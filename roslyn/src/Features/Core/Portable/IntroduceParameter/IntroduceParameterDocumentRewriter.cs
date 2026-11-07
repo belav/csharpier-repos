@@ -497,8 +497,9 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                 var semanticModel = await _originalDocument
                     .GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var typeSymbol =
-                    semanticModel.GetTypeInfo(_expression, cancellationToken).ConvertedType
+                var typeSymbol = semanticModel
+                    .GetTypeInfo(_expression, cancellationToken)
+                    .ConvertedType
                     ?? semanticModel.Compilation.ObjectType;
                 return typeSymbol;
             }

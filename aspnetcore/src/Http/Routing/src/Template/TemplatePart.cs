@@ -39,8 +39,7 @@ public class TemplatePart
             IsCatchAll = parameter.IsCatchAll;
             IsOptional = parameter.IsOptional;
             DefaultValue = parameter.Default;
-            InlineConstraints =
-                parameter.ParameterPolicies?.Select(p => new InlineConstraint(p))
+            InlineConstraints = parameter.ParameterPolicies?.Select(p => new InlineConstraint(p))
                 ?? Enumerable.Empty<InlineConstraint>();
         }
         else if (other.IsSeparator && other is RoutePatternSeparatorPart separator)

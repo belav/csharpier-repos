@@ -37,8 +37,8 @@ public ref struct TypeMapPlanBuilder
         _variables = configuration.Variables;
         _expressions = configuration.Expressions;
         _catches = configuration.Catches;
-        _parameters =
-            _configuration.Parameters ?? new ParameterExpression[] { null, null, ContextParameter };
+        _parameters = _configuration.Parameters
+            ?? new ParameterExpression[] { null, null, ContextParameter };
     }
 
     public Type DestinationType => _destination.Type;
@@ -624,14 +624,13 @@ public ref struct TypeMapPlanBuilder
         Expression destValueExpr
     )
     {
-        var valueResolverFunc =
-            memberMap.Resolver?.GetExpression(
-                _configuration,
-                memberMap,
-                customSource,
-                _destination,
-                destValueExpr
-            ) ?? destValueExpr;
+        var valueResolverFunc = memberMap.Resolver?.GetExpression(
+            _configuration,
+            memberMap,
+            customSource,
+            _destination,
+            destValueExpr
+        ) ?? destValueExpr;
         if (memberMap.NullSubstitute != null)
         {
             valueResolverFunc = memberMap.NullSubstitute(valueResolverFunc);

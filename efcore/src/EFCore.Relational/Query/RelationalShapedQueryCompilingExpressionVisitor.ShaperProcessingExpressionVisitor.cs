@@ -1223,10 +1223,9 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     }
                     else
                     {
-                        var projectionBindingExpression =
-                            (
-                                includeExpression.NavigationExpression as CollectionResultExpression
-                            )?.ProjectionBindingExpression
+                        var projectionBindingExpression = (
+                            includeExpression.NavigationExpression as CollectionResultExpression
+                        )?.ProjectionBindingExpression
                             ?? (
                                 includeExpression.NavigationExpression
                                 as RelationalStructuralTypeShaperExpression
@@ -1332,8 +1331,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
                         var navigation = relationalCollectionShaperExpression.Navigation;
                         var collectionAccessor = navigation?.GetCollectionAccessor();
-                        var collectionType =
-                            collectionAccessor?.CollectionType
+                        var collectionType = collectionAccessor?.CollectionType
                             ?? relationalCollectionShaperExpression.Type;
                         var elementType = relationalCollectionShaperExpression.ElementType;
                         var relatedElementType = innerShaper.ReturnType;
@@ -1455,8 +1453,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
                         var navigation = relationalSplitCollectionShaperExpression.Navigation;
                         var collectionAccessor = navigation?.GetCollectionAccessor();
-                        var collectionType =
-                            collectionAccessor?.CollectionType
+                        var collectionType = collectionAccessor?.CollectionType
                             ?? relationalSplitCollectionShaperExpression.Type;
                         var elementType = relationalSplitCollectionShaperExpression.ElementType;
                         var relatedElementType = innerShaper.ReturnType;

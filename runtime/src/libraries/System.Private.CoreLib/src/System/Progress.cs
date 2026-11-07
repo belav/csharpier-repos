@@ -33,8 +33,8 @@ namespace System
         {
             // Capture the current synchronization context.
             // If there is no current context, we use a default instance targeting the ThreadPool.
-            _synchronizationContext =
-                SynchronizationContext.Current ?? ProgressStatics.DefaultContext;
+            _synchronizationContext = SynchronizationContext.Current
+                ?? ProgressStatics.DefaultContext;
             Debug.Assert(_synchronizationContext != null);
             _invokeHandlers = new SendOrPostCallback(InvokeHandlers);
         }

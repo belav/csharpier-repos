@@ -155,8 +155,8 @@ namespace System.IO
         {
             get
             {
-                string systemRoot =
-                    Environment.GetEnvironmentVariable("SystemRoot") ?? @"C:\Windows";
+                string systemRoot = Environment.GetEnvironmentVariable("SystemRoot")
+                    ?? @"C:\Windows";
                 return Path.Join(systemRoot, "System32", "subst.exe");
             }
         }

@@ -426,8 +426,10 @@ build_metadata.AdditionalFiles.ToRetrieve = ghi789
 
             // MSBuild will convert the above relative paths to absolute paths based on the current location.
             // We replicate that behavior here to test we get the expected full paths
-            string executingLocation =
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)?.Replace('\\', '/')
+            string executingLocation = Path.GetDirectoryName(
+                    Assembly.GetExecutingAssembly().Location
+                )
+                ?.Replace('\\', '/')
                 ?? string.Empty;
             string expectedPath1 = $"{executingLocation}/file1.cs";
             string expectedPath2 = $"{executingLocation}/subDir/file2.cs";
@@ -481,8 +483,10 @@ build_metadata.Compile.ToRetrieve = abc123
 
             // MSBuild will convert the above relative paths to absolute paths based on the current location.
             // We replicate that behavior here to test we get the expected full paths
-            string executingLocation =
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)?.Replace('\\', '/')
+            string executingLocation = Path.GetDirectoryName(
+                    Assembly.GetExecutingAssembly().Location
+                )
+                ?.Replace('\\', '/')
                 ?? string.Empty;
             string expectedPath = $"{executingLocation}/file1.cs";
 

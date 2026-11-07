@@ -25,8 +25,8 @@ namespace MonoTests.Features
             var port = NetworkHelpers.FindFreePort();
             onlyServers = Boolean.Parse(ConfigurationManager.AppSettings["onlyServers"] ?? "false");
             onlyClients = Boolean.Parse(ConfigurationManager.AppSettings["onlyClients"] ?? "false");
-            endpointBase =
-                ConfigurationManager.AppSettings["endpointBase"] ?? $"http://localhost:{port}/";
+            endpointBase = ConfigurationManager.AppSettings["endpointBase"]
+                ?? $"http://localhost:{port}/";
             if (!endpointBase.EndsWith("/"))
                 endpointBase = endpointBase + '/';
             logMessages = Boolean.Parse(ConfigurationManager.AppSettings["logMessages"] ?? "false");

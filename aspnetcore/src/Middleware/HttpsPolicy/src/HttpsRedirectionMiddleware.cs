@@ -77,8 +77,7 @@ public class HttpsRedirectionMiddleware
     )
         : this(next, options, config, loggerFactory)
     {
-        _serverAddressesFeature =
-            serverAddressesFeature
+        _serverAddressesFeature = serverAddressesFeature
             ?? throw new ArgumentNullException(nameof(serverAddressesFeature));
     }
 

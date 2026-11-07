@@ -192,8 +192,7 @@ public class TestRelationalTypeMappingSource : RelationalTypeMappingSource
                 var isFixedLength = mappingInfo.IsFixedLength == true;
                 var baseName =
                     (isAnsi ? "ansi_" : "just_") + (isFixedLength ? "string_fixed" : "string");
-                var size =
-                    mappingInfo.Size
+                var size = mappingInfo.Size
                     ?? (
                         mappingInfo.IsKeyOrIndex
                             ? isAnsi

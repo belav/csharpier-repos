@@ -620,8 +620,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return false;
                 }
 
-                var baseAllRequiredMembers =
-                    BaseTypeNoUseSiteDiagnostics?.AllRequiredMembers
+                var baseAllRequiredMembers = BaseTypeNoUseSiteDiagnostics?.AllRequiredMembers
                     ?? ImmutableSegmentedDictionary<string, Symbol>.Empty;
                 var hasDeclaredRequiredMembers = HasDeclaredRequiredMembers;
 

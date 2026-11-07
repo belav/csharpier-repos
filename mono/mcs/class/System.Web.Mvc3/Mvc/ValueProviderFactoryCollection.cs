@@ -26,8 +26,8 @@
         )
             : base(valueProviderFactories)
         {
-            _serviceResolver =
-                serviceResolver ?? new MultiServiceResolver<ValueProviderFactory>(() => Items);
+            _serviceResolver = serviceResolver
+                ?? new MultiServiceResolver<ValueProviderFactory>(() => Items);
         }
 
         public IValueProvider GetValueProvider(ControllerContext controllerContext)

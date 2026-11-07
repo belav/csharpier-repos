@@ -943,8 +943,7 @@ namespace Mono.Options
             : base(comparer)
         {
             this.roSources = new ReadOnlyCollection<ArgumentSource>(sources);
-            this.localizer =
-                localizer
+            this.localizer = localizer
                 ?? delegate(string f)
                 {
                     return f;

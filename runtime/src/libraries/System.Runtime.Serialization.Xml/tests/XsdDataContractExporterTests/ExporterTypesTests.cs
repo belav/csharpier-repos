@@ -587,8 +587,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 get
                 {
-                    localPersons =
-                        localPersons ?? new CollectionWithoutParameterlessCtor<Person>(5);
+                    localPersons = localPersons
+                        ?? new CollectionWithoutParameterlessCtor<Person>(5);
                     return localPersons;
                 }
             }

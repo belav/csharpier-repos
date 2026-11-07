@@ -20,8 +20,7 @@ public class ValidateBodyParameterAttribute : ActionFilterAttribute
             if (bodyParameter != null)
             {
                 // Body model binder normally reports errors for parameters using the empty name.
-                var parameterBindingErrors =
-                    context.ModelState[bodyParameter.Name]?.Errors
+                var parameterBindingErrors = context.ModelState[bodyParameter.Name]?.Errors
                     ?? context.ModelState[string.Empty]?.Errors;
                 if (parameterBindingErrors != null && parameterBindingErrors.Count != 0)
                 {

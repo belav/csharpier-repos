@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public static readonly InvocationReasons Empty = new(ImmutableHashSet<string>.Empty);
 
         [DataMember(Order = 0)]
-        private readonly ImmutableHashSet<string> _reasons =
-            reasons ?? ImmutableHashSet<string>.Empty;
+        private readonly ImmutableHashSet<string> _reasons = reasons
+            ?? ImmutableHashSet<string>.Empty;
 
         public InvocationReasons(string reason)
             : this(ImmutableHashSet.Create(reason)) { }

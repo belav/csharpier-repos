@@ -26,8 +26,8 @@
         )
             : base(engines)
         {
-            _serviceResolver =
-                serviceResolver ?? new MultiServiceResolver<IViewEngine>(() => Items);
+            _serviceResolver = serviceResolver
+                ?? new MultiServiceResolver<IViewEngine>(() => Items);
         }
 
         private IEnumerable<IViewEngine> CombinedItems

@@ -184,8 +184,7 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
             features.Set(
                 new TlsConnectionCallbackOptions
                 {
-                    ApplicationProtocols =
-                        sslServerAuthenticationOptions.ApplicationProtocols
+                    ApplicationProtocols = sslServerAuthenticationOptions.ApplicationProtocols
                         ?? new List<SslApplicationProtocol> { SslApplicationProtocol.Http3 },
                     OnConnection = (context, cancellationToken) =>
                         ValueTask.FromResult(sslServerAuthenticationOptions),

@@ -136,14 +136,13 @@ namespace Microsoft.CodeAnalysis.Completion
             var snippetService = document.Project.Services.GetService<ISnippetInfoService>();
             if (snippetService != null)
             {
-                var change =
-                    await GetTextChangeAsync(
-                            document,
-                            item,
-                            ch: '\t',
-                            cancellationToken: cancellationToken
-                        )
-                        .ConfigureAwait(false)
+                var change = await GetTextChangeAsync(
+                        document,
+                        item,
+                        ch: '\t',
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false)
                     ?? new TextChange(item.Span, item.DisplayText);
                 var insertionText = change.NewText;
 
@@ -189,11 +188,10 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken = default
         )
         {
-            var change =
-                (
-                    await GetTextChangeAsync(document, item, commitKey, cancellationToken)
-                        .ConfigureAwait(false)
-                ) ?? new TextChange(item.Span, item.DisplayText);
+            var change = (
+                await GetTextChangeAsync(document, item, commitKey, cancellationToken)
+                    .ConfigureAwait(false)
+            ) ?? new TextChange(item.Span, item.DisplayText);
             return CompletionChange.Create(change);
         }
 

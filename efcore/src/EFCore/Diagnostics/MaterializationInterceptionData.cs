@@ -85,8 +85,7 @@ public readonly struct MaterializationInterceptionData
 
     private IPropertyBase GetProperty(string propertyName)
     {
-        var property =
-            (IPropertyBase?)EntityType.FindProperty(propertyName)
+        var property = (IPropertyBase?)EntityType.FindProperty(propertyName)
             ?? EntityType.FindServiceProperty(propertyName);
 
         if (property == null)

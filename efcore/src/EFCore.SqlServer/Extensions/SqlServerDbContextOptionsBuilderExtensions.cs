@@ -281,8 +281,7 @@ public static class SqlServerDbContextOptionsExtensions
 
     private static void ConfigureWarnings(DbContextOptionsBuilder optionsBuilder)
     {
-        var coreOptionsExtension =
-            optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
+        var coreOptionsExtension = optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
             ?? new CoreOptionsExtension();
 
         coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(

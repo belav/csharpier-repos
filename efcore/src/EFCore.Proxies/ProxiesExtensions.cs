@@ -43,8 +43,7 @@ public static class ProxiesExtensions
         bool checkEquality = true
     )
     {
-        var extension =
-            optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
+        var extension = optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
             ?? new ProxiesOptionsExtension();
 
         extension = extension.WithChangeTracking(useChangeTrackingProxies, checkEquality);
@@ -118,8 +117,7 @@ public static class ProxiesExtensions
         bool useLazyLoadingProxies = true
     )
     {
-        var extension =
-            optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
+        var extension = optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
             ?? new ProxiesOptionsExtension();
 
         extension = extension.WithLazyLoading(useLazyLoadingProxies);
@@ -155,8 +153,7 @@ public static class ProxiesExtensions
     {
         Check.NotNull(lazyLoadingProxiesOptionsAction, nameof(lazyLoadingProxiesOptionsAction));
 
-        var extension =
-            optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
+        var extension = optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
             ?? new ProxiesOptionsExtension();
 
         ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(

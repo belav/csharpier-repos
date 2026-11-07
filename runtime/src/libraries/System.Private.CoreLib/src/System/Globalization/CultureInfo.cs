@@ -258,8 +258,7 @@ namespace System.Globalization
         {
             ArgumentNullException.ThrowIfNull(textAndCompareCultureName);
 
-            CultureData? cultureData =
-                CultureData.GetCultureData(cultureName, false)
+            CultureData? cultureData = CultureData.GetCultureData(cultureName, false)
                 ?? throw new CultureNotFoundException(
                     nameof(cultureName),
                     cultureName,
@@ -568,8 +567,7 @@ namespace System.Globalization
                     }
                     else
                     {
-                        culture =
-                            CreateCultureInfoNoThrow(parentName, _cultureData.UseUserOverride)
+                        culture = CreateCultureInfoNoThrow(parentName, _cultureData.UseUserOverride)
                             ??
                             // For whatever reason our IPARENT or SPARENT wasn't correct, so use invariant
                             // We can't allow ourselves to fail.  In case of custom cultures the parent of the
@@ -1124,8 +1122,7 @@ namespace System.Globalization
                 }
             }
 
-            result =
-                CreateCultureInfoNoThrow(name, useUserOverride: false)
+            result = CreateCultureInfoNoThrow(name, useUserOverride: false)
                 ?? throw new CultureNotFoundException(
                     nameof(name),
                     name,
@@ -1222,8 +1219,7 @@ namespace System.Globalization
                 if (cache is null)
                 {
                     cache = new Dictionary<string, CultureInfo>();
-                    cache =
-                        Interlocked.CompareExchange(ref s_cachedCulturesByName, cache, null)
+                    cache = Interlocked.CompareExchange(ref s_cachedCulturesByName, cache, null)
                         ?? cache;
                 }
 
@@ -1239,8 +1235,7 @@ namespace System.Globalization
                 if (cache is null)
                 {
                     cache = new Dictionary<int, CultureInfo>();
-                    cache =
-                        Interlocked.CompareExchange(ref s_cachedCulturesByLcid, cache, null)
+                    cache = Interlocked.CompareExchange(ref s_cachedCulturesByLcid, cache, null)
                         ?? cache;
                 }
 

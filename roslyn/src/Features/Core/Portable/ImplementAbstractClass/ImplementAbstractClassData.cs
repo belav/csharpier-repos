@@ -484,8 +484,7 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                 if (current.BaseType == null && current is ITypeParameterSymbol typeParameter)
                 {
                     var constraints = typeParameter.ConstraintTypes;
-                    current =
-                        constraints.OfType<INamedTypeSymbol>().FirstOrDefault()
+                    current = constraints.OfType<INamedTypeSymbol>().FirstOrDefault()
                         ?? constraints.FirstOrDefault(t => t.IsReferenceType);
                     continue;
                 }

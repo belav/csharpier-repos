@@ -35,8 +35,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
             MetadataProvider = metadataProvider;
             CompilationResult = compilationResult;
             Logger = logger;
-            Customizations =
-                customizations
+            Customizations = customizations
                 ?? throw new InvalidOperationException("Customizations must be provided");
             ExitCode = trimmingResults.ExitCode;
         }

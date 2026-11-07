@@ -1265,13 +1265,9 @@ namespace System.Activities.XamlIntegration
                     {
                         foreach (ActivityPropertyReference propertyReference in PropertyReferences)
                         {
-                            XamlMember targetProperty =
-                                this.Type.GetMember(propertyReference.TargetProperty)
-                                ?? new XamlMember(
-                                    propertyReference.TargetProperty,
-                                    this.Type,
-                                    false
-                                );
+                            XamlMember targetProperty = this.Type.GetMember(
+                                propertyReference.TargetProperty
+                            ) ?? new XamlMember(propertyReference.TargetProperty, this.Type, false);
                             parentWriter.WriteStartMember(targetProperty);
                             WritePropertyReference(
                                 parentWriter,

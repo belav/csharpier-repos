@@ -108,8 +108,9 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
                 // If we're not able to find a narrower navigation location in this file though then just navigate to
                 // the first reference itself.
-                var navigationLocationSpan =
-                    symbol.Locations.FirstOrDefault(loc => loc.SourceTree == tree)?.SourceSpan
+                var navigationLocationSpan = symbol
+                    .Locations.FirstOrDefault(loc => loc.SourceTree == tree)
+                    ?.SourceSpan
                     ?? referencesInCurrentFile.First().Span;
 
                 var spans = referencesInCurrentFile.SelectAsArray(r => computeFullSpan(r));
@@ -124,14 +125,9 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 // (since that is only needed for intersecting with the caret.  Instead, we just need a
                 // reasonable location to navigate them to.  First try to find a narrow location to navigate to.
                 // And, if we can't, just go to the first reference we can find.
-                var navigationLocation =
-                    symbol.Locations.FirstOrDefault(loc =>
-                        loc.SourceTree != null && loc.SourceTree != tree
-                    )
-                    ?? Location.Create(
-                        allReferences.First().SyntaxTree,
-                        allReferences.First().Span
-                    );
+                var navigationLocation = symbol.Locations.FirstOrDefault(loc =>
+                    loc.SourceTree != null && loc.SourceTree != tree
+                ) ?? Location.Create(allReferences.First().SyntaxTree, allReferences.First().Span);
 
                 var documentId = solution.GetDocumentId(navigationLocation.SourceTree);
                 if (documentId == null)

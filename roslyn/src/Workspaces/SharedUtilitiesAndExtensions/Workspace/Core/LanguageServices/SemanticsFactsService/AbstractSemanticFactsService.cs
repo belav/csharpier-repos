@@ -123,8 +123,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
             CancellationToken cancellationToken
         )
         {
-            var container =
-                containerOpt
+            var container = containerOpt
                 ?? location
                     .AncestorsAndSelf()
                     .FirstOrDefault(a =>
@@ -193,8 +192,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             if (methodToLookFor is null)
                 return null;
 
-            var impl =
-                type.FindImplementationForInterfaceMember(methodToLookFor) ?? methodToLookFor;
+            var impl = type.FindImplementationForInterfaceMember(methodToLookFor)
+                ?? methodToLookFor;
             return impl as IMethodSymbol;
 
             IMethodSymbol? GetDisposeMethod(string typeName, string methodName)

@@ -272,8 +272,8 @@ namespace System.Configuration
             if (resultSectionData != null)
             {
                 UriIdnScope idnScope = resultSectionData.IdnScope ?? IdnElement.EnabledDefaultValue;
-                bool iriParsing =
-                    resultSectionData.IriParsing ?? IriParsingElement.EnabledDefaultValue;
+                bool iriParsing = resultSectionData.IriParsing
+                    ?? IriParsingElement.EnabledDefaultValue;
                 IEnumerable<SchemeSettingInternal> schemeSettings =
                     resultSectionData.SchemeSettings.Values as IEnumerable<SchemeSettingInternal>;
 

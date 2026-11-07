@@ -146,11 +146,11 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             var editor = new SyntaxEditor(root, generator);
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var containingMember =
-                anonymousObject.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>(
-                    (node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node),
-                    syntaxFacts
-                ) ?? anonymousObject;
+            var containingMember = anonymousObject.FirstAncestorOrSelf<
+                SyntaxNode,
+                ISyntaxFactsService
+            >((node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node), syntaxFacts)
+                ?? anonymousObject;
 
             // Next, go and update any references to these anonymous type properties to match
             // the new PascalCased name we've picked for the new properties that will go in

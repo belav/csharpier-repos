@@ -465,8 +465,8 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             // If we can convert, do that. If not, cast it.
             ExprLocal exprLocal = ExprFactory.CreateLocal(local);
-            Expr result =
-                _binder.tryConvert(exprLocal, ctype) ?? _binder.mustCast(exprLocal, ctype);
+            Expr result = _binder.tryConvert(exprLocal, ctype)
+                ?? _binder.mustCast(exprLocal, ctype);
             result.Flags |= EXPRFLAG.EXF_LVALUE;
             return result;
         }

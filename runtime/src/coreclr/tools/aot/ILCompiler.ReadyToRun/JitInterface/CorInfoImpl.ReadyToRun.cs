@@ -4067,8 +4067,8 @@ namespace Internal.JitInterface
                 HashSet<MethodDesc> previouslyStashedInlinees = _stashedInlinedMethods.Pop();
                 if (_inlinedMethods != null)
                 {
-                    previouslyStashedInlinees =
-                        previouslyStashedInlinees ?? new HashSet<MethodDesc>();
+                    previouslyStashedInlinees = previouslyStashedInlinees
+                        ?? new HashSet<MethodDesc>();
                     foreach (var inlineeInHashSet in _inlinedMethods)
                         previouslyStashedInlinees.Add(inlineeInHashSet);
                 }

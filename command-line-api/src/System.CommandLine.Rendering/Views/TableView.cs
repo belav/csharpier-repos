@@ -120,8 +120,8 @@ namespace System.CommandLine.Rendering.Views
             )
             {
                 Header = header;
-                ColumnDefinition =
-                    columnDefinition ?? throw new ArgumentNullException(nameof(columnDefinition));
+                ColumnDefinition = columnDefinition
+                    ?? throw new ArgumentNullException(nameof(columnDefinition));
                 _cellValue = cellValue ?? throw new ArgumentNullException(nameof(cellValue));
             }
 

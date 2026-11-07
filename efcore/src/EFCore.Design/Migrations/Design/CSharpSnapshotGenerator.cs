@@ -504,8 +504,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var clrType =
-            FindValueConverter(property)?.ProviderClrType.MakeNullable(property.IsNullable)
+        var clrType = FindValueConverter(property)
+            ?.ProviderClrType.MakeNullable(property.IsNullable)
             ?? property.ClrType;
 
         var propertyBuilderName =
@@ -961,8 +961,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         var functionNameAnnotation = annotations.Find(RelationalAnnotationNames.FunctionName);
         if (functionNameAnnotation != null || entityType.BaseType == null)
         {
-            var functionName =
-                (string?)functionNameAnnotation?.Value ?? entityType.GetFunctionName();
+            var functionName = (string?)functionNameAnnotation?.Value
+                ?? entityType.GetFunctionName();
             if (functionName != null || functionNameAnnotation != null)
             {
                 stringBuilder
@@ -1014,9 +1014,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
             var discriminatorProperty = entityType.FindDiscriminatorProperty();
             if (discriminatorPropertyAnnotation?.Value != null && discriminatorProperty != null)
             {
-                var propertyClrType =
-                    FindValueConverter(discriminatorProperty)
-                        ?.ProviderClrType.MakeNullable(discriminatorProperty.IsNullable)
+                var propertyClrType = FindValueConverter(discriminatorProperty)
+                    ?.ProviderClrType.MakeNullable(discriminatorProperty.IsNullable)
                     ?? discriminatorProperty.ClrType;
                 stringBuilder
                     .Append('<')

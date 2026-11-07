@@ -640,8 +640,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                NamedTypeSymbol baseType =
-                    symbol.EnumUnderlyingType ?? symbol.BaseTypeNoUseSiteDiagnostics; // null for interfaces
+                NamedTypeSymbol baseType = symbol.EnumUnderlyingType
+                    ?? symbol.BaseTypeNoUseSiteDiagnostics; // null for interfaces
                 System.Diagnostics.Debug.Assert(
                     (object)baseType != null || symbol.SpecialType == SpecialType.System_Object,
                     "Only object has no base."

@@ -339,8 +339,8 @@ namespace System.Net.Mail
                 && !MimeBasePart.IsAscii(_name, false)
             )
             {
-                Encoding encoding =
-                    NameEncoding ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
+                Encoding encoding = NameEncoding
+                    ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
                 MimePart.ContentType.Name = MimeBasePart.EncodeHeaderValue(
                     _name,
                     encoding,

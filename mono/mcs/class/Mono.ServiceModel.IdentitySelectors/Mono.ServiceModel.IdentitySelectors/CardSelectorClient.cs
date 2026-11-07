@@ -88,8 +88,9 @@ namespace Mono.ServiceModel.IdentitySelectors
         // They are used to indicate a service URL when there is no
         // overriden behavior of RequestSelfIssuedToken().
 
-        string self_identity_issuer =
-            Environment.GetEnvironmentVariable("MONO_IDENTITY_SERVICE_URL") ?? "localhost:7450";
+        string self_identity_issuer = Environment.GetEnvironmentVariable(
+            "MONO_IDENTITY_SERVICE_URL"
+        ) ?? "localhost:7450";
         string self_identity_issuer_cert = Environment.GetEnvironmentVariable(
             "MONO_IDENTITY_SERVICE_CERTIFICATE"
         );

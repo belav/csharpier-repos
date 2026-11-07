@@ -1301,8 +1301,8 @@ namespace Microsoft.Interop.Analyzers
                     if (ManualTypeMarshallingHelper.ModeUsesManagedToUnmanagedShape(mode))
                     {
                         // First verify all usages in the managed->unmanaged shape.
-                        IMethodSymbol toUnmanagedMethod =
-                            methods.ToUnmanaged ?? methods.ToUnmanagedWithBuffer;
+                        IMethodSymbol toUnmanagedMethod = methods.ToUnmanaged
+                            ?? methods.ToUnmanagedWithBuffer;
                         unmanagedType = toUnmanagedMethod.ReturnType;
                         if (
                             !unmanagedType.IsUnmanagedType
@@ -1358,8 +1358,8 @@ namespace Microsoft.Interop.Analyzers
                     if (ManualTypeMarshallingHelper.ModeUsesUnmanagedToManagedShape(mode))
                     {
                         // Verify the usages unmanaged->managed shape
-                        IMethodSymbol toManagedMethod =
-                            methods.ToManaged ?? methods.ToManagedFinally;
+                        IMethodSymbol toManagedMethod = methods.ToManaged
+                            ?? methods.ToManagedFinally;
 
                         if (
                             unmanagedType is not null

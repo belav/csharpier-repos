@@ -531,8 +531,9 @@ namespace System.Text.Json.Serialization.Metadata
             if (numberHandlingIsApplicable)
             {
                 // Priority 1: Get handling from attribute on property/field, its parent class type or property type.
-                JsonNumberHandling? handling =
-                    NumberHandling ?? ParentTypeInfo.NumberHandling ?? _jsonTypeInfo.NumberHandling;
+                JsonNumberHandling? handling = NumberHandling
+                    ?? ParentTypeInfo.NumberHandling
+                    ?? _jsonTypeInfo.NumberHandling;
 
                 // Priority 2: Get handling from JsonSerializerOptions instance.
                 if (!handling.HasValue && Options.NumberHandling != JsonNumberHandling.Strict)
@@ -669,8 +670,8 @@ namespace System.Text.Json.Serialization.Metadata
                 potentialNumberType = EffectiveConverter.ElementType;
             }
 
-            potentialNumberType =
-                Nullable.GetUnderlyingType(potentialNumberType) ?? potentialNumberType;
+            potentialNumberType = Nullable.GetUnderlyingType(potentialNumberType)
+                ?? potentialNumberType;
 
             return potentialNumberType == typeof(byte)
                 || potentialNumberType == typeof(decimal)
@@ -886,8 +887,7 @@ namespace System.Text.Json.Serialization.Metadata
 
             JsonConverter<TValue> GetDictionaryValueConverter<TValue>()
             {
-                JsonTypeInfo dictionaryValueInfo =
-                    JsonTypeInfo.ElementTypeInfo
+                JsonTypeInfo dictionaryValueInfo = JsonTypeInfo.ElementTypeInfo
                     // Slower path for non-generic types that implement IDictionary<,>.
                     // It is possible to cache this converter on JsonTypeInfo if we assume the property value
                     // will always be the same type for all instances.

@@ -395,8 +395,8 @@ namespace System.ServiceModel.Security.Tokens
             Buffer.BlockCopy(key, 0, this.key, 0, key.Length);
             this.contextId = contextId;
             this.keyGeneration = keyGeneration;
-            this.authorizationPolicies =
-                authorizationPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
+            this.authorizationPolicies = authorizationPolicies
+                ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
             List<SecurityKey> temp = new List<SecurityKey>(1);
             temp.Add(new InMemorySymmetricSecurityKey(this.key, false));
             this.securityKeys = temp.AsReadOnly();

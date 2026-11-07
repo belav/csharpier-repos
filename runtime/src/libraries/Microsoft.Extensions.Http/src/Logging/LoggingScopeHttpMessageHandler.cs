@@ -64,8 +64,8 @@ namespace Microsoft.Extensions.Http.Logging
             {
                 var stopwatch = ValueStopwatch.StartNew();
 
-                Func<string, bool> shouldRedactHeaderValue =
-                    _options?.ShouldRedactHeaderValue ?? _shouldNotRedactHeaderValue;
+                Func<string, bool> shouldRedactHeaderValue = _options?.ShouldRedactHeaderValue
+                    ?? _shouldNotRedactHeaderValue;
 
                 using (Log.BeginRequestPipelineScope(_logger, request))
                 {

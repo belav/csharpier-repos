@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis
 
             // First, see if we can reuse the entries from previousTable.
             // If not, produce the actual values we need from sourceTable.
-            var result =
-                tryReusePreviousTableValues(entryCount) ?? computeCurrentTableValues(entryCount);
+            var result = tryReusePreviousTableValues(entryCount)
+                ?? computeCurrentTableValues(entryCount);
             return (result, sourceInputs);
 
             ImmutableArray<TInput>? tryReusePreviousTableValues(int entryCount)

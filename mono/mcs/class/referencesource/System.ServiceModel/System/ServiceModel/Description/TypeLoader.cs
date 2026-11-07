@@ -1058,8 +1058,8 @@ namespace System.ServiceModel.Description
 
             contractDescription.SessionMode = contractAttr.SessionMode;
             contractDescription.CallbackContractType = callbackType;
-            contractDescription.ConfigurationName =
-                contractAttr.ConfigurationName ?? contractType.FullName;
+            contractDescription.ConfigurationName = contractAttr.ConfigurationName
+                ?? contractType.FullName;
 
             // get inherited operations
             List<Type> types = ServiceReflector.GetInheritedContractTypes(contractType);
@@ -1885,8 +1885,8 @@ namespace System.ServiceModel.Description
                     messageContractAttribute.WrapperName,
                     messageDescription.MessageName
                 ).EncodedName;
-                messageDescription.Body.WrapperNamespace =
-                    messageContractAttribute.WrapperNamespace ?? defaultNS;
+                messageDescription.Body.WrapperNamespace = messageContractAttribute.WrapperNamespace
+                    ?? defaultNS;
             }
             List<MemberInfo> contractMembers = new List<MemberInfo>();
 

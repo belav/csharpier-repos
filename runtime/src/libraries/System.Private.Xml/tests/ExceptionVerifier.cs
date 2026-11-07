@@ -217,11 +217,10 @@ namespace System.Xml.Tests
         {
             // Use reflection to obtain "res" property value
             var exceptionType = _ex.GetType();
-            var fInfo =
-                exceptionType.GetField(
-                    "res",
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
-                )
+            var fInfo = exceptionType.GetField(
+                "res",
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
+            )
                 ?? exceptionType.BaseType.GetField(
                     "res",
                     BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase

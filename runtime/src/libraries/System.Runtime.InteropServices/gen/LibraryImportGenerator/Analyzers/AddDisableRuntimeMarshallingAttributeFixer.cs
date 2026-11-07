@@ -65,8 +65,7 @@ namespace Microsoft.Interop.Analyzers
             CancellationToken cancellationToken
         )
         {
-            Document? assemblyInfo =
-                project.Documents.FirstOrDefault(IsPropertiesAssemblyInfo)
+            Document? assemblyInfo = project.Documents.FirstOrDefault(IsPropertiesAssemblyInfo)
                 ?? project.AddDocument(
                     AssemblyInfoFileName,
                     "",

@@ -49,8 +49,7 @@ internal static class TaskGenericsUtil
             && (!taskType.IsGenericType || taskType.GetGenericTypeDefinition() != typeof(Task<>))
         )
         {
-            taskType =
-                taskType.BaseType
+            taskType = taskType.BaseType
                 ?? throw new ArgumentException(
                     $"The type '{taskType.FullName}' is not inherited from '{typeof(Task).FullName}'."
                 );

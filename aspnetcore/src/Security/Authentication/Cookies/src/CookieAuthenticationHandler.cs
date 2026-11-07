@@ -383,8 +383,8 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
 
         if (signInContext.Properties.IsPersistent)
         {
-            var expiresUtc =
-                signInContext.Properties.ExpiresUtc ?? issuedUtc.Add(Options.ExpireTimeSpan);
+            var expiresUtc = signInContext.Properties.ExpiresUtc
+                ?? issuedUtc.Add(Options.ExpireTimeSpan);
             signInContext.CookieOptions.Expires = expiresUtc.ToUniversalTime();
         }
 

@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
             public override object GetOptions(CancellationToken cancellationToken)
             {
                 var services = _document.Project.Solution.Services;
-                var pickMembersService =
-                    _service._pickMembersService_forTestingPurposes
+                var pickMembersService = _service._pickMembersService_forTestingPurposes
                     ?? services.GetRequiredService<IPickMembersService>();
                 var globalOptionService =
                     services.GetService<ILegacyGlobalOptionsWorkspaceService>();

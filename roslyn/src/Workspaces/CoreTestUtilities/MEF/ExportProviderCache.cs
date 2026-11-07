@@ -190,9 +190,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     );
                 }
 
-                var expectedCatalog =
-                    Interlocked.CompareExchange(ref _scope.ExpectedCatalog, _catalog, null)
-                    ?? _catalog;
+                var expectedCatalog = Interlocked.CompareExchange(
+                    ref _scope.ExpectedCatalog,
+                    _catalog,
+                    null
+                ) ?? _catalog;
                 RequireForSingleExportProvider(expectedCatalog == _catalog);
 
                 var expected = _scope.ExpectedProviderForCatalog;
@@ -235,12 +237,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     }
 
                     expected = _exportProviderFactory.CreateExportProvider();
-                    expected =
-                        Interlocked.CompareExchange(
-                            ref _scope.ExpectedProviderForCatalog,
-                            expected,
-                            null
-                        ) ?? expected;
+                    expected = Interlocked.CompareExchange(
+                        ref _scope.ExpectedProviderForCatalog,
+                        expected,
+                        null
+                    ) ?? expected;
                     Interlocked.CompareExchange(ref _scope.CurrentExportProvider, expected, null);
                 }
 

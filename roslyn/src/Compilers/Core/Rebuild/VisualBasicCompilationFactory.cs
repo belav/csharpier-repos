@@ -121,8 +121,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
             var (optimizationLevel, plus) = GetOptimizationLevel(optimization);
             var isChecked = pdbOptions.OptionToBool(CompilationOptionNames.Checked) ?? true;
-            var embedVBRuntime =
-                pdbOptions.OptionToBool(CompilationOptionNames.EmbedRuntime) ?? false;
+            var embedVBRuntime = pdbOptions.OptionToBool(CompilationOptionNames.EmbedRuntime)
+                ?? false;
             var rootNamespace = pdbOptions.OptionToString(CompilationOptionNames.RootNamespace);
 
             var compilationOptions = new VisualBasicCompilationOptions(

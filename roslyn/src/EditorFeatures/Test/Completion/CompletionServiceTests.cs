@@ -48,8 +48,7 @@ class Test {
             var completionService = project.Services.GetRequiredService<CompletionService>();
 
             var document = project.Documents.Single();
-            var caretPosition =
-                workspace.DocumentWithCursor.CursorPosition
+            var caretPosition = workspace.DocumentWithCursor.CursorPosition
                 ?? throw new InvalidOperationException();
             var completions = await completionService.GetCompletionsAsync(
                 document,

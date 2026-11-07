@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
             this.Text = text;
             this.Glyph = glyph;
             this.Spans = spans;
-            this.ChildItems =
-                childItems ?? SpecializedCollections.EmptyList<FSharpNavigationBarItem>();
+            this.ChildItems = childItems
+                ?? SpecializedCollections.EmptyList<FSharpNavigationBarItem>();
             this.Indent = indent;
             this.Bolded = bolded;
             this.Grayed = grayed;

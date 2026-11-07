@@ -186,8 +186,8 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
 
     private static bool CanSerializeType(Type typeToSerialize, out string? errorMessage)
     {
-        typeToSerialize =
-            typeToSerialize ?? throw new ArgumentNullException(nameof(typeToSerialize));
+        typeToSerialize = typeToSerialize
+            ?? throw new ArgumentNullException(nameof(typeToSerialize));
 
         errorMessage = null;
 

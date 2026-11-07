@@ -40,12 +40,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Formatting
             var document = workspace.CurrentSolution.Projects.First().Documents.First();
             var languageServices = document.Project.Services;
 
-            var cleanupOptions =
-                options?.GetCodeCleanupOptions(
-                    languageServices,
-                    allowImportsInHiddenRegions: false,
-                    fallbackOptions: null
-                ) ?? CodeCleanupOptions.GetDefault(languageServices);
+            var cleanupOptions = options?.GetCodeCleanupOptions(
+                languageServices,
+                allowImportsInHiddenRegions: false,
+                fallbackOptions: null
+            ) ?? CodeCleanupOptions.GetDefault(languageServices);
 
             var formattingService =
                 document.GetRequiredLanguageService<INewDocumentFormattingService>();

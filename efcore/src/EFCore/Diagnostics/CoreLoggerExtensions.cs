@@ -251,8 +251,9 @@ public static class CoreLoggerExtensions
 
         if (diagnostics.ShouldLog(definition))
         {
-            var modelVersion =
-                contextOptions.FindExtension<CoreOptionsExtension>()?.Model?.GetProductVersion()
+            var modelVersion = contextOptions
+                .FindExtension<CoreOptionsExtension>()
+                ?.Model?.GetProductVersion()
                 ?? "";
 
             definition.Log(diagnostics, modelVersion, ProductInfo.GetVersion());
@@ -286,8 +287,8 @@ public static class CoreLoggerExtensions
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (ContextInitializedEventData)payload;
-        var modelVersion =
-            p.ContextOptions.FindExtension<CoreOptionsExtension>()?.Model?.GetProductVersion()
+        var modelVersion = p.ContextOptions.FindExtension<CoreOptionsExtension>()
+            ?.Model?.GetProductVersion()
             ?? "";
         return d.GenerateMessage(modelVersion, ProductInfo.GetVersion());
     }
@@ -330,8 +331,7 @@ public static class CoreLoggerExtensions
             )
         )
         {
-            var eventData =
-                createEventData?.Invoke(context, exception, entries, definition)
+            var eventData = createEventData?.Invoke(context, exception, entries, definition)
                 ?? CreateConcurrencyExceptionEventData(context, exception, entries, definition);
 
             diagnostics.DispatchEventData(
@@ -392,8 +392,7 @@ public static class CoreLoggerExtensions
             )
         )
         {
-            var eventData =
-                createEventData?.Invoke(context, exception, entries, definition)
+            var eventData = createEventData?.Invoke(context, exception, entries, definition)
                 ?? CreateConcurrencyExceptionEventData(context, exception, entries, definition);
 
             diagnostics.DispatchEventData(

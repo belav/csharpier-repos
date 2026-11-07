@@ -353,8 +353,10 @@ namespace Mono.Linker.Tests.Extensions
                         if (type.HasGenericParameters)
                         {
                             int genericParametersCount = type.GenericParameters.Count;
-                            int declaringTypeGenericParametersCount =
-                                type.DeclaringType?.GenericParameters?.Count ?? 0;
+                            int declaringTypeGenericParametersCount = type.DeclaringType
+                                ?.GenericParameters
+                                ?.Count
+                                ?? 0;
 
                             string simpleName;
                             if (genericParametersCount > declaringTypeGenericParametersCount)

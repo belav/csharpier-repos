@@ -837,8 +837,7 @@ public sealed partial class SelectExpression : TableExpressionBase
             }
         }
 
-        var table =
-            entityType.GetViewOrTableMappings().SingleOrDefault()?.Table
+        var table = entityType.GetViewOrTableMappings().SingleOrDefault()?.Table
             ?? entityType.GetDefaultMappings().Single().Table;
 
         // TODO: We'll need to make sure this is correct when we add support for JSON complex types.
@@ -3493,8 +3492,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                 // and therefore doesn't have type mapping (yet - we infer those after the translation is complete)
                 // but for set operation at least one side should have type mapping, otherwise whole thing would have been parameterized out
                 // this can only happen in compiled query, since we always parameterize parameters there - if this happens we throw
-                var outerTypeMapping =
-                    innerProjection1.Expression.TypeMapping
+                var outerTypeMapping = innerProjection1.Expression.TypeMapping
                     ?? innerProjection2.Expression.TypeMapping;
                 if (outerTypeMapping == null)
                 {

@@ -161,8 +161,8 @@ namespace System.Net.Security
 
                 // ELSE Try the MY user and machine stores for private key check.
                 // For server side mode MY machine store takes priority.
-                X509Certificate2? found =
-                    FindCertWithPrivateKey(isServer) ?? FindCertWithPrivateKey(!isServer);
+                X509Certificate2? found = FindCertWithPrivateKey(isServer)
+                    ?? FindCertWithPrivateKey(!isServer);
                 if (found is not null)
                 {
                     return found;
@@ -785,8 +785,11 @@ namespace System.Net.Security
             // Note selectedCert is a safe ref possibly cloned from the user passed Cert object
             //
             byte[] guessedThumbPrint = selectedCert.GetCertHash();
-            bool sendTrustedList =
-                _sslAuthenticationOptions.CertificateContext!.Trust?._sendTrustInHandshake ?? false;
+            bool sendTrustedList = _sslAuthenticationOptions
+                .CertificateContext!
+                .Trust
+                ?._sendTrustInHandshake
+                ?? false;
             SafeFreeCredentials? cachedCredentialHandle = SslSessionsCache.TryCachedCredential(
                 guessedThumbPrint,
                 _sslAuthenticationOptions.EnabledSslProtocols,
@@ -930,11 +933,10 @@ namespace System.Net.Security
 
                     if (_sslAuthenticationOptions.IsServer)
                     {
-                        sendTrustList =
-                            _sslAuthenticationOptions
-                                .CertificateContext
-                                ?.Trust
-                                ?._sendTrustInHandshake
+                        sendTrustList = _sslAuthenticationOptions
+                            .CertificateContext
+                            ?.Trust
+                            ?._sendTrustInHandshake
                             ?? false;
 
                         status = SslStreamPal.AcceptSecurityContext(

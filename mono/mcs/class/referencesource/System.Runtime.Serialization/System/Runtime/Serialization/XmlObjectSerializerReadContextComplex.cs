@@ -360,8 +360,7 @@ namespace System.Runtime.Serialization
                 TD.DCDeserializeWithSurrogateStart(declaredType.FullName);
             }
 
-            DataContract dataContract =
-                surrogateDataContract
+            DataContract dataContract = surrogateDataContract
                 ?? GetDataContract(
                     DataContractSurrogateCaller.GetDataContractType(
                         dataContractSurrogate,

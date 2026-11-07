@@ -410,8 +410,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 return new CodeLensDetailsDescriptor
                 {
                     Headers = s_header,
-                    Entries =
-                        entries
+                    Entries = entries
                         ?? SpecializedCollections.EmptyList<CodeLensDetailEntryDescriptor>(),
 
                     // use default behavior

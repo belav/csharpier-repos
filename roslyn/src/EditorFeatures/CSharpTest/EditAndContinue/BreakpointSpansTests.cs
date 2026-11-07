@@ -107,8 +107,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
                 : TextSpan.FromBounds(expectedSpans[0].Start, expectedSpans[^1].End);
             Assert.NotNull(declarationNode);
 
-            var actualEnvelope =
-                SyntaxUtilities.TryGetDeclarationBody(declarationNode, symbol: null)?.Envelope
+            var actualEnvelope = SyntaxUtilities
+                .TryGetDeclarationBody(declarationNode, symbol: null)
+                ?.Envelope
                 ?? default;
             Assert.Equal(expectedEnvelope, actualEnvelope);
         }

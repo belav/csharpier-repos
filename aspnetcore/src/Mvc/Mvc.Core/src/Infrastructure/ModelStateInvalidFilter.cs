@@ -28,8 +28,8 @@ public partial class ModelStateInvalidFilter : IActionFilter, IOrderedFilter
     /// <param name="logger">The logger.</param>
     public ModelStateInvalidFilter(ApiBehaviorOptions apiBehaviorOptions, ILogger logger)
     {
-        _apiBehaviorOptions =
-            apiBehaviorOptions ?? throw new ArgumentNullException(nameof(apiBehaviorOptions));
+        _apiBehaviorOptions = apiBehaviorOptions
+            ?? throw new ArgumentNullException(nameof(apiBehaviorOptions));
         if (
             !_apiBehaviorOptions.SuppressModelStateInvalidFilter
             && _apiBehaviorOptions.InvalidModelStateResponseFactory == null

@@ -20,8 +20,8 @@ public class ToggleExecutionModeServerFixture<TClientProgram> : ServerFixture
 
     public void UseAspNetHost(AspNetSiteServerFixture.BuildWebHost buildWebHostMethod)
     {
-        _buildWebHostMethod =
-            buildWebHostMethod ?? throw new ArgumentNullException(nameof(buildWebHostMethod));
+        _buildWebHostMethod = buildWebHostMethod
+            ?? throw new ArgumentNullException(nameof(buildWebHostMethod));
     }
 
     protected override string StartAndGetRootUri()

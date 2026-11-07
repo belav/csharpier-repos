@@ -434,48 +434,42 @@ namespace System.Linq.Tests
             )
             {
                 _getEnumerator = getEnumerator ?? (() => this);
-                _moveNext =
-                    moveNext
+                _moveNext = moveNext
                     ?? (
                         () =>
                         {
                             throw new NotImplementedException();
                         }
                     );
-                _current =
-                    current
+                _current = current
                     ?? (
                         () =>
                         {
                             throw new NotImplementedException();
                         }
                     );
-                _explicitGetEnumerator =
-                    explicitGetEnumerator
+                _explicitGetEnumerator = explicitGetEnumerator
                     ?? (
                         () =>
                         {
                             throw new NotImplementedException();
                         }
                     );
-                _explicitCurrent =
-                    explicitCurrent
+                _explicitCurrent = explicitCurrent
                     ?? (
                         () =>
                         {
                             throw new NotImplementedException();
                         }
                     );
-                _reset =
-                    reset
+                _reset = reset
                     ?? (
                         () =>
                         {
                             throw new NotImplementedException();
                         }
                     );
-                _dispose =
-                    dispose
+                _dispose = dispose
                     ?? (
                         () =>
                         {

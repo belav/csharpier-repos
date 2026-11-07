@@ -250,8 +250,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
             CancellationToken cancellationToken
         )
         {
-            var document =
-                solution.GetDocument(DocumentId)
+            var document = solution.GetDocument(DocumentId)
                 ?? await solution
                     .GetSourceGeneratedDocumentAsync(DocumentId, cancellationToken)
                     .ConfigureAwait(false);

@@ -1020,8 +1020,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || applyParentUnaryOperator.OperatorKind == testOperator
             );
 
-            ConstantValue? constantLeft =
-                loweredLeft.ConstantValueOpt ?? UnboxConstant(loweredLeft);
+            ConstantValue? constantLeft = loweredLeft.ConstantValueOpt
+                ?? UnboxConstant(loweredLeft);
             if (
                 testOperator == UnaryOperatorKind.DynamicFalse
                     && constantLeft == ConstantValue.False

@@ -763,8 +763,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 foreach (int index1 in originalConstraintTypesMap.Values)
                 {
-                    TypeWithAnnotations constraintType1 =
-                        mergedConstraintTypes?[index1] ?? originalConstraintTypes[index1];
+                    TypeWithAnnotations constraintType1 = mergedConstraintTypes?[index1]
+                        ?? originalConstraintTypes[index1];
                     int index2;
 
                     if (!clauseConstraintTypesMap.TryGetValue(constraintType1, out index2))

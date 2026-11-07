@@ -771,8 +771,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass();
-            string result =
-                (string)mc.Method_ReturnsDynamic<int, string>(10, null, mc) ?? string.Empty;
+            string result = (string)mc.Method_ReturnsDynamic<int, string>(10, null, mc)
+                ?? string.Empty;
             if (result == string.Empty)
                 return 0;
             return 1;

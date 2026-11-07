@@ -168,8 +168,9 @@ internal static class UseCollectionExpressionHelpers
                     if (capacityConstructor != null)
                         return true;
 
-                    var noArgConstructor =
-                        GetAccessibleInstanceConstructor(constructors, c => c.Parameters.IsEmpty)
+                    var noArgConstructor = GetAccessibleInstanceConstructor(constructors, c =>
+                        c.Parameters.IsEmpty
+                    )
                         ?? GetAccessibleInstanceConstructor(constructors, c =>
                             c.Parameters.All(p => p.IsOptional || p.IsParams)
                         );

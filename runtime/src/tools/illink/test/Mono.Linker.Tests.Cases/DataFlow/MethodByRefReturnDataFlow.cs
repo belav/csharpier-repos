@@ -85,8 +85,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         static void AssignToCapturedAnnotatedTypeReference()
         {
             // In this testcase, the Roslyn analyzer sees an assignment to a flow-capture reference.
-            ReturnAnnotatedTypeReferenceAsAnnotated() =
-                GetWithPublicMethods() ?? GetWithPublicFields();
+            ReturnAnnotatedTypeReferenceAsAnnotated() = GetWithPublicMethods()
+                ?? GetWithPublicFields();
         }
 
         [ExpectedWarning(
@@ -142,8 +142,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         )]
         static void AssignToCapturedAnnotatedTypeReferenceProperty()
         {
-            AnnotatedTypeReferenceAsAnnotatedProperty =
-                GetWithPublicMethods() ?? GetWithPublicFields();
+            AnnotatedTypeReferenceAsAnnotatedProperty = GetWithPublicMethods()
+                ?? GetWithPublicFields();
         }
 
         static int intField;

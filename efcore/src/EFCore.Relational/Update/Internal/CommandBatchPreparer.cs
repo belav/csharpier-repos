@@ -30,11 +30,10 @@ public class CommandBatchPreparer : ICommandBatchPreparer
     /// </summary>
     public CommandBatchPreparer(CommandBatchPreparerDependencies dependencies)
     {
-        _minBatchSize =
-            dependencies
-                .Options.Extensions.OfType<RelationalOptionsExtension>()
-                .FirstOrDefault()
-                ?.MinBatchSize
+        _minBatchSize = dependencies
+            .Options.Extensions.OfType<RelationalOptionsExtension>()
+            .FirstOrDefault()
+            ?.MinBatchSize
             ?? 1;
 
         _modificationCommandGraph = new Multigraph<IReadOnlyModificationCommand, CommandDependency>(

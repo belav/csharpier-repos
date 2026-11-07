@@ -1870,8 +1870,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLocationSyntax,
                     diagnostics
                 );
-                builder.ElementTypeWithAnnotations =
-                    builder.CurrentPropertyGetter?.ReturnTypeWithAnnotations
+                builder.ElementTypeWithAnnotations = builder
+                    .CurrentPropertyGetter
+                    ?.ReturnTypeWithAnnotations
                     ?? TypeWithAnnotations.Create(
                         GetSpecialType(SpecialType.System_Object, diagnostics, errorLocationSyntax)
                     );

@@ -200,11 +200,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (!(syntax is ExpressionSyntax))
                 {
-                    syntax =
-                        syntax
-                            .DescendantNodes(n => !(n is ExpressionSyntax))
-                            .OfType<ExpressionSyntax>()
-                            .FirstOrDefault()
+                    syntax = syntax
+                        .DescendantNodes(n => !(n is ExpressionSyntax))
+                        .OfType<ExpressionSyntax>()
+                        .FirstOrDefault()
                         ?? syntax;
                 }
 

@@ -1048,8 +1048,7 @@ namespace System.Text.RegularExpressions.Symbolic
                 {
                     // Get or create the transitions
                     int offset = DeltaOffset(sourceId, mintermId);
-                    (int, DerivativeEffect[])[] transitions =
-                        _capturingNfaDelta[offset]
+                    (int, DerivativeEffect[])[] transitions = _capturingNfaDelta[offset]
                         ?? CreateNewCapturingTransition(sourceId, mintermId, offset);
 
                     // Take the transitions in their prioritized order

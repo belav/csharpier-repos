@@ -559,8 +559,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             );
             string memberName;
             // Considering, we're not handling the case of a member inherited from a generic base type.
-            var typeDeclaringMember =
-                member.GetExplicitlyImplementedInterface(out memberName) ?? member.DeclaringType;
+            var typeDeclaringMember = member.GetExplicitlyImplementedInterface(out memberName)
+                ?? member.DeclaringType;
             var typeDeclaringMemberInfo = typeDeclaringMember.IsInterface
                 ? customTypeInfoMap.SubstituteCustomTypeInfo(
                     typeDeclaringMember.GetInterfaceListEntry(member.DeclaringType),

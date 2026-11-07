@@ -995,8 +995,7 @@ public class InferParameterBindingInfoConventionTest
     )
     {
         modelMetadataProvider = modelMetadataProvider ?? new EmptyModelMetadataProvider();
-        serviceProviderIsService =
-            serviceProviderIsService
+        serviceProviderIsService = serviceProviderIsService
             ?? Mock.Of<IServiceProviderIsService>(s => s.IsService(It.IsAny<Type>()) == false);
         return new InferParameterBindingInfoConvention(
             modelMetadataProvider,

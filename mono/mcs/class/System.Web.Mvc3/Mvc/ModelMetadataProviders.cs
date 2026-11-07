@@ -8,8 +8,7 @@
 
         internal ModelMetadataProviders(IResolver<ModelMetadataProvider> resolver = null)
         {
-            _resolver =
-                resolver
+            _resolver = resolver
                 ?? new SingleServiceResolver<ModelMetadataProvider>(
                     () => _currentProvider,
                     new DataAnnotationsModelMetadataProvider(),

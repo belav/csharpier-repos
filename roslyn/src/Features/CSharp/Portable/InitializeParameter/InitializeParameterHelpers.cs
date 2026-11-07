@@ -71,8 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
 
             if (IsExpressionBody(body))
             {
-                var semicolonToken =
-                    TryGetSemicolonToken(functionDeclaration)
+                var semicolonToken = TryGetSemicolonToken(functionDeclaration)
                     ?? SyntaxFactory.Token(SyntaxKind.SemicolonToken);
 
                 if (

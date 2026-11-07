@@ -182,8 +182,7 @@ internal sealed class AcceptsMatcherPolicy
         for (var i = 0; i < endpoints.Count; i++)
         {
             var endpoint = endpoints[i];
-            var contentTypes =
-                endpoint.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes
+            var contentTypes = endpoint.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes
                 ?? Array.Empty<string>();
             if (contentTypes.Count == 0)
             {

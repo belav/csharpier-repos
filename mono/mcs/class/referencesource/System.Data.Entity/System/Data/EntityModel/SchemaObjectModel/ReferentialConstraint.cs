@@ -133,10 +133,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         )
                             ? RelationshipMultiplicity.ZeroOrOne
                             : RelationshipMultiplicity.Many;
-                    principalRoleEnd.Multiplicity =
-                        principalRoleEnd.Multiplicity ?? expectedPrincipalMultiplicity;
-                    dependentRoleEnd.Multiplicity =
-                        dependentRoleEnd.Multiplicity ?? expectedDependentMultiplicity;
+                    principalRoleEnd.Multiplicity = principalRoleEnd.Multiplicity
+                        ?? expectedPrincipalMultiplicity;
+                    dependentRoleEnd.Multiplicity = dependentRoleEnd.Multiplicity
+                        ?? expectedDependentMultiplicity;
 
                     // Since the FromProperty must be the key of the FromRole, the FromRole cannot be '*' as multiplicity
                     // Also the lower bound of multiplicity of FromRole can be zero if and only if all the properties in

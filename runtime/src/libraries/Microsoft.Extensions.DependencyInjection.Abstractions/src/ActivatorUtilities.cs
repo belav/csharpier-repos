@@ -1407,19 +1407,18 @@ namespace Microsoft.Extensions.DependencyInjection
             for (int i = 0; i < parameters.Length; i++)
             {
                 ref FactoryParameterContext parameter = ref parameters[i];
-                constructorArguments[i] =
-                    (
-                        (parameter.ArgumentIndex != -1)
-                            // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
-                            ? arguments![parameter.ArgumentIndex]
-                            : GetService(
-                                serviceProvider,
-                                parameter.ParameterType,
-                                declaringType,
-                                parameter.HasDefaultValue,
-                                parameter.ServiceKey
-                            )
-                    ) ?? parameter.DefaultValue;
+                constructorArguments[i] = (
+                    (parameter.ArgumentIndex != -1)
+                        // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
+                        ? arguments![parameter.ArgumentIndex]
+                        : GetService(
+                            serviceProvider,
+                            parameter.ParameterType,
+                            declaringType,
+                            parameter.HasDefaultValue,
+                            parameter.ServiceKey
+                        )
+                ) ?? parameter.DefaultValue;
             }
 
             return invoker.Invoke(constructorArguments.AsSpan());
@@ -1464,19 +1463,18 @@ namespace Microsoft.Extensions.DependencyInjection
             for (int i = 0; i < parameters.Length; i++)
             {
                 ref FactoryParameterContext parameter = ref parameters[i];
-                constructorArguments[i] =
-                    (
-                        (parameter.ArgumentIndex != -1)
-                            // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
-                            ? arguments![parameter.ArgumentIndex]
-                            : GetService(
-                                serviceProvider,
-                                parameter.ParameterType,
-                                declaringType,
-                                parameter.HasDefaultValue,
-                                parameter.ServiceKey
-                            )
-                    ) ?? parameter.DefaultValue;
+                constructorArguments[i] = (
+                    (parameter.ArgumentIndex != -1)
+                        // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
+                        ? arguments![parameter.ArgumentIndex]
+                        : GetService(
+                            serviceProvider,
+                            parameter.ParameterType,
+                            declaringType,
+                            parameter.HasDefaultValue,
+                            parameter.ServiceKey
+                        )
+                ) ?? parameter.DefaultValue;
             }
 
             return constructor.Invoke(

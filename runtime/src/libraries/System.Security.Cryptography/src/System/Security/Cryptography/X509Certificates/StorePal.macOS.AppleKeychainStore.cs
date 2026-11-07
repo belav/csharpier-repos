@@ -66,8 +66,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                 AppleCertificatePal applePal = (AppleCertificatePal)cert;
 
-                var handle =
-                    (SafeKeychainItemHandle?)applePal.IdentityHandle ?? applePal.CertificateHandle;
+                var handle = (SafeKeychainItemHandle?)applePal.IdentityHandle
+                    ?? applePal.CertificateHandle;
                 Interop.AppleCrypto.X509StoreAddCertificate(handle, _keychainHandle);
             }
 
@@ -75,8 +75,8 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 AppleCertificatePal applePal = (AppleCertificatePal)cert;
 
-                var handle =
-                    (SafeKeychainItemHandle?)applePal.IdentityHandle ?? applePal.CertificateHandle;
+                var handle = (SafeKeychainItemHandle?)applePal.IdentityHandle
+                    ?? applePal.CertificateHandle;
                 Interop.AppleCrypto.X509StoreRemoveCertificate(handle, _keychainHandle, _readonly);
             }
 

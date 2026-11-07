@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Features.Intents
         /// Contains metadata that can be used to identify the kind of sub-action these edits
         /// apply to for the requested intent.
         /// </summary>
-        public readonly string ActionName =
-            actionName ?? throw new ArgumentNullException(nameof(actionName));
+        public readonly string ActionName = actionName
+            ?? throw new ArgumentNullException(nameof(actionName));
     }
 }

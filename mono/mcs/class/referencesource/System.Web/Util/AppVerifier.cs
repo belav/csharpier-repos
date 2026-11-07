@@ -160,34 +160,31 @@
         private static Action<AppVerifierException> GetAppVerifierBehaviorFromRegistry()
         {
             // use 0 as the default value if the key doesn't exist or is of the wrong type
-            int valueFromRegistry =
-                (
-                    Misc.GetAspNetRegValue(
-                        subKey: null,
-                        valueName: "RuntimeVerificationBehavior",
-                        defaultValue: null
-                    ) as int?
-                ) ?? 0;
+            int valueFromRegistry = (
+                Misc.GetAspNetRegValue(
+                    subKey: null,
+                    valueName: "RuntimeVerificationBehavior",
+                    defaultValue: null
+                ) as int?
+            ) ?? 0;
 
             // REG_QWORD used as a mask to disable individual asserts. No key means all asserts are enabled
-            AppVerifierErrorCodeEnableAssertMask =
-                (
-                    Misc.GetAspNetRegValue(
-                        subKey: null,
-                        valueName: "AppVerifierErrorCodeEnableAssertMask",
-                        defaultValue: (long)(-1)
-                    ) as long?
-                ) ?? (long)(-1);
+            AppVerifierErrorCodeEnableAssertMask = (
+                Misc.GetAspNetRegValue(
+                    subKey: null,
+                    valueName: "AppVerifierErrorCodeEnableAssertMask",
+                    defaultValue: (long)(-1)
+                ) as long?
+            ) ?? (long)(-1);
 
             // REG_QWORD used as a mask to control call stack collection on individual asserts (useful if we event log only). No key means all asserts will collect stack traces
-            AppVerifierErrorCodeCollectCallStackMask =
-                (
-                    Misc.GetAspNetRegValue(
-                        subKey: null,
-                        valueName: "AppVerifierErrorCodeCollectCallstackMask",
-                        defaultValue: (long)(-1)
-                    ) as long?
-                ) ?? (long)(-1);
+            AppVerifierErrorCodeCollectCallStackMask = (
+                Misc.GetAspNetRegValue(
+                    subKey: null,
+                    valueName: "AppVerifierErrorCodeCollectCallstackMask",
+                    defaultValue: (long)(-1)
+                ) as long?
+            ) ?? (long)(-1);
 
             // REG_DWORD mask to disable call stack collection on begin* / end* methods. No key means all call stacks are collected
             AppVerifierCollectCallStackMask = (CallStackCollectionBitMasks)(

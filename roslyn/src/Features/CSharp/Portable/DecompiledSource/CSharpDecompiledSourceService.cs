@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
             for (
                 INamespaceOrTypeSymbol? symbol = containingType;
                 symbol is not null and not INamespaceSymbol { IsGlobalNamespace: true };
-                symbol =
-                        (INamespaceOrTypeSymbol?)symbol.ContainingType ?? symbol.ContainingNamespace
+                symbol = (INamespaceOrTypeSymbol?)symbol.ContainingType
+                        ?? symbol.ContainingNamespace
             )
             {
                 if (symbol.ContainingType is not null)

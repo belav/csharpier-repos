@@ -290,9 +290,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
             byte[]? compressedHash = null;
             if (uncompressedSize != 0)
             {
-                using var algorithm =
-                    CryptographicHashProvider.TryGetAlgorithm(sourceTextInfo.HashAlgorithm)
-                    ?? throw new InvalidOperationException();
+                using var algorithm = CryptographicHashProvider.TryGetAlgorithm(
+                    sourceTextInfo.HashAlgorithm
+                ) ?? throw new InvalidOperationException();
                 compressedHash = algorithm.ComputeHash(bytes);
 
                 var decompressed = new MemoryStream(uncompressedSize);

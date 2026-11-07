@@ -204,8 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case SyntaxKind.LocalDeclarationStatement:
                     {
-                        Binder localDeclarationBinder =
-                            enclosingBinder.GetBinder(innerStatement) ?? enclosingBinder;
+                        Binder localDeclarationBinder = enclosingBinder.GetBinder(innerStatement)
+                            ?? enclosingBinder;
                         var decl = (LocalDeclarationStatementSyntax)innerStatement;
 
                         decl.Declaration.Type.VisitRankSpecifiers(
@@ -261,8 +261,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.LocalFunctionStatement:
                     {
-                        Binder localFunctionDeclarationBinder =
-                            enclosingBinder.GetBinder(innerStatement) ?? enclosingBinder;
+                        Binder localFunctionDeclarationBinder = enclosingBinder.GetBinder(
+                            innerStatement
+                        ) ?? enclosingBinder;
                         var decl = (LocalFunctionStatementSyntax)innerStatement;
 
                         foreach (var parameter in decl.ParameterList.Parameters)

@@ -408,8 +408,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // cache of size 8 seems reasonable here.
                 // considering that substituted methods have about 10 reference fields,
                 // reusing just one may make the cache profitable.
-                var cache =
-                    _lazyMembersByNameCache
+                var cache = _lazyMembersByNameCache
                     ?? (
                         _lazyMembersByNameCache = new ConcurrentCache<
                             string,

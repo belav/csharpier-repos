@@ -56,8 +56,7 @@ namespace System.Web.Security.Cryptography
             {
                 if (_applicationName == null)
                 {
-                    _applicationName =
-                        HttpRuntime.AppDomainAppVirtualPath
+                    _applicationName = HttpRuntime.AppDomainAppVirtualPath
                         ?? Process.GetCurrentProcess().MainModule.ModuleName;
                 }
                 return _applicationName;

@@ -91,19 +91,18 @@ public class SqlExpressionFactory : ISqlExpressionFactory
 
     private SqlExpression ApplyTypeMappingOnLike(LikeExpression likeExpression)
     {
-        var inferredTypeMapping =
-            (
-                likeExpression.EscapeChar == null
-                    ? ExpressionExtensions.InferTypeMapping(
-                        likeExpression.Match,
-                        likeExpression.Pattern
-                    )
-                    : ExpressionExtensions.InferTypeMapping(
-                        likeExpression.Match,
-                        likeExpression.Pattern,
-                        likeExpression.EscapeChar
-                    )
-            ) ?? _typeMappingSource.FindMapping(likeExpression.Match.Type, Dependencies.Model);
+        var inferredTypeMapping = (
+            likeExpression.EscapeChar == null
+                ? ExpressionExtensions.InferTypeMapping(
+                    likeExpression.Match,
+                    likeExpression.Pattern
+                )
+                : ExpressionExtensions.InferTypeMapping(
+                    likeExpression.Match,
+                    likeExpression.Pattern,
+                    likeExpression.EscapeChar
+                )
+        ) ?? _typeMappingSource.FindMapping(likeExpression.Match.Type, Dependencies.Model);
 
         return new LikeExpression(
             ApplyTypeMapping(likeExpression.Match, inferredTypeMapping),
@@ -216,8 +215,7 @@ public class SqlExpressionFactory : ISqlExpressionFactory
             case ExpressionType.LessThanOrEqual:
             case ExpressionType.NotEqual:
             {
-                inferredTypeMapping =
-                    ExpressionExtensions.InferTypeMapping(left, right)
+                inferredTypeMapping = ExpressionExtensions.InferTypeMapping(left, right)
                     // We avoid object here since the result does not get typeMapping from outside.
                     ?? _typeMappingSource.FindMapping(
                         left.Type != typeof(object) ? left.Type : right.Type,
@@ -245,8 +243,8 @@ public class SqlExpressionFactory : ISqlExpressionFactory
             case ExpressionType.And:
             case ExpressionType.Or:
             {
-                inferredTypeMapping =
-                    typeMapping ?? ExpressionExtensions.InferTypeMapping(left, right);
+                inferredTypeMapping = typeMapping
+                    ?? ExpressionExtensions.InferTypeMapping(left, right);
                 resultType = inferredTypeMapping?.ClrType ?? left.Type;
                 resultTypeMapping = inferredTypeMapping;
                 break;
@@ -518,8 +516,7 @@ public class SqlExpressionFactory : ISqlExpressionFactory
     )
     {
         var resultType = right.Type;
-        var inferredTypeMapping =
-            typeMapping
+        var inferredTypeMapping = typeMapping
             ?? ExpressionExtensions.InferTypeMapping(left, right)
             ?? _typeMappingSource.FindMapping(resultType, Dependencies.Model);
 
@@ -584,8 +581,7 @@ public class SqlExpressionFactory : ISqlExpressionFactory
         SqlExpression? elseResult
     )
     {
-        var operandTypeMapping =
-            operand!.TypeMapping
+        var operandTypeMapping = operand!.TypeMapping
             ?? whenClauses.Select(wc => wc.Test.TypeMapping).FirstOrDefault(t => t != null)
             // Since we never look at type of Operand/Test after this place,
             // we need to find actual typeMapping based on non-object type.
@@ -595,8 +591,7 @@ public class SqlExpressionFactory : ISqlExpressionFactory
                 .Select(t => _typeMappingSource.FindMapping(t, Dependencies.Model))
                 .FirstOrDefault();
 
-        var resultTypeMapping =
-            elseResult?.TypeMapping
+        var resultTypeMapping = elseResult?.TypeMapping
             ?? whenClauses.Select(wc => wc.Result.TypeMapping).FirstOrDefault(t => t != null);
 
         operand = ApplyTypeMapping(operand, operandTypeMapping);
@@ -622,8 +617,7 @@ public class SqlExpressionFactory : ISqlExpressionFactory
         SqlExpression? elseResult
     )
     {
-        var resultTypeMapping =
-            elseResult?.TypeMapping
+        var resultTypeMapping = elseResult?.TypeMapping
             ?? whenClauses.Select(wc => wc.Result.TypeMapping).FirstOrDefault(t => t != null);
 
         var typeMappedWhenClauses = new List<CaseWhenClause>();

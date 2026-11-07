@@ -40,8 +40,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
             _solutionServices = solutionServices;
             _diagnosticReporter = diagnosticReporter;
             _pathResolver = new PathResolver(_diagnosticReporter);
-            _projectFileExtensionRegistry =
-                projectFileExtensionRegistry
+            _projectFileExtensionRegistry = projectFileExtensionRegistry
                 ?? new ProjectFileExtensionRegistry(solutionServices, _diagnosticReporter);
 
             Properties = ImmutableDictionary.Create<string, string>(

@@ -110,8 +110,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             // overload to stop leaking the Lambda implementation detail.
             TextDocument = document ?? throw new ArgumentNullException(nameof(document));
             Span = span;
-            _registerRefactoring =
-                registerRefactoring ?? throw new ArgumentNullException(nameof(registerRefactoring));
+            _registerRefactoring = registerRefactoring
+                ?? throw new ArgumentNullException(nameof(registerRefactoring));
             Options = options;
             CancellationToken = cancellationToken;
         }

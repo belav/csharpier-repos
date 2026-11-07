@@ -2479,8 +2479,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     && argumentExpression is LambdaExpressionSyntax lambdaExpression
                                 )
                                 {
-                                    typeArg =
-                                        InferTypeForFirstParameterOfLambda(lambdaExpression)
+                                    typeArg = InferTypeForFirstParameterOfLambda(lambdaExpression)
                                         ?? this.Compilation.ObjectType;
                                 }
 

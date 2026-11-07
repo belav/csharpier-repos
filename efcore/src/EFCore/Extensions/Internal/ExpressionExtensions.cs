@@ -49,8 +49,7 @@ public static class ExpressionExtensions
                 : Expression.Constant(false);
         }
 
-        var comparer =
-            (propertyBase as IProperty)?.GetValueComparer()
+        var comparer = (propertyBase as IProperty)?.GetValueComparer()
             ?? ValueComparer.CreateDefault(
                 propertyBase?.ClrType ?? currentValueExpression.Type,
                 favorStructuralComparisons: false

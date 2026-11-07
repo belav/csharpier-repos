@@ -225,8 +225,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             // Arrange
             AntiForgeryToken token = new AntiForgeryToken();
             HttpCookieCollection cookies = new HttpCookieCollection();
-            bool defaultCookieSecureValue =
-                expectedCookieSecureFlag ?? new HttpCookie("name", "value").Secure; // pulled from config; set by ctor
+            bool defaultCookieSecureValue = expectedCookieSecureFlag
+                ?? new HttpCookie("name", "value").Secure; // pulled from config; set by ctor
 
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(o => o.Response.Cookies).Returns(cookies);

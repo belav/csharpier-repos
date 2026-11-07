@@ -183,8 +183,9 @@ namespace R2RTest
                         )
                         {
                             string testPath = excludeListElement.Attribute("Include")?.Value ?? "";
-                            string issueID =
-                                excludeListElement.Element(s_xmlNamespace + "Issue")?.Value
+                            string issueID = excludeListElement
+                                .Element(s_xmlNamespace + "Issue")
+                                ?.Value
                                 ?? "N/A";
                             exclusions.Add(CreateTestExclusion(testPath, issueID));
                         }

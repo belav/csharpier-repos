@@ -541,8 +541,10 @@ public class SqlServerAnnotationCodeGenerator : AnnotationCodeGenerator
                     : seedAnnotation.Value is int intValue ? intValue
                     : (long?)seedAnnotation.Value ?? 1L;
 
-                var increment =
-                    GetAndRemove<int?>(annotations, SqlServerAnnotationNames.IdentityIncrement)
+                var increment = GetAndRemove<int?>(
+                    annotations,
+                    SqlServerAnnotationNames.IdentityIncrement
+                )
                     ?? model.FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)?.Value
                         as int?
                     ?? 1;

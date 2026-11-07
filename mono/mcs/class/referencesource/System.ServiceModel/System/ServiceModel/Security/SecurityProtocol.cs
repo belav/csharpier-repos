@@ -920,8 +920,8 @@ namespace System.ServiceModel.Security
                 {
                     if (supportingAuthenticators[i].TokenResolver != null)
                     {
-                        outOfBandResolvers =
-                            outOfBandResolvers ?? new Collection<SecurityTokenResolver>();
+                        outOfBandResolvers = outOfBandResolvers
+                            ?? new Collection<SecurityTokenResolver>();
                         outOfBandResolvers.Add(supportingAuthenticators[i].TokenResolver);
                     }
                 }

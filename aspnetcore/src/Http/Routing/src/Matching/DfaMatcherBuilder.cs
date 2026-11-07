@@ -587,8 +587,7 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                 }
             }
 
-            var literalValue =
-                requiredValue?.ToString()
+            var literalValue = requiredValue?.ToString()
                 ?? throw new InvalidOperationException(
                     $"Required value for literal '{parameterPart.Name}' must evaluate to a non-null string."
                 );

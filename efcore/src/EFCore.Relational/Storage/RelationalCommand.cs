@@ -92,16 +92,15 @@ public class RelationalCommand : IRelationalCommand
         {
             if (shouldLogCommandExecute)
             {
-                var interceptionResult =
-                    logger?.CommandNonQueryExecuting(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        startTime,
-                        parameterObject.CommandSource
-                    ) ?? default;
+                var interceptionResult = logger?.CommandNonQueryExecuting(
+                    connection,
+                    command,
+                    context,
+                    commandId,
+                    connection.ConnectionId,
+                    startTime,
+                    parameterObject.CommandSource
+                ) ?? default;
 
                 var nonQueryResult = interceptionResult.HasResult
                     ? interceptionResult.Result
@@ -329,16 +328,15 @@ public class RelationalCommand : IRelationalCommand
         {
             if (shouldLogCommandExecute)
             {
-                var interceptionResult =
-                    logger?.CommandScalarExecuting(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        startTime,
-                        parameterObject.CommandSource
-                    ) ?? default;
+                var interceptionResult = logger?.CommandScalarExecuting(
+                    connection,
+                    command,
+                    context,
+                    commandId,
+                    connection.ConnectionId,
+                    startTime,
+                    parameterObject.CommandSource
+                ) ?? default;
 
                 var result = interceptionResult.HasResult
                     ? interceptionResult.Result

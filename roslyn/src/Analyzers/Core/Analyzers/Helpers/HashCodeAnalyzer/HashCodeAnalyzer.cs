@@ -98,8 +98,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 blockOperation = childBlock;
 
             var statements = blockOperation.Operations.WhereAsArray(o => !o.IsImplicit);
-            var (accessesBase, members) =
-                MatchAccumulatorPattern(method, statements)
+            var (accessesBase, members) = MatchAccumulatorPattern(method, statements)
                 ?? MatchTuplePattern(method, statements)
                 ?? default;
 

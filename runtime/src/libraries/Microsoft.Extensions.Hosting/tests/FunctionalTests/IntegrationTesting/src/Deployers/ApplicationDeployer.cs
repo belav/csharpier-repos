@@ -93,8 +93,7 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
         protected void DotnetPublish(string publishRoot = null)
         {
-            var publisher =
-                DeploymentParameters.ApplicationPublisher
+            var publisher = DeploymentParameters.ApplicationPublisher
                 ?? new ApplicationPublisher(DeploymentParameters.ApplicationPath);
             _publishedApplication = publisher
                 .Publish(DeploymentParameters, Logger)

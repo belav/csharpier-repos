@@ -42,8 +42,7 @@ public abstract class EventDefinitionBase
             }
 
             var behavior = warningsConfiguration.GetBehavior(eventId);
-            WarningBehavior =
-                behavior
+            WarningBehavior = behavior
                 ?? (
                     level == LogLevel.Warning
                     && warningsConfiguration.DefaultBehavior == WarningBehavior.Throw

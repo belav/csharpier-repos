@@ -16,13 +16,11 @@ namespace ILLink.Shared
         public DiagnosticString(DiagnosticId diagnosticId)
         {
             var resourceManager = SharedStrings.ResourceManager;
-            _titleFormat =
-                resourceManager.GetString($"{diagnosticId}Title")
+            _titleFormat = resourceManager.GetString($"{diagnosticId}Title")
                 ?? throw new InvalidOperationException(
                     $"{diagnosticId} does not have a matching resource called {diagnosticId}Title"
                 );
-            _messageFormat =
-                resourceManager.GetString($"{diagnosticId}Message")
+            _messageFormat = resourceManager.GetString($"{diagnosticId}Message")
                 ?? throw new InvalidOperationException(
                     $"{diagnosticId} does not have a matching resource called {diagnosticId}Message"
                 );
@@ -31,13 +29,11 @@ namespace ILLink.Shared
         public DiagnosticString(string diagnosticResourceStringName)
         {
             var resourceManager = SharedStrings.ResourceManager;
-            _titleFormat =
-                resourceManager.GetString($"{diagnosticResourceStringName}Title")
+            _titleFormat = resourceManager.GetString($"{diagnosticResourceStringName}Title")
                 ?? throw new InvalidOperationException(
                     $"{diagnosticResourceStringName} does not have a matching resource called {diagnosticResourceStringName}Title"
                 );
-            _messageFormat =
-                resourceManager.GetString($"{diagnosticResourceStringName}Message")
+            _messageFormat = resourceManager.GetString($"{diagnosticResourceStringName}Message")
                 ?? throw new InvalidOperationException(
                     $"{diagnosticResourceStringName} does not have a matching resource called {diagnosticResourceStringName}Message"
                 );

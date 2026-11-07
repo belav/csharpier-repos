@@ -20,8 +20,7 @@ public sealed class ApiConventionResult
         IReadOnlyList<IApiResponseMetadataProvider> responseMetadataProviders
     )
     {
-        ResponseMetadataProviders =
-            responseMetadataProviders
+        ResponseMetadataProviders = responseMetadataProviders
             ?? throw new ArgumentNullException(nameof(responseMetadataProviders));
     }
 

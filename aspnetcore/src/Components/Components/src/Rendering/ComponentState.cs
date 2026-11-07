@@ -228,8 +228,7 @@ public class ComponentState : IAsyncDisposable
 
         // Now update all the tracking state to match the filtered set
         _hasCascadingParameters = remainingCascadingParameters is not null;
-        _cascadingParameters =
-            (IReadOnlyList<CascadingParameterState>?)remainingCascadingParameters
+        _cascadingParameters = (IReadOnlyList<CascadingParameterState>?)remainingCascadingParameters
             ?? Array.Empty<CascadingParameterState>();
         _hasSingleDeliveryCascadingParameters = false;
     }

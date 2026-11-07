@@ -215,8 +215,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             static DiagnosticInfo createObsoleteDiagnostic(Symbol symbol, BinderFlags location)
             {
-                var data =
-                    symbol.ObsoleteAttributeData
+                var data = symbol.ObsoleteAttributeData
                     ?? symbol.ContainingModule.ObsoleteAttributeData
                     ?? symbol.ContainingAssembly.ObsoleteAttributeData;
                 Debug.Assert(data != null);

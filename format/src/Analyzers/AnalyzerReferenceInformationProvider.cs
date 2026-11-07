@@ -93,8 +93,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     }
                     else
                     {
-                        var analyzerService =
-                            workspace.Services.GetService<IAnalyzerService>()
+                        var analyzerService = workspace.Services.GetService<IAnalyzerService>()
                             ?? throw new NotSupportedException();
                         var loader = analyzerService.GetLoader();
                         analyzerAssembly = loader.LoadFromPath(path);

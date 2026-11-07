@@ -1243,8 +1243,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             if (namedTypeSymbol.OriginalDefinition.Kind == SymbolKind.ErrorType)
             {
                 ErrorTypeSymbol errorType = (ErrorTypeSymbol)namedTypeSymbol.OriginalDefinition;
-                DiagnosticInfo diagInfo =
-                    errorType.GetUseSiteInfo().DiagnosticInfo ?? errorType.ErrorInfo;
+                DiagnosticInfo diagInfo = errorType.GetUseSiteInfo().DiagnosticInfo
+                    ?? errorType.ErrorInfo;
 
                 if (diagInfo == null && namedTypeSymbol.Kind == SymbolKind.ErrorType)
                 {

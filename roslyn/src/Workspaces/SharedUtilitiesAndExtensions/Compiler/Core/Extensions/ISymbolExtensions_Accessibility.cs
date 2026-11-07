@@ -287,8 +287,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             Debug.Assert(within is INamedTypeSymbol or IAssemblySymbol);
             Contract.ThrowIfNull(assembly);
-            var withinAssembly =
-                (within as IAssemblySymbol) ?? ((INamedTypeSymbol)within).ContainingAssembly;
+            var withinAssembly = (within as IAssemblySymbol)
+                ?? ((INamedTypeSymbol)within).ContainingAssembly;
 
             switch (declaredAccessibility)
             {
@@ -331,8 +331,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var originalContainingType = containingType.OriginalDefinition;
             var withinNamedType = within as INamedTypeSymbol;
-            var withinAssembly =
-                (within as IAssemblySymbol) ?? ((INamedTypeSymbol)within).ContainingAssembly;
+            var withinAssembly = (within as IAssemblySymbol)
+                ?? ((INamedTypeSymbol)within).ContainingAssembly;
 
             // A nested symbol is only accessible to us if its container is accessible as well.
             if (!IsNamedTypeAccessible(containingType, within))

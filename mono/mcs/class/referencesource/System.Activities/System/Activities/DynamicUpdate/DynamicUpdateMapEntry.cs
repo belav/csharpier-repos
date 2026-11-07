@@ -183,8 +183,8 @@ namespace System.Activities.DynamicUpdate
                     first.SavedOriginalValues,
                     second.SavedOriginalValues
                 );
-                result.SavedOriginalValueFromParent =
-                    first.SavedOriginalValueFromParent ?? second.SavedOriginalValueFromParent;
+                result.SavedOriginalValueFromParent = first.SavedOriginalValueFromParent
+                    ?? second.SavedOriginalValueFromParent;
                 if (first.BlockReason == UpdateBlockedReason.NotBlocked)
                 {
                     result.BlockReason = second.BlockReason;

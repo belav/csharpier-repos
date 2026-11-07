@@ -472,8 +472,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return;
             }
 
-            lazyLocalDiagnostics =
-                lazyLocalDiagnostics
+            lazyLocalDiagnostics = lazyLocalDiagnostics
                 ?? new Dictionary<
                     TKey,
                     Dictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>.Builder>
@@ -517,8 +516,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return;
             }
 
-            _nonLocalDiagnosticsOpt =
-                _nonLocalDiagnosticsOpt
+            _nonLocalDiagnosticsOpt = _nonLocalDiagnosticsOpt
                 ?? new Dictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>.Builder>();
 
             ImmutableArray<Diagnostic>.Builder? currentDiagnostics;

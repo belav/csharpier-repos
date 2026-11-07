@@ -20,8 +20,8 @@ namespace WebMatrix.Data
         internal const string SqlServerProviderName = "System.Data.SqlClient";
 
         private const string DefaultDataProviderAppSetting = "systemData:defaultProvider";
-        internal static string DataDirectory =
-            (string)AppDomain.CurrentDomain.GetData("DataDirectory")
+        internal static string DataDirectory = (string)
+            AppDomain.CurrentDomain.GetData("DataDirectory")
             ?? Directory.GetCurrentDirectory();
 
         private static readonly IDictionary<string, IDbFileHandler> _databaseFileHandlers =

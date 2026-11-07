@@ -46,8 +46,8 @@ public sealed class RelatedAssemblyAttribute : Attribute
     {
         ArgumentNullException.ThrowIfNull(assembly);
 
-        var loadContext =
-            AssemblyLoadContext.GetLoadContext(assembly) ?? AssemblyLoadContext.Default;
+        var loadContext = AssemblyLoadContext.GetLoadContext(assembly)
+            ?? AssemblyLoadContext.Default;
         return GetRelatedAssemblies(
             assembly,
             throwOnError,

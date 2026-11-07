@@ -1186,17 +1186,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             var placeholders = placeholderBuilder.ToImmutableAndFree();
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
-            TypeSymbol inferredType =
-                (
-                    inferType
-                        ? BestTypeInferrer.InferBestType(
-                            placeholders,
-                            _conversions,
-                            ref discardedUseSiteInfo,
-                            out _
-                        )
-                        : null
-                ) ?? node.Type?.SetUnknownNullabilityForReferenceTypes();
+            TypeSymbol inferredType = (
+                inferType
+                    ? BestTypeInferrer.InferBestType(
+                        placeholders,
+                        _conversions,
+                        ref discardedUseSiteInfo,
+                        out _
+                    )
+                    : null
+            ) ?? node.Type?.SetUnknownNullabilityForReferenceTypes();
 
             var inferredTypeWithAnnotations = TypeWithAnnotations.Create(inferredType);
             NullableFlowState inferredState;

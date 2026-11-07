@@ -439,8 +439,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     )
     {
         var lastMigrationFileName = migration.PreviousMigrationId + migration.FileExtension;
-        var migrationDirectory =
-            outputDir
+        var migrationDirectory = outputDir
             ?? GetDirectory(projectDir, lastMigrationFileName, migration.MigrationSubNamespace);
         var migrationFile = Path.Combine(
             migrationDirectory,

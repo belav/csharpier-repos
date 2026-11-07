@@ -178,8 +178,7 @@ public abstract class TypeMappingSourceBase : ITypeMappingSource
 
                 var typeToInstantiate = FindTypeToInstantiate();
 
-                collectionReaderWriter =
-                    mappingInfo.JsonValueReaderWriter
+                collectionReaderWriter = mappingInfo.JsonValueReaderWriter
                     ?? (JsonValueReaderWriter?)
                         Activator.CreateInstance(
                             (

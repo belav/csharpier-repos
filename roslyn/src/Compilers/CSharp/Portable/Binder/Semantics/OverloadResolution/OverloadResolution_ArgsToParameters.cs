@@ -101,17 +101,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // We use -1 as a sentinel to mean that no parameter was found that corresponded to this argument.
                 bool isNamedArgument;
-                int parameterPosition =
-                    CorrespondsToAnyParameter(
-                        parameters,
-                        expanded,
-                        arguments,
-                        argumentPosition,
-                        isVararg,
-                        out isNamedArgument,
-                        ref seenNamedParams,
-                        ref seenOutOfPositionNamedArgument
-                    ) ?? -1;
+                int parameterPosition = CorrespondsToAnyParameter(
+                    parameters,
+                    expanded,
+                    arguments,
+                    argumentPosition,
+                    isVararg,
+                    out isNamedArgument,
+                    ref seenNamedParams,
+                    ref seenOutOfPositionNamedArgument
+                ) ?? -1;
 
                 if (parameterPosition == -1 && unmatchedArgumentIndex == null)
                 {

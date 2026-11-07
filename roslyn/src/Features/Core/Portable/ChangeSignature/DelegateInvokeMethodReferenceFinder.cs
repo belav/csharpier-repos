@@ -107,14 +107,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     state.SemanticModel.GetTypeInfo(node, cancellationToken).ConvertedType;
                 if (convertedType != null)
                 {
-                    convertedType =
-                        await SymbolFinder
-                            .FindSourceDefinitionAsync(
-                                convertedType,
-                                state.Solution,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false)
+                    convertedType = await SymbolFinder
+                        .FindSourceDefinitionAsync(convertedType, state.Solution, cancellationToken)
+                        .ConfigureAwait(false)
                         ?? convertedType;
                 }
 

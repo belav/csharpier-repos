@@ -13131,13 +13131,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var node = index.Syntax;
-            var result =
-                TryImplicitConversionToArrayIndex(
-                    index,
-                    SpecialType.System_Int32,
-                    node,
-                    diagnostics
-                )
+            var result = TryImplicitConversionToArrayIndex(
+                index,
+                SpecialType.System_Int32,
+                node,
+                diagnostics
+            )
                 ?? TryImplicitConversionToArrayIndex(
                     index,
                     SpecialType.System_UInt32,
@@ -14980,15 +14979,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             var parameterTypes = methodSymbol.ParameterTypesWithAnnotations;
             var returnType = returnTypeOverride ?? methodSymbol.ReturnTypeWithAnnotations;
             var returnRefKind = returnRefKindOverride ?? methodSymbol.RefKind;
-            var parameterScopes =
-                parameterScopesOverride
+            var parameterScopes = parameterScopesOverride
                 ?? (
                     parameters.Any(p => p.EffectiveScope != ScopedKind.None)
                         ? parameters.SelectAsArray(p => p.EffectiveScope)
                         : default
                 );
-            var parameterHasUnscopedRefAttributes =
-                parameterHasUnscopedRefAttributesOverride
+            var parameterHasUnscopedRefAttributes = parameterHasUnscopedRefAttributesOverride
                 ?? (
                     parameters.Any(p => p.HasUnscopedRefAttribute)
                         ? parameters.SelectAsArray(p => p.HasUnscopedRefAttribute)

@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                 return 0;
             }
 
-            var moduleMetadata =
-                (_metadataOpt as AssemblyMetadata)?.GetModules()[0] ?? (ModuleMetadata)_metadataOpt;
+            var moduleMetadata = (_metadataOpt as AssemblyMetadata)?.GetModules()[0]
+                ?? (ModuleMetadata)_metadataOpt;
             var methodIL = moduleMetadata.Module.GetMethodBodyOrThrow(methodHandle);
             var localSignatureHandle = methodIL.LocalSignature;
             return moduleMetadata.MetadataReader.GetToken(localSignatureHandle);

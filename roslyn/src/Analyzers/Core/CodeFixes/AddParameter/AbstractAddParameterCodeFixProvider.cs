@@ -71,13 +71,12 @@ namespace Microsoft.CodeAnalysis.AddParameter
 
             for (var node = initialNode; node != null; node = node.Parent)
             {
-                var fixData =
-                    TryGetInvocationExpressionFixInfo(
-                        semanticModel,
-                        syntaxFacts,
-                        node,
-                        cancellationToken
-                    )
+                var fixData = TryGetInvocationExpressionFixInfo(
+                    semanticModel,
+                    syntaxFacts,
+                    node,
+                    cancellationToken
+                )
                     ?? TryGetObjectCreationFixInfo(
                         semanticModel,
                         syntaxFacts,

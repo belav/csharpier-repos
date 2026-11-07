@@ -30,12 +30,12 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
             CSharpLspRazorProjectFactory razorProjectFactory
         )
         {
-            _contentTypeRegistry =
-                contentTypeRegistry ?? throw new ArgumentNullException(nameof(contentTypeRegistry));
-            _serviceProvider =
-                serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            _razorProjectFactory =
-                razorProjectFactory ?? throw new ArgumentNullException(nameof(razorProjectFactory));
+            _contentTypeRegistry = contentTypeRegistry
+                ?? throw new ArgumentNullException(nameof(contentTypeRegistry));
+            _serviceProvider = serviceProvider
+                ?? throw new ArgumentNullException(nameof(serviceProvider));
+            _razorProjectFactory = razorProjectFactory
+                ?? throw new ArgumentNullException(nameof(razorProjectFactory));
         }
 
         public IContentType GetContentType(string filePath) =>

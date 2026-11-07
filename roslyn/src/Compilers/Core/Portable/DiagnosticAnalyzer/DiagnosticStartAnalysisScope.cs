@@ -758,8 +758,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             case SymbolKind.NamedType:
                                 var namedType = (INamedTypeSymbol)context.Symbol;
                                 var delegateInvokeMethod = namedType.DelegateInvokeMethod;
-                                parameters =
-                                    delegateInvokeMethod?.Parameters
+                                parameters = delegateInvokeMethod?.Parameters
                                     ?? ImmutableArray.Create<IParameterSymbol>();
                                 break;
                             default:

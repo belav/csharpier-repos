@@ -372,8 +372,7 @@ public class SingleQueryingEnumerable<T>
                             .ConfigureAwait(false);
                     }
 
-                    var hasNext =
-                        _resultCoordinator!.HasNext
+                    var hasNext = _resultCoordinator!.HasNext
                         ?? await _dataReader!.ReadAsync(_cancellationToken).ConfigureAwait(false);
 
                     if (hasNext)

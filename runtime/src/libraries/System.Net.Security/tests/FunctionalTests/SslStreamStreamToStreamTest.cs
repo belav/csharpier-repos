@@ -27,8 +27,8 @@ namespace System.Net.Security.Tests
             Func<X509Certificate, string, Task> func
         )
         {
-            X509Certificate certificate =
-                serverCertificate ?? Configuration.Certificates.GetServerCertificate();
+            X509Certificate certificate = serverCertificate
+                ?? Configuration.Certificates.GetServerCertificate();
             try
             {
                 string name;

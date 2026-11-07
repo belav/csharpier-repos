@@ -23,8 +23,8 @@ public class LoggingOptions : ILoggingOptions
     /// </summary>
     public virtual void Initialize(IDbContextOptions options)
     {
-        var coreOptions =
-            options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+        var coreOptions = options.FindExtension<CoreOptionsExtension>()
+            ?? new CoreOptionsExtension();
 
         IsSensitiveDataLoggingEnabled = coreOptions.IsSensitiveDataLoggingEnabled;
         DetailedErrorsEnabled = coreOptions.DetailedErrorsEnabled;
@@ -39,8 +39,8 @@ public class LoggingOptions : ILoggingOptions
     /// </summary>
     public virtual void Validate(IDbContextOptions options)
     {
-        var coreOptions =
-            options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+        var coreOptions = options.FindExtension<CoreOptionsExtension>()
+            ?? new CoreOptionsExtension();
 
         if (IsSensitiveDataLoggingEnabled != coreOptions.IsSensitiveDataLoggingEnabled)
         {

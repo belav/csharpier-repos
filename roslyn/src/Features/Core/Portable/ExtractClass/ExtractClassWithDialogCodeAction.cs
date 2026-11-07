@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis.ExtractClass
 
         public override object? GetOptions(CancellationToken cancellationToken)
         {
-            var extractClassService =
-                _service
+            var extractClassService = _service
                 ?? _document.Project.Solution.Services.GetRequiredService<IExtractClassOptionsService>();
             return extractClassService
                 .GetExtractClassOptionsAsync(

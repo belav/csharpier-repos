@@ -623,8 +623,7 @@ namespace System.Xaml
             }
             else
             {
-                xm =
-                    (XamlMember)FindStandardDirective(name, AllowedMemberLocations.MemberElement)
+                xm = (XamlMember)FindStandardDirective(name, AllowedMemberLocations.MemberElement)
                     ??
                     // not a standard directive? then try attachable
                     xt.GetAttachableMember(name)

@@ -175,8 +175,7 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             get
             {
-                _partCreationPolicy ??=
-                    _type.GetFirstAttribute<PartCreationPolicyAttribute>()
+                _partCreationPolicy ??= _type.GetFirstAttribute<PartCreationPolicyAttribute>()
                     ?? PartCreationPolicyAttribute.Default;
 
                 return _partCreationPolicy.CreationPolicy;

@@ -501,12 +501,16 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     var debuggerDisplay = GetApplicableDebuggerDisplayAttribute(member);
                     if (debuggerDisplay != null)
                     {
-                        string k =
-                            FormatWithEmbeddedExpressions(lengthLimit, debuggerDisplay.Name, obj)
-                            ?? member.Name;
-                        string v =
-                            FormatWithEmbeddedExpressions(lengthLimit, debuggerDisplay.Value, obj)
-                            ?? string.Empty; // TODO: ?
+                        string k = FormatWithEmbeddedExpressions(
+                            lengthLimit,
+                            debuggerDisplay.Name,
+                            obj
+                        ) ?? member.Name;
+                        string v = FormatWithEmbeddedExpressions(
+                            lengthLimit,
+                            debuggerDisplay.Value,
+                            obj
+                        ) ?? string.Empty; // TODO: ?
                         if (!AddMember(result, new FormattedMember(-1, k, v), ref lengthLimit))
                         {
                             return;

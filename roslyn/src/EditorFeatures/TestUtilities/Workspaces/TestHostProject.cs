@@ -155,13 +155,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             _compilationOptions = compilationOptions;
             _parseOptions = parseOptions;
             _metadataReferences = references;
-            _analyzerReferences =
-                analyzerReferences ?? SpecializedCollections.EmptyEnumerable<AnalyzerReference>();
+            _analyzerReferences = analyzerReferences
+                ?? SpecializedCollections.EmptyEnumerable<AnalyzerReference>();
             this.Documents = documents;
-            this.AdditionalDocuments =
-                additionalDocuments ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
-            this.AnalyzerConfigDocuments =
-                analyzerConfigDocuments
+            this.AdditionalDocuments = additionalDocuments
+                ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
+            this.AnalyzerConfigDocuments = analyzerConfigDocuments
                 ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
             ProjectReferences = SpecializedCollections.EmptyEnumerable<ProjectReference>();
             _isSubmission = isSubmission;
@@ -224,29 +223,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             language = language ?? LanguageNames.CSharp;
             _languageServices = workspace.Services.GetLanguageServices(language);
 
-            _compilationOptions =
-                compilationOptions
+            _compilationOptions = compilationOptions
                 ?? this.LanguageServiceProvider.GetService<ICompilationFactoryService>()
                     .GetDefaultCompilationOptions();
-            _parseOptions =
-                parseOptions
+            _parseOptions = parseOptions
                 ?? this.LanguageServiceProvider.GetService<ISyntaxTreeFactoryService>()
                     .GetDefaultParseOptions();
-            this.Documents =
-                documents ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
-            this.AdditionalDocuments =
-                additionalDocuments ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
-            this.AnalyzerConfigDocuments =
-                analyzerConfigDocuments
+            this.Documents = documents
+                ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
+            this.AdditionalDocuments = additionalDocuments
+                ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
+            this.AnalyzerConfigDocuments = analyzerConfigDocuments
                 ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
             ProjectReferences =
                 projectReferences != null
                     ? projectReferences.Select(p => new ProjectReference(p.Id))
                     : SpecializedCollections.EmptyEnumerable<ProjectReference>();
-            _metadataReferences =
-                metadataReferences ?? new MetadataReference[] { TestMetadata.Net451.mscorlib };
-            _analyzerReferences =
-                analyzerReferences ?? SpecializedCollections.EmptyEnumerable<AnalyzerReference>();
+            _metadataReferences = metadataReferences
+                ?? new MetadataReference[] { TestMetadata.Net451.mscorlib };
+            _analyzerReferences = analyzerReferences
+                ?? SpecializedCollections.EmptyEnumerable<AnalyzerReference>();
             _assemblyName = assemblyName ?? "TestProject";
             _version = VersionStamp.Create();
             _outputFilePath = GetTestOutputFilePath(_filePath);

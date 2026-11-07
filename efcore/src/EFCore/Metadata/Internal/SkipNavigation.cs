@@ -50,8 +50,7 @@ public class SkipNavigation
         TargetEntityType = targetEntityType;
         IsCollection = collection;
         IsOnDependent = onDependent;
-        _type =
-            navigationType
+        _type = navigationType
             ?? this.GetIdentifyingMemberInfo()?.GetMemberType()
             ?? (
                 IsCollection

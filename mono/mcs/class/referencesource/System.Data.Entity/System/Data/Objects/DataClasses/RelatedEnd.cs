@@ -588,8 +588,7 @@ namespace System.Data.Objects.DataClasses
 
             // Add a parameter for each entity key value found on the key.
             AliasGenerator paramNameGen = new AliasGenerator(_entityKeyParamName); // Aliases are cached in AliasGenerator
-            IEnumerable<EdmMember> parameterMembers =
-                _sourceQueryParamProperties
+            IEnumerable<EdmMember> parameterMembers = _sourceQueryParamProperties
                 ?? key.GetEntitySet(ObjectContext.MetadataWorkspace).ElementType.KeyMembers;
 
             hasResults = true;

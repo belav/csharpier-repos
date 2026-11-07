@@ -25,8 +25,8 @@
         )
             : base(providers)
         {
-            _serviceResolver =
-                resolver ?? new MultiServiceResolver<IModelBinderProvider>(() => Items);
+            _serviceResolver = resolver
+                ?? new MultiServiceResolver<IModelBinderProvider>(() => Items);
         }
 
         private IEnumerable<IModelBinderProvider> CombinedItems

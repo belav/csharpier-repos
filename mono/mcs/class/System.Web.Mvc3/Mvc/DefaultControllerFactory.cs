@@ -43,8 +43,7 @@
             }
             else
             {
-                _activatorResolver =
-                    activatorResolver
+                _activatorResolver = activatorResolver
                     ?? new SingleServiceResolver<IControllerActivator>(
                         () => null,
                         new DefaultControllerActivator(dependencyResolver),

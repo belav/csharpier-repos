@@ -70,8 +70,8 @@ public readonly record struct RelationalTypeMappingInfo
         var customConverter = elementType.GetValueConverter();
         var mappingHints = customConverter?.MappingHints;
 
-        IsFixedLength =
-            fallbackFixedLength ?? (mappingHints as RelationalConverterMappingHints)?.IsFixedLength;
+        IsFixedLength = fallbackFixedLength
+            ?? (mappingHints as RelationalConverterMappingHints)?.IsFixedLength;
         DbType = (mappingHints as RelationalConverterMappingHints)?.DbType;
         StoreTypeName = storeTypeName;
         StoreTypeNameBase = storeTypeNameBase;
@@ -140,8 +140,8 @@ public readonly record struct RelationalTypeMappingInfo
 
         var mappingHints = customConverter?.MappingHints;
 
-        IsFixedLength =
-            fallbackFixedLength ?? (mappingHints as RelationalConverterMappingHints)?.IsFixedLength;
+        IsFixedLength = fallbackFixedLength
+            ?? (mappingHints as RelationalConverterMappingHints)?.IsFixedLength;
         DbType = (mappingHints as RelationalConverterMappingHints)?.DbType;
         StoreTypeName = storeTypeName;
         StoreTypeNameBase = storeTypeNameBase;
@@ -240,8 +240,7 @@ public readonly record struct RelationalTypeMappingInfo
 
         StoreTypeName = source.StoreTypeName;
         StoreTypeNameBase = source.StoreTypeNameBase;
-        IsFixedLength =
-            source.IsFixedLength
+        IsFixedLength = source.IsFixedLength
             ?? (mappingHints as RelationalConverterMappingHints)?.IsFixedLength;
         DbType = source.DbType ?? (mappingHints as RelationalConverterMappingHints)?.DbType;
     }

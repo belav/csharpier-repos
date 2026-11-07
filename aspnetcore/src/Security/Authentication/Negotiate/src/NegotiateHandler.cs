@@ -460,8 +460,7 @@ public class NegotiateHandler
 
     private void RegisterForConnectionDispose(IDisposable authState)
     {
-        var connectionCompleteFeature =
-            Context.Features.Get<IConnectionCompleteFeature>()
+        var connectionCompleteFeature = Context.Features.Get<IConnectionCompleteFeature>()
             ?? throw new NotSupportedException(
                 $"Negotiate authentication requires a server that supports {nameof(IConnectionCompleteFeature)} like Kestrel."
             );

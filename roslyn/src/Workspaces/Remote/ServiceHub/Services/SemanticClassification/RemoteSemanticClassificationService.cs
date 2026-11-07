@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 solutionChecksum,
                 async solution =>
                 {
-                    var document =
-                        solution.GetDocument(documentId)
+                    var document = solution.GetDocument(documentId)
                         ?? await solution
                             .GetSourceGeneratedDocumentAsync(documentId, cancellationToken)
                             .ConfigureAwait(false);

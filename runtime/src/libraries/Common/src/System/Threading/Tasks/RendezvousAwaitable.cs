@@ -110,8 +110,7 @@ namespace System.Threading.Tasks
         /// <summary>Alerts any awaiter that the operation has completed.</summary>
         private void NotifyAwaiter()
         {
-            Action? c =
-                _continuation
+            Action? c = _continuation
                 ?? Interlocked.CompareExchange(ref _continuation, s_completionSentinel, null);
             if (c != null)
             {
@@ -133,8 +132,8 @@ namespace System.Threading.Tasks
         {
             Debug.Assert(continuation != null);
 
-            Action? c =
-                _continuation ?? Interlocked.CompareExchange(ref _continuation, continuation, null);
+            Action? c = _continuation
+                ?? Interlocked.CompareExchange(ref _continuation, continuation, null);
             if (c != null)
             {
                 Debug.Assert(c == s_completionSentinel);

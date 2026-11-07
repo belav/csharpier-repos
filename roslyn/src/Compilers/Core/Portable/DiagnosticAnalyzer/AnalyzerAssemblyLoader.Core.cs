@@ -53,8 +53,7 @@ namespace Microsoft.CodeAnalysis
         )
         {
             _loadOption = loadOption;
-            _compilerLoadContext =
-                compilerLoadContext
+            _compilerLoadContext = compilerLoadContext
                 ?? AssemblyLoadContext.GetLoadContext(
                     typeof(AnalyzerAssemblyLoader).GetTypeInfo().Assembly
                 )!;
@@ -70,8 +69,7 @@ namespace Microsoft.CodeAnalysis
         {
             DirectoryLoadContext? loadContext;
 
-            var fullDirectoryPath =
-                Path.GetDirectoryName(assemblyOriginalPath)
+            var fullDirectoryPath = Path.GetDirectoryName(assemblyOriginalPath)
                 ?? throw new ArgumentException(
                     message: null,
                     paramName: nameof(assemblyOriginalPath)

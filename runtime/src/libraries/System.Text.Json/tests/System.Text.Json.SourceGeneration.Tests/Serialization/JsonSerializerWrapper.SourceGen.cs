@@ -15,8 +15,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         public StringSerializerWrapper(JsonSerializerContext defaultContext)
         {
-            _defaultContext =
-                defaultContext ?? throw new ArgumentNullException(nameof(defaultContext));
+            _defaultContext = defaultContext
+                ?? throw new ArgumentNullException(nameof(defaultContext));
         }
 
         public override JsonSerializerOptions DefaultOptions => _defaultContext.Options;
@@ -96,8 +96,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         public AsyncStreamSerializerWrapper(JsonSerializerContext defaultContext)
         {
-            _defaultContext =
-                defaultContext ?? throw new ArgumentNullException(nameof(defaultContext));
+            _defaultContext = defaultContext
+                ?? throw new ArgumentNullException(nameof(defaultContext));
         }
 
         public override async Task<T> DeserializeWrapper<T>(

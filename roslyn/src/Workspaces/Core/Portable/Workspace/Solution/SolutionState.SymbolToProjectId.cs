@@ -113,8 +113,7 @@ namespace Microsoft.CodeAnalysis
                     // references) for that project.  This is the case for metadata symbols.  A metadata symbol might be
                     // found in many projects, so we just return the first result as that's just as good for finding the
                     // metadata symbol as any other project.
-                    projectId =
-                        TryGetProjectId(symbol, primary: true)
+                    projectId = TryGetProjectId(symbol, primary: true)
                         ?? TryGetProjectId(symbol, primary: false);
 
                     // Have to lock as there's no atomic AddOrUpdate in netstandard2.0 and we could throw if two

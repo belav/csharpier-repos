@@ -314,8 +314,7 @@ namespace System.Web.Mvc.Html
             IDictionary<string, object> htmlAttributes = null
         )
         {
-            string resolvedLabelText =
-                labelText
+            string resolvedLabelText = labelText
                 ?? metadata.DisplayName
                 ?? metadata.PropertyName
                 ?? htmlFieldName.Split('.').Last();

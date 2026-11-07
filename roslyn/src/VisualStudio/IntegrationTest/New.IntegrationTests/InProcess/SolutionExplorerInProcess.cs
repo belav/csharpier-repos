@@ -91,18 +91,15 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             const string language = "Language";
             const string name = "ProjectName";
             const string template = "ProjectTemplate";
-            var languageName =
-                projectElement.Attribute(language)?.Value
+            var languageName = projectElement.Attribute(language)?.Value
                 ?? throw new ArgumentException(
                     $"You must specify an attribute called '{language}' on a project element."
                 );
-            var projectName =
-                projectElement.Attribute(name)?.Value
+            var projectName = projectElement.Attribute(name)?.Value
                 ?? throw new ArgumentException(
                     $"You must specify an attribute called '{name}' on a project element."
                 );
-            var projectTemplate =
-                projectElement.Attribute(template)?.Value
+            var projectTemplate = projectElement.Attribute(template)?.Value
                 ?? throw new ArgumentException(
                     $"You must specify an attribute called '{template}' on a project element."
                 );

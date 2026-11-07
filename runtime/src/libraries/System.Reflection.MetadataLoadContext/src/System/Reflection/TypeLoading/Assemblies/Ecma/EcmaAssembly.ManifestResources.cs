@@ -37,8 +37,8 @@ namespace System.Reflection.TypeLoading.Ecma
                     internalManifestResourceInfo.ReferencedAssembly.GetManifestResourceInfo(
                         resourceName
                     )!;
-                internalManifestResourceInfo.FileName =
-                    underlyingManifestResourceInfo.FileName ?? string.Empty;
+                internalManifestResourceInfo.FileName = underlyingManifestResourceInfo.FileName
+                    ?? string.Empty;
                 internalManifestResourceInfo.ResourceLocation =
                     underlyingManifestResourceInfo.ResourceLocation
                     | ResourceLocation.ContainedInAnotherAssembly;

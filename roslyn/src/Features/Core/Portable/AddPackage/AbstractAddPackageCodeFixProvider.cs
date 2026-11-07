@@ -49,10 +49,9 @@ namespace Microsoft.CodeAnalysis.AddPackage
 
             var workspaceServices = document.Project.Solution.Services;
 
-            var symbolSearchService =
-                _symbolSearchService ?? workspaceServices.GetService<ISymbolSearchService>();
-            var installerService =
-                _packageInstallerService
+            var symbolSearchService = _symbolSearchService
+                ?? workspaceServices.GetService<ISymbolSearchService>();
+            var installerService = _packageInstallerService
                 ?? workspaceServices.GetService<IPackageInstallerService>();
 
             var codeActions = ArrayBuilder<CodeAction>.GetInstance();

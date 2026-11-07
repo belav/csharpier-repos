@@ -614,13 +614,12 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken
     )
     {
-        var mergedCodes =
-            await GetTokenAsync(
-                user,
-                AuthenticatorStoreLoginProvider,
-                RecoveryCodeTokenName,
-                cancellationToken
-            ) ?? "";
+        var mergedCodes = await GetTokenAsync(
+            user,
+            AuthenticatorStoreLoginProvider,
+            RecoveryCodeTokenName,
+            cancellationToken
+        ) ?? "";
         var splitCodes = mergedCodes.Split(';');
         if (splitCodes.Contains(code))
         {
@@ -633,13 +632,12 @@ public class InMemoryUserStore<TUser>
 
     public async Task<int> CountCodesAsync(TUser user, CancellationToken cancellationToken)
     {
-        var mergedCodes =
-            await GetTokenAsync(
-                user,
-                AuthenticatorStoreLoginProvider,
-                RecoveryCodeTokenName,
-                cancellationToken
-            ) ?? "";
+        var mergedCodes = await GetTokenAsync(
+            user,
+            AuthenticatorStoreLoginProvider,
+            RecoveryCodeTokenName,
+            cancellationToken
+        ) ?? "";
         if (mergedCodes.Length > 0)
         {
             return mergedCodes.Split(';').Length;

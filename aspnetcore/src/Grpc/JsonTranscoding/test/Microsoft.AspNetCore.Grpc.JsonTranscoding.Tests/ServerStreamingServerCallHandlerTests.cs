@@ -469,8 +469,7 @@ public class ServerStreamingServerCallHandlerTests : LoggedTest
             new TestGrpcServiceActivator<JsonTranscodingGreeterService>()
         );
 
-        var jsonSettings =
-            jsonTranscodingOptions?.JsonSettings
+        var jsonSettings = jsonTranscodingOptions?.JsonSettings
             ?? new GrpcJsonSettings() { WriteIndented = false };
 
         var descriptorRegistry = new DescriptorRegistry();

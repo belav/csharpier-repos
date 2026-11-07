@@ -91,8 +91,7 @@ public class TestMainJsProjectProvider : ProjectProviderBase
 
     public void AssertBundle(BuildArgs buildArgs, BuildProjectOptions buildProjectOptions)
     {
-        string binFrameworkDir =
-            buildProjectOptions.BinFrameworkDir
+        string binFrameworkDir = buildProjectOptions.BinFrameworkDir
             ?? FindBinFrameworkDir(
                 buildArgs.Config,
                 buildProjectOptions.Publish,

@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             this.Location = location;
             this.IsImplicit = isImplicit;
             this.SymbolUsageInfo = symbolUsageInfo;
-            this.AdditionalProperties =
-                additionalProperties ?? ImmutableDictionary<string, string>.Empty;
+            this.AdditionalProperties = additionalProperties
+                ?? ImmutableDictionary<string, string>.Empty;
             this.CandidateReason = candidateReason;
             this.ContainingStringLocation = containingStringLocation;
         }

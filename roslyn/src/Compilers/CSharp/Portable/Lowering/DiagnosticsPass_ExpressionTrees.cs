@@ -635,8 +635,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode VisitIndexerAccess(BoundIndexerAccess node)
         {
             var indexer = node.Indexer;
-            var method =
-                indexer.GetOwnOrInheritedGetMethod() ?? indexer.GetOwnOrInheritedSetMethod();
+            var method = indexer.GetOwnOrInheritedGetMethod()
+                ?? indexer.GetOwnOrInheritedSetMethod();
             if ((object)method != null)
             {
                 VisitCall(

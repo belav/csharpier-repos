@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         public FormattedClassification(string text, string classificationName)
         {
             Text = text ?? throw new ArgumentNullException(nameof(text));
-            ClassificationName =
-                classificationName ?? throw new ArgumentNullException(nameof(classificationName));
+            ClassificationName = classificationName
+                ?? throw new ArgumentNullException(nameof(classificationName));
         }
 
         public override bool Equals(object obj)

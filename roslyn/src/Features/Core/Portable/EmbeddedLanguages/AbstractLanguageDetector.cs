@@ -106,12 +106,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
                     && syntaxFacts.IsArgument(token.Parent.Parent)
                 )
                 {
-                    options =
-                        GetOptionsFromSiblingArgument(
-                            token.Parent.Parent,
-                            semanticModel,
-                            cancellationToken
-                        ) ?? GetStringSyntaxDefaultOptions();
+                    options = GetOptionsFromSiblingArgument(
+                        token.Parent.Parent,
+                        semanticModel,
+                        cancellationToken
+                    ) ?? GetStringSyntaxDefaultOptions();
                 }
 
                 return true;

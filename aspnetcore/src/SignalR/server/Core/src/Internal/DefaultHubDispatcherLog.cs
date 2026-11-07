@@ -54,8 +54,8 @@ internal static partial class DefaultHubDispatcherLog
     {
         if (logger.IsEnabled(LogLevel.Trace))
         {
-            var resultType =
-                objectMethodExecutor.AsyncResultType ?? objectMethodExecutor.MethodReturnType;
+            var resultType = objectMethodExecutor.AsyncResultType
+                ?? objectMethodExecutor.MethodReturnType;
             StreamingResult(logger, invocationId, resultType.FullName);
         }
     }
@@ -81,8 +81,8 @@ internal static partial class DefaultHubDispatcherLog
     {
         if (logger.IsEnabled(LogLevel.Trace))
         {
-            var resultType =
-                objectMethodExecutor.AsyncResultType ?? objectMethodExecutor.MethodReturnType;
+            var resultType = objectMethodExecutor.AsyncResultType
+                ?? objectMethodExecutor.MethodReturnType;
             SendingResult(logger, invocationId, resultType.FullName);
         }
     }

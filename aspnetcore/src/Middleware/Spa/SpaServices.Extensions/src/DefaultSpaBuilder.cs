@@ -13,8 +13,8 @@ internal sealed class DefaultSpaBuilder : ISpaBuilder
 
     public DefaultSpaBuilder(IApplicationBuilder applicationBuilder, SpaOptions options)
     {
-        ApplicationBuilder =
-            applicationBuilder ?? throw new ArgumentNullException(nameof(applicationBuilder));
+        ApplicationBuilder = applicationBuilder
+            ?? throw new ArgumentNullException(nameof(applicationBuilder));
 
         Options = options ?? throw new ArgumentNullException(nameof(options));
     }

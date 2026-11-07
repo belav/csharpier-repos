@@ -998,8 +998,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return false;
             }
 
-            var semicolonToken =
-                semicolonTokenOpt ?? SyntaxFactory.Token(SyntaxKind.SemicolonToken);
+            var semicolonToken = semicolonTokenOpt
+                ?? SyntaxFactory.Token(SyntaxKind.SemicolonToken);
 
             statement = ConvertToStatement(
                 expression,

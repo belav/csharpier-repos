@@ -204,8 +204,7 @@ public class Mapper : IMapper, IInternalRuntimeMapper
 
     public Mapper(IConfigurationProvider configuration, Factory serviceCtor)
     {
-        _configuration =
-            (IGlobalConfiguration)configuration
+        _configuration = (IGlobalConfiguration)configuration
             ?? throw new ArgumentNullException(nameof(configuration));
         _serviceCtor = serviceCtor ?? throw new NullReferenceException(nameof(serviceCtor));
         DefaultContext = new(this);

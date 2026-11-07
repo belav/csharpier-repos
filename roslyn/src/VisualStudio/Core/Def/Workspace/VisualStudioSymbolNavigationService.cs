@@ -76,8 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             var visibleSourceLocations = sourceLocations.Where(loc =>
                 loc.IsVisibleSourceLocation()
             );
-            var sourceLocation =
-                visibleSourceLocations.FirstOrDefault() ?? sourceLocations.FirstOrDefault();
+            var sourceLocation = visibleSourceLocations.FirstOrDefault()
+                ?? sourceLocations.FirstOrDefault();
 
             if (sourceLocation != null)
             {

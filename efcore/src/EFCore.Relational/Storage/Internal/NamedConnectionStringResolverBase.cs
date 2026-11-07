@@ -40,8 +40,8 @@ public abstract class NamedConnectionStringResolverBase
 
         var configuration = ApplicationServiceProvider?.GetService<IConfiguration>();
 
-        var resolved =
-            configuration?[connectionName] ?? configuration?[DefaultSection + connectionName];
+        var resolved = configuration?[connectionName]
+            ?? configuration?[DefaultSection + connectionName];
 
         if (resolved == null)
         {

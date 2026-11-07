@@ -1368,8 +1368,7 @@ namespace System.Text.RegularExpressions
                     bitsToSet |= bitsToSet << 1;
                 }
 
-                uint[]? cache =
-                    asciiLazyCache
+                uint[]? cache = asciiLazyCache
                     ?? Interlocked.CompareExchange(
                         ref asciiLazyCache,
                         new uint[CacheArrayLength],

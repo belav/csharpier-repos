@@ -566,8 +566,7 @@ namespace System.Threading.Tasks
         /// <exception cref="InvalidOperationException">This constructor expects <see cref="SynchronizationContext.Current"/> to be set.</exception>
         internal SynchronizationContextTaskScheduler()
         {
-            m_synchronizationContext =
-                SynchronizationContext.Current
+            m_synchronizationContext = SynchronizationContext.Current
                 ??
                 // make sure we have a synccontext to work with
                 throw new InvalidOperationException(

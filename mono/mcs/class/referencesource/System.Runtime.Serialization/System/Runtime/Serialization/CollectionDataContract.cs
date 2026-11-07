@@ -790,8 +790,7 @@ namespace System.Runtime.Serialization
                         : new XmlDictionary(3);
                     this.Name = dictionary.Add(this.StableName.Name);
                     this.Namespace = dictionary.Add(this.StableName.Namespace);
-                    this.itemName =
-                        itemName
+                    this.itemName = itemName
                         ?? DataContract
                             .GetStableName(DataContract.UnwrapNullableType(itemType))
                             .Name;

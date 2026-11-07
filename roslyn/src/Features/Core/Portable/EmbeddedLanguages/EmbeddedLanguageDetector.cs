@@ -308,8 +308,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
                     if (syntaxFacts.IsVariableDeclarator(container.Parent.Parent))
                     {
                         var variableDeclarator = container.Parent.Parent;
-                        var symbol =
-                            semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken)
+                        var symbol = semanticModel.GetDeclaredSymbol(
+                            variableDeclarator,
+                            cancellationToken
+                        )
                             ?? semanticModel.GetDeclaredSymbol(
                                 syntaxFacts
                                     .GetIdentifierOfVariableDeclarator(variableDeclarator)

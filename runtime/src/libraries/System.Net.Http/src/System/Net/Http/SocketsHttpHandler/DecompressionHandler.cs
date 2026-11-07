@@ -177,8 +177,7 @@ namespace System.Net.Http
             )
             {
                 using (
-                    Stream decompressedStream =
-                        TryCreateContentReadStream()
+                    Stream decompressedStream = TryCreateContentReadStream()
                         ?? await CreateContentReadStreamAsync(cancellationToken)
                             .ConfigureAwait(false)
                 )
@@ -218,8 +217,7 @@ namespace System.Net.Http
                 Stream originalStream;
                 if (async)
                 {
-                    originalStream =
-                        _originalContent.TryReadAsStream()
+                    originalStream = _originalContent.TryReadAsStream()
                         ?? await _originalContent
                             .ReadAsStreamAsync(cancellationToken)
                             .ConfigureAwait(false);

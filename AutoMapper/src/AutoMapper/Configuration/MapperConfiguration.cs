@@ -198,8 +198,8 @@ public class MapperConfiguration : IGlobalConfiguration
 
     LambdaExpression IGlobalConfiguration.BuildExecutionPlan(in MapRequest mapRequest)
     {
-        var typeMap =
-            ResolveTypeMap(mapRequest.RuntimeTypes) ?? ResolveTypeMap(mapRequest.RequestedTypes);
+        var typeMap = ResolveTypeMap(mapRequest.RuntimeTypes)
+            ?? ResolveTypeMap(mapRequest.RequestedTypes);
         if (typeMap != null)
         {
             return GenerateTypeMapExpression(mapRequest.RequestedTypes, typeMap);
@@ -494,8 +494,7 @@ public class MapperConfiguration : IGlobalConfiguration
             TypeMap FindClosedGenericMap(TypePair typePair)
             {
                 var genericTypePair = typePair.GetTypeDefinitionIfGeneric();
-                var userMap =
-                    FindTypeMapFor(genericTypePair.SourceType, typePair.DestinationType)
+                var userMap = FindTypeMapFor(genericTypePair.SourceType, typePair.DestinationType)
                     ?? FindTypeMapFor(typePair.SourceType, genericTypePair.DestinationType)
                     ?? FindTypeMapFor(genericTypePair);
                 TypeMapConfiguration genericMapConfig;

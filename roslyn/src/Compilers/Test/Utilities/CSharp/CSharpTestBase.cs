@@ -876,8 +876,7 @@ namespace System.Diagnostics.CodeAnalysis
             Verification verify = default
         )
         {
-            options =
-                options
+            options = options
                 ?? TestOptions.ReleaseDll.WithOutputKind(
                     (expectedOutput != null)
                         ? OutputKind.ConsoleApplication
@@ -1009,8 +1008,7 @@ namespace System.Diagnostics.CodeAnalysis
             Verification verify = default
         )
         {
-            options =
-                options
+            options = options
                 ?? (
                     expectedOutput != null
                         ? TestOptions.ReleaseExe

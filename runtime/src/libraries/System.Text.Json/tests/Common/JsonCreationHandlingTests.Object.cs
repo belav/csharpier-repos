@@ -1321,8 +1321,9 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
                     }
                 )
                 {
-                    JsonObjectCreationHandling effectiveHandling =
-                        propSett ?? typeSett ?? optionsSett;
+                    JsonObjectCreationHandling effectiveHandling = propSett
+                        ?? typeSett
+                        ?? optionsSett;
                     bool result = effectiveHandling == JsonObjectCreationHandling.Populate;
                     yield return new object[] { result, optionsSett, typeSett, propSett };
                 }

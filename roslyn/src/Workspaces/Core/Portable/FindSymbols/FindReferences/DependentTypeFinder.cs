@@ -539,8 +539,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             else
             {
                 // For a source project, find the project that that type was defined in.
-                var sourceProject =
-                    solution.GetProject(type.ContainingAssembly, cancellationToken)
+                var sourceProject = solution.GetProject(type.ContainingAssembly, cancellationToken)
                     ?? solution.GetOriginatingProject(type.ContainingAssembly);
                 if (sourceProject == null)
                     return SpecializedCollections.EmptySet<ProjectId>();

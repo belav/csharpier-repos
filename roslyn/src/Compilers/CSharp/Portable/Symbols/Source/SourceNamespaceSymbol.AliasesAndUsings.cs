@@ -503,8 +503,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ref _lazyMergedGlobalAliasesAndUsings,
                             new MergedGlobalAliasesAndUsings()
                             {
-                                UsingAliasesMap =
-                                    mergedAliases
+                                UsingAliasesMap = mergedAliases
                                     ?? ImmutableDictionary<string, AliasAndUsingDirective>.Empty,
                                 UsingNamespacesOrTypes =
                                     mergedNamespacesOrTypes.ToImmutableAndFree(),
@@ -1301,8 +1300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         UsingAliases = usingAliases?.ToImmutableAndFree() ?? globalUsingAliases,
                         UsingAliasesMap = usingAliasesMap?.ToImmutable() ?? globalUsingAliasesMap,
-                        UsingNamespacesOrTypes =
-                            usings?.ToImmutableAndFree() ?? globalUsingNamespacesOrTypes,
+                        UsingNamespacesOrTypes = usings?.ToImmutableAndFree()
+                            ?? globalUsingNamespacesOrTypes,
                         Diagnostics = diagnostics,
                     };
 
@@ -1395,16 +1394,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CancellationToken cancellationToken
             )
             {
-                var externAliasesAndDiagnostics =
-                    _lazyExternAliases
+                var externAliasesAndDiagnostics = _lazyExternAliases
                     ?? GetExternAliasesAndDiagnostics(
                         declaringSymbol,
                         (CSharpSyntaxNode)declarationSyntax.GetSyntax(cancellationToken)
                     );
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var globalUsingsAndDiagnostics =
-                    _lazyGlobalUsings
+                var globalUsingsAndDiagnostics = _lazyGlobalUsings
                     ?? (
                         declaringSymbol.IsGlobalNamespace
                             ? GetGlobalUsingsAndDiagnostics(
@@ -1416,8 +1413,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     );
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var usingsAndDiagnostics =
-                    _lazyUsings
+                var usingsAndDiagnostics = _lazyUsings
                     ?? GetUsingsAndDiagnostics(
                         declaringSymbol,
                         (CSharpSyntaxNode)declarationSyntax.GetSyntax(cancellationToken),

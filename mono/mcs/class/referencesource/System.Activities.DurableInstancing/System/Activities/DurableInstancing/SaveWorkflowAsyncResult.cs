@@ -349,12 +349,11 @@ namespace System.Activities.DurableInstancing
         )
         {
             int parameterSize = source.Count > 8000 ? source.Count : -1;
-            object parameterValue =
-                (
-                    parameterSize == -1
-                        ? SaveWorkflowAsyncResult.GenerateByteArray(source)
-                        : source.Array
-                ) ?? (object)DBNull.Value;
+            object parameterValue = (
+                parameterSize == -1
+                    ? SaveWorkflowAsyncResult.GenerateByteArray(source)
+                    : source.Array
+            ) ?? (object)DBNull.Value;
             parameters.Add(
                 new SqlParameter
                 {

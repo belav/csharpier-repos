@@ -78,8 +78,8 @@
                 string typeName = EntityTypeName;
                 if (_entityType == null)
                 {
-                    _entityType =
-                        GetDataObjectTypeByName(typeName) ?? GetDataObjectType(EntitySetType);
+                    _entityType = GetDataObjectTypeByName(typeName)
+                        ?? GetDataObjectType(EntitySetType);
                 }
                 return _entityType;
             }

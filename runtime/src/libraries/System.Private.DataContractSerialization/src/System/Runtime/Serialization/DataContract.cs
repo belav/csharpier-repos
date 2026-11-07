@@ -449,8 +449,7 @@ namespace System.Runtime.Serialization.DataContracts
                 Type? type
             )
             {
-                DataContract dataContract =
-                    s_dataContractCache.GetItem(id)
+                DataContract dataContract = s_dataContractCache.GetItem(id)
                     ?? CreateGetOnlyCollectionDataContract(id, typeHandle, type);
                 return dataContract;
             }
@@ -1774,11 +1773,10 @@ namespace System.Runtime.Serialization.DataContracts
         private static string GetDefaultDataContractNamespace(Type type)
         {
             string? clrNs = type.Namespace ?? string.Empty;
-            string? ns =
-                GetGlobalDataContractNamespace(
-                    clrNs,
-                    type.Module.GetCustomAttributes(typeof(ContractNamespaceAttribute)).ToArray()
-                )
+            string? ns = GetGlobalDataContractNamespace(
+                clrNs,
+                type.Module.GetCustomAttributes(typeof(ContractNamespaceAttribute)).ToArray()
+            )
                 ?? GetGlobalDataContractNamespace(
                     clrNs,
                     type.Assembly.GetCustomAttributes(typeof(ContractNamespaceAttribute)).ToArray()

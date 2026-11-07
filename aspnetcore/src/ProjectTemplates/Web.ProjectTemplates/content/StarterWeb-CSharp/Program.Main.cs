@@ -41,8 +41,7 @@ public class Program
 
         // Add services to the container.
 #if (IndividualLocalAuth)
-        var connectionString =
-            builder.Configuration.GetConnectionString("DefaultConnection")
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException(
                 "Connection string 'DefaultConnection' not found."
             );

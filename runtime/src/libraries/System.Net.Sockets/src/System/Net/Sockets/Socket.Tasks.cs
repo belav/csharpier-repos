@@ -66,9 +66,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled<Socket>(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferSendEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferSendEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
 
             Debug.Assert(saea.BufferList is null);
             Debug.Assert(saea.AcceptSocket is null);
@@ -99,9 +100,10 @@ namespace System.Net.Sockets
             }
 
             // Use _singleBufferReceiveEventArgs so the AwaitableSocketAsyncEventArgs can be re-used later for receives.
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferReceiveEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferReceiveEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
 
             saea.RemoteEndPoint = remoteEP;
 
@@ -293,9 +295,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferSendEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferSendEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
 
             saea.DisconnectReuseSocket = reuseSocket;
             saea.WrapExceptionsForNetworkStream = false;
@@ -366,9 +369,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled<int>(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferReceiveEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferReceiveEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
 
             Debug.Assert(saea.BufferList == null);
             saea.SetBuffer(buffer);
@@ -483,9 +487,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled<SocketReceiveFromResult>(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferReceiveEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferReceiveEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
 
             Debug.Assert(saea.BufferList == null);
             saea.SetBuffer(buffer);
@@ -535,9 +540,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled<int>(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferReceiveEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferReceiveEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
 
             Debug.Assert(saea.BufferList == null);
             saea.SetBuffer(buffer);
@@ -610,9 +616,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled<SocketReceiveMessageFromResult>(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferReceiveEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferReceiveEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: true);
 
             Debug.Assert(saea.BufferList == null);
             saea.SetBuffer(buffer);
@@ -671,9 +678,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled<int>(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferSendEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferSendEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
 
             Debug.Assert(saea.BufferList == null);
             saea.SetBuffer(MemoryMarshal.AsMemory(buffer));
@@ -693,9 +701,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferSendEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferSendEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
 
             Debug.Assert(saea.BufferList == null);
             saea.SetBuffer(MemoryMarshal.AsMemory(buffer));
@@ -808,9 +817,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled<int>(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferSendEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferSendEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
 
             Debug.Assert(saea.BufferList == null);
             saea.SetBuffer(MemoryMarshal.AsMemory(buffer));
@@ -844,9 +854,10 @@ namespace System.Net.Sockets
                 return ValueTask.FromCanceled<int>(cancellationToken);
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferSendEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferSendEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
 
             Debug.Assert(saea.BufferList == null);
             saea.SetBuffer(MemoryMarshal.AsMemory(buffer));
@@ -928,9 +939,10 @@ namespace System.Net.Sockets
                 packetsCount++;
             }
 
-            AwaitableSocketAsyncEventArgs saea =
-                Interlocked.Exchange(ref _singleBufferSendEventArgs, null)
-                ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
+            AwaitableSocketAsyncEventArgs saea = Interlocked.Exchange(
+                ref _singleBufferSendEventArgs,
+                null
+            ) ?? new AwaitableSocketAsyncEventArgs(this, isReceiveForCaching: false);
 
             SendPacketsElement[] sendPacketsElements =
                 saea.SendPacketsElements?.Length == packetsCount

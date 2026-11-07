@@ -141,10 +141,9 @@ namespace System.ComponentModel.Design.Serialization
             MemberRelationship relationship
         )
         {
-            string? sourceName =
-                TypeDescriptor.GetComponentName(source.Owner!) ?? source.Owner!.ToString();
-            string? relName =
-                TypeDescriptor.GetComponentName(relationship.Owner!)
+            string? sourceName = TypeDescriptor.GetComponentName(source.Owner!)
+                ?? source.Owner!.ToString();
+            string? relName = TypeDescriptor.GetComponentName(relationship.Owner!)
                 ?? relationship.Owner!.ToString();
             throw new ArgumentException(
                 SR.Format(

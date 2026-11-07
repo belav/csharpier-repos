@@ -2004,8 +2004,7 @@ namespace Microsoft.CodeAnalysis
             // Checking for unchangeable documents will only be done if we were asked not to ignore them.
             foreach (var documentId in changedDocumentIds)
             {
-                var document =
-                    projectChanges.OldProject.State.DocumentStates.GetState(documentId)
+                var document = projectChanges.OldProject.State.DocumentStates.GetState(documentId)
                     ?? projectChanges.NewProject.State.DocumentStates.GetState(documentId)!;
 
                 if (!document.CanApplyChange())

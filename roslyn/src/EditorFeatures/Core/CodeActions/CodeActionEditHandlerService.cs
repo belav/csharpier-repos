@@ -229,8 +229,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 transaction.Commit();
             }
 
-            var updatedSolution =
-                operations.OfType<ApplyChangesOperation>().FirstOrDefault()?.ChangedSolution
+            var updatedSolution = operations
+                .OfType<ApplyChangesOperation>()
+                .FirstOrDefault()
+                ?.ChangedSolution
                 ?? oldSolution;
             await TryNavigateToLocationOrStartRenameSessionAsync(
                     workspace,

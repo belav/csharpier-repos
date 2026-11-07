@@ -49,8 +49,8 @@ public class SqlServerLongCountMethodTranslator : IAggregateMethodCallTranslator
             )
         )
         {
-            var sqlExpression =
-                (source.Selector as SqlExpression) ?? _sqlExpressionFactory.Fragment("*");
+            var sqlExpression = (source.Selector as SqlExpression)
+                ?? _sqlExpressionFactory.Fragment("*");
             if (source.Predicate != null)
             {
                 if (sqlExpression is SqlFragmentExpression)

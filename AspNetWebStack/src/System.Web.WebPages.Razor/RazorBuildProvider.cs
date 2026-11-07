@@ -233,8 +233,8 @@ namespace System.Web.WebPages.Razor
 
         private void OnCodeGenerationCompleted(CodeCompileUnit generatedCode)
         {
-            EventHandler<CodeGenerationCompleteEventArgs> handler =
-                _codeGenerationCompletedInternal ?? CodeGenerationCompleted;
+            EventHandler<CodeGenerationCompleteEventArgs> handler = _codeGenerationCompletedInternal
+                ?? CodeGenerationCompleted;
             if (handler != null)
             {
                 handler(

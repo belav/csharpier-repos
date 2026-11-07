@@ -2589,11 +2589,10 @@ namespace Microsoft.CodeAnalysis.Operations
                 bool isChecked = boundBinaryOperator.OperatorKind.IsChecked();
                 bool isCompareText = false;
                 bool isImplicit = boundBinaryOperator.WasCompilerGenerated;
-                TypeSymbol? constrainedToTypeOpt =
-                    GetConstrainedToTypeForOperator(
-                        boundBinaryOperator.LogicalOperator,
-                        boundBinaryOperator.ConstrainedToTypeOpt
-                    )
+                TypeSymbol? constrainedToTypeOpt = GetConstrainedToTypeForOperator(
+                    boundBinaryOperator.LogicalOperator,
+                    boundBinaryOperator.ConstrainedToTypeOpt
+                )
                     ?? GetConstrainedToTypeForOperator(
                         boundBinaryOperator.OperatorKind.Operator() == CSharp.BinaryOperatorKind.And
                             ? boundBinaryOperator.FalseOperator
@@ -3457,8 +3456,7 @@ namespace Microsoft.CodeAnalysis.Operations
             Debug.Assert(boundCatchBlock.ExceptionFilterPrologueOpt is null);
             IOperation? filter = Create(boundCatchBlock.ExceptionFilterOpt);
             IBlockOperation handler = (IBlockOperation)Create(boundCatchBlock.Body);
-            ITypeSymbol exceptionType =
-                boundCatchBlock.ExceptionTypeOpt.GetPublicSymbol()
+            ITypeSymbol exceptionType = boundCatchBlock.ExceptionTypeOpt.GetPublicSymbol()
                 ?? _semanticModel.Compilation.ObjectType;
             ImmutableArray<ILocalSymbol> locals = boundCatchBlock.Locals.GetPublicSymbols();
             SyntaxNode syntax = boundCatchBlock.Syntax;

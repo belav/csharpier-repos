@@ -3485,8 +3485,8 @@ namespace Microsoft.CodeAnalysis
             CancellationToken cancellationToken
         )
         {
-            options =
-                options ?? EmitOptions.Default.WithIncludePrivateMembers(metadataPEStream == null);
+            options = options
+                ?? EmitOptions.Default.WithIncludePrivateMembers(metadataPEStream == null);
 
             bool embedPdb = options.DebugInformationFormat == DebugInformationFormat.Embedded;
             Debug.Assert(!embedPdb || pdbStream == null);
@@ -3848,8 +3848,8 @@ namespace Microsoft.CodeAnalysis
                 || pdbStreamProvider != null
             )
             {
-                pePdbFilePath =
-                    pePdbFilePath ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb");
+                pePdbFilePath = pePdbFilePath
+                    ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb");
             }
             else
             {

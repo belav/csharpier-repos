@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis
 
             this.Id = id;
             this.SuppressedDiagnosticId = suppressedDiagnosticId;
-            this.Justification =
-                justification ?? throw new ArgumentNullException(nameof(justification));
+            this.Justification = justification
+                ?? throw new ArgumentNullException(nameof(justification));
         }
 
         public bool Equals(SuppressionDescriptor? other)

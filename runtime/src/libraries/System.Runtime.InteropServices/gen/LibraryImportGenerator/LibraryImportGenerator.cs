@@ -392,9 +392,9 @@ namespace Microsoft.Interop
             );
 
             // Process the LibraryImport attribute
-            LibraryImportCompilationData libraryImportData =
-                ProcessLibraryImportAttribute(generatedDllImportAttr!)
-                ?? new LibraryImportCompilationData("INVALID_CSHARP_SYNTAX");
+            LibraryImportCompilationData libraryImportData = ProcessLibraryImportAttribute(
+                generatedDllImportAttr!
+            ) ?? new LibraryImportCompilationData("INVALID_CSHARP_SYNTAX");
 
             if (libraryImportData.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling))
             {
@@ -602,8 +602,8 @@ namespace Microsoft.Interop
         {
             LibraryImportData pinvokeData = stub.LibraryImportData with
             {
-                EntryPoint =
-                    stub.LibraryImportData.EntryPoint ?? userDeclaredMethod.Identifier.ValueText,
+                EntryPoint = stub.LibraryImportData.EntryPoint
+                    ?? userDeclaredMethod.Identifier.ValueText,
             };
 
             if (

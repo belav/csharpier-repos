@@ -68,8 +68,8 @@ namespace Castle.Components.DictionaryAdapter
                 }
                 else
                 {
-                    var type =
-                        Type ?? GetInferredType(dictionaryAdapter, property, out initializer);
+                    var type = Type
+                        ?? GetInferredType(dictionaryAdapter, property, out initializer);
 
                     if (IsAcceptedType(type))
                     {

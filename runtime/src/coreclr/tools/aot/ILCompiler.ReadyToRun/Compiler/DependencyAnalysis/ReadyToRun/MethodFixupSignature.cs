@@ -68,8 +68,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 && factory.CompilationModuleGroup.ContainsMethodBody(canonMethod, false)
             )
             {
-                list =
-                    list
+                list = list
                     ?? new DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>.DependencyList();
                 try
                 {

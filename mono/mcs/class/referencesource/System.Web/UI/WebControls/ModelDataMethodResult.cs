@@ -27,8 +27,8 @@
         public ModelDataMethodResult(object returnValue, OrderedDictionary outputParameters)
         {
             ReturnValue = returnValue;
-            outputParameters =
-                outputParameters ?? new OrderedDictionary(StringComparer.OrdinalIgnoreCase);
+            outputParameters = outputParameters
+                ?? new OrderedDictionary(StringComparer.OrdinalIgnoreCase);
             _outputParameters = outputParameters.AsReadOnly();
         }
     }

@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             AnalyzerInfoCache = analyzerInfoCache;
-            _asyncOperationListener =
-                operationListener ?? AsynchronousOperationListenerProvider.NullListener;
+            _asyncOperationListener = operationListener
+                ?? AsynchronousOperationListenerProvider.NullListener;
         }
 
         public Task<
@@ -317,8 +317,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 (WorkspaceAnalyzerOptions)compilationWithAnalyzers.AnalysisOptions.Options!
             ).IdeOptions;
 
-            var analyzers =
-                documentAnalysisScope?.Analyzers
+            var analyzers = documentAnalysisScope?.Analyzers
                 ?? compilationWithAnalyzers.Analyzers.Where(a =>
                     forceExecuteAllAnalyzers
                     || !a.IsOpenFileOnly(ideOptions.CleanupOptions?.SimplifierOptions)

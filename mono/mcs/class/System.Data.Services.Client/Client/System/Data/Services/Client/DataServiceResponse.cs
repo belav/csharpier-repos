@@ -40,8 +40,8 @@ namespace System.Data.Services.Client
             bool batchResponse
         )
         {
-            this.headers =
-                headers ?? new Dictionary<string, string>(EqualityComparer<string>.Default);
+            this.headers = headers
+                ?? new Dictionary<string, string>(EqualityComparer<string>.Default);
             this.statusCode = statusCode;
             this.batchResponse = batchResponse;
             this.response = response;

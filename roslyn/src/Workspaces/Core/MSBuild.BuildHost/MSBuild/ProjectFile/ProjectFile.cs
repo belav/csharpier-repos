@@ -194,8 +194,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             // use it for their own purpose.
             // In the future, we might consider officially exposing "default namespace" for VB project
             // (e.g. through a <defaultnamespace> msbuild property)
-            var defaultNamespace =
-                project.ReadPropertyString(PropertyNames.RootNamespace) ?? string.Empty;
+            var defaultNamespace = project.ReadPropertyString(PropertyNames.RootNamespace)
+                ?? string.Empty;
 
             var targetFramework = project.ReadPropertyString(PropertyNames.TargetFramework);
             if (RoslynString.IsNullOrWhiteSpace(targetFramework))

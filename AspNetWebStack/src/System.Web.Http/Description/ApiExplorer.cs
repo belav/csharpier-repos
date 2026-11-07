@@ -906,8 +906,7 @@ namespace System.Web.Http.Description
 
         private string GetApiDocumentation(HttpActionDescriptor actionDescriptor)
         {
-            IDocumentationProvider documentationProvider =
-                DocumentationProvider
+            IDocumentationProvider documentationProvider = DocumentationProvider
                 ?? actionDescriptor.Configuration.Services.GetDocumentationProvider();
             if (documentationProvider != null)
             {
@@ -919,8 +918,7 @@ namespace System.Web.Http.Description
 
         private string GetApiParameterDocumentation(HttpParameterDescriptor parameterDescriptor)
         {
-            IDocumentationProvider documentationProvider =
-                DocumentationProvider
+            IDocumentationProvider documentationProvider = DocumentationProvider
                 ?? parameterDescriptor.Configuration.Services.GetDocumentationProvider();
             if (documentationProvider != null)
             {
@@ -932,8 +930,7 @@ namespace System.Web.Http.Description
 
         private string GetApiResponseDocumentation(HttpActionDescriptor actionDescriptor)
         {
-            IDocumentationProvider documentationProvider =
-                DocumentationProvider
+            IDocumentationProvider documentationProvider = DocumentationProvider
                 ?? actionDescriptor.Configuration.Services.GetDocumentationProvider();
             if (documentationProvider != null)
             {

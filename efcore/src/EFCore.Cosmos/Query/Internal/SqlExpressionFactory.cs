@@ -168,8 +168,7 @@ public class SqlExpressionFactory : ISqlExpressionFactory
             case ExpressionType.LessThanOrEqual:
             case ExpressionType.NotEqual:
                 {
-                    inferredTypeMapping =
-                        ExpressionExtensions.InferTypeMapping(left, right)
+                    inferredTypeMapping = ExpressionExtensions.InferTypeMapping(left, right)
                         // We avoid object here since the result does not get typeMapping from outside.
                         ?? (
                             left.Type != typeof(object)
@@ -200,8 +199,8 @@ public class SqlExpressionFactory : ISqlExpressionFactory
             case ExpressionType.And:
             case ExpressionType.Or:
                 {
-                    inferredTypeMapping =
-                        typeMapping ?? ExpressionExtensions.InferTypeMapping(left, right);
+                    inferredTypeMapping = typeMapping
+                        ?? ExpressionExtensions.InferTypeMapping(left, right);
                     resultType = inferredTypeMapping?.ClrType ?? left.Type;
                     resultTypeMapping = inferredTypeMapping;
                 }

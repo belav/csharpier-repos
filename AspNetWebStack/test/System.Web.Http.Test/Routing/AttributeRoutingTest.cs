@@ -327,11 +327,9 @@ namespace System.Web.Http.Routing
                 IDictionary<string, IEnumerable<IDirectRouteFactory>> actionRouteFactories
             )
             {
-                _controllerRouteFactories =
-                    controllerRouteFactories
+                _controllerRouteFactories = controllerRouteFactories
                     ?? new Dictionary<Type, IEnumerable<IDirectRouteFactory>>();
-                _actionRouteFactories =
-                    actionRouteFactories
+                _actionRouteFactories = actionRouteFactories
                     ?? new Dictionary<string, IEnumerable<IDirectRouteFactory>>();
             }
 

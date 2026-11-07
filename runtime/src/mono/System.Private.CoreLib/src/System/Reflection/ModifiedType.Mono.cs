@@ -144,8 +144,7 @@ namespace System.Reflection
             {
                 if (parentUnmodifiedType.IsFunctionPointer)
                 {
-                    var parentSignatureHolderType =
-                        _typeSignature.SignatureHolderType
+                    var parentSignatureHolderType = _typeSignature.SignatureHolderType
                         ?? throw new Exception(
                             $"Parent's {nameof(_typeSignature.SignatureHolderType)} cannot be null"
                         );
@@ -153,8 +152,7 @@ namespace System.Reflection
                 }
                 else
                 {
-                    var parentSignatureHolderInfo =
-                        _typeSignature.SignatureHolderInfo
+                    var parentSignatureHolderInfo = _typeSignature.SignatureHolderInfo
                         ?? throw new Exception(
                             $"Parent's {nameof(_typeSignature.SignatureHolderInfo)} cannot be null"
                         );

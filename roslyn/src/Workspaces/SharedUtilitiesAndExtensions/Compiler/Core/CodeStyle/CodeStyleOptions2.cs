@@ -305,8 +305,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     serializeValue: option =>
                     {
                         Debug.Assert(s_unusedParametersPreferenceMap.ContainsValue(option.Value));
-                        var value =
-                            s_unusedParametersPreferenceMap.GetKeyOrDefault(option.Value)
+                        var value = s_unusedParametersPreferenceMap.GetKeyOrDefault(option.Value)
                             ?? s_unusedParametersPreferenceMap.GetKeyOrDefault(defaultValue.Value);
                         return $"{value}{CodeStyleHelpers.GetEditorConfigStringNotificationPart(option, defaultValue)}";
                     }
@@ -444,8 +443,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                         serializeValue: option =>
                         {
                             Debug.Assert(s_parenthesesPreferenceMap.ContainsValue(option.Value));
-                            var value =
-                                s_parenthesesPreferenceMap.GetKeyOrDefault(option.Value)
+                            var value = s_parenthesesPreferenceMap.GetKeyOrDefault(option.Value)
                                 ?? s_parenthesesPreferenceMap.GetKeyOrDefault(
                                     ParenthesesPreference.AlwaysForClarity
                                 );

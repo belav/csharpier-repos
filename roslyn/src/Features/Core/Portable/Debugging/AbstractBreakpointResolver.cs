@@ -210,8 +210,7 @@ namespace Microsoft.CodeAnalysis.Debugging
                     return false;
                 }
 
-                container =
-                    ((INamespaceOrTypeSymbol)container.ContainingType)
+                container = ((INamespaceOrTypeSymbol)container.ContainingType)
                     ?? container.ContainingNamespace;
 
                 // We ran out of containers to match against before we matched all the names, so this type isn't a match.

@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         ),
             INamespaceSymbol
     {
-        private readonly IList<INamespaceOrTypeSymbol> _members =
-            members ?? SpecializedCollections.EmptyList<INamespaceOrTypeSymbol>();
+        private readonly IList<INamespaceOrTypeSymbol> _members = members
+            ?? SpecializedCollections.EmptyList<INamespaceOrTypeSymbol>();
 
         public override bool IsNamespace => true;
 

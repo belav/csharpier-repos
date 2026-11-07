@@ -129,8 +129,9 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                 return TopValue;
 
             var arrayValue = ArrayValue.Create(Visit(operation.DimensionSizes[0], state));
-            var elements =
-                operation.Initializer?.ElementValues.Select(val => Visit(val, state)).ToArray()
+            var elements = operation
+                .Initializer?.ElementValues.Select(val => Visit(val, state))
+                .ToArray()
                 ?? System.Array.Empty<MultiValue>();
             foreach (var array in arrayValue.AsEnumerable().Cast<ArrayValue>())
             {

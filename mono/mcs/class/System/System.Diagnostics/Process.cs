@@ -985,8 +985,8 @@ namespace System.Diagnostics
             {
                 MonoIO.Close(stdout_write, out error);
 
-                Encoding stdoutEncoding =
-                    startInfo.StandardOutputEncoding ?? Console.OutputEncoding;
+                Encoding stdoutEncoding = startInfo.StandardOutputEncoding
+                    ?? Console.OutputEncoding;
 
                 standardOutput = new StreamReader(
                     new FileStream(stdout_read, FileAccess.Read, true, 8192),

@@ -93,8 +93,8 @@ public class ColumnBase<TColumnMappingBase> : Annotatable, IColumnBase
             }
 
             var typeMapping = StoreTypeMapping;
-            var providerType =
-                typeMapping.Converter?.ProviderClrType.UnwrapNullableType() ?? typeMapping.ClrType;
+            var providerType = typeMapping.Converter?.ProviderClrType.UnwrapNullableType()
+                ?? typeMapping.ClrType;
 
             return _providerClrType = providerType;
         }

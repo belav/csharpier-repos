@@ -59,8 +59,7 @@ namespace System.Data.Services.Client
         {
             this.expandPaths = expandPaths ?? new List<string>();
             this.countOption = countOption;
-            this.customQueryOptions =
-                customQueryOptions
+            this.customQueryOptions = customQueryOptions
                 ?? new Dictionary<ConstantExpression, ConstantExpression>(
                     ReferenceEqualityComparer<ConstantExpression>.Instance
                 );

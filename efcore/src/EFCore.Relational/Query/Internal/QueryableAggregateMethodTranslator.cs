@@ -84,8 +84,8 @@ public class QueryableAggregateMethodTranslator : IAggregateMethodCallTranslator
                 case nameof(Queryable.Count)
                     when methodInfo == QueryableMethods.CountWithoutPredicate
                         || methodInfo == QueryableMethods.CountWithPredicate:
-                    var countSqlExpression =
-                        (source.Selector as SqlExpression) ?? _sqlExpressionFactory.Fragment("*");
+                    var countSqlExpression = (source.Selector as SqlExpression)
+                        ?? _sqlExpressionFactory.Fragment("*");
                     countSqlExpression = CombineTerms(source, countSqlExpression);
                     return _sqlExpressionFactory.Function(
                         "COUNT",
@@ -98,8 +98,8 @@ public class QueryableAggregateMethodTranslator : IAggregateMethodCallTranslator
                 case nameof(Queryable.LongCount)
                     when methodInfo == QueryableMethods.LongCountWithoutPredicate
                         || methodInfo == QueryableMethods.LongCountWithPredicate:
-                    var longCountSqlExpression =
-                        (source.Selector as SqlExpression) ?? _sqlExpressionFactory.Fragment("*");
+                    var longCountSqlExpression = (source.Selector as SqlExpression)
+                        ?? _sqlExpressionFactory.Fragment("*");
                     longCountSqlExpression = CombineTerms(source, longCountSqlExpression);
                     return _sqlExpressionFactory.Function(
                         "COUNT",

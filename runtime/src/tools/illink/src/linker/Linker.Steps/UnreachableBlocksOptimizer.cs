@@ -1717,8 +1717,7 @@ namespace Mono.Linker.Steps
                             WellKnownType.System_Object,
                             context
                         );
-                        body_variables[index].VariableType =
-                            objectType
+                        body_variables[index].VariableType = objectType
                             ?? throw new NotSupportedException(
                                 "Missing predefined 'System.Object' type"
                             );

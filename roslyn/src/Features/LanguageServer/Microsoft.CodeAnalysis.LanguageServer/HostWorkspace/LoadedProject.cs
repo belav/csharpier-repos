@@ -151,8 +151,10 @@ internal sealed class LoadedProject : IDisposable
                 // The relative path resolver calls File.Exists() to see if the path doesn't exist; it guarantees that generally the path returned
                 // is to an actual file on disk. And it needs to call File.Exists() in some cases if there are reference paths to have to search. But as a fallback
                 // we'll accept the resolved path since in the common case it's a file that just might not exist on disk yet.
-                var absolutePath =
-                    relativePathResolver.ResolvePath(cr.Reference, baseFilePath: null)
+                var absolutePath = relativePathResolver.ResolvePath(
+                    cr.Reference,
+                    baseFilePath: null
+                )
                     ?? FileUtilities.ResolveRelativePath(
                         cr.Reference,
                         commandLineArguments.BaseDirectory

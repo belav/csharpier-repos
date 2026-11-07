@@ -141,8 +141,7 @@ public static class WebHostBuilderExtensions
                 )]
                 object GetStartupInstance(IServiceProvider serviceProvider)
                 {
-                    var instance =
-                        startupFactory(context)
+                    var instance = startupFactory(context)
                         ?? throw new InvalidOperationException(
                             "The specified factory returned null startup instance."
                         );

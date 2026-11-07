@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             Lazy<IRazorDynamicFileInfoProvider> innerDynamicFileInfoProvider
         )
         {
-            _innerDynamicFileInfoProvider =
-                innerDynamicFileInfoProvider
+            _innerDynamicFileInfoProvider = innerDynamicFileInfoProvider
                 ?? throw new ArgumentNullException(nameof(innerDynamicFileInfoProvider));
         }
 

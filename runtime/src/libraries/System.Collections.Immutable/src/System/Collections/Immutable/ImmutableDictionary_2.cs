@@ -76,8 +76,7 @@ namespace System.Collections.Immutable
         /// <param name="comparers">The comparers.</param>
         private ImmutableDictionary(Comparers? comparers = null)
         {
-            _comparers =
-                comparers
+            _comparers = comparers
                 ?? Comparers.Get(EqualityComparer<TKey>.Default, EqualityComparer<TValue>.Default);
             _root = SortedInt32KeyNode<HashBucket>.EmptyNode;
         }

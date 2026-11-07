@@ -46,8 +46,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
 
             var token = root.FindToken(diagnosticSpan.Start);
 
-            var originalNode =
-                token.GetAncestor<PropertyDeclarationSyntax>()
+            var originalNode = token.GetAncestor<PropertyDeclarationSyntax>()
                 ?? token.GetAncestor<MethodDeclarationSyntax>()
                 ?? (SyntaxNode?)token.GetAncestor<FieldDeclarationSyntax>();
 

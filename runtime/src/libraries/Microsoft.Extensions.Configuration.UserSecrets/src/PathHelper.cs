@@ -65,8 +65,7 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
 
             // For backwards compat, this checks env vars first before using Env.GetFolderPath
             string? appData = Environment.GetEnvironmentVariable("APPDATA");
-            string? root =
-                appData // On Windows it goes to %APPDATA%\Microsoft\UserSecrets\
+            string? root = appData // On Windows it goes to %APPDATA%\Microsoft\UserSecrets\
                 ?? Environment.GetEnvironmentVariable("HOME") // On Mac/Linux it goes to ~/.microsoft/usersecrets/
                 ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                 ?? Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)

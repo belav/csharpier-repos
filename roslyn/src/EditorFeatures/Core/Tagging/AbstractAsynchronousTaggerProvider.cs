@@ -315,10 +315,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             NormalizedSnapshotSpanCollection? removed
         )
         {
-            public readonly NormalizedSnapshotSpanCollection Added =
-                added ?? NormalizedSnapshotSpanCollection.Empty;
-            public readonly NormalizedSnapshotSpanCollection Removed =
-                removed ?? NormalizedSnapshotSpanCollection.Empty;
+            public readonly NormalizedSnapshotSpanCollection Added = added
+                ?? NormalizedSnapshotSpanCollection.Empty;
+            public readonly NormalizedSnapshotSpanCollection Removed = removed
+                ?? NormalizedSnapshotSpanCollection.Empty;
 
             public int Count => Added.Count + Removed.Count;
         }

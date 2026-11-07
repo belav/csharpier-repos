@@ -867,10 +867,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         select m;
 
                     var membersArray = members.ToImmutableArray();
-                    var symbol =
-                        membersArray.FirstOrDefault(m =>
-                            m.Name.Equals(expectedFieldName, StringComparison.Ordinal)
-                        ) ?? membersArray.FirstOrDefault();
+                    var symbol = membersArray.FirstOrDefault(m =>
+                        m.Name.Equals(expectedFieldName, StringComparison.Ordinal)
+                    ) ?? membersArray.FirstOrDefault();
                     if (symbol != null)
                     {
                         parameterToFieldMap[parameterName.BestNameForParameter] = symbol;

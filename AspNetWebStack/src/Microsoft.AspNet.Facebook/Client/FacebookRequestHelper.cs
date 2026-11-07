@@ -21,8 +21,7 @@ namespace Microsoft.AspNet.Facebook.Client
                 return context.Items[ParsedSignedRequestKey];
             }
 
-            string rawSignedRequest =
-                context.Request.Form[SignedRequestKey]
+            string rawSignedRequest = context.Request.Form[SignedRequestKey]
                 ?? context.Request.QueryString[SignedRequestKey];
             object signedRequest = null;
             if (!String.IsNullOrEmpty(rawSignedRequest))

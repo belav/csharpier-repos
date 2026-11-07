@@ -30,8 +30,7 @@ internal sealed class ComplexTypeExpressionConverterFactory<T>(FormDataMetadataF
         FormDataMapperOptions options
     )
     {
-        var metadata =
-            factory.GetOrCreateMetadataFor(type, options)
+        var metadata = factory.GetOrCreateMetadataFor(type, options)
             ?? throw new InvalidOperationException(
                 $"Could not resolve metadata for type '{type.FullName}'."
             );

@@ -291,13 +291,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 {
                     var parameters = allParameters.TakeAsArray(i);
                     var expressions = allExpressions.TakeAsArray(i);
-                    var result =
-                        FindConstructorToDelegateTo(
-                            parameters,
-                            expressions,
-                            TypeToGenerateIn.InstanceConstructors,
-                            cancellationToken
-                        )
+                    var result = FindConstructorToDelegateTo(
+                        parameters,
+                        expressions,
+                        TypeToGenerateIn.InstanceConstructors,
+                        cancellationToken
+                    )
                         ?? FindConstructorToDelegateTo(
                             parameters,
                             expressions,
@@ -701,10 +700,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     select m;
 
                 var membersArray = members.ToImmutableArray();
-                var symbol =
-                    membersArray.FirstOrDefault(m =>
-                        m.Name.Equals(expectedFieldName, StringComparison.Ordinal)
-                    ) ?? membersArray.FirstOrDefault();
+                var symbol = membersArray.FirstOrDefault(m =>
+                    m.Name.Equals(expectedFieldName, StringComparison.Ordinal)
+                ) ?? membersArray.FirstOrDefault();
                 if (symbol != null)
                 {
                     if (IsViableFieldOrProperty(parameterType, symbol))

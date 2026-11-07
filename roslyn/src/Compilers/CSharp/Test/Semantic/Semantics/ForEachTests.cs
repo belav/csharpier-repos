@@ -4092,9 +4092,8 @@ public static class Extensions
 
             comp.VerifyDiagnostics(diagnostics);
 
-            var syntaxNode =
-                (CommonForEachStatementSyntax)
-                    tree.FindNodeOrTokenByKind(SyntaxKind.ForEachStatement).AsNode()
+            var syntaxNode = (CommonForEachStatementSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.ForEachStatement).AsNode()
                 ?? (CommonForEachStatementSyntax)
                     tree.FindNodeOrTokenByKind(SyntaxKind.ForEachVariableStatement).AsNode();
             var treeModel = (SyntaxTreeSemanticModel)comp.GetSemanticModel(tree);

@@ -131,8 +131,8 @@ namespace System.ServiceModel.Dispatcher
             if (description == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("description");
 
-            this.serializerFactory =
-                serializerFactory ?? new DataContractSerializerOperationBehavior(description);
+            this.serializerFactory = serializerFactory
+                ?? new DataContractSerializerOperationBehavior(description);
             foreach (Type type in description.KnownTypes)
             {
                 if (knownTypes == null)

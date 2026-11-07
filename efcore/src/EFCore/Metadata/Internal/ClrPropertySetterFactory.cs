@@ -34,8 +34,8 @@ public class ClrPropertySetterFactory : ClrAccessorFactory<IClrPropertySetter>
         TNonNullableEnumValue
     >(MemberInfo memberInfo, IPropertyBase? propertyBase)
     {
-        var entityClrType =
-            propertyBase?.DeclaringType.ContainingEntityType.ClrType ?? typeof(TEntity);
+        var entityClrType = propertyBase?.DeclaringType.ContainingEntityType.ClrType
+            ?? typeof(TEntity);
         var entityParameter = Expression.Parameter(entityClrType, "entity");
         var propertyDeclaringType = propertyBase?.DeclaringType.ClrType ?? typeof(TEntity);
         var valueParameter = Expression.Parameter(typeof(TValue), "value");

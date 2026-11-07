@@ -263,8 +263,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                var data =
-                    GetSourceDecodedWellKnownAttributeData()
+                var data = GetSourceDecodedWellKnownAttributeData()
                     ?? GetNetModuleDecodedWellKnownAttributeData();
 
                 // By default WrapNonExceptionThrows is considered to be true.

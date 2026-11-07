@@ -137,10 +137,9 @@ namespace System.Text.Json
                             break;
 
                         case MetadataPropertyName.Type:
-                            state.Current.JsonPropertyName =
-                                jsonTypeInfo
-                                    .PolymorphicTypeResolver
-                                    ?.TypeDiscriminatorPropertyNameUtf8
+                            state.Current.JsonPropertyName = jsonTypeInfo
+                                .PolymorphicTypeResolver
+                                ?.TypeDiscriminatorPropertyNameUtf8
                                 ?? s_typePropertyName;
 
                             if (jsonTypeInfo.PolymorphicTypeResolver is null)

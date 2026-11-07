@@ -14,8 +14,8 @@ internal class MethodInfoHandlerDescriptor : HandlerDescriptor
 
     public MethodInfoHandlerDescriptor(MethodInfo handlerMethodInfo, object? target = null)
     {
-        _handlerMethodInfo =
-            handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
+        _handlerMethodInfo = handlerMethodInfo
+            ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
         _invocationTarget = target;
     }
 

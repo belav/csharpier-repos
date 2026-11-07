@@ -27,8 +27,8 @@
         )
         {
             string controllerName = (string)requestContext.RouteData.Values["controller"];
-            IControllerFactory controllerFactory =
-                _controllerFactory ?? ControllerBuilder.Current.GetControllerFactory();
+            IControllerFactory controllerFactory = _controllerFactory
+                ?? ControllerBuilder.Current.GetControllerFactory();
             return controllerFactory.GetControllerSessionBehavior(requestContext, controllerName);
         }
 

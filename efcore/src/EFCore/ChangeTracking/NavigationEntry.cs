@@ -72,8 +72,7 @@ public abstract class NavigationEntry : MemberEntry
 
     private static INavigationBase GetNavigation(InternalEntityEntry internalEntry, string name)
     {
-        var navigation =
-            (INavigationBase?)internalEntry.EntityType.FindNavigation(name)
+        var navigation = (INavigationBase?)internalEntry.EntityType.FindNavigation(name)
             ?? internalEntry.EntityType.FindSkipNavigation(name);
 
         if (navigation == null)

@@ -1005,22 +1005,25 @@ namespace System
         /// </summary>
         public static void RefreshMemoryLimit()
         {
-            ulong heapHardLimit =
-                (AppContext.GetData("GCHeapHardLimit") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitPercent =
-                (AppContext.GetData("GCHeapHardLimitPercent") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitSOH =
-                (AppContext.GetData("GCHeapHardLimitSOH") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitLOH =
-                (AppContext.GetData("GCHeapHardLimitLOH") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitPOH =
-                (AppContext.GetData("GCHeapHardLimitPOH") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitSOHPercent =
-                (AppContext.GetData("GCHeapHardLimitSOHPercent") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitLOHPercent =
-                (AppContext.GetData("GCHeapHardLimitLOHPercent") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitPOHPercent =
-                (AppContext.GetData("GCHeapHardLimitPOHPercent") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimit = (AppContext.GetData("GCHeapHardLimit") as ulong?)
+                ?? ulong.MaxValue;
+            ulong heapHardLimitPercent = (AppContext.GetData("GCHeapHardLimitPercent") as ulong?)
+                ?? ulong.MaxValue;
+            ulong heapHardLimitSOH = (AppContext.GetData("GCHeapHardLimitSOH") as ulong?)
+                ?? ulong.MaxValue;
+            ulong heapHardLimitLOH = (AppContext.GetData("GCHeapHardLimitLOH") as ulong?)
+                ?? ulong.MaxValue;
+            ulong heapHardLimitPOH = (AppContext.GetData("GCHeapHardLimitPOH") as ulong?)
+                ?? ulong.MaxValue;
+            ulong heapHardLimitSOHPercent = (
+                AppContext.GetData("GCHeapHardLimitSOHPercent") as ulong?
+            ) ?? ulong.MaxValue;
+            ulong heapHardLimitLOHPercent = (
+                AppContext.GetData("GCHeapHardLimitLOHPercent") as ulong?
+            ) ?? ulong.MaxValue;
+            ulong heapHardLimitPOHPercent = (
+                AppContext.GetData("GCHeapHardLimitPOHPercent") as ulong?
+            ) ?? ulong.MaxValue;
             GCHeapHardLimitInfo heapHardLimitInfo = new GCHeapHardLimitInfo
             {
                 HeapHardLimit = heapHardLimit,

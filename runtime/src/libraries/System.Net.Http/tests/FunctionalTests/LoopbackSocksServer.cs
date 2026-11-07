@@ -275,8 +275,8 @@ namespace System.Net.Http.Functional.Tests
             /// <summary>Closes sockets to cause both tasks to end, and eats connection reset/aborted errors.</summary>
             void HandleExceptions(Exception ex)
             {
-                SocketError sockErr =
-                    (ex.InnerException as SocketException)?.SocketErrorCode ?? SocketError.Success;
+                SocketError sockErr = (ex.InnerException as SocketException)?.SocketErrorCode
+                    ?? SocketError.Success;
 
                 // If aborted, the other task failed and is asking this task to end.
                 if (sockErr == SocketError.OperationAborted)

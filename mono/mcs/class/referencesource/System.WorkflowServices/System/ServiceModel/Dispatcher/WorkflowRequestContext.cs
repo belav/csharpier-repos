@@ -50,8 +50,8 @@ namespace System.ServiceModel.Dispatcher
 
             this.asyncResult = asyncResult;
             this.inputs = new ReadOnlyCollection<object>(inputs);
-            this.contextProperties =
-                contextProperties ?? SerializableReadOnlyDictionary<string, string>.Empty;
+            this.contextProperties = contextProperties
+                ?? SerializableReadOnlyDictionary<string, string>.Empty;
             this.operationContext = OperationContext.Current;
         }
 

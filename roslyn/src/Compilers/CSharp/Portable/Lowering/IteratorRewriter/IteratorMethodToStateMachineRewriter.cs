@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             _current = current;
 
-            _nextFinalizeState =
-                slotAllocatorOpt?.GetFirstUnusedStateMachineState(increasing: false)
-                ?? StateMachineState.FirstIteratorFinalizeState;
+            _nextFinalizeState = slotAllocatorOpt?.GetFirstUnusedStateMachineState(
+                increasing: false
+            ) ?? StateMachineState.FirstIteratorFinalizeState;
         }
 
 #nullable disable

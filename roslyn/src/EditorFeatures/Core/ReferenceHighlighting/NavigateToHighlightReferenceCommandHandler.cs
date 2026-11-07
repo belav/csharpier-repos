@@ -34,10 +34,10 @@ internal partial class NavigateToHighlightReferenceCommandHandler(
     : ICommandHandler<NavigateToNextHighlightedReferenceCommandArgs>,
         ICommandHandler<NavigateToPreviousHighlightedReferenceCommandArgs>
 {
-    private readonly IOutliningManagerService _outliningManagerService =
-        outliningManagerService ?? throw new ArgumentNullException(nameof(outliningManagerService));
-    private readonly IViewTagAggregatorFactoryService _tagAggregatorFactory =
-        tagAggregatorFactory ?? throw new ArgumentNullException(nameof(tagAggregatorFactory));
+    private readonly IOutliningManagerService _outliningManagerService = outliningManagerService
+        ?? throw new ArgumentNullException(nameof(outliningManagerService));
+    private readonly IViewTagAggregatorFactoryService _tagAggregatorFactory = tagAggregatorFactory
+        ?? throw new ArgumentNullException(nameof(tagAggregatorFactory));
 
     public string DisplayName => EditorFeaturesResources.Navigate_To_Highlight_Reference;
 

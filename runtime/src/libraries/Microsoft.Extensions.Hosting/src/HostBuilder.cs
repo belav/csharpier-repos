@@ -276,8 +276,8 @@ namespace Microsoft.Extensions.Hosting
         {
             var hostingEnvironment = new HostingEnvironment()
             {
-                EnvironmentName =
-                    hostConfiguration[HostDefaults.EnvironmentKey] ?? Environments.Production,
+                EnvironmentName = hostConfiguration[HostDefaults.EnvironmentKey]
+                    ?? Environments.Production,
                 ContentRootPath = ResolveContentRootPath(
                     hostConfiguration[HostDefaults.ContentRootKey],
                     AppContext.BaseDirectory

@@ -196,8 +196,8 @@ public static class SqlServerPropertyExtensions
 
         var sequenceName = property.GetHiLoSequenceName(storeObject) ?? model.GetHiLoSequenceName();
 
-        var sequenceSchema =
-            property.GetHiLoSequenceSchema(storeObject) ?? model.GetHiLoSequenceSchema();
+        var sequenceSchema = property.GetHiLoSequenceSchema(storeObject)
+            ?? model.GetHiLoSequenceSchema();
 
         return model.FindSequence(sequenceName, sequenceSchema);
     }
@@ -1194,8 +1194,7 @@ public static class SqlServerPropertyExtensions
             return false;
         }
 
-        var valueConverter =
-            property.GetValueConverter()
+        var valueConverter = property.GetValueConverter()
             ?? (
                 property.FindRelationalTypeMapping(storeObject)
                 ?? typeMappingSource?.FindMapping((IProperty)property)

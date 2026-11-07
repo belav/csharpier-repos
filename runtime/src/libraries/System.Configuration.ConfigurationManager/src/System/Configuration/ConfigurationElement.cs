@@ -1058,15 +1058,15 @@ namespace System.Configuration
         internal string PropertyFileName(string propertyName)
         {
             // Get the filename of the parent if prop is not there
-            PropertySourceInfo p =
-                PropertyInfoInternal(propertyName) ?? PropertyInfoInternal(string.Empty);
+            PropertySourceInfo p = PropertyInfoInternal(propertyName)
+                ?? PropertyInfoInternal(string.Empty);
             return p == null ? string.Empty : p.FileName;
         }
 
         internal int PropertyLineNumber(string propertyName)
         {
-            PropertySourceInfo p =
-                PropertyInfoInternal(propertyName) ?? PropertyInfoInternal(string.Empty);
+            PropertySourceInfo p = PropertyInfoInternal(propertyName)
+                ?? PropertyInfoInternal(string.Empty);
             return p?.LineNumber ?? 0;
         }
 

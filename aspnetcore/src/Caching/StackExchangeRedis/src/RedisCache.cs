@@ -366,8 +366,7 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
     private void ValidateServerFeatures(IConnectionMultiplexer connection)
     {
-        _ =
-            connection
+        _ = connection
             ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
 
         try
@@ -393,8 +392,7 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
     private void TryRegisterProfiler(IConnectionMultiplexer connection)
     {
-        _ =
-            connection
+        _ = connection
             ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
 
         if (_options.ProfilingSession is not null)

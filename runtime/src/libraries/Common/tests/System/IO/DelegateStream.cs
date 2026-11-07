@@ -50,24 +50,21 @@ namespace System.IO
             _flushFunc = flushFunc ?? (() => { });
             _flushAsyncFunc = flushAsyncFunc ?? (token => base.FlushAsync(token));
 
-            _lengthFunc =
-                lengthFunc
+            _lengthFunc = lengthFunc
                 ?? (
                     () =>
                     {
                         throw new NotSupportedException();
                     }
                 );
-            _positionSetFunc =
-                positionSetFunc
+            _positionSetFunc = positionSetFunc
                 ?? (
                     _ =>
                     {
                         throw new NotSupportedException();
                     }
                 );
-            _positionGetFunc =
-                positionGetFunc
+            _positionGetFunc = positionGetFunc
                 ?? (
                     () =>
                     {
@@ -75,26 +72,22 @@ namespace System.IO
                     }
                 );
 
-            _readAsyncFunc =
-                readAsyncFunc
+            _readAsyncFunc = readAsyncFunc
                 ?? ((buffer, offset, count, token) => base.ReadAsync(buffer, offset, count, token));
-            _readFunc =
-                readFunc
+            _readFunc = readFunc
                 ?? (
                     (buffer, offset, count) =>
                         readAsyncFunc(buffer, offset, count, default).GetAwaiter().GetResult()
                 );
 
-            _seekFunc =
-                seekFunc
+            _seekFunc = seekFunc
                 ?? (
                     (_, __) =>
                     {
                         throw new NotSupportedException();
                     }
                 );
-            _setLengthFunc =
-                setLengthFunc
+            _setLengthFunc = setLengthFunc
                 ?? (
                     _ =>
                     {
@@ -102,13 +95,11 @@ namespace System.IO
                     }
                 );
 
-            _writeAsyncFunc =
-                writeAsyncFunc
+            _writeAsyncFunc = writeAsyncFunc
                 ?? (
                     (buffer, offset, count, token) => base.WriteAsync(buffer, offset, count, token)
                 );
-            _writeFunc =
-                writeFunc
+            _writeFunc = writeFunc
                 ?? (
                     (buffer, offset, count) =>
                         writeAsyncFunc(buffer, offset, count, default).GetAwaiter().GetResult()

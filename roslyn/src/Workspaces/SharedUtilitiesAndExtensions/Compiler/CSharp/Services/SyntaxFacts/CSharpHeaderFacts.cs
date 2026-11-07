@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             if (node == null)
                 return false;
 
-            var lastToken =
-                (node as TypeDeclarationSyntax)?.TypeParameterList?.GetLastToken()
+            var lastToken = (node as TypeDeclarationSyntax)?.TypeParameterList?.GetLastToken()
                 ?? node.Identifier;
             if (fullHeader)
                 lastToken = node.BaseList?.GetLastToken() ?? lastToken;

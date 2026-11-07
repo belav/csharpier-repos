@@ -1116,11 +1116,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 compilerApiVersionString.Substring("roslyn".Length)
             );
 
-            var expectedVersionString =
-                assembly
-                    .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Single(a => a.Key == "CurrentCompilerApiVersion")
-                    .Value
+            var expectedVersionString = assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .Single(a => a.Key == "CurrentCompilerApiVersion")
+                .Value
                 ?? string.Empty;
             var expectedVersion = Version.Parse(expectedVersionString);
 

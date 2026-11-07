@@ -46,8 +46,8 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
         Dictionary<(Type, string), Func<object, object>> shadowPropertyMappings = null
     )
     {
-        _shadowPropertyMappings =
-            shadowPropertyMappings ?? new Dictionary<(Type, string), Func<object, object>>();
+        _shadowPropertyMappings = shadowPropertyMappings
+            ?? new Dictionary<(Type, string), Func<object, object>>();
     }
 
     protected override Expression VisitMember(MemberExpression memberExpression)

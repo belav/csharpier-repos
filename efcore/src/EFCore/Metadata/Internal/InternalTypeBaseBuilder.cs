@@ -256,8 +256,8 @@ public abstract class InternalTypeBaseBuilder
                     return null;
                 }
 
-                memberInfo ??=
-                    existingProperty.PropertyInfo ?? (MemberInfo?)existingProperty.FieldInfo;
+                memberInfo ??= existingProperty.PropertyInfo
+                    ?? (MemberInfo?)existingProperty.FieldInfo;
             }
             else if (!configurationSource.Overrides(existingProperty.GetConfigurationSource()))
             {
@@ -1270,8 +1270,7 @@ public abstract class InternalTypeBaseBuilder
 
             Debug.Assert(configurationSource.HasValue);
 
-            memberInfo ??=
-                existingComplexProperty.PropertyInfo
+            memberInfo ??= existingComplexProperty.PropertyInfo
                 ?? (MemberInfo?)existingComplexProperty.FieldInfo;
             propertyType ??= existingComplexProperty.ClrType;
             collection ??= existingComplexProperty.IsCollection;

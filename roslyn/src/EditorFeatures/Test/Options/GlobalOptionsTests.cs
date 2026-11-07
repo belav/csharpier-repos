@@ -141,8 +141,7 @@ public class GlobalOptionsTests
                     }
                     else
                     {
-                        var propertyType =
-                            Nullable.GetUnderlyingType(property.PropertyType)
+                        var propertyType = Nullable.GetUnderlyingType(property.PropertyType)
                             ?? property.PropertyType;
 
                         if (propertyType != property.PropertyType)

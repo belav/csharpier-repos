@@ -30,8 +30,8 @@ namespace System.Web.Http.ModelBinding.Binders
 
         public override IModelBinder GetBinder(HttpConfiguration configuration, Type modelType)
         {
-            IEnumerable<ModelBinderProvider> providers =
-                _providers ?? configuration.Services.GetModelBinderProviders();
+            IEnumerable<ModelBinderProvider> providers = _providers
+                ?? configuration.Services.GetModelBinderProviders();
 
             // Pre-filter out any binders that we know can't match.
             IEnumerable<IModelBinder> binders =

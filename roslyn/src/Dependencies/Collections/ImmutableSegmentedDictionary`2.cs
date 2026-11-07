@@ -189,8 +189,8 @@ namespace Microsoft.CodeAnalysis.Collections
             SegmentedDictionary<TKey, TValue>? dictionary = null;
             foreach (var pair in pairs)
             {
-                ICollection<KeyValuePair<TKey, TValue>> collectionToCheck =
-                    dictionary ?? self._dictionary;
+                ICollection<KeyValuePair<TKey, TValue>> collectionToCheck = dictionary
+                    ?? self._dictionary;
                 if (collectionToCheck.Contains(pair))
                     continue;
 

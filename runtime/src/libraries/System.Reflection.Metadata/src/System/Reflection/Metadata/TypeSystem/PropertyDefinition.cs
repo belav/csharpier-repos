@@ -99,8 +99,8 @@ namespace System.Reflection.Metadata
                 }
             }
 
-            var otherAccessors =
-                other?.ToImmutable() ?? ImmutableArray<MethodDefinitionHandle>.Empty;
+            var otherAccessors = other?.ToImmutable()
+                ?? ImmutableArray<MethodDefinitionHandle>.Empty;
             return new PropertyAccessors(getter, setter, otherAccessors);
         }
     }

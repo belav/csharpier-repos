@@ -107,8 +107,7 @@ internal sealed class FieldStore
     [RequiresUnreferencedCode("Hot reload required untrimmed apps")]
     public static FieldStore Create(RuntimeTypeHandle type)
     {
-        Type t =
-            Type.GetTypeFromHandle(type)
+        Type t = Type.GetTypeFromHandle(type)
             ?? throw new ArgumentException(SR.Arg_InvalidHandle, nameof(type));
         object? loc;
         if (t.IsPrimitive || t.IsValueType)

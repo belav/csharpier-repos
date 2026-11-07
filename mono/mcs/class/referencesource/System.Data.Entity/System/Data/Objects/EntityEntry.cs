@@ -4634,8 +4634,8 @@ namespace System.Data.Objects
                 return false;
             }
             //
-            principalKey =
-                relatedEnd.EntityKey ?? relatedEnd.CachedValue.ObjectStateEntry.EntityKey;
+            principalKey = relatedEnd.EntityKey
+                ?? relatedEnd.CachedValue.ObjectStateEntry.EntityKey;
             return principalKey != null;
         }
 

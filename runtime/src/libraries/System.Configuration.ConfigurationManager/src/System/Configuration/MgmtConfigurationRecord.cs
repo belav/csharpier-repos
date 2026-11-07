@@ -817,8 +817,7 @@ namespace System.Configuration
             _sectionFactories?.Add(configKey, new FactoryId(configKey, group, name));
 
             // Get the type name.
-            string typeName =
-                configSection.SectionInformation.Type
+            string typeName = configSection.SectionInformation.Type
                 ?? Host.GetConfigTypeName(configSection.GetType());
 
             // Add a factory record for the section.
@@ -1001,8 +1000,8 @@ namespace System.Configuration
             _sectionGroupFactories?.Add(configKey, new FactoryId(configKey, group, name));
 
             // Get the type name - if it is not specified explicitly, get it from the type of the object.
-            string typeName =
-                configSectionGroup.Type ?? Host.GetConfigTypeName(configSectionGroup.GetType());
+            string typeName = configSectionGroup.Type
+                ?? Host.GetConfigTypeName(configSectionGroup.GetType());
 
             // Create a factory record and add it to the collection of factory records.
             factoryRecord = new FactoryRecord(

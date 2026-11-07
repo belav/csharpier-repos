@@ -474,8 +474,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 for (int i = 1; i < blocks.Length - 1; i++)
                 {
                     BasicBlock block = blocks[i];
-                    PooledHashSet<CaptureId> currentState =
-                        entryStates[i] ?? PooledHashSet<CaptureId>.GetInstance();
+                    PooledHashSet<CaptureId> currentState = entryStates[i]
+                        ?? PooledHashSet<CaptureId>.GetInstance();
                     entryStates[i] = null;
 
                     foreach (ControlFlowBranch predecessor in block.Predecessors)
@@ -622,8 +622,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     IOperation lastOperation = null;
                     for (int i = block.Ordinal; i > 0 && lastOperation == null; i--)
                     {
-                        lastOperation =
-                            blocks[i].BranchValue ?? blocks[i].Operations.LastOrDefault();
+                        lastOperation = blocks[i].BranchValue
+                            ?? blocks[i].Operations.LastOrDefault();
                     }
 
                     var referencedInLastOperation = PooledHashSet<CaptureId>.GetInstance();

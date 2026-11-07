@@ -432,8 +432,7 @@ namespace System.CommandLine.Help
 
             TwoColumnHelpRow GetOptionOrCommandRow()
             {
-                var firstColumnText =
-                    customization?.GetFirstColumn?.Invoke(context)
+                var firstColumnText = customization?.GetFirstColumn?.Invoke(context)
                     ?? (
                         symbol is CliOption option
                             ? Default.GetOptionUsageLabel(option)
@@ -442,8 +441,9 @@ namespace System.CommandLine.Help
 
                 var customizedSymbolDescription = customization?.GetSecondColumn?.Invoke(context);
 
-                var symbolDescription =
-                    customizedSymbolDescription ?? symbol.Description ?? string.Empty;
+                var symbolDescription = customizedSymbolDescription
+                    ?? symbol.Description
+                    ?? string.Empty;
 
                 //in case symbol description is customized, do not output default value
                 //default value output is not customizable for identifier symbols
@@ -459,12 +459,10 @@ namespace System.CommandLine.Help
 
             TwoColumnHelpRow GetCommandArgumentRow(CliArgument argument)
             {
-                var firstColumnText =
-                    customization?.GetFirstColumn?.Invoke(context)
+                var firstColumnText = customization?.GetFirstColumn?.Invoke(context)
                     ?? Default.GetArgumentUsageLabel(argument);
 
-                var argumentDescription =
-                    customization?.GetSecondColumn?.Invoke(context)
+                var argumentDescription = customization?.GetSecondColumn?.Invoke(context)
                     ?? Default.GetArgumentDescription(argument);
 
                 var defaultValueDescription = argument.HasDefaultValue

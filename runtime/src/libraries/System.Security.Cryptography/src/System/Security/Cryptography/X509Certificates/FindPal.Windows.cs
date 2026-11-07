@@ -176,15 +176,14 @@ namespace System.Security.Cryptography.X509Certificates
                 CERT_TEMPLATE_EXT* pTemplateExt = (CERT_TEMPLATE_EXT*)pvDecoded;
                 string? actual = Marshal.PtrToStringAnsi(pTemplateExt->pszObjId);
 
-                string expectedOidValue =
-                    Interop
-                        .Crypt32.FindOidInfo(
-                            Interop.Crypt32.CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
-                            templateName,
-                            OidGroup.Template,
-                            fallBackToAllGroups: true
-                        )
-                        .OID
+                string expectedOidValue = Interop
+                    .Crypt32.FindOidInfo(
+                        Interop.Crypt32.CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
+                        templateName,
+                        OidGroup.Template,
+                        fallBackToAllGroups: true
+                    )
+                    .OID
                     ?? templateName;
 
                 return expectedOidValue.Equals(actual, StringComparison.OrdinalIgnoreCase);

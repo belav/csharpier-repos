@@ -296,14 +296,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 foreach (var symbol in symbols)
                 {
                     // Get the source symbol if possible
-                    var sourceSymbol =
-                        await SymbolFinder
-                            .FindSourceDefinitionAsync(
-                                symbol,
-                                document.Project.Solution,
-                                _cancellationToken
-                            )
-                            .ConfigureAwait(false)
+                    var sourceSymbol = await SymbolFinder
+                        .FindSourceDefinitionAsync(
+                            symbol,
+                            document.Project.Solution,
+                            _cancellationToken
+                        )
+                        .ConfigureAwait(false)
                         ?? symbol;
 
                     if (!sourceSymbol.IsFromSource())
@@ -322,14 +321,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             )
             {
                 // Get the source symbol if possible
-                var sourceSymbol =
-                    await SymbolFinder
-                        .FindSourceDefinitionAsync(
-                            symbol,
-                            document.Project.Solution,
-                            _cancellationToken
-                        )
-                        .ConfigureAwait(false)
+                var sourceSymbol = await SymbolFinder
+                    .FindSourceDefinitionAsync(
+                        symbol,
+                        document.Project.Solution,
+                        _cancellationToken
+                    )
+                    .ConfigureAwait(false)
                     ?? symbol;
 
                 if (

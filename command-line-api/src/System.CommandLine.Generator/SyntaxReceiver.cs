@@ -295,17 +295,17 @@ namespace System.CommandLine.Generator
             }
 
             //TODO: what about other awaitables?
-            INamedTypeSymbol taskType =
-                compilation.GetTypeByMetadataName("System.Threading.Tasks.Task")
-                ?? throw new InvalidOperationException("Failed to find Task");
+            INamedTypeSymbol taskType = compilation.GetTypeByMetadataName(
+                "System.Threading.Tasks.Task"
+            ) ?? throw new InvalidOperationException("Failed to find Task");
             if (symbolEqualityComparer.Equals(returnType, taskType))
             {
                 return ReturnPattern.AwaitFunction;
             }
 
-            INamedTypeSymbol taskOfTType =
-                compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1")
-                ?? throw new InvalidOperationException("Failed to find Task<T>");
+            INamedTypeSymbol taskOfTType = compilation.GetTypeByMetadataName(
+                "System.Threading.Tasks.Task`1"
+            ) ?? throw new InvalidOperationException("Failed to find Task<T>");
 
             if (
                 returnType is INamedTypeSymbol { TypeArguments: { Length: 1 } } namedReturnType

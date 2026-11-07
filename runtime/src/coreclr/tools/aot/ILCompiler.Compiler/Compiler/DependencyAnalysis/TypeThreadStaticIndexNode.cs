@@ -49,8 +49,8 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
-            ISymbolDefinitionNode node =
-                _inlinedThreadStatics ?? factory.TypeThreadStaticsSymbol(_type);
+            ISymbolDefinitionNode node = _inlinedThreadStatics
+                ?? factory.TypeThreadStaticsSymbol(_type);
 
             return new DependencyList { new DependencyListEntry(node, "Thread static storage") };
         }

@@ -14,8 +14,8 @@ namespace System.Web.Http.ModelBinding.Binders
 
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
-            ModelMetadataProvider metadataProvider =
-                MetadataProvider ?? actionContext.GetMetadataProvider();
+            ModelMetadataProvider metadataProvider = MetadataProvider
+                ?? actionContext.GetMetadataProvider();
             ModelBindingHelper.ValidateBindingContext(
                 bindingContext,
                 typeof(KeyValuePair<TKey, TValue>),

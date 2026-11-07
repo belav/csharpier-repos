@@ -58,8 +58,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CompilerPathUtilities.RequireAbsolutePath(fullPath, nameof(fullPath));
 
             FullPath = fullPath;
-            _assemblyLoader =
-                assemblyLoader ?? throw new ArgumentNullException(nameof(assemblyLoader));
+            _assemblyLoader = assemblyLoader
+                ?? throw new ArgumentNullException(nameof(assemblyLoader));
 
             _diagnosticAnalyzers = new(
                 this,

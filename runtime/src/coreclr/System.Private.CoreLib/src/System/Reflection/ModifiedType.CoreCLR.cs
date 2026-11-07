@@ -17,11 +17,10 @@ namespace System.Reflection
                 new TypeSignature()
                 {
                     _signature = _typeSignature._signature,
-                    _offset =
-                        _typeSignature._signature?.GetTypeParameterOffset(
-                            _typeSignature._offset,
-                            index
-                        ) ?? 0,
+                    _offset = _typeSignature._signature?.GetTypeParameterOffset(
+                        _typeSignature._offset,
+                        index
+                    ) ?? 0,
                 }
             );
 

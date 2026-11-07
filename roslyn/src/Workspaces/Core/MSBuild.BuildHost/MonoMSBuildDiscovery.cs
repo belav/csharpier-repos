@@ -155,8 +155,9 @@ internal static class MonoMSBuildDiscovery
             // Inside this is either a Current directory or a 15.0 directory, so find it; the previous code at
             // https://github.com/OmniSharp/omnisharp-roslyn/blob/dde8119c40f4e3920eb5ea894cbca047033bd9aa/src/OmniSharp.Host/MSBuild/Discovery/MSBuildInstanceProvider.cs#L48-L58
             // ensured we had a correctly normalized path in case the underlying file system might have been case insensitive.
-            var versionDirectory =
-                monoMSBuildDir.EnumerateDirectories().SingleOrDefault(d => d.Name == "Current")
+            var versionDirectory = monoMSBuildDir
+                .EnumerateDirectories()
+                .SingleOrDefault(d => d.Name == "Current")
                 ?? monoMSBuildDir.EnumerateDirectories().SingleOrDefault(d => d.Name == "15.0");
 
             if (versionDirectory == null)

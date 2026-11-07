@@ -645,8 +645,13 @@ namespace System.Xml.Serialization
                                 valueTypeDesc.DataType == null
                                     ? valueTypeDesc.Name
                                     : valueTypeDesc.DataType.Name;
-                            TypeMapping baseMapping =
-                                GetTypeMapping(xsdTypeName, ns, valueTypeDesc, _types, null)
+                            TypeMapping baseMapping = GetTypeMapping(
+                                xsdTypeName,
+                                ns,
+                                valueTypeDesc,
+                                _types,
+                                null
+                            )
                                 ?? ImportTypeMapping(
                                     _modelScope.GetTypeModel(model.TypeDesc.BaseTypeDesc!.Type!),
                                     ns,

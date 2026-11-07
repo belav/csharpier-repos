@@ -92,8 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
                     testDocument.CursorPosition.HasValue || testDocument.SelectedSpans.Any(),
                     "No caret position or selected spans are set!"
                 );
-                var startCaretPosition =
-                    testDocument.CursorPosition ?? testDocument.SelectedSpans.Last().End;
+                var startCaretPosition = testDocument.CursorPosition
+                    ?? testDocument.SelectedSpans.Last().End;
 
                 var view = testDocument.GetTextView();
 

@@ -2185,12 +2185,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                     // When deleting something from a compilation unit we just report diagnostics for the last global statement
                     var globalStatements = unit.Members.OfType<GlobalStatementSyntax>();
-                    var globalNode =
-                        (
-                            editKind == EditKind.Delete
-                                ? globalStatements.LastOrDefault()
-                                : globalStatements.FirstOrDefault()
-                        ) ?? unit.ChildNodes().FirstOrDefault();
+                    var globalNode = (
+                        editKind == EditKind.Delete
+                            ? globalStatements.LastOrDefault()
+                            : globalStatements.FirstOrDefault()
+                    ) ?? unit.ChildNodes().FirstOrDefault();
 
                     if (globalNode == null)
                     {

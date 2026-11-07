@@ -82,8 +82,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
         )
         {
             var projectFilePath = Path.GetTempPath();
-            var binOutputPath =
-                GetOutputPathFromArguments(commandLineArguments)
+            var binOutputPath = GetOutputPathFromArguments(commandLineArguments)
                 ?? Path.Combine(projectFilePath, projectName + ".dll");
 
             return CreateCSharpCPSProjectAsync(

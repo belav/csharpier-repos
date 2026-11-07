@@ -123,8 +123,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 kinds = KindsProvided;
             }
 
-            var searchCurrentDocument =
-                (callback.Options as INavigateToOptions2)?.SearchCurrentDocument ?? false;
+            var searchCurrentDocument = (
+                callback.Options as INavigateToOptions2
+            )?.SearchCurrentDocument
+                ?? false;
 
             var roslynCallback = new NavigateToItemProviderCallback(_displayFactory, callback);
             var searcher = NavigateToSearcher.Create(

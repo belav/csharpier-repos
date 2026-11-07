@@ -901,8 +901,7 @@ namespace System.Security.Cryptography.Xml
 
         internal static AsymmetricAlgorithm? GetAnyPublicKey(X509Certificate2 certificate)
         {
-            AsymmetricAlgorithm? algorithm =
-                (AsymmetricAlgorithm?)certificate.GetRSAPublicKey()
+            AsymmetricAlgorithm? algorithm = (AsymmetricAlgorithm?)certificate.GetRSAPublicKey()
                 ?? certificate.GetECDsaPublicKey();
 
 #if NETCOREAPP

@@ -1184,8 +1184,7 @@ namespace Newtonsoft.Json.Serialization
             string qualifiedTypeName
         )
         {
-            TypeNameHandling resolvedTypeNameHandling =
-                member?.TypeNameHandling
+            TypeNameHandling resolvedTypeNameHandling = member?.TypeNameHandling
                 ?? containerContract?.ItemTypeNameHandling
                 ?? containerMember?.ItemTypeNameHandling
                 ?? Serializer._typeNameHandling;
@@ -2133,8 +2132,7 @@ namespace Newtonsoft.Json.Serialization
                 contract.ItemContract = GetContractSafe(contract.DictionaryValueType);
             }
 
-            JsonConverter? dictionaryValueConverter =
-                contract.ItemConverter
+            JsonConverter? dictionaryValueConverter = contract.ItemConverter
                 ?? GetConverter(contract.ItemContract, null, contract, containerProperty);
             PrimitiveTypeCode keyTypeCode =
                 (contract.KeyContract is JsonPrimitiveContract keyContract)
@@ -3468,8 +3466,7 @@ namespace Newtonsoft.Json.Serialization
                         };
                         propertyValues.Add(creatorPropertyContext);
 
-                        JsonProperty? property =
-                            creatorPropertyContext.ConstructorProperty
+                        JsonProperty? property = creatorPropertyContext.ConstructorProperty
                             ?? creatorPropertyContext.Property;
                         if (property != null)
                         {

@@ -40,8 +40,7 @@ namespace System.Web.Mvc
             }
             else
             {
-                _activatorResolver =
-                    activatorResolver
+                _activatorResolver = activatorResolver
                     ?? new SingleServiceResolver<IViewPageActivator>(
                         () => null,
                         new DefaultViewPageActivator(dependencyResolver),

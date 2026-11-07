@@ -876,8 +876,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder? rootBinder = null
         )
         {
-            var binder =
-                rootBinder
+            var binder = rootBinder
                 ?? compilation
                     .GetBinderFactory(attributeDeclarationSyntaxList.Node!.SyntaxTree)
                     .GetBinder(attributeDeclarationSyntaxList.Node);

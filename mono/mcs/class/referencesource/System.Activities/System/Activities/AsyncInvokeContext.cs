@@ -13,8 +13,7 @@ namespace System.Activities
         public AsyncInvokeContext(object userState, WorkflowInvoker invoker)
         {
             this.UserState = userState;
-            SynchronizationContext syncContext =
-                SynchronizationContext.Current
+            SynchronizationContext syncContext = SynchronizationContext.Current
                 ?? WorkflowApplication.SynchronousSynchronizationContext.Value;
             this.Operation = new AsyncInvokeOperation(syncContext);
             this.Invoker = invoker;

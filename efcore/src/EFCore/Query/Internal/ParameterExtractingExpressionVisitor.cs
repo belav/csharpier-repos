@@ -176,8 +176,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     /// </summary>
     protected override Expression VisitConditional(ConditionalExpression conditionalExpression)
     {
-        var newTestExpression =
-            TryGetConstantValue(conditionalExpression.Test) ?? Visit(conditionalExpression.Test);
+        var newTestExpression = TryGetConstantValue(conditionalExpression.Test)
+            ?? Visit(conditionalExpression.Test);
 
         if (newTestExpression is ConstantExpression { Value: bool constantTestValue })
         {
@@ -251,8 +251,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         {
             case ExpressionType.Coalesce:
             {
-                var newLeftExpression =
-                    TryGetConstantValue(binaryExpression.Left) ?? Visit(binaryExpression.Left);
+                var newLeftExpression = TryGetConstantValue(binaryExpression.Left)
+                    ?? Visit(binaryExpression.Left);
                 if (newLeftExpression is ConstantExpression constantLeftExpression)
                 {
                     return constantLeftExpression.Value == null
@@ -270,15 +270,15 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             case ExpressionType.AndAlso:
             case ExpressionType.OrElse:
             {
-                var newLeftExpression =
-                    TryGetConstantValue(binaryExpression.Left) ?? Visit(binaryExpression.Left);
+                var newLeftExpression = TryGetConstantValue(binaryExpression.Left)
+                    ?? Visit(binaryExpression.Left);
                 if (ShortCircuitLogicalExpression(newLeftExpression, binaryExpression.NodeType))
                 {
                     return newLeftExpression;
                 }
 
-                var newRightExpression =
-                    TryGetConstantValue(binaryExpression.Right) ?? Visit(binaryExpression.Right);
+                var newRightExpression = TryGetConstantValue(binaryExpression.Right)
+                    ?? Visit(binaryExpression.Right);
                 return ShortCircuitLogicalExpression(newRightExpression, binaryExpression.NodeType)
                     ? newRightExpression
                     : binaryExpression.Update(

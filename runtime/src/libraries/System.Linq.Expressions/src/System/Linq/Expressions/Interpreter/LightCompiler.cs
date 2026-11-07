@@ -2190,8 +2190,8 @@ namespace System.Linq.Expressions.Interpreter
                     exHandlers = new List<ExceptionHandler>();
                     foreach (CatchBlock handler in node.Handlers)
                     {
-                        ParameterExpression parameter =
-                            handler.Variable ?? Expression.Parameter(handler.Test);
+                        ParameterExpression parameter = handler.Variable
+                            ?? Expression.Parameter(handler.Test);
 
                         LocalDefinition local = _locals.DefineLocal(parameter, _instructions.Count);
                         _exceptionForRethrowStack.Push(parameter);

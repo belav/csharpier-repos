@@ -130,8 +130,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 }
 
                 var undoHistory = bufferUndoState.TextUndoHistory;
-                var targetTransaction =
-                    this.UndoManagers[subjectBuffer].ConflictResolutionUndoTransaction
+                var targetTransaction = this.UndoManagers[
+                    subjectBuffer
+                ].ConflictResolutionUndoTransaction
                     ?? this.UndoManagers[subjectBuffer].StartRenameSessionUndoTransaction;
                 while (undoHistory.UndoStack.First() != targetTransaction)
                 {

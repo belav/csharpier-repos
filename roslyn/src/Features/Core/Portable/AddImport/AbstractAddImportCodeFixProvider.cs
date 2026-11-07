@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             var codeActionOptions = context.Options.GetOptions(document.Project.Services);
             var searchOptions = codeActionOptions.SearchOptions;
 
-            var symbolSearchService =
-                _symbolSearchService ?? services.GetRequiredService<ISymbolSearchService>();
+            var symbolSearchService = _symbolSearchService
+                ?? services.GetRequiredService<ISymbolSearchService>();
 
             var installerService = searchOptions.SearchNuGetPackages
                 ? _packageInstallerService ?? services.GetService<IPackageInstallerService>()

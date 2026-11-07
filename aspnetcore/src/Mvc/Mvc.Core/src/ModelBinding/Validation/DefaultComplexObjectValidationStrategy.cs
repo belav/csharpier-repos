@@ -111,8 +111,7 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
             else
             {
                 var property = _properties[_index - _parameters.Count];
-                var propertyName =
-                    property.ValidationModelName
+                var propertyName = property.ValidationModelName
                     ?? property.BinderModelName
                     ?? property.PropertyName;
                 var key = ModelNames.CreatePropertyModelName(_key, propertyName);

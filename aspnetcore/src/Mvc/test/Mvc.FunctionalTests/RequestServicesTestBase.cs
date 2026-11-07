@@ -15,8 +15,7 @@ public abstract class RequestServicesTestBase<TStartup> : IClassFixture<MvcTestF
 {
     protected RequestServicesTestBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }

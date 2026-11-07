@@ -655,8 +655,10 @@ public class ActionEndpointFactoryTest
 
     private void AssertMatchingSuppressed(Endpoint endpoint, bool suppressed)
     {
-        var isEndpointSuppressed =
-            endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching ?? false;
+        var isEndpointSuppressed = endpoint
+            .Metadata.GetMetadata<ISuppressMatchingMetadata>()
+            ?.SuppressMatching
+            ?? false;
         Assert.Equal(suppressed, isEndpointSuppressed);
     }
 

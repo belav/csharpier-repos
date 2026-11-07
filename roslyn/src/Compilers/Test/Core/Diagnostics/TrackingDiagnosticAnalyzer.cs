@@ -331,8 +331,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Func<IEnumerable<T>, IOrderedEnumerable<T>> sorter = null
         )
         {
-            sorter =
-                sorter
+            sorter = sorter
                 ?? new Func<IEnumerable<T>, IOrderedEnumerable<T>>(items => items.OrderBy(i => i));
             expected = sorter(expected);
             actual = sorter(actual);

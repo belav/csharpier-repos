@@ -166,8 +166,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     .PeReader.ReadDebugDirectory()
                     .Single(entry => entry.Type == DebugDirectoryEntryType.CodeView);
                 var codeView = OptionsReader.PeReader.ReadCodeViewDebugDirectoryData(codeViewEntry);
-                pdbFilePath =
-                    codeView.Path
+                pdbFilePath = codeView.Path
                     ?? throw new InvalidOperationException(
                         RebuildResources.Could_not_get_PDB_file_path
                     );

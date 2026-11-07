@@ -21,8 +21,8 @@ namespace System.ComponentModel.DataAnnotations
         )
             : base(parent)
         {
-            AssociatedMetadataType =
-                associatedMetadataType ?? TypeDescriptorCache.GetAssociatedMetadataType(type);
+            AssociatedMetadataType = associatedMetadataType
+                ?? TypeDescriptorCache.GetAssociatedMetadataType(type);
             IsSelfAssociated = (type == AssociatedMetadataType);
             if (AssociatedMetadataType != null)
             {

@@ -225,8 +225,8 @@ public abstract class CoreTypeMapping
         }
 
 #pragma warning disable CS0612 // Type or member is obsolete
-        ValueGeneratorFactory =
-            parameters.ValueGeneratorFactory ?? converter?.MappingHints?.ValueGeneratorFactory;
+        ValueGeneratorFactory = parameters.ValueGeneratorFactory
+            ?? converter?.MappingHints?.ValueGeneratorFactory;
 #pragma warning restore CS0612 // Type or member is obsolete
     }
 

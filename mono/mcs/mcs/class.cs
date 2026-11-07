@@ -3364,8 +3364,8 @@ namespace Mono.CSharp
             {
                 mods =
                     ((ModFlags & Modifiers.ABSTRACT) != 0) ? Modifiers.PROTECTED : Modifiers.PUBLIC;
-                parameters =
-                    PrimaryConstructorParameters ?? ParametersCompiled.EmptyReadOnlyParameters;
+                parameters = PrimaryConstructorParameters
+                    ?? ParametersCompiled.EmptyReadOnlyParameters;
             }
 
             var c = new Constructor(this, MemberName.Name, mods, null, parameters, Location);

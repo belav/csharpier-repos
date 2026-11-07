@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<SyntaxNode>? executableCodeBlocks
         )
         {
-            var codeBlocks =
-                executableCodeBlocks?.Where(c => c != null).AsImmutableOrEmpty()
+            var codeBlocks = executableCodeBlocks?.Where(c => c != null).AsImmutableOrEmpty()
                 ?? ImmutableArray<SyntaxNode>.Empty;
             return new DeclarationInfo(node, codeBlocks, declaredSymbol);
         }

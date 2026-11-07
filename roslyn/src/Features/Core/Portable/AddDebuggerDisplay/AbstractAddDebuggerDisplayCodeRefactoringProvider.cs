@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.AddDebuggerDisplay
         {
             var (document, _, cancellationToken) = context;
 
-            var typeAndPriority =
-                await GetRelevantTypeFromHeaderAsync(context).ConfigureAwait(false)
+            var typeAndPriority = await GetRelevantTypeFromHeaderAsync(context)
+                .ConfigureAwait(false)
                 ?? await GetRelevantTypeFromMethodAsync(context).ConfigureAwait(false);
 
             if (typeAndPriority == null)

@@ -1634,8 +1634,7 @@ namespace System.ComponentModel
 
             while (node == null)
             {
-                node =
-                    (TypeDescriptionNode?)s_providerTypeTable[searchType]
+                node = (TypeDescriptionNode?)s_providerTypeTable[searchType]
                     ?? (TypeDescriptionNode?)s_providerTable[searchType];
 
                 if (node == null)
@@ -3256,8 +3255,8 @@ namespace System.ComponentModel
             {
                 ArgumentNullException.ThrowIfNull(editorBaseType);
 
-                object? editor =
-                    _primary.GetEditor(editorBaseType) ?? _secondary.GetEditor(editorBaseType);
+                object? editor = _primary.GetEditor(editorBaseType)
+                    ?? _secondary.GetEditor(editorBaseType);
 
                 return editor;
             }
@@ -3279,8 +3278,8 @@ namespace System.ComponentModel
             [RequiresUnreferencedCode(AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
             EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[]? attributes)
             {
-                EventDescriptorCollection events =
-                    _primary.GetEvents(attributes) ?? _secondary.GetEvents(attributes);
+                EventDescriptorCollection events = _primary.GetEvents(attributes)
+                    ?? _secondary.GetEvents(attributes);
 
                 Debug.Assert(events != null, "Someone should have handled this");
                 return events;
@@ -3292,8 +3291,8 @@ namespace System.ComponentModel
             [RequiresUnreferencedCode(PropertyDescriptor.PropertyDescriptorPropertyTypeMessage)]
             PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
             {
-                PropertyDescriptorCollection properties =
-                    _primary.GetProperties() ?? _secondary.GetProperties();
+                PropertyDescriptorCollection properties = _primary.GetProperties()
+                    ?? _secondary.GetProperties();
 
                 Debug.Assert(properties != null, "Someone should have handled this");
                 return properties;
@@ -3311,8 +3310,8 @@ namespace System.ComponentModel
                 Attribute[]? attributes
             )
             {
-                PropertyDescriptorCollection properties =
-                    _primary.GetProperties(attributes) ?? _secondary.GetProperties(attributes);
+                PropertyDescriptorCollection properties = _primary.GetProperties(attributes)
+                    ?? _secondary.GetProperties(attributes);
 
                 Debug.Assert(properties != null, "Someone should have handled this");
                 return properties;

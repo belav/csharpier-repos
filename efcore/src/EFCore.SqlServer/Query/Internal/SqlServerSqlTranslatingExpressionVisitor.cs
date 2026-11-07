@@ -114,8 +114,7 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             && ArithmeticOperatorTypes.Contains(sqlBinaryExpression.OperatorType)
         )
         {
-            var inferredProviderType =
-                GetProviderType(sqlBinaryExpression.Left)
+            var inferredProviderType = GetProviderType(sqlBinaryExpression.Left)
                 ?? GetProviderType(sqlBinaryExpression.Right);
             if (inferredProviderType != null)
             {

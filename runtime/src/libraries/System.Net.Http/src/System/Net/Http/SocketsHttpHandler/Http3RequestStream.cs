@@ -301,8 +301,7 @@ namespace System.Net.Http
 
                     default:
                         // Our stream was reset.
-                        Exception innerException =
-                            _connection.AbortException
+                        Exception innerException = _connection.AbortException
                             ?? HttpProtocolException.CreateHttp3StreamException(code, ex);
                         HttpRequestError httpRequestError =
                             innerException is HttpProtocolException

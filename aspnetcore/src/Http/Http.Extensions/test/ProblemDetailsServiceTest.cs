@@ -169,8 +169,7 @@ public class ProblemDetailsServiceTest
 
         public bool CanWrite(ProblemDetailsContext context)
         {
-            var metadata =
-                context.AdditionalMetadata?.GetMetadata<SampleMetadata>()
+            var metadata = context.AdditionalMetadata?.GetMetadata<SampleMetadata>()
                 ?? context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<SampleMetadata>();
 
             return metadata != null && _canWrite;

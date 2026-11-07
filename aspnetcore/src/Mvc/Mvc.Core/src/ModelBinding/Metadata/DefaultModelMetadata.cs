@@ -530,8 +530,7 @@ public class DefaultModelMetadata : ModelMetadata
         }
         else if (defaultModelMetadata.IsComplexType)
         {
-            var parameters =
-                defaultModelMetadata.BoundConstructor?.BoundConstructorParameters
+            var parameters = defaultModelMetadata.BoundConstructor?.BoundConstructorParameters
                 ?? Array.Empty<ModelMetadata>();
             foreach (var parameter in parameters)
             {

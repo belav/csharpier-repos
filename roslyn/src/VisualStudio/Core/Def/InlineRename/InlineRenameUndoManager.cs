@@ -205,8 +205,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
 
                 var undoManager = bufferUndoState.UndoManager;
                 var startRenameUndoPrimitive = bufferUndoState.StartRenameSessionUndoPrimitive;
-                var markerPrimitive =
-                    bufferUndoState.ConflictResolutionRenameUndoPrimitive
+                var markerPrimitive = bufferUndoState.ConflictResolutionRenameUndoPrimitive
                     ?? startRenameUndoPrimitive;
 
                 // If we're not undoing conflict resolution, we need to undo the next unit after our startRenameUndoPrimitive

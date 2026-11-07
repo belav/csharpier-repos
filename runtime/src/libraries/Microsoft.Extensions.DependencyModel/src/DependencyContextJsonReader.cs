@@ -927,8 +927,8 @@ namespace Microsoft.Extensions.DependencyModel
             }
             else
             {
-                IEnumerable<string> assemblies =
-                    targetLibrary.Compilations ?? Enumerable.Empty<string>();
+                IEnumerable<string> assemblies = targetLibrary.Compilations
+                    ?? Enumerable.Empty<string>();
                 return new CompilationLibrary(
                     stub.Type,
                     name,

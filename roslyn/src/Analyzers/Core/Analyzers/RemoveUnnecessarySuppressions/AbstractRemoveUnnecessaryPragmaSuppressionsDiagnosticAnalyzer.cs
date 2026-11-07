@@ -303,8 +303,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             }
 
             // Finally, report the unnecessary suppressions.
-            var effectiveSeverity =
-                severity.ToDiagnosticSeverity()
+            var effectiveSeverity = severity.ToDiagnosticSeverity()
                 ?? s_removeUnnecessarySuppressionDescriptor.DefaultSeverity;
             ReportUnnecessarySuppressions(
                 pragmasToIsUsedMap,

@@ -221,8 +221,8 @@ namespace System.Text.Json
                     Current.JsonTypeInfo = jsonTypeInfo;
                     Current.JsonPropertyInfo = jsonTypeInfo.PropertyInfoForTypeInfo;
                     // Allow number handling on property to win over handling on type.
-                    Current.NumberHandling =
-                        numberHandling ?? Current.JsonPropertyInfo.EffectiveNumberHandling;
+                    Current.NumberHandling = numberHandling
+                        ?? Current.JsonPropertyInfo.EffectiveNumberHandling;
                 }
             }
             else
@@ -445,8 +445,8 @@ namespace System.Text.Json
             static void AppendStackFrame(StringBuilder sb, ref WriteStackFrame frame)
             {
                 // Append the property name. Or attempt to get the JSON property name from the property name specified in re-entry.
-                string? propertyName =
-                    frame.JsonPropertyInfo?.MemberName ?? frame.JsonPropertyNameAsString;
+                string? propertyName = frame.JsonPropertyInfo?.MemberName
+                    ?? frame.JsonPropertyNameAsString;
 
                 AppendPropertyName(sb, propertyName);
             }

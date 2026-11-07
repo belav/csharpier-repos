@@ -549,14 +549,13 @@ namespace Microsoft.CodeAnalysis.Emit
             }
 
             changes = changesBuilder;
-            replacedSymbols =
-                lazyReplacedSymbolsBuilder ?? SpecializedCollections.EmptySet<ISymbolInternal>();
+            replacedSymbols = lazyReplacedSymbolsBuilder
+                ?? SpecializedCollections.EmptySet<ISymbolInternal>();
 
-            deletedMembers =
-                lazyDeletedMembersBuilder?.ToImmutableSegmentedDictionary(
-                    keySelector: static e => e.Key,
-                    elementSelector: static e => e.Value.ToImmutableAndFree()
-                )
+            deletedMembers = lazyDeletedMembersBuilder?.ToImmutableSegmentedDictionary(
+                keySelector: static e => e.Key,
+                elementSelector: static e => e.Value.ToImmutableAndFree()
+            )
                 ?? ImmutableSegmentedDictionary<
                     ISymbolInternal,
                     ImmutableArray<ISymbolInternal>

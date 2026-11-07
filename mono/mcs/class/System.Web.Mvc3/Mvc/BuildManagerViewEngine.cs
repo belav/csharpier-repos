@@ -26,8 +26,7 @@
             }
             else
             {
-                _activatorResolver =
-                    activatorResolver
+                _activatorResolver = activatorResolver
                     ?? new SingleServiceResolver<IViewPageActivator>(
                         () => null,
                         new DefaultViewPageActivator(dependencyResolver),

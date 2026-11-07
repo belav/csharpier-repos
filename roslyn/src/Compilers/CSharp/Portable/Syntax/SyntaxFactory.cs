@@ -2470,8 +2470,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             using var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options);
             using var parser = MakeParser(lexer);
 
-            var node =
-                parser.ParseAttributeArgumentList()
+            var node = parser.ParseAttributeArgumentList()
                 ?? new InternalSyntax.AttributeArgumentListSyntax(
                     SyntaxKind.AttributeArgumentList,
                     InternalSyntax.SyntaxFactory.MissingToken(SyntaxKind.OpenParenToken),

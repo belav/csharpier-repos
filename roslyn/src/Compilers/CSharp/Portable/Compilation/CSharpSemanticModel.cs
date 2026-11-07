@@ -4835,8 +4835,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                 case BoundKind.BaseReference:
                     {
-                        Binder binder =
-                            binderOpt
+                        Binder binder = binderOpt
                             ?? GetEnclosingBinder(GetAdjustedNodePosition(boundNode.Syntax));
                         NamedTypeSymbol containingType = binder.ContainingType;
                         var containingMember = binder.ContainingMember();
@@ -4959,8 +4958,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 case SymbolKind.Field:
                                 case SymbolKind.Property:
                                     resultKind = LookupResultKind.NotReferencable;
-                                    thisParam =
-                                        containingMember.EnclosingThisSymbol()
+                                    thisParam = containingMember.EnclosingThisSymbol()
                                         ?? new ThisParameterSymbol(null, containingType);
                                     break;
 
@@ -5375,8 +5373,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Filter typeSymbol's instance constructors by accessibility.
                 // If all the instance constructors are inaccessible, we retain
                 // all of them for correct semantic info.
-                Binder binder =
-                    binderOpt
+                Binder binder = binderOpt
                     ?? GetEnclosingBinder(GetAdjustedNodePosition(lowestBoundNode.Syntax));
                 ImmutableArray<MethodSymbol> candidateConstructors;
 
@@ -5452,8 +5449,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return ImmutableArray<IPropertySymbol>.Empty;
             }
 
-            Binder binder =
-                binderOpt ?? GetEnclosingBinder(GetAdjustedNodePosition(boundNode.Syntax));
+            Binder binder = binderOpt
+                ?? GetEnclosingBinder(GetAdjustedNodePosition(boundNode.Syntax));
             var symbols = ArrayBuilder<ISymbol>.GetInstance();
             AppendSymbolsWithNameAndArity(
                 symbols,
@@ -5631,8 +5628,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             isDynamic = false;
 
             // The method group needs filtering.
-            Binder binder =
-                binderOpt ?? GetEnclosingBinder(GetAdjustedNodePosition(boundNode.Syntax));
+            Binder binder = binderOpt
+                ?? GetEnclosingBinder(GetAdjustedNodePosition(boundNode.Syntax));
             methodGroup = GetReducedAndFilteredMethodGroupSymbols(binder, boundNode)
                 .Cast<MethodSymbol, Symbol>();
 

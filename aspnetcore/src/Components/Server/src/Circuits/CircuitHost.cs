@@ -65,10 +65,10 @@ internal partial class CircuitHost : IAsyncDisposable
         Renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
         Descriptors = descriptors ?? throw new ArgumentNullException(nameof(descriptors));
         JSRuntime = jsRuntime ?? throw new ArgumentNullException(nameof(jsRuntime));
-        _navigationManager =
-            navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
-        _circuitHandlers =
-            circuitHandlers ?? throw new ArgumentNullException(nameof(circuitHandlers));
+        _navigationManager = navigationManager
+            ?? throw new ArgumentNullException(nameof(navigationManager));
+        _circuitHandlers = circuitHandlers
+            ?? throw new ArgumentNullException(nameof(circuitHandlers));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
         Services = scope.ServiceProvider;

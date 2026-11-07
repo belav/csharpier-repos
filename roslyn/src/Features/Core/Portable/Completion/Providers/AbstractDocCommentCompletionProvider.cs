@@ -127,8 +127,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         protected AbstractDocCommentCompletionProvider(CompletionItemRules defaultRules)
         {
-            this.defaultRules =
-                defaultRules ?? throw new ArgumentNullException(nameof(defaultRules));
+            this.defaultRules = defaultRules
+                ?? throw new ArgumentNullException(nameof(defaultRules));
         }
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)

@@ -379,14 +379,11 @@ public sealed partial class QuicConnection : IAsyncDisposable
 
             // RFC 6066 forbids IP literals
             // DNI mapping is handled by MsQuic
-            string sni =
-                (
-                    TargetHostNameHelper.IsValidAddress(
-                        options.ClientAuthenticationOptions.TargetHost
-                    )
-                        ? null
-                        : options.ClientAuthenticationOptions.TargetHost
-                )
+            string sni = (
+                TargetHostNameHelper.IsValidAddress(options.ClientAuthenticationOptions.TargetHost)
+                    ? null
+                    : options.ClientAuthenticationOptions.TargetHost
+            )
                 ?? host
                 ?? address?.ToString()
                 ?? string.Empty;

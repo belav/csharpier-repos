@@ -26,8 +26,8 @@
         )
             : base(validatorProvidors)
         {
-            _serviceResolver =
-                serviceResolver ?? new MultiServiceResolver<ModelValidatorProvider>(() => Items);
+            _serviceResolver = serviceResolver
+                ?? new MultiServiceResolver<ModelValidatorProvider>(() => Items);
         }
 
         private IEnumerable<ModelValidatorProvider> CombinedItems

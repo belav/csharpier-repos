@@ -774,8 +774,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // to restore the nullable warnings for all members that were not initialized in this constructor, including those
                         // from base types that were expected to have been initialized by the consumer at the construction site.
 
-                        var chainedConstructorEnforcesRequiredMembers =
-                            GetBaseOrThisInitializer()?.ShouldCheckRequiredMembers() ?? false;
+                        var chainedConstructorEnforcesRequiredMembers = GetBaseOrThisInitializer()
+                            ?.ShouldCheckRequiredMembers()
+                            ?? false;
 
                         if (
                             chainedConstructorEnforcesRequiredMembers
@@ -1300,8 +1301,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                         {
                             var members = containingType.GetMembersUnordered();
-                            var requiredMembers =
-                                containingType.BaseTypeNoUseSiteDiagnostics?.AllRequiredMembers
+                            var requiredMembers = containingType
+                                .BaseTypeNoUseSiteDiagnostics
+                                ?.AllRequiredMembers
                                 ?? ImmutableSegmentedDictionary<string, Symbol>.Empty;
 
                             if (requiredMembers.IsEmpty)
@@ -1529,8 +1531,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        location =
-                            syntaxOpt?.GetLocation()
+                        location = syntaxOpt?.GetLocation()
                             ?? methodMainNode.Syntax.GetLastToken().GetLocation();
                     }
 
@@ -1672,8 +1673,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && GetState(ref state, inputSlot).IsNotNull()
                 )
                 {
-                    var location =
-                        syntaxOpt?.GetLocation()
+                    var location = syntaxOpt?.GetLocation()
                         ?? methodMainNode.Syntax.GetLastToken().GetLocation();
                     if (outputParam is object)
                     {
@@ -6446,8 +6446,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     isLifted,
                     rightType
                 );
-                TypeSymbol asMemberOfType =
-                    getTypeIfContainingType(methodContainer, leftUnderlyingType.Type, leftOperand)
+                TypeSymbol asMemberOfType = getTypeIfContainingType(
+                    methodContainer,
+                    leftUnderlyingType.Type,
+                    leftOperand
+                )
                     ?? getTypeIfContainingType(
                         methodContainer,
                         rightUnderlyingType.Type,
@@ -7268,8 +7271,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (node is BoundConversion boundConversion)
             {
                 var operandType = ResultType;
-                TypeWithAnnotations explicitType =
-                    boundConversion.ConversionGroupOpt?.ExplicitType ?? default;
+                TypeWithAnnotations explicitType = boundConversion.ConversionGroupOpt?.ExplicitType
+                    ?? default;
                 bool fromExplicitCast = explicitType.HasType;
                 TypeWithAnnotations targetType = fromExplicitCast
                     ? explicitType
@@ -16426,12 +16429,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override LocalFunctionState CreateLocalFunctionState(LocalFunctionSymbol symbol)
         {
-            var variables =
-                (
-                    symbol.ContainingSymbol is MethodSymbol containingMethod
-                        ? _variables.GetVariablesForMethodScope(containingMethod)
-                        : null
-                ) ?? _variables.GetRootScope();
+            var variables = (
+                symbol.ContainingSymbol is MethodSymbol containingMethod
+                    ? _variables.GetVariablesForMethodScope(containingMethod)
+                    : null
+            ) ?? _variables.GetRootScope();
             return new LocalFunctionState(LocalState.UnreachableState(variables));
         }
 

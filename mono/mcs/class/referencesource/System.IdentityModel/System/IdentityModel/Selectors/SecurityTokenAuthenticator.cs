@@ -45,8 +45,8 @@ namespace System.IdentityModel.Selectors
 
             if (TD.TokenValidationStartedIsEnabled())
             {
-                eventTraceActivity =
-                    eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
+                eventTraceActivity = eventTraceActivity
+                    ?? EventTraceActivity.GetFromThreadOrCreate();
                 tokenType = tokenType ?? token.GetType().ToString();
                 TD.TokenValidationStarted(eventTraceActivity, tokenType, token.Id);
             }
@@ -63,8 +63,8 @@ namespace System.IdentityModel.Selectors
                 );
                 if (TD.TokenValidationFailureIsEnabled())
                 {
-                    eventTraceActivity =
-                        eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
+                    eventTraceActivity = eventTraceActivity
+                        ?? EventTraceActivity.GetFromThreadOrCreate();
                     tokenType = tokenType ?? token.GetType().ToString();
                     TD.TokenValidationFailure(eventTraceActivity, tokenType, token.Id, errorMsg);
                 }
@@ -76,8 +76,8 @@ namespace System.IdentityModel.Selectors
 
             if (TD.TokenValidationSuccessIsEnabled())
             {
-                eventTraceActivity =
-                    eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
+                eventTraceActivity = eventTraceActivity
+                    ?? EventTraceActivity.GetFromThreadOrCreate();
                 tokenType = tokenType ?? token.GetType().ToString();
                 TD.TokenValidationSuccess(eventTraceActivity, tokenType, token.Id);
             }

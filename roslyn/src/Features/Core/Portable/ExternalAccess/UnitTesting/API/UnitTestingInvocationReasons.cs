@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         );
 
         [DataMember(Order = 0)]
-        private readonly ImmutableHashSet<string> _reasons =
-            reasons ?? ImmutableHashSet<string>.Empty;
+        private readonly ImmutableHashSet<string> _reasons = reasons
+            ?? ImmutableHashSet<string>.Empty;
 
         public UnitTestingInvocationReasons(string reason)
             : this(ImmutableHashSet.Create(reason)) { }

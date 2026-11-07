@@ -245,8 +245,7 @@ namespace Microsoft.Build.Evaluation
                     );
             foreach (var p in GlobalProperties)
                 this.properties.Add(new GlobalProjectProperty(this, p.Key, p.Value));
-            var tools =
-                ProjectCollection.GetToolset(this.ToolsVersion)
+            var tools = ProjectCollection.GetToolset(this.ToolsVersion)
                 ?? ProjectCollection.GetToolset(this.ProjectCollection.DefaultToolsVersion);
             foreach (var p in ProjectCollection.GetReservedProperties(tools, this))
                 this.properties.Add(p);

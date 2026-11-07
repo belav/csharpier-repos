@@ -432,8 +432,7 @@ namespace Microsoft.Build.Evaluation
         static IEnumerable<T> GetWellKnownProperties<T>(Func<string, string, T> create)
         {
             yield return create("OS", OS);
-            var ext =
-                Environment.GetEnvironmentVariable("MSBuildExtensionsPath")
+            var ext = Environment.GetEnvironmentVariable("MSBuildExtensionsPath")
                 ?? DefaultExtensionsPath;
             yield return create("MSBuildExtensionsPath", ext);
             var ext32 = Environment.GetEnvironmentVariable("MSBuildExtensionsPath32") ?? ext;

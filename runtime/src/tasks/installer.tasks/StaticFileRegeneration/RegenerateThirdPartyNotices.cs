@@ -53,8 +53,7 @@ namespace Microsoft.DotNet.Build.Tasks
                     .SelectMany(item =>
                     {
                         string repo = item.ItemSpec;
-                        string branch =
-                            item.GetMetadata("Branch")
+                        string branch = item.GetMetadata("Branch")
                             ?? throw new ArgumentException($"{item.ItemSpec} specifies no Branch.");
 
                         return PotentialTpnPaths.Select(path => new

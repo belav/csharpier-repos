@@ -86,8 +86,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 SelectedMembers = mappedMembers!;
 
                 ContainingType = containingType;
-                Accessibility =
-                    desiredAccessibility
+                Accessibility = desiredAccessibility
                     ?? (
                         ContainingType.IsAbstractClass()
                             ? Accessibility.Protected

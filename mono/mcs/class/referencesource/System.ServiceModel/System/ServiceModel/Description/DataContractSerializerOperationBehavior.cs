@@ -40,8 +40,8 @@ namespace System.ServiceModel.Description
             DataContractFormatAttribute dataContractFormatAttribute
         )
         {
-            this.dataContractFormatAttribute =
-                dataContractFormatAttribute ?? new DataContractFormatAttribute();
+            this.dataContractFormatAttribute = dataContractFormatAttribute
+                ?? new DataContractFormatAttribute();
             this.operation = operation;
         }
 

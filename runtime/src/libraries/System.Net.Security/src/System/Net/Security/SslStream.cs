@@ -970,8 +970,8 @@ namespace System.Net.Security
         )
         {
             // we get null when called for the first-time, or concurrent read or write operation
-            var manager =
-                Interlocked.Exchange(ref field, null) ?? new PoolingPointerMemoryManager();
+            var manager = Interlocked.Exchange(ref field, null)
+                ?? new PoolingPointerMemoryManager();
 
             manager.Reset(pointer, length);
             return manager;

@@ -114,8 +114,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             telemetry.SetBreakState(inBreakState);
 
-            BaseActiveStatements =
-                lazyActiveStatementMap
+            BaseActiveStatements = lazyActiveStatementMap
                 ?? (
                     inBreakState
                         ? AsyncLazy.Create(GetBaseActiveStatementsAsync)

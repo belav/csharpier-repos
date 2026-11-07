@@ -471,16 +471,14 @@ class Tester : Base
 
     async Task<bool> CoalescingTest_1()
     {
-        var r =
-            await Task.Factory.StartNew<string>(() => null)
+        var r = await Task.Factory.StartNew<string>(() => null)
             ?? await Task.Factory.StartNew(() => "x");
         return r == "x";
     }
 
     async Task<bool> CoalescingTest_2()
     {
-        var r =
-            await Task.Factory.StartNew<short?>(() => null)
+        var r = await Task.Factory.StartNew<short?>(() => null)
             ?? await Task.Factory.StartNew<byte>(() => 2);
         return r == 2;
     }

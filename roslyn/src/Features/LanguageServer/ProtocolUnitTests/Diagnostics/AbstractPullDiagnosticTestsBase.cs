@@ -222,14 +222,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             IProgress<WorkspaceDiagnosticPartialReport>? progress = null
         )
         {
-            var previousResultsLsp =
-                previousResults
-                    ?.Select(r => new PreviousResultId
-                    {
-                        Uri = r.identifier.Uri,
-                        Value = r.resultId,
-                    })
-                    .ToArray()
+            var previousResultsLsp = previousResults
+                ?.Select(r => new PreviousResultId { Uri = r.identifier.Uri, Value = r.resultId })
+                .ToArray()
                 ?? Array.Empty<PreviousResultId>();
             return new WorkspaceDiagnosticParams
             {

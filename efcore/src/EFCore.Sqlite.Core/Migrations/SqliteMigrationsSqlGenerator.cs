@@ -485,15 +485,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 if (defaultValue != null)
                 {
-                    var defaultValueTypeMapping =
-                        (
-                            column.StoreType == null
-                                ? null
-                                : Dependencies.TypeMappingSource.FindMapping(
-                                    defaultValue.GetType(),
-                                    column.StoreType
-                                )
-                        ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
+                    var defaultValueTypeMapping = (
+                        column.StoreType == null
+                            ? null
+                            : Dependencies.TypeMappingSource.FindMapping(
+                                defaultValue.GetType(),
+                                column.StoreType
+                            )
+                    ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
 
                     selectBuilder
                         .Append(", ")
@@ -621,8 +620,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
         var srid = operation[SqliteAnnotationNames.Srid] as int? ?? 0;
 
-        var geometryType =
-            operation.ColumnType
+        var geometryType = operation.ColumnType
             ?? GetColumnType(operation.Schema, operation.Table, operation.Name, operation, model);
 
         builder

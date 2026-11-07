@@ -448,8 +448,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         {
             var project = GetProject(hierarchy);
             var solution = _workspace.CurrentSolution;
-            var projectOrSolutionName =
-                project?.Name ?? PathUtilities.GetFileName(solution.FilePath);
+            var projectOrSolutionName = project?.Name
+                ?? PathUtilities.GetFileName(solution.FilePath);
 
             // Handle multi-tfm projects - we want to run code analysis for all tfm flavors of the project.
             ImmutableArray<Project> otherProjectsForMultiTfmProject;

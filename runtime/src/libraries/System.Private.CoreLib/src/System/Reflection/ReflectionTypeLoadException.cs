@@ -38,8 +38,7 @@ namespace System.Reflection
             : base(info, context)
         {
             Types = Type.EmptyTypes;
-            LoaderExceptions =
-                (Exception?[]?)info.GetValue("Exceptions", typeof(Exception[]))
+            LoaderExceptions = (Exception?[]?)info.GetValue("Exceptions", typeof(Exception[]))
                 ?? Array.Empty<Exception?>();
         }
 

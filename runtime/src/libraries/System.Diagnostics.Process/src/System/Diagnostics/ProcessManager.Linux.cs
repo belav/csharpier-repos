@@ -41,8 +41,8 @@ namespace System.Diagnostics
         /// <returns>The array of modules.</returns>
         internal static ProcessModuleCollection GetModules(int processId)
         {
-            ProcessModuleCollection modules =
-                Interop.procfs.ParseMapsModules(processId) ?? new(capacity: 0);
+            ProcessModuleCollection modules = Interop.procfs.ParseMapsModules(processId)
+                ?? new(capacity: 0);
 
             // Move the main executable module to be the first in the list if it's not already
             if (Process.GetExePath(processId) is string exePath)
@@ -93,8 +93,7 @@ namespace System.Diagnostics
             var pi = new ProcessInfo()
             {
                 ProcessId = pid,
-                ProcessName =
-                    processName
+                ProcessName = processName
                     ?? Process.GetUntruncatedProcessName(ref procFsStat)
                     ?? string.Empty,
                 BasePriority = (int)procFsStat.nice,

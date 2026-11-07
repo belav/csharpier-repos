@@ -257,11 +257,10 @@ namespace ILCompiler
                         );
 #endif
 
-                    pdbReader =
-                        PortablePdbSymbolReader.TryOpenEmbedded(
-                            peReader,
-                            GetMetadataStringDecoder()
-                        ) ?? OpenAssociatedSymbolFile(filePath, peReader);
+                    pdbReader = PortablePdbSymbolReader.TryOpenEmbedded(
+                        peReader,
+                        GetMetadataStringDecoder()
+                    ) ?? OpenAssociatedSymbolFile(filePath, peReader);
                 }
                 else
                 {

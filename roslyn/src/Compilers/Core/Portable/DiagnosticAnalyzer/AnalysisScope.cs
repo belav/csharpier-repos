@@ -134,8 +134,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool concurrentAnalysis
         )
         {
-            var additionalFiles =
-                analyzerOptions?.AdditionalFiles ?? ImmutableArray<AdditionalText>.Empty;
+            var additionalFiles = analyzerOptions?.AdditionalFiles
+                ?? ImmutableArray<AdditionalText>.Empty;
             return new AnalysisScope(
                 compilation.CommonSyntaxTrees,
                 additionalFiles,

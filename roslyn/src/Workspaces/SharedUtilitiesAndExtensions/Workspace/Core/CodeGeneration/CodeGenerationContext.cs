@@ -159,8 +159,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             AfterThisLocation = afterThisLocation;
             BeforeThisLocation = beforeThisLocation;
             AddImports = addImports;
-            AdditionalImports =
-                additionalImports ?? SpecializedCollections.EmptyEnumerable<INamespaceSymbol>();
+            AdditionalImports = additionalImports
+                ?? SpecializedCollections.EmptyEnumerable<INamespaceSymbol>();
             GenerateMembers = generateMembers;
             MergeNestedNamespaces = mergeNestedNamespaces;
             MergeAttributes = mergeAttributes;

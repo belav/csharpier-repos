@@ -19,32 +19,28 @@ namespace System.Collections.Tests
             Func<object, int> objectGetHashCode = null
         )
         {
-            _equals =
-                equals
+            _equals = equals
                 ?? (
                     (x, y) =>
                     {
                         throw new NotImplementedException();
                     }
                 );
-            _getHashCode =
-                getHashCode
+            _getHashCode = getHashCode
                 ?? (
                     obj =>
                     {
                         throw new NotImplementedException();
                     }
                 );
-            _objectEquals =
-                objectEquals
+            _objectEquals = objectEquals
                 ?? (
                     (x, y) =>
                     {
                         throw new NotImplementedException();
                     }
                 );
-            _objectGetHashCode =
-                objectGetHashCode
+            _objectGetHashCode = objectGetHashCode
                 ?? (
                     obj =>
                     {

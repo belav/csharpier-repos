@@ -250,8 +250,7 @@ namespace DbMetal.Generator.Implementation
             string filename
         )
         {
-            ICodeGenerator codeGenerator =
-                FindCodeGenerator(parameters, filename)
+            ICodeGenerator codeGenerator = FindCodeGenerator(parameters, filename)
                 ?? (
                     string.IsNullOrEmpty(parameters.Language)
                         ? CodeDomGenerator.CreateFromFileExtension(Path.GetExtension(filename))

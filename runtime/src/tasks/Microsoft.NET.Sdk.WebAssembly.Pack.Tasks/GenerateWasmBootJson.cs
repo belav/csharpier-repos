@@ -153,11 +153,13 @@ public class GenerateWasmBootJson : Task
             result.runtimeOptions = runtimeOptions.ToArray();
         }
 
-        string[] moduleAfterConfigLoadedFullPaths =
-            ModuleAfterConfigLoaded?.Select(s => s.GetMetadata("FullPath")).ToArray()
+        string[] moduleAfterConfigLoadedFullPaths = ModuleAfterConfigLoaded
+            ?.Select(s => s.GetMetadata("FullPath"))
+            .ToArray()
             ?? Array.Empty<string>();
-        string[] moduleAfterRuntimeReadyFullPaths =
-            ModuleAfterRuntimeReady?.Select(s => s.GetMetadata("FullPath")).ToArray()
+        string[] moduleAfterRuntimeReadyFullPaths = ModuleAfterRuntimeReady
+            ?.Select(s => s.GetMetadata("FullPath"))
+            .ToArray()
             ?? Array.Empty<string>();
 
         // Build a two-level dictionary of the form:

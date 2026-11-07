@@ -21,8 +21,7 @@ internal sealed class WebHostOptions
 
         string? GetConfig(string key) => primaryConfiguration[key] ?? fallbackConfiguration?[key];
 
-        ApplicationName =
-            environment?.ApplicationName
+        ApplicationName = environment?.ApplicationName
             ?? GetConfig(WebHostDefaults.ApplicationKey)
             ?? Assembly.GetEntryAssembly()?.GetName().Name
             ?? string.Empty;

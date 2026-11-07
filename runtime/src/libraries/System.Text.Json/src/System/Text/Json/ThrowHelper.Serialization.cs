@@ -706,8 +706,8 @@ namespace System.Text.Json
             if (string.IsNullOrEmpty(message))
             {
                 // Use a default message.
-                Type propertyType =
-                    state.Current.JsonPropertyInfo?.PropertyType ?? state.Current.JsonTypeInfo.Type;
+                Type propertyType = state.Current.JsonPropertyInfo?.PropertyType
+                    ?? state.Current.JsonTypeInfo.Type;
                 message = SR.Format(SR.DeserializeUnableToConvertValue, propertyType);
                 ex.AppendPathInformation = true;
             }
@@ -835,8 +835,8 @@ namespace System.Text.Json
             Debug.Assert(!message.Contains(" Path: "));
 
             // Obtain the type to show in the message.
-            Type propertyType =
-                state.Current.JsonPropertyInfo?.PropertyType ?? state.Current.JsonTypeInfo.Type;
+            Type propertyType = state.Current.JsonPropertyInfo?.PropertyType
+                ?? state.Current.JsonTypeInfo.Type;
 
             if (!message.Contains(propertyType.ToString()))
             {
@@ -868,8 +868,8 @@ namespace System.Text.Json
             Debug.Assert(!message.Contains(" Path: "));
 
             // Obtain the type to show in the message.
-            Type propertyType =
-                state.Current.JsonPropertyInfo?.PropertyType ?? state.Current.JsonTypeInfo.Type;
+            Type propertyType = state.Current.JsonPropertyInfo?.PropertyType
+                ?? state.Current.JsonTypeInfo.Type;
 
             if (!message.Contains(propertyType.ToString()))
             {

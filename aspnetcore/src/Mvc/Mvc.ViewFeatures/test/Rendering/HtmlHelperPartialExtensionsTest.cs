@@ -46,8 +46,8 @@ public class HtmlHelperPartialExtensionsTest
         if (expectedModel == null)
         {
             // Extension methods without model parameter use ViewData.Model to get Model.
-            var viewData =
-                expectedViewData ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
+            var viewData = expectedViewData
+                ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
             helper.SetupGet(h => h.ViewData).Returns(viewData).Verifiable();
         }
 
@@ -126,8 +126,8 @@ public class HtmlHelperPartialExtensionsTest
         if (expectedModel == null)
         {
             // Extension methods without model parameter use ViewData.Model to get Model.
-            var viewData =
-                expectedViewData ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
+            var viewData = expectedViewData
+                ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
             helper.SetupGet(h => h.ViewData).Returns(viewData).Verifiable();
         }
 
@@ -209,8 +209,8 @@ public class HtmlHelperPartialExtensionsTest
         if (expectedModel == null)
         {
             // Extension methods without model parameter use ViewData.Model to get Model.
-            var viewData =
-                expectedViewData ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
+            var viewData = expectedViewData
+                ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
             helper.SetupGet(h => h.ViewData).Returns(viewData).Verifiable();
         }
 
@@ -260,8 +260,8 @@ public class HtmlHelperPartialExtensionsTest
         if (expectedModel == null)
         {
             // Extension methods without model parameter use ViewData.Model to get Model.
-            var viewData =
-                expectedViewData ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
+            var viewData = expectedViewData
+                ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
             helper.SetupGet(h => h.ViewData).Returns(viewData).Verifiable();
         }
 

@@ -460,8 +460,8 @@ namespace Microsoft.Interop
                     return false;
                 if (current.MetadataName != typeNameParts[i])
                     return false;
-                current =
-                    (INamespaceOrTypeSymbol)current.ContainingType ?? current.ContainingNamespace;
+                current = (INamespaceOrTypeSymbol)current.ContainingType
+                    ?? current.ContainingNamespace;
             }
             return true;
         }

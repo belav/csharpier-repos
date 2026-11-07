@@ -245,8 +245,8 @@ namespace System.Data.Query.InternalTrees
             )
             {
                 // for enums unwrap the type if nullable
-                var propertyUnderlyingType =
-                    Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+                var propertyUnderlyingType = Nullable.GetUnderlyingType(prop.PropertyType)
+                    ?? prop.PropertyType;
                 Type propType = propertyUnderlyingType.IsEnum
                     ? propertyUnderlyingType.GetEnumUnderlyingType()
                     : prop.PropertyType;

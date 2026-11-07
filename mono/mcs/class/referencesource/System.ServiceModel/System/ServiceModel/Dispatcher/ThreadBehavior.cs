@@ -100,8 +100,8 @@ namespace System.ServiceModel.Dispatcher
         SynchronizationContext GetSyncContext(InstanceContext instanceContext)
         {
             Fx.Assert(instanceContext != null, "instanceContext is null !");
-            SynchronizationContext syncContext =
-                instanceContext.SynchronizationContext ?? this.context;
+            SynchronizationContext syncContext = instanceContext.SynchronizationContext
+                ?? this.context;
             return syncContext;
         }
 

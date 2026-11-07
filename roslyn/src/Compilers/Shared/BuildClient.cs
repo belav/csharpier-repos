@@ -184,8 +184,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
             if (hasShared)
             {
-                pipeName =
-                    pipeName ?? BuildServerConnection.GetPipeName(buildPaths.ClientDirectory);
+                pipeName = pipeName
+                    ?? BuildServerConnection.GetPipeName(buildPaths.ClientDirectory);
                 var libDirectory = Environment.GetEnvironmentVariable("LIB");
                 var serverResult = RunServerCompilation(
                     textWriter,

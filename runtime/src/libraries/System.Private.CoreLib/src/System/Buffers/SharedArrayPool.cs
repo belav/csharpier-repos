@@ -174,8 +174,8 @@ namespace System.Buffers
                 tla = new ThreadLocalArray(array);
                 if (prev is not null)
                 {
-                    Partitions partitionsForArraySize =
-                        _buckets[bucketIndex] ?? CreatePerCorePartitions(bucketIndex);
+                    Partitions partitionsForArraySize = _buckets[bucketIndex]
+                        ?? CreatePerCorePartitions(bucketIndex);
                     returned = partitionsForArraySize.TryPush(prev);
                 }
             }

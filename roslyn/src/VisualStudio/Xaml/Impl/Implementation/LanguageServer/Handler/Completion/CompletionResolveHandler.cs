@@ -72,8 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 ProjectId.CreateFromSerialized(data.ProjectGuid),
                 data.DocumentGuid
             );
-            var document =
-                context.Solution.GetDocument(documentId)
+            var document = context.Solution.GetDocument(documentId)
                 ?? context.Solution.GetAdditionalDocument(documentId);
             if (document == null)
             {

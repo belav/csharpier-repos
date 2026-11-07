@@ -721,13 +721,12 @@ namespace System.Net.WebSockets
             _closeStatus = closeStatus;
             _closeStatusDescription = statusDescription;
 
-            var closeTask =
-                BrowserInterop.WebSocketClose(
-                    _innerWebSocket!,
-                    (int)closeStatus,
-                    statusDescription,
-                    waitForCloseReceived
-                ) ?? Task.CompletedTask;
+            var closeTask = BrowserInterop.WebSocketClose(
+                _innerWebSocket!,
+                (int)closeStatus,
+                statusDescription,
+                waitForCloseReceived
+            ) ?? Task.CompletedTask;
             await CancelationHelper(closeTask, cancellationToken, FastState).ConfigureAwait(true);
 
 #if FEATURE_WASM_THREADS

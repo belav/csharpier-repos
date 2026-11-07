@@ -20,8 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
         public LogHubLspLogger(TraceConfiguration configuration, TraceSource traceSource)
         {
-            _configuration =
-                configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _configuration = configuration
+                ?? throw new ArgumentNullException(nameof(configuration));
             _traceSource = traceSource ?? throw new ArgumentNullException(nameof(traceSource));
         }
 

@@ -3795,8 +3795,8 @@ namespace System.Data.Objects
 
             // get the expected EDM type
             EdmType modelEdmType;
-            Type unwrappedTElement =
-                Nullable.GetUnderlyingType(typeof(TElement)) ?? typeof(TElement);
+            Type unwrappedTElement = Nullable.GetUnderlyingType(typeof(TElement))
+                ?? typeof(TElement);
             CollectionColumnMap columnMap;
             // for enums that are not in the model we use the enum underlying type
             if (

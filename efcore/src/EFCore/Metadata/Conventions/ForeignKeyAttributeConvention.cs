@@ -247,8 +247,8 @@ public class ForeignKeyAttributeConvention
             fkPropertiesOnPrincipalToDependent = null;
         }
 
-        var fkPropertiesOnNavigation =
-            fkPropertiesOnDependentToPrincipal ?? fkPropertiesOnPrincipalToDependent;
+        var fkPropertiesOnNavigation = fkPropertiesOnDependentToPrincipal
+            ?? fkPropertiesOnPrincipalToDependent;
         var upgradePrincipalToDependentNavigationSource =
             fkPropertiesOnPrincipalToDependent != null;
         var upgradeDependentToPrincipalNavigationSource =
@@ -323,8 +323,7 @@ public class ForeignKeyAttributeConvention
                     relationshipBuilder = newBuilder;
                     upgradePrincipalToDependentNavigationSource = false;
 
-                    fkPropertiesToSet =
-                        fkPropertiesOnDependentToPrincipal
+                    fkPropertiesToSet = fkPropertiesOnDependentToPrincipal
                         ?? new List<string> { fkPropertyOnDependent!.GetSimpleMemberName() };
                 }
 

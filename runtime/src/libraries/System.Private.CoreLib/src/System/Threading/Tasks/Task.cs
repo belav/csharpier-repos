@@ -200,8 +200,7 @@ namespace System.Threading.Tasks
                 "Null Task objects can't be added to the ActiveTasks collection"
             );
 
-            Dictionary<int, Task> activeTasks =
-                Volatile.Read(ref s_currentActiveTasks)
+            Dictionary<int, Task> activeTasks = Volatile.Read(ref s_currentActiveTasks)
                 ?? Interlocked.CompareExchange(
                     ref s_currentActiveTasks,
                     new Dictionary<int, Task>(),

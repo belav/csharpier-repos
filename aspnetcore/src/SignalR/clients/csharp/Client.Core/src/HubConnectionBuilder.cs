@@ -48,14 +48,12 @@ public class HubConnectionBuilder : IHubConnectionBuilder
         // The service provider is disposed by the HubConnection
         var serviceProvider = Services.BuildServiceProvider();
 
-        var connectionFactory =
-            serviceProvider.GetService<IConnectionFactory>()
+        var connectionFactory = serviceProvider.GetService<IConnectionFactory>()
             ?? throw new InvalidOperationException(
                 $"Cannot create {nameof(HubConnection)} instance. An {nameof(IConnectionFactory)} was not configured."
             );
 
-        var endPoint =
-            serviceProvider.GetService<EndPoint>()
+        var endPoint = serviceProvider.GetService<EndPoint>()
             ?? throw new InvalidOperationException(
                 $"Cannot create {nameof(HubConnection)} instance. An {nameof(EndPoint)} was not configured."
             );

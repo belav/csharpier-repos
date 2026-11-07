@@ -369,8 +369,7 @@ namespace IOperationGenerator
                 )
                 .ToList();
 
-            var unusedKinds =
-                _tree.UnusedOperationKinds.Entries?.Select(e => e.Value).ToList()
+            var unusedKinds = _tree.UnusedOperationKinds.Entries?.Select(e => e.Value).ToList()
                 ?? new List<int>();
 
             using var elementsToKindEnumerator = elementsToKind.GetEnumerator();
@@ -754,8 +753,7 @@ namespace IOperationGenerator
                 {
                     while (node.OperationKind?.Include == false)
                     {
-                        node =
-                            (AbstractNode?)_typeMap[node.Base]
+                        node = (AbstractNode?)_typeMap[node.Base]
                             ?? throw new InvalidOperationException(
                                 $"{node.Name} is not being included in OperationKind, but has no base type!"
                             );

@@ -39,8 +39,8 @@ namespace System.Web.Http
             HttpActionDescriptor actionDescriptor = null
         )
         {
-            HttpControllerContext context =
-                controllerContext ?? ContextUtil.CreateControllerContext();
+            HttpControllerContext context = controllerContext
+                ?? ContextUtil.CreateControllerContext();
             HttpActionDescriptor descriptor = actionDescriptor ?? CreateActionDescriptor();
             descriptor.ControllerDescriptor = context.ControllerDescriptor;
             return new HttpActionContext(context, descriptor);

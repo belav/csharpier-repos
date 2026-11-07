@@ -239,8 +239,7 @@ internal sealed class RegexLanguageDetector(
             return false;
         }
 
-        options =
-            GetOptionsFromSiblingArgument(argumentNode, semanticModel, cancellationToken)
+        options = GetOptionsFromSiblingArgument(argumentNode, semanticModel, cancellationToken)
             ?? default;
         return true;
     }

@@ -242,8 +242,8 @@ namespace ILCompiler
 
             private bool FormsCycle(TypeSystemEntity entity, out ModuleCycleInfo cycleInfo)
             {
-                EcmaModule ownerModule =
-                    (entity as EcmaType)?.EcmaModule ?? (entity as EcmaMethod)?.Module;
+                EcmaModule ownerModule = (entity as EcmaType)?.EcmaModule
+                    ?? (entity as EcmaMethod)?.Module;
                 if (ownerModule != null)
                 {
                     cycleInfo = _hashtable.GetOrCreateValue(ownerModule);
@@ -270,13 +270,11 @@ namespace ILCompiler
 
                 var ownerType = owner as TypeDesc;
                 var ownerMethod = owner as MethodDesc;
-                var ownerDefinition =
-                    ownerType?.GetTypeDefinition()
+                var ownerDefinition = ownerType?.GetTypeDefinition()
                     ?? (TypeSystemEntity)ownerMethod.GetTypicalMethodDefinition();
                 var referentType = referent as TypeDesc;
                 var referentMethod = referent as MethodDesc;
-                var referentDefinition =
-                    referentType?.GetTypeDefinition()
+                var referentDefinition = referentType?.GetTypeDefinition()
                     ?? (TypeSystemEntity)referentMethod.GetTypicalMethodDefinition();
 
                 // We don't track cycles in non-ecma entities.

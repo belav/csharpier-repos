@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             // go to a definition at some other location, rather than the definition they're on.
             // This can happen when a token is at a location that is both a reference and a definition.
             // For example, on an anonymous type member declaration.
-            var symbol =
-                semanticInfo.AliasSymbol
+            var symbol = semanticInfo.AliasSymbol
                 ?? semanticInfo.ReferencedSymbols.FirstOrDefault()
                 ?? semanticInfo.DeclaredSymbol
                 ?? semanticInfo.Type;

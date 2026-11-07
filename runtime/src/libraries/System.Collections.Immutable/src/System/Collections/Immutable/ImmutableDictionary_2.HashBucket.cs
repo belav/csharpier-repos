@@ -44,8 +44,8 @@ namespace System.Collections.Immutable
             )
             {
                 _firstValue = firstElement;
-                _additionalElements =
-                    additionalElements ?? ImmutableList<KeyValuePair<TKey, TValue>>.Node.EmptyNode;
+                _additionalElements = additionalElements
+                    ?? ImmutableList<KeyValuePair<TKey, TValue>>.Node.EmptyNode;
             }
 
             /// <summary>

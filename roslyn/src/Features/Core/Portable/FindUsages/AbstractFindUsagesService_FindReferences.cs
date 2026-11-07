@@ -298,8 +298,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var symbol =
-                semanticModel.GetSymbolInfo(token.Parent, cancellationToken).Symbol
+            var symbol = semanticModel.GetSymbolInfo(token.Parent, cancellationToken).Symbol
                 ?? semanticModel.GetDeclaredSymbol(token.Parent, cancellationToken);
 
             // Numeric labels are available in VB.  In that case we want the normal FAR engine to

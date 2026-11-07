@@ -129,11 +129,10 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         )
         {
             generator ??= new();
-            CSharpParseOptions parseOptions =
-                compilation
-                    .SyntaxTrees.OfType<CSharpSyntaxTree>()
-                    .Select(tree => tree.Options)
-                    .FirstOrDefault()
+            CSharpParseOptions parseOptions = compilation
+                .SyntaxTrees.OfType<CSharpSyntaxTree>()
+                .Select(tree => tree.Options)
+                .FirstOrDefault()
                 ?? s_defaultParseOptions;
 
             return

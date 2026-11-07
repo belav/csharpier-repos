@@ -1043,8 +1043,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             // Deep-copy the contentInfo since the real ContentInfo doesn't do this. This defends against a bad implementation changing
             // our "expectedContentInfo" to match what it produces.
-            expectedContentInfo =
-                expectedContentInfo
+            expectedContentInfo = expectedContentInfo
                 ?? new ContentInfo(
                     new Oid(contentInfo.ContentType),
                     (byte[])(contentInfo.Content.Clone())

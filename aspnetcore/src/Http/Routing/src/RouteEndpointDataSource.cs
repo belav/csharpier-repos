@@ -296,8 +296,8 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
 
         // Use the overridden RequestDelegate if it exists. If the overridden RequestDelegate is merely wrapping the final RequestDelegate,
         // it will still work because of the redirectRequestDelegate.
-        builder.RequestDelegate =
-            conventionOverriddenRequestDelegate ?? factoryCreatedRequestDelegate;
+        builder.RequestDelegate = conventionOverriddenRequestDelegate
+            ?? factoryCreatedRequestDelegate;
 
         entry.FinallyConventions.IsReadOnly = true;
         foreach (var entryFinallyConvention in entry.FinallyConventions)

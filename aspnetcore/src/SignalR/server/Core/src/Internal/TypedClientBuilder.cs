@@ -193,8 +193,7 @@ internal static class TypedClientBuilder<T>
             paramTypes = paramTypes.Take(paramTypes.Length - 1).ToArray();
         }
 
-        var methodName =
-            interfaceMethodInfo.GetCustomAttribute<HubMethodNameAttribute>()?.Name
+        var methodName = interfaceMethodInfo.GetCustomAttribute<HubMethodNameAttribute>()?.Name
             ?? interfaceMethodInfo.Name;
 
         var generator = methodBuilder.GetILGenerator();

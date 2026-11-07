@@ -131,8 +131,8 @@ namespace System.ServiceModel.Security
         {
             if (this.Factory.ActAsInitiator)
             {
-                SecurityTokenProvider provider =
-                    this.initiatorSymmetricTokenProvider ?? this.initiatorAsymmetricTokenProvider;
+                SecurityTokenProvider provider = this.initiatorSymmetricTokenProvider
+                    ?? this.initiatorAsymmetricTokenProvider;
                 if (provider != null)
                 {
                     SecurityUtils.AbortTokenProviderIfRequired(provider);
@@ -152,8 +152,8 @@ namespace System.ServiceModel.Security
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (this.Factory.ActAsInitiator)
             {
-                SecurityTokenProvider provider =
-                    this.initiatorSymmetricTokenProvider ?? this.initiatorAsymmetricTokenProvider;
+                SecurityTokenProvider provider = this.initiatorSymmetricTokenProvider
+                    ?? this.initiatorAsymmetricTokenProvider;
                 if (provider != null)
                 {
                     SecurityUtils.CloseTokenProviderIfRequired(

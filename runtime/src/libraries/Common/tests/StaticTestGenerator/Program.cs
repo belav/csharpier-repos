@@ -422,8 +422,8 @@ namespace StaticTestGenerator
                                         // For a [MemberData(...)], it might point to a method, property, or field; get the right
                                         // piece of metadata.  Also, for methods, there might be data to pass to the method
                                         // when invoking it; store that as well.
-                                        Type memberDataType =
-                                            memberData.MemberType ?? testMethod.DeclaringType!;
+                                        Type memberDataType = memberData.MemberType
+                                            ?? testMethod.DeclaringType!;
 
                                         MethodInfo? testDataMethod = memberDataType.GetMethod(
                                             memberData.MemberName,

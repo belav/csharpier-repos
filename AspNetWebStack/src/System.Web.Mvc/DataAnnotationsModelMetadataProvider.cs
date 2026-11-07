@@ -43,11 +43,9 @@ namespace System.Web.Mvc
 
             // We prefer [UIHint("...", PresentationLayer = "MVC")] but will fall back to [UIHint("...")]
             IEnumerable<UIHintAttribute> uiHintAttributes = attributeList.OfType<UIHintAttribute>();
-            UIHintAttribute uiHintAttribute =
-                uiHintAttributes.FirstOrDefault(a =>
-                    String.Equals(a.PresentationLayer, "MVC", StringComparison.OrdinalIgnoreCase)
-                )
-                ?? uiHintAttributes.FirstOrDefault(a => String.IsNullOrEmpty(a.PresentationLayer));
+            UIHintAttribute uiHintAttribute = uiHintAttributes.FirstOrDefault(a =>
+                String.Equals(a.PresentationLayer, "MVC", StringComparison.OrdinalIgnoreCase)
+            ) ?? uiHintAttributes.FirstOrDefault(a => String.IsNullOrEmpty(a.PresentationLayer));
             if (uiHintAttribute != null)
             {
                 result.TemplateHint = uiHintAttribute.UIHint;

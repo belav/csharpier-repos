@@ -23,8 +23,7 @@ public class TestingInfrastructureTests
         WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting> fixture
     )
     {
-        Factory =
-            fixture.Factories.FirstOrDefault()
+        Factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = Factory.CreateClient();
     }

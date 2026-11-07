@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             bool assertIsForeground = false
         )
         {
-            _threadingContext =
-                threadingContext ?? throw new ArgumentNullException(nameof(threadingContext));
+            _threadingContext = threadingContext
+                ?? throw new ArgumentNullException(nameof(threadingContext));
 
             // ForegroundThreadAffinitizedObject might not necessarily be created on a foreground thread.
             // AssertIsForeground here only if the object must be created on a foreground thread.

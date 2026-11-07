@@ -220,8 +220,7 @@ namespace System.Net.Http
 
                 // Since the underlying byte[] will never be exposed, we use an ArrayPool-backed
                 // stream to which we copy all of the data from the response.
-                using Stream responseStream =
-                    c.TryReadAsStream()
+                using Stream responseStream = c.TryReadAsStream()
                     ?? await c.ReadAsStreamAsync(cts.Token).ConfigureAwait(false);
                 using var buffer = new HttpContent.LimitArrayPoolWriteStream(
                     _maxResponseContentBufferSize,
@@ -336,8 +335,7 @@ namespace System.Net.Http
                     )
                     : new HttpContent.LimitArrayPoolWriteStream(_maxResponseContentBufferSize);
 
-                using Stream responseStream =
-                    c.TryReadAsStream()
+                using Stream responseStream = c.TryReadAsStream()
                     ?? await c.ReadAsStreamAsync(cts.Token).ConfigureAwait(false);
                 try
                 {

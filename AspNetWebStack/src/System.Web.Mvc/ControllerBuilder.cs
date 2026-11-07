@@ -20,8 +20,7 @@ namespace System.Web.Mvc
 
         internal ControllerBuilder(IResolver<IControllerFactory> serviceResolver)
         {
-            _serviceResolver =
-                serviceResolver
+            _serviceResolver = serviceResolver
                 ?? new SingleServiceResolver<IControllerFactory>(
                     () => _factoryThunk(),
                     new DefaultControllerFactory { ControllerBuilder = this },

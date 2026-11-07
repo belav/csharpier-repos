@@ -197,11 +197,10 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
             //  Look up the value from the new roamed theme property first
             //  Fallback to the original roamed theme property if that fails
-            var currentThemeString =
-                settingsManager.GetValueOrDefault<string?>(
-                    ColorThemeNewValueName,
-                    defaultValue: null
-                )
+            var currentThemeString = settingsManager.GetValueOrDefault<string?>(
+                ColorThemeNewValueName,
+                defaultValue: null
+            )
                 ?? settingsManager.GetValueOrDefault<string?>(
                     ColorThemeValueName,
                     defaultValue: null

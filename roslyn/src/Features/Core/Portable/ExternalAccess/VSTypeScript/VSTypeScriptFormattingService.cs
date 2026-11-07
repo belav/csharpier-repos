@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [Import(AllowDefault = true)] IVSTypeScriptFormattingServiceImplementation impl
     ) : IFormattingService
     {
-        private readonly IVSTypeScriptFormattingServiceImplementation _impl =
-            impl ?? throw new ArgumentNullException(nameof(impl));
+        private readonly IVSTypeScriptFormattingServiceImplementation _impl = impl
+            ?? throw new ArgumentNullException(nameof(impl));
 
         public Task<Document> FormatAsync(
             Document document,

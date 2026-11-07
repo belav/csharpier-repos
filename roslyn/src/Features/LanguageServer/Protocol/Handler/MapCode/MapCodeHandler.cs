@@ -96,8 +96,7 @@ internal sealed class MapCodeHandler : ILspServiceRequestHandler<MapCodeParams, 
 
         async Task<(Uri, TextEdit[])?> MapCodeAsync(LSP.MapCodeMapping codeMapping)
         {
-            var textDocument =
-                codeMapping.TextDocument
+            var textDocument = codeMapping.TextDocument
                 ?? throw new ArgumentException(
                     $"mapCode sub-request failed: MapCodeMapping.TextDocument not expected to be null."
                 );

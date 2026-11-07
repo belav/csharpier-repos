@@ -620,8 +620,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 case ErrorCode.ERR_NameNotInContextPossibleMissingReference: // Probably can't happen.
                     foreach (var argument in arguments)
                     {
-                        var identity =
-                            (argument as AssemblyIdentity)
+                        var identity = (argument as AssemblyIdentity)
                             ?? (argument as AssemblySymbol)?.Identity;
                         if (
                             identity != null

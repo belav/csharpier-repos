@@ -434,8 +434,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 // If we happen to get the result of the error task before the refactoring task,
                 // and that result is non-null, we can just cancel the refactoring task.
-                var result =
-                    await errorTask.ConfigureAwait(false)
+                var result = await errorTask.ConfigureAwait(false)
                     ?? await refactoringTask.ConfigureAwait(false);
                 linkedTokenSource.Cancel();
 

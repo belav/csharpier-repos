@@ -720,8 +720,7 @@ namespace Microsoft.CodeAnalysis.Remote
                         oldDocumentChecksums.Checksum == newDocumentChecksums.Checksum
                     );
 
-                    var document =
-                        project.GetDocument(documentId)
+                    var document = project.GetDocument(documentId)
                         ?? project.GetAdditionalDocument(documentId)
                         ?? project.GetAnalyzerConfigDocument(documentId);
                     Contract.ThrowIfNull(document);

@@ -436,8 +436,7 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                     primaryConstructorDeclaration.SyntaxTree
                 );
 
-                var body =
-                    primaryConstructorDeclaration.ExpressionBody
+                var body = primaryConstructorDeclaration.ExpressionBody
                     ?? (SyntaxNode?)primaryConstructorDeclaration.Body;
                 if (body?.ContainsDirectives is true)
                     return false;

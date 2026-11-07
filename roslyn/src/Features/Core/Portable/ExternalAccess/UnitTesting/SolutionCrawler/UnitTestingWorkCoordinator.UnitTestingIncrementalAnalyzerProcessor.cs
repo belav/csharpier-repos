@@ -362,8 +362,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     ReportPendingWorkItemCount();
 
                     // Check if the work item is specific to some incremental analyzer(s).
-                    var analyzersToExecute =
-                        workItem.GetApplicableAnalyzers(analyzers) ?? analyzers;
+                    var analyzersToExecute = workItem.GetApplicableAnalyzers(analyzers)
+                        ?? analyzers;
                     foreach (var analyzer in analyzersToExecute)
                     {
                         if (cancellationToken.IsCancellationRequested)

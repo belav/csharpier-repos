@@ -123,8 +123,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             PackageResolver = packageResolver;
             GacFileResolver = gacFileResolver;
 
-            _fileReferenceProvider =
-                fileReferenceProvider
+            _fileReferenceProvider = fileReferenceProvider
                 ?? new Func<string, MetadataReferenceProperties, PortableExecutableReference>(
                     (path, properties) => MetadataReference.CreateFromFile(path, properties)
                 );

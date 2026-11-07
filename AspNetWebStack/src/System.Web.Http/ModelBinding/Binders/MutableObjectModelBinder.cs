@@ -112,8 +112,8 @@ namespace System.Web.Http.ModelBinding.Binders
             IEnumerable<ModelMetadata> propertyMetadatas
         )
         {
-            ModelMetadataProvider metadataProvider =
-                MetadataProvider ?? actionContext.GetMetadataProvider();
+            ModelMetadataProvider metadataProvider = MetadataProvider
+                ?? actionContext.GetMetadataProvider();
 
             // create a DTO and call into the DTO binder
             ComplexModelDto originalDto = new ComplexModelDto(

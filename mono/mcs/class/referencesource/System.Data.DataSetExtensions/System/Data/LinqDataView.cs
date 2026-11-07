@@ -42,8 +42,8 @@ namespace System.Data
             : base(table)
         {
             Debug.Assert(table != null, "null DataTable");
-            this.sortExpressionBuilder =
-                sortExpressionBuilder ?? new SortExpressionBuilder<DataRow>();
+            this.sortExpressionBuilder = sortExpressionBuilder
+                ?? new SortExpressionBuilder<DataRow>();
         }
 
         //I have two forms of predicate because I need to pass in null if predicate is null. Otherwise I need to convert it into delegate and pass it into

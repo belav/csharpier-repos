@@ -960,11 +960,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             var compilation = ThreadingContext.JoinableTaskFactory.Run(() =>
                 document.Project.GetRequiredCompilationAsync(CancellationToken.None)
             );
-            var newSymbolKey =
-                (
-                    e.NewModel.SelectedItem
-                    as AbstractSignatureHelpProvider.SymbolKeySignatureHelpItem
-                )?.SymbolKey
+            var newSymbolKey = (
+                e.NewModel.SelectedItem as AbstractSignatureHelpProvider.SymbolKeySignatureHelpItem
+            )?.SymbolKey
                 ?? default;
             var newSymbol = newSymbolKey
                 .Resolve(compilation, cancellationToken: CancellationToken.None)
@@ -1076,8 +1074,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return;
             }
 
-            var firstField =
-                _state._method?.Parameters.FirstOrDefault()?.Name ?? PlaceholderSnippetField;
+            var firstField = _state._method?.Parameters.FirstOrDefault()?.Name
+                ?? PlaceholderSnippetField;
             if (ExpansionSession.GetFieldSpan(firstField, textSpan) != VSConstants.S_OK)
             {
                 return;
@@ -1087,8 +1085,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             adjustedTextSpan.iStartLine = textSpan[0].iStartLine;
             adjustedTextSpan.iStartIndex = textSpan[0].iStartIndex;
 
-            var lastField =
-                _state._method?.Parameters.LastOrDefault()?.Name ?? PlaceholderSnippetField;
+            var lastField = _state._method?.Parameters.LastOrDefault()?.Name
+                ?? PlaceholderSnippetField;
             if (ExpansionSession.GetFieldSpan(lastField, textSpan) != VSConstants.S_OK)
             {
                 return;

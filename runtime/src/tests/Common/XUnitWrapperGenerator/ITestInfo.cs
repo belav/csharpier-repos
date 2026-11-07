@@ -43,8 +43,8 @@ public sealed class BasicTestMethod : ITestInfo
         );
         Method = method.Name;
         DisplayNameForFiltering = $"{ContainingType}.{Method}({args})";
-        TestNameExpression =
-            displayNameExpression ?? $"\"{externAlias}::{ContainingType}.{Method}({args})\"";
+        TestNameExpression = displayNameExpression
+            ?? $"\"{externAlias}::{ContainingType}.{Method}({args})\"";
 
         if (method.IsStatic)
         {

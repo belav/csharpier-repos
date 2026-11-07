@@ -1929,8 +1929,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(
                     (object)iteratorStateMachine == null || (object)asyncStateMachine == null
                 );
-                stateMachineTypeOpt =
-                    (StateMachineTypeSymbol)iteratorStateMachine ?? asyncStateMachine;
+                stateMachineTypeOpt = (StateMachineTypeSymbol)iteratorStateMachine
+                    ?? asyncStateMachine;
 
                 return bodyWithoutAsync;
             }

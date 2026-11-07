@@ -287,10 +287,9 @@ namespace Internal.IL
                     EmbeddedSignatureDataKind.OptionalCustomModifier,
                 };
 
-                var declData =
-                    declSig.GetEmbeddedSignatureData(kinds) ?? Array.Empty<EmbeddedSignatureData>();
-                var maybeData =
-                    maybeSig.GetEmbeddedSignatureData(kinds)
+                var declData = declSig.GetEmbeddedSignatureData(kinds)
+                    ?? Array.Empty<EmbeddedSignatureData>();
+                var maybeData = maybeSig.GetEmbeddedSignatureData(kinds)
                     ?? Array.Empty<EmbeddedSignatureData>();
                 if (declData.Length != maybeData.Length)
                 {

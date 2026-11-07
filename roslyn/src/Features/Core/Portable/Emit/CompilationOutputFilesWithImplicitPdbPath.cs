@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.Emit
             }
 
             // First try to use the full path as specified in the PDB, then look next to the assembly.
-            var pdbStream =
-                TryOpenFileStream(pdbPath)
+            var pdbStream = TryOpenFileStream(pdbPath)
                 ?? TryOpenFileStream(
                     Path.Combine(
                         Path.GetDirectoryName(AssemblyFilePath)!,
