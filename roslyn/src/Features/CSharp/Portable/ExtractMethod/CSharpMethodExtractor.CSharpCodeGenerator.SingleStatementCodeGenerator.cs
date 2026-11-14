@@ -22,9 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 CSharpSelectionResult selectionResult,
                 AnalyzerResult analyzerResult,
                 CSharpCodeGenerationOptions options,
-                bool localFunction) : CSharpCodeGenerator(selectionResult, analyzerResult, options, localFunction)
+                bool localFunction
+            ) : CSharpCodeGenerator(selectionResult, analyzerResult, options, localFunction)
             {
-                protected override SyntaxToken CreateMethodName() => GenerateMethodNameForStatementGenerators();
+                protected override SyntaxToken CreateMethodName() =>
+                    GenerateMethodNameForStatementGenerators();
 
                 protected override ImmutableArray<StatementSyntax> GetInitialStatementsForMethodDefinitions()
                 {
@@ -33,8 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return ImmutableArray.Create(this.SelectionResult.GetFirstStatement());
                 }
 
-                protected override SyntaxNode GetFirstStatementOrInitializerSelectedAtCallSite()
-                    => this.SelectionResult.GetFirstStatement();
+                protected override SyntaxNode GetFirstStatementOrInitializerSelectedAtCallSite() =>
+                    this.SelectionResult.GetFirstStatement();
 
                 protected override SyntaxNode GetLastStatementOrInitializerSelectedAtCallSite()
                 {
@@ -43,10 +45,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return this.SelectionResult.GetFirstStatement();
                 }
 
-                protected override Task<SyntaxNode> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(CancellationToken cancellationToken)
+                protected override Task<SyntaxNode> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
+                    CancellationToken cancellationToken
+                )
                 {
                     var statement = GetStatementContainingInvocationToExtractedMethodWorker();
-                    return Task.FromResult<SyntaxNode>(statement.WithAdditionalAnnotations(CallSiteAnnotation));
+                    return Task.FromResult<SyntaxNode>(
+                        statement.WithAdditionalAnnotations(CallSiteAnnotation)
+                    );
                 }
             }
         }

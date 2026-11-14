@@ -17,11 +17,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         // if we ever have an app where multiple threads need to use this with each thread operating
         // on trees from a different language. We will need to fix this if we ever need to write app
         // test that does something like this.
-        public static ISyntaxNodeKindProvider KindProvider
-        {
-            get;
-            set;
-        }
+        public static ISyntaxNodeKindProvider KindProvider { get; set; }
 
         public static string GetKind(this SyntaxNodeOrToken n)
         {
@@ -45,13 +41,20 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public static bool IsIdentifier(this SyntaxToken n)
         {
-            return n.GetKind().Contains("Identifier") && n.Parent != null && n.Parent.GetKind().Contains("Name");
+            return n.GetKind().Contains("Identifier")
+                && n.Parent != null
+                && n.Parent.GetKind().Contains("Name");
         }
 
         public static bool IsKeyword(this SyntaxToken n)
         {
             var kind = n.GetKind();
-            return kind.EndsWith("Keyword", StringComparison.Ordinal) || (kind.Contains("Identifier") && n.Parent != null && !n.Parent.GetKind().Contains("Name"));
+            return kind.EndsWith("Keyword", StringComparison.Ordinal)
+                || (
+                    kind.Contains("Identifier")
+                    && n.Parent != null
+                    && !n.Parent.GetKind().Contains("Name")
+                );
         }
 
         public static bool IsLiteral(this SyntaxToken n)
@@ -149,10 +152,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var typeObject = node.GetType();
             var nodeClassName = typeObject.Name;
             var properties = typeObject.GetTypeInfo().DeclaredProperties;
-            return new NodeInfo(typeObject.Name, (
-                from p in properties
-                where IsField(p)
-                select GetFieldInfo(p, node)).ToArray());
+            return new NodeInfo(
+                typeObject.Name,
+                (from p in properties where IsField(p) select GetFieldInfo(p, node)).ToArray()
+            );
         }
 
         public static NodeInfo GetNodeInfo(this SyntaxToken token)
@@ -160,10 +163,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var typeObject = token.GetType();
             var nodeClassName = typeObject.Name;
             var properties = typeObject.GetTypeInfo().DeclaredProperties;
-            return new NodeInfo(typeObject.Name, (
-                from p in properties
-                where IsField(p)
-                select GetFieldInfo(p, token)).ToArray());
+            return new NodeInfo(
+                typeObject.Name,
+                (from p in properties where IsField(p) select GetFieldInfo(p, token)).ToArray()
+            );
         }
 
         public static NodeInfo GetNodeInfo(this SyntaxTrivia trivia)
@@ -171,28 +174,30 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var typeObject = trivia.GetType();
             var nodeClassName = typeObject.Name;
             var properties = typeObject.GetTypeInfo().DeclaredProperties;
-            return new NodeInfo(typeObject.Name, (
-                from p in properties
-                where IsField(p)
-                select GetFieldInfo(p, trivia)).ToArray());
+            return new NodeInfo(
+                typeObject.Name,
+                (from p in properties where IsField(p) select GetFieldInfo(p, trivia)).ToArray()
+            );
         }
 
         //Does this property refer to a field?
         private static bool IsField(PropertyInfo prop)
         {
             var typeObject = prop.PropertyType;
-            if (typeObject == typeof(int) ||
-                typeObject == typeof(uint) ||
-                typeObject == typeof(long) ||
-                typeObject == typeof(ulong) ||
-                typeObject == typeof(bool) ||
-                typeObject == typeof(string) ||
-                typeObject == typeof(float) ||
-                typeObject == typeof(double) ||
-                typeObject == typeof(char) ||
-                typeObject == typeof(DateTime) ||
-                typeObject == typeof(decimal) ||
-                typeObject.GetTypeInfo().IsEnum)
+            if (
+                typeObject == typeof(int)
+                || typeObject == typeof(uint)
+                || typeObject == typeof(long)
+                || typeObject == typeof(ulong)
+                || typeObject == typeof(bool)
+                || typeObject == typeof(string)
+                || typeObject == typeof(float)
+                || typeObject == typeof(double)
+                || typeObject == typeof(char)
+                || typeObject == typeof(DateTime)
+                || typeObject == typeof(decimal)
+                || typeObject.GetTypeInfo().IsEnum
+            )
             {
                 return true;
             }
@@ -217,7 +222,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         //Only called if IsField returns true. Get the name/type/value of this field and packages into a FieldInfo.
         private static NodeInfo.FieldInfo GetFieldInfo(PropertyInfo prop, SyntaxTrivia trivia)
         {
-            return new NodeInfo.FieldInfo(prop.Name, prop.PropertyType, prop.GetValue(trivia, null));
+            return new NodeInfo.FieldInfo(
+                prop.Name,
+                prop.PropertyType,
+                prop.GetValue(trivia, null)
+            );
         }
     }
 }

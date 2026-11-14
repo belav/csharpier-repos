@@ -12,13 +12,22 @@ public class SetLastErrorTest
         private const string SetError = nameof(SetError);
 
         [DllImport(nameof(SetLastErrorNative), EntryPoint = SetError)]
-        public static extern void SetError_Default(int error, [MarshalAs(UnmanagedType.U1)] bool shouldSetError);
+        public static extern void SetError_Default(
+            int error,
+            [MarshalAs(UnmanagedType.U1)] bool shouldSetError
+        );
 
         [DllImport(nameof(SetLastErrorNative), EntryPoint = SetError, SetLastError = false)]
-        public static extern void SetError_False(int error, [MarshalAs(UnmanagedType.U1)] bool shouldSetError);
+        public static extern void SetError_False(
+            int error,
+            [MarshalAs(UnmanagedType.U1)] bool shouldSetError
+        );
 
         [DllImport(nameof(SetLastErrorNative), EntryPoint = SetError, SetLastError = true)]
-        public static extern void SetError_True(int error, [MarshalAs(UnmanagedType.U1)] bool shouldSetError);
+        public static extern void SetError_True(
+            int error,
+            [MarshalAs(UnmanagedType.U1)] bool shouldSetError
+        );
     }
 
     public static void LastErrorHasExpectedValue()

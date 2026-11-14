@@ -15,19 +15,23 @@
 */
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Xunit;
 
 namespace BenchmarksGame
 {
     public class FannkuchRedux_5
     {
-        static int[] fact, chkSums, maxFlips;
+        static int[] fact,
+            chkSums,
+            maxFlips;
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void firstPermutation(int[] p, int[] pp, int[] count, int idx)
         {
-            for (int i = 0; i < p.Length; ++i) p[i] = i;
+            for (int i = 0; i < p.Length; ++i)
+                p[i] = i;
             for (int i = count.Length - 1; i > 0; --i)
             {
                 int d = idx / fact[i];
@@ -35,8 +39,10 @@ namespace BenchmarksGame
                 if (d > 0)
                 {
                     idx = idx % fact[i];
-                    for (int j = i; j >= 0; --j) pp[j] = p[j];
-                    for (int j = 0; j <= i; ++j) p[j] = pp[(j + d) % (i + 1)];
+                    for (int j = i; j >= 0; --j)
+                        pp[j] = p[j];
+                    for (int j = 0; j <= i; ++j)
+                        p[j] = pp[(j + d) % (i + 1)];
                 }
             }
         }
@@ -53,7 +59,8 @@ namespace BenchmarksGame
                 count[i++] = 0;
                 int next = p[1];
                 p[0] = next;
-                for (int j = 1; j < i;) p[j] = p[++j];
+                for (int j = 1; j < i; )
+                    p[j] = p[++j];
                 p[i] = first;
                 first = next;
             }
@@ -63,9 +70,12 @@ namespace BenchmarksGame
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static int countFlips(int first, int[] p, int[] pp)
         {
-            if (first == 0) return 0;
-            if (p[first] == 0) return 1;
-            for (int i = 0; i < pp.Length; i++) pp[i] = p[i];
+            if (first == 0)
+                return 0;
+            if (p[first] == 0)
+                return 1;
+            for (int i = 0; i < pp.Length; i++)
+                pp[i] = p[i];
             int flips = 2;
             while (true)
             {
@@ -76,7 +86,8 @@ namespace BenchmarksGame
                     pp[hi] = t;
                 }
                 int tp = pp[first];
-                if (pp[tp] == 0) return flips;
+                if (pp[tp] == 0)
+                    return flips;
                 pp[first] = first;
                 first = tp;
                 flips++;
@@ -85,7 +96,9 @@ namespace BenchmarksGame
 
         static void run(int n, int taskId, int taskSize)
         {
-            int[] p = new int[n], pp = new int[n], count = new int[n];
+            int[] p = new int[n],
+                pp = new int[n],
+                count = new int[n];
             firstPermutation(p, pp, count, taskId * taskSize);
             int chksum = countFlips(p[0], p, pp);
             int maxflips = chksum;
@@ -93,7 +106,8 @@ namespace BenchmarksGame
             {
                 var flips = countFlips(nextPermutation(p, count), p, pp);
                 chksum += (1 - (taskSize % 2) * 2) * flips;
-                if (flips > maxflips) maxflips = flips;
+                if (flips > maxflips)
+                    maxflips = flips;
             }
             chkSums[taskId] = chksum;
             maxFlips[taskId] = maxflips;
@@ -122,7 +136,10 @@ namespace BenchmarksGame
             fact = new int[n + 1];
             fact[0] = 1;
             var factn = 1;
-            for (int i = 1; i < fact.Length; i++) { fact[i] = factn *= i; }
+            for (int i = 1; i < fact.Length; i++)
+            {
+                fact[i] = factn *= i;
+            }
 
             // For n == 7 and nTasks > 8, the algorithm returns chkSum != 228
             // Hence, we restrict the processor count to 8 to get consistency on
@@ -139,14 +156,17 @@ namespace BenchmarksGame
                 (threads[j] = new Thread(() => run(n, j, taskSize))).Start();
             }
             run(n, 0, taskSize);
-            int chksum = chkSums[0], maxflips = maxFlips[0];
+            int chksum = chkSums[0],
+                maxflips = maxFlips[0];
             for (int i = 1; i < threads.Length; i++)
             {
                 threads[i].Join();
                 chksum += chkSums[i];
-                if (maxFlips[i] > maxflips) maxflips = maxFlips[i];
+                if (maxFlips[i] > maxflips)
+                    maxflips = maxFlips[i];
             }
-            if (verbose) Console.Out.WriteLineAsync(chksum + "\nPfannkuchen(" + n + ") = " + maxflips);
+            if (verbose)
+                Console.Out.WriteLineAsync(chksum + "\nPfannkuchen(" + n + ") = " + maxflips);
 
             return maxflips;
         }

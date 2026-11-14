@@ -31,69 +31,69 @@ internal static partial class Interop
         // Defines from proc_info.h
         internal enum ThreadRunState
         {
-            TH_STATE_RUNNING            = 1,
-            TH_STATE_STOPPED            = 2,
-            TH_STATE_WAITING            = 3,
-            TH_STATE_UNINTERRUPTIBLE    = 4,
-            TH_STATE_HALTED             = 5
+            TH_STATE_RUNNING = 1,
+            TH_STATE_STOPPED = 2,
+            TH_STATE_WAITING = 3,
+            TH_STATE_UNINTERRUPTIBLE = 4,
+            TH_STATE_HALTED = 5,
         }
 
         // Defines in proc_info.h
         [Flags]
         internal enum ThreadFlags
         {
-            TH_FLAGS_SWAPPED    = 0x1,
-            TH_FLAGS_IDLE       = 0x2
+            TH_FLAGS_SWAPPED = 0x1,
+            TH_FLAGS_IDLE = 0x2,
         }
 
         // from sys\resource.h
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct rusage_info_v3
         {
-            internal fixed byte     ri_uuid[16];
-            internal ulong          ri_user_time;
-            internal ulong          ri_system_time;
-            internal ulong          ri_pkg_idle_wkups;
-            internal ulong          ri_interrupt_wkups;
-            internal ulong          ri_pageins;
-            internal ulong          ri_wired_size;
-            internal ulong          ri_resident_size;
-            internal ulong          ri_phys_footprint;
-            internal ulong          ri_proc_start_abstime;
-            internal ulong          ri_proc_exit_abstime;
-            internal ulong          ri_child_user_time;
-            internal ulong          ri_child_system_time;
-            internal ulong          ri_child_pkg_idle_wkups;
-            internal ulong          ri_child_interrupt_wkups;
-            internal ulong          ri_child_pageins;
-            internal ulong          ri_child_elapsed_abstime;
-            internal ulong          ri_diskio_bytesread;
-            internal ulong          ri_diskio_byteswritten;
-            internal ulong          ri_cpu_time_qos_default;
-            internal ulong          ri_cpu_time_qos_maintenance;
-            internal ulong          ri_cpu_time_qos_background;
-            internal ulong          ri_cpu_time_qos_utility;
-            internal ulong          ri_cpu_time_qos_legacy;
-            internal ulong          ri_cpu_time_qos_user_initiated;
-            internal ulong          ri_cpu_time_qos_user_interactive;
-            internal ulong          ri_billed_system_time;
-            internal ulong          ri_serviced_system_time;
+            internal fixed byte ri_uuid[16];
+            internal ulong ri_user_time;
+            internal ulong ri_system_time;
+            internal ulong ri_pkg_idle_wkups;
+            internal ulong ri_interrupt_wkups;
+            internal ulong ri_pageins;
+            internal ulong ri_wired_size;
+            internal ulong ri_resident_size;
+            internal ulong ri_phys_footprint;
+            internal ulong ri_proc_start_abstime;
+            internal ulong ri_proc_exit_abstime;
+            internal ulong ri_child_user_time;
+            internal ulong ri_child_system_time;
+            internal ulong ri_child_pkg_idle_wkups;
+            internal ulong ri_child_interrupt_wkups;
+            internal ulong ri_child_pageins;
+            internal ulong ri_child_elapsed_abstime;
+            internal ulong ri_diskio_bytesread;
+            internal ulong ri_diskio_byteswritten;
+            internal ulong ri_cpu_time_qos_default;
+            internal ulong ri_cpu_time_qos_maintenance;
+            internal ulong ri_cpu_time_qos_background;
+            internal ulong ri_cpu_time_qos_utility;
+            internal ulong ri_cpu_time_qos_legacy;
+            internal ulong ri_cpu_time_qos_user_initiated;
+            internal ulong ri_cpu_time_qos_user_interactive;
+            internal ulong ri_billed_system_time;
+            internal ulong ri_serviced_system_time;
         }
 
         // From proc_info.h
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct proc_threadinfo
         {
-            internal ulong      pth_user_time;
-            internal ulong      pth_system_time;
-            internal int        pth_cpu_usage;
-            internal int        pth_policy;
-            internal int        pth_run_state;
-            internal int        pth_flags;
-            internal int        pth_sleep_time;
-            internal int        pth_curpri;
-            internal int        pth_priority;
-            internal int        pth_maxpriority;
+            internal ulong pth_user_time;
+            internal ulong pth_system_time;
+            internal int pth_cpu_usage;
+            internal int pth_policy;
+            internal int pth_run_state;
+            internal int pth_flags;
+            internal int pth_sleep_time;
+            internal int pth_curpri;
+            internal int pth_priority;
+            internal int pth_maxpriority;
             internal fixed byte pth_name[MAXTHREADNAMESIZE];
         }
 
@@ -111,9 +111,7 @@ internal static partial class Interop
         /// <param name="buffersize">The length of the block of memory allocated for the PID array</param>
         /// <returns>Returns the number of elements (PIDs) in the buffer</returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_listallpids(
-            int*    pBuffer,
-            int     buffersize);
+        private static unsafe partial int proc_listallpids(int* pBuffer, int buffersize);
 
         /// <summary>
         /// Queries the OS for the list of all running processes and returns the PID for each
@@ -154,8 +152,7 @@ internal static partial class Interop
                         throw new Win32Exception(SR.CantGetAllPids);
                     }
                 }
-            }
-            while (numProcesses == processes.Length);
+            } while (numProcesses == processes.Length);
 
             // Remove extra elements
             Array.Resize<int>(ref processes, numProcesses);
@@ -182,7 +179,8 @@ internal static partial class Interop
             int flavor,
             ulong arg,
             proc_threadinfo* buffer,
-            int bufferSize);
+            int bufferSize
+        );
 
         /// <summary>
         /// Gets information about a process given it's PID
@@ -203,7 +201,8 @@ internal static partial class Interop
             int flavor,
             ulong arg,
             proc_fdinfo* buffer,
-            int bufferSize);
+            int bufferSize
+        );
 
         /// <summary>
         /// Gets information about a process given it's PID
@@ -224,7 +223,8 @@ internal static partial class Interop
             int flavor,
             ulong arg,
             ulong* buffer,
-            int bufferSize);
+            int bufferSize
+        );
 
         /// <summary>
         /// Gets the thread information for the given thread
@@ -250,7 +250,9 @@ internal static partial class Interop
             return (result == size ? new proc_threadinfo?(info) : null);
         }
 
-        internal static unsafe List<KeyValuePair<ulong, proc_threadinfo?>> GetAllThreadsInProcess(int pid)
+        internal static unsafe List<KeyValuePair<ulong, proc_threadinfo?>> GetAllThreadsInProcess(
+            int pid
+        )
         {
             // Negative PIDs are invalid
             ArgumentOutOfRangeException.ThrowIfNegative(pid);
@@ -268,7 +270,13 @@ internal static partial class Interop
                 threadIds = new ulong[size];
                 fixed (ulong* pBuffer = &threadIds[0])
                 {
-                    result = proc_pidinfo(pid, PROC_PIDLISTTHREADS, 0, pBuffer, sizeof(ulong) * threadIds.Length);
+                    result = proc_pidinfo(
+                        pid,
+                        PROC_PIDLISTTHREADS,
+                        0,
+                        pBuffer,
+                        sizeof(ulong) * threadIds.Length
+                    );
                 }
 
                 if (result <= 0)
@@ -285,8 +293,7 @@ internal static partial class Interop
                         size *= 2;
                     }
                 }
-            }
-            while (result == sizeof(ulong) * threadIds.Length);
+            } while (result == sizeof(ulong) * threadIds.Length);
 
             Debug.Assert((result % sizeof(ulong)) == 0);
 
@@ -295,7 +302,12 @@ internal static partial class Interop
             threads.Capacity = count;
             for (int i = 0; i < count; i++)
             {
-                threads.Add(new KeyValuePair<ulong, proc_threadinfo?>(threadIds[i], GetThreadInfoById(pid, threadIds[i])));
+                threads.Add(
+                    new KeyValuePair<ulong, proc_threadinfo?>(
+                        threadIds[i],
+                        GetThreadInfoById(pid, threadIds[i])
+                    )
+                );
             }
 
             return threads;
@@ -309,10 +321,7 @@ internal static partial class Interop
         /// <param name="bufferSize">The size of the buffer, should be PROC_PIDPATHINFO_MAXSIZE</param>
         /// <returns>Returns the length of the path returned on success</returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_pidpath(
-            int pid,
-            byte* buffer,
-            uint bufferSize);
+        private static unsafe partial int proc_pidpath(int pid, byte* buffer, uint bufferSize);
 
         /// <summary>
         /// Gets the full path to the executable file identified by the specified PID
@@ -348,7 +357,8 @@ internal static partial class Interop
         private static unsafe partial int proc_pid_rusage(
             int pid,
             int flavor,
-            rusage_info_v3* buffer);
+            rusage_info_v3* buffer
+        );
 
         /// <summary>
         /// Gets the rusage information for the process identified by the PID

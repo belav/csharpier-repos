@@ -10,7 +10,10 @@ using Xunit.Sdk;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
-    [TraitDiscoverer("Microsoft.CodeAnalysis.Test.Utilities.CompilerTraitDiscoverer", assemblyName: "Roslyn.Test.Utilities")]
+    [TraitDiscoverer(
+        "Microsoft.CodeAnalysis.Test.Utilities.CompilerTraitDiscoverer",
+        assemblyName: "Roslyn.Test.Utilities"
+    )]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class CompilerTraitAttribute : Attribute, ITraitAttribute
     {

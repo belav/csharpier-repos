@@ -16,15 +16,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class WhenKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public WhenKeywordRecommender()
-            : base(SyntaxKind.WhenKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.WhenKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return context.IsCatchFilterContext ||
-                IsAfterCompleteExpressionOrPatternInCaseLabel(context) ||
-                IsAtEndOfPatternInSwitchExpression(context);
+            return context.IsCatchFilterContext
+                || IsAfterCompleteExpressionOrPatternInCaseLabel(context)
+                || IsAtEndOfPatternInSwitchExpression(context);
         }
 
         private static bool IsAtEndOfPatternInSwitchExpression(CSharpSyntaxContext context)
@@ -40,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return false;
         }
 
-        private static bool IsAfterCompleteExpressionOrPatternInCaseLabel(CSharpSyntaxContext context)
+        private static bool IsAfterCompleteExpressionOrPatternInCaseLabel(
+            CSharpSyntaxContext context
+        )
         {
             var switchLabel = context.TargetToken.GetAncestor<SwitchLabelSyntax>();
             if (switchLabel == null)

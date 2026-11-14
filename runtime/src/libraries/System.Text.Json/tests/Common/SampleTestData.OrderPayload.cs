@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 
 namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
-{ 
+{
     public partial class Order
     {
         public long OrderNumber { get; set; }
@@ -27,7 +27,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
         public IEnumerable<Order> RelatedOrder { get; set; }
         public User ReviewedBy { get; set; }
     }
-    
+
     public class Product
     {
         public Guid ProductId { get; set; }
@@ -39,7 +39,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
         public string Title { get; set; }
         public Price Price { get; set; }
         public bool BestChoice { get; set; }
-        public float AverageStars { get; set; }  
+        public float AverageStars { get; set; }
         public bool Featured { get; set; }
         public TestClassWithInitializedProperties ProductRestrictions { get; set; }
         public SimpleTestClassWithGenericCollectionWrappers SalesInfo { get; set; }
@@ -70,7 +70,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
 
     public class Review
     {
-        public long ReviewId { get; set; } 
+        public long ReviewId { get; set; }
         public User Customer { get; set; }
         public string ProductSku { get; set; }
         public string CustomerName { get; set; }
@@ -160,7 +160,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
     {
         Customer = 1,
         Employee = 2,
-        Supplier = 3
+        Supplier = 3,
     }
 
     public partial class Order
@@ -186,7 +186,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                         FacebookId = "9988998877662222111",
                         SubscriptionType = 2,
                         IsNew = true,
-                        IsEmployee = false
+                        IsEmployee = false,
                     },
                     ShippingInfo = new List<ShippingInfo>
                     {
@@ -204,30 +204,25 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                                 UpdatedAt = new DateTime(),
                                 TwitterId = string.Empty,
                                 SubscriptionType = 0,
-                                IsEmployee = true
+                                IsEmployee = true,
                             },
                             CarrierId = "TTT123999MMM",
                             ShippingType = "Ground",
                             EstimatedDelivery = new DateTime(),
                             Tracking = new Uri("http://TestShipCompany.test/track/123" + i),
                             CarrierName = "TestShipCompany",
-                            HandlingInstruction = "Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats",
+                            HandlingInstruction =
+                                "Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats",
                             CurrentStatus = "Out for delivery",
-                            IsDangerous = false
-                        }
+                            IsDangerous = false,
+                        },
                     },
                     OneTime = true,
                     Cancelled = false,
                     IsGift = i % 2 == 0,
                     IsGPickUp = i % 5 == 0,
-                    ShippingAddress = new Address()
-                    {
-                        City = "Redmond"
-                    },
-                    PickupAddress = new Address
-                    {
-                        City = "Bellevue"
-                    },
+                    ShippingAddress = new Address() { City = "Redmond" },
+                    PickupAddress = new Address { City = "Bellevue" },
                     Coupon = SampleEnumInt64.Max,
                     UserInteractions = new List<Comment>
                     {
@@ -248,12 +243,13 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                                 FacebookId = "9988998877662222111",
                                 SubscriptionType = 2,
                                 IsNew = true,
-                                IsEmployee = false
+                                IsEmployee = false,
                             },
                             Title = "Green Field",
-                            Message = "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
-                            Responses = new List<Comment>()
-                        }
+                            Message =
+                                "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
+                            Responses = new List<Comment>(),
+                        },
                     },
                     Created = new DateTime(2019, 11, 10),
                     Confirmed = new DateTime(2019, 11, 11),
@@ -270,8 +266,8 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                         UpdatedAt = new DateTime(),
                         TwitterId = string.Empty,
                         SubscriptionType = 0,
-                        IsEmployee = true
-                    }
+                        IsEmployee = true,
+                    },
                 };
                 List<Product> products = new List<Product>();
                 for (int j = 0; j < i % 4; j++)
@@ -283,7 +279,8 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                         SKU = "LL123" + j,
                         Brand = new TestClassWithInitializedProperties(),
                         ProductCategory = new SimpleTestClassWithNonGenericCollectionWrappers(),
-                        Description = "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
+                        Description =
+                            "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
                         Created = new DateTime(2000, 10, 12),
                         Title = "Surface Pro 6 for Business - 512GB",
                         Price = new Price(),
@@ -309,13 +306,12 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                         GuaranteeStartsAt = new DateTime(),
                         GuaranteeEndsAt = new DateTime(),
                         IsActive = true,
-                        RelatedProducts = new List<Product>()
+                        RelatedProducts = new List<Product>(),
                     };
                     product.SalesInfo.Initialize();
                     List<Review> reviews = new List<Review>();
                     for (int k = 0; k < i % 3; k++)
                     {
-
                         Review review = new Review
                         {
                             Customer = new User
@@ -326,15 +322,19 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                                 CreatedAt = new DateTime(),
                                 ImageId = string.Empty,
                                 UserType = UserType.Customer,
-                                SubscriptionType = k
+                                SubscriptionType = k,
                             },
                             ProductSku = product.SKU,
                             CustomerName = "Customer" + i + k,
                             Stars = j + k,
                             Title = $"Title {i}{j}{k}",
                             Comment = "",
-                            Images = new List<Uri> { new Uri($"http://dotnet.test/link/images/image/{k}"), new Uri($"http://dotnet.test/link/images/image/{j}") },
-                            ReviewId = i + j + k
+                            Images = new List<Uri>
+                            {
+                                new Uri($"http://dotnet.test/link/images/image/{k}"),
+                                new Uri($"http://dotnet.test/link/images/image/{j}"),
+                            },
+                            ReviewId = i + j + k,
                         };
                         reviews.Add(review);
                     }

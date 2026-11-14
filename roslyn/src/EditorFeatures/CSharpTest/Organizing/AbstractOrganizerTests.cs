@@ -24,11 +24,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Organizing
             await CheckAsync(initial, final, Options.Script);
         }
 
-        protected static async Task CheckAsync(string initial, string final, CSharpParseOptions options)
+        protected static async Task CheckAsync(
+            string initial,
+            string final,
+            CSharpParseOptions options
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(initial, options);
             var document = workspace.CurrentSolution.GetDocument(workspace.Documents.First().Id);
-            var newRoot = await (await OrganizingService.OrganizeAsync(document)).GetSyntaxRootAsync();
+            var newRoot = await (
+                await OrganizingService.OrganizeAsync(document)
+            ).GetSyntaxRootAsync();
             Assert.Equal(final.NormalizeLineEndings(), newRoot.ToFullString());
         }
     }

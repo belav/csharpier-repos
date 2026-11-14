@@ -34,16 +34,12 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-
     [ComVisible(true)]
     public class DynamicILInfo
     {
-
         private DynamicMethod method = null!;
 
-        internal DynamicILInfo()
-        {
-        }
+        internal DynamicILInfo() { }
 
         internal DynamicILInfo(DynamicMethod method)
         {
@@ -52,10 +48,7 @@ namespace System.Reflection.Emit
 
         public DynamicMethod DynamicMethod
         {
-            get
-            {
-                return method;
-            }
+            get { return method; }
         }
 
         // FIXME:
@@ -71,7 +64,9 @@ namespace System.Reflection.Emit
 
         public int GetTokenFor(RuntimeFieldHandle field)
         {
-            return this.method.GetRuntimeILGenerator().TokenGenerator.GetToken(FieldInfo.GetFieldFromHandle(field), false);
+            return this
+                .method.GetRuntimeILGenerator()
+                .TokenGenerator.GetToken(FieldInfo.GetFieldFromHandle(field), false);
         }
 
         public int GetTokenFor(RuntimeMethodHandle method)

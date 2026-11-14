@@ -55,5 +55,5 @@ public enum QueryTrackingBehavior
     ///         in the result set are represented by the same entity instance.
     ///     </para>
     /// </remarks>
-    NoTrackingWithIdentityResolution
+    NoTrackingWithIdentityResolution,
 }

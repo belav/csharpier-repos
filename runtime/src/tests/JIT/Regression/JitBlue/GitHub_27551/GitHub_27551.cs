@@ -3,8 +3,8 @@
 
 using System;
 using System.Numerics;
-using System.Runtime.Intrinsics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 public class GitHub_27551

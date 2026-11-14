@@ -1,7 +1,7 @@
 //
 // System.MonoType
 //
-// Authors: 
+// Authors:
 // 	Sean MacIsaac (macisaac@ximian.com)
 // 	Paolo Molaro (lupus@ximian.com)
 // 	Patrik Torstensson (patrik.torstensson@labs2.com)
@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,12 +34,10 @@
 
 namespace System
 {
-	// Dummy type kept because lots of external code uses
-	// this to check whenever it is running on mono.
-	sealed class MonoType : RuntimeType
-	{
-		private MonoType ()
-		{
-		}
-	}
+    // Dummy type kept because lots of external code uses
+    // this to check whenever it is running on mono.
+    sealed class MonoType : RuntimeType
+    {
+        private MonoType() { }
+    }
 }

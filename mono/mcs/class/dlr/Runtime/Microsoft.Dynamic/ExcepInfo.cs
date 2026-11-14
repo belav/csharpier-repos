@@ -1,20 +1,19 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Microsoft Public License. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Microsoft Public License, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Microsoft Public License. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Microsoft Public License, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Microsoft Public License.
  *
  * You must not remove this notice, or any other, from this software.
  *
  *
  * ***************************************************************************/
-using System; using Microsoft;
-
-
+using System;
+using Microsoft;
 #if !SILVERLIGHT // ComObject
 
 using System.Diagnostics;
@@ -24,15 +23,18 @@ using System.Security;
 using ComTypes = System.Runtime.InteropServices.ComTypes;
 
 #if CODEPLEX_40
-namespace System.Dynamic {
+namespace System.Dynamic
+{
 #else
-namespace Microsoft.Scripting {
+namespace Microsoft.Scripting
+{
 #endif
     /// <summary>
     /// This is similar to ComTypes.EXCEPINFO, but lets us do our own custom marshaling
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ExcepInfo {
+    internal struct ExcepInfo
+    {
         private short wCode;
         private short wReserved;
         private IntPtr bstrSource;
@@ -44,15 +46,23 @@ namespace Microsoft.Scripting {
         private int scode;
 
 #if DEBUG
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline")]
-        static ExcepInfo() {
-            Debug.Assert(Marshal.SizeOf(typeof(ExcepInfo)) == Marshal.SizeOf(typeof(ComTypes.EXCEPINFO)));
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA2207:InitializeValueTypeStaticFieldsInline"
+        )]
+        static ExcepInfo()
+        {
+            Debug.Assert(
+                Marshal.SizeOf(typeof(ExcepInfo)) == Marshal.SizeOf(typeof(ComTypes.EXCEPINFO))
+            );
         }
 #endif
 
         [SecurityCritical]
-        private static string ConvertAndFreeBstr(ref IntPtr bstr) {
-            if (bstr == IntPtr.Zero) {
+        private static string ConvertAndFreeBstr(ref IntPtr bstr)
+        {
+            if (bstr == IntPtr.Zero)
+            {
                 return null;
             }
 
@@ -62,9 +72,11 @@ namespace Microsoft.Scripting {
             return result;
         }
 
-        internal void Dummy() {
+        internal void Dummy()
+        {
             wCode = 0;
-            wReserved = 0; wReserved++;
+            wReserved = 0;
+            wReserved++;
             bstrSource = IntPtr.Zero;
             bstrDescription = IntPtr.Zero;
             bstrHelpFile = IntPtr.Zero;
@@ -76,9 +88,13 @@ namespace Microsoft.Scripting {
             throw Error.MethodShouldNotBeCalled();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA2201:DoNotRaiseReservedExceptionTypes"
+        )]
         [SecurityCritical]
-        internal Exception GetException() {
+        internal Exception GetException()
+        {
             Debug.Assert(pfnDeferredFillIn == IntPtr.Zero);
 #if DEBUG
             System.Diagnostics.Debug.Assert(wReserved != -1);
@@ -89,15 +105,22 @@ namespace Microsoft.Scripting {
             Exception exception = Marshal.GetExceptionForHR(errorCode);
 
             string message = ConvertAndFreeBstr(ref bstrDescription);
-            if (message != null) {
+            if (message != null)
+            {
                 // If we have a custom message, create a new Exception object with the message set correctly.
                 // We need to create a new object because "exception.Message" is a read-only property.
-                if (exception is COMException) {
+                if (exception is COMException)
+                {
                     exception = new COMException(message, errorCode);
-                } else {
+                }
+                else
+                {
                     Type exceptionType = exception.GetType();
-                    ConstructorInfo ctor = exceptionType.GetConstructor(new Type[] { typeof(string) });
-                    if (ctor != null) {
+                    ConstructorInfo ctor = exceptionType.GetConstructor(
+                        new Type[] { typeof(string) }
+                    );
+                    if (ctor != null)
+                    {
                         exception = (Exception)ctor.Invoke(new object[] { message });
                     }
                 }
@@ -106,7 +129,8 @@ namespace Microsoft.Scripting {
             exception.Source = ConvertAndFreeBstr(ref bstrSource);
 
             string helpLink = ConvertAndFreeBstr(ref bstrHelpFile);
-            if (helpLink != null && dwHelpContext != 0) {
+            if (helpLink != null && dwHelpContext != 0)
+            {
                 helpLink += "#" + dwHelpContext;
             }
             exception.HelpLink = helpLink;

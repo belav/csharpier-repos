@@ -10,15 +10,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     {
         private readonly DateTime _end;
 
-        public TimeSlice(TimeSpan duration)
-            => _end = DateTime.UtcNow + duration;
+        public TimeSlice(TimeSpan duration) => _end = DateTime.UtcNow + duration;
 
         public bool IsOver
         {
-            get
-            {
-                return DateTime.UtcNow > _end;
-            }
+            get { return DateTime.UtcNow > _end; }
         }
     }
 }

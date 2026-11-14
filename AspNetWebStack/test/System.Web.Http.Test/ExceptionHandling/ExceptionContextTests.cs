@@ -35,14 +35,21 @@ namespace System.Web.Http.ExceptionHandling
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpControllerContext expectedControllerContext = CreateControllerContext(expectedRequestContext,
-                    expectedRequest);
-                HttpActionContext expectedActionContext = CreateActionContext(expectedControllerContext);
+                HttpControllerContext expectedControllerContext = CreateControllerContext(
+                    expectedRequestContext,
+                    expectedRequest
+                );
+                HttpActionContext expectedActionContext = CreateActionContext(
+                    expectedControllerContext
+                );
                 ExceptionContextCatchBlock expectedCatchBlock = CreateCatchBlock();
 
                 // Act
-                ExceptionContext product = CreateProductUnderTest(expectedException, expectedCatchBlock,
-                    expectedActionContext);
+                ExceptionContext product = CreateProductUnderTest(
+                    expectedException,
+                    expectedCatchBlock,
+                    expectedActionContext
+                );
 
                 // Assert
                 Assert.Same(expectedException, product.Exception);
@@ -65,12 +72,17 @@ namespace System.Web.Http.ExceptionHandling
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpControllerContext controllerContext = CreateControllerContext(requestContext, request);
+                HttpControllerContext controllerContext = CreateControllerContext(
+                    requestContext,
+                    request
+                );
                 HttpActionContext actionContext = CreateActionContext(controllerContext);
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, actionContext),
-                    "exception");
+                Assert.ThrowsArgumentNull(
+                    () => CreateProductUnderTest(exception, catchBlock, actionContext),
+                    "exception"
+                );
             }
         }
 
@@ -84,12 +96,17 @@ namespace System.Web.Http.ExceptionHandling
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpControllerContext controllerContext = CreateControllerContext(requestContext, request);
+                HttpControllerContext controllerContext = CreateControllerContext(
+                    requestContext,
+                    request
+                );
                 HttpActionContext actionContext = CreateActionContext(controllerContext);
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, actionContext),
-                    "catchBlock");
+                Assert.ThrowsArgumentNull(
+                    () => CreateProductUnderTest(exception, catchBlock, actionContext),
+                    "catchBlock"
+                );
             }
         }
 
@@ -102,8 +119,10 @@ namespace System.Web.Http.ExceptionHandling
             HttpActionContext actionContext = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, actionContext),
-                "actionContext");
+            Assert.ThrowsArgumentNull(
+                () => CreateProductUnderTest(exception, catchBlock, actionContext),
+                "actionContext"
+            );
         }
 
         [Fact]
@@ -116,8 +135,11 @@ namespace System.Web.Http.ExceptionHandling
             Assert.Null(actionContext.ControllerContext); // Guard
 
             // Act & Assert
-            Assert.ThrowsArgument(() => CreateProductUnderTest(exception, catchBlock, actionContext), "actionContext",
-                "HttpActionContext.ControllerContext must not be null.");
+            Assert.ThrowsArgument(
+                () => CreateProductUnderTest(exception, catchBlock, actionContext),
+                "actionContext",
+                "HttpActionContext.ControllerContext must not be null."
+            );
         }
 
         [Fact]
@@ -129,14 +151,17 @@ namespace System.Web.Http.ExceptionHandling
             HttpRequestContext requestContext = CreateRequestContext();
             HttpControllerContext controllerContext = new HttpControllerContext
             {
-                RequestContext = requestContext
+                RequestContext = requestContext,
             };
             Assert.Null(controllerContext.Request); // Guard
             HttpActionContext actionContext = CreateActionContext(controllerContext);
 
             // Act & Assert
-            Assert.ThrowsArgument(() => CreateProductUnderTest(exception, catchBlock, actionContext), "actionContext",
-                "HttpControllerContext.Request must not be null");
+            Assert.ThrowsArgument(
+                () => CreateProductUnderTest(exception, catchBlock, actionContext),
+                "actionContext",
+                "HttpControllerContext.Request must not be null"
+            );
         }
 
         [Fact]
@@ -152,8 +177,11 @@ namespace System.Web.Http.ExceptionHandling
                 expectedRequest.SetRequestContext(expectedRequestContext);
 
                 // Act
-                ExceptionContext product = CreateProductUnderTest(expectedException, expectedCatchBlock,
-                    expectedRequest);
+                ExceptionContext product = CreateProductUnderTest(
+                    expectedException,
+                    expectedCatchBlock,
+                    expectedRequest
+                );
 
                 // Assert
                 Assert.Same(expectedException, product.Exception);
@@ -179,7 +207,10 @@ namespace System.Web.Http.ExceptionHandling
                 request.SetRequestContext(requestContext);
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, request), "exception");
+                Assert.ThrowsArgumentNull(
+                    () => CreateProductUnderTest(exception, catchBlock, request),
+                    "exception"
+                );
             }
         }
 
@@ -196,7 +227,10 @@ namespace System.Web.Http.ExceptionHandling
                 request.SetRequestContext(requestContext);
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, request), "catchBlock");
+                Assert.ThrowsArgumentNull(
+                    () => CreateProductUnderTest(exception, catchBlock, request),
+                    "catchBlock"
+                );
             }
         }
 
@@ -209,7 +243,10 @@ namespace System.Web.Http.ExceptionHandling
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, request), "request");
+            Assert.ThrowsArgumentNull(
+                () => CreateProductUnderTest(exception, catchBlock, request),
+                "request"
+            );
         }
 
         [Fact]
@@ -245,8 +282,12 @@ namespace System.Web.Http.ExceptionHandling
                 expectedRequest.SetRequestContext(expectedRequestContext);
 
                 // Act
-                ExceptionContext product = CreateProductUnderTest(expectedException, expectedCatchBlock,
-                    expectedRequest, expectedResponse);
+                ExceptionContext product = CreateProductUnderTest(
+                    expectedException,
+                    expectedCatchBlock,
+                    expectedRequest,
+                    expectedResponse
+                );
 
                 // Assert
                 Assert.Same(expectedException, product.Exception);
@@ -273,8 +314,10 @@ namespace System.Web.Http.ExceptionHandling
                 request.SetRequestContext(requestContext);
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, request, response),
-                    "exception");
+                Assert.ThrowsArgumentNull(
+                    () => CreateProductUnderTest(exception, catchBlock, request, response),
+                    "exception"
+                );
             }
         }
 
@@ -292,8 +335,10 @@ namespace System.Web.Http.ExceptionHandling
                 request.SetRequestContext(requestContext);
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, request, response),
-                    "catchBlock");
+                Assert.ThrowsArgumentNull(
+                    () => CreateProductUnderTest(exception, catchBlock, request, response),
+                    "catchBlock"
+                );
             }
         }
 
@@ -308,8 +353,10 @@ namespace System.Web.Http.ExceptionHandling
             using (HttpResponseMessage response = CreateResponse())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, request, response),
-                    "request");
+                Assert.ThrowsArgumentNull(
+                    () => CreateProductUnderTest(exception, catchBlock, request, response),
+                    "request"
+                );
             }
         }
 
@@ -326,7 +373,12 @@ namespace System.Web.Http.ExceptionHandling
                 Assert.Null(request.GetRequestContext()); // Guard
 
                 // Act
-                ExceptionContext product = CreateProductUnderTest(exception, catchBlock, request, response);
+                ExceptionContext product = CreateProductUnderTest(
+                    exception,
+                    catchBlock,
+                    request,
+                    response
+                );
 
                 // Assert
                 Assert.Null(product.RequestContext);
@@ -345,8 +397,10 @@ namespace System.Web.Http.ExceptionHandling
                 HttpResponseMessage response = null;
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => CreateProductUnderTest(exception, catchBlock, request, response),
-                    "response");
+                Assert.ThrowsArgumentNull(
+                    () => CreateProductUnderTest(exception, catchBlock, request, response),
+                    "response"
+                );
             }
         }
 
@@ -355,17 +409,20 @@ namespace System.Web.Http.ExceptionHandling
             return new HttpActionContext();
         }
 
-        private static HttpActionContext CreateActionContext(HttpControllerContext controllerContext)
+        private static HttpActionContext CreateActionContext(
+            HttpControllerContext controllerContext
+        )
         {
-            return new HttpActionContext
-            {
-                ControllerContext = controllerContext
-            };
+            return new HttpActionContext { ControllerContext = controllerContext };
         }
 
         private static ExceptionContextCatchBlock CreateCatchBlock()
         {
-            return new ExceptionContextCatchBlock("IgnoreCaughtAt", isTopLevel: false, callsHandler: false);
+            return new ExceptionContextCatchBlock(
+                "IgnoreCaughtAt",
+                isTopLevel: false,
+                callsHandler: false
+            );
         }
 
         private static HttpControllerContext CreateControllerContext()
@@ -373,14 +430,12 @@ namespace System.Web.Http.ExceptionHandling
             return new HttpControllerContext();
         }
 
-        private static HttpControllerContext CreateControllerContext(HttpRequestContext requestContext,
-            HttpRequestMessage request)
+        private static HttpControllerContext CreateControllerContext(
+            HttpRequestContext requestContext,
+            HttpRequestMessage request
+        )
         {
-            return new HttpControllerContext
-            {
-                RequestContext = requestContext,
-                Request = request
-            };
+            return new HttpControllerContext { RequestContext = requestContext, Request = request };
         }
 
         private static Exception CreateException()
@@ -393,20 +448,30 @@ namespace System.Web.Http.ExceptionHandling
             return new ExceptionContext(CreateException(), CreateCatchBlock());
         }
 
-        private static ExceptionContext CreateProductUnderTest(Exception exception,
-            ExceptionContextCatchBlock catchBlock, HttpActionContext actionContext)
+        private static ExceptionContext CreateProductUnderTest(
+            Exception exception,
+            ExceptionContextCatchBlock catchBlock,
+            HttpActionContext actionContext
+        )
         {
             return new ExceptionContext(exception, catchBlock, actionContext);
         }
 
-        private static ExceptionContext CreateProductUnderTest(Exception exception,
-            ExceptionContextCatchBlock catchBlock, HttpRequestMessage request)
+        private static ExceptionContext CreateProductUnderTest(
+            Exception exception,
+            ExceptionContextCatchBlock catchBlock,
+            HttpRequestMessage request
+        )
         {
             return new ExceptionContext(exception, catchBlock, request);
         }
 
-        private static ExceptionContext CreateProductUnderTest(Exception exception,
-            ExceptionContextCatchBlock catchBlock, HttpRequestMessage request, HttpResponseMessage response)
+        private static ExceptionContext CreateProductUnderTest(
+            Exception exception,
+            ExceptionContextCatchBlock catchBlock,
+            HttpRequestMessage request,
+            HttpResponseMessage response
+        )
         {
             return new ExceptionContext(exception, catchBlock, request, response);
         }

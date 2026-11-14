@@ -1,6 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.  
+// See the LICENSE file in the project root for more information.
 
 #nullable disable
 
@@ -70,7 +70,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
 
         private void CancelButton_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 
-        private void Destination_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void Destination_SelectedItemChanged(
+            object sender,
+            RoutedPropertyChangedEventArgs<object> e
+        )
         {
             if (DestinationTreeView.SelectedItem is BaseTypeTreeNodeViewModel memberGraphNode)
             {

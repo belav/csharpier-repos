@@ -1,16 +1,16 @@
 #region Imports
 
 using System;
-using System.Xml;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Reflection;
 using System.Threading;
 using System.Transactions;
-using System.Reflection;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime.Hosting;
-using System.Diagnostics;
+using System.Xml;
 
 #endregion
 
@@ -103,7 +103,9 @@ namespace System.Workflow.Runtime
     // of currently executing activity.
     internal sealed class ServiceEnvironment : AmbientEnvironment
     {
-        internal static readonly Guid debuggerThreadGuid = new Guid("54D747AE-5CC6-4171-95C8-0A8C40443915");
+        internal static readonly Guid debuggerThreadGuid = new Guid(
+            "54D747AE-5CC6-4171-95C8-0A8C40443915"
+        );
 
         internal ServiceEnvironment(Activity currentActivity)
             : base(currentActivity)
@@ -119,7 +121,8 @@ namespace System.Workflow.Runtime
                 if (currentActivity == null)
                     return null;
                 else
-                    return (IWorkBatch)currentActivity.GetValue(WorkflowExecutor.TransientBatchProperty);
+                    return (IWorkBatch)
+                        currentActivity.GetValue(WorkflowExecutor.TransientBatchProperty);
             }
         }
 
@@ -131,7 +134,12 @@ namespace System.Workflow.Runtime
                 if (currentActivity == null)
                     return Guid.Empty;
 
-                return ((Guid)ContextActivityUtils.RootContextActivity(currentActivity).GetValue(WorkflowExecutor.WorkflowInstanceIdProperty));
+                return (
+                    (Guid)
+                        ContextActivityUtils
+                            .RootContextActivity(currentActivity)
+                            .GetValue(WorkflowExecutor.WorkflowInstanceIdProperty)
+                );
             }
         }
 
@@ -144,18 +152,24 @@ namespace System.Workflow.Runtime
                 // fetch workflow executor
                 IWorkflowCoreRuntime workflowExecutor = null;
                 if (currentActivity != null)
-                    workflowExecutor = ContextActivityUtils.RetrieveWorkflowExecutor(currentActivity);
+                    workflowExecutor = ContextActivityUtils.RetrieveWorkflowExecutor(
+                        currentActivity
+                    );
 
                 while (currentActivity != null)
                 {
                     if (currentActivity == workflowExecutor.CurrentAtomicActivity)
                     {
-                        TransactionalProperties transactionalProperties = (TransactionalProperties)currentActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
+                        TransactionalProperties transactionalProperties = (TransactionalProperties)
+                            currentActivity.GetValue(
+                                WorkflowExecutor.TransactionalPropertiesProperty
+                            );
                         if (transactionalProperties != null)
                         {
                             if (transactionalProperties.LocalQueuingService != null)
                             {
-                                WorkflowQueuingService queuingService = transactionalProperties.LocalQueuingService;
+                                WorkflowQueuingService queuingService =
+                                    transactionalProperties.LocalQueuingService;
                                 return queuingService; // return local queuing service
                             }
                         }
@@ -167,13 +181,13 @@ namespace System.Workflow.Runtime
         }
 
         // DO NOT change this to internal/public
-        // Technically we only want to store the Batch in the TLS, 
-        // but because we also want the queueing service and instId, 
+        // Technically we only want to store the Batch in the TLS,
+        // but because we also want the queueing service and instId,
         // we are storing the object encapsulating all the info.
         // The service environment only represents the transactional view:
         // the current batch; and not the current executing view:
-        // e.g. some caller/caller, send/receive scenarios where 
-        // we want the current batch to be the caller's so this activity 
+        // e.g. some caller/caller, send/receive scenarios where
+        // we want the current batch to be the caller's so this activity
         // does not reflect the executing activity (the callee).
         private static Activity CurrentActivity
         {
@@ -186,7 +200,10 @@ namespace System.Workflow.Runtime
 
         internal static bool IsInServiceThread(Guid instanceId)
         {
-            System.Diagnostics.Debug.Assert(instanceId != Guid.Empty, "IsInServiceThread expects valid guid.");
+            System.Diagnostics.Debug.Assert(
+                instanceId != Guid.Empty,
+                "IsInServiceThread expects valid guid."
+            );
             if (WorkflowInstanceId == instanceId)
                 return true;
 
@@ -201,9 +218,7 @@ namespace System.Workflow.Runtime
     internal class DebuggerThreadMarker : AmbientEnvironment
     {
         public DebuggerThreadMarker()
-            : base(new object())
-        {
-        }
+            : base(new object()) { }
 
         internal static bool IsInDebuggerThread()
         {
@@ -227,11 +242,9 @@ namespace System.Workflow.Runtime
 
         internal static WorkflowRuntime CurrentRuntime
         {
-            get
-            {
-                return RuntimeEnvironment.workflowRuntime;
-            }
+            get { return RuntimeEnvironment.workflowRuntime; }
         }
+
         void IDisposable.Dispose()
         {
             workflowRuntime = null;

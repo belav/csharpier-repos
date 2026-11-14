@@ -12,6 +12,7 @@ namespace System.ServiceModel.Syndication.Tests
         {
             Assert.Equal("Atom10", SyndicationVersions.Atom10);
         }
+
         [Fact]
         public void Rss20_Get_ReturnsExpected()
         {

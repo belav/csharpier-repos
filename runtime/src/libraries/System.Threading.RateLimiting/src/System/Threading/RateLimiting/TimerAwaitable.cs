@@ -52,14 +52,16 @@ namespace System.Threading.RateLimiting
                                 restoreFlow = true;
                             }
 
-                            _timer = new Timer(static state =>
-                            {
-                                var thisRef = (TimerAwaitable)state!;
-                                thisRef.Tick();
-                            },
-                            state: this,
-                            dueTime: _dueTime,
-                            period: _period);
+                            _timer = new Timer(
+                                static state =>
+                                {
+                                    var thisRef = (TimerAwaitable)state!;
+                                    thisRef.Tick();
+                                },
+                                state: this,
+                                dueTime: _dueTime,
+                                period: _period
+                            );
                         }
                         finally
                         {
@@ -75,6 +77,7 @@ namespace System.Threading.RateLimiting
         }
 
         public TimerAwaitable GetAwaiter() => this;
+
         public bool IsCompleted => ReferenceEquals(_callback, _callbackCompleted);
 
         public bool GetResult()
@@ -92,8 +95,13 @@ namespace System.Threading.RateLimiting
 
         public void OnCompleted(Action continuation)
         {
-            if (ReferenceEquals(_callback, _callbackCompleted) ||
-                ReferenceEquals(Interlocked.CompareExchange(ref _callback, continuation, null), _callbackCompleted))
+            if (
+                ReferenceEquals(_callback, _callbackCompleted)
+                || ReferenceEquals(
+                    Interlocked.CompareExchange(ref _callback, continuation, null),
+                    _callbackCompleted
+                )
+            )
             {
                 Task.Run(continuation);
             }

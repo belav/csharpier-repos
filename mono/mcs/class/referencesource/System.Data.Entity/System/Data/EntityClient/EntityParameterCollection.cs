@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
+using System.Text;
 
 namespace System.Data.EntityClient
 {
@@ -27,9 +27,7 @@ namespace System.Data.EntityClient
         /// Constructs the EntityParameterCollection object
         /// </summary>
         internal EntityParameterCollection()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// Gets the parameter from the collection at the specified index
@@ -38,14 +36,8 @@ namespace System.Data.EntityClient
         /// <returns>The parameter at the index</returns>
         public new EntityParameter this[int index]
         {
-            get
-            {
-                return (EntityParameter)this.GetParameter(index);
-            }
-            set
-            {
-                this.SetParameter(index, value);
-            }
+            get { return (EntityParameter)this.GetParameter(index); }
+            set { this.SetParameter(index, value); }
         }
 
         /// <summary>
@@ -55,14 +47,8 @@ namespace System.Data.EntityClient
         /// <returns>The parameter with the given name</returns>
         public new EntityParameter this[string parameterName]
         {
-            get
-            {
-                return (EntityParameter)this.GetParameter(parameterName);
-            }
-            set
-            {
-                this.SetParameter(parameterName, value);
-            }
+            get { return (EntityParameter)this.GetParameter(parameterName); }
+            set { this.SetParameter(parameterName, value); }
         }
 
         /// <summary>
@@ -89,7 +75,7 @@ namespace System.Data.EntityClient
                 return false;
             }
         }
-       
+
         /// <summary>
         /// Add a EntityParameter to the collection
         /// </summary>
@@ -202,7 +188,7 @@ namespace System.Data.EntityClient
         public void Remove(EntityParameter value)
         {
             this.Remove((object)value);
-        }    
+        }
 
         /// <summary>
         /// Reset the dirty flag on the collection

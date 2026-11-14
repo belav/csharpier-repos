@@ -24,6 +24,7 @@ namespace System.Diagnostics.Metrics
             Quantile = quantile;
             Value = value;
         }
+
         public double Quantile { get; }
         public double Value { get; }
     }
@@ -44,7 +45,10 @@ namespace System.Diagnostics.Metrics
 
     internal sealed class LabeledAggregationStatistics
     {
-        public LabeledAggregationStatistics(IAggregationStatistics stats, params KeyValuePair<string, string>[] labels)
+        public LabeledAggregationStatistics(
+            IAggregationStatistics stats,
+            params KeyValuePair<string, string>[] labels
+        )
         {
             AggregationStatistics = stats;
             Labels = labels;

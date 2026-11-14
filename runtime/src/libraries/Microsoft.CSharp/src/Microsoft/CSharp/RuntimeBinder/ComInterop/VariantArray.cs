@@ -23,19 +23,30 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     [StructLayout(LayoutKind.Sequential)]
     internal struct VariantArray2
     {
-        public ComVariant Element0, Element1;
+        public ComVariant Element0,
+            Element1;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct VariantArray4
     {
-        public ComVariant Element0, Element1, Element2, Element3;
+        public ComVariant Element0,
+            Element1,
+            Element2,
+            Element3;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct VariantArray8
     {
-        public ComVariant Element0, Element1, Element2, Element3, Element4, Element5, Element6, Element7;
+        public ComVariant Element0,
+            Element1,
+            Element2,
+            Element3,
+            Element4,
+            Element5,
+            Element6,
+            Element7;
     }
 
     //
@@ -55,8 +66,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicFields, typeof(VariantArray2))]
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicFields, typeof(VariantArray4))]
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicFields, typeof(VariantArray8))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Types are either dynamically created or have dynamic dependency.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Types are either dynamically created or have dynamic dependency."
+        )]
         internal static MemberExpression GetStructField(ParameterExpression variantArray, int field)
         {
             return Expression.Field(variantArray, "Element" + field);
@@ -65,10 +79,14 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal static Type GetStructType(int args)
         {
             Debug.Assert(args >= 0);
-            if (args <= 1) return typeof(VariantArray1);
-            if (args <= 2) return typeof(VariantArray2);
-            if (args <= 4) return typeof(VariantArray4);
-            if (args <= 8) return typeof(VariantArray8);
+            if (args <= 1)
+                return typeof(VariantArray1);
+            if (args <= 2)
+                return typeof(VariantArray2);
+            if (args <= 4)
+                return typeof(VariantArray4);
+            if (args <= 8)
+                return typeof(VariantArray8);
 
             int size = 1;
             while (args > size)
@@ -81,7 +99,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 // See if we can find an existing type
                 foreach (Type t in s_generatedTypes)
                 {
-                    int arity = int.Parse(t.Name.AsSpan("VariantArray".Length), provider: CultureInfo.InvariantCulture);
+                    int arity = int.Parse(
+                        t.Name.AsSpan("VariantArray".Length),
+                        provider: CultureInfo.InvariantCulture
+                    );
                     if (size == arity)
                     {
                         return t;
@@ -98,7 +119,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static Type CreateCustomType(int size)
         {
             TypeAttributes attrs = TypeAttributes.NotPublic | TypeAttributes.SequentialLayout;
-            TypeBuilder type = UnsafeMethods.DynamicModule.DefineType("VariantArray" + size, attrs, typeof(ValueType));
+            TypeBuilder type = UnsafeMethods.DynamicModule.DefineType(
+                "VariantArray" + size,
+                attrs,
+                typeof(ValueType)
+            );
             for (int i = 0; i < size; i++)
             {
                 type.DefineField("Element" + i, typeof(ComVariant), FieldAttributes.Public);

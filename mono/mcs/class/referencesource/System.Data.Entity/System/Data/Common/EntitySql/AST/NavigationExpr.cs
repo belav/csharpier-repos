@@ -10,9 +10,9 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Represents a relationship navigation operator NAVIGATE(sourceRefExpr, Relationship-Type-Name [,ToEndName [,FromEndName]]).
@@ -28,7 +28,12 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initializes relationship navigation expression.
         /// </summary>
-        internal RelshipNavigationExpr(Node refExpr, Node relshipTypeName, Identifier toEndIdentifier, Identifier fromEndIdentifier)
+        internal RelshipNavigationExpr(
+            Node refExpr,
+            Node relshipTypeName,
+            Identifier toEndIdentifier,
+            Identifier fromEndIdentifier
+        )
         {
             _refExpr = refExpr;
             _relshipTypeName = relshipTypeName;

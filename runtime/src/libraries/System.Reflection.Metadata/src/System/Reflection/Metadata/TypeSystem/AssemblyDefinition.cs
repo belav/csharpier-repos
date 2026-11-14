@@ -17,50 +17,32 @@ namespace System.Reflection.Metadata
 
         public AssemblyHashAlgorithm HashAlgorithm
         {
-            get
-            {
-                return _reader.AssemblyTable.GetHashAlgorithm();
-            }
+            get { return _reader.AssemblyTable.GetHashAlgorithm(); }
         }
 
         public Version Version
         {
-            get
-            {
-                return _reader.AssemblyTable.GetVersion();
-            }
+            get { return _reader.AssemblyTable.GetVersion(); }
         }
 
         public AssemblyFlags Flags
         {
-            get
-            {
-                return _reader.AssemblyTable.GetFlags();
-            }
+            get { return _reader.AssemblyTable.GetFlags(); }
         }
 
         public StringHandle Name
         {
-            get
-            {
-                return _reader.AssemblyTable.GetName();
-            }
+            get { return _reader.AssemblyTable.GetName(); }
         }
 
         public StringHandle Culture
         {
-            get
-            {
-                return _reader.AssemblyTable.GetCulture();
-            }
+            get { return _reader.AssemblyTable.GetCulture(); }
         }
 
         public BlobHandle PublicKey
         {
-            get
-            {
-                return _reader.AssemblyTable.GetPublicKey();
-            }
+            get { return _reader.AssemblyTable.GetPublicKey(); }
         }
 
         public CustomAttributeHandleCollection GetCustomAttributes()
@@ -70,7 +52,10 @@ namespace System.Reflection.Metadata
 
         public DeclarativeSecurityAttributeHandleCollection GetDeclarativeSecurityAttributes()
         {
-            return new DeclarativeSecurityAttributeHandleCollection(_reader, EntityHandle.AssemblyDefinition);
+            return new DeclarativeSecurityAttributeHandleCollection(
+                _reader,
+                EntityHandle.AssemblyDefinition
+            );
         }
     }
 }

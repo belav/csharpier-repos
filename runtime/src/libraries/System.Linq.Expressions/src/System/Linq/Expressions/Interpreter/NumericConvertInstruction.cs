@@ -7,7 +7,8 @@ namespace System.Linq.Expressions.Interpreter
 {
     internal abstract class NumericConvertInstruction : Instruction
     {
-        internal readonly TypeCode _from, _to;
+        internal readonly TypeCode _from,
+            _to;
         private readonly bool _isLiftedToNull;
 
         protected NumericConvertInstruction(TypeCode from, TypeCode to, bool isLiftedToNull)
@@ -56,9 +57,7 @@ namespace System.Linq.Expressions.Interpreter
             public override string InstructionName => "UncheckedConvert";
 
             public Unchecked(TypeCode from, TypeCode to, bool isLiftedToNull)
-                : base(from, to, isLiftedToNull)
-            {
-            }
+                : base(from, to, isLiftedToNull) { }
 
             protected override object Convert(object obj)
             {
@@ -179,9 +178,7 @@ namespace System.Linq.Expressions.Interpreter
             public override string InstructionName => "CheckedConvert";
 
             public Checked(TypeCode from, TypeCode to, bool isLiftedToNull)
-                : base(from, to, isLiftedToNull)
-            {
-            }
+                : base(from, to, isLiftedToNull) { }
 
             protected override object Convert(object obj)
             {
@@ -302,9 +299,7 @@ namespace System.Linq.Expressions.Interpreter
             public override string InstructionName => "ConvertToUnderlying";
 
             public ToUnderlying(TypeCode to, bool isLiftedToNull)
-                : base(to, to, isLiftedToNull)
-            {
-            }
+                : base(to, to, isLiftedToNull) { }
 
             protected override object Convert(object obj)
             {

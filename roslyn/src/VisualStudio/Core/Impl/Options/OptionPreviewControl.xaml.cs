@@ -20,24 +20,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     {
         internal AbstractOptionPreviewViewModel ViewModel;
         private readonly IServiceProvider _serviceProvider;
-        private readonly Func<OptionStore, IServiceProvider, AbstractOptionPreviewViewModel> _createViewModel;
+        private readonly Func<
+            OptionStore,
+            IServiceProvider,
+            AbstractOptionPreviewViewModel
+        > _createViewModel;
 
-        internal OptionPreviewControl(IServiceProvider serviceProvider, OptionStore optionStore, Func<OptionStore, IServiceProvider, AbstractOptionPreviewViewModel> createViewModel) : base(optionStore)
+        internal OptionPreviewControl(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore,
+            Func<OptionStore, IServiceProvider, AbstractOptionPreviewViewModel> createViewModel
+        )
+            : base(optionStore)
         {
             InitializeComponent();
 
             // AutomationDelegatingListView is defined in ServicesVisualStudio, which has
-            // InternalsVisibleTo this project. But, the markup compiler doesn't consider the IVT 
-            // relationship, so declaring the AutomationDelegatingListView in XAML would require 
-            // duplicating that type in this project. Declaring and setting it here avoids the 
-            // markup compiler completely, allowing us to reference the internal 
+            // InternalsVisibleTo this project. But, the markup compiler doesn't consider the IVT
+            // relationship, so declaring the AutomationDelegatingListView in XAML would require
+            // duplicating that type in this project. Declaring and setting it here avoids the
+            // markup compiler completely, allowing us to reference the internal
             // AutomationDelegatingListView without issue.
             var listview = new AutomationDelegatingListView();
             listview.Name = "Options";
             listview.SelectionMode = SelectionMode.Single;
             listview.PreviewKeyDown += Options_PreviewKeyDown;
             listview.SelectionChanged += Options_SelectionChanged;
-            listview.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Path = new PropertyPath(nameof(ViewModel.Items)) });
+            listview.SetBinding(
+                ItemsControl.ItemsSourceProperty,
+                new Binding { Path = new PropertyPath(nameof(ViewModel.Items)) }
+            );
             AutomationProperties.SetName(listview, ServicesVSResources.Options);
 
             listViewContentControl.Content = listview;
@@ -85,7 +97,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             // Use the first item's preview.
             var firstItem = this.ViewModel.Items.OfType<CheckBoxOptionViewModel>().First();
-            this.ViewModel.SetOptionAndUpdatePreview(firstItem.IsChecked, firstItem.Option, firstItem.GetPreview());
+            this.ViewModel.SetOptionAndUpdatePreview(
+                firstItem.IsChecked,
+                firstItem.Option,
+                firstItem.GetPreview()
+            );
 
             DataContext = ViewModel;
         }

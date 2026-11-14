@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,18 +34,17 @@ using System.Security.Permissions;
 [assembly: AssemblyTitle("Mono.Options.dll")]
 [assembly: AssemblyDescription("Command Line Parsing Utilities")]
 
-[assembly: CLSCompliant (true)]
-[assembly: ComVisible (false)]
+[assembly: CLSCompliant(true)]
+[assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion (
-	//
-	// DO NOT MODIFY STRINGS BELOW WITHOUT UPDATING mono/data/mono-options.pc.in
-	//
-	"0.2.3.0"
-	//
-	// DO NOT MODIFY STRINGS ABOVE WITHOUT UPDATING mono/data/mono-options.pc.in
-	//
+[assembly: AssemblyVersion(
+    //
+    // DO NOT MODIFY STRINGS BELOW WITHOUT UPDATING mono/data/mono-options.pc.in
+    //
+    "0.2.3.0"
+//
+// DO NOT MODIFY STRINGS ABOVE WITHOUT UPDATING mono/data/mono-options.pc.in
+//
 )]
 
-[assembly: AssemblyDelaySign (true)]
-
+[assembly: AssemblyDelaySign(true)]

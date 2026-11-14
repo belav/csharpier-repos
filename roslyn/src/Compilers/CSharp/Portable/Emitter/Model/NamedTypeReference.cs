@@ -26,52 +26,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         ushort Cci.INamedTypeReference.GenericParameterCount
         {
-            get
-            {
-                return (ushort)UnderlyingNamedType.Arity;
-            }
+            get { return (ushort)UnderlyingNamedType.Arity; }
         }
 
         bool Cci.INamedTypeReference.MangleName
         {
-            get
-            {
-                return UnderlyingNamedType.MangleName;
-            }
+            get { return UnderlyingNamedType.MangleName; }
         }
 
 #nullable enable
         string? Cci.INamedTypeReference.AssociatedFileIdentifier
         {
-            get
-            {
-                return UnderlyingNamedType.GetFileLocalTypeMetadataNamePrefix();
-            }
+            get { return UnderlyingNamedType.GetFileLocalTypeMetadataNamePrefix(); }
         }
+
 #nullable disable
 
         string Cci.INamedEntity.Name
         {
-            get
-            {
-                return UnderlyingNamedType.MetadataName;
-            }
+            get { return UnderlyingNamedType.MetadataName; }
         }
 
         bool Cci.ITypeReference.IsEnum
         {
-            get
-            {
-                return UnderlyingNamedType.IsEnumType();
-            }
+            get { return UnderlyingNamedType.IsEnumType(); }
         }
 
         bool Cci.ITypeReference.IsValueType
         {
-            get
-            {
-                return UnderlyingNamedType.IsValueType;
-            }
+            get { return UnderlyingNamedType.IsValueType; }
         }
 
         Cci.ITypeDefinition Cci.ITypeReference.GetResolvedType(EmitContext context)
@@ -81,65 +64,43 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.PrimitiveTypeCode Cci.ITypeReference.TypeCode
         {
-            get
-            {
-                return Cci.PrimitiveTypeCode.NotPrimitive;
-            }
+            get { return Cci.PrimitiveTypeCode.NotPrimitive; }
         }
 
         TypeDefinitionHandle Cci.ITypeReference.TypeDef
         {
-            get
-            {
-                return default(TypeDefinitionHandle);
-            }
+            get { return default(TypeDefinitionHandle); }
         }
 
         Cci.IGenericMethodParameterReference Cci.ITypeReference.AsGenericMethodParameterReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
-        public abstract Cci.IGenericTypeInstanceReference AsGenericTypeInstanceReference
-        {
-            get;
-        }
+        public abstract Cci.IGenericTypeInstanceReference AsGenericTypeInstanceReference { get; }
 
         Cci.IGenericTypeParameterReference Cci.ITypeReference.AsGenericTypeParameterReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
-        Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(EmitContext context)
+        Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
+            EmitContext context
+        )
         {
             return null;
         }
 
-        public abstract Cci.INamespaceTypeReference AsNamespaceTypeReference
-        {
-            get;
-        }
+        public abstract Cci.INamespaceTypeReference AsNamespaceTypeReference { get; }
 
         Cci.INestedTypeDefinition Cci.ITypeReference.AsNestedTypeDefinition(EmitContext context)
         {
             return null;
         }
 
-        public abstract Cci.INestedTypeReference AsNestedTypeReference
-        {
-            get;
-        }
+        public abstract Cci.INestedTypeReference AsNestedTypeReference { get; }
 
-        public abstract Cci.ISpecializedNestedTypeReference AsSpecializedNestedTypeReference
-        {
-            get;
-        }
+        public abstract Cci.ISpecializedNestedTypeReference AsSpecializedNestedTypeReference { get; }
 
         Cci.ITypeDefinition Cci.ITypeReference.AsTypeDefinition(EmitContext context)
         {
@@ -163,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             return null;
         }
 
-        CodeAnalysis.Symbols.ISymbolInternal Cci.IReference.GetInternalSymbol() => UnderlyingNamedType;
+        CodeAnalysis.Symbols.ISymbolInternal Cci.IReference.GetInternalSymbol() =>
+            UnderlyingNamedType;
 
         public sealed override bool Equals(object obj)
         {

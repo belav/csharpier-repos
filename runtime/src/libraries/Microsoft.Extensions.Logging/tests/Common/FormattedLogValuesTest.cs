@@ -40,7 +40,11 @@ namespace Microsoft.Extensions.Logging.Test
         }
 
         [Theory]
-        [InlineData("(null), (null) : (null)", "{0} : {1}", new object[] { new object[] { null, null }, null })]
+        [InlineData(
+            "(null), (null) : (null)",
+            "{0} : {1}",
+            new object[] { new object[] { null, null }, null }
+        )]
         [InlineData("(null)", "{0}", new object[] { null })]
         public void LogValues_WithNulls(string expected, string format, object[] args)
         {
@@ -66,15 +70,22 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData("{{", "{{", null)]
         [InlineData("'{{'", "'{{'", null)]
         [InlineData("'{{}}'", "'{{}}'", null)]
-        [InlineData("arg1 arg2 '{}'  '{' '{:}' '{,:}' {,}- test string",
+        [InlineData(
+            "arg1 arg2 '{}'  '{' '{:}' '{,:}' {,}- test string",
             "{0} {1} '{{}}'  '{{' '{{:}}' '{{,:}}' {{,}}- test string",
-            new object[] { "arg1", "arg2" })]
-        [InlineData("{prefix{arg1}suffix}", "{{prefix{{{Argument}}}suffix}}", new object[] { "arg1" })]
+            new object[] { "arg1", "arg2" }
+        )]
+        [InlineData(
+            "{prefix{arg1}suffix}",
+            "{{prefix{{{Argument}}}suffix}}",
+            new object[] { "arg1" }
+        )]
         public void LogValues_With_Escaped_Braces(string expected, string format, object[] args)
         {
-            var logValues = args == null ?
-                new FormattedLogValues(format) :
-                new FormattedLogValues(format, args);
+            var logValues =
+                args == null
+                    ? new FormattedLogValues(format)
+                    : new FormattedLogValues(format, args);
 
             Assert.Equal(expected, logValues.ToString());
 
@@ -108,14 +119,17 @@ namespace Microsoft.Extensions.Logging.Test
             logValues.ToString();
 
             var state = logValues.ToArray();
-            Assert.Equal(new[]
-            {
-                new KeyValuePair<string, object>("Param1", param1),
-                new KeyValuePair<string, object>("Param2", param2),
-                new KeyValuePair<string, object>("Param3", param3),
-                new KeyValuePair<string, object>("Param4", param4),
-                new KeyValuePair<string, object>("{OriginalFormat}", format),
-            }, state);
+            Assert.Equal(
+                new[]
+                {
+                    new KeyValuePair<string, object>("Param1", param1),
+                    new KeyValuePair<string, object>("Param2", param2),
+                    new KeyValuePair<string, object>("Param3", param3),
+                    new KeyValuePair<string, object>("Param4", param4),
+                    new KeyValuePair<string, object>("{OriginalFormat}", format),
+                },
+                state
+            );
         }
 
         [Fact]
@@ -175,61 +189,85 @@ namespace Microsoft.Extensions.Logging.Test
                     // multi item enumerable
                     {
                         "The view '{ViewName}' was not found. Searched locations: {SearchedLocations}",
-                        new object[] { "Index", new[] { "Views/Home/Index.cshtml", "Views/Shared/Index.cshtml" } },
-                        "The view 'Index' was not found. Searched locations: " +
-                        "Views/Home/Index.cshtml, Views/Shared/Index.cshtml"
+                        new object[]
+                        {
+                            "Index",
+                            new[] { "Views/Home/Index.cshtml", "Views/Shared/Index.cshtml" },
+                        },
+                        "The view 'Index' was not found. Searched locations: "
+                            + "Views/Home/Index.cshtml, Views/Shared/Index.cshtml"
                     },
                     // non-string enumerable. ToString() should be called on non-string types
                     {
-                        "Media type '{MediaType}' did not match any of the supported media types." +
-                        "Supported media types: {SupportedMediaTypes}",
+                        "Media type '{MediaType}' did not match any of the supported media types."
+                            + "Supported media types: {SupportedMediaTypes}",
                         new object[]
                         {
                             new MediaType("application", "blah"),
                             new[]
                             {
                                 new MediaType("text", "foo"),
-                                new MediaType("application", "xml")
-                            }
+                                new MediaType("application", "xml"),
+                            },
                         },
-                        "Media type 'application/blah' did not match any of the supported media types." +
-                        "Supported media types: text/foo, application/xml"
+                        "Media type 'application/blah' did not match any of the supported media types."
+                            + "Supported media types: text/foo, application/xml"
                     },
                     // List<string> parameter
                     {
                         "The view '{ViewName}' was not found. Searched locations: {SearchedLocations}",
-                        new object[] { "Index", new[] { "Home/Index.cshtml", "Shared/Index.cshtml" }.ToList() },
-                        "The view 'Index' was not found. Searched locations: " +
-                        "Home/Index.cshtml, Shared/Index.cshtml"
+                        new object[]
+                        {
+                            "Index",
+                            new[] { "Home/Index.cshtml", "Shared/Index.cshtml" }.ToList(),
+                        },
+                        "The view 'Index' was not found. Searched locations: "
+                            + "Home/Index.cshtml, Shared/Index.cshtml"
                     },
                     // We support only one level of enumerable value
                     {
                         "The view '{ViewName}' was not found. Searched locations: {SearchedLocations}",
-                        new object[] { "Index", new[] { new[] { "abc", "def" }, new[] { "ghi", "jkl" } } },
-                        "The view 'Index' was not found. Searched locations: " +
-                        "System.String[], System.String[]"
+                        new object[]
+                        {
+                            "Index",
+                            new[] { new[] { "abc", "def" }, new[] { "ghi", "jkl" } },
+                        },
+                        "The view 'Index' was not found. Searched locations: "
+                            + "System.String[], System.String[]"
                     },
                     // sub-enumerable having null value item
                     {
                         "The view '{ViewName}' was not found. Searched locations: {SearchedLocations}",
-                        new object[] { "Index", new Uri[][] { null, new[] { new Uri("http://def") } } },
-                        "The view 'Index' was not found. Searched locations: " +
-                        "(null), System.Uri[]"
+                        new object[]
+                        {
+                            "Index",
+                            new Uri[][] { null, new[] { new Uri("http://def") } },
+                        },
+                        "The view 'Index' was not found. Searched locations: "
+                            + "(null), System.Uri[]"
                     },
                     // non-string sub-enumerables
                     {
                         "The view '{ViewName}' was not found. Searched locations: {SearchedLocations}",
-                        new object[] { "Index", new[] { new Uri[] { null }, new[] { new Uri("http://def") } } },
-                        "The view 'Index' was not found. Searched locations: " +
-                        "System.Uri[], System.Uri[]"
-                    }
+                        new object[]
+                        {
+                            "Index",
+                            new[] { new Uri[] { null }, new[] { new Uri("http://def") } },
+                        },
+                        "The view 'Index' was not found. Searched locations: "
+                            + "System.Uri[], System.Uri[]"
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(FormatsEnumerableValuesData))]
-        public void FormatsEnumerableValues(string messageFormat, object[] arguments, string expected)
+        public void FormatsEnumerableValues(
+            string messageFormat,
+            object[] arguments,
+            string expected
+        )
         {
             var logValues = new FormattedLogValues(messageFormat, arguments);
 

@@ -46,8 +46,7 @@ public abstract class ProtectedBrowserStorage
 
         _storeName = storeName;
         _jsRuntime = jsRuntime ?? throw new ArgumentNullException(nameof(jsRuntime));
-        _dataProtectionProvider =
-            dataProtectionProvider
+        _dataProtectionProvider = dataProtectionProvider
             ?? throw new ArgumentNullException(nameof(dataProtectionProvider));
     }
 

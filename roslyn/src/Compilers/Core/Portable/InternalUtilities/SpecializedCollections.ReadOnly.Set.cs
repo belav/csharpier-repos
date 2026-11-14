@@ -11,13 +11,14 @@ namespace Roslyn.Utilities
     {
         private partial class ReadOnly
         {
-            internal class Set<TUnderlying, T> : Collection<TUnderlying, T>, ISet<T>, IReadOnlySet<T>
+            internal class Set<TUnderlying, T>
+                : Collection<TUnderlying, T>,
+                    ISet<T>,
+                    IReadOnlySet<T>
                 where TUnderlying : ISet<T>
             {
                 public Set(TUnderlying underlying)
-                    : base(underlying)
-                {
-                }
+                    : base(underlying) { }
 
                 public new bool Add(T item)
                 {

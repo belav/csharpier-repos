@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
 
 namespace System.Net.Http
@@ -13,7 +12,9 @@ namespace System.Net.Http
     internal sealed class WinInetProxyHelper
     {
         private const int RecentAutoDetectionInterval = 120_000; // 2 minutes in milliseconds.
-        private readonly string? _autoConfigUrl, _proxy, _proxyBypass;
+        private readonly string? _autoConfigUrl,
+            _proxy,
+            _proxyBypass;
         private readonly bool _autoDetect;
         private readonly bool _useProxy;
         private bool _autoDetectionFailed;
@@ -34,7 +35,10 @@ namespace System.Net.Http
 
                     if (NetEventSource.Log.IsEnabled())
                     {
-                        NetEventSource.Info(this, $"AutoConfigUrl={AutoConfigUrl}, AutoDetect={AutoDetect}, Proxy={Proxy}, ProxyBypass={ProxyBypass}");
+                        NetEventSource.Info(
+                            this,
+                            $"AutoConfigUrl={AutoConfigUrl}, AutoDetect={AutoDetect}, Proxy={Proxy}, ProxyBypass={ProxyBypass}"
+                        );
                     }
 
                     _useProxy = true;
@@ -43,12 +47,13 @@ namespace System.Net.Http
                 {
                     // We match behavior of WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY and ignore errors.
                     int lastError = Marshal.GetLastWin32Error();
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, $"error={lastError}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(this, $"error={lastError}");
                 }
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"_useProxy={_useProxy}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"_useProxy={_useProxy}");
             }
-
             finally
             {
                 // FreeHGlobal already checks for null pointer before freeing the memory.
@@ -73,13 +78,14 @@ namespace System.Net.Http
         public string? ProxyBypass => _proxyBypass;
 
         public bool RecentAutoDetectionFailure =>
-            _autoDetectionFailed &&
-            Environment.TickCount - _lastTimeAutoDetectionFailed <= RecentAutoDetectionInterval;
+            _autoDetectionFailed
+            && Environment.TickCount - _lastTimeAutoDetectionFailed <= RecentAutoDetectionInterval;
 
         public bool GetProxyForUrl(
             SafeWinHttpHandle? sessionHandle,
             Uri uri,
-            out Interop.WinHttp.WINHTTP_PROXY_INFO proxyInfo)
+            out Interop.WinHttp.WINHTTP_PROXY_INFO proxyInfo
+        )
         {
             proxyInfo.AccessType = Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY;
             proxyInfo.Proxy = IntPtr.Zero;
@@ -94,12 +100,20 @@ namespace System.Net.Http
 
             Interop.WinHttp.WINHTTP_AUTOPROXY_OPTIONS autoProxyOptions;
             autoProxyOptions.AutoConfigUrl = AutoConfigUrl;
-            autoProxyOptions.AutoDetectFlags = AutoDetect ?
-                (Interop.WinHttp.WINHTTP_AUTO_DETECT_TYPE_DHCP | Interop.WinHttp.WINHTTP_AUTO_DETECT_TYPE_DNS_A) : 0;
+            autoProxyOptions.AutoDetectFlags = AutoDetect
+                ? (
+                    Interop.WinHttp.WINHTTP_AUTO_DETECT_TYPE_DHCP
+                    | Interop.WinHttp.WINHTTP_AUTO_DETECT_TYPE_DNS_A
+                )
+                : 0;
             autoProxyOptions.AutoLoginIfChallenged = false;
             autoProxyOptions.Flags =
-                (AutoDetect ? Interop.WinHttp.WINHTTP_AUTOPROXY_AUTO_DETECT : 0) |
-                (!string.IsNullOrEmpty(AutoConfigUrl) ? Interop.WinHttp.WINHTTP_AUTOPROXY_CONFIG_URL : 0);
+                (AutoDetect ? Interop.WinHttp.WINHTTP_AUTOPROXY_AUTO_DETECT : 0)
+                | (
+                    !string.IsNullOrEmpty(AutoConfigUrl)
+                        ? Interop.WinHttp.WINHTTP_AUTOPROXY_CONFIG_URL
+                        : 0
+                );
             autoProxyOptions.Reserved1 = IntPtr.Zero;
             autoProxyOptions.Reserved2 = 0;
 
@@ -135,13 +149,17 @@ namespace System.Net.Http
             do
             {
                 _autoDetectionFailed = false;
-                if (Interop.WinHttp.WinHttpGetProxyForUrl(
-                    sessionHandle!,
-                    destination,
-                    ref autoProxyOptions,
-                    out proxyInfo))
+                if (
+                    Interop.WinHttp.WinHttpGetProxyForUrl(
+                        sessionHandle!,
+                        destination,
+                        ref autoProxyOptions,
+                        out proxyInfo
+                    )
+                )
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Using autoconfig proxy settings");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, "Using autoconfig proxy settings");
                     useProxy = true;
 
                     break;
@@ -149,7 +167,8 @@ namespace System.Net.Http
                 else
                 {
                     var lastError = Marshal.GetLastWin32Error();
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, $"error={lastError}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(this, $"error={lastError}");
 
                     if (lastError == Interop.WinHttp.ERROR_WINHTTP_LOGIN_FAILURE)
                     {
@@ -182,14 +201,20 @@ namespace System.Net.Http
             {
                 proxyInfo.AccessType = Interop.WinHttp.WINHTTP_ACCESS_TYPE_NAMED_PROXY;
                 proxyInfo.Proxy = Marshal.StringToHGlobalUni(Proxy);
-                proxyInfo.ProxyBypass = string.IsNullOrEmpty(ProxyBypass) ?
-                    IntPtr.Zero : Marshal.StringToHGlobalUni(ProxyBypass);
+                proxyInfo.ProxyBypass = string.IsNullOrEmpty(ProxyBypass)
+                    ? IntPtr.Zero
+                    : Marshal.StringToHGlobalUni(ProxyBypass);
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Fallback to Proxy={Proxy}, ProxyBypass={ProxyBypass}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        $"Fallback to Proxy={Proxy}, ProxyBypass={ProxyBypass}"
+                    );
                 useProxy = true;
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"useProxy={useProxy}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"useProxy={useProxy}");
 
             return useProxy;
         }

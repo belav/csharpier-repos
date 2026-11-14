@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class Test {
                     unsafe void N() {
                         delegate* $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class Test {
                     unsafe void N() {
                         delegate*$$
-                """);
+                """
+            );
         }
     }
 }

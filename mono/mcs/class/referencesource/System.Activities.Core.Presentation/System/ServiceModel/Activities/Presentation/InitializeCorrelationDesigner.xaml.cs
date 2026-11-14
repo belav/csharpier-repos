@@ -7,40 +7,53 @@ namespace System.ServiceModel.Activities.Presentation
     using System;
     using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation;
-    using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Converters;
+    using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.PropertyEditing;
     using System.Activities.Presentation.View;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Windows;
-    using System.Collections.ObjectModel;
 
-    partial class InitializeCorrelationDesigner 
+    partial class InitializeCorrelationDesigner
     {
         public const string CorrelationPropertyName = "Correlation";
         public const string CorrelationDataPropertyName = "CorrelationData";
 
         public InitializeCorrelationDesigner()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.InitializeReferenceTypeStaticFieldsInline,
-            Justification = "PropertyValueEditors association needs to be done in the static constructor.")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.InitializeReferenceTypeStaticFieldsInline,
+            Justification = "PropertyValueEditors association needs to be done in the static constructor."
+        )]
         static InitializeCorrelationDesigner()
         {
             Type type = typeof(InitializeCorrelation);
             AttributeTableBuilder builder = new AttributeTableBuilder();
 
-            builder.AddCustomAttributes(type, type.GetProperty("Correlation"),
-                new DescriptionAttribute(StringResourceDictionary.Instance.GetString("messagingCorrelatesWithHint")));
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Correlation"),
+                new DescriptionAttribute(
+                    StringResourceDictionary.Instance.GetString("messagingCorrelatesWithHint")
+                )
+            );
 
-            builder.AddCustomAttributes(type, type.GetProperty("CorrelationData"),
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("CorrelationData"),
                 PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationDataValueEditor)),
-                new DescriptionAttribute(StringResourceDictionary.Instance.GetString("messagingCorrelationDataHint")));
+                new DescriptionAttribute(
+                    StringResourceDictionary.Instance.GetString("messagingCorrelationDataHint")
+                )
+            );
 
             builder.AddCustomAttributes(type, "CorrelationData", BrowsableAttribute.Yes);
             MetadataStore.AddAttributeTable(builder.CreateTable());
@@ -67,22 +80,38 @@ namespace System.ServiceModel.Activities.Presentation
 
         void UpdateButton()
         {
-            this.btnCorrelationData.Content =
-                this.ModelItem.Properties[CorrelationDataPropertyName].IsSet ? this.FindResource("viewTitle") : this.FindResource("defineTitle");
+            this.btnCorrelationData.Content = this.ModelItem
+                .Properties[CorrelationDataPropertyName]
+                .IsSet
+                ? this.FindResource("viewTitle")
+                : this.FindResource("defineTitle");
         }
 
         internal sealed class CorrelationDataValueEditor : DialogPropertyValueEditor
         {
             public CorrelationDataValueEditor()
             {
-                this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate("CorrelationDataValueEditor_InlineTemplate");
+                this.InlineEditorTemplate =
+                    EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
+                        "CorrelationDataValueEditor_InlineTemplate"
+                    );
             }
 
-            public override void ShowDialog(PropertyValue propertyValue, IInputElement commandSource)
+            public override void ShowDialog(
+                PropertyValue propertyValue,
+                IInputElement commandSource
+            )
             {
-                ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter = new ModelPropertyEntryToOwnerActivityConverter();
+                ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter =
+                    new ModelPropertyEntryToOwnerActivityConverter();
 
-                ModelItem modelItem = (ModelItem)propertyEntryConverter.Convert(propertyValue.ParentProperty, typeof(ModelItem), false, null);
+                ModelItem modelItem = (ModelItem)
+                    propertyEntryConverter.Convert(
+                        propertyValue.ParentProperty,
+                        typeof(ModelItem),
+                        false,
+                        null
+                    );
                 EditingContext context = modelItem.GetEditingContext();
 
                 this.ShowDialog(modelItem, context);
@@ -92,19 +121,37 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 Fx.Assert(modelItem != null, "Activity model item shouldn't be null!");
                 Fx.Assert(context != null, "EditingContext shouldn't be null!");
-                
-                new EditorWindow(modelItem, modelItem.Properties[CorrelationPropertyName].Value, this.GetCorrelationDataWrapperCollection(modelItem), context).ShowOkCancel();
+
+                new EditorWindow(
+                    modelItem,
+                    modelItem.Properties[CorrelationPropertyName].Value,
+                    this.GetCorrelationDataWrapperCollection(modelItem),
+                    context
+                ).ShowOkCancel();
             }
 
-            ObservableCollection<CorrelationDataWrapper> GetCorrelationDataWrapperCollection(ModelItem modelItem)
+            ObservableCollection<CorrelationDataWrapper> GetCorrelationDataWrapperCollection(
+                ModelItem modelItem
+            )
             {
                 ObservableCollection<CorrelationDataWrapper> wrapperCollection = null;
                 if (modelItem.ItemType == typeof(InitializeCorrelation))
                 {
                     wrapperCollection = new ObservableCollection<CorrelationDataWrapper>();
-                    foreach (ModelItem entry in modelItem.Properties[CorrelationDataPropertyName].Dictionary.Properties["ItemsCollection"].Collection)
-                    { 
-                        wrapperCollection.Add(new CorrelationDataWrapper((string)entry.Properties["Key"].ComputedValue, entry.Properties["Value"].Value));
+                    foreach (
+                        ModelItem entry in modelItem
+                            .Properties[CorrelationDataPropertyName]
+                            .Dictionary
+                            .Properties["ItemsCollection"]
+                            .Collection
+                    )
+                    {
+                        wrapperCollection.Add(
+                            new CorrelationDataWrapper(
+                                (string)entry.Properties["Key"].ComputedValue,
+                                entry.Properties["Value"].Value
+                            )
+                        );
                     }
                 }
                 return wrapperCollection;
@@ -112,7 +159,12 @@ namespace System.ServiceModel.Activities.Presentation
 
             sealed class EditorWindow : WorkflowElementDialog
             {
-                public EditorWindow(ModelItem activity, ModelItem correlationHandler, ObservableCollection<CorrelationDataWrapper> correlationData, EditingContext context)
+                public EditorWindow(
+                    ModelItem activity,
+                    ModelItem correlationHandler,
+                    ObservableCollection<CorrelationDataWrapper> correlationData,
+                    EditingContext context
+                )
                 {
                     this.ModelItem = activity;
                     this.Context = context;
@@ -123,11 +175,11 @@ namespace System.ServiceModel.Activities.Presentation
                     this.EnableMinimizeButton = false;
                     this.WindowResizeMode = ResizeMode.CanResize;
                     this.WindowSizeToContent = SizeToContent.Manual;
-                    var content = new CorrelationDataDesigner() 
-                    { 
+                    var content = new CorrelationDataDesigner()
+                    {
                         Activity = activity,
                         CorrelationHandle = correlationHandler,
-                        CorrelationInitializeData = correlationData
+                        CorrelationInitializeData = correlationData,
                     };
                     this.Title = (string)content.Resources["controlTitle"];
                     this.Content = content;

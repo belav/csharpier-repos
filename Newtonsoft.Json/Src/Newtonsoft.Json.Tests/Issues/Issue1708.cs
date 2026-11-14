@@ -50,7 +50,9 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_DateTime()
         {
-            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader("'2018-05-27T23:25:08Z'"));
+            JsonTextReader jsonTextReader = new JsonTextReader(
+                new StringReader("'2018-05-27T23:25:08Z'")
+            );
             jsonTextReader.DateParseHandling = DateParseHandling.None;
             jsonTextReader.Read();
 

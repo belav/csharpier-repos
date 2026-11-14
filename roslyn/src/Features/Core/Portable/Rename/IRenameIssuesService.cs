@@ -10,6 +10,10 @@ namespace Microsoft.CodeAnalysis.Rename
     internal interface IRenameIssuesService : ILanguageService
     {
         bool CheckLanguageSpecificIssues(
-            SemanticModel semantic, ISymbol symbol, SyntaxToken triggerToken, [NotNullWhen(true)] out string? langError);
+            SemanticModel semantic,
+            ISymbol symbol,
+            SyntaxToken triggerToken,
+            [NotNullWhen(true)] out string? langError
+        );
     }
 }

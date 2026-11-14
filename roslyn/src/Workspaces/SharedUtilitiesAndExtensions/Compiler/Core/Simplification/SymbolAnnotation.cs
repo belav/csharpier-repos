@@ -14,13 +14,15 @@ namespace Microsoft.CodeAnalysis.Simplification
     {
         public const string Kind = "SymbolId";
 
-        public static SyntaxAnnotation Create(ISymbol symbol)
-            => new(Kind, DocumentationCommentId.CreateReferenceId(symbol));
+        public static SyntaxAnnotation Create(ISymbol symbol) =>
+            new(Kind, DocumentationCommentId.CreateReferenceId(symbol));
 
-        public static ISymbol? GetSymbol(SyntaxAnnotation annotation, Compilation compilation)
-            => GetSymbols(annotation, compilation).FirstOrDefault();
+        public static ISymbol? GetSymbol(SyntaxAnnotation annotation, Compilation compilation) =>
+            GetSymbols(annotation, compilation).FirstOrDefault();
 
-        public static ImmutableArray<ISymbol> GetSymbols(SyntaxAnnotation annotation, Compilation compilation)
-            => DocumentationCommentId.GetSymbolsForReferenceId(annotation.Data!, compilation);
+        public static ImmutableArray<ISymbol> GetSymbols(
+            SyntaxAnnotation annotation,
+            Compilation compilation
+        ) => DocumentationCommentId.GetSymbolsForReferenceId(annotation.Data!, compilation);
     }
 }

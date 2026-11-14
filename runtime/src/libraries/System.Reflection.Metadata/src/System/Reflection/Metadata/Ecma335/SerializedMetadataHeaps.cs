@@ -14,7 +14,8 @@ namespace System.Reflection.Metadata.Ecma335
         public SerializedMetadata(
             MetadataSizes sizes,
             BlobBuilder stringHeap,
-            ImmutableArray<int> stringMap)
+            ImmutableArray<int> stringMap
+        )
         {
             Sizes = sizes;
             StringHeap = stringHeap;

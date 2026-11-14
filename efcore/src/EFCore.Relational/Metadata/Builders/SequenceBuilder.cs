@@ -35,8 +35,7 @@ public class SequenceBuilder : IInfrastructure<IConventionSequenceBuilder>
     /// <summary>
     ///     The sequence.
     /// </summary>
-    public virtual IMutableSequence Metadata
-        => Builder.Metadata;
+    public virtual IMutableSequence Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Sets the <see cref="ISequence" /> to increment by the given amount when generating each next value.
@@ -137,8 +136,7 @@ public class SequenceBuilder : IInfrastructure<IConventionSequenceBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -147,8 +145,7 @@ public class SequenceBuilder : IInfrastructure<IConventionSequenceBuilder>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -156,8 +153,7 @@ public class SequenceBuilder : IInfrastructure<IConventionSequenceBuilder>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

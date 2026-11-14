@@ -34,7 +34,8 @@ namespace System.Linq.Parallel
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TElement"></typeparam>
-    internal sealed class Lookup<TKey, TElement> : ILookup<TKey, TElement> where TKey: notnull
+    internal sealed class Lookup<TKey, TElement> : ILookup<TKey, TElement>
+        where TKey : notnull
     {
         private readonly Dictionary<TKey, IGrouping<TKey, TElement>> _dict;
         private readonly IEqualityComparer<TKey> _comparer;
@@ -112,7 +113,10 @@ namespace System.Linq.Parallel
         {
             if (_comparer.Equals(grouping.Key, default))
             {
-                Debug.Assert(_defaultKeyGrouping == null, "Cannot insert two groupings with the default key into a lookup.");
+                Debug.Assert(
+                    _defaultKeyGrouping == null,
+                    "Cannot insert two groupings with the default key into a lookup."
+                );
 
                 _defaultKeyGrouping = grouping;
             }

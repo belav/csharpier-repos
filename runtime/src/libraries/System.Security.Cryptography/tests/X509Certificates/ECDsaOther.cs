@@ -17,9 +17,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public override KeySizes[] LegalKeySizes => _impl.LegalKeySizes;
 
         public override void GenerateKey(ECCurve curve) => _impl.GenerateKey(curve);
-        public override void ImportParameters(ECParameters parameters) => _impl.ImportParameters(parameters);
+
+        public override void ImportParameters(ECParameters parameters) =>
+            _impl.ImportParameters(parameters);
+
         public override byte[] SignHash(byte[] hash) => _impl.SignHash(hash);
-        public override bool VerifyHash(byte[] hash, byte[] signature) => _impl.VerifyHash(hash, signature);
+
+        public override bool VerifyHash(byte[] hash, byte[] signature) =>
+            _impl.VerifyHash(hash, signature);
 
         public override ECParameters ExportExplicitParameters(bool includePrivateParameters) =>
             _impl.ExportExplicitParameters(includePrivateParameters);
@@ -33,7 +38,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             set { _impl.KeySize = value; }
         }
 
-        protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+        protected override byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             using (HashAlgorithm alg = RSAOther.GetHashAlgorithm(hashAlgorithm))
             {

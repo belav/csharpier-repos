@@ -26,11 +26,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             ITextBuffer subjectBuffer,
             string caseGenerationLocationField,
             string switchExpressionField,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
             : base(snippetExpansionClient, subjectBuffer, threadingContext)
         {
             this.CaseGenerationLocationField = caseGenerationLocationField;
-            this.SwitchExpressionField = switchExpressionField is ['$', .. var middle, '$'] ? middle : switchExpressionField;
+            this.SwitchExpressionField = switchExpressionField is ['$', .. var middle, '$']
+                ? middle
+                : switchExpressionField;
         }
 
         protected override int FieldChanged(string field, out int requeryFunction)
@@ -39,7 +42,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return VSConstants.S_OK;
         }
 
-        protected override async Task<(int ExitCode, string Value, int HasCurrentValue)> GetCurrentValueAsync(CancellationToken cancellationToken)
+        protected override async Task<(
+            int ExitCode,
+            string Value,
+            int HasCurrentValue
+        )> GetCurrentValueAsync(CancellationToken cancellationToken)
         {
             if (!TryGetDocument(out var document))
             {
@@ -49,34 +56,71 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             // If the switch expression is invalid, still show the default case
             var hasCurrentValue = 1;
 
-            var snippetFunctionService = document.Project.GetRequiredLanguageService<SnippetFunctionService>();
-            if (!TryGetSpan(SwitchExpressionField, out var switchExpressionSpan) ||
-                !TryGetSpan(CaseGenerationLocationField, out var caseGenerationSpan))
+            var snippetFunctionService =
+                document.Project.GetRequiredLanguageService<SnippetFunctionService>();
+            if (
+                !TryGetSpan(SwitchExpressionField, out var switchExpressionSpan)
+                || !TryGetSpan(CaseGenerationLocationField, out var caseGenerationSpan)
+            )
             {
-                return (VSConstants.S_OK, snippetFunctionService.SwitchDefaultCaseForm, hasCurrentValue);
+                return (
+                    VSConstants.S_OK,
+                    snippetFunctionService.SwitchDefaultCaseForm,
+                    hasCurrentValue
+                );
             }
 
-            var simplifierOptions = await document.GetSimplifierOptionsAsync(snippetExpansionClient.EditorOptionsService.GlobalOptions, cancellationToken).ConfigureAwait(false);
+            var simplifierOptions = await document
+                .GetSimplifierOptionsAsync(
+                    snippetExpansionClient.EditorOptionsService.GlobalOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var value = await snippetFunctionService.GetSwitchExpansionAsync(document, caseGenerationSpan.Value, switchExpressionSpan.Value, simplifierOptions, cancellationToken).ConfigureAwait(false);
+            var value = await snippetFunctionService
+                .GetSwitchExpansionAsync(
+                    document,
+                    caseGenerationSpan.Value,
+                    switchExpressionSpan.Value,
+                    simplifierOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (value == null)
             {
-                return (VSConstants.S_OK, snippetFunctionService.SwitchDefaultCaseForm, hasCurrentValue);
+                return (
+                    VSConstants.S_OK,
+                    snippetFunctionService.SwitchDefaultCaseForm,
+                    hasCurrentValue
+                );
             }
 
             return (VSConstants.S_OK, value, hasCurrentValue);
         }
 
-        private bool TryGetSpan(string fieldName, [NotNullWhen(true)] out TextSpan? switchExpressionSpan)
+        private bool TryGetSpan(
+            string fieldName,
+            [NotNullWhen(true)] out TextSpan? switchExpressionSpan
+        )
         {
             switchExpressionSpan = null;
             var surfaceBufferFieldSpan = new VsTextSpan[1];
-            if (snippetExpansionClient.ExpansionSession?.GetFieldSpan(fieldName, surfaceBufferFieldSpan) != VSConstants.S_OK)
+            if (
+                snippetExpansionClient.ExpansionSession?.GetFieldSpan(
+                    fieldName,
+                    surfaceBufferFieldSpan
+                ) != VSConstants.S_OK
+            )
             {
                 return false;
             }
 
-            if (!snippetExpansionClient.TryGetSubjectBufferSpan(surfaceBufferFieldSpan[0], out var subjectBufferFieldSpan))
+            if (
+                !snippetExpansionClient.TryGetSubjectBufferSpan(
+                    surfaceBufferFieldSpan[0],
+                    out var subjectBufferFieldSpan
+                )
+            )
             {
                 return false;
             }

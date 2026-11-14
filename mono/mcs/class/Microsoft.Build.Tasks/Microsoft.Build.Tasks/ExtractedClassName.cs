@@ -25,25 +25,26 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public struct ExtractedClassName {
-	
-		bool	isInsideConditionalBlock;
-		string	name;
-		
-		public bool IsInsideConditionalBlock {
-			get { return isInsideConditionalBlock; }
-			set { isInsideConditionalBlock = value; }
-		}
-		
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
-	}
-}
+namespace Microsoft.Build.Tasks
+{
+    public struct ExtractedClassName
+    {
+        bool isInsideConditionalBlock;
+        string name;
 
+        public bool IsInsideConditionalBlock
+        {
+            get { return isInsideConditionalBlock; }
+            set { isInsideConditionalBlock = value; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+    }
+}

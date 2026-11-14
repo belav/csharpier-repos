@@ -14,14 +14,20 @@ namespace System.Runtime.Intrinsics.Arm
     {
         internal ArmBase() { }
 
-        public static bool IsSupported { get => IsSupported; }
+        public static bool IsSupported
+        {
+            get => IsSupported;
+        }
 
         [Intrinsic]
         public abstract class Arm64
         {
             internal Arm64() { }
 
-            public static bool IsSupported { get => IsSupported; }
+            public static bool IsSupported
+            {
+                get => IsSupported;
+            }
 
             /// <summary>
             ///   A64: CLS Wd, Wn

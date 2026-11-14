@@ -12,6 +12,7 @@ internal static partial class Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool GetCommProperties(
             SafeFileHandle hFile,
-            ref COMMPROP lpCommProp);
+            ref COMMPROP lpCommProp
+        );
     }
 }

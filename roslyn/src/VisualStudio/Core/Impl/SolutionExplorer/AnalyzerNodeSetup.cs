@@ -25,19 +25,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public AnalyzerNodeSetup(
             IThreadingContext threadingContext,
             AnalyzerItemsTracker analyzerTracker,
-            AnalyzersCommandHandler analyzerCommandHandler)
+            AnalyzersCommandHandler analyzerCommandHandler
+        )
         {
             _threadingContext = threadingContext;
             _analyzerTracker = analyzerTracker;
             _analyzerCommandHandler = analyzerCommandHandler;
         }
 
-        public async Task InitializeAsync(IAsyncServiceProvider serviceProvider, CancellationToken cancellationToken)
+        public async Task InitializeAsync(
+            IAsyncServiceProvider serviceProvider,
+            CancellationToken cancellationToken
+        )
         {
-            await _analyzerTracker.RegisterAsync(serviceProvider, cancellationToken).ConfigureAwait(false);
-            await _analyzerCommandHandler.InitializeAsync(
-                await serviceProvider.GetServiceAsync<IMenuCommandService, IMenuCommandService>(_threadingContext.JoinableTaskFactory, throwOnFailure: false).ConfigureAwait(false),
-                cancellationToken).ConfigureAwait(false);
+            await _analyzerTracker
+                .RegisterAsync(serviceProvider, cancellationToken)
+                .ConfigureAwait(false);
+            await _analyzerCommandHandler
+                .InitializeAsync(
+                    await serviceProvider
+                        .GetServiceAsync<IMenuCommandService, IMenuCommandService>(
+                            _threadingContext.JoinableTaskFactory,
+                            throwOnFailure: false
+                        )
+                        .ConfigureAwait(false),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public void Unregister()

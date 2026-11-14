@@ -28,8 +28,12 @@ namespace System.Web.WebPages.ApplicationParts
             if (module == null)
             {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  WebPageResources.ApplicationPart_ModuleCannotBeFound, partName));
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.ApplicationPart_ModuleCannotBeFound,
+                        partName
+                    )
+                );
             }
 
             // Get the resource path

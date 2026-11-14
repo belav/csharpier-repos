@@ -7,17 +7,17 @@ using Xunit;
 
 class Gen<T>
 {
-    static public T Field;
+    public static T Field;
 
-    static public T[] TArray;
+    public static T[] TArray;
 
-    static public T Property
+    public static T Property
     {
         get { return Field; }
         set { Field = value; }
     }
 
-    static public T Method(T t)
+    public static T Method(T t)
     {
         return t;
     }
@@ -69,7 +69,6 @@ public class Test_class_static01
             ret = 1;
         }
 
-
         Gen<String>.Field = "Field";
         if (Gen<String>.Field != "Field")
         {
@@ -110,6 +109,5 @@ public class Test_class_static01
         }
 
         return ret;
-
     }
 }

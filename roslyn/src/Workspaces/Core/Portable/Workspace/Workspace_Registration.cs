@@ -12,12 +12,18 @@ namespace Microsoft.CodeAnalysis
     /* This is the static API on Workspace that lets you associate text containers with workspace instances */
     public abstract partial class Workspace
     {
-        private static readonly ConditionalWeakTable<SourceTextContainer, WorkspaceRegistration> s_bufferToWorkspaceRegistrationMap = new();
+        private static readonly ConditionalWeakTable<
+            SourceTextContainer,
+            WorkspaceRegistration
+        > s_bufferToWorkspaceRegistrationMap = new();
 
         /// <summary>
         /// Gets the workspace associated with the specific text container.
         /// </summary>
-        public static bool TryGetWorkspace(SourceTextContainer textContainer, [NotNullWhen(true)] out Workspace? workspace)
+        public static bool TryGetWorkspace(
+            SourceTextContainer textContainer,
+            [NotNullWhen(true)] out Workspace? workspace
+        )
         {
             if (textContainer == null)
             {
@@ -66,14 +72,19 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns a <see cref="WorkspaceRegistration" /> for a given text container.
         /// </summary>
-        public static WorkspaceRegistration GetWorkspaceRegistration(SourceTextContainer textContainer)
+        public static WorkspaceRegistration GetWorkspaceRegistration(
+            SourceTextContainer textContainer
+        )
         {
             if (textContainer == null)
             {
                 throw new ArgumentNullException(nameof(textContainer));
             }
 
-            return s_bufferToWorkspaceRegistrationMap.GetValue(textContainer, static _ => new WorkspaceRegistration());
+            return s_bufferToWorkspaceRegistrationMap.GetValue(
+                textContainer,
+                static _ => new WorkspaceRegistration()
+            );
         }
     }
 }

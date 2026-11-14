@@ -8,28 +8,26 @@ namespace System.Configuration
     /// </summary>
     public sealed class ClientSettingsSection : ConfigurationSection
     {
-        private static readonly ConfigurationProperty s_propSettings = new ConfigurationProperty(null, typeof(SettingElementCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection() { s_propSettings };
+        private static readonly ConfigurationProperty s_propSettings = new ConfigurationProperty(
+            null,
+            typeof(SettingElementCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection() { s_propSettings };
 
-        public ClientSettingsSection()
-        {
-        }
+        public ClientSettingsSection() { }
 
         protected internal override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return s_properties;
-            }
+            get { return s_properties; }
         }
 
         [ConfigurationProperty("", IsDefaultCollection = true)]
         public SettingElementCollection Settings
         {
-            get
-            {
-                return (SettingElementCollection)base[s_propSettings];
-            }
+            get { return (SettingElementCollection)base[s_propSettings]; }
         }
     }
 }

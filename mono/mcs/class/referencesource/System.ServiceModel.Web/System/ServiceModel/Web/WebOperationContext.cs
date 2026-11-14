@@ -13,12 +13,12 @@ namespace System.ServiceModel.Web
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Syndication;
     using System.Text;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Serialization;
-    using System.ServiceModel.Dispatcher;
 
     public class WebOperationContext : IExtension<OperationContext>
     {
@@ -26,7 +26,8 @@ namespace System.ServiceModel.Web
         internal static readonly string DefaultJsonMediaType = JsonGlobals.applicationJsonMediaType;
         internal static readonly string DefaultXmlMediaType = "application/xml";
         internal static readonly string DefaultAtomMediaType = "application/atom+xml";
-        internal static readonly string DefaultStreamMediaType = WebHttpBehavior.defaultStreamContentType;
+        internal static readonly string DefaultStreamMediaType =
+            WebHttpBehavior.defaultStreamContentType;
 
         OperationContext operationContext;
 
@@ -34,7 +35,9 @@ namespace System.ServiceModel.Web
         {
             if (operationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("operationContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "operationContext"
+                );
             }
             this.operationContext = operationContext;
 #pragma warning disable 56506 // Microsoft, operationContext.Extensions is never null
@@ -53,7 +56,8 @@ namespace System.ServiceModel.Web
                 {
                     return null;
                 }
-                WebOperationContext existing = OperationContext.Current.Extensions.Find<WebOperationContext>();
+                WebOperationContext existing =
+                    OperationContext.Current.Extensions.Find<WebOperationContext>();
                 if (existing != null)
                 {
                     return existing;
@@ -63,32 +67,28 @@ namespace System.ServiceModel.Web
         }
 
         public IncomingWebRequestContext IncomingRequest
-        { 
-            get { return new IncomingWebRequestContext(this.operationContext); } 
+        {
+            get { return new IncomingWebRequestContext(this.operationContext); }
         }
 
         public IncomingWebResponseContext IncomingResponse
-        { 
-            get { return new IncomingWebResponseContext(this.operationContext); } 
+        {
+            get { return new IncomingWebResponseContext(this.operationContext); }
         }
 
         public OutgoingWebRequestContext OutgoingRequest
-        { 
-            get { return new OutgoingWebRequestContext(this.operationContext); } 
+        {
+            get { return new OutgoingWebRequestContext(this.operationContext); }
         }
 
         public OutgoingWebResponseContext OutgoingResponse
-        { 
-            get { return new OutgoingWebResponseContext(this.operationContext); } 
+        {
+            get { return new OutgoingWebResponseContext(this.operationContext); }
         }
 
-        public void Attach(OperationContext owner)
-        {
-        }
-        
-        public void Detach(OperationContext owner)
-        {
-        }        
+        public void Attach(OperationContext owner) { }
+
+        public void Detach(OperationContext owner) { }
 
         public Message CreateJsonResponse<T>(T instance)
         {
@@ -96,34 +96,64 @@ namespace System.ServiceModel.Web
             return CreateJsonResponse<T>(instance, serializer);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "CreateJsonMessage requires the DataContractJsonSerializer.  Allowing the base type XmlObjectSerializer would let deveopers supply a non-Json Serializer.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "CreateJsonMessage requires the DataContractJsonSerializer.  Allowing the base type XmlObjectSerializer would let deveopers supply a non-Json Serializer."
+        )]
         public Message CreateJsonResponse<T>(T instance, DataContractJsonSerializer serializer)
         {
             if (serializer == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializer");
             }
-            Message message = Message.CreateMessage(MessageVersion.None, (string)null, instance, serializer);
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.JsonProperty);
-            AddContentType(WebOperationContext.DefaultJsonMediaType, this.OutgoingResponse.BindingWriteEncoding);
+            Message message = Message.CreateMessage(
+                MessageVersion.None,
+                (string)null,
+                instance,
+                serializer
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.JsonProperty
+            );
+            AddContentType(
+                WebOperationContext.DefaultJsonMediaType,
+                this.OutgoingResponse.BindingWriteEncoding
+            );
             return message;
         }
 
         public Message CreateXmlResponse<T>(T instance)
         {
-            System.Runtime.Serialization.DataContractSerializer serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(T));
+            System.Runtime.Serialization.DataContractSerializer serializer =
+                new System.Runtime.Serialization.DataContractSerializer(typeof(T));
             return CreateXmlResponse(instance, serializer);
         }
 
-        public Message CreateXmlResponse<T>(T instance, System.Runtime.Serialization.XmlObjectSerializer serializer)
+        public Message CreateXmlResponse<T>(
+            T instance,
+            System.Runtime.Serialization.XmlObjectSerializer serializer
+        )
         {
             if (serializer == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializer");
             }
-            Message message = Message.CreateMessage(MessageVersion.None, (string)null, instance, serializer);
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
-            AddContentType(WebOperationContext.DefaultXmlMediaType, this.OutgoingResponse.BindingWriteEncoding);
+            Message message = Message.CreateMessage(
+                MessageVersion.None,
+                (string)null,
+                instance,
+                serializer
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.XmlProperty
+            );
+            AddContentType(
+                WebOperationContext.DefaultXmlMediaType,
+                this.OutgoingResponse.BindingWriteEncoding
+            );
             return message;
         }
 
@@ -133,13 +163,27 @@ namespace System.ServiceModel.Web
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializer");
             }
-            Message message = Message.CreateMessage(MessageVersion.None, (string)null, new XmlSerializerBodyWriter(instance, serializer));
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
-            AddContentType(WebOperationContext.DefaultXmlMediaType, this.OutgoingResponse.BindingWriteEncoding);
+            Message message = Message.CreateMessage(
+                MessageVersion.None,
+                (string)null,
+                new XmlSerializerBodyWriter(instance, serializer)
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.XmlProperty
+            );
+            AddContentType(
+                WebOperationContext.DefaultXmlMediaType,
+                this.OutgoingResponse.BindingWriteEncoding
+            );
             return message;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Other XNode derived types such as XAttribute don't make sense in this context, so we are not using the XNode base type.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Other XNode derived types such as XAttribute don't make sense in this context, so we are not using the XNode base type."
+        )]
         public Message CreateXmlResponse(XDocument document)
         {
             if (document == null)
@@ -153,23 +197,47 @@ namespace System.ServiceModel.Web
             }
             else
             {
-                message = Message.CreateMessage(MessageVersion.None, (string)null, document.CreateReader());
+                message = Message.CreateMessage(
+                    MessageVersion.None,
+                    (string)null,
+                    document.CreateReader()
+                );
             }
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
-            AddContentType(WebOperationContext.DefaultXmlMediaType, this.OutgoingResponse.BindingWriteEncoding);
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.XmlProperty
+            );
+            AddContentType(
+                WebOperationContext.DefaultXmlMediaType,
+                this.OutgoingResponse.BindingWriteEncoding
+            );
             return message;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Other XNode derived types such as XAttribute don't make sense in this context, so we are not using the XNode base type.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Other XNode derived types such as XAttribute don't make sense in this context, so we are not using the XNode base type."
+        )]
         public Message CreateXmlResponse(XElement element)
         {
             if (element == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
-            Message message = Message.CreateMessage(MessageVersion.None, (string)null, element.CreateReader());
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
-            AddContentType(WebOperationContext.DefaultXmlMediaType, this.OutgoingResponse.BindingWriteEncoding);
+            Message message = Message.CreateMessage(
+                MessageVersion.None,
+                (string)null,
+                element.CreateReader()
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.XmlProperty
+            );
+            AddContentType(
+                WebOperationContext.DefaultXmlMediaType,
+                this.OutgoingResponse.BindingWriteEncoding
+            );
             return message;
         }
 
@@ -179,9 +247,19 @@ namespace System.ServiceModel.Web
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("item");
             }
-            Message message = Message.CreateMessage(MessageVersion.None, (string)null, item.GetAtom10Formatter());
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
-            AddContentType(WebOperationContext.DefaultAtomMediaType, this.OutgoingResponse.BindingWriteEncoding);
+            Message message = Message.CreateMessage(
+                MessageVersion.None,
+                (string)null,
+                item.GetAtom10Formatter()
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.XmlProperty
+            );
+            AddContentType(
+                WebOperationContext.DefaultAtomMediaType,
+                this.OutgoingResponse.BindingWriteEncoding
+            );
             return message;
         }
 
@@ -191,9 +269,19 @@ namespace System.ServiceModel.Web
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("feed");
             }
-            Message message = Message.CreateMessage(MessageVersion.None, (string)null, feed.GetAtom10Formatter());
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
-            AddContentType(WebOperationContext.DefaultAtomMediaType, this.OutgoingResponse.BindingWriteEncoding);
+            Message message = Message.CreateMessage(
+                MessageVersion.None,
+                (string)null,
+                feed.GetAtom10Formatter()
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.XmlProperty
+            );
+            AddContentType(
+                WebOperationContext.DefaultAtomMediaType,
+                this.OutgoingResponse.BindingWriteEncoding
+            );
             return message;
         }
 
@@ -203,15 +291,29 @@ namespace System.ServiceModel.Web
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("document");
             }
-            Message message = Message.CreateMessage(MessageVersion.None, (string)null, document.GetFormatter());
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
-            AddContentType(WebOperationContext.DefaultAtomMediaType, this.OutgoingResponse.BindingWriteEncoding);
+            Message message = Message.CreateMessage(
+                MessageVersion.None,
+                (string)null,
+                document.GetFormatter()
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.XmlProperty
+            );
+            AddContentType(
+                WebOperationContext.DefaultAtomMediaType,
+                this.OutgoingResponse.BindingWriteEncoding
+            );
             return message;
         }
 
         public Message CreateTextResponse(string text)
         {
-            return CreateTextResponse(text, WebOperationContext.DefaultTextMediaType, Encoding.UTF8);
+            return CreateTextResponse(
+                text,
+                WebOperationContext.DefaultTextMediaType,
+                Encoding.UTF8
+            );
         }
 
         public Message CreateTextResponse(string text, string contentType)
@@ -234,18 +336,25 @@ namespace System.ServiceModel.Web
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("encoding");
             }
 
-            Message message = new HttpStreamMessage(StreamBodyWriter.CreateStreamBodyWriter((stream) =>
-            {
-                byte[] preamble = encoding.GetPreamble();
-                if (preamble.Length > 0)
-                {
-                    stream.Write(preamble, 0, preamble.Length);
-                }
-                byte[] bytes = encoding.GetBytes(text);
-                stream.Write(bytes, 0, bytes.Length);
-                stream.Flush();
-            }));
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
+            Message message = new HttpStreamMessage(
+                StreamBodyWriter.CreateStreamBodyWriter(
+                    (stream) =>
+                    {
+                        byte[] preamble = encoding.GetPreamble();
+                        if (preamble.Length > 0)
+                        {
+                            stream.Write(preamble, 0, preamble.Length);
+                        }
+                        byte[] bytes = encoding.GetBytes(text);
+                        stream.Write(bytes, 0, bytes.Length);
+                        stream.Flush();
+                    }
+                )
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.RawProperty
+            );
             AddContentType(contentType, null);
             return message;
         }
@@ -260,7 +369,11 @@ namespace System.ServiceModel.Web
             return CreateTextResponse(textWriter, contentType, encoding);
         }
 
-        public Message CreateTextResponse(Action<TextWriter> textWriter, string contentType, Encoding encoding)
+        public Message CreateTextResponse(
+            Action<TextWriter> textWriter,
+            string contentType,
+            Encoding encoding
+        )
         {
             if (textWriter == null)
             {
@@ -275,14 +388,21 @@ namespace System.ServiceModel.Web
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("encoding");
             }
 
-            Message message = new HttpStreamMessage(StreamBodyWriter.CreateStreamBodyWriter((stream) =>
-            {
-                using (TextWriter writer = new StreamWriter(stream, encoding))
-                {
-                    textWriter(writer);
-                }
-            }));
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
+            Message message = new HttpStreamMessage(
+                StreamBodyWriter.CreateStreamBodyWriter(
+                    (stream) =>
+                    {
+                        using (TextWriter writer = new StreamWriter(stream, encoding))
+                        {
+                            textWriter(writer);
+                        }
+                    }
+                )
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.RawProperty
+            );
             AddContentType(contentType, null);
             return message;
         }
@@ -298,12 +418,19 @@ namespace System.ServiceModel.Web
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contentType");
             }
             Message message = ByteStreamMessage.CreateMessage(stream);
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.RawProperty
+            );
             AddContentType(contentType, null);
             return message;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Using the StreamBodyWriter type instead of the BodyWriter type for discoverability.  The StreamBodyWriter provides a helpful overload of the OnWriteBodyContents method that takes a Stream")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Using the StreamBodyWriter type instead of the BodyWriter type for discoverability.  The StreamBodyWriter provides a helpful overload of the OnWriteBodyContents method that takes a Stream"
+        )]
         public Message CreateStreamResponse(StreamBodyWriter bodyWriter, string contentType)
         {
             if (bodyWriter == null)
@@ -315,7 +442,10 @@ namespace System.ServiceModel.Web
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contentType");
             }
             Message message = new HttpStreamMessage(bodyWriter);
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.RawProperty
+            );
             AddContentType(contentType, null);
             return message;
         }
@@ -330,8 +460,13 @@ namespace System.ServiceModel.Web
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contentType");
             }
-            Message message = new HttpStreamMessage(StreamBodyWriter.CreateStreamBodyWriter(streamWriter));
-            message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
+            Message message = new HttpStreamMessage(
+                StreamBodyWriter.CreateStreamBodyWriter(streamWriter)
+            );
+            message.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.RawProperty
+            );
             AddContentType(contentType, null);
             return message;
         }
@@ -343,16 +478,25 @@ namespace System.ServiceModel.Web
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("operationName");
             }
 
-            WebHttpDispatchOperationSelector selector = OperationContext.Current.EndpointDispatcher.DispatchRuntime.OperationSelector as WebHttpDispatchOperationSelector;
+            WebHttpDispatchOperationSelector selector =
+                OperationContext.Current.EndpointDispatcher.DispatchRuntime.OperationSelector
+                as WebHttpDispatchOperationSelector;
             if (selector == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR2.GetString(SR2.OperationSelectorNotWebSelector, typeof(WebHttpDispatchOperationSelector))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.OperationSelectorNotWebSelector,
+                            typeof(WebHttpDispatchOperationSelector)
+                        )
+                    )
+                );
             }
             return selector.GetUriTemplate(operationName);
         }
 
         void AddContentType(string contentType, Encoding encoding)
-        {      
+        {
             if (string.IsNullOrEmpty(this.OutgoingResponse.ContentType))
             {
                 if (encoding != null)
@@ -390,4 +534,3 @@ namespace System.ServiceModel.Web
         }
     }
 }
-

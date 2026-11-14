@@ -13,15 +13,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class CheckedKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public CheckedKeywordRecommender()
-            : base(SyntaxKind.CheckedKeyword)
-        {
-        }
+            : base(SyntaxKind.CheckedKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            if (context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsNonAttributeExpressionContext)
+            if (
+                context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsNonAttributeExpressionContext
+            )
             {
                 return true;
             }
@@ -30,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             if (targetToken.Kind() == SyntaxKind.OperatorKeyword)
             {
-                var previousPossiblySkippedToken = targetToken.GetPreviousToken(includeSkipped: true);
+                var previousPossiblySkippedToken = targetToken.GetPreviousToken(
+                    includeSkipped: true
+                );
 
                 if (previousPossiblySkippedToken.IsLastTokenOfNode<TypeSyntax>())
                 {
@@ -39,11 +45,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
                 SyntaxToken previousToken;
 
-                if (previousPossiblySkippedToken.IsLastTokenOfNode<ExplicitInterfaceSpecifierSyntax>())
+                if (
+                    previousPossiblySkippedToken.IsLastTokenOfNode<ExplicitInterfaceSpecifierSyntax>()
+                )
                 {
-                    var firstSpecifierToken = previousPossiblySkippedToken.GetRequiredAncestor<ExplicitInterfaceSpecifierSyntax>().GetFirstToken(includeSkipped: true);
+                    var firstSpecifierToken = previousPossiblySkippedToken
+                        .GetRequiredAncestor<ExplicitInterfaceSpecifierSyntax>()
+                        .GetFirstToken(includeSkipped: true);
 
-                    if (firstSpecifierToken.GetPreviousToken(includeSkipped: true).IsLastTokenOfNode<TypeSyntax>())
+                    if (
+                        firstSpecifierToken
+                            .GetPreviousToken(includeSkipped: true)
+                            .IsLastTokenOfNode<TypeSyntax>()
+                    )
                     {
                         return true;
                     }

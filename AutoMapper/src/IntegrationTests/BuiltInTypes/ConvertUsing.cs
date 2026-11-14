@@ -1,6 +1,7 @@
 ﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
-public class ConvertUsingWithNullables : IntegrationTest<ConvertUsingWithNullables.DatabaseInitializer>
+public class ConvertUsingWithNullables
+    : IntegrationTest<ConvertUsingWithNullables.DatabaseInitializer>
 {
     public class MyProfile : Profile
     {
@@ -8,14 +9,15 @@ public class ConvertUsingWithNullables : IntegrationTest<ConvertUsingWithNullabl
         {
             CreateProjection<MyTable, MyTableModel>();
             CreateProjection<int, MyEnum>().ConvertUsing(x => (MyEnum)x);
-            CreateProjection<int?, MyEnum>().ConvertUsing(x => x.HasValue ? (MyEnum)x.Value : MyEnum.Value1);
+            CreateProjection<int?, MyEnum>()
+                .ConvertUsing(x => x.HasValue ? (MyEnum)x.Value : MyEnum.Value1);
         }
     }
 
     public enum MyEnum
     {
         Value1 = 0,
-        Value2 = 1
+        Value2 = 1,
     }
 
     public class MyTable
@@ -36,10 +38,13 @@ public class ConvertUsingWithNullables : IntegrationTest<ConvertUsingWithNullabl
     {
         protected override void Seed(TestContext context)
         {
-            context.MyTable.AddRange(new[]{
-                new MyTable { EnumValue = (int)MyEnum.Value2 },
-                new MyTable { EnumValueNullable = (int?)MyEnum.Value1 },
-            });
+            context.MyTable.AddRange(
+                new[]
+                {
+                    new MyTable { EnumValue = (int)MyEnum.Value2 },
+                    new MyTable { EnumValueNullable = (int?)MyEnum.Value1 },
+                }
+            );
             base.Seed(context);
         }
     }
@@ -48,12 +53,14 @@ public class ConvertUsingWithNullables : IntegrationTest<ConvertUsingWithNullabl
     {
         public DbSet<MyTable> MyTable { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.AddProfile<MyProfile>());
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg => cfg.AddProfile<MyProfile>());
 
     [Fact]
     public void Should_project_ok()
     {
-        using(var context = new TestContext())
+        using (var context = new TestContext())
         {
             var results = ProjectTo<MyTableModel>(context.MyTable).ToList();
             results[0].Id.ShouldBe(1);
@@ -95,20 +102,19 @@ public class ConvertUsingBug : IntegrationTest<ConvertUsingBug.DatabaseInitializ
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Parent>()
-                .HasMany(x => x.Children);
+            modelBuilder.Entity<Parent>().HasMany(x => x.Children);
         }
 
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Children> Children { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Parent, ParentVM>();
-        cfg.CreateProjection<Children, int>()
-            .ConvertUsing(c => c.ID);
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Parent, ParentVM>();
+            cfg.CreateProjection<Children, int>().ConvertUsing(c => c.ID);
+        });
 
     [Fact]
     public void can_map_with_projection()
@@ -118,15 +124,20 @@ public class ConvertUsingBug : IntegrationTest<ConvertUsingBug.DatabaseInitializ
             var result = ProjectTo<ParentVM>(db.Parents);
         }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<ApplicationDBContext> { }
 }
+
 public class StringTypeConverter : IntegrationTest<StringTypeConverter.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<string, string>().ConvertUsing(s => s ?? string.Empty);
-        cfg.CreateMap<Planning, Appointment>().ForMember(a => a.Subject, o => o.MapFrom(p => p.Libelle ?? p.Service.Libelle));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<string, string>().ConvertUsing(s => s ?? string.Empty);
+            cfg.CreateMap<Planning, Appointment>()
+                .ForMember(a => a.Subject, o => o.MapFrom(p => p.Libelle ?? p.Service.Libelle));
+        });
+
     [Fact]
     public void Should_work()
     {
@@ -134,29 +145,35 @@ public class StringTypeConverter : IntegrationTest<StringTypeConverter.DatabaseI
         var query = ProjectTo<Appointment>(context.Planning);
         query.Single().Subject.ShouldBe("Test");
     }
+
     public class Appointment
     {
         public int Id { get; set; }
         public string Subject { get; set; }
     }
+
     public class Planning
     {
         public int Id { get; set; }
         public string Libelle { get; set; }
         public Service Service { get; set; }
     }
+
     public partial class Service
     {
         public int Id { get; set; }
         public string Libelle { get; set; }
     }
+
     public partial class ApplicationDBContext : LocalDbContext
     {
         public DbSet<Planning> Planning { get; set; }
         public DbSet<Service> Service { get; set; }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<ApplicationDBContext>
     {
-        protected override void Seed(ApplicationDBContext context) => context.Planning.Add(new() { Libelle = "Test" });
+        protected override void Seed(ApplicationDBContext context) =>
+            context.Planning.Add(new() { Libelle = "Test" });
     }
 }

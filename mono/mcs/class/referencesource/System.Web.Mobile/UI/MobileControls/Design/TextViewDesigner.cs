@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="TextViewDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
 {
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.MobileControls;
     using System.Web.UI.MobileControls.Adapters;
-    using System.Web.UI.Design.MobileControls.Adapters;
 
     /// <summary>
     ///    <para>
@@ -19,11 +19,13 @@ namespace System.Web.UI.Design.MobileControls
     ///    </para>
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.TextView'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class TextViewDesigner : MobileControlDesigner
     {
         private System.Web.UI.MobileControls.TextView _textView;
@@ -45,9 +47,11 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.TextView,
-                         "TextViewDesigner.Initialize - Invalid TextView Control");
-            _textView = (System.Web.UI.MobileControls.TextView) component;
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.TextView,
+                "TextViewDesigner.Initialize - Invalid TextView Control"
+            );
+            _textView = (System.Web.UI.MobileControls.TextView)component;
             base.Initialize(component);
         }
 
@@ -56,9 +60,10 @@ namespace System.Web.UI.Design.MobileControls
             get
             {
                 return (
-                    ContainmentStatus == ContainmentStatus.InForm ||
-                    ContainmentStatus == ContainmentStatus.InPanel ||
-                    ContainmentStatus == ContainmentStatus.InTemplateFrame);
+                    ContainmentStatus == ContainmentStatus.InForm
+                    || ContainmentStatus == ContainmentStatus.InPanel
+                    || ContainmentStatus == ContainmentStatus.InTemplateFrame
+                );
             }
         }
 
@@ -76,18 +81,18 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.Web.UI.MobileControls.TextBox'/>
         protected override String GetDesignTimeNormalHtml()
         {
-            Debug.Assert (_textView.Text != null);
+            Debug.Assert(_textView.Text != null);
 
             DesignerTextWriter tw;
             Control[] children = null;
 
             String originalText = _textView.Text;
             bool blankText = (originalText.Trim().Length == 0);
-            bool hasControls =  _textView.HasControls();
+            bool hasControls = _textView.HasControls();
 
             if (blankText)
             {
-                if (hasControls) 
+                if (hasControls)
                 {
                     children = new Control[_textView.Controls.Count];
                     _textView.Controls.CopyTo(children, 0);
@@ -104,9 +109,9 @@ namespace System.Web.UI.Design.MobileControls
                 if (blankText)
                 {
                     _textView.Text = originalText;
-                    if (hasControls) 
+                    if (hasControls)
                     {
-                        foreach (Control c in children) 
+                        foreach (Control c in children)
                         {
                             _textView.Controls.Add(c);
                         }
@@ -147,4 +152,3 @@ namespace System.Web.UI.Design.MobileControls
         }
     }
 }
-

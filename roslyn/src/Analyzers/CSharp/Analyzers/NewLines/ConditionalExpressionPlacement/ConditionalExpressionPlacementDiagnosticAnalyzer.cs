@@ -14,34 +14,54 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class ConditionalExpressionPlacementDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class ConditionalExpressionPlacementDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConditionalExpressionPlacementDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.ConditionalExpressionPlacementDiagnosticId,
-                   EnforceOnBuildValues.ConditionalExpressionPlacement,
-                   CSharpCodeStyleOptions.AllowBlankLineAfterTokenInConditionalExpression,
-                   new LocalizableResourceString(
-                       nameof(CSharpAnalyzersResources.Blank_line_not_allowed_after_conditional_expression_token), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
+            : base(
+                IDEDiagnosticIds.ConditionalExpressionPlacementDiagnosticId,
+                EnforceOnBuildValues.ConditionalExpressionPlacement,
+                CSharpCodeStyleOptions.AllowBlankLineAfterTokenInConditionalExpression,
+                new LocalizableResourceString(
+                    nameof(
+                        CSharpAnalyzersResources.Blank_line_not_allowed_after_conditional_expression_token
+                    ),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
+
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
+            );
+
+        private void AnalyzeTree(
+            SyntaxTreeAnalysisContext context,
+            CompilationOptions compilationOptions
+        )
         {
-        }
-
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
-
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(context =>
-                context.RegisterSyntaxTreeAction(treeContext => AnalyzeTree(treeContext, context.Compilation.Options)));
-
-        private void AnalyzeTree(SyntaxTreeAnalysisContext context, CompilationOptions compilationOptions)
-        {
-            var option = context.GetCSharpAnalyzerOptions().AllowBlankLineAfterTokenInConditionalExpression;
-            if (option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification))
+            var option = context
+                .GetCSharpAnalyzerOptions()
+                .AllowBlankLineAfterTokenInConditionalExpression;
+            if (
+                option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification)
+            )
                 return;
 
             Recurse(context, option.Notification, context.GetAnalysisRoot(findInTrivia: false));
         }
 
-        private void Recurse(SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, SyntaxNode node)
+        private void Recurse(
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            SyntaxNode node
+        )
         {
             context.CancellationToken.ThrowIfCancellationRequested();
 
@@ -59,10 +79,18 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
         }
 
         private void ProcessConditionalExpression(
-            SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, ConditionalExpressionSyntax conditionalExpression)
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            ConditionalExpressionSyntax conditionalExpression
+        )
         {
             // Don't bother analyzing nodes whose parent have syntax errors in them.
-            if (conditionalExpression.GetRequiredParent().GetDiagnostics().Any(static d => d.Severity == DiagnosticSeverity.Error))
+            if (
+                conditionalExpression
+                    .GetRequiredParent()
+                    .GetDiagnostics()
+                    .Any(static d => d.Severity == DiagnosticSeverity.Error)
+            )
                 return;
 
             // Only if both tokens are not ok do we report an error.  For example, the following is legal:
@@ -72,18 +100,20 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
             //      baz ? quux : ztesh;
             //
             // despite one colon being at the end of the line.
-            if (IsOk(conditionalExpression.QuestionToken) ||
-                IsOk(conditionalExpression.ColonToken))
+            if (IsOk(conditionalExpression.QuestionToken) || IsOk(conditionalExpression.ColonToken))
             {
                 return;
             }
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                conditionalExpression.QuestionToken.GetLocation(),
-                notificationOption,
-                additionalLocations: null,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    conditionalExpression.QuestionToken.GetLocation(),
+                    notificationOption,
+                    additionalLocations: null,
+                    properties: null
+                )
+            );
 
             return;
 
@@ -104,8 +134,15 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
                 if (nextToken == default)
                     return true;
 
-                if (nextToken.LeadingTrivia.Any(static t => t.Kind() is
-                        SyntaxKind.IfDirectiveTrivia or SyntaxKind.ElseDirectiveTrivia or SyntaxKind.ElifDirectiveTrivia or SyntaxKind.EndIfDirectiveTrivia))
+                if (
+                    nextToken.LeadingTrivia.Any(static t =>
+                        t.Kind()
+                            is SyntaxKind.IfDirectiveTrivia
+                                or SyntaxKind.ElseDirectiveTrivia
+                                or SyntaxKind.ElifDirectiveTrivia
+                                or SyntaxKind.EndIfDirectiveTrivia
+                    )
+                )
                 {
                     return true;
                 }

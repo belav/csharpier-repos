@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,81 +30,98 @@
 
 using System;
 
-namespace Mono.Data.Tds.Protocol {
-	public sealed class TdsInternalError 
-	{
-		#region Fields
+namespace Mono.Data.Tds.Protocol
+{
+    public sealed class TdsInternalError
+    {
+        #region Fields
 
-		byte theClass;
-		int lineNumber;
-		string message;
-		int number;
-		string procedure;
-		string server;
-		string source;
-		byte state;
+        byte theClass;
+        int lineNumber;
+        string message;
+        int number;
+        string procedure;
+        string server;
+        string source;
+        byte state;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public TdsInternalError (byte theClass, int lineNumber, string message, int number, string procedure, string server, string source, byte state)
-		{
-			this.theClass = theClass;
-			this.lineNumber = lineNumber;
-			this.message = message;
-			this.number = number;
-			this.procedure = procedure;
-			this.server = server;
-			this.source = source;
-			this.state = state;
-		}
+        public TdsInternalError(
+            byte theClass,
+            int lineNumber,
+            string message,
+            int number,
+            string procedure,
+            string server,
+            string source,
+            byte state
+        )
+        {
+            this.theClass = theClass;
+            this.lineNumber = lineNumber;
+            this.message = message;
+            this.number = number;
+            this.procedure = procedure;
+            this.server = server;
+            this.source = source;
+            this.state = state;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public Byte Class {
-			get { return theClass; }
-			set { theClass = value; }
-		}
+        public Byte Class
+        {
+            get { return theClass; }
+            set { theClass = value; }
+        }
 
-		public int LineNumber {
-			get { return lineNumber; }
-			set { lineNumber = value; }
-		}
+        public int LineNumber
+        {
+            get { return lineNumber; }
+            set { lineNumber = value; }
+        }
 
-		public string Message {
-			get { return message; }
-			set { message = value; }
-		}
+        public string Message
+        {
+            get { return message; }
+            set { message = value; }
+        }
 
-		public int Number {
-			get { return number; }
-			set { number = value; }
-		}
+        public int Number
+        {
+            get { return number; }
+            set { number = value; }
+        }
 
-		public string Procedure {
-			get { return procedure; }
-			set { procedure = value; }
-		}
+        public string Procedure
+        {
+            get { return procedure; }
+            set { procedure = value; }
+        }
 
-		public string Server {
-			get { return server; }
-			set { server = value;}
-		}
+        public string Server
+        {
+            get { return server; }
+            set { server = value; }
+        }
 
-		public string Source {
-			get { return source; }
-			set { source = value; }
-		}
+        public string Source
+        {
+            get { return source; }
+            set { source = value; }
+        }
 
-		public byte State {
-			get { return state; }
-			set { state = value; }
-		}
+        public byte State
+        {
+            get { return state; }
+            set { state = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }
-

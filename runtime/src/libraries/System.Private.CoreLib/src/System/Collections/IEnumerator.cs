@@ -25,9 +25,7 @@ namespace System.Collections
 #nullable disable // explicitly leaving Current as "oblivious" to avoid spurious warnings in foreach over non-generic enumerables
         object Current
 #nullable restore
-        {
-            get;
-        }
+        { get; }
 
         // Resets the enumerator to the beginning of the enumeration, starting over.
         // The preferred behavior for Reset is to return the exact same enumeration.

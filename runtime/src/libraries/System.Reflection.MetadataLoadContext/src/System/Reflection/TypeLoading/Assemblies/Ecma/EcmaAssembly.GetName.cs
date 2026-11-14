@@ -18,7 +18,7 @@ namespace System.Reflection.TypeLoading.Ecma
             {
                 Name = ad.Name.GetString(reader),
                 Version = ad.Version,
-                CultureName = ad.Culture.GetStringOrNull(reader) ?? string.Empty
+                CultureName = ad.Culture.GetStringOrNull(reader) ?? string.Empty,
             };
             byte[] pk = ad.PublicKey.GetBlobBytes(reader);
             data.PublicKey = pk;
@@ -29,7 +29,8 @@ namespace System.Reflection.TypeLoading.Ecma
                 data.PublicKeyToken = pk.ComputePublicKeyToken();
             }
 
-            AssemblyNameFlags anFlagsAndContentType = ad.Flags.ToAssemblyNameFlags() | AssemblyNameFlags.PublicKey;
+            AssemblyNameFlags anFlagsAndContentType =
+                ad.Flags.ToAssemblyNameFlags() | AssemblyNameFlags.PublicKey;
             data.Flags = anFlagsAndContentType.ExtractAssemblyNameFlags();
 
             // We've finished setting the AssemblyName properties that actually pertain to binding and the Ecma-355
@@ -42,7 +43,10 @@ namespace System.Reflection.TypeLoading.Ecma
             data.HashAlgorithm = ad.HashAlgorithm.ToConfigurationAssemblyHashAlgorithm();
             data.ContentType = anFlagsAndContentType.ExtractAssemblyContentType();
 
-            ManifestModule.GetPEKind(out PortableExecutableKinds peKind, out ImageFileMachine machine);
+            ManifestModule.GetPEKind(
+                out PortableExecutableKinds peKind,
+                out ImageFileMachine machine
+            );
             switch (machine)
             {
                 case ImageFileMachine.AMD64:

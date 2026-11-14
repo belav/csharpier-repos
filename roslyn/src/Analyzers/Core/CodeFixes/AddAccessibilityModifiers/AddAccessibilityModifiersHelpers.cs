@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
     internal static partial class AddAccessibilityModifiersHelpers
     {
         public static void UpdateDeclaration(
-            SyntaxEditor editor, ISymbol symbol, SyntaxNode declaration)
+            SyntaxEditor editor,
+            ISymbol symbol,
+            SyntaxNode declaration
+        )
         {
             Contract.ThrowIfNull(symbol);
 
@@ -20,13 +23,16 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 
             // Check to see if we need to add or remove
             // If there's a modifier, then we need to remove it, otherwise no modifier, add it.
-            editor.ReplaceNode(
-                declaration,
-                (currentDeclaration, _) => UpdateAccessibility(currentDeclaration, preferredAccessibility));
+            editor.ReplaceNode(declaration, (currentDeclaration, _) =>
+                UpdateAccessibility(currentDeclaration, preferredAccessibility)
+            );
 
             return;
 
-            SyntaxNode UpdateAccessibility(SyntaxNode declaration, Accessibility preferredAccessibility)
+            SyntaxNode UpdateAccessibility(
+                SyntaxNode declaration,
+                Accessibility preferredAccessibility
+            )
             {
                 var generator = editor.Generator;
 

@@ -21,9 +21,7 @@ namespace System.ServiceModel.Security
         MessageVersion messageVersion;
 
         protected NegotiationTokenProvider()
-            : base()
-        {
-        }
+            : base() { }
 
         public BindingContext IssuerBindingContext
         {
@@ -41,31 +39,22 @@ namespace System.ServiceModel.Security
 
         public override XmlDictionaryString RequestSecurityTokenAction
         {
-            get 
-            {
-                return this.StandardsManager.TrustDriver.RequestSecurityTokenAction;
-            }
+            get { return this.StandardsManager.TrustDriver.RequestSecurityTokenAction; }
         }
 
         public override XmlDictionaryString RequestSecurityTokenResponseAction
         {
-            get 
-            {
-                return this.StandardsManager.TrustDriver.RequestSecurityTokenResponseAction;
-            }
+            get { return this.StandardsManager.TrustDriver.RequestSecurityTokenResponseAction; }
         }
 
         protected override MessageVersion MessageVersion
         {
-            get
-            {
-                return this.messageVersion;
-            }
+            get { return this.messageVersion; }
         }
 
         protected override bool RequiresManualReplyAddressing
         {
-            get 
+            get
             {
                 ThrowIfCreated();
                 return this.requiresManualReplyAddressing;
@@ -97,7 +86,11 @@ namespace System.ServiceModel.Security
         {
             if (this.IssuerBindingContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())
+                    )
+                );
             }
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             this.SetupRstChannelFactory();
@@ -105,12 +98,18 @@ namespace System.ServiceModel.Security
             base.OnOpen(timeoutHelper.RemainingTime());
         }
 
-        protected abstract IChannelFactory<IRequestChannel> GetNegotiationChannelFactory(IChannelFactory<IRequestChannel> transportChannelFactory, ChannelBuilder channelBuilder);
+        protected abstract IChannelFactory<IRequestChannel> GetNegotiationChannelFactory(
+            IChannelFactory<IRequestChannel> transportChannelFactory,
+            ChannelBuilder channelBuilder
+        );
 
         void SetupRstChannelFactory()
         {
             IChannelFactory<IRequestChannel> innerChannelFactory = null;
-            ChannelBuilder channelBuilder = new ChannelBuilder(this.IssuerBindingContext.Clone(), true);
+            ChannelBuilder channelBuilder = new ChannelBuilder(
+                this.IssuerBindingContext.Clone(),
+                true
+            );
             // if the underlying transport does not support request/reply, wrap it inside
             // a service channel factory.
             if (channelBuilder.CanBuildChannelFactory<IRequestChannel>())
@@ -120,42 +119,68 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                ClientRuntime clientRuntime = new ClientRuntime("RequestSecurityTokenContract", NamingHelper.DefaultNamespace);
+                ClientRuntime clientRuntime = new ClientRuntime(
+                    "RequestSecurityTokenContract",
+                    NamingHelper.DefaultNamespace
+                );
                 clientRuntime.ValidateMustUnderstand = false;
-                ServiceChannelFactory serviceChannelFactory = ServiceChannelFactory.BuildChannelFactory(channelBuilder, clientRuntime);
+                ServiceChannelFactory serviceChannelFactory =
+                    ServiceChannelFactory.BuildChannelFactory(channelBuilder, clientRuntime);
 
                 serviceChannelFactory.ClientRuntime.UseSynchronizationContext = false;
                 serviceChannelFactory.ClientRuntime.AddTransactionFlowProperties = false;
-                ClientOperation rstOperation = new ClientOperation(serviceChannelFactory.ClientRuntime, "RequestSecurityToken", this.RequestSecurityTokenAction.Value);
+                ClientOperation rstOperation = new ClientOperation(
+                    serviceChannelFactory.ClientRuntime,
+                    "RequestSecurityToken",
+                    this.RequestSecurityTokenAction.Value
+                );
                 rstOperation.Formatter = MessageOperationFormatter.Instance;
                 serviceChannelFactory.ClientRuntime.Operations.Add(rstOperation);
 
                 if (this.IsMultiLegNegotiation)
                 {
-                    ClientOperation rstrOperation = new ClientOperation(serviceChannelFactory.ClientRuntime, "RequestSecurityTokenResponse", this.RequestSecurityTokenResponseAction.Value);
+                    ClientOperation rstrOperation = new ClientOperation(
+                        serviceChannelFactory.ClientRuntime,
+                        "RequestSecurityTokenResponse",
+                        this.RequestSecurityTokenResponseAction.Value
+                    );
                     rstrOperation.Formatter = MessageOperationFormatter.Instance;
                     serviceChannelFactory.ClientRuntime.Operations.Add(rstrOperation);
                 }
                 // service channel automatically adds reply headers
                 this.requiresManualReplyAddressing = false;
-                innerChannelFactory = new SecuritySessionSecurityTokenProvider.RequestChannelFactory(serviceChannelFactory);
+                innerChannelFactory =
+                    new SecuritySessionSecurityTokenProvider.RequestChannelFactory(
+                        serviceChannelFactory
+                    );
             }
 
-            this.rstChannelFactory = GetNegotiationChannelFactory(innerChannelFactory, channelBuilder);
+            this.rstChannelFactory = GetNegotiationChannelFactory(
+                innerChannelFactory,
+                channelBuilder
+            );
             this.messageVersion = channelBuilder.Binding.MessageVersion;
         }
-       
+
         // negotiation message processing overrides
-        protected override bool WillInitializeChannelFactoriesCompleteSynchronously(EndpointAddress target)
+        protected override bool WillInitializeChannelFactoriesCompleteSynchronously(
+            EndpointAddress target
+        )
         {
             return true;
         }
 
-        protected override void InitializeChannelFactories(EndpointAddress target, TimeSpan timeout)
-        {
-        }
+        protected override void InitializeChannelFactories(
+            EndpointAddress target,
+            TimeSpan timeout
+        ) { }
 
-        protected override IAsyncResult BeginInitializeChannelFactories(EndpointAddress target, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginInitializeChannelFactories(
+            EndpointAddress target,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }

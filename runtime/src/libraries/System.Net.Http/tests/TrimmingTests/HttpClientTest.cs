@@ -12,12 +12,15 @@ class Program
     [SupportedOSPlatformGuard("linux")]
     [SupportedOSPlatformGuard("macOS")]
     [SupportedOSPlatformGuard("Windows")]
-    private static bool IsHttp3Supported => (OperatingSystem.IsLinux() && !OperatingSystem.IsAndroid()) || OperatingSystem.IsWindows() || OperatingSystem.IsMacOS();
+    private static bool IsHttp3Supported =>
+        (OperatingSystem.IsLinux() && !OperatingSystem.IsAndroid())
+        || OperatingSystem.IsWindows()
+        || OperatingSystem.IsMacOS();
 
     static async Task<int> Main(string[] args)
     {
         using var client = new HttpClient();
-        using var response = await client.GetAsync("https://www.microsoft.com");            
+        using var response = await client.GetAsync("https://www.microsoft.com");
         var result = await response.Content.ReadAsStringAsync();
         Console.WriteLine(result);
 
@@ -26,12 +29,16 @@ class Program
 
         if (IsHttp3Supported)
         {
-            Console.WriteLine($"Expected {quicDll} is {(quicDllExists ? "present - OK" : "missing - BAD")}.");
+            Console.WriteLine(
+                $"Expected {quicDll} is {(quicDllExists ? "present - OK" : "missing - BAD")}."
+            );
             return quicDllExists ? 100 : -1;
         }
         else
         {
-            Console.WriteLine($"Unexpected {quicDll} is {(quicDllExists ? "present - BAD" : "missing - OK")}.");
+            Console.WriteLine(
+                $"Unexpected {quicDll} is {(quicDllExists ? "present - BAD" : "missing - OK")}."
+            );
             return quicDllExists ? -1 : 100;
         }
     }

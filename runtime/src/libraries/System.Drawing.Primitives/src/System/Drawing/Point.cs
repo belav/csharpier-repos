@@ -10,8 +10,12 @@ namespace System.Drawing
     /// Represents an ordered pair of x and y coordinates that define a point in a two-dimensional plane.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [TypeConverter("System.Drawing.PointConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
+    [TypeConverter(
+        "System.Drawing.PointConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public struct Point : IEquatable<Point>
     {
         /// <summary>
@@ -98,7 +102,8 @@ namespace System.Drawing
         /// <see cref='System.Drawing.Point.X'/> and <see cref='System.Drawing.Point.Y'/> properties of the two
         /// <see cref='System.Drawing.Point'/> objects are equal.
         /// </summary>
-        public static bool operator ==(Point left, Point right) => left.X == right.X && left.Y == right.Y;
+        public static bool operator ==(Point left, Point right) =>
+            left.X == right.X && left.Y == right.Y;
 
         /// <summary>
         /// Compares two <see cref='System.Drawing.Point'/> objects. The result specifies whether the values of the
@@ -110,33 +115,39 @@ namespace System.Drawing
         /// <summary>
         /// Translates a <see cref='System.Drawing.Point'/> by a given <see cref='System.Drawing.Size'/> .
         /// </summary>
-        public static Point Add(Point pt, Size sz) => new Point(unchecked(pt.X + sz.Width), unchecked(pt.Y + sz.Height));
+        public static Point Add(Point pt, Size sz) =>
+            new Point(unchecked(pt.X + sz.Width), unchecked(pt.Y + sz.Height));
 
         /// <summary>
         /// Translates a <see cref='System.Drawing.Point'/> by the negative of a given <see cref='System.Drawing.Size'/> .
         /// </summary>
-        public static Point Subtract(Point pt, Size sz) => new Point(unchecked(pt.X - sz.Width), unchecked(pt.Y - sz.Height));
+        public static Point Subtract(Point pt, Size sz) =>
+            new Point(unchecked(pt.X - sz.Width), unchecked(pt.Y - sz.Height));
 
         /// <summary>
         /// Converts a PointF to a Point by performing a ceiling operation on all the coordinates.
         /// </summary>
-        public static Point Ceiling(PointF value) => new Point(unchecked((int)Math.Ceiling(value.X)), unchecked((int)Math.Ceiling(value.Y)));
+        public static Point Ceiling(PointF value) =>
+            new Point(unchecked((int)Math.Ceiling(value.X)), unchecked((int)Math.Ceiling(value.Y)));
 
         /// <summary>
         /// Converts a PointF to a Point by performing a truncate operation on all the coordinates.
         /// </summary>
-        public static Point Truncate(PointF value) => new Point(unchecked((int)value.X), unchecked((int)value.Y));
+        public static Point Truncate(PointF value) =>
+            new Point(unchecked((int)value.X), unchecked((int)value.Y));
 
         /// <summary>
         /// Converts a PointF to a Point by performing a round operation on all the coordinates.
         /// </summary>
-        public static Point Round(PointF value) => new Point(unchecked((int)Math.Round(value.X)), unchecked((int)Math.Round(value.Y)));
+        public static Point Round(PointF value) =>
+            new Point(unchecked((int)Math.Round(value.X)), unchecked((int)Math.Round(value.Y)));
 
         /// <summary>
         /// Specifies whether this <see cref='System.Drawing.Point'/> contains the same coordinates as the specified
         /// <see cref='object'/>.
         /// </summary>
-        public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is Point && Equals((Point)obj);
+        public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is Point && Equals((Point)obj);
 
         public readonly bool Equals(Point other) => this == other;
 

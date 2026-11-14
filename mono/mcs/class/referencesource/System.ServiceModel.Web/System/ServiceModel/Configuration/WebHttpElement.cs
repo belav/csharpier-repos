@@ -9,13 +9,10 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Web;
 
     public sealed partial class WebHttpElement : BehaviorExtensionElement
-    {       
+    {
         ConfigurationPropertyCollection properties;
-        
-        public WebHttpElement()
-        {
-        }
-        
+
+        public WebHttpElement() { }
 
         [ConfigurationProperty(WebConfigurationStrings.HelpEnabled)]
         public bool HelpEnabled
@@ -36,7 +33,11 @@ namespace System.ServiceModel.Configuration
         [InternalEnumValidator(typeof(WebMessageFormatHelper))]
         public WebMessageFormat DefaultOutgoingResponseFormat
         {
-            get { return (WebMessageFormat)base[WebConfigurationStrings.DefaultOutgoingResponseFormat]; }
+            get
+            {
+                return (WebMessageFormat)
+                    base[WebConfigurationStrings.DefaultOutgoingResponseFormat];
+            }
             set { base[WebConfigurationStrings.DefaultOutgoingResponseFormat] = value; }
         }
 
@@ -54,39 +55,94 @@ namespace System.ServiceModel.Configuration
             set { base[WebConfigurationStrings.FaultExceptionEnabled] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
             get
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();                    
-                    properties.Add(new ConfigurationProperty(WebConfigurationStrings.HelpEnabled, typeof(bool), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-                    properties.Add(new ConfigurationProperty(WebConfigurationStrings.DefaultBodyStyle, typeof(System.ServiceModel.Web.WebMessageBodyStyle), System.ServiceModel.Web.WebMessageBodyStyle.Bare, null, new System.ServiceModel.Configuration.InternalEnumValidator(typeof(System.ServiceModel.Web.WebMessageBodyStyleHelper)), System.Configuration.ConfigurationPropertyOptions.None));
-                    properties.Add(new ConfigurationProperty(WebConfigurationStrings.DefaultOutgoingResponseFormat, typeof(System.ServiceModel.Web.WebMessageFormat), System.ServiceModel.Web.WebMessageFormat.Xml, null, new System.ServiceModel.Configuration.InternalEnumValidator(typeof(System.ServiceModel.Web.WebMessageFormatHelper)), System.Configuration.ConfigurationPropertyOptions.None));
-                    properties.Add(new ConfigurationProperty(WebConfigurationStrings.AutomaticFormatSelectionEnabled, typeof(bool), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-                    properties.Add(new ConfigurationProperty(WebConfigurationStrings.FaultExceptionEnabled, typeof(bool), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            WebConfigurationStrings.HelpEnabled,
+                            typeof(bool),
+                            false,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            WebConfigurationStrings.DefaultBodyStyle,
+                            typeof(System.ServiceModel.Web.WebMessageBodyStyle),
+                            System.ServiceModel.Web.WebMessageBodyStyle.Bare,
+                            null,
+                            new System.ServiceModel.Configuration.InternalEnumValidator(
+                                typeof(System.ServiceModel.Web.WebMessageBodyStyleHelper)
+                            ),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            WebConfigurationStrings.DefaultOutgoingResponseFormat,
+                            typeof(System.ServiceModel.Web.WebMessageFormat),
+                            System.ServiceModel.Web.WebMessageFormat.Xml,
+                            null,
+                            new System.ServiceModel.Configuration.InternalEnumValidator(
+                                typeof(System.ServiceModel.Web.WebMessageFormatHelper)
+                            ),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            WebConfigurationStrings.AutomaticFormatSelectionEnabled,
+                            typeof(bool),
+                            false,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            WebConfigurationStrings.FaultExceptionEnabled,
+                            typeof(bool),
+                            false,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Configuration", "Configuration102:ConfigurationPropertyAttributeRule", MessageId = "System.ServiceModel.Configuration.WebHttpElement.BehaviorType", Justification = "Not a configurable property; a property that had to be overridden from abstract parent class")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Configuration",
+            "Configuration102:ConfigurationPropertyAttributeRule",
+            MessageId = "System.ServiceModel.Configuration.WebHttpElement.BehaviorType",
+            Justification = "Not a configurable property; a property that had to be overridden from abstract parent class"
+        )]
         public override Type BehaviorType
         {
             get { return typeof(WebHttpBehavior); }
         }
 
-        internal protected override object CreateBehavior()
+        protected internal override object CreateBehavior()
         {
-            return new WebHttpBehavior() 
-            { 
-                HelpEnabled = this.HelpEnabled, 
-                DefaultBodyStyle = this.DefaultBodyStyle, 
+            return new WebHttpBehavior()
+            {
+                HelpEnabled = this.HelpEnabled,
+                DefaultBodyStyle = this.DefaultBodyStyle,
                 DefaultOutgoingResponseFormat = this.DefaultOutgoingResponseFormat,
-                AutomaticFormatSelectionEnabled = this.AutomaticFormatSelectionEnabled, 
-                FaultExceptionEnabled = this.FaultExceptionEnabled, 
+                AutomaticFormatSelectionEnabled = this.AutomaticFormatSelectionEnabled,
+                FaultExceptionEnabled = this.FaultExceptionEnabled,
             };
         }
     }

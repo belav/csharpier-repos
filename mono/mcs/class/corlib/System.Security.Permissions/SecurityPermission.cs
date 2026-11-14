@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,159 +32,168 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [Serializable]
+    public sealed class SecurityPermission
+        : CodeAccessPermission,
+            IUnrestrictedPermission,
+            IBuiltInPermission
+    {
+        private const int version = 1;
 
-	[ComVisible (true)]
-	[Serializable]
-	public sealed class SecurityPermission :
-		CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission {
+        private SecurityPermissionFlag flags;
 
-		private const int version = 1;
+        // constructors
 
-		private SecurityPermissionFlag flags;
+        public SecurityPermission(PermissionState state)
+        {
+            if (CheckPermissionState(state, true) == PermissionState.Unrestricted)
+                flags = SecurityPermissionFlag.AllFlags;
+            else
+                flags = SecurityPermissionFlag.NoFlags;
+        }
 
-		// constructors
+        public SecurityPermission(SecurityPermissionFlag flag)
+        {
+            // reuse validation by the Flags property
+            Flags = flag;
+        }
 
-		public SecurityPermission (PermissionState state)
-		{
-			if (CheckPermissionState (state, true) == PermissionState.Unrestricted)
-				flags = SecurityPermissionFlag.AllFlags;
-			else
-				flags = SecurityPermissionFlag.NoFlags;
-		}
+        public SecurityPermissionFlag Flags
+        {
+            get { return flags; }
+            set
+            {
+                if ((value & SecurityPermissionFlag.AllFlags) != value)
+                {
+                    string msg = String.Format(Locale.GetText("Invalid flags {0}"), value);
+                    throw new ArgumentException(msg, "SecurityPermissionFlag");
+                }
+                flags = value;
+            }
+        }
 
-		public SecurityPermission (SecurityPermissionFlag flag) 
-		{
-			// reuse validation by the Flags property
-			Flags = flag;
-		}
+        // IUnrestrictedPermission
+        public bool IsUnrestricted()
+        {
+            return (flags == SecurityPermissionFlag.AllFlags);
+        }
 
-		public SecurityPermissionFlag Flags {
-			get { return flags; }
-			set {
-				if ((value & SecurityPermissionFlag.AllFlags) != value) {
-					string msg = String.Format (Locale.GetText ("Invalid flags {0}"), value);
-					throw new ArgumentException (msg, "SecurityPermissionFlag");
-				}
-				flags = value;
-			}
-		}
+        public override IPermission Copy()
+        {
+            return new SecurityPermission(flags);
+        }
 
-		// IUnrestrictedPermission
-		public bool IsUnrestricted () 
-		{
-			return (flags == SecurityPermissionFlag.AllFlags);
-		}
+        public override IPermission Intersect(IPermission target)
+        {
+            SecurityPermission sp = Cast(target);
+            if (sp == null)
+                return null;
+            if (IsEmpty() || sp.IsEmpty())
+                return null;
 
-		public override IPermission Copy () 
-		{
-			return new SecurityPermission (flags);
-		}
+            if (this.IsUnrestricted() && sp.IsUnrestricted())
+                return new SecurityPermission(PermissionState.Unrestricted);
+            if (this.IsUnrestricted())
+                return sp.Copy();
+            if (sp.IsUnrestricted())
+                return this.Copy();
 
-		public override IPermission Intersect (IPermission target) 
-		{
-			SecurityPermission sp = Cast (target);
-			if (sp == null)
-				return null;
-			if (IsEmpty () || sp.IsEmpty ())
-				return null;
+            SecurityPermissionFlag f = flags & sp.flags;
+            if (f == SecurityPermissionFlag.NoFlags)
+                return null;
+            else
+                return new SecurityPermission(f);
+        }
 
-			if (this.IsUnrestricted () && sp.IsUnrestricted ())
-				return new SecurityPermission (PermissionState.Unrestricted);
-			if (this.IsUnrestricted ())
-				return sp.Copy ();
-			if (sp.IsUnrestricted ())
-				return this.Copy ();
+        public override IPermission Union(IPermission target)
+        {
+            SecurityPermission sp = Cast(target);
+            if (sp == null)
+                return this.Copy();
 
-			SecurityPermissionFlag f = flags & sp.flags;
-			if (f == SecurityPermissionFlag.NoFlags)
-				return null;
-			else
-				return new SecurityPermission (f);
-		}
+            if (this.IsUnrestricted() || sp.IsUnrestricted())
+                return new SecurityPermission(PermissionState.Unrestricted);
 
-		public override IPermission Union (IPermission target) 
-		{
-			SecurityPermission sp = Cast (target);
-			if (sp == null)
-				return this.Copy ();
+            return new SecurityPermission(flags | sp.flags);
+        }
 
-			if (this.IsUnrestricted () || sp.IsUnrestricted ())
-				return new SecurityPermission (PermissionState.Unrestricted);
-			
-			return new SecurityPermission (flags | sp.flags);
-		}
+        public override bool IsSubsetOf(IPermission target)
+        {
+            SecurityPermission sp = Cast(target);
+            if (sp == null)
+                return IsEmpty();
 
-		public override bool IsSubsetOf (IPermission target) 
-		{
-			SecurityPermission sp = Cast (target);
-			if (sp == null) 
-				return IsEmpty ();
+            if (sp.IsUnrestricted())
+                return true;
+            if (this.IsUnrestricted())
+                return false;
 
-			if (sp.IsUnrestricted ())
-				return true;
-			if (this.IsUnrestricted ())
-				return false;
+            return ((flags & ~sp.flags) == 0);
+        }
 
-			return ((flags & ~sp.flags) == 0);
-		}
+        public override void FromXml(SecurityElement esd)
+        {
+            // General validation in CodeAccessPermission
+            CheckSecurityElement(esd, "esd", version, version);
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
 
-		public override void FromXml (SecurityElement esd) 
-		{
-			// General validation in CodeAccessPermission
-			CheckSecurityElement (esd, "esd", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+            if (IsUnrestricted(esd))
+            {
+                flags = SecurityPermissionFlag.AllFlags;
+            }
+            else
+            {
+                string f = esd.Attribute("Flags");
+                if (f == null)
+                {
+                    flags = SecurityPermissionFlag.NoFlags;
+                }
+                else
+                {
+                    flags = (SecurityPermissionFlag)Enum.Parse(typeof(SecurityPermissionFlag), f);
+                }
+            }
+        }
 
-			if (IsUnrestricted (esd)) {
-				flags = SecurityPermissionFlag.AllFlags;
-			}
-			else {
-				string f = esd.Attribute ("Flags");
-				if (f == null) {
-					flags = SecurityPermissionFlag.NoFlags;
-				}
-				else {
-					flags = (SecurityPermissionFlag) Enum.Parse (
-						typeof (SecurityPermissionFlag), f);
-				}
-			}
-		}
+        public override SecurityElement ToXml()
+        {
+            SecurityElement e = Element(version);
+            if (IsUnrestricted())
+                e.AddAttribute("Unrestricted", "true");
+            else
+                e.AddAttribute("Flags", flags.ToString());
+            return e;
+        }
 
-		public override SecurityElement ToXml () 
-		{
-			SecurityElement e = Element (version);
-			if (IsUnrestricted ())
-				e.AddAttribute ("Unrestricted", "true");
-			else
-				e.AddAttribute ("Flags", flags.ToString ());
-			return e;
-		}
+        // IBuiltInPermission
+        int IBuiltInPermission.GetTokenIndex()
+        {
+            return (int)BuiltInToken.Security;
+        }
 
-		// IBuiltInPermission
-		int IBuiltInPermission.GetTokenIndex ()
-		{
-			return (int) BuiltInToken.Security;
-		}
+        // helpers
 
-		// helpers
+        private bool IsEmpty()
+        {
+            return (flags == SecurityPermissionFlag.NoFlags);
+        }
 
-		private bool IsEmpty ()
-		{
-			return (flags == SecurityPermissionFlag.NoFlags);
-		}
+        private SecurityPermission Cast(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-		private SecurityPermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
+            SecurityPermission sp = (target as SecurityPermission);
+            if (sp == null)
+            {
+                ThrowInvalidPermission(target, typeof(SecurityPermission));
+            }
 
-			SecurityPermission sp = (target as SecurityPermission);
-			if (sp == null) {
-				ThrowInvalidPermission (target, typeof (SecurityPermission));
-			}
-
-			return sp;
-		}
-	}
+            return sp;
+        }
+    }
 }

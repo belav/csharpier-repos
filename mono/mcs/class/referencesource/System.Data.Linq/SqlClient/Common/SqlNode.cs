@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Linq.Expressions;
-using System.Diagnostics;
-using System.Data;
 
-namespace System.Data.Linq.SqlClient {
+namespace System.Data.Linq.SqlClient
+{
     using System.Data.Linq.Mapping;
     using System.Data.Linq.Provider;
     using System.Diagnostics.CodeAnalysis;
 
-    internal enum SqlNodeType {
+    internal enum SqlNodeType
+    {
         Add,
         Alias,
         AliasRef,
@@ -106,40 +108,48 @@ namespace System.Data.Linq.SqlClient {
         UserRow,
         Variable,
         Value,
-        ValueOf
+        ValueOf,
     }
 
     [System.Diagnostics.DebuggerDisplay("text = {Text}, \r\nsource = {SourceExpression}")]
-    internal abstract class SqlNode {
+    internal abstract class SqlNode
+    {
         private SqlNodeType nodeType;
         private Expression sourceExpression;
 
-        internal SqlNode(SqlNodeType nodeType, Expression sourceExpression) {
+        internal SqlNode(SqlNodeType nodeType, Expression sourceExpression)
+        {
             this.nodeType = nodeType;
             this.sourceExpression = sourceExpression;
         }
 
-        internal Expression SourceExpression {
+        internal Expression SourceExpression
+        {
             get { return this.sourceExpression; }
         }
 
-        internal void ClearSourceExpression() {
+        internal void ClearSourceExpression()
+        {
             this.sourceExpression = null;
         }
 
-        internal SqlNodeType NodeType {
+        internal SqlNodeType NodeType
+        {
             get { return this.nodeType; }
         }
 
 #if DEBUG
         private static DbFormatter formatter;
-        internal static DbFormatter Formatter {
+        internal static DbFormatter Formatter
+        {
             get { return formatter; }
             set { formatter = value; }
         }
 
-        internal string Text {
-            get {
+        internal string Text
+        {
+            get
+            {
                 if (Formatter == null)
                     return "SqlNode.Formatter is not assigned";
                 return SqlNode.Formatter.Format(this, true);
@@ -148,19 +158,24 @@ namespace System.Data.Linq.SqlClient {
 #endif
     }
 
-    internal abstract class SqlExpression : SqlNode {
+    internal abstract class SqlExpression : SqlNode
+    {
         private Type clrType;
+
         internal SqlExpression(SqlNodeType nodeType, Type clrType, Expression sourceExpression)
-            : base(nodeType, sourceExpression) {
+            : base(nodeType, sourceExpression)
+        {
             this.clrType = clrType;
         }
 
-        internal Type ClrType {
+        internal Type ClrType
+        {
             get { return this.clrType; }
         }
 
         // note: changing the CLR type of a node is potentially dangerous
-        internal void SetClrType(Type type) {
+        internal void SetClrType(Type type)
+        {
             this.clrType = type;
         }
 
@@ -168,23 +183,32 @@ namespace System.Data.Linq.SqlClient {
 
         /// <summary>
         /// Drill down looking for a constant root expression, returning true if found.
-        /// </summary>           
-        internal bool IsConstantColumn {
-            get {
-                if (this.NodeType == SqlNodeType.Column) {
+        /// </summary>
+        internal bool IsConstantColumn
+        {
+            get
+            {
+                if (this.NodeType == SqlNodeType.Column)
+                {
                     SqlColumn col = (SqlColumn)this;
-                    if (col.Expression != null) {
+                    if (col.Expression != null)
+                    {
                         return col.Expression.IsConstantColumn;
                     }
                 }
-                else if (this.NodeType == SqlNodeType.ColumnRef) {
+                else if (this.NodeType == SqlNodeType.ColumnRef)
+                {
                     return ((SqlColumnRef)this).Column.IsConstantColumn;
                 }
-                else if (this.NodeType == SqlNodeType.OptionalValue) {
+                else if (this.NodeType == SqlNodeType.OptionalValue)
+                {
                     return ((SqlOptionalValue)this).Value.IsConstantColumn;
                 }
-                else if (this.NodeType == SqlNodeType.Value ||
-                        this.NodeType == SqlNodeType.Parameter) {
+                else if (
+                    this.NodeType == SqlNodeType.Value
+                    || this.NodeType == SqlNodeType.Parameter
+                )
+                {
                     return true;
                 }
                 return false;
@@ -195,79 +219,108 @@ namespace System.Data.Linq.SqlClient {
     /// <summary>
     /// A SqlExpression with a simple implementation of ClrType and SqlType.
     /// </summary>
-    internal abstract class SqlSimpleTypeExpression : SqlExpression {
+    internal abstract class SqlSimpleTypeExpression : SqlExpression
+    {
         private ProviderType sqlType;
 
-        internal SqlSimpleTypeExpression(SqlNodeType nodeType, Type clrType, ProviderType sqlType, Expression sourceExpression)
-            : base(nodeType, clrType, sourceExpression) {
+        internal SqlSimpleTypeExpression(
+            SqlNodeType nodeType,
+            Type clrType,
+            ProviderType sqlType,
+            Expression sourceExpression
+        )
+            : base(nodeType, clrType, sourceExpression)
+        {
             this.sqlType = sqlType;
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.sqlType; }
         }
 
-        internal void SetSqlType(ProviderType type) {
+        internal void SetSqlType(ProviderType type)
+        {
             this.sqlType = type;
         }
     }
 
-    internal class SqlDiscriminatorOf : SqlSimpleTypeExpression {
+    internal class SqlDiscriminatorOf : SqlSimpleTypeExpression
+    {
         SqlExpression obj;
-        internal SqlDiscriminatorOf(SqlExpression obj, Type clrType, ProviderType sqlType, Expression sourceExpression)
-            : base(SqlNodeType.DiscriminatorOf, clrType, sqlType, sourceExpression) {
+
+        internal SqlDiscriminatorOf(
+            SqlExpression obj,
+            Type clrType,
+            ProviderType sqlType,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.DiscriminatorOf, clrType, sqlType, sourceExpression)
+        {
             this.obj = obj;
         }
-        internal SqlExpression Object {
+
+        internal SqlExpression Object
+        {
             get { return this.obj; }
             set { this.obj = value; }
         }
     }
 
-
     /// <summary>
     /// Represents a dynamic CLR type that is chosen based on a discriminator expression.
     /// </summary>
-    internal class SqlDiscriminatedType : SqlExpression {
+    internal class SqlDiscriminatedType : SqlExpression
+    {
         private ProviderType sqlType;
         private SqlExpression discriminator;
         private MetaType targetType;
-        internal SqlDiscriminatedType(ProviderType sqlType, SqlExpression discriminator, MetaType targetType, Expression sourceExpression)
-            : base(SqlNodeType.DiscriminatedType,
-                   typeof(Type),
-                   sourceExpression) {
+
+        internal SqlDiscriminatedType(
+            ProviderType sqlType,
+            SqlExpression discriminator,
+            MetaType targetType,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.DiscriminatedType, typeof(Type), sourceExpression)
+        {
             if (discriminator == null)
                 throw Error.ArgumentNull("discriminator");
             this.discriminator = discriminator;
             this.targetType = targetType;
             this.sqlType = sqlType;
         }
-        internal override ProviderType SqlType {
+
+        internal override ProviderType SqlType
+        {
             get { return this.sqlType; }
         }
-        internal SqlExpression Discriminator {
+        internal SqlExpression Discriminator
+        {
             get { return this.discriminator; }
             set { this.discriminator = value; }
         }
 
-        internal MetaType TargetType {
+        internal MetaType TargetType
+        {
             get { return this.targetType; }
         }
     }
 
-    internal abstract class SqlStatement : SqlNode {
+    internal abstract class SqlStatement : SqlNode
+    {
         internal SqlStatement(SqlNodeType nodeType, Expression sourceExpression)
-            : base(nodeType, sourceExpression) {
-        }
+            : base(nodeType, sourceExpression) { }
     }
 
-    internal abstract class SqlSource : SqlNode {
+    internal abstract class SqlSource : SqlNode
+    {
         internal SqlSource(SqlNodeType nt, Expression sourceExpression)
-            : base(nt, sourceExpression) {
-        }
+            : base(nt, sourceExpression) { }
     }
 
-    internal class SqlSelect : SqlStatement {
+    internal class SqlSelect : SqlStatement
+    {
         private SqlExpression top;
         private bool isPercent;
         private bool isDistinct;
@@ -282,7 +335,8 @@ namespace System.Data.Linq.SqlClient {
         private bool squelch;
 
         internal SqlSelect(SqlExpression selection, SqlSource from, Expression sourceExpression)
-            : base(SqlNodeType.Select, sourceExpression) {
+            : base(SqlNodeType.Select, sourceExpression)
+        {
             this.Row = new SqlRow(sourceExpression);
             this.Selection = selection;
             this.From = from;
@@ -291,178 +345,230 @@ namespace System.Data.Linq.SqlClient {
             this.orderingType = SqlOrderingType.Default;
         }
 
-        internal SqlExpression Top {
+        internal SqlExpression Top
+        {
             get { return this.top; }
             set { this.top = value; }
         }
 
-        internal bool IsPercent {
+        internal bool IsPercent
+        {
             get { return this.isPercent; }
             set { this.isPercent = value; }
         }
 
-        internal bool IsDistinct {
+        internal bool IsDistinct
+        {
             get { return this.isDistinct; }
             set { this.isDistinct = value; }
         }
 
-        internal SqlExpression Selection {
+        internal SqlExpression Selection
+        {
             get { return this.selection; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.selection = value;
             }
         }
 
-        internal SqlRow Row {
+        internal SqlRow Row
+        {
             get { return this.row; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.row = value;
             }
         }
 
-        internal SqlSource From {
+        internal SqlSource From
+        {
             get { return this.from; }
             set { this.from = value; }
         }
 
-        internal SqlExpression Where {
+        internal SqlExpression Where
+        {
             get { return this.where; }
-            set {
-                if (value != null && TypeSystem.GetNonNullableType(value.ClrType) != typeof(bool)) {
+            set
+            {
+                if (value != null && TypeSystem.GetNonNullableType(value.ClrType) != typeof(bool))
+                {
                     throw Error.ArgumentWrongType("value", "bool", value.ClrType);
                 }
                 this.where = value;
             }
         }
 
-        internal List<SqlExpression> GroupBy {
+        internal List<SqlExpression> GroupBy
+        {
             get { return this.groupBy; }
         }
 
-        internal SqlExpression Having {
+        internal SqlExpression Having
+        {
             get { return this.having; }
-            set {
-                if (value != null && TypeSystem.GetNonNullableType(value.ClrType) != typeof(bool)) {
+            set
+            {
+                if (value != null && TypeSystem.GetNonNullableType(value.ClrType) != typeof(bool))
+                {
                     throw Error.ArgumentWrongType("value", "bool", value.ClrType);
                 }
                 this.having = value;
             }
         }
 
-        internal List<SqlOrderExpression> OrderBy {
+        internal List<SqlOrderExpression> OrderBy
+        {
             get { return this.orderBy; }
         }
 
-        internal SqlOrderingType OrderingType {
+        internal SqlOrderingType OrderingType
+        {
             get { return this.orderingType; }
             set { this.orderingType = value; }
         }
 
-        internal bool DoNotOutput {
+        internal bool DoNotOutput
+        {
             get { return this.squelch; }
             set { this.squelch = value; }
         }
     }
 
-    internal enum SqlOrderingType {
+    internal enum SqlOrderingType
+    {
         Default,
         Never,
         Blocked,
-        Always
+        Always,
     }
 
-    internal class SqlTable : SqlNode {
+    internal class SqlTable : SqlNode
+    {
         private MetaTable table;
         private MetaType rowType;
         private ProviderType sqlRowType;
         private List<SqlColumn> columns;
 
-        internal SqlTable(MetaTable table, MetaType rowType, ProviderType sqlRowType, Expression sourceExpression)
-            : base(SqlNodeType.Table, sourceExpression) {
+        internal SqlTable(
+            MetaTable table,
+            MetaType rowType,
+            ProviderType sqlRowType,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Table, sourceExpression)
+        {
             this.table = table;
             this.rowType = rowType;
             this.sqlRowType = sqlRowType;
             this.columns = new List<SqlColumn>();
         }
 
-        internal MetaTable MetaTable {
+        internal MetaTable MetaTable
+        {
             get { return this.table; }
         }
 
-        internal string Name {
+        internal string Name
+        {
             get { return this.table.TableName; }
         }
 
-        internal List<SqlColumn> Columns {
+        internal List<SqlColumn> Columns
+        {
             get { return this.columns; }
         }
 
-        internal MetaType RowType {
+        internal MetaType RowType
+        {
             get { return this.rowType; }
         }
 
-        internal ProviderType SqlRowType {
+        internal ProviderType SqlRowType
+        {
             get { return this.sqlRowType; }
         }
 
-        internal SqlColumn Find(string columnName) {
-            foreach (SqlColumn c in this.Columns) {
+        internal SqlColumn Find(string columnName)
+        {
+            foreach (SqlColumn c in this.Columns)
+            {
                 if (c.Name == columnName)
                     return c;
             }
             return null;
         }
-
     }
 
-    internal class SqlUserQuery : SqlNode {
+    internal class SqlUserQuery : SqlNode
+    {
         private string queryText;
         private SqlExpression projection;
         private List<SqlExpression> args;
         private List<SqlUserColumn> columns;
 
-        internal SqlUserQuery(SqlNodeType nt, SqlExpression projection, IEnumerable<SqlExpression> args, Expression source)
-            : base(nt, source) {
+        internal SqlUserQuery(
+            SqlNodeType nt,
+            SqlExpression projection,
+            IEnumerable<SqlExpression> args,
+            Expression source
+        )
+            : base(nt, source)
+        {
             this.Projection = projection;
             this.args = (args != null) ? new List<SqlExpression>(args) : new List<SqlExpression>();
             this.columns = new List<SqlUserColumn>();
         }
 
-        internal SqlUserQuery(string queryText, SqlExpression projection, IEnumerable<SqlExpression> args, Expression source)
-            : base(SqlNodeType.UserQuery, source) {
+        internal SqlUserQuery(
+            string queryText,
+            SqlExpression projection,
+            IEnumerable<SqlExpression> args,
+            Expression source
+        )
+            : base(SqlNodeType.UserQuery, source)
+        {
             this.queryText = queryText;
             this.Projection = projection;
             this.args = (args != null) ? new List<SqlExpression>(args) : new List<SqlExpression>();
             this.columns = new List<SqlUserColumn>();
         }
 
-        internal string QueryText {
+        internal string QueryText
+        {
             get { return this.queryText; }
         }
 
-        internal SqlExpression Projection {
+        internal SqlExpression Projection
+        {
             get { return this.projection; }
-            set {
+            set
+            {
                 if (this.projection != null && this.projection.ClrType != value.ClrType)
                     throw Error.ArgumentWrongType("value", this.projection.ClrType, value.ClrType);
                 this.projection = value;
             }
         }
 
-        internal List<SqlExpression> Arguments {
+        internal List<SqlExpression> Arguments
+        {
             get { return this.args; }
         }
 
-        internal List<SqlUserColumn> Columns {
+        internal List<SqlUserColumn> Columns
+        {
             get { return this.columns; }
         }
 
-        internal SqlUserColumn Find(string name) {
-            foreach (SqlUserColumn c in this.Columns) {
+        internal SqlUserColumn Find(string name)
+        {
+            foreach (SqlUserColumn c in this.Columns)
+            {
                 if (c.Name == name)
                     return c;
             }
@@ -470,38 +576,56 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlStoredProcedureCall : SqlUserQuery {
+    internal class SqlStoredProcedureCall : SqlUserQuery
+    {
         private MetaFunction function;
 
-        internal SqlStoredProcedureCall(MetaFunction function, SqlExpression projection, IEnumerable<SqlExpression> args, Expression source)
-            : base(SqlNodeType.StoredProcedureCall, projection, args, source) {
+        internal SqlStoredProcedureCall(
+            MetaFunction function,
+            SqlExpression projection,
+            IEnumerable<SqlExpression> args,
+            Expression source
+        )
+            : base(SqlNodeType.StoredProcedureCall, projection, args, source)
+        {
             if (function == null)
                 throw Error.ArgumentNull("function");
             this.function = function;
         }
 
-        internal MetaFunction Function {
+        internal MetaFunction Function
+        {
             get { return this.function; }
         }
     }
 
-    internal class SqlUserRow : SqlSimpleTypeExpression {
+    internal class SqlUserRow : SqlSimpleTypeExpression
+    {
         private SqlUserQuery query;
         private MetaType rowType;
 
-        internal SqlUserRow(MetaType rowType, ProviderType sqlType, SqlUserQuery query, Expression source)
-            : base(SqlNodeType.UserRow, rowType.Type, sqlType, source) {
+        internal SqlUserRow(
+            MetaType rowType,
+            ProviderType sqlType,
+            SqlUserQuery query,
+            Expression source
+        )
+            : base(SqlNodeType.UserRow, rowType.Type, sqlType, source)
+        {
             this.Query = query;
             this.rowType = rowType;
         }
 
-        internal MetaType RowType {
+        internal MetaType RowType
+        {
             get { return this.rowType; }
         }
 
-        internal SqlUserQuery Query {
+        internal SqlUserQuery Query
+        {
             get { return this.query; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (value.Projection != null && value.Projection.ClrType != this.ClrType)
@@ -511,21 +635,32 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlUserColumn : SqlSimpleTypeExpression {
+    internal class SqlUserColumn : SqlSimpleTypeExpression
+    {
         private SqlUserQuery query;
         private string name;
         private bool isRequired;
 
-        internal SqlUserColumn(Type clrType, ProviderType sqlType, SqlUserQuery query, string name, bool isRequired, Expression source)
-            : base(SqlNodeType.UserColumn, clrType, sqlType, source) {
+        internal SqlUserColumn(
+            Type clrType,
+            ProviderType sqlType,
+            SqlUserQuery query,
+            string name,
+            bool isRequired,
+            Expression source
+        )
+            : base(SqlNodeType.UserColumn, clrType, sqlType, source)
+        {
             this.Query = query;
             this.name = name;
             this.isRequired = isRequired;
         }
 
-        internal SqlUserQuery Query {
+        internal SqlUserQuery Query
+        {
             get { return this.query; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (this.query != null && this.query != value)
@@ -534,65 +669,85 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        internal string Name {
+        internal string Name
+        {
             get { return this.name; }
         }
 
-        internal bool IsRequired {
+        internal bool IsRequired
+        {
             get { return this.isRequired; }
         }
     }
 
-    internal class SqlAlias : SqlSource {
+    internal class SqlAlias : SqlSource
+    {
         private string name;
         private SqlNode node;
 
         internal SqlAlias(SqlNode node)
-            : base(SqlNodeType.Alias, node.SourceExpression) {
+            : base(SqlNodeType.Alias, node.SourceExpression)
+        {
             this.Node = node;
         }
 
-        internal string Name {
+        internal string Name
+        {
             get { return this.name; }
             set { this.name = value; }
         }
 
-        internal SqlNode Node {
+        internal SqlNode Node
+        {
             get { return this.node; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (!(value is SqlExpression || value is SqlSelect || value is SqlTable || value is SqlUnion))
+                if (
+                    !(
+                        value is SqlExpression
+                        || value is SqlSelect
+                        || value is SqlTable
+                        || value is SqlUnion
+                    )
+                )
                     throw Error.UnexpectedNode(value.NodeType);
                 this.node = value;
             }
         }
     }
 
-    internal class SqlAliasRef : SqlExpression {
+    internal class SqlAliasRef : SqlExpression
+    {
         private SqlAlias alias;
 
         internal SqlAliasRef(SqlAlias alias)
-            : base(SqlNodeType.AliasRef, GetClrType(alias.Node), alias.SourceExpression) {
+            : base(SqlNodeType.AliasRef, GetClrType(alias.Node), alias.SourceExpression)
+        {
             if (alias == null)
                 throw Error.ArgumentNull("alias");
             this.alias = alias;
         }
 
-        internal SqlAlias Alias {
+        internal SqlAlias Alias
+        {
             get { return this.alias; }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return GetSqlType(this.alias.Node); }
         }
 
-        private static Type GetClrType(SqlNode node) {
+        private static Type GetClrType(SqlNode node)
+        {
             SqlTableValuedFunctionCall tvf = node as SqlTableValuedFunctionCall;
             if (tvf != null)
                 return tvf.RowType.Type;
             SqlExpression exp = node as SqlExpression;
-            if (exp != null) {
+            if (exp != null)
+            {
                 if (TypeSystem.IsSequenceType(exp.ClrType))
                     return TypeSystem.GetElementType(exp.ClrType);
                 return exp.ClrType;
@@ -609,7 +764,8 @@ namespace System.Data.Linq.SqlClient {
             throw Error.UnexpectedNode(node.NodeType);
         }
 
-        private static ProviderType GetSqlType(SqlNode node) {
+        private static ProviderType GetSqlType(SqlNode node)
+        {
             SqlExpression exp = node as SqlExpression;
             if (exp != null)
                 return exp.SqlType;
@@ -626,99 +782,127 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlJoin : SqlSource {
+    internal class SqlJoin : SqlSource
+    {
         private SqlJoinType joinType;
         private SqlSource left;
         private SqlSource right;
         private SqlExpression condition;
 
-        internal SqlJoin(SqlJoinType type, SqlSource left, SqlSource right, SqlExpression cond, Expression sourceExpression)
-            : base(SqlNodeType.Join, sourceExpression) {
+        internal SqlJoin(
+            SqlJoinType type,
+            SqlSource left,
+            SqlSource right,
+            SqlExpression cond,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Join, sourceExpression)
+        {
             this.JoinType = type;
             this.Left = left;
             this.Right = right;
             this.Condition = cond;
         }
 
-        internal SqlJoinType JoinType {
+        internal SqlJoinType JoinType
+        {
             get { return this.joinType; }
             set { this.joinType = value; }
         }
 
-        internal SqlSource Left {
+        internal SqlSource Left
+        {
             get { return this.left; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.left = value;
             }
         }
 
-        internal SqlSource Right {
+        internal SqlSource Right
+        {
             get { return this.right; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.right = value;
             }
         }
 
-        internal SqlExpression Condition {
+        internal SqlExpression Condition
+        {
             get { return this.condition; }
             set { this.condition = value; }
         }
     }
 
-    internal enum SqlJoinType {
+    internal enum SqlJoinType
+    {
         Cross,
         Inner,
         LeftOuter,
         CrossApply,
-        OuterApply
+        OuterApply,
     }
 
-    internal class SqlUnion : SqlNode {
+    internal class SqlUnion : SqlNode
+    {
         private SqlNode left;
         private SqlNode right;
         private bool all;
 
         internal SqlUnion(SqlNode left, SqlNode right, bool all)
-            : base(SqlNodeType.Union, right.SourceExpression) {
+            : base(SqlNodeType.Union, right.SourceExpression)
+        {
             this.Left = left;
             this.Right = right;
             this.All = all;
         }
 
-        internal SqlNode Left {
+        internal SqlNode Left
+        {
             get { return this.left; }
-            set {
+            set
+            {
                 Validate(value);
                 this.left = value;
             }
         }
 
-        internal SqlNode Right {
+        internal SqlNode Right
+        {
             get { return this.right; }
-            set {
+            set
+            {
                 Validate(value);
                 this.right = value;
             }
         }
 
-        internal bool All {
+        internal bool All
+        {
             get { return this.all; }
             set { this.all = value; }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification="Unknown reason.")]
-        private void Validate(SqlNode node) {
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Unknown reason."
+        )]
+        private void Validate(SqlNode node)
+        {
             if (node == null)
                 throw Error.ArgumentNull("node");
             if (!(node is SqlExpression || node is SqlSelect || node is SqlUnion))
                 throw Error.UnexpectedNode(node.NodeType);
         }
 
-        internal Type GetClrType() {
+        internal Type GetClrType()
+        {
             SqlExpression exp = this.Left as SqlExpression;
             if (exp != null)
                 return exp.ClrType;
@@ -728,7 +912,8 @@ namespace System.Data.Linq.SqlClient {
             throw Error.CouldNotGetClrType();
         }
 
-        internal ProviderType GetSqlType() {
+        internal ProviderType GetSqlType()
+        {
             SqlExpression exp = this.Left as SqlExpression;
             if (exp != null)
                 return exp.SqlType;
@@ -739,81 +924,98 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlNop : SqlSimpleTypeExpression {
+    internal class SqlNop : SqlSimpleTypeExpression
+    {
         internal SqlNop(Type clrType, ProviderType sqlType, Expression sourceExpression)
-            : base(SqlNodeType.Nop, clrType, sqlType, sourceExpression) {
-        }
+            : base(SqlNodeType.Nop, clrType, sqlType, sourceExpression) { }
     }
 
-    internal class SqlLift : SqlExpression {
+    internal class SqlLift : SqlExpression
+    {
         internal SqlExpression liftedExpression;
 
         internal SqlLift(Type type, SqlExpression liftedExpression, Expression sourceExpression)
-            : base(SqlNodeType.Lift, type, sourceExpression) {
+            : base(SqlNodeType.Lift, type, sourceExpression)
+        {
             if (liftedExpression == null)
                 throw Error.ArgumentNull("liftedExpression");
             this.liftedExpression = liftedExpression;
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.liftedExpression; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.liftedExpression = value;
             }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.liftedExpression.SqlType; }
         }
     }
 
-    internal enum SqlOrderType {
+    internal enum SqlOrderType
+    {
         Ascending,
-        Descending
+        Descending,
     }
 
-    internal class SqlOrderExpression : IEquatable<SqlOrderExpression> {
+    internal class SqlOrderExpression : IEquatable<SqlOrderExpression>
+    {
         private SqlOrderType orderType;
         private SqlExpression expression;
 
-        internal SqlOrderExpression(SqlOrderType type, SqlExpression expr) {
+        internal SqlOrderExpression(SqlOrderType type, SqlExpression expr)
+        {
             this.OrderType = type;
             this.Expression = expr;
         }
 
-        internal SqlOrderType OrderType {
+        internal SqlOrderType OrderType
+        {
             get { return this.orderType; }
             set { this.orderType = value; }
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (this.expression != null && !this.expression.ClrType.IsAssignableFrom(value.ClrType))
+                if (
+                    this.expression != null
+                    && !this.expression.ClrType.IsAssignableFrom(value.ClrType)
+                )
                     throw Error.ArgumentWrongType("value", this.expression.ClrType, value.ClrType);
                 this.expression = value;
             }
         }
 
-        public override bool Equals(object obj) {
+        public override bool Equals(object obj)
+        {
             if (this.EqualsTo(obj as SqlOrderExpression))
                 return true;
 
             return base.Equals(obj);
         }
 
-        public bool Equals(SqlOrderExpression other) {
+        public bool Equals(SqlOrderExpression other)
+        {
             if (this.EqualsTo(other))
                 return true;
 
             return base.Equals(other);
         }
 
-        private bool EqualsTo(SqlOrderExpression other) {
+        private bool EqualsTo(SqlOrderExpression other)
+        {
             if (other == null)
                 return false;
             if (object.ReferenceEquals(this, other))
@@ -832,7 +1034,8 @@ namespace System.Data.Linq.SqlClient {
             return col1 == col2;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             SqlColumn col = SqlOrderExpression.UnwrapColumn(this.Expression);
             if (col != null)
                 return col.GetHashCode();
@@ -840,21 +1043,25 @@ namespace System.Data.Linq.SqlClient {
             return base.GetHashCode();
         }
 
-        private static SqlColumn UnwrapColumn(SqlExpression expr) {
+        private static SqlColumn UnwrapColumn(SqlExpression expr)
+        {
             System.Diagnostics.Debug.Assert(expr != null);
 
             SqlUnary exprAsUnary = expr as SqlUnary;
-            if (exprAsUnary != null) {
+            if (exprAsUnary != null)
+            {
                 expr = exprAsUnary.Operand;
             }
 
             SqlColumn exprAsColumn = expr as SqlColumn;
-            if (exprAsColumn != null) {
+            if (exprAsColumn != null)
+            {
                 return exprAsColumn;
             }
 
             SqlColumnRef exprAsColumnRef = expr as SqlColumnRef;
-            if (exprAsColumnRef != null) {
+            if (exprAsColumnRef != null)
+            {
                 return exprAsColumnRef.GetRootColumn();
             }
             //
@@ -865,16 +1072,25 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlRowNumber : SqlSimpleTypeExpression {
+    internal class SqlRowNumber : SqlSimpleTypeExpression
+    {
         private List<SqlOrderExpression> orderBy;
 
-        internal List<SqlOrderExpression> OrderBy {
+        internal List<SqlOrderExpression> OrderBy
+        {
             get { return orderBy; }
         }
 
-        internal SqlRowNumber(Type clrType, ProviderType sqlType, List<SqlOrderExpression> orderByList, Expression sourceExpression)
-            : base(SqlNodeType.RowNumber, clrType, sqlType, sourceExpression) {
-            if (orderByList == null) {
+        internal SqlRowNumber(
+            Type clrType,
+            ProviderType sqlType,
+            List<SqlOrderExpression> orderByList,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.RowNumber, clrType, sqlType, sourceExpression)
+        {
+            if (orderByList == null)
+            {
                 throw Error.ArgumentNull("orderByList");
             }
 
@@ -882,18 +1098,37 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlUnary : SqlSimpleTypeExpression {
+    internal class SqlUnary : SqlSimpleTypeExpression
+    {
         private SqlExpression operand;
         private MethodInfo method;
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-        internal SqlUnary(SqlNodeType nt, Type clrType, ProviderType sqlType, SqlExpression expr, Expression sourceExpression)
-            : this(nt, clrType, sqlType, expr, null, sourceExpression) {
-        }
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+        )]
+        internal SqlUnary(
+            SqlNodeType nt,
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression expr,
+            Expression sourceExpression
+        )
+            : this(nt, clrType, sqlType, expr, null, sourceExpression) { }
 
-        internal SqlUnary(SqlNodeType nt, Type clrType, ProviderType sqlType, SqlExpression expr, MethodInfo method, Expression sourceExpression)
-            : base(nt, clrType, sqlType, sourceExpression) {
-            switch (nt) {
+        internal SqlUnary(
+            SqlNodeType nt,
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression expr,
+            MethodInfo method,
+            Expression sourceExpression
+        )
+            : base(nt, clrType, sqlType, sourceExpression)
+        {
+            switch (nt)
+            {
                 case SqlNodeType.Not:
                 case SqlNodeType.Not2V:
                 case SqlNodeType.Negate:
@@ -920,33 +1155,60 @@ namespace System.Data.Linq.SqlClient {
             this.method = method;
         }
 
-        internal SqlExpression Operand {
+        internal SqlExpression Operand
+        {
             get { return this.operand; }
-            set {
-                if (value == null && (this.NodeType != SqlNodeType.Count && this.NodeType != SqlNodeType.LongCount))
+            set
+            {
+                if (
+                    value == null
+                    && (
+                        this.NodeType != SqlNodeType.Count && this.NodeType != SqlNodeType.LongCount
+                    )
+                )
                     throw Error.ArgumentNull("value");
                 this.operand = value;
             }
         }
 
-        internal MethodInfo Method {
+        internal MethodInfo Method
+        {
             get { return this.method; }
         }
     }
 
-    internal class SqlBinary : SqlSimpleTypeExpression {
+    internal class SqlBinary : SqlSimpleTypeExpression
+    {
         private SqlExpression left;
         private SqlExpression right;
         private MethodInfo method;
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-        internal SqlBinary(SqlNodeType nt, Type clrType, ProviderType sqlType, SqlExpression left, SqlExpression right)
-            : this(nt, clrType, sqlType, left, right, null) {
-        }
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+        )]
+        internal SqlBinary(
+            SqlNodeType nt,
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression left,
+            SqlExpression right
+        )
+            : this(nt, clrType, sqlType, left, right, null) { }
 
-        internal SqlBinary(SqlNodeType nt, Type clrType, ProviderType sqlType, SqlExpression left, SqlExpression right, MethodInfo method)
-            : base(nt, clrType, sqlType, right.SourceExpression) {
-            switch (nt) {
+        internal SqlBinary(
+            SqlNodeType nt,
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression left,
+            SqlExpression right,
+            MethodInfo method
+        )
+            : base(nt, clrType, sqlType, right.SourceExpression)
+        {
+            switch (nt)
+            {
                 case SqlNodeType.Add:
                 case SqlNodeType.Sub:
                 case SqlNodeType.Mul:
@@ -976,88 +1238,127 @@ namespace System.Data.Linq.SqlClient {
             this.method = method;
         }
 
-        internal SqlExpression Left {
+        internal SqlExpression Left
+        {
             get { return this.left; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.left = value;
             }
         }
 
-        internal SqlExpression Right {
+        internal SqlExpression Right
+        {
             get { return this.right; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.right = value;
             }
         }
 
-        internal MethodInfo Method {
+        internal MethodInfo Method
+        {
             get { return this.method; }
         }
     }
 
-    internal class SqlBetween : SqlSimpleTypeExpression {
+    internal class SqlBetween : SqlSimpleTypeExpression
+    {
         SqlExpression expression;
         SqlExpression start;
         SqlExpression end;
 
-        internal SqlBetween(Type clrType, ProviderType sqlType, SqlExpression expr, SqlExpression start, SqlExpression end, Expression source)
-            : base(SqlNodeType.Between, clrType, sqlType, source) {
+        internal SqlBetween(
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression expr,
+            SqlExpression start,
+            SqlExpression end,
+            Expression source
+        )
+            : base(SqlNodeType.Between, clrType, sqlType, source)
+        {
             this.expression = expr;
             this.start = start;
             this.end = end;
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
             set { this.expression = value; }
         }
 
-        internal SqlExpression Start {
+        internal SqlExpression Start
+        {
             get { return this.start; }
             set { this.start = value; }
         }
 
-        internal SqlExpression End {
+        internal SqlExpression End
+        {
             get { return this.end; }
             set { this.end = value; }
         }
     }
 
-    internal class SqlIn : SqlSimpleTypeExpression {
+    internal class SqlIn : SqlSimpleTypeExpression
+    {
         private SqlExpression expression;
         private List<SqlExpression> values;
 
-        internal SqlIn(Type clrType, ProviderType sqlType, SqlExpression expression, IEnumerable<SqlExpression> values, Expression sourceExpression)
-            :base(SqlNodeType.In, clrType, sqlType, sourceExpression) {
+        internal SqlIn(
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression expression,
+            IEnumerable<SqlExpression> values,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.In, clrType, sqlType, sourceExpression)
+        {
             this.expression = expression;
-            this.values = values != null ? new List<SqlExpression>(values) : new List<SqlExpression>(0);
+            this.values =
+                values != null ? new List<SqlExpression>(values) : new List<SqlExpression>(0);
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
-            set {
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     throw Error.ArgumentNull("value");
                 }
                 this.expression = value;
             }
         }
-        internal List<SqlExpression> Values {
+        internal List<SqlExpression> Values
+        {
             get { return this.values; }
         }
     }
 
-    internal class SqlLike : SqlSimpleTypeExpression {
+    internal class SqlLike : SqlSimpleTypeExpression
+    {
         private SqlExpression expression;
         private SqlExpression pattern;
         private SqlExpression escape;
 
-        internal SqlLike(Type clrType, ProviderType sqlType, SqlExpression expr, SqlExpression pattern, SqlExpression escape, Expression source)
-            : base(SqlNodeType.Like, clrType, sqlType, source) {
+        internal SqlLike(
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression expr,
+            SqlExpression pattern,
+            SqlExpression escape,
+            Expression source
+        )
+            : base(SqlNodeType.Like, clrType, sqlType, source)
+        {
             if (expr == null)
                 throw Error.ArgumentNull("expr");
             if (pattern == null)
@@ -1067,9 +1368,11 @@ namespace System.Data.Linq.SqlClient {
             this.Escape = escape;
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (value.ClrType != typeof(string))
@@ -1078,9 +1381,11 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        internal SqlExpression Pattern {
+        internal SqlExpression Pattern
+        {
             get { return this.pattern; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (value.ClrType != typeof(string))
@@ -1089,9 +1394,11 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        internal SqlExpression Escape {
+        internal SqlExpression Escape
+        {
             get { return this.escape; }
-            set {
+            set
+            {
                 if (value != null && value.ClrType != typeof(string))
                     throw Error.ArgumentWrongType("value", "string", value.ClrType);
                 this.escape = value;
@@ -1099,11 +1406,13 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlWhen {
+    internal class SqlWhen
+    {
         private SqlExpression matchExpression;
         private SqlExpression valueExpression;
 
-        internal SqlWhen(SqlExpression match, SqlExpression value) {
+        internal SqlWhen(SqlExpression match, SqlExpression value)
+        {
             // 'match' may be null when this when represents the ELSE condition.
             if (value == null)
                 throw Error.ArgumentNull("value");
@@ -1111,25 +1420,46 @@ namespace System.Data.Linq.SqlClient {
             this.Value = value;
         }
 
-        internal SqlExpression Match {
+        internal SqlExpression Match
+        {
             get { return this.matchExpression; }
-            set {
-                if (this.matchExpression != null && value != null && this.matchExpression.ClrType != value.ClrType
+            set
+            {
+                if (
+                    this.matchExpression != null
+                    && value != null
+                    && this.matchExpression.ClrType != value.ClrType
                     // Exception: bool types, because predicates can have type bool or bool?
-                    && !TypeSystem.GetNonNullableType(this.matchExpression.ClrType).Equals(typeof(bool))
-                    && !TypeSystem.GetNonNullableType(value.ClrType).Equals(typeof(bool)))
-                    throw Error.ArgumentWrongType("value", this.matchExpression.ClrType, value.ClrType);
+                    && !TypeSystem
+                        .GetNonNullableType(this.matchExpression.ClrType)
+                        .Equals(typeof(bool))
+                    && !TypeSystem.GetNonNullableType(value.ClrType).Equals(typeof(bool))
+                )
+                    throw Error.ArgumentWrongType(
+                        "value",
+                        this.matchExpression.ClrType,
+                        value.ClrType
+                    );
                 this.matchExpression = value;
             }
         }
 
-        internal SqlExpression Value {
+        internal SqlExpression Value
+        {
             get { return this.valueExpression; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (this.valueExpression != null && !this.valueExpression.ClrType.IsAssignableFrom(value.ClrType))
-                    throw Error.ArgumentWrongType("value", this.valueExpression.ClrType, value.ClrType);
+                if (
+                    this.valueExpression != null
+                    && !this.valueExpression.ClrType.IsAssignableFrom(value.ClrType)
+                )
+                    throw Error.ArgumentWrongType(
+                        "value",
+                        this.valueExpression.ClrType,
+                        value.ClrType
+                    );
                 this.valueExpression = value;
             }
         }
@@ -1138,19 +1468,26 @@ namespace System.Data.Linq.SqlClient {
     /*
      * Searched CASE function:
      * CASE
-     * WHEN BooleanExpression THEN resultExpression 
-     * [ ...n ] 
-     * [ 
-     * ELSE elseResultExpression 
-     * ] 
+     * WHEN BooleanExpression THEN resultExpression
+     * [ ...n ]
+     * [
+     * ELSE elseResultExpression
+     * ]
      * END
      */
-    internal class SqlSearchedCase : SqlExpression {
+    internal class SqlSearchedCase : SqlExpression
+    {
         private List<SqlWhen> whens;
         private SqlExpression @else;
 
-        internal SqlSearchedCase(Type clrType, IEnumerable<SqlWhen> whens, SqlExpression @else, Expression sourceExpression)
-            : base(SqlNodeType.SearchedCase, clrType, sourceExpression) {
+        internal SqlSearchedCase(
+            Type clrType,
+            IEnumerable<SqlWhen> whens,
+            SqlExpression @else,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.SearchedCase, clrType, sourceExpression)
+        {
             if (whens == null)
                 throw Error.ArgumentNull("whens");
             this.whens = new List<SqlWhen>(whens);
@@ -1159,13 +1496,16 @@ namespace System.Data.Linq.SqlClient {
             this.Else = @else;
         }
 
-        internal List<SqlWhen> Whens {
+        internal List<SqlWhen> Whens
+        {
             get { return this.whens; }
         }
 
-        internal SqlExpression Else {
+        internal SqlExpression Else
+        {
             get { return this.@else; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (this.@else != null && !this.@else.ClrType.IsAssignableFrom(value.ClrType))
@@ -1174,27 +1514,35 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.whens[0].Value.SqlType; }
         }
     }
 
     /*
      * Simple CASE function:
-     * CASE inputExpression 
-     * WHEN whenExpression THEN resultExpression 
-     * [ ...n ] 
-     * [ 
-     * ELSE elseResultExpression 
-     * ] 
-     * END 
+     * CASE inputExpression
+     * WHEN whenExpression THEN resultExpression
+     * [ ...n ]
+     * [
+     * ELSE elseResultExpression
+     * ]
+     * END
      */
-    internal class SqlSimpleCase : SqlExpression {
+    internal class SqlSimpleCase : SqlExpression
+    {
         private SqlExpression expression;
         private List<SqlWhen> whens = new List<SqlWhen>();
 
-        internal SqlSimpleCase(Type clrType, SqlExpression expr, IEnumerable<SqlWhen> whens, Expression sourceExpression)
-            : base(SqlNodeType.SimpleCase, clrType, sourceExpression) {
+        internal SqlSimpleCase(
+            Type clrType,
+            SqlExpression expr,
+            IEnumerable<SqlWhen> whens,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.SimpleCase, clrType, sourceExpression)
+        {
             this.Expression = expr;
             if (whens == null)
                 throw Error.ArgumentNull("whens");
@@ -1203,9 +1551,11 @@ namespace System.Data.Linq.SqlClient {
                 throw Error.ArgumentOutOfRange("whens");
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (this.expression != null && this.expression.ClrType != value.ClrType)
@@ -1214,31 +1564,40 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        internal List<SqlWhen> Whens {
+        internal List<SqlWhen> Whens
+        {
             get { return this.whens; }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.whens[0].Value.SqlType; }
         }
     }
 
     /// <summary>
     /// A case statement that must be evaluated on the client. For example, a case statement
-    /// that contains values of LINK, Element, or Multi-set are not directly handleable by 
+    /// that contains values of LINK, Element, or Multi-set are not directly handleable by
     /// SQL.
-    /// 
-    /// CASE inputExpression 
-    /// WHEN whenExpression THEN resultExpression 
-    /// [ ...n ] 
-    /// END 
+    ///
+    /// CASE inputExpression
+    /// WHEN whenExpression THEN resultExpression
+    /// [ ...n ]
+    /// END
     /// </summary>
-    internal class SqlClientCase : SqlExpression {
+    internal class SqlClientCase : SqlExpression
+    {
         private SqlExpression expression;
         private List<SqlClientWhen> whens = new List<SqlClientWhen>();
 
-        internal SqlClientCase(Type clrType, SqlExpression expr, IEnumerable<SqlClientWhen> whens, Expression sourceExpression)
-            : base(SqlNodeType.ClientCase, clrType, sourceExpression) {
+        internal SqlClientCase(
+            Type clrType,
+            SqlExpression expr,
+            IEnumerable<SqlClientWhen> whens,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.ClientCase, clrType, sourceExpression)
+        {
             this.Expression = expr;
             if (whens == null)
                 throw Error.ArgumentNull("whens");
@@ -1247,9 +1606,11 @@ namespace System.Data.Linq.SqlClient {
                 throw Error.ArgumentOutOfRange("whens");
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (this.expression != null && this.expression.ClrType != value.ClrType)
@@ -1258,11 +1619,13 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        internal List<SqlClientWhen> Whens {
+        internal List<SqlClientWhen> Whens
+        {
             get { return this.whens; }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.whens[0].Value.SqlType; }
         }
     }
@@ -1270,11 +1633,13 @@ namespace System.Data.Linq.SqlClient {
     /// <summary>
     /// A single WHEN clause for ClientCase.
     /// </summary>
-    internal class SqlClientWhen {
+    internal class SqlClientWhen
+    {
         private SqlExpression matchExpression;
         private SqlExpression matchValue;
 
-        internal SqlClientWhen(SqlExpression match, SqlExpression value) {
+        internal SqlClientWhen(SqlExpression match, SqlExpression value)
+        {
             // 'match' may be null when this when represents the ELSE condition.
             if (value == null)
                 throw Error.ArgumentNull("value");
@@ -1282,18 +1647,30 @@ namespace System.Data.Linq.SqlClient {
             this.Value = value;
         }
 
-        internal SqlExpression Match {
+        internal SqlExpression Match
+        {
             get { return this.matchExpression; }
-            set {
-                if (this.matchExpression != null && value != null && this.matchExpression.ClrType != value.ClrType)
-                    throw Error.ArgumentWrongType("value", this.matchExpression.ClrType, value.ClrType);
+            set
+            {
+                if (
+                    this.matchExpression != null
+                    && value != null
+                    && this.matchExpression.ClrType != value.ClrType
+                )
+                    throw Error.ArgumentWrongType(
+                        "value",
+                        this.matchExpression.ClrType,
+                        value.ClrType
+                    );
                 this.matchExpression = value;
             }
         }
 
-        internal SqlExpression Value {
+        internal SqlExpression Value
+        {
             get { return this.matchValue; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (this.matchValue != null && this.matchValue.ClrType != value.ClrType)
@@ -1305,20 +1682,29 @@ namespace System.Data.Linq.SqlClient {
 
     /// <summary>
     /// Represents the construction of an object in abstract 'super sql'.
-    /// The type may be polymorphic. A discriminator field is used to determine 
+    /// The type may be polymorphic. A discriminator field is used to determine
     /// which type in a hierarchy should be instantiated.
-    /// In the common degenerate case where the inheritance hierarchy is 1-deep 
-    /// the discriminator will be a constant SqlValue and there will be one 
+    /// In the common degenerate case where the inheritance hierarchy is 1-deep
+    /// the discriminator will be a constant SqlValue and there will be one
     /// type-case-when corresponding to that type.
     /// </summary>
-    internal class SqlTypeCase : SqlExpression {
+    internal class SqlTypeCase : SqlExpression
+    {
         private MetaType rowType;
         private SqlExpression discriminator;
         private List<SqlTypeCaseWhen> whens = new List<SqlTypeCaseWhen>();
         ProviderType sqlType;
 
-        internal SqlTypeCase(Type clrType, ProviderType sqlType, MetaType rowType, SqlExpression discriminator, IEnumerable<SqlTypeCaseWhen> whens, Expression sourceExpression)
-            : base(SqlNodeType.TypeCase, clrType, sourceExpression) {
+        internal SqlTypeCase(
+            Type clrType,
+            ProviderType sqlType,
+            MetaType rowType,
+            SqlExpression discriminator,
+            IEnumerable<SqlTypeCaseWhen> whens,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.TypeCase, clrType, sourceExpression)
+        {
             this.Discriminator = discriminator;
             if (whens == null)
                 throw Error.ArgumentNull("whens");
@@ -1329,26 +1715,35 @@ namespace System.Data.Linq.SqlClient {
             this.rowType = rowType;
         }
 
-        internal SqlExpression Discriminator {
+        internal SqlExpression Discriminator
+        {
             get { return this.discriminator; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (this.discriminator != null && this.discriminator.ClrType != value.ClrType)
-                    throw Error.ArgumentWrongType("value", this.discriminator.ClrType, value.ClrType);
+                    throw Error.ArgumentWrongType(
+                        "value",
+                        this.discriminator.ClrType,
+                        value.ClrType
+                    );
                 this.discriminator = value;
             }
         }
 
-        internal List<SqlTypeCaseWhen> Whens {
+        internal List<SqlTypeCaseWhen> Whens
+        {
             get { return this.whens; }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return sqlType; }
         }
 
-        internal MetaType RowType {
+        internal MetaType RowType
+        {
             get { return this.rowType; }
         }
     }
@@ -1358,53 +1753,76 @@ namespace System.Data.Linq.SqlClient {
     /// When 'match' is the same as type case Discriminator then the corresponding
     /// type binding is the one used for instantiation.
     /// </summary>
-    internal class SqlTypeCaseWhen {
+    internal class SqlTypeCaseWhen
+    {
         private SqlExpression match;
         private SqlExpression @new;
 
-        internal SqlTypeCaseWhen(SqlExpression match, SqlExpression typeBinding) {
+        internal SqlTypeCaseWhen(SqlExpression match, SqlExpression typeBinding)
+        {
             this.Match = match;
             this.TypeBinding = typeBinding;
         }
-        internal SqlExpression Match {
+
+        internal SqlExpression Match
+        {
             get { return this.match; }
-            set {
+            set
+            {
                 if (this.match != null && value != null && this.match.ClrType != value.ClrType)
                     throw Error.ArgumentWrongType("value", this.match.ClrType, value.ClrType);
                 this.match = value;
             }
         }
-        internal SqlExpression TypeBinding {
+        internal SqlExpression TypeBinding
+        {
             get { return this.@new; }
             set { this.@new = value; }
         }
     }
 
-    internal class SqlValue : SqlSimpleTypeExpression {
+    internal class SqlValue : SqlSimpleTypeExpression
+    {
         private object value;
         private bool isClient;
 
-        internal SqlValue(Type clrType, ProviderType sqlType, object value, bool isClientSpecified, Expression sourceExpression)
-            : base(SqlNodeType.Value, clrType, sqlType, sourceExpression) {
+        internal SqlValue(
+            Type clrType,
+            ProviderType sqlType,
+            object value,
+            bool isClientSpecified,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Value, clrType, sqlType, sourceExpression)
+        {
             this.value = value;
             this.isClient = isClientSpecified;
         }
 
-        internal object Value {
+        internal object Value
+        {
             get { return this.value; }
         }
 
-        internal bool IsClientSpecified {
+        internal bool IsClientSpecified
+        {
             get { return this.isClient; }
         }
     }
 
-    internal class SqlParameter : SqlSimpleTypeExpression {
+    internal class SqlParameter : SqlSimpleTypeExpression
+    {
         private string name;
         private System.Data.ParameterDirection direction;
 
-        internal SqlParameter(Type clrType, ProviderType sqlType, string name, Expression sourceExpression)
-            : base(SqlNodeType.Parameter, clrType, sqlType, sourceExpression) {
+        internal SqlParameter(
+            Type clrType,
+            ProviderType sqlType,
+            string name,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Parameter, clrType, sqlType, sourceExpression)
+        {
             if (name == null)
                 throw Error.ArgumentNull("name");
             if (typeof(Type).IsAssignableFrom(clrType))
@@ -1413,61 +1831,86 @@ namespace System.Data.Linq.SqlClient {
             this.direction = System.Data.ParameterDirection.Input;
         }
 
-        internal string Name {
+        internal string Name
+        {
             get { return this.name; }
         }
 
-        internal System.Data.ParameterDirection Direction {
+        internal System.Data.ParameterDirection Direction
+        {
             get { return this.direction; }
             set { this.direction = value; }
         }
     }
 
-    internal class SqlVariable : SqlSimpleTypeExpression {
+    internal class SqlVariable : SqlSimpleTypeExpression
+    {
         private string name;
 
-        internal SqlVariable(Type clrType, ProviderType sqlType, string name, Expression sourceExpression)
-            : base(SqlNodeType.Variable, clrType, sqlType, sourceExpression) {
+        internal SqlVariable(
+            Type clrType,
+            ProviderType sqlType,
+            string name,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Variable, clrType, sqlType, sourceExpression)
+        {
             if (name == null)
                 throw Error.ArgumentNull("name");
             this.name = name;
         }
 
-        internal string Name {
+        internal string Name
+        {
             get { return this.name; }
         }
     }
 
-    internal class SqlMember : SqlSimpleTypeExpression {
+    internal class SqlMember : SqlSimpleTypeExpression
+    {
         private SqlExpression expression;
         private MemberInfo member;
 
-        internal SqlMember(Type clrType, ProviderType sqlType, SqlExpression expr, MemberInfo member)
-            : base(SqlNodeType.Member, clrType, sqlType, expr.SourceExpression) {
+        internal SqlMember(
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression expr,
+            MemberInfo member
+        )
+            : base(SqlNodeType.Member, clrType, sqlType, expr.SourceExpression)
+        {
             this.member = member;
             this.Expression = expr;
         }
 
-        internal MemberInfo Member {
+        internal MemberInfo Member
+        {
             get { return this.member; }
         }
 
-        internal SqlExpression Expression {
-            get {
-                return this.expression;
-            }
-            set {
+        internal SqlExpression Expression
+        {
+            get { return this.expression; }
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (!this.member.ReflectedType.IsAssignableFrom(value.ClrType) &&
-                    !value.ClrType.IsAssignableFrom(this.member.ReflectedType))
-                    throw Error.MemberAccessIllegal(this.member, this.member.ReflectedType, value.ClrType);
+                if (
+                    !this.member.ReflectedType.IsAssignableFrom(value.ClrType)
+                    && !value.ClrType.IsAssignableFrom(this.member.ReflectedType)
+                )
+                    throw Error.MemberAccessIllegal(
+                        this.member,
+                        this.member.ReflectedType,
+                        value.ClrType
+                    );
                 this.expression = value;
             }
         }
     }
 
-    internal class SqlColumn : SqlExpression {
+    internal class SqlColumn : SqlExpression
+    {
         private SqlAlias alias;
         private string name;
         private int ordinal;
@@ -1475,8 +1918,16 @@ namespace System.Data.Linq.SqlClient {
         private SqlExpression expression;
         private ProviderType sqlType;
 
-        internal SqlColumn(Type clrType, ProviderType sqlType, string name, MetaDataMember member, SqlExpression expr, Expression sourceExpression)
-            : base(SqlNodeType.Column, clrType, sourceExpression) {
+        internal SqlColumn(
+            Type clrType,
+            ProviderType sqlType,
+            string name,
+            MetaDataMember member,
+            SqlExpression expr,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Column, clrType, sourceExpression)
+        {
             if (typeof(Type).IsAssignableFrom(clrType))
                 throw Error.ArgumentWrongValue("clrType");
             this.Name = name;
@@ -1490,38 +1941,44 @@ namespace System.Data.Linq.SqlClient {
         }
 
         internal SqlColumn(string name, SqlExpression expr)
-            : this(expr.ClrType, expr.SqlType, name, null, expr, expr.SourceExpression) {
+            : this(expr.ClrType, expr.SqlType, name, null, expr, expr.SourceExpression)
+        {
             System.Diagnostics.Debug.Assert(expr != null);
         }
 
-        internal SqlAlias Alias {
+        internal SqlAlias Alias
+        {
             get { return this.alias; }
             set { this.alias = value; }
         }
 
-        internal string Name {
+        internal string Name
+        {
             get { return this.name; }
             set { this.name = value; }
         }
 
-        internal int Ordinal {
+        internal int Ordinal
+        {
             get { return this.ordinal; }
             set { this.ordinal = value; }
         }
 
-        internal MetaDataMember MetaMember {
+        internal MetaDataMember MetaMember
+        {
             get { return this.member; }
         }
 
         /// <summary>
         /// Set the column's Expression. This can change the type of the column.
         /// </summary>
-        internal SqlExpression Expression {
-            get {
-                return this.expression;
-            }
-            set {
-                if (value != null) {
+        internal SqlExpression Expression
+        {
+            get { return this.expression; }
+            set
+            {
+                if (value != null)
+                {
                     if (!this.ClrType.IsAssignableFrom(value.ClrType))
                         throw Error.ArgumentWrongType("value", this.ClrType, value.ClrType);
                     SqlColumnRef cref = value as SqlColumnRef;
@@ -1532,8 +1989,10 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        internal override ProviderType SqlType {
-            get {
+        internal override ProviderType SqlType
+        {
+            get
+            {
                 if (this.expression != null)
                     return this.expression.SqlType;
                 return this.sqlType;
@@ -1541,53 +2000,67 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlColumnRef : SqlExpression {
+    internal class SqlColumnRef : SqlExpression
+    {
         private SqlColumn column;
+
         internal SqlColumnRef(SqlColumn col)
-            : base(SqlNodeType.ColumnRef, col.ClrType, col.SourceExpression) {
+            : base(SqlNodeType.ColumnRef, col.ClrType, col.SourceExpression)
+        {
             this.column = col;
         }
 
-        internal SqlColumn Column {
+        internal SqlColumn Column
+        {
             get { return this.column; }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.column.SqlType; }
         }
 
-        public override bool Equals(object obj) {
+        public override bool Equals(object obj)
+        {
             SqlColumnRef cref = obj as SqlColumnRef;
             return cref != null && cref.Column == this.column;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return this.column.GetHashCode();
         }
 
-        internal SqlColumn GetRootColumn() {
+        internal SqlColumn GetRootColumn()
+        {
             SqlColumn c = this.column;
-            while (c.Expression != null && c.Expression.NodeType == SqlNodeType.ColumnRef) {
+            while (c.Expression != null && c.Expression.NodeType == SqlNodeType.ColumnRef)
+            {
                 c = ((SqlColumnRef)c.Expression).Column;
             }
             return c;
         }
     }
 
-    internal class SqlRow : SqlNode {
+    internal class SqlRow : SqlNode
+    {
         private List<SqlColumn> columns;
 
         internal SqlRow(Expression sourceExpression)
-            : base(SqlNodeType.Row, sourceExpression) {
+            : base(SqlNodeType.Row, sourceExpression)
+        {
             this.columns = new List<SqlColumn>();
         }
 
-        internal List<SqlColumn> Columns {
+        internal List<SqlColumn> Columns
+        {
             get { return this.columns; }
         }
 
-        internal SqlColumn Find(string name) {
-            foreach (SqlColumn c in this.columns) {
+        internal SqlColumn Find(string name)
+        {
+            foreach (SqlColumn c in this.columns)
+            {
                 if (name == c.Name)
                     return c;
             }
@@ -1595,25 +2068,30 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlMemberAssign : SqlNode {
+    internal class SqlMemberAssign : SqlNode
+    {
         private MemberInfo member;
         private SqlExpression expression;
 
         internal SqlMemberAssign(MemberInfo member, SqlExpression expr)
-            : base(SqlNodeType.MemberAssign, expr.SourceExpression) {
+            : base(SqlNodeType.MemberAssign, expr.SourceExpression)
+        {
             if (member == null)
                 throw Error.ArgumentNull("member");
             this.member = member;
             this.Expression = expr;
         }
 
-        internal MemberInfo Member {
+        internal MemberInfo Member
+        {
             get { return this.member; }
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.expression = value;
@@ -1621,33 +2099,49 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlGrouping : SqlSimpleTypeExpression {
+    internal class SqlGrouping : SqlSimpleTypeExpression
+    {
         private SqlExpression key;
         private SqlExpression group;
 
-        internal SqlGrouping(Type clrType, ProviderType sqlType, SqlExpression key, SqlExpression group, Expression sourceExpression)
-            : base(SqlNodeType.Grouping, clrType, sqlType, sourceExpression) {
-            if (key == null) throw Error.ArgumentNull("key");
-            if (group == null) throw Error.ArgumentNull("group");
+        internal SqlGrouping(
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression key,
+            SqlExpression group,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Grouping, clrType, sqlType, sourceExpression)
+        {
+            if (key == null)
+                throw Error.ArgumentNull("key");
+            if (group == null)
+                throw Error.ArgumentNull("group");
             this.key = key;
             this.group = group;
         }
 
-        internal SqlExpression Key {
+        internal SqlExpression Key
+        {
             get { return this.key; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (!this.key.ClrType.IsAssignableFrom(value.ClrType)
-                    && !value.ClrType.IsAssignableFrom(this.key.ClrType))
+                if (
+                    !this.key.ClrType.IsAssignableFrom(value.ClrType)
+                    && !value.ClrType.IsAssignableFrom(this.key.ClrType)
+                )
                     throw Error.ArgumentWrongType("value", this.key.ClrType, value.ClrType);
                 this.key = value;
             }
         }
 
-        internal SqlExpression Group {
+        internal SqlExpression Group
+        {
             get { return this.group; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (value.ClrType != this.group.ClrType)
@@ -1657,65 +2151,89 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlNew : SqlSimpleTypeExpression {
+    internal class SqlNew : SqlSimpleTypeExpression
+    {
         private MetaType metaType;
         private ConstructorInfo constructor;
         private List<SqlExpression> args;
         private List<MemberInfo> argMembers;
         private List<SqlMemberAssign> members;
 
-        internal SqlNew(MetaType metaType, ProviderType sqlType, ConstructorInfo cons, IEnumerable<SqlExpression> args, IEnumerable<MemberInfo> argMembers, IEnumerable<SqlMemberAssign> members, Expression sourceExpression)
-            : base(SqlNodeType.New, metaType.Type, sqlType, sourceExpression) {
+        internal SqlNew(
+            MetaType metaType,
+            ProviderType sqlType,
+            ConstructorInfo cons,
+            IEnumerable<SqlExpression> args,
+            IEnumerable<MemberInfo> argMembers,
+            IEnumerable<SqlMemberAssign> members,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.New, metaType.Type, sqlType, sourceExpression)
+        {
             this.metaType = metaType;
-            
-            if (cons == null && metaType.Type.IsClass) { // structs do not need to have a constructor
+
+            if (cons == null && metaType.Type.IsClass)
+            { // structs do not need to have a constructor
                 throw Error.ArgumentNull("cons");
             }
             this.constructor = cons;
             this.args = new List<SqlExpression>();
             this.argMembers = new List<MemberInfo>();
             this.members = new List<SqlMemberAssign>();
-            if (args != null) {
+            if (args != null)
+            {
                 this.args.AddRange(args);
             }
-            if (argMembers != null) {
+            if (argMembers != null)
+            {
                 this.argMembers.AddRange(argMembers);
             }
-            if (members != null) {
+            if (members != null)
+            {
                 this.members.AddRange(members);
             }
         }
 
-        internal MetaType MetaType {
+        internal MetaType MetaType
+        {
             get { return this.metaType; }
         }
 
-        internal ConstructorInfo Constructor {
+        internal ConstructorInfo Constructor
+        {
             get { return this.constructor; }
         }
 
-        internal List<SqlExpression> Args {
+        internal List<SqlExpression> Args
+        {
             get { return this.args; }
         }
 
-        internal List<MemberInfo> ArgMembers {
+        internal List<MemberInfo> ArgMembers
+        {
             get { return this.argMembers; }
         }
 
-        internal List<SqlMemberAssign> Members {
+        internal List<SqlMemberAssign> Members
+        {
             get { return this.members; }
         }
 
-        internal SqlExpression Find(MemberInfo mi) {
-            for (int i = 0, n = this.argMembers.Count; i < n; i++) {
+        internal SqlExpression Find(MemberInfo mi)
+        {
+            for (int i = 0, n = this.argMembers.Count; i < n; i++)
+            {
                 MemberInfo argmi = this.argMembers[i];
-                if (argmi.Name == mi.Name) {
+                if (argmi.Name == mi.Name)
+                {
                     return this.args[i];
                 }
             }
 
-            foreach (SqlMemberAssign ma in this.Members) {
-                if (ma.Member.Name == mi.Name) {
+            foreach (SqlMemberAssign ma in this.Members)
+            {
+                if (ma.Member.Name == mi.Name)
+                {
                     return ma.Expression;
                 }
             }
@@ -1724,13 +2242,22 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlMethodCall : SqlSimpleTypeExpression {
+    internal class SqlMethodCall : SqlSimpleTypeExpression
+    {
         private MethodInfo method;
         private SqlExpression obj;
         private List<SqlExpression> arguments;
 
-        internal SqlMethodCall(Type clrType, ProviderType sqlType, MethodInfo method, SqlExpression obj, IEnumerable<SqlExpression> args, Expression sourceExpression)
-            : base(SqlNodeType.MethodCall, clrType, sqlType, sourceExpression) {
+        internal SqlMethodCall(
+            Type clrType,
+            ProviderType sqlType,
+            MethodInfo method,
+            SqlExpression obj,
+            IEnumerable<SqlExpression> args,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.MethodCall, clrType, sqlType, sourceExpression)
+        {
             if (method == null)
                 throw Error.ArgumentNull("method");
             this.method = method;
@@ -1740,54 +2267,76 @@ namespace System.Data.Linq.SqlClient {
                 this.arguments.AddRange(args);
         }
 
-        internal MethodInfo Method {
+        internal MethodInfo Method
+        {
             get { return this.method; }
         }
 
-        internal SqlExpression Object {
+        internal SqlExpression Object
+        {
             get { return this.obj; }
-            set {
+            set
+            {
                 if (value == null && !this.method.IsStatic)
                     throw Error.ArgumentNull("value");
                 if (value != null && !this.method.DeclaringType.IsAssignableFrom(value.ClrType))
-                    throw Error.ArgumentWrongType("value", this.method.DeclaringType, value.ClrType);
+                    throw Error.ArgumentWrongType(
+                        "value",
+                        this.method.DeclaringType,
+                        value.ClrType
+                    );
                 this.obj = value;
             }
         }
 
-        internal List<SqlExpression> Arguments {
+        internal List<SqlExpression> Arguments
+        {
             get { return this.arguments; }
         }
     }
 
-    internal class SqlIncludeScope : SqlNode {
+    internal class SqlIncludeScope : SqlNode
+    {
         SqlNode child;
-        internal SqlIncludeScope(SqlNode child, Expression sourceExpression) 
-            : base(SqlNodeType.IncludeScope, sourceExpression) { 
+
+        internal SqlIncludeScope(SqlNode child, Expression sourceExpression)
+            : base(SqlNodeType.IncludeScope, sourceExpression)
+        {
             this.child = child;
         }
-        internal SqlNode Child {
-            get {return this.child;}
-            set {this.child = value;}
+
+        internal SqlNode Child
+        {
+            get { return this.child; }
+            set { this.child = value; }
         }
     }
 
-    internal class SqlClientArray : SqlSimpleTypeExpression {
+    internal class SqlClientArray : SqlSimpleTypeExpression
+    {
         private List<SqlExpression> expressions;
 
-        internal SqlClientArray(Type clrType, ProviderType sqlType, SqlExpression[ ] exprs, Expression sourceExpression)
-            : base(SqlNodeType.ClientArray, clrType, sqlType, sourceExpression) {
+        internal SqlClientArray(
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression[] exprs,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.ClientArray, clrType, sqlType, sourceExpression)
+        {
             this.expressions = new List<SqlExpression>();
             if (exprs != null)
                 this.Expressions.AddRange(exprs);
         }
 
-        internal List<SqlExpression> Expressions {
+        internal List<SqlExpression> Expressions
+        {
             get { return this.expressions; }
         }
     }
 
-    internal class SqlLink : SqlSimpleTypeExpression {
+    internal class SqlLink : SqlSimpleTypeExpression
+    {
         private MetaType rowType;
         private SqlExpression expression;
         private MetaDataMember member;
@@ -1795,8 +2344,19 @@ namespace System.Data.Linq.SqlClient {
         private SqlExpression expansion;
         private object id;
 
-        internal SqlLink(object id, MetaType rowType, Type clrType, ProviderType sqlType, SqlExpression expression, MetaDataMember member, IEnumerable<SqlExpression> keyExpressions, SqlExpression expansion, Expression sourceExpression)
-            : base(SqlNodeType.Link, clrType, sqlType, sourceExpression) {
+        internal SqlLink(
+            object id,
+            MetaType rowType,
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression expression,
+            MetaDataMember member,
+            IEnumerable<SqlExpression> keyExpressions,
+            SqlExpression expansion,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Link, clrType, sqlType, sourceExpression)
+        {
             this.id = id;
             this.rowType = rowType;
             this.expansion = expansion;
@@ -1807,43 +2367,55 @@ namespace System.Data.Linq.SqlClient {
                 this.keyExpressions.AddRange(keyExpressions);
         }
 
-        internal MetaType RowType {
+        internal MetaType RowType
+        {
             get { return this.rowType; }
         }
 
-        internal SqlExpression Expansion {
+        internal SqlExpression Expansion
+        {
             get { return this.expansion; }
             set { this.expansion = value; }
         }
 
-
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
             set { this.expression = value; }
         }
 
-        internal MetaDataMember Member {
+        internal MetaDataMember Member
+        {
             get { return this.member; }
         }
 
-        internal List<SqlExpression> KeyExpressions {
+        internal List<SqlExpression> KeyExpressions
+        {
             get { return this.keyExpressions; }
         }
 
-        internal object Id {
+        internal object Id
+        {
             get { return this.id; }
         }
     }
 
-    internal class SqlExprSet : SqlExpression {
+    internal class SqlExprSet : SqlExpression
+    {
         private List<SqlExpression> expressions;
 
-        internal SqlExprSet(Type clrType, IEnumerable <SqlExpression> exprs, Expression sourceExpression)
-            : base(SqlNodeType.ExprSet, clrType, sourceExpression) {
+        internal SqlExprSet(
+            Type clrType,
+            IEnumerable<SqlExpression> exprs,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.ExprSet, clrType, sourceExpression)
+        {
             this.expressions = new List<SqlExpression>(exprs);
         }
 
-        internal List<SqlExpression> Expressions {
+        internal List<SqlExpression> Expressions
+        {
             get { return this.expressions; }
         }
 
@@ -1851,25 +2423,31 @@ namespace System.Data.Linq.SqlClient {
         /// Get the first non-set expression of the set by drilling
         /// down the left expressions.
         /// </summary>
-        internal SqlExpression GetFirstExpression() {
+        internal SqlExpression GetFirstExpression()
+        {
             SqlExpression expr = expressions[0];
-            while (expr is SqlExprSet) {
+            while (expr is SqlExprSet)
+            {
                 expr = ((SqlExprSet)expr).Expressions[0];
             }
             return expr;
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.expressions[0].SqlType; }
         }
     }
 
-    internal class SqlSubSelect : SqlSimpleTypeExpression {
+    internal class SqlSubSelect : SqlSimpleTypeExpression
+    {
         private SqlSelect select;
 
-        internal SqlSubSelect(SqlNodeType nt , Type clrType, ProviderType sqlType , SqlSelect select)
-            : base(nt, clrType, sqlType, select.SourceExpression) {
-            switch (nt) {
+        internal SqlSubSelect(SqlNodeType nt, Type clrType, ProviderType sqlType, SqlSelect select)
+            : base(nt, clrType, sqlType, select.SourceExpression)
+        {
+            switch (nt)
+            {
                 case SqlNodeType.Multiset:
                 case SqlNodeType.ScalarSubSelect:
                 case SqlNodeType.Element:
@@ -1881,9 +2459,11 @@ namespace System.Data.Linq.SqlClient {
             this.Select = select;
         }
 
-        internal SqlSelect Select {
+        internal SqlSelect Select
+        {
             get { return this.select; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.select = value;
@@ -1891,64 +2471,91 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlClientQuery : SqlSimpleTypeExpression {
+    internal class SqlClientQuery : SqlSimpleTypeExpression
+    {
         private SqlSubSelect query;
         private List<SqlExpression> arguments;
         private List<SqlParameter> parameters;
         int ordinal;
 
         internal SqlClientQuery(SqlSubSelect subquery)
-            : base(SqlNodeType.ClientQuery, subquery.ClrType, subquery.SqlType, subquery.SourceExpression) {
+            : base(
+                SqlNodeType.ClientQuery,
+                subquery.ClrType,
+                subquery.SqlType,
+                subquery.SourceExpression
+            )
+        {
             this.query = subquery;
             this.arguments = new List<SqlExpression>();
             this.parameters = new List<SqlParameter>();
         }
 
-        internal SqlSubSelect Query {
+        internal SqlSubSelect Query
+        {
             get { return this.query; }
-            set {
+            set
+            {
                 if (value == null || (this.query != null && this.query.ClrType != value.ClrType))
                     throw Error.ArgumentWrongType(value, this.query.ClrType, value.ClrType);
                 this.query = value;
             }
         }
 
-        internal List<SqlExpression> Arguments {
+        internal List<SqlExpression> Arguments
+        {
             get { return this.arguments; }
         }
 
-        internal List<SqlParameter> Parameters {
+        internal List<SqlParameter> Parameters
+        {
             get { return this.parameters; }
         }
 
-        internal int Ordinal {
+        internal int Ordinal
+        {
             get { return this.ordinal; }
             set { this.ordinal = value; }
         }
     }
 
-    internal class SqlJoinedCollection : SqlSimpleTypeExpression {
+    internal class SqlJoinedCollection : SqlSimpleTypeExpression
+    {
         private SqlExpression expression;
         private SqlExpression count;
 
-        internal SqlJoinedCollection(Type clrType, ProviderType sqlType, SqlExpression expression, SqlExpression count, Expression sourceExpression)
-            : base(SqlNodeType.JoinedCollection, clrType, sqlType, sourceExpression) {
+        internal SqlJoinedCollection(
+            Type clrType,
+            ProviderType sqlType,
+            SqlExpression expression,
+            SqlExpression count,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.JoinedCollection, clrType, sqlType, sourceExpression)
+        {
             this.expression = expression;
             this.count = count;
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
-            set {
-                if (value == null || this.expression != null && this.expression.ClrType != value.ClrType)
+            set
+            {
+                if (
+                    value == null
+                    || this.expression != null && this.expression.ClrType != value.ClrType
+                )
                     throw Error.ArgumentWrongType(value, this.expression.ClrType, value.ClrType);
                 this.expression = value;
             }
         }
 
-        internal SqlExpression Count {
+        internal SqlExpression Count
+        {
             get { return this.count; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (value.ClrType != typeof(int))
@@ -1958,31 +2565,41 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlUpdate : SqlStatement {
+    internal class SqlUpdate : SqlStatement
+    {
         private SqlSelect select;
         private List<SqlAssign> assignments;
 
-        internal SqlUpdate(SqlSelect select, IEnumerable<SqlAssign> assignments, Expression sourceExpression)
-            : base(SqlNodeType.Update, sourceExpression) {
+        internal SqlUpdate(
+            SqlSelect select,
+            IEnumerable<SqlAssign> assignments,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.Update, sourceExpression)
+        {
             this.Select = select;
             this.assignments = new List<SqlAssign>(assignments);
         }
 
-        internal SqlSelect Select {
+        internal SqlSelect Select
+        {
             get { return this.select; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.select = value;
             }
         }
 
-        internal List<SqlAssign> Assignments {
+        internal List<SqlAssign> Assignments
+        {
             get { return this.assignments; }
         }
     }
 
-    internal class SqlInsert : SqlStatement {
+    internal class SqlInsert : SqlStatement
+    {
         private SqlTable table;
         private SqlRow row;
         private SqlExpression expression;
@@ -1990,29 +2607,35 @@ namespace System.Data.Linq.SqlClient {
         private bool outputToLocal;
 
         internal SqlInsert(SqlTable table, SqlExpression expr, Expression sourceExpression)
-            : base(SqlNodeType.Insert, sourceExpression) {
+            : base(SqlNodeType.Insert, sourceExpression)
+        {
             this.Table = table;
             this.Expression = expr;
             this.Row = new SqlRow(sourceExpression);
         }
 
-        internal SqlTable Table {
+        internal SqlTable Table
+        {
             get { return this.table; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("null");
                 this.table = value;
             }
         }
 
-        internal SqlRow Row {
+        internal SqlRow Row
+        {
             get { return this.row; }
             set { this.row = value; }
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("null");
                 if (!this.table.RowType.Type.IsAssignableFrom(value.ClrType))
@@ -2021,28 +2644,34 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        internal SqlColumn OutputKey {
+        internal SqlColumn OutputKey
+        {
             get { return this.outputKey; }
             set { this.outputKey = value; }
         }
 
-        internal bool OutputToLocal {
+        internal bool OutputToLocal
+        {
             get { return this.outputToLocal; }
             set { this.outputToLocal = value; }
         }
     }
 
-    internal class SqlDelete : SqlStatement {
+    internal class SqlDelete : SqlStatement
+    {
         private SqlSelect select;
 
         internal SqlDelete(SqlSelect select, Expression sourceExpression)
-            : base(SqlNodeType.Delete, sourceExpression) {
+            : base(SqlNodeType.Delete, sourceExpression)
+        {
             this.Select = select;
         }
 
-        internal SqlSelect Select {
+        internal SqlSelect Select
+        {
             get { return this.select; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.select = value;
@@ -2050,93 +2679,118 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlBlock : SqlStatement {
+    internal class SqlBlock : SqlStatement
+    {
         private List<SqlStatement> statements;
 
         internal SqlBlock(Expression sourceExpression)
-            : base(SqlNodeType.Block, sourceExpression) {
+            : base(SqlNodeType.Block, sourceExpression)
+        {
             this.statements = new List<SqlStatement>();
         }
 
-        internal List<SqlStatement> Statements {
+        internal List<SqlStatement> Statements
+        {
             get { return this.statements; }
         }
     }
 
-    internal class SqlAssign : SqlStatement {
+    internal class SqlAssign : SqlStatement
+    {
         private SqlExpression leftValue;
         private SqlExpression rightValue;
 
         internal SqlAssign(SqlExpression lValue, SqlExpression rValue, Expression sourceExpression)
-            : base(SqlNodeType.Assign, sourceExpression) {
+            : base(SqlNodeType.Assign, sourceExpression)
+        {
             this.LValue = lValue;
             this.RValue = rValue;
         }
 
-        internal SqlExpression LValue {
+        internal SqlExpression LValue
+        {
             get { return this.leftValue; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (this.rightValue != null && !value.ClrType.IsAssignableFrom(this.rightValue.ClrType))
+                if (
+                    this.rightValue != null
+                    && !value.ClrType.IsAssignableFrom(this.rightValue.ClrType)
+                )
                     throw Error.ArgumentWrongType("value", this.rightValue.ClrType, value.ClrType);
                 this.leftValue = value;
             }
         }
 
-        internal SqlExpression RValue {
+        internal SqlExpression RValue
+        {
             get { return this.rightValue; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (this.leftValue != null && !this.leftValue.ClrType.IsAssignableFrom(value.ClrType))
+                if (
+                    this.leftValue != null
+                    && !this.leftValue.ClrType.IsAssignableFrom(value.ClrType)
+                )
                     throw Error.ArgumentWrongType("value", this.leftValue.ClrType, value.ClrType);
                 this.rightValue = value;
             }
         }
     }
 
-    internal class SqlDoNotVisitExpression : SqlExpression {
+    internal class SqlDoNotVisitExpression : SqlExpression
+    {
         private SqlExpression expression;
 
         internal SqlDoNotVisitExpression(SqlExpression expr)
-            : base(SqlNodeType.DoNotVisit, expr.ClrType, expr.SourceExpression) {
+            : base(SqlNodeType.DoNotVisit, expr.ClrType, expr.SourceExpression)
+        {
             if (expr == null)
                 throw Error.ArgumentNull("expr");
             this.expression = expr;
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expression; }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.expression.SqlType; }
         }
     }
 
-    internal class SqlOptionalValue : SqlSimpleTypeExpression {
+    internal class SqlOptionalValue : SqlSimpleTypeExpression
+    {
         private SqlExpression hasValue;
         private SqlExpression expressionValue;
 
-        internal SqlOptionalValue( SqlExpression hasValue, SqlExpression value)
-            : base(SqlNodeType.OptionalValue, value.ClrType, value.SqlType, value.SourceExpression) {
+        internal SqlOptionalValue(SqlExpression hasValue, SqlExpression value)
+            : base(SqlNodeType.OptionalValue, value.ClrType, value.SqlType, value.SourceExpression)
+        {
             this.HasValue = hasValue;
             this.Value = value;
         }
 
-        internal SqlExpression HasValue {
+        internal SqlExpression HasValue
+        {
             get { return this.hasValue; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 this.hasValue = value;
             }
         }
 
-        internal SqlExpression Value {
+        internal SqlExpression Value
+        {
             get { return this.expressionValue; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
                 if (value.ClrType != this.ClrType)
@@ -2146,25 +2800,41 @@ namespace System.Data.Linq.SqlClient {
         }
     }
 
-    internal class SqlFunctionCall : SqlSimpleTypeExpression {
+    internal class SqlFunctionCall : SqlSimpleTypeExpression
+    {
         private string name;
         private List<SqlExpression> arguments;
 
-        internal SqlFunctionCall(Type clrType, ProviderType sqlType, string name, IEnumerable <SqlExpression > args , Expression source)
-            : this(SqlNodeType.FunctionCall, clrType , sqlType, name, args, source) {
-        }
+        internal SqlFunctionCall(
+            Type clrType,
+            ProviderType sqlType,
+            string name,
+            IEnumerable<SqlExpression> args,
+            Expression source
+        )
+            : this(SqlNodeType.FunctionCall, clrType, sqlType, name, args, source) { }
 
-        internal SqlFunctionCall(SqlNodeType nodeType, Type clrType, ProviderType sqlType, string name , IEnumerable <SqlExpression> args , Expression source)
-            : base(nodeType, clrType, sqlType, source) {
+        internal SqlFunctionCall(
+            SqlNodeType nodeType,
+            Type clrType,
+            ProviderType sqlType,
+            string name,
+            IEnumerable<SqlExpression> args,
+            Expression source
+        )
+            : base(nodeType, clrType, sqlType, source)
+        {
             this.name = name;
             this.arguments = new List<SqlExpression>(args);
         }
 
-        internal string Name {
+        internal string Name
+        {
             get { return this.name; }
         }
 
-        internal List<SqlExpression> Arguments {
+        internal List<SqlExpression> Arguments
+        {
             get { return this.arguments; }
         }
     }
@@ -2173,108 +2843,150 @@ namespace System.Data.Linq.SqlClient {
     /// This class is used to represent a table value function.  It inherits normal function
     /// call functionality, and adds TVF specific members.
     /// </summary>
-    internal class SqlTableValuedFunctionCall : SqlFunctionCall {
+    internal class SqlTableValuedFunctionCall : SqlFunctionCall
+    {
         private MetaType rowType;
         private List<SqlColumn> columns;
 
-        internal SqlTableValuedFunctionCall(MetaType rowType, Type clrType, ProviderType sqlType, string name, IEnumerable <SqlExpression > args , Expression source)
-            : base(SqlNodeType.TableValuedFunctionCall, clrType , sqlType, name, args, source) {
+        internal SqlTableValuedFunctionCall(
+            MetaType rowType,
+            Type clrType,
+            ProviderType sqlType,
+            string name,
+            IEnumerable<SqlExpression> args,
+            Expression source
+        )
+            : base(SqlNodeType.TableValuedFunctionCall, clrType, sqlType, name, args, source)
+        {
             this.rowType = rowType;
             this.columns = new List<SqlColumn>();
         }
 
-        internal MetaType RowType {
+        internal MetaType RowType
+        {
             get { return this.rowType; }
         }
 
-        internal List<SqlColumn> Columns {
+        internal List<SqlColumn> Columns
+        {
             get { return this.columns; }
         }
 
-        internal SqlColumn Find(string name) {
-            foreach (SqlColumn c in this.Columns) {
+        internal SqlColumn Find(string name)
+        {
+            foreach (SqlColumn c in this.Columns)
+            {
                 if (c.Name == name)
                     return c;
             }
             return null;
         }
-
     }
 
-    internal class SqlSharedExpression : SqlExpression {
+    internal class SqlSharedExpression : SqlExpression
+    {
         private SqlExpression expr;
 
         internal SqlSharedExpression(SqlExpression expr)
-          : base(SqlNodeType.SharedExpression, expr.ClrType, expr.SourceExpression) {
+            : base(SqlNodeType.SharedExpression, expr.ClrType, expr.SourceExpression)
+        {
             this.expr = expr;
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expr; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (!this.ClrType.IsAssignableFrom(value.ClrType)
-                    && !value.ClrType.IsAssignableFrom(this.ClrType))
+                if (
+                    !this.ClrType.IsAssignableFrom(value.ClrType)
+                    && !value.ClrType.IsAssignableFrom(this.ClrType)
+                )
                     throw Error.ArgumentWrongType("value", this.ClrType, value.ClrType);
                 this.expr = value;
             }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.expr.SqlType; }
         }
     }
 
-    internal class SqlSharedExpressionRef : SqlExpression {
+    internal class SqlSharedExpressionRef : SqlExpression
+    {
         private SqlSharedExpression expr;
 
         internal SqlSharedExpressionRef(SqlSharedExpression expr)
-            : base(SqlNodeType.SharedExpressionRef, expr.ClrType, expr.SourceExpression) {
+            : base(SqlNodeType.SharedExpressionRef, expr.ClrType, expr.SourceExpression)
+        {
             this.expr = expr;
         }
 
-        internal SqlSharedExpression SharedExpression {
+        internal SqlSharedExpression SharedExpression
+        {
             get { return this.expr; }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.expr.SqlType; }
         }
     }
 
-    internal class SqlSimpleExpression : SqlExpression {
+    internal class SqlSimpleExpression : SqlExpression
+    {
         private SqlExpression expr;
 
         internal SqlSimpleExpression(SqlExpression expr)
-            : base(SqlNodeType.SimpleExpression, expr.ClrType, expr.SourceExpression) {
+            : base(SqlNodeType.SimpleExpression, expr.ClrType, expr.SourceExpression)
+        {
             this.expr = expr;
         }
 
-        internal SqlExpression Expression {
+        internal SqlExpression Expression
+        {
             get { return this.expr; }
-            set {
+            set
+            {
                 if (value == null)
                     throw Error.ArgumentNull("value");
-                if (!TypeSystem.GetNonNullableType(this.ClrType).IsAssignableFrom(TypeSystem.GetNonNullableType(value.ClrType)))
+                if (
+                    !TypeSystem
+                        .GetNonNullableType(this.ClrType)
+                        .IsAssignableFrom(TypeSystem.GetNonNullableType(value.ClrType))
+                )
                     throw Error.ArgumentWrongType("value", this.ClrType, value.ClrType);
                 this.expr = value;
             }
         }
 
-        internal override ProviderType SqlType {
+        internal override ProviderType SqlType
+        {
             get { return this.expr.SqlType; }
         }
     }
 
-    internal class SqlClientParameter : SqlSimpleTypeExpression {
+    internal class SqlClientParameter : SqlSimpleTypeExpression
+    {
         // Expression<Func<object[], T>>
         LambdaExpression accessor;
-        internal SqlClientParameter(Type clrType, ProviderType sqlType, LambdaExpression accessor, Expression sourceExpression):
-            base(SqlNodeType.ClientParameter, clrType, sqlType, sourceExpression) {
+
+        internal SqlClientParameter(
+            Type clrType,
+            ProviderType sqlType,
+            LambdaExpression accessor,
+            Expression sourceExpression
+        )
+            : base(SqlNodeType.ClientParameter, clrType, sqlType, sourceExpression)
+        {
             this.accessor = accessor;
         }
-        internal LambdaExpression Accessor {
+
+        internal LambdaExpression Accessor
+        {
             get { return this.accessor; }
         }
     }

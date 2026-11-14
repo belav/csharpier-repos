@@ -1,38 +1,42 @@
 //------------------------------------------------------------------------------
 // <copyright file="TemplatingOptionsDialog.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
-    using System.Collections;
-    using System.Collections.Specialized;
     using System.Globalization;
-//    using System.Web.UI.Design.Util;
+    //    using System.Web.UI.Design.Util;
     using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-
-    using Panel = System.Windows.Forms.Panel;
     using Button = System.Windows.Forms.Button;
-    using Label = System.Windows.Forms.Label;
     using ComboBox = System.Windows.Forms.ComboBox;
     using Form = System.Windows.Forms.Form;
+    using Label = System.Windows.Forms.Label;
+    using Panel = System.Windows.Forms.Panel;
     using UnsettableComboBox = System.Web.UI.Design.MobileControls.Util.UnsettableComboBox;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class TemplatingOptionsDialog : DesignerForm, IRefreshableDeviceSpecificEditor, IDeviceSpecificDesigner
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class TemplatingOptionsDialog
+        : DesignerForm,
+            IRefreshableDeviceSpecificEditor,
+            IDeviceSpecificDesigner
     {
         private System.Windows.Forms.Control _header;
         private MobileTemplatedControlDesigner _designer;
@@ -53,15 +57,18 @@ namespace System.Web.UI.Design.MobileControls
 
         private const int _standardSchemaNumber = 2;
 
-        internal TemplatingOptionsDialog(MobileTemplatedControlDesigner designer, 
-                                       ISite site, 
-                                       int mergingContext) : base(site)
+        internal TemplatingOptionsDialog(
+            MobileTemplatedControlDesigner designer,
+            ISite site,
+            int mergingContext
+        )
+            : base(site)
         {
             _strCollSchemas = new StringCollection();
             _mergingContext = mergingContext;
             _designer = designer;
             _site = site;
-            _dsd = (IDeviceSpecificDesigner) designer;
+            _dsd = (IDeviceSpecificDesigner)designer;
             _dsd.SetDeviceSpecificEditor(this);
 
             InitializeComponent();
@@ -71,16 +78,18 @@ namespace System.Web.UI.Design.MobileControls
             _lblSchemas.Text = SR.GetString(SR.TemplatingOptionsDialog_SchemaCaption);
             _btnEditChoices.Text = SR.GetString(SR.TemplatingOptionsDialog_EditBtnCaption);
             _lblChoices.Text = SR.GetString(SR.TemplatingOptionsDialog_FilterCaption);
-            _schemasFriendly = new String[] { SR.GetString(SR.TemplatingOptionsDialog_HTMLSchemaFriendly),
-                                              SR.GetString(SR.TemplatingOptionsDialog_CHTMLSchemaFriendly) };
-            _schemasUrl = new String[] { SR.GetString(SR.MarkupSchema_HTML32),
-                                         SR.GetString(SR.MarkupSchema_cHTML10) };
-            
-            int tabOffset = GenericUI.InitDialog(
-                this,
-                _dsd,
-                _mergingContext
-            );
+            _schemasFriendly = new String[]
+            {
+                SR.GetString(SR.TemplatingOptionsDialog_HTMLSchemaFriendly),
+                SR.GetString(SR.TemplatingOptionsDialog_CHTMLSchemaFriendly),
+            };
+            _schemasUrl = new String[]
+            {
+                SR.GetString(SR.MarkupSchema_HTML32),
+                SR.GetString(SR.MarkupSchema_cHTML10),
+            };
+
+            int tabOffset = GenericUI.InitDialog(this, _dsd, _mergingContext);
 
             SetTabIndexes(tabOffset);
             _dsd.RefreshHeader(_mergingContext);
@@ -89,15 +98,14 @@ namespace System.Web.UI.Design.MobileControls
             {
                 DeviceSpecific ds;
                 _dsd.GetDeviceSpecific(currentDeviceSpecificID, out ds);
-                ((IRefreshableDeviceSpecificEditor) this).Refresh(currentDeviceSpecificID, ds);
+                ((IRefreshableDeviceSpecificEditor)this).Refresh(currentDeviceSpecificID, ds);
             }
             UpdateControlEnabling();
         }
 
-        protected override string HelpTopic {
-            get {
-                return "net.Mobile.TemplatingOptionsDialog";
-            }
+        protected override string HelpTopic
+        {
+            get { return "net.Mobile.TemplatingOptionsDialog"; }
         }
 
         private void SetTabIndexes(int tabIndexOffset)
@@ -118,7 +126,7 @@ namespace System.Web.UI.Design.MobileControls
 
             _btnEditChoices = new Button();
             _btnClose = new Button();
-            
+
             _lblChoices.Location = new System.Drawing.Point(0, 0);
             _lblChoices.Size = new System.Drawing.Size(276, 16);
             _lblChoices.TabStop = false;
@@ -129,7 +137,9 @@ namespace System.Web.UI.Design.MobileControls
             _cmbChoices.Enabled = false;
             _cmbChoices.Sorted = true;
             _cmbChoices.DropDownStyle = ComboBoxStyle.DropDownList;
-            _cmbChoices.SelectedIndexChanged += new EventHandler(this.OnSelectedIndexChangedChoicesComboBox);
+            _cmbChoices.SelectedIndexChanged += new EventHandler(
+                this.OnSelectedIndexChangedChoicesComboBox
+            );
 
             _btnEditChoices.Location = new System.Drawing.Point(201, 15);
             _btnEditChoices.Size = new System.Drawing.Size(75, 23);
@@ -152,18 +162,23 @@ namespace System.Web.UI.Design.MobileControls
             _btnClose.TabStop = true;
             _btnClose.Click += new EventHandler(this.OnClickCloseButton);
 
-            this._pnlMain.Controls.AddRange(new System.Windows.Forms.Control[] {
-                this._btnClose,
-                this._cmbSchemas,
-                this._lblSchemas,
-                this._btnEditChoices,
-                this._lblChoices,
-                this._cmbChoices
-            });
+            this._pnlMain.Controls.AddRange(
+                new System.Windows.Forms.Control[]
+                {
+                    this._btnClose,
+                    this._cmbSchemas,
+                    this._lblSchemas,
+                    this._btnEditChoices,
+                    this._lblChoices,
+                    this._cmbChoices,
+                }
+            );
             this._pnlMain.Location = new System.Drawing.Point(6, 5);
             this._pnlMain.Size = new System.Drawing.Size(276, 128);
             this._pnlMain.TabIndex = 0;
-            this._pnlMain.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
+            this._pnlMain.Anchor = (
+                System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left
+            );
 
             this.ClientSize = new Size(285, 139);
             this.AcceptButton = _btnClose;
@@ -218,10 +233,12 @@ namespace System.Web.UI.Design.MobileControls
                     }
                     else
                     {
-                        _cmbChoices.SelectedItem = DesignerUtility.ChoiceToUniqueIdentifier(_designer.CurrentChoice);
+                        _cmbChoices.SelectedItem = DesignerUtility.ChoiceToUniqueIdentifier(
+                            _designer.CurrentChoice
+                        );
                     }
                 }
-                else 
+                else
                 {
                     Debug.Assert(_cmbChoices.Items.Count > 0);
                     _cmbChoices.SelectedItem = SR.GetString(SR.DeviceFilter_NoChoice);
@@ -268,8 +285,11 @@ namespace System.Web.UI.Design.MobileControls
                 foreach (DeviceSpecificChoice choice in _ds.Choices)
                 {
                     friendlySchema = UrlToFriendlySchema(choice.Xmlns);
-                    if (friendlySchema != null && friendlySchema.Length > 0 &&
-                        !CaseSensitiveComboSearch(_cmbSchemas, friendlySchema))
+                    if (
+                        friendlySchema != null
+                        && friendlySchema.Length > 0
+                        && !CaseSensitiveComboSearch(_cmbSchemas, friendlySchema)
+                    )
                     {
                         _cmbSchemas.AddItem(friendlySchema);
                     }
@@ -281,7 +301,14 @@ namespace System.Web.UI.Design.MobileControls
         {
             for (int i = 0; i < _standardSchemaNumber; i++)
             {
-                if (0 == String.Compare(_schemasFriendly[i], friendlySchema, StringComparison.OrdinalIgnoreCase))
+                if (
+                    0
+                    == String.Compare(
+                        _schemasFriendly[i],
+                        friendlySchema,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return _schemasUrl[i];
                 }
@@ -303,13 +330,18 @@ namespace System.Web.UI.Design.MobileControls
 
         private void SetSchemaValue()
         {
-            if (_ds != null &&
-                _cmbChoices.SelectedIndex >= 0)
+            if (_ds != null && _cmbChoices.SelectedIndex >= 0)
             {
                 String currentChoiceIdentifier = _cmbChoices.SelectedItem as String;
-                if (currentChoiceIdentifier != null && !currentChoiceIdentifier.Equals(SR.GetString(SR.DeviceFilter_NoChoice)))
+                if (
+                    currentChoiceIdentifier != null
+                    && !currentChoiceIdentifier.Equals(SR.GetString(SR.DeviceFilter_NoChoice))
+                )
                 {
-                    DeviceSpecificChoice dsc = GetChoiceFromIdentifier((String) currentChoiceIdentifier, _ds);
+                    DeviceSpecificChoice dsc = GetChoiceFromIdentifier(
+                        (String)currentChoiceIdentifier,
+                        _ds
+                    );
                     _cmbSchemas.Text = UrlToFriendlySchema(dsc.Xmlns);
                 }
             }
@@ -329,7 +361,7 @@ namespace System.Web.UI.Design.MobileControls
                 DeviceSpecificChoiceCollection choices;
                 if (mobileControl is StyleSheet)
                 {
-                    StyleSheet styleSheet = (StyleSheet) mobileControl;
+                    StyleSheet styleSheet = (StyleSheet)mobileControl;
                     ICollection styleKeys = styleSheet.Styles;
                     foreach (String key in styleKeys)
                     {
@@ -341,8 +373,11 @@ namespace System.Web.UI.Design.MobileControls
 
                             foreach (DeviceSpecificChoice choice in choices)
                             {
-                                if (choice.Xmlns != null && choice.Xmlns.Length > 0 &&
-                                    !_strCollSchemas.Contains(choice.Xmlns))
+                                if (
+                                    choice.Xmlns != null
+                                    && choice.Xmlns.Length > 0
+                                    && !_strCollSchemas.Contains(choice.Xmlns)
+                                )
                                 {
                                     _strCollSchemas.Add(choice.Xmlns);
                                 }
@@ -359,8 +394,11 @@ namespace System.Web.UI.Design.MobileControls
 
                         foreach (DeviceSpecificChoice choice in choices)
                         {
-                            if (choice.Xmlns != null && choice.Xmlns.Length > 0 &&
-                                !_strCollSchemas.Contains(choice.Xmlns))
+                            if (
+                                choice.Xmlns != null
+                                && choice.Xmlns.Length > 0
+                                && !_strCollSchemas.Contains(choice.Xmlns)
+                            )
                             {
                                 _strCollSchemas.Add(choice.Xmlns);
                             }
@@ -382,7 +420,7 @@ namespace System.Web.UI.Design.MobileControls
         {
             foreach (Object obj in cmb.Items)
             {
-                if (String.Compare(str, (String) obj, StringComparison.Ordinal) == 0)
+                if (String.Compare(str, (String)obj, StringComparison.Ordinal) == 0)
                 {
                     return true;
                 }
@@ -394,11 +432,19 @@ namespace System.Web.UI.Design.MobileControls
         {
             _btnEditChoices.Enabled = (_dsd.UnderlyingObject != null);
             _cmbChoices.Enabled = (_cmbChoices.Items.Count > 0);
-            _cmbSchemas.Enabled = (_cmbChoices.Items.Count > 1) &&
-                                  (!((String)_cmbChoices.SelectedItem).Equals(SR.GetString(SR.DeviceFilter_NoChoice)));
+            _cmbSchemas.Enabled =
+                (_cmbChoices.Items.Count > 1)
+                && (
+                    !((String)_cmbChoices.SelectedItem).Equals(
+                        SR.GetString(SR.DeviceFilter_NoChoice)
+                    )
+                );
         }
 
-        private DeviceSpecificChoice GetChoiceFromIdentifier(String choiceIdentifier, DeviceSpecific ds)
+        private DeviceSpecificChoice GetChoiceFromIdentifier(
+            String choiceIdentifier,
+            DeviceSpecific ds
+        )
         {
             if (null == ds)
             {
@@ -409,9 +455,13 @@ namespace System.Web.UI.Design.MobileControls
 
             foreach (DeviceSpecificChoice choice in ds.Choices)
             {
-                if (DesignerUtility.ChoiceToUniqueIdentifier(choice).Equals(choiceIdentifier) ||
-                    (choice.Filter.Length == 0 && 
-                     choiceIdentifier.Equals(SR.GetString(SR.DeviceFilter_DefaultChoice))))
+                if (
+                    DesignerUtility.ChoiceToUniqueIdentifier(choice).Equals(choiceIdentifier)
+                    || (
+                        choice.Filter.Length == 0
+                        && choiceIdentifier.Equals(SR.GetString(SR.DeviceFilter_DefaultChoice))
+                    )
+                )
                 {
                     return choice;
                 }
@@ -424,7 +474,7 @@ namespace System.Web.UI.Design.MobileControls
         {
             return true;
         }
-        
+
         void IRefreshableDeviceSpecificEditor.Refresh(String deviceSpecificID, DeviceSpecific ds)
         {
             _ds = ds;
@@ -434,26 +484,32 @@ namespace System.Web.UI.Design.MobileControls
             UpdateControlEnabling();
         }
 
-        void IRefreshableDeviceSpecificEditor.UnderlyingObjectsChanged()
-        {
-        }
+        void IRefreshableDeviceSpecificEditor.UnderlyingObjectsChanged() { }
 
-        void IRefreshableDeviceSpecificEditor.BeginExternalDeviceSpecificEdit() {}
-        void IRefreshableDeviceSpecificEditor.EndExternalDeviceSpecificEdit(
-            bool commitChanges) {}
+        void IRefreshableDeviceSpecificEditor.BeginExternalDeviceSpecificEdit() { }
+
+        void IRefreshableDeviceSpecificEditor.EndExternalDeviceSpecificEdit(bool commitChanges) { }
+
         void IRefreshableDeviceSpecificEditor.DeviceSpecificRenamed(
-            String oldDeviceSpecificID, String newDeviceSpecificID) {}
-        void IRefreshableDeviceSpecificEditor.DeviceSpecificDeleted(
-            String deviceSpecificID) {}
-        
+            String oldDeviceSpecificID,
+            String newDeviceSpecificID
+        ) { }
+
+        void IRefreshableDeviceSpecificEditor.DeviceSpecificDeleted(String deviceSpecificID) { }
+
         private void OnClickCloseButton(Object sender, EventArgs e)
         {
             _dsd.UseCurrentDeviceSpecificID();
 
-            if (0 <= _cmbChoices.SelectedIndex &&
-                !_cmbChoices.Text.Equals(SR.GetString(SR.DeviceFilter_NoChoice)))
+            if (
+                0 <= _cmbChoices.SelectedIndex
+                && !_cmbChoices.Text.Equals(SR.GetString(SR.DeviceFilter_NoChoice))
+            )
             {
-                _designer.CurrentChoice = GetChoiceFromIdentifier((String) _cmbChoices.SelectedItem, _ds);
+                _designer.CurrentChoice = GetChoiceFromIdentifier(
+                    (String)_cmbChoices.SelectedItem,
+                    _ds
+                );
             }
             else
             {
@@ -464,7 +520,7 @@ namespace System.Web.UI.Design.MobileControls
             DialogResult = DialogResult.OK;
         }
 
-        private void OnSelectedIndexChangedChoicesComboBox(Object sender, EventArgs e) 
+        private void OnSelectedIndexChangedChoicesComboBox(Object sender, EventArgs e)
         {
             if (_cmbChoices.Text.Equals(SR.GetString(SR.DeviceFilter_NoChoice)))
             {
@@ -480,11 +536,14 @@ namespace System.Web.UI.Design.MobileControls
             _designer.SetTemplateVerbsDirty();
         }
 
-        private void OnLostFocusSchemasComboBox(Object sender, EventArgs e) 
+        private void OnLostFocusSchemasComboBox(Object sender, EventArgs e)
         {
             Debug.Assert(_ds != null);
             Debug.Assert(_cmbChoices.SelectedIndex >= 0);
-            DeviceSpecificChoice choice = GetChoiceFromIdentifier((String) _cmbChoices.SelectedItem, _ds);
+            DeviceSpecificChoice choice = GetChoiceFromIdentifier(
+                (String)_cmbChoices.SelectedItem,
+                _ds
+            );
             String urlSchema = FriendlyToUrlSchema(_cmbSchemas.Text);
             if (0 != String.Compare(choice.Xmlns, urlSchema, StringComparison.Ordinal))
             {
@@ -494,7 +553,14 @@ namespace System.Web.UI.Design.MobileControls
                     int previousSchemaOccurrences = 0;
                     foreach (DeviceSpecificChoice choiceTmp in _ds.Choices)
                     {
-                        if (0 == String.Compare(choiceTmp.Xmlns, previousUrlSchema, StringComparison.Ordinal))
+                        if (
+                            0
+                            == String.Compare(
+                                choiceTmp.Xmlns,
+                                previousUrlSchema,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             previousSchemaOccurrences++;
                         }
@@ -505,7 +571,14 @@ namespace System.Web.UI.Design.MobileControls
                         bool standardSchema = false;
                         for (int i = 0; i < _standardSchemaNumber; i++)
                         {
-                            if (0 == String.Compare(_schemasUrl[i], previousUrlSchema, StringComparison.Ordinal))
+                            if (
+                                0
+                                == String.Compare(
+                                    _schemasUrl[i],
+                                    previousUrlSchema,
+                                    StringComparison.Ordinal
+                                )
+                            )
                             {
                                 standardSchema = true;
                                 break;
@@ -519,8 +592,11 @@ namespace System.Web.UI.Design.MobileControls
                 }
                 choice.Xmlns = urlSchema;
                 String friendlySchema = UrlToFriendlySchema(urlSchema);
-                if (friendlySchema == null || friendlySchema.Length > 0 &&
-                    !CaseSensitiveComboSearch(_cmbSchemas, friendlySchema))
+                if (
+                    friendlySchema == null
+                    || friendlySchema.Length > 0
+                        && !CaseSensitiveComboSearch(_cmbSchemas, friendlySchema)
+                )
                 {
                     _cmbSchemas.AddItem(friendlySchema);
                 }
@@ -529,7 +605,10 @@ namespace System.Web.UI.Design.MobileControls
 
         private void OnClickEditChoicesButton(Object source, EventArgs e)
         {
-            AppliedDeviceFiltersDialog dialog = new AppliedDeviceFiltersDialog(this, _mergingContext);
+            AppliedDeviceFiltersDialog dialog = new AppliedDeviceFiltersDialog(
+                this,
+                _mergingContext
+            );
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 _designer.UpdateRendering();
@@ -544,49 +623,42 @@ namespace System.Web.UI.Design.MobileControls
         //  Begin IDeviceSpecificDesigner Implementation
         ////////////////////////////////////////////////////////////////////////
 
-        void IDeviceSpecificDesigner.SetDeviceSpecificEditor
-            (IRefreshableDeviceSpecificEditor editor)
-        {
-        }
+        void IDeviceSpecificDesigner.SetDeviceSpecificEditor(
+            IRefreshableDeviceSpecificEditor editor
+        ) { }
 
         String IDeviceSpecificDesigner.CurrentDeviceSpecificID
         {
-            get
-            {
-                return _dsd.CurrentDeviceSpecificID;
-            }
+            get { return _dsd.CurrentDeviceSpecificID; }
         }
 
         System.Windows.Forms.Control IDeviceSpecificDesigner.Header
         {
-            get
-            {
-                return _header;
-            }
+            get { return _header; }
         }
 
         System.Web.UI.Control IDeviceSpecificDesigner.UnderlyingControl
         {
-            get
-            {
-                return _dsd.UnderlyingControl;
-            }
+            get { return _dsd.UnderlyingControl; }
         }
 
         Object IDeviceSpecificDesigner.UnderlyingObject
         {
-            get
-            {
-                return _dsd.UnderlyingObject;
-            }
+            get { return _dsd.UnderlyingObject; }
         }
 
-        bool IDeviceSpecificDesigner.GetDeviceSpecific(String deviceSpecificParentID, out DeviceSpecific ds)
+        bool IDeviceSpecificDesigner.GetDeviceSpecific(
+            String deviceSpecificParentID,
+            out DeviceSpecific ds
+        )
         {
             return _dsd.GetDeviceSpecific(deviceSpecificParentID, out ds);
         }
 
-        void IDeviceSpecificDesigner.SetDeviceSpecific(String deviceSpecificParentID, DeviceSpecific ds)
+        void IDeviceSpecificDesigner.SetDeviceSpecific(
+            String deviceSpecificParentID,
+            DeviceSpecific ds
+        )
         {
             _ds = ds;
             _dsd.SetDeviceSpecific(deviceSpecificParentID, ds);
@@ -599,20 +671,16 @@ namespace System.Web.UI.Design.MobileControls
 
             lblDescription.TabIndex = 0;
             lblDescription.Text = SR.GetString(SR.MobileControl_SettingGenericChoiceDescription);
-            
+
             panel.Height = lblDescription.Height;
             panel.Width = lblDescription.Width;
             panel.Controls.Add(lblDescription);
             _header = panel;
         }
 
-        void IDeviceSpecificDesigner.RefreshHeader(int mergingContext)
-        {
-        }
+        void IDeviceSpecificDesigner.RefreshHeader(int mergingContext) { }
 
-        void IDeviceSpecificDesigner.UseCurrentDeviceSpecificID()
-        {
-        }
+        void IDeviceSpecificDesigner.UseCurrentDeviceSpecificID() { }
 
         /////////////////////////////////////////////////////////////////////////
         //  End IDeviceSpecificDesigner Implementation

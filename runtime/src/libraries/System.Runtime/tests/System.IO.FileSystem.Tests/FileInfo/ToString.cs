@@ -34,7 +34,12 @@ namespace System.IO.Tests
         [Fact]
         public void AlternateDirectoryDividerChar()
         {
-            string path = Path.Combine(Path.GetPathRoot(Directory.GetCurrentDirectory()), "Directory", "File").Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            string path = Path.Combine(
+                    Path.GetPathRoot(Directory.GetCurrentDirectory()),
+                    "Directory",
+                    "File"
+                )
+                .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             var info = new FileInfo(path);
             Assert.Equal(path, info.ToString());
         }
@@ -42,7 +47,9 @@ namespace System.IO.Tests
         [Fact]
         public void UNCShare()
         {
-            string path = new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Machine", "Directory", "File");
+            string path =
+                new string(Path.DirectorySeparatorChar, 2)
+                + Path.Combine("Machine", "Directory", "File");
             var info = new FileInfo(path);
             Assert.Equal(path, info.ToString());
         }

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.ServiceDescriptionCollection.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,142 +32,148 @@
 using System.Web.Services;
 using System.Xml;
 
-namespace System.Web.Services.Description {
-	public sealed class ServiceDescriptionCollection : ServiceDescriptionBaseCollection {
+namespace System.Web.Services.Description
+{
+    public sealed class ServiceDescriptionCollection : ServiceDescriptionBaseCollection
+    {
+        ServiceDescriptionImporter importer;
 
-		ServiceDescriptionImporter importer;
-		
-		#region Constructors
-	
-		public ServiceDescriptionCollection () 
-			: base (null)
-		{
-		}
+        #region Constructors
 
-		#endregion // Constructors
+        public ServiceDescriptionCollection()
+            : base(null) { }
 
-		#region Properties
+        #endregion // Constructors
 
-		public ServiceDescription this [int index] {
-			get { 
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ();
+        #region Properties
 
-				return (ServiceDescription) List[index]; 
-			}
-			set { List [index] = value; }
-		}
+        public ServiceDescription this[int index]
+        {
+            get
+            {
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException();
 
-		public ServiceDescription this [string ns] {
-			get { 
-				return (ServiceDescription) Table[ns];
-			}
-		}
+                return (ServiceDescription)List[index];
+            }
+            set { List[index] = value; }
+        }
 
-		#endregion // Properties
+        public ServiceDescription this[string ns]
+        {
+            get { return (ServiceDescription)Table[ns]; }
+        }
 
-		#region Methods
-		internal void SetImporter (ServiceDescriptionImporter i)
-		{
-			importer = i;
-		}
-		public int Add (ServiceDescription serviceDescription) 
-		{
-			Insert (Count, serviceDescription);
-			return (Count - 1);
-		}
-		
-		public bool Contains (ServiceDescription serviceDescription)
-		{
-			return List.Contains (serviceDescription);
-		}
+        #endregion // Properties
 
-		public void CopyTo (ServiceDescription[] array, int index) 
-		{
-			List.CopyTo (array, index);
-		}
+        #region Methods
+        internal void SetImporter(ServiceDescriptionImporter i)
+        {
+            importer = i;
+        }
 
-		public Binding GetBinding (XmlQualifiedName name)
-		{
-			foreach (ServiceDescription desc in List) {
-				if (desc.TargetNamespace == name.Namespace) {
-					foreach (Binding binding in desc.Bindings) 
-						if (binding.Name == name.Name)
-							return binding;
-				}
-			}
-			throw new InvalidOperationException ("Binding '" + name + "' not found");
-		}
+        public int Add(ServiceDescription serviceDescription)
+        {
+            Insert(Count, serviceDescription);
+            return (Count - 1);
+        }
 
-		protected override string GetKey (object value) 
-		{
-			return ((ServiceDescription) value).TargetNamespace;
-		}
+        public bool Contains(ServiceDescription serviceDescription)
+        {
+            return List.Contains(serviceDescription);
+        }
 
-		public Message GetMessage (XmlQualifiedName name)
-		{
-			foreach (ServiceDescription desc in List) {
-				if (desc.TargetNamespace == name.Namespace) {
-					foreach (Message message in desc.Messages) 
-						if (message.Name == name.Name)
-							return message;
-				}
-			}
-			throw new InvalidOperationException ("Message '" + name + "' not found");
-		}
+        public void CopyTo(ServiceDescription[] array, int index)
+        {
+            List.CopyTo(array, index);
+        }
 
-		public PortType GetPortType (XmlQualifiedName name)
-		{
-			foreach (ServiceDescription desc in List) {
-				if (desc.TargetNamespace == name.Namespace) {
-					foreach (PortType portType in desc.PortTypes) 
-						if (portType.Name == name.Name)
-							return portType;
-				}
-			}
-			throw new InvalidOperationException ("Port type '" + name + "' not found");
-		}
+        public Binding GetBinding(XmlQualifiedName name)
+        {
+            foreach (ServiceDescription desc in List)
+            {
+                if (desc.TargetNamespace == name.Namespace)
+                {
+                    foreach (Binding binding in desc.Bindings)
+                        if (binding.Name == name.Name)
+                            return binding;
+                }
+            }
+            throw new InvalidOperationException("Binding '" + name + "' not found");
+        }
 
-		public Service GetService (XmlQualifiedName name)
-		{
-			foreach (ServiceDescription desc in List) {
-				if (desc.TargetNamespace == name.Namespace) {
-					foreach (Service service in desc.Services) 
-						if (service.Name == name.Name)
-							return service;
-				}
-			}
-			throw new InvalidOperationException ("Service '" + name + "' not found");
-		}
+        protected override string GetKey(object value)
+        {
+            return ((ServiceDescription)value).TargetNamespace;
+        }
 
-		public int IndexOf (ServiceDescription serviceDescription)
-		{
-			return List.IndexOf (serviceDescription);
-		}
+        public Message GetMessage(XmlQualifiedName name)
+        {
+            foreach (ServiceDescription desc in List)
+            {
+                if (desc.TargetNamespace == name.Namespace)
+                {
+                    foreach (Message message in desc.Messages)
+                        if (message.Name == name.Name)
+                            return message;
+                }
+            }
+            throw new InvalidOperationException("Message '" + name + "' not found");
+        }
 
-		public void Insert (int index, ServiceDescription serviceDescription)
-		{
-			List.Insert (index, serviceDescription);
-			OnInsertComplete (index, serviceDescription);
-		}
-	
-		public void Remove (ServiceDescription serviceDescription)
-		{
-			List.Remove (serviceDescription);
-		}
+        public PortType GetPortType(XmlQualifiedName name)
+        {
+            foreach (ServiceDescription desc in List)
+            {
+                if (desc.TargetNamespace == name.Namespace)
+                {
+                    foreach (PortType portType in desc.PortTypes)
+                        if (portType.Name == name.Name)
+                            return portType;
+                }
+            }
+            throw new InvalidOperationException("Port type '" + name + "' not found");
+        }
 
-		[MonoTODO]
-		protected override
-		void OnInsertComplete (int index, object item)
-		{
-			base.OnInsertComplete (index, item);
-		}
+        public Service GetService(XmlQualifiedName name)
+        {
+            foreach (ServiceDescription desc in List)
+            {
+                if (desc.TargetNamespace == name.Namespace)
+                {
+                    foreach (Service service in desc.Services)
+                        if (service.Name == name.Name)
+                            return service;
+                }
+            }
+            throw new InvalidOperationException("Service '" + name + "' not found");
+        }
 
-		[MonoTODO]
-		protected override void SetParent (object value, object parent)
-		{
-		}
+        public int IndexOf(ServiceDescription serviceDescription)
+        {
+            return List.IndexOf(serviceDescription);
+        }
 
-		#endregion // Methods
-	}
+        public void Insert(int index, ServiceDescription serviceDescription)
+        {
+            List.Insert(index, serviceDescription);
+            OnInsertComplete(index, serviceDescription);
+        }
+
+        public void Remove(ServiceDescription serviceDescription)
+        {
+            List.Remove(serviceDescription);
+        }
+
+        [MonoTODO]
+        protected override void OnInsertComplete(int index, object item)
+        {
+            base.OnInsertComplete(index, item);
+        }
+
+        [MonoTODO]
+        protected override void SetParent(object value, object parent) { }
+
+        #endregion // Methods
+    }
 }

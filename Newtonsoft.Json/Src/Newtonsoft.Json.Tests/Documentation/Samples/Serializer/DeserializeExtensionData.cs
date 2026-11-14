@@ -25,7 +25,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -33,8 +35,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 {
@@ -76,7 +76,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'DisplayName': 'John Smith',
               'SAMAccountName': 'contoso\\johns'
             }";

@@ -25,60 +25,139 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             ThreadingContext = threadingContext;
         }
 
-        protected abstract Task<bool> TryNavigateToItemAsync(Document document, WrappedNavigationBarItem item, ITextView textView, ITextVersion textVersion, CancellationToken cancellationToken);
+        protected abstract Task<bool> TryNavigateToItemAsync(
+            Document document,
+            WrappedNavigationBarItem item,
+            ITextView textView,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        );
 
         public async Task<ImmutableArray<NavigationBarItem>> GetItemsAsync(
             Document document,
             bool workspaceSupportsDocumentChanges,
             bool forceFrozenPartialSemanticsForCrossProcessOperations,
             ITextVersion textVersion,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var service = document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>();
-            var items = await service.GetItemsAsync(document, workspaceSupportsDocumentChanges, forceFrozenPartialSemanticsForCrossProcessOperations, cancellationToken).ConfigureAwait(false);
-            return items.SelectAsArray(v => (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v));
+            var service =
+                document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>();
+            var items = await service
+                .GetItemsAsync(
+                    document,
+                    workspaceSupportsDocumentChanges,
+                    forceFrozenPartialSemanticsForCrossProcessOperations,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return items.SelectAsArray(v =>
+                (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)
+            );
         }
 
-        public Task<bool> TryNavigateToItemAsync(Document document, NavigationBarItem item, ITextView textView, ITextVersion textVersion, CancellationToken cancellationToken)
-            => TryNavigateToItemAsync(document, (WrappedNavigationBarItem)item, textView, textVersion, cancellationToken);
+        public Task<bool> TryNavigateToItemAsync(
+            Document document,
+            NavigationBarItem item,
+            ITextView textView,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        ) =>
+            TryNavigateToItemAsync(
+                document,
+                (WrappedNavigationBarItem)item,
+                textView,
+                textVersion,
+                cancellationToken
+            );
 
         protected async Task NavigateToSymbolItemAsync(
-            Document document, NavigationBarItem item, SymbolItem symbolItem, ITextVersion textVersion, CancellationToken cancellationToken)
-        {
-            var workspace = document.Project.Solution.Workspace;
-
-            var (documentId, position, virtualSpace) = await GetNavigationLocationAsync(
-                document, item, symbolItem, textVersion, cancellationToken).ConfigureAwait(false);
-
-            await NavigateToPositionAsync(workspace, documentId, position, virtualSpace, cancellationToken).ConfigureAwait(false);
-        }
-
-        protected async Task NavigateToPositionAsync(Workspace workspace, DocumentId documentId, int position, int virtualSpace, CancellationToken cancellationToken)
-        {
-            var navigationService = workspace.Services.GetRequiredService<IDocumentNavigationService>();
-
-            if (!await navigationService.TryNavigateToPositionAsync(
-                    ThreadingContext, workspace, documentId, position, virtualSpace, NavigationOptions.Default, cancellationToken).ConfigureAwait(false))
-            {
-                // Ensure we're back on the UI thread before showing a failure message.
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-                var notificationService = workspace.Services.GetRequiredService<INotificationService>();
-                notificationService.SendNotification(EditorFeaturesResources.The_definition_of_the_object_is_hidden, severity: NotificationSeverity.Error);
-            }
-        }
-
-        internal virtual Task<(DocumentId documentId, int position, int virtualSpace)> GetNavigationLocationAsync(
             Document document,
             NavigationBarItem item,
             SymbolItem symbolItem,
             ITextVersion textVersion,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
+        {
+            var workspace = document.Project.Solution.Workspace;
+
+            var (documentId, position, virtualSpace) = await GetNavigationLocationAsync(
+                    document,
+                    item,
+                    symbolItem,
+                    textVersion,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+
+            await NavigateToPositionAsync(
+                    workspace,
+                    documentId,
+                    position,
+                    virtualSpace,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+        }
+
+        protected async Task NavigateToPositionAsync(
+            Workspace workspace,
+            DocumentId documentId,
+            int position,
+            int virtualSpace,
+            CancellationToken cancellationToken
+        )
+        {
+            var navigationService =
+                workspace.Services.GetRequiredService<IDocumentNavigationService>();
+
+            if (
+                !await navigationService
+                    .TryNavigateToPositionAsync(
+                        ThreadingContext,
+                        workspace,
+                        documentId,
+                        position,
+                        virtualSpace,
+                        NavigationOptions.Default,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            )
+            {
+                // Ensure we're back on the UI thread before showing a failure message.
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
+                var notificationService =
+                    workspace.Services.GetRequiredService<INotificationService>();
+                notificationService.SendNotification(
+                    EditorFeaturesResources.The_definition_of_the_object_is_hidden,
+                    severity: NotificationSeverity.Error
+                );
+            }
+        }
+
+        internal virtual Task<(
+            DocumentId documentId,
+            int position,
+            int virtualSpace
+        )> GetNavigationLocationAsync(
+            Document document,
+            NavigationBarItem item,
+            SymbolItem symbolItem,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
             if (symbolItem.Location.InDocumentInfo != null)
             {
                 // If the item points to a location in this document, then just determine the where that span currently
                 // is (in case recent edits have moved it) and navigate there.
-                var navigationSpan = item.GetCurrentItemSpan(textVersion, symbolItem.Location.InDocumentInfo.Value.navigationSpan);
+                var navigationSpan = item.GetCurrentItemSpan(
+                    textVersion,
+                    symbolItem.Location.InDocumentInfo.Value.navigationSpan
+                );
                 return Task.FromResult((document.Id, navigationSpan.Start, 0));
             }
             else

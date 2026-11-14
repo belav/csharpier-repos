@@ -10,7 +10,10 @@ namespace System.Reflection.Emit
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
 
-        public DynamicMethod DynamicMethod { get { return default; } }
+        public DynamicMethod DynamicMethod
+        {
+            get { return default; }
+        }
 
         public void SetCode(byte[] code, int maxStackSize) { }
 
@@ -31,30 +34,37 @@ namespace System.Reflection.Emit
         {
             return default;
         }
+
         public int GetTokenFor(DynamicMethod method)
         {
             return default;
         }
+
         public int GetTokenFor(RuntimeMethodHandle method, RuntimeTypeHandle contextType)
         {
             return default;
         }
+
         public int GetTokenFor(RuntimeFieldHandle field)
         {
             return default;
         }
+
         public int GetTokenFor(RuntimeFieldHandle field, RuntimeTypeHandle contextType)
         {
             return default;
         }
+
         public int GetTokenFor(RuntimeTypeHandle type)
         {
             return default;
         }
+
         public int GetTokenFor(string literal)
         {
             return default;
         }
+
         public int GetTokenFor(byte[] signature)
         {
             return default;

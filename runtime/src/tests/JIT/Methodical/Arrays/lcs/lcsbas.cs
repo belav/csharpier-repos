@@ -13,7 +13,8 @@ namespace JitTest_lcsbas_lcs_cs
         private static String buildLCS(int[,,,] b, char[] X, int[] ind)
         {
             for (int i = 0; i < RANK; i++)
-                if (ind[i] == 0) return "";
+                if (ind[i] == 0)
+                    return "";
 
             int L = b[ind[0], ind[1], ind[2], ind[3]];
             if (L == RANK)
@@ -111,11 +112,12 @@ namespace JitTest_lcsbas_lcs_cs
         public static int TestEntryPoint()
         {
             Console.WriteLine("Test searches for longest common subsequence of 4 strings\n\n");
-            String[] str = new String[RANK] {
+            String[] str = new String[RANK]
+            {
                 "The Sun has left his blackness",
                 "and has found a fresher morning",
                 "and the fair Moon rejoices",
-                "in the clear and cloudless night"
+                "in the clear and cloudless night",
             };
 
             int[] len = new int[RANK];

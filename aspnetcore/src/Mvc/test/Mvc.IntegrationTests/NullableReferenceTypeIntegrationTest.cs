@@ -47,17 +47,14 @@ public class NullableReferenceTypeIntegrationTest
 
         // ModelState
         Assert.False(modelState.IsValid);
-        Assert.Collection(
-            modelState.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("FirstName", kvp.Key);
-                Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
+        Assert.Collection(modelState.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("FirstName", kvp.Key);
+            Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
 
-                // Not validating framework error message.
-                Assert.Single(kvp.Value.Errors);
-            }
-        );
+            // Not validating framework error message.
+            Assert.Single(kvp.Value.Errors);
+        });
     }
 
 #nullable enable
@@ -137,17 +134,14 @@ public class NullableReferenceTypeIntegrationTest
 
         // ModelState
         Assert.False(modelState.IsValid);
-        Assert.Collection(
-            modelState.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("FirstName", kvp.Key);
-                Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
+        Assert.Collection(modelState.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("FirstName", kvp.Key);
+            Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
 
-                var error = Assert.Single(kvp.Value.Errors);
-                Assert.Equal("Test", error.ErrorMessage);
-            }
-        );
+            var error = Assert.Single(kvp.Value.Errors);
+            Assert.Equal("Test", error.ErrorMessage);
+        });
     }
 
 #nullable enable
@@ -197,16 +191,13 @@ public class NullableReferenceTypeIntegrationTest
 
         // ModelState
         Assert.False(modelState.IsValid);
-        Assert.Collection(
-            modelState.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("param1", kvp.Key);
-                Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
+        Assert.Collection(modelState.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("param1", kvp.Key);
+            Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
 
-                // Not validating framework error message.
-                Assert.Single(kvp.Value.Errors);
-            }
-        );
+            // Not validating framework error message.
+            Assert.Single(kvp.Value.Errors);
+        });
     }
 }

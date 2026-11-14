@@ -19,19 +19,39 @@ namespace System.Transactions
         private static object? s_classSyncObject;
 
         internal static DurableEnlistmentActive DurableEnlistmentActive =>
-            LazyInitializer.EnsureInitialized(ref s_durableEnlistmentActive, ref s_classSyncObject, () => new DurableEnlistmentActive());
+            LazyInitializer.EnsureInitialized(
+                ref s_durableEnlistmentActive,
+                ref s_classSyncObject,
+                () => new DurableEnlistmentActive()
+            );
 
         protected static DurableEnlistmentAborting DurableEnlistmentAborting =>
-            LazyInitializer.EnsureInitialized(ref s_durableEnlistmentAborting, ref s_classSyncObject, () => new DurableEnlistmentAborting());
+            LazyInitializer.EnsureInitialized(
+                ref s_durableEnlistmentAborting,
+                ref s_classSyncObject,
+                () => new DurableEnlistmentAborting()
+            );
 
         protected static DurableEnlistmentCommitting DurableEnlistmentCommitting =>
-            LazyInitializer.EnsureInitialized(ref s_durableEnlistmentCommitting, ref s_classSyncObject, () => new DurableEnlistmentCommitting());
+            LazyInitializer.EnsureInitialized(
+                ref s_durableEnlistmentCommitting,
+                ref s_classSyncObject,
+                () => new DurableEnlistmentCommitting()
+            );
 
         protected static DurableEnlistmentDelegated DurableEnlistmentDelegated =>
-            LazyInitializer.EnsureInitialized(ref s_durableEnlistmentDelegated, ref s_classSyncObject, () => new DurableEnlistmentDelegated());
+            LazyInitializer.EnsureInitialized(
+                ref s_durableEnlistmentDelegated,
+                ref s_classSyncObject,
+                () => new DurableEnlistmentDelegated()
+            );
 
         protected static DurableEnlistmentEnded DurableEnlistmentEnded =>
-            LazyInitializer.EnsureInitialized(ref s_durableEnlistmentEnded, ref s_classSyncObject, () => new DurableEnlistmentEnded());
+            LazyInitializer.EnsureInitialized(
+                ref s_durableEnlistmentEnded,
+                ref s_classSyncObject,
+                () => new DurableEnlistmentEnded()
+            );
     }
 
     // Active state for a durable enlistment.  In this state the transaction can be aborted
@@ -64,7 +84,10 @@ namespace System.Transactions
             DurableEnlistmentCommitting.EnterState(enlistment);
         }
 
-        internal override void ChangeStatePromoted(InternalEnlistment enlistment, IPromotedEnlistment promotedEnlistment)
+        internal override void ChangeStatePromoted(
+            InternalEnlistment enlistment,
+            IPromotedEnlistment promotedEnlistment
+        )
         {
             // Save the promoted enlistment because future notifications must be sent here.
             enlistment.PromotedEnlistment = promotedEnlistment;
@@ -96,7 +119,11 @@ namespace System.Transactions
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.EnlistmentStatus(TraceSourceType.TraceSourceLtm, enlistment.EnlistmentTraceId, NotificationCall.Rollback);
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceLtm,
+                        enlistment.EnlistmentTraceId,
+                        NotificationCall.Rollback
+                    );
                 }
 
                 // Send the Rollback notification to the enlistment
@@ -106,7 +133,9 @@ namespace System.Transactions
                 }
                 else
                 {
-                    enlistment.PromotableSinglePhaseNotification.Rollback(enlistment.SinglePhaseEnlistment);
+                    enlistment.PromotableSinglePhaseNotification.Rollback(
+                        enlistment.SinglePhaseEnlistment
+                    );
                 }
             }
             finally
@@ -147,17 +176,25 @@ namespace System.Transactions
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.EnlistmentStatus(TraceSourceType.TraceSourceLtm, enlistment.EnlistmentTraceId, NotificationCall.SinglePhaseCommit);
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceLtm,
+                        enlistment.EnlistmentTraceId,
+                        NotificationCall.SinglePhaseCommit
+                    );
                 }
 
                 // Send the Commit notification to the enlistment
                 if (enlistment.SinglePhaseNotification != null)
                 {
-                    enlistment.SinglePhaseNotification.SinglePhaseCommit(enlistment.SinglePhaseEnlistment);
+                    enlistment.SinglePhaseNotification.SinglePhaseCommit(
+                        enlistment.SinglePhaseEnlistment
+                    );
                 }
                 else
                 {
-                    enlistment.PromotableSinglePhaseNotification.SinglePhaseCommit(enlistment.SinglePhaseEnlistment);
+                    enlistment.PromotableSinglePhaseNotification.SinglePhaseCommit(
+                        enlistment.SinglePhaseEnlistment
+                    );
                 }
                 spcCommitted = true;
             }

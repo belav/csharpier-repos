@@ -26,14 +26,14 @@
 
 using System;
 using System.Data.Common;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace System.Data.SqlTypes {
-
+namespace System.Data.SqlTypes
+{
     /// <devdoc>
     ///    <para>
     ///       Represents a floating point number within the range of -3.40E +38 through
@@ -43,12 +43,15 @@ namespace System.Data.SqlTypes {
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     [XmlSchemaProvider("GetXsdType")]
-    public struct SqlSingle : INullable, IComparable, IXmlSerializable {
+    public struct SqlSingle : INullable, IComparable, IXmlSerializable
+    {
         private bool m_fNotNull; // false if null
         private float m_value;
+
         // constructor
         // construct a Null
-        private SqlSingle(bool fNull) {
+        private SqlSingle(bool fNull)
+        {
             m_fNotNull = false;
             m_value = (float)0.0;
         }
@@ -56,10 +59,12 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SqlSingle(float value) {
+        public SqlSingle(float value)
+        {
             if (Single.IsInfinity(value) || Single.IsNaN(value))
                 throw new OverflowException(SQLResource.ArithOverflowMessage);
-            else {
+            else
+            {
                 m_fNotNull = true;
                 m_value = value;
             }
@@ -68,23 +73,26 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SqlSingle(double value) : this(checked((float)value)) {
-        }
+        public SqlSingle(double value)
+            : this(checked((float)value)) { }
 
         // INullable
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsNull {
-            get { return !m_fNotNull;}
+        public bool IsNull
+        {
+            get { return !m_fNotNull; }
         }
 
         // property: Value
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public float Value {
-            get {
+        public float Value
+        {
+            get
+            {
                 if (m_fNotNull)
                     return m_value;
                 else
@@ -96,7 +104,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlSingle(float x) {
+        public static implicit operator SqlSingle(float x)
+        {
             return new SqlSingle(x);
         }
 
@@ -104,36 +113,38 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator float(SqlSingle x) {
+        public static explicit operator float(SqlSingle x)
+        {
             return x.Value;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override String ToString() {
+        public override String ToString()
+        {
             return IsNull ? SQLResource.NullString : m_value.ToString((IFormatProvider)null);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlSingle Parse(String s) {
+        public static SqlSingle Parse(String s)
+        {
             if (s == SQLResource.NullString)
                 return SqlSingle.Null;
-            else 
+            else
                 return new SqlSingle(Single.Parse(s, CultureInfo.InvariantCulture));
         }
-
 
         // Unary operators
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlSingle operator -(SqlSingle x) {
+        public static SqlSingle operator -(SqlSingle x)
+        {
             return x.IsNull ? Null : new SqlSingle(-x.m_value);
         }
-
 
         // Binary operators
 
@@ -141,7 +152,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlSingle operator +(SqlSingle x, SqlSingle y) {
+        public static SqlSingle operator +(SqlSingle x, SqlSingle y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -156,7 +168,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlSingle operator -(SqlSingle x, SqlSingle y) {
+        public static SqlSingle operator -(SqlSingle x, SqlSingle y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -171,7 +184,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlSingle operator *(SqlSingle x, SqlSingle y) {
+        public static SqlSingle operator *(SqlSingle x, SqlSingle y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -186,7 +200,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlSingle operator /(SqlSingle x, SqlSingle y) {
+        public static SqlSingle operator /(SqlSingle x, SqlSingle y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -201,15 +216,14 @@ namespace System.Data.SqlTypes {
             return new SqlSingle(value);
         }
 
-
-
         // Implicit conversions
 
         // Implicit conversion from SqlBoolean to SqlSingle
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlSingle(SqlBoolean x) {
+        public static explicit operator SqlSingle(SqlBoolean x)
+        {
             return x.IsNull ? Null : new SqlSingle(x.ByteValue);
         }
 
@@ -217,7 +231,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlSingle(SqlByte x) {
+        public static implicit operator SqlSingle(SqlByte x)
+        {
             // Will not overflow
             return x.IsNull ? Null : new SqlSingle((float)(x.Value));
         }
@@ -226,7 +241,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlSingle(SqlInt16 x) {
+        public static implicit operator SqlSingle(SqlInt16 x)
+        {
             // Will not overflow
             return x.IsNull ? Null : new SqlSingle((float)(x.Value));
         }
@@ -235,7 +251,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlSingle(SqlInt32 x) {
+        public static implicit operator SqlSingle(SqlInt32 x)
+        {
             // Will not overflow
             return x.IsNull ? Null : new SqlSingle((float)(x.Value));
         }
@@ -244,7 +261,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlSingle(SqlInt64 x) {
+        public static implicit operator SqlSingle(SqlInt64 x)
+        {
             // Will not overflow
             return x.IsNull ? Null : new SqlSingle((float)(x.Value));
         }
@@ -253,7 +271,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlSingle(SqlMoney x) {
+        public static implicit operator SqlSingle(SqlMoney x)
+        {
             return x.IsNull ? Null : new SqlSingle(x.ToDouble());
         }
 
@@ -261,20 +280,20 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlSingle(SqlDecimal x) {
+        public static implicit operator SqlSingle(SqlDecimal x)
+        {
             // Will not overflow
             return x.IsNull ? Null : new SqlSingle(x.ToDouble());
         }
 
-
         // Explicit conversions
-
 
         // Explicit conversion from SqlDouble to SqlSingle
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlSingle(SqlDouble x) {
+        public static explicit operator SqlSingle(SqlDouble x)
+        {
             return x.IsNull ? Null : new SqlSingle(x.Value);
         }
 
@@ -283,7 +302,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlSingle(SqlString x) {
+        public static explicit operator SqlSingle(SqlString x)
+        {
             if (x.IsNull)
                 return SqlSingle.Null;
             return Parse(x.Value);
@@ -293,43 +313,55 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator==(SqlSingle x, SqlSingle y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value == y.m_value);
+        public static SqlBoolean operator ==(SqlSingle x, SqlSingle y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value == y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator!=(SqlSingle x, SqlSingle y) {
-            return ! (x == y);
+        public static SqlBoolean operator !=(SqlSingle x, SqlSingle y)
+        {
+            return !(x == y);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator<(SqlSingle x, SqlSingle y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value < y.m_value);
+        public static SqlBoolean operator <(SqlSingle x, SqlSingle y)
+        {
+            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value < y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator>(SqlSingle x, SqlSingle y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value > y.m_value);
+        public static SqlBoolean operator >(SqlSingle x, SqlSingle y)
+        {
+            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value > y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator<=(SqlSingle x, SqlSingle y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value <= y.m_value);
+        public static SqlBoolean operator <=(SqlSingle x, SqlSingle y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator>=(SqlSingle x, SqlSingle y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value >= y.m_value);
+        public static SqlBoolean operator >=(SqlSingle x, SqlSingle y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value >= y.m_value);
         }
 
         //--------------------------------------------------
@@ -337,92 +369,111 @@ namespace System.Data.SqlTypes {
         //--------------------------------------------------
 
         // Alternative method for operator +
-        public static SqlSingle Add(SqlSingle x, SqlSingle y) {
+        public static SqlSingle Add(SqlSingle x, SqlSingle y)
+        {
             return x + y;
         }
+
         // Alternative method for operator -
-        public static SqlSingle Subtract(SqlSingle x, SqlSingle y) {
+        public static SqlSingle Subtract(SqlSingle x, SqlSingle y)
+        {
             return x - y;
         }
 
         // Alternative method for operator *
-        public static SqlSingle Multiply(SqlSingle x, SqlSingle y) {
+        public static SqlSingle Multiply(SqlSingle x, SqlSingle y)
+        {
             return x * y;
         }
 
         // Alternative method for operator /
-        public static SqlSingle Divide(SqlSingle x, SqlSingle y) {
+        public static SqlSingle Divide(SqlSingle x, SqlSingle y)
+        {
             return x / y;
         }
 
         // Alternative method for operator ==
-        public static SqlBoolean Equals(SqlSingle x, SqlSingle y) {
+        public static SqlBoolean Equals(SqlSingle x, SqlSingle y)
+        {
             return (x == y);
         }
 
         // Alternative method for operator !=
-        public static SqlBoolean NotEquals(SqlSingle x, SqlSingle y) {
+        public static SqlBoolean NotEquals(SqlSingle x, SqlSingle y)
+        {
             return (x != y);
         }
 
         // Alternative method for operator <
-        public static SqlBoolean LessThan(SqlSingle x, SqlSingle y) {
+        public static SqlBoolean LessThan(SqlSingle x, SqlSingle y)
+        {
             return (x < y);
         }
 
         // Alternative method for operator >
-        public static SqlBoolean GreaterThan(SqlSingle x, SqlSingle y) {
+        public static SqlBoolean GreaterThan(SqlSingle x, SqlSingle y)
+        {
             return (x > y);
         }
 
         // Alternative method for operator <=
-        public static SqlBoolean LessThanOrEqual(SqlSingle x, SqlSingle y) {
+        public static SqlBoolean LessThanOrEqual(SqlSingle x, SqlSingle y)
+        {
             return (x <= y);
         }
 
         // Alternative method for operator >=
-        public static SqlBoolean GreaterThanOrEqual(SqlSingle x, SqlSingle y) {
+        public static SqlBoolean GreaterThanOrEqual(SqlSingle x, SqlSingle y)
+        {
             return (x >= y);
         }
 
         // Alternative method for conversions.
 
-        public SqlBoolean ToSqlBoolean() {
+        public SqlBoolean ToSqlBoolean()
+        {
             return (SqlBoolean)this;
         }
 
-        public SqlByte ToSqlByte() {
+        public SqlByte ToSqlByte()
+        {
             return (SqlByte)this;
         }
 
-        public SqlDouble ToSqlDouble() {
+        public SqlDouble ToSqlDouble()
+        {
             return (SqlDouble)this;
         }
 
-        public SqlInt16 ToSqlInt16() {
+        public SqlInt16 ToSqlInt16()
+        {
             return (SqlInt16)this;
         }
 
-        public SqlInt32 ToSqlInt32() {
+        public SqlInt32 ToSqlInt32()
+        {
             return (SqlInt32)this;
         }
 
-        public SqlInt64 ToSqlInt64() {
+        public SqlInt64 ToSqlInt64()
+        {
             return (SqlInt64)this;
         }
 
-        public SqlMoney ToSqlMoney() {
+        public SqlMoney ToSqlMoney()
+        {
             return (SqlMoney)this;
         }
 
-        public SqlDecimal ToSqlDecimal() {
+        public SqlDecimal ToSqlDecimal()
+        {
             return (SqlDecimal)this;
         }
 
-        public SqlString ToSqlString() {
+        public SqlString ToSqlString()
+        {
             return (SqlString)this;
         }
-
 
         // IComparable
         // Compares this object to another object, returning an integer that
@@ -434,8 +485,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int CompareTo(Object value) {
-            if (value is SqlSingle) {
+        public int CompareTo(Object value)
+        {
+            if (value is SqlSingle)
+            {
                 SqlSingle i = (SqlSingle)value;
 
                 return CompareTo(i);
@@ -443,16 +496,19 @@ namespace System.Data.SqlTypes {
             throw ADP.WrongType(value.GetType(), typeof(SqlSingle));
         }
 
-        public int CompareTo(SqlSingle value) {
+        public int CompareTo(SqlSingle value)
+        {
             // If both Null, consider them equal.
             // Otherwise, Null is less than anything.
             if (IsNull)
-                return value.IsNull ? 0  : -1;
+                return value.IsNull ? 0 : -1;
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -460,8 +516,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool Equals(Object value) {
-            if (!(value is SqlSingle)) {
+        public override bool Equals(Object value)
+        {
+            if (!(value is SqlSingle))
+            {
                 return false;
             }
 
@@ -477,26 +535,33 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return IsNull ? 0 : Value.GetHashCode();
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IXmlSerializable.ReadXml(XmlReader reader) {
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
             string isNull = reader.GetAttribute("nil", XmlSchema.InstanceNamespace);
-            if (isNull != null && XmlConvert.ToBoolean(isNull)) {
+            if (isNull != null && XmlConvert.ToBoolean(isNull))
+            {
                 // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
                 reader.ReadElementString();
                 m_fNotNull = false;
             }
-            else {
+            else
+            {
                 m_value = XmlConvert.ToSingle(reader.ReadElementString());
                 m_fNotNull = true;
             }
@@ -505,11 +570,14 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IXmlSerializable.WriteXml(XmlWriter writer) {
-            if (IsNull) {
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            if (IsNull)
+            {
                 writer.WriteAttributeString("xsi", "nil", XmlSchema.InstanceNamespace, "true");
             }
-            else {
+            else
+            {
                 writer.WriteString(XmlConvert.ToString(m_value));
             }
         }
@@ -517,27 +585,29 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet) {
+        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet)
+        {
             return new XmlQualifiedName("float", XmlSchema.Namespace);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly SqlSingle Null       = new SqlSingle(true);
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public static readonly SqlSingle Zero       = new SqlSingle((float)0.0);
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public static readonly SqlSingle MinValue   = new SqlSingle(Single.MinValue);
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public static readonly SqlSingle MaxValue   = new SqlSingle(Single.MaxValue);
+        public static readonly SqlSingle Null = new SqlSingle(true);
 
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public static readonly SqlSingle Zero = new SqlSingle((float)0.0);
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public static readonly SqlSingle MinValue = new SqlSingle(Single.MinValue);
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public static readonly SqlSingle MaxValue = new SqlSingle(Single.MaxValue);
     } // SqlSingle
-
 } // namespace System.Data.SqlTypes

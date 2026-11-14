@@ -93,15 +93,12 @@ internal sealed class PageActionEndpointDataSource : ActionEndpointDataSourceBas
             order ??= _orderSequence.GetNext();
 
             endpoints
-                .Map(
-                    pattern,
-                    context =>
-                    {
-                        throw new InvalidOperationException(
-                            "This endpoint is not expected to be executed directly."
-                        );
-                    }
-                )
+                .Map(pattern, context =>
+                {
+                    throw new InvalidOperationException(
+                        "This endpoint is not expected to be executed directly."
+                    );
+                })
                 .Add(b =>
                 {
                     ((RouteEndpointBuilder)b).Order = order.Value;

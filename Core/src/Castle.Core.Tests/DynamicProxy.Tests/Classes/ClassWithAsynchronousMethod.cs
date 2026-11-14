@@ -14,25 +14,26 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
-	using System.Threading;
-	using System.Threading.Tasks;
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Castle.DynamicProxy.Tests.Interfaces;
 
-	using Castle.DynamicProxy.Tests.Interfaces;
+    public class ClassWithAsynchronousMethod : IInterfaceWithAsynchronousMethod
+    {
+        public async Task Method()
+        {
+            Console.WriteLine(
+                $"Before Await ClassWithAsynchronousMethod:Method ThreadId='{Thread.CurrentThread.ManagedThreadId}'.",
+                Thread.CurrentThread.ManagedThreadId
+            );
 
-	public class ClassWithAsynchronousMethod : IInterfaceWithAsynchronousMethod
-	{
-		public async Task Method()
-		{
-			Console.WriteLine(
-				$"Before Await ClassWithAsynchronousMethod:Method ThreadId='{Thread.CurrentThread.ManagedThreadId}'.",
-				Thread.CurrentThread.ManagedThreadId);
+            await Task.Delay(10).ConfigureAwait(false);
 
-			await Task.Delay(10).ConfigureAwait(false);
-
-			Console.WriteLine(
-				$"After Await ClassWithAsynchronousMethod:Method ThreadId='{Thread.CurrentThread.ManagedThreadId}'.",
-				Thread.CurrentThread.ManagedThreadId);
-		}
-	}
+            Console.WriteLine(
+                $"After Await ClassWithAsynchronousMethod:Method ThreadId='{Thread.CurrentThread.ManagedThreadId}'.",
+                Thread.CurrentThread.ManagedThreadId
+            );
+        }
+    }
 }

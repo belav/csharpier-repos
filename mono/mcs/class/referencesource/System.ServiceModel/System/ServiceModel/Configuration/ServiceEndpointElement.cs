@@ -10,9 +10,12 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Description;
 
-    public sealed partial class ServiceEndpointElement : ConfigurationElement, IConfigurationContextProviderInternal
+    public sealed partial class ServiceEndpointElement
+        : ConfigurationElement,
+            IConfigurationContextProviderInternal
     {
-        public ServiceEndpointElement() : base() { }
+        public ServiceEndpointElement()
+            : base() { }
 
         public ServiceEndpointElement(Uri address, string contractType)
             : this()
@@ -33,7 +36,10 @@ namespace System.ServiceModel.Configuration
             {
                 this.Address = source.Address;
             }
-            if (properties[ConfigurationStrings.BehaviorConfiguration].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.BehaviorConfiguration].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.BehaviorConfiguration = source.BehaviorConfiguration;
             }
@@ -41,7 +47,10 @@ namespace System.ServiceModel.Configuration
             {
                 this.Binding = source.Binding;
             }
-            if (properties[ConfigurationStrings.BindingConfiguration].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.BindingConfiguration].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.BindingConfiguration = source.BindingConfiguration;
             }
@@ -49,37 +58,58 @@ namespace System.ServiceModel.Configuration
             {
                 this.Name = source.Name;
             }
-            if (properties[ConfigurationStrings.BindingName].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.BindingName].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.BindingName = source.BindingName;
             }
-            if (properties[ConfigurationStrings.BindingNamespace].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.BindingNamespace].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.BindingNamespace = source.BindingNamespace;
             }
-            if (properties[ConfigurationStrings.Contract].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.Contract].ValueOrigin != PropertyValueOrigin.Default
+            )
             {
                 this.Contract = source.Contract;
             }
-            if (properties[ConfigurationStrings.Headers].ValueOrigin != PropertyValueOrigin.Default
-                && source.Headers != null)
+            if (
+                properties[ConfigurationStrings.Headers].ValueOrigin != PropertyValueOrigin.Default
+                && source.Headers != null
+            )
             {
                 this.Headers.Copy(source.Headers);
             }
-            if (properties[ConfigurationStrings.Identity].ValueOrigin != PropertyValueOrigin.Default
-                && source.Identity != null)
+            if (
+                properties[ConfigurationStrings.Identity].ValueOrigin != PropertyValueOrigin.Default
+                && source.Identity != null
+            )
             {
                 this.Identity.Copy(source.Identity);
             }
-            if (properties[ConfigurationStrings.ListenUriMode].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.ListenUriMode].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.ListenUriMode = source.ListenUriMode;
             }
-            if (properties[ConfigurationStrings.ListenUri].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.ListenUri].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.ListenUri = source.ListenUri;
             }
-            if (properties[ConfigurationStrings.IsSystemEndpoint].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.IsSystemEndpoint].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.IsSystemEndpoint = source.IsSystemEndpoint;
             }
@@ -87,13 +117,20 @@ namespace System.ServiceModel.Configuration
             {
                 this.Kind = source.Kind;
             }
-            if (properties[ConfigurationStrings.EndpointConfiguration].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.EndpointConfiguration].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.EndpointConfiguration = source.EndpointConfiguration;
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Address, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Address,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         public Uri Address
         {
             get { return (Uri)base[ConfigurationStrings.Address]; }
@@ -115,7 +152,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Binding, Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Binding,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string Binding
         {
@@ -130,7 +170,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.BindingConfiguration, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.BindingConfiguration,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string BindingConfiguration
         {
@@ -160,7 +204,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.BindingName, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.BindingName,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string BindingName
         {
@@ -175,7 +223,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.BindingNamespace, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.BindingNamespace,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string BindingNamespace
         {
@@ -190,7 +242,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Contract, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Contract,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string Contract
         {
@@ -217,7 +273,10 @@ namespace System.ServiceModel.Configuration
             get { return (IdentityElement)base[ConfigurationStrings.Identity]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ListenUriMode, DefaultValue = ListenUriMode.Explicit)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ListenUriMode,
+            DefaultValue = ListenUriMode.Explicit
+        )]
         [ServiceModelEnumValidator(typeof(ListenUriModeHelper))]
         public ListenUriMode ListenUriMode
         {
@@ -239,7 +298,11 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.IsSystemEndpoint] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Kind, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Kind,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string Kind
         {
@@ -254,7 +317,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.EndpointConfiguration, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.EndpointConfiguration,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string EndpointConfiguration
         {
@@ -274,15 +341,15 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous =
-            "RequiresReview - the return value will be used for a security decision -- see comment in interface definition")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - the return value will be used for a security decision -- see comment in interface definition"
+        )]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
-            Fx.Assert("Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
+            Fx.Assert(
+                "Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext"
+            );
             return null;
         }
     }
 }
-
-
-

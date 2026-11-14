@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             ICodeModelInstanceFactory codeModelInstanceFactory,
             VisualStudioWorkspace visualStudioWorkspace,
             IServiceProvider serviceProvider,
-            ProjectCodeModelFactory projectCodeModelFactory)
+            ProjectCodeModelFactory projectCodeModelFactory
+        )
         {
             _threadingContext = threadingContext;
             _projectId = projectId;
@@ -61,11 +62,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 if (_codeModelCache == null)
                 {
-                    var workspaceProject = _visualStudioWorkspace.CurrentSolution.GetProject(_projectId);
+                    var workspaceProject = _visualStudioWorkspace.CurrentSolution.GetProject(
+                        _projectId
+                    );
 
                     if (workspaceProject != null)
                     {
-                        _codeModelCache = new CodeModelProjectCache(_threadingContext, _projectId, _codeModelInstanceFactory, _projectCodeModelFactory, _serviceProvider, workspaceProject.Services, _visualStudioWorkspace);
+                        _codeModelCache = new CodeModelProjectCache(
+                            _threadingContext,
+                            _projectId,
+                            _codeModelInstanceFactory,
+                            _projectCodeModelFactory,
+                            _serviceProvider,
+                            workspaceProject.Services,
+                            _visualStudioWorkspace
+                        );
                     }
                 }
 
@@ -73,16 +84,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
         }
 
-        internal IEnumerable<ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>> GetCachedFileCodeModelInstances()
-            => GetCodeModelCache().GetFileCodeModelInstances();
+        internal IEnumerable<
+            ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>
+        > GetCachedFileCodeModelInstances() => GetCodeModelCache().GetFileCodeModelInstances();
 
-        internal bool TryGetCachedFileCodeModel(string fileName, out ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> fileCodeModelHandle)
+        internal bool TryGetCachedFileCodeModel(
+            string fileName,
+            out ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> fileCodeModelHandle
+        )
         {
             var handle = GetCodeModelCache()?.GetComHandleForFileCodeModel(fileName);
 
-            fileCodeModelHandle = handle != null
-                ? handle.Value
-                : default;
+            fileCodeModelHandle = handle != null ? handle.Value : default;
 
             return handle != null;
         }
@@ -91,14 +104,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         /// Gets or creates a <see cref="FileCodeModel"/> for the given file name. Because we don't have
         /// a parent object, this will call back to the project system to provide us the parent object.
         /// </summary>
-        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(string filePath)
-            => GetCodeModelCache().GetOrCreateFileCodeModel(filePath);
+        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(
+            string filePath
+        ) => GetCodeModelCache().GetOrCreateFileCodeModel(filePath);
 
-        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(string filePath, object parent)
-            => GetCodeModelCache().GetOrCreateFileCodeModel(filePath, parent);
+        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(
+            string filePath,
+            object parent
+        ) => GetCodeModelCache().GetOrCreateFileCodeModel(filePath, parent);
 
-        public EnvDTE.CodeModel GetOrCreateRootCodeModel(EnvDTE.Project parent)
-            => GetCodeModelCache().GetOrCreateRootCodeModel(parent);
+        public EnvDTE.CodeModel GetOrCreateRootCodeModel(EnvDTE.Project parent) =>
+            GetCodeModelCache().GetOrCreateRootCodeModel(parent);
 
         public void OnSourceFileRemoved(string fileName)
         {
@@ -114,14 +130,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             _codeModelCache?.OnSourceFileRenaming(filePath, newFilePath);
         }
 
-        EnvDTE.FileCodeModel IProjectCodeModel.GetOrCreateFileCodeModel(string filePath, object parent)
-            => this.GetOrCreateFileCodeModel(filePath, parent).Handle;
+        EnvDTE.FileCodeModel IProjectCodeModel.GetOrCreateFileCodeModel(
+            string filePath,
+            object parent
+        ) => this.GetOrCreateFileCodeModel(filePath, parent).Handle;
 
-        public EnvDTE.FileCodeModel CreateFileCodeModel(SourceGeneratedDocument sourceGeneratedDocument)
+        public EnvDTE.FileCodeModel CreateFileCodeModel(
+            SourceGeneratedDocument sourceGeneratedDocument
+        )
         {
             // Unlike for "regular" documents, we make no effort to cache these between callers or hold them for longer lifetimes with
             // events.
-            return FileCodeModel.Create(GetCodeModelCache().State, parent: null, sourceGeneratedDocument.Id, isSourceGeneratorOutput: true, new TextManagerAdapter()).Handle;
+            return FileCodeModel
+                .Create(
+                    GetCodeModelCache().State,
+                    parent: null,
+                    sourceGeneratedDocument.Id,
+                    isSourceGeneratorOutput: true,
+                    new TextManagerAdapter()
+                )
+                .Handle;
         }
     }
 }

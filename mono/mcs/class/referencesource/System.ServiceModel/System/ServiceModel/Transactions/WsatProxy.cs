@@ -5,24 +5,22 @@
 namespace System.ServiceModel.Transactions
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
     using System.Text;
     using System.Threading;
     using System.Transactions;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Diagnostics;
-
     using Microsoft.Transactions.Bridge;
     using Microsoft.Transactions.Wsat.Messaging;
     using Microsoft.Transactions.Wsat.Protocol;
-
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.Security.Permissions;
 
     class WsatProxy
     {
@@ -40,13 +38,18 @@ namespace System.ServiceModel.Transactions
         }
 
         //=============================================================================================
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to CoordinationContext properties are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to CoordinationContext properties are safe."
+        )]
         public Transaction UnmarshalTransaction(WsatTransactionInfo info)
         {
             if (info.Context.ProtocolVersion != this.protocolVersion)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion)));
+                    new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                );
             }
 
             if (wsatConfig.OleTxUpgradeEnabled)
@@ -65,9 +68,14 @@ namespace System.ServiceModel.Transactions
 
                     // Fall back to WS-AT unmarshal
                     if (DiagnosticUtility.ShouldTraceInformation)
-                        TraceUtility.TraceEvent(TraceEventType.Information,
-                                                                     TraceCode.TxFailedToNegotiateOleTx,
-                                                                     SR.GetString(SR.TraceCodeTxFailedToNegotiateOleTx, info.Context.Identifier));
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.TxFailedToNegotiateOleTx,
+                            SR.GetString(
+                                SR.TraceCodeTxFailedToNegotiateOleTx,
+                                info.Context.Identifier
+                            )
+                        );
                 }
             }
 
@@ -75,27 +83,37 @@ namespace System.ServiceModel.Transactions
             // skip the CreateCoordinationContext step
             CoordinationContext localContext = info.Context;
 
-            if (!this.wsatConfig.IsLocalRegistrationService(localContext.RegistrationService, this.protocolVersion))
+            if (
+                !this.wsatConfig.IsLocalRegistrationService(
+                    localContext.RegistrationService,
+                    this.protocolVersion
+                )
+            )
             {
                 // Our WS-AT protocol service for the context's protocol version should be enabled
                 if (!this.wsatConfig.IsProtocolServiceEnabled(this.protocolVersion))
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TransactionException(SR.GetString(SR.WsatProtocolServiceDisabled, this.protocolVersion)));
+                        new TransactionException(
+                            SR.GetString(SR.WsatProtocolServiceDisabled, this.protocolVersion)
+                        )
+                    );
                 }
 
                 // We should have enabled inbound transactions
                 if (!this.wsatConfig.InboundEnabled)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TransactionException(SR.GetString(SR.InboundTransactionsDisabled)));
+                        new TransactionException(SR.GetString(SR.InboundTransactionsDisabled))
+                    );
                 }
 
                 // The sender should have enabled both WS-AT and outbound transactions
                 if (this.wsatConfig.IsDisabledRegistrationService(localContext.RegistrationService))
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TransactionException(SR.GetString(SR.SourceTransactionsDisabled)));
+                        new TransactionException(SR.GetString(SR.SourceTransactionsDisabled))
+                    );
                 }
 
                 // Ask the WS-AT protocol service to unmarshal the transaction
@@ -106,13 +124,18 @@ namespace System.ServiceModel.Transactions
             if (transactionId == Guid.Empty)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionException(SR.GetString(SR.InvalidCoordinationContextTransactionId)));
+                    new TransactionException(
+                        SR.GetString(SR.InvalidCoordinationContextTransactionId)
+                    )
+                );
             }
 
-            byte[] propagationToken = MarshalPropagationToken(ref transactionId,
-                                                              localContext.IsolationLevel,
-                                                              localContext.IsolationFlags,
-                                                              localContext.Description);
+            byte[] propagationToken = MarshalPropagationToken(
+                ref transactionId,
+                localContext.IsolationLevel,
+                localContext.IsolationFlags,
+                localContext.Description
+            );
 
             return OleTxTransactionInfo.UnmarshalPropagationToken(propagationToken);
         }
@@ -120,23 +143,25 @@ namespace System.ServiceModel.Transactions
         //=============================================================================================
         // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next version.
         /*
-        // We demand full trust because we use CreateCoordinationContext from a non-APTCA assembly and the CreateCoordinationContext constructor does an Environment.FailFast 
+        // We demand full trust because we use CreateCoordinationContext from a non-APTCA assembly and the CreateCoordinationContext constructor does an Environment.FailFast
         // if the argument is invalid. It's recommended to not let partially trusted callers to bring down the process.
         // WSATs are not supported in partial trust, so customers should not be broken by this demand.
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         */
         CoordinationContext CreateCoordinationContext(WsatTransactionInfo info)
         {
-            CreateCoordinationContext cccMessage = new CreateCoordinationContext(this.protocolVersion);
+            CreateCoordinationContext cccMessage = new CreateCoordinationContext(
+                this.protocolVersion
+            );
             cccMessage.CurrentContext = info.Context;
             cccMessage.IssuedToken = info.IssuedToken;
 
             try
             {
                 // This was necessary during some portions of WCF 1.0 development
-                // It is probably not needed now. However, it seems conceptually 
-                // solid to separate this operation from the incoming app message as 
-                // much as possible.  There have also been enough ServiceModel bugs in 
+                // It is probably not needed now. However, it seems conceptually
+                // solid to separate this operation from the incoming app message as
+                // much as possible.  There have also been enough ServiceModel bugs in
                 // this area that it does not seem wise to remove this at the moment
                 // (2006/3/30, WCF 1.0 RC1 milestone)
                 using (new OperationContextScope((OperationContext)null))
@@ -148,13 +173,21 @@ namespace System.ServiceModel.Transactions
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionException(SR.GetString(SR.UnmarshalTransactionFaulted, e.Message), e));
+                    new TransactionException(
+                        SR.GetString(SR.UnmarshalTransactionFaulted, e.Message),
+                        e
+                    )
+                );
             }
             catch (WsatSendFailureException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerCommunicationException(SR.GetString(SR.TMCommunicationError), e));
+                    new TransactionManagerCommunicationException(
+                        SR.GetString(SR.TMCommunicationError),
+                        e
+                    )
+                );
             }
         }
 
@@ -171,8 +204,12 @@ namespace System.ServiceModel.Transactions
                 ActivationProxy proxy = GetActivationProxy();
                 EndpointAddress address = proxy.To;
 
-                EndpointAddress localActivationService = this.wsatConfig.LocalActivationService(this.protocolVersion);
-                EndpointAddress remoteActivationService = this.wsatConfig.RemoteActivationService(this.protocolVersion);
+                EndpointAddress localActivationService = this.wsatConfig.LocalActivationService(
+                    this.protocolVersion
+                );
+                EndpointAddress remoteActivationService = this.wsatConfig.RemoteActivationService(
+                    this.protocolVersion
+                );
 
                 try
                 {
@@ -184,18 +221,22 @@ namespace System.ServiceModel.Transactions
 
                     // Don't retry if we're not likely to succeed on the next pass
                     Exception inner = e.InnerException;
-                    if (inner is TimeoutException ||
-                        inner is QuotaExceededException ||
-                        inner is FaultException)
+                    if (
+                        inner is TimeoutException
+                        || inner is QuotaExceededException
+                        || inner is FaultException
+                    )
                         throw;
 
                     // Give up after 10 attempts
                     if (attempts > 10)
                         throw;
 
-                    if (attempts > 5 &&
-                        remoteActivationService != null &&
-                        ReferenceEquals(address, localActivationService))
+                    if (
+                        attempts > 5
+                        && remoteActivationService != null
+                        && ReferenceEquals(address, localActivationService)
+                    )
                     {
                         // Switch over to the remote activation service.
                         // In clustered scenarios this uses the cluster name,
@@ -261,7 +302,7 @@ namespace System.ServiceModel.Transactions
         //=============================================================================================
         // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next version.
         /*
-        // We demand full trust because we call ActivationProxy.Release(), which is defined in a non-APTCA assembly and can do Environment.FailFast. 
+        // We demand full trust because we call ActivationProxy.Release(), which is defined in a non-APTCA assembly and can do Environment.FailFast.
         // It's recommended to not let partially trusted callers to bring down the process.
         // WSATs are not supported in partial trust, so customers should not be broken by this demand.
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
@@ -312,7 +353,8 @@ namespace System.ServiceModel.Transactions
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionException(SR.GetString(SR.WsatProxyCreationFailed), e));
+                    new TransactionException(SR.GetString(SR.WsatProxyCreationFailed), e)
+                );
             }
         }
 
@@ -335,16 +377,26 @@ namespace System.ServiceModel.Transactions
 
                         try
                         {
-                            CoordinationServiceConfiguration config = new CoordinationServiceConfiguration();
+                            CoordinationServiceConfiguration config =
+                                new CoordinationServiceConfiguration();
                             config.Mode = CoordinationServiceMode.Formatter;
-                            config.RemoteClientsEnabled = this.wsatConfig.RemoteActivationService(this.protocolVersion) != null;
-                            this.coordinationService = new CoordinationService(config, this.protocolVersion);
+                            config.RemoteClientsEnabled =
+                                this.wsatConfig.RemoteActivationService(this.protocolVersion)
+                                != null;
+                            this.coordinationService = new CoordinationService(
+                                config,
+                                this.protocolVersion
+                            );
                         }
                         catch (MessagingInitializationException e)
                         {
                             DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new TransactionException(SR.GetString(SR.WsatMessagingInitializationFailed), e));
+                                new TransactionException(
+                                    SR.GetString(SR.WsatMessagingInitializationFailed),
+                                    e
+                                )
+                            );
                         }
                     }
                 }
@@ -359,6 +411,7 @@ namespace System.ServiceModel.Transactions
 
         // Keep a propagation token around as a template for hydrating transactions
         static byte[] fixedPropagationToken;
+
         static byte[] CreateFixedPropagationToken()
         {
             if (fixedPropagationToken == null)
@@ -399,10 +452,12 @@ namespace System.ServiceModel.Transactions
         //     [etc]
         // }
 
-        static byte[] MarshalPropagationToken(ref Guid transactionId,
-                                              IsolationLevel isoLevel,
-                                              IsolationFlags isoFlags,
-                                              string description)
+        static byte[] MarshalPropagationToken(
+            ref Guid transactionId,
+            IsolationLevel isoLevel,
+            IsolationFlags isoFlags,
+            string description
+        )
         {
             const int offsetof_guidTx = 8;
             const int offsetof_isoLevel = 24;
@@ -448,7 +503,7 @@ namespace System.ServiceModel.Transactions
             ReadCommitted = 0x1000,
             RepeatableRead = 0x10000,
             Serializable = 0x100000,
-            Isolated = 0x100000
+            Isolated = 0x100000,
         }
 
         static ProxyIsolationLevel ConvertIsolationLevel(IsolationLevel IsolationLevel)

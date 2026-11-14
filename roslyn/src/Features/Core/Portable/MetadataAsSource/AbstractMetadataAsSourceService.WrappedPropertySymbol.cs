@@ -11,7 +11,17 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 {
     internal partial class AbstractMetadataAsSourceService
     {
-        private class WrappedPropertySymbol(IPropertySymbol propertySymbol, bool canImplementImplicitly, IDocumentationCommentFormattingService docCommentFormattingService) : AbstractWrappedSymbol(propertySymbol, canImplementImplicitly, docCommentFormattingService), IPropertySymbol
+        private class WrappedPropertySymbol(
+            IPropertySymbol propertySymbol,
+            bool canImplementImplicitly,
+            IDocumentationCommentFormattingService docCommentFormattingService
+        )
+            : AbstractWrappedSymbol(
+                propertySymbol,
+                canImplementImplicitly,
+                docCommentFormattingService
+            ),
+                IPropertySymbol
         {
             private readonly IPropertySymbol _symbol = propertySymbol;
 
@@ -55,16 +65,14 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public ImmutableArray<CustomModifier> RefCustomModifiers => _symbol.RefCustomModifiers;
 
-            public ImmutableArray<CustomModifier> TypeCustomModifiers => _symbol.TypeCustomModifiers;
+            public ImmutableArray<CustomModifier> TypeCustomModifiers =>
+                _symbol.TypeCustomModifiers;
 
             ISymbol ISymbol.OriginalDefinition => _symbol.OriginalDefinition;
 
             public new IPropertySymbol OriginalDefinition
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
         }
     }

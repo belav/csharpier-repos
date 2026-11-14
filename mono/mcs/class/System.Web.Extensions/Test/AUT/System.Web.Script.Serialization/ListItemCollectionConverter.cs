@@ -1,21 +1,28 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Web.UI.WebControls;
-using System.Collections;
 
 namespace System.Web.Script.Serialization.CS
 {
     public class ListItemCollectionConverter : JavaScriptConverter
     {
-
         public override IEnumerable<Type> SupportedTypes
         {
             //Define the ListItemCollection as a supported type.
-            get { return new ReadOnlyCollection<Type>(new List<Type>(new Type[] { typeof(ListItemCollection) })); }
+            get
+            {
+                return new ReadOnlyCollection<Type>(
+                    new List<Type>(new Type[] { typeof(ListItemCollection) })
+                );
+            }
         }
 
-        public override IDictionary<string, object> Serialize(object obj, JavaScriptSerializer serializer)
+        public override IDictionary<string, object> Serialize(
+            object obj,
+            JavaScriptSerializer serializer
+        )
         {
             ListItemCollection listType = obj as ListItemCollection;
 
@@ -39,7 +46,11 @@ namespace System.Web.Script.Serialization.CS
             return new Dictionary<string, object>();
         }
 
-        public override object Deserialize(IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer)
+        public override object Deserialize(
+            IDictionary<string, object> dictionary,
+            Type type,
+            JavaScriptSerializer serializer
+        )
         {
             if (dictionary == null)
                 throw new ArgumentNullException("dictionary");
@@ -51,13 +62,12 @@ namespace System.Web.Script.Serialization.CS
 
                 // Deserialize the ListItemCollection's items.
                 ArrayList itemsList = (ArrayList)dictionary["List"];
-                for (int i=0; i<itemsList.Count; i++)
+                for (int i = 0; i < itemsList.Count; i++)
                     list.Add(serializer.ConvertToType<ListItem>(itemsList[i]));
 
                 return list;
             }
             return null;
         }
-
     }
 }

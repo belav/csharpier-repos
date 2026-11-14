@@ -87,14 +87,18 @@ namespace System.Security.Cryptography
             {
                 // Use oid Value first if present, otherwise FriendlyName because Oid maintains a hard-coded
                 // cache that may have different casing for FriendlyNames than OpenSsl
-                string oid = !string.IsNullOrEmpty(curve.Oid.Value) ? curve.Oid.Value : curve.Oid.FriendlyName!;
+                string oid = !string.IsNullOrEmpty(curve.Oid.Value)
+                    ? curve.Oid.Value
+                    : curve.Oid.FriendlyName!;
 
                 SafeEcKeyHandle? key = Interop.Crypto.EcKeyCreateByOid(oid);
 
                 if (key == null || key.IsInvalid)
                 {
                     key?.Dispose();
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, oid));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_CurveNotSupported, oid)
+                    );
                 }
 
                 if (!Interop.Crypto.EcKeyGenerateKey(key))
@@ -116,7 +120,8 @@ namespace System.Security.Cryptography
             else
             {
                 throw new PlatformNotSupportedException(
-                    SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString()));
+                    SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString())
+                );
             }
 
             return KeySize;

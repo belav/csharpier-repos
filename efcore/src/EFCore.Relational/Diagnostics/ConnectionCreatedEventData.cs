@@ -28,7 +28,8 @@ public class ConnectionCreatedEventData : DbContextEventData
         DbContext? context,
         Guid connectionId,
         DateTimeOffset startTime,
-        TimeSpan duration)
+        TimeSpan duration
+    )
         : base(eventDefinition, messageGenerator, context)
     {
         Connection = connection;

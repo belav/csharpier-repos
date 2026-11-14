@@ -23,7 +23,10 @@ namespace System.Xml.Xsl.XsltOld
         public TextEvent(Compiler compiler)
         {
             NavigatorInput input = compiler.Input;
-            Debug.Assert(input.NodeType == XPathNodeType.Text || input.NodeType == XPathNodeType.SignificantWhitespace);
+            Debug.Assert(
+                input.NodeType == XPathNodeType.Text
+                    || input.NodeType == XPathNodeType.SignificantWhitespace
+            );
             _text = input.Value;
         }
 

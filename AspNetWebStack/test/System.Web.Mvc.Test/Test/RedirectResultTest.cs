@@ -39,12 +39,20 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new RedirectResult(String.Empty); },
-                "url");
+                delegate
+                {
+                    new RedirectResult(String.Empty);
+                },
+                "url"
+            );
 
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new RedirectResult(String.Empty, true); },
-                "url");
+                delegate
+                {
+                    new RedirectResult(String.Empty, true);
+                },
+                "url"
+            );
         }
 
         [Fact]
@@ -52,12 +60,20 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new RedirectResult(url: null); },
-                "url");
+                delegate
+                {
+                    new RedirectResult(url: null);
+                },
+                "url"
+            );
 
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new RedirectResult(url: null, permanent: true); },
-                "url");
+                delegate
+                {
+                    new RedirectResult(url: null, permanent: true);
+                },
+                "url"
+            );
         }
 
         [Fact]
@@ -65,10 +81,21 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
-            mockResponse.Setup(o => o.Redirect(_baseUrl, false /* endResponse */)).Verifiable();
+            mockResponse
+                .Setup(o =>
+                    o.Redirect(
+                        _baseUrl,
+                        false /* endResponse */
+                    )
+                )
+                .Verifiable();
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             mockContext.Setup(o => o.Response).Returns(mockResponse.Object);
-            ControllerContext context = new ControllerContext(mockContext.Object, new RouteData(), new Mock<ControllerBase>().Object);
+            ControllerContext context = new ControllerContext(
+                mockContext.Object,
+                new RouteData(),
+                new Mock<ControllerBase>().Object
+            );
             var result = new RedirectResult(_baseUrl);
 
             // Act
@@ -83,10 +110,21 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
-            mockResponse.Setup(o => o.RedirectPermanent(_baseUrl, false /* endResponse */)).Verifiable();
+            mockResponse
+                .Setup(o =>
+                    o.RedirectPermanent(
+                        _baseUrl,
+                        false /* endResponse */
+                    )
+                )
+                .Verifiable();
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             mockContext.Setup(o => o.Response).Returns(mockResponse.Object);
-            ControllerContext context = new ControllerContext(mockContext.Object, new RouteData(), new Mock<ControllerBase>().Object);
+            ControllerContext context = new ControllerContext(
+                mockContext.Object,
+                new RouteData(),
+                new Mock<ControllerBase>().Object
+            );
             var result = new RedirectResult(_baseUrl, permanent: true);
 
             // Act
@@ -104,8 +142,14 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { result.ExecuteResult(null /* context */); },
-                "context");
+                delegate
+                {
+                    result.ExecuteResult(
+                        null /* context */
+                    );
+                },
+                "context"
+            );
         }
 
         [Fact]
@@ -113,15 +157,20 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             RouteData routeData = new RouteData();
-            routeData.DataTokens[ControllerContext.ParentActionViewContextToken] = new ViewContext();
-            ControllerContext context = new ControllerContext(new Mock<HttpContextBase>().Object, routeData, new Mock<ControllerBase>().Object);
+            routeData.DataTokens[ControllerContext.ParentActionViewContextToken] =
+                new ViewContext();
+            ControllerContext context = new ControllerContext(
+                new Mock<HttpContextBase>().Object,
+                routeData,
+                new Mock<ControllerBase>().Object
+            );
             RedirectResult result = new RedirectResult(_baseUrl);
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => result.ExecuteResult(context),
                 MvcResources.RedirectAction_CannotRedirectInChildAction
-                );
+            );
         }
     }
 }

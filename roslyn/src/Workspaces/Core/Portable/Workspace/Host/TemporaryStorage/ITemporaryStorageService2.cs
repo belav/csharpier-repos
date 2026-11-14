@@ -16,11 +16,21 @@ namespace Microsoft.CodeAnalysis.Host
         /// <summary>
         /// Attach to existing <see cref="ITemporaryStreamStorage"/> with given name.
         /// </summary>
-        ITemporaryStreamStorageInternal AttachTemporaryStreamStorage(string storageName, long offset, long size);
+        ITemporaryStreamStorageInternal AttachTemporaryStreamStorage(
+            string storageName,
+            long offset,
+            long size
+        );
 
         /// <summary>
         /// Attach to existing <see cref="ITemporaryTextStorage"/> with given name.
         /// </summary>
-        ITemporaryTextStorageInternal AttachTemporaryTextStorage(string storageName, long offset, long size, SourceHashAlgorithm checksumAlgorithm, Encoding? encoding);
+        ITemporaryTextStorageInternal AttachTemporaryTextStorage(
+            string storageName,
+            long offset,
+            long size,
+            SourceHashAlgorithm checksumAlgorithm,
+            Encoding? encoding
+        );
     }
 }

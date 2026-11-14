@@ -114,6 +114,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp
 
         AddReference,
         NuGet,
-        TargetTypeMatch
+        TargetTypeMatch,
     }
 }

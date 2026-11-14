@@ -17,10 +17,7 @@ public abstract class TemporalRangeQueryRootExpression : TemporalQueryRootExpres
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected TemporalRangeQueryRootExpression(
-        IEntityType entityType,
-        DateTime from,
-        DateTime to)
+    protected TemporalRangeQueryRootExpression(IEntityType entityType, DateTime from, DateTime to)
         : base(entityType)
     {
         From = from;
@@ -37,7 +34,8 @@ public abstract class TemporalRangeQueryRootExpression : TemporalQueryRootExpres
         IAsyncQueryProvider queryProvider,
         IEntityType entityType,
         DateTime from,
-        DateTime to)
+        DateTime to
+    )
         : base(queryProvider, entityType)
     {
         From = from;
@@ -66,16 +64,18 @@ public abstract class TemporalRangeQueryRootExpression : TemporalQueryRootExpres
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is TemporalRangeQueryRootExpression queryRootExpression
-                && Equals(queryRootExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is TemporalRangeQueryRootExpression queryRootExpression
+                && Equals(queryRootExpression)
+        );
 
-    private bool Equals(TemporalRangeQueryRootExpression queryRootExpression)
-        => base.Equals(queryRootExpression)
-            && Equals(From, queryRootExpression.From)
-            && Equals(To, queryRootExpression.To);
+    private bool Equals(TemporalRangeQueryRootExpression queryRootExpression) =>
+        base.Equals(queryRootExpression)
+        && Equals(From, queryRootExpression.From)
+        && Equals(To, queryRootExpression.To);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

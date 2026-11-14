@@ -14,11 +14,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private readonly ILegacyGlobalOptionService _legacyGlobalOptions;
         private readonly string _languageName;
 
-        internal AbstractAutomationObject(ILegacyGlobalOptionService legacyGlobalOptions, string languageName)
-            => (_legacyGlobalOptions, _languageName) = (legacyGlobalOptions, languageName);
+        internal AbstractAutomationObject(
+            ILegacyGlobalOptionService legacyGlobalOptions,
+            string languageName
+        ) => (_legacyGlobalOptions, _languageName) = (legacyGlobalOptions, languageName);
 
-        private protected T GetOption<T>(PerLanguageOption2<T> option)
-            => _legacyGlobalOptions.GlobalOptions.GetOption(option, _languageName);
+        private protected T GetOption<T>(PerLanguageOption2<T> option) =>
+            _legacyGlobalOptions.GlobalOptions.GetOption(option, _languageName);
 
         private protected void SetOption<T>(PerLanguageOption2<T> option, T value)
         {
@@ -28,8 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _legacyGlobalOptions.UpdateRegisteredWorkspaces();
         }
 
-        private protected T GetOption<T>(Option2<T> option)
-            => _legacyGlobalOptions.GlobalOptions.GetOption(option);
+        private protected T GetOption<T>(Option2<T> option) =>
+            _legacyGlobalOptions.GlobalOptions.GetOption(option);
 
         private protected void SetOption<T>(Option2<T> option, T value)
         {
@@ -39,23 +41,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _legacyGlobalOptions.UpdateRegisteredWorkspaces();
         }
 
-        private protected int GetBooleanOption(PerLanguageOption2<bool?> key)
-            => NullableBooleanToInteger(GetOption(key));
+        private protected int GetBooleanOption(PerLanguageOption2<bool?> key) =>
+            NullableBooleanToInteger(GetOption(key));
 
-        private protected void SetBooleanOption(PerLanguageOption2<bool?> key, int value)
-            => SetOption(key, IntegerToNullableBoolean(value));
+        private protected void SetBooleanOption(PerLanguageOption2<bool?> key, int value) =>
+            SetOption(key, IntegerToNullableBoolean(value));
 
-        private protected int GetBooleanOption(Option2<bool?> key)
-            => NullableBooleanToInteger(GetOption(key));
+        private protected int GetBooleanOption(Option2<bool?> key) =>
+            NullableBooleanToInteger(GetOption(key));
 
-        private protected void SetBooleanOption(Option2<bool?> key, int value)
-            => SetOption(key, IntegerToNullableBoolean(value));
+        private protected void SetBooleanOption(Option2<bool?> key, int value) =>
+            SetOption(key, IntegerToNullableBoolean(value));
 
-        private protected string GetXmlOption<T>(Option2<CodeStyleOption2<T>> option)
-            => GetOption(option).ToXElement().ToString();
+        private protected string GetXmlOption<T>(Option2<CodeStyleOption2<T>> option) =>
+            GetOption(option).ToXElement().ToString();
 
-        private protected string GetXmlOption<T>(PerLanguageOption2<CodeStyleOption2<T>> option)
-            => GetOption(option).ToXElement().ToString();
+        private protected string GetXmlOption<T>(PerLanguageOption2<CodeStyleOption2<T>> option) =>
+            GetOption(option).ToXElement().ToString();
 
         private protected void SetXmlOption<T>(Option2<CodeStyleOption2<T>> option, string value)
         {
@@ -63,7 +65,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             SetOption(option, convertedValue);
         }
 
-        private protected void SetXmlOption<T>(PerLanguageOption2<CodeStyleOption2<T>> option, string value)
+        private protected void SetXmlOption<T>(
+            PerLanguageOption2<CodeStyleOption2<T>> option,
+            string value
+        )
         {
             var convertedValue = CodeStyleOption2<T>.FromXElement(XElement.Parse(value));
             SetOption(option, convertedValue);
@@ -79,7 +84,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return value.Value ? 1 : 0;
         }
 
-        private static bool? IntegerToNullableBoolean(int value)
-            => (value < 0) ? null : (value > 0);
+        private static bool? IntegerToNullableBoolean(int value) =>
+            (value < 0) ? null : (value > 0);
     }
 }

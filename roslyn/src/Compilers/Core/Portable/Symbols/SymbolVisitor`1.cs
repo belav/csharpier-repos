@@ -8,9 +8,7 @@ namespace Microsoft.CodeAnalysis
     {
         public virtual TResult? Visit(ISymbol? symbol)
         {
-            return symbol == null
-                ? default(TResult?)
-                : symbol.Accept(this);
+            return symbol == null ? default(TResult?) : symbol.Accept(this);
         }
 
         public virtual TResult? DefaultVisit(ISymbol symbol)

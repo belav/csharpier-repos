@@ -14,16 +14,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     public class BasicSquigglesNetCore : BasicSquigglesCommon
     {
         public BasicSquigglesNetCore()
-            : base(WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary)
-        {
-        }
+            : base(WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary) { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(false);
 
             // The VisualBasicNetCoreClassLibrary template does not open a file automatically.
-            await TestServices.SolutionExplorer.OpenFileAsync(ProjectName, WellKnownProjectTemplates.VisualBasicNetCoreClassLibraryClassFileName, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                ProjectName,
+                WellKnownProjectTemplates.VisualBasicNetCoreClassLibraryClassFileName,
+                HangMitigatingCancellationToken
+            );
         }
     }
 }

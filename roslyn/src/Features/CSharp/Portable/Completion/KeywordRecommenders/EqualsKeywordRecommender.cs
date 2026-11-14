@@ -12,11 +12,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class EqualsKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public EqualsKeywordRecommender()
-            : base(SyntaxKind.EqualsKeyword)
-        {
-        }
+            : base(SyntaxKind.EqualsKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // cases:
             //   join a in expr o1 |
@@ -33,8 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             var lastToken = join.LeftExpression.GetLastToken(includeSkipped: true);
 
             // join a in expr |
-            if (join.LeftExpression.Width() > 0 &&
-                token == lastToken)
+            if (join.LeftExpression.Width() > 0 && token == lastToken)
             {
                 return true;
             }

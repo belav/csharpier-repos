@@ -8,16 +8,14 @@ namespace Microsoft.EntityFrameworkCore.Tools;
 
 internal static class Json
 {
-    public static CommandOption ConfigureOption(CommandLineApplication command)
-        => command.Option("--json", Resources.JsonDescription);
+    public static CommandOption ConfigureOption(CommandLineApplication command) =>
+        command.Option("--json", Resources.JsonDescription);
 
-    public static string Literal(string? text)
-        => text != null
-            ? "\"" + text.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\""
-            : "null";
+    public static string Literal(string? text) =>
+        text != null ? "\"" + text.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"" : "null";
 
-    public static string Literal(bool? value)
-        => value.HasValue
+    public static string Literal(bool? value) =>
+        value.HasValue
             ? value.Value
                 ? "true"
                 : "false"

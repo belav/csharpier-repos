@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     public sealed class ServiceModelSectionGroup : ConfigurationSectionGroup
     {
@@ -14,12 +14,19 @@ namespace System.ServiceModel.Configuration
 
         public BehaviorsSection Behaviors
         {
-            get { return (BehaviorsSection)this.Sections[ConfigurationStrings.BehaviorsSectionName]; }
+            get
+            {
+                return (BehaviorsSection)this.Sections[ConfigurationStrings.BehaviorsSectionName];
+            }
         }
 
         public BindingsSection Bindings
         {
-            get { return (BindingsSection)this.Sections[ConfigurationStrings.BindingsSectionGroupName]; }
+            get
+            {
+                return (BindingsSection)
+                    this.Sections[ConfigurationStrings.BindingsSectionGroupName];
+            }
         }
 
         public ClientSection Client
@@ -29,22 +36,37 @@ namespace System.ServiceModel.Configuration
 
         public ComContractsSection ComContracts
         {
-            get { return (ComContractsSection)this.Sections[ConfigurationStrings.ComContractsSectionName]; }
+            get
+            {
+                return (ComContractsSection)
+                    this.Sections[ConfigurationStrings.ComContractsSectionName];
+            }
         }
 
         public CommonBehaviorsSection CommonBehaviors
         {
-            get { return (CommonBehaviorsSection)this.Sections[ConfigurationStrings.CommonBehaviorsSectionName]; }
+            get
+            {
+                return (CommonBehaviorsSection)
+                    this.Sections[ConfigurationStrings.CommonBehaviorsSectionName];
+            }
         }
 
         public DiagnosticSection Diagnostic
         {
-            get { return (DiagnosticSection)this.Sections[ConfigurationStrings.DiagnosticSectionName]; }
+            get
+            {
+                return (DiagnosticSection)this.Sections[ConfigurationStrings.DiagnosticSectionName];
+            }
         }
 
         public ServiceHostingEnvironmentSection ServiceHostingEnvironment
         {
-            get { return (ServiceHostingEnvironmentSection)this.Sections[ConfigurationStrings.ServiceHostingEnvironmentSectionName]; }
+            get
+            {
+                return (ServiceHostingEnvironmentSection)
+                    this.Sections[ConfigurationStrings.ServiceHostingEnvironmentSectionName];
+            }
         }
 
         public ExtensionsSection Extensions
@@ -54,7 +76,11 @@ namespace System.ServiceModel.Configuration
 
         public ProtocolMappingSection ProtocolMapping
         {
-            get { return (ProtocolMappingSection)this.Sections[ConfigurationStrings.ProtocolMappingSectionName]; }
+            get
+            {
+                return (ProtocolMappingSection)
+                    this.Sections[ConfigurationStrings.ProtocolMappingSectionName];
+            }
         }
 
         public ServicesSection Services
@@ -64,7 +90,11 @@ namespace System.ServiceModel.Configuration
 
         public StandardEndpointsSection StandardEndpoints
         {
-            get { return (StandardEndpointsSection)this.Sections[ConfigurationStrings.StandardEndpointsSectionName]; }
+            get
+            {
+                return (StandardEndpointsSection)
+                    this.Sections[ConfigurationStrings.StandardEndpointsSectionName];
+            }
         }
 
         public static ServiceModelSectionGroup GetSectionGroup(Configuration config)
@@ -75,8 +105,8 @@ namespace System.ServiceModel.Configuration
             }
 
 #pragma warning suppress 56506 //Microsoft; config.SectionGroups can never be null (underlying configuration system guarantees)
-            return (ServiceModelSectionGroup)config.SectionGroups[ConfigurationStrings.SectionGroupName];
+            return (ServiceModelSectionGroup)
+                config.SectionGroups[ConfigurationStrings.SectionGroupName];
         }
-
     }
 }

@@ -38,205 +38,242 @@ using System.Threading;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class Exec : ToolTaskExtension {
-	
-		string		command;
-		bool		ignoreExitCode;
-		ITaskItem[]	outputs;
-		string		stdErrEncoding;
-		string		stdOutEncoding;
-		string		workingDirectory;
-		string scriptFile;
+namespace Microsoft.Build.Tasks
+{
+    public class Exec : ToolTaskExtension
+    {
+        string command;
+        bool ignoreExitCode;
+        ITaskItem[] outputs;
+        string stdErrEncoding;
+        string stdOutEncoding;
+        string workingDirectory;
+        string scriptFile;
 
-		Func<string, bool> errorMatcher, warningMatcher;
-		
-		public Exec ()
-		{
-			ignoreExitCode = false;
-		}
-		
-		protected internal override void AddCommandLineCommands (CommandLineBuilderExtension commandLine)
-		{
-			if (IsRunningOnWindows)
-				commandLine.AppendSwitch ("/q /c");
+        Func<string, bool> errorMatcher,
+            warningMatcher;
 
-			if (!String.IsNullOrEmpty (command)) {
-				scriptFile = Path.GetTempFileName ();
-				if (IsRunningOnWindows)
-					scriptFile = scriptFile + ".bat";
-				using (StreamWriter sw = new StreamWriter (scriptFile)) {
-					sw.Write (command);
-				}
-				commandLine.AppendFileNameIfNotNull (scriptFile);
-			}
-			base.AddCommandLineCommands (commandLine);
-		}
+        public Exec()
+        {
+            ignoreExitCode = false;
+        }
 
-		protected override int ExecuteTool (string pathToTool,
-						    string responseFileCommands,
-						    string commandLineCommands)
-		{
-			try {
-				errorMatcher = GetTryMatchRegexFunc (CustomErrorRegularExpression, true);
-				warningMatcher = GetTryMatchRegexFunc (CustomWarningRegularExpression, false);
-				return base.ExecuteTool (pathToTool, responseFileCommands, commandLineCommands);
-			} finally {
-				if (scriptFile != null)
-					DeleteTempFile (scriptFile);
-			}
-		}
+        protected internal override void AddCommandLineCommands(
+            CommandLineBuilderExtension commandLine
+        )
+        {
+            if (IsRunningOnWindows)
+                commandLine.AppendSwitch("/q /c");
 
-		[MonoTODO]
-		protected override string GenerateFullPathToTool ()
-		{
-			return IsRunningOnWindows ? "cmd.exe" : "sh";
-		}
-		
-		protected override string GetWorkingDirectory ()
-		{
-			return workingDirectory;
-		}
-		
-		protected override bool HandleTaskExecutionErrors ()
-		{
-			if (ExitCode != 0)
-				Log.LogError ("Command '{0}' exited with code: {1}.", Command, ExitCode);
+            if (!String.IsNullOrEmpty(command))
+            {
+                scriptFile = Path.GetTempFileName();
+                if (IsRunningOnWindows)
+                    scriptFile = scriptFile + ".bat";
+                using (StreamWriter sw = new StreamWriter(scriptFile))
+                {
+                    sw.Write(command);
+                }
+                commandLine.AppendFileNameIfNotNull(scriptFile);
+            }
+            base.AddCommandLineCommands(commandLine);
+        }
 
-			return ExitCode == 0 || ignoreExitCode;
-		}
-		
-		[MonoTODO]
-		protected override void LogPathToTool (string toolName,
-						       string pathToTool)
-		{
-		}
-		
-		[MonoTODO]
-		protected override void LogToolCommand (string message)
-		{
-			Log.LogMessage (MessageImportance.Normal, "Executing: " + command);
-		}
-		
-		protected override void LogEventsFromTextOutput (string singleLine, MessageImportance messageImportance)
-		{
-			if (IgnoreStandardErrorWarningFormat ||
-				(!errorMatcher (singleLine) && !warningMatcher (singleLine)))
-				Log.LogMessage (messageImportance, singleLine);
-		}
+        protected override int ExecuteTool(
+            string pathToTool,
+            string responseFileCommands,
+            string commandLineCommands
+        )
+        {
+            try
+            {
+                errorMatcher = GetTryMatchRegexFunc(CustomErrorRegularExpression, true);
+                warningMatcher = GetTryMatchRegexFunc(CustomWarningRegularExpression, false);
+                return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
+            }
+            finally
+            {
+                if (scriptFile != null)
+                    DeleteTempFile(scriptFile);
+            }
+        }
 
-		// @is_error_type - log as errors, else warnings
-		Func<string, bool> GetTryMatchRegexFunc (string regex_str, bool is_error_type)
-		{
-			bool is_bad = false;
-			Regex regex = null;
-			return (singleLine) => {
-				if (String.IsNullOrEmpty (regex_str) || is_bad)
-					return false;
+        [MonoTODO]
+        protected override string GenerateFullPathToTool()
+        {
+            return IsRunningOnWindows ? "cmd.exe" : "sh";
+        }
 
-				try {
-					if (regex == null)
-						regex = new Regex (regex_str, RegexOptions.Compiled);
-				} catch (ArgumentException ae) {
-					Log.LogError ("The regular expression specified for '{0}' is invalid : {1}",
-							is_error_type ? "errors" : "warnings", ae.Message);
-					Log.LogMessage (MessageImportance.Low, "The regular expression specified for '{0}' is invalid : {1}",
-							is_error_type ? "errors" : "warnings", ae.ToString ());
+        protected override string GetWorkingDirectory()
+        {
+            return workingDirectory;
+        }
 
-					is_bad = true;
-					return false;
-				}
+        protected override bool HandleTaskExecutionErrors()
+        {
+            if (ExitCode != 0)
+                Log.LogError("Command '{0}' exited with code: {1}.", Command, ExitCode);
 
-				if (!regex.Match (singleLine).Success)
-					return false;
+            return ExitCode == 0 || ignoreExitCode;
+        }
 
-				if (is_error_type)
-					Log.LogError (singleLine);
-				else
-					Log.LogWarning (singleLine);
-				return true;
-			};
-		}
+        [MonoTODO]
+        protected override void LogPathToTool(string toolName, string pathToTool) { }
 
-		[MonoTODO]
-		protected override bool ValidateParameters ()
-		{
-			return true;
-		}
-		
-		[Required]
-		public string Command {
-			get { return command; }
-			set {
-				command = value;
-				if (Path.DirectorySeparatorChar == '/')
-					command = command.Replace ("\r\n", "\n");
-			}
-		}
+        [MonoTODO]
+        protected override void LogToolCommand(string message)
+        {
+            Log.LogMessage(MessageImportance.Normal, "Executing: " + command);
+        }
 
-		public bool IgnoreExitCode {
-			get { return ignoreExitCode; }
-			set { ignoreExitCode = value; }
-		}
+        protected override void LogEventsFromTextOutput(
+            string singleLine,
+            MessageImportance messageImportance
+        )
+        {
+            if (
+                IgnoreStandardErrorWarningFormat
+                || (!errorMatcher(singleLine) && !warningMatcher(singleLine))
+            )
+                Log.LogMessage(messageImportance, singleLine);
+        }
 
-		[Output]
-		public ITaskItem[] Outputs {
-			get { return outputs; }
-			set { outputs = value; }
-		}
+        // @is_error_type - log as errors, else warnings
+        Func<string, bool> GetTryMatchRegexFunc(string regex_str, bool is_error_type)
+        {
+            bool is_bad = false;
+            Regex regex = null;
+            return (singleLine) =>
+            {
+                if (String.IsNullOrEmpty(regex_str) || is_bad)
+                    return false;
 
-		protected override Encoding StandardErrorEncoding {
-			get { return base.StandardErrorEncoding; }
-		}
-		
-		protected override MessageImportance StandardErrorLoggingImportance {
-			get { return base.StandardErrorLoggingImportance; }
-		}
+                try
+                {
+                    if (regex == null)
+                        regex = new Regex(regex_str, RegexOptions.Compiled);
+                }
+                catch (ArgumentException ae)
+                {
+                    Log.LogError(
+                        "The regular expression specified for '{0}' is invalid : {1}",
+                        is_error_type ? "errors" : "warnings",
+                        ae.Message
+                    );
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "The regular expression specified for '{0}' is invalid : {1}",
+                        is_error_type ? "errors" : "warnings",
+                        ae.ToString()
+                    );
 
-		protected override Encoding StandardOutputEncoding {
-			get { return base.StandardOutputEncoding; }
-		}
-		
-		protected override MessageImportance StandardOutputLoggingImportance {
-			get { return base.StandardOutputLoggingImportance; }
-		}
+                    is_bad = true;
+                    return false;
+                }
 
-		public bool IgnoreStandardErrorWarningFormat { get; set; }
+                if (!regex.Match(singleLine).Success)
+                    return false;
 
-		public string CustomErrorRegularExpression { get; set; }
+                if (is_error_type)
+                    Log.LogError(singleLine);
+                else
+                    Log.LogWarning(singleLine);
+                return true;
+            };
+        }
 
-		public string CustomWarningRegularExpression { get; set; }
-		
-		[MonoTODO]
-		[Output]
-		public string StdOutEncoding {
-			get { return stdOutEncoding; }
-			set { stdOutEncoding = value; }
-		}
-		
-		[MonoTODO]
-		[Output]
-		public string StdErrEncoding {
-			get { return stdErrEncoding; }
-			set { stdErrEncoding = value; }
-		}
-		
-		[MonoTODO]
-		protected override string ToolName {
-			get { return String.Empty; }
-		}
+        [MonoTODO]
+        protected override bool ValidateParameters()
+        {
+            return true;
+        }
 
-		public string WorkingDirectory {
-			get { return workingDirectory; }
-			set { workingDirectory = value; }
-		}
+        [Required]
+        public string Command
+        {
+            get { return command; }
+            set
+            {
+                command = value;
+                if (Path.DirectorySeparatorChar == '/')
+                    command = command.Replace("\r\n", "\n");
+            }
+        }
 
-		static bool IsRunningOnWindows {
-			get {
-				PlatformID pid = Environment.OSVersion.Platform;
-				return ((int) pid != 128 && (int) pid != 4 && (int) pid != 6);
-			}
-		}
+        public bool IgnoreExitCode
+        {
+            get { return ignoreExitCode; }
+            set { ignoreExitCode = value; }
+        }
 
-	}
+        [Output]
+        public ITaskItem[] Outputs
+        {
+            get { return outputs; }
+            set { outputs = value; }
+        }
+
+        protected override Encoding StandardErrorEncoding
+        {
+            get { return base.StandardErrorEncoding; }
+        }
+
+        protected override MessageImportance StandardErrorLoggingImportance
+        {
+            get { return base.StandardErrorLoggingImportance; }
+        }
+
+        protected override Encoding StandardOutputEncoding
+        {
+            get { return base.StandardOutputEncoding; }
+        }
+
+        protected override MessageImportance StandardOutputLoggingImportance
+        {
+            get { return base.StandardOutputLoggingImportance; }
+        }
+
+        public bool IgnoreStandardErrorWarningFormat { get; set; }
+
+        public string CustomErrorRegularExpression { get; set; }
+
+        public string CustomWarningRegularExpression { get; set; }
+
+        [MonoTODO]
+        [Output]
+        public string StdOutEncoding
+        {
+            get { return stdOutEncoding; }
+            set { stdOutEncoding = value; }
+        }
+
+        [MonoTODO]
+        [Output]
+        public string StdErrEncoding
+        {
+            get { return stdErrEncoding; }
+            set { stdErrEncoding = value; }
+        }
+
+        [MonoTODO]
+        protected override string ToolName
+        {
+            get { return String.Empty; }
+        }
+
+        public string WorkingDirectory
+        {
+            get { return workingDirectory; }
+            set { workingDirectory = value; }
+        }
+
+        static bool IsRunningOnWindows
+        {
+            get
+            {
+                PlatformID pid = Environment.OSVersion.Platform;
+                return ((int)pid != 128 && (int)pid != 4 && (int)pid != 6);
+            }
+        }
+    }
 }

@@ -20,22 +20,262 @@ namespace System.Globalization
         {
             // Upper Casing
 
-            /* 0000-000f */  0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007, 0x0008, 0x0009, 0x000a, 0x000b, 0x000c, 0x000d, 0x000e, 0x000f,
-            /* 0010-001f */  0x0010, 0x0011, 0x0012, 0x0013, 0x0014, 0x0015, 0x0016, 0x0017, 0x0018, 0x0019, 0x001a, 0x001b, 0x001c, 0x001d, 0x001e, 0x001f,
-            /* 0020-002f */  0x0020, 0x0021, 0x0022, 0x0023, 0x0024, 0x0025, 0x0026, 0x0027, 0x0028, 0x0029, 0x002a, 0x002b, 0x002c, 0x002d, 0x002e, 0x002f,
-            /* 0030-003f */  0x0030, 0x0031, 0x0032, 0x0033, 0x0034, 0x0035, 0x0036, 0x0037, 0x0038, 0x0039, 0x003a, 0x003b, 0x003c, 0x003d, 0x003e, 0x003f,
-            /* 0040-004f */  0x0040, 0x0041, 0x0042, 0x0043, 0x0044, 0x0045, 0x0046, 0x0047, 0x0048, 0x0049, 0x004a, 0x004b, 0x004c, 0x004d, 0x004e, 0x004f,
-            /* 0050-005f */  0x0050, 0x0051, 0x0052, 0x0053, 0x0054, 0x0055, 0x0056, 0x0057, 0x0058, 0x0059, 0x005a, 0x005b, 0x005c, 0x005d, 0x005e, 0x005f,
-            /* 0060-006f */  0x0060, 0x0041, 0x0042, 0x0043, 0x0044, 0x0045, 0x0046, 0x0047, 0x0048, 0x0049, 0x004a, 0x004b, 0x004c, 0x004d, 0x004e, 0x004f,
-            /* 0070-007f */  0x0050, 0x0051, 0x0052, 0x0053, 0x0054, 0x0055, 0x0056, 0x0057, 0x0058, 0x0059, 0x005a, 0x007b, 0x007c, 0x007d, 0x007e, 0x007f,
-            /* 0080-008f */  0x0080, 0x0081, 0x0082, 0x0083, 0x0084, 0x0085, 0x0086, 0x0087, 0x0088, 0x0089, 0x008a, 0x008b, 0x008c, 0x008d, 0x008e, 0x008f,
-            /* 0090-009f */  0x0090, 0x0091, 0x0092, 0x0093, 0x0094, 0x0095, 0x0096, 0x0097, 0x0098, 0x0099, 0x009a, 0x009b, 0x009c, 0x009d, 0x009e, 0x009f,
-            /* 00a0-00af */  0x00a0, 0x00a1, 0x00a2, 0x00a3, 0x00a4, 0x00a5, 0x00a6, 0x00a7, 0x00a8, 0x00a9, 0x00aa, 0x00ab, 0x00ac, 0x00ad, 0x00ae, 0x00af,
-            /* 00b0-00bf */  0x00b0, 0x00b1, 0x00b2, 0x00b3, 0x00b4, 0x039c, 0x00b6, 0x00b7, 0x00b8, 0x00b9, 0x00ba, 0x00bb, 0x00bc, 0x00bd, 0x00be, 0x00bf,
-            /* 00c0-00cf */  0x00c0, 0x00c1, 0x00c2, 0x00c3, 0x00c4, 0x00c5, 0x00c6, 0x00c7, 0x00c8, 0x00c9, 0x00ca, 0x00cb, 0x00cc, 0x00cd, 0x00ce, 0x00cf,
-            /* 00d0-00df */  0x00d0, 0x00d1, 0x00d2, 0x00d3, 0x00d4, 0x00d5, 0x00d6, 0x00d7, 0x00d8, 0x00d9, 0x00da, 0x00db, 0x00dc, 0x00dd, 0x00de, 0x00df,
-            /* 00e0-00ef */  0x00c0, 0x00c1, 0x00c2, 0x00c3, 0x00c4, 0x00c5, 0x00c6, 0x00c7, 0x00c8, 0x00c9, 0x00ca, 0x00cb, 0x00cc, 0x00cd, 0x00ce, 0x00cf,
-            /* 00f0-00ff */  0x00d0, 0x00d1, 0x00d2, 0x00d3, 0x00d4, 0x00d5, 0x00d6, 0x00f7, 0x00d8, 0x00d9, 0x00da, 0x00db, 0x00dc, 0x00dd, 0x00de, 0x0178,
+            /* 0000-000f */0x0000,
+            0x0001,
+            0x0002,
+            0x0003,
+            0x0004,
+            0x0005,
+            0x0006,
+            0x0007,
+            0x0008,
+            0x0009,
+            0x000a,
+            0x000b,
+            0x000c,
+            0x000d,
+            0x000e,
+            0x000f,
+            /* 0010-001f */0x0010,
+            0x0011,
+            0x0012,
+            0x0013,
+            0x0014,
+            0x0015,
+            0x0016,
+            0x0017,
+            0x0018,
+            0x0019,
+            0x001a,
+            0x001b,
+            0x001c,
+            0x001d,
+            0x001e,
+            0x001f,
+            /* 0020-002f */0x0020,
+            0x0021,
+            0x0022,
+            0x0023,
+            0x0024,
+            0x0025,
+            0x0026,
+            0x0027,
+            0x0028,
+            0x0029,
+            0x002a,
+            0x002b,
+            0x002c,
+            0x002d,
+            0x002e,
+            0x002f,
+            /* 0030-003f */0x0030,
+            0x0031,
+            0x0032,
+            0x0033,
+            0x0034,
+            0x0035,
+            0x0036,
+            0x0037,
+            0x0038,
+            0x0039,
+            0x003a,
+            0x003b,
+            0x003c,
+            0x003d,
+            0x003e,
+            0x003f,
+            /* 0040-004f */0x0040,
+            0x0041,
+            0x0042,
+            0x0043,
+            0x0044,
+            0x0045,
+            0x0046,
+            0x0047,
+            0x0048,
+            0x0049,
+            0x004a,
+            0x004b,
+            0x004c,
+            0x004d,
+            0x004e,
+            0x004f,
+            /* 0050-005f */0x0050,
+            0x0051,
+            0x0052,
+            0x0053,
+            0x0054,
+            0x0055,
+            0x0056,
+            0x0057,
+            0x0058,
+            0x0059,
+            0x005a,
+            0x005b,
+            0x005c,
+            0x005d,
+            0x005e,
+            0x005f,
+            /* 0060-006f */0x0060,
+            0x0041,
+            0x0042,
+            0x0043,
+            0x0044,
+            0x0045,
+            0x0046,
+            0x0047,
+            0x0048,
+            0x0049,
+            0x004a,
+            0x004b,
+            0x004c,
+            0x004d,
+            0x004e,
+            0x004f,
+            /* 0070-007f */0x0050,
+            0x0051,
+            0x0052,
+            0x0053,
+            0x0054,
+            0x0055,
+            0x0056,
+            0x0057,
+            0x0058,
+            0x0059,
+            0x005a,
+            0x007b,
+            0x007c,
+            0x007d,
+            0x007e,
+            0x007f,
+            /* 0080-008f */0x0080,
+            0x0081,
+            0x0082,
+            0x0083,
+            0x0084,
+            0x0085,
+            0x0086,
+            0x0087,
+            0x0088,
+            0x0089,
+            0x008a,
+            0x008b,
+            0x008c,
+            0x008d,
+            0x008e,
+            0x008f,
+            /* 0090-009f */0x0090,
+            0x0091,
+            0x0092,
+            0x0093,
+            0x0094,
+            0x0095,
+            0x0096,
+            0x0097,
+            0x0098,
+            0x0099,
+            0x009a,
+            0x009b,
+            0x009c,
+            0x009d,
+            0x009e,
+            0x009f,
+            /* 00a0-00af */0x00a0,
+            0x00a1,
+            0x00a2,
+            0x00a3,
+            0x00a4,
+            0x00a5,
+            0x00a6,
+            0x00a7,
+            0x00a8,
+            0x00a9,
+            0x00aa,
+            0x00ab,
+            0x00ac,
+            0x00ad,
+            0x00ae,
+            0x00af,
+            /* 00b0-00bf */0x00b0,
+            0x00b1,
+            0x00b2,
+            0x00b3,
+            0x00b4,
+            0x039c,
+            0x00b6,
+            0x00b7,
+            0x00b8,
+            0x00b9,
+            0x00ba,
+            0x00bb,
+            0x00bc,
+            0x00bd,
+            0x00be,
+            0x00bf,
+            /* 00c0-00cf */0x00c0,
+            0x00c1,
+            0x00c2,
+            0x00c3,
+            0x00c4,
+            0x00c5,
+            0x00c6,
+            0x00c7,
+            0x00c8,
+            0x00c9,
+            0x00ca,
+            0x00cb,
+            0x00cc,
+            0x00cd,
+            0x00ce,
+            0x00cf,
+            /* 00d0-00df */0x00d0,
+            0x00d1,
+            0x00d2,
+            0x00d3,
+            0x00d4,
+            0x00d5,
+            0x00d6,
+            0x00d7,
+            0x00d8,
+            0x00d9,
+            0x00da,
+            0x00db,
+            0x00dc,
+            0x00dd,
+            0x00de,
+            0x00df,
+            /* 00e0-00ef */0x00c0,
+            0x00c1,
+            0x00c2,
+            0x00c3,
+            0x00c4,
+            0x00c5,
+            0x00c6,
+            0x00c7,
+            0x00c8,
+            0x00c9,
+            0x00ca,
+            0x00cb,
+            0x00cc,
+            0x00cd,
+            0x00ce,
+            0x00cf,
+            /* 00f0-00ff */0x00d0,
+            0x00d1,
+            0x00d2,
+            0x00d3,
+            0x00d4,
+            0x00d5,
+            0x00d6,
+            0x00f7,
+            0x00d8,
+            0x00d9,
+            0x00da,
+            0x00db,
+            0x00dc,
+            0x00dd,
+            0x00de,
+            0x0178,
         };
 
         // s_casingTable is covering the Unicode BMP plane only. Surrogate casing is handled separately.
@@ -86,40 +326,40 @@ namespace System.Globalization
         // The bits are in reverse order for readability, i.e. the highest order bit refers to
         // the lowest index.
         private static ReadOnlySpan<byte> s_casingTableInit => // 32
-        [
-            /* 0000-07FF */    0b00000000,
-            /* 0800-0FFF */    0b00000000,
-            /* 1000-17FF */    0b01001100,
-            /* 1800-1FFF */    0b00000000,
-            /* 2000-27FF */    0b00110111,
-            /* 2800-2FFF */    0b11100000,
-            /* 3000-37FF */    0b00011111,
-            /* 3800-3FFF */    0b11111111,
-            /* 4000-47FF */    0b11111111,
-            /* 4800-4FFF */    0b11111111,
-            /* 5000-57FF */    0b11111111,
-            /* 5800-5FFF */    0b11111111,
-            /* 6000-67FF */    0b11111111,
-            /* 6800-6FFF */    0b11111111,
-            /* 7000-77FF */    0b11111111,
-            /* 7800-7FFF */    0b11111111,
-            /* 8000-87FF */    0b11111111,
-            /* 8800-8FFF */    0b11111111,
-            /* 9000-97FF */    0b11111111,
-            /* 9800-9FFF */    0b11111110,
-            /* A000-A7FF */    0b11110100,
-            /* A800-AFFF */    0b00001111,
-            /* B000-B7FF */    0b11111111,
-            /* B800-BFFF */    0b11111111,
-            /* C000-C7FF */    0b11111111,
-            /* C800-CFFF */    0b11111111,
-            /* D000-D7FF */    0b11111110,
-            /* D800-DFFF */    0b11111111,
-            /* E000-E7FF */    0b11111111,
-            /* E800-EFFF */    0b11111111,
-            /* F000-F7FF */    0b11111111,
-            /* F800-FFFF */    0b11001000,
-        ];
+            [
+                /* 0000-07FF */0b00000000,
+                /* 0800-0FFF */0b00000000,
+                /* 1000-17FF */0b01001100,
+                /* 1800-1FFF */0b00000000,
+                /* 2000-27FF */0b00110111,
+                /* 2800-2FFF */0b11100000,
+                /* 3000-37FF */0b00011111,
+                /* 3800-3FFF */0b11111111,
+                /* 4000-47FF */0b11111111,
+                /* 4800-4FFF */0b11111111,
+                /* 5000-57FF */0b11111111,
+                /* 5800-5FFF */0b11111111,
+                /* 6000-67FF */0b11111111,
+                /* 6800-6FFF */0b11111111,
+                /* 7000-77FF */0b11111111,
+                /* 7800-7FFF */0b11111111,
+                /* 8000-87FF */0b11111111,
+                /* 8800-8FFF */0b11111111,
+                /* 9000-97FF */0b11111111,
+                /* 9800-9FFF */0b11111110,
+                /* A000-A7FF */0b11110100,
+                /* A800-AFFF */0b00001111,
+                /* B000-B7FF */0b11111111,
+                /* B800-BFFF */0b11111111,
+                /* C000-C7FF */0b11111111,
+                /* C800-CFFF */0b11111111,
+                /* D000-D7FF */0b11111110,
+                /* D800-DFFF */0b11111111,
+                /* E000-E7FF */0b11111111,
+                /* E800-EFFF */0b11111111,
+                /* F000-F7FF */0b11111111,
+                /* F800-FFFF */0b11001000,
+            ];
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static char ToUpper(char c)
@@ -127,7 +367,7 @@ namespace System.Globalization
             int pageNumber = ((int)c) >> 8;
             if (pageNumber == 0) // optimize for ASCII range
             {
-                return (char) s_basicLatin[(int)c];
+                return (char)s_basicLatin[(int)c];
             }
 
             ushort[]? casingTable = s_casingTable[pageNumber];
@@ -139,13 +379,17 @@ namespace System.Globalization
 
             casingTable ??= InitOrdinalCasingPage(pageNumber);
 
-            return (char) casingTable[((int)c) & 0xFF];
+            return (char)casingTable[((int)c) & 0xFF];
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static char ToUpperInvariantMode(char c) => c <= '\u00FF' ? (char) s_basicLatin[(int)c] : c;
+        internal static char ToUpperInvariantMode(char c) =>
+            c <= '\u00FF' ? (char)s_basicLatin[(int)c] : c;
 
-        public static void ToUpperInvariantMode(this ReadOnlySpan<char> source, Span<char> destination)
+        public static void ToUpperInvariantMode(
+            this ReadOnlySpan<char> source,
+            Span<char> destination
+        )
         {
             for (int i = 0; i < source.Length; i++)
             {
@@ -173,7 +417,7 @@ namespace System.Globalization
                     if (char.IsLowSurrogate(cl))
                     {
                         // well formed surrogates
-                        SurrogateCasing.ToUpper(c, cl, out destination[i], out destination[i+1]);
+                        SurrogateCasing.ToUpper(c, cl, out destination[i], out destination[i + 1]);
                         i++; // skip the low surrogate
                         continue;
                     }
@@ -183,7 +427,12 @@ namespace System.Globalization
             }
         }
 
-        internal static int CompareStringIgnoreCase(ref char strA, int lengthA, ref char strB, int lengthB)
+        internal static int CompareStringIgnoreCase(
+            ref char strA,
+            int lengthA,
+            ref char strB,
+            int lengthB
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
@@ -201,9 +450,17 @@ namespace System.Globalization
                 char b = charB;
                 char lowSurrogateA = '\0';
 
-                if (!char.IsHighSurrogate(a) || index >= lengthA - 1 || !char.IsLowSurrogate(lowSurrogateA = Unsafe.Add(ref charA, 1)))
+                if (
+                    !char.IsHighSurrogate(a)
+                    || index >= lengthA - 1
+                    || !char.IsLowSurrogate(lowSurrogateA = Unsafe.Add(ref charA, 1))
+                )
                 {
-                    if (!char.IsHighSurrogate(b) || index >= lengthB - 1 || !char.IsLowSurrogate(Unsafe.Add(ref charB, 1)))
+                    if (
+                        !char.IsHighSurrogate(b)
+                        || index >= lengthB - 1
+                        || !char.IsLowSurrogate(Unsafe.Add(ref charB, 1))
+                    )
                     {
                         //
                         // Neither A or B are surrogates
@@ -244,7 +501,11 @@ namespace System.Globalization
 
                 char lowSurrogateB = '\0';
 
-                if (!char.IsHighSurrogate(b) || index >= lengthB - 1 || !char.IsLowSurrogate(lowSurrogateB = Unsafe.Add(ref charB, 1)))
+                if (
+                    !char.IsHighSurrogate(b)
+                    || index >= lengthB - 1
+                    || !char.IsLowSurrogate(lowSurrogateB = Unsafe.Add(ref charB, 1))
+                )
                 {
                     //
                     // charB is not surrogate and charA is surrogate
@@ -268,8 +529,12 @@ namespace System.Globalization
                     continue;
                 }
 
-                uint upperSurrogateA = CharUnicodeInfo.ToUpper(UnicodeUtility.GetScalarFromUtf16SurrogatePair(a, lowSurrogateA));
-                uint upperSurrogateB = CharUnicodeInfo.ToUpper(UnicodeUtility.GetScalarFromUtf16SurrogatePair(b, lowSurrogateB));
+                uint upperSurrogateA = CharUnicodeInfo.ToUpper(
+                    UnicodeUtility.GetScalarFromUtf16SurrogatePair(a, lowSurrogateA)
+                );
+                uint upperSurrogateB = CharUnicodeInfo.ToUpper(
+                    UnicodeUtility.GetScalarFromUtf16SurrogatePair(b, lowSurrogateB)
+                );
 
                 if (upperSurrogateA == upperSurrogateB)
                 {
@@ -294,7 +559,7 @@ namespace System.Globalization
             Debug.Assert(!GlobalizationMode.UseNls);
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
-            fixed (char* pValue  = &MemoryMarshal.GetReference(value))
+            fixed (char* pValue = &MemoryMarshal.GetReference(value))
             {
                 char* pSourceLimit = pSource + (source.Length - value.Length);
                 char* pValueLimit = pValue + value.Length - 1;
@@ -302,8 +567,8 @@ namespace System.Globalization
 
                 while (pCurrentSource <= pSourceLimit)
                 {
-                    char *pVal = pValue;
-                    char *pSrc = pCurrentSource;
+                    char* pVal = pValue;
+                    char* pSrc = pCurrentSource;
 
                     while (pVal <= pValueLimit)
                     {
@@ -317,7 +582,11 @@ namespace System.Globalization
                             continue;
                         }
 
-                        if (char.IsHighSurrogate(*pSrc) && char.IsLowSurrogate(*(pSrc + 1)) && char.IsLowSurrogate(*(pVal + 1)))
+                        if (
+                            char.IsHighSurrogate(*pSrc)
+                            && char.IsLowSurrogate(*(pSrc + 1))
+                            && char.IsLowSurrogate(*(pVal + 1))
+                        )
                         {
                             // Well formed surrogates
                             // both the source and the Value have well-formed surrogates.
@@ -339,7 +608,7 @@ namespace System.Globalization
                     if (pVal > pValueLimit)
                     {
                         // Found match.
-                        return (int) (pCurrentSource - pSource);
+                        return (int)(pCurrentSource - pSource);
                     }
 
                     pCurrentSource++;
@@ -358,15 +627,15 @@ namespace System.Globalization
             Debug.Assert(!GlobalizationMode.UseNls);
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
-            fixed (char* pValue  = &MemoryMarshal.GetReference(value))
+            fixed (char* pValue = &MemoryMarshal.GetReference(value))
             {
                 char* pValueLimit = pValue + value.Length - 1;
                 char* pCurrentSource = pSource + (source.Length - value.Length);
 
                 while (pCurrentSource >= pSource)
                 {
-                    char *pVal = pValue;
-                    char *pSrc = pCurrentSource;
+                    char* pVal = pValue;
+                    char* pSrc = pCurrentSource;
 
                     while (pVal <= pValueLimit)
                     {
@@ -380,7 +649,11 @@ namespace System.Globalization
                             continue;
                         }
 
-                        if (char.IsHighSurrogate(*pSrc) && char.IsLowSurrogate(*(pSrc + 1)) && char.IsLowSurrogate(*(pVal + 1)))
+                        if (
+                            char.IsHighSurrogate(*pSrc)
+                            && char.IsLowSurrogate(*(pSrc + 1))
+                            && char.IsLowSurrogate(*(pVal + 1))
+                        )
                         {
                             // Well formed surrogates
                             // both the source and the Value have well-formed surrogates.
@@ -402,7 +675,7 @@ namespace System.Globalization
                     if (pVal > pValueLimit)
                     {
                         // Found match.
-                        return (int) (pCurrentSource - pSource);
+                        return (int)(pCurrentSource - pSource);
                     }
 
                     pCurrentSource--;
@@ -426,7 +699,7 @@ namespace System.Globalization
             return table;
         }
 
-        private static unsafe ushort [] InitOrdinalCasingPage(int pageNumber)
+        private static unsafe ushort[] InitOrdinalCasingPage(int pageNumber)
         {
             Debug.Assert(pageNumber >= 0 && pageNumber < 256);
 

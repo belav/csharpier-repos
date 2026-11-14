@@ -35,9 +35,8 @@ public class LocalizationServiceCollectionExtensionsTest
         var collection = new ServiceCollection();
 
         // Act
-        LocalizationServiceCollectionExtensions.AddLocalizationServices(
-            collection,
-            options => options.ResourcesPath = "Resources"
+        LocalizationServiceCollectionExtensions.AddLocalizationServices(collection, options =>
+            options.ResourcesPath = "Resources"
         );
 
         AssertContainsSingle(

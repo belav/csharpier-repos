@@ -36,6 +36,7 @@ namespace System.Reflection
     internal static class CustomAttribute
     {
         private static Assembly? corlib;
+
         [ThreadStatic]
         private static Dictionary<Type, AttributeUsageAttribute>? usage_cache;
 
@@ -43,7 +44,10 @@ namespace System.Reflection
         private static bool IsUserCattrProvider(object obj)
         {
             Type? type = obj as Type;
-            if ((type is RuntimeType) || (RuntimeFeature.IsDynamicCodeSupported && type?.IsTypeBuilder() == true))
+            if (
+                (type is RuntimeType)
+                || (RuntimeFeature.IsDynamicCodeSupported && type?.IsTypeBuilder() == true)
+            )
                 return false;
             if ((obj is Type))
                 return true;
@@ -53,9 +57,16 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern Attribute[] GetCustomAttributesInternal(ICustomAttributeProvider obj, Type attributeType, bool pseudoAttrs);
+        internal static extern Attribute[] GetCustomAttributesInternal(
+            ICustomAttributeProvider obj,
+            Type attributeType,
+            bool pseudoAttrs
+        );
 
-        internal static object[]? GetPseudoCustomAttributes(ICustomAttributeProvider obj, Type attributeType)
+        internal static object[]? GetPseudoCustomAttributes(
+            ICustomAttributeProvider obj,
+            Type attributeType
+        )
         {
             object[]? pseudoAttrs = null;
             /* FIXME: Add other types */
@@ -111,7 +122,11 @@ namespace System.Reflection
         }
 
         // FIXME: Callers are explicitly passing in null for attributeType, but GetCustomAttributes prohibits null attributeType arguments
-        internal static object[] GetCustomAttributesBase(ICustomAttributeProvider obj, Type? attributeType, bool inheritedOnly)
+        internal static object[] GetCustomAttributesBase(
+            ICustomAttributeProvider obj,
+            Type? attributeType,
+            bool inheritedOnly
+        )
         {
             object[] attrs = GetCustomAttributesInternal(obj, attributeType!, pseudoAttrs: false);
             //
@@ -137,17 +152,32 @@ namespace System.Reflection
         {
             if (attributeType == null)
                 return true;
-            return attributeType.IsAssignableFrom(attrType) ||
-                (attributeType.IsGenericTypeDefinition && attrType.IsGenericType && attributeType.IsAssignableFrom(attrType.GetGenericTypeDefinition()));
+            return attributeType.IsAssignableFrom(attrType)
+                || (
+                    attributeType.IsGenericTypeDefinition
+                    && attrType.IsGenericType
+                    && attributeType.IsAssignableFrom(attrType.GetGenericTypeDefinition())
+                );
         }
 
-        internal static object[] GetCustomAttributes(ICustomAttributeProvider obj, Type attributeType, bool inherit)
+        internal static object[] GetCustomAttributes(
+            ICustomAttributeProvider obj,
+            Type attributeType,
+            bool inherit
+        )
         {
             ArgumentNullException.ThrowIfNull(obj);
             ArgumentNullException.ThrowIfNull(attributeType);
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && !attributeType.IsInterface
-                && attributeType != typeof(Attribute) && attributeType != typeof(CustomAttribute) && attributeType != typeof(object))
-                throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass + " " + attributeType.FullName);
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute))
+                && !attributeType.IsInterface
+                && attributeType != typeof(Attribute)
+                && attributeType != typeof(CustomAttribute)
+                && attributeType != typeof(object)
+            )
+                throw new ArgumentException(
+                    SR.Argument_MustHaveAttributeBaseClass + " " + attributeType.FullName
+                );
 
             if (IsUserCattrProvider(obj))
                 return obj.GetCustomAttributes(attributeType, inherit);
@@ -195,8 +225,7 @@ namespace System.Reflection
             // there's no use in scanning base types
             if ((attributeType != null && attributeType.IsSealed) && inherit)
             {
-                AttributeUsageAttribute usageAttribute = RetrieveAttributeUsage(
-                    attributeType);
+                AttributeUsageAttribute usageAttribute = RetrieveAttributeUsage(attributeType);
                 if (!usageAttribute.Inherited)
                     inherit = false;
             }
@@ -214,7 +243,9 @@ namespace System.Reflection
                     foreach (object attr in res)
                     {
                         if (attr == null)
-                            throw new CustomAttributeFormatException(SR.Arg_CustomAttributeFormatException);
+                            throw new CustomAttributeFormatException(
+                                SR.Arg_CustomAttributeFormatException
+                            );
                     }
                     var result = new Attribute[res.Length];
                     res.CopyTo(result, 0);
@@ -225,13 +256,19 @@ namespace System.Reflection
                 foreach (object attr in res)
                 {
                     if (attr == null)
-                        throw new CustomAttributeFormatException(SR.Arg_CustomAttributeFormatException);
+                        throw new CustomAttributeFormatException(
+                            SR.Arg_CustomAttributeFormatException
+                        );
 
                     if (AttrTypeMatches(attributeType, attr.GetType()))
                         a.Add(attr);
                 }
 
-                if (attributeType == null || attributeType.IsValueType || attributeType.IsGenericTypeDefinition)
+                if (
+                    attributeType == null
+                    || attributeType.IsValueType
+                    || attributeType.IsGenericTypeDefinition
+                )
                     array = new Attribute[a.Count];
                 else
                     array = (Array.CreateInstance(attributeType, a.Count) as object[])!;
@@ -250,7 +287,9 @@ namespace System.Reflection
                 {
                     AttributeUsageAttribute usage;
                     if (attr == null)
-                        throw new CustomAttributeFormatException(SR.Arg_CustomAttributeFormatException);
+                        throw new CustomAttributeFormatException(
+                            SR.Arg_CustomAttributeFormatException
+                        );
 
                     Type attrType = attr.GetType();
                     if (!AttrTypeMatches(attributeType, attr.GetType()))
@@ -271,9 +310,19 @@ namespace System.Reflection
                     // or
                     // - the attribute is on same inheritance level than the first
                     //   attribute that was discovered for this attribute type ))
-                    if ((inheritanceLevel == 0 || usage.Inherited) && (usage.AllowMultiple ||
-                        (firstAttribute == null || (firstAttribute != null
-                            && firstAttribute.InheritanceLevel == inheritanceLevel))))
+                    if (
+                        (inheritanceLevel == 0 || usage.Inherited)
+                        && (
+                            usage.AllowMultiple
+                            || (
+                                firstAttribute == null
+                                || (
+                                    firstAttribute != null
+                                    && firstAttribute.InheritanceLevel == inheritanceLevel
+                                )
+                            )
+                        )
+                    )
                         a.Add(attr);
 
                     if (firstAttribute == null)
@@ -287,7 +336,11 @@ namespace System.Reflection
                 }
             } while (btype != null);
 
-            if (attributeType == null || attributeType.IsValueType || attributeType.IsGenericTypeDefinition)
+            if (
+                attributeType == null
+                || attributeType.IsValueType
+                || attributeType.IsGenericTypeDefinition
+            )
                 array = new Attribute[a.Count];
             else
                 array = (Array.CreateInstance(attributeType, a.Count) as object[])!;
@@ -312,12 +365,26 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        [DynamicDependency("#ctor(System.Reflection.ConstructorInfo,System.Reflection.Assembly,System.IntPtr,System.UInt32)", typeof(RuntimeCustomAttributeData))]
-        [DynamicDependency("#ctor(System.Reflection.MemberInfo,System.Object)", typeof(CustomAttributeNamedArgument))]
-        [DynamicDependency("#ctor(System.Type,System.Object)", typeof(CustomAttributeTypedArgument))]
-        private static extern CustomAttributeData[] GetCustomAttributesDataInternal(ICustomAttributeProvider obj);
+        [DynamicDependency(
+            "#ctor(System.Reflection.ConstructorInfo,System.Reflection.Assembly,System.IntPtr,System.UInt32)",
+            typeof(RuntimeCustomAttributeData)
+        )]
+        [DynamicDependency(
+            "#ctor(System.Reflection.MemberInfo,System.Object)",
+            typeof(CustomAttributeNamedArgument)
+        )]
+        [DynamicDependency(
+            "#ctor(System.Type,System.Object)",
+            typeof(CustomAttributeTypedArgument)
+        )]
+        private static extern CustomAttributeData[] GetCustomAttributesDataInternal(
+            ICustomAttributeProvider obj
+        );
 
-        internal static IList<CustomAttributeData> GetCustomAttributesData(ICustomAttributeProvider obj, bool inherit = false)
+        internal static IList<CustomAttributeData> GetCustomAttributesData(
+            ICustomAttributeProvider obj,
+            bool inherit = false
+        )
         {
             ArgumentNullException.ThrowIfNull(obj);
 
@@ -327,7 +394,11 @@ namespace System.Reflection
             return GetCustomAttributesData(obj, typeof(CustomAttribute), inherit);
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesData(ICustomAttributeProvider obj, Type? attributeType, bool inherit)
+        internal static IList<CustomAttributeData> GetCustomAttributesData(
+            ICustomAttributeProvider obj,
+            Type? attributeType,
+            bool inherit
+        )
         {
             ArgumentNullException.ThrowIfNull(obj);
             ArgumentNullException.ThrowIfNull(attributeType);
@@ -381,7 +452,9 @@ namespace System.Reflection
                     foreach (CustomAttributeData attrData in res)
                     {
                         if (attrData == null)
-                            throw new CustomAttributeFormatException(SR.Arg_CustomAttributeFormatException);
+                            throw new CustomAttributeFormatException(
+                                SR.Arg_CustomAttributeFormatException
+                            );
                     }
 
                     var result = new CustomAttributeData[res.Count];
@@ -394,7 +467,9 @@ namespace System.Reflection
                     foreach (CustomAttributeData attrData in res)
                     {
                         if (attrData == null)
-                            throw new CustomAttributeFormatException(SR.Arg_CustomAttributeFormatException);
+                            throw new CustomAttributeFormatException(
+                                SR.Arg_CustomAttributeFormatException
+                            );
                         if (!attributeType.IsAssignableFrom(attrData.AttributeType))
                             continue;
                         a.Add(attrData);
@@ -415,7 +490,9 @@ namespace System.Reflection
                 {
                     AttributeUsageAttribute usage;
                     if (attrData == null)
-                        throw new CustomAttributeFormatException(SR.Arg_CustomAttributeFormatException);
+                        throw new CustomAttributeFormatException(
+                            SR.Arg_CustomAttributeFormatException
+                        );
 
                     Type attrType = attrData.AttributeType;
                     if (attributeType != null)
@@ -441,9 +518,19 @@ namespace System.Reflection
                     // or
                     // - the attribute is on same inheritance level than the first
                     //   attribute that was discovered for this attribute type ))
-                    if ((inheritanceLevel == 0 || usage.Inherited) && (usage.AllowMultiple ||
-                        (firstAttribute == null || (firstAttribute != null
-                            && firstAttribute.InheritanceLevel == inheritanceLevel))))
+                    if (
+                        (inheritanceLevel == 0 || usage.Inherited)
+                        && (
+                            usage.AllowMultiple
+                            || (
+                                firstAttribute == null
+                                || (
+                                    firstAttribute != null
+                                    && firstAttribute.InheritanceLevel == inheritanceLevel
+                                )
+                            )
+                        )
+                    )
                         a.Add(attrData);
 
                     if (firstAttribute == null)
@@ -460,7 +547,11 @@ namespace System.Reflection
             return a.ToArray();
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesDataBase(ICustomAttributeProvider obj, Type? attributeType, bool inheritedOnly)
+        internal static IList<CustomAttributeData> GetCustomAttributesDataBase(
+            ICustomAttributeProvider obj,
+            Type? attributeType,
+            bool inheritedOnly
+        )
         {
             CustomAttributeData[] attrsData;
             if (IsUserCattrProvider(obj))
@@ -478,12 +569,17 @@ namespace System.Reflection
             //
             if (!inheritedOnly)
             {
-                CustomAttributeData[]? pseudoAttrsData = GetPseudoCustomAttributesData(obj, attributeType);
+                CustomAttributeData[]? pseudoAttrsData = GetPseudoCustomAttributesData(
+                    obj,
+                    attributeType
+                );
                 if (pseudoAttrsData != null)
                 {
                     if (attrsData.Length == 0)
                         return Array.AsReadOnly(pseudoAttrsData);
-                    CustomAttributeData[] res = new CustomAttributeData[attrsData.Length + pseudoAttrsData.Length];
+                    CustomAttributeData[] res = new CustomAttributeData[
+                        attrsData.Length + pseudoAttrsData.Length
+                    ];
                     Array.Copy(attrsData, res, attrsData.Length);
                     Array.Copy(pseudoAttrsData, 0, res, attrsData.Length, pseudoAttrsData.Length);
                     return Array.AsReadOnly(res);
@@ -493,7 +589,10 @@ namespace System.Reflection
             return Array.AsReadOnly(attrsData);
         }
 
-        internal static CustomAttributeData[]? GetPseudoCustomAttributesData(ICustomAttributeProvider obj, Type? attributeType)
+        internal static CustomAttributeData[]? GetPseudoCustomAttributesData(
+            ICustomAttributeProvider obj,
+            Type? attributeType
+        )
         {
             CustomAttributeData[]? pseudoAttrsData = null;
 
@@ -546,19 +645,33 @@ namespace System.Reflection
 
 #pragma warning disable SYSLIB0050 // TypeAttributes.Serializable is obsolete
             if ((Attributes & TypeAttributes.Serializable) != 0)
-                attrsData[count++] = new RuntimeCustomAttributeData((typeof(SerializableAttribute)).GetConstructor(Type.EmptyTypes)!);
+                attrsData[count++] = new RuntimeCustomAttributeData(
+                    (typeof(SerializableAttribute)).GetConstructor(Type.EmptyTypes)!
+                );
 #pragma warning restore SYSLIB0050
             if ((Attributes & TypeAttributes.Import) != 0)
-                attrsData[count++] = new RuntimeCustomAttributeData((typeof(ComImportAttribute)).GetConstructor(Type.EmptyTypes)!);
+                attrsData[count++] = new RuntimeCustomAttributeData(
+                    (typeof(ComImportAttribute)).GetConstructor(Type.EmptyTypes)!
+                );
 
             return attrsData;
         }
 
-        internal static bool IsDefined(ICustomAttributeProvider obj, Type attributeType, bool inherit)
+        internal static bool IsDefined(
+            ICustomAttributeProvider obj,
+            Type attributeType,
+            bool inherit
+        )
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && !attributeType.IsInterface && attributeType != typeof(Attribute))
-                throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass + " " + attributeType.FullName);
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute))
+                && !attributeType.IsInterface
+                && attributeType != typeof(Attribute)
+            )
+                throw new ArgumentException(
+                    SR.Argument_MustHaveAttributeBaseClass + " " + attributeType.FullName
+                );
 
             AttributeUsageAttribute? usage = null;
             do
@@ -594,10 +707,16 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern bool IsDefinedInternal(ICustomAttributeProvider obj, Type AttributeType);
+        private static extern bool IsDefinedInternal(
+            ICustomAttributeProvider obj,
+            Type AttributeType
+        );
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Linker analyzes base properties and marks them")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Linker analyzes base properties and marks them"
+        )]
         private static PropertyInfo? GetBasePropertyDefinition(RuntimePropertyInfo property)
         {
             MethodInfo? method = property.GetGetMethod(true);
@@ -615,20 +734,28 @@ namespace System.Reflection
                     Type[] paramTypes = new Type[parameters.Length];
                     for (int i = 0; i < paramTypes.Length; i++)
                         paramTypes[i] = parameters[i].ParameterType;
-                    return baseMethod.DeclaringType!.GetProperty(property.Name, property.PropertyType,
-                                             paramTypes);
+                    return baseMethod.DeclaringType!.GetProperty(
+                        property.Name,
+                        property.PropertyType,
+                        paramTypes
+                    );
                 }
                 else
                 {
-                    return baseMethod.DeclaringType!.GetProperty(property.Name, property.PropertyType);
+                    return baseMethod.DeclaringType!.GetProperty(
+                        property.Name,
+                        property.PropertyType
+                    );
                 }
             }
             return null;
-
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Linker analyzes base events and marks them")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Linker analyzes base events and marks them"
+        )]
         private static EventInfo? GetBaseEventDefinition(RuntimeEventInfo evt)
         {
             MethodInfo? method = evt.GetAddMethod(true);
@@ -706,7 +833,11 @@ namespace System.Reflection
                 return new AttributeUsageAttribute(AttributeTargets.Class);
 
             AttributeUsageAttribute? usageAttribute = null;
-            object[] attribs = GetCustomAttributes(attributeType, typeof(AttributeUsageAttribute), false);
+            object[] attribs = GetCustomAttributes(
+                attributeType,
+                typeof(AttributeUsageAttribute),
+                false
+            );
             if (attribs.Length == 0)
             {
                 // if no AttributeUsage was defined on the attribute level, then
@@ -714,13 +845,11 @@ namespace System.Reflection
                 if (attributeType.BaseType != null)
                 {
                     usageAttribute = RetrieveAttributeUsage(attributeType.BaseType);
-
                 }
                 if (usageAttribute != null)
                 {
                     // return AttributeUsage of base class
                     return usageAttribute;
-
                 }
                 // return default AttributeUsageAttribute if no AttributeUsage
                 // was defined on attribute, or its base class
@@ -732,7 +861,9 @@ namespace System.Reflection
             // anyone from using IL ofcourse
             if (attribs.Length > 1)
             {
-                throw new FormatException(SR.Format(SR.Format_AttributeUsage, attributeType.GetType().FullName));
+                throw new FormatException(
+                    SR.Format(SR.Format_AttributeUsage, attributeType.GetType().FullName)
+                );
             }
 
             return ((AttributeUsageAttribute)attribs[0]);
@@ -783,7 +914,8 @@ namespace System.Reflection
             {
                 return elementCount == 0 ? Array.Empty<object>() : new object[elementCount];
             }
-            return /*elementCount == 0 ? caType.GetEmptyArray() :*/ (object[])Array.CreateInstance(caType, elementCount);
+            return /*elementCount == 0 ? caType.GetEmptyArray() :*/
+            (object[])Array.CreateInstance(caType, elementCount);
         }
 
         private static readonly AttributeUsageAttribute DefaultAttributeUsage =
@@ -802,18 +934,12 @@ namespace System.Reflection
 
             public AttributeUsageAttribute Usage
             {
-                get
-                {
-                    return _usage;
-                }
+                get { return _usage; }
             }
 
             public int InheritanceLevel
             {
-                get
-                {
-                    return _inheritanceLevel;
-                }
+                get { return _inheritanceLevel; }
             }
         }
     }

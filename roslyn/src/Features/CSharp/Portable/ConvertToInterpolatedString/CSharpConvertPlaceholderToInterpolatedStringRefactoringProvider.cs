@@ -10,24 +10,33 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertToInterpolatedString
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertPlaceholderToInterpolatedString), Shared]
-    internal partial class CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider :
-        AbstractConvertPlaceholderToInterpolatedStringRefactoringProvider<
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertPlaceholderToInterpolatedString
+        ),
+        Shared
+    ]
+    internal partial class CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider
+        : AbstractConvertPlaceholderToInterpolatedStringRefactoringProvider<
             ExpressionSyntax,
             LiteralExpressionSyntax,
             InvocationExpressionSyntax,
             InterpolatedStringExpressionSyntax,
             ArgumentSyntax,
             ArgumentListSyntax,
-            InterpolationSyntax>
+            InterpolationSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider() { }
 
-        protected override ExpressionSyntax ParseExpression(string text)
-            => SyntaxFactory.ParseExpression(text);
+        protected override ExpressionSyntax ParseExpression(string text) =>
+            SyntaxFactory.ParseExpression(text);
     }
 }

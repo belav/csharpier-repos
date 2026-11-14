@@ -37,13 +37,21 @@ namespace System.Web.Http.Results
         /// <param name="contentNegotiator">The content negotiator to handle content negotiation.</param>
         /// <param name="request">The request message which led to this result.</param>
         /// <param name="formatters">The formatters to use to negotiate and format the content.</param>
-        public CreatedAtRouteNegotiatedContentResult(string routeName, IDictionary<string, object> routeValues,
-            T content, UrlHelper urlFactory, IContentNegotiator contentNegotiator, HttpRequestMessage request,
-            IEnumerable<MediaTypeFormatter> formatters)
-            : this(routeName, routeValues, content, new DirectDependencyProvider(urlFactory, contentNegotiator,
-                request, formatters))
-        {
-        }
+        public CreatedAtRouteNegotiatedContentResult(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            T content,
+            UrlHelper urlFactory,
+            IContentNegotiator contentNegotiator,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
+            : this(
+                routeName,
+                routeValues,
+                content,
+                new DirectDependencyProvider(urlFactory, contentNegotiator, request, formatters)
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatedAtRouteNegotiatedContentResult{T}"/> class with the
@@ -53,14 +61,21 @@ namespace System.Web.Http.Results
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <param name="content">The content value to negotiate and format in the entity body.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
-        public CreatedAtRouteNegotiatedContentResult(string routeName, IDictionary<string, object> routeValues,
-            T content, ApiController controller)
+        public CreatedAtRouteNegotiatedContentResult(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            T content,
+            ApiController controller
+        )
             : this(routeName, routeValues, content, new ApiControllerDependencyProvider(controller))
-        {
-        }
+        { }
 
-        private CreatedAtRouteNegotiatedContentResult(string routeName, IDictionary<string, object> routeValues,
-            T content, IDependencyProvider dependencies)
+        private CreatedAtRouteNegotiatedContentResult(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            T content,
+            IDependencyProvider dependencies
+        )
         {
             if (routeName == null)
             {
@@ -126,8 +141,11 @@ namespace System.Web.Http.Results
         private HttpResponseMessage Execute()
         {
             // Run content negotiation.
-            ContentNegotiationResult result = _dependencies.ContentNegotiator.Negotiate(typeof(T),
-                _dependencies.Request, _dependencies.Formatters);
+            ContentNegotiationResult result = _dependencies.ContentNegotiator.Negotiate(
+                typeof(T),
+                _dependencies.Request,
+                _dependencies.Formatters
+            );
 
             HttpResponseMessage response = new HttpResponseMessage();
 
@@ -146,14 +164,20 @@ namespace System.Web.Http.Results
 
                     if (link == null)
                     {
-                        throw new InvalidOperationException(SRResources.UrlHelper_LinkMustNotReturnNull);
+                        throw new InvalidOperationException(
+                            SRResources.UrlHelper_LinkMustNotReturnNull
+                        );
                     }
 
                     response.Headers.Location = new Uri(link);
                     Contract.Assert(result.Formatter != null);
                     // At this point mediaType should be a cloned value. (The content negotiator is responsible for
                     // returning a new copy.)
-                    response.Content = new ObjectContent<T>(_content, result.Formatter, result.MediaType);
+                    response.Content = new ObjectContent<T>(
+                        _content,
+                        result.Formatter,
+                        result.MediaType
+                    );
                 }
 
                 response.RequestMessage = _dependencies.Request;
@@ -191,8 +215,12 @@ namespace System.Web.Http.Results
             private readonly HttpRequestMessage _request;
             private readonly IEnumerable<MediaTypeFormatter> _formatters;
 
-            public DirectDependencyProvider(UrlHelper urlFactory, IContentNegotiator contentNegotiator,
-                HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
+            public DirectDependencyProvider(
+                UrlHelper urlFactory,
+                IContentNegotiator contentNegotiator,
+                HttpRequestMessage request,
+                IEnumerable<MediaTypeFormatter> formatters
+            )
             {
                 if (urlFactory == null)
                 {
@@ -301,7 +329,9 @@ namespace System.Web.Http.Results
 
                     if (request == null)
                     {
-                        throw new InvalidOperationException(SRResources.ApiController_RequestMustNotBeNull);
+                        throw new InvalidOperationException(
+                            SRResources.ApiController_RequestMustNotBeNull
+                        );
                     }
 
                     UrlHelper urlFactory = _controller.Url ?? new UrlHelper(request);
@@ -311,7 +341,8 @@ namespace System.Web.Http.Results
                     if (configuration == null)
                     {
                         throw new InvalidOperationException(
-                            SRResources.HttpControllerContext_ConfigurationMustNotBeNull);
+                            SRResources.HttpControllerContext_ConfigurationMustNotBeNull
+                        );
                     }
 
                     ServicesContainer services = configuration.Services;
@@ -320,15 +351,23 @@ namespace System.Web.Http.Results
 
                     if (contentNegotiator == null)
                     {
-                        throw new InvalidOperationException(Error.Format(
-                            SRResources.HttpRequestMessageExtensions_NoContentNegotiator, typeof(IContentNegotiator)));
+                        throw new InvalidOperationException(
+                            Error.Format(
+                                SRResources.HttpRequestMessageExtensions_NoContentNegotiator,
+                                typeof(IContentNegotiator)
+                            )
+                        );
                     }
 
                     IEnumerable<MediaTypeFormatter> formatters = configuration.Formatters;
                     Contract.Assert(formatters != null);
 
-                    _resolvedDependencies = new DirectDependencyProvider(urlFactory, contentNegotiator, request,
-                        formatters);
+                    _resolvedDependencies = new DirectDependencyProvider(
+                        urlFactory,
+                        contentNegotiator,
+                        request,
+                        formatters
+                    );
                 }
             }
         }

@@ -4,35 +4,31 @@ using System.Runtime.InteropServices;
 
 struct BI
 {
-	public static implicit operator BI (int i)
-	{
-		return new BI ();
-	}
+    public static implicit operator BI(int i)
+    {
+        return new BI();
+    }
 }
 
 class C
 {
-	public static void M ([DefaultParameterValue (1 + 3)]BI step)
-	{
-	}
-	
-	public static void M2 ([DefaultParameterValue (1)] object o)
-	{
-	}
+    public static void M([DefaultParameterValue(1 + 3)] BI step) { }
 
-	public static int Main ()
-	{
-		var m = typeof (C).GetMethod ("M");
-		var p = m.GetParameters ()[0];
+    public static void M2([DefaultParameterValue(1)] object o) { }
 
-		Console.WriteLine (p.Attributes);
-		if (p.Attributes != ParameterAttributes.HasDefault)
-			return 2;
+    public static int Main()
+    {
+        var m = typeof(C).GetMethod("M");
+        var p = m.GetParameters()[0];
 
-		if ((int) p.DefaultValue != 4)
-			return 1;
+        Console.WriteLine(p.Attributes);
+        if (p.Attributes != ParameterAttributes.HasDefault)
+            return 2;
 
-		Console.WriteLine (p.DefaultValue);
-		return 0;
-	}
+        if ((int)p.DefaultValue != 4)
+            return 1;
+
+        Console.WriteLine(p.DefaultValue);
+        return 0;
+    }
 }

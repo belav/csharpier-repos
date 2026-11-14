@@ -3,7 +3,6 @@
 
 using System.IO;
 using System.Threading;
-
 // The CODEDOM check is here to support versions of the framework that may not have fully
 // incorporated all of .NET Core, but want to use System.Configuration.ConfigurationManager.
 // TempFileCollection was moved around in .NET Core.
@@ -17,8 +16,8 @@ namespace System.Configuration.Internal
 {
     internal sealed class WriteFileContext
     {
-        private const int SavingTimeout = 10000;        // 10 seconds
-        private const int SavingRetryInterval = 100;    // 100 milliseconds
+        private const int SavingTimeout = 10000; // 10 seconds
+        private const int SavingRetryInterval = 100; // 100 milliseconds
         private readonly string _templateFilename;
 
         private TempFileCollection _tempFiles;
@@ -60,7 +59,8 @@ namespace System.Configuration.Internal
         {
             try
             {
-                if (!success) return;
+                if (!success)
+                    return;
 
                 if (File.Exists(filename))
                 {
@@ -135,10 +135,7 @@ namespace System.Configuration.Internal
             try
             {
                 // Try to open file for write access
-                fs = new FileStream(filename,
-                    FileMode.Open,
-                    FileAccess.Write,
-                    FileShare.ReadWrite);
+                fs = new FileStream(filename, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
             }
             catch (IOException)
             {
@@ -164,10 +161,12 @@ namespace System.Configuration.Internal
             // The file may be open for read, if it is then
             // lets try again because maybe they will finish
             // soon, and we will be able to replace
-            while (!writeSucceeded &&
-                (duration < SavingTimeout) &&
-                File.Exists(target) &&
-                !FileIsWriteLocked(target))
+            while (
+                !writeSucceeded
+                && (duration < SavingTimeout)
+                && File.Exists(target)
+                && !FileIsWriteLocked(target)
+            )
             {
                 Thread.Sleep(SavingRetryInterval);
                 duration += SavingRetryInterval;
@@ -214,10 +213,12 @@ namespace System.Configuration.Internal
             try
             {
                 // Try to open for shared reading
-                fileStream = new FileStream(fileName,
+                fileStream = new FileStream(
+                    fileName,
                     FileMode.Open,
                     FileAccess.Read,
-                    FileShare.Read | FileShare.Delete);
+                    FileShare.Read | FileShare.Delete
+                );
 
                 // If we can open it for shared reading, it is not write locked
                 return false;

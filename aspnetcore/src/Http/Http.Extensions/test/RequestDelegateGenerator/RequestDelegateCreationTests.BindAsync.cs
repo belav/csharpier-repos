@@ -103,8 +103,8 @@ app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}}? myBindAsyncParam) =
         if (expectException)
         {
             // These types simply don't support optional parameters since they cannot return null.
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => endpoint.RequestDelegate(httpContext)
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                endpoint.RequestDelegate(httpContext)
             );
             Assert.Equal("The request is missing the required Referer header.", ex.Message);
         }
@@ -137,8 +137,8 @@ app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}} myBindAsyncParam) =>
 
         if (expectException)
         {
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => endpoint.RequestDelegate(httpContext)
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                endpoint.RequestDelegate(httpContext)
             );
             Assert.Equal("The request is missing the required Referer header.", ex.Message);
         }
@@ -216,8 +216,8 @@ app.MapGet("/", (HttpContext httpContext, MyBindAsyncTypeThatThrows myBindAsyncP
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers.Referer = "https://example.org";
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => endpoint.RequestDelegate(httpContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            endpoint.RequestDelegate(httpContext)
         );
         Assert.Equal("BindAsync failed", ex.Message);
     }

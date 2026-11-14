@@ -19,7 +19,10 @@ namespace System.Data.EntityClient
     /// <summary>
     /// A data reader class for the entity client provider
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix"
+    )]
     public class EntityDataReader : DbDataReader, IExtendedDataRecord
     {
         // The command object that owns this reader
@@ -37,7 +40,11 @@ namespace System.Data.EntityClient
         /// DbDataReader.  It is expected that EntityDataReader only has a reference to EntityCommand and doesn't assume responsibility
         /// of cleaning the command object, but it does assume responsibility of cleaning up the store data reader object.
         /// </summary>
-        internal EntityDataReader(EntityCommand command, DbDataReader storeDataReader, CommandBehavior behavior)
+        internal EntityDataReader(
+            EntityCommand command,
+            DbDataReader storeDataReader,
+            CommandBehavior behavior
+        )
             : base()
         {
             Debug.Assert(command != null && storeDataReader != null);
@@ -53,10 +60,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override int Depth
         {
-            get
-            {
-                return this._storeDataReader.Depth;
-            }
+            get { return this._storeDataReader.Depth; }
         }
 
         /// <summary>
@@ -64,10 +68,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override int FieldCount
         {
-            get
-            {
-                return this._storeDataReader.FieldCount;
-            }
+            get { return this._storeDataReader.FieldCount; }
         }
 
         /// <summary>
@@ -75,10 +76,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override bool HasRows
         {
-            get
-            {
-                return this._storeDataReader.HasRows;
-            }
+            get { return this._storeDataReader.HasRows; }
         }
 
         /// <summary>
@@ -86,10 +84,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override bool IsClosed
         {
-            get
-            {
-                return this._storeDataReader.IsClosed;
-            }
+            get { return this._storeDataReader.IsClosed; }
         }
 
         /// <summary>
@@ -97,10 +92,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override int RecordsAffected
         {
-            get
-            {
-                return this._storeDataReader.RecordsAffected;
-            }
+            get { return this._storeDataReader.RecordsAffected; }
         }
 
         /// <summary>
@@ -109,10 +101,7 @@ namespace System.Data.EntityClient
         /// <param name="ordinal">The ordinal of the column to retrieve the value</param>
         public override object this[int ordinal]
         {
-            get
-            {
-                return this._storeDataReader[ordinal];
-            }
+            get { return this._storeDataReader[ordinal]; }
         }
 
         /// <summary>
@@ -133,10 +122,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override int VisibleFieldCount
         {
-            get
-            {
-                return this._storeDataReader.VisibleFieldCount;
-            }
+            get { return this._storeDataReader.VisibleFieldCount; }
         }
 
         /// <summary>
@@ -167,7 +153,10 @@ namespace System.Data.EntityClient
 
                 // Notify the command object that we are closing, so clean up operations such as copying output parameters can be done
                 this._command.NotifyDataReaderClosing();
-                if ((this._behavior & CommandBehavior.CloseConnection) == CommandBehavior.CloseConnection)
+                if (
+                    (this._behavior & CommandBehavior.CloseConnection)
+                    == CommandBehavior.CloseConnection
+                )
                 {
                     Debug.Assert(this._command.Connection != null);
                     this._command.Connection.Close();
@@ -177,7 +166,7 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Releases the resources used by this data reader 
+        /// Releases the resources used by this data reader
         /// </summary>
         /// <param name="disposing">true to release both managed and unmanaged resources, false to release only unmanaged resources</param>
         protected override void Dispose(bool disposing)
@@ -218,9 +207,21 @@ namespace System.Data.EntityClient
         /// <param name="bufferOffset">The index in the buffer indicating where the data is copied into</param>
         /// <param name="length">The maximum number of bytes to read</param>
         /// <returns>The actual number of bytes read</returns>
-        public override long GetBytes(int ordinal, long dataOffset, byte[] buffer, int bufferOffset, int length)
+        public override long GetBytes(
+            int ordinal,
+            long dataOffset,
+            byte[] buffer,
+            int bufferOffset,
+            int length
+        )
         {
-            return this._storeDataReader.GetBytes(ordinal, dataOffset, buffer, bufferOffset, length);
+            return this._storeDataReader.GetBytes(
+                ordinal,
+                dataOffset,
+                buffer,
+                bufferOffset,
+                length
+            );
         }
 
         /// <summary>
@@ -242,9 +243,21 @@ namespace System.Data.EntityClient
         /// <param name="bufferOffset">The index in the buffer indicating where the data is copied into</param>
         /// <param name="length">The maximum number of bytes to read</param>
         /// <returns>The actual number of characters read</returns>
-        public override long GetChars(int ordinal, long dataOffset, char[] buffer, int bufferOffset, int length)
+        public override long GetChars(
+            int ordinal,
+            long dataOffset,
+            char[] buffer,
+            int bufferOffset,
+            int length
+        )
         {
-            return this._storeDataReader.GetChars(ordinal, dataOffset, buffer, bufferOffset, length);
+            return this._storeDataReader.GetChars(
+                ordinal,
+                dataOffset,
+                buffer,
+                bufferOffset,
+                length
+            );
         }
 
         /// <summary>
@@ -384,7 +397,7 @@ namespace System.Data.EntityClient
         /// <param name="ordinal"></param>
         /// <returns></returns>
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        override public Type GetProviderSpecificFieldType(int ordinal)
+        public override Type GetProviderSpecificFieldType(int ordinal)
         {
             return _storeDataReader.GetProviderSpecificFieldType(ordinal);
         }
@@ -466,15 +479,18 @@ namespace System.Data.EntityClient
         /// <returns>true if there are more result sets</returns>
         public override bool NextResult()
         {
-            try 
+            try
             {
                 return this._storeDataReader.NextResult();
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
-                if (EntityUtil.IsCatchableExceptionType(e)) 
+                if (EntityUtil.IsCatchableExceptionType(e))
                 {
-                    throw EntityUtil.CommandExecution(System.Data.Entity.Strings.EntityClient_StoreReaderFailed, e);
+                    throw EntityUtil.CommandExecution(
+                        System.Data.Entity.Strings.EntityClient_StoreReaderFailed,
+                        e
+                    );
                 }
                 throw;
             }

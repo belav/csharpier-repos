@@ -1,29 +1,46 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Xml;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Globalization;
-    using System.ComponentModel;
-    using System.Transactions;
-    using System.Reflection;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.ComponentModel.Design.Serialization;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design.Serialization;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Text;
+    using System.Transactions;
+    using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
 
     [Browsable(true)]
     [DesignerSerializer(typeof(DependencyObjectCodeDomSerializer), typeof(CodeDomSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowTransactionOptions : DependencyObject
     {
-        public static readonly DependencyProperty TimeoutDurationProperty = DependencyProperty.Register("TimeoutDuration", typeof(TimeSpan), typeof(WorkflowTransactionOptions), new PropertyMetadata(new TimeSpan(0, 0, 30), DependencyPropertyOptions.Metadata));
-        public static readonly DependencyProperty IsolationLevelProperty = DependencyProperty.Register("IsolationLevel", typeof(IsolationLevel), typeof(WorkflowTransactionOptions), new PropertyMetadata(IsolationLevel.Serializable, DependencyPropertyOptions.Metadata));
+        public static readonly DependencyProperty TimeoutDurationProperty =
+            DependencyProperty.Register(
+                "TimeoutDuration",
+                typeof(TimeSpan),
+                typeof(WorkflowTransactionOptions),
+                new PropertyMetadata(new TimeSpan(0, 0, 30), DependencyPropertyOptions.Metadata)
+            );
+        public static readonly DependencyProperty IsolationLevelProperty =
+            DependencyProperty.Register(
+                "IsolationLevel",
+                typeof(IsolationLevel),
+                typeof(WorkflowTransactionOptions),
+                new PropertyMetadata(
+                    IsolationLevel.Serializable,
+                    DependencyPropertyOptions.Metadata
+                )
+            );
 
         [SRDescription(SR.TimeoutDescr)]
         [SRCategory(SR.Activity)]
@@ -32,14 +49,8 @@ namespace System.Workflow.ComponentModel
         [TypeConverter(typeof(TimeoutDurationConverter))]
         public TimeSpan TimeoutDuration
         {
-            get
-            {
-                return (TimeSpan)base.GetValue(TimeoutDurationProperty);
-            }
-            set
-            {
-                base.SetValue(TimeoutDurationProperty, value);
-            }
+            get { return (TimeSpan)base.GetValue(TimeoutDurationProperty); }
+            set { base.SetValue(TimeoutDurationProperty, value); }
         }
 
         [SRDescription(SR.IsolationLevelDescr)]
@@ -47,14 +58,8 @@ namespace System.Workflow.ComponentModel
         [MergableProperty(false)]
         public IsolationLevel IsolationLevel
         {
-            get
-            {
-                return (IsolationLevel)base.GetValue(IsolationLevelProperty);
-            }
-            set
-            {
-                base.SetValue(IsolationLevelProperty, value);
-            }
+            get { return (IsolationLevel)base.GetValue(IsolationLevelProperty); }
+            set { base.SetValue(IsolationLevelProperty, value); }
         }
     }
 
@@ -68,7 +73,12 @@ namespace System.Workflow.ComponentModel
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string) && value is TimeSpan)
             {
@@ -87,7 +97,11 @@ namespace System.Workflow.ComponentModel
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             TimeSpan parsedTimespan = TimeSpan.Zero;
             string timeSpan = value as string;
@@ -98,13 +112,18 @@ namespace System.Workflow.ComponentModel
                 {
                     parsedTimespan = TimeSpan.Parse(timeSpan, CultureInfo.InvariantCulture);
                 }
-                catch
-                {
-                }
+                catch { }
 
                 if (parsedTimespan.Ticks < 0)
                 {
-                    throw new Exception(string.Format(System.Globalization.CultureInfo.CurrentCulture, SR.GetString(SR.Error_NegativeValue), value.ToString(), "TimeoutDuration"));
+                    throw new Exception(
+                        string.Format(
+                            System.Globalization.CultureInfo.CurrentCulture,
+                            SR.GetString(SR.Error_NegativeValue),
+                            value.ToString(),
+                            "TimeoutDuration"
+                        )
+                    );
                 }
             }
 

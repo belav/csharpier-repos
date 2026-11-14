@@ -19,9 +19,8 @@ public class AntiforgeryMiddlewareTest
         antiforgeryService
             .Setup(af => af.ValidateRequestAsync(It.IsAny<HttpContext>()))
             .Returns(Task.FromResult(true));
-        var antiforgeryMiddleware = new AntiforgeryMiddleware(
-            antiforgeryService.Object,
-            hc => Task.CompletedTask
+        var antiforgeryMiddleware = new AntiforgeryMiddleware(antiforgeryService.Object, hc =>
+            Task.CompletedTask
         );
         var httpContext = GetHttpContext();
         httpContext.Request.Method = method;
@@ -39,9 +38,8 @@ public class AntiforgeryMiddlewareTest
     public async Task RespectsIgnoreAntiforgeryMetadata()
     {
         var antiforgeryService = new Mock<IAntiforgery>();
-        var antiforgeryMiddleware = new AntiforgeryMiddleware(
-            antiforgeryService.Object,
-            hc => Task.CompletedTask
+        var antiforgeryMiddleware = new AntiforgeryMiddleware(antiforgeryService.Object, hc =>
+            Task.CompletedTask
         );
         var httpContext = GetHttpContext(hasIgnoreMetadata: true);
 
@@ -63,9 +61,8 @@ public class AntiforgeryMiddlewareTest
     public async Task IgnoresUnsupportedHttpMethods(string method)
     {
         var antiforgeryService = new Mock<IAntiforgery>();
-        var antiforgeryMiddleware = new AntiforgeryMiddleware(
-            antiforgeryService.Object,
-            hc => Task.CompletedTask
+        var antiforgeryMiddleware = new AntiforgeryMiddleware(antiforgeryService.Object, hc =>
+            Task.CompletedTask
         );
         var httpContext = GetHttpContext();
         httpContext.Request.Method = method;
@@ -87,9 +84,8 @@ public class AntiforgeryMiddlewareTest
         antiforgeryService
             .Setup(af => af.ValidateRequestAsync(It.IsAny<HttpContext>()))
             .Returns(Task.FromResult(true));
-        var antiforgeryMiddleware = new AntiforgeryMiddleware(
-            antiforgeryService.Object,
-            hc => Task.CompletedTask
+        var antiforgeryMiddleware = new AntiforgeryMiddleware(antiforgeryService.Object, hc =>
+            Task.CompletedTask
         );
         var httpContext = GetHttpContext(hasIgnoreMetadata);
 

@@ -14,15 +14,24 @@ public class StaticReadonlyStructWithGC
         // Pre-initialize host type
         RuntimeHelpers.RunClassConstructor(typeof(StaticReadonlyStructWithGC).TypeHandle);
 
-        if (!Test1()) throw new Exception("Test1 failed");
-        if (!Test2()) throw new Exception("Test2 failed");
-        if (!Test3()) throw new Exception("Test3 failed");
-        if (!Test4()) throw new Exception("Test4 failed");
-        if (!Test5()) throw new Exception("Test5 failed");
-        if (!Test6()) throw new Exception("Test6 failed");
-        if (!Test7()) throw new Exception("Test7 failed");
-        if (!Test8()) throw new Exception("Test8 failed");
-        if (!Test9()) throw new Exception("Test9 failed");
+        if (!Test1())
+            throw new Exception("Test1 failed");
+        if (!Test2())
+            throw new Exception("Test2 failed");
+        if (!Test3())
+            throw new Exception("Test3 failed");
+        if (!Test4())
+            throw new Exception("Test4 failed");
+        if (!Test5())
+            throw new Exception("Test5 failed");
+        if (!Test6())
+            throw new Exception("Test6 failed");
+        if (!Test7())
+            throw new Exception("Test7 failed");
+        if (!Test8())
+            throw new Exception("Test8 failed");
+        if (!Test9())
+            throw new Exception("Test9 failed");
     }
 
     static readonly MyStruct MyStructFld = new()
@@ -34,18 +43,35 @@ public class StaticReadonlyStructWithGC
         E = () => 42,
         F = new MyStruct3 { A = typeof(double), B = typeof(string) },
         G = new int[0],
-        H = null
+        H = null,
     };
 
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test1() => MyStructFld.A == "A";
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test2() => MyStructFld.B == "111111";
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test3() => MyStructFld.C.A == "AA";
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test4() => MyStructFld.D == typeof(int);
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test5() => MyStructFld.E() == 42;
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test6() => MyStructFld.F.A == typeof(double);
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test7() => MyStructFld.F.B == typeof(string);
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test8() => MyStructFld.G.Length == 0;
-    [MethodImpl(MethodImplOptions.NoInlining)] static bool Test9() => MyStructFld.H == null;
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test1() => MyStructFld.A == "A";
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test2() => MyStructFld.B == "111111";
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test3() => MyStructFld.C.A == "AA";
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test4() => MyStructFld.D == typeof(int);
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test5() => MyStructFld.E() == 42;
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test6() => MyStructFld.F.A == typeof(double);
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test7() => MyStructFld.F.B == typeof(string);
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test8() => MyStructFld.G.Length == 0;
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static bool Test9() => MyStructFld.H == null;
 
     struct MyStruct
     {

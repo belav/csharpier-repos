@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </remarks>
     internal class RoslynDocumentSymbolParams : DocumentSymbolParams
     {
-        [JsonProperty(PropertyName = "useHierarchicalSymbols", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [JsonProperty(
+            PropertyName = "useHierarchicalSymbols",
+            DefaultValueHandling = DefaultValueHandling.Ignore
+        )]
         public bool UseHierarchicalSymbols { get; set; }
     }
 }

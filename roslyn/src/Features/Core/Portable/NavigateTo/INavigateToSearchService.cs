@@ -20,7 +20,8 @@ internal interface INavigateToSearchService : ILanguageService
         string searchPattern,
         IImmutableSet<string> kinds,
         Func<INavigateToSearchResult, Task> onResultFound,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Searches the documents inside <paramref name="projects"/> for symbols that matches <paramref
@@ -41,7 +42,8 @@ internal interface INavigateToSearchService : ILanguageService
         Document? activeDocument,
         Func<Project, INavigateToSearchResult, Task> onResultFound,
         Func<Task> onProjectCompleted,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 }
 
 /// <summary>
@@ -68,7 +70,8 @@ internal interface IAdvancedNavigateToSearchService : INavigateToSearchService
         Document? activeDocument,
         Func<Project, INavigateToSearchResult, Task> onResultFound,
         Func<Task> onProjectCompleted,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Searches the generated documents inside <paramref name="projects"/> for symbols that matches <paramref
@@ -86,5 +89,6 @@ internal interface IAdvancedNavigateToSearchService : INavigateToSearchService
         Document? activeDocument,
         Func<Project, INavigateToSearchResult, Task> onResultFound,
         Func<Task> onProjectCompleted,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 }

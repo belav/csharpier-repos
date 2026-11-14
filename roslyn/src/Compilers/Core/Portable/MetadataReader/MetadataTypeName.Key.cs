@@ -49,24 +49,23 @@ namespace Microsoft.CodeAnalysis
                         _typeName = mdTypeName._typeName;
                     }
 
-                    _useCLSCompliantNameArityEncoding = mdTypeName.UseCLSCompliantNameArityEncoding ? (byte)1 : (byte)0;
+                    _useCLSCompliantNameArityEncoding = mdTypeName.UseCLSCompliantNameArityEncoding
+                        ? (byte)1
+                        : (byte)0;
                     _forcedArity = mdTypeName._forcedArity;
                 }
             }
 
             private bool HasFullyQualifiedName
             {
-                get
-                {
-                    return _typeName == null;
-                }
+                get { return _typeName == null; }
             }
 
             public bool Equals(Key other)
             {
-                return _useCLSCompliantNameArityEncoding == other._useCLSCompliantNameArityEncoding &&
-                    _forcedArity == other._forcedArity &&
-                    EqualNames(ref other);
+                return _useCLSCompliantNameArityEncoding == other._useCLSCompliantNameArityEncoding
+                    && _forcedArity == other._forcedArity
+                    && EqualNames(ref other);
             }
 
             private bool EqualNames(ref Key other)
@@ -78,12 +77,20 @@ namespace Microsoft.CodeAnalysis
 
                 if (this.HasFullyQualifiedName)
                 {
-                    return MetadataHelpers.SplitNameEqualsFullyQualifiedName(other._namespaceOrFullyQualifiedName, other._typeName, _namespaceOrFullyQualifiedName);
+                    return MetadataHelpers.SplitNameEqualsFullyQualifiedName(
+                        other._namespaceOrFullyQualifiedName,
+                        other._typeName,
+                        _namespaceOrFullyQualifiedName
+                    );
                 }
 
                 if (other.HasFullyQualifiedName)
                 {
-                    return MetadataHelpers.SplitNameEqualsFullyQualifiedName(_namespaceOrFullyQualifiedName, _typeName, other._namespaceOrFullyQualifiedName);
+                    return MetadataHelpers.SplitNameEqualsFullyQualifiedName(
+                        _namespaceOrFullyQualifiedName,
+                        _typeName,
+                        other._namespaceOrFullyQualifiedName
+                    );
                 }
 
                 return false;
@@ -96,9 +103,10 @@ namespace Microsoft.CodeAnalysis
 
             public override int GetHashCode()
             {
-                return Hash.Combine(GetHashCodeName(),
-                       Hash.Combine(_useCLSCompliantNameArityEncoding != 0,
-                       _forcedArity));
+                return Hash.Combine(
+                    GetHashCodeName(),
+                    Hash.Combine(_useCLSCompliantNameArityEncoding != 0, _forcedArity)
+                );
             }
 
             private int GetHashCodeName()

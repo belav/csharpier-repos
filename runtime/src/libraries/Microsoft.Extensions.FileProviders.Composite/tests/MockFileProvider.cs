@@ -16,15 +16,16 @@ namespace Microsoft.Extensions.FileProviders.Composite
         {
             // Castle DynamicProxy hasn't been updated to ignore .net5 infrastructure attributes
             // and few tests here mock IEnumerable interface
-            Castle.DynamicProxy.Generators.AttributesToAvoidReplicating.Add(typeof(System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute));
+            Castle.DynamicProxy.Generators.AttributesToAvoidReplicating.Add(
+                typeof(System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute)
+            );
         }
 #endif
 
         private IEnumerable<IFileInfo> _files;
         private Dictionary<string, IChangeToken> _changeTokens;
 
-        public MockFileProvider()
-        {}
+        public MockFileProvider() { }
 
         public MockFileProvider(params IFileInfo[] files)
         {
@@ -36,7 +37,8 @@ namespace Microsoft.Extensions.FileProviders.Composite
             _changeTokens = changeTokens.ToDictionary(
                 changeToken => changeToken.Key,
                 changeToken => changeToken.Value,
-                StringComparer.Ordinal);
+                StringComparer.Ordinal
+            );
         }
 
         public IDirectoryContents GetDirectoryContents(string subpath)
@@ -50,7 +52,9 @@ namespace Microsoft.Extensions.FileProviders.Composite
                 return contents.Object;
             }
 
-            var filesInFolder = _files.Where(f => f.Name.StartsWith(subpath, StringComparison.Ordinal));
+            var filesInFolder = _files.Where(f =>
+                f.Name.StartsWith(subpath, StringComparison.Ordinal)
+            );
             if (filesInFolder.Any())
             {
                 contents.Setup(m => m.GetEnumerator()).Returns(filesInFolder.GetEnumerator());

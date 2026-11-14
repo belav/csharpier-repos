@@ -42,12 +42,19 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static CertificateTemplateAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static CertificateTemplateAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static CertificateTemplateAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static CertificateTemplateAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -68,7 +75,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Decode(ref reader, Asn1Tag.Sequence, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, out CertificateTemplateAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            out CertificateTemplateAsn decoded
+        )
         {
             try
             {
@@ -80,7 +91,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, out CertificateTemplateAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            out CertificateTemplateAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -92,10 +107,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer))
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer)
+            )
             {
-
                 if (sequenceReader.TryReadInt32(out int tmpTemplateMinorVersion))
                 {
                     decoded.TemplateMinorVersion = tmpTemplateMinorVersion;
@@ -104,9 +120,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 {
                     sequenceReader.ThrowIfNotEmpty();
                 }
-
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

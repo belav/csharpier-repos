@@ -19,19 +19,37 @@ namespace System.ServiceModel.Routing
             this.transactionFlowAttribute = new TransactionFlowAttribute(flowOption);
         }
 
-        void IOperationBehavior.AddBindingParameters(OperationDescription operationDescription, BindingParameterCollection bindingParameters)
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription operationDescription,
+            BindingParameterCollection bindingParameters
+        )
         {
-            ((IOperationBehavior)this.transactionFlowAttribute).AddBindingParameters(operationDescription, bindingParameters);
+            ((IOperationBehavior)this.transactionFlowAttribute).AddBindingParameters(
+                operationDescription,
+                bindingParameters
+            );
         }
 
-        void IOperationBehavior.ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation)
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription operationDescription,
+            ClientOperation clientOperation
+        )
         {
-            ((IOperationBehavior)this.transactionFlowAttribute).ApplyClientBehavior(operationDescription, clientOperation);
+            ((IOperationBehavior)this.transactionFlowAttribute).ApplyClientBehavior(
+                operationDescription,
+                clientOperation
+            );
         }
 
-        void IOperationBehavior.ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation)
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription operationDescription,
+            DispatchOperation dispatchOperation
+        )
         {
-            ((IOperationBehavior)this.transactionFlowAttribute).ApplyDispatchBehavior(operationDescription, dispatchOperation);
+            ((IOperationBehavior)this.transactionFlowAttribute).ApplyDispatchBehavior(
+                operationDescription,
+                dispatchOperation
+            );
         }
 
         void IOperationBehavior.Validate(OperationDescription operationDescription)

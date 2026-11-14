@@ -26,50 +26,46 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class TargetStartedEventArgs : BuildStatusEventArgs {
-	
-		string targetName;
-		string projectFile;
-		string targetFile;
-		
-		protected TargetStartedEventArgs ()
-		{
-		}
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class TargetStartedEventArgs : BuildStatusEventArgs
+    {
+        string targetName;
+        string projectFile;
+        string targetFile;
 
-		public TargetStartedEventArgs (string message,
-					       string helpKeyword,
-					       string targetName,
-					       string projectFile,
-					       string targetFile)
-			: base (message, helpKeyword, null)
-		{
-			this.targetName = targetName;
-			this.projectFile = projectFile;
-			this.targetFile = targetFile;
-		}
+        protected TargetStartedEventArgs() { }
 
-		public string ProjectFile {
-			get {
-				return projectFile;
-			}
-		}
+        public TargetStartedEventArgs(
+            string message,
+            string helpKeyword,
+            string targetName,
+            string projectFile,
+            string targetFile
+        )
+            : base(message, helpKeyword, null)
+        {
+            this.targetName = targetName;
+            this.projectFile = projectFile;
+            this.targetFile = targetFile;
+        }
 
-		public string TargetFile {
-			get {
-				return targetFile;
-			}
-		}
+        public string ProjectFile
+        {
+            get { return projectFile; }
+        }
 
-		public string TargetName {
-			get {
-				return targetName;
-			}
-		}
-	}
+        public string TargetFile
+        {
+            get { return targetFile; }
+        }
+
+        public string TargetName
+        {
+            get { return targetName; }
+        }
+    }
 }
-

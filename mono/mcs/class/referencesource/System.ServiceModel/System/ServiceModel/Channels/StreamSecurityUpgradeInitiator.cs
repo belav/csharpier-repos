@@ -8,15 +8,16 @@ namespace System.ServiceModel.Channels
 
     public abstract class StreamSecurityUpgradeInitiator : StreamUpgradeInitiator
     {
-        protected StreamSecurityUpgradeInitiator()
-        {
-        }
+        protected StreamSecurityUpgradeInitiator() { }
 
         public abstract SecurityMessageProperty GetRemoteSecurity(); // works after call to AcceptUpgrade
 
-        internal static SecurityMessageProperty GetRemoteSecurity(StreamUpgradeInitiator upgradeInitiator)
+        internal static SecurityMessageProperty GetRemoteSecurity(
+            StreamUpgradeInitiator upgradeInitiator
+        )
         {
-            StreamSecurityUpgradeInitiator securityInitiator = upgradeInitiator as StreamSecurityUpgradeInitiator;
+            StreamSecurityUpgradeInitiator securityInitiator =
+                upgradeInitiator as StreamSecurityUpgradeInitiator;
             if (securityInitiator != null)
             {
                 return securityInitiator.GetRemoteSecurity();

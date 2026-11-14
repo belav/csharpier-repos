@@ -6,46 +6,27 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data{
+namespace System.Data
+{
     using System;
 
-    public interface IDbCommand : IDisposable {
+    public interface IDbCommand : IDisposable
+    {
+        IDbConnection Connection { get; set; }
 
-        IDbConnection Connection {
-            get;
-            set;
-        }
+        IDbTransaction Transaction { get; set; }
 
-        IDbTransaction Transaction {
-            get;
-            set;
-        }
+        string CommandText { get; set; }
 
-        string CommandText {
-            get;
-            set;
-        }
+        int CommandTimeout { get; set; }
 
-        int CommandTimeout {
-            get;
-            set;
-        }
+        CommandType CommandType { get; set; }
 
-        CommandType CommandType {
-            get;
-            set;
-        }
-
-        IDataParameterCollection Parameters {
-            get;
-        }
+        IDataParameterCollection Parameters { get; }
 
         void Prepare();
-         
-        UpdateRowSource UpdatedRowSource {
-            get;
-            set;
-        }
+
+        UpdateRowSource UpdatedRowSource { get; set; }
 
         void Cancel();
 
@@ -60,4 +41,3 @@ namespace System.Data{
         object ExecuteScalar();
     }
 }
-

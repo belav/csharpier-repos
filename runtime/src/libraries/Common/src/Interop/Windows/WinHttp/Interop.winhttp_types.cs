@@ -3,10 +3,10 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 #if NET7_0_OR_GREATER
 using System.Runtime.InteropServices.Marshalling;
 #endif
-using System.Text;
 
 internal static partial class Interop
 {
@@ -82,7 +82,8 @@ internal static partial class Interop
         public const uint WINHTTP_OPTION_DECOMPRESSION = 118;
         public const uint WINHTTP_DECOMPRESSION_FLAG_GZIP = 0x00000001;
         public const uint WINHTTP_DECOMPRESSION_FLAG_DEFLATE = 0x00000002;
-        public const uint WINHTTP_DECOMPRESSION_FLAG_ALL = WINHTTP_DECOMPRESSION_FLAG_GZIP | WINHTTP_DECOMPRESSION_FLAG_DEFLATE;
+        public const uint WINHTTP_DECOMPRESSION_FLAG_ALL =
+            WINHTTP_DECOMPRESSION_FLAG_GZIP | WINHTTP_DECOMPRESSION_FLAG_DEFLATE;
 
         public const uint WINHTTP_OPTION_REDIRECT_POLICY = 88;
         public const uint WINHTTP_OPTION_REDIRECT_POLICY_NEVER = 0;
@@ -134,9 +135,11 @@ internal static partial class Interop
         public const uint WINHTTP_AUTH_TARGET_PROXY = 0x00000001;
 
         public const uint WINHTTP_OPTION_USERNAME = 0x1000;
+
         // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. It is property descriptor, not secret value.")]
         public const uint WINHTTP_OPTION_PASSWORD = 0x1001;
         public const uint WINHTTP_OPTION_PROXY_USERNAME = 0x1002;
+
         // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. It is property descriptor, not secret value.")]
         public const uint WINHTTP_OPTION_PROXY_PASSWORD = 0x1003;
 
@@ -179,7 +182,7 @@ internal static partial class Interop
             WINHTTP_WEB_SOCKET_BINARY_FRAGMENT_BUFFER_TYPE = 1,
             WINHTTP_WEB_SOCKET_UTF8_MESSAGE_BUFFER_TYPE = 2,
             WINHTTP_WEB_SOCKET_UTF8_FRAGMENT_BUFFER_TYPE = 3,
-            WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE = 4
+            WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE = 4,
         }
 
         public const uint WINHTTP_OPTION_CONTEXT_VALUE = 45;
@@ -213,28 +216,34 @@ internal static partial class Interop
         public const uint WINHTTP_CALLBACK_STATUS_SHUTDOWN_COMPLETE = 0x04000000;
 
         public const uint WINHTTP_CALLBACK_FLAG_SEND_REQUEST =
-            WINHTTP_CALLBACK_STATUS_SENDING_REQUEST |
-            WINHTTP_CALLBACK_STATUS_REQUEST_SENT;
+            WINHTTP_CALLBACK_STATUS_SENDING_REQUEST | WINHTTP_CALLBACK_STATUS_REQUEST_SENT;
         public const uint WINHTTP_CALLBACK_FLAG_HANDLES =
-            WINHTTP_CALLBACK_STATUS_HANDLE_CREATED |
-            WINHTTP_CALLBACK_STATUS_HANDLE_CLOSING;
+            WINHTTP_CALLBACK_STATUS_HANDLE_CREATED | WINHTTP_CALLBACK_STATUS_HANDLE_CLOSING;
         public const uint WINHTTP_CALLBACK_FLAG_REDIRECT = WINHTTP_CALLBACK_STATUS_REDIRECT;
-        public const uint WINHTTP_CALLBACK_FLAG_SECURE_FAILURE = WINHTTP_CALLBACK_STATUS_SECURE_FAILURE;
-        public const uint WINHTTP_CALLBACK_FLAG_SENDREQUEST_COMPLETE = WINHTTP_CALLBACK_STATUS_SENDREQUEST_COMPLETE;
-        public const uint WINHTTP_CALLBACK_FLAG_HEADERS_AVAILABLE = WINHTTP_CALLBACK_STATUS_HEADERS_AVAILABLE;
-        public const uint WINHTTP_CALLBACK_FLAG_DATA_AVAILABLE = WINHTTP_CALLBACK_STATUS_DATA_AVAILABLE;
-        public const uint WINHTTP_CALLBACK_FLAG_READ_COMPLETE = WINHTTP_CALLBACK_STATUS_READ_COMPLETE;
-        public const uint WINHTTP_CALLBACK_FLAG_WRITE_COMPLETE = WINHTTP_CALLBACK_STATUS_WRITE_COMPLETE;
-        public const uint WINHTTP_CALLBACK_FLAG_REQUEST_ERROR = WINHTTP_CALLBACK_STATUS_REQUEST_ERROR;
-        public const uint WINHTTP_CALLBACK_FLAG_GETPROXYFORURL_COMPLETE = WINHTTP_CALLBACK_STATUS_GETPROXYFORURL_COMPLETE;
-        public const uint WINHTTP_CALLBACK_FLAG_ALL_COMPLETIONS =
-            WINHTTP_CALLBACK_STATUS_SENDREQUEST_COMPLETE |
-            WINHTTP_CALLBACK_STATUS_HEADERS_AVAILABLE |
-            WINHTTP_CALLBACK_STATUS_DATA_AVAILABLE |
-            WINHTTP_CALLBACK_STATUS_READ_COMPLETE |
-            WINHTTP_CALLBACK_STATUS_WRITE_COMPLETE |
-            WINHTTP_CALLBACK_STATUS_REQUEST_ERROR |
+        public const uint WINHTTP_CALLBACK_FLAG_SECURE_FAILURE =
+            WINHTTP_CALLBACK_STATUS_SECURE_FAILURE;
+        public const uint WINHTTP_CALLBACK_FLAG_SENDREQUEST_COMPLETE =
+            WINHTTP_CALLBACK_STATUS_SENDREQUEST_COMPLETE;
+        public const uint WINHTTP_CALLBACK_FLAG_HEADERS_AVAILABLE =
+            WINHTTP_CALLBACK_STATUS_HEADERS_AVAILABLE;
+        public const uint WINHTTP_CALLBACK_FLAG_DATA_AVAILABLE =
+            WINHTTP_CALLBACK_STATUS_DATA_AVAILABLE;
+        public const uint WINHTTP_CALLBACK_FLAG_READ_COMPLETE =
+            WINHTTP_CALLBACK_STATUS_READ_COMPLETE;
+        public const uint WINHTTP_CALLBACK_FLAG_WRITE_COMPLETE =
+            WINHTTP_CALLBACK_STATUS_WRITE_COMPLETE;
+        public const uint WINHTTP_CALLBACK_FLAG_REQUEST_ERROR =
+            WINHTTP_CALLBACK_STATUS_REQUEST_ERROR;
+        public const uint WINHTTP_CALLBACK_FLAG_GETPROXYFORURL_COMPLETE =
             WINHTTP_CALLBACK_STATUS_GETPROXYFORURL_COMPLETE;
+        public const uint WINHTTP_CALLBACK_FLAG_ALL_COMPLETIONS =
+            WINHTTP_CALLBACK_STATUS_SENDREQUEST_COMPLETE
+            | WINHTTP_CALLBACK_STATUS_HEADERS_AVAILABLE
+            | WINHTTP_CALLBACK_STATUS_DATA_AVAILABLE
+            | WINHTTP_CALLBACK_STATUS_READ_COMPLETE
+            | WINHTTP_CALLBACK_STATUS_WRITE_COMPLETE
+            | WINHTTP_CALLBACK_STATUS_REQUEST_ERROR
+            | WINHTTP_CALLBACK_STATUS_GETPROXYFORURL_COMPLETE;
         public const uint WINHTTP_CALLBACK_FLAG_ALL_NOTIFICATIONS = 0xFFFFFFFF;
 
         public const uint WININET_E_CONNECTION_RESET = 0x80072EFF;
@@ -245,7 +254,8 @@ internal static partial class Interop
             IntPtr context,
             uint internetStatus,
             IntPtr statusInformation,
-            uint statusInformationLength);
+            uint statusInformationLength
+        );
 
 #if NET7_0_OR_GREATER
         [NativeMarshalling(typeof(Marshaller))]
@@ -255,19 +265,28 @@ internal static partial class Interop
         {
             public uint Flags;
             public uint AutoDetectFlags;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string? AutoConfigUrl;
             public IntPtr Reserved1;
             public uint Reserved2;
+
             [MarshalAs(UnmanagedType.Bool)]
             public bool AutoLoginIfChallenged;
+
 #if NET7_0_OR_GREATER
-            [CustomMarshaller(typeof(WINHTTP_AUTOPROXY_OPTIONS), MarshalMode.Default, typeof(Marshaller))]
+            [CustomMarshaller(
+                typeof(WINHTTP_AUTOPROXY_OPTIONS),
+                MarshalMode.Default,
+                typeof(Marshaller)
+            )]
             public static class Marshaller
             {
-                public static Native ConvertToUnmanaged(WINHTTP_AUTOPROXY_OPTIONS managed) => new(managed);
+                public static Native ConvertToUnmanaged(WINHTTP_AUTOPROXY_OPTIONS managed) =>
+                    new(managed);
 
-                public static WINHTTP_AUTOPROXY_OPTIONS ConvertToManaged(Native native) => native.ToManaged();
+                public static WINHTTP_AUTOPROXY_OPTIONS ConvertToManaged(Native native) =>
+                    native.ToManaged();
 
                 public static void Free(Native native) => native.FreeNative();
 
@@ -284,7 +303,9 @@ internal static partial class Interop
                     {
                         Flags = managed.Flags;
                         AutoDetectFlags = managed.AutoDetectFlags;
-                        AutoConfigUrl = managed.AutoConfigUrl is not null ? Marshal.StringToCoTaskMemUni(managed.AutoConfigUrl) : IntPtr.Zero;
+                        AutoConfigUrl = managed.AutoConfigUrl is not null
+                            ? Marshal.StringToCoTaskMemUni(managed.AutoConfigUrl)
+                            : IntPtr.Zero;
                         Reserved1 = managed.Reserved1;
                         Reserved2 = managed.Reserved2;
                         AutoLoginIfChallenged = managed.AutoLoginIfChallenged ? 1 : 0;
@@ -296,10 +317,13 @@ internal static partial class Interop
                         {
                             Flags = Flags,
                             AutoDetectFlags = AutoDetectFlags,
-                            AutoConfigUrl = AutoConfigUrl != IntPtr.Zero ? Marshal.PtrToStringUni(AutoConfigUrl) : null,
+                            AutoConfigUrl =
+                                AutoConfigUrl != IntPtr.Zero
+                                    ? Marshal.PtrToStringUni(AutoConfigUrl)
+                                    : null,
                             Reserved1 = Reserved1,
                             Reserved2 = Reserved2,
-                            AutoLoginIfChallenged = AutoLoginIfChallenged != 0
+                            AutoLoginIfChallenged = AutoLoginIfChallenged != 0,
                         };
                     }
 
@@ -336,7 +360,6 @@ internal static partial class Interop
             public uint dwError;
         }
 
-
         [StructLayout(LayoutKind.Sequential)]
         public struct tcp_keepalive
         {
@@ -356,7 +379,7 @@ internal static partial class Interop
             WINHTTP_WEB_SOCKET_SEND_OPERATION = 0,
             WINHTTP_WEB_SOCKET_RECEIVE_OPERATION = 1,
             WINHTTP_WEB_SOCKET_CLOSE_OPERATION = 2,
-            WINHTTP_WEB_SOCKET_SHUTDOWN_OPERATION = 3
+            WINHTTP_WEB_SOCKET_SHUTDOWN_OPERATION = 3,
         }
     }
 }

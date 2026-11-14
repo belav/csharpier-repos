@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,56 +35,58 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-	[XmlSchemaProvider ("GetSchema")]
-	public class EndpointDiscoveryMetadata11 : IXmlSerializable
-	{
-		public static EndpointDiscoveryMetadata11 FromEndpointDiscoveryMetadata (EndpointDiscoveryMetadata endpointDiscoveryMetadata)
-		{
-			return new EndpointDiscoveryMetadata11 (endpointDiscoveryMetadata);
-		}
+    [XmlSchemaProvider("GetSchema")]
+    public class EndpointDiscoveryMetadata11 : IXmlSerializable
+    {
+        public static EndpointDiscoveryMetadata11 FromEndpointDiscoveryMetadata(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata
+        )
+        {
+            return new EndpointDiscoveryMetadata11(endpointDiscoveryMetadata);
+        }
 
-		public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
-		{
-			EndpointAddress10.GetSchema (schemaSet);
-			schemaSet.Add (schema);
-			return new XmlQualifiedName ("ProbeMatchType", version.Namespace);
-		}
+        public static XmlQualifiedName GetSchema(XmlSchemaSet schemaSet)
+        {
+            EndpointAddress10.GetSchema(schemaSet);
+            schemaSet.Add(schema);
+            return new XmlQualifiedName("ProbeMatchType", version.Namespace);
+        }
 
-		static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
-		static readonly XmlSchema schema = EndpointDiscoveryMetadata.BuildSchema (version);
+        static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
+        static readonly XmlSchema schema = EndpointDiscoveryMetadata.BuildSchema(version);
 
-		// for deserialization use
-		EndpointDiscoveryMetadata11 ()
-		{
-		}
+        // for deserialization use
+        EndpointDiscoveryMetadata11() { }
 
-		internal EndpointDiscoveryMetadata11 (EndpointDiscoveryMetadata source)
-		{
-			this.source = source;
-		}
-		
-		EndpointDiscoveryMetadata source;
+        internal EndpointDiscoveryMetadata11(EndpointDiscoveryMetadata source)
+        {
+            this.source = source;
+        }
 
-		public XmlSchema GetSchema ()
-		{
-			return null;
-		}
+        EndpointDiscoveryMetadata source;
 
-		public void ReadXml (XmlReader reader)
-		{
-			source = EndpointDiscoveryMetadata.ReadXml (reader, version);
-		}
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
 
-		public EndpointDiscoveryMetadata ToEndpointDiscoveryMetadata ()
-		{
-			if (source == null)
-				throw new InvalidOperationException ("Call ReadXml method first before calling this method");
-			return source;
-		}
+        public void ReadXml(XmlReader reader)
+        {
+            source = EndpointDiscoveryMetadata.ReadXml(reader, version);
+        }
 
-		public void WriteXml (XmlWriter writer)
-		{
-			source.WriteXml (writer, version);
-		}
-	}
+        public EndpointDiscoveryMetadata ToEndpointDiscoveryMetadata()
+        {
+            if (source == null)
+                throw new InvalidOperationException(
+                    "Call ReadXml method first before calling this method"
+                );
+            return source;
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            source.WriteXml(writer, version);
+        }
+    }
 }

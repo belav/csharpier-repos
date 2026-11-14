@@ -26,9 +26,7 @@ namespace System.IdentityModel.Claims
         bool disposed = false;
 
         public X509CertificateClaimSet(X509Certificate2 certificate)
-            : this(certificate, true)
-        {
-        }
+            : this(certificate, true) { }
 
         internal X509CertificateClaimSet(X509Certificate2 certificate, bool clone)
         {
@@ -38,9 +36,7 @@ namespace System.IdentityModel.Claims
         }
 
         X509CertificateClaimSet(X509CertificateClaimSet from)
-            : this(from.X509Certificate, true)
-        {
-        }
+            : this(from.X509Certificate, true) { }
 
         X509CertificateClaimSet(X509ChainElementCollection elements, int index)
         {
@@ -113,11 +109,17 @@ namespace System.IdentityModel.Claims
                         this.elements = null;
                     }
                     // SelfSigned?
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(this.certificate.SubjectName.Name, this.certificate.IssuerName.Name))
+                    else if (
+                        StringComparer.OrdinalIgnoreCase.Equals(
+                            this.certificate.SubjectName.Name,
+                            this.certificate.IssuerName.Name
+                        )
+                    )
                         this.issuer = this;
                     else
-                        this.issuer = new X500DistinguishedNameClaimSet(this.certificate.IssuerName);
-
+                        this.issuer = new X500DistinguishedNameClaimSet(
+                            this.certificate.IssuerName
+                        );
                 }
                 return this.issuer;
             }
@@ -217,15 +219,15 @@ namespace System.IdentityModel.Claims
 
         static bool SupportedClaimType(string claimType)
         {
-            return claimType == null ||
-                ClaimTypes.Thumbprint.Equals(claimType) ||
-                ClaimTypes.X500DistinguishedName.Equals(claimType) ||
-                ClaimTypes.Dns.Equals(claimType) ||
-                ClaimTypes.Name.Equals(claimType) ||
-                ClaimTypes.Email.Equals(claimType) ||
-                ClaimTypes.Upn.Equals(claimType) ||
-                ClaimTypes.Uri.Equals(claimType) ||
-                ClaimTypes.Rsa.Equals(claimType);
+            return claimType == null
+                || ClaimTypes.Thumbprint.Equals(claimType)
+                || ClaimTypes.X500DistinguishedName.Equals(claimType)
+                || ClaimTypes.Dns.Equals(claimType)
+                || ClaimTypes.Name.Equals(claimType)
+                || ClaimTypes.Email.Equals(claimType)
+                || ClaimTypes.Upn.Equals(claimType)
+                || ClaimTypes.Uri.Equals(claimType)
+                || ClaimTypes.Rsa.Equals(claimType);
         }
 
         // Note: null string represents any.
@@ -240,11 +242,19 @@ namespace System.IdentityModel.Claims
             {
                 if (right == null || Rights.Identity.Equals(right))
                 {
-                    yield return new Claim(ClaimTypes.Thumbprint, this.certificate.GetCertHash(), Rights.Identity);
+                    yield return new Claim(
+                        ClaimTypes.Thumbprint,
+                        this.certificate.GetCertHash(),
+                        Rights.Identity
+                    );
                 }
                 if (right == null || Rights.PossessProperty.Equals(right))
                 {
-                    yield return new Claim(ClaimTypes.Thumbprint, this.certificate.GetCertHash(), Rights.PossessProperty);
+                    yield return new Claim(
+                        ClaimTypes.Thumbprint,
+                        this.certificate.GetCertHash(),
+                        Rights.PossessProperty
+                    );
                 }
             }
             else if (this.claims == null && ClaimTypes.Dns.Equals(claimType))
@@ -265,9 +275,11 @@ namespace System.IdentityModel.Claims
                 for (int i = 0; i < this.claims.Count; ++i)
                 {
                     Claim claim = this.claims[i];
-                    if ((claim != null) &&
-                        (anyClaimType || claimType.Equals(claim.ClaimType)) &&
-                        (anyRight || right.Equals(claim.Right)))
+                    if (
+                        (claim != null)
+                        && (anyClaimType || claimType.Equals(claim.ClaimType))
+                        && (anyRight || right.Equals(claim.Right))
+                    )
                     {
                         yield return claim;
                     }
@@ -287,25 +299,40 @@ namespace System.IdentityModel.Claims
             // App context switch for disabling support for multiple dns entries in a SAN certificate
             // If we can't dynamically parse the alt subject names, we will not add any dns claims ONLY for the alt subject names.
             // In this way, if the X509NameType.DnsName was enough to succeed for the out-bound-message. We would have a success.
-            if (!LocalAppContextSwitches.DisableMultipleDNSEntriesInSANCertificate && X509SubjectAlternativeNameConstants.SuccessfullyInitialized)
+            if (
+                !LocalAppContextSwitches.DisableMultipleDNSEntriesInSANCertificate
+                && X509SubjectAlternativeNameConstants.SuccessfullyInitialized
+            )
             {
                 foreach (X509Extension ext in cert.Extensions)
                 {
                     // Extension is SAN or SAN2
-                    if (ext.Oid.Value == X509SubjectAlternativeNameConstants.SanOid || ext.Oid.Value == X509SubjectAlternativeNameConstants.San2Oid)
+                    if (
+                        ext.Oid.Value == X509SubjectAlternativeNameConstants.SanOid
+                        || ext.Oid.Value == X509SubjectAlternativeNameConstants.San2Oid
+                    )
                     {
                         string asnString = ext.Format(false);
                         if (string.IsNullOrWhiteSpace(asnString))
                             break;
 
-                        // SubjectAlternativeNames might contain something other than a dNSName, 
+                        // SubjectAlternativeNames might contain something other than a dNSName,
                         // so we have to parse through and only use the dNSNames
                         // <identifier><delimiter><value><separator(s)>
-                        string[] rawDnsEntries = asnString.Split(X509SubjectAlternativeNameConstants.SeparatorArray, StringSplitOptions.RemoveEmptyEntries);
+                        string[] rawDnsEntries = asnString.Split(
+                            X509SubjectAlternativeNameConstants.SeparatorArray,
+                            StringSplitOptions.RemoveEmptyEntries
+                        );
                         for (int i = 0; i < rawDnsEntries.Length; i++)
                         {
-                            string[] keyval = rawDnsEntries[i].Split(X509SubjectAlternativeNameConstants.Delimiter);
-                            if (string.Equals(keyval[0], X509SubjectAlternativeNameConstants.Identifier))
+                            string[] keyval = rawDnsEntries[i]
+                                .Split(X509SubjectAlternativeNameConstants.Delimiter);
+                            if (
+                                string.Equals(
+                                    keyval[0],
+                                    X509SubjectAlternativeNameConstants.Identifier
+                                )
+                            )
                                 dnsClaimEntries.Add(Claim.CreateDnsClaim(keyval[1]));
                         }
                     }
@@ -331,7 +358,9 @@ namespace System.IdentityModel.Claims
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
         }
 
@@ -342,11 +371,19 @@ namespace System.IdentityModel.Claims
             public X500DistinguishedNameClaimSet(X500DistinguishedName x500DistinguishedName)
             {
                 if (x500DistinguishedName == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("x500DistinguishedName");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "x500DistinguishedName"
+                    );
 
                 this.identity = new X509Identity(x500DistinguishedName);
                 List<Claim> claims = new List<Claim>(2);
-                claims.Add(new Claim(ClaimTypes.X500DistinguishedName, x500DistinguishedName, Rights.Identity));
+                claims.Add(
+                    new Claim(
+                        ClaimTypes.X500DistinguishedName,
+                        x500DistinguishedName,
+                        Rights.Identity
+                    )
+                );
                 claims.Add(Claim.CreateX500DistinguishedNameClaim(x500DistinguishedName));
                 Initialize(ClaimSet.Anonymous, claims);
             }
@@ -357,56 +394,77 @@ namespace System.IdentityModel.Claims
             }
         }
 
-        // We don't have a strongly typed extension to parse Subject Alt Names, so we have to do a workaround 
+        // We don't have a strongly typed extension to parse Subject Alt Names, so we have to do a workaround
         // to figure out what the identifier, delimiter, and separator is by using a well-known extension
         private static class X509SubjectAlternativeNameConstants
         {
             public const string SanOid = "2.5.29.7";
             public const string San2Oid = "2.5.29.17";
 
-            public static string Identifier
-            {
-                get;
-                private set;
-            }
+            public static string Identifier { get; private set; }
 
-            public static char Delimiter
-            {
-                get;
-                private set;
-            }
+            public static char Delimiter { get; private set; }
 
-            public static string Separator
-            {
-                get;
-                private set;
-            }
+            public static string Separator { get; private set; }
 
-            public static string[] SeparatorArray
-            {
-                get;
-                private set;
-            }
+            public static string[] SeparatorArray { get; private set; }
 
-            public static bool SuccessfullyInitialized
-            {
-                get;
-                private set;
-            }
+            public static bool SuccessfullyInitialized { get; private set; }
 
             // static initializer will run before properties are accessed
             static X509SubjectAlternativeNameConstants()
             {
                 // Extracted a well-known X509Extension
-                byte[] x509ExtensionBytes = new byte[] {
-                    48, 36, 130, 21, 110, 111, 116, 45, 114, 101, 97, 108, 45, 115, 117, 98, 106, 101, 99,
-                    116, 45, 110, 97, 109, 101, 130, 11, 101, 120, 97, 109, 112, 108, 101, 46, 99, 111, 109
+                byte[] x509ExtensionBytes = new byte[]
+                {
+                    48,
+                    36,
+                    130,
+                    21,
+                    110,
+                    111,
+                    116,
+                    45,
+                    114,
+                    101,
+                    97,
+                    108,
+                    45,
+                    115,
+                    117,
+                    98,
+                    106,
+                    101,
+                    99,
+                    116,
+                    45,
+                    110,
+                    97,
+                    109,
+                    101,
+                    130,
+                    11,
+                    101,
+                    120,
+                    97,
+                    109,
+                    112,
+                    108,
+                    101,
+                    46,
+                    99,
+                    111,
+                    109,
                 };
                 const string subjectName = "not-real-subject-name";
                 string x509ExtensionFormattedString = string.Empty;
                 try
                 {
-                    X509Extension x509Extension = new X509Extension(SanOid, x509ExtensionBytes, true);
+                    X509Extension x509Extension = new X509Extension(
+                        SanOid,
+                        x509ExtensionBytes,
+                        true
+                    );
                     x509ExtensionFormattedString = x509Extension.Format(false);
 
                     // Each OS has a different dNSName identifier and delimiter
@@ -419,13 +477,17 @@ namespace System.IdentityModel.Claims
                     int delimiterIndex = x509ExtensionFormattedString.IndexOf(subjectName) - 1;
                     Delimiter = x509ExtensionFormattedString[delimiterIndex];
 
-                    // Make an assumption that all characters from the the start of string to the delimiter 
+                    // Make an assumption that all characters from the the start of string to the delimiter
                     // are part of the identifier
                     Identifier = x509ExtensionFormattedString.Substring(0, delimiterIndex);
 
                     int separatorFirstChar = delimiterIndex + subjectName.Length + 1;
                     int separatorLength = 1;
-                    for (int i = separatorFirstChar + 1; i < x509ExtensionFormattedString.Length; i++)
+                    for (
+                        int i = separatorFirstChar + 1;
+                        i < x509ExtensionFormattedString.Length;
+                        i++
+                    )
                     {
                         // We advance until the first character of the identifier to determine what the
                         // separator is. This assumes that the identifier assumption above is correct
@@ -437,23 +499,31 @@ namespace System.IdentityModel.Claims
                         separatorLength++;
                     }
 
-                    Separator = x509ExtensionFormattedString.Substring(separatorFirstChar, separatorLength);
+                    Separator = x509ExtensionFormattedString.Substring(
+                        separatorFirstChar,
+                        separatorLength
+                    );
                     SeparatorArray = new string[1] { Separator };
                     SuccessfullyInitialized = true;
                 }
                 catch (Exception ex)
                 {
-                    SuccessfullyInitialized = false;                    
+                    SuccessfullyInitialized = false;
                     DiagnosticUtility.TraceHandledException(
-                        new FormatException(string.Format(CultureInfo.InvariantCulture,
-                        "There was an error parsing the SubjectAlternativeNames: '{0}'. See inner exception for more details.{1}Detected values were: Identifier: '{2}'; Delimiter:'{3}'; Separator:'{4}'",
-                        x509ExtensionFormattedString,
-                        Environment.NewLine,
-                        Identifier,
-                        Delimiter,
-                        Separator),
-                        ex), 
-                        TraceEventType.Warning);
+                        new FormatException(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "There was an error parsing the SubjectAlternativeNames: '{0}'. See inner exception for more details.{1}Detected values were: Identifier: '{2}'; Delimiter:'{3}'; Separator:'{4}'",
+                                x509ExtensionFormattedString,
+                                Environment.NewLine,
+                                Identifier,
+                                Delimiter,
+                                Separator
+                            ),
+                            ex
+                        ),
+                        TraceEventType.Warning
+                    );
                 }
             }
         }
@@ -470,9 +540,7 @@ namespace System.IdentityModel.Claims
         bool disposable = true;
 
         public X509Identity(X509Certificate2 certificate)
-            : this(certificate, true, true)
-        {
-        }
+            : this(certificate, true, true) { }
 
         public X509Identity(X500DistinguishedName x500DistinguishedName)
             : base(X509, X509)
@@ -535,7 +603,9 @@ namespace System.IdentityModel.Claims
 
         public override ClaimsIdentity Clone()
         {
-            return this.certificate != null ? new X509Identity(this.certificate) : new X509Identity(this.x500DistinguishedName);
+            return this.certificate != null
+                ? new X509Identity(this.certificate)
+                : new X509Identity(this.x500DistinguishedName);
         }
 
         public void Dispose()
@@ -554,7 +624,9 @@ namespace System.IdentityModel.Claims
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
         }
     }

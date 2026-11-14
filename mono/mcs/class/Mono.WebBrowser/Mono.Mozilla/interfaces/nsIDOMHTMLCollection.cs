@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,41 +26,45 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("a6cf9083-15b3-11d2-932e-00805f8add32")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMHTMLCollection
+    {
+        #region nsIDOMHTMLCollection
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLength(out uint ret);
 
-	[Guid ("a6cf9083-15b3-11d2-932e-00805f8add32")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMHTMLCollection {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int item(uint index, [MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret);
 
-#region nsIDOMHTMLCollection
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLength ( out uint ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int namedItem(
+            /*DOMString*/HandleRef name,
+            [MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int item (
-				   uint index,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int namedItem (
-				   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
-
-#endregion
-	}
-
-
-	internal class nsDOMHTMLCollection {
-		public static nsIDOMHTMLCollection GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMHTMLCollection obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMHTMLCollection).GUID, obj);
-			return o as nsIDOMHTMLCollection;
-		}
-	}
+    internal class nsDOMHTMLCollection
+    {
+        public static nsIDOMHTMLCollection GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMHTMLCollection obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMHTMLCollection).GUID, obj);
+            return o as nsIDOMHTMLCollection;
+        }
+    }
 }

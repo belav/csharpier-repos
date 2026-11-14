@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,39 +27,39 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Security.Permissions;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
 
-namespace System.Reflection {
+namespace System.Reflection
+{
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    partial class Module
+    {
+        internal Guid MvId
+        {
+            get { return GetModuleVersionId(); }
+        }
 
-	[Serializable]
-	[StructLayout (LayoutKind.Sequential)]
-	partial class Module {
-		internal Guid MvId {
-			get {
-				return GetModuleVersionId ();
-			}
-		}
+        // Used by mcs, the symbol writer, and mdb through reflection
+        internal static Guid Mono_GetGuid(Module module)
+        {
+            return module.GetModuleVersionId();
+        }
 
-		// Used by mcs, the symbol writer, and mdb through reflection
-		internal static Guid Mono_GetGuid (Module module)
-		{
-			return module.GetModuleVersionId ();
-		}
+        internal virtual Guid GetModuleVersionId()
+        {
+            throw new NotImplementedException();
+        }
 
-		internal virtual Guid GetModuleVersionId ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public virtual X509Certificate GetSignerCertificate ()
-		{
-			throw NotImplemented.ByDesign;
-		}
-	}
+        public virtual X509Certificate GetSignerCertificate()
+        {
+            throw NotImplemented.ByDesign;
+        }
+    }
 }

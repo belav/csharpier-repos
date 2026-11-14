@@ -11,7 +11,9 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void SafeHandle_NotIsInvalid()
         {
-            using (var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
+            using (
+                var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
+            )
             {
                 Assert.False(s.SafeHandle.IsInvalid);
             }
@@ -29,9 +31,9 @@ namespace System.Net.Sockets.Tests
         }
 
         private static SafeSocketHandle Socket(int af, int type, int protocol) =>
-            OperatingSystem.IsWindows() ?
-                SocketWindows(af, type, protocol) :
-                SocketUnix(af, type, protocol);
+            OperatingSystem.IsWindows()
+                ? SocketWindows(af, type, protocol)
+                : SocketUnix(af, type, protocol);
 
         [DllImport("ws2_32.dll", EntryPoint = "socket")]
         private static extern SafeSocketHandle SocketWindows(int af, int type, int protocol);

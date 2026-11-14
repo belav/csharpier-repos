@@ -12,38 +12,54 @@ namespace System.ServiceModel.Channels
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class HttpCookieContainerBindingElement : BindingElement
     {
-        [Obsolete(HttpChannelUtilities.ObsoleteDescriptionStrings.TypeObsoleteUseAllowCookies, false)]
+        [Obsolete(
+            HttpChannelUtilities.ObsoleteDescriptionStrings.TypeObsoleteUseAllowCookies,
+            false
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public HttpCookieContainerBindingElement() 
-        { 
-        }
+        public HttpCookieContainerBindingElement() { }
 
-        [Obsolete(HttpChannelUtilities.ObsoleteDescriptionStrings.TypeObsoleteUseAllowCookies, false)]
+        [Obsolete(
+            HttpChannelUtilities.ObsoleteDescriptionStrings.TypeObsoleteUseAllowCookies,
+            false
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected HttpCookieContainerBindingElement(HttpCookieContainerBindingElement elementToBeCloned) : base(elementToBeCloned)
-        {
-        }
+        protected HttpCookieContainerBindingElement(
+            HttpCookieContainerBindingElement elementToBeCloned
+        )
+            : base(elementToBeCloned) { }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override BindingElement Clone()
-        { 
-            return new HttpCookieContainerBindingElement(this); 
+        {
+            return new HttpCookieContainerBindingElement(this);
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
             }
 
-            if (!context.Binding.Scheme.Equals("http", StringComparison.OrdinalIgnoreCase) &&
-                !context.Binding.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
+            if (
+                !context.Binding.Scheme.Equals("http", StringComparison.OrdinalIgnoreCase)
+                && !context.Binding.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                        SR.GetString(SR.CookieContainerBindingElementNeedsHttp, typeof(HttpCookieContainerBindingElement))));
+                        SR.GetString(
+                            SR.CookieContainerBindingElementNeedsHttp,
+                            typeof(HttpCookieContainerBindingElement)
+                        )
+                    )
+                );
             }
 
 #pragma warning suppress 56506 // BindingContext.BindingParameters should never be null

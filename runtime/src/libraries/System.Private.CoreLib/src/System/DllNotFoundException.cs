@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when a DLL specified in a DLL import cannot be found.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class DllNotFoundException : TypeLoadException
     {
         public DllNotFoundException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_DLLNOTFOUND;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected DllNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected DllNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Threading.Channels;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Channels;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
 #nullable enable
@@ -33,19 +33,23 @@ internal sealed class RunLoop : IDisposable
         foreach (DevToolsQueue q in queues)
         {
             if (q.Connection.OnReadAsync is null)
-                throw new ArgumentException($"Queue's({q.Id}) connection doesn't have a OnReadAsync handler set");
+                throw new ArgumentException(
+                    $"Queue's({q.Id}) connection doesn't have a OnReadAsync handler set"
+                );
         }
 
         _logger = logger;
         _queues = queues;
 
-        var channel = Channel.CreateUnbounded<Task>(new UnboundedChannelOptions { SingleReader = true });
+        var channel = Channel.CreateUnbounded<Task>(
+            new UnboundedChannelOptions { SingleReader = true }
+        );
         _channelWriter = channel.Writer;
         _channelReader = channel.Reader;
     }
 
-    public Task RunAsync(CancellationTokenSource cts)
-        => Task.Run(async () =>
+    public Task RunAsync(CancellationTokenSource cts) =>
+        Task.Run(async () =>
         {
             RunLoopExitState exitState;
 
@@ -75,7 +79,10 @@ internal sealed class RunLoop : IDisposable
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Invoking RunLoopStopped event ({exitState}) failed with {ex}");
+                _logger.LogError(
+                    ex,
+                    $"Invoking RunLoopStopped event ({exitState}) failed with {ex}"
+                );
             }
         });
 
@@ -114,8 +121,14 @@ internal sealed class RunLoop : IDisposable
             if (completedTask.IsFaulted)
             {
                 return (completedIdx < numQueues && !_queues[completedIdx].Connection.IsConnected)
-                            ? new(RunLoopStopReason.ConnectionClosed, new Exception($"Connection id: {_queues[completedIdx].Id}", completedTask.Exception))
-                            : new(RunLoopStopReason.Exception, completedTask.Exception);
+                    ? new(
+                        RunLoopStopReason.ConnectionClosed,
+                        new Exception(
+                            $"Connection id: {_queues[completedIdx].Id}",
+                            completedTask.Exception
+                        )
+                    )
+                    : new(RunLoopStopReason.Exception, completedTask.Exception);
             }
 
             if (x.IsCancellationRequested)
@@ -179,18 +192,20 @@ internal sealed class RunLoop : IDisposable
         if (_shutdownRequested.Task.IsCompleted)
             return new(RunLoopStopReason.Shutdown, null);
         return x.IsCancellationRequested
-                    ? new(RunLoopStopReason.Cancelled, null)
-                    : new(RunLoopStopReason.Exception,
-                                new InvalidOperationException($"This shouldn't ever get thrown. Unsure why the loop stopped"));
+            ? new(RunLoopStopReason.Cancelled, null)
+            : new(
+                RunLoopStopReason.Exception,
+                new InvalidOperationException(
+                    $"This shouldn't ever get thrown. Unsure why the loop stopped"
+                )
+            );
     }
 
     public Task Send(byte[] payload, CancellationToken token, DevToolsQueue? queue = null)
     {
         queue ??= _queues[0];
         Task? task = queue.Send(payload, token);
-        return task is null
-                ? Task.CompletedTask
-                : _channelWriter.WriteAsync(task, token).AsTask();
+        return task is null ? Task.CompletedTask : _channelWriter.WriteAsync(task, token).AsTask();
     }
 
     public void Fail(Exception exception)

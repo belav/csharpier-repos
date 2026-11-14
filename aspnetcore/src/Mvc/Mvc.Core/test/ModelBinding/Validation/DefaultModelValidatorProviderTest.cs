@@ -96,13 +96,11 @@ public class DefaultModelValidatorProviderTest
         var validatorItems = context.Results;
 
         Assert.Equal(2, validatorItems.Count);
-        Assert.Single(
-            validatorItems,
-            v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Class"
+        Assert.Single(validatorItems, v =>
+            Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Class"
         );
-        Assert.Single(
-            validatorItems,
-            v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Property"
+        Assert.Single(validatorItems, v =>
+            Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Property"
         );
     }
 
@@ -151,14 +149,11 @@ public class DefaultModelValidatorProviderTest
         var validatorItems = context.Results;
 
         Assert.Equal(2, validatorItems.Count);
-        Assert.Single(
-            validatorItems,
-            v =>
-                ((DataAnnotationsModelValidator)v.Validator).Attribute is RegularExpressionAttribute
+        Assert.Single(validatorItems, v =>
+            ((DataAnnotationsModelValidator)v.Validator).Attribute is RegularExpressionAttribute
         );
-        Assert.Single(
-            validatorItems,
-            v => ((DataAnnotationsModelValidator)v.Validator).Attribute is StringLengthAttribute
+        Assert.Single(validatorItems, v =>
+            ((DataAnnotationsModelValidator)v.Validator).Attribute is StringLengthAttribute
         );
     }
 

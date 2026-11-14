@@ -17,19 +17,21 @@ namespace System.IdentityModel.Claims
         static ClaimSet windows;
         static ClaimSet anonymous;
 
-        public static ClaimSet System 
-        { 
-            get 
+        public static ClaimSet System
+        {
+            get
             {
                 if (system == null)
                 {
                     List<Claim> claims = new List<Claim>(2);
                     claims.Add(Claim.System);
-                    claims.Add(new Claim(ClaimTypes.System, XsiConstants.System, Rights.PossessProperty));
+                    claims.Add(
+                        new Claim(ClaimTypes.System, XsiConstants.System, Rights.PossessProperty)
+                    );
                     system = new DefaultClaimSet(claims);
                 }
-                return system; 
-            } 
+                return system;
+            }
         }
 
         public static ClaimSet Windows
@@ -39,7 +41,10 @@ namespace System.IdentityModel.Claims
                 if (windows == null)
                 {
                     List<Claim> claims = new List<Claim>(2);
-                    SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.NTAuthoritySid, null);
+                    SecurityIdentifier sid = new SecurityIdentifier(
+                        WellKnownSidType.NTAuthoritySid,
+                        null
+                    );
                     claims.Add(new Claim(ClaimTypes.Sid, sid, Rights.Identity));
                     claims.Add(Claim.CreateWindowsSidClaim(sid));
                     windows = new DefaultClaimSet(claims);
@@ -59,13 +64,12 @@ namespace System.IdentityModel.Claims
             }
         }
 
-        static internal bool SupportedRight(string right)
+        internal static bool SupportedRight(string right)
         {
-            return right == null ||
-                Rights.Identity.Equals(right) ||
-                Rights.PossessProperty.Equals(right);
+            return right == null
+                || Rights.Identity.Equals(right)
+                || Rights.PossessProperty.Equals(right);
         }
-
 
         public virtual bool ContainsClaim(Claim claim, IEqualityComparer<Claim> comparer)
         {
@@ -106,10 +110,14 @@ namespace System.IdentityModel.Claims
         public abstract Claim this[int index] { get; }
         public abstract int Count { get; }
         public abstract ClaimSet Issuer { get; }
+
         // Note: null string represents any.
         public abstract IEnumerable<Claim> FindClaims(string claimType, string right);
         public abstract IEnumerator<Claim> GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() { return this.GetEnumerator(); }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
     }
 }

@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CoreXml.Test.XLinq;
-using Microsoft.Test.ModuleCore;
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using CoreXml.Test.XLinq;
+using Microsoft.Test.ModuleCore;
 using XmlCoreTest.Common;
 
 namespace XLinqTests
@@ -21,14 +21,85 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(OnXElement1) { Attribute = new VariationAttribute("On XElement - empty I.") { Param = "<A></A>", Priority = 1 } });
-            AddChild(new TestVariation(OnXElement1) { Attribute = new VariationAttribute("On XElement - with attributes") { Param = "<A xmlns='nsa' xmlns:p='nsp' p:a='aa'>text<B/><p:B/><?PI?></A>", Priority = 0 } });
-            AddChild(new TestVariation(OnXElement1) { Attribute = new VariationAttribute("On XElement - child elements only") { Param = "<A><B>repere</B><C/></A>", Priority = 1 } });
-            AddChild(new TestVariation(OnXElement1) { Attribute = new VariationAttribute("On XElement - empty II.") { Param = "<A/>", Priority = 1 } });
-            AddChild(new TestVariation(OnXElement1) { Attribute = new VariationAttribute("On XElement - string content only") { Param = "<A>text</A>", Priority = 1 } });
-            AddChild(new TestVariation(OnXElement1) { Attribute = new VariationAttribute("On XElement - without attributes") { Param = "<A><B/>text<!--comment--></A>", Priority = 1 } });
-            AddChild(new TestVariation(OnXElement2) { Attribute = new VariationAttribute("On XElement - empty string content") { Priority = 2 } });
-            AddChild(new TestVariation(OnXElement3) { Attribute = new VariationAttribute("On XElement - loaded content") { Param = Path.Combine("TestData", "XLinq", "books.xml"), Priority = 0 } });
+            AddChild(
+                new TestVariation(OnXElement1)
+                {
+                    Attribute = new VariationAttribute("On XElement - empty I.")
+                    {
+                        Param = "<A></A>",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement1)
+                {
+                    Attribute = new VariationAttribute("On XElement - with attributes")
+                    {
+                        Param = "<A xmlns='nsa' xmlns:p='nsp' p:a='aa'>text<B/><p:B/><?PI?></A>",
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement1)
+                {
+                    Attribute = new VariationAttribute("On XElement - child elements only")
+                    {
+                        Param = "<A><B>repere</B><C/></A>",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement1)
+                {
+                    Attribute = new VariationAttribute("On XElement - empty II.")
+                    {
+                        Param = "<A/>",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement1)
+                {
+                    Attribute = new VariationAttribute("On XElement - string content only")
+                    {
+                        Param = "<A>text</A>",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement1)
+                {
+                    Attribute = new VariationAttribute("On XElement - without attributes")
+                    {
+                        Param = "<A><B/>text<!--comment--></A>",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement2)
+                {
+                    Attribute = new VariationAttribute("On XElement - empty string content")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement3)
+                {
+                    Attribute = new VariationAttribute("On XElement - loaded content")
+                    {
+                        Param = Path.Combine("TestData", "XLinq", "books.xml"),
+                        Priority = 0,
+                    },
+                }
+            );
         }
 
         /// <summary>
@@ -109,9 +180,18 @@ namespace XLinqTests
             TestLog.Compare(!e.HasElements, "!e.HasElements");
             TestLog.Compare(e.Nodes().IsEmpty(), "e.Nodes().IsEmpty()");
             TestLog.Compare(e.IsEmpty, "e.IsEmpty");
-            TestLog.Compare(attributesBefore.SequenceEqual(e.Attributes()), "attributesBefore.SequenceEqual(e.Attributes())");
-            TestLog.Compare(nodesBefore.Where(n => n.Parent != null).IsEmpty(), "nodesBefore.Where(n=>n.Parent!=null).IsEmpty()");
-            TestLog.Compare(nodesBefore.Where(n => n.Document != null).IsEmpty(), "nodesBefore.Where(n=>n.Parent!=null).IsEmpty()");
+            TestLog.Compare(
+                attributesBefore.SequenceEqual(e.Attributes()),
+                "attributesBefore.SequenceEqual(e.Attributes())"
+            );
+            TestLog.Compare(
+                nodesBefore.Where(n => n.Parent != null).IsEmpty(),
+                "nodesBefore.Where(n=>n.Parent!=null).IsEmpty()"
+            );
+            TestLog.Compare(
+                nodesBefore.Where(n => n.Document != null).IsEmpty(),
+                "nodesBefore.Where(n=>n.Parent!=null).IsEmpty()"
+            );
         }
     }
 }

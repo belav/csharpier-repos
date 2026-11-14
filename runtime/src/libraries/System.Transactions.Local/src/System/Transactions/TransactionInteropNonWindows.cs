@@ -16,7 +16,9 @@ namespace System.Transactions
 
             if (transaction._complete)
             {
-                throw TransactionException.CreateTransactionCompletedException(transaction.DistributedTxId);
+                throw TransactionException.CreateTransactionCompletedException(
+                    transaction.DistributedTxId
+                );
             }
 
             OletxTransaction? distributedTx = transaction.Promote();
@@ -40,7 +42,9 @@ namespace System.Transactions
         /// matches this value, then the caller can continue with its enlistment with MSDTC. But if it
         /// does not match, the caller will not be able to enlist with MSDTC.
         /// </summary>
-        public static readonly Guid PromoterTypeDtc = new Guid("14229753-FFE1-428D-82B7-DF73045CB8DA");
+        public static readonly Guid PromoterTypeDtc = new Guid(
+            "14229753-FFE1-428D-82B7-DF73045CB8DA"
+        );
 
         public static byte[] GetExportCookie(Transaction transaction, byte[] whereabouts)
         {
@@ -50,7 +54,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetExportCookie");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetExportCookie"
+                );
             }
 
             // Copy the whereabouts so that it cannot be modified later.
@@ -62,7 +69,10 @@ namespace System.Transactions
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetExportCookie");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetExportCookie"
+                );
             }
 
             return cookie;
@@ -80,7 +90,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransactionFromExportCookie");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetTransactionFromExportCookie"
+                );
             }
 
             var cookieCopy = new byte[cookie.Length];
@@ -99,19 +112,28 @@ namespace System.Transactions
             {
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransactionFromExportCookie");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceOleTx,
+                        "TransactionInterop.GetTransactionFromExportCookie"
+                    );
                 }
 
                 return transaction;
             }
 
             // Find or create the promoted transaction.
-            OletxTransaction dTx = OletxTransactionManager.GetTransactionFromExportCookie(cookieCopy, txId);
+            OletxTransaction dTx = OletxTransactionManager.GetTransactionFromExportCookie(
+                cookieCopy,
+                txId
+            );
             transaction = TransactionManager.FindOrCreatePromotedTransaction(txId, dTx);
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransactionFromExportCookie");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetTransactionFromExportCookie"
+                );
             }
 
             return transaction;
@@ -124,7 +146,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransmitterPropagationToken");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetTransmitterPropagationToken"
+                );
             }
 
             ConvertToOletxTransaction(transaction);
@@ -132,13 +157,18 @@ namespace System.Transactions
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransmitterPropagationToken");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetTransmitterPropagationToken"
+                );
             }
 
             return token;
         }
 
-        public static Transaction GetTransactionFromTransmitterPropagationToken(byte[] propagationToken)
+        public static Transaction GetTransactionFromTransmitterPropagationToken(
+            byte[] propagationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(propagationToken);
 
@@ -150,7 +180,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransactionFromTransmitterPropagationToken");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetTransactionFromTransmitterPropagationToken"
+                );
             }
 
             // Extract the transaction guid from the propagation token to see if we already have a
@@ -164,20 +197,28 @@ namespace System.Transactions
             {
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransactionFromTransmitterPropagationToken");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceOleTx,
+                        "TransactionInterop.GetTransactionFromTransmitterPropagationToken"
+                    );
                 }
 
                 return tx;
             }
 
-            OletxTransaction dTx = GetOletxTransactionFromTransmitterPropagationToken(propagationToken);
+            OletxTransaction dTx = GetOletxTransactionFromTransmitterPropagationToken(
+                propagationToken
+            );
 
             // If a transaction is found then FindOrCreate will Dispose the distributed transaction created.
             Transaction returnValue = TransactionManager.FindOrCreatePromotedTransaction(txId, dTx);
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransactionFromTransmitterPropagationToken");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetTransactionFromTransmitterPropagationToken"
+                );
             }
             return returnValue;
         }
@@ -189,7 +230,10 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetDtcTransaction");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetDtcTransaction"
+                );
             }
 
             ConvertToOletxTransaction(transaction);
@@ -197,27 +241,40 @@ namespace System.Transactions
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetDtcTransaction");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetDtcTransaction"
+                );
             }
 
             return transactionNative;
         }
 
-        public static Transaction GetTransactionFromDtcTransaction(IDtcTransaction transactionNative)
+        public static Transaction GetTransactionFromDtcTransaction(
+            IDtcTransaction transactionNative
+        )
         {
             ArgumentNullException.ThrowIfNull(transactionNative);
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransactionFromDtcTransaction");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetTransactionFromDtcTransaction"
+                );
             }
 
-            Transaction transaction = OletxTransactionManager.GetTransactionFromDtcTransaction(transactionNative);
+            Transaction transaction = OletxTransactionManager.GetTransactionFromDtcTransaction(
+                transactionNative
+            );
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetTransactionFromDtcTransaction");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetTransactionFromDtcTransaction"
+                );
             }
             return transaction;
         }
@@ -227,19 +284,27 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetWhereabouts");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetWhereabouts"
+                );
             }
 
             byte[] returnValue = OletxTransactionManager.GetWhereabouts();
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, "TransactionInterop.GetWhereabouts");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    "TransactionInterop.GetWhereabouts"
+                );
             }
             return returnValue;
         }
 
-        internal static OletxTransaction GetOletxTransactionFromTransmitterPropagationToken(byte[] propagationToken)
+        internal static OletxTransaction GetOletxTransactionFromTransmitterPropagationToken(
+            byte[] propagationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(propagationToken);
 
@@ -251,7 +316,9 @@ namespace System.Transactions
             byte[] propagationTokenCopy = new byte[propagationToken.Length];
             Array.Copy(propagationToken, propagationTokenCopy, propagationToken.Length);
 
-            return OletxTransactionManager.GetOletxTransactionFromTransmitterPropagationToken(propagationTokenCopy);
+            return OletxTransactionManager.GetOletxTransactionFromTransmitterPropagationToken(
+                propagationTokenCopy
+            );
         }
     }
 }

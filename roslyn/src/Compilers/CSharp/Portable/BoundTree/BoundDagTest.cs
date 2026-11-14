@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #endif
     partial class BoundDagTest
     {
-        public override bool Equals([NotNullWhen(true)] object? obj) => this.Equals(obj as BoundDagTest);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            this.Equals(obj as BoundDagTest);
 
         private bool Equals(BoundDagTest? other)
         {
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         first = false;
                         result += $"Item{param.Ordinal + 1}";
                     }
-                    result += $") {d.GetOutputTempDebuggerDisplay()} = {d.Input.GetDebuggerDisplay()}";
+                    result +=
+                        $") {d.GetOutputTempDebuggerDisplay()} = {d.Input.GetDebuggerDisplay()}";
                     return result;
                 case BoundDagIndexEvaluation i:
                     return $"{i.GetOutputTempDebuggerDisplay()} = {i.Input.GetDebuggerDisplay()}[{i.Index}]";
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundDagEvaluation e:
                     return $"{e.GetOutputTempDebuggerDisplay()} = {e.Kind}({e.Input.GetDebuggerDisplay()})";
                 case BoundDagTypeTest b:
-                    var typeName = b.Type.TypeKind == TypeKind.Error ? "<error type>" : b.Type.ToString();
+                    var typeName =
+                        b.Type.TypeKind == TypeKind.Error ? "<error type>" : b.Type.ToString();
                     return $"{b.Input.GetDebuggerDisplay()} is {typeName}";
                 case BoundDagValueTest v:
                     return $"{v.Input.GetDebuggerDisplay()} == {v.Value.GetValueToDisplay()}";
@@ -95,7 +98,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         BinaryOperatorKind.LessThanOrEqual => "<=",
                         BinaryOperatorKind.GreaterThan => ">",
                         BinaryOperatorKind.GreaterThanOrEqual => ">=",
-                        _ => "??"
+                        _ => "??",
                     };
                     return $"{r.Input.GetDebuggerDisplay()} {operatorName} {r.Value.GetValueToDisplay()}";
                 default:

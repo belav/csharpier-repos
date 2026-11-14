@@ -5,10 +5,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
-using System.Numerics;
 using Xunit;
 
 public class TestClass
@@ -16,11 +16,17 @@ public class TestClass
     static ulong s_ulong_18 = 5;
     static Vector128<ulong> s_v128_ulong_36 = Vector128.Create((ulong)5, 0);
     Vector128<ulong> v128_ulong_87 = Vector128.CreateScalar((ulong)5);
+
     private void Method0()
     {
         unchecked
         {
-            s_ulong_18 = Vector128.Dot(v128_ulong_87 += s_v128_ulong_36 *= v128_ulong_87| (s_v128_ulong_36 = v128_ulong_87), v128_ulong_87 = (s_v128_ulong_36 *= Vector128<ulong>.Zero)* (v128_ulong_87 *= s_v128_ulong_36));
+            s_ulong_18 = Vector128.Dot(
+                v128_ulong_87 += s_v128_ulong_36 *=
+                    v128_ulong_87 | (s_v128_ulong_36 = v128_ulong_87),
+                v128_ulong_87 =
+                    (s_v128_ulong_36 *= Vector128<ulong>.Zero) * (v128_ulong_87 *= s_v128_ulong_36)
+            );
             return;
         }
     }

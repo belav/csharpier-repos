@@ -7,6 +7,9 @@ namespace System.ServiceModel
 
     public abstract class PeerMessagePropagationFilter
     {
-        public abstract PeerMessagePropagation ShouldMessagePropagate(Message message, PeerMessageOrigination origination);
+        public abstract PeerMessagePropagation ShouldMessagePropagate(
+            Message message,
+            PeerMessageOrigination origination
+        );
     }
 }

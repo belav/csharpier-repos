@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,111 +29,116 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 
-using System.Collections.Generic;
-
 namespace System.Web.Caching
 {
-	sealed class CachedRawResponse
-	{
-		public sealed class DataItem
-		{
-			public readonly byte[] Buffer;
-			public readonly long Length;
-			public readonly HttpResponseSubstitutionCallback Callback;
-			
-			public DataItem (byte[] buffer, long length)
-			{
-				Buffer = buffer;
-				Length = length;
-			}
+    sealed class CachedRawResponse
+    {
+        public sealed class DataItem
+        {
+            public readonly byte[] Buffer;
+            public readonly long Length;
+            public readonly HttpResponseSubstitutionCallback Callback;
 
-			public DataItem (HttpResponseSubstitutionCallback callback) : this (null, 0)
-			{
-				Callback = callback;
-			}
-		}
-		
-		HttpCachePolicy policy;
-		CachedVaryBy varyby;
-		int status_code;
-		string status_desc;
-		NameValueCollection headers;
-		List <DataItem> data;
+            public DataItem(byte[] buffer, long length)
+            {
+                Buffer = buffer;
+                Length = length;
+            }
 
-		IList Data {
-			get {
-				if (data == null)
-					data = new List <DataItem> ();
+            public DataItem(HttpResponseSubstitutionCallback callback)
+                : this(null, 0)
+            {
+                Callback = callback;
+            }
+        }
 
-				return data;
-			}
-		}
-		
-		public CachedRawResponse (HttpCachePolicy policy)
-		{
-			this.policy = policy;
-		}
+        HttpCachePolicy policy;
+        CachedVaryBy varyby;
+        int status_code;
+        string status_desc;
+        NameValueCollection headers;
+        List<DataItem> data;
 
-		public HttpCachePolicy Policy {
-			get { return policy; }
-			set { policy = value; }
-		}
+        IList Data
+        {
+            get
+            {
+                if (data == null)
+                    data = new List<DataItem>();
 
-		public CachedVaryBy VaryBy {
-			get { return varyby; }
-			set { varyby = value; }
-		}
-		
-		public int StatusCode {
-			get { return status_code; }
-			set { status_code = value; }
-		}
+                return data;
+            }
+        }
 
-		public string StatusDescription {
-			get { return status_desc; }
-			set { status_desc = value; }
-		}
+        public CachedRawResponse(HttpCachePolicy policy)
+        {
+            this.policy = policy;
+        }
 
-		public NameValueCollection Headers {
-			get { return headers; }
-		}
+        public HttpCachePolicy Policy
+        {
+            get { return policy; }
+            set { policy = value; }
+        }
 
-		public void SetHeaders (NameValueCollection headers)
-		{
-			this.headers = headers;
-		}
+        public CachedVaryBy VaryBy
+        {
+            get { return varyby; }
+            set { varyby = value; }
+        }
 
-		public void SetData (MemoryStream ms)
-		{
-			if (ms == null)
-				return;
-			
-			Data.Add (new DataItem (ms.GetBuffer (), ms.Length));
-		}
+        public int StatusCode
+        {
+            get { return status_code; }
+            set { status_code = value; }
+        }
 
-		public void SetData (HttpResponseSubstitutionCallback callback)
-		{
-			if (callback == null)
-				return;
+        public string StatusDescription
+        {
+            get { return status_desc; }
+            set { status_desc = value; }
+        }
 
-			Data.Add (new DataItem (callback));
-		}
-		
-		public IList GetData ()
-		{
-			int count = data != null ? data.Count :0;
-			if (count == 0)
-				return null;
+        public NameValueCollection Headers
+        {
+            get { return headers; }
+        }
 
-			return data;
-		}
-	}
+        public void SetHeaders(NameValueCollection headers)
+        {
+            this.headers = headers;
+        }
+
+        public void SetData(MemoryStream ms)
+        {
+            if (ms == null)
+                return;
+
+            Data.Add(new DataItem(ms.GetBuffer(), ms.Length));
+        }
+
+        public void SetData(HttpResponseSubstitutionCallback callback)
+        {
+            if (callback == null)
+                return;
+
+            Data.Add(new DataItem(callback));
+        }
+
+        public IList GetData()
+        {
+            int count = data != null ? data.Count : 0;
+            if (count == 0)
+                return null;
+
+            return data;
+        }
+    }
 }
-

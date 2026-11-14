@@ -9,9 +9,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
     public class PatternContextLinearInclude : PatternContextLinear
     {
         public PatternContextLinearInclude(ILinearPattern pattern)
-            : base(pattern)
-        {
-        }
+            : base(pattern) { }
 
         public override void Declare(Action<IPathSegment, bool> onDeclare)
         {

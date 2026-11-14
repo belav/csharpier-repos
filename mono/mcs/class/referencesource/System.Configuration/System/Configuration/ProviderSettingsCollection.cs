@@ -7,39 +7,34 @@
 namespace System.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Globalization;
     using System.IO;
     using System.Text;
-    using System.Globalization;
+    using System.Xml;
 
     [ConfigurationCollection(typeof(ProviderSettings))]
-    public sealed class ProviderSettingsCollection : ConfigurationElementCollection 
+    public sealed class ProviderSettingsCollection : ConfigurationElementCollection
     {
-        static private ConfigurationPropertyCollection _properties;
-         
-        static ProviderSettingsCollection() 
+        private static ConfigurationPropertyCollection _properties;
+
+        static ProviderSettingsCollection()
         {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
         }
 
-        public ProviderSettingsCollection() :
-            base(StringComparer.OrdinalIgnoreCase)
+        public ProviderSettingsCollection()
+            : base(StringComparer.OrdinalIgnoreCase) { }
+
+        protected internal override ConfigurationPropertyCollection Properties
         {
+            get { return _properties; }
         }
-         
-        protected internal override ConfigurationPropertyCollection Properties 
-        {
-            get
-            {
-                return _properties;
-            }
-        }
-         
-        public void Add(ProviderSettings provider) 
+
+        public void Add(ProviderSettings provider)
         {
             if (provider != null)
             {
@@ -48,7 +43,7 @@ namespace System.Configuration
             }
         }
 
-        public void Remove(String name) 
+        public void Remove(String name)
         {
             BaseRemove(name);
         }
@@ -58,35 +53,30 @@ namespace System.Configuration
             BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement() 
+        protected override ConfigurationElement CreateNewElement()
         {
             return new ProviderSettings();
         }
-        protected override Object GetElementKey(ConfigurationElement element) 
+
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             return ((ProviderSettings)element).Name;
         }
 
         public new ProviderSettings this[string key]
         {
-            get
-            {
-                return (ProviderSettings)BaseGet(key);
-            }
+            get { return (ProviderSettings)BaseGet(key); }
         }
-        
+
         public ProviderSettings this[int index]
         {
-            get
-            {
-                return (ProviderSettings)BaseGet(index);
-            }
+            get { return (ProviderSettings)BaseGet(index); }
             set
             {
                 if (BaseGet(index) != null)
                     BaseRemoveAt(index);
 
-                BaseAdd(index,value);
+                BaseAdd(index, value);
             }
         }
     }

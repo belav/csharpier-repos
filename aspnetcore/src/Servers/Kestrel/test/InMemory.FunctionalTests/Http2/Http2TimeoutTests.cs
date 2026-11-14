@@ -293,9 +293,8 @@ public class Http2TimeoutTests : Http2TestBase
         _mockTimeoutHandler.VerifyNoOtherCalls();
         _mockConnectionContext.VerifyNoOtherCalls();
 
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied"
+        Assert.Contains(TestSink.Writes, w =>
+            w.EventId.Name == "ResponseMinimumDataRateNotSatisfied"
         );
     }
 

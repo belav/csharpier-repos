@@ -2,16 +2,17 @@
 
 public static class AssertionExtensions
 {
-    public static void ShouldContain(this IEnumerable items, object item) 
-        => ShouldBeEnumerableTestExtensions.ShouldContain(items.Cast<object>(), item);
+    public static void ShouldContain(this IEnumerable items, object item) =>
+        ShouldBeEnumerableTestExtensions.ShouldContain(items.Cast<object>(), item);
 
-    public static void ShouldBeEmpty(this IEnumerable items) 
-        => ShouldBeEnumerableTestExtensions.ShouldBeEmpty(items.Cast<object>());
+    public static void ShouldBeEmpty(this IEnumerable items) =>
+        ShouldBeEnumerableTestExtensions.ShouldBeEmpty(items.Cast<object>());
 
-    public static void ShouldBeThrownBy(this Type exceptionType, Action action) 
-        => action.ShouldThrow(exceptionType);
+    public static void ShouldBeThrownBy(this Type exceptionType, Action action) =>
+        action.ShouldThrow(exceptionType);
 
-    public static void ShouldThrowException<T>(this Action action, Action<T> customAssertion) where T : Exception
+    public static void ShouldThrowException<T>(this Action action, Action<T> customAssertion)
+        where T : Exception
     {
         bool throws = false;
         try
@@ -26,6 +27,6 @@ public static class AssertionExtensions
         throws.ShouldBeTrue();
     }
 
-    public static void ShouldNotBeThrownBy(this Type exceptionType, Action action) 
-        => action.ShouldNotThrow();
+    public static void ShouldNotBeThrownBy(this Type exceptionType, Action action) =>
+        action.ShouldNotThrow();
 }

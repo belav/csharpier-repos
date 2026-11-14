@@ -13,7 +13,7 @@ namespace System.Xml.XmlReaderTests
             {
                 DtdProcessing = DtdProcessing.Ignore,
                 CheckCharacters = false,
-                ConformanceLevel = ConformanceLevel.Fragment
+                ConformanceLevel = ConformanceLevel.Fragment,
             };
 
             var stream = new StringReader(fragment);
@@ -36,11 +36,18 @@ namespace System.Xml.XmlReaderTests
                 throw new InvalidOperationException("Couldn't find element '" + elementName + "'");
         }
 
-        public static void PositionOnElementNonEmptyNoDoctype(this XmlReader reader, string elementName)
+        public static void PositionOnElementNonEmptyNoDoctype(
+            this XmlReader reader,
+            string elementName
+        )
         {
             while (reader.Read())
             {
-                if (reader.Name == elementName && !reader.IsEmptyElement && reader.NodeType != XmlNodeType.DocumentType)
+                if (
+                    reader.Name == elementName
+                    && !reader.IsEmptyElement
+                    && reader.NodeType != XmlNodeType.DocumentType
+                )
                     break;
             }
         }

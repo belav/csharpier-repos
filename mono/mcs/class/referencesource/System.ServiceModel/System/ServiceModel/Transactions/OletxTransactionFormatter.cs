@@ -11,7 +11,10 @@ namespace System.ServiceModel.Transactions
 
     class OleTxTransactionFormatter : TransactionFormatter
     {
-        static OleTxTransactionHeader emptyTransactionHeader = new OleTxTransactionHeader(null, null);
+        static OleTxTransactionHeader emptyTransactionHeader = new OleTxTransactionHeader(
+            null,
+            null
+        );
 
         public override MessageHeader EmptyTransactionHeader
         {
@@ -56,10 +59,12 @@ namespace System.ServiceModel.Transactions
             return options.ulTimeout;
         }
 
-        public static void GetTransactionAttributes(Transaction transaction,
-                                                    out uint timeout,
-                                                    out IsolationFlags isoFlags,
-                                                    out string description)
+        public static void GetTransactionAttributes(
+            Transaction transaction,
+            out uint timeout,
+            out IsolationFlags isoFlags,
+            out string description
+        )
         {
             IDtcTransaction dtcTransaction = TransactionInterop.GetDtcTransaction(transaction);
             ITransactionOptions transactionOptions = (ITransactionOptions)dtcTransaction;
@@ -100,18 +105,22 @@ namespace System.ServiceModel.Transactions
             public uint grfRMSupportedRetaining;
         }
 
-        [ComImport,
-         Guid("3A6AD9E0-23B9-11cf-AD60-00AA00A74CCD"),
-         InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            ComImport,
+            Guid("3A6AD9E0-23B9-11cf-AD60-00AA00A74CCD"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         interface ITransactionOptions
         {
             void SetOptions([In] ref XACTOPT pOptions);
             void GetOptions([Out] out XACTOPT pOptions);
         }
 
-        [ComImport,
-         GuidAttribute("0fb15084-af41-11ce-bd2b-204c4f4f5020"),
-         InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            ComImport,
+            GuidAttribute("0fb15084-af41-11ce-bd2b-204c4f4f5020"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         interface ISaneDtcTransaction
         {
             void Abort(IntPtr reason, int retaining, int async);

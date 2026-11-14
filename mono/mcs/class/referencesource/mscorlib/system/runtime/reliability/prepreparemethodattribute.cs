@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>clrosdev</OWNER>
@@ -26,11 +26,8 @@ namespace System.Runtime.ConstrainedExecution
     using System.Runtime.InteropServices;
 
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, Inherited = false)]
-
     public sealed class PrePrepareMethodAttribute : Attribute
     {
-        public PrePrepareMethodAttribute()
-        {
-        }
+        public PrePrepareMethodAttribute() { }
     }
 }

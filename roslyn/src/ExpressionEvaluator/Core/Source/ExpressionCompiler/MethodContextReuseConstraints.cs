@@ -18,7 +18,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private readonly int _methodVersion;
         private readonly ILSpan _span;
 
-        internal MethodContextReuseConstraints(Guid moduleVersionId, int methodToken, int methodVersion, ILSpan span)
+        internal MethodContextReuseConstraints(
+            Guid moduleVersionId,
+            int methodToken,
+            int methodVersion,
+            ILSpan span
+        )
         {
             Debug.Assert(moduleVersionId != Guid.Empty);
             Debug.Assert(MetadataTokens.Handle(methodToken).Kind == HandleKind.MethodDefinition);
@@ -30,17 +35,22 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             _span = span;
         }
 
-        public bool AreSatisfied(Guid moduleVersionId, int methodToken, int methodVersion, int ilOffset)
+        public bool AreSatisfied(
+            Guid moduleVersionId,
+            int methodToken,
+            int methodVersion,
+            int ilOffset
+        )
         {
             Debug.Assert(moduleVersionId != Guid.Empty);
             Debug.Assert(MetadataTokens.Handle(methodToken).Kind == HandleKind.MethodDefinition);
             Debug.Assert(methodVersion >= 1);
             Debug.Assert(ilOffset >= 0);
 
-            return moduleVersionId == _moduleVersionId &&
-                methodToken == _methodToken &&
-                methodVersion == _methodVersion &&
-                _span.Contains(ilOffset);
+            return moduleVersionId == _moduleVersionId
+                && methodToken == _methodToken
+                && methodVersion == _methodVersion
+                && _span.Contains(ilOffset);
         }
 
         public override string ToString()
@@ -53,14 +63,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// Examples:
         /// scopes: [   [   ) x [  )  )
         /// result:         [   )
-        /// 
+        ///
         /// scopes: [ x [   )   [  )  )
-        /// result: [   )     
-        /// 
+        /// result: [   )
+        ///
         /// scopes: [   [ x )   [  )  )
-        /// result:     [   )     
+        /// result:     [   )
         /// </summary>
-        public static ILSpan CalculateReuseSpan(int ilOffset, ILSpan initialSpan, IEnumerable<ILSpan> scopes)
+        public static ILSpan CalculateReuseSpan(
+            int ilOffset,
+            ILSpan initialSpan,
+            IEnumerable<ILSpan> scopes
+        )
         {
             Debug.Assert(ilOffset >= 0);
 

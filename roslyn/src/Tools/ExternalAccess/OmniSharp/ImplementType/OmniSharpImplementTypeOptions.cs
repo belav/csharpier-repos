@@ -8,11 +8,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ImplementType
 {
     internal readonly record struct OmniSharpImplementTypeOptions(
         OmniSharpImplementTypeInsertionBehavior InsertionBehavior,
-        OmniSharpImplementTypePropertyGenerationBehavior PropertyGenerationBehavior);
+        OmniSharpImplementTypePropertyGenerationBehavior PropertyGenerationBehavior
+    );
 
     internal enum OmniSharpImplementTypeInsertionBehavior
     {
-        WithOtherMembersOfTheSameKind = ImplementTypeInsertionBehavior.WithOtherMembersOfTheSameKind,
+        WithOtherMembersOfTheSameKind =
+            ImplementTypeInsertionBehavior.WithOtherMembersOfTheSameKind,
         AtTheEnd = ImplementTypeInsertionBehavior.AtTheEnd,
     }
 

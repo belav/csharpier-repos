@@ -21,7 +21,11 @@ namespace BuildBoss
         internal ProjectFileType ProjectType => _data.ProjectFileType;
         internal string ProjectFilePath => _data.FilePath;
 
-        internal ProjectCheckerUtil(ProjectData data, Dictionary<ProjectKey, ProjectData> solutionMap, bool isPrimarySolution)
+        internal ProjectCheckerUtil(
+            ProjectData data,
+            Dictionary<ProjectKey, ProjectData> solutionMap,
+            bool isPrimarySolution
+        )
         {
             _data = data;
             _projectUtil = data.ProjectUtil;
@@ -108,14 +112,19 @@ namespace BuildBoss
             return allGood;
         }
 
-        private bool CheckNoGuidsOnProjectReferences(TextWriter textWriter, List<ProjectReferenceEntry> entryList)
+        private bool CheckNoGuidsOnProjectReferences(
+            TextWriter textWriter,
+            List<ProjectReferenceEntry> entryList
+        )
         {
             var allGood = true;
             foreach (var entry in entryList)
             {
                 if (entry.Project != null)
                 {
-                    textWriter.WriteLine($"Project reference for {entry.ProjectKey.FileName} should not have a GUID");
+                    textWriter.WriteLine(
+                        $"Project reference for {entry.ProjectKey.FileName} should not have a GUID"
+                    );
                     allGood = false;
                 }
             }
@@ -128,12 +137,17 @@ namespace BuildBoss
             var allGood = true;
             foreach (var packageRef in _projectUtil.GetPackageReferences())
             {
-                var allowedPackageVersions = GetAllowedPackageReferenceVersions(packageRef).ToList();
+                var allowedPackageVersions = GetAllowedPackageReferenceVersions(packageRef)
+                    .ToList();
 
                 if (!allowedPackageVersions.Contains(packageRef.Version))
                 {
-                    textWriter.WriteLine($"PackageReference {packageRef.Name} has incorrect version {packageRef.Version}");
-                    textWriter.WriteLine($"Allowed values are " + string.Join(" or", allowedPackageVersions));
+                    textWriter.WriteLine(
+                        $"PackageReference {packageRef.Name} has incorrect version {packageRef.Version}"
+                    );
+                    textWriter.WriteLine(
+                        $"Allowed values are " + string.Join(" or", allowedPackageVersions)
+                    );
                     allGood = false;
                 }
             }
@@ -141,14 +155,19 @@ namespace BuildBoss
             return allGood;
         }
 
-        private IEnumerable<string> GetAllowedPackageReferenceVersions(PackageReference packageReference)
+        private IEnumerable<string> GetAllowedPackageReferenceVersions(
+            PackageReference packageReference
+        )
         {
             // If this is a generator project, if it has a reference to Microsoft.CodeAnalysis.Common, that means it's
             // a source generator. In that case, we require the version of the API being built against to match the toolset
             // version, so that way the source generator can actually be loaded by the toolset. We don't apply this rule to
             // any other project, as any other project having a reason to reference a version of Roslyn via a PackageReference
             // probably doesn't fall under this rule.
-            if (ProjectFilePath.Contains("CompilerGeneratorTools") && packageReference.Name == "Microsoft.CodeAnalysis.Common")
+            if (
+                ProjectFilePath.Contains("CompilerGeneratorTools")
+                && packageReference.Name == "Microsoft.CodeAnalysis.Common"
+            )
             {
                 yield return "$(SourceGeneratorMicrosoftCodeAnalysisVersion)";
             }
@@ -166,7 +185,13 @@ namespace BuildBoss
             var allGood = true;
             foreach (var internalsVisibleTo in _projectUtil.GetInternalsVisibleTo())
             {
-                if (string.Equals(internalsVisibleTo.LoadsWithinVisualStudio, "false", StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        internalsVisibleTo.LoadsWithinVisualStudio,
+                        "false",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // IVTs explicitly declared with LoadsWithinVisualStudio="false" are allowed
                     continue;
@@ -182,7 +207,9 @@ namespace BuildBoss
                 {
                     if (!Uri.TryCreate(internalsVisibleTo.WorkItem, UriKind.Absolute, out _))
                     {
-                        textWriter.WriteLine($"InternalsVisibleTo for external assembly '{internalsVisibleTo.TargetAssembly}' does not have a valid URI specified for {nameof(InternalsVisibleTo.WorkItem)}.");
+                        textWriter.WriteLine(
+                            $"InternalsVisibleTo for external assembly '{internalsVisibleTo.TargetAssembly}' does not have a valid URI specified for {nameof(InternalsVisibleTo.WorkItem)}."
+                        );
                         allGood = false;
                     }
 
@@ -190,10 +217,14 @@ namespace BuildBoss
                     continue;
                 }
 
-                var builtByThisRepository = _solutionMap.Values.Any(projectData => GetAssemblyName(projectData) == internalsVisibleTo.TargetAssembly);
+                var builtByThisRepository = _solutionMap.Values.Any(projectData =>
+                    GetAssemblyName(projectData) == internalsVisibleTo.TargetAssembly
+                );
                 if (!builtByThisRepository)
                 {
-                    textWriter.WriteLine($"InternalsVisibleTo not allowed for external assembly '{internalsVisibleTo.TargetAssembly}' that may load within Visual Studio.");
+                    textWriter.WriteLine(
+                        $"InternalsVisibleTo not allowed for external assembly '{internalsVisibleTo.TargetAssembly}' that may load within Visual Studio."
+                    );
                     allGood = false;
                 }
             }
@@ -220,14 +251,19 @@ namespace BuildBoss
         /// apply all configuration entries to projects which are compiled via referenes but not included
         /// in the solution.
         /// </summary>
-        private bool CheckProjectReferencesComplete(TextWriter textWriter, IEnumerable<ProjectKey> declaredReferences)
+        private bool CheckProjectReferencesComplete(
+            TextWriter textWriter,
+            IEnumerable<ProjectKey> declaredReferences
+        )
         {
             var allGood = true;
             foreach (var key in declaredReferences)
             {
                 if (!_solutionMap.ContainsKey(key))
                 {
-                    textWriter.WriteLine($"Project reference {key.FileName} is not included in the solution");
+                    textWriter.WriteLine(
+                        $"Project reference {key.FileName} is not included in the solution"
+                    );
                     allGood = false;
                 }
             }
@@ -250,7 +286,10 @@ namespace BuildBoss
         /// Consideration was given to fixing up all of the tools but it felt like fighting against the grain.  Pretty
         /// much every repo has this practice.
         /// </summary>
-        private bool CheckUnitTestReferenceRestriction(TextWriter textWriter, IEnumerable<ProjectKey> declaredReferences)
+        private bool CheckUnitTestReferenceRestriction(
+            TextWriter textWriter,
+            IEnumerable<ProjectKey> declaredReferences
+        )
         {
             if (!_data.IsTestProject)
             {
@@ -267,7 +306,9 @@ namespace BuildBoss
 
                 if (projectData.ProjectUtil.IsTestProject)
                 {
-                    textWriter.WriteLine($"Cannot reference {key.FileName} as it is another unit test project");
+                    textWriter.WriteLine(
+                        $"Cannot reference {key.FileName} as it is another unit test project"
+                    );
                     allGood = false;
                 }
             }
@@ -296,7 +337,9 @@ namespace BuildBoss
                         continue;
                 }
 
-                textWriter.WriteLine($"TargetFramework {targetFramework} is not supported in this build");
+                textWriter.WriteLine(
+                    $"TargetFramework {targetFramework} is not supported in this build"
+                );
                 allGood = false;
             }
 

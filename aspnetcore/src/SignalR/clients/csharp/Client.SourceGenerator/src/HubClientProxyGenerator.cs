@@ -33,9 +33,8 @@ internal sealed partial class HubClientProxyGenerator : IIncrementalGenerator
 
         var payload = compilationAndMethodDeclaration.Combine(memberAccessExpressions.Collect());
 
-        context.RegisterSourceOutput(
-            payload,
-            static (spc, source) => Execute(source.Left.Left, source.Left.Right, source.Right, spc)
+        context.RegisterSourceOutput(payload, static (spc, source) =>
+            Execute(source.Left.Left, source.Left.Right, source.Right, spc)
         );
     }
 

@@ -28,16 +28,18 @@ internal sealed partial class RoslynSearchItemsSourceProvider
             IReadOnlyCollection<PatternMatch> patternMatches,
             string? location,
             float perProviderItemPriority,
-            string language)
+            string language
+        )
             : base(
-                  provider._viewFactory,
-                  resultType,
-                  primarySortText,
-                  secondarySortText,
-                  patternMatches,
-                  location,
-                  perProviderItemPriority: perProviderItemPriority,
-                  language: language)
+                provider._viewFactory,
+                resultType,
+                primarySortText,
+                secondarySortText,
+                patternMatches,
+                location,
+                perProviderItemPriority: perProviderItemPriority,
+                language: language
+            )
         {
             SearchResult = searchResult;
         }

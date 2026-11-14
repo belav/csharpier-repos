@@ -8,9 +8,11 @@ namespace Profiler.Tests
 {
     class GCAllocateTests
     {
-        static readonly Guid GcAllocateEventsProfilerGuid = new Guid("55b9554d-6115-45a2-be1e-c80f7fa35369");
+        static readonly Guid GcAllocateEventsProfilerGuid = new Guid(
+            "55b9554d-6115-45a2-be1e-c80f7fa35369"
+        );
 
-        public static int RunTest(String[] args) 
+        public static int RunTest(String[] args)
         {
             int[] large = new int[100000];
             int[] pinned = GC.AllocateArray<int>(32, true);
@@ -30,9 +32,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "GCCallbacksAllocate",
-                                          profilerClsid: GcAllocateEventsProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "GCCallbacksAllocate",
+                profilerClsid: GcAllocateEventsProfilerGuid
+            );
         }
     }
 }

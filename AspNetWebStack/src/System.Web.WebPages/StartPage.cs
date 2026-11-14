@@ -54,7 +54,7 @@ namespace System.Web.WebPages
 
         public override void ExecutePageHierarchy()
         {
-            // Push the current pagestart on the stack. 
+            // Push the current pagestart on the stack.
             TemplateStack.Push(Context, this);
             try
             {
@@ -77,9 +77,16 @@ namespace System.Web.WebPages
         /// <summary>
         /// Returns either the root-most init page, or the provided page itself if no init page is found
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters",
-            Justification = "Start Pages are instances of WebPageRenderingBase. It might be possible to have WebPageExecuting bases that are not in the same inheritance tree as StartPages")]
-        public static WebPageRenderingBase GetStartPage(WebPageRenderingBase page, string fileName, IEnumerable<string> supportedExtensions)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Start Pages are instances of WebPageRenderingBase. It might be possible to have WebPageExecuting bases that are not in the same inheritance tree as StartPages"
+        )]
+        public static WebPageRenderingBase GetStartPage(
+            WebPageRenderingBase page,
+            string fileName,
+            IEnumerable<string> supportedExtensions
+        )
         {
             if (page == null)
             {
@@ -87,7 +94,14 @@ namespace System.Web.WebPages
             }
             if (String.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "fileName"), "fileName");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "fileName"
+                    ),
+                    "fileName"
+                );
             }
             if (supportedExtensions == null)
             {
@@ -95,12 +109,22 @@ namespace System.Web.WebPages
             }
 
             // Use the page's VirtualPathFactory if available
-            return GetStartPage(page, page.VirtualPathFactory ?? VirtualPathFactoryManager.Instance,
-                                HttpRuntime.AppDomainAppVirtualPath, fileName, supportedExtensions);
+            return GetStartPage(
+                page,
+                page.VirtualPathFactory ?? VirtualPathFactoryManager.Instance,
+                HttpRuntime.AppDomainAppVirtualPath,
+                fileName,
+                supportedExtensions
+            );
         }
 
-        internal static WebPageRenderingBase GetStartPage(WebPageRenderingBase page, IVirtualPathFactory virtualPathFactory, string appDomainAppVirtualPath,
-                                                          string fileName, IEnumerable<string> supportedExtensions)
+        internal static WebPageRenderingBase GetStartPage(
+            WebPageRenderingBase page,
+            IVirtualPathFactory virtualPathFactory,
+            string appDomainAppVirtualPath,
+            string fileName,
+            IEnumerable<string> supportedExtensions
+        )
         {
             // Build up a list of pages to execute, such as one of the following:
             // ~/somepage.cshtml
@@ -112,17 +136,26 @@ namespace System.Web.WebPages
             // Start with the requested page's directory, find the init page,
             // and then traverse up the hierarchy to find init pages all the
             // way up to the root of the app.
-            while (!String.IsNullOrEmpty(pageDirectory) && pageDirectory != "/" && PathUtil.IsWithinAppRoot(appDomainAppVirtualPath, pageDirectory))
+            while (
+                !String.IsNullOrEmpty(pageDirectory)
+                && pageDirectory != "/"
+                && PathUtil.IsWithinAppRoot(appDomainAppVirtualPath, pageDirectory)
+            )
             {
                 // Go through the list of supported extensions
                 foreach (var extension in supportedExtensions)
                 {
-                    var virtualPath = VirtualPathUtility.Combine(pageDirectory, fileName + "." + extension);
+                    var virtualPath = VirtualPathUtility.Combine(
+                        pageDirectory,
+                        fileName + "." + extension
+                    );
 
                     // Can we build a file from the current path?
                     if (virtualPathFactory.Exists(virtualPath))
                     {
-                        var parentStartPage = virtualPathFactory.CreateInstance<StartPage>(virtualPath);
+                        var parentStartPage = virtualPathFactory.CreateInstance<StartPage>(
+                            virtualPath
+                        );
                         parentStartPage.VirtualPath = virtualPath;
                         parentStartPage.ChildPage = currentPage;
                         parentStartPage.VirtualPathFactory = virtualPathFactory;

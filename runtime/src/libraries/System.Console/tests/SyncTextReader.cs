@@ -6,13 +6,17 @@ using System.IO;
 using System.Text;
 using Xunit;
 
-[SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+[SkipOnPlatform(
+    TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+    "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+)]
 public class SyncTextReader
 {
     // NOTE: These tests test the underlying SyncTextReader by
     // accessing the Console.In TextReader (which in fact is a SyncTextReader).
 
-    static readonly string[] s_testLines = new string[] {
+    static readonly string[] s_testLines = new string[]
+    {
         "3232 Hello32 Hello 5032 Hello 50 532 Hello 50 5 aTrueaabcdbc1.23123.4561.23439505050System.ObjectHello World",
         "32",
         "",
@@ -62,7 +66,6 @@ public class SyncTextReader
                     Console.SetIn(sr);
                     action();
                 }
-
             }
         }
         finally
@@ -81,7 +84,8 @@ public class SyncTextReader
     public void ReadToEnd()
     {
         var expected = string.Join(Environment.NewLine, s_testLines);
-        Test(expected, () => {
+        Test(expected, () =>
+        {
             // Given, When
             var result = Console.In.ReadToEnd();
 
@@ -95,7 +99,8 @@ public class SyncTextReader
     public void ReadBlock()
     {
         var expected = new[] { 'H', 'e', 'l', 'l', 'o' };
-        Test(new string(expected), () => {
+        Test(new string(expected), () =>
+        {
             // Given
             var buffer = new char[expected.Length];
 
@@ -113,7 +118,8 @@ public class SyncTextReader
     public void Read()
     {
         var expected = new[] { 'H', 'e', 'l', 'l', 'o' };
-        Test(new string(expected), () => {
+        Test(new string(expected), () =>
+        {
             // Given
             var buffer = new char[expected.Length];
 
@@ -131,7 +137,8 @@ public class SyncTextReader
     public void Peek()
     {
         const string expected = "ABC";
-        Test(expected, () => {
+        Test(expected, () =>
+        {
             foreach (char expectedChar in expected)
             {
                 Assert.Equal(expectedChar, Console.In.Peek());
@@ -144,7 +151,8 @@ public class SyncTextReader
     public void ReadToEndAsync()
     {
         var expected = string.Join(Environment.NewLine, s_testLines);
-        Test(expected, () => {
+        Test(expected, () =>
+        {
             // Given, When
             var result = Console.In.ReadToEndAsync().Result;
 
@@ -158,7 +166,8 @@ public class SyncTextReader
     public void ReadBlockAsync()
     {
         var expected = new[] { 'H', 'e', 'l', 'l', 'o' };
-        Test(new string(expected), () => {
+        Test(new string(expected), () =>
+        {
             // Given
             var buffer = new char[expected.Length];
 
@@ -171,10 +180,22 @@ public class SyncTextReader
             Assert.Equal(-1, Console.Read()); // We should be at EOF now.
 
             // Invalid args
-            Assert.Throws<ArgumentNullException>(() => { Console.In.ReadBlockAsync(null, 0, 0); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Console.In.ReadBlockAsync(new char[1], -1, 0); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Console.In.ReadBlockAsync(new char[1], 0, -1); });
-            AssertExtensions.Throws<ArgumentException>(null, () => { Console.In.ReadBlockAsync(new char[1], 1, 1); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Console.In.ReadBlockAsync(null, 0, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Console.In.ReadBlockAsync(new char[1], -1, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Console.In.ReadBlockAsync(new char[1], 0, -1);
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Console.In.ReadBlockAsync(new char[1], 1, 1);
+            });
         });
     }
 
@@ -182,7 +203,8 @@ public class SyncTextReader
     public void ReadAsync()
     {
         var expected = new[] { 'H', 'e', 'l', 'l', 'o' };
-        Test(new string(expected), () => {
+        Test(new string(expected), () =>
+        {
             // Given
             var buffer = new char[expected.Length];
 
@@ -195,10 +217,22 @@ public class SyncTextReader
             Assert.Equal(-1, Console.Read()); // We should be at EOF now.
 
             // Invalid args
-            Assert.Throws<ArgumentNullException>(() => { Console.In.ReadAsync(null, 0, 0); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Console.In.ReadAsync(new char[1], -1, 0); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Console.In.ReadAsync(new char[1], 0, -1); });
-            AssertExtensions.Throws<ArgumentException>(null, () => { Console.In.ReadAsync(new char[1], 1, 1); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Console.In.ReadAsync(null, 0, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Console.In.ReadAsync(new char[1], -1, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Console.In.ReadAsync(new char[1], 0, -1);
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Console.In.ReadAsync(new char[1], 1, 1);
+            });
         });
     }
 
@@ -206,7 +240,8 @@ public class SyncTextReader
     public void ReadLineAsync()
     {
         var expected = string.Join(Environment.NewLine, s_testLines);
-        Test(expected, () => {
+        Test(expected, () =>
+        {
             for (int i = 0; i < s_testLines.Length; i++)
             {
                 // Given, When

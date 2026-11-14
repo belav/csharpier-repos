@@ -26,14 +26,14 @@
 
 using System;
 using System.Data.Common;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace System.Data.SqlTypes {
-
+namespace System.Data.SqlTypes
+{
     /// <devdoc>
     ///    <para>
     ///       Represents a 64-bit signed integer to be stored in
@@ -43,17 +43,18 @@ namespace System.Data.SqlTypes {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     [XmlSchemaProvider("GetXsdType")]
-    public struct SqlInt64 : INullable, IComparable, IXmlSerializable {
+    public struct SqlInt64 : INullable, IComparable, IXmlSerializable
+    {
         private bool m_fNotNull; // false if null
         private long m_value;
 
-        private const long x_lLowIntMask  = 0xffffffff;
+        private const long x_lLowIntMask = 0xffffffff;
         private const long x_lHighIntMask = unchecked((long)0xffffffff00000000);
-
 
         // constructor
         // construct a Null
-        private SqlInt64(bool fNull) {
+        private SqlInt64(bool fNull)
+        {
             m_fNotNull = false;
             m_value = 0;
         }
@@ -61,7 +62,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SqlInt64(long value) {
+        public SqlInt64(long value)
+        {
             m_value = value;
             m_fNotNull = true;
         }
@@ -70,16 +72,19 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsNull {
-            get { return !m_fNotNull;}
+        public bool IsNull
+        {
+            get { return !m_fNotNull; }
         }
 
         // property: Value
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public long Value {
-            get {
+        public long Value
+        {
+            get
+            {
                 if (m_fNotNull)
                     return m_value;
                 else
@@ -91,7 +96,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlInt64(long x) {
+        public static implicit operator SqlInt64(long x)
+        {
             return new SqlInt64(x);
         }
 
@@ -99,43 +105,46 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator long(SqlInt64 x) {
+        public static explicit operator long(SqlInt64 x)
+        {
             return x.Value;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override String ToString() {
+        public override String ToString()
+        {
             return IsNull ? SQLResource.NullString : m_value.ToString((IFormatProvider)null);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 Parse(String s) {
+        public static SqlInt64 Parse(String s)
+        {
             if (s == SQLResource.NullString)
                 return SqlInt64.Null;
-            else 
+            else
                 return new SqlInt64(Int64.Parse(s, (IFormatProvider)null));
         }
-
 
         // Unary operators
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator -(SqlInt64 x) {
+        public static SqlInt64 operator -(SqlInt64 x)
+        {
             return x.IsNull ? Null : new SqlInt64(-x.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator ~(SqlInt64 x) {
+        public static SqlInt64 operator ~(SqlInt64 x)
+        {
             return x.IsNull ? Null : new SqlInt64(~x.m_value);
         }
-
 
         // Binary operators
 
@@ -143,7 +152,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator +(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 operator +(SqlInt64 x, SqlInt64 y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -157,7 +167,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator -(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 operator -(SqlInt64 x, SqlInt64 y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -171,31 +182,34 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator *(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 operator *(SqlInt64 x, SqlInt64 y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
-            bool    fNeg = false;
+            bool fNeg = false;
 
-            long    lOp1 = x.m_value;
-            long    lOp2 = y.m_value;
-            long    lResult;
-            long    lPartialResult = 0;
+            long lOp1 = x.m_value;
+            long lOp2 = y.m_value;
+            long lResult;
+            long lPartialResult = 0;
 
-            if (lOp1 < 0) {
+            if (lOp1 < 0)
+            {
                 fNeg = true;
-                lOp1 = - lOp1;
+                lOp1 = -lOp1;
             }
 
-            if (lOp2 < 0) {
+            if (lOp2 < 0)
+            {
                 fNeg = !fNeg;
-                lOp2 = - lOp2;
+                lOp2 = -lOp2;
             }
 
-            long    lLow1   = lOp1 & x_lLowIntMask;
-            long    lHigh1  = (lOp1 >> 32) & x_lLowIntMask;
-            long    lLow2   = lOp2 & x_lLowIntMask;
-            long    lHigh2  = (lOp2 >> 32) & x_lLowIntMask;
+            long lLow1 = lOp1 & x_lLowIntMask;
+            long lHigh1 = (lOp1 >> 32) & x_lLowIntMask;
+            long lLow2 = lOp2 & x_lLowIntMask;
+            long lHigh2 = (lOp2 >> 32) & x_lLowIntMask;
 
             // if both of the high order dwords are non-zero then overflow results
             if (lHigh1 != 0 && lHigh2 != 0)
@@ -206,13 +220,15 @@ namespace System.Data.SqlTypes {
             if (lResult < 0)
                 throw new OverflowException(SQLResource.ArithOverflowMessage);
 
-            if (lHigh1 != 0) {
+            if (lHigh1 != 0)
+            {
                 SQLDebug.Check(lHigh2 == 0);
                 lPartialResult = lHigh1 * lLow2;
                 if (lPartialResult < 0 || lPartialResult > Int64.MaxValue)
                     throw new OverflowException(SQLResource.ArithOverflowMessage);
             }
-            else if (lHigh2 != 0) {
+            else if (lHigh2 != 0)
+            {
                 SQLDebug.Check(lHigh1 == 0);
                 lPartialResult = lLow1 * lHigh2;
                 if (lPartialResult < 0 || lPartialResult > Int64.MaxValue)
@@ -224,7 +240,7 @@ namespace System.Data.SqlTypes {
                 throw new OverflowException(SQLResource.ArithOverflowMessage);
 
             if (fNeg)
-                lResult = - lResult;
+                lResult = -lResult;
 
             return new SqlInt64(lResult);
         }
@@ -232,11 +248,13 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator /(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 operator /(SqlInt64 x, SqlInt64 y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
-            if (y.m_value != 0) {
+            if (y.m_value != 0)
+            {
                 if ((x.m_value == Int64.MinValue) && (y.m_value == -1))
                     throw new OverflowException(SQLResource.ArithOverflowMessage);
 
@@ -249,11 +267,13 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator %(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 operator %(SqlInt64 x, SqlInt64 y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
-            if (y.m_value != 0) {
+            if (y.m_value != 0)
+            {
                 if ((x.m_value == Int64.MinValue) && (y.m_value == -1))
                     throw new OverflowException(SQLResource.ArithOverflowMessage);
 
@@ -267,24 +287,26 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator &(SqlInt64 x, SqlInt64 y) {
-            return(x.IsNull || y.IsNull) ? Null : new SqlInt64(x.m_value & y.m_value);
+        public static SqlInt64 operator &(SqlInt64 x, SqlInt64 y)
+        {
+            return (x.IsNull || y.IsNull) ? Null : new SqlInt64(x.m_value & y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator |(SqlInt64 x, SqlInt64 y) {
-            return(x.IsNull || y.IsNull) ? Null : new SqlInt64(x.m_value | y.m_value);
+        public static SqlInt64 operator |(SqlInt64 x, SqlInt64 y)
+        {
+            return (x.IsNull || y.IsNull) ? Null : new SqlInt64(x.m_value | y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlInt64 operator ^(SqlInt64 x, SqlInt64 y) {
-            return(x.IsNull || y.IsNull) ? Null : new SqlInt64(x.m_value ^ y.m_value);
+        public static SqlInt64 operator ^(SqlInt64 x, SqlInt64 y)
+        {
+            return (x.IsNull || y.IsNull) ? Null : new SqlInt64(x.m_value ^ y.m_value);
         }
-
 
         // Implicit conversions
 
@@ -292,7 +314,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlInt64(SqlBoolean x) {
+        public static explicit operator SqlInt64(SqlBoolean x)
+        {
             return x.IsNull ? Null : new SqlInt64((long)x.ByteValue);
         }
 
@@ -300,7 +323,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlInt64(SqlByte x) {
+        public static implicit operator SqlInt64(SqlByte x)
+        {
             return x.IsNull ? Null : new SqlInt64((long)(x.Value));
         }
 
@@ -308,7 +332,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlInt64(SqlInt16 x) {
+        public static implicit operator SqlInt64(SqlInt16 x)
+        {
             return x.IsNull ? Null : new SqlInt64((long)(x.Value));
         }
 
@@ -316,10 +341,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlInt64(SqlInt32 x) {
+        public static implicit operator SqlInt64(SqlInt32 x)
+        {
             return x.IsNull ? Null : new SqlInt64((long)(x.Value));
         }
-
 
         // Explicit conversions
 
@@ -327,7 +352,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlInt64(SqlSingle x) {
+        public static explicit operator SqlInt64(SqlSingle x)
+        {
             if (x.IsNull)
                 return Null;
 
@@ -342,7 +368,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlInt64(SqlDouble x) {
+        public static explicit operator SqlInt64(SqlDouble x)
+        {
             if (x.IsNull)
                 return Null;
 
@@ -357,7 +384,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlInt64(SqlMoney x) {
+        public static explicit operator SqlInt64(SqlMoney x)
+        {
             return x.IsNull ? Null : new SqlInt64(x.ToInt64());
         }
 
@@ -365,30 +393,35 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlInt64(SqlDecimal x) {
+        public static explicit operator SqlInt64(SqlDecimal x)
+        {
             if (x.IsNull)
                 return SqlInt64.Null;
 
-            SqlDecimal  ssnumTemp = x;
-            long        llRetVal;
+            SqlDecimal ssnumTemp = x;
+            long llRetVal;
 
             // Throw away decimal portion
-            ssnumTemp.AdjustScale (-ssnumTemp.m_bScale, false);
+            ssnumTemp.AdjustScale(-ssnumTemp.m_bScale, false);
 
             // More than 8 bytes of data will always overflow
             if (ssnumTemp.m_bLen > 2)
                 throw new OverflowException(SQLResource.ConversionOverflowMessage);
 
             // If 8 bytes of data, see if fits in LONGLONG
-            if (ssnumTemp.m_bLen == 2) {
+            if (ssnumTemp.m_bLen == 2)
+            {
                 ulong dwl = SqlDecimal.DWL(ssnumTemp.m_data1, ssnumTemp.m_data2);
-                if (dwl > SqlDecimal.x_llMax && (ssnumTemp.IsPositive || dwl != 1 + SqlDecimal.x_llMax))
+                if (
+                    dwl > SqlDecimal.x_llMax
+                    && (ssnumTemp.IsPositive || dwl != 1 + SqlDecimal.x_llMax)
+                )
                     throw new OverflowException(SQLResource.ConversionOverflowMessage);
-                llRetVal = (long) dwl;
+                llRetVal = (long)dwl;
             }
             // 4 bytes of data always fits in a LONGLONG
             else
-                llRetVal = (long) ssnumTemp.m_data1;
+                llRetVal = (long)ssnumTemp.m_data1;
 
             //negate result if ssnumTemp negative
             if (!ssnumTemp.IsPositive)
@@ -402,56 +435,70 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlInt64(SqlString x) {
+        public static explicit operator SqlInt64(SqlString x)
+        {
             return x.IsNull ? Null : new SqlInt64(Int64.Parse(x.Value, (IFormatProvider)null));
         }
 
         // Utility functions
-        private static bool SameSignLong(long x, long y) {
-            return((x ^ y) & unchecked((long)0x8000000000000000L)) == 0;
+        private static bool SameSignLong(long x, long y)
+        {
+            return ((x ^ y) & unchecked((long)0x8000000000000000L)) == 0;
         }
 
         // Overloading comparison operators
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator==(SqlInt64 x, SqlInt64 y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value == y.m_value);
+        public static SqlBoolean operator ==(SqlInt64 x, SqlInt64 y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value == y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator!=(SqlInt64 x, SqlInt64 y) {
-            return ! (x == y);
+        public static SqlBoolean operator !=(SqlInt64 x, SqlInt64 y)
+        {
+            return !(x == y);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator<(SqlInt64 x, SqlInt64 y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value < y.m_value);
+        public static SqlBoolean operator <(SqlInt64 x, SqlInt64 y)
+        {
+            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value < y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator>(SqlInt64 x, SqlInt64 y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value > y.m_value);
+        public static SqlBoolean operator >(SqlInt64 x, SqlInt64 y)
+        {
+            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value > y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator<=(SqlInt64 x, SqlInt64 y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value <= y.m_value);
+        public static SqlBoolean operator <=(SqlInt64 x, SqlInt64 y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator>=(SqlInt64 x, SqlInt64 y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value >= y.m_value);
+        public static SqlBoolean operator >=(SqlInt64 x, SqlInt64 y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value >= y.m_value);
         }
 
         //--------------------------------------------------
@@ -459,121 +506,146 @@ namespace System.Data.SqlTypes {
         //--------------------------------------------------
 
         // Alternative method for operator ~
-        public static SqlInt64 OnesComplement(SqlInt64 x) {
+        public static SqlInt64 OnesComplement(SqlInt64 x)
+        {
             return ~x;
         }
 
         // Alternative method for operator +
-        public static SqlInt64 Add(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 Add(SqlInt64 x, SqlInt64 y)
+        {
             return x + y;
         }
+
         // Alternative method for operator -
-        public static SqlInt64 Subtract(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 Subtract(SqlInt64 x, SqlInt64 y)
+        {
             return x - y;
         }
 
         // Alternative method for operator *
-        public static SqlInt64 Multiply(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 Multiply(SqlInt64 x, SqlInt64 y)
+        {
             return x * y;
         }
 
         // Alternative method for operator /
-        public static SqlInt64 Divide(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 Divide(SqlInt64 x, SqlInt64 y)
+        {
             return x / y;
         }
 
         // Alternative method for operator %
-        public static SqlInt64 Mod(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 Mod(SqlInt64 x, SqlInt64 y)
+        {
             return x % y;
         }
-        
-        public static SqlInt64 Modulus(SqlInt64 x, SqlInt64 y) {
+
+        public static SqlInt64 Modulus(SqlInt64 x, SqlInt64 y)
+        {
             return x % y;
         }
 
         // Alternative method for operator &
-        public static SqlInt64 BitwiseAnd(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 BitwiseAnd(SqlInt64 x, SqlInt64 y)
+        {
             return x & y;
         }
 
         // Alternative method for operator |
-        public static SqlInt64 BitwiseOr(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 BitwiseOr(SqlInt64 x, SqlInt64 y)
+        {
             return x | y;
         }
 
         // Alternative method for operator ^
-        public static SqlInt64 Xor(SqlInt64 x, SqlInt64 y) {
+        public static SqlInt64 Xor(SqlInt64 x, SqlInt64 y)
+        {
             return x ^ y;
         }
 
         // Alternative method for operator ==
-        public static SqlBoolean Equals(SqlInt64 x, SqlInt64 y) {
+        public static SqlBoolean Equals(SqlInt64 x, SqlInt64 y)
+        {
             return (x == y);
         }
 
         // Alternative method for operator !=
-        public static SqlBoolean NotEquals(SqlInt64 x, SqlInt64 y) {
+        public static SqlBoolean NotEquals(SqlInt64 x, SqlInt64 y)
+        {
             return (x != y);
         }
 
         // Alternative method for operator <
-        public static SqlBoolean LessThan(SqlInt64 x, SqlInt64 y) {
+        public static SqlBoolean LessThan(SqlInt64 x, SqlInt64 y)
+        {
             return (x < y);
         }
 
         // Alternative method for operator >
-        public static SqlBoolean GreaterThan(SqlInt64 x, SqlInt64 y) {
+        public static SqlBoolean GreaterThan(SqlInt64 x, SqlInt64 y)
+        {
             return (x > y);
         }
 
         // Alternative method for operator <=
-        public static SqlBoolean LessThanOrEqual(SqlInt64 x, SqlInt64 y) {
+        public static SqlBoolean LessThanOrEqual(SqlInt64 x, SqlInt64 y)
+        {
             return (x <= y);
         }
 
         // Alternative method for operator >=
-        public static SqlBoolean GreaterThanOrEqual(SqlInt64 x, SqlInt64 y) {
+        public static SqlBoolean GreaterThanOrEqual(SqlInt64 x, SqlInt64 y)
+        {
             return (x >= y);
         }
 
         // Alternative method for conversions.
 
-        public SqlBoolean ToSqlBoolean() {
+        public SqlBoolean ToSqlBoolean()
+        {
             return (SqlBoolean)this;
         }
 
-        public SqlByte ToSqlByte() {
+        public SqlByte ToSqlByte()
+        {
             return (SqlByte)this;
         }
 
-        public SqlDouble ToSqlDouble() {
+        public SqlDouble ToSqlDouble()
+        {
             return (SqlDouble)this;
         }
 
-        public SqlInt16 ToSqlInt16() {
+        public SqlInt16 ToSqlInt16()
+        {
             return (SqlInt16)this;
         }
 
-        public SqlInt32 ToSqlInt32() {
+        public SqlInt32 ToSqlInt32()
+        {
             return (SqlInt32)this;
         }
 
-        public SqlMoney ToSqlMoney() {
+        public SqlMoney ToSqlMoney()
+        {
             return (SqlMoney)this;
         }
 
-        public SqlDecimal ToSqlDecimal() {
+        public SqlDecimal ToSqlDecimal()
+        {
             return (SqlDecimal)this;
         }
 
-        public SqlSingle ToSqlSingle() {
+        public SqlSingle ToSqlSingle()
+        {
             return (SqlSingle)this;
         }
 
-        public SqlString ToSqlString() {
+        public SqlString ToSqlString()
+        {
             return (SqlString)this;
         }
-
 
         // IComparable
         // Compares this object to another object, returning an integer that
@@ -585,8 +657,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int CompareTo(Object value) {
-            if (value is SqlInt64) {
+        public int CompareTo(Object value)
+        {
+            if (value is SqlInt64)
+            {
                 SqlInt64 i = (SqlInt64)value;
 
                 return CompareTo(i);
@@ -594,16 +668,19 @@ namespace System.Data.SqlTypes {
             throw ADP.WrongType(value.GetType(), typeof(SqlInt64));
         }
 
-        public int CompareTo(SqlInt64 value) {
+        public int CompareTo(SqlInt64 value)
+        {
             // If both Null, consider them equal.
             // Otherwise, Null is less than anything.
             if (IsNull)
-                return value.IsNull ? 0  : -1;
+                return value.IsNull ? 0 : -1;
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -611,8 +688,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool Equals(Object value) {
-            if (!(value is SqlInt64)) {
+        public override bool Equals(Object value)
+        {
+            if (!(value is SqlInt64))
+            {
                 return false;
             }
 
@@ -628,26 +707,33 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return IsNull ? 0 : Value.GetHashCode();
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IXmlSerializable.ReadXml(XmlReader reader) {
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
             string isNull = reader.GetAttribute("nil", XmlSchema.InstanceNamespace);
-            if (isNull != null && XmlConvert.ToBoolean(isNull)) {
+            if (isNull != null && XmlConvert.ToBoolean(isNull))
+            {
                 // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
                 reader.ReadElementString();
                 m_fNotNull = false;
             }
-            else {
+            else
+            {
                 m_value = XmlConvert.ToInt64(reader.ReadElementString());
                 m_fNotNull = true;
             }
@@ -656,11 +742,14 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IXmlSerializable.WriteXml(XmlWriter writer) {
-            if (IsNull) {
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            if (IsNull)
+            {
                 writer.WriteAttributeString("xsi", "nil", XmlSchema.InstanceNamespace, "true");
             }
-            else {
+            else
+            {
                 writer.WriteString(XmlConvert.ToString(m_value));
             }
         }
@@ -668,27 +757,29 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet) {
+        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet)
+        {
             return new XmlQualifiedName("long", XmlSchema.Namespace);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly SqlInt64 Null        = new SqlInt64(true);
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public static readonly SqlInt64 Zero        = new SqlInt64(0);
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public static readonly SqlInt64 MinValue    = new SqlInt64(Int64.MinValue);
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public static readonly SqlInt64 MaxValue    = new SqlInt64(Int64.MaxValue);
+        public static readonly SqlInt64 Null = new SqlInt64(true);
 
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public static readonly SqlInt64 Zero = new SqlInt64(0);
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public static readonly SqlInt64 MinValue = new SqlInt64(Int64.MinValue);
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public static readonly SqlInt64 MaxValue = new SqlInt64(Int64.MaxValue);
     } // SqlInt64
-
 } // namespace System.Data.SqlTypes

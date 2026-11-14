@@ -19,7 +19,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             _dispose = dispose;
         }
 
-        public void Dispose()
-            => Interlocked.Exchange(ref _dispose, null)?.Invoke();
+        public void Dispose() => Interlocked.Exchange(ref _dispose, null)?.Invoke();
     }
 }

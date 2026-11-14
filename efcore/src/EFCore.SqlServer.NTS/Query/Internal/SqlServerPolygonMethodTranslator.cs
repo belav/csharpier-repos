@@ -15,7 +15,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 public class SqlServerPolygonMethodTranslator : IMethodCallTranslator
 {
     private static readonly MethodInfo GetInteriorRingN = typeof(Polygon).GetRuntimeMethod(
-        nameof(Polygon.GetInteriorRingN), new[] { typeof(int) })!;
+        nameof(Polygon.GetInteriorRingN),
+        new[] { typeof(int) }
+    )!;
 
     private readonly IRelationalTypeMappingSource _typeMappingSource;
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -28,7 +30,8 @@ public class SqlServerPolygonMethodTranslator : IMethodCallTranslator
     /// </summary>
     public SqlServerPolygonMethodTranslator(
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         _typeMappingSource = typeMappingSource;
         _sqlExpressionFactory = sqlExpressionFactory;
@@ -44,13 +47,21 @@ public class SqlServerPolygonMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (Equals(method, GetInteriorRingN))
         {
-            Check.DebugAssert(instance!.TypeMapping != null, "Instance must have typeMapping assigned.");
+            Check.DebugAssert(
+                instance!.TypeMapping != null,
+                "Instance must have typeMapping assigned."
+            );
             var storeType = instance.TypeMapping.StoreType;
-            var isGeography = string.Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
+            var isGeography = string.Equals(
+                storeType,
+                "geography",
+                StringComparison.OrdinalIgnoreCase
+            );
 
             if (isGeography)
             {
@@ -59,15 +70,14 @@ public class SqlServerPolygonMethodTranslator : IMethodCallTranslator
                     "RingN",
                     new[]
                     {
-                        _sqlExpressionFactory.Add(
-                            arguments[0],
-                            _sqlExpressionFactory.Constant(2))
+                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(2)),
                     },
                     nullable: true,
                     instancePropagatesNullability: true,
                     argumentsPropagateNullability: new[] { true },
                     method.ReturnType,
-                    _typeMappingSource.FindMapping(method.ReturnType, storeType));
+                    _typeMappingSource.FindMapping(method.ReturnType, storeType)
+                );
             }
 
             return _sqlExpressionFactory.Function(
@@ -75,15 +85,14 @@ public class SqlServerPolygonMethodTranslator : IMethodCallTranslator
                 "STInteriorRingN",
                 new[]
                 {
-                    _sqlExpressionFactory.Add(
-                        arguments[0],
-                        _sqlExpressionFactory.Constant(1))
+                    _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
                 },
                 nullable: true,
                 instancePropagatesNullability: true,
                 argumentsPropagateNullability: new[] { true },
                 method.ReturnType,
-                _typeMappingSource.FindMapping(method.ReturnType, storeType));
+                _typeMappingSource.FindMapping(method.ReturnType, storeType)
+            );
         }
 
         return null;

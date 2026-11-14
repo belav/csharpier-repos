@@ -3,6 +3,7 @@
 //
 
 using Internal;
+
 class C
 {
     static int Main()

@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,48 +28,42 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public abstract class ChartElement : IDisposable
-	{
-		#region Constructors
-		protected ChartElement ()
-		{
-		}
-		#endregion
+    public abstract class ChartElement : IDisposable
+    {
+        #region Constructors
+        protected ChartElement() { }
+        #endregion
 
-		#region Public Properties
-		[DefaultValue (null)]
-		public object Tag { get; set; }
-		#endregion
+        #region Public Properties
+        [DefaultValue(null)]
+        public object Tag { get; set; }
+        #endregion
 
-		#region Public Methods
-		public void Dispose ()
-		{
-		}
+        #region Public Methods
+        public void Dispose() { }
 
-		public override bool Equals (object obj)
-		{
-			return base.Equals (obj);
-		}
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
 
-		public override int GetHashCode ()
-		{
-			return base.GetHashCode ();
-		}
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
-		public override string ToString ()
-		{
-			if (this is ChartNamedElement)
-				return string.Format ("{0}-{1}", GetType ().Name, (this as ChartNamedElement).Name);
+        public override string ToString()
+        {
+            if (this is ChartNamedElement)
+                return string.Format("{0}-{1}", GetType().Name, (this as ChartNamedElement).Name);
 
-			return GetType ().Name;
-		}
-		#endregion
+            return GetType().Name;
+        }
+        #endregion
 
 
-		#region Protected Methods
-		protected virtual void Dispose (bool disposing)
-		{
-		}
-		#endregion
-	}
+        #region Protected Methods
+        protected virtual void Dispose(bool disposing) { }
+        #endregion
+    }
 }

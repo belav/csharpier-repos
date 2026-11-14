@@ -58,9 +58,8 @@ public class ServerLogScope : IDisposable
 
             // Create (or get) a logger with the same name as the server logger
             // Call in the lock to avoid ODE where LoggerFactory could be disposed by the wrapped disposable
-            logger = _serverLoggers.GetOrAdd(
-                write.LoggerName,
-                loggerName => _loggerFactory.CreateLogger("SERVER " + loggerName)
+            logger = _serverLoggers.GetOrAdd(write.LoggerName, loggerName =>
+                _loggerFactory.CreateLogger("SERVER " + loggerName)
             );
         }
 

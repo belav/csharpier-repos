@@ -4,89 +4,119 @@
 //   If someone screws up the function we will end up
 //   setting values in the wrong slots and the totals will be wrong
 
-
 using System;
 using System.Threading;
 using Xunit;
 
 public class Value0
 {
+    [ThreadStatic]
+    private static object One = 1;
 
     [ThreadStatic]
-    private static object One= 1;
+    private static object Two = 2;
+
     [ThreadStatic]
-    private static object Two= 2;
+    private static object Three = 3;
+
     [ThreadStatic]
-    private static object Three= 3;
+    private static object Four = 4;
+
     [ThreadStatic]
-    private static object Four= 4;
+    private static object Five = 5;
+
     [ThreadStatic]
-    private static object Five= 5;
+    private static object Six = 6;
+
     [ThreadStatic]
-    private static object Six= 6;
+    private static object Seven = 7;
+
     [ThreadStatic]
-    private static object Seven= 7;
+    private static object Eight = 8;
+
     [ThreadStatic]
-    private static object Eight= 8;
+    private static object Nine = 9;
+
     [ThreadStatic]
-    private static object Nine= 9;
+    private static object Ten = 10;
+
     [ThreadStatic]
-    private static object Ten= 10;
+    private static object Eleven = 11;
+
     [ThreadStatic]
-    private static object Eleven= 11;
+    private static object Twelve = 12;
+
     [ThreadStatic]
-    private static object Twelve= 12;
+    private static object Thirteen = 13;
+
     [ThreadStatic]
-    private static object Thirteen= 13;
+    private static object Fourteen = 14;
+
     [ThreadStatic]
-    private static object Fourteen= 14;
+    private static object Fifteen = 15;
+
     [ThreadStatic]
-    private static object Fifteen= 15;
+    private static object Sixteen = 16;
+
     [ThreadStatic]
-    private static object Sixteen= 16;
+    private static object Seventeen = 17;
+
     [ThreadStatic]
-    private static object Seventeen= 17;
+    private static object Eightteen = 18;
+
     [ThreadStatic]
-    private static object Eightteen= 18;
+    private static object Nineteen = 19;
+
     [ThreadStatic]
-    private static object Nineteen= 19;
+    private static object Twenty = 20;
+
     [ThreadStatic]
-    private static object Twenty= 20;
+    private static object TwentyOne = 21;
+
     [ThreadStatic]
-    private static object TwentyOne= 21;
+    private static object TwentyTwo = 22;
+
     [ThreadStatic]
-    private static object TwentyTwo= 22;
+    private static object TwentyThree = 23;
+
     [ThreadStatic]
-    private static object TwentyThree= 23;
+    private static object TwentyFour = 24;
+
     [ThreadStatic]
-    private static object TwentyFour= 24;
+    private static object TwentyFive = 25;
+
     [ThreadStatic]
-    private static object TwentyFive= 25;
+    private static object TwentySix = 26;
+
     [ThreadStatic]
-    private static object TwentySix= 26;
+    private static object TwentySeven = 27;
+
     [ThreadStatic]
-    private static object TwentySeven= 27;
+    private static object TwentyEight = 28;
+
     [ThreadStatic]
-    private static object TwentyEight= 28;
+    private static object TwentyNine = 29;
+
     [ThreadStatic]
-    private static object TwentyNine= 29;
+    private static object Thirty = 30;
+
     [ThreadStatic]
-    private static object Thirty= 30;
+    private static object ThirtyOne = 31;
+
     [ThreadStatic]
-    private static object ThirtyOne= 31;
-    [ThreadStatic]
-    private static object ThirtyTwo= 32;
+    private static object ThirtyTwo = 32;
 
     public bool CheckValues()
     {
-        if((int)ThirtyTwo != 32)
+        if ((int)ThirtyTwo != 32)
         {
             Console.WriteLine("ThirtySecond spot was incorrect!!!");
             return false;
         }
-        
+
         int value = 0;
-        value = (int)One
+        value =
+            (int)One
             + (int)Two
             + (int)Three
             + (int)Four
@@ -119,94 +149,124 @@ public class Value0
             + (int)ThirtyOne
             + (int)ThirtyTwo;
 
-        if(value != 528)
+        if (value != 528)
         {
-           Console.WriteLine("Value0 - Wrong values in ThreadStatics!!! {0}",value);
+            Console.WriteLine("Value0 - Wrong values in ThreadStatics!!! {0}", value);
             return false;
         }
         return true;
     }
-    
 }
 
 public class Value1
 {
+    [ThreadStatic]
+    private static object One = 1;
 
     [ThreadStatic]
-    private static object One= 1;
+    private static object Two = 2;
+
     [ThreadStatic]
-    private static object Two= 2;
+    private static object Three = 3;
+
     [ThreadStatic]
-    private static object Three= 3;
+    private static object Four = 4;
+
     [ThreadStatic]
-    private static object Four= 4;
+    private static object Five = 5;
+
     [ThreadStatic]
-    private static object Five= 5;
+    private static object Six = 6;
+
     [ThreadStatic]
-    private static object Six= 6;
+    private static object Seven = 7;
+
     [ThreadStatic]
-    private static object Seven= 7;
+    private static object Eight = 8;
+
     [ThreadStatic]
-    private static object Eight= 8;
+    private static object Nine = 9;
+
     [ThreadStatic]
-    private static object Nine= 9;
+    private static object Ten = 10;
+
     [ThreadStatic]
-    private static object Ten= 10;
+    private static object Eleven = 11;
+
     [ThreadStatic]
-    private static object Eleven= 11;
+    private static object Twelve = 12;
+
     [ThreadStatic]
-    private static object Twelve= 12;
+    private static object Thirteen = 13;
+
     [ThreadStatic]
-    private static object Thirteen= 13;
+    private static object Fourteen = 14;
+
     [ThreadStatic]
-    private static object Fourteen= 14;
+    private static object Fifteen = 15;
+
     [ThreadStatic]
-    private static object Fifteen= 15;
+    private static object Sixteen = 16;
+
     [ThreadStatic]
-    private static object Sixteen= 16;
+    private static object Seventeen = 17;
+
     [ThreadStatic]
-    private static object Seventeen= 17;
+    private static object Eightteen = 18;
+
     [ThreadStatic]
-    private static object Eightteen= 18;
+    private static object Nineteen = 19;
+
     [ThreadStatic]
-    private static object Nineteen= 19;
+    private static object Twenty = 20;
+
     [ThreadStatic]
-    private static object Twenty= 20;
+    private static object TwentyOne = 21;
+
     [ThreadStatic]
-    private static object TwentyOne= 21;
+    private static object TwentyTwo = 22;
+
     [ThreadStatic]
-    private static object TwentyTwo= 22;
+    private static object TwentyThree = 23;
+
     [ThreadStatic]
-    private static object TwentyThree= 23;
+    private static object TwentyFour = 24;
+
     [ThreadStatic]
-    private static object TwentyFour= 24;
+    private static object TwentyFive = 25;
+
     [ThreadStatic]
-    private static object TwentyFive= 25;
+    private static object TwentySix = 26;
+
     [ThreadStatic]
-    private static object TwentySix= 26;
+    private static object TwentySeven = 27;
+
     [ThreadStatic]
-    private static object TwentySeven= 27;
+    private static object TwentyEight = 28;
+
     [ThreadStatic]
-    private static object TwentyEight= 28;
+    private static object TwentyNine = 29;
+
     [ThreadStatic]
-    private static object TwentyNine= 29;
+    private static object Thirty = 30;
+
     [ThreadStatic]
-    private static object Thirty= 30;
+    private static object ThirtyOne = 31;
+
     [ThreadStatic]
-    private static object ThirtyOne= 31;
-    [ThreadStatic]
-    private static object ThirtyTwo= 32;
+    private static object ThirtyTwo = 32;
 
     public bool CheckValues()
     {
-        if((int)ThirtyTwo != 32)
+        if ((int)ThirtyTwo != 32)
         {
             Console.WriteLine("ThirtySecond spot was incorrect!!!");
             return false;
         }
-        
+
         int value = 0;
-        value = (int)One
+        value =
+            (int)One
             + (int)Two
             + (int)Three
             + (int)Four
@@ -239,94 +299,124 @@ public class Value1
             + (int)ThirtyOne
             + (int)ThirtyTwo;
 
-        if(value != 528)
+        if (value != 528)
         {
-            Console.WriteLine("Value1 - Wrong values in ThreadStatics!!! {0}",value);
+            Console.WriteLine("Value1 - Wrong values in ThreadStatics!!! {0}", value);
             return false;
         }
         return true;
     }
-    
 }
 
 public class Value2
 {
+    [ThreadStatic]
+    private static object One = 1;
 
     [ThreadStatic]
-    private static object One= 1;
+    private static object Two = 2;
+
     [ThreadStatic]
-    private static object Two= 2;
+    private static object Three = 3;
+
     [ThreadStatic]
-    private static object Three= 3;
+    private static object Four = 4;
+
     [ThreadStatic]
-    private static object Four= 4;
+    private static object Five = 5;
+
     [ThreadStatic]
-    private static object Five= 5;
+    private static object Six = 6;
+
     [ThreadStatic]
-    private static object Six= 6;
+    private static object Seven = 7;
+
     [ThreadStatic]
-    private static object Seven= 7;
+    private static object Eight = 8;
+
     [ThreadStatic]
-    private static object Eight= 8;
+    private static object Nine = 9;
+
     [ThreadStatic]
-    private static object Nine= 9;
+    private static object Ten = 10;
+
     [ThreadStatic]
-    private static object Ten= 10;
+    private static object Eleven = 11;
+
     [ThreadStatic]
-    private static object Eleven= 11;
+    private static object Twelve = 12;
+
     [ThreadStatic]
-    private static object Twelve= 12;
+    private static object Thirteen = 13;
+
     [ThreadStatic]
-    private static object Thirteen= 13;
+    private static object Fourteen = 14;
+
     [ThreadStatic]
-    private static object Fourteen= 14;
+    private static object Fifteen = 15;
+
     [ThreadStatic]
-    private static object Fifteen= 15;
+    private static object Sixteen = 16;
+
     [ThreadStatic]
-    private static object Sixteen= 16;
+    private static object Seventeen = 17;
+
     [ThreadStatic]
-    private static object Seventeen= 17;
+    private static object Eightteen = 18;
+
     [ThreadStatic]
-    private static object Eightteen= 18;
+    private static object Nineteen = 19;
+
     [ThreadStatic]
-    private static object Nineteen= 19;
+    private static object Twenty = 20;
+
     [ThreadStatic]
-    private static object Twenty= 20;
+    private static object TwentyOne = 21;
+
     [ThreadStatic]
-    private static object TwentyOne= 21;
+    private static object TwentyTwo = 22;
+
     [ThreadStatic]
-    private static object TwentyTwo= 22;
+    private static object TwentyThree = 23;
+
     [ThreadStatic]
-    private static object TwentyThree= 23;
+    private static object TwentyFour = 24;
+
     [ThreadStatic]
-    private static object TwentyFour= 24;
+    private static object TwentyFive = 25;
+
     [ThreadStatic]
-    private static object TwentyFive= 25;
+    private static object TwentySix = 26;
+
     [ThreadStatic]
-    private static object TwentySix= 26;
+    private static object TwentySeven = 27;
+
     [ThreadStatic]
-    private static object TwentySeven= 27;
+    private static object TwentyEight = 28;
+
     [ThreadStatic]
-    private static object TwentyEight= 28;
+    private static object TwentyNine = 29;
+
     [ThreadStatic]
-    private static object TwentyNine= 29;
+    private static object Thirty = 30;
+
     [ThreadStatic]
-    private static object Thirty= 30;
+    private static object ThirtyOne = 31;
+
     [ThreadStatic]
-    private static object ThirtyOne= 31;
-    [ThreadStatic]
-    private static object ThirtyTwo= 32;
+    private static object ThirtyTwo = 32;
 
     public bool CheckValues()
     {
-        if((int)ThirtyTwo != 32)
+        if ((int)ThirtyTwo != 32)
         {
             Console.WriteLine("Value2 - ThirtySecond spot was incorrect!!!");
             return false;
         }
-        
+
         int value = 0;
-        value = (int)One
+        value =
+            (int)One
             + (int)Two
             + (int)Three
             + (int)Four
@@ -359,9 +449,9 @@ public class Value2
             + (int)ThirtyOne
             + (int)ThirtyTwo;
 
-        if(value != 528)
+        if (value != 528)
         {
-            Console.WriteLine("Wrong values in ThreadStatics!!! {0}",value);
+            Console.WriteLine("Wrong values in ThreadStatics!!! {0}", value);
             return false;
         }
         return true;
@@ -370,82 +460,113 @@ public class Value2
 
 public class Value3
 {
+    [ThreadStatic]
+    private static object One = 1;
 
     [ThreadStatic]
-    private static object One= 1;
+    private static object Two = 2;
+
     [ThreadStatic]
-    private static object Two= 2;
+    private static object Three = 3;
+
     [ThreadStatic]
-    private static object Three= 3;
+    private static object Four = 4;
+
     [ThreadStatic]
-    private static object Four= 4;
+    private static object Five = 5;
+
     [ThreadStatic]
-    private static object Five= 5;
+    private static object Six = 6;
+
     [ThreadStatic]
-    private static object Six= 6;
+    private static object Seven = 7;
+
     [ThreadStatic]
-    private static object Seven= 7;
+    private static object Eight = 8;
+
     [ThreadStatic]
-    private static object Eight= 8;
+    private static object Nine = 9;
+
     [ThreadStatic]
-    private static object Nine= 9;
+    private static object Ten = 10;
+
     [ThreadStatic]
-    private static object Ten= 10;
+    private static object Eleven = 11;
+
     [ThreadStatic]
-    private static object Eleven= 11;
+    private static object Twelve = 12;
+
     [ThreadStatic]
-    private static object Twelve= 12;
+    private static object Thirteen = 13;
+
     [ThreadStatic]
-    private static object Thirteen= 13;
+    private static object Fourteen = 14;
+
     [ThreadStatic]
-    private static object Fourteen= 14;
+    private static object Fifteen = 15;
+
     [ThreadStatic]
-    private static object Fifteen= 15;
+    private static object Sixteen = 16;
+
     [ThreadStatic]
-    private static object Sixteen= 16;
+    private static object Seventeen = 17;
+
     [ThreadStatic]
-    private static object Seventeen= 17;
+    private static object Eightteen = 18;
+
     [ThreadStatic]
-    private static object Eightteen= 18;
+    private static object Nineteen = 19;
+
     [ThreadStatic]
-    private static object Nineteen= 19;
+    private static object Twenty = 20;
+
     [ThreadStatic]
-    private static object Twenty= 20;
+    private static object TwentyOne = 21;
+
     [ThreadStatic]
-    private static object TwentyOne= 21;
+    private static object TwentyTwo = 22;
+
     [ThreadStatic]
-    private static object TwentyTwo= 22;
+    private static object TwentyThree = 23;
+
     [ThreadStatic]
-    private static object TwentyThree= 23;
+    private static object TwentyFour = 24;
+
     [ThreadStatic]
-    private static object TwentyFour= 24;
+    private static object TwentyFive = 25;
+
     [ThreadStatic]
-    private static object TwentyFive= 25;
+    private static object TwentySix = 26;
+
     [ThreadStatic]
-    private static object TwentySix= 26;
+    private static object TwentySeven = 27;
+
     [ThreadStatic]
-    private static object TwentySeven= 27;
+    private static object TwentyEight = 28;
+
     [ThreadStatic]
-    private static object TwentyEight= 28;
+    private static object TwentyNine = 29;
+
     [ThreadStatic]
-    private static object TwentyNine= 29;
+    private static object Thirty = 30;
+
     [ThreadStatic]
-    private static object Thirty= 30;
+    private static object ThirtyOne = 31;
+
     [ThreadStatic]
-    private static object ThirtyOne= 31;
-    [ThreadStatic]
-    private static object ThirtyTwo= 32;
+    private static object ThirtyTwo = 32;
 
     public bool CheckValues()
     {
-        if((int)ThirtyTwo != 32)
+        if ((int)ThirtyTwo != 32)
         {
             Console.WriteLine("Value2 - ThirtySecond spot was incorrect!!!");
             return false;
         }
-        
+
         int value = 0;
-        value = (int)One
+        value =
+            (int)One
             + (int)Two
             + (int)Three
             + (int)Four
@@ -478,9 +599,9 @@ public class Value3
             + (int)ThirtyOne
             + (int)ThirtyTwo;
 
-        if(value != 528)
+        if (value != 528)
         {
-            Console.WriteLine("Wrong values in ThreadStatics!!! {0}",value);
+            Console.WriteLine("Wrong values in ThreadStatics!!! {0}", value);
             return false;
         }
         return true;
@@ -489,82 +610,113 @@ public class Value3
 
 public class Value4
 {
+    [ThreadStatic]
+    private static object One = 1;
 
     [ThreadStatic]
-    private static object One= 1;
+    private static object Two = 2;
+
     [ThreadStatic]
-    private static object Two= 2;
+    private static object Three = 3;
+
     [ThreadStatic]
-    private static object Three= 3;
+    private static object Four = 4;
+
     [ThreadStatic]
-    private static object Four= 4;
+    private static object Five = 5;
+
     [ThreadStatic]
-    private static object Five= 5;
+    private static object Six = 6;
+
     [ThreadStatic]
-    private static object Six= 6;
+    private static object Seven = 7;
+
     [ThreadStatic]
-    private static object Seven= 7;
+    private static object Eight = 8;
+
     [ThreadStatic]
-    private static object Eight= 8;
+    private static object Nine = 9;
+
     [ThreadStatic]
-    private static object Nine= 9;
+    private static object Ten = 10;
+
     [ThreadStatic]
-    private static object Ten= 10;
+    private static object Eleven = 11;
+
     [ThreadStatic]
-    private static object Eleven= 11;
+    private static object Twelve = 12;
+
     [ThreadStatic]
-    private static object Twelve= 12;
+    private static object Thirteen = 13;
+
     [ThreadStatic]
-    private static object Thirteen= 13;
+    private static object Fourteen = 14;
+
     [ThreadStatic]
-    private static object Fourteen= 14;
+    private static object Fifteen = 15;
+
     [ThreadStatic]
-    private static object Fifteen= 15;
+    private static object Sixteen = 16;
+
     [ThreadStatic]
-    private static object Sixteen= 16;
+    private static object Seventeen = 17;
+
     [ThreadStatic]
-    private static object Seventeen= 17;
+    private static object Eightteen = 18;
+
     [ThreadStatic]
-    private static object Eightteen= 18;
+    private static object Nineteen = 19;
+
     [ThreadStatic]
-    private static object Nineteen= 19;
+    private static object Twenty = 20;
+
     [ThreadStatic]
-    private static object Twenty= 20;
+    private static object TwentyOne = 21;
+
     [ThreadStatic]
-    private static object TwentyOne= 21;
+    private static object TwentyTwo = 22;
+
     [ThreadStatic]
-    private static object TwentyTwo= 22;
+    private static object TwentyThree = 23;
+
     [ThreadStatic]
-    private static object TwentyThree= 23;
+    private static object TwentyFour = 24;
+
     [ThreadStatic]
-    private static object TwentyFour= 24;
+    private static object TwentyFive = 25;
+
     [ThreadStatic]
-    private static object TwentyFive= 25;
+    private static object TwentySix = 26;
+
     [ThreadStatic]
-    private static object TwentySix= 26;
+    private static object TwentySeven = 27;
+
     [ThreadStatic]
-    private static object TwentySeven= 27;
+    private static object TwentyEight = 28;
+
     [ThreadStatic]
-    private static object TwentyEight= 28;
+    private static object TwentyNine = 29;
+
     [ThreadStatic]
-    private static object TwentyNine= 29;
+    private static object Thirty = 30;
+
     [ThreadStatic]
-    private static object Thirty= 30;
+    private static object ThirtyOne = 31;
+
     [ThreadStatic]
-    private static object ThirtyOne= 31;
-    [ThreadStatic]
-    private static object ThirtyTwo= 32;
+    private static object ThirtyTwo = 32;
 
     public bool CheckValues()
     {
-        if((int)ThirtyTwo != 32)
+        if ((int)ThirtyTwo != 32)
         {
             Console.WriteLine("Value2 - ThirtySecond spot was incorrect!!!");
             return false;
         }
-        
+
         int value = 0;
-        value = (int)One
+        value =
+            (int)One
             + (int)Two
             + (int)Three
             + (int)Four
@@ -597,9 +749,9 @@ public class Value4
             + (int)ThirtyOne
             + (int)ThirtyTwo;
 
-        if(value != 528)
+        if (value != 528)
         {
-            Console.WriteLine("Wrong values in ThreadStatics!!! {0}",value);
+            Console.WriteLine("Wrong values in ThreadStatics!!! {0}", value);
             return false;
         }
         return true;
@@ -608,82 +760,113 @@ public class Value4
 
 public class Value5
 {
+    [ThreadStatic]
+    private static object One = 1;
 
     [ThreadStatic]
-    private static object One= 1;
+    private static object Two = 2;
+
     [ThreadStatic]
-    private static object Two= 2;
+    private static object Three = 3;
+
     [ThreadStatic]
-    private static object Three= 3;
+    private static object Four = 4;
+
     [ThreadStatic]
-    private static object Four= 4;
+    private static object Five = 5;
+
     [ThreadStatic]
-    private static object Five= 5;
+    private static object Six = 6;
+
     [ThreadStatic]
-    private static object Six= 6;
+    private static object Seven = 7;
+
     [ThreadStatic]
-    private static object Seven= 7;
+    private static object Eight = 8;
+
     [ThreadStatic]
-    private static object Eight= 8;
+    private static object Nine = 9;
+
     [ThreadStatic]
-    private static object Nine= 9;
+    private static object Ten = 10;
+
     [ThreadStatic]
-    private static object Ten= 10;
+    private static object Eleven = 11;
+
     [ThreadStatic]
-    private static object Eleven= 11;
+    private static object Twelve = 12;
+
     [ThreadStatic]
-    private static object Twelve= 12;
+    private static object Thirteen = 13;
+
     [ThreadStatic]
-    private static object Thirteen= 13;
+    private static object Fourteen = 14;
+
     [ThreadStatic]
-    private static object Fourteen= 14;
+    private static object Fifteen = 15;
+
     [ThreadStatic]
-    private static object Fifteen= 15;
+    private static object Sixteen = 16;
+
     [ThreadStatic]
-    private static object Sixteen= 16;
+    private static object Seventeen = 17;
+
     [ThreadStatic]
-    private static object Seventeen= 17;
+    private static object Eightteen = 18;
+
     [ThreadStatic]
-    private static object Eightteen= 18;
+    private static object Nineteen = 19;
+
     [ThreadStatic]
-    private static object Nineteen= 19;
+    private static object Twenty = 20;
+
     [ThreadStatic]
-    private static object Twenty= 20;
+    private static object TwentyOne = 21;
+
     [ThreadStatic]
-    private static object TwentyOne= 21;
+    private static object TwentyTwo = 22;
+
     [ThreadStatic]
-    private static object TwentyTwo= 22;
+    private static object TwentyThree = 23;
+
     [ThreadStatic]
-    private static object TwentyThree= 23;
+    private static object TwentyFour = 24;
+
     [ThreadStatic]
-    private static object TwentyFour= 24;
+    private static object TwentyFive = 25;
+
     [ThreadStatic]
-    private static object TwentyFive= 25;
+    private static object TwentySix = 26;
+
     [ThreadStatic]
-    private static object TwentySix= 26;
+    private static object TwentySeven = 27;
+
     [ThreadStatic]
-    private static object TwentySeven= 27;
+    private static object TwentyEight = 28;
+
     [ThreadStatic]
-    private static object TwentyEight= 28;
+    private static object TwentyNine = 29;
+
     [ThreadStatic]
-    private static object TwentyNine= 29;
+    private static object Thirty = 30;
+
     [ThreadStatic]
-    private static object Thirty= 30;
+    private static object ThirtyOne = 31;
+
     [ThreadStatic]
-    private static object ThirtyOne= 31;
-    [ThreadStatic]
-    private static object ThirtyTwo= 32;
+    private static object ThirtyTwo = 32;
 
     public bool CheckValues()
     {
-        if((int)ThirtyTwo != 32)
+        if ((int)ThirtyTwo != 32)
         {
             Console.WriteLine("Value2 - ThirtySecond spot was incorrect!!!");
             return false;
         }
-        
+
         int value = 0;
-        value = (int)One
+        value =
+            (int)One
             + (int)Two
             + (int)Three
             + (int)Four
@@ -716,9 +899,9 @@ public class Value5
             + (int)ThirtyOne
             + (int)ThirtyTwo;
 
-        if(value != 528)
+        if (value != 528)
         {
-            Console.WriteLine("Wrong values in ThreadStatics!!! {0}",value);
+            Console.WriteLine("Wrong values in ThreadStatics!!! {0}", value);
             return false;
         }
         return true;
@@ -731,15 +914,19 @@ public class MyData
 
     [ThreadStatic]
     private static Value0 v0;
+
     [ThreadStatic]
     private static Value1 v1;
+
     [ThreadStatic]
     private static Value2 v2;
 
     [ThreadStatic]
     private static Value3 v3;
+
     [ThreadStatic]
     private static Value4 v4;
+
     [ThreadStatic]
     private static Value5 v5;
 
@@ -754,18 +941,18 @@ public class MyData
         v3 = new Value3();
         v4 = new Value4();
         v5 = new Value5();
-        pass = v0.CheckValues()
-                && v1.CheckValues()
-                && v2.CheckValues()
-                && v3.CheckValues()
-                && v4.CheckValues()
-                && v5.CheckValues();
+        pass =
+            v0.CheckValues()
+            && v1.CheckValues()
+            && v2.CheckValues()
+            && v3.CheckValues()
+            && v4.CheckValues()
+            && v5.CheckValues();
     }
 }
 
 public class Test_threadstatic01
 {
-
     private int retVal = 0;
 
     [Fact]
@@ -773,7 +960,7 @@ public class Test_threadstatic01
     {
         Test_threadstatic01 staticsTest = new Test_threadstatic01();
         staticsTest.RunTest();
-        Console.WriteLine(100 == staticsTest.retVal ? "Test Passed":"Test Failed");
+        Console.WriteLine(100 == staticsTest.retVal ? "Test Passed" : "Test Failed");
         return staticsTest.retVal;
     }
 
@@ -781,20 +968,18 @@ public class Test_threadstatic01
     {
         MyData data = new MyData();
         data.autoEvent = new AutoResetEvent(false);
-        
+
         Thread t = new Thread(data.ThreadTarget);
         t.Start();
-        if(!t.IsAlive)
+        if (!t.IsAlive)
         {
             Console.WriteLine("Thread was not set to Alive after starting");
             retVal = 50;
             return;
         }
-        data.autoEvent.Set();            
+        data.autoEvent.Set();
         t.Join();
-        if(data.pass)
+        if (data.pass)
             retVal = 100;
     }
-
 }
-

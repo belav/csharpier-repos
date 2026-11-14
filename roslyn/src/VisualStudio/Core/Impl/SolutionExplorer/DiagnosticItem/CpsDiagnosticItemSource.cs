@@ -13,7 +13,9 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal partial class CpsDiagnosticItemSource : BaseDiagnosticAndGeneratorItemSource, INotifyPropertyChanged
+    internal partial class CpsDiagnosticItemSource
+        : BaseDiagnosticAndGeneratorItemSource,
+            INotifyPropertyChanged
     {
         private readonly IVsHierarchyItem _item;
         private readonly string _projectDirectoryPath;
@@ -25,7 +27,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public CpsDiagnosticItemSource(Workspace workspace, string projectPath, ProjectId projectId, IVsHierarchyItem item, IAnalyzersCommandHandler commandHandler, IDiagnosticAnalyzerService analyzerService)
+        public CpsDiagnosticItemSource(
+            Workspace workspace,
+            string projectPath,
+            ProjectId projectId,
+            IVsHierarchyItem item,
+            IAnalyzersCommandHandler commandHandler,
+            IDiagnosticAnalyzerService analyzerService
+        )
             : base(workspace, projectId, commandHandler, analyzerService)
         {
             _item = item;
@@ -69,7 +78,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
         }
 
-        public IContextMenuController DiagnosticItemContextMenuController => CommandHandler.DiagnosticContextMenuController;
+        public IContextMenuController DiagnosticItemContextMenuController =>
+            CommandHandler.DiagnosticContextMenuController;
 
         public override object SourceItem => _item;
 
@@ -85,8 +95,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
 
             // Was this a change to our project, or a global change?
-            if (e.ProjectId == ProjectId ||
-                e.Kind == WorkspaceChangeKind.SolutionChanged)
+            if (e.ProjectId == ProjectId || e.Kind == WorkspaceChangeKind.SolutionChanged)
             {
                 var analyzerReference = TryGetAnalyzerReference(e.NewSolution);
                 if (analyzerReference != null)
@@ -109,14 +118,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
 
             var canonicalName = _item.CanonicalName;
-            var analyzerFilePath = CpsUtilities.ExtractAnalyzerFilePath(_projectDirectoryPath, canonicalName);
+            var analyzerFilePath = CpsUtilities.ExtractAnalyzerFilePath(
+                _projectDirectoryPath,
+                canonicalName
+            );
 
             if (string.IsNullOrEmpty(analyzerFilePath))
             {
                 return null;
             }
 
-            return project.AnalyzerReferences.FirstOrDefault(r => string.Equals(r.FullPath, analyzerFilePath, StringComparison.OrdinalIgnoreCase));
+            return project.AnalyzerReferences.FirstOrDefault(r =>
+                string.Equals(r.FullPath, analyzerFilePath, StringComparison.OrdinalIgnoreCase)
+            );
         }
     }
 }

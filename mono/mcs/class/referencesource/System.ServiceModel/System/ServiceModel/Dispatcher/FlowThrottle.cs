@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     sealed class FlowThrottle
     {
@@ -27,10 +27,19 @@ namespace System.ServiceModel.Dispatcher
         Action released;
         Action<int> ratio;
 
-        internal FlowThrottle(WaitCallback release, int capacity, String propertyName, String configName)
+        internal FlowThrottle(
+            WaitCallback release,
+            int capacity,
+            String propertyName,
+            String configName
+        )
         {
             if (capacity <= 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                    )
+                );
 
             this.count = 0;
             this.capacity = capacity;
@@ -48,7 +57,11 @@ namespace System.ServiceModel.Dispatcher
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                        )
+                    );
                 this.capacity = value;
             }
         }
@@ -80,18 +93,26 @@ namespace System.ServiceModel.Dispatcher
                             string traceMessage;
                             if (this.propertyName != null)
                             {
-                                traceMessage = SR.GetString(SR.TraceCodeServiceThrottleLimitReached,
-                                                 this.propertyName, this.capacity, this.configName);
+                                traceMessage = SR.GetString(
+                                    SR.TraceCodeServiceThrottleLimitReached,
+                                    this.propertyName,
+                                    this.capacity,
+                                    this.configName
+                                );
                             }
                             else
                             {
-                                traceMessage = SR.GetString(SR.TraceCodeServiceThrottleLimitReachedInternal,
-                                                 this.capacity);
+                                traceMessage = SR.GetString(
+                                    SR.TraceCodeServiceThrottleLimitReachedInternal,
+                                    this.capacity
+                                );
                             }
 
                             TraceUtility.TraceEvent(
-                                TraceEventType.Warning, TraceCode.ServiceThrottleLimitReached, traceMessage);
-
+                                TraceEventType.Warning,
+                                TraceCode.ServiceThrottleLimitReached,
+                                traceMessage
+                            );
                         }
                     }
 

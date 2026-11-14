@@ -1,19 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="DayNameFormat.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
     ///    <para>
     ///       Specifies the format for the name of days.
     ///    </para>
     /// </devdoc>
-    public enum DayNameFormat {
-
+    public enum DayNameFormat
+    {
         /// <devdoc>
         ///    <para>
         ///       The day name displayed in full.
@@ -41,6 +40,6 @@ namespace System.Web.UI.WebControls {
         ///    </para>
         /// </devdoc>
         FirstTwoLetters = 3,
-        Shortest = 4
+        Shortest = 4,
     }
 }

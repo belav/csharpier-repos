@@ -44,8 +44,7 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int RecordsAffected
-        => _recordsAffected;
+    public override int RecordsAffected => _recordsAffected;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,8 +52,7 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override object this[string name]
-        => throw new NotSupportedException();
+    public override object this[string name] => throw new NotSupportedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,8 +60,7 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override object this[int ordinal]
-        => throw new NotSupportedException();
+    public override object this[int ordinal] => throw new NotSupportedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -71,8 +68,7 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int Depth
-        => throw new NotSupportedException();
+    public override int Depth => throw new NotSupportedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -110,8 +106,7 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsClosed
-        => _isClosed;
+    public override bool IsClosed => _isClosed;
 
     [Conditional("DEBUG")]
     private void AssertReaderIsOpen()
@@ -143,8 +138,7 @@ public class BufferedDataReader : DbDataReader
     {
         AssertReaderIsOpenWithData();
 
-        if (0 > ordinal
-            || ordinal > _currentResultSet.FieldCount)
+        if (0 > ordinal || ordinal > _currentResultSet.FieldCount)
         {
             throw new IndexOutOfRangeException();
         }
@@ -167,9 +161,13 @@ public class BufferedDataReader : DbDataReader
         {
             do
             {
-                _bufferedDataRecords.Add(new BufferedDataRecord(_detailedErrorsEnabled).Initialize(_underlyingReader, columns));
-            }
-            while (_underlyingReader.NextResult());
+                _bufferedDataRecords.Add(
+                    new BufferedDataRecord(_detailedErrorsEnabled).Initialize(
+                        _underlyingReader,
+                        columns
+                    )
+                );
+            } while (_underlyingReader.NextResult());
 
             _recordsAffected = _underlyingReader.RecordsAffected;
             _currentResultSet = _bufferedDataRecords[_currentResultSetNumber];
@@ -191,7 +189,8 @@ public class BufferedDataReader : DbDataReader
     /// </summary>
     public virtual async Task<BufferedDataReader> InitializeAsync(
         IReadOnlyList<ReaderColumn?> columns,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         if (_underlyingReader == null)
         {
@@ -203,10 +202,13 @@ public class BufferedDataReader : DbDataReader
             do
             {
                 _bufferedDataRecords.Add(
-                    await new BufferedDataRecord(_detailedErrorsEnabled).InitializeAsync(_underlyingReader, columns, cancellationToken)
-                        .ConfigureAwait(false));
-            }
-            while (await _underlyingReader.NextResultAsync(cancellationToken).ConfigureAwait(false));
+                    await new BufferedDataRecord(_detailedErrorsEnabled)
+                        .InitializeAsync(_underlyingReader, columns, cancellationToken)
+                        .ConfigureAwait(false)
+                );
+            } while (
+                await _underlyingReader.NextResultAsync(cancellationToken).ConfigureAwait(false)
+            );
 
             _recordsAffected = _underlyingReader.RecordsAffected;
             _currentResultSet = _bufferedDataRecords[_currentResultSetNumber];
@@ -226,23 +228,23 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsSupportedValueType(Type type)
-        => type == typeof(int)
-            || type == typeof(bool)
-            || type == typeof(Guid)
-            || type == typeof(byte)
-            || type == typeof(char)
-            || type == typeof(DateTime)
-            || type == typeof(DateTimeOffset)
-            || type == typeof(decimal)
-            || type == typeof(double)
-            || type == typeof(float)
-            || type == typeof(short)
-            || type == typeof(long)
-            || type == typeof(uint)
-            || type == typeof(ushort)
-            || type == typeof(ulong)
-            || type == typeof(sbyte);
+    public static bool IsSupportedValueType(Type type) =>
+        type == typeof(int)
+        || type == typeof(bool)
+        || type == typeof(Guid)
+        || type == typeof(byte)
+        || type == typeof(char)
+        || type == typeof(DateTime)
+        || type == typeof(DateTimeOffset)
+        || type == typeof(decimal)
+        || type == typeof(double)
+        || type == typeof(float)
+        || type == typeof(short)
+        || type == typeof(long)
+        || type == typeof(uint)
+        || type == typeof(ushort)
+        || type == typeof(ulong)
+        || type == typeof(sbyte);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -271,9 +273,7 @@ public class BufferedDataReader : DbDataReader
     /// </summary>
     protected override void Dispose(bool disposing)
     {
-        if (!_disposed
-            && disposing
-            && !IsClosed)
+        if (!_disposed && disposing && !IsClosed)
         {
             Close();
         }
@@ -313,8 +313,13 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override long GetBytes(int ordinal, long dataOffset, byte[]? buffer, int bufferOffset, int length)
-        => throw new NotSupportedException();
+    public override long GetBytes(
+        int ordinal,
+        long dataOffset,
+        byte[]? buffer,
+        int bufferOffset,
+        int length
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -334,8 +339,13 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override long GetChars(int ordinal, long dataOffset, char[]? buffer, int bufferOffset, int length)
-        => throw new NotSupportedException();
+    public override long GetChars(
+        int ordinal,
+        long dataOffset,
+        char[]? buffer,
+        int bufferOffset,
+        int length
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -571,8 +581,7 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override IEnumerator GetEnumerator()
-        => throw new NotSupportedException();
+    public override IEnumerator GetEnumerator() => throw new NotSupportedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -580,8 +589,7 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override DataTable GetSchemaTable()
-        => throw new NotSupportedException();
+    public override DataTable GetSchemaTable() => throw new NotSupportedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -608,8 +616,8 @@ public class BufferedDataReader : DbDataReader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Task<bool> NextResultAsync(CancellationToken cancellationToken)
-        => Task.FromResult(NextResult());
+    public override Task<bool> NextResultAsync(CancellationToken cancellationToken) =>
+        Task.FromResult(NextResult());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -735,114 +743,109 @@ public class BufferedDataReader : DbDataReader
 
         public bool IsDataReady { get; private set; }
 
-        public bool HasRows
-            => _rowCount > 0;
+        public bool HasRows => _rowCount > 0;
 
-        public int FieldCount
-            => _fieldTypes.Length;
+        public int FieldCount => _fieldTypes.Length;
 
-        public string GetDataTypeName(int ordinal)
-            => _dataTypeNames[ordinal];
+        public string GetDataTypeName(int ordinal) => _dataTypeNames[ordinal];
 
-        public Type GetFieldType(int ordinal)
-            => _fieldTypes[ordinal];
+        public Type GetFieldType(int ordinal) => _fieldTypes[ordinal];
 
-        public string GetName(int ordinal)
-            => _columnNames[ordinal];
+        public string GetName(int ordinal) => _columnNames[ordinal];
 
-        public int GetOrdinal(string name)
-            => _fieldNameLookup.Value[name];
+        public int GetOrdinal(string name) => _fieldNameLookup.Value[name];
 
-        public bool GetBoolean(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Bool
+        public bool GetBoolean(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Bool
                 ? _bools[_currentRowNumber * _boolCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<bool>(ordinal);
 
-        public byte GetByte(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Byte
+        public byte GetByte(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Byte
                 ? _bytes[_currentRowNumber * _byteCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<byte>(ordinal);
 
-        public char GetChar(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Char
+        public char GetChar(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Char
                 ? _chars[_currentRowNumber * _charCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<char>(ordinal);
 
-        public DateTime GetDateTime(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.DateTime
+        public DateTime GetDateTime(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.DateTime
                 ? _dateTimes[_currentRowNumber * _dateTimeCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<DateTime>(ordinal);
 
-        public DateTimeOffset GetDateTimeOffset(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.DateTimeOffset
-                ? _dateTimeOffsets[_currentRowNumber * _dateTimeOffsetCount + _ordinalToIndexMap[ordinal]]
+        public DateTimeOffset GetDateTimeOffset(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.DateTimeOffset
+                ? _dateTimeOffsets[
+                    _currentRowNumber * _dateTimeOffsetCount + _ordinalToIndexMap[ordinal]
+                ]
                 : GetFieldValue<DateTimeOffset>(ordinal);
 
-        public decimal GetDecimal(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Decimal
+        public decimal GetDecimal(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Decimal
                 ? _decimals[_currentRowNumber * _decimalCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<decimal>(ordinal);
 
-        public double GetDouble(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Double
+        public double GetDouble(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Double
                 ? _doubles[_currentRowNumber * _doubleCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<double>(ordinal);
 
-        public float GetFloat(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Float
+        public float GetFloat(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Float
                 ? _floats[_currentRowNumber * _floatCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<float>(ordinal);
 
-        public Guid GetGuid(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Guid
+        public Guid GetGuid(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Guid
                 ? _guids[_currentRowNumber * _guidCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<Guid>(ordinal);
 
-        public short GetInt16(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Short
+        public short GetInt16(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Short
                 ? _shorts[_currentRowNumber * _shortCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<short>(ordinal);
 
-        public int GetInt32(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Int
+        public int GetInt32(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Int
                 ? _ints[_currentRowNumber * _intCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<int>(ordinal);
 
-        public long GetInt64(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.Long
+        public long GetInt64(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.Long
                 ? _longs[_currentRowNumber * _longCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<long>(ordinal);
 
-        public sbyte GetSByte(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.SByte
+        public sbyte GetSByte(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.SByte
                 ? _sbytes[_currentRowNumber * _sbyteCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<sbyte>(ordinal);
 
-        public ushort GetUInt16(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.UShort
+        public ushort GetUInt16(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.UShort
                 ? _ushorts[_currentRowNumber * _ushortCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<ushort>(ordinal);
 
-        public uint GetUInt32(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.UInt
+        public uint GetUInt32(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.UInt
                 ? _uints[_currentRowNumber * _uintCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<uint>(ordinal);
 
-        public ulong GetUInt64(int ordinal)
-            => _columnTypeCases[ordinal] == TypeCase.ULong
+        public ulong GetUInt64(int ordinal) =>
+            _columnTypeCases[ordinal] == TypeCase.ULong
                 ? _ulongs[_currentRowNumber * _ulongCount + _ordinalToIndexMap[ordinal]]
                 : GetFieldValue<ulong>(ordinal);
 
-        public object GetValue(int ordinal)
-            => GetFieldValue<object>(ordinal);
+        public object GetValue(int ordinal) => GetFieldValue<object>(ordinal);
 
 #pragma warning disable IDE0060 // Remove unused parameter
         public static int GetValues(object[] values)
 #pragma warning restore IDE0060 // Remove unused parameter
             => throw new NotSupportedException();
 
-        public T GetFieldValue<T>(int ordinal)
-            => (_columnTypeCases[ordinal]) switch
+        public T GetFieldValue<T>(int ordinal) =>
+            (_columnTypeCases[ordinal]) switch
             {
                 TypeCase.Bool => (T)(object)GetBoolean(ordinal),
                 TypeCase.Byte => (T)(object)GetByte(ordinal),
@@ -860,29 +863,30 @@ public class BufferedDataReader : DbDataReader
                 TypeCase.UShort => (T)(object)GetUInt16(ordinal),
                 TypeCase.UInt => (T)(object)GetUInt32(ordinal),
                 TypeCase.ULong => (T)(object)GetUInt64(ordinal),
-                _ => (T)_objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]]
+                _ => (T)_objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]],
             };
 
         // ReSharper disable once InconsistentNaming
-        public bool IsDBNull(int ordinal)
-            => _nulls[_currentRowNumber * _nullCount + _nullOrdinalToIndexMap[ordinal]];
+        public bool IsDBNull(int ordinal) =>
+            _nulls[_currentRowNumber * _nullCount + _nullOrdinalToIndexMap[ordinal]];
 
-        public bool Read()
-            => IsDataReady = ++_currentRowNumber < _rowCount;
+        public bool Read() => IsDataReady = ++_currentRowNumber < _rowCount;
 
 #pragma warning disable IDE0060 // Remove unused parameter
-        public Task<T> GetFieldValueAsync<T>(int ordinal, CancellationToken cancellationToken)
-            => Task.FromResult(GetFieldValue<T>(ordinal));
+        public Task<T> GetFieldValueAsync<T>(int ordinal, CancellationToken cancellationToken) =>
+            Task.FromResult(GetFieldValue<T>(ordinal));
 
         // ReSharper disable once InconsistentNaming
-        public Task<bool> IsDBNullAsync(int ordinal, CancellationToken cancellationToken)
-            => Task.FromResult(IsDBNull(ordinal));
+        public Task<bool> IsDBNullAsync(int ordinal, CancellationToken cancellationToken) =>
+            Task.FromResult(IsDBNull(ordinal));
 
-        public Task<bool> ReadAsync(CancellationToken cancellationToken)
-            => Task.FromResult(Read());
+        public Task<bool> ReadAsync(CancellationToken cancellationToken) => Task.FromResult(Read());
 #pragma warning restore IDE0060 // Remove unused parameter
 
-        public BufferedDataRecord Initialize(DbDataReader reader, IReadOnlyList<ReaderColumn?> columns)
+        public BufferedDataRecord Initialize(
+            DbDataReader reader,
+            IReadOnlyList<ReaderColumn?> columns
+        )
         {
             _underlyingReader = reader;
             _columns = columns;
@@ -910,7 +914,8 @@ public class BufferedDataReader : DbDataReader
         public async Task<BufferedDataRecord> InitializeAsync(
             DbDataReader reader,
             IReadOnlyList<ReaderColumn?> columns,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _underlyingReader = reader;
             _columns = columns;
@@ -958,7 +963,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Bool:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadBool(_underlyingReader, i, column);
                             }
@@ -972,7 +982,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Byte:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadByte(_underlyingReader, i, column);
                             }
@@ -986,7 +1001,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Char:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadChar(_underlyingReader, i, column);
                             }
@@ -1000,7 +1020,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.DateTime:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadDateTime(_underlyingReader, i, column);
                             }
@@ -1014,7 +1039,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.DateTimeOffset:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadDateTimeOffset(_underlyingReader, i, column);
                             }
@@ -1028,7 +1058,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Decimal:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadDecimal(_underlyingReader, i, column);
                             }
@@ -1042,7 +1077,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Double:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadDouble(_underlyingReader, i, column);
                             }
@@ -1056,7 +1096,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Float:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadFloat(_underlyingReader, i, column);
                             }
@@ -1070,7 +1115,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Guid:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadGuid(_underlyingReader, i, column);
                             }
@@ -1084,7 +1134,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Short:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadShort(_underlyingReader, i, column);
                             }
@@ -1098,7 +1153,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Int:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadInt(_underlyingReader, i, column);
                             }
@@ -1112,7 +1172,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.Long:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadLong(_underlyingReader, i, column);
                             }
@@ -1126,7 +1191,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.SByte:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadSByte(_underlyingReader, i, column);
                             }
@@ -1140,7 +1210,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.UShort:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadUShort(_underlyingReader, i, column);
                             }
@@ -1154,7 +1229,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.UInt:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadUInt(_underlyingReader, i, column);
                             }
@@ -1168,7 +1248,12 @@ public class BufferedDataReader : DbDataReader
                     case TypeCase.ULong:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadULong(_underlyingReader, i, column);
                             }
@@ -1184,7 +1269,12 @@ public class BufferedDataReader : DbDataReader
                     default:
                         if (nullIndex != -1)
                         {
-                            if (!(_tempNulls[_currentRowNumber * _nullCount + nullIndex] = _underlyingReader.IsDBNull(i)))
+                            if (
+                                !(
+                                    _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
+                                        _underlyingReader.IsDBNull(i)
+                                )
+                            )
                             {
                                 ReadObject(_underlyingReader, i, column);
                             }
@@ -1215,7 +1305,10 @@ public class BufferedDataReader : DbDataReader
             _dataTypeNames = dataTypeNames;
             _fieldTypes = columnTypes;
             _columnNames = columnNames;
-            _fieldNameLookup = new Lazy<Dictionary<string, int>>(CreateNameLookup, isThreadSafe: false);
+            _fieldNameLookup = new Lazy<Dictionary<string, int>>(
+                CreateNameLookup,
+                isThreadSafe: false
+            );
 
             Dictionary<string, int> CreateNameLookup()
             {
@@ -1235,19 +1328,26 @@ public class BufferedDataReader : DbDataReader
             if (FieldCount < _columns.Count)
             {
                 // Non-composed FromSql
-                var firstMissingColumn = _columns.Select(c => c?.Name).Where(c => c != null).Except(_columnNames).FirstOrDefault();
+                var firstMissingColumn = _columns
+                    .Select(c => c?.Name)
+                    .Where(c => c != null)
+                    .Except(_columnNames)
+                    .FirstOrDefault();
                 if (firstMissingColumn != null)
                 {
-                    throw new InvalidOperationException(RelationalStrings.FromSqlMissingColumn(firstMissingColumn));
+                    throw new InvalidOperationException(
+                        RelationalStrings.FromSqlMissingColumn(firstMissingColumn)
+                    );
                 }
 
-                throw new InvalidOperationException(RelationalStrings.TooFewReaderFields(_columns.Count, FieldCount));
+                throw new InvalidOperationException(
+                    RelationalStrings.TooFewReaderFields(_columns.Count, FieldCount)
+                );
             }
 
             _columnTypeCases = Enumerable.Repeat(TypeCase.Empty, fieldCount).ToArray();
             _ordinalToIndexMap = Enumerable.Repeat(-1, fieldCount).ToArray();
-            if (_columns.Count > 0
-                && _columns.Any(e => e?.Name != null))
+            if (_columns.Count > 0 && _columns.Any(e => e?.Name != null))
             {
                 // Non-Composed FromSql
                 var readerColumns = _fieldNameLookup.Value;
@@ -1266,7 +1366,9 @@ public class BufferedDataReader : DbDataReader
                     {
                         if (_columns.Count != 1)
                         {
-                            throw new InvalidOperationException(RelationalStrings.FromSqlMissingColumn(column.Name));
+                            throw new InvalidOperationException(
+                                RelationalStrings.FromSqlMissingColumn(column.Name)
+                            );
                         }
 
                         ordinal = 0;
@@ -1517,8 +1619,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _tempBools[_currentRowNumber * _boolCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<bool>)column).GetFieldValue(reader, _indexMap);
+                    _tempBools[_currentRowNumber * _boolCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<bool>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1527,8 +1630,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _tempBools[_currentRowNumber * _boolCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<bool>)column).GetFieldValue(reader, _indexMap);
+                _tempBools[_currentRowNumber * _boolCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<bool>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1538,8 +1642,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _bytes[_currentRowNumber * _byteCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<byte>)column).GetFieldValue(reader, _indexMap);
+                    _bytes[_currentRowNumber * _byteCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<byte>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1548,8 +1653,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _bytes[_currentRowNumber * _byteCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<byte>)column).GetFieldValue(reader, _indexMap);
+                _bytes[_currentRowNumber * _byteCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<byte>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1559,8 +1665,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _chars[_currentRowNumber * _charCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<char>)column).GetFieldValue(reader, _indexMap);
+                    _chars[_currentRowNumber * _charCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<char>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1569,8 +1676,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _chars[_currentRowNumber * _charCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<char>)column).GetFieldValue(reader, _indexMap);
+                _chars[_currentRowNumber * _charCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<char>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1580,8 +1688,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _dateTimes[_currentRowNumber * _dateTimeCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<DateTime>)column).GetFieldValue(reader, _indexMap);
+                    _dateTimes[_currentRowNumber * _dateTimeCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<DateTime>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1590,8 +1699,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _dateTimes[_currentRowNumber * _dateTimeCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<DateTime>)column).GetFieldValue(reader, _indexMap);
+                _dateTimes[_currentRowNumber * _dateTimeCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<DateTime>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1601,8 +1711,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _dateTimeOffsets[_currentRowNumber * _dateTimeOffsetCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<DateTimeOffset>)column).GetFieldValue(reader, _indexMap);
+                    _dateTimeOffsets[
+                        _currentRowNumber * _dateTimeOffsetCount + _ordinalToIndexMap[ordinal]
+                    ] = ((ReaderColumn<DateTimeOffset>)column).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1611,8 +1722,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _dateTimeOffsets[_currentRowNumber * _dateTimeOffsetCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<DateTimeOffset>)column).GetFieldValue(reader, _indexMap);
+                _dateTimeOffsets[
+                    _currentRowNumber * _dateTimeOffsetCount + _ordinalToIndexMap[ordinal]
+                ] = ((ReaderColumn<DateTimeOffset>)column).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1622,8 +1734,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _decimals[_currentRowNumber * _decimalCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<decimal>)column).GetFieldValue(reader, _indexMap);
+                    _decimals[_currentRowNumber * _decimalCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<decimal>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1632,8 +1745,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _decimals[_currentRowNumber * _decimalCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<decimal>)column).GetFieldValue(reader, _indexMap);
+                _decimals[_currentRowNumber * _decimalCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<decimal>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1643,8 +1757,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _doubles[_currentRowNumber * _doubleCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<double>)column).GetFieldValue(reader, _indexMap);
+                    _doubles[_currentRowNumber * _doubleCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<double>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1653,8 +1768,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _doubles[_currentRowNumber * _doubleCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<double>)column).GetFieldValue(reader, _indexMap);
+                _doubles[_currentRowNumber * _doubleCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<double>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1664,8 +1780,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _floats[_currentRowNumber * _floatCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<float>)column).GetFieldValue(reader, _indexMap);
+                    _floats[_currentRowNumber * _floatCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<float>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1674,8 +1791,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _floats[_currentRowNumber * _floatCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<float>)column).GetFieldValue(reader, _indexMap);
+                _floats[_currentRowNumber * _floatCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<float>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1685,8 +1803,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _guids[_currentRowNumber * _guidCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<Guid>)column).GetFieldValue(reader, _indexMap);
+                    _guids[_currentRowNumber * _guidCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<Guid>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1695,8 +1814,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _guids[_currentRowNumber * _guidCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<Guid>)column).GetFieldValue(reader, _indexMap);
+                _guids[_currentRowNumber * _guidCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<Guid>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1706,8 +1826,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _shorts[_currentRowNumber * _shortCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<short>)column).GetFieldValue(reader, _indexMap);
+                    _shorts[_currentRowNumber * _shortCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<short>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1716,8 +1837,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _shorts[_currentRowNumber * _shortCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<short>)column).GetFieldValue(reader, _indexMap);
+                _shorts[_currentRowNumber * _shortCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<short>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1727,8 +1849,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _ints[_currentRowNumber * _intCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<int>)column).GetFieldValue(reader, _indexMap);
+                    _ints[_currentRowNumber * _intCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<int>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1737,8 +1860,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _ints[_currentRowNumber * _intCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<int>)column).GetFieldValue(reader, _indexMap);
+                _ints[_currentRowNumber * _intCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<int>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1748,8 +1872,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _longs[_currentRowNumber * _longCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<long>)column).GetFieldValue(reader, _indexMap);
+                    _longs[_currentRowNumber * _longCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<long>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1758,8 +1883,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _longs[_currentRowNumber * _longCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<long>)column).GetFieldValue(reader, _indexMap);
+                _longs[_currentRowNumber * _longCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<long>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1769,8 +1895,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _sbytes[_currentRowNumber * _sbyteCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<sbyte>)column).GetFieldValue(reader, _indexMap);
+                    _sbytes[_currentRowNumber * _sbyteCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<sbyte>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1779,8 +1906,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _sbytes[_currentRowNumber * _sbyteCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<sbyte>)column).GetFieldValue(reader, _indexMap);
+                _sbytes[_currentRowNumber * _sbyteCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<sbyte>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1790,8 +1918,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _ushorts[_currentRowNumber * _ushortCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<ushort>)column).GetFieldValue(reader, _indexMap);
+                    _ushorts[_currentRowNumber * _ushortCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<ushort>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1800,8 +1929,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _ushorts[_currentRowNumber * _ushortCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<ushort>)column).GetFieldValue(reader, _indexMap);
+                _ushorts[_currentRowNumber * _ushortCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<ushort>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1811,8 +1941,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _uints[_currentRowNumber * _uintCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<uint>)column).GetFieldValue(reader, _indexMap);
+                    _uints[_currentRowNumber * _uintCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<uint>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1821,8 +1952,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _uints[_currentRowNumber * _uintCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<uint>)column).GetFieldValue(reader, _indexMap);
+                _uints[_currentRowNumber * _uintCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<uint>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1832,8 +1964,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _ulongs[_currentRowNumber * _ulongCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<ulong>)column).GetFieldValue(reader, _indexMap);
+                    _ulongs[_currentRowNumber * _ulongCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<ulong>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1842,8 +1975,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _ulongs[_currentRowNumber * _ulongCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<ulong>)column).GetFieldValue(reader, _indexMap);
+                _ulongs[_currentRowNumber * _ulongCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<ulong>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1853,8 +1987,9 @@ public class BufferedDataReader : DbDataReader
             {
                 try
                 {
-                    _objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]] =
-                        ((ReaderColumn<object>)column).GetFieldValue(reader, _indexMap);
+                    _objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]] = (
+                        (ReaderColumn<object>)column
+                    ).GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1863,8 +1998,9 @@ public class BufferedDataReader : DbDataReader
             }
             else
             {
-                _objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]] =
-                    ((ReaderColumn<object>)column).GetFieldValue(reader, _indexMap);
+                _objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]] = (
+                    (ReaderColumn<object>)column
+                ).GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1887,7 +2023,7 @@ public class BufferedDataReader : DbDataReader
             Long,
             UInt,
             ULong,
-            UShort
+            UShort,
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1895,7 +2031,8 @@ public class BufferedDataReader : DbDataReader
             Exception exception,
             DbDataReader reader,
             int ordinal,
-            ReaderColumn column)
+            ReaderColumn column
+        )
         {
             var value = reader.GetFieldValue<object?>(ordinal);
             var property = column.Property;
@@ -1914,21 +2051,33 @@ public class BufferedDataReader : DbDataReader
                     expectedType = property.ClrType;
                 }
 
-                message = exception is NullReferenceException
-                    || Equals(value, DBNull.Value)
-                        ? RelationalStrings.ErrorMaterializingPropertyNullReference(entityType, propertyName, expectedType)
-                        : exception is InvalidCastException
-                            ? CoreStrings.ErrorMaterializingPropertyInvalidCast(entityType, propertyName, expectedType, actualType)
-                            : RelationalStrings.ErrorMaterializingProperty(entityType, propertyName);
+                message =
+                    exception is NullReferenceException || Equals(value, DBNull.Value)
+                        ? RelationalStrings.ErrorMaterializingPropertyNullReference(
+                            entityType,
+                            propertyName,
+                            expectedType
+                        )
+                    : exception is InvalidCastException
+                        ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
+                            entityType,
+                            propertyName,
+                            expectedType,
+                            actualType
+                        )
+                    : RelationalStrings.ErrorMaterializingProperty(entityType, propertyName);
             }
             else
             {
-                message = exception is NullReferenceException
-                    || Equals(value, DBNull.Value)
+                message =
+                    exception is NullReferenceException || Equals(value, DBNull.Value)
                         ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
-                        : exception is InvalidCastException
-                            ? RelationalStrings.ErrorMaterializingValueInvalidCast(expectedType, actualType)
-                            : RelationalStrings.ErrorMaterializingValue;
+                    : exception is InvalidCastException
+                        ? RelationalStrings.ErrorMaterializingValueInvalidCast(
+                            expectedType,
+                            actualType
+                        )
+                    : RelationalStrings.ErrorMaterializingValue;
             }
 
             throw new InvalidOperationException(message, exception);

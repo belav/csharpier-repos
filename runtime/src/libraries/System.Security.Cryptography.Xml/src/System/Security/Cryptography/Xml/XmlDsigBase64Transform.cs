@@ -10,7 +10,12 @@ namespace System.Security.Cryptography.Xml
     // A class representing conversion from Base64 using CryptoStream
     public class XmlDsigBase64Transform : Transform
     {
-        private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlNodeList), typeof(XmlDocument) };
+        private readonly Type[] _inputTypes =
+        {
+            typeof(Stream),
+            typeof(XmlNodeList),
+            typeof(XmlDocument),
+        };
         private readonly Type[] _outputTypes = { typeof(Stream) };
         private CryptoStream? _cs;
 
@@ -29,9 +34,7 @@ namespace System.Security.Cryptography.Xml
             get { return _outputTypes; }
         }
 
-        public override void LoadInnerXml(XmlNodeList nodeList)
-        {
-        }
+        public override void LoadInnerXml(XmlNodeList nodeList) { }
 
         protected override XmlNodeList? GetInnerXml()
         {
@@ -59,7 +62,8 @@ namespace System.Security.Cryptography.Xml
 
         private void LoadStreamInput(Stream inputStream)
         {
-            if (inputStream == null) throw new ArgumentException("obj");
+            if (inputStream == null)
+                throw new ArgumentException("obj");
             MemoryStream ms = new MemoryStream();
             byte[] buffer = new byte[1024];
             int bytesRead;
@@ -70,8 +74,10 @@ namespace System.Security.Cryptography.Xml
                 {
                     int i;
                     int j = 0;
-                    while ((j < bytesRead) && (!char.IsWhiteSpace((char)buffer[j]))) j++;
-                    i = j; j++;
+                    while ((j < bytesRead) && (!char.IsWhiteSpace((char)buffer[j])))
+                        j++;
+                    i = j;
+                    j++;
                     while (j < bytesRead)
                     {
                         if (!char.IsWhiteSpace((char)buffer[j]))
@@ -101,8 +107,10 @@ namespace System.Security.Cryptography.Xml
             byte[] buffer = Encoding.UTF8.GetBytes(sb.ToString());
             int i;
             int j = 0;
-            while ((j < buffer.Length) && (!char.IsWhiteSpace((char)buffer[j]))) j++;
-            i = j; j++;
+            while ((j < buffer.Length) && (!char.IsWhiteSpace((char)buffer[j])))
+                j++;
+            i = j;
+            j++;
             while (j < buffer.Length)
             {
                 if (!char.IsWhiteSpace((char)buffer[j]))
@@ -124,7 +132,10 @@ namespace System.Security.Cryptography.Xml
         public override object GetOutput(Type type)
         {
             if (type != typeof(Stream) && !type.IsSubclassOf(typeof(Stream)))
-                throw new ArgumentException(SR.Cryptography_Xml_TransformIncorrectInputType, nameof(type));
+                throw new ArgumentException(
+                    SR.Cryptography_Xml_TransformIncorrectInputType,
+                    nameof(type)
+                );
             return _cs!;
         }
     }

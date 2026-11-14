@@ -7,6 +7,6 @@ namespace System.Reflection.Metadata.Ecma335
     {
         None = SignatureAttributes.None,
         HasThis = SignatureAttributes.Instance,
-        HasExplicitThis = SignatureAttributes.Instance | SignatureAttributes.ExplicitThis
+        HasExplicitThis = SignatureAttributes.Instance | SignatureAttributes.ExplicitThis,
     }
 }

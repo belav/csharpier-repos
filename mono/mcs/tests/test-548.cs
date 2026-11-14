@@ -7,14 +7,17 @@ namespace Bugs
         struct MyBoolean
         {
             private bool value;
+
             public MyBoolean(bool value)
             {
                 this.value = value;
             }
+
             public static implicit operator MyBoolean(bool value)
             {
                 return new MyBoolean(value);
             }
+
             public static implicit operator bool(MyBoolean b)
             {
                 return b.value;

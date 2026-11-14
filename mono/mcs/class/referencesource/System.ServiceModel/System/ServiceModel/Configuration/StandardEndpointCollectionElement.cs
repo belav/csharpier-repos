@@ -4,22 +4,31 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Configuration;
-    using System.ServiceModel;
     using System.Security;
-    using System.Collections.Generic;
+    using System.ServiceModel;
     using System.ServiceModel.Description;
 
-    public partial class StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration> : EndpointCollectionElement
+    public partial class StandardEndpointCollectionElement<
+        TStandardEndpoint,
+        TEndpointConfiguration
+    > : EndpointCollectionElement
         where TStandardEndpoint : ServiceEndpoint
-        where TEndpointConfiguration : StandardEndpointElement, new ()
+        where TEndpointConfiguration : StandardEndpointElement, new()
     {
-
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public StandardEndpointElementCollection<TEndpointConfiguration> Endpoints
         {
-            get { return (StandardEndpointElementCollection<TEndpointConfiguration>)base[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (StandardEndpointElementCollection<TEndpointConfiguration>)
+                    base[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
         public override Type EndpointType
@@ -31,7 +40,8 @@ namespace System.ServiceModel.Configuration
         {
             get
             {
-                List<StandardEndpointElement> configuredEndpoints = new List<StandardEndpointElement>();
+                List<StandardEndpointElement> configuredEndpoints =
+                    new List<StandardEndpointElement>();
                 foreach (StandardEndpointElement configuredEndpoint in this.Endpoints)
                 {
                     configuredEndpoints.Add(configuredEndpoint);
@@ -43,7 +53,8 @@ namespace System.ServiceModel.Configuration
 
         public override bool ContainsKey(string name)
         {
-            StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration> me = (StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration>)this;
+            StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration> me =
+                (StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration>)this;
 #pragma warning suppress 56506 //Microsoft; me.Endpoints can never be null (underlying configuration system guarantees)
             return me.Endpoints.ContainsKey(name);
         }
@@ -53,11 +64,16 @@ namespace System.ServiceModel.Configuration
             return System.Activator.CreateInstance<TEndpointConfiguration>();
         }
 
-        protected internal override bool TryAdd(string name, ServiceEndpoint endpoint, Configuration config)
+        protected internal override bool TryAdd(
+            string name,
+            ServiceEndpoint endpoint,
+            Configuration config
+        )
         {
             // The configuration item needs to understand the ServiceEndpointType && be of type ServiceEndpoint
-            bool retval = (endpoint.GetType() == typeof(TStandardEndpoint)) &&
-                typeof(StandardEndpointElement).IsAssignableFrom(typeof(TEndpointConfiguration));
+            bool retval =
+                (endpoint.GetType() == typeof(TStandardEndpoint))
+                && typeof(StandardEndpointElement).IsAssignableFrom(typeof(TEndpointConfiguration));
             if (retval)
             {
                 TEndpointConfiguration endpointConfig = new TEndpointConfiguration();
@@ -69,6 +85,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

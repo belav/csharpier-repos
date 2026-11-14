@@ -42,13 +42,24 @@ namespace System.Security.Cryptography.Cose
         /// <value>A region of memory that contains the digital signature.</value>
         public ReadOnlyMemory<byte> Signature => _signature;
 
-        internal CoseSignature(CoseMultiSignMessage message, CoseHeaderMap protectedHeaders, CoseHeaderMap unprotectedHeaders, byte[] encodedSignProtectedHeaders, byte[] signature)
+        internal CoseSignature(
+            CoseMultiSignMessage message,
+            CoseHeaderMap protectedHeaders,
+            CoseHeaderMap unprotectedHeaders,
+            byte[] encodedSignProtectedHeaders,
+            byte[] signature
+        )
             : this(protectedHeaders, unprotectedHeaders, encodedSignProtectedHeaders, signature)
         {
             Message = message;
         }
 
-        internal CoseSignature(CoseHeaderMap protectedHeaders, CoseHeaderMap unprotectedHeaders, byte[] encodedSignProtectedHeaders, byte[] signature)
+        internal CoseSignature(
+            CoseHeaderMap protectedHeaders,
+            CoseHeaderMap unprotectedHeaders,
+            byte[] encodedSignProtectedHeaders,
+            byte[] signature
+        )
         {
             ProtectedHeaders = protectedHeaders;
             UnprotectedHeaders = unprotectedHeaders;
@@ -63,10 +74,7 @@ namespace System.Security.Cryptography.Cose
                 Debug.Assert(_message != null);
                 return _message;
             }
-            set
-            {
-                _message = value;
-            }
+            set { _message = value; }
         }
 
         /// <summary>
@@ -109,7 +117,13 @@ namespace System.Security.Cryptography.Cose
                 throw new InvalidOperationException(SR.ContentWasDetached);
             }
 
-            return VerifyCore(key, Message.Content.Value.Span, null, associatedData, CoseHelpers.GetKeyType(key));
+            return VerifyCore(
+                key,
+                Message.Content.Value.Span,
+                null,
+                associatedData,
+                CoseHelpers.GetKeyType(key)
+            );
         }
 
         /// <summary>
@@ -152,7 +166,13 @@ namespace System.Security.Cryptography.Cose
                 throw new InvalidOperationException(SR.ContentWasDetached);
             }
 
-            return VerifyCore(key, Message.Content.Value.Span, null, associatedData, CoseHelpers.GetKeyType(key));
+            return VerifyCore(
+                key,
+                Message.Content.Value.Span,
+                null,
+                associatedData,
+                CoseHelpers.GetKeyType(key)
+            );
         }
 
         /// <summary>
@@ -184,7 +204,11 @@ namespace System.Security.Cryptography.Cose
         /// </exception>
         /// <seealso cref="VerifyEmbedded(AsymmetricAlgorithm, byte[])"/>
         /// <seealso cref="CoseMessage.Content"/>
-        public bool VerifyDetached(AsymmetricAlgorithm key, byte[] detachedContent, byte[]? associatedData = null)
+        public bool VerifyDetached(
+            AsymmetricAlgorithm key,
+            byte[] detachedContent,
+            byte[]? associatedData = null
+        )
         {
             if (key is null)
             {
@@ -201,7 +225,13 @@ namespace System.Security.Cryptography.Cose
                 throw new InvalidOperationException(SR.ContentWasEmbedded);
             }
 
-            return VerifyCore(key, detachedContent, null, associatedData, CoseHelpers.GetKeyType(key));
+            return VerifyCore(
+                key,
+                detachedContent,
+                null,
+                associatedData,
+                CoseHelpers.GetKeyType(key)
+            );
         }
 
         /// <summary>
@@ -233,7 +263,11 @@ namespace System.Security.Cryptography.Cose
         /// </exception>
         /// <seealso cref="VerifyEmbedded(AsymmetricAlgorithm, ReadOnlySpan{byte})"/>
         /// <seealso cref="CoseMessage.Content"/>
-        public bool VerifyDetached(AsymmetricAlgorithm key, ReadOnlySpan<byte> detachedContent, ReadOnlySpan<byte> associatedData = default)
+        public bool VerifyDetached(
+            AsymmetricAlgorithm key,
+            ReadOnlySpan<byte> detachedContent,
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             if (key is null)
             {
@@ -245,7 +279,13 @@ namespace System.Security.Cryptography.Cose
                 throw new InvalidOperationException(SR.ContentWasEmbedded);
             }
 
-            return VerifyCore(key, detachedContent, null, associatedData, CoseHelpers.GetKeyType(key));
+            return VerifyCore(
+                key,
+                detachedContent,
+                null,
+                associatedData,
+                CoseHelpers.GetKeyType(key)
+            );
         }
 
         /// <summary>
@@ -285,7 +325,11 @@ namespace System.Security.Cryptography.Cose
         /// </exception>
         /// <seealso cref="VerifyDetachedAsync(AsymmetricAlgorithm, Stream, ReadOnlyMemory{byte}, CancellationToken)"/>
         /// <seealso cref="CoseMessage.Content"/>
-        public bool VerifyDetached(AsymmetricAlgorithm key, Stream detachedContent, ReadOnlySpan<byte> associatedData = default)
+        public bool VerifyDetached(
+            AsymmetricAlgorithm key,
+            Stream detachedContent,
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             if (key is null)
             {
@@ -299,12 +343,18 @@ namespace System.Security.Cryptography.Cose
 
             if (!detachedContent.CanRead)
             {
-                throw new ArgumentException(SR.Sign1ArgumentStreamNotReadable, nameof(detachedContent));
+                throw new ArgumentException(
+                    SR.Sign1ArgumentStreamNotReadable,
+                    nameof(detachedContent)
+                );
             }
 
             if (!detachedContent.CanSeek)
             {
-                throw new ArgumentException(SR.Sign1ArgumentStreamNotSeekable, nameof(detachedContent));
+                throw new ArgumentException(
+                    SR.Sign1ArgumentStreamNotSeekable,
+                    nameof(detachedContent)
+                );
             }
 
             if (!Message.IsDetached)
@@ -312,7 +362,13 @@ namespace System.Security.Cryptography.Cose
                 throw new InvalidOperationException(SR.ContentWasEmbedded);
             }
 
-            return VerifyCore(key, default, detachedContent, associatedData, CoseHelpers.GetKeyType(key));
+            return VerifyCore(
+                key,
+                default,
+                detachedContent,
+                associatedData,
+                CoseHelpers.GetKeyType(key)
+            );
         }
 
         /// <summary>
@@ -353,7 +409,12 @@ namespace System.Security.Cryptography.Cose
         /// </exception>
         /// <seealso cref="VerifyDetached(AsymmetricAlgorithm, Stream, ReadOnlySpan{byte})"/>
         /// <seealso cref="CoseMessage.Content"/>
-        public Task<bool> VerifyDetachedAsync(AsymmetricAlgorithm key, Stream detachedContent, ReadOnlyMemory<byte> associatedData = default, CancellationToken cancellationToken = default)
+        public Task<bool> VerifyDetachedAsync(
+            AsymmetricAlgorithm key,
+            Stream detachedContent,
+            ReadOnlyMemory<byte> associatedData = default,
+            CancellationToken cancellationToken = default
+        )
         {
             if (key is null)
             {
@@ -366,12 +427,18 @@ namespace System.Security.Cryptography.Cose
 
             if (!detachedContent.CanRead)
             {
-                throw new ArgumentException(SR.Sign1ArgumentStreamNotReadable, nameof(detachedContent));
+                throw new ArgumentException(
+                    SR.Sign1ArgumentStreamNotReadable,
+                    nameof(detachedContent)
+                );
             }
 
             if (!detachedContent.CanSeek)
             {
-                throw new ArgumentException(SR.Sign1ArgumentStreamNotSeekable, nameof(detachedContent));
+                throw new ArgumentException(
+                    SR.Sign1ArgumentStreamNotSeekable,
+                    nameof(detachedContent)
+                );
             }
 
             if (!Message.IsDetached)
@@ -379,12 +446,26 @@ namespace System.Security.Cryptography.Cose
                 throw new InvalidOperationException(SR.ContentWasEmbedded);
             }
 
-            return VerifyAsyncCore(key, detachedContent, associatedData, CoseHelpers.GetKeyType(key), cancellationToken);
+            return VerifyAsyncCore(
+                key,
+                detachedContent,
+                associatedData,
+                CoseHelpers.GetKeyType(key),
+                cancellationToken
+            );
         }
 
-        private async Task<bool> VerifyAsyncCore(AsymmetricAlgorithm key, Stream content, ReadOnlyMemory<byte> associatedData, KeyType keyType, CancellationToken cancellationToken)
+        private async Task<bool> VerifyAsyncCore(
+            AsymmetricAlgorithm key,
+            Stream content,
+            ReadOnlyMemory<byte> associatedData,
+            KeyType keyType,
+            CancellationToken cancellationToken
+        )
         {
-            ReadOnlyMemory<byte> encodedAlg = CoseHelpers.GetCoseAlgorithmFromProtectedHeaders(ProtectedHeaders);
+            ReadOnlyMemory<byte> encodedAlg = CoseHelpers.GetCoseAlgorithmFromProtectedHeaders(
+                ProtectedHeaders
+            );
 
             int? nullableAlg = CoseHelpers.DecodeCoseAlgorithmHeader(encodedAlg);
             if (nullableAlg == null)
@@ -392,7 +473,12 @@ namespace System.Security.Cryptography.Cose
                 throw new CryptographicException(SR.Sign1VerifyAlgHeaderWasIncorrect);
             }
 
-            HashAlgorithmName hashAlgorithm = CoseHelpers.GetHashAlgorithmFromCoseAlgorithmAndKeyType(nullableAlg.Value, keyType, out RSASignaturePadding? padding);
+            HashAlgorithmName hashAlgorithm =
+                CoseHelpers.GetHashAlgorithmFromCoseAlgorithmAndKeyType(
+                    nullableAlg.Value,
+                    keyType,
+                    out RSASignaturePadding? padding
+                );
 
             using (IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithm))
             {
@@ -401,12 +487,24 @@ namespace System.Security.Cryptography.Cose
                     Message.RawProtectedHeaders.Length,
                     _encodedSignProtectedHeaders.Length,
                     associatedData.Length,
-                    contentLength: 0);
+                    contentLength: 0
+                );
                 byte[] buffer = ArrayPool<byte>.Shared.Rent(bufferLength);
 
                 try
                 {
-                    await CoseMessage.AppendToBeSignedAsync(buffer, hasher, SigStructureContext.Signature, Message.RawProtectedHeaders, _encodedSignProtectedHeaders, associatedData, content, cancellationToken).ConfigureAwait(false);
+                    await CoseMessage
+                        .AppendToBeSignedAsync(
+                            buffer,
+                            hasher,
+                            SigStructureContext.Signature,
+                            Message.RawProtectedHeaders,
+                            _encodedSignProtectedHeaders,
+                            associatedData,
+                            content,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     return VerifyHash(key, hasher, hashAlgorithm, keyType, padding);
                 }
                 finally
@@ -416,16 +514,29 @@ namespace System.Security.Cryptography.Cose
             }
         }
 
-        private bool VerifyCore(AsymmetricAlgorithm key, ReadOnlySpan<byte> contentBytes, Stream? contentStream, ReadOnlySpan<byte> associatedData, KeyType keyType)
+        private bool VerifyCore(
+            AsymmetricAlgorithm key,
+            ReadOnlySpan<byte> contentBytes,
+            Stream? contentStream,
+            ReadOnlySpan<byte> associatedData,
+            KeyType keyType
+        )
         {
-            ReadOnlyMemory<byte> encodedAlg = CoseHelpers.GetCoseAlgorithmFromProtectedHeaders(ProtectedHeaders);
+            ReadOnlyMemory<byte> encodedAlg = CoseHelpers.GetCoseAlgorithmFromProtectedHeaders(
+                ProtectedHeaders
+            );
             int? nullableAlg = CoseHelpers.DecodeCoseAlgorithmHeader(encodedAlg);
             if (nullableAlg == null)
             {
                 throw new CryptographicException(SR.Sign1VerifyAlgHeaderWasIncorrect);
             }
 
-            HashAlgorithmName hashAlgorithm = CoseHelpers.GetHashAlgorithmFromCoseAlgorithmAndKeyType(nullableAlg.Value, keyType, out RSASignaturePadding? padding);
+            HashAlgorithmName hashAlgorithm =
+                CoseHelpers.GetHashAlgorithmFromCoseAlgorithmAndKeyType(
+                    nullableAlg.Value,
+                    keyType,
+                    out RSASignaturePadding? padding
+                );
             using (IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithm))
             {
                 int bufferLength = CoseMessage.ComputeToBeSignedEncodedSize(
@@ -433,12 +544,22 @@ namespace System.Security.Cryptography.Cose
                     Message.RawProtectedHeaders.Length,
                     _encodedSignProtectedHeaders.Length,
                     associatedData.Length,
-                    contentLength: 0);
+                    contentLength: 0
+                );
                 byte[] buffer = ArrayPool<byte>.Shared.Rent(bufferLength);
 
                 try
                 {
-                    CoseMessage.AppendToBeSigned(buffer, hasher, SigStructureContext.Signature, Message.RawProtectedHeaders.Span, _encodedSignProtectedHeaders, associatedData, contentBytes, contentStream);
+                    CoseMessage.AppendToBeSigned(
+                        buffer,
+                        hasher,
+                        SigStructureContext.Signature,
+                        Message.RawProtectedHeaders.Span,
+                        _encodedSignProtectedHeaders,
+                        associatedData,
+                        contentBytes,
+                        contentStream
+                    );
                     return VerifyHash(key, hasher, hashAlgorithm, keyType, padding);
                 }
                 finally
@@ -448,7 +569,13 @@ namespace System.Security.Cryptography.Cose
             }
         }
 
-        private bool VerifyHash(AsymmetricAlgorithm key, IncrementalHash hasher, HashAlgorithmName hashAlgorithm, KeyType keyType, RSASignaturePadding? padding)
+        private bool VerifyHash(
+            AsymmetricAlgorithm key,
+            IncrementalHash hasher,
+            HashAlgorithmName hashAlgorithm,
+            KeyType keyType,
+            RSASignaturePadding? padding
+        )
         {
 #if NETCOREAPP
             Debug.Assert(hasher.HashLengthInBytes <= 512 / 8); // largest hash we can get (SHA512).

@@ -24,30 +24,27 @@
 //
 
 using System;
-using System.IO;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
 
 //
 public class SampleDrawingImage
 {
-	
-	public static void Main (string[] args)
-	{
-		Stream stout, stin;
+    public static void Main(string[] args)
+    {
+        Stream stout,
+            stin;
 
-		stin = File.OpenRead ("bitmaps/horse.bmp");
-		Bitmap bmp = new Bitmap (stin);
-		
-		// Draw a red rectangle
-		Graphics gr = Graphics.FromImage (bmp);
-		gr.DrawRectangle (new Pen (Color.Red, 2), 10.0F, 10.0F, 40.0F, 40.0F);
-		
-		stout = File.Open ("horse.jpg", FileMode.Create);
-		bmp.Save (stout, ImageFormat.Jpeg);
-	}
+        stin = File.OpenRead("bitmaps/horse.bmp");
+        Bitmap bmp = new Bitmap(stin);
 
+        // Draw a red rectangle
+        Graphics gr = Graphics.FromImage(bmp);
+        gr.DrawRectangle(new Pen(Color.Red, 2), 10.0F, 10.0F, 40.0F, 40.0F);
+
+        stout = File.Open("horse.jpg", FileMode.Create);
+        bmp.Save(stout, ImageFormat.Jpeg);
+    }
 }
-
-

@@ -27,7 +27,10 @@ namespace System.Resources.Tests
         {
             const string message = "message";
             const string cultureName = "fr-FR";
-            MissingSatelliteAssemblyException msae = new MissingSatelliteAssemblyException(message, cultureName);
+            MissingSatelliteAssemblyException msae = new MissingSatelliteAssemblyException(
+                message,
+                cultureName
+            );
             Assert.Equal(message, msae.Message);
             Assert.Equal(cultureName, msae.CultureName);
         }
@@ -37,7 +40,10 @@ namespace System.Resources.Tests
         {
             string message = "message";
             Exception innerException = new Exception();
-            MissingSatelliteAssemblyException msae = new MissingSatelliteAssemblyException(message, innerException);
+            MissingSatelliteAssemblyException msae = new MissingSatelliteAssemblyException(
+                message,
+                innerException
+            );
             Assert.Equal(message, msae.Message);
             Assert.Same(innerException, msae.InnerException);
         }

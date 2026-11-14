@@ -9,9 +9,31 @@ namespace System.Xml.XmlConvertTests
     {
         #region Static Fields
 
-        public static string[] _Expbyte_Ideographic = { "_x3006_", "_x3008_", "_x3020_", "_x302A_", "_x4DFF_", "_x9FA6_" };
+        public static string[] _Expbyte_Ideographic =
+        {
+            "_x3006_",
+            "_x3008_",
+            "_x3020_",
+            "_x302A_",
+            "_x4DFF_",
+            "_x9FA6_",
+        };
 
-        public static byte[] _byte_Ideographic = { 0x06, 0x30, 0x08, 0x30, 0x20, 0x30, 0x2A, 0x30, 0xFF, 0x4D, 0xA6, 0x9F };
+        public static byte[] _byte_Ideographic =
+        {
+            0x06,
+            0x30,
+            0x08,
+            0x30,
+            0x20,
+            0x30,
+            0x2A,
+            0x30,
+            0xFF,
+            0x4D,
+            0xA6,
+            0x9F,
+        };
 
         #endregion
 

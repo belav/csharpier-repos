@@ -6,12 +6,13 @@
 // <owner current="true" primary="false">billin</owner>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.SqlServer.Server {
-
+namespace Microsoft.SqlServer.Server
+{
     using System;
 
     // Types should match Getter/Setter names
-    internal enum SmiXetterTypeCode {
+    internal enum SmiXetterTypeCode
+    {
         XetBoolean,
         XetByte,
         XetBytes,
@@ -25,10 +26,10 @@ namespace Microsoft.SqlServer.Server {
         XetSqlDecimal,
         XetDateTime,
         XetGuid,
-        GetVariantMetaData,     // no set call, just get
+        GetVariantMetaData, // no set call, just get
         GetXet,
-        XetTime,                // XetTime mistakenly named, does not match getter/setter method name
-        XetTimeSpan = XetTime,  // prefer using XetTimeSpan instead of XetTime.  Both mean the same thing for now.
+        XetTime, // XetTime mistakenly named, does not match getter/setter method name
+        XetTimeSpan = XetTime, // prefer using XetTimeSpan instead of XetTime.  Both mean the same thing for now.
         XetDateTimeOffset,
     }
 }

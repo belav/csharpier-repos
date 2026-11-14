@@ -43,7 +43,8 @@ public partial class HelpBuilder
         /// <summary>
         /// Gets the description for an argument (typically used in the second column text in the arguments section).
         /// </summary>
-        public static string GetArgumentDescription(CliArgument argument) => argument.Description ?? string.Empty;
+        public static string GetArgumentDescription(CliArgument argument) =>
+            argument.Description ?? string.Empty;
 
         /// <summary>
         /// Gets the usage title for an argument (for example: <c>&lt;value&gt;</c>, typically used in the first column text in the arguments usage section, or within the synopsis.
@@ -78,24 +79,25 @@ public partial class HelpBuilder
         /// </summary>
         /// <param name="symbol">The symbol to get a help item for.</param>
         /// <returns>Text to display.</returns>
-        public static string GetCommandUsageLabel(CliCommand symbol)
-            => GetIdentifierSymbolUsageLabel(symbol, symbol._aliases);
+        public static string GetCommandUsageLabel(CliCommand symbol) =>
+            GetIdentifierSymbolUsageLabel(symbol, symbol._aliases);
 
         /// <inheritdoc cref="GetCommandUsageLabel(CliCommand)"/>
-        public static string GetOptionUsageLabel(CliOption symbol)
-            => GetIdentifierSymbolUsageLabel(symbol, symbol._aliases);
+        public static string GetOptionUsageLabel(CliOption symbol) =>
+            GetIdentifierSymbolUsageLabel(symbol, symbol._aliases);
 
         private static string GetIdentifierSymbolUsageLabel(CliSymbol symbol, AliasSet? aliasSet)
         {
-            var aliases =  aliasSet is null
-                ? new [] { symbol.Name }
-                : new [] {symbol.Name}.Concat(aliasSet)
-                                .Select(r => r.SplitPrefix())
-                                .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
-                                .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
-                                .GroupBy(t => t.Alias)
-                                .Select(t => t.First())
-                                .Select(t => $"{t.Prefix}{t.Alias}");
+            var aliases = aliasSet is null
+                ? new[] { symbol.Name }
+                : new[] { symbol.Name }
+                    .Concat(aliasSet)
+                    .Select(r => r.SplitPrefix())
+                    .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
+                    .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
+                    .GroupBy(t => t.Alias)
+                    .Select(t => t.First())
+                    .Select(t => $"{t.Prefix}{t.Alias}");
 
             var firstColumnText = string.Join(", ", aliases);
 
@@ -139,7 +141,11 @@ public partial class HelpBuilder
         public static Func<HelpContext, bool> SynopsisSection() =>
             ctx =>
             {
-                ctx.HelpBuilder.WriteHeading(LocalizationResources.HelpDescriptionTitle(), ctx.Command.Description, ctx.Output);
+                ctx.HelpBuilder.WriteHeading(
+                    LocalizationResources.HelpDescriptionTitle(),
+                    ctx.Command.Description,
+                    ctx.Output
+                );
                 return true;
             };
 
@@ -149,7 +155,11 @@ public partial class HelpBuilder
         public static Func<HelpContext, bool> CommandUsageSection() =>
             ctx =>
             {
-                ctx.HelpBuilder.WriteHeading(LocalizationResources.HelpUsageTitle(), ctx.HelpBuilder.GetUsage(ctx.Command), ctx.Output);
+                ctx.HelpBuilder.WriteHeading(
+                    LocalizationResources.HelpUsageTitle(),
+                    ctx.HelpBuilder.GetUsage(ctx.Command),
+                    ctx.Output
+                );
                 return true;
             };
 
@@ -159,11 +169,17 @@ public partial class HelpBuilder
         public static Func<HelpContext, bool> CommandArgumentsSection() =>
             ctx =>
             {
-                TwoColumnHelpRow[] commandArguments = ctx.HelpBuilder.GetCommandArgumentRows(ctx.Command, ctx).ToArray();
+                TwoColumnHelpRow[] commandArguments = ctx
+                    .HelpBuilder.GetCommandArgumentRows(ctx.Command, ctx)
+                    .ToArray();
 
                 if (commandArguments.Length > 0)
                 {
-                    ctx.HelpBuilder.WriteHeading(LocalizationResources.HelpArgumentsTitle(), null, ctx.Output);
+                    ctx.HelpBuilder.WriteHeading(
+                        LocalizationResources.HelpArgumentsTitle(),
+                        null,
+                        ctx.Output
+                    );
                     ctx.HelpBuilder.WriteColumns(commandArguments, ctx);
                     return true;
                 }
@@ -219,7 +235,9 @@ public partial class HelpBuilder
                                     {
                                         if (option is not HelpOption || !addedHelpOption)
                                         {
-                                            optionRows.Add(ctx.HelpBuilder.GetTwoColumnRow(option, ctx));
+                                            optionRows.Add(
+                                                ctx.HelpBuilder.GetTwoColumnRow(option, ctx)
+                                            );
                                         }
                                     }
                                 }
@@ -234,7 +252,11 @@ public partial class HelpBuilder
 
                 if (optionRows.Count > 0)
                 {
-                    ctx.HelpBuilder.WriteHeading(LocalizationResources.HelpOptionsTitle(), null, ctx.Output);
+                    ctx.HelpBuilder.WriteHeading(
+                        LocalizationResources.HelpOptionsTitle(),
+                        null,
+                        ctx.Output
+                    );
                     ctx.HelpBuilder.WriteColumns(optionRows, ctx);
                     return true;
                 }

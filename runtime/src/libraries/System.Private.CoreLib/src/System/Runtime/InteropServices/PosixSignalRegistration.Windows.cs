@@ -10,7 +10,10 @@ namespace System.Runtime.InteropServices
     {
         private static readonly HashSet<Token> s_registrations = new();
 
-        private static unsafe PosixSignalRegistration Register(PosixSignal signal, Action<PosixSignalContext> handler)
+        private static unsafe PosixSignalRegistration Register(
+            PosixSignal signal,
+            Action<PosixSignalContext> handler
+        )
         {
             switch (signal)
             {
@@ -29,8 +32,10 @@ namespace System.Runtime.InteropServices
 
             lock (s_registrations)
             {
-                if (s_registrations.Count == 0 &&
-                    !Interop.Kernel32.SetConsoleCtrlHandler(&HandlerRoutine, Add: true))
+                if (
+                    s_registrations.Count == 0
+                    && !Interop.Kernel32.SetConsoleCtrlHandler(&HandlerRoutine, Add: true)
+                )
                 {
                     throw Win32Marshal.GetExceptionForLastWin32Error();
                 }
@@ -50,8 +55,10 @@ namespace System.Runtime.InteropServices
                     _token = null;
 
                     s_registrations.Remove(token);
-                    if (s_registrations.Count == 0 &&
-                        !Interop.Kernel32.SetConsoleCtrlHandler(&HandlerRoutine, Add: false))
+                    if (
+                        s_registrations.Count == 0
+                        && !Interop.Kernel32.SetConsoleCtrlHandler(&HandlerRoutine, Add: false)
+                    )
                     {
                         // Ignore errors due to the handler no longer being registered; this can happen, for example, with
                         // direct use of Alloc/Attach/FreeConsole which result in the table of control handlers being reset.

@@ -9,10 +9,18 @@ namespace System.Reflection.Metadata.Ecma335
 {
     public sealed partial class MetadataBuilder
     {
-        internal SerializedMetadata GetSerializedMetadata(ImmutableArray<int> externalRowCounts, int metadataVersionByteCount, bool isStandaloneDebugMetadata)
+        internal SerializedMetadata GetSerializedMetadata(
+            ImmutableArray<int> externalRowCounts,
+            int metadataVersionByteCount,
+            bool isStandaloneDebugMetadata
+        )
         {
             var stringHeapBuilder = new HeapBlobBuilder(_stringHeapCapacity);
-            var stringMap = SerializeStringHeap(stringHeapBuilder, _strings, _stringHeapStartOffset);
+            var stringMap = SerializeStringHeap(
+                stringHeapBuilder,
+                _strings,
+                _stringHeapStartOffset
+            );
 
             Debug.Assert(HeapIndex.UserString == 0);
             Debug.Assert((int)HeapIndex.String == 1);
@@ -23,14 +31,25 @@ namespace System.Reflection.Metadata.Ecma335
                 _userStringBuilder.Count,
                 stringHeapBuilder.Count,
                 _blobHeapSize,
-                _guidBuilder.Count);
+                _guidBuilder.Count
+            );
 
-            var sizes = new MetadataSizes(GetRowCounts(), externalRowCounts, heapSizes, metadataVersionByteCount, isStandaloneDebugMetadata);
+            var sizes = new MetadataSizes(
+                GetRowCounts(),
+                externalRowCounts,
+                heapSizes,
+                metadataVersionByteCount,
+                isStandaloneDebugMetadata
+            );
 
             return new SerializedMetadata(sizes, stringHeapBuilder, stringMap);
         }
 
-        internal static void SerializeMetadataHeader(BlobBuilder builder, string metadataVersion, MetadataSizes sizes)
+        internal static void SerializeMetadataHeader(
+            BlobBuilder builder,
+            string metadataVersion,
+            MetadataSizes sizes
+        )
         {
             int startOffset = builder.Count;
 
@@ -57,7 +76,11 @@ namespace System.Reflection.Metadata.Ecma335
             builder.WriteByte(0);
             int metadataVersionEnd = builder.Count;
 
-            for (int i = 0; i < sizes.MetadataVersionPaddedLength - (metadataVersionEnd - metadataVersionStart); i++)
+            for (
+                int i = 0;
+                i < sizes.MetadataVersionPaddedLength - (metadataVersionEnd - metadataVersionStart);
+                i++
+            )
             {
                 builder.WriteByte(0);
             }
@@ -66,7 +89,9 @@ namespace System.Reflection.Metadata.Ecma335
             builder.WriteUInt16(0);
 
             // number of streams
-            builder.WriteUInt16((ushort)(5 + (sizes.IsEncDelta ? 1 : 0) + (sizes.IsStandaloneDebugMetadata ? 1 : 0)));
+            builder.WriteUInt16(
+                (ushort)(5 + (sizes.IsEncDelta ? 1 : 0) + (sizes.IsStandaloneDebugMetadata ? 1 : 0))
+            );
 
             // stream headers
             int offsetFromStartOfMetadata = sizes.MetadataHeaderSize;
@@ -74,19 +99,49 @@ namespace System.Reflection.Metadata.Ecma335
             // emit the #Pdb stream first so that only a single page has to be read in order to find out PDB ID
             if (sizes.IsStandaloneDebugMetadata)
             {
-                SerializeStreamHeader(ref offsetFromStartOfMetadata, sizes.StandalonePdbStreamSize, "#Pdb", builder);
+                SerializeStreamHeader(
+                    ref offsetFromStartOfMetadata,
+                    sizes.StandalonePdbStreamSize,
+                    "#Pdb",
+                    builder
+                );
             }
 
             // Spec: Some compilers store metadata in a #- stream, which holds an uncompressed, or non-optimized, representation of metadata tables;
             // this includes extra metadata -Ptr tables. Such PE files do not form part of ECMA-335 standard.
             //
             // Note: EnC delta is stored as uncompressed metadata stream.
-            SerializeStreamHeader(ref offsetFromStartOfMetadata, sizes.MetadataTableStreamSize, (sizes.IsCompressed ? "#~" : "#-"), builder);
+            SerializeStreamHeader(
+                ref offsetFromStartOfMetadata,
+                sizes.MetadataTableStreamSize,
+                (sizes.IsCompressed ? "#~" : "#-"),
+                builder
+            );
 
-            SerializeStreamHeader(ref offsetFromStartOfMetadata, sizes.GetAlignedHeapSize(HeapIndex.String), "#Strings", builder);
-            SerializeStreamHeader(ref offsetFromStartOfMetadata, sizes.GetAlignedHeapSize(HeapIndex.UserString), "#US", builder);
-            SerializeStreamHeader(ref offsetFromStartOfMetadata, sizes.GetAlignedHeapSize(HeapIndex.Guid), "#GUID", builder);
-            SerializeStreamHeader(ref offsetFromStartOfMetadata, sizes.GetAlignedHeapSize(HeapIndex.Blob), "#Blob", builder);
+            SerializeStreamHeader(
+                ref offsetFromStartOfMetadata,
+                sizes.GetAlignedHeapSize(HeapIndex.String),
+                "#Strings",
+                builder
+            );
+            SerializeStreamHeader(
+                ref offsetFromStartOfMetadata,
+                sizes.GetAlignedHeapSize(HeapIndex.UserString),
+                "#US",
+                builder
+            );
+            SerializeStreamHeader(
+                ref offsetFromStartOfMetadata,
+                sizes.GetAlignedHeapSize(HeapIndex.Guid),
+                "#GUID",
+                builder
+            );
+            SerializeStreamHeader(
+                ref offsetFromStartOfMetadata,
+                sizes.GetAlignedHeapSize(HeapIndex.Blob),
+                "#Blob",
+                builder
+            );
 
             if (sizes.IsEncDelta)
             {
@@ -97,7 +152,12 @@ namespace System.Reflection.Metadata.Ecma335
             Debug.Assert(endOffset - startOffset == sizes.MetadataHeaderSize);
         }
 
-        private static void SerializeStreamHeader(ref int offsetFromStartOfMetadata, int alignedStreamSize, string streamName, BlobBuilder builder)
+        private static void SerializeStreamHeader(
+            ref int offsetFromStartOfMetadata,
+            int alignedStreamSize,
+            string streamName,
+            BlobBuilder builder
+        )
         {
             // 4 for the first uint (offset), 4 for the second uint (padded size), length of stream name + 1 for null terminator (then padded)
             int sizeOfStreamHeader = MetadataSizes.GetMetadataStreamHeaderSize(streamName);

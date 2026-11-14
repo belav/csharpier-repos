@@ -9,5 +9,4 @@ namespace System.ServiceModel.Description
         void ExportContract(WsdlExporter exporter, WsdlContractConversionContext context);
         void ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext context);
     }
-
 }

@@ -21,11 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LastBuiltInArgumentProvider()
-        {
-        }
+        public LastBuiltInArgumentProvider() { }
 
-        public override Task ProvideArgumentAsync(ArgumentContext context)
-            => Task.CompletedTask;
+        public override Task ProvideArgumentAsync(ArgumentContext context) => Task.CompletedTask;
     }
 }

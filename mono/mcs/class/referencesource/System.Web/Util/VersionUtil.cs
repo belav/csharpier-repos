@@ -1,20 +1,21 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="VersionUtil.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * Helper class for performing common operations on Version objects
- * 
+ *
  * Copyright (c) 2009 Microsoft Corporation
  */
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
 
-    internal static class VersionUtil {
-
+    internal static class VersionUtil
+    {
         public static readonly Version Framework00 = new Version(0, 0);
         public static readonly Version Framework20 = new Version(2, 0);
         public static readonly Version Framework35 = new Version(3, 5);
@@ -31,6 +32,5 @@ namespace System.Web.Util {
         // SxS releases of the .NET Framework.
         public static readonly Version FrameworkDefault = Framework40;
         public const string FrameworkDefaultString = "4.0";
-
     }
 }

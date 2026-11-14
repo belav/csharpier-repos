@@ -2,34 +2,41 @@
 // <copyright file="SoapAttributeAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
 
     /// <include file='doc\SoapAttributeAttribute.uex' path='docs/doc[@for="SoapAttributeAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-    public class SoapAttributeAttribute : System.Attribute {
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
+    public class SoapAttributeAttribute : System.Attribute
+    {
         string attributeName;
         string ns;
         string dataType;
-        
+
         /// <include file='doc\SoapAttributeAttribute.uex' path='docs/doc[@for="SoapAttributeAttribute.SoapAttributeAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapAttributeAttribute() {
-        }
-        
+        public SoapAttributeAttribute() { }
+
         /// <include file='doc\SoapAttributeAttribute.uex' path='docs/doc[@for="SoapAttributeAttribute.SoapAttributeAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapAttributeAttribute(string attributeName) {
+        public SoapAttributeAttribute(string attributeName)
+        {
             this.attributeName = attributeName;
         }
 
@@ -37,7 +44,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string AttributeName {
+        public string AttributeName
+        {
             get { return attributeName == null ? string.Empty : attributeName; }
             set { attributeName = value; }
         }
@@ -46,7 +54,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
@@ -55,7 +64,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string DataType {
+        public string DataType
+        {
             get { return dataType == null ? string.Empty : dataType; }
             set { dataType = value; }
         }

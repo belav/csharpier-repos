@@ -18,32 +18,57 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParentheses
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
-    public partial class RemoveUnnecessaryPatternParenthesesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class RemoveUnnecessaryPatternParenthesesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnnecessaryPatternParenthesesTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer(), new CSharpRemoveUnnecessaryParenthesesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer(),
+                new CSharpRemoveUnnecessaryParenthesesCodeFixProvider()
+            );
 
-        private async Task TestAsync(string initial, string expected, bool offeredWhenRequireForClarityIsEnabled, int index = 0)
+        private async Task TestAsync(
+            string initial,
+            string expected,
+            bool offeredWhenRequireForClarityIsEnabled,
+            int index = 0
+        )
         {
-            await TestInRegularAndScriptAsync(initial, expected, options: RemoveAllUnnecessaryParentheses, index: index);
+            await TestInRegularAndScriptAsync(
+                initial,
+                expected,
+                options: RemoveAllUnnecessaryParentheses,
+                index: index
+            );
 
             if (offeredWhenRequireForClarityIsEnabled)
             {
-                await TestInRegularAndScriptAsync(initial, expected, options: RequireAllParenthesesForClarity, index: index);
+                await TestInRegularAndScriptAsync(
+                    initial,
+                    expected,
+                    options: RequireAllParenthesesForClarity,
+                    index: index
+                );
             }
             else
             {
-                await TestMissingAsync(initial, parameters: new TestParameters(options: RequireAllParenthesesForClarity));
+                await TestMissingAsync(
+                    initial,
+                    parameters: new TestParameters(options: RequireAllParenthesesForClarity)
+                );
             }
         }
 
-        internal override bool ShouldSkipMessageDescriptionVerification(DiagnosticDescriptor descriptor)
-            => descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary) && descriptor.DefaultSeverity == DiagnosticSeverity.Hidden;
+        internal override bool ShouldSkipMessageDescriptionVerification(
+            DiagnosticDescriptor descriptor
+        ) =>
+            descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary)
+            && descriptor.DefaultSeverity == DiagnosticSeverity.Hidden;
 
         [Fact]
         public async Task TestArithmeticRequiredForClarity2()
@@ -66,7 +91,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         bool x = o is a or b and c;
                     }
                 }
-                """, parameters: new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity));
+                """,
+                parameters: new TestParameters(
+                    options: RequireArithmeticBinaryParenthesesForClarity
+                )
+            );
         }
 
         [Fact]
@@ -81,7 +110,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         bool x = o is a or $$(b and c);
                     }
                 }
-                """, new TestParameters(options: RequireOtherBinaryParenthesesForClarity));
+                """,
+                new TestParameters(options: RequireOtherBinaryParenthesesForClarity)
+            );
         }
 
         [Fact]
@@ -105,7 +136,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         bool x = o is a or b or c;
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: true);
+                """,
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
@@ -129,7 +162,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         bool x = o is a or b or c;
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: true);
+                """,
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
@@ -153,7 +188,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         bool x = o is a or b;
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: true);
+                """,
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
@@ -185,7 +222,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         }
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: true);
+                """,
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
@@ -215,7 +254,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         };
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: true);
+                """,
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
@@ -239,7 +280,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         bool x = o is { X: a or b };
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: true);
+                """,
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
@@ -263,7 +306,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         bool x = o is a or not b;
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: false);
+                """,
+                offeredWhenRequireForClarityIsEnabled: false
+            );
         }
 
         [Fact]
@@ -287,7 +332,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         bool x = o is not a or b;
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: false);
+                """,
+                offeredWhenRequireForClarityIsEnabled: false
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52589")]
@@ -304,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -332,7 +380,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                         }
                     }
                 }
-                """, offeredWhenRequireForClarityIsEnabled: true);
+                """,
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
     }
 }

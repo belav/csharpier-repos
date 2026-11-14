@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         /// <summary>
         /// Increase the <see cref="IndentBlockOperation.IndentationDeltaOrPosition"/> if the block is part of a
         /// condition of the anchor token. For example:
-        /// 
+        ///
         /// <code>
         /// if (value is
         ///     { // This open brace token is part of a condition of the 'if' token.

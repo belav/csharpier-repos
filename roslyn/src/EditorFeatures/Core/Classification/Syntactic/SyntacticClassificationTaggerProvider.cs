@@ -19,9 +19,12 @@ internal sealed partial class SyntacticClassificationTaggerProvider(
     IThreadingContext threadingContext,
     ClassificationTypeMap typeMap,
     IGlobalOptionService globalOptions,
-    IAsynchronousOperationListenerProvider listenerProvider)
+    IAsynchronousOperationListenerProvider listenerProvider
+)
 {
-    private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(FeatureAttribute.Classification);
+    private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(
+        FeatureAttribute.Classification
+    );
     private readonly IThreadingContext _threadingContext = threadingContext;
     private readonly ClassificationTypeMap _typeMap = typeMap;
     private readonly IGlobalOptionService _globalOptions = globalOptions;

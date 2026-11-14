@@ -13,7 +13,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
     [Guid(Guids.CSharpOptionPageFormattingWrappingIdString)]
     internal class FormattingWrappingPage : AbstractOptionPage
     {
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
-            => new OptionPreviewControl(serviceProvider, optionStore, (o, s) => new WrappingViewModel(o, s));
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        ) =>
+            new OptionPreviewControl(serviceProvider, optionStore, (o, s) =>
+                new WrappingViewModel(o, s)
+            );
     }
 }

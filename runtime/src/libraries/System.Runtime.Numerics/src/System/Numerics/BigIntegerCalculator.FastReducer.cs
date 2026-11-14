@@ -20,7 +20,13 @@ namespace System.Numerics
             private readonly Span<uint> _q1;
             private readonly Span<uint> _q2;
 
-            public FastReducer(ReadOnlySpan<uint> modulus, Span<uint> r, Span<uint> mu, Span<uint> q1, Span<uint> q2)
+            public FastReducer(
+                ReadOnlySpan<uint> modulus,
+                Span<uint> r,
+                Span<uint> mu,
+                Span<uint> q1,
+                Span<uint> q2
+            )
             {
                 Debug.Assert(!modulus.IsEmpty);
                 Debug.Assert(r.Length == modulus.Length * 2 + 1);
@@ -65,7 +71,12 @@ namespace System.Numerics
                 return length;
             }
 
-            private static int DivMul(ReadOnlySpan<uint> left, ReadOnlySpan<uint> right, Span<uint> bits, int k)
+            private static int DivMul(
+                ReadOnlySpan<uint> left,
+                ReadOnlySpan<uint> right,
+                Span<uint> bits,
+                int k
+            )
             {
                 Debug.Assert(!right.IsEmpty);
                 Debug.Assert(!bits.IsEmpty);
@@ -82,15 +93,11 @@ namespace System.Numerics
 
                     if (left.Length < right.Length)
                     {
-                        Multiply(right,
-                                 left,
-                                 bits.Slice(0, left.Length + right.Length));
+                        Multiply(right, left, bits.Slice(0, left.Length + right.Length));
                     }
                     else
                     {
-                        Multiply(left,
-                                 right,
-                                 bits.Slice(0, left.Length + right.Length));
+                        Multiply(left, right, bits.Slice(0, left.Length + right.Length));
                     }
 
                     return ActualLength(bits.Slice(0, left.Length + right.Length));
@@ -99,7 +106,12 @@ namespace System.Numerics
                 return 0;
             }
 
-            private static int SubMod(Span<uint> left, ReadOnlySpan<uint> right, ReadOnlySpan<uint> modulus, int k)
+            private static int SubMod(
+                Span<uint> left,
+                ReadOnlySpan<uint> right,
+                ReadOnlySpan<uint> modulus,
+                int k
+            )
             {
                 // Executes the subtraction algorithm for left and right,
                 // but considers only the first k limbs, which is equivalent to

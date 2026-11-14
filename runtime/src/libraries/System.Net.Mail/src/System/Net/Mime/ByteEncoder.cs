@@ -12,9 +12,16 @@ namespace System.Net.Mime
 
         protected abstract bool HasSpecialEncodingForCRLF { get; }
 
-        public string GetEncodedString() => Encoding.ASCII.GetString(WriteState.Buffer, 0, WriteState.Length);
+        public string GetEncodedString() =>
+            Encoding.ASCII.GetString(WriteState.Buffer, 0, WriteState.Length);
 
-        public int EncodeBytes(byte[] buffer, int offset, int count, bool dontDeferFinalBytes, bool shouldAppendSpaceToCRLF)
+        public int EncodeBytes(
+            byte[] buffer,
+            int offset,
+            int count,
+            bool dontDeferFinalBytes,
+            bool shouldAppendSpaceToCRLF
+        )
         {
             // Add Encoding header, if any. e.g. =?encoding?b?
             WriteState.AppendHeader();
@@ -33,7 +40,7 @@ namespace System.Net.Mime
                 if (_hasSpecialEncodingForCRLF && IsCRLF(buffer, cur, count + offset))
                 {
                     AppendEncodedCRLF();
-                    cur++;  // Transformed two chars, so shift the index to account for that
+                    cur++; // Transformed two chars, so shift the index to account for that
                 }
                 else
                 {
@@ -73,7 +80,10 @@ namespace System.Net.Mime
             for (int i = 0; i < value.Length; ++i)
             {
                 int codepointSize = GetCodepointSize(value, i);
-                Debug.Assert(codepointSize == 1 || codepointSize == 2, "codepointSize was not 1 or 2");
+                Debug.Assert(
+                    codepointSize == 1 || codepointSize == 2,
+                    "codepointSize was not 1 or 2"
+                );
 
                 int bytesCount = encoding.GetBytes(value, i, codepointSize, bytes, 0);
                 if (codepointSize == 2)
@@ -127,7 +137,9 @@ namespace System.Net.Mime
 
         protected static bool IsSurrogatePair(string value, int i)
         {
-            return char.IsSurrogate(value[i]) && i + 1 < value.Length && char.IsSurrogatePair(value[i], value[i + 1]);
+            return char.IsSurrogate(value[i])
+                && i + 1 < value.Length
+                && char.IsSurrogatePair(value[i], value[i + 1]);
         }
 
         protected static bool IsCRLF(byte[] bytes, int count)

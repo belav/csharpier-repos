@@ -10,10 +10,10 @@ namespace System.Numerics
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     public interface INumber<TSelf>
         : IComparable,
-          IComparable<TSelf>,
-          IComparisonOperators<TSelf, TSelf, bool>,
-          IModulusOperators<TSelf, TSelf, TSelf>,
-          INumberBase<TSelf>
+            IComparable<TSelf>,
+            IComparisonOperators<TSelf, TSelf, bool>,
+            IModulusOperators<TSelf, TSelf, TSelf>,
+            INumberBase<TSelf>
         where TSelf : INumber<TSelf>?
     {
         /// <summary>Clamps a value to an inclusive minimum and maximum value.</summary>

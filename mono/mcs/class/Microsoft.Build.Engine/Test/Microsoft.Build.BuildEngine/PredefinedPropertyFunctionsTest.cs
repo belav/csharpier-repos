@@ -28,14 +28,16 @@ using System.IO;
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-	[TestFixture]
-	public class PredefinedPropertyFunctionsTest {
-
-		[Test]
-		public void TestMakeRelative ()
-		{
-			string documentString = @"
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    [TestFixture]
+    public class PredefinedPropertyFunctionsTest
+    {
+        [Test]
+        public void TestMakeRelative()
+        {
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<PropertyGroup>
 						<Path1>c:\users\</Path1>
@@ -62,23 +64,48 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			if (Path.DirectorySeparatorChar == '\\') {
-				documentString = documentString.Replace ("/home", "c:/home");
-				documentString = documentString.Replace ("/tmp", "c:/tmp");
-			}
+            if (Path.DirectorySeparatorChar == '\\')
+            {
+                documentString = documentString.Replace("/home", "c:/home");
+                documentString = documentString.Replace("/tmp", "c:/tmp");
+            }
 
-			var engine = new Engine (Consts.BinPath);
-			var project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            var engine = new Engine(Consts.BinPath);
+            var project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.AreEqual (@"username\", project.EvaluatedProperties ["MakeRelative1"].FinalValue, "#1");
-			Assert.AreEqual (@"..\", project.EvaluatedProperties ["MakeRelative2"].FinalValue, "#2");
-			Assert.AreEqual (@"username\", project.EvaluatedProperties ["MakeRelative3"].FinalValue, "#3");
-			Assert.AreEqual (@"..\", project.EvaluatedProperties ["MakeRelative4"].FinalValue, "#4");
-			Assert.AreEqual (@"..\..\tmp\test\file", project.EvaluatedProperties ["MakeRelative5"].FinalValue, "#5");
-			Assert.AreEqual (@"username\path with spaces + special? chars (1)\", project.EvaluatedProperties ["MakeRelative6"].FinalValue, "#6");
-			Assert.AreEqual (@"username\test\", project.EvaluatedProperties ["MakeRelative7"].FinalValue, "#7");
-			Assert.AreEqual (@"username\test\", project.EvaluatedProperties ["MakeRelative8"].FinalValue, "#8");
-		}
-	}
+            Assert.AreEqual(
+                @"username\",
+                project.EvaluatedProperties["MakeRelative1"].FinalValue,
+                "#1"
+            );
+            Assert.AreEqual(@"..\", project.EvaluatedProperties["MakeRelative2"].FinalValue, "#2");
+            Assert.AreEqual(
+                @"username\",
+                project.EvaluatedProperties["MakeRelative3"].FinalValue,
+                "#3"
+            );
+            Assert.AreEqual(@"..\", project.EvaluatedProperties["MakeRelative4"].FinalValue, "#4");
+            Assert.AreEqual(
+                @"..\..\tmp\test\file",
+                project.EvaluatedProperties["MakeRelative5"].FinalValue,
+                "#5"
+            );
+            Assert.AreEqual(
+                @"username\path with spaces + special? chars (1)\",
+                project.EvaluatedProperties["MakeRelative6"].FinalValue,
+                "#6"
+            );
+            Assert.AreEqual(
+                @"username\test\",
+                project.EvaluatedProperties["MakeRelative7"].FinalValue,
+                "#7"
+            );
+            Assert.AreEqual(
+                @"username\test\",
+                project.EvaluatedProperties["MakeRelative8"].FinalValue,
+                "#8"
+            );
+        }
+    }
 }

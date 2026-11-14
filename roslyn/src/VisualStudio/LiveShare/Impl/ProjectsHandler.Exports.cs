@@ -18,9 +18,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RoslynProjectsHandler()
-        {
-        }
+        public RoslynProjectsHandler() { }
     }
 
     [ExportLspRequestHandler(LiveShareConstants.CSharpContractName, RoslynMethods.ProjectsName)]
@@ -28,19 +26,18 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpProjectsHandler()
-        {
-        }
+        public CSharpProjectsHandler() { }
     }
 
-    [ExportLspRequestHandler(LiveShareConstants.VisualBasicContractName, RoslynMethods.ProjectsName)]
+    [ExportLspRequestHandler(
+        LiveShareConstants.VisualBasicContractName,
+        RoslynMethods.ProjectsName
+    )]
     internal class VisualBasicProjectsHandler : ProjectsHandler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualBasicProjectsHandler()
-        {
-        }
+        public VisualBasicProjectsHandler() { }
     }
 
     [ExportLspRequestHandler(LiveShareConstants.TypeScriptContractName, RoslynMethods.ProjectsName)]
@@ -48,8 +45,6 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TypeScriptProjectsHandler()
-        {
-        }
+        public TypeScriptProjectsHandler() { }
     }
 }

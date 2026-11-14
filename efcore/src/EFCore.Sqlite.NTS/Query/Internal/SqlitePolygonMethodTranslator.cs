@@ -14,8 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqlitePolygonMethodTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo GetInteriorRingN
-        = typeof(Polygon).GetRuntimeMethod(nameof(Polygon.GetInteriorRingN), new[] { typeof(int) })!;
+    private static readonly MethodInfo GetInteriorRingN = typeof(Polygon).GetRuntimeMethod(
+        nameof(Polygon.GetInteriorRingN),
+        new[] { typeof(int) }
+    )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -40,16 +42,22 @@ public class SqlitePolygonMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (Equals(method, GetInteriorRingN))
         {
             return _sqlExpressionFactory.Function(
                 "InteriorRingN",
-                new[] { instance!, _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)) },
+                new[]
+                {
+                    instance!,
+                    _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
+                },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, true },
-                method.ReturnType);
+                method.ReturnType
+            );
         }
 
         return null;

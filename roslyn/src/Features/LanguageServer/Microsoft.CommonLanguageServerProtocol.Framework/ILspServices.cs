@@ -11,7 +11,8 @@ namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
 public interface ILspServices : IDisposable
 {
-    T GetRequiredService<T>() where T : notnull;
+    T GetRequiredService<T>()
+        where T : notnull;
 
     object? TryGetService(Type @type);
 

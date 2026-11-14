@@ -10,14 +10,19 @@ namespace System.Runtime
     internal unsafe struct GCFrameRegistration
     {
 #pragma warning disable IDE0060
-        public GCFrameRegistration(void* allocation, uint elemCount, bool areByRefs = true)
-        {
-        }
+        public GCFrameRegistration(void* allocation, uint elemCount, bool areByRefs = true) { }
 #pragma warning restore IDE0060
 
         [Conditional("unnecessary")]
-        internal static unsafe void RegisterForGCReporting(GCFrameRegistration* pRegistration) { /* nop */ }
+        internal static unsafe void RegisterForGCReporting(
+            GCFrameRegistration* pRegistration
+        ) { /* nop */
+        }
+
         [Conditional("unnecessary")]
-        internal static unsafe void UnregisterForGCReporting(GCFrameRegistration* pRegistration) { /* nop */ }
+        internal static unsafe void UnregisterForGCReporting(
+            GCFrameRegistration* pRegistration
+        ) { /* nop */
+        }
     }
 }

@@ -25,11 +25,16 @@ namespace System.Web.Mvc
         private static readonly string UploadTypeName = DataType.Upload.ToString();
         private static readonly string UrlTypeName = DataType.Url.ToString();
 
-        private static readonly Lazy<Dictionary<object, string>> _dataTypeToName = new Lazy<Dictionary<object, string>>(CreateDataTypeToName, isThreadSafe: true);
+        private static readonly Lazy<Dictionary<object, string>> _dataTypeToName = new Lazy<
+            Dictionary<object, string>
+        >(CreateDataTypeToName, isThreadSafe: true);
 
         // This is a faster version of GetDataTypeName(). It internally calls ToString() on the enum
         // value, which can be quite slow because of value verification.
-        internal static string ToDataTypeName(this DataTypeAttribute attribute, Func<DataTypeAttribute, Boolean> isDataType = null)
+        internal static string ToDataTypeName(
+            this DataTypeAttribute attribute,
+            Func<DataTypeAttribute, Boolean> isDataType = null
+        )
         {
             if (isDataType == null)
             {
@@ -108,7 +113,10 @@ namespace System.Web.Mvc
             {
                 // Don't add to the dictionary any of the statically known types.
                 // This is a workingset size optimization.
-                if (dataTypeValue != DataType.Custom && KnownDataTypeToString(dataTypeValue) == null)
+                if (
+                    dataTypeValue != DataType.Custom
+                    && KnownDataTypeToString(dataTypeValue) == null
+                )
                 {
                     string name = Enum.GetName(typeof(DataType), dataTypeValue);
                     dataTypeToName[dataTypeValue] = name;

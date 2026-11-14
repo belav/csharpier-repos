@@ -25,7 +25,10 @@
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class PrivateImplementationBClass : PrivateImplementationAClass, IPrivateImplementationB, IPrivateOverriddenImplementation
+    public class PrivateImplementationBClass
+        : PrivateImplementationAClass,
+            IPrivateImplementationB,
+            IPrivateOverriddenImplementation
     {
         [JsonIgnore]
         public string PropertyB { get; set; }

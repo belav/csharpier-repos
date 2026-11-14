@@ -82,7 +82,22 @@ namespace Tests.System.IO
         [Fact]
         public void TestValidParseNumericMethods()
         {
-            string buffer = int.MaxValue + "," + int.MinValue + "," + uint.MinValue + "," + uint.MaxValue + "," + long.MinValue + "," + long.MaxValue + "," + ulong.MinValue + "," + ulong.MaxValue;
+            string buffer =
+                int.MaxValue
+                + ","
+                + int.MinValue
+                + ","
+                + uint.MinValue
+                + ","
+                + uint.MaxValue
+                + ","
+                + long.MinValue
+                + ","
+                + long.MaxValue
+                + ","
+                + ulong.MinValue
+                + ","
+                + ulong.MaxValue;
             char separator = ',';
 
             StringParser sp = new StringParser(buffer, separator);
@@ -99,7 +114,14 @@ namespace Tests.System.IO
         [Fact]
         public void TestOverflowFromNumericParsing()
         {
-            string buffer = long.MinValue + "," + long.MaxValue + "," + decimal.MinValue + "," + decimal.MaxValue;
+            string buffer =
+                long.MinValue
+                + ","
+                + long.MaxValue
+                + ","
+                + decimal.MinValue
+                + ","
+                + decimal.MaxValue;
             char separator = ',';
 
             StringParser sp = new StringParser(buffer, separator);

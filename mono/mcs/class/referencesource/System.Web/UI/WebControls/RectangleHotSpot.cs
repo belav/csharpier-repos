@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // <copyright file="RectangleHotSpot.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.UI.WebControls {
-    
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
     using System.Globalization;
@@ -13,80 +13,59 @@ namespace System.Web.UI.WebControls {
     /// <devdoc>
     /// <para>Implements HotSpot for rectangle regions.</para>
     /// </devdoc>
-    public sealed class RectangleHotSpot : HotSpot {
-
-        [
-        WebCategory("Appearance"),
-        DefaultValue(0),
-        WebSysDescription(SR.RectangleHotSpot_Bottom),
-        ]
-        public int Bottom {
-            get {
+    public sealed class RectangleHotSpot : HotSpot
+    {
+        [WebCategory("Appearance"), DefaultValue(0), WebSysDescription(SR.RectangleHotSpot_Bottom)]
+        public int Bottom
+        {
+            get
+            {
                 object o = ViewState["Bottom"];
-                return o != null? (int)o : 0;
+                return o != null ? (int)o : 0;
             }
-            set {
-                ViewState["Bottom"] = value;
-            }
+            set { ViewState["Bottom"] = value; }
         }
 
-
-        [
-        WebCategory("Appearance"),
-        DefaultValue(0),
-        WebSysDescription(SR.RectangleHotSpot_Left),
-        ]
-        public int Left {
-            get {
+        [WebCategory("Appearance"), DefaultValue(0), WebSysDescription(SR.RectangleHotSpot_Left)]
+        public int Left
+        {
+            get
+            {
                 object o = ViewState["Left"];
-                return o != null? (int)o : 0;
+                return o != null ? (int)o : 0;
             }
-            set {
-                ViewState["Left"] = value;
-            }
+            set { ViewState["Left"] = value; }
         }
 
-
-        [
-        WebCategory("Appearance"),
-        DefaultValue(0),
-        WebSysDescription(SR.RectangleHotSpot_Right),
-        ]
-        public int Right {
-            get {
+        [WebCategory("Appearance"), DefaultValue(0), WebSysDescription(SR.RectangleHotSpot_Right)]
+        public int Right
+        {
+            get
+            {
                 object o = ViewState["Right"];
-                return o != null? (int)o : 0;
+                return o != null ? (int)o : 0;
             }
-            set {
-                ViewState["Right"] = value;
-            }
+            set { ViewState["Right"] = value; }
         }
 
-
-        [
-        WebCategory("Appearance"),
-        DefaultValue(0),
-        WebSysDescription(SR.RectangleHotSpot_Top),
-        ]
-        public int Top {
-            get {
+        [WebCategory("Appearance"), DefaultValue(0), WebSysDescription(SR.RectangleHotSpot_Top)]
+        public int Top
+        {
+            get
+            {
                 object o = ViewState["Top"];
-                return o != null? (int)o : 0;
+                return o != null ? (int)o : 0;
             }
-            set {
-                ViewState["Top"] = value;
-            }
+            set { ViewState["Top"] = value; }
         }
 
-
-        protected internal override string MarkupName {
-            get {
-                return "rect";
-            }
+        protected internal override string MarkupName
+        {
+            get { return "rect"; }
         }
 
-
-        public override string GetCoordinates() {
+        public override string GetCoordinates()
+        {
             return Left + "," + Top + "," + Right + "," + Bottom;
         }
     }

@@ -51,17 +51,19 @@ namespace CppSharp
             else
                 CompilationDatabasePath = "compile_commands.json";
 
-            if (!File.Exists(CompilationDatabasePath)) {
-                Console.WriteLine("Could not find JSON compilation database '{0}'",
-                    CompilationDatabasePath);
+            if (!File.Exists(CompilationDatabasePath))
+            {
+                Console.WriteLine(
+                    "Could not find JSON compilation database '{0}'",
+                    CompilationDatabasePath
+                );
                 Environment.Exit(0);
             }
         }
 
         static string GetXcodeToolchainPath()
         {
-            var toolchains = Directory.EnumerateDirectories("/Applications", "Xcode*")
-                .ToList();
+            var toolchains = Directory.EnumerateDirectories("/Applications", "Xcode*").ToList();
             toolchains.Sort();
 
             var toolchainPath = toolchains.LastOrDefault();
@@ -75,16 +77,18 @@ namespace CppSharp
         {
             var toolchainPath = GetXcodeToolchainPath();
 
-            var toolchains = Directory.EnumerateDirectories(Path.Combine(toolchainPath,
-                "Contents/Developer/Toolchains")).ToList();
+            var toolchains = Directory
+                .EnumerateDirectories(Path.Combine(toolchainPath, "Contents/Developer/Toolchains"))
+                .ToList();
             toolchains.Sort();
 
             toolchainPath = toolchains.LastOrDefault();
             if (toolchainPath == null)
                 throw new Exception("Could not find a valid Xcode toolchain");
 
-            var includePaths = Directory.EnumerateDirectories(Path.Combine(toolchainPath,
-                "usr/lib/clang")).ToList();
+            var includePaths = Directory
+                .EnumerateDirectories(Path.Combine(toolchainPath, "usr/lib/clang"))
+                .ToList();
             var includePath = includePaths.LastOrDefault();
 
             if (includePath == null)
@@ -105,7 +109,7 @@ namespace CppSharp
 
             options.NoBuiltinIncludes = true;
             options.NoStandardIncludes = true;
-        }        
+        }
 
         static void Setup(Driver driver)
         {
@@ -134,7 +138,8 @@ namespace CppSharp
             // further processing.
             var units = new List<CompileUnit>();
 
-            foreach (var unit in database) {
+            foreach (var unit in database)
+            {
                 // Ignore compile units compiled with PIC (Position-independent code)
                 if (unit.command.EndsWith("-fPIC -DPIC"))
                     continue;
@@ -151,7 +156,7 @@ namespace CppSharp
 
                 // Ignore the Boehm runtime build.
                 if (unit.command.Contains("libmonoruntime_la"))
-                    continue;                    
+                    continue;
 
                 units.Add(unit);
             }
@@ -167,21 +172,24 @@ namespace CppSharp
             compileUnits = CleanCompileUnits(compileUnits);
             compileUnits = compileUnits.OrderBy(unit => unit.file).ToList();
 
-            foreach (var unit in compileUnits) {
+            foreach (var unit in compileUnits)
+            {
                 var source = driver.Project.AddFile(unit.file);
                 source.Options = driver.BuildParseOptions(source);
 
-                var args = unit.command.Split(new char[] {' '}).Skip(1);
-                foreach (var arg in args) {
+                var args = unit.command.Split(new char[] { ' ' }).Skip(1);
+                foreach (var arg in args)
+                {
                     // Skip some arguments that Clang complains about...
-                    var arguments = new List<string> {
+                    var arguments = new List<string>
+                    {
                         "-no-cpp-precomp",
                         "-Qunused-arguments",
                         "-fno-strict-aliasing",
                         "-Qunused-arguments",
                         "-MD",
                         "-MF",
-                        "-c"
+                        "-c",
                     };
 
                     if (arguments.Contains(arg))

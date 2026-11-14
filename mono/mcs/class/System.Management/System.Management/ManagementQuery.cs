@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,56 +32,46 @@ using System.ComponentModel;
 
 namespace System.Management
 {
-	[MonoTODO ("System.Management is not implemented")]
-	//[TypeConverter ("")]
-	public abstract class ManagementQuery : ICloneable
-	{
-		string sQueryLanguage;
-		string sQueryString;
+    [MonoTODO("System.Management is not implemented")]
+    //[TypeConverter ("")]
+    public abstract class ManagementQuery : ICloneable
+    {
+        string sQueryLanguage;
+        string sQueryString;
 
-		internal ManagementQuery ()
-		{
-		}
+        internal ManagementQuery() { }
 
-		internal ManagementQuery (string query)
-		{
-			QueryString = query;
-		}
+        internal ManagementQuery(string query)
+        {
+            QueryString = query;
+        }
 
-		internal ManagementQuery (string language, string query)
-		{
-			QueryLanguage = language;
-			QueryString = query;
-		}
+        internal ManagementQuery(string language, string query)
+        {
+            QueryLanguage = language;
+            QueryString = query;
+        }
 
-		static ManagementQuery ()
-		{
-		}
+        static ManagementQuery() { }
 
-		public virtual string QueryLanguage {
-			get {
-				return sQueryLanguage;
-			}
-			set {
-				sQueryLanguage = value;
-			}
-		}
+        public virtual string QueryLanguage
+        {
+            get { return sQueryLanguage; }
+            set { sQueryLanguage = value; }
+        }
 
-		public virtual string QueryString {
-			get {
-				return sQueryString;
-			}
-			set {
-				sQueryString = value;
-			}
-		}
+        public virtual string QueryString
+        {
+            get { return sQueryString; }
+            set { sQueryString = value; }
+        }
 
-		public abstract object Clone ();
+        public abstract object Clone();
 
-		[MonoTODO]
-		protected internal virtual void ParseQuery (string query)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected internal virtual void ParseQuery(string query)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

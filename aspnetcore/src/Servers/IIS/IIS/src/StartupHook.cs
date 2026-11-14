@@ -26,19 +26,22 @@ internal sealed class StartupHook
         }
 
         var detailedErrors = Environment.GetEnvironmentVariable("ASPNETCORE_DETAILEDERRORS");
-        var enableStartupErrorPage =
-            detailedErrors?.Equals("1", StringComparison.OrdinalIgnoreCase) ?? false;
-        enableStartupErrorPage |=
-            detailedErrors?.Equals("true", StringComparison.OrdinalIgnoreCase) ?? false;
-
-        var aspnetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-        enableStartupErrorPage |=
-            aspnetCoreEnvironment?.Equals("Development", StringComparison.OrdinalIgnoreCase)
+        var enableStartupErrorPage = detailedErrors?.Equals("1", StringComparison.OrdinalIgnoreCase)
+            ?? false;
+        enableStartupErrorPage |= detailedErrors?.Equals("true", StringComparison.OrdinalIgnoreCase)
             ?? false;
 
+        var aspnetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        enableStartupErrorPage |= aspnetCoreEnvironment?.Equals(
+            "Development",
+            StringComparison.OrdinalIgnoreCase
+        ) ?? false;
+
         var dotnetEnvironment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-        enableStartupErrorPage |=
-            dotnetEnvironment?.Equals("Development", StringComparison.OrdinalIgnoreCase) ?? false;
+        enableStartupErrorPage |= dotnetEnvironment?.Equals(
+            "Development",
+            StringComparison.OrdinalIgnoreCase
+        ) ?? false;
 
         if (!enableStartupErrorPage)
         {

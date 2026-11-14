@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection.PortableExecutable;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler.PEWriter

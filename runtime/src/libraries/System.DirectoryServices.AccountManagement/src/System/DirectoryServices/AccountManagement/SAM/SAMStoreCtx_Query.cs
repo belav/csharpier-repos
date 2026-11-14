@@ -19,7 +19,10 @@ namespace System.DirectoryServices.AccountManagement
 
         // Returns true if this store has native support for search (and thus a wormhole).
         // Returns true for everything but SAM (both reg-SAM and MSAM).
-        internal override bool SupportsSearchNatively { get { return false; } }
+        internal override bool SupportsSearchNatively
+        {
+            get { return false; }
+        }
 
         // Returns a type indicating the type of object that would be returned as the wormhole for the specified
         // PrincipalSearcher.
@@ -78,13 +81,16 @@ namespace System.DirectoryServices.AccountManagement
             // Build the description of the properties we'll filter by.  In SAMStoreCtx, the "native" searcher
             // is simply the QbeFilterDescription, which will be passed to the SAMQuerySet to use to
             // manually filter out non-matching results.
-            QbeFilterDescription propertiesToMatch = (QbeFilterDescription)PushFilterToNativeSearcher(ps);
+            QbeFilterDescription propertiesToMatch =
+                (QbeFilterDescription)PushFilterToNativeSearcher(ps);
 
             // Get the entries we'll iterate over.  Write access to Children is controlled through the
             // ctxBaseLock, but we don't want to have to hold that lock while we're iterating over all
             // the child entries.  So we have to clone the ctxBase --- not ideal, but it prevents
             // multithreading issues.
-            DirectoryEntries entries = SDSUtils.BuildDirectoryEntry(_ctxBase.Path, _credentials, _authTypes).Children;
+            DirectoryEntries entries = SDSUtils
+                .BuildDirectoryEntry(_ctxBase.Path, _credentials, _authTypes)
+                .Children;
             Debug.Assert(entries != null);
 
             // Determine the principal types of interest.  The SAMQuerySet will use this to restrict
@@ -97,12 +103,13 @@ namespace System.DirectoryServices.AccountManagement
 
             // Create the ResultSet that will perform the client-side filtering
             SAMQuerySet resultSet = new SAMQuerySet(
-                                                schemaTypes,
-                                                entries,
-                                                _ctxBase,
-                                                sizeLimit,
-                                                this,
-                                                new QbeMatcher(propertiesToMatch));
+                schemaTypes,
+                entries,
+                _ctxBase,
+                sizeLimit,
+                this,
+                new QbeMatcher(propertiesToMatch)
+            );
 
             return resultSet;
         }
@@ -111,15 +118,24 @@ namespace System.DirectoryServices.AccountManagement
         {
             List<string> schemaTypes = new List<string>();
 
-            if (principalType == typeof(UserPrincipal) || principalType.IsSubclassOf(typeof(UserPrincipal)))
+            if (
+                principalType == typeof(UserPrincipal)
+                || principalType.IsSubclassOf(typeof(UserPrincipal))
+            )
             {
                 schemaTypes.Add("User");
             }
-            else if (principalType == typeof(GroupPrincipal) || principalType.IsSubclassOf(typeof(GroupPrincipal)))
+            else if (
+                principalType == typeof(GroupPrincipal)
+                || principalType.IsSubclassOf(typeof(GroupPrincipal))
+            )
             {
                 schemaTypes.Add("Group");
             }
-            else if (principalType == typeof(ComputerPrincipal) || principalType.IsSubclassOf(typeof(ComputerPrincipal)))
+            else if (
+                principalType == typeof(ComputerPrincipal)
+                || principalType.IsSubclassOf(typeof(ComputerPrincipal))
+            )
             {
                 schemaTypes.Add("Computer");
             }
@@ -136,9 +152,12 @@ namespace System.DirectoryServices.AccountManagement
             }
             else
             {
-                Debug.Fail($"SAMStoreCtx.GetSchemaFilter: fell off end looking for {principalType}");
+                Debug.Fail(
+                    $"SAMStoreCtx.GetSchemaFilter: fell off end looking for {principalType}"
+                );
                 throw new InvalidOperationException(
-                                SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForQuery, principalType));
+                    SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForQuery, principalType)
+                );
             }
 
             return schemaTypes;

@@ -30,42 +30,34 @@ using Mono;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-	sealed partial class SafeSecIdentityHandle : SafeKeychainItemHandle
-	{
-		public SafeSecIdentityHandle ()
-		{
-		}
-	}
+    sealed partial class SafeSecIdentityHandle : SafeKeychainItemHandle
+    {
+        public SafeSecIdentityHandle() { }
+    }
 
-	sealed partial class SafeSecCertificateHandle : SafeKeychainItemHandle
-	{
-		public SafeSecCertificateHandle ()
-		{
-		}
-	}
+    sealed partial class SafeSecCertificateHandle : SafeKeychainItemHandle
+    {
+        public SafeSecCertificateHandle() { }
+    }
 }
 
 namespace System.Security.Cryptography.Apple
 {
-	partial class SafeKeychainItemHandle : SafeHandle
-	{
-		internal SafeKeychainItemHandle ()
-		    : base (IntPtr.Zero, ownsHandle: true)
-		{
-		}
+    partial class SafeKeychainItemHandle : SafeHandle
+    {
+        internal SafeKeychainItemHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
-		protected override bool ReleaseHandle ()
-		{
-			if (handle != IntPtr.Zero)
-				CFObject.CFRelease (handle);
-			SetHandle (IntPtr.Zero);
-			return true;
-		}
+        protected override bool ReleaseHandle()
+        {
+            if (handle != IntPtr.Zero)
+                CFObject.CFRelease(handle);
+            SetHandle(IntPtr.Zero);
+            return true;
+        }
 
-		public override bool IsInvalid => handle == IntPtr.Zero;
-	}
+        public override bool IsInvalid => handle == IntPtr.Zero;
+    }
 
-	partial class SafeSecKeyRefHandle : SafeKeychainItemHandle
-	{
-	}
+    partial class SafeSecKeyRefHandle : SafeKeychainItemHandle { }
 }

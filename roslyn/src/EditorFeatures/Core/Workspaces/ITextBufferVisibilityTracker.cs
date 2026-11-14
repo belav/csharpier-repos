@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Workspaces
             IAsynchronousOperationListener listener,
             ITextBuffer subjectBuffer,
             TimeSpan timeSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Only add a delay if we have access to a service that will tell us when the buffer become visible or not.
             if (service is null)
@@ -68,8 +69,15 @@ namespace Microsoft.CodeAnalysis.Workspaces
             var taskOfTask = delayTask.ContinueWith(
                 // Convert a successfully completed task when we were canceled to a canceled task.  Otherwise, return
                 // the faulted or non-canceled task as is.
-                task => task.Status == TaskStatus.RanToCompletion && cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) : task,
-                CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                task =>
+                    task.Status == TaskStatus.RanToCompletion
+                    && cancellationToken.IsCancellationRequested
+                        ? Task.FromCanceled(cancellationToken)
+                        : task,
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
             return taskOfTask.Unwrap();
 
             // Normal delay logic, except that this does not throw in the event of cancellation, but instead returns
@@ -80,7 +88,9 @@ namespace Microsoft.CodeAnalysis.Workspaces
                 if (cancellationToken.IsCancellationRequested)
                     return;
 
-                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken).NoThrowAwaitable();
+                await threadingContext
+                    .JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken)
+                    .NoThrowAwaitable();
                 if (cancellationToken.IsCancellationRequested)
                     return;
 
@@ -98,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Workspaces
                 {
                     // Listen to when the active document changed so that we startup work on a document once it becomes visible.
                     var delayTask = listener.Delay(timeSpan, cancellationToken);
-                    await Task.WhenAny(delayTask, visibilityChangedTaskSource.Task).NoThrowAwaitable(captureContext: true);
+                    await Task.WhenAny(delayTask, visibilityChangedTaskSource.Task)
+                        .NoThrowAwaitable(captureContext: true);
                 }
                 finally
                 {

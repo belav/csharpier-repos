@@ -12,7 +12,11 @@ namespace System.Text.Tests
         public void Ctor_Empty()
         {
             UTF8Encoding encoding = new UTF8Encoding();
-            VerifyUtf8Encoding(encoding, encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: false);
+            VerifyUtf8Encoding(
+                encoding,
+                encoderShouldEmitUTF8Identifier: false,
+                throwOnInvalidBytes: false
+            );
         }
 
         [Theory]
@@ -21,7 +25,11 @@ namespace System.Text.Tests
         public void Ctor_Bool(bool encoderShouldEmitUTF8Identifier)
         {
             UTF8Encoding encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier);
-            VerifyUtf8Encoding(encoding, encoderShouldEmitUTF8Identifier, throwOnInvalidBytes: false);
+            VerifyUtf8Encoding(
+                encoding,
+                encoderShouldEmitUTF8Identifier,
+                throwOnInvalidBytes: false
+            );
         }
 
         [Theory]
@@ -31,11 +39,18 @@ namespace System.Text.Tests
         [InlineData(false, false)]
         public void Ctor_Bool_Bool(bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes)
         {
-            UTF8Encoding encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier, throwOnInvalidBytes);
+            UTF8Encoding encoding = new UTF8Encoding(
+                encoderShouldEmitUTF8Identifier,
+                throwOnInvalidBytes
+            );
             VerifyUtf8Encoding(encoding, encoderShouldEmitUTF8Identifier, throwOnInvalidBytes);
         }
 
-        private static void VerifyUtf8Encoding(UTF8Encoding encoding, bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes)
+        private static void VerifyUtf8Encoding(
+            UTF8Encoding encoding,
+            bool encoderShouldEmitUTF8Identifier,
+            bool throwOnInvalidBytes
+        )
         {
             if (encoderShouldEmitUTF8Identifier)
             {
@@ -120,8 +135,14 @@ namespace System.Text.Tests
             clone.DecoderFallback = new DecoderReplacementFallback("[BAD]");
             clone.EncoderFallback = new EncoderReplacementFallback("?");
 
-            Assert.Equal("ab[BAD]xy", clone.GetString(new byte[] { (byte)'a', (byte)'b', 0xC0, (byte)'x', (byte)'y' }));
-            Assert.Equal(new byte[] { (byte)'a', (byte)'?', (byte)'c' }, clone.GetBytes("a\ud800c"));
+            Assert.Equal(
+                "ab[BAD]xy",
+                clone.GetString(new byte[] { (byte)'a', (byte)'b', 0xC0, (byte)'x', (byte)'y' })
+            );
+            Assert.Equal(
+                new byte[] { (byte)'a', (byte)'?', (byte)'c' },
+                clone.GetBytes("a\ud800c")
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
@@ -141,14 +162,49 @@ namespace System.Text.Tests
             yield return new object[] { new UTF8Encoding(), new UTF8Encoding(false, false), true };
             yield return new object[] { new UTF8Encoding(), new UTF8Encoding(false, true), false };
 
-            yield return new object[] { new UTF8Encoding(false), new UTF8Encoding(false, false), true };
-            yield return new object[] { new UTF8Encoding(true), new UTF8Encoding(true, false), true };
-            yield return new object[] { new UTF8Encoding(false), new UTF8Encoding(false, true), false };
+            yield return new object[]
+            {
+                new UTF8Encoding(false),
+                new UTF8Encoding(false, false),
+                true,
+            };
+            yield return new object[]
+            {
+                new UTF8Encoding(true),
+                new UTF8Encoding(true, false),
+                true,
+            };
+            yield return new object[]
+            {
+                new UTF8Encoding(false),
+                new UTF8Encoding(false, true),
+                false,
+            };
 
-            yield return new object[] { new UTF8Encoding(true, true), new UTF8Encoding(true, true), true };
-            yield return new object[] { new UTF8Encoding(false, false), new UTF8Encoding(false, false), true };
-            yield return new object[] { new UTF8Encoding(true, false), new UTF8Encoding(true, false), true };
-            yield return new object[] { new UTF8Encoding(true, false), new UTF8Encoding(false, true), false };
+            yield return new object[]
+            {
+                new UTF8Encoding(true, true),
+                new UTF8Encoding(true, true),
+                true,
+            };
+            yield return new object[]
+            {
+                new UTF8Encoding(false, false),
+                new UTF8Encoding(false, false),
+                true,
+            };
+            yield return new object[]
+            {
+                new UTF8Encoding(true, false),
+                new UTF8Encoding(true, false),
+                true,
+            };
+            yield return new object[]
+            {
+                new UTF8Encoding(true, false),
+                new UTF8Encoding(false, true),
+                false,
+            };
 
             yield return new object[] { Encoding.UTF8, Encoding.UTF8, true };
             yield return new object[] { Encoding.GetEncoding("utf-8"), Encoding.UTF8, true };
@@ -178,9 +234,27 @@ namespace System.Text.Tests
 
             UTF8Encoding encoding = new CustomUTF8Encoding();
 
-            Assert.Equal(new byte[] { (byte)'!', (byte)'a', (byte)'!', (byte)'b', (byte)'!', (byte)'c', (byte)'!' }, encoding.GetBytes("abc"));
-            Assert.Equal("*a*b*c*".ToCharArray(), encoding.GetChars(new byte[] { (byte)'a', (byte)'b', (byte)'c' }));
-            Assert.Equal("~a~b~c~", encoding.GetString(new byte[] { (byte)'a', (byte)'b', (byte)'c' }));
+            Assert.Equal(
+                new byte[]
+                {
+                    (byte)'!',
+                    (byte)'a',
+                    (byte)'!',
+                    (byte)'b',
+                    (byte)'!',
+                    (byte)'c',
+                    (byte)'!',
+                },
+                encoding.GetBytes("abc")
+            );
+            Assert.Equal(
+                "*a*b*c*".ToCharArray(),
+                encoding.GetChars(new byte[] { (byte)'a', (byte)'b', (byte)'c' })
+            );
+            Assert.Equal(
+                "~a~b~c~",
+                encoding.GetString(new byte[] { (byte)'a', (byte)'b', (byte)'c' })
+            );
         }
 
         /// <summary>
@@ -195,14 +269,17 @@ namespace System.Text.Tests
                 return chars.Length * 2 + 1;
             }
 
-            public override int GetBytes(string chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+            public override int GetBytes(
+                string chars,
+                int charIndex,
+                int charCount,
+                byte[] bytes,
+                int byteIndex
+            )
             {
                 // We'll narrow chars to bytes and surround each char with an exclamation point.
 
-                List<byte> builder = new List<byte>()
-                {
-                    (byte)'!'
-                };
+                List<byte> builder = new List<byte>() { (byte)'!' };
 
                 foreach (char ch in chars.AsSpan(charIndex, charCount))
                 {
@@ -219,14 +296,17 @@ namespace System.Text.Tests
                 return count * 2 + 1;
             }
 
-            public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+            public override int GetChars(
+                byte[] bytes,
+                int byteIndex,
+                int byteCount,
+                char[] chars,
+                int charIndex
+            )
             {
                 // We'll widen bytes to chars and surround each char with an asterisk.
 
-                List<char> builder = new List<char>()
-                {
-                    '*'
-                };
+                List<char> builder = new List<char>() { '*' };
 
                 foreach (byte b in bytes.AsSpan(byteIndex, byteCount))
                 {

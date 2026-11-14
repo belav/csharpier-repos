@@ -14,7 +14,13 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 {
-    internal abstract partial class AbstractMoveTypeService<TService, TTypeDeclarationSyntax, TNamespaceDeclarationSyntax, TMemberDeclarationSyntax, TCompilationUnitSyntax>
+    internal abstract partial class AbstractMoveTypeService<
+        TService,
+        TTypeDeclarationSyntax,
+        TNamespaceDeclarationSyntax,
+        TMemberDeclarationSyntax,
+        TCompilationUnitSyntax
+    >
     {
         private sealed class State
         {
@@ -33,8 +39,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             }
 
             internal static State Generate(
-                SemanticDocument document, TTypeDeclarationSyntax typeDeclaration, CodeCleanupOptionsProvider fallbackOptions,
-                CancellationToken cancellationToken)
+                SemanticDocument document,
+                TTypeDeclarationSyntax typeDeclaration,
+                CodeCleanupOptionsProvider fallbackOptions,
+                CancellationToken cancellationToken
+            )
             {
                 var state = new State(document, fallbackOptions);
                 if (!state.TryInitialize(typeDeclaration, cancellationToken))
@@ -47,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
             private bool TryInitialize(
                 TTypeDeclarationSyntax typeDeclaration,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
@@ -56,22 +66,33 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
                 var tree = SemanticDocument.SyntaxTree;
                 var root = SemanticDocument.Root;
-                var syntaxFacts = SemanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts =
+                    SemanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
 
                 // compiler declared types, anonymous types, types defined in metadata should be filtered out.
-                if (SemanticDocument.SemanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken) is not INamedTypeSymbol typeSymbol ||
-                    typeSymbol.Locations.Any(static loc => loc.IsInMetadata) ||
-                    typeSymbol.IsAnonymousType ||
-                    typeSymbol.IsImplicitlyDeclared ||
-                    typeSymbol.Name == string.Empty)
+                if (
+                    SemanticDocument.SemanticModel.GetDeclaredSymbol(
+                        typeDeclaration,
+                        cancellationToken
+                    )
+                        is not INamedTypeSymbol typeSymbol
+                    || typeSymbol.Locations.Any(static loc => loc.IsInMetadata)
+                    || typeSymbol.IsAnonymousType
+                    || typeSymbol.IsImplicitlyDeclared
+                    || typeSymbol.Name == string.Empty
+                )
                 {
                     return false;
                 }
 
                 TypeNode = typeDeclaration;
                 TypeName = typeSymbol.Name;
-                DocumentNameWithoutExtension = Path.GetFileNameWithoutExtension(SemanticDocument.Document.Name);
-                IsDocumentNameAValidIdentifier = syntaxFacts.IsValidIdentifier(DocumentNameWithoutExtension);
+                DocumentNameWithoutExtension = Path.GetFileNameWithoutExtension(
+                    SemanticDocument.Document.Name
+                );
+                IsDocumentNameAValidIdentifier = syntaxFacts.IsValidIdentifier(
+                    DocumentNameWithoutExtension
+                );
 
                 return true;
             }

@@ -4,21 +4,21 @@
 
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
+using Microsoft.CodeAnalysis.LanguageServer;
 using Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion;
 using Microsoft.CodeAnalysis.Options;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Test.Utilities;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Roslyn.Test.Utilities;
 using Xunit;
-using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static Roslyn.Test.Utilities.AbstractLanguageServerProtocolTests;
-using System.Threading;
-using Microsoft.CodeAnalysis.LanguageServer;
-using Microsoft.CodeAnalysis.PooledObjects;
+using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace IdeBenchmarks.Lsp
 {
@@ -30,14 +30,11 @@ namespace IdeBenchmarks.Lsp
 
         private LSP.CompletionList? _list;
 
-        public LspCompletionSerializationBenchmarks() : base(null)
-        {
-        }
+        public LspCompletionSerializationBenchmarks()
+            : base(null) { }
 
         [GlobalSetup]
-        public void GlobalSetup()
-        {
-        }
+        public void GlobalSetup() { }
 
         [IterationSetup]
         public void IterationSetup()
@@ -55,7 +52,7 @@ namespace IdeBenchmarks.Lsp
         private async Task LoadSolutionAsync()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Buffers;
 using System.Buffers.Binary;
 using System.Buffers.Text;
@@ -88,19 +85,24 @@ class A
         {|caret:|}
     }
 }";
-            await using var testServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace: false, new LSP.VSInternalClientCapabilities
-            {
-                TextDocument = new LSP.TextDocumentClientCapabilities
-                {
-                    Completion = new LSP.CompletionSetting
+            await using var testServer = await CreateTestLspServerAsync(
+                    markup,
+                    mutatingLspWorkspace: false,
+                    new LSP.VSInternalClientCapabilities
                     {
-                        CompletionListSetting = new LSP.CompletionListSetting
+                        TextDocument = new LSP.TextDocumentClientCapabilities
                         {
-                            ItemDefaults = ["editRange", "commitCharacters", "data"],
-                        }
+                            Completion = new LSP.CompletionSetting
+                            {
+                                CompletionListSetting = new LSP.CompletionListSetting
+                                {
+                                    ItemDefaults = ["editRange", "commitCharacters", "data"],
+                                },
+                            },
+                        },
                     }
-                }
-            }).ConfigureAwait(false);
+                )
+                .ConfigureAwait(false);
 
             var globalOptions = testServer.TestWorkspace.GetService<IGlobalOptionService>();
             globalOptions.SetGlobalOption(LspOptionsStorage.MaxCompletionListSize, -1);
@@ -113,11 +115,14 @@ class A
                 Context = new LSP.CompletionContext()
                 {
                     TriggerKind = LSP.CompletionTriggerKind.Invoked,
-                }
+                },
             };
 
             var document = testServer.GetCurrentSolution().Projects.First().Documents.First();
-            var results = await testServer.ExecuteRequestAsync<LSP.CompletionParams, LSP.CompletionList>(LSP.Methods.TextDocumentCompletionName, completionParams, CancellationToken.None);
+            var results = await testServer.ExecuteRequestAsync<
+                LSP.CompletionParams,
+                LSP.CompletionList
+            >(LSP.Methods.TextDocumentCompletionName, completionParams, CancellationToken.None);
 
             var list = (await CompletionTests.RunGetCompletionsAsync(testServer, completionParams));
             if (list.Items.Length == 0)

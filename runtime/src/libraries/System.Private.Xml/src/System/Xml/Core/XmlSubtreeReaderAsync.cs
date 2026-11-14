@@ -11,7 +11,10 @@ using System.Xml;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlSubtreeReader : XmlWrappingReader, IXmlLineInfo, IXmlNamespaceResolver
+    internal sealed partial class XmlSubtreeReader
+        : XmlWrappingReader,
+            IXmlLineInfo,
+            IXmlNamespaceResolver
     {
         public override Task<string> GetValueAsync()
         {
@@ -42,14 +45,18 @@ namespace System.Xml
                     Debug.Assert(reader.Depth >= _initialDepth);
                     if (reader.Depth == _initialDepth)
                     {
-                        if (reader.NodeType == XmlNodeType.EndElement ||
-                            (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement))
+                        if (
+                            reader.NodeType == XmlNodeType.EndElement
+                            || (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement)
+                        )
                         {
                             _state = State.EndOfFile;
                             SetEmptyNode();
                             return false;
                         }
-                        Debug.Assert(reader.NodeType == XmlNodeType.Element && !reader.IsEmptyElement);
+                        Debug.Assert(
+                            reader.NodeType == XmlNodeType.Element && !reader.IsEmptyElement
+                        );
                     }
                     if (await reader.ReadAsync().ConfigureAwait(false))
                     {
@@ -118,15 +125,20 @@ namespace System.Xml
                             // we are on root of the subtree -> skip to the end element and set to Eof state
                             if (await reader.ReadAsync().ConfigureAwait(false))
                             {
-                                while (reader.NodeType != XmlNodeType.EndElement && reader.Depth > _initialDepth)
+                                while (
+                                    reader.NodeType != XmlNodeType.EndElement
+                                    && reader.Depth > _initialDepth
+                                )
                                 {
                                     await reader.SkipAsync().ConfigureAwait(false);
                                 }
                             }
                         }
-                        Debug.Assert(reader.NodeType == XmlNodeType.EndElement ||
-                                      reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement ||
-                                      reader.ReadState != ReadState.Interactive);
+                        Debug.Assert(
+                            reader.NodeType == XmlNodeType.EndElement
+                                || reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement
+                                || reader.ReadState != ReadState.Interactive
+                        );
                         _state = State.EndOfFile;
                         SetEmptyNode();
                         return;
@@ -212,12 +224,17 @@ namespace System.Xml
             }
         }
 
-        public override async Task<object> ReadContentAsAsync(Type returnType, IXmlNamespaceResolver? namespaceResolver)
+        public override async Task<object> ReadContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver? namespaceResolver
+        )
         {
             try
             {
                 InitReadContentAsType("ReadContentAs");
-                object value = await reader.ReadContentAsAsync(returnType, namespaceResolver).ConfigureAwait(false);
+                object value = await reader
+                    .ReadContentAsAsync(returnType, namespaceResolver)
+                    .ConfigureAwait(false);
                 FinishReadContentAsType();
                 return value;
             }
@@ -228,7 +245,11 @@ namespace System.Xml
             }
         }
 
-        public override async Task<int> ReadContentAsBase64Async(byte[] buffer, int index, int count)
+        public override async Task<int> ReadContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             switch (_state)
             {
@@ -273,13 +294,19 @@ namespace System.Xml
 
                                 Debug.Assert(_binDecoder != null);
                                 _binDecoder.SetNextOutputBuffer(buffer, index, count);
-                                _nsIncReadOffset += _binDecoder.Decode(_curNode.value, _nsIncReadOffset, _curNode.value.Length - _nsIncReadOffset);
+                                _nsIncReadOffset += _binDecoder.Decode(
+                                    _curNode.value,
+                                    _nsIncReadOffset,
+                                    _curNode.value.Length - _nsIncReadOffset
+                                );
                                 return _binDecoder.DecodedCount;
                             }
                             goto case XmlNodeType.Text;
                         case XmlNodeType.Text:
                             Debug.Assert(AttributeCount > 0);
-                            return await reader.ReadContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+                            return await reader
+                                .ReadContentAsBase64Async(buffer, index, count)
+                                .ConfigureAwait(false);
                         default:
                             Debug.Fail($"Unexpected state {_state}");
                             return 0;
@@ -290,7 +317,9 @@ namespace System.Xml
                     goto case State.ReadContentAsBase64;
 
                 case State.ReadContentAsBase64:
-                    int read = await reader.ReadContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+                    int read = await reader
+                        .ReadContentAsBase64Async(buffer, index, count)
+                        .ConfigureAwait(false);
                     if (read == 0)
                     {
                         _state = State.Interactive;
@@ -309,7 +338,11 @@ namespace System.Xml
             }
         }
 
-        public override async Task<int> ReadElementContentAsBase64Async(byte[] buffer, int index, int count)
+        public override async Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             switch (_state)
             {
@@ -322,21 +355,30 @@ namespace System.Xml
                 case State.Interactive:
                 case State.PopNamespaceScope:
                 case State.ClearNsAttributes:
-                    if (!await InitReadElementContentAsBinaryAsync(State.ReadElementContentAsBase64).ConfigureAwait(false))
+                    if (
+                        !await InitReadElementContentAsBinaryAsync(State.ReadElementContentAsBase64)
+                            .ConfigureAwait(false)
+                    )
                     {
                         return 0;
                     }
                     goto case State.ReadElementContentAsBase64;
 
                 case State.ReadElementContentAsBase64:
-                    int read = await reader.ReadContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+                    int read = await reader
+                        .ReadContentAsBase64Async(buffer, index, count)
+                        .ConfigureAwait(false);
                     if (read > 0 || count == 0)
                     {
                         return read;
                     }
                     if (NodeType != XmlNodeType.EndElement)
                     {
-                        throw new XmlException(SR.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo);
+                        throw new XmlException(
+                            SR.Xml_InvalidNodeType,
+                            reader.NodeType.ToString(),
+                            reader as IXmlLineInfo
+                        );
                     }
 
                     // pop namespace scope
@@ -366,7 +408,11 @@ namespace System.Xml
             }
         }
 
-        public override async Task<int> ReadContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override async Task<int> ReadContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             switch (_state)
             {
@@ -411,13 +457,19 @@ namespace System.Xml
 
                                 Debug.Assert(_binDecoder != null);
                                 _binDecoder.SetNextOutputBuffer(buffer, index, count);
-                                _nsIncReadOffset += _binDecoder.Decode(_curNode.value, _nsIncReadOffset, _curNode.value.Length - _nsIncReadOffset);
+                                _nsIncReadOffset += _binDecoder.Decode(
+                                    _curNode.value,
+                                    _nsIncReadOffset,
+                                    _curNode.value.Length - _nsIncReadOffset
+                                );
                                 return _binDecoder.DecodedCount;
                             }
                             goto case XmlNodeType.Text;
                         case XmlNodeType.Text:
                             Debug.Assert(AttributeCount > 0);
-                            return await reader.ReadContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+                            return await reader
+                                .ReadContentAsBinHexAsync(buffer, index, count)
+                                .ConfigureAwait(false);
                         default:
                             Debug.Fail($"Unexpected state {_state}");
                             return 0;
@@ -428,7 +480,9 @@ namespace System.Xml
                     goto case State.ReadContentAsBinHex;
 
                 case State.ReadContentAsBinHex:
-                    int read = await reader.ReadContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+                    int read = await reader
+                        .ReadContentAsBinHexAsync(buffer, index, count)
+                        .ConfigureAwait(false);
                     if (read == 0)
                     {
                         _state = State.Interactive;
@@ -447,7 +501,11 @@ namespace System.Xml
             }
         }
 
-        public override async Task<int> ReadElementContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override async Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             switch (_state)
             {
@@ -460,20 +518,29 @@ namespace System.Xml
                 case State.Interactive:
                 case State.PopNamespaceScope:
                 case State.ClearNsAttributes:
-                    if (!await InitReadElementContentAsBinaryAsync(State.ReadElementContentAsBinHex).ConfigureAwait(false))
+                    if (
+                        !await InitReadElementContentAsBinaryAsync(State.ReadElementContentAsBinHex)
+                            .ConfigureAwait(false)
+                    )
                     {
                         return 0;
                     }
                     goto case State.ReadElementContentAsBinHex;
                 case State.ReadElementContentAsBinHex:
-                    int read = await reader.ReadContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+                    int read = await reader
+                        .ReadContentAsBinHexAsync(buffer, index, count)
+                        .ConfigureAwait(false);
                     if (read > 0 || count == 0)
                     {
                         return read;
                     }
                     if (NodeType != XmlNodeType.EndElement)
                     {
-                        throw new XmlException(SR.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo);
+                        throw new XmlException(
+                            SR.Xml_InvalidNodeType,
+                            reader.NodeType.ToString(),
+                            reader as IXmlLineInfo
+                        );
                     }
 
                     // pop namespace scope
@@ -558,7 +625,9 @@ namespace System.Xml
         {
             if (NodeType != XmlNodeType.Element)
             {
-                throw reader.CreateReadElementContentAsException(nameof(ReadElementContentAsBase64));
+                throw reader.CreateReadElementContentAsException(
+                    nameof(ReadElementContentAsBase64)
+                );
             }
 
             bool isEmpty = IsEmptyElement;
@@ -572,7 +641,11 @@ namespace System.Xml
             switch (NodeType)
             {
                 case XmlNodeType.Element:
-                    throw new XmlException(SR.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo);
+                    throw new XmlException(
+                        SR.Xml_InvalidNodeType,
+                        reader.NodeType.ToString(),
+                        reader as IXmlLineInfo
+                    );
                 case XmlNodeType.EndElement:
                     // pop scope & move off end element
                     ProcessNamespaces();
@@ -587,21 +660,34 @@ namespace System.Xml
 
         private async Task<bool> FinishReadElementContentAsBinaryAsync()
         {
-            Debug.Assert(_state == State.ReadElementContentAsBase64 || _state == State.ReadElementContentAsBinHex);
+            Debug.Assert(
+                _state == State.ReadElementContentAsBase64
+                    || _state == State.ReadElementContentAsBinHex
+            );
 
             byte[] bytes = new byte[256];
             if (_state == State.ReadElementContentAsBase64)
             {
-                while (await reader.ReadContentAsBase64Async(bytes, 0, 256).ConfigureAwait(false) > 0) ;
+                while (
+                    await reader.ReadContentAsBase64Async(bytes, 0, 256).ConfigureAwait(false) > 0
+                )
+                    ;
             }
             else
             {
-                while (await reader.ReadContentAsBinHexAsync(bytes, 0, 256).ConfigureAwait(false) > 0) ;
+                while (
+                    await reader.ReadContentAsBinHexAsync(bytes, 0, 256).ConfigureAwait(false) > 0
+                )
+                    ;
             }
 
             if (NodeType != XmlNodeType.EndElement)
             {
-                throw new XmlException(SR.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_InvalidNodeType,
+                    reader.NodeType.ToString(),
+                    reader as IXmlLineInfo
+                );
             }
 
             // pop namespace scope
@@ -621,16 +707,24 @@ namespace System.Xml
 
         private async Task<bool> FinishReadContentAsBinaryAsync()
         {
-            Debug.Assert(_state == State.ReadContentAsBase64 || _state == State.ReadContentAsBinHex);
+            Debug.Assert(
+                _state == State.ReadContentAsBase64 || _state == State.ReadContentAsBinHex
+            );
 
             byte[] bytes = new byte[256];
             if (_state == State.ReadContentAsBase64)
             {
-                while (await reader.ReadContentAsBase64Async(bytes, 0, 256).ConfigureAwait(false) > 0) ;
+                while (
+                    await reader.ReadContentAsBase64Async(bytes, 0, 256).ConfigureAwait(false) > 0
+                )
+                    ;
             }
             else
             {
-                while (await reader.ReadContentAsBinHexAsync(bytes, 0, 256).ConfigureAwait(false) > 0) ;
+                while (
+                    await reader.ReadContentAsBinHexAsync(bytes, 0, 256).ConfigureAwait(false) > 0
+                )
+                    ;
             }
 
             _state = State.Interactive;

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,42 +27,40 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-using NUnit.Mocks;
 using System;
+using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-using System.Reflection;
-using SystemMessage = System.Messaging.Message;
-using SystemAcknowledgeTypes = System.Messaging.AcknowledgeTypes;
-
 using Mono.Messaging;
+using NUnit.Framework;
+using NUnit.Mocks;
+using SystemAcknowledgeTypes = System.Messaging.AcknowledgeTypes;
+using SystemMessage = System.Messaging.Message;
 
-namespace MonoTests.Mono.Messaging.RabbitMQ {
-
+namespace MonoTests.Mono.Messaging.RabbitMQ
+{
     [TestFixture]
-    public class MessageTest {
-    
+    public class MessageTest
+    {
         DynamicMock messageMock;
         IMessage iMessage;
-        
+
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            messageMock = new DynamicMock (typeof (IMessage));
-            iMessage = (IMessage) messageMock.MockInstance;
+            messageMock = new DynamicMock(typeof(IMessage));
+            iMessage = (IMessage)messageMock.MockInstance;
         }
 
         [Test]
-        public void SetProperties ()
+        public void SetProperties()
         {
-            messageMock.Expect ("set_AcknowledgeType", 
-                AcknowledgeTypes.FullReachQueue);
-                
-            SystemMessage m = TestUtils.CreateMessage (iMessage);
+            messageMock.Expect("set_AcknowledgeType", AcknowledgeTypes.FullReachQueue);
+
+            SystemMessage m = TestUtils.CreateMessage(iMessage);
             m.AcknowledgeType = SystemAcknowledgeTypes.FullReachQueue;
-            
-            messageMock.Verify ();
+
+            messageMock.Verify();
         }
     }
 }

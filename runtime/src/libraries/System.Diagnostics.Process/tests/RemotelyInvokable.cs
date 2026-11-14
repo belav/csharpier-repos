@@ -83,7 +83,12 @@ namespace System.Diagnostics.Tests
         public static int ReadLineWithCustomEncodingWriteLineWithUtf8(string inputEncoding)
         {
             string line;
-            using (var inputReader = new StreamReader(Console.OpenStandardInput(), Encoding.GetEncoding(inputEncoding)))
+            using (
+                var inputReader = new StreamReader(
+                    Console.OpenStandardInput(),
+                    Encoding.GetEncoding(inputEncoding)
+                )
+            )
             {
                 line = inputReader.ReadLine();
             }

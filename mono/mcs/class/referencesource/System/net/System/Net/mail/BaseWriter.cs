@@ -1,5 +1,5 @@
-using System.IO;
 using System.Collections.Specialized;
+using System.IO;
 using System.Net.Mail;
 
 namespace System.Net.Mime
@@ -8,7 +8,7 @@ namespace System.Net.Mime
     {
         #region Fields
 
-        // This is the maximum default line length that can actually be written.  When encoding 
+        // This is the maximum default line length that can actually be written.  When encoding
         // headers, the line length is more conservative to account for things like folding.
         // In MailWriter, all encoding has already been done so this will only fold lines
         // that are NOT encoded already, which means being less conservative is ok.
@@ -32,7 +32,7 @@ namespace System.Net.Mime
             {
                 throw new ArgumentNullException("stream");
             }
-            
+
             this.stream = stream;
             this.shouldEncodeLeadingDots = shouldEncodeLeadingDots;
             this.onCloseHandler = new EventHandler(OnClose);
@@ -41,7 +41,7 @@ namespace System.Net.Mime
         }
 
         #region Headers
-        
+
         internal abstract void WriteHeaders(NameValueCollection headers, bool allowUnicode);
 
         internal void WriteHeader(string name, string value, bool allowUnicode)
@@ -64,24 +64,37 @@ namespace System.Net.Mime
 
         private void WriteAndFold(string value, int charsAlreadyOnLine, bool allowUnicode)
         {
-            int lastSpace = 0, startOfLine = 0;
+            int lastSpace = 0,
+                startOfLine = 0;
             for (int index = 0; index < value.Length; index++)
             {
                 // When we find a FWS (CRLF) copy it as is.
                 if (MailBnfHelper.IsFWSAt(value, index)) // At the first char of "\r\n " or "\r\n\t"
                 {
                     index += 2; // Skip the FWS
-                    this.bufferBuilder.Append(value, startOfLine, index - startOfLine, allowUnicode);
+                    this.bufferBuilder.Append(
+                        value,
+                        startOfLine,
+                        index - startOfLine,
+                        allowUnicode
+                    );
                     // Reset for the next line
                     startOfLine = index;
                     lastSpace = index;
                     charsAlreadyOnLine = 0;
                 }
                 // When we pass the line length limit, and know where there was a space to fold at, fold there
-                else if (((index - startOfLine) > (this.lineLength - charsAlreadyOnLine))
-                    && lastSpace != startOfLine)
+                else if (
+                    ((index - startOfLine) > (this.lineLength - charsAlreadyOnLine))
+                    && lastSpace != startOfLine
+                )
                 {
-                    this.bufferBuilder.Append(value, startOfLine, lastSpace - startOfLine, allowUnicode);
+                    this.bufferBuilder.Append(
+                        value,
+                        startOfLine,
+                        lastSpace - startOfLine,
+                        allowUnicode
+                    );
                     this.bufferBuilder.Append(CRLF);
                     startOfLine = lastSpace;
                     charsAlreadyOnLine = 0;
@@ -95,7 +108,12 @@ namespace System.Net.Mime
             // Write any remaining data to the buffer.
             if (value.Length - startOfLine > 0)
             {
-                this.bufferBuilder.Append(value, startOfLine, value.Length - startOfLine, allowUnicode);
+                this.bufferBuilder.Append(
+                    value,
+                    startOfLine,
+                    value.Length - startOfLine,
+                    allowUnicode
+                );
             }
         }
 
@@ -161,8 +179,13 @@ namespace System.Net.Mime
                 if (multiResult != null)
                 {
                     multiResult.Enter();
-                    IAsyncResult result = this.stream.BeginWrite(this.bufferBuilder.GetBuffer(), 0,
-                        this.bufferBuilder.Length, onWrite, multiResult);
+                    IAsyncResult result = this.stream.BeginWrite(
+                        this.bufferBuilder.GetBuffer(),
+                        0,
+                        this.bufferBuilder.Length,
+                        onWrite,
+                        multiResult
+                    );
                     if (result.CompletedSynchronously)
                     {
                         this.stream.EndWrite(result);
@@ -176,7 +199,7 @@ namespace System.Net.Mime
                 this.bufferBuilder.Reset();
             }
         }
-        
+
         protected static void OnWrite(IAsyncResult result)
         {
             if (!result.CompletedSynchronously)
@@ -196,7 +219,7 @@ namespace System.Net.Mime
         }
 
         internal abstract void Close();
-        
+
         protected abstract void OnClose(object sender, EventArgs args);
 
         #endregion Cleanup

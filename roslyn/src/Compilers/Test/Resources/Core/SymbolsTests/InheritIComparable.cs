@@ -4,16 +4,23 @@
 
 class BaseTypeSpecifierClass : global::System.IComparable
 {
-    public int CompareTo(object o) { return 0; }
+    public int CompareTo(object o)
+    {
+        return 0;
+    }
 }
+
 class GooAttribute : System.Attribute { }
+
 interface I1
 {
     int Method();
 }
+
 class Test : I1
 {
     struct N1 { }
+
     int I1.Method()
     {
         return 5;

@@ -23,6 +23,6 @@ namespace System.Runtime.InteropServices
         NoFailureLog = 0x4000,
         DisableActivateAsActivator = 0x8000,
         EnableActivateAsActivator = 0x10000,
-        FromDefaultContext = 0x20000
+        FromDefaultContext = 0x20000,
     }
 }

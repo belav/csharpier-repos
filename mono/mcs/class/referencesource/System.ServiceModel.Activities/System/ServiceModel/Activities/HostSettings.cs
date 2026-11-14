@@ -8,9 +8,7 @@ namespace System.ServiceModel.Activities
 
     public sealed class HostSettings
     {
-        public HostSettings()
-        {
-        }
+        public HostSettings() { }
 
         public bool IncludeExceptionDetailInFaults { get; set; }
 

@@ -19,8 +19,8 @@ namespace System.Text.Encodings.Web.Tests
 
         public override int MaxOutputCharactersPerInputCharacter => 8; // "[10FFFF]".Length
 
-        public override unsafe int FindFirstCharacterToEncode(char* text, int textLength)
-            => FindFirstCharacterToEncode(new ReadOnlySpan<char>(text, textLength));
+        public override unsafe int FindFirstCharacterToEncode(char* text, int textLength) =>
+            FindFirstCharacterToEncode(new ReadOnlySpan<char>(text, textLength));
 
         private int FindFirstCharacterToEncode(ReadOnlySpan<char> span)
         {
@@ -28,7 +28,10 @@ namespace System.Text.Encodings.Web.Tests
 
             while (!span.IsEmpty)
             {
-                if (!TryGetNextScalarValue(span, out int scalarValue) || !_isScalarAllowed(scalarValue))
+                if (
+                    !TryGetNextScalarValue(span, out int scalarValue)
+                    || !_isScalarAllowed(scalarValue)
+                )
                 {
                     return originalLength - span.Length; // couldn't extract scalar or failed predicate
                 }
@@ -76,7 +79,12 @@ namespace System.Text.Encodings.Web.Tests
         /// <summary>
         /// Encodes scalar as an unsigned hexadecimal number (min. 4 hex digits) surrounded by square brackets: "[XXXX]".
         /// </summary>
-        public override unsafe bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten)
+        public override unsafe bool TryEncodeUnicodeScalar(
+            int unicodeScalar,
+            char* buffer,
+            int bufferLength,
+            out int numberOfCharactersWritten
+        )
         {
             string encoded = FormattableString.Invariant($"[{(uint)unicodeScalar:X4}]");
             numberOfCharactersWritten = (encoded.Length <= (uint)bufferLength) ? encoded.Length : 0;

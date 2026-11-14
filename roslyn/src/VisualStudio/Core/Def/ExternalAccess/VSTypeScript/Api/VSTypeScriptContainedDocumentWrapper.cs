@@ -17,12 +17,15 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
     {
         private readonly ContainedDocument _underlyingObject;
 
-        public VSTypeScriptContainedDocumentWrapper(ContainedDocument underlyingObject)
-            => _underlyingObject = underlyingObject;
+        public VSTypeScriptContainedDocumentWrapper(ContainedDocument underlyingObject) =>
+            _underlyingObject = underlyingObject;
 
         public bool IsDefault => _underlyingObject == null;
 
-        public static bool TryGetContainedDocument(DocumentId documentId, out VSTypeScriptContainedDocumentWrapper document)
+        public static bool TryGetContainedDocument(
+            DocumentId documentId,
+            out VSTypeScriptContainedDocumentWrapper document
+        )
         {
             // TypeScript only calls this to immediately check if the document is a ContainedDocument. Because of that we can just check for
             // ContainedDocuments
@@ -37,13 +40,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             return false;
         }
 
-        public void Dispose()
-            => _underlyingObject.Dispose();
+        public void Dispose() => _underlyingObject.Dispose();
 
-        public ITextBuffer SubjectBuffer
-            => _underlyingObject.SubjectBuffer;
+        public ITextBuffer SubjectBuffer => _underlyingObject.SubjectBuffer;
 
-        public IVsContainedLanguageHost Host
-            => _underlyingObject.ContainedLanguageHost;
+        public IVsContainedLanguageHost Host => _underlyingObject.ContainedLanguageHost;
     }
 }

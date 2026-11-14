@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.RegistrationException.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,53 +31,49 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace System.EnterpriseServices {
-	[Serializable]
-	public sealed class RegistrationException : SystemException {
-
-		#region Fields
+namespace System.EnterpriseServices
+{
+    [Serializable]
+    public sealed class RegistrationException : SystemException
+    {
+        #region Fields
 #pragma warning disable 649
-		RegistrationErrorInfo[] errorInfo;
+        RegistrationErrorInfo[] errorInfo;
 #pragma warning restore 649
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		[MonoTODO]
-		public RegistrationException (string msg)
-			: base (msg)
-		{
-		}
+        [MonoTODO]
+        public RegistrationException(string msg)
+            : base(msg) { }
 
-		public RegistrationException ()
-			: this ("Registration error")
-		{
-		}
+        public RegistrationException()
+            : this("Registration error") { }
 
-		public RegistrationException (string msg, Exception inner)
-			: base (msg, inner)
-		{
-		}
+        public RegistrationException(string msg, Exception inner)
+            : base(msg, inner) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
-			
-		public RegistrationErrorInfo[] ErrorInfo {
-			get { return errorInfo; }
-		}
+        #region Properties
 
-		#endregion // Properties
+        public RegistrationErrorInfo[] ErrorInfo
+        {
+            get { return errorInfo; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		[MonoTODO]
-		public override void GetObjectData (SerializationInfo info, StreamingContext ctx)
-		{
-			throw new NotImplementedException ();
-		}
+        #region Methods
 
-		#endregion // Methods
-	}
+        [MonoTODO]
+        public override void GetObjectData(SerializationInfo info, StreamingContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion // Methods
+    }
 }

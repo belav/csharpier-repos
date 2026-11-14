@@ -22,14 +22,13 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     {
         foreach (var parameter in methodSymbol.Parameters)
         {
-            var modelBindingAttribute =
-                parameter
-                    .GetAttributes(
-                        wellKnownTypes.Get(
-                            WellKnownType.Microsoft_AspNetCore_Mvc_ModelBinding_IBinderTypeProviderMetadata
-                        )
+            var modelBindingAttribute = parameter
+                .GetAttributes(
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Mvc_ModelBinding_IBinderTypeProviderMetadata
                     )
-                    .FirstOrDefault()
+                )
+                .FirstOrDefault()
                 ?? parameter
                     .GetAttributes(
                         wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_BindAttribute)

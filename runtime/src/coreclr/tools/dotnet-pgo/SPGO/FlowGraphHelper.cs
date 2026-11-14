@@ -18,7 +18,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             Func<T, HashSet<T>> getSuccessors,
             string title,
             Func<T, string> getNodeLabel,
-            Func<(T, T), string> getEdgeLabel)
+            Func<(T, T), string> getEdgeLabel
+        )
         {
             var sb = new StringBuilder();
             sb.AppendLine("digraph G {");
@@ -53,7 +54,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             HashSet<T> seen = new HashSet<T>(curRank);
             while (curRank.Count > 0)
             {
-                sb.AppendLine($"  {{rank = same; {string.Concat(curRank.Select(bb => $"N{bbToIndex[bb]}; "))}}}");
+                sb.AppendLine(
+                    $"  {{rank = same; {string.Concat(curRank.Select(bb => $"N{bbToIndex[bb]}; "))}}}"
+                );
                 curRank = curRank.SelectMany(getSuccessors).Where(seen.Add).ToList();
             }
 
@@ -64,7 +67,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         public static string Dump(
             this FlowGraph fg,
             Func<BasicBlock, string> getNodeAnnot,
-            Func<(BasicBlock, BasicBlock), string> getEdgeAnnot)
+            Func<(BasicBlock, BasicBlock), string> getEdgeAnnot
+        )
         {
             string getBasicBlockLabel(BasicBlock bb)
             {
@@ -78,8 +82,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 bb => bb.Targets,
                 "",
                 getBasicBlockLabel,
-                getEdgeAnnot);
-
+                getEdgeAnnot
+            );
         }
     }
 }

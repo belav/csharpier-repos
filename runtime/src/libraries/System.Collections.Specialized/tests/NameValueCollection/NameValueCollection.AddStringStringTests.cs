@@ -38,14 +38,26 @@ namespace System.Collections.Specialized.Tests
                 Assert.Equal(value, nameValueCollection.Get(name.ToUpperInvariant()));
                 Assert.Equal(value, nameValueCollection.Get(name.ToLowerInvariant()));
 
-                Assert.Equal(new string[] { value }, nameValueCollection.GetValues(name.ToUpperInvariant()));
-                Assert.Equal(new string[] { value }, nameValueCollection.GetValues(name.ToLowerInvariant()));
+                Assert.Equal(
+                    new string[] { value },
+                    nameValueCollection.GetValues(name.ToUpperInvariant())
+                );
+                Assert.Equal(
+                    new string[] { value },
+                    nameValueCollection.GetValues(name.ToLowerInvariant())
+                );
 
                 Assert.DoesNotContain(name.ToUpperInvariant(), nameValueCollection.AllKeys);
                 Assert.DoesNotContain(name.ToLowerInvariant(), nameValueCollection.AllKeys);
 
-                Assert.DoesNotContain(name.ToUpperInvariant(), nameValueCollection.Keys.Cast<string>());
-                Assert.DoesNotContain(name.ToLowerInvariant(), nameValueCollection.Keys.Cast<string>());
+                Assert.DoesNotContain(
+                    name.ToUpperInvariant(),
+                    nameValueCollection.Keys.Cast<string>()
+                );
+                Assert.DoesNotContain(
+                    name.ToLowerInvariant(),
+                    nameValueCollection.Keys.Cast<string>()
+                );
 
                 // We should be able to access values and keys in the order they were added
                 Assert.Equal(value, nameValueCollection[i]);

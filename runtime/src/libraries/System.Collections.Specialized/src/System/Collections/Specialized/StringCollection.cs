@@ -1,14 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 namespace System.Collections.Specialized
 {
     /// <devdoc>
     ///    <para>Represents a collection of strings.</para>
     /// </devdoc>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class StringCollection : IList
     {
         private readonly ArrayList data = new ArrayList(); // Do not rename (binary serialization)
@@ -18,14 +19,8 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public string? this[int index]
         {
-            get
-            {
-                return ((string?)data[index]);
-            }
-            set
-            {
-                data[index] = value;
-            }
+            get { return ((string?)data[index]); }
+            set { data[index] = value; }
         }
 
         /// <devdoc>
@@ -34,28 +29,18 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public int Count
         {
-            get
-            {
-                return data.Count;
-            }
+            get { return data.Count; }
         }
 
         bool IList.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         bool IList.IsFixedSize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
-
 
         /// <devdoc>
         ///    <para>Adds a string with the specified value to the
@@ -136,10 +121,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <devdoc>
@@ -149,10 +131,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <devdoc>
@@ -177,22 +156,13 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public object SyncRoot
         {
-            get
-            {
-                return data.SyncRoot;
-            }
+            get { return data.SyncRoot; }
         }
 
         object? IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
-            set
-            {
-                this[index] = (string?)value;
-            }
+            get { return this[index]; }
+            set { this[index] = (string?)value; }
         }
 
         int IList.Add(object? value)
@@ -204,7 +174,6 @@ namespace System.Collections.Specialized
         {
             return Contains((string?)value);
         }
-
 
         int IList.IndexOf(object? value)
         {
@@ -243,10 +212,7 @@ namespace System.Collections.Specialized
 
         public string? Current
         {
-            get
-            {
-                return (string?)(_baseEnumerator.Current);
-            }
+            get { return (string?)(_baseEnumerator.Current); }
         }
 
         public bool MoveNext()

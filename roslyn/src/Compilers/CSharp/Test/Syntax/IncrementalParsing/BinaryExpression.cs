@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         [Fact]
         public void PlusToMultiply()
         {
-            string text = @"class C{
+            string text =
+                @"class C{
                        void M() {
                             int x = y + 2;
                             } 
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             var method = type.Members[0] as MethodDeclarationSyntax;
             var block = method.Body;
             var statement = block.Statements[0] as LocalDeclarationStatementSyntax;
-            var expression = statement.Declaration.Variables[0].Initializer.Value as BinaryExpressionSyntax;
+            var expression =
+                statement.Declaration.Variables[0].Initializer.Value as BinaryExpressionSyntax;
             Assert.Equal(SyntaxKind.MultiplyExpression, expression.Kind());
         }
 
@@ -159,13 +161,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         [Fact]
         public void DotToArrow()
         {
-            MakeMemberAccessChange(SyntaxKind.SimpleMemberAccessExpression, SyntaxKind.PointerMemberAccessExpression);
+            MakeMemberAccessChange(
+                SyntaxKind.SimpleMemberAccessExpression,
+                SyntaxKind.PointerMemberAccessExpression
+            );
         }
 
         [Fact]
         public void ArrowToDot()
         {
-            MakeMemberAccessChange(SyntaxKind.PointerMemberAccessExpression, SyntaxKind.SimpleMemberAccessExpression);
+            MakeMemberAccessChange(
+                SyntaxKind.PointerMemberAccessExpression,
+                SyntaxKind.SimpleMemberAccessExpression
+            );
         }
 
         #region Helpers
@@ -184,17 +192,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             MakeChange(oldStyle, newStyle, topLevel: true, options: TestOptions.Script);
         }
 
-        private static void MakeChange(SyntaxKind oldSyntaxKind, SyntaxKind newSyntaxKind, bool topLevel = false, CSharpParseOptions options = null)
+        private static void MakeChange(
+            SyntaxKind oldSyntaxKind,
+            SyntaxKind newSyntaxKind,
+            bool topLevel = false,
+            CSharpParseOptions options = null
+        )
         {
             string oldName = GetExpressionString(oldSyntaxKind);
             string newName = GetExpressionString(newSyntaxKind);
 
             string topLevelStatement = "x " + oldName + " y";
             // Be warned when changing the fields here
-            var code = @"class C { void m() {
-                 " + topLevelStatement + @";
+            var code =
+                @"class C { void m() {
+                 "
+                + topLevelStatement
+                + @";
                 }}";
-            var oldTree = SyntaxFactory.ParseSyntaxTree(topLevel ? topLevelStatement : code, options: options);
+            var oldTree = SyntaxFactory.ParseSyntaxTree(
+                topLevel ? topLevelStatement : code,
+                options: options
+            );
 
             // Make the change to the node
             var newTree = oldTree.WithReplaceFirst(oldName, newName);
@@ -204,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
 
         private static ExpressionSyntax GetExpressionNode(SyntaxTree newTree)
         {
-            TypeDeclarationSyntax classType = newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+            TypeDeclarationSyntax classType =
+                newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
             MethodDeclarationSyntax method = classType.Members[0] as MethodDeclarationSyntax;
             var block = method.Body;
             var statement = block.Statements[0] as ExpressionStatementSyntax;
@@ -213,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
 
         private static ExpressionSyntax GetGlobalExpressionNode(SyntaxTree newTree)
         {
-            var statementType = newTree.GetCompilationUnitRoot().Members[0] as GlobalStatementSyntax;
+            var statementType =
+                newTree.GetCompilationUnitRoot().Members[0] as GlobalStatementSyntax;
             Assert.True(statementType.AttributeLists.Count == 0);
             Assert.True(statementType.Modifiers.Count == 0);
             var statement = statementType.Statement as ExpressionStatementSyntax;

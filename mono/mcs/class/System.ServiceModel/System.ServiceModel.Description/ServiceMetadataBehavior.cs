@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,86 +31,92 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Description;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public class ServiceMetadataBehavior : IServiceBehavior
-	{
-		public const string MexContractName = "IMetadataExchange";
+    [MonoTODO]
+    public class ServiceMetadataBehavior : IServiceBehavior
+    {
+        public const string MexContractName = "IMetadataExchange";
 
-		MetadataExporter exporter;
+        MetadataExporter exporter;
 
-		public ServiceMetadataBehavior ()
-		{
-		}
+        public ServiceMetadataBehavior() { }
 
-		public bool HttpGetEnabled { get; set; }
+        public bool HttpGetEnabled { get; set; }
 
-		public bool HttpsGetEnabled { get; set; }
+        public bool HttpsGetEnabled { get; set; }
 
-		public MetadataExporter MetadataExporter {
-			get { return exporter ?? (exporter = new WsdlExporter ()); }
-			set { exporter = value; }
-		}
+        public MetadataExporter MetadataExporter
+        {
+            get { return exporter ?? (exporter = new WsdlExporter()); }
+            set { exporter = value; }
+        }
 
-		public Uri ExternalMetadataLocation { get; set; }
+        public Uri ExternalMetadataLocation { get; set; }
 
-		public Uri HttpGetUrl { get; set; }
+        public Uri HttpGetUrl { get; set; }
 
-		public Uri HttpsGetUrl { get; set; }
+        public Uri HttpsGetUrl { get; set; }
 
-		public Binding HttpGetBinding { get; set; }
+        public Binding HttpGetBinding { get; set; }
 
-		public Binding HttpsGetBinding { get; set; }
+        public Binding HttpsGetBinding { get; set; }
 
-		void IServiceBehavior.AddBindingParameters (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase,
-			Collection<ServiceEndpoint> endpoints,
-			BindingParameterCollection parameters)
-		{
-		}
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-		void IServiceBehavior.ApplyDispatchBehavior (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase) {
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
+        {
+            ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension(
+                serviceHostBase
+            );
 
-			ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension (serviceHostBase);
+            //Find ChannelDispatcher for Mex, and add a MexInstanceContextProvider
+            //to it
+            foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers)
+            {
+                ChannelDispatcher cd = cdb as ChannelDispatcher;
+                if (cd == null)
+                    continue;
 
-			//Find ChannelDispatcher for Mex, and add a MexInstanceContextProvider
-			//to it
-			foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers) {
-				ChannelDispatcher cd = cdb as ChannelDispatcher;
-				if (cd == null)
-					continue;
+                foreach (EndpointDispatcher ed in cd.Endpoints)
+                {
+                    if (ed.ContractName == MexContractName)
+                        ed.DispatchRuntime.InstanceContextProvider = new MexInstanceContextProvider(
+                            serviceHostBase
+                        );
+                }
+            }
 
-				foreach (EndpointDispatcher ed in cd.Endpoints) {
-					if (ed.ContractName == MexContractName)
-						ed.DispatchRuntime.InstanceContextProvider = new MexInstanceContextProvider (serviceHostBase);
-				}
-			}
+            if (HttpGetEnabled)
+            {
+                Uri uri = serviceHostBase.CreateUri("http", HttpGetUrl);
+                if (uri != null)
+                    sme.EnsureChannelDispatcher(true, "http", uri, HttpGetBinding);
+            }
 
-			if (HttpGetEnabled) {
-				Uri uri = serviceHostBase.CreateUri ("http", HttpGetUrl);
-				if (uri != null)
-					sme.EnsureChannelDispatcher (true, "http", uri, HttpGetBinding);
-			}
+            if (HttpsGetEnabled)
+            {
+                Uri uri = serviceHostBase.CreateUri("https", HttpsGetUrl);
+                if (uri != null)
+                    sme.EnsureChannelDispatcher(true, "https", uri, HttpsGetBinding);
+            }
+        }
 
-			if (HttpsGetEnabled) {
-				Uri uri = serviceHostBase.CreateUri ("https", HttpsGetUrl);
-				if (uri != null)
-					sme.EnsureChannelDispatcher (true, "https", uri, HttpsGetBinding);
-			}
-		}
-
-		[MonoTODO]
-		void IServiceBehavior.Validate (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{			
-		}
-	}
+        [MonoTODO]
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
+    }
 }

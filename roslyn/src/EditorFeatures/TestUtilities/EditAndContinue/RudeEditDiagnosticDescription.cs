@@ -9,14 +9,20 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 {
-    internal readonly struct RudeEditDiagnosticDescription : IEquatable<RudeEditDiagnosticDescription>
+    internal readonly struct RudeEditDiagnosticDescription
+        : IEquatable<RudeEditDiagnosticDescription>
     {
         private readonly RudeEditKind _rudeEditKind;
         private readonly string? _firstLine;
         private readonly string? _squiggle;
         private readonly string[] _arguments;
 
-        internal RudeEditDiagnosticDescription(RudeEditKind rudeEditKind, string? squiggle, string[] arguments, string? firstLine)
+        internal RudeEditDiagnosticDescription(
+            RudeEditKind rudeEditKind,
+            string? squiggle,
+            string[] arguments,
+            string? firstLine
+        )
         {
             _rudeEditKind = rudeEditKind;
             _squiggle = squiggle;
@@ -26,35 +32,39 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         public string? FirstLine => _firstLine;
 
-        public RudeEditDiagnosticDescription WithFirstLine(string value)
-            => new(_rudeEditKind, _squiggle, _arguments, value.Trim());
+        public RudeEditDiagnosticDescription WithFirstLine(string value) =>
+            new(_rudeEditKind, _squiggle, _arguments, value.Trim());
 
         public bool Equals(RudeEditDiagnosticDescription other)
         {
             return _rudeEditKind == other._rudeEditKind
                 && _squiggle == other._squiggle
-                && (_firstLine == other._firstLine || _firstLine == null || other._firstLine == null)
+                && (
+                    _firstLine == other._firstLine || _firstLine == null || other._firstLine == null
+                )
                 && _arguments.SequenceEqual(other._arguments, object.Equals);
         }
 
-        public override bool Equals(object obj)
-            => obj is RudeEditDiagnosticDescription && Equals((RudeEditDiagnosticDescription)obj);
+        public override bool Equals(object obj) =>
+            obj is RudeEditDiagnosticDescription && Equals((RudeEditDiagnosticDescription)obj);
 
         public override int GetHashCode()
         {
-            return
-                Hash.Combine(_squiggle,
-                Hash.CombineValues(_arguments, (int)_rudeEditKind));
+            return Hash.Combine(_squiggle, Hash.CombineValues(_arguments, (int)_rudeEditKind));
         }
 
-        public override string ToString()
-            => ToString(tryGetResource: null);
+        public override string ToString() => ToString(tryGetResource: null);
 
         public string ToString(Func<string, string?>? tryGetResource)
         {
-            var arguments =
-                new[] { (_squiggle != null) ? "\"" + _squiggle.Replace("\r\n", "\\r\\n") + "\"" : "null" }
-                .Concat(_arguments.Select(a => tryGetResource?.Invoke(a) is { } ? $"GetResource(\"{a}\")" : $"\"{a}\""));
+            var arguments = new[]
+            {
+                (_squiggle != null) ? "\"" + _squiggle.Replace("\r\n", "\\r\\n") + "\"" : "null",
+            }.Concat(
+                _arguments.Select(a =>
+                    tryGetResource?.Invoke(a) is { } ? $"GetResource(\"{a}\")" : $"\"{a}\""
+                )
+            );
 
             var withLine = (_firstLine != null) ? $".WithFirstLine(\"{_firstLine}\")" : null;
 
@@ -71,7 +81,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             }
             catch (FormatException)
             {
-                Assert.True(false, $"Message format string was not supplied enough arguments.\nRudeEditKind: {_rudeEditKind}\nArguments supplied: {_arguments.Length}\nFormat string: {format}");
+                Assert.True(
+                    false,
+                    $"Message format string was not supplied enough arguments.\nRudeEditKind: {_rudeEditKind}\nArguments supplied: {_arguments.Length}\nFormat string: {format}"
+                );
             }
         }
     }

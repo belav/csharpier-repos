@@ -18,7 +18,7 @@ namespace System.Data.Metadata.Edm
 {
     /// <summary>
     /// Cached dynamic method to get the property value from a CLR instance
-    /// </summary> 
+    /// </summary>
     internal class NavigationPropertyAccessor
     {
         #region Constructors
@@ -53,7 +53,7 @@ namespace System.Data.Metadata.Edm
             get { return _propertyName; }
         }
 
-        /// <summary>cached dynamic method to get the property value from a CLR instance</summary> 
+        /// <summary>cached dynamic method to get the property value from a CLR instance</summary>
         public Func<object, object> ValueGetter
         {
             get { return _memberGetter; }
@@ -65,7 +65,7 @@ namespace System.Data.Metadata.Edm
             }
         }
 
-        /// <summary>cached dynamic method to set the property value from a CLR instance</summary> 
+        /// <summary>cached dynamic method to set the property value from a CLR instance</summary>
         public Action<object, object> ValueSetter
         {
             get { return _memberSetter; }

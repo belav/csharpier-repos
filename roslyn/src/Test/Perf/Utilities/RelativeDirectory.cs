@@ -16,9 +16,7 @@ namespace Roslyn.Test.Performance.Utilities
     {
         private string _workingDir;
 
-        public RelativeDirectory()
-        {
-        }
+        public RelativeDirectory() { }
 
         public RelativeDirectory(string workingDir)
         {
@@ -34,12 +32,14 @@ namespace Roslyn.Test.Performance.Utilities
         {
             if (_workingDir == null)
             {
-                throw new InvalidOperationException("The test has not been set up correctly.  Avoid doing any directory operations in the constructor.");
+                throw new InvalidOperationException(
+                    "The test has not been set up correctly.  Avoid doing any directory operations in the constructor."
+                );
             }
         }
 
         /// <summary>
-        /// Returns the current working directory that the test has access to.  
+        /// Returns the current working directory that the test has access to.
         /// This is typically the same directory as the script is located in.
         /// </summary>
         public string MyWorkingDirectory
@@ -59,14 +59,16 @@ namespace Roslyn.Test.Performance.Utilities
             get
             {
                 ThrowIfNotSetup();
-                var tempDirectory = Environment.ExpandEnvironmentVariables(@"%SYSTEMDRIVE%\PerfTemp");
+                var tempDirectory = Environment.ExpandEnvironmentVariables(
+                    @"%SYSTEMDRIVE%\PerfTemp"
+                );
                 Directory.CreateDirectory(tempDirectory);
                 return tempDirectory;
             }
         }
 
         /// <summary>
-        /// Returns the directory that contains built roslyn binaries.  Usually this will be 
+        /// Returns the directory that contains built roslyn binaries.  Usually this will be
         /// Binaries/Debug or Binaries/Release.
         /// </summary>
         /// <returns></returns>
@@ -79,14 +81,19 @@ namespace Roslyn.Test.Performance.Utilities
 
             foreach (var configuration in new string[] { "debug", "release" })
             {
-                var configurationIndex = _workingDir.IndexOf(configuration, StringComparison.CurrentCultureIgnoreCase);
+                var configurationIndex = _workingDir.IndexOf(
+                    configuration,
+                    StringComparison.CurrentCultureIgnoreCase
+                );
                 if (configurationIndex != -1)
                 {
                     return _workingDir.Substring(0, configurationIndex + configuration.Length);
                 }
             }
 
-            throw new Exception("Couldn't find binaries. Are you running from the binaries directory?");
+            throw new Exception(
+                "Couldn't find binaries. Are you running from the binaries directory?"
+            );
         }
 
         /// <returns>
@@ -108,7 +115,9 @@ namespace Roslyn.Test.Performance.Utilities
             // has been downloaded *and* extracted.
             if (File.Exists(zipPath))
             {
-                logger.Log($"Didn't download and extract {zipFileName} because one already exists at {zipPath}.");
+                logger.Log(
+                    $"Didn't download and extract {zipFileName} because one already exists at {zipPath}."
+                );
                 return;
             }
 
@@ -120,7 +129,8 @@ namespace Roslyn.Test.Performance.Utilities
             }
 
             // Download zip file to temp directory
-            var downloadTarget = $"https://dotnetci.blob.core.windows.net/roslyn-perf/{zipFileName}";
+            var downloadTarget =
+                $"https://dotnetci.blob.core.windows.net/roslyn-perf/{zipFileName}";
             logger.Log($"Downloading {downloadTarget}");
             var client = new WebClient();
             client.DownloadFile(downloadTarget, zipPath);

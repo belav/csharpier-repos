@@ -8,12 +8,16 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.ServiceModel;
 
-    class ContextInputSessionChannel : ContextInputChannelBase<IInputSessionChannel>, IInputSessionChannel
+    class ContextInputSessionChannel
+        : ContextInputChannelBase<IInputSessionChannel>,
+            IInputSessionChannel
     {
-        public ContextInputSessionChannel(ChannelManagerBase channelManager, IInputSessionChannel innerChannel, ContextExchangeMechanism contextExchangeMechanism)
-            : base(channelManager, innerChannel, contextExchangeMechanism)
-        {
-        }
+        public ContextInputSessionChannel(
+            ChannelManagerBase channelManager,
+            IInputSessionChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism
+        )
+            : base(channelManager, innerChannel, contextExchangeMechanism) { }
 
         public IInputSession Session
         {

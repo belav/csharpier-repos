@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         {
             Button,
             HyperLink,
-            Close
+            Close,
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Reflection.Augments;
 using Internal.Runtime.CompilerServices;
 
@@ -29,11 +28,17 @@ namespace System
         {
             Type type;
             int offset;
-            ReflectionAugments.ReflectionCoreCallbacks.MakeTypedReference(target, flds, out type, out offset);
+            ReflectionAugments.ReflectionCoreCallbacks.MakeTypedReference(
+                target,
+                flds,
+                out type,
+                out offset
+            );
             return new TypedReference(target, offset, type.TypeHandle);
         }
 
-        public static Type? GetTargetType(TypedReference value) => Type.GetTypeFromHandle(value._typeHandle);
+        public static Type? GetTargetType(TypedReference value) =>
+            Type.GetTypeFromHandle(value._typeHandle);
 
         public static RuntimeTypeHandle TargetTypeToken(TypedReference value)
         {
@@ -68,9 +73,16 @@ namespace System
             }
         }
 
-        public static void SetTypedReference(TypedReference target, object? value) { throw new NotSupportedException(); }
+        public static void SetTypedReference(TypedReference target, object? value)
+        {
+            throw new NotSupportedException();
+        }
 
-        public override bool Equals(object? o) { throw new NotSupportedException(SR.NotSupported_NYI); }
+        public override bool Equals(object? o)
+        {
+            throw new NotSupportedException(SR.NotSupported_NYI);
+        }
+
         public override int GetHashCode() => _typeHandle.IsNull ? 0 : _typeHandle.GetHashCode();
 
         internal bool IsNull => _typeHandle.IsNull;
@@ -78,10 +90,7 @@ namespace System
         internal ref byte Value
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return ref _value;
-            }
+            get { return ref _value; }
         }
     }
 }

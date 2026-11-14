@@ -10,11 +10,26 @@ namespace System.ComponentModel.Tests
     public class MyTypeDescriptorContext : ITypeDescriptorContext
     {
         public IContainer Container => null;
-        public object Instance { get { return null; } }
-        public PropertyDescriptor PropertyDescriptor { get { return null; } }
-        public bool OnComponentChanging() { return true; }
+        public object Instance
+        {
+            get { return null; }
+        }
+        public PropertyDescriptor PropertyDescriptor
+        {
+            get { return null; }
+        }
+
+        public bool OnComponentChanging()
+        {
+            return true;
+        }
+
         public void OnComponentChanged() { }
-        public object GetService(Type serviceType) { return null; }
+
+        public object GetService(Type serviceType)
+        {
+            return null;
+        }
     }
 
     public struct SomeValueType
@@ -26,7 +41,7 @@ namespace System.ComponentModel.Tests
     {
         Add,
         Sub,
-        Mul
+        Mul,
     }
 
     [Flags]
@@ -34,21 +49,21 @@ namespace System.ComponentModel.Tests
     {
         Option1 = 1,
         Option2 = 2,
-        Option3 = 4
+        Option3 = 4,
     }
 
     [Flags]
     public enum ULongFlagsEnum : ulong
     {
         Bit62 = 1UL << 62,
-        Bit63 = 1UL << 63
+        Bit63 = 1UL << 63,
     }
 
     [Flags]
     public enum LongFlagsEnum : long
     {
         Bit62 = 1L << 62,
-        Bit63 = 1L << 63
+        Bit63 = 1L << 63,
     }
 
     public class FormattableClass : IFormattable
@@ -57,21 +72,24 @@ namespace System.ComponentModel.Tests
         {
             return FormattableClass.Token;
         }
+
         public const string Token = "Formatted class.";
     }
 
     public class MyTypeListConverter : TypeListConverter
     {
         public MyTypeListConverter(Type[] types)
-            : base(types)
-        {
-        }
+            : base(types) { }
     }
 
 #if FUNCTIONAL_TESTS
-    [TypeConverter("System.ComponentModel.Tests.BaseClassConverter, System.ComponentModel.TypeConverter.Tests, Version=9.9.9.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [TypeConverter(
+        "System.ComponentModel.Tests.BaseClassConverter, System.ComponentModel.TypeConverter.Tests, Version=9.9.9.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #elif PERFORMANCE_TESTS
-    [TypeConverter("System.ComponentModel.Tests.BaseClassConverter, System.ComponentModel.TypeConverter.PerformanceTests, Version=9.9.9.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [TypeConverter(
+        "System.ComponentModel.Tests.BaseClassConverter, System.ComponentModel.TypeConverter.PerformanceTests, Version=9.9.9.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #else
 #error Define FUNCTIONAL_TESTS or PERFORMANCE_TESTS
 #endif
@@ -81,6 +99,7 @@ namespace System.ComponentModel.Tests
         {
             BaseProperty = 1;
         }
+
         public override bool Equals(object other)
         {
             BaseClass otherBaseClass = other as BaseClass;
@@ -94,17 +113,26 @@ namespace System.ComponentModel.Tests
             }
             return base.Equals(other);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public int BaseProperty;
     }
 
     public class BaseClassConverter : TypeConverter
     {
-        public BaseClassConverter(string someString) { throw new InvalidOperationException("This constructor should not be invoked by TypeDescriptor.GetConverter."); }
+        public BaseClassConverter(string someString)
+        {
+            throw new InvalidOperationException(
+                "This constructor should not be invoked by TypeDescriptor.GetConverter."
+            );
+        }
+
         public BaseClassConverter() { }
+
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(int))
@@ -113,7 +141,11 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertFrom(context, sourceType);
         }
-        public override bool CanConvertTo(ITypeDescriptorContext context, [NotNullWhen(true)] Type? destinationType)
+
+        public override bool CanConvertTo(
+            ITypeDescriptorContext context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
             if (destinationType == typeof(int))
             {
@@ -121,7 +153,12 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertTo(context, destinationType);
         }
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             if (value is int)
             {
@@ -131,7 +168,13 @@ namespace System.ComponentModel.Tests
             }
             return base.ConvertFrom(context, culture, value);
         }
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(int))
             {
@@ -153,11 +196,13 @@ namespace System.ComponentModel.Tests
         {
             DerivedProperty = 2;
         }
+
         public DerivedClass(int i)
             : base()
         {
             DerivedProperty = i;
         }
+
         public override bool Equals(object other)
         {
             DerivedClass otherDerivedClass = other as DerivedClass;
@@ -171,10 +216,12 @@ namespace System.ComponentModel.Tests
             }
             return base.Equals(other);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public int DerivedProperty;
     }
 
@@ -190,7 +237,11 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertFrom(context, sourceType);
         }
-        public override bool CanConvertTo(ITypeDescriptorContext context, [NotNullWhen(true)] Type? destinationType)
+
+        public override bool CanConvertTo(
+            ITypeDescriptorContext context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
             if (destinationType == typeof(int))
             {
@@ -198,7 +249,12 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertTo(context, destinationType);
         }
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             if (value is int)
             {
@@ -209,7 +265,13 @@ namespace System.ComponentModel.Tests
             }
             return base.ConvertFrom(context, culture, value);
         }
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(int))
             {
@@ -240,6 +302,7 @@ namespace System.ComponentModel.Tests
         {
             InterfaceProperty = 10;
         }
+
         public int InterfaceProperty { get; set; }
     }
 
@@ -250,13 +313,17 @@ namespace System.ComponentModel.Tests
             InterfaceProperty = 20;
             DerivedInterfaceProperty = InterfaceProperty / 2;
         }
+
         public int InterfaceProperty { get; set; }
         public int DerivedInterfaceProperty { get; set; }
     }
 
     public class IBaseConverter : TypeConverter
     {
-        public override bool CanConvertTo(ITypeDescriptorContext context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
             if (destinationType == typeof(string) || destinationType == typeof(int))
             {
@@ -265,7 +332,12 @@ namespace System.ComponentModel.Tests
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string))
             {
@@ -282,22 +354,20 @@ namespace System.ComponentModel.Tests
     }
 
     [TypeConverter("System.ComponentModel.Tests.InvalidConverter")]
-    internal class ClassWithInvalidConverter : BaseClass
-    {
-    }
+    internal class ClassWithInvalidConverter : BaseClass { }
 
     public class InvalidConverter : TypeConverter
     {
         public InvalidConverter(string someString)
         {
-            throw new InvalidOperationException("This constructor should not be invoked by TypeDescriptor.GetConverter.");
+            throw new InvalidOperationException(
+                "This constructor should not be invoked by TypeDescriptor.GetConverter."
+            );
         }
         // Default constructor is missing, we expect the following exception when getting a converter:
         // System.MissingMethodException: No parameterless constructor defined for this object.
     }
 
     // TypeDescriptor should default to the TypeConverter in this case.
-    public class ClassWithNoConverter
-    {
-    }
+    public class ClassWithNoConverter { }
 }

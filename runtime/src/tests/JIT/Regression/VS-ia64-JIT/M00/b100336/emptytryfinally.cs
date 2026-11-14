@@ -4,17 +4,13 @@
 
 using System;
 using Xunit;
+
 public class a
 {
-
     [Fact]
     public static void TestEntryPoint()
     {
-        try
-        {
-        }
-        finally
-        {
-        }
+        try { }
+        finally { }
     }
 }

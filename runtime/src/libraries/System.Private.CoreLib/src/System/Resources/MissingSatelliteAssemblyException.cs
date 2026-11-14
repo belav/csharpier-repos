@@ -11,7 +11,9 @@ namespace System.Resources
     /// The exception that is thrown when the satellite assembly for the resources of the default culture is missing.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MissingSatelliteAssemblyException : SystemException
     {
         private readonly string? _cultureName;
@@ -41,12 +43,17 @@ namespace System.Resources
             HResult = HResults.COR_E_MISSINGSATELLITEASSEMBLY;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected MissingSatelliteAssemblyException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected MissingSatelliteAssemblyException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
 
         public string? CultureName => _cultureName;
     }

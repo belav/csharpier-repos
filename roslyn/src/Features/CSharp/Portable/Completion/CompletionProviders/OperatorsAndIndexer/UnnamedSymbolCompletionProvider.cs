@@ -22,12 +22,15 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
     /// <summary>
-    /// Provides completion for uncommon unnamed symbols, like conversions, indexer and operators.  These completion 
+    /// Provides completion for uncommon unnamed symbols, like conversions, indexer and operators.  These completion
     /// items will be brought up with <c>dot</c> like normal, but will end up inserting more than just a name into
     /// the editor.  For example, committing a conversion will insert the conversion prior to the expression being
     /// dotted off of.
     /// </summary>
-    [ExportCompletionProvider(nameof(UnnamedSymbolCompletionProvider), LanguageNames.CSharp), Shared]
+    [
+        ExportCompletionProvider(nameof(UnnamedSymbolCompletionProvider), LanguageNames.CSharp),
+        Shared
+    ]
     [ExtensionOrder(After = nameof(SymbolCompletionProvider))]
     internal partial class UnnamedSymbolCompletionProvider : LSPCompletionProvider
     {
@@ -36,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         /// of the type.  We accomplish this by placing a character known to be greater than all other normal identifier
         /// characters as the start of our item's name. This doesn't affect what we insert though as all derived
         /// providers have specialized logic for what they need to do.
-        /// </summary> 
+        /// </summary>
         private const string SortingPrefix = "\uFFFD";
 
         /// <summary>
@@ -55,37 +58,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UnnamedSymbolCompletionProvider()
-        {
-        }
+        public UnnamedSymbolCompletionProvider() { }
 
         internal override string Language => LanguageNames.CSharp;
 
         public override ImmutableHashSet<char> TriggerCharacters => ImmutableHashSet.Create('.');
 
-        public override bool IsInsertionTrigger(SourceText text, int insertedCharacterPosition, CompletionOptions options)
-            => text[insertedCharacterPosition] == '.';
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int insertedCharacterPosition,
+            CompletionOptions options
+        ) => text[insertedCharacterPosition] == '.';
 
         /// <summary>
         /// We keep operators sorted in a specific order.  We don't want to sort them alphabetically, but instead want
         /// to keep things like <c>==</c> and <c>!=</c> together.
         /// </summary>
-        private static string SortText(int sortingGroupIndex, string sortTextSymbolPart)
-            => $"{SortingPrefix}{sortingGroupIndex:000}_{sortTextSymbolPart}";
+        private static string SortText(int sortingGroupIndex, string sortTextSymbolPart) =>
+            $"{SortingPrefix}{sortingGroupIndex:000}_{sortTextSymbolPart}";
 
         /// <summary>
         /// Gets the dot-like token we're after, and also the start of the expression we'd want to place any text before.
         /// </summary>
-        private static (SyntaxToken dotLikeToken, int expressionStart) GetDotAndExpressionStart(SyntaxNode root, int position, CancellationToken cancellationToken)
+        private static (SyntaxToken dotLikeToken, int expressionStart) GetDotAndExpressionStart(
+            SyntaxNode root,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            if (CompletionUtilities.GetDotTokenLeftOfPosition(root.SyntaxTree, position, cancellationToken) is not SyntaxToken dotToken)
+            if (
+                CompletionUtilities.GetDotTokenLeftOfPosition(
+                    root.SyntaxTree,
+                    position,
+                    cancellationToken
+                )
+                is not SyntaxToken dotToken
+            )
                 return default;
 
             // if we have `.Name`, we want to get the parent member-access of that to find the starting position.
             // Otherwise, if we have .. then we want the left side of that to find the starting position.
-            var expression = dotToken.Kind() == SyntaxKind.DotToken
-                ? dotToken.Parent as ExpressionSyntax
-                : (dotToken.Parent as RangeExpressionSyntax)?.LeftOperand;
+            var expression =
+                dotToken.Kind() == SyntaxKind.DotToken
+                    ? dotToken.Parent as ExpressionSyntax
+                    : (dotToken.Parent as RangeExpressionSyntax)?.LeftOperand;
 
             if (expression == null)
                 return default;
@@ -101,33 +117,54 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var document = context.Document;
             var position = context.Position;
 
-            // Escape hatch feature flag to let us disable this feature remotely if we run into any issues with it, 
+            // Escape hatch feature flag to let us disable this feature remotely if we run into any issues with it,
             if (context.CompletionOptions.UnnamedSymbolCompletionDisabled)
                 return;
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var dotAndExprStart = GetDotAndExpressionStart(root, position, cancellationToken);
             if (dotAndExprStart == default)
                 return;
 
             var recommender = document.GetRequiredLanguageService<IRecommendationService>();
-            var syntaxContext = await context.GetSyntaxContextWithExistingSpeculativeModelAsync(document, cancellationToken).ConfigureAwait(false);
+            var syntaxContext = await context
+                .GetSyntaxContextWithExistingSpeculativeModelAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             var semanticModel = syntaxContext.SemanticModel;
 
             var options = context.CompletionOptions.ToRecommendationServiceOptions();
-            var recommendedSymbols = recommender.GetRecommendedSymbolsInContext(syntaxContext, options, cancellationToken);
+            var recommendedSymbols = recommender.GetRecommendedSymbolsInContext(
+                syntaxContext,
+                options,
+                cancellationToken
+            );
 
-            AddUnnamedSymbols(context, position, semanticModel, recommendedSymbols.UnnamedSymbols, cancellationToken);
+            AddUnnamedSymbols(
+                context,
+                position,
+                semanticModel,
+                recommendedSymbols.UnnamedSymbols,
+                cancellationToken
+            );
         }
 
         private void AddUnnamedSymbols(
-            CompletionContext context, int position, SemanticModel semanticModel, ImmutableArray<ISymbol> unnamedSymbols, CancellationToken cancellationToken)
+            CompletionContext context,
+            int position,
+            SemanticModel semanticModel,
+            ImmutableArray<ISymbol> unnamedSymbols,
+            CancellationToken cancellationToken
+        )
         {
             // Add one 'this[]' entry for all the indexers this type may have.
             AddIndexers(context, unnamedSymbols.WhereAsArray(s => s.IsIndexer()));
 
             // Group all the related operators and add a single completion entry per group.
-            var operatorGroups = unnamedSymbols.WhereAsArray(s => s.IsUserDefinedOperator()).GroupBy(op => op.Name);
+            var operatorGroups = unnamedSymbols
+                .WhereAsArray(s => s.IsUserDefinedOperator())
+                .GroupBy(op => op.Name);
             foreach (var opGroup in operatorGroups)
                 AddOperatorGroup(context, opGroup.Key, opGroup);
 
@@ -144,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             CompletionItem item,
             char? commitKey,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var kind = item.GetProperty(KindName);
             return kind switch
@@ -161,20 +199,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem item,
             CompletionOptions options,
             SymbolDescriptionOptions displayOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var kind = item.GetProperty(KindName);
             return kind switch
             {
-                IndexerKindName => await GetIndexerDescriptionAsync(document, item, displayOptions, cancellationToken).ConfigureAwait(false),
-                OperatorKindName => await GetOperatorDescriptionAsync(document, item, displayOptions, cancellationToken).ConfigureAwait(false),
-                ConversionKindName => await GetConversionDescriptionAsync(document, item, displayOptions, cancellationToken).ConfigureAwait(false),
+                IndexerKindName => await GetIndexerDescriptionAsync(
+                        document,
+                        item,
+                        displayOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false),
+                OperatorKindName => await GetOperatorDescriptionAsync(
+                        document,
+                        item,
+                        displayOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false),
+                ConversionKindName => await GetConversionDescriptionAsync(
+                        document,
+                        item,
+                        displayOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
         }
 
-        private static Task<CompletionChange> ReplaceTextAfterOperatorAsync(Document document, CompletionItem item, string text, CancellationToken cancellationToken)
-            => ReplaceTextAfterOperatorAsync(document, item, text, keepQuestion: false, positionOffset: 0, cancellationToken);
+        private static Task<CompletionChange> ReplaceTextAfterOperatorAsync(
+            Document document,
+            CompletionItem item,
+            string text,
+            CancellationToken cancellationToken
+        ) =>
+            ReplaceTextAfterOperatorAsync(
+                document,
+                item,
+                text,
+                keepQuestion: false,
+                positionOffset: 0,
+                cancellationToken
+            );
 
         private static async Task<CompletionChange> ReplaceTextAfterOperatorAsync(
             Document document,
@@ -182,25 +251,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             string text,
             bool keepQuestion,
             int positionOffset,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var position = SymbolCompletionItem.GetContextPosition(item);
 
             var (dotToken, _) = GetDotAndExpressionStart(root, position, cancellationToken);
-            var questionToken = dotToken.GetPreviousToken().Kind() == SyntaxKind.QuestionToken
-                ? dotToken.GetPreviousToken()
-                : (SyntaxToken?)null;
+            var questionToken =
+                dotToken.GetPreviousToken().Kind() == SyntaxKind.QuestionToken
+                    ? dotToken.GetPreviousToken()
+                    : (SyntaxToken?)null;
 
-            var replacementStart = !keepQuestion && questionToken != null
-                ? questionToken.Value.SpanStart
-                : dotToken.SpanStart;
+            var replacementStart =
+                !keepQuestion && questionToken != null
+                    ? questionToken.Value.SpanStart
+                    : dotToken.SpanStart;
             var newPosition = replacementStart + text.Length + positionOffset;
 
             var tokenOnLeft = root.FindTokenOnLeftOfPosition(position, includeSkipped: true);
             return CompletionChange.Create(
                 new TextChange(TextSpan.FromBounds(replacementStart, tokenOnLeft.Span.End), text),
-                newPosition);
+                newPosition
+            );
         }
     }
 }

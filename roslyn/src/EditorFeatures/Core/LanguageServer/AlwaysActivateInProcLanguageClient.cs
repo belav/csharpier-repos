@@ -42,20 +42,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         ILspServiceLoggerFactory lspLoggerFactory,
         IThreadingContext threadingContext,
         ExportProvider exportProvider,
-        [ImportMany] IEnumerable<Lazy<ILspBuildOnlyDiagnostics, ILspBuildOnlyDiagnosticsMetadata>> buildOnlyDiagnostics) : AbstractInProcLanguageClient(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext, exportProvider)
+        [ImportMany]
+            IEnumerable<
+            Lazy<ILspBuildOnlyDiagnostics, ILspBuildOnlyDiagnosticsMetadata>
+        > buildOnlyDiagnostics
+    )
+        : AbstractInProcLanguageClient(
+            lspServiceProvider,
+            globalOptions,
+            lspLoggerFactory,
+            threadingContext,
+            exportProvider
+        )
     {
-        private readonly ExperimentalCapabilitiesProvider _experimentalCapabilitiesProvider = defaultCapabilitiesProvider;
-        private readonly IEnumerable<Lazy<ILspBuildOnlyDiagnostics, ILspBuildOnlyDiagnosticsMetadata>> _buildOnlyDiagnostics = buildOnlyDiagnostics;
+        private readonly ExperimentalCapabilitiesProvider _experimentalCapabilitiesProvider =
+            defaultCapabilitiesProvider;
+        private readonly IEnumerable<
+            Lazy<ILspBuildOnlyDiagnostics, ILspBuildOnlyDiagnosticsMetadata>
+        > _buildOnlyDiagnostics = buildOnlyDiagnostics;
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
             // If the LSP editor feature flag is enabled advertise support for LSP features here so they are available locally and remote.
-            var isLspEditorEnabled = GlobalOptions.GetOption(LspOptionsStorage.LspEditorFeatureFlag);
+            var isLspEditorEnabled = GlobalOptions.GetOption(
+                LspOptionsStorage.LspEditorFeatureFlag
+            );
 
             var serverCapabilities = isLspEditorEnabled
-                ? (VSInternalServerCapabilities)_experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities)
+                ? (VSInternalServerCapabilities)
+                    _experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities)
                 : new VSInternalServerCapabilities()
                 {
                     // Even if the flag is off, we want to include text sync capabilities.
@@ -73,7 +91,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             if (isPullDiagnostics)
             {
                 serverCapabilities.SupportsDiagnosticRequests = true;
-                serverCapabilities.MultipleContextSupportProvider = new VSInternalMultipleContextFeatures { SupportsMultipleContextsDiagnostics = true };
+                serverCapabilities.MultipleContextSupportProvider =
+                    new VSInternalMultipleContextFeatures
+                    {
+                        SupportsMultipleContextsDiagnostics = true,
+                    };
                 serverCapabilities.DiagnosticProvider ??= new();
                 serverCapabilities.DiagnosticProvider.DiagnosticKinds =
                 [
@@ -107,7 +129,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             // However, when the experimental LSP editor is enabled we want LSP to power NavigateTo, so we set DisableGoToWorkspaceSymbols=false.
             serverCapabilities.DisableGoToWorkspaceSymbols = !isLspEditorEnabled;
 
-            var isLspSemanticTokensEnabled = GlobalOptions.GetOption(LspOptionsStorage.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokensEnabled = GlobalOptions.GetOption(
+                LspOptionsStorage.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokensEnabled)
             {
                 // Using only range handling has shown to be more performant than using a combination of full/edits/range handling,
@@ -120,9 +144,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                     Range = true,
                     Legend = new SemanticTokensLegend
                     {
-                        TokenTypes = SemanticTokensSchema.GetSchema(clientCapabilities.HasVisualStudioLspCapability()).AllTokenTypes.ToArray(),
-                        TokenModifiers = SemanticTokensSchema.TokenModifiers
-                    }
+                        TokenTypes = SemanticTokensSchema
+                            .GetSchema(clientCapabilities.HasVisualStudioLspCapability())
+                            .AllTokenTypes.ToArray(),
+                        TokenModifiers = SemanticTokensSchema.TokenModifiers,
+                    },
                 };
             }
 
@@ -136,8 +162,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// they will get no diagnostics.  When not enabled we don't show the failure box (failure will still be recorded in the task status center)
         /// as the failure is not catastrophic.
         /// </summary>
-        public override bool ShowNotificationOnInitializeFailed => GlobalOptions.IsLspPullDiagnostics();
+        public override bool ShowNotificationOnInitializeFailed =>
+            GlobalOptions.IsLspPullDiagnostics();
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.AlwaysActiveVSLspServer;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.AlwaysActiveVSLspServer;
     }
 }

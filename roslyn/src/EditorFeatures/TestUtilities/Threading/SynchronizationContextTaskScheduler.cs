@@ -20,7 +20,8 @@ namespace Roslyn.Test.Utilities
         internal SynchronizationContextTaskScheduler(SynchronizationContext synchronizationContext)
         {
             _postCallback = new SendOrPostCallback(PostCallback);
-            _synchronizationContext = synchronizationContext ?? throw new ArgumentNullException(nameof(synchronizationContext));
+            _synchronizationContext = synchronizationContext
+                ?? throw new ArgumentNullException(nameof(synchronizationContext));
         }
 
         public override Int32 MaximumConcurrencyLevel => 1;
@@ -31,6 +32,7 @@ namespace Roslyn.Test.Utilities
             _synchronizationContext.Post(_postCallback, task);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
         }
+
         protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {
             if (SynchronizationContext.Current == _synchronizationContext)
@@ -41,10 +43,8 @@ namespace Roslyn.Test.Utilities
             return false;
         }
 
-        protected override IEnumerable<Task> GetScheduledTasks()
-            => null;
+        protected override IEnumerable<Task> GetScheduledTasks() => null;
 
-        private void PostCallback(object obj)
-            => TryExecuteTask((Task)obj);
+        private void PostCallback(object obj) => TryExecuteTask((Task)obj);
     }
 }

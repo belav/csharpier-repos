@@ -207,18 +207,14 @@ public class Http2WebSocketInteropTests : LoggedTest
     {
         webHostBuilder.UseKestrel(options =>
         {
-            options.Listen(
-                IPAddress.Loopback,
-                0,
-                listenOptions =>
+            options.Listen(IPAddress.Loopback, 0, listenOptions =>
+            {
+                listenOptions.Protocols = protocols;
+                if (scheme == "https")
                 {
-                    listenOptions.Protocols = protocols;
-                    if (scheme == "https")
-                    {
-                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                    }
+                    listenOptions.UseHttps(TestResources.GetTestCertificate());
                 }
-            );
+            });
         });
     }
 }

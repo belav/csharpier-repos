@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForIndexersAnalyzerTests
@@ -28,9 +29,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, ExpressionBodyPreference.WhenPossible },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never },
-                }
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                        ExpressionBodyPreference.WhenPossible
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never
+                    },
+                },
             }.RunAsync();
         }
 
@@ -42,9 +49,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, ExpressionBodyPreference.Never },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never },
-                }
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                        ExpressionBodyPreference.Never
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never
+                    },
+                },
             }.RunAsync();
         }
 
@@ -232,8 +245,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, ExpressionBodyPreference.Never },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.WhenPossible },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                        ExpressionBodyPreference.Never
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.WhenPossible
+                    },
                 },
                 NumberOfFixAllIterations = 2,
                 NumberOfIncrementalIterations = 2,

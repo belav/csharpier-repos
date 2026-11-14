@@ -4,10 +4,10 @@
 
 #nullable disable
 
+using System;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         public void TestSimpleIterator01()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -91,7 +91,7 @@ class Program
         public void TestSimpleIterator02()
         {
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 using System;
 
 class C
@@ -128,7 +128,7 @@ class C
         public void TestSimpleIterator03()
         {
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 using System;
 
 struct S
@@ -169,7 +169,9 @@ class Program
 }";
             var compilation = CompileAndVerifyWithMscorlib40(source, expectedOutput: "12324565");
 
-            compilation.VerifyIL("C.<IE>d__2<T>.System.Collections.Generic.IEnumerable<T>.GetEnumerator()", @"
+            compilation.VerifyIL(
+                "C.<IE>d__2<T>.System.Collections.Generic.IEnumerable<T>.GetEnumerator()",
+                @"
 {
   // Code size       84 (0x54)
   .maxstack  2
@@ -206,8 +208,11 @@ class Program
   IL_004d:  stfld      ""T C.<IE>d__2<T>.i1""
   IL_0052:  ldloc.0
   IL_0053:  ret
-}");
-            compilation.VerifyIL("S.<IE>d__2<T>.System.Collections.Generic.IEnumerable<T>.GetEnumerator()", @"
+}"
+            );
+            compilation.VerifyIL(
+                "S.<IE>d__2<T>.System.Collections.Generic.IEnumerable<T>.GetEnumerator()",
+                @"
 {
   // Code size       84 (0x54)
   .maxstack  2
@@ -244,14 +249,15 @@ class Program
   IL_004d:  stfld      ""T S.<IE>d__2<T>.i1""
   IL_0052:  ldloc.0
   IL_0053:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestSimpleIterator04()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -301,9 +307,14 @@ class Program
         }
     }
 }";
-            var compilation = CompileAndVerify(source, expectedOutput: "0|01Z|012XZ|012X3Z|012X34YZ|012X34Y5Z|012X34Y5Z6");
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: "0|01Z|012XZ|012X3Z|012X34YZ|012X34Y5Z|012X34Y5Z6"
+            );
 
-            compilation.VerifyIL("Program.<Int0>d__0.System.Collections.IEnumerator.MoveNext()", @"
+            compilation.VerifyIL(
+                "Program.<Int0>d__0.System.Collections.IEnumerator.MoveNext()",
+                @"
 {
   // Code size      303 (0x12f)
   .maxstack  2
@@ -442,8 +453,11 @@ class Program
   IL_012d:  ldloc.0
   IL_012e:  ret
 }
-");
-            compilation.VerifyIL("Program.<Int0>d__0.System.IDisposable.Dispose()", @"
+"
+            );
+            compilation.VerifyIL(
+                "Program.<Int0>d__0.System.IDisposable.Dispose()",
+                @"
 {
   // Code size       76 (0x4c)
   .maxstack  2
@@ -512,13 +526,15 @@ class Program
   }
   IL_004b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TestIteratorWithBaseAccess()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -560,7 +576,8 @@ class Derived: Base
         [Fact]
         public void TestIteratorWithBaseAccessInLambda()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -632,7 +649,8 @@ static class M1
         [Fact]
         public void TestIteratorWithBaseAccessInLambda2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -683,7 +701,8 @@ class C: Base
         [Fact]
         public void TestIteratorWithLambda()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -721,7 +740,8 @@ class C
         [Fact]
         public void Legacy_basic_itr_block010()
         {
-            var source = @"using System.Collections.Generic;
+            var source =
+                @"using System.Collections.Generic;
 using System.Collections;
 using System;
 
@@ -762,7 +782,8 @@ class Program
         [Fact]
         public void TestIteratorWithLambda02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -796,7 +817,8 @@ public class A
         [Fact]
         public void TestIteratorWithNestedForEachAndThrow()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System;
 
@@ -872,7 +894,8 @@ public class MyEnumerator : IEnumerator<int>
         [Fact]
         public void TestIteratorWithSwitchBreak()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -910,7 +933,7 @@ class Test
         public void TestIteratorWithCapturedStruct()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -948,7 +971,8 @@ struct B
         [Fact, WorkItem(544908, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544908")]
         public void TestIteratorWithNullableAsCollectionVariable_NonNull()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 
@@ -974,7 +998,10 @@ struct S : IEnumerable
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "1").VerifyIL("Program.Main", @"
+            CompileAndVerify(source, expectedOutput: "1")
+                .VerifyIL(
+                    "Program.Main",
+                    @"
 {
   // Code size       90 (0x5a)
   .maxstack  2
@@ -1026,14 +1053,16 @@ struct S : IEnumerable
   IL_0053:  ldloc.1
   IL_0054:  call       ""void System.Console.Write(int)""
   IL_0059:  ret
-}");
+}"
+                );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         [WorkItem(544908, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544908")]
         public void TestIteratorWithNullableAsCollectionVariable_Null()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 
@@ -1074,8 +1103,13 @@ struct S : IEnumerable
     }
 }
 ";
-            CompileAndVerifyException<InvalidOperationException>(source, expectedMessage: "Nullable object must have a value.").
-                VerifyIL("Program.Test", @"
+            CompileAndVerifyException<InvalidOperationException>(
+                    source,
+                    expectedMessage: "Nullable object must have a value."
+                )
+                .VerifyIL(
+                    "Program.Test",
+                    @"
 {
   // Code size       82 (0x52)
   .maxstack  2
@@ -1124,7 +1158,8 @@ struct S : IEnumerable
   IL_004b:  ldloc.1
   IL_004c:  call       ""void System.Console.Write(int)""
   IL_0051:  ret
-}");
+}"
+                );
         }
 
         [Fact]
@@ -1132,7 +1167,7 @@ struct S : IEnumerable
         public void TestIteratorWithUsing()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
  
 class Test<T>
@@ -1158,7 +1193,8 @@ class T
         [Fact, WorkItem(545767, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545767")]
         public void DoNotCaptureUnusedParameters_Release()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1173,35 +1209,46 @@ class Program
         yield return x;
     }
 }";
-            var rel = CompileAndVerify(source, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            var rel = CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>2__current"
-                }, module.GetFieldNames("Program.<M>d__1"));
-            });
+                    AssertEx.Equal(
+                        new[] { "<>1__state", "<>2__current" },
+                        module.GetFieldNames("Program.<M>d__1")
+                    );
+                }
+            );
 
-            rel.VerifyIL("Program.M", @"
+            rel.VerifyIL(
+                "Program.M",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldc.i4.0
   IL_0001:  newobj     ""Program.<M>d__1..ctor(int)""
   IL_0006:  ret
-}");
-            var dbg = CompileAndVerify(source, options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+}"
+            );
+            var dbg = CompileAndVerify(
+                source,
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>2__current",
-                    "items",
-                    "<x>5__1",
-                }, module.GetFieldNames("Program.<M>d__1"));
-            });
+                    AssertEx.Equal(
+                        new[] { "<>1__state", "<>2__current", "items", "<x>5__1" },
+                        module.GetFieldNames("Program.<M>d__1")
+                    );
+                }
+            );
 
-            dbg.VerifyIL("Program.M", @"
+            dbg.VerifyIL(
+                "Program.M",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  3
@@ -1211,13 +1258,15 @@ class Program
   IL_0007:  ldarg.0
   IL_0008:  stfld      ""System.Collections.Generic.IEnumerable<int> Program.<M>d__1.items""
   IL_000d:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void HoistedParameters_Enumerable()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 struct Test
@@ -1229,44 +1278,61 @@ struct Test
         y = 1;
     }
 }";
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                // consider: we don't really need to hoist "x" and "z", we could store the values of "<>3__x" and "<>3__z" to locals at the beginning of MoveNext.
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>2__current",
-                    "<>l__initialThreadId",
-                    "x",
-                    "<>3__x",
-                    "z",
-                    "<>3__z",
-                    "y",
-                    "<>3__y",
-                }, module.GetFieldNames("Test.<F>d__0"));
-            });
+                    // consider: we don't really need to hoist "x" and "z", we could store the values of "<>3__x" and "<>3__z" to locals at the beginning of MoveNext.
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>2__current",
+                            "<>l__initialThreadId",
+                            "x",
+                            "<>3__x",
+                            "z",
+                            "<>3__z",
+                            "y",
+                            "<>3__y",
+                        },
+                        module.GetFieldNames("Test.<F>d__0")
+                    );
+                }
+            );
 
-            CompileAndVerify(source, options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>2__current",
-                    "<>l__initialThreadId",
-                    "x",
-                    "<>3__x",
-                    "y",
-                    "<>3__y",
-                    "z",
-                    "<>3__z",
-                }, module.GetFieldNames("Test.<F>d__0"));
-            });
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>2__current",
+                            "<>l__initialThreadId",
+                            "x",
+                            "<>3__x",
+                            "y",
+                            "<>3__y",
+                            "z",
+                            "<>3__z",
+                        },
+                        module.GetFieldNames("Test.<F>d__0")
+                    );
+                }
+            );
         }
 
         [Fact]
         public void HoistedParameters_Enumerator()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 struct Test
@@ -1278,36 +1344,38 @@ struct Test
         y = 1;
     }
 }";
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>2__current",
-                    "x",
-                    "z",
-                    "y",
-                }, module.GetFieldNames("Test.<F>d__0"));
-            });
+                    AssertEx.Equal(
+                        new[] { "<>1__state", "<>2__current", "x", "z", "y" },
+                        module.GetFieldNames("Test.<F>d__0")
+                    );
+                }
+            );
 
-            CompileAndVerify(source, options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>2__current",
-                    "x",
-                    "y",
-                    "z",
-                }, module.GetFieldNames("Test.<F>d__0"));
-            });
+                    AssertEx.Equal(
+                        new[] { "<>1__state", "<>2__current", "x", "y", "z" },
+                        module.GetFieldNames("Test.<F>d__0")
+                    );
+                }
+            );
         }
 
         [Fact]
         public void IteratorForEach()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1329,9 +1397,10 @@ class Test
         }
     }
 }";
-            CompileAndVerify(source, expectedOutput: "abcdef").
-                VerifyIL("Test.<M>d__0<T>.System.Collections.IEnumerator.MoveNext()",
-@"{
+            CompileAndVerify(source, expectedOutput: "abcdef")
+                .VerifyIL(
+                    "Test.<M>d__0<T>.System.Collections.IEnumerator.MoveNext()",
+                    @"{
   // Code size      129 (0x81)
   .maxstack  2
   .locals init (bool V_0,
@@ -1399,7 +1468,8 @@ class Test
   }
   IL_007f:  ldloc.0
   IL_0080:  ret
-}");
+}"
+                );
         }
 
         [Fact]
@@ -1407,7 +1477,7 @@ class Test
         public void CaptureRefLocalNoParts()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 struct S
@@ -1441,7 +1511,7 @@ class Program
         public void MultipassAnalysisWithRefLocal()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 struct S
@@ -1476,7 +1546,7 @@ class Program
         public void DelegateCreationInIterator()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 delegate int Delegate(int x);
@@ -1506,7 +1576,7 @@ class Program1
         public void ForwardBranchInFinally()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1583,7 +1653,7 @@ class Program
         public void MultiLevelGoto()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1668,14 +1738,17 @@ class Program
 
 
 ";
-            CompileAndVerify(source, expectedOutput: "12345Finally5Finally4Finally3Finally2L1Finally1");
+            CompileAndVerify(
+                source,
+                expectedOutput: "12345Finally5Finally4Finally3Finally2L1Finally1"
+            );
         }
 
         [Fact]
         public void MultiLevelGoto001()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1767,21 +1840,24 @@ class Program
 }
 
 ";
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 L1
 Finally10Finally2L1
 Finally101Finally3Finally2L1
 Finally1012Finally4Finally3Finally2L1
 Finally10123Finally5Finally4Finally3Finally2L1
 Finally101234Finally5Finally4Finally3Finally2L1
-Finally1");
+Finally1"
+            );
         }
 
         [Fact]
         public void Switch001()
         {
             var source =
-@"
+                @"
 using System;
 using System.Diagnostics;
 using System.Collections;
@@ -1882,7 +1958,7 @@ class S<T1, T2>
         public void AssignedInFinally()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1914,8 +1990,11 @@ class A
 }
 
 ";
-            CompileAndVerify(source, expectedOutput: @"5
-42");
+            CompileAndVerify(
+                source,
+                expectedOutput: @"5
+42"
+            );
         }
 
         [Fact]
@@ -1938,8 +2017,14 @@ class Program
             var parsed = new[] { Parse(source) };
             var comp = CreateCompilationWithMscorlib45(parsed);
             var verifier = this.CompileAndVerify(comp);
-            var il = verifier.VisualizeIL("Program.<Goo>d__0.System.Collections.Generic.IEnumerable<int>.GetEnumerator()");
-            Assert.Contains("System.Environment.CurrentManagedThreadId.get", il, StringComparison.Ordinal);
+            var il = verifier.VisualizeIL(
+                "Program.<Goo>d__0.System.Collections.Generic.IEnumerable<int>.GetEnumerator()"
+            );
+            Assert.Contains(
+                "System.Environment.CurrentManagedThreadId.get",
+                il,
+                StringComparison.Ordinal
+            );
         }
 
         [Fact]
@@ -1971,15 +2056,21 @@ namespace System
             var comp = CreateCompilation(parsed);
             comp.MakeMemberMissing(WellKnownMember.System_Threading_Thread__ManagedThreadId);
             var verifier = this.CompileAndVerify(comp);
-            var il = verifier.VisualizeIL("Program.<Goo>d__0.System.Collections.Generic.IEnumerable<int>.GetEnumerator()");
-            Assert.Contains("System.Environment.CurrentManagedThreadId.get", il, StringComparison.Ordinal);
+            var il = verifier.VisualizeIL(
+                "Program.<Goo>d__0.System.Collections.Generic.IEnumerable<int>.GetEnumerator()"
+            );
+            Assert.Contains(
+                "System.Environment.CurrentManagedThreadId.get",
+                il,
+                StringComparison.Ordinal
+            );
         }
 
         [Fact]
         public void UnreachableExit()
         {
             var source =
-@"
+                @"
 using System.Collections.Generic;
 using System;
 
@@ -2010,7 +2101,7 @@ class Program
         public void Regress709127()
         {
             var source =
-@"
+                @"
     using System.Collections;
     using System.Collections.Generic;
     using System;
@@ -2091,7 +2182,7 @@ class Program
         public void Regress718498a()
         {
             var source =
-@"using System.Collections;
+                @"using System.Collections;
 using System.Collections.Generic;
 using System;
 
@@ -2132,7 +2223,7 @@ class Program
         public void Regress718498b()
         {
             var source =
-@"using System.Collections;
+                @"using System.Collections;
 using System.Collections.Generic;
 using System;
 
@@ -2177,7 +2268,7 @@ class Program
         public void Regress718498c()
         {
             var source =
-@"using System.Collections;
+                @"using System.Collections;
 using System.Collections.Generic;
 using System;
 
@@ -2219,7 +2310,7 @@ class Program
         public void SpillFieldName()
         {
             var source =
-@"class C<T>
+                @"class C<T>
 {
     static System.Collections.Generic.IEnumerable<T> F(System.IDisposable x, T[] y)
     {
@@ -2233,8 +2324,11 @@ class Program
     }
 }";
             string expectedIL;
-            CompileAndVerify(source).VerifyIL("C<T>.<F>d__0.System.Collections.IEnumerator.MoveNext()", expectedIL =
-@"{
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C<T>.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                    expectedIL =
+                        @"{
   // Code size      176 (0xb0)
   .maxstack  3
   .locals init (bool V_0,
@@ -2322,7 +2416,8 @@ class Program
   }
   IL_00ae:  ldloc.0
   IL_00af:  ret
-}");
+}"
+                );
             Assert.True(expectedIL.IndexOf("<>_", StringComparison.Ordinal) < 0);
         }
 
@@ -2330,7 +2425,8 @@ class Program
         public void IteratorShouldCompileWithoutOptionalAttributes()
         {
             #region IL for corlib without CompilerGeneratedAttribute or DebuggerNonUserCodeAttribute
-            var corlib = @"
+            var corlib =
+                @"
 namespace System
 {
     public class Object { }
@@ -2377,7 +2473,8 @@ namespace System.Collections
 }";
             #endregion
 
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public System.Collections.IEnumerable SomeNumbers()
@@ -2387,12 +2484,15 @@ public class C
 }";
             // The compilation succeeds even though CompilerGeneratedAttribute and DebuggerNonUserCodeAttribute are not available.
             var parseOptions = TestOptions.Regular.WithNoRefSafetyRulesAttribute();
-            var compilation = CreateEmptyCompilation(new[] { Parse(source, options: parseOptions), Parse(corlib, options: parseOptions) });
+            var compilation = CreateEmptyCompilation(
+                new[] { Parse(source, options: parseOptions), Parse(corlib, options: parseOptions) }
+            );
             // PEVerify: System.Enum must extend System.ValueType.
             var verifier = CompileAndVerify(compilation, verify: Verification.FailsPEVerify);
             verifier.VerifyDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1));
+                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
+            );
         }
 
         [Fact, WorkItem(9463, "https://github.com/dotnet/roslyn/issues/9463")]
@@ -2400,7 +2500,8 @@ public class C
         {
             // Note that IDisposable.Dispose, IEnumerator.Current and other types are missing
             // Also, IEnumerator<T> doesn't have a get accessor
-            var source = @"
+            var source =
+                @"
 namespace System
 {
     public class Object { }
@@ -2432,35 +2533,57 @@ public class C
 {
     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
 }";
-            var compilation = CreateEmptyCompilation(new[] { Parse(source, options: TestOptions.Regular.WithNoRefSafetyRulesAttribute()) });
+            var compilation = CreateEmptyCompilation(
+                new[]
+                {
+                    Parse(source, options: TestOptions.Regular.WithNoRefSafetyRulesAttribute()),
+                }
+            );
 
             compilation.VerifyEmitDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // (31,57): error CS0656: Missing compiler required member 'System.IDisposable.Dispose'
                 //     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.IDisposable", "Dispose").WithLocation(31, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.IDisposable", "Dispose")
+                    .WithLocation(31, 57),
                 // (31,57): error CS0154: The property or indexer 'IEnumerator<T>.Current' cannot be used in this context because it lacks the get accessor
                 //     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "{ yield return 42; }").WithArguments("System.Collections.Generic.IEnumerator<T>.Current").WithLocation(31, 57),
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "{ yield return 42; }")
+                    .WithArguments("System.Collections.Generic.IEnumerator<T>.Current")
+                    .WithLocation(31, 57),
                 // (31,57): error CS0656: Missing compiler required member 'System.Collections.IEnumerator.Current'
                 //     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.Collections.IEnumerator", "Current").WithLocation(31, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.Collections.IEnumerator", "Current")
+                    .WithLocation(31, 57),
                 // (31,57): error CS0656: Missing compiler required member 'System.Collections.IEnumerator.MoveNext'
                 //     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.Collections.IEnumerator", "MoveNext").WithLocation(31, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.Collections.IEnumerator", "MoveNext")
+                    .WithLocation(31, 57),
                 // (31,57): error CS0656: Missing compiler required member 'System.Collections.IEnumerator.Reset'
                 //     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.Collections.IEnumerator", "Reset").WithLocation(31, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.Collections.IEnumerator", "Reset")
+                    .WithLocation(31, 57),
                 // (31,57): error CS0656: Missing compiler required member 'System.Collections.IEnumerable.GetEnumerator'
                 //     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.Collections.IEnumerable", "GetEnumerator").WithLocation(31, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.Collections.IEnumerable", "GetEnumerator")
+                    .WithLocation(31, 57),
                 // (31,57): error CS0518: Predefined type 'System.Collections.Generic.IEnumerable`1' is not defined or imported
                 //     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "{ yield return 42; }").WithArguments("System.Collections.Generic.IEnumerable`1").WithLocation(31, 57),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "{ yield return 42; }")
+                    .WithArguments("System.Collections.Generic.IEnumerable`1")
+                    .WithLocation(31, 57),
                 // (31,57): error CS0656: Missing compiler required member 'System.Collections.Generic.IEnumerable`1.GetEnumerator'
                 //     public System.Collections.IEnumerable SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.Collections.Generic.IEnumerable`1", "GetEnumerator").WithLocation(31, 57));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.Collections.Generic.IEnumerable`1", "GetEnumerator")
+                    .WithLocation(31, 57)
+            );
         }
 
         [Fact, WorkItem(9463, "https://github.com/dotnet/roslyn/issues/9463")]
@@ -2468,7 +2591,8 @@ public class C
         {
             // Note that IDisposable.Dispose and other types are missing
             // Also IEnumerator.Current lacks a get accessor
-            var source = @"
+            var source =
+                @"
 namespace System
 {
     public class Object { }
@@ -2496,30 +2620,48 @@ public class C
 {
     public System.Collections.IEnumerator SomeNumbers() { yield return 42; }
 }";
-            var compilation = CreateEmptyCompilation(new[] { Parse(source, options: TestOptions.Regular.WithNoRefSafetyRulesAttribute()) });
+            var compilation = CreateEmptyCompilation(
+                new[]
+                {
+                    Parse(source, options: TestOptions.Regular.WithNoRefSafetyRulesAttribute()),
+                }
+            );
 
             // No error about IEnumerable
             compilation.VerifyEmitDiagnostics(
                 // (27,57): error CS0656: Missing compiler required member 'System.IDisposable.Dispose'
                 //     public System.Collections.IEnumerator SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.IDisposable", "Dispose").WithLocation(27, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.IDisposable", "Dispose")
+                    .WithLocation(27, 57),
                 // (27,57): error CS0518: Predefined type 'System.Collections.Generic.IEnumerator`1' is not defined or imported
                 //     public System.Collections.IEnumerator SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "{ yield return 42; }").WithArguments("System.Collections.Generic.IEnumerator`1").WithLocation(27, 57),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "{ yield return 42; }")
+                    .WithArguments("System.Collections.Generic.IEnumerator`1")
+                    .WithLocation(27, 57),
                 // (27,57): error CS0656: Missing compiler required member 'System.Collections.Generic.IEnumerator`1.Current'
                 //     public System.Collections.IEnumerator SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.Collections.Generic.IEnumerator`1", "Current").WithLocation(27, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.Collections.Generic.IEnumerator`1", "Current")
+                    .WithLocation(27, 57),
                 // (27,57): error CS0154: The property or indexer 'IEnumerator.Current' cannot be used in this context because it lacks the get accessor
                 //     public System.Collections.IEnumerator SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "{ yield return 42; }").WithArguments("System.Collections.IEnumerator.Current").WithLocation(27, 57),
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "{ yield return 42; }")
+                    .WithArguments("System.Collections.IEnumerator.Current")
+                    .WithLocation(27, 57),
                 // (27,57): error CS0656: Missing compiler required member 'System.Collections.IEnumerator.MoveNext'
                 //     public System.Collections.IEnumerator SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.Collections.IEnumerator", "MoveNext").WithLocation(27, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.Collections.IEnumerator", "MoveNext")
+                    .WithLocation(27, 57),
                 // (27,57): error CS0656: Missing compiler required member 'System.Collections.IEnumerator.Reset'
                 //     public System.Collections.IEnumerator SomeNumbers() { yield return 42; }
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }").WithArguments("System.Collections.IEnumerator", "Reset").WithLocation(27, 57),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ yield return 42; }")
+                    .WithArguments("System.Collections.IEnumerator", "Reset")
+                    .WithLocation(27, 57),
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1));
+                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
+            );
         }
 
         [Fact, WorkItem(21077, "https://github.com/dotnet/roslyn/issues/21077")]
@@ -2527,7 +2669,7 @@ public class C
         {
             // Note that the variable i is not captured in any of these three async methods.
             var source =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class Program
 {
@@ -2567,8 +2709,9 @@ class Program
     }
 }";
             var v = CompileAndVerify(source, options: TestOptions.ReleaseDll);
-            v.VerifyIL("Program.<Method1>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"{
+            v.VerifyIL(
+                "Program.<Method1>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"{
   // Code size      148 (0x94)
   .maxstack  3
   .locals init (int V_0,
@@ -2640,9 +2783,11 @@ class Program
   IL_0089:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Method1>d__0.<>t__builder""
   IL_008e:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0093:  ret
-}");
-            v.VerifyIL("Program.<Method2>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"{
+}"
+            );
+            v.VerifyIL(
+                "Program.<Method2>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"{
   // Code size      260 (0x104)
   .maxstack  3
   .locals init (int V_0,
@@ -2757,9 +2902,11 @@ class Program
   IL_00f9:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Method2>d__1.<>t__builder""
   IL_00fe:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0103:  ret
-}");
-            v.VerifyIL("Program.<Method3>d__2.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"{
+}"
+            );
+            v.VerifyIL(
+                "Program.<Method3>d__2.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"{
   // Code size      260 (0x104)
   .maxstack  3
   .locals init (int V_0,
@@ -2874,14 +3021,15 @@ class Program
   IL_00f9:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Method3>d__2.<>t__builder""
   IL_00fe:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0103:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(5062, "https://github.com/dotnet/roslyn/issues/5062")]
         public void LocalLiftingVsSwitch()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -2915,8 +3063,14 @@ class Program
         yield return result.ToString();
     }
 }";
-            var compilation = CompileAndVerify(source, expectedOutput: "FalseTrueFalseTrue", options: TestOptions.ReleaseExe);
-            compilation.VerifyIL("Program.<Iter1>d__1.System.Collections.IEnumerator.MoveNext()", @"{
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: "FalseTrueFalseTrue",
+                options: TestOptions.ReleaseExe
+            );
+            compilation.VerifyIL(
+                "Program.<Iter1>d__1.System.Collections.IEnumerator.MoveNext()",
+                @"{
   // Code size       69 (0x45)
   .maxstack  2
   .locals init (int V_0,
@@ -2957,8 +3111,11 @@ class Program
   IL_003e:  stfld      ""int Program.<Iter1>d__1.<>1__state""
   IL_0043:  ldc.i4.0
   IL_0044:  ret
-}");
-            compilation.VerifyIL("Program.<Iter2>d__2.System.Collections.IEnumerator.MoveNext()", @"{
+}"
+            );
+            compilation.VerifyIL(
+                "Program.<Iter2>d__2.System.Collections.IEnumerator.MoveNext()",
+                @"{
   // Code size       69 (0x45)
   .maxstack  2
   .locals init (int V_0,
@@ -2999,7 +3156,8 @@ class Program
   IL_003e:  stfld      ""int Program.<Iter2>d__2.<>1__state""
   IL_0043:  ldc.i4.0
   IL_0044:  ret
-}");
+}"
+            );
         }
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,24 +30,22 @@
 
 namespace System.Runtime.Remoting.Channels
 {
-	public class CommonTransportKeys
-	{
-		public const string ConnectionId = "__ConnectionId";
-		public const string IPAddress = "__IPAddress";
-		public const string RequestUri = "__RequestUri";
-		
-		internal const string RequestVerb = "__RequestVerb";
-		internal const string HttpVersion = "__HttpVersion";
-		internal const string ContentType = "Content-Type";
-		internal const string UserAgent = "User-Agent";
-		internal const string Host = "Host";
-		internal const string SoapAction = "SOAPAction";
-		
-		internal const string HttpStatusCode = "__HttpStatusCode";
-		internal const string HttpReasonPhrase = "__HttpReasonPhrase";
-		
-		public CommonTransportKeys ()
-		{
-		}
-	}
+    public class CommonTransportKeys
+    {
+        public const string ConnectionId = "__ConnectionId";
+        public const string IPAddress = "__IPAddress";
+        public const string RequestUri = "__RequestUri";
+
+        internal const string RequestVerb = "__RequestVerb";
+        internal const string HttpVersion = "__HttpVersion";
+        internal const string ContentType = "Content-Type";
+        internal const string UserAgent = "User-Agent";
+        internal const string Host = "Host";
+        internal const string SoapAction = "SOAPAction";
+
+        internal const string HttpStatusCode = "__HttpStatusCode";
+        internal const string HttpReasonPhrase = "__HttpReasonPhrase";
+
+        public CommonTransportKeys() { }
+    }
 }

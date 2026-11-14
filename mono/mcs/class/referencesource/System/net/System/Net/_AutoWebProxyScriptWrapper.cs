@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 // Two implementations of AutoWebProxyScriptWrapper live in this file.  The first uses jscript.dll via COM, the second
 // uses Microsoft.JScript using an external AppDomain.
 
@@ -459,16 +458,16 @@ namespace System.Net
 
 #else
 
-namespace System.Net 
+namespace System.Net
 {
     using System.Collections;
     using System.Reflection;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using System.Runtime.Remoting;
-    using System.Runtime.ConstrainedExecution;
     using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.Remoting;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
     using System.Threading;
 
     // This interface is useless to users.  We need it to interact with our Microsoft.JScript helper class.
@@ -505,10 +504,15 @@ namespace System.Net
         }
 
         [ReflectionPermission(SecurityAction.Assert, Flags = ReflectionPermissionFlag.MemberAccess)]
-        [ReflectionPermission(SecurityAction.Assert, Flags = ReflectionPermissionFlag.TypeInformation)]
+        [ReflectionPermission(
+            SecurityAction.Assert,
+            Flags = ReflectionPermissionFlag.TypeInformation
+        )]
         internal AutoWebProxyScriptWrapper()
         {
-            GlobalLog.Print("AutoWebProxyScriptWrapper::.ctor() Creating AppDomain: " + c_appDomainName);
+            GlobalLog.Print(
+                "AutoWebProxyScriptWrapper::.ctor() Creating AppDomain: " + c_appDomainName
+            );
 
             Exception exception = null;
             if (s_ProxyScriptHelperLoadError == null && s_ProxyScriptHelperType == null)
@@ -520,7 +524,10 @@ namespace System.Net
                         // Try to load the type late-bound out of Microsoft.JScript.
                         try
                         {
-                            s_ProxyScriptHelperType = Type.GetType("System.Net.VsaWebProxyScript, Microsoft.JScript, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", true);
+                            s_ProxyScriptHelperType = Type.GetType(
+                                "System.Net.VsaWebProxyScript, Microsoft.JScript, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                                true
+                            );
                         }
                         catch (Exception ex)
                         {
@@ -529,7 +536,8 @@ namespace System.Net
 
                         if (s_ProxyScriptHelperType == null)
                         {
-                            s_ProxyScriptHelperLoadError = exception == null ? new InternalException() : exception;
+                            s_ProxyScriptHelperLoadError =
+                                exception == null ? new InternalException() : exception;
                         }
                     }
                 }
@@ -537,7 +545,12 @@ namespace System.Net
 
             if (s_ProxyScriptHelperLoadError != null)
             {
-                throw new TypeLoadException(SR.GetString(SR.net_cannot_load_proxy_helper), s_ProxyScriptHelperLoadError is InternalException ? null : s_ProxyScriptHelperLoadError);
+                throw new TypeLoadException(
+                    SR.GetString(SR.net_cannot_load_proxy_helper),
+                    s_ProxyScriptHelperLoadError is InternalException
+                        ? null
+                        : s_ProxyScriptHelperLoadError
+                );
             }
 
             CreateAppDomain();
@@ -545,15 +558,37 @@ namespace System.Net
             exception = null;
             try
             {
-                GlobalLog.Print("AutoWebProxyScriptWrapper::CreateInstance() Creating Object. type.Assembly.FullName: [" + s_ProxyScriptHelperType.Assembly.FullName + "] type.FullName: [" + s_ProxyScriptHelperType.FullName + "]");
-                ObjectHandle handle = Activator.CreateInstance(scriptDomain, s_ProxyScriptHelperType.Assembly.FullName, s_ProxyScriptHelperType.FullName, false,
-                    BindingFlags.CreateInstance | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.InvokeMethod,
-                    null, null, null, null, null);
+                GlobalLog.Print(
+                    "AutoWebProxyScriptWrapper::CreateInstance() Creating Object. type.Assembly.FullName: ["
+                        + s_ProxyScriptHelperType.Assembly.FullName
+                        + "] type.FullName: ["
+                        + s_ProxyScriptHelperType.FullName
+                        + "]"
+                );
+                ObjectHandle handle = Activator.CreateInstance(
+                    scriptDomain,
+                    s_ProxyScriptHelperType.Assembly.FullName,
+                    s_ProxyScriptHelperType.FullName,
+                    false,
+                    BindingFlags.CreateInstance
+                        | BindingFlags.Instance
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.InvokeMethod,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                );
                 if (handle != null)
                 {
-                    site = (IWebProxyScript) handle.Unwrap();
+                    site = (IWebProxyScript)handle.Unwrap();
                 }
-                GlobalLog.Print("AutoWebProxyScriptWrapper::CreateInstance() Create script site:" + ValidationHelper.HashString(site));
+                GlobalLog.Print(
+                    "AutoWebProxyScriptWrapper::CreateInstance() Create script site:"
+                        + ValidationHelper.HashString(site)
+                );
             }
             catch (Exception ex)
             {
@@ -565,10 +600,16 @@ namespace System.Net
                 {
                     if (s_ProxyScriptHelperLoadError == null)
                     {
-                        s_ProxyScriptHelperLoadError = exception == null ? new InternalException() : exception;
+                        s_ProxyScriptHelperLoadError =
+                            exception == null ? new InternalException() : exception;
                     }
                 }
-                throw new TypeLoadException(SR.GetString(SR.net_cannot_load_proxy_helper), s_ProxyScriptHelperLoadError is InternalException ? null : s_ProxyScriptHelperLoadError);
+                throw new TypeLoadException(
+                    SR.GetString(SR.net_cannot_load_proxy_helper),
+                    s_ProxyScriptHelperLoadError is InternalException
+                        ? null
+                        : s_ProxyScriptHelperLoadError
+                );
             }
         }
 
@@ -584,7 +625,9 @@ namespace System.Net
 
                 if (s_CleanedUp)
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.net_cant_perform_during_shutdown));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.net_cant_perform_during_shutdown)
+                    );
                 }
 
                 // Create singleton.
@@ -594,7 +637,10 @@ namespace System.Net
                     s_AppDomainInfo.DisallowBindingRedirects = true;
                     s_AppDomainInfo.DisallowCodeDownload = true;
 
-                    NamedPermissionSet perms = new NamedPermissionSet("__WebProxySandbox", PermissionState.None);
+                    NamedPermissionSet perms = new NamedPermissionSet(
+                        "__WebProxySandbox",
+                        PermissionState.None
+                    );
                     perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
                     ApplicationTrust trust = new ApplicationTrust();
                     trust.DefaultGrantSet = new PolicyStatement(perms);
@@ -606,8 +652,15 @@ namespace System.Net
                 AppDomain excessAppDomain = s_ExcessAppDomain;
                 if (excessAppDomain != null)
                 {
-                    TimerThread.GetOrCreateQueue(0).CreateTimer(new TimerThread.Callback(CloseAppDomainCallback), excessAppDomain);
-                    throw new InvalidOperationException(SR.GetString(SR.net_cant_create_environment));
+                    TimerThread
+                        .GetOrCreateQueue(0)
+                        .CreateTimer(
+                            new TimerThread.Callback(CloseAppDomainCallback),
+                            excessAppDomain
+                        );
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.net_cant_create_environment)
+                    );
                 }
 
                 appDomainIndex = s_NextAppDomainIndex++;
@@ -615,11 +668,19 @@ namespace System.Net
                 finally
                 {
                     PermissionSet permissionSet = new PermissionSet(PermissionState.None);
-                    permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+                    permissionSet.AddPermission(
+                        new SecurityPermission(SecurityPermissionFlag.Execution)
+                    );
 
-                    // 
+                    //
 
-                    s_ExcessAppDomain = AppDomain.CreateDomain(c_appDomainName, null, s_AppDomainInfo, permissionSet, null);
+                    s_ExcessAppDomain = AppDomain.CreateDomain(
+                        c_appDomainName,
+                        null,
+                        s_AppDomainInfo,
+                        permissionSet,
+                        null
+                    );
 
                     try
                     {
@@ -647,7 +708,12 @@ namespace System.Net
                             finally
                             {
                                 // Can't call AppDomain.Unload from a user thread (or in a lock).
-                                TimerThread.GetOrCreateQueue(0).CreateTimer(new TimerThread.Callback(CloseAppDomainCallback), s_ExcessAppDomain);
+                                TimerThread
+                                    .GetOrCreateQueue(0)
+                                    .CreateTimer(
+                                        new TimerThread.Callback(CloseAppDomainCallback),
+                                        s_ExcessAppDomain
+                                    );
                             }
                         }
                     }
@@ -667,7 +733,9 @@ namespace System.Net
             site.Close();
 
             // Can't call AppDomain.Unload() from a user thread.
-            TimerThread.GetOrCreateQueue(0).CreateTimer(new TimerThread.Callback(CloseAppDomainCallback), appDomainIndex);
+            TimerThread
+                .GetOrCreateQueue(0)
+                .CreateTimer(new TimerThread.Callback(CloseAppDomainCallback), appDomainIndex);
             GC.SuppressFinalize(this);
         }
 
@@ -685,19 +753,25 @@ namespace System.Net
             if (!NclUtilities.HasShutdownStarted && scriptDomain != null)
             {
                 // Can't call AppDomain.Unload() from the finalizer thread.
-                TimerThread.GetOrCreateQueue(0).CreateTimer(new TimerThread.Callback(CloseAppDomainCallback), appDomainIndex);
+                TimerThread
+                    .GetOrCreateQueue(0)
+                    .CreateTimer(new TimerThread.Callback(CloseAppDomainCallback), appDomainIndex);
             }
         }
 
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.ControlAppDomain)]
-        private static void CloseAppDomainCallback(TimerThread.Timer timer, int timeNoticed, object context)
+        private static void CloseAppDomainCallback(
+            TimerThread.Timer timer,
+            int timeNoticed,
+            object context
+        )
         {
             try
             {
                 AppDomain domain = context as AppDomain;
                 if (domain == null)
                 {
-                    CloseAppDomain((int) context);
+                    CloseAppDomain((int)context);
                 }
                 else
                 {
@@ -714,7 +788,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NclUtilities.IsFatal(exception)) throw;
+                if (NclUtilities.IsFatal(exception))
+                    throw;
             }
         }
 
@@ -734,7 +809,7 @@ namespace System.Net
                 {
                     return;
                 }
-                appDomain = (AppDomain) s_AppDomains[index];
+                appDomain = (AppDomain)s_AppDomains[index];
             }
             finally
             {
@@ -804,36 +879,19 @@ namespace System.Net
 
         internal string ScriptBody
         {
-            get
-            {
-                return scriptText;
-            }
+            get { return scriptText; }
         }
 
         internal byte[] Buffer
         {
-            get
-            {
-                return scriptBytes;
-            }
-
-            set
-            {
-                scriptBytes = value;
-            }
+            get { return scriptBytes; }
+            set { scriptBytes = value; }
         }
 
         internal DateTime LastModified
         {
-            get
-            {
-                return lastModified;
-            }
-
-            set
-            {
-                lastModified = value;
-            }
+            get { return lastModified; }
+            set { lastModified = value; }
         }
 
         private string scriptText;
@@ -843,7 +901,12 @@ namespace System.Net
         // Forward these to the site.
         internal string FindProxyForURL(string url, string host)
         {
-            GlobalLog.Print("AutoWebProxyScriptWrapper::FindProxyForURL() Calling JScript for url:" + url.ToString() + " host:" + host.ToString());
+            GlobalLog.Print(
+                "AutoWebProxyScriptWrapper::FindProxyForURL() Calling JScript for url:"
+                    + url.ToString()
+                    + " host:"
+                    + host.ToString()
+            );
             return site.Run(url, host);
         }
 
@@ -851,12 +914,18 @@ namespace System.Net
         {
             if (site.Load(engineScriptLocation, scriptBody, typeof(WebProxyScriptHelper)))
             {
-                GlobalLog.Print("AutoWebProxyScriptWrapper::Compile() Compilation succeeded for engineScriptLocation:" + engineScriptLocation.ToString());
+                GlobalLog.Print(
+                    "AutoWebProxyScriptWrapper::Compile() Compilation succeeded for engineScriptLocation:"
+                        + engineScriptLocation.ToString()
+                );
                 scriptText = scriptBody;
                 scriptBytes = buffer;
                 return true;
             }
-            GlobalLog.Print("AutoWebProxyScriptWrapper::Compile() Compilation failed for engineScriptLocation:" + engineScriptLocation.ToString());
+            GlobalLog.Print(
+                "AutoWebProxyScriptWrapper::Compile() Compilation failed for engineScriptLocation:"
+                    + engineScriptLocation.ToString()
+            );
             return false;
         }
     }

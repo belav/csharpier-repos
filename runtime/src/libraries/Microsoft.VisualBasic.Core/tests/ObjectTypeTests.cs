@@ -289,9 +289,17 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(LikeObj_TestData))]
-        public void LikeObj(object left, object right, object expectedBinaryCompare, object expectedTextCompare)
+        public void LikeObj(
+            object left,
+            object right,
+            object expectedBinaryCompare,
+            object expectedTextCompare
+        )
         {
-            Assert.Equal(expectedBinaryCompare, ObjectType.LikeObj(left, right, CompareMethod.Binary));
+            Assert.Equal(
+                expectedBinaryCompare,
+                ObjectType.LikeObj(left, right, CompareMethod.Binary)
+            );
             Assert.Equal(expectedTextCompare, ObjectType.LikeObj(left, right, CompareMethod.Text));
         }
 
@@ -313,8 +321,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [MemberData(nameof(LikeObj_NullReference_TestData))]
         public void LikeObj_NullReference(object left, object right)
         {
-            Assert.Throws<NullReferenceException>(() => ObjectType.LikeObj(left, right, CompareMethod.Binary));
-            Assert.Throws<NullReferenceException>(() => ObjectType.LikeObj(left, right, CompareMethod.Text));
+            Assert.Throws<NullReferenceException>(() =>
+                ObjectType.LikeObj(left, right, CompareMethod.Binary)
+            );
+            Assert.Throws<NullReferenceException>(() =>
+                ObjectType.LikeObj(left, right, CompareMethod.Text)
+            );
         }
 
         public static IEnumerable<object[]> LikeObj_NullReference_TestData()
@@ -342,8 +354,20 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { "a", "a", 0, 0 };
             yield return new object[] { "a", "b", -1, -1 };
             yield return new object[] { "b", "a", 1, 1 };
-            yield return new object[] { "a", "ABC", 32, PlatformDetection.IsInvariantGlobalization ? -2 : -1 };
-            yield return new object[] { "ABC", "a", -32, PlatformDetection.IsInvariantGlobalization ? 2 : 1 };
+            yield return new object[]
+            {
+                "a",
+                "ABC",
+                32,
+                PlatformDetection.IsInvariantGlobalization ? -2 : -1,
+            };
+            yield return new object[]
+            {
+                "ABC",
+                "a",
+                -32,
+                PlatformDetection.IsInvariantGlobalization ? 2 : 1,
+            };
             yield return new object[] { "abc", "ABC", 32, 0 };
         }
     }

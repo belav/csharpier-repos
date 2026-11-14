@@ -27,7 +27,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public override AggregateType GetAts() =>
-            _ats ??= TypeManager.GetAggregate(TypeManager.GetNullable(), TypeArray.Allocate(UnderlyingType));
+            _ats ??= TypeManager.GetAggregate(
+                TypeManager.GetNullable(),
+                TypeArray.Allocate(UnderlyingType)
+            );
 
         public override CType StripNubs() => UnderlyingType;
 
@@ -55,7 +58,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public override FUNDTYPE FundamentalType => FUNDTYPE.FT_STRUCT;
 
-        [ExcludeFromCodeCoverage(Justification = "Should be unreachable. Overload exists just to catch it being hit during debug.")]
+        [ExcludeFromCodeCoverage(
+            Justification = "Should be unreachable. Overload exists just to catch it being hit during debug."
+        )]
         public override ConstValKind ConstValKind
         {
             get

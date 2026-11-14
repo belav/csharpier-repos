@@ -21,7 +21,10 @@ namespace System.Web.Http.Controllers
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => new RequestBackedHttpRequestContext(request), "request");
+            Assert.ThrowsArgumentNull(
+                () => new RequestBackedHttpRequestContext(request),
+                "request"
+            );
         }
 
         [Fact]
@@ -258,13 +261,17 @@ namespace System.Web.Http.Controllers
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void IncludeErrorDetailGet_ReturnsIncludeErrorDetailFromProperty_WhenRequestIsPresent(bool expected)
+        public void IncludeErrorDetailGet_ReturnsIncludeErrorDetailFromProperty_WhenRequestIsPresent(
+            bool expected
+        )
         {
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
                 HttpRequestContext context = CreateProductUnderTest(request);
-                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() => expected);
+                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
+                    expected
+                );
 
                 // Act
                 bool actual = context.IncludeErrorDetail;
@@ -277,15 +284,18 @@ namespace System.Web.Http.Controllers
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void IncludeErrorDetailGet_IgnoresRequest_AfterIncludeErrorDetailSet(bool expectedIncludeErrorDetail)
+        public void IncludeErrorDetailGet_IgnoresRequest_AfterIncludeErrorDetailSet(
+            bool expectedIncludeErrorDetail
+        )
         {
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
                 HttpRequestContext context = CreateProductUnderTest(request);
                 context.IncludeErrorDetail = expectedIncludeErrorDetail;
-                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] =
-                    new Lazy<bool>(() => !expectedIncludeErrorDetail);
+                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
+                    !expectedIncludeErrorDetail
+                );
 
                 // Act
                 bool includeErrorDetail = context.IncludeErrorDetail;
@@ -353,8 +363,9 @@ namespace System.Web.Http.Controllers
             {
                 HttpRequestContext context = CreateProductUnderTest(request);
                 context.IsLocal = expectedIsLocal;
-                request.Properties[HttpPropertyKeys.IsLocalKey] =
-                    new Lazy<bool>(() => !expectedIsLocal);
+                request.Properties[HttpPropertyKeys.IsLocalKey] = new Lazy<bool>(() =>
+                    !expectedIsLocal
+                );
 
                 // Act
                 bool isLocal = context.IsLocal;
@@ -610,8 +621,11 @@ namespace System.Web.Http.Controllers
             // Arrange
             string expectedVirtualPathRoot = "/";
 
-            using (HttpConfiguration configuration = new HttpConfiguration(new HttpRouteCollection(
-                expectedVirtualPathRoot)))
+            using (
+                HttpConfiguration configuration = new HttpConfiguration(
+                    new HttpRouteCollection(expectedVirtualPathRoot)
+                )
+            )
             {
                 HttpRequestContext context = CreateProductUnderTest();
                 context.Configuration = configuration;
@@ -628,7 +642,9 @@ namespace System.Web.Http.Controllers
         [InlineData("a b")]
         [InlineData("/a b")]
         [InlineData("/a%20b")]
-        public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(string configurationVirtualPathRoot)
+        public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(
+            string configurationVirtualPathRoot
+        )
         {
             // Arrange
             var expectedVirtualPathRoot = "/a b";
@@ -650,7 +666,11 @@ namespace System.Web.Http.Controllers
         public void VirtualPathRootGet_IgnoresConfiguration_AfterVirtualPathRootSet()
         {
             // Arrange
-            using (HttpConfiguration configuration = new HttpConfiguration(new HttpRouteCollection("other")))
+            using (
+                HttpConfiguration configuration = new HttpConfiguration(
+                    new HttpRouteCollection("other")
+                )
+            )
             {
                 HttpRequestContext context = CreateProductUnderTest();
                 context.Configuration = configuration;
@@ -669,7 +689,11 @@ namespace System.Web.Http.Controllers
         public void VirtualPathRootGet_IgnoresConfiguration_AfterVirtualPathRootSetNull()
         {
             // Arrange
-            using (HttpConfiguration configuration = new HttpConfiguration(new HttpRouteCollection("other")))
+            using (
+                HttpConfiguration configuration = new HttpConfiguration(
+                    new HttpRouteCollection("other")
+                )
+            )
             {
                 HttpRequestContext context = CreateProductUnderTest();
                 context.Configuration = configuration;
@@ -708,7 +732,9 @@ namespace System.Web.Http.Controllers
             return new RequestBackedHttpRequestContext();
         }
 
-        private static RequestBackedHttpRequestContext CreateProductUnderTest(HttpRequestMessage request)
+        private static RequestBackedHttpRequestContext CreateProductUnderTest(
+            HttpRequestMessage request
+        )
         {
             return new RequestBackedHttpRequestContext(request);
         }

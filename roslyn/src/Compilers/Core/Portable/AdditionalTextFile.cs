@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis
         /// Returns a <see cref="SourceText"/> with the contents of this file, or <c>null</c> if
         /// there were errors reading the file.
         /// </summary>
-        public override SourceText? GetText(CancellationToken cancellationToken = default) => _text.Value;
+        public override SourceText? GetText(CancellationToken cancellationToken = default) =>
+            _text.Value;
 
         /// <summary>
         /// Errors encountered when trying to read the additional file. Always empty if

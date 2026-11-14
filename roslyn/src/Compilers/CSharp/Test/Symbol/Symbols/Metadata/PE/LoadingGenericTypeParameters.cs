@@ -22,15 +22,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var assembly = MetadataTestHelpers.GetSymbolForReference(TestMetadata.Net40.mscorlib);
             var module0 = assembly.Modules[0];
 
-            var objectType = module0.GlobalNamespace.GetMembers("System").
-                OfType<NamespaceSymbol>().Single().
-                GetTypeMembers("Object").Single();
+            var objectType = module0
+                .GlobalNamespace.GetMembers("System")
+                .OfType<NamespaceSymbol>()
+                .Single()
+                .GetTypeMembers("Object")
+                .Single();
 
             Assert.Equal(0, objectType.Arity);
             Assert.Equal(0, objectType.TypeParameters.Length);
             Assert.Equal(0, objectType.TypeArguments().Length);
 
-            assembly = MetadataTestHelpers.GetSymbolForReference(TestReferences.SymbolsTests.MDTestLib1);
+            assembly = MetadataTestHelpers.GetSymbolForReference(
+                TestReferences.SymbolsTests.MDTestLib1
+            );
             module0 = assembly.Modules[0];
 
             var varC1 = module0.GlobalNamespace.GetTypeMembers("C1").Single();
@@ -193,12 +198,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         {
             // .class public C`2<T1,T2>
             // .class nested public D<S1>
-            var mdRef = MetadataReference.CreateFromImage(TestResources.MetadataTests.Invalid.InvalidGenericType.AsImmutableOrNull());
+            var mdRef = MetadataReference.CreateFromImage(
+                TestResources.MetadataTests.Invalid.InvalidGenericType.AsImmutableOrNull()
+            );
             string source = "class X : C<int, int>.D { }";
-            CreateCompilation(source, new[] { mdRef }).VerifyDiagnostics(
-                // (2,11): error CS0648: 'C<T1, T2>.D' is a type not supported by the language
-                // class X : C<int, int>.D { }
-                Diagnostic(ErrorCode.ERR_BogusType, "C<int, int>.D").WithArguments("C<T1, T2>.D")
+            CreateCompilation(source, new[] { mdRef })
+                .VerifyDiagnostics(
+                    // (2,11): error CS0648: 'C<T1, T2>.D' is a type not supported by the language
+                    // class X : C<int, int>.D { }
+                    Diagnostic(ErrorCode.ERR_BogusType, "C<int, int>.D")
+                        .WithArguments("C<T1, T2>.D")
                 );
         }
 
@@ -207,7 +216,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void InvalidNestedArity_2()
         {
             var ilSource =
-@".class interface public abstract I0
+                @".class interface public abstract I0
 {
   .class interface abstract nested public IT<T>
   {
@@ -231,7 +240,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
   }
 }";
             var csharpSource =
-@"class C0_T : I0.IT<object> { }
+                @"class C0_T : I0.IT<object> { }
 class C0_T_0 : I0.IT<object>.I0 { }
 class CT_0 : IT<object>.I0 { }
 class CT_0_0 : IT<object>.I0.I0 { }
@@ -261,7 +270,8 @@ class CT_TU_T : IT<object>.ITU<int>.IT { }
                 Diagnostic(ErrorCode.ERR_BogusType, "CT_T_0").WithArguments("IT<T>.IT.I0"),
                 // (7,7): error CS0648: 'IT<T>.ITU<U>.IT' is a type not supported by the language
                 // class CT_TU_T : IT<object>.ITU<int>.IT { }
-                Diagnostic(ErrorCode.ERR_BogusType, "CT_TU_T").WithArguments("IT<T>.ITU<U>.IT"));
+                Diagnostic(ErrorCode.ERR_BogusType, "CT_TU_T").WithArguments("IT<T>.ITU<U>.IT")
+            );
         }
     }
 }

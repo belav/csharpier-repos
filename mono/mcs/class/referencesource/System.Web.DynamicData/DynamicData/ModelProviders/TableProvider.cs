@@ -3,16 +3,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Security.Principal;
 
-namespace System.Web.DynamicData.ModelProviders {
+namespace System.Web.DynamicData.ModelProviders
+{
     /// <summary>
     /// Base provider class for tables.
     /// Each provider type (e.g. Linq To Sql, Entity Framework, 3rd party) extends this class.
     /// </summary>
-    public abstract class TableProvider {
+    public abstract class TableProvider
+    {
         private Type _rootEntityType;
         private string _dataContextPropertyName;
 
-        internal TableProvider() {
+        internal TableProvider()
+        {
             // for unit testing
         }
 
@@ -20,8 +23,10 @@ namespace System.Web.DynamicData.ModelProviders {
         /// ctor
         /// </summary>
         /// <param name="model">the model this table belongs to</param>
-        protected TableProvider(DataModelProvider model) {
-            if (model == null) {
+        protected TableProvider(DataModelProvider model)
+        {
+            if (model == null)
+            {
                 throw new ArgumentNullException("model");
             }
 
@@ -32,8 +37,12 @@ namespace System.Web.DynamicData.ModelProviders {
         /// readable representation
         /// </summary>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
-        public override string ToString() {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase"
+        )]
+        public override string ToString()
+        {
             // To help identifying objects in debugger
             return Name ?? base.ToString();
         }
@@ -41,13 +50,13 @@ namespace System.Web.DynamicData.ModelProviders {
         /// <summary>
         /// Provides access to attributes defined for the table represented by this provider.
         /// </summary>
-        public virtual AttributeCollection Attributes {
-            get {
-                return GetTypeDescriptor().GetAttributes();
-            }
+        public virtual AttributeCollection Attributes
+        {
+            get { return GetTypeDescriptor().GetAttributes(); }
         }
 
-        public virtual ICustomTypeDescriptor GetTypeDescriptor() {
+        public virtual ICustomTypeDescriptor GetTypeDescriptor()
+        {
             return TypeDescriptor.GetProvider(EntityType).GetTypeDescriptor(EntityType);
         }
 
@@ -79,7 +88,8 @@ namespace System.Web.DynamicData.ModelProviders {
         /// <summary>
         /// Get the value of a foreign key for a given row. By default, it just looks up a property by that name
         /// </summary>
-        public virtual object EvaluateForeignKey(object row, string foreignKeyName) {
+        public virtual object EvaluateForeignKey(object row, string foreignKeyName)
+        {
             return System.Web.UI.DataBinder.GetPropertyValue(row, foreignKeyName);
         }
 
@@ -93,13 +103,10 @@ namespace System.Web.DynamicData.ModelProviders {
         /// Return the root type of this entity's inheritance hierarchy; if the type is at the top
         /// of an inheritance hierarchy or does not have any inheritance, will return EntityType.
         /// </summary>
-        public virtual Type RootEntityType {
-            get {
-                return _rootEntityType ?? EntityType;
-            }
-            protected set {
-                _rootEntityType = value;
-            }
+        public virtual Type RootEntityType
+        {
+            get { return _rootEntityType ?? EntityType; }
+            protected set { _rootEntityType = value; }
         }
 
         /// <summary>
@@ -107,20 +114,19 @@ namespace System.Web.DynamicData.ModelProviders {
         /// a table that is part of the NorthwindDataContext.Products collection. If this value has not
         /// been set, it will return the value of the Name property.
         /// </summary>
-        public virtual string DataContextPropertyName {
-            get {
-                return _dataContextPropertyName ?? Name;
-            }
-            protected set {
-                _dataContextPropertyName = value;
-            }
+        public virtual string DataContextPropertyName
+        {
+            get { return _dataContextPropertyName ?? Name; }
+            protected set { _dataContextPropertyName = value; }
         }
 
         /// <summary>
         /// Returns whether the passed in user is allowed to delete items from the table
         /// </summary>
-        public virtual bool CanDelete(IPrincipal principal) {
-            if (principal == null) {
+        public virtual bool CanDelete(IPrincipal principal)
+        {
+            if (principal == null)
+            {
                 throw new ArgumentNullException("principal");
             }
             return true;
@@ -129,8 +135,10 @@ namespace System.Web.DynamicData.ModelProviders {
         /// <summary>
         /// Returns whether the passed in user is allowed to insert into the table
         /// </summary>
-        public virtual bool CanInsert(IPrincipal principal) {
-            if (principal == null) {
+        public virtual bool CanInsert(IPrincipal principal)
+        {
+            if (principal == null)
+            {
                 throw new ArgumentNullException("principal");
             }
             return true;
@@ -139,8 +147,10 @@ namespace System.Web.DynamicData.ModelProviders {
         /// <summary>
         /// Returns whether the passed in user is allowed to read from the table
         /// </summary>
-        public virtual bool CanRead(IPrincipal principal) {
-            if (principal == null) {
+        public virtual bool CanRead(IPrincipal principal)
+        {
+            if (principal == null)
+            {
                 throw new ArgumentNullException("principal");
             }
             return true;
@@ -149,8 +159,10 @@ namespace System.Web.DynamicData.ModelProviders {
         /// <summary>
         /// Returns whether the passed in user is allowed to make changes tothe table
         /// </summary>
-        public virtual bool CanUpdate(IPrincipal principal) {
-            if (principal == null) {
+        public virtual bool CanUpdate(IPrincipal principal)
+        {
+            if (principal == null)
+            {
                 throw new ArgumentNullException("principal");
             }
             return true;

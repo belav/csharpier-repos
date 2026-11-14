@@ -25,7 +25,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             private int _lastLineBreakIndex;
             private bool _touchedNoisyCharacterOnCurrentLine;
 
-            public static bool ShouldFormatMultiLine(FormattingContext context, bool firstTriviaInTree, TriviaList triviaList)
+            public static bool ShouldFormatMultiLine(
+                FormattingContext context,
+                bool firstTriviaInTree,
+                TriviaList triviaList
+            )
             {
                 var analyzer = new CodeShapeAnalyzer(context, firstTriviaInTree, triviaList);
                 return analyzer.ShouldFormat();
@@ -62,9 +66,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         return false;
                     }
 
-                    if (trivia.Kind() == SyntaxKind.RegionDirectiveTrivia ||
-                        trivia.Kind() == SyntaxKind.EndRegionDirectiveTrivia ||
-                        SyntaxFacts.IsPreprocessorDirective(trivia.Kind()))
+                    if (
+                        trivia.Kind() == SyntaxKind.RegionDirectiveTrivia
+                        || trivia.Kind() == SyntaxKind.EndRegionDirectiveTrivia
+                        || SyntaxFacts.IsPreprocessorDirective(trivia.Kind())
+                    )
                     {
                         return false;
                     }
@@ -77,8 +83,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             {
                 foreach (var trivia in list)
                 {
-                    if (trivia.Kind() is SyntaxKind.SkippedTokensTrivia or
-                        SyntaxKind.PreprocessingMessageTrivia)
+                    if (
+                        trivia.Kind()
+                        is SyntaxKind.SkippedTokensTrivia
+                            or SyntaxKind.PreprocessingMessageTrivia
+                    )
                     {
                         return true;
                     }
@@ -87,7 +96,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 return false;
             }
 
-            private CodeShapeAnalyzer(FormattingContext context, bool firstTriviaInTree, TriviaList triviaList)
+            private CodeShapeAnalyzer(
+                FormattingContext context,
+                bool firstTriviaInTree,
+                TriviaList triviaList
+            )
             {
                 _context = context;
                 _options = context.Options;
@@ -194,15 +207,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 }
 
                 // check whether indentation are right
-                if (this.UseIndentation && _indentation != _context.GetBaseIndentation(trivia.SpanStart))
+                if (
+                    this.UseIndentation
+                    && _indentation != _context.GetBaseIndentation(trivia.SpanStart)
+                )
                 {
                     // comment has wrong indentation
                     return true;
                 }
 
                 // go deep down for single line documentation comment
-                if (trivia.IsSingleLineDocComment() &&
-                    ShouldFormatSingleLineDocumentationComment(_indentation, _options.TabSize, trivia))
+                if (
+                    trivia.IsSingleLineDocComment()
+                    && ShouldFormatSingleLineDocumentationComment(
+                        _indentation,
+                        _options.TabSize,
+                        trivia
+                    )
+                )
                 {
                     return true;
                 }
@@ -212,8 +234,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             private static bool OnSkippedTokensOrText(SyntaxTrivia trivia)
             {
-                if (trivia.Kind() is not SyntaxKind.SkippedTokensTrivia and
-                    not SyntaxKind.PreprocessingMessageTrivia)
+                if (
+                    trivia.Kind()
+                    is not SyntaxKind.SkippedTokensTrivia
+                        and not SyntaxKind.PreprocessingMessageTrivia
+                )
                 {
                     return false;
                 }
@@ -223,8 +248,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             private bool OnRegion(SyntaxTrivia trivia, int currentIndex)
             {
-                if (trivia.Kind() is not SyntaxKind.RegionDirectiveTrivia and
-                    not SyntaxKind.EndRegionDirectiveTrivia)
+                if (
+                    trivia.Kind()
+                    is not SyntaxKind.RegionDirectiveTrivia
+                        and not SyntaxKind.EndRegionDirectiveTrivia
+                )
                 {
                     return false;
                 }
@@ -267,9 +295,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             private bool OnTouchedNoisyCharacter(SyntaxTrivia trivia)
             {
-                if (trivia.IsElastic() ||
-                    trivia.Kind() == SyntaxKind.WhitespaceTrivia ||
-                    trivia.Kind() == SyntaxKind.EndOfLineTrivia)
+                if (
+                    trivia.IsElastic()
+                    || trivia.Kind() == SyntaxKind.WhitespaceTrivia
+                    || trivia.Kind() == SyntaxKind.EndOfLineTrivia
+                )
                 {
                     return false;
                 }
@@ -289,15 +319,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
                     // order in which these methods run has a side effect. don't change the order
                     // each method run
-                    if (OnElastic(trivia) ||
-                        OnWhitespace(trivia) ||
-                        OnEndOfLine(trivia, index) ||
-                        OnTouchedNoisyCharacter(trivia) ||
-                        OnComment(trivia) ||
-                        OnSkippedTokensOrText(trivia) ||
-                        OnRegion(trivia, index) ||
-                        OnPreprocessor(trivia, index) ||
-                        OnDisabledTextTrivia(trivia, index))
+                    if (
+                        OnElastic(trivia)
+                        || OnWhitespace(trivia)
+                        || OnEndOfLine(trivia, index)
+                        || OnTouchedNoisyCharacter(trivia)
+                        || OnComment(trivia)
+                        || OnSkippedTokensOrText(trivia)
+                        || OnRegion(trivia, index)
+                        || OnPreprocessor(trivia, index)
+                        || OnDisabledTextTrivia(trivia, index)
+                    )
                     {
                         return true;
                     }
@@ -311,7 +343,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (trivia.IsKind(SyntaxKind.DisabledTextTrivia))
                 {
                     var triviaString = trivia.ToString();
-                    if (!string.IsNullOrEmpty(triviaString) && SyntaxFacts.IsNewLine(triviaString.Last()))
+                    if (
+                        !string.IsNullOrEmpty(triviaString)
+                        && SyntaxFacts.IsNewLine(triviaString.Last())
+                    )
                     {
                         ResetStateAfterNewLine(index);
                     }
@@ -320,7 +355,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 return false;
             }
 
-            private static bool ShouldFormatSingleLineDocumentationComment(int indentation, int tabSize, SyntaxTrivia trivia)
+            private static bool ShouldFormatSingleLineDocumentationComment(
+                int indentation,
+                int tabSize,
+                SyntaxTrivia trivia
+            )
             {
                 Debug.Assert(trivia.HasStructure);
 
@@ -344,7 +383,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                             var xmlCommentText = xmlTrivia.ToString();
 
                             // "///" == 3.
-                            if (xmlCommentText.GetColumnFromLineOffset(xmlCommentText.Length - 3, tabSize) != indentation)
+                            if (
+                                xmlCommentText.GetColumnFromLineOffset(
+                                    xmlCommentText.Length - 3,
+                                    tabSize
+                                ) != indentation
+                            )
                             {
                                 return true;
                             }

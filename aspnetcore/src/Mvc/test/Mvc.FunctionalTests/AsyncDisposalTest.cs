@@ -14,8 +14,7 @@ public class AsyncDisposalTest : IClassFixture<MvcTestFixture<BasicWebSite.Start
 {
     public AsyncDisposalTest(MvcTestFixture<BasicWebSite.Startup> fixture)
     {
-        Factory =
-            fixture.Factories.FirstOrDefault()
+        Factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = Factory.CreateDefaultClient();
     }

@@ -16,7 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     internal partial class StreamingFindUsagesPresenter
     {
         /// <summary>
-        /// Base type of all <see cref="Entry"/>s that represent some source location in 
+        /// Base type of all <see cref="Entry"/>s that represent some source location in
         /// a <see cref="Document"/>.  Navigation to that location is provided by this type.
         /// Subclasses can be used to provide customized line text to display in the entry.
         /// </summary>
@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 RoslynDefinitionBucket definitionBucket,
                 Guid projectGuid,
                 SourceText lineText,
-                MappedSpanResult mappedSpanResult)
+                MappedSpanResult mappedSpanResult
+            )
                 : base(definitionBucket, context.Presenter)
             {
                 _boxedProjectGuid = projectGuid;
@@ -43,32 +44,52 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             protected abstract string GetProjectName();
 
-            protected override object? GetValueWorker(string keyName)
-                => keyName switch
+            protected override object? GetValueWorker(string keyName) =>
+                keyName switch
                 {
                     StandardTableKeyNames.DocumentName => _mappedSpanResult.FilePath,
                     StandardTableKeyNames.Line => _mappedSpanResult.LinePositionSpan.Start.Line,
-                    StandardTableKeyNames.Column => _mappedSpanResult.LinePositionSpan.Start.Character,
+                    StandardTableKeyNames.Column => _mappedSpanResult
+                        .LinePositionSpan
+                        .Start
+                        .Character,
                     StandardTableKeyNames.ProjectName => GetProjectName(),
                     StandardTableKeyNames.ProjectGuid => _boxedProjectGuid,
                     StandardTableKeyNames.Text => _lineText.ToString().Trim(),
                     _ => null,
                 };
 
-            public static async Task<MappedSpanResult?> TryMapAndGetFirstAsync(DocumentSpan documentSpan, SourceText sourceText, CancellationToken cancellationToken)
+            public static async Task<MappedSpanResult?> TryMapAndGetFirstAsync(
+                DocumentSpan documentSpan,
+                SourceText sourceText,
+                CancellationToken cancellationToken
+            )
             {
                 var service = documentSpan.Document.Services.GetService<ISpanMappingService>();
                 if (service == null)
                 {
-                    return new MappedSpanResult(documentSpan.Document.FilePath, sourceText.Lines.GetLinePositionSpan(documentSpan.SourceSpan), documentSpan.SourceSpan);
+                    return new MappedSpanResult(
+                        documentSpan.Document.FilePath,
+                        sourceText.Lines.GetLinePositionSpan(documentSpan.SourceSpan),
+                        documentSpan.SourceSpan
+                    );
                 }
 
-                var results = await service.MapSpansAsync(
-                    documentSpan.Document, SpecializedCollections.SingletonEnumerable(documentSpan.SourceSpan), cancellationToken).ConfigureAwait(false);
+                var results = await service
+                    .MapSpansAsync(
+                        documentSpan.Document,
+                        SpecializedCollections.SingletonEnumerable(documentSpan.SourceSpan),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (results.IsDefaultOrEmpty)
                 {
-                    return new MappedSpanResult(documentSpan.Document.FilePath, sourceText.Lines.GetLinePositionSpan(documentSpan.SourceSpan), documentSpan.SourceSpan);
+                    return new MappedSpanResult(
+                        documentSpan.Document.FilePath,
+                        sourceText.Lines.GetLinePositionSpan(documentSpan.SourceSpan),
+                        documentSpan.SourceSpan
+                    );
                 }
 
                 // if span mapping service filtered out the span, make sure

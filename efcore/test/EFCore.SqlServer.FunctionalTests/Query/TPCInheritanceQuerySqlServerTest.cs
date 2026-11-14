@@ -5,10 +5,12 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class TPCInheritanceQuerySqlServerTest : TPCInheritanceQuerySqlServerTestBase<TPCInheritanceQuerySqlServerFixture>
+public class TPCInheritanceQuerySqlServerTest
+    : TPCInheritanceQuerySqlServerTestBase<TPCInheritanceQuerySqlServerFixture>
 {
-    public TPCInheritanceQuerySqlServerTest(TPCInheritanceQuerySqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+    public TPCInheritanceQuerySqlServerTest(
+        TPCInheritanceQuerySqlServerFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture, testOutputHelper) { }
 }

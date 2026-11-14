@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,27 +29,29 @@
 
 using System.Security.Permissions;
 
-namespace Microsoft.Win32 {
+namespace Microsoft.Win32
+{
+    [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
+    [PermissionSet(SecurityAction.InheritanceDemand, Unrestricted = true)]
+    public class SessionEndingEventArgs : System.EventArgs
+    {
+        SessionEndReasons myreason;
+        bool mycancel;
 
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
-	public class SessionEndingEventArgs : System.EventArgs {
+        public SessionEndingEventArgs(SessionEndReasons reason)
+        {
+            this.myreason = reason;
+        }
 
-		SessionEndReasons myreason;
-		bool mycancel;
+        public SessionEndReasons Reason
+        {
+            get { return myreason; }
+        }
 
-		public SessionEndingEventArgs (SessionEndReasons reason)
-		{
-			this.myreason = reason;
-		}
-	
-		public SessionEndReasons Reason {
-			get { return myreason; }
-		}
-	
-		public bool Cancel {
-			get { return mycancel; }
-			set { mycancel = value; }
-		}
-	}
+        public bool Cancel
+        {
+            get { return mycancel; }
+            set { mycancel = value; }
+        }
+    }
 }

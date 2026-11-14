@@ -45,7 +45,10 @@ public sealed record SqlExpressionFactoryDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public SqlExpressionFactoryDependencies(IModel model, IRelationalTypeMappingSource typeMappingSource)
+    public SqlExpressionFactoryDependencies(
+        IModel model,
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         Model = model;
         TypeMappingSource = typeMappingSource;

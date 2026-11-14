@@ -19,15 +19,13 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates an instance of <see cref="AudienceRestriction"/>
         /// </summary>
-        public AudienceRestriction()
-        {
-        }
+        public AudienceRestriction() { }
 
         /// <summary>
         /// Creates an instance of <see cref="AudienceRestriction"/>
         /// </summary>
         /// <param name="audienceMode">Specifies the mode in which AudienceUri restriction is applied.</param>
-        public AudienceRestriction( AudienceUriMode audienceMode )
+        public AudienceRestriction(AudienceUriMode audienceMode)
         {
             _audienceMode = audienceMode;
         }
@@ -49,5 +47,4 @@ namespace System.IdentityModel.Tokens
             get { return _audience; }
         }
     }
-
 }

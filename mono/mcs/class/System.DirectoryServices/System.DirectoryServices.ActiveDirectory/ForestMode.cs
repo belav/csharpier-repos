@@ -23,12 +23,12 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum ForestMode
-	{
-		Windows2000Forest,
-		Windows2003InterimForest,
-		Windows2003Forest,
-		Windows2008Forest,
-		Windows2008R2Forest
-	}
+    public enum ForestMode
+    {
+        Windows2000Forest,
+        Windows2003InterimForest,
+        Windows2003Forest,
+        Windows2008Forest,
+        Windows2008R2Forest,
+    }
 }

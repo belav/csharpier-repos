@@ -16,9 +16,8 @@ namespace System.IO.Compression
         /// <summary>Initializes a new instance of the <see cref="ZLibStream"/> class by using the specified stream and compression mode.</summary>
         /// <param name="stream">The stream to which compressed data is written or from which data to decompress is read.</param>
         /// <param name="mode">One of the enumeration values that indicates whether to compress data to the stream or decompress data from the stream.</param>
-        public ZLibStream(Stream stream, CompressionMode mode) : this(stream, mode, leaveOpen: false)
-        {
-        }
+        public ZLibStream(Stream stream, CompressionMode mode)
+            : this(stream, mode, leaveOpen: false) { }
 
         /// <summary>Initializes a new instance of the <see cref="ZLibStream"/> class by using the specified stream, compression mode, and whether to leave the <paramref name="stream"/> open.</summary>
         /// <param name="stream">The stream to which compressed data is written or from which data to decompress is read.</param>
@@ -26,15 +25,19 @@ namespace System.IO.Compression
         /// <param name="leaveOpen"><see langword="true" /> to leave the stream object open after disposing the <see cref="ZLibStream"/> object; otherwise, <see langword="false" />.</param>
         public ZLibStream(Stream stream, CompressionMode mode, bool leaveOpen)
         {
-            _deflateStream = new DeflateStream(stream, mode, leaveOpen, ZLibNative.ZLib_DefaultWindowBits);
+            _deflateStream = new DeflateStream(
+                stream,
+                mode,
+                leaveOpen,
+                ZLibNative.ZLib_DefaultWindowBits
+            );
         }
 
         /// <summary>Initializes a new instance of the <see cref="ZLibStream"/> class by using the specified stream and compression level.</summary>
         /// <param name="stream">The stream to which compressed data is written.</param>
         /// <param name="compressionLevel">One of the enumeration values that indicates whether to emphasize speed or compression efficiency when compressing data to the stream.</param>
-        public ZLibStream(Stream stream, CompressionLevel compressionLevel) : this(stream, compressionLevel, leaveOpen: false)
-        {
-        }
+        public ZLibStream(Stream stream, CompressionLevel compressionLevel)
+            : this(stream, compressionLevel, leaveOpen: false) { }
 
         /// <summary>Initializes a new instance of the <see cref="ZLibStream"/> class by using the specified stream, compression level, and whether to leave the <paramref name="stream"/> open.</summary>
         /// <param name="stream">The stream to which compressed data is written.</param>
@@ -42,7 +45,12 @@ namespace System.IO.Compression
         /// <param name="leaveOpen"><see langword="true" /> to leave the stream object open after disposing the <see cref="ZLibStream"/> object; otherwise, <see langword="false" />.</param>
         public ZLibStream(Stream stream, CompressionLevel compressionLevel, bool leaveOpen)
         {
-            _deflateStream = new DeflateStream(stream, compressionLevel, leaveOpen, ZLibNative.ZLib_DefaultWindowBits);
+            _deflateStream = new DeflateStream(
+                stream,
+                compressionLevel,
+                leaveOpen,
+                ZLibNative.ZLib_DefaultWindowBits
+            );
         }
 
         /// <summary>Gets a value indicating whether the stream supports reading.</summary>
@@ -81,7 +89,8 @@ namespace System.IO.Compression
         }
 
         /// <summary>This method is not supported and always throws a <see cref="NotSupportedException"/>.</summary>
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         /// <summary>This method is not supported and always throws a <see cref="NotSupportedException"/>.</summary>
         public override void SetLength(long value) => throw new NotSupportedException();
@@ -101,7 +110,13 @@ namespace System.IO.Compression
         /// <param name="asyncCallback">An optional asynchronous callback, to be called when the read operation is complete.</param>
         /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous read request from other requests.</param>
         /// <returns>An object that represents the asynchronous read operation, which could still be pending.</returns>
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        )
         {
             ThrowIfClosed();
             return _deflateStream.BeginRead(buffer, offset, count, asyncCallback, asyncState);
@@ -139,7 +154,12 @@ namespace System.IO.Compression
         /// <param name="count">The maximum number of bytes to read.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task that represents the asynchronous completion of the operation.</returns>
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfClosed();
             return _deflateStream.ReadAsync(buffer, offset, count, cancellationToken);
@@ -149,7 +169,10 @@ namespace System.IO.Compression
         /// <param name="buffer">The byte span to read the data into.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task that represents the asynchronous completion of the operation.</returns>
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfClosed();
             return _deflateStream.ReadAsyncMemory(buffer, cancellationToken);
@@ -162,7 +185,13 @@ namespace System.IO.Compression
         /// <param name="asyncCallback">An optional asynchronous callback, to be called when the write operation is complete.</param>
         /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous write request from other requests.</param>
         /// <returns>An object that represents the asynchronous write operation, which could still be pending.</returns>
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        )
         {
             ThrowIfClosed();
             return _deflateStream.BeginWrite(buffer, offset, count, asyncCallback, asyncState);
@@ -197,7 +226,12 @@ namespace System.IO.Compression
         /// <param name="count">The maximum number of bytes to write.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task that represents the asynchronous completion of the operation.</returns>
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfClosed();
             return _deflateStream.WriteAsync(buffer, offset, count, cancellationToken);
@@ -207,7 +241,10 @@ namespace System.IO.Compression
         /// <param name="buffer">The buffer to write data from.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task that represents the asynchronous completion of the operation.</returns>
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfClosed();
             return _deflateStream.WriteAsyncMemory(buffer, cancellationToken);
@@ -235,7 +272,11 @@ namespace System.IO.Compression
         /// <param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task that represents the asynchronous copy operation.</returns>
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfClosed();
             return _deflateStream.CopyToAsync(destination, bufferSize, cancellationToken);

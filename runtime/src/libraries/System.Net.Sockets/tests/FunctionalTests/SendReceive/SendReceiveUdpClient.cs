@@ -12,9 +12,13 @@ namespace System.Net.Sockets.Tests
         [OuterLoop]
         [Theory]
         [MemberData(nameof(LoopbacksAndUseMemory))]
-        public async Task SendToRecvFromAsync_Datagram_UDP_UdpClient(IPAddress loopbackAddress, bool useMemoryOverload)
+        public async Task SendToRecvFromAsync_Datagram_UDP_UdpClient(
+            IPAddress loopbackAddress,
+            bool useMemoryOverload
+        )
         {
-            IPAddress leftAddress = loopbackAddress, rightAddress = loopbackAddress;
+            IPAddress leftAddress = loopbackAddress,
+                rightAddress = loopbackAddress;
 
             const int DatagramSize = 256;
             const int DatagramsToSend = 256;
@@ -49,7 +53,11 @@ namespace System.Net.Sockets.Tests
                         int datagramId = (int)result.Buffer[0];
                         Assert.Null(receivedChecksums[datagramId]);
 
-                        receivedChecksums[datagramId] = Fletcher32.Checksum(result.Buffer, 0, result.Buffer.Length);
+                        receivedChecksums[datagramId] = Fletcher32.Checksum(
+                            result.Buffer,
+                            0,
+                            result.Buffer.Length
+                        );
                     }
                 });
 
@@ -66,7 +74,12 @@ namespace System.Net.Sockets.Tests
                         random.NextBytes(sendBuffer);
                         sendBuffer[0] = (byte)sentDatagrams;
 
-                        int sent = useMemoryOverload ? await right.SendAsync(new ReadOnlyMemory<byte>(sendBuffer), leftEndpoint) : await right.SendAsync(sendBuffer, DatagramSize, leftEndpoint);
+                        int sent = useMemoryOverload
+                            ? await right.SendAsync(
+                                new ReadOnlyMemory<byte>(sendBuffer),
+                                leftEndpoint
+                            )
+                            : await right.SendAsync(sendBuffer, DatagramSize, leftEndpoint);
 
                         Assert.True(receiverAck.Wait(AckTimeout));
                         receiverAck.Reset();

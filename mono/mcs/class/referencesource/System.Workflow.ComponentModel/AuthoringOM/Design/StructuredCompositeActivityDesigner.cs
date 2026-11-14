@@ -2,40 +2,40 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
     using System.CodeDom;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //
-
-
 
     #region StructuredCompositeActivityDesigner Class
     /// <summary>
     /// Base class for CompositActivityDesigner which have a structured layouts where contained ContainedDesigners
-    /// are connected to each other using connectors. Class is used when the user needs to provide different types 
+    /// are connected to each other using connectors. Class is used when the user needs to provide different types
     /// of layouts for CompositeActivityDesigner
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class StructuredCompositeActivityDesigner : CompositeActivityDesigner
     {
         #region Fields
@@ -67,8 +67,13 @@ namespace System.Workflow.ComponentModel.Design
 
                         foreach (ActivityDesigner containedDesigner in containedDesigners)
                         {
-                            bool isAlternateFlowActivityAttribute = Helpers.IsAlternateFlowActivity(containedDesigner.Activity);
-                            if (mappedDesigners.Contains(containedDesigner) || isAlternateFlowActivityAttribute)
+                            bool isAlternateFlowActivityAttribute = Helpers.IsAlternateFlowActivity(
+                                containedDesigner.Activity
+                            );
+                            if (
+                                mappedDesigners.Contains(containedDesigner)
+                                || isAlternateFlowActivityAttribute
+                            )
                                 designersToRemove.Add(containedDesigner);
                         }
 
@@ -102,7 +107,11 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 ActivityDesigner activeDesigner = ActiveDesigner;
-                if (activeDesigner != null && activeDesigner != this && activeDesigner is CompositeActivityDesigner)
+                if (
+                    activeDesigner != null
+                    && activeDesigner != this
+                    && activeDesigner is CompositeActivityDesigner
+                )
                     return ((CompositeActivityDesigner)activeDesigner).LastSelectableObject;
                 else
                     return base.LastSelectableObject;
@@ -121,7 +130,6 @@ namespace System.Workflow.ComponentModel.Design
                     this.activeView = ValidatedViews[0];
                 return this.activeView;
             }
-
             set
             {
                 if (this.activeView == value || value == null)
@@ -197,11 +205,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         protected virtual int CurrentDropTarget
         {
-            get
-            {
-                return this.currentDropTarget;
-            }
-
+            get { return this.currentDropTarget; }
             set
             {
                 this.currentDropTarget = value;
@@ -213,7 +217,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return (!String.IsNullOrEmpty(Text) && !TextRectangle.Size.IsEmpty && Views.Count > 1);
+                return (
+                    !String.IsNullOrEmpty(Text) && !TextRectangle.Size.IsEmpty && Views.Count > 1
+                );
             }
         }
 
@@ -221,7 +227,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                List<ActivityDesignerVerb> smartTagVerbs = new List<ActivityDesignerVerb>(base.SmartTagVerbs);
+                List<ActivityDesignerVerb> smartTagVerbs = new List<ActivityDesignerVerb>(
+                    base.SmartTagVerbs
+                );
 
                 //Return smarttag actions only if there is more than one view
                 if (Views.Count > 1)
@@ -229,7 +237,13 @@ namespace System.Workflow.ComponentModel.Design
                     for (int i = 0; i < Views.Count; i++)
                     {
                         DesignerView view = Views[i];
-                        ActivityDesignerVerb smartVerb = new ActivityDesignerVerb(this, DesignerVerbGroup.Actions, view.Text, new EventHandler(OnSmartTagVerb), new EventHandler(OnSmartTagVerbStatus));
+                        ActivityDesignerVerb smartVerb = new ActivityDesignerVerb(
+                            this,
+                            DesignerVerbGroup.Actions,
+                            view.Text,
+                            new EventHandler(OnSmartTagVerb),
+                            new EventHandler(OnSmartTagVerbStatus)
+                        );
                         smartVerb.Properties[DesignerUserDataKeys.DesignerView] = view;
                         smartVerb.Properties[DesignerUserDataKeys.Image] = view.Image;
                         smartTagVerbs.Add(smartVerb);
@@ -262,11 +276,7 @@ namespace System.Workflow.ComponentModel.Design
 
                 return base.SmartTagVisible;
             }
-
-            set
-            {
-                base.SmartTagVisible = value;
-            }
+            set { base.SmartTagVisible = value; }
         }
 
         private ReadOnlyCollection<DesignerView> ValidatedViews
@@ -276,7 +286,9 @@ namespace System.Workflow.ComponentModel.Design
                 ReadOnlyCollection<DesignerView> views = Views;
                 if (views.Count == 0)
 #pragma warning suppress 56503
-                    throw new InvalidOperationException(DR.GetString(DR.Error_MultiviewSequentialActivityDesigner));
+                    throw new InvalidOperationException(
+                        DR.GetString(DR.Error_MultiviewSequentialActivityDesigner)
+                    );
                 return views;
             }
         }
@@ -303,7 +315,10 @@ namespace System.Workflow.ComponentModel.Design
         #region Methods
 
         #region Public Methods
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             if (insertLocation == null)
                 throw new ArgumentNullException("insertLocation");
@@ -311,7 +326,8 @@ namespace System.Workflow.ComponentModel.Design
             if (activitiesToInsert == null)
                 throw new ArgumentNullException("activitiesToInsert");
 
-            ActivityDesigner hostedDesigner = (ActiveView != null) ? ActiveView.AssociatedDesigner : null;
+            ActivityDesigner hostedDesigner =
+                (ActiveView != null) ? ActiveView.AssociatedDesigner : null;
             if (hostedDesigner != this)
                 return false;
 
@@ -319,7 +335,10 @@ namespace System.Workflow.ComponentModel.Design
             foreach (Activity activity in activitiesToInsert)
             {
                 if (activity == null)
-                    throw new ArgumentException("activitiesToInsert", SR.GetString(SR.Error_CollectionHasNullEntry));
+                    throw new ArgumentException(
+                        "activitiesToInsert",
+                        SR.GetString(SR.Error_CollectionHasNullEntry)
+                    );
 
                 if (secondaryViewTypes.Contains(activity.GetType()))
                     return false;
@@ -328,7 +347,10 @@ namespace System.Workflow.ComponentModel.Design
             return base.CanInsertActivities(GetUpdatedLocation(insertLocation), activitiesToInsert);
         }
 
-        public override void InsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override void InsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             if (insertLocation == null)
                 throw new ArgumentNullException("insertLocation");
@@ -339,7 +361,10 @@ namespace System.Workflow.ComponentModel.Design
             base.InsertActivities(GetUpdatedLocation(insertLocation), activitiesToInsert);
         }
 
-        public override void MoveActivities(HitTestInfo moveLocation, ReadOnlyCollection<Activity> activitiesToMove)
+        public override void MoveActivities(
+            HitTestInfo moveLocation,
+            ReadOnlyCollection<Activity> activitiesToMove
+        )
         {
             if (moveLocation == null)
                 throw new ArgumentNullException("moveLocation");
@@ -389,7 +414,8 @@ namespace System.Workflow.ComponentModel.Design
                 ActiveView = viewToActivate;
 
                 //Invoking a verb might change the shown view so we map again
-                CompositeActivityDesigner activeCompositeDesigner = ActiveDesigner as CompositeActivityDesigner;
+                CompositeActivityDesigner activeCompositeDesigner =
+                    ActiveDesigner as CompositeActivityDesigner;
                 if (activeCompositeDesigner != null)
                 {
                     if (activeCompositeDesigner != this)
@@ -400,7 +426,10 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        public override object GetNextSelectableObject(object current, DesignerNavigationDirection direction)
+        public override object GetNextSelectableObject(
+            object current,
+            DesignerNavigationDirection direction
+        )
         {
             object nextObject = null;
 
@@ -409,8 +438,13 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (activeDesigner != this)
                 {
-                    if (current != activeDesigner.Activity && activeDesigner is CompositeActivityDesigner)
-                        nextObject = ((CompositeActivityDesigner)activeDesigner).GetNextSelectableObject(current, direction);
+                    if (
+                        current != activeDesigner.Activity
+                        && activeDesigner is CompositeActivityDesigner
+                    )
+                        nextObject = (
+                            (CompositeActivityDesigner)activeDesigner
+                        ).GetNextSelectableObject(current, direction);
                 }
                 else
                 {
@@ -440,7 +474,10 @@ namespace System.Workflow.ComponentModel.Design
         {
             List<Point> connectionPoints = new List<Point>(GetConnections(edges));
             if (connectionPoints.Count > 0 && (edges & DesignerEdges.Top) > 0)
-                connectionPoints[0] = new Point(connectionPoints[0].X, connectionPoints[0].Y + TitleHeight);
+                connectionPoints[0] = new Point(
+                    connectionPoints[0].X,
+                    connectionPoints[0].Y + TitleHeight
+                );
             return connectionPoints.AsReadOnly();
         }
 
@@ -454,20 +491,34 @@ namespace System.Workflow.ComponentModel.Design
             return new Rectangle[] { Bounds };
         }
 
-        protected override void OnContainedActivitiesChanging(ActivityCollectionChangeEventArgs listChangeArgs)
+        protected override void OnContainedActivitiesChanging(
+            ActivityCollectionChangeEventArgs listChangeArgs
+        )
         {
             base.OnContainedActivitiesChanging(listChangeArgs);
 
-            if (listChangeArgs.Action == ActivityCollectionChangeAction.Remove && listChangeArgs.RemovedItems[0] != null)
+            if (
+                listChangeArgs.Action == ActivityCollectionChangeAction.Remove
+                && listChangeArgs.RemovedItems[0] != null
+            )
             {
                 ActivityDesigner activeDesigner = ActiveDesigner;
-                if (activeDesigner != null && listChangeArgs.RemovedItems[0] == activeDesigner.Activity)
+                if (
+                    activeDesigner != null
+                    && listChangeArgs.RemovedItems[0] == activeDesigner.Activity
+                )
                     ActiveView = ValidatedViews[0];
                 SecondaryViewProvider.OnViewRemoved(this, listChangeArgs.RemovedItems[0].GetType());
             }
         }
 
-        protected void DrawConnectors(Graphics graphics, Pen pen, Point[] points, LineAnchor startCap, LineAnchor endCap)
+        protected void DrawConnectors(
+            Graphics graphics,
+            Pen pen,
+            Point[] points,
+            LineAnchor startCap,
+            LineAnchor endCap
+        )
         {
             Size arrowCapSize = Size.Empty;
             Size maxCapSize = Size.Empty;
@@ -475,10 +526,21 @@ namespace System.Workflow.ComponentModel.Design
             CompositeDesignerTheme compositeDesignerTheme = DesignerTheme as CompositeDesignerTheme;
             if (compositeDesignerTheme != null)
             {
-                arrowCapSize = new Size(compositeDesignerTheme.ConnectorSize.Width / 3, compositeDesignerTheme.ConnectorSize.Height / 3);
+                arrowCapSize = new Size(
+                    compositeDesignerTheme.ConnectorSize.Width / 3,
+                    compositeDesignerTheme.ConnectorSize.Height / 3
+                );
                 maxCapSize = compositeDesignerTheme.ConnectorSize;
             }
-            ActivityDesignerPaint.DrawConnectors(graphics, pen, points, arrowCapSize, maxCapSize, startCap, endCap);
+            ActivityDesignerPaint.DrawConnectors(
+                graphics,
+                pen,
+                points,
+                arrowCapSize,
+                maxCapSize,
+                startCap,
+                endCap
+            );
         }
 
         protected override void OnDragEnter(ActivityDragEventArgs e)
@@ -517,10 +579,15 @@ namespace System.Workflow.ComponentModel.Design
             else if ((e.AllowedEffect & DragDropEffects.Move) == DragDropEffects.Move)
                 e.Effect = DragDropEffects.Move;
 
-            //If the component is sited then that means that we are moving it 
+            //If the component is sited then that means that we are moving it
             try
             {
-                CompositeActivityDesigner.InsertActivities(this, new ConnectorHitTestInfo(this, HitTestLocations.Designer, CurrentDropTarget), e.Activities, SR.GetString(SR.DragDropActivities));
+                CompositeActivityDesigner.InsertActivities(
+                    this,
+                    new ConnectorHitTestInfo(this, HitTestLocations.Designer, CurrentDropTarget),
+                    e.Activities,
+                    SR.GetString(SR.DragDropActivities)
+                );
             }
             finally
             {
@@ -548,7 +615,10 @@ namespace System.Workflow.ComponentModel.Design
 
                 int titleHeight = TitleHeight;
                 foreach (ActivityDesigner activityDesigner in ContainedDesigners)
-                    activityDesigner.Location = new Point(activityDesigner.Location.X, activityDesigner.Location.Y + titleHeight);
+                    activityDesigner.Location = new Point(
+                        activityDesigner.Location.X,
+                        activityDesigner.Location.Y + titleHeight
+                    );
             }
         }
 
@@ -618,7 +688,8 @@ namespace System.Workflow.ComponentModel.Design
             {
                 this.itemPalette = new ItemPalette();
                 this.itemPalette.Closed += new EventHandler(OnPaletteClosed);
-                this.itemPalette.SelectionChanged += new SelectionChangeEventHandler<SelectionChangeEventArgs>(OnSmartAction);
+                this.itemPalette.SelectionChanged +=
+                    new SelectionChangeEventHandler<SelectionChangeEventArgs>(OnSmartAction);
             }
 
             //we need to update the font every time the menu is shown
@@ -648,7 +719,6 @@ namespace System.Workflow.ComponentModel.Design
 
                 //
 
-
                 PerformLayout();
             }
 
@@ -672,9 +742,14 @@ namespace System.Workflow.ComponentModel.Design
                 if (e.ViewPort.IntersectsWith(designerBounds))
                 {
                     bDrawingVisibleChildren = true;
-                    using (PaintEventArgs paintEventArgs = new PaintEventArgs(e.Graphics, e.ViewPort))
+                    using (
+                        PaintEventArgs paintEventArgs = new PaintEventArgs(e.Graphics, e.ViewPort)
+                    )
                     {
-                        ((IWorkflowDesignerMessageSink)activityDesigner).OnPaint(paintEventArgs, e.ViewPort);
+                        ((IWorkflowDesignerMessageSink)activityDesigner).OnPaint(
+                            paintEventArgs,
+                            e.ViewPort
+                        );
                     }
                 }
                 else
@@ -693,7 +768,10 @@ namespace System.Workflow.ComponentModel.Design
                 if (CurrentDropTarget < dropTargets.Length)
                 {
                     Rectangle dropConnector = dropTargets[CurrentDropTarget];
-                    return new Point(dropConnector.Left + dropConnector.Width / 2, dropConnector.Top + dropConnector.Height / 2);
+                    return new Point(
+                        dropConnector.Left + dropConnector.Width / 2,
+                        dropConnector.Top + dropConnector.Height / 2
+                    );
                 }
             }
 
@@ -717,19 +795,40 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            if (dropIndex >= 0 && !CanInsertActivities(new ConnectorHitTestInfo(this, HitTestLocations.Designer, dropIndex), e.Activities))
+            if (
+                dropIndex >= 0
+                && !CanInsertActivities(
+                    new ConnectorHitTestInfo(this, HitTestLocations.Designer, dropIndex),
+                    e.Activities
+                )
+            )
                 dropIndex = -1;
 
             bool ctrlKeyPressed = ((e.KeyState & 8) == 8);
-            if (dropIndex >= 0 && !ctrlKeyPressed && (e.AllowedEffect & DragDropEffects.Move) == DragDropEffects.Move)
+            if (
+                dropIndex >= 0
+                && !ctrlKeyPressed
+                && (e.AllowedEffect & DragDropEffects.Move) == DragDropEffects.Move
+            )
             {
-                ConnectorHitTestInfo moveLocation = new ConnectorHitTestInfo(this, HitTestLocations.Designer, dropIndex);
+                ConnectorHitTestInfo moveLocation = new ConnectorHitTestInfo(
+                    this,
+                    HitTestLocations.Designer,
+                    dropIndex
+                );
                 foreach (Activity activity in e.Activities)
                 {
                     if (activity.Site != null)
                     {
                         ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(activity);
-                        if (activityDesigner == null || activityDesigner.ParentDesigner == null || !activityDesigner.ParentDesigner.CanMoveActivities(moveLocation, new List<Activity>(new Activity[] { activity }).AsReadOnly()))
+                        if (
+                            activityDesigner == null
+                            || activityDesigner.ParentDesigner == null
+                            || !activityDesigner.ParentDesigner.CanMoveActivities(
+                                moveLocation,
+                                new List<Activity>(new Activity[] { activity }).AsReadOnly()
+                            )
+                        )
                         {
                             dropIndex = -1;
                             break;
@@ -750,7 +849,10 @@ namespace System.Workflow.ComponentModel.Design
             else if (CurrentDropTarget >= 0)
             {
                 bool ctrlKeyPressed = ((e.KeyState & 8) == 8);
-                if (ctrlKeyPressed && (e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy)
+                if (
+                    ctrlKeyPressed
+                    && (e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy
+                )
                     return DragDropEffects.Copy;
                 else if ((e.AllowedEffect & DragDropEffects.Move) == DragDropEffects.Move)
                     return DragDropEffects.Move;
@@ -779,9 +881,13 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (Expanded && view.AssociatedDesigner != null)
                 {
-                    ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                    ISelectionService selectionService =
+                        GetService(typeof(ISelectionService)) as ISelectionService;
                     if (selectionService != null)
-                        selectionService.SetSelectedComponents(new object[] { view.AssociatedDesigner.Activity }, SelectionTypes.Replace);
+                        selectionService.SetSelectedComponents(
+                            new object[] { view.AssociatedDesigner.Activity },
+                            SelectionTypes.Replace
+                        );
                 }
             }
         }
@@ -791,7 +897,8 @@ namespace System.Workflow.ComponentModel.Design
             ItemInfo itemInfo = e.CurrentItem as ItemInfo;
             if (itemInfo != null)
             {
-                ActivityDesignerVerb smartVerb = itemInfo.UserData[DesignerUserDataKeys.DesignerVerb] as ActivityDesignerVerb;
+                ActivityDesignerVerb smartVerb =
+                    itemInfo.UserData[DesignerUserDataKeys.DesignerVerb] as ActivityDesignerVerb;
                 if (smartVerb != null)
                     smartVerb.Invoke();
             }
@@ -807,20 +914,25 @@ namespace System.Workflow.ComponentModel.Design
             int lockedActivityOffset = 0;
             foreach (DesignerView secondaryView in Views)
             {
-                if (secondaryView.AssociatedDesigner != null &&
-                    this != secondaryView.AssociatedDesigner &&
-                    Helpers.IsActivityLocked(secondaryView.AssociatedDesigner.Activity))
+                if (
+                    secondaryView.AssociatedDesigner != null
+                    && this != secondaryView.AssociatedDesigner
+                    && Helpers.IsActivityLocked(secondaryView.AssociatedDesigner.Activity)
+                )
                 {
                     lockedActivityOffset++;
                 }
             }
 
-            return new ConnectorHitTestInfo(this, location.HitLocation, lockedActivityOffset + location.MapToIndex());
+            return new ConnectorHitTestInfo(
+                this,
+                location.HitLocation,
+                lockedActivityOffset + location.MapToIndex()
+            );
         }
         #endregion
 
         #endregion
     }
     #endregion
-
 }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 //
 // <OWNER>Microsoft</OWNER>
 /*============================================================
@@ -11,35 +11,35 @@
 **
 ** Purpose: Capture synchronization semantics for asynchronous callbacks
 **
-** 
+**
 ===========================================================*/
 
 namespace System.Threading
-{    
-#if !MONO
-    using Microsoft.Win32.SafeHandles;
-#endif
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+{
+    using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime;
     using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
 #if FEATURE_CORRUPTING_EXCEPTIONS
     using System.Runtime.ExceptionServices;
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-    using System.Runtime;
-    using System.Runtime.Versioning;
-    using System.Runtime.ConstrainedExecution;
-    using System.Reflection;
-    using System.Security;
-    using System.Diagnostics.Contracts;
-    using System.Diagnostics.CodeAnalysis;
 
+#if !MONO
+    using Microsoft.Win32.SafeHandles;
+#endif
 
 #if FEATURE_SYNCHRONIZATIONCONTEXT_WAIT
     [Flags]
     enum SynchronizationContextProperties
     {
         None = 0,
-        RequireWaitNotification = 0x1
+        RequireWaitNotification = 0x1,
     };
 #endif
 
@@ -53,27 +53,35 @@ namespace System.Threading
     internal class WinRTSynchronizationContextFactoryBase
     {
         [SecurityCritical]
-        public virtual SynchronizationContext Create(object coreDispatcher) {return null;}
+        public virtual SynchronizationContext Create(object coreDispatcher)
+        {
+            return null;
+        }
     }
 #endif //FEATURE_COMINTEROP
 
 #if !FEATURE_CORECLR
-    [SecurityPermissionAttribute(SecurityAction.InheritanceDemand, Flags =SecurityPermissionFlag.ControlPolicy|SecurityPermissionFlag.ControlEvidence)]
+    [SecurityPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Flags = SecurityPermissionFlag.ControlPolicy | SecurityPermissionFlag.ControlEvidence
+    )]
 #endif
     public partial class SynchronizationContext
     {
 #if FEATURE_SYNCHRONIZATIONCONTEXT_WAIT
         SynchronizationContextProperties _props = SynchronizationContextProperties.None;
 #endif
-        
-        public SynchronizationContext()
-        {
-        }
-                        
+
+        public SynchronizationContext() { }
+
 #if FEATURE_SYNCHRONIZATIONCONTEXT_WAIT
 
         // helper delegate to statically bind to Wait method
-        private delegate int WaitDelegate(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout);
+        private delegate int WaitDelegate(
+            IntPtr[] waitHandles,
+            bool waitAll,
+            int millisecondsTimeout
+        );
 
         static Type s_cachedPreparedType1;
         static Type s_cachedPreparedType2;
@@ -82,8 +90,12 @@ namespace System.Threading
         static Type s_cachedPreparedType5;
 
         // protected so that only the derived sync context class can enable these flags
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SuppressMessage("Microsoft.Concurrency", "CA8001", Justification = "We never dereference s_cachedPreparedType*, so ordering is unimportant")]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SuppressMessage(
+            "Microsoft.Concurrency",
+            "CA8001",
+            Justification = "We never dereference s_cachedPreparedType*, so ordering is unimportant"
+        )]
         protected void SetWaitNotificationRequired()
         {
             //
@@ -98,19 +110,26 @@ namespace System.Threading
             // is a *very* hot code path for many WPF and Microsoft apps.
             //
             Type type = this.GetType();
-            if (s_cachedPreparedType1 != type &&
-                s_cachedPreparedType2 != type &&
-                s_cachedPreparedType3 != type &&
-                s_cachedPreparedType4 != type &&
-                s_cachedPreparedType5 != type)
+            if (
+                s_cachedPreparedType1 != type
+                && s_cachedPreparedType2 != type
+                && s_cachedPreparedType3 != type
+                && s_cachedPreparedType4 != type
+                && s_cachedPreparedType5 != type
+            )
             {
                 RuntimeHelpers.PrepareDelegate(new WaitDelegate(this.Wait));
 
-                if (s_cachedPreparedType1 == null)      s_cachedPreparedType1  = type;
-                else if (s_cachedPreparedType2 == null) s_cachedPreparedType2  = type;
-                else if (s_cachedPreparedType3 == null) s_cachedPreparedType3  = type;
-                else if (s_cachedPreparedType4 == null) s_cachedPreparedType4  = type;
-                else if (s_cachedPreparedType5 == null) s_cachedPreparedType5  = type;
+                if (s_cachedPreparedType1 == null)
+                    s_cachedPreparedType1 = type;
+                else if (s_cachedPreparedType2 == null)
+                    s_cachedPreparedType2 = type;
+                else if (s_cachedPreparedType3 == null)
+                    s_cachedPreparedType3 = type;
+                else if (s_cachedPreparedType4 == null)
+                    s_cachedPreparedType4 = type;
+                else if (s_cachedPreparedType5 == null)
+                    s_cachedPreparedType5 = type;
             }
 
             _props |= SynchronizationContextProperties.RequireWaitNotification;
@@ -118,11 +137,10 @@ namespace System.Threading
 
         public bool IsWaitNotificationRequired()
         {
-            return ((_props & SynchronizationContextProperties.RequireWaitNotification) != 0);  
+            return ((_props & SynchronizationContextProperties.RequireWaitNotification) != 0);
         }
 #endif
 
-    
         public virtual void Send(SendOrPostCallback d, Object state)
         {
             d(state);
@@ -133,24 +151,19 @@ namespace System.Threading
             ThreadPool.QueueUserWorkItem(new WaitCallback(d), state);
         }
 
-        
         /// <summary>
         ///     Optional override for subclasses, for responding to notification that operation is starting.
         /// </summary>
-        public virtual void OperationStarted()
-        {
-        }
+        public virtual void OperationStarted() { }
 
         /// <summary>
         ///     Optional override for subclasses, for responding to notification that operation has completed.
         /// </summary>
-        public virtual void OperationCompleted()
-        {
-        }
+        public virtual void OperationCompleted() { }
 
 #if FEATURE_SYNCHRONIZATIONCONTEXT_WAIT
-        // Method called when the CLR does a wait operation 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        // Method called when the CLR does a wait operation
+        [System.Security.SecurityCritical] // auto-generated_required
         [CLSCompliant(false)]
         [PrePrepareMethod]
         public virtual int Wait(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
@@ -162,10 +175,10 @@ namespace System.Threading
             Contract.EndContractBlock();
             return WaitHelper(waitHandles, waitAll, millisecondsTimeout);
         }
-                                
-        // Static helper to which the above method can delegate to in order to get the default 
+
+        // Static helper to which the above method can delegate to in order to get the default
         // COM behavior.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [CLSCompliant(false)]
         [PrePrepareMethod]
         [ResourceExposure(ResourceScope.None)]
@@ -173,15 +186,26 @@ namespace System.Threading
 #if MONO
         protected static int WaitHelper(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
         {
-            unsafe {
-                fixed (IntPtr * pWaitHandles = waitHandles) {
-                    return System.Threading.WaitHandle.Wait_internal (pWaitHandles, waitHandles.Length, waitAll, millisecondsTimeout);
+            unsafe
+            {
+                fixed (IntPtr* pWaitHandles = waitHandles)
+                {
+                    return System.Threading.WaitHandle.Wait_internal(
+                        pWaitHandles,
+                        waitHandles.Length,
+                        waitAll,
+                        millisecondsTimeout
+                    );
                 }
             }
         }
 #else
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        protected static extern int WaitHelper(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout);
+        protected static extern int WaitHelper(
+            IntPtr[] waitHandles,
+            bool waitAll,
+            int millisecondsTimeout
+        );
 #endif
 #endif
 
@@ -189,12 +213,12 @@ namespace System.Threading
         [ThreadStatic]
         private static SynchronizationContext s_threadStaticContext;
 
-		//
-		// NetCF had a bug where SynchronizationContext.SetThreadStaticContext would set the SyncContext for every thread in the process.  
-		// This was because they stored the value in a regular static field (NetCF has no support for ThreadStatic fields).  This was fixed in 
-		// Mango, but some apps built against pre-Mango WP7 do depend on the broken behavior.  So for those apps we need an AppDomain-wide static
-		// to hold whatever context was last set on any thread.
-		//
+        //
+        // NetCF had a bug where SynchronizationContext.SetThreadStaticContext would set the SyncContext for every thread in the process.
+        // This was because they stored the value in a regular static field (NetCF has no support for ThreadStatic fields).  This was fixed in
+        // Mango, but some apps built against pre-Mango WP7 do depend on the broken behavior.  So for those apps we need an AppDomain-wide static
+        // to hold whatever context was last set on any thread.
+        //
         private static SynchronizationContext s_appDomainStaticContext;
 
         [System.Security.SecurityCritical]
@@ -206,21 +230,21 @@ namespace System.Threading
         [System.Security.SecurityCritical]
         public static void SetThreadStaticContext(SynchronizationContext syncContext)
         {
-			//
-			// If this is a pre-Mango Windows Phone app, we need to set the SC for *all* threads to match the old NetCF behavior.
-			//
+            //
+            // If this is a pre-Mango Windows Phone app, we need to set the SC for *all* threads to match the old NetCF behavior.
+            //
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhoneMango)
                 s_appDomainStaticContext = syncContext;
             else
                 s_threadStaticContext = syncContext;
         }
 
-        public static SynchronizationContext Current 
+        public static SynchronizationContext Current
         {
-            get      
+            get
             {
                 SynchronizationContext context = null;
-            
+
                 if (CompatibilitySwitches.IsAppEarlierThanWindowsPhoneMango)
                     context = s_appDomainStaticContext;
                 else
@@ -235,7 +259,7 @@ namespace System.Threading
             }
         }
 
-        // Get the last SynchronizationContext that was set explicitly (not flowed via ExecutionContext.Capture/Run)        
+        // Get the last SynchronizationContext that was set explicitly (not flowed via ExecutionContext.Capture/Run)
         internal static SynchronizationContext CurrentNoFlow
         {
             [FriendAccessAllowed]
@@ -248,7 +272,7 @@ namespace System.Threading
 #else //FEATURE_CORECLR
 
         // set SynchronizationContext on the current thread
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void SetSynchronizationContext(SynchronizationContext syncContext)
         {
             ExecutionContext ec = Thread.CurrentThread.GetMutableExecutionContext();
@@ -260,33 +284,35 @@ namespace System.Threading
         [Obsolete("The method is not supported and will be removed")]
         public static void SetThreadStaticContext(SynchronizationContext syncContext)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 #endif
 
         // Get the current SynchronizationContext on the current thread
-        public static SynchronizationContext Current 
+        public static SynchronizationContext Current
         {
-            get      
+            get
             {
-                return Thread.CurrentThread.GetExecutionContextReader().SynchronizationContext ?? GetThreadLocalContext();
+                return Thread.CurrentThread.GetExecutionContextReader().SynchronizationContext
+                    ?? GetThreadLocalContext();
             }
         }
 
-        // Get the last SynchronizationContext that was set explicitly (not flowed via ExecutionContext.Capture/Run)        
+        // Get the last SynchronizationContext that was set explicitly (not flowed via ExecutionContext.Capture/Run)
         internal static SynchronizationContext CurrentNoFlow
         {
             [FriendAccessAllowed]
             get
             {
-                return Thread.CurrentThread.GetExecutionContextReader().SynchronizationContextNoFlow ?? GetThreadLocalContext();
+                return Thread.CurrentThread.GetExecutionContextReader().SynchronizationContextNoFlow
+                    ?? GetThreadLocalContext();
             }
         }
 
         private static SynchronizationContext GetThreadLocalContext()
         {
             SynchronizationContext context = null;
-            
+
 #if FEATURE_APPX
             if (context == null && Environment.IsWinRTSupported)
                 context = GetWinRTContext();
@@ -294,7 +320,7 @@ namespace System.Threading
 
 #if MONODROID && !MOBILE_DESKTOP_HOST
             if (context == null)
-                context = AndroidPlatform.GetDefaultSyncContext ();
+                context = AndroidPlatform.GetDefaultSyncContext();
 #endif
 
             return context;
@@ -345,8 +371,13 @@ namespace System.Threading
             WinRTSynchronizationContextFactoryBase factory = s_winRTContextFactory;
             if (factory == null)
             {
-                Type factoryType = Type.GetType("System.Threading.WinRTSynchronizationContextFactory, " + AssemblyRef.SystemRuntimeWindowsRuntime, true);
-                s_winRTContextFactory = factory = (WinRTSynchronizationContextFactoryBase)Activator.CreateInstance(factoryType, true);
+                Type factoryType = Type.GetType(
+                    "System.Threading.WinRTSynchronizationContextFactory, "
+                        + AssemblyRef.SystemRuntimeWindowsRuntime,
+                    true
+                );
+                s_winRTContextFactory = factory = (WinRTSynchronizationContextFactoryBase)
+                    Activator.CreateInstance(factoryType, true);
             }
             return factory;
         }
@@ -359,8 +390,7 @@ namespace System.Threading
         private static extern object GetWinRTDispatcherForCurrentThread();
 #endif //FEATURE_APPX
 
-
-        // helper to Clone this SynchronizationContext, 
+        // helper to Clone this SynchronizationContext,
         public virtual SynchronizationContext CreateCopy()
         {
             // the CLR dummy has an empty clone function - no member data
@@ -368,8 +398,13 @@ namespace System.Threading
         }
 
 #if FEATURE_SYNCHRONIZATIONCONTEXT_WAIT
-        [System.Security.SecurityCritical]  // auto-generated
-        private static int InvokeWaitMethodHelper(SynchronizationContext syncContext, IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
+        [System.Security.SecurityCritical] // auto-generated
+        private static int InvokeWaitMethodHelper(
+            SynchronizationContext syncContext,
+            IntPtr[] waitHandles,
+            bool waitAll,
+            int millisecondsTimeout
+        )
         {
             return syncContext.Wait(waitHandles, waitAll, millisecondsTimeout);
         }

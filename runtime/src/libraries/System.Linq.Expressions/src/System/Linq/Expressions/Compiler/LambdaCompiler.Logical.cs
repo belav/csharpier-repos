@@ -106,7 +106,6 @@ namespace System.Linq.Expressions.Compiler
             }
         }
 
-
         private void EmitNullableCoalesce(BinaryExpression b)
         {
             Debug.Assert(b.Method == null);
@@ -125,8 +124,9 @@ namespace System.Linq.Expressions.Compiler
             {
                 Debug.Assert(b.Conversion.ParameterCount == 1);
                 ParameterExpression p = b.Conversion.GetParameter(0);
-                Debug.Assert(p.Type.IsAssignableFrom(b.Left.Type) ||
-                             p.Type.IsAssignableFrom(nnLeftType));
+                Debug.Assert(
+                    p.Type.IsAssignableFrom(b.Left.Type) || p.Type.IsAssignableFrom(nnLeftType)
+                );
 
                 // emit the delegate instance
                 EmitLambdaExpression(b.Conversion);
@@ -171,7 +171,6 @@ namespace System.Linq.Expressions.Compiler
             _ilg.MarkLabel(labEnd);
         }
 
-
         private void EmitLambdaReferenceCoalesce(BinaryExpression b)
         {
             LocalBuilder loc = GetLocal(b.Left.Type);
@@ -200,7 +199,6 @@ namespace System.Linq.Expressions.Compiler
 
             _ilg.MarkLabel(labEnd);
         }
-
 
         private void EmitReferenceCoalesceWithoutConversion(BinaryExpression b)
         {
@@ -478,7 +476,10 @@ namespace System.Linq.Expressions.Compiler
                     break;
 
                 default:
-                    EmitExpression(node, CompilationFlags.EmitAsNoTail | CompilationFlags.EmitNoExpressionStart);
+                    EmitExpression(
+                        node,
+                        CompilationFlags.EmitAsNoTail | CompilationFlags.EmitNoExpressionStart
+                    );
                     EmitBranchOp(branchValue, label);
                     break;
             }
@@ -495,7 +496,10 @@ namespace System.Linq.Expressions.Compiler
         {
             if (node.Method != null)
             {
-                EmitExpression(node, CompilationFlags.EmitAsNoTail | CompilationFlags.EmitNoExpressionStart);
+                EmitExpression(
+                    node,
+                    CompilationFlags.EmitAsNoTail | CompilationFlags.EmitNoExpressionStart
+                );
                 EmitBranchOp(branch, label);
                 return;
             }
@@ -505,7 +509,9 @@ namespace System.Linq.Expressions.Compiler
 
         private void EmitBranchComparison(bool branch, BinaryExpression node, Label label)
         {
-            Debug.Assert(node.NodeType == ExpressionType.Equal || node.NodeType == ExpressionType.NotEqual);
+            Debug.Assert(
+                node.NodeType == ExpressionType.Equal || node.NodeType == ExpressionType.NotEqual
+            );
             Debug.Assert(!node.IsLiftedToNull);
 
             // To share code paths, we want to treat NotEqual as an inverted Equal
@@ -580,7 +586,9 @@ namespace System.Linq.Expressions.Compiler
 
         private void EmitBranchLogical(bool branch, BinaryExpression node, Label label)
         {
-            Debug.Assert(node.NodeType == ExpressionType.AndAlso || node.NodeType == ExpressionType.OrElse);
+            Debug.Assert(
+                node.NodeType == ExpressionType.AndAlso || node.NodeType == ExpressionType.OrElse
+            );
             Debug.Assert(!node.IsLiftedToNull);
 
             if (node.Method != null || node.IsLifted)
@@ -589,7 +597,6 @@ namespace System.Linq.Expressions.Compiler
                 EmitBranchOp(branch, label);
                 return;
             }
-
 
             bool isAnd = node.NodeType == ExpressionType.AndAlso;
 

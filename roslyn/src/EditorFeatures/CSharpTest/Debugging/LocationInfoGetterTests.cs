@@ -20,7 +20,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
     [Trait(Traits.Feature, Traits.Features.DebuggingLocationName)]
     public class LocationInfoGetterTests
     {
-        private static async Task TestAsync(string markup, string expectedName, int expectedLineOffset, CSharpParseOptions parseOptions = null)
+        private static async Task TestAsync(
+            string markup,
+            string expectedName,
+            int expectedLineOffset,
+            CSharpParseOptions parseOptions = null
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(markup, parseOptions);
 
@@ -29,17 +34,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             var locationInfo = await LocationInfoGetter.GetInfoAsync(
                 workspace.CurrentSolution.Projects.Single().Documents.Single(),
                 position,
-                CancellationToken.None);
+                CancellationToken.None
+            );
 
             Assert.Equal(expectedName, locationInfo.Name);
             Assert.Equal(expectedLineOffset, locationInfo.LineOffset);
         }
 
         [Fact]
-        public async Task TestClass()
-            => await TestAsync("class G$$oo { }", "Goo", 0);
+        public async Task TestClass() => await TestAsync("class G$$oo { }", "Goo", 0);
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538415")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538415")
+        ]
         public async Task TestMethod()
         {
             await TestAsync(
@@ -50,7 +59,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     {
                     }
                 }
-                """, "Class.Method()", 0);
+                """,
+                "Class.Method()",
+                0
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668")]
@@ -67,7 +79,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }$$
                     }
                 }
-                """, "Namespace.Class.Method()", 2);
+                """,
+                "Namespace.Class.Method()",
+                2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49000")]
@@ -85,7 +100,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     {
                     }$$
                 }
-                """, "Namespace.Class.Method()", 2);
+                """,
+                "Namespace.Class.Method()",
+                2
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668")]
@@ -102,7 +120,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }$$
                     }
                 }
-                """, "Namespace.Another.Class.Method()", 2);
+                """,
+                "Namespace.Another.Class.Method()",
+                2
+            );
         }
 
         [Fact]
@@ -122,7 +143,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """, "Namespace.Another.Class.Method()", 2);
+                """,
+                "Namespace.Another.Class.Method()",
+                2
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668")]
@@ -139,7 +163,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """, "Outer.Inner.Quux()", 1);
+                """,
+                "Outer.Inner.Quux()",
+                1
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668")]
@@ -157,7 +184,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """, "Class.Property", 4);
+                """,
+                "Class.Property",
+                4
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527668")]
@@ -180,7 +210,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """, "Class.Property", 9);
+                """,
+                "Class.Property",
+                9
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538415")]
@@ -192,7 +225,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     int fi$$eld;
                 }
-                """, "Class.field", 0);
+                """,
+                "Class.field",
+                0
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543494")]
@@ -204,7 +240,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     Action<int> a = b => { in$$t c; };
                 }
-                """, "Class.a", 0);
+                """,
+                "Class.a",
+                0
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543494")]
@@ -216,7 +255,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     int a1, a$$2;
                 }
-                """, "Class.a2", 0);
+                """,
+                "Class.a2",
+                0
+            );
         }
 
         [Fact]
@@ -231,7 +273,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
 
                     $$}
                 }
-                """, "C1.C1()", 3);
+                """,
+                "C1.C1()",
+                3
+            );
         }
 
         [Fact]
@@ -245,7 +290,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     {
                     $$}
                 }
-                """, "C1.~C1()", 2);
+                """,
+                "C1.~C1()",
+                2
+            );
         }
 
         [Fact]
@@ -263,7 +311,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """, "N1.C1.+(C1 x, C1 y)", 2); // Old implementation reports "operator +" (rather than "+")...
+                """,
+                "N1.C1.+(C1 x, C1 y)",
+                2
+            ); // Old implementation reports "operator +" (rather than "+")...
         }
 
         [Fact]
@@ -284,7 +335,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     {
                     }
                 }
-                """, "N1.C1.N1.C2(N1.C1 x)", 2); // Old implementation reports "explicit operator N1.C2" (rather than "N1.C2")...
+                """,
+                "N1.C1.N1.C2(N1.C1 x)",
+                2
+            ); // Old implementation reports "explicit operator N1.C2" (rather than "N1.C2")...
         }
 
         [Fact]
@@ -297,7 +351,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     delegate void D1();
                     event D1 e1$$;
                 }
-                """, "C1.e1", 0);
+                """,
+                "C1.e1",
+                0
+            );
         }
 
         [Fact]
@@ -315,7 +372,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     {
                     $$}
                 }
-                """, "C1.M1()", 2);
+                """,
+                "C1.M1()",
+                2
+            );
         }
 
         [Fact]
@@ -333,7 +393,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """, "C1.this[int x]", 4);
+                """,
+                "C1.this[int x]",
+                4
+            );
         }
 
         [Fact]
@@ -345,7 +408,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     void M1(params int[] x) { $$ }
                 }
-                """, "C1.M1(params int[] x)", 0);
+                """,
+                "C1.M1(params int[] x)",
+                0
+            );
         }
 
         [Fact]
@@ -357,7 +423,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     void M1(__arglist) { $$ }
                 }
-                """, "C1.M1(__arglist)", 0); // Old implementation does not show "__arglist"...
+                """,
+                "C1.M1(__arglist)",
+                0
+            ); // Old implementation does not show "__arglist"...
         }
 
         [Fact]
@@ -372,7 +441,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         $$y = x;
                     }
                 }
-                """, "C1.M1( ref int x, out int y )", 2); // Old implementation did not show extra spaces around the parameters...
+                """,
+                "C1.M1( ref int x, out int y )",
+                2
+            ); // Old implementation did not show extra spaces around the parameters...
         }
 
         [Fact]
@@ -387,7 +459,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         $$y = x;
                     }
                 }
-                """, "C1.M1(int x =1)", 2);
+                """,
+                "C1.M1(int x =1)",
+                2
+            );
         }
 
         [Fact]
@@ -401,7 +476,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     {
                     }$$
                 }
-                """, "C1.M1(this int x)", 2);
+                """,
+                "C1.M1(this int x)",
+                2
+            );
         }
 
         [Fact]
@@ -413,7 +491,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     static void M1() { $$ }
                 }
-                """, "C1.M1()", 0);
+                """,
+                "C1.M1()",
+                0
+            );
         }
 
         [Fact]
@@ -425,7 +506,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     static void M1<V>() { $$ }
                 }
-                """, "C1.M1()", 0);
+                """,
+                "C1.M1()",
+                0
+            );
         }
 
         [Fact]
@@ -437,7 +521,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     static void M1<V>(C1<int, V> x, V y) { $$ }
                 }
-                """, "C1.M1(C1<int, V> x, V y)", 0);
+                """,
+                "C1.M1(C1<int, V> x, V y)",
+                0
+            );
         }
 
         [Fact]
@@ -451,7 +538,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         int a1, a$$2;
                     }
                 }
-                """, "Class.a2", 0);
+                """,
+                "Class.a2",
+                0
+            );
         }
 
         [Fact]
@@ -468,7 +558,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """, "?.C1.M1()", 1);
+                """,
+                "?.C1.M1()",
+                1
+            );
         }
 
         [Fact]
@@ -484,7 +577,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """, "N1.?.M1()", 1);
+                """,
+                "N1.?.M1()",
+                1
+            );
         }
 
         [Fact]
@@ -501,7 +597,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         $$}
                     }
                 }
-                """, "N1.C1", 4);
+                """,
+                "N1.C1",
+                4
+            );
         }
 
         [Fact]
@@ -518,7 +617,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         $$}
                     }
                 }
-                """, "N1.C1.M1", 2);
+                """,
+                "N1.C1.M1",
+                2
+            );
         }
 
         [Fact]
@@ -527,7 +629,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             await TestAsync(
                 """
                 $$int f1;
-                """, "f1", 0, new CSharpParseOptions(kind: SourceCodeKind.Script));
+                """,
+                "f1",
+                0,
+                new CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
         }
 
         [Fact]
@@ -538,7 +644,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 int M1(int x)
                 {
                 $$}
-                """, "M1(int x)", 2, new CSharpParseOptions(kind: SourceCodeKind.Script));
+                """,
+                "M1(int x)",
+                2,
+                new CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
         }
 
         [Fact]
@@ -547,7 +657,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             await TestAsync(
                 """
                 $$System.Console.WriteLine("Hello")
-                """, null, 0, new CSharpParseOptions(kind: SourceCodeKind.Script));
+                """,
+                null,
+                0,
+                new CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
         }
     }
 }

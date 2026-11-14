@@ -95,15 +95,33 @@ namespace Internal.TypeSystem
                 int a = (int)0x9e3779b9 + key;
                 int b = (int)0x9e3779b9;
                 int c = 16777619;
-                a -= b; a -= c; a ^= (c >> 13);
-                b -= c; b -= a; b ^= (a << 8);
-                c -= a; c -= b; c ^= (b >> 13);
-                a -= b; a -= c; a ^= (c >> 12);
-                b -= c; b -= a; b ^= (a << 16);
-                c -= a; c -= b; c ^= (b >> 5);
-                a -= b; a -= c; a ^= (c >> 3);
-                b -= c; b -= a; b ^= (a << 10);
-                c -= a; c -= b; c ^= (b >> 15);
+                a -= b;
+                a -= c;
+                a ^= (c >> 13);
+                b -= c;
+                b -= a;
+                b ^= (a << 8);
+                c -= a;
+                c -= b;
+                c ^= (b >> 13);
+                a -= b;
+                a -= c;
+                a ^= (c >> 12);
+                b -= c;
+                b -= a;
+                b ^= (a << 16);
+                c -= a;
+                c -= b;
+                c ^= (b >> 5);
+                a -= b;
+                a -= c;
+                a ^= (c >> 3);
+                b -= c;
+                b -= a;
+                b ^= (a << 10);
+                c -= a;
+                c -= b;
+                c ^= (b >> 15);
                 return c;
             }
         }
@@ -153,7 +171,10 @@ namespace Internal.TypeSystem
         /// <summary>
         /// The current count of elements in the hashtable
         /// </summary>
-        public int Count { get { return _count; } }
+        public int Count
+        {
+            get { return _count; }
+        }
 
         /// <summary>
         /// Gets the value associated with the specified key.
@@ -211,7 +232,10 @@ namespace Internal.TypeSystem
         /// <param name="hashtable"></param>
         /// <param name="tableIndex"></param>
         /// <returns>The value that replaced the sentinel, or null</returns>
-        private static IntPtr WaitForSentinelInHashtableToDisappear(IntPtr[] hashtable, int tableIndex)
+        private static IntPtr WaitForSentinelInHashtableToDisappear(
+            IntPtr[] hashtable,
+            int tableIndex
+        )
         {
             var sw = new SpinWait();
             while (true)
@@ -353,7 +377,10 @@ namespace Internal.TypeSystem
             return result;
         }
 
-        private static IntPtr VolatileReadNonSentinelFromHashtable(IntPtr[] hashTable, int tableIndex)
+        private static IntPtr VolatileReadNonSentinelFromHashtable(
+            IntPtr[] hashTable,
+            int tableIndex
+        )
         {
             IntPtr examineEntry = Volatile.Read(ref hashTable[tableIndex]);
 
@@ -375,7 +402,11 @@ namespace Internal.TypeSystem
         /// <param name="valueInHashtable">Newly added value if adding succeds, a value which was already present in the hashtable which is equal to it,
         /// or an undefined value if adding fails and must be retried.</param>
         /// <returns>True if the operation succeeded (either because the value was added or the value was already present).</returns>
-        private bool TryAddOrGetExisting(TValue value, out bool addedValue, ref TValue valueInHashtable)
+        private bool TryAddOrGetExisting(
+            TValue value,
+            out bool addedValue,
+            ref TValue valueInHashtable
+        )
         {
             // The table must be captured into a local to ensure reads/writes
             // don't get torn by expansions
@@ -462,7 +493,13 @@ namespace Internal.TypeSystem
         {
             // Add to hash, use a CompareExchange to ensure that
             // the sentinel is are fully communicated to all threads
-            if (Interlocked.CompareExchange(ref hashTableLocal[tableIndex], new IntPtr(1), IntPtr.Zero) == IntPtr.Zero)
+            if (
+                Interlocked.CompareExchange(
+                    ref hashTableLocal[tableIndex],
+                    new IntPtr(1),
+                    IntPtr.Zero
+                ) == IntPtr.Zero
+            )
             {
                 return true;
             }
@@ -473,7 +510,11 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Writes the value into the table. Must only be used to overwrite a sentinel.
         /// </summary>
-        private static void WriteValueToLocation(IntPtr value, IntPtr[] hashTableLocal, int tableIndex)
+        private static void WriteValueToLocation(
+            IntPtr value,
+            IntPtr[] hashTableLocal,
+            int tableIndex
+        )
         {
             // Add to hash, use a volatile write to ensure that
             // the contents of the value are fully published to all
@@ -610,11 +651,16 @@ namespace Internal.TypeSystem
 
             public bool MoveNext()
             {
-                if ((_hashtableContentsToEnumerate != null) && (_index < _hashtableContentsToEnumerate.Length))
+                if (
+                    (_hashtableContentsToEnumerate != null)
+                    && (_index < _hashtableContentsToEnumerate.Length)
+                )
                 {
                     for (; _index < _hashtableContentsToEnumerate.Length; _index++)
                     {
-                        IntPtr examineEntry = Volatile.Read(ref _hashtableContentsToEnumerate[_index]);
+                        IntPtr examineEntry = Volatile.Read(
+                            ref _hashtableContentsToEnumerate[_index]
+                        );
                         if ((examineEntry != IntPtr.Zero) && (examineEntry != new IntPtr(1)))
                         {
                             _current = _hashtable.ConvertIntPtrToValue(examineEntry);
@@ -628,9 +674,7 @@ namespace Internal.TypeSystem
                 return false;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Reset()
             {
@@ -639,18 +683,12 @@ namespace Internal.TypeSystem
 
             public TValue Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    throw new NotSupportedException();
-                }
+                get { throw new NotSupportedException(); }
             }
         }
 

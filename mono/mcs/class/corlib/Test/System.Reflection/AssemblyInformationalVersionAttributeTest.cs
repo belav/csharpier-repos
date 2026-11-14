@@ -6,85 +6,81 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 using NUnit.Framework;
 
-namespace MonoTests.System.Reflection {
-
-	/// <summary>
-	/// Test Fixture for AssemblyInformationalVersionAttribute.
-	/// </summary>
-	[TestFixture]
-	public class AssemblyInformationalVersionAttributeTest {
-
+namespace MonoTests.System.Reflection
+{
+    /// <summary>
+    /// Test Fixture for AssemblyInformationalVersionAttribute.
+    /// </summary>
+    [TestFixture]
+    public class AssemblyInformationalVersionAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblyInformationalVersionAttribute attr;
-		
-		public AssemblyInformationalVersionAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName();
+        AssemblyInformationalVersionAttribute attr;
 
-			dynAsmName.Name = "TestAssembly";
+        public AssemblyInformationalVersionAttributeTest()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAsmName.Name = "TestAssembly";
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblyInformationalVersionAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "2.0.0.0" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblyInformationalVersionAttribute;
-		}
+            dynAssembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.Run);
 
-		[Test]
-		public void InformationalVersionTest ()
-		{
-			Assert.AreEqual (attr.InformationalVersion,
-							 "2.0.0.0", "#1");
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof(AssemblyInformationalVersionAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor(new Type[] { typeof(string) });
+            CustomAttributeBuilder attrBuilder = new CustomAttributeBuilder(
+                ctrInfo,
+                new object[1] { "2.0.0.0" }
+            );
+            dynAssembly.SetCustomAttribute(attrBuilder);
+            object[] attributes = dynAssembly.GetCustomAttributes(true);
+            attr = attributes[0] as AssemblyInformationalVersionAttribute;
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblyInformationalVersionAttribute), "#1"
-				);
+        [Test]
+        public void InformationalVersionTest()
+        {
+            Assert.AreEqual(attr.InformationalVersion, "2.0.0.0", "#1");
+        }
 
-		}
+        [Test]
+        public void TypeIdTest()
+        {
+            Assert.AreEqual(attr.TypeId, typeof(AssemblyInformationalVersionAttribute), "#1");
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			
-			Assert.AreEqual (
-				attr.Match (new AssemblyInformationalVersionAttribute ("Descrptn")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue()
+        {
+            Assert.AreEqual(attr.Match(attr), true, "#1");
+        }
+
+        [Test]
+        public void MatchTestForFalse()
+        {
+            Assert.AreEqual(
+                attr.Match(new AssemblyInformationalVersionAttribute("Descrptn")),
+                false,
+                "#1"
+            );
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblyInformationalVersionAttribute ("1.2.3.4");
-			Assert.AreEqual ("1.2.3.4", a.InformationalVersion);
-		}
-	}
+
+        [Test]
+        public void CtorTest()
+        {
+            var a = new AssemblyInformationalVersionAttribute("1.2.3.4");
+            Assert.AreEqual("1.2.3.4", a.InformationalVersion);
+        }
+    }
 }

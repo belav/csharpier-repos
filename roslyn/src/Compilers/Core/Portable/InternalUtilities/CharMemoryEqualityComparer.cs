@@ -12,11 +12,13 @@ namespace Roslyn.Utilities
     /// </summary>
     internal sealed class CharMemoryEqualityComparer : IEqualityComparer<ReadOnlyMemory<char>>
     {
-        public static readonly CharMemoryEqualityComparer Instance = new CharMemoryEqualityComparer();
+        public static readonly CharMemoryEqualityComparer Instance =
+            new CharMemoryEqualityComparer();
 
         private CharMemoryEqualityComparer() { }
 
-        public bool Equals(ReadOnlyMemory<char> x, ReadOnlyMemory<char> y) => x.Span.SequenceEqual(y.Span);
+        public bool Equals(ReadOnlyMemory<char> x, ReadOnlyMemory<char> y) =>
+            x.Span.SequenceEqual(y.Span);
 
         public int GetHashCode(ReadOnlyMemory<char> mem) => Hash.GetFNVHashCode(mem.Span);
     }

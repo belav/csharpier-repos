@@ -17,6 +17,7 @@ namespace System.ServiceModel.ComIntegration
     {
         ICreateServiceChannel serviceChannelCreator;
         Dictionary<MethodBase, MethodBase> baseTypeToInterfaceMethod;
+
         internal TearOffProxy(ICreateServiceChannel serviceChannelCreator, Type proxiedType)
             : base(proxiedType)
         {
@@ -30,7 +31,6 @@ namespace System.ServiceModel.ComIntegration
 
         public override IMessage Invoke(IMessage message)
         {
-
             RealProxy delegatingProxy = null;
             IMethodCallMessage msg = message as IMethodCallMessage;
             try
@@ -42,7 +42,15 @@ namespace System.ServiceModel.ComIntegration
                 if (Fx.IsFatal(e))
                     throw;
 
-                return new ReturnMessage(DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(e.GetBaseException().Message, Marshal.GetHRForException(e.GetBaseException()))), msg);
+                return new ReturnMessage(
+                    DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            e.GetBaseException().Message,
+                            Marshal.GetHRForException(e.GetBaseException())
+                        )
+                    ),
+                    msg
+                );
             }
 
             MethodBase typeMethod = msg.MethodBase;
@@ -58,11 +66,27 @@ namespace System.ServiceModel.ComIntegration
                 if ((returnMsg == null) || (returnMsg.Exception == null))
                     return msgReturned;
                 else
-                    return new ReturnMessage(DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(returnMsg.Exception.GetBaseException().Message, Marshal.GetHRForException(returnMsg.Exception.GetBaseException()))), msg);
+                    return new ReturnMessage(
+                        DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new COMException(
+                                returnMsg.Exception.GetBaseException().Message,
+                                Marshal.GetHRForException(returnMsg.Exception.GetBaseException())
+                            )
+                        ),
+                        msg
+                    );
             }
             else
             {
-                return new ReturnMessage(DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.OperationNotFound, typeMethod.Name), HR.DISP_E_UNKNOWNNAME)), msg);
+                return new ReturnMessage(
+                    DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            SR.GetString(SR.OperationNotFound, typeMethod.Name),
+                            HR.DISP_E_UNKNOWNNAME
+                        )
+                    ),
+                    msg
+                );
             }
         }
 

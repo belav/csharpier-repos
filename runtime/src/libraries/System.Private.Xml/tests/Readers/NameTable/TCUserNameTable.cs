@@ -13,7 +13,12 @@ namespace System.Xml.NameTableTests
         {
             // for function v1
             {
-                this.AddChild(new CVariation(v1) { Attribute = new Variation("Read xml file using custom name table") });
+                this.AddChild(
+                    new CVariation(v1)
+                    {
+                        Attribute = new Variation("Read xml file using custom name table"),
+                    }
+                );
             }
         }
     }

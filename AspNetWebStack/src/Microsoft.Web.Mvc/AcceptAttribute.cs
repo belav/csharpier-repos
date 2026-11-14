@@ -31,7 +31,11 @@ namespace Microsoft.Web.Mvc
             get { return MimeTypesParsed.Aggregate((left, right) => left + ", " + right); }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "These strings are normalized to lowercase because they are presented to the user in lowercase format")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "These strings are normalized to lowercase because they are presented to the user in lowercase format"
+        )]
         private string MimeTypesNormalized
         {
             get { return MimeTypes.Replace(" ", String.Empty).ToLowerInvariant(); }
@@ -44,15 +48,23 @@ namespace Microsoft.Web.Mvc
 
         public override string FormatErrorMessage(string name)
         {
-            return String.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, MimeTypesFormatted);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                ErrorMessageString,
+                name,
+                MimeTypesFormatted
+            );
         }
 
-        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             var rule = new ModelClientValidationRule
             {
                 ValidationType = "accept",
-                ErrorMessage = FormatErrorMessage(metadata.GetDisplayName())
+                ErrorMessage = FormatErrorMessage(metadata.GetDisplayName()),
             };
             rule.ValidationParameters["mimetype"] = MimeTypesNormalized;
             yield return rule;
@@ -80,7 +92,11 @@ namespace Microsoft.Web.Mvc
             return false;
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "These strings are normalized to lowercase because they are presented to the user in lowercase format")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "These strings are normalized to lowercase because they are presented to the user in lowercase format"
+        )]
         private bool ValidateMimeTypes(string mimeType)
         {
             return MimeTypesParsed.Contains(mimeType.ToLowerInvariant());

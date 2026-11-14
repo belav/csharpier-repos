@@ -7,31 +7,36 @@ namespace System.Runtime.Serialization.Configuration
     using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
 
     public sealed partial class NetDataContractSerializerSection : ConfigurationSection
     {
         public NetDataContractSerializerSection()
-            : base()
-        {
-        }
+            : base() { }
 
-        [Fx.Tag.SecurityNote(Critical = "Elevates in order to get the NetDataContractSerializerSection config section."
-            + " Caller should not leak config section instance to untrusted code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Elevates in order to get the NetDataContractSerializerSection config section."
+                + " Caller should not leak config section instance to untrusted code."
+        )]
         [SecurityCritical]
         [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
         internal static bool TryUnsafeGetSection(out NetDataContractSerializerSection section)
         {
-            section = (NetDataContractSerializerSection)ConfigurationManager.GetSection(ConfigurationStrings.NetDataContractSerializerSectionPath);
+            section = (NetDataContractSerializerSection)
+                ConfigurationManager.GetSection(
+                    ConfigurationStrings.NetDataContractSerializerSectionPath
+                );
             return section != null;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.EnableUnsafeTypeForwarding, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.EnableUnsafeTypeForwarding,
+            DefaultValue = false
+        )]
         public bool EnableUnsafeTypeForwarding
         {
             get { return (bool)base[ConfigurationStrings.EnableUnsafeTypeForwarding]; }
         }
     }
-
 }

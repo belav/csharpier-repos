@@ -14,30 +14,23 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public static readonly ISyntaxHelper Instance = new CSharpSyntaxHelper();
 
-        private CSharpSyntaxHelper()
-        {
-        }
+        private CSharpSyntaxHelper() { }
 
-        public override bool IsCaseSensitive
-            => true;
+        public override bool IsCaseSensitive => true;
 
-        protected override int AttributeListKind
-            => (int)SyntaxKind.AttributeList;
+        protected override int AttributeListKind => (int)SyntaxKind.AttributeList;
 
-        public override bool IsValidIdentifier(string name)
-            => SyntaxFacts.IsValidIdentifier(name);
+        public override bool IsValidIdentifier(string name) => SyntaxFacts.IsValidIdentifier(name);
 
-        public override bool IsAnyNamespaceBlock(SyntaxNode node)
-            => node is BaseNamespaceDeclarationSyntax;
+        public override bool IsAnyNamespaceBlock(SyntaxNode node) =>
+            node is BaseNamespaceDeclarationSyntax;
 
-        public override bool IsAttribute(SyntaxNode node)
-            => node is AttributeSyntax;
+        public override bool IsAttribute(SyntaxNode node) => node is AttributeSyntax;
 
-        public override SyntaxNode GetNameOfAttribute(SyntaxNode node)
-            => ((AttributeSyntax)node).Name;
+        public override SyntaxNode GetNameOfAttribute(SyntaxNode node) =>
+            ((AttributeSyntax)node).Name;
 
-        public override bool IsAttributeList(SyntaxNode node)
-            => node is AttributeListSyntax;
+        public override bool IsAttributeList(SyntaxNode node) => node is AttributeListSyntax;
 
         public override void AddAttributeTargets(SyntaxNode node, ArrayBuilder<SyntaxNode> targets)
         {
@@ -54,22 +47,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                 targets.Add(container);
         }
 
-        public override SeparatedSyntaxList<SyntaxNode> GetAttributesOfAttributeList(SyntaxNode node)
-            => ((AttributeListSyntax)node).Attributes;
+        public override SeparatedSyntaxList<SyntaxNode> GetAttributesOfAttributeList(
+            SyntaxNode node
+        ) => ((AttributeListSyntax)node).Attributes;
 
-        public override bool IsLambdaExpression(SyntaxNode node)
-            => node is LambdaExpressionSyntax;
+        public override bool IsLambdaExpression(SyntaxNode node) => node is LambdaExpressionSyntax;
 
-        public override string GetUnqualifiedIdentifierOfName(SyntaxNode node)
-            => ((NameSyntax)node).GetUnqualifiedName().Identifier.ValueText;
+        public override string GetUnqualifiedIdentifierOfName(SyntaxNode node) =>
+            ((NameSyntax)node).GetUnqualifiedName().Identifier.ValueText;
 
-        public override void AddAliases(GreenNode node, ArrayBuilder<(string aliasName, string symbolName)> aliases, bool global)
+        public override void AddAliases(
+            GreenNode node,
+            ArrayBuilder<(string aliasName, string symbolName)> aliases,
+            bool global
+        )
         {
             if (node is Syntax.InternalSyntax.CompilationUnitSyntax compilationUnit)
             {
                 AddAliases(compilationUnit.Usings, aliases, global);
             }
-            else if (node is Syntax.InternalSyntax.BaseNamespaceDeclarationSyntax namespaceDeclaration)
+            else if (
+                node is Syntax.InternalSyntax.BaseNamespaceDeclarationSyntax namespaceDeclaration
+            )
             {
                 AddAliases(namespaceDeclaration.Usings, aliases, global);
             }
@@ -82,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void AddAliases(
             CodeAnalysis.Syntax.InternalSyntax.SyntaxList<Syntax.InternalSyntax.UsingDirectiveSyntax> usings,
             ArrayBuilder<(string aliasName, string symbolName)> aliases,
-            bool global)
+            bool global
+        )
         {
             foreach (var usingDirective in usings)
             {
@@ -103,8 +103,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private static Syntax.InternalSyntax.SimpleNameSyntax GetUnqualifiedName(Syntax.InternalSyntax.NameSyntax name)
-            => name switch
+        private static Syntax.InternalSyntax.SimpleNameSyntax GetUnqualifiedName(
+            Syntax.InternalSyntax.NameSyntax name
+        ) =>
+            name switch
             {
                 Syntax.InternalSyntax.AliasQualifiedNameSyntax alias => alias.Name,
                 Syntax.InternalSyntax.QualifiedNameSyntax qualified => qualified.Right,
@@ -112,7 +114,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _ => throw ExceptionUtilities.UnexpectedValue(name.KindText),
             };
 
-        public override void AddAliases(CompilationOptions compilation, ArrayBuilder<(string aliasName, string symbolName)> aliases)
+        public override void AddAliases(
+            CompilationOptions compilation,
+            ArrayBuilder<(string aliasName, string symbolName)> aliases
+        )
         {
             // C# doesn't have global aliases at the compilation-options, only the compilation-unit level.
             return;
@@ -127,8 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var directive in compilationUnit.Usings)
             {
-                if (directive.GlobalKeyword != null &&
-                    directive.Alias != null)
+                if (directive.GlobalKeyword != null && directive.Alias != null)
                 {
                     return true;
                 }

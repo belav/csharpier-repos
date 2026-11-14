@@ -13,12 +13,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal static class DiagnosticExtensions
     {
-        public static void Verify(this IEnumerable<DiagnosticInfo> actual, params DiagnosticDescription[] expected)
+        public static void Verify(
+            this IEnumerable<DiagnosticInfo> actual,
+            params DiagnosticDescription[] expected
+        )
         {
             actual.Select(info => new CSDiagnostic(info, NoLocation.Singleton)).Verify(expected);
         }
 
-        public static void Verify(this ImmutableArray<DiagnosticInfo> actual, params DiagnosticDescription[] expected)
+        public static void Verify(
+            this ImmutableArray<DiagnosticInfo> actual,
+            params DiagnosticDescription[] expected
+        )
         {
             actual.Select(info => new CSDiagnostic(info, NoLocation.Singleton)).Verify(expected);
         }

@@ -3,12 +3,12 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.Xml;
-    using System.ComponentModel;
 
     public sealed class PeerSecuritySettings
     {
@@ -58,7 +58,8 @@ namespace System.ServiceModel
         {
             get
             {
-                return this.Mode == SecurityMode.Transport || this.Mode == SecurityMode.TransportWithMessageCredential;
+                return this.Mode == SecurityMode.Transport
+                    || this.Mode == SecurityMode.TransportWithMessageCredential;
             }
         }
 
@@ -66,8 +67,15 @@ namespace System.ServiceModel
         {
             get
             {
-                System.Net.Security.ProtectionLevel level = System.Net.Security.ProtectionLevel.None;
-                if (this.Mode == SecurityMode.Message || this.Mode == SecurityMode.TransportWithMessageCredential)
+                System.Net.Security.ProtectionLevel level = System
+                    .Net
+                    .Security
+                    .ProtectionLevel
+                    .None;
+                if (
+                    this.Mode == SecurityMode.Message
+                    || this.Mode == SecurityMode.TransportWithMessageCredential
+                )
                 {
                     level = System.Net.Security.ProtectionLevel.Sign;
                 }
@@ -75,12 +83,14 @@ namespace System.ServiceModel
             }
         }
 
-
         internal void OnImportPolicy(MetadataImporter importer, PolicyConversionContext context)
         {
-            XmlElement element = PolicyConversionContext.FindAssertion(context.GetBindingAssertions(),
-                                    PeerTransportPolicyConstants.PeerTransportSecurityMode,
-                                    TransportPolicyConstants.PeerTransportUri, true);
+            XmlElement element = PolicyConversionContext.FindAssertion(
+                context.GetBindingAssertions(),
+                PeerTransportPolicyConstants.PeerTransportSecurityMode,
+                TransportPolicyConstants.PeerTransportUri,
+                true
+            );
 
             this.Mode = SecurityMode.Transport;
             if (element != null)
@@ -121,16 +131,21 @@ namespace System.ServiceModel
                     assertion = PeerTransportPolicyConstants.PeerTransportSecurityModeMessage;
                     break;
                 case SecurityMode.TransportWithMessageCredential:
-                    assertion = PeerTransportPolicyConstants.PeerTransportSecurityModeTransportWithMessageCredential;
+                    assertion =
+                        PeerTransportPolicyConstants.PeerTransportSecurityModeTransportWithMessageCredential;
                     break;
                 default:
                     Fx.Assert("Unsupported value for PeerSecuritySettings.Mode");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
             }
             XmlDocument doc = new XmlDocument();
-            XmlElement element = doc.CreateElement(PeerTransportPolicyConstants.PeerTransportPrefix,
-                                                   PeerTransportPolicyConstants.PeerTransportSecurityMode,
-                                                   TransportPolicyConstants.PeerTransportUri);
+            XmlElement element = doc.CreateElement(
+                PeerTransportPolicyConstants.PeerTransportPrefix,
+                PeerTransportPolicyConstants.PeerTransportSecurityMode,
+                TransportPolicyConstants.PeerTransportUri
+            );
             element.InnerText = assertion;
             context.GetBindingAssertions().Add(element);
             transportSecurity.OnExportPolicy(exporter, context);
@@ -138,8 +153,7 @@ namespace System.ServiceModel
 
         internal bool InternalShouldSerialize()
         {
-            return this.ShouldSerializeMode()
-                || this.ShouldSerializeTransport();
+            return this.ShouldSerializeMode() || this.ShouldSerializeTransport();
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -151,8 +165,8 @@ namespace System.ServiceModel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeTransport()
         {
-            return this.Transport.CredentialType != PeerTransportSecuritySettings.DefaultCredentialType;
+            return this.Transport.CredentialType
+                != PeerTransportSecuritySettings.DefaultCredentialType;
         }
     }
 }
-

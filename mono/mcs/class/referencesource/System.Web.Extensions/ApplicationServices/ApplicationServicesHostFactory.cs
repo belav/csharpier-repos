@@ -8,21 +8,27 @@ using System.Diagnostics.CodeAnalysis;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 
-namespace System.Web.ApplicationServices {
-
-    public class ApplicationServicesHostFactory : ServiceHostFactory {
-        protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses) {
+namespace System.Web.ApplicationServices
+{
+    public class ApplicationServicesHostFactory : ServiceHostFactory
+    {
+        protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
+        {
             ServiceHost host = null;
-            if (typeof(ProfileService).Equals(serviceType)) {
+            if (typeof(ProfileService).Equals(serviceType))
+            {
                 host = new ServiceHost(new ProfileService(), baseAddresses);
             }
-            else if (typeof(RoleService).Equals(serviceType)) {
+            else if (typeof(RoleService).Equals(serviceType))
+            {
                 host = new ServiceHost(new RoleService(), baseAddresses);
             }
-            else if (typeof(AuthenticationService).Equals(serviceType)) {
+            else if (typeof(AuthenticationService).Equals(serviceType))
+            {
                 host = new ServiceHost(new AuthenticationService(), baseAddresses);
             }
-            else {
+            else
+            {
                 host = base.CreateServiceHost(serviceType, baseAddresses);
             }
             return host;

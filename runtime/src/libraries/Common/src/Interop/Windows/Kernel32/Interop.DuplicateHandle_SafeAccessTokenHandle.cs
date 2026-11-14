@@ -18,6 +18,7 @@ internal static partial class Interop
             out SafeAccessTokenHandle lpTargetHandle,
             uint dwDesiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle,
-            uint dwOptions);
+            uint dwOptions
+        );
     }
 }

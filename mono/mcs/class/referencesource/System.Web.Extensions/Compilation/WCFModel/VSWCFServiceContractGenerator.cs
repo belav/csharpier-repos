@@ -8,18 +8,19 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.Xml;
 using System.Xml.Schema;
-using System.Security.Permissions;
-using System.Linq;
-
+using Debug = System.Diagnostics.Debug;
 #if WEB_EXTENSIONS_CODE
 using System.Security;
 using System.Web.Resources;
@@ -31,10 +32,7 @@ using Microsoft.VSDesigner.WCF.Resources;
 /// The VSWCFServiceContractGenerator takes a SvcMap file and it's associated metadata,
 /// imports the metadata using a WsdlImporter and System.ServiceModel.ServiceContractGenerator
 /// that are configured according to the options set in the SvcMap file
-/// 
-using Debug = System.Diagnostics.Debug;
-using System.Diagnostics.CodeAnalysis;
-
+///
 #if WEB_EXTENSIONS_CODE
 namespace System.Web.Compilation.WCFModel
 #else
@@ -45,11 +43,11 @@ namespace Microsoft.VSDesigner.WCFModel
     /// Proxy and configuration generator
     /// </summary>
 #if WEB_EXTENSIONS_CODE
-    [PermissionSet(SecurityAction.InheritanceDemand, Name="FullTrust")]    
+    [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
     [SecurityCritical]
     internal class VSWCFServiceContractGenerator
 #else
-    // We only check for CLS compliant for the public version of this class since the 
+    // We only check for CLS compliant for the public version of this class since the
     // compiler will complain about CLS compliance not being checked for non-public classes
     [CLSCompliant(true)]
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
@@ -57,7 +55,6 @@ namespace Microsoft.VSDesigner.WCFModel
     public class VSWCFServiceContractGenerator
 #endif
     {
-
         #region Private backing fields
         private const string VB_LANGUAGE_NAME = "vb";
 
@@ -79,7 +76,10 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <summary>
         /// Map from service endpoint to the channel endpoint that was actually imported
         /// </summary>
-        private Dictionary<ServiceEndpoint, ChannelEndpointElement> serviceEndpointToChannelEndpointElementMap;
+        private Dictionary<
+            ServiceEndpoint,
+            ChannelEndpointElement
+        > serviceEndpointToChannelEndpointElementMap;
 
         /// <summary>
         /// List of contract types generate by this generator
@@ -118,12 +118,9 @@ namespace Microsoft.VSDesigner.WCFModel
         private const int FRAMEWORK_VERSION_35 = 0x30005;
 
         /// <summary>
-        /// list of types which are new in the 3.5 framework. 
+        /// list of types which are new in the 3.5 framework.
         /// </summary>
-        private static Type[] unsupportedTypesInFramework30 = new Type[] {
-            typeof(DateTimeOffset),
-        };
-
+        private static Type[] unsupportedTypesInFramework30 = new Type[] { typeof(DateTimeOffset) };
 
         #endregion
 
@@ -265,7 +262,9 @@ namespace Microsoft.VSDesigner.WCFModel
             {
                 if (outAttribute == null)
                 {
-                    outAttribute = new CodeAttributeDeclaration(typeof(System.Runtime.InteropServices.OutAttribute).FullName);
+                    outAttribute = new CodeAttributeDeclaration(
+                        typeof(System.Runtime.InteropServices.OutAttribute).FullName
+                    );
                 }
                 return outAttribute;
             }
@@ -284,25 +283,37 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="proxyGeneratedContractTypes"></param>
         /// <param name="proxyGenerationErrors"></param>
         protected VSWCFServiceContractGenerator(
-                List<ProxyGenerationError> importErrors,
-                CodeCompileUnit targetCompileUnit,
-                System.Configuration.Configuration targetConfiguration,
-                IEnumerable<System.ServiceModel.Channels.Binding> bindingCollection,
-                IEnumerable<ContractDescription> contractCollection,
-                List<ServiceEndpoint> serviceEndpointList,
-                Dictionary<ServiceEndpoint, ChannelEndpointElement> serviceEndpointToChannelEndpointElementMap,
-                List<GeneratedContractType> proxyGeneratedContractTypes,
-                IEnumerable<ProxyGenerationError> proxyGenerationErrors)
+            List<ProxyGenerationError> importErrors,
+            CodeCompileUnit targetCompileUnit,
+            System.Configuration.Configuration targetConfiguration,
+            IEnumerable<System.ServiceModel.Channels.Binding> bindingCollection,
+            IEnumerable<ContractDescription> contractCollection,
+            List<ServiceEndpoint> serviceEndpointList,
+            Dictionary<
+                ServiceEndpoint,
+                ChannelEndpointElement
+            > serviceEndpointToChannelEndpointElementMap,
+            List<GeneratedContractType> proxyGeneratedContractTypes,
+            IEnumerable<ProxyGenerationError> proxyGenerationErrors
+        )
         {
-            if (importErrors == null) throw new ArgumentNullException("importErrors");
-            if (targetCompileUnit == null) throw new ArgumentNullException("targetCompileUnit");
+            if (importErrors == null)
+                throw new ArgumentNullException("importErrors");
+            if (targetCompileUnit == null)
+                throw new ArgumentNullException("targetCompileUnit");
             // Please note - target configuration may be NULL
-            if (bindingCollection == null) throw new ArgumentNullException("bindingCollection");
-            if (contractCollection == null) throw new ArgumentNullException("contractCollection");
-            if (serviceEndpointList == null) throw new ArgumentNullException("serviceEndpointList");
-            if (serviceEndpointToChannelEndpointElementMap == null) throw new ArgumentNullException("serviceEndpointToChannelEndpointElementMap");
-            if (proxyGeneratedContractTypes == null) throw new ArgumentNullException("proxyGeneratedContractTypes");
-            if (proxyGenerationErrors == null) throw new ArgumentNullException("proxyGenerationErrors");
+            if (bindingCollection == null)
+                throw new ArgumentNullException("bindingCollection");
+            if (contractCollection == null)
+                throw new ArgumentNullException("contractCollection");
+            if (serviceEndpointList == null)
+                throw new ArgumentNullException("serviceEndpointList");
+            if (serviceEndpointToChannelEndpointElementMap == null)
+                throw new ArgumentNullException("serviceEndpointToChannelEndpointElementMap");
+            if (proxyGeneratedContractTypes == null)
+                throw new ArgumentNullException("proxyGeneratedContractTypes");
+            if (proxyGenerationErrors == null)
+                throw new ArgumentNullException("proxyGenerationErrors");
 
             this.importErrors = importErrors;
             this.targetCompileUnit = targetCompileUnit;
@@ -310,13 +321,14 @@ namespace Microsoft.VSDesigner.WCFModel
             this.bindingCollection = bindingCollection;
             this.contractCollection = contractCollection;
             this.serviceEndpointList = serviceEndpointList;
-            this.serviceEndpointToChannelEndpointElementMap = serviceEndpointToChannelEndpointElementMap;
+            this.serviceEndpointToChannelEndpointElementMap =
+                serviceEndpointToChannelEndpointElementMap;
             this.proxyGeneratedContractTypes = proxyGeneratedContractTypes;
             this.proxyGenerationErrors = proxyGenerationErrors;
         }
 
         /// <summary>
-        /// Factory method: generate code and return the resulting VSWCFServiceContractGenerator. 
+        /// Factory method: generate code and return the resulting VSWCFServiceContractGenerator.
         /// </summary>
         /// <param name="svcMapFile">
         /// The SvcMapFile that lists the metadata and generation options for the service reference.
@@ -356,45 +368,54 @@ namespace Microsoft.VSDesigner.WCFModel
         /// A VSWCFServiceContractGenerator instance that contains the result of the generation. To get
         /// hold of the generated information, you can query it's properties.
         /// </returns>
-        public static VSWCFServiceContractGenerator GenerateCodeAndConfiguration(SvcMapFile svcMapFile,
-                                             System.Configuration.Configuration toolConfiguration,
-                                             System.CodeDom.Compiler.CodeDomProvider codeDomProvider,
-                                             string proxyNamespace,
-                                             System.Configuration.Configuration targetConfiguration,
-                                             string configurationNamespace,
-                                             IServiceProvider serviceProviderForImportExtensions,
-                                             IContractGeneratorReferenceTypeLoader typeLoader,
-                                             int targetFrameworkVersion,
-                                             System.Type typedDataSetSchemaImporterExtension)
+        public static VSWCFServiceContractGenerator GenerateCodeAndConfiguration(
+            SvcMapFile svcMapFile,
+            System.Configuration.Configuration toolConfiguration,
+            System.CodeDom.Compiler.CodeDomProvider codeDomProvider,
+            string proxyNamespace,
+            System.Configuration.Configuration targetConfiguration,
+            string configurationNamespace,
+            IServiceProvider serviceProviderForImportExtensions,
+            IContractGeneratorReferenceTypeLoader typeLoader,
+            int targetFrameworkVersion,
+            System.Type typedDataSetSchemaImporterExtension
+        )
         {
-            if (svcMapFile == null) throw new ArgumentNullException("svcMapFile");
-            if (codeDomProvider == null) throw new ArgumentNullException("codeDomProvider");
-            if (typedDataSetSchemaImporterExtension == null) throw new ArgumentNullException("typedDataSetSchemaImporterExtension");
+            if (svcMapFile == null)
+                throw new ArgumentNullException("svcMapFile");
+            if (codeDomProvider == null)
+                throw new ArgumentNullException("codeDomProvider");
+            if (typedDataSetSchemaImporterExtension == null)
+                throw new ArgumentNullException("typedDataSetSchemaImporterExtension");
 
             List<ProxyGenerationError> importErrors = new List<ProxyGenerationError>();
             List<ProxyGenerationError> proxyGenerationErrors = new List<ProxyGenerationError>();
 
             CodeCompileUnit targetCompileUnit = new CodeCompileUnit();
 
-            WsdlImporter wsdlImporter = CreateWsdlImporter(svcMapFile,
-                                                           toolConfiguration,
-                                                           targetCompileUnit,
-                                                           codeDomProvider,
-                                                           proxyNamespace,
-                                                           serviceProviderForImportExtensions,
-                                                           typeLoader,
-                                                           targetFrameworkVersion,
-                                                           importErrors,
-                                                           typedDataSetSchemaImporterExtension);
+            WsdlImporter wsdlImporter = CreateWsdlImporter(
+                svcMapFile,
+                toolConfiguration,
+                targetCompileUnit,
+                codeDomProvider,
+                proxyNamespace,
+                serviceProviderForImportExtensions,
+                typeLoader,
+                targetFrameworkVersion,
+                importErrors,
+                typedDataSetSchemaImporterExtension
+            );
 
-            ServiceContractGenerator contractGenerator = CreateContractGenerator(svcMapFile.ClientOptions,
-                                                                                wsdlImporter,
-                                                                                targetCompileUnit,
-                                                                                proxyNamespace,
-                                                                                targetConfiguration,
-                                                                                typeLoader,
-                                                                                targetFrameworkVersion,
-                                                                                importErrors);
+            ServiceContractGenerator contractGenerator = CreateContractGenerator(
+                svcMapFile.ClientOptions,
+                wsdlImporter,
+                targetCompileUnit,
+                proxyNamespace,
+                targetConfiguration,
+                typeLoader,
+                targetFrameworkVersion,
+                importErrors
+            );
 
             try
             {
@@ -402,67 +423,79 @@ namespace Microsoft.VSDesigner.WCFModel
                 IEnumerable<System.ServiceModel.Channels.Binding> bindingCollection;
                 IEnumerable<ContractDescription> contractCollection;
 
-                ImportWCFModel(wsdlImporter,
-                                 targetCompileUnit,
-                                 importErrors,
-                                 out serviceEndpointList,
-                                 out bindingCollection,
-                                 out contractCollection);
+                ImportWCFModel(
+                    wsdlImporter,
+                    targetCompileUnit,
+                    importErrors,
+                    out serviceEndpointList,
+                    out bindingCollection,
+                    out contractCollection
+                );
 
-                Dictionary<ServiceEndpoint, ChannelEndpointElement> serviceEndpointToChannelEndpointElementMap;
+                Dictionary<
+                    ServiceEndpoint,
+                    ChannelEndpointElement
+                > serviceEndpointToChannelEndpointElementMap;
                 List<GeneratedContractType> proxyGeneratedContractTypes;
 
-                GenerateProxy(wsdlImporter,
-                              contractGenerator,
-                              targetCompileUnit,
-                              proxyNamespace,
-                              configurationNamespace,
-                              contractCollection,
-                              bindingCollection,
-                              serviceEndpointList,
-                              proxyGenerationErrors,
-                              out serviceEndpointToChannelEndpointElementMap,
-                              out proxyGeneratedContractTypes);
+                GenerateProxy(
+                    wsdlImporter,
+                    contractGenerator,
+                    targetCompileUnit,
+                    proxyNamespace,
+                    configurationNamespace,
+                    contractCollection,
+                    bindingCollection,
+                    serviceEndpointList,
+                    proxyGenerationErrors,
+                    out serviceEndpointToChannelEndpointElementMap,
+                    out proxyGeneratedContractTypes
+                );
 
                 if (IsVBCodeDomProvider(codeDomProvider))
                 {
                     PatchOutParametersInVB(targetCompileUnit);
                 }
 
-                return new VSWCFServiceContractGenerator(importErrors,
-                                                         targetCompileUnit,
-                                                         targetConfiguration,
-                                                         bindingCollection,
-                                                         contractCollection,
-                                                         serviceEndpointList,
-                                                         serviceEndpointToChannelEndpointElementMap,
-                                                         proxyGeneratedContractTypes,
-                                                         proxyGenerationErrors);
+                return new VSWCFServiceContractGenerator(
+                    importErrors,
+                    targetCompileUnit,
+                    targetConfiguration,
+                    bindingCollection,
+                    contractCollection,
+                    serviceEndpointList,
+                    serviceEndpointToChannelEndpointElementMap,
+                    proxyGeneratedContractTypes,
+                    proxyGenerationErrors
+                );
             }
             catch (Exception ex)
             {
                 // fatal error... (workaround for bug #135242)
                 // We want to convert fatal error exception to a normal code generator error message,
                 // so the user could find information from pervious errors to find KB topic.
-                proxyGenerationErrors.Add(new ProxyGenerationError(
-                                    ProxyGenerationError.GeneratorState.GenerateCode,
-                                    String.Empty,
-                                    ex,
-                                    false));
+                proxyGenerationErrors.Add(
+                    new ProxyGenerationError(
+                        ProxyGenerationError.GeneratorState.GenerateCode,
+                        String.Empty,
+                        ex,
+                        false
+                    )
+                );
 
-                return new VSWCFServiceContractGenerator(importErrors,
-                                                        new CodeCompileUnit(),
-                                                        targetConfiguration,
-                                                        new List<System.ServiceModel.Channels.Binding>(),
-                                                        new List<ContractDescription>(),
-                                                        new List<ServiceEndpoint>(),
-                                                        new Dictionary<ServiceEndpoint, ChannelEndpointElement>(),
-                                                        new List<GeneratedContractType>(),
-                                                        proxyGenerationErrors);
+                return new VSWCFServiceContractGenerator(
+                    importErrors,
+                    new CodeCompileUnit(),
+                    targetConfiguration,
+                    new List<System.ServiceModel.Channels.Binding>(),
+                    new List<ContractDescription>(),
+                    new List<ServiceEndpoint>(),
+                    new Dictionary<ServiceEndpoint, ChannelEndpointElement>(),
+                    new List<GeneratedContractType>(),
+                    proxyGenerationErrors
+                );
             }
-
         }
-
 
         /// <summary>
         /// Instantiate and configure a ServiceContractGenerator to be used for code and config
@@ -495,16 +528,21 @@ namespace Microsoft.VSDesigner.WCFModel
         /// The list into which we will add any errors while importing the metadata.
         /// </param>
         /// <returns></returns>
-        protected static ServiceContractGenerator CreateContractGenerator(ClientOptions proxyOptions,
-                                            WsdlImporter wsdlImporter,
-                                            CodeCompileUnit targetCompileUnit,
-                                            string proxyNamespace,
-                                            System.Configuration.Configuration targetConfiguration,
-                                            IContractGeneratorReferenceTypeLoader typeLoader,
-                                            int targetFrameworkVersion,
-                                            IList<ProxyGenerationError> importErrors)
+        protected static ServiceContractGenerator CreateContractGenerator(
+            ClientOptions proxyOptions,
+            WsdlImporter wsdlImporter,
+            CodeCompileUnit targetCompileUnit,
+            string proxyNamespace,
+            System.Configuration.Configuration targetConfiguration,
+            IContractGeneratorReferenceTypeLoader typeLoader,
+            int targetFrameworkVersion,
+            IList<ProxyGenerationError> importErrors
+        )
         {
-            ServiceContractGenerator contractGenerator = new ServiceContractGenerator(targetCompileUnit, targetConfiguration);
+            ServiceContractGenerator contractGenerator = new ServiceContractGenerator(
+                targetCompileUnit,
+                targetConfiguration
+            );
 
             // We want to generate all types into the proxy namespace CLR namespace. We indicate
             // this by adding a namespace mapping from all XML namespaces ("*") to the namespace
@@ -521,20 +559,23 @@ namespace Microsoft.VSDesigner.WCFModel
             }
 
             // Make sure at most one of the async options will be set: AsynchronousMethods | TaskBasedAsynchronousMethod.
-            contractGenerator.Options &= ~ServiceContractGenerationOptions.AsynchronousMethods &
-                                         ~ServiceContractGenerationOptions.EventBasedAsynchronousMethods &
-                                         ~ServiceContractGenerationOptions.TaskBasedAsynchronousMethod;
+            contractGenerator.Options &=
+                ~ServiceContractGenerationOptions.AsynchronousMethods
+                & ~ServiceContractGenerationOptions.EventBasedAsynchronousMethods
+                & ~ServiceContractGenerationOptions.TaskBasedAsynchronousMethod;
 
             if (proxyOptions.GenerateTaskBasedAsynchronousMethod)
             {
-                contractGenerator.Options |= ServiceContractGenerationOptions.TaskBasedAsynchronousMethod;
+                contractGenerator.Options |=
+                    ServiceContractGenerationOptions.TaskBasedAsynchronousMethod;
             }
             else if (proxyOptions.GenerateAsynchronousMethods)
             {
                 contractGenerator.Options |= ServiceContractGenerationOptions.AsynchronousMethods;
                 if (targetFrameworkVersion >= FRAMEWORK_VERSION_35)
                 {
-                    contractGenerator.Options |= ServiceContractGenerationOptions.EventBasedAsynchronousMethods;
+                    contractGenerator.Options |=
+                        ServiceContractGenerationOptions.EventBasedAsynchronousMethods;
                 }
             }
 
@@ -561,46 +602,79 @@ namespace Microsoft.VSDesigner.WCFModel
                         if (!IsTypeShareable(sharedType))
                         {
                             importErrors.Add(
-                                    new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.GenerateCode,
-                                        String.Empty,
-                                        new FormatException(String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_SharedTypeMustBePublic, mapping.TypeName)))
-                                );
+                                new ProxyGenerationError(
+                                    ProxyGenerationError.GeneratorState.GenerateCode,
+                                    String.Empty,
+                                    new FormatException(
+                                        String.Format(
+                                            CultureInfo.CurrentCulture,
+                                            WCFModelStrings.ReferenceGroup_SharedTypeMustBePublic,
+                                            mapping.TypeName
+                                        )
+                                    )
+                                )
+                            );
                             continue;
                         }
 
                         // Get a contract description corresponding to the type we wanted to share
                         ContractDescription contract = ContractDescription.GetContract(sharedType);
 
-                        if (!String.Equals(mapping.Name, contract.Name, StringComparison.Ordinal) ||
-                                !String.Equals(mapping.TargetNamespace, contract.Namespace, StringComparison.Ordinal))
+                        if (
+                            !String.Equals(mapping.Name, contract.Name, StringComparison.Ordinal)
+                            || !String.Equals(
+                                mapping.TargetNamespace,
+                                contract.Namespace,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             // mismatch
                             importErrors.Add(
-                                    new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.GenerateCode,
-                                        String.Empty,
-                                        new FormatException(String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_ServiceContractMappingMissMatch, mapping.TypeName, contract.Namespace, contract.Name, mapping.TargetNamespace, mapping.Name)))
-                                );
+                                new ProxyGenerationError(
+                                    ProxyGenerationError.GeneratorState.GenerateCode,
+                                    String.Empty,
+                                    new FormatException(
+                                        String.Format(
+                                            CultureInfo.CurrentCulture,
+                                            WCFModelStrings.ReferenceGroup_ServiceContractMappingMissMatch,
+                                            mapping.TypeName,
+                                            contract.Namespace,
+                                            contract.Name,
+                                            mapping.TargetNamespace,
+                                            mapping.Name
+                                        )
+                                    )
+                                )
+                            );
                         }
 
-                        XmlQualifiedName qname = new XmlQualifiedName(contract.Name, contract.Namespace);
+                        XmlQualifiedName qname = new XmlQualifiedName(
+                            contract.Name,
+                            contract.Namespace
+                        );
                         wsdlImporter.KnownContracts.Add(qname, contract);
                         contractGenerator.ReferencedTypes.Add(contract, sharedType);
                     }
                     catch (Exception ex)
                     {
-                        importErrors.Add(new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.GenerateCode,
-                                        String.Empty,
-                                        ex));
+                        importErrors.Add(
+                            new ProxyGenerationError(
+                                ProxyGenerationError.GeneratorState.GenerateCode,
+                                String.Empty,
+                                ex
+                            )
+                        );
                     }
                 }
             }
 
             foreach (NamespaceMapping namespaceMapping in proxyOptions.NamespaceMappingList)
             {
-                contractGenerator.NamespaceMappings.Add(namespaceMapping.TargetNamespace, namespaceMapping.ClrNamespace);
+                contractGenerator.NamespaceMappings.Add(
+                    namespaceMapping.TargetNamespace,
+                    namespaceMapping.ClrNamespace
+                );
             }
 
             return contractGenerator;
@@ -619,43 +693,64 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="proxyGenerationErrors">A list of errors encountered while generating the client</param>
         /// <param name="serviceEndpointToChannelEndpointElementMap">Map from service endpoint to the configuration element for the endpoint</param>
         /// <param name="proxyGeneratedContractTypes">The generated contract types</param>
-        protected static void GenerateProxy(WsdlImporter importer,
-                                            ServiceContractGenerator contractGenerator,
-                                            CodeCompileUnit targetCompileUnit,
-                                            string proxyNamespace,
-                                            string configurationNamespace,
-                                            IEnumerable<ContractDescription> contractCollection,
-                                            IEnumerable<System.ServiceModel.Channels.Binding> bindingCollection,
-                                            List<ServiceEndpoint> serviceEndpointList,
-                                            IList<ProxyGenerationError> proxyGenerationErrors,
-                                            out Dictionary<ServiceEndpoint, ChannelEndpointElement> serviceEndpointToChannelEndpointElementMap,
-                                            out List<GeneratedContractType> proxyGeneratedContractTypes)
+        protected static void GenerateProxy(
+            WsdlImporter importer,
+            ServiceContractGenerator contractGenerator,
+            CodeCompileUnit targetCompileUnit,
+            string proxyNamespace,
+            string configurationNamespace,
+            IEnumerable<ContractDescription> contractCollection,
+            IEnumerable<System.ServiceModel.Channels.Binding> bindingCollection,
+            List<ServiceEndpoint> serviceEndpointList,
+            IList<ProxyGenerationError> proxyGenerationErrors,
+            out Dictionary<
+                ServiceEndpoint,
+                ChannelEndpointElement
+            > serviceEndpointToChannelEndpointElementMap,
+            out List<GeneratedContractType> proxyGeneratedContractTypes
+        )
         {
             // Parameter checking
-            if (serviceEndpointList == null) throw new ArgumentNullException("serviceEndpointList");
-            if (bindingCollection == null) throw new ArgumentNullException("bindingCollection");
-            if (contractCollection == null) throw new ArgumentNullException("contractCollection");
-            if (proxyGenerationErrors == null) throw new ArgumentNullException("proxyGenerationErrors");
+            if (serviceEndpointList == null)
+                throw new ArgumentNullException("serviceEndpointList");
+            if (bindingCollection == null)
+                throw new ArgumentNullException("bindingCollection");
+            if (contractCollection == null)
+                throw new ArgumentNullException("contractCollection");
+            if (proxyGenerationErrors == null)
+                throw new ArgumentNullException("proxyGenerationErrors");
 
             proxyGeneratedContractTypes = new List<GeneratedContractType>();
-            serviceEndpointToChannelEndpointElementMap = new Dictionary<ServiceEndpoint, ChannelEndpointElement>();
+            serviceEndpointToChannelEndpointElementMap =
+                new Dictionary<ServiceEndpoint, ChannelEndpointElement>();
 
             try
             {
-                HttpBindingExtension httpBindingEx = importer.WsdlImportExtensions.Find<HttpBindingExtension>();
+                HttpBindingExtension httpBindingEx =
+                    importer.WsdlImportExtensions.Find<HttpBindingExtension>();
 
                 foreach (ContractDescription contract in contractCollection)
                 {
-                    if (httpBindingEx == null || !httpBindingEx.IsHttpBindingContract(contract) || serviceEndpointList.Any(endpoint => endpoint.Contract == contract))
+                    if (
+                        httpBindingEx == null
+                        || !httpBindingEx.IsHttpBindingContract(contract)
+                        || serviceEndpointList.Any(endpoint => endpoint.Contract == contract)
+                    )
                     {
-                        CodeTypeReference typeReference = contractGenerator.GenerateServiceContractType(contract);
+                        CodeTypeReference typeReference =
+                            contractGenerator.GenerateServiceContractType(contract);
                         if (typeReference != null)
                         {
                             // keep the (targetNamespace, portType) -> CLR type map table...
 
                             string baseType = typeReference.BaseType;
 
-                            GeneratedContractType generatedType = new GeneratedContractType(contract.Namespace, contract.Name, baseType, baseType);
+                            GeneratedContractType generatedType = new GeneratedContractType(
+                                contract.Namespace,
+                                contract.Name,
+                                baseType,
+                                baseType
+                            );
                             proxyGeneratedContractTypes.Add(generatedType);
                         }
                     }
@@ -671,21 +766,28 @@ namespace Microsoft.VSDesigner.WCFModel
                         serviceEndpointToChannelEndpointElementMap[endpoint] = endpointElement;
                     }
 
-                    foreach (System.ServiceModel.Channels.Binding bindingDescription in bindingCollection)
+                    foreach (
+                        System.ServiceModel.Channels.Binding bindingDescription in bindingCollection
+                    )
                     {
                         string bindingSectionName = null;
                         string bindingConfigurationName = null;
-                        // Generate binding will change the state of the contractGenerator... 
-                        contractGenerator.GenerateBinding(bindingDescription, out bindingSectionName, out bindingConfigurationName);
+                        // Generate binding will change the state of the contractGenerator...
+                        contractGenerator.GenerateBinding(
+                            bindingDescription,
+                            out bindingSectionName,
+                            out bindingConfigurationName
+                        );
                     }
-
                 }
 
-                PatchConfigurationName(proxyNamespace,
-                                       configurationNamespace,
-                                       proxyGeneratedContractTypes,
-                                       serviceEndpointToChannelEndpointElementMap.Values,
-                                       targetCompileUnit);
+                PatchConfigurationName(
+                    proxyNamespace,
+                    configurationNamespace,
+                    proxyGeneratedContractTypes,
+                    serviceEndpointToChannelEndpointElementMap.Values,
+                    targetCompileUnit
+                );
             }
             finally
             {
@@ -705,26 +807,39 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="proxyNamespace">CLR namespace we'll put the client code in</param>
         /// <returns></returns>
         protected static XmlSerializerImportOptions CreateXmlSerializerImportOptions(
-                                ClientOptions proxyOptions,
-                                CodeCompileUnit targetCompileUnit,
-                                System.CodeDom.Compiler.CodeDomProvider codeDomProvider,
-                                string proxyNamespace,
-                                System.Type typedDataSetSchemaImporterExtension)
+            ClientOptions proxyOptions,
+            CodeCompileUnit targetCompileUnit,
+            System.CodeDom.Compiler.CodeDomProvider codeDomProvider,
+            string proxyNamespace,
+            System.Type typedDataSetSchemaImporterExtension
+        )
         {
-            System.ServiceModel.Channels.XmlSerializerImportOptions xmlSerializerOptions = new XmlSerializerImportOptions(targetCompileUnit);
-            System.Web.Services.Description.WebReferenceOptions webReferenceOptions = new System.Web.Services.Description.WebReferenceOptions();
+            System.ServiceModel.Channels.XmlSerializerImportOptions xmlSerializerOptions =
+                new XmlSerializerImportOptions(targetCompileUnit);
+            System.Web.Services.Description.WebReferenceOptions webReferenceOptions =
+                new System.Web.Services.Description.WebReferenceOptions();
 
-            webReferenceOptions.CodeGenerationOptions = System.Xml.Serialization.CodeGenerationOptions.GenerateProperties | System.Xml.Serialization.CodeGenerationOptions.GenerateOrder;
+            webReferenceOptions.CodeGenerationOptions =
+                System.Xml.Serialization.CodeGenerationOptions.GenerateProperties
+                | System.Xml.Serialization.CodeGenerationOptions.GenerateOrder;
 
             if (proxyOptions.EnableDataBinding)
             {
-                webReferenceOptions.CodeGenerationOptions |= System.Xml.Serialization.CodeGenerationOptions.EnableDataBinding;
+                webReferenceOptions.CodeGenerationOptions |= System
+                    .Xml
+                    .Serialization
+                    .CodeGenerationOptions
+                    .EnableDataBinding;
             }
 
-            webReferenceOptions.SchemaImporterExtensions.Add(typedDataSetSchemaImporterExtension.AssemblyQualifiedName);
-            webReferenceOptions.SchemaImporterExtensions.Add(typeof(System.Data.DataSetSchemaImporterExtension).AssemblyQualifiedName);
+            webReferenceOptions.SchemaImporterExtensions.Add(
+                typedDataSetSchemaImporterExtension.AssemblyQualifiedName
+            );
+            webReferenceOptions.SchemaImporterExtensions.Add(
+                typeof(System.Data.DataSetSchemaImporterExtension).AssemblyQualifiedName
+            );
 
-            /* 
+            /*
 
 
 
@@ -764,16 +879,19 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="importErrors">List of errors encountered. New errors will be added to this list</param>
         /// <returns></returns>
         protected static XsdDataContractImporter CreateDataContractImporter(
-                ClientOptions proxyOptions,
-                CodeCompileUnit targetCompileUnit,
-                System.CodeDom.Compiler.CodeDomProvider codeDomProvider,
-                string proxyNamespace,
-                IContractGeneratorReferenceTypeLoader typeLoader,
-                int targetFrameworkVersion,
-                IList<ProxyGenerationError> importErrors)
+            ClientOptions proxyOptions,
+            CodeCompileUnit targetCompileUnit,
+            System.CodeDom.Compiler.CodeDomProvider codeDomProvider,
+            string proxyNamespace,
+            IContractGeneratorReferenceTypeLoader typeLoader,
+            int targetFrameworkVersion,
+            IList<ProxyGenerationError> importErrors
+        )
         {
-            System.Runtime.Serialization.XsdDataContractImporter xsdDataContractImporter = new System.Runtime.Serialization.XsdDataContractImporter(targetCompileUnit);
-            System.Runtime.Serialization.ImportOptions options = new System.Runtime.Serialization.ImportOptions();
+            System.Runtime.Serialization.XsdDataContractImporter xsdDataContractImporter =
+                new System.Runtime.Serialization.XsdDataContractImporter(targetCompileUnit);
+            System.Runtime.Serialization.ImportOptions options =
+                new System.Runtime.Serialization.ImportOptions();
 
             options.CodeProvider = codeDomProvider;
 
@@ -787,7 +905,12 @@ namespace Microsoft.VSDesigner.WCFModel
 
             if (typeLoader != null)
             {
-                IEnumerable<Type> referencedTypes = LoadSharedDataContractTypes(proxyOptions, typeLoader, targetFrameworkVersion, importErrors);
+                IEnumerable<Type> referencedTypes = LoadSharedDataContractTypes(
+                    proxyOptions,
+                    typeLoader,
+                    targetFrameworkVersion,
+                    importErrors
+                );
                 if (referencedTypes != null)
                 {
                     foreach (Type sharedType in referencedTypes)
@@ -796,7 +919,11 @@ namespace Microsoft.VSDesigner.WCFModel
                     }
                 }
 
-                IEnumerable<Type> referencedCollectionTypes = LoadSharedCollectionTypes(proxyOptions, typeLoader, importErrors);
+                IEnumerable<Type> referencedCollectionTypes = LoadSharedCollectionTypes(
+                    proxyOptions,
+                    typeLoader,
+                    importErrors
+                );
                 if (referencedCollectionTypes != null)
                 {
                     foreach (Type collectionType in referencedCollectionTypes)
@@ -804,12 +931,14 @@ namespace Microsoft.VSDesigner.WCFModel
                         options.ReferencedCollectionTypes.Add(collectionType);
                     }
                 }
-
             }
 
             foreach (NamespaceMapping namespaceMapping in proxyOptions.NamespaceMappingList)
             {
-                options.Namespaces.Add(namespaceMapping.TargetNamespace, namespaceMapping.ClrNamespace);
+                options.Namespaces.Add(
+                    namespaceMapping.TargetNamespace,
+                    namespaceMapping.ClrNamespace
+                );
             }
 
             xsdDataContractImporter.Options = options;
@@ -828,19 +957,34 @@ namespace Microsoft.VSDesigner.WCFModel
         /// A list of CLR types from referenced assemblies and/or specific types that we want to share
         /// </return>
         /// <remarks></remarks>
-        [SuppressMessage("Microsoft.Usage", "CA2301:EmbeddableTypesInContainersRule", MessageId = "sharedTypeTable", Justification = "This is used within VS to get the types from reference assemblies i.e., the reference assembly for a given assembly but not across assemblies - so com interop is not an issue.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2301:EmbeddableTypesInContainersRule",
+            MessageId = "sharedTypeTable",
+            Justification = "This is used within VS to get the types from reference assemblies i.e., the reference assembly for a given assembly but not across assemblies - so com interop is not an issue."
+        )]
         protected static IEnumerable<Type> LoadSharedDataContractTypes(
-                ClientOptions proxyOptions, IContractGeneratorReferenceTypeLoader typeLoader, int targetFrameworkVersion, IList<ProxyGenerationError> importErrors)
+            ClientOptions proxyOptions,
+            IContractGeneratorReferenceTypeLoader typeLoader,
+            int targetFrameworkVersion,
+            IList<ProxyGenerationError> importErrors
+        )
         {
-            if (typeLoader == null) throw new ArgumentNullException("typeLoader");
+            if (typeLoader == null)
+                throw new ArgumentNullException("typeLoader");
 
-            // the value in sharedTypeTable is why we add this type in the shared type list. 
+            // the value in sharedTypeTable is why we add this type in the shared type list.
             // if it is only added because it is in the referenced assembly, the value will be null, otherwise it contains the entry in the type inclusion list
             // if the type is also in the exclusion list, we will report an error if the type is comming from the inclusion list, but no error if it comes from a referenced assembly only.
-            Dictionary<Type, ReferencedType> sharedTypeTable = new Dictionary<Type, ReferencedType>();
+            Dictionary<Type, ReferencedType> sharedTypeTable =
+                new Dictionary<Type, ReferencedType>();
 
             // load all types in referencedAssemblies
-            IEnumerable<Assembly> referencedAssemblies = LoadReferenedAssemblies(proxyOptions, typeLoader, importErrors);
+            IEnumerable<Assembly> referencedAssemblies = LoadReferenedAssemblies(
+                proxyOptions,
+                typeLoader,
+                importErrors
+            );
             if (referencedAssemblies != null)
             {
                 foreach (Assembly referencedAssembly in referencedAssemblies)
@@ -848,7 +992,9 @@ namespace Microsoft.VSDesigner.WCFModel
                     var typeLoader2 = typeLoader as IContractGeneratorReferenceTypeLoader2;
                     if (typeLoader2 != null)
                     {
-                        foreach (Type sharedType in typeLoader2.LoadExportedTypes(referencedAssembly))
+                        foreach (
+                            Type sharedType in typeLoader2.LoadExportedTypes(referencedAssembly)
+                        )
                         {
                             sharedTypeTable.Add(sharedType, null);
                         }
@@ -860,7 +1006,7 @@ namespace Microsoft.VSDesigner.WCFModel
                         {
                             try
                             {
-                                // Do multi-targeting check by calling IContractGeneratorReferenceTypeLoader.LoadType().                            
+                                // Do multi-targeting check by calling IContractGeneratorReferenceTypeLoader.LoadType().
                                 if (typeLoader.LoadType(typeInAssembly.FullName) != null)
                                 {
                                     sharedTypeTable.Add(typeInAssembly, null);
@@ -879,7 +1025,9 @@ namespace Microsoft.VSDesigner.WCFModel
                                         ProxyGenerationError.GeneratorState.GenerateCode,
                                         String.Empty,
                                         ex,
-                                        true));
+                                        true
+                                    )
+                                );
                             }
                         }
                     }
@@ -897,11 +1045,18 @@ namespace Microsoft.VSDesigner.WCFModel
                     if (!IsTypeShareable(sharedType))
                     {
                         importErrors.Add(
-                                new ProxyGenerationError(
-                                    ProxyGenerationError.GeneratorState.GenerateCode,
-                                    String.Empty,
-                                    new FormatException(String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_SharedTypeMustBePublic, referencedType.TypeName)))
-                            );
+                            new ProxyGenerationError(
+                                ProxyGenerationError.GeneratorState.GenerateCode,
+                                String.Empty,
+                                new FormatException(
+                                    String.Format(
+                                        CultureInfo.CurrentCulture,
+                                        WCFModelStrings.ReferenceGroup_SharedTypeMustBePublic,
+                                        referencedType.TypeName
+                                    )
+                                )
+                            )
+                        );
                         continue;
                     }
 
@@ -909,10 +1064,13 @@ namespace Microsoft.VSDesigner.WCFModel
                 }
                 catch (Exception ex)
                 {
-                    importErrors.Add(new ProxyGenerationError(
-                                    ProxyGenerationError.GeneratorState.GenerateCode,
-                                    String.Empty,
-                                    ex));
+                    importErrors.Add(
+                        new ProxyGenerationError(
+                            ProxyGenerationError.GeneratorState.GenerateCode,
+                            String.Empty,
+                            ex
+                        )
+                    );
                 }
             }
 
@@ -928,10 +1086,19 @@ namespace Microsoft.VSDesigner.WCFModel
                         if (sharedTypeTable[sharedType] != null)
                         {
                             // error message
-                            importErrors.Add(new ProxyGenerationError(
-                                            ProxyGenerationError.GeneratorState.GenerateCode,
-                                            String.Empty,
-                                            new Exception(String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_DataContractExcludedAndIncluded, excludedType.TypeName))));
+                            importErrors.Add(
+                                new ProxyGenerationError(
+                                    ProxyGenerationError.GeneratorState.GenerateCode,
+                                    String.Empty,
+                                    new Exception(
+                                        String.Format(
+                                            CultureInfo.CurrentCulture,
+                                            WCFModelStrings.ReferenceGroup_DataContractExcludedAndIncluded,
+                                            excludedType.TypeName
+                                        )
+                                    )
+                                )
+                            );
                         }
                         sharedTypeTable.Remove(sharedType);
                     }
@@ -939,11 +1106,14 @@ namespace Microsoft.VSDesigner.WCFModel
                 catch (Exception ex)
                 {
                     // waring message for excludedTypes
-                    importErrors.Add(new ProxyGenerationError(
-                                    ProxyGenerationError.GeneratorState.GenerateCode,
-                                    String.Empty,
-                                    ex,
-                                    true));
+                    importErrors.Add(
+                        new ProxyGenerationError(
+                            ProxyGenerationError.GeneratorState.GenerateCode,
+                            String.Empty,
+                            ex,
+                            true
+                        )
+                    );
                 }
             }
 
@@ -964,7 +1134,6 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private static IEnumerable<Type> GetUnsupportedTypes(int targetFrameworkVersion)
         {
-
             if (targetFrameworkVersion < FRAMEWORK_VERSION_35)
             {
                 // NOTE: do we need load those types with typeLoader?
@@ -975,12 +1144,12 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// Ensure that the ConfigurationName attribute on service contracts and the channel endpoint elements all agree on the 
+        /// Ensure that the ConfigurationName attribute on service contracts and the channel endpoint elements all agree on the
         /// name of the service contract.
         /// We want to avoid having root/default namespace values persisted in config, since that would require us
         /// to update config whenever the default/root namespace changes, so we make sure that we exclude it
         /// from the ConfigurationName attribute and the channel endpoint element we generate.
-        /// 
+        ///
         /// For VB, the root namespace is not actually present in the generated code, so we typically don't have to
         /// do anything (the configuration and proxy namespaces are equal) but for C#, we need to strip out the
         /// default namespace.
@@ -1001,18 +1170,20 @@ namespace Microsoft.VSDesigner.WCFModel
         /// The compile unit into which we generated the client
         /// </param>
         private static void PatchConfigurationName(
-                                    string proxyNamespace,
-                                    string configNamespace,
-                                    IEnumerable<GeneratedContractType> generatedContracts,
-                                    IEnumerable<ChannelEndpointElement> endpoints,
-                                    CodeCompileUnit targetCompileUnit
-            )
+            string proxyNamespace,
+            string configNamespace,
+            IEnumerable<GeneratedContractType> generatedContracts,
+            IEnumerable<ChannelEndpointElement> endpoints,
+            CodeCompileUnit targetCompileUnit
+        )
         {
-
-            // Since the name has to match between configuration and the name we put in the ConfigurationName 
+            // Since the name has to match between configuration and the name we put in the ConfigurationName
             // attribute in code, we may have some patching to do - but only if the proxy namespace is not equal
             // to the configuration namespace...
-            if (configNamespace != null && !configNamespace.Equals(proxyNamespace, StringComparison.Ordinal))
+            if (
+                configNamespace != null
+                && !configNamespace.Equals(proxyNamespace, StringComparison.Ordinal)
+            )
             {
                 string proxyNamespaceHead = MakePeriodTerminatedNamespacePrefix(proxyNamespace);
                 string configNamespaceHead = MakePeriodTerminatedNamespacePrefix(configNamespace);
@@ -1020,22 +1191,34 @@ namespace Microsoft.VSDesigner.WCFModel
                 // We need to fix up the configuration name for all generated contracts...
                 foreach (GeneratedContractType contract in generatedContracts)
                 {
-                    contract.ConfigurationName = ReplaceNamespace(proxyNamespaceHead, configNamespaceHead, contract.ConfigurationName);
+                    contract.ConfigurationName = ReplaceNamespace(
+                        proxyNamespaceHead,
+                        configNamespaceHead,
+                        contract.ConfigurationName
+                    );
                 }
 
                 // ..and we need to fix up all elements in config...
                 foreach (ChannelEndpointElement endpoint in endpoints)
                 {
-                    endpoint.Contract = ReplaceNamespace(proxyNamespaceHead, configNamespaceHead, endpoint.Contract);
+                    endpoint.Contract = ReplaceNamespace(
+                        proxyNamespaceHead,
+                        configNamespaceHead,
+                        endpoint.Contract
+                    );
                 }
 
                 // ...and all ConfigurationName values in service contract attributes in the generated code as well...
-                PatchConfigurationNameInServiceContractAttribute(targetCompileUnit, proxyNamespace, configNamespace);
+                PatchConfigurationNameInServiceContractAttribute(
+                    targetCompileUnit,
+                    proxyNamespace,
+                    configNamespace
+                );
             }
         }
 
         /// <summary>
-        /// If the type name begins with the namespace specified in originalNamespace, replace the namespace 
+        /// If the type name begins with the namespace specified in originalNamespace, replace the namespace
         /// for the given type name with the namespace specified in the replacementNamespace parameter.
         /// </summary>
         /// <param name="originalNamespace">
@@ -1050,10 +1233,20 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <returns>
         /// The new type name (potentially the same as passed in)
         /// </returns>
-        private static string ReplaceNamespace(string originalNamespace, string replacementNamespace, string typeName)
+        private static string ReplaceNamespace(
+            string originalNamespace,
+            string replacementNamespace,
+            string typeName
+        )
         {
-            Debug.Assert(originalNamespace.Length == 0 || originalNamespace.EndsWith(".", StringComparison.Ordinal));
-            Debug.Assert(replacementNamespace.Length == 0 || replacementNamespace.EndsWith(".", StringComparison.Ordinal));
+            Debug.Assert(
+                originalNamespace.Length == 0
+                    || originalNamespace.EndsWith(".", StringComparison.Ordinal)
+            );
+            Debug.Assert(
+                replacementNamespace.Length == 0
+                    || replacementNamespace.EndsWith(".", StringComparison.Ordinal)
+            );
             Debug.Assert(typeName != null);
 
             if (typeName.StartsWith(originalNamespace, StringComparison.Ordinal))
@@ -1094,8 +1287,8 @@ namespace Microsoft.VSDesigner.WCFModel
 
         /// <summary>
         /// Determine if a type can be shared.
-        /// 
-        /// In order for a type to be shareable for service references, it has to be a 
+        ///
+        /// In order for a type to be shareable for service references, it has to be a
         /// public type...
         /// </summary>
         /// <param name="t"></param>
@@ -1119,7 +1312,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="importErrors"></param>
         /// <return></return>
         /// <remarks></remarks>
-        private static IEnumerable<Assembly> LoadReferenedAssemblies(ClientOptions proxyOptions, IContractGeneratorReferenceTypeLoader typeLoader, IList<ProxyGenerationError> importErrors)
+        private static IEnumerable<Assembly> LoadReferenedAssemblies(
+            ClientOptions proxyOptions,
+            IContractGeneratorReferenceTypeLoader typeLoader,
+            IList<ProxyGenerationError> importErrors
+        )
         {
             List<Assembly> referencedAssemblies = new List<Assembly>();
             if (proxyOptions.ReferenceAllAssemblies)
@@ -1134,11 +1331,14 @@ namespace Microsoft.VSDesigner.WCFModel
                         // treat as warning messages
                         foreach (Exception ex in loadingErrors)
                         {
-                            importErrors.Add(new ProxyGenerationError(
-                                            ProxyGenerationError.GeneratorState.GenerateCode,
-                                            String.Empty,
-                                            ex,
-                                            true));
+                            importErrors.Add(
+                                new ProxyGenerationError(
+                                    ProxyGenerationError.GeneratorState.GenerateCode,
+                                    String.Empty,
+                                    ex,
+                                    true
+                                )
+                            );
                         }
                     }
 
@@ -1149,10 +1349,13 @@ namespace Microsoft.VSDesigner.WCFModel
                 }
                 catch (Exception ex)
                 {
-                    importErrors.Add(new ProxyGenerationError(
-                                    ProxyGenerationError.GeneratorState.GenerateCode,
-                                    String.Empty,
-                                    ex));
+                    importErrors.Add(
+                        new ProxyGenerationError(
+                            ProxyGenerationError.GeneratorState.GenerateCode,
+                            String.Empty,
+                            ex
+                        )
+                    );
                 }
             }
 
@@ -1168,10 +1371,13 @@ namespace Microsoft.VSDesigner.WCFModel
                 }
                 catch (Exception ex)
                 {
-                    importErrors.Add(new ProxyGenerationError(
-                                    ProxyGenerationError.GeneratorState.GenerateCode,
-                                    String.Empty,
-                                    ex));
+                    importErrors.Add(
+                        new ProxyGenerationError(
+                            ProxyGenerationError.GeneratorState.GenerateCode,
+                            String.Empty,
+                            ex
+                        )
+                    );
                 }
             }
             return referencedAssemblies;
@@ -1186,10 +1392,16 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="importErrors">Errors encountered while loading the collection types</param>
         /// <return></return>
         /// <remarks></remarks>
-        protected static IEnumerable<Type> LoadSharedCollectionTypes(ClientOptions proxyOptions, IContractGeneratorReferenceTypeLoader typeLoader, IList<ProxyGenerationError> importErrors)
+        protected static IEnumerable<Type> LoadSharedCollectionTypes(
+            ClientOptions proxyOptions,
+            IContractGeneratorReferenceTypeLoader typeLoader,
+            IList<ProxyGenerationError> importErrors
+        )
         {
             List<Type> referencedCollectionTypes = new List<Type>();
-            foreach (ReferencedCollectionType referencedCollectionMapping in proxyOptions.CollectionMappingList)
+            foreach (
+                ReferencedCollectionType referencedCollectionMapping in proxyOptions.CollectionMappingList
+            )
             {
                 try
                 {
@@ -1199,11 +1411,18 @@ namespace Microsoft.VSDesigner.WCFModel
                     if (!IsTypeShareable(collectionType))
                     {
                         importErrors.Add(
-                                new ProxyGenerationError(
-                                    ProxyGenerationError.GeneratorState.GenerateCode,
-                                    String.Empty,
-                                    new FormatException(String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_SharedTypeMustBePublic, referencedCollectionMapping.TypeName)))
-                            );
+                            new ProxyGenerationError(
+                                ProxyGenerationError.GeneratorState.GenerateCode,
+                                String.Empty,
+                                new FormatException(
+                                    String.Format(
+                                        CultureInfo.CurrentCulture,
+                                        WCFModelStrings.ReferenceGroup_SharedTypeMustBePublic,
+                                        referencedCollectionMapping.TypeName
+                                    )
+                                )
+                            )
+                        );
                         continue;
                     }
 
@@ -1211,10 +1430,13 @@ namespace Microsoft.VSDesigner.WCFModel
                 }
                 catch (Exception ex)
                 {
-                    importErrors.Add(new ProxyGenerationError(
-                                    ProxyGenerationError.GeneratorState.GenerateCode,
-                                    String.Empty,
-                                    ex));
+                    importErrors.Add(
+                        new ProxyGenerationError(
+                            ProxyGenerationError.GeneratorState.GenerateCode,
+                            String.Empty,
+                            ex
+                        )
+                    );
                 }
             }
             return referencedCollectionTypes;
@@ -1233,23 +1455,31 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="importErrors"></param>
         /// <param name="typedDataSetSchemaImporterExtension"></param>
         /// <returns></returns>
-        protected static WsdlImporter CreateWsdlImporter(SvcMapFile svcMapFile,
-                                                      System.Configuration.Configuration toolConfiguration,
-                                                      CodeCompileUnit targetCompileUnit,
-                                                      System.CodeDom.Compiler.CodeDomProvider codeDomProvider,
-                                                      string targetNamespace,
-                                                      IServiceProvider serviceProviderForImportExtensions,
-                                                      IContractGeneratorReferenceTypeLoader typeLoader,
-                                                      int targetFrameworkVersion,
-                                                      IList<ProxyGenerationError> importErrors,
-                                                      System.Type typedDataSetSchemaImporterExtension)
+        protected static WsdlImporter CreateWsdlImporter(
+            SvcMapFile svcMapFile,
+            System.Configuration.Configuration toolConfiguration,
+            CodeCompileUnit targetCompileUnit,
+            System.CodeDom.Compiler.CodeDomProvider codeDomProvider,
+            string targetNamespace,
+            IServiceProvider serviceProviderForImportExtensions,
+            IContractGeneratorReferenceTypeLoader typeLoader,
+            int targetFrameworkVersion,
+            IList<ProxyGenerationError> importErrors,
+            System.Type typedDataSetSchemaImporterExtension
+        )
         {
-            List<MetadataSection> metadataSections = CollectMetadataDocuments(svcMapFile.MetadataList, importErrors);
+            List<MetadataSection> metadataSections = CollectMetadataDocuments(
+                svcMapFile.MetadataList,
+                importErrors
+            );
 
             WsdlImporter importer = null;
 
             ClientOptions.ProxySerializerType serializerType = svcMapFile.ClientOptions.Serializer;
-            if (serializerType == ClientOptions.ProxySerializerType.Auto && ContainsHttpBindings(metadataSections))
+            if (
+                serializerType == ClientOptions.ProxySerializerType.Auto
+                && ContainsHttpBindings(metadataSections)
+            )
             {
                 // NOTE: HTTP Get/Post binding indicates an old web service. We use XmlSerializer to prevent generating dup classes.
                 // Please check devdiv bug 94078
@@ -1258,22 +1488,31 @@ namespace Microsoft.VSDesigner.WCFModel
 
             if (toolConfiguration != null)
             {
-                ServiceModelSectionGroup serviceModelSection = ServiceModelSectionGroup.GetSectionGroup(toolConfiguration);
+                ServiceModelSectionGroup serviceModelSection =
+                    ServiceModelSectionGroup.GetSectionGroup(toolConfiguration);
 
                 if (serviceModelSection != null)
                 {
-                    Collection<IWsdlImportExtension> wsdlImportExtensions = serviceModelSection.Client.Metadata.LoadWsdlImportExtensions();
-                    Collection<IPolicyImportExtension> policyImportExtensions = serviceModelSection.Client.Metadata.LoadPolicyImportExtensions();
+                    Collection<IWsdlImportExtension> wsdlImportExtensions =
+                        serviceModelSection.Client.Metadata.LoadWsdlImportExtensions();
+                    Collection<IPolicyImportExtension> policyImportExtensions =
+                        serviceModelSection.Client.Metadata.LoadPolicyImportExtensions();
 
                     // If we have specified a specific serializer to use, we remove
                     // the other serializer...
                     switch (serializerType)
                     {
                         case ClientOptions.ProxySerializerType.DataContractSerializer:
-                            RemoveExtension(typeof(XmlSerializerMessageContractImporter), wsdlImportExtensions);
+                            RemoveExtension(
+                                typeof(XmlSerializerMessageContractImporter),
+                                wsdlImportExtensions
+                            );
                             break;
                         case ClientOptions.ProxySerializerType.XmlSerializer:
-                            RemoveExtension(typeof(DataContractSerializerMessageContractImporter), wsdlImportExtensions);
+                            RemoveExtension(
+                                typeof(DataContractSerializerMessageContractImporter),
+                                wsdlImportExtensions
+                            );
                             break;
                         case ClientOptions.ProxySerializerType.Auto:
                             break;
@@ -1282,12 +1521,21 @@ namespace Microsoft.VSDesigner.WCFModel
                             break;
                     }
 
-                    ProvideImportExtensionsWithContextInformation(svcMapFile, serviceProviderForImportExtensions, wsdlImportExtensions, policyImportExtensions);
+                    ProvideImportExtensionsWithContextInformation(
+                        svcMapFile,
+                        serviceProviderForImportExtensions,
+                        wsdlImportExtensions,
+                        policyImportExtensions
+                    );
 
                     wsdlImportExtensions.Add(new HttpBindingExtension());
 
                     // Create Importer...
-                    importer = new WsdlImporter(new MetadataSet(metadataSections), policyImportExtensions, wsdlImportExtensions);
+                    importer = new WsdlImporter(
+                        new MetadataSet(metadataSections),
+                        policyImportExtensions,
+                        wsdlImportExtensions
+                    );
                 }
             }
 
@@ -1296,19 +1544,33 @@ namespace Microsoft.VSDesigner.WCFModel
                 importer = new WsdlImporter(new MetadataSet(metadataSections));
             }
 
-            // DevDiv 124333 - Always add DataContract importer (even if we are in XmlSerializerMode) to 
+            // DevDiv 124333 - Always add DataContract importer (even if we are in XmlSerializerMode) to
             // enable importing Fault contracts...
-            importer.State.Add(typeof(System.Runtime.Serialization.XsdDataContractImporter),
-                           CreateDataContractImporter(svcMapFile.ClientOptions, targetCompileUnit, codeDomProvider, targetNamespace, typeLoader, targetFrameworkVersion, importErrors));
+            importer.State.Add(
+                typeof(System.Runtime.Serialization.XsdDataContractImporter),
+                CreateDataContractImporter(
+                    svcMapFile.ClientOptions,
+                    targetCompileUnit,
+                    codeDomProvider,
+                    targetNamespace,
+                    typeLoader,
+                    targetFrameworkVersion,
+                    importErrors
+                )
+            );
 
             if (serializerType != ClientOptions.ProxySerializerType.DataContractSerializer)
             {
-                importer.State.Add(typeof(System.ServiceModel.Channels.XmlSerializerImportOptions),
-                               CreateXmlSerializerImportOptions(svcMapFile.ClientOptions,
-                                                                targetCompileUnit,
-                                                                codeDomProvider,
-                                                                targetNamespace,
-                                                                typedDataSetSchemaImporterExtension));
+                importer.State.Add(
+                    typeof(System.ServiceModel.Channels.XmlSerializerImportOptions),
+                    CreateXmlSerializerImportOptions(
+                        svcMapFile.ClientOptions,
+                        targetCompileUnit,
+                        codeDomProvider,
+                        targetNamespace,
+                        typedDataSetSchemaImporterExtension
+                    )
+                );
             }
 
             // Read the UseSerializerForFaults from Reference.svcmap, create a FaultImportOptions using this information
@@ -1327,7 +1589,7 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// Look through all the import extensions to see if any of them want access to 
+        /// Look through all the import extensions to see if any of them want access to
         ///   the service reference's extension files.  They tell us this by implementing
         ///   the interface IWcfReferenceReceiveContextInformation.
         /// </summary>
@@ -1335,7 +1597,12 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="serviceProviderForImportExtensions"></param>
         /// <param name="wsdlImportExtensions"></param>
         /// <param name="policyImportExtensions"></param>
-        internal static void ProvideImportExtensionsWithContextInformation(SvcMapFile svcMapFile, IServiceProvider serviceProviderForImportExtensions, IEnumerable<IWsdlImportExtension> wsdlImportExtensions, IEnumerable<IPolicyImportExtension> policyImportExtensions)
+        internal static void ProvideImportExtensionsWithContextInformation(
+            SvcMapFile svcMapFile,
+            IServiceProvider serviceProviderForImportExtensions,
+            IEnumerable<IWsdlImportExtension> wsdlImportExtensions,
+            IEnumerable<IPolicyImportExtension> policyImportExtensions
+        )
         {
             // Only make this copy if we need to (not the mainline case)
             Dictionary<string, byte[]> extensionFileContents = null;
@@ -1343,7 +1610,8 @@ namespace Microsoft.VSDesigner.WCFModel
             foreach (IWsdlImportExtension wsdlImportExtension in wsdlImportExtensions)
             {
                 System.Web.Compilation.IWcfReferenceReceiveContextInformation receiveContext =
-                    wsdlImportExtension as System.Web.Compilation.IWcfReferenceReceiveContextInformation;
+                    wsdlImportExtension
+                    as System.Web.Compilation.IWcfReferenceReceiveContextInformation;
                 if (receiveContext != null)
                 {
                     if (extensionFileContents == null)
@@ -1352,13 +1620,15 @@ namespace Microsoft.VSDesigner.WCFModel
                     }
                     receiveContext.ReceiveImportContextInformation(
                         extensionFileContents,
-                        serviceProviderForImportExtensions);
+                        serviceProviderForImportExtensions
+                    );
                 }
             }
             foreach (IPolicyImportExtension policyImportExtension in policyImportExtensions)
             {
                 System.Web.Compilation.IWcfReferenceReceiveContextInformation receiveContext =
-                    policyImportExtension as System.Web.Compilation.IWcfReferenceReceiveContextInformation;
+                    policyImportExtension
+                    as System.Web.Compilation.IWcfReferenceReceiveContextInformation;
                 if (receiveContext != null)
                 {
                     if (extensionFileContents == null)
@@ -1367,7 +1637,8 @@ namespace Microsoft.VSDesigner.WCFModel
                     }
                     receiveContext.ReceiveImportContextInformation(
                         extensionFileContents,
-                        serviceProviderForImportExtensions);
+                        serviceProviderForImportExtensions
+                    );
                 }
             }
         }
@@ -1383,7 +1654,10 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </param>
         /// <return></return>
         /// <remarks></remarks>
-        private static void RemoveExtension(Type extensionType, Collection<IWsdlImportExtension> wsdlImportExtensions)
+        private static void RemoveExtension(
+            Type extensionType,
+            Collection<IWsdlImportExtension> wsdlImportExtensions
+        )
         {
             Debug.Assert(wsdlImportExtensions != null);
 
@@ -1398,7 +1672,9 @@ namespace Microsoft.VSDesigner.WCFModel
         /// Creates a dictionary containing a copy of the contents of all of the extension files
         /// </summary>
         /// <returns></returns>
-        private static Dictionary<string, byte[]> CreateDictionaryOfCopiedExtensionFiles(SvcMapFile svcMapFile)
+        private static Dictionary<string, byte[]> CreateDictionaryOfCopiedExtensionFiles(
+            SvcMapFile svcMapFile
+        )
         {
             Dictionary<string, byte[]> extensionFileContents = new Dictionary<string, byte[]>();
             foreach (ExtensionFile extensionFile in svcMapFile.Extensions)
@@ -1409,20 +1685,25 @@ namespace Microsoft.VSDesigner.WCFModel
                 //   if the byte array we return is null or not.
                 if (extensionFile.ContentBuffer != null && extensionFile.IsBufferValid)
                 {
-                    extensionFileContents.Add(extensionFile.Name, (byte[])extensionFile.ContentBuffer.Clone());
+                    extensionFileContents.Add(
+                        extensionFile.Name,
+                        (byte[])extensionFile.ContentBuffer.Clone()
+                    );
                 }
             }
 
             return extensionFileContents;
         }
 
-
         /// <summary>
         /// Merge metadata files to prepare code generation
         /// </summary>
         /// <returns>metadata collection</returns>
         /// <remarks></remarks>
-        protected static List<MetadataSection> CollectMetadataDocuments(IEnumerable<MetadataFile> metadataList, IList<ProxyGenerationError> importErrors)
+        protected static List<MetadataSection> CollectMetadataDocuments(
+            IEnumerable<MetadataFile> metadataList,
+            IList<ProxyGenerationError> importErrors
+        )
         {
             List<MetadataSection> metadataCollection = new List<MetadataSection>();
 
@@ -1440,7 +1721,9 @@ namespace Microsoft.VSDesigner.WCFModel
                     }
                     catch (Exception ex)
                     {
-                        importErrors.Add(ConvertMetadataErrorToProxyGenerationError(metadataItem, ex));
+                        importErrors.Add(
+                            ConvertMetadataErrorToProxyGenerationError(metadataItem, ex)
+                        );
                     }
                 }
             }
@@ -1456,40 +1739,69 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <return></return>
         /// <remarks></remarks>
-        internal static ProxyGenerationError ConvertMetadataErrorToProxyGenerationError(MetadataFile metadataItem, Exception ex)
+        internal static ProxyGenerationError ConvertMetadataErrorToProxyGenerationError(
+            MetadataFile metadataItem,
+            Exception ex
+        )
         {
             ProxyGenerationError generationError = null;
             if (ex is XmlSchemaException)
             {
-                generationError = new ProxyGenerationError(ProxyGenerationError.GeneratorState.LoadMetadata, metadataItem.FileName, (XmlSchemaException)ex);
+                generationError = new ProxyGenerationError(
+                    ProxyGenerationError.GeneratorState.LoadMetadata,
+                    metadataItem.FileName,
+                    (XmlSchemaException)ex
+                );
             }
             else if (ex is XmlException)
             {
-                generationError = new ProxyGenerationError(ProxyGenerationError.GeneratorState.LoadMetadata, metadataItem.FileName, (XmlException)ex);
+                generationError = new ProxyGenerationError(
+                    ProxyGenerationError.GeneratorState.LoadMetadata,
+                    metadataItem.FileName,
+                    (XmlException)ex
+                );
             }
             else if (ex is InvalidOperationException)
             {
-                System.Xml.Schema.XmlSchemaException schemaException = ex.InnerException as System.Xml.Schema.XmlSchemaException;
+                System.Xml.Schema.XmlSchemaException schemaException =
+                    ex.InnerException as System.Xml.Schema.XmlSchemaException;
                 if (schemaException != null)
                 {
-                    generationError = new ProxyGenerationError(ProxyGenerationError.GeneratorState.LoadMetadata, metadataItem.FileName, schemaException);
+                    generationError = new ProxyGenerationError(
+                        ProxyGenerationError.GeneratorState.LoadMetadata,
+                        metadataItem.FileName,
+                        schemaException
+                    );
                 }
                 else
                 {
-                    System.Xml.XmlException xmlException = ex.InnerException as System.Xml.XmlException;
+                    System.Xml.XmlException xmlException =
+                        ex.InnerException as System.Xml.XmlException;
                     if (xmlException != null)
                     {
-                        generationError = new ProxyGenerationError(ProxyGenerationError.GeneratorState.LoadMetadata, metadataItem.FileName, xmlException);
+                        generationError = new ProxyGenerationError(
+                            ProxyGenerationError.GeneratorState.LoadMetadata,
+                            metadataItem.FileName,
+                            xmlException
+                        );
                     }
                     else
                     {
-                        generationError = new ProxyGenerationError(ProxyGenerationError.GeneratorState.LoadMetadata, metadataItem.FileName, (InvalidOperationException)ex);
+                        generationError = new ProxyGenerationError(
+                            ProxyGenerationError.GeneratorState.LoadMetadata,
+                            metadataItem.FileName,
+                            (InvalidOperationException)ex
+                        );
                     }
                 }
             }
             else
             {
-                generationError = new ProxyGenerationError(ProxyGenerationError.GeneratorState.LoadMetadata, metadataItem.FileName, ex);
+                generationError = new ProxyGenerationError(
+                    ProxyGenerationError.GeneratorState.LoadMetadata,
+                    metadataItem.FileName,
+                    ex
+                );
             }
             return generationError;
         }
@@ -1498,9 +1810,13 @@ namespace Microsoft.VSDesigner.WCFModel
         /// Remove duplicated schema items from the metadata collection
         /// </summary>
         /// <remarks></remarks>
-        private static void RemoveDuplicatedSchemaItems(List<MetadataSection> metadataCollection, IList<ProxyGenerationError> importErrors)
+        private static void RemoveDuplicatedSchemaItems(
+            List<MetadataSection> metadataCollection,
+            IList<ProxyGenerationError> importErrors
+        )
         {
-            Dictionary<XmlSchema, MetadataSection> schemaList = new Dictionary<XmlSchema, MetadataSection>();
+            Dictionary<XmlSchema, MetadataSection> schemaList =
+                new Dictionary<XmlSchema, MetadataSection>();
 
             // add independent schema files...
             foreach (MetadataSection metadataSection in metadataCollection)
@@ -1517,7 +1833,9 @@ namespace Microsoft.VSDesigner.WCFModel
             {
                 if (metadataSection.Dialect == MetadataSection.ServiceDescriptionDialect)
                 {
-                    System.Web.Services.Description.ServiceDescription wsdl = (System.Web.Services.Description.ServiceDescription)metadataSection.Metadata;
+                    System.Web.Services.Description.ServiceDescription wsdl =
+                        (System.Web.Services.Description.ServiceDescription)
+                            metadataSection.Metadata;
                     foreach (XmlSchema schema in wsdl.Types.Schemas)
                     {
                         schema.SourceUri = wsdl.RetrievalUrl;
@@ -1533,7 +1851,10 @@ namespace Microsoft.VSDesigner.WCFModel
             {
                 foreach (XmlSchema schema in duplicatedSchemas)
                 {
-                    Debug.Assert(schemaList.ContainsKey(schema), "The schema list should not contain any of the schemas returned in the duplicateSchemas...");
+                    Debug.Assert(
+                        schemaList.ContainsKey(schema),
+                        "The schema list should not contain any of the schemas returned in the duplicateSchemas..."
+                    );
 
                     MetadataSection metadataSection = schemaList[schema];
                     if (metadataSection.Dialect == MetadataSection.XmlSchemaDialect)
@@ -1542,7 +1863,9 @@ namespace Microsoft.VSDesigner.WCFModel
                     }
                     else if (metadataSection.Dialect == MetadataSection.ServiceDescriptionDialect)
                     {
-                        System.Web.Services.Description.ServiceDescription wsdl = (System.Web.Services.Description.ServiceDescription)metadataSection.Metadata;
+                        System.Web.Services.Description.ServiceDescription wsdl =
+                            (System.Web.Services.Description.ServiceDescription)
+                                metadataSection.Metadata;
                         wsdl.Types.Schemas.Remove(schema);
                     }
                 }
@@ -1553,14 +1876,20 @@ namespace Microsoft.VSDesigner.WCFModel
         /// check all wsdl files, and generate error messages if one contract have multiple different specifications
         /// </summary>
         /// <remarks></remarks>
-        private static void CheckDuplicatedWsdlItems(IList<MetadataSection> metadataCollection, IList<ProxyGenerationError> importErrors)
+        private static void CheckDuplicatedWsdlItems(
+            IList<MetadataSection> metadataCollection,
+            IList<ProxyGenerationError> importErrors
+        )
         {
-            List<System.Web.Services.Description.ServiceDescription> wsdlFiles = new List<System.Web.Services.Description.ServiceDescription>();
+            List<System.Web.Services.Description.ServiceDescription> wsdlFiles =
+                new List<System.Web.Services.Description.ServiceDescription>();
             foreach (MetadataSection metadataSection in metadataCollection)
             {
                 if (metadataSection.Dialect == MetadataSection.ServiceDescriptionDialect)
                 {
-                    System.Web.Services.Description.ServiceDescription wsdl = (System.Web.Services.Description.ServiceDescription)metadataSection.Metadata;
+                    System.Web.Services.Description.ServiceDescription wsdl =
+                        (System.Web.Services.Description.ServiceDescription)
+                            metadataSection.Metadata;
                     wsdlFiles.Add(wsdl);
                 }
             }
@@ -1580,16 +1909,18 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="serviceEndpointList">List of endpoints imported</param>
         /// <param name="bindingCollection">The collection of bindings imported</param>
         /// <param name="contractCollection">The collection of contracts imported</param>
-        protected static void ImportWCFModel(WsdlImporter importer,
-                                          System.CodeDom.CodeCompileUnit compileUnit,
-                                          IList<ProxyGenerationError> generationErrors,
-                                          out List<ServiceEndpoint> serviceEndpointList,
-                                          out IEnumerable<System.ServiceModel.Channels.Binding> bindingCollection,
-                                          out IEnumerable<ContractDescription> contractCollection)
+        protected static void ImportWCFModel(
+            WsdlImporter importer,
+            System.CodeDom.CodeCompileUnit compileUnit,
+            IList<ProxyGenerationError> generationErrors,
+            out List<ServiceEndpoint> serviceEndpointList,
+            out IEnumerable<System.ServiceModel.Channels.Binding> bindingCollection,
+            out IEnumerable<ContractDescription> contractCollection
+        )
         {
-            // We want to remove soap1.2 endpoints for ASMX references, but we can't use the "normal" way 
+            // We want to remove soap1.2 endpoints for ASMX references, but we can't use the "normal" way
             // of using a IWsdlImportExtension to do so since BeforeImport is called too late (DevDiv 7857)
-            // If DevDiv 7857 is fixed, we can remove the following two lines and instead add the 
+            // If DevDiv 7857 is fixed, we can remove the following two lines and instead add the
             // AsmxEndpointPickerExtension to the importer's wsdl import extensions...
             IWsdlImportExtension asmxFixerUpper = new AsmxEndpointPickerExtension();
             asmxFixerUpper.BeforeImport(importer.WsdlDocuments, null, null);
@@ -1599,7 +1930,7 @@ namespace Microsoft.VSDesigner.WCFModel
 
             //
             // First we import all the endpoints (ports). This is required so that any WsdlImportExtension's BeforeImport
-            // gets called before we actually try to import anything from the WSDL object model. 
+            // gets called before we actually try to import anything from the WSDL object model.
             // If we don't do this, we run into problems if any wsdl import extensions want to delete a specific port
             // and this port happens to be the first port we try to import (you can't interrupt the import)
             importer.ImportAllEndpoints();
@@ -1607,12 +1938,16 @@ namespace Microsoft.VSDesigner.WCFModel
             //
             // We need to go through each endpoint element and "re-import" it in order to get the mapping
             // between the wsdlPort and the ServiceEndpoint... Importing the same endpoint twice is a no-op
-            // as far as the endpoint collection is concerned - it is simply a hashtable lookup to retreive 
+            // as far as the endpoint collection is concerned - it is simply a hashtable lookup to retreive
             // the already generated information...
             //
-            foreach (System.Web.Services.Description.ServiceDescription wsdlServiceDescription in importer.WsdlDocuments)
+            foreach (
+                System.Web.Services.Description.ServiceDescription wsdlServiceDescription in importer.WsdlDocuments
+            )
             {
-                foreach (System.Web.Services.Description.Service wsdlService in wsdlServiceDescription.Services)
+                foreach (
+                    System.Web.Services.Description.Service wsdlService in wsdlServiceDescription.Services
+                )
                 {
                     foreach (System.Web.Services.Description.Port servicePort in wsdlService.Ports)
                     {
@@ -1624,31 +1959,40 @@ namespace Microsoft.VSDesigner.WCFModel
                         catch (InvalidOperationException)
                         {
                             // Invalid operation exceptions should already be in the errors collection for the importer, so we don't
-                            // need to add another generationError. The most probable cause for this is that the we failed to import 
+                            // need to add another generationError. The most probable cause for this is that the we failed to import
                             // the endpoint...
                         }
                         catch (Exception ex)
                         { // It is bad, because WsdlImporter.WsdlImportException is a private class
-                            generationErrors.Add(new ProxyGenerationError(ProxyGenerationError.GeneratorState.GenerateCode, wsdlServiceDescription.RetrievalUrl, ex));
+                            generationErrors.Add(
+                                new ProxyGenerationError(
+                                    ProxyGenerationError.GeneratorState.GenerateCode,
+                                    wsdlServiceDescription.RetrievalUrl,
+                                    ex
+                                )
+                            );
                         }
                     }
                 }
             }
 
-
             bindingCollection = importer.ImportAllBindings();
-            System.Diagnostics.Debug.Assert(bindingCollection != null, "The importer should never return a NULL binding collection!");
+            System.Diagnostics.Debug.Assert(
+                bindingCollection != null,
+                "The importer should never return a NULL binding collection!"
+            );
 
             contractCollection = importer.ImportAllContracts();
-            System.Diagnostics.Debug.Assert(contractCollection != null, "The importer should never return a NULL contract collection!");
+            System.Diagnostics.Debug.Assert(
+                contractCollection != null,
+                "The importer should never return a NULL contract collection!"
+            );
 
             foreach (MetadataConversionError error in importer.Errors)
             {
                 generationErrors.Add(new ProxyGenerationError(error));
             }
         }
-
-
 
         /// <summary>
         /// This function patches ServiceContractAttribute in the generated proxy code. It replaces all proxyNamespace in the attribute
@@ -1658,7 +2002,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="configNamespace"></param>
         /// <return></return>
         /// <remarks></remarks>
-        private static void PatchConfigurationNameInServiceContractAttribute(CodeCompileUnit proxyCodeUnit, string proxyNamespace, string configNamespace)
+        private static void PatchConfigurationNameInServiceContractAttribute(
+            CodeCompileUnit proxyCodeUnit,
+            string proxyNamespace,
+            string configNamespace
+        )
         {
             if (proxyNamespace == null)
             {
@@ -1673,7 +2021,13 @@ namespace Microsoft.VSDesigner.WCFModel
                 foreach (CodeNamespace proxyCodeNamespace in proxyCodeUnit.Namespaces)
                 {
                     // Find the namespace we are patching...
-                    if (String.Equals(proxyNamespace, proxyCodeNamespace.Name, StringComparison.Ordinal))
+                    if (
+                        String.Equals(
+                            proxyNamespace,
+                            proxyCodeNamespace.Name,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         // ...and all types in each namespace...
                         foreach (CodeTypeDeclaration typeDeclaration in proxyCodeNamespace.Types)
@@ -1681,20 +2035,44 @@ namespace Microsoft.VSDesigner.WCFModel
                             if (typeDeclaration.IsInterface)
                             {
                                 // ...and each attribute on each interface...
-                                foreach (CodeAttributeDeclaration codeAttribute in typeDeclaration.CustomAttributes)
+                                foreach (
+                                    CodeAttributeDeclaration codeAttribute in typeDeclaration.CustomAttributes
+                                )
                                 {
                                     // find System.ServiceModel.ServiceContractAttribute attribute.
-                                    if (String.Equals(codeAttribute.AttributeType.BaseType, typeof(System.ServiceModel.ServiceContractAttribute).FullName, StringComparison.Ordinal))
+                                    if (
+                                        String.Equals(
+                                            codeAttribute.AttributeType.BaseType,
+                                            typeof(System.ServiceModel.ServiceContractAttribute).FullName,
+                                            StringComparison.Ordinal
+                                        )
+                                    )
                                     {
-                                        foreach (CodeAttributeArgument argument in codeAttribute.Arguments)
+                                        foreach (
+                                            CodeAttributeArgument argument in codeAttribute.Arguments
+                                        )
                                         {
-                                            if (String.Equals(argument.Name, "ConfigurationName", StringComparison.Ordinal))
+                                            if (
+                                                String.Equals(
+                                                    argument.Name,
+                                                    "ConfigurationName",
+                                                    StringComparison.Ordinal
+                                                )
+                                            )
                                             {
                                                 // we only fix the string here
-                                                CodePrimitiveExpression valueExpression = argument.Value as CodePrimitiveExpression;
-                                                if (valueExpression != null && valueExpression.Value is string)
+                                                CodePrimitiveExpression valueExpression =
+                                                    argument.Value as CodePrimitiveExpression;
+                                                if (
+                                                    valueExpression != null
+                                                    && valueExpression.Value is string
+                                                )
                                                 {
-                                                    valueExpression.Value = ReplaceNamespace(proxyNamespaceHead, configNamespaceHead, (string)valueExpression.Value);
+                                                    valueExpression.Value = ReplaceNamespace(
+                                                        proxyNamespaceHead,
+                                                        configNamespaceHead,
+                                                        (string)valueExpression.Value
+                                                    );
                                                 }
                                             }
                                         }
@@ -1707,10 +2085,9 @@ namespace Microsoft.VSDesigner.WCFModel
             }
         }
 
-
         /// <summary>
         /// Patch VB code for output parameters.
-        /// 
+        ///
         /// Visual Basic doesn't support Out parameters - they are all generated as ByRef.
         /// Unfortunately, the CodeDom provider doesn't add an Out attribute to the ByRef
         /// parameters, so we have to do that ourselves...
@@ -1752,7 +2129,12 @@ namespace Microsoft.VSDesigner.WCFModel
                             // Make sure that all Out parameters have an <Out> attribute
                             //
                             // First check for explicit <OutAttribute> declaration to avoid adding duplicate attributes.
-                            if (!IsDefinedInCodeAttributeCollection(typeof(System.Runtime.InteropServices.OutAttribute), parameter.CustomAttributes))
+                            if (
+                                !IsDefinedInCodeAttributeCollection(
+                                    typeof(System.Runtime.InteropServices.OutAttribute),
+                                    parameter.CustomAttributes
+                                )
+                            )
                             {
                                 parameter.CustomAttributes.Add(OutAttribute);
                             }
@@ -1769,11 +2151,17 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="metadata"></param>
         /// <return></return>
         /// <remarks></remarks>
-        private static bool IsDefinedInCodeAttributeCollection(Type type, CodeAttributeDeclarationCollection metadata)
+        private static bool IsDefinedInCodeAttributeCollection(
+            Type type,
+            CodeAttributeDeclarationCollection metadata
+        )
         {
             foreach (CodeAttributeDeclaration attribute in metadata)
             {
-                if (String.Equals(attribute.Name, type.FullName, StringComparison.Ordinal) || String.Equals(attribute.Name, type.Name, StringComparison.Ordinal))
+                if (
+                    String.Equals(attribute.Name, type.FullName, StringComparison.Ordinal)
+                    || String.Equals(attribute.Name, type.Name, StringComparison.Ordinal)
+                )
                 {
                     return true;
                 }
@@ -1787,13 +2175,21 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="codeDomProvider"></param>
         /// <return></return>
         /// <remarks></remarks>
-        private static bool IsVBCodeDomProvider(System.CodeDom.Compiler.CodeDomProvider codeDomProvider)
+        private static bool IsVBCodeDomProvider(
+            System.CodeDom.Compiler.CodeDomProvider codeDomProvider
+        )
         {
             string fileExtension = codeDomProvider.FileExtension;
             try
             {
-                string language = System.CodeDom.Compiler.CodeDomProvider.GetLanguageFromExtension(fileExtension);
-                return String.Equals(language, VB_LANGUAGE_NAME, StringComparison.OrdinalIgnoreCase);
+                string language = System.CodeDom.Compiler.CodeDomProvider.GetLanguageFromExtension(
+                    fileExtension
+                );
+                return String.Equals(
+                    language,
+                    VB_LANGUAGE_NAME,
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
             catch (System.Configuration.ConfigurationException)
             {
@@ -1814,7 +2210,9 @@ namespace Microsoft.VSDesigner.WCFModel
             {
                 if (metadataSection.Dialect == MetadataSection.ServiceDescriptionDialect)
                 {
-                    System.Web.Services.Description.ServiceDescription wsdlFile = (System.Web.Services.Description.ServiceDescription)metadataSection.Metadata;
+                    System.Web.Services.Description.ServiceDescription wsdlFile =
+                        (System.Web.Services.Description.ServiceDescription)
+                            metadataSection.Metadata;
                     if (ContainsHttpBindings(wsdlFile))
                     {
                         return true;
@@ -1830,13 +2228,16 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="wsdlFile">one wsdl</param>
         /// <return></return>
         /// <remarks></remarks>
-        internal static bool ContainsHttpBindings(System.Web.Services.Description.ServiceDescription wsdlFile)
+        internal static bool ContainsHttpBindings(
+            System.Web.Services.Description.ServiceDescription wsdlFile
+        )
         {
             foreach (System.Web.Services.Description.Binding binding in wsdlFile.Bindings)
             {
                 foreach (object extension in binding.Extensions)
                 {
-                    System.Web.Services.Description.HttpBinding httpBinding = extension as System.Web.Services.Description.HttpBinding;
+                    System.Web.Services.Description.HttpBinding httpBinding =
+                        extension as System.Web.Services.Description.HttpBinding;
                     if (httpBinding != null)
                     {
                         return true;

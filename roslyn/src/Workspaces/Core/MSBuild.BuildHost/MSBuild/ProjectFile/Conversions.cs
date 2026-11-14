@@ -11,10 +11,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
     /// </summary>
     internal static class Conversions
     {
-        public static bool ToBool(string? value)
-            => value != null
-            && (string.Equals(bool.TrueString, value, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals("On", value, StringComparison.OrdinalIgnoreCase));
+        public static bool ToBool(string? value) =>
+            value != null
+            && (
+                string.Equals(bool.TrueString, value, StringComparison.OrdinalIgnoreCase)
+                || string.Equals("On", value, StringComparison.OrdinalIgnoreCase)
+            );
 
         public static int ToInt(string? value)
         {

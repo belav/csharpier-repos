@@ -8,7 +8,8 @@ using Xunit;
 
 namespace System.Buffers.Tests
 {
-    public abstract class ArrayBufferWriterTests<T> where T : IEquatable<T>
+    public abstract class ArrayBufferWriterTests<T>
+        where T : IEquatable<T>
     {
         [Fact]
         public void ArrayBufferWriter_Ctor()
@@ -179,7 +180,9 @@ namespace System.Buffers.Tests
             {
                 var output = new ArrayBufferWriter<T>();
                 WriteData(output, 100);
-                Assert.Throws<InvalidOperationException>(() => output.Advance(output.FreeCapacity + 1));
+                Assert.Throws<InvalidOperationException>(() =>
+                    output.Advance(output.FreeCapacity + 1)
+                );
             }
         }
 
@@ -289,7 +292,9 @@ namespace System.Buffers.Tests
                     var output = new ArrayBufferWriter<T>(2_000_000_000);
                     WriteData(output, 1_000);
                     Assert.Throws<InvalidOperationException>(() => output.Advance(int.MaxValue));
-                    Assert.Throws<InvalidOperationException>(() => output.Advance(2_000_000_000 - 1_000 + 1));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        output.Advance(2_000_000_000 - 1_000 + 1)
+                    );
                 }
             }
             catch (OutOfMemoryException) { }

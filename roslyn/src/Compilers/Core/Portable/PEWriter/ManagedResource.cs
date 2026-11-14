@@ -25,7 +25,13 @@ namespace Microsoft.Cci
         /// <paramref name="streamProvider"/> streamProvider callers will dispose result after use.
         /// <paramref name="streamProvider"/> and <paramref name="fileReference"/> are mutually exclusive.
         /// </summary>
-        internal ManagedResource(string name, bool isPublic, Func<Stream>? streamProvider, IFileReference? fileReference, uint offset)
+        internal ManagedResource(
+            string name,
+            bool isPublic,
+            Func<Stream>? streamProvider,
+            IFileReference? fileReference,
+            uint offset
+        )
         {
             RoslynDebug.Assert(streamProvider == null ^ fileReference == null);
 
@@ -48,7 +54,9 @@ namespace Microsoft.Cci
                     {
                         if (stream == null)
                         {
-                            throw new InvalidOperationException(CodeAnalysisResources.ResourceStreamProviderShouldReturnNonNullStream);
+                            throw new InvalidOperationException(
+                                CodeAnalysisResources.ResourceStreamProviderShouldReturnNonNullStream
+                            );
                         }
 
                         var count = (int)(stream.Length - stream.Position);
@@ -58,7 +66,13 @@ namespace Microsoft.Cci
                         if (bytesWritten != count)
                         {
                             throw new EndOfStreamException(
-                                    string.Format(CultureInfo.CurrentUICulture, CodeAnalysisResources.ResourceStreamEndedUnexpectedly, bytesWritten, count));
+                                string.Format(
+                                    CultureInfo.CurrentUICulture,
+                                    CodeAnalysisResources.ResourceStreamEndedUnexpectedly,
+                                    bytesWritten,
+                                    count
+                                )
+                            );
                         }
                         resourceWriter.Align(8);
                     }
@@ -72,18 +86,12 @@ namespace Microsoft.Cci
 
         public IFileReference? ExternalFile
         {
-            get
-            {
-                return _fileReference;
-            }
+            get { return _fileReference; }
         }
 
         public uint Offset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
         }
 
         public IEnumerable<ICustomAttribute> Attributes

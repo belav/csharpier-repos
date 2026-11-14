@@ -6,11 +6,11 @@ namespace System.ServiceModel.Web
     using System;
     using System.Globalization;
 
-    // DO NOT EDIT THIS CODE. 
+    // DO NOT EDIT THIS CODE.
     //
-    // All of the code from this class was taken from build 20717.00 
-    // of System.Net.HttpDateParse.  If there is a bug with this code 
-    // it should be fixed  in the original System.Net.HttpDateParse 
+    // All of the code from this class was taken from build 20717.00
+    // of System.Net.HttpDateParse.  If there is a bug with this code
+    // it should be fixed  in the original System.Net.HttpDateParse
     // and then ported here. [Microsoft]
 
     internal static class HttpDateParse
@@ -114,7 +114,6 @@ namespace System.ServiceModel.Web
                             return DATE_TOKEN_APRIL;
                         case 'U':
                             return DATE_TOKEN_AUGUST;
-
                     }
                     return DATE_TOKEN_ERROR;
 
@@ -198,7 +197,6 @@ namespace System.ServiceModel.Web
 
                     return DATE_TOKEN_ERROR;
 
-
                 case 'T':
                     switch (MakeUpper(lpszDay[index + 1]))
                     {
@@ -215,13 +213,11 @@ namespace System.ServiceModel.Web
 
                 case 'W':
                     return DATE_TOKEN_WEDNESDAY;
-
             }
 
             return DATE_TOKEN_ERROR;
         }
 
-        
         // Routine Description:
         //
         //    Parses through a ANSI, RFC850, or RFC1123 date format and covents it into
@@ -247,7 +243,8 @@ namespace System.ServiceModel.Web
         internal static bool ParseHttpDate(String DateString, out DateTime dtOut)
         {
             int index = 0;
-            int i = 0, iLastLettered = -1;
+            int i = 0,
+                iLastLettered = -1;
             bool fIsANSIDateFormat = false;
             int[] rgdwDateParseResults = new int[MAX_FIELD_DATE_ENTRIES];
             bool fRet = true;
@@ -286,30 +283,34 @@ namespace System.ServiceModel.Web
                         rgdwDateParseResults[i] *= BASE_DEC;
                         rgdwDateParseResults[i] += (lpInputBuffer[index] - '0');
                         index++;
-                    } while (index < DateString.Length &&
-                             lpInputBuffer[index] >= '0' &&
-                             lpInputBuffer[index] <= '9');
+                    } while (
+                        index < DateString.Length
+                        && lpInputBuffer[index] >= '0'
+                        && lpInputBuffer[index] <= '9'
+                    );
 
                     i++; // next token
                 }
-                else if ((lpInputBuffer[index] >= 'A' && lpInputBuffer[index] <= 'Z') ||
-                         (lpInputBuffer[index] >= 'a' && lpInputBuffer[index] <= 'z'))
+                else if (
+                    (lpInputBuffer[index] >= 'A' && lpInputBuffer[index] <= 'Z')
+                    || (lpInputBuffer[index] >= 'a' && lpInputBuffer[index] <= 'z')
+                )
                 {
                     //
                     // we have a string, should be a day, month, or GMT
                     //   lets skim to the end of the string
                     //
 
-                    rgdwDateParseResults[i] =
-                    MapDayMonthToDword(lpInputBuffer, index);
+                    rgdwDateParseResults[i] = MapDayMonthToDword(lpInputBuffer, index);
 
                     iLastLettered = i;
 
                     // We want to ignore the possibility of a time zone such as PST or EST in a non-standard
                     // date format such as "Thu Dec 17 16:01:28 PST 1998" (Notice that the year is _after_ the time zone
-                    if ((rgdwDateParseResults[i] == DATE_TOKEN_ERROR)
-                        &&
-                        !(fIsANSIDateFormat && (i == DATE_ANSI_INDEX_YEAR)))
+                    if (
+                        (rgdwDateParseResults[i] == DATE_TOKEN_ERROR)
+                        && !(fIsANSIDateFormat && (i == DATE_ANSI_INDEX_YEAR))
+                    )
                     {
                         fRet = false;
                         goto quit;
@@ -334,9 +335,13 @@ namespace System.ServiceModel.Web
                     do
                     {
                         index++;
-                    } while (index < DateString.Length &&
-                             ((lpInputBuffer[index] >= 'A' && lpInputBuffer[index] <= 'Z') ||
-                               (lpInputBuffer[index] >= 'a' && lpInputBuffer[index] <= 'z')));
+                    } while (
+                        index < DateString.Length
+                        && (
+                            (lpInputBuffer[index] >= 'A' && lpInputBuffer[index] <= 'Z')
+                            || (lpInputBuffer[index] >= 'a' && lpInputBuffer[index] <= 'z')
+                        )
+                    );
 
                     i++; // next token
                 }
@@ -414,11 +419,7 @@ namespace System.ServiceModel.Web
             // !lpszHrs || !lpszMins || !lpszSec
             //
 
-            if ((i < 4)
-                || (day > 31)
-                || (hour > 23)
-                || (minute > 59)
-                || (second > 59))
+            if ((i < 4) || (day > 31) || (hour > 23) || (minute > 59) || (second > 59))
             {
                 fRet = false;
                 goto quit;
@@ -446,10 +447,8 @@ namespace System.ServiceModel.Web
             //   then convert to appropriate GMT time
             //
 
-            if ((i > DATE_INDEX_TZ &&
-                 rgdwDateParseResults[DATE_INDEX_TZ] != DATE_TOKEN_GMT))
+            if ((i > DATE_INDEX_TZ && rgdwDateParseResults[DATE_INDEX_TZ] != DATE_TOKEN_GMT))
             {
-
                 //
                 // if we received +/-nnnn as offset (hhmm), modify the output FILETIME
                 //
@@ -464,7 +463,7 @@ namespace System.ServiceModel.Web
 
             dtOut = dtOut.ToLocalTime();
 
-        quit:
+            quit:
 
             return fRet;
         }

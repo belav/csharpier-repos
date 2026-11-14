@@ -5,11 +5,10 @@
 namespace System.ServiceModel.Security
 {
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
+    using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-
     using ISecurityElement = System.IdentityModel.ISecurityElement;
 
     class SendSecurityHeaderElement

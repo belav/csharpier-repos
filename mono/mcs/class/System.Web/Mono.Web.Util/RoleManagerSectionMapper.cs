@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,130 +34,139 @@ using System.Web.Configuration;
 
 namespace Mono.Web.Util
 {
-	internal class RoleManagerSectionMapper : ISectionSettingsMapper
-	{
-		public object MapSection (object _section, List <SettingsMappingWhat> whats)
-		{
-			RoleManagerSection section = _section as RoleManagerSection;
-			if (section == null)
-				return _section;
-			
-			List <SettingsMappingWhatContents> contents;
+    internal class RoleManagerSectionMapper : ISectionSettingsMapper
+    {
+        public object MapSection(object _section, List<SettingsMappingWhat> whats)
+        {
+            RoleManagerSection section = _section as RoleManagerSection;
+            if (section == null)
+                return _section;
 
-			foreach (SettingsMappingWhat what in whats) {
-				contents = what.Contents;
-				if (contents == null || contents.Count == 0)
-					continue;
+            List<SettingsMappingWhatContents> contents;
 
-				foreach (SettingsMappingWhatContents item in contents) {
-					switch (item.Operation) {
-						case SettingsMappingWhatOperation.Add:
-							ProcessAdd (section, item);
-							break;
+            foreach (SettingsMappingWhat what in whats)
+            {
+                contents = what.Contents;
+                if (contents == null || contents.Count == 0)
+                    continue;
 
-						case SettingsMappingWhatOperation.Clear:
-							ProcessClear (section, item);
-							break;
+                foreach (SettingsMappingWhatContents item in contents)
+                {
+                    switch (item.Operation)
+                    {
+                        case SettingsMappingWhatOperation.Add:
+                            ProcessAdd(section, item);
+                            break;
 
-						case SettingsMappingWhatOperation.Replace:
-							ProcessReplace (section, item);
-							break;
+                        case SettingsMappingWhatOperation.Clear:
+                            ProcessClear(section, item);
+                            break;
 
-						case SettingsMappingWhatOperation.Remove:
-							ProcessRemove (section, item);
-							break;
-					}
-				}
-			}
-				
-			return section;
-		}
+                        case SettingsMappingWhatOperation.Replace:
+                            ProcessReplace(section, item);
+                            break;
 
-		bool GetCommonAttributes (SettingsMappingWhatContents how, out string name, out string type)
-		{
-			name = type = null;
-			
-			Dictionary <string, string> attrs = how.Attributes;
-			
-			if (attrs == null || attrs.Count == 0)
-				return false;
+                        case SettingsMappingWhatOperation.Remove:
+                            ProcessRemove(section, item);
+                            break;
+                    }
+                }
+            }
 
-			if (!attrs.TryGetValue ("name", out name))
-				return false;
+            return section;
+        }
 
-			if (String.IsNullOrEmpty (name))
-				return false;
+        bool GetCommonAttributes(SettingsMappingWhatContents how, out string name, out string type)
+        {
+            name = type = null;
 
-			attrs.TryGetValue ("type", out type);
+            Dictionary<string, string> attrs = how.Attributes;
 
-			return true;
-		}
+            if (attrs == null || attrs.Count == 0)
+                return false;
 
-		void SetProviderProperties (SettingsMappingWhatContents how, ProviderSettings prov)
-		{
-			Dictionary <string, string> attrs = how.Attributes;
-			if (attrs == null || attrs.Count == 0)
-				return;
+            if (!attrs.TryGetValue("name", out name))
+                return false;
 
-			string key;
-			foreach (KeyValuePair <string, string> kvp in attrs) {
-				key = kvp.Key;
-				if (key == "name")
-					continue;
-				if (key == "type") {
-					prov.Type = kvp.Value;
-					continue;
-				}
-				prov.Parameters [key] = kvp.Value;
-			}
-		}
-		
-		void ProcessAdd (RoleManagerSection section, SettingsMappingWhatContents how)
-		{
-			string name, type;
-			if (!GetCommonAttributes (how, out name, out type))
-				return;
+            if (String.IsNullOrEmpty(name))
+                return false;
 
-			ProviderSettingsCollection providers = section.Providers;
-			ProviderSettings provider = providers [name];
-			if (provider != null)
-				return;
+            attrs.TryGetValue("type", out type);
 
-			ProviderSettings prov = new ProviderSettings (name, type);
-			SetProviderProperties (how, prov);
-			
-			providers.Add (prov);
-		}
+            return true;
+        }
 
-		void ProcessRemove (RoleManagerSection section, SettingsMappingWhatContents how)
-		{
-			string name, type;
-			if (!GetCommonAttributes (how, out name, out type))
-				return;
+        void SetProviderProperties(SettingsMappingWhatContents how, ProviderSettings prov)
+        {
+            Dictionary<string, string> attrs = how.Attributes;
+            if (attrs == null || attrs.Count == 0)
+                return;
 
-			ProviderSettingsCollection providers = section.Providers;
-			ProviderSettings provider = providers [name];
-			if (provider != null) {
-				if (provider.Type != type)
-					return;
-				providers.Remove (name);
-			}
-		}
-		
-		void ProcessClear (RoleManagerSection section, SettingsMappingWhatContents how)
-		{
-			section.Providers.Clear ();
-		}
+            string key;
+            foreach (KeyValuePair<string, string> kvp in attrs)
+            {
+                key = kvp.Key;
+                if (key == "name")
+                    continue;
+                if (key == "type")
+                {
+                    prov.Type = kvp.Value;
+                    continue;
+                }
+                prov.Parameters[key] = kvp.Value;
+            }
+        }
 
-		void ProcessReplace (RoleManagerSection section, SettingsMappingWhatContents how)
-		{
-			string name, type;
-			if (!GetCommonAttributes (how, out name, out type))
-				return;
+        void ProcessAdd(RoleManagerSection section, SettingsMappingWhatContents how)
+        {
+            string name,
+                type;
+            if (!GetCommonAttributes(how, out name, out type))
+                return;
 
-			ProviderSettings provider = section.Providers [name];
-			if (provider != null)
-				SetProviderProperties (how, provider);
-		}
-	}
+            ProviderSettingsCollection providers = section.Providers;
+            ProviderSettings provider = providers[name];
+            if (provider != null)
+                return;
+
+            ProviderSettings prov = new ProviderSettings(name, type);
+            SetProviderProperties(how, prov);
+
+            providers.Add(prov);
+        }
+
+        void ProcessRemove(RoleManagerSection section, SettingsMappingWhatContents how)
+        {
+            string name,
+                type;
+            if (!GetCommonAttributes(how, out name, out type))
+                return;
+
+            ProviderSettingsCollection providers = section.Providers;
+            ProviderSettings provider = providers[name];
+            if (provider != null)
+            {
+                if (provider.Type != type)
+                    return;
+                providers.Remove(name);
+            }
+        }
+
+        void ProcessClear(RoleManagerSection section, SettingsMappingWhatContents how)
+        {
+            section.Providers.Clear();
+        }
+
+        void ProcessReplace(RoleManagerSection section, SettingsMappingWhatContents how)
+        {
+            string name,
+                type;
+            if (!GetCommonAttributes(how, out name, out type))
+                return;
+
+            ProviderSettings provider = section.Providers[name];
+            if (provider != null)
+                SetProviderProperties(how, provider);
+        }
+    }
 }

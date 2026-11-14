@@ -28,7 +28,12 @@ using System.ComponentModel;
 
 namespace Newtonsoft.Json.Tests.TestObjects.Organization
 {
-    [JsonObject(Id = "Person", Title = "Title!", Description = "JsonObjectAttribute description!", MemberSerialization = MemberSerialization.OptIn)]
+    [JsonObject(
+        Id = "Person",
+        Title = "Title!",
+        Description = "JsonObjectAttribute description!",
+        MemberSerialization = MemberSerialization.OptIn
+    )]
 #if !(DNXCORE50)
     [Description("DescriptionAttribute description!")]
 #endif

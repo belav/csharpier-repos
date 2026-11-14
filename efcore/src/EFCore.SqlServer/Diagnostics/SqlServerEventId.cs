@@ -73,8 +73,7 @@ public static class SqlServerEventId
 
     private static readonly string ValidationPrefix = DbLoggerCategory.Model.Validation.Name + ".";
 
-    private static EventId MakeValidationId(Id id)
-        => new((int)id, ValidationPrefix + id);
+    private static EventId MakeValidationId(Id id) => new((int)id, ValidationPrefix + id);
 
     /// <summary>
     ///     Decimal column is part of the key.
@@ -87,7 +86,9 @@ public static class SqlServerEventId
     ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId DecimalTypeKeyWarning = MakeValidationId(Id.DecimalTypeKeyWarning);
+    public static readonly EventId DecimalTypeKeyWarning = MakeValidationId(
+        Id.DecimalTypeKeyWarning
+    );
 
     /// <summary>
     ///     No explicit type for a decimal column.
@@ -100,7 +101,9 @@ public static class SqlServerEventId
     ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId DecimalTypeDefaultWarning = MakeValidationId(Id.DecimalTypeDefaultWarning);
+    public static readonly EventId DecimalTypeDefaultWarning = MakeValidationId(
+        Id.DecimalTypeDefaultWarning
+    );
 
     /// <summary>
     ///     A byte property is set up to use a SQL Server identity column.
@@ -113,7 +116,9 @@ public static class SqlServerEventId
     ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ByteIdentityColumnWarning = MakeValidationId(Id.ByteIdentityColumnWarning);
+    public static readonly EventId ByteIdentityColumnWarning = MakeValidationId(
+        Id.ByteIdentityColumnWarning
+    );
 
     /// <summary>
     ///     There are conflicting value generation methods for a property.
@@ -127,13 +132,14 @@ public static class SqlServerEventId
     ///         payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ConflictingValueGenerationStrategiesWarning =
-        MakeValidationId(Id.ConflictingValueGenerationStrategiesWarning);
+    public static readonly EventId ConflictingValueGenerationStrategiesWarning = MakeValidationId(
+        Id.ConflictingValueGenerationStrategiesWarning
+    );
 
-    private static readonly string TransactionPrefix = DbLoggerCategory.Database.Transaction.Name + ".";
+    private static readonly string TransactionPrefix =
+        DbLoggerCategory.Database.Transaction.Name + ".";
 
-    private static EventId MakeTransactionId(Id id)
-        => new((int)id, TransactionPrefix + id);
+    private static EventId MakeTransactionId(Id id) => new((int)id, TransactionPrefix + id);
 
     /// <summary>
     ///     Savepoints have been disabled when saving changes with an external transaction, because Multiple Active Result Sets is
@@ -142,12 +148,13 @@ public static class SqlServerEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     /// </remarks>
-    public static readonly EventId SavepointsDisabledBecauseOfMARS = MakeTransactionId(Id.SavepointsDisabledBecauseOfMARS);
+    public static readonly EventId SavepointsDisabledBecauseOfMARS = MakeTransactionId(
+        Id.SavepointsDisabledBecauseOfMARS
+    );
 
     private static readonly string ScaffoldingPrefix = DbLoggerCategory.Scaffolding.Name + ".";
 
-    private static EventId MakeScaffoldingId(Id id)
-        => new((int)id, ScaffoldingPrefix + id);
+    private static EventId MakeScaffoldingId(Id id) => new((int)id, ScaffoldingPrefix + id);
 
     /// <summary>
     ///     A column was found.
@@ -179,7 +186,9 @@ public static class SqlServerEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId MissingSchemaWarning = MakeScaffoldingId(Id.MissingSchemaWarning);
+    public static readonly EventId MissingSchemaWarning = MakeScaffoldingId(
+        Id.MissingSchemaWarning
+    );
 
     /// <summary>
     ///     The database is missing a table.
@@ -237,7 +246,9 @@ public static class SqlServerEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId UniqueConstraintFound = MakeScaffoldingId(Id.UniqueConstraintFound);
+    public static readonly EventId UniqueConstraintFound = MakeScaffoldingId(
+        Id.UniqueConstraintFound
+    );
 
     /// <summary>
     ///     An index was found.
@@ -261,8 +272,9 @@ public static class SqlServerEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId ForeignKeyPrincipalColumnMissingWarning =
-        MakeScaffoldingId(Id.ForeignKeyPrincipalColumnMissingWarning);
+    public static readonly EventId ForeignKeyPrincipalColumnMissingWarning = MakeScaffoldingId(
+        Id.ForeignKeyPrincipalColumnMissingWarning
+    );
 
     /// <summary>
     ///     A reflexive foreign key constraint was skipped.
@@ -270,7 +282,9 @@ public static class SqlServerEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId ReflexiveConstraintIgnored = MakeScaffoldingId(Id.ReflexiveConstraintIgnored);
+    public static readonly EventId ReflexiveConstraintIgnored = MakeScaffoldingId(
+        Id.ReflexiveConstraintIgnored
+    );
 
     /// <summary>
     ///     A duplicate foreign key constraint was skipped.
@@ -278,7 +292,9 @@ public static class SqlServerEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId DuplicateForeignKeyConstraintIgnored = MakeScaffoldingId(Id.DuplicateForeignKeyConstraintIgnored);
+    public static readonly EventId DuplicateForeignKeyConstraintIgnored = MakeScaffoldingId(
+        Id.DuplicateForeignKeyConstraintIgnored
+    );
 
     /// <summary>
     ///     A column was skipped because its database type could not be found.
@@ -286,7 +302,9 @@ public static class SqlServerEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId ColumnWithoutTypeWarning = MakeScaffoldingId(Id.ColumnWithoutTypeWarning);
+    public static readonly EventId ColumnWithoutTypeWarning = MakeScaffoldingId(
+        Id.ColumnWithoutTypeWarning
+    );
 
     /// <summary>
     ///     The database user has not been granted 'VIEW DEFINITION' rights. Scaffolding requires these rights to construct the Entity Framework
@@ -296,5 +314,7 @@ public static class SqlServerEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId MissingViewDefinitionRightsWarning = MakeScaffoldingId(Id.MissingViewDefinitionRightsWarning);
+    public static readonly EventId MissingViewDefinitionRightsWarning = MakeScaffoldingId(
+        Id.MissingViewDefinitionRightsWarning
+    );
 }

@@ -40,7 +40,8 @@ namespace System.Runtime.Tests
         [Fact]
         public void SetTargetToNull_StateIsConsistent()
         {
-            object target = new(), dependent = new();
+            object target = new(),
+                dependent = new();
             DependentHandle handle = new(target, dependent);
 
             Assert.True(handle.IsAllocated);
@@ -59,7 +60,8 @@ namespace System.Runtime.Tests
         [Fact]
         public void SetTargetToNull_RepeatedCallsAreFine()
         {
-            object target = new(), dependent = new();
+            object target = new(),
+                dependent = new();
             DependentHandle handle = new(target, dependent);
 
             handle.Target = null;
@@ -82,7 +84,8 @@ namespace System.Runtime.Tests
         [Fact]
         public void GetSetDependent()
         {
-            object target = new(), dependent = new();
+            object target = new(),
+                dependent = new();
             DependentHandle handle = new(target, null);
 
             // The target can be retrieved correctly
@@ -160,9 +163,13 @@ namespace System.Runtime.Tests
         public void DependentIsCollectedOnTargetNotReachable()
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static DependentHandle Initialize(out WeakReference weakTarget, out WeakReference weakDependent)
+            static DependentHandle Initialize(
+                out WeakReference weakTarget,
+                out WeakReference weakDependent
+            )
             {
-                object target = new(), dependent = new();
+                object target = new(),
+                    dependent = new();
 
                 weakTarget = new WeakReference(target);
                 weakDependent = new WeakReference(dependent);
@@ -170,7 +177,10 @@ namespace System.Runtime.Tests
                 return new DependentHandle(target, dependent);
             }
 
-            DependentHandle handle = Initialize(out WeakReference target, out WeakReference dependent);
+            DependentHandle handle = Initialize(
+                out WeakReference target,
+                out WeakReference dependent
+            );
 
             GC.Collect();
 
@@ -187,7 +197,10 @@ namespace System.Runtime.Tests
         public void DependentIsCollectedOnTargetNotReachable_EvenWithReferenceCycles()
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static DependentHandle Initialize(out WeakReference weakTarget, out WeakReference weakDependent)
+            static DependentHandle Initialize(
+                out WeakReference weakTarget,
+                out WeakReference weakDependent
+            )
             {
                 object target = new();
                 ObjectWithReference dependent = new() { Reference = target };
@@ -198,7 +211,10 @@ namespace System.Runtime.Tests
                 return new DependentHandle(target, dependent);
             }
 
-            DependentHandle handle = Initialize(out WeakReference target, out WeakReference dependent);
+            DependentHandle handle = Initialize(
+                out WeakReference target,
+                out WeakReference dependent
+            );
 
             GC.Collect();
 
@@ -286,7 +302,7 @@ namespace System.Runtime.Tests
                 finally
                 {
                     handle.Dispose();
-                }                
+                }
             });
         }
 
@@ -303,7 +319,8 @@ namespace System.Runtime.Tests
         [Fact]
         public void Dispose_RepeatedCallsAreFine()
         {
-            object target = new(), dependent = new();
+            object target = new(),
+                dependent = new();
             DependentHandle handle = new(target, dependent);
 
             Assert.True(handle.IsAllocated);

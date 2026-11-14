@@ -23,10 +23,11 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
     /// <summary>
-    /// Creates services on the first connection of an applicable subject buffer to an IWpfTextView. 
+    /// Creates services on the first connection of an applicable subject buffer to an IWpfTextView.
     /// This ensures the services are available by the time an open document or the interactive window needs them.
     /// </summary>
-    internal abstract class AbstractCreateServicesOnTextViewConnection : IWpfTextViewConnectionListener
+    internal abstract class AbstractCreateServicesOnTextViewConnection
+        : IWpfTextViewConnectionListener
     {
         private readonly string _languageName;
         private readonly AsyncBatchingWorkQueue<ProjectId?> _workQueue;
@@ -35,31 +36,38 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         protected VisualStudioWorkspace Workspace { get; }
         protected IGlobalOptionService GlobalOptions { get; }
 
-        protected virtual Task InitializeServiceForProjectWithOpenedDocumentAsync(Project project)
-            => Task.CompletedTask;
+        protected virtual Task InitializeServiceForProjectWithOpenedDocumentAsync(
+            Project project
+        ) => Task.CompletedTask;
 
         public AbstractCreateServicesOnTextViewConnection(
             VisualStudioWorkspace workspace,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider,
             IThreadingContext threadingContext,
-            string languageName)
+            string languageName
+        )
         {
             Workspace = workspace;
             GlobalOptions = globalOptions;
             _languageName = languageName;
 
             _workQueue = new AsyncBatchingWorkQueue<ProjectId?>(
-                    TimeSpan.FromSeconds(1),
-                    BatchProcessProjectsWithOpenedDocumentAsync,
-                    EqualityComparer<ProjectId?>.Default,
-                    listenerProvider.GetListener(FeatureAttribute.CompletionSet),
-                    threadingContext.DisposalToken);
+                TimeSpan.FromSeconds(1),
+                BatchProcessProjectsWithOpenedDocumentAsync,
+                EqualityComparer<ProjectId?>.Default,
+                listenerProvider.GetListener(FeatureAttribute.CompletionSet),
+                threadingContext.DisposalToken
+            );
 
             Workspace.DocumentOpened += QueueWorkOnDocumentOpened;
         }
 
-        void IWpfTextViewConnectionListener.SubjectBuffersConnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
+        void IWpfTextViewConnectionListener.SubjectBuffersConnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        )
         {
             if (!_initialized)
             {
@@ -69,11 +77,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        void IWpfTextViewConnectionListener.SubjectBuffersDisconnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
-        {
-        }
+        void IWpfTextViewConnectionListener.SubjectBuffersDisconnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        ) { }
 
-        private async ValueTask BatchProcessProjectsWithOpenedDocumentAsync(ImmutableSegmentedList<ProjectId?> projectIds, CancellationToken cancellationToken)
+        private async ValueTask BatchProcessProjectsWithOpenedDocumentAsync(
+            ImmutableSegmentedList<ProjectId?> projectIds,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var projectId in projectIds)
             {
@@ -88,10 +101,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     // Preload project completion providers at document open also helps avoid redundant file reads
                     // from a race caused by multiple features (codefix, refactoring, etc.) attempting to get extensions
                     // from analyzer references at the same time when they are not cached.
-                    if (project.GetLanguageService<CompletionService>() is CompletionService completionService)
+                    if (
+                        project.GetLanguageService<CompletionService>()
+                        is CompletionService completionService
+                    )
                         completionService.TriggerLoadProjectProviders(project);
 
-                    await InitializeServiceForProjectWithOpenedDocumentAsync(project).ConfigureAwait(false);
+                    await InitializeServiceForProjectWithOpenedDocumentAsync(project)
+                        .ConfigureAwait(false);
                 }
             }
         }

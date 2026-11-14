@@ -4,8 +4,8 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics;
-using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Contracts.EditAndContinue;
+using Microsoft.CodeAnalysis.Emit;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<SequencePointUpdates> lineChanges,
             ImmutableHashSet<ISymbol> addedSymbols,
             ImmutableArray<DocumentActiveStatementChanges> activeStatementChanges,
-            EditAndContinueCapabilities requiredCapabilities)
+            EditAndContinueCapabilities requiredCapabilities
+        )
         {
             Debug.Assert(!semanticEdits.IsDefault);
             Debug.Assert(!lineChanges.IsDefault);

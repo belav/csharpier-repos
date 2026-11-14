@@ -4,15 +4,13 @@ using System;
 
 public class C : IA
 {
-	public int GetLength ()
-	{
-		return 0;
-	}
+    public int GetLength()
+    {
+        return 0;
+    }
 }
 
 public class Tests
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

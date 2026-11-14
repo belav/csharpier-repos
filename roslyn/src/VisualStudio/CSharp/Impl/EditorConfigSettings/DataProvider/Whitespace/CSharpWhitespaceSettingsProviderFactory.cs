@@ -10,12 +10,16 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.DataProvider.Whitespace
 {
-    internal sealed class CSharpWhitespaceSettingsProviderFactory : ILanguageSettingsProviderFactory<Setting>
+    internal sealed class CSharpWhitespaceSettingsProviderFactory
+        : ILanguageSettingsProviderFactory<Setting>
     {
         private readonly Workspace _workspace;
         private readonly IGlobalOptionService _globalOptions;
 
-        public CSharpWhitespaceSettingsProviderFactory(Workspace workspace, IGlobalOptionService globalOptions)
+        public CSharpWhitespaceSettingsProviderFactory(
+            Workspace workspace,
+            IGlobalOptionService globalOptions
+        )
         {
             _workspace = workspace;
             _globalOptions = globalOptions;
@@ -24,7 +28,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
         public ISettingsProvider<Setting> GetForFile(string filePath)
         {
             var updaterService = new OptionUpdater(_workspace, filePath);
-            return new CSharpWhitespaceSettingsProvider(filePath, updaterService, _workspace, _globalOptions);
+            return new CSharpWhitespaceSettingsProvider(
+                filePath,
+                updaterService,
+                _workspace,
+                _globalOptions
+            );
         }
     }
 }

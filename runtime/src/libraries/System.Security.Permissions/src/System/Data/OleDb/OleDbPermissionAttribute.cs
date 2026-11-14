@@ -8,16 +8,37 @@ using System.Security.Permissions;
 namespace System.Data.OleDb
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct |
-        AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class OleDbPermissionAttribute : DBDataPermissionAttribute
     {
-        public OleDbPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public OleDbPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
+
         [ComponentModel.Browsable(false)]
         [ComponentModel.EditorBrowsable(ComponentModel.EditorBrowsableState.Never)]
-        public string Provider { get { return null; } set { } }
-        public override IPermission CreatePermission() { return null; }
+        public string Provider
+        {
+            get { return null; }
+            set { }
+        }
+
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

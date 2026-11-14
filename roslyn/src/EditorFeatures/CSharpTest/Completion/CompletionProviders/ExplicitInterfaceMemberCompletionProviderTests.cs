@@ -12,10 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class ExplicitInterfaceMemberCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class ExplicitInterfaceMemberCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ExplicitInterfaceMemberCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ExplicitInterfaceMemberCompletionProvider);
 
         [Fact]
         public async Task ExplicitInterfaceMember_01()
@@ -40,7 +41,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             await VerifyItemExistsAsync(markup, "Goo", displayTextSuffix: "()");
             await VerifyItemExistsAsync(markup, "Goo", displayTextSuffix: "(int x)");
             await VerifyItemExistsAsync(markup, "Prop");
-            await VerifyItemExistsAsync(markup, "Generic", displayTextSuffix: "<K, V>(K key, V value)");
+            await VerifyItemExistsAsync(
+                markup,
+                "Generic",
+                displayTextSuffix: "<K, V>(K key, V value)"
+            );
             await VerifyItemExistsAsync(markup, "this", displayTextSuffix: "[int i]");
             await VerifyItemExistsAsync(markup, "With_Underscore", displayTextSuffix: "()");
         }
@@ -351,8 +356,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34456")]
         public async Task NotInaccessibleMember_01()
         {
-            var markup =
-                """
+            var markup = """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                         <ProjectReference>Assembly2</ProjectReference>
@@ -388,8 +392,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34456")]
         public async Task NotInaccessibleMember_02()
         {
-            var markup =
-                """
+            var markup = """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                         <ProjectReference>Assembly2</ProjectReference>
@@ -449,7 +452,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyProviderCommitAsync(markup, "Generic<K, V>(K key, V value)", expected, '\t');
+            await VerifyProviderCommitAsync(
+                markup,
+                "Generic<K, V>(K key, V value)",
+                expected,
+                '\t'
+            );
         }
 
         [Fact]
@@ -608,7 +616,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("out")]
         public async Task TestWithRefKind(string refKind)
         {
-            var markup = $@"
+            var markup =
+                $@"
 interface I
 {{
     void M({refKind} string s);
@@ -620,7 +629,8 @@ class C : I
 }}
 ";
 
-            var expected = $@"
+            var expected =
+                $@"
 interface I
 {{
     void M({refKind} string s);
@@ -1010,7 +1020,12 @@ class C : I
                 }
                 """;
 
-            await VerifyProviderCommitAsync(markup, "operator checked string(C3 x)", expected, '\t');
+            await VerifyProviderCommitAsync(
+                markup,
+                "operator checked string(C3 x)",
+                expected,
+                '\t'
+            );
         }
     }
 }

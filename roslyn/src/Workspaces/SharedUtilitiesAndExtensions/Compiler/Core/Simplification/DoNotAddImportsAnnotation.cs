@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Simplification
     // System.NotImplementedException() with a SymbolAnnotation and a DoNotAddImportsAnnotation.
     //
     // This allows the simplifier to remove the `System.` if `using System` is already in the file
-    // but prevents the addition of `using System` just for the NotImplementedException. 
+    // but prevents the addition of `using System` just for the NotImplementedException.
     //
     // This could have been implemented as an additional bit serialized into the `Data` string of
     // SymbolAnnotation. However that would require additional substring operations to retrieve

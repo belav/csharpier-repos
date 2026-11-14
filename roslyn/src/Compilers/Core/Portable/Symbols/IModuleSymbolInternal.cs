@@ -6,7 +6,5 @@
 
 namespace Microsoft.CodeAnalysis.Symbols
 {
-    internal interface IModuleSymbolInternal : ISymbolInternal
-    {
-    }
+    internal interface IModuleSymbolInternal : ISymbolInternal { }
 }

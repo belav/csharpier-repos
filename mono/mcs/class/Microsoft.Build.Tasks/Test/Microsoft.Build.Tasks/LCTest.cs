@@ -34,68 +34,72 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    class LCExtended : LC
+    {
+        public LCExtended()
+            : base() { }
 
-	class LCExtended : LC {
-		public LCExtended ()
-			: base ()
-		{
-		}
+        public void ACLC(CommandLineBuilderExtension commandLine)
+        {
+            base.AddCommandLineCommands(commandLine);
+        }
 
-		public void ACLC (CommandLineBuilderExtension commandLine)
-		{
-			base.AddCommandLineCommands (commandLine);
-		}
+        public string TN
+        {
+            get { return base.ToolName; }
+        }
+    }
 
-		public string TN {
-			get { return base.ToolName; }
-		}
-	}
+    [TestFixture]
+    public class LCTest
+    {
+        [Test]
+        public void TestAssignment1()
+        {
+            LC lc = new LC();
 
-	[TestFixture]
-	public class LCTest {
+            lc.LicenseTarget = new TaskItem("bar.exe");
+            lc.NoLogo = true;
+            lc.OutputDirectory = "abc\\def";
+            lc.OutputLicense = new TaskItem("bar.exe.licenses");
+            lc.ReferencedAssemblies = new ITaskItem[] { new TaskItem("Test.dll") };
+            lc.Sources = new ITaskItem[] { new TaskItem("foo.licx") };
 
-		[Test]
-		public void TestAssignment1 ()
-		{
-			LC lc = new LC ();
+            Assert.AreEqual("bar.exe", lc.LicenseTarget.ItemSpec, "LicenseTarget");
+            Assert.AreEqual(true, lc.NoLogo, "NoLogo");
+            Assert.AreEqual("abc\\def", lc.OutputDirectory, "OutputDirectory");
+            Assert.AreEqual("bar.exe.licenses", lc.OutputLicense.ItemSpec, "OutputLicense");
 
-			lc.LicenseTarget = new TaskItem ("bar.exe");
-			lc.NoLogo = true;
-			lc.OutputDirectory = "abc\\def";
-			lc.OutputLicense = new TaskItem ("bar.exe.licenses");
-			lc.ReferencedAssemblies = new ITaskItem [] { new TaskItem ("Test.dll") };
-			lc.Sources = new ITaskItem [] { new TaskItem ("foo.licx") };
+            Assert.AreEqual(1, lc.ReferencedAssemblies.Length, "Number of ReferenceAssemblies");
+            Assert.AreEqual(
+                "Test.dll",
+                lc.ReferencedAssemblies[0].ItemSpec,
+                "ReferencedAssemblies[0]"
+            );
 
-			Assert.AreEqual ("bar.exe", lc.LicenseTarget.ItemSpec, "LicenseTarget");
-			Assert.AreEqual (true, lc.NoLogo, "NoLogo");
-			Assert.AreEqual ("abc\\def", lc.OutputDirectory, "OutputDirectory");
-			Assert.AreEqual ("bar.exe.licenses", lc.OutputLicense.ItemSpec, "OutputLicense");
+            Assert.AreEqual(1, lc.Sources.Length, "Number of Sources");
+            Assert.AreEqual("foo.licx", lc.Sources[0].ItemSpec, "Sources [0]");
+        }
 
-			Assert.AreEqual (1, lc.ReferencedAssemblies.Length, "Number of ReferenceAssemblies");
-			Assert.AreEqual ("Test.dll", lc.ReferencedAssemblies [0].ItemSpec, "ReferencedAssemblies[0]");
+        [Test]
+        public void TestDefaults()
+        {
+            LC lc = new LC();
 
-			Assert.AreEqual (1, lc.Sources.Length, "Number of Sources");
-			Assert.AreEqual ("foo.licx", lc.Sources [0].ItemSpec, "Sources [0]");
-		}
+            lc.LicenseTarget = new TaskItem("bar.exe");
+            lc.Sources = new ITaskItem[] { new TaskItem("foo.licx") };
 
-		[Test]
-		public void TestDefaults ()
-		{
-			LC lc = new LC ();
+            Assert.AreEqual("bar.exe", lc.LicenseTarget.ItemSpec, "LicenseTarget");
+            Assert.AreEqual(false, lc.NoLogo, "NoLogo");
+            Assert.IsNull(lc.OutputDirectory, "OutputDirectory");
+            Assert.AreEqual(null, lc.OutputLicense, "OutputLicense");
 
-			lc.LicenseTarget = new TaskItem ("bar.exe");
-			lc.Sources = new ITaskItem [] { new TaskItem ("foo.licx") };
+            Assert.IsNull(lc.ReferencedAssemblies, "ReferencedAssemblies");
 
-			Assert.AreEqual ("bar.exe", lc.LicenseTarget.ItemSpec, "LicenseTarget");
-			Assert.AreEqual (false, lc.NoLogo, "NoLogo");
-			Assert.IsNull (lc.OutputDirectory, "OutputDirectory");
-			Assert.AreEqual (null, lc.OutputLicense, "OutputLicense");
-
-			Assert.IsNull (lc.ReferencedAssemblies, "ReferencedAssemblies");
-
-			Assert.AreEqual (1, lc.Sources.Length, "Number of Sources");
-			Assert.AreEqual ("foo.licx", lc.Sources [0].ItemSpec, "Sources [0]");
-		}
-	}
+            Assert.AreEqual(1, lc.Sources.Length, "Number of Sources");
+            Assert.AreEqual("foo.licx", lc.Sources[0].ItemSpec, "Sources [0]");
+        }
+    }
 }

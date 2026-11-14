@@ -33,15 +33,12 @@ namespace Microsoft.Build.Tasks.Xaml
         string msBuildProjectDirectory;
         ITaskItem[] applicationMarkupWithTypeName;
 
-        public CompilationPass2Task()
-        {
-        }
+        public CompilationPass2Task() { }
 
         [Fx.Tag.KnownXamlExternal]
         public ITaskItem[] ApplicationMarkup { get; set; }
 
-        public string AssemblyName
-        { get; set; }
+        public string AssemblyName { get; set; }
 
         [Fx.Tag.KnownXamlExternal]
         public ITaskItem[] References { get; set; }
@@ -49,11 +46,7 @@ namespace Microsoft.Build.Tasks.Xaml
         // Required in Dev11, but for backward compatibility with a Dev10 targets file, not marking as required.
         public string Language
         {
-            get
-            {
-                return this.language;
-            }
-
+            get { return this.language; }
             set
             {
                 this.language = value;
@@ -64,11 +57,7 @@ namespace Microsoft.Build.Tasks.Xaml
         // Required in Dev11, but for backward compatibility with a Dev10 targets file, not marking as required.
         public string OutputPath
         {
-            get
-            {
-                return this.outputPath;
-            }
-
+            get { return this.outputPath; }
             set
             {
                 this.outputPath = value;
@@ -79,11 +68,7 @@ namespace Microsoft.Build.Tasks.Xaml
         // Required in Dev11, but for backward compatibility with a Dev10 targets file, not marking as required.
         public string MSBuildProjectDirectory
         {
-            get
-            {
-                return this.msBuildProjectDirectory;
-            }
-
+            get { return this.msBuildProjectDirectory; }
             set
             {
                 this.msBuildProjectDirectory = value;
@@ -91,24 +76,17 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        public bool IsInProcessXamlMarkupCompile
-        { get; set; }
+        public bool IsInProcessXamlMarkupCompile { get; set; }
 
         [Fx.Tag.KnownXamlExternal]
-        public ITaskItem[] SourceCodeFiles
-        { get; set; }
-        
-        public ITaskItem[] XamlBuildTypeInspectionExtensionNames
-        { get; set; }
+        public ITaskItem[] SourceCodeFiles { get; set; }
+
+        public ITaskItem[] XamlBuildTypeInspectionExtensionNames { get; set; }
 
         // Required in Dev11, but for backward compatibility with a Dev10 targets file, not marking as required.
         public ITaskItem[] ApplicationMarkupWithTypeName
         {
-            get
-            {
-                return this.applicationMarkupWithTypeName;
-            }
-
+            get { return this.applicationMarkupWithTypeName; }
             set
             {
                 this.applicationMarkupWithTypeName = value;
@@ -116,26 +94,17 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        public string LocalAssemblyReference
-        { get; set; }
+        public string LocalAssemblyReference { get; set; }
 
-        public string RootNamespace
-        { get; set; }
+        public string RootNamespace { get; set; }
 
-        public string BuildTaskPath
-        { get; set; }
+        public string BuildTaskPath { get; set; }
 
         [Output]
         public ITaskItem[] ExtensionGeneratedCodeFiles
         {
-            get
-            {
-                return generatedCodeFiles.ToArray();
-            }
-            set
-            {
-                generatedCodeFiles = new List<ITaskItem>(value);
-            }
+            get { return generatedCodeFiles.ToArray(); }
+            set { generatedCodeFiles = new List<ITaskItem>(value); }
         }
 
         public override bool Execute()
@@ -146,11 +115,16 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 ValidateRequiredDev11Properties();
 
-                appDomain = XamlBuildTaskServices.CreateAppDomain("CompilationPass2AppDomain_" + Guid.NewGuid(), BuildTaskPath);
+                appDomain = XamlBuildTaskServices.CreateAppDomain(
+                    "CompilationPass2AppDomain_" + Guid.NewGuid(),
+                    BuildTaskPath
+                );
 
-                CompilationPass2TaskInternal wrapper = (CompilationPass2TaskInternal)appDomain.CreateInstanceAndUnwrap(
-                    Assembly.GetExecutingAssembly().FullName,
-                    typeof(CompilationPass2TaskInternal).FullName);
+                CompilationPass2TaskInternal wrapper = (CompilationPass2TaskInternal)
+                    appDomain.CreateInstanceAndUnwrap(
+                        Assembly.GetExecutingAssembly().FullName,
+                        typeof(CompilationPass2TaskInternal).FullName
+                    );
 
                 PopulateBuildArtifacts(wrapper);
 
@@ -167,7 +141,8 @@ namespace Microsoft.Build.Tasks.Xaml
                             logData.Message,
                             logData.FileName,
                             logData.LineNumber,
-                            logData.LinePosition);
+                            logData.LinePosition
+                        );
                     }
                 }
 
@@ -211,23 +186,41 @@ namespace Microsoft.Build.Tasks.Xaml
                 string requiredPropertiesNotSpecified = "";
                 if (this.language == null)
                 {
-                    requiredPropertiesNotSpecified = SeparateWithComma(requiredPropertiesNotSpecified, "Language");
+                    requiredPropertiesNotSpecified = SeparateWithComma(
+                        requiredPropertiesNotSpecified,
+                        "Language"
+                    );
                 }
                 if (this.outputPath == null)
                 {
-                    requiredPropertiesNotSpecified = SeparateWithComma(requiredPropertiesNotSpecified, "OutputPath");
+                    requiredPropertiesNotSpecified = SeparateWithComma(
+                        requiredPropertiesNotSpecified,
+                        "OutputPath"
+                    );
                 }
                 if (this.msBuildProjectDirectory == null)
                 {
-                    requiredPropertiesNotSpecified = SeparateWithComma(requiredPropertiesNotSpecified, "MSBuildProjectDirectory");
+                    requiredPropertiesNotSpecified = SeparateWithComma(
+                        requiredPropertiesNotSpecified,
+                        "MSBuildProjectDirectory"
+                    );
                 }
                 if (this.applicationMarkupWithTypeName == null)
                 {
-                    requiredPropertiesNotSpecified = SeparateWithComma(requiredPropertiesNotSpecified, "ApplicationMarkupWithTypeName");
+                    requiredPropertiesNotSpecified = SeparateWithComma(
+                        requiredPropertiesNotSpecified,
+                        "ApplicationMarkupWithTypeName"
+                    );
                 }
                 if (!String.IsNullOrEmpty(requiredPropertiesNotSpecified))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.MissingRequiredParametersCompilationPass2Task(requiredPropertiesNotSpecified)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.MissingRequiredParametersCompilationPass2Task(
+                                requiredPropertiesNotSpecified
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -248,8 +241,9 @@ namespace Microsoft.Build.Tasks.Xaml
 
             wrapper.BuildLogger = this.Log;
 
-            wrapper.References = this.References
-                .Select(i => new DelegatingTaskItem(i) as ITaskItem).ToList();
+            wrapper.References = this
+                .References.Select(i => new DelegatingTaskItem(i) as ITaskItem)
+                .ToList();
 
             wrapper.LocalAssemblyReference = this.LocalAssemblyReference;
 
@@ -278,10 +272,13 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (this.supportExtensions)
             {
-                wrapper.XamlBuildTaskTypeInspectionExtensionNames = XamlBuildTaskServices.GetXamlBuildTaskExtensionNames(this.XamlBuildTypeInspectionExtensionNames);
+                wrapper.XamlBuildTaskTypeInspectionExtensionNames =
+                    XamlBuildTaskServices.GetXamlBuildTaskExtensionNames(
+                        this.XamlBuildTypeInspectionExtensionNames
+                    );
 
                 // Here we create a Dictionary of Type Full Name and corresponding TaskItem
-                // This is passed to the extensions which enables them to look up 
+                // This is passed to the extensions which enables them to look up
                 // metadata about a type like file name.
                 IDictionary<string, ITaskItem> applicationMarkupWithTypeName = null;
                 if (this.ApplicationMarkupWithTypeName != null)
@@ -293,7 +290,10 @@ namespace Microsoft.Build.Tasks.Xaml
                     string typeName = taskItem.GetMetadata("typeName");
                     if (!String.IsNullOrWhiteSpace(typeName))
                     {
-                        applicationMarkupWithTypeName.Add(typeName, new DelegatingTaskItem(taskItem));
+                        applicationMarkupWithTypeName.Add(
+                            typeName,
+                            new DelegatingTaskItem(taskItem)
+                        );
                     }
                 }
                 wrapper.ApplicationMarkupWithTypeName = applicationMarkupWithTypeName;

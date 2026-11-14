@@ -301,9 +301,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var messagesAccesor = CreateValidationMessagesAccessor(appElement);
 
         // Binding applies to option selection
-        Browser.Equal(
-            new[] { "SanFrancisco" },
-            () => citiesInput.AllSelectedOptions.Select(option => option.GetAttribute("value"))
+        Browser.Equal(new[] { "SanFrancisco" }, () =>
+            citiesInput.AllSelectedOptions.Select(option => option.GetAttribute("value"))
         );
 
         // Validates on edit
@@ -357,9 +356,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var hostileSelectLabel = selectParagraph.FindElement(By.TagName("span"));
 
         // Check initial selection
-        Browser.Equal(
-            new[] { "\"", "{" },
-            () => hostileSelectInput.AllSelectedOptions.Select(o => o.Text)
+        Browser.Equal(new[] { "\"", "{" }, () =>
+            hostileSelectInput.AllSelectedOptions.Select(o => o.Text)
         );
 
         hostileSelectInput.DeselectByIndex(0);
@@ -456,39 +454,36 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.True(() => FindColorInputs().All(i => !i.Selected));
 
         // Invalidates on submit
-        Browser.True(
-            () => FindCountryInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindCountryInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
         );
-        Browser.True(
-            () => FindColorInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindColorInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
         );
 
         submitButton.Click();
 
-        Browser.True(
-            () => FindCountryInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindCountryInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
         );
-        Browser.True(
-            () => FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
         );
 
         // Validates on edit
         FindCountryInputs().First().Click();
 
-        Browser.True(
-            () =>
-                FindCountryInputs()
-                    .All(i => string.Equals("modified valid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindCountryInputs().All(i => string.Equals("modified valid", i.GetAttribute("class")))
         );
-        Browser.True(
-            () => FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
         );
 
         FindColorInputs().First().Click();
 
-        Browser.True(
-            () =>
-                FindColorInputs().All(i => string.Equals("modified valid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindColorInputs().All(i => string.Equals("modified valid", i.GetAttribute("class")))
         );
 
         IReadOnlyCollection<IWebElement> FindCountryInputs() =>
@@ -736,9 +731,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var select = new SelectElement(appElement.FindElement(By.Id("select-cities")));
 
         // Assert that the binding works in the .NET -> JS direction
-        Browser.Equal(
-            new[] { "\"sf\"", "\"sea\"" },
-            () => select.AllSelectedOptions.Select(option => option.GetAttribute("value"))
+        Browser.Equal(new[] { "\"sf\"", "\"sea\"" }, () =>
+            select.AllSelectedOptions.Select(option => option.GetAttribute("value"))
         );
 
         select.DeselectByIndex(0);
@@ -984,18 +978,16 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         input.SelectByValue("Wednesday");
         Browser.Equal("Wednesday", () => input.AllSelectedOptions.Single().Text);
         input.SelectByValue("Tuesday");
-        Browser.Equal(
-            "Monday+Wednesday",
-            () => string.Join('+', input.AllSelectedOptions.Select(e => e.Text))
+        Browser.Equal("Monday+Wednesday", () =>
+            string.Join('+', input.AllSelectedOptions.Select(e => e.Text))
         );
 
         // If the user then re-enters the same value, even though the setter doesn't cause any
         // change to the .NET model (because it's re-mutated to the same value again), the diff
         // still knows to update the DOM
         input.SelectByValue("Tuesday");
-        Browser.Equal(
-            "Monday+Wednesday",
-            () => string.Join('+', input.AllSelectedOptions.Select(e => e.Text))
+        Browser.Equal("Monday+Wednesday", () =>
+            string.Join('+', input.AllSelectedOptions.Select(e => e.Text))
         );
     }
 
@@ -1058,9 +1050,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // The bound value is expected and no inputs have a class attribute
         Browser.True(() => FindRadioInputs().All(input => !ElementHasAttribute(input, "class")));
-        Browser.True(
-            () =>
-                FindRadioInputs().First(input => input.GetAttribute("value") == "Unknown").Selected
+        Browser.True(() =>
+            FindRadioInputs().First(input => input.GetAttribute("value") == "Unknown").Selected
         );
         Browser.Equal("Unknown", () => selectedInputText.Text);
 
@@ -1068,11 +1059,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // Value binding continues to work without an edit context and class attributes are unchanged
         Browser.True(() => FindRadioInputs().All(input => !ElementHasAttribute(input, "class")));
-        Browser.True(
-            () =>
-                FindRadioInputs()
-                    .First(input => input.GetAttribute("value") == "BestAirline")
-                    .Selected
+        Browser.True(() =>
+            FindRadioInputs().First(input => input.GetAttribute("value") == "BestAirline").Selected
         );
         Browser.Equal("BestAirline", () => selectedInputText.Text);
 
@@ -1101,9 +1089,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         ageInput.Clear();
         ageInput.SendKeys("-1");
         submitButton.Click();
-        Browser.Collection(
-            allMessagesAccessor,
-            x => Assert.Equal("Under-zeros should not be filling out forms", x)
+        Browser.Collection(allMessagesAccessor, x =>
+            Assert.Equal("Under-zeros should not be filling out forms", x)
         );
         Browser.Empty(modelMessagesAccessor);
 
@@ -1111,13 +1098,11 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         ageInput.Clear();
         ageInput.SendKeys("10");
         submitButton.Click();
-        Browser.Collection(
-            allMessagesAccessor,
-            x => Assert.Equal("Sorry, you're not old enough as a non-cat", x)
+        Browser.Collection(allMessagesAccessor, x =>
+            Assert.Equal("Sorry, you're not old enough as a non-cat", x)
         );
-        Browser.Collection(
-            modelMessagesAccessor,
-            x => Assert.Equal("Sorry, you're not old enough as a non-cat", x)
+        Browser.Collection(modelMessagesAccessor, x =>
+            Assert.Equal("Sorry, you're not old enough as a non-cat", x)
         );
 
         // Become valid

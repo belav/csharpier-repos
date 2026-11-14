@@ -27,7 +27,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"child::*[last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -45,7 +51,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"child::*[last() - 1]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -63,7 +75,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"attribute::*[last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -79,17 +97,25 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"attribute::*[last() - 1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
                     LocalName = "Attr4",
                     Name = "Attr4",
                     HasNameTable = true,
-                    Value = "Fourth"
-                });
+                    Value = "Fourth",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -107,7 +133,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"child::*[position() = last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -125,7 +157,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[position() = last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -143,7 +181,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[position() = last()]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -161,7 +205,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"@*[position() = last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -179,7 +229,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"@*[position() = last()]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -197,7 +253,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[last() = 1]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -215,7 +277,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[last() = 1]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -233,7 +301,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"child::*[position() = 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -251,7 +325,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"attribute::*[position() = 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -269,7 +349,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"child::*[2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -287,7 +373,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"attribute::*[2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -305,7 +397,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"child::*[position() > 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -323,7 +421,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"child::*[position()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -341,7 +445,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[position() = 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -359,7 +469,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[position() = 2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -377,7 +493,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"@*[position() = 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -395,7 +517,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"@*[position() = 2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -413,7 +541,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -431,7 +565,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -449,7 +589,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"@*[2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -467,7 +613,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"@*[2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -485,7 +637,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[position() > 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -503,7 +661,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"*[position() > 2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -521,7 +685,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"@*[position() > 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -539,7 +709,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"@*[position() > 2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -556,7 +732,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var testExpression = @"id(""1"")";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

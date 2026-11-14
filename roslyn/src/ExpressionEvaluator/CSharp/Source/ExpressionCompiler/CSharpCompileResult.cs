@@ -17,8 +17,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal CSharpCompileResult(
             byte[] assembly,
             MethodSymbol method,
-            ReadOnlyCollection<string>? formatSpecifiers)
-            : base(assembly, method.ContainingType.MetadataName, method.MetadataName, formatSpecifiers)
+            ReadOnlyCollection<string>? formatSpecifiers
+        )
+            : base(
+                assembly,
+                method.ContainingType.MetadataName,
+                method.MetadataName,
+                formatSpecifiers
+            )
         {
             Debug.Assert(method is EEMethodSymbol); // Expected but not required.
             _method = method;

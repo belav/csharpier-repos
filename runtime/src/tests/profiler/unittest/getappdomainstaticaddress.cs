@@ -4,16 +4,18 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.Loader;
+using System.Threading;
 
 namespace Profiler.Tests
 {
     class Program
     {
-        static readonly Guid GetAppDomainStaticAddressProfilerGuid = new Guid("604D76F0-2AF2-48E0-B196-80C972F6AFB7");
+        static readonly Guid GetAppDomainStaticAddressProfilerGuid = new Guid(
+            "604D76F0-2AF2-48E0-B196-80C972F6AFB7"
+        );
 
         static int Main(string[] args)
         {
@@ -22,9 +24,11 @@ namespace Profiler.Tests
                 return RunTest();
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "UnitTestGetAppDomainStaticAddress",
-                                          profilerClsid: GetAppDomainStaticAddressProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "UnitTestGetAppDomainStaticAddress",
+                profilerClsid: GetAppDomainStaticAddressProfilerGuid
+            );
         }
 
         static int RunTest()
@@ -41,7 +45,9 @@ namespace Profiler.Tests
             var collectibleContext = new AssemblyLoadContext("Collectible", true);
 
             var asmDir = Path.GetDirectoryName(typeof(Program).Assembly.Location);
-            var dynamicLibrary = collectibleContext.LoadFromAssemblyPath(Path.Combine(asmDir, "unloadlibrary.dll"));
+            var dynamicLibrary = collectibleContext.LoadFromAssemblyPath(
+                Path.Combine(asmDir, "unloadlibrary.dll")
+            );
             var testType = dynamicLibrary.GetType("UnloadLibrary.TestClass");
 
             object instance = Activator.CreateInstance(testType);

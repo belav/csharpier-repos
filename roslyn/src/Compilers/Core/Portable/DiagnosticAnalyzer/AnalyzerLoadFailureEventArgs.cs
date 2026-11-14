@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             UnableToCreateAnalyzer = 2,
             NoAnalyzers = 3,
             ReferencesFramework = 4,
-            ReferencesNewerCompiler = 5
+            ReferencesNewerCompiler = 5,
         }
 
         /// <summary>
@@ -43,9 +43,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         public Version? ReferencedCompilerVersion { get; internal init; }
 
-        public AnalyzerLoadFailureEventArgs(FailureErrorCode errorCode, string message, Exception? exceptionOpt = null, string? typeNameOpt = null)
+        public AnalyzerLoadFailureEventArgs(
+            FailureErrorCode errorCode,
+            string message,
+            Exception? exceptionOpt = null,
+            string? typeNameOpt = null
+        )
         {
-            if (errorCode <= FailureErrorCode.None || errorCode > FailureErrorCode.ReferencesNewerCompiler)
+            if (
+                errorCode <= FailureErrorCode.None
+                || errorCode > FailureErrorCode.ReferencesNewerCompiler
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(errorCode));
             }

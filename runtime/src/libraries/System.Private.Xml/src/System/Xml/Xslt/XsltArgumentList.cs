@@ -11,16 +11,21 @@ namespace System.Xml.Xsl
         public abstract string Message { get; }
     }
 
-    public delegate void XsltMessageEncounteredEventHandler(object sender, XsltMessageEncounteredEventArgs e);
+    public delegate void XsltMessageEncounteredEventHandler(
+        object sender,
+        XsltMessageEncounteredEventArgs e
+    );
 
     public class XsltArgumentList
     {
         private readonly Hashtable _parameters = new Hashtable();
         private readonly Hashtable _extensions = new Hashtable();
-        private const string ExtensionObjectWarning = @"The stylesheet may have calls to methods of the extension object passed in which cannot be statically analyzed " +
-            "by the trimmer. Ensure all methods that may be called are preserved.";
-        internal const string ExtensionObjectSuppresion = @"In order for this code path to be hit, a previous call to XsltArgumentList.AddExtensionObject is " +
-            "required. That method is already annotated as unsafe and throwing a warning, so we can suppress here.";
+        private const string ExtensionObjectWarning =
+            @"The stylesheet may have calls to methods of the extension object passed in which cannot be statically analyzed "
+            + "by the trimmer. Ensure all methods that may be called are preserved.";
+        internal const string ExtensionObjectSuppresion =
+            @"In order for this code path to be hit, a previous call to XsltArgumentList.AddExtensionObject is "
+            + "required. That method is already annotated as unsafe and throwing a warning, so we can suppress here.";
 
         // Used for reporting xsl:message's during execution
         internal XsltMessageEncounteredEventHandler? xsltMessageEncountered;
@@ -75,14 +80,8 @@ namespace System.Xml.Xsl
 
         public event XsltMessageEncounteredEventHandler XsltMessageEncountered
         {
-            add
-            {
-                xsltMessageEncountered += value;
-            }
-            remove
-            {
-                xsltMessageEncountered -= value;
-            }
+            add { xsltMessageEncountered += value; }
+            remove { xsltMessageEncountered -= value; }
         }
 
         public void Clear()

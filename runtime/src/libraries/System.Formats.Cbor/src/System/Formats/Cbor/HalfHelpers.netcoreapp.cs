@@ -8,10 +8,8 @@ namespace System.Formats.Cbor
 {
     internal static partial class HalfHelpers
     {
-        public static unsafe float HalfToFloat(Half value)
-            => (float)value;
+        public static unsafe float HalfToFloat(Half value) => (float)value;
 
-        public static unsafe double HalfToDouble(Half value)
-            => (double)value;
+        public static unsafe double HalfToDouble(Half value) => (double)value;
     }
 }

@@ -18,7 +18,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         //-----------------------------------------------------------------------------------
         //[Variation(Desc = "v1.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
         [InlineData("import_v4_a.xsd", "import_v4_b.xsd", 2, null)]
@@ -42,7 +41,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals(param1.ToString()) && imp.Schema.TargetNamespace == (string)param3)
+                if (
+                    imp.SchemaLocation.Equals(param1.ToString())
+                    && imp.Schema.TargetNamespace == (string)param3
+                )
                     return;
 
             Assert.Fail();
@@ -74,7 +76,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals(param1.ToString()) && imp.Schema.TargetNamespace == (string)param4)
+                if (
+                    imp.SchemaLocation.Equals(param1.ToString())
+                    && imp.Schema.TargetNamespace == (string)param4
+                )
                     return;
 
             Assert.Fail();
@@ -100,11 +105,18 @@ namespace System.Xml.XmlSchemaTests
 
             CError.Compare(sc.IsCompiled, true, "Add2IsCompiled");
             CError.Compare(sc.Count, 2, "Add2Count");
-            CError.Compare(orig.SourceUri.Contains("import_v4_b.xsd"), true, "Compare the schema object");
+            CError.Compare(
+                orig.SourceUri.Contains("import_v4_b.xsd"),
+                true,
+                "Compare the schema object"
+            );
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v4_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v4_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     return;
 
             Assert.Fail();
@@ -132,7 +144,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v4_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v4_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     return;
 
             Assert.Fail();
@@ -159,7 +174,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v2_b.xsd") && imp.Schema.TargetNamespace.Equals("ns-b"))
+                if (
+                    imp.SchemaLocation.Equals("import_v2_b.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-b")
+                )
                     return;
 
             Assert.Fail();
@@ -182,20 +200,27 @@ namespace System.Xml.XmlSchemaTests
             CError.Compare(sc.IsCompiled, true, "CompileIsCompiled");
 
             XmlSchema sch_B = sc.Add(null, Path.Combine(TestData._Root, "import_v9_b.xsd")); // should be already present in the set
-            sc.Add(null, Path.Combine(TestData._Root, "import_v9_c.xsd"));                   // should be already present in the set
+            sc.Add(null, Path.Combine(TestData._Root, "import_v9_c.xsd")); // should be already present in the set
 
             CError.Compare(sc.Count, 3, "Count");
             CError.Compare(sc.IsCompiled, true, "IsCompiled");
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v9_b.xsd") && imp.Schema.TargetNamespace.Equals("ns-b"))
+                if (
+                    imp.SchemaLocation.Equals("import_v9_b.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-b")
+                )
                     found = true;
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
 
             // check that schema C in sch_b.Includes and its NS correct.
             foreach (XmlSchemaImport imp in sch_B.Includes)
-                if (imp.SchemaLocation.Equals("import_v9_c.xsd") && imp.Schema.TargetNamespace.Equals("ns-c"))
+                if (
+                    imp.SchemaLocation.Equals("import_v9_c.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-c")
+                )
                     return;
 
             Assert.Fail();
@@ -218,24 +243,32 @@ namespace System.Xml.XmlSchemaTests
             CError.Compare(sc.IsCompiled, true, "CompileIsCompiled");
 
             XmlSchema sch_B = sc.Add(null, Path.Combine(TestData._Root, "import_v10_b.xsd")); // should be already present in the set
-            sc.Add(null, Path.Combine(TestData._Root, "import_v10_c.xsd"));                   // should be already present in the set
+            sc.Add(null, Path.Combine(TestData._Root, "import_v10_c.xsd")); // should be already present in the set
 
             CError.Compare(sc.Count, 3, "Count");
             CError.Compare(sc.IsCompiled, true, "IsCompiled");
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v10_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v10_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     found = true;
 
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
 
             // check that schema C in sch_b.Includes and its NS correct.
             foreach (XmlSchemaImport imp in sch_B.Includes)
-                if (imp.SchemaLocation.Equals("import_v10_c.xsd") && imp.Schema.TargetNamespace.Equals("ns-c"))
+                if (
+                    imp.SchemaLocation.Equals("import_v10_c.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-c")
+                )
                     found = true;
 
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
 
             // try adding no ns schema with an ns
             sc.Add("ns-b", Path.Combine(TestData._Root, "import_v10_b.xsd"));
@@ -505,15 +538,22 @@ namespace System.Xml.XmlSchemaTests
 
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings |
-                                       XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                       XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessInlineSchema;
             settings.Schemas = new XmlSchemaSet();
             settings.Schemas.Add(ss);
 
-            using (XmlReader vr = XmlReader.Create(Path.Combine(TestData._Root, "105897.xml"), settings))
+            using (
+                XmlReader vr = XmlReader.Create(
+                    Path.Combine(TestData._Root, "105897.xml"),
+                    settings
+                )
+            )
             {
-                while (vr.Read()) ;
+                while (vr.Read())
+                    ;
             }
             return;
         }
@@ -546,7 +586,10 @@ namespace System.Xml.XmlSchemaTests
             // check that schema is present in parent.Includes and its NS correct.
 
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals(param1.ToString()) && imp.Schema.TargetNamespace == (string)param3)
+                if (
+                    imp.SchemaLocation.Equals(param1.ToString())
+                    && imp.Schema.TargetNamespace == (string)param3
+                )
                     return;
 
             Assert.Fail();
@@ -588,7 +631,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals(param1.ToString()) && imp.Schema.TargetNamespace == (string)param4)
+                if (
+                    imp.SchemaLocation.Equals(param1.ToString())
+                    && imp.Schema.TargetNamespace == (string)param4
+                )
                     return;
 
             Assert.Fail();
@@ -657,7 +703,11 @@ namespace System.Xml.XmlSchemaTests
             XmlSchema orig = sc.Add(null, Path.Combine(TestData._Root, "import_v4_b.xsd")); // should be already present in the set
             CError.Compare(sc.IsCompiled, true, "Add2IsCompiled");
             CError.Compare(sc.Count, 2, "Add2Count");
-            CError.Compare(orig.SourceUri.Contains("import_v4_b.xsd"), true, "Compare the schema object");
+            CError.Compare(
+                orig.SourceUri.Contains("import_v4_b.xsd"),
+                true,
+                "Compare the schema object"
+            );
 
             sc.Reprocess(orig);
             CError.Compare(sc.IsCompiled, false, "ReprocessIsCompiled");
@@ -669,7 +719,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v4_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v4_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     return;
 
             Assert.Fail();
@@ -708,7 +761,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v4_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v4_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     return;
 
             Assert.Fail();
@@ -747,7 +803,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v2_b.xsd") && imp.Schema.TargetNamespace.Equals("ns-b"))
+                if (
+                    imp.SchemaLocation.Equals("import_v2_b.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-b")
+                )
                     return;
 
             Assert.Fail();
@@ -774,7 +833,7 @@ namespace System.Xml.XmlSchemaTests
             CError.Compare(sc.IsCompiled, true, "CompileIsCompiled");
 
             XmlSchema sch_B = sc.Add(null, Path.Combine(TestData._Root, "import_v9_b.xsd")); // should be already present in the set
-            sc.Add(null, Path.Combine(TestData._Root, "import_v9_c.xsd"));                   // should be already present in the set
+            sc.Add(null, Path.Combine(TestData._Root, "import_v9_c.xsd")); // should be already present in the set
             CError.Compare(sc.Count, 3, "Count");
             CError.Compare(sc.IsCompiled, true, "IsCompiled");
 
@@ -788,12 +847,19 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v9_b.xsd") && imp.Schema.TargetNamespace.Equals("ns-b"))
+                if (
+                    imp.SchemaLocation.Equals("import_v9_b.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-b")
+                )
                     found = true;
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
             // check that schema C in sch_b.Includes and its NS correct.
             foreach (XmlSchemaImport imp in sch_B.Includes)
-                if (imp.SchemaLocation.Equals("import_v9_c.xsd") && imp.Schema.TargetNamespace.Equals("ns-c"))
+                if (
+                    imp.SchemaLocation.Equals("import_v9_c.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-c")
+                )
                     return;
 
             Assert.Fail();
@@ -820,7 +886,7 @@ namespace System.Xml.XmlSchemaTests
             CError.Compare(sc.IsCompiled, true, "CompileIsCompiled");
 
             XmlSchema sch_B = sc.Add(null, Path.Combine(TestData._Root, "import_v10_b.xsd")); // should be already present in the set
-            sc.Add(null, Path.Combine(TestData._Root, "import_v10_c.xsd"));                   // should be already present in the set
+            sc.Add(null, Path.Combine(TestData._Root, "import_v10_c.xsd")); // should be already present in the set
             CError.Compare(sc.Count, 3, "Count");
             CError.Compare(sc.IsCompiled, true, "IsCompiled");
 
@@ -834,17 +900,25 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v10_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v10_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     found = true;
 
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
 
             // check that schema C in sch_b.Includes and its NS correct.
             foreach (XmlSchemaImport imp in sch_B.Includes)
-                if (imp.SchemaLocation.Equals("import_v10_c.xsd") && imp.Schema.TargetNamespace.Equals("ns-c"))
+                if (
+                    imp.SchemaLocation.Equals("import_v10_c.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-c")
+                )
                     found = true;
 
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
 
             // try adding no ns schema with an ns
             sch_B = sc.Add("ns-b", Path.Combine(TestData._Root, "import_v10_b.xsd"));
@@ -1203,15 +1277,22 @@ namespace System.Xml.XmlSchemaTests
 
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings |
-                                       XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                       XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessInlineSchema;
             settings.Schemas = new XmlSchemaSet();
             settings.Schemas.Add(ss);
 
-            using (XmlReader vr = XmlReader.Create(Path.Combine(TestData._Root, "105897.xml"), settings))
+            using (
+                XmlReader vr = XmlReader.Create(
+                    Path.Combine(TestData._Root, "105897.xml"),
+                    settings
+                )
+            )
             {
-                while (vr.Read()) ;
+                while (vr.Read())
+                    ;
             }
             return;
         }
@@ -1242,7 +1323,10 @@ namespace System.Xml.XmlSchemaTests
             CError.Compare(sc.IsCompiled, false, "ReprocessIsCompiled");
             CError.Compare(sc.Count, param2, "ReprocessCount");
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals(param1.ToString()) && imp.Schema.TargetNamespace == (string)param3)
+                if (
+                    imp.SchemaLocation.Equals(param1.ToString())
+                    && imp.Schema.TargetNamespace == (string)param3
+                )
                     return;
 
             Assert.Fail();
@@ -1284,7 +1368,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals(param1.ToString()) && imp.Schema.TargetNamespace == (string)param4)
+                if (
+                    imp.SchemaLocation.Equals(param1.ToString())
+                    && imp.Schema.TargetNamespace == (string)param4
+                )
                     return;
 
             Assert.Fail();
@@ -1356,7 +1443,11 @@ namespace System.Xml.XmlSchemaTests
             XmlSchema orig = sc.Add(null, Path.Combine(TestData._Root, "import_v4_b.xsd")); // should be already present in the set
             CError.Compare(sc.IsCompiled, false, "Add2IsCompiled");
             CError.Compare(sc.Count, 2, "Add2Count");
-            CError.Compare(orig.SourceUri.Contains("import_v4_b.xsd"), true, "Compare the schema object");
+            CError.Compare(
+                orig.SourceUri.Contains("import_v4_b.xsd"),
+                true,
+                "Compare the schema object"
+            );
 
             sc.Compile();
             CError.Compare(sc.IsCompiled, true, "CompileIsCompiled");
@@ -1368,7 +1459,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v4_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v4_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     return;
 
             Assert.Fail();
@@ -1407,7 +1501,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v4_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v4_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     return;
 
             Assert.Fail();
@@ -1446,7 +1543,10 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v2_b.xsd") && imp.Schema.TargetNamespace.Equals("ns-b"))
+                if (
+                    imp.SchemaLocation.Equals("import_v2_b.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-b")
+                )
                     return;
 
             Assert.Fail();
@@ -1473,7 +1573,7 @@ namespace System.Xml.XmlSchemaTests
             CError.Compare(sc.Count, 3, "ReprocessCount");
 
             XmlSchema sch_B = sc.Add(null, Path.Combine(TestData._Root, "import_v9_b.xsd")); // should be already present in the set
-            sc.Add(null, Path.Combine(TestData._Root, "import_v9_c.xsd"));                   // should be already present in the set
+            sc.Add(null, Path.Combine(TestData._Root, "import_v9_c.xsd")); // should be already present in the set
             CError.Compare(sc.Count, 3, "Count");
             CError.Compare(sc.IsCompiled, false, "IsCompiled");
 
@@ -1487,13 +1587,20 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v9_b.xsd") && imp.Schema.TargetNamespace.Equals("ns-b"))
+                if (
+                    imp.SchemaLocation.Equals("import_v9_b.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-b")
+                )
                     found = true;
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
 
             // check that schema C in sch_b.Includes and its NS correct.
             foreach (XmlSchemaImport imp in sch_B.Includes)
-                if (imp.SchemaLocation.Equals("import_v9_c.xsd") && imp.Schema.TargetNamespace.Equals("ns-c"))
+                if (
+                    imp.SchemaLocation.Equals("import_v9_c.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-c")
+                )
                     return;
 
             Assert.Fail();
@@ -1520,7 +1627,7 @@ namespace System.Xml.XmlSchemaTests
             CError.Compare(sc.Count, 3, "ReprocessCount");
 
             XmlSchema sch_B = sc.Add(null, Path.Combine(TestData._Root, "import_v10_b.xsd")); // should be already present in the set
-            sc.Add(null, Path.Combine(TestData._Root, "import_v10_c.xsd"));                   // should be already present in the set
+            sc.Add(null, Path.Combine(TestData._Root, "import_v10_c.xsd")); // should be already present in the set
             CError.Compare(sc.Count, 3, "Count");
             CError.Compare(sc.IsCompiled, false, "IsCompiled");
 
@@ -1534,17 +1641,25 @@ namespace System.Xml.XmlSchemaTests
 
             // check that schema is present in parent.Includes and its NS correct.
             foreach (XmlSchemaImport imp in parent.Includes)
-                if (imp.SchemaLocation.Equals("import_v10_b.xsd") && imp.Schema.TargetNamespace == null)
+                if (
+                    imp.SchemaLocation.Equals("import_v10_b.xsd")
+                    && imp.Schema.TargetNamespace == null
+                )
                     found = true;
 
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
 
             // check that schema C in sch_b.Includes and its NS correct.
             foreach (XmlSchemaImport imp in sch_B.Includes)
-                if (imp.SchemaLocation.Equals("import_v10_c.xsd") && imp.Schema.TargetNamespace.Equals("ns-c"))
+                if (
+                    imp.SchemaLocation.Equals("import_v10_c.xsd")
+                    && imp.Schema.TargetNamespace.Equals("ns-c")
+                )
                     found = true;
 
-            if (!found) Assert.Fail();
+            if (!found)
+                Assert.Fail();
 
             // try adding no ns schema with an ns
             sch_B = sc.Add("ns-b", Path.Combine(TestData._Root, "import_v10_b.xsd"));
@@ -1897,15 +2012,22 @@ namespace System.Xml.XmlSchemaTests
 
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings |
-                                       XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                       XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessInlineSchema;
             settings.Schemas = new XmlSchemaSet();
             settings.Schemas.Add(ss);
 
-            using (XmlReader vr = XmlReader.Create(Path.Combine(TestData._Root, "105897.xml"), settings))
+            using (
+                XmlReader vr = XmlReader.Create(
+                    Path.Combine(TestData._Root, "105897.xml"),
+                    settings
+                )
+            )
             {
-                while (vr.Read()) ;
+                while (vr.Read())
+                    ;
             }
             return;
         }

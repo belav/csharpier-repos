@@ -92,27 +92,45 @@ namespace System.Web.WebPages
             BeginContext(GetOutputWriter(), VirtualPath, startPosition, length, isLiteral);
         }
 
-        protected internal void BeginContext(string virtualPath, int startPosition, int length, bool isLiteral)
+        protected internal void BeginContext(
+            string virtualPath,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             BeginContext(GetOutputWriter(), virtualPath, startPosition, length, isLiteral);
         }
 
-        protected internal void BeginContext(TextWriter writer, int startPosition, int length, bool isLiteral)
+        protected internal void BeginContext(
+            TextWriter writer,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             BeginContext(writer, VirtualPath, startPosition, length, isLiteral);
         }
 
-        protected internal void BeginContext(TextWriter writer, string virtualPath, int startPosition, int length, bool isLiteral)
+        protected internal void BeginContext(
+            TextWriter writer,
+            string virtualPath,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             // Double check that the instrumentation service is active because WriteAttribute always calls this
             if (InstrumentationService.IsAvailable)
             {
-                InstrumentationService.BeginContext(Context,
-                                                    virtualPath,
-                                                    writer,
-                                                    startPosition,
-                                                    length,
-                                                    isLiteral);
+                InstrumentationService.BeginContext(
+                    Context,
+                    virtualPath,
+                    writer,
+                    startPosition,
+                    length,
+                    isLiteral
+                );
             }
         }
 
@@ -121,27 +139,45 @@ namespace System.Web.WebPages
             EndContext(GetOutputWriter(), VirtualPath, startPosition, length, isLiteral);
         }
 
-        protected internal void EndContext(string virtualPath, int startPosition, int length, bool isLiteral)
+        protected internal void EndContext(
+            string virtualPath,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             EndContext(GetOutputWriter(), virtualPath, startPosition, length, isLiteral);
         }
 
-        protected internal void EndContext(TextWriter writer, int startPosition, int length, bool isLiteral)
+        protected internal void EndContext(
+            TextWriter writer,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             EndContext(writer, VirtualPath, startPosition, length, isLiteral);
         }
 
-        protected internal void EndContext(TextWriter writer, string virtualPath, int startPosition, int length, bool isLiteral)
+        protected internal void EndContext(
+            TextWriter writer,
+            string virtualPath,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             // Double check that the instrumentation service is active because WriteAttribute always calls this
             if (InstrumentationService.IsAvailable)
             {
-                InstrumentationService.EndContext(Context,
-                                                  virtualPath,
-                                                  writer,
-                                                  startPosition,
-                                                  length,
-                                                  isLiteral);
+                InstrumentationService.EndContext(
+                    Context,
+                    virtualPath,
+                    writer,
+                    startPosition,
+                    length,
+                    isLiteral
+                );
             }
         }
 
@@ -161,7 +197,14 @@ namespace System.Web.WebPages
             {
                 return virtualPath;
             }
-            throw new HttpException(String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_LayoutPageNotFound, layoutPagePath, virtualPath));
+            throw new HttpException(
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_LayoutPageNotFound,
+                    layoutPagePath,
+                    virtualPath
+                )
+            );
         }
 
         public virtual string NormalizePath(string path)
@@ -176,17 +219,35 @@ namespace System.Web.WebPages
 
         public abstract void WriteLiteral(object value);
 
-        public virtual void WriteAttribute(string name, PositionTagged<string> prefix, PositionTagged<string> suffix, params AttributeValue[] values)
+        public virtual void WriteAttribute(
+            string name,
+            PositionTagged<string> prefix,
+            PositionTagged<string> suffix,
+            params AttributeValue[] values
+        )
         {
             WriteAttributeTo(GetOutputWriter(), name, prefix, suffix, values);
         }
 
-        public virtual void WriteAttributeTo(TextWriter writer, string name, PositionTagged<string> prefix, PositionTagged<string> suffix, params AttributeValue[] values)
+        public virtual void WriteAttributeTo(
+            TextWriter writer,
+            string name,
+            PositionTagged<string> prefix,
+            PositionTagged<string> suffix,
+            params AttributeValue[] values
+        )
         {
             WriteAttributeTo(VirtualPath, writer, name, prefix, suffix, values);
         }
 
-        protected internal virtual void WriteAttributeTo(string pageVirtualPath, TextWriter writer, string name, PositionTagged<string> prefix, PositionTagged<string> suffix, params AttributeValue[] values)
+        protected internal virtual void WriteAttributeTo(
+            string pageVirtualPath,
+            TextWriter writer,
+            string name,
+            PositionTagged<string> prefix,
+            PositionTagged<string> suffix,
+            params AttributeValue[] values
+        )
         {
             bool first = true;
             bool wroteSomething = false;
@@ -202,9 +263,11 @@ namespace System.Web.WebPages
                 {
                     AttributeValue attrVal = values[i];
                     PositionTagged<object> val = attrVal.Value;
-                    PositionTagged<string> next = i == values.Length - 1 ?
-                        suffix : // End of the list, grab the suffix
-                        values[i + 1].Prefix; // Still in the list, grab the next prefix
+                    PositionTagged<string> next =
+                        i == values.Length - 1
+                            ? suffix
+                            : // End of the list, grab the suffix
+                            values[i + 1].Prefix; // Still in the list, grab the next prefix
 
                     if (val.Value == null)
                     {
@@ -212,14 +275,14 @@ namespace System.Web.WebPages
                         continue;
                     }
 
-                    // The special cases here are that the value we're writing might already be a string, or that the 
+                    // The special cases here are that the value we're writing might already be a string, or that the
                     // value might be a bool. If the value is the bool 'true' we want to write the attribute name instead
                     // of the string 'true'. If the value is the bool 'false' we don't want to write anything.
                     //
                     // Otherwise the value is another object (perhaps an IHtmlString), and we'll ask it to format itself.
                     string stringValue;
 
-                    // Intentionally using is+cast here for performance reasons. This is more performant than as+bool? 
+                    // Intentionally using is+cast here for performance reasons. This is more performant than as+bool?
                     // because of boxing.
                     if (val.Value is bool)
                     {
@@ -250,7 +313,13 @@ namespace System.Web.WebPages
                     // Calculate length of the source span by the position of the next value (or suffix)
                     int sourceLength = next.Position - attrVal.Value.Position;
 
-                    BeginContext(writer, pageVirtualPath, attrVal.Value.Position, sourceLength, isLiteral: attrVal.Literal);
+                    BeginContext(
+                        writer,
+                        pageVirtualPath,
+                        attrVal.Value.Position,
+                        sourceLength,
+                        isLiteral: attrVal.Literal
+                    );
 
                     // The extra branching here is to ensure that we call the Write*To(string) overload when
                     // possible.
@@ -271,7 +340,13 @@ namespace System.Web.WebPages
                         WriteTo(writer, val.Value);
                     }
 
-                    EndContext(writer, pageVirtualPath, attrVal.Value.Position, sourceLength, isLiteral: attrVal.Literal);
+                    EndContext(
+                        writer,
+                        pageVirtualPath,
+                        attrVal.Value.Position,
+                        sourceLength,
+                        isLiteral: attrVal.Literal
+                    );
                     wroteSomething = true;
                 }
                 if (wroteSomething)
@@ -281,14 +356,23 @@ namespace System.Web.WebPages
             }
         }
 
-        private void WritePositionTaggedLiteral(TextWriter writer, string pageVirtualPath, string value, int position)
+        private void WritePositionTaggedLiteral(
+            TextWriter writer,
+            string pageVirtualPath,
+            string value,
+            int position
+        )
         {
             BeginContext(writer, pageVirtualPath, position, value.Length, isLiteral: true);
             WriteLiteralTo(writer, value);
             EndContext(writer, pageVirtualPath, position, value.Length, isLiteral: true);
         }
 
-        private void WritePositionTaggedLiteral(TextWriter writer, string pageVirtualPath, PositionTagged<string> value)
+        private void WritePositionTaggedLiteral(
+            TextWriter writer,
+            string pageVirtualPath,
+            PositionTagged<string> value
+        )
         {
             WritePositionTaggedLiteral(writer, pageVirtualPath, value.Value, value.Position);
         }
@@ -326,7 +410,11 @@ namespace System.Web.WebPages
             writer.Write(content);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A method is more appropriate in this case since a property likely already exists to hold this value")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "A method is more appropriate in this case since a property likely already exists to hold this value"
+        )]
         protected internal virtual TextWriter GetOutputWriter()
         {
             return TextWriter.Null;

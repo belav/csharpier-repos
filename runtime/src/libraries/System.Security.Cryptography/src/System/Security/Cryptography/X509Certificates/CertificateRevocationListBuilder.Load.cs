@@ -40,14 +40,18 @@ namespace System.Security.Cryptography.X509Certificates
         ///     need all of the bytes provided in the array.
         ///   </para>
         /// </exception>
-        public static CertificateRevocationListBuilder Load(byte[] currentCrl, out BigInteger currentCrlNumber)
+        public static CertificateRevocationListBuilder Load(
+            byte[] currentCrl,
+            out BigInteger currentCrlNumber
+        )
         {
             ArgumentNullException.ThrowIfNull(currentCrl);
 
             CertificateRevocationListBuilder ret = Load(
                 new ReadOnlySpan<byte>(currentCrl),
                 out BigInteger crlNumber,
-                out int bytesConsumed);
+                out int bytesConsumed
+            );
 
             if (bytesConsumed != currentCrl.Length)
             {
@@ -83,7 +87,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static CertificateRevocationListBuilder Load(
             ReadOnlySpan<byte> currentCrl,
             out BigInteger currentCrlNumber,
-            out int bytesConsumed)
+            out int bytesConsumed
+        )
         {
             List<RevokedCertificate> list = new();
             BigInteger crlNumber = 0;
@@ -96,7 +101,11 @@ namespace System.Security.Cryptography.X509Certificates
 
                 AsnValueReader certificateList = reader.ReadSequence();
                 AsnValueReader tbsCertList = certificateList.ReadSequence();
-                AlgorithmIdentifierAsn.Decode(ref certificateList, ReadOnlyMemory<byte>.Empty, out _);
+                AlgorithmIdentifierAsn.Decode(
+                    ref certificateList,
+                    ReadOnlyMemory<byte>.Empty,
+                    out _
+                );
 
                 if (!certificateList.TryReadPrimitiveBitString(out _, out _))
                 {
@@ -132,14 +141,19 @@ namespace System.Security.Cryptography.X509Certificates
 
                 AsnValueReader revokedCertificates = default;
 
-                if (tbsCertList.HasData && tbsCertList.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence))
+                if (
+                    tbsCertList.HasData
+                    && tbsCertList.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
+                )
                 {
                     revokedCertificates = tbsCertList.ReadSequence();
                 }
 
                 if (version > 0 && tbsCertList.HasData)
                 {
-                    AsnValueReader crlExtensionsExplicit = tbsCertList.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
+                    AsnValueReader crlExtensionsExplicit = tbsCertList.ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    );
                     AsnValueReader crlExtensions = crlExtensionsExplicit.ReadSequence();
                     crlExtensionsExplicit.ThrowIfNotEmpty();
 
@@ -158,7 +172,9 @@ namespace System.Security.Cryptography.X509Certificates
                             extension.ReadBoolean();
                         }
 
-                        if (!extension.TryReadPrimitiveOctetString(out ReadOnlySpan<byte> extnValue))
+                        if (
+                            !extension.TryReadPrimitiveOctetString(out ReadOnlySpan<byte> extnValue)
+                        )
                         {
                             throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                         }
@@ -171,7 +187,8 @@ namespace System.Security.Cryptography.X509Certificates
                         {
                             AsnValueReader crlNumberReader = new AsnValueReader(
                                 extnValue,
-                                AsnEncodingRules.DER);
+                                AsnEncodingRules.DER
+                            );
 
                             crlNumber = crlNumberReader.ReadInteger();
                             crlNumberReader.ThrowIfNotEmpty();
@@ -183,7 +200,10 @@ namespace System.Security.Cryptography.X509Certificates
 
                 while (revokedCertificates.HasData)
                 {
-                    RevokedCertificate revokedCertificate = new RevokedCertificate(ref revokedCertificates, version);
+                    RevokedCertificate revokedCertificate = new RevokedCertificate(
+                        ref revokedCertificates,
+                        version
+                    );
                     list.Add(revokedCertificate);
                 }
             }
@@ -228,7 +248,10 @@ namespace System.Security.Cryptography.X509Certificates
         ///     <paramref name="currentCrl" /> could not be decoded.
         ///   </para>
         /// </exception>
-        public static CertificateRevocationListBuilder LoadPem(string currentCrl, out BigInteger currentCrlNumber)
+        public static CertificateRevocationListBuilder LoadPem(
+            string currentCrl,
+            out BigInteger currentCrlNumber
+        )
         {
             ArgumentNullException.ThrowIfNull(currentCrl);
 
@@ -263,15 +286,26 @@ namespace System.Security.Cryptography.X509Certificates
         ///     <paramref name="currentCrl" /> could not be decoded.
         ///   </para>
         /// </exception>
-        public static CertificateRevocationListBuilder LoadPem(ReadOnlySpan<char> currentCrl, out BigInteger currentCrlNumber)
+        public static CertificateRevocationListBuilder LoadPem(
+            ReadOnlySpan<char> currentCrl,
+            out BigInteger currentCrlNumber
+        )
         {
-            foreach ((ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(currentCrl))
+            foreach (
+                (ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(currentCrl)
+            )
             {
                 if (contents[fields.Label].SequenceEqual(PemLabels.X509CertificateRevocationList))
                 {
                     byte[] rented = ArrayPool<byte>.Shared.Rent(fields.DecodedDataLength);
 
-                    if (!Convert.TryFromBase64Chars(contents[fields.Base64Data], rented, out int bytesWritten))
+                    if (
+                        !Convert.TryFromBase64Chars(
+                            contents[fields.Base64Data],
+                            rented,
+                            out int bytesWritten
+                        )
+                    )
                     {
                         Debug.Fail("Base64Decode failed, but PemEncoding said it was legal");
                         throw new UnreachableException();
@@ -280,7 +314,8 @@ namespace System.Security.Cryptography.X509Certificates
                     CertificateRevocationListBuilder ret = Load(
                         rented.AsSpan(0, bytesWritten),
                         out currentCrlNumber,
-                        out int bytesConsumed);
+                        out int bytesConsumed
+                    );
 
                     Debug.Assert(bytesConsumed == bytesWritten);
                     ArrayPool<byte>.Shared.Return(rented);
@@ -288,7 +323,10 @@ namespace System.Security.Cryptography.X509Certificates
                 }
             }
 
-            throw new CryptographicException(SR.Cryptography_NoPemOfLabel, PemLabels.X509CertificateRevocationList);
+            throw new CryptographicException(
+                SR.Cryptography_NoPemOfLabel,
+                PemLabels.X509CertificateRevocationList
+            );
         }
     }
 }

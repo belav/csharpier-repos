@@ -10,7 +10,10 @@ namespace System.Web.Http.Util
 {
     internal class ConvertToStreamMessageHandler : DelegatingHandler
     {
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             HttpContent requestContent = await ToStreamContent(request.Content);
             request.Content = requestContent;

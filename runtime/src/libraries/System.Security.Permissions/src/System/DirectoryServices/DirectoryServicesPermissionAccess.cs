@@ -8,6 +8,6 @@ namespace System.DirectoryServices
     {
         None = 0,
         Browse = 2,
-        Write = 6
+        Write = 6,
     }
 }

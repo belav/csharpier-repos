@@ -17,11 +17,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// <summary>
         /// Retrieves the start point of a given node for the specified EnvDTE.vsCMPart.
         /// </summary>
-        VirtualTreePoint? GetStartPoint(SyntaxNode node, LineFormattingOptions options, EnvDTE.vsCMPart? part = null);
+        VirtualTreePoint? GetStartPoint(
+            SyntaxNode node,
+            LineFormattingOptions options,
+            EnvDTE.vsCMPart? part = null
+        );
 
         /// <summary>
         /// Retrieves the end point of a given node for the specified EnvDTE.vsCMPart.
         /// </summary>
-        VirtualTreePoint? GetEndPoint(SyntaxNode node, LineFormattingOptions options, EnvDTE.vsCMPart? part = null);
+        VirtualTreePoint? GetEndPoint(
+            SyntaxNode node,
+            LineFormattingOptions options,
+            EnvDTE.vsCMPart? part = null
+        );
     }
 }

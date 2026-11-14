@@ -7,41 +7,40 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Text;
+using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace System.Data
 {
-
     /// <summary>
     /// This class represents a combined sort expression build using mutiple sort expressions.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class SortExpressionBuilder<T> : IComparer<List<object>> 
+    internal class SortExpressionBuilder<T> : IComparer<List<object>>
     {
         /**
          *  This class ensures multiple orderby/thenbys are handled correctly. Its semantics is as follows:
-         *  
+         *
          * Query 1:
          * orderby a
          * thenby  b
          * orderby c
          * orderby d
          * thenby  e
-         * 
+         *
          * is equivalent to:
-         * 
+         *
          * Query 2:
          * orderby d
          * thenby  e
          * thenby  c
          * thenby  a
          * thenby  b
-         * 
+         *
          **/
 
         //Selectors and comparers are mapped using the index in the list.
@@ -52,7 +51,6 @@ namespace System.Data
 
         LinkedListNode<Func<T, object>> _currentSelector = null;
         LinkedListNode<Comparison<object>> _currentComparer = null;
-
 
         /// <summary>
         /// Adds a sorting selector/comparer in the correct order
@@ -68,8 +66,8 @@ namespace System.Data
                 _currentSelector = _selectors.AddFirst(keySelector);
                 _currentComparer = _comparers.AddFirst(compare);
             }
-            else 
-            {   
+            else
+            {
                 //ThenBy can only be called after OrderBy
                 Debug.Assert(_currentSelector != null);
                 Debug.Assert(_currentComparer != null);
@@ -79,8 +77,6 @@ namespace System.Data
             }
         }
 
-        
-
         /// <summary>
         /// Represents a Combined selector of all selectors added thusfar.
         /// </summary>
@@ -88,16 +84,14 @@ namespace System.Data
         public List<object> Select(T row)
         {
             List<object> result = new List<object>();
-            
+
             foreach (Func<T, object> selector in _selectors)
             {
                 result.Add(selector(row));
-            }    
-            
+            }
+
             return result;
         }
-
-
 
         /// <summary>
         /// Represents a Comparer (of IComparer) that compares two combined-selectors using
@@ -134,11 +128,11 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Clones the SortexpressionBuilder and returns a new object 
+        /// Clones the SortexpressionBuilder and returns a new object
         /// that points to same comparer and selectors (in the same order).
         /// </summary>
         /// <returns></returns>
-        internal SortExpressionBuilder<T> Clone() 
+        internal SortExpressionBuilder<T> Clone()
         {
             SortExpressionBuilder<T> builder = new SortExpressionBuilder<T>();
 
@@ -153,7 +147,6 @@ namespace System.Data
                     builder._selectors.AddLast(selector);
                 }
             }
-            
 
             foreach (Comparison<object> comparer in _comparers)
             {
@@ -181,14 +174,15 @@ namespace System.Data
             {
                 if (selector == _currentSelector.Value)
                 {
-                    builder._currentSelector = builder._selectors.AddLast(r => selector((T)(object)r));
+                    builder._currentSelector = builder._selectors.AddLast(r =>
+                        selector((T)(object)r)
+                    );
                 }
                 else
                 {
                     builder._selectors.AddLast(r => selector((T)(object)r));
                 }
             }
-
 
             foreach (Comparison<object> comparer in _comparers)
             {
@@ -204,6 +198,5 @@ namespace System.Data
 
             return builder;
         }
-
     } //end SortExpressionBuilder<T>
 }

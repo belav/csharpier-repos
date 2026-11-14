@@ -24,7 +24,8 @@ namespace System.Linq.Parallel
     /// precisely what we want.
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
-    internal sealed class ConcatQueryOperator<TSource> : BinaryQueryOperator<TSource, TSource, TSource>
+    internal sealed class ConcatQueryOperator<TSource>
+        : BinaryQueryOperator<TSource, TSource, TSource>
     {
         private readonly bool _prematureMergeLeft; // Whether to prematurely merge the left data source
         private readonly bool _prematureMergeRight; // Whether to prematurely merge the right data source
@@ -36,26 +37,41 @@ namespace System.Linq.Parallel
         //     child                - the child whose data we will reverse
         //
 
-        internal ConcatQueryOperator(ParallelQuery<TSource> firstChild, ParallelQuery<TSource> secondChild)
+        internal ConcatQueryOperator(
+            ParallelQuery<TSource> firstChild,
+            ParallelQuery<TSource> secondChild
+        )
             : base(firstChild, secondChild)
         {
             Debug.Assert(firstChild != null, "first child data source cannot be null");
             Debug.Assert(secondChild != null, "second child data source cannot be null");
             _outputOrdered = LeftChild.OutputOrdered || RightChild.OutputOrdered;
 
-            _prematureMergeLeft = LeftChild.OrdinalIndexState.IsWorseThan(OrdinalIndexState.Increasing);
-            _prematureMergeRight = RightChild.OrdinalIndexState.IsWorseThan(OrdinalIndexState.Increasing);
+            _prematureMergeLeft = LeftChild.OrdinalIndexState.IsWorseThan(
+                OrdinalIndexState.Increasing
+            );
+            _prematureMergeRight = RightChild.OrdinalIndexState.IsWorseThan(
+                OrdinalIndexState.Increasing
+            );
 
-            if ((LeftChild.OrdinalIndexState == OrdinalIndexState.Indexable)
-                && (RightChild.OrdinalIndexState == OrdinalIndexState.Indexable))
+            if (
+                (LeftChild.OrdinalIndexState == OrdinalIndexState.Indexable)
+                && (RightChild.OrdinalIndexState == OrdinalIndexState.Indexable)
+            )
             {
                 SetOrdinalIndex(OrdinalIndexState.Indexable);
             }
             else
             {
                 SetOrdinalIndex(
-                    ExchangeUtilities.Worse(OrdinalIndexState.Increasing,
-                        ExchangeUtilities.Worse(LeftChild.OrdinalIndexState, RightChild.OrdinalIndexState)));
+                    ExchangeUtilities.Worse(
+                        OrdinalIndexState.Increasing,
+                        ExchangeUtilities.Worse(
+                            LeftChild.OrdinalIndexState,
+                            RightChild.OrdinalIndexState
+                        )
+                    )
+                );
             }
         }
 
@@ -70,66 +86,124 @@ namespace System.Linq.Parallel
             QueryResults<TSource> leftChildResults = LeftChild.Open(settings, preferStriping);
             QueryResults<TSource> rightChildResults = RightChild.Open(settings, preferStriping);
 
-            return ConcatQueryOperatorResults.NewResults(leftChildResults, rightChildResults, this, settings, preferStriping);
+            return ConcatQueryOperatorResults.NewResults(
+                leftChildResults,
+                rightChildResults,
+                this,
+                settings,
+                preferStriping
+            );
         }
 
         public override void WrapPartitionedStream<TLeftKey, TRightKey>(
-            PartitionedStream<TSource, TLeftKey> leftStream, PartitionedStream<TSource, TRightKey> rightStream,
-            IPartitionedStreamRecipient<TSource> outputRecipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TSource, TLeftKey> leftStream,
+            PartitionedStream<TSource, TRightKey> rightStream,
+            IPartitionedStreamRecipient<TSource> outputRecipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             // Prematurely merge the left results, if necessary
             if (_prematureMergeLeft)
             {
-                ListQueryResults<TSource> leftStreamResults =
-                    ExecuteAndCollectResults(leftStream, leftStream.PartitionCount, LeftChild.OutputOrdered, preferStriping, settings);
-                PartitionedStream<TSource, int> leftStreamInc = leftStreamResults.GetPartitionedStream();
-                WrapHelper<int, TRightKey>(leftStreamInc, rightStream, outputRecipient, settings, preferStriping);
+                ListQueryResults<TSource> leftStreamResults = ExecuteAndCollectResults(
+                    leftStream,
+                    leftStream.PartitionCount,
+                    LeftChild.OutputOrdered,
+                    preferStriping,
+                    settings
+                );
+                PartitionedStream<TSource, int> leftStreamInc =
+                    leftStreamResults.GetPartitionedStream();
+                WrapHelper<int, TRightKey>(
+                    leftStreamInc,
+                    rightStream,
+                    outputRecipient,
+                    settings,
+                    preferStriping
+                );
             }
             else
             {
-                Debug.Assert(!ExchangeUtilities.IsWorseThan(leftStream.OrdinalIndexState, OrdinalIndexState.Increasing));
-                WrapHelper<TLeftKey, TRightKey>(leftStream, rightStream, outputRecipient, settings, preferStriping);
+                Debug.Assert(
+                    !ExchangeUtilities.IsWorseThan(
+                        leftStream.OrdinalIndexState,
+                        OrdinalIndexState.Increasing
+                    )
+                );
+                WrapHelper<TLeftKey, TRightKey>(
+                    leftStream,
+                    rightStream,
+                    outputRecipient,
+                    settings,
+                    preferStriping
+                );
             }
         }
 
         private void WrapHelper<TLeftKey, TRightKey>(
-            PartitionedStream<TSource, TLeftKey> leftStreamInc, PartitionedStream<TSource, TRightKey> rightStream,
-            IPartitionedStreamRecipient<TSource> outputRecipient, QuerySettings settings, bool preferStriping)
+            PartitionedStream<TSource, TLeftKey> leftStreamInc,
+            PartitionedStream<TSource, TRightKey> rightStream,
+            IPartitionedStreamRecipient<TSource> outputRecipient,
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             // Prematurely merge the right results, if necessary
             if (_prematureMergeRight)
             {
-                ListQueryResults<TSource> rightStreamResults =
-                    ExecuteAndCollectResults(rightStream, leftStreamInc.PartitionCount, LeftChild.OutputOrdered, preferStriping, settings);
-                PartitionedStream<TSource, int> rightStreamInc = rightStreamResults.GetPartitionedStream();
+                ListQueryResults<TSource> rightStreamResults = ExecuteAndCollectResults(
+                    rightStream,
+                    leftStreamInc.PartitionCount,
+                    LeftChild.OutputOrdered,
+                    preferStriping,
+                    settings
+                );
+                PartitionedStream<TSource, int> rightStreamInc =
+                    rightStreamResults.GetPartitionedStream();
                 WrapHelper2<TLeftKey, int>(leftStreamInc, rightStreamInc, outputRecipient);
             }
             else
             {
-                Debug.Assert(!ExchangeUtilities.IsWorseThan(rightStream.OrdinalIndexState, OrdinalIndexState.Increasing));
+                Debug.Assert(
+                    !ExchangeUtilities.IsWorseThan(
+                        rightStream.OrdinalIndexState,
+                        OrdinalIndexState.Increasing
+                    )
+                );
                 WrapHelper2<TLeftKey, TRightKey>(leftStreamInc, rightStream, outputRecipient);
             }
         }
 
         private void WrapHelper2<TLeftKey, TRightKey>(
-            PartitionedStream<TSource, TLeftKey> leftStreamInc, PartitionedStream<TSource, TRightKey> rightStreamInc,
-            IPartitionedStreamRecipient<TSource> outputRecipient)
+            PartitionedStream<TSource, TLeftKey> leftStreamInc,
+            PartitionedStream<TSource, TRightKey> rightStreamInc,
+            IPartitionedStreamRecipient<TSource> outputRecipient
+        )
         {
             int partitionCount = leftStreamInc.PartitionCount;
 
             // Generate the shared data.
-            IComparer<ConcatKey<TLeftKey, TRightKey>> comparer = ConcatKey<TLeftKey, TRightKey>.MakeComparer(
-                leftStreamInc.KeyComparer, rightStreamInc.KeyComparer);
-            var outputStream = new PartitionedStream<TSource, ConcatKey<TLeftKey, TRightKey>>(partitionCount, comparer, OrdinalIndexState);
+            IComparer<ConcatKey<TLeftKey, TRightKey>> comparer = ConcatKey<
+                TLeftKey,
+                TRightKey
+            >.MakeComparer(leftStreamInc.KeyComparer, rightStreamInc.KeyComparer);
+            var outputStream = new PartitionedStream<TSource, ConcatKey<TLeftKey, TRightKey>>(
+                partitionCount,
+                comparer,
+                OrdinalIndexState
+            );
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new ConcatQueryOperatorEnumerator<TLeftKey, TRightKey>(leftStreamInc[i], rightStreamInc[i]);
+                outputStream[i] = new ConcatQueryOperatorEnumerator<TLeftKey, TRightKey>(
+                    leftStreamInc[i],
+                    rightStreamInc[i]
+                );
             }
 
             outputRecipient.Receive(outputStream);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
@@ -139,7 +213,6 @@ namespace System.Linq.Parallel
         {
             return LeftChild.AsSequentialQuery(token).Concat(RightChild.AsSequentialQuery(token));
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
@@ -155,7 +228,8 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for concatenating two data sources.
         //
 
-        private sealed class ConcatQueryOperatorEnumerator<TLeftKey, TRightKey> : QueryOperatorEnumerator<TSource, ConcatKey<TLeftKey, TRightKey>>
+        private sealed class ConcatQueryOperatorEnumerator<TLeftKey, TRightKey>
+            : QueryOperatorEnumerator<TSource, ConcatKey<TLeftKey, TRightKey>>
         {
             private readonly QueryOperatorEnumerator<TSource, TLeftKey> _firstSource; // The first data source to enumerate.
             private readonly QueryOperatorEnumerator<TSource, TRightKey> _secondSource; // The second data source to enumerate.
@@ -167,7 +241,8 @@ namespace System.Linq.Parallel
 
             internal ConcatQueryOperatorEnumerator(
                 QueryOperatorEnumerator<TSource, TLeftKey> firstSource,
-                QueryOperatorEnumerator<TSource, TRightKey> secondSource)
+                QueryOperatorEnumerator<TSource, TRightKey> secondSource
+            )
             {
                 Debug.Assert(firstSource != null);
                 Debug.Assert(secondSource != null);
@@ -184,7 +259,10 @@ namespace System.Linq.Parallel
             // index offset.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TSource currentElement, ref ConcatKey<TLeftKey, TRightKey> currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
+                ref ConcatKey<TLeftKey, TRightKey> currentKey
+            )
             {
                 Debug.Assert(_firstSource != null);
                 Debug.Assert(_secondSource != null);
@@ -220,7 +298,6 @@ namespace System.Linq.Parallel
             }
         }
 
-
         //-----------------------------------------------------------------------------------
         // Query results for a Concat operator. The results are indexable if the child
         // results were indexable.
@@ -232,29 +309,53 @@ namespace System.Linq.Parallel
             private readonly int _rightChildCount; // The number of elements in the right child result set
 
             public static QueryResults<TSource> NewResults(
-                QueryResults<TSource> leftChildQueryResults, QueryResults<TSource> rightChildQueryResults,
-                ConcatQueryOperator<TSource> op, QuerySettings settings,
-                bool preferStriping)
+                QueryResults<TSource> leftChildQueryResults,
+                QueryResults<TSource> rightChildQueryResults,
+                ConcatQueryOperator<TSource> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
             {
                 if (leftChildQueryResults.IsIndexible && rightChildQueryResults.IsIndexible)
                 {
                     return new ConcatQueryOperatorResults(
-                        leftChildQueryResults, rightChildQueryResults, op, settings, preferStriping);
+                        leftChildQueryResults,
+                        rightChildQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
                 else
                 {
                     return new BinaryQueryOperatorResults(
-                        leftChildQueryResults, rightChildQueryResults, op, settings, preferStriping);
+                        leftChildQueryResults,
+                        rightChildQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
             }
 
             private ConcatQueryOperatorResults(
-                QueryResults<TSource> leftChildQueryResults, QueryResults<TSource> rightChildQueryResults,
-                ConcatQueryOperator<TSource> concatOp, QuerySettings settings,
-                bool preferStriping)
-                : base(leftChildQueryResults, rightChildQueryResults, concatOp, settings, preferStriping)
+                QueryResults<TSource> leftChildQueryResults,
+                QueryResults<TSource> rightChildQueryResults,
+                ConcatQueryOperator<TSource> concatOp,
+                QuerySettings settings,
+                bool preferStriping
+            )
+                : base(
+                    leftChildQueryResults,
+                    rightChildQueryResults,
+                    concatOp,
+                    settings,
+                    preferStriping
+                )
             {
-                Debug.Assert(leftChildQueryResults.IsIndexible && rightChildQueryResults.IsIndexible);
+                Debug.Assert(
+                    leftChildQueryResults.IsIndexible && rightChildQueryResults.IsIndexible
+                );
 
                 _leftChildCount = leftChildQueryResults.ElementsCount;
                 _rightChildCount = rightChildQueryResults.ElementsCount;
@@ -318,7 +419,9 @@ namespace System.Linq.Parallel
         }
 
         internal static IComparer<ConcatKey<TLeftKey, TRightKey>> MakeComparer(
-            IComparer<TLeftKey> leftComparer, IComparer<TRightKey> rightComparer)
+            IComparer<TLeftKey> leftComparer,
+            IComparer<TRightKey> rightComparer
+        )
         {
             return new ConcatKeyComparer(leftComparer, rightComparer);
         }
@@ -334,7 +437,10 @@ namespace System.Linq.Parallel
             private readonly IComparer<TLeftKey> _leftComparer;
             private readonly IComparer<TRightKey> _rightComparer;
 
-            internal ConcatKeyComparer(IComparer<TLeftKey> leftComparer, IComparer<TRightKey> rightComparer)
+            internal ConcatKeyComparer(
+                IComparer<TLeftKey> leftComparer,
+                IComparer<TRightKey> rightComparer
+            )
             {
                 _leftComparer = leftComparer;
                 _rightComparer = rightComparer;

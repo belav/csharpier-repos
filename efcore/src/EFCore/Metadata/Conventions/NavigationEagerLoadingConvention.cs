@@ -32,6 +32,9 @@ public class NavigationEagerLoadingConvention : IForeignKeyOwnershipChangedConve
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessForeignKeyOwnershipChanged(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<bool?> context)
-        => relationshipBuilder.Metadata.PrincipalToDependent?.Builder.AutoInclude(relationshipBuilder.Metadata.IsOwnership);
+        IConventionContext<bool?> context
+    ) =>
+        relationshipBuilder.Metadata.PrincipalToDependent?.Builder.AutoInclude(
+            relationshipBuilder.Metadata.IsOwnership
+        );
 }

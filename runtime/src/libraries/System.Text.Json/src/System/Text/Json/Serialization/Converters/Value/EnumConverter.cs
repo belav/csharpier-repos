@@ -45,12 +45,17 @@ namespace System.Text.Json.Serialization.Converters
             return type.IsEnum;
         }
 
-        public EnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
-            : this(converterOptions, namingPolicy: null, serializerOptions)
-        {
-        }
+        public EnumConverter(
+            EnumConverterOptions converterOptions,
+            JsonSerializerOptions serializerOptions
+        )
+            : this(converterOptions, namingPolicy: null, serializerOptions) { }
 
-        public EnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy? namingPolicy, JsonSerializerOptions serializerOptions)
+        public EnumConverter(
+            EnumConverterOptions converterOptions,
+            JsonNamingPolicy? namingPolicy,
+            JsonSerializerOptions serializerOptions
+        )
         {
             _converterOptions = converterOptions;
             _namingPolicy = namingPolicy;
@@ -89,12 +94,19 @@ namespace System.Text.Json.Serialization.Converters
                 // If enum contains special char, make it failed to serialize or deserialize.
                 if (name.AsSpan().IndexOfAny(',', ' ') >= 0)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_InvalidEnumTypeWithSpecialChar(typeof(T), name);
+                    ThrowHelper.ThrowInvalidOperationException_InvalidEnumTypeWithSpecialChar(
+                        typeof(T),
+                        name
+                    );
                 }
             }
         }
 
-        public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override T Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             JsonTokenType token = reader.TokenType;
 
@@ -123,7 +135,10 @@ namespace System.Text.Json.Serialization.Converters
 #endif
             }
 
-            if (token != JsonTokenType.Number || (_converterOptions & EnumConverterOptions.AllowNumbers) == 0)
+            if (
+                token != JsonTokenType.Number
+                || (_converterOptions & EnumConverterOptions.AllowNumbers) == 0
+            )
             {
                 ThrowHelper.ThrowJsonException();
                 return default;
@@ -268,7 +283,11 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        internal override T ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override T ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
 #if NETCOREAPP
             if (TryParseEnumCore(ref reader, out T value))
@@ -287,11 +306,19 @@ namespace System.Text.Json.Serialization.Converters
 #endif
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, T value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            T value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             ulong key = ConvertToUInt64(value);
 
-            if (options.DictionaryKeyPolicy == null && _nameCacheForWriting.TryGetValue(key, out JsonEncodedText formatted))
+            if (
+                options.DictionaryKeyPolicy == null
+                && _nameCacheForWriting.TryGetValue(key, out JsonEncodedText formatted)
+            )
             {
                 writer.WritePropertyName(formatted);
                 return;
@@ -373,19 +400,25 @@ namespace System.Text.Json.Serialization.Converters
             char[]? rentedBuffer = null;
             int bufferLength = reader.ValueLength;
 
-            Span<char> charBuffer = bufferLength <= JsonConstants.StackallocCharThreshold
-                ? stackalloc char[JsonConstants.StackallocCharThreshold]
-                : (rentedBuffer = ArrayPool<char>.Shared.Rent(bufferLength));
+            Span<char> charBuffer =
+                bufferLength <= JsonConstants.StackallocCharThreshold
+                    ? stackalloc char[JsonConstants.StackallocCharThreshold]
+                    : (rentedBuffer = ArrayPool<char>.Shared.Rent(bufferLength));
 
             int charsWritten = reader.CopyString(charBuffer);
             ReadOnlySpan<char> source = charBuffer.Slice(0, charsWritten);
 #endif
 
             bool success;
-            if ((_converterOptions & EnumConverterOptions.AllowNumbers) != 0 || !JsonHelpers.IntegerRegex.IsMatch(source))
+            if (
+                (_converterOptions & EnumConverterOptions.AllowNumbers) != 0
+                || !JsonHelpers.IntegerRegex.IsMatch(source)
+            )
             {
                 // Try parsing case sensitive first
-                success = Enum.TryParse(source, out value) || Enum.TryParse(source, ignoreCase: true, out value);
+                success =
+                    Enum.TryParse(source, out value)
+                    || Enum.TryParse(source, ignoreCase: true, out value);
             }
             else
             {
@@ -415,11 +448,17 @@ namespace System.Text.Json.Serialization.Converters
                 ThrowHelper.ThrowJsonException();
             }
 
-            Debug.Assert(_nameCacheForReading != null, "Enum value cache should be instantiated if a naming policy is specified.");
+            Debug.Assert(
+                _nameCacheForReading != null,
+                "Enum value cache should be instantiated if a naming policy is specified."
+            );
 
             bool success;
 
-            if (!(success = _nameCacheForReading.TryGetValue(enumString, out T value)) && enumString.Contains(ValueSeparator))
+            if (
+                !(success = _nameCacheForReading.TryGetValue(enumString, out T value))
+                && enumString.Contains(ValueSeparator)
+            )
             {
                 string[] enumValues = SplitFlagsEnum(enumString);
                 ulong result = 0;
@@ -481,8 +520,10 @@ namespace System.Text.Json.Serialization.Converters
             // preceded by a negative sign. Identifiers have to start with a letter
             // so we'll just pick the first valid one and check for a negative sign
             // if needed.
-            return (value[0] >= 'A' &&
-                (!s_isSignedEnum || !value.StartsWith(NumberFormatInfo.CurrentInfo.NegativeSign)));
+            return (
+                value[0] >= 'A'
+                && (!s_isSignedEnum || !value.StartsWith(NumberFormatInfo.CurrentInfo.NegativeSign))
+            );
         }
 
         private static string FormatJsonName(string value, JsonNamingPolicy? namingPolicy)
@@ -510,7 +551,9 @@ namespace System.Text.Json.Serialization.Converters
                     string name = namingPolicy.ConvertName(enumValues[i]);
                     if (name == null)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_NamingPolicyReturnNull(namingPolicy);
+                        ThrowHelper.ThrowInvalidOperationException_NamingPolicyReturnNull(
+                            namingPolicy
+                        );
                     }
                     enumValues[i] = name;
                 }
@@ -530,7 +573,7 @@ namespace System.Text.Json.Serialization.Converters
 #else
                 new string[] { ValueSeparator }, StringSplitOptions.None
 #endif
-                );
+            );
         }
     }
 }

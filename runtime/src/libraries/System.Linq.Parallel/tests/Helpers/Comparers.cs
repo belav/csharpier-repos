@@ -105,9 +105,9 @@ namespace System.Linq.Parallel.Tests
         public int Compare(T x, T y)
         {
             int direction = _def.Compare(x, y);
-            return direction == 0 ? 0 :
-                direction > 0 ? int.MaxValue :
-                int.MinValue;
+            return direction == 0 ? 0
+                : direction > 0 ? int.MaxValue
+                : int.MinValue;
         }
     }
 
@@ -129,23 +129,22 @@ namespace System.Linq.Parallel.Tests
 
     internal static class DelegatedComparable
     {
-        public static DelegatedComparable<T> Delegate<T>(T value, IComparer<T> comparer) where T : IComparable<T>
+        public static DelegatedComparable<T> Delegate<T>(T value, IComparer<T> comparer)
+            where T : IComparable<T>
         {
             return new DelegatedComparable<T>(value, comparer);
         }
     }
 
-    internal class DelegatedComparable<T> : IComparable<DelegatedComparable<T>> where T : IComparable<T>
+    internal class DelegatedComparable<T> : IComparable<DelegatedComparable<T>>
+        where T : IComparable<T>
     {
         private T _value;
         private IComparer<T> _comparer;
 
         public T Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
 
         public DelegatedComparable(T value, IComparer<T> comparer)
@@ -166,10 +165,7 @@ namespace System.Linq.Parallel.Tests
 
         public int Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
 
         public NotComparable(int x)

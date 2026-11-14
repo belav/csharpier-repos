@@ -9,7 +9,8 @@ using Xunit;
 
 public class DllImportSearchPathsTest
 {
-    private static string Subdirectory => Path.Combine(NativeLibraryToLoad.GetDirectory(), "subdirectory");
+    private static string Subdirectory =>
+        Path.Combine(NativeLibraryToLoad.GetDirectory(), "subdirectory");
 
     [Fact]
     public static void AssemblyDirectory_NotFound()
@@ -19,19 +20,21 @@ public class DllImportSearchPathsTest
     }
 
     public static bool CanLoadAssemblyInSubdirectory =>
-        !TestLibrary.Utilities.IsNativeAot &&
-        !TestLibrary.PlatformDetection.IsMonoLLVMFULLAOT &&
-        !OperatingSystem.IsAndroid() &&
-        !OperatingSystem.IsIOS() &&
-        !OperatingSystem.IsTvOS() &&
-        !OperatingSystem.IsBrowser() &&
-        !OperatingSystem.IsWasi();
+        !TestLibrary.Utilities.IsNativeAot
+        && !TestLibrary.PlatformDetection.IsMonoLLVMFULLAOT
+        && !OperatingSystem.IsAndroid()
+        && !OperatingSystem.IsIOS()
+        && !OperatingSystem.IsTvOS()
+        && !OperatingSystem.IsBrowser()
+        && !OperatingSystem.IsWasi();
 
     [ConditionalFact(nameof(CanLoadAssemblyInSubdirectory))]
     public static void AssemblyDirectory_Found()
     {
         // Library should be found in the assembly directory
-        var assembly = Assembly.LoadFile(Path.Combine(Subdirectory, $"{nameof(DllImportSearchPathsTest)}.dll"));
+        var assembly = Assembly.LoadFile(
+            Path.Combine(Subdirectory, $"{nameof(DllImportSearchPathsTest)}.dll")
+        );
         var type = assembly.GetType(nameof(NativeLibraryPInvoke));
         var method = type.GetMethod(nameof(NativeLibraryPInvoke.Sum));
 
@@ -89,6 +92,8 @@ public class NativeLibraryPInvokeAot
     // The passing of DllImportSearchPath.System32 is done to ensure on Windows the runtime won't fallback
     // and try to search the application directory by default.
     [DllImport(NativeLibraryToLoad.Name + "-in-native")]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32)]
+    [DefaultDllImportSearchPaths(
+        DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32
+    )]
     static extern int NativeSum(int arg1, int arg2);
 }

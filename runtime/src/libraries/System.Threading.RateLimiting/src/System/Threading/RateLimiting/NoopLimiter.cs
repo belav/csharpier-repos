@@ -23,7 +23,7 @@ namespace System.Threading.RateLimiting
                 CurrentAvailablePermits = long.MaxValue,
                 CurrentQueuedCount = 0,
                 TotalFailedLeases = 0,
-                TotalSuccessfulLeases = Interlocked.Read(ref _totalSuccessfulLeases)
+                TotalSuccessfulLeases = Interlocked.Read(ref _totalSuccessfulLeases),
             };
         }
 
@@ -33,7 +33,10 @@ namespace System.Threading.RateLimiting
             return _lease;
         }
 
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(int permitCount, CancellationToken cancellationToken)
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            int permitCount,
+            CancellationToken cancellationToken
+        )
         {
             Interlocked.Increment(ref _totalSuccessfulLeases);
             return new ValueTask<RateLimitLease>(_lease);

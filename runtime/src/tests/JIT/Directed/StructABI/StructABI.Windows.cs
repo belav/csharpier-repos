@@ -3,5 +3,5 @@
 
 public static partial class StructABI
 {
-	const string StructABILib = "StructABILib.dll";
+    const string StructABILib = "StructABILib.dll";
 }

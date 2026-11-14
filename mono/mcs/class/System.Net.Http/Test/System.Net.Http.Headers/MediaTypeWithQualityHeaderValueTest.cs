@@ -29,108 +29,114 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
-using System.Net.Http.Headers;
 using System.Linq;
+using System.Net.Http.Headers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http.Headers
 {
-	[TestFixture]
-	public class MediaTypeWithQualityHeaderValueTest
-	{
-		[Test]
-		public void Ctor_InvalidArguments ()
-		{
-			try {
-				new MediaTypeWithQualityHeaderValue (null);
-				Assert.Fail ("#1");
-			} catch (ArgumentException) {
-			}
+    [TestFixture]
+    public class MediaTypeWithQualityHeaderValueTest
+    {
+        [Test]
+        public void Ctor_InvalidArguments()
+        {
+            try
+            {
+                new MediaTypeWithQualityHeaderValue(null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentException) { }
 
-			try {
-				new MediaTypeWithQualityHeaderValue ("audio/", 0.1);
-				Assert.Fail ("#2");
-			} catch (FormatException) {
-			}
+            try
+            {
+                new MediaTypeWithQualityHeaderValue("audio/", 0.1);
+                Assert.Fail("#2");
+            }
+            catch (FormatException) { }
 
-			try {
-				new MediaTypeWithQualityHeaderValue ("audio/*", 2);
-				Assert.Fail ("#3");
-			} catch (ArgumentOutOfRangeException) {
-			}
-		}
+            try
+            {
+                new MediaTypeWithQualityHeaderValue("audio/*", 2);
+                Assert.Fail("#3");
+            }
+            catch (ArgumentOutOfRangeException) { }
+        }
 
-		[Test]
-		public void Equals ()
-		{
-			var value = new MediaTypeWithQualityHeaderValue ("audio/x");
-			Assert.AreEqual (value, new MediaTypeWithQualityHeaderValue ("audio/x"), "#1");
-			Assert.AreEqual (value, new MediaTypeWithQualityHeaderValue ("aUdio/X"), "#2");
-			Assert.AreNotEqual (value, new MediaTypeWithQualityHeaderValue ("audio/y"), "#3");
+        [Test]
+        public void Equals()
+        {
+            var value = new MediaTypeWithQualityHeaderValue("audio/x");
+            Assert.AreEqual(value, new MediaTypeWithQualityHeaderValue("audio/x"), "#1");
+            Assert.AreEqual(value, new MediaTypeWithQualityHeaderValue("aUdio/X"), "#2");
+            Assert.AreNotEqual(value, new MediaTypeWithQualityHeaderValue("audio/y"), "#3");
 
-			value = new MediaTypeWithQualityHeaderValue ("audio/x", 0.3);
-			Assert.AreEqual (value, new MediaTypeWithQualityHeaderValue ("audio/x", 0.3), "#4");
-			Assert.AreNotEqual (value, new MediaTypeWithQualityHeaderValue ("audio/x"), "#5");
-			Assert.AreNotEqual (value, new MediaTypeWithQualityHeaderValue ("audio/Y", 0.6), "#6");
-		}
+            value = new MediaTypeWithQualityHeaderValue("audio/x", 0.3);
+            Assert.AreEqual(value, new MediaTypeWithQualityHeaderValue("audio/x", 0.3), "#4");
+            Assert.AreNotEqual(value, new MediaTypeWithQualityHeaderValue("audio/x"), "#5");
+            Assert.AreNotEqual(value, new MediaTypeWithQualityHeaderValue("audio/Y", 0.6), "#6");
+        }
 
-		[Test]
-		public void Parse ()
-		{
-			var res = MediaTypeWithQualityHeaderValue.Parse ("audio/ aa");
-			Assert.AreEqual ("audio/aa", res.MediaType, "#1");
-			Assert.AreEqual (0, res.Parameters.Count, "#1b");
-			Assert.AreEqual ("audio/aa", res.ToString (), "#1c");
-		}
+        [Test]
+        public void Parse()
+        {
+            var res = MediaTypeWithQualityHeaderValue.Parse("audio/ aa");
+            Assert.AreEqual("audio/aa", res.MediaType, "#1");
+            Assert.AreEqual(0, res.Parameters.Count, "#1b");
+            Assert.AreEqual("audio/aa", res.ToString(), "#1c");
+        }
 
-		[Test]
-		public void Parse_Invalid ()
-		{
-			try {
-				MediaTypeWithQualityHeaderValue.Parse (null);
-				Assert.Fail ("#1");
-			} catch (FormatException) {
-			}
+        [Test]
+        public void Parse_Invalid()
+        {
+            try
+            {
+                MediaTypeWithQualityHeaderValue.Parse(null);
+                Assert.Fail("#1");
+            }
+            catch (FormatException) { }
 
-			try {
-				MediaTypeWithQualityHeaderValue.Parse ("  ");
-				Assert.Fail ("#2");
-			} catch (FormatException) {
-			}
+            try
+            {
+                MediaTypeWithQualityHeaderValue.Parse("  ");
+                Assert.Fail("#2");
+            }
+            catch (FormatException) { }
 
-			try {
-				MediaTypeWithQualityHeaderValue.Parse ("audio/");
-				Assert.Fail ("#3");
-			} catch (FormatException) {
-			}
-		}
+            try
+            {
+                MediaTypeWithQualityHeaderValue.Parse("audio/");
+                Assert.Fail("#3");
+            }
+            catch (FormatException) { }
+        }
 
-		[Test]
-		public void Properties ()
-		{
-			var value = new MediaTypeWithQualityHeaderValue ("audio/*", 0.3);
-			Assert.IsNull (value.CharSet, "#1");
-			Assert.AreEqual ("audio/*", value.MediaType, "#2");
-			Assert.AreEqual ("q", value.Parameters.First ().Name, "#3");
-			Assert.AreEqual (0.3, value.Quality, "#4");
+        [Test]
+        public void Properties()
+        {
+            var value = new MediaTypeWithQualityHeaderValue("audio/*", 0.3);
+            Assert.IsNull(value.CharSet, "#1");
+            Assert.AreEqual("audio/*", value.MediaType, "#2");
+            Assert.AreEqual("q", value.Parameters.First().Name, "#3");
+            Assert.AreEqual(0.3, value.Quality, "#4");
 
-			value.Parameters.Add (new NameValueHeaderValue ("q", "b"));
-		}
+            value.Parameters.Add(new NameValueHeaderValue("q", "b"));
+        }
 
-		[Test]
-		public void TryParse ()
-		{
-			MediaTypeWithQualityHeaderValue res;
-			Assert.IsTrue (MediaTypeWithQualityHeaderValue.TryParse ("audio/*", out res), "#1");
-			Assert.AreEqual (0, res.Parameters.Count, "#1");
-		}
+        [Test]
+        public void TryParse()
+        {
+            MediaTypeWithQualityHeaderValue res;
+            Assert.IsTrue(MediaTypeWithQualityHeaderValue.TryParse("audio/*", out res), "#1");
+            Assert.AreEqual(0, res.Parameters.Count, "#1");
+        }
 
-		[Test]
-		public void TryParse_Invalid ()
-		{
-			MediaTypeWithQualityHeaderValue res;
-			Assert.IsFalse (MediaTypeWithQualityHeaderValue.TryParse ("", out res), "#1");
-			Assert.IsNull (res, "#2");
-		}
-	}
+        [Test]
+        public void TryParse_Invalid()
+        {
+            MediaTypeWithQualityHeaderValue res;
+            Assert.IsFalse(MediaTypeWithQualityHeaderValue.TryParse("", out res), "#1");
+            Assert.IsNull(res, "#2");
+        }
+    }
 }

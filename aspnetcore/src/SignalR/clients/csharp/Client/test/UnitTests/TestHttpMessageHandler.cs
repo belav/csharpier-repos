@@ -45,8 +45,7 @@ public class TestHttpMessageHandler : HttpMessageHandler
         bool handleFirstPoll = true
     )
     {
-        _logger =
-            loggerFactory?.CreateLogger<TestHttpMessageHandler>()
+        _logger = loggerFactory?.CreateLogger<TestHttpMessageHandler>()
             ?? NullLoggerFactory.Instance.CreateLogger<TestHttpMessageHandler>();
 
         if (autoNegotiate)

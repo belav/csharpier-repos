@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         public string Name { get; }
 
-        protected ArgumentProvider()
-            => Name = GetType().FullName!;
+        protected ArgumentProvider() => Name = GetType().FullName!;
 
         /// <summary>
         /// Supports providing argument values for an argument completion session.

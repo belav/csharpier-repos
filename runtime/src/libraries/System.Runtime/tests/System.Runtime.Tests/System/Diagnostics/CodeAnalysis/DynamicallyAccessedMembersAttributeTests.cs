@@ -9,7 +9,10 @@ namespace System.Diagnostics.CodeAnalysis.Tests
     {
         [Theory]
         [InlineData(DynamicallyAccessedMemberTypes.None)]
-        [InlineData(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
+        [InlineData(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.PublicProperties
+        )]
         [InlineData(DynamicallyAccessedMemberTypes.All)]
         public void TestConstructor(DynamicallyAccessedMemberTypes memberTypes)
         {

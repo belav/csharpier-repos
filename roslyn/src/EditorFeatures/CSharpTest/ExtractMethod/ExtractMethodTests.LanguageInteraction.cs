@@ -1353,7 +1353,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         output.AppendLine();
                     }
                     """;
-                await TestExtractMethodAsync(code, expected, parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script));
+                await TestExtractMethodAsync(
+                    code,
+                    expected,
+                    parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             }
 
             [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544920")]
@@ -2076,40 +2080,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/3147")]
         public async Task HandleFormattableStringTargetTyping1()
         {
-            const string code = CodeSnippets.FormattableStringType + """
-                namespace N
-                {
-                    using System;
-
-                    class C
+            const string code =
+                CodeSnippets.FormattableStringType
+                + """
+                    namespace N
                     {
-                        public void M()
+                        using System;
+
+                        class C
                         {
-                            var f = FormattableString.Invariant([|$""|]);
+                            public void M()
+                            {
+                                var f = FormattableString.Invariant([|$""|]);
+                            }
                         }
                     }
-                }
-                """;
+                    """;
 
-            const string expected = CodeSnippets.FormattableStringType + """
-                namespace N
-                {
-                    using System;
-
-                    class C
+            const string expected =
+                CodeSnippets.FormattableStringType
+                + """
+                    namespace N
                     {
-                        public void M()
-                        {
-                            var f = FormattableString.Invariant(NewMethod());
-                        }
+                        using System;
 
-                        private static FormattableString NewMethod()
+                        class C
                         {
-                            return $"";
+                            public void M()
+                            {
+                                var f = FormattableString.Invariant(NewMethod());
+                            }
+
+                            private static FormattableString NewMethod()
+                            {
+                                return $"";
+                            }
                         }
                     }
-                }
-                """;
+                    """;
 
             await TestExtractMethodAsync(code, expected);
         }
@@ -2266,7 +2274,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                     void M2() { }
                     void M3() { }
                     string S => "S";
-                
+
                     void M()
                     {
                         using Goo g = NewMethod();
@@ -2280,7 +2288,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         g.M3();
                         return g;
                     }
-                
+
                     public void Dispose()
                     {
                         throw new NotImplementedException();

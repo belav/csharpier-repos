@@ -22,21 +22,33 @@ namespace System.ServiceModel.Security
 
         public override bool IsSecurityVersionSupported(MessageSecurityVersion version)
         {
-            return version == MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 ||
-                version == MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11 ||
-                version == MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+            return version
+                    == MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10
+                || version
+                    == MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11
+                || version
+                    == MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
         }
 
-        public override MessageSecurityVersion GetSupportedMessageSecurityVersion(SecurityVersion version)
+        public override MessageSecurityVersion GetSupportedMessageSecurityVersion(
+            SecurityVersion version
+        )
         {
-                return (version == SecurityVersion.WSSecurity10) ? MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 : MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+            return (version == SecurityVersion.WSSecurity10)
+                ? MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10
+                : MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
         }
 
         public override TrustDriver TrustDriver
         {
             get
             {
-                return new WSTrustFeb2005.DriverFeb2005(new SecurityStandardsManager(MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11, WSSecurityTokenSerializer.DefaultInstance));
+                return new WSTrustFeb2005.DriverFeb2005(
+                    new SecurityStandardsManager(
+                        MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11,
+                        WSSecurityTokenSerializer.DefaultInstance
+                    )
+                );
             }
         }
 
@@ -55,20 +67,33 @@ namespace System.ServiceModel.Security
         }
 
         // WS-SecurityPolicy 11 should still use the mssp namespace for MustNotSendCancel
-        public override bool TryImportWsspMustNotSendCancelAssertion(ICollection<XmlElement> assertions, out bool requireCancellation)
+        public override bool TryImportWsspMustNotSendCancelAssertion(
+            ICollection<XmlElement> assertions,
+            out bool requireCancellation
+        )
         {
             requireCancellation = !TryImportMsspAssertion(assertions, MustNotSendCancelName);
             return true;
         }
 
-        public override XmlElement CreateWsspHttpsTokenAssertion(MetadataExporter exporter, HttpsTransportBindingElement httpsBinding)
+        public override XmlElement CreateWsspHttpsTokenAssertion(
+            MetadataExporter exporter,
+            HttpsTransportBindingElement httpsBinding
+        )
         {
             XmlElement result = CreateWsspAssertion(HttpsTokenName);
-            result.SetAttribute(RequireClientCertificateName, httpsBinding.RequireClientCertificate ? TrueName : FalseName);
+            result.SetAttribute(
+                RequireClientCertificateName,
+                httpsBinding.RequireClientCertificate ? TrueName : FalseName
+            );
             return result;
         }
 
-        public override bool TryImportWsspHttpsTokenAssertion(MetadataImporter importer, ICollection<XmlElement> assertions, HttpsTransportBindingElement httpsBinding)
+        public override bool TryImportWsspHttpsTokenAssertion(
+            MetadataImporter importer,
+            ICollection<XmlElement> assertions,
+            HttpsTransportBindingElement httpsBinding
+        )
         {
             if (assertions == null)
             {
@@ -82,7 +107,7 @@ namespace System.ServiceModel.Security
             {
                 result = true;
                 string v = assertion.GetAttribute(RequireClientCertificateName);
-                try 
+                try
                 {
                     httpsBinding.RequireClientCertificate = XmlUtil.IsTrue(v);
                 }
@@ -93,7 +118,16 @@ namespace System.ServiceModel.Security
                     if (e is NullReferenceException)
                         throw;
 
-                    importer.Errors.Add(new MetadataConversionError(SR.GetString(SR.UnsupportedBooleanAttribute, RequireClientCertificateName, e.Message), false));
+                    importer.Errors.Add(
+                        new MetadataConversionError(
+                            SR.GetString(
+                                SR.UnsupportedBooleanAttribute,
+                                RequireClientCertificateName,
+                                e.Message
+                            ),
+                            false
+                        )
+                    );
                     result = false;
                 }
             }
@@ -105,14 +139,28 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        public override XmlElement CreateWsspTrustAssertion(MetadataExporter exporter, SecurityKeyEntropyMode keyEntropyMode)
+        public override XmlElement CreateWsspTrustAssertion(
+            MetadataExporter exporter,
+            SecurityKeyEntropyMode keyEntropyMode
+        )
         {
             return CreateWsspTrustAssertion(Trust10Name, exporter, keyEntropyMode);
         }
 
-        public override bool TryImportWsspTrustAssertion(MetadataImporter importer, ICollection<XmlElement> assertions, SecurityBindingElement binding, out XmlElement assertion)
+        public override bool TryImportWsspTrustAssertion(
+            MetadataImporter importer,
+            ICollection<XmlElement> assertions,
+            SecurityBindingElement binding,
+            out XmlElement assertion
+        )
         {
-            return TryImportWsspTrustAssertion(Trust10Name, importer, assertions, binding, out assertion);
+            return TryImportWsspTrustAssertion(
+                Trust10Name,
+                importer,
+                assertions,
+                binding,
+                out assertion
+            );
         }
     }
 }

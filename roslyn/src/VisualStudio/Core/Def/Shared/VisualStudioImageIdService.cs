@@ -29,7 +29,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
         public readonly ImmutableArray<ImageCompositionLayer> Layers;
         public readonly IImageHandle ImageHandle;
 
-        public CompositeImage(ImmutableArray<ImageCompositionLayer> layers, IImageHandle imageHandle)
+        public CompositeImage(
+            ImmutableArray<ImageCompositionLayer> layers,
+            IImageHandle imageHandle
+        )
         {
             this.Layers = layers;
             this.ImageHandle = imageHandle;
@@ -49,7 +52,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioImageIdService(IThreadingContext threadingContext, SVsServiceProvider serviceProvider)
+        public VisualStudioImageIdService(
+            IThreadingContext threadingContext,
+            SVsServiceProvider serviceProvider
+        )
             : base(threadingContext)
         {
             _imageService = (IVsImageService2)serviceProvider.GetService(typeof(SVsImageService));
@@ -70,8 +76,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
             {
                 case Glyph.AddReference:
                     return GetCompositedImageId(
-                        CreateLayer(Glyph.Reference.GetImageMoniker(), virtualXOffset: 1, virtualYOffset: 2),
-                        CreateLayer(KnownMonikers.PendingAddNode, virtualWidth: 7, virtualXOffset: -1, virtualYOffset: -2));
+                        CreateLayer(
+                            Glyph.Reference.GetImageMoniker(),
+                            virtualXOffset: 1,
+                            virtualYOffset: 2
+                        ),
+                        CreateLayer(
+                            KnownMonikers.PendingAddNode,
+                            virtualWidth: 7,
+                            virtualXOffset: -1,
+                            virtualYOffset: -2
+                        )
+                    );
             }
 
             return glyph.GetImageId();
@@ -81,7 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
             ImageMoniker imageMoniker,
             int virtualWidth = 16,
             int virtualYOffset = 0,
-            int virtualXOffset = 0)
+            int virtualXOffset = 0
+        )
         {
             return new ImageCompositionLayer
             {
@@ -108,8 +125,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
             }
 
             var imageHandle = _imageService.AddCustomCompositeImage(
-                    virtualWidth: 16, virtualHeight: 16,
-                    layerCount: layers.Length, layers: layers);
+                virtualWidth: 16,
+                virtualHeight: 16,
+                layerCount: layers.Length,
+                layers: layers
+            );
 
             _compositeImages.Add(new CompositeImage(layers.AsImmutableOrEmpty(), imageHandle));
 

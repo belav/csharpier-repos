@@ -31,6 +31,5 @@ internal static partial class Interop
             internal const int FILE_MAP_READ = 0x0004;
             internal const int FILE_MAP_EXECUTE = 0x0020;
         }
-
     }
 }

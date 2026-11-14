@@ -13,7 +13,10 @@ string outFilePath;
 
 if (args.Length != 2)
 {
-    Console.Error.WriteLine("Usage: \"{0} <input> <output>\"", Path.GetFileNameWithoutExtension(args[0]));
+    Console.Error.WriteLine(
+        "Usage: \"{0} <input> <output>\"",
+        Path.GetFileNameWithoutExtension(args[0])
+    );
     return 1;
 }
 
@@ -22,7 +25,12 @@ outFilePath = args[1];
 
 Tree? tree;
 var serializer = new XmlSerializer(typeof(Tree));
-using (var reader = XmlReader.Create(inFileName, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }))
+using (
+    var reader = XmlReader.Create(
+        inFileName,
+        new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
+    )
+)
 {
     tree = (Tree?)serializer.Deserialize(reader);
 }

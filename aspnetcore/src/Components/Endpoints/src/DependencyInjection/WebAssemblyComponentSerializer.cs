@@ -14,13 +14,11 @@ internal sealed class WebAssemblyComponentSerializer
         ParameterView parameters
     )
     {
-        var assembly =
-            type.Assembly.GetName().Name
+        var assembly = type.Assembly.GetName().Name
             ?? throw new InvalidOperationException(
                 "Cannot prerender components from assemblies with a null name"
             );
-        var typeFullName =
-            type.FullName
+        var typeFullName = type.FullName
             ?? throw new InvalidOperationException(
                 "Cannot prerender component types with a null name"
             );

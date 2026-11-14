@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
     internal sealed class BraceMatchingTypeFormatDefinitions
     {
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeDefinitions.BraceMatchingName)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeDefinitions.BraceMatchingName
+        )]
         [Name(ClassificationTypeDefinitions.BraceMatchingName)]
         [Order(After = Priority.High)]
         [UserVisible(true)]

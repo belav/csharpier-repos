@@ -50,15 +50,22 @@ namespace System.Reflection.Emit.Tests
         public void ToString_NonGenericMethod()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            MethodBuilder method = type.DefineMethod("method1", MethodAttributes.Public | MethodAttributes.Static, typeof(int), new Type[0]);
+            MethodBuilder method = type.DefineMethod(
+                "method1",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(int),
+                new Type[0]
+            );
 
             string toString = method.ToString();
-            Assert.True(toString.LastIndexOf("Name: method1") != -1 &&
-                toString.LastIndexOf("Attributes: 22") != -1 &&
-                toString.LastIndexOf("Method Signature: Length: 3") != -1 &&
-                toString.LastIndexOf("Arguments: 0") != -1 &&
-                toString.LastIndexOf("Signature:") != -1 &&
-                toString.LastIndexOf("0  0  8  0") != -1);
+            Assert.True(
+                toString.LastIndexOf("Name: method1") != -1
+                    && toString.LastIndexOf("Attributes: 22") != -1
+                    && toString.LastIndexOf("Method Signature: Length: 3") != -1
+                    && toString.LastIndexOf("Arguments: 0") != -1
+                    && toString.LastIndexOf("Signature:") != -1
+                    && toString.LastIndexOf("0  0  8  0") != -1
+            );
         }
 
         [Fact]
@@ -66,24 +73,36 @@ namespace System.Reflection.Emit.Tests
         public void ToString_GenericMethod()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            MethodBuilder method = type.DefineMethod("method1", MethodAttributes.Public, typeof(int), new Type[0]);
+            MethodBuilder method = type.DefineMethod(
+                "method1",
+                MethodAttributes.Public,
+                typeof(int),
+                new Type[0]
+            );
             method.DefineGenericParameters("T", "U", "V");
             method.MakeGenericMethod(typeof(string), typeof(int), typeof(object));
 
             string toString = method.ToString();
-            Assert.True(toString.LastIndexOf("Name: method1") != -1 &&
-                toString.LastIndexOf("Attributes: 6") != -1 &&
-                toString.LastIndexOf("Method Signature: Length: 4") != -1 &&
-                toString.LastIndexOf("Arguments: 0") != -1 &&
-                toString.LastIndexOf("Signature:") != -1 &&
-                toString.LastIndexOf("48  3  0  8  0") != -1);
+            Assert.True(
+                toString.LastIndexOf("Name: method1") != -1
+                    && toString.LastIndexOf("Attributes: 6") != -1
+                    && toString.LastIndexOf("Method Signature: Length: 4") != -1
+                    && toString.LastIndexOf("Arguments: 0") != -1
+                    && toString.LastIndexOf("Signature:") != -1
+                    && toString.LastIndexOf("48  3  0  8  0") != -1
+            );
         }
 
         private static string ExpectedToStrin(MethodBuilder method)
         {
-            return "Name: " + method.Name + " " + Environment.NewLine +
-                "Attributes: " + ((int)method.Attributes).ToString() + Environment.NewLine +
-                "Method Signature: ";
+            return "Name: "
+                + method.Name
+                + " "
+                + Environment.NewLine
+                + "Attributes: "
+                + ((int)method.Attributes).ToString()
+                + Environment.NewLine
+                + "Method Signature: ";
         }
     }
 }

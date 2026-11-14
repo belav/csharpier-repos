@@ -6,9 +6,9 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 {
     /// <summary>
     /// Defines logging severity levels. Each logger may choose to report differently based on the level of the message being logged.
-    /// 
+    ///
     /// Copied from Microsoft.Extensions.Logging https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.loglevel
-    /// 
+    ///
     /// </summary>
     internal enum LogLevel
     {
@@ -45,6 +45,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// <summary>
         /// Not used for writing log messages. Specifies that a logging category should not write any messages.
         /// </summary>
-        None = 6
+        None = 6,
     }
 }

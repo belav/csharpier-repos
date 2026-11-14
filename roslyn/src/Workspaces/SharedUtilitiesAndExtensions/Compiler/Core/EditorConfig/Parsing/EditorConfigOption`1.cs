@@ -13,9 +13,12 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         : EditorConfigOption(Section, Span)
     {
         public static implicit operator T(EditorConfigOption<T> option) => option.Value;
-        public static implicit operator EditorConfigOption<T>((Section section, TextSpan? span, T value) tuple)
-            => new(tuple.section, tuple.span, tuple.value);
-        public static implicit operator EditorConfigOption<T>((Section section, T value) tuple)
-            => new(tuple.section, null, tuple.value);
+
+        public static implicit operator EditorConfigOption<T>(
+            (Section section, TextSpan? span, T value) tuple
+        ) => new(tuple.section, tuple.span, tuple.value);
+
+        public static implicit operator EditorConfigOption<T>((Section section, T value) tuple) =>
+            new(tuple.section, null, tuple.value);
     }
 }

@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 {
     internal class SyntaxKindSet
     {
-        public static readonly ISet<SyntaxKind> AllTypeModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        public static readonly ISet<SyntaxKind> AllTypeModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.AbstractKeyword,
             SyntaxKind.FileKeyword,
@@ -21,10 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxKind.StaticKeyword,
             SyntaxKind.UnsafeKeyword,
             SyntaxKind.ReadOnlyKeyword,
-            SyntaxKind.RefKeyword
+            SyntaxKind.RefKeyword,
         };
 
-        public static readonly ISet<SyntaxKind> AllMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        public static readonly ISet<SyntaxKind> AllMemberModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.AbstractKeyword,
             SyntaxKind.AsyncKeyword,
@@ -44,7 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxKind.VolatileKeyword,
         };
 
-        public static readonly ISet<SyntaxKind> AllGlobalMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        public static readonly ISet<SyntaxKind> AllGlobalMemberModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.ExternKeyword,
             SyntaxKind.InternalKeyword,
@@ -58,7 +64,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxKind.VolatileKeyword,
         };
 
-        public static readonly ISet<SyntaxKind> AccessibilityModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        public static readonly ISet<SyntaxKind> AccessibilityModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.PublicKeyword,
             SyntaxKind.PrivateKeyword,
@@ -66,7 +74,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxKind.InternalKeyword,
         };
 
-        public static readonly ISet<SyntaxKind> AllTypeDeclarations = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        public static readonly ISet<SyntaxKind> AllTypeDeclarations = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.ClassDeclaration,
@@ -76,45 +86,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxKind.EnumDeclaration,
         };
 
-        public static readonly ISet<SyntaxKind> ClassInterfaceStructRecordTypeDeclarations = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.RecordDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.RecordStructDeclaration,
-        };
+        public static readonly ISet<SyntaxKind> ClassInterfaceStructRecordTypeDeclarations =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.RecordDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.RecordStructDeclaration,
+            };
 
-        public static readonly ISet<SyntaxKind> ClassInterfaceRecordTypeDeclarations = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.RecordDeclaration,
-        };
+        public static readonly ISet<SyntaxKind> ClassInterfaceRecordTypeDeclarations =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.RecordDeclaration,
+            };
 
-        public static readonly ISet<SyntaxKind> ClassRecordTypeDeclarations = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.RecordDeclaration,
-        };
+        public static readonly ISet<SyntaxKind> ClassRecordTypeDeclarations =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.RecordDeclaration,
+            };
 
-        public static readonly ISet<SyntaxKind> ClassStructRecordTypeDeclarations = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.RecordDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.RecordStructDeclaration,
-        };
+        public static readonly ISet<SyntaxKind> ClassStructRecordTypeDeclarations =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.RecordDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.RecordStructDeclaration,
+            };
 
-        public static readonly ISet<SyntaxKind> StructOnlyTypeDeclarations = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.RecordStructDeclaration,
-        };
+        public static readonly ISet<SyntaxKind> StructOnlyTypeDeclarations =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.RecordStructDeclaration,
+            };
 
-        public static readonly ISet<SyntaxKind> InterfaceOnlyTypeDeclarations = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.InterfaceDeclaration,
-        };
+        public static readonly ISet<SyntaxKind> InterfaceOnlyTypeDeclarations =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.InterfaceDeclaration,
+            };
     }
 }

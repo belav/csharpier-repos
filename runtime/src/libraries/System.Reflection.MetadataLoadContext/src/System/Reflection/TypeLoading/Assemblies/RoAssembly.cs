@@ -23,7 +23,10 @@ namespace System.Reflection.TypeLoading
         {
             Loader = loader;
             IsSingleModule = (assemblyFileCount == 0);
-            _loadedModules = (assemblyFileCount == 0) ? Array.Empty<RoModule>() : new RoModule[assemblyFileCount];
+            _loadedModules =
+                (assemblyFileCount == 0)
+                    ? Array.Empty<RoModule>()
+                    : new RoModule[assemblyFileCount];
         }
 
         public sealed override Module ManifestModule => GetRoManifestModule();
@@ -33,38 +36,63 @@ namespace System.Reflection.TypeLoading
         public sealed override string ToString() => Loader.GetDisposedString() ?? base.ToString();
 
         // Naming
-        public sealed override AssemblyName GetName(bool copiedName) => GetAssemblyNameDataNoCopy().CreateAssemblyName();
-        internal AssemblyNameData GetAssemblyNameDataNoCopy() => _lazyAssemblyNameData ??= ComputeNameData();
+        public sealed override AssemblyName GetName(bool copiedName) =>
+            GetAssemblyNameDataNoCopy().CreateAssemblyName();
+
+        internal AssemblyNameData GetAssemblyNameDataNoCopy() =>
+            _lazyAssemblyNameData ??= ComputeNameData();
+
         protected abstract AssemblyNameData ComputeNameData();
         private volatile AssemblyNameData? _lazyAssemblyNameData;
 
         public sealed override string FullName => _lazyFullName ??= GetName().FullName;
         private volatile string? _lazyFullName;
 
-        internal const string ThrowingMessageInRAF = "This member throws an exception for assemblies embedded in a single-file app";
+        internal const string ThrowingMessageInRAF =
+            "This member throws an exception for assemblies embedded in a single-file app";
 
         // Location and codebase
         public abstract override string Location { get; }
+
 #if NETCOREAPP
-        [Obsolete(Obsoletions.CodeBaseMessage, DiagnosticId = Obsoletions.CodeBaseDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CodeBaseMessage,
+            DiagnosticId = Obsoletions.CodeBaseDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
 #endif
-        public sealed override string CodeBase => throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
+        public sealed override string CodeBase =>
+            throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
+
 #if NETCOREAPP
-        [Obsolete(Obsoletions.CodeBaseMessage, DiagnosticId = Obsoletions.CodeBaseDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CodeBaseMessage,
+            DiagnosticId = Obsoletions.CodeBaseDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
 #endif
-        public sealed override string EscapedCodeBase => throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
+        public sealed override string EscapedCodeBase =>
+            throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
 
         // Custom Attributes
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         // Apis to retrieved types physically defined in this module.
-        public sealed override Type[] GetTypes() => IsSingleModule ? ManifestModule.GetTypes() : base.GetTypes();
+        public sealed override Type[] GetTypes() =>
+            IsSingleModule ? ManifestModule.GetTypes() : base.GetTypes();
+
         public sealed override IEnumerable<TypeInfo> DefinedTypes => GetDefinedRoTypes()!;
 
-        private IEnumerable<RoType>? GetDefinedRoTypes() => IsSingleModule ? GetRoManifestModule().GetDefinedRoTypes() : MultiModuleGetDefinedRoTypes();
+        private IEnumerable<RoType>? GetDefinedRoTypes() =>
+            IsSingleModule
+                ? GetRoManifestModule().GetDefinedRoTypes()
+                : MultiModuleGetDefinedRoTypes();
+
         private IEnumerable<RoType> MultiModuleGetDefinedRoTypes()
         {
             foreach (RoModule module in ComputeRoModules(getResourceModules: false))
@@ -109,7 +137,12 @@ namespace System.Reflection.TypeLoading
             // (We can't just throw in the assemblyResolve delegate because assembly qualifications are permitted inside generic arguments,
             // just not in the top level type name.) In the bigger scheme of things, this does not seem worth worrying about.
 
-            return Helpers.LoadTypeFromAssemblyQualifiedName(name, defaultAssembly: this, ignoreCase: ignoreCase, throwOnError: throwOnError);
+            return Helpers.LoadTypeFromAssemblyQualifiedName(
+                name,
+                defaultAssembly: this,
+                ignoreCase: ignoreCase,
+                throwOnError: throwOnError
+            );
         }
 
         /// <summary>
@@ -120,10 +153,22 @@ namespace System.Reflection.TypeLoading
         /// If a type is not contained or forwarded from the assembly, this method returns null (does not throw.)
         /// This supports the "throwOnError: false" behavior of Assembly.GetType(string, bool).
         /// </summary>
-        internal RoDefinitionType? GetTypeCore(string ns, string name, bool ignoreCase, out Exception? e) => GetTypeCore(ns.ToUtf8(), name.ToUtf8(), ignoreCase, out e);
-        internal RoDefinitionType? GetTypeCore(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, bool ignoreCase, out Exception? e)
+        internal RoDefinitionType? GetTypeCore(
+            string ns,
+            string name,
+            bool ignoreCase,
+            out Exception? e
+        ) => GetTypeCore(ns.ToUtf8(), name.ToUtf8(), ignoreCase, out e);
+
+        internal RoDefinitionType? GetTypeCore(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name,
+            bool ignoreCase,
+            out Exception? e
+        )
         {
-            RoDefinitionType? result = GetRoManifestModule().GetTypeCore(ns, name, ignoreCase, out e);
+            RoDefinitionType? result = GetRoManifestModule()
+                .GetTypeCore(ns, name, ignoreCase, out e);
             if (IsSingleModule || result != null)
                 return result;
 
@@ -153,14 +198,21 @@ namespace System.Reflection.TypeLoading
             return result;
         }
 
-        private AssemblyNameData[] GetReferencedAssembliesNoCopy() => _lazyAssemblyReferences ??= ComputeAssemblyReferences();
+        private AssemblyNameData[] GetReferencedAssembliesNoCopy() =>
+            _lazyAssemblyReferences ??= ComputeAssemblyReferences();
+
         protected abstract AssemblyNameData[] ComputeAssemblyReferences();
         private volatile AssemblyNameData[]? _lazyAssemblyReferences;
 
         // Miscellaneous properties
         public sealed override bool ReflectionOnly => true;
+
 #if NETCOREAPP
-        [Obsolete("The Global Assembly Cache is not supported.", DiagnosticId = "SYSLIB0005", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
+        [Obsolete(
+            "The Global Assembly Cache is not supported.",
+            DiagnosticId = "SYSLIB0005",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
 #endif
         public sealed override bool GlobalAssemblyCache => false;
         public sealed override long HostContext => 0;
@@ -172,6 +224,7 @@ namespace System.Reflection.TypeLoading
         public abstract override ManifestResourceInfo? GetManifestResourceInfo(string resourceName);
         public abstract override string[] GetManifestResourceNames();
         public abstract override Stream? GetManifestResourceStream(string name);
+
         public sealed override Stream? GetManifestResourceStream(Type type, string name)
         {
             StringBuilder sb = new StringBuilder();
@@ -199,21 +252,47 @@ namespace System.Reflection.TypeLoading
 
         // Serialization
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        public sealed override void GetObjectData(SerializationInfo info, StreamingContext context) => throw new NotSupportedException();
+        public sealed override void GetObjectData(
+            SerializationInfo info,
+            StreamingContext context
+        ) => throw new NotSupportedException();
 
         // Satellite assemblies
-        public sealed override Assembly GetSatelliteAssembly(CultureInfo culture) => throw new NotSupportedException(SR.NotSupported_SatelliteAssembly);
-        public sealed override Assembly GetSatelliteAssembly(CultureInfo culture, Version? version) => throw new NotSupportedException(SR.NotSupported_SatelliteAssembly);
+        public sealed override Assembly GetSatelliteAssembly(CultureInfo culture) =>
+            throw new NotSupportedException(SR.NotSupported_SatelliteAssembly);
+
+        public sealed override Assembly GetSatelliteAssembly(
+            CultureInfo culture,
+            Version? version
+        ) => throw new NotSupportedException(SR.NotSupported_SatelliteAssembly);
 
         // Operations that are invalid for ReflectionOnly objects.
-        public sealed override object[] GetCustomAttributes(bool inherit) => throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
-        public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
-        public sealed override bool IsDefined(Type attributeType, bool inherit) => throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
+        public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
+        public sealed override bool IsDefined(Type attributeType, bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
         // Compat quirk: Why ArgumentException instead of InvalidOperationException?
-        public sealed override object CreateInstance(string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder? binder, object?[]? args, CultureInfo? culture, object?[]? activationAttributes) => throw new ArgumentException(SR.Arg_ReflectionOnlyInvoke);
+        public sealed override object CreateInstance(
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object?[]? args,
+            CultureInfo? culture,
+            object?[]? activationAttributes
+        ) => throw new ArgumentException(SR.Arg_ReflectionOnlyInvoke);
 
         internal MetadataLoadContext Loader { get; }
     }

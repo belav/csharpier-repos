@@ -105,8 +105,8 @@ internal sealed class ActionEndpointFactory
 
                 updatedRoutePattern = RoutePatternFactory.Combine(groupPrefix, updatedRoutePattern);
 
-                var requestDelegate =
-                    CreateRequestDelegate(action, route.DataTokens) ?? _requestDelegate;
+                var requestDelegate = CreateRequestDelegate(action, route.DataTokens)
+                    ?? _requestDelegate;
 
                 // We suppress link generation for each conventionally routed endpoint. We generate a single endpoint per-route
                 // to handle link generation.

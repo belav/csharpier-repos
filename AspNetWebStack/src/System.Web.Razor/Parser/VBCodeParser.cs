@@ -17,7 +17,9 @@ namespace System.Web.Razor.Parser
 {
     public partial class VBCodeParser : TokenizerBackedParser<VBTokenizer, VBSymbol, VBSymbolType>
     {
-        internal static ISet<string> DefaultKeywords = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        internal static ISet<string> DefaultKeywords = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        )
         {
             "functions",
             "code",
@@ -38,13 +40,21 @@ namespace System.Web.Razor.Parser
             "namespace",
             "class",
             "layout",
-            "sessionstate"
+            "sessionstate",
         };
 
-        private Dictionary<VBKeyword, Func<bool>> _keywordHandlers = new Dictionary<VBKeyword, Func<bool>>();
-        private Dictionary<string, Func<bool>> _directiveHandlers = new Dictionary<string, Func<bool>>(StringComparer.OrdinalIgnoreCase);
+        private Dictionary<VBKeyword, Func<bool>> _keywordHandlers =
+            new Dictionary<VBKeyword, Func<bool>>();
+        private Dictionary<string, Func<bool>> _directiveHandlers = new Dictionary<
+            string,
+            Func<bool>
+        >(StringComparer.OrdinalIgnoreCase);
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "Necessary state is initialized before calling virtual methods")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "Necessary state is initialized before calling virtual methods"
+        )]
         public VBCodeParser()
         {
             DirectParentIsCode = false;
@@ -68,11 +78,18 @@ namespace System.Web.Razor.Parser
         private bool IsNested { get; set; }
         private bool DirectParentIsCode { get; set; }
 
-        protected override bool IsAtEmbeddedTransition(bool allowTemplatesAndComments, bool allowTransitions)
+        protected override bool IsAtEmbeddedTransition(
+            bool allowTemplatesAndComments,
+            bool allowTransitions
+        )
         {
-            return (allowTransitions && Language.IsTransition(CurrentSymbol) && !Was(VBSymbolType.Dot)) ||
-                   (allowTemplatesAndComments && Language.IsCommentStart(CurrentSymbol)) ||
-                   (Language.IsTransition(CurrentSymbol) && NextIs(VBSymbolType.Transition));
+            return (
+                    allowTransitions
+                    && Language.IsTransition(CurrentSymbol)
+                    && !Was(VBSymbolType.Dot)
+                )
+                || (allowTemplatesAndComments && Language.IsCommentStart(CurrentSymbol))
+                || (Language.IsTransition(CurrentSymbol) && NextIs(VBSymbolType.Transition));
         }
 
         protected override void HandleEmbeddedTransition()
@@ -110,7 +127,9 @@ namespace System.Web.Razor.Parser
                 NextToken();
                 using (Context.StartBlock())
                 {
-                    IEnumerable<VBSymbol> syms = ReadWhile(sym => sym.Type == VBSymbolType.WhiteSpace);
+                    IEnumerable<VBSymbol> syms = ReadWhile(sym =>
+                        sym.Type == VBSymbolType.WhiteSpace
+                    );
                     if (At(VBSymbolType.Transition))
                     {
                         Accept(syms);
@@ -158,26 +177,36 @@ namespace System.Web.Razor.Parser
                             case VBSymbolType.WhiteSpace:
                             case VBSymbolType.NewLine:
                                 config = ImplictExpressionSpanConfig;
-                                Context.OnError(CurrentLocation,
-                                                RazorResources.ParseError_Unexpected_WhiteSpace_At_Start_Of_CodeBlock_VB);
+                                Context.OnError(
+                                    CurrentLocation,
+                                    RazorResources.ParseError_Unexpected_WhiteSpace_At_Start_Of_CodeBlock_VB
+                                );
                                 break;
                             default:
                                 config = ImplictExpressionSpanConfig;
-                                Context.OnError(CurrentLocation,
-                                                RazorResources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock_VB,
-                                                CurrentSymbol.Content);
+                                Context.OnError(
+                                    CurrentLocation,
+                                    RazorResources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock_VB,
+                                    CurrentSymbol.Content
+                                );
                                 break;
                         }
                     }
                     else
                     {
                         config = ImplictExpressionSpanConfig;
-                        Context.OnError(CurrentLocation,
-                                        RazorResources.ParseError_Unexpected_EndOfFile_At_Start_Of_CodeBlock);
+                        Context.OnError(
+                            CurrentLocation,
+                            RazorResources.ParseError_Unexpected_EndOfFile_At_Start_Of_CodeBlock
+                        );
                     }
                     using (PushSpanConfig(config))
                     {
-                        if (!isComplete && Span.Symbols.Count == 0 && Context.LastAcceptedCharacters != AcceptedCharacters.Any)
+                        if (
+                            !isComplete
+                            && Span.Symbols.Count == 0
+                            && Context.LastAcceptedCharacters != AcceptedCharacters.Any
+                        )
                         {
                             AddMarkerSymbolIfNecessary();
                         }
@@ -194,9 +223,10 @@ namespace System.Web.Razor.Parser
             span.EditHandler = new ImplicitExpressionEditHandler(
                 Language.TokenizeString,
                 Keywords,
-                acceptTrailingDot: DirectParentIsCode)
+                acceptTrailingDot: DirectParentIsCode
+            )
             {
-                AcceptedCharacters = AcceptedCharacters.NonWhiteSpace
+                AcceptedCharacters = AcceptedCharacters.NonWhiteSpace,
             };
         }
 
@@ -254,18 +284,24 @@ namespace System.Web.Razor.Parser
             Span.CodeGenerator = new ExpressionCodeGenerator();
             using (PushSpanConfig(span => span.CodeGenerator = new ExpressionCodeGenerator()))
             {
-                if (!Balance(BalancingModes.NoErrorOnFailure |
-                             BalancingModes.BacktrackOnFailure |
-                             BalancingModes.AllowCommentsAndTemplates,
-                             VBSymbolType.LeftParenthesis,
-                             VBSymbolType.RightParenthesis,
-                             start))
+                if (
+                    !Balance(
+                        BalancingModes.NoErrorOnFailure
+                            | BalancingModes.BacktrackOnFailure
+                            | BalancingModes.AllowCommentsAndTemplates,
+                        VBSymbolType.LeftParenthesis,
+                        VBSymbolType.RightParenthesis,
+                        start
+                    )
+                )
                 {
-                    Context.OnError(start,
-                                    RazorResources.ParseError_Expected_EndOfBlock_Before_EOF,
-                                    RazorResources.BlockName_ExplicitExpression,
-                                    VBSymbol.GetSample(VBSymbolType.RightParenthesis),
-                                    VBSymbol.GetSample(VBSymbolType.LeftParenthesis));
+                    Context.OnError(
+                        start,
+                        RazorResources.ParseError_Expected_EndOfBlock_Before_EOF,
+                        RazorResources.BlockName_ExplicitExpression,
+                        VBSymbol.GetSample(VBSymbolType.RightParenthesis),
+                        VBSymbol.GetSample(VBSymbolType.LeftParenthesis)
+                    );
                     AcceptUntil(VBSymbolType.NewLine);
                     AddMarkerSymbolIfNecessary();
                     Output(SpanKind.Code);
@@ -310,14 +346,17 @@ namespace System.Web.Razor.Parser
                                     oldConfig(span);
                                     span.EditHandler.AcceptedCharacters = AcceptedCharacters.Any;
                                 });
-                                Balance(BalancingModes.AllowCommentsAndTemplates,
-                                        VBSymbolType.LeftParenthesis,
-                                        VBSymbolType.RightParenthesis,
-                                        start);
+                                Balance(
+                                    BalancingModes.AllowCommentsAndTemplates,
+                                    VBSymbolType.LeftParenthesis,
+                                    VBSymbolType.RightParenthesis,
+                                    start
+                                );
                             }
                             if (Optional(VBSymbolType.RightParenthesis))
                             {
-                                Span.EditHandler.AcceptedCharacters = AcceptedCharacters.NonWhiteSpace;
+                                Span.EditHandler.AcceptedCharacters =
+                                    AcceptedCharacters.NonWhiteSpace;
                             }
                             break;
                         case VBSymbolType.Dot:
@@ -378,11 +417,17 @@ namespace System.Web.Razor.Parser
             Keywords.Add(directive);
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This only occurs in Release builds, where this method is empty by design")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This only occurs in Release builds, where this method is empty by design"
+        )]
         [Conditional("DEBUG")]
         protected void Assert(VBKeyword keyword)
         {
-            Debug.Assert(CurrentSymbol.Type == VBSymbolType.Keyword && CurrentSymbol.Keyword == keyword);
+            Debug.Assert(
+                CurrentSymbol.Type == VBSymbolType.Keyword && CurrentSymbol.Keyword == keyword
+            );
         }
 
         protected bool At(VBKeyword keyword)
@@ -412,7 +457,10 @@ namespace System.Web.Razor.Parser
                 Debug.Assert(ReferenceEquals(Context.ActiveParser, Context.MarkupParser));
                 if (!String.IsNullOrEmpty(startSequence) || !String.IsNullOrEmpty(endSequence))
                 {
-                    Context.MarkupParser.ParseSection(Tuple.Create(startSequence, endSequence), false);
+                    Context.MarkupParser.ParseSection(
+                        Tuple.Create(startSequence, endSequence),
+                        false
+                    );
                 }
                 else
                 {
@@ -462,7 +510,10 @@ namespace System.Web.Razor.Parser
             {
                 if (Context.IsWithin(BlockType.Template))
                 {
-                    Context.OnError(transition.Start, RazorResources.ParseError_InlineMarkup_Blocks_Cannot_Be_Nested);
+                    Context.OnError(
+                        transition.Start,
+                        RazorResources.ParseError_InlineMarkup_Blocks_Cannot_Be_Nested
+                    );
                 }
                 Accept(lastWhiteSpace);
                 VBSymbol transition2 = CurrentSymbol;
@@ -510,7 +561,11 @@ namespace System.Web.Razor.Parser
         protected bool ReservedWord()
         {
             Context.CurrentBlock.Type = BlockType.Directive;
-            Context.OnError(CurrentLocation, RazorResources.ParseError_ReservedWord, CurrentSymbol.Content);
+            Context.OnError(
+                CurrentLocation,
+                RazorResources.ParseError_ReservedWord,
+                CurrentSymbol.Content
+            );
             Span.CodeGenerator = SpanCodeGenerator.Null;
             AcceptAndMoveNext();
             Output(SpanKind.MetaCode, AcceptedCharacters.None);

@@ -70,7 +70,11 @@ namespace System.Web.Razor.Parser.SyntaxTree
             builder.Reset();
 
             // Calculate other properties
-            Content = Symbols.Aggregate(new StringBuilder(), (sb, sym) => sb.Append(sym.Content), sb => sb.ToString());
+            Content = Symbols.Aggregate(
+                new StringBuilder(),
+                (sb, sym) => sb.Append(sym.Content),
+                sb => sb.ToString()
+            );
         }
 
         /// <summary>
@@ -95,7 +99,14 @@ namespace System.Web.Razor.Parser.SyntaxTree
             builder.Append(" Gen: <");
             builder.Append(CodeGenerator.ToString());
             builder.Append("> {");
-            builder.Append(String.Join(";", Symbols.GroupBy(sym => sym.GetType()).Select(grp => String.Concat(grp.Key.Name, ":", grp.Count()))));
+            builder.Append(
+                String.Join(
+                    ";",
+                    Symbols
+                        .GroupBy(sym => sym.GetType())
+                        .Select(grp => String.Concat(grp.Key.Name, ":", grp.Count()))
+                )
+            );
             builder.Append("}");
             return builder.ToString();
         }
@@ -124,30 +135,26 @@ namespace System.Web.Razor.Parser.SyntaxTree
         public override bool EquivalentTo(SyntaxTreeNode node)
         {
             Span other = node as Span;
-            return other != null &&
-                   Kind.Equals(other.Kind) &&
-                   Start.Equals(other.Start) &&
-                   EditHandler.Equals(other.EditHandler) &&
-                   String.Equals(other.Content, Content, StringComparison.Ordinal);
+            return other != null
+                && Kind.Equals(other.Kind)
+                && Start.Equals(other.Start)
+                && EditHandler.Equals(other.EditHandler)
+                && String.Equals(other.Content, Content, StringComparison.Ordinal);
         }
 
         public override bool Equals(object obj)
         {
             Span other = obj as Span;
-            return other != null &&
-                   Kind.Equals(other.Kind) &&
-                   EditHandler.Equals(other.EditHandler) &&
-                   CodeGenerator.Equals(other.CodeGenerator) &&
-                   Symbols.SequenceEqual(other.Symbols);
+            return other != null
+                && Kind.Equals(other.Kind)
+                && EditHandler.Equals(other.EditHandler)
+                && CodeGenerator.Equals(other.CodeGenerator)
+                && Symbols.SequenceEqual(other.Symbols);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add((int)Kind)
-                .Add(Start)
-                .Add(Content)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add((int)Kind).Add(Start).Add(Content).CombinedHash;
         }
     }
 }

@@ -15,6 +15,10 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hpal, int iStartIndex, int nEntries, byte[] lppe);
+            HandleRef hpal,
+            int iStartIndex,
+            int nEntries,
+            byte[] lppe
+        );
     }
 }

@@ -13,7 +13,13 @@ namespace Microsoft.CodeAnalysis
     internal abstract class ErrorLogger
     {
         public abstract void LogDiagnostic(Diagnostic diagnostic, SuppressionInfo? suppressionInfo);
-        public abstract void AddAnalyzerDescriptorsAndExecutionTime(ImmutableArray<(DiagnosticDescriptor Descriptor, DiagnosticDescriptorErrorLoggerInfo Info)> descriptors, double totalAnalyzerExecutionTime);
+        public abstract void AddAnalyzerDescriptorsAndExecutionTime(
+            ImmutableArray<(
+                DiagnosticDescriptor Descriptor,
+                DiagnosticDescriptorErrorLoggerInfo Info
+            )> descriptors,
+            double totalAnalyzerExecutionTime
+        );
     }
 
     /// <summary>
@@ -35,5 +41,6 @@ namespace Microsoft.CodeAnalysis
         double ExecutionTime,
         int ExecutionPercentage,
         ImmutableHashSet<ReportDiagnostic>? EffectiveSeverities,
-        bool HasAnyExternalSuppression);
+        bool HasAnyExternalSuppression
+    );
 }

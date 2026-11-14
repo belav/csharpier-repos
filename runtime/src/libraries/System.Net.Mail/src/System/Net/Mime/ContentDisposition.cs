@@ -25,27 +25,45 @@ namespace System.Net.Mime
         private bool _isPersisted;
 
         private static readonly TrackingValidationObjectDictionary.ValidateAndParseValue s_dateParser =
-                new TrackingValidationObjectDictionary.ValidateAndParseValue(v => new SmtpDateTime(v.ToString()!));
+            new TrackingValidationObjectDictionary.ValidateAndParseValue(v => new SmtpDateTime(
+                v.ToString()!
+            ));
+
         // this will throw a FormatException if the value supplied is not a valid SmtpDateTime
 
         private static readonly TrackingValidationObjectDictionary.ValidateAndParseValue s_longParser =
-                new TrackingValidationObjectDictionary.ValidateAndParseValue((object value) =>
+            new TrackingValidationObjectDictionary.ValidateAndParseValue(
+                (object value) =>
                 {
                     long longValue;
-                    if (!long.TryParse(value.ToString(), NumberStyles.None, CultureInfo.InvariantCulture, out longValue))
+                    if (
+                        !long.TryParse(
+                            value.ToString(),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out longValue
+                        )
+                    )
                     {
                         throw new FormatException(SR.ContentDispositionInvalid);
                     }
                     return longValue;
-                });
+                }
+            );
 
-        private static readonly Dictionary<string, TrackingValidationObjectDictionary.ValidateAndParseValue> s_validators =
-            new Dictionary<string, TrackingValidationObjectDictionary.ValidateAndParseValue>() {
-                { CreationDateKey, s_dateParser },
-                { ModificationDateKey, s_dateParser },
-                { ReadDateKey, s_dateParser },
-                { SizeKey, s_longParser }
-            };
+        private static readonly Dictionary<
+            string,
+            TrackingValidationObjectDictionary.ValidateAndParseValue
+        > s_validators = new Dictionary<
+            string,
+            TrackingValidationObjectDictionary.ValidateAndParseValue
+        >()
+        {
+            { CreationDateKey, s_dateParser },
+            { ModificationDateKey, s_dateParser },
+            { ReadDateKey, s_dateParser },
+            { SizeKey, s_longParser },
+        };
 
         public ContentDisposition()
         {
@@ -65,7 +83,9 @@ namespace System.Net.Mime
 
         internal DateTime GetDateParameter(string parameterName)
         {
-            SmtpDateTime? dateValue = ((TrackingValidationObjectDictionary)Parameters).InternalGet(parameterName) as SmtpDateTime;
+            SmtpDateTime? dateValue =
+                ((TrackingValidationObjectDictionary)Parameters).InternalGet(parameterName)
+                as SmtpDateTime;
             return dateValue == null ? DateTime.MinValue : dateValue.Date;
         }
 
@@ -84,7 +104,8 @@ namespace System.Net.Mime
             }
         }
 
-        public StringDictionary Parameters => _parameters ??= new TrackingValidationObjectDictionary(s_validators);
+        public StringDictionary Parameters =>
+            _parameters ??= new TrackingValidationObjectDictionary(s_validators);
 
         /// <summary>
         /// Gets the value of the Filename parameter.
@@ -127,7 +148,10 @@ namespace System.Net.Mime
             set
             {
                 SmtpDateTime date = new SmtpDateTime(value);
-                ((TrackingValidationObjectDictionary)Parameters).InternalSet(ModificationDateKey, date);
+                ((TrackingValidationObjectDictionary)Parameters).InternalSet(
+                    ModificationDateKey,
+                    date
+                );
             }
         }
 
@@ -137,7 +161,9 @@ namespace System.Net.Mime
             set
             {
                 _isChanged = true;
-                _dispositionType = value ? DispositionTypeNames.Inline : DispositionTypeNames.Attachment;
+                _dispositionType = value
+                    ? DispositionTypeNames.Inline
+                    : DispositionTypeNames.Attachment;
             }
         }
 
@@ -161,13 +187,12 @@ namespace System.Net.Mime
         {
             get
             {
-                object? sizeValue = ((TrackingValidationObjectDictionary)Parameters).InternalGet(SizeKey);
+                object? sizeValue = ((TrackingValidationObjectDictionary)Parameters).InternalGet(
+                    SizeKey
+                );
                 return sizeValue == null ? -1 : (long)sizeValue;
             }
-            set
-            {
-                ((TrackingValidationObjectDictionary)Parameters).InternalSet(SizeKey, value);
-            }
+            set { ((TrackingValidationObjectDictionary)Parameters).InternalSet(SizeKey, value); }
         }
 
         internal void Set(string contentDisposition, HeaderCollection headers)
@@ -176,7 +201,10 @@ namespace System.Net.Mime
             // via the headers.
             _disposition = contentDisposition;
             ParseValue();
-            headers.InternalSet(MailHeaderInfo.GetString(MailHeaderID.ContentDisposition)!, ToString());
+            headers.InternalSet(
+                MailHeaderInfo.GetString(MailHeaderID.ContentDisposition)!,
+                ToString()
+            );
             _isPersisted = true;
         }
 
@@ -184,7 +212,10 @@ namespace System.Net.Mime
         {
             if (IsChanged || !_isPersisted || forcePersist)
             {
-                headers.InternalSet(MailHeaderInfo.GetString(MailHeaderID.ContentDisposition)!, ToString());
+                headers.InternalSet(
+                    MailHeaderInfo.GetString(MailHeaderID.ContentDisposition)!,
+                    ToString()
+                );
                 _isPersisted = true;
             }
         }
@@ -228,8 +259,10 @@ namespace System.Net.Mime
             {
                 builder.Append('"').Append(value).Append('"');
             }
-            else if ((allowUnicode && !MailBnfHelper.HasCROrLF(value)) // Unicode without CL or LF's
-                || MimeBasePart.IsAscii(value, false)) // Ascii
+            else if (
+                (allowUnicode && !MailBnfHelper.HasCROrLF(value)) // Unicode without CL or LF's
+                || MimeBasePart.IsAscii(value, false)
+            ) // Ascii
             {
                 MailBnfHelper.GetTokenOrQuotedString(value, builder, allowUnicode);
             }
@@ -237,18 +270,28 @@ namespace System.Net.Mime
             {
                 // MIME Encoding required
                 encoding = Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
-                builder.Append('"').Append(MimeBasePart.EncodeHeaderValue(value, encoding, MimeBasePart.ShouldUseBase64Encoding(encoding))).Append('"');
+                builder
+                    .Append('"')
+                    .Append(
+                        MimeBasePart.EncodeHeaderValue(
+                            value,
+                            encoding,
+                            MimeBasePart.ShouldUseBase64Encoding(encoding)
+                        )
+                    )
+                    .Append('"');
             }
         }
 
         public override bool Equals([NotNullWhen(true)] object? rparam)
         {
-            return rparam == null ?
-                false :
-                string.Equals(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase);
+            return rparam == null
+                ? false
+                : string.Equals(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase);
         }
 
-        public override int GetHashCode() => StringComparer.OrdinalIgnoreCase.GetHashCode(ToString());
+        public override int GetHashCode() =>
+            StringComparer.OrdinalIgnoreCase.GetHashCode(ToString());
 
         [MemberNotNull(nameof(_dispositionType))]
         private void ParseValue()
@@ -281,7 +324,9 @@ namespace System.Net.Mime
                     // ensure that the separator charactor is present
                     if (_disposition[offset++] != ';')
                     {
-                        throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, _disposition[offset - 1]));
+                        throw new FormatException(
+                            SR.Format(SR.MailHeaderFieldInvalidCharacter, _disposition[offset - 1])
+                        );
                     }
 
                     // skip whitespace and see if there's anything left to parse or if we're done
@@ -290,7 +335,10 @@ namespace System.Net.Mime
                         break;
                     }
 
-                    string? paramAttribute = MailBnfHelper.ReadParameterAttribute(_disposition, ref offset);
+                    string? paramAttribute = MailBnfHelper.ReadParameterAttribute(
+                        _disposition,
+                        ref offset
+                    );
                     string? paramValue;
 
                     // verify the next character after the parameter is correct
@@ -306,9 +354,10 @@ namespace System.Net.Mime
                         throw new FormatException(SR.ContentDispositionInvalid);
                     }
 
-                    paramValue = _disposition[offset] == '"' ?
-                        MailBnfHelper.ReadQuotedString(_disposition, ref offset, null) :
-                        MailBnfHelper.ReadToken(_disposition, ref offset);
+                    paramValue =
+                        _disposition[offset] == '"'
+                            ? MailBnfHelper.ReadQuotedString(_disposition, ref offset, null)
+                            : MailBnfHelper.ReadToken(_disposition, ref offset);
 
                     // paramValue could potentially still be empty if it was a valid quoted string that
                     // contained no inner value.  this is invalid

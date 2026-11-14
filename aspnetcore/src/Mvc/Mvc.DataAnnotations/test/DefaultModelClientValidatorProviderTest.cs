@@ -98,13 +98,11 @@ public class DefaultModelClientValidatorProviderTest
         var validatorItems = context.Results;
 
         Assert.Equal(2, validatorItems.Count);
-        Assert.Single(
-            validatorItems,
-            v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Class"
+        Assert.Single(validatorItems, v =>
+            Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Class"
         );
-        Assert.Single(
-            validatorItems,
-            v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Property"
+        Assert.Single(validatorItems, v =>
+            Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Property"
         );
     }
 

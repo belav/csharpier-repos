@@ -23,16 +23,15 @@ namespace hello_rangecheckinfinally_interactions_cs
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             int[] a;
             //Start recording
             testLog.StartRecording();
             a = new int[2];
-            try
-            {
-            }
+            try { }
             finally
             {
                 a[0] = 1234;
@@ -48,4 +47,3 @@ namespace hello_rangecheckinfinally_interactions_cs
         }
     }
 }
-

@@ -19,67 +19,100 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         [Fact]
         public void AssignToPlus()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.AddAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.AddAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToSubtract()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.SubtractAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.SubtractAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToMultiply()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.MultiplyAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.MultiplyAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToDivide()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.DivideAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.DivideAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToModule()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.ModuloAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.ModuloAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToExclusiveOr()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.ExclusiveOrAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.ExclusiveOrAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToLeftShift()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.LeftShiftAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.LeftShiftAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToRightShift()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.RightShiftAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.RightShiftAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToUnsignedRightShift()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.UnsignedRightShiftAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.UnsignedRightShiftAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToAnd()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.AndAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.AndAssignmentExpression
+            );
         }
 
         [Fact]
         public void AssignToOr()
         {
-            MakeAssignmentChange(SyntaxKind.SimpleAssignmentExpression, SyntaxKind.OrAssignmentExpression);
+            MakeAssignmentChange(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.OrAssignmentExpression
+            );
         }
 
         #region Helper Methods
@@ -90,21 +123,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             MakeAssignmentChanges(oldStyle, newStyle, topLevel: true, options: TestOptions.Script);
         }
 
-        private static void MakeAssignmentChanges(SyntaxKind oldSyntaxKind, SyntaxKind newSyntaxKind, bool topLevel = false, CSharpParseOptions options = null)
+        private static void MakeAssignmentChanges(
+            SyntaxKind oldSyntaxKind,
+            SyntaxKind newSyntaxKind,
+            bool topLevel = false,
+            CSharpParseOptions options = null
+        )
         {
             string oldName = GetExpressionString(oldSyntaxKind);
             string newName = GetExpressionString(newSyntaxKind);
 
             string topLevelStatement = "x " + oldName + " y";
-            var code = @"class C { void m() {
-                 " + topLevelStatement + @";
+            var code =
+                @"class C { void m() {
+                 "
+                + topLevelStatement
+                + @";
                 }}";
 
-            var oldTree = SyntaxFactory.ParseSyntaxTree(topLevel ? topLevelStatement : code, options: options);
+            var oldTree = SyntaxFactory.ParseSyntaxTree(
+                topLevel ? topLevelStatement : code,
+                options: options
+            );
 
             // Make the change to the node
             var newTree = oldTree.WithReplaceFirst(oldName, newName);
-            var binNode = topLevel ? GetGlobalStatementSyntaxChange(newTree) : GetExpressionSyntaxChange(newTree);
+            var binNode = topLevel
+                ? GetGlobalStatementSyntaxChange(newTree)
+                : GetExpressionSyntaxChange(newTree);
             Assert.Equal(binNode.Kind(), newSyntaxKind);
         }
 
@@ -153,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
 
         private static AssignmentExpressionSyntax GetGlobalStatementSyntaxChange(SyntaxTree newTree)
         {
-            var statementType = newTree.GetCompilationUnitRoot().Members[0] as GlobalStatementSyntax;
+            var statementType =
+                newTree.GetCompilationUnitRoot().Members[0] as GlobalStatementSyntax;
             Assert.True(statementType.AttributeLists.Count == 0);
             Assert.True(statementType.Modifiers.Count == 0);
             var statement = statementType.Statement as ExpressionStatementSyntax;

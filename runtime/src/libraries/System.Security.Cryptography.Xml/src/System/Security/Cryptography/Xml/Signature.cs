@@ -92,7 +92,8 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the Signature
-            XmlElement signatureElement = (XmlElement)document.CreateElement("Signature", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement signatureElement = (XmlElement)
+                document.CreateElement("Signature", SignedXml.XmlDsigNamespaceUrl);
             if (!string.IsNullOrEmpty(_id))
                 signatureElement.SetAttribute("Id", _id);
 
@@ -106,8 +107,13 @@ namespace System.Security.Cryptography.Xml
             if (_signatureValue == null)
                 throw new CryptographicException(SR.Cryptography_Xml_SignatureValueRequired);
 
-            XmlElement signatureValueElement = document.CreateElement("SignatureValue", SignedXml.XmlDsigNamespaceUrl);
-            signatureValueElement.AppendChild(document.CreateTextNode(Convert.ToBase64String(_signatureValue)));
+            XmlElement signatureValueElement = document.CreateElement(
+                "SignatureValue",
+                SignedXml.XmlDsigNamespaceUrl
+            );
+            signatureValueElement.AppendChild(
+                document.CreateTextNode(Convert.ToBase64String(_signatureValue))
+            );
             if (!string.IsNullOrEmpty(_signatureValueId))
                 signatureValueElement.SetAttribute("Id", _signatureValueId);
             signatureElement.AppendChild(signatureValueElement);
@@ -163,15 +169,34 @@ namespace System.Security.Cryptography.Xml
             SignedInfo.LoadXml(signedInfoElement);
 
             // SignatureValue
-            XmlNodeList? signatureValueNodes = signatureElement.SelectNodes("ds:SignatureValue", nsm);
-            if (signatureValueNodes == null || signatureValueNodes.Count == 0 || signatureValueNodes.Count > 1)
-                throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignatureValue");
+            XmlNodeList? signatureValueNodes = signatureElement.SelectNodes(
+                "ds:SignatureValue",
+                nsm
+            );
+            if (
+                signatureValueNodes == null
+                || signatureValueNodes.Count == 0
+                || signatureValueNodes.Count > 1
+            )
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_InvalidElement,
+                    "SignatureValue"
+                );
             XmlElement signatureValueElement = (signatureValueNodes[0] as XmlElement)!;
             expectedChildNodes += signatureValueNodes.Count;
-            _signatureValue = Convert.FromBase64String(Utils.DiscardWhiteSpaces(signatureValueElement.InnerText));
-            _signatureValueId = Utils.GetAttribute(signatureValueElement, "Id", SignedXml.XmlDsigNamespaceUrl);
+            _signatureValue = Convert.FromBase64String(
+                Utils.DiscardWhiteSpaces(signatureValueElement.InnerText)
+            );
+            _signatureValueId = Utils.GetAttribute(
+                signatureValueElement,
+                "Id",
+                SignedXml.XmlDsigNamespaceUrl
+            );
             if (!Utils.VerifyAttributes(signatureValueElement, "Id"))
-                throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignatureValue");
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_InvalidElement,
+                    "SignatureValue"
+                );
 
             // KeyInfo - optional single element
             XmlNodeList? keyInfoNodes = signatureElement.SelectNodes("ds:KeyInfo", nsm);

@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -56,6 +55,6 @@ public class InMemoryIntegerValueGeneratorTest
     }
 
     [ConditionalFact]
-    public void Does_not_generate_temp_values()
-        => Assert.False(new InMemoryIntegerValueGenerator<int>(0).GeneratesTemporaryValues);
+    public void Does_not_generate_temp_values() =>
+        Assert.False(new InMemoryIntegerValueGenerator<int>(0).GeneratesTemporaryValues);
 }

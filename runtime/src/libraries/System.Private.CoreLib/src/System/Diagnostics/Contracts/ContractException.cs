@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 namespace System.Diagnostics.Contracts
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")] // Needs to be public to support binary serialization compatibility
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )] // Needs to be public to support binary serialization compatibility
     public sealed class ContractException : Exception
     {
         private readonly ContractFailureKind _kind;
@@ -26,7 +28,13 @@ namespace System.Diagnostics.Contracts
             HResult = HResults.COR_E_CODECONTRACTFAILED;
         }
 
-        public ContractException(ContractFailureKind kind, string? failure, string? userMessage, string? condition, Exception? innerException)
+        public ContractException(
+            ContractFailureKind kind,
+            string? failure,
+            string? userMessage,
+            string? condition,
+            Exception? innerException
+        )
             : base(failure, innerException)
         {
             HResult = HResults.COR_E_CODECONTRACTFAILED;
@@ -35,7 +43,11 @@ namespace System.Diagnostics.Contracts
             _condition = condition;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         private ContractException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -44,7 +56,11 @@ namespace System.Diagnostics.Contracts
             _condition = info.GetString("Condition");
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

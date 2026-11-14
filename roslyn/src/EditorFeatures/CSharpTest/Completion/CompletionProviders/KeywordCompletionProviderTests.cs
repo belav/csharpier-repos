@@ -16,23 +16,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
 {
     public class KeywordCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(KeywordCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(KeywordCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
-        public async Task IsCommitCharacterTest()
-            => await VerifyCommonCommitCharactersAsync("$$", textTypedSoFar: "");
+        public async Task IsCommitCharacterTest() =>
+            await VerifyCommonCommitCharactersAsync("$$", textTypedSoFar: "");
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
-        public void IsTextualTriggerCharacterTest()
-            => TestCommonIsTextualTriggerCharacter();
+        public void IsTextualTriggerCharacterTest() => TestCommonIsTextualTriggerCharacter();
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task SendEnterThroughToEditorTest()
         {
-            await VerifySendEnterThroughToEnterAsync("$$", "class", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync("$$", "class", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync("$$", "class", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                "$$",
+                "class",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                "$$",
+                "class",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                "$$",
+                "class",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
@@ -300,7 +313,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
                     void Main() { }
                 }
                 """;
-            await VerifyProviderCommitAsync(markupBeforeCommit, "get", expectedCodeAfterCommit, commitChar: ';');
+            await VerifyProviderCommitAsync(
+                markupBeforeCommit,
+                "get",
+                expectedCodeAfterCommit,
+                commitChar: ';'
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/7768")]
@@ -323,7 +341,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
                     void Main() { }
                 }
                 """;
-            await VerifyProviderCommitAsync(markupBeforeCommit, "set", expectedCodeAfterCommit, commitChar: ';');
+            await VerifyProviderCommitAsync(
+                markupBeforeCommit,
+                "set",
+                expectedCodeAfterCommit,
+                commitChar: ';'
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/7768")]
@@ -346,7 +369,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
                     void Main() { }
                 }
                 """;
-            await VerifyProviderCommitAsync(markupBeforeCommit, "return", expectedCodeAfterCommit, commitChar: ';');
+            await VerifyProviderCommitAsync(
+                markupBeforeCommit,
+                "return",
+                expectedCodeAfterCommit,
+                commitChar: ';'
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/14218")]
@@ -417,8 +445,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         [WorkItem("https://github.com/dotnet/roslyn/issues/34774")]
         public async Task DoNotSuggestEventAfterReadonlyInClass()
         {
-            var markup =
-                """
+            var markup = """
                 class C {
                     readonly $$
                 }
@@ -430,8 +457,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         [WorkItem("https://github.com/dotnet/roslyn/issues/34774")]
         public async Task DoNotSuggestEventAfterReadonlyInInterface()
         {
-            var markup =
-                """
+            var markup = """
                 interface C {
                     readonly $$
                 }
@@ -443,8 +469,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         [WorkItem("https://github.com/dotnet/roslyn/issues/34774")]
         public async Task SuggestEventAfterReadonlyInStruct()
         {
-            var markup =
-                """
+            var markup = """
                 struct C {
                     readonly $$
                 }
@@ -462,9 +487,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         [InlineData("interface", false)]
         public async Task SuggestReadonlyPropertyAccessor(string declarationType, bool present)
         {
-
             var markup =
-$@"{declarationType} C {{
+                $@"{declarationType} C {{
     int X {{
         $$
     }}
@@ -485,11 +509,13 @@ $@"{declarationType} C {{
         [InlineData("struct", true)]
         [InlineData("class", false)]
         [InlineData("interface", false)]
-        public async Task SuggestReadonlyBeforePropertyAccessor(string declarationType, bool present)
+        public async Task SuggestReadonlyBeforePropertyAccessor(
+            string declarationType,
+            bool present
+        )
         {
-
             var markup =
-$@"{declarationType} C {{
+                $@"{declarationType} C {{
     int X {{
         $$ get;
     }}
@@ -512,9 +538,8 @@ $@"{declarationType} C {{
         [InlineData("interface", false)]
         public async Task SuggestReadonlyIndexerAccessor(string declarationType, bool present)
         {
-
             var markup =
-$@"{declarationType} C {{
+                $@"{declarationType} C {{
     int this[int i] {{
         $$
     }}
@@ -537,9 +562,8 @@ $@"{declarationType} C {{
         [InlineData("interface", false)]
         public async Task SuggestReadonlyEventAccessor(string declarationType, bool present)
         {
-
             var markup =
-$@"{declarationType} C {{
+                $@"{declarationType} C {{
     event System.Action E {{
         $$
     }}
@@ -559,8 +583,7 @@ $@"{declarationType} C {{
         [WorkItem("https://github.com/dotnet/roslyn/issues/39265")]
         public async Task SuggestAccessorAfterReadonlyInStruct()
         {
-            var markup =
-                """
+            var markup = """
                 struct C {
                     int X {
                         readonly $$
@@ -576,9 +599,7 @@ $@"{declarationType} C {{
         [WorkItem("https://github.com/dotnet/roslyn/issues/39265")]
         public async Task SuggestReadonlyMethodInStruct()
         {
-
-            var markup =
-                """
+            var markup = """
                 struct C {
                     public $$ void M() {}
                 }
@@ -586,12 +607,16 @@ $@"{declarationType} C {{
             await VerifyItemExistsAsync(markup, "readonly");
         }
 
-        [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/58921"), CombinatorialData, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
+        [
+            Theory,
+            WorkItem("https://github.com/dotnet/roslyn/issues/58921"),
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.KeywordRecommending)
+        ]
         public async Task TestInCastExpressionThatMightBeParenthesizedExpression1(bool hasNewline)
         {
-
             var markup =
-$@"
+                $@"
 class C
 {{
     void M()
@@ -628,11 +653,12 @@ class C
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/57886")]
-        public async Task TestInCastExpressionThatMightBeParenthesizedExpression2(bool hasExpression)
+        public async Task TestInCastExpressionThatMightBeParenthesizedExpression2(
+            bool hasExpression
+        )
         {
-
             var markup =
-$@"class C
+                $@"class C
 {{
     bool Prop => (t$$)  {(hasExpression ? "n" : string.Empty)}
     private int n;

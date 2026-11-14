@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         /// </summary>
         public string Language { get; }
 
-        public ExportAspNetCoreEmbeddedLanguageClassifierAttribute(
-            string name, string language)
+        public ExportAspNetCoreEmbeddedLanguageClassifierAttribute(string name, string language)
             : base(typeof(IAspNetCoreEmbeddedLanguageClassifier))
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));

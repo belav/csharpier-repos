@@ -49,7 +49,7 @@ internal static partial class Interop
 
             ForegroundMask = 0xf,
             BackgroundMask = 0xf0,
-            ColorMask = 0xff
+            ColorMask = 0xff,
         }
     }
 }

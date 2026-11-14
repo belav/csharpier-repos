@@ -8,8 +8,12 @@ namespace System.Web.Helpers
     [Obsolete("Use System.Web.HttpRequest.Unvalidated instead.")]
     public static class Validation
     {
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "request",
-            Justification = "Parameter is only meant for making this show up as 'Request.Unvalidated()', which closely resembles FX45 syntax.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "request",
+            Justification = "Parameter is only meant for making this show up as 'Request.Unvalidated()', which closely resembles FX45 syntax."
+        )]
 #pragma warning disable 0618 // Obsolete System.Web.Helpers.UnvalidatedRequestValues
         public static UnvalidatedRequestValues Unvalidated(this HttpRequestBase request)
 #pragma warning restore
@@ -17,8 +21,12 @@ namespace System.Web.Helpers
             return Unvalidated((HttpRequest)null);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "request",
-            Justification = "Parameter is only meant for making this show up as 'Request.Unvalidated()', which closely resembles FX45 syntax.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "request",
+            Justification = "Parameter is only meant for making this show up as 'Request.Unvalidated()', which closely resembles FX45 syntax."
+        )]
 #pragma warning disable 0618 // Obsolete System.Web.Helpers.UnvalidatedRequestValues
         public static UnvalidatedRequestValues Unvalidated(this HttpRequest request)
 #pragma warning restore

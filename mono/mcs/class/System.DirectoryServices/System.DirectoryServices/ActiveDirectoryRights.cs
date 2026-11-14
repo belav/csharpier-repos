@@ -24,27 +24,27 @@ using System;
 
 namespace System.DirectoryServices
 {
-	[Flags]
-	public enum ActiveDirectoryRights
-	{
-		Delete = 65536,
-		ReadControl = 131072,
-		WriteDacl = 262144,
-		WriteOwner = 524288,
-		Synchronize = 1048576,
-		AccessSystemSecurity = 16777216,
-		GenericRead = 131220,
-		GenericWrite = 131112,
-		GenericExecute = 131076,
-		GenericAll = 983551,
-		CreateChild = 1,
-		DeleteChild = 2,
-		ListChildren = 4,
-		Self = 8,
-		ReadProperty = 16,
-		WriteProperty = 32,
-		DeleteTree = 64,
-		ListObject = 128,
-		ExtendedRight = 256
-	}
+    [Flags]
+    public enum ActiveDirectoryRights
+    {
+        Delete = 65536,
+        ReadControl = 131072,
+        WriteDacl = 262144,
+        WriteOwner = 524288,
+        Synchronize = 1048576,
+        AccessSystemSecurity = 16777216,
+        GenericRead = 131220,
+        GenericWrite = 131112,
+        GenericExecute = 131076,
+        GenericAll = 983551,
+        CreateChild = 1,
+        DeleteChild = 2,
+        ListChildren = 4,
+        Self = 8,
+        ReadProperty = 16,
+        WriteProperty = 32,
+        DeleteTree = 64,
+        ListObject = 128,
+        ExtendedRight = 256,
+    }
 }

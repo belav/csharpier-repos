@@ -15,40 +15,32 @@ namespace System.ServiceModel.Diagnostics
         enum PerfCounters : int
         {
             Instances = 0,
-            TotalCounters = Instances + 1
+            TotalCounters = Instances + 1,
         }
 
-        string[] perfCounterNames = 
-        {
-            PerformanceCounterStrings.SERVICEMODELSERVICE.SInstances,
-        };
+        string[] perfCounterNames = { PerformanceCounterStrings.SERVICEMODELSERVICE.SInstances };
 
         const int maxCounterLength = 64;
         const int hashLength = 2;
+
         [Flags]
         enum truncOptions : uint
         {
             NoBits = 0,
             service32 = 0x01,
-            uri31 = 0x04
+            uri31 = 0x04,
         }
 
         internal PerformanceCounter[] Counters { get; set; }
 
         internal override string InstanceName
         {
-            get
-            {
-                return this.instanceName;
-            }
+            get { return this.instanceName; }
         }
 
         internal override string[] CounterNames
         {
-            get
-            {
-                return this.perfCounterNames;
-            }
+            get { return this.perfCounterNames; }
         }
 
         internal override int PerfCounterStart
@@ -61,7 +53,7 @@ namespace System.ServiceModel.Diagnostics
             get { return (int)PerfCounters.TotalCounters; }
         }
 
-        static internal string CreateFriendlyInstanceName(ServiceHostBase serviceHost)
+        internal static string CreateFriendlyInstanceName(ServiceHostBase serviceHost)
         {
             // It is a shared instance across all services which have the default counter enabled
             return "_WCF_Admin";
@@ -75,7 +67,10 @@ namespace System.ServiceModel.Diagnostics
             {
                 try
                 {
-                    PerformanceCounter counter = PerformanceCounters.GetDefaultPerformanceCounter(this.perfCounterNames[i], this.instanceName);
+                    PerformanceCounter counter = PerformanceCounters.GetDefaultPerformanceCounter(
+                        this.perfCounterNames[i],
+                        this.instanceName
+                    );
                     if (counter != null)
                     {
                         this.Counters[i] = counter;
@@ -94,8 +89,13 @@ namespace System.ServiceModel.Diagnostics
                     }
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.PerformanceCountersFailedForService,
-                            SR.GetString(SR.TraceCodePerformanceCountersFailedForService), null, e);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Error,
+                            TraceCode.PerformanceCountersFailedForService,
+                            SR.GetString(SR.TraceCodePerformanceCountersFailedForService),
+                            null,
+                            e
+                        );
                     }
                     break;
                 }

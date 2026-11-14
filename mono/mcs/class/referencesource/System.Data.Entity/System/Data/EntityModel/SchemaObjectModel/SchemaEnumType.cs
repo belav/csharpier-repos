@@ -16,7 +16,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
     using System.Xml;
 
     /// <summary>
-    /// Represents EnumType element from CSDL. 
+    /// Represents EnumType element from CSDL.
     /// </summary>
     internal class SchemaEnumType : SchemaType
     {
@@ -31,9 +31,9 @@ namespace System.Data.EntityModel.SchemaObjectModel
         private string _unresolvedUnderlyingTypeName;
 
         /// <summary>
-        /// Resolved underlying type of this enum type. 
+        /// Resolved underlying type of this enum type.
         /// </summary>
-        private SchemaType _underlyingType; 
+        private SchemaType _underlyingType;
 
         /// <summary>
         /// Members of this EnumType.
@@ -64,7 +64,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// Returns underlying type for this enum. 
+        /// Returns underlying type for this enum.
         /// </summary>
         public SchemaType UnderlyingType
         {
@@ -133,7 +133,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (!base.HandleAttribute(reader))
             {
-                if(CanHandleAttribute(reader, XmlConstants.IsFlags))
+                if (CanHandleAttribute(reader, XmlConstants.IsFlags))
                 {
                     HandleBoolAttribute(reader, ref _isFlags);
                 }
@@ -177,12 +177,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     }
                     else
                     {
-                        AddError(ErrorCode.CalculatedEnumValueOutOfRange,
+                        AddError(
+                            ErrorCode.CalculatedEnumValueOutOfRange,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.CalculatedEnumValueOutOfRange);
+                            System.Data.Entity.Strings.CalculatedEnumValueOutOfRange
+                        );
 
-                        // the error has been reported. Assigning previous + 1 would cause an overflow. Null is not really 
-                        // expected later on so just assign the previous value. 
+                        // the error has been reported. Assigning previous + 1 would cause an overflow. Null is not really
+                        // expected later on so just assign the previous value.
                         enumMember.Value = previousValue;
                     }
                 }
@@ -199,10 +201,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
             // if the underlying type was not specified in the CSDL we use int by default
             if (_unresolvedUnderlyingTypeName == null)
             {
-                _underlyingType = Schema.SchemaManager.SchemaTypes
-                    .Single(t => t is ScalarType && ((ScalarType)t).TypeKind == PrimitiveTypeKind.Int32);
+                _underlyingType = Schema.SchemaManager.SchemaTypes.Single(t =>
+                    t is ScalarType && ((ScalarType)t).TypeKind == PrimitiveTypeKind.Int32
+                );
             }
-            else 
+            else
             {
                 Debug.Assert(_unresolvedUnderlyingTypeName != string.Empty);
                 Schema.ResolveTypeName(this, _unresolvedUnderlyingTypeName, out _underlyingType);
@@ -218,34 +221,51 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             var enumUnderlyingType = UnderlyingType as ScalarType;
 
-            if (enumUnderlyingType == null || !Helper.IsSupportedEnumUnderlyingType(enumUnderlyingType.TypeKind))
+            if (
+                enumUnderlyingType == null
+                || !Helper.IsSupportedEnumUnderlyingType(enumUnderlyingType.TypeKind)
+            )
             {
-                AddError(ErrorCode.InvalidEnumUnderlyingType,
+                AddError(
+                    ErrorCode.InvalidEnumUnderlyingType,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidEnumUnderlyingType);
+                    System.Data.Entity.Strings.InvalidEnumUnderlyingType
+                );
             }
             else
             {
-                Debug.Assert(!_enumMembers.Any(m => !m.Value.HasValue), "member values should have been fixed up already.");
+                Debug.Assert(
+                    !_enumMembers.Any(m => !m.Value.HasValue),
+                    "member values should have been fixed up already."
+                );
 
                 // Check for underflows and overflows
-                var invalidEnumMembers = _enumMembers
-                    .Where(m => !Helper.IsEnumMemberValueInRange(enumUnderlyingType.TypeKind, (long)m.Value));
+                var invalidEnumMembers = _enumMembers.Where(m =>
+                    !Helper.IsEnumMemberValueInRange(enumUnderlyingType.TypeKind, (long)m.Value)
+                );
 
                 foreach (var invalidEnumMember in invalidEnumMembers)
                 {
-                    invalidEnumMember.AddError(ErrorCode.EnumMemberValueOutOfItsUnderylingTypeRange,
+                    invalidEnumMember.AddError(
+                        ErrorCode.EnumMemberValueOutOfItsUnderylingTypeRange,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.EnumMemberValueOutOfItsUnderylingTypeRange(invalidEnumMember.Value, invalidEnumMember.Name, UnderlyingType.Name));
+                        System.Data.Entity.Strings.EnumMemberValueOutOfItsUnderylingTypeRange(
+                            invalidEnumMember.Value,
+                            invalidEnumMember.Name,
+                            UnderlyingType.Name
+                        )
+                    );
                 }
             }
 
             // Check for duplicate enumeration members.
             if (_enumMembers.GroupBy(o => o.Name).Where(g => g.Count() > 1).Any())
             {
-                AddError(ErrorCode.DuplicateEnumMember,
+                AddError(
+                    ErrorCode.DuplicateEnumMember,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.DuplicateEnumMember);
+                    System.Data.Entity.Strings.DuplicateEnumMember
+                );
             }
         }
     }

@@ -8,11 +8,11 @@ namespace System.Activities.Core.Presentation
 
     using System;
     using System.ComponentModel;
-    using System.Windows;
-    using System.Windows.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Windows;
+    using System.Windows.Data;
 
     // <summary>
     // Transform bool value using logical not.

@@ -9,10 +9,10 @@ namespace System.IdentityModel
     using System.Xml;
 
     /// <summary>
-    /// This class wraps a given _reader and delegates all calls to it. 
+    /// This class wraps a given _reader and delegates all calls to it.
     /// XmlDictionaryReader class does not provide a way to set the _reader
     /// Quotas on the XmlDictionaryReader.CreateDictionaryReader(XmlReader)
-    /// API. This class overrides XmlDictionaryReader.Quotas property and 
+    /// API. This class overrides XmlDictionaryReader.Quotas property and
     /// hence custom quotas can be specified.
     /// </summary>
     internal class WrappedXmlDictionaryReader : XmlDictionaryReader, IXmlLineInfo
@@ -22,7 +22,8 @@ namespace System.IdentityModel
 
         public WrappedXmlDictionaryReader(
             XmlReader reader,
-            XmlDictionaryReaderQuotas xmlDictionaryReaderQuotas)
+            XmlDictionaryReaderQuotas xmlDictionaryReaderQuotas
+        )
         {
             if (reader == null)
             {
@@ -31,7 +32,9 @@ namespace System.IdentityModel
 
             if (xmlDictionaryReaderQuotas == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("xmlDictionaryReaderQuotas");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "xmlDictionaryReaderQuotas"
+                );
             }
 
             this.reader = reader;
@@ -40,18 +43,12 @@ namespace System.IdentityModel
 
         public override int AttributeCount
         {
-            get
-            {
-                return this.reader.AttributeCount;
-            }
+            get { return this.reader.AttributeCount; }
         }
 
         public override string BaseURI
         {
-            get
-            {
-                return this.reader.BaseURI;
-            }
+            get { return this.reader.BaseURI; }
         }
 
         public override bool CanReadBinaryContent
@@ -66,138 +63,87 @@ namespace System.IdentityModel
 
         public override int Depth
         {
-            get
-            {
-                return this.reader.Depth;
-            }
+            get { return this.reader.Depth; }
         }
 
         public override bool EOF
         {
-            get
-            {
-                return this.reader.EOF;
-            }
+            get { return this.reader.EOF; }
         }
 
         public override bool HasValue
         {
-            get
-            {
-                return this.reader.HasValue;
-            }
+            get { return this.reader.HasValue; }
         }
 
         public override bool IsDefault
         {
-            get
-            {
-                return this.reader.IsDefault;
-            }
+            get { return this.reader.IsDefault; }
         }
 
         public override bool IsEmptyElement
         {
-            get
-            {
-                return this.reader.IsEmptyElement;
-            }
+            get { return this.reader.IsEmptyElement; }
         }
 
         public override string LocalName
         {
-            get
-            {
-                return this.reader.LocalName;
-            }
+            get { return this.reader.LocalName; }
         }
 
         public override string Name
         {
-            get
-            {
-                return this.reader.Name;
-            }
+            get { return this.reader.Name; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return this.reader.NamespaceURI;
-            }
+            get { return this.reader.NamespaceURI; }
         }
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return this.reader.NameTable;
-            }
+            get { return this.reader.NameTable; }
         }
 
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return this.reader.NodeType;
-            }
+            get { return this.reader.NodeType; }
         }
 
         public override string Prefix
         {
-            get
-            {
-                return this.reader.Prefix;
-            }
+            get { return this.reader.Prefix; }
         }
 
         public override char QuoteChar
         {
-            get
-            {
-                return this.reader.QuoteChar;
-            }
+            get { return this.reader.QuoteChar; }
         }
 
         public override ReadState ReadState
         {
-            get
-            {
-                return this.reader.ReadState;
-            }
+            get { return this.reader.ReadState; }
         }
 
         public override string Value
         {
-            get
-            {
-                return this.reader.Value;
-            }
+            get { return this.reader.Value; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return this.reader.XmlLang;
-            }
+            get { return this.reader.XmlLang; }
         }
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return this.reader.XmlSpace;
-            }
+            get { return this.reader.XmlSpace; }
         }
 
         public override Type ValueType
         {
-            get
-            {
-                return this.reader.ValueType;
-            }
+            get { return this.reader.ValueType; }
         }
 
         public int LineNumber
@@ -232,34 +178,22 @@ namespace System.IdentityModel
 
         public override XmlDictionaryReaderQuotas Quotas
         {
-            get
-            {
-                return this.xmlDictionaryReaderQuotas;
-            }
+            get { return this.xmlDictionaryReaderQuotas; }
         }
 
         public override string this[int index]
         {
-            get
-            {
-                return this.reader[index];
-            }
+            get { return this.reader[index]; }
         }
 
         public override string this[string name]
         {
-            get
-            {
-                return this.reader[name];
-            }
+            get { return this.reader[name]; }
         }
 
         public override string this[string name, string namespaceUri]
         {
-            get
-            {
-                return this.reader[name, namespaceUri];
-            }
+            get { return this.reader[name, namespaceUri]; }
         }
 
         public override void Close()
@@ -447,7 +381,10 @@ namespace System.IdentityModel
             return this.reader.ReadContentAsString();
         }
 
-        public override object ReadContentAs(Type valueType, IXmlNamespaceResolver namespaceResolver)
+        public override object ReadContentAs(
+            Type valueType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             return this.reader.ReadContentAs(valueType, namespaceResolver);
         }

@@ -16,10 +16,9 @@ public class VerificationAgent
     /// <param name="expected">expected result</param>
     public static void ThrowVerificationException(string message, object actual, object expected)
     {
-        throw new Exception(string.Format("{0}, actual: {1}, expected: {2}",
-            message,
-            actual,
-            expected));
+        throw new Exception(
+            string.Format("{0}, actual: {1}, expected: {2}", message, actual, expected)
+        );
     }
     #endregion
 }

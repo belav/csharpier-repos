@@ -49,9 +49,8 @@ public class ModelCacheKey
     /// <returns>
     ///     <see langword="true" /> if the key is for the same context type, otherwise <see langword="false" />.
     /// </returns>
-    protected virtual bool Equals(ModelCacheKey other)
-        => _dbContextType == other._dbContextType
-            && _designTime == other._designTime;
+    protected virtual bool Equals(ModelCacheKey other) =>
+        _dbContextType == other._dbContextType && _designTime == other._designTime;
 
     /// <summary>
     ///     Determines if this key is equivalent to a given object (i.e. if they are keys for the same context type).
@@ -63,8 +62,8 @@ public class ModelCacheKey
     ///     <see langword="true" /> if the object is a <see cref="ModelCacheKey" /> and is for the same context type, otherwise
     ///     <see langword="false" />.
     /// </returns>
-    public override bool Equals(object? obj)
-        => (obj is ModelCacheKey otherAsKey) && Equals(otherAsKey);
+    public override bool Equals(object? obj) =>
+        (obj is ModelCacheKey otherAsKey) && Equals(otherAsKey);
 
     /// <summary>
     ///     Gets the hash code for the key.

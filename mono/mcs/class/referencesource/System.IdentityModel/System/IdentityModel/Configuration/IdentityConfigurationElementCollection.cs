@@ -8,18 +8,20 @@ using System.Configuration;
 namespace System.IdentityModel.Configuration
 {
 #pragma warning disable 1591
-    [ConfigurationCollection(typeof(IdentityConfigurationElement), AddItemName = ConfigurationStrings.IdentityConfiguration, CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public sealed partial class IdentityConfigurationElementCollection : ConfigurationElementCollection
+    [ConfigurationCollection(
+        typeof(IdentityConfigurationElement),
+        AddItemName = ConfigurationStrings.IdentityConfiguration,
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed partial class IdentityConfigurationElementCollection
+        : ConfigurationElementCollection
     {
         // Note:This is a BasicMap collection type with ThrowOnDuplicate true.
-        // If there are two configuration elements defined with the same key the configuration system throws an error. 
+        // If there are two configuration elements defined with the same key the configuration system throws an error.
 
         protected override bool ThrowOnDuplicate
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override ConfigurationElement CreateNewElement()
@@ -34,7 +36,8 @@ namespace System.IdentityModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
-            IdentityConfigurationElement elementAsServiceElement = element as IdentityConfigurationElement;
+            IdentityConfigurationElement elementAsServiceElement =
+                element as IdentityConfigurationElement;
 
             if (elementAsServiceElement == null)
             {
@@ -56,9 +59,16 @@ namespace System.IdentityModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("name");
             }
 
-            IdentityConfigurationElement result = base.BaseGet(name) as IdentityConfigurationElement;
+            IdentityConfigurationElement result =
+                base.BaseGet(name) as IdentityConfigurationElement;
 
-            if (!StringComparer.Ordinal.Equals(name, ConfigurationStrings.DefaultConfigurationElementName) && result == null)
+            if (
+                !StringComparer.Ordinal.Equals(
+                    name,
+                    ConfigurationStrings.DefaultConfigurationElementName
+                )
+                && result == null
+            )
             {
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID7012, name));
             }
@@ -69,11 +79,14 @@ namespace System.IdentityModel.Configuration
         protected override void BaseAdd(ConfigurationElement element)
         {
             string name = GetElementKey(element) as string;
-            IdentityConfigurationElement result = base.BaseGet(name) as IdentityConfigurationElement;
+            IdentityConfigurationElement result =
+                base.BaseGet(name) as IdentityConfigurationElement;
 
             if (result != null)
             {
-                throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID7029, "<identityConfiguation>", name));
+                throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID7029, "<identityConfiguation>", name)
+                );
             }
 
             base.BaseAdd(element);
@@ -84,10 +97,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         internal bool IsConfigured
         {
-            get
-            {
-                return (Count > 0);
-            }
+            get { return (Count > 0); }
         }
     }
 #pragma warning restore 1591

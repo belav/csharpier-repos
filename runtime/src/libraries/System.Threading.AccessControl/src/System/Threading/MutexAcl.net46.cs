@@ -8,7 +8,12 @@ namespace System.Threading
 {
     public static class MutexAcl
     {
-        public static Mutex Create(bool initiallyOwned, string? name, out bool createdNew, MutexSecurity? mutexSecurity)
+        public static Mutex Create(
+            bool initiallyOwned,
+            string? name,
+            out bool createdNew,
+            MutexSecurity? mutexSecurity
+        )
         {
             return new Mutex(initiallyOwned, name, out createdNew, mutexSecurity);
         }
@@ -18,7 +23,11 @@ namespace System.Threading
             return Mutex.OpenExisting(name, rights);
         }
 
-        public static bool TryOpenExisting(string name, MutexRights rights, [NotNullWhen(true)] out Mutex result)
+        public static bool TryOpenExisting(
+            string name,
+            MutexRights rights,
+            [NotNullWhen(true)] out Mutex result
+        )
         {
             return Mutex.TryOpenExisting(name, rights, out result);
         }

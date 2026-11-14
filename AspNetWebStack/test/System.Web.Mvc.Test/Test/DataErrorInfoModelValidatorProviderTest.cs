@@ -10,18 +10,25 @@ namespace System.Web.Mvc.Test
 {
     public class DataErrorInfoModelValidatorProviderTest
     {
-        private static readonly EmptyModelMetadataProvider _metadataProvider = new EmptyModelMetadataProvider();
+        private static readonly EmptyModelMetadataProvider _metadataProvider =
+            new EmptyModelMetadataProvider();
 
         [Fact]
         public void GetValidatorsReturnsEmptyCollectionIfTypeNotIDataErrorInfo()
         {
             // Arrange
-            DataErrorInfoModelValidatorProvider validatorProvider = new DataErrorInfoModelValidatorProvider();
+            DataErrorInfoModelValidatorProvider validatorProvider =
+                new DataErrorInfoModelValidatorProvider();
             object model = new object();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForType(() => model, typeof(object));
+            ModelMetadata metadata = _metadataProvider.GetMetadataForType(
+                () => model,
+                typeof(object)
+            );
 
             // Act
-            ModelValidator[] validators = validatorProvider.GetValidators(metadata, new ControllerContext()).ToArray();
+            ModelValidator[] validators = validatorProvider
+                .GetValidators(metadata, new ControllerContext())
+                .ToArray();
 
             // Assert
             Assert.Empty(validators);
@@ -31,16 +38,24 @@ namespace System.Web.Mvc.Test
         public void GetValidatorsReturnsValidatorForIDataErrorInfoProperty()
         {
             // Arrange
-            DataErrorInfoModelValidatorProvider validatorProvider = new DataErrorInfoModelValidatorProvider();
+            DataErrorInfoModelValidatorProvider validatorProvider =
+                new DataErrorInfoModelValidatorProvider();
             DataErrorInfo1 model = new DataErrorInfo1();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => model, typeof(DataErrorInfo1), "SomeStringProperty");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => model,
+                typeof(DataErrorInfo1),
+                "SomeStringProperty"
+            );
             Type[] expectedTypes = new Type[]
             {
-                typeof(DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator)
+                typeof(DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator),
             };
 
             // Act
-            Type[] actualTypes = validatorProvider.GetValidators(metadata, new ControllerContext()).Select(v => v.GetType()).ToArray();
+            Type[] actualTypes = validatorProvider
+                .GetValidators(metadata, new ControllerContext())
+                .Select(v => v.GetType())
+                .ToArray();
 
             // Assert
             Assert.Equal(expectedTypes, actualTypes);
@@ -50,16 +65,23 @@ namespace System.Web.Mvc.Test
         public void GetValidatorsReturnsValidatorForIDataErrorInfoRootType()
         {
             // Arrange
-            DataErrorInfoModelValidatorProvider validatorProvider = new DataErrorInfoModelValidatorProvider();
+            DataErrorInfoModelValidatorProvider validatorProvider =
+                new DataErrorInfoModelValidatorProvider();
             DataErrorInfo1 model = new DataErrorInfo1();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForType(() => model, typeof(DataErrorInfo1));
+            ModelMetadata metadata = _metadataProvider.GetMetadataForType(
+                () => model,
+                typeof(DataErrorInfo1)
+            );
             Type[] expectedTypes = new Type[]
             {
-                typeof(DataErrorInfoModelValidatorProvider.DataErrorInfoClassModelValidator)
+                typeof(DataErrorInfoModelValidatorProvider.DataErrorInfoClassModelValidator),
             };
 
             // Act
-            Type[] actualTypes = validatorProvider.GetValidators(metadata, new ControllerContext()).Select(v => v.GetType()).ToArray();
+            Type[] actualTypes = validatorProvider
+                .GetValidators(metadata, new ControllerContext())
+                .Select(v => v.GetType())
+                .ToArray();
 
             // Assert
             Assert.Equal(expectedTypes, actualTypes);
@@ -69,36 +91,55 @@ namespace System.Web.Mvc.Test
         public void GetValidatorsThrowsIfContextIsNull()
         {
             // Arrange
-            DataErrorInfoModelValidatorProvider validatorProvider = new DataErrorInfoModelValidatorProvider();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForType(null, typeof(DataErrorInfo1));
+            DataErrorInfoModelValidatorProvider validatorProvider =
+                new DataErrorInfoModelValidatorProvider();
+            ModelMetadata metadata = _metadataProvider.GetMetadataForType(
+                null,
+                typeof(DataErrorInfo1)
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { validatorProvider.GetValidators(metadata, null); }, "context");
+                delegate
+                {
+                    validatorProvider.GetValidators(metadata, null);
+                },
+                "context"
+            );
         }
 
         [Fact]
         public void GetValidatorsThrowsIfMetadataIsNull()
         {
             // Arrange
-            DataErrorInfoModelValidatorProvider validatorProvider = new DataErrorInfoModelValidatorProvider();
+            DataErrorInfoModelValidatorProvider validatorProvider =
+                new DataErrorInfoModelValidatorProvider();
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { validatorProvider.GetValidators(null, new ControllerContext()); }, "metadata");
+                delegate
+                {
+                    validatorProvider.GetValidators(null, new ControllerContext());
+                },
+                "metadata"
+            );
         }
 
         [Fact]
         public void ClassValidator_Validate_IDataErrorInfoModelWithError()
         {
             // Arrange
-            DataErrorInfo1 model = new DataErrorInfo1()
-            {
-                Error = "This is an error message."
-            };
-            ModelMetadata metadata = _metadataProvider.GetMetadataForType(() => model, typeof(DataErrorInfo1));
+            DataErrorInfo1 model = new DataErrorInfo1() { Error = "This is an error message." };
+            ModelMetadata metadata = _metadataProvider.GetMetadataForType(
+                () => model,
+                typeof(DataErrorInfo1)
+            );
 
-            var validator = new DataErrorInfoModelValidatorProvider.DataErrorInfoClassModelValidator(metadata, new ControllerContext());
+            var validator =
+                new DataErrorInfoModelValidatorProvider.DataErrorInfoClassModelValidator(
+                    metadata,
+                    new ControllerContext()
+                );
 
             // Act
             ModelValidationResult[] result = validator.Validate(null).ToArray();
@@ -113,9 +154,16 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             DataErrorInfo1 model = new DataErrorInfo1();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForType(() => model, typeof(DataErrorInfo1));
+            ModelMetadata metadata = _metadataProvider.GetMetadataForType(
+                () => model,
+                typeof(DataErrorInfo1)
+            );
 
-            var validator = new DataErrorInfoModelValidatorProvider.DataErrorInfoClassModelValidator(metadata, new ControllerContext());
+            var validator =
+                new DataErrorInfoModelValidatorProvider.DataErrorInfoClassModelValidator(
+                    metadata,
+                    new ControllerContext()
+                );
 
             // Act
             ModelValidationResult[] result = validator.Validate(null).ToArray();
@@ -129,9 +177,16 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object model = new object();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForType(() => model, typeof(object));
+            ModelMetadata metadata = _metadataProvider.GetMetadataForType(
+                () => model,
+                typeof(object)
+            );
 
-            var validator = new DataErrorInfoModelValidatorProvider.DataErrorInfoClassModelValidator(metadata, new ControllerContext());
+            var validator =
+                new DataErrorInfoModelValidatorProvider.DataErrorInfoClassModelValidator(
+                    metadata,
+                    new ControllerContext()
+                );
 
             // Act
             ModelValidationResult[] result = validator.Validate(null).ToArray();
@@ -146,9 +201,17 @@ namespace System.Web.Mvc.Test
             // Arrange
             DataErrorInfo1 container = new DataErrorInfo1();
             container["Error"] = "This should never be shown.";
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => container, typeof(DataErrorInfo1), "Error");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => container,
+                typeof(DataErrorInfo1),
+                "Error"
+            );
 
-            var validator = new DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator(metadata, new ControllerContext());
+            var validator =
+                new DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator(
+                    metadata,
+                    new ControllerContext()
+                );
 
             // Act
             ModelValidationResult[] result = validator.Validate(container).ToArray();
@@ -162,15 +225,29 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ObservableModel model = new ObservableModel();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => model.TheProperty, typeof(ObservableModel), "TheProperty");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => model.TheProperty,
+                typeof(ObservableModel),
+                "TheProperty"
+            );
             ControllerContext controllerContext = new ControllerContext();
 
             // Act
-            ModelValidator[] validators = new DataErrorInfoModelValidatorProvider().GetValidators(metadata, controllerContext).ToArray();
-            ModelValidationResult[] results = validators.SelectMany(o => o.Validate(model)).ToArray();
+            ModelValidator[] validators = new DataErrorInfoModelValidatorProvider()
+                .GetValidators(metadata, controllerContext)
+                .ToArray();
+            ModelValidationResult[] results = validators
+                .SelectMany(o => o.Validate(model))
+                .ToArray();
 
             // Assert
-            Assert.Equal(new[] { typeof(DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator) }, Array.ConvertAll(validators, o => o.GetType()));
+            Assert.Equal(
+                new[]
+                {
+                    typeof(DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator),
+                },
+                Array.ConvertAll(validators, o => o.GetType())
+            );
             Assert.Equal(new[] { "TheProperty" }, model.GetColumnNamesPassed().ToArray());
             Assert.Empty(results);
             Assert.False(model.PropertyWasRead());
@@ -182,9 +259,17 @@ namespace System.Web.Mvc.Test
             // Arrange
             DataErrorInfo1 container = new DataErrorInfo1();
             container["SomeStringProperty"] = "This is an error message.";
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => container, typeof(DataErrorInfo1), "SomeStringProperty");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => container,
+                typeof(DataErrorInfo1),
+                "SomeStringProperty"
+            );
 
-            var validator = new DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator(metadata, new ControllerContext());
+            var validator =
+                new DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator(
+                    metadata,
+                    new ControllerContext()
+                );
 
             // Act
             ModelValidationResult[] result = validator.Validate(container).ToArray();
@@ -199,9 +284,17 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             DataErrorInfo1 container = new DataErrorInfo1();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => container, typeof(DataErrorInfo1), "SomeStringProperty");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => container,
+                typeof(DataErrorInfo1),
+                "SomeStringProperty"
+            );
 
-            var validator = new DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator(metadata, new ControllerContext());
+            var validator =
+                new DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator(
+                    metadata,
+                    new ControllerContext()
+                );
 
             // Act
             ModelValidationResult[] result = validator.Validate(container).ToArray();
@@ -216,9 +309,17 @@ namespace System.Web.Mvc.Test
             // Arrange
             DataErrorInfo1 container = new DataErrorInfo1();
             container["SomeStringProperty"] = "This is an error message.";
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => container, typeof(DataErrorInfo1), "SomeStringProperty");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => container,
+                typeof(DataErrorInfo1),
+                "SomeStringProperty"
+            );
 
-            var validator = new DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator(metadata, new ControllerContext());
+            var validator =
+                new DataErrorInfoModelValidatorProvider.DataErrorInfoPropertyModelValidator(
+                    metadata,
+                    new ControllerContext()
+                );
 
             // Act
             ModelValidationResult[] result = validator.Validate(new object()).ToArray();
@@ -229,7 +330,9 @@ namespace System.Web.Mvc.Test
 
         private class DataErrorInfo1 : IDataErrorInfo
         {
-            private readonly Dictionary<string, string> _errors = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            private readonly Dictionary<string, string> _errors = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             public string SomeStringProperty { get; set; }
 

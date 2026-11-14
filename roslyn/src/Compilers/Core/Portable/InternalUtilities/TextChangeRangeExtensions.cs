@@ -14,14 +14,17 @@ namespace Roslyn.Utilities
 {
     internal static class TextChangeRangeExtensions
     {
-        public static TextChangeRange? Accumulate(this TextChangeRange? accumulatedTextChangeSoFar, IEnumerable<TextChangeRange> changesInNextVersion)
+        public static TextChangeRange? Accumulate(
+            this TextChangeRange? accumulatedTextChangeSoFar,
+            IEnumerable<TextChangeRange> changesInNextVersion
+        )
         {
             if (!changesInNextVersion.Any())
             {
                 return accumulatedTextChangeSoFar;
             }
 
-            // get encompassing text change and accumulate it once. 
+            // get encompassing text change and accumulate it once.
             // we could apply each one individually like we do in SyntaxDiff::ComputeSpansInNew by calculating delta
             // between each change in changesInNextVersion which is already sorted in its textual position ascending order.
             // but end result will be same as just applying it once with encompassed text change range.
@@ -36,9 +39,11 @@ namespace Roslyn.Utilities
             // set initial value from the old one.
             var currentStart = accumulatedTextChangeSoFar.Value.Span.Start;
             var currentOldEnd = accumulatedTextChangeSoFar.Value.Span.End;
-            var currentNewEnd = accumulatedTextChangeSoFar.Value.Span.Start + accumulatedTextChangeSoFar.Value.NewLength;
+            var currentNewEnd =
+                accumulatedTextChangeSoFar.Value.Span.Start
+                + accumulatedTextChangeSoFar.Value.NewLength;
 
-            // this is a port from 
+            // this is a port from
             //      csharp\rad\Text\SourceText.cpp - CSourceText::OnChangeLineText
             // which accumulate text changes to one big text change that would encompass all changes
 
@@ -47,7 +52,7 @@ namespace Roslyn.Utilities
             // 1) position values are always associated with a buffer version.
             // 2) Comparison between position values is only allowed if their
             //    buffer version is the same.
-            // 3) newChange.Span.End and newChange.Span.Start + newChange.NewLength (both stored and incoming) 
+            // 3) newChange.Span.End and newChange.Span.Start + newChange.NewLength (both stored and incoming)
             //    refer to the same position, but have different buffer versions.
             // 4) The incoming end position is associated with buffer versions
             //    n-1 (old) and n(new).
@@ -96,7 +101,10 @@ namespace Roslyn.Utilities
                 currentNewEnd = newChange.Span.Start + newChange.NewLength;
             }
 
-            return new TextChangeRange(TextSpan.FromBounds(currentStart, currentOldEnd), currentNewEnd - currentStart);
+            return new TextChangeRange(
+                TextSpan.FromBounds(currentStart, currentOldEnd),
+                currentNewEnd - currentStart
+            );
         }
 
         public static TextChangeRange ToTextChangeRange(this TextChange textChange)
@@ -113,7 +121,10 @@ namespace Roslyn.Utilities
         /// <remarks>
         /// Both `oldChanges` and `newChanges` must contain non-overlapping spans in ascending order.
         /// </remarks>
-        public static ImmutableArray<TextChangeRange> Merge(ImmutableArray<TextChangeRange> oldChanges, ImmutableArray<TextChangeRange> newChanges)
+        public static ImmutableArray<TextChangeRange> Merge(
+            ImmutableArray<TextChangeRange> oldChanges,
+            ImmutableArray<TextChangeRange> newChanges
+        )
         {
             // Earlier steps are expected to prevent us from ever reaching this point with empty change sets.
             if (oldChanges.IsEmpty)
@@ -149,14 +160,18 @@ namespace Roslyn.Utilities
                 if (oldChange.Span.Length == 0 && oldChange.NewLength == 0)
                 {
                     // old change does not insert or delete any characters, so it can be dropped to no effect.
-                    if (tryGetNextOldChange()) continue;
-                    else break;
+                    if (tryGetNextOldChange())
+                        continue;
+                    else
+                        break;
                 }
                 else if (newChange.SpanLength == 0 && newChange.NewLength == 0)
                 {
                     // new change does not insert or delete any characters, so it can be dropped to no effect.
-                    if (tryGetNextNewChange()) continue;
-                    else break;
+                    if (tryGetNextNewChange())
+                        continue;
+                    else
+                        break;
                 }
                 else if (newChange.SpanEnd <= oldChange.Span.Start + oldDelta)
                 {
@@ -164,8 +179,10 @@ namespace Roslyn.Utilities
                     //                old[--------]
                     // new[--------]
                     adjustAndAddNewChange(builder, oldDelta, newChange);
-                    if (tryGetNextNewChange()) continue;
-                    else break;
+                    if (tryGetNextNewChange())
+                        continue;
+                    else
+                        break;
                 }
                 else if (newChange.SpanStart >= oldChange.NewEnd() + oldDelta)
                 {
@@ -173,8 +190,10 @@ namespace Roslyn.Utilities
                     // old[--------]
                     //                new[--------]
                     addAndAdjustOldDelta(builder, ref oldDelta, oldChange);
-                    if (tryGetNextOldChange()) continue;
-                    else break;
+                    if (tryGetNextOldChange())
+                        continue;
+                    else
+                        break;
                 }
                 else if (newChange.SpanStart < oldChange.Span.Start + oldDelta)
                 {
@@ -195,9 +214,22 @@ namespace Roslyn.Utilities
                     // ---------------
                     // new|ddd|
                     //    |bbbbbb|
-                    var newChangeLeadingDeletion = oldChange.Span.Start + oldDelta - newChange.SpanStart;
-                    adjustAndAddNewChange(builder, oldDelta, new UnadjustedNewChange(newChange.SpanStart, newChangeLeadingDeletion, newLength: 0));
-                    newChange = new UnadjustedNewChange(oldChange.Span.Start + oldDelta, newChange.SpanLength - newChangeLeadingDeletion, newChange.NewLength);
+                    var newChangeLeadingDeletion =
+                        oldChange.Span.Start + oldDelta - newChange.SpanStart;
+                    adjustAndAddNewChange(
+                        builder,
+                        oldDelta,
+                        new UnadjustedNewChange(
+                            newChange.SpanStart,
+                            newChangeLeadingDeletion,
+                            newLength: 0
+                        )
+                    );
+                    newChange = new UnadjustedNewChange(
+                        oldChange.Span.Start + oldDelta,
+                        newChange.SpanLength - newChangeLeadingDeletion,
+                        newChange.NewLength
+                    );
                     continue;
                 }
                 else if (newChange.SpanStart > oldChange.Span.Start + oldDelta)
@@ -218,11 +250,28 @@ namespace Roslyn.Utilities
                     //    new|dddddd|
                     //       |bbbbbb|
 
-                    var oldChangeLeadingInsertion = newChange.SpanStart - (oldChange.Span.Start + oldDelta);
+                    var oldChangeLeadingInsertion =
+                        newChange.SpanStart - (oldChange.Span.Start + oldDelta);
                     // we must make sure to delete at most as many characters as the entire oldChange deletes
-                    var oldChangeLeadingDeletion = Math.Min(oldChange.Span.Length, oldChangeLeadingInsertion);
-                    addAndAdjustOldDelta(builder, ref oldDelta, new TextChangeRange(new TextSpan(oldChange.Span.Start, oldChangeLeadingDeletion), oldChangeLeadingInsertion));
-                    oldChange = new TextChangeRange(new TextSpan(newChange.SpanStart - oldDelta, oldChange.Span.Length - oldChangeLeadingDeletion), oldChange.NewLength - oldChangeLeadingInsertion);
+                    var oldChangeLeadingDeletion = Math.Min(
+                        oldChange.Span.Length,
+                        oldChangeLeadingInsertion
+                    );
+                    addAndAdjustOldDelta(
+                        builder,
+                        ref oldDelta,
+                        new TextChangeRange(
+                            new TextSpan(oldChange.Span.Start, oldChangeLeadingDeletion),
+                            oldChangeLeadingInsertion
+                        )
+                    );
+                    oldChange = new TextChangeRange(
+                        new TextSpan(
+                            newChange.SpanStart - oldDelta,
+                            oldChange.Span.Length - oldChangeLeadingDeletion
+                        ),
+                        oldChange.NewLength - oldChangeLeadingInsertion
+                    );
                     continue;
                 }
                 else
@@ -257,16 +306,25 @@ namespace Roslyn.Utilities
                         //    new||
                         //       |bbbbbb|
 
-                        oldChange = new TextChangeRange(oldChange.Span, oldChange.NewLength - newChange.SpanLength);
+                        oldChange = new TextChangeRange(
+                            oldChange.Span,
+                            oldChange.NewLength - newChange.SpanLength
+                        );
 
                         // the new change deletion is equal to the subset of the old change insertion that we are consuming this iteration
                         oldDelta = oldDelta + newChange.SpanLength;
 
                         // since the new change insertion occurs before the old change, consume it now
-                        newChange = new UnadjustedNewChange(newChange.SpanEnd, spanLength: 0, newChange.NewLength);
+                        newChange = new UnadjustedNewChange(
+                            newChange.SpanEnd,
+                            spanLength: 0,
+                            newChange.NewLength
+                        );
                         adjustAndAddNewChange(builder, oldDelta, newChange);
-                        if (tryGetNextNewChange()) continue;
-                        else break;
+                        if (tryGetNextNewChange())
+                            continue;
+                        else
+                            break;
                     }
                     else
                     {
@@ -306,10 +364,17 @@ namespace Roslyn.Utilities
                         // adjust the oldDelta to reflect that the old change has been consumed
                         oldDelta = oldDelta - oldChange.Span.Length + oldChange.NewLength;
 
-                        var newDeletion = newChange.SpanLength + oldChange.Span.Length - oldChange.NewLength;
-                        newChange = new UnadjustedNewChange(oldChange.Span.Start + oldDelta, newDeletion, newChange.NewLength);
-                        if (tryGetNextOldChange()) continue;
-                        else break;
+                        var newDeletion =
+                            newChange.SpanLength + oldChange.Span.Length - oldChange.NewLength;
+                        newChange = new UnadjustedNewChange(
+                            oldChange.Span.Start + oldDelta,
+                            newDeletion,
+                            newChange.NewLength
+                        );
+                        if (tryGetNextOldChange())
+                            continue;
+                        else
+                            break;
                     }
                 }
             }
@@ -366,17 +431,31 @@ namespace Roslyn.Utilities
                 }
             }
 
-            static void addAndAdjustOldDelta(ArrayBuilder<TextChangeRange> builder, ref int oldDelta, TextChangeRange oldChange)
+            static void addAndAdjustOldDelta(
+                ArrayBuilder<TextChangeRange> builder,
+                ref int oldDelta,
+                TextChangeRange oldChange
+            )
             {
                 // modify oldDelta to reflect characters deleted and inserted by an old change
                 oldDelta = oldDelta - oldChange.Span.Length + oldChange.NewLength;
                 add(builder, oldChange);
             }
 
-            static void adjustAndAddNewChange(ArrayBuilder<TextChangeRange> builder, int oldDelta, UnadjustedNewChange newChange)
+            static void adjustAndAddNewChange(
+                ArrayBuilder<TextChangeRange> builder,
+                int oldDelta,
+                UnadjustedNewChange newChange
+            )
             {
                 // unadjusted new change is relative to the original text with old changes applied. Subtract oldDelta to make it relative to the original text.
-                add(builder, new TextChangeRange(new TextSpan(newChange.SpanStart - oldDelta, newChange.SpanLength), newChange.NewLength));
+                add(
+                    builder,
+                    new TextChangeRange(
+                        new TextSpan(newChange.SpanStart - oldDelta, newChange.SpanLength),
+                        newChange.NewLength
+                    )
+                );
             }
 
             static void add(ArrayBuilder<TextChangeRange> builder, TextChangeRange change)
@@ -387,14 +466,16 @@ namespace Roslyn.Utilities
                     if (last.Span.End == change.Span.Start)
                     {
                         // merge changes together if they are adjacent
-                        builder[^1] = new TextChangeRange(new TextSpan(last.Span.Start, last.Span.Length + change.Span.Length), last.NewLength + change.NewLength);
+                        builder[^1] = new TextChangeRange(
+                            new TextSpan(last.Span.Start, last.Span.Length + change.Span.Length),
+                            last.NewLength + change.NewLength
+                        );
                         return;
                     }
                     else if (last.Span.End > change.Span.Start)
                     {
                         throw new ArgumentOutOfRangeException(nameof(change));
                     }
-
                 }
 
                 builder.Add(change);
@@ -426,9 +507,7 @@ namespace Roslyn.Utilities
             }
 
             public UnadjustedNewChange(TextChangeRange range)
-                : this(range.Span.Start, range.Span.Length, range.NewLength)
-            {
-            }
+                : this(range.Span.Start, range.Span.Length, range.NewLength) { }
         }
 
         private static int NewEnd(this TextChangeRange range) => range.Span.Start + range.NewLength;

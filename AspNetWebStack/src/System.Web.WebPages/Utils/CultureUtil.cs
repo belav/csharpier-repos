@@ -20,7 +20,11 @@ namespace System.Web.WebPages
             }
         }
 
-        internal static void SetUICulture(Thread thread, HttpContextBase context, string cultureName)
+        internal static void SetUICulture(
+            Thread thread,
+            HttpContextBase context,
+            string cultureName
+        )
         {
             Debug.Assert(!String.IsNullOrEmpty(cultureName));
             CultureInfo cultureInfo = GetCulture(context, cultureName);
@@ -66,7 +70,7 @@ namespace System.Web.WebPages
                     }
                     catch (CultureNotFoundException)
                     {
-                        // There is no easy way to ask if a given culture is invalid so we have to handle exception.  
+                        // There is no easy way to ask if a given culture is invalid so we have to handle exception.
                     }
                 }
             }

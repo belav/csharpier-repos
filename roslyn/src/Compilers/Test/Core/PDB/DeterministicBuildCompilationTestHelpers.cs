@@ -22,10 +22,22 @@ namespace Roslyn.Test.Utilities.PDB
 {
     internal static partial class DeterministicBuildCompilationTestHelpers
     {
-        public static void VerifyPdbOption<T>(this ImmutableDictionary<string, string> pdbOptions, string pdbName, T expectedValue, Func<T, bool> isDefault = null, Func<T, string> toString = null)
+        public static void VerifyPdbOption<T>(
+            this ImmutableDictionary<string, string> pdbOptions,
+            string pdbName,
+            T expectedValue,
+            Func<T, bool> isDefault = null,
+            Func<T, string> toString = null
+        )
         {
-            bool expectedIsDefault = (isDefault != null) ? isDefault(expectedValue) : EqualityComparer<T>.Default.Equals(expectedValue, default);
-            var expectedValueString = expectedIsDefault ? null : (toString != null) ? toString(expectedValue) : expectedValue.ToString();
+            bool expectedIsDefault =
+                (isDefault != null)
+                    ? isDefault(expectedValue)
+                    : EqualityComparer<T>.Default.Equals(expectedValue, default);
+            var expectedValueString =
+                expectedIsDefault ? null
+                : (toString != null) ? toString(expectedValue)
+                : expectedValue.ToString();
 
             pdbOptions.TryGetValue(pdbName, out var actualValueString);
             Assert.Equal(expectedValueString, actualValueString);
@@ -36,44 +48,82 @@ namespace Roslyn.Test.Utilities.PDB
             var emitOptions = new EmitOptions(
                 debugInformationFormat: DebugInformationFormat.Embedded,
                 pdbChecksumAlgorithm: HashAlgorithmName.SHA256,
-                defaultSourceFileEncoding: Encoding.UTF32);
+                defaultSourceFileEncoding: Encoding.UTF32
+            );
 
             yield return emitOptions;
             yield return emitOptions.WithDefaultSourceFileEncoding(Encoding.ASCII);
-            yield return emitOptions.WithDefaultSourceFileEncoding(null).WithFallbackSourceFileEncoding(Encoding.Unicode);
-            yield return emitOptions.WithFallbackSourceFileEncoding(Encoding.Unicode).WithDefaultSourceFileEncoding(Encoding.ASCII);
+            yield return emitOptions
+                .WithDefaultSourceFileEncoding(null)
+                .WithFallbackSourceFileEncoding(Encoding.Unicode);
+            yield return emitOptions
+                .WithFallbackSourceFileEncoding(Encoding.Unicode)
+                .WithDefaultSourceFileEncoding(Encoding.ASCII);
         }
 
-        internal static void AssertCommonOptions(EmitOptions emitOptions, CompilationOptions compilationOptions, Compilation compilation, ImmutableDictionary<string, string> pdbOptions)
+        internal static void AssertCommonOptions(
+            EmitOptions emitOptions,
+            CompilationOptions compilationOptions,
+            Compilation compilation,
+            ImmutableDictionary<string, string> pdbOptions
+        )
         {
             pdbOptions.VerifyPdbOption("version", 2);
-            pdbOptions.VerifyPdbOption("fallback-encoding", emitOptions.FallbackSourceFileEncoding, toString: v => v.WebName);
-            pdbOptions.VerifyPdbOption("default-encoding", emitOptions.DefaultSourceFileEncoding, toString: v => v.WebName);
+            pdbOptions.VerifyPdbOption(
+                "fallback-encoding",
+                emitOptions.FallbackSourceFileEncoding,
+                toString: v => v.WebName
+            );
+            pdbOptions.VerifyPdbOption(
+                "default-encoding",
+                emitOptions.DefaultSourceFileEncoding,
+                toString: v => v.WebName
+            );
 
             int portabilityPolicy = 0;
-            if (compilationOptions.AssemblyIdentityComparer is DesktopAssemblyIdentityComparer identityComparer)
+            if (
+                compilationOptions.AssemblyIdentityComparer
+                is DesktopAssemblyIdentityComparer identityComparer
+            )
             {
-                portabilityPolicy |= identityComparer.PortabilityPolicy.SuppressSilverlightLibraryAssembliesPortability ? 0b1 : 0;
-                portabilityPolicy |= identityComparer.PortabilityPolicy.SuppressSilverlightPlatformAssembliesPortability ? 0b10 : 0;
+                portabilityPolicy |= identityComparer
+                    .PortabilityPolicy
+                    .SuppressSilverlightLibraryAssembliesPortability
+                    ? 0b1
+                    : 0;
+                portabilityPolicy |= identityComparer
+                    .PortabilityPolicy
+                    .SuppressSilverlightPlatformAssembliesPortability
+                    ? 0b10
+                    : 0;
             }
 
             pdbOptions.VerifyPdbOption("portability-policy", portabilityPolicy);
 
-            var compilerVersion = typeof(Compilation).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            var compilerVersion = typeof(Compilation)
+                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
             Assert.Equal(compilerVersion.ToString(), pdbOptions["compiler-version"]);
 
-            var runtimeVersion = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            var runtimeVersion = typeof(object)
+                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
             Assert.Equal(runtimeVersion, pdbOptions[CompilationOptionNames.RuntimeVersion]);
 
             pdbOptions.VerifyPdbOption(
                 "optimization",
                 (compilationOptions.OptimizationLevel, compilationOptions.DebugPlusMode),
-                toString: v => v.OptimizationLevel.ToPdbSerializedString(v.DebugPlusMode));
+                toString: v => v.OptimizationLevel.ToPdbSerializedString(v.DebugPlusMode)
+            );
 
             Assert.Equal(compilation.Language, pdbOptions["language"]);
         }
 
-        public static void VerifyReferenceInfo(TestMetadataReferenceInfo[] references, TargetFramework targetFramework, BlobReader metadataReferenceReader)
+        public static void VerifyReferenceInfo(
+            TestMetadataReferenceInfo[] references,
+            TargetFramework targetFramework,
+            BlobReader metadataReferenceReader
+        )
         {
             var frameworkReferences = TargetFrameworkUtil.GetReferences(targetFramework);
             var count = 0;
@@ -86,7 +136,9 @@ namespace Roslyn.Test.Utilities.PDB
                     continue;
                 }
 
-                var testReference = references.Single(x => x.MetadataReferenceInfo.Mvid == info.Mvid);
+                var testReference = references.Single(x =>
+                    x.MetadataReferenceInfo.Mvid == info.Mvid
+                );
                 testReference.MetadataReferenceInfo.AssertEqual(info);
                 count++;
             }
@@ -96,10 +148,12 @@ namespace Roslyn.Test.Utilities.PDB
 
         public static BlobReader GetSingleBlob(Guid infoGuid, MetadataReader pdbReader)
         {
-            return (from cdiHandle in pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
-                    let cdi = pdbReader.GetCustomDebugInformation(cdiHandle)
-                    where pdbReader.GetGuid(cdi.Kind) == infoGuid
-                    select pdbReader.GetBlobReader(cdi.Value)).Single();
+            return (
+                from cdiHandle in pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
+                let cdi = pdbReader.GetCustomDebugInformation(cdiHandle)
+                where pdbReader.GetGuid(cdi.Kind) == infoGuid
+                select pdbReader.GetBlobReader(cdi.Value)
+            ).Single();
         }
 
         public static MetadataReferenceInfo ParseMetadataReferenceInfo(ref BlobReader blobReader)
@@ -129,9 +183,10 @@ namespace Roslyn.Test.Utilities.PDB
 
             var embedInteropTypesAndKind = blobReader.ReadByte();
             var embedInteropTypes = (embedInteropTypesAndKind & 0b10) == 0b10;
-            var kind = (embedInteropTypesAndKind & 0b1) == 0b1
-                ? MetadataImageKind.Assembly
-                : MetadataImageKind.Module;
+            var kind =
+                (embedInteropTypesAndKind & 0b1) == 0b1
+                    ? MetadataImageKind.Assembly
+                    : MetadataImageKind.Module;
 
             var timestamp = blobReader.ReadInt32();
             var imageSize = blobReader.ReadInt32();
@@ -146,12 +201,14 @@ namespace Roslyn.Test.Utilities.PDB
                     ? ImmutableArray<string>.Empty
                     : externAliases.Split(',').ToImmutableArray(),
                 kind,
-                embedInteropTypes);
+                embedInteropTypes
+            );
         }
 
-        public static ImmutableDictionary<string, string> ParseCompilationOptions(BlobReader blobReader)
+        public static ImmutableDictionary<string, string> ParseCompilationOptions(
+            BlobReader blobReader
+        )
         {
-
             // Compiler flag bytes are UTF-8 null-terminated key-value pairs
             string key = null;
             Dictionary<string, string> kvp = new Dictionary<string, string>();

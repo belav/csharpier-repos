@@ -1,9 +1,11 @@
 using System;
 
-
 class DeeplyNestedGeneratorUsingSiblingPrivateClass
 {
-    private class Foo { public string Bar { get; set; } }
+    private class Foo
+    {
+        public string Bar { get; set; }
+    }
 
     private class Deeply
     {
@@ -16,8 +18,5 @@ class DeeplyNestedGeneratorUsingSiblingPrivateClass
         }
     }
 
-    static void Main(string[] args)
-    {
-    }
+    static void Main(string[] args) { }
 }
-

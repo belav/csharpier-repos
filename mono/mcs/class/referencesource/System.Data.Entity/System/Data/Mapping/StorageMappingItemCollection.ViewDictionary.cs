@@ -25,15 +25,20 @@ namespace System.Data.Mapping
 
     public partial class StorageMappingItemCollection : MappingItemCollection
     {
-        internal delegate bool TryGetUserDefinedQueryView(EntitySetBase extent, out GeneratedView generatedView);
-        internal delegate bool TryGetUserDefinedQueryViewOfType(OfTypeQVCacheKey extent, out GeneratedView generatedView);
+        internal delegate bool TryGetUserDefinedQueryView(
+            EntitySetBase extent,
+            out GeneratedView generatedView
+        );
+        internal delegate bool TryGetUserDefinedQueryViewOfType(
+            OfTypeQVCacheKey extent,
+            out GeneratedView generatedView
+        );
 
         internal class ViewDictionary
         {
-
             readonly TryGetUserDefinedQueryView TryGetUserDefinedQueryView;
             readonly TryGetUserDefinedQueryViewOfType TryGetUserDefinedQueryViewOfType;
-           
+
             private StorageMappingItemCollection m_storageMappingItemCollection;
 
             private static ConfigViewGenerator m_config = new ConfigViewGenerator();
@@ -47,28 +52,49 @@ namespace System.Data.Mapping
             /// <summary>
             /// Caches computation of view generation per <see cref="StorageEntityContainerMapping"/>. Cached value contains both query and update views.
             /// </summary>
-            private readonly Memoizer<EntityContainer, Dictionary<EntitySetBase, GeneratedView>> m_generatedViewsMemoizer;
+            private readonly Memoizer<
+                EntityContainer,
+                Dictionary<EntitySetBase, GeneratedView>
+            > m_generatedViewsMemoizer;
+
             /// <summary>
             /// Caches computation of getting Type-specific Query Views - either by view gen or user-defined input.
             /// </summary>
-            private readonly Memoizer<OfTypeQVCacheKey, GeneratedView> m_generatedViewOfTypeMemoizer;
+            private readonly Memoizer<
+                OfTypeQVCacheKey,
+                GeneratedView
+            > m_generatedViewOfTypeMemoizer;
 
-            internal ViewDictionary(StorageMappingItemCollection storageMappingItemCollection, 
-                            out Dictionary<EntitySetBase, GeneratedView> userDefinedQueryViewsDict,
-                            out Dictionary<OfTypeQVCacheKey, GeneratedView> userDefinedQueryViewsOfTypeDict)
+            internal ViewDictionary(
+                StorageMappingItemCollection storageMappingItemCollection,
+                out Dictionary<EntitySetBase, GeneratedView> userDefinedQueryViewsDict,
+                out Dictionary<OfTypeQVCacheKey, GeneratedView> userDefinedQueryViewsOfTypeDict
+            )
             {
                 this.m_storageMappingItemCollection = storageMappingItemCollection;
-                this.m_generatedViewsMemoizer = new Memoizer<EntityContainer, Dictionary<EntitySetBase, GeneratedView>>(SerializedGetGeneratedViews, null);
-                this.m_generatedViewOfTypeMemoizer = new Memoizer<OfTypeQVCacheKey, GeneratedView>(SerializedGeneratedViewOfType, OfTypeQVCacheKey.PairComparer.Instance);
+                this.m_generatedViewsMemoizer = new Memoizer<
+                    EntityContainer,
+                    Dictionary<EntitySetBase, GeneratedView>
+                >(SerializedGetGeneratedViews, null);
+                this.m_generatedViewOfTypeMemoizer = new Memoizer<OfTypeQVCacheKey, GeneratedView>(
+                    SerializedGeneratedViewOfType,
+                    OfTypeQVCacheKey.PairComparer.Instance
+                );
 
-                userDefinedQueryViewsDict = new Dictionary<EntitySetBase, GeneratedView>(EqualityComparer<EntitySetBase>.Default);
-                userDefinedQueryViewsOfTypeDict = new Dictionary<OfTypeQVCacheKey, GeneratedView>(OfTypeQVCacheKey.PairComparer.Instance);
+                userDefinedQueryViewsDict = new Dictionary<EntitySetBase, GeneratedView>(
+                    EqualityComparer<EntitySetBase>.Default
+                );
+                userDefinedQueryViewsOfTypeDict = new Dictionary<OfTypeQVCacheKey, GeneratedView>(
+                    OfTypeQVCacheKey.PairComparer.Instance
+                );
 
                 TryGetUserDefinedQueryView = userDefinedQueryViewsDict.TryGetValue;
                 TryGetUserDefinedQueryViewOfType = userDefinedQueryViewsOfTypeDict.TryGetValue;
             }
 
-            private Dictionary<EntitySetBase, GeneratedView> SerializedGetGeneratedViews(EntityContainer container)
+            private Dictionary<EntitySetBase, GeneratedView> SerializedGetGeneratedViews(
+                EntityContainer container
+            )
             {
                 Debug.Assert(container != null);
 
@@ -76,19 +102,30 @@ namespace System.Data.Mapping
                 Dictionary<EntitySetBase, GeneratedView> extentMappingViews;
 
                 // Get the mapping that has the entity container mapped.
-                StorageEntityContainerMapping entityContainerMap = MappingMetadataHelper.GetEntityContainerMap(m_storageMappingItemCollection, container);
+                StorageEntityContainerMapping entityContainerMap =
+                    MappingMetadataHelper.GetEntityContainerMap(
+                        m_storageMappingItemCollection,
+                        container
+                    );
 
                 // We get here because memoizer didn't find an entry for the container.
                 // It might happen that the entry with generated views already exists for the counterpart container, so check it first.
-                EntityContainer counterpartContainer = container.DataSpace == DataSpace.CSpace ? 
-                    entityContainerMap.StorageEntityContainer : entityContainerMap.EdmEntityContainer;
-                if (m_generatedViewsMemoizer.TryGetValue(counterpartContainer, out extentMappingViews))
+                EntityContainer counterpartContainer =
+                    container.DataSpace == DataSpace.CSpace
+                        ? entityContainerMap.StorageEntityContainer
+                        : entityContainerMap.EdmEntityContainer;
+                if (
+                    m_generatedViewsMemoizer.TryGetValue(
+                        counterpartContainer,
+                        out extentMappingViews
+                    )
+                )
                 {
                     return extentMappingViews;
                 }
 
-                extentMappingViews = new Dictionary<EntitySetBase, GeneratedView>(); 
-               
+                extentMappingViews = new Dictionary<EntitySetBase, GeneratedView>();
+
                 if (!entityContainerMap.HasViews)
                 {
                     return extentMappingViews;
@@ -97,13 +134,22 @@ namespace System.Data.Mapping
                 // If we are in generated views mode.
                 if (m_generatedViewsMode)
                 {
-                    if(ObjectItemCollection.ViewGenerationAssemblies!=null && ObjectItemCollection.ViewGenerationAssemblies.Count>0)
+                    if (
+                        ObjectItemCollection.ViewGenerationAssemblies != null
+                        && ObjectItemCollection.ViewGenerationAssemblies.Count > 0
+                    )
                     {
-                        SerializedCollectViewsFromObjectCollection(this.m_storageMappingItemCollection.Workspace, extentMappingViews);
+                        SerializedCollectViewsFromObjectCollection(
+                            this.m_storageMappingItemCollection.Workspace,
+                            extentMappingViews
+                        );
                     }
                     else
                     {
-                        SerializedCollectViewsFromReferencedAssemblies(this.m_storageMappingItemCollection.Workspace, extentMappingViews);
+                        SerializedCollectViewsFromReferencedAssemblies(
+                            this.m_storageMappingItemCollection.Workspace,
+                            extentMappingViews
+                        );
                     }
                 }
 
@@ -114,7 +160,10 @@ namespace System.Data.Mapping
                     this.SerializedGenerateViews(entityContainerMap, extentMappingViews);
                 }
 
-                Debug.Assert(extentMappingViews.Count > 0, "view should be generated at this point");
+                Debug.Assert(
+                    extentMappingViews.Count > 0,
+                    "view should be generated at this point"
+                );
 
                 return extentMappingViews;
             }
@@ -125,27 +174,39 @@ namespace System.Data.Mapping
             /// </summary>
             /// <param name="entityContainerMap"></param>
             /// <param name="resultDictionary"></param>
-            private void SerializedGenerateViews(StorageEntityContainerMapping entityContainerMap, Dictionary<EntitySetBase, GeneratedView> resultDictionary)
+            private void SerializedGenerateViews(
+                StorageEntityContainerMapping entityContainerMap,
+                Dictionary<EntitySetBase, GeneratedView> resultDictionary
+            )
             {
                 //If there are no entity set maps, don't call the view generation process
                 Debug.Assert(entityContainerMap.HasViews);
 
-                ViewGenResults viewGenResults = ViewgenGatekeeper.GenerateViewsFromMapping(entityContainerMap, m_config);
-                KeyToListMap<EntitySetBase, GeneratedView> extentMappingViews = viewGenResults.Views;
+                ViewGenResults viewGenResults = ViewgenGatekeeper.GenerateViewsFromMapping(
+                    entityContainerMap,
+                    m_config
+                );
+                KeyToListMap<EntitySetBase, GeneratedView> extentMappingViews =
+                    viewGenResults.Views;
                 if (viewGenResults.HasErrors)
                 {
                     // Can get the list of errors using viewGenResults.Errors
                     throw new MappingException(Helper.CombineErrorMessage(viewGenResults.Errors));
                 }
 
-                foreach (KeyValuePair<EntitySetBase, List<GeneratedView>> keyValuePair in extentMappingViews.KeyValuePairs)
+                foreach (
+                    KeyValuePair<
+                        EntitySetBase,
+                        List<GeneratedView>
+                    > keyValuePair in extentMappingViews.KeyValuePairs
+                )
                 {
                     //Multiple Views are returned for an extent but the first view
                     //is the only one that we will use for now. In the future,
                     //we might start using the other views which are per type within an extent.
                     GeneratedView generatedView;
                     //Add the view to the local dictionary
-                            
+
                     if (!resultDictionary.TryGetValue(keyValuePair.Key, out generatedView))
                     {
                         generatedView = keyValuePair.Value[0];
@@ -158,7 +219,13 @@ namespace System.Data.Mapping
             /// Generates a single query view for a given Extent and type. It is used to generate OfType and OfTypeOnly views.
             /// </summary>
             /// <param name="includeSubtypes">Whether the view should include extents that are subtypes of the given entity</param>
-            private bool TryGenerateQueryViewOfType(EntityContainer entityContainer, EntitySetBase entity, EntityTypeBase type, bool includeSubtypes, out GeneratedView generatedView)
+            private bool TryGenerateQueryViewOfType(
+                EntityContainer entityContainer,
+                EntitySetBase entity,
+                EntityTypeBase type,
+                bool includeSubtypes,
+                out GeneratedView generatedView
+            )
             {
                 Debug.Assert(entityContainer != null);
                 Debug.Assert(entity != null);
@@ -171,40 +238,64 @@ namespace System.Data.Mapping
                 }
 
                 //Get the mapping that has the entity container mapped.
-                StorageEntityContainerMapping entityContainerMap = MappingMetadataHelper.GetEntityContainerMap(m_storageMappingItemCollection, entityContainer);
+                StorageEntityContainerMapping entityContainerMap =
+                    MappingMetadataHelper.GetEntityContainerMap(
+                        m_storageMappingItemCollection,
+                        entityContainer
+                    );
                 Debug.Assert(!entityContainerMap.IsEmpty, "There are no entity set maps");
 
                 bool success;
-                ViewGenResults viewGenResults = ViewgenGatekeeper.GenerateTypeSpecificQueryView(entityContainerMap, m_config, entity, type, includeSubtypes, out success);
+                ViewGenResults viewGenResults = ViewgenGatekeeper.GenerateTypeSpecificQueryView(
+                    entityContainerMap,
+                    m_config,
+                    entity,
+                    type,
+                    includeSubtypes,
+                    out success
+                );
                 if (!success)
                 {
                     generatedView = null;
                     return false; //could not generate view
                 }
 
-                KeyToListMap<EntitySetBase, GeneratedView> extentMappingViews = viewGenResults.Views;
+                KeyToListMap<EntitySetBase, GeneratedView> extentMappingViews =
+                    viewGenResults.Views;
 
                 if (viewGenResults.HasErrors)
                 {
                     throw new MappingException(Helper.CombineErrorMessage(viewGenResults.Errors));
                 }
 
-                Debug.Assert(extentMappingViews.AllValues.Count() == 1, "Viewgen should have produced only one view");
+                Debug.Assert(
+                    extentMappingViews.AllValues.Count() == 1,
+                    "Viewgen should have produced only one view"
+                );
                 generatedView = extentMappingViews.AllValues.First();
 
                 return true;
             }
 
             /// <summary>
-            /// Tries to generate the Oftype or OfTypeOnly query view for a given entity set and type. 
+            /// Tries to generate the Oftype or OfTypeOnly query view for a given entity set and type.
             /// Returns false if the view could not be generated.
-            /// Possible reasons for failing are 
+            /// Possible reasons for failing are
             ///   1) Passing in OfTypeOnly on an abstract type
             ///   2) In user-specified query views mode a query for the given type is absent
             /// </summary>
-            internal bool TryGetGeneratedViewOfType(MetadataWorkspace workspace, EntitySetBase entity, EntityTypeBase type, bool includeSubtypes, out GeneratedView generatedView)
+            internal bool TryGetGeneratedViewOfType(
+                MetadataWorkspace workspace,
+                EntitySetBase entity,
+                EntityTypeBase type,
+                bool includeSubtypes,
+                out GeneratedView generatedView
+            )
             {
-                OfTypeQVCacheKey key = new OfTypeQVCacheKey(entity, new Pair<EntityTypeBase, bool>(type, includeSubtypes));
+                OfTypeQVCacheKey key = new OfTypeQVCacheKey(
+                    entity,
+                    new Pair<EntityTypeBase, bool>(type, includeSubtypes)
+                );
                 generatedView = this.m_generatedViewOfTypeMemoizer.Evaluate(key);
                 return (generatedView != null);
             }
@@ -217,7 +308,7 @@ namespace System.Data.Mapping
             {
                 GeneratedView generatedView;
                 //See if we have collected user-defined QueryView
-                if(TryGetUserDefinedQueryViewOfType(arg, out generatedView))
+                if (TryGetUserDefinedQueryViewOfType(arg, out generatedView))
                 {
                     return generatedView;
                 }
@@ -227,11 +318,19 @@ namespace System.Data.Mapping
                 EntityTypeBase type = arg.Second.First;
                 bool includeSubtypes = arg.Second.Second;
 
-                if (!TryGenerateQueryViewOfType(entity.EntityContainer, entity, type, includeSubtypes, out generatedView))
+                if (
+                    !TryGenerateQueryViewOfType(
+                        entity.EntityContainer,
+                        entity,
+                        type,
+                        includeSubtypes,
+                        out generatedView
+                    )
+                )
                 {
                     generatedView = null;
                 }
- 
+
                 return generatedView;
             }
 
@@ -239,7 +338,7 @@ namespace System.Data.Mapping
             /// Returns the update or query view for an Extent as a
             /// string.
             /// There are a series of steps that we go through for discovering a view for an extent.
-            /// To start with we assume that we are working with Generated Views. To find out the 
+            /// To start with we assume that we are working with Generated Views. To find out the
             /// generated view we go to the ObjectItemCollection and see if it is not-null. If the ObjectItemCollection
             /// is non-null, we get the view generation assemblies that it might have cached during the
             /// Object metadata discovery.If there are no view generation assemblies we switch to the
@@ -250,7 +349,7 @@ namespace System.Data.Mapping
             /// the query or update is issued from the Value layer and this is the first time view has been asked for.
             /// The compile time view gen for value layer queries will work for very simple scenarios.
             /// If the users wants to get the performance benefit, they should call MetadataWorkspace.LoadFromAssembly.
-            /// At this point we go through the referenced assemblies of the entry assembly( this wont work for Asp.net 
+            /// At this point we go through the referenced assemblies of the entry assembly( this wont work for Asp.net
             /// or if the viewgen assembly was not referenced by the executing application).
             /// and try to see if there were any view gen assemblies. If there are, we collect the views for all extents.
             /// Once we have all the generated views gathered, we try to get the view for the extent passed in.
@@ -259,7 +358,11 @@ namespace System.Data.Mapping
             /// assemblies of calling assembly, we change the mode to runtime view generation and will continue to
             /// be in that mode for the rest of the lifetime of the mapping item collection.
             /// </summary>
-            internal GeneratedView GetGeneratedView(EntitySetBase extent, MetadataWorkspace workspace, StorageMappingItemCollection storageMappingItemCollection)
+            internal GeneratedView GetGeneratedView(
+                EntitySetBase extent,
+                MetadataWorkspace workspace,
+                StorageMappingItemCollection storageMappingItemCollection
+            )
             {
                 //First check if we have collected a view from user-defined query views
                 //Dont need to worry whether to generate Query view or update viw, because that is relative to the extent.
@@ -280,29 +383,44 @@ namespace System.Data.Mapping
                         {
                             Helpers.StringTraceLine(String.Empty);
                             Helpers.StringTraceLine(String.Empty);
-                            Helpers.FormatTraceLine("================= Generating FK Query View for: {0} =================", aSet.Name);
+                            Helpers.FormatTraceLine(
+                                "================= Generating FK Query View for: {0} =================",
+                                aSet.Name
+                            );
                             Helpers.StringTraceLine(String.Empty);
                             Helpers.StringTraceLine(String.Empty);
                         }
 
                         // Although we expose a collection of constraints in the API, there is only ever one constraint.
-                        Debug.Assert(aSet.ElementType.ReferentialConstraints.Count == 1, "aSet.ElementType.ReferentialConstraints.Count == 1");
+                        Debug.Assert(
+                            aSet.ElementType.ReferentialConstraints.Count == 1,
+                            "aSet.ElementType.ReferentialConstraints.Count == 1"
+                        );
                         ReferentialConstraint rc = aSet.ElementType.ReferentialConstraints.Single();
 
-                        EntitySet dependentSet = aSet.AssociationSetEnds[rc.ToRole.Name].EntitySet;                        
-                        EntitySet principalSet = aSet.AssociationSetEnds[rc.FromRole.Name].EntitySet;
+                        EntitySet dependentSet = aSet.AssociationSetEnds[rc.ToRole.Name].EntitySet;
+                        EntitySet principalSet = aSet.AssociationSetEnds[
+                            rc.FromRole.Name
+                        ].EntitySet;
 
                         DbExpression qView = dependentSet.Scan();
 
                         // Introduce an OfType view if the dependent end is a subtype of the entity set
-                        EntityType dependentType = MetadataHelper.GetEntityTypeForEnd((AssociationEndMember)rc.ToRole);
-                        EntityType principalType = MetadataHelper.GetEntityTypeForEnd((AssociationEndMember)rc.FromRole);
+                        EntityType dependentType = MetadataHelper.GetEntityTypeForEnd(
+                            (AssociationEndMember)rc.ToRole
+                        );
+                        EntityType principalType = MetadataHelper.GetEntityTypeForEnd(
+                            (AssociationEndMember)rc.FromRole
+                        );
                         if (dependentSet.ElementType.IsBaseTypeOf(dependentType))
                         {
                             qView = qView.OfType(TypeUsage.Create(dependentType));
                         }
 
-                        if (rc.FromRole.RelationshipMultiplicity == RelationshipMultiplicity.ZeroOrOne)
+                        if (
+                            rc.FromRole.RelationshipMultiplicity
+                            == RelationshipMultiplicity.ZeroOrOne
+                        )
                         {
                             // Filter out instances with existing relationships.
                             qView = qView.Where(e =>
@@ -319,42 +437,73 @@ namespace System.Data.Mapping
                         qView = qView.Select(e =>
                         {
                             List<DbExpression> ends = new List<DbExpression>();
-                            foreach (AssociationEndMember end in aSet.ElementType.AssociationEndMembers)
+                            foreach (
+                                AssociationEndMember end in aSet.ElementType.AssociationEndMembers
+                            )
                             {
                                 if (end.Name == rc.ToRole.Name)
                                 {
                                     var keyValues = new List<KeyValuePair<string, DbExpression>>();
-                                    foreach (EdmMember keyMember in dependentSet.ElementType.KeyMembers)
+                                    foreach (
+                                        EdmMember keyMember in dependentSet.ElementType.KeyMembers
+                                    )
                                     {
                                         keyValues.Add(e.Property((EdmProperty)keyMember));
                                     }
-                                    ends.Add(dependentSet.RefFromKey(DbExpressionBuilder.NewRow(keyValues), dependentType));
+                                    ends.Add(
+                                        dependentSet.RefFromKey(
+                                            DbExpressionBuilder.NewRow(keyValues),
+                                            dependentType
+                                        )
+                                    );
                                 }
                                 else
                                 {
                                     // Manufacture a key using key values.
                                     var keyValues = new List<KeyValuePair<string, DbExpression>>();
-                                    foreach (EdmMember keyMember in principalSet.ElementType.KeyMembers)
+                                    foreach (
+                                        EdmMember keyMember in principalSet.ElementType.KeyMembers
+                                    )
                                     {
-                                        int offset = rc.FromProperties.IndexOf((EdmProperty)keyMember);
+                                        int offset = rc.FromProperties.IndexOf(
+                                            (EdmProperty)keyMember
+                                        );
                                         keyValues.Add(e.Property(rc.ToProperties[offset]));
                                     }
-                                    ends.Add(principalSet.RefFromKey(DbExpressionBuilder.NewRow(keyValues), principalType));
+                                    ends.Add(
+                                        principalSet.RefFromKey(
+                                            DbExpressionBuilder.NewRow(keyValues),
+                                            principalType
+                                        )
+                                    );
                                 }
                             }
                             return TypeUsage.Create(aSet.ElementType).New(ends);
                         });
-                        return GeneratedView.CreateGeneratedViewForFKAssociationSet(aSet, aSet.ElementType, new DbQueryCommandTree(workspace, DataSpace.SSpace, qView), storageMappingItemCollection, m_config);
+                        return GeneratedView.CreateGeneratedViewForFKAssociationSet(
+                            aSet,
+                            aSet.ElementType,
+                            new DbQueryCommandTree(workspace, DataSpace.SSpace, qView),
+                            storageMappingItemCollection,
+                            m_config
+                        );
                     }
                 }
 
                 // If no User-defined QV is found, call memoized View Generation procedure.
-                Dictionary<EntitySetBase, GeneratedView> generatedViews = m_generatedViewsMemoizer.Evaluate(extent.EntityContainer);
+                Dictionary<EntitySetBase, GeneratedView> generatedViews =
+                    m_generatedViewsMemoizer.Evaluate(extent.EntityContainer);
 
-                if (!generatedViews.TryGetValue(extent, out view)) 
+                if (!generatedViews.TryGetValue(extent, out view))
                 {
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.Mapping_Views_For_Extent_Not_Generated(
-                        (extent.EntityContainer.DataSpace==DataSpace.SSpace)?"Table":"EntitySet",extent.Name));
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.Mapping_Views_For_Extent_Not_Generated(
+                            (extent.EntityContainer.DataSpace == DataSpace.SSpace)
+                                ? "Table"
+                                : "EntitySet",
+                            extent.Name
+                        )
+                    );
                 }
 
                 return view;
@@ -365,27 +514,50 @@ namespace System.Data.Mapping
             /// </summary>
             /// <param name="workspace"></param>
             /// <param name="objectCollection"></param>
-            private void SerializedCollectViewsFromObjectCollection(MetadataWorkspace workspace, Dictionary<EntitySetBase, GeneratedView> extentMappingViews)
+            private void SerializedCollectViewsFromObjectCollection(
+                MetadataWorkspace workspace,
+                Dictionary<EntitySetBase, GeneratedView> extentMappingViews
+            )
             {
-                IList<Assembly> allViewGenAssemblies = ObjectItemCollection.ViewGenerationAssemblies;
+                IList<Assembly> allViewGenAssemblies =
+                    ObjectItemCollection.ViewGenerationAssemblies;
                 if (allViewGenAssemblies != null)
                 {
                     foreach (Assembly assembly in allViewGenAssemblies)
                     {
-                        object[] viewGenAttributes = assembly.GetCustomAttributes(typeof(System.Data.Mapping.EntityViewGenerationAttribute), false /*inherit*/);
+                        object[] viewGenAttributes = assembly.GetCustomAttributes(
+                            typeof(System.Data.Mapping.EntityViewGenerationAttribute),
+                            false /*inherit*/
+                        );
                         if ((viewGenAttributes != null) && (viewGenAttributes.Length != 0))
                         {
-                            foreach (EntityViewGenerationAttribute viewGenAttribute in viewGenAttributes)
+                            foreach (
+                                EntityViewGenerationAttribute viewGenAttribute in viewGenAttributes
+                            )
                             {
                                 Type viewContainerType = viewGenAttribute.ViewGenerationType;
                                 if (!viewContainerType.IsSubclassOf(typeof(EntityViewContainer)))
                                 {
-                                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.Generated_View_Type_Super_Class(StorageMslConstructs.EntityViewGenerationTypeName));
+                                    throw EntityUtil.InvalidOperation(
+                                        System.Data.Entity.Strings.Generated_View_Type_Super_Class(
+                                            StorageMslConstructs.EntityViewGenerationTypeName
+                                        )
+                                    );
                                 }
-                                EntityViewContainer viewContainer = (Activator.CreateInstance(viewContainerType) as EntityViewContainer);
-                                Debug.Assert(viewContainer != null, "Should be able to create the type");
+                                EntityViewContainer viewContainer = (
+                                    Activator.CreateInstance(viewContainerType)
+                                    as EntityViewContainer
+                                );
+                                Debug.Assert(
+                                    viewContainer != null,
+                                    "Should be able to create the type"
+                                );
 
-                                SerializedAddGeneratedViewsInEntityViewContainer(workspace, viewContainer, extentMappingViews);
+                                SerializedAddGeneratedViewsInEntityViewContainer(
+                                    workspace,
+                                    viewContainer,
+                                    extentMappingViews
+                                );
                             }
                         }
                     }
@@ -393,84 +565,132 @@ namespace System.Data.Mapping
             }
 
             /// <summary>
-            /// this method do the following check on the generated views in the EntityViewContainer, 
+            /// this method do the following check on the generated views in the EntityViewContainer,
             /// then add those views all at once to the dictionary
             /// 1. there should be one storeageEntityContainerMapping that has the same h
             ///     C side and S side names as the EnittyViewcontainer
-            /// 2. Generate the hash for the storageEntityContainerMapping in the MM closure, 
+            /// 2. Generate the hash for the storageEntityContainerMapping in the MM closure,
             ///     and this hash should be the same in EntityViewContainer
-            /// 3. Generate the hash for all of the view text in the EntityViewContainer and 
+            /// 3. Generate the hash for all of the view text in the EntityViewContainer and
             ///     this hash should be the same as the stored on in the EntityViewContainer
             /// </summary>
             /// <param name="entityViewContainer"></param>
-            private void SerializedAddGeneratedViewsInEntityViewContainer(MetadataWorkspace workspace, EntityViewContainer entityViewContainer, Dictionary<EntitySetBase, GeneratedView> extentMappingViews)
+            private void SerializedAddGeneratedViewsInEntityViewContainer(
+                MetadataWorkspace workspace,
+                EntityViewContainer entityViewContainer,
+                Dictionary<EntitySetBase, GeneratedView> extentMappingViews
+            )
             {
                 StorageEntityContainerMapping storageEntityContainerMapping;
                 // first check
-                if (!this.TryGetCorrespondingStorageEntityContainerMapping(entityViewContainer,
-                    workspace.GetItemCollection(DataSpace.CSSpace).GetItems<StorageEntityContainerMapping>(), out storageEntityContainerMapping))
+                if (
+                    !this.TryGetCorrespondingStorageEntityContainerMapping(
+                        entityViewContainer,
+                        workspace
+                            .GetItemCollection(DataSpace.CSSpace)
+                            .GetItems<StorageEntityContainerMapping>(),
+                        out storageEntityContainerMapping
+                    )
+                )
                 {
                     return;
                 }
 
                 // second check
-                if (!this.SerializedVerifyHashOverMmClosure(storageEntityContainerMapping, entityViewContainer))
+                if (
+                    !this.SerializedVerifyHashOverMmClosure(
+                        storageEntityContainerMapping,
+                        entityViewContainer
+                    )
+                )
                 {
-                    throw new MappingException(Strings.ViewGen_HashOnMappingClosure_Not_Matching(entityViewContainer.EdmEntityContainerName));
-
+                    throw new MappingException(
+                        Strings.ViewGen_HashOnMappingClosure_Not_Matching(
+                            entityViewContainer.EdmEntityContainerName
+                        )
+                    );
                 }
 
                 // third check, prior to the check, we collect all the views in the entity view container to the dictionary
                 // if the views are changed then we will throw exception out
                 if (this.VerifyViewsHaveNotChanged(workspace, entityViewContainer))
                 {
-                    this.SerializedAddGeneratedViews(workspace, entityViewContainer, extentMappingViews);
+                    this.SerializedAddGeneratedViews(
+                        workspace,
+                        entityViewContainer,
+                        extentMappingViews
+                    );
                 }
                 else
                 {
-                    throw new InvalidOperationException(System.Data.Entity.Strings.Generated_Views_Changed);
+                    throw new InvalidOperationException(
+                        System.Data.Entity.Strings.Generated_Views_Changed
+                    );
                 }
             }
-                    
 
-            private bool TryGetCorrespondingStorageEntityContainerMapping(EntityViewContainer viewContainer,
-                IEnumerable<StorageEntityContainerMapping> storageEntityContainerMappingList, out StorageEntityContainerMapping storageEntityContainerMapping)
+            private bool TryGetCorrespondingStorageEntityContainerMapping(
+                EntityViewContainer viewContainer,
+                IEnumerable<StorageEntityContainerMapping> storageEntityContainerMappingList,
+                out StorageEntityContainerMapping storageEntityContainerMapping
+            )
             {
                 storageEntityContainerMapping = null;
 
                 foreach (var entityContainerMapping in storageEntityContainerMappingList)
                 {
                     // first check
-                    if (entityContainerMapping.EdmEntityContainer.Name == viewContainer.EdmEntityContainerName &&
-                        entityContainerMapping.StorageEntityContainer.Name == viewContainer.StoreEntityContainerName)
+                    if (
+                        entityContainerMapping.EdmEntityContainer.Name
+                            == viewContainer.EdmEntityContainerName
+                        && entityContainerMapping.StorageEntityContainer.Name
+                            == viewContainer.StoreEntityContainerName
+                    )
                     {
                         storageEntityContainerMapping = entityContainerMapping;
                         return true;
                     }
                 }
                 return false;
-
             }
 
-            private bool SerializedVerifyHashOverMmClosure(StorageEntityContainerMapping entityContainerMapping, EntityViewContainer entityViewContainer)
+            private bool SerializedVerifyHashOverMmClosure(
+                StorageEntityContainerMapping entityContainerMapping,
+                EntityViewContainer entityViewContainer
+            )
             {
-                if (MetadataMappingHasherVisitor.GetMappingClosureHash(m_storageMappingItemCollection.MappingVersion, entityContainerMapping) ==
-                    entityViewContainer.HashOverMappingClosure)
+                if (
+                    MetadataMappingHasherVisitor.GetMappingClosureHash(
+                        m_storageMappingItemCollection.MappingVersion,
+                        entityContainerMapping
+                    ) == entityViewContainer.HashOverMappingClosure
+                )
                 {
                     return true;
                 }
                 return false;
             }
 
-            private bool VerifyViewsHaveNotChanged(MetadataWorkspace workspace, EntityViewContainer viewContainer)
+            private bool VerifyViewsHaveNotChanged(
+                MetadataWorkspace workspace,
+                EntityViewContainer viewContainer
+            )
             {
                 //Now check whether the hash of the generated views match the one
                 //we stored in the code file during design
                 //Produce the hash and add it to the code
-                var mappingCollection = (workspace.GetItemCollection(DataSpace.CSSpace) as StorageMappingItemCollection);
-                Debug.Assert(mappingCollection != null,"Must have Mapping Collection in the Metadataworkspace");
+                var mappingCollection = (
+                    workspace.GetItemCollection(DataSpace.CSSpace) as StorageMappingItemCollection
+                );
+                Debug.Assert(
+                    mappingCollection != null,
+                    "Must have Mapping Collection in the Metadataworkspace"
+                );
 
-                string viewHash = MetadataHelper.GenerateHashForAllExtentViewsContent(mappingCollection.MappingVersion, viewContainer.ExtentViews);
+                string viewHash = MetadataHelper.GenerateHashForAllExtentViewsContent(
+                    mappingCollection.MappingVersion,
+                    viewContainer.ExtentViews
+                );
                 string storedViewHash = viewContainer.HashOverAllExtentViews;
                 if (viewHash != storedViewHash)
                 {
@@ -479,16 +699,18 @@ namespace System.Data.Mapping
                 return true;
             }
 
-
             //Collect the names of the entitysetbases and the generated views from
             //the generated type into a string so that we can produce a hash over it.
-            private void SerializedAddGeneratedViews(MetadataWorkspace workspace, EntityViewContainer viewContainer, Dictionary<EntitySetBase, GeneratedView> extentMappingViews)
+            private void SerializedAddGeneratedViews(
+                MetadataWorkspace workspace,
+                EntityViewContainer viewContainer,
+                Dictionary<EntitySetBase, GeneratedView> extentMappingViews
+            )
             {
                 foreach (KeyValuePair<string, string> extentView in viewContainer.ExtentViews)
                 {
                     EntityContainer entityContainer = null;
                     EntitySetBase extent = null;
-
 
                     string extentFullName = extentView.Key;
                     int extentNameIndex = extentFullName.LastIndexOf('.');
@@ -496,22 +718,42 @@ namespace System.Data.Mapping
                     if (extentNameIndex != -1)
                     {
                         string entityContainerName = extentFullName.Substring(0, extentNameIndex);
-                        string extentName = extentFullName.Substring(extentFullName.LastIndexOf('.') + 1);
+                        string extentName = extentFullName.Substring(
+                            extentFullName.LastIndexOf('.') + 1
+                        );
 
-                        if (!workspace.TryGetItem<EntityContainer>(entityContainerName, DataSpace.CSpace, out entityContainer))
+                        if (
+                            !workspace.TryGetItem<EntityContainer>(
+                                entityContainerName,
+                                DataSpace.CSpace,
+                                out entityContainer
+                            )
+                        )
                         {
-                            workspace.TryGetItem<EntityContainer>(entityContainerName, DataSpace.SSpace, out entityContainer);
+                            workspace.TryGetItem<EntityContainer>(
+                                entityContainerName,
+                                DataSpace.SSpace,
+                                out entityContainer
+                            );
                         }
 
                         if (entityContainer != null)
                         {
-                            entityContainer.BaseEntitySets.TryGetValue(extentName, false, out extent);
+                            entityContainer.BaseEntitySets.TryGetValue(
+                                extentName,
+                                false,
+                                out extent
+                            );
                         }
                     }
 
                     if (extent == null)
                     {
-                        throw new MappingException(System.Data.Entity.Strings.Generated_Views_Invalid_Extent(extentFullName));
+                        throw new MappingException(
+                            System.Data.Entity.Strings.Generated_Views_Invalid_Extent(
+                                extentFullName
+                            )
+                        );
                     }
 
                     //Create a Generated view and cache it
@@ -520,23 +762,26 @@ namespace System.Data.Mapping
                     if (!extentMappingViews.TryGetValue(extent, out generatedView))
                     {
                         generatedView = GeneratedView.CreateGeneratedView(
-                            extent, 
+                            extent,
                             null, // edmType
                             null, // commandTree
                             extentView.Value, // eSQL
                             m_storageMappingItemCollection,
-                            new ConfigViewGenerator());
+                            new ConfigViewGenerator()
+                        );
                         extentMappingViews.Add(extent, generatedView);
                     }
                 }
             }
 
-
             /// <summary>
             /// Tries to collect the views from the referenced assemblies of Entry assembly.
             /// </summary>
             /// <param name="workspace"></param>
-            private void SerializedCollectViewsFromReferencedAssemblies(MetadataWorkspace workspace, Dictionary<EntitySetBase, GeneratedView> extentMappingViews)
+            private void SerializedCollectViewsFromReferencedAssemblies(
+                MetadataWorkspace workspace,
+                Dictionary<EntitySetBase, GeneratedView> extentMappingViews
+            )
             {
                 ObjectItemCollection objectCollection;
                 ItemCollection itemCollection;
@@ -550,7 +795,9 @@ namespace System.Data.Mapping
                     Assembly entryAssembly = Assembly.GetEntryAssembly();
                     if (entryAssembly != null)
                     {
-                        objectCollection.ImplicitLoadViewsFromAllReferencedAssemblies(entryAssembly);
+                        objectCollection.ImplicitLoadViewsFromAllReferencedAssemblies(
+                            entryAssembly
+                        );
                     }
                 }
                 this.SerializedCollectViewsFromObjectCollection(workspace, extentMappingViews);

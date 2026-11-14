@@ -12,6 +12,6 @@ namespace System.Threading
         BelowNormal = 1,
         Normal = 2,
         AboveNormal = 3,
-        Highest = 4
+        Highest = 4,
     }
 }

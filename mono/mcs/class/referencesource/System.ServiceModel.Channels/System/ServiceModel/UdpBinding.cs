@@ -28,14 +28,20 @@ namespace System.ServiceModel
         public UdpBinding(string configurationName)
             : this()
         {
-            UdpBindingCollectionElement section = UdpBindingCollectionElement.GetBindingCollectionElement();
+            UdpBindingCollectionElement section =
+                UdpBindingCollectionElement.GetBindingCollectionElement();
             UdpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                    configurationName,
-                    UdpTransportConfigurationStrings.UdpBindingElementName)));
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            UdpTransportConfigurationStrings.UdpBindingElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -43,17 +49,23 @@ namespace System.ServiceModel
             }
         }
 
-        private UdpBinding(UdpTransportBindingElement transport, TextMessageEncodingBindingElement encoding)
+        private UdpBinding(
+            UdpTransportBindingElement transport,
+            TextMessageEncodingBindingElement encoding
+        )
             : this()
         {
             this.DuplicateMessageHistoryLength = transport.DuplicateMessageHistoryLength;
             this.MaxBufferPoolSize = transport.MaxBufferPoolSize;
             this.MaxPendingMessagesTotalSize = transport.MaxPendingMessagesTotalSize;
             this.MaxReceivedMessageSize = transport.MaxReceivedMessageSize;
-            this.MaxRetransmitCount = Math.Max(transport.RetransmissionSettings.MaxUnicastRetransmitCount, transport.RetransmissionSettings.MaxMulticastRetransmitCount);
+            this.MaxRetransmitCount = Math.Max(
+                transport.RetransmissionSettings.MaxUnicastRetransmitCount,
+                transport.RetransmissionSettings.MaxMulticastRetransmitCount
+            );
             this.MulticastInterfaceId = transport.MulticastInterfaceId;
             this.TimeToLive = transport.TimeToLive;
-            
+
             this.ReaderQuotas = encoding.ReaderQuotas;
             this.TextEncoding = encoding.WriteEncoding;
         }
@@ -61,27 +73,15 @@ namespace System.ServiceModel
         [DefaultValue(UdpConstants.Defaults.DuplicateMessageHistoryLength)]
         public int DuplicateMessageHistoryLength
         {
-            get
-            {
-                return this.udpTransport.DuplicateMessageHistoryLength;
-            }
-            set
-            {
-                this.udpTransport.DuplicateMessageHistoryLength = value;
-            }
+            get { return this.udpTransport.DuplicateMessageHistoryLength; }
+            set { this.udpTransport.DuplicateMessageHistoryLength = value; }
         }
 
         [DefaultValue(TransportDefaults.MaxBufferPoolSize)]
         public long MaxBufferPoolSize
         {
-            get
-            {
-                return this.udpTransport.MaxBufferPoolSize; 
-            }
-            set
-            {
-                this.udpTransport.MaxBufferPoolSize = value;
-            }
+            get { return this.udpTransport.MaxBufferPoolSize; }
+            set { this.udpTransport.MaxBufferPoolSize = value; }
         }
 
         [DefaultValue(UdpConstants.Defaults.MaxRetransmitCount)]
@@ -89,7 +89,10 @@ namespace System.ServiceModel
         {
             get
             {
-                return Math.Max(this.udpTransport.RetransmissionSettings.MaxUnicastRetransmitCount, this.udpTransport.RetransmissionSettings.MaxMulticastRetransmitCount);
+                return Math.Max(
+                    this.udpTransport.RetransmissionSettings.MaxUnicastRetransmitCount,
+                    this.udpTransport.RetransmissionSettings.MaxMulticastRetransmitCount
+                );
             }
             set
             {
@@ -101,27 +104,15 @@ namespace System.ServiceModel
         [DefaultValue(UdpConstants.Defaults.DefaultMaxPendingMessagesTotalSize)]
         public long MaxPendingMessagesTotalSize
         {
-            get
-            {
-                return this.udpTransport.MaxPendingMessagesTotalSize;
-            }
-            set
-            {
-                this.udpTransport.MaxPendingMessagesTotalSize = value;
-            }
+            get { return this.udpTransport.MaxPendingMessagesTotalSize; }
+            set { this.udpTransport.MaxPendingMessagesTotalSize = value; }
         }
 
         [DefaultValue(UdpConstants.Defaults.MaxReceivedMessageSize)]
         public long MaxReceivedMessageSize
         {
-            get
-            {
-                return this.udpTransport.MaxReceivedMessageSize;
-            }
-            set
-            {
-                this.udpTransport.MaxReceivedMessageSize = value;
-            }
+            get { return this.udpTransport.MaxReceivedMessageSize; }
+            set { this.udpTransport.MaxReceivedMessageSize = value; }
         }
 
         [DefaultValue(UdpConstants.Defaults.MulticastInterfaceId)]
@@ -172,7 +163,10 @@ namespace System.ServiceModel
             return bindingElements.Clone();
         }
 
-        bool BindingElementsPropertiesMatch(UdpTransportBindingElement transport, MessageEncodingBindingElement encoding)
+        bool BindingElementsPropertiesMatch(
+            UdpTransportBindingElement transport,
+            MessageEncodingBindingElement encoding
+        )
         {
             if (!this.udpTransport.IsMatch(transport))
             {
@@ -187,7 +181,11 @@ namespace System.ServiceModel
             return true;
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes, Justification = "no need to call this from derrived classes")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
+            Justification = "no need to call this from derrived classes"
+        )]
         bool IBindingRuntimePreferences.ReceiveSynchronously
         {
             get { return false; }
@@ -205,7 +203,10 @@ namespace System.ServiceModel
             return (!this.TextEncoding.Equals(TextEncoderDefaults.Encoding));
         }
 
-        internal static bool TryCreate(BindingElementCollection bindingElements, out Binding binding)
+        internal static bool TryCreate(
+            BindingElementCollection bindingElements,
+            out Binding binding
+        )
         {
             binding = null;
 
@@ -216,7 +217,7 @@ namespace System.ServiceModel
 
             UdpTransportBindingElement transport = null;
             TextMessageEncodingBindingElement encoding = null;
-            
+
             foreach (BindingElement bindingElement in bindingElements)
             {
                 if (bindingElement is UdpTransportBindingElement)
@@ -242,7 +243,7 @@ namespace System.ServiceModel
 
             if (!udpBinding.BindingElementsPropertiesMatch(transport, encoding))
             {
-                return false;    
+                return false;
             }
 
             binding = udpBinding;

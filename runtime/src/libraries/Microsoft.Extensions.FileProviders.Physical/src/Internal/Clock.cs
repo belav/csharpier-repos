@@ -9,9 +9,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
     {
         public static readonly Clock Instance = new Clock();
 
-        private Clock()
-        {
-        }
+        private Clock() { }
 
         public DateTime UtcNow => DateTime.UtcNow;
     }

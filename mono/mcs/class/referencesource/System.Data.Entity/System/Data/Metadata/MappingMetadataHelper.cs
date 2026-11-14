@@ -20,11 +20,18 @@ namespace System.Data.Metadata.Edm
     /// </summary>
     internal static class MappingMetadataHelper
     {
-
-        internal static IEnumerable<StorageTypeMapping> GetMappingsForEntitySetAndType(StorageMappingItemCollection mappingCollection, EntityContainer container, EntitySetBase entitySet, EntityTypeBase entityType)
+        internal static IEnumerable<StorageTypeMapping> GetMappingsForEntitySetAndType(
+            StorageMappingItemCollection mappingCollection,
+            EntityContainer container,
+            EntitySetBase entitySet,
+            EntityTypeBase entityType
+        )
         {
             Debug.Assert(entityType != null, "EntityType parameter should not be null.");
-            StorageEntityContainerMapping containerMapping = GetEntityContainerMap(mappingCollection, container);
+            StorageEntityContainerMapping containerMapping = GetEntityContainerMap(
+                mappingCollection,
+                container
+            );
             StorageSetMapping extentMap = containerMapping.GetSetMapping(entitySet.Name);
 
             //The Set may have no mapping
@@ -32,43 +39,94 @@ namespace System.Data.Metadata.Edm
             {
                 //for each mapping fragment of Type we are interested in within the given set
                 //Check use of IsOfTypes in Code review
-                foreach (StorageTypeMapping typeMap in extentMap.TypeMappings.Where(map => map.Types.Union(map.IsOfTypes).Contains(entityType)))
+                foreach (
+                    StorageTypeMapping typeMap in extentMap.TypeMappings.Where(map =>
+                        map.Types.Union(map.IsOfTypes).Contains(entityType)
+                    )
+                )
                 {
                     yield return typeMap;
                 }
             }
         }
 
-       /// <summary>
-       /// Returns all mapping fragments for the given entity set's types and their parent types.
-       /// </summary>
-        internal static IEnumerable<StorageTypeMapping> GetMappingsForEntitySetAndSuperTypes(StorageMappingItemCollection mappingCollection, EntityContainer container, EntitySetBase entitySet, EntityTypeBase childEntityType)
+        /// <summary>
+        /// Returns all mapping fragments for the given entity set's types and their parent types.
+        /// </summary>
+        internal static IEnumerable<StorageTypeMapping> GetMappingsForEntitySetAndSuperTypes(
+            StorageMappingItemCollection mappingCollection,
+            EntityContainer container,
+            EntitySetBase entitySet,
+            EntityTypeBase childEntityType
+        )
         {
-            return MetadataHelper.GetTypeAndParentTypesOf(childEntityType, mappingCollection.EdmItemCollection, true /*includeAbstractTypes*/).SelectMany(
-                edmType => 
-                    edmType.EdmEquals(childEntityType) ? 
-                      GetMappingsForEntitySetAndType(mappingCollection, container, entitySet, (edmType as EntityTypeBase))
-                    : GetIsTypeOfMappingsForEntitySetAndType(mappingCollection, container, entitySet, (edmType as EntityTypeBase), childEntityType)
-                ).ToList();
+            return MetadataHelper
+                .GetTypeAndParentTypesOf(
+                    childEntityType,
+                    mappingCollection.EdmItemCollection,
+                    true /*includeAbstractTypes*/
+                )
+                .SelectMany(edmType =>
+                    edmType.EdmEquals(childEntityType)
+                        ? GetMappingsForEntitySetAndType(
+                            mappingCollection,
+                            container,
+                            entitySet,
+                            (edmType as EntityTypeBase)
+                        )
+                        : GetIsTypeOfMappingsForEntitySetAndType(
+                            mappingCollection,
+                            container,
+                            entitySet,
+                            (edmType as EntityTypeBase),
+                            childEntityType
+                        )
+                )
+                .ToList();
         }
 
         /// <summary>
         /// Returns mappings for the given set/type only if the mapping applies also to childEntittyType either via IsTypeOf or explicitly specifying multiple types in mapping fragments.
         /// </summary>
-        private static IEnumerable<StorageTypeMapping> GetIsTypeOfMappingsForEntitySetAndType(StorageMappingItemCollection mappingCollection, EntityContainer container, EntitySetBase entitySet, EntityTypeBase entityType, EntityTypeBase childEntityType)
+        private static IEnumerable<StorageTypeMapping> GetIsTypeOfMappingsForEntitySetAndType(
+            StorageMappingItemCollection mappingCollection,
+            EntityContainer container,
+            EntitySetBase entitySet,
+            EntityTypeBase entityType,
+            EntityTypeBase childEntityType
+        )
         {
-            foreach (var mapping in GetMappingsForEntitySetAndType(mappingCollection, container, entitySet, entityType))
+            foreach (
+                var mapping in GetMappingsForEntitySetAndType(
+                    mappingCollection,
+                    container,
+                    entitySet,
+                    entityType
+                )
+            )
             {
-                if (mapping.IsOfTypes.Any(parentType => parentType.IsAssignableFrom(childEntityType)) || mapping.Types.Contains(childEntityType))
+                if (
+                    mapping.IsOfTypes.Any(parentType =>
+                        parentType.IsAssignableFrom(childEntityType)
+                    ) || mapping.Types.Contains(childEntityType)
+                )
                 {
                     yield return mapping;
                 }
             }
-        }      
+        }
 
-        internal static IEnumerable<StorageEntityTypeModificationFunctionMapping> GetModificationFunctionMappingsForEntitySetAndType(StorageMappingItemCollection mappingCollection, EntityContainer container, EntitySetBase entitySet, EntityTypeBase entityType)
+        internal static IEnumerable<StorageEntityTypeModificationFunctionMapping> GetModificationFunctionMappingsForEntitySetAndType(
+            StorageMappingItemCollection mappingCollection,
+            EntityContainer container,
+            EntitySetBase entitySet,
+            EntityTypeBase entityType
+        )
         {
-            StorageEntityContainerMapping containerMapping = GetEntityContainerMap(mappingCollection, container);
+            StorageEntityContainerMapping containerMapping = GetEntityContainerMap(
+                mappingCollection,
+                container
+            );
 
             StorageSetMapping extentMap = containerMapping.GetSetMapping(entitySet.Name);
             StorageEntitySetMapping entitySetMapping = extentMap as StorageEntitySetMapping;
@@ -78,23 +136,32 @@ namespace System.Data.Metadata.Edm
             {
                 if (entitySetMapping != null) //could be association set mapping
                 {
-                    foreach (var v in entitySetMapping.ModificationFunctionMappings.Where(functionMap => functionMap.EntityType.Equals(entityType)))
+                    foreach (
+                        var v in entitySetMapping.ModificationFunctionMappings.Where(functionMap =>
+                            functionMap.EntityType.Equals(entityType)
+                        )
+                    )
                     {
                         yield return v;
                     }
                 }
             }
-
         }
 
-        internal static StorageEntityContainerMapping GetEntityContainerMap(StorageMappingItemCollection mappingCollection, EntityContainer entityContainer)
+        internal static StorageEntityContainerMapping GetEntityContainerMap(
+            StorageMappingItemCollection mappingCollection,
+            EntityContainer entityContainer
+        )
         {
-            ReadOnlyCollection<StorageEntityContainerMapping> entityContainerMaps = mappingCollection.GetItems<StorageEntityContainerMapping>();
+            ReadOnlyCollection<StorageEntityContainerMapping> entityContainerMaps =
+                mappingCollection.GetItems<StorageEntityContainerMapping>();
             StorageEntityContainerMapping entityContainerMap = null;
             foreach (StorageEntityContainerMapping map in entityContainerMaps)
             {
-                if ((entityContainer.Equals(map.EdmEntityContainer))
-                    || (entityContainer.Equals(map.StorageEntityContainer)))
+                if (
+                    (entityContainer.Equals(map.EdmEntityContainer))
+                    || (entityContainer.Equals(map.StorageEntityContainer))
+                )
                 {
                     entityContainerMap = map;
                     break;
@@ -102,7 +169,11 @@ namespace System.Data.Metadata.Edm
             }
             if (entityContainerMap == null)
             {
-                throw new MappingException(System.Data.Entity.Strings.Mapping_NotFound_EntityContainer(entityContainer.Name));
+                throw new MappingException(
+                    System.Data.Entity.Strings.Mapping_NotFound_EntityContainer(
+                        entityContainer.Name
+                    )
+                );
             }
             return entityContainerMap;
         }

@@ -15,9 +15,7 @@ namespace Roslyn.Utilities
                 where TUnderlying : ICollection<T>
             {
                 public Collection(TUnderlying underlying)
-                    : base(underlying)
-                {
-                }
+                    : base(underlying) { }
 
                 public void Add(T item)
                 {
@@ -41,10 +39,7 @@ namespace Roslyn.Utilities
 
                 public int Count
                 {
-                    get
-                    {
-                        return this.Underlying.Count;
-                    }
+                    get { return this.Underlying.Count; }
                 }
 
                 public bool IsReadOnly => true;

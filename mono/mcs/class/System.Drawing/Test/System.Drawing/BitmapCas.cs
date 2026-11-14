@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,108 +26,113 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Drawing;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Drawing {
+namespace MonoCasTests.System.Drawing
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class BitmapCas
+    {
+        private MethodInfo getHbitmap1;
+        private MethodInfo getHbitmap2;
+        private MethodInfo getHicon;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class BitmapCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            // this executes at fulltrust
+            getHbitmap1 = typeof(Bitmap).GetMethod("GetHbitmap", new Type[0]);
+            getHbitmap2 = typeof(Bitmap).GetMethod("GetHbitmap", new Type[1] { typeof(Color) });
+            getHicon = typeof(Bitmap).GetMethod("GetHicon");
+        }
 
-		private MethodInfo getHbitmap1;
-		private MethodInfo getHbitmap2;
-		private MethodInfo getHicon;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// this executes at fulltrust
-			getHbitmap1 = typeof (Bitmap).GetMethod ("GetHbitmap", new Type[0]);
-			getHbitmap2 = typeof (Bitmap).GetMethod ("GetHbitmap", new Type[1] { typeof (Color) });
-			getHicon = typeof (Bitmap).GetMethod ("GetHicon");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        public void GetHbitmap()
+        {
+            Bitmap b = new Bitmap(10, 10);
+            try
+            {
+                Assert.IsTrue(b.GetHbitmap() != IntPtr.Zero, "GetHbitmap");
+            }
+            catch (NotImplementedException)
+            {
+                // not available on Mono
+            }
+            try
+            {
+                Assert.IsTrue(b.GetHbitmap(Color.Aqua) != IntPtr.Zero, "GetHbitmap(Color)");
+            }
+            catch (NotImplementedException)
+            {
+                // not available on Mono
+            }
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        public void GetHicon()
+        {
+            Bitmap b = new Bitmap(10, 10);
+            try
+            {
+                Assert.IsTrue(b.GetHicon() != IntPtr.Zero, "GetHicon");
+            }
+            catch (NotImplementedException)
+            {
+                // not available on Mono
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		public void GetHbitmap ()
-		{
-			Bitmap b = new Bitmap (10, 10);
-			try {
-				Assert.IsTrue (b.GetHbitmap () != IntPtr.Zero, "GetHbitmap");
-			}
-			catch (NotImplementedException) {
-				// not available on Mono
-			}
-			try {
-				Assert.IsTrue (b.GetHbitmap (Color.Aqua) != IntPtr.Zero, "GetHbitmap(Color)");
-			}
-			catch (NotImplementedException) {
-				// not available on Mono
-			}
-		}
+        // we use reflection to call Bitmap as it's GetHbitmap and GetHicon methods
+        // are protected by a LinkDemand (which will be converted into full demand,
+        // i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		public void GetHicon ()
-		{
-			Bitmap b = new Bitmap (10, 10);
-			try {
-				Assert.IsTrue (b.GetHicon () != IntPtr.Zero, "GetHicon");
-			}
-			catch (NotImplementedException) {
-				// not available on Mono
-			}
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetHbitmap_Empty_LinkDemand()
+        {
+            // requires FullTrust, so denying anything break the requirements
+            Assert.IsNotNull(getHbitmap1, "GetHbitmap");
+            Bitmap b = new Bitmap(10, 10);
+            getHbitmap1.Invoke(b, null);
+        }
 
-		// we use reflection to call Bitmap as it's GetHbitmap and GetHicon methods
-		// are protected by a LinkDemand (which will be converted into full demand, 
-		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetHbitmap_Color_LinkDemand()
+        {
+            // requires FullTrust, so denying anything break the requirements
+            Assert.IsNotNull(getHbitmap2, "GetHbitmap(Color)");
+            Bitmap b = new Bitmap(10, 10);
+            getHbitmap2.Invoke(b, new object[1] { Color.Aqua });
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetHbitmap_Empty_LinkDemand ()
-		{
-			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (getHbitmap1, "GetHbitmap");
-			Bitmap b = new Bitmap (10, 10);
-			getHbitmap1.Invoke (b, null);
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetHbitmap_Color_LinkDemand ()
-		{
-			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (getHbitmap2, "GetHbitmap(Color)");
-			Bitmap b = new Bitmap (10, 10);
-			getHbitmap2.Invoke (b, new object[1] { Color.Aqua });
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetHicon_LinkDemand ()
-		{
-			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (getHicon, "GetHicon");
-			Bitmap b = new Bitmap (10, 10);
-			getHicon.Invoke (b, null);
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetHicon_LinkDemand()
+        {
+            // requires FullTrust, so denying anything break the requirements
+            Assert.IsNotNull(getHicon, "GetHicon");
+            Bitmap b = new Bitmap(10, 10);
+            getHicon.Invoke(b, null);
+        }
+    }
 }

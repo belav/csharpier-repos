@@ -19,10 +19,17 @@ namespace Microsoft.Interop.JavaScript
             _elementMarshalerType = elementMarshalerType;
         }
 
-        public override IEnumerable<ExpressionSyntax> GenerateBind(TypePositionInfo info, StubCodeContext context)
+        public override IEnumerable<ExpressionSyntax> GenerateBind(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
-            yield return InvocationExpression(MarshalerTypeName(Type),
-                ArgumentList(SingletonSeparatedList(Argument(MarshalerTypeName(_elementMarshalerType)))));
+            yield return InvocationExpression(
+                MarshalerTypeName(Type),
+                ArgumentList(
+                    SingletonSeparatedList(Argument(MarshalerTypeName(_elementMarshalerType)))
+                )
+            );
         }
     }
 }

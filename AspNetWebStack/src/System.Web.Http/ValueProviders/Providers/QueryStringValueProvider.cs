@@ -10,8 +10,6 @@ namespace System.Web.Http.ValueProviders.Providers
     public class QueryStringValueProvider : NameValuePairsValueProvider
     {
         public QueryStringValueProvider(HttpActionContext actionContext, CultureInfo culture)
-            : base(actionContext.ControllerContext.Request.GetQueryNameValuePairs(), culture)
-        {
-        }
+            : base(actionContext.ControllerContext.Request.GetQueryNameValuePairs(), culture) { }
     }
 }

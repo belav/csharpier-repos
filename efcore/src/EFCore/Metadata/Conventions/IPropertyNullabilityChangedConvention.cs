@@ -18,5 +18,6 @@ public interface IPropertyNullabilityChangedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessPropertyNullabilityChanged(
         IConventionPropertyBuilder propertyBuilder,
-        IConventionContext<bool?> context);
+        IConventionContext<bool?> context
+    );
 }

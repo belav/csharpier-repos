@@ -4,10 +4,10 @@
 
 namespace System.Activities.Hosting
 {
+    using System.Activities.Tracking;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime;
-    using System.Activities.Tracking;
 
     // One workflow host should have one manager, and one manager should have one catalog.
     // One workflow instance should have one container as the instance itself would be
@@ -15,7 +15,11 @@ namespace System.Activities.Hosting
     public class WorkflowInstanceExtensionManager
     {
         // using an empty list instead of null simplifies our calculations immensely
-        internal static List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>> EmptyExtensionProviders = new List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>>(0);
+        internal static List<
+            KeyValuePair<Type, WorkflowInstanceExtensionProvider>
+        > EmptyExtensionProviders = new List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>>(
+            0
+        );
         internal static List<object> EmptySingletonExtensions = new List<object>(0);
 
         bool isReadonly;
@@ -25,28 +29,15 @@ namespace System.Activities.Hosting
         bool hasSingletonTrackingParticipant;
         bool hasSingletonPersistenceModule;
 
-        public WorkflowInstanceExtensionManager()
-        {
-        }
+        public WorkflowInstanceExtensionManager() { }
 
-        internal SymbolResolver SymbolResolver
-        {
-            get;
-            private set;
-        }
+        internal SymbolResolver SymbolResolver { get; private set; }
 
-        internal List<object> SingletonExtensions
-        {
-            get;
-            private set;
-        }
+        internal List<object> SingletonExtensions { get; private set; }
 
         internal List<object> AdditionalSingletonExtensions
         {
-            get
-            {
-                return this.additionalSingletonExtensions;
-            }
+            get { return this.additionalSingletonExtensions; }
         }
 
         internal List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>> ExtensionProviders
@@ -55,33 +46,19 @@ namespace System.Activities.Hosting
             private set;
         }
 
-        internal bool HasSingletonIWorkflowInstanceExtensions
-        {
-            get;
-            private set;
-        }
+        internal bool HasSingletonIWorkflowInstanceExtensions { get; private set; }
 
         internal bool HasSingletonTrackingParticipant
         {
-            get
-            {
-                return this.hasSingletonTrackingParticipant;
-            }
+            get { return this.hasSingletonTrackingParticipant; }
         }
 
         internal bool HasSingletonPersistenceModule
         {
-            get
-            {
-                return this.hasSingletonPersistenceModule;
-            }
+            get { return this.hasSingletonPersistenceModule; }
         }
 
-        internal bool HasAdditionalSingletonIWorkflowInstanceExtensions
-        {
-            get;
-            private set;
-        }
+        internal bool HasAdditionalSingletonIWorkflowInstanceExtensions { get; private set; }
 
         // use this method to add the singleton extension
         public virtual void Add(object singletonExtension)
@@ -97,7 +74,10 @@ namespace System.Activities.Hosting
             {
                 if (this.SymbolResolver != null)
                 {
-                    throw FxTrace.Exception.Argument("singletonExtension", SR.SymbolResolverAlreadyExists);
+                    throw FxTrace.Exception.Argument(
+                        "singletonExtension",
+                        SR.SymbolResolverAlreadyExists
+                    );
                 }
                 this.SymbolResolver = (SymbolResolver)singletonExtension;
             }
@@ -107,11 +87,17 @@ namespace System.Activities.Hosting
                 {
                     HasSingletonIWorkflowInstanceExtensions = true;
                 }
-                if (!this.HasSingletonTrackingParticipant && singletonExtension is TrackingParticipant)
+                if (
+                    !this.HasSingletonTrackingParticipant
+                    && singletonExtension is TrackingParticipant
+                )
                 {
                     this.hasSingletonTrackingParticipant = true;
                 }
-                if (!this.HasSingletonPersistenceModule && singletonExtension is IPersistencePipelineModule)
+                if (
+                    !this.HasSingletonPersistenceModule
+                    && singletonExtension is IPersistencePipelineModule
+                )
                 {
                     this.hasSingletonPersistenceModule = true;
                 }
@@ -126,7 +112,8 @@ namespace System.Activities.Hosting
         }
 
         // use this method to add a per-instance extension
-        public virtual void Add<T>(Func<T> extensionCreationFunction) where T : class
+        public virtual void Add<T>(Func<T> extensionCreationFunction)
+            where T : class
         {
             if (extensionCreationFunction == null)
             {
@@ -136,10 +123,16 @@ namespace System.Activities.Hosting
 
             if (this.ExtensionProviders == null)
             {
-                this.ExtensionProviders = new List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>>();
+                this.ExtensionProviders =
+                    new List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>>();
             }
 
-            this.ExtensionProviders.Add(new KeyValuePair<Type, WorkflowInstanceExtensionProvider>(typeof(T), new WorkflowInstanceExtensionProvider<T>(extensionCreationFunction)));
+            this.ExtensionProviders.Add(
+                new KeyValuePair<Type, WorkflowInstanceExtensionProvider>(
+                    typeof(T),
+                    new WorkflowInstanceExtensionProvider<T>(extensionCreationFunction)
+                )
+            );
         }
 
         internal List<object> GetAllSingletonExtensions()
@@ -160,15 +153,27 @@ namespace System.Activities.Hosting
             }
         }
 
-        internal static WorkflowInstanceExtensionCollection CreateInstanceExtensions(Activity workflowDefinition, WorkflowInstanceExtensionManager extensionManager)
+        internal static WorkflowInstanceExtensionCollection CreateInstanceExtensions(
+            Activity workflowDefinition,
+            WorkflowInstanceExtensionManager extensionManager
+        )
         {
-            Fx.Assert(workflowDefinition.IsRuntimeReady, "activity should be ready with extensions after a successful CacheMetadata call");
+            Fx.Assert(
+                workflowDefinition.IsRuntimeReady,
+                "activity should be ready with extensions after a successful CacheMetadata call"
+            );
             if (extensionManager != null)
             {
                 extensionManager.MakeReadOnly();
-                return new WorkflowInstanceExtensionCollection(workflowDefinition, extensionManager);
+                return new WorkflowInstanceExtensionCollection(
+                    workflowDefinition,
+                    extensionManager
+                );
             }
-            else if ((workflowDefinition.DefaultExtensionsCount > 0) || (workflowDefinition.RequiredExtensionTypesCount > 0))
+            else if (
+                (workflowDefinition.DefaultExtensionsCount > 0)
+                || (workflowDefinition.RequiredExtensionTypesCount > 0)
+            )
             {
                 return new WorkflowInstanceExtensionCollection(workflowDefinition, null);
             }
@@ -178,10 +183,16 @@ namespace System.Activities.Hosting
             }
         }
 
-        internal static void AddExtensionClosure(object newExtension, ref List<object> targetCollection, ref bool addedTrackingParticipant, ref bool addedPersistenceModule)
+        internal static void AddExtensionClosure(
+            object newExtension,
+            ref List<object> targetCollection,
+            ref bool addedTrackingParticipant,
+            ref bool addedPersistenceModule
+        )
         {
             // see if we need to process "additional" extensions
-            IWorkflowInstanceExtension currentInstanceExtension = newExtension as IWorkflowInstanceExtension;
+            IWorkflowInstanceExtension currentInstanceExtension =
+                newExtension as IWorkflowInstanceExtension;
             if (currentInstanceExtension == null)
             {
                 return; // bail early
@@ -195,7 +206,8 @@ namespace System.Activities.Hosting
 
             while (currentInstanceExtension != null)
             {
-                IEnumerable<object> additionalExtensions = currentInstanceExtension.GetAdditionalExtensions();
+                IEnumerable<object> additionalExtensions =
+                    currentInstanceExtension.GetAdditionalExtensions();
                 if (additionalExtensions != null)
                 {
                     foreach (object additionalExtension in additionalExtensions)
@@ -205,15 +217,21 @@ namespace System.Activities.Hosting
                         {
                             if (additionalInstanceExtensions == null)
                             {
-                                additionalInstanceExtensions = new Queue<IWorkflowInstanceExtension>();
+                                additionalInstanceExtensions =
+                                    new Queue<IWorkflowInstanceExtension>();
                             }
-                            additionalInstanceExtensions.Enqueue((IWorkflowInstanceExtension)additionalExtension);
+                            additionalInstanceExtensions.Enqueue(
+                                (IWorkflowInstanceExtension)additionalExtension
+                            );
                         }
                         if (!addedTrackingParticipant && additionalExtension is TrackingParticipant)
                         {
                             addedTrackingParticipant = true;
                         }
-                        if (!addedPersistenceModule && additionalExtension is IPersistencePipelineModule)
+                        if (
+                            !addedPersistenceModule
+                            && additionalExtension is IPersistencePipelineModule
+                        )
                         {
                             addedPersistenceModule = true;
                         }
@@ -241,9 +259,16 @@ namespace System.Activities.Hosting
                 {
                     if (HasSingletonIWorkflowInstanceExtensions)
                     {
-                        foreach (IWorkflowInstanceExtension additionalExtensionProvider in this.SingletonExtensions.OfType<IWorkflowInstanceExtension>())
+                        foreach (
+                            IWorkflowInstanceExtension additionalExtensionProvider in this.SingletonExtensions.OfType<IWorkflowInstanceExtension>()
+                        )
                         {
-                            AddExtensionClosure(additionalExtensionProvider, ref this.additionalSingletonExtensions, ref this.hasSingletonTrackingParticipant, ref this.hasSingletonPersistenceModule);
+                            AddExtensionClosure(
+                                additionalExtensionProvider,
+                                ref this.additionalSingletonExtensions,
+                                ref this.hasSingletonTrackingParticipant,
+                                ref this.hasSingletonPersistenceModule
+                            );
                         }
 
                         if (this.AdditionalSingletonExtensions != null)
@@ -261,7 +286,10 @@ namespace System.Activities.Hosting
                     }
 
                     this.allSingletonExtensions = this.SingletonExtensions;
-                    if (this.AdditionalSingletonExtensions != null && this.AdditionalSingletonExtensions.Count > 0)
+                    if (
+                        this.AdditionalSingletonExtensions != null
+                        && this.AdditionalSingletonExtensions.Count > 0
+                    )
                     {
                         this.allSingletonExtensions = new List<object>(this.SingletonExtensions);
                         this.allSingletonExtensions.AddRange(this.AdditionalSingletonExtensions);
@@ -286,7 +314,9 @@ namespace System.Activities.Hosting
         {
             if (this.isReadonly)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ExtensionsCannotBeModified));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.ExtensionsCannotBeModified)
+                );
             }
         }
     }

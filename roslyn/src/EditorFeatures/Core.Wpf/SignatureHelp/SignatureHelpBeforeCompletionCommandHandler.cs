@@ -25,12 +25,12 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
     /// sig help wants to allow completion to complete that to "WriteLine(" before it tried to
     /// proffer sig help. If we were to reverse things, then we'd get a bogus situation where sig
     /// help would see "WriteL(" would have nothing to offer and would return.
-    /// 
+    ///
     /// However, despite wanting sighelp to receive typechar first and then defer it to completion,
     /// we want completion to receive other events first (like escape, and navigation keys). We
     /// consider completion to have higher priority for those commands. In order to accomplish that,
     /// we introduced <see cref="SignatureHelpAfterCompletionCommandHandler"/>
-    /// This command handler then delegates escape, up and down to those command handlers. 
+    /// This command handler then delegates escape, up and down to those command handlers.
     /// It is called before <see cref="PredefinedCompletionNames.CompletionCommandHandler"/>.
     /// </summary>
     [Export]
@@ -41,10 +41,10 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
     // Ensure roslyn comes after LSP to allow them to provide results.
     // https://github.com/dotnet/roslyn/issues/42338
     [Order(After = "LSP SignatureHelpCommandHandler")]
-    internal class SignatureHelpBeforeCompletionCommandHandler :
-        AbstractSignatureHelpCommandHandler,
-        IChainedCommandHandler<TypeCharCommandArgs>,
-        IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
+    internal class SignatureHelpBeforeCompletionCommandHandler
+        : AbstractSignatureHelpCommandHandler,
+            IChainedCommandHandler<TypeCharCommandArgs>,
+            IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
     {
         public string DisplayName => EditorFeaturesResources.Signature_Help;
 
@@ -53,12 +53,14 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public SignatureHelpBeforeCompletionCommandHandler(
             IThreadingContext threadingContext,
             SignatureHelpControllerProvider controllerProvider,
-            IGlobalOptionService globalOptions)
-            : base(threadingContext, controllerProvider, globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(threadingContext, controllerProvider, globalOptions) { }
 
-        private bool TryGetControllerCommandHandler<TCommandArgs>(TCommandArgs args, out ICommandHandler commandHandler)
+        private bool TryGetControllerCommandHandler<TCommandArgs>(
+            TCommandArgs args,
+            out ICommandHandler commandHandler
+        )
             where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 
         private CommandState GetCommandStateWorker<TCommandArgs>(
             TCommandArgs args,
-            Func<CommandState> nextHandler)
+            Func<CommandState> nextHandler
+        )
             where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         private void ExecuteCommandWorker<TCommandArgs>(
             TCommandArgs args,
             Action nextHandler,
-            CommandExecutionContext context)
+            CommandExecutionContext context
+        )
             where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
@@ -100,25 +104,39 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             }
         }
 
-        CommandState IChainedCommandHandler<TypeCharCommandArgs>.GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextHandler)
+        CommandState IChainedCommandHandler<TypeCharCommandArgs>.GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextHandler
+        )
         {
             AssertIsForeground();
             return GetCommandStateWorker(args, nextHandler);
         }
 
-        void IChainedCommandHandler<TypeCharCommandArgs>.ExecuteCommand(TypeCharCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        void IChainedCommandHandler<TypeCharCommandArgs>.ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             AssertIsForeground();
             ExecuteCommandWorker(args, nextHandler, context);
         }
 
-        CommandState IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.GetCommandState(InvokeSignatureHelpCommandArgs args, Func<CommandState> nextHandler)
+        CommandState IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.GetCommandState(
+            InvokeSignatureHelpCommandArgs args,
+            Func<CommandState> nextHandler
+        )
         {
             AssertIsForeground();
             return CommandState.Available;
         }
 
-        void IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.ExecuteCommand(InvokeSignatureHelpCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        void IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.ExecuteCommand(
+            InvokeSignatureHelpCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             AssertIsForeground();
             ExecuteCommandWorker(args, nextHandler, context);

@@ -27,7 +27,7 @@ public class Runtime_63354
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    internal static void Box(object o) {}
+    internal static void Box(object o) { }
 
     [Fact]
     public static int TestEntryPoint()

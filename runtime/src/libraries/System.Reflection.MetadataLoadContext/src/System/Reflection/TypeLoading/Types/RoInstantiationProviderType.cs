@@ -11,9 +11,7 @@ namespace System.Reflection.TypeLoading
     internal abstract partial class RoInstantiationProviderType : RoType
     {
         protected RoInstantiationProviderType()
-            : base()
-        {
-        }
+            : base() { }
 
         internal abstract RoType[] Instantiation { get; }
     }

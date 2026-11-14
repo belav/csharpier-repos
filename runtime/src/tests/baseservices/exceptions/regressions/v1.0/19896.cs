@@ -5,31 +5,30 @@ using Xunit;
 
 public class b19896
 {
-	[Fact]
-	public static int TestEntryPoint()
-	{
-		int retVal = 200;
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        int retVal = 200;
 
-		try
-		{
-			try
-			{
-				throw new Exception();
-			}
-			catch
-			{
-				Type.GetType("System.Foo", true);
-			}
-		}
+        try
+        {
+            try
+            {
+                throw new Exception();
+            }
+            catch
+            {
+                Type.GetType("System.Foo", true);
+            }
+        }
+        catch (System.TypeLoadException)
+        {
+            Console.WriteLine("TEST PASSED");
+            retVal = 100;
+        }
 
-		catch(System.TypeLoadException)
-		{
-			Console.WriteLine("TEST PASSED");
-			retVal = 100;
-		}
-
-		return retVal;
-	}
+        return retVal;
+    }
 }
 
 //EOF

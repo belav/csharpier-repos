@@ -30,10 +30,7 @@ namespace System.Activities.Statements
 
         public int Count
         {
-            get
-            {
-                return this.sortedTimerList.Count;
-            }
+            get { return this.sortedTimerList.Count; }
         }
 
         [DataMember(Name = "sortedTimerList")]
@@ -45,13 +42,18 @@ namespace System.Activities.Statements
 
         public void AddTimer(TimeSpan timeout, Bookmark bookmark)
         {
-            // Add timer is only called on the workflow thread, 
-            // It can't be racing with the persistence thread. 
+            // Add timer is only called on the workflow thread,
+            // It can't be racing with the persistence thread.
             // So the table MUST be mutable when this method is called
             Fx.Assert(!this.isImmutable, "Add timer is called when table is immutable");
             DateTime dueTime = TimeoutHelper.Add(DateTime.UtcNow, timeout);
             TimerData timerData = new TimerData(bookmark, dueTime);
-            timerData.IOThreadTimer = new IOThreadTimer(this.timerExtension.OnTimerFiredCallback, bookmark, false, 0);
+            timerData.IOThreadTimer = new IOThreadTimer(
+                this.timerExtension.OnTimerFiredCallback,
+                bookmark,
+                false,
+                0
+            );
             timerData.IOThreadTimer.Set(timeout);
             this.sortedTimerList.Add(timerData);
         }
@@ -59,12 +61,12 @@ namespace System.Activities.Statements
         public void RemoveTimer(Bookmark bookmark)
         {
             // When IOThread Timer calls back, it will call remove timer
-            // In another thread, we may be in the middle of persistence. 
+            // In another thread, we may be in the middle of persistence.
             // During persisting, we will mark the table as immutable
             // After we are done writing to the database, we will buffer the remove request
-            // Meanwhile, since we are not scheduling any IOThreadTimers, 
+            // Meanwhile, since we are not scheduling any IOThreadTimers,
             // we can only have at most one pending Remove request
-            // We don't want to remove 
+            // We don't want to remove
             if (!this.isImmutable)
             {
                 TimerData expirationTimeData;
@@ -94,12 +96,12 @@ namespace System.Activities.Statements
             const int retryDuration = 10;
 
             // When IOThread Timer calls back, it might call RetryTimer timer if ResumeBookmark returned notReady
-            // In another thread, we may be in the middle of persistence. 
+            // In another thread, we may be in the middle of persistence.
             // During persisting, we will mark the table as immutable
             // After we are done writing to the database, we will buffer the remove request
-            // Meanwhile, since we are not scheduling any IOThreadTimers, 
+            // Meanwhile, since we are not scheduling any IOThreadTimers,
             // we can only have at most one pending Remove request
-            // We don't want to remove 
+            // We don't want to remove
             if (!this.isImmutable)
             {
                 // We only retry the timer IFF no one has removed it from the table
@@ -144,7 +146,12 @@ namespace System.Activities.Statements
 
             foreach (TimerData timerData in this.sortedTimerList.Timers)
             {
-                timerData.IOThreadTimer = new IOThreadTimer(this.timerExtension.OnTimerFiredCallback, timerData.Bookmark, false, 0);
+                timerData.IOThreadTimer = new IOThreadTimer(
+                    this.timerExtension.OnTimerFiredCallback,
+                    timerData.Bookmark,
+                    false,
+                    0
+                );
                 if (timerData.ExpirationTime <= DateTime.UtcNow)
                 {
                     // If the timer expired, we want to fire it immediately to win the ---- against UnloadOnIdle policy
@@ -214,36 +221,20 @@ namespace System.Activities.Statements
                 this.Bookmark = timerBookmark;
                 this.ExpirationTime = expirationTime;
             }
-            
+
             public Bookmark Bookmark
             {
-                get
-                {
-                    return this.bookmark;
-                }
-                private set
-                {
-                    this.bookmark = value;
-                }
-            }
-            
-            public DateTime ExpirationTime
-            {
-                get
-                {
-                    return this.expirationTime;
-                }
-                private set
-                {
-                    this.expirationTime = value;
-                }
+                get { return this.bookmark; }
+                private set { this.bookmark = value; }
             }
 
-            public IOThreadTimer IOThreadTimer
+            public DateTime ExpirationTime
             {
-                get;
-                set;
+                get { return this.expirationTime; }
+                private set { this.expirationTime = value; }
             }
+
+            public IOThreadTimer IOThreadTimer { get; set; }
 
             [DataMember(Name = "Bookmark")]
             internal Bookmark SerializedBookmark
@@ -277,18 +268,12 @@ namespace System.Activities.Statements
 
             public List<TimerData> Timers
             {
-                get
-                {
-                    return this.list;
-                }
+                get { return this.list; }
             }
 
             public int Count
             {
-                get
-                {
-                    return this.list.Count;
-                }
+                get { return this.list.Count; }
             }
 
             [DataMember(Name = "list")]
@@ -386,7 +371,11 @@ namespace System.Activities.Statements
                                 {
                                     if (y.Bookmark.IsNamed)
                                     {
-                                        return string.Compare(x.Bookmark.Name, y.Bookmark.Name, StringComparison.OrdinalIgnoreCase);
+                                        return string.Compare(
+                                            x.Bookmark.Name,
+                                            y.Bookmark.Name,
+                                            StringComparison.OrdinalIgnoreCase
+                                        );
                                     }
                                     else
                                     {

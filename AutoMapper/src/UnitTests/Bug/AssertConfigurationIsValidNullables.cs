@@ -6,15 +6,18 @@ public class AssertConfigurationIsValidNullables : AutoMapperSpecBase
     {
         public int? Number { get; set; }
     }
+
     class Destination
     {
         public decimal? Number { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
+
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }

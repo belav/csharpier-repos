@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,151 +26,160 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("ff751edc-8b02-aae7-0010-8301838a3123")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMMouseEvent : nsIDOMUIEvent
+    {
+        #region nsIDOMEvent
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getType( /*DOMString*/
+            HandleRef ret
+        );
 
-	[Guid ("ff751edc-8b02-aae7-0010-8301838a3123")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMMouseEvent : nsIDOMUIEvent {
-#region nsIDOMEvent
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getType (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getTarget([MarshalAs(UnmanagedType.Interface)] out nsIDOMEventTarget ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCurrentTarget([MarshalAs(UnmanagedType.Interface)] out nsIDOMEventTarget ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCurrentTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getEventPhase(out ushort ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getEventPhase ( out ushort ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getBubbles(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getBubbles ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCancelable(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCancelable ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getTimeStamp(out int ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getTimeStamp ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int stopPropagation();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int stopPropagation ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int preventDefault();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int preventDefault ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int initEvent(
+            /*DOMString*/HandleRef eventTypeArg,
+            bool canBubbleArg,
+            bool cancelableArg
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int initEvent (
-				   /*DOMString*/ HandleRef eventTypeArg,
-				   bool canBubbleArg,
-				   bool cancelableArg);
+        #endregion
 
-#endregion
+        #region nsIDOMUIEvent
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getView([MarshalAs(UnmanagedType.Interface)] out nsIDOMAbstractView ret);
 
-#region nsIDOMUIEvent
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getView ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMAbstractView ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDetail(out int ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDetail ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int initUIEvent(
+            /*DOMString*/HandleRef typeArg,
+            bool canBubbleArg,
+            bool cancelableArg,
+            [MarshalAs(UnmanagedType.Interface)] nsIDOMAbstractView viewArg,
+            int detailArg
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int initUIEvent (
-				   /*DOMString*/ HandleRef typeArg,
-				   bool canBubbleArg,
-				   bool cancelableArg,
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMAbstractView viewArg,
-				   int detailArg);
+        #endregion
 
-#endregion
+        #region nsIDOMMouseEvent
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getScreenX(out int ret);
 
-#region nsIDOMMouseEvent
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getScreenX ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getScreenY(out int ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getScreenY ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getClientX(out int ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getClientX ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getClientY(out int ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getClientY ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCtrlKey(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCtrlKey ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getShiftKey(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getShiftKey ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAltKey(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAltKey ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getMetaKey(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getMetaKey ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getButton(out ushort ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getButton ( out ushort ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getRelatedTarget([MarshalAs(UnmanagedType.Interface)] out nsIDOMEventTarget ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getRelatedTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int initMouseEvent(
+            /*DOMString*/HandleRef typeArg,
+            bool canBubbleArg,
+            bool cancelableArg,
+            [MarshalAs(UnmanagedType.Interface)] nsIDOMAbstractView viewArg,
+            int detailArg,
+            int screenXArg,
+            int screenYArg,
+            int clientXArg,
+            int clientYArg,
+            bool ctrlKeyArg,
+            bool altKeyArg,
+            bool shiftKeyArg,
+            bool metaKeyArg,
+            ushort buttonArg,
+            [MarshalAs(UnmanagedType.Interface)] nsIDOMEventTarget relatedTargetArg
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int initMouseEvent (
-				   /*DOMString*/ HandleRef typeArg,
-				   bool canBubbleArg,
-				   bool cancelableArg,
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMAbstractView viewArg,
-				   int detailArg,
-				   int screenXArg,
-				   int screenYArg,
-				   int clientXArg,
-				   int clientYArg,
-				   bool ctrlKeyArg,
-				   bool altKeyArg,
-				   bool shiftKeyArg,
-				   bool metaKeyArg,
-				   ushort buttonArg,
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMEventTarget relatedTargetArg);
+        #endregion
+    }
 
-#endregion
-	}
-
-
-	internal class nsDOMMouseEvent {
-		public static nsIDOMMouseEvent GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMMouseEvent obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMMouseEvent).GUID, obj);
-			return o as nsIDOMMouseEvent;
-		}
-	}
+    internal class nsDOMMouseEvent
+    {
+        public static nsIDOMMouseEvent GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMMouseEvent obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMMouseEvent).GUID, obj);
+            return o as nsIDOMMouseEvent;
+        }
+    }
 }

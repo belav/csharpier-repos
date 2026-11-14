@@ -7,11 +7,10 @@ namespace System.ServiceModel.Channels
     using System.Diagnostics;
     using System.Runtime;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
-    abstract class IdlingCommunicationPool<TKey, TItem>
-        : CommunicationPool<TKey, TItem>
+    abstract class IdlingCommunicationPool<TKey, TItem> : CommunicationPool<TKey, TItem>
         where TKey : class
         where TItem : class
     {
@@ -57,7 +56,10 @@ namespace System.ServiceModel.Channels
         {
             IdleTimeoutIdleConnectionPool connections;
 
-            public IdleTimeoutEndpointConnectionPool(IdlingCommunicationPool<TKey, TItem> parent, TKey key)
+            public IdleTimeoutEndpointConnectionPool(
+                IdlingCommunicationPool<TKey, TItem> parent,
+                TKey key
+            )
                 : base(parent, key)
             {
                 this.connections = new IdleTimeoutIdleConnectionPool(this, this.ThisLock);
@@ -96,7 +98,7 @@ namespace System.ServiceModel.Channels
 
             protected class IdleTimeoutIdleConnectionPool : PoolIdleConnectionPool
             {
-                // for performance reasons we don't just blindly start a timer up to clean up 
+                // for performance reasons we don't just blindly start a timer up to clean up
                 // idle connections. However, if we're above a certain threshold of connections
                 const int timerThreshold = 1;
 
@@ -112,11 +114,16 @@ namespace System.ServiceModel.Channels
                 // lock around our Dictionary access
                 Dictionary<TItem, IdlingConnectionSettings> connectionMapping;
 
-                public IdleTimeoutIdleConnectionPool(IdleTimeoutEndpointConnectionPool parent, object thisLock)
+                public IdleTimeoutIdleConnectionPool(
+                    IdleTimeoutEndpointConnectionPool parent,
+                    object thisLock
+                )
                     : base(parent.Parent.MaxIdleConnectionPoolCount)
                 {
                     this.parent = parent;
-                    IdlingCommunicationPool<TKey, TItem> idlingCommunicationPool = ((IdlingCommunicationPool<TKey, TItem>)parent.Parent);
+                    IdlingCommunicationPool<TKey, TItem> idlingCommunicationPool = (
+                        (IdlingCommunicationPool<TKey, TItem>)parent.Parent
+                    );
                     this.idleTimeout = idlingCommunicationPool.idleTimeout;
                     this.leaseTimeout = idlingCommunicationPool.leaseTimeout;
                     this.thisLock = thisLock;
@@ -231,7 +238,9 @@ namespace System.ServiceModel.Channels
                     }
 
                     // allocate half the idle timeout for our g----ful shutdowns
-                    TimeoutHelper timeoutHelper = new TimeoutHelper(TimeoutHelper.Divide(this.idleTimeout, 2));
+                    TimeoutHelper timeoutHelper = new TimeoutHelper(
+                        TimeoutHelper.Divide(this.idleTimeout, 2)
+                    );
                     for (int i = 0; i < itemsToClose.Count; i++)
                     {
                         parent.CloseIdleConnection(itemsToClose[i], timeoutHelper.RemainingTime());
@@ -258,7 +267,10 @@ namespace System.ServiceModel.Channels
                         {
                             bool closeItem;
                             connectionsCopy[i] = base.Take(out closeItem);
-                            Fx.Assert(connectionsCopy[i] != null, "IdleConnections should only be modified under thisLock");
+                            Fx.Assert(
+                                connectionsCopy[i] != null,
+                                "IdleConnections should only be modified under thisLock"
+                            );
                             if (closeItem || IdleOutConnection(connectionsCopy[i], now))
                             {
                                 itemsToClose.Add(connectionsCopy[i]);
@@ -271,7 +283,10 @@ namespace System.ServiceModel.Channels
                             if (connectionsCopy[i] != null)
                             {
                                 bool successfulReturn = base.Return(connectionsCopy[i]);
-                                Fx.Assert(successfulReturn, "IdleConnections should only be modified under thisLock");
+                                Fx.Assert(
+                                    successfulReturn,
+                                    "IdleConnections should only be modified under thisLock"
+                                );
                             }
                         }
 
@@ -317,7 +332,9 @@ namespace System.ServiceModel.Channels
                             {
                                 Exception exceptionToThrow = this.pendingException;
                                 this.pendingException = null;
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exceptionToThrow);
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    exceptionToThrow
+                                );
                             }
                         }
                     }
@@ -327,14 +344,25 @@ namespace System.ServiceModel.Channels
                 {
                     if (TD.LeaseTimeoutIsEnabled())
                     {
-                        TD.LeaseTimeout(SR.GetString(SR.TraceCodeConnectionPoolLeaseTimeoutReached, this.leaseTimeout), this.parent.Key.ToString());
+                        TD.LeaseTimeout(
+                            SR.GetString(
+                                SR.TraceCodeConnectionPoolLeaseTimeoutReached,
+                                this.leaseTimeout
+                            ),
+                            this.parent.Key.ToString()
+                        );
                     }
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Information,
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
                             TraceCode.ConnectionPoolLeaseTimeoutReached,
-                            SR.GetString(SR.TraceCodeConnectionPoolLeaseTimeoutReached, this.leaseTimeout),
-                            this);
+                            SR.GetString(
+                                SR.TraceCodeConnectionPoolLeaseTimeoutReached,
+                                this.leaseTimeout
+                            ),
+                            this
+                        );
                     }
                 }
 
@@ -342,14 +370,25 @@ namespace System.ServiceModel.Channels
                 {
                     if (TD.IdleTimeoutIsEnabled())
                     {
-                        TD.IdleTimeout(SR.GetString(SR.TraceCodeConnectionPoolIdleTimeoutReached, this.idleTimeout), this.parent.Key.ToString());
+                        TD.IdleTimeout(
+                            SR.GetString(
+                                SR.TraceCodeConnectionPoolIdleTimeoutReached,
+                                this.idleTimeout
+                            ),
+                            this.parent.Key.ToString()
+                        );
                     }
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Information,
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
                             TraceCode.ConnectionPoolIdleTimeoutReached,
-                            SR.GetString(SR.TraceCodeConnectionPoolIdleTimeoutReached, this.idleTimeout),
-                            this);
+                            SR.GetString(
+                                SR.TraceCodeConnectionPoolIdleTimeoutReached,
+                                this.idleTimeout
+                            ),
+                            this
+                        );
                     }
                 }
 

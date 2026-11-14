@@ -8,7 +8,8 @@ namespace System.Text.RegularExpressions.Symbolic
 {
     /// <summary>An insertion-ordered map that supports small int keys.</summary>
     /// <remarks>Uses a sparse array of the same size as the space of keys for efficient lookups.</remarks>
-    internal sealed class SparseIntMap<T> where T : struct
+    internal sealed class SparseIntMap<T>
+        where T : struct
     {
         private const int InitialCapacity = 16;
 

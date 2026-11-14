@@ -4,32 +4,32 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Globalization;
     using System.Reflection;
-    using System.Web.Util;
     using System.Security.Permissions;
-
+    using System.Web.Util;
 
     /// <devdoc>
     /// TypeConverter for ControlParameter's PropertyName property.
     /// </devdoc>
-    public class ControlPropertyNameConverter : StringConverter {
-
+    public class ControlPropertyNameConverter : StringConverter
+    {
         /// <devdoc>
         /// Returns a list of all the propery names for a given control.
         /// </devdoc>
-        private string[] GetPropertyNames(Control control) {
-
+        private string[] GetPropertyNames(Control control)
+        {
             ArrayList array = new ArrayList();
 
             PropertyDescriptorCollection pdc = TypeDescriptor.GetProperties(control.GetType());
 
-            foreach (PropertyDescriptor desc in pdc) {
+            foreach (PropertyDescriptor desc in pdc)
+            {
                 array.Add(desc.Name);
             }
 
@@ -38,13 +38,14 @@ namespace System.Web.UI.WebControls {
             return (string[])array.ToArray(typeof(string));
         }
 
-
         /// <devdoc>
         /// Returns a collection of standard values retrieved from the context specified
         /// by the specified type descriptor.
         /// </devdoc>
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) {
-            if (context == null) {
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            if (context == null)
+            {
                 return null;
             }
 
@@ -58,7 +59,10 @@ namespace System.Web.UI.WebControls {
 
             // Get designer host
             IDesignerHost host = (IDesignerHost)context.GetService(typeof(IDesignerHost));
-            Debug.Assert(host != null, "Unable to get IDesignerHost in ControlPropertyNameConverter");
+            Debug.Assert(
+                host != null,
+                "Unable to get IDesignerHost in ControlPropertyNameConverter"
+            );
 
             if (host == null)
                 return null;
@@ -76,21 +80,20 @@ namespace System.Web.UI.WebControls {
             return new StandardValuesCollection(propertyNames);
         }
 
-
         /// <devdoc>
         /// Gets whether or not the context specified contains exclusive standard values.
         /// </devdoc>
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) {
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
             return false;
         }
-
 
         /// <devdoc>
         /// Gets whether or not the specified context contains supported standard values.
         /// </devdoc>
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
             return (context != null);
         }
     }
 }
-

@@ -12,8 +12,10 @@ namespace System
     internal readonly ref struct ByReference
     {
         public readonly ref byte Value;
+
         public ByReference(ref byte value) => Value = ref value;
 
-        public static ByReference Create<T>(ref T p) => new ByReference(ref Unsafe.As<T, byte>(ref p));
+        public static ByReference Create<T>(ref T p) =>
+            new ByReference(ref Unsafe.As<T, byte>(ref p));
     }
 }

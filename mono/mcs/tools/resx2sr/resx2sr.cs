@@ -61,243 +61,299 @@
  */
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Resources;
 using System.ComponentModel.Design;
+using System.IO;
+using System.Resources;
 using System.Text.RegularExpressions;
 using Mono.Options;
 
 public class Program
 {
-	class CmdOptions
-	{
-		public bool ShowHelp { get; set; }
-		public string OutputFile { get; set; }
-		public bool ExistingOnly { get; set; }
-		public bool WarnConstantMismatch { get; set; }
-	}
+    class CmdOptions
+    {
+        public bool ShowHelp { get; set; }
+        public string OutputFile { get; set; }
+        public bool ExistingOnly { get; set; }
+        public bool WarnConstantMismatch { get; set; }
+    }
 
-	internal static List<string> InputFiles;
-	internal static Dictionary<string, object> ExistingKeys;
+    internal static List<string> InputFiles;
+    internal static Dictionary<string, object> ExistingKeys;
 
-	public static int Main (string[] args)
-	{
-		var options = new CmdOptions ();
+    public static int Main(string[] args)
+    {
+        var options = new CmdOptions();
 
-		InputFiles = new List<string> ();
-		ExistingKeys = new Dictionary<string, object> ();
+        InputFiles = new List<string>();
+        ExistingKeys = new Dictionary<string, object>();
 
-		string className = "SR";
+        string className = "SR";
 
-		var p = new OptionSet () {
-			{ "o|out=", "Specifies output file name",
-				v => options.OutputFile = v },
-			{ "i|in=", "Specifies input file name",
-				v => InputFiles.Add (v) },
-			{ "n|name=", "Name for generated class, default is 'SR'",
-				v => className = v },
-			{ "h|help",  "Display available options",
-				v => options.ShowHelp = v != null },
-			{ "e|existing", "Only update existing values, do not add keys",
-				v => options.ExistingOnly = true
-			}, { "warn-mismatch", "Warn about constant mismatches",
-				v => options.WarnConstantMismatch = true
-			}
-		};
+        var p = new OptionSet()
+        {
+            { "o|out=", "Specifies output file name", v => options.OutputFile = v },
+            { "i|in=", "Specifies input file name", v => InputFiles.Add(v) },
+            { "n|name=", "Name for generated class, default is 'SR'", v => className = v },
+            { "h|help", "Display available options", v => options.ShowHelp = v != null },
+            {
+                "e|existing",
+                "Only update existing values, do not add keys",
+                v => options.ExistingOnly = true
+            },
+            {
+                "warn-mismatch",
+                "Warn about constant mismatches",
+                v => options.WarnConstantMismatch = true
+            },
+        };
 
-		List<string> extra;
-		try {
-			extra = p.Parse (args);
-		} catch (OptionException e) {
-			Console.WriteLine (e.Message);
-			Console.WriteLine ("Try 'resx2sr -help' for more information.");
-			return 1;
-		}
+        List<string> extra;
+        try
+        {
+            extra = p.Parse(args);
+        }
+        catch (OptionException e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine("Try 'resx2sr -help' for more information.");
+            return 1;
+        }
 
-		if (options.ShowHelp) {
-			ShowHelp (p);
-			return 0;
-		}
+        if (options.ShowHelp)
+        {
+            ShowHelp(p);
+            return 0;
+        }
 
-		if (extra.Count < 1) {
-			ShowHelp (p);
-			return 2;
-		}
+        if (extra.Count < 1)
+        {
+            ShowHelp(p);
+            return 2;
+        }
 
-		if (!LoadInputFiles ())
-			return 4;
+        if (!LoadInputFiles())
+            return 4;
 
-		var resxStrings = new List<Tuple<string, string, string>> ();
-		if (!LoadStrings (resxStrings, extra))
-			return 3;
+        var resxStrings = new List<Tuple<string, string, string>>();
+        if (!LoadStrings(resxStrings, extra))
+            return 3;
 
-		GenerateFile (className, resxStrings, options);
+        GenerateFile(className, resxStrings, options);
 
-		return 0;
-	}
+        return 0;
+    }
 
-	static void ShowHelp (OptionSet p)
-	{
-		Console.WriteLine ("Usage: resx2sr [options] input-files");
-		Console.WriteLine ("Generates C# file with string constants from resource file");
-		Console.WriteLine ();
-		Console.WriteLine ("Options:");
-		p.WriteOptionDescriptions (Console.Out);
-	}
+    static void ShowHelp(OptionSet p)
+    {
+        Console.WriteLine("Usage: resx2sr [options] input-files");
+        Console.WriteLine("Generates C# file with string constants from resource file");
+        Console.WriteLine();
+        Console.WriteLine("Options:");
+        p.WriteOptionDescriptions(Console.Out);
+    }
 
-	static void GenerateFile (string className, List<Tuple<string, string, string>> txtStrings, CmdOptions options)
-	{
-//		var outputFile = options.OutputFile ?? "SR.cs";
+    static void GenerateFile(
+        string className,
+        List<Tuple<string, string, string>> txtStrings,
+        CmdOptions options
+    )
+    {
+        //		var outputFile = options.OutputFile ?? "SR.cs";
 
-		using (var str = options.OutputFile == null ? Console.Out : new StreamWriter (options.OutputFile)) {
-			str.WriteLine ("//");
-			str.WriteLine ("// This file was generated by resx2sr tool");
-			str.WriteLine ("//");
-			str.WriteLine ();
+        using (
+            var str =
+                options.OutputFile == null ? Console.Out : new StreamWriter(options.OutputFile)
+        )
+        {
+            str.WriteLine("//");
+            str.WriteLine("// This file was generated by resx2sr tool");
+            str.WriteLine("//");
+            str.WriteLine();
 
-			int nsIdx = className.LastIndexOf ('.');
-			if (nsIdx > 0) {
-				str.WriteLine ($"namespace {className.Substring (0, nsIdx)}");
-				str.WriteLine ("{");
-				className = className.Substring (nsIdx+1);
-			}
+            int nsIdx = className.LastIndexOf('.');
+            if (nsIdx > 0)
+            {
+                str.WriteLine($"namespace {className.Substring(0, nsIdx)}");
+                str.WriteLine("{");
+                className = className.Substring(nsIdx + 1);
+            }
 
-			str.WriteLine ($"partial class {className}");
-			str.WriteLine ("{");
+            str.WriteLine($"partial class {className}");
+            str.WriteLine("{");
 
-			var dict = new Dictionary<string, string> ();
+            var dict = new Dictionary<string, string>();
 
-			foreach (var entry in txtStrings) {
+            foreach (var entry in txtStrings)
+            {
+                var value = ToCSharpString(entry.Item2);
+                string found;
+                if (dict.TryGetValue(entry.Item1, out found))
+                {
+                    if (found == value || !options.WarnConstantMismatch)
+                        continue;
 
-				var value = ToCSharpString (entry.Item2);
-				string found;
-				if (dict.TryGetValue (entry.Item1, out found)) {
-					if (found == value || !options.WarnConstantMismatch)
-						continue;
+                    // The same entry was found with different values in multiple input files.
+                    Console.Error.WriteLine(
+                        $"Constant value mismatch for {entry.Item1}:\n\tOld: {found}\n\tNew: {value}"
+                    );
+                    continue;
+                }
 
-					// The same entry was found with different values in multiple input files.
-					Console.Error.WriteLine ($"Constant value mismatch for {entry.Item1}:\n\tOld: {found}\n\tNew: {value}");
-					continue;
-				}
+                // Always add to list of seen keys.
+                dict.Add(entry.Item1, value);
 
-				// Always add to list of seen keys.
-				dict.Add (entry.Item1, value);
+                // The following conditional could be simplified to one line, but I belive
+                // it is easier to understand what it does by writing it verbosely like this.
+                if (options.ExistingOnly)
+                {
+                    // We read in all entries, then update the strings of the existing ones,
+                    // so skip the non-existing ones.
+                    if (!ExistingKeys.ContainsKey(entry.Item1))
+                        continue;
+                }
+                else
+                {
+                    // In this mode of operation, we pass some existing files via `--in=`,
+                    // so we skip the existing ones.
+                    if (ExistingKeys.ContainsKey(entry.Item1))
+                        continue;
+                }
 
-				// The following conditional could be simplified to one line, but I belive
-				// it is easier to understand what it does by writing it verbosely like this.
-				if (options.ExistingOnly) {
-					// We read in all entries, then update the strings of the existing ones,
-					// so skip the non-existing ones.
-					if (!ExistingKeys.ContainsKey (entry.Item1))
-						continue;
-				} else {
-					// In this mode of operation, we pass some existing files via `--in=`,
-					// so we skip the existing ones.
-					if (ExistingKeys.ContainsKey (entry.Item1))
-						continue;
-				}
+                str.Write($"\tpublic const string {entry.Item1} = \"{value}\";");
 
-				str.Write ($"\tpublic const string {entry.Item1} = \"{value}\";");
+                if (!string.IsNullOrEmpty(entry.Item3))
+                    str.Write(" // {entry.Item3}");
 
-				if (!string.IsNullOrEmpty (entry.Item3))
-					str.Write (" // {entry.Item3}");
+                str.WriteLine();
+            }
 
-				str.WriteLine ();
-			}
+            if (options.ExistingOnly)
+            {
+                // Add any keys that we missed from the input files.
+                foreach (var v in ExistingKeys.Keys)
+                {
+                    if (!dict.ContainsKey(v))
+                    {
+                        str.WriteLine($"\tinternal const string {v} = \"{v}\";");
+                    }
+                }
+            }
 
-			if (options.ExistingOnly) {
-				// Add any keys that we missed from the input files.
-				foreach (var v in ExistingKeys.Keys) {
-					if (!dict.ContainsKey (v)) {
-						str.WriteLine ($"\tinternal const string {v} = \"{v}\";");
-					}
-				}
-			}
+            str.WriteLine("}");
 
-			str.WriteLine ("}");
+            if (nsIdx > 0)
+            {
+                str.WriteLine("}");
+            }
+        }
+    }
 
-			if (nsIdx > 0) {
-				str.WriteLine ("}");
-			}
-		}
-	}
+    static string ToCSharpString(string str)
+    {
+        str = str.Replace("\n", "\\n");
 
-	static string ToCSharpString (string str)
-	{
-		str = str.Replace ("\n", "\\n");
+        return str.Replace("\\", "\\\\").Replace("\"", "\\\"");
+    }
 
-		return str.Replace ("\\", "\\\\").Replace ("\"", "\\\"");
-	}
+    static bool LoadStrings(
+        List<Tuple<string, string, string>> resourcesStrings,
+        List<string> files
+    )
+    {
+        var keys = new Dictionary<string, string>();
+        foreach (var fileName in files)
+        {
+            if (!File.Exists(fileName))
+            {
+                Console.Error.WriteLine($"Error reading resource file '{fileName}'");
+                return false;
+            }
 
-	static bool LoadStrings (List<Tuple<string, string, string>> resourcesStrings, List<string> files)
-	{
-		var keys = new Dictionary<string, string> ();
-		foreach (var fileName in files) {
-			if (!File.Exists (fileName)) {
-				Console.Error.WriteLine ($"Error reading resource file '{fileName}'");
-				return false;
-			}
+            if (
+                string.Equals(
+                    Path.GetExtension(fileName),
+                    ".txt",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
+            {
+                resourcesStrings.AddRange(ReadTextResources(fileName));
+            }
+            else
+            {
+                resourcesStrings.AddRange(ReadResxFile(fileName));
+            }
+        }
 
-			if (string.Equals (Path.GetExtension (fileName), ".txt", StringComparison.OrdinalIgnoreCase)) {
-				resourcesStrings.AddRange (ReadTextResources (fileName));
-			} else {
-				resourcesStrings.AddRange (ReadResxFile (fileName));
-			}
-		}
+        return true;
+    }
 
-		return true;
-	}
+    static IEnumerable<Tuple<string, string, string>> ReadResxFile(string fileName)
+    {
+        var rr = new ResXResourceReader(fileName);
+        rr.UseResXDataNodes = true;
+        var dict = rr.GetEnumerator();
+        while (dict.MoveNext())
+        {
+            var node = (ResXDataNode)dict.Value;
+            yield return Tuple.Create(
+                node.Name,
+                (string)node.GetValue((ITypeResolutionService)null),
+                node.Comment
+            );
+        }
+    }
 
-	static IEnumerable<Tuple<string,string,string>> ReadResxFile (string fileName)
-	{
-		var rr = new ResXResourceReader (fileName);
-		rr.UseResXDataNodes = true;
-		var dict = rr.GetEnumerator ();
-		while (dict.MoveNext ()) {
-			var node = (ResXDataNode)dict.Value;
-			yield return Tuple.Create (node.Name, (string) node.GetValue ((ITypeResolutionService)null), node.Comment);
-		}
-	}
+    static IEnumerable<Tuple<string, string, string>> ReadTextResources(string fileName)
+    {
+        foreach (var line in File.ReadAllLines(fileName))
+        {
+            if (line.Length == 0 || line[0] == ';')
+            {
+                continue;
+            }
+            var idx = line.IndexOf('=');
+            if (idx < 1)
+            {
+                Console.Error.WriteLine($"Error reading resource file '{fileName}'");
+                continue;
+            }
+            yield return Tuple.Create(
+                line.Substring(0, idx),
+                line.Substring(idx + 1),
+                (string)null
+            );
+        }
+    }
 
-	static IEnumerable<Tuple<string,string,string>> ReadTextResources (string fileName)
-	{
-		foreach (var line in File.ReadAllLines (fileName)) {
-			if (line.Length == 0 || line[0] == ';') {
-				continue;
-			}
-			var idx = line.IndexOf ('=');
-			if (idx < 1) {
-				Console.Error.WriteLine ($"Error reading resource file '{fileName}'");
-				continue;
-			}
-			yield return Tuple.Create (line.Substring (0, idx), line.Substring (idx+1), (string)null);
-		}
-	}
+    static bool LoadInputFiles()
+    {
+        var reg = new Regex(@"\s*public const string (\w+)\s+=\s+");
+        var keys = new Dictionary<string, string>();
+        foreach (var fileName in InputFiles)
+        {
+            if (!File.Exists(fileName))
+            {
+                Console.Error.WriteLine($"Error reading input file '{fileName}'");
+                return false;
+            }
 
-	static bool LoadInputFiles ()
-	{
-		var reg = new Regex (@"\s*public const string (\w+)\s+=\s+");
-		var keys = new Dictionary<string, string> ();
-		foreach (var fileName in InputFiles) {
-			if (!File.Exists (fileName)) {
-				Console.Error.WriteLine ($"Error reading input file '{fileName}'");
-				return false;
-			}
+            using (var reader = new StreamReader(fileName))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var match = reg.Match(line);
+                    if (!match.Success)
+                        continue;
 
-			using (var reader = new StreamReader (fileName)) {
-				string line;
-				while ((line = reader.ReadLine ()) != null) {
-					var match = reg.Match (line);
-					if (!match.Success)
-						continue;
+                    var key = match.Groups[1].Value;
+                    ExistingKeys[key] = null;
+                }
+            }
+        }
 
-					var key = match.Groups[1].Value;
-					ExistingKeys[key] = null;
-				}
-			}
-		}
-
-		return true;
-	}
+        return true;
+    }
 }

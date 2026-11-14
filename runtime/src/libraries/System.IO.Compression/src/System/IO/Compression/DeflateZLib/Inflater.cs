@@ -14,19 +14,19 @@ namespace System.IO.Compression
     /// </summary>
     internal sealed class Inflater : IDisposable
     {
-        private const int MinWindowBits = -15;              // WindowBits must be between -8..-15 to ignore the header, 8..15 for
-        private const int MaxWindowBits = 47;               // zlib headers, 24..31 for GZip headers, or 40..47 for either Zlib or GZip
+        private const int MinWindowBits = -15; // WindowBits must be between -8..-15 to ignore the header, 8..15 for
+        private const int MaxWindowBits = 47; // zlib headers, 24..31 for GZip headers, or 40..47 for either Zlib or GZip
 
-        private bool _nonEmptyInput;                        // Whether there is any non empty input
-        private bool _finished;                             // Whether the end of the stream has been reached
-        private bool _isDisposed;                           // Prevents multiple disposals
-        private readonly int _windowBits;                   // The WindowBits parameter passed to Inflater construction
-        private ZLibNative.ZLibStreamHandle _zlibStream;    // The handle to the primary underlying zlib stream
-        private MemoryHandle _inputBufferHandle;            // The handle to the buffer that provides input to _zlibStream
+        private bool _nonEmptyInput; // Whether there is any non empty input
+        private bool _finished; // Whether the end of the stream has been reached
+        private bool _isDisposed; // Prevents multiple disposals
+        private readonly int _windowBits; // The WindowBits parameter passed to Inflater construction
+        private ZLibNative.ZLibStreamHandle _zlibStream; // The handle to the primary underlying zlib stream
+        private MemoryHandle _inputBufferHandle; // The handle to the buffer that provides input to _zlibStream
         private readonly long _uncompressedSize;
         private long _currentInflatedCount;
 
-        private object SyncLock => this;                    // Used to make writing to unmanaged structures atomic
+        private object SyncLock => this; // Used to make writing to unmanaged structures atomic
 
         /// <summary>
         /// Initialized the Inflater with the given windowBits size
@@ -122,7 +122,10 @@ namespace System.IO.Compression
 
         private unsafe void ReadOutput(byte* bufPtr, int length, out int bytesRead)
         {
-            if (ReadInflateOutput(bufPtr, length, ZLibNative.FlushCode.NoFlush, out bytesRead) == ZLibNative.ErrorCode.StreamEnd)
+            if (
+                ReadInflateOutput(bufPtr, length, ZLibNative.FlushCode.NoFlush, out bytesRead)
+                == ZLibNative.ErrorCode.StreamEnd
+            )
             {
                 if (!NeedsInput() && IsGzipStream() && IsInputBufferHandleAllocated)
                 {
@@ -154,7 +157,10 @@ namespace System.IO.Compression
                 uint nextAvailIn = _zlibStream.AvailIn;
 
                 // Check the leftover bytes to see if they start with he gzip header ID bytes
-                if (*nextInPointer != ZLibNative.GZip_Header_ID1 || (nextAvailIn > 1 && *(nextInPointer + 1) != ZLibNative.GZip_Header_ID2))
+                if (
+                    *nextInPointer != ZLibNative.GZip_Header_ID1
+                    || (nextAvailIn > 1 && *(nextInPointer + 1) != ZLibNative.GZip_Header_ID2)
+                )
                 {
                     return true;
                 }
@@ -251,27 +257,52 @@ namespace System.IO.Compression
 
             switch (error)
             {
-                case ZLibNative.ErrorCode.Ok:           // Successful initialization
+                case ZLibNative.ErrorCode.Ok: // Successful initialization
                     return;
 
-                case ZLibNative.ErrorCode.MemError:     // Not enough memory
-                    throw new ZLibException(SR.ZLibErrorNotEnoughMemory, "inflateInit2_", (int)error, _zlibStream.GetErrorMessage());
+                case ZLibNative.ErrorCode.MemError: // Not enough memory
+                    throw new ZLibException(
+                        SR.ZLibErrorNotEnoughMemory,
+                        "inflateInit2_",
+                        (int)error,
+                        _zlibStream.GetErrorMessage()
+                    );
 
                 case ZLibNative.ErrorCode.VersionError: //zlib library is incompatible with the version assumed
-                    throw new ZLibException(SR.ZLibErrorVersionMismatch, "inflateInit2_", (int)error, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorVersionMismatch,
+                        "inflateInit2_",
+                        (int)error,
+                        _zlibStream.GetErrorMessage()
+                    );
 
-                case ZLibNative.ErrorCode.StreamError:  // Parameters are invalid
-                    throw new ZLibException(SR.ZLibErrorIncorrectInitParameters, "inflateInit2_", (int)error, _zlibStream.GetErrorMessage());
+                case ZLibNative.ErrorCode.StreamError: // Parameters are invalid
+                    throw new ZLibException(
+                        SR.ZLibErrorIncorrectInitParameters,
+                        "inflateInit2_",
+                        (int)error,
+                        _zlibStream.GetErrorMessage()
+                    );
 
                 default:
-                    throw new ZLibException(SR.ZLibErrorUnexpected, "inflateInit2_", (int)error, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorUnexpected,
+                        "inflateInit2_",
+                        (int)error,
+                        _zlibStream.GetErrorMessage()
+                    );
             }
         }
 
         /// <summary>
         /// Wrapper around the ZLib inflate function, configuring the stream appropriately.
         /// </summary>
-        private unsafe ZLibNative.ErrorCode ReadInflateOutput(byte* bufPtr, int length, ZLibNative.FlushCode flushCode, out int bytesRead)
+        private unsafe ZLibNative.ErrorCode ReadInflateOutput(
+            byte* bufPtr,
+            int length,
+            ZLibNative.FlushCode flushCode,
+            out int bytesRead
+        )
         {
             lock (SyncLock)
             {
@@ -301,24 +332,39 @@ namespace System.IO.Compression
             }
             switch (errC)
             {
-                case ZLibNative.ErrorCode.Ok:           // progress has been made inflating
-                case ZLibNative.ErrorCode.StreamEnd:    // The end of the input stream has been reached
+                case ZLibNative.ErrorCode.Ok: // progress has been made inflating
+                case ZLibNative.ErrorCode.StreamEnd: // The end of the input stream has been reached
                     return errC;
 
-                case ZLibNative.ErrorCode.BufError:     // No room in the output buffer - inflate() can be called again with more space to continue
+                case ZLibNative.ErrorCode.BufError: // No room in the output buffer - inflate() can be called again with more space to continue
                     return errC;
 
-                case ZLibNative.ErrorCode.MemError:     // Not enough memory to complete the operation
-                    throw new ZLibException(SR.ZLibErrorNotEnoughMemory, "inflate_", (int)errC, _zlibStream.GetErrorMessage());
+                case ZLibNative.ErrorCode.MemError: // Not enough memory to complete the operation
+                    throw new ZLibException(
+                        SR.ZLibErrorNotEnoughMemory,
+                        "inflate_",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
 
-                case ZLibNative.ErrorCode.DataError:    // The input data was corrupted (input stream not conforming to the zlib format or incorrect check value)
+                case ZLibNative.ErrorCode.DataError: // The input data was corrupted (input stream not conforming to the zlib format or incorrect check value)
                     throw new InvalidDataException(SR.UnsupportedCompression);
 
-                case ZLibNative.ErrorCode.StreamError:  //the stream structure was inconsistent (for example if next_in or next_out was NULL),
-                    throw new ZLibException(SR.ZLibErrorInconsistentStream, "inflate_", (int)errC, _zlibStream.GetErrorMessage());
+                case ZLibNative.ErrorCode.StreamError: //the stream structure was inconsistent (for example if next_in or next_out was NULL),
+                    throw new ZLibException(
+                        SR.ZLibErrorInconsistentStream,
+                        "inflate_",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
 
                 default:
-                    throw new ZLibException(SR.ZLibErrorUnexpected, "inflate_", (int)errC, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorUnexpected,
+                        "inflate_",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
             }
         }
 

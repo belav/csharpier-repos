@@ -5,19 +5,17 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Xml;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.Xml;
 
-    public class MessagePartDescriptionCollection : KeyedCollection<XmlQualifiedName, MessagePartDescription>
+    public class MessagePartDescriptionCollection
+        : KeyedCollection<XmlQualifiedName, MessagePartDescription>
     {
         internal MessagePartDescriptionCollection()
-            : base(null, 4)
-        {
-
-        }
+            : base(null, 4) { }
 
         protected override XmlQualifiedName GetKeyForItem(MessagePartDescription item)
         {

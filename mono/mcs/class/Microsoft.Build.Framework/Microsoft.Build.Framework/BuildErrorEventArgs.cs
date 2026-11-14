@@ -28,116 +28,137 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class BuildErrorEventArgs
-			: LazyFormattedBuildEventArgs {
-	
-		string	code;
-		int	columnNumber;
-		int	endColumnNumber;
-		int	endLineNumber;
-		string 	file;
-		int	lineNumber;
-		string	subcategory;
-		string projectFile;
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class BuildErrorEventArgs : LazyFormattedBuildEventArgs
+    {
+        string code;
+        int columnNumber;
+        int endColumnNumber;
+        int endLineNumber;
+        string file;
+        int lineNumber;
+        string subcategory;
+        string projectFile;
 
-		protected BuildErrorEventArgs ()
-		{
-		}
+        protected BuildErrorEventArgs() { }
 
-		public BuildErrorEventArgs (string subcategory, string code,
-					    string file, int lineNumber,
-					    int columnNumber,
-					    int endLineNumber,
-					    int endColumnNumber,
-					    string message, string helpKeyword,
-					    string senderName)
-			: base (message, helpKeyword, senderName)
-		{
-			this.subcategory = subcategory;
-			this.code = code;
-			this.file = file;
-			this.lineNumber = lineNumber;
-			this.columnNumber = columnNumber;
-			this.endLineNumber = endLineNumber;
-			this.endColumnNumber = endColumnNumber;
-		}
+        public BuildErrorEventArgs(
+            string subcategory,
+            string code,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            string helpKeyword,
+            string senderName
+        )
+            : base(message, helpKeyword, senderName)
+        {
+            this.subcategory = subcategory;
+            this.code = code;
+            this.file = file;
+            this.lineNumber = lineNumber;
+            this.columnNumber = columnNumber;
+            this.endLineNumber = endLineNumber;
+            this.endColumnNumber = endColumnNumber;
+        }
 
-		public BuildErrorEventArgs (string subcategory, string code,
-				string file, int lineNumber, int columnNumber,
-				int endLineNumber, int endColumnNumber, string message,
-				string helpKeyword, string senderName, DateTime eventTimestamp)
-			: this (subcategory, code, file, lineNumber, columnNumber,
-				endLineNumber, endColumnNumber, message, helpKeyword,
-				senderName, eventTimestamp, new object[0])
-		{
-		}
+        public BuildErrorEventArgs(
+            string subcategory,
+            string code,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            string helpKeyword,
+            string senderName,
+            DateTime eventTimestamp
+        )
+            : this(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName,
+                eventTimestamp,
+                new object[0]
+            ) { }
 
-		public BuildErrorEventArgs (string subcategory, string code,
-				string file, int lineNumber, int columnNumber, int endLineNumber,
-				int endColumnNumber, string message, string helpKeyword,
-				string senderName, DateTime eventTimestamp,
-				params object[] messageArgs)
-			: base (message, helpKeyword, senderName, eventTimestamp, messageArgs)
-		{
-			this.subcategory = subcategory;
-			this.code = code;
-			this.file = file;
-			this.lineNumber = lineNumber;
-			this.columnNumber = columnNumber;
-			this.endLineNumber = endLineNumber;
-			this.endColumnNumber = endColumnNumber;
+        public BuildErrorEventArgs(
+            string subcategory,
+            string code,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            string helpKeyword,
+            string senderName,
+            DateTime eventTimestamp,
+            params object[] messageArgs
+        )
+            : base(message, helpKeyword, senderName, eventTimestamp, messageArgs)
+        {
+            this.subcategory = subcategory;
+            this.code = code;
+            this.file = file;
+            this.lineNumber = lineNumber;
+            this.columnNumber = columnNumber;
+            this.endLineNumber = endLineNumber;
+            this.endColumnNumber = endColumnNumber;
+        }
 
-		}
+        public string Code
+        {
+            get { return code; }
+        }
 
-		public string Code {
-			get {
-				return code;
-			}
-		}
+        public int ColumnNumber
+        {
+            get { return columnNumber; }
+        }
 
-		public int ColumnNumber {
-			get {
-				return columnNumber;
-			}
-		}
+        public int EndColumnNumber
+        {
+            get { return endColumnNumber; }
+        }
 
-		public int EndColumnNumber {
-			get {
-				return endColumnNumber;
-			}
-		}
+        public int EndLineNumber
+        {
+            get { return endLineNumber; }
+        }
 
-		public int EndLineNumber {
-			get {
-				return endLineNumber;
-			}
-		}
+        public string File
+        {
+            get { return file; }
+        }
 
-		public string File {
-			get {
-				return file;
-			}
-		}
+        public int LineNumber
+        {
+            get { return lineNumber; }
+        }
 
-		public int LineNumber {
-			get {
-				return lineNumber;
-			}
-		}
-		
-		public string Subcategory {
-			get {
-				return subcategory;
-			}
-		}
+        public string Subcategory
+        {
+            get { return subcategory; }
+        }
 
-		public string ProjectFile {
-			get { return projectFile; }
-			set {  projectFile = value; }
-		}
-
-	}
+        public string ProjectFile
+        {
+            get { return projectFile; }
+            set { projectFile = value; }
+        }
+    }
 }
-

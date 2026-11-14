@@ -33,9 +33,7 @@ public class ReferenceEntry<TEntity, TProperty> : ReferenceEntry
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceEntry(InternalEntityEntry internalEntry, string name)
-        : base(internalEntry, name)
-    {
-    }
+        : base(internalEntry, name) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,9 +43,7 @@ public class ReferenceEntry<TEntity, TProperty> : ReferenceEntry
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceEntry(InternalEntityEntry internalEntry, INavigation navigation)
-        : base(internalEntry, navigation)
-    {
-    }
+        : base(internalEntry, navigation) { }
 
     /// <summary>
     ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.
@@ -57,8 +53,7 @@ public class ReferenceEntry<TEntity, TProperty> : ReferenceEntry
     ///     examples.
     /// </remarks>
     /// <value> An entry for the entity that owns this member. </value>
-    public new virtual EntityEntry<TEntity> EntityEntry
-        => new(InternalEntry);
+    public new virtual EntityEntry<TEntity> EntityEntry => new(InternalEntry);
 
     /// <summary>
     ///     The <see cref="EntityEntry{TEntity}" /> of the entity this navigation targets.
@@ -107,6 +102,5 @@ public class ReferenceEntry<TEntity, TProperty> : ReferenceEntry
     ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related entities</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public new virtual IQueryable<TProperty> Query()
-        => (IQueryable<TProperty>)base.Query();
+    public new virtual IQueryable<TProperty> Query() => (IQueryable<TProperty>)base.Query();
 }

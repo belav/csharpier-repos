@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.Remote
             public readonly IServiceProvider ServiceProvider;
             public readonly IServiceBroker ServiceBroker;
 
-            public ServiceConstructionArguments(IServiceProvider serviceProvider, IServiceBroker serviceBroker)
+            public ServiceConstructionArguments(
+                IServiceProvider serviceProvider,
+                IServiceBroker serviceBroker
+            )
             {
                 ServiceProvider = serviceProvider;
                 ServiceBroker = serviceBroker;

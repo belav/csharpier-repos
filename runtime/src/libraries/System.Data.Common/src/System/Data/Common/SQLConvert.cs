@@ -217,7 +217,6 @@ namespace System.Data.Common
             };
         }
 
-
         public static SqlDateTime ConvertToSqlDateTime(object value)
         {
             Debug.Assert(value != null, "null argument in ConvertToSqlDateTime");
@@ -340,28 +339,48 @@ namespace System.Data.Common
             };
         }
 
-        public static DateTimeOffset ConvertStringToDateTimeOffset(string value, IFormatProvider formatProvider)
+        public static DateTimeOffset ConvertStringToDateTimeOffset(
+            string value,
+            IFormatProvider formatProvider
+        )
         {
             return DateTimeOffset.Parse(value, formatProvider);
         }
+
         // this should not be called for XmlSerialization
-        public static object ChangeTypeForDefaultValue(object value, Type type, IFormatProvider formatProvider)
+        public static object ChangeTypeForDefaultValue(
+            object value,
+            Type type,
+            IFormatProvider formatProvider
+        )
         {
             if (type == typeof(System.Numerics.BigInteger))
             {
-                if ((DBNull.Value == value) || (null == value)) { return DBNull.Value; }
+                if ((DBNull.Value == value) || (null == value))
+                {
+                    return DBNull.Value;
+                }
                 return BigIntegerStorage.ConvertToBigInteger(value, formatProvider);
             }
             else if (value is System.Numerics.BigInteger)
             {
-                return BigIntegerStorage.ConvertFromBigInteger((System.Numerics.BigInteger)value, type, formatProvider);
+                return BigIntegerStorage.ConvertFromBigInteger(
+                    (System.Numerics.BigInteger)value,
+                    type,
+                    formatProvider
+                );
             }
 
             return ChangeType2(value, DataStorage.GetStorageType(type), type, formatProvider);
         }
 
         // this should not be called for XmlSerialization
-        public static object ChangeType2(object value, StorageType stype, Type type, IFormatProvider formatProvider)
+        public static object ChangeType2(
+            object value,
+            StorageType stype,
+            Type type,
+            IFormatProvider formatProvider
+        )
         {
             switch (stype)
             { // if destination is SQL type
@@ -410,7 +429,7 @@ namespace System.Data.Common
                     StorageType vtype = DataStorage.GetStorageType(valueType);
                     // destination is CLR
                     switch (vtype)
-                    {// and source is SQL type
+                    { // and source is SQL type
                         case StorageType.SqlBinary:
                         case StorageType.SqlBoolean:
                         case StorageType.SqlByte:
@@ -510,35 +529,59 @@ namespace System.Data.Common
                                     case StorageType.String:
                                         return (string)value;
                                     case StorageType.Boolean:
-                                        if ("1" == (string)value) return true;
-                                        if ("0" == (string)value) return false;
+                                        if ("1" == (string)value)
+                                            return true;
+                                        if ("0" == (string)value)
+                                            return false;
                                         break;
                                     case StorageType.Char:
                                         return ((IConvertible)(string)value).ToChar(formatProvider);
                                     case StorageType.SByte:
-                                        return ((IConvertible)(string)value).ToSByte(formatProvider);
+                                        return ((IConvertible)(string)value).ToSByte(
+                                            formatProvider
+                                        );
                                     case StorageType.Byte:
                                         return ((IConvertible)(string)value).ToByte(formatProvider);
                                     case StorageType.Int16:
-                                        return ((IConvertible)(string)value).ToInt16(formatProvider);
+                                        return ((IConvertible)(string)value).ToInt16(
+                                            formatProvider
+                                        );
                                     case StorageType.UInt16:
-                                        return ((IConvertible)(string)value).ToUInt16(formatProvider);
+                                        return ((IConvertible)(string)value).ToUInt16(
+                                            formatProvider
+                                        );
                                     case StorageType.Int32:
-                                        return ((IConvertible)(string)value).ToInt32(formatProvider);
+                                        return ((IConvertible)(string)value).ToInt32(
+                                            formatProvider
+                                        );
                                     case StorageType.UInt32:
-                                        return ((IConvertible)(string)value).ToUInt32(formatProvider);
+                                        return ((IConvertible)(string)value).ToUInt32(
+                                            formatProvider
+                                        );
                                     case StorageType.Int64:
-                                        return ((IConvertible)(string)value).ToInt64(formatProvider);
+                                        return ((IConvertible)(string)value).ToInt64(
+                                            formatProvider
+                                        );
                                     case StorageType.UInt64:
-                                        return ((IConvertible)(string)value).ToUInt64(formatProvider);
+                                        return ((IConvertible)(string)value).ToUInt64(
+                                            formatProvider
+                                        );
                                     case StorageType.Single:
-                                        return ((IConvertible)(string)value).ToSingle(formatProvider);
+                                        return ((IConvertible)(string)value).ToSingle(
+                                            formatProvider
+                                        );
                                     case StorageType.Double:
-                                        return ((IConvertible)(string)value).ToDouble(formatProvider);
+                                        return ((IConvertible)(string)value).ToDouble(
+                                            formatProvider
+                                        );
                                     case StorageType.Decimal:
-                                        return ((IConvertible)(string)value).ToDecimal(formatProvider);
+                                        return ((IConvertible)(string)value).ToDecimal(
+                                            formatProvider
+                                        );
                                     case StorageType.DateTime:
-                                        return ((IConvertible)(string)value).ToDateTime(formatProvider);
+                                        return ((IConvertible)(string)value).ToDateTime(
+                                            formatProvider
+                                        );
                                     //return  XmlConvert.ToDateTime((string) value, XmlDateTimeSerializationMode.RoundtripKind);
                                     case StorageType.TimeSpan:
                                         return XmlConvert.ToTimeSpan((string)value);
@@ -558,7 +601,10 @@ namespace System.Data.Common
         // this should be called for XmlSerialization
         public static object ChangeTypeForXML(object value, Type type)
         {
-            Debug.Assert(value is string || type == typeof(string), "invalid call to ChangeTypeForXML");
+            Debug.Assert(
+                value is string || type == typeof(string),
+                "invalid call to ChangeTypeForXML"
+            );
             StorageType destinationType = DataStorage.GetStorageType(type);
             Type valueType = value.GetType();
             StorageType vtype = DataStorage.GetStorageType(valueType);
@@ -576,7 +622,12 @@ namespace System.Data.Common
                 case StorageType.SqlChars:
                     return new SqlChars(((string)value).ToCharArray());
                 case StorageType.SqlDateTime:
-                    return new SqlDateTime(XmlConvert.ToDateTime((string)value, XmlDateTimeSerializationMode.RoundtripKind));
+                    return new SqlDateTime(
+                        XmlConvert.ToDateTime(
+                            (string)value,
+                            XmlDateTimeSerializationMode.RoundtripKind
+                        )
+                    );
                 case StorageType.SqlDecimal:
                     return SqlDecimal.Parse((string)value); // parses invariant format and is larger has larger range then Decimal
                 case StorageType.SqlDouble:
@@ -601,8 +652,10 @@ namespace System.Data.Common
                 //                    }
                 //                    goto default;
                 case StorageType.Boolean:
-                    if ("1" == (string)value) return true;
-                    if ("0" == (string)value) return false;
+                    if ("1" == (string)value)
+                        return true;
+                    if ("0" == (string)value)
+                        return false;
                     return XmlConvert.ToBoolean((string)value);
                 case StorageType.Char:
                     return XmlConvert.ToChar((string)value);
@@ -629,7 +682,10 @@ namespace System.Data.Common
                 case StorageType.Decimal:
                     return XmlConvert.ToDecimal((string)value);
                 case StorageType.DateTime:
-                    return XmlConvert.ToDateTime((string)value, XmlDateTimeSerializationMode.RoundtripKind);
+                    return XmlConvert.ToDateTime(
+                        (string)value,
+                        XmlDateTimeSerializationMode.RoundtripKind
+                    );
                 case StorageType.Guid:
                     return XmlConvert.ToGuid((string)value);
                 case StorageType.Uri:
@@ -645,97 +701,108 @@ namespace System.Data.Common
                         _ => (TimeSpan)value,
                     };
                 default:
+                {
+                    if ((DBNull.Value == value) || (null == value))
                     {
-                        if ((DBNull.Value == value) || (null == value))
-                        {
-                            return DBNull.Value;
-                        }
-
-                        switch (vtype)
-                        { // To String
-                            case StorageType.SqlBinary:
-                                return Convert.ToBase64String(((SqlBinary)value).Value);
-                            case StorageType.SqlBoolean:
-                                return XmlConvert.ToString(((SqlBoolean)value).Value);
-                            case StorageType.SqlByte:
-                                return XmlConvert.ToString(((SqlByte)value).Value);
-                            case StorageType.SqlBytes:
-                                return Convert.ToBase64String(((SqlBytes)value).Value);
-                            case StorageType.SqlChars:
-                                return new string(((SqlChars)value).Value);
-                            case StorageType.SqlDateTime:
-                                return XmlConvert.ToString(((SqlDateTime)value).Value, XmlDateTimeSerializationMode.RoundtripKind);
-                            case StorageType.SqlDecimal:
-                                return ((SqlDecimal)value).ToString(); // converts using invariant format and is larger has larger range then Decimal
-                            case StorageType.SqlDouble:
-                                return XmlConvert.ToString(((SqlDouble)value).Value);
-                            case StorageType.SqlGuid:
-                                return XmlConvert.ToString(((SqlGuid)value).Value);
-                            case StorageType.SqlInt16:
-                                return XmlConvert.ToString(((SqlInt16)value).Value);
-                            case StorageType.SqlInt32:
-                                return XmlConvert.ToString(((SqlInt32)value).Value);
-                            case StorageType.SqlInt64:
-                                return XmlConvert.ToString(((SqlInt64)value).Value);
-                            case StorageType.SqlMoney:
-                                return XmlConvert.ToString(((SqlMoney)value).Value);
-                            case StorageType.SqlSingle:
-                                return XmlConvert.ToString(((SqlSingle)value).Value);
-                            case StorageType.SqlString:
-                                return ((SqlString)value).Value;
-                            case StorageType.Boolean:
-                                return XmlConvert.ToString((bool)value);
-                            case StorageType.Char:
-                                return XmlConvert.ToString((char)value);
-                            case StorageType.SByte:
-                                return XmlConvert.ToString((sbyte)value);
-                            case StorageType.Byte:
-                                return XmlConvert.ToString((byte)value);
-                            case StorageType.Int16:
-                                return XmlConvert.ToString((short)value);
-                            case StorageType.UInt16:
-                                return XmlConvert.ToString((ushort)value);
-                            case StorageType.Int32:
-                                return XmlConvert.ToString((int)value);
-                            case StorageType.UInt32:
-                                return XmlConvert.ToString((uint)value);
-                            case StorageType.Int64:
-                                return XmlConvert.ToString((long)value);
-                            case StorageType.UInt64:
-                                return XmlConvert.ToString((ulong)value);
-                            case StorageType.Single:
-                                return XmlConvert.ToString((float)value);
-                            case StorageType.Double:
-                                return XmlConvert.ToString((double)value);
-                            case StorageType.Decimal:
-                                return XmlConvert.ToString((decimal)value);
-                            case StorageType.DateTime:
-                                return XmlConvert.ToString((DateTime)value, XmlDateTimeSerializationMode.RoundtripKind);
-                            case StorageType.TimeSpan:
-                                return XmlConvert.ToString((TimeSpan)value);
-                            case StorageType.Guid:
-                                return XmlConvert.ToString((Guid)value);
-                            case StorageType.String:
-                                return (string)value;
-                            case StorageType.CharArray:
-                                return new string((char[])value);
-                            case StorageType.DateTimeOffset:
-                                return XmlConvert.ToString((DateTimeOffset)value);
-                            default:
-                                IConvertible? iconvertible = (value as IConvertible);
-                                if (null != iconvertible)
-                                {
-                                    return iconvertible.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                                }
-                                // catch additional classes like Guid
-                                IFormattable? iformattable = (value as IFormattable);
-                                if (null != iformattable)
-                                {
-                                    return iformattable.ToString(null, System.Globalization.CultureInfo.InvariantCulture);
-                                }
-                                return value.ToString()!;
-                        }
+                        return DBNull.Value;
                     }
+
+                    switch (vtype)
+                    { // To String
+                        case StorageType.SqlBinary:
+                            return Convert.ToBase64String(((SqlBinary)value).Value);
+                        case StorageType.SqlBoolean:
+                            return XmlConvert.ToString(((SqlBoolean)value).Value);
+                        case StorageType.SqlByte:
+                            return XmlConvert.ToString(((SqlByte)value).Value);
+                        case StorageType.SqlBytes:
+                            return Convert.ToBase64String(((SqlBytes)value).Value);
+                        case StorageType.SqlChars:
+                            return new string(((SqlChars)value).Value);
+                        case StorageType.SqlDateTime:
+                            return XmlConvert.ToString(
+                                ((SqlDateTime)value).Value,
+                                XmlDateTimeSerializationMode.RoundtripKind
+                            );
+                        case StorageType.SqlDecimal:
+                            return ((SqlDecimal)value).ToString(); // converts using invariant format and is larger has larger range then Decimal
+                        case StorageType.SqlDouble:
+                            return XmlConvert.ToString(((SqlDouble)value).Value);
+                        case StorageType.SqlGuid:
+                            return XmlConvert.ToString(((SqlGuid)value).Value);
+                        case StorageType.SqlInt16:
+                            return XmlConvert.ToString(((SqlInt16)value).Value);
+                        case StorageType.SqlInt32:
+                            return XmlConvert.ToString(((SqlInt32)value).Value);
+                        case StorageType.SqlInt64:
+                            return XmlConvert.ToString(((SqlInt64)value).Value);
+                        case StorageType.SqlMoney:
+                            return XmlConvert.ToString(((SqlMoney)value).Value);
+                        case StorageType.SqlSingle:
+                            return XmlConvert.ToString(((SqlSingle)value).Value);
+                        case StorageType.SqlString:
+                            return ((SqlString)value).Value;
+                        case StorageType.Boolean:
+                            return XmlConvert.ToString((bool)value);
+                        case StorageType.Char:
+                            return XmlConvert.ToString((char)value);
+                        case StorageType.SByte:
+                            return XmlConvert.ToString((sbyte)value);
+                        case StorageType.Byte:
+                            return XmlConvert.ToString((byte)value);
+                        case StorageType.Int16:
+                            return XmlConvert.ToString((short)value);
+                        case StorageType.UInt16:
+                            return XmlConvert.ToString((ushort)value);
+                        case StorageType.Int32:
+                            return XmlConvert.ToString((int)value);
+                        case StorageType.UInt32:
+                            return XmlConvert.ToString((uint)value);
+                        case StorageType.Int64:
+                            return XmlConvert.ToString((long)value);
+                        case StorageType.UInt64:
+                            return XmlConvert.ToString((ulong)value);
+                        case StorageType.Single:
+                            return XmlConvert.ToString((float)value);
+                        case StorageType.Double:
+                            return XmlConvert.ToString((double)value);
+                        case StorageType.Decimal:
+                            return XmlConvert.ToString((decimal)value);
+                        case StorageType.DateTime:
+                            return XmlConvert.ToString(
+                                (DateTime)value,
+                                XmlDateTimeSerializationMode.RoundtripKind
+                            );
+                        case StorageType.TimeSpan:
+                            return XmlConvert.ToString((TimeSpan)value);
+                        case StorageType.Guid:
+                            return XmlConvert.ToString((Guid)value);
+                        case StorageType.String:
+                            return (string)value;
+                        case StorageType.CharArray:
+                            return new string((char[])value);
+                        case StorageType.DateTimeOffset:
+                            return XmlConvert.ToString((DateTimeOffset)value);
+                        default:
+                            IConvertible? iconvertible = (value as IConvertible);
+                            if (null != iconvertible)
+                            {
+                                return iconvertible.ToString(
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                );
+                            }
+                            // catch additional classes like Guid
+                            IFormattable? iformattable = (value as IFormattable);
+                            if (null != iformattable)
+                            {
+                                return iformattable.ToString(
+                                    null,
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                );
+                            }
+                            return value.ToString()!;
+                    }
+                }
             }
         }
     }

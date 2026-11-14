@@ -24,18 +24,20 @@ namespace Microsoft.CodeAnalysis
         public abstract TextSpan Span { get; }
 
         /// <summary>
-        /// Retrieves the original referenced syntax node.  
+        /// Retrieves the original referenced syntax node.
         /// This action may cause a parse to happen to recover the syntax node.
         /// </summary>
         /// <returns>The original referenced syntax node.</returns>
         public abstract SyntaxNode GetSyntax(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retrieves the original referenced syntax node.  
+        /// Retrieves the original referenced syntax node.
         /// This action may cause a parse to happen to recover the syntax node.
         /// </summary>
         /// <returns>The original referenced syntax node.</returns>
-        public virtual Task<SyntaxNode> GetSyntaxAsync(CancellationToken cancellationToken = default)
+        public virtual Task<SyntaxNode> GetSyntaxAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             return Task.FromResult(this.GetSyntax(cancellationToken));
         }

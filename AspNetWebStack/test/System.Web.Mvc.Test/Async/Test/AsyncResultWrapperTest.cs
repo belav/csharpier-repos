@@ -19,7 +19,10 @@ namespace System.Web.Mvc.Async.Test
             {
                 // Act
                 IAsyncResult outerResult = AsyncResultWrapper.Begin<object>(
-                    ar => { resultGivenToCallback = ar; },
+                    ar =>
+                    {
+                        resultGivenToCallback = ar;
+                    },
                     null,
                     (callback, callbackState, state) =>
                     {
@@ -27,7 +30,8 @@ namespace System.Web.Mvc.Async.Test
                         return innerResult;
                     },
                     (ar, state) => { },
-                    null);
+                    null
+                );
 
                 capturedCallback(innerResult);
 
@@ -61,7 +65,8 @@ namespace System.Web.Mvc.Async.Test
                     },
                     invokeState,
                     null,
-                    Timeout.Infinite);
+                    Timeout.Infinite
+                );
                 AsyncResultWrapper.End(outerResult);
 
                 // Assert
@@ -97,7 +102,8 @@ namespace System.Web.Mvc.Async.Test
                     },
                     invokeState,
                     null,
-                    Timeout.Infinite);
+                    Timeout.Infinite
+                );
                 object endResult = AsyncResultWrapper.End<object>(outerResult);
 
                 // Assert
@@ -115,22 +121,27 @@ namespace System.Web.Mvc.Async.Test
             {
                 AsyncState = "inner state",
                 CompletedSynchronously = true,
-                IsCompleted = true
+                IsCompleted = true,
             };
 
             using (innerResult)
             {
                 // Act
                 IAsyncResult outerResult = AsyncResultWrapper.Begin<object>(
-                    null, "outer state",
+                    null,
+                    "outer state",
                     (callback, callbackState, state) => innerResult,
                     (ar, state) => { },
-                    null);
+                    null
+                );
 
                 // Assert
                 Assert.Equal(innerResult.AsyncState, outerResult.AsyncState);
                 Assert.Null(outerResult.AsyncWaitHandle);
-                Assert.Equal(innerResult.CompletedSynchronously, outerResult.CompletedSynchronously);
+                Assert.Equal(
+                    innerResult.CompletedSynchronously,
+                    outerResult.CompletedSynchronously
+                );
                 Assert.Equal(innerResult.IsCompleted, outerResult.IsCompleted);
             }
         }
@@ -144,7 +155,10 @@ namespace System.Web.Mvc.Async.Test
             {
                 // Act
                 IAsyncResult outerResult = AsyncResultWrapper.Begin<object>(
-                    ar => { resultGivenToCallback = ar; },
+                    ar =>
+                    {
+                        resultGivenToCallback = ar;
+                    },
                     null,
                     (callback, callbackState, state) =>
                     {
@@ -152,7 +166,8 @@ namespace System.Web.Mvc.Async.Test
                         return innerResult;
                     },
                     (ar, state) => { },
-                    null);
+                    null
+                );
 
                 // Assert
                 Assert.Equal(outerResult, resultGivenToCallback);
@@ -177,7 +192,8 @@ namespace System.Web.Mvc.Async.Test
                     return innerResultMock.Object;
                 },
                 (ar, state) => { },
-                null);
+                null
+            );
 
             // Assert
             Assert.True(outerResult.CompletedSynchronously);
@@ -190,7 +206,7 @@ namespace System.Web.Mvc.Async.Test
             MockAsyncResult asyncResult = new MockAsyncResult()
             {
                 CompletedSynchronously = false,
-                IsCompleted = false
+                IsCompleted = false,
             };
 
             using (asyncResult)
@@ -208,21 +224,22 @@ namespace System.Web.Mvc.Async.Test
 
                 // Act
                 IAsyncResult outerResult = AsyncResultWrapper.Begin<object>(
-                     originalCallback,
-                     originalState,
-                     (callback, callbackState, state) =>
-                     {
-                         passedCallback = callback;
-                         asyncResult.AsyncState = callbackState;
-                         return asyncResult;
-                     },
-                     (ar, state) =>
-                     {
-                         asyncResult.IsCompleted = true;
-                         passedCallback(ar);
-                     },
-                     null,
-                     callbackSyncContext: syncContext);
+                    originalCallback,
+                    originalState,
+                    (callback, callbackState, state) =>
+                    {
+                        passedCallback = callback;
+                        asyncResult.AsyncState = callbackState;
+                        return asyncResult;
+                    },
+                    (ar, state) =>
+                    {
+                        asyncResult.IsCompleted = true;
+                        passedCallback(ar);
+                    },
+                    null,
+                    callbackSyncContext: syncContext
+                );
                 AsyncResultWrapper.End(outerResult);
 
                 // Assert
@@ -241,7 +258,7 @@ namespace System.Web.Mvc.Async.Test
             MockAsyncResult asyncResult = new MockAsyncResult()
             {
                 CompletedSynchronously = true,
-                IsCompleted = true
+                IsCompleted = true,
             };
 
             using (asyncResult)
@@ -268,7 +285,8 @@ namespace System.Web.Mvc.Async.Test
                     },
                     (ar, state) => { },
                     null,
-                    callbackSyncContext: syncContext);
+                    callbackSyncContext: syncContext
+                );
 
                 // Assert
                 Assert.True(originalCallbackCalled);
@@ -283,12 +301,15 @@ namespace System.Web.Mvc.Async.Test
         public void Begin_WithCallbackSyncContext_ThrowsAsyncEvenIfSendContextCaptures()
         {
             // Arrange
-            InvalidOperationException exception = new InvalidOperationException("Some exception text.");
-            CapturingSynchronizationContext capturingSyncContext = new CapturingSynchronizationContext();
+            InvalidOperationException exception = new InvalidOperationException(
+                "Some exception text."
+            );
+            CapturingSynchronizationContext capturingSyncContext =
+                new CapturingSynchronizationContext();
             MockAsyncResult asyncResult = new MockAsyncResult()
             {
                 CompletedSynchronously = false,
-                IsCompleted = true
+                IsCompleted = true,
             };
 
             using (asyncResult)
@@ -305,27 +326,30 @@ namespace System.Web.Mvc.Async.Test
 
                 // Act & Assert
                 IAsyncResult outerResult = AsyncResultWrapper.Begin<object>(
-                     originalCallback,
-                     null,
-                     (callback, callbackState, state) =>
-                     {
-                         passedCallback = callback;
-                         asyncResult.AsyncState = callbackState;
-                         return asyncResult;
-                     },
-                     (ar, state) =>
-                     {
-                         asyncResult.IsCompleted = true;
-                         passedCallback(ar);
-                     },
-                     null,
-                     callbackSyncContext: capturingSyncContext);
-                SynchronousOperationException thrownException = Assert.Throws<SynchronousOperationException>(
-                    delegate
+                    originalCallback,
+                    null,
+                    (callback, callbackState, state) =>
                     {
-                        AsyncResultWrapper.End(outerResult);
+                        passedCallback = callback;
+                        asyncResult.AsyncState = callbackState;
+                        return asyncResult;
                     },
-                    @"An operation that crossed a synchronization context failed. See the inner exception for more information.");
+                    (ar, state) =>
+                    {
+                        asyncResult.IsCompleted = true;
+                        passedCallback(ar);
+                    },
+                    null,
+                    callbackSyncContext: capturingSyncContext
+                );
+                SynchronousOperationException thrownException =
+                    Assert.Throws<SynchronousOperationException>(
+                        delegate
+                        {
+                            AsyncResultWrapper.End(outerResult);
+                        },
+                        @"An operation that crossed a synchronization context failed. See the inner exception for more information."
+                    );
 
                 // Assert
                 Assert.Equal(exception, thrownException.InnerException);
@@ -339,12 +363,15 @@ namespace System.Web.Mvc.Async.Test
         public void Begin_WithCallbackSyncContext_ThrowsSynchronous()
         {
             // Arrange
-            InvalidOperationException exception = new InvalidOperationException("Some exception text.");
-            CapturingSynchronizationContext capturingSyncContext = new CapturingSynchronizationContext();
+            InvalidOperationException exception = new InvalidOperationException(
+                "Some exception text."
+            );
+            CapturingSynchronizationContext capturingSyncContext =
+                new CapturingSynchronizationContext();
             MockAsyncResult asyncResult = new MockAsyncResult()
             {
                 CompletedSynchronously = true,
-                IsCompleted = true
+                IsCompleted = true,
             };
 
             using (asyncResult)
@@ -359,22 +386,25 @@ namespace System.Web.Mvc.Async.Test
                 };
 
                 // Act & Assert
-                InvalidOperationException thrownException = Assert.Throws<InvalidOperationException>(
-                    delegate
-                    {
-                        AsyncResultWrapper.Begin<object>(
-                            originalCallback,
-                            null,
-                            (callback, callbackState, state) =>
-                            {
-                                asyncResult.AsyncState = callbackState;
-                                return asyncResult;
-                            },
-                            (ar, state) => { },
-                            null,
-                            callbackSyncContext: capturingSyncContext);
-                    },
-                    exception.Message);
+                InvalidOperationException thrownException =
+                    Assert.Throws<InvalidOperationException>(
+                        delegate
+                        {
+                            AsyncResultWrapper.Begin<object>(
+                                originalCallback,
+                                null,
+                                (callback, callbackState, state) =>
+                                {
+                                    asyncResult.AsyncState = callbackState;
+                                    return asyncResult;
+                                },
+                                (ar, state) => { },
+                                null,
+                                callbackSyncContext: capturingSyncContext
+                            );
+                        },
+                        exception.Message
+                    );
 
                 // Assert
                 Assert.Equal(exception, thrownException);
@@ -391,7 +421,15 @@ namespace System.Web.Mvc.Async.Test
             bool actionCalled = false;
 
             // Act
-            IAsyncResult asyncResult = AsyncResultWrapper.BeginSynchronous(callback: null, state: null, action: delegate { actionCalled = true; }, tag: null);
+            IAsyncResult asyncResult = AsyncResultWrapper.BeginSynchronous(
+                callback: null,
+                state: null,
+                action: delegate
+                {
+                    actionCalled = true;
+                },
+                tag: null
+            );
             AsyncResultWrapper.End(asyncResult);
 
             // Assert
@@ -431,7 +469,8 @@ namespace System.Web.Mvc.Async.Test
                     return expectedReturn;
                 },
                 funcState: expectedState,
-                tag: null);
+                tag: null
+            );
             object retVal = AsyncResultWrapper.End<object>(asyncResult);
 
             // Assert
@@ -449,9 +488,11 @@ namespace System.Web.Mvc.Async.Test
             using (var mockResult = new MockAsyncResult())
             {
                 IAsyncResult asyncResult = AsyncResultWrapper.Begin(
-                    null, null,
+                    null,
+                    null,
                     (callback, state) => mockResult,
-                    ar => 42);
+                    ar => 42
+                );
 
                 // Act
                 int returned = AsyncResultWrapper.End<int>(asyncResult);
@@ -468,16 +509,23 @@ namespace System.Web.Mvc.Async.Test
             using (var mockResult = new MockAsyncResult())
             {
                 IAsyncResult asyncResult = AsyncResultWrapper.Begin<object>(
-                    null, null,
+                    null,
+                    null,
                     (callback, callbackState, state) => mockResult,
                     (ar, state) => { },
-                    null);
+                    null
+                );
 
                 // Act & assert
                 Assert.Throws<ArgumentException>(
-                    delegate { AsyncResultWrapper.End<int>(asyncResult); },
-                    "The provided IAsyncResult is not valid for this method." + Environment.NewLine
-                  + "Parameter name: asyncResult");
+                    delegate
+                    {
+                        AsyncResultWrapper.End<int>(asyncResult);
+                    },
+                    "The provided IAsyncResult is not valid for this method."
+                        + Environment.NewLine
+                        + "Parameter name: asyncResult"
+                );
             }
         }
 
@@ -486,7 +534,12 @@ namespace System.Web.Mvc.Async.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { AsyncResultWrapper.End(null); }, "asyncResult");
+                delegate
+                {
+                    AsyncResultWrapper.End(null);
+                },
+                "asyncResult"
+            );
         }
 
         [Fact]
@@ -496,17 +549,24 @@ namespace System.Web.Mvc.Async.Test
             using (var mockResult = new MockAsyncResult())
             {
                 IAsyncResult asyncResult = AsyncResultWrapper.Begin<object>(
-                    null, null,
+                    null,
+                    null,
                     (callback, callbackState, state) => mockResult,
                     (ar, state) => { },
                     null,
-                    "some tag");
+                    "some tag"
+                );
 
                 // Act & assert
                 Assert.Throws<ArgumentException>(
-                    delegate { AsyncResultWrapper.End(asyncResult, "some other tag"); },
-                    "The provided IAsyncResult is not valid for this method." + Environment.NewLine
-                  + "Parameter name: asyncResult");
+                    delegate
+                    {
+                        AsyncResultWrapper.End(asyncResult, "some other tag");
+                    },
+                    "The provided IAsyncResult is not valid for this method."
+                        + Environment.NewLine
+                        + "Parameter name: asyncResult"
+                );
             }
         }
 
@@ -517,16 +577,22 @@ namespace System.Web.Mvc.Async.Test
             using (var mockResult = new MockAsyncResult())
             {
                 IAsyncResult asyncResult = AsyncResultWrapper.Begin<object>(
-                null, null,
-                (callback, callbackState, state) => mockResult,
-                (ar, state) => { },
-                null);
+                    null,
+                    null,
+                    (callback, callbackState, state) => mockResult,
+                    (ar, state) => { },
+                    null
+                );
 
                 // Act & assert
                 AsyncResultWrapper.End(asyncResult);
                 Assert.Throws<InvalidOperationException>(
-                    delegate { AsyncResultWrapper.End(asyncResult); },
-                    "The provided IAsyncResult has already been consumed.");
+                    delegate
+                    {
+                        AsyncResultWrapper.End(asyncResult);
+                    },
+                    "The provided IAsyncResult has already been consumed."
+                );
             }
         }
 
@@ -534,26 +600,46 @@ namespace System.Web.Mvc.Async.Test
         public void TimedOut()
         {
             // Arrange
-            using (ManualResetEvent waitHandle = new ManualResetEvent(false /* initialState */))
+            using (
+                ManualResetEvent waitHandle = new ManualResetEvent(
+                    false /* initialState */
+                )
+            )
             {
-                AsyncCallback callback = ar => { waitHandle.Set(); };
+                AsyncCallback callback = ar =>
+                {
+                    waitHandle.Set();
+                };
 
                 // Act & assert
                 using (var mockResult = new MockAsyncResult())
                 {
                     IAsyncResult asyncResult = AsyncResultWrapper.Begin<object>(
-                    callback, null,
-                    (innerCallback, callbackState, state) => mockResult,
-                    (ar, state) => { Assert.True(false, "This callback should never execute since we timed out."); },
-                    null,
-                    null, 0);
+                        callback,
+                        null,
+                        (innerCallback, callbackState, state) => mockResult,
+                        (ar, state) =>
+                        {
+                            Assert.True(
+                                false,
+                                "This callback should never execute since we timed out."
+                            );
+                        },
+                        null,
+                        null,
+                        0
+                    );
 
                     // wait for the timeout
                     waitHandle.WaitOne();
 
                     Assert.True(asyncResult.IsCompleted);
                     Assert.Throws<TimeoutException>(
-                        delegate { AsyncResultWrapper.End(asyncResult); });
+                        delegate
+                        {
+                            AsyncResultWrapper.End(asyncResult);
+                        }
+                    );
                 }
             }
         }

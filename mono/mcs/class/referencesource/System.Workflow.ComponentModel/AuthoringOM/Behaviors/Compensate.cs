@@ -1,15 +1,15 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Drawing;
-    using System.ComponentModel;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Drawing;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     [SRDescription(SR.CompensateActivityDescription)]
     [ToolboxItem(typeof(ActivityToolboxItem))]
@@ -17,18 +17,26 @@ namespace System.Workflow.ComponentModel
     [ToolboxBitmap(typeof(CompensateActivity), "Resources.Compensate.png")]
     [ActivityValidator(typeof(CompensateValidator))]
     [SRCategory(SR.Standard)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class CompensateActivity : Activity, IPropertyValueProvider, IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class CompensateActivity
+        : Activity,
+            IPropertyValueProvider,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
     {
-        public CompensateActivity()
-        {
-        }
-        public CompensateActivity(string name)
-            : base(name)
-        {
-        }
+        public CompensateActivity() { }
 
-        public static readonly DependencyProperty TargetActivityNameProperty = DependencyProperty.Register("TargetActivityName", typeof(string), typeof(CompensateActivity), new PropertyMetadata("", DependencyPropertyOptions.Metadata));
+        public CompensateActivity(string name)
+            : base(name) { }
+
+        public static readonly DependencyProperty TargetActivityNameProperty =
+            DependencyProperty.Register(
+                "TargetActivityName",
+                typeof(string),
+                typeof(CompensateActivity),
+                new PropertyMetadata("", DependencyPropertyOptions.Metadata)
+            );
 
         [SRCategory(SR.Activity)]
         [SRDescription(SR.CompensatableActivityDescr)]
@@ -37,14 +45,8 @@ namespace System.Workflow.ComponentModel
         [DefaultValue("")]
         public string TargetActivityName
         {
-            get
-            {
-                return base.GetValue(TargetActivityNameProperty) as string;
-            }
-            set
-            {
-                base.SetValue(TargetActivityNameProperty, value);
-            }
+            get { return base.GetValue(TargetActivityNameProperty) as string; }
+            set { base.SetValue(TargetActivityNameProperty, value); }
         }
 
         #region Protected Methods
@@ -56,7 +58,9 @@ namespace System.Workflow.ComponentModel
             base.Initialize(provider);
         }
 
-        protected internal override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected internal override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -66,7 +70,10 @@ namespace System.Workflow.ComponentModel
         #endregion
 
         #region IActivityEventListener<ActivityExecutionStatusChangedEventArgs> Members
-        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(object sender, ActivityExecutionStatusChangedEventArgs e)
+        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(
+            object sender,
+            ActivityExecutionStatusChangedEventArgs e
+        )
         {
             if (sender == null)
                 throw new ArgumentNullException("sender");
@@ -76,7 +83,10 @@ namespace System.Workflow.ComponentModel
 
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             if (e.ExecutionStatus == ActivityExecutionStatus.Closed)
             {
@@ -99,12 +109,17 @@ namespace System.Workflow.ComponentModel
             do
             {
                 commonParentActivity = commonParentActivity.Parent;
-                targetActivity = commonParentActivity.GetActivityByName(this.TargetActivityName, true);
+                targetActivity = commonParentActivity.GetActivityByName(
+                    this.TargetActivityName,
+                    true
+                );
             } while (targetActivity == null);
 
-            if (targetActivity is ICompensatableActivity &&
-                targetActivity.ExecutionStatus == ActivityExecutionStatus.Closed &&
-                targetActivity.ExecutionResult == ActivityExecutionResult.Succeeded)
+            if (
+                targetActivity is ICompensatableActivity
+                && targetActivity.ExecutionStatus == ActivityExecutionStatus.Closed
+                && targetActivity.ExecutionResult == ActivityExecutionResult.Succeeded
+            )
             {
                 // same execution context
                 targetActivity.RegisterForStatusChange(Activity.ClosedEvent, this);
@@ -119,28 +134,46 @@ namespace System.Workflow.ComponentModel
                 ActivityExecutionContextManager contextManager = context.ExecutionContextManager;
                 foreach (ActivityExecutionContext activeContext in contextManager.ExecutionContexts)
                 {
-                    if (targetActivity.GetActivityByName(activeContext.Activity.QualifiedName, true) != null)
+                    if (
+                        targetActivity.GetActivityByName(activeContext.Activity.QualifiedName, true)
+                        != null
+                    )
                     {
-                        if (activeContext.Activity.ExecutionStatus == ActivityExecutionStatus.Compensating ||
-                            activeContext.Activity.ExecutionStatus == ActivityExecutionStatus.Faulting ||
-                            activeContext.Activity.ExecutionStatus == ActivityExecutionStatus.Canceling
-                            )
+                        if (
+                            activeContext.Activity.ExecutionStatus
+                                == ActivityExecutionStatus.Compensating
+                            || activeContext.Activity.ExecutionStatus
+                                == ActivityExecutionStatus.Faulting
+                            || activeContext.Activity.ExecutionStatus
+                                == ActivityExecutionStatus.Canceling
+                        )
                             return context.Activity.ExecutionStatus;
                     }
                 }
 
                 // walk through all completed execution contexts
-                for (int index = contextManager.CompletedExecutionContexts.Count - 1; index >= 0; index--)
+                for (
+                    int index = contextManager.CompletedExecutionContexts.Count - 1;
+                    index >= 0;
+                    index--
+                )
                 {
-                    //only compensate direct child during explicit compensation 
-                    ActivityExecutionContextInfo completedActivityInfo = contextManager.CompletedExecutionContexts[index];
+                    //only compensate direct child during explicit compensation
+                    ActivityExecutionContextInfo completedActivityInfo =
+                        contextManager.CompletedExecutionContexts[index];
                     if (((completedActivityInfo.Flags & PersistFlags.NeedsCompensation) != 0))
                     {
-                        ActivityExecutionContext revokedExecutionContext = contextManager.DiscardPersistedExecutionContext(completedActivityInfo);
+                        ActivityExecutionContext revokedExecutionContext =
+                            contextManager.DiscardPersistedExecutionContext(completedActivityInfo);
                         if (revokedExecutionContext.Activity is ICompensatableActivity)
                         {
-                            revokedExecutionContext.Activity.RegisterForStatusChange(Activity.ClosedEvent, this);
-                            revokedExecutionContext.CompensateActivity(revokedExecutionContext.Activity);
+                            revokedExecutionContext.Activity.RegisterForStatusChange(
+                                Activity.ClosedEvent,
+                                this
+                            );
+                            revokedExecutionContext.CompensateActivity(
+                                revokedExecutionContext.Activity
+                            );
                         }
                         return context.Activity.ExecutionStatus;
                     }
@@ -149,7 +182,13 @@ namespace System.Workflow.ComponentModel
             else
             {
                 // currently faulting, canceling, or compensating
-                if (CompensationUtils.TryCompensateLastCompletedChildActivity(context, targetActivity, this))
+                if (
+                    CompensationUtils.TryCompensateLastCompletedChildActivity(
+                        context,
+                        targetActivity,
+                        this
+                    )
+                )
                     return context.Activity.ExecutionStatus;
             }
             return ActivityExecutionStatus.Closed;
@@ -174,13 +213,19 @@ namespace System.Workflow.ComponentModel
             CompositeActivity parent = compensate.Parent;
             while (parent != null)
             {
-                if ((parent is CompensationHandlerActivity) || (parent is FaultHandlersActivity) || (parent is CancellationHandlerActivity))
+                if (
+                    (parent is CompensationHandlerActivity)
+                    || (parent is FaultHandlersActivity)
+                    || (parent is CancellationHandlerActivity)
+                )
                 {
                     parent = parent.Parent;
                     if (parent != null)
                     {
                         if (Helpers.IsCustomActivity(parent))
-                            targetList.Add(parent.UserData[UserDataKeys.CustomActivityDefaultName] as string);
+                            targetList.Add(
+                                parent.UserData[UserDataKeys.CustomActivityDefaultName] as string
+                            );
                         else
                             targetList.Add(parent.Name);
 
@@ -208,20 +253,35 @@ namespace System.Workflow.ComponentModel
 
             CompensateActivity compensate = obj as CompensateActivity;
             if (compensate == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(CompensateActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(CompensateActivity).FullName
+                    ),
+                    "obj"
+                );
 
             // Compensate must be in a CompensationHandler or FaultHandler
             CompositeActivity parent = compensate.Parent;
             while (parent != null)
             {
-                if (parent is CompensationHandlerActivity || parent is FaultHandlerActivity || parent is CancellationHandlerActivity)
+                if (
+                    parent is CompensationHandlerActivity
+                    || parent is FaultHandlerActivity
+                    || parent is CancellationHandlerActivity
+                )
                     break;
 
                 parent = parent.Parent;
             }
 
             if (parent == null)
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_CompensateBadNesting), ErrorNumbers.Error_CompensateBadNesting));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(SR.Error_CompensateBadNesting),
+                        ErrorNumbers.Error_CompensateBadNesting
+                    )
+                );
 
             ValidationError error = null;
             StringCollection targets = CompensateActivity.GetCompensatableTargets(compensate);
@@ -231,7 +291,17 @@ namespace System.Workflow.ComponentModel
             }
             else if (!targets.Contains(compensate.TargetActivityName))
             {
-                error = new ValidationError(SR.GetString(SR.Error_CompensateBadTargetTX, "TargetActivityName", compensate.TargetActivityName, compensate.QualifiedName), ErrorNumbers.Error_CompensateBadTargetTX, false, "TargetActivityName");
+                error = new ValidationError(
+                    SR.GetString(
+                        SR.Error_CompensateBadTargetTX,
+                        "TargetActivityName",
+                        compensate.TargetActivityName,
+                        compensate.QualifiedName
+                    ),
+                    ErrorNumbers.Error_CompensateBadTargetTX,
+                    false,
+                    "TargetActivityName"
+                );
             }
             if (error != null)
                 validationErrors.Add(error);

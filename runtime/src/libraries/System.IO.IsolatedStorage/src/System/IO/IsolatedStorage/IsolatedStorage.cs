@@ -50,20 +50,21 @@ namespace System.IO.IsolatedStorage
         }
 
         [CLSCompliant(false)]
-        [Obsolete("IsolatedStorage.CurrentSize has been deprecated because it is not CLS Compliant. To get the current size use IsolatedStorage.UsedSize instead.")]
+        [Obsolete(
+            "IsolatedStorage.CurrentSize has been deprecated because it is not CLS Compliant. To get the current size use IsolatedStorage.UsedSize instead."
+        )]
         public virtual ulong CurrentSize
         {
-            get
-            {
-                throw new InvalidOperationException(SR.IsolatedStorage_CurrentSizeUndefined);
-            }
+            get { throw new InvalidOperationException(SR.IsolatedStorage_CurrentSizeUndefined); }
         }
 
         public virtual long UsedSize
         {
             get
             {
-                throw new InvalidOperationException(SR.Format(SR.IsolatedStorage_QuotaIsUndefined, nameof(UsedSize)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.IsolatedStorage_QuotaIsUndefined, nameof(UsedSize))
+                );
             }
         }
 
@@ -71,12 +72,16 @@ namespace System.IO.IsolatedStorage
         {
             get
             {
-                throw new InvalidOperationException(SR.Format(SR.IsolatedStorage_QuotaIsUndefined, nameof(AvailableFreeSpace)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.IsolatedStorage_QuotaIsUndefined, nameof(AvailableFreeSpace))
+                );
             }
         }
 
         [CLSCompliant(false)]
-        [Obsolete("IsolatedStorage.MaximumSize has been deprecated because it is not CLS Compliant. To get the maximum size use IsolatedStorage.Quota instead.")]
+        [Obsolete(
+            "IsolatedStorage.MaximumSize has been deprecated because it is not CLS Compliant. To get the maximum size use IsolatedStorage.Quota instead."
+        )]
         public virtual ulong MaximumSize
         {
             get
@@ -84,7 +89,9 @@ namespace System.IO.IsolatedStorage
                 if (_validQuota)
                     return _quota;
 
-                throw new InvalidOperationException(SR.Format(SR.IsolatedStorage_QuotaIsUndefined, nameof(MaximumSize)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.IsolatedStorage_QuotaIsUndefined, nameof(MaximumSize))
+                );
             }
         }
 
@@ -95,9 +102,10 @@ namespace System.IO.IsolatedStorage
                 if (_validQuota)
                     return (long)_quota;
 
-                throw new InvalidOperationException(SR.Format(SR.IsolatedStorage_QuotaIsUndefined, nameof(Quota)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.IsolatedStorage_QuotaIsUndefined, nameof(Quota))
+                );
             }
-
             internal set
             {
                 _quota = (ulong)value;
@@ -105,10 +113,7 @@ namespace System.IO.IsolatedStorage
             }
         }
 
-        public IsolatedStorageScope Scope
-        {
-            get; private set;
-        }
+        public IsolatedStorageScope Scope { get; private set; }
 
         protected virtual char SeparatorExternal
         {
@@ -127,22 +132,27 @@ namespace System.IO.IsolatedStorage
 
         public abstract void Remove();
 
-        internal string? IdentityHash
-        {
-            get; private set;
-        }
+        internal string? IdentityHash { get; private set; }
 
         protected void InitStore(IsolatedStorageScope scope, Type appEvidenceType)
         {
             InitStore(scope, null, appEvidenceType);
         }
 
-        protected void InitStore(IsolatedStorageScope scope, Type? domainEvidenceType, Type? assemblyEvidenceType)
+        protected void InitStore(
+            IsolatedStorageScope scope,
+            Type? domainEvidenceType,
+            Type? assemblyEvidenceType
+        )
         {
             VerifyScope(scope);
             Scope = scope;
 
-            Helper.GetDefaultIdentityAndHash(out object identity, out string hash, SeparatorInternal);
+            Helper.GetDefaultIdentityAndHash(
+                out object identity,
+                out string hash,
+                SeparatorInternal
+            );
 
             if (Helper.IsApplication(scope))
             {
@@ -153,7 +163,11 @@ namespace System.IO.IsolatedStorage
                 if (Helper.IsDomain(scope))
                 {
                     _domainIdentity = identity;
-                    hash = string.Create(null, stackalloc char[128], $"{hash}{SeparatorExternal}{hash}");
+                    hash = string.Create(
+                        null,
+                        stackalloc char[128],
+                        $"{hash}{SeparatorExternal}{hash}"
+                    );
                 }
 
                 _assemblyIdentity = identity;
@@ -169,13 +183,24 @@ namespace System.IO.IsolatedStorage
             switch (scope)
             {
                 case IsolatedStorageScope.User | IsolatedStorageScope.Assembly:
-                case IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain:
-                case IsolatedStorageScope.Roaming | IsolatedStorageScope.User | IsolatedStorageScope.Assembly:
-                case IsolatedStorageScope.Roaming | IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain:
+                case IsolatedStorageScope.User
+                    | IsolatedStorageScope.Assembly
+                    | IsolatedStorageScope.Domain:
+                case IsolatedStorageScope.Roaming
+                    | IsolatedStorageScope.User
+                    | IsolatedStorageScope.Assembly:
+                case IsolatedStorageScope.Roaming
+                    | IsolatedStorageScope.User
+                    | IsolatedStorageScope.Assembly
+                    | IsolatedStorageScope.Domain:
                 case IsolatedStorageScope.Machine | IsolatedStorageScope.Assembly:
-                case IsolatedStorageScope.Machine | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain:
+                case IsolatedStorageScope.Machine
+                    | IsolatedStorageScope.Assembly
+                    | IsolatedStorageScope.Domain:
                 case IsolatedStorageScope.Application | IsolatedStorageScope.User:
-                case IsolatedStorageScope.Application | IsolatedStorageScope.User | IsolatedStorageScope.Roaming:
+                case IsolatedStorageScope.Application
+                    | IsolatedStorageScope.User
+                    | IsolatedStorageScope.Roaming:
                 case IsolatedStorageScope.Application | IsolatedStorageScope.Machine:
                     break;
                 default:

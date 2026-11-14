@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class TestClass_65690
 {
     public struct S1
@@ -20,12 +21,15 @@ public class TestClass_65690
             public bool bool_1;
             public sbyte sbyte_2;
         }
+
         public double double_3;
     }
+
     public struct S2
     {
         public S1.S1_D1_F1 s1_s1_d1_f1_5;
     }
+
     static byte s_byte_7 = 2;
     static decimal s_decimal_9 = -1.9647058823529411764705882353m;
     static int s_int_12 = 1;
@@ -41,6 +45,7 @@ public class TestClass_65690
     S1 s1_38 = new S1();
     S2 s2_39 = new S2();
     static int s_loopInvariant = 4;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public byte LeafMethod1()
     {
@@ -49,8 +54,12 @@ public class TestClass_65690
             return 15 + 4;
         }
     }
- 
-    public double Method3(out sbyte p_sbyte_93, out double p_double_94, out S1.S1_D1_F1 p_s1_s1_d1_f1_98)
+
+    public double Method3(
+        out sbyte p_sbyte_93,
+        out double p_double_94,
+        out S1.S1_D1_F1 p_s1_s1_d1_f1_98
+    )
     {
         unchecked
         {
@@ -69,9 +78,7 @@ public class TestClass_65690
             ulong ulong_152 = 5;
             S1.S1_D1_F1 s1_s1_d1_f1_153 = new S1.S1_D1_F1();
             S2 s2_155 = new S2();
-            if (15 - 4 != LeafMethod1())
-            {
-            }
+            if (15 - 4 != LeafMethod1()) { }
             else
             {
                 try
@@ -80,15 +87,15 @@ public class TestClass_65690
                 }
                 finally
                 {
-                    s2_39.s1_s1_d1_f1_5.decimal_0 = 15 % 4 + s1_s1_d1_f1_153.decimal_0 - 15 + 4 + 40;
+                    s2_39.s1_s1_d1_f1_5.decimal_0 =
+                        15 % 4 + s1_s1_d1_f1_153.decimal_0 - 15 + 4 + 40;
                 }
                 int __loopvar25 = 15 + 4;
                 do
                 {
                     if (__loopvar25 < s_loopInvariant - 1)
                         break;
-                }
-                while (s1_s1_d1_f1_37.bool_1 = s1_s1_d1_f1_37.bool_1 = bool_23);
+                } while (s1_s1_d1_f1_37.bool_1 = s1_s1_d1_f1_37.bool_1 = bool_23);
             }
             if (15 / 4 % ulong_152 + 22 + 78 - s_ulong_19 > 19)
             {
@@ -99,20 +106,23 @@ public class TestClass_65690
                         break;
                     if (s1_s1_d1_f1_37.bool_1)
                     {
-                        Method3(out s2_155.s1_s1_d1_f1_5.sbyte_2, out s1_38.double_3, out s1_s1_d1_f1_153);
+                        Method3(
+                            out s2_155.s1_s1_d1_f1_5.sbyte_2,
+                            out s1_38.double_3,
+                            out s1_s1_d1_f1_153
+                        );
                     }
                     else
                     {
                         ushort_34 *= 15 % 4;
                     }
-                    if ((byte_24 = s_byte_7 ^= 15 | 4) >= (15 | 4))
-                    {
-                    }
+                    if ((byte_24 = s_byte_7 ^= 15 | 4) >= (15 | 4)) { }
                 }
             }
             return;
         }
     }
+
     [Fact]
     public static void TestEntryPoint()
     {

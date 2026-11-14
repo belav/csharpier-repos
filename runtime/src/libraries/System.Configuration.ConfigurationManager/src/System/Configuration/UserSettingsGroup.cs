@@ -3,7 +3,5 @@
 
 namespace System.Configuration
 {
-    public sealed class UserSettingsGroup : ConfigurationSectionGroup
-    {
-    }
+    public sealed class UserSettingsGroup : ConfigurationSectionGroup { }
 }

@@ -30,184 +30,193 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class DataListItem_ctor_IL
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class DataListItem_ctor_IL : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm = (HtmlForm)FindControl("form1");
-			GHTTestBegin(frm);
-            
-			// AlternatingItem
-			GHTSubTestBegin("AlternatingItem");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(1, ListItemType.AlternatingItem);
-				Compare(item.ItemType, ListItemType.AlternatingItem);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			// EditItem
-			GHTSubTestBegin("EditItem");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(1, ListItemType.EditItem);
-				Compare(item.ItemType, ListItemType.EditItem);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("form1");
+            GHTTestBegin(frm);
 
-			// Footer
-			GHTSubTestBegin("Footer");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(1, ListItemType.Footer);
-				Compare(item.ItemType, ListItemType.Footer);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // AlternatingItem
+            GHTSubTestBegin("AlternatingItem");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(1, ListItemType.AlternatingItem);
+                Compare(item.ItemType, ListItemType.AlternatingItem);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Header
-			GHTSubTestBegin("Header");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(1, ListItemType.Header);
-				Compare(item.ItemType, ListItemType.Header);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // EditItem
+            GHTSubTestBegin("EditItem");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(1, ListItemType.EditItem);
+                Compare(item.ItemType, ListItemType.EditItem);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Item
-			GHTSubTestBegin("Item");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(1, ListItemType.Item);
-				Compare(item.ItemType, ListItemType.Item);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Footer
+            GHTSubTestBegin("Footer");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(1, ListItemType.Footer);
+                Compare(item.ItemType, ListItemType.Footer);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Pager
-			GHTSubTestBegin("Pager");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(1, ListItemType.Pager);
-				Compare(item.ItemType, ListItemType.Pager);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Header
+            GHTSubTestBegin("Header");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(1, ListItemType.Header);
+                Compare(item.ItemType, ListItemType.Header);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// SelectedItem
-			GHTSubTestBegin("SelectedItem");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(1, ListItemType.SelectedItem);
-				Compare(item.ItemType, ListItemType.SelectedItem);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Item
+            GHTSubTestBegin("Item");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(1, ListItemType.Item);
+                Compare(item.ItemType, ListItemType.Item);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Separator
-			GHTSubTestBegin("Separator");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(1, ListItemType.Separator);
-				Compare(item.ItemType, ListItemType.Separator);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Pager
+            GHTSubTestBegin("Pager");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(1, ListItemType.Pager);
+                Compare(item.ItemType, ListItemType.Pager);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Positive  index
-			GHTSubTestBegin("Positive index");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(10, ListItemType.Item);
-				Compare(item.ItemIndex, 10);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // SelectedItem
+            GHTSubTestBegin("SelectedItem");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(1, ListItemType.SelectedItem);
+                Compare(item.ItemType, ListItemType.SelectedItem);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Negative index
-			GHTSubTestBegin("Negative index");
-				try 
-				{
-					System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(-10, ListItemType.Item);
-					Compare(item.ItemIndex, -10);
-				}
-				catch (Exception ex) 
-				{
-					GHTSubTestUnexpectedExceptionCaught(ex);
-				}
-			GHTSubTestEnd();
+            // Separator
+            GHTSubTestBegin("Separator");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(1, ListItemType.Separator);
+                Compare(item.ItemType, ListItemType.Separator);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// -1
-			GHTSubTestBegin("-1");
-			try 
-			{
-				System.Web.UI.WebControls.DataListItem item = new System.Web.UI.WebControls.DataListItem(-1, ListItemType.Item);
-				Compare(item.ItemIndex, -1);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Positive  index
+            GHTSubTestBegin("Positive index");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(10, ListItemType.Item);
+                Compare(item.ItemIndex, 10);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			GHTTestEnd();
+            // Negative index
+            GHTSubTestBegin("Negative index");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(-10, ListItemType.Item);
+                Compare(item.ItemIndex, -10);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-		}
-	}
+            // -1
+            GHTSubTestBegin("-1");
+            try
+            {
+                System.Web.UI.WebControls.DataListItem item =
+                    new System.Web.UI.WebControls.DataListItem(-1, ListItemType.Item);
+                Compare(item.ItemIndex, -1);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
+
+            GHTTestEnd();
+        }
+    }
 }

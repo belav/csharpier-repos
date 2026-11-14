@@ -72,8 +72,8 @@ internal static class HostingEnvironmentExtensions
             hostingEnvironment.WebRootFileProvider = new NullFileProvider();
         }
 
-        hostingEnvironment.EnvironmentName =
-            options.Environment ?? hostingEnvironment.EnvironmentName;
+        hostingEnvironment.EnvironmentName = options.Environment
+            ?? hostingEnvironment.EnvironmentName;
     }
 
     internal static void Initialize(
@@ -99,11 +99,10 @@ internal static class HostingEnvironmentExtensions
             );
         }
 
-        hostingEnvironment.ApplicationName =
-            baseEnvironment?.ApplicationName ?? options.ApplicationName;
+        hostingEnvironment.ApplicationName = baseEnvironment?.ApplicationName
+            ?? options.ApplicationName;
         hostingEnvironment.ContentRootPath = contentRootPath;
-        hostingEnvironment.ContentRootFileProvider =
-            baseEnvironment?.ContentRootFileProvider
+        hostingEnvironment.ContentRootFileProvider = baseEnvironment?.ContentRootFileProvider
             ?? new PhysicalFileProvider(hostingEnvironment.ContentRootPath);
 
         var webRoot = options.WebRoot;
@@ -140,8 +139,7 @@ internal static class HostingEnvironmentExtensions
             hostingEnvironment.WebRootFileProvider = new NullFileProvider();
         }
 
-        hostingEnvironment.EnvironmentName =
-            baseEnvironment?.EnvironmentName
+        hostingEnvironment.EnvironmentName = baseEnvironment?.EnvironmentName
             ?? options.Environment
             ?? hostingEnvironment.EnvironmentName;
     }

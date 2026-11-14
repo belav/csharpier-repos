@@ -23,18 +23,28 @@ namespace System.Net.Sockets
         private bool Disposed => _disposed != 0;
 
         // Initializes a new instance of the System.Net.Sockets.TcpClient class.
-        public TcpClient() : this(AddressFamily.Unknown)
-        {
-        }
+        public TcpClient()
+            : this(AddressFamily.Unknown) { }
 
         // Initializes a new instance of the System.Net.Sockets.TcpClient class.
         public TcpClient(AddressFamily family)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, family);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, family);
 
-            if (family is not (AddressFamily.InterNetwork or AddressFamily.InterNetworkV6 or AddressFamily.Unknown))
+            if (
+                family
+                is not (
+                    AddressFamily.InterNetwork
+                    or AddressFamily.InterNetworkV6
+                    or AddressFamily.Unknown
+                )
+            )
             {
-                throw new ArgumentException(SR.Format(SR.net_protocol_invalid_family, "TCP"), nameof(family));
+                throw new ArgumentException(
+                    SR.Format(SR.net_protocol_invalid_family, "TCP"),
+                    nameof(family)
+                );
             }
 
             _family = family;
@@ -46,7 +56,8 @@ namespace System.Net.Sockets
         {
             ArgumentNullException.ThrowIfNull(localEP);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, localEP);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, localEP);
             _family = localEP.AddressFamily; // set before calling CreateSocket
             InitializeClientSocket();
             _clientSocket.Bind(localEP);
@@ -54,11 +65,13 @@ namespace System.Net.Sockets
 
         // Initializes a new instance of the System.Net.Sockets.TcpClient class and connects to the specified port on
         // the specified host.
-        public TcpClient(string hostname, int port) : this(AddressFamily.Unknown)
+        public TcpClient(string hostname, int port)
+            : this(AddressFamily.Unknown)
         {
             ArgumentNullException.ThrowIfNull(hostname);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, hostname);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, hostname);
             if (!TcpValidationHelpers.ValidatePortNumber(port))
             {
                 throw new ArgumentOutOfRangeException(nameof(port));
@@ -134,7 +147,6 @@ namespace System.Net.Sockets
             Client.Connect(hostname, port);
             _family = Client.AddressFamily;
             _active = true;
-
         }
 
         // Connects the Client to the specified port on the specified host.
@@ -194,14 +206,20 @@ namespace System.Net.Sockets
             _active = true;
         }
 
-        public ValueTask ConnectAsync(IPAddress address, int port, CancellationToken cancellationToken) =>
-            CompleteConnectAsync(Client.ConnectAsync(address, port, cancellationToken));
+        public ValueTask ConnectAsync(
+            IPAddress address,
+            int port,
+            CancellationToken cancellationToken
+        ) => CompleteConnectAsync(Client.ConnectAsync(address, port, cancellationToken));
 
         public ValueTask ConnectAsync(string host, int port, CancellationToken cancellationToken) =>
             CompleteConnectAsync(Client.ConnectAsync(host, port, cancellationToken));
 
-        public ValueTask ConnectAsync(IPAddress[] addresses, int port, CancellationToken cancellationToken) =>
-            CompleteConnectAsync(Client.ConnectAsync(addresses, port, cancellationToken));
+        public ValueTask ConnectAsync(
+            IPAddress[] addresses,
+            int port,
+            CancellationToken cancellationToken
+        ) => CompleteConnectAsync(Client.ConnectAsync(addresses, port, cancellationToken));
 
         /// <summary>
         /// Connects the client to a remote TCP host using the specified endpoint as an asynchronous operation.
@@ -218,20 +236,31 @@ namespace System.Net.Sockets
             _active = true;
         }
 
-        public IAsyncResult BeginConnect(IPAddress address, int port, AsyncCallback? requestCallback, object? state) =>
-            Client.BeginConnect(address, port, requestCallback, state);
+        public IAsyncResult BeginConnect(
+            IPAddress address,
+            int port,
+            AsyncCallback? requestCallback,
+            object? state
+        ) => Client.BeginConnect(address, port, requestCallback, state);
 
-        public IAsyncResult BeginConnect(string host, int port, AsyncCallback? requestCallback, object? state) =>
-            Client.BeginConnect(host, port, requestCallback, state);
+        public IAsyncResult BeginConnect(
+            string host,
+            int port,
+            AsyncCallback? requestCallback,
+            object? state
+        ) => Client.BeginConnect(host, port, requestCallback, state);
 
-        public IAsyncResult BeginConnect(IPAddress[] addresses, int port, AsyncCallback? requestCallback, object? state) =>
-            Client.BeginConnect(addresses, port, requestCallback, state);
+        public IAsyncResult BeginConnect(
+            IPAddress[] addresses,
+            int port,
+            AsyncCallback? requestCallback,
+            object? state
+        ) => Client.BeginConnect(addresses, port, requestCallback, state);
 
         public void EndConnect(IAsyncResult asyncResult)
         {
             _clientSocket.EndConnect(asyncResult);
             _active = true;
-
         }
 
         // Returns the stream used to read and write data to the remote host.
@@ -293,29 +322,79 @@ namespace System.Net.Sockets
         // Gets or sets the size of the receive buffer in bytes.
         public int ReceiveBufferSize
         {
-            get { return (int)Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer)!; }
-            set { Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, value); }
+            get
+            {
+                return (int)
+                    Client.GetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.ReceiveBuffer
+                    )!;
+            }
+            set
+            {
+                Client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveBuffer,
+                    value
+                );
+            }
         }
 
         // Gets or sets the size of the send buffer in bytes.
         public int SendBufferSize
         {
-            get { return (int)Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendBuffer)!; }
-            set { Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendBuffer, value); }
+            get
+            {
+                return (int)
+                    Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendBuffer)!;
+            }
+            set
+            {
+                Client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendBuffer,
+                    value
+                );
+            }
         }
 
         // Gets or sets the receive time out value of the connection in milliseconds.
         public int ReceiveTimeout
         {
-            get { return (int)Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout)!; }
-            set { Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, value); }
+            get
+            {
+                return (int)
+                    Client.GetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.ReceiveTimeout
+                    )!;
+            }
+            set
+            {
+                Client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveTimeout,
+                    value
+                );
+            }
         }
 
         // Gets or sets the send time out value of the connection in milliseconds.
         public int SendTimeout
         {
-            get { return (int)Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout)!; }
-            set { Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, value); }
+            get
+            {
+                return (int)
+                    Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout)!;
+            }
+            set
+            {
+                Client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendTimeout,
+                    value
+                );
+            }
         }
 
         // Gets or sets the value of the connection's linger option.

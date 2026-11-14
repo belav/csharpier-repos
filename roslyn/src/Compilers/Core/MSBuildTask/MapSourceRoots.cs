@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
     /// </summary>
     /// <remarks>
     /// Does not perform any path validation.
-    /// 
-    /// The <c>MappedPath</c> is either the path (ItemSpec) itself, when <see cref="Deterministic"/> is false, 
+    ///
+    /// The <c>MappedPath</c> is either the path (ItemSpec) itself, when <see cref="Deterministic"/> is false,
     /// or a calculated deterministic source path (starting with prefix '/_/', '/_1/', etc.), otherwise.
     /// </remarks>
     public sealed class MapSourceRoots : Task
@@ -68,11 +68,19 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             public const string MappedPath = nameof(MappedPath);
             public const string SourceLinkUrl = nameof(SourceLinkUrl);
 
-            public static readonly string[] SourceRootMetadataNames = new[] { SourceControl, RevisionId, NestedRoot, ContainingRoot, MappedPath, SourceLinkUrl };
+            public static readonly string[] SourceRootMetadataNames = new[]
+            {
+                SourceControl,
+                RevisionId,
+                NestedRoot,
+                ContainingRoot,
+                MappedPath,
+                SourceLinkUrl,
+            };
         }
 
-        private static string EnsureEndsWithSlash(string path)
-            => (path[path.Length - 1] == '/') ? path : path + '/';
+        private static string EnsureEndsWithSlash(string path) =>
+            (path[path.Length - 1] == '/') ? path : path + '/';
 
         private static bool EndsWithDirectorySeparator(string path)
         {
@@ -98,7 +106,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // to match the corresponding separators used in paths given to the compiler).
                 if (!EndsWithDirectorySeparator(sourceRoot.ItemSpec))
                 {
-                    Log.LogErrorFromResources("MapSourceRoots.PathMustEndWithSlashOrBackslash", Names.SourceRoot, sourceRoot.ItemSpec);
+                    Log.LogErrorFromResources(
+                        "MapSourceRoots.PathMustEndWithSlashOrBackslash",
+                        Names.SourceRoot,
+                        sourceRoot.ItemSpec
+                    );
                 }
 
                 if (rootByItemSpec.TryGetValue(sourceRoot.ItemSpec, out var existingRoot))
@@ -125,7 +137,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 {
                     foreach (var root in mappedSourceRoots)
                     {
-                        if (!string.IsNullOrEmpty(root.GetMetadata(Names.SourceControl)) == sourceControlled)
+                        if (
+                            !string.IsNullOrEmpty(root.GetMetadata(Names.SourceControl))
+                            == sourceControlled
+                        )
                         {
                             string localPath = root.ItemSpec;
                             string nestedRoot = root.GetMetadata(Names.NestedRoot);
@@ -135,12 +150,17 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
                                 if (topLevelMappedPaths.ContainsKey(localPath))
                                 {
-                                    Log.LogErrorFromResources("MapSourceRoots.ContainsDuplicate", Names.SourceRoot, localPath);
+                                    Log.LogErrorFromResources(
+                                        "MapSourceRoots.ContainsDuplicate",
+                                        Names.SourceRoot,
+                                        localPath
+                                    );
                                 }
                                 else
                                 {
                                     int index = topLevelMappedPaths.Count;
-                                    var mappedPath = "/_" + (index == 0 ? "" : index.ToString()) + "/";
+                                    var mappedPath =
+                                        "/_" + (index == 0 ? "" : index.ToString()) + "/";
                                     topLevelMappedPaths.Add(localPath, mappedPath);
                                     root.SetMetadata(Names.MappedPath, mappedPath);
                                 }
@@ -157,7 +177,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
                 if (topLevelMappedPaths.Count == 0)
                 {
-                    Log.LogErrorFromResources("MapSourceRoots.NoTopLevelSourceRoot", Names.SourceRoot, Names.DeterministicSourcePaths);
+                    Log.LogErrorFromResources(
+                        "MapSourceRoots.NoTopLevelSourceRoot",
+                        Names.SourceRoot,
+                        Names.DeterministicSourcePaths
+                    );
                     return false;
                 }
 
@@ -171,14 +195,31 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
                         // The value of ContainingRoot metadata is a file path that is compared with ItemSpec values of SourceRoot items.
                         // Since the paths in ItemSpec have backslashes replaced with slashes on non-Windows platforms we need to do the same for ContainingRoot.
-                        if (containingRoot != null && topLevelMappedPaths.TryGetValue(Utilities.FixFilePath(containingRoot), out var mappedTopLevelPath))
+                        if (
+                            containingRoot != null
+                            && topLevelMappedPaths.TryGetValue(
+                                Utilities.FixFilePath(containingRoot),
+                                out var mappedTopLevelPath
+                            )
+                        )
                         {
-                            Debug.Assert(mappedTopLevelPath.EndsWith("/", StringComparison.Ordinal));
-                            root.SetMetadata(Names.MappedPath, mappedTopLevelPath + EnsureEndsWithSlash(nestedRoot.Replace('\\', '/')));
+                            Debug.Assert(
+                                mappedTopLevelPath.EndsWith("/", StringComparison.Ordinal)
+                            );
+                            root.SetMetadata(
+                                Names.MappedPath,
+                                mappedTopLevelPath
+                                    + EnsureEndsWithSlash(nestedRoot.Replace('\\', '/'))
+                            );
                         }
                         else
                         {
-                            Log.LogErrorFromResources("MapSourceRoots.NoSuchTopLevelSourceRoot", Names.SourceRoot + "." + Names.ContainingRoot, Names.SourceRoot, containingRoot);
+                            Log.LogErrorFromResources(
+                                "MapSourceRoots.NoSuchTopLevelSourceRoot",
+                                Names.SourceRoot + "." + Names.ContainingRoot,
+                                Names.SourceRoot,
+                                containingRoot
+                            );
                         }
                     }
                 }
@@ -209,9 +250,20 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 var leftValue = left.GetMetadata(metadataName);
                 var rightValue = right.GetMetadata(metadataName);
 
-                if (!string.IsNullOrEmpty(leftValue) && !string.IsNullOrEmpty(rightValue) && leftValue != rightValue)
+                if (
+                    !string.IsNullOrEmpty(leftValue)
+                    && !string.IsNullOrEmpty(rightValue)
+                    && leftValue != rightValue
+                )
                 {
-                    Log.LogWarningFromResources("MapSourceRoots.ContainsDuplicate", Names.SourceRoot, left.ItemSpec, metadataName, leftValue, rightValue);
+                    Log.LogWarningFromResources(
+                        "MapSourceRoots.ContainsDuplicate",
+                        Names.SourceRoot,
+                        left.ItemSpec,
+                        metadataName,
+                        leftValue,
+                        rightValue
+                    );
                 }
             }
         }

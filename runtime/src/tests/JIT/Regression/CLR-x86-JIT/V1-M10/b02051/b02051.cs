@@ -3,9 +3,11 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     using System;
+
     public class JITcrash
     {
         [Fact]

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -11,11 +12,17 @@ namespace Test
     {
         ulong[] m_aulField = null;
 
-        static void Func1(ref BB param1, double[] param2,
-                                uint[] param3, ref bool param4) { }
+        static void Func1(ref BB param1, double[] param2, uint[] param3, ref bool param4) { }
 
-        static uint[] Func2(long param1) { return null; }
-        static bool[] Func3(ulong[] param4) { return null; }
+        static uint[] Func2(long param1)
+        {
+            return null;
+        }
+
+        static bool[] Func3(ulong[] param4)
+        {
+            return null;
+        }
 
         static void Func4(ref BB[] param1, ref long param2, ref long[] param3)
         {

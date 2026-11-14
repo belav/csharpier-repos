@@ -17,11 +17,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// Remote API.
         /// </summary>
-        public async ValueTask<ImmutableArray<ActiveStatementSpan>> GetSpansAsync(DocumentId? documentId, string filePath, CancellationToken cancellationToken)
+        public async ValueTask<ImmutableArray<ActiveStatementSpan>> GetSpansAsync(
+            DocumentId? documentId,
+            string filePath,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                return await _provider(documentId, filePath, cancellationToken).ConfigureAwait(false);
+                return await _provider(documentId, filePath, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
             {

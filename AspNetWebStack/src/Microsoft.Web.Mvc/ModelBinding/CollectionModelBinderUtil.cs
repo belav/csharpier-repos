@@ -11,7 +11,11 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     internal static class CollectionModelBinderUtil
     {
-        public static void CreateOrReplaceCollection<TElement>(ExtensibleModelBindingContext bindingContext, IEnumerable<TElement> incomingElements, Func<ICollection<TElement>> creator)
+        public static void CreateOrReplaceCollection<TElement>(
+            ExtensibleModelBindingContext bindingContext,
+            IEnumerable<TElement> incomingElements,
+            Func<ICollection<TElement>> creator
+        )
         {
             ICollection<TElement> collection = bindingContext.Model as ICollection<TElement>;
             if (collection == null || collection.IsReadOnly)
@@ -27,9 +31,14 @@ namespace Microsoft.Web.Mvc.ModelBinding
             }
         }
 
-        public static void CreateOrReplaceDictionary<TKey, TValue>(ExtensibleModelBindingContext bindingContext, IEnumerable<KeyValuePair<TKey, TValue>> incomingElements, Func<IDictionary<TKey, TValue>> creator)
+        public static void CreateOrReplaceDictionary<TKey, TValue>(
+            ExtensibleModelBindingContext bindingContext,
+            IEnumerable<KeyValuePair<TKey, TValue>> incomingElements,
+            Func<IDictionary<TKey, TValue>> creator
+        )
         {
-            IDictionary<TKey, TValue> dictionary = bindingContext.Model as IDictionary<TKey, TValue>;
+            IDictionary<TKey, TValue> dictionary =
+                bindingContext.Model as IDictionary<TKey, TValue>;
             if (dictionary == null || dictionary.IsReadOnly)
             {
                 dictionary = creator();
@@ -55,14 +64,33 @@ namespace Microsoft.Web.Mvc.ModelBinding
         // type can update models that implement IList<T>, and if for some reason the existing model instance is not
         // updatable the binder will create a List<T> object and bind to that instead. This method will return a ListBinder<T>
         // or null, depending on whether the type and updatability checks succeed.
-        public static IExtensibleModelBinder GetGenericBinder(Type supportedInterfaceType, Type newInstanceType, Type openBinderType, ModelMetadata modelMetadata)
+        public static IExtensibleModelBinder GetGenericBinder(
+            Type supportedInterfaceType,
+            Type newInstanceType,
+            Type openBinderType,
+            ModelMetadata modelMetadata
+        )
         {
-            Type[] typeArguments = GetTypeArgumentsForUpdatableGenericCollection(supportedInterfaceType, newInstanceType, modelMetadata);
-            return (typeArguments != null) ? (IExtensibleModelBinder)Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments)) : null;
+            Type[] typeArguments = GetTypeArgumentsForUpdatableGenericCollection(
+                supportedInterfaceType,
+                newInstanceType,
+                modelMetadata
+            );
+            return (typeArguments != null)
+                ? (IExtensibleModelBinder)
+                    Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments))
+                : null;
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "System.Web.Mvc.ValueProviderResult.ConvertTo(System.Type)", Justification = "This model binder binds collections, so it does not need culture.")]
-        public static IEnumerable<string> GetIndexNamesFromValueProviderResult(ValueProviderResult valueProviderResultIndex)
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1304:SpecifyCultureInfo",
+            MessageId = "System.Web.Mvc.ValueProviderResult.ConvertTo(System.Type)",
+            Justification = "This model binder binds collections, so it does not need culture."
+        )]
+        public static IEnumerable<string> GetIndexNamesFromValueProviderResult(
+            ValueProviderResult valueProviderResultIndex
+        )
         {
             IEnumerable<string> indexNames = null;
             if (valueProviderResultIndex != null)
@@ -89,13 +117,20 @@ namespace Microsoft.Web.Mvc.ModelBinding
         // Returns the generic type arguments for the model type if updatable, else null.
         // supportedInterfaceType: open type (like IList<>) of supported interface, must implement ICollection<>
         // newInstanceType: open type (like List<>) of object that will be created, must implement supportedInterfaceType
-        public static Type[] GetTypeArgumentsForUpdatableGenericCollection(Type supportedInterfaceType, Type newInstanceType, ModelMetadata modelMetadata)
+        public static Type[] GetTypeArgumentsForUpdatableGenericCollection(
+            Type supportedInterfaceType,
+            Type newInstanceType,
+            ModelMetadata modelMetadata
+        )
         {
             /*
              * Check that we can extract proper type arguments from the model.
              */
 
-            if (!modelMetadata.ModelType.IsGenericType || modelMetadata.ModelType.IsGenericTypeDefinition)
+            if (
+                !modelMetadata.ModelType.IsGenericType
+                || modelMetadata.ModelType.IsGenericTypeDefinition
+            )
             {
                 // not a closed generic type
                 return null;
@@ -126,14 +161,20 @@ namespace Microsoft.Web.Mvc.ModelBinding
              * the model instance can be updated in-place.
              */
 
-            Type closedSupportedInterfaceType = supportedInterfaceType.MakeGenericType(modelTypeArguments);
+            Type closedSupportedInterfaceType = supportedInterfaceType.MakeGenericType(
+                modelTypeArguments
+            );
             if (!closedSupportedInterfaceType.IsInstanceOfType(modelMetadata.Model))
             {
                 return null; // not instance of correct interface
             }
 
-            Type closedCollectionType = TypeHelpers.ExtractGenericInterface(closedSupportedInterfaceType, typeof(ICollection<>));
-            bool collectionInstanceIsReadOnly = (bool)closedCollectionType.GetProperty("IsReadOnly").GetValue(modelMetadata.Model, null);
+            Type closedCollectionType = TypeHelpers.ExtractGenericInterface(
+                closedSupportedInterfaceType,
+                typeof(ICollection<>)
+            );
+            bool collectionInstanceIsReadOnly = (bool)
+                closedCollectionType.GetProperty("IsReadOnly").GetValue(modelMetadata.Model, null);
             if (collectionInstanceIsReadOnly)
             {
                 return null;

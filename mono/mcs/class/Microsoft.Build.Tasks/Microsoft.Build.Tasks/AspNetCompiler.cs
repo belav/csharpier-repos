@@ -25,125 +25,141 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.IO;
 using Microsoft.Build.Framework;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class AspNetCompiler : ToolTaskExtension {
-	
-		bool	allowPartiallyTrustedCallers;
-		bool	clean;
-		bool	debug;
-		bool	delaySign;
-		bool	fixedNames;
-		bool	force;
-		string	keyContainer;
-		string	keyFile;
-		string	metabasePath;
-		string	physicalPath;
-		string	targetPath;
-		bool	updateable;
-		string	virtualPath;
-	
-		public AspNetCompiler ()
-		{
-		}
-		
-		[MonoTODO]
-		public override bool Execute ()
-		{
-			return false;
-		}
-		
-		[MonoTODO]
-		protected internal override void AddCommandLineCommands (CommandLineBuilderExtension commandLine)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected override string GenerateFullPathToTool ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected override bool ValidateParameters ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public bool AllowPartiallyTrustedCallers {
-			get { return allowPartiallyTrustedCallers; }
-			set { allowPartiallyTrustedCallers = value; }
-		}
-		
-		public bool Clean {
-			get { return clean; }
-			set { clean = value; }
-		}
-		
-		public bool Debug {
-			get { return debug; }
-			set { debug = value; }
-		}
-		
-		public bool DelaySign {
-			get { return delaySign; }
-			set { delaySign = value; }
-		}
-		
-		public bool FixedNames {
-			get { return fixedNames; }
-			set { fixedNames = value; }
-		}
-		
-		public bool Force {
-			get { return force; }
-			set { force = value; }
-		}
-		
-		public string KeyContainer {
-			get { return keyContainer; }
-			set { keyContainer = value; }
-		}
-		
-		public string KeyFile {
-			get { return keyFile; }
-			set { keyFile = value; }
-		}
-		
-		public string MetabasePath {
-			get { return metabasePath; }
-			set { metabasePath = value; }
-		}
-		
-		public string PhysicalPath {
-			get { return physicalPath; }
-			set { physicalPath = value; }
-		}
-		
-		public string TargetPath {
-			get { return targetPath; }
-			set { targetPath = value; }
-		}
-		
-		public bool Updateable {
-			get { return updateable; }
-			set { updateable = value; }
-		}
-		
-		public string VirtualPath {
-			get { return virtualPath; }
-			set { virtualPath = value; }
-		}
-		
-		protected override string ToolName {
-			get { return MSBuildUtils.RunningOnWindows ? "aspnet_compiler.bat" : "aspnet_compiler"; }
-		}
-	}
-}
+namespace Microsoft.Build.Tasks
+{
+    public class AspNetCompiler : ToolTaskExtension
+    {
+        bool allowPartiallyTrustedCallers;
+        bool clean;
+        bool debug;
+        bool delaySign;
+        bool fixedNames;
+        bool force;
+        string keyContainer;
+        string keyFile;
+        string metabasePath;
+        string physicalPath;
+        string targetPath;
+        bool updateable;
+        string virtualPath;
 
+        public AspNetCompiler() { }
+
+        [MonoTODO]
+        public override bool Execute()
+        {
+            return false;
+        }
+
+        [MonoTODO]
+        protected internal override void AddCommandLineCommands(
+            CommandLineBuilderExtension commandLine
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected override string GenerateFullPathToTool()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected override bool ValidateParameters()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AllowPartiallyTrustedCallers
+        {
+            get { return allowPartiallyTrustedCallers; }
+            set { allowPartiallyTrustedCallers = value; }
+        }
+
+        public bool Clean
+        {
+            get { return clean; }
+            set { clean = value; }
+        }
+
+        public bool Debug
+        {
+            get { return debug; }
+            set { debug = value; }
+        }
+
+        public bool DelaySign
+        {
+            get { return delaySign; }
+            set { delaySign = value; }
+        }
+
+        public bool FixedNames
+        {
+            get { return fixedNames; }
+            set { fixedNames = value; }
+        }
+
+        public bool Force
+        {
+            get { return force; }
+            set { force = value; }
+        }
+
+        public string KeyContainer
+        {
+            get { return keyContainer; }
+            set { keyContainer = value; }
+        }
+
+        public string KeyFile
+        {
+            get { return keyFile; }
+            set { keyFile = value; }
+        }
+
+        public string MetabasePath
+        {
+            get { return metabasePath; }
+            set { metabasePath = value; }
+        }
+
+        public string PhysicalPath
+        {
+            get { return physicalPath; }
+            set { physicalPath = value; }
+        }
+
+        public string TargetPath
+        {
+            get { return targetPath; }
+            set { targetPath = value; }
+        }
+
+        public bool Updateable
+        {
+            get { return updateable; }
+            set { updateable = value; }
+        }
+
+        public string VirtualPath
+        {
+            get { return virtualPath; }
+            set { virtualPath = value; }
+        }
+
+        protected override string ToolName
+        {
+            get
+            {
+                return MSBuildUtils.RunningOnWindows ? "aspnet_compiler.bat" : "aspnet_compiler";
+            }
+        }
+    }
+}

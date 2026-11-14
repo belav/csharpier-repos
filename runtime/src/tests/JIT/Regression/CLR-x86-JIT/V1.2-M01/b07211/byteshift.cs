@@ -4,6 +4,7 @@
 
 using System;
 using Xunit;
+
 namespace Test
 {
     public class ShiftTest
@@ -33,7 +34,4 @@ namespace Test
                 return 100;
         }
     }
-
 }
-
-

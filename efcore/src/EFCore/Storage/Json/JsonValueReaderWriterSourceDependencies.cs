@@ -45,7 +45,5 @@ public sealed record JsonValueReaderWriterSourceDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public JsonValueReaderWriterSourceDependencies()
-    {
-    }
+    public JsonValueReaderWriterSourceDependencies() { }
 }

@@ -7,12 +7,12 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class ComplexNavigationsODataQueryTests : ODataQueryTestBase, IClassFixture<ComplexNavigationsODataQueryTestFixture>
+public class ComplexNavigationsODataQueryTests
+    : ODataQueryTestBase,
+        IClassFixture<ComplexNavigationsODataQueryTestFixture>
 {
     public ComplexNavigationsODataQueryTests(ComplexNavigationsODataQueryTestFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task Query_level_ones()
@@ -89,7 +89,10 @@ public class ComplexNavigationsODataQueryTests : ODataQueryTestBase, IClassFixtu
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsObject<JObject>();
 
-        Assert.Contains("$metadata#LevelOne(OneToOne_Required_FK1())", result["@odata.context"].ToString());
+        Assert.Contains(
+            "$metadata#LevelOne(OneToOne_Required_FK1())",
+            result["@odata.context"].ToString()
+        );
         Assert.Equal(1, result["@odata.count"]);
         var projection = result["value"] as JArray;
         Assert.Single(projection);

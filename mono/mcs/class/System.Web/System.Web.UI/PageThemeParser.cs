@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,27 +37,27 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-	internal sealed class PageThemeParser: UserControlParser
-	{
-		string[] linkedStyleSheets;
+    internal sealed class PageThemeParser : UserControlParser
+    {
+        string[] linkedStyleSheets;
 
-		public string [] LinkedStyleSheets {
-			get { return linkedStyleSheets; }
-			set { linkedStyleSheets = value; }
-		}
+        public string[] LinkedStyleSheets
+        {
+            get { return linkedStyleSheets; }
+            set { linkedStyleSheets = value; }
+        }
 
-		internal PageThemeParser (VirtualPath virtualPath, HttpContext context)
-		: base (virtualPath, virtualPath.PhysicalPath, context, "System.Web.UI.PageTheme")
-		{
-			AddDependency (virtualPath.Original);
-		}
-		
-		internal override void HandleOptions (object obj)
-		{
-		}
+        internal PageThemeParser(VirtualPath virtualPath, HttpContext context)
+            : base(virtualPath, virtualPath.PhysicalPath, context, "System.Web.UI.PageTheme")
+        {
+            AddDependency(virtualPath.Original);
+        }
 
-		internal override string DefaultBaseTypeName {
-			get { return "System.Web.UI.PageTheme"; }
-		}
-	}
+        internal override void HandleOptions(object obj) { }
+
+        internal override string DefaultBaseTypeName
+        {
+            get { return "System.Web.UI.PageTheme"; }
+        }
+    }
 }

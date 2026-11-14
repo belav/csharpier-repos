@@ -6,24 +6,26 @@ namespace System.ServiceModel.Discovery
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.Xml;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
-    
+    using System.Xml;
+
     abstract class ByeOperationAsyncResult<TMessage> : AsyncResult
         where TMessage : class
     {
-        static AsyncCompletion onOnOfflineAnnoucementCompletedCallback = 
-            new AsyncCompletion(OnOnOfflineAnnouncementCompleted);
+        static AsyncCompletion onOnOfflineAnnoucementCompletedCallback = new AsyncCompletion(
+            OnOnOfflineAnnouncementCompleted
+        );
 
         IAnnouncementServiceImplementation announcementServiceImpl;
 
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         internal ByeOperationAsyncResult(
-            IAnnouncementServiceImplementation announcementServiceImpl, 
-            TMessage message, 
-            AsyncCallback callback, 
-            object state)
+            IAnnouncementServiceImplementation announcementServiceImpl,
+            TMessage message,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.announcementServiceImpl = announcementServiceImpl;
@@ -34,14 +36,17 @@ namespace System.ServiceModel.Discovery
                 return;
             }
 
-            IAsyncResult innerAsyncResult =
-                this.announcementServiceImpl.OnBeginOfflineAnnouncement(
+            IAsyncResult innerAsyncResult = this.announcementServiceImpl.OnBeginOfflineAnnouncement(
                 this.GetMessageSequence(message),
                 this.GetEndpointDiscoveryMetadata(message),
                 this.PrepareAsyncCompletion(onOnOfflineAnnoucementCompletedCallback),
-                this);
+                this
+            );
 
-            if (innerAsyncResult.CompletedSynchronously && OnOnOfflineAnnouncementCompleted(innerAsyncResult))
+            if (
+                innerAsyncResult.CompletedSynchronously
+                && OnOnOfflineAnnouncementCompleted(innerAsyncResult)
+            )
             {
                 this.Complete(true);
                 return;
@@ -54,7 +59,8 @@ namespace System.ServiceModel.Discovery
 
         static bool OnOnOfflineAnnouncementCompleted(IAsyncResult result)
         {
-            ByeOperationAsyncResult<TMessage> thisPtr = (ByeOperationAsyncResult<TMessage>)result.AsyncState;
+            ByeOperationAsyncResult<TMessage> thisPtr =
+                (ByeOperationAsyncResult<TMessage>)result.AsyncState;
             thisPtr.announcementServiceImpl.OnEndOfflineAnnouncement(result);
 
             return true;
@@ -64,7 +70,7 @@ namespace System.ServiceModel.Discovery
         {
             UniqueId messageId = OperationContext.Current.IncomingMessageHeaders.MessageId;
             if (messageId == null)
-            {                
+            {
                 if (TD.DiscoveryMessageWithNullMessageIdIsEnabled())
                 {
                     TD.DiscoveryMessageWithNullMessageId(null, ProtocolStrings.TracingStrings.Bye);
@@ -76,14 +82,20 @@ namespace System.ServiceModel.Discovery
             EventTraceActivity eventTraceActivity = null;
             if (Fx.Trace.IsEtwProviderEnabled)
             {
-                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(OperationContext.Current.IncomingMessage);
+                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                    OperationContext.Current.IncomingMessage
+                );
             }
 
             if (this.announcementServiceImpl.IsDuplicate(messageId))
             {
                 if (TD.DuplicateDiscoveryMessageIsEnabled())
                 {
-                    TD.DuplicateDiscoveryMessage(eventTraceActivity, ProtocolStrings.TracingStrings.Bye, messageId.ToString());
+                    TD.DuplicateDiscoveryMessage(
+                        eventTraceActivity,
+                        ProtocolStrings.TracingStrings.Bye,
+                        messageId.ToString()
+                    );
                 }
 
                 return true;
@@ -96,7 +108,11 @@ namespace System.ServiceModel.Discovery
             {
                 if (TD.DiscoveryMessageWithInvalidContentIsEnabled())
                 {
-                    TD.DiscoveryMessageWithInvalidContent(eventTraceActivity, ProtocolStrings.TracingStrings.Bye, messageId.ToString());
+                    TD.DiscoveryMessageWithInvalidContent(
+                        eventTraceActivity,
+                        ProtocolStrings.TracingStrings.Bye,
+                        messageId.ToString()
+                    );
                 }
 
                 return true;

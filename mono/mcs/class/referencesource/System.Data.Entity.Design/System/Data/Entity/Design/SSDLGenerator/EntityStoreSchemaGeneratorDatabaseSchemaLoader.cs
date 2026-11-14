@@ -7,44 +7,63 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Globalization;
 using System.Data.Common;
-using System.Data.EntityClient;
 using System.Data.Entity.Design.Common;
-using System.Text;
+using System.Data.EntityClient;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {
     /// <summary>
     /// Responsible for Loading Database Schema Information
     /// </summary>
-    internal class EntityStoreSchemaGeneratorDatabaseSchemaLoader 
+    internal class EntityStoreSchemaGeneratorDatabaseSchemaLoader
     {
         private readonly EntityConnection _connection;
         private readonly Version _storeSchemaModelVersion;
         private readonly string _providerInvariantName;
 
-        public EntityStoreSchemaGeneratorDatabaseSchemaLoader(string providerInvariantName, string connectionString)
+        public EntityStoreSchemaGeneratorDatabaseSchemaLoader(
+            string providerInvariantName,
+            string connectionString
+        )
         {
             Debug.Assert(providerInvariantName != null, "providerInvariantName parameter is null");
             Debug.Assert(connectionString != null, "connectionString parameter is null");
             _providerInvariantName = providerInvariantName;
-            _connection = CreateStoreSchemaConnection(providerInvariantName, connectionString, out _storeSchemaModelVersion);
+            _connection = CreateStoreSchemaConnection(
+                providerInvariantName,
+                connectionString,
+                out _storeSchemaModelVersion
+            );
         }
 
-        private static EntityConnection CreateStoreSchemaConnection(string providerInvariantName, string connectionString, out Version storeSchemaModelVersion)
+        private static EntityConnection CreateStoreSchemaConnection(
+            string providerInvariantName,
+            string connectionString,
+            out Version storeSchemaModelVersion
+        )
         {
             // We are going to try loading all versions of the store schema model starting from the newest.
             // The first version of the model that was shipped with EntityFrameworkVersions.Version1 and EntityFrameworkVersions.Version2 is the last one
             // we try, if it fails to load let the exception to propagate up to the caller.
-            foreach (var version in EntityFrameworkVersions.ValidVersions.Where(v => v > EntityFrameworkVersions.Version2).OrderByDescending(v => v))
+            foreach (
+                var version in EntityFrameworkVersions
+                    .ValidVersions.Where(v => v > EntityFrameworkVersions.Version2)
+                    .OrderByDescending(v => v)
+            )
             {
                 try
                 {
                     storeSchemaModelVersion = version;
-                    return EntityStoreSchemaGenerator.CreateStoreSchemaConnection(providerInvariantName, connectionString, storeSchemaModelVersion);
+                    return EntityStoreSchemaGenerator.CreateStoreSchemaConnection(
+                        providerInvariantName,
+                        connectionString,
+                        storeSchemaModelVersion
+                    );
                 }
                 catch (Exception e)
                 {
@@ -56,7 +75,11 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
             }
             storeSchemaModelVersion = EntityFrameworkVersions.Version2;
-            return EntityStoreSchemaGenerator.CreateStoreSchemaConnection(providerInvariantName, connectionString, storeSchemaModelVersion);
+            return EntityStoreSchemaGenerator.CreateStoreSchemaConnection(
+                providerInvariantName,
+                connectionString,
+                storeSchemaModelVersion
+            );
         }
 
         public void Open()
@@ -78,76 +101,89 @@ namespace System.Data.Entity.Design.SsdlGenerator
         {
             get { return _storeSchemaModelVersion; }
         }
-        
-        public FunctionDetailsReader LoadFunctionDetails(IEnumerable<EntityStoreSchemaFilterEntry> filters)
+
+        public FunctionDetailsReader LoadFunctionDetails(
+            IEnumerable<EntityStoreSchemaFilterEntry> filters
+        )
         {
             return FunctionDetailsReader.Create(_connection, filters, _storeSchemaModelVersion);
         }
 
-        public IEnumerable<DataRow> LoadViewDetails(IEnumerable<EntityStoreSchemaFilterEntry> filters)
+        public IEnumerable<DataRow> LoadViewDetails(
+            IEnumerable<EntityStoreSchemaFilterEntry> filters
+        )
         {
             TableDetailsCollection views = new TableDetailsCollection();
             return LoadDataTable(
-                ViewDetailSql, 
-                rows => 
-                    rows
-                    .OrderBy(r => r.Field<string>("SchemaName"))
-                    .ThenBy(r=>r.Field<string>("TableName"))
-                    .ThenBy(r=>r.Field<int>("Ordinal")), 
-                views, 
-                EntityStoreSchemaFilterObjectTypes.View, 
-                filters, 
-                ViewDetailAlias);
+                ViewDetailSql,
+                rows =>
+                    rows.OrderBy(r => r.Field<string>("SchemaName"))
+                        .ThenBy(r => r.Field<string>("TableName"))
+                        .ThenBy(r => r.Field<int>("Ordinal")),
+                views,
+                EntityStoreSchemaFilterObjectTypes.View,
+                filters,
+                ViewDetailAlias
+            );
         }
 
-        public IEnumerable<DataRow> LoadTableDetails(IEnumerable<EntityStoreSchemaFilterEntry> filters)
+        public IEnumerable<DataRow> LoadTableDetails(
+            IEnumerable<EntityStoreSchemaFilterEntry> filters
+        )
         {
             TableDetailsCollection table = new TableDetailsCollection();
             return LoadDataTable(
                 TableDetailSql,
                 rows =>
-                    rows
-                    .OrderBy(r => r.Field<string>("SchemaName"))
-                    .ThenBy(r => r.Field<string>("TableName"))
-                    .ThenBy(r => r.Field<int>("Ordinal")),
+                    rows.OrderBy(r => r.Field<string>("SchemaName"))
+                        .ThenBy(r => r.Field<string>("TableName"))
+                        .ThenBy(r => r.Field<int>("Ordinal")),
                 table,
                 EntityStoreSchemaFilterObjectTypes.Table,
                 filters,
-                TableDetailAlias);
+                TableDetailAlias
+            );
         }
 
-        public IEnumerable<DataRow> LoadFunctionReturnTableDetails(IEnumerable<EntityStoreSchemaFilterEntry> filters)
+        public IEnumerable<DataRow> LoadFunctionReturnTableDetails(
+            IEnumerable<EntityStoreSchemaFilterEntry> filters
+        )
         {
-            Debug.Assert(_storeSchemaModelVersion >= EntityFrameworkVersions.Version3, "_storeSchemaModelVersion >= EntityFrameworkVersions.Version3");
+            Debug.Assert(
+                _storeSchemaModelVersion >= EntityFrameworkVersions.Version3,
+                "_storeSchemaModelVersion >= EntityFrameworkVersions.Version3"
+            );
             TableDetailsCollection table = new TableDetailsCollection();
             return LoadDataTable(
                 FunctionReturnTableDetailSql,
                 rows =>
-                    rows
-                    .OrderBy(r => r.Field<string>("SchemaName"))
-                    .ThenBy(r => r.Field<string>("TableName"))
-                    .ThenBy(r => r.Field<int>("Ordinal")),
+                    rows.OrderBy(r => r.Field<string>("SchemaName"))
+                        .ThenBy(r => r.Field<string>("TableName"))
+                        .ThenBy(r => r.Field<int>("Ordinal")),
                 table,
                 EntityStoreSchemaFilterObjectTypes.Function,
                 filters,
-                FunctionReturnTableDetailAlias);
+                FunctionReturnTableDetailAlias
+            );
         }
 
-        public IEnumerable<DataRow> LoadRelationships(IEnumerable<EntityStoreSchemaFilterEntry> filters)
+        public IEnumerable<DataRow> LoadRelationships(
+            IEnumerable<EntityStoreSchemaFilterEntry> filters
+        )
         {
             RelationshipDetailsCollection table = new RelationshipDetailsCollection();
             return LoadDataTable(
                 RelationshipDetailSql,
                 rows =>
-                    rows
-                    .OrderBy(r => r.Field<string>("RelationshipName"))
-                    .ThenBy(r => r.Field<string>("RelationshipId"))
-                    .ThenBy(r => r.Field<int>("Ordinal")), 
-                table, 
-                EntityStoreSchemaFilterObjectTypes.Table, 
-                filters, 
-                RelationshipDetailFromTableAlias, 
-                RelationshipDetailToTableAlias);
+                    rows.OrderBy(r => r.Field<string>("RelationshipName"))
+                        .ThenBy(r => r.Field<string>("RelationshipId"))
+                        .ThenBy(r => r.Field<int>("Ordinal")),
+                table,
+                EntityStoreSchemaFilterObjectTypes.Table,
+                filters,
+                RelationshipDetailFromTableAlias,
+                RelationshipDetailToTableAlias
+            );
         }
 
         /// <summary>
@@ -164,11 +200,29 @@ namespace System.Data.Entity.Design.SsdlGenerator
             get { return _connection; }
         }
 
-        private IEnumerable<DataRow> LoadDataTable(string sql, Func<IEnumerable<DataRow>, IEnumerable<DataRow>> orderByFunc, DataTable table, EntityStoreSchemaFilterObjectTypes queryTypes, IEnumerable<EntityStoreSchemaFilterEntry> filters, params string[] filterAliases)
+        private IEnumerable<DataRow> LoadDataTable(
+            string sql,
+            Func<IEnumerable<DataRow>, IEnumerable<DataRow>> orderByFunc,
+            DataTable table,
+            EntityStoreSchemaFilterObjectTypes queryTypes,
+            IEnumerable<EntityStoreSchemaFilterEntry> filters,
+            params string[] filterAliases
+        )
         {
-            using (EntityCommand command = CreateFilteredCommand(_connection, sql, null, queryTypes, new List<EntityStoreSchemaFilterEntry>(filters), filterAliases))
+            using (
+                EntityCommand command = CreateFilteredCommand(
+                    _connection,
+                    sql,
+                    null,
+                    queryTypes,
+                    new List<EntityStoreSchemaFilterEntry>(filters),
+                    filterAliases
+                )
+            )
             {
-                using (DbDataReader reader = command.ExecuteReader(CommandBehavior.SequentialAccess))
+                using (
+                    DbDataReader reader = command.ExecuteReader(CommandBehavior.SequentialAccess)
+                )
                 {
                     object[] values = new object[table.Columns.Count];
                     while (reader.Read())
@@ -182,7 +236,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
             }
         }
 
-        internal static EntityCommand CreateFilteredCommand(EntityConnection connection, string sql, string orderByClause, EntityStoreSchemaFilterObjectTypes queryTypes, List<EntityStoreSchemaFilterEntry> filters, string[] filterAliases)
+        internal static EntityCommand CreateFilteredCommand(
+            EntityConnection connection,
+            string sql,
+            string orderByClause,
+            EntityStoreSchemaFilterObjectTypes queryTypes,
+            List<EntityStoreSchemaFilterEntry> filters,
+            string[] filterAliases
+        )
         {
             EntityCommand command = connection.CreateCommand();
             command.CommandType = CommandType.Text;
@@ -214,14 +275,16 @@ namespace System.Data.Entity.Design.SsdlGenerator
                         continue;
                     }
 
-
                     if (entry.Effect == EntityStoreSchemaFilterEffect.Allow)
                     {
                         AddFilterEntry(command, allows, alias, entry);
                     }
                     else
                     {
-                        Debug.Assert(entry.Effect == EntityStoreSchemaFilterEffect.Exclude, "did you add new value?");
+                        Debug.Assert(
+                            entry.Effect == EntityStoreSchemaFilterEffect.Exclude,
+                            "did you add new value?"
+                        );
                         AddFilterEntry(command, excludes, alias, entry);
                     }
                 }
@@ -253,7 +316,6 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
             }
 
-
             // did we end up with a where clause?
             StringBuilder sqlStatement = new StringBuilder(sql);
             if (whereClause.Length != 0)
@@ -275,9 +337,13 @@ namespace System.Data.Entity.Design.SsdlGenerator
             return command;
         }
 
-        private static void AddFilterEntry(EntityCommand command, StringBuilder segment, string alias, EntityStoreSchemaFilterEntry entry)
+        private static void AddFilterEntry(
+            EntityCommand command,
+            StringBuilder segment,
+            string alias,
+            EntityStoreSchemaFilterEntry entry
+        )
         {
-            
             StringBuilder filterText = new StringBuilder();
             AddComparison(command, filterText, alias, "CatalogName", entry.Catalog);
             AddComparison(command, filterText, alias, "SchemaName", entry.Schema);
@@ -299,7 +365,13 @@ namespace System.Data.Entity.Design.SsdlGenerator
             segment.Append(")");
         }
 
-        private static void AddComparison(EntityCommand command, StringBuilder segment, string alias, string propertyName, string value)
+        private static void AddComparison(
+            EntityCommand command,
+            StringBuilder segment,
+            string alias,
+            string propertyName,
+            string value
+        )
         {
             if (value != null)
             {
@@ -312,7 +384,8 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 segment.Append(".");
                 segment.Append(propertyName);
                 segment.Append(" LIKE @");
-                string parameterName = "p" + command.Parameters.Count.ToString(CultureInfo.InvariantCulture);
+                string parameterName =
+                    "p" + command.Parameters.Count.ToString(CultureInfo.InvariantCulture);
                 segment.Append(parameterName);
                 EntityParameter parameter = new EntityParameter();
                 parameter.ParameterName = parameterName;
@@ -322,7 +395,8 @@ namespace System.Data.Entity.Design.SsdlGenerator
         }
 
         private static readonly string ViewDetailAlias = "v";
-        private static readonly string ViewDetailSql = @"
+        private static readonly string ViewDetailSql =
+            @"
               SELECT 
                   v.CatalogName
               ,   v.SchemaName                           
@@ -367,9 +441,10 @@ namespace System.Data.Entity.Design.SsdlGenerator
                   CROSS APPLY pk.Columns as pkc) as pk
             ON v.ColumnId = pk.Id                   
              ";
-        
+
         private static readonly string TableDetailAlias = "t";
-        private static readonly string TableDetailSql = @"
+        private static readonly string TableDetailSql =
+            @"
               SELECT 
                   t.CatalogName
               ,   t.SchemaName                           
@@ -416,7 +491,8 @@ namespace System.Data.Entity.Design.SsdlGenerator
             ";
 
         private static readonly string FunctionReturnTableDetailAlias = "tvf";
-        private static readonly string FunctionReturnTableDetailSql = @"
+        private static readonly string FunctionReturnTableDetailSql =
+            @"
               SELECT 
                   tvf.CatalogName
               ,   tvf.SchemaName                           
@@ -454,7 +530,8 @@ namespace System.Data.Entity.Design.SsdlGenerator
 
         private static readonly string RelationshipDetailFromTableAlias = "r.FromTable";
         private static readonly string RelationshipDetailToTableAlias = "r.ToTable";
-        private static readonly string RelationshipDetailSql = @"
+        private static readonly string RelationshipDetailSql =
+            @"
               SELECT
                  r.ToTable.CatalogName as ToTableCatalog
                , r.ToTable.SchemaName as ToTableSchema

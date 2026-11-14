@@ -13,11 +13,13 @@ namespace Microsoft.CodeAnalysis.VisualBasic
     {
         public override string Language => LanguageNames.VisualBasic;
 
-        internal VisualBasicProjectFileLoader()
-        {
-        }
+        internal VisualBasicProjectFileLoader() { }
 
-        protected override ProjectFile CreateProjectFile(MSB.Evaluation.Project? project, ProjectBuildManager buildManager, DiagnosticLog log)
+        protected override ProjectFile CreateProjectFile(
+            MSB.Evaluation.Project? project,
+            ProjectBuildManager buildManager,
+            DiagnosticLog log
+        )
         {
             return new VisualBasicProjectFile(this, project, buildManager, log);
         }

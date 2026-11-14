@@ -21,9 +21,7 @@ public class AttributeCodeFragment
     /// <param name="type">The attribute's CLR type.</param>
     /// <param name="arguments">The attribute's arguments.</param>
     public AttributeCodeFragment(Type type, params object?[] arguments)
-        : this(type, arguments, new Dictionary<string, object?>(0))
-    {
-    }
+        : this(type, arguments, new Dictionary<string, object?>(0)) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="AttributeCodeFragment" /> class.
@@ -31,7 +29,11 @@ public class AttributeCodeFragment
     /// <param name="type">The attribute's CLR type.</param>
     /// <param name="arguments">The attribute's positional arguments.</param>
     /// <param name="namedArguments">The attribute's named arguments.</param>
-    public AttributeCodeFragment(Type type, IEnumerable<object?> arguments, IDictionary<string, object?> namedArguments)
+    public AttributeCodeFragment(
+        Type type,
+        IEnumerable<object?> arguments,
+        IDictionary<string, object?> namedArguments
+    )
     {
         Type = type;
         _arguments = new List<object?>(arguments);
@@ -48,13 +50,11 @@ public class AttributeCodeFragment
     ///     Gets the attribute's positional arguments.
     /// </summary>
     /// <value> The arguments. </value>
-    public virtual IReadOnlyList<object?> Arguments
-        => _arguments;
+    public virtual IReadOnlyList<object?> Arguments => _arguments;
 
     /// <summary>
     ///     Gets the attribute's named arguments.
     /// </summary>
     /// <value>The arguments.</value>
-    public virtual IReadOnlyDictionary<string, object?> NamedArguments
-        => _namedArguments;
+    public virtual IReadOnlyDictionary<string, object?> NamedArguments => _namedArguments;
 }

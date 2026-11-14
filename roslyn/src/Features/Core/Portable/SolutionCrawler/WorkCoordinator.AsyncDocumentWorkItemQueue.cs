@@ -14,24 +14,34 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         internal partial class WorkCoordinator
         {
-            private class AsyncDocumentWorkItemQueue(SolutionCrawlerProgressReporter progressReporter, Workspace workspace) : AsyncWorkItemQueue<DocumentId>(progressReporter, workspace)
+            private class AsyncDocumentWorkItemQueue(
+                SolutionCrawlerProgressReporter progressReporter,
+                Workspace workspace
+            ) : AsyncWorkItemQueue<DocumentId>(progressReporter, workspace)
             {
-                private readonly Dictionary<ProjectId, Dictionary<DocumentId, WorkItem>> _documentWorkQueue = new();
+                private readonly Dictionary<
+                    ProjectId,
+                    Dictionary<DocumentId, WorkItem>
+                > _documentWorkQueue = new();
 
                 protected override int WorkItemCount_NoLock => _documentWorkQueue.Count;
 
                 protected override bool TryTake_NoLock(DocumentId key, out WorkItem workInfo)
                 {
                     workInfo = default;
-                    if (_documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap) &&
-                        documentMap.TryGetValue(key, out workInfo))
+                    if (
+                        _documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap)
+                        && documentMap.TryGetValue(key, out workInfo)
+                    )
                     {
                         documentMap.Remove(key);
 
                         if (documentMap.Count == 0)
                         {
                             _documentWorkQueue.Remove(key.ProjectId);
-                            SharedPools.BigDefault<Dictionary<DocumentId, WorkItem>>().ClearAndFree(documentMap);
+                            SharedPools
+                                .BigDefault<Dictionary<DocumentId, WorkItem>>()
+                                .ClearAndFree(documentMap);
                         }
 
                         return true;
@@ -41,8 +51,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
 
                 protected override bool TryTakeAnyWork_NoLock(
-                    ProjectId? preferableProjectId, ProjectDependencyGraph dependencyGraph,
-                    out WorkItem workItem)
+                    ProjectId? preferableProjectId,
+                    ProjectDependencyGraph dependencyGraph,
+                    out WorkItem workItem
+                )
                 {
                     // there must be at least one item in the map when this is called unless host is shutting down.
                     if (_documentWorkQueue.Count == 0)
@@ -61,9 +73,15 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
 
                 private DocumentId GetBestDocumentId_NoLock(
-                    ProjectId? preferableProjectId, ProjectDependencyGraph dependencyGraph)
+                    ProjectId? preferableProjectId,
+                    ProjectDependencyGraph dependencyGraph
+                )
                 {
-                    var projectId = GetBestProjectId_NoLock(_documentWorkQueue, preferableProjectId, dependencyGraph);
+                    var projectId = GetBestProjectId_NoLock(
+                        _documentWorkQueue,
+                        preferableProjectId,
+                        dependencyGraph
+                    );
 
                     var documentMap = _documentWorkQueue[projectId];
 
@@ -97,21 +115,30 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     var key = item.DocumentId;
 
                     // now document work
-                    if (_documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap) &&
-                        documentMap.TryGetValue(key, out var existingWorkItem))
+                    if (
+                        _documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap)
+                        && documentMap.TryGetValue(key, out var existingWorkItem)
+                    )
                     {
                         // TODO: should I care about language when replace it?
                         Debug.Assert(existingWorkItem.Language == item.Language);
 
                         // replace it
-                        documentMap[key] = existingWorkItem.With(item.InvocationReasons, item.ActiveMember, item.SpecificAnalyzers, item.AsyncToken);
+                        documentMap[key] = existingWorkItem.With(
+                            item.InvocationReasons,
+                            item.ActiveMember,
+                            item.SpecificAnalyzers,
+                            item.AsyncToken
+                        );
                         return false;
                     }
 
                     // add document map if it is not already there
                     if (documentMap == null)
                     {
-                        documentMap = SharedPools.BigDefault<Dictionary<DocumentId, WorkItem>>().AllocateAndClear();
+                        documentMap = SharedPools
+                            .BigDefault<Dictionary<DocumentId, WorkItem>>()
+                            .AllocateAndClear();
                         _documentWorkQueue.Add(key.ProjectId, documentMap);
 
                         if (_documentWorkQueue.Count == 1)
@@ -136,7 +163,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             workItem.AsyncToken.Dispose();
                         }
 
-                        SharedPools.BigDefault<Dictionary<DocumentId, WorkItem>>().ClearAndFree(map);
+                        SharedPools
+                            .BigDefault<Dictionary<DocumentId, WorkItem>>()
+                            .ClearAndFree(map);
                     }
 
                     _documentWorkQueue.Clear();

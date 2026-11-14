@@ -12,7 +12,7 @@ namespace System.Collections.Tests
         const int MaxTest = 100;
         const int Seed = 42;
 
-        private readonly static IComparer<string> s_stringComparer = StringComparer.Ordinal;
+        private static readonly IComparer<string> s_stringComparer = StringComparer.Ordinal;
 
         [Theory]
         [MemberData(nameof(GetRandomStringArrays))]
@@ -32,7 +32,10 @@ namespace System.Collections.Tests
             Assert.Equal(expected, actual);
         }
 
-        private static IEnumerable<TElement> HeapSort_Heapify<TElement>(IEnumerable<TElement> inputs, IComparer<TElement>? comparer = null)
+        private static IEnumerable<TElement> HeapSort_Heapify<TElement>(
+            IEnumerable<TElement> inputs,
+            IComparer<TElement>? comparer = null
+        )
         {
             var queue = new PriorityQueue<TElement, TElement>(inputs.Select(e => (e, e)), comparer);
             foreach ((TElement element, TElement priority) in DrainHeap(queue))
@@ -60,7 +63,10 @@ namespace System.Collections.Tests
             Assert.Equal(expected, actual);
         }
 
-        private static IEnumerable<TElement> HeapSort_EnqueueRange<TElement>(IEnumerable<TElement> inputs, IComparer<TElement>? comparer = null)
+        private static IEnumerable<TElement> HeapSort_EnqueueRange<TElement>(
+            IEnumerable<TElement> inputs,
+            IComparer<TElement>? comparer = null
+        )
         {
             var queue = new PriorityQueue<TElement, TElement>(comparer);
             queue.EnqueueRange(inputs.Select(e => (e, e)));
@@ -89,7 +95,10 @@ namespace System.Collections.Tests
             Assert.Equal(expected, actual);
         }
 
-        private static IEnumerable<TElement> HeapSort_Enqueue<TElement>(IEnumerable<TElement> inputs, IComparer<TElement>? comparer = null)
+        private static IEnumerable<TElement> HeapSort_Enqueue<TElement>(
+            IEnumerable<TElement> inputs,
+            IComparer<TElement>? comparer = null
+        )
         {
             var queue = new PriorityQueue<TElement, TElement>(comparer);
 
@@ -110,7 +119,9 @@ namespace System.Collections.Tests
         public static void KMaxElements_String(string[] elements)
         {
             const int k = 5;
-            IEnumerable<string> expected = elements.OrderByDescending(e => e, s_stringComparer).Take(k);
+            IEnumerable<string> expected = elements
+                .OrderByDescending(e => e, s_stringComparer)
+                .Take(k);
             IEnumerable<string> actual = KMaxElements(elements, k, s_stringComparer);
             Assert.Equal(expected, actual);
         }
@@ -125,7 +136,11 @@ namespace System.Collections.Tests
             Assert.Equal(expected, actual);
         }
 
-        private static IEnumerable<TElement> KMaxElements<TElement>(TElement[] elements, int k, IComparer<TElement>? comparer = null)
+        private static IEnumerable<TElement> KMaxElements<TElement>(
+            TElement[] elements,
+            int k,
+            IComparer<TElement>? comparer = null
+        )
         {
             var queue = new PriorityQueue<TElement, TElement>(comparer);
             comparer = queue.Comparer;
@@ -152,7 +167,10 @@ namespace System.Collections.Tests
             }
         }
 
-        private static IEnumerable<(TElement Element, TPriority Priority)> DrainHeap<TElement, TPriority>(PriorityQueue<TElement, TPriority> queue)
+        private static IEnumerable<(TElement Element, TPriority Priority)> DrainHeap<
+            TElement,
+            TPriority
+        >(PriorityQueue<TElement, TPriority> queue)
         {
             while (queue.Count > 0)
             {
@@ -166,8 +184,11 @@ namespace System.Collections.Tests
             Assert.False(queue.TryPeek(out _, out _));
         }
 
-        public static IEnumerable<object[]> GetRandomStringArrays() => GenerateMemberData(random => GenArray(GenString, random));
-        public static IEnumerable<object[]> GetRandomIntArrays() => GenerateMemberData(random => GenArray(GenInt, random));
+        public static IEnumerable<object[]> GetRandomStringArrays() =>
+            GenerateMemberData(random => GenArray(GenString, random));
+
+        public static IEnumerable<object[]> GetRandomIntArrays() =>
+            GenerateMemberData(random => GenArray(GenInt, random));
 
         private static IEnumerable<object[]> GenerateMemberData<T>(Func<Random, T> genElement)
         {
@@ -175,7 +196,8 @@ namespace System.Collections.Tests
             for (int i = 0; i < MaxTest; i++)
             {
                 yield return new object[] { genElement(random) };
-            };
+            }
+            ;
         }
 
         private static T[] GenArray<T>(Func<Random, T> genElement, Random random)

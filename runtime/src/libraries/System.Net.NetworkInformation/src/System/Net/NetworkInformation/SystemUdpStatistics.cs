@@ -24,14 +24,29 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        public override long DatagramsReceived { get { return _stats.datagramsReceived; } }
+        public override long DatagramsReceived
+        {
+            get { return _stats.datagramsReceived; }
+        }
 
-        public override long IncomingDatagramsDiscarded { get { return _stats.incomingDatagramsDiscarded; } }
+        public override long IncomingDatagramsDiscarded
+        {
+            get { return _stats.incomingDatagramsDiscarded; }
+        }
 
-        public override long IncomingDatagramsWithErrors { get { return _stats.incomingDatagramsWithErrors; } }
+        public override long IncomingDatagramsWithErrors
+        {
+            get { return _stats.incomingDatagramsWithErrors; }
+        }
 
-        public override long DatagramsSent { get { return _stats.datagramsSent; } }
+        public override long DatagramsSent
+        {
+            get { return _stats.datagramsSent; }
+        }
 
-        public override int UdpListeners { get { return (int)_stats.udpListeners; } }
+        public override int UdpListeners
+        {
+            get { return (int)_stats.udpListeners; }
+        }
     }
 }

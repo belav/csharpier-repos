@@ -27,22 +27,208 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("MIddle attribute") { Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>", "a2", false }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("First attribute, in Document") { Params = new object[] { "<A attr='1' a2='a2' a3='a3'/>", "attr", true }, Priority = 0 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("Last attribute, in Document") { Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>", "{ns}a3", true }, Priority = 1 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("Last attribute") { Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>", "{ns}a3", false }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("Remove namespace, in Document") { Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>", "{http://www.w3.org/2000/xmlns/}p", true }, Priority = 1 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("Remove namespace") { Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>", "{http://www.w3.org/2000/xmlns/}p", false }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("Remove default namespace, in Document") { Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3'/>", "xmlns", true }, Priority = 1 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("Remove default namespace") { Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' xmlns='def' p:a3='pa3'/>", "xmlns", false }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("The only attribute, in Document") { Params = new object[] { "<A attr='1'/>", "attr", true }, Priority = 1 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("The only attribute") { Params = new object[] { "<A attr='1'/>", "attr", false }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("First attribute") { Params = new object[] { "<A attr='1' a2='a2' a3='a3'/>", "attr", false }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveAttribute) { Attribute = new VariationAttribute("MIddle attribute, in Document") { Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>", "a2", true }, Priority = 0 } });
-            AddChild(new TestVariation(RemoveStandaloneAttribute) { Attribute = new VariationAttribute("Remove standalone attribute I.") { Params = new object[] { "{a}aa", "value" }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveStandaloneAttribute) { Attribute = new VariationAttribute("Remove standalone attribute - namespace") { Params = new object[] { "{http://www.w3.org/2000/xmlns/}p", "value" }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveStandaloneAttribute) { Attribute = new VariationAttribute("Remove standalone attribute - def namespace") { Params = new object[] { "xmlns", "value" }, Priority = 2 } });
-            AddChild(new TestVariation(RemoveStandaloneAttribute) { Attribute = new VariationAttribute("Remove standalone attribute II.") { Params = new object[] { "aa", "value" }, Priority = 2 } });
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("MIddle attribute")
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>",
+                            "a2",
+                            false,
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("First attribute, in Document")
+                    {
+                        Params = new object[] { "<A attr='1' a2='a2' a3='a3'/>", "attr", true },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("Last attribute, in Document")
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>",
+                            "{ns}a3",
+                            true,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("Last attribute")
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>",
+                            "{ns}a3",
+                            false,
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("Remove namespace, in Document")
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>",
+                            "{http://www.w3.org/2000/xmlns/}p",
+                            true,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("Remove namespace")
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>",
+                            "{http://www.w3.org/2000/xmlns/}p",
+                            false,
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("Remove default namespace, in Document")
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr='1' a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3'/>",
+                            "xmlns",
+                            true,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("Remove default namespace")
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' xmlns='def' p:a3='pa3'/>",
+                            "xmlns",
+                            false,
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("The only attribute, in Document")
+                    {
+                        Params = new object[] { "<A attr='1'/>", "attr", true },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("The only attribute")
+                    {
+                        Params = new object[] { "<A attr='1'/>", "attr", false },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("First attribute")
+                    {
+                        Params = new object[] { "<A attr='1' a2='a2' a3='a3'/>", "attr", false },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveAttribute)
+                {
+                    Attribute = new VariationAttribute("MIddle attribute, in Document")
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr='1' a2='a2' a3='a3' xmlns:p='ns' p:a3='pa3'/>",
+                            "a2",
+                            true,
+                        },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveStandaloneAttribute)
+                {
+                    Attribute = new VariationAttribute("Remove standalone attribute I.")
+                    {
+                        Params = new object[] { "{a}aa", "value" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveStandaloneAttribute)
+                {
+                    Attribute = new VariationAttribute("Remove standalone attribute - namespace")
+                    {
+                        Params = new object[] { "{http://www.w3.org/2000/xmlns/}p", "value" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveStandaloneAttribute)
+                {
+                    Attribute = new VariationAttribute(
+                        "Remove standalone attribute - def namespace"
+                    )
+                    {
+                        Params = new object[] { "xmlns", "value" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(RemoveStandaloneAttribute)
+                {
+                    Attribute = new VariationAttribute("Remove standalone attribute II.")
+                    {
+                        Params = new object[] { "aa", "value" },
+                        Priority = 2,
+                    },
+                }
+            );
         }
 
         // Remove standalone attribute
@@ -100,7 +286,10 @@ namespace XLinqTests
                 // Expected exception
             }
 
-            TestLog.Compare(expValues.EqualAllAttributes(elem.Attributes(), Helpers.MyAttributeComparer), "The rest of the attributes");
+            TestLog.Compare(
+                expValues.EqualAllAttributes(elem.Attributes(), Helpers.MyAttributeComparer),
+                "The rest of the attributes"
+            );
 
             elem.Verify();
         }

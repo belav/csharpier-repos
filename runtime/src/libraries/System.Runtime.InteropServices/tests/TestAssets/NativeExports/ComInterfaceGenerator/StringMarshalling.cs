@@ -43,13 +43,23 @@ namespace NativeExports.ComInterfaceGenerator
                 {
                     if (_s_comInterface1VTable != null)
                         return _s_comInterface1VTable;
-                    void** vtable = (void**)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(GetAndSetInt), sizeof(void*) * 5);
-                    GetIUnknownImpl(out var fpQueryInterface, out var fpAddReference, out var fpRelease);
+                    void** vtable = (void**)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(GetAndSetInt),
+                            sizeof(void*) * 5
+                        );
+                    GetIUnknownImpl(
+                        out var fpQueryInterface,
+                        out var fpAddReference,
+                        out var fpRelease
+                    );
                     vtable[0] = (void*)fpQueryInterface;
                     vtable[1] = (void*)fpAddReference;
                     vtable[2] = (void*)fpRelease;
-                    vtable[3] = (delegate* unmanaged<void*, byte**, int>)&Utf8Implementation.ABI.GetStringUtf8;
-                    vtable[4] = (delegate* unmanaged<void*, byte*, int>)&Utf8Implementation.ABI.SetStringUtf8;
+                    vtable[3] = (delegate* unmanaged<void*, byte**, int>)
+                        &Utf8Implementation.ABI.GetStringUtf8;
+                    vtable[4] = (delegate* unmanaged<void*, byte*, int>)
+                        &Utf8Implementation.ABI.SetStringUtf8;
                     _s_comInterface1VTable = vtable;
                     return _s_comInterface1VTable;
                 }
@@ -60,23 +70,41 @@ namespace NativeExports.ComInterfaceGenerator
                 {
                     if (_s_comInterface2VTable != null)
                         return _s_comInterface2VTable;
-                    void** vtable = (void**)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(GetAndSetInt), sizeof(void*) * 5);
-                    GetIUnknownImpl(out var fpQueryInterface, out var fpAddReference, out var fpRelease);
+                    void** vtable = (void**)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(GetAndSetInt),
+                            sizeof(void*) * 5
+                        );
+                    GetIUnknownImpl(
+                        out var fpQueryInterface,
+                        out var fpAddReference,
+                        out var fpRelease
+                    );
                     vtable[0] = (void*)fpQueryInterface;
                     vtable[1] = (void*)fpAddReference;
                     vtable[2] = (void*)fpRelease;
-                    vtable[3] = (delegate* unmanaged<void*, ushort**, int>)&Utf16Implementation.ABI.GetStringUtf16;
-                    vtable[4] = (delegate* unmanaged<void*, ushort*, int>)&Utf16Implementation.ABI.SetStringUtf16;
+                    vtable[3] = (delegate* unmanaged<void*, ushort**, int>)
+                        &Utf16Implementation.ABI.GetStringUtf16;
+                    vtable[4] = (delegate* unmanaged<void*, ushort*, int>)
+                        &Utf16Implementation.ABI.SetStringUtf16;
                     _s_comInterface2VTable = vtable;
                     return _s_comInterface2VTable;
                 }
             }
 
-            protected override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+            protected override ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            )
             {
                 if (obj is IUTF8Marshalling)
                 {
-                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(Utf8Implementation), sizeof(ComInterfaceEntry));
+                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(Utf8Implementation),
+                            sizeof(ComInterfaceEntry)
+                        );
                     comInterfaceEntry->IID = new Guid(IUTF8Marshalling.IID);
                     comInterfaceEntry->Vtable = (nint)S_Utf8VTable;
                     count = 1;
@@ -84,7 +112,11 @@ namespace NativeExports.ComInterfaceGenerator
                 }
                 else if (obj is IUTF16Marshalling)
                 {
-                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(Utf16Implementation), sizeof(ComInterfaceEntry));
+                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(Utf16Implementation),
+                            sizeof(ComInterfaceEntry)
+                        );
                     comInterfaceEntry->IID = new Guid(IUTF16Marshalling.IID);
                     comInterfaceEntry->Vtable = (nint)S_Utf16VTable;
                     count = 1;
@@ -94,8 +126,13 @@ namespace NativeExports.ComInterfaceGenerator
                 return null;
             }
 
-            protected override object? CreateObject(nint externalComObject, CreateObjectFlags flags) => throw new NotImplementedException();
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+            protected override object? CreateObject(
+                nint externalComObject,
+                CreateObjectFlags flags
+            ) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
         }
 
         class Utf8Implementation : IUTF8Marshalling
@@ -106,6 +143,7 @@ namespace NativeExports.ComInterfaceGenerator
             {
                 return _data;
             }
+
             void IUTF8Marshalling.SetString(string x)
             {
                 _data = x;
@@ -119,7 +157,9 @@ namespace NativeExports.ComInterfaceGenerator
                 {
                     try
                     {
-                        string currValue = ComInterfaceDispatch.GetInstance<IUTF8Marshalling>((ComInterfaceDispatch*)@this).GetString();
+                        string currValue = ComInterfaceDispatch
+                            .GetInstance<IUTF8Marshalling>((ComInterfaceDispatch*)@this)
+                            .GetString();
                         *value = Utf8StringMarshaller.ConvertToUnmanaged(currValue);
                         return 0;
                     }
@@ -135,7 +175,9 @@ namespace NativeExports.ComInterfaceGenerator
                     try
                     {
                         string value = Utf8StringMarshaller.ConvertToManaged(newValue);
-                        ComInterfaceDispatch.GetInstance<IUTF8Marshalling>((ComInterfaceDispatch*)@this).SetString(value);
+                        ComInterfaceDispatch
+                            .GetInstance<IUTF8Marshalling>((ComInterfaceDispatch*)@this)
+                            .SetString(value);
                         return 0;
                     }
                     catch (Exception e)
@@ -154,6 +196,7 @@ namespace NativeExports.ComInterfaceGenerator
             {
                 return _data;
             }
+
             void IUTF16Marshalling.SetString(string x)
             {
                 _data = x;
@@ -167,7 +210,9 @@ namespace NativeExports.ComInterfaceGenerator
                 {
                     try
                     {
-                        string currValue = ComInterfaceDispatch.GetInstance<IUTF16Marshalling>((ComInterfaceDispatch*)@this).GetString();
+                        string currValue = ComInterfaceDispatch
+                            .GetInstance<IUTF16Marshalling>((ComInterfaceDispatch*)@this)
+                            .GetString();
                         *value = Utf16StringMarshaller.ConvertToUnmanaged(currValue);
                         return 0;
                     }
@@ -183,7 +228,9 @@ namespace NativeExports.ComInterfaceGenerator
                     try
                     {
                         string value = Utf16StringMarshaller.ConvertToManaged(newValue);
-                        ComInterfaceDispatch.GetInstance<IUTF16Marshalling>((ComInterfaceDispatch*)@this).SetString(value);
+                        ComInterfaceDispatch
+                            .GetInstance<IUTF16Marshalling>((ComInterfaceDispatch*)@this)
+                            .SetString(value);
                         return 0;
                     }
                     catch (Exception e)

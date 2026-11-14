@@ -49,7 +49,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SetWithAbsoluteExpirationDoesNotThrow()
         {
-            string key = DateTime.UtcNow.Ticks.ToString() + "SetWithAbsoluteExpirationDoesNotThrow_SetTest";
+            string key =
+                DateTime.UtcNow.Ticks.ToString() + "SetWithAbsoluteExpirationDoesNotThrow_SetTest";
             object expected = new object();
             int minutesToCache = 10;
             bool slidingExpiration = false;
@@ -72,23 +73,35 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SetWithSlidingExpirationForNegativeTime()
         {
-            string key = DateTime.UtcNow.Ticks.ToString() + "_SetWithSlidingExpirationForNegativeTime_SetTest";
+            string key =
+                DateTime.UtcNow.Ticks.ToString()
+                + "_SetWithSlidingExpirationForNegativeTime_SetTest";
             object expected = new object();
-            Assert.ThrowsArgumentGreaterThan(() => WebCache.Set(key, expected, -1), "minutesToCache", "0");
+            Assert.ThrowsArgumentGreaterThan(
+                () => WebCache.Set(key, expected, -1),
+                "minutesToCache",
+                "0"
+            );
         }
 
         [Fact]
         public void SetWithSlidingExpirationForZeroTime()
         {
-            string key = DateTime.UtcNow.Ticks.ToString() + "_SetWithSlidingExpirationForZeroTime_SetTest";
+            string key =
+                DateTime.UtcNow.Ticks.ToString() + "_SetWithSlidingExpirationForZeroTime_SetTest";
             object expected = new object();
-            Assert.ThrowsArgumentGreaterThan(() => WebCache.Set(key, expected, 0), "minutesToCache", "0");
+            Assert.ThrowsArgumentGreaterThan(
+                () => WebCache.Set(key, expected, 0),
+                "minutesToCache",
+                "0"
+            );
         }
 
         [Fact]
         public void SetWithSlidingExpirationForYear()
         {
-            string key = DateTime.UtcNow.Ticks.ToString() + "_SetWithSlidingExpirationForYear_SetTest";
+            string key =
+                DateTime.UtcNow.Ticks.ToString() + "_SetWithSlidingExpirationForYear_SetTest";
             object expected = new object();
 
             WebCache.Set(key, expected, 365 * 24 * 60, true);
@@ -99,15 +112,23 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SetWithSlidingExpirationForMoreThanYear()
         {
-            string key = DateTime.UtcNow.Ticks.ToString() + "_SetWithSlidingExpirationForMoreThanYear_SetTest";
+            string key =
+                DateTime.UtcNow.Ticks.ToString()
+                + "_SetWithSlidingExpirationForMoreThanYear_SetTest";
             object expected = new object();
-            Assert.ThrowsArgumentLessThanOrEqualTo(() => WebCache.Set(key, expected, (365 * 24 * 60) + 1, true), "minutesToCache", (365 * 24 * 60).ToString());
+            Assert.ThrowsArgumentLessThanOrEqualTo(
+                () => WebCache.Set(key, expected, (365 * 24 * 60) + 1, true),
+                "minutesToCache",
+                (365 * 24 * 60).ToString()
+            );
         }
 
         [Fact]
         public void SetWithAbsoluteExpirationForMoreThanYear()
         {
-            string key = DateTime.UtcNow.Ticks.ToString() + "_SetWithAbsoluteExpirationForMoreThanYear_SetTest";
+            string key =
+                DateTime.UtcNow.Ticks.ToString()
+                + "_SetWithAbsoluteExpirationForMoreThanYear_SetTest";
             object expected = new object();
 
             WebCache.Set(key, expected, 365 * 24 * 60, true);

@@ -11,12 +11,18 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 {
     internal partial class TaggerEventSources
     {
-        private class DiagnosticsChangedEventSource(ITextBuffer subjectBuffer, IDiagnosticService service) : AbstractTaggerEventSource
+        private class DiagnosticsChangedEventSource(
+            ITextBuffer subjectBuffer,
+            IDiagnosticService service
+        ) : AbstractTaggerEventSource
         {
             private readonly ITextBuffer _subjectBuffer = subjectBuffer;
             private readonly IDiagnosticService _service = service;
 
-            private void OnDiagnosticsUpdated(object? sender, ImmutableArray<DiagnosticsUpdatedArgs> e)
+            private void OnDiagnosticsUpdated(
+                object? sender,
+                ImmutableArray<DiagnosticsUpdatedArgs> e
+            )
             {
                 var textContainer = _subjectBuffer.AsTextContainer();
                 var anyChanged = false;
@@ -43,11 +49,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                 }
             }
 
-            public override void Connect()
-                => _service.DiagnosticsUpdated += OnDiagnosticsUpdated;
+            public override void Connect() => _service.DiagnosticsUpdated += OnDiagnosticsUpdated;
 
-            public override void Disconnect()
-                => _service.DiagnosticsUpdated -= OnDiagnosticsUpdated;
+            public override void Disconnect() =>
+                _service.DiagnosticsUpdated -= OnDiagnosticsUpdated;
         }
     }
 }

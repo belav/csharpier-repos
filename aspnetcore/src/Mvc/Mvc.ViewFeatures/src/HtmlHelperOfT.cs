@@ -33,8 +33,7 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
     )
         : base(htmlGenerator, viewEngine, metadataProvider, bufferScope, htmlEncoder, urlEncoder)
     {
-        _modelExpressionProvider =
-            modelExpressionProvider
+        _modelExpressionProvider = modelExpressionProvider
             ?? throw new ArgumentNullException(nameof(modelExpressionProvider));
     }
 

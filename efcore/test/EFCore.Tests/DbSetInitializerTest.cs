@@ -14,14 +14,15 @@ public class DbSetInitializerTest
         var setFinder = new FakeSetFinder();
         var setSource = new DbSetSource();
 
-        var customServices = new ServiceCollection()
-            .AddSingleton<IDbSetInitializer>(
-                new DbSetInitializer(setFinder, setSource));
+        var customServices = new ServiceCollection().AddSingleton<IDbSetInitializer>(
+            new DbSetInitializer(setFinder, setSource)
+        );
 
         var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider(customServices);
 
         using var context = new JustAContext(
-            new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider).Options);
+            new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider).Options
+        );
         Assert.NotNull(context.One);
         Assert.NotNull(context.GetTwo());
         Assert.NotNull(context.Three);
@@ -36,10 +37,22 @@ public class DbSetInitializerTest
 
             return new[]
             {
-                new DbSetProperty("One", typeof(string), setterFactory.Create(typeof(JustAContext).GetAnyProperty("One"))),
-                new DbSetProperty("Two", typeof(object), setterFactory.Create(typeof(JustAContext).GetAnyProperty("Two"))),
-                new DbSetProperty("Three", typeof(string), setterFactory.Create(typeof(JustAContext).GetAnyProperty("Three"))),
-                new DbSetProperty("Four", typeof(string), null)
+                new DbSetProperty(
+                    "One",
+                    typeof(string),
+                    setterFactory.Create(typeof(JustAContext).GetAnyProperty("One"))
+                ),
+                new DbSetProperty(
+                    "Two",
+                    typeof(object),
+                    setterFactory.Create(typeof(JustAContext).GetAnyProperty("Two"))
+                ),
+                new DbSetProperty(
+                    "Three",
+                    typeof(string),
+                    setterFactory.Create(typeof(JustAContext).GetAnyProperty("Three"))
+                ),
+                new DbSetProperty("Four", typeof(string), null),
             };
         }
     }
@@ -47,21 +60,19 @@ public class DbSetInitializerTest
     private class JustAContext : DbContext
     {
         public JustAContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<string> One { get; set; }
+
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private DbSet<object> Two { get; set; }
+
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<string> Three { get; private set; }
 
-        public DbSet<string> Four
-            => null;
+        public DbSet<string> Four => null;
 
-        public DbSet<object> GetTwo()
-            => Two;
+        public DbSet<object> GetTwo() => Two;
     }
 }

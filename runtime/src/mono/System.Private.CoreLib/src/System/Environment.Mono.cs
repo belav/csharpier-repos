@@ -57,6 +57,10 @@ namespace System
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [DoesNotReturn]
-        internal static extern void FailFast(string? message, Exception? exception, string? errorSource);
+        internal static extern void FailFast(
+            string? message,
+            Exception? exception,
+            string? errorSource
+        );
     }
 }

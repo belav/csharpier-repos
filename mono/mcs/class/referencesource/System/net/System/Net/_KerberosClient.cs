@@ -4,44 +4,84 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
+namespace System.Net
+{
     using System.Collections;
+    using System.Globalization;
     using System.Net.Sockets;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
-    using System.Globalization;
 
-    internal class KerberosClient : ISessionAuthenticationModule {
-
+    internal class KerberosClient : ISessionAuthenticationModule
+    {
         internal const string AuthType = "Kerberos";
         internal static string Signature = AuthType.ToLower(CultureInfo.InvariantCulture);
         internal static int SignatureSize = Signature.Length;
 
-        public Authorization Authenticate(string challenge, WebRequest webRequest, ICredentials credentials) {
-            GlobalLog.Print("KerberosClient::Authenticate() challenge:[" + ValidationHelper.ToString(challenge) + "] webRequest#" + ValidationHelper.HashString(webRequest) + " credentials#" + ValidationHelper.HashString(credentials) + " calling DoAuthenticate()");
+        public Authorization Authenticate(
+            string challenge,
+            WebRequest webRequest,
+            ICredentials credentials
+        )
+        {
+            GlobalLog.Print(
+                "KerberosClient::Authenticate() challenge:["
+                    + ValidationHelper.ToString(challenge)
+                    + "] webRequest#"
+                    + ValidationHelper.HashString(webRequest)
+                    + " credentials#"
+                    + ValidationHelper.HashString(credentials)
+                    + " calling DoAuthenticate()"
+            );
             return DoAuthenticate(challenge, webRequest, credentials, false);
         }
 
-        
-        private Authorization DoAuthenticate(string challenge, WebRequest webRequest, ICredentials credentials, bool preAuthenticate) {
-            GlobalLog.Print("KerberosClient::DoAuthenticate() challenge:[" + ValidationHelper.ToString(challenge) + "] webRequest#" + ValidationHelper.HashString(webRequest) + " credentials#" + ValidationHelper.HashString(credentials) + " preAuthenticate:" + preAuthenticate.ToString());
+        private Authorization DoAuthenticate(
+            string challenge,
+            WebRequest webRequest,
+            ICredentials credentials,
+            bool preAuthenticate
+        )
+        {
+            GlobalLog.Print(
+                "KerberosClient::DoAuthenticate() challenge:["
+                    + ValidationHelper.ToString(challenge)
+                    + "] webRequest#"
+                    + ValidationHelper.HashString(webRequest)
+                    + " credentials#"
+                    + ValidationHelper.HashString(credentials)
+                    + " preAuthenticate:"
+                    + preAuthenticate.ToString()
+            );
 
-            GlobalLog.Assert(credentials != null, "KerberosClient::DoAuthenticate()|credentials == null");
-            if (credentials == null) {
+            GlobalLog.Assert(
+                credentials != null,
+                "KerberosClient::DoAuthenticate()|credentials == null"
+            );
+            if (credentials == null)
+            {
                 return null;
             }
 
             HttpWebRequest httpWebRequest = webRequest as HttpWebRequest;
 
-            GlobalLog.Assert(httpWebRequest != null, "KerberosClient::DoAuthenticate()|httpWebRequest == null");
-            GlobalLog.Assert(httpWebRequest.ChallengedUri != null, "KerberosClient::DoAuthenticate()|httpWebRequest.ChallengedUri == null");
+            GlobalLog.Assert(
+                httpWebRequest != null,
+                "KerberosClient::DoAuthenticate()|httpWebRequest == null"
+            );
+            GlobalLog.Assert(
+                httpWebRequest.ChallengedUri != null,
+                "KerberosClient::DoAuthenticate()|httpWebRequest.ChallengedUri == null"
+            );
 
             NTAuthentication authSession = null;
             string incoming = null;
 
-            if (!preAuthenticate) {
+            if (!preAuthenticate)
+            {
                 int index = AuthenticationManager.FindSubstringNotInQuotes(challenge, Signature);
-                if (index < 0) {
+                if (index < 0)
+                {
                     return null;
                 }
 
@@ -51,10 +91,12 @@ namespace System.Net {
                 // there may be multiple challenges. If the next character after the
                 // package name is not a comma then it is challenge data
                 //
-                if (challenge.Length > blobBegin && challenge[blobBegin] != ',') {
+                if (challenge.Length > blobBegin && challenge[blobBegin] != ',')
+                {
                     ++blobBegin;
                 }
-                else {
+                else
+                {
                     index = -1;
                 }
 
@@ -71,95 +113,157 @@ namespace System.Net {
                 }
 
                 authSession = httpWebRequest.CurrentAuthenticationState.GetSecurityContext(this);
-                GlobalLog.Print("KerberosClient::DoAuthenticate() key:" + ValidationHelper.HashString(httpWebRequest.CurrentAuthenticationState) + " retrieved authSession:" + ValidationHelper.HashString(authSession));
+                GlobalLog.Print(
+                    "KerberosClient::DoAuthenticate() key:"
+                        + ValidationHelper.HashString(httpWebRequest.CurrentAuthenticationState)
+                        + " retrieved authSession:"
+                        + ValidationHelper.HashString(authSession)
+                );
             }
 
-            if (authSession==null) {
-                NetworkCredential NC = credentials.GetCredential(httpWebRequest.ChallengedUri, Signature);
-                GlobalLog.Print("KerberosClient::DoAuthenticate() GetCredential() returns:" + ValidationHelper.ToString(NC));
+            if (authSession == null)
+            {
+                NetworkCredential NC = credentials.GetCredential(
+                    httpWebRequest.ChallengedUri,
+                    Signature
+                );
+                GlobalLog.Print(
+                    "KerberosClient::DoAuthenticate() GetCredential() returns:"
+                        + ValidationHelper.ToString(NC)
+                );
 
-                if (NC == null || (!(NC is SystemNetworkCredential) && NC.InternalGetUserName().Length == 0))
+                if (
+                    NC == null
+                    || (!(NC is SystemNetworkCredential) && NC.InternalGetUserName().Length == 0)
+                )
                 {
                     return null;
                 }
 
                 ICredentialPolicy policy = AuthenticationManager.CredentialPolicy;
-                if (policy != null && !policy.ShouldSendCredential(httpWebRequest.ChallengedUri, httpWebRequest, NC, this))
+                if (
+                    policy != null
+                    && !policy.ShouldSendCredential(
+                        httpWebRequest.ChallengedUri,
+                        httpWebRequest,
+                        NC,
+                        this
+                    )
+                )
                     return null;
 
-                SpnToken spn = httpWebRequest.CurrentAuthenticationState.GetComputeSpn(httpWebRequest);
-                GlobalLog.Print("KerberosClient::Authenticate() ChallengedSpn:" + ValidationHelper.ToString(spn));
+                SpnToken spn = httpWebRequest.CurrentAuthenticationState.GetComputeSpn(
+                    httpWebRequest
+                );
+                GlobalLog.Print(
+                    "KerberosClient::Authenticate() ChallengedSpn:" + ValidationHelper.ToString(spn)
+                );
 
                 ChannelBinding binding = null;
                 if (httpWebRequest.CurrentAuthenticationState.TransportContext != null)
                 {
-                    binding = httpWebRequest.CurrentAuthenticationState.TransportContext.GetChannelBinding(ChannelBindingKind.Endpoint);
+                    binding =
+                        httpWebRequest.CurrentAuthenticationState.TransportContext.GetChannelBinding(
+                            ChannelBindingKind.Endpoint
+                        );
                 }
 
-                authSession =
-                    new NTAuthentication(
-                        AuthType,
-                        NC,
-                        spn,
-                        httpWebRequest,
-                        binding);
+                authSession = new NTAuthentication(AuthType, NC, spn, httpWebRequest, binding);
 
-
-                GlobalLog.Print("KerberosClient::DoAuthenticate() setting SecurityContext for:" + ValidationHelper.HashString(httpWebRequest.CurrentAuthenticationState) + " to authSession:" + ValidationHelper.HashString(authSession));
+                GlobalLog.Print(
+                    "KerberosClient::DoAuthenticate() setting SecurityContext for:"
+                        + ValidationHelper.HashString(httpWebRequest.CurrentAuthenticationState)
+                        + " to authSession:"
+                        + ValidationHelper.HashString(authSession)
+                );
                 httpWebRequest.CurrentAuthenticationState.SetSecurityContext(authSession, this);
             }
 
             string clientResponse = authSession.GetOutgoingBlob(incoming);
-            if (clientResponse==null) {
+            if (clientResponse == null)
+            {
                 return null;
             }
 
-            return new Authorization(AuthType + " " + clientResponse, authSession.IsCompleted, string.Empty, authSession.IsMutualAuthFlag);
+            return new Authorization(
+                AuthType + " " + clientResponse,
+                authSession.IsCompleted,
+                string.Empty,
+                authSession.IsMutualAuthFlag
+            );
         }
 
-        public bool CanPreAuthenticate {
-            get {
-                return true;
-            }
+        public bool CanPreAuthenticate
+        {
+            get { return true; }
         }
 
-        public Authorization PreAuthenticate(WebRequest webRequest, ICredentials credentials) {
-            GlobalLog.Print("KerberosClient::PreAuthenticate() webRequest#" + ValidationHelper.HashString(webRequest) + " credentials#" + ValidationHelper.HashString(credentials) + " calling DoAuthenticate()");
+        public Authorization PreAuthenticate(WebRequest webRequest, ICredentials credentials)
+        {
+            GlobalLog.Print(
+                "KerberosClient::PreAuthenticate() webRequest#"
+                    + ValidationHelper.HashString(webRequest)
+                    + " credentials#"
+                    + ValidationHelper.HashString(credentials)
+                    + " calling DoAuthenticate()"
+            );
             return DoAuthenticate(null, webRequest, credentials, true);
         }
 
-        public string AuthenticationType {
-            get {
-                return AuthType;
-            }
+        public string AuthenticationType
+        {
+            get { return AuthType; }
         }
 
         //
         // called when getting the final blob on the 200 OK from the server
         //
-        public bool Update(string challenge, WebRequest webRequest) {
+        public bool Update(string challenge, WebRequest webRequest)
+        {
             GlobalLog.Print("KerberosClient::Update(): " + challenge);
 
             HttpWebRequest httpWebRequest = webRequest as HttpWebRequest;
 
-            GlobalLog.Assert(httpWebRequest != null, "KerberosClient::Update()|httpWebRequest == null");
-            GlobalLog.Assert(httpWebRequest.ChallengedUri != null, "KerberosClient::Update()|httpWebRequest.ChallengedUri == null");
+            GlobalLog.Assert(
+                httpWebRequest != null,
+                "KerberosClient::Update()|httpWebRequest == null"
+            );
+            GlobalLog.Assert(
+                httpWebRequest.ChallengedUri != null,
+                "KerberosClient::Update()|httpWebRequest.ChallengedUri == null"
+            );
 
             //
             // try to retrieve the state of the ongoing handshake
             //
-            NTAuthentication authSession = httpWebRequest.CurrentAuthenticationState.GetSecurityContext(this);
-            GlobalLog.Print("KerberosClient::Update() key:" + ValidationHelper.HashString(httpWebRequest.CurrentAuthenticationState) + " retrieved authSession:" + ValidationHelper.HashString(authSession));
+            NTAuthentication authSession =
+                httpWebRequest.CurrentAuthenticationState.GetSecurityContext(this);
+            GlobalLog.Print(
+                "KerberosClient::Update() key:"
+                    + ValidationHelper.HashString(httpWebRequest.CurrentAuthenticationState)
+                    + " retrieved authSession:"
+                    + ValidationHelper.HashString(authSession)
+            );
 
-            if (authSession==null) {
+            if (authSession == null)
+            {
                 GlobalLog.Print("KerberosClient::Update() null session returning true");
                 return true;
             }
 
-            GlobalLog.Print("KerberosClient::Update() authSession.IsCompleted:" + authSession.IsCompleted.ToString());
+            GlobalLog.Print(
+                "KerberosClient::Update() authSession.IsCompleted:"
+                    + authSession.IsCompleted.ToString()
+            );
 
-            if (httpWebRequest.CurrentAuthenticationState.StatusCodeMatch==httpWebRequest.ResponseStatusCode) {
-                GlobalLog.Print("KerberosClient::Update() still handshaking (based on status code) returning false");
+            if (
+                httpWebRequest.CurrentAuthenticationState.StatusCodeMatch
+                == httpWebRequest.ResponseStatusCode
+            )
+            {
+                GlobalLog.Print(
+                    "KerberosClient::Update() still handshaking (based on status code) returning false"
+                );
                 return false;
             }
 
@@ -167,8 +271,12 @@ namespace System.Net {
             // the whole point here is to to close the Security Context (this will complete the authentication handshake
             // with server authentication for schemese that support it such as Kerberos)
             //
-            int index = challenge==null ? -1 : AuthenticationManager.FindSubstringNotInQuotes(challenge, Signature);
-            if (index>=0) {
+            int index =
+                challenge == null
+                    ? -1
+                    : AuthenticationManager.FindSubstringNotInQuotes(challenge, Signature);
+            if (index >= 0)
+            {
                 int blobBegin = index + SignatureSize;
                 string incoming = null;
 
@@ -176,41 +284,60 @@ namespace System.Net {
                 // there may be multiple challenges. If the next character after the
                 // package name is not a comma then it is challenge data
                 //
-                if (challenge.Length > blobBegin && challenge[blobBegin] != ',') {
+                if (challenge.Length > blobBegin && challenge[blobBegin] != ',')
+                {
                     ++blobBegin;
-                } else {
+                }
+                else
+                {
                     index = -1;
                 }
-                if (index >= 0 && challenge.Length > blobBegin) {
+                if (index >= 0 && challenge.Length > blobBegin)
+                {
                     incoming = challenge.Substring(blobBegin);
                 }
-                GlobalLog.Print("KerberosClient::Update() closing security context using last incoming blob:[" + ValidationHelper.ToString(incoming) + "]");
+                GlobalLog.Print(
+                    "KerberosClient::Update() closing security context using last incoming blob:["
+                        + ValidationHelper.ToString(incoming)
+                        + "]"
+                );
                 string clientResponse = authSession.GetOutgoingBlob(incoming);
-                httpWebRequest.CurrentAuthenticationState.Authorization.MutuallyAuthenticated = authSession.IsMutualAuthFlag;
-                GlobalLog.Print("KerberosClient::Update() GetOutgoingBlob() returns clientResponse:[" + ValidationHelper.ToString(clientResponse) + "] IsCompleted:" + authSession.IsCompleted.ToString());
+                httpWebRequest.CurrentAuthenticationState.Authorization.MutuallyAuthenticated =
+                    authSession.IsMutualAuthFlag;
+                GlobalLog.Print(
+                    "KerberosClient::Update() GetOutgoingBlob() returns clientResponse:["
+                        + ValidationHelper.ToString(clientResponse)
+                        + "] IsCompleted:"
+                        + authSession.IsCompleted.ToString()
+                );
             }
 
             // Extract the CBT we used and cache it for future requests that want to do preauth
-            httpWebRequest.ServicePoint.SetCachedChannelBinding(httpWebRequest.ChallengedUri, authSession.ChannelBinding);
+            httpWebRequest.ServicePoint.SetCachedChannelBinding(
+                httpWebRequest.ChallengedUri,
+                authSession.ChannelBinding
+            );
 
-            GlobalLog.Print("KerberosClient::Update() session removed and ConnectionGroup released returning true");
+            GlobalLog.Print(
+                "KerberosClient::Update() session removed and ConnectionGroup released returning true"
+            );
             ClearSession(httpWebRequest);
             return true;
         }
 
-        public void ClearSession(WebRequest webRequest) {
+        public void ClearSession(WebRequest webRequest)
+        {
             HttpWebRequest httpWebRequest = webRequest as HttpWebRequest;
-            GlobalLog.Assert(httpWebRequest != null, "KerberosClient::ClearSession()|httpWebRequest == null");
+            GlobalLog.Assert(
+                httpWebRequest != null,
+                "KerberosClient::ClearSession()|httpWebRequest == null"
+            );
             httpWebRequest.CurrentAuthenticationState.ClearSession();
         }
 
-        public bool CanUseDefaultCredentials {
-            get {
-                return true;
-            }
+        public bool CanUseDefaultCredentials
+        {
+            get { return true; }
         }
-
     }; // class KerberosClient
-
-
 } // namespace System.Net

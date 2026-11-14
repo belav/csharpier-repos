@@ -35,7 +35,12 @@ namespace System.Reflection.Internal
 
         private MemoryMappedFile? _lazyMemoryMap;
 
-        public StreamMemoryBlockProvider(Stream stream, long imageStart, int imageSize, bool leaveOpen)
+        public StreamMemoryBlockProvider(
+            Stream stream,
+            long imageStart,
+            int imageSize,
+            bool leaveOpen
+        )
         {
             Debug.Assert(stream.CanSeek && stream.CanRead);
             _stream = stream;
@@ -59,14 +64,15 @@ namespace System.Reflection.Internal
 
         public override int Size
         {
-            get
-            {
-                return _imageSize;
-            }
+            get { return _imageSize; }
         }
 
         /// <exception cref="IOException">Error reading from the stream.</exception>
-        internal static unsafe NativeHeapMemoryBlock ReadMemoryBlockNoLock(Stream stream, long start, int size)
+        internal static unsafe NativeHeapMemoryBlock ReadMemoryBlockNoLock(
+            Stream stream,
+            long start,
+            int size
+        )
         {
             var block = new NativeHeapMemoryBlock(size);
             bool fault = true;
@@ -101,7 +107,13 @@ namespace System.Reflection.Internal
 
             if (_useMemoryMap && size > MemoryMapThreshold)
             {
-                if (TryCreateMemoryMappedFileBlock(absoluteStart, size, out MemoryMappedFileBlock? block))
+                if (
+                    TryCreateMemoryMappedFileBlock(
+                        absoluteStart,
+                        size,
+                        out MemoryMappedFileBlock? block
+                    )
+                )
                 {
                     return block;
                 }
@@ -122,7 +134,11 @@ namespace System.Reflection.Internal
         }
 
         /// <exception cref="IOException">IO error while mapping memory or not enough memory to create the mapping.</exception>
-        private unsafe bool TryCreateMemoryMappedFileBlock(long start, int size, [NotNullWhen(true)] out MemoryMappedFileBlock? block)
+        private unsafe bool TryCreateMemoryMappedFileBlock(
+            long start,
+            int size,
+            [NotNullWhen(true)] out MemoryMappedFileBlock? block
+        )
         {
             if (_lazyMemoryMap == null)
             {
@@ -134,14 +150,14 @@ namespace System.Reflection.Internal
                 {
                     try
                     {
-                        newMemoryMap =
-                            MemoryMappedFile.CreateFromFile(
-                                fileStream: (FileStream)_stream,
-                                mapName: null,
-                                capacity: 0,
-                                access: MemoryMappedFileAccess.Read,
-                                inheritability: HandleInheritability.None,
-                                leaveOpen: true);
+                        newMemoryMap = MemoryMappedFile.CreateFromFile(
+                            fileStream: (FileStream)_stream,
+                            mapName: null,
+                            capacity: 0,
+                            access: MemoryMappedFileAccess.Read,
+                            inheritability: HandleInheritability.None,
+                            leaveOpen: true
+                        );
                     }
                     catch (UnauthorizedAccessException e)
                     {
@@ -165,7 +181,11 @@ namespace System.Reflection.Internal
 
             lock (_streamGuard)
             {
-                accessor = _lazyMemoryMap.CreateViewAccessor(start, size, MemoryMappedFileAccess.Read);
+                accessor = _lazyMemoryMap.CreateViewAccessor(
+                    start,
+                    size,
+                    MemoryMappedFileAccess.Read
+                );
             }
 
             if (accessor == null)
@@ -174,7 +194,12 @@ namespace System.Reflection.Internal
                 return false;
             }
 
-            block = new MemoryMappedFileBlock(accessor, accessor.SafeMemoryMappedViewHandle, accessor.PointerOffset, size);
+            block = new MemoryMappedFileBlock(
+                accessor,
+                accessor.SafeMemoryMappedViewHandle,
+                accessor.PointerOffset,
+                size
+            );
             return true;
         }
     }

@@ -8,11 +8,11 @@ using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -21,13 +21,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Serilog;
 using Microsoft.Extensions.ObjectPool;
+using Microsoft.Extensions.Primitives;
+using Serilog;
 
 namespace HttpStress
 {
@@ -60,7 +60,12 @@ namespace HttpStress
                 host = host.UseHttpSys(hso =>
                 {
                     hso.UrlPrefixes.Add(ServerUri);
-                    hso.Authentication.Schemes = Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes.None;
+                    hso.Authentication.Schemes = Microsoft
+                        .AspNetCore
+                        .Server
+                        .HttpSys
+                        .AuthenticationSchemes
+                        .None;
                     hso.Authentication.AllowAnonymous = true;
                     hso.MaxConnections = null;
                     hso.MaxRequestBodySize = null;
@@ -72,14 +77,30 @@ namespace HttpStress
                 host = host.UseKestrel(ko =>
                 {
                     // conservative estimation based on https://github.com/dotnet/aspnetcore/blob/caa910ceeba5f2b2c02c47a23ead0ca31caea6f0/src/Servers/Kestrel/Core/src/Internal/Http2/Http2Stream.cs#L204
-                    ko.Limits.MaxRequestLineSize = Math.Max(ko.Limits.MaxRequestLineSize, configuration.MaxRequestUriSize + 100);
-                    ko.Limits.MaxRequestHeaderCount = Math.Max(ko.Limits.MaxRequestHeaderCount, configuration.MaxRequestHeaderCount);
-                    ko.Limits.MaxRequestHeadersTotalSize = Math.Max(ko.Limits.MaxRequestHeadersTotalSize, configuration.MaxRequestHeaderTotalSize);
+                    ko.Limits.MaxRequestLineSize = Math.Max(
+                        ko.Limits.MaxRequestLineSize,
+                        configuration.MaxRequestUriSize + 100
+                    );
+                    ko.Limits.MaxRequestHeaderCount = Math.Max(
+                        ko.Limits.MaxRequestHeaderCount,
+                        configuration.MaxRequestHeaderCount
+                    );
+                    ko.Limits.MaxRequestHeadersTotalSize = Math.Max(
+                        ko.Limits.MaxRequestHeadersTotalSize,
+                        configuration.MaxRequestHeaderTotalSize
+                    );
 
-                    ko.Limits.Http2.MaxStreamsPerConnection = configuration.ServerMaxConcurrentStreams ?? ko.Limits.Http2.MaxStreamsPerConnection;
-                    ko.Limits.Http2.MaxFrameSize = configuration.ServerMaxFrameSize ?? ko.Limits.Http2.MaxFrameSize;
-                    ko.Limits.Http2.InitialConnectionWindowSize = configuration.ServerInitialConnectionWindowSize ?? ko.Limits.Http2.InitialConnectionWindowSize;
-                    ko.Limits.Http2.MaxRequestHeaderFieldSize = configuration.ServerMaxRequestHeaderFieldSize ?? ko.Limits.Http2.MaxRequestHeaderFieldSize;
+                    ko.Limits.Http2.MaxStreamsPerConnection =
+                        configuration.ServerMaxConcurrentStreams
+                        ?? ko.Limits.Http2.MaxStreamsPerConnection;
+                    ko.Limits.Http2.MaxFrameSize = configuration.ServerMaxFrameSize
+                        ?? ko.Limits.Http2.MaxFrameSize;
+                    ko.Limits.Http2.InitialConnectionWindowSize =
+                        configuration.ServerInitialConnectionWindowSize
+                        ?? ko.Limits.Http2.InitialConnectionWindowSize;
+                    ko.Limits.Http2.MaxRequestHeaderFieldSize =
+                        configuration.ServerMaxRequestHeaderFieldSize
+                        ?? ko.Limits.Http2.MaxRequestHeaderFieldSize;
 
                     switch (hostname)
                     {
@@ -91,7 +112,6 @@ namespace HttpStress
                             IPAddress iPAddress = Dns.GetHostAddresses(hostname).First();
                             ko.Listen(iPAddress, port, ConfigureListenOptions);
                             break;
-
                     }
 
                     void ConfigureListenOptions(ListenOptions listenOptions)
@@ -101,11 +121,31 @@ namespace HttpStress
                             // Create self-signed cert for server.
                             using (RSA rsa = RSA.Create())
                             {
-                                var certReq = new CertificateRequest("CN=contoso.com", rsa, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-                                certReq.CertificateExtensions.Add(new X509BasicConstraintsExtension(false, false, 0, false));
-                                certReq.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") }, false));
-                                certReq.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false));
-                                X509Certificate2 cert = certReq.CreateSelfSigned(DateTimeOffset.UtcNow.AddMonths(-1), DateTimeOffset.UtcNow.AddMonths(1));
+                                var certReq = new CertificateRequest(
+                                    "CN=contoso.com",
+                                    rsa,
+                                    HashAlgorithmName.SHA256,
+                                    RSASignaturePadding.Pkcs1
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509BasicConstraintsExtension(false, false, 0, false)
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509EnhancedKeyUsageExtension(
+                                        new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                                        false
+                                    )
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509KeyUsageExtension(
+                                        X509KeyUsageFlags.DigitalSignature,
+                                        false
+                                    )
+                                );
+                                X509Certificate2 cert = certReq.CreateSelfSigned(
+                                    DateTimeOffset.UtcNow.AddMonths(-1),
+                                    DateTimeOffset.UtcNow.AddMonths(1)
+                                );
                                 if (OperatingSystem.IsWindows())
                                 {
                                     cert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
@@ -120,13 +160,14 @@ namespace HttpStress
                         else
                         {
                             listenOptions.Protocols =
-                                configuration.HttpVersion == HttpVersion.Version20 ?
-                                HttpProtocols.Http2 :
-                                HttpProtocols.Http1;
+                                configuration.HttpVersion == HttpVersion.Version20
+                                    ? HttpProtocols.Http2
+                                    : HttpProtocols.Http1;
                         }
                     }
                 });
-            };
+            }
+            ;
 
             LoggerConfiguration loggerConfiguration = new LoggerConfiguration();
             if (configuration.Trace)
@@ -136,7 +177,12 @@ namespace HttpStress
                     Directory.CreateDirectory(LogHttpEventListener.LogDirectory);
                 }
                 // Clear existing logs first.
-                foreach (var filename in Directory.GetFiles(LogHttpEventListener.LogDirectory, "server*.log"))
+                foreach (
+                    var filename in Directory.GetFiles(
+                        LogHttpEventListener.LogDirectory,
+                        "server*.log"
+                    )
+                )
                 {
                     try
                     {
@@ -147,14 +193,18 @@ namespace HttpStress
 
                 loggerConfiguration = loggerConfiguration
                     // Output diagnostics to the file
-                    .WriteTo.File(Path.Combine(LogHttpEventListener.LogDirectory, "server.log"), fileSizeLimitBytes: 100 << 20, rollOnFileSizeLimit: true)
+                    .WriteTo.File(
+                        Path.Combine(LogHttpEventListener.LogDirectory, "server.log"),
+                        fileSizeLimitBytes: 100 << 20,
+                        rollOnFileSizeLimit: true
+                    )
                     .MinimumLevel.Debug();
             }
             if (configuration.LogAspNet)
             {
                 loggerConfiguration = loggerConfiguration
-                    // Output only warnings and errors
-                    .WriteTo.Console(Serilog.Events.LogEventLevel.Warning);
+                // Output only warnings and errors
+                .WriteTo.Console(Serilog.Events.LogEventLevel.Warning);
             }
             Log.Logger = loggerConfiguration.CreateLogger();
             if (configuration.Trace)
@@ -162,8 +212,7 @@ namespace HttpStress
                 _listener = new LogQuicEventListener(Log.Logger);
             }
 
-            host = host
-                .UseSerilog()
+            host = host.UseSerilog()
                 // Set up how each request should be handled by the server.
                 .Configure(app =>
                 {
@@ -204,12 +253,20 @@ namespace HttpStress
             });
             endpoints.MapGet("/headers", async context =>
             {
-                (string name, StringValues values)[] headersToEcho =
-                        context.Request.Headers
-                        .Where(h => h.Key.StartsWith("header-"))
-                        // kestrel does not seem to be splitting comma separated header values, handle here
-                        .Select(h => (h.Key, new StringValues(h.Value.SelectMany(v => v.Split(',')).Select(x => x.Trim()).ToArray())))
-                        .ToArray();
+                (string name, StringValues values)[] headersToEcho = context
+                    .Request.Headers.Where(h => h.Key.StartsWith("header-"))
+                    // kestrel does not seem to be splitting comma separated header values, handle here
+                    .Select(h =>
+                        (
+                            h.Key,
+                            new StringValues(
+                                h.Value.SelectMany(v => v.Split(','))
+                                    .Select(x => x.Trim())
+                                    .ToArray()
+                            )
+                        )
+                    )
+                    .ToArray();
 
                 foreach ((string name, StringValues values) in headersToEcho)
                 {
@@ -230,11 +287,12 @@ namespace HttpStress
                         context.Response.AppendTrailer(name + "-trailer", values);
                     }
                 }
-
             });
             endpoints.MapGet("/variables", async context =>
             {
-                NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(context.Request.QueryString.Value!);
+                NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(
+                    context.Request.QueryString.Value!
+                );
 
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < nameValueCollection.Count; i++)
@@ -353,13 +411,19 @@ namespace HttpStress
             {
                 // Simple uri parser: used to parse values valid in Kestrel
                 // but not representable by the System.Uri class, e.g. https://+:5050
-                Match m = Regex.Match(serverUri, "^(?<scheme>https?)://(?<host>[^:/]+)(:(?<port>[0-9]+))?");
+                Match m = Regex.Match(
+                    serverUri,
+                    "^(?<scheme>https?)://(?<host>[^:/]+)(:(?<port>[0-9]+))?"
+                );
 
-                if (!m.Success) throw;
+                if (!m.Success)
+                    throw;
 
                 string scheme = m.Groups["scheme"].Value;
                 string hostname = m.Groups["host"].Value;
-                int port = m.Groups["port"].Success ? int.Parse(m.Groups["port"].Value) : (scheme == "https" ? 443 : 80);
+                int port = m.Groups["port"].Success
+                    ? int.Parse(m.Groups["port"].Value)
+                    : (scheme == "https" ? 443 : 80);
                 return (scheme, hostname, port);
             }
         }
@@ -370,9 +434,14 @@ namespace HttpStress
 
             int GetExpectedContentLength()
             {
-                if (ctx.Request.Headers.TryGetValue(ExpectedResponseContentLength, out StringValues values) &&
-                    values.Count == 1 &&
-                    int.TryParse(values[0], out int result))
+                if (
+                    ctx.Request.Headers.TryGetValue(
+                        ExpectedResponseContentLength,
+                        out StringValues values
+                    )
+                    && values.Count == 1
+                    && int.TryParse(values[0], out int result)
+                )
                 {
                     return result;
                 }
@@ -386,11 +455,7 @@ namespace HttpStress
     {
         // deterministically generate ascii string of given length
         public static string CreateStringContent(int contentSize) =>
-            new String(
-                Enumerable
-                    .Range(0, contentSize)
-                    .Select(i => (char)(i % 128))
-                    .ToArray());
+            new String(Enumerable.Range(0, contentSize).Select(i => (char)(i % 128)).ToArray());
 
         // used for validating content on client side
         public static bool IsValidServerContent(string input)
@@ -407,7 +472,8 @@ namespace HttpStress
 
     public class LogQuicEventListener : EventListener
     {
-        private DefaultObjectPool<StringBuilder> _stringBuilderPool = new DefaultObjectPool<StringBuilder>(new StringBuilderPooledObjectPolicy());
+        private DefaultObjectPool<StringBuilder> _stringBuilderPool =
+            new DefaultObjectPool<StringBuilder>(new StringBuilderPooledObjectPolicy());
         private readonly Serilog.ILogger _logger;
 
         public LogQuicEventListener(Serilog.ILogger logger)

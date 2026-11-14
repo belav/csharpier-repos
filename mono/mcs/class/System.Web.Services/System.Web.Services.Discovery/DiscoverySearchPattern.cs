@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Discovery.DiscoverySearchPattern.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,27 +28,26 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Discovery {
-	public abstract class DiscoverySearchPattern {
+namespace System.Web.Services.Discovery
+{
+    public abstract class DiscoverySearchPattern
+    {
+        #region Constructors
 
-		#region Constructors
+        protected DiscoverySearchPattern() { }
 
-		protected DiscoverySearchPattern () {}
-	
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public abstract string Pattern {
-			get;
-		}
+        public abstract string Pattern { get; }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public abstract DiscoveryReference GetDiscoveryReference (string filename);
+        public abstract DiscoveryReference GetDiscoveryReference(string filename);
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

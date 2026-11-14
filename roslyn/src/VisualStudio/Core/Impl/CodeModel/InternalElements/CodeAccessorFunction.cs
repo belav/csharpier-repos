@@ -15,9 +15,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeFunction2))]
-    public sealed partial class CodeAccessorFunction : AbstractCodeElement, EnvDTE.CodeFunction, EnvDTE80.CodeFunction2
+    public sealed partial class CodeAccessorFunction
+        : AbstractCodeElement,
+            EnvDTE.CodeFunction,
+            EnvDTE80.CodeFunction2
     {
-        internal static EnvDTE.CodeFunction Create(CodeModelState state, AbstractCodeMember parent, MethodKind kind)
+        internal static EnvDTE.CodeFunction Create(
+            CodeModelState state,
+            AbstractCodeMember parent,
+            MethodKind kind
+        )
         {
             var newElement = new CodeAccessorFunction(state, parent, kind);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(newElement);
@@ -26,14 +33,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         private readonly ParentHandle<AbstractCodeMember> _parentHandle;
         private readonly MethodKind _kind;
 
-        private CodeAccessorFunction(CodeModelState state, AbstractCodeMember parent, MethodKind kind)
+        private CodeAccessorFunction(
+            CodeModelState state,
+            AbstractCodeMember parent,
+            MethodKind kind
+        )
             : base(state, parent.FileCodeModel)
         {
-            Debug.Assert(kind is MethodKind.EventAdd or
-                         MethodKind.EventRaise or
-                         MethodKind.EventRemove or
-                         MethodKind.PropertyGet or
-                         MethodKind.PropertySet);
+            Debug.Assert(
+                kind
+                    is MethodKind.EventAdd
+                        or MethodKind.EventRaise
+                        or MethodKind.EventRemove
+                        or MethodKind.PropertyGet
+                        or MethodKind.PropertySet
+            );
 
             _parentHandle = new ParentHandle<AbstractCodeMember>(parent);
             _kind = kind;
@@ -41,8 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         private AbstractCodeMember ParentMember => _parentHandle.Value;
 
-        private bool IsPropertyAccessor()
-            => _kind is MethodKind.PropertyGet or MethodKind.PropertySet;
+        private bool IsPropertyAccessor() =>
+            _kind is MethodKind.PropertyGet or MethodKind.PropertySet;
 
         internal override bool TryLookupNode(out SyntaxNode node)
         {
@@ -54,29 +68,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 return false;
             }
 
-            return CodeModelService.TryGetAutoPropertyExpressionBody(parentNode, out node) ||
-                   CodeModelService.TryGetAccessorNode(parentNode, _kind, out node);
+            return CodeModelService.TryGetAutoPropertyExpressionBody(parentNode, out node)
+                || CodeModelService.TryGetAccessorNode(parentNode, _kind, out node);
         }
 
-        public override EnvDTE.vsCMElement Kind
-            => EnvDTE.vsCMElement.vsCMElementFunction;
+        public override EnvDTE.vsCMElement Kind => EnvDTE.vsCMElement.vsCMElementFunction;
 
         public override object Parent => _parentHandle.Value;
 
-        public override EnvDTE.CodeElements Children
-            => EmptyCollection.Create(this.State, this);
+        public override EnvDTE.CodeElements Children => EmptyCollection.Create(this.State, this);
 
-        protected override string GetName()
-            => this.ParentMember.Name;
+        protected override string GetName() => this.ParentMember.Name;
 
-        protected override void SetName(string value)
-            => this.ParentMember.Name = value;
+        protected override void SetName(string value) => this.ParentMember.Name = value;
 
-        protected override string GetFullName()
-            => this.ParentMember.FullName;
+        protected override string GetFullName() => this.ParentMember.FullName;
 
-        public EnvDTE.CodeElements Attributes
-            => AttributeCollection.Create(this.State, this);
+        public EnvDTE.CodeElements Attributes => AttributeCollection.Create(this.State, this);
 
         public EnvDTE.vsCMAccess Access
         {
@@ -85,50 +93,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = LookupNode();
                 return CodeModelService.GetAccess(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateAccess, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateAccess, value); }
         }
 
         public bool CanOverride
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            get { throw new System.NotImplementedException(); }
+            set { throw new System.NotImplementedException(); }
         }
 
         public string Comment
         {
-            get
-            {
-                throw Exceptions.ThrowEFail();
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { throw Exceptions.ThrowEFail(); }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public string DocComment
         {
-            get
-            {
-                return string.Empty;
-            }
-
-            set
-            {
-                throw Exceptions.ThrowENotImpl();
-            }
+            get { return string.Empty; }
+            set { throw Exceptions.ThrowENotImpl(); }
         }
 
         public EnvDTE.vsCMFunction FunctionKind
@@ -172,7 +155,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     return ((CodeEvent)this.ParentMember).OverrideKind;
                 }
             }
-
             set
             {
                 if (IsPropertyAccessor())
@@ -201,7 +183,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     return ((CodeEvent)this.ParentMember).IsShared;
                 }
             }
-
             set
             {
                 if (IsPropertyAccessor())
@@ -228,7 +209,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     return ((CodeEvent)this.ParentMember).MustImplement;
                 }
             }
-
             set
             {
                 if (IsPropertyAccessor())
@@ -242,8 +222,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             }
         }
 
-        public EnvDTE.CodeElements Overloads
-            => throw Exceptions.ThrowEFail();
+        public EnvDTE.CodeElements Overloads => throw Exceptions.ThrowEFail();
 
         public EnvDTE.CodeElements Parameters
         {
@@ -269,11 +248,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
                 throw Exceptions.ThrowEFail();
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE.CodeAttribute AddAttribute(string name, string value, object position)

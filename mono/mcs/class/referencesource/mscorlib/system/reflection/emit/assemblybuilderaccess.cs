@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>WESU</OWNER>
 using System;
@@ -9,8 +9,8 @@ using System;
 // This enumeration defines the access modes for a dynamic assembly.
 // EE uses these enum values..look for m_dwDynamicAssemblyAccess in Assembly.hpp
 
-namespace System.Reflection.Emit 
-{    
+namespace System.Reflection.Emit
+{
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Flags]

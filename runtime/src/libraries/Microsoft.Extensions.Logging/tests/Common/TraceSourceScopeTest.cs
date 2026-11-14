@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Logging.Test
             var state = "1337state7331";
 
             var factory = TestLoggerBuilder.Create(builder =>
-                builder.AddTraceSource(new SourceSwitch("TestSwitch"), new ConsoleTraceListener()));
+                builder.AddTraceSource(new SourceSwitch("TestSwitch"), new ConsoleTraceListener())
+            );
 
             var logger = factory.CreateLogger("Test");
 

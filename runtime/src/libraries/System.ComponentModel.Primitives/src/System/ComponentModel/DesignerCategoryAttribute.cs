@@ -15,7 +15,9 @@ namespace System.ComponentModel
         /// Specifies that a component marked with this category uses a component
         /// designer. This <see langword='static'/> field is read-only.
         /// </summary>
-        public static readonly DesignerCategoryAttribute Component = new DesignerCategoryAttribute("Component");
+        public static readonly DesignerCategoryAttribute Component = new DesignerCategoryAttribute(
+            "Component"
+        );
 
         /// <summary>
         /// Specifies that a component marked with this category cannot use a visual
@@ -27,21 +29,24 @@ namespace System.ComponentModel
         /// Specifies that a component marked with this category uses a form designer.
         /// This <see langword='static'/> field is read-only.
         /// </summary>
-        public static readonly DesignerCategoryAttribute Form = new DesignerCategoryAttribute("Form");
+        public static readonly DesignerCategoryAttribute Form = new DesignerCategoryAttribute(
+            "Form"
+        );
 
         /// <summary>
         /// Specifies that a component marked with this category uses a generic designer.
         /// This <see langword='static'/> field is read-only.
         /// </summary>
-        public static readonly DesignerCategoryAttribute Generic = new DesignerCategoryAttribute("Designer");
+        public static readonly DesignerCategoryAttribute Generic = new DesignerCategoryAttribute(
+            "Designer"
+        );
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DesignerCategoryAttribute'/> class with the
         /// default category.
         /// </summary>
-        public DesignerCategoryAttribute() : this(string.Empty)
-        {
-        }
+        public DesignerCategoryAttribute()
+            : this(string.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DesignerCategoryAttribute'/> class with

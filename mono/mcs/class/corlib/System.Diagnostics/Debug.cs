@@ -28,40 +28,33 @@
 
 namespace System.Diagnostics
 {
-	//
-	// The type is renamed to DebugInternal in the post processing to avoid conficts in IVT assemblies. The proper
-	// solution is to have support for IVT for members
-	//
-	static class Debug
-	{
-		[ConditionalAttribute ("DEBUG")]
-		public static void Assert (bool condition)
-		{
-		}
+    //
+    // The type is renamed to DebugInternal in the post processing to avoid conficts in IVT assemblies. The proper
+    // solution is to have support for IVT for members
+    //
+    static class Debug
+    {
+        [ConditionalAttribute("DEBUG")]
+        public static void Assert(bool condition) { }
 
-		[ConditionalAttribute ("DEBUG")]
-		public static void Assert (bool condition, string message)
-		{
-		}
+        [ConditionalAttribute("DEBUG")]
+        public static void Assert(bool condition, string message) { }
 
-		[ConditionalAttribute ("DEBUG")]
-		public static void Assert (bool condition, string message, string detailMessage)
-		{
-		}
+        [ConditionalAttribute("DEBUG")]
+        public static void Assert(bool condition, string message, string detailMessage) { }
 
-		[ConditionalAttribute ("DEBUG")]
-		public static void Assert (bool condition, string message, string detailMessageFormat, params object[] args)
-		{
-		}
+        [ConditionalAttribute("DEBUG")]
+        public static void Assert(
+            bool condition,
+            string message,
+            string detailMessageFormat,
+            params object[] args
+        ) { }
 
-		[ConditionalAttribute ("DEBUG")]
-		public static void Fail (string message)
-		{
-		}
+        [ConditionalAttribute("DEBUG")]
+        public static void Fail(string message) { }
 
-		[ConditionalAttribute ("DEBUG")]
-		public static void Fail (string message, string detailMessage)
-		{
-		}
-	}
+        [ConditionalAttribute("DEBUG")]
+        public static void Fail(string message, string detailMessage) { }
+    }
 }

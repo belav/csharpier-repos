@@ -20,7 +20,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ChangeReturnType), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ChangeReturnType
+        ),
+        Shared
+    ]
     internal class CSharpChangeToIEnumerableCodeFixProvider : AbstractIteratorCodeFixProvider
     {
         /// <summary>
@@ -29,19 +35,29 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
         private const string CS1624 = nameof(CS1624);
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpChangeToIEnumerableCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpChangeToIEnumerableCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {
             get { return ImmutableArray.Create(CS1624); }
         }
 
-        protected override async Task<CodeAction?> GetCodeFixAsync(SyntaxNode root, SyntaxNode node, Document document, Diagnostic diagnostics, CancellationToken cancellationToken)
+        protected override async Task<CodeAction?> GetCodeFixAsync(
+            SyntaxNode root,
+            SyntaxNode node,
+            Document document,
+            Diagnostic diagnostics,
+            CancellationToken cancellationToken
+        )
         {
-            var model = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var methodSymbol = model.GetDeclaredSymbol(node, cancellationToken) as IMethodSymbol;
             // IMethod symbol can either be a regular method or an accessor
             if (methodSymbol?.ReturnType == null || methodSymbol.ReturnsVoid)
@@ -50,7 +66,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             }
 
             var type = methodSymbol.ReturnType;
-            if (!TryGetIEnumerableSymbols(model, out var ienumerableSymbol, out var ienumerableGenericSymbol))
+            if (
+                !TryGetIEnumerableSymbols(
+                    model,
+                    out var ienumerableSymbol,
+                    out var ienumerableGenericSymbol
+                )
+            )
             {
                 return null;
             }
@@ -65,7 +87,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                 }
                 else if (arity == 0 && type is IArrayTypeSymbol arrayType)
                 {
-                    ienumerableGenericSymbol = ienumerableGenericSymbol.Construct(arrayType.ElementType);
+                    ienumerableGenericSymbol = ienumerableGenericSymbol.Construct(
+                        arrayType.ElementType
+                    );
                 }
                 else
                 {
@@ -79,10 +103,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
 
             var newReturnType = ienumerableGenericSymbol.GenerateTypeSyntax();
             Document? newDocument = null;
-            var newMethodDeclarationSyntax = (node as MethodDeclarationSyntax)?.WithReturnType(newReturnType);
+            var newMethodDeclarationSyntax = (node as MethodDeclarationSyntax)?.WithReturnType(
+                newReturnType
+            );
             if (newMethodDeclarationSyntax != null)
             {
-                newDocument = document.WithSyntaxRoot(root.ReplaceNode(node, newMethodDeclarationSyntax));
+                newDocument = document.WithSyntaxRoot(
+                    root.ReplaceNode(node, newMethodDeclarationSyntax)
+                );
             }
 
             var newOperator = (node as OperatorDeclarationSyntax)?.WithReturnType(newReturnType);
@@ -94,13 +122,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             var oldAccessor = node.Parent?.Parent as PropertyDeclarationSyntax;
             if (oldAccessor != null)
             {
-                newDocument = document.WithSyntaxRoot(root.ReplaceNode(oldAccessor, oldAccessor.WithType(newReturnType)));
+                newDocument = document.WithSyntaxRoot(
+                    root.ReplaceNode(oldAccessor, oldAccessor.WithType(newReturnType))
+                );
             }
 
             var oldIndexer = node.Parent?.Parent as IndexerDeclarationSyntax;
             if (oldIndexer != null)
             {
-                newDocument = document.WithSyntaxRoot(root.ReplaceNode(oldIndexer, oldIndexer.WithType(newReturnType)));
+                newDocument = document.WithSyntaxRoot(
+                    root.ReplaceNode(oldIndexer, oldIndexer.WithType(newReturnType))
+                );
             }
 
             if (newDocument == null)
@@ -108,9 +140,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                 return null;
             }
 
-            var title = string.Format(CSharpCodeFixesResources.Change_return_type_from_0_to_1,
+            var title = string.Format(
+                CSharpCodeFixesResources.Change_return_type_from_0_to_1,
                 type.ToMinimalDisplayString(model, node.SpanStart),
-                ienumerableGenericSymbol.ToMinimalDisplayString(model, node.SpanStart));
+                ienumerableGenericSymbol.ToMinimalDisplayString(model, node.SpanStart)
+            );
 
             return CodeAction.Create(title, _ => Task.FromResult(newDocument), title);
         }
@@ -118,10 +152,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
         private static bool TryGetIEnumerableSymbols(
             SemanticModel model,
             [NotNullWhen(true)] out INamedTypeSymbol? ienumerableSymbol,
-            [NotNullWhen(true)] out INamedTypeSymbol? ienumerableGenericSymbol)
+            [NotNullWhen(true)] out INamedTypeSymbol? ienumerableGenericSymbol
+        )
         {
-            ienumerableSymbol = model.Compilation.GetTypeByMetadataName(typeof(IEnumerable).FullName!);
-            ienumerableGenericSymbol = model.Compilation.GetTypeByMetadataName(typeof(IEnumerable<>).FullName!);
+            ienumerableSymbol = model.Compilation.GetTypeByMetadataName(
+                typeof(IEnumerable).FullName!
+            );
+            ienumerableGenericSymbol = model.Compilation.GetTypeByMetadataName(
+                typeof(IEnumerable<>).FullName!
+            );
 
             return ienumerableGenericSymbol != null && ienumerableSymbol != null;
         }

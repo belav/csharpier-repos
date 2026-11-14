@@ -70,39 +70,36 @@ public class Startup
         );
 
         // MVC would usually handle this:
-        app.Map(
-            "/api/TodoList",
-            todoApp =>
+        app.Map("/api/TodoList", todoApp =>
+        {
+            todoApp.Run(async context =>
             {
-                todoApp.Run(async context =>
+                var response = context.Response;
+                if (HttpMethods.IsPost(context.Request.Method))
                 {
-                    var response = context.Response;
-                    if (HttpMethods.IsPost(context.Request.Method))
+                    var reader = new StreamReader(context.Request.Body);
+                    var body = await reader.ReadToEndAsync();
+                    using (var json = JsonDocument.Parse(body))
                     {
-                        var reader = new StreamReader(context.Request.Body);
-                        var body = await reader.ReadToEndAsync();
-                        using (var json = JsonDocument.Parse(body))
+                        var obj = json.RootElement;
+                        var todo = new Todo()
                         {
-                            var obj = json.RootElement;
-                            var todo = new Todo()
-                            {
-                                Description = obj.GetProperty("Description").GetString(),
-                                Owner = context.User.Identity.Name,
-                            };
-                            Todos.Add(todo);
-                        }
+                            Description = obj.GetProperty("Description").GetString(),
+                            Owner = context.User.Identity.Name,
+                        };
+                        Todos.Add(todo);
                     }
-                    else
-                    {
-                        response.ContentType = "application/json";
-                        response.Headers.CacheControl = "no-cache";
-                        await response.StartAsync();
-                        Serialize(Todos, response.BodyWriter);
-                        await response.BodyWriter.FlushAsync();
-                    }
-                });
-            }
-        );
+                }
+                else
+                {
+                    response.ContentType = "application/json";
+                    response.Headers.CacheControl = "no-cache";
+                    await response.StartAsync();
+                    Serialize(Todos, response.BodyWriter);
+                    await response.BodyWriter.FlushAsync();
+                }
+            });
+        });
     }
 
     private void Serialize(IList<Todo> todos, IBufferWriter<byte> output)

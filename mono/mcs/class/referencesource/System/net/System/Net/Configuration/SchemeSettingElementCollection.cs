@@ -2,11 +2,13 @@ using System;
 
 namespace System.Configuration
 {
-    [ConfigurationCollection(typeof(SchemeSettingElement),
+    [ConfigurationCollection(
+        typeof(SchemeSettingElement),
         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap,
         AddItemName = SchemeSettingElementCollection.AddItemName,
         ClearItemsName = SchemeSettingElementCollection.ClearItemsName,
-        RemoveItemName = SchemeSettingElementCollection.RemoveItemName)]
+        RemoveItemName = SchemeSettingElementCollection.RemoveItemName
+    )]
     public sealed class SchemeSettingElementCollection : ConfigurationElementCollection
     {
         internal const string AddItemName = "add";

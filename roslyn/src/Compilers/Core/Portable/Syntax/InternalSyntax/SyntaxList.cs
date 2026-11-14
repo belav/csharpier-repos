@@ -10,14 +10,10 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
     internal abstract partial class SyntaxList : GreenNode
     {
         internal SyntaxList()
-            : base(GreenNode.ListKind)
-        {
-        }
+            : base(GreenNode.ListKind) { }
 
         internal SyntaxList(DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations)
-            : base(GreenNode.ListKind, diagnostics, annotations)
-        {
-        }
+            : base(GreenNode.ListKind, diagnostics, annotations) { }
 
         internal static GreenNode List(GreenNode child)
         {
@@ -30,7 +26,12 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             RoslynDebug.Assert(child1 != null);
 
             int hash;
-            GreenNode? cached = SyntaxNodeCache.TryGetNode(GreenNode.ListKind, child0, child1, out hash);
+            GreenNode? cached = SyntaxNodeCache.TryGetNode(
+                GreenNode.ListKind,
+                child0,
+                child1,
+                out hash
+            );
             if (cached != null)
                 return (WithTwoChildren)cached;
 
@@ -50,7 +51,13 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             RoslynDebug.Assert(child2 != null);
 
             int hash;
-            GreenNode? cached = SyntaxNodeCache.TryGetNode(GreenNode.ListKind, child0, child1, child2, out hash);
+            GreenNode? cached = SyntaxNodeCache.TryGetNode(
+                GreenNode.ListKind,
+                child0,
+                child1,
+                child2,
+                out hash
+            );
             if (cached != null)
                 return (WithThreeChildren)cached;
 
@@ -143,18 +150,12 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
         public sealed override string Language
         {
-            get
-            {
-                throw ExceptionUtilities.Unreachable();
-            }
+            get { throw ExceptionUtilities.Unreachable(); }
         }
 
         public sealed override string KindText
         {
-            get
-            {
-                throw ExceptionUtilities.Unreachable();
-            }
+            get { throw ExceptionUtilities.Unreachable(); }
         }
 
         public sealed override SyntaxNode GetStructure(SyntaxTrivia parentTrivia)

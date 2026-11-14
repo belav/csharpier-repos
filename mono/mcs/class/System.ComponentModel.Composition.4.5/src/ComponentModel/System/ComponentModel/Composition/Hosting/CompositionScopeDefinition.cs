@@ -2,25 +2,28 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.ComponentModel.Composition.Hosting;
-using Microsoft.Internal;
+using System.ComponentModel.Composition.Primitives;
+using System.ComponentModel.Composition.ReflectionModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Threading;
-using System.ComponentModel.Composition.ReflectionModel;
-using System.ComponentModel.Composition.Primitives;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
     [DebuggerTypeProxy(typeof(CompositionScopeDefinitionDebuggerProxy))]
-    public class CompositionScopeDefinition : ComposablePartCatalog, INotifyComposablePartCatalogChanged
+    public class CompositionScopeDefinition
+        : ComposablePartCatalog,
+            INotifyComposablePartCatalogChanged
     {
         private ComposablePartCatalog _catalog;
         private IEnumerable<ExportDefinition> _publicSurface = null;
-        private IEnumerable<CompositionScopeDefinition> _children = Enumerable.Empty<CompositionScopeDefinition>();
+        private IEnumerable<CompositionScopeDefinition> _children =
+            Enumerable.Empty<CompositionScopeDefinition>();
         private volatile int _isDisposed = 0;
 
         /// <summary>
@@ -33,7 +36,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         /// <param name="catalog">The catalog.</param>
         /// <param name="children">The children.</param>
-        public CompositionScopeDefinition(ComposablePartCatalog catalog, IEnumerable<CompositionScopeDefinition> children)
+        public CompositionScopeDefinition(
+            ComposablePartCatalog catalog,
+            IEnumerable<CompositionScopeDefinition> children
+        )
         {
             Requires.NotNull(catalog, "catalog");
             Requires.NullOrNotNullElements(children, "children");
@@ -41,14 +47,17 @@ namespace System.ComponentModel.Composition.Hosting
             InitializeCompositionScopeDefinition(catalog, children, null);
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositionScopeDefinition"/> class.
         /// </summary>
         /// <param name="catalog">The catalog.</param>
         /// <param name="children">The children.</param>
         /// <param name="publicSurface">The exports that can be used to create new scopes.</param>
-        public CompositionScopeDefinition(ComposablePartCatalog catalog, IEnumerable<CompositionScopeDefinition> children, IEnumerable<ExportDefinition> publicSurface)
+        public CompositionScopeDefinition(
+            ComposablePartCatalog catalog,
+            IEnumerable<CompositionScopeDefinition> children,
+            IEnumerable<ExportDefinition> publicSurface
+        )
         {
             Requires.NotNull(catalog, "catalog");
             Requires.NullOrNotNullElements(children, "children");
@@ -57,25 +66,29 @@ namespace System.ComponentModel.Composition.Hosting
             InitializeCompositionScopeDefinition(catalog, children, publicSurface);
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositionScopeDefinition"/> class.
         /// </summary>
         /// <param name="catalog">The catalog.</param>
         /// <param name="children">The children.</param>
-        private void InitializeCompositionScopeDefinition(ComposablePartCatalog catalog, IEnumerable<CompositionScopeDefinition> children, IEnumerable<ExportDefinition> publicSurface)
+        private void InitializeCompositionScopeDefinition(
+            ComposablePartCatalog catalog,
+            IEnumerable<CompositionScopeDefinition> children,
+            IEnumerable<ExportDefinition> publicSurface
+        )
         {
             this._catalog = catalog;
             if (children != null)
             {
                 this._children = children.ToArray();
             }
-            if(publicSurface != null)
+            if (publicSurface != null)
             {
                 this._publicSurface = publicSurface;
             }
 
-            INotifyComposablePartCatalogChanged notifyCatalog = this._catalog as INotifyComposablePartCatalogChanged;
+            INotifyComposablePartCatalogChanged notifyCatalog =
+                this._catalog as INotifyComposablePartCatalogChanged;
             if (notifyCatalog != null)
             {
                 notifyCatalog.Changed += this.OnChangedInternal;
@@ -98,7 +111,8 @@ namespace System.ComponentModel.Composition.Hosting
                     if (Interlocked.CompareExchange(ref this._isDisposed, 1, 0) == 0)
 #pragma warning restore 420
                     {
-                        INotifyComposablePartCatalogChanged notifyCatalog = this._catalog as INotifyComposablePartCatalogChanged;
+                        INotifyComposablePartCatalogChanged notifyCatalog =
+                            this._catalog as INotifyComposablePartCatalogChanged;
                         if (notifyCatalog != null)
                         {
                             notifyCatalog.Changed -= this.OnChangedInternal;
@@ -144,14 +158,14 @@ namespace System.ComponentModel.Composition.Hosting
             get
             {
                 this.ThrowIfDisposed();
-                if(this._publicSurface == null)
+                if (this._publicSurface == null)
                 {
-                    return this.SelectMany( (p) => p.ExportDefinitions );
+                    return this.SelectMany((p) => p.ExportDefinitions);
                 }
 
                 return this._publicSurface;
             }
-        } 
+        }
 
         /// <summary>
         /// Gets an Enumerator for the ComposablePartDefinitions
@@ -186,26 +200,30 @@ namespace System.ComponentModel.Composition.Hosting
         /// <paramref name="definition"/>, return an empty <see cref="IEnumerable{T}"/>.
         /// </note>
         /// </remarks>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             this.ThrowIfDisposed();
 
             return this._catalog.GetExports(definition);
         }
 
-        internal IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExportsFromPublicSurface(ImportDefinition definition)
+        internal IEnumerable<
+            Tuple<ComposablePartDefinition, ExportDefinition>
+        > GetExportsFromPublicSurface(ImportDefinition definition)
         {
             Assumes.NotNull(definition, "definition");
 
             var exports = new List<Tuple<ComposablePartDefinition, ExportDefinition>>();
 
-            foreach(var exportDefinition in this.PublicSurface)
+            foreach (var exportDefinition in this.PublicSurface)
             {
                 if (definition.IsConstraintSatisfiedBy(exportDefinition))
                 {
                     foreach (var export in this.GetExports(definition))
                     {
-                        if(export.Item2 == exportDefinition)
+                        if (export.Item2 == exportDefinition)
                         {
                             exports.Add(export);
                             break;
@@ -264,7 +282,11 @@ namespace System.ComponentModel.Composition.Hosting
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfDisposed()
         {
             if (this._isDisposed == 1)

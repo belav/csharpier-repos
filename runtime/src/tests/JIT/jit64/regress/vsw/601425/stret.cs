@@ -15,7 +15,6 @@ public struct VType
     public short v4;
 }
 
-
 public class StructReturn
 {
     public static VType VTypeInc(VType vt)
@@ -67,9 +66,21 @@ public class StructReturn
         short v4 = 999;
 
         VType vt = InitVType(v1, v2, v3, v4);
-        Console.WriteLine("init returned v1={0:D} v2={1:D} v3={2:D} 4={3:D}", vt.v1, vt.v2, vt.v3, vt.v4);
+        Console.WriteLine(
+            "init returned v1={0:D} v2={1:D} v3={2:D} 4={3:D}",
+            vt.v1,
+            vt.v2,
+            vt.v3,
+            vt.v4
+        );
         VType vtinc = VTypeInc(vt);
-        Console.WriteLine("inc returned v1={0:D} v2={1:D} v3={2:D} v4={3:D}", vtinc.v1, vtinc.v2, vtinc.v3, vtinc.v4);
+        Console.WriteLine(
+            "inc returned v1={0:D} v2={1:D} v3={2:D} v4={3:D}",
+            vtinc.v1,
+            vtinc.v2,
+            vtinc.v3,
+            vtinc.v4
+        );
         if (vt.v2 + 1 != vtinc.v2)
         {
             Console.WriteLine("Fail");

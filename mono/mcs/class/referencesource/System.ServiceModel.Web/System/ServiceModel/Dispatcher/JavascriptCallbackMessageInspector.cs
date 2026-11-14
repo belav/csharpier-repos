@@ -4,15 +4,15 @@
 #pragma warning disable 1634, 1691
 namespace System.ServiceModel.Dispatcher
 {
-    using System.Net;
+    using System.Diagnostics;
     using System.Linq;
+    using System.Net;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Web;
     using System.Web;
-    using System.ServiceModel.Description;
-    using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
 
     class JavascriptCallbackMessageInspector : IDispatchMessageInspector
     {
@@ -23,20 +23,32 @@ namespace System.ServiceModel.Dispatcher
             this.CallbackParameterName = callbackParameterName;
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.JsonpCallbackNameSet, SR2.GetString(SR2.TraceCodeJsonpCallbackNameSet, callbackParameterName));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.JsonpCallbackNameSet,
+                    SR2.GetString(SR2.TraceCodeJsonpCallbackNameSet, callbackParameterName)
+                );
             }
         }
 
         string CallbackParameterName { get; set; }
 
-        public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
+        public object AfterReceiveRequest(
+            ref Message request,
+            IClientChannel channel,
+            InstanceContext instanceContext
+        )
         {
-            if (HttpContext.Current != null &&
-                HttpContext.Current.User != null &&
-                HttpContext.Current.User.Identity != null &&
-                HttpContext.Current.User.Identity.IsAuthenticated)
+            if (
+                HttpContext.Current != null
+                && HttpContext.Current.User != null
+                && HttpContext.Current.User.Identity != null
+                && HttpContext.Current.User.Identity.IsAuthenticated
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported)
+                );
             }
             return null;
         }
@@ -44,37 +56,60 @@ namespace System.ServiceModel.Dispatcher
         public void BeforeSendReply(ref Message reply, object correlationState)
         {
             WebBodyFormatMessageProperty formatProperty;
-            JavascriptCallbackResponseMessageProperty javascriptCallbackResponseMessageProperty = null;
-            if (reply.Properties.TryGetValue<WebBodyFormatMessageProperty>(WebBodyFormatMessageProperty.Name, out formatProperty) &&
-                formatProperty != null &&
-                formatProperty.Format == WebContentFormat.Json)
+            JavascriptCallbackResponseMessageProperty javascriptCallbackResponseMessageProperty =
+                null;
+            if (
+                reply.Properties.TryGetValue<WebBodyFormatMessageProperty>(
+                    WebBodyFormatMessageProperty.Name,
+                    out formatProperty
+                )
+                && formatProperty != null
+                && formatProperty.Format == WebContentFormat.Json
+            )
             {
-                if (!reply.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptCallbackResponseMessageProperty)
-                    || javascriptCallbackResponseMessageProperty == null)
+                if (
+                    !reply.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                        JavascriptCallbackResponseMessageProperty.Name,
+                        out javascriptCallbackResponseMessageProperty
+                    )
+                    || javascriptCallbackResponseMessageProperty == null
+                )
                 {
-                    javascriptCallbackResponseMessageProperty = WebHttpBehavior.TrySetupJavascriptCallback(this.CallbackParameterName);
+                    javascriptCallbackResponseMessageProperty =
+                        WebHttpBehavior.TrySetupJavascriptCallback(this.CallbackParameterName);
                     if (javascriptCallbackResponseMessageProperty != null)
                     {
-                        reply.Properties.Add(JavascriptCallbackResponseMessageProperty.Name, javascriptCallbackResponseMessageProperty);
+                        reply.Properties.Add(
+                            JavascriptCallbackResponseMessageProperty.Name,
+                            javascriptCallbackResponseMessageProperty
+                        );
                     }
                 }
                 if (javascriptCallbackResponseMessageProperty != null)
-                {                    
+                {
                     HttpResponseMessageProperty property;
-                    if (reply.Properties.TryGetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name, out property) &&
-                        property != null)
+                    if (
+                        reply.Properties.TryGetValue<HttpResponseMessageProperty>(
+                            HttpResponseMessageProperty.Name,
+                            out property
+                        )
+                        && property != null
+                    )
                     {
-                        property.Headers[HttpResponseHeader.ContentType] = applicationJavaScriptMediaType;
+                        property.Headers[HttpResponseHeader.ContentType] =
+                            applicationJavaScriptMediaType;
                         if (javascriptCallbackResponseMessageProperty.StatusCode == null)
                         {
-                            javascriptCallbackResponseMessageProperty.StatusCode = property.StatusCode;
+                            javascriptCallbackResponseMessageProperty.StatusCode =
+                                property.StatusCode;
                         }
                         property.StatusCode = HttpStatusCode.OK;
 
                         if (property.SuppressEntityBody)
                         {
                             property.SuppressEntityBody = false;
-                            Message nullJsonMessage = WebOperationContext.Current.CreateJsonResponse<object>(null);
+                            Message nullJsonMessage =
+                                WebOperationContext.Current.CreateJsonResponse<object>(null);
                             nullJsonMessage.Properties.CopyProperties(reply.Properties);
                             reply = nullJsonMessage;
                         }

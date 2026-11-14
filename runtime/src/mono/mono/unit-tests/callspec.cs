@@ -1,28 +1,23 @@
-
 namespace Baz
 {
     class Foo
     {
-        public Foo()
-        {
-        }
+        public Foo() { }
 
         public string Bar()
         {
             return "Hello, World!";
-		}
+        }
 
         public string Bar(string who)
         {
             return "Hello, " + who + "!";
         }
-	}
+    }
 
     class Goo
     {
-        public Goo()
-        {
-        }
+        public Goo() { }
 
         public string Bar(string greet)
         {
@@ -32,9 +27,7 @@ namespace Baz
 
     class Foo2
     {
-        public Foo2()
-        {
-        }
+        public Foo2() { }
 
         public string Bar(string greet)
         {

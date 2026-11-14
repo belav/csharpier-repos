@@ -54,7 +54,10 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
-        private static readonly Dictionary<Type, ReadType> ReadTypeMap = new Dictionary<Type, ReadType>
+        private static readonly Dictionary<Type, ReadType> ReadTypeMap = new Dictionary<
+            Type,
+            ReadType
+        >
         {
             [typeof(byte[])] = ReadType.ReadAsBytes,
             [typeof(byte)] = ReadType.ReadAsInt32,
@@ -69,7 +72,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
             [typeof(float)] = ReadType.ReadAsDouble,
             [typeof(double)] = ReadType.ReadAsDouble,
-            [typeof(long)] = ReadType.ReadAsInt64
+            [typeof(long)] = ReadType.ReadAsInt64,
         };
     }
 }

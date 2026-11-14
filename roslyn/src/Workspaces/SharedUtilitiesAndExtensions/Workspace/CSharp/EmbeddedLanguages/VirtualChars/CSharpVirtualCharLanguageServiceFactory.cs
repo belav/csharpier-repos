@@ -10,25 +10,26 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 {
-    [ExportLanguageServiceFactory(typeof(IVirtualCharLanguageService), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(typeof(IVirtualCharLanguageService), LanguageNames.CSharp),
+        Shared
+    ]
     internal sealed class CSharpVirtualCharLanguageServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpVirtualCharLanguageServiceFactory()
-        {
-        }
+        public CSharpVirtualCharLanguageServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => CSharpVirtualCharLanguageService.Instance;
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            CSharpVirtualCharLanguageService.Instance;
 
-        private sealed class CSharpVirtualCharLanguageService : CSharpVirtualCharService, IVirtualCharLanguageService
+        private sealed class CSharpVirtualCharLanguageService
+            : CSharpVirtualCharService,
+                IVirtualCharLanguageService
         {
             internal static new readonly CSharpVirtualCharLanguageService Instance = new();
 
-            private CSharpVirtualCharLanguageService()
-            {
-            }
+            private CSharpVirtualCharLanguageService() { }
         }
     }
 }

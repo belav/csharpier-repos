@@ -9,6 +9,6 @@ namespace System.ComponentModel
         Select = 1,
         Update = 2,
         Insert = 3,
-        Delete = 4
+        Delete = 4,
     }
 }

@@ -18,14 +18,25 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         public XmlSchema GetSchema(string ns, string e1, string e2)
         {
             string xsd = string.Empty;
             if (ns.Equals(string.Empty))
-                xsd = "<schema xmlns='http://www.w3.org/2001/XMLSchema'><element name='" + e1 + "'/><element name='" + e2 + "'/></schema>";
+                xsd =
+                    "<schema xmlns='http://www.w3.org/2001/XMLSchema'><element name='"
+                    + e1
+                    + "'/><element name='"
+                    + e2
+                    + "'/></schema>";
             else
-                xsd = "<schema xmlns='http://www.w3.org/2001/XMLSchema' targetNamespace='" + ns + "'><element name='" + e1 + "'/><element name='" + e2 + "'/></schema>";
+                xsd =
+                    "<schema xmlns='http://www.w3.org/2001/XMLSchema' targetNamespace='"
+                    + ns
+                    + "'><element name='"
+                    + e1
+                    + "'/><element name='"
+                    + e2
+                    + "'/></schema>";
 
             XmlSchema schema = XmlSchema.Read(new StringReader(xsd), null);
             return schema;
@@ -52,7 +63,14 @@ namespace System.Xml.XmlSchemaTests
         //[Variation(Desc = "v2.2 - GlobalElements with set with two schemas, both with NS", Params = new object[] { "a", "e1", "e2", "b", "e3", "e4" })]
         [InlineData("a", "e1", "e2", "b", "e3", "e4")]
         [Theory]
-        public void v2(object param0, object param1, object param2, object param3, object param4, object param5)
+        public void v2(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5
+        )
         {
             string ns1 = param0.ToString();
             string ns2 = param3.ToString();
@@ -74,10 +92,26 @@ namespace System.Xml.XmlSchemaTests
 
             //Verify
             CError.Compare(ss.GlobalElements.Count, 4, "Elements Count after add/compile");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns1)), true, "Contains2");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e3, ns2)), true, "Contains3");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e4, ns2)), true, "Contains4");
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns1)),
+                true,
+                "Contains2"
+            );
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e3, ns2)),
+                true,
+                "Contains3"
+            );
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e4, ns2)),
+                true,
+                "Contains4"
+            );
 
             //Now reprocess one schema and check
             ss.Reprocess(s1);
@@ -111,7 +145,15 @@ namespace System.Xml.XmlSchemaTests
         //[Variation(Desc = "v3.8 - GlobalElements with a set having schema (ns) to another set with schema(ns), no compile", Params = new object[] { "a", "e1", "e2", "b", "e3", "e4", false })]
         [InlineData("a", "e1", "e2", "b", "e3", "e4", false)]
         [Theory]
-        public void v3(object param0, object param1, object param2, object param3, object param4, object param5, object param6)
+        public void v3(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5,
+            object param6
+        )
         {
             string ns1 = param0.ToString();
             string ns2 = param3.ToString();
@@ -141,10 +183,26 @@ namespace System.Xml.XmlSchemaTests
                 ss1.Compile();
             //Verify
             CError.Compare(ss1.GlobalElements.Count, 4, "Types Count after add, compile,add");
-            CError.Compare(ss1.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)), true, "Contains1");
-            CError.Compare(ss1.GlobalElements.Contains(new XmlQualifiedName(e2, ns1)), true, "Contains2");
-            CError.Compare(ss1.GlobalElements.Contains(new XmlQualifiedName(e3, ns2)), true, "Contains3");
-            CError.Compare(ss1.GlobalElements.Contains(new XmlQualifiedName(e4, ns2)), true, "Contains4");
+            CError.Compare(
+                ss1.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss1.GlobalElements.Contains(new XmlQualifiedName(e2, ns1)),
+                true,
+                "Contains2"
+            );
+            CError.Compare(
+                ss1.GlobalElements.Contains(new XmlQualifiedName(e3, ns2)),
+                true,
+                "Contains3"
+            );
+            CError.Compare(
+                ss1.GlobalElements.Contains(new XmlQualifiedName(e4, ns2)),
+                true,
+                "Contains4"
+            );
 
             //Now reprocess one schema and check
             ss1.Reprocess(s1);
@@ -180,8 +238,16 @@ namespace System.Xml.XmlSchemaTests
             XmlSchema schema1 = ss.Add(null, Path.Combine(TestData._Root, uri1));
             ss.Compile();
             CError.Compare(ss.GlobalElements.Count, 3, "Types Count after add"); // +1 for root in ns-a
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns2)), true, "Contains2");
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns2)),
+                true,
+                "Contains2"
+            );
 
             //get the SOM for the imported schema
             foreach (XmlSchema s in ss.Schemas(ns2))
@@ -191,8 +257,16 @@ namespace System.Xml.XmlSchemaTests
 
             ss.Compile();
             CError.Compare(ss.GlobalElements.Count, 2, "Types Count after Remove");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns2)), false, "Contains2");
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns2)),
+                false,
+                "Contains2"
+            );
 
             return;
         }
@@ -216,14 +290,30 @@ namespace System.Xml.XmlSchemaTests
             ss.Add(null, Path.Combine(TestData._Root, "xsdauthor.xsd"));
             XmlSchema schema1 = ss.Add(null, Path.Combine(TestData._Root, uri1));
             ss.Compile();
-            CError.Compare(ss.GlobalElements.Count, 4, "Types Count");  // +1 for root in ns-a and xsdauthor
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns2)), true, "Contains2");
+            CError.Compare(ss.GlobalElements.Count, 4, "Types Count"); // +1 for root in ns-a and xsdauthor
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns2)),
+                true,
+                "Contains2"
+            );
 
             ss.RemoveRecursive(schema1); // should not need to compile for RemoveRecursive to take effect
             CError.Compare(ss.GlobalElements.Count, 1, "Types Count");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)), false, "Contains1");
-            CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns2)), false, "Contains2");
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)),
+                false,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns2)),
+                false,
+                "Contains2"
+            );
 
             return;
         }
@@ -237,7 +327,16 @@ namespace System.Xml.XmlSchemaTests
             string e1 = param1.ToString();
             string e2 = param2.ToString();
             XmlSchema s1 = GetSchema(ns1, e1, e2);
-            XmlSchema s2 = XmlSchema.Read(new StreamReader(new FileStream(Path.Combine(TestData._Root, "invalid.xsd"), FileMode.Open, FileAccess.Read)), null);
+            XmlSchema s2 = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(
+                        Path.Combine(TestData._Root, "invalid.xsd"),
+                        FileMode.Open,
+                        FileAccess.Read
+                    )
+                ),
+                null
+            );
 
             XmlSchemaSet ss = new XmlSchemaSet();
             ss.Add(s1);
@@ -253,8 +352,16 @@ namespace System.Xml.XmlSchemaTests
             {
                 //Verify
                 CError.Compare(ss.GlobalElements.Count, 2, "Elements Count after compile");
-                CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)), true, "Contains1");
-                CError.Compare(ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns1)), true, "Contains2");
+                CError.Compare(
+                    ss.GlobalElements.Contains(new XmlQualifiedName(e1, ns1)),
+                    true,
+                    "Contains1"
+                );
+                CError.Compare(
+                    ss.GlobalElements.Contains(new XmlQualifiedName(e2, ns1)),
+                    true,
+                    "Contains2"
+                );
                 return;
             }
             Assert.Fail();

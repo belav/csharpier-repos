@@ -5,79 +5,117 @@
 namespace System.ServiceModel
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
     using System.Text;
     using System.Threading;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Configuration;
 
     public class DuplexChannelFactory<TChannel> : ChannelFactory<TChannel>
     {
         //Type overloads
         public DuplexChannelFactory(Type callbackInstanceType)
-            : this((object)callbackInstanceType)
-        { }
-        public DuplexChannelFactory(Type callbackInstanceType, Binding binding, String remoteAddress)
-            : this((object)callbackInstanceType, binding, new EndpointAddress(remoteAddress))
-        { }
-        public DuplexChannelFactory(Type callbackInstanceType, Binding binding, EndpointAddress remoteAddress)
-            : this((object)callbackInstanceType, binding, remoteAddress)
-        { }
+            : this((object)callbackInstanceType) { }
+
+        public DuplexChannelFactory(
+            Type callbackInstanceType,
+            Binding binding,
+            String remoteAddress
+        )
+            : this((object)callbackInstanceType, binding, new EndpointAddress(remoteAddress)) { }
+
+        public DuplexChannelFactory(
+            Type callbackInstanceType,
+            Binding binding,
+            EndpointAddress remoteAddress
+        )
+            : this((object)callbackInstanceType, binding, remoteAddress) { }
+
         public DuplexChannelFactory(Type callbackInstanceType, Binding binding)
-            : this((object)callbackInstanceType, binding)
-        { }
-        public DuplexChannelFactory(Type callbackInstanceType, string endpointConfigurationName, EndpointAddress remoteAddress)
-            : this((object)callbackInstanceType, endpointConfigurationName, remoteAddress)
-        { }
+            : this((object)callbackInstanceType, binding) { }
+
+        public DuplexChannelFactory(
+            Type callbackInstanceType,
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress
+        )
+            : this((object)callbackInstanceType, endpointConfigurationName, remoteAddress) { }
+
         public DuplexChannelFactory(Type callbackInstanceType, string endpointConfigurationName)
-            : this((object)callbackInstanceType, endpointConfigurationName)
-        { }
+            : this((object)callbackInstanceType, endpointConfigurationName) { }
+
         public DuplexChannelFactory(Type callbackInstanceType, ServiceEndpoint endpoint)
-            : this((object)callbackInstanceType, endpoint)
-        { }
+            : this((object)callbackInstanceType, endpoint) { }
 
         //InstanceContext overloads
         public DuplexChannelFactory(InstanceContext callbackInstance)
-            : this((object)callbackInstance)
-        { }
-        public DuplexChannelFactory(InstanceContext callbackInstance, Binding binding, String remoteAddress)
-            : this((object)callbackInstance, binding, new EndpointAddress(remoteAddress))
-        { }
-        public DuplexChannelFactory(InstanceContext callbackInstance, Binding binding, EndpointAddress remoteAddress)
-            : this((object)callbackInstance, binding, remoteAddress)
-        { }
+            : this((object)callbackInstance) { }
+
+        public DuplexChannelFactory(
+            InstanceContext callbackInstance,
+            Binding binding,
+            String remoteAddress
+        )
+            : this((object)callbackInstance, binding, new EndpointAddress(remoteAddress)) { }
+
+        public DuplexChannelFactory(
+            InstanceContext callbackInstance,
+            Binding binding,
+            EndpointAddress remoteAddress
+        )
+            : this((object)callbackInstance, binding, remoteAddress) { }
+
         public DuplexChannelFactory(InstanceContext callbackInstance, Binding binding)
-            : this((object)callbackInstance, binding)
-        { }
-        public DuplexChannelFactory(InstanceContext callbackInstance, string endpointConfigurationName, EndpointAddress remoteAddress)
-            : this((object)callbackInstance, endpointConfigurationName, remoteAddress)
-        { }
-        public DuplexChannelFactory(InstanceContext callbackInstance, string endpointConfigurationName)
-            : this((object)callbackInstance, endpointConfigurationName)
-        { }
+            : this((object)callbackInstance, binding) { }
+
+        public DuplexChannelFactory(
+            InstanceContext callbackInstance,
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress
+        )
+            : this((object)callbackInstance, endpointConfigurationName, remoteAddress) { }
+
+        public DuplexChannelFactory(
+            InstanceContext callbackInstance,
+            string endpointConfigurationName
+        )
+            : this((object)callbackInstance, endpointConfigurationName) { }
+
         public DuplexChannelFactory(InstanceContext callbackInstance, ServiceEndpoint endpoint)
-            : this((object)callbackInstance, endpoint)
-        { }
+            : this((object)callbackInstance, endpoint) { }
 
         // TChannel provides ContractDescription
         public DuplexChannelFactory(object callbackObject)
             : base(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, TraceUtility.CreateSourceString(this)), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(
+                            SR.ActivityConstructChannelFactory,
+                            TraceUtility.CreateSourceString(this)
+                        ),
+                        ActivityType.Construct
+                    );
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackObject");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "callbackObject"
+                    );
                 }
 
                 this.CheckAndAssignCallbackInstance(callbackObject);
@@ -87,28 +125,45 @@ namespace System.ServiceModel
 
         // TChannel provides ContractDescription, attr/config [TChannel,name] provides Address,Binding
         public DuplexChannelFactory(object callbackObject, string endpointConfigurationName)
-            : this(callbackObject, endpointConfigurationName, null)
-        {
-        }
+            : this(callbackObject, endpointConfigurationName, null) { }
 
         // TChannel provides ContractDescription, attr/config [TChannel,name] provides Binding, provide Address explicitly
-        public DuplexChannelFactory(object callbackObject, string endpointConfigurationName, EndpointAddress remoteAddress)
+        public DuplexChannelFactory(
+            object callbackObject,
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress
+        )
             : base(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, TraceUtility.CreateSourceString(this)), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(
+                            SR.ActivityConstructChannelFactory,
+                            TraceUtility.CreateSourceString(this)
+                        ),
+                        ActivityType.Construct
+                    );
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackObject");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "callbackObject"
+                    );
                 }
 
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "endpointConfigurationName"
+                    );
                 }
 
                 this.CheckAndAssignCallbackInstance(callbackObject);
@@ -118,28 +173,42 @@ namespace System.ServiceModel
 
         // TChannel provides ContractDescription, attr/config [TChannel,name] provides Address,Binding
         public DuplexChannelFactory(object callbackObject, Binding binding)
-            : this(callbackObject, binding, (EndpointAddress)null)
-        {
-        }
+            : this(callbackObject, binding, (EndpointAddress)null) { }
 
         // TChannel provides ContractDescription, provide Address,Binding explicitly
         public DuplexChannelFactory(object callbackObject, Binding binding, String remoteAddress)
-            : this(callbackObject, binding, new EndpointAddress(remoteAddress))
-        {
-        }
+            : this(callbackObject, binding, new EndpointAddress(remoteAddress)) { }
+
         // TChannel provides ContractDescription, provide Address,Binding explicitly
-        public DuplexChannelFactory(object callbackObject, Binding binding, EndpointAddress remoteAddress)
+        public DuplexChannelFactory(
+            object callbackObject,
+            Binding binding,
+            EndpointAddress remoteAddress
+        )
             : base(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, TraceUtility.CreateSourceString(this)), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(
+                            SR.ActivityConstructChannelFactory,
+                            TraceUtility.CreateSourceString(this)
+                        ),
+                        ActivityType.Construct
+                    );
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackObject");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "callbackObject"
+                    );
                 }
 
                 if (binding == null)
@@ -156,15 +225,28 @@ namespace System.ServiceModel
         public DuplexChannelFactory(object callbackObject, ServiceEndpoint endpoint)
             : base(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, TraceUtility.CreateSourceString(this)), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(
+                            SR.ActivityConstructChannelFactory,
+                            TraceUtility.CreateSourceString(this)
+                        ),
+                        ActivityType.Construct
+                    );
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackObject");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "callbackObject"
+                    );
                 }
 
                 if (endpoint == null)
@@ -213,7 +295,11 @@ namespace System.ServiceModel
             return CreateChannel(this.CallbackInstance, address, via);
         }
 
-        public virtual TChannel CreateChannel(InstanceContext callbackInstance, EndpointAddress address, Uri via)
+        public virtual TChannel CreateChannel(
+            InstanceContext callbackInstance,
+            EndpointAddress address,
+            Uri via
+        )
         {
             if (address == null)
             {
@@ -222,33 +308,51 @@ namespace System.ServiceModel
 
             if (this.CallbackType != null && callbackInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCreateDuplexChannelNoCallback1)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxCreateDuplexChannelNoCallback1)
+                    )
+                );
             }
             if (callbackInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCreateDuplexChannelNoCallback)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxCreateDuplexChannelNoCallback))
+                );
             }
 
             if (callbackInstance.UserObject == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCreateDuplexChannelNoCallbackUserObject)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxCreateDuplexChannelNoCallbackUserObject)
+                    )
+                );
             }
 
             if (!this.HasDuplexOperations())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCreateDuplexChannel1, this.Endpoint.Contract.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxCreateDuplexChannel1, this.Endpoint.Contract.Name)
+                    )
+                );
             }
 
             Type userObjectType = callbackInstance.UserObject.GetType();
             Type callbackType = this.Endpoint.Contract.CallbackContractType;
             if (callbackType != null && !callbackType.IsAssignableFrom(userObjectType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.SFxCreateDuplexChannelBadCallbackUserObject, callbackType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxCreateDuplexChannelBadCallbackUserObject, callbackType)
+                    )
+                );
             }
 
             EnsureOpened();
-            TChannel result = (TChannel)this.ServiceChannelFactory.CreateChannel(typeof(TChannel), address, via);
+            TChannel result = (TChannel)
+                this.ServiceChannelFactory.CreateChannel(typeof(TChannel), address, via);
 
             IDuplexContextChannel duplexChannel = result as IDuplexContextChannel;
             if (duplexChannel != null)
@@ -269,44 +373,89 @@ namespace System.ServiceModel
             return new InstanceContext(callbackObject);
         }
 
-        public static TChannel CreateChannel(object callbackObject, String endpointConfigurationName)
+        public static TChannel CreateChannel(
+            object callbackObject,
+            String endpointConfigurationName
+        )
         {
-            return CreateChannel(GetInstanceContextForObject(callbackObject), endpointConfigurationName);
+            return CreateChannel(
+                GetInstanceContextForObject(callbackObject),
+                endpointConfigurationName
+            );
         }
 
-        public static TChannel CreateChannel(object callbackObject, Binding binding, EndpointAddress endpointAddress)
+        public static TChannel CreateChannel(
+            object callbackObject,
+            Binding binding,
+            EndpointAddress endpointAddress
+        )
         {
-            return CreateChannel(GetInstanceContextForObject(callbackObject), binding, endpointAddress);
+            return CreateChannel(
+                GetInstanceContextForObject(callbackObject),
+                binding,
+                endpointAddress
+            );
         }
 
-        public static TChannel CreateChannel(object callbackObject, Binding binding, EndpointAddress endpointAddress, Uri via)
+        public static TChannel CreateChannel(
+            object callbackObject,
+            Binding binding,
+            EndpointAddress endpointAddress,
+            Uri via
+        )
         {
-            return CreateChannel(GetInstanceContextForObject(callbackObject), binding, endpointAddress, via);
+            return CreateChannel(
+                GetInstanceContextForObject(callbackObject),
+                binding,
+                endpointAddress,
+                via
+            );
         }
 
-        public static TChannel CreateChannel(InstanceContext callbackInstance, String endpointConfigurationName)
+        public static TChannel CreateChannel(
+            InstanceContext callbackInstance,
+            String endpointConfigurationName
+        )
         {
-            DuplexChannelFactory<TChannel> channelFactory = new DuplexChannelFactory<TChannel>(callbackInstance, endpointConfigurationName);
+            DuplexChannelFactory<TChannel> channelFactory = new DuplexChannelFactory<TChannel>(
+                callbackInstance,
+                endpointConfigurationName
+            );
             TChannel channel = channelFactory.CreateChannel();
             SetFactoryToAutoClose(channel);
             return channel;
         }
 
-        public static TChannel CreateChannel(InstanceContext callbackInstance, Binding binding, EndpointAddress endpointAddress)
+        public static TChannel CreateChannel(
+            InstanceContext callbackInstance,
+            Binding binding,
+            EndpointAddress endpointAddress
+        )
         {
-            DuplexChannelFactory<TChannel> channelFactory = new DuplexChannelFactory<TChannel>(callbackInstance, binding, endpointAddress);
+            DuplexChannelFactory<TChannel> channelFactory = new DuplexChannelFactory<TChannel>(
+                callbackInstance,
+                binding,
+                endpointAddress
+            );
             TChannel channel = channelFactory.CreateChannel();
             SetFactoryToAutoClose(channel);
             return channel;
         }
 
-        public static TChannel CreateChannel(InstanceContext callbackInstance, Binding binding, EndpointAddress endpointAddress, Uri via)
+        public static TChannel CreateChannel(
+            InstanceContext callbackInstance,
+            Binding binding,
+            EndpointAddress endpointAddress,
+            Uri via
+        )
         {
-            DuplexChannelFactory<TChannel> channelFactory = new DuplexChannelFactory<TChannel>(callbackInstance, binding);
+            DuplexChannelFactory<TChannel> channelFactory = new DuplexChannelFactory<TChannel>(
+                callbackInstance,
+                binding
+            );
             TChannel channel = channelFactory.CreateChannel(endpointAddress, via);
             SetFactoryToAutoClose(channel);
             return channel;
         }
-
     }
 }

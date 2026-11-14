@@ -19,7 +19,9 @@ public struct S0
     public bool F5;
     public sbyte F7;
     public uint F8;
-    public S0(ushort f2): this()
+
+    public S0(ushort f2)
+        : this()
     {
         F2 = f2;
     }
@@ -65,7 +67,5 @@ public interface IRuntime
 
 public class Runtime : IRuntime
 {
-    public void WriteLine<T>(T value)
-    {
-    }
+    public void WriteLine<T>(T value) { }
 }

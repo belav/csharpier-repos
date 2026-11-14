@@ -13,7 +13,6 @@ namespace System.Workflow.ComponentModel.Compiler
     #region DesignTimeEventInfo
     internal sealed class DesignTimeEventInfo : EventInfo
     {
-
         #region Members and Constructors
 
         private string name;
@@ -54,16 +53,27 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             if (this.addMethod == null)
             {
-                Type handlerType = declaringType.ResolveType(DesignTimeType.GetTypeNameFromCodeTypeReference(this.codeDomEvent.Type, declaringType));
+                Type handlerType = declaringType.ResolveType(
+                    DesignTimeType.GetTypeNameFromCodeTypeReference(
+                        this.codeDomEvent.Type,
+                        declaringType
+                    )
+                );
                 if (handlerType != null)
                 {
                     CodeMemberMethod codeAddMethod = new CodeMemberMethod();
 
                     codeAddMethod.Name = "add_" + this.name;
                     codeAddMethod.ReturnType = new CodeTypeReference(typeof(void));
-                    codeAddMethod.Parameters.Add(new CodeParameterDeclarationExpression(this.codeDomEvent.Type, "Handler"));
+                    codeAddMethod.Parameters.Add(
+                        new CodeParameterDeclarationExpression(this.codeDomEvent.Type, "Handler")
+                    );
                     codeAddMethod.Attributes = this.memberAttributes;
-                    this.addMethod = new DesignTimeMethodInfo(this.declaringType, codeAddMethod, true);
+                    this.addMethod = new DesignTimeMethodInfo(
+                        this.declaringType,
+                        codeAddMethod,
+                        true
+                    );
                 }
             }
             return this.addMethod;
@@ -73,16 +83,27 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             if (this.removeMethod == null)
             {
-                Type handlerType = declaringType.ResolveType(DesignTimeType.GetTypeNameFromCodeTypeReference(this.codeDomEvent.Type, declaringType));
+                Type handlerType = declaringType.ResolveType(
+                    DesignTimeType.GetTypeNameFromCodeTypeReference(
+                        this.codeDomEvent.Type,
+                        declaringType
+                    )
+                );
                 if (handlerType != null)
                 {
                     CodeMemberMethod codeRemoveMethod = new CodeMemberMethod();
 
                     codeRemoveMethod.Name = "remove_" + this.name;
                     codeRemoveMethod.ReturnType = new CodeTypeReference(typeof(void));
-                    codeRemoveMethod.Parameters.Add(new CodeParameterDeclarationExpression(handlerType, "Handler"));
+                    codeRemoveMethod.Parameters.Add(
+                        new CodeParameterDeclarationExpression(handlerType, "Handler")
+                    );
                     codeRemoveMethod.Attributes = this.memberAttributes;
-                    this.removeMethod = new DesignTimeMethodInfo(declaringType, codeRemoveMethod, true);
+                    this.removeMethod = new DesignTimeMethodInfo(
+                        declaringType,
+                        codeRemoveMethod,
+                        true
+                    );
                 }
             }
             return this.removeMethod;
@@ -95,36 +116,25 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public override EventAttributes Attributes
         {
-            //We're not interested in this flag 
-            get
-            {
-                return default(EventAttributes);
-            }
+            //We're not interested in this flag
+            get { return default(EventAttributes); }
         }
         #endregion
 
         #region MemberInfo Overrides
         public override string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
         public override Type DeclaringType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
         public override Type ReflectedType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
+
         public override object[] GetCustomAttributes(bool inherit)
         {
             return GetCustomAttributes(typeof(object), inherit);
@@ -136,7 +146,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("attributeType");
 
             if (this.attributes == null)
-                this.attributes = Helper.LoadCustomAttributes(this.codeDomEvent.CustomAttributes, this.DeclaringType as DesignTimeType);
+                this.attributes = Helper.LoadCustomAttributes(
+                    this.codeDomEvent.CustomAttributes,
+                    this.DeclaringType as DesignTimeType
+                );
 
             return Helper.GetCustomAttributes(attributeType, inherit, this.attributes, this);
         }
@@ -147,7 +160,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("attributeType");
 
             if (this.attributes == null)
-                this.attributes = Helper.LoadCustomAttributes(this.codeDomEvent.CustomAttributes, this.DeclaringType as DesignTimeType);
+                this.attributes = Helper.LoadCustomAttributes(
+                    this.codeDomEvent.CustomAttributes,
+                    this.DeclaringType as DesignTimeType
+                );
 
             if (Helper.IsDefined(attributeType, inherit, attributes, this))
                 return true;
@@ -161,20 +177,13 @@ namespace System.Workflow.ComponentModel.Compiler
 
         internal bool IsPublic
         {
-            get
-            {
-                return ((memberAttributes & MemberAttributes.Public) != 0);
-            }
+            get { return ((memberAttributes & MemberAttributes.Public) != 0); }
         }
         internal bool IsStatic
         {
-            get
-            {
-                return ((memberAttributes & MemberAttributes.Static) != 0);
-            }
+            get { return ((memberAttributes & MemberAttributes.Static) != 0); }
         }
         #endregion
-
     }
     #endregion
 }

@@ -14,7 +14,6 @@ namespace System.Runtime.InteropServices.ComTypes
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IEnumSTATDATA
     {
-
         /// <summary>
         /// Retrieves the next celt items in the enumeration sequence. If there are
         /// fewer than the requested number of elements left in the sequence, it
@@ -23,7 +22,11 @@ namespace System.Runtime.InteropServices.ComTypes
         /// in NULL for that parameter).
         /// </summary>
         [PreserveSig]
-        int Next(int celt, [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] STATDATA[] rgelt, [Out, MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] int[] pceltFetched);
+        int Next(
+            int celt,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] STATDATA[] rgelt,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] int[] pceltFetched
+        );
 
         /// <summary>
         /// Skips over the next specified number of elements in the enumeration sequence.

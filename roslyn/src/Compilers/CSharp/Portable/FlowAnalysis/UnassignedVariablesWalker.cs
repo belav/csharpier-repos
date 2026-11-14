@@ -18,19 +18,26 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal class UnassignedVariablesWalker : DefiniteAssignmentPass
     {
-        private UnassignedVariablesWalker(CSharpCompilation compilation, Symbol member, BoundNode node)
-            : base(compilation, member, node, EmptyStructTypeCache.CreateNeverEmpty())
-        {
-        }
+        private UnassignedVariablesWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node
+        )
+            : base(compilation, member, node, EmptyStructTypeCache.CreateNeverEmpty()) { }
 
-        internal static HashSet<Symbol> Analyze(CSharpCompilation compilation, Symbol member, BoundNode node,
-                                                bool convertInsufficientExecutionStackExceptionToCancelledByStackGuardException = false)
+        internal static HashSet<Symbol> Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            bool convertInsufficientExecutionStackExceptionToCancelledByStackGuardException = false
+        )
         {
             var walker = new UnassignedVariablesWalker(compilation, member, node);
 
             if (convertInsufficientExecutionStackExceptionToCancelledByStackGuardException)
             {
-                walker._convertInsufficientExecutionStackExceptionToCancelledByStackGuardException = true;
+                walker._convertInsufficientExecutionStackExceptionToCancelledByStackGuardException =
+                    true;
             }
 
             try
@@ -53,7 +60,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _result;
         }
 
-        protected override void ReportUnassigned(Symbol symbol, SyntaxNode node, int slot, bool skipIfUseBeforeDeclaration)
+        protected override void ReportUnassigned(
+            Symbol symbol,
+            SyntaxNode node,
+            int slot,
+            bool skipIfUseBeforeDeclaration
+        )
         {
             // TODO: how to handle fields of structs?
             if (symbol.Kind != SymbolKind.Field)
@@ -67,7 +79,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected override void ReportUnassignedOutParameter(ParameterSymbol parameter, SyntaxNode node, Location location)
+        protected override void ReportUnassignedOutParameter(
+            ParameterSymbol parameter,
+            SyntaxNode node,
+            Location location
+        )
         {
             _result.Add(parameter);
             base.ReportUnassignedOutParameter(parameter, node, location);

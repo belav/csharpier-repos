@@ -15,9 +15,7 @@ namespace Roslyn.Utilities
             {
                 public static new readonly Set<T> Instance = new();
 
-                protected Set()
-                {
-                }
+                protected Set() { }
 
                 public new bool Add(T item)
                 {

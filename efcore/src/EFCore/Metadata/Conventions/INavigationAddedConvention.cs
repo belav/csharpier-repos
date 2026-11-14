@@ -18,5 +18,6 @@ public interface INavigationAddedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessNavigationAdded(
         IConventionNavigationBuilder navigationBuilder,
-        IConventionContext<IConventionNavigationBuilder> context);
+        IConventionContext<IConventionNavigationBuilder> context
+    );
 }

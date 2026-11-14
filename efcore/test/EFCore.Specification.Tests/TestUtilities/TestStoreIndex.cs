@@ -35,8 +35,7 @@ public class TestStoreIndex
         }
     }
 
-    public virtual void RemoveShared(string name)
-        => _createdDatabases.Remove(name);
+    public virtual void RemoveShared(string name) => _createdDatabases.Remove(name);
 
     public virtual void CreateNonShared(string name, Action initializeDatabase)
     {
@@ -54,7 +53,8 @@ public class TestStoreIndex
                 if (!_creationLocks.TryRemove(name, out _))
                 {
                     throw new InvalidOperationException(
-                        $"An attempt was made to initialize a non-shared store {name} from two different threads.");
+                        $"An attempt was made to initialize a non-shared store {name} from two different threads."
+                    );
                 }
             }
         }
@@ -62,7 +62,8 @@ public class TestStoreIndex
         {
             _creationLocks.TryRemove(name, out _);
             throw new InvalidOperationException(
-                $"An attempt was made to initialize a non-shared store {name} from two different threads.");
+                $"An attempt was made to initialize a non-shared store {name} from two different threads."
+            );
         }
     }
 }

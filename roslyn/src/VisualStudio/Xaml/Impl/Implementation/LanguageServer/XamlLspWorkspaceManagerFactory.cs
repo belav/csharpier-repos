@@ -10,13 +10,20 @@ using Microsoft.CodeAnalysis.LanguageServer;
 
 namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
 {
-    [ExportLspServiceFactory(typeof(LspWorkspaceManager), StringConstants.XamlLspLanguagesContract), Shared]
+    [
+        ExportLspServiceFactory(
+            typeof(LspWorkspaceManager),
+            StringConstants.XamlLspLanguagesContract
+        ),
+        Shared
+    ]
     internal class XamlLspWorkspaceManagerFactory : LspWorkspaceManagerFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public XamlLspWorkspaceManagerFactory(LspWorkspaceRegistrationService lspWorkspaceRegistrationService) : base(lspWorkspaceRegistrationService)
-        {
-        }
+        public XamlLspWorkspaceManagerFactory(
+            LspWorkspaceRegistrationService lspWorkspaceRegistrationService
+        )
+            : base(lspWorkspaceRegistrationService) { }
     }
 }

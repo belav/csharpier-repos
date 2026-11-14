@@ -7,10 +7,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
 using System.Collections.Generic;
-using System.Text;
+using System.Data.Metadata.Edm;
 using System.Globalization;
+using System.Text;
+
 namespace System.Data.Mapping.Update.Internal
 {
     /// <summary>
@@ -24,7 +25,7 @@ namespace System.Data.Mapping.Update.Internal
     /// etc.) are stored within each row: where appropriate, constants appearing
     /// within a row are associated with a <see cref="PropagatorResult" /> through the <see cref=
     /// "UpdateTranslator" />.
-    /// </para> 
+    /// </para>
     /// <para>
     /// The 'leaves' of an update mapping view (UMV) are extent expressions. A change node
     /// associated with an extent expression is simply the list of changes to the C-Space
@@ -59,20 +60,29 @@ namespace System.Data.Mapping.Update.Internal
         /// Gets the type of the rows contained in this node. This type corresponds (not coincidentally)
         /// to the type of an expression in an update mapping view.
         /// </summary>
-        internal TypeUsage ElementType { get { return m_elementType; } }
+        internal TypeUsage ElementType
+        {
+            get { return m_elementType; }
+        }
 
         /// <summary>
         /// Gets a list of rows to be inserted.
         /// </summary>
-        internal List<PropagatorResult> Inserted { get { return m_inserted; } }
+        internal List<PropagatorResult> Inserted
+        {
+            get { return m_inserted; }
+        }
 
         /// <summary>
         /// Gets a list of rows to be deleted.
         /// </summary>
-        internal List<PropagatorResult> Deleted { get { return m_deleted; } }
+        internal List<PropagatorResult> Deleted
+        {
+            get { return m_deleted; }
+        }
 
         /// <summary>
-        /// Gets or sets a version of a record at this node with default record. The record has the type 
+        /// Gets or sets a version of a record at this node with default record. The record has the type
         /// of the node we are visiting.
         /// </summary>
         internal PropagatorResult Placeholder
@@ -88,7 +98,9 @@ namespace System.Data.Mapping.Update.Internal
             StringBuilder builder = new StringBuilder();
 
             builder.AppendLine("{");
-            builder.AppendFormat(CultureInfo.InvariantCulture, "    ElementType = {0}", ElementType).AppendLine();
+            builder
+                .AppendFormat(CultureInfo.InvariantCulture, "    ElementType = {0}", ElementType)
+                .AppendLine();
             builder.AppendLine("    Inserted = {");
             foreach (PropagatorResult insert in Inserted)
             {
@@ -101,7 +113,9 @@ namespace System.Data.Mapping.Update.Internal
                 builder.Append("        ").AppendLine(delete.ToString());
             }
             builder.AppendLine("    }");
-            builder.AppendFormat(CultureInfo.InvariantCulture, "    PlaceHolder = {0}", Placeholder).AppendLine();
+            builder
+                .AppendFormat(CultureInfo.InvariantCulture, "    PlaceHolder = {0}", Placeholder)
+                .AppendLine();
 
             builder.Append("}");
             return builder.ToString();

@@ -22,13 +22,24 @@ namespace System.Xml
         }
 
         [DoesNotReturn]
-        private static void ThrowXmlException(XmlDictionaryReader reader, string res, string? arg1, string? arg2)
+        private static void ThrowXmlException(
+            XmlDictionaryReader reader,
+            string res,
+            string? arg1,
+            string? arg2
+        )
         {
             ThrowXmlException(reader, res, arg1, arg2, null);
         }
 
         [DoesNotReturn]
-        private static void ThrowXmlException(XmlDictionaryReader reader, string res, string? arg1, string? arg2, string? arg3)
+        private static void ThrowXmlException(
+            XmlDictionaryReader reader,
+            string res,
+            string? arg1,
+            string? arg2,
+            string? arg3
+        )
         {
             string s = SR.Format(res, arg1, arg2, arg3);
             if (reader is IXmlLineInfo lineInfo && lineInfo.HasLineInfo())
@@ -65,9 +76,17 @@ namespace System.Xml
             switch (reader.NodeType)
             {
                 case XmlNodeType.Element:
-                    return SR.Format(SR.XmlFoundElement, GetName(reader.Prefix, reader.LocalName), reader.NamespaceURI);
+                    return SR.Format(
+                        SR.XmlFoundElement,
+                        GetName(reader.Prefix, reader.LocalName),
+                        reader.NamespaceURI
+                    );
                 case XmlNodeType.EndElement:
-                    return SR.Format(SR.XmlFoundEndElement, GetName(reader.Prefix, reader.LocalName), reader.NamespaceURI);
+                    return SR.Format(
+                        SR.XmlFoundEndElement,
+                        GetName(reader.Prefix, reader.LocalName),
+                        reader.NamespaceURI
+                    );
                 case XmlNodeType.Text:
                 case XmlNodeType.Whitespace:
                 case XmlNodeType.SignificantWhitespace:
@@ -89,19 +108,42 @@ namespace System.Xml
         [DoesNotReturn]
         public static void ThrowStartElementExpected(XmlDictionaryReader reader, string name)
         {
-            ThrowXmlException(reader, SR.XmlStartElementNameExpected, name, GetWhatWasFound(reader));
+            ThrowXmlException(
+                reader,
+                SR.XmlStartElementNameExpected,
+                name,
+                GetWhatWasFound(reader)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowStartElementExpected(XmlDictionaryReader reader, string localName, string ns)
+        public static void ThrowStartElementExpected(
+            XmlDictionaryReader reader,
+            string localName,
+            string ns
+        )
         {
-            ThrowXmlException(reader, SR.XmlStartElementLocalNameNsExpected, localName, ns, GetWhatWasFound(reader));
+            ThrowXmlException(
+                reader,
+                SR.XmlStartElementLocalNameNsExpected,
+                localName,
+                ns,
+                GetWhatWasFound(reader)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowStartElementExpected(XmlDictionaryReader reader, XmlDictionaryString localName, XmlDictionaryString ns)
+        public static void ThrowStartElementExpected(
+            XmlDictionaryReader reader,
+            XmlDictionaryString localName,
+            XmlDictionaryString ns
+        )
         {
-            ThrowStartElementExpected(reader, XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(ns));
+            ThrowStartElementExpected(
+                reader,
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(ns)
+            );
         }
 
         [DoesNotReturn]
@@ -113,43 +155,97 @@ namespace System.Xml
         [DoesNotReturn]
         public static void ThrowFullStartElementExpected(XmlDictionaryReader reader, string name)
         {
-            ThrowXmlException(reader, SR.XmlFullStartElementNameExpected, name, GetWhatWasFound(reader));
+            ThrowXmlException(
+                reader,
+                SR.XmlFullStartElementNameExpected,
+                name,
+                GetWhatWasFound(reader)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowFullStartElementExpected(XmlDictionaryReader reader, string localName, string ns)
+        public static void ThrowFullStartElementExpected(
+            XmlDictionaryReader reader,
+            string localName,
+            string ns
+        )
         {
-            ThrowXmlException(reader, SR.XmlFullStartElementLocalNameNsExpected, localName, ns, GetWhatWasFound(reader));
+            ThrowXmlException(
+                reader,
+                SR.XmlFullStartElementLocalNameNsExpected,
+                localName,
+                ns,
+                GetWhatWasFound(reader)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowFullStartElementExpected(XmlDictionaryReader reader, XmlDictionaryString localName, XmlDictionaryString ns)
+        public static void ThrowFullStartElementExpected(
+            XmlDictionaryReader reader,
+            XmlDictionaryString localName,
+            XmlDictionaryString ns
+        )
         {
-            ThrowFullStartElementExpected(reader, XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(ns));
+            ThrowFullStartElementExpected(
+                reader,
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(ns)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowEndElementExpected(XmlDictionaryReader reader, string localName, string ns)
+        public static void ThrowEndElementExpected(
+            XmlDictionaryReader reader,
+            string localName,
+            string ns
+        )
         {
-            ThrowXmlException(reader, SR.XmlEndElementExpected, localName, ns, GetWhatWasFound(reader));
+            ThrowXmlException(
+                reader,
+                SR.XmlEndElementExpected,
+                localName,
+                ns,
+                GetWhatWasFound(reader)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowMaxArrayLengthExceeded(XmlDictionaryReader reader, int maxArrayLength)
+        public static void ThrowMaxArrayLengthExceeded(
+            XmlDictionaryReader reader,
+            int maxArrayLength
+        )
         {
-            ThrowXmlException(reader, SR.XmlMaxArrayLengthExceeded, maxArrayLength.ToString(NumberFormatInfo.CurrentInfo));
+            ThrowXmlException(
+                reader,
+                SR.XmlMaxArrayLengthExceeded,
+                maxArrayLength.ToString(NumberFormatInfo.CurrentInfo)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowMaxArrayLengthOrMaxItemsQuotaExceeded(XmlDictionaryReader reader, int maxQuota)
+        public static void ThrowMaxArrayLengthOrMaxItemsQuotaExceeded(
+            XmlDictionaryReader reader,
+            int maxQuota
+        )
         {
-            ThrowXmlException(reader, SR.XmlMaxArrayLengthOrMaxItemsQuotaExceeded, maxQuota.ToString(NumberFormatInfo.CurrentInfo));
+            ThrowXmlException(
+                reader,
+                SR.XmlMaxArrayLengthOrMaxItemsQuotaExceeded,
+                maxQuota.ToString(NumberFormatInfo.CurrentInfo)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowMaxBytesPerReadExceeded(XmlDictionaryReader reader, int maxBytesPerRead)
+        public static void ThrowMaxBytesPerReadExceeded(
+            XmlDictionaryReader reader,
+            int maxBytesPerRead
+        )
         {
-            ThrowXmlException(reader, SR.XmlMaxBytesPerReadExceeded, maxBytesPerRead.ToString(NumberFormatInfo.CurrentInfo));
+            ThrowXmlException(
+                reader,
+                SR.XmlMaxBytesPerReadExceeded,
+                maxBytesPerRead.ToString(NumberFormatInfo.CurrentInfo)
+            );
         }
 
         [DoesNotReturn]
@@ -159,15 +255,29 @@ namespace System.Xml
         }
 
         [DoesNotReturn]
-        public static void ThrowMaxStringContentLengthExceeded(XmlDictionaryReader reader, int maxStringContentLength)
+        public static void ThrowMaxStringContentLengthExceeded(
+            XmlDictionaryReader reader,
+            int maxStringContentLength
+        )
         {
-            ThrowXmlException(reader, SR.XmlMaxStringContentLengthExceeded, maxStringContentLength.ToString(NumberFormatInfo.CurrentInfo));
+            ThrowXmlException(
+                reader,
+                SR.XmlMaxStringContentLengthExceeded,
+                maxStringContentLength.ToString(NumberFormatInfo.CurrentInfo)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowMaxNameTableCharCountExceeded(XmlDictionaryReader reader, int maxNameTableCharCount)
+        public static void ThrowMaxNameTableCharCountExceeded(
+            XmlDictionaryReader reader,
+            int maxNameTableCharCount
+        )
         {
-            ThrowXmlException(reader, SR.XmlMaxNameTableCharCountExceeded, maxNameTableCharCount.ToString(NumberFormatInfo.CurrentInfo));
+            ThrowXmlException(
+                reader,
+                SR.XmlMaxNameTableCharCountExceeded,
+                maxNameTableCharCount.ToString(NumberFormatInfo.CurrentInfo)
+            );
         }
 
         [DoesNotReturn]
@@ -191,13 +301,21 @@ namespace System.Xml
         [DoesNotReturn]
         public static void ThrowInvalidXml(XmlDictionaryReader reader, byte b)
         {
-            ThrowXmlException(reader, SR.XmlInvalidXmlByte, b.ToString("X2", CultureInfo.InvariantCulture));
+            ThrowXmlException(
+                reader,
+                SR.XmlInvalidXmlByte,
+                b.ToString("X2", CultureInfo.InvariantCulture)
+            );
         }
 
         [DoesNotReturn]
         public static void ThrowUnexpectedEndOfFile(XmlDictionaryReader reader)
         {
-            ThrowXmlException(reader, SR.XmlUnexpectedEndOfFile, ((XmlBaseReader)reader).GetOpenElements());
+            ThrowXmlException(
+                reader,
+                SR.XmlUnexpectedEndOfFile,
+                ((XmlBaseReader)reader).GetOpenElements()
+            );
         }
 
         [DoesNotReturn]
@@ -207,13 +325,21 @@ namespace System.Xml
         }
 
         [DoesNotReturn]
-        public static void ThrowTokenExpected(XmlDictionaryReader reader, string expected, char found)
+        public static void ThrowTokenExpected(
+            XmlDictionaryReader reader,
+            string expected,
+            char found
+        )
         {
             ThrowXmlException(reader, SR.XmlTokenExpected, expected, found.ToString());
         }
 
         [DoesNotReturn]
-        public static void ThrowTokenExpected(XmlDictionaryReader reader, string expected, string found)
+        public static void ThrowTokenExpected(
+            XmlDictionaryReader reader,
+            string expected,
+            string found
+        )
         {
             ThrowXmlException(reader, SR.XmlTokenExpected, expected, found);
         }
@@ -225,13 +351,28 @@ namespace System.Xml
         }
 
         [DoesNotReturn]
-        public static void ThrowTagMismatch(XmlDictionaryReader reader, string expectedPrefix, string expectedLocalName, string foundPrefix, string foundLocalName)
+        public static void ThrowTagMismatch(
+            XmlDictionaryReader reader,
+            string expectedPrefix,
+            string expectedLocalName,
+            string foundPrefix,
+            string foundLocalName
+        )
         {
-            ThrowXmlException(reader, SR.XmlTagMismatch, GetName(expectedPrefix, expectedLocalName), GetName(foundPrefix, foundLocalName));
+            ThrowXmlException(
+                reader,
+                SR.XmlTagMismatch,
+                GetName(expectedPrefix, expectedLocalName),
+                GetName(foundPrefix, foundLocalName)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowDuplicateXmlnsAttribute(XmlDictionaryReader reader, string localName, string ns)
+        public static void ThrowDuplicateXmlnsAttribute(
+            XmlDictionaryReader reader,
+            string localName,
+            string ns
+        )
         {
             string name;
             if (localName.Length == 0)
@@ -242,9 +383,21 @@ namespace System.Xml
         }
 
         [DoesNotReturn]
-        public static void ThrowDuplicateAttribute(XmlDictionaryReader reader, string prefix1, string prefix2, string localName, string ns)
+        public static void ThrowDuplicateAttribute(
+            XmlDictionaryReader reader,
+            string prefix1,
+            string prefix2,
+            string localName,
+            string ns
+        )
         {
-            ThrowXmlException(reader, SR.XmlDuplicateAttribute, GetName(prefix1, localName), GetName(prefix2, localName), ns);
+            ThrowXmlException(
+                reader,
+                SR.XmlDuplicateAttribute,
+                GetName(prefix1, localName),
+                GetName(prefix2, localName),
+                ns
+            );
         }
 
         [DoesNotReturn]
@@ -272,7 +425,11 @@ namespace System.Xml
         }
 
         [DoesNotReturn]
-        public static void ThrowConversionOverflow(XmlDictionaryReader reader, string value, string type)
+        public static void ThrowConversionOverflow(
+            XmlDictionaryReader reader,
+            string value,
+            string type
+        )
         {
             ThrowXmlException(reader, SR.XmlConversionOverflow, value, type);
         }
@@ -280,19 +437,38 @@ namespace System.Xml
         [DoesNotReturn]
         public static void ThrowXmlDictionaryStringIDOutOfRange(XmlDictionaryReader reader)
         {
-            ThrowXmlException(reader, SR.XmlDictionaryStringIDRange, XmlDictionaryString.MinKey.ToString(NumberFormatInfo.CurrentInfo), XmlDictionaryString.MaxKey.ToString(NumberFormatInfo.CurrentInfo));
+            ThrowXmlException(
+                reader,
+                SR.XmlDictionaryStringIDRange,
+                XmlDictionaryString.MinKey.ToString(NumberFormatInfo.CurrentInfo),
+                XmlDictionaryString.MaxKey.ToString(NumberFormatInfo.CurrentInfo)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowXmlDictionaryStringIDUndefinedStatic(XmlDictionaryReader reader, int key)
+        public static void ThrowXmlDictionaryStringIDUndefinedStatic(
+            XmlDictionaryReader reader,
+            int key
+        )
         {
-            ThrowXmlException(reader, SR.XmlDictionaryStringIDUndefinedStatic, key.ToString(NumberFormatInfo.CurrentInfo));
+            ThrowXmlException(
+                reader,
+                SR.XmlDictionaryStringIDUndefinedStatic,
+                key.ToString(NumberFormatInfo.CurrentInfo)
+            );
         }
 
         [DoesNotReturn]
-        public static void ThrowXmlDictionaryStringIDUndefinedSession(XmlDictionaryReader reader, int key)
+        public static void ThrowXmlDictionaryStringIDUndefinedSession(
+            XmlDictionaryReader reader,
+            int key
+        )
         {
-            ThrowXmlException(reader, SR.XmlDictionaryStringIDUndefinedSession, key.ToString(NumberFormatInfo.CurrentInfo));
+            ThrowXmlException(
+                reader,
+                SR.XmlDictionaryStringIDUndefinedSession,
+                key.ToString(NumberFormatInfo.CurrentInfo)
+            );
         }
 
         [DoesNotReturn]
@@ -303,17 +479,32 @@ namespace System.Xml
 
         public static XmlException CreateConversionException(string type, Exception exception)
         {
-            return new XmlException(SR.Format(SR.XmlInvalidConversionWithoutValue, type), exception);
+            return new XmlException(
+                SR.Format(SR.XmlInvalidConversionWithoutValue, type),
+                exception
+            );
         }
 
-        public static XmlException CreateConversionException(string value, string type, Exception exception)
+        public static XmlException CreateConversionException(
+            string value,
+            string type,
+            Exception exception
+        )
         {
             return new XmlException(SR.Format(SR.XmlInvalidConversion, value, type), exception);
         }
 
-        public static XmlException CreateEncodingException(byte[] buffer, int offset, int count, Exception exception)
+        public static XmlException CreateEncodingException(
+            byte[] buffer,
+            int offset,
+            int count,
+            Exception exception
+        )
         {
-            return CreateEncodingException(new System.Text.UTF8Encoding(false, false).GetString(buffer, offset, count), exception);
+            return CreateEncodingException(
+                new System.Text.UTF8Encoding(false, false).GetString(buffer, offset, count),
+                exception
+            );
         }
 
         public static XmlException CreateEncodingException(string value, Exception exception)

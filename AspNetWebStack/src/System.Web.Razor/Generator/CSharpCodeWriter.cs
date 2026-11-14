@@ -117,7 +117,9 @@ namespace System.Web.Razor.Generator
                     case '\u2029':
                         // Inlined CSharpCodeGenerator.AppendEscapedChar
                         InnerWriter.Write("\\u");
-                        InnerWriter.Write(((int)literal[i]).ToString("X4", CultureInfo.InvariantCulture));
+                        InnerWriter.Write(
+                            ((int)literal[i]).ToString("X4", CultureInfo.InvariantCulture)
+                        );
                         break;
                     default:
                         InnerWriter.Write(literal[i]);
@@ -125,13 +127,15 @@ namespace System.Web.Razor.Generator
                 }
                 if (i > 0 && i % 80 == 0)
                 {
-                    // If current character is a high surrogate and the following 
-                    // character is a low surrogate, don't break them. 
-                    // Otherwise when we write the string to a file, we might lose 
+                    // If current character is a high surrogate and the following
+                    // character is a low surrogate, don't break them.
+                    // Otherwise when we write the string to a file, we might lose
                     // the characters.
-                    if (Char.IsHighSurrogate(literal[i])
+                    if (
+                        Char.IsHighSurrogate(literal[i])
                         && (i < literal.Length - 1)
-                        && Char.IsLowSurrogate(literal[i + 1]))
+                        && Char.IsLowSurrogate(literal[i + 1])
+                    )
                     {
                         InnerWriter.Write(literal[++i]);
                     }
@@ -154,7 +158,11 @@ namespace System.Web.Razor.Generator
             InnerWriter.Write("@" + identifier);
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Lowercase is intended here. C# boolean literals are all lowercase")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "Lowercase is intended here. C# boolean literals are all lowercase"
+        )]
         public override void WriteBooleanLiteral(bool value)
         {
             WriteSnippet(value.ToString().ToLowerInvariant());

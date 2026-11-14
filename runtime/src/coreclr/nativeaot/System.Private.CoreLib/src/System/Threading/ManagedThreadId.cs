@@ -30,7 +30,13 @@ namespace System.Threading
 
             private const int BitsPerNode = 32;
 
-            private ImmutableIdDispenser(ImmutableIdDispenser? left, ImmutableIdDispenser? right, int used, int size, uint bitmap)
+            private ImmutableIdDispenser(
+                ImmutableIdDispenser? left,
+                ImmutableIdDispenser? right,
+                int used,
+                int size,
+                uint bitmap
+            )
             {
                 _left = left;
                 _right = right;
@@ -93,7 +99,13 @@ namespace System.Threading
                 if (_used == _size)
                 {
                     id = _size;
-                    return new ImmutableIdDispenser(this, null, _size + 1, checked(2 * _size + BitsPerNode), 1);
+                    return new ImmutableIdDispenser(
+                        this,
+                        null,
+                        _size + 1,
+                        checked(2 * _size + BitsPerNode),
+                        1
+                    );
                 }
 
                 var bitmap = _bitmap;
@@ -117,8 +129,7 @@ namespace System.Threading
                         left = new ImmutableIdDispenser(null, null, 1, ChildSize, 1);
                         id = left.ChildSize;
                     }
-                    else
-                    if (right == null)
+                    else if (right == null)
                     {
                         right = new ImmutableIdDispenser(null, null, 1, ChildSize, 1);
                         id = ChildSize + BitsPerNode + right.ChildSize;
@@ -186,6 +197,7 @@ namespace System.Threading
         // because that object may have longer lifetime than the OS thread.
         [ThreadStatic]
         private static ManagedThreadId t_currentThreadId;
+
         [ThreadStatic]
         private static int t_currentManagedThreadId;
 
@@ -214,10 +226,14 @@ namespace System.Threading
             int id;
 
             var priorIdDispenser = Volatile.Read(ref s_idDispenser);
-            for (;;)
+            for (; ; )
             {
                 var updatedIdDispenser = priorIdDispenser.AllocateId(out id);
-                var interlockedResult = Interlocked.CompareExchange(ref s_idDispenser, updatedIdDispenser, priorIdDispenser);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref s_idDispenser,
+                    updatedIdDispenser,
+                    priorIdDispenser
+                );
                 if (object.ReferenceEquals(priorIdDispenser, interlockedResult))
                     break;
                 priorIdDispenser = interlockedResult; // we already have a volatile read that we can reuse for the next loop
@@ -236,10 +252,14 @@ namespace System.Threading
             }
 
             var priorIdDispenser = Volatile.Read(ref s_idDispenser);
-            for (;;)
+            for (; ; )
             {
                 var updatedIdDispenser = s_idDispenser.RecycleId(id);
-                var interlockedResult = Interlocked.CompareExchange(ref s_idDispenser, updatedIdDispenser, priorIdDispenser);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref s_idDispenser,
+                    updatedIdDispenser,
+                    priorIdDispenser
+                );
                 if (object.ReferenceEquals(priorIdDispenser, interlockedResult))
                     break;
                 priorIdDispenser = interlockedResult; // we already have a volatile read that we can reuse for the next loop

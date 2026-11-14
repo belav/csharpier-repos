@@ -24,26 +24,39 @@ namespace System.Web.WebPages.Administration.PackageManager
         {
             if (String.IsNullOrEmpty(remoteSource))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "remoteSource");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "remoteSource"
+                );
             }
             if (String.IsNullOrEmpty(siteRoot))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "siteRoot");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "siteRoot"
+                );
             }
 
             _siteRoot = siteRoot;
             string webRepositoryDirectory = GetWebRepositoryDirectory(siteRoot);
-            _projectManager = new ProjectManager(sourceRepository: PackageRepositoryFactory.Default.CreateRepository(remoteSource),
-                                                 pathResolver: new DefaultPackagePathResolver(webRepositoryDirectory),
-                                                 localRepository: PackageRepositoryFactory.Default.CreateRepository(webRepositoryDirectory),
-                                                 project: new WebProjectSystem(siteRoot));
+            _projectManager = new ProjectManager(
+                sourceRepository: PackageRepositoryFactory.Default.CreateRepository(remoteSource),
+                pathResolver: new DefaultPackagePathResolver(webRepositoryDirectory),
+                localRepository: PackageRepositoryFactory.Default.CreateRepository(
+                    webRepositoryDirectory
+                ),
+                project: new WebProjectSystem(siteRoot)
+            );
         }
 
         internal WebProjectManager(IProjectManager projectManager, string siteRoot)
         {
             if (String.IsNullOrEmpty(siteRoot))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "siteRoot");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "siteRoot"
+                );
             }
 
             if (projectManager == null)
@@ -67,9 +80,16 @@ namespace System.Web.WebPages.Administration.PackageManager
 
         internal bool DoNotAddBindingRedirects { get; set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#",
-            Justification = "We want to ensure we get server-side counts for the IQueryable which can only be performed before we collapse versions.")]
-        public virtual IQueryable<IPackage> GetRemotePackages(string searchTerms, bool filterPreferred)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            MessageId = "2#",
+            Justification = "We want to ensure we get server-side counts for the IQueryable which can only be performed before we collapse versions."
+        )]
+        public virtual IQueryable<IPackage> GetRemotePackages(
+            string searchTerms,
+            bool filterPreferred
+        )
         {
             var packages = GetPackages(SourceRepository, searchTerms);
             if (filterPreferred)
@@ -77,9 +97,8 @@ namespace System.Web.WebPages.Administration.PackageManager
                 packages = packages.Where(p => p.Tags.ToLower().Contains(WebPagesPreferredTag));
             }
 
-            // Order by download count and Id to allow collapsing 
-            return packages.OrderByDescending(p => p.DownloadCount)
-                .ThenBy(p => p.Id);
+            // Order by download count and Id to allow collapsing
+            return packages.OrderByDescending(p => p.DownloadCount).ThenBy(p => p.Id);
         }
 
         public IQueryable<IPackage> GetInstalledPackages(string searchTerms)
@@ -87,14 +106,21 @@ namespace System.Web.WebPages.Administration.PackageManager
             return GetPackages(LocalRepository, searchTerms);
         }
 
-        public IEnumerable<IPackage> GetPackagesWithUpdates(string searchTerms, bool filterPreferredPackages)
+        public IEnumerable<IPackage> GetPackagesWithUpdates(
+            string searchTerms,
+            bool filterPreferredPackages
+        )
         {
             var packagesToUpdate = GetPackages(LocalRepository, searchTerms);
             if (filterPreferredPackages)
             {
-                packagesToUpdate = packagesToUpdate.Where(p => !String.IsNullOrEmpty(p.Tags) && p.Tags.ToLower().Contains(WebPagesPreferredTag));
+                packagesToUpdate = packagesToUpdate.Where(p =>
+                    !String.IsNullOrEmpty(p.Tags) && p.Tags.ToLower().Contains(WebPagesPreferredTag)
+                );
             }
-            return SourceRepository.GetUpdates(packagesToUpdate, includePrerelease: false).AsQueryable();
+            return SourceRepository
+                .GetUpdates(packagesToUpdate, includePrerelease: false)
+                .AsQueryable();
         }
 
         internal IEnumerable<string> InstallPackage(IPackage package)
@@ -110,7 +136,12 @@ namespace System.Web.WebPages.Administration.PackageManager
         {
             IEnumerable<string> result = PerformLoggedAction(() =>
             {
-                _projectManager.AddPackageReference(package.Id, package.Version, ignoreDependencies: false, allowPrereleaseVersions: false);
+                _projectManager.AddPackageReference(
+                    package.Id,
+                    package.Version,
+                    ignoreDependencies: false,
+                    allowPrereleaseVersions: false
+                );
                 AddBindingRedirects(appDomain);
             });
             return result;
@@ -129,7 +160,12 @@ namespace System.Web.WebPages.Administration.PackageManager
         {
             return PerformLoggedAction(() =>
             {
-                _projectManager.UpdatePackageReference(package.Id, package.Version, updateDependencies: true, allowPrereleaseVersions: false);
+                _projectManager.UpdatePackageReference(
+                    package.Id,
+                    package.Version,
+                    updateDependencies: true,
+                    allowPrereleaseVersions: false
+                );
                 AddBindingRedirects(appDomain);
             });
         }
@@ -142,11 +178,19 @@ namespace System.Web.WebPages.Administration.PackageManager
         {
             return PerformLoggedAction(() =>
             {
-                _projectManager.RemovePackageReference(package.Id, forceRemove: false, removeDependencies: removeDependencies);
+                _projectManager.RemovePackageReference(
+                    package.Id,
+                    forceRemove: false,
+                    removeDependencies: removeDependencies
+                );
             });
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "It seems more appropriate to deal with IPackages")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "It seems more appropriate to deal with IPackages"
+        )]
         public bool IsPackageInstalled(IPackage package)
         {
             return LocalRepository.Exists(package);
@@ -154,7 +198,9 @@ namespace System.Web.WebPages.Administration.PackageManager
 
         public IPackage GetUpdate(IPackage package)
         {
-            return SourceRepository.GetUpdates(new[] { package }, includePrerelease: false).SingleOrDefault();
+            return SourceRepository
+                .GetUpdates(new[] { package }, includePrerelease: false)
+                .SingleOrDefault();
         }
 
         private void AddBindingRedirects(AppDomain appDomain)
@@ -165,13 +211,19 @@ namespace System.Web.WebPages.Administration.PackageManager
             }
             // We can't use HttpRuntime.BinDirectory since there is no runtime when installing via WebMatrix.
             var binDirectory = Path.Combine(_siteRoot, "bin");
-            var assemblies = RemoteAssembly.GetAssembliesForBindingRedirect(appDomain, binDirectory);
+            var assemblies = RemoteAssembly.GetAssembliesForBindingRedirect(
+                appDomain,
+                binDirectory
+            );
             var bindingRedirects = BindingRedirectResolver.GetBindingRedirects(assemblies);
 
             if (bindingRedirects.Any())
             {
                 // NuGet ends up reading our web.config file regardless of if any bindingRedirects are needed.
-                var bindingRedirectManager = new BindingRedirectManager(_projectManager.Project, "web.config");
+                var bindingRedirectManager = new BindingRedirectManager(
+                    _projectManager.Project,
+                    "web.config"
+                );
                 bindingRedirectManager.AddBindingRedirects(bindingRedirects);
             }
         }
@@ -198,42 +250,66 @@ namespace System.Web.WebPages.Administration.PackageManager
         public static IEnumerable<IPackage> CollapseVersions(IQueryable<IPackage> packages)
         {
             const int BufferSize = 30;
-            return packages.Where(package => package.IsLatestVersion)
+            return packages
+                .Where(package => package.IsLatestVersion)
                 .AsBufferedEnumerable(BufferSize)
                 .DistinctLast(PackageEqualityComparer.Id, PackageComparer.Version);
         }
 
         internal IEnumerable<IPackage> GetPackagesRequiringLicenseAcceptance(IPackage package)
         {
-            return GetPackagesRequiringLicenseAcceptance(package, localRepository: LocalRepository, sourceRepository: SourceRepository);
+            return GetPackagesRequiringLicenseAcceptance(
+                package,
+                localRepository: LocalRepository,
+                sourceRepository: SourceRepository
+            );
         }
 
-        internal static IEnumerable<IPackage> GetPackagesRequiringLicenseAcceptance(IPackage package, IPackageRepository localRepository, IPackageRepository sourceRepository)
+        internal static IEnumerable<IPackage> GetPackagesRequiringLicenseAcceptance(
+            IPackage package,
+            IPackageRepository localRepository,
+            IPackageRepository sourceRepository
+        )
         {
             var dependencies = GetPackageDependencies(package, localRepository, sourceRepository);
 
             return from p in dependencies
-                   where p.RequireLicenseAcceptance
-                   select p;
+                where p.RequireLicenseAcceptance
+                select p;
         }
 
-        private static IEnumerable<IPackage> GetPackageDependencies(IPackage package, IPackageRepository localRepository, IPackageRepository sourceRepository)
+        private static IEnumerable<IPackage> GetPackageDependencies(
+            IPackage package,
+            IPackageRepository localRepository,
+            IPackageRepository sourceRepository
+        )
         {
-            InstallWalker walker = new InstallWalker(localRepository: localRepository, sourceRepository: sourceRepository, logger: NullLogger.Instance,
-                                                     ignoreDependencies: false, allowPrereleaseVersions: false);
+            InstallWalker walker = new InstallWalker(
+                localRepository: localRepository,
+                sourceRepository: sourceRepository,
+                logger: NullLogger.Instance,
+                ignoreDependencies: false,
+                allowPrereleaseVersions: false
+            );
             IEnumerable<PackageOperation> operations = walker.ResolveOperations(package);
 
             return from operation in operations
-                   where operation.Action == PackageAction.Install
-                   select operation.Package;
+                where operation.Action == PackageAction.Install
+                select operation.Package;
         }
 
-        internal static IQueryable<IPackage> GetPackages(IPackageRepository repository, string searchTerm)
+        internal static IQueryable<IPackage> GetPackages(
+            IPackageRepository repository,
+            string searchTerm
+        )
         {
             return GetPackages(repository.GetPackages(), searchTerm);
         }
 
-        internal static IQueryable<IPackage> GetPackages(IQueryable<IPackage> packages, string searchTerm)
+        internal static IQueryable<IPackage> GetPackages(
+            IQueryable<IPackage> packages,
+            string searchTerm
+        )
         {
             if (!String.IsNullOrEmpty(searchTerm))
             {

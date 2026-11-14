@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,20 +34,20 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Discovery
 {
-	[TestFixture]
-	public class EndpointDiscoveryMetadataTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			var edm = new EndpointDiscoveryMetadata ();
-			Assert.IsNotNull (edm.Address, "#1");
-			Assert.AreEqual (EndpointAddress.AnonymousUri, edm.Address.Uri, "#1-2");
-			Assert.AreEqual (0, edm.Version, "#2");
-			Assert.IsNotNull (edm.ContractTypeNames, "#3");
-			Assert.IsNotNull (edm.Scopes, "#4");
-			Assert.IsNotNull (edm.ListenUris, "#5");
-			Assert.IsNotNull (edm.Extensions, "#6");
-		}
-	}
+    [TestFixture]
+    public class EndpointDiscoveryMetadataTest
+    {
+        [Test]
+        public void DefaultValues()
+        {
+            var edm = new EndpointDiscoveryMetadata();
+            Assert.IsNotNull(edm.Address, "#1");
+            Assert.AreEqual(EndpointAddress.AnonymousUri, edm.Address.Uri, "#1-2");
+            Assert.AreEqual(0, edm.Version, "#2");
+            Assert.IsNotNull(edm.ContractTypeNames, "#3");
+            Assert.IsNotNull(edm.Scopes, "#4");
+            Assert.IsNotNull(edm.ListenUris, "#5");
+            Assert.IsNotNull(edm.Extensions, "#6");
+        }
+    }
 }

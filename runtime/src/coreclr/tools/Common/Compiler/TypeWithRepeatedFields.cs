@@ -83,14 +83,27 @@ namespace ILCompiler
         }
 
         public override ClassLayoutMetadata GetClassLayout() => MetadataType.GetClassLayout();
-        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) => MetadataType.HasCustomAttribute(attributeNamespace, attributeName);
-        public override IEnumerable<MetadataType> GetNestedTypes() => (IEnumerable<MetadataType>)EmptyTypes;
+
+        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) =>
+            MetadataType.HasCustomAttribute(attributeNamespace, attributeName);
+
+        public override IEnumerable<MetadataType> GetNestedTypes() =>
+            (IEnumerable<MetadataType>)EmptyTypes;
+
         public override MetadataType GetNestedType(string name) => null;
+
         public override int GetInlineArrayLength() => MetadataType.GetInlineArrayLength();
-        public override MethodImplRecord[] FindMethodsImplWithMatchingDeclName(string name) => MetadataType.FindMethodsImplWithMatchingDeclName(name);
+
+        public override MethodImplRecord[] FindMethodsImplWithMatchingDeclName(string name) =>
+            MetadataType.FindMethodsImplWithMatchingDeclName(name);
+
         public override int GetHashCode() => MetadataType.GetHashCode();
-        protected override MethodImplRecord[] ComputeVirtualMethodImplsForType() => Array.Empty<MethodImplRecord>();
-        protected override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer) => comparer.Compare(MetadataType, ((TypeWithRepeatedFields)other).MetadataType);
+
+        protected override MethodImplRecord[] ComputeVirtualMethodImplsForType() =>
+            Array.Empty<MethodImplRecord>();
+
+        protected override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer) =>
+            comparer.Compare(MetadataType, ((TypeWithRepeatedFields)other).MetadataType);
 
         protected override TypeFlags ComputeTypeFlags(TypeFlags mask)
         {

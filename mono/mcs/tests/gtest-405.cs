@@ -1,14 +1,12 @@
-using System.Collections.Generic;
 using System;
-	
+using System.Collections.Generic;
+
 public struct AllocationClassData<T>
 {
-	static Comparison<AllocationClassData<T>> hh;
+    static Comparison<AllocationClassData<T>> hh;
 }
 
 class C
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

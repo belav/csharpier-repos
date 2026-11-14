@@ -182,8 +182,7 @@ internal sealed class AcceptsMatcherPolicy
         for (var i = 0; i < endpoints.Count; i++)
         {
             var endpoint = endpoints[i];
-            var contentTypes =
-                endpoint.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes
+            var contentTypes = endpoint.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes
                 ?? Array.Empty<string>();
             if (contentTypes.Count == 0)
             {
@@ -282,9 +281,8 @@ internal sealed class AcceptsMatcherPolicy
             var e = edges[i];
             ordered[i] = (mediaType: CreateEdgeMediaType(ref e), destination: e.Destination);
         }
-        Array.Sort(
-            ordered,
-            static (left, right) => GetScore(left.mediaType).CompareTo(GetScore(right.mediaType))
+        Array.Sort(ordered, static (left, right) =>
+            GetScore(left.mediaType).CompareTo(GetScore(right.mediaType))
         );
 
         // If any edge matches all content types, then treat that as the 'exit'. This will

@@ -4,47 +4,66 @@
 
 using System;
 using Xunit;
+
 interface IncrDecr
 {
     int Val();
 }
+
 struct MyInt : IncrDecr
 {
     int x;
-    public int Val() { return x + 1; }
-    public override int GetHashCode() { return Val(); }
+
+    public int Val()
+    {
+        return x + 1;
+    }
+
+    public override int GetHashCode()
+    {
+        return Val();
+    }
 }
-class MyCounter<T> where T : IncrDecr
+
+class MyCounter<T>
+    where T : IncrDecr
 {
     T counter;
     T[] counters = new T[1];
+
     public int Val1A()
     {
         return counter.GetHashCode();
     }
+
     public int Val2A()
     {
         return counters[0].GetHashCode();
     }
+
     public int Val3A(T cnter)
     {
         counter = cnter;
         return counter.GetHashCode();
     }
+
     public int Val1B()
     {
         return counter.GetHashCode();
     }
+
     public int Val2B()
     {
         return counters[0].GetHashCode();
     }
+
     public int Val3B(T cnter)
     {
         counter = cnter;
         return counter.GetHashCode();
     }
 }
+
 public class test
 {
     [Fact]
@@ -74,4 +93,3 @@ public class test
         return 100;
     }
 }
-

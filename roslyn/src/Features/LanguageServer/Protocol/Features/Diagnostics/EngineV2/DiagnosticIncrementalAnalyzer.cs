@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
     /// <summary>
     /// Diagnostic Analyzer Engine V2
-    /// 
+    ///
     /// This one follows pattern compiler has set for diagnostic analyzer.
     /// </summary>
     internal partial class DiagnosticIncrementalAnalyzer : IIncrementalAnalyzer
@@ -37,9 +37,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private readonly IncrementalMemberEditAnalyzer _incrementalMemberEditAnalyzer = new();
 
 #if NETSTANDARD
-        private ConditionalWeakTable<Project, CompilationWithAnalyzers?> _projectCompilationsWithAnalyzers = new();
+        private ConditionalWeakTable<
+            Project,
+            CompilationWithAnalyzers?
+        > _projectCompilationsWithAnalyzers = new();
 #else
-        private readonly ConditionalWeakTable<Project, CompilationWithAnalyzers?> _projectCompilationsWithAnalyzers = new();
+        private readonly ConditionalWeakTable<
+            Project,
+            CompilationWithAnalyzers?
+        > _projectCompilationsWithAnalyzers = new();
 #endif
 
         internal DiagnosticAnalyzerService AnalyzerService { get; }
@@ -50,39 +56,56 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             DiagnosticAnalyzerService analyzerService,
             int correlationId,
             Workspace workspace,
-            DiagnosticAnalyzerInfoCache analyzerInfoCache)
+            DiagnosticAnalyzerInfoCache analyzerInfoCache
+        )
         {
             Contract.ThrowIfNull(analyzerService);
 
             AnalyzerService = analyzerService;
             Workspace = workspace;
 
-            _documentTrackingService = workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            _documentTrackingService =
+                workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
             _correlationId = correlationId;
 
             _stateManager = new StateManager(workspace, analyzerInfoCache);
             _stateManager.ProjectAnalyzerReferenceChanged += OnProjectAnalyzerReferenceChanged;
 
-            _diagnosticAnalyzerRunner = new InProcOrRemoteHostAnalyzerRunner(analyzerInfoCache, analyzerService.Listener);
+            _diagnosticAnalyzerRunner = new InProcOrRemoteHostAnalyzerRunner(
+                analyzerInfoCache,
+                analyzerService.Listener
+            );
 
             GlobalOptions.AddOptionChangedHandler(this, OnGlobalOptionChanged);
         }
 
         private void OnGlobalOptionChanged(object? sender, OptionChangedEventArgs e)
         {
-            if (DiagnosticAnalyzerService.IsGlobalOptionAffectingDiagnostics(e.Option) &&
-                GlobalOptions.GetOption(SolutionCrawlerRegistrationService.EnableSolutionCrawler))
+            if (
+                DiagnosticAnalyzerService.IsGlobalOptionAffectingDiagnostics(e.Option)
+                && GlobalOptions.GetOption(SolutionCrawlerRegistrationService.EnableSolutionCrawler)
+            )
             {
                 var service = Workspace.Services.GetService<ISolutionCrawlerService>();
-                service?.Reanalyze(Workspace, this, projectIds: null, documentIds: null, highPriority: false);
+                service?.Reanalyze(
+                    Workspace,
+                    this,
+                    projectIds: null,
+                    documentIds: null,
+                    highPriority: false
+                );
             }
         }
 
         internal IGlobalOptionService GlobalOptions => AnalyzerService.GlobalOptions;
-        internal DiagnosticAnalyzerInfoCache DiagnosticAnalyzerInfoCache => _diagnosticAnalyzerRunner.AnalyzerInfoCache;
+        internal DiagnosticAnalyzerInfoCache DiagnosticAnalyzerInfoCache =>
+            _diagnosticAnalyzerRunner.AnalyzerInfoCache;
 
-        private void OnProjectAnalyzerReferenceChanged(object? sender, ProjectAnalyzerReferenceChangedEventArgs e)
+        private void OnProjectAnalyzerReferenceChanged(
+            object? sender,
+            ProjectAnalyzerReferenceChangedEventArgs e
+        )
         {
             if (e.Removed.Length == 0)
             {
@@ -121,7 +144,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     foreach (var projectId in projectIds)
                     {
                         stateSet.CollectDocumentsWithDiagnostics(projectId, documentSet);
-                        AddProjectDiagnosticsRemovedArgs(ref argsBuilder.AsRef(), stateSet, projectId, documentSet, handleActiveFile);
+                        AddProjectDiagnosticsRemovedArgs(
+                            ref argsBuilder.AsRef(),
+                            stateSet,
+                            projectId,
+                            documentSet,
+                            handleActiveFile
+                        );
                         documentSet.Clear();
                     }
                 }
@@ -146,7 +175,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // PERF: don't fire events for ones that we dont have any diagnostics on
                     if (documentSet.Count > 0)
                     {
-                        AddProjectDiagnosticsRemovedArgs(ref argsBuilder.AsRef(), stateSet, projectId, documentSet, handleActiveFile: true);
+                        AddProjectDiagnosticsRemovedArgs(
+                            ref argsBuilder.AsRef(),
+                            stateSet,
+                            projectId,
+                            documentSet,
+                            handleActiveFile: true
+                        );
                         documentSet.Clear();
                     }
                 }
@@ -157,72 +192,111 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
         private void AddDiagnosticsCreatedArgs(
             ref TemporaryArray<DiagnosticsUpdatedArgs> builder,
-            Project project, DiagnosticAnalyzer analyzer, ImmutableArray<DiagnosticData> items)
+            Project project,
+            DiagnosticAnalyzer analyzer,
+            ImmutableArray<DiagnosticData> items
+        )
         {
             Contract.ThrowIfFalse(project.Solution.Workspace == Workspace);
 
-            builder.Add(DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                CreateId(analyzer, project.Id, AnalysisKind.NonLocal),
-                project.Solution.Workspace,
-                project.Solution,
-                project.Id,
-                documentId: null,
-                diagnostics: items));
+            builder.Add(
+                DiagnosticsUpdatedArgs.DiagnosticsCreated(
+                    CreateId(analyzer, project.Id, AnalysisKind.NonLocal),
+                    project.Solution.Workspace,
+                    project.Solution,
+                    project.Id,
+                    documentId: null,
+                    diagnostics: items
+                )
+            );
         }
 
         private void AddDiagnosticsRemovedArgs(
             ref TemporaryArray<DiagnosticsUpdatedArgs> builder,
-            ProjectId projectId, Solution? solution, DiagnosticAnalyzer analyzer)
+            ProjectId projectId,
+            Solution? solution,
+            DiagnosticAnalyzer analyzer
+        )
         {
             Contract.ThrowIfFalse(solution == null || solution.Workspace == Workspace);
 
-            builder.Add(DiagnosticsUpdatedArgs.DiagnosticsRemoved(
-                CreateId(analyzer, projectId, AnalysisKind.NonLocal),
-                Workspace,
-                solution,
-                projectId,
-                documentId: null));
+            builder.Add(
+                DiagnosticsUpdatedArgs.DiagnosticsRemoved(
+                    CreateId(analyzer, projectId, AnalysisKind.NonLocal),
+                    Workspace,
+                    solution,
+                    projectId,
+                    documentId: null
+                )
+            );
         }
 
         private void AddDiagnosticsCreatedArgs(
             ref TemporaryArray<DiagnosticsUpdatedArgs> builder,
-            TextDocument document, DiagnosticAnalyzer analyzer, AnalysisKind kind, ImmutableArray<DiagnosticData> items)
+            TextDocument document,
+            DiagnosticAnalyzer analyzer,
+            AnalysisKind kind,
+            ImmutableArray<DiagnosticData> items
+        )
         {
             Contract.ThrowIfFalse(document.Project.Solution.Workspace == Workspace);
 
-            builder.Add(DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                CreateId(analyzer, document.Id, kind),
-                document.Project.Solution.Workspace,
-                document.Project.Solution,
-                document.Project.Id,
-                document.Id,
-                items));
+            builder.Add(
+                DiagnosticsUpdatedArgs.DiagnosticsCreated(
+                    CreateId(analyzer, document.Id, kind),
+                    document.Project.Solution.Workspace,
+                    document.Project.Solution,
+                    document.Project.Id,
+                    document.Id,
+                    items
+                )
+            );
         }
 
         private void AddDiagnosticsRemovedArgs(
             ref TemporaryArray<DiagnosticsUpdatedArgs> builder,
-            DocumentId documentId, Solution? solution, DiagnosticAnalyzer analyzer, AnalysisKind kind)
+            DocumentId documentId,
+            Solution? solution,
+            DiagnosticAnalyzer analyzer,
+            AnalysisKind kind
+        )
         {
             Contract.ThrowIfFalse(solution == null || solution.Workspace == Workspace);
 
-            builder.Add(DiagnosticsUpdatedArgs.DiagnosticsRemoved(
-                CreateId(analyzer, documentId, kind),
-                Workspace,
-                solution,
-                documentId.ProjectId,
-                documentId));
+            builder.Add(
+                DiagnosticsUpdatedArgs.DiagnosticsRemoved(
+                    CreateId(analyzer, documentId, kind),
+                    Workspace,
+                    solution,
+                    documentId.ProjectId,
+                    documentId
+                )
+            );
         }
 
-        private static object CreateId(DiagnosticAnalyzer analyzer, DocumentId documentId, AnalysisKind kind)
-            => new LiveDiagnosticUpdateArgsId(analyzer, documentId, kind);
+        private static object CreateId(
+            DiagnosticAnalyzer analyzer,
+            DocumentId documentId,
+            AnalysisKind kind
+        ) => new LiveDiagnosticUpdateArgsId(analyzer, documentId, kind);
 
-        private static object CreateId(DiagnosticAnalyzer analyzer, ProjectId projectId, AnalysisKind kind)
-            => new LiveDiagnosticUpdateArgsId(analyzer, projectId, kind);
+        private static object CreateId(
+            DiagnosticAnalyzer analyzer,
+            ProjectId projectId,
+            AnalysisKind kind
+        ) => new LiveDiagnosticUpdateArgsId(analyzer, projectId, kind);
 
-        public static Task<VersionStamp> GetDiagnosticVersionAsync(Project project, CancellationToken cancellationToken)
-            => project.GetDependentVersionAsync(cancellationToken);
+        public static Task<VersionStamp> GetDiagnosticVersionAsync(
+            Project project,
+            CancellationToken cancellationToken
+        ) => project.GetDependentVersionAsync(cancellationToken);
 
-        private static DiagnosticAnalysisResult GetResultOrEmpty(ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> map, DiagnosticAnalyzer analyzer, ProjectId projectId, VersionStamp version)
+        private static DiagnosticAnalysisResult GetResultOrEmpty(
+            ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> map,
+            DiagnosticAnalyzer analyzer,
+            ProjectId projectId,
+            VersionStamp version
+        )
         {
             if (map.TryGetValue(analyzer, out var result))
             {
@@ -232,33 +306,38 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             return DiagnosticAnalysisResult.CreateEmpty(projectId, version);
         }
 
-        public void LogAnalyzerCountSummary()
-            => _telemetry.ReportAndClear(_correlationId);
+        public void LogAnalyzerCountSummary() => _telemetry.ReportAndClear(_correlationId);
 
         /// <summary>
         /// The highest priority (lowest value) amongst all incremental analyzers (others have priority 1).
         /// </summary>
         public int Priority => 0;
 
-        internal IEnumerable<DiagnosticAnalyzer> GetAnalyzersTestOnly(Project project)
-            => _stateManager.GetOrCreateStateSets(project).Select(s => s.Analyzer);
+        internal IEnumerable<DiagnosticAnalyzer> GetAnalyzersTestOnly(Project project) =>
+            _stateManager.GetOrCreateStateSets(project).Select(s => s.Analyzer);
 
-        private static string GetDocumentLogMessage(string title, TextDocument document, DiagnosticAnalyzer analyzer)
-            => $"{title}: ({document.Id}, {document.Project.Id}), ({analyzer})";
+        private static string GetDocumentLogMessage(
+            string title,
+            TextDocument document,
+            DiagnosticAnalyzer analyzer
+        ) => $"{title}: ({document.Id}, {document.Project.Id}), ({analyzer})";
 
-        private static string GetProjectLogMessage(Project project, ImmutableArray<StateSet> stateSets)
-            => $"project: ({project.Id}), ({string.Join(Environment.NewLine, stateSets.Select(s => s.Analyzer.ToString()))})";
+        private static string GetProjectLogMessage(
+            Project project,
+            ImmutableArray<StateSet> stateSets
+        ) =>
+            $"project: ({project.Id}), ({string.Join(Environment.NewLine, stateSets.Select(s => s.Analyzer.ToString()))})";
 
-        private static string GetResetLogMessage(TextDocument document)
-            => $"document close/reset: ({document.FilePath ?? document.Name})";
+        private static string GetResetLogMessage(TextDocument document) =>
+            $"document close/reset: ({document.FilePath ?? document.Name})";
 
-        private static string GetOpenLogMessage(TextDocument document)
-            => $"document open: ({document.FilePath ?? document.Name})";
+        private static string GetOpenLogMessage(TextDocument document) =>
+            $"document open: ({document.FilePath ?? document.Name})";
 
-        private static string GetRemoveLogMessage(DocumentId id)
-            => $"document remove: {id.ToString()}";
+        private static string GetRemoveLogMessage(DocumentId id) =>
+            $"document remove: {id.ToString()}";
 
-        private static string GetRemoveLogMessage(ProjectId id)
-            => $"project remove: {id.ToString()}";
+        private static string GetRemoveLogMessage(ProjectId id) =>
+            $"project remove: {id.ToString()}";
     }
 }

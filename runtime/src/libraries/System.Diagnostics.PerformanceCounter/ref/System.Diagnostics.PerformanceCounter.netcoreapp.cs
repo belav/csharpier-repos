@@ -6,7 +6,6 @@
 
 namespace System.Diagnostics
 {
-    public readonly partial struct CounterSample : System.IEquatable<System.Diagnostics.CounterSample>
-    {
-    }
+    public readonly partial struct CounterSample
+        : System.IEquatable<System.Diagnostics.CounterSample> { }
 }

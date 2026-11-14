@@ -16,7 +16,11 @@ namespace System.Xml.XmlDocumentTests
             var namedNodeMap = (XmlNamedNodeMap)xmlDocument.FirstChild.Attributes;
             Assert.Equal(0, namedNodeMap.Count);
 
-            var newAttribute = xmlDocument.CreateNode(XmlNodeType.Attribute, "newNode", string.Empty);
+            var newAttribute = xmlDocument.CreateNode(
+                XmlNodeType.Attribute,
+                "newNode",
+                string.Empty
+            );
             namedNodeMap.SetNamedItem(newAttribute);
 
             Assert.NotNull(newAttribute);

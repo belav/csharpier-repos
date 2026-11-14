@@ -3,8 +3,10 @@
 
 namespace ApplyUpdateReferencedAssembly
 {
-    public class MethodBody1 {
-        public static string StaticMethod1 () {
+    public class MethodBody1
+    {
+        public static string StaticMethod1()
+        {
             return "NEW STRING";
         }
     }

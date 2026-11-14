@@ -9,7 +9,6 @@ namespace System.IdentityModel.Selectors
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Xml;
-
     //
     // For common
     //
@@ -17,7 +16,7 @@ namespace System.IdentityModel.Selectors
 
     //
     // Summary:
-    //  This class wraps and manages the lifetime of an array of PolicyElements that are to be Marshaled to 
+    //  This class wraps and manages the lifetime of an array of PolicyElements that are to be Marshaled to
     //  native memory.
     //
     internal class PolicyChain : IDisposable
@@ -49,7 +48,6 @@ namespace System.IdentityModel.Selectors
             {
                 int elementSize = InternalPolicyElement.Size;
                 int chainLength = m_chain.Length;
-
 
                 m_nativeChain = HGlobalSafeHandle.Construct(chainLength * elementSize);
 

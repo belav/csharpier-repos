@@ -1,20 +1,20 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Runtime;
-using System.Security;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
+using System.Runtime;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -65,7 +65,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             uint size = _this.Size;
             if (((uint)Int32.MaxValue) < size)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge")
+                );
             }
 
             return (int)(size - 1);
@@ -119,7 +121,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             if (((uint)Int32.MaxValue) < index)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge")
+                );
             }
 
             return (int)index;
@@ -149,7 +153,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             {
                 if (((uint)Int32.MaxValue) < index)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "InvalidOperation_CollectionBackingListTooLarge"
+                        )
+                    );
                 }
 
                 RemoveAtHelper(_this, index);

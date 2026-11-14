@@ -79,20 +79,29 @@ namespace Microsoft.Internal
             return GetDisplayName(member.DeclaringType!, member.Name);
         }
 
-        internal static bool TryGetGenericInterfaceType(Type instanceType, Type targetOpenInterfaceType, [NotNullWhen(true)] out Type? targetClosedInterfaceType)
+        internal static bool TryGetGenericInterfaceType(
+            Type instanceType,
+            Type targetOpenInterfaceType,
+            [NotNullWhen(true)] out Type? targetClosedInterfaceType
+        )
         {
             // The interface must be open
-            if (!targetOpenInterfaceType.IsInterface ||
-                !targetOpenInterfaceType.IsGenericTypeDefinition ||
-                instanceType.IsGenericTypeDefinition)
+            if (
+                !targetOpenInterfaceType.IsInterface
+                || !targetOpenInterfaceType.IsGenericTypeDefinition
+                || instanceType.IsGenericTypeDefinition
+            )
             {
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
 
             // if instanceType is an interface, we must first check it directly
-            if (instanceType.IsInterface &&
-                instanceType.IsGenericType &&
-                instanceType.UnderlyingSystemType.GetGenericTypeDefinition() == targetOpenInterfaceType.UnderlyingSystemType)
+            if (
+                instanceType.IsInterface
+                && instanceType.IsGenericType
+                && instanceType.UnderlyingSystemType.GetGenericTypeDefinition()
+                    == targetOpenInterfaceType.UnderlyingSystemType
+            )
             {
                 targetClosedInterfaceType = instanceType;
                 return true;
@@ -104,9 +113,15 @@ namespace Microsoft.Internal
                 //  more expensive implementation of GetInterface, this does mean that we're
                 //  takign the chance that there aren't too many types which implement multiple
                 //  interfaces by the same name...
-                Type? targetInterface = instanceType.GetInterface(targetOpenInterfaceType.Name, false);
-                if (targetInterface != null &&
-                    targetInterface.UnderlyingSystemType.GetGenericTypeDefinition() == targetOpenInterfaceType.UnderlyingSystemType)
+                Type? targetInterface = instanceType.GetInterface(
+                    targetOpenInterfaceType.Name,
+                    false
+                );
+                if (
+                    targetInterface != null
+                    && targetInterface.UnderlyingSystemType.GetGenericTypeDefinition()
+                        == targetOpenInterfaceType.UnderlyingSystemType
+                )
                 {
                     targetClosedInterfaceType = targetInterface;
                     return true;
@@ -123,7 +138,9 @@ namespace Microsoft.Internal
 
         internal static IEnumerable<PropertyInfo> GetAllProperties(this Type type)
         {
-            return type.GetInterfaces().Concat(new Type[] { type }).SelectMany(itf => itf.GetProperties());
+            return type.GetInterfaces()
+                .Concat(new Type[] { type })
+                .SelectMany(itf => itf.GetProperties());
         }
 
         internal static IEnumerable<MethodInfo> GetAllMethods(this Type type)
@@ -144,7 +161,15 @@ namespace Microsoft.Internal
 
         private static IEnumerable<MethodInfo> GetDeclaredMethods(this Type type)
         {
-            foreach (MethodInfo method in type.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly))
+            foreach (
+                MethodInfo method in type.GetMethods(
+                    BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.DeclaredOnly
+                )
+            )
             {
                 yield return method;
             }
@@ -168,7 +193,15 @@ namespace Microsoft.Internal
 
         private static IEnumerable<FieldInfo> GetDeclaredFields(this Type type)
         {
-            foreach (FieldInfo m in type.GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly))
+            foreach (
+                FieldInfo m in type.GetFields(
+                    BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.DeclaredOnly
+                )
+            )
             {
                 yield return m;
             }
@@ -189,6 +222,5 @@ namespace Microsoft.Internal
             }
             return false;
         }
-
     }
 }

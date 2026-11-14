@@ -61,7 +61,10 @@ namespace System.ConfigurationTests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21510", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21510",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void AddToAppSettings_Save()
         {
             using (var temp = new TempConfig(TestData.EmptyConfig))
@@ -120,17 +123,20 @@ namespace System.ConfigurationTests
                 {
                     MachineConfigFilename = machine.ConfigPath,
                     ExeConfigFilename = exe.ConfigPath,
-                    RoamingUserConfigFilename = user.ConfigPath
+                    RoamingUserConfigFilename = user.ConfigPath,
                 };
 
-                var config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.PerUserRoaming);
+                var config = ConfigurationManager.OpenMappedExeConfiguration(
+                    map,
+                    ConfigurationUserLevel.PerUserRoaming
+                );
 
                 Assert.Throws<ConfigurationErrorsException>(() => config.AppSettings);
             }
         }
 
         public static string AppSettingsConfig =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <appSettings>
   <add key='AppSettingsKey' value='AppSettingsValue'/>
 </appSettings>";
@@ -142,12 +148,18 @@ namespace System.ConfigurationTests
             {
                 const string SubDirectory = "Config";
                 const string AppConfigFileName = "tempAppConfig.config";
-                string tempConfigDirectory = Path.Combine(Path.GetDirectoryName(tempConfig.ConfigPath), SubDirectory);
+                string tempConfigDirectory = Path.Combine(
+                    Path.GetDirectoryName(tempConfig.ConfigPath),
+                    SubDirectory
+                );
                 using (var tempDirectory = new TempDirectory(tempConfigDirectory))
                 {
                     // set configSource and save the config
                     var config = ConfigurationManager.OpenExeConfiguration(tempConfig.ExePath);
-                    config.AppSettings.SectionInformation.ConfigSource = Path.Combine(SubDirectory, AppConfigFileName);
+                    config.AppSettings.SectionInformation.ConfigSource = Path.Combine(
+                        SubDirectory,
+                        AppConfigFileName
+                    );
                     config.Save();
 
                     // write temporary appConfig
@@ -157,7 +169,10 @@ namespace System.ConfigurationTests
                     // load config and test the appSettings
                     config = ConfigurationManager.OpenExeConfiguration(tempConfig.ExePath);
                     Assert.NotEmpty(config.AppSettings.Settings);
-                    Assert.Equal("AppSettingsValue", config.AppSettings.Settings["AppSettingsKey"].Value);
+                    Assert.Equal(
+                        "AppSettingsValue",
+                        config.AppSettings.Settings["AppSettingsKey"].Value
+                    );
                 }
             }
         }
@@ -179,7 +194,9 @@ namespace System.ConfigurationTests
             using (var tempConfig = new TempConfig(TestData.EmptyConfig))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(tempConfig.ExePath);
-                Assert.ThrowsAny<Exception>(() => config.AppSettings.SectionInformation.ConfigSource = configPath);
+                Assert.ThrowsAny<Exception>(() =>
+                    config.AppSettings.SectionInformation.ConfigSource = configPath
+                );
             }
         }
     }

@@ -21,6 +21,6 @@ namespace System.ComponentModel
         /// <summary>
         /// Specifies that the entire collection has changed.
         /// </summary>
-        Refresh = 3
+        Refresh = 3,
     }
 }

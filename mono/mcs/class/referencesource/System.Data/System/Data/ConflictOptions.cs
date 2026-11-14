@@ -6,12 +6,12 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
-    public enum ConflictOption {
+namespace System.Data
+{
+    public enum ConflictOption
+    {
         CompareAllSearchableValues = 1,
-        CompareRowVersion          = 2,
-        OverwriteChanges           = 3,
+        CompareRowVersion = 2,
+        OverwriteChanges = 3,
     }
 }
-

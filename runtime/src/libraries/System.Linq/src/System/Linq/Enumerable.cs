@@ -9,7 +9,9 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> AsEnumerable<TSource>(this IEnumerable<TSource> source) => source;
+        public static IEnumerable<TSource> AsEnumerable<TSource>(
+            this IEnumerable<TSource> source
+        ) => source;
 
         /// <summary>
         /// Sets the <paramref name="list"/>'s <see cref="List{T}.Count"/> to be <paramref name="count"/>
@@ -24,7 +26,10 @@ namespace System.Linq
 
         /// <summary>Validates that source is not null and then tries to extract a span from the source.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // fast type checks that don't add a lot of overhead
-        private static bool TryGetSpan<TSource>(this IEnumerable<TSource> source, out ReadOnlySpan<TSource> span)
+        private static bool TryGetSpan<TSource>(
+            this IEnumerable<TSource> source,
+            out ReadOnlySpan<TSource> span
+        )
             // This constraint isn't required, but the overheads involved here can be more substantial when TSource
             // is a reference type and generic implementations are shared.  So for now we're protecting ourselves
             // and forcing a conscious choice to remove this in the future, at which point it should be paired with

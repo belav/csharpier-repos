@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         private readonly ISyntaxKinds _syntaxKinds;
 
         protected AbstractResolveConflictMarkerCodeFixProvider(
-            ISyntaxKinds syntaxKinds, string diagnosticId)
+            ISyntaxKinds syntaxKinds,
+            string diagnosticId
+        )
         {
             FixableDiagnosticIds = ImmutableArray.Create(diagnosticId);
             _syntaxKinds = syntaxKinds;
@@ -62,27 +64,45 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         /// them if they bring up the lightbulb on a <c>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</c> line, it should run ahead of
         /// normal fix providers else so the user can quickly fix the conflict and move onto the next conflict.
         /// </summary>
-        protected override CodeActionRequestPriority ComputeRequestPriority()
-            => CodeActionRequestPriority.High;
+        protected override CodeActionRequestPriority ComputeRequestPriority() =>
+            CodeActionRequestPriority.High;
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var cancellationToken = context.CancellationToken;
             var document = context.Document;
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
 
             var position = context.Span.Start;
-            if (!ShouldFix(root, text, position, out var startLine, out var firstMiddleLine, out var secondMiddleLine, out var endLine))
+            if (
+                !ShouldFix(
+                    root,
+                    text,
+                    position,
+                    out var startLine,
+                    out var firstMiddleLine,
+                    out var secondMiddleLine,
+                    out var endLine
+                )
+            )
                 return;
 
             RegisterCodeFixes(context, startLine, firstMiddleLine, secondMiddleLine, endLine);
         }
 
         private bool ShouldFix(
-            SyntaxNode root, SourceText text, int position,
-            out TextLine startLine, out TextLine firstMiddleLine, out TextLine secondMiddleLine, out TextLine endLine)
+            SyntaxNode root,
+            SourceText text,
+            int position,
+            out TextLine startLine,
+            out TextLine firstMiddleLine,
+            out TextLine secondMiddleLine,
+            out TextLine endLine
+        )
         {
             startLine = default;
             firstMiddleLine = default;
@@ -93,11 +113,23 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             var conflictLine = lines.GetLineFromPosition(position);
             if (position != conflictLine.Start)
             {
-                Debug.Assert(false, "All conflict markers should start at the beginning of a line.");
+                Debug.Assert(
+                    false,
+                    "All conflict markers should start at the beginning of a line."
+                );
                 return false;
             }
 
-            if (!TryGetConflictLines(text, position, out startLine, out firstMiddleLine, out secondMiddleLine, out endLine))
+            if (
+                !TryGetConflictLines(
+                    text,
+                    position,
+                    out startLine,
+                    out firstMiddleLine,
+                    out secondMiddleLine,
+                    out endLine
+                )
+            )
                 return false;
 
             var startTrivia = root.FindTrivia(startLine.Start);
@@ -119,7 +151,10 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
                     return false;
 
                 // We don't want to report here if there was conflict trivia on the ||||||| line  (since we would have already reported the issue there).
-                if (firstMiddleLine != secondMiddleLine && firstMiddleTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia)
+                if (
+                    firstMiddleLine != secondMiddleLine
+                    && firstMiddleTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia
+                )
                     return false;
             }
             else if (position == endLine.Start)
@@ -130,7 +165,10 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
                     return false;
 
                 // We don't want to report here if there was conflict trivia on the ||||||| line  (since we would have already reported the issue there).
-                if (firstMiddleLine != secondMiddleLine && firstMiddleTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia)
+                if (
+                    firstMiddleLine != secondMiddleLine
+                    && firstMiddleTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia
+                )
                     return false;
 
                 // We don't want to report here if there was conflict trivia on the ======= line  (since we would have already reported the issue there).
@@ -142,8 +180,13 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         }
 
         private static bool TryGetConflictLines(
-            SourceText text, int position,
-            out TextLine startLine, out TextLine firstMiddleLine, out TextLine secondMiddleLine, out TextLine endLine)
+            SourceText text,
+            int position,
+            out TextLine startLine,
+            out TextLine firstMiddleLine,
+            out TextLine secondMiddleLine,
+            out TextLine endLine
+        )
         {
             startLine = default;
             firstMiddleLine = default;
@@ -158,8 +201,13 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
                     startLine = lines.GetLineFromPosition(position);
                     foundBarLine = TryFindLineForwards(startLine, '|', out firstMiddleLine);
 
-                    if (!TryFindLineForwards(foundBarLine ? firstMiddleLine : startLine, '=', out secondMiddleLine) ||
-                        !TryFindLineForwards(secondMiddleLine, '>', out endLine))
+                    if (
+                        !TryFindLineForwards(
+                            foundBarLine ? firstMiddleLine : startLine,
+                            '=',
+                            out secondMiddleLine
+                        ) || !TryFindLineForwards(secondMiddleLine, '>', out endLine)
+                    )
                     {
                         return false;
                     }
@@ -167,15 +215,20 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
                     break;
                 case '|':
                     firstMiddleLine = lines.GetLineFromPosition(position);
-                    return TryFindLineBackwards(firstMiddleLine, '<', out startLine) &&
-                           TryFindLineForwards(firstMiddleLine, '=', out secondMiddleLine) &&
-                           TryFindLineForwards(secondMiddleLine, '>', out endLine);
+                    return TryFindLineBackwards(firstMiddleLine, '<', out startLine)
+                        && TryFindLineForwards(firstMiddleLine, '=', out secondMiddleLine)
+                        && TryFindLineForwards(secondMiddleLine, '>', out endLine);
                 case '=':
                     secondMiddleLine = lines.GetLineFromPosition(position);
                     foundBarLine = TryFindLineBackwards(secondMiddleLine, '|', out firstMiddleLine);
 
-                    if (!TryFindLineBackwards(foundBarLine ? firstMiddleLine : secondMiddleLine, '<', out startLine) ||
-                        !TryFindLineForwards(secondMiddleLine, '>', out endLine))
+                    if (
+                        !TryFindLineBackwards(
+                            foundBarLine ? firstMiddleLine : secondMiddleLine,
+                            '<',
+                            out startLine
+                        ) || !TryFindLineForwards(secondMiddleLine, '>', out endLine)
+                    )
                     {
                         return false;
                     }
@@ -190,7 +243,13 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
 
                     foundBarLine = TryFindLineBackwards(secondMiddleLine, '|', out firstMiddleLine);
 
-                    if (!TryFindLineBackwards(foundBarLine ? firstMiddleLine : secondMiddleLine, '<', out startLine))
+                    if (
+                        !TryFindLineBackwards(
+                            foundBarLine ? firstMiddleLine : secondMiddleLine,
+                            '<',
+                            out startLine
+                        )
+                    )
                         return false;
 
                     break;
@@ -222,7 +281,11 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             return false;
         }
 
-        private static bool TryFindLineBackwards(TextLine startLine, char ch, out TextLine foundLine)
+        private static bool TryFindLineBackwards(
+            TextLine startLine,
+            char ch,
+            out TextLine foundLine
+        )
         {
             var text = startLine.Text!;
             var lines = text.Lines;
@@ -262,7 +325,12 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         }
 
         private static void RegisterCodeFixes(
-            CodeFixContext context, TextLine startLine, TextLine firstMiddleLine, TextLine secondMiddleLine, TextLine endLine)
+            CodeFixContext context,
+            TextLine startLine,
+            TextLine firstMiddleLine,
+            TextLine secondMiddleLine,
+            TextLine endLine
+        )
         {
             var document = context.Document;
 
@@ -282,24 +350,66 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             var endPos = endLine.Start;
 
             context.RegisterCodeFix(
-                CreateCodeAction(takeTopText,
-                    c => TakeTopAsync(document, startPos, firstMiddlePos, secondMiddlePos, endPos, c),
-                    TakeTopEquivalenceKey),
-                context.Diagnostics);
+                CreateCodeAction(
+                    takeTopText,
+                    c =>
+                        TakeTopAsync(
+                            document,
+                            startPos,
+                            firstMiddlePos,
+                            secondMiddlePos,
+                            endPos,
+                            c
+                        ),
+                    TakeTopEquivalenceKey
+                ),
+                context.Diagnostics
+            );
             context.RegisterCodeFix(
-                CreateCodeAction(takeBottomText,
-                    c => TakeBottomAsync(document, startPos, firstMiddlePos, secondMiddlePos, endPos, c),
-                    TakeBottomEquivalenceKey),
-                context.Diagnostics);
+                CreateCodeAction(
+                    takeBottomText,
+                    c =>
+                        TakeBottomAsync(
+                            document,
+                            startPos,
+                            firstMiddlePos,
+                            secondMiddlePos,
+                            endPos,
+                            c
+                        ),
+                    TakeBottomEquivalenceKey
+                ),
+                context.Diagnostics
+            );
             context.RegisterCodeFix(
-                CreateCodeAction(CodeFixesResources.Take_both,
-                    c => TakeBothAsync(document, startPos, firstMiddlePos, secondMiddlePos, endPos, c),
-                    TakeBothEquivalenceKey),
-                context.Diagnostics);
+                CreateCodeAction(
+                    CodeFixesResources.Take_both,
+                    c =>
+                        TakeBothAsync(
+                            document,
+                            startPos,
+                            firstMiddlePos,
+                            secondMiddlePos,
+                            endPos,
+                            c
+                        ),
+                    TakeBothEquivalenceKey
+                ),
+                context.Diagnostics
+            );
 
-            static CodeAction CreateCodeAction(string title, Func<CancellationToken, Task<Document>> action, string equivalenceKey)
+            static CodeAction CreateCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> action,
+                string equivalenceKey
+            )
             {
-                var codeAction = CodeAction.Create(title, action, equivalenceKey, CodeActionPriority.High);
+                var codeAction = CodeAction.Create(
+                    title,
+                    action,
+                    equivalenceKey,
+                    CodeActionPriority.High
+                );
 
 #if !CODE_STYLE
                 // Backdoor that allows this provider to use the high-priority bucket.
@@ -311,9 +421,14 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         }
 
         private static async Task<Document> AddEditsAsync(
-            Document document, int startPos, int firstMiddlePos, int secondMiddlePos, int endPos,
+            Document document,
+            int startPos,
+            int firstMiddlePos,
+            int secondMiddlePos,
+            int endPos,
             Action<SourceText, ArrayBuilder<TextChange>, int, int, int, int> addEdits,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
 
@@ -325,8 +440,13 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         }
 
         private static void AddTopEdits(
-            SourceText text, ArrayBuilder<TextChange> edits,
-            int startPos, int firstMiddlePos, int secondMiddlePos, int endPos)
+            SourceText text,
+            ArrayBuilder<TextChange> edits,
+            int startPos,
+            int firstMiddlePos,
+            int secondMiddlePos,
+            int endPos
+        )
         {
             // Delete the line containing <<<<<<<
             var startEnd = GetEndIncludingLineBreak(text, startPos);
@@ -338,8 +458,13 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         }
 
         private static void AddBottomEdits(
-            SourceText text, ArrayBuilder<TextChange> edits,
-            int startPos, int firstMiddlePos, int secondMiddlePos, int endPos)
+            SourceText text,
+            ArrayBuilder<TextChange> edits,
+            int startPos,
+            int firstMiddlePos,
+            int secondMiddlePos,
+            int endPos
+        )
         {
             // Remove the chunk of text (inclusive) from <<<<<<< through =======
             var equalsEnd = GetEndIncludingLineBreak(text, secondMiddlePos);
@@ -351,8 +476,13 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         }
 
         private static void AddBothEdits(
-            SourceText text, ArrayBuilder<TextChange> edits,
-            int startPos, int firstMiddlePos, int secondMiddlePos, int endPos)
+            SourceText text,
+            ArrayBuilder<TextChange> edits,
+            int startPos,
+            int firstMiddlePos,
+            int secondMiddlePos,
+            int endPos
+        )
         {
             // Delete the line containing <<<<<<<
             var startEnd = GetEndIncludingLineBreak(text, startPos);
@@ -376,33 +506,86 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             edits.Add(new TextChange(TextSpan.FromBounds(endPos, bottomEnd), ""));
         }
 
-        private static Task<Document> TakeTopAsync(Document document, int startPos, int firstMiddlePos, int secondMiddlePos, int endPos, CancellationToken cancellationToken)
-            => AddEditsAsync(document, startPos, firstMiddlePos, secondMiddlePos, endPos, AddTopEdits, cancellationToken);
+        private static Task<Document> TakeTopAsync(
+            Document document,
+            int startPos,
+            int firstMiddlePos,
+            int secondMiddlePos,
+            int endPos,
+            CancellationToken cancellationToken
+        ) =>
+            AddEditsAsync(
+                document,
+                startPos,
+                firstMiddlePos,
+                secondMiddlePos,
+                endPos,
+                AddTopEdits,
+                cancellationToken
+            );
 
-        private static Task<Document> TakeBottomAsync(Document document, int startPos, int firstMiddlePos, int secondMiddlePos, int endPos, CancellationToken cancellationToken)
-            => AddEditsAsync(document, startPos, firstMiddlePos, secondMiddlePos, endPos, AddBottomEdits, cancellationToken);
+        private static Task<Document> TakeBottomAsync(
+            Document document,
+            int startPos,
+            int firstMiddlePos,
+            int secondMiddlePos,
+            int endPos,
+            CancellationToken cancellationToken
+        ) =>
+            AddEditsAsync(
+                document,
+                startPos,
+                firstMiddlePos,
+                secondMiddlePos,
+                endPos,
+                AddBottomEdits,
+                cancellationToken
+            );
 
-        private static Task<Document> TakeBothAsync(Document document, int startPos, int firstMiddlePos, int secondMiddlePos, int endPos, CancellationToken cancellationToken)
-            => AddEditsAsync(document, startPos, firstMiddlePos, secondMiddlePos, endPos, AddBothEdits, cancellationToken);
+        private static Task<Document> TakeBothAsync(
+            Document document,
+            int startPos,
+            int firstMiddlePos,
+            int secondMiddlePos,
+            int endPos,
+            CancellationToken cancellationToken
+        ) =>
+            AddEditsAsync(
+                document,
+                startPos,
+                firstMiddlePos,
+                secondMiddlePos,
+                endPos,
+                AddBothEdits,
+                cancellationToken
+            );
 
-        private static int GetEndIncludingLineBreak(SourceText text, int position)
-            => text.Lines.GetLineFromPosition(position).SpanIncludingLineBreak.End;
+        private static int GetEndIncludingLineBreak(SourceText text, int position) =>
+            text.Lines.GetLineFromPosition(position).SpanIncludingLineBreak.End;
 
         private async Task<Document> FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            string? equivalenceKey, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            string? equivalenceKey,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(
-                equivalenceKey is TakeTopEquivalenceKey or
-                TakeBottomEquivalenceKey or
-                TakeBothEquivalenceKey);
+                equivalenceKey
+                    is TakeTopEquivalenceKey
+                        or TakeBottomEquivalenceKey
+                        or TakeBothEquivalenceKey
+            );
 
             // Process diagnostics in order so we produce edits in the right order.
-            var orderedDiagnostics = diagnostics.OrderBy(
-                (d1, d2) => d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start).ToImmutableArray();
+            var orderedDiagnostics = diagnostics
+                .OrderBy((d1, d2) => d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start)
+                .ToImmutableArray();
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Create a single array of edits to apply.  Then walk over all the
             // conflict-marker-regions we want to fix and add the edits for each
@@ -413,7 +596,17 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             foreach (var diagnostic in diagnostics)
             {
                 var position = diagnostic.Location.SourceSpan.Start;
-                if (!ShouldFix(root, text, position, out var startLine, out var firstMiddleLine, out var secondMiddleLine, out var endLine))
+                if (
+                    !ShouldFix(
+                        root,
+                        text,
+                        position,
+                        out var startLine,
+                        out var firstMiddleLine,
+                        out var secondMiddleLine,
+                        out var endLine
+                    )
+                )
                     continue;
 
                 var startPos = startLine.Start;
@@ -428,11 +621,25 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
                         continue;
 
                     case TakeBottomEquivalenceKey:
-                        AddBottomEdits(text, edits, startPos, firstMiddlePos, secondMiddlePos, endPos);
+                        AddBottomEdits(
+                            text,
+                            edits,
+                            startPos,
+                            firstMiddlePos,
+                            secondMiddlePos,
+                            endPos
+                        );
                         continue;
 
                     case TakeBothEquivalenceKey:
-                        AddBothEdits(text, edits, startPos, firstMiddlePos, secondMiddlePos, endPos);
+                        AddBothEdits(
+                            text,
+                            edits,
+                            startPos,
+                            firstMiddlePos,
+                            secondMiddlePos,
+                            endPos
+                        );
                         continue;
 
                     default:
@@ -446,8 +653,16 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             return finalDoc;
         }
 
-        public override FixAllProvider GetFixAllProvider()
-            => FixAllProvider.Create(async (context, document, diagnostics) =>
-                await this.FixAllAsync(document, diagnostics, context.CodeActionEquivalenceKey, context.CancellationToken).ConfigureAwait(false));
+        public override FixAllProvider GetFixAllProvider() =>
+            FixAllProvider.Create(
+                async (context, document, diagnostics) =>
+                    await this.FixAllAsync(
+                            document,
+                            diagnostics,
+                            context.CodeActionEquivalenceKey,
+                            context.CancellationToken
+                        )
+                        .ConfigureAwait(false)
+            );
     }
 }

@@ -27,18 +27,19 @@ namespace Microsoft.CodeAnalysis.Emit
             Type = type;
         }
 
-        public bool IsUnused
-            => Type is null;
+        public bool IsUnused => Type is null;
 
-        public bool Equals(EncHoistedLocalInfo other)
-            => SlotInfo.Equals(other.SlotInfo) &&
-               Cci.SymbolEquivalentEqualityComparer.Instance.Equals(Type, other.Type);
+        public bool Equals(EncHoistedLocalInfo other) =>
+            SlotInfo.Equals(other.SlotInfo)
+            && Cci.SymbolEquivalentEqualityComparer.Instance.Equals(Type, other.Type);
 
-        public override bool Equals(object? obj)
-            => obj is EncHoistedLocalInfo info && Equals(info);
+        public override bool Equals(object? obj) => obj is EncHoistedLocalInfo info && Equals(info);
 
-        public override int GetHashCode()
-            => Hash.Combine(Cci.SymbolEquivalentEqualityComparer.Instance.GetHashCode(Type), SlotInfo.GetHashCode());
+        public override int GetHashCode() =>
+            Hash.Combine(
+                Cci.SymbolEquivalentEqualityComparer.Instance.GetHashCode(Type),
+                SlotInfo.GetHashCode()
+            );
 
         private string GetDebuggerDisplay()
         {
@@ -47,10 +48,12 @@ namespace Microsoft.CodeAnalysis.Emit
                 return "[invalid]";
             }
 
-            return string.Format("[Id={0}, SynthesizedKind={1}, Type={2}]",
+            return string.Format(
+                "[Id={0}, SynthesizedKind={1}, Type={2}]",
                 SlotInfo.Id,
                 SlotInfo.SynthesizedKind,
-                Type);
+                Type
+            );
         }
     }
 }

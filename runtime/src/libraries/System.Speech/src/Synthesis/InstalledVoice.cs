@@ -26,21 +26,12 @@ namespace System.Speech.Synthesis
         #region public Properties
         public VoiceInfo VoiceInfo
         {
-            get
-            {
-                return _voice;
-            }
+            get { return _voice; }
         }
         public bool Enabled
         {
-            get
-            {
-                return _enabled;
-            }
-            set
-            {
-                SetEnabledFlag(value, true);
-            }
+            get { return _enabled; }
+            set { SetEnabledFlag(value, true); }
         }
 
         #endregion Events
@@ -54,8 +45,12 @@ namespace System.Speech.Synthesis
                 return false;
             }
 
-            return VoiceInfo.Name == ti2.VoiceInfo.Name && VoiceInfo.Age == ti2.VoiceInfo.Age && VoiceInfo.Gender == ti2.VoiceInfo.Gender && VoiceInfo.Culture.Equals(ti2.VoiceInfo.Culture);
+            return VoiceInfo.Name == ti2.VoiceInfo.Name
+                && VoiceInfo.Age == ti2.VoiceInfo.Age
+                && VoiceInfo.Gender == ti2.VoiceInfo.Gender
+                && VoiceInfo.Culture.Equals(ti2.VoiceInfo.Culture);
         }
+
         public override int GetHashCode()
         {
             return VoiceInfo.Name.GetHashCode();

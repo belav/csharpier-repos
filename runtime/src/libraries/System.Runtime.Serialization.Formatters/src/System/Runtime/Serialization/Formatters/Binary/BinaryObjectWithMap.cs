@@ -21,7 +21,13 @@ namespace System.Runtime.Serialization.Formatters.Binary
             _binaryHeaderEnum = binaryHeaderEnum;
         }
 
-        internal void Set(int objectId, string name, int numMembers, string[] memberNames, int assemId)
+        internal void Set(
+            int objectId,
+            string name,
+            int numMembers,
+            string[] memberNames,
+            int assemId
+        )
         {
             _objectId = objectId;
             _name = name;
@@ -29,9 +35,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
             _memberNames = memberNames;
             _assemId = assemId;
 
-            _binaryHeaderEnum = assemId > 0 ?
-                BinaryHeaderEnum.ObjectWithMapAssemId :
-                BinaryHeaderEnum.ObjectWithMap;
+            _binaryHeaderEnum =
+                assemId > 0
+                    ? BinaryHeaderEnum.ObjectWithMapAssemId
+                    : BinaryHeaderEnum.ObjectWithMap;
         }
 
         public void Write(BinaryFormatterWriter output)

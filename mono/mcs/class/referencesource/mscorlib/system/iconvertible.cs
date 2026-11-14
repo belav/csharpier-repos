@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System {
-
+namespace System
+{
     using System.Diagnostics.Contracts;
     using System.Threading;
 
@@ -46,7 +46,7 @@ namespace System {
         // given type. If a particular conversion is not supported, the
         // implementation must throw an InvalidCastException. If the value of the
         // underlying object is not within the range of the target type, the
-        // implementation must throw an OverflowException.  The 
+        // implementation must throw an OverflowException.  The
         // IFormatProvider will be used to get a NumberFormatInfo or similar
         // appropriate service object, and may safely be null.
 
@@ -165,6 +165,4 @@ namespace System {
         #endregion
     }
 #endif // CONTRACTS_FULL
-
 }
-

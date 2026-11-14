@@ -11,13 +11,28 @@ namespace System.Collections.ObjectModel.Tests
     {
         public static IEnumerable<object[]> SerializeDeserialize_Roundtrips_MemberData()
         {
-            yield return new object[] { new ReadOnlyObservableCollection<int>(new ObservableCollection<int>()) };
-            yield return new object[] { new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1 }) };
-            yield return new object[] { new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2 }) };
-            yield return new object[] { new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2, 3 }) };
+            yield return new object[]
+            {
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>()),
+            };
+            yield return new object[]
+            {
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1 }),
+            };
+            yield return new object[]
+            {
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2 }),
+            };
+            yield return new object[]
+            {
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2, 3 }),
+            };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         [MemberData(nameof(SerializeDeserialize_Roundtrips_MemberData))]
         public void SerializeDeserialize_Roundtrips(ReadOnlyObservableCollection<int> c)
         {

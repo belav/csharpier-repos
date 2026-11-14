@@ -69,14 +69,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
         //------------------------------------------------------------------------------
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool CreateProcess
-        (
+        internal static extern bool CreateProcess(
             string? lpApplicationName,
             [In, Out] StringBuilder lpCommandLine,
             IntPtr lpProcessAttributes,
             IntPtr lpThreadAttributes,
-            [In, MarshalAs(UnmanagedType.Bool)]
-            bool bInheritHandles,
+            [In, MarshalAs(UnmanagedType.Bool)] bool bInheritHandles,
             uint dwCreationFlags,
             IntPtr lpEnvironment,
             string lpCurrentDirectory,

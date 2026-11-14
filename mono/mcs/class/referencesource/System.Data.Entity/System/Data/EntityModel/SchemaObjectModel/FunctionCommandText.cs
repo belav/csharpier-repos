@@ -25,9 +25,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="parentElement">Reference to the schema element.</param>
         public FunctionCommandText(Function parentElement)
-            : base(parentElement)
-        {
-        }
+            : base(parentElement) { }
 
         public string CommandText
         {
@@ -46,8 +44,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (String.IsNullOrEmpty(_commandText))
             {
-                AddError(ErrorCode.EmptyCommandText, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.EmptyCommandText);
+                AddError(
+                    ErrorCode.EmptyCommandText,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.EmptyCommandText
+                );
             }
         }
     }

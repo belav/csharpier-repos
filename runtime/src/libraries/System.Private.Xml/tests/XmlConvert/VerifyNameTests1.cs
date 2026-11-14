@@ -10,36 +10,276 @@ namespace System.Xml.XmlConvertTests
     {
         public override void AddChildren()
         {
-            AddChild(new CVariation(v1) { Attribute = new Variation("VerifyWhitespace.First character in name 4e") { Param = 7 } });
-            AddChild(new CVariation(v1) { Attribute = new Variation("VerifyName.First character in name 4e") { Param = 2 } });
-            AddChild(new CVariation(v1) { Attribute = new Variation("VerifyNCName.First character in name 4e") { Param = 3 } });
-            AddChild(new CVariation(v1) { Attribute = new Variation("VerifyNMTOKEN.First character in name 4e") { Param = 1 } });
-            AddChild(new CVariation(v1) { Attribute = new Variation("VerifyXmlChars.First character in name 4e") { Param = 5 } });
-            AddChild(new CVariation(v1) { Attribute = new Variation("VerifyPublicId.First character in name 4e") { Param = 6 } });
-            AddChild(new CVariation(v2) { Attribute = new Variation("VerifyXmlChars.Second+ character in name") { Param = 5 } });
-            AddChild(new CVariation(v2) { Attribute = new Variation("VerifyName.Second+ character in name") { Param = 2 } });
-            AddChild(new CVariation(v2) { Attribute = new Variation("VerifyNCName.Second+ character in name") { Param = 3 } });
-            AddChild(new CVariation(v2) { Attribute = new Variation("VerifyNMTOKEN.Second+ character in name") { Param = 1 } });
-            AddChild(new CVariation(v2) { Attribute = new Variation("VerifyPublicId.Second+ character in name") { Param = 6 } });
-            AddChild(new CVariation(v2) { Attribute = new Variation("VerifyWhitespace.Second+ character in name") { Param = 7 } });
-            AddChild(new CVariation(v3) { Attribute = new Variation("VerifyPublicId.Last character in name 4e") { Param = 6 } });
-            AddChild(new CVariation(v3) { Attribute = new Variation("VerifyWhitespace.Last character in name 4e") { Param = 7 } });
-            AddChild(new CVariation(v3) { Attribute = new Variation("VerifyName.Last character in name 4e") { Param = 2 } });
-            AddChild(new CVariation(v3) { Attribute = new Variation("VerifyNCName.Last character in name 4e") { Param = 3 } });
-            AddChild(new CVariation(v3) { Attribute = new Variation("VerifyXmlChars.Last character in name 4e") { Param = 5 } });
-            AddChild(new CVariation(v3) { Attribute = new Variation("VerifyNMTOKEN.Last character in name 4e") { Param = 1 } });
-            AddChild(new CVariation(v4) { Attribute = new Variation("VerifyPublicId.Name with two colons") { Params = new object[] { 6, false } } });
-            AddChild(new CVariation(v4) { Attribute = new Variation("VerifyNMTOKEN.Name with two colons") { Params = new object[] { 1, false } } });
-            AddChild(new CVariation(v4) { Attribute = new Variation("VerifyWhitespace.Name with two colons") { Params = new object[] { 7, true } } });
-            AddChild(new CVariation(v4) { Attribute = new Variation("VerifyName.Name with two colons") { Params = new object[] { 2, false } } });
-            AddChild(new CVariation(v4) { Attribute = new Variation("VerifyNCName.Name with two colons") { Params = new object[] { 3, true } } });
-            AddChild(new CVariation(v4) { Attribute = new Variation("VerifyXmlChars.Name with two colons") { Params = new object[] { 5, false } } });
-            AddChild(new CVariation(v5) { Attribute = new Variation("VerifyPublicId.multiple non letter characters with :") { Params = new object[] { 6, false } } });
-            AddChild(new CVariation(v5) { Attribute = new Variation("VerifyWhitespace.multiple non letter characters with :") { Params = new object[] { 7, true } } });
-            AddChild(new CVariation(v5) { Attribute = new Variation("VerifyName.multiple non letter characters with :") { Params = new object[] { 2, false } } });
-            AddChild(new CVariation(v5) { Attribute = new Variation("VerifyNCName.multiple non letter characters with :") { Params = new object[] { 3, true } } });
-            AddChild(new CVariation(v5) { Attribute = new Variation("VerifyXmlChars.multiple non letter characters with :") { Params = new object[] { 5, false } } });
-            AddChild(new CVariation(v5) { Attribute = new Variation("VerifyNMTOKEN.multiple non letter characters with :") { Params = new object[] { 1, false } } });
+            AddChild(
+                new CVariation(v1)
+                {
+                    Attribute = new Variation("VerifyWhitespace.First character in name 4e")
+                    {
+                        Param = 7,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v1)
+                {
+                    Attribute = new Variation("VerifyName.First character in name 4e")
+                    {
+                        Param = 2,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v1)
+                {
+                    Attribute = new Variation("VerifyNCName.First character in name 4e")
+                    {
+                        Param = 3,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v1)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.First character in name 4e")
+                    {
+                        Param = 1,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v1)
+                {
+                    Attribute = new Variation("VerifyXmlChars.First character in name 4e")
+                    {
+                        Param = 5,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v1)
+                {
+                    Attribute = new Variation("VerifyPublicId.First character in name 4e")
+                    {
+                        Param = 6,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v2)
+                {
+                    Attribute = new Variation("VerifyXmlChars.Second+ character in name")
+                    {
+                        Param = 5,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v2)
+                {
+                    Attribute = new Variation("VerifyName.Second+ character in name") { Param = 2 },
+                }
+            );
+            AddChild(
+                new CVariation(v2)
+                {
+                    Attribute = new Variation("VerifyNCName.Second+ character in name")
+                    {
+                        Param = 3,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v2)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.Second+ character in name")
+                    {
+                        Param = 1,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v2)
+                {
+                    Attribute = new Variation("VerifyPublicId.Second+ character in name")
+                    {
+                        Param = 6,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v2)
+                {
+                    Attribute = new Variation("VerifyWhitespace.Second+ character in name")
+                    {
+                        Param = 7,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v3)
+                {
+                    Attribute = new Variation("VerifyPublicId.Last character in name 4e")
+                    {
+                        Param = 6,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v3)
+                {
+                    Attribute = new Variation("VerifyWhitespace.Last character in name 4e")
+                    {
+                        Param = 7,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v3)
+                {
+                    Attribute = new Variation("VerifyName.Last character in name 4e") { Param = 2 },
+                }
+            );
+            AddChild(
+                new CVariation(v3)
+                {
+                    Attribute = new Variation("VerifyNCName.Last character in name 4e")
+                    {
+                        Param = 3,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v3)
+                {
+                    Attribute = new Variation("VerifyXmlChars.Last character in name 4e")
+                    {
+                        Param = 5,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v3)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.Last character in name 4e")
+                    {
+                        Param = 1,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v4)
+                {
+                    Attribute = new Variation("VerifyPublicId.Name with two colons")
+                    {
+                        Params = new object[] { 6, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v4)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.Name with two colons")
+                    {
+                        Params = new object[] { 1, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v4)
+                {
+                    Attribute = new Variation("VerifyWhitespace.Name with two colons")
+                    {
+                        Params = new object[] { 7, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v4)
+                {
+                    Attribute = new Variation("VerifyName.Name with two colons")
+                    {
+                        Params = new object[] { 2, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v4)
+                {
+                    Attribute = new Variation("VerifyNCName.Name with two colons")
+                    {
+                        Params = new object[] { 3, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v4)
+                {
+                    Attribute = new Variation("VerifyXmlChars.Name with two colons")
+                    {
+                        Params = new object[] { 5, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v5)
+                {
+                    Attribute = new Variation(
+                        "VerifyPublicId.multiple non letter characters with :"
+                    )
+                    {
+                        Params = new object[] { 6, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v5)
+                {
+                    Attribute = new Variation(
+                        "VerifyWhitespace.multiple non letter characters with :"
+                    )
+                    {
+                        Params = new object[] { 7, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v5)
+                {
+                    Attribute = new Variation("VerifyName.multiple non letter characters with :")
+                    {
+                        Params = new object[] { 2, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v5)
+                {
+                    Attribute = new Variation("VerifyNCName.multiple non letter characters with :")
+                    {
+                        Params = new object[] { 3, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v5)
+                {
+                    Attribute = new Variation(
+                        "VerifyXmlChars.multiple non letter characters with :"
+                    )
+                    {
+                        Params = new object[] { 5, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v5)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.multiple non letter characters with :")
+                    {
+                        Params = new object[] { 1, false },
+                    },
+                }
+            );
         }
 
         private int v1()
@@ -113,7 +353,10 @@ namespace System.Xml.XmlConvertTests
                 }
                 else
                 {
-                    CError.Compare(bException, string.Format("Exception expected for char: 0x{0:x}", (int)c));
+                    CError.Compare(
+                        bException,
+                        string.Format("Exception expected for char: 0x{0:x}", (int)c)
+                    );
                 }
             }
             return TEST_PASS;
@@ -191,7 +434,10 @@ namespace System.Xml.XmlConvertTests
                 }
                 else
                 {
-                    CError.Compare(bException, string.Format("Exception expected for char: 0x{0:x}", (int)c));
+                    CError.Compare(
+                        bException,
+                        string.Format("Exception expected for char: 0x{0:x}", (int)c)
+                    );
                 }
             }
             return TEST_PASS;
@@ -269,7 +515,10 @@ namespace System.Xml.XmlConvertTests
                 }
                 else
                 {
-                    CError.Compare(bException, string.Format("Exception expected for char: 0x{0:x}", (int)c));
+                    CError.Compare(
+                        bException,
+                        string.Format("Exception expected for char: 0x{0:x}", (int)c)
+                    );
                 }
             }
             return TEST_PASS;

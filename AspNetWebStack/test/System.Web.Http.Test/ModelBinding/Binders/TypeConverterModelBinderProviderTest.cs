@@ -60,12 +60,12 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             return new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, modelType),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    modelType
+                ),
                 ModelName = "theModelName",
-                ValueProvider = new SimpleHttpValueProvider
-                {
-                    { "theModelName", "someValue" }
-                }
+                ValueProvider = new SimpleHttpValueProvider { { "theModelName", "someValue" } },
             };
         }
     }

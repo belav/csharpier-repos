@@ -10,16 +10,17 @@
 namespace System.Data.Entity.Design
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum LanguageOption
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GenerateCSharpCode = 0,
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GenerateVBCode = 1,
     }

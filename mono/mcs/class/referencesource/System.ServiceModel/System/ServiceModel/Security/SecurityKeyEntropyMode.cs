@@ -10,24 +10,31 @@ namespace System.ServiceModel.Security
     {
         ClientEntropy,
         ServerEntropy,
-        CombinedEntropy
+        CombinedEntropy,
     }
 
     sealed class SecurityKeyEntropyModeHelper
     {
         internal static bool IsDefined(SecurityKeyEntropyMode value)
         {
-            return (value == SecurityKeyEntropyMode.ClientEntropy
+            return (
+                value == SecurityKeyEntropyMode.ClientEntropy
                 || value == SecurityKeyEntropyMode.ServerEntropy
-                || value == SecurityKeyEntropyMode.CombinedEntropy);
+                || value == SecurityKeyEntropyMode.CombinedEntropy
+            );
         }
 
         internal static void Validate(SecurityKeyEntropyMode value)
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(SecurityKeyEntropyMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(SecurityKeyEntropyMode)
+                    )
+                );
             }
         }
     }

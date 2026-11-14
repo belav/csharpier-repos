@@ -74,12 +74,14 @@ namespace VirtFunc
             CDerived20 c20 = new CDerived20();
             myHT.Add(c20, 20);
 
-	    foreach (var item in myHT) {
-	      if (item.Key.GetHashCode() != item.Value) {
-		Console.WriteLine("FAILED at " + item.Value);
-		return 1;
-	      }
-	    }
+            foreach (var item in myHT)
+            {
+                if (item.Key.GetHashCode() != item.Value)
+                {
+                    Console.WriteLine("FAILED at " + item.Value);
+                    return 1;
+                }
+            }
 
             Console.WriteLine("PASSED");
             return 100;

@@ -28,7 +28,12 @@ namespace System.Collections.Immutable
         /// </remarks>
         [DebuggerDisplay("Count = {Count}")]
         [DebuggerTypeProxy(typeof(ImmutableListBuilderDebuggerProxy<>))]
-        public sealed class Builder : IList<T>, IList, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyList<T>
+        public sealed class Builder
+            : IList<T>,
+                IList,
+                IOrderedCollection<T>,
+                IImmutableListQueries<T>,
+                IReadOnlyList<T>
         {
             /// <summary>
             /// The binary tree used to store the contents of the list.  Contents are typically not entirely frozen.
@@ -96,11 +101,7 @@ namespace System.Collections.Immutable
             /// </summary>
             internal Node Root
             {
-                get
-                {
-                    return _root;
-                }
-
+                get { return _root; }
                 private set
                 {
                     // We *always* increment the version number because some mutations
@@ -127,14 +128,8 @@ namespace System.Collections.Immutable
             /// <returns>The value at the specified index.</returns>
             public T this[int index]
             {
-                get
-                {
-                    return this.Root.ItemRef(index);
-                }
-                set
-                {
-                    this.Root = this.Root.ReplaceAt(index, value);
-                }
+                get { return this.Root.ItemRef(index); }
+                set { this.Root = this.Root.ReplaceAt(index, value); }
             }
 
             /// <summary>
@@ -142,10 +137,7 @@ namespace System.Collections.Immutable
             /// </summary>
             T IOrderedCollection<T>.this[int index]
             {
-                get
-                {
-                    return this[index];
-                }
+                get { return this[index]; }
             }
 
             /// <summary>
@@ -317,7 +309,8 @@ namespace System.Collections.Immutable
             /// </param>
             /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
             /// <param name="count">The number of elements to copy.</param>
-            public void CopyTo(int index, T[] array, int arrayIndex, int count) => _root.CopyTo(index, array, arrayIndex, count);
+            public void CopyTo(int index, T[] array, int arrayIndex, int count) =>
+                _root.CopyTo(index, array, arrayIndex, count);
 
             /// <summary>
             /// Creates a shallow copy of a range of elements in the source ImmutableList&lt;T&gt;.
@@ -432,7 +425,8 @@ namespace System.Collections.Immutable
             /// The zero-based index of the first occurrence of an element that matches the
             /// conditions defined by match, if found; otherwise, -1.
             /// </returns>
-            public int FindIndex(int startIndex, Predicate<T> match) => _root.FindIndex(startIndex, match);
+            public int FindIndex(int startIndex, Predicate<T> match) =>
+                _root.FindIndex(startIndex, match);
 
             /// <summary>
             /// Searches for an element that matches the conditions defined by the specified
@@ -447,7 +441,8 @@ namespace System.Collections.Immutable
             /// The zero-based index of the first occurrence of an element that matches the
             /// conditions defined by match, if found; otherwise, -1.
             /// </returns>
-            public int FindIndex(int startIndex, int count, Predicate<T> match) => _root.FindIndex(startIndex, count, match);
+            public int FindIndex(int startIndex, int count, Predicate<T> match) =>
+                _root.FindIndex(startIndex, count, match);
 
             /// <summary>
             /// Searches for an element that matches the conditions defined by the specified
@@ -491,7 +486,8 @@ namespace System.Collections.Immutable
             /// The zero-based index of the last occurrence of an element that matches the
             /// conditions defined by match, if found; otherwise, -1.
             /// </returns>
-            public int FindLastIndex(int startIndex, Predicate<T> match) => _root.FindLastIndex(startIndex, match);
+            public int FindLastIndex(int startIndex, Predicate<T> match) =>
+                _root.FindLastIndex(startIndex, match);
 
             /// <summary>
             /// Searches for an element that matches the conditions defined by the specified
@@ -509,7 +505,8 @@ namespace System.Collections.Immutable
             /// The zero-based index of the last occurrence of an element that matches the
             /// conditions defined by match, if found; otherwise, -1.
             /// </returns>
-            public int FindLastIndex(int startIndex, int count, Predicate<T> match) => _root.FindLastIndex(startIndex, count, match);
+            public int FindLastIndex(int startIndex, int count, Predicate<T> match) =>
+                _root.FindLastIndex(startIndex, count, match);
 
             /// <summary>
             /// Searches for the specified object and returns the zero-based index of the
@@ -581,8 +578,12 @@ namespace System.Collections.Immutable
             /// elements in the ImmutableList&lt;T&gt; that starts at index and
             /// contains count number of elements, if found; otherwise, -1.
             /// </returns>
-            public int IndexOf(T item, int index, int count, IEqualityComparer<T>? equalityComparer) =>
-                _root.IndexOf(item, index, count, equalityComparer);
+            public int IndexOf(
+                T item,
+                int index,
+                int count,
+                IEqualityComparer<T>? equalityComparer
+            ) => _root.IndexOf(item, index, count, equalityComparer);
 
             /// <summary>
             /// Searches for the specified object and returns the zero-based index of the
@@ -606,7 +607,12 @@ namespace System.Collections.Immutable
                     return -1;
                 }
 
-                return _root.LastIndexOf(item, this.Count - 1, this.Count, EqualityComparer<T>.Default);
+                return _root.LastIndexOf(
+                    item,
+                    this.Count - 1,
+                    this.Count,
+                    EqualityComparer<T>.Default
+                );
             }
 
             /// <summary>
@@ -632,7 +638,12 @@ namespace System.Collections.Immutable
                     return -1;
                 }
 
-                return _root.LastIndexOf(item, startIndex, startIndex + 1, EqualityComparer<T>.Default);
+                return _root.LastIndexOf(
+                    item,
+                    startIndex,
+                    startIndex + 1,
+                    EqualityComparer<T>.Default
+                );
             }
 
             /// <summary>
@@ -673,8 +684,12 @@ namespace System.Collections.Immutable
             /// in the ImmutableList&lt;T&gt; that contains count number of elements
             /// and ends at index, if found; otherwise, -1.
             /// </returns>
-            public int LastIndexOf(T item, int startIndex, int count, IEqualityComparer<T>? equalityComparer) =>
-                _root.LastIndexOf(item, startIndex, count, equalityComparer);
+            public int LastIndexOf(
+                T item,
+                int startIndex,
+                int count,
+                IEqualityComparer<T>? equalityComparer
+            ) => _root.LastIndexOf(item, startIndex, count, equalityComparer);
 
             /// <summary>
             /// Determines whether every element in the ImmutableList&lt;T&gt;
@@ -1176,7 +1191,11 @@ namespace System.Collections.Immutable
                 {
                     if (_syncRoot == null)
                     {
-                        System.Threading.Interlocked.CompareExchange<object?>(ref _syncRoot, new object(), null);
+                        System.Threading.Interlocked.CompareExchange<object?>(
+                            ref _syncRoot,
+                            new object(),
+                            null
+                        );
                     }
 
                     return _syncRoot;

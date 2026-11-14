@@ -4,12 +4,12 @@
 
 namespace Microsoft.Build.Tasks.Xaml
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Xaml;
-    using System.Runtime;
     using System.Reflection;
-    using System;
+    using System.Runtime;
+    using System.Xaml;
     using System.Xaml.Schema;
     using Microsoft.Build.Utilities;
     using XamlBuildTask;
@@ -29,7 +29,12 @@ namespace Microsoft.Build.Tasks.Xaml
             this.rootNamespace = rootNamespace;
         }
 
-        public bool ValidateXaml(XamlReader xamlReader, bool failOnFirstError, string assemblyName, out IList<LogData> validationErrors)
+        public bool ValidateXaml(
+            XamlReader xamlReader,
+            bool failOnFirstError,
+            string assemblyName,
+            out IList<LogData> validationErrors
+        )
         {
             if (xamlReader == null)
             {
@@ -39,10 +44,17 @@ namespace Microsoft.Build.Tasks.Xaml
 
             // We loop through the provided XAML using a XamlValidatingReader to ensure that:
             //  1. XAML is valid.
-            //  2. All types referenced in XAML are validate-able. At this point, any types defined in the local 
+            //  2. All types referenced in XAML are validate-able. At this point, any types defined in the local
             //     assembly should be referenced, so this should be possible.
-            XamlValidatingReader reader = new XamlValidatingReader(xamlReader, this.localAssembly, rootNamespace, assemblyName);
-            reader.OnValidationError += new EventHandler<ValidationEventArgs>(reader_OnValidationError);
+            XamlValidatingReader reader = new XamlValidatingReader(
+                xamlReader,
+                this.localAssembly,
+                rootNamespace,
+                assemblyName
+            );
+            reader.OnValidationError += new EventHandler<ValidationEventArgs>(
+                reader_OnValidationError
+            );
             while (reader.Read())
             {
                 if (this.eventArgs != null && failOnFirstError)
@@ -67,13 +79,15 @@ namespace Microsoft.Build.Tasks.Xaml
                 this.eventArgs = new List<LogData>();
             }
 
-            this.eventArgs.Add(new LogData()
-            {
-                FileName = this.xamlFileName,
-                LineNumber = e.LineNumber,
-                LinePosition = e.LinePosition,
-                Message = e.Message
-            });
+            this.eventArgs.Add(
+                new LogData()
+                {
+                    FileName = this.xamlFileName,
+                    LineNumber = e.LineNumber,
+                    LinePosition = e.LinePosition,
+                    Message = e.Message,
+                }
+            );
         }
     }
 }

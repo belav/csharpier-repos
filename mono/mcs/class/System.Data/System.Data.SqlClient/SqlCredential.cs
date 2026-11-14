@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,44 +33,47 @@ using System.Data;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace System.Data.SqlClient {
-	/// <summary>
-	/// Describes an error from a SQL database.
-	/// </summary>
-	[Serializable]
-	public sealed class SqlCredential
-	{
-		#region Fields
+namespace System.Data.SqlClient
+{
+    /// <summary>
+    /// Describes an error from a SQL database.
+    /// </summary>
+    [Serializable]
+    public sealed class SqlCredential
+    {
+        #region Fields
 
-		string uid = "";
-		SecureString pwd = null;
+        string uid = "";
+        SecureString pwd = null;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public SqlCredential (string userId, SecureString password)
-		{
-			if (userId == null)
-				throw new ArgumentNullException("userId");
-			if (password == null)
-				throw new ArgumentNullException("password");
-			this.uid = userId;
-			this.pwd = password;
-		}
+        public SqlCredential(string userId, SecureString password)
+        {
+            if (userId == null)
+                throw new ArgumentNullException("userId");
+            if (password == null)
+                throw new ArgumentNullException("password");
+            this.uid = userId;
+            this.pwd = password;
+        }
 
-		#endregion // Constructors
-		
-		#region Properties
+        #endregion // Constructors
 
-		public string UserId {
-			get { return uid; }
-		}
+        #region Properties
 
-		public SecureString Password {
-			get { return pwd; }
-		}
+        public string UserId
+        {
+            get { return uid; }
+        }
 
-		#endregion
-	}
+        public SecureString Password
+        {
+            get { return pwd; }
+        }
+
+        #endregion
+    }
 }

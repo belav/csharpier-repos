@@ -22,7 +22,11 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 {
     internal abstract partial class AbstractConvertIfToSwitchCodeRefactoringProvider<
-        TIfStatementSyntax, TExpressionSyntax, TIsExpressionSyntax, TPatternSyntax> : SyntaxEditorBasedCodeRefactoringProvider
+        TIfStatementSyntax,
+        TExpressionSyntax,
+        TIsExpressionSyntax,
+        TPatternSyntax
+    > : SyntaxEditorBasedCodeRefactoringProvider
     {
         private const string SwitchStatementEquivalenceKey = "SwitchStatement";
         private const string SwitchExpressionEquivalenceKey = "SwitchExpression";
@@ -30,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         public abstract string GetTitle(bool forSwitchExpression);
         public abstract Analyzer CreateAnalyzer(ISyntaxFacts syntaxFacts, ParseOptions options);
 
-        protected sealed override ImmutableArray<FixAllScope> SupportedFixAllScopes => AllFixAllScopes;
+        protected sealed override ImmutableArray<FixAllScope> SupportedFixAllScopes =>
+            AllFixAllScopes;
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -40,10 +45,23 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 return;
             }
 
-            var ifStatement = await context.TryGetRelevantNodeAsync<TIfStatementSyntax>().ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var ifStatement = await context
+                .TryGetRelevantNodeAsync<TIfStatementSyntax>()
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            if (!ShouldOfferRefactoring(ifStatement, semanticModel, syntaxFactsService, out var analyzer, out var sections, out var target))
+            if (
+                !ShouldOfferRefactoring(
+                    ifStatement,
+                    semanticModel,
+                    syntaxFactsService,
+                    out var analyzer,
+                    out var sections,
+                    out var target
+                )
+            )
             {
                 return;
             }
@@ -51,19 +69,43 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             context.RegisterRefactoring(
                 CodeAction.Create(
                     GetTitle(forSwitchExpression: false),
-                    c => UpdateDocumentAsync(document, target, ifStatement, sections, analyzer.Features, convertToSwitchExpression: false, c),
-                    SwitchStatementEquivalenceKey),
-                ifStatement.Span);
+                    c =>
+                        UpdateDocumentAsync(
+                            document,
+                            target,
+                            ifStatement,
+                            sections,
+                            analyzer.Features,
+                            convertToSwitchExpression: false,
+                            c
+                        ),
+                    SwitchStatementEquivalenceKey
+                ),
+                ifStatement.Span
+            );
 
-            if (analyzer.Supports(Feature.SwitchExpression) &&
-                CanConvertToSwitchExpression(analyzer.Supports(Feature.OrPattern), sections))
+            if (
+                analyzer.Supports(Feature.SwitchExpression)
+                && CanConvertToSwitchExpression(analyzer.Supports(Feature.OrPattern), sections)
+            )
             {
                 context.RegisterRefactoring(
                     CodeAction.Create(
                         GetTitle(forSwitchExpression: true),
-                        c => UpdateDocumentAsync(document, target, ifStatement, sections, analyzer.Features, convertToSwitchExpression: true, c),
-                        SwitchExpressionEquivalenceKey),
-                    ifStatement.Span);
+                        c =>
+                            UpdateDocumentAsync(
+                                document,
+                                target,
+                                ifStatement,
+                                sections,
+                                analyzer.Features,
+                                convertToSwitchExpression: true,
+                                c
+                            ),
+                        SwitchExpressionEquivalenceKey
+                    ),
+                    ifStatement.Span
+                );
             }
         }
 
@@ -73,13 +115,17 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             ISyntaxFactsService syntaxFactsService,
             [NotNullWhen(true)] out Analyzer? analyzer,
             [NotNullWhen(true)] out ImmutableArray<AnalyzedSwitchSection> sections,
-            [NotNullWhen(true)] out SyntaxNode? target)
+            [NotNullWhen(true)] out SyntaxNode? target
+        )
         {
             analyzer = null;
             sections = default;
             target = null;
 
-            if (ifStatement == null || ifStatement.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
+            if (
+                ifStatement == null
+                || ifStatement.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
+            )
             {
                 return false;
             }
@@ -111,7 +157,9 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             // if-chains/checks and easily converting them over to a switch.  So not offering the
             // feature on simple if-statements seems like an acceptable compromise to take to ensure
             // the overall user experience isn't degraded.
-            var labelCount = sections.Sum(section => section.Labels.IsDefault ? 1 : section.Labels.Length);
+            var labelCount = sections.Sum(section =>
+                section.Labels.IsDefault ? 1 : section.Labels.Length
+            );
             if (labelCount < 2)
             {
                 return false;
@@ -121,17 +169,27 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         }
 
         private static bool CanConvertToSwitchExpression(
-            bool supportsOrPattern, ImmutableArray<AnalyzedSwitchSection> sections)
+            bool supportsOrPattern,
+            ImmutableArray<AnalyzedSwitchSection> sections
+        )
         {
             // There must be a default case for an exhaustive switch expression
             if (!sections.Any(static section => section.Labels.IsDefault))
                 return false;
 
             // There must be at least one return statement
-            if (!sections.Any(static section => GetSwitchArmKind(section.Body) == OperationKind.Return))
+            if (
+                !sections.Any(static section =>
+                    GetSwitchArmKind(section.Body) == OperationKind.Return
+                )
+            )
                 return false;
 
-            if (!sections.All(section => CanConvertSectionForSwitchExpression(supportsOrPattern, section)))
+            if (
+                !sections.All(section =>
+                    CanConvertSectionForSwitchExpression(supportsOrPattern, section)
+                )
+            )
                 return false;
 
             return true;
@@ -151,7 +209,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 return default;
             }
 
-            static bool CanConvertSectionForSwitchExpression(bool supportsOrPattern, AnalyzedSwitchSection section)
+            static bool CanConvertSectionForSwitchExpression(
+                bool supportsOrPattern,
+                AnalyzedSwitchSection section
+            )
             {
                 // All arms must be convertible to a switch arm
                 if (GetSwitchArmKind(section.Body) == default)
@@ -173,7 +234,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 
                 // If there are two or more labels, we can support this as long as the language supports 'or' patterns
                 // and as long as no label has any guards.
-                return supportsOrPattern && section.Labels.All(label => label.Guards.IsDefaultOrEmpty);
+                return supportsOrPattern
+                    && section.Labels.All(label => label.Guards.IsDefaultOrEmpty);
             }
         }
 
@@ -183,7 +245,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             SyntaxEditor editor,
             CodeActionOptionsProvider optionsProvider,
             string? equivalenceKey,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var convertToSwitchExpression = equivalenceKey == SwitchExpressionEquivalenceKey;
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
@@ -193,7 +256,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             // to ensure we strongly hold onto the nodes so that 'TrackNodes'
             // invoked below, which does tracking based off a ConditionalWeakTable,
             // tracks the nodes for the entire duration of this method.
-            var ifStatements = editor.OriginalRoot.DescendantNodes().OfType<TIfStatementSyntax>().ToArray();
+            var ifStatements = editor
+                .OriginalRoot.DescendantNodes()
+                .OfType<TIfStatementSyntax>()
+                .ToArray();
 
             // We're going to be continually editing this tree. Track all the nodes we
             // care about so we can find them across each edit.
@@ -242,23 +308,49 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                     continue;
 
                 // Get current root, if statement and semantic model.
-                var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document
+                    .GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var ifStatement = root.GetCurrentNodes(originalIfStatement).SingleOrDefault();
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 // Check if the refactoring is applicable for this if statement.
-                if (!ShouldOfferRefactoring(ifStatement, semanticModel, syntaxFactsService, out var analyzer, out var sections, out var target))
+                if (
+                    !ShouldOfferRefactoring(
+                        ifStatement,
+                        semanticModel,
+                        syntaxFactsService,
+                        out var analyzer,
+                        out var sections,
+                        out var target
+                    )
+                )
                     continue;
 
                 // When converting to switch expression, we need to perform an additional check to ensure this conversion is possible.
-                if (convertToSwitchExpression && !CanConvertToSwitchExpression(analyzer.Supports(Feature.OrPattern), sections))
+                if (
+                    convertToSwitchExpression
+                    && !CanConvertToSwitchExpression(analyzer.Supports(Feature.OrPattern), sections)
+                )
                     continue;
 
-                document = await UpdateDocumentAsync(document, target, ifStatement, sections,
-                    analyzer.Features, convertToSwitchExpression, cancellationToken).ConfigureAwait(false);
+                document = await UpdateDocumentAsync(
+                        document,
+                        target,
+                        ifStatement,
+                        sections,
+                        analyzer.Features,
+                        convertToSwitchExpression,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
-            var updatedRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var updatedRoot = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             editor.ReplaceNode(editor.OriginalRoot, updatedRoot);
         }
     }

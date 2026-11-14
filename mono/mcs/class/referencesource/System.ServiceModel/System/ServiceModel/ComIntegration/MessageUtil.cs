@@ -4,17 +4,17 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
+    using System.EnterpriseServices;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Security.Permissions;
-    using System.Security.Principal;    
+    using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
-    using System.Transactions;
-    using System.ServiceModel.Transactions;
     using System.ServiceModel.Diagnostics;
-    using System.EnterpriseServices;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Transactions;
+    using System.Transactions;
 
     static class MessageUtil
     {
@@ -32,7 +32,9 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (context.WindowsIdentity == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.RequiresWindowsSecurity());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            Error.RequiresWindowsSecurity()
+                        );
                     }
 
                     callerIdentity = context.WindowsIdentity;
@@ -56,7 +58,7 @@ namespace System.ServiceModel.ComIntegration
         {
             ServiceConfig serviceConfig = new ServiceConfig();
             serviceConfig.Transaction = TransactionOption.Disabled;
-            ServiceDomain.Enter( serviceConfig );
+            ServiceDomain.Enter(serviceConfig);
             try
             {
                 return TransactionMessageProperty.TryGetTransaction(message);

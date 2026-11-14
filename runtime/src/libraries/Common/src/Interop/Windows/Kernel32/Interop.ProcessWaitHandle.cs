@@ -22,7 +22,8 @@ internal static partial class Interop
                     out SafeWaitHandle waitHandle,
                     0,
                     false,
-                    HandleOptions.DUPLICATE_SAME_ACCESS);
+                    HandleOptions.DUPLICATE_SAME_ACCESS
+                );
 
                 if (!succeeded)
                 {

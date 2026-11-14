@@ -21,7 +21,9 @@ namespace System.Activities
             @"^(?<name>[^;]*)
                (; (\s* Version \s* = \s* (?<version>[^;]*))? )?
                (; (\s* Package \s* = \s* (?<package>.*))? )?
-              $", RegexOptions.IgnorePatternWhitespace);
+              $",
+            RegexOptions.IgnorePatternWhitespace
+        );
         const string versionString = "; Version=";
         const string packageString = "; Package=";
 
@@ -43,38 +45,20 @@ namespace System.Activities
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-            set
-            {
-                this.name = ValidateName(value, "value");
-            }
+            get { return this.name; }
+            set { this.name = ValidateName(value, "value"); }
         }
 
         public Version Version
         {
-            get
-            {
-                return this.version;
-            }
-            set
-            {
-                this.version = value;
-            }
+            get { return this.version; }
+            set { this.version = value; }
         }
 
         public string Package
         {
-            get
-            {
-                return this.package;
-            }
-            set
-            {
-                this.package = ValidatePackage(value, "value");
-            }
+            get { return this.package; }
+            set { this.package = ValidatePackage(value, "value"); }
         }
 
         public static WorkflowIdentity Parse(string identity)
@@ -104,8 +88,10 @@ namespace System.Activities
 
         public bool Equals(WorkflowIdentity other)
         {
-            return !object.ReferenceEquals(other, null) && this.name == other.name &&
-                this.version == other.version && this.package == other.package;
+            return !object.ReferenceEquals(other, null)
+                && this.name == other.name
+                && this.version == other.version
+                && this.package == other.package;
         }
 
         public override int GetHashCode()
@@ -149,10 +135,7 @@ namespace System.Activities
         [DataMember(EmitDefaultValue = false, Name = "version")]
         internal string SerializedVersion
         {
-            get
-            {
-                return (this.version == null) ? null : this.version.ToString();
-            }
+            get { return (this.version == null) ? null : this.version.ToString(); }
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -191,7 +174,9 @@ namespace System.Activities
         // SerializationException with an InnerException is the pattern that DCS follows when values aren't convertible.
         static void WrapInSerializationException(Exception exception)
         {
-            throw FxTrace.Exception.AsError(new SerializationException(exception.Message, exception));
+            throw FxTrace.Exception.AsError(
+                new SerializationException(exception.Message, exception)
+            );
         }
 
         static string ValidateName(string name, string paramName)
@@ -247,8 +232,8 @@ namespace System.Activities
 
         static bool HasLeadingOrTrailingWhitespace(string value)
         {
-            return value.Length > 0 &&
-                (char.IsWhiteSpace(value[0]) || char.IsWhiteSpace(value[value.Length - 1]));
+            return value.Length > 0
+                && (char.IsWhiteSpace(value[0]) || char.IsWhiteSpace(value[value.Length - 1]));
         }
 
         static string Normalize(string value, string paramName, bool throwOnError = true)
@@ -269,7 +254,9 @@ namespace System.Activities
             {
                 if (throwOnError)
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(ex.Message, paramName, ex));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(ex.Message, paramName, ex)
+                    );
                 }
                 else
                 {
@@ -333,8 +320,14 @@ namespace System.Activities
                 }
 
                 Fx.Assert(!this.name.Contains(";"), "Regex should not have matched semi-colon");
-                Fx.Assert(!HasLeadingOrTrailingWhitespace(this.name), "Whitespace should have been stripped");
-                Fx.Assert(this.package == null || !HasLeadingOrTrailingWhitespace(this.package), "Whitespace should have been stripped");
+                Fx.Assert(
+                    !HasLeadingOrTrailingWhitespace(this.name),
+                    "Whitespace should have been stripped"
+                );
+                Fx.Assert(
+                    this.package == null || !HasLeadingOrTrailingWhitespace(this.package),
+                    "Whitespace should have been stripped"
+                );
 
                 WorkflowIdentity result = new WorkflowIdentity();
                 result.name = this.name;

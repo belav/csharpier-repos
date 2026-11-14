@@ -12,10 +12,15 @@ namespace System.Text.Json.Serialization.Converters
 
         private const int MaximumVersionLength = 43; // 2147483647.2147483647.2147483647.2147483647
 
-        private const int MaximumEscapedVersionLength = JsonConstants.MaxExpansionFactorWhileEscaping * MaximumVersionLength;
+        private const int MaximumEscapedVersionLength =
+            JsonConstants.MaxExpansionFactorWhileEscaping * MaximumVersionLength;
 #endif
 
-        public override Version? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Version? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType is JsonTokenType.Null)
             {
@@ -35,7 +40,13 @@ namespace System.Text.Json.Serialization.Converters
             Debug.Assert(reader.TokenType is JsonTokenType.PropertyName or JsonTokenType.String);
 
 #if NETCOREAPP
-            if (!JsonHelpers.IsInRangeInclusive(reader.ValueLength, MinimumVersionLength, MaximumEscapedVersionLength))
+            if (
+                !JsonHelpers.IsInRangeInclusive(
+                    reader.ValueLength,
+                    MinimumVersionLength,
+                    MaximumEscapedVersionLength
+                )
+            )
             {
                 ThrowHelper.ThrowFormatException(DataType.TimeSpan);
             }
@@ -59,7 +70,13 @@ namespace System.Text.Json.Serialization.Converters
             }
 #else
             string? versionString = reader.GetString();
-            if (!string.IsNullOrEmpty(versionString) && (!char.IsDigit(versionString[0]) || !char.IsDigit(versionString[versionString.Length - 1])))
+            if (
+                !string.IsNullOrEmpty(versionString)
+                && (
+                    !char.IsDigit(versionString[0])
+                    || !char.IsDigit(versionString[versionString.Length - 1])
+                )
+            )
             {
                 // Since leading and trailing whitespaces are forbidden throughout System.Text.Json converters
                 // we need to make sure that our input doesn't have them,
@@ -76,7 +93,11 @@ namespace System.Text.Json.Serialization.Converters
             return null;
         }
 
-        public override void Write(Utf8JsonWriter writer, Version? value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            Version? value,
+            JsonSerializerOptions options
+        )
         {
             if (value is null)
             {
@@ -98,12 +119,21 @@ namespace System.Text.Json.Serialization.Converters
 #endif
         }
 
-        internal override Version ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override Version ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return ReadCore(ref reader);
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, Version value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            Version value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             if (value is null)
             {

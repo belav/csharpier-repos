@@ -18,114 +18,72 @@ namespace System.Security.Cryptography
 
             public static ECCurve brainpoolP160r1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP160r1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP160r1)); }
             }
 
             public static ECCurve brainpoolP160t1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP160t1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP160t1)); }
             }
 
             public static ECCurve brainpoolP192r1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP192r1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP192r1)); }
             }
 
             public static ECCurve brainpoolP192t1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP192t1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP192t1)); }
             }
 
             public static ECCurve brainpoolP224r1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP224r1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP224r1)); }
             }
 
             public static ECCurve brainpoolP224t1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP224t1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP224t1)); }
             }
 
             public static ECCurve brainpoolP256r1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP256r1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP256r1)); }
             }
 
             public static ECCurve brainpoolP256t1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP256t1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP256t1)); }
             }
 
             public static ECCurve brainpoolP320r1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP320r1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP320r1)); }
             }
 
             public static ECCurve brainpoolP320t1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP320t1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP320t1)); }
             }
 
             public static ECCurve brainpoolP384r1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP384r1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP384r1)); }
             }
 
             public static ECCurve brainpoolP384t1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP384t1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP384t1)); }
             }
 
             public static ECCurve brainpoolP512r1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP512r1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP512r1)); }
             }
 
             public static ECCurve brainpoolP512t1
             {
-                get
-                {
-                    return ECCurve.CreateFromFriendlyName(nameof(brainpoolP512t1));
-                }
+                get { return ECCurve.CreateFromFriendlyName(nameof(brainpoolP512t1)); }
             }
 
             public static ECCurve nistP256

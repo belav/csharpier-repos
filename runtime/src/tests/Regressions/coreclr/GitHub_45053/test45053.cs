@@ -20,11 +20,12 @@ public abstract class TA : T<A> { }
 //    public override A GetA() => new ();
 // }
 
-    // Overridden here, in the grandson
+// Overridden here, in the grandson
 public class TB : TA
 {
-    public override B GetA() => new ();
+    public override B GetA() => new();
 }
+
 public class A { }
 
 public class B : A { }

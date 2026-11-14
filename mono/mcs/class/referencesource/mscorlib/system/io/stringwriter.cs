@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  StringWriter
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 ** Purpose: For writing text to a string
@@ -15,17 +15,18 @@
 ===========================================================*/
 
 using System;
-using System.Runtime;
-using System.Text;
-using System.Globalization;
 using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Text;
 #if FEATURE_ASYNC_IO
 using System.Threading.Tasks;
 #endif
 
-namespace System.IO {
+namespace System.IO
+{
     // This class implements a text writer that writes to a string buffer and allows
     // the resulting sequence of characters to be presented as a string.
     //
@@ -33,30 +34,32 @@ namespace System.IO {
     [ComVisible(true)]
     public class StringWriter : TextWriter
     {
-        private static volatile UnicodeEncoding m_encoding=null;
+        private static volatile UnicodeEncoding m_encoding = null;
 
         private StringBuilder _sb;
         private bool _isOpen;
 
         // Constructs a new StringWriter. A new StringBuilder is automatically
         // created and associated with the new StringWriter.
-        public StringWriter() 
-            : this(new StringBuilder(), CultureInfo.CurrentCulture)
-        {
-        }
+        public StringWriter()
+            : this(new StringBuilder(), CultureInfo.CurrentCulture) { }
 
-        public StringWriter(IFormatProvider formatProvider) 
-            : this(new StringBuilder(), formatProvider) {
-        }
-    
+        public StringWriter(IFormatProvider formatProvider)
+            : this(new StringBuilder(), formatProvider) { }
+
         // Constructs a new StringWriter that writes to the given StringBuilder.
-        // 
-        public StringWriter(StringBuilder sb) : this(sb, CultureInfo.CurrentCulture) {
-        }
+        //
+        public StringWriter(StringBuilder sb)
+            : this(sb, CultureInfo.CurrentCulture) { }
 
-        public StringWriter(StringBuilder sb, IFormatProvider formatProvider) : base(formatProvider) {
-            if (sb==null)
-                throw new ArgumentNullException("sb", Environment.GetResourceString("ArgumentNull_Buffer"));
+        public StringWriter(StringBuilder sb, IFormatProvider formatProvider)
+            : base(formatProvider)
+        {
+            if (sb == null)
+                throw new ArgumentNullException(
+                    "sb",
+                    Environment.GetResourceString("ArgumentNull_Buffer")
+                );
             Contract.EndContractBlock();
             _sb = sb;
             _isOpen = true;
@@ -75,13 +78,15 @@ namespace System.IO {
             base.Dispose(disposing);
         }
 
-
-        public override Encoding Encoding {
-            get { 
-                if (m_encoding==null) {
+        public override Encoding Encoding
+        {
+            get
+            {
+                if (m_encoding == null)
+                {
                     m_encoding = new UnicodeEncoding(false, false);
                 }
-                return m_encoding; 
+                return m_encoding;
             }
         }
 
@@ -89,32 +94,46 @@ namespace System.IO {
         // that was passed to the constructor, or the StringBuilder that was
         // automatically created.
         //
-        public virtual StringBuilder GetStringBuilder() {
+        public virtual StringBuilder GetStringBuilder()
+        {
             return _sb;
         }
-    
+
         // Writes a character to the underlying string buffer.
         //
-        public override void Write(char value) {
+        public override void Write(char value)
+        {
             if (!_isOpen)
                 __Error.WriterClosed();
             _sb.Append(value);
         }
-    
+
         // Writes a range of a character array to the underlying string buffer.
         // This method will write count characters of data into this
         // StringWriter from the buffer character array starting at position
         // index.
         //
-        public override void Write(char[] buffer, int index, int count) {
-            if (buffer==null)
-                throw new ArgumentNullException("buffer", Environment.GetResourceString("ArgumentNull_Buffer"));
+        public override void Write(char[] buffer, int index, int count)
+        {
+            if (buffer == null)
+                throw new ArgumentNullException(
+                    "buffer",
+                    Environment.GetResourceString("ArgumentNull_Buffer")
+                );
             if (index < 0)
-                throw new ArgumentOutOfRangeException("index", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException("count", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "count",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             if (buffer.Length - index < count)
-                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidOffLen"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InvalidOffLen")
+                );
             Contract.EndContractBlock();
 
             if (!_isOpen)
@@ -122,16 +141,17 @@ namespace System.IO {
 
             _sb.Append(buffer, index, count);
         }
-    
+
         // Writes a string to the underlying string buffer. If the given string is
         // null, nothing is written.
         //
-        public override void Write(String value) {
+        public override void Write(String value)
+        {
             if (!_isOpen)
                 __Error.WriterClosed();
-            if (value != null) _sb.Append(value);
+            if (value != null)
+                _sb.Append(value);
         }
-
 
 #if FEATURE_ASYNC_IO
         #region Task based Async APIs
@@ -195,7 +215,8 @@ namespace System.IO {
         // Returns a string containing the characters written to this TextWriter
         // so far.
         //
-        public override String ToString() {
+        public override String ToString()
+        {
             return _sb.ToString();
         }
     }

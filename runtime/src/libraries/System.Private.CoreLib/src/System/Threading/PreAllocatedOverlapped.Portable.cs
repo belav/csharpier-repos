@@ -11,8 +11,11 @@ namespace System.Threading
     {
         internal ThreadPoolBoundHandleOverlapped? _overlappedPortableCore;
 
-        private static PreAllocatedOverlapped UnsafeCreatePortableCore(IOCompletionCallback callback, object? state, object? pinData) =>
-            new PreAllocatedOverlapped(callback, state, pinData, flowExecutionContext: false);
+        private static PreAllocatedOverlapped UnsafeCreatePortableCore(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) => new PreAllocatedOverlapped(callback, state, pinData, flowExecutionContext: false);
 
         private bool AddRefPortableCore()
         {

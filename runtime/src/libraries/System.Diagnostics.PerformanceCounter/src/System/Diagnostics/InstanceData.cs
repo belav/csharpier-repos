@@ -20,10 +20,7 @@ namespace System.Diagnostics
 
         public long RawValue
         {
-            get
-            {
-                return Sample.RawValue;
-            }
+            get { return Sample.RawValue; }
         }
     }
 }

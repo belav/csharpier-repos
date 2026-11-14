@@ -10,29 +10,39 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public void StringComparer()
         {
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<string, int>(
-                    System.StringComparer.OrdinalIgnoreCase)
-                {
-                    new KeyedItem<string, int>("foo", 0),
-                    new KeyedItem<string, int>("bar", 1)
-                };
-            AssertExtensions.Throws<ArgumentException>("key", null, () => collection.Add(new KeyedItem<string, int>("Foo", 0)));
-            AssertExtensions.Throws<ArgumentException>("key", null, () => collection.Add(new KeyedItem<string, int>("fOo", 0)));
-            AssertExtensions.Throws<ArgumentException>("key", null, () => collection.Add(new KeyedItem<string, int>("baR", 0)));
+            var collection = new TestKeyedCollectionOfIKeyedItem<string, int>(
+                System.StringComparer.OrdinalIgnoreCase
+            )
+            {
+                new KeyedItem<string, int>("foo", 0),
+                new KeyedItem<string, int>("bar", 1),
+            };
+            AssertExtensions.Throws<ArgumentException>("key", null, () =>
+                collection.Add(new KeyedItem<string, int>("Foo", 0))
+            );
+            AssertExtensions.Throws<ArgumentException>("key", null, () =>
+                collection.Add(new KeyedItem<string, int>("fOo", 0))
+            );
+            AssertExtensions.Throws<ArgumentException>("key", null, () =>
+                collection.Add(new KeyedItem<string, int>("baR", 0))
+            );
         }
 
         [Theory]
         [InlineData(-2)]
         [InlineData(int.MinValue)]
-        public void Ctor_InvalidDictionaryCreationThreshold_ThrowsArgumentOutOfRangeException(int dictionaryCreationThreshold)
+        public void Ctor_InvalidDictionaryCreationThreshold_ThrowsArgumentOutOfRangeException(
+            int dictionaryCreationThreshold
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("dictionaryCreationThreshold", () => new TestKeyedCollectionOfIKeyedItem<string, int>(dictionaryCreationThreshold));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "dictionaryCreationThreshold",
+                () => new TestKeyedCollectionOfIKeyedItem<string, int>(dictionaryCreationThreshold)
+            );
         }
     }
 
-    public class IListTestKeyedCollectionIntInt :
-        IListTestKeyedCollection<int, int>
+    public class IListTestKeyedCollectionIntInt : IListTestKeyedCollection<int, int>
     {
         private static int s_item = 1;
 
@@ -42,7 +52,7 @@ namespace System.Collections.ObjectModel.Tests
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
         {
-            yield return (long) 5;
+            yield return (long)5;
             yield return "foo";
             yield return new object();
         }
@@ -62,8 +72,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class IListTestKeyedCollectionStringString :
-        IListTestKeyedCollection<string, string>
+    public class IListTestKeyedCollectionStringString : IListTestKeyedCollection<string, string>
     {
         private static int s_item = 1;
 
@@ -73,7 +82,7 @@ namespace System.Collections.ObjectModel.Tests
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
         {
-            yield return (long) 5;
+            yield return (long)5;
             yield return 5;
             yield return new object();
         }
@@ -93,8 +102,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class IListTestKeyedCollectionIntString :
-        IListTestKeyedCollection<int, string>
+    public class IListTestKeyedCollectionIntString : IListTestKeyedCollection<int, string>
     {
         private static int s_item = 1;
 
@@ -104,7 +112,7 @@ namespace System.Collections.ObjectModel.Tests
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
         {
-            yield return (long) 5;
+            yield return (long)5;
             yield return 5;
             yield return new object();
         }
@@ -124,8 +132,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class IListTestKeyedCollectionStringInt :
-        IListTestKeyedCollection<string, int>
+    public class IListTestKeyedCollectionStringInt : IListTestKeyedCollection<string, int>
     {
         private static int s_item = 1;
 
@@ -135,7 +142,7 @@ namespace System.Collections.ObjectModel.Tests
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
         {
-            yield return (long) 5;
+            yield return (long)5;
             yield return "bar";
             yield return new object();
         }
@@ -155,8 +162,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class IListTestKeyedCollectionIntIntBadKey :
-        IListTestKeyedCollectionBadKey<int, int>
+    public class IListTestKeyedCollectionIntIntBadKey : IListTestKeyedCollectionBadKey<int, int>
     {
         private static int s_item = 1;
 
@@ -166,7 +172,7 @@ namespace System.Collections.ObjectModel.Tests
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
         {
-            yield return (long) 5;
+            yield return (long)5;
             yield return "foo";
             yield return new object();
         }
@@ -186,8 +192,8 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class IListTestKeyedCollectionStringStringBadKey :
-        IListTestKeyedCollectionBadKey<string, string>
+    public class IListTestKeyedCollectionStringStringBadKey
+        : IListTestKeyedCollectionBadKey<string, string>
     {
         private static int s_item = 1;
 
@@ -197,7 +203,7 @@ namespace System.Collections.ObjectModel.Tests
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
         {
-            yield return (long) 5;
+            yield return (long)5;
             yield return 5;
             yield return new object();
         }
@@ -217,8 +223,8 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class IListTestKeyedCollectionIntStringBadKey :
-        IListTestKeyedCollectionBadKey<int, string>
+    public class IListTestKeyedCollectionIntStringBadKey
+        : IListTestKeyedCollectionBadKey<int, string>
     {
         private static int s_item = 1;
 
@@ -228,7 +234,7 @@ namespace System.Collections.ObjectModel.Tests
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
         {
-            yield return (long) 5;
+            yield return (long)5;
             yield return 5;
             yield return new object();
         }
@@ -248,8 +254,8 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class IListTestKeyedCollectionStringIntBadKey :
-        IListTestKeyedCollectionBadKey<string, int>
+    public class IListTestKeyedCollectionStringIntBadKey
+        : IListTestKeyedCollectionBadKey<string, int>
     {
         private static int s_item = 1;
 
@@ -259,7 +265,7 @@ namespace System.Collections.ObjectModel.Tests
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
         {
-            yield return (long) 5;
+            yield return (long)5;
             yield return "bar";
             yield return new object();
         }
@@ -279,8 +285,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class KeyedCollectionTestsIntInt :
-        KeyedCollectionTests<int, int>
+    public class KeyedCollectionTestsIntInt : KeyedCollectionTests<int, int>
     {
         private int _curValue = 1;
 
@@ -295,8 +300,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class KeyedCollectionTestsStringString :
-        KeyedCollectionTests<string, string>
+    public class KeyedCollectionTestsStringString : KeyedCollectionTests<string, string>
     {
         private int _curValue = 1;
 
@@ -311,8 +315,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class KeyedCollectionTestsIntString :
-        KeyedCollectionTests<int, string>
+    public class KeyedCollectionTestsIntString : KeyedCollectionTests<int, string>
     {
         private int _curValue = 1;
 
@@ -327,8 +330,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class KeyedCollectionTestsStringInt :
-        KeyedCollectionTests<string, int>
+    public class KeyedCollectionTestsStringInt : KeyedCollectionTests<string, int>
     {
         private int _curValue = 1;
 

@@ -39,29 +39,19 @@ namespace RecordTypes
         [MinLength(5)]
         public string P6 { get; set; } = string.Empty;
 
-        public ThirdModel(int _)
-        {
-        }
+        public ThirdModel(int _) { }
 
-        public ThirdModel(object _)
-        {
-        }
+        public ThirdModel(object _) { }
     }
 
     [OptionsValidator]
-    public partial record struct FirstValidator : IValidateOptions<FirstModel>
-    {
-    }
+    public partial record struct FirstValidator : IValidateOptions<FirstModel> { }
 
     [OptionsValidator]
-    public partial record struct SecondValidator : IValidateOptions<SecondModel>
-    {
-    }
+    public partial record struct SecondValidator : IValidateOptions<SecondModel> { }
 
     [OptionsValidator]
-    public partial record class ThirdValidator : IValidateOptions<SecondModel>
-    {
-    }
+    public partial record class ThirdValidator : IValidateOptions<SecondModel> { }
 }
 
 // #endif

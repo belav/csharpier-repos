@@ -12,7 +12,9 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("// Licensed to the .NET Foundation under one or more agreements.");
-        Console.WriteLine("// The .NET Foundation licenses this file to you under the MIT license.");
+        Console.WriteLine(
+            "// The .NET Foundation licenses this file to you under the MIT license."
+        );
         Console.WriteLine();
 
         Console.WriteLine("#include \"pal/unicodedata.h\"");
@@ -20,7 +22,9 @@ class Program
         Console.WriteLine();
         Console.WriteLine("//");
         Console.WriteLine("// THIS FILE IS GENERATED. DO NOT HAND EDIT.");
-        Console.WriteLine("// IF YOU NEED TO UPDATE UNICODE VERSION FOLLOW THE GUIDE AT src/libraries/System.Private.CoreLib/Tools/GenUnicodeProp/Updating-Unicode-Versions.md");
+        Console.WriteLine(
+            "// IF YOU NEED TO UPDATE UNICODE VERSION FOLLOW THE GUIDE AT src/libraries/System.Private.CoreLib/Tools/GenUnicodeProp/Updating-Unicode-Versions.md"
+        );
         Console.WriteLine("//");
         Console.WriteLine();
 
@@ -41,10 +45,9 @@ class Program
                 if (!hasLowerCaseMapping && !hasUpperCaseMapping)
                     continue;
 
-
-                int opposingCase = hasUpperCaseMapping ?
-                    int.Parse(fields[12], NumberStyles.HexNumber) :
-                    int.Parse(fields[13], NumberStyles.HexNumber);
+                int opposingCase = hasUpperCaseMapping
+                    ? int.Parse(fields[12], NumberStyles.HexNumber)
+                    : int.Parse(fields[13], NumberStyles.HexNumber);
 
                 // These won't fit in 16 bits - no point carrying them
                 if (code > 0xFFFF)
@@ -59,6 +62,8 @@ class Program
 
         Console.WriteLine("};");
 
-        Console.WriteLine("CONST UINT UNICODE_DATA_SIZE = sizeof(UnicodeData)/sizeof(UnicodeDataRec);");
+        Console.WriteLine(
+            "CONST UINT UNICODE_DATA_SIZE = sizeof(UnicodeData)/sizeof(UnicodeDataRec);"
+        );
     }
 }

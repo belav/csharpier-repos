@@ -14,9 +14,9 @@ namespace System.Xml.XmlDiff
         IgnorePrefix = 0x20,
         IgnoreDTD = 0x40,
         IgnoreChildOrder = 0x80,
-        InfosetComparison = 0xB,     //sets IgnoreEmptyElement, IgnoreWhitespace and IgnoreAttributeOrder
+        InfosetComparison = 0xB, //sets IgnoreEmptyElement, IgnoreWhitespace and IgnoreAttributeOrder
         CDataAsText = 0x100,
-        NormalizeNewline = 0x200 // ignores newlines in text nodes only
+        NormalizeNewline = 0x200, // ignores newlines in text nodes only
     }
 
     public class XmlDiffAdvancedOptions
@@ -26,52 +26,27 @@ namespace System.Xml.XmlDiff
         private string _IgnoreChildOrderExpr;
         private XmlNamespaceManager _mngr;
 
-        public XmlDiffAdvancedOptions()
-        {
-        }
+        public XmlDiffAdvancedOptions() { }
+
         public string IgnoreNodesExpr
         {
-            get
-            {
-                return _IgnoreNodesExpr;
-            }
-            set
-            {
-                _IgnoreNodesExpr = value;
-            }
+            get { return _IgnoreNodesExpr; }
+            set { _IgnoreNodesExpr = value; }
         }
         public string IgnoreValuesExpr
         {
-            get
-            {
-                return _IgnoreValuesExpr;
-            }
-            set
-            {
-                _IgnoreValuesExpr = value;
-            }
+            get { return _IgnoreValuesExpr; }
+            set { _IgnoreValuesExpr = value; }
         }
         public string IgnoreChildOrderExpr
         {
-            get
-            {
-                return _IgnoreChildOrderExpr;
-            }
-            set
-            {
-                _IgnoreChildOrderExpr = value;
-            }
+            get { return _IgnoreChildOrderExpr; }
+            set { _IgnoreChildOrderExpr = value; }
         }
         public XmlNamespaceManager Context
         {
-            get
-            {
-                return _mngr;
-            }
-            set
-            {
-                _mngr = value;
-            }
+            get { return _mngr; }
+            set { _mngr = value; }
         }
     }
 }

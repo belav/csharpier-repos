@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -12,9 +12,8 @@
 **          that a class should be treated as if it has
 **          global scope.
 **
-** 
+**
 ===========================================================*/
-    
 
 namespace System.Runtime.CompilerServices
 {
@@ -23,7 +22,6 @@ namespace System.Runtime.CompilerServices
     [System.Runtime.InteropServices.ComVisible(true)]
     public class CompilerGlobalScopeAttribute : Attribute
     {
-       public CompilerGlobalScopeAttribute () {}
+        public CompilerGlobalScopeAttribute() { }
     }
 }
-

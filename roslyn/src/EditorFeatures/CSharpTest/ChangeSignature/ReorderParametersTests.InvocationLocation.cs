@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
     [Trait(Traits.Feature, Traits.Features.ChangeSignature)]
     public partial class ChangeSignatureTests : AbstractChangeSignatureTests
     {
-        #region Methods 
+        #region Methods
 
         [Fact]
         public async Task ReorderMethodParameters_InvokeBeforeMethodName()
@@ -41,8 +41,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation,
-                expectedUpdatedInvocationDocumentCode: updatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         [Fact]
@@ -68,8 +73,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation,
-                expectedUpdatedInvocationDocumentCode: updatedCode, expectedSelectedIndex: 1);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode,
+                expectedSelectedIndex: 1
+            );
         }
 
         [Fact]
@@ -95,7 +105,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -121,7 +136,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -137,7 +157,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, expectedSuccess: false, expectedFailureReason: ChangeSignatureFailureKind.DefinedInMetadata);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: false,
+                expectedFailureReason: ChangeSignatureFailureKind.DefinedInMetadata
+            );
         }
 
         [Fact]
@@ -153,7 +178,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, expectedSuccess: false, expectedFailureReason: ChangeSignatureFailureKind.DefinedInMetadata);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: false,
+                expectedFailureReason: ChangeSignatureFailureKind.DefinedInMetadata
+            );
         }
 
         [Fact]
@@ -169,7 +199,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, expectedSuccess: false, expectedFailureReason: ChangeSignatureFailureKind.DefinedInMetadata);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: false,
+                expectedFailureReason: ChangeSignatureFailureKind.DefinedInMetadata
+            );
         }
 
         [Fact]
@@ -182,7 +217,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, expectedSuccess: false, expectedFailureReason: ChangeSignatureFailureKind.IncorrectKind);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: false,
+                expectedFailureReason: ChangeSignatureFailureKind.IncorrectKind
+            );
         }
 
         [Fact]
@@ -200,7 +240,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 """;
 
             await TestChangeSignatureViaCommandAsync(
-                LanguageNames.CSharp, markup, expectedSuccess: false);
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: false
+            );
         }
 
         [Fact]
@@ -253,7 +296,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -289,7 +337,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -335,7 +388,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -381,7 +439,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -427,7 +490,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -457,7 +525,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -481,7 +554,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -513,7 +591,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -551,7 +634,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         #endregion
@@ -583,8 +671,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation,
-                expectedUpdatedInvocationDocumentCode: updatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         [Fact]
@@ -612,8 +705,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation,
-                expectedUpdatedInvocationDocumentCode: updatedCode, expectedSelectedIndex: 1);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode,
+                expectedSelectedIndex: 1
+            );
         }
 
         [Fact]
@@ -641,8 +739,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation,
-                expectedUpdatedInvocationDocumentCode: updatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         [Fact]
@@ -670,7 +773,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -708,7 +816,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -746,8 +859,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation,
-                expectedUpdatedInvocationDocumentCode: updatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         #endregion
@@ -781,8 +899,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation,
-                expectedUpdatedInvocationDocumentCode: updatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         [Fact]
@@ -816,7 +939,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         #endregion
@@ -844,7 +972,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCodeActionAsync(markup, expectedCodeAction: true, updatedSignature: permutation, expectedCode: updatedCode);
+            await TestChangeSignatureViaCodeActionAsync(
+                markup,
+                expectedCodeAction: true,
+                updatedSignature: permutation,
+                expectedCode: updatedCode
+            );
         }
 
         [Fact]
@@ -885,7 +1018,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCodeActionAsync(markup, expectedCodeAction: true, updatedSignature: permutation, expectedCode: updatedCode);
+            await TestChangeSignatureViaCodeActionAsync(
+                markup,
+                expectedCodeAction: true,
+                updatedSignature: permutation,
+                expectedCode: updatedCode
+            );
         }
 
         [Fact]
@@ -926,8 +1064,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
             await TestChangeSignatureViaCommandAsync(
-                LanguageNames.CSharp, markup, updatedSignature: permutation,
-                expectedUpdatedInvocationDocumentCode: updatedCode);
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]

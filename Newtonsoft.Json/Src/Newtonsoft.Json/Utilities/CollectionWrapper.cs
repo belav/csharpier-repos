@@ -26,8 +26,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using System.Globalization;
+using System.Threading;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -198,7 +198,9 @@ namespace Newtonsoft.Json.Utilities
         {
             if (_genericCollection != null)
             {
-                throw new InvalidOperationException("Wrapped ICollection<T> does not support IndexOf.");
+                throw new InvalidOperationException(
+                    "Wrapped ICollection<T> does not support IndexOf."
+                );
             }
 
             if (IsCompatibleObject(value))
@@ -213,7 +215,9 @@ namespace Newtonsoft.Json.Utilities
         {
             if (_genericCollection != null)
             {
-                throw new InvalidOperationException("Wrapped ICollection<T> does not support RemoveAt.");
+                throw new InvalidOperationException(
+                    "Wrapped ICollection<T> does not support RemoveAt."
+                );
             }
 
             _list!.RemoveAt(index);
@@ -223,7 +227,9 @@ namespace Newtonsoft.Json.Utilities
         {
             if (_genericCollection != null)
             {
-                throw new InvalidOperationException("Wrapped ICollection<T> does not support Insert.");
+                throw new InvalidOperationException(
+                    "Wrapped ICollection<T> does not support Insert."
+                );
             }
 
             VerifyValueType(value);
@@ -260,7 +266,9 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (_genericCollection != null)
                 {
-                    throw new InvalidOperationException("Wrapped ICollection<T> does not support indexer.");
+                    throw new InvalidOperationException(
+                        "Wrapped ICollection<T> does not support indexer."
+                    );
                 }
 
                 return _list![index];
@@ -269,7 +277,9 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (_genericCollection != null)
                 {
-                    throw new InvalidOperationException("Wrapped ICollection<T> does not support indexer.");
+                    throw new InvalidOperationException(
+                        "Wrapped ICollection<T> does not support indexer."
+                    );
                 }
 
                 VerifyValueType(value);
@@ -301,13 +311,26 @@ namespace Newtonsoft.Json.Utilities
         {
             if (!IsCompatibleObject(value))
             {
-                throw new ArgumentException("The value '{0}' is not of type '{1}' and cannot be used in this generic collection.".FormatWith(CultureInfo.InvariantCulture, value, typeof(T)), nameof(value));
+                throw new ArgumentException(
+                    "The value '{0}' is not of type '{1}' and cannot be used in this generic collection.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        value,
+                        typeof(T)
+                    ),
+                    nameof(value)
+                );
             }
         }
 
         private static bool IsCompatibleObject(object? value)
         {
-            if (!(value is T) && (value != null || (typeof(T).IsValueType() && !ReflectionUtils.IsNullableType(typeof(T)))))
+            if (
+                !(value is T)
+                && (
+                    value != null
+                    || (typeof(T).IsValueType() && !ReflectionUtils.IsNullableType(typeof(T)))
+                )
+            )
             {
                 return false;
             }

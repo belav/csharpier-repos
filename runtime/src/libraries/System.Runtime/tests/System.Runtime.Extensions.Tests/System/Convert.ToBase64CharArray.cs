@@ -13,7 +13,13 @@ namespace System.Tests
             string input = "test";
             byte[] inputBytes = Convert.FromBase64String(input);
             char[] resultChars = new char[4];
-            int fillCharCount = Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length - 1, resultChars, 0);
+            int fillCharCount = Convert.ToBase64CharArray(
+                inputBytes,
+                0,
+                inputBytes.Length - 1,
+                resultChars,
+                0
+            );
             Assert.Equal(input.Length, fillCharCount);
         }
 
@@ -33,7 +39,8 @@ namespace System.Tests
             // Regression test for bug where offsetOut parameter was ignored
             char[] outputBuffer = "........".ToCharArray();
             byte[] inputBuffer = new byte[6];
-            for (int i = 0; i < inputBuffer.Length; inputBuffer[i] = (byte)i++) ;
+            for (int i = 0; i < inputBuffer.Length; inputBuffer[i] = (byte)i++)
+                ;
 
             // Convert the first half of the byte array, write to the first half of the char array
             int c = Convert.ToBase64CharArray(inputBuffer, 0, 3, outputBuffer, 0);
@@ -49,7 +56,9 @@ namespace System.Tests
         [Fact]
         public static void InvalidInputBuffer()
         {
-            Assert.Throws<ArgumentNullException>(() => Convert.ToBase64CharArray(null, 0, 1, new char[1], 0));
+            Assert.Throws<ArgumentNullException>(() =>
+                Convert.ToBase64CharArray(null, 0, 1, new char[1], 0)
+            );
         }
 
         [Fact]
@@ -57,7 +66,9 @@ namespace System.Tests
         {
             char[] inputChars = "test".ToCharArray();
             byte[] inputBytes = Convert.FromBase64CharArray(inputChars, 0, inputChars.Length);
-            Assert.Throws<ArgumentNullException>(() => Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, null, 0));
+            Assert.Throws<ArgumentNullException>(() =>
+                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, null, 0)
+            );
         }
 
         [Fact]
@@ -67,8 +78,18 @@ namespace System.Tests
             byte[] inputBytes = Convert.FromBase64CharArray(inputChars, 0, inputChars.Length);
             char[] outputBuffer = new char[4];
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToBase64CharArray(inputBytes, -1, inputBytes.Length, outputBuffer, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToBase64CharArray(inputBytes, inputBytes.Length, inputBytes.Length, outputBuffer, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.ToBase64CharArray(inputBytes, -1, inputBytes.Length, outputBuffer, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.ToBase64CharArray(
+                    inputBytes,
+                    inputBytes.Length,
+                    inputBytes.Length,
+                    outputBuffer,
+                    0
+                )
+            );
         }
 
         [Fact]
@@ -78,8 +99,12 @@ namespace System.Tests
             byte[] inputBytes = Convert.FromBase64CharArray(inputChars, 0, inputChars.Length);
             char[] outputBuffer = new char[4];
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, outputBuffer, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, outputBuffer, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, outputBuffer, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, outputBuffer, 1)
+            );
         }
 
         [Fact]
@@ -89,9 +114,15 @@ namespace System.Tests
             byte[] inputBytes = Convert.FromBase64CharArray(inputChars, 0, inputChars.Length);
             char[] outputBuffer = new char[4];
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToBase64CharArray(inputBytes, 0, -1, outputBuffer, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length + 1, outputBuffer, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToBase64CharArray(inputBytes, 1, inputBytes.Length, outputBuffer, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.ToBase64CharArray(inputBytes, 0, -1, outputBuffer, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length + 1, outputBuffer, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.ToBase64CharArray(inputBytes, 1, inputBytes.Length, outputBuffer, 0)
+            );
         }
     }
 }

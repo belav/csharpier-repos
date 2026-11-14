@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.FlowAnalysis
             [Fact]
             public void RegionInIsPattern01()
             {
-                var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(@"
+                var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(
+                    @"
 class C
 {
     static void M(object o)
@@ -31,7 +32,8 @@ class C
             _ = throw null
         };
     }
-}");
+}"
+                );
                 Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.VariablesDeclared));
                 Assert.Equal("s", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
                 Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));

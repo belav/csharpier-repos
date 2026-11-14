@@ -10,7 +10,5 @@ namespace System.Runtime.InteropServices.Marshalling
     /// This attribute is only valid on types that implement at least one <see cref="GeneratedComInterfaceAttribute"/>-attributed interface.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class GeneratedComClassAttribute : Attribute
-    {
-    }
+    public sealed class GeneratedComClassAttribute : Attribute { }
 }

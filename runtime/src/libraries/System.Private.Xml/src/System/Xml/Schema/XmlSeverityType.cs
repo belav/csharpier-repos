@@ -10,9 +10,10 @@ namespace System.Xml.Schema
         /// Errors that can be recovered from.
         /// </summary>
         Error,
+
         /// <summary>
         /// Errors that can be ignored.
         /// </summary>
-        Warning
+        Warning,
     }
 }

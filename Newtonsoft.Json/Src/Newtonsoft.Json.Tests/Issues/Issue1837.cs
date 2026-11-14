@@ -23,9 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Linq.JsonPath;
-using System;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -50,9 +50,9 @@ namespace Newtonsoft.Json.Tests.Issues
             var rhs = new TestData();
 
             // For all tests, if Type(x) is different from Type(y), return false.
-            // given x === y, if Type(x) is Null, return true 
+            // given x === y, if Type(x) is Null, return true
             var target = lhs.Null;
-            AssertAll(StrictEquality, target, rhs.Null);            
+            AssertAll(StrictEquality, target, rhs.Null);
             AssertNone(StrictEquality, target, rhs.ErrybodyButNull);
 
             // given x === y, if x is the same Number value as y, return true.
@@ -70,12 +70,28 @@ namespace Newtonsoft.Json.Tests.Issues
             // given x === y, if Type(x) is Boolean, return true if x and y are both true or both false; otherwise, return false.
             target = lhs.True;
             AssertAll(StrictEquality, target, rhs.True);
-            AssertNone(StrictEquality, target, new[] { rhs.False }, rhs.Nopes, rhs.Numbers, rhs.Strings, rhs.Dates);
+            AssertNone(
+                StrictEquality,
+                target,
+                new[] { rhs.False },
+                rhs.Nopes,
+                rhs.Numbers,
+                rhs.Strings,
+                rhs.Dates
+            );
             target = lhs.False;
             AssertAll(StrictEquality, target, rhs.False);
-            AssertNone(StrictEquality, target, new[] { rhs.True }, rhs.Nopes, rhs.Numbers, rhs.Strings, rhs.Dates);
+            AssertNone(
+                StrictEquality,
+                target,
+                new[] { rhs.True },
+                rhs.Nopes,
+                rhs.Numbers,
+                rhs.Strings,
+                rhs.Dates
+            );
 
-            //Dates 
+            //Dates
             target = lhs.DateYearMonth;
             AssertAll(StrictEquality, target, rhs.DateYearMonth);
             AssertNone(StrictEquality, target, rhs.DateYear);
@@ -87,13 +103,14 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.IsFalse(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.OtherISODate));
         }
 
-        #region helpers        
+        #region helpers
         // used by asserters to perform the comparison
         public delegate bool Comparator(JValue lhs, JValue rhs);
 
         // there was going to be an abstractEquality, but check the exception for it's implementation for why that's skipped for now
-        private readonly Comparator StrictEquality = (lhs, rhs) => BooleanQueryExpression.EqualsWithStrictMatch(lhs, rhs);
- 
+        private readonly Comparator StrictEquality = (lhs, rhs) =>
+            BooleanQueryExpression.EqualsWithStrictMatch(lhs, rhs);
+
         // a bunch of convenience methods for the test belwo
         // these make sure the comparator returns false for all do not wants
         private void AssertNone(Comparator comparator, JValue token, params JValue[][] doNotWant)
@@ -137,6 +154,7 @@ namespace Newtonsoft.Json.Tests.Issues
     public class TestData
     {
         public readonly JValue Null;
+
         //JSON.stringify({"undef": undefined}) returns {}
         //public readonly JToken Undefined;
         public readonly JValue[] Nopes;
@@ -145,6 +163,7 @@ namespace Newtonsoft.Json.Tests.Issues
         public readonly JValue OneDotZero;
         public readonly JValue Two;
         public readonly JValue Scientific;
+
         // stringify returns these as 0
         //public readonly JToken NegativeZero;
         //public readonly JToken PositiveZero;
@@ -167,6 +186,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
         public readonly JValue DateYearMonth;
         public readonly JValue DateYear;
+
         // stringify only ever uses the ISO 8601 zulu date format, so let's just bother with that one.
         public readonly JValue DateISO;
         public readonly JValue OtherISODate;
@@ -177,7 +197,9 @@ namespace Newtonsoft.Json.Tests.Issues
 
         public TestData()
         {
-            var shebang = JObject.Parse("{\"null\":null,\"NaN\":null,\"true\":true,\"false\":false,\"two\":2,\"int\":1,\"float\":1.0,\"scifloat\":-1.3e+70,\"herp\":\"herp\",\"derp\":\"derp\",\"timespan\":86400000,\"dateYearMonth\":\"2018-09-01T00: 00:00.000Z\",\"dateYear\":\"2018-01-01T00: 00:00.000Z\",\"dateJSONAndISOZulu\":\"2018-09-20T20:38:59.463Z\", \"otherDate\": \"2018-09-20T20:41:14.821Z\"}");
+            var shebang = JObject.Parse(
+                "{\"null\":null,\"NaN\":null,\"true\":true,\"false\":false,\"two\":2,\"int\":1,\"float\":1.0,\"scifloat\":-1.3e+70,\"herp\":\"herp\",\"derp\":\"derp\",\"timespan\":86400000,\"dateYearMonth\":\"2018-09-01T00: 00:00.000Z\",\"dateYear\":\"2018-01-01T00: 00:00.000Z\",\"dateJSONAndISOZulu\":\"2018-09-20T20:38:59.463Z\", \"otherDate\": \"2018-09-20T20:41:14.821Z\"}"
+            );
             Null = (JValue)shebang["null"];
             One = (JValue)shebang["int"];
             OneDotZero = (JValue)shebang["float"];
@@ -193,22 +215,9 @@ namespace Newtonsoft.Json.Tests.Issues
             OtherISODate = (JValue)shebang["otherDate"];
             Dates = new[] { DateYearMonth, DateYear, DateISO, OtherISODate };
             Boolies = new[] { True, False };
-            Strings = new[]
-            {
-                HerpString,
-                DerpString
-            };
-            Numbers = new[]
-            {
-                One,
-                OneDotZero,
-                Two,
-                Scientific
-            };
-            Nopes = new[]
-            {
-                Null
-            };
+            Strings = new[] { HerpString, DerpString };
+            Numbers = new[] { One, OneDotZero, Two, Scientific };
+            Nopes = new[] { Null };
             Errybody = new[] { Nopes, Numbers, Strings, Boolies, Dates };
             ErrybodyButNull = new[] { Numbers, Strings, Boolies, Dates };
         }

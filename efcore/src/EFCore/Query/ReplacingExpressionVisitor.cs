@@ -30,15 +30,21 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
     /// <param name="replacement">The expression to be used as replacement.</param>
     /// <param name="tree">The expression tree in which replacement is going to be performed.</param>
     /// <returns>An expression tree with replacements made.</returns>
-    public static Expression Replace(Expression original, Expression replacement, Expression tree)
-        => new ReplacingExpressionVisitor(new[] { original }, new[] { replacement }).Visit(tree);
+    public static Expression Replace(
+        Expression original,
+        Expression replacement,
+        Expression tree
+    ) => new ReplacingExpressionVisitor(new[] { original }, new[] { replacement }).Visit(tree);
 
     /// <summary>
     ///     Creates a new instance of the <see cref="ReplacingExpressionVisitor" /> class.
     /// </summary>
     /// <param name="originals">A list of original expressions to replace.</param>
     /// <param name="replacements">A list of expressions to be used as replacements.</param>
-    public ReplacingExpressionVisitor(IReadOnlyList<Expression> originals, IReadOnlyList<Expression> replacements)
+    public ReplacingExpressionVisitor(
+        IReadOnlyList<Expression> originals,
+        IReadOnlyList<Expression> replacements
+    )
     {
         _originals = originals;
         _replacements = replacements;
@@ -48,7 +54,13 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
     [return: NotNullIfNotNull("expression")]
     public override Expression? Visit(Expression? expression)
     {
-        if (expression is null or ShapedQueryExpression or StructuralTypeShaperExpression or GroupByShaperExpression)
+        if (
+            expression
+            is null
+                or ShapedQueryExpression
+                or StructuralTypeShaperExpression
+                or GroupByShaperExpression
+        )
         {
             return expression;
         }
@@ -71,8 +83,10 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
     {
         var innerExpression = Visit(memberExpression.Expression);
 
-        if (innerExpression is GroupByShaperExpression groupByShaperExpression
-            && memberExpression.Member.Name == nameof(IGrouping<int, int>.Key))
+        if (
+            innerExpression is GroupByShaperExpression groupByShaperExpression
+            && memberExpression.Member.Name == nameof(IGrouping<int, int>.Key)
+        )
         {
             return groupByShaperExpression.KeySelector;
         }
@@ -87,9 +101,13 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
         }
 
         var mayBeMemberInitExpression = innerExpression.UnwrapTypeConversion(out _);
-        if (mayBeMemberInitExpression is MemberInitExpression memberInitExpression
-            && memberInitExpression.Bindings.SingleOrDefault(
-                mb => mb.Member.IsSameAs(memberExpression.Member)) is MemberAssignment memberAssignment)
+        if (
+            mayBeMemberInitExpression is MemberInitExpression memberInitExpression
+            && memberInitExpression.Bindings.SingleOrDefault(mb =>
+                mb.Member.IsSameAs(memberExpression.Member)
+            )
+                is MemberAssignment memberAssignment
+        )
         {
             return memberAssignment.Expression;
         }
@@ -100,7 +118,12 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
     /// <inheritdoc />
     protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
     {
-        if (methodCallExpression.TryGetEFPropertyArguments(out var entityExpression, out var propertyName))
+        if (
+            methodCallExpression.TryGetEFPropertyArguments(
+                out var entityExpression,
+                out var propertyName
+            )
+        )
         {
             var newEntityExpression = Visit(entityExpression);
             if (newEntityExpression is NewExpression newExpression)
@@ -113,14 +136,21 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
             }
 
             var mayBeMemberInitExpression = newEntityExpression.UnwrapTypeConversion(out _);
-            if (mayBeMemberInitExpression is MemberInitExpression memberInitExpression
-                && memberInitExpression.Bindings.SingleOrDefault(
-                    mb => mb.Member.Name == propertyName) is MemberAssignment memberAssignment)
+            if (
+                mayBeMemberInitExpression is MemberInitExpression memberInitExpression
+                && memberInitExpression.Bindings.SingleOrDefault(mb =>
+                    mb.Member.Name == propertyName
+                )
+                    is MemberAssignment memberAssignment
+            )
             {
                 return memberAssignment.Expression;
             }
 
-            return methodCallExpression.Update(null, new[] { newEntityExpression, methodCallExpression.Arguments[1] });
+            return methodCallExpression.Update(
+                null,
+                new[] { newEntityExpression, methodCallExpression.Arguments[1] }
+            );
         }
 
         return base.VisitMethodCall(methodCallExpression);

@@ -3,13 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Reflection.Metadata;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using System.Diagnostics.CodeAnalysis;
 
 public class RuntimeConfigParserTask : Task
 {
@@ -34,10 +34,7 @@ public class RuntimeConfigParserTask : Task
     {
         AllowTrailingCommas = true,
         ReadCommentHandling = JsonCommentHandling.Skip,
-        Converters =
-        {
-            new StringConverter()
-        }
+        Converters = { new StringConverter() },
     };
 
     public override bool Execute()
@@ -54,7 +51,12 @@ public class RuntimeConfigParserTask : Task
             return false;
         }
 
-        if (!TryConvertInputToDictionary(RuntimeConfigFile, out Dictionary<string, string>? configProperties))
+        if (
+            !TryConvertInputToDictionary(
+                RuntimeConfigFile,
+                out Dictionary<string, string>? configProperties
+            )
+        )
         {
             return false;
         }
@@ -71,14 +73,22 @@ public class RuntimeConfigParserTask : Task
         ConvertDictionaryToBlob(configProperties, blobBuilder);
 
         Directory.CreateDirectory(Path.GetDirectoryName(OutputFile!)!);
-        using var stream = new FileStream(OutputFile, FileMode.Create, FileAccess.Write, FileShare.None);
+        using var stream = new FileStream(
+            OutputFile,
+            FileMode.Create,
+            FileAccess.Write,
+            FileShare.None
+        );
         blobBuilder.WriteContentTo(stream);
 
         return !Log.HasLoggedErrors;
     }
 
     /// Reads a json file from the given path and extracts the "configProperties" key (assumed to be a string to string dictionary)
-    private bool TryConvertInputToDictionary(string inputFilePath, [NotNullWhen(true)] out Dictionary<string, string>? result)
+    private bool TryConvertInputToDictionary(
+        string inputFilePath,
+        [NotNullWhen(true)] out Dictionary<string, string>? result
+    )
     {
         result = null;
 
@@ -107,7 +117,10 @@ public class RuntimeConfigParserTask : Task
 
     /// Just write the dictionary out to a blob as a count followed by
     /// a length-prefixed UTF8 encoding of each key and value
-    private static void ConvertDictionaryToBlob(Dictionary<string, string> properties, BlobBuilder builder)
+    private static void ConvertDictionaryToBlob(
+        Dictionary<string, string> properties,
+        BlobBuilder builder
+    )
     {
         int count = properties.Count;
 
@@ -140,10 +153,13 @@ public class RuntimeOption
 {
     // the configProperties key
     [JsonPropertyName("configProperties")]
-    public Dictionary<string, string> ConfigProperties { get; set; } = new Dictionary<string, string>();
+    public Dictionary<string, string> ConfigProperties { get; set; } =
+        new Dictionary<string, string>();
+
     // everything other than configProperties
     [JsonExtensionData]
-    public Dictionary<string, object> ExtensionDataSub { get; set; } = new Dictionary<string, object>();
+    public Dictionary<string, object> ExtensionDataSub { get; set; } =
+        new Dictionary<string, object>();
 }
 
 public class Root
@@ -151,14 +167,20 @@ public class Root
     // the runtimeOptions key
     [JsonPropertyName("runtimeOptions")]
     public RuntimeOption RuntimeOptions { get; set; } = new RuntimeOption();
+
     // everything other than runtimeOptions
     [JsonExtensionData]
-    public Dictionary<string, object> ExtensionDataRoot { get; set; } = new Dictionary<string, object>();
+    public Dictionary<string, object> ExtensionDataRoot { get; set; } =
+        new Dictionary<string, object>();
 }
 
 public class StringConverter : JsonConverter<string>
 {
-    public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override string Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         switch (reader.TokenType)
         {

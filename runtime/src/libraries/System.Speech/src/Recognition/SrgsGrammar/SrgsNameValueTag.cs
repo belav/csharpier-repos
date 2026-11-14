@@ -15,15 +15,15 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsNameValueTag : SrgsElement, IPropertyTag
     {
         #region Constructors
-        public SrgsNameValueTag()
-        {
-        }
+        public SrgsNameValueTag() { }
+
         public SrgsNameValueTag(object value)
         {
             Helpers.ThrowIfNull(value, nameof(value));
 
             Value = value;
         }
+
         public SrgsNameValueTag(string name, object value)
             : this(value)
         {
@@ -36,14 +36,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         // Name of semantic property contained inside the <tag> element.
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = GetTrimmedName(value, "value");
-            }
+            get { return _name; }
+            set { _name = GetTrimmedName(value, "value"); }
         }
 
         // Prefast cannot figure out that parameter checking is done
@@ -56,10 +50,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 Helpers.ThrowIfNull(value, nameof(value));
 
-                if ((value is string) ||
-                (value is bool) ||
-                (value is int) ||
-                (value is double))
+                if ((value is string) || (value is bool) || (value is int) || (value is double))
                 {
                     _value = value;
                 }

@@ -19,7 +19,7 @@ internal class List
         GC.Collect();
         GC.WaitForPendingFinalizers();
 
-        for(long i = 0; i < iterations; i++)
+        for (long i = 0; i < iterations; i++)
         {
             CreateLargeObjects();
             GC.Collect();
@@ -33,7 +33,7 @@ internal class List
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        for(long i = 0; i < iterations; i++)
+        for (long i = 0; i < iterations; i++)
         {
             CreateLargeObjectsHalf();
             GC.Collect();
@@ -42,8 +42,8 @@ internal class List
         }
 
         //Promote from Gen1 to Gen2
-        SmallGC [] sgc;
-        sgc = new SmallGC [LOOP];
+        SmallGC[] sgc;
+        sgc = new SmallGC[LOOP];
 
         for (int j = 0; j < LOOP; j++)
             sgc[j] = new SmallGC(0);
@@ -56,21 +56,21 @@ internal class List
         GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
-                    
-        for(long i = 0; i < iterations; i++)
+
+        for (long i = 0; i < iterations; i++)
         {
             // allocate into gen 0
-            sgc = new SmallGC [LOOP];
+            sgc = new SmallGC[LOOP];
             for (int j = 0; j < LOOP; j++)
                 sgc[j] = new SmallGC(0);
 
             // promote to gen 1
-            while (GC.GetGeneration(sgc[LOOP-1])<1)
+            while (GC.GetGeneration(sgc[LOOP - 1]) < 1)
             {
                 GC.Collect();
-            }                
-            
-            while (GC.GetGeneration(sgc[LOOP-1])<2)
+            }
+
+            while (GC.GetGeneration(sgc[LOOP - 1]) < 2)
             {
                 // promote to gen 2
                 GC.Collect();
@@ -88,29 +88,28 @@ internal class List
         GC.Collect();
         GC.WaitForPendingFinalizers();
 
-        if(List.ValidateList(node, LOOP) == 0)
+        if (List.ValidateList(node, LOOP) == 0)
             Console.WriteLine("Pointers after promotion are not valid");
 
-        for(long i = 0; i < iterations; i++)
+        for (long i = 0; i < iterations; i++)
         {
             // allocate into gen 0
             node = PopulateList(LOOP);
 
             // promote to gen 1
-            while (GC.GetGeneration(node)<1)
+            while (GC.GetGeneration(node) < 1)
             {
                 GC.Collect();
-            }  
+            }
 
-            while (GC.GetGeneration(node)<2)
+            while (GC.GetGeneration(node) < 2)
             {
                 //promote to gen 2
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 
-                if(ValidateList(node, LOOP) == 0)
+                if (ValidateList(node, LOOP) == 0)
                     Console.WriteLine("Pointers after promotion are not valid");
-                
             }
         }
     }
@@ -118,12 +117,13 @@ internal class List
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static List PopulateList(int len)
     {
-        if (len == 0) return null;
+        if (len == 0)
+            return null;
         List Node = new List();
         Node.dat = new SmallGC(1);
         Node.dat.AttachSmallObjects();
         Node.next = null;
-        for (int i = len -1; i > 0; i--)
+        for (int i = len - 1; i > 0; i--)
         {
             List cur = new List();
             cur.dat = new SmallGC(1);
@@ -139,15 +139,18 @@ internal class List
         List tmp1 = First;
         int i = 0;
         LargeGC tmp2;
-        while(tmp1 != null)
+        while (tmp1 != null)
         {
             //Check the list have correct small object pointers after collection
-            if(tmp1.dat == null) break;
+            if (tmp1.dat == null)
+                break;
             tmp2 = tmp1.dat.m_pLarge;
             //check the large object has non zero small object pointers
-            if (tmp2.m_pSmall == null) break;
+            if (tmp2.m_pSmall == null)
+                break;
             //check the large object has correct small object pointers
-            if(tmp2.m_pSmall != tmp1.dat) break;
+            if (tmp2.m_pSmall != tmp1.dat)
+                break;
             tmp1 = tmp1.next;
             i++;
         }
@@ -157,38 +160,37 @@ internal class List
             return 0;
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void CreateLargeObjects()
     {
-        LargeGC [] lgc;
+        LargeGC[] lgc;
         lgc = new LargeGC[LOOP];
-        for (int i=0; i < LOOP ; i++)
+        for (int i = 0; i < LOOP; i++)
             lgc[i] = new LargeGC();
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void CreateLargeObjectsHalf()
     {
-        LargeGC [] lgc;
+        LargeGC[] lgc;
         lgc = new LargeGC[LOOP];
 
-        for(int i = 0; i < LOOP; i++)
+        for (int i = 0; i < LOOP; i++)
             lgc[i] = new LargeGC();
 
-        for(int i = 0; i < LOOP; i+=2)
+        for (int i = 0; i < LOOP; i += 2)
             lgc[i] = null;
     }
 }
 
 internal class LargeGC
 {
-    public double [] d;
+    public double[] d;
     public SmallGC m_pSmall;
 
     public LargeGC()
     {
-        d = new double [10625]; //85 KB
+        d = new double[10625]; //85 KB
         m_pSmall = null;
     }
 
@@ -201,6 +203,7 @@ internal class LargeGC
 internal class SmallGC
 {
     public LargeGC m_pLarge;
+
     public SmallGC(int HasLargeObj)
     {
         if (HasLargeObj == 1)
@@ -208,6 +211,7 @@ internal class SmallGC
         else
             m_pLarge = null;
     }
+
     public virtual void AttachSmallObjects()
     {
         m_pLarge.AttachSmallObjects(this);

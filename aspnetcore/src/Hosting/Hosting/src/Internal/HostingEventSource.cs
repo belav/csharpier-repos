@@ -97,28 +97,22 @@ internal sealed class HostingEventSource : EventSource
                 DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
-            _totalRequestsCounter ??= new PollingCounter(
-                "total-requests",
-                this,
-                () => Volatile.Read(ref _totalRequests)
+            _totalRequestsCounter ??= new PollingCounter("total-requests", this, () =>
+                Volatile.Read(ref _totalRequests)
             )
             {
                 DisplayName = "Total Requests",
             };
 
-            _currentRequestsCounter ??= new PollingCounter(
-                "current-requests",
-                this,
-                () => Volatile.Read(ref _currentRequests)
+            _currentRequestsCounter ??= new PollingCounter("current-requests", this, () =>
+                Volatile.Read(ref _currentRequests)
             )
             {
                 DisplayName = "Current Requests",
             };
 
-            _failedRequestsCounter ??= new PollingCounter(
-                "failed-requests",
-                this,
-                () => Volatile.Read(ref _failedRequests)
+            _failedRequestsCounter ??= new PollingCounter("failed-requests", this, () =>
+                Volatile.Read(ref _failedRequests)
             )
             {
                 DisplayName = "Failed Requests",

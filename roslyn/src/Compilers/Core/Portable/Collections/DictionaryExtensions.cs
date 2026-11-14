@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis
         public static TValue GetOrAdd<TKey, TValue>(
             this Dictionary<TKey, TValue> dictionary,
             TKey key,
-            TValue value)
+            TValue value
+        )
             where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var existingValue))
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis
         public static bool TryAdd<TKey, TValue>(
             this Dictionary<TKey, TValue> dictionary,
             TKey key,
-            TValue value)
+            TValue value
+        )
             where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var _))
@@ -53,7 +55,11 @@ namespace Microsoft.CodeAnalysis
         }
 #endif
 
-        public static void AddPooled<K, V>(this IDictionary<K, ArrayBuilder<V>> dictionary, K key, V value)
+        public static void AddPooled<K, V>(
+            this IDictionary<K, ArrayBuilder<V>> dictionary,
+            K key,
+            V value
+        )
             where K : notnull
         {
             if (!dictionary.TryGetValue(key, out var values))
@@ -65,7 +71,12 @@ namespace Microsoft.CodeAnalysis
             values.Add(value);
         }
 
-        public static ImmutableSegmentedDictionary<K, ImmutableArray<V>> ToImmutableSegmentedDictionaryAndFree<K, V>(this IReadOnlyDictionary<K, ArrayBuilder<V>> builder)
+        public static ImmutableSegmentedDictionary<
+            K,
+            ImmutableArray<V>
+        > ToImmutableSegmentedDictionaryAndFree<K, V>(
+            this IReadOnlyDictionary<K, ArrayBuilder<V>> builder
+        )
             where K : notnull
         {
             var result = ImmutableSegmentedDictionary.CreateBuilder<K, ImmutableArray<V>>();

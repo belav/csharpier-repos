@@ -30,9 +30,7 @@ namespace OLEDB.Test.ModuleCore
 
         //Constructor
         public CTestBase(string desc)
-            : this(null, desc)
-        {
-        }
+            : this(null, desc) { }
 
         //Constructor
         public CTestBase(string name, string desc)
@@ -40,7 +38,8 @@ namespace OLEDB.Test.ModuleCore
             //Now set the passed in names.
             if (name != null)
                 this.Name = name;
-            if (this.Name == null) this.Name = "No Name Provided";
+            if (this.Name == null)
+                this.Name = "No Name Provided";
             if (desc != null)
                 this.Desc = desc;
         }
@@ -183,9 +182,7 @@ namespace OLEDB.Test.ModuleCore
             set { _children = value; }
         }
 
-        protected virtual void UpdateAttributes()
-        {
-        }
+        protected virtual void UpdateAttributes() { }
 
         protected virtual void DetermineChildren()
         {
@@ -221,9 +218,7 @@ namespace OLEDB.Test.ModuleCore
             }
         }
 
-        public virtual void AddChildren()
-        {
-        }
+        public virtual void AddChildren() { }
 
         //ITestCase implementation
         public string GetName()
@@ -258,7 +253,6 @@ namespace OLEDB.Test.ModuleCore
             {
                 return HandleException(e);
             }
-
         }
 
         public virtual int Terminate(object o)
@@ -367,7 +361,14 @@ namespace OLEDB.Test.ModuleCore
             while (inner != null)
             {
                 CError.WriteLine("\n INNER EXCEPTION :");
-                CError.Log(actual, expected, inner.Source, inner.Message, inner.StackTrace, eErrorLevel);
+                CError.Log(
+                    actual,
+                    expected,
+                    inner.Source,
+                    inner.Message,
+                    inner.StackTrace,
+                    eErrorLevel
+                );
                 inner = inner.InnerException;
             }
 

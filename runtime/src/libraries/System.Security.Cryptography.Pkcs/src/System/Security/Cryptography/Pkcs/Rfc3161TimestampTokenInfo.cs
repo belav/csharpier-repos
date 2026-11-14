@@ -47,7 +47,8 @@ namespace System.Security.Cryptography.Pkcs
             bool isOrdering = false,
             ReadOnlyMemory<byte>? nonce = null,
             ReadOnlyMemory<byte>? timestampAuthorityName = null,
-            X509ExtensionCollection? extensions = null)
+            X509ExtensionCollection? extensions = null
+        )
         {
             _encodedBytes = Encode(
                 policyId,
@@ -59,7 +60,8 @@ namespace System.Security.Cryptography.Pkcs
                 accuracyInMicroseconds,
                 nonce,
                 timestampAuthorityName,
-                extensions);
+                extensions
+            );
 
             if (!TryDecode(_encodedBytes, true, out _parsedData, out _, out _))
             {
@@ -90,7 +92,13 @@ namespace System.Security.Cryptography.Pkcs
         /// Gets an OID of the hash algorithm.
         /// </summary>
         /// <value>An OID of the hash algorithm.</value>
-        public Oid HashAlgorithmId => (_hashAlgorithmId ??= new Oid(_parsedData.MessageImprint.HashAlgorithm.Algorithm, null));
+        public Oid HashAlgorithmId =>
+            (
+                _hashAlgorithmId ??= new Oid(
+                    _parsedData.MessageImprint.HashAlgorithm.Algorithm,
+                    null
+                )
+            );
 
         /// <summary>
         /// Gets the data representing the message hash.
@@ -184,7 +192,8 @@ namespace System.Security.Cryptography.Pkcs
                 X509Extension extension = new X509Extension(
                     rawExtension.ExtnId,
                     rawExtension.ExtnValue.ToArray(),
-                    rawExtension.Critical);
+                    rawExtension.Critical
+                );
 
                 // Currently there are no extensions defined.
                 // Should this dip into CryptoConfig or other extensible
@@ -233,9 +242,18 @@ namespace System.Security.Cryptography.Pkcs
         public static bool TryDecode(
             ReadOnlyMemory<byte> encodedBytes,
             [NotNullWhen(true)] out Rfc3161TimestampTokenInfo? timestampTokenInfo,
-            out int bytesConsumed)
+            out int bytesConsumed
+        )
         {
-            if (TryDecode(encodedBytes, false, out Rfc3161TstInfo tstInfo, out bytesConsumed, out byte[]? copiedBytes))
+            if (
+                TryDecode(
+                    encodedBytes,
+                    false,
+                    out Rfc3161TstInfo tstInfo,
+                    out bytesConsumed,
+                    out byte[]? copiedBytes
+                )
+            )
             {
                 timestampTokenInfo = new Rfc3161TimestampTokenInfo(copiedBytes!, tstInfo);
                 return true;
@@ -251,7 +269,8 @@ namespace System.Security.Cryptography.Pkcs
             bool ownsMemory,
             out Rfc3161TstInfo tstInfo,
             out int bytesConsumed,
-            out byte[]? copiedBytes)
+            out byte[]? copiedBytes
+        )
         {
             // https://tools.ietf.org/html/rfc3161#section-2.4.2
             // The eContent SHALL be the DER-encoded value of TSTInfo.
@@ -272,7 +291,10 @@ namespace System.Security.Cryptography.Pkcs
                     firstElement = copiedBytes;
                 }
 
-                Rfc3161TstInfo parsedInfo = Rfc3161TstInfo.Decode(firstElement, AsnEncodingRules.DER);
+                Rfc3161TstInfo parsedInfo = Rfc3161TstInfo.Decode(
+                    firstElement,
+                    AsnEncodingRules.DER
+                );
 
                 // The deserializer doesn't do bounds checks.
                 // Micros and Millis are defined as (1..999)
@@ -282,11 +304,13 @@ namespace System.Security.Cryptography.Pkcs
                 // (Reminder to readers: a null int? with an inequality operator
                 // has the value false, so if accuracy is missing, or millis or micro is missing,
                 // then the respective checks return false and don't throw).
-                if (parsedInfo.Accuracy?.Micros > 999 ||
-                    parsedInfo.Accuracy?.Micros < 1 ||
-                    parsedInfo.Accuracy?.Millis > 999 ||
-                    parsedInfo.Accuracy?.Millis < 1 ||
-                    parsedInfo.Accuracy?.Seconds < 0)
+                if (
+                    parsedInfo.Accuracy?.Micros > 999
+                    || parsedInfo.Accuracy?.Micros < 1
+                    || parsedInfo.Accuracy?.Millis > 999
+                    || parsedInfo.Accuracy?.Millis < 1
+                    || parsedInfo.Accuracy?.Seconds < 0
+                )
                 {
                     throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                 }
@@ -321,7 +345,8 @@ namespace System.Security.Cryptography.Pkcs
             long? accuracyInMicroseconds,
             ReadOnlyMemory<byte>? nonce,
             ReadOnlyMemory<byte>? tsaName,
-            X509ExtensionCollection? extensions)
+            X509ExtensionCollection? extensions
+        )
         {
             if (policyId is null)
             {

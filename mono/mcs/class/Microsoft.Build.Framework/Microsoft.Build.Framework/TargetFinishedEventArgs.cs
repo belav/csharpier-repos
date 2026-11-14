@@ -26,51 +26,54 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class TargetFinishedEventArgs : BuildStatusEventArgs {
-	
-		string	targetName;
-		string	projectFile;
-		string	targetFile;
-		bool	succeeded;
-				
-		protected TargetFinishedEventArgs ()
-		{
-		}
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class TargetFinishedEventArgs : BuildStatusEventArgs
+    {
+        string targetName;
+        string projectFile;
+        string targetFile;
+        bool succeeded;
 
-		public TargetFinishedEventArgs (string message,
-						string helpKeyword,
-						string targetName,
-						string projectFile,
-						string targetFile,
-						bool succeeded)
-			: base (message, helpKeyword, null)
-		{
-			this.targetName = targetName;
-			this.projectFile = projectFile;
-			this.targetFile = targetFile;  
-			this.succeeded = succeeded;
-		}
+        protected TargetFinishedEventArgs() { }
 
-		public string ProjectFile {
-			get { return projectFile; }
-		}
+        public TargetFinishedEventArgs(
+            string message,
+            string helpKeyword,
+            string targetName,
+            string projectFile,
+            string targetFile,
+            bool succeeded
+        )
+            : base(message, helpKeyword, null)
+        {
+            this.targetName = targetName;
+            this.projectFile = projectFile;
+            this.targetFile = targetFile;
+            this.succeeded = succeeded;
+        }
 
-		public string TargetFile {
-			get { return targetFile; }
-		}
+        public string ProjectFile
+        {
+            get { return projectFile; }
+        }
 
-		public string TargetName {
-			get { return targetName; }
-		}
-		
-		public bool Succeeded {
-			get { return succeeded; }
-		}
-	}
+        public string TargetFile
+        {
+            get { return targetFile; }
+        }
+
+        public string TargetName
+        {
+            get { return targetName; }
+        }
+
+        public bool Succeeded
+        {
+            get { return succeeded; }
+        }
+    }
 }
-

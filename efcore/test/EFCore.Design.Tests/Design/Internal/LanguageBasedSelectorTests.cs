@@ -14,7 +14,8 @@ public class LanguageBasedSelectorTests
         var selector = new TestLanguageBasedSelector(
             new TestLanguageBasedService("C#"),
             new TestLanguageBasedService("F#"),
-            vbService);
+            vbService
+        );
 
         var result = selector.Select("VB");
 
@@ -27,7 +28,8 @@ public class LanguageBasedSelectorTests
         var legacyService = new TestLanguageBasedService(null);
         var selector = new TestLanguageBasedSelector(
             legacyService,
-            new TestLanguageBasedService("C#"));
+            new TestLanguageBasedService("C#")
+        );
 
         var result = selector.Select("C#");
 
@@ -52,7 +54,8 @@ public class LanguageBasedSelectorTests
         var selector = new TestLanguageBasedSelector(
             csharpService,
             new TestLanguageBasedService("F#"),
-            new TestLanguageBasedService("VB"));
+            new TestLanguageBasedService("VB")
+        );
 
         var result = selector.Select(null);
 
@@ -75,7 +78,8 @@ public class LanguageBasedSelectorTests
         var lastService = new TestLanguageBasedService("C#");
         var selector = new TestLanguageBasedSelector(
             new TestLanguageBasedService("C#"),
-            lastService);
+            lastService
+        );
 
         var result = selector.Select("C#");
 
@@ -85,9 +89,7 @@ public class LanguageBasedSelectorTests
     private class TestLanguageBasedSelector : LanguageBasedSelector<TestLanguageBasedService>
     {
         public TestLanguageBasedSelector(params TestLanguageBasedService[] services)
-            : base(services)
-        {
-        }
+            : base(services) { }
     }
 
     private class TestLanguageBasedService : ILanguageBasedService

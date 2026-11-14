@@ -7,8 +7,8 @@ using System.Net.Http;
 namespace System.Web.Http.Routing
 {
     /// <summary>
-    /// Route that generates a virtual path, but does not claim any routes. 
-    /// This can be used with RouteCollectionRoute to provide generation by names. 
+    /// Route that generates a virtual path, but does not claim any routes.
+    /// This can be used with RouteCollectionRoute to provide generation by names.
     /// Delegates to an inner route to do actual generation.
     /// </summary>
     /// <remarks>
@@ -59,7 +59,10 @@ namespace System.Web.Http.Routing
             return null;
         }
 
-        public IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, IDictionary<string, object> values)
+        public IHttpVirtualPathData GetVirtualPath(
+            HttpRequestMessage request,
+            IDictionary<string, object> values
+        )
         {
             return _innerRoute.GetVirtualPath(request, values);
         }

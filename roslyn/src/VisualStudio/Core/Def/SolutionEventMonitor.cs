@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices
         private const string SolutionOpening = "Solution Opening";
         private const string SolutionClosing = "Solution Closing";
 
-        private readonly UIContext _solutionClosingContext = UIContext.FromUIContextGuid(VSConstants.UICONTEXT.SolutionClosing_guid);
+        private readonly UIContext _solutionClosingContext = UIContext.FromUIContextGuid(
+            VSConstants.UICONTEXT.SolutionClosing_guid
+        );
         private readonly IGlobalOperationNotificationService _notificationService;
         private readonly Dictionary<string, IDisposable> _operations = new();
 
@@ -30,11 +32,20 @@ namespace Microsoft.VisualStudio.LanguageServices
             Contract.ThrowIfNull(notificationService);
             _notificationService = notificationService;
 
-            RegisterEventHandler(KnownUIContexts.SolutionBuildingContext, SolutionBuildingContextChanged);
-            RegisterEventHandler(KnownUIContexts.SolutionOpeningContext, SolutionOpeningContextChanged);
+            RegisterEventHandler(
+                KnownUIContexts.SolutionBuildingContext,
+                SolutionBuildingContextChanged
+            );
+            RegisterEventHandler(
+                KnownUIContexts.SolutionOpeningContext,
+                SolutionOpeningContextChanged
+            );
             RegisterEventHandler(_solutionClosingContext, SolutionClosingContextChanged);
 
-            static void RegisterEventHandler(UIContext context, EventHandler<UIContextChangedEventArgs> handler)
+            static void RegisterEventHandler(
+                UIContext context,
+                EventHandler<UIContextChangedEventArgs> handler
+            )
             {
                 // make sure we set initial state correctly. otherwise, we can get into a race where we might miss the very first events
                 if (context.IsActive)
@@ -51,19 +62,21 @@ namespace Microsoft.VisualStudio.LanguageServices
 
             _operations.Clear();
 
-            KnownUIContexts.SolutionBuildingContext.UIContextChanged -= SolutionBuildingContextChanged;
-            KnownUIContexts.SolutionOpeningContext.UIContextChanged -= SolutionOpeningContextChanged;
+            KnownUIContexts.SolutionBuildingContext.UIContextChanged -=
+                SolutionBuildingContextChanged;
+            KnownUIContexts.SolutionOpeningContext.UIContextChanged -=
+                SolutionOpeningContextChanged;
             _solutionClosingContext.UIContextChanged -= SolutionClosingContextChanged;
         }
 
-        private void SolutionBuildingContextChanged(object? sender, UIContextChangedEventArgs e)
-            => ContextChanged(e.Activated, SolutionBuilding);
+        private void SolutionBuildingContextChanged(object? sender, UIContextChangedEventArgs e) =>
+            ContextChanged(e.Activated, SolutionBuilding);
 
-        private void SolutionOpeningContextChanged(object? sender, UIContextChangedEventArgs e)
-            => ContextChanged(e.Activated, SolutionOpening);
+        private void SolutionOpeningContextChanged(object? sender, UIContextChangedEventArgs e) =>
+            ContextChanged(e.Activated, SolutionOpening);
 
-        private void SolutionClosingContextChanged(object? sender, UIContextChangedEventArgs e)
-            => ContextChanged(e.Activated, SolutionClosing);
+        private void SolutionClosingContextChanged(object? sender, UIContextChangedEventArgs e) =>
+            ContextChanged(e.Activated, SolutionClosing);
 
         private void ContextChanged(bool active, string operation)
         {

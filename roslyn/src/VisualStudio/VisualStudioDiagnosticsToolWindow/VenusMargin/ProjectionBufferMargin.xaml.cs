@@ -29,7 +29,9 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TextView.Properties[ProjectionSpanTaggerProvider.PropertyName] = new List<Span>(e.AddedItems.Cast<SnapshotSpan>().Select(ss => ss.Span).Where(ss => !ss.IsEmpty));
+            TextView.Properties[ProjectionSpanTaggerProvider.PropertyName] = new List<Span>(
+                e.AddedItems.Cast<SnapshotSpan>().Select(ss => ss.Span).Where(ss => !ss.IsEmpty)
+            );
             RaiseSelectionChanged(EventArgs.Empty);
         }
 
@@ -45,18 +47,17 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
             var view = TextEditorFactory.CreateTextView(buffer);
 
             var projectionBuffer = TextView.TextBuffer as IProjectionBuffer;
-            var spansFromBuffer = from ss in projectionBuffer.CurrentSnapshot.GetSourceSpans()
-                                  where ss.Snapshot.TextBuffer == buffer
-                                  select ss.Span;
+            var spansFromBuffer =
+                from ss in projectionBuffer.CurrentSnapshot.GetSourceSpans()
+                where ss.Snapshot.TextBuffer == buffer
+                select ss.Span;
 
-            view.Properties[ProjectionSpanTaggerProvider.PropertyName] = new List<Span>(spansFromBuffer);
+            view.Properties[ProjectionSpanTaggerProvider.PropertyName] = new List<Span>(
+                spansFromBuffer
+            );
             var host = TextEditorFactory.CreateTextViewHost(view, setFocus: true);
 
-            var window = new Window
-            {
-                Content = host.HostControl,
-                ShowActivated = true,
-            };
+            var window = new Window { Content = host.HostControl, ShowActivated = true };
 
             window.Closed += (s, a) =>
             {

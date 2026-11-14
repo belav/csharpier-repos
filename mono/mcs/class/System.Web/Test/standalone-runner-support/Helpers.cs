@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,59 +31,61 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
-
 using MonoTests.stand_alone.WebHarness;
 
 namespace StandAloneRunnerSupport
 {
-	public sealed class Helpers
-	{
-		public const string BEGIN_CODE_MARKER = "<!-- @CODE_BEGIN@ -->";
-		public const string END_CODE_MARKER = "<!-- @CODE_END@ -->";
-		
-		public static string ExtractCodeFromHtml (string html)
-		{
-			AppDomain ad = AppDomain.CurrentDomain;
-			return HtmlDiff.GetControlFromPageHtml (html, BEGIN_CODE_MARKER, END_CODE_MARKER);
-		}
+    public sealed class Helpers
+    {
+        public const string BEGIN_CODE_MARKER = "<!-- @CODE_BEGIN@ -->";
+        public const string END_CODE_MARKER = "<!-- @CODE_END@ -->";
 
-		public static void ExtractAndCompareCodeFromHtml (string html, string original, string msg)
-		{
-			string rendered = ExtractCodeFromHtml (html);
-			HtmlDiff.AssertAreEqual (original, rendered, msg);
-		}
+        public static string ExtractCodeFromHtml(string html)
+        {
+            AppDomain ad = AppDomain.CurrentDomain;
+            return HtmlDiff.GetControlFromPageHtml(html, BEGIN_CODE_MARKER, END_CODE_MARKER);
+        }
 
-		public static string StripWebResourceAxdQuery (string origHtml)
-		{
-			return StripWebResourceAxdQuery (StripWebResourceAxdQuery (origHtml, "\""), "&quot;");
-		}
+        public static void ExtractAndCompareCodeFromHtml(string html, string original, string msg)
+        {
+            string rendered = ExtractCodeFromHtml(html);
+            HtmlDiff.AssertAreEqual(original, rendered, msg);
+        }
 
-		static string StripWebResourceAxdQuery (string origHtml, string delimiter)
-		{
-			if (String.IsNullOrEmpty (origHtml))
-				return origHtml;
+        public static string StripWebResourceAxdQuery(string origHtml)
+        {
+            return StripWebResourceAxdQuery(StripWebResourceAxdQuery(origHtml, "\""), "&quot;");
+        }
 
-			// Naive approach, enough for now
-			return new Regex (delimiter + "/WebResource\\.axd.*?" + delimiter).Replace (origHtml, delimiter + "/WebResource.axd" + delimiter);
-		}
+        static string StripWebResourceAxdQuery(string origHtml, string delimiter)
+        {
+            if (String.IsNullOrEmpty(origHtml))
+                return origHtml;
 
-		public static bool HasException (string html, Type exceptionType)
-		{
-			if (exceptionType == null)
-				throw new ArgumentNullException ("exceptionType");
+            // Naive approach, enough for now
+            return new Regex(delimiter + "/WebResource\\.axd.*?" + delimiter).Replace(
+                origHtml,
+                delimiter + "/WebResource.axd" + delimiter
+            );
+        }
 
-			return HasException (html, exceptionType.FullName);
-		}
-		
-		public static bool HasException (string html, string exceptionType)
-		{
-			if (String.IsNullOrEmpty (exceptionType))
-				throw new ArgumentNullException ("exceptionType");
-			
-			if (String.IsNullOrEmpty (html))
-				return false;
-			
-			return html.IndexOf ("[" + exceptionType + "]:") != -1;
-		}
-	}
+        public static bool HasException(string html, Type exceptionType)
+        {
+            if (exceptionType == null)
+                throw new ArgumentNullException("exceptionType");
+
+            return HasException(html, exceptionType.FullName);
+        }
+
+        public static bool HasException(string html, string exceptionType)
+        {
+            if (String.IsNullOrEmpty(exceptionType))
+                throw new ArgumentNullException("exceptionType");
+
+            if (String.IsNullOrEmpty(html))
+                return false;
+
+            return html.IndexOf("[" + exceptionType + "]:") != -1;
+        }
+    }
 }

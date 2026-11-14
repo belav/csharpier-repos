@@ -12,7 +12,12 @@ internal static partial class Interop
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use CreateFile.
         /// </summary>
-        [LibraryImport(Libraries.Kernel32, EntryPoint = "CreateFileW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Kernel32,
+            EntryPoint = "CreateFileW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         private static unsafe partial IntPtr CreateFilePrivate_IntPtr(
             string lpFileName,
             int dwDesiredAccess,
@@ -20,17 +25,27 @@ internal static partial class Interop
             SECURITY_ATTRIBUTES* lpSecurityAttributes,
             FileMode dwCreationDisposition,
             int dwFlagsAndAttributes,
-            IntPtr hTemplateFile);
+            IntPtr hTemplateFile
+        );
 
         internal static unsafe IntPtr CreateFile_IntPtr(
             string lpFileName,
             int dwDesiredAccess,
             FileShare dwShareMode,
             FileMode dwCreationDisposition,
-            int dwFlagsAndAttributes)
+            int dwFlagsAndAttributes
+        )
         {
             lpFileName = PathInternal.EnsureExtendedPrefixIfNeeded(lpFileName);
-            return CreateFilePrivate_IntPtr(lpFileName, dwDesiredAccess, dwShareMode, null, dwCreationDisposition, dwFlagsAndAttributes, IntPtr.Zero);
+            return CreateFilePrivate_IntPtr(
+                lpFileName,
+                dwDesiredAccess,
+                dwShareMode,
+                null,
+                dwCreationDisposition,
+                dwFlagsAndAttributes,
+                IntPtr.Zero
+            );
         }
     }
 }

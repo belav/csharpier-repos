@@ -5,36 +5,35 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class Test_constructor 
+public class Test_constructor
 {
     static string s;
 
-    public override string ToString() 
+    public override string ToString()
     {
         return "Test";
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public Test_constructor() 
+    public Test_constructor()
     {
-        s = ToString();   // cannot be devirtualized
+        s = ToString(); // cannot be devirtualized
     }
-    
+
     [Fact]
-    public static int TestEntryPoint() 
+    public static int TestEntryPoint()
     {
         new Child();
         return (s == "Child" ? 100 : 0);
     }
 }
 
-class Child : Test_constructor 
+class Child : Test_constructor
 {
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public Child() { }
 
-    public override string ToString() 
+    public override string ToString()
     {
         return "Child";
     }

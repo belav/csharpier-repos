@@ -10,9 +10,15 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.Atom10FeedFormatter<>))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.Atom10ItemFormatter))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.Atom10ItemFormatter<>))]
-[assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.AtomPub10CategoriesDocumentFormatter))]
-[assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter))]
-[assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter<>))]
+[assembly: TypeForwardedTo(
+    typeof(System.ServiceModel.Syndication.AtomPub10CategoriesDocumentFormatter)
+)]
+[assembly: TypeForwardedTo(
+    typeof(System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter)
+)]
+[assembly: TypeForwardedTo(
+    typeof(System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter<>)
+)]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.CategoriesDocument))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.CategoriesDocumentFormatter))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.InlineCategoriesDocument))]
@@ -27,7 +33,9 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.SyndicationCategory))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.SyndicationContent))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.SyndicationElementExtension))]
-[assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.SyndicationElementExtensionCollection))]
+[assembly: TypeForwardedTo(
+    typeof(System.ServiceModel.Syndication.SyndicationElementExtensionCollection)
+)]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.SyndicationFeed))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.SyndicationFeedFormatter))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.SyndicationItem))]

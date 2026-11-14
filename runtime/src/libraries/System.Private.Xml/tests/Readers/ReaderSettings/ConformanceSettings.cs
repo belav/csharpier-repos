@@ -25,7 +25,6 @@ namespace System.Xml.ReaderSettingsTests
             return mn.GetNodes();
         }
 
-
         //[Variation("Wrapping Tests: CR with CR", Pri = 2, Params = new object[] { "Auto", "Auto", "<root/>", "true" })]
         //[Variation("Wrapping Tests: CR with CR", Pri = 2, Params = new object[] { "Auto", "Auto", "<root/><root/>", "true" })]
         //[Variation("Wrapping Tests: CR with CR", Pri = 2, Params = new object[] { "Fragment", "Auto", "<root/><root/>", "true" })]
@@ -40,7 +39,6 @@ namespace System.Xml.ReaderSettingsTests
         //[Variation("Wrapping Tests: CR with CR", Pri = 2, Params = new object[] { "Fragment", "Document", "<root/><root/>", "false" })]
         //[Variation("Wrapping Tests: CR with CR", Pri = 2, Params = new object[] { "Document", "Document", "<root/>", "true" })]
 
-
         public int wrappingTests()
         {
             string underlyingReaderLevel = this.CurVariation.Params[0].ToString();
@@ -53,14 +51,19 @@ namespace System.Xml.ReaderSettingsTests
             CError.WriteLine(conformanceXml);
             CError.WriteLine("IsValid = " + valid);
 
-
             try
             {
                 XmlReaderSettings rsU = new XmlReaderSettings();
-                rsU.ConformanceLevel = (ConformanceLevel)Enum.Parse(typeof(ConformanceLevel), underlyingReaderLevel);
-                XmlReader rU = ReaderHelper.Create(new StringReader(conformanceXml), rsU, (string)null);
+                rsU.ConformanceLevel = (ConformanceLevel)
+                    Enum.Parse(typeof(ConformanceLevel), underlyingReaderLevel);
+                XmlReader rU = ReaderHelper.Create(
+                    new StringReader(conformanceXml),
+                    rsU,
+                    (string)null
+                );
                 XmlReaderSettings rsW = new XmlReaderSettings();
-                rsW.ConformanceLevel = (ConformanceLevel)Enum.Parse(typeof(ConformanceLevel), wrappingReaderLevel);
+                rsW.ConformanceLevel = (ConformanceLevel)
+                    Enum.Parse(typeof(ConformanceLevel), wrappingReaderLevel);
                 XmlReader rW = ReaderHelper.Create(rU, rsW);
                 CError.Compare(rW.ReadState, ReadState.Initial, "ReadState not initial");
             }
@@ -84,7 +87,11 @@ namespace System.Xml.ReaderSettingsTests
         {
             XmlReaderSettings rs = new XmlReaderSettings();
             CError.Compare(rs.CheckCharacters, true, "CheckCharacters not true");
-            CError.Compare(rs.ConformanceLevel, ConformanceLevel.Document, "Conformance Level not document by default");
+            CError.Compare(
+                rs.ConformanceLevel,
+                ConformanceLevel.Document,
+                "Conformance Level not document by default"
+            );
             return TEST_PASS;
         }
 
@@ -99,10 +106,17 @@ namespace System.Xml.ReaderSettingsTests
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.CheckCharacters = true;
 
-            XmlReader reader = ReaderHelper.CreateReader(readerType, new StringReader(invalidCharXml), false, null, rs);
+            XmlReader reader = ReaderHelper.CreateReader(
+                readerType,
+                new StringReader(invalidCharXml),
+                false,
+                null,
+                rs
+            );
             try
             {
-                while (reader.Read()) ;
+                while (reader.Read())
+                    ;
             }
             catch (XmlException xe)
             {
@@ -137,11 +151,20 @@ namespace System.Xml.ReaderSettingsTests
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.CheckCharacters = false;
 
-            using (XmlReader reader = ReaderHelper.CreateReader(readerType, new StringReader(invalidCharXml), false, null, rs))
+            using (
+                XmlReader reader = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(invalidCharXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 try
                 {
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                 }
                 catch (XmlException xe)
                 {
@@ -169,10 +192,17 @@ namespace System.Xml.ReaderSettingsTests
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.CheckCharacters = false;
-            XmlReader reader = ReaderHelper.CreateReader(readerType, new StringReader(mn.GetNodes()), false, null, rs);
+            XmlReader reader = ReaderHelper.CreateReader(
+                readerType,
+                new StringReader(mn.GetNodes()),
+                false,
+                null,
+                rs
+            );
             try
             {
-                while (reader.Read()) ;
+                while (reader.Read())
+                    ;
             }
             catch (XmlException xe)
             {
@@ -207,10 +237,17 @@ namespace System.Xml.ReaderSettingsTests
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.CheckCharacters = true;
 
-            XmlReader reader = ReaderHelper.CreateReader(readerType, new StringReader(invalidCharXml), false, null, rs);
+            XmlReader reader = ReaderHelper.CreateReader(
+                readerType,
+                new StringReader(invalidCharXml),
+                false,
+                null,
+                rs
+            );
             try
             {
-                while (reader.Read()) ;
+                while (reader.Read())
+                    ;
             }
             catch (XmlException xe)
             {
@@ -237,10 +274,48 @@ namespace System.Xml.ReaderSettingsTests
             return mn.GetNodes();
         }
 
-
-        private static bool[] s_pri0ExpectedNone = { false, false, false, false, false, true, true, true, true, true, false };
-        private static bool[] s_pri0ExpectedFragment = { false, false, false, false, false, true, true, true, true, true, false };
-        private static bool[] s_pri0ExpectedDocument = { true, true, false, true, true, true, true, true, true, true, false };
+        private static bool[] s_pri0ExpectedNone =
+        {
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+        };
+        private static bool[] s_pri0ExpectedFragment =
+        {
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+        };
+        private static bool[] s_pri0ExpectedDocument =
+        {
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+        };
 
         public object[] GetAllPri0ConformanceTestXmlStrings()
         {
@@ -267,10 +342,10 @@ namespace System.Xml.ReaderSettingsTests
             ManagedNodeWriter mn = null;
 
             list.Add(GetPatternXml("T")); //1
-            list.Add(GetPatternXml("XEMEM"));//2
-            list.Add(GetPatternXml("WEM"));//3
-            list.Add(GetPatternXml("TPT"));//4
-            list.Add(GetPatternXml("A"));//5
+            list.Add(GetPatternXml("XEMEM")); //2
+            list.Add(GetPatternXml("WEM")); //3
+            list.Add(GetPatternXml("TPT")); //4
+            list.Add(GetPatternXml("A")); //5
 
             //6
             mn = new ManagedNodeWriter();
@@ -303,7 +378,10 @@ namespace System.Xml.ReaderSettingsTests
             //9
             mn = new ManagedNodeWriter();
             mn.PutPattern("XE");
-            mn.PutAttribute(UnicodeCharHelper.GetInvalidCharacters(CharType.XmlChar), UnicodeCharHelper.GetInvalidCharacters(CharType.XmlChar));
+            mn.PutAttribute(
+                UnicodeCharHelper.GetInvalidCharacters(CharType.XmlChar),
+                UnicodeCharHelper.GetInvalidCharacters(CharType.XmlChar)
+            );
             mn.PutPattern("M");
             CError.WriteLine(mn.GetNodes());
             list.Add(mn.GetNodes());
@@ -347,11 +425,16 @@ namespace System.Xml.ReaderSettingsTests
 
             for (int i = 0; i < xml.Length; i++)
             {
-                XmlReader reader = ReaderHelper.Create(new StringReader((string)xml[i]), rs, (string)null);
+                XmlReader reader = ReaderHelper.Create(
+                    new StringReader((string)xml[i]),
+                    rs,
+                    (string)null
+                );
                 bool actual = false;
                 try
                 {
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                 }
                 catch (XmlException xe)
                 {
@@ -367,15 +450,18 @@ namespace System.Xml.ReaderSettingsTests
                     CError.WriteLine((string)xml[i]);
                     failed = true;
                 }
-            }//end for
+            } //end for
 
             if (failed)
                 return TEST_FAIL;
 
             return TEST_PASS;
-        }//end variation
+        } //end variation
 
-        [Variation("Conformance Level to Fragment and test various scenarios from test plan", Pri = 0)]
+        [Variation(
+            "Conformance Level to Fragment and test various scenarios from test plan",
+            Pri = 0
+        )]
         public int CFragment()
         {
             XmlReaderSettings rs = new XmlReaderSettings();
@@ -391,11 +477,16 @@ namespace System.Xml.ReaderSettingsTests
 
             for (int i = 0; i < xml.Length; i++)
             {
-                XmlReader reader = ReaderHelper.Create(new StringReader((string)xml[i]), rs, (string)null);
+                XmlReader reader = ReaderHelper.Create(
+                    new StringReader((string)xml[i]),
+                    rs,
+                    (string)null
+                );
                 bool actual = false;
                 try
                 {
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                 }
                 catch (XmlException xe)
                 {
@@ -411,15 +502,18 @@ namespace System.Xml.ReaderSettingsTests
                     CError.WriteLine((string)xml[i]);
                     failed = true;
                 }
-            }//end for
+            } //end for
 
             if (failed)
                 return TEST_FAIL;
 
             return TEST_PASS;
-        }//end variation
+        } //end variation
 
-        [Variation("Conformance Level to Document and test various scenarios from test plan", Pri = 0)]
+        [Variation(
+            "Conformance Level to Document and test various scenarios from test plan",
+            Pri = 0
+        )]
         public int CDocument()
         {
             XmlReaderSettings rs = new XmlReaderSettings();
@@ -435,11 +529,16 @@ namespace System.Xml.ReaderSettingsTests
 
             for (int i = 0; i < xml.Length; i++)
             {
-                XmlReader reader = ReaderHelper.Create(new StringReader((string)xml[i]), rs, (string)null);
+                XmlReader reader = ReaderHelper.Create(
+                    new StringReader((string)xml[i]),
+                    rs,
+                    (string)null
+                );
                 bool actual = false;
                 try
                 {
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                 }
                 catch (XmlException xe)
                 {
@@ -463,7 +562,6 @@ namespace System.Xml.ReaderSettingsTests
             return TEST_PASS;
         }
 
-
         [Variation("Test Invalid Value Range for enum properties", Pri = 1)]
         public int InvalidValueRange()
         {
@@ -475,9 +573,7 @@ namespace System.Xml.ReaderSettingsTests
                 settings.ConformanceLevel = (ConformanceLevel)666;
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             return TEST_PASS;
         }

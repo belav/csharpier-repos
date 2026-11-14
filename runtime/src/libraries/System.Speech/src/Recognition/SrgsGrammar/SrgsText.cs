@@ -13,9 +13,8 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsText : SrgsElement, IElementText
     {
         #region Constructors
-        public SrgsText()
-        {
-        }
+        public SrgsText() { }
+
         public SrgsText(string text)
         {
             Helpers.ThrowIfNull(text, nameof(text));
@@ -28,10 +27,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         #region public Properties
         public string Text
         {
-            get
-            {
-                return _text;
-            }
+            get { return _text; }
             set
             {
                 Helpers.ThrowIfNull(value, nameof(value));

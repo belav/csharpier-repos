@@ -21,7 +21,10 @@ namespace System.IO.Pipelines.Tests
         protected override string ReadWriteCountName => null;
         protected override Type UnsupportedConcurrentExceptionType => null;
 
-        [ActiveIssue("Implementation doesn't currently special-case Dispose, treating it instead as completion.")]
-        public override Task Disposed_ThrowsObjectDisposedException() => base.Disposed_ThrowsObjectDisposedException();
+        [ActiveIssue(
+            "Implementation doesn't currently special-case Dispose, treating it instead as completion."
+        )]
+        public override Task Disposed_ThrowsObjectDisposedException() =>
+            base.Disposed_ThrowsObjectDisposedException();
     }
 }

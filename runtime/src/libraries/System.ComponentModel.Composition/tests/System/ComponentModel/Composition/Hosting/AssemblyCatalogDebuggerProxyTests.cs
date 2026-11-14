@@ -59,5 +59,5 @@ namespace System.ComponentModel.Composition.Hosting
         {
             return new AssemblyCatalog(assembly);
         }
-   }
+    }
 }

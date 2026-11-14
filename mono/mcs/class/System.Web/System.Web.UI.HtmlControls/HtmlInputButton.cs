@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,247 +32,279 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Web.Util;
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [DefaultEventAttribute("ServerClick")]
+    [SupportsEventValidation]
+    public class HtmlInputButton : HtmlInputControl, IPostBackEventHandler
+    {
+        static readonly object ServerClickEvent = new object();
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEventAttribute ("ServerClick")]
-	[SupportsEventValidation]
-	public class HtmlInputButton : HtmlInputControl, IPostBackEventHandler 
-	{
-		static readonly object ServerClickEvent = new object();
+        public HtmlInputButton()
+            : this("button") { }
 
-		public HtmlInputButton () : this ("button")
-		{
-		}
+        public HtmlInputButton(string type)
+            : base(type) { }
 
-		public HtmlInputButton (string type) :	base (type)
-		{
-		}
+        [DefaultValue(true)]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public virtual bool CausesValidation
+        {
+            get
+            {
+                string flag = Attributes["CausesValidation"];
 
-		[DefaultValue(true)]
-		[WebSysDescription("")]
-		[WebCategory("Behavior")]
-		public virtual bool CausesValidation {
-			get {
-				string flag = Attributes["CausesValidation"];
+                if (flag == null)
+                    return true;
 
-				if (flag == null)
-					return true;
+                return Boolean.Parse(flag);
+            }
+            set { Attributes["CausesValidation"] = value.ToString(); }
+        }
 
-				return Boolean.Parse (flag);
-			}
-			set {
-				Attributes ["CausesValidation"] = value.ToString();
-			}
-		}
+        [DefaultValue("")]
+        public virtual string ValidationGroup
+        {
+            get
+            {
+                string group = Attributes["ValidationGroup"];
 
-		[DefaultValue ("")]
-		public virtual string ValidationGroup
-		{
-			get {
-				string group = Attributes["ValidationGroup"];
+                if (group == null)
+                    return "";
 
-				if (group == null)
-					return "";
+                return group;
+            }
+            set
+            {
+                if (value == null)
+                    Attributes.Remove("ValidationGroup");
+                else
+                    Attributes["ValidationGroup"] = value;
+            }
+        }
 
-				return group;
-			}
-			set {
-				if (value == null)
-					Attributes.Remove ("ValidationGroup");
-				else
-					Attributes["ValidationGroup"] = value;
-			}
-		}
+        void RaisePostBackEventInternal(string eventArgument)
+        {
+            ValidateEvent(UniqueID, eventArgument);
+            if (CausesValidation)
+                Page.Validate(ValidationGroup);
 
-		void RaisePostBackEventInternal (string eventArgument)
-		{
-			ValidateEvent (UniqueID, eventArgument);
-			if (CausesValidation)
-				Page.Validate (ValidationGroup);
-			
-			if (String.Compare (Type, "reset", true, Helpers.InvariantCulture) != 0)
-				OnServerClick (EventArgs.Empty);
-			else
-				ResetForm (FindForm ());
-		}
+            if (String.Compare(Type, "reset", true, Helpers.InvariantCulture) != 0)
+                OnServerClick(EventArgs.Empty);
+            else
+                ResetForm(FindForm());
+        }
 
-		HtmlForm FindForm ()
-		{
-			Page p = Page;
-			if (p != null)
-				return p.Form;
+        HtmlForm FindForm()
+        {
+            Page p = Page;
+            if (p != null)
+                return p.Form;
 
-			return null;
-		}
-		
-		void ResetForm (HtmlForm form)
-		{
-			if (form == null || !form.HasControls ())
-				return;
-			
-			ResetChildrenValues (form.Controls);
-		}
+            return null;
+        }
 
-		void ResetChildrenValues (ControlCollection children)
-		{
-			foreach (Control child in children) {
-				if (child == null)
-					continue;
-				
-				if (child.HasControls ())
-					ResetChildrenValues (child.Controls);
-				ResetChildValue (child);
-			}
-		}
+        void ResetForm(HtmlForm form)
+        {
+            if (form == null || !form.HasControls())
+                return;
 
-		void ResetChildValue (Control child)
-		{
-			Type type = child.GetType ();
-			object[] attributes = type.GetCustomAttributes (false);
-			if (attributes == null || attributes.Length == 0)
-				return;
+            ResetChildrenValues(form.Controls);
+        }
 
-			string defaultProperty = null;
-			DefaultPropertyAttribute defprop;
-			
-			foreach (object attr in attributes) {
-				defprop = attr as DefaultPropertyAttribute;
-				if (defprop == null)
-					continue;
-				defaultProperty = defprop.Name;
-				break;
-			}
+        void ResetChildrenValues(ControlCollection children)
+        {
+            foreach (Control child in children)
+            {
+                if (child == null)
+                    continue;
 
-			if (defaultProperty == null || defaultProperty.Length == 0)
-				return;
+                if (child.HasControls())
+                    ResetChildrenValues(child.Controls);
+                ResetChildValue(child);
+            }
+        }
 
-			PropertyInfo pi = null;
-			try {
-				pi = type.GetProperty (defaultProperty,
-						       BindingFlags.Instance |
-						       BindingFlags.Public |
-						       BindingFlags.Static |
-						       BindingFlags.IgnoreCase);
-			} catch (Exception) {
-				// ignore
-			}
-			if (pi == null || !pi.CanWrite)
-				return;
-			
-			attributes = pi.GetCustomAttributes (false);
-			if (attributes == null || attributes.Length == 0)
-				return;
+        void ResetChildValue(Control child)
+        {
+            Type type = child.GetType();
+            object[] attributes = type.GetCustomAttributes(false);
+            if (attributes == null || attributes.Length == 0)
+                return;
 
-			DefaultValueAttribute defval = null;
-			object value = null;
-			
-			foreach (object attr in attributes) {
-				defval = attr as DefaultValueAttribute;
-				if (defval == null)
-					continue;
-				value = defval.Value;
-				break;
-			}
-			
-			if (value == null || pi.PropertyType != value.GetType ())
-				return;
+            string defaultProperty = null;
+            DefaultPropertyAttribute defprop;
 
-			try {
-				pi.SetValue (child, value, null);
-			} catch (Exception) {
-				// ignore
-			}
-		}
+            foreach (object attr in attributes)
+            {
+                defprop = attr as DefaultPropertyAttribute;
+                if (defprop == null)
+                    continue;
+                defaultProperty = defprop.Name;
+                break;
+            }
 
-		protected virtual void RaisePostBackEvent (string eventArgument)
-		{
-			RaisePostBackEventInternal (eventArgument);
-		}
-		
-		void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
-		{
-			RaisePostBackEvent (eventArgument);
-		}
+            if (defaultProperty == null || defaultProperty.Length == 0)
+                return;
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			base.OnPreRender (e);
-			if (Events [ServerClickEvent] != null)
-				Page.RequiresPostBackScript ();
-		}
+            PropertyInfo pi = null;
+            try
+            {
+                pi = type.GetProperty(
+                    defaultProperty,
+                    BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.Static
+                        | BindingFlags.IgnoreCase
+                );
+            }
+            catch (Exception)
+            {
+                // ignore
+            }
+            if (pi == null || !pi.CanWrite)
+                return;
 
-		protected virtual void OnServerClick (EventArgs e)
-		{
-			EventHandler server_click = (EventHandler) Events [ServerClickEvent];
-			if (server_click != null)
-				server_click (this, e);
-		}
+            attributes = pi.GetCustomAttributes(false);
+            if (attributes == null || attributes.Length == 0)
+                return;
 
-		protected override void RenderAttributes (HtmlTextWriter writer)
-		{
-			CultureInfo inv = Helpers.InvariantCulture;
-			string input_type = Type;
-			if (0 != String.Compare (input_type, "reset", true, inv) &&
-				((0 == String.Compare (input_type, "submit", true, inv)) ||
-				(0 == String.Compare (input_type, "button", true, inv) && Events [ServerClickEvent] != null))) {
+            DefaultValueAttribute defval = null;
+            object value = null;
 
-				string onclick = String.Empty;
-				if (Attributes ["onclick"] != null) {
-					onclick = ClientScriptManager.EnsureEndsWithSemicolon (Attributes ["onclick"] + onclick);
-					Attributes.Remove ("onclick");
-				}
+            foreach (object attr in attributes)
+            {
+                defval = attr as DefaultValueAttribute;
+                if (defval == null)
+                    continue;
+                value = defval.Value;
+                break;
+            }
 
-				Page page = Page;
-				if (page != null) {
-					PostBackOptions options = GetPostBackOptions ();
-					onclick += page.ClientScript.GetPostBackEventReference (options, true);
-				}
+            if (value == null || pi.PropertyType != value.GetType())
+                return;
 
-				if (onclick.Length > 0) {
-					bool encode = true;
-					if (Events [ServerClickEvent] != null)
-						encode = false; // tests show that this is indeed
-								// the case...
-					writer.WriteAttribute ("onclick", onclick, encode);
-					writer.WriteAttribute ("language", "javascript");
-				}
-			}
+            try
+            {
+                pi.SetValue(child, value, null);
+            }
+            catch (Exception)
+            {
+                // ignore
+            }
+        }
 
-			Attributes.Remove ("CausesValidation");
-			// LAMESPEC: MS doesn't actually remove this
-			//attribute.  it shows up in the rendered
-			//output.
+        protected virtual void RaisePostBackEvent(string eventArgument)
+        {
+            RaisePostBackEventInternal(eventArgument);
+        }
 
-			// Attributes.Remove("ValidationGroup");
-			base.RenderAttributes (writer);
-		}
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
+        {
+            RaisePostBackEvent(eventArgument);
+        }
 
-		PostBackOptions GetPostBackOptions ()
-		{
-			Page page = Page;
-			PostBackOptions options = new PostBackOptions (this);
-			options.ValidationGroup = null;
-			options.ActionUrl = null;
-			options.Argument = String.Empty;
-			options.RequiresJavaScriptProtocol = false;
-			options.ClientSubmit = (0 != String.Compare (Type, "submit", true, Helpers.InvariantCulture));
-			options.PerformValidation = CausesValidation && page != null && page.Validators.Count > 0;
-			if (options.PerformValidation)
-				options.ValidationGroup = ValidationGroup;
+        protected internal override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            if (Events[ServerClickEvent] != null)
+                Page.RequiresPostBackScript();
+        }
 
-			return options;
-		}
+        protected virtual void OnServerClick(EventArgs e)
+        {
+            EventHandler server_click = (EventHandler)Events[ServerClickEvent];
+            if (server_click != null)
+                server_click(this, e);
+        }
 
-		[WebSysDescription("")]
-		[WebCategory("Action")]
-		public event EventHandler ServerClick {
-			add { Events.AddHandler (ServerClickEvent, value); }
-			remove { Events.RemoveHandler (ServerClickEvent, value); }
-		}
-	}	
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            CultureInfo inv = Helpers.InvariantCulture;
+            string input_type = Type;
+            if (
+                0 != String.Compare(input_type, "reset", true, inv)
+                && (
+                    (0 == String.Compare(input_type, "submit", true, inv))
+                    || (
+                        0 == String.Compare(input_type, "button", true, inv)
+                        && Events[ServerClickEvent] != null
+                    )
+                )
+            )
+            {
+                string onclick = String.Empty;
+                if (Attributes["onclick"] != null)
+                {
+                    onclick = ClientScriptManager.EnsureEndsWithSemicolon(
+                        Attributes["onclick"] + onclick
+                    );
+                    Attributes.Remove("onclick");
+                }
+
+                Page page = Page;
+                if (page != null)
+                {
+                    PostBackOptions options = GetPostBackOptions();
+                    onclick += page.ClientScript.GetPostBackEventReference(options, true);
+                }
+
+                if (onclick.Length > 0)
+                {
+                    bool encode = true;
+                    if (Events[ServerClickEvent] != null)
+                        encode = false; // tests show that this is indeed
+                    // the case...
+                    writer.WriteAttribute("onclick", onclick, encode);
+                    writer.WriteAttribute("language", "javascript");
+                }
+            }
+
+            Attributes.Remove("CausesValidation");
+            // LAMESPEC: MS doesn't actually remove this
+            //attribute.  it shows up in the rendered
+            //output.
+
+            // Attributes.Remove("ValidationGroup");
+            base.RenderAttributes(writer);
+        }
+
+        PostBackOptions GetPostBackOptions()
+        {
+            Page page = Page;
+            PostBackOptions options = new PostBackOptions(this);
+            options.ValidationGroup = null;
+            options.ActionUrl = null;
+            options.Argument = String.Empty;
+            options.RequiresJavaScriptProtocol = false;
+            options.ClientSubmit = (
+                0 != String.Compare(Type, "submit", true, Helpers.InvariantCulture)
+            );
+            options.PerformValidation =
+                CausesValidation && page != null && page.Validators.Count > 0;
+            if (options.PerformValidation)
+                options.ValidationGroup = ValidationGroup;
+
+            return options;
+        }
+
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        public event EventHandler ServerClick
+        {
+            add { Events.AddHandler(ServerClickEvent, value); }
+            remove { Events.RemoveHandler(ServerClickEvent, value); }
+        }
+    }
 }
-

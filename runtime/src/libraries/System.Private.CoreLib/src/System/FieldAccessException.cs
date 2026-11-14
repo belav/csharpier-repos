@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when there is an invalid attempt to access a private or protected field inside a class.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class FieldAccessException : MemberAccessException
     {
         public FieldAccessException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_FIELDACCESS;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected FieldAccessException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected FieldAccessException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

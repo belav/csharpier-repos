@@ -7,7 +7,11 @@ namespace ILCompiler.DependencyAnalysis
 {
     public partial class JumpStubNode
     {
-        protected override void EmitCode(NodeFactory factory, ref ARMEmitter encoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref ARMEmitter encoder,
+            bool relocsOnly
+        )
         {
             if (!_target.RepresentsIndirectionCell)
             {

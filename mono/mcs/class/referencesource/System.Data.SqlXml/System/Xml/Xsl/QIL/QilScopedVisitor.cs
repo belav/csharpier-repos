@@ -7,13 +7,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace System.Xml.Xsl.Qil {
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// Adds iterator and function scoping to the QilVisitor implementation.
     /// </summary>
-    internal class QilScopedVisitor : QilVisitor {
-
+    internal class QilScopedVisitor : QilVisitor
+    {
         //-----------------------------------------------
         // QilScopedVisitor methods
         //-----------------------------------------------
@@ -21,40 +21,44 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Called when a variable, parameter, or function enters scope.
         /// </summary>
-        protected virtual void BeginScope(QilNode node) {
-        }
+        protected virtual void BeginScope(QilNode node) { }
 
         /// <summary>
         /// Called when a variable, parameter, or function exits scope.
         /// </summary>
-        protected virtual void EndScope(QilNode node) {
-        }
+        protected virtual void EndScope(QilNode node) { }
 
         /// <summary>
         /// Called at the beginning of Visit().
         /// </summary>
-        protected virtual void BeforeVisit(QilNode node) {
+        protected virtual void BeforeVisit(QilNode node)
+        {
             QilExpression qil;
 
-            switch (node.NodeType) {
+            switch (node.NodeType)
+            {
                 case QilNodeType.QilExpression:
                     // Put all global functions, variables, and parameters in scope
-                    qil = (QilExpression) node;
-                    foreach (QilNode param in qil.GlobalParameterList) BeginScope(param);
-                    foreach (QilNode var in qil.GlobalVariableList) BeginScope(var);
-                    foreach (QilNode func in qil.FunctionList) BeginScope(func);
+                    qil = (QilExpression)node;
+                    foreach (QilNode param in qil.GlobalParameterList)
+                        BeginScope(param);
+                    foreach (QilNode var in qil.GlobalVariableList)
+                        BeginScope(var);
+                    foreach (QilNode func in qil.FunctionList)
+                        BeginScope(func);
                     break;
 
                 case QilNodeType.Function:
                     // Put all formal arguments in scope
-                    foreach (QilNode arg in ((QilFunction) node).Arguments) BeginScope(arg);
+                    foreach (QilNode arg in ((QilFunction)node).Arguments)
+                        BeginScope(arg);
                     break;
 
                 case QilNodeType.Loop:
                 case QilNodeType.Filter:
                 case QilNodeType.Sort:
                     // Put loop iterator in scope
-                    BeginScope(((QilLoop) node).Variable);
+                    BeginScope(((QilLoop)node).Variable);
                     break;
             }
         }
@@ -62,32 +66,37 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Called at the end of Visit().
         /// </summary>
-        protected virtual void AfterVisit(QilNode node) {
+        protected virtual void AfterVisit(QilNode node)
+        {
             QilExpression qil;
 
-            switch (node.NodeType) {
+            switch (node.NodeType)
+            {
                 case QilNodeType.QilExpression:
                     // Remove all global functions, variables, and parameters from scope
-                    qil = (QilExpression) node;
-                    foreach (QilNode func in qil.FunctionList) EndScope(func);
-                    foreach (QilNode var in qil.GlobalVariableList) EndScope(var);
-                    foreach (QilNode param in qil.GlobalParameterList) EndScope(param);
+                    qil = (QilExpression)node;
+                    foreach (QilNode func in qil.FunctionList)
+                        EndScope(func);
+                    foreach (QilNode var in qil.GlobalVariableList)
+                        EndScope(var);
+                    foreach (QilNode param in qil.GlobalParameterList)
+                        EndScope(param);
                     break;
 
                 case QilNodeType.Function:
                     // Remove all formal arguments from scope
-                    foreach (QilNode arg in ((QilFunction) node).Arguments) EndScope(arg);
+                    foreach (QilNode arg in ((QilFunction)node).Arguments)
+                        EndScope(arg);
                     break;
 
                 case QilNodeType.Loop:
                 case QilNodeType.Filter:
                 case QilNodeType.Sort:
                     // Remove loop iterator in scope
-                    EndScope(((QilLoop) node).Variable);
+                    EndScope(((QilLoop)node).Variable);
                     break;
             }
         }
-
 
         //-----------------------------------------------
         // QilVisitor overrides
@@ -96,7 +105,8 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Call BeforeVisit() and AfterVisit().
         /// </summary>
-        protected override QilNode Visit(QilNode n) {
+        protected override QilNode Visit(QilNode n)
+        {
             QilNode ret;
             BeforeVisit(n);
             ret = base.Visit(n);

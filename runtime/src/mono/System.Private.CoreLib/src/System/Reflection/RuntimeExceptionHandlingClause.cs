@@ -26,5 +26,4 @@ namespace System.Reflection
         public override int FilterOffset => filter_offset;
         public override Type? CatchType => catch_type;
     }
-
 }

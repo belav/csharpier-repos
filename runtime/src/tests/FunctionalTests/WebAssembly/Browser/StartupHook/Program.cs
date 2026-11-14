@@ -9,17 +9,16 @@ namespace Sample
 {
     public partial class Test
     {
-        public static void Main()
-        {
-        }
+        public static void Main() { }
 
         [JSExport]
         public static int TestMeaning()
         {
             string appContextKey = "Test.StartupHookForFunctionalTest.DidRun";
-            var data = (string) AppContext.GetData (appContextKey);
+            var data = (string)AppContext.GetData(appContextKey);
 
-            if (data != "Yes") {
+            if (data != "Yes")
+            {
                 string msg = $"Expected startup hook to set {appContextKey} to 'Yes', got '{data}'";
                 Console.Error.WriteLine(msg);
                 return 104;

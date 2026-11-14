@@ -17,8 +17,7 @@ public class RoutingAcrossPipelineBranchesTests
         MvcTestFixture<RoutingWebSite.StartupRoutingDifferentBranches> fixture
     )
     {
-        Factory =
-            fixture.Factories.FirstOrDefault()
+        Factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
     }
 

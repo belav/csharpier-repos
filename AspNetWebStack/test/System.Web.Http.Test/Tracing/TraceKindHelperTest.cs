@@ -8,8 +8,6 @@ namespace System.Web.Http.Tracing
     public class TraceKindHelperTest : EnumHelperTestBase<TraceKind>
     {
         public TraceKindHelperTest()
-            : base(TraceKindHelper.IsDefined, TraceKindHelper.Validate, (TraceKind)999)
-        {
-        }
+            : base(TraceKindHelper.IsDefined, TraceKindHelper.Validate, (TraceKind)999) { }
     }
 }

@@ -6,14 +6,14 @@ namespace System.ServiceModel.Channels
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml;
-    using System.Net;
-    using System.IO;
-    using System.Text;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Net;
     using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
+    using System.Text;
+    using System.Xml;
 
     abstract class ContextProtocol
     {
@@ -23,7 +23,9 @@ namespace System.ServiceModel.Channels
         {
             if (!ContextExchangeMechanismHelper.IsDefined(contextExchangeMechanism))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("contextExchangeMechanism"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("contextExchangeMechanism")
+                );
             }
             this.contextExchangeMechanism = contextExchangeMechanism;
         }
@@ -55,17 +57,25 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.ContextProtocolContextAddedToMessage,
-                    SR.GetString(SR.TraceCodeContextProtocolContextAddedToMessage), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.ContextProtocolContextAddedToMessage,
+                    SR.GetString(SR.TraceCodeContextProtocolContextAddedToMessage),
+                    this
+                );
             }
         }
 
         internal static class HttpCookieToolbox
         {
             public const string ContextHttpCookieName = "WscContext";
-            public const string RemoveContextHttpCookieHeader = ContextHttpCookieName + ";Max-Age=0";
+            public const string RemoveContextHttpCookieHeader =
+                ContextHttpCookieName + ";Max-Age=0";
 
-            public static string EncodeContextAsHttpSetCookieHeader(ContextMessageProperty context, Uri uri)
+            public static string EncodeContextAsHttpSetCookieHeader(
+                ContextMessageProperty context,
+                Uri uri
+            )
             {
                 if (uri == null)
                 {
@@ -89,16 +99,22 @@ namespace System.ServiceModel.Channels
                     "{0}=\"{1}\";Path={2}",
                     HttpCookieToolbox.ContextHttpCookieName,
                     Convert.ToBase64String(stream.GetBuffer(), 0, (int)stream.Length),
-                    uri.AbsolutePath);
+                    uri.AbsolutePath
+                );
 
                 return result;
             }
 
-            public static bool TryCreateFromHttpCookieHeader(string httpCookieHeader, out ContextMessageProperty context)
+            public static bool TryCreateFromHttpCookieHeader(
+                string httpCookieHeader,
+                out ContextMessageProperty context
+            )
             {
                 if (httpCookieHeader == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("httpCookieHeader");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "httpCookieHeader"
+                    );
                 }
 
                 context = null;
@@ -106,7 +122,12 @@ namespace System.ServiceModel.Channels
                 foreach (string token in httpCookieHeader.Split(';'))
                 {
                     string trimmedToken = token.Trim();
-                    if (trimmedToken.StartsWith(HttpCookieToolbox.ContextHttpCookieName, StringComparison.Ordinal))
+                    if (
+                        trimmedToken.StartsWith(
+                            HttpCookieToolbox.ContextHttpCookieName,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         int equalsSignIndex = trimmedToken.IndexOf('=');
                         if (equalsSignIndex < 0)
@@ -118,14 +139,21 @@ namespace System.ServiceModel.Channels
                         {
                             string value = trimmedToken.Substring(equalsSignIndex + 1).Trim();
 
-                            if (value.Length > 1 && (value[0] == '"') && (value[value.Length - 1] == '"'))
+                            if (
+                                value.Length > 1
+                                && (value[0] == '"')
+                                && (value[value.Length - 1] == '"')
+                            )
                             {
                                 value = value.Substring(1, value.Length - 2);
                             }
                             try
                             {
                                 context = ContextMessageHeader.ParseContextHeader(
-                                    XmlReader.Create(new MemoryStream(Convert.FromBase64String(value))));
+                                    XmlReader.Create(
+                                        new MemoryStream(Convert.FromBase64String(value))
+                                    )
+                                );
                                 break;
                             }
                             catch (SerializationException e)

@@ -46,8 +46,8 @@ public class HtmlHelperPartialExtensionsTest
         if (expectedModel == null)
         {
             // Extension methods without model parameter use ViewData.Model to get Model.
-            var viewData =
-                expectedViewData ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
+            var viewData = expectedViewData
+                ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
             helper.SetupGet(h => h.ViewData).Returns(viewData).Verifiable();
         }
 
@@ -126,8 +126,8 @@ public class HtmlHelperPartialExtensionsTest
         if (expectedModel == null)
         {
             // Extension methods without model parameter use ViewData.Model to get Model.
-            var viewData =
-                expectedViewData ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
+            var viewData = expectedViewData
+                ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
             helper.SetupGet(h => h.ViewData).Returns(viewData).Verifiable();
         }
 
@@ -209,8 +209,8 @@ public class HtmlHelperPartialExtensionsTest
         if (expectedModel == null)
         {
             // Extension methods without model parameter use ViewData.Model to get Model.
-            var viewData =
-                expectedViewData ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
+            var viewData = expectedViewData
+                ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
             helper.SetupGet(h => h.ViewData).Returns(viewData).Verifiable();
         }
 
@@ -260,8 +260,8 @@ public class HtmlHelperPartialExtensionsTest
         if (expectedModel == null)
         {
             // Extension methods without model parameter use ViewData.Model to get Model.
-            var viewData =
-                expectedViewData ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
+            var viewData = expectedViewData
+                ?? new ViewDataDictionary(new EmptyModelMetadataProvider());
             helper.SetupGet(h => h.ViewData).Returns(viewData).Verifiable();
         }
 
@@ -447,8 +447,8 @@ public class HtmlHelperPartialExtensionsTest
         var viewData = helper.ViewData;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => helper.PartialAsync("test-view", model, viewData)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            helper.PartialAsync("test-view", model, viewData)
         );
         Assert.Equal(expected, exception.Message);
     }
@@ -491,8 +491,8 @@ public class HtmlHelperPartialExtensionsTest
         var viewData = helper.ViewData;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => helper.PartialAsync("test-view", model, viewData)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            helper.PartialAsync("test-view", model, viewData)
         );
         Assert.Equal(expected, exception.Message);
     }
@@ -539,8 +539,8 @@ public class HtmlHelperPartialExtensionsTest
         var viewData = helper.ViewData;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => helper.PartialAsync("test-view", model, viewData)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            helper.PartialAsync("test-view", model, viewData)
         );
         Assert.Equal(expected, exception.Message);
     }
@@ -583,8 +583,8 @@ public class HtmlHelperPartialExtensionsTest
         var viewData = helper.ViewData;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => helper.RenderPartialAsync("test-view", model, viewData)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            helper.RenderPartialAsync("test-view", model, viewData)
         );
         Assert.Equal(expected, exception.Message);
     }
@@ -627,8 +627,8 @@ public class HtmlHelperPartialExtensionsTest
         var viewData = helper.ViewData;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => helper.RenderPartialAsync("test-view", model, viewData)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            helper.RenderPartialAsync("test-view", model, viewData)
         );
         Assert.Equal(expected, exception.Message);
     }
@@ -675,8 +675,8 @@ public class HtmlHelperPartialExtensionsTest
         var viewData = helper.ViewData;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => helper.RenderPartialAsync("test-view", model, viewData)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            helper.RenderPartialAsync("test-view", model, viewData)
         );
         Assert.Equal(expected, exception.Message);
     }

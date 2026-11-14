@@ -6,12 +6,12 @@
 **
 **
 **
-** Purpose: 
+** Purpose:
 ** This class represents the current system timezone.  It is
-** the only meaningful implementation of the TimeZone class 
+** the only meaningful implementation of the TimeZone class
 ** available in this version.
 **
-** The only TimeZone that we support in version 1 is the 
+** The only TimeZone that we support in version 1 is the
 ** CurrentTimeZone as determined by the system timezone.
 **
 **

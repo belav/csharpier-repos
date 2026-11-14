@@ -37,7 +37,9 @@ namespace System.Linq.Tests
         public void NullSourceComparer()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Order(Comparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.Order(Comparer<int>.Default)
+            );
         }
 
         [Fact]

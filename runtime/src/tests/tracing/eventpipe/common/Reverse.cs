@@ -14,9 +14,9 @@ namespace Tracing.Tests.Common
     /**
      * ==ADVERTISE PROTOCOL==
      * Before standard IPC Protocol communication can occur on a client-mode connection
-     * the runtime must advertise itself over the connection.  ALL SUBSEQUENT COMMUNICATION 
+     * the runtime must advertise itself over the connection.  ALL SUBSEQUENT COMMUNICATION
      * IS STANDARD DIAGNOSTICS IPC PROTOCOL COMMUNICATION.
-     * 
+     *
      * The flow for Advertise is a one-way burst of 32 bytes consisting of
      * 8 bytes  - "ADVR_V1\0" (ASCII chars + null byte)
      * 16 bytes - CLR Instance Cookie (little-endian)
@@ -48,7 +48,7 @@ namespace Tracing.Tests.Common
                     Magic = binaryReader.ReadBytes(Magic_V1.Length),
                     RuntimeInstanceCookie = new Guid(binaryReader.ReadBytes(16)),
                     ProcessId = binaryReader.ReadUInt64(),
-                    Unused = binaryReader.ReadUInt16()
+                    Unused = binaryReader.ReadUInt16(),
                 };
 
                 for (int i = 0; i < Magic_V1.Length; i++)
@@ -60,7 +60,7 @@ namespace Tracing.Tests.Common
             }
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return $"{{ Magic={Magic}; ClrInstanceId={RuntimeInstanceCookie}; ProcessId={ProcessId}; Unused={Unused}; }}";
         }
@@ -76,7 +76,10 @@ namespace Tracing.Tests.Common
             }
             else
             {
-                return Path.Combine(Path.GetTempPath(), "DOTNET_TRACE_TESTS_" + Path.GetRandomFileName());
+                return Path.Combine(
+                    Path.GetTempPath(),
+                    "DOTNET_TRACE_TESTS_" + Path.GetRandomFileName()
+                );
             }
         }
 
@@ -99,7 +102,11 @@ namespace Tracing.Tests.Common
                     File.Delete(serverAddress);
                 var remoteEP = new UnixDomainSocketEndPoint(serverAddress);
 
-                var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                var socket = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                );
                 // socket(7) states that SO_RCVBUF has a minimum of 128 and SO_SNDBUF has minimum of 1024
                 socket.SendBufferSize = Math.Max(bufferSize, 1024);
                 socket.ReceiveBufferSize = Math.Max(bufferSize, 128);
@@ -144,7 +151,8 @@ namespace Tracing.Tests.Common
                     PipeTransmissionMode.Byte,
                     PipeOptions.None,
                     _bufferSize,
-                    _bufferSize);
+                    _bufferSize
+                );
             }
             else
             {
@@ -162,7 +170,7 @@ namespace Tracing.Tests.Common
                     {
                         serverStream.Disconnect();
                     }
-                    catch {}
+                    catch { }
                     finally
                     {
                         serverStream.Dispose();
@@ -183,7 +191,9 @@ namespace Tracing.Tests.Common
         }
 
         // Creates the server, listens, and closes the server
-        public static async Task<IpcAdvertise> CreateServerAndReceiveAdvertisement(string serverAddress)
+        public static async Task<IpcAdvertise> CreateServerAndReceiveAdvertisement(
+            string serverAddress
+        )
         {
             var server = new ReverseServer(serverAddress);
             Logger.logger.Log("Waiting for connection");

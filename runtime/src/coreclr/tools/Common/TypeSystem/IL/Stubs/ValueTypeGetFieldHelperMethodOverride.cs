@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
@@ -24,18 +23,12 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override MethodSignature Signature
@@ -46,12 +39,16 @@ namespace Internal.IL.Stubs
                 {
                     TypeSystemContext context = _owningType.Context;
                     TypeDesc int32Type = context.GetWellKnownType(WellKnownType.Int32);
-                    TypeDesc eeTypePtrType = context.SystemModule.GetKnownType("Internal.Runtime", "MethodTable").MakePointerType();
+                    TypeDesc eeTypePtrType = context
+                        .SystemModule.GetKnownType("Internal.Runtime", "MethodTable")
+                        .MakePointerType();
 
-                    _signature = new MethodSignature(0, 0, int32Type, new[] {
+                    _signature = new MethodSignature(
+                        0,
+                        0,
                         int32Type,
-                        eeTypePtrType.MakeByRefType()
-                    });
+                        new[] { int32Type, eeTypePtrType.MakeByRefType() }
+                    );
                 }
 
                 return _signature;
@@ -64,11 +61,19 @@ namespace Internal.IL.Stubs
 
             ILEmitter emitter = new ILEmitter();
 
-            TypeDesc methodTableType = Context.SystemModule.GetKnownType("Internal.Runtime", "MethodTable");
+            TypeDesc methodTableType = Context.SystemModule.GetKnownType(
+                "Internal.Runtime",
+                "MethodTable"
+            );
             MethodDesc methodTableOfMethod = methodTableType.GetKnownMethod("Of", null);
 
-            ILToken rawDataToken = owningType.IsValueType ? default :
-                emitter.NewToken(Context.SystemModule.GetKnownType("System.Runtime.CompilerServices", "RawData").GetKnownField("Data"));
+            ILToken rawDataToken = owningType.IsValueType
+                ? default
+                : emitter.NewToken(
+                    Context
+                        .SystemModule.GetKnownType("System.Runtime.CompilerServices", "RawData")
+                        .GetKnownField("Data")
+                );
 
             var switchStream = emitter.NewCodeStream();
             var getFieldStream = emitter.NewCodeStream();
@@ -100,7 +105,9 @@ namespace Internal.IL.Stubs
                 // Don't unnecessarily create an MethodTable for the enum.
                 boxableFieldType = boxableFieldType.UnderlyingType;
 
-                MethodDesc mtOfFieldMethod = methodTableOfMethod.MakeInstantiatedMethod(boxableFieldType);
+                MethodDesc mtOfFieldMethod = methodTableOfMethod.MakeInstantiatedMethod(
+                    boxableFieldType
+                );
                 getFieldStream.Emit(ILOpcode.call, emitter.NewToken(mtOfFieldMethod));
 
                 getFieldStream.Emit(ILOpcode.stind_i);
@@ -125,10 +132,14 @@ namespace Internal.IL.Stubs
                 switchStream.EmitSwitch(fieldGetters.ToArray());
             }
 
-            if (!owningType.IsValueType
-                && MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(this) is MethodDesc slotMethod
-                && owningType.BaseType.FindVirtualFunctionTargetMethodOnObjectType(slotMethod) is MethodDesc baseMethod
-                && slotMethod != baseMethod)
+            if (
+                !owningType.IsValueType
+                && MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(this)
+                    is MethodDesc slotMethod
+                && owningType.BaseType.FindVirtualFunctionTargetMethodOnObjectType(slotMethod)
+                    is MethodDesc baseMethod
+                && slotMethod != baseMethod
+            )
             {
                 // On reference types, we recurse into base implementation too, handling both the case of asking
                 // for number of fields (add number of fields on the current class before returning), and
@@ -163,36 +174,24 @@ namespace Internal.IL.Stubs
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return Instantiation.Empty;
-            }
+            get { return Instantiation.Empty; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal const string MetadataName = "__GetFieldHelper";
 
         public override string Name
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
     }
 }

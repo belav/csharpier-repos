@@ -1,11 +1,11 @@
 ﻿#region Using directives
 
 using System;
-using System.Threading;
-using System.Reflection;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
 using Microsoft.Win32;
 #endregion
 
@@ -19,7 +19,8 @@ namespace System.Workflow.Runtime.DebugEngine
         private int threadId = 0;
         private ManualResetEvent threadInitializedEvent = null;
         private volatile bool runThread = false;
-        private static readonly string ExpressionEvaluationFrameTypeName = "ExpressionEvaluationFrameTypeName";
+        private static readonly string ExpressionEvaluationFrameTypeName =
+            "ExpressionEvaluationFrameTypeName";
         #endregion
 
         #region Methods
@@ -37,7 +38,12 @@ namespace System.Workflow.Runtime.DebugEngine
 
         public void RunThread(IInstanceTable instanceTable)
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugControllerThread.DebugControllerThread():"));
+            Debug.WriteLine(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "WDE: DebugControllerThread.DebugControllerThread():"
+                )
+            );
             if (this.controllerThread == null)
                 return;
 
@@ -48,7 +54,12 @@ namespace System.Workflow.Runtime.DebugEngine
 
         public void StopThread()
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugControllerThread.StopThread():"));
+            Debug.WriteLine(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "WDE: DebugControllerThread.StopThread():"
+                )
+            );
 
             try
             {
@@ -57,12 +68,15 @@ namespace System.Workflow.Runtime.DebugEngine
                     this.runThread = false;
                     Thread.Sleep(10);
 
-                    // On x64 we put the debug controller thread to Sleep(Timeout.Infinite) in 
+                    // On x64 we put the debug controller thread to Sleep(Timeout.Infinite) in
                     // ExpressionEvaluationFunction. This thread needs to be started before it
                     // a Join can execute.
                     if (this.controllerThread.IsAlive && IntPtr.Size == 8)
                     {
-                        while (this.controllerThread.ThreadState == System.Threading.ThreadState.WaitSleepJoin)
+                        while (
+                            this.controllerThread.ThreadState
+                            == System.Threading.ThreadState.WaitSleepJoin
+                        )
                         {
                             this.controllerThread.Start();
                             this.controllerThread.Join();
@@ -74,7 +88,7 @@ namespace System.Workflow.Runtime.DebugEngine
             }
             catch (ThreadStateException)
             {
-                // Ignore the ThreadStateException which will be thrown when StopThread() is called during 
+                // Ignore the ThreadStateException which will be thrown when StopThread() is called during
                 // AppDomain unload.
             }
             finally
@@ -91,18 +105,34 @@ namespace System.Workflow.Runtime.DebugEngine
         {
             try
             {
-                Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugControllerThread.ControllerThreadFunction():"));
+                Debug.WriteLine(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "WDE: DebugControllerThread.ControllerThreadFunction():"
+                    )
+                );
 
                 IExpressionEvaluationFrame expressionEvaluationFrame = null;
 
                 try
                 {
-                    RegistryKey debugEngineSubKey = Registry.LocalMachine.OpenSubKey(RegistryKeys.DebuggerSubKey);
+                    RegistryKey debugEngineSubKey = Registry.LocalMachine.OpenSubKey(
+                        RegistryKeys.DebuggerSubKey
+                    );
                     if (debugEngineSubKey != null)
                     {
-                        string evaluationFrameTypeName = debugEngineSubKey.GetValue(ExpressionEvaluationFrameTypeName, String.Empty) as string;
-                        if (!String.IsNullOrEmpty(evaluationFrameTypeName) && Type.GetType(evaluationFrameTypeName) != null)
-                            expressionEvaluationFrame = Activator.CreateInstance(Type.GetType(evaluationFrameTypeName)) as IExpressionEvaluationFrame;
+                        string evaluationFrameTypeName =
+                            debugEngineSubKey.GetValue(
+                                ExpressionEvaluationFrameTypeName,
+                                String.Empty
+                            ) as string;
+                        if (
+                            !String.IsNullOrEmpty(evaluationFrameTypeName)
+                            && Type.GetType(evaluationFrameTypeName) != null
+                        )
+                            expressionEvaluationFrame =
+                                Activator.CreateInstance(Type.GetType(evaluationFrameTypeName))
+                                as IExpressionEvaluationFrame;
                     }
                 }
                 catch { }
@@ -111,14 +141,21 @@ namespace System.Workflow.Runtime.DebugEngine
                 {
                     Type eeFrameType = null;
 
-                    const string eeFrameTypeNameFormat = "Microsoft.Workflow.DebugEngine.ExpressionEvaluationFrame, Microsoft.Workflow.ExpressionEvaluation, Version={0}.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+                    const string eeFrameTypeNameFormat =
+                        "Microsoft.Workflow.DebugEngine.ExpressionEvaluationFrame, Microsoft.Workflow.ExpressionEvaluation, Version={0}.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
 
                     // Try versions 12.0.0.0, 11.0.0.0, 10.0.0.0
                     for (int version = 12; eeFrameType == null && version >= 10; --version)
                     {
                         try
                         {
-                            eeFrameType = Type.GetType(string.Format(CultureInfo.InvariantCulture, eeFrameTypeNameFormat, version));
+                            eeFrameType = Type.GetType(
+                                string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    eeFrameTypeNameFormat,
+                                    version
+                                )
+                            );
                         }
                         catch (TypeLoadException)
                         {
@@ -128,14 +165,26 @@ namespace System.Workflow.Runtime.DebugEngine
 
                     if (eeFrameType != null)
                     {
-                        expressionEvaluationFrame = Activator.CreateInstance(eeFrameType) as IExpressionEvaluationFrame;
+                        expressionEvaluationFrame =
+                            Activator.CreateInstance(eeFrameType) as IExpressionEvaluationFrame;
                     }
                 }
 
-                Debug.Assert(expressionEvaluationFrame != null, "Failed to create Expression Evaluation Frame.");
+                Debug.Assert(
+                    expressionEvaluationFrame != null,
+                    "Failed to create Expression Evaluation Frame."
+                );
 
                 if (expressionEvaluationFrame != null)
-                    expressionEvaluationFrame.CreateEvaluationFrame((IInstanceTable)instanceTable, (DebugEngineCallback)Delegate.CreateDelegate(typeof(DebugEngineCallback), this, "ExpressionEvaluationFunction"));
+                    expressionEvaluationFrame.CreateEvaluationFrame(
+                        (IInstanceTable)instanceTable,
+                        (DebugEngineCallback)
+                            Delegate.CreateDelegate(
+                                typeof(DebugEngineCallback),
+                                this,
+                                "ExpressionEvaluationFunction"
+                            )
+                    );
             }
             catch
             {
@@ -151,7 +200,6 @@ namespace System.Workflow.Runtime.DebugEngine
             this.threadId = NativeMethods.GetCurrentThreadId();
             this.threadInitializedEvent.Set();
 
-
             using (new DebuggerThreadMarker())
             {
                 // If an exception occurs somehow, continue to spin.
@@ -159,7 +207,7 @@ namespace System.Workflow.Runtime.DebugEngine
                 {
                     try
                     {
-                        // Expression eval on x64 does not work (bug 18143) so 
+                        // Expression eval on x64 does not work (bug 18143) so
                         // don't let the thread spin.
                         if (IntPtr.Size == 8)
                         {
@@ -167,18 +215,29 @@ namespace System.Workflow.Runtime.DebugEngine
                         }
                         else
                             // Spin within the try catch.
-                            while (this.runThread);
+                            while (this.runThread)
+                                ;
                     }
                     catch (ThreadAbortException)
                     {
-                        Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugControllerThread.ExpressionEvaluationFunction(): ThreadAbortException"));
+                        Debug.WriteLine(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                "WDE: DebugControllerThread.ExpressionEvaluationFunction(): ThreadAbortException"
+                            )
+                        );
 
                         // Explicitly do not call ResetAbort().
                         throw;
                     }
                     catch
                     {
-                        Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugControllerThread.ExpressionEvaluationFunction(): other exception"));
+                        Debug.WriteLine(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                "WDE: DebugControllerThread.ExpressionEvaluationFunction(): other exception"
+                            )
+                        );
                     }
                 }
             }
@@ -190,18 +249,12 @@ namespace System.Workflow.Runtime.DebugEngine
 
         public int ThreadId
         {
-            get
-            {
-                return this.threadId;
-            }
+            get { return this.threadId; }
         }
 
         public int ManagedThreadId
         {
-            get
-            {
-                return this.controllerThread.ManagedThreadId;
-            }
+            get { return this.controllerThread.ManagedThreadId; }
         }
 
         #endregion

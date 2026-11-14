@@ -19,7 +19,8 @@ public class RelationalEvaluatableExpressionFilter : EvaluatableExpressionFilter
     /// <param name="relationalDependencies">The relational-specific dependencies to use.</param>
     public RelationalEvaluatableExpressionFilter(
         EvaluatableExpressionFilterDependencies dependencies,
-        RelationalEvaluatableExpressionFilterDependencies relationalDependencies)
+        RelationalEvaluatableExpressionFilterDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;

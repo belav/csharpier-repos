@@ -15,10 +15,11 @@ namespace Wasm.Build.Tests.MT.Blazor;
 
 public class SimpleMultiThreadedTests : BlazorWasmTestBase
 {
-    public SimpleMultiThreadedTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext)
-    {
-    }
+    public SimpleMultiThreadedTests(
+        ITestOutputHelper output,
+        SharedBuildPerTestClassFixture buildContext
+    )
+        : base(output, buildContext) { }
 
     // dotnet-run needed for running with *build* so wwwroot has the index.html etc
     // [Theory]
@@ -37,7 +38,10 @@ public class SimpleMultiThreadedTests : BlazorWasmTestBase
     //                          Path.GetFullPath(Path.Combine(FindBlazorBinFrameworkDir(config, forPublish: false), "..")));
     // }
 
-    [ConditionalTheory(typeof(BuildTestBase), nameof(IsWorkloadWithMultiThreadingForDefaultFramework))]
+    [ConditionalTheory(
+        typeof(BuildTestBase),
+        nameof(IsWorkloadWithMultiThreadingForDefaultFramework)
+    )]
     [InlineData("Debug", false)]
     // [InlineData("Debug", true)]
     [InlineData("Release", false)]
@@ -48,29 +52,39 @@ public class SimpleMultiThreadedTests : BlazorWasmTestBase
         string projectFile = CreateWasmTemplateProject(id, "blazorwasm");
         AddItemsPropertiesToProject(projectFile, "<WasmEnableThreads>true</WasmEnableThreads>");
         // if (aot)
-            // AddItemsPropertiesToProject(projectFile, "<RunAOTCompilation>true</RunAOTCompilation>");
+        // AddItemsPropertiesToProject(projectFile, "<RunAOTCompilation>true</RunAOTCompilation>");
 
-        BlazorPublish(new BlazorBuildOptions(
-            id,
-            config,
-            aot ? NativeFilesType.AOT
-                : (config == "Release" ? NativeFilesType.Relinked : NativeFilesType.FromRuntimePack),
-            RuntimeType: RuntimeVariant.MultiThreaded));
+        BlazorPublish(
+            new BlazorBuildOptions(
+                id,
+                config,
+                aot
+                    ? NativeFilesType.AOT
+                    : (
+                        config == "Release"
+                            ? NativeFilesType.Relinked
+                            : NativeFilesType.FromRuntimePack
+                    ),
+                RuntimeType: RuntimeVariant.MultiThreaded
+            )
+        );
 
         StringBuilder errorOutput = new();
         await BlazorRunForPublishWithWebServer(
-                runOptions: new BlazorRunOptions(
-                    Config: config,
-                    ExtraArgs: "--web-server-use-cors --web-server-use-cop",
-                    OnConsoleMessage: (message) =>
-                    {
-                        if (message.Type == "error")
-                            errorOutput.AppendLine(message.Text);
-                    },
-                    OnErrorMessage: (message) =>
-                    {
-                        errorOutput.AppendLine(message);
-                    }));
+            runOptions: new BlazorRunOptions(
+                Config: config,
+                ExtraArgs: "--web-server-use-cors --web-server-use-cop",
+                OnConsoleMessage: (message) =>
+                {
+                    if (message.Type == "error")
+                        errorOutput.AppendLine(message.Text);
+                },
+                OnErrorMessage: (message) =>
+                {
+                    errorOutput.AppendLine(message);
+                }
+            )
+        );
 
         if (errorOutput.Length > 0)
             throw new XunitException($"Errors found in browser console output:\n{errorOutput}");

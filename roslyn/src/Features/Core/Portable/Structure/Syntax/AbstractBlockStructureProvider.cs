@@ -17,12 +17,25 @@ namespace Microsoft.CodeAnalysis.Structure
     /// </summary>
     internal abstract class AbstractBlockStructureProvider : BlockStructureProvider
     {
-        private readonly ImmutableDictionary<Type, ImmutableArray<AbstractSyntaxStructureProvider>> _nodeProviderMap;
-        private readonly ImmutableDictionary<int, ImmutableArray<AbstractSyntaxStructureProvider>> _triviaProviderMap;
+        private readonly ImmutableDictionary<
+            Type,
+            ImmutableArray<AbstractSyntaxStructureProvider>
+        > _nodeProviderMap;
+        private readonly ImmutableDictionary<
+            int,
+            ImmutableArray<AbstractSyntaxStructureProvider>
+        > _triviaProviderMap;
 
         protected AbstractBlockStructureProvider(
-            ImmutableDictionary<Type, ImmutableArray<AbstractSyntaxStructureProvider>> defaultNodeOutlinerMap,
-            ImmutableDictionary<int, ImmutableArray<AbstractSyntaxStructureProvider>> defaultTriviaOutlinerMap)
+            ImmutableDictionary<
+                Type,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            > defaultNodeOutlinerMap,
+            ImmutableDictionary<
+                int,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            > defaultTriviaOutlinerMap
+        )
         {
             _nodeProviderMap = defaultNodeOutlinerMap;
             _triviaProviderMap = defaultTriviaOutlinerMap;
@@ -35,7 +48,13 @@ namespace Microsoft.CodeAnalysis.Structure
                 var syntaxRoot = context.SyntaxTree.GetRoot(context.CancellationToken);
                 using var spans = TemporaryArray<BlockSpan>.Empty;
                 BlockSpanCollector.CollectBlockSpans(
-                    syntaxRoot, context.Options, _nodeProviderMap, _triviaProviderMap, ref spans.AsRef(), context.CancellationToken);
+                    syntaxRoot,
+                    context.Options,
+                    _nodeProviderMap,
+                    _triviaProviderMap,
+                    ref spans.AsRef(),
+                    context.CancellationToken
+                );
 
                 context.Spans.EnsureCapacity(context.Spans.Count + spans.Count);
                 foreach (var span in spans)

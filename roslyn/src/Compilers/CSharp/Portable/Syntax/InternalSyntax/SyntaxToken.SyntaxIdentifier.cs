@@ -20,7 +20,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 this.TextField = text;
             }
 
-            internal SyntaxIdentifier(string text, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
+            internal SyntaxIdentifier(
+                string text,
+                DiagnosticInfo[] diagnostics,
+                SyntaxAnnotation[] annotations
+            )
                 : base(SyntaxKind.IdentifierToken, text.Length, diagnostics, annotations)
             {
                 this.TextField = text;
@@ -43,12 +47,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             public override SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
             {
-                return new SyntaxIdentifierWithTrivia(this.Kind, this.TextField, this.TextField, trivia, null, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxIdentifierWithTrivia(
+                    this.Kind,
+                    this.TextField,
+                    this.TextField,
+                    trivia,
+                    null,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             public override SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
             {
-                return new SyntaxIdentifierWithTrivia(this.Kind, this.TextField, this.TextField, null, trivia, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxIdentifierWithTrivia(
+                    this.Kind,
+                    this.TextField,
+                    this.TextField,
+                    null,
+                    trivia,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[] diagnostics)

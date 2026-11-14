@@ -1144,14 +1144,11 @@ public class PageTest
         // Assert
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Null(result.PageName);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
     }
 
     [Fact]
@@ -1185,14 +1182,11 @@ public class PageTest
         // Assert
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
     }
 
     [Fact]
@@ -1231,14 +1225,11 @@ public class PageTest
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
         Assert.Equal(pageHandler, result.PageHandler);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
         Assert.Equal(fragment, result.Fragment);
     }
 
@@ -1290,14 +1281,11 @@ public class PageTest
         // Assert
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
         Assert.True(result.Permanent);
     }
 
@@ -1317,14 +1305,11 @@ public class PageTest
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
         Assert.Equal(pageHandler, result.PageHandler);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
         Assert.True(result.Permanent);
     }
 
@@ -1365,14 +1350,11 @@ public class PageTest
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
         Assert.Equal(pageHandler, result.PageHandler);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
         Assert.Equal(fragment, result.Fragment);
         Assert.True(result.Permanent);
     }

@@ -16,43 +16,47 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MockDiagnosticAnalyzer
 {
-    public partial class MockDiagnosticAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class MockDiagnosticAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         private class MockDiagnosticAnalyzer : DiagnosticAnalyzer
         {
             public const string Id = "MockDiagnostic";
-            private readonly DiagnosticDescriptor _descriptor = new DiagnosticDescriptor(Id, "MockDiagnostic", "MockDiagnostic", "InternalCategory", DiagnosticSeverity.Warning, isEnabledByDefault: true, helpLinkUri: "https://github.com/dotnet/roslyn");
+            private readonly DiagnosticDescriptor _descriptor = new DiagnosticDescriptor(
+                Id,
+                "MockDiagnostic",
+                "MockDiagnostic",
+                "InternalCategory",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                helpLinkUri: "https://github.com/dotnet/roslyn"
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(_descriptor);
-                }
+                get { return ImmutableArray.Create(_descriptor); }
             }
 
-            public override void Initialize(AnalysisContext context)
-                => context.RegisterCompilationStartAction(CreateAnalyzerWithinCompilation);
+            public override void Initialize(AnalysisContext context) =>
+                context.RegisterCompilationStartAction(CreateAnalyzerWithinCompilation);
 
-            public void CreateAnalyzerWithinCompilation(CompilationStartAnalysisContext context)
-                => context.RegisterCompilationEndAction(AnalyzeCompilation);
+            public void CreateAnalyzerWithinCompilation(CompilationStartAnalysisContext context) =>
+                context.RegisterCompilationEndAction(AnalyzeCompilation);
 
-            public void AnalyzeCompilation(CompilationAnalysisContext context)
-            {
-            }
+            public void AnalyzeCompilation(CompilationAnalysisContext context) { }
         }
 
         public MockDiagnosticAnalyzerTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new MockDiagnosticAnalyzer(), null);
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new MockDiagnosticAnalyzer(), null);
 
         private async Task VerifyDiagnosticsAsync(
-             string source,
-             params DiagnosticDescription[] expectedDiagnostics)
+            string source,
+            params DiagnosticDescription[] expectedDiagnostics
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(source, composition: GetComposition());
             var actualDiagnostics = await this.GetDiagnosticsAsync(workspace, new TestParameters());

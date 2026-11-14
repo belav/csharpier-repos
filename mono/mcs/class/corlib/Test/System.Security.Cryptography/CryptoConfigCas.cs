@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,81 +27,82 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Cryptography;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Security.Cryptography {
+namespace MonoCasTests.System.Security.Cryptography
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CryptoConfigCas
+    {
+        private MethodInfo create1;
+        private MethodInfo create2;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CryptoConfigCas {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
 
-		private MethodInfo create1;
-		private MethodInfo create2;
+            Type t = typeof(CryptoConfig);
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+            Type[] one = new Type[1] { typeof(string) };
+            create1 = t.GetMethod("CreateFromName", one);
 
-			Type t = typeof (CryptoConfig);
+            Type[] two = new Type[2] { typeof(string), typeof(object[]) };
+            create2 = t.GetMethod("CreateFromName", two);
+        }
 
-			Type[] one = new Type [1] { typeof (string) };
-			create1 = t.GetMethod ("CreateFromName", one);
+        // Partial Trust Tests - i.e. call "normal" unit with reduced privileges
 
-			Type[] two = new Type [2] { typeof (string), typeof (object[]) };
-			create2 = t.GetMethod ("CreateFromName", two);
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_DenyUnrestricted_Success()
+        {
+            MonoTests.System.Security.Cryptography.CryptoConfigTest cct =
+                new MonoTests.System.Security.Cryptography.CryptoConfigTest();
+            // call most (all but arguments checking) unit tests from CryptoConfigTest
+            cct.CCToString();
+            cct.CreateFromName();
+            cct.EncodeOID();
+            cct.MapNameToOID();
+        }
 
-		// Partial Trust Tests - i.e. call "normal" unit with reduced privileges
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        [Category("NotWorking")]
+        public void PartialTrust_DenyUnrestricted_CreateFromURL()
+        {
+            MonoTests.System.Security.Cryptography.CryptoConfigTest cct =
+                new MonoTests.System.Security.Cryptography.CryptoConfigTest();
+            // this test must load System.Security to create some types
+            cct.CreateFromURL();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void PartialTrust_DenyUnrestricted_Success ()
-		{
-			MonoTests.System.Security.Cryptography.CryptoConfigTest cct = new MonoTests.System.Security.Cryptography.CryptoConfigTest ();
-			// call most (all but arguments checking) unit tests from CryptoConfigTest
-			cct.CCToString ();
-			cct.CreateFromName ();
-			cct.EncodeOID ();
-			cct.MapNameToOID ();
-		}
+        // we use reflection to call CryptoConfig as the CreateFromName methods are
+        // protected by LinkDemand (which will be converted into full demand, i.e.
+        // a stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		[Category ("NotWorking")]
-		public void PartialTrust_DenyUnrestricted_CreateFromURL ()
-		{
-			MonoTests.System.Security.Cryptography.CryptoConfigTest cct = new MonoTests.System.Security.Cryptography.CryptoConfigTest ();
-			// this test must load System.Security to create some types
-			cct.CreateFromURL ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void CreateFromName1()
+        {
+            Assert.IsNotNull(create1.Invoke(null, new object[1] { "DES" }), "1");
+            // No restriction for the string only version
+        }
 
-		// we use reflection to call CryptoConfig as the CreateFromName methods are 
-		// protected by LinkDemand (which will be converted into full demand, i.e. 
-		// a stack walk) when reflection is used (i.e. it gets testable).
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void CreateFromName1 ()
-		{
-			Assert.IsNotNull (create1.Invoke (null, new object [1] { "DES" }), "1");
-			// No restriction for the string only version
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void CreateFromName2 ()
-		{
-			Assert.IsNotNull (create2.Invoke (null, new object [2] { "DES", new object [0] }), "2");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void CreateFromName2()
+        {
+            Assert.IsNotNull(create2.Invoke(null, new object[2] { "DES", new object[0] }), "2");
+        }
+    }
 }

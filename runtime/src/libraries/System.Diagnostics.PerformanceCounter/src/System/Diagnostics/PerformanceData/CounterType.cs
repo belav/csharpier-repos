@@ -9,9 +9,12 @@ namespace System.Diagnostics.PerformanceData
     public enum CounterType
     {
         QueueLength = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_QUEUELEN_TYPE,
-        LargeQueueLength = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_QUEUELEN_TYPE,
-        QueueLength100Ns = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_100NS_QUEUELEN_TYPE,
-        QueueLengthObjectTime = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_OBJ_TIME_QUEUELEN_TYPE,
+        LargeQueueLength =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_QUEUELEN_TYPE,
+        QueueLength100Ns =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_100NS_QUEUELEN_TYPE,
+        QueueLengthObjectTime =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_OBJ_TIME_QUEUELEN_TYPE,
         RawData32 = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_RAWCOUNT,
         RawData64 = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_RAWCOUNT,
         RawDataHex32 = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_RAWCOUNT_HEX,
@@ -31,18 +34,25 @@ namespace System.Diagnostics.PerformanceData
         PercentageActive = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_TIMER,
         PercentageNotActive = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_TIMER_INV,
         PercentageActive100Ns = Interop.Kernel32.PerformanceCounterOptions.PERF_100NSEC_TIMER,
-        PercentageNotActive100Ns = Interop.Kernel32.PerformanceCounterOptions.PERF_100NSEC_TIMER_INV,
+        PercentageNotActive100Ns =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_100NSEC_TIMER_INV,
         ElapsedTime = Interop.Kernel32.PerformanceCounterOptions.PERF_ELAPSED_TIME,
-        MultiTimerPercentageActive = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER,
-        MultiTimerPercentageNotActive = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER_INV,
-        MultiTimerPercentageActive100Ns = Interop.Kernel32.PerformanceCounterOptions.PERF_100NSEC_MULTI_TIMER,
-        MultiTimerPercentageNotActive100Ns = Interop.Kernel32.PerformanceCounterOptions.PERF_100NSEC_MULTI_TIMER_INV,
+        MultiTimerPercentageActive =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER,
+        MultiTimerPercentageNotActive =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER_INV,
+        MultiTimerPercentageActive100Ns =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_100NSEC_MULTI_TIMER,
+        MultiTimerPercentageNotActive100Ns =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_100NSEC_MULTI_TIMER_INV,
         MultiTimerBase = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_BASE,
         Delta32 = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_DELTA,
         Delta64 = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_DELTA,
         ObjectSpecificTimer = Interop.Kernel32.PerformanceCounterOptions.PERF_OBJ_TIME_TIMER,
-        PrecisionSystemTimer = Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_SYSTEM_TIMER,
+        PrecisionSystemTimer =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_SYSTEM_TIMER,
         PrecisionTimer100Ns = Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_100NS_TIMER,
-        PrecisionObjectSpecificTimer = Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_OBJECT_TIMER
+        PrecisionObjectSpecificTimer =
+            Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_OBJECT_TIMER,
     }
 }

@@ -38,8 +38,14 @@ namespace System.ComponentModel.Tests
 
             Assert.Equal("test", new DefaultValueAttribute((object)"test").Value);
 
-            Assert.Equal(DayOfWeek.Monday, new DefaultValueAttribute(typeof(DayOfWeek), "Monday").Value);
-            Assert.Equal(TimeSpan.FromHours(1), new DefaultValueAttribute(typeof(TimeSpan), "1:00:00").Value);
+            Assert.Equal(
+                DayOfWeek.Monday,
+                new DefaultValueAttribute(typeof(DayOfWeek), "Monday").Value
+            );
+            Assert.Equal(
+                TimeSpan.FromHours(1),
+                new DefaultValueAttribute(typeof(TimeSpan), "1:00:00").Value
+            );
 
             Assert.Equal(42, new DefaultValueAttribute(typeof(int), "42").Value);
             Assert.Null(new DefaultValueAttribute(typeof(int), "caughtException").Value);
@@ -52,7 +58,11 @@ namespace System.ComponentModel.Tests
 
         public class CustomConverter : TypeConverter
         {
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
                 return new CustomType() { Value = int.Parse((string)value) };
             }
@@ -66,7 +76,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public static void Ctor_CustomTypeConverter()
         {
-            TypeDescriptor.AddAttributes(typeof(CustomType), new TypeConverterAttribute(typeof(CustomConverter)));
+            TypeDescriptor.AddAttributes(
+                typeof(CustomType),
+                new TypeConverterAttribute(typeof(CustomConverter))
+            );
             DefaultValueAttribute attr = new DefaultValueAttribute(typeof(CustomType), "42");
             Assert.Equal(42, ((CustomType)attr.Value).Value);
         }
@@ -74,29 +87,50 @@ namespace System.ComponentModel.Tests
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [InlineData(typeof(CustomType), true, "", 0)]
         [InlineData(typeof(int), false, "42", 42)]
-        public void Ctor_TypeDescriptorNotFound_ExceptionFallback(Type type, bool returnNull, string stringToConvert, int expectedValue)
+        public void Ctor_TypeDescriptorNotFound_ExceptionFallback(
+            Type type,
+            bool returnNull,
+            string stringToConvert,
+            int expectedValue
+        )
         {
-            RemoteExecutor.Invoke((innerType, innerReturnNull, innerStringToConvert, innerExpectedValue) =>
-            {
-                FieldInfo s_convertFromInvariantString = typeof(DefaultValueAttribute).GetField("s_convertFromInvariantString", BindingFlags.GetField | Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Static);
-                Assert.NotNull(s_convertFromInvariantString);
+            RemoteExecutor
+                .Invoke(
+                    (innerType, innerReturnNull, innerStringToConvert, innerExpectedValue) =>
+                    {
+                        FieldInfo s_convertFromInvariantString =
+                            typeof(DefaultValueAttribute).GetField(
+                                "s_convertFromInvariantString",
+                                BindingFlags.GetField
+                                    | Reflection.BindingFlags.NonPublic
+                                    | Reflection.BindingFlags.Static
+                            );
+                        Assert.NotNull(s_convertFromInvariantString);
 
-                // simulate TypeDescriptor.ConvertFromInvariantString not found
-                s_convertFromInvariantString.SetValue(null, new object());
+                        // simulate TypeDescriptor.ConvertFromInvariantString not found
+                        s_convertFromInvariantString.SetValue(null, new object());
 
-                // we fallback to empty catch in DefaultValueAttribute constructor
-                DefaultValueAttribute attr = new DefaultValueAttribute(Type.GetType(innerType), innerStringToConvert);
+                        // we fallback to empty catch in DefaultValueAttribute constructor
+                        DefaultValueAttribute attr = new DefaultValueAttribute(
+                            Type.GetType(innerType),
+                            innerStringToConvert
+                        );
 
-                if (bool.Parse(innerReturnNull))
-                {
-                    Assert.Null(attr.Value);
-                }
-                else
-                {
-                    Assert.Equal(int.Parse(innerExpectedValue), attr.Value);
-                }
-
-            }, type.ToString(), returnNull.ToString(), stringToConvert, expectedValue.ToString()).Dispose();
+                        if (bool.Parse(innerReturnNull))
+                        {
+                            Assert.Null(attr.Value);
+                        }
+                        else
+                        {
+                            Assert.Equal(int.Parse(innerExpectedValue), attr.Value);
+                        }
+                    },
+                    type.ToString(),
+                    returnNull.ToString(),
+                    stringToConvert,
+                    expectedValue.ToString()
+                )
+                .Dispose();
         }
 
         [Theory]
@@ -116,7 +150,12 @@ namespace System.ComponentModel.Tests
             yield return new object[] { attr, new DefaultValueAttribute(43), false };
             yield return new object[] { attr, new DefaultValueAttribute(null), false };
             yield return new object[] { attr, null, false };
-            yield return new object[] { new DefaultValueAttribute(null), new DefaultValueAttribute(null), true };
+            yield return new object[]
+            {
+                new DefaultValueAttribute(null),
+                new DefaultValueAttribute(null),
+                true,
+            };
         }
 
         [Theory]
@@ -135,7 +174,8 @@ namespace System.ComponentModel.Tests
 
     public sealed class CustomDefaultValueAttribute : DefaultValueAttribute
     {
-        public CustomDefaultValueAttribute(object value) : base(value) { }
+        public CustomDefaultValueAttribute(object value)
+            : base(value) { }
 
         public new void SetValue(object value) => base.SetValue(value);
     }

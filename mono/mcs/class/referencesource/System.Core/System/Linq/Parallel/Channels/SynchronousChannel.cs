@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -31,7 +31,7 @@ namespace System.Linq.Parallel
         private Queue<T> m_queue;
 
 #if DEBUG
-    // In debug builds, we keep track of when the producer is done (for asserts).
+        // In debug builds, we keep track of when the producer is done (for asserts).
         private bool m_done;
 #endif
 
@@ -39,9 +39,7 @@ namespace System.Linq.Parallel
         // Instantiates a new queue.
         //
 
-        internal SynchronousChannel()
-        {
-        }
+        internal SynchronousChannel() { }
 
         //-----------------------------------------------------------------------------------
         // Initializes the queue for this channel.
@@ -92,7 +90,10 @@ namespace System.Linq.Parallel
         {
             Contract.Assert(m_queue != null);
 #if DEBUG
-            Contract.Assert(m_done, "trying to dequeue before production is done -- this is not safe");
+            Contract.Assert(
+                m_done,
+                "trying to dequeue before production is done -- this is not safe"
+            );
 #endif
             return m_queue.Dequeue();
         }
@@ -104,8 +105,8 @@ namespace System.Linq.Parallel
         internal void SetDone()
         {
 #if DEBUG
-    // We only track this in DEBUG builds to aid in debugging. This ensures we
-    // can assert dequeue-before-done and enqueue-after-done invariants above.
+            // We only track this in DEBUG builds to aid in debugging. This ensures we
+            // can assert dequeue-before-done and enqueue-after-done invariants above.
             m_done = true;
 #endif
         }
@@ -118,7 +119,10 @@ namespace System.Linq.Parallel
         {
             Contract.Assert(array != null);
 #if DEBUG
-            Contract.Assert(m_done, "Can only copy from the channel after it's done being added to");
+            Contract.Assert(
+                m_done,
+                "Can only copy from the channel after it's done being added to"
+            );
 #endif
             m_queue.CopyTo(array, arrayIndex);
         }

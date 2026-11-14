@@ -1,6 +1,6 @@
 using System;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace GitHub_17957
@@ -38,7 +38,6 @@ namespace GitHub_17957
                 return false;
             }
 
-
             Vector128<ushort> vus = Vector128<ushort>.Zero;
             vus = vus.WithElement(0, ushort.MaxValue);
             if (vus.GetElement(0) != ushort.MaxValue)
@@ -57,7 +56,6 @@ namespace GitHub_17957
             {
                 return false;
             }
-
 
             Vector128<sbyte> vsb = Vector128<sbyte>.Zero;
             vsb = vsb.WithElement(0, (sbyte)(-1));
@@ -146,7 +144,6 @@ namespace GitHub_17957
                 return false;
             }
 
-
             Vector256<ushort> vus = Vector256<ushort>.Zero;
             vus = vus.WithElement(0, ushort.MaxValue);
             if (vus.GetElement(0) != ushort.MaxValue)
@@ -165,7 +162,6 @@ namespace GitHub_17957
             {
                 return false;
             }
-
 
             Vector256<sbyte> vsb = Vector256<sbyte>.Zero;
             vsb = vsb.WithElement(0, (sbyte)(-1));

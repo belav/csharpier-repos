@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -18,6 +17,7 @@ namespace Microsoft.NET.Build.Tasks
 
         [Required]
         public ITaskItem CompilationEntry { get; set; }
+
         [Required]
         public ITaskItem[] ImplementationAssemblyReferences { get; set; }
         public ITaskItem[] ReadyToRunCompositeBuildReferences { get; set; }
@@ -80,10 +80,15 @@ namespace Microsoft.NET.Build.Tasks
         protected override bool ValidateParameters()
         {
             string emitSymbolsMetadata = CompilationEntry.GetMetadata(MetadataKeys.EmitSymbols);
-            _emitSymbols = !string.IsNullOrEmpty(emitSymbolsMetadata) && bool.Parse(emitSymbolsMetadata);
+            _emitSymbols =
+                !string.IsNullOrEmpty(emitSymbolsMetadata) && bool.Parse(emitSymbolsMetadata);
             _createPDBCommand = CompilationEntry.GetMetadata(MetadataKeys.CreatePDBCommand);
-            string createCompositeImageMetadata = CompilationEntry.GetMetadata(MetadataKeys.CreateCompositeImage);
-            _createCompositeImage = !string.IsNullOrEmpty(createCompositeImageMetadata) && bool.Parse(createCompositeImageMetadata);
+            string createCompositeImageMetadata = CompilationEntry.GetMetadata(
+                MetadataKeys.CreateCompositeImage
+            );
+            _createCompositeImage =
+                !string.IsNullOrEmpty(createCompositeImageMetadata)
+                && bool.Parse(createCompositeImageMetadata);
 
             if (IsPdbCompilation && CrossgenTool == null)
             {
@@ -132,12 +137,18 @@ namespace Microsoft.NET.Build.Tasks
                     // For smooth switchover we accept both JitPath and TargetOS / TargetArch in .NET 6 Crossgen2
                     if (string.IsNullOrEmpty(Crossgen2Tool.GetMetadata(MetadataKeys.TargetOS)))
                     {
-                        Log.LogError(Strings.Crossgen2MissingRequiredMetadata, MetadataKeys.TargetOS);
+                        Log.LogError(
+                            Strings.Crossgen2MissingRequiredMetadata,
+                            MetadataKeys.TargetOS
+                        );
                         return false;
                     }
                     if (string.IsNullOrEmpty(Crossgen2Tool.GetMetadata(MetadataKeys.TargetArch)))
                     {
-                        Log.LogError(Strings.Crossgen2MissingRequiredMetadata, MetadataKeys.TargetArch);
+                        Log.LogError(
+                            Strings.Crossgen2MissingRequiredMetadata,
+                            MetadataKeys.TargetArch
+                        );
                         return false;
                     }
                 }
@@ -222,14 +233,29 @@ namespace Microsoft.NET.Build.Tasks
         {
             StringBuilder result = new StringBuilder();
 
-            var references = _createCompositeImage ? ReadyToRunCompositeBuildReferences : ImplementationAssemblyReferences;
+            var references = _createCompositeImage
+                ? ReadyToRunCompositeBuildReferences
+                : ImplementationAssemblyReferences;
 
             if (references != null)
             {
-                foreach (var reference in (_createCompositeImage ? ReadyToRunCompositeBuildReferences : ImplementationAssemblyReferences))
+                foreach (
+                    var reference in (
+                        _createCompositeImage
+                            ? ReadyToRunCompositeBuildReferences
+                            : ImplementationAssemblyReferences
+                    )
+                )
                 {
                     // When generating PDBs, we must not add a reference to the IL version of the R2R image for which we're trying to generate a PDB
-                    if (IsPdbCompilation && string.Equals(Path.GetFileName(reference.ItemSpec), Path.GetFileName(_outputR2RImage), StringComparison.OrdinalIgnoreCase))
+                    if (
+                        IsPdbCompilation
+                        && string.Equals(
+                            Path.GetFileName(reference.ItemSpec),
+                            Path.GetFileName(_outputR2RImage),
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         continue;
 
                     if (UseCrossgen2 && !IsPdbCompilation)
@@ -310,7 +336,9 @@ namespace Microsoft.NET.Build.Tasks
             else
             {
                 result.AppendLine($"--targetos:{Crossgen2Tool.GetMetadata(MetadataKeys.TargetOS)}");
-                result.AppendLine($"--targetarch:{Crossgen2Tool.GetMetadata(MetadataKeys.TargetArch)}");
+                result.AppendLine(
+                    $"--targetarch:{Crossgen2Tool.GetMetadata(MetadataKeys.TargetArch)}"
+                );
             }
 
             result.AppendLine("-O");
@@ -328,7 +356,9 @@ namespace Microsoft.NET.Build.Tasks
                     result.AppendLine("--perfmap");
                     result.AppendLine($"--perfmap-path:{Path.GetDirectoryName(_outputPDBImage)}");
 
-                    string perfmapFormatVersion = Crossgen2Tool.GetMetadata(MetadataKeys.PerfmapFormatVersion);
+                    string perfmapFormatVersion = Crossgen2Tool.GetMetadata(
+                        MetadataKeys.PerfmapFormatVersion
+                    );
                     if (!string.IsNullOrEmpty(perfmapFormatVersion))
                     {
                         result.AppendLine($"--perfmap-format-version:{perfmapFormatVersion}");
@@ -346,7 +376,12 @@ namespace Microsoft.NET.Build.Tasks
 
             if (!string.IsNullOrEmpty(Crossgen2ExtraCommandLineArgs))
             {
-                foreach (string extraArg in Crossgen2ExtraCommandLineArgs.Split(';', StringSplitOptions.RemoveEmptyEntries))
+                foreach (
+                    string extraArg in Crossgen2ExtraCommandLineArgs.Split(
+                        ';',
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                )
                 {
                     result.AppendLine(extraArg);
                 }
@@ -384,7 +419,11 @@ namespace Microsoft.NET.Build.Tasks
             return result.ToString();
         }
 
-        protected override int ExecuteTool(string pathToTool, string responseFileCommands, string commandLineCommands)
+        protected override int ExecuteTool(
+            string pathToTool,
+            string responseFileCommands,
+            string commandLineCommands
+        )
         {
             // Ensure output sub-directories exists - Crossgen does not create directories for output files. Any relative path used with the
             // '/out' parameter has to have an existing directory.
@@ -395,9 +434,15 @@ namespace Microsoft.NET.Build.Tasks
             return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
         }
 
-        protected override void LogEventsFromTextOutput(string singleLine, MessageImportance messageImportance)
+        protected override void LogEventsFromTextOutput(
+            string singleLine,
+            MessageImportance messageImportance
+        )
         {
-            if (!ShowCompilerWarnings && singleLine.Contains("warning:", StringComparison.OrdinalIgnoreCase))
+            if (
+                !ShowCompilerWarnings
+                && singleLine.Contains("warning:", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 Log.LogMessage(MessageImportance.Normal, singleLine);
                 WarningsDetected = true;

@@ -8,6 +8,6 @@ namespace System.Configuration
         LockedAttributes = 1,
         LockedExceptionList = 2,
         LockedElements = 3,
-        LockedElementsExceptionList = 4
+        LockedElementsExceptionList = 4,
     }
 }

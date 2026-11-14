@@ -28,8 +28,8 @@ public class DefaultValueBinding : InstantiationBinding
     /// </summary>
     /// <param name="bindingInfo">Information needed to create the expression.</param>
     /// <returns>The expression tree.</returns>
-    public override Expression CreateConstructorExpression(ParameterBindingInfo bindingInfo)
-        => Expression.Default(RuntimeType);
+    public override Expression CreateConstructorExpression(ParameterBindingInfo bindingInfo) =>
+        Expression.Default(RuntimeType);
 
     /// <summary>
     ///     The type that will be created from the expression tree created for this binding.
@@ -41,6 +41,6 @@ public class DefaultValueBinding : InstantiationBinding
     /// </summary>
     /// <param name="parameterBindings">The new parameter bindings.</param>
     /// <returns>A copy with replaced parameter bindings.</returns>
-    public override InstantiationBinding With(IReadOnlyList<ParameterBinding> parameterBindings)
-        => this;
+    public override InstantiationBinding With(IReadOnlyList<ParameterBinding> parameterBindings) =>
+        this;
 }

@@ -12,16 +12,16 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public async Task LengthIsReseted()
         {
-           var source = new byte[] { 1, 2, 3 };
+            var source = new byte[] { 1, 2, 3 };
 
-           await _pipe.Writer.WriteAsync(source);
+            await _pipe.Writer.WriteAsync(source);
 
-           _pipe.Reader.Complete();
-           _pipe.Writer.Complete();
+            _pipe.Reader.Complete();
+            _pipe.Writer.Complete();
 
-           _pipe.Reset();
+            _pipe.Reset();
 
-           Assert.Equal(0, _pipe.Length);
+            Assert.Equal(0, _pipe.Length);
         }
     }
 }

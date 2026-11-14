@@ -14,7 +14,13 @@ namespace System.Xml.Linq.Tests
         public void FormattedDate()
         {
             // Ensure we are compatible with the .NET Framework
-            Assert.Equal("CreatedTime=\"2018-01-01T12:13:14Z\"", new XAttribute("CreatedTime", new DateTime(2018, 1, 1, 12, 13, 14, DateTimeKind.Utc)).ToString());
+            Assert.Equal(
+                "CreatedTime=\"2018-01-01T12:13:14Z\"",
+                new XAttribute(
+                    "CreatedTime",
+                    new DateTime(2018, 1, 1, 12, 13, 14, DateTimeKind.Utc)
+                ).ToString()
+            );
         }
 
         public static IEnumerable<object[]> NumericValuesWithMinusSign()
@@ -37,7 +43,9 @@ namespace System.Xml.Linq.Tests
             {
                 newCulture = new CultureInfo("sv-SE");
             }
-            catch (CultureNotFoundException) { /* Do nothing */ }
+            catch (CultureNotFoundException)
+            { /* Do nothing */
+            }
 
             using (new ThreadCultureChange(newCulture))
             {
@@ -55,7 +63,11 @@ namespace System.Xml.Linq.Tests
         public static IEnumerable<object[]> NonNumericValues()
         {
             yield return new object[] { true, "true" };
-            yield return new object[] { new DateTimeOffset(2018, 1, 1, 12, 13, 14, TimeSpan.Zero), "2018-01-01T12:13:14Z" };
+            yield return new object[]
+            {
+                new DateTimeOffset(2018, 1, 1, 12, 13, 14, TimeSpan.Zero),
+                "2018-01-01T12:13:14Z",
+            };
             yield return new object[] { new TimeSpan(12, 13, 14), "PT12H13M14S" };
             yield return new object[] { "-123\n", "-123\n" };
         }
@@ -69,7 +81,9 @@ namespace System.Xml.Linq.Tests
             {
                 newCulture = new CultureInfo("sv-SE");
             }
-            catch (CultureNotFoundException) { /* Do nothing */ }
+            catch (CultureNotFoundException)
+            { /* Do nothing */
+            }
 
             using (new ThreadCultureChange(newCulture))
             {

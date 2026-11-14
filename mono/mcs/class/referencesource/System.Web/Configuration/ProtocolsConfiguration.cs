@@ -4,44 +4,51 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization.Formatters;
     using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.ComponentModel;
-    using System.Collections;
-    using System.Configuration;
-    using System.Reflection;
-    using System.Globalization;
     using System.Web.Hosting;
     using System.Web.Security;
     using System.Web.Util;
     using System.Xml;
 
-    internal class ProtocolsConfiguration {
-
+    internal class ProtocolsConfiguration
+    {
         private Hashtable _protocolEntries = new Hashtable();
 
-        internal ProtocolsConfiguration(XmlNode section) {
-
+        internal ProtocolsConfiguration(XmlNode section)
+        {
             // process XML section in order and apply the directives
 
             HandlerBase.CheckForUnrecognizedAttributes(section);
 
-            foreach (XmlNode child in section.ChildNodes) {
-
+            foreach (XmlNode child in section.ChildNodes)
+            {
                 // skip whitespace and comments
                 if (IsIgnorableAlsoCheckForNonElement(child))
                     continue;
 
                 // process <add> elements
 
-                if (child.Name == "add") {
+                if (child.Name == "add")
+                {
                     String id = HandlerBase.RemoveRequiredAttribute(child, "id");
-                    String phType = HandlerBase.RemoveRequiredAttribute(child, "processHandlerType");
-                    String ahType = HandlerBase.RemoveRequiredAttribute(child, "appDomainHandlerType");
+                    String phType = HandlerBase.RemoveRequiredAttribute(
+                        child,
+                        "processHandlerType"
+                    );
+                    String ahType = HandlerBase.RemoveRequiredAttribute(
+                        child,
+                        "appDomainHandlerType"
+                    );
 
                     bool validate = true;
                     HandlerBase.GetAndRemoveBooleanAttribute(child, "validate", ref validate);
@@ -53,7 +60,7 @@ namespace System.Web.Configuration {
                     /* TEMPORARY allow duplicates for easy Indigo machine.config update
                     if (_protocolEntries[id] != null) {
                         throw new ConfigurationErrorsException(
-                                        SR.GetString(SR.Dup_protocol_id, id), 
+                                        SR.GetString(SR.Dup_protocol_id, id),
                                         child);
                     }
                     */
@@ -61,35 +68,42 @@ namespace System.Web.Configuration {
                     // add entry
                     /* TEMPORARY hide errors and ignore bad <add> tags
                        to let breaking changes through */
-                    try {
+                    try
+                    {
                         _protocolEntries[id] = new ProtocolsConfigurationEntry(
-                            id, phType, ahType, validate, 
+                            id,
+                            phType,
+                            ahType,
+                            validate,
                             ConfigurationErrorsException.GetFilename(child),
-                            ConfigurationErrorsException.GetLineNumber(child));
+                            ConfigurationErrorsException.GetLineNumber(child)
+                        );
                     }
-                    catch {
-                    }
+                    catch { }
                 }
-                else {
+                else
+                {
                     HandlerBase.ThrowUnrecognizedElement(child);
                 }
             }
         }
 
-        private bool IsIgnorableAlsoCheckForNonElement(XmlNode node) {
-            if (node.NodeType == XmlNodeType.Comment || node.NodeType == XmlNodeType.Whitespace) {
+        private bool IsIgnorableAlsoCheckForNonElement(XmlNode node)
+        {
+            if (node.NodeType == XmlNodeType.Comment || node.NodeType == XmlNodeType.Whitespace)
+            {
                 return true;
             }
 
             if (node.NodeType != XmlNodeType.Element)
             {
                 throw new ConfigurationErrorsException(
-                                SR.GetString(SR.Config_base_elements_only),
-                                node);
+                    SR.GetString(SR.Config_base_elements_only),
+                    node
+                );
             }
 
             return false;
         }
-
     }
 }

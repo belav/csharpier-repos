@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,61 +32,73 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI.WebControls
 {
-	public class GridViewUpdatedEventArgs : EventArgs
-	{
-		int rowsAffected;
-		Exception e;
-		bool exceptionHandled;
-		bool keepEditMode;
-		IOrderedDictionary keys;
-		IOrderedDictionary newValues;
-		IOrderedDictionary oldValues;
-		
-		public GridViewUpdatedEventArgs (int affectedRows, Exception e)
-		{
-			this.rowsAffected = affectedRows;
-			this.e = e;
-			this.exceptionHandled = false;
-			this.keepEditMode = false;
-		}
-		
-		internal GridViewUpdatedEventArgs (int affectedRows, Exception e, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
-			: this (affectedRows, e)
-		{
-			this.keys = keys;
-			this.newValues = newValues;
-			this.oldValues = oldValues;
-		}
-		
-		public int AffectedRows {
-			get { return rowsAffected; }
-		}
+    public class GridViewUpdatedEventArgs : EventArgs
+    {
+        int rowsAffected;
+        Exception e;
+        bool exceptionHandled;
+        bool keepEditMode;
+        IOrderedDictionary keys;
+        IOrderedDictionary newValues;
+        IOrderedDictionary oldValues;
 
-		public Exception Exception {
-			get { return e; }
-		}
+        public GridViewUpdatedEventArgs(int affectedRows, Exception e)
+        {
+            this.rowsAffected = affectedRows;
+            this.e = e;
+            this.exceptionHandled = false;
+            this.keepEditMode = false;
+        }
 
-		public bool ExceptionHandled {
-			get { return exceptionHandled; }
-			set { exceptionHandled = value; }
-		}
-	
-		public bool KeepInEditMode {
-			get { return keepEditMode; }
-			set { keepEditMode = value; }
-		}
+        internal GridViewUpdatedEventArgs(
+            int affectedRows,
+            Exception e,
+            IOrderedDictionary keys,
+            IOrderedDictionary oldValues,
+            IOrderedDictionary newValues
+        )
+            : this(affectedRows, e)
+        {
+            this.keys = keys;
+            this.newValues = newValues;
+            this.oldValues = oldValues;
+        }
 
-		public IOrderedDictionary Keys {
-			get { return keys; }
-		}
+        public int AffectedRows
+        {
+            get { return rowsAffected; }
+        }
 
-		public IOrderedDictionary NewValues {
-			get { return newValues; }
-		}
+        public Exception Exception
+        {
+            get { return e; }
+        }
 
-		public IOrderedDictionary OldValues {
-			get { return oldValues; }
-		}
-	}
+        public bool ExceptionHandled
+        {
+            get { return exceptionHandled; }
+            set { exceptionHandled = value; }
+        }
+
+        public bool KeepInEditMode
+        {
+            get { return keepEditMode; }
+            set { keepEditMode = value; }
+        }
+
+        public IOrderedDictionary Keys
+        {
+            get { return keys; }
+        }
+
+        public IOrderedDictionary NewValues
+        {
+            get { return newValues; }
+        }
+
+        public IOrderedDictionary OldValues
+        {
+            get { return oldValues; }
+        }
+    }
 }
-

@@ -72,38 +72,55 @@ struct S
         str2 = s + str;
 
         pad.d1 =
-        pad.d2 =
-        pad.d3 =
-        pad.d4 =
-        pad.d5 =
-        pad.d6 =
-        pad.d7 =
-        pad.d8 =
-        pad.d9 =
-        pad.d10 =
-        pad.d11 =
-        pad.d12 =
-        pad.d13 =
-        pad.d14 =
-        pad.d15 =
-        pad.d16 =
-        pad.d17 =
-        pad.d18 =
-        pad.d19 =
-        pad.d20 =
-        pad.d21 =
-        pad.d22 =
-        pad.d23 =
-        pad.d24 =
-        pad.d25 =
-        pad.d26 =
-        pad.d27 =
-        pad.d28 =
-        pad.d30 = 3.3;
+            pad.d2 =
+            pad.d3 =
+            pad.d4 =
+            pad.d5 =
+            pad.d6 =
+            pad.d7 =
+            pad.d8 =
+            pad.d9 =
+            pad.d10 =
+            pad.d11 =
+            pad.d12 =
+            pad.d13 =
+            pad.d14 =
+            pad.d15 =
+            pad.d16 =
+            pad.d17 =
+            pad.d18 =
+            pad.d19 =
+            pad.d20 =
+            pad.d21 =
+            pad.d22 =
+            pad.d23 =
+            pad.d24 =
+            pad.d25 =
+            pad.d26 =
+            pad.d27 =
+            pad.d28 =
+            pad.d30 =
+                3.3;
         pad.str = "pad dot str";
 
-        pad18 = pad17 = pad16 = pad15 = pad14 = pad13 = pad12 = pad11 = pad10 =
-        pad9 = pad8 = pad7 = pad6 = pad5 = pad4 = pad3 = pad2 = pad;
+        pad18 =
+            pad17 =
+            pad16 =
+            pad15 =
+            pad14 =
+            pad13 =
+            pad12 =
+            pad11 =
+            pad10 =
+            pad9 =
+            pad8 =
+            pad7 =
+            pad6 =
+            pad5 =
+            pad4 =
+            pad3 =
+            pad2 =
+                pad;
     }
 }
 

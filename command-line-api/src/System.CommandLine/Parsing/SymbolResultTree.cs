@@ -12,9 +12,7 @@ namespace System.CommandLine.Parsing
         internal List<CliToken>? UnmatchedTokens;
         private Dictionary<string, SymbolNode>? _symbolsByName;
 
-        internal SymbolResultTree(
-            CliCommand rootCommand, 
-            List<string>? tokenizeErrors)
+        internal SymbolResultTree(CliCommand rootCommand, List<string>? tokenizeErrors)
         {
             _rootCommand = rootCommand;
 
@@ -31,17 +29,17 @@ namespace System.CommandLine.Parsing
 
         internal int ErrorCount => Errors?.Count ?? 0;
 
-        internal ArgumentResult? GetResult(CliArgument argument)
-            => TryGetValue(argument, out SymbolResult? result) ? (ArgumentResult)result : default;
+        internal ArgumentResult? GetResult(CliArgument argument) =>
+            TryGetValue(argument, out SymbolResult? result) ? (ArgumentResult)result : default;
 
-        internal CommandResult? GetResult(CliCommand command)
-            => TryGetValue(command, out var result) ? (CommandResult)result : default;
+        internal CommandResult? GetResult(CliCommand command) =>
+            TryGetValue(command, out var result) ? (CommandResult)result : default;
 
-        internal OptionResult? GetResult(CliOption option)
-            => TryGetValue(option, out SymbolResult? result) ? (OptionResult)result : default;
+        internal OptionResult? GetResult(CliOption option) =>
+            TryGetValue(option, out SymbolResult? result) ? (OptionResult)result : default;
 
-        internal DirectiveResult? GetResult(CliDirective directive)
-            => TryGetValue(directive, out SymbolResult? result) ? (DirectiveResult)result : default;
+        internal DirectiveResult? GetResult(CliDirective directive) =>
+            TryGetValue(directive, out SymbolResult? result) ? (DirectiveResult)result : default;
 
         internal IEnumerable<SymbolResult> GetChildren(SymbolResult parent)
         {
@@ -59,20 +57,33 @@ namespace System.CommandLine.Parsing
 
         internal void AddError(ParseError parseError) => (Errors ??= new()).Add(parseError);
 
-        internal void InsertFirstError(ParseError parseError) => (Errors ??= new()).Insert(0, parseError);
+        internal void InsertFirstError(ParseError parseError) =>
+            (Errors ??= new()).Insert(0, parseError);
 
-        internal void AddUnmatchedToken(CliToken token, CommandResult commandResult, CommandResult rootCommandResult)
+        internal void AddUnmatchedToken(
+            CliToken token,
+            CommandResult commandResult,
+            CommandResult rootCommandResult
+        )
         {
             (UnmatchedTokens ??= new()).Add(token);
 
             if (commandResult.Command.TreatUnmatchedTokensAsErrors)
             {
-                if (commandResult != rootCommandResult && !rootCommandResult.Command.TreatUnmatchedTokensAsErrors)
+                if (
+                    commandResult != rootCommandResult
+                    && !rootCommandResult.Command.TreatUnmatchedTokensAsErrors
+                )
                 {
                     return;
                 }
 
-                AddError(new ParseError(LocalizationResources.UnrecognizedCommandOrArgument(token.Value), commandResult));
+                AddError(
+                    new ParseError(
+                        LocalizationResources.UnrecognizedCommandOrArgument(token.Value),
+                        commandResult
+                    )
+                );
             }
         }
 
@@ -80,10 +91,10 @@ namespace System.CommandLine.Parsing
         {
             if (_symbolsByName is null)
             {
-                _symbolsByName = new();  
+                _symbolsByName = new();
                 PopulateSymbolsByName(_rootCommand);
             }
-          
+
             if (!_symbolsByName.TryGetValue(name, out SymbolNode? node))
             {
                 throw new ArgumentException($"No symbol result found with name \"{name}\".");
@@ -134,17 +145,18 @@ namespace System.CommandLine.Parsing
             {
                 if (_symbolsByName!.TryGetValue(symbol.Name, out var node))
                 {
-                    if (symbol.Name == node.Symbol.Name &&
-                        symbol.FirstParent?.Symbol is { } parent &&
-                        parent == node.Symbol.FirstParent?.Symbol)
+                    if (
+                        symbol.Name == node.Symbol.Name
+                        && symbol.FirstParent?.Symbol is { } parent
+                        && parent == node.Symbol.FirstParent?.Symbol
+                    )
                     {
-                        throw new InvalidOperationException($"Command {parent.Name} has more than one child named \"{symbol.Name}\".");
+                        throw new InvalidOperationException(
+                            $"Command {parent.Name} has more than one child named \"{symbol.Name}\"."
+                        );
                     }
 
-                    _symbolsByName[symbol.Name] = new(symbol)
-                    {
-                        Next = node
-                    };
+                    _symbolsByName[symbol.Name] = new(symbol) { Next = node };
                 }
                 else
                 {

@@ -16,11 +16,9 @@ namespace System.IO.Packaging
 
         StringBuilder builder = new StringBuilder();
 
-        public PackUriParser ()
-            : base (GenericUriParserOptions.Default)
-        {
-        }
-        
+        public PackUriParser()
+            : base(GenericUriParserOptions.Default) { }
+
         protected override string GetComponents(Uri uri, UriComponents components, UriFormat format)
         {
             string s = uri.OriginalString;
@@ -60,11 +58,14 @@ namespace System.IO.Packaging
                 if (end == -1)
                     end = s.Length;
 
-                if ((components & UriComponents.KeepDelimiter) != UriComponents.KeepDelimiter &&
-                    builder.Length == 0)
+                if (
+                    (components & UriComponents.KeepDelimiter) != UriComponents.KeepDelimiter
+                    && builder.Length == 0
+                )
                     start++;
 
-                if (start > 0) builder.Append(s, start, end - start);
+                if (start > 0)
+                    builder.Append(s, start, end - start);
             }
 
             if ((components & UriComponents.Query) == UriComponents.Query)
@@ -73,13 +74,15 @@ namespace System.IO.Packaging
 
                 if (index != -1)
                 {
-                        if ((components & UriComponents.KeepDelimiter) != UriComponents.KeepDelimiter &&
-                            builder.Length == 0)
-                                index++;
+                    if (
+                        (components & UriComponents.KeepDelimiter) != UriComponents.KeepDelimiter
+                        && builder.Length == 0
+                    )
+                        index++;
 
-                        int fragIndex = s.IndexOf('#');
-                        int end = fragIndex == -1 ? s.Length : fragIndex;
-                        builder.Append(s, index, end - index);
+                    int fragIndex = s.IndexOf('#');
+                    int end = fragIndex == -1 ? s.Length : fragIndex;
+                    builder.Append(s, index, end - index);
                 }
             }
 
@@ -89,17 +92,19 @@ namespace System.IO.Packaging
 
                 if (index != -1)
                 {
-                        if ((components & UriComponents.KeepDelimiter) != UriComponents.KeepDelimiter &&
-                            builder.Length == 0)
-                                index++;
+                    if (
+                        (components & UriComponents.KeepDelimiter) != UriComponents.KeepDelimiter
+                        && builder.Length == 0
+                    )
+                        index++;
 
-                        builder.Append(s, index, s.Length - index);
+                    builder.Append(s, index, s.Length - index);
                 }
             }
 
             return builder.ToString();
         }
-        
+
         protected override void InitializeAndValidate(Uri uri, out UriFormatException parsingError)
         {
             parsingError = null;

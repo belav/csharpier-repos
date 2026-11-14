@@ -27,12 +27,15 @@ internal sealed class InternalUseFieldName
         IsStatic.Name,
         IsNewSlot.Name,
         IsBackingField.Name,
-        ParentTypeId.Name
+        ParentTypeId.Name,
     };
 
     private InternalUseFieldName(string fieldName) => Name = $"__{fieldName}__";
 
     public static int Count => s_names.Count;
-    public static bool IsKnown(string name) => !string.IsNullOrEmpty(name) && s_names.Contains(name);
+
+    public static bool IsKnown(string name) =>
+        !string.IsNullOrEmpty(name) && s_names.Contains(name);
+
     public string Name { get; init; }
 }

@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using System.Reflection;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -28,7 +28,11 @@ internal sealed class IcallTableGenerator
     // The runtime icall table should be generated using
     // mono --print-icall-table
     //
-    public IcallTableGenerator(string? runtimeIcallTableFile, Func<string, string> fixupSymbolName, TaskLoggingHelper log)
+    public IcallTableGenerator(
+        string? runtimeIcallTableFile,
+        Func<string, string> fixupSymbolName,
+        TaskLoggingHelper log
+    )
     {
         Log = log;
         _fixupSymbolName = fixupSymbolName;
@@ -53,9 +57,15 @@ internal sealed class IcallTableGenerator
                     EmitTable(w);
 
                 if (Utils.CopyIfDifferent(tmpFileName, outputPath, useHash: false))
-                    Log.LogMessage(MessageImportance.Low, $"Generating icall table to '{outputPath}'.");
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        $"Generating icall table to '{outputPath}'."
+                    );
                 else
-                    Log.LogMessage(MessageImportance.Low, $"Icall table in {outputPath} is unchanged.");
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        $"Icall table in {outputPath} is unchanged."
+                    );
             }
             finally
             {
@@ -128,7 +138,9 @@ internal sealed class IcallTableGenerator
                 string name = nameElem.GetString()!;
                 string func = icall_j.GetProperty("func").GetString()!;
                 bool handles = icall_j.GetProperty("handles").GetBoolean();
-                int flags = icall_j.TryGetProperty ("flags", out var _) ? int.Parse (icall_j.GetProperty("flags").GetString()!) : 0;
+                int flags = icall_j.TryGetProperty("flags", out var _)
+                    ? int.Parse(icall_j.GetProperty("flags").GetString()!)
+                    : 0;
 
                 icallClass.Icalls.Add(name, new Icall(name, func, handles, flags));
             }
@@ -137,7 +149,15 @@ internal sealed class IcallTableGenerator
 
     private void ProcessType(Type type)
     {
-        foreach (var method in type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
+        foreach (
+            var method in type.GetMethods(
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Static
+                    | BindingFlags.Instance
+            )
+        )
         {
             if ((method.GetMethodImplementationFlags() & MethodImplAttributes.InternalCall) == 0)
                 continue;
@@ -148,7 +168,17 @@ internal sealed class IcallTableGenerator
             }
             catch (Exception ex) when (ex is not LogAsErrorException)
             {
-                Log.LogWarning(null, "WASM0001", "", "", 0, 0, 0, 0, $"Could not get icall, or callbacks for method '{type.FullName}::{method.Name}' because '{ex.Message}'");
+                Log.LogWarning(
+                    null,
+                    "WASM0001",
+                    "",
+                    "",
+                    0,
+                    0,
+                    0,
+                    0,
+                    $"Could not get icall, or callbacks for method '{type.FullName}::{method.Name}' because '{ex.Message}'"
+                );
                 continue;
             }
 
@@ -200,8 +230,18 @@ internal sealed class IcallTableGenerator
                 }
                 catch (NotImplementedException nie)
                 {
-                    Log.LogWarning(null, "WASM0001", "", "", 0, 0, 0, 0, $"Failed to generate icall function for method '[{method.DeclaringType!.Assembly.GetName().Name}] {className}::{method.Name}'" +
-                                    $" because type '{nie.Message}' is not supported for parameter named '{par.Name}'. Ignoring.");
+                    Log.LogWarning(
+                        null,
+                        "WASM0001",
+                        "",
+                        "",
+                        0,
+                        0,
+                        0,
+                        0,
+                        $"Failed to generate icall function for method '[{method.DeclaringType!.Assembly.GetName().Name}] {className}::{method.Name}'"
+                            + $" because type '{nie.Message}' is not supported for parameter named '{par.Name}'. Ignoring."
+                    );
                     return null;
                 }
                 pindex++;
@@ -216,11 +256,16 @@ internal sealed class IcallTableGenerator
             string? signature = SignatureMapper.MethodToSignature(method);
             if (signature == null)
             {
-                throw new LogAsErrorException($"Unsupported parameter type in method '{type.FullName}.{method.Name}'");
+                throw new LogAsErrorException(
+                    $"Unsupported parameter type in method '{type.FullName}.{method.Name}'"
+                );
             }
 
             if (_signatures.Add(signature))
-                Log.LogMessage(MessageImportance.Low, $"Adding icall signature {signature} for method '{type.FullName}.{method.Name}'");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Adding icall signature {signature} for method '{type.FullName}.{method.Name}'"
+                );
         }
     }
 
@@ -248,38 +293,41 @@ internal sealed class IcallTableGenerator
         }
         else
         {
-            sb.Append(t.Name switch
-            {
-                nameof(Char) => "char",
-                nameof(Boolean) => "bool",
-                nameof(SByte) => "sbyte",
-                nameof(Byte) => "byte",
-                nameof(Int16) => "int16",
-                nameof(UInt16) => "uint16",
-                nameof(Int32) => "int",
-                nameof(UInt32) => "uint",
-                nameof(Int64) => "long",
-                nameof(UInt64) => "ulong",
-                nameof(IntPtr) => "intptr",
-                nameof(UIntPtr) => "uintptr",
-                nameof(Single) => "single",
-                nameof(Double) => "double",
-                nameof(Object) => "object",
-                nameof(String) => "string",
-                _ => throw new NotImplementedException(t.FullName)
-            });
+            sb.Append(
+                t.Name switch
+                {
+                    nameof(Char) => "char",
+                    nameof(Boolean) => "bool",
+                    nameof(SByte) => "sbyte",
+                    nameof(Byte) => "byte",
+                    nameof(Int16) => "int16",
+                    nameof(UInt16) => "uint16",
+                    nameof(Int32) => "int",
+                    nameof(UInt32) => "uint",
+                    nameof(Int64) => "long",
+                    nameof(UInt64) => "ulong",
+                    nameof(IntPtr) => "intptr",
+                    nameof(UIntPtr) => "uintptr",
+                    nameof(Single) => "single",
+                    nameof(Double) => "double",
+                    nameof(Object) => "object",
+                    nameof(String) => "string",
+                    _ => throw new NotImplementedException(t.FullName),
+                }
+            );
         }
     }
 
-    private static string MapType(Type t) => t.Name switch
-    {
-        "Void" => "void",
-        nameof(Double) => "double",
-        nameof(Single) => "float",
-        nameof(Int64) => "int64_t",
-        nameof(UInt64) => "uint64_t",
-        _ => "int",
-    };
+    private static string MapType(Type t) =>
+        t.Name switch
+        {
+            "Void" => "void",
+            nameof(Double) => "double",
+            nameof(Single) => "float",
+            nameof(Int64) => "int64_t",
+            nameof(UInt64) => "uint64_t",
+            _ => "int",
+        };
 
     private static string GenIcallDecl(Icall icall)
     {

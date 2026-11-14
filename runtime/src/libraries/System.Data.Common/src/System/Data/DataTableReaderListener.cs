@@ -53,8 +53,12 @@ namespace System.Data
             {
                 return;
             }
-            _currentDataTable.Columns.ColumnPropertyChanged += new CollectionChangeEventHandler(SchemaChanged);
-            _currentDataTable.Columns.CollectionChanged += new CollectionChangeEventHandler(SchemaChanged);
+            _currentDataTable.Columns.ColumnPropertyChanged += new CollectionChangeEventHandler(
+                SchemaChanged
+            );
+            _currentDataTable.Columns.CollectionChanged += new CollectionChangeEventHandler(
+                SchemaChanged
+            );
 
             _currentDataTable.RowChanged += new DataRowChangeEventHandler(DataChanged);
             _currentDataTable.RowDeleted += new DataRowChangeEventHandler(DataChanged);
@@ -74,8 +78,12 @@ namespace System.Data
                 return;
             }
 
-            _currentDataTable.Columns.ColumnPropertyChanged -= new CollectionChangeEventHandler(SchemaChanged);
-            _currentDataTable.Columns.CollectionChanged -= new CollectionChangeEventHandler(SchemaChanged);
+            _currentDataTable.Columns.ColumnPropertyChanged -= new CollectionChangeEventHandler(
+                SchemaChanged
+            );
+            _currentDataTable.Columns.CollectionChanged -= new CollectionChangeEventHandler(
+                SchemaChanged
+            );
 
             _currentDataTable.RowChanged -= new DataRowChangeEventHandler(DataChanged);
             _currentDataTable.RowDeleted -= new DataRowChangeEventHandler(DataChanged);

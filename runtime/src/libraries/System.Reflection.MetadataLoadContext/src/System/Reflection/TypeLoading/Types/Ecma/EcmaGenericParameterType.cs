@@ -21,18 +21,38 @@ namespace System.Reflection.TypeLoading.Ecma
 
             Handle = handle;
             _ecmaModule = module;
-            _neverAccessThisExceptThroughGenericParameterProperty = handle.GetGenericParameter(Reader);
+            _neverAccessThisExceptThroughGenericParameterProperty = handle.GetGenericParameter(
+                Reader
+            );
         }
 
         internal sealed override RoModule GetRoModule() => _ecmaModule;
 
         protected sealed override int ComputePosition() => GenericParameter.Index;
-        protected sealed override string ComputeName() => GenericParameter.Name.GetString(Reader);
-        public sealed override GenericParameterAttributes GenericParameterAttributes => GenericParameter.Attributes;
 
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => GenericParameter.GetCustomAttributes().ToTrueCustomAttributes(GetEcmaModule());
-        internal sealed override bool IsCustomAttributeDefined(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name) => GenericParameter.GetCustomAttributes().IsCustomAttributeDefined(ns, name, GetEcmaModule());
-        internal sealed override CustomAttributeData? TryFindCustomAttribute(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name) => GenericParameter.GetCustomAttributes().TryFindCustomAttribute(ns, name, GetEcmaModule());
+        protected sealed override string ComputeName() => GenericParameter.Name.GetString(Reader);
+
+        public sealed override GenericParameterAttributes GenericParameterAttributes =>
+            GenericParameter.Attributes;
+
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            GenericParameter.GetCustomAttributes().ToTrueCustomAttributes(GetEcmaModule());
+
+        internal sealed override bool IsCustomAttributeDefined(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name
+        ) =>
+            GenericParameter
+                .GetCustomAttributes()
+                .IsCustomAttributeDefined(ns, name, GetEcmaModule());
+
+        internal sealed override CustomAttributeData? TryFindCustomAttribute(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name
+        ) =>
+            GenericParameter
+                .GetCustomAttributes()
+                .TryFindCustomAttribute(ns, name, GetEcmaModule());
 
         public sealed override int MetadataToken => Handle.GetToken();
 
@@ -49,7 +69,8 @@ namespace System.Reflection.TypeLoading.Ecma
             int index = 0;
             foreach (GenericParameterConstraintHandle h in handles)
             {
-                RoType constraint = h.GetGenericParameterConstraint(reader).Type.ResolveTypeDefRefOrSpec(GetEcmaModule(), typeContext);
+                RoType constraint = h.GetGenericParameterConstraint(reader)
+                    .Type.ResolveTypeDefRefOrSpec(GetEcmaModule(), typeContext);
 
                 // A constraint can have modifiers such as 'System.Runtime.InteropServices.UnmanagedType' which here is a 'System.ValueType'
                 // modified type with a modreq for 'UnmanagedType' which would be obtainable through 'GetRequiredCustomModifiers()'.
@@ -69,12 +90,22 @@ namespace System.Reflection.TypeLoading.Ecma
         public abstract override MethodBase? DeclaringMethod { get; }
 
         internal GenericParameterHandle Handle { get; }
+
         internal EcmaModule GetEcmaModule() => _ecmaModule;
+
         internal MetadataReader Reader => GetEcmaModule().Reader;
         protected abstract TypeContext TypeContext { get; }
 
-        protected ref readonly GenericParameter GenericParameter { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughGenericParameterProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        protected ref readonly GenericParameter GenericParameter
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughGenericParameterProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly GenericParameter _neverAccessThisExceptThroughGenericParameterProperty;
     }
 }

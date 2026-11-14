@@ -15,10 +15,15 @@ public class cs1
         return i * 100;
     }
 
-    public const System.Runtime.CompilerServices.MethodImplOptions s_enum2 = System.Runtime.CompilerServices.MethodImplOptions.NoInlining;
+    public const System.Runtime.CompilerServices.MethodImplOptions s_enum2 = System
+        .Runtime
+        .CompilerServices
+        .MethodImplOptions
+        .NoInlining;
 
     [System.Runtime.CompilerServices.MethodImpl(
-      System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     [Fact]
     public static int TestEntryPoint()
     {

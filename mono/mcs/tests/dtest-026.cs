@@ -2,20 +2,20 @@
 
 struct S
 {
-	public int Value;
+    public int Value;
 }
 
 class C
 {
-	static dynamic f;
-	
-	public static int Main ()
-	{
-		f = new S ();
-		f.Value = 5;
-		if (f.Value != 5)
-			return 1;
+    static dynamic f;
 
-		return 0;
-	}
+    public static int Main()
+    {
+        f = new S();
+        f.Value = 5;
+        if (f.Value != 5)
+            return 1;
+
+        return 0;
+    }
 }

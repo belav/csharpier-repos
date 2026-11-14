@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 namespace System.Runtime.CompilerServices
 {
@@ -11,7 +11,5 @@ namespace System.Runtime.CompilerServices
     //
     // Any compiler could use this to indicate that the user has not specified
     // Sign behavior for the given byte.
-    public static class IsSignUnspecifiedByte 
-    {
-    }
+    public static class IsSignUnspecifiedByte { }
 }

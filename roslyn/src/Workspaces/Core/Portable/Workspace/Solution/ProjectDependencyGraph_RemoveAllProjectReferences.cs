@@ -21,10 +21,26 @@ namespace Microsoft.CodeAnalysis
             var projectIds = _projectIds;
 
             // Incrementally update the graph
-            var referencesMap = ComputeNewReferencesMapForRemovedAllProjectReferences(_referencesMap, projectId);
-            var reverseReferencesMap = ComputeNewReverseReferencesMapForRemovedAllProjectReferences(_lazyReverseReferencesMap, projectId, referencedProjectIds);
-            var transitiveReferencesMap = ComputeNewTransitiveReferencesMapForRemovedAllProjectReferences(_transitiveReferencesMap, projectId, referencedProjectIds);
-            var reverseTransitiveReferencesMap = ComputeNewReverseTransitiveReferencesMapForRemovedAllProjectReferences(_reverseTransitiveReferencesMap, projectId);
+            var referencesMap = ComputeNewReferencesMapForRemovedAllProjectReferences(
+                _referencesMap,
+                projectId
+            );
+            var reverseReferencesMap = ComputeNewReverseReferencesMapForRemovedAllProjectReferences(
+                _lazyReverseReferencesMap,
+                projectId,
+                referencedProjectIds
+            );
+            var transitiveReferencesMap =
+                ComputeNewTransitiveReferencesMapForRemovedAllProjectReferences(
+                    _transitiveReferencesMap,
+                    projectId,
+                    referencedProjectIds
+                );
+            var reverseTransitiveReferencesMap =
+                ComputeNewReverseTransitiveReferencesMapForRemovedAllProjectReferences(
+                    _reverseTransitiveReferencesMap,
+                    projectId
+                );
 
             return new ProjectDependencyGraph(
                 projectIds,
@@ -33,12 +49,20 @@ namespace Microsoft.CodeAnalysis
                 transitiveReferencesMap,
                 reverseTransitiveReferencesMap,
                 topologicallySortedProjects: default,
-                dependencySets: default);
+                dependencySets: default
+            );
         }
 
-        private static ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> ComputeNewReferencesMapForRemovedAllProjectReferences(
-            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> existingForwardReferencesMap,
-            ProjectId projectId)
+        private static ImmutableDictionary<
+            ProjectId,
+            ImmutableHashSet<ProjectId>
+        > ComputeNewReferencesMapForRemovedAllProjectReferences(
+            ImmutableDictionary<
+                ProjectId,
+                ImmutableHashSet<ProjectId>
+            > existingForwardReferencesMap,
+            ProjectId projectId
+        )
         {
             // Projects with no references do not have an entry in the forward references map
             return existingForwardReferencesMap.Remove(projectId);
@@ -54,10 +78,17 @@ namespace Microsoft.CodeAnalysis
         /// <param name="referencedProjectIds">The targets of the project references which are being removed.</param>
         /// <returns>The updated (complete) reverse references map, or <see langword="null"/> if the reverse references
         /// map could not be incrementally updated.</returns>
-        private static ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>? ComputeNewReverseReferencesMapForRemovedAllProjectReferences(
-            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>? existingReverseReferencesMap,
+        private static ImmutableDictionary<
+            ProjectId,
+            ImmutableHashSet<ProjectId>
+        >? ComputeNewReverseReferencesMapForRemovedAllProjectReferences(
+            ImmutableDictionary<
+                ProjectId,
+                ImmutableHashSet<ProjectId>
+            >? existingReverseReferencesMap,
             ProjectId projectId,
-            ImmutableHashSet<ProjectId> referencedProjectIds)
+            ImmutableHashSet<ProjectId> referencedProjectIds
+        )
         {
             if (existingReverseReferencesMap is null)
             {
@@ -73,10 +104,17 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutable();
         }
 
-        private static ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> ComputeNewTransitiveReferencesMapForRemovedAllProjectReferences(
-            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> existingTransitiveReferencesMap,
+        private static ImmutableDictionary<
+            ProjectId,
+            ImmutableHashSet<ProjectId>
+        > ComputeNewTransitiveReferencesMapForRemovedAllProjectReferences(
+            ImmutableDictionary<
+                ProjectId,
+                ImmutableHashSet<ProjectId>
+            > existingTransitiveReferencesMap,
             ProjectId projectId,
-            ImmutableHashSet<ProjectId> referencedProjectIds)
+            ImmutableHashSet<ProjectId> referencedProjectIds
+        )
         {
             var builder = existingTransitiveReferencesMap.ToBuilder();
 
@@ -100,9 +138,16 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutable();
         }
 
-        private static ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> ComputeNewReverseTransitiveReferencesMapForRemovedAllProjectReferences(
-            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> existingReverseTransitiveReferencesMap,
-            ProjectId projectId)
+        private static ImmutableDictionary<
+            ProjectId,
+            ImmutableHashSet<ProjectId>
+        > ComputeNewReverseTransitiveReferencesMapForRemovedAllProjectReferences(
+            ImmutableDictionary<
+                ProjectId,
+                ImmutableHashSet<ProjectId>
+            > existingReverseTransitiveReferencesMap,
+            ProjectId projectId
+        )
         {
             var builder = existingReverseTransitiveReferencesMap.ToBuilder();
 

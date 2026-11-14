@@ -34,12 +34,13 @@ public class Level1
             return false;
         }
 
-        return ReferenceEquals(this, obj) ? true : obj.GetType() == GetType() && Equals((Level1)obj);
+        return ReferenceEquals(this, obj)
+            ? true
+            : obj.GetType() == GetType() && Equals((Level1)obj);
     }
 
-    private bool Equals(Level1 other)
-        => Id == other.Id && string.Equals(Name, other.Name) && Date.Equals(other.Date);
+    private bool Equals(Level1 other) =>
+        Id == other.Id && string.Equals(Name, other.Name) && Date.Equals(other.Date);
 
-    public override int GetHashCode()
-        => HashCode.Combine(Id, Name, Date);
+    public override int GetHashCode() => HashCode.Combine(Id, Name, Date);
 }

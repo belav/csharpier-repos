@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnnecessaryImportsDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryImportsCodeFixProvider>;
+        CSharpRemoveUnnecessaryImportsCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryImports)]
     public class RemoveUnnecessaryImportsTests
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27006")]
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         Action a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27006")]
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         Action a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -177,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         DateTime d;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -254,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         List<int> list;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -287,7 +294,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         DateTime d;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -317,7 +325,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         args.Where(a => a.Length > 10);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541827")]
@@ -390,7 +399,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         G::List<int> list;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -419,7 +429,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         G.List<int> list;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -457,7 +468,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -465,38 +477,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;
-                using System.Linq;|}|]
+                TestCode = """
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                namespace N;
+                    namespace N;
 
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        DateTime d;
+                        static void Main(string[] args)
+                        {
+                            DateTime d;
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                namespace N;
+                    """,
+                FixedCode = """
+                    namespace N;
 
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        DateTime d;
+                        static void Main(string[] args)
+                        {
+                            DateTime d;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -548,7 +558,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                 {
                     DateTime d;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/712656")]
@@ -599,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                 {
                     DateTime d;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/712656")]
@@ -607,49 +619,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;
-                using System.Linq;|}|]
+                TestCode = """
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                namespace N;
+                    namespace N;
 
-                [|using System;
-                {|IDE0005:using System.Collections.Generic;|}|]
+                    [|using System;
+                    {|IDE0005:using System.Collections.Generic;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            DateTime d;
+                        }
+                    }
+
+                    class F
                     {
                         DateTime d;
                     }
-                }
+                    """,
+                FixedCode = """
+                    namespace N;
 
-                class F
-                {
-                    DateTime d;
-                }
-                """,
-                FixedCode =
-                """
-                namespace N;
+                    using System;
 
-                using System;
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            DateTime d;
+                        }
+                    }
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class F
                     {
                         DateTime d;
                     }
-                }
-
-                class F
-                {
-                    DateTime d;
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -738,7 +748,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -775,7 +786,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         List<int> list;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -814,7 +826,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -857,7 +870,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541817")]
@@ -916,7 +930,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528609")]
@@ -941,7 +956,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -965,7 +981,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541827")]
@@ -999,7 +1016,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                                 select a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1197,7 +1215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1235,7 +1254,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541817")]
@@ -1259,7 +1279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541914")]
@@ -1277,7 +1298,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                 public static class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541937")]
@@ -1320,7 +1342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                 public static class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542016")]
@@ -1348,7 +1371,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542016")]
@@ -1382,7 +1406,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542134")]
@@ -1752,13 +1777,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(10,31): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(10, 31, 10, 36),
                     // Test0.cs(10,31): error CS1003: Syntax error, 'in' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 31, 10, 36).WithArguments("in"),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(10, 31, 10, 36)
+                        .WithArguments("in"),
                     // Test0.cs(10,31): error CS1525: Invalid expression term 'fixed'
-                    DiagnosticResult.CompilerError("CS1525").WithSpan(10, 31, 10, 36).WithArguments("fixed"),
+                    DiagnosticResult
+                        .CompilerError("CS1525")
+                        .WithSpan(10, 31, 10, 36)
+                        .WithArguments("fixed"),
                     // Test0.cs(10,31): error CS1525: Invalid expression term 'fixed'
-                    DiagnosticResult.CompilerError("CS1525").WithSpan(10, 31, 10, 36).WithArguments("fixed"),
+                    DiagnosticResult
+                        .CompilerError("CS1525")
+                        .WithSpan(10, 31, 10, 36)
+                        .WithArguments("fixed"),
                     // Test0.cs(10,31): error CS1525: Invalid expression term 'fixed'
-                    DiagnosticResult.CompilerError("CS1525").WithSpan(10, 31, 10, 36).WithArguments("fixed"),
+                    DiagnosticResult
+                        .CompilerError("CS1525")
+                        .WithSpan(10, 31, 10, 36)
+                        .WithArguments("fixed"),
                     // Test0.cs(10,31): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     DiagnosticResult.CompilerError("CS0214").WithSpan(10, 31, 10, 49),
                     // Test0.cs(10,37): error CS0209: The type of a local declared in a fixed statement must be a pointer type
@@ -1768,19 +1805,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(10,37): error CS1001: Identifier expected
                     DiagnosticResult.CompilerError("CS1001").WithSpan(10, 37, 10, 39),
                     // Test0.cs(10,37): error CS1003: Syntax error, '(' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 37, 10, 39).WithArguments("("),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(10, 37, 10, 39)
+                        .WithArguments("("),
                     // Test0.cs(10,37): error CS1003: Syntax error, ',' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 37, 10, 39).WithArguments(","),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(10, 37, 10, 39)
+                        .WithArguments(","),
                     // Test0.cs(10,37): error CS1031: Type expected
                     DiagnosticResult.CompilerError("CS1031").WithSpan(10, 37, 10, 39),
                     // Test0.cs(10,40): error CS0118: 'expr2' is a variable but is used like a type
-                    DiagnosticResult.CompilerError("CS0118").WithSpan(10, 40, 10, 45).WithMessage(null),
+                    DiagnosticResult
+                        .CompilerError("CS0118")
+                        .WithSpan(10, 40, 10, 45)
+                        .WithMessage(null),
                     // Test0.cs(10,40): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithSpan(10, 40, 10, 45),
                     // Test0.cs(10,40): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     DiagnosticResult.CompilerError("CS1023").WithSpan(10, 40, 10, 49),
                     // Test0.cs(10,49): error CS0246: The type or namespace name 'i' could not be found (are you missing a using directive or an assembly reference?)
-                    DiagnosticResult.CompilerError("CS0246").WithSpan(10, 49, 10, 50).WithArguments("i"),
+                    DiagnosticResult
+                        .CompilerError("CS0246")
+                        .WithSpan(10, 49, 10, 50)
+                        .WithArguments("i"),
                     // Test0.cs(10,49): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(10, 49, 10, 50),
                     // Test0.cs(10,58): error CS1002: ; expected
@@ -1788,9 +1837,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(10,58): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     DiagnosticResult.CompilerError("CS0214").WithSpan(10, 58, 10, 80),
                     // Test0.cs(10,64): error CS0246: The type or namespace name 'select' could not be found (are you missing a using directive or an assembly reference?)
-                    DiagnosticResult.CompilerError("CS0246").WithSpan(10, 64, 10, 70).WithArguments("select"),
+                    DiagnosticResult
+                        .CompilerError("CS0246")
+                        .WithSpan(10, 64, 10, 70)
+                        .WithArguments("select"),
                     // Test0.cs(10,64): error CS1003: Syntax error, '(' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 64, 10, 70).WithArguments("("),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(10, 64, 10, 70)
+                        .WithArguments("("),
                     // Test0.cs(10,71): error CS0209: The type of a local declared in a fixed statement must be a pointer type
                     DiagnosticResult.CompilerError("CS0209").WithSpan(10, 71, 10, 71),
                     // Test0.cs(10,71): error CS0210: You must provide an initializer in a fixed or using statement declaration
@@ -1800,7 +1855,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(10,71): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithSpan(10, 71, 10, 74),
                     // Test0.cs(10,77): error CS0103: The name 'i' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithSpan(10, 77, 10, 78).WithArguments("i"),
+                    DiagnosticResult
+                        .CompilerError("CS0103")
+                        .WithSpan(10, 77, 10, 78)
+                        .WithArguments("i"),
                     // Test0.cs(10,80): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(10, 80, 10, 85),
                     // Test0.cs(10,80): error CS1513: } expected
@@ -1816,19 +1874,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(10,86): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(10, 86, 10, 87),
                     // Test0.cs(10,86): error CS1003: Syntax error, '(' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 86, 10, 87).WithArguments("("),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(10, 86, 10, 87)
+                        .WithArguments("("),
                     // Test0.cs(10,86): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithSpan(10, 86, 10, 87),
                     // Test0.cs(10,86): error CS1031: Type expected
                     DiagnosticResult.CompilerError("CS1031").WithSpan(10, 86, 10, 87),
                     // Test0.cs(10,86): error CS1525: Invalid expression term '}'
-                    DiagnosticResult.CompilerError("CS1525").WithSpan(10, 86, 10, 87).WithArguments("}"),
+                    DiagnosticResult
+                        .CompilerError("CS1525")
+                        .WithSpan(10, 86, 10, 87)
+                        .WithArguments("}"),
                     // Test0.cs(10,87): error CS1597: Semicolon after method or accessor block is not valid
                     DiagnosticResult.CompilerError("CS1597").WithSpan(10, 87, 10, 88),
                     // Test0.cs(12,5): error CS0825: The contextual keyword 'var' may only appear within a local variable declaration or in script code
                     DiagnosticResult.CompilerError("CS0825").WithSpan(12, 5, 12, 8),
                     // Test0.cs(12,35): error CS0103: The name 'expr1' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithSpan(12, 35, 12, 40).WithArguments("expr1"),
+                    DiagnosticResult
+                        .CompilerError("CS0103")
+                        .WithSpan(12, 35, 12, 40)
+                        .WithArguments("expr1"),
                     // Test0.cs(13,30): error CS0742: A query body must end with a select clause or a group clause
                     DiagnosticResult.CompilerError("CS0742").WithSpan(13, 30, 13, 35),
                     // Test0.cs(13,30): error CS0743: Expected contextual keyword 'on'
@@ -1840,13 +1907,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(13,30): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(13, 30, 13, 35),
                     // Test0.cs(13,30): error CS1003: Syntax error, 'in' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 30, 13, 35).WithArguments("in"),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 30, 13, 35)
+                        .WithArguments("in"),
                     // Test0.cs(13,30): error CS1525: Invalid expression term 'fixed'
-                    DiagnosticResult.CompilerError("CS1525").WithSpan(13, 30, 13, 35).WithArguments("fixed"),
+                    DiagnosticResult
+                        .CompilerError("CS1525")
+                        .WithSpan(13, 30, 13, 35)
+                        .WithArguments("fixed"),
                     // Test0.cs(13,30): error CS1525: Invalid expression term 'fixed'
-                    DiagnosticResult.CompilerError("CS1525").WithSpan(13, 30, 13, 35).WithArguments("fixed"),
+                    DiagnosticResult
+                        .CompilerError("CS1525")
+                        .WithSpan(13, 30, 13, 35)
+                        .WithArguments("fixed"),
                     // Test0.cs(13,30): error CS1525: Invalid expression term 'fixed'
-                    DiagnosticResult.CompilerError("CS1525").WithSpan(13, 30, 13, 35).WithArguments("fixed"),
+                    DiagnosticResult
+                        .CompilerError("CS1525")
+                        .WithSpan(13, 30, 13, 35)
+                        .WithArguments("fixed"),
                     // Test0.cs(13,36): error CS1642: Fixed size buffer fields may only be members of structs
                     DiagnosticResult.CompilerError("CS1642").WithSpan(13, 36, 13, 36),
                     // Test0.cs(13,36): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
@@ -1854,9 +1933,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(13,36): error CS1001: Identifier expected
                     DiagnosticResult.CompilerError("CS1001").WithSpan(13, 36, 13, 38),
                     // Test0.cs(13,36): error CS1003: Syntax error, ',' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 36, 13, 38).WithArguments(","),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 36, 13, 38)
+                        .WithArguments(","),
                     // Test0.cs(13,36): error CS1003: Syntax error, '[' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 36, 13, 38).WithArguments("["),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 36, 13, 38)
+                        .WithArguments("["),
                     // Test0.cs(13,36): error CS1031: Type expected
                     DiagnosticResult.CompilerError("CS1031").WithSpan(13, 36, 13, 38),
                     // Test0.cs(13,36): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
@@ -1864,27 +1949,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(13,36): error CS7092: A fixed buffer may only have one dimension.
                     DiagnosticResult.CompilerError("CS7092").WithSpan(13, 36, 13, 57),
                     // Test0.cs(13,39): error CS0103: The name 'expr2' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithSpan(13, 39, 13, 44).WithArguments("expr2"),
+                    DiagnosticResult
+                        .CompilerError("CS0103")
+                        .WithSpan(13, 39, 13, 44)
+                        .WithArguments("expr2"),
                     // Test0.cs(13,45): error CS1003: Syntax error, ',' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 45, 13, 47).WithArguments(","),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 45, 13, 47)
+                        .WithArguments(","),
                     // Test0.cs(13,48): error CS1003: Syntax error, ',' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 48, 13, 49).WithArguments(","),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 48, 13, 49)
+                        .WithArguments(","),
                     // Test0.cs(13,50): error CS1003: Syntax error, ',' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 50, 13, 56).WithArguments(","),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 50, 13, 56)
+                        .WithArguments(","),
                     // Test0.cs(13,57): error CS0443: Syntax error; value expected
                     DiagnosticResult.CompilerError("CS0443").WithSpan(13, 57, 13, 57),
                     // Test0.cs(13,57): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(13, 57, 13, 62),
                     // Test0.cs(13,57): error CS1003: Syntax error, ',' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 57, 13, 62).WithArguments(","),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 57, 13, 62)
+                        .WithArguments(","),
                     // Test0.cs(13,57): error CS1003: Syntax error, ']' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 57, 13, 62).WithArguments("]"),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 57, 13, 62)
+                        .WithArguments("]"),
                     // Test0.cs(13,63): error CS0246: The type or namespace name 'select' could not be found (are you missing a using directive or an assembly reference?)
-                    DiagnosticResult.CompilerError("CS0246").WithSpan(13, 63, 13, 69).WithArguments("select"),
+                    DiagnosticResult
+                        .CompilerError("CS0246")
+                        .WithSpan(13, 63, 13, 69)
+                        .WithArguments("select"),
                     // Test0.cs(13,63): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
                     DiagnosticResult.CompilerError("CS1663").WithSpan(13, 63, 13, 69),
                     // Test0.cs(13,70): error CS0102: The type 'QueryExpressionTest' already contains a definition for ''
-                    DiagnosticResult.CompilerError("CS0102").WithSpan(13, 70, 13, 70).WithArguments("QueryExpressionTest", ""),
+                    DiagnosticResult
+                        .CompilerError("CS0102")
+                        .WithSpan(13, 70, 13, 70)
+                        .WithArguments("QueryExpressionTest", ""),
                     // Test0.cs(13,70): error CS1642: Fixed size buffer fields may only be members of structs
                     DiagnosticResult.CompilerError("CS1642").WithSpan(13, 70, 13, 70),
                     // Test0.cs(13,70): error CS0836: Cannot use anonymous type in a constant expression
@@ -1892,25 +2001,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(13,70): error CS1001: Identifier expected
                     DiagnosticResult.CompilerError("CS1001").WithSpan(13, 70, 13, 73),
                     // Test0.cs(13,70): error CS1003: Syntax error, '[' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 70, 13, 73).WithArguments("["),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 70, 13, 73)
+                        .WithArguments("["),
                     // Test0.cs(13,70): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     DiagnosticResult.CompilerError("CS0214").WithSpan(13, 70, 13, 79),
                     // Test0.cs(13,70): error CS7092: A fixed buffer may only have one dimension.
                     DiagnosticResult.CompilerError("CS7092").WithSpan(13, 70, 13, 79),
                     // Test0.cs(13,76): error CS0103: The name 'i' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithSpan(13, 76, 13, 77).WithArguments("i"),
+                    DiagnosticResult
+                        .CompilerError("CS0103")
+                        .WithSpan(13, 76, 13, 77)
+                        .WithArguments("i"),
                     // Test0.cs(13,79): error CS0443: Syntax error; value expected
                     DiagnosticResult.CompilerError("CS0443").WithSpan(13, 79, 13, 79),
                     // Test0.cs(13,79): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(13, 79, 13, 84),
                     // Test0.cs(13,79): error CS1003: Syntax error, ',' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 79, 13, 84).WithArguments(","),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 79, 13, 84)
+                        .WithArguments(","),
                     // Test0.cs(13,79): error CS1003: Syntax error, ']' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 79, 13, 84).WithArguments("]"),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 79, 13, 84)
+                        .WithArguments("]"),
                     // Test0.cs(13,79): error CS1513: } expected
                     DiagnosticResult.CompilerError("CS1513").WithSpan(13, 79, 13, 84),
                     // Test0.cs(13,85): error CS0102: The type 'QueryExpressionTest' already contains a definition for ''
-                    DiagnosticResult.CompilerError("CS0102").WithSpan(13, 85, 13, 85).WithArguments("QueryExpressionTest", ""),
+                    DiagnosticResult
+                        .CompilerError("CS0102")
+                        .WithSpan(13, 85, 13, 85)
+                        .WithArguments("QueryExpressionTest", ""),
                     // Test0.cs(13,85): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     DiagnosticResult.CompilerError("CS0214").WithSpan(13, 85, 13, 85),
                     // Test0.cs(13,85): error CS1642: Fixed size buffer fields may only be members of structs
@@ -1924,9 +2048,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                     // Test0.cs(13,85): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(13, 85, 13, 86),
                     // Test0.cs(13,85): error CS1003: Syntax error, '[' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 85, 13, 86).WithArguments("["),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 85, 13, 86)
+                        .WithArguments("["),
                     // Test0.cs(13,85): error CS1003: Syntax error, ']' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(13, 85, 13, 86).WithArguments("]"),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(13, 85, 13, 86)
+                        .WithArguments("]"),
                     // Test0.cs(13,85): error CS1031: Type expected
                     DiagnosticResult.CompilerError("CS1031").WithSpan(13, 85, 13, 86),
                     // Test0.cs(14,3): error CS1022: Type or namespace definition, or end-of-file expected
@@ -1952,31 +2082,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                 """;
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { code },
-                    DocumentationMode = DocumentationMode.None,
-                },
+                TestState = { Sources = { code }, DocumentationMode = DocumentationMode.None },
             }.RunAsync();
 
             // fully parsing doc comments; System is necessary
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { code },
-                    DocumentationMode = DocumentationMode.Parse,
-                },
+                TestState = { Sources = { code }, DocumentationMode = DocumentationMode.Parse },
             }.RunAsync();
 
             // fully parsing and diagnosing doc comments; System is necessary
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { code },
-                    DocumentationMode = DocumentationMode.Diagnose,
-                },
+                TestState = { Sources = { code }, DocumentationMode = DocumentationMode.Diagnose },
             }.RunAsync();
         }
 
@@ -2007,7 +2125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                         Console.WriteLine();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/1323")]
@@ -2022,7 +2141,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                 """
                 #if true
                 #endif
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -2051,13 +2171,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
             {
                 0 => code,
                 _ => """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
             };
 
             var markupMode = warningLevel switch
@@ -2071,18 +2191,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { code },
-                    MarkupHandling = markupMode,
-                },
+                TestState = { Sources = { code }, MarkupHandling = markupMode },
                 FixedCode = fixedCode,
                 SolutionTransforms =
                 {
                     (solution, projectId) =>
                     {
-                        var compilationOptions = (CSharpCompilationOptions)solution.GetRequiredProject(projectId).CompilationOptions!;
-                        return solution.WithProjectCompilationOptions(projectId, compilationOptions.WithWarningLevel(warningLevel));
+                        var compilationOptions = (CSharpCompilationOptions)
+                            solution.GetRequiredProject(projectId).CompilationOptions!;
+                        return solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions.WithWarningLevel(warningLevel)
+                        );
                     },
                 },
             }.RunAsync();
@@ -2093,35 +2213,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                namespace N;
+                TestCode = """
+                    namespace N;
 
-                [|{|IDE0005:using System;|}
-                using System.Collections.Generic;|]
+                    [|{|IDE0005:using System;|}
+                    using System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                namespace N;
+                    """,
+                FixedCode = """
+                    namespace N;
 
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -2131,32 +2249,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                [|{|IDE0005:using System;|}
+                TestCode = """
+                    [|{|IDE0005:using System;|}
 
-                using System.Collections.Generic;|]
+                    using System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                using System.Collections.Generic;
+                    """,
+                FixedCode = """
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """
+                    """,
             }.RunAsync();
         }
 
@@ -2165,33 +2281,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                [|{|IDE0005:using System;
-                using System.Threading.Tasks;|}
+                TestCode = """
+                    [|{|IDE0005:using System;
+                    using System.Threading.Tasks;|}
 
-                using System.Collections.Generic;|]
+                    using System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                using System.Collections.Generic;
+                    """,
+                FixedCode = """
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """
+                    """,
             }.RunAsync();
         }
 
@@ -2200,37 +2314,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                [|{|IDE0005:using System;|}
-                using System.Threading.Tasks;
+                TestCode = """
+                    [|{|IDE0005:using System;|}
+                    using System.Threading.Tasks;
 
-                using System.Collections.Generic;|]
+                    using System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
-                        Task task = null;
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                            Task task = null;
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                using System.Threading.Tasks;
+                    """,
+                FixedCode = """
+                    using System.Threading.Tasks;
 
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
-                        Task task = null;
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                            Task task = null;
+                        }
                     }
-                }
-                """
+                    """,
             }.RunAsync();
         }
 
@@ -2239,33 +2351,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                [|using System.Collections.Generic;
+                TestCode = """
+                    [|using System.Collections.Generic;
 
-                {|IDE0005:using System;
-                using System.Threading.Tasks;|}|]
+                    {|IDE0005:using System;
+                    using System.Threading.Tasks;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                using System.Collections.Generic;
+                    """,
+                FixedCode = """
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """
+                    """,
             }.RunAsync();
         }
     }

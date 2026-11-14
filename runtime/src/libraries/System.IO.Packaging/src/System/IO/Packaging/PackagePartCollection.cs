@@ -25,8 +25,6 @@ namespace System.IO.Packaging
             return GetEnumerator();
         }
 
-
-
         /// <summary>
         /// Returns an enumerator over all the Parts in the container
         /// </summary>
@@ -49,7 +47,9 @@ namespace System.IO.Packaging
 
         #region Internal Constructor
 
-        internal PackagePartCollection(SortedList<PackUriHelper.ValidatedPartUri, PackagePart> partList)
+        internal PackagePartCollection(
+            SortedList<PackUriHelper.ValidatedPartUri, PackagePart> partList
+        )
         {
             Debug.Assert(partList != null, "partDictionary parameter cannot be null");
             _partList = partList;

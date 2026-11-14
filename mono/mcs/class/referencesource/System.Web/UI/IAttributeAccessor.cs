@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="IAttributeAccessor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -10,30 +10,29 @@
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-namespace System.Web.UI {
-
-/// <devdoc>
-///    <para>[To be supplied.]</para>
-/// </devdoc>
-public interface IAttributeAccessor {
-    /*
-     * Get the string value of a named property
-     */
-
+namespace System.Web.UI
+{
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    string GetAttribute(string key);
+    public interface IAttributeAccessor
+    {
+        /*
+         * Get the string value of a named property
+         */
 
-    /*
-     * Set a named property with a string value
-     */
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        string GetAttribute(string key);
 
-    /// <devdoc>
-    ///    <para>[To be supplied.]</para>
-    /// </devdoc>
-    void SetAttribute(string key, string value);
+        /*
+         * Set a named property with a string value
+         */
 
-}
-
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        void SetAttribute(string key, string value);
+    }
 }

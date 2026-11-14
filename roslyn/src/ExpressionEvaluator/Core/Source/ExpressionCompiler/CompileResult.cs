@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             byte[] assembly,
             string typeName,
             string methodName,
-            ReadOnlyCollection<string>? formatSpecifiers)
+            ReadOnlyCollection<string>? formatSpecifiers
+        )
         {
             Assembly = assembly;
             TypeName = typeName;

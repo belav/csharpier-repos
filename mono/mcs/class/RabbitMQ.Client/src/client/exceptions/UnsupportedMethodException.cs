@@ -66,7 +66,10 @@ namespace RabbitMQ.Client.Exceptions
         private string m_methodName;
 
         ///<summary>The name of the RPC request that could not be sent.</summary>
-        public string MethodName { get { return m_methodName; } }
+        public string MethodName
+        {
+            get { return m_methodName; }
+        }
 
         public UnsupportedMethodException(string methodName)
         {

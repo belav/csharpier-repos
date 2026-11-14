@@ -8,7 +8,10 @@ using Xunit;
 public class Program
 {
     [DllImport("libc", EntryPoint = "setlocale")]
-    public static extern IntPtr setlocale(int category, [MarshalAs(UnmanagedType.LPStr)] string locale);
+    public static extern IntPtr setlocale(
+        int category,
+        [MarshalAs(UnmanagedType.LPStr)] string locale
+    );
 
     [Fact]
     public static int TestEntryPoint()
@@ -19,7 +22,11 @@ public class Program
         // towupper 'i' -> \x0130 (instead of 'I')
         // towlower 'I' -> \x0131 (instead of 'i')
         const string TRLocale = "tr_TR.UTF-8";
-        IntPtr res = setlocale(6 /*LC_ALL*/, TRLocale);
+        IntPtr res = setlocale(
+            6 /*LC_ALL*/
+            ,
+            TRLocale
+        );
         if (TRLocale != Marshal.PtrToStringAnsi(res))
         {
             Console.WriteLine("Skipped! " + TRLocale + " locale was not found in system!");

@@ -19,12 +19,18 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Compute the instance field layout for a DefType. Must not depend on static field layout for any other type.
         /// </summary>
-        public abstract ComputedInstanceFieldLayout ComputeInstanceLayout(DefType type, InstanceLayoutKind layoutKind);
+        public abstract ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType type,
+            InstanceLayoutKind layoutKind
+        );
 
         /// <summary>
         /// Compute the static field layout for a DefType. Must not depend on static field layout for any other type.
         /// </summary>
-        public abstract ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType type, StaticLayoutKind layoutKind);
+        public abstract ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType type,
+            StaticLayoutKind layoutKind
+        );
 
         /// <summary>
         /// Compute whether the fields of the specified type contain a GC pointer.
@@ -40,7 +46,9 @@ namespace Internal.TypeSystem
         /// Compute the shape of a value type. The shape information is used to control code generation and allocation
         /// (such as vectorization, passing the value type by value across method calls, or boxing alignment).
         /// </summary>
-        public abstract ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type);
+        public abstract ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        );
     }
 
     /// <summary>
@@ -56,7 +64,7 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Compute instance sizes, alignments and field offsets.
         /// </summary>
-        TypeAndFields
+        TypeAndFields,
     }
 
     /// <summary>
@@ -72,7 +80,7 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Compute static region sizes and static field offsets.
         /// </summary>
-        StaticRegionSizesAndFields
+        StaticRegionSizesAndFields,
     }
 
     public struct ComputedInstanceFieldLayout

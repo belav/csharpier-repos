@@ -16,15 +16,12 @@ namespace Microsoft.VisualStudio.LanguageServices
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceCacheService()
-        {
-        }
+        public WorkspaceCacheService() { }
 
         /// <summary>
         /// Called by the host to try and reduce memory occupied by caches.
         /// </summary>
-        public void FlushCaches()
-            => this.CacheFlushRequested?.Invoke(this, EventArgs.Empty);
+        public void FlushCaches() => this.CacheFlushRequested?.Invoke(this, EventArgs.Empty);
 
         /// <summary>
         /// Raised by the host when available memory is getting low in order to request that caches be flushed.

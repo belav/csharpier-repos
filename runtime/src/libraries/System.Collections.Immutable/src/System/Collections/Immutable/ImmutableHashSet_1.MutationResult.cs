@@ -52,7 +52,11 @@ namespace System.Collections.Immutable
             /// <param name="root">The root node of the result.</param>
             /// <param name="count">The total element count or a count adjustment.</param>
             /// <param name="countType">The appropriate interpretation for the <paramref name="count"/> parameter.</param>
-            internal MutationResult(SortedInt32KeyNode<HashBucket> root, int count, CountType countType = ImmutableHashSet<T>.CountType.Adjustment)
+            internal MutationResult(
+                SortedInt32KeyNode<HashBucket> root,
+                int count,
+                CountType countType = ImmutableHashSet<T>.CountType.Adjustment
+            )
             {
                 Requires.NotNull(root, nameof(root));
                 _root = root;

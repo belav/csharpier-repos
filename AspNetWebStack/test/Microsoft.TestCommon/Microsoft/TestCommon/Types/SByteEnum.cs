@@ -7,6 +7,6 @@ namespace Microsoft.TestCommon.Types
     {
         FirstSByte,
         SecondSByte,
-        ThirdSByte
+        ThirdSByte,
     }
 }

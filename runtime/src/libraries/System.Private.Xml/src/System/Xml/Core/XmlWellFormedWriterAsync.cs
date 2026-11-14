@@ -56,7 +56,12 @@ namespace System.Xml
             }
         }
 
-        public override async Task WriteDocTypeAsync(string name, string? pubid, string? sysid, string? subset)
+        public override async Task WriteDocTypeAsync(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        )
         {
             try
             {
@@ -91,21 +96,39 @@ namespace System.Xml
                     {
                         if ((i = XmlCharType.IsPublicId(pubid)) >= 0)
                         {
-                            throw new ArgumentException(SR.Format(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(pubid, i)), nameof(pubid));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(pubid, i)
+                                ),
+                                nameof(pubid)
+                            );
                         }
                     }
                     if (sysid != null)
                     {
                         if ((i = XmlCharType.IsOnlyCharData(sysid)) >= 0)
                         {
-                            throw new ArgumentException(SR.Format(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(sysid, i)), nameof(sysid));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(sysid, i)
+                                ),
+                                nameof(sysid)
+                            );
                         }
                     }
                     if (subset != null)
                     {
                         if ((i = XmlCharType.IsOnlyCharData(subset)) >= 0)
                         {
-                            throw new ArgumentException(SR.Format(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(subset, i)), nameof(subset));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(subset, i)
+                                ),
+                                nameof(subset)
+                            );
                         }
                     }
                 }
@@ -199,7 +222,11 @@ namespace System.Xml
             }
         }
 
-        private Task WriteStartElementAsync_NoAdvanceState(string? prefix, string localName, string? ns)
+        private Task WriteStartElementAsync_NoAdvanceState(
+            string? prefix,
+            string localName,
+            string? ns
+        )
         {
             try
             {
@@ -256,12 +283,18 @@ namespace System.Xml
             }
         }
 
-        private async Task WriteStartElementAsync_NoAdvanceState(Task task, string? prefix, string localName, string? ns)
+        private async Task WriteStartElementAsync_NoAdvanceState(
+            Task task,
+            string? prefix,
+            string localName,
+            string? ns
+        )
         {
             try
             {
                 await task.ConfigureAwait(false);
-                await WriteStartElementAsync_NoAdvanceState(prefix, localName, ns).ConfigureAwait(false);
+                await WriteStartElementAsync_NoAdvanceState(prefix, localName, ns)
+                    .ConfigureAwait(false);
             }
             catch
             {
@@ -299,7 +332,12 @@ namespace System.Xml
             }
         }
 
-        private async Task WriteStartElementAsync_FinishWrite(Task t, string prefix, string localName, string ns)
+        private async Task WriteStartElementAsync_FinishWrite(
+            Task t,
+            string prefix,
+            string localName,
+            string ns
+        )
         {
             try
             {
@@ -319,7 +357,11 @@ namespace System.Xml
             {
                 Task task = AdvanceStateAsync(Token.EndElement);
 
-                return SequenceRun(task, thisRef => thisRef.WriteEndElementAsync_NoAdvanceState(), this);
+                return SequenceRun(
+                    task,
+                    thisRef => thisRef.WriteEndElementAsync_NoAdvanceState(),
+                    this
+                );
             }
             catch
             {
@@ -348,7 +390,11 @@ namespace System.Xml
                     task = _writer.WriteEndElementAsync();
                 }
 
-                return SequenceRun(task, thisRef => thisRef.WriteEndElementAsync_FinishWrite(), this);
+                return SequenceRun(
+                    task,
+                    thisRef => thisRef.WriteEndElementAsync_FinishWrite(),
+                    this
+                );
             }
             catch
             {
@@ -398,7 +444,11 @@ namespace System.Xml
             {
                 Task task = AdvanceStateAsync(Token.EndElement);
 
-                return SequenceRun(task, thisRef => thisRef.WriteFullEndElementAsync_NoAdvanceState(), this);
+                return SequenceRun(
+                    task,
+                    thisRef => thisRef.WriteFullEndElementAsync_NoAdvanceState(),
+                    this
+                );
             }
             catch
             {
@@ -427,7 +477,11 @@ namespace System.Xml
                     task = _writer.WriteFullEndElementAsync();
                 }
 
-                return SequenceRun(task, thisRef => thisRef.WriteEndElementAsync_FinishWrite(), this);
+                return SequenceRun(
+                    task,
+                    thisRef => thisRef.WriteEndElementAsync_FinishWrite(),
+                    this
+                );
             }
             catch
             {
@@ -436,7 +490,11 @@ namespace System.Xml
             }
         }
 
-        protected internal override Task WriteStartAttributeAsync(string? prefix, string localName, string? namespaceName)
+        protected internal override Task WriteStartAttributeAsync(
+            string? prefix,
+            string localName,
+            string? namespaceName
+        )
         {
             try
             {
@@ -458,11 +516,20 @@ namespace System.Xml
                 Task task = AdvanceStateAsync(Token.StartAttribute);
                 if (task.IsSuccess())
                 {
-                    return WriteStartAttributeAsync_NoAdvanceState(prefix, localName, namespaceName);
+                    return WriteStartAttributeAsync_NoAdvanceState(
+                        prefix,
+                        localName,
+                        namespaceName
+                    );
                 }
                 else
                 {
-                    return WriteStartAttributeAsync_NoAdvanceState(task, prefix, localName, namespaceName);
+                    return WriteStartAttributeAsync_NoAdvanceState(
+                        task,
+                        prefix,
+                        localName,
+                        namespaceName
+                    );
                 }
             }
             catch
@@ -472,7 +539,11 @@ namespace System.Xml
             }
         }
 
-        private Task WriteStartAttributeAsync_NoAdvanceState(string? prefix, string localName, string? namespaceName)
+        private Task WriteStartAttributeAsync_NoAdvanceState(
+            string? prefix,
+            string localName,
+            string? namespaceName
+        )
         {
             try
             {
@@ -572,7 +643,7 @@ namespace System.Xml
                     PushNamespaceImplicit(prefix, namespaceName);
                 }
 
-            SkipPushAndWrite:
+                SkipPushAndWrite:
 
                 // add attribute to the list and check for duplicates
                 AddAttribute(prefix, localName, namespaceName);
@@ -580,7 +651,9 @@ namespace System.Xml
                 if (_specAttr == SpecialAttribute.No)
                 {
                     // write attribute name
-                    return TryReturnTask(_writer.WriteStartAttributeAsync(prefix, localName, namespaceName));
+                    return TryReturnTask(
+                        _writer.WriteStartAttributeAsync(prefix, localName, namespaceName)
+                    );
                 }
                 return Task.CompletedTask;
             }
@@ -591,12 +664,18 @@ namespace System.Xml
             }
         }
 
-        private async Task WriteStartAttributeAsync_NoAdvanceState(Task task, string? prefix, string localName, string? namespaceName)
+        private async Task WriteStartAttributeAsync_NoAdvanceState(
+            Task task,
+            string? prefix,
+            string localName,
+            string? namespaceName
+        )
         {
             try
             {
                 await task.ConfigureAwait(false);
-                await WriteStartAttributeAsync_NoAdvanceState(prefix, localName, namespaceName).ConfigureAwait(false);
+                await WriteStartAttributeAsync_NoAdvanceState(prefix, localName, namespaceName)
+                    .ConfigureAwait(false);
             }
             catch
             {
@@ -605,13 +684,16 @@ namespace System.Xml
             }
         }
 
-
         protected internal override Task WriteEndAttributeAsync()
         {
             try
             {
                 Task task = AdvanceStateAsync(Token.EndAttribute);
-                return SequenceRun(task, thisRef => thisRef.WriteEndAttributeAsync_NoAdvance(), this);
+                return SequenceRun(
+                    task,
+                    thisRef => thisRef.WriteEndAttributeAsync_NoAdvance(),
+                    this
+                );
             }
             catch
             {
@@ -657,18 +739,32 @@ namespace System.Xml
                             {
                                 if (_rawWriter.SupportsNamespaceDeclarationInChunks)
                                 {
-                                    await _rawWriter.WriteStartNamespaceDeclarationAsync(string.Empty).ConfigureAwait(false);
-                                    await _attrValueCache.ReplayAsync(_rawWriter).ConfigureAwait(false);
-                                    await _rawWriter.WriteEndNamespaceDeclarationAsync().ConfigureAwait(false);
+                                    await _rawWriter
+                                        .WriteStartNamespaceDeclarationAsync(string.Empty)
+                                        .ConfigureAwait(false);
+                                    await _attrValueCache
+                                        .ReplayAsync(_rawWriter)
+                                        .ConfigureAwait(false);
+                                    await _rawWriter
+                                        .WriteEndNamespaceDeclarationAsync()
+                                        .ConfigureAwait(false);
                                 }
                                 else
                                 {
-                                    await _rawWriter.WriteNamespaceDeclarationAsync(string.Empty, value).ConfigureAwait(false);
+                                    await _rawWriter
+                                        .WriteNamespaceDeclarationAsync(string.Empty, value)
+                                        .ConfigureAwait(false);
                                 }
                             }
                             else
                             {
-                                await _writer.WriteStartAttributeAsync(string.Empty, "xmlns", XmlReservedNs.NsXmlNs).ConfigureAwait(false);
+                                await _writer
+                                    .WriteStartAttributeAsync(
+                                        string.Empty,
+                                        "xmlns",
+                                        XmlReservedNs.NsXmlNs
+                                    )
+                                    .ConfigureAwait(false);
                                 await _attrValueCache.ReplayAsync(_writer).ConfigureAwait(false);
                                 await _writer.WriteEndAttributeAsync().ConfigureAwait(false);
                             }
@@ -682,7 +778,10 @@ namespace System.Xml
                         {
                             throw new ArgumentException(SR.Xml_PrefixForEmptyNs);
                         }
-                        if (value == XmlReservedNs.NsXmlNs || (value == XmlReservedNs.NsXml && _curDeclPrefix != "xml"))
+                        if (
+                            value == XmlReservedNs.NsXmlNs
+                            || (value == XmlReservedNs.NsXml && _curDeclPrefix != "xml")
+                        )
                         {
                             throw new ArgumentException(SR.Xml_CanNotBindToReservedNamespace);
                         }
@@ -694,18 +793,32 @@ namespace System.Xml
                             {
                                 if (_rawWriter.SupportsNamespaceDeclarationInChunks)
                                 {
-                                    await _rawWriter.WriteStartNamespaceDeclarationAsync(_curDeclPrefix).ConfigureAwait(false);
-                                    await _attrValueCache.ReplayAsync(_rawWriter).ConfigureAwait(false);
-                                    await _rawWriter.WriteEndNamespaceDeclarationAsync().ConfigureAwait(false);
+                                    await _rawWriter
+                                        .WriteStartNamespaceDeclarationAsync(_curDeclPrefix)
+                                        .ConfigureAwait(false);
+                                    await _attrValueCache
+                                        .ReplayAsync(_rawWriter)
+                                        .ConfigureAwait(false);
+                                    await _rawWriter
+                                        .WriteEndNamespaceDeclarationAsync()
+                                        .ConfigureAwait(false);
                                 }
                                 else
                                 {
-                                    await _rawWriter.WriteNamespaceDeclarationAsync(_curDeclPrefix, value).ConfigureAwait(false);
+                                    await _rawWriter
+                                        .WriteNamespaceDeclarationAsync(_curDeclPrefix, value)
+                                        .ConfigureAwait(false);
                                 }
                             }
                             else
                             {
-                                await _writer.WriteStartAttributeAsync("xmlns", _curDeclPrefix, XmlReservedNs.NsXmlNs).ConfigureAwait(false);
+                                await _writer
+                                    .WriteStartAttributeAsync(
+                                        "xmlns",
+                                        _curDeclPrefix,
+                                        XmlReservedNs.NsXmlNs
+                                    )
+                                    .ConfigureAwait(false);
                                 await _attrValueCache.ReplayAsync(_writer).ConfigureAwait(false);
                                 await _writer.WriteEndAttributeAsync().ConfigureAwait(false);
                             }
@@ -728,14 +841,18 @@ namespace System.Xml
                         {
                             throw new ArgumentException(SR.Format(SR.Xml_InvalidXmlSpace, value));
                         }
-                        await _writer.WriteStartAttributeAsync("xml", "space", XmlReservedNs.NsXml).ConfigureAwait(false);
+                        await _writer
+                            .WriteStartAttributeAsync("xml", "space", XmlReservedNs.NsXml)
+                            .ConfigureAwait(false);
                         await _attrValueCache.ReplayAsync(_writer).ConfigureAwait(false);
                         await _writer.WriteEndAttributeAsync().ConfigureAwait(false);
                         break;
                     case SpecialAttribute.XmlLang:
                         value = _attrValueCache.StringValue;
                         _elemScopeStack[_elemTop].xmlLang = value;
-                        await _writer.WriteStartAttributeAsync("xml", "lang", XmlReservedNs.NsXml).ConfigureAwait(false);
+                        await _writer
+                            .WriteStartAttributeAsync("xml", "lang", XmlReservedNs.NsXml)
+                            .ConfigureAwait(false);
                         await _attrValueCache.ReplayAsync(_writer).ConfigureAwait(false);
                         await _writer.WriteEndAttributeAsync().ConfigureAwait(false);
                         break;
@@ -794,11 +911,18 @@ namespace System.Xml
                 text ??= string.Empty;
 
                 // xml declaration is a special case (not a processing instruction, but we allow WriteProcessingInstruction as a convenience)
-                if (name.Length == 3 && string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase))
+                if (
+                    name.Length == 3
+                    && string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     if (_currentState != State.Start)
                     {
-                        throw new ArgumentException(_conformanceLevel == ConformanceLevel.Document ? SR.Xml_DupXmlDecl : SR.Xml_CannotWriteXmlDecl);
+                        throw new ArgumentException(
+                            _conformanceLevel == ConformanceLevel.Document
+                                ? SR.Xml_DupXmlDecl
+                                : SR.Xml_CannotWriteXmlDecl
+                        );
                     }
 
                     _xmlDeclFollows = true;
@@ -811,7 +935,9 @@ namespace System.Xml
                     }
                     else
                     {
-                        await _writer.WriteProcessingInstructionAsync(name, text).ConfigureAwait(false);
+                        await _writer
+                            .WriteProcessingInstructionAsync(name, text)
+                            .ConfigureAwait(false);
                     }
                 }
                 else
@@ -894,7 +1020,9 @@ namespace System.Xml
                 }
                 else
                 {
-                    await _writer.WriteSurrogateCharEntityAsync(lowChar, highChar).ConfigureAwait(false);
+                    await _writer
+                        .WriteSurrogateCharEntityAsync(lowChar, highChar)
+                        .ConfigureAwait(false);
                 }
             }
             catch
@@ -1099,7 +1227,12 @@ namespace System.Xml
             }
         }
 
-        private async Task WriteBase64Async_NoAdvanceState(Task task, byte[] buffer, int index, int count)
+        private async Task WriteBase64Async_NoAdvanceState(
+            Task task,
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             try
             {
@@ -1161,7 +1294,9 @@ namespace System.Xml
                 }
                 else
                 {
-                    await _rawWriter.WriteQualifiedNameAsync(prefix, localName, ns).ConfigureAwait(false);
+                    await _rawWriter
+                        .WriteQualifiedNameAsync(prefix, localName, ns)
+                        .ConfigureAwait(false);
                 }
             }
             catch
@@ -1258,7 +1393,11 @@ namespace System.Xml
             }
         }
 
-        private async Task _AdvanceStateAsync_ContinueWhenFinish(Task task, State newState, Token token)
+        private async Task _AdvanceStateAsync_ContinueWhenFinish(
+            Task task,
+            State newState,
+            Token token
+        )
         {
             await task.ConfigureAwait(false);
             _currentState = newState;
@@ -1276,10 +1415,16 @@ namespace System.Xml
                 }
                 else
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Xml_WrongToken, tokenName[(int)token], GetStateName(_currentState)));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.Xml_WrongToken,
+                            tokenName[(int)token],
+                            GetStateName(_currentState)
+                        )
+                    );
                 }
             }
-        Advance:
+            Advance:
             State newState = _stateTable[((int)token << 4) + (int)_currentState];
             //                         [ (int)token * 16 + (int)currentState ];
 
@@ -1293,38 +1438,72 @@ namespace System.Xml
                         break;
 
                     case State.StartContent:
-                        return AdvanceStateAsync_ReturnWhenFinish(StartElementContentAsync(), State.Content);
+                        return AdvanceStateAsync_ReturnWhenFinish(
+                            StartElementContentAsync(),
+                            State.Content
+                        );
 
                     case State.StartContentEle:
-                        return AdvanceStateAsync_ReturnWhenFinish(StartElementContentAsync(), State.Element);
+                        return AdvanceStateAsync_ReturnWhenFinish(
+                            StartElementContentAsync(),
+                            State.Element
+                        );
 
                     case State.StartContentB64:
-                        return AdvanceStateAsync_ReturnWhenFinish(StartElementContentAsync(), State.B64Content);
+                        return AdvanceStateAsync_ReturnWhenFinish(
+                            StartElementContentAsync(),
+                            State.B64Content
+                        );
 
                     case State.StartDoc:
-                        return AdvanceStateAsync_ReturnWhenFinish(WriteStartDocumentAsync(), State.Document);
+                        return AdvanceStateAsync_ReturnWhenFinish(
+                            WriteStartDocumentAsync(),
+                            State.Document
+                        );
 
                     case State.StartDocEle:
-                        return AdvanceStateAsync_ReturnWhenFinish(WriteStartDocumentAsync(), State.Element);
+                        return AdvanceStateAsync_ReturnWhenFinish(
+                            WriteStartDocumentAsync(),
+                            State.Element
+                        );
 
                     case State.EndAttrSEle:
-                        task = SequenceRun(WriteEndAttributeAsync(), thisRef => thisRef.StartElementContentAsync(), this);
+                        task = SequenceRun(
+                            WriteEndAttributeAsync(),
+                            thisRef => thisRef.StartElementContentAsync(),
+                            this
+                        );
                         return AdvanceStateAsync_ReturnWhenFinish(task, State.Element);
 
                     case State.EndAttrEEle:
-                        task = SequenceRun(WriteEndAttributeAsync(), thisRef => thisRef.StartElementContentAsync(), this);
+                        task = SequenceRun(
+                            WriteEndAttributeAsync(),
+                            thisRef => thisRef.StartElementContentAsync(),
+                            this
+                        );
                         return AdvanceStateAsync_ReturnWhenFinish(task, State.Content);
                     case State.EndAttrSCont:
-                        task = SequenceRun(WriteEndAttributeAsync(), thisRef => thisRef.StartElementContentAsync(), this);
+                        task = SequenceRun(
+                            WriteEndAttributeAsync(),
+                            thisRef => thisRef.StartElementContentAsync(),
+                            this
+                        );
                         return AdvanceStateAsync_ReturnWhenFinish(task, State.Content);
 
                     case State.EndAttrSAttr:
-                        return AdvanceStateAsync_ReturnWhenFinish(WriteEndAttributeAsync(), State.Attribute);
+                        return AdvanceStateAsync_ReturnWhenFinish(
+                            WriteEndAttributeAsync(),
+                            State.Attribute
+                        );
 
                     case State.PostB64Cont:
                         if (_rawWriter != null)
                         {
-                            return AdvanceStateAsync_ContinueWhenFinish(_rawWriter.WriteEndBase64Async(), State.Content, token);
+                            return AdvanceStateAsync_ContinueWhenFinish(
+                                _rawWriter.WriteEndBase64Async(),
+                                State.Content,
+                                token
+                            );
                         }
                         _currentState = State.Content;
                         goto Advance;
@@ -1332,7 +1511,11 @@ namespace System.Xml
                     case State.PostB64Attr:
                         if (_rawWriter != null)
                         {
-                            return AdvanceStateAsync_ContinueWhenFinish(_rawWriter.WriteEndBase64Async(), State.Attribute, token);
+                            return AdvanceStateAsync_ContinueWhenFinish(
+                                _rawWriter.WriteEndBase64Async(),
+                                State.Attribute,
+                                token
+                            );
                         }
                         _currentState = State.Attribute;
                         goto Advance;
@@ -1340,7 +1523,11 @@ namespace System.Xml
                     case State.PostB64RootAttr:
                         if (_rawWriter != null)
                         {
-                            return AdvanceStateAsync_ContinueWhenFinish(_rawWriter.WriteEndBase64Async(), State.RootLevelAttr, token);
+                            return AdvanceStateAsync_ContinueWhenFinish(
+                                _rawWriter.WriteEndBase64Async(),
+                                State.RootLevelAttr,
+                                token
+                            );
                         }
                         _currentState = State.RootLevelAttr;
                         goto Advance;
@@ -1361,8 +1548,10 @@ namespace System.Xml
                         break;
 
                     case State.StartRootLevelAttr:
-                        return AdvanceStateAsync_ReturnWhenFinish(WriteEndAttributeAsync(), State.RootLevelAttr);
-
+                        return AdvanceStateAsync_ReturnWhenFinish(
+                            WriteEndAttributeAsync(),
+                            State.RootLevelAttr
+                        );
 
                     default:
                         Debug.Fail("We should not get to this point.");

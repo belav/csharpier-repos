@@ -3,11 +3,13 @@
 //
 
 using Xunit;
+
 namespace Default
 {
     //@BEGINRENAME; Verify this renames
     //@ENDRENAME; Verify this renames
     using System;
+
     //
     // X class
     //
@@ -16,14 +18,9 @@ namespace Default
         [Fact]
         public static void TestEntryPoint()
         {
-
             Console.WriteLine("Entering Hello world");
 
-
             Console.WriteLine("Done");
-
         } // main
-
     } // Spin
-
 }

@@ -7,7 +7,13 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector)
+        public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(
+            this IEnumerable<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector
+        )
         {
             if (outer == null)
             {
@@ -34,10 +40,24 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.resultSelector);
             }
 
-            return JoinIterator(outer, inner, outerKeySelector, innerKeySelector, resultSelector, null);
+            return JoinIterator(
+                outer,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                null
+            );
         }
 
-        public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector, IEqualityComparer<TKey>? comparer)
+        public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(
+            this IEnumerable<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             if (outer == null)
             {
@@ -64,22 +84,43 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.resultSelector);
             }
 
-            return JoinIterator(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            return JoinIterator(
+                outer,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer
+            );
         }
 
-        private static IEnumerable<TResult> JoinIterator<TOuter, TInner, TKey, TResult>(IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector, IEqualityComparer<TKey>? comparer)
+        private static IEnumerable<TResult> JoinIterator<TOuter, TInner, TKey, TResult>(
+            IEnumerable<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             using (IEnumerator<TOuter> e = outer.GetEnumerator())
             {
                 if (e.MoveNext())
                 {
-                    Lookup<TKey, TInner> lookup = Lookup<TKey, TInner>.CreateForJoin(inner, innerKeySelector, comparer);
+                    Lookup<TKey, TInner> lookup = Lookup<TKey, TInner>.CreateForJoin(
+                        inner,
+                        innerKeySelector,
+                        comparer
+                    );
                     if (lookup.Count != 0)
                     {
                         do
                         {
                             TOuter item = e.Current;
-                            Grouping<TKey, TInner>? g = lookup.GetGrouping(outerKeySelector(item), create: false);
+                            Grouping<TKey, TInner>? g = lookup.GetGrouping(
+                                outerKeySelector(item),
+                                create: false
+                            );
                             if (g != null)
                             {
                                 int count = g._count;
@@ -89,8 +130,7 @@ namespace System.Linq
                                     yield return resultSelector(item, elements[i]);
                                 }
                             }
-                        }
-                        while (e.MoveNext());
+                        } while (e.MoveNext());
                     }
                 }
             }

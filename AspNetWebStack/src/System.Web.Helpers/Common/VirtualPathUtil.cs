@@ -12,7 +12,7 @@ namespace System.Web.Helpers
     internal static class VirtualPathUtil
     {
         /// <summary>
-        /// Resolves and maps a path (physical or virtual) to a physical path on the server. 
+        /// Resolves and maps a path (physical or virtual) to a physical path on the server.
         /// </summary>
         /// <param name="httpContext">The <see cref="HttpContextBase"/>.</param>
         /// <param name="path">Either a physical rooted path or a virtual path to be mapped.
@@ -32,15 +32,23 @@ namespace System.Web.Helpers
             }
 
             // There is no TryMapPath API so we have to catch HttpException if we want to
-            // throw ArgumentException instead.  
+            // throw ArgumentException instead.
             try
             {
-                return httpContext.Request.MapPath(ResolvePath(TemplateStack.GetCurrentTemplate(httpContext), httpContext, path));
+                return httpContext.Request.MapPath(
+                    ResolvePath(TemplateStack.GetCurrentTemplate(httpContext), httpContext, path)
+                );
             }
             catch (HttpException)
             {
                 throw new ArgumentException(
-                    String.Format(CultureInfo.InvariantCulture, HelpersResources.PathUtils_IncorrectPath, path), "path");
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        HelpersResources.PathUtils_IncorrectPath,
+                        path
+                    ),
+                    "path"
+                );
             }
         }
 
@@ -59,10 +67,18 @@ namespace System.Web.Helpers
                 return virtualPath;
             }
             var httpContext = new HttpContextWrapper(HttpContext.Current);
-            return ResolvePath(TemplateStack.GetCurrentTemplate(httpContext), httpContext, virtualPath);
+            return ResolvePath(
+                TemplateStack.GetCurrentTemplate(httpContext),
+                httpContext,
+                virtualPath
+            );
         }
 
-        internal static string ResolvePath(ITemplateFile templateFile, HttpContextBase httpContext, string virtualPath)
+        internal static string ResolvePath(
+            ITemplateFile templateFile,
+            HttpContextBase httpContext,
+            string virtualPath
+        )
         {
             Debug.Assert(!String.IsNullOrEmpty(virtualPath));
             string basePath;

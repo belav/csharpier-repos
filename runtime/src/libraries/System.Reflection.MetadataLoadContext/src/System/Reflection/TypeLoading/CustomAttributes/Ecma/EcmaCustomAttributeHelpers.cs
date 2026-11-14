@@ -17,7 +17,10 @@ namespace System.Reflection.TypeLoading.Ecma
         /// Converts ECMA-encoded custom attributes into a freshly allocated CustomAttributeData object suitable for direct return
         /// from the CustomAttributes api.
         /// </summary>
-        public static IEnumerable<CustomAttributeData> ToTrueCustomAttributes(this CustomAttributeHandleCollection handles, EcmaModule module)
+        public static IEnumerable<CustomAttributeData> ToTrueCustomAttributes(
+            this CustomAttributeHandleCollection handles,
+            EcmaModule module
+        )
         {
             foreach (CustomAttributeHandle handle in handles)
             {
@@ -25,14 +28,27 @@ namespace System.Reflection.TypeLoading.Ecma
             }
         }
 
-        public static CustomAttributeData ToCustomAttributeData(this CustomAttributeHandle handle, EcmaModule module) => new EcmaCustomAttributeData(handle, module);
+        public static CustomAttributeData ToCustomAttributeData(
+            this CustomAttributeHandle handle,
+            EcmaModule module
+        ) => new EcmaCustomAttributeData(handle, module);
 
-        public static bool IsCustomAttributeDefined(this CustomAttributeHandleCollection handles, ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, EcmaModule module)
+        public static bool IsCustomAttributeDefined(
+            this CustomAttributeHandleCollection handles,
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name,
+            EcmaModule module
+        )
         {
             return !handles.FindCustomAttributeByName(ns, name, module).IsNil;
         }
 
-        public static CustomAttributeData? TryFindCustomAttribute(this CustomAttributeHandleCollection handles, ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, EcmaModule module)
+        public static CustomAttributeData? TryFindCustomAttribute(
+            this CustomAttributeHandleCollection handles,
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name,
+            EcmaModule module
+        )
         {
             CustomAttributeHandle handle = handles.FindCustomAttributeByName(ns, name, module);
             if (handle.IsNil)
@@ -40,7 +56,12 @@ namespace System.Reflection.TypeLoading.Ecma
             return handle.ToCustomAttributeData(module);
         }
 
-        private static CustomAttributeHandle FindCustomAttributeByName(this CustomAttributeHandleCollection handles, ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, EcmaModule module)
+        private static CustomAttributeHandle FindCustomAttributeByName(
+            this CustomAttributeHandleCollection handles,
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name,
+            EcmaModule module
+        )
         {
             MetadataReader reader = module.Reader;
             foreach (CustomAttributeHandle handle in handles)
@@ -56,43 +77,53 @@ namespace System.Reflection.TypeLoading.Ecma
             return default;
         }
 
-        public static bool TypeMatchesNameAndNamespace(this EntityHandle handle, ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, MetadataReader reader)
+        public static bool TypeMatchesNameAndNamespace(
+            this EntityHandle handle,
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name,
+            MetadataReader reader
+        )
         {
             switch (handle.Kind)
             {
                 case HandleKind.TypeDefinition: // Not clear if this can happen but as fail-safe....
-                    {
-                        TypeDefinition td = ((TypeDefinitionHandle)handle).GetTypeDefinition(reader);
-                        return td.Name.Equals(name, reader) && td.Namespace.Equals(ns, reader);
-                    }
+                {
+                    TypeDefinition td = ((TypeDefinitionHandle)handle).GetTypeDefinition(reader);
+                    return td.Name.Equals(name, reader) && td.Namespace.Equals(ns, reader);
+                }
 
                 case HandleKind.TypeReference:
-                    {
-                        TypeReference tr = ((TypeReferenceHandle)handle).GetTypeReference(reader);
-                        return tr.ResolutionScope.Kind != HandleKind.TypeReference && tr.Name.Equals(name, reader) && tr.Namespace.Equals(ns, reader);
-                    }
+                {
+                    TypeReference tr = ((TypeReferenceHandle)handle).GetTypeReference(reader);
+                    return tr.ResolutionScope.Kind != HandleKind.TypeReference
+                        && tr.Name.Equals(name, reader)
+                        && tr.Namespace.Equals(ns, reader);
+                }
 
                 default:
                     return false;
             }
         }
 
-        public static EntityHandle TryGetDeclaringTypeHandle(this in CustomAttribute ca, MetadataReader reader)
+        public static EntityHandle TryGetDeclaringTypeHandle(
+            this in CustomAttribute ca,
+            MetadataReader reader
+        )
         {
             EntityHandle ctorHandle = ca.Constructor;
             switch (ctorHandle.Kind)
             {
                 case HandleKind.MethodDefinition:
-                    {
-                        MethodDefinitionHandle mh = (MethodDefinitionHandle)ctorHandle;
-                        return mh.GetMethodDefinition(reader).GetDeclaringType();
-                    }
+                {
+                    MethodDefinitionHandle mh = (MethodDefinitionHandle)ctorHandle;
+                    return mh.GetMethodDefinition(reader).GetDeclaringType();
+                }
 
                 case HandleKind.MemberReference:
-                    {
-                        MemberReferenceHandle mh = (MemberReferenceHandle)ctorHandle;
-                        return mh.GetMemberReference(reader).Parent;
-                    }
+                {
+                    MemberReferenceHandle mh = (MemberReferenceHandle)ctorHandle;
+                    return mh.GetMemberReference(reader).Parent;
+                }
 
                 default:
                     return default;
@@ -103,10 +134,15 @@ namespace System.Reflection.TypeLoading.Ecma
         /// Converts a list of System.Reflection.Metadata CustomAttributeTypedArgument&lt;&gt; into a freshly allocated CustomAttributeTypedArgument
         /// list suitable for direct return from the CustomAttributes api.
         /// </summary>
-        public static IList<CustomAttributeTypedArgument> ToApiForm(this IList<CustomAttributeTypedArgument<RoType>> catgs)
+        public static IList<CustomAttributeTypedArgument> ToApiForm(
+            this IList<CustomAttributeTypedArgument<RoType>> catgs
+        )
         {
             int count = catgs.Count;
-            CustomAttributeTypedArgument[] cats = count != 0 ? new CustomAttributeTypedArgument[count] : Array.Empty<CustomAttributeTypedArgument>();
+            CustomAttributeTypedArgument[] cats =
+                count != 0
+                    ? new CustomAttributeTypedArgument[count]
+                    : Array.Empty<CustomAttributeTypedArgument>();
             for (int i = 0; i < count; i++)
             {
                 cats[i] = catgs[i].ToApiForm();
@@ -118,7 +154,9 @@ namespace System.Reflection.TypeLoading.Ecma
         /// Converts a System.Reflection.Metadata CustomAttributeTypedArgument&lt;&gt; into a freshly allocated CustomAttributeTypedArgument
         /// object suitable for direct return from the CustomAttributes api.
         /// </summary>
-        public static CustomAttributeTypedArgument ToApiForm(this CustomAttributeTypedArgument<RoType> catg) => ToApiForm(catg.Type, catg.Value);
+        public static CustomAttributeTypedArgument ToApiForm(
+            this CustomAttributeTypedArgument<RoType> catg
+        ) => ToApiForm(catg.Type, catg.Value);
 
         private static CustomAttributeTypedArgument ToApiForm(Type type, object? value)
         {
@@ -134,10 +172,16 @@ namespace System.Reflection.TypeLoading.Ecma
         /// Converts a list of System.Reflection.Metadata CustomAttributeNamedArgument&lt;&gt; into a freshly allocated CustomAttributeNamedArgument
         /// list suitable for direct return from the CustomAttributes api.
         /// </summary>
-        public static IList<CustomAttributeNamedArgument> ToApiForm(this IList<CustomAttributeNamedArgument<RoType>> cangs, Type attributeType)
+        public static IList<CustomAttributeNamedArgument> ToApiForm(
+            this IList<CustomAttributeNamedArgument<RoType>> cangs,
+            Type attributeType
+        )
         {
             int count = cangs.Count;
-            CustomAttributeNamedArgument[] cans = count != 0 ? new CustomAttributeNamedArgument[count] : Array.Empty<CustomAttributeNamedArgument>();
+            CustomAttributeNamedArgument[] cans =
+                count != 0
+                    ? new CustomAttributeNamedArgument[count]
+                    : Array.Empty<CustomAttributeNamedArgument>();
             for (int i = 0; i < count; i++)
             {
                 cans[i] = cangs[i].ToApiForm(attributeType);
@@ -149,17 +193,26 @@ namespace System.Reflection.TypeLoading.Ecma
         /// Converts a System.Reflection.Metadata CustomAttributeNamedArgument&lt;&gt; into a freshly allocated CustomAttributeNamedArgument
         /// object suitable for direct return from the CustomAttributes api.
         /// </summary>
-        public static CustomAttributeNamedArgument ToApiForm(this CustomAttributeNamedArgument<RoType> cang, Type attributeType)
+        public static CustomAttributeNamedArgument ToApiForm(
+            this CustomAttributeNamedArgument<RoType> cang,
+            Type attributeType
+        )
         {
             MemberInfo? member;
             switch (cang.Kind)
             {
                 case CustomAttributeNamedArgumentKind.Field:
-                    member = attributeType.GetField(cang.Name!, BindingFlags.Public | BindingFlags.Instance);
+                    member = attributeType.GetField(
+                        cang.Name!,
+                        BindingFlags.Public | BindingFlags.Instance
+                    );
                     break;
 
                 case CustomAttributeNamedArgumentKind.Property:
-                    member = attributeType.GetProperty(cang.Name!, BindingFlags.Public | BindingFlags.Instance);
+                    member = attributeType.GetProperty(
+                        cang.Name!,
+                        BindingFlags.Public | BindingFlags.Instance
+                    );
                     break;
 
                 default:
@@ -175,7 +228,10 @@ namespace System.Reflection.TypeLoading.Ecma
         //
         // https://github.com/dotnet/runtime/blob/b908ecf514f32c7ba7d59ecc28fa3fdd64a10a1a/src/coreclr/vm/mlinfo.cpp#L469
         //
-        public static MarshalAsAttribute ToMarshalAsAttribute(this BlobHandle blobHandle, EcmaModule module)
+        public static MarshalAsAttribute ToMarshalAsAttribute(
+            this BlobHandle blobHandle,
+            EcmaModule module
+        )
         {
             MetadataReader reader = module.Reader;
             BlobReader br = blobHandle.GetBlobReader(reader);
@@ -214,7 +270,12 @@ namespace System.Reflection.TypeLoading.Ecma
                     if (br.RemainingBytes == 0)
                         break;
                     string? udtName = br.ReadSerializedString();
-                    ma.SafeArrayUserDefinedSubType = Helpers.LoadTypeFromAssemblyQualifiedName(udtName!, module.GetRoAssembly(), ignoreCase: false, throwOnError: false);
+                    ma.SafeArrayUserDefinedSubType = Helpers.LoadTypeFromAssemblyQualifiedName(
+                        udtName!,
+                        module.GetRoAssembly(),
+                        ignoreCase: false,
+                        throwOnError: false
+                    );
                     break;
 
                 case UnmanagedType.LPArray:
@@ -243,7 +304,12 @@ namespace System.Reflection.TypeLoading.Ecma
                     if (br.RemainingBytes == 0)
                         break;
                     ma.MarshalType = br.ReadSerializedString();
-                    ma.MarshalTypeRef = Helpers.LoadTypeFromAssemblyQualifiedName(ma.MarshalType!, module.GetRoAssembly(), ignoreCase: false, throwOnError: false);
+                    ma.MarshalTypeRef = Helpers.LoadTypeFromAssemblyQualifiedName(
+                        ma.MarshalType!,
+                        module.GetRoAssembly(),
+                        ignoreCase: false,
+                        throwOnError: false
+                    );
 
                     if (br.RemainingBytes == 0)
                         break;

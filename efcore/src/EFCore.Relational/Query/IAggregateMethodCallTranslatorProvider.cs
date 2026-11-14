@@ -31,5 +31,6 @@ public interface IAggregateMethodCallTranslatorProvider
         MethodInfo method,
         EnumerableExpression source,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger);
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    );
 }

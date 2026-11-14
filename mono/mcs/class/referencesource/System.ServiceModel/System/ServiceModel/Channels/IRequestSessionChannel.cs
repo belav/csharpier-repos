@@ -5,8 +5,5 @@ namespace System.ServiceModel.Channels
 {
     using System;
 
-    public interface IRequestSessionChannel
-        : IRequestChannel, ISessionChannel<IOutputSession>
-    {
-    }
+    public interface IRequestSessionChannel : IRequestChannel, ISessionChannel<IOutputSession> { }
 }

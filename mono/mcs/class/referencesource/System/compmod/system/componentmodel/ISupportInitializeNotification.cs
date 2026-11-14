@@ -1,15 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ISupportInitializeNotification.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-    
-
-    using System.Diagnostics;
-
+namespace System.ComponentModel
+{
     using System;
+    using System.Diagnostics;
 
     /// <include file='doc\ISupportInitializeNotification.uex' path='docs/doc[@for="ISupportInitializeNotification"]/*' />
     /// <devdoc>
@@ -17,7 +15,8 @@ namespace System.ComponentModel {
     ///         Extends ISupportInitialize to allow dependent components to be notified when initialization is complete.
     ///    </para>
     /// </devdoc>
-    public interface ISupportInitializeNotification : ISupportInitialize {
+    public interface ISupportInitializeNotification : ISupportInitialize
+    {
         /// <include file='doc\ISupportInitializeNotification.uex' path='docs/doc[@for="ISupportInitializeNotification.IsInitialized"]/*' />
         /// <devdoc>
         ///    <para>

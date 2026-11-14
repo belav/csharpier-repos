@@ -1,25 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="Process.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
     using System;
 
     public delegate void DataReceivedEventHandler(Object sender, DataReceivedEventArgs e);
-    
-    public class DataReceivedEventArgs : EventArgs {
+
+    public class DataReceivedEventArgs : EventArgs
+    {
         internal String _data;
-        
-        internal DataReceivedEventArgs(String data) {
+
+        internal DataReceivedEventArgs(String data)
+        {
             _data = data;
         }
 
-        public String Data {
-            get {
-                return _data;
-            }
+        public String Data
+        {
+            get { return _data; }
         }
     }
 }

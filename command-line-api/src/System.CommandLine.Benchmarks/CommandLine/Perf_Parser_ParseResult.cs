@@ -29,12 +29,12 @@ namespace System.CommandLine.Benchmarks.CommandLine
             _configuration = new CliConfiguration(new CliRootCommand { option })
             {
                 Directives = { new DiagramDirective() },
-                Output = _output
+                Output = _output,
             };
         }
 
-        public IEnumerable<string> GenerateTestInputs() 
-            => new[]
+        public IEnumerable<string> GenerateTestInputs() =>
+            new[]
             {
                 "[directive1] -opt",
                 "[directive1] [directive2] -opt",
@@ -43,14 +43,13 @@ namespace System.CommandLine.Benchmarks.CommandLine
                 "[directive1:1] [directive2:2] [directive2:3] -opt",
             };
 
-        public IEnumerable<object> GenerateTestParseResults()
-            => GenerateTestInputs()
-               .Select(input => new BdnParam<ParseResult>(_configuration.Parse(input), input));
+        public IEnumerable<object> GenerateTestParseResults() =>
+            GenerateTestInputs()
+                .Select(input => new BdnParam<ParseResult>(_configuration.Parse(input), input));
 
         [Benchmark]
         [ArgumentsSource(nameof(GenerateTestInputs))]
-        public ParseResult ParseResult_Directives(string input)
-            => _configuration.Parse(input);
+        public ParseResult ParseResult_Directives(string input) => _configuration.Parse(input);
 
         [Benchmark]
         [ArgumentsSource(nameof(GenerateTestParseResults))]

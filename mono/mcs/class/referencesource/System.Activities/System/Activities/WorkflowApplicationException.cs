@@ -17,14 +17,10 @@ namespace System.Activities
         Guid instanceId;
 
         public WorkflowApplicationException()
-            : base(SR.DefaultWorkflowApplicationExceptionMessage)
-        {
-        }
+            : base(SR.DefaultWorkflowApplicationExceptionMessage) { }
 
         public WorkflowApplicationException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public WorkflowApplicationException(string message, Guid instanceId)
             : base(message)
@@ -33,11 +29,13 @@ namespace System.Activities
         }
 
         public WorkflowApplicationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
-        public WorkflowApplicationException(string message, Guid instanceId, Exception innerException)
+        public WorkflowApplicationException(
+            string message,
+            Guid instanceId,
+            Exception innerException
+        )
             : base(message, innerException)
         {
             this.instanceId = instanceId;
@@ -51,13 +49,12 @@ namespace System.Activities
 
         public Guid InstanceId
         {
-            get
-            {
-                return this.instanceId;
-            }
+            get { return this.instanceId; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are overriding a critical method in the base class.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are overriding a critical method in the base class."
+        )]
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

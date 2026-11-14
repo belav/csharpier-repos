@@ -31,20 +31,17 @@ public class Program
         StreamingSample.Register(app);
         UploadSample.Register(app);
 
-        app.Command(
-            "help",
-            cmd =>
-            {
-                cmd.Description = "Get help for the application, or a specific command";
+        app.Command("help", cmd =>
+        {
+            cmd.Description = "Get help for the application, or a specific command";
 
-                var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for");
-                cmd.OnExecute(() =>
-                {
-                    app.ShowHelp(commandArgument.Value);
-                    return 0;
-                });
-            }
-        );
+            var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for");
+            cmd.OnExecute(() =>
+            {
+                app.ShowHelp(commandArgument.Value);
+                return 0;
+            });
+        });
 
         app.OnExecute(() =>
         {

@@ -14,7 +14,17 @@ public class Runtime_62249
 
     // Note that all VFP registers are occupied by d0-d7 arguments, hence the last argument is passed on the stack.
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static int Callee(double d0, double d1, double d2, double d3, double d4, double d5, double d6, double d7, CanBeReinterpretedAsDouble onStack)
+    public static int Callee(
+        double d0,
+        double d1,
+        double d2,
+        double d3,
+        double d4,
+        double d5,
+        double d6,
+        double d7,
+        CanBeReinterpretedAsDouble onStack
+    )
     {
         return onStack._0 == 62249 ? 100 : 0;
     }

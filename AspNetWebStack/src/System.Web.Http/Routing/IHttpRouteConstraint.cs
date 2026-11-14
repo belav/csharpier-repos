@@ -20,6 +20,12 @@ namespace System.Web.Http.Routing
         /// <param name="values">The route value dictionary.</param>
         /// <param name="routeDirection">The direction of the routing, i.e. URI resolution or URI generation.</param>
         /// <returns><c>false</c> if the route should not match the specified request, or <c>true</c> otherwise</returns>
-        bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values, HttpRouteDirection routeDirection);
+        bool Match(
+            HttpRequestMessage request,
+            IHttpRoute route,
+            string parameterName,
+            IDictionary<string, object> values,
+            HttpRouteDirection routeDirection
+        );
     }
 }

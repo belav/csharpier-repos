@@ -12,7 +12,7 @@ namespace System.Xml.Xsl
         private bool _enableScript;
         private bool _checkOnly;
         private bool _includeDebugInformation;
-        private int _warningLevel = -1;     // -1 means not set
+        private int _warningLevel = -1; // -1 means not set
         private bool _treatWarningsAsErrors;
 
         public XsltSettings() { }

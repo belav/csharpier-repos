@@ -65,14 +65,8 @@ namespace System.Xml.Schema
 
         internal Compositor Compositor
         {
-            get
-            {
-                return _compositor;
-            }
-            set
-            {
-                _compositor = value;
-            }
+            get { return _compositor; }
+            set { _compositor = value; }
         }
     }
 }

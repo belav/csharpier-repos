@@ -15,20 +15,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private readonly IEnumerable<IRefactorNotifyService> _refactorNotifyServices;
         private readonly IGlobalOptionService _globalOptions;
 
-        protected AbstractEditorInlineRenameService(IEnumerable<IRefactorNotifyService> refactorNotifyServices, IGlobalOptionService globalOptions)
+        protected AbstractEditorInlineRenameService(
+            IEnumerable<IRefactorNotifyService> refactorNotifyServices,
+            IGlobalOptionService globalOptions
+        )
         {
             _refactorNotifyServices = refactorNotifyServices;
             _globalOptions = globalOptions;
         }
 
-        public async Task<IInlineRenameInfo> GetRenameInfoAsync(Document document, int position, CancellationToken cancellationToken)
+        public async Task<IInlineRenameInfo> GetRenameInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var symbolicInfo = await SymbolicRenameInfo.GetRenameInfoAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var symbolicInfo = await SymbolicRenameInfo
+                .GetRenameInfoAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (symbolicInfo.LocalizedErrorMessage != null)
                 return new FailureInlineRenameInfo(symbolicInfo.LocalizedErrorMessage);
 
             return new SymbolInlineRenameInfo(
-                _refactorNotifyServices, symbolicInfo, _globalOptions.CreateProvider(), cancellationToken);
+                _refactorNotifyServices,
+                symbolicInfo,
+                _globalOptions.CreateProvider(),
+                cancellationToken
+            );
         }
     }
 }

@@ -26,6 +26,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         {
             m_metadataItem = extent;
         }
+
         internal RoleBoolean(AssociationSetEnd end)
         {
             m_metadataItem = end;
@@ -40,7 +41,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Not supported in this class.
         /// </summary>
-        internal override StringBuilder AsEsql(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             Debug.Fail("Should not be called.");
             return null; // To keep the compiler happy
@@ -55,35 +60,65 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return null; // To keep the compiler happy
         }
 
-        internal override StringBuilder AsUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             AssociationSetEnd end = m_metadataItem as AssociationSetEnd;
             if (end != null)
             {
-                builder.Append(Strings.ViewGen_AssociationSet_AsUserString(blockAlias, end.Name, end.ParentAssociationSet));
+                builder.Append(
+                    Strings.ViewGen_AssociationSet_AsUserString(
+                        blockAlias,
+                        end.Name,
+                        end.ParentAssociationSet
+                    )
+                );
             }
             else
             {
-                builder.Append(Strings.ViewGen_EntitySet_AsUserString(blockAlias, m_metadataItem.ToString()));
+                builder.Append(
+                    Strings.ViewGen_EntitySet_AsUserString(blockAlias, m_metadataItem.ToString())
+                );
             }
             return builder;
         }
 
-        internal override StringBuilder AsNegatedUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsNegatedUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             AssociationSetEnd end = m_metadataItem as AssociationSetEnd;
             if (end != null)
             {
-                builder.Append(Strings.ViewGen_AssociationSet_AsUserString_Negated(blockAlias, end.Name, end.ParentAssociationSet));
+                builder.Append(
+                    Strings.ViewGen_AssociationSet_AsUserString_Negated(
+                        blockAlias,
+                        end.Name,
+                        end.ParentAssociationSet
+                    )
+                );
             }
             else
             {
-                builder.Append(Strings.ViewGen_EntitySet_AsUserString_Negated(blockAlias, m_metadataItem.ToString()));
+                builder.Append(
+                    Strings.ViewGen_EntitySet_AsUserString_Negated(
+                        blockAlias,
+                        m_metadataItem.ToString()
+                    )
+                );
             }
             return builder;
         }
 
-        internal override void GetRequiredSlots(MemberProjectionIndex projectedSlotMap, bool[] requiredSlots)
+        internal override void GetRequiredSlots(
+            MemberProjectionIndex projectedSlotMap,
+            bool[] requiredSlots
+        )
         {
             throw new NotImplementedException();
         }

@@ -20,7 +20,8 @@ public class QueryRootProcessor : ExpressionVisitor
     /// <param name="queryCompilationContext">The query compilation context object to use.</param>
     public QueryRootProcessor(
         QueryTranslationPreprocessorDependencies dependencies,
-        QueryCompilationContext queryCompilationContext)
+        QueryCompilationContext queryCompilationContext
+    )
     {
         _model = queryCompilationContext.Model;
     }
@@ -31,10 +32,12 @@ public class QueryRootProcessor : ExpressionVisitor
         // We'll look for IEnumerable/IQueryable arguments to methods on Enumerable/Queryable, and convert these to constant/parameter query
         // root nodes. These will later get translated to e.g. VALUES (constant) and OPENJSON (parameter) on SQL Server.
         var method = methodCallExpression.Method;
-        if (method.DeclaringType != typeof(Queryable)
+        if (
+            method.DeclaringType != typeof(Queryable)
             && method.DeclaringType != typeof(Enumerable)
             && method.DeclaringType != typeof(QueryableExtensions)
-            && method.DeclaringType != typeof(EntityFrameworkQueryableExtensions))
+            && method.DeclaringType != typeof(EntityFrameworkQueryableExtensions)
+        )
         {
             return base.VisitMethodCall(methodCallExpression);
         }
@@ -55,9 +58,12 @@ public class QueryRootProcessor : ExpressionVisitor
             // (the precise type mapping - with the value converter - will be inferred later based on LINQ operators composed on the root).
             // However, we do exclude element CLR types which are associated to entity types in our model, since Contains over entity
             // collections isn't yet supported (#30712).
-            var visitedArgument = parameterType.IsGenericType
-                && (parameterType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                    || parameterType.GetGenericTypeDefinition() == typeof(IQueryable<>))
+            var visitedArgument =
+                parameterType.IsGenericType
+                && (
+                    parameterType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                    || parameterType.GetGenericTypeDefinition() == typeof(IQueryable<>)
+                )
                 && parameterType.GetGenericArguments()[0] is var elementClrType
                 && !_model.FindEntityTypes(elementClrType).Any()
                     ? VisitQueryRootCandidate(argument, elementClrType)
@@ -98,7 +104,11 @@ public class QueryRootProcessor : ExpressionVisitor
                     valueExpressions.Add(Expression.Constant(value, elementClrType));
                 }
 
-                if (ShouldConvertToInlineQueryRoot(Expression.NewArrayInit(elementClrType, valueExpressions)))
+                if (
+                    ShouldConvertToInlineQueryRoot(
+                        Expression.NewArrayInit(elementClrType, valueExpressions)
+                    )
+                )
                 {
                     return new InlineQueryRootExpression(valueExpressions, elementClrType);
                 }
@@ -107,13 +117,21 @@ public class QueryRootProcessor : ExpressionVisitor
 
             case NewArrayExpression newArrayExpression
                 when ShouldConvertToInlineQueryRoot(newArrayExpression):
-                return new InlineQueryRootExpression(newArrayExpression.Expressions, elementClrType);
+                return new InlineQueryRootExpression(
+                    newArrayExpression.Expressions,
+                    elementClrType
+                );
 
             case ParameterExpression parameterExpression
-                when parameterExpression.Name?.StartsWith(QueryCompilationContext.QueryParameterPrefix, StringComparison.Ordinal)
-                == true
-                && ShouldConvertToParameterQueryRoot(parameterExpression):
-                return new ParameterQueryRootExpression(parameterExpression.Type.GetSequenceType(), parameterExpression);
+                when parameterExpression.Name?.StartsWith(
+                    QueryCompilationContext.QueryParameterPrefix,
+                    StringComparison.Ordinal
+                ) == true
+                    && ShouldConvertToParameterQueryRoot(parameterExpression):
+                return new ParameterQueryRootExpression(
+                    parameterExpression.Type.GetSequenceType(),
+                    parameterExpression
+                );
 
             default:
                 return Visit(expression);
@@ -125,13 +143,14 @@ public class QueryRootProcessor : ExpressionVisitor
     ///     This handles cases inline expressions whose elements are all constants.
     /// </summary>
     /// <param name="newArrayExpression">The new array expression that's a candidate for conversion to a query root.</param>
-    protected virtual bool ShouldConvertToInlineQueryRoot(NewArrayExpression newArrayExpression)
-        => false;
+    protected virtual bool ShouldConvertToInlineQueryRoot(NewArrayExpression newArrayExpression) =>
+        false;
 
     /// <summary>
     ///     Determines whether a <see cref="ParameterExpression" /> should be converted to a <see cref="ParameterQueryRootExpression" />.
     /// </summary>
     /// <param name="parameterExpression">The parameter expression that's a candidate for conversion to a query root.</param>
-    protected virtual bool ShouldConvertToParameterQueryRoot(ParameterExpression parameterExpression)
-        => false;
+    protected virtual bool ShouldConvertToParameterQueryRoot(
+        ParameterExpression parameterExpression
+    ) => false;
 }

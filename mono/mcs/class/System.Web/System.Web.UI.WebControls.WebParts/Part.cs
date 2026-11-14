@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,84 +29,68 @@ using System;
 
 namespace System.Web.UI.WebControls.WebParts
 {
+    public abstract class Part : Panel, INamingContainer, ICompositeControlDesignerAccessor
+    {
+        string description;
+        string title;
+        PartChromeState chrome_state;
+        PartChromeType chrome_type;
+        ControlCollection controls;
 
-	public abstract class Part: Panel, INamingContainer, ICompositeControlDesignerAccessor
-	{
-		string description;
-		string title;
-		PartChromeState chrome_state;
-		PartChromeType chrome_type;
-		ControlCollection controls;
+        internal Part()
+        {
+            description = "";
+            title = "";
+            chrome_state = PartChromeState.Normal;
+            chrome_type = PartChromeType.Default;
+        }
 
-		internal Part ()
-		{
-			description = "";
-			title = "";
-			chrome_state = PartChromeState.Normal;
-			chrome_type = PartChromeType.Default;
-		}
+        [MonoTODO("Not implemented")]
+        public override void DataBind()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO ("Not implemented")]
-		public override void DataBind()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("not sure exactly what this one does..")]
+        void ICompositeControlDesignerAccessor.RecreateChildControls()
+        {
+            /* for now just call CreateChildControls to force
+             * the recreation of our children. */
+            CreateChildControls();
+        }
 
-		[MonoTODO("not sure exactly what this one does..")]
-		void ICompositeControlDesignerAccessor.RecreateChildControls ()
-		{
-			/* for now just call CreateChildControls to force
-			 * the recreation of our children. */
-			CreateChildControls ();
-		}
+        public virtual PartChromeState ChromeState
+        {
+            get { return chrome_state; }
+            set { chrome_state = value; }
+        }
 
-		public virtual PartChromeState ChromeState
-		{
-			get {
-				return chrome_state;
-			}
-			set {
-				chrome_state = value;
-			}
-		}
+        public virtual PartChromeType ChromeType
+        {
+            get { return chrome_type; }
+            set { chrome_type = value; }
+        }
 
-		public virtual PartChromeType ChromeType
-		{
-			get {
-				return chrome_type;
-			}
-			set {
-				chrome_type = value;
-			}
-		}
+        public new virtual ControlCollection Controls
+        {
+            get
+            {
+                if (controls == null)
+                    controls = new ControlCollection(this);
+                return controls;
+            }
+        }
 
-		public virtual new ControlCollection Controls
-		{
-			get {
-				if(controls == null)
-					controls = new ControlCollection(this);
-				return controls;
-			}
-		}
+        public virtual string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
 
-		public virtual string Description
-		{
-			get {
-				return description;
-			}
-			set {
-				description = value;
-			}
-		}
-
-		public virtual string Title
-		{
-			get {
-				return title;
-			}
-			set {
-				title = value;
-			}
-		}
-	}
+        public virtual string Title
+        {
+            get { return title; }
+            set { title = value; }
+        }
+    }
 }

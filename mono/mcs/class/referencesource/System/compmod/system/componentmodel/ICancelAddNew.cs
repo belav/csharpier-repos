@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="ICancelAddNew.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
 
     /// <devdoc>

@@ -252,9 +252,8 @@ public abstract class ComponentRenderingTestBase
 
         // Click to add/remove some child components
         addButton.Click();
-        Browser.Collection(
-            childComponentWrappers,
-            elem => Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text)
+        Browser.Collection(childComponentWrappers, elem =>
+            Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text)
         );
 
         addButton.Click();
@@ -265,9 +264,8 @@ public abstract class ComponentRenderingTestBase
         );
 
         removeButton.Click();
-        Browser.Collection(
-            childComponentWrappers,
-            elem => Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text)
+        Browser.Collection(childComponentWrappers, elem =>
+            Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text)
         );
 
         addButton.Click();
@@ -502,9 +500,8 @@ public abstract class ComponentRenderingTestBase
 
         appElement.FindElement(By.Id(triggerButton)).Click();
         Browser.Equal("True", () => didReceiveFocusLabel.Text);
-        Browser.Equal(
-            "focus-input-onafterrender",
-            () => Browser.SwitchTo().ActiveElement().GetAttribute("id")
+        Browser.Equal("focus-input-onafterrender", () =>
+            Browser.SwitchTo().ActiveElement().GetAttribute("id")
         );
 
         // As well as actually focusing and triggering the onfocusin event, we should not be seeing any errors
@@ -572,9 +569,8 @@ public abstract class ComponentRenderingTestBase
     public void CanUseJsInteropForRefElementsDuringOnAfterRender()
     {
         var appElement = Browser.MountTestComponent<AfterRenderInteropComponent>();
-        Browser.Equal(
-            "Value set after render",
-            () => Browser.Exists(By.TagName("input")).GetAttribute("value")
+        Browser.Equal("Value set after render", () =>
+            Browser.Exists(By.TagName("input")).GetAttribute("value")
         );
     }
 
@@ -613,9 +609,8 @@ public abstract class ComponentRenderingTestBase
 
         // Updating markup blocks
         appElement.FindElement(By.TagName("button")).Click();
-        Browser.Equal(
-            "[The output was changed completely.]",
-            () => appElement.FindElement(By.Id("dynamic-markup-block")).Text
+        Browser.Equal("[The output was changed completely.]", () =>
+            appElement.FindElement(By.Id("dynamic-markup-block")).Text
         );
         Assert.Equal(
             "changed",
@@ -708,13 +703,11 @@ public abstract class ComponentRenderingTestBase
     public void CanPerformInteropImmediatelyOnComponentInsertion()
     {
         var appElement = Browser.MountTestComponent<InteropOnInitializationComponent>();
-        Browser.Equal(
-            "Hello from interop call",
-            () => appElement.FindElement(By.Id("val-get-by-interop")).Text
+        Browser.Equal("Hello from interop call", () =>
+            appElement.FindElement(By.Id("val-get-by-interop")).Text
         );
-        Browser.Equal(
-            "Hello from interop call",
-            () => appElement.FindElement(By.Id("val-set-by-interop")).GetAttribute("value")
+        Browser.Equal("Hello from interop call", () =>
+            appElement.FindElement(By.Id("val-set-by-interop")).GetAttribute("value")
         );
     }
 

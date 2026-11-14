@@ -18,9 +18,7 @@ internal class ServerLoggerFactory : ILoggerFactory
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public ServerLoggerFactory()
-    {
-    }
+    public ServerLoggerFactory() { }
 
     public void SetFactory(ILoggerFactory loggerFactory)
     {

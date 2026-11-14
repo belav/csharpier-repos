@@ -28,8 +28,7 @@ public class OperationBuilder<TOperation> : IInfrastructure<TOperation>
     /// </summary>
     protected virtual TOperation Operation { get; }
 
-    TOperation IInfrastructure<TOperation>.Instance
-        => Operation;
+    TOperation IInfrastructure<TOperation>.Instance => Operation;
 
     /// <summary>
     ///     Annotates the operation with the given name/value pair.
@@ -37,9 +36,7 @@ public class OperationBuilder<TOperation> : IInfrastructure<TOperation>
     /// <param name="name">The annotation name.</param>
     /// <param name="value">The annotation value.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
-    public virtual OperationBuilder<TOperation> Annotation(
-        string name,
-        object? value)
+    public virtual OperationBuilder<TOperation> Annotation(string name, object? value)
     {
         Check.NotEmpty(name, nameof(name));
 
@@ -55,8 +52,7 @@ public class OperationBuilder<TOperation> : IInfrastructure<TOperation>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string ToString()
-        => base.ToString()!;
+    public override string ToString() => base.ToString()!;
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -64,16 +60,14 @@ public class OperationBuilder<TOperation> : IInfrastructure<TOperation>
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

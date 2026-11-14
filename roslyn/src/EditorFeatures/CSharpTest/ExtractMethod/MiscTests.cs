@@ -45,10 +45,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             var rootWithAnnotation = result.Root;
 
             // find token to replace
-            var publicToken = rootWithAnnotation.DescendantTokens().First(t => t.Kind() == SyntaxKind.PublicKeyword);
+            var publicToken = rootWithAnnotation
+                .DescendantTokens()
+                .First(t => t.Kind() == SyntaxKind.PublicKeyword);
 
             // replace the token with new one
-            var newRoot = rootWithAnnotation.ReplaceToken(publicToken, SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
+            var newRoot = rootWithAnnotation.ReplaceToken(
+                publicToken,
+                SyntaxFactory.Token(SyntaxKind.PrivateKeyword)
+            );
 
             // restore trivia around it
             var rootWithTriviaRestored = result.RestoreTrivia(newRoot);
@@ -90,10 +95,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             var rootWithAnnotation = result.Root;
 
             // find token to replace
-            var publicToken = rootWithAnnotation.DescendantTokens().First(t => t.Kind() == SyntaxKind.PublicKeyword);
+            var publicToken = rootWithAnnotation
+                .DescendantTokens()
+                .First(t => t.Kind() == SyntaxKind.PublicKeyword);
 
             // replace the token with new one
-            var newRoot = rootWithAnnotation.ReplaceToken(publicToken, SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
+            var newRoot = rootWithAnnotation.ReplaceToken(
+                publicToken,
+                SyntaxFactory.Token(SyntaxKind.PrivateKeyword)
+            );
 
             // restore trivia around it
             var rootWithTriviaRestored = result.RestoreTrivia(newRoot);
@@ -125,22 +135,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                 }
                 """;
 
-            using var workspace = TestWorkspace.CreateCSharp(markupCode, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateCSharp(
+                markupCode,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var testDocument = workspace.Documents.Single();
 
             var view = testDocument.GetTextView();
-            view.Selection.Select(new SnapshotSpan(
-                view.TextBuffer.CurrentSnapshot, testDocument.SelectedSpans[0].Start, testDocument.SelectedSpans[0].Length), isReversed: false);
+            view.Selection.Select(
+                new SnapshotSpan(
+                    view.TextBuffer.CurrentSnapshot,
+                    testDocument.SelectedSpans[0].Start,
+                    testDocument.SelectedSpans[0].Length
+                ),
+                isReversed: false
+            );
 
-            var callBackService = (INotificationServiceCallback)workspace.Services.GetRequiredService<INotificationService>();
+            var callBackService = (INotificationServiceCallback)
+                workspace.Services.GetRequiredService<INotificationService>();
             var called = false;
             callBackService.NotificationCallback = (_, _, _) => called = true;
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(PredefinedCommandHandlerNames.ExtractMethod, ContentTypeNames.CSharpContentType);
+            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(
+                PredefinedCommandHandlerNames.ExtractMethod,
+                ContentTypeNames.CSharpContentType
+            );
 
-            handler.ExecuteCommand(new ExtractMethodCommandArgs(view, view.TextBuffer), TestCommandExecutionContext.Create());
+            handler.ExecuteCommand(
+                new ExtractMethodCommandArgs(view, view.TextBuffer),
+                TestCommandExecutionContext.Create()
+            );
 
-            var waiter = workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>().GetWaiter(FeatureAttribute.ExtractMethod);
+            var waiter = workspace
+                .ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>()
+                .GetWaiter(FeatureAttribute.ExtractMethod);
             await waiter.ExpeditedWaitAsync();
 
             Assert.True(called);

@@ -1,5 +1,7 @@
-﻿namespace System.Web.Mvc {
-    internal interface IResolver<T> {
+﻿namespace System.Web.Mvc
+{
+    internal interface IResolver<T>
+    {
         T Current { get; }
     }
 }

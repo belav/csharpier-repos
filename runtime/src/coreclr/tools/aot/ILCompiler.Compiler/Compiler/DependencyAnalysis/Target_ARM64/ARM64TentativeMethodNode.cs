@@ -7,7 +7,11 @@ namespace ILCompiler.DependencyAnalysis
 {
     public partial class TentativeMethodNode
     {
-        protected override void EmitCode(NodeFactory factory, ref ARM64Emitter encoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref ARM64Emitter encoder,
+            bool relocsOnly
+        )
         {
             encoder.EmitJMP(GetTarget(factory));
         }

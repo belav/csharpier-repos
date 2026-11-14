@@ -10,20 +10,22 @@ namespace System.Configuration
         private readonly int _minValue;
         private readonly int _resolution;
 
-        public IntegerValidator(int minValue, int maxValue) :
-            this(minValue, maxValue, false, 1)
-        { }
+        public IntegerValidator(int minValue, int maxValue)
+            : this(minValue, maxValue, false, 1) { }
 
-        public IntegerValidator(int minValue, int maxValue, bool rangeIsExclusive) :
-            this(minValue, maxValue, rangeIsExclusive, 1)
-        { }
+        public IntegerValidator(int minValue, int maxValue, bool rangeIsExclusive)
+            : this(minValue, maxValue, rangeIsExclusive, 1) { }
 
         public IntegerValidator(int minValue, int maxValue, bool rangeIsExclusive, int resolution)
         {
-            if (resolution <= 0) throw new ArgumentOutOfRangeException(nameof(resolution));
+            if (resolution <= 0)
+                throw new ArgumentOutOfRangeException(nameof(resolution));
 
             if (minValue > maxValue)
-                throw new ArgumentOutOfRangeException(nameof(minValue), SR.Validator_min_greater_than_max);
+                throw new ArgumentOutOfRangeException(
+                    nameof(minValue),
+                    SR.Validator_min_greater_than_max
+                );
 
             _minValue = minValue;
             _maxValue = maxValue;
@@ -41,11 +43,13 @@ namespace System.Configuration
         {
             ValidatorUtils.HelperParamValidation(value, typeof(int));
 
-            ValidatorUtils.ValidateScalar((int)value,
+            ValidatorUtils.ValidateScalar(
+                (int)value,
                 _minValue,
                 _maxValue,
                 _resolution,
-                _flags == ValidationFlags.ExclusiveRange);
+                _flags == ValidationFlags.ExclusiveRange
+            );
         }
 
         private enum ValidationFlags

@@ -13,9 +13,11 @@ namespace System.Web.Mvc.Test
         public void DoesAnyKeyHavePrefixFailure()
         {
             // Arrange
-            Dictionary<string, object> dict = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+            Dictionary<string, object> dict = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            )
             {
-                { "FOOBAR", 42 }
+                { "FOOBAR", 42 },
             };
 
             // Act
@@ -29,9 +31,11 @@ namespace System.Web.Mvc.Test
         public void DoesAnyKeyHavePrefixSuccess()
         {
             // Arrange
-            Dictionary<string, object> dict = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+            Dictionary<string, object> dict = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            )
             {
-                { "FOO.BAR", 42 }
+                { "FOO.BAR", 42 },
             };
 
             // Act
@@ -45,13 +49,15 @@ namespace System.Web.Mvc.Test
         public void FindKeysWithPrefix()
         {
             // Arrange
-            Dictionary<string, string> dict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            Dictionary<string, string> dict = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            )
             {
                 { "FOO", "fooValue" },
                 { "FOOBAR", "foobarValue" },
                 { "FOO.BAR", "foo.barValue" },
                 { "FOO[0]", "foo[0]Value" },
-                { "BAR", "barValue" }
+                { "BAR", "barValue" },
             };
 
             // Act

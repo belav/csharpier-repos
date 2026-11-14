@@ -20,7 +20,9 @@ namespace System.Web.Http
 
         public int GetServicesCount_ControllerConfig()
         {
-            return Configuration.Services.GetService(typeof(IDocumentationProvider)) == null ? 0 : 1;
+            return Configuration.Services.GetService(typeof(IDocumentationProvider)) == null
+                ? 0
+                : 1;
         }
 
         public int GetFormattersCount_RequestConfig()
@@ -35,7 +37,11 @@ namespace System.Web.Http
 
         public int GetServicesCount_RequestConfig()
         {
-            return Request.GetConfiguration().Services.GetService(typeof(IDocumentationProvider)) == null ? 0 : 1;
+            return
+                Request.GetConfiguration().Services.GetService(typeof(IDocumentationProvider))
+                == null
+                ? 0
+                : 1;
         }
     }
 }

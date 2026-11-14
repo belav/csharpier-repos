@@ -1,20 +1,27 @@
-
 //------------------------------------------------------------------------------
 // <copyright file="XmlSerializerAssemblyAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
 
     /// <include file='doc\XmlSerializerAssemblyAttribute.uex' path='docs/doc[@for="XmlSerializerAssemblyAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple=false)]
-    public sealed class XmlSerializerAssemblyAttribute : System.Attribute {
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct,
+        AllowMultiple = false
+    )]
+    public sealed class XmlSerializerAssemblyAttribute : System.Attribute
+    {
         string assemblyName;
         string codeBase;
 
@@ -22,19 +29,22 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerAssemblyAttribute() : this(null, null) {}
+        public XmlSerializerAssemblyAttribute()
+            : this(null, null) { }
 
         /// <include file='doc\XmlSerializerAssemblyAttribute.uex' path='docs/doc[@for="XmlSerializerAssemblyAttribute.XmlSerializerAssemblyAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerAssemblyAttribute(string assemblyName) : this(assemblyName, null) {}
-        
+        public XmlSerializerAssemblyAttribute(string assemblyName)
+            : this(assemblyName, null) { }
+
         /// <include file='doc\XmlSerializerAssemblyAttribute.uex' path='docs/doc[@for="XmlSerializerAssemblyAttribute.XmlSerializerAssemblyAttribute2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerAssemblyAttribute(string assemblyName, string codeBase) {
+        public XmlSerializerAssemblyAttribute(string assemblyName, string codeBase)
+        {
             this.assemblyName = assemblyName;
             this.codeBase = codeBase;
         }
@@ -43,7 +53,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string CodeBase {
+        public string CodeBase
+        {
             get { return codeBase; }
             set { codeBase = value; }
         }
@@ -52,7 +63,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string AssemblyName {
+        public string AssemblyName
+        {
             get { return assemblyName; }
             set { assemblyName = value; }
         }

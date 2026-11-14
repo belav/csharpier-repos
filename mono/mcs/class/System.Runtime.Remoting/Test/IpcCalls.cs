@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,7 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
@@ -36,56 +35,55 @@ using NUnit.Framework;
 
 namespace MonoTests.Remoting
 {
-	[TestFixture]
-	public class IpcSyncCallTest : SyncCallTest
-	{
-		public override ChannelManager CreateChannelManager ()
-		{
-			return new IpcChannelManager ();
-		}
-	}
+    [TestFixture]
+    public class IpcSyncCallTest : SyncCallTest
+    {
+        public override ChannelManager CreateChannelManager()
+        {
+            return new IpcChannelManager();
+        }
+    }
 
-	[TestFixture]
-	public class IpcAsyncCallTest : AsyncCallTest
-	{
-		public override ChannelManager CreateChannelManager ()
-		{
-			return new IpcChannelManager ();
-		}
-	}
+    [TestFixture]
+    public class IpcAsyncCallTest : AsyncCallTest
+    {
+        public override ChannelManager CreateChannelManager()
+        {
+            return new IpcChannelManager();
+        }
+    }
 
-	[TestFixture]
-	public class IpcReflectionCallTest : ReflectionCallTest
-	{
-		public override ChannelManager CreateChannelManager ()
-		{
-			return new IpcChannelManager ();
-		}
-	}
+    [TestFixture]
+    public class IpcReflectionCallTest : ReflectionCallTest
+    {
+        public override ChannelManager CreateChannelManager()
+        {
+            return new IpcChannelManager();
+        }
+    }
 
-	[TestFixture]
-	public class IpcDelegateCallTest : DelegateCallTest
-	{
-		public override ChannelManager CreateChannelManager ()
-		{
-			return new IpcChannelManager ();
-		}
-	}
+    [TestFixture]
+    public class IpcDelegateCallTest : DelegateCallTest
+    {
+        public override ChannelManager CreateChannelManager()
+        {
+            return new IpcChannelManager();
+        }
+    }
 
-	[Serializable]
-	public class IpcChannelManager : ChannelManager
-	{
-		public override IChannelSender CreateClientChannel ()
-		{
-			return new IpcChannel ();
-		}
+    [Serializable]
+    public class IpcChannelManager : ChannelManager
+    {
+        public override IChannelSender CreateClientChannel()
+        {
+            return new IpcChannel();
+        }
 
-		public override IChannelReceiver CreateServerChannel ()
-		{
-			// simulate the Tcp/HttpChannel(0) semantics with a GUID.
-			string portName = "ipc" + Guid.NewGuid ().ToString ("N");
-			return new IpcChannel (portName);
-		}
-	}
+        public override IChannelReceiver CreateServerChannel()
+        {
+            // simulate the Tcp/HttpChannel(0) semantics with a GUID.
+            string portName = "ipc" + Guid.NewGuid().ToString("N");
+            return new IpcChannel(portName);
+        }
+    }
 }
-

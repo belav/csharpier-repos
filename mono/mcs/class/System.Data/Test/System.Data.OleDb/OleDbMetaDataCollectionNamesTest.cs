@@ -33,23 +33,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-        [TestFixture]
-        public class OleDbMetaDataCollectionNamesTest
+    [TestFixture]
+    public class OleDbMetaDataCollectionNamesTest
+    {
+        [Test]
+        public void ValuesTest()
         {
-                [Test]
-                public void ValuesTest ()
-                {
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.Catalogs, "Catalogs");
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.Collations, "Collations");
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.Columns, "Columns");
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.Indexes, "Indexes");
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.ProcedureColumns, "ProcedureColumns");
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.ProcedureParameters, "ProcedureParameters");
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.Procedures, "Procedures");
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.Tables, "Tables");
-                        Assert.AreEqual (OleDbMetaDataCollectionNames.Views, "Views");
-                }
+            Assert.AreEqual(OleDbMetaDataCollectionNames.Catalogs, "Catalogs");
+            Assert.AreEqual(OleDbMetaDataCollectionNames.Collations, "Collations");
+            Assert.AreEqual(OleDbMetaDataCollectionNames.Columns, "Columns");
+            Assert.AreEqual(OleDbMetaDataCollectionNames.Indexes, "Indexes");
+            Assert.AreEqual(OleDbMetaDataCollectionNames.ProcedureColumns, "ProcedureColumns");
+            Assert.AreEqual(
+                OleDbMetaDataCollectionNames.ProcedureParameters,
+                "ProcedureParameters"
+            );
+            Assert.AreEqual(OleDbMetaDataCollectionNames.Procedures, "Procedures");
+            Assert.AreEqual(OleDbMetaDataCollectionNames.Tables, "Tables");
+            Assert.AreEqual(OleDbMetaDataCollectionNames.Views, "Views");
         }
+    }
 }
 
 #endif

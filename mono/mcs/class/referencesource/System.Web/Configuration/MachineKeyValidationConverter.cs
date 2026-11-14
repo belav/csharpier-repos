@@ -6,25 +6,37 @@
 
 using System;
 using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
-using System.Xml;
-using System.Collections.Specialized;
-using System.Globalization;
-using System.ComponentModel;
 using System.Security;
+using System.Security.Permissions;
 using System.Text;
-using System.Configuration;
+using System.Xml;
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed class MachineKeyValidationConverter : ConfigurationConverterBase {
-
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type) {
-            if (!(value is MachineKeyValidation)) {
-                throw new ArgumentException(SR.GetString(SR.Config_Invalid_enum_value, "SHA1, MD5, 3DES, AES, HMACSHA256, HMACSHA384, HMACSHA512"));
+    public sealed class MachineKeyValidationConverter : ConfigurationConverterBase
+    {
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
+            if (!(value is MachineKeyValidation))
+            {
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Config_Invalid_enum_value,
+                        "SHA1, MD5, 3DES, AES, HMACSHA256, HMACSHA384, HMACSHA512"
+                    )
+                );
             }
             return ConvertFromEnum((MachineKeyValidation)value);
         }
@@ -36,7 +48,8 @@ namespace System.Web.Configuration {
 
         internal static string ConvertFromEnum(MachineKeyValidation enumValue)
         {
-            switch (enumValue) {
+            switch (enumValue)
+            {
                 case MachineKeyValidation.SHA1:
                     return "SHA1";
                 case MachineKeyValidation.MD5:
@@ -58,7 +71,7 @@ namespace System.Web.Configuration {
 
         internal static MachineKeyValidation ConvertToEnum(string strValue)
         {
-            if (strValue==null)
+            if (strValue == null)
                 return MachineKeySection.DefaultValidation;
 
             switch (strValue)

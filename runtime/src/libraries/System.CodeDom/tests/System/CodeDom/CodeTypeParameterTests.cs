@@ -45,11 +45,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeReference type1 = new CodeTypeReference(typeof(int));
             typeParameter.Constraints.Add(type1);
-            Assert.Equal(new CodeTypeReference[] { type1 }, typeParameter.Constraints.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1 },
+                typeParameter.Constraints.Cast<CodeTypeReference>()
+            );
 
             CodeTypeReference type2 = new CodeTypeReference(typeof(int));
             typeParameter.Constraints.Add(type2);
-            Assert.Equal(new CodeTypeReference[] { type1, type2 }, typeParameter.Constraints.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1, type2 },
+                typeParameter.Constraints.Cast<CodeTypeReference>()
+            );
         }
 
         [Fact]
@@ -59,11 +65,17 @@ namespace System.CodeDom.Tests
 
             CodeAttributeDeclaration attribute1 = new CodeAttributeDeclaration("Name1");
             typeParameter.CustomAttributes.Add(attribute1);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1 }, typeParameter.CustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1 },
+                typeParameter.CustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
 
             CodeAttributeDeclaration attribute2 = new CodeAttributeDeclaration("Name2");
             typeParameter.CustomAttributes.Add(attribute2);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1, attribute2 }, typeParameter.CustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1, attribute2 },
+                typeParameter.CustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
         }
 
         [Theory]

@@ -7,10 +7,16 @@ using System.Web.Http.ValueProviders;
 
 namespace System.Web.Http
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Parameter,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public sealed class FromUriAttribute : ModelBinderAttribute
     {
-        public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(HttpConfiguration configuration)
+        public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(
+            HttpConfiguration configuration
+        )
         {
             if (configuration == null)
             {

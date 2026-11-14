@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithMatchingIf()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         [|If args IsNot Nothing Then
@@ -31,7 +32,8 @@ Module Program
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then
@@ -45,11 +47,13 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithMatchingIf_Directive()
         {
-            var code = @"[|
+            var code =
+                @"[|
 #If c = 0 Then
 #Endif|]";
 
-            var expected = @"
+            var expected =
+                @"
 #If c = 0 Then
 #End If";
             await VerifyAsync(code, expected);
@@ -58,14 +62,16 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithoutMatchingIf()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         [|EndIf|]
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         End If
@@ -77,13 +83,15 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithoutMatchingIf_Directive()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Class X
 End Class
 
 #Endif|]";
 
-            var expected = @"
+            var expected =
+                @"
 Class X
 End Class
 
@@ -95,14 +103,16 @@ End Class
         [WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_SameLineAsIf()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then [|EndIf|]        
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then
@@ -115,14 +125,16 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_SameLineAsIf_Invalid()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing [|EndIf|]
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing EndIf
@@ -134,10 +146,12 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_SameLineAsIf_Directive()
         {
-            var code = @"[|
+            var code =
+                @"[|
 #If c = 0 Then #Endif|]";
 
-            var expected = @"
+            var expected =
+                @"
 #If c = 0 Then #Endif";
             await VerifyAsync(code, expected);
         }
@@ -145,7 +159,8 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithLeadingTrivia()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         [|If args IsNot Nothing Then
@@ -155,7 +170,8 @@ Module Program
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then
@@ -170,13 +186,15 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithLeadingTrivia_Directive()
         {
-            var code = @"[|
+            var code =
+                @"[|
 #If c = 0 Then
 '#Endif
 #Endif
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 #If c = 0 Then
 '#Endif
 #End If
@@ -187,7 +205,8 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_InvocationExpressionArgument()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         [|If args IsNot Nothing Then
@@ -196,7 +215,8 @@ Module Program
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then
@@ -210,7 +230,8 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_InvalidDirectiveCases()
         {
-            var code = @"[|
+            var code =
+                @"[|
 ' BadDirective cases
 #If c = 0 Then
 #InvocationExpression #Endif
@@ -236,7 +257,8 @@ InvocationExpression
 #Endif
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 ' BadDirective cases
 #If c = 0 Then
 #InvocationExpression #Endif
@@ -267,7 +289,8 @@ InvocationExpression
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithTrailingTrivia()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         [|If args IsNot Nothing Then
@@ -276,7 +299,8 @@ Module Program
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then
@@ -290,12 +314,14 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithTrailingTrivia_Directive()
         {
-            var code = @"[|
+            var code =
+                @"[|
 #If c = 0 Then
 #Endif '#Endif
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 #If c = 0 Then
 #End If '#Endif
 ";
@@ -305,7 +331,8 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithIdentifierTokenTrailingTrivia()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         [|If args IsNot Nothing Then
@@ -314,7 +341,8 @@ Module Program
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then
@@ -328,7 +356,8 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_InvalidDirectiveCases_02()
         {
-            var code = @"[|
+            var code =
+                @"[|
 ' BadDirective cases
 #If c = 0 Then
 #Endif #IdentifierToken
@@ -354,7 +383,8 @@ IdentifierToken#
 IdentifierToken
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 ' BadDirective cases
 #If c = 0 Then
 #End If #IdentifierToken
@@ -385,7 +415,8 @@ IdentifierToken
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithLeadingAndTrailingTrivia()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         [|If args IsNot Nothing Then
@@ -396,7 +427,8 @@ EndIf
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then
@@ -412,13 +444,15 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithLeadingAndTrailingTrivia_Directive()
         {
-            var code = @"[|
+            var code =
+                @"[|
 #If c = 0 Then
 '#Endif
 #Endif '#Endif
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 #If c = 0 Then
 '#Endif
 #End If '#Endif
@@ -429,7 +463,8 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithLeadingAndTrailingInvocationExpressions()
         {
-            var code = @"
+            var code =
+                @"
 Module Program
     Sub Main(args As String())
         [|If args IsNot Nothing Then
@@ -440,7 +475,8 @@ IdentifierToken|]
     End Sub
 End Module";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         If args IsNot Nothing Then
@@ -456,7 +492,8 @@ End Module";
         [Fact, WorkItem(17313, "DevDiv_Projects/Roslyn")]
         public async Task FixEndIfKeyword_WithLeadingAndTrailingInvocationExpressions_Directive()
         {
-            var code = @"[|
+            var code =
+                @"[|
 ' BadDirective cases
 #If c = 0 Then
 #InvalidTrivia #Endif #InvalidTrivia
@@ -482,7 +519,8 @@ InvalidTrivia#
 #Endif InvalidTrivia#
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 ' BadDirective cases
 #If c = 0 Then
 #InvalidTrivia #Endif #InvalidTrivia
@@ -513,7 +551,8 @@ InvalidTrivia#
         [Fact, WorkItem(5722, "DevDiv_Projects/Roslyn")]
         public async Task FixPrimitiveTypeKeywords_ValidCases()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Imports SystemAlias = System
 Imports SystemInt16Alias = System.Short
 Imports SystemUInt16Alias = System.ushort
@@ -556,7 +595,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Imports SystemAlias = System
 Imports SystemInt16Alias = System.Int16
 Imports SystemUInt16Alias = System.UInt16
@@ -606,7 +646,8 @@ End Module
         {
             // With a user defined type named System
             // No fixups as System binds to type not a namespace.
-            var code = @"
+            var code =
+                @"
 Imports SystemAlias = System
 Imports SystemInt16Alias = System.Short
 Imports SystemUInt16Alias = System.ushort
@@ -669,7 +710,8 @@ End Module
             await VerifyAsync(@"[|" + code + @"|]", expectedResult: code);
 
             // No Fixes in trivia
-            code = @"
+            code =
+                @"
 Imports SystemAlias = System
 'Imports SystemInt16Alias = System.Short
 
@@ -687,7 +729,8 @@ End Module
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/606015")]
         public async Task FixFullWidthSingleQuotes()
         {
-            var code = @"[|
+            var code =
+                @"[|
 ‘ｆｕｌｌｗｉｄｔｈ 1　
 ’ｆｕｌｌｗｉｄｔｈ 2
 ‘‘ｆｕｌｌｗｉｄｔｈ 3
@@ -697,7 +740,8 @@ End Module
 ‘’‘’ｆｕｌｌｗｉｄｔｈ 7
 '‘’‘’ｆｕｌｌｗｉｄｔｈ 8|]";
 
-            var expected = @"
+            var expected =
+                @"
 'ｆｕｌｌｗｉｄｔｈ 1　
 'ｆｕｌｌｗｉｄｔｈ 2
 '‘ｆｕｌｌｗｉｄｔｈ 3
@@ -730,8 +774,8 @@ End Module
             }
         }
 
-        private static string FixLineEndings(string text)
-            => text.Replace("\r\n", "\n").Replace("\n", "\r\n");
+        private static string FixLineEndings(string text) =>
+            text.Replace("\r\n", "\n").Replace("\n", "\r\n");
 
         private static async Task VerifyAsync(string codeWithMarker, string expectedResult)
         {
@@ -741,9 +785,20 @@ End Module
             MarkupTestFile.GetSpans(codeWithMarker, out var codeWithoutMarker, out var textSpans);
 
             var document = CreateDocument(codeWithoutMarker, LanguageNames.VisualBasic);
-            var codeCleanups = CodeCleaner.GetDefaultProviders(document).WhereAsArray(p => p.Name is PredefinedCodeCleanupProviderNames.FixIncorrectTokens or PredefinedCodeCleanupProviderNames.Format);
+            var codeCleanups = CodeCleaner
+                .GetDefaultProviders(document)
+                .WhereAsArray(p =>
+                    p.Name
+                        is PredefinedCodeCleanupProviderNames.FixIncorrectTokens
+                            or PredefinedCodeCleanupProviderNames.Format
+                );
 
-            var cleanDocument = await CodeCleaner.CleanupAsync(document, textSpans[0], CodeCleanupOptions.GetDefault(document.Project.Services), codeCleanups);
+            var cleanDocument = await CodeCleaner.CleanupAsync(
+                document,
+                textSpans[0],
+                CodeCleanupOptions.GetDefault(document.Project.Services),
+                codeCleanups
+            );
 
             Assert.Equal(expectedResult, (await cleanDocument.GetSyntaxRootAsync()).ToFullString());
         }
@@ -752,10 +807,13 @@ End Module
         {
             var solution = new AdhocWorkspace().CurrentSolution;
             var projectId = ProjectId.CreateNewId();
-            var project = solution.AddProject(projectId, "Project", "Project.dll", language).GetProject(projectId);
+            var project = solution
+                .AddProject(projectId, "Project", "Project.dll", language)
+                .GetProject(projectId);
 
-            return project.AddMetadataReference(TestMetadata.Net451.mscorlib)
-                          .AddDocument("Document", SourceText.From(code));
+            return project
+                .AddMetadataReference(TestMetadata.Net451.mscorlib)
+                .AddDocument("Document", SourceText.From(code));
         }
     }
 }

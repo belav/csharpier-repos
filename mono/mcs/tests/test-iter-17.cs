@@ -3,10 +3,13 @@ using System.Collections;
 
 class Program
 {
-    static public IEnumerable Empty {
-        get {
-            object [] os = new object [] { };
-            foreach (object o in os) {
+    public static IEnumerable Empty
+    {
+        get
+        {
+            object[] os = new object[] { };
+            foreach (object o in os)
+            {
                 yield return o;
             }
         }

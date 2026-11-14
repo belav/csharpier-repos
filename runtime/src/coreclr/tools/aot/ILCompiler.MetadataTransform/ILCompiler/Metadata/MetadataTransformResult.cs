@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
 using Debug = System.Diagnostics.Debug;
 
@@ -19,10 +18,7 @@ namespace ILCompiler.Metadata
         /// </summary>
         public IReadOnlyCollection<ScopeDefinition> Scopes
         {
-            get
-            {
-                return _transform._scopeDefs.Records;
-            }
+            get { return _transform._scopeDefs.Records; }
         }
 
         /// <summary>
@@ -35,10 +31,7 @@ namespace ILCompiler.Metadata
         /// </summary>
         public MetadataTransform Transform
         {
-            get
-            {
-                return _transform;
-            }
+            get { return _transform; }
         }
 
         internal MetadataTransformResult(Transform<T> transform)

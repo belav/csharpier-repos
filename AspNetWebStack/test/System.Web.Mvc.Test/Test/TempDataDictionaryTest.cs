@@ -78,7 +78,9 @@ namespace System.Web.Mvc.Test
             NullTempDataProvider provider = new NullTempDataProvider();
             TempDataDictionary tempData = new TempDataDictionary();
             Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
-            controllerContext.Setup(c => c.HttpContext.Request).Returns(new Mock<HttpRequestBase>().Object);
+            controllerContext
+                .Setup(c => c.HttpContext.Request)
+                .Returns(new Mock<HttpRequestBase>().Object);
             tempData["Foo"] = "Foo";
             tempData["Bar"] = "Bar";
 
@@ -98,7 +100,9 @@ namespace System.Web.Mvc.Test
             NullTempDataProvider provider = new NullTempDataProvider();
             TempDataDictionary tempData = new TempDataDictionary();
             Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
-            controllerContext.Setup(c => c.HttpContext.Request).Returns(new Mock<HttpRequestBase>().Object);
+            controllerContext
+                .Setup(c => c.HttpContext.Request)
+                .Returns(new Mock<HttpRequestBase>().Object);
             tempData["Foo"] = "Foo";
             tempData["Bar"] = "Bar";
 
@@ -217,7 +221,9 @@ namespace System.Web.Mvc.Test
             // Act
             tempData["Key1"] = "Value1";
             tempData.Add("Key2", "Value2");
-            ((ICollection<KeyValuePair<string, object>>)tempData).Add(new KeyValuePair<string, object>("Key3", "Value3"));
+            ((ICollection<KeyValuePair<string, object>>)tempData).Add(
+                new KeyValuePair<string, object>("Key3", "Value3")
+            );
 
             // Assert (IDictionary)
             Assert.Equal(3, tempData.Count);
@@ -231,14 +237,19 @@ namespace System.Web.Mvc.Test
             tempDataEnumerator.Reset();
             while (tempDataEnumerator.MoveNext())
             {
-                KeyValuePair<string, object> pair = (KeyValuePair<string, object>)tempDataEnumerator.Current;
+                KeyValuePair<string, object> pair =
+                    (KeyValuePair<string, object>)tempDataEnumerator.Current;
                 Assert.True(((ICollection<KeyValuePair<string, object>>)tempData).Contains(pair));
             }
 
             // Assert (ICollection)
             foreach (string key in tempData.Keys)
             {
-                Assert.True(((ICollection<KeyValuePair<string, object>>)tempData).Contains(new KeyValuePair<string, object>(key, tempData[key])));
+                Assert.True(
+                    ((ICollection<KeyValuePair<string, object>>)tempData).Contains(
+                        new KeyValuePair<string, object>(key, tempData[key])
+                    )
+                );
             }
 
             foreach (string value in tempData.Values)
@@ -256,14 +267,22 @@ namespace System.Web.Mvc.Test
                 Assert.True(tempData.ContainsValue(value));
             }
 
-            KeyValuePair<string, object>[] keyValuePairArray = new KeyValuePair<string, object>[tempData.Count];
+            KeyValuePair<string, object>[] keyValuePairArray = new KeyValuePair<string, object>[
+                tempData.Count
+            ];
             ((ICollection<KeyValuePair<string, object>>)tempData).CopyTo(keyValuePairArray, 0);
 
             Assert.False(((ICollection<KeyValuePair<string, object>>)tempData).IsReadOnly);
 
-            Assert.False(((ICollection<KeyValuePair<string, object>>)tempData).Remove(new KeyValuePair<string, object>("Key5", "Value5")));
+            Assert.False(
+                ((ICollection<KeyValuePair<string, object>>)tempData).Remove(
+                    new KeyValuePair<string, object>("Key5", "Value5")
+                )
+            );
 
-            IEnumerator<KeyValuePair<string, object>> keyValuePairEnumerator = ((ICollection<KeyValuePair<string, object>>)tempData).GetEnumerator();
+            IEnumerator<KeyValuePair<string, object>> keyValuePairEnumerator = (
+                (ICollection<KeyValuePair<string, object>>)tempData
+            ).GetEnumerator();
             keyValuePairEnumerator.Reset();
             while (keyValuePairEnumerator.MoveNext())
             {
@@ -286,7 +305,11 @@ namespace System.Web.Mvc.Test
             NullTempDataProvider provider = new NullTempDataProvider();
 
             // Act
-            tempDataDictionary.Load(null /* controllerContext */, provider);
+            tempDataDictionary.Load(
+                null /* controllerContext */
+                ,
+                provider
+            );
 
             // Assert
             Assert.Empty(tempDataDictionary);
@@ -311,9 +334,10 @@ namespace System.Web.Mvc.Test
 
         internal class NullTempDataProvider : ITempDataProvider
         {
-            public void SaveTempData(ControllerContext controllerContext, IDictionary<string, object> values)
-            {
-            }
+            public void SaveTempData(
+                ControllerContext controllerContext,
+                IDictionary<string, object> values
+            ) { }
 
             public IDictionary<string, object> LoadTempData(ControllerContext controllerContext)
             {
@@ -330,9 +354,10 @@ namespace System.Web.Mvc.Test
                 _data = data;
             }
 
-            public void SaveTempData(ControllerContext controllerContext, IDictionary<string, object> values)
-            {
-            }
+            public void SaveTempData(
+                ControllerContext controllerContext,
+                IDictionary<string, object> values
+            ) { }
 
             public IDictionary<string, object> LoadTempData(ControllerContext controllerContext)
             {

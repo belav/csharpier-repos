@@ -23,7 +23,8 @@ public class RowNumberExpression : SqlExpression
     public RowNumberExpression(
         IReadOnlyList<SqlExpression>? partitions,
         IReadOnlyList<OrderingExpression> orderings,
-        RelationalTypeMapping? typeMapping)
+        RelationalTypeMapping? typeMapping
+    )
         : base(typeof(long), typeMapping)
     {
         Partitions = partitions ?? Array.Empty<SqlExpression>();
@@ -60,9 +61,7 @@ public class RowNumberExpression : SqlExpression
             orderings.Add(newOrdering);
         }
 
-        return changed
-            ? new RowNumberExpression(partitions, orderings, TypeMapping)
-            : this;
+        return changed ? new RowNumberExpression(partitions, orderings, TypeMapping) : this;
     }
 
     /// <summary>
@@ -74,12 +73,14 @@ public class RowNumberExpression : SqlExpression
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
     public virtual RowNumberExpression Update(
         IReadOnlyList<SqlExpression>? partitions,
-        IReadOnlyList<OrderingExpression> orderings)
-        => ((Partitions == null && partitions == null)
-                || (Partitions != null && partitions != null && Partitions.SequenceEqual(partitions)))
-            && Orderings.SequenceEqual(orderings)
-                ? this
-                : new RowNumberExpression(partitions, orderings, TypeMapping);
+        IReadOnlyList<OrderingExpression> orderings
+    ) =>
+        (
+            (Partitions == null && partitions == null)
+            || (Partitions != null && partitions != null && Partitions.SequenceEqual(partitions))
+        ) && Orderings.SequenceEqual(orderings)
+            ? this
+            : new RowNumberExpression(partitions, orderings, TypeMapping);
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -98,16 +99,21 @@ public class RowNumberExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is RowNumberExpression rowNumberExpression
-                && Equals(rowNumberExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is RowNumberExpression rowNumberExpression && Equals(rowNumberExpression)
+        );
 
-    private bool Equals(RowNumberExpression rowNumberExpression)
-        => base.Equals(rowNumberExpression)
-            && (Partitions == null ? rowNumberExpression.Partitions == null : Partitions.SequenceEqual(rowNumberExpression.Partitions))
-            && Orderings.SequenceEqual(rowNumberExpression.Orderings);
+    private bool Equals(RowNumberExpression rowNumberExpression) =>
+        base.Equals(rowNumberExpression)
+        && (
+            Partitions == null
+                ? rowNumberExpression.Partitions == null
+                : Partitions.SequenceEqual(rowNumberExpression.Partitions)
+        )
+        && Orderings.SequenceEqual(rowNumberExpression.Orderings);
 
     /// <inheritdoc />
     public override int GetHashCode()

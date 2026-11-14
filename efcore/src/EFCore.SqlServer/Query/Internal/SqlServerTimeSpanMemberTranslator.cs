@@ -18,7 +18,7 @@ public class SqlServerTimeSpanMemberTranslator : IMemberTranslator
         { nameof(TimeSpan.Hours), "hour" },
         { nameof(TimeSpan.Minutes), "minute" },
         { nameof(TimeSpan.Seconds), "second" },
-        { nameof(TimeSpan.Milliseconds), "millisecond" }
+        { nameof(TimeSpan.Milliseconds), "millisecond" },
     };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -44,15 +44,21 @@ public class SqlServerTimeSpanMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (member.DeclaringType == typeof(TimeSpan) && DatePartMappings.TryGetValue(member.Name, out var value))
+        if (
+            member.DeclaringType == typeof(TimeSpan)
+            && DatePartMappings.TryGetValue(member.Name, out var value)
+        )
         {
             return _sqlExpressionFactory.Function(
-                "DATEPART", new[] { _sqlExpressionFactory.Fragment(value), instance! },
+                "DATEPART",
+                new[] { _sqlExpressionFactory.Fragment(value), instance! },
                 nullable: true,
                 argumentsPropagateNullability: new[] { false, true },
-                returnType);
+                returnType
+            );
         }
 
         return null;

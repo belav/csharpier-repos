@@ -59,38 +59,53 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                     throw ExceptionUtilities.UnexpectedValue(fixAllState.FixAllKind);
             }
 
-            Logger.Log(functionId, KeyValueLogMessage.Create(m =>
-            {
-                m[CorrelationId] = fixAllState.CorrelationId;
-
-                if (isInternalProvider)
+            Logger.Log(
+                functionId,
+                KeyValueLogMessage.Create(m =>
                 {
-                    m[providerKey] = fixAllState.Provider.GetType().FullName!;
-                    m[CodeActionEquivalenceKey] = fixAllState.CodeActionEquivalenceKey;
-                    m[LanguageName] = fixAllState.Project.Language;
-                }
-                else
-                {
-                    m[providerKey] = fixAllState.Provider.GetType().FullName!.GetHashCode().ToString();
-                    m[CodeActionEquivalenceKey] = fixAllState.CodeActionEquivalenceKey?.GetHashCode().ToString();
-                    m[LanguageName] = fixAllState.Project.Language.GetHashCode().ToString();
-                }
+                    m[CorrelationId] = fixAllState.CorrelationId;
 
-                m[FixAllScope] = fixAllState.Scope.ToString();
-                switch (fixAllState.Scope)
-                {
-                    case CodeFixes.FixAllScope.Project:
-                        m[DocumentCount] = fixAllState.Project.DocumentIds.Count;
-                        break;
+                    if (isInternalProvider)
+                    {
+                        m[providerKey] = fixAllState.Provider.GetType().FullName!;
+                        m[CodeActionEquivalenceKey] = fixAllState.CodeActionEquivalenceKey;
+                        m[LanguageName] = fixAllState.Project.Language;
+                    }
+                    else
+                    {
+                        m[providerKey] = fixAllState
+                            .Provider.GetType()
+                            .FullName!.GetHashCode()
+                            .ToString();
+                        m[CodeActionEquivalenceKey] = fixAllState
+                            .CodeActionEquivalenceKey?.GetHashCode()
+                            .ToString();
+                        m[LanguageName] = fixAllState.Project.Language.GetHashCode().ToString();
+                    }
 
-                    case CodeFixes.FixAllScope.Solution:
-                        m[DocumentCount] = fixAllState.Solution.Projects.Sum(p => p.DocumentIds.Count);
-                        break;
-                }
-            }));
+                    m[FixAllScope] = fixAllState.Scope.ToString();
+                    switch (fixAllState.Scope)
+                    {
+                        case CodeFixes.FixAllScope.Project:
+                            m[DocumentCount] = fixAllState.Project.DocumentIds.Count;
+                            break;
+
+                        case CodeFixes.FixAllScope.Solution:
+                            m[DocumentCount] = fixAllState.Solution.Projects.Sum(p =>
+                                p.DocumentIds.Count
+                            );
+                            break;
+                    }
+                })
+            );
         }
 
-        public static void LogComputationResult(FixAllKind fixAllKind, int correlationId, bool completed, bool timedOut = false)
+        public static void LogComputationResult(
+            FixAllKind fixAllKind,
+            int correlationId,
+            bool completed,
+            bool timedOut = false
+        )
         {
             Contract.ThrowIfTrue(completed && timedOut);
 
@@ -112,17 +127,25 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             {
                 FixAllKind.CodeFix => FunctionId.CodeFixes_FixAllOccurrencesComputation,
                 FixAllKind.Refactoring => FunctionId.Refactoring_FixAllOccurrencesComputation,
-                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
+                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
             };
 
-            Logger.Log(functionId, KeyValueLogMessage.Create(m =>
-            {
-                m[CorrelationId] = correlationId;
-                m[Result] = value;
-            }));
+            Logger.Log(
+                functionId,
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[CorrelationId] = correlationId;
+                    m[Result] = value;
+                })
+            );
         }
 
-        public static void LogPreviewChangesResult(FixAllKind fixAllKind, int? correlationId, bool applied, bool allChangesApplied = true)
+        public static void LogPreviewChangesResult(
+            FixAllKind fixAllKind,
+            int? correlationId,
+            bool applied,
+            bool allChangesApplied = true
+        )
         {
             string value;
             if (applied)
@@ -138,51 +161,76 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             {
                 FixAllKind.CodeFix => FunctionId.CodeFixes_FixAllOccurrencesPreviewChanges,
                 FixAllKind.Refactoring => FunctionId.Refactoring_FixAllOccurrencesPreviewChanges,
-                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
+                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
             };
 
-            Logger.Log(functionId, KeyValueLogMessage.Create(m =>
-            {
-                // we might not have this info for suppression
-                if (correlationId.HasValue)
+            Logger.Log(
+                functionId,
+                KeyValueLogMessage.Create(m =>
+                {
+                    // we might not have this info for suppression
+                    if (correlationId.HasValue)
+                    {
+                        m[CorrelationId] = correlationId;
+                    }
+
+                    m[Result] = value;
+                })
+            );
+        }
+
+        public static void LogDiagnosticsStats(
+            int correlationId,
+            ImmutableDictionary<
+                Document,
+                ImmutableArray<Diagnostic>
+            > documentsAndDiagnosticsToFixMap
+        )
+        {
+            Logger.Log(
+                FunctionId.CodeFixes_FixAllOccurrencesComputation_Document_Diagnostics,
+                KeyValueLogMessage.Create(m =>
                 {
                     m[CorrelationId] = correlationId;
-                }
-
-                m[Result] = value;
-            }));
+                    m[DocumentsWithDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Count;
+                    m[TotalDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Values.Sum(v =>
+                        v.Length
+                    );
+                })
+            );
         }
 
-        public static void LogDiagnosticsStats(int correlationId, ImmutableDictionary<Document, ImmutableArray<Diagnostic>> documentsAndDiagnosticsToFixMap)
+        public static void LogDiagnosticsStats(
+            int correlationId,
+            ImmutableDictionary<Project, ImmutableArray<Diagnostic>> projectsAndDiagnosticsToFixMap
+        )
         {
-            Logger.Log(FunctionId.CodeFixes_FixAllOccurrencesComputation_Document_Diagnostics, KeyValueLogMessage.Create(m =>
-            {
-                m[CorrelationId] = correlationId;
-                m[DocumentsWithDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Count;
-                m[TotalDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Values.Sum(v => v.Length);
-            }));
-        }
-
-        public static void LogDiagnosticsStats(int correlationId, ImmutableDictionary<Project, ImmutableArray<Diagnostic>> projectsAndDiagnosticsToFixMap)
-        {
-            Logger.Log(FunctionId.CodeFixes_FixAllOccurrencesComputation_Project_Diagnostics, KeyValueLogMessage.Create(m =>
-            {
-                m[CorrelationId] = correlationId;
-                m[ProjectsWithDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Count;
-                m[TotalDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Values.Sum(v => v.Length);
-            }));
+            Logger.Log(
+                FunctionId.CodeFixes_FixAllOccurrencesComputation_Project_Diagnostics,
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[CorrelationId] = correlationId;
+                    m[ProjectsWithDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Count;
+                    m[TotalDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Values.Sum(v =>
+                        v.Length
+                    );
+                })
+            );
         }
 
         public static void LogFixesToMergeStats(FunctionId functionId, int correlationId, int count)
         {
-            Logger.Log(functionId, KeyValueLogMessage.Create(m =>
-            {
-                m[CorrelationId] = correlationId;
-                m[TotalFixesToMerge] = count;
-            }));
+            Logger.Log(
+                functionId,
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[CorrelationId] = correlationId;
+                    m[TotalFixesToMerge] = count;
+                })
+            );
         }
 
-        public static LogMessage CreateCorrelationLogMessage(int correlationId)
-            => KeyValueLogMessage.Create(LogType.UserAction, m => m[CorrelationId] = correlationId);
+        public static LogMessage CreateCorrelationLogMessage(int correlationId) =>
+            KeyValueLogMessage.Create(LogType.UserAction, m => m[CorrelationId] = correlationId);
     }
 }

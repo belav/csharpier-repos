@@ -45,12 +45,16 @@ namespace Roslyn.Test.Performance.Utilities
 
         public void AddStartEvent(int absoluteInstance)
         {
-            WriteToBuffer($@"<from providerGuid=""{KernelProviderGuid}"" absoluteInstance=""{absoluteInstance}"" process=""csc"" eventName = ""Process/Start""/>");
+            WriteToBuffer(
+                $@"<from providerGuid=""{KernelProviderGuid}"" absoluteInstance=""{absoluteInstance}"" process=""csc"" eventName = ""Process/Start""/>"
+            );
         }
 
         public void AddEndEvent()
         {
-            WriteToBuffer($@"<to providerGuid=""{KernelProviderGuid}"" absoluteInstance=""1"" process=""csc"" eventName=""Process/Stop""/>");
+            WriteToBuffer(
+                $@"<to providerGuid=""{KernelProviderGuid}"" absoluteInstance=""1"" process=""csc"" eventName=""Process/Stop""/>"
+            );
         }
 
         public void AddComment(string comment)

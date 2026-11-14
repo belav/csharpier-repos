@@ -115,8 +115,7 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement>
     public override FormDataConverter CreateConverter(Type _, FormDataMapperOptions options)
     {
         // Resolve the element type converter
-        var elementTypeConverter =
-            options.ResolveConverter<TElement>()
+        var elementTypeConverter = options.ResolveConverter<TElement>()
             ?? throw new InvalidOperationException(
                 $"Unable to create converter for '{typeof(TCollection).FullName}'."
             );

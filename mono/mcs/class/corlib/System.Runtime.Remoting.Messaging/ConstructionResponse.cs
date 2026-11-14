@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,31 +36,30 @@ using System.Runtime.Serialization;
 
 namespace System.Runtime.Remoting.Messaging
 {
-	[Serializable] [CLSCompliant (false)]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ConstructionResponse: MethodResponse, IConstructionReturnMessage
-	{
-		public ConstructionResponse (Header[] h, IMethodCallMessage mcm)
-			: base (h, mcm)
-		{
-		}
-		
-		internal ConstructionResponse(object resultObject, LogicalCallContext callCtx, IMethodCallMessage msg)
-			: base (resultObject, null, callCtx, msg)
-		{
-		}
+    [Serializable]
+    [CLSCompliant(false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class ConstructionResponse : MethodResponse, IConstructionReturnMessage
+    {
+        public ConstructionResponse(Header[] h, IMethodCallMessage mcm)
+            : base(h, mcm) { }
 
-		internal ConstructionResponse (Exception e, IMethodCallMessage msg): base (e, msg)
-		{
-		}
-		
-		internal ConstructionResponse (SerializationInfo info, StreamingContext context): base (info, context)
-		{
-		}
-		
-		public override IDictionary Properties 
-		{
-			get { return base.Properties; }
-		}
-	}
+        internal ConstructionResponse(
+            object resultObject,
+            LogicalCallContext callCtx,
+            IMethodCallMessage msg
+        )
+            : base(resultObject, null, callCtx, msg) { }
+
+        internal ConstructionResponse(Exception e, IMethodCallMessage msg)
+            : base(e, msg) { }
+
+        internal ConstructionResponse(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+
+        public override IDictionary Properties
+        {
+            get { return base.Properties; }
+        }
+    }
 }

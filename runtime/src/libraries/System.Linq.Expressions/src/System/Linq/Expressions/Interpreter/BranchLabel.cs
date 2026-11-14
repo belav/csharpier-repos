@@ -21,7 +21,10 @@ namespace System.Linq.Expressions.Interpreter
         }
 
         public override string ToString() =>
-            string.Create(CultureInfo.InvariantCulture, $"->{Index} C({ContinuationStackDepth}) S({StackDepth})");
+            string.Create(
+                CultureInfo.InvariantCulture,
+                $"->{Index} C({ContinuationStackDepth}) S({StackDepth})"
+            );
     }
 
     internal sealed class BranchLabel
@@ -43,7 +46,11 @@ namespace System.Linq.Expressions.Interpreter
 
         internal RuntimeLabel ToRuntimeLabel()
         {
-            Debug.Assert(_targetIndex != UnknownIndex && _stackDepth != UnknownDepth && _continuationStackDepth != UnknownDepth);
+            Debug.Assert(
+                _targetIndex != UnknownIndex
+                    && _stackDepth != UnknownDepth
+                    && _continuationStackDepth != UnknownDepth
+            );
             return new RuntimeLabel(_targetIndex, _continuationStackDepth, _stackDepth);
         }
 
@@ -68,7 +75,9 @@ namespace System.Linq.Expressions.Interpreter
         internal void AddBranch(InstructionList instructions, int branchIndex)
         {
             Debug.Assert(((_targetIndex == UnknownIndex) == (_stackDepth == UnknownDepth)));
-            Debug.Assert(((_targetIndex == UnknownIndex) == (_continuationStackDepth == UnknownDepth)));
+            Debug.Assert(
+                ((_targetIndex == UnknownIndex) == (_continuationStackDepth == UnknownDepth))
+            );
 
             if (_targetIndex == UnknownIndex)
             {

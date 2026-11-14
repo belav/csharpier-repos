@@ -49,25 +49,29 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeObject()
         {
-            string json = @"
+            string json =
+                @"
   {
     ""Value"": ""2017-12-05T21:59:00""
   }";
 
-            DateTimeWrapper c1 = JsonConvert.DeserializeObject<DateTimeWrapper>(json, new JsonSerializerSettings()
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc
-            });
+            DateTimeWrapper c1 = JsonConvert.DeserializeObject<DateTimeWrapper>(
+                json,
+                new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc }
+            );
 
-            DateTimeWrapper c2 = JsonConvert.DeserializeObject<DateTimeWrapper>(json, new JsonSerializerSettings()
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Local
-            });
+            DateTimeWrapper c2 = JsonConvert.DeserializeObject<DateTimeWrapper>(
+                json,
+                new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Local }
+            );
 
-            DateTimeWrapper c3 = JsonConvert.DeserializeObject<DateTimeWrapper>(json, new JsonSerializerSettings()
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Unspecified
-            });
+            DateTimeWrapper c3 = JsonConvert.DeserializeObject<DateTimeWrapper>(
+                json,
+                new JsonSerializerSettings()
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
+                }
+            );
 
             DateTimeWrapper c4 = JsonConvert.DeserializeObject<DateTimeWrapper>(json);
 
@@ -80,27 +84,34 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeFromJObject()
         {
-            string json = @"
+            string json =
+                @"
   {
     ""Value"": ""2017-12-05T21:59:00""
   }";
 
             JObject jo = JObject.Parse(json);
 
-            DateTimeWrapper c1 = jo.ToObject<DateTimeWrapper>(JsonSerializer.Create(new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc
-            }));
+            DateTimeWrapper c1 = jo.ToObject<DateTimeWrapper>(
+                JsonSerializer.Create(
+                    new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Utc }
+                )
+            );
 
-            DateTimeWrapper c2 = jo.ToObject<DateTimeWrapper>(JsonSerializer.Create(new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Local
-            }));
+            DateTimeWrapper c2 = jo.ToObject<DateTimeWrapper>(
+                JsonSerializer.Create(
+                    new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Local }
+                )
+            );
 
-            DateTimeWrapper c3 = jo.ToObject<DateTimeWrapper>(JsonSerializer.Create(new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Unspecified
-            }));
+            DateTimeWrapper c3 = jo.ToObject<DateTimeWrapper>(
+                JsonSerializer.Create(
+                    new JsonSerializerSettings
+                    {
+                        DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
+                    }
+                )
+            );
 
             DateTimeWrapper c4 = jo.ToObject<DateTimeWrapper>();
 

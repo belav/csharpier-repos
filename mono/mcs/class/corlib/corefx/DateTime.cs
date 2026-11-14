@@ -4,16 +4,16 @@
 
 using System;
 using System.Runtime;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace System
 {
     partial struct DateTime
     {
-        public static DateTime UtcNow 
+        public static DateTime UtcNow
         {
-            get 
+            get
             {
                 long ticks = GetSystemTimeAsFileTime();
                 return new DateTime(((UInt64)(ticks + FileTimeOffset)) | KindUtc);

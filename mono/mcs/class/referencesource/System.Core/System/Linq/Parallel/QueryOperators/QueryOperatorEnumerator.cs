@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -21,7 +21,7 @@ using System.Core; // for System.Core.SR
 namespace System.Linq.Parallel
 {
     /// <summary>
-    /// A common enumerator type that unifies all query operator enumerators. 
+    /// A common enumerator type that unifies all query operator enumerators.
     /// </summary>
     /// <typeparam name="TElement"></typeparam>
     /// <typeparam name="TKey"></typeparam>
@@ -61,7 +61,9 @@ namespace System.Linq.Parallel
             private QueryOperatorEnumerator<TElement, TKey> m_operatorEnumerator;
             private TElement m_current;
 
-            internal QueryOperatorClassicEnumerator(QueryOperatorEnumerator<TElement, TKey> operatorEnumerator)
+            internal QueryOperatorClassicEnumerator(
+                QueryOperatorEnumerator<TElement, TKey> operatorEnumerator
+            )
             {
                 Contract.Assert(operatorEnumerator != null);
                 m_operatorEnumerator = operatorEnumerator;

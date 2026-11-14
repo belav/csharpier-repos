@@ -21,8 +21,10 @@ namespace BuildBoss
         internal ProjectFileType ProjectFileType => ProjectEntryUtil.GetProjectFileType(FilePath);
 
         internal bool IsTestProject => IsUnitTestProject || IsIntegrationTestProject;
-        internal bool IsUnitTestProject => Path.GetFileNameWithoutExtension(FilePath).EndsWith(".UnitTests");
-        internal bool IsIntegrationTestProject => Path.GetFileNameWithoutExtension(FilePath).EndsWith(".IntegrationTests");
+        internal bool IsUnitTestProject =>
+            Path.GetFileNameWithoutExtension(FilePath).EndsWith(".UnitTests");
+        internal bool IsIntegrationTestProject =>
+            Path.GetFileNameWithoutExtension(FilePath).EndsWith(".IntegrationTests");
 
         internal ProjectData(string filePath)
         {

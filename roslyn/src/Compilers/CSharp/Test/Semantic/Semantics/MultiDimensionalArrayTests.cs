@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // Verify that operations on multidimensional arrays work and cause side effects only once.
 
-            string source = @"
+            string source =
+                @"
 using System;
 class P
 {
@@ -83,7 +84,8 @@ class P
   }
 
 }";
-            string expected = @"A0B1C2t
+            string expected =
+                @"A0B1C2t
 A3B4C5t
 A6B7C8t
 A9B10C11t
@@ -103,7 +105,8 @@ A30B31C32t";
         {
             // Verify that operations on multidimensional arrays work and cause side effects only once.
 
-            string source = @"
+            string source =
+                @"
 using System;
 class P
 {
@@ -135,7 +138,8 @@ class P
                 Console.Write(d[j,k,l]);
   }
 }";
-            string expected = @"123456789101112
+            string expected =
+                @"123456789101112
 1234588899989101112
 888888888999999999999888999101112";
 
@@ -145,7 +149,8 @@ class P
         [Fact]
         public void TestMultiDimensionalArrayForEach()
         {
-            string source = @"
+            string source =
+                @"
 public class C
 {
     public static void Main()
@@ -166,7 +171,8 @@ public class C
         [Fact()]
         public void MultiDimArrayGenericTypeWiderThanArrayType()
         {
-            string source = @"
+            string source =
+                @"
 class Program { 
     public static void Ref<T>(T[,] array) 
     {
@@ -188,21 +194,23 @@ class Program {
         public void MissingNestedArrayInitializerWithNullConst()
         {
             var text =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         int?[ , ] ar1 = { null  };
     }
 }";
-            CreateCompilation(text).VerifyDiagnostics(
-// (5,27): error CS0846: A nested array initializer is expected
-//         int?[ , ] ar1 = { null  };
-Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "null")
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (5,27): error CS0846: A nested array initializer is expected
+                    //         int?[ , ] ar1 = { null  };
+                    Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "null")
                 );
         }
 
-        private static readonly string s_arraysOfRank1IlSource = @"
+        private static readonly string s_arraysOfRank1IlSource =
+            @"
 .class public auto ansi beforefieldinit Test
        extends [mscorlib]System.Object
 {
@@ -282,12 +290,18 @@ Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "null")
 } // end of class Test
 ";
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void ArraysOfRank1_GetElement()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -295,13 +309,20 @@ Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "null")
         System.Console.WriteLine(t.Test1()[0]);
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(compilation, expectedOutput:
-@"Test1
--100");
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
+-100"
+            );
 
-            verifier.VerifyIL("C.Main",
-@"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -312,15 +333,22 @@ Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "null")
   IL_0010:  call       ""void System.Console.WriteLine(double)""
   IL_0015:  ret
 }
-");
+"
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void ArraysOfRank1_SetElement()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -330,14 +358,21 @@ Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "null")
         System.Console.WriteLine(t.Test2(a));
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(compilation, expectedOutput:
-@"Test1
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
 Test2
-123");
+123"
+            );
 
-            verifier.VerifyIL("C.Main",
-@"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  4
@@ -355,15 +390,22 @@ Test2
   IL_0022:  call       ""void System.Console.WriteLine(double)""
   IL_0027:  ret
 }
-");
+"
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void ArraysOfRank1_ElementAddress()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -378,14 +420,21 @@ Test2
         val = 123;
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(compilation, expectedOutput:
-@"Test1
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
 Test2
-123");
+123"
+            );
 
-            verifier.VerifyIL("C.Main",
-@"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       36 (0x24)
   .maxstack  3
@@ -403,55 +452,86 @@ Test2
   IL_001e:  call       ""void System.Console.WriteLine(double)""
   IL_0023:  ret
 }
-");
+"
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [Fact]
         public void ArraysOfRank1_Overriding01()
         {
             var source =
-@"class C : Test
+                @"class C : Test
 {
     public override double[] Test1()
     {
         return null;
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseDll);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseDll
+            );
             compilation.VerifyDiagnostics(
-    // (3,30): error CS0508: 'C.Test1()': return type must be 'double[*]' to match overridden member 'Test.Test1()'
-    //     public override double[] Test1()
-    Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "Test1").WithArguments("C.Test1()", "Test.Test1()", "double[*]").WithLocation(3, 30)
-                );
+                // (3,30): error CS0508: 'C.Test1()': return type must be 'double[*]' to match overridden member 'Test.Test1()'
+                //     public override double[] Test1()
+                Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "Test1")
+                    .WithArguments("C.Test1()", "Test.Test1()", "double[*]")
+                    .WithLocation(3, 30)
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [Fact]
         public void ArraysOfRank1_Overriding02()
         {
             var source =
-@"class C : Test
+                @"class C : Test
 {
     public override double Test2(double[] x)
     {
         return x[0];
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseDll);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseDll
+            );
             compilation.VerifyDiagnostics(
-    // (3,28): error CS0115: 'C.Test2(double[])': no suitable method found to override
-    //     public override double Test2(double[] x)
-    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "Test2").WithArguments("C.Test2(double[])").WithLocation(3, 28)
-                );
+                // (3,28): error CS0115: 'C.Test2(double[])': no suitable method found to override
+                //     public override double Test2(double[] x)
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "Test2")
+                    .WithArguments("C.Test2(double[])")
+                    .WithLocation(3, 28)
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [Fact]
         public void ArraysOfRank1_Conversions()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -469,38 +549,65 @@ Test2
         mdarray = new [] { 3.0d };
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics(
-    // (6,23): error CS0029: Cannot implicitly convert type 'double[*]' to 'double[]'
-    //         double[] a1 = t.Test1();
-    Diagnostic(ErrorCode.ERR_NoImplicitConv, "t.Test1()").WithArguments("double[*]", "double[]").WithLocation(6, 23),
-    // (7,23): error CS0030: Cannot convert type 'double[*]' to 'double[]'
-    //         double[] a2 = (double[])t.Test1();
-    Diagnostic(ErrorCode.ERR_NoExplicitConv, "(double[])t.Test1()").WithArguments("double[*]", "double[]").WithLocation(7, 23),
-    // (8,55): error CS0029: Cannot implicitly convert type 'double[*]' to 'System.Collections.Generic.IList<double>'
-    //         System.Collections.Generic.IList<double> a3 = t.Test1();
-    Diagnostic(ErrorCode.ERR_NoImplicitConv, "t.Test1()").WithArguments("double[*]", "System.Collections.Generic.IList<double>").WithLocation(8, 55),
-    // (10,17): error CS1503: Argument 1: cannot convert from 'double[]' to 'double[*]'
-    //         t.Test2(a4);
-    Diagnostic(ErrorCode.ERR_BadArgType, "a4").WithArguments("1", "double[]", "double[*]").WithLocation(10, 17),
-    // (11,18): error CS0030: Cannot convert type 'double[*]' to 'System.Collections.Generic.IList<double>'
-    //         var a5 = (System.Collections.Generic.IList<double>)t.Test1();
-    Diagnostic(ErrorCode.ERR_NoExplicitConv, "(System.Collections.Generic.IList<double>)t.Test1()").WithArguments("double[*]", "System.Collections.Generic.IList<double>").WithLocation(11, 18),
-    // (14,19): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.IList<double>' to 'double[*]'
-    //         mdarray = ilist;
-    Diagnostic(ErrorCode.ERR_NoImplicitConv, "ilist").WithArguments("System.Collections.Generic.IList<double>", "double[*]").WithLocation(14, 19),
-    // (16,19): error CS0029: Cannot implicitly convert type 'double[]' to 'double[*]'
-    //         mdarray = new [] { 3.0d };
-    Diagnostic(ErrorCode.ERR_NoImplicitConv, "new [] { 3.0d }").WithArguments("double[]", "double[*]").WithLocation(16, 19)
-                );
+                // (6,23): error CS0029: Cannot implicitly convert type 'double[*]' to 'double[]'
+                //         double[] a1 = t.Test1();
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "t.Test1()")
+                    .WithArguments("double[*]", "double[]")
+                    .WithLocation(6, 23),
+                // (7,23): error CS0030: Cannot convert type 'double[*]' to 'double[]'
+                //         double[] a2 = (double[])t.Test1();
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(double[])t.Test1()")
+                    .WithArguments("double[*]", "double[]")
+                    .WithLocation(7, 23),
+                // (8,55): error CS0029: Cannot implicitly convert type 'double[*]' to 'System.Collections.Generic.IList<double>'
+                //         System.Collections.Generic.IList<double> a3 = t.Test1();
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "t.Test1()")
+                    .WithArguments("double[*]", "System.Collections.Generic.IList<double>")
+                    .WithLocation(8, 55),
+                // (10,17): error CS1503: Argument 1: cannot convert from 'double[]' to 'double[*]'
+                //         t.Test2(a4);
+                Diagnostic(ErrorCode.ERR_BadArgType, "a4")
+                    .WithArguments("1", "double[]", "double[*]")
+                    .WithLocation(10, 17),
+                // (11,18): error CS0030: Cannot convert type 'double[*]' to 'System.Collections.Generic.IList<double>'
+                //         var a5 = (System.Collections.Generic.IList<double>)t.Test1();
+                Diagnostic(
+                        ErrorCode.ERR_NoExplicitConv,
+                        "(System.Collections.Generic.IList<double>)t.Test1()"
+                    )
+                    .WithArguments("double[*]", "System.Collections.Generic.IList<double>")
+                    .WithLocation(11, 18),
+                // (14,19): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.IList<double>' to 'double[*]'
+                //         mdarray = ilist;
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "ilist")
+                    .WithArguments("System.Collections.Generic.IList<double>", "double[*]")
+                    .WithLocation(14, 19),
+                // (16,19): error CS0029: Cannot implicitly convert type 'double[]' to 'double[*]'
+                //         mdarray = new [] { 3.0d };
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new [] { 3.0d }")
+                    .WithArguments("double[]", "double[*]")
+                    .WithLocation(16, 19)
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [Fact]
         public void ArraysOfRank1_TypeArgumentInference01()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -529,7 +636,11 @@ Test2
     static void M2<T>(T a, T b){}
     static void M3<T>(System.Collections.Generic.IList<T> a){}
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
 
             var m2 = compilation.GetTypeByMetadataName("Test").GetMember<MethodSymbol>("M2");
             var szArray = (ArrayTypeSymbol)m2.Parameters.First().Type;
@@ -547,39 +658,61 @@ Test2
             Assert.True(mdArray.LowerBounds.IsDefault);
 
             compilation.VerifyDiagnostics(
-    // (10,9): error CS0411: The type arguments for method 'C.M1<T>(T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         M1(md);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1").WithArguments("C.M1<T>(T[])").WithLocation(10, 9),
-    // (13,9): error CS0411: The type arguments for method 'C.M2<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         M2(sz, md);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2").WithArguments("C.M2<T>(T, T)").WithLocation(13, 9),
-    // (14,9): error CS0411: The type arguments for method 'C.M2<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         M2(md, sz);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2").WithArguments("C.M2<T>(T, T)").WithLocation(14, 9),
-    // (16,9): error CS0411: The type arguments for method 'C.M3<T>(IList<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         M3(md);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3").WithArguments("C.M3<T>(System.Collections.Generic.IList<T>)").WithLocation(16, 9),
-    // (18,14): error CS0411: The type arguments for method 'Test.M1<T>(T[*])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         Test.M1(sz);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1").WithArguments("Test.M1<T>(T[*])").WithLocation(18, 14),
-    // (20,21): error CS1503: Argument 2: cannot convert from 'double[]' to 'double[*]'
-    //         Test.M2(sz, sz);
-    Diagnostic(ErrorCode.ERR_BadArgType, "sz").WithArguments("2", "double[]", "double[*]").WithLocation(20, 21),
-    // (21,17): error CS1503: Argument 1: cannot convert from 'double[*]' to 'double[]'
-    //         Test.M2(md, md);
-    Diagnostic(ErrorCode.ERR_BadArgType, "md").WithArguments("1", "double[*]", "double[]").WithLocation(21, 17),
-    // (23,14): error CS0411: The type arguments for method 'Test.M2<T>(T[], T[*])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         Test.M2(md, sz);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2").WithArguments("Test.M2<T>(T[], T[*])").WithLocation(23, 14)
-                );
+                // (10,9): error CS0411: The type arguments for method 'C.M1<T>(T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M1(md);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
+                    .WithArguments("C.M1<T>(T[])")
+                    .WithLocation(10, 9),
+                // (13,9): error CS0411: The type arguments for method 'C.M2<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M2(sz, md);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2")
+                    .WithArguments("C.M2<T>(T, T)")
+                    .WithLocation(13, 9),
+                // (14,9): error CS0411: The type arguments for method 'C.M2<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M2(md, sz);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2")
+                    .WithArguments("C.M2<T>(T, T)")
+                    .WithLocation(14, 9),
+                // (16,9): error CS0411: The type arguments for method 'C.M3<T>(IList<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M3(md);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("C.M3<T>(System.Collections.Generic.IList<T>)")
+                    .WithLocation(16, 9),
+                // (18,14): error CS0411: The type arguments for method 'Test.M1<T>(T[*])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         Test.M1(sz);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
+                    .WithArguments("Test.M1<T>(T[*])")
+                    .WithLocation(18, 14),
+                // (20,21): error CS1503: Argument 2: cannot convert from 'double[]' to 'double[*]'
+                //         Test.M2(sz, sz);
+                Diagnostic(ErrorCode.ERR_BadArgType, "sz")
+                    .WithArguments("2", "double[]", "double[*]")
+                    .WithLocation(20, 21),
+                // (21,17): error CS1503: Argument 1: cannot convert from 'double[*]' to 'double[]'
+                //         Test.M2(md, md);
+                Diagnostic(ErrorCode.ERR_BadArgType, "md")
+                    .WithArguments("1", "double[*]", "double[]")
+                    .WithLocation(21, 17),
+                // (23,14): error CS0411: The type arguments for method 'Test.M2<T>(T[], T[*])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         Test.M2(md, sz);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2")
+                    .WithArguments("Test.M2<T>(T[], T[*])")
+                    .WithLocation(23, 14)
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void ArraysOfRank1_TypeArgumentInference02()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -598,21 +731,33 @@ Test2
         System.Console.WriteLine(typeof(T));
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
-            CompileAndVerify(compilation, expectedOutput:
-@"Test1
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
 System.Double[*]
 System.Double
 System.Double
-");
+"
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void ArraysOfRank1_ForEach()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -623,13 +768,20 @@ System.Double
         }
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(compilation, expectedOutput:
-@"Test1
--100");
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
+-100"
+            );
 
-            verifier.VerifyIL("C.Main",
-@"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       50 (0x32)
   .maxstack  2
@@ -661,15 +813,22 @@ System.Double
   IL_002f:  ble.s      IL_001d
   IL_0031:  ret
 }
-");
+"
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void ArraysOfRank1_Length()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -677,13 +836,20 @@ System.Double
         System.Console.WriteLine(t.Test1().Length);
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(compilation, expectedOutput:
-@"Test1
-1");
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
+1"
+            );
 
-            verifier.VerifyIL("C.Main",
-@"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  1
@@ -693,15 +859,22 @@ System.Double
   IL_000f:  call       ""void System.Console.WriteLine(int)""
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void ArraysOfRank1_LongLength()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -709,13 +882,20 @@ System.Double
         System.Console.WriteLine(t.Test1().LongLength);
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(compilation, expectedOutput:
-@"Test1
-1");
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
+1"
+            );
 
-            verifier.VerifyIL("C.Main",
-@"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  1
@@ -725,15 +905,22 @@ System.Double
   IL_000f:  call       ""void System.Console.WriteLine(long)""
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
-        [WorkItem(126766, "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"), WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")]
+        [
+            WorkItem(
+                126766,
+                "https://devdiv.visualstudio.com:443/defaultcollection/DevDiv/_workitems/edit/126766"
+            ),
+            WorkItem(4924, "https://github.com/dotnet/roslyn/issues/4924")
+        ]
         [Fact]
         public void ArraysOfRank1_ParamArray()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -743,22 +930,31 @@ System.Double
         t.Test3(new double [] {d});
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, s_arraysOfRank1IlSource, options: TestOptions.ReleaseDll);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                s_arraysOfRank1IlSource,
+                options: TestOptions.ReleaseDll
+            );
             compilation.VerifyDiagnostics(
-    // (7,17): error CS1503: Argument 1: cannot convert from 'double' to 'params double[*]'
-    //         t.Test3(d);
-    Diagnostic(ErrorCode.ERR_BadArgType, "d").WithArguments("1", "double", "params double[*]").WithLocation(7, 17),
-    // (8,17): error CS1503: Argument 1: cannot convert from 'double[]' to 'params double[*]'
-    //         t.Test3(new double [] {d});
-    Diagnostic(ErrorCode.ERR_BadArgType, "new double [] {d}").WithArguments("1", "double[]", "params double[*]").WithLocation(8, 17)
-                );
+                // (7,17): error CS1503: Argument 1: cannot convert from 'double' to 'params double[*]'
+                //         t.Test3(d);
+                Diagnostic(ErrorCode.ERR_BadArgType, "d")
+                    .WithArguments("1", "double", "params double[*]")
+                    .WithLocation(7, 17),
+                // (8,17): error CS1503: Argument 1: cannot convert from 'double[]' to 'params double[*]'
+                //         t.Test3(new double [] {d});
+                Diagnostic(ErrorCode.ERR_BadArgType, "new double [] {d}")
+                    .WithArguments("1", "double[]", "params double[*]")
+                    .WithLocation(8, 17)
+            );
         }
 
         [WorkItem(4954, "https://github.com/dotnet/roslyn/issues/4954")]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void SizesAndLowerBounds_01()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit Test
        extends [mscorlib]System.Object
 {
@@ -962,7 +1158,7 @@ System.Double
 ";
 
             var source =
-@"class C : Test
+                @"class C : Test
 {
     static void Main()
     {
@@ -1087,7 +1283,11 @@ System.Double
     }
 }
 ";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, ilSource, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                ilSource,
+                options: TestOptions.ReleaseExe
+            );
 
             var test = compilation.GetTypeByMetadataName("Test");
             var array = (ArrayTypeSymbol)test.GetMember<MethodSymbol>("Test1").ReturnType;
@@ -1209,8 +1409,9 @@ System.Double
             Assert.Equal(new[] { 5 }, array.Sizes);
             Assert.Equal(new[] { 1 }, array.LowerBounds);
 
-            var verifier = CompileAndVerify(compilation, expectedOutput:
-@"Test1
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
 Test2
 Test3
 Test4
@@ -1242,14 +1443,16 @@ Overridden 13
 Overridden 14
 Overridden 15
 Overridden 16
-");
+"
+            );
         }
 
         [WorkItem(4954, "https://github.com/dotnet/roslyn/issues/4954")]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void SizesAndLowerBounds_02()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit Test
        extends [mscorlib]System.Object
 {
@@ -1426,7 +1629,7 @@ Overridden 16
 ";
 
             var source =
-@"class C : Test
+                @"class C : Test
 {
     static void Main()
     {
@@ -1535,9 +1738,14 @@ Overridden 16
     }
 }
 ";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, ilSource, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(compilation, expectedOutput:
-@"Test1
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                ilSource,
+                options: TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: @"Test1
 Test2
 Test3
 Test4
@@ -1569,14 +1777,16 @@ Overridden 13
 Overridden 14
 Overridden 15
 Overridden 16
-");
+"
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(4958, "https://github.com/dotnet/roslyn/issues/4958")]
         public void ArraysOfRank1_InAttributes()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit Program
        extends [mscorlib]System.Object
 {
@@ -1640,7 +1850,7 @@ Overridden 16
 ";
 
             var source =
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -1675,27 +1885,62 @@ class C
         return (System.Type)typeof(Program).GetMember(target)[0].GetCustomAttributesData().ElementAt(0).ConstructorArguments[0].Value;
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, ilSource, references: new[] { SystemCoreRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                ilSource,
+                references: new[] { SystemCoreRef },
+                options: TestOptions.ReleaseExe
+            );
 
             var p = compilation.GetTypeByMetadataName("Program");
-            var a1 = (IArrayTypeSymbol)p.GetMember<MethodSymbol>("Test1").GetAttributes().Single().ConstructorArguments.Single().Value;
+            var a1 = (IArrayTypeSymbol)
+                p.GetMember<MethodSymbol>("Test1")
+                    .GetAttributes()
+                    .Single()
+                    .ConstructorArguments.Single()
+                    .Value;
             Assert.Equal("System.Int32[]", a1.ToTestDisplayString());
             Assert.Equal(1, a1.Rank);
             Assert.True(a1.IsSZArray);
 
-            var a2 = (IArrayTypeSymbol)p.GetMember<MethodSymbol>("Test2").GetAttributes().Single().ConstructorArguments.Single().Value;
+            var a2 = (IArrayTypeSymbol)
+                p.GetMember<MethodSymbol>("Test2")
+                    .GetAttributes()
+                    .Single()
+                    .ConstructorArguments.Single()
+                    .Value;
             Assert.Equal("System.Int32[*]", a2.ToTestDisplayString());
             Assert.Equal(1, a2.Rank);
             Assert.False(a2.IsSZArray);
 
-            Assert.True(((ITypeSymbol)p.GetMember<MethodSymbol>("Test3").GetAttributes().Single().ConstructorArguments.Single().Value).IsErrorType());
-            Assert.True(((ITypeSymbol)p.GetMember<MethodSymbol>("Test4").GetAttributes().Single().ConstructorArguments.Single().Value).IsErrorType());
+            Assert.True(
+                (
+                    (ITypeSymbol)
+                        p.GetMember<MethodSymbol>("Test3")
+                            .GetAttributes()
+                            .Single()
+                            .ConstructorArguments.Single()
+                            .Value
+                ).IsErrorType()
+            );
+            Assert.True(
+                (
+                    (ITypeSymbol)
+                        p.GetMember<MethodSymbol>("Test4")
+                            .GetAttributes()
+                            .Single()
+                            .ConstructorArguments.Single()
+                            .Value
+                ).IsErrorType()
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"System.Int32[]
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"System.Int32[]
 System.Int32[*]
 Throws
-Throws");
+Throws"
+            );
         }
     }
 }

@@ -11,17 +11,30 @@ namespace System.ServiceModel.Activities
     {
         public abstract HostSettings HostSettings { get; }
 
-        public abstract void Send(MessageContext message, SendSettings settings, InstanceKey correlatesWith, Bookmark sendCompleteBookmark);
+        public abstract void Send(
+            MessageContext message,
+            SendSettings settings,
+            InstanceKey correlatesWith,
+            Bookmark sendCompleteBookmark
+        );
 
         public abstract void Cancel(Bookmark bookmark);
 
         public abstract void OnUninitializeCorrelation(InstanceKey correlationKey);
 
-        public void RegisterReceive(ReceiveSettings settings, InstanceKey correlatesWith, Bookmark receiveBookmark)
+        public void RegisterReceive(
+            ReceiveSettings settings,
+            InstanceKey correlatesWith,
+            Bookmark receiveBookmark
+        )
         {
             this.OnRegisterReceive(settings, correlatesWith, receiveBookmark);
         }
 
-        protected abstract void OnRegisterReceive(ReceiveSettings settings, InstanceKey correlatesWith, Bookmark receiveBookmark);
+        protected abstract void OnRegisterReceive(
+            ReceiveSettings settings,
+            InstanceKey correlatesWith,
+            Bookmark receiveBookmark
+        );
     }
 }

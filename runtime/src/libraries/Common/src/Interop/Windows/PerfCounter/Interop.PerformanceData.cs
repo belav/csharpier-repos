@@ -10,9 +10,7 @@ internal static partial class Interop
     internal static partial class PerfCounter
     {
         [LibraryImport(Libraries.Advapi32)]
-        internal static partial uint PerfStopProvider(
-            IntPtr hProvider
-        );
+        internal static partial uint PerfStopProvider(IntPtr hProvider);
 
         internal unsafe delegate uint PERFLIBREQUEST(
             uint RequestCode,
@@ -60,7 +58,11 @@ internal static partial class Interop
             out SafePerfProviderHandle phProvider
         );
 
-        [LibraryImport(Libraries.Advapi32, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static unsafe partial PerfCounterSetInstanceStruct* PerfCreateInstance(
             SafePerfProviderHandle hProvider,
             ref Guid CounterSetGuid,

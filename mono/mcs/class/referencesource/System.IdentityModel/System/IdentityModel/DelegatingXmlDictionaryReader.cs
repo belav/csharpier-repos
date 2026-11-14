@@ -7,7 +7,7 @@ namespace System.IdentityModel
     using System.Xml;
 
     /// <summary>
-    /// Class wraps a given reader and delegates all XmlDictionaryReader calls 
+    /// Class wraps a given reader and delegates all XmlDictionaryReader calls
     /// to the inner wrapped reader.
     /// </summary>
     public class DelegatingXmlDictionaryReader : XmlDictionaryReader
@@ -17,9 +17,7 @@ namespace System.IdentityModel
         /// <summary>
         /// Initializes a new instance of <see cref="DelegatingXmlDictionaryWriter" />
         /// </summary>
-        protected DelegatingXmlDictionaryReader()
-        {
-        }
+        protected DelegatingXmlDictionaryReader() { }
 
         /// <summary>
         /// Initializes the Inner reader that this instance wraps.
@@ -57,7 +55,7 @@ namespace System.IdentityModel
         /// Gets the value of the attribute with the specified System.Xml.XmlReader.Name.
         /// </summary>
         /// <param name="name">The qualified name of the attribute.</param>
-        /// <returns>The value of the specified attribute. If the attribute is not found, 
+        /// <returns>The value of the specified attribute. If the attribute is not found,
         /// null is returned.</returns>
         public override string this[string name]
         {
@@ -65,12 +63,12 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Gets the value of the attribute with the specified System.Xml.XmlReader.LocalName and 
+        /// Gets the value of the attribute with the specified System.Xml.XmlReader.LocalName and
         /// System.Xml.XmlReader.NamespaceURI from the wrapped reader.
         /// </summary>
         /// <param name="name">The local name of the attribute.</param>
         /// <param name="namespaceURI">The namespace URI of the attribute.</param>
-        /// <returns>The value of the specified attribute. If the attribute is not found, 
+        /// <returns>The value of the specified attribute. If the attribute is not found,
         /// null is returned.</returns>
         public override string this[string name, string namespaceURI]
         {
@@ -110,7 +108,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Gets a value indicating if the current node can have a 
+        /// Gets a value indicating if the current node can have a
         /// System.Xml.XmlReader.Value.
         /// </summary>
         public override bool HasValue
@@ -192,7 +190,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Gets the System.Xml.ReadState of the reader. 
+        /// Gets the System.Xml.ReadState of the reader.
         /// </summary>
         public override ReadState ReadState
         {
@@ -224,7 +222,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Gets the current xml:space scope. If no xml:space scope exists, this property 
+        /// Gets the current xml:space scope. If no xml:space scope exists, this property
         /// defaults to XmlSpace.None.
         /// </summary>
         public override XmlSpace XmlSpace
@@ -308,7 +306,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Moves to the attribute with the specified System.Xml.XmlReader.LocalName and 
+        /// Moves to the attribute with the specified System.Xml.XmlReader.LocalName and
         /// System.Xml.XmlReader.NamespaceURI.
         /// </summary>
         /// <param name="name">The local name of the attribute.</param>

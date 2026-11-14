@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// <summary>
     /// Information early-decoded from well-known custom attributes applied on a parameter.
     /// </summary>
-    internal sealed class ParameterEarlyWellKnownAttributeData : CommonParameterEarlyWellKnownAttributeData
+    internal sealed class ParameterEarlyWellKnownAttributeData
+        : CommonParameterEarlyWellKnownAttributeData
     {
         private bool _hasUnscopedRefAttribute;
         public bool HasUnscopedRefAttribute

@@ -11,7 +11,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventionComplexProperty, IComplexProperty
+public class ComplexProperty
+    : PropertyBase,
+        IMutableComplexProperty,
+        IConventionComplexProperty,
+        IComplexProperty
 {
     private InternalComplexPropertyBuilder? _builder;
     private bool? _isNullable;
@@ -33,7 +37,8 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
         string? targetTypeName,
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type targetType,
         bool collection,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
         : base(name, propertyInfo, fieldInfo, configurationSource)
     {
         ClrType = type;
@@ -41,7 +46,10 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
         IsCollection = collection;
         ComplexType = new ComplexType(
             targetTypeName ?? declaringType.GetOwnedName(targetType.ShortDisplayName(), name),
-            targetType, this, configurationSource);
+            targetType,
+            this,
+            configurationSource
+        );
         _builder = new InternalComplexPropertyBuilder(this, declaringType.Model.Builder);
     }
 
@@ -54,7 +62,9 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     public virtual InternalComplexPropertyBuilder Builder
     {
         [DebuggerStepThrough]
-        get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(Name));
+        get =>
+            _builder
+            ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(Name));
     }
 
     /// <summary>
@@ -79,9 +89,7 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && DeclaringType.IsInModel;
+    public virtual bool IsInModel => _builder is not null && DeclaringType.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -135,7 +143,12 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
             if (!ClrType.IsNullableType())
             {
                 throw new InvalidOperationException(
-                    CoreStrings.CannotBeNullable(Name, DeclaringType.DisplayName(), ClrType.ShortDisplayName()));
+                    CoreStrings.CannotBeNullable(
+                        Name,
+                        DeclaringType.DisplayName(),
+                        ClrType.ShortDisplayName()
+                    )
+                );
             }
         }
 
@@ -143,13 +156,10 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
 
         _isNullable = nullable;
 
-        return isChanging
-            ? OnPropertyNullableChanged()
-            : nullable;
+        return isChanging ? OnPropertyNullableChanged() : nullable;
     }
 
-    private bool DefaultIsNullable
-        => ClrType.IsNullableType();
+    private bool DefaultIsNullable => ClrType.IsNullableType();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -157,8 +167,8 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetIsNullableConfigurationSource()
-        => _isNullableConfigurationSource;
+    public virtual ConfigurationSource? GetIsNullableConfigurationSource() =>
+        _isNullableConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -166,8 +176,8 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual bool? OnPropertyNullableChanged()
-        => DeclaringType.Model.ConventionDispatcher.OnComplexPropertyNullabilityChanged(Builder);
+    protected virtual bool? OnPropertyNullableChanged() =>
+        DeclaringType.Model.ConventionDispatcher.OnComplexPropertyNullabilityChanged(Builder);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -175,8 +185,15 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override FieldInfo? OnFieldInfoSet(FieldInfo? newFieldInfo, FieldInfo? oldFieldInfo)
-        => DeclaringType.Model.ConventionDispatcher.OnComplexPropertyFieldChanged(Builder, newFieldInfo, oldFieldInfo);
+    protected override FieldInfo? OnFieldInfoSet(
+        FieldInfo? newFieldInfo,
+        FieldInfo? oldFieldInfo
+    ) =>
+        DeclaringType.Model.ConventionDispatcher.OnComplexPropertyFieldChanged(
+            Builder,
+            newFieldInfo,
+            oldFieldInfo
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -207,11 +224,11 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
         TypeBase sourceType,
         Type targetType,
         bool shouldBeCollection,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         var memberClrType = memberInfo.GetMemberType().TryGetSequenceType();
-        if (shouldBeCollection
-            && memberClrType?.IsAssignableFrom(targetType) != true)
+        if (shouldBeCollection && memberClrType?.IsAssignableFrom(targetType) != true)
         {
             if (shouldThrow)
             {
@@ -220,14 +237,15 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
                         propertyName,
                         sourceType.DisplayName(),
                         memberInfo.GetMemberType().ShortDisplayName(),
-                        targetType.ShortDisplayName()));
+                        targetType.ShortDisplayName()
+                    )
+                );
             }
 
             return false;
         }
 
-        if (!shouldBeCollection
-            && !memberInfo.GetMemberType().IsAssignableFrom(targetType))
+        if (!shouldBeCollection && !memberInfo.GetMemberType().IsAssignableFrom(targetType))
         {
             if (shouldThrow)
             {
@@ -236,7 +254,9 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
                         propertyName,
                         sourceType.DisplayName(),
                         memberInfo.GetMemberType().ShortDisplayName(),
-                        targetType.ShortDisplayName()));
+                        targetType.ShortDisplayName()
+                    )
+                );
             }
 
             return false;
@@ -255,8 +275,14 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     protected override IConventionAnnotation? OnAnnotationSet(
         string name,
         IConventionAnnotation? annotation,
-        IConventionAnnotation? oldAnnotation)
-        => DeclaringType.Model.ConventionDispatcher.OnComplexPropertyAnnotationChanged(Builder, name, annotation, oldAnnotation);
+        IConventionAnnotation? oldAnnotation
+    ) =>
+        DeclaringType.Model.ConventionDispatcher.OnComplexPropertyAnnotationChanged(
+            Builder,
+            name,
+            annotation,
+            oldAnnotation
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -264,10 +290,14 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyComplexProperty)this).ToDebugString(),
-            () => ((IReadOnlyComplexProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IReadOnlyComplexProperty)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -275,8 +305,10 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IReadOnlyComplexProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyComplexProperty)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -344,7 +376,9 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    bool? IConventionComplexProperty.SetIsNullable(bool? nullable, bool fromDataAnnotation)
-        => SetIsNullable(
-            nullable, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionComplexProperty.SetIsNullable(bool? nullable, bool fromDataAnnotation) =>
+        SetIsNullable(
+            nullable,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

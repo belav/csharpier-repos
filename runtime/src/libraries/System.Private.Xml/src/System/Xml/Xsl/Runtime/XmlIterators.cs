@@ -14,11 +14,10 @@ namespace System.Xml.Xsl.Runtime
     [EditorBrowsable(EditorBrowsableState.Never)]
     public enum IteratorResult
     {
-        NoMoreNodes,                // Iteration is complete; there are no more nodes
-        NeedInputNode,              // The next node needs to be fetched from the contained iterator before iteration can continue
-        HaveCurrentNode,            // This iterator's Current property is set to the next node in the iteration
+        NoMoreNodes, // Iteration is complete; there are no more nodes
+        NeedInputNode, // The next node needs to be fetched from the contained iterator before iteration can continue
+        HaveCurrentNode, // This iterator's Current property is set to the next node in the iteration
     };
-
 
     /// <summary>
     /// Tokenize a string containing IDREF values and deref the values in order to get a list of ID elements.
@@ -44,8 +43,7 @@ namespace System.Xml.Xsl.Runtime
                 _idx++;
                 if (_idx >= _idrefs.Length)
                     return false;
-            }
-            while (!_navCurrent.MoveToId(_idrefs[_idx]));
+            } while (!_navCurrent.MoveToId(_idrefs[_idx]));
 
             return true;
         }

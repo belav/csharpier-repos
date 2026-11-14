@@ -3,9 +3,8 @@
 
 using System;
 using System.Diagnostics;
-
-using Internal.Text;
 using Internal.ReadyToRunConstants;
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -39,7 +38,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return _helperID.CompareTo(((ReadyToRunHelperSignature) other)._helperID);
+            return _helperID.CompareTo(((ReadyToRunHelperSignature)other)._helperID);
         }
     }
 }

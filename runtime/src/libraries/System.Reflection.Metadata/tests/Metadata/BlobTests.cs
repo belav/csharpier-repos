@@ -50,7 +50,10 @@ namespace System.Reflection.Metadata.Tests
             builder.WriteInt64(1);
             Assert.Equal(8, builder.Count);
 
-            AssertEx.Equal(new byte[] { 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[] { 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+                builder.ToArray()
+            );
         }
 
         private void TestContentEquals(byte[] left, byte[] right)
@@ -79,43 +82,493 @@ namespace System.Reflection.Metadata.Tests
 
             TestContentEquals(
                 new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }
+            );
 
             TestContentEquals(
                 new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }
+            );
 
             TestContentEquals(
                 new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }
+            );
 
             TestContentEquals(
                 new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }
+            );
 
             TestContentEquals(
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                },
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                }
+            );
 
             TestContentEquals(
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                },
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                }
+            );
 
             TestContentEquals(
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 });
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                },
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                }
+            );
 
             TestContentEquals(
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 });
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                },
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                }
+            );
 
             TestContentEquals(
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 99, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 });
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    99,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                },
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                }
+            );
 
             TestContentEquals(
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 99, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 });
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                },
+                new byte[]
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    99,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                }
+            );
         }
 
         [Fact]
@@ -195,7 +648,29 @@ namespace System.Reflection.Metadata.Tests
 
             builder.WriteUInt32(0xaabbccdd);
 
-            AssertEx.Equal(new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0xDD, 0xCC, 0xBB, 0xAA }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0xDD,
+                    0xCC,
+                    0xBB,
+                    0xAA,
+                },
+                builder.ToArray()
+            );
             AssertEx.Equal(new byte[] { }, builder.ToArray(0, 0));
             AssertEx.Equal(new byte[] { 0 }, builder.ToArray(0, 1));
             AssertEx.Equal(new byte[] { 1 }, builder.ToArray(1, 1));
@@ -232,19 +707,73 @@ namespace System.Reflection.Metadata.Tests
                 builder.WriteByte((byte)i);
             }
 
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
-                0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
-                0x20, 0x21
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0x14,
+                    0x15,
+                    0x16,
+                    0x17,
+                    0x18,
+                    0x19,
+                    0x1A,
+                    0x1B,
+                    0x1C,
+                    0x1D,
+                    0x1E,
+                    0x1F,
+                    0x20,
+                    0x21,
+                },
+                builder.ToArray()
+            );
 
-            AssertEx.Equal(new byte[]
-            {
-                0x0E, 0x0F,
-                0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
-                0x20, 0x21
-            }, builder.ToArray(0x0e, 20));
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0x14,
+                    0x15,
+                    0x16,
+                    0x17,
+                    0x18,
+                    0x19,
+                    0x1A,
+                    0x1B,
+                    0x1C,
+                    0x1D,
+                    0x1E,
+                    0x1F,
+                    0x20,
+                    0x21,
+                },
+                builder.ToArray(0x0e, 20)
+            );
 
             AssertEx.Equal(new byte[] { 0x0E }, builder.ToArray(0x0e, 1));
             AssertEx.Equal(new byte[] { 0x0E, 0x0F }, builder.ToArray(0x0e, 2));
@@ -283,7 +812,29 @@ namespace System.Reflection.Metadata.Tests
 
             builder.WriteUInt32(0xaabbccdd);
 
-            AssertEx.Equal(new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0xDD, 0xCC, 0xBB, 0xAA }, builder.ToImmutableArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0xDD,
+                    0xCC,
+                    0xBB,
+                    0xAA,
+                },
+                builder.ToImmutableArray()
+            );
             AssertEx.Equal(new byte[] { }, builder.ToImmutableArray(0, 0));
             AssertEx.Equal(new byte[] { 0 }, builder.ToImmutableArray(0, 1));
             AssertEx.Equal(new byte[] { 1 }, builder.ToImmutableArray(1, 1));
@@ -331,20 +882,83 @@ namespace System.Reflection.Metadata.Tests
 
             var stream = new MemoryStream();
             builder.WriteContentTo(stream);
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13
-            }, stream.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                },
+                stream.ToArray()
+            );
 
             builder.WriteByte(0xff);
 
             builder.WriteContentTo(stream);
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
-                0xff,
-            }, stream.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0xff,
+                },
+                stream.ToArray()
+            );
         }
 
         [Fact]
@@ -354,7 +968,9 @@ namespace System.Reflection.Metadata.Tests
             builder.WriteByte(1);
 
             Assert.Throws<ArgumentNullException>(() => builder.WriteContentTo((Stream)null));
-            Assert.Throws<NotSupportedException>(() => builder.WriteContentTo(new MemoryStream(new byte[] { 1 }, writable: false)));
+            Assert.Throws<NotSupportedException>(() =>
+                builder.WriteContentTo(new MemoryStream(new byte[] { 1 }, writable: false))
+            );
         }
 
         [Fact]
@@ -368,20 +984,83 @@ namespace System.Reflection.Metadata.Tests
 
             var writer = new BlobWriter(256);
             builder.WriteContentTo(ref writer);
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                },
+                writer.ToArray()
+            );
 
             builder.WriteByte(0xff);
 
             builder.WriteContentTo(ref writer);
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
-                0xff,
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0xff,
+                },
+                writer.ToArray()
+            );
         }
 
         [Fact]
@@ -395,20 +1074,83 @@ namespace System.Reflection.Metadata.Tests
 
             var builder2 = new BlobBuilder(256);
             builder1.WriteContentTo(builder2);
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13
-            }, builder2.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                },
+                builder2.ToArray()
+            );
 
             builder1.WriteByte(0xff);
 
             builder1.WriteContentTo(builder2);
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
-                0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
-                0xff,
-            }, builder2.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0x00,
+                    0x01,
+                    0x02,
+                    0x03,
+                    0x04,
+                    0x05,
+                    0x06,
+                    0x07,
+                    0x08,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0xff,
+                },
+                builder2.ToArray()
+            );
         }
 
         [Fact]
@@ -454,11 +1196,44 @@ namespace System.Reflection.Metadata.Tests
 
             builder1.LinkSuffix(builder2);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-                0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02
-            }, builder1.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                },
+                builder1.ToArray()
+            );
 
             Assert.Equal(32, builder1.Count);
             Assert.Equal(16, builder2.Count);
@@ -504,11 +1279,44 @@ namespace System.Reflection.Metadata.Tests
             builder2.ReserveBytes(0);
             builder1.LinkSuffix(builder2);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-            }, builder1.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                },
+                builder1.ToArray()
+            );
 
             Assert.Equal(32, builder1.Count);
             Assert.Equal(16, builder2.Count);
@@ -562,7 +1370,9 @@ namespace System.Reflection.Metadata.Tests
             Assert.Throws<InvalidOperationException>(() => builder1.GetBlobs());
             Assert.Throws<InvalidOperationException>(() => builder1.ContentEquals(builder1));
             Assert.Throws<InvalidOperationException>(() => builder1.WriteUTF16("str"));
-            Assert.Throws<InvalidOperationException>(() => builder1.WriteUTF8("str", allowUnpairedSurrogates: false));
+            Assert.Throws<InvalidOperationException>(() =>
+                builder1.WriteUTF8("str", allowUnpairedSurrogates: false)
+            );
 
             builder2.LinkSuffix(builder3);
             AssertEx.Equal(new byte[] { 1, 2, 3 }, builder2.ToArray());
@@ -582,28 +1392,50 @@ namespace System.Reflection.Metadata.Tests
             var builder = new BlobBuilder(16);
             Assert.Throws<ArgumentNullException>(() => builder.WriteUTF16((char[])null));
             Assert.Throws<ArgumentNullException>(() => builder.WriteUTF16((string)null));
-            Assert.Throws<ArgumentNullException>(() => builder.WriteUTF8(null, allowUnpairedSurrogates: true));
-            Assert.Throws<ArgumentNullException>(() => builder.WriteUTF8(null, allowUnpairedSurrogates: true));
+            Assert.Throws<ArgumentNullException>(() =>
+                builder.WriteUTF8(null, allowUnpairedSurrogates: true)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                builder.WriteUTF8(null, allowUnpairedSurrogates: true)
+            );
             Assert.Throws<ArgumentNullException>(() => builder.TryWriteBytes((Stream)null, 0));
             Assert.Throws<ArgumentNullException>(() => builder.WriteBytes(null));
             Assert.Throws<ArgumentNullException>(() => builder.WriteBytes(null, 0, 0));
             Assert.Throws<ArgumentNullException>(() => builder.WriteBytes((byte*)null, 0));
-            Assert.Throws<ArgumentNullException>(() => builder.WriteBytes(default(ImmutableArray<byte>)));
-            Assert.Throws<ArgumentNullException>(() => builder.WriteBytes(default(ImmutableArray<byte>), 0, 0));
+            Assert.Throws<ArgumentNullException>(() =>
+                builder.WriteBytes(default(ImmutableArray<byte>))
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                builder.WriteBytes(default(ImmutableArray<byte>), 0, 0)
+            );
 
             var bw = default(BlobWriter);
             Assert.Throws<ArgumentNullException>(() => builder.WriteContentTo(ref bw));
             Assert.Throws<ArgumentNullException>(() => builder.WriteContentTo((Stream)null));
             Assert.Throws<ArgumentNullException>(() => builder.WriteContentTo((BlobBuilder)null));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.TryWriteBytes(new MemoryStream(), -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.TryWriteBytes(new MemoryStream(), -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(0, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(new byte[] { }, 1, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(new byte[] { }, 0, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(new byte[] { }, 0, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(ImmutableArray<byte>.Empty, 1, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(ImmutableArray<byte>.Empty, 0, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(ImmutableArray<byte>.Empty, 1, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteBytes(new byte[] { }, 1, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteBytes(new byte[] { }, 0, 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteBytes(new byte[] { }, 0, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteBytes(ImmutableArray<byte>.Empty, 1, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteBytes(ImmutableArray<byte>.Empty, 0, 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteBytes(ImmutableArray<byte>.Empty, 1, -1)
+            );
         }
 
         [Fact]
@@ -637,12 +1469,29 @@ namespace System.Reflection.Metadata.Tests
 
             var blobs = builder.GetBlobs().ToArray();
             Assert.Equal(1, blobs.Length);
-            AssertEx.Equal(new byte[]
-            {
-                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-                0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-                0x01
-            }, blobs[0].GetBytes().ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                },
+                blobs[0].GetBytes().ToArray()
+            );
         }
 
         // TODO:
@@ -692,9 +1541,13 @@ namespace System.Reflection.Metadata.Tests
             var builder = new BlobBuilder();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => writer.WriteCompressedInteger(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => writer.WriteCompressedInteger(BlobWriterImpl.MaxCompressedIntegerValue + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                writer.WriteCompressedInteger(BlobWriterImpl.MaxCompressedIntegerValue + 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteCompressedInteger(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteCompressedInteger(BlobWriterImpl.MaxCompressedIntegerValue + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteCompressedInteger(BlobWriterImpl.MaxCompressedIntegerValue + 1)
+            );
         }
 
         [Fact]
@@ -716,10 +1569,26 @@ namespace System.Reflection.Metadata.Tests
             var writer = new BlobWriter(4);
             var builder = new BlobBuilder();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => writer.WriteCompressedSignedInteger(BlobWriterImpl.MinSignedCompressedIntegerValue - 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => writer.WriteCompressedSignedInteger(BlobWriterImpl.MaxSignedCompressedIntegerValue + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteCompressedSignedInteger(BlobWriterImpl.MinSignedCompressedIntegerValue - 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteCompressedSignedInteger(BlobWriterImpl.MaxSignedCompressedIntegerValue + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                writer.WriteCompressedSignedInteger(
+                    BlobWriterImpl.MinSignedCompressedIntegerValue - 1
+                )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                writer.WriteCompressedSignedInteger(
+                    BlobWriterImpl.MaxSignedCompressedIntegerValue + 1
+                )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteCompressedSignedInteger(
+                    BlobWriterImpl.MinSignedCompressedIntegerValue - 1
+                )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                builder.WriteCompressedSignedInteger(
+                    BlobWriterImpl.MaxSignedCompressedIntegerValue + 1
+                )
+            );
         }
 
         [Fact]
@@ -746,25 +1615,109 @@ namespace System.Reflection.Metadata.Tests
             writer.WriteBytes(guid.ToByteArray());
             writer.WriteGuid(guid);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x44, 0x33, 0x22, 0x11,
-                0x66, 0x55,
-                0x77,
-                0xff, 0xee, 0xdd, 0xcc, 0xbb, 0xaa, 0x99, 0x88,
-                0xff, 0xff, 0xff, 0xff,
-                0xfe, 0xff,
-                0xfd,
-                0x01,
-                0x00,
-                0x21, 0x43, 0x65, 0x87, 0x09, 0xBA, 0xDC, 0xFE,
-                0x56, 0x55, 0x44, 0x34, 0x33, 0x22, 0x12, 0x11,
-                0x02, 0xD6, 0xE0, 0x9A, 0x94, 0x47, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0xFF,
-                0x00, 0x00, 0x80, 0xFF,
-                0x04, 0x03, 0x02, 0x01, 0x06, 0x05, 0x08, 0x07, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10,
-                0x04, 0x03, 0x02, 0x01, 0x06, 0x05, 0x08, 0x07, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x44,
+                    0x33,
+                    0x22,
+                    0x11,
+                    0x66,
+                    0x55,
+                    0x77,
+                    0xff,
+                    0xee,
+                    0xdd,
+                    0xcc,
+                    0xbb,
+                    0xaa,
+                    0x99,
+                    0x88,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xfe,
+                    0xff,
+                    0xfd,
+                    0x01,
+                    0x00,
+                    0x21,
+                    0x43,
+                    0x65,
+                    0x87,
+                    0x09,
+                    0xBA,
+                    0xDC,
+                    0xFE,
+                    0x56,
+                    0x55,
+                    0x44,
+                    0x34,
+                    0x33,
+                    0x22,
+                    0x12,
+                    0x11,
+                    0x02,
+                    0xD6,
+                    0xE0,
+                    0x9A,
+                    0x94,
+                    0x47,
+                    0x09,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xF8,
+                    0xFF,
+                    0x00,
+                    0x00,
+                    0x80,
+                    0xFF,
+                    0x04,
+                    0x03,
+                    0x02,
+                    0x01,
+                    0x06,
+                    0x05,
+                    0x08,
+                    0x07,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                    0x04,
+                    0x03,
+                    0x02,
+                    0x01,
+                    0x06,
+                    0x05,
+                    0x08,
+                    0x07,
+                    0x09,
+                    0x0A,
+                    0x0B,
+                    0x0C,
+                    0x0D,
+                    0x0E,
+                    0x0F,
+                    0x10,
+                },
+                writer.ToArray()
+            );
         }
 
         [Fact]
@@ -782,14 +1735,10 @@ namespace System.Reflection.Metadata.Tests
             writer.WriteBytes(new byte[] { 0x0c }, 1, 0);
             writer.WriteBytes(new byte[] { 0x0d, 0x0e }, 1, 1);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x01, 0x02, 0x03, 0x04,
-                0x05, 0x06, 0x07, 0x08,
-                0x09,
-                0x0b,
-                0x0e
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0b, 0x0e },
+                writer.ToArray()
+            );
         }
 
         [Fact]
@@ -804,12 +1753,27 @@ namespace System.Reflection.Metadata.Tests
             writer.WriteBytes(0xff, 0);
             writer.WriteBytes(3, 1);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x01, 0x01, 0x01, 0x01,
-                0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02,
-                0x03
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x01,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x02,
+                    0x03,
+                },
+                writer.ToArray()
+            );
         }
 
         [Fact]
@@ -834,13 +1798,30 @@ namespace System.Reflection.Metadata.Tests
             writer.Align(2);
             writer.Align(1);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x01, 0x00, 0x02, 0x00,
-                0x03, 0x00, 0x00, 0x00,
-                0x04, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x06, 0x00
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x01,
+                    0x00,
+                    0x02,
+                    0x00,
+                    0x03,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x04,
+                    0x05,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x06,
+                    0x00,
+                },
+                writer.ToArray()
+            );
         }
 
         [Fact]
@@ -853,21 +1834,34 @@ namespace System.Reflection.Metadata.Tests
             writer.WriteUTF16("");
             writer.WriteUTF16(new char[0]);
 
-            writer.WriteUTF16(new char[] { '\ud800' });           // hi surrogate
-            writer.WriteUTF16("\udc00");                          // lo surrogate
-            writer.WriteUTF16("\ud800\udc00");                    // pair
+            writer.WriteUTF16(new char[] { '\ud800' }); // hi surrogate
+            writer.WriteUTF16("\udc00"); // lo surrogate
+            writer.WriteUTF16("\ud800\udc00"); // pair
             writer.WriteUTF16(new char[] { '\udc00', '\ud800' }); // lo + hi
             writer.WriteUTF16("\u1234");
 
-            AssertEx.Equal(new byte[]
-            {
-                0x61, 0x00,
-                0x00, 0xD8,
-                0x00, 0xDC,
-                0x00, 0xD8, 0x00, 0xDC,
-                0x00, 0xDC, 0x00, 0xD8,
-                0x34, 0x12
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x61,
+                    0x00,
+                    0x00,
+                    0xD8,
+                    0x00,
+                    0xDC,
+                    0x00,
+                    0xD8,
+                    0x00,
+                    0xDC,
+                    0x00,
+                    0xDC,
+                    0x00,
+                    0xD8,
+                    0x34,
+                    0x12,
+                },
+                writer.ToArray()
+            );
         }
 
         [Fact]
@@ -880,24 +1874,47 @@ namespace System.Reflection.Metadata.Tests
             writer.WriteSerializedString(null);
             writer.WriteSerializedString("");
 
-            writer.WriteSerializedString("\ud800");       // hi surrogate
-            writer.WriteSerializedString("\udc00");       // lo surrogate
+            writer.WriteSerializedString("\ud800"); // hi surrogate
+            writer.WriteSerializedString("\udc00"); // lo surrogate
             writer.WriteSerializedString("\ud800\udc00"); // pair
             writer.WriteSerializedString("\udc00\ud800"); // lo + hi
             writer.WriteSerializedString("\u1234");
 
-            AssertEx.Equal(new byte[]
-            {
-                0x00,
-                0x01, 0x61,
-                0xff,
-                0x00,
-                0x03, 0xED, 0xA0, 0x80,
-                0x03, 0xED, 0xB0, 0x80,
-                0x04, 0xF0, 0x90, 0x80, 0x80,
-                0x06, 0xED, 0xB0, 0x80, 0xED, 0xA0, 0x80,
-                0x03, 0xE1, 0x88, 0xB4
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x00,
+                    0x01,
+                    0x61,
+                    0xff,
+                    0x00,
+                    0x03,
+                    0xED,
+                    0xA0,
+                    0x80,
+                    0x03,
+                    0xED,
+                    0xB0,
+                    0x80,
+                    0x04,
+                    0xF0,
+                    0x90,
+                    0x80,
+                    0x80,
+                    0x06,
+                    0xED,
+                    0xB0,
+                    0x80,
+                    0xED,
+                    0xA0,
+                    0x80,
+                    0x03,
+                    0xE1,
+                    0x88,
+                    0xB4,
+                },
+                writer.ToArray()
+            );
         }
 
         [Fact]
@@ -910,30 +1927,52 @@ namespace System.Reflection.Metadata.Tests
             writer.WriteUTF8("d", allowUnpairedSurrogates: true);
             writer.WriteUTF8("", allowUnpairedSurrogates: true);
 
-            writer.WriteUTF8(Encoding.UTF8.GetString(new byte[]
-            {
-                0x00,
-                0xC2, 0x80,
-                0xE1, 0x88, 0xB4
-            }), allowUnpairedSurrogates: true);
+            writer.WriteUTF8(
+                Encoding.UTF8.GetString(new byte[] { 0x00, 0xC2, 0x80, 0xE1, 0x88, 0xB4 }),
+                allowUnpairedSurrogates: true
+            );
 
-            writer.WriteUTF8("\0\ud800", allowUnpairedSurrogates: true);       // hi surrogate
-            writer.WriteUTF8("\0\udc00", allowUnpairedSurrogates: true);       // lo surrogate
+            writer.WriteUTF8("\0\ud800", allowUnpairedSurrogates: true); // hi surrogate
+            writer.WriteUTF8("\0\udc00", allowUnpairedSurrogates: true); // lo surrogate
             writer.WriteUTF8("\0\ud800\udc00", allowUnpairedSurrogates: true); // pair
             writer.WriteUTF8("\0\udc00\ud800", allowUnpairedSurrogates: true); // lo + hi
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)'a',
-                (byte)'b', (byte)'c',
-                (byte)'d',
-                0x00, 0xC2, 0x80, 0xE1, 0x88, 0xB4,
-
-                0x00, 0xED, 0xA0, 0x80,
-                0x00, 0xED, 0xB0, 0x80,
-                0x00, 0xF0, 0x90, 0x80, 0x80,
-                0x00, 0xED, 0xB0, 0x80, 0xED, 0xA0, 0x80
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)'a',
+                    (byte)'b',
+                    (byte)'c',
+                    (byte)'d',
+                    0x00,
+                    0xC2,
+                    0x80,
+                    0xE1,
+                    0x88,
+                    0xB4,
+                    0x00,
+                    0xED,
+                    0xA0,
+                    0x80,
+                    0x00,
+                    0xED,
+                    0xB0,
+                    0x80,
+                    0x00,
+                    0xF0,
+                    0x90,
+                    0x80,
+                    0x80,
+                    0x00,
+                    0xED,
+                    0xB0,
+                    0x80,
+                    0xED,
+                    0xA0,
+                    0x80,
+                },
+                writer.ToArray()
+            );
         }
 
         [Fact]
@@ -946,30 +1985,52 @@ namespace System.Reflection.Metadata.Tests
             writer.WriteUTF8("d", allowUnpairedSurrogates: false);
             writer.WriteUTF8("", allowUnpairedSurrogates: false);
 
-            writer.WriteUTF8(Encoding.UTF8.GetString(new byte[]
-            {
-                0x00,
-                0xC2, 0x80,
-                0xE1, 0x88, 0xB4
-            }), allowUnpairedSurrogates: false);
+            writer.WriteUTF8(
+                Encoding.UTF8.GetString(new byte[] { 0x00, 0xC2, 0x80, 0xE1, 0x88, 0xB4 }),
+                allowUnpairedSurrogates: false
+            );
 
-            writer.WriteUTF8("\0\ud800", allowUnpairedSurrogates: false);       // hi surrogate
-            writer.WriteUTF8("\0\udc00", allowUnpairedSurrogates: false);       // lo surrogate
+            writer.WriteUTF8("\0\ud800", allowUnpairedSurrogates: false); // hi surrogate
+            writer.WriteUTF8("\0\udc00", allowUnpairedSurrogates: false); // lo surrogate
             writer.WriteUTF8("\0\ud800\udc00", allowUnpairedSurrogates: false); // pair
             writer.WriteUTF8("\0\udc00\ud800", allowUnpairedSurrogates: false); // lo + hi
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)'a',
-                (byte)'b', (byte)'c',
-                (byte)'d',
-                0x00, 0xC2, 0x80, 0xE1, 0x88, 0xB4,
-
-                0x00, 0xEF, 0xBF, 0xBD,
-                0x00, 0xEF, 0xBF, 0xBD,
-                0x00, 0xF0, 0x90, 0x80, 0x80,
-                0x00, 0xEF, 0xBF, 0xBD, 0xEF, 0xBF, 0xBD
-            }, writer.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)'a',
+                    (byte)'b',
+                    (byte)'c',
+                    (byte)'d',
+                    0x00,
+                    0xC2,
+                    0x80,
+                    0xE1,
+                    0x88,
+                    0xB4,
+                    0x00,
+                    0xEF,
+                    0xBF,
+                    0xBD,
+                    0x00,
+                    0xEF,
+                    0xBF,
+                    0xBD,
+                    0x00,
+                    0xF0,
+                    0x90,
+                    0x80,
+                    0x80,
+                    0x00,
+                    0xEF,
+                    0xBF,
+                    0xBD,
+                    0xEF,
+                    0xBF,
+                    0xBD,
+                },
+                writer.ToArray()
+            );
         }
 
         [Fact]

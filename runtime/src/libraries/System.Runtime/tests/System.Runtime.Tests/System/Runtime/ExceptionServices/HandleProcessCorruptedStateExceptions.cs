@@ -17,7 +17,12 @@ namespace System.Runtime.ExceptionServices.Tests
     public class HandleProcessCorruptedStateExceptionsTests
     {
         [DllImport("kernel32.dll")]
-        static extern void RaiseException(uint dwExceptionCode, uint dwExceptionFlags, uint nNumberOfArguments, IntPtr lpArguments);
+        static extern void RaiseException(
+            uint dwExceptionCode,
+            uint dwExceptionFlags,
+            uint nNumberOfArguments,
+            IntPtr lpArguments
+        );
 
         [DllImport("kernel32.dll")]
         private static extern int SetErrorMode(int uMode);
@@ -32,9 +37,7 @@ namespace System.Runtime.ExceptionServices.Tests
             {
                 RaiseException(0xC0000005, 0, 0, IntPtr.Zero);
             }
-            catch (AccessViolationException)
-            {
-            }
+            catch (AccessViolationException) { }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -42,9 +45,18 @@ namespace System.Runtime.ExceptionServices.Tests
         public static void ProcessExit_Called()
         {
             // We expect the launched process to crash; don't let it write the resulting AV message to the console.
-            var psi = new ProcessStartInfo() { RedirectStandardError = true, RedirectStandardOutput = true };
+            var psi = new ProcessStartInfo()
+            {
+                RedirectStandardError = true,
+                RedirectStandardOutput = true,
+            };
 
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(() => CauseAVInNative(), new RemoteInvokeOptions { CheckExitCode = false, StartInfo = psi }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    () => CauseAVInNative(),
+                    new RemoteInvokeOptions { CheckExitCode = false, StartInfo = psi }
+                )
+            )
             {
                 Process p = handle.Process;
                 p.WaitForExit();

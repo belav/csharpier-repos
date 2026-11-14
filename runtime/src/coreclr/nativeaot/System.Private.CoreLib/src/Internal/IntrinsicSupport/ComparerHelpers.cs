@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.IntrinsicSupport
@@ -82,7 +81,12 @@ namespace Internal.IntrinsicSupport
                 }
             }
 
-            bool success = RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(openComparerType, new RuntimeTypeHandle[] { comparerTypeArgument }, out comparerType);
+            bool success =
+                RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(
+                    openComparerType,
+                    new RuntimeTypeHandle[] { comparerTypeArgument },
+                    out comparerType
+                );
             if (!success)
             {
                 Environment.FailFast("Unable to create comparer");
@@ -93,7 +97,8 @@ namespace Internal.IntrinsicSupport
 
         // This one is an intrinsic that is used to make enum comparisons more efficient.
         [Intrinsic]
-        internal static int EnumOnlyCompare<T>(T x, T y) where T : struct, Enum
+        internal static int EnumOnlyCompare<T>(T x, T y)
+            where T : struct, Enum
         {
             return x.CompareTo(y);
         }

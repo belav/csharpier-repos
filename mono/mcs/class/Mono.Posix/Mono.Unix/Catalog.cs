@@ -35,102 +35,121 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Mono.Unix {
+namespace Mono.Unix
+{
+    public class Catalog
+    {
+        private Catalog() { }
 
-	public class Catalog {
-		private Catalog () {}
+        [DllImport("intl", CallingConvention = CallingConvention.Cdecl)]
+        static extern IntPtr bindtextdomain(IntPtr domainname, IntPtr dirname);
 
-		[DllImport("intl", CallingConvention=CallingConvention.Cdecl)]
-		static extern IntPtr bindtextdomain (IntPtr domainname, IntPtr dirname);
-		[DllImport("intl", CallingConvention=CallingConvention.Cdecl)]
-		static extern IntPtr bind_textdomain_codeset (IntPtr domainname,
-			IntPtr codeset);
-		[DllImport("intl", CallingConvention=CallingConvention.Cdecl)]
-		static extern IntPtr textdomain (IntPtr domainname);
-		
-		public static void Init (String package, String localedir)
-		{
-			IntPtr ipackage, ilocaledir, iutf8;
-			MarshalStrings (package, out ipackage, localedir, out ilocaledir, 
-					"UTF-8", out iutf8);
-			try {
-				if (bindtextdomain (ipackage, ilocaledir) == IntPtr.Zero)
-					throw new UnixIOException (Native.Errno.ENOMEM);
-				if (bind_textdomain_codeset (ipackage, iutf8) == IntPtr.Zero)
-					throw new UnixIOException (Native.Errno.ENOMEM);
-				if (textdomain (ipackage) == IntPtr.Zero)
-					throw new UnixIOException (Native.Errno.ENOMEM);
-			}
-			finally {
-				UnixMarshal.FreeHeap (ipackage);
-				UnixMarshal.FreeHeap (ilocaledir);
-				UnixMarshal.FreeHeap (iutf8);
-			}
-		}
+        [DllImport("intl", CallingConvention = CallingConvention.Cdecl)]
+        static extern IntPtr bind_textdomain_codeset(IntPtr domainname, IntPtr codeset);
 
-		private static void MarshalStrings (string s1, out IntPtr p1, 
-				string s2, out IntPtr p2, string s3, out IntPtr p3)
-		{
-			p1 = p2 = p3 = IntPtr.Zero;
+        [DllImport("intl", CallingConvention = CallingConvention.Cdecl)]
+        static extern IntPtr textdomain(IntPtr domainname);
 
-			bool cleanup = true;
+        public static void Init(String package, String localedir)
+        {
+            IntPtr ipackage,
+                ilocaledir,
+                iutf8;
+            MarshalStrings(package, out ipackage, localedir, out ilocaledir, "UTF-8", out iutf8);
+            try
+            {
+                if (bindtextdomain(ipackage, ilocaledir) == IntPtr.Zero)
+                    throw new UnixIOException(Native.Errno.ENOMEM);
+                if (bind_textdomain_codeset(ipackage, iutf8) == IntPtr.Zero)
+                    throw new UnixIOException(Native.Errno.ENOMEM);
+                if (textdomain(ipackage) == IntPtr.Zero)
+                    throw new UnixIOException(Native.Errno.ENOMEM);
+            }
+            finally
+            {
+                UnixMarshal.FreeHeap(ipackage);
+                UnixMarshal.FreeHeap(ilocaledir);
+                UnixMarshal.FreeHeap(iutf8);
+            }
+        }
 
-			try {
-				p1 = UnixMarshal.StringToHeap (s1);
-				p2 = UnixMarshal.StringToHeap (s2);
-				if (s3 != null)
-					p3 = UnixMarshal.StringToHeap (s3);
-				cleanup = false;
-			}
-			finally {
-				if (cleanup) {
-					UnixMarshal.FreeHeap (p1);
-					UnixMarshal.FreeHeap (p2);
-					UnixMarshal.FreeHeap (p3);
-				}
-			}
-		}
-	
-		[DllImport("intl", CallingConvention=CallingConvention.Cdecl)]
-		static extern IntPtr gettext (IntPtr instring);
-		
-		public static String GetString (String s)
-		{
-			IntPtr ints = UnixMarshal.StringToHeap (s);
-			try {
-				// gettext(3) returns the input pointer if no translation is found
-				IntPtr r = gettext (ints);
-				if (r != ints)
-					return UnixMarshal.PtrToStringUnix (r);
-				return s;
-			}
-			finally {
-				UnixMarshal.FreeHeap (ints);
-			}
-		}
-	
-		[DllImport("intl", CallingConvention=CallingConvention.Cdecl)]
-		static extern IntPtr ngettext (IntPtr singular, IntPtr plural, Int32 n);
-		
-		public static String GetPluralString (String s, String p, Int32 n)
-		{
-			IntPtr ints, intp, _ignore;
-			MarshalStrings (s, out ints, p, out intp, null, out _ignore);
+        private static void MarshalStrings(
+            string s1,
+            out IntPtr p1,
+            string s2,
+            out IntPtr p2,
+            string s3,
+            out IntPtr p3
+        )
+        {
+            p1 = p2 = p3 = IntPtr.Zero;
 
-			try {
-				// ngettext(3) returns an input pointer if no translation is found
-				IntPtr r = ngettext (ints, intp, n);
-				if (r == ints)
-					return s;
-				if (r == intp)
-					return p;
-				return UnixMarshal.PtrToStringUnix (r); 
-			}
-			finally {
-				UnixMarshal.FreeHeap (ints);
-				UnixMarshal.FreeHeap (intp);
-			}
-		}
-	}
+            bool cleanup = true;
+
+            try
+            {
+                p1 = UnixMarshal.StringToHeap(s1);
+                p2 = UnixMarshal.StringToHeap(s2);
+                if (s3 != null)
+                    p3 = UnixMarshal.StringToHeap(s3);
+                cleanup = false;
+            }
+            finally
+            {
+                if (cleanup)
+                {
+                    UnixMarshal.FreeHeap(p1);
+                    UnixMarshal.FreeHeap(p2);
+                    UnixMarshal.FreeHeap(p3);
+                }
+            }
+        }
+
+        [DllImport("intl", CallingConvention = CallingConvention.Cdecl)]
+        static extern IntPtr gettext(IntPtr instring);
+
+        public static String GetString(String s)
+        {
+            IntPtr ints = UnixMarshal.StringToHeap(s);
+            try
+            {
+                // gettext(3) returns the input pointer if no translation is found
+                IntPtr r = gettext(ints);
+                if (r != ints)
+                    return UnixMarshal.PtrToStringUnix(r);
+                return s;
+            }
+            finally
+            {
+                UnixMarshal.FreeHeap(ints);
+            }
+        }
+
+        [DllImport("intl", CallingConvention = CallingConvention.Cdecl)]
+        static extern IntPtr ngettext(IntPtr singular, IntPtr plural, Int32 n);
+
+        public static String GetPluralString(String s, String p, Int32 n)
+        {
+            IntPtr ints,
+                intp,
+                _ignore;
+            MarshalStrings(s, out ints, p, out intp, null, out _ignore);
+
+            try
+            {
+                // ngettext(3) returns an input pointer if no translation is found
+                IntPtr r = ngettext(ints, intp, n);
+                if (r == ints)
+                    return s;
+                if (r == intp)
+                    return p;
+                return UnixMarshal.PtrToStringUnix(r);
+            }
+            finally
+            {
+                UnixMarshal.FreeHeap(ints);
+                UnixMarshal.FreeHeap(intp);
+            }
+        }
+    }
 }
-

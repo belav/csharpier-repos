@@ -14,9 +14,7 @@ namespace System.ComponentModel.Composition
         private readonly IEnumerable<CompositionError>? _errors;
 
         public CompositionResult(params CompositionError[] errors)
-            : this((IEnumerable<CompositionError>)errors)
-        {
-        }
+            : this((IEnumerable<CompositionError>)errors) { }
 
         public CompositionResult(IEnumerable<CompositionError>? errors)
         {

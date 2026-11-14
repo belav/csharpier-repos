@@ -23,9 +23,11 @@ namespace System.ComponentModel.Composition.Hosting
             private List<ComposablePartDefinition> _addedParts;
             private HashSet<ComposablePartDefinition> _removedParts;
 
-            public CatalogChangeProxy(ComposablePartCatalog originalCatalog,
+            public CatalogChangeProxy(
+                ComposablePartCatalog originalCatalog,
                 IEnumerable<ComposablePartDefinition> addedParts,
-                IEnumerable<ComposablePartDefinition> removedParts)
+                IEnumerable<ComposablePartDefinition> removedParts
+            )
             {
                 this._originalCatalog = originalCatalog;
                 this._addedParts = new List<ComposablePartDefinition>(addedParts);
@@ -34,17 +36,22 @@ namespace System.ComponentModel.Composition.Hosting
 
             public override IEnumerator<ComposablePartDefinition> GetEnumerator()
             {
-                return this._originalCatalog.Concat(this._addedParts).Except(this._removedParts).GetEnumerator();
+                return this
+                    ._originalCatalog.Concat(this._addedParts)
+                    .Except(this._removedParts)
+                    .GetEnumerator();
             }
 
-            public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
-                ImportDefinition definition)
+            public override IEnumerable<
+                Tuple<ComposablePartDefinition, ExportDefinition>
+            > GetExports(ImportDefinition definition)
             {
                 Requires.NotNull(definition, "definition");
 
                 var originalExports = this._originalCatalog.GetExports(definition);
                 var trimmedExports = originalExports.Where(partAndExport =>
-                    !this._removedParts.Contains(partAndExport.Item1));
+                    !this._removedParts.Contains(partAndExport.Item1)
+                );
 
                 var addedExports = new List<Tuple<ComposablePartDefinition, ExportDefinition>>();
                 foreach (var part in this._addedParts)
@@ -53,7 +60,9 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         if (definition.IsConstraintSatisfiedBy(export))
                         {
-                            addedExports.Add(new Tuple<ComposablePartDefinition, ExportDefinition>(part, export));
+                            addedExports.Add(
+                                new Tuple<ComposablePartDefinition, ExportDefinition>(part, export)
+                            );
                         }
                     }
                 }

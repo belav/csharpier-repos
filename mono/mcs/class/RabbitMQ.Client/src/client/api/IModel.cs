@@ -69,7 +69,7 @@ namespace RabbitMQ.Client
     /// statement can be used to scope the lifetime of a channel when
     /// appropriate.
     ///</remarks>
-    public interface IModel: IDisposable
+    public interface IModel : IDisposable
     {
         ///<summary>Notifies the destruction of the model.</summary>
         ///<remarks>
@@ -143,21 +143,19 @@ namespace RabbitMQ.Client
         void ExchangeDeclare(string exchange, string type);
 
         ///<summary>(Spec method) Declare an exchange.</summary>
-        void ExchangeDeclare(string exchange,
-                             string type,
-                             bool passive,
-                             bool durable,
-                             bool autoDelete,
-                             bool @internal,
-                             [AmqpNowaitArgument(null)]
-                             bool nowait,
-                             IDictionary arguments);
+        void ExchangeDeclare(
+            string exchange,
+            string type,
+            bool passive,
+            bool durable,
+            bool autoDelete,
+            bool @internal,
+            [AmqpNowaitArgument(null)] bool nowait,
+            IDictionary arguments
+        );
 
         ///<summary>(Spec method) Delete an exchange.</summary>
-        void ExchangeDelete(string exchange,
-                            bool ifUnused,
-                            [AmqpNowaitArgument(null)]
-                            bool nowait);
+        void ExchangeDelete(string exchange, bool ifUnused, [AmqpNowaitArgument(null)] bool nowait);
 
         ///<summary>(Spec method) Declare a queue.</summary>
         ///<remarks>
@@ -183,30 +181,31 @@ namespace RabbitMQ.Client
         ///non-autodelete, with no arguments.
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
-        string QueueDeclare(string queue,
-                            bool durable);
+        string QueueDeclare(string queue, bool durable);
 
         ///<summary>(Spec method) Declare a queue.</summary>
         ///<remarks>
         ///Returns the name of the queue that was declared.
         ///</remarks>
         [return: AmqpFieldMapping(null, "queue")]
-        string QueueDeclare(string queue,
-                            bool passive,
-                            bool durable,
-                            bool exclusive,
-                            bool autoDelete,
-                            [AmqpNowaitArgument(null)]
-                            bool nowait,
-                            IDictionary arguments);
+        string QueueDeclare(
+            string queue,
+            bool passive,
+            bool durable,
+            bool exclusive,
+            bool autoDelete,
+            [AmqpNowaitArgument(null)] bool nowait,
+            IDictionary arguments
+        );
 
         ///<summary>(Spec method) Bind a queue to an exchange.</summary>
-        void QueueBind(string queue,
-                       string exchange,
-                       string routingKey,
-                       [AmqpNowaitArgument(null)]
-                       bool nowait,
-                       IDictionary arguments);
+        void QueueBind(
+            string queue,
+            string exchange,
+            string routingKey,
+            [AmqpNowaitArgument(null)] bool nowait,
+            IDictionary arguments
+        );
 
         ///<summary>(Spec method) Unbind a queue from an exchange.</summary>
         ///<remarks>
@@ -216,10 +215,7 @@ namespace RabbitMQ.Client
         ///addition of a queue.unbind method.
         ///</remarks>
         [AmqpUnsupported("RabbitMQ.Client.Framing.v0_8qpid")]
-        void QueueUnbind(string queue,
-                         string exchange,
-                         string routingKey,
-                         IDictionary arguments);
+        void QueueUnbind(string queue, string exchange, string routingKey, IDictionary arguments);
 
         ///<summary>(Spec method) Purge a queue of messages.</summary>
         ///<remarks>
@@ -227,9 +223,7 @@ namespace RabbitMQ.Client
         ///specified, returns <code>uint.MaxValue</code>.
         ///</remarks>
         [return: AmqpFieldMapping(null, "messageCount")]
-        uint QueuePurge(string queue,
-                        [AmqpNowaitArgument(null, "0xFFFFFFFF")]
-                        bool nowait);
+        uint QueuePurge(string queue, [AmqpNowaitArgument(null, "0xFFFFFFFF")] bool nowait);
 
         ///<summary>(Spec method) Delete a queue.</summary>
         ///<remarks>
@@ -238,11 +232,12 @@ namespace RabbitMQ.Client
         ///<code>uint.MaxValue</code>.
         ///</remarks>
         [return: AmqpFieldMapping(null, "messageCount")]
-        uint QueueDelete(string queue,
-                         bool ifUnused,
-                         bool ifEmpty,
-                         [AmqpNowaitArgument(null, "0xFFFFFFFF")]
-                         bool nowait);
+        uint QueueDelete(
+            string queue,
+            bool ifUnused,
+            bool ifEmpty,
+            [AmqpNowaitArgument(null, "0xFFFFFFFF")] bool nowait
+        );
 
         ///<summary>Start a Basic content-class consumer.</summary>
         ///<remarks>
@@ -251,9 +246,7 @@ namespace RabbitMQ.Client
         ///noLocal=false and exclusive=false.
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
-        string BasicConsume(string queue,
-                            IDictionary filter,
-                            IBasicConsumer consumer);
+        string BasicConsume(string queue, IDictionary filter, IBasicConsumer consumer);
 
         ///<summary>Start a Basic content-class consumer.</summary>
         ///<remarks>
@@ -262,10 +255,7 @@ namespace RabbitMQ.Client
         ///noLocal=false and exclusive=false.
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
-        string BasicConsume(string queue,
-                            bool noAck,
-                            IDictionary filter,
-                            IBasicConsumer consumer);
+        string BasicConsume(string queue, bool noAck, IDictionary filter, IBasicConsumer consumer);
 
         ///<summary>Start a Basic content-class consumer.</summary>
         ///<remarks>
@@ -273,67 +263,69 @@ namespace RabbitMQ.Client
         ///noLocal=false and exclusive=false.
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
-        string BasicConsume(string queue,
-                            bool noAck,
-                            string consumerTag,
-                            IDictionary filter,
-                            IBasicConsumer consumer);
+        string BasicConsume(
+            string queue,
+            bool noAck,
+            string consumerTag,
+            IDictionary filter,
+            IBasicConsumer consumer
+        );
 
         ///<summary>Start a Basic content-class consumer.</summary>
         [AmqpMethodDoNotImplement(null)]
-        string BasicConsume(string queue,
-                            bool noAck,
-                            string consumerTag,
-                            bool noLocal,
-                            bool exclusive,
-                            IDictionary filter,
-                            IBasicConsumer consumer);
+        string BasicConsume(
+            string queue,
+            bool noAck,
+            string consumerTag,
+            bool noLocal,
+            bool exclusive,
+            IDictionary filter,
+            IBasicConsumer consumer
+        );
 
         ///<summary>Delete a Basic content-class consumer.</summary>
         [AmqpMethodDoNotImplement(null)]
         void BasicCancel(string consumerTag);
 
         ///<summary>(Spec method) Configures QoS parameters of the Basic content-class.</summary>
-        void BasicQos(uint prefetchSize,
-                      ushort prefetchCount,
-                      bool global);
+        void BasicQos(uint prefetchSize, ushort prefetchCount, bool global);
 
         ///<summary>(Spec method) Convenience overload of BasicPublish.</summary>
         ///<remarks>
         ///The publication occurs with mandatory=false and immediate=false.
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
-        void BasicPublish(PublicationAddress addr,
-                          IBasicProperties basicProperties,
-                          byte[] body);
+        void BasicPublish(PublicationAddress addr, IBasicProperties basicProperties, byte[] body);
 
         ///<summary>(Spec method) Convenience overload of BasicPublish.</summary>
         ///<remarks>
         ///The publication occurs with mandatory=false and immediate=false.
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
-        void BasicPublish(string exchange,
-                          string routingKey,
-                          IBasicProperties basicProperties,
-                          byte[] body);
+        void BasicPublish(
+            string exchange,
+            string routingKey,
+            IBasicProperties basicProperties,
+            byte[] body
+        );
 
         ///<summary>(Spec method) Publish a message using the Basic
         ///content-class.</summary>
         [AmqpMethodDoNotImplement(null)]
-        void BasicPublish(string exchange,
-                          string routingKey,
-                          bool mandatory,
-                          bool immediate,
-                          IBasicProperties basicProperties,
-                          byte[] body);
+        void BasicPublish(
+            string exchange,
+            string routingKey,
+            bool mandatory,
+            bool immediate,
+            IBasicProperties basicProperties,
+            byte[] body
+        );
 
         ///<summary>(Spec method) Acknowledge one or more delivered message(s).</summary>
-        void BasicAck(ulong deliveryTag,
-                      bool multiple);
+        void BasicAck(ulong deliveryTag, bool multiple);
 
         ///<summary>(Spec method) Reject a delivered message.</summary>
-        void BasicReject(ulong deliveryTag,
-                         bool requeue);
+        void BasicReject(ulong deliveryTag, bool requeue);
 
         ///<summary>(Spec method)</summary>
         void BasicRecover(bool requeue);
@@ -343,8 +335,7 @@ namespace RabbitMQ.Client
         ///no messages are currently available. See also
         ///IModel.BasicAck.</summary>
         [AmqpMethodDoNotImplement(null)]
-        BasicGetResult BasicGet(string queue,
-                                bool noAck);
+        BasicGetResult BasicGet(string queue, bool noAck);
 
         ///<summary>(Spec method) Enable TX mode for this session.</summary>
         void TxSelect();
@@ -372,7 +363,7 @@ namespace RabbitMQ.Client
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
         void Close();
-        
+
         ///<summary>Close this session.</summary>
         ///<remarks>
         ///The method behaves in the same way as Close(), with the only
@@ -387,7 +378,7 @@ namespace RabbitMQ.Client
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
         void Close(ushort replyCode, string replyText);
-        
+
         ///<summary>Abort this session.</summary>
         ///<remarks>
         ///If the session is already closed (or closing), then this
@@ -399,7 +390,7 @@ namespace RabbitMQ.Client
         ///</remarks>
         [AmqpMethodDoNotImplement(null)]
         void Abort();
-        
+
         ///<summary>Abort this session.</summary>
         ///<remarks>
         ///The method behaves in the same way as Abort(), with the only
@@ -433,13 +424,15 @@ namespace RabbitMQ.Client
 
         ///<summary>Sets the new instance's properties from the
         ///arguments passed in.</summary>
-        public BasicGetResult(ulong deliveryTag,
-                              bool redelivered,
-                              string exchange,
-                              string routingKey,
-                              uint messageCount,
-                              IBasicProperties basicProperties,
-                              byte[] body)
+        public BasicGetResult(
+            ulong deliveryTag,
+            bool redelivered,
+            string exchange,
+            string routingKey,
+            uint messageCount,
+            IBasicProperties basicProperties,
+            byte[] body
+        )
         {
             m_deliveryTag = deliveryTag;
             m_redelivered = redelivered;
@@ -451,13 +444,28 @@ namespace RabbitMQ.Client
         }
 
         ///<summary>Retrieve the delivery tag for this message. See also IModel.BasicAck.</summary>
-        public ulong DeliveryTag { get { return m_deliveryTag; } }
+        public ulong DeliveryTag
+        {
+            get { return m_deliveryTag; }
+        }
+
         ///<summary>Retrieve the redelivered flag for this message.</summary>
-        public bool Redelivered { get { return m_redelivered; } }
+        public bool Redelivered
+        {
+            get { return m_redelivered; }
+        }
+
         ///<summary>Retrieve the exchange this message was published to.</summary>
-        public string Exchange { get { return m_exchange; } }
+        public string Exchange
+        {
+            get { return m_exchange; }
+        }
+
         ///<summary>Retrieve the routing key with which this message was published.</summary>
-        public string RoutingKey { get { return m_routingKey; } }
+        public string RoutingKey
+        {
+            get { return m_routingKey; }
+        }
 
         ///<summary>Retrieve the number of messages pending on the
         ///queue, excluding the message being delivered.</summary>
@@ -466,12 +474,22 @@ namespace RabbitMQ.Client
         /// change arbitrarily as messages are added to the queue and
         /// removed by other clients.
         ///</remarks>
-        public uint MessageCount { get { return m_messageCount; } }
+        public uint MessageCount
+        {
+            get { return m_messageCount; }
+        }
 
         ///<summary>Retrieves the Basic-class content header properties for this message.</summary>
-        public IBasicProperties BasicProperties { get { return m_basicProperties; } }
+        public IBasicProperties BasicProperties
+        {
+            get { return m_basicProperties; }
+        }
+
         ///<summary>Retrieves the body of this message.</summary>
-        public byte[] Body { get { return m_body; } }
+        public byte[] Body
+        {
+            get { return m_body; }
+        }
     }
 }
 
@@ -498,30 +516,31 @@ namespace RabbitMQ.Client.Impl
         ///public publish method after potential null-reference issues
         ///have been rectified.</summary>
         [AmqpMethodMapping(null, "basic", "publish")]
-        void _Private_BasicPublish(string exchange,
-                                   string routingKey,
-                                   bool mandatory,
-                                   bool immediate,
-                                   [AmqpContentHeaderMapping]
-                                   IBasicProperties basicProperties,
-                                   [AmqpContentBodyMapping]
-                                   byte[] body);
+        void _Private_BasicPublish(
+            string exchange,
+            string routingKey,
+            bool mandatory,
+            bool immediate,
+            [AmqpContentHeaderMapping] IBasicProperties basicProperties,
+            [AmqpContentBodyMapping] byte[] body
+        );
 
         ///<summary>Used to send a Basic.Consume method. The public
         ///consume API calls this while also managing internal
         ///datastructures.</summary>
         [AmqpForceOneWay]
         [AmqpMethodMapping(null, "basic", "consume")]
-        void _Private_BasicConsume(string queue,
-                                   string consumerTag,
-                                   bool noLocal,
-                                   bool noAck,
-                                   bool exclusive,
-                                   bool nowait,
-                                   [AmqpUnsupported("RabbitMQ.Client.Framing.v0_8")]
-                                   [AmqpFieldMapping("RabbitMQ.Client.Framing.v0_8qpid",
-                                                     "arguments")]
-                                   IDictionary filter);
+        void _Private_BasicConsume(
+            string queue,
+            string consumerTag,
+            bool noLocal,
+            bool noAck,
+            bool exclusive,
+            bool nowait,
+            [AmqpUnsupported("RabbitMQ.Client.Framing.v0_8")]
+            [AmqpFieldMapping("RabbitMQ.Client.Framing.v0_8qpid", "arguments")]
+                IDictionary filter
+        );
 
         ///<summary>Handle incoming Basic.ConsumeOk methods.</summary>
         void HandleBasicConsumeOk(string consumerTag);
@@ -531,8 +550,7 @@ namespace RabbitMQ.Client.Impl
         ///datastructures.</summary>
         [AmqpForceOneWay]
         [AmqpMethodMapping(null, "basic", "cancel")]
-        void _Private_BasicCancel(string consumerTag,
-                                  bool nowait);
+        void _Private_BasicCancel(string consumerTag, bool nowait);
 
         ///<summary>Handle incoming Basic.CancelOk methods.</summary>
         void HandleBasicCancelOk(string consumerTag);
@@ -551,10 +569,12 @@ namespace RabbitMQ.Client.Impl
         ///session shutdown.</summary>
         [AmqpForceOneWay]
         [AmqpMethodMapping(null, "channel", "close")]
-        void _Private_ChannelClose(ushort replyCode,
-                                   string replyText,
-                                   ushort classId,
-                                   ushort methodId);
+        void _Private_ChannelClose(
+            ushort replyCode,
+            string replyText,
+            ushort classId,
+            ushort methodId
+        );
 
         ///<summary>Used to send a Basic.Get. Basic.Get is a special
         ///case, since it can result in a Basic.GetOk or a
@@ -562,20 +582,19 @@ namespace RabbitMQ.Client.Impl
         ///required.</summary>
         [AmqpForceOneWay]
         [AmqpMethodMapping(null, "basic", "get")]
-        void _Private_BasicGet(string queue,
-                               bool noAck);
+        void _Private_BasicGet(string queue, bool noAck);
 
         ///<summary>Handle incoming Basic.GetOk methods. Routes the
         ///information to a waiting Basic.Get continuation.</summary>
-        void HandleBasicGetOk(ulong deliveryTag,
-                              bool redelivered,
-                              string exchange,
-                              string routingKey,
-                              uint messageCount,
-                              [AmqpContentHeaderMapping]
-                              IBasicProperties basicProperties,
-                              [AmqpContentBodyMapping]
-                              byte[] body);
+        void HandleBasicGetOk(
+            ulong deliveryTag,
+            bool redelivered,
+            string exchange,
+            string routingKey,
+            uint messageCount,
+            [AmqpContentHeaderMapping] IBasicProperties basicProperties,
+            [AmqpContentBodyMapping] byte[] body
+        );
 
         ///<summary>Handle incoming Basic.GetEmpty methods. Routes the
         ///information to a waiting Basic.Get continuation.</summary>
@@ -588,42 +607,44 @@ namespace RabbitMQ.Client.Impl
 
         ///<summary>Handle incoming Basic.Deliver methods. Dispatches
         ///to waiting consumers.</summary>
-        void HandleBasicDeliver(string consumerTag,
-                                ulong deliveryTag,
-                                bool redelivered,
-                                string exchange,
-                                string routingKey,
-                                [AmqpContentHeaderMapping]
-                                IBasicProperties basicProperties,
-                                [AmqpContentBodyMapping]
-                                byte[] body);
+        void HandleBasicDeliver(
+            string consumerTag,
+            ulong deliveryTag,
+            bool redelivered,
+            string exchange,
+            string routingKey,
+            [AmqpContentHeaderMapping] IBasicProperties basicProperties,
+            [AmqpContentBodyMapping] byte[] body
+        );
 
         ///<summary>Handle incoming Basic.Return methods. Signals a
         ///BasicReturnEvent.</summary>
-        void HandleBasicReturn(ushort replyCode,
-                               string replyText,
-                               string exchange,
-                               string routingKey,
-                               [AmqpContentHeaderMapping]
-                               IBasicProperties basicProperties,
-                               [AmqpContentBodyMapping]
-                               byte[] body);
-                               
+        void HandleBasicReturn(
+            ushort replyCode,
+            string replyText,
+            string exchange,
+            string routingKey,
+            [AmqpContentHeaderMapping] IBasicProperties basicProperties,
+            [AmqpContentBodyMapping] byte[] body
+        );
+
         ///<summary>Used to send a Channel.FlowOk. Confirms that
         ///Channel.Flow from the broker was processed.</summary>
         [AmqpMethodMapping(null, "channel", "flow-ok")]
         void _Private_ChannelFlowOk();
-        
+
         ///<summary>Handle incoming Channel.Flow methods. Either
         ///stops or resumes sending the methods that have content.</summary>
         void HandleChannelFlow(bool active);
 
         ///<summary>Handle an incoming Channel.Close. Shuts down the
         ///session and model.</summary>
-        void HandleChannelClose(ushort replyCode,
-                                string replyText,
-                                ushort classId,
-                                ushort methodId);
+        void HandleChannelClose(
+            ushort replyCode,
+            string replyText,
+            ushort classId,
+            ushort methodId
+        );
 
         ///<summary>Handle an incoming Channel.CloseOk.</summary>
         void HandleChannelCloseOk();
@@ -634,50 +655,50 @@ namespace RabbitMQ.Client.Impl
 
         ///<summary>Handle an incoming Connection.Start. Used during
         ///connection initialisation.</summary>
-        void HandleConnectionStart(byte versionMajor,
-                                   byte versionMinor,
-                                   IDictionary serverProperties,
-                                   byte[] mechanisms,
-                                   byte[] locales);
+        void HandleConnectionStart(
+            byte versionMajor,
+            byte versionMinor,
+            IDictionary serverProperties,
+            byte[] mechanisms,
+            byte[] locales
+        );
 
         ///<summary>Sends a Connection.StartOk, and waits for a
         ///Connection.Tune. Used during connection
         ///initialisation.</summary>
         [return: AmqpMethodMapping(null, "connection", "tune")]
-        ConnectionTuneDetails ConnectionStartOk(IDictionary clientProperties,
-                                                string mechanism,
-                                                byte[] response,
-                                                string locale);
+        ConnectionTuneDetails ConnectionStartOk(
+            IDictionary clientProperties,
+            string mechanism,
+            byte[] response,
+            string locale
+        );
 
         ///<summary>Sends a Connection.TuneOk. Used during connection
         ///initialisation.</summary>
-        void ConnectionTuneOk(ushort channelMax,
-                              uint frameMax,
-                              ushort heartbeat);
-
+        void ConnectionTuneOk(ushort channelMax, uint frameMax, ushort heartbeat);
 
         ///<summary>Used to send a Connection.Open. Called during
         ///connection startup.</summary>
         [AmqpForceOneWay]
         [AmqpMethodMapping(null, "connection", "open")]
-        void _Private_ConnectionOpen(string virtualHost,
-                                     string capabilities,
-                                     bool insist);
+        void _Private_ConnectionOpen(string virtualHost, string capabilities, bool insist);
 
         ///<summary>Handle an incoming Connection.OpenOk.</summary>
         void HandleConnectionOpenOk(string knownHosts);
 
         ///<summary>Handle an incoming Connection.Redirect.</summary>
-        void HandleConnectionRedirect(string host,
-                                      string knownHosts);
+        void HandleConnectionRedirect(string host, string knownHosts);
 
         ///<summary>Used to send a Connection.Close. Called during
         ///connection shutdown.</summary>
         [AmqpMethodMapping(null, "connection", "close")]
-        void _Private_ConnectionClose(ushort replyCode,
-                                      string replyText,
-                                      ushort classId,
-                                      ushort methodId);
+        void _Private_ConnectionClose(
+            ushort replyCode,
+            string replyText,
+            ushort classId,
+            ushort methodId
+        );
 
         ///<summary>Used to send a Connection.CloseOk. Called during
         ///connection shutdown.</summary>
@@ -686,10 +707,12 @@ namespace RabbitMQ.Client.Impl
 
         ///<summary>Handle an incoming Connection.Close. Shuts down the
         ///connection and all sessions and models.</summary>
-        void HandleConnectionClose(ushort replyCode,
-                                   string replyText,
-                                   ushort classId,
-                                   ushort methodId);
+        void HandleConnectionClose(
+            ushort replyCode,
+            string replyText,
+            ushort classId,
+            ushort methodId
+        );
     }
 
     ///<summary>Essential information from an incoming Connection.Tune
@@ -698,8 +721,10 @@ namespace RabbitMQ.Client.Impl
     {
         ///<summary>The peer's suggested channel-max parameter.</summary>
         public ushort m_channelMax;
+
         ///<summary>The peer's suggested frame-max parameter.</summary>
         public uint m_frameMax;
+
         ///<summary>The peer's suggested heartbeat parameter.</summary>
         public ushort m_heartbeat;
     }
@@ -766,8 +791,7 @@ namespace RabbitMQ.Client.Apigen.Attributes
     {
         public string m_fieldName;
 
-        public AmqpFieldMappingAttribute(string namespaceName,
-                                string fieldName)
+        public AmqpFieldMappingAttribute(string namespaceName, string fieldName)
             : base(namespaceName)
         {
             m_fieldName = fieldName;
@@ -783,9 +807,7 @@ namespace RabbitMQ.Client.Apigen.Attributes
         public string m_className;
         public string m_methodName;
 
-        public AmqpMethodMappingAttribute(string namespaceName,
-                                 string className,
-                                 string methodName)
+        public AmqpMethodMappingAttribute(string namespaceName, string className, string methodName)
             : base(namespaceName)
         {
             m_className = className;
@@ -805,8 +827,7 @@ namespace RabbitMQ.Client.Apigen.Attributes
         public AmqpNowaitArgumentAttribute(string namespaceName)
             : this(namespaceName, null) { }
 
-        public AmqpNowaitArgumentAttribute(string namespaceName,
-                                  string replacementExpression)
+        public AmqpNowaitArgumentAttribute(string namespaceName, string replacementExpression)
             : base(namespaceName)
         {
             m_replacementExpression = replacementExpression;

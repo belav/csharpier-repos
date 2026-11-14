@@ -16,7 +16,8 @@ namespace System.Text.Json.Serialization.Converters
             Type typeToConvert,
             JsonSerializerOptions options,
             scoped ref ReadStack state,
-            out Memory<T> value)
+            out Memory<T> value
+        )
         {
             if (reader.TokenType is JsonTokenType.Null)
             {
@@ -32,18 +33,30 @@ namespace System.Text.Json.Serialization.Converters
             ((List<T>)state.Current.ReturnValue!).Add(value);
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state, JsonSerializerOptions options)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             state.Current.ReturnValue = new List<T>();
         }
 
-        protected override void ConvertCollection(ref ReadStack state, JsonSerializerOptions options)
+        protected override void ConvertCollection(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             Memory<T> memory = ((List<T>)state.Current.ReturnValue!).ToArray().AsMemory();
             state.Current.ReturnValue = memory;
         }
 
-        protected override bool OnWriteResume(Utf8JsonWriter writer, Memory<T> value, JsonSerializerOptions options, ref WriteStack state)
+        protected override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            Memory<T> value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             return ReadOnlyMemoryConverter<T>.OnWriteResume(writer, value.Span, options, ref state);
         }

@@ -12,14 +12,14 @@ using Microsoft.VisualStudio.Composition;
 namespace Microsoft.CodeAnalysis.Test.Utilities.Notification
 {
     [Export(typeof(IGlobalOperationNotificationService)), PartNotDiscoverable, Shared]
-    internal sealed class TestGlobalOperationNotificationService : AbstractGlobalOperationNotificationService
+    internal sealed class TestGlobalOperationNotificationService
+        : AbstractGlobalOperationNotificationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public TestGlobalOperationNotificationService(
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(listenerProvider) { }
     }
 }

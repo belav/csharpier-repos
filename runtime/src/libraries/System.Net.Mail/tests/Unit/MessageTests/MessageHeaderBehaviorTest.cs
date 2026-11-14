@@ -135,8 +135,14 @@ namespace System.Net.Mail.Tests
 
             Assert.Equal(MailPriority.Normal, _message.Priority);
 
-            Assert.True(_message.Headers.GetValues("Importance").Length == 1, "importance was not set");
-            Assert.True(_message.Headers.GetValues("X-Priority").Length == 1, "x-priority was not set");
+            Assert.True(
+                _message.Headers.GetValues("Importance").Length == 1,
+                "importance was not set"
+            );
+            Assert.True(
+                _message.Headers.GetValues("X-Priority").Length == 1,
+                "x-priority was not set"
+            );
             Assert.True(_message.Headers.GetValues("Priority").Length == 1, "priority was not set");
 
             Assert.Contains("low", _message.Headers.GetValues("Importance")[0]);

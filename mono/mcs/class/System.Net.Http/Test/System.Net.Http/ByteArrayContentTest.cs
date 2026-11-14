@@ -27,113 +27,117 @@
 //
 
 using System;
-using NUnit.Framework;
-using System.Net.Http;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http
 {
-	[TestFixture]
-	public class ByteArrayContentTest
-	{
-		[Test]
-		public void Ctor_Invalid ()
-		{
-			try {
-				new ByteArrayContent (null);
-				Assert.Fail ("#1");
-			} catch (ArgumentNullException) {
-			}
+    [TestFixture]
+    public class ByteArrayContentTest
+    {
+        [Test]
+        public void Ctor_Invalid()
+        {
+            try
+            {
+                new ByteArrayContent(null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException) { }
 
-			try {
-				new ByteArrayContent (new byte[0], -1, 2);
-				Assert.Fail ("#2");
-			} catch (ArgumentOutOfRangeException) {
-			}
+            try
+            {
+                new ByteArrayContent(new byte[0], -1, 2);
+                Assert.Fail("#2");
+            }
+            catch (ArgumentOutOfRangeException) { }
 
-			try {
-				new ByteArrayContent (new byte[0], 11, 1);
-				Assert.Fail ("#3");
-			} catch (ArgumentOutOfRangeException) {
-			}
+            try
+            {
+                new ByteArrayContent(new byte[0], 11, 1);
+                Assert.Fail("#3");
+            }
+            catch (ArgumentOutOfRangeException) { }
 
-			try {
-				new ByteArrayContent (new byte[10], 9, 5);
-				Assert.Fail ("#4");
-			} catch (ArgumentOutOfRangeException) {
-			}
-		}
+            try
+            {
+                new ByteArrayContent(new byte[10], 9, 5);
+                Assert.Fail("#4");
+            }
+            catch (ArgumentOutOfRangeException) { }
+        }
 
-		[Test]
-		public void Ctor ()
-		{
-			byte[] b = { 4, 6 };
+        [Test]
+        public void Ctor()
+        {
+            byte[] b = { 4, 6 };
 
-			using (var m = new ByteArrayContent (b)) {
-			}
-		}
+            using (var m = new ByteArrayContent(b)) { }
+        }
 
-		[Test]
-		public void CopyTo_Invalid ()
-		{
-			var m = new MemoryStream ();
+        [Test]
+        public void CopyTo_Invalid()
+        {
+            var m = new MemoryStream();
 
-			var sc = new ByteArrayContent (new byte[0]);
-			try {
-				sc.CopyToAsync (null);
-				Assert.Fail ("#1");
-			} catch (ArgumentNullException) {
-			}
-		}
+            var sc = new ByteArrayContent(new byte[0]);
+            try
+            {
+                sc.CopyToAsync(null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException) { }
+        }
 
-		[Test]
-		public void CopyToAsync ()
-		{
-			byte[] b = { 4, 2 };
+        [Test]
+        public void CopyToAsync()
+        {
+            byte[] b = { 4, 2 };
 
-			var sc = new ByteArrayContent (b);
+            var sc = new ByteArrayContent(b);
 
-			var dest = new MemoryStream ();
-			var task = sc.CopyToAsync (dest);
-			Assert.IsTrue (task.Wait (500));
-			Assert.AreEqual (2, dest.Length, "#1");
-		}
+            var dest = new MemoryStream();
+            var task = sc.CopyToAsync(dest);
+            Assert.IsTrue(task.Wait(500));
+            Assert.AreEqual(2, dest.Length, "#1");
+        }
 
-		[Test]
-		public void LoadIntoBufferAsync ()
-		{
-			byte[] b = { 4 };
+        [Test]
+        public void LoadIntoBufferAsync()
+        {
+            byte[] b = { 4 };
 
-			var sc = new ByteArrayContent (b);
-			var t = sc.LoadIntoBufferAsync (400);
-			Assert.IsTrue (t.Wait (500));
-		}
+            var sc = new ByteArrayContent(b);
+            var t = sc.LoadIntoBufferAsync(400);
+            Assert.IsTrue(t.Wait(500));
+        }
 
-		[Test]
-		public void ReadAsByteArrayAsync ()
-		{
-			byte[] b = { 4, 55 };
+        [Test]
+        public void ReadAsByteArrayAsync()
+        {
+            byte[] b = { 4, 55 };
 
-			var sc = new ByteArrayContent (b, 1, 1);
-			var res = sc.ReadAsByteArrayAsync ().Result;
-			Assert.AreEqual (1, res.Length, "#1");
-			Assert.AreEqual (55, res[0], "#2");
+            var sc = new ByteArrayContent(b, 1, 1);
+            var res = sc.ReadAsByteArrayAsync().Result;
+            Assert.AreEqual(1, res.Length, "#1");
+            Assert.AreEqual(55, res[0], "#2");
 
-			sc = new ByteArrayContent (b);
-			res = sc.ReadAsByteArrayAsync ().Result;
-			Assert.AreEqual (2, res.Length, "#10");
-			Assert.AreEqual (55, res[1], "#11");
-		}
+            sc = new ByteArrayContent(b);
+            res = sc.ReadAsByteArrayAsync().Result;
+            Assert.AreEqual(2, res.Length, "#10");
+            Assert.AreEqual(55, res[1], "#11");
+        }
 
-		[Test]
-		public void ReadAsStringAsync ()
-		{
-			byte[] b = { 77, 55 };
+        [Test]
+        public void ReadAsStringAsync()
+        {
+            byte[] b = { 77, 55 };
 
-			var sc = new ByteArrayContent (b);
-			var res = sc.ReadAsStringAsync ().Result;
-			Assert.AreEqual ("M7", res, "#1");
-		}
-	}
+            var sc = new ByteArrayContent(b);
+            var res = sc.ReadAsStringAsync().Result;
+            Assert.AreEqual("M7", res, "#1");
+        }
+    }
 }

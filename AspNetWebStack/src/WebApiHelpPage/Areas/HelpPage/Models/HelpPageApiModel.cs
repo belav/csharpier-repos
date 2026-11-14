@@ -47,10 +47,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Models
         /// </summary>
         public IList<ParameterDescription> RequestBodyParameters
         {
-            get
-            {
-                return GetParameterDescriptions(RequestModelDescription);
-            }
+            get { return GetParameterDescriptions(RequestModelDescription); }
         }
 
         /// <summary>
@@ -63,10 +60,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Models
         /// </summary>
         public IList<ParameterDescription> ResourceProperties
         {
-            get
-            {
-                return GetParameterDescriptions(ResourceDescription);
-            }
+            get { return GetParameterDescriptions(ResourceDescription); }
         }
 
         /// <summary>
@@ -84,18 +78,23 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Models
         /// </summary>
         public Collection<string> ErrorMessages { get; private set; }
 
-        private static IList<ParameterDescription> GetParameterDescriptions(ModelDescription modelDescription)
+        private static IList<ParameterDescription> GetParameterDescriptions(
+            ModelDescription modelDescription
+        )
         {
-            ComplexTypeModelDescription complexTypeModelDescription = modelDescription as ComplexTypeModelDescription;
+            ComplexTypeModelDescription complexTypeModelDescription =
+                modelDescription as ComplexTypeModelDescription;
             if (complexTypeModelDescription != null)
             {
                 return complexTypeModelDescription.Properties;
             }
 
-            CollectionModelDescription collectionModelDescription = modelDescription as CollectionModelDescription;
+            CollectionModelDescription collectionModelDescription =
+                modelDescription as CollectionModelDescription;
             if (collectionModelDescription != null)
             {
-                complexTypeModelDescription = collectionModelDescription.ElementDescription as ComplexTypeModelDescription;
+                complexTypeModelDescription =
+                    collectionModelDescription.ElementDescription as ComplexTypeModelDescription;
                 if (complexTypeModelDescription != null)
                 {
                     return complexTypeModelDescription.Properties;

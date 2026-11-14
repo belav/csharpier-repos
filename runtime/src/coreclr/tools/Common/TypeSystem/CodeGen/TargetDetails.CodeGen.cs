@@ -6,7 +6,12 @@ namespace Internal.TypeSystem
     // Extension to TargetDetails related to code generation
     public partial class TargetDetails
     {
-        public TargetDetails(TargetArchitecture architecture, TargetOS targetOS, TargetAbi abi, SimdVectorLength simdVectorLength)
+        public TargetDetails(
+            TargetArchitecture architecture,
+            TargetOS targetOS,
+            TargetAbi abi,
+            SimdVectorLength simdVectorLength
+        )
             : this(architecture, targetOS, abi)
         {
             MaximumSimdVectorLength = simdVectorLength;
@@ -15,10 +20,7 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Specifies the maximum size of native vectors on the target architecture.
         /// </summary>
-        public SimdVectorLength MaximumSimdVectorLength
-        {
-            get;
-        }
+        public SimdVectorLength MaximumSimdVectorLength { get; }
     }
 
     /// <summary>

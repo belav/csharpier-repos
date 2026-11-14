@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.SSE2
@@ -18,9 +18,18 @@ namespace IntelHardwareIntrinsicTest.SSE2
         {
             if (Sse2.IsSupported)
             {
-
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[2] { 1, -5 }, new double[2]))
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 3, -11, 7, 49 }, new float[4]))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[2] { 1, -5 },
+                        new double[2]
+                    )
+                )
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 3, -11, 7, 49 },
+                        new float[4]
+                    )
+                )
                 {
                     var vd0 = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void ConcatConsts()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -38,7 +39,9 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"AB
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"AB
 A
 A
 AA
@@ -47,10 +50,13 @@ B
 
 #
 
-#");
+#"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size      101 (0x65)
   .maxstack  1
@@ -76,13 +82,15 @@ B
   IL_005f:  call       ""void System.Console.WriteLine(string)""
   IL_0064:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(38858, "https://github.com/dotnet/roslyn/issues/38858")]
         public void ConcatEnumWithToString()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static void Main()
@@ -103,7 +111,8 @@ public enum Enum { A = 0, ToString = 1 }
         [Fact, WorkItem(38858, "https://github.com/dotnet/roslyn/issues/38858")]
         public void ConcatStructWithToString()
         {
-            var source = @"
+            var source =
+                @"
 public struct Bad
 {
     public new int ToString;
@@ -121,7 +130,8 @@ public struct Bad
         [Fact]
         public void ConcatDefaults()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -144,7 +154,9 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"AB
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"AB
 A
 A
 AA
@@ -153,10 +165,13 @@ B
 
 #
 
-#");
+#"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size      101 (0x65)
   .maxstack  1
@@ -182,13 +197,15 @@ B
   IL_005f:  call       ""void System.Console.WriteLine(string)""
   IL_0064:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatFour()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -201,11 +218,12 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"qqqqqqqq"
-);
+            var comp = CompileAndVerify(source, expectedOutput: @"qqqqqqqq");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       19 (0x13)
   .maxstack  4
@@ -217,13 +235,15 @@ public class Test
   IL_000d:  call       ""void System.Console.WriteLine(string)""
   IL_0012:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatMerge()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -240,13 +260,18 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"FABF
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"FABF
 OABO
 FABFOABO
-OAFABOFA");
+OAFABOFA"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size      259 (0x103)
   .maxstack  5
@@ -358,14 +383,19 @@ OAFABOFA");
   IL_00fd:  call       ""void System.Console.WriteLine(string)""
   IL_0102:  ret
 }
-");
+"
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes
+        )]
         [WorkItem(37830, "https://github.com/dotnet/roslyn/issues/37830")]
         public void ConcatMerge_MarshalByRefObject()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Messaging;
@@ -408,7 +438,9 @@ class Test
             var comp = CompileAndVerify(source, expectedOutput: @"test_field: 2");
             comp.VerifyDiagnostics();
             // Note: we use ldfld on the field, but not ldflda, because the type is MarshalByRefObject
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -433,13 +465,15 @@ class Test
   IL_003a:  call       ""void System.Console.WriteLine(string)""
   IL_003f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatMergeFromOne()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -455,7 +489,9 @@ public class Test
             var comp = CompileAndVerify(source, expectedOutput: @"FFABFF");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  4
@@ -485,13 +521,15 @@ public class Test
   IL_0033:  call       ""void System.Console.WriteLine(string)""
   IL_0038:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatOneArg()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -507,12 +545,17 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"O
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"O
 F
-O");
+O"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       82 (0x52)
   .maxstack  2
@@ -548,13 +591,15 @@ O");
   IL_004c:  call       ""void System.Console.WriteLine(string)""
   IL_0051:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatOneArgWithNullToString()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -573,11 +618,16 @@ public class C
     public override string ToString() => null;
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"Y
-Y");
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"Y
+Y"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size      111 (0x6f)
   .maxstack  2
@@ -619,13 +669,15 @@ Y");
   IL_0069:  call       ""void System.Console.WriteLine(string)""
   IL_006e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatOneArgWithExplicitConcatCall()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -639,11 +691,16 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"O
-O");
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"O
+O"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -663,13 +720,15 @@ O");
   IL_002b:  call       ""void System.Console.WriteLine(string)""
   IL_0030:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatEmptyString()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -684,11 +743,16 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"O
-F");
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"O
+F"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       51 (0x33)
   .maxstack  2
@@ -712,14 +776,16 @@ F");
   IL_002d:  call       ""void System.Console.WriteLine(string)""
   IL_0032:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(679120, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/679120")]
         public void ConcatEmptyArray()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -735,17 +801,22 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"Start
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"Start
 
 
 A
 B
-End");
+End"
+            );
 
             comp.VerifyDiagnostics();
             // NOTE: Dev11 doesn't optimize away string.Concat(new string[0]) either.
             // We could add an optimization, but it's unlikely to occur in real code.
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  1
@@ -765,14 +836,16 @@ End");
   IL_003d:  call       ""void System.Console.WriteLine(string)""
   IL_0042:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(529064, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529064")]
         [Fact]
         public void TestStringConcatOnLiteralAndCompound()
         {
-            var source = @"
+            var source =
+                @"
 public class Test
 {
     static string field01 = ""A"";
@@ -785,7 +858,9 @@ public class Test
 ";
             var comp = CompileAndVerify(source);
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  3
@@ -796,13 +871,15 @@ public class Test
   IL_0014:  stsfld     ""string Test.field01""
   IL_0019:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatGeneric()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -827,16 +904,21 @@ public class Test
 }
 
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"A0
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"A0
 A0A0
 0B
 0
 #
 0
-#");
+#"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.TestMethod<T>()", @"
+            comp.VerifyIL(
+                "Test.TestMethod<T>()",
+                @"
 {
   // Code size      291 (0x123)
   .maxstack  4
@@ -927,13 +1009,15 @@ A0A0
   IL_011d:  call       ""void System.Console.WriteLine(string)""
   IL_0122:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatGenericConstrained()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -968,7 +1052,9 @@ public class Test
 }
 
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"A
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"A
 AA
 B
 
@@ -981,10 +1067,13 @@ B
 
 #
 
-#");
+#"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.TestMethod<T, U>()", @"
+            comp.VerifyIL(
+                "Test.TestMethod<T, U>()",
+                @"
 {
   // Code size      141 (0x8d)
   .maxstack  1
@@ -1018,13 +1107,15 @@ B
   IL_0087:  call       ""void System.Console.WriteLine(string)""
   IL_008c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatGenericUnconstrained()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -1059,15 +1150,20 @@ struct MutableStruct
     public override string ToString() => (++i).ToString();
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"PPFF
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"PPFF
 FF
 PP
 
 1111
-1111");
+1111"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Printer<T>.Print", @"
+            comp.VerifyIL(
+                "Printer<T>.Print",
+                @"
 {
   // Code size      125 (0x7d)
   .maxstack  4
@@ -1118,13 +1214,15 @@ PP
   IL_0077:  call       ""void System.Console.WriteLine(string)""
   IL_007c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatGenericConstrainedClass()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -1149,13 +1247,18 @@ class Printer<T> where T : class
     }
 }";
 
-            var comp = CompileAndVerify(source, expectedOutput: @"PPFF
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"PPFF
 FF
 PP
-");
+"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Printer<T>.Print", @"
+            comp.VerifyIL(
+                "Printer<T>.Print",
+                @"
 {
   // Code size       93 (0x5d)
   .maxstack  5
@@ -1197,14 +1300,15 @@ PP
   IL_0057:  call       ""void System.Console.WriteLine(string)""
   IL_005c:  ret
 }
-");
-
+"
+            );
         }
 
         [Fact]
         public void ConcatGenericConstrainedStruct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -1233,11 +1337,16 @@ struct MutableStruct
     public override string ToString() => (++i).ToString();
 }";
 
-            var comp = CompileAndVerify(source, expectedOutput: @"1111
-1111");
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"1111
+1111"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Printer<T>.Print", @"
+            comp.VerifyIL(
+                "Printer<T>.Print",
+                @"
 {
   // Code size       81 (0x51)
   .maxstack  4
@@ -1268,14 +1377,15 @@ struct MutableStruct
   IL_004b:  call       ""void System.Console.WriteLine(string)""
   IL_0050:  ret
 }
-");
-
+"
+            );
         }
 
         [Fact]
         public void ConcatWithOtherOptimizations()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -1299,7 +1409,9 @@ public class Test
 
             // IMPORTANT!!  only  c__DisplayClass0.expr2  should be initialized,
             //              there should not be such thing as c__DisplayClass0.expr1
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  3
@@ -1313,13 +1425,15 @@ public class Test
   IL_0020:  call       ""void System.Console.WriteLine(string)""
   IL_0025:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(1092853, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1092853")]
         public void ConcatWithNullCoalescedNullLiteral()
         {
-            const string source = @"
+            const string source =
+                @"
 class Repro
 {
     static string Bug(string s)
@@ -1338,7 +1452,9 @@ class Repro
             var comp = CompileAndVerify(source, expectedOutput: "\"\"");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Repro.Bug", @"
+            comp.VerifyIL(
+                "Repro.Bug",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  3
@@ -1351,13 +1467,15 @@ class Repro
   IL_000b:  call       ""string string.Concat(string, string)""
   IL_0010:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(1092853, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1092853")]
         public void ConcatWithNullCoalescedNullLiteral_2()
         {
-            const string source = @"
+            const string source =
+                @"
 class Repro
 {
     static string Bug(string s)
@@ -1375,7 +1493,9 @@ class Repro
 
             var comp = CompileAndVerify(source, expectedOutput: "\"\"");
 
-            comp.VerifyIL("Repro.Bug", @"
+            comp.VerifyIL(
+                "Repro.Bug",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  3
@@ -1388,13 +1508,15 @@ class Repro
   IL_000b:  call       ""string string.Concat(string, string)""
   IL_0010:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatMutableStruct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -1418,7 +1540,9 @@ struct MutableStruct
             var comp = CompileAndVerify(source, expectedOutput: @"1111");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       87 (0x57)
   .maxstack  4
@@ -1449,13 +1573,15 @@ struct MutableStruct
   IL_004c:  call       ""string string.Concat(string, string, string, string)""
   IL_0051:  call       ""void System.Console.WriteLine(string)""
   IL_0056:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ConcatMutableStructsSideEffects()
         {
-            const string source = @"
+            const string source =
+                @"
 using System;
 using static System.Console;
 
@@ -1494,7 +1620,8 @@ class Test
         [Fact]
         public void ConcatReadonlyStruct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -1517,7 +1644,9 @@ readonly struct ReadonlyStruct
             var comp = CompileAndVerify(source, expectedOutput: @"RRRR");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       77 (0x4d)
   .maxstack  4
@@ -1540,13 +1669,15 @@ readonly struct ReadonlyStruct
   IL_0047:  call       ""void System.Console.WriteLine(string)""
   IL_004c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatStructWithReadonlyToString()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -1569,7 +1700,9 @@ struct StructWithReadonlyToString
             var comp = CompileAndVerify(source, expectedOutput: @"RRRR");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       77 (0x4d)
   .maxstack  4
@@ -1592,13 +1725,15 @@ struct StructWithReadonlyToString
   IL_0047:  call       ""void System.Console.WriteLine(string)""
   IL_004c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatStructWithNoToString()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -1618,7 +1753,9 @@ struct S { }
             var comp = CompileAndVerify(source, expectedOutput: @"SSSS");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       77 (0x4d)
   .maxstack  4
@@ -1641,13 +1778,15 @@ struct S { }
   IL_0047:  call       ""void System.Console.WriteLine(string)""
   IL_004c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatWithImplicitOperator()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -1663,7 +1802,9 @@ public class Test
             var comp = CompileAndVerify(source, expectedOutput: @"ST");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -1674,13 +1815,15 @@ public class Test
   IL_0014:  call       ""void System.Console.WriteLine(string)""
   IL_0019:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatWithNull()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -1696,7 +1839,9 @@ public class Test
             var comp = CompileAndVerify(source, expectedOutput: @"S");
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  3
@@ -1712,13 +1857,15 @@ public class Test
   IL_001b:  call       ""void System.Console.WriteLine(string)""
   IL_0020:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatWithSpecialValueTypes()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -1749,7 +1896,9 @@ public class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"a1
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"a1
 2b
 c3
 4d
@@ -1761,10 +1910,13 @@ c10d11
 a14b15a16
 c17d18c19
 2021cdcd
-22c23dcd");
+22c23dcd"
+            );
 
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size      477 (0x1dd)
   .maxstack  4
@@ -1942,13 +2094,15 @@ c17d18c19
   IL_01d7:  call       ""void System.Console.WriteLine(string)""
   IL_01dc:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ConcatExpressions()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Test
@@ -1965,7 +2119,9 @@ class Test
 
             var comp = CompileAndVerify(source, expectedOutput: "3+4=7");
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Main", @"
+            comp.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       81 (0x51)
   .maxstack  5
@@ -2002,13 +2158,15 @@ class Test
   IL_0046:  call       ""string string.Concat(params string[])""
   IL_004b:  call       ""void System.Console.WriteLine(string)""
   IL_0050:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ConcatRefs()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Test
@@ -2035,7 +2193,9 @@ class Test
 
             var comp = CompileAndVerify(source, expectedOutput: "S13O1S24O2");
             comp.VerifyDiagnostics();
-            comp.VerifyIL("Test.Print<T1, T2, T3>", @"
+            comp.VerifyIL(
+                "Test.Print<T1, T2, T3>",
+                @"
 {
   // Code size      133 (0x85)
   .maxstack  5
@@ -2102,7 +2262,8 @@ class Test
   IL_007a:  call       ""string string.Concat(params string[])""
   IL_007f:  call       ""void System.Console.WriteLine(string)""
   IL_0084:  ret
-}");
+}"
+            );
         }
     }
 }

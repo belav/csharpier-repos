@@ -4,22 +4,24 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration.Internal {
-
+namespace System.Configuration.Internal
+{
     using System.Configuration;
 
-
     [
-        // FXCOP: The correct fix would be to make this class static.
-        // But a class can't be static and sealed at the same time.
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses")
-    ]
-    internal sealed class ConfigurationManagerHelper : IConfigurationManagerHelper {
+    // FXCOP: The correct fix would be to make this class static.
+    // But a class can't be static and sealed at the same time.
+    System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Performance",
+        "CA1812:AvoidUninstantiatedInternalClasses"
+    )]
+    internal sealed class ConfigurationManagerHelper : IConfigurationManagerHelper
+    {
         // Created only through reflection.
-        private ConfigurationManagerHelper() {
-        }
+        private ConfigurationManagerHelper() { }
 
-        void IConfigurationManagerHelper.EnsureNetConfigLoaded() {
+        void IConfigurationManagerHelper.EnsureNetConfigLoaded()
+        {
             System.Net.Configuration.SettingsSection.EnsureConfigLoaded();
         }
     }

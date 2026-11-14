@@ -5,10 +5,13 @@ using System;
 using System.Reflection;
 using Xunit;
 
-public interface IGetContents<T> {
+public interface IGetContents<T>
+{
     (string, int, T) GetContents();
 }
-public struct MyStruct<T> : IGetContents<T> {
+
+public struct MyStruct<T> : IGetContents<T>
+{
     public string s;
     public int a;
     public T t;
@@ -19,8 +22,8 @@ public struct MyStruct<T> : IGetContents<T> {
     }
 }
 
-public class Program {
-
+public class Program
+{
     public delegate (string, int, T) MyDelegate<T>(IGetContents<T> arg);
 
     [Fact]

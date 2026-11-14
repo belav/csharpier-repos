@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         [Fact]
         public void Category()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int P { get; set; }
@@ -43,18 +44,28 @@ class C
 
                 foreach (var expr in new[] { "this", "null", "1", "F", "p", "l" })
                 {
-                    Assert.Equal(DkmEvaluationResultCategory.Data, GetResultProperties(context, expr).Category);
+                    Assert.Equal(
+                        DkmEvaluationResultCategory.Data,
+                        GetResultProperties(context, expr).Category
+                    );
                 }
 
-                Assert.Equal(DkmEvaluationResultCategory.Method, GetResultProperties(context, "M()").Category);
-                Assert.Equal(DkmEvaluationResultCategory.Property, GetResultProperties(context, "P").Category);
+                Assert.Equal(
+                    DkmEvaluationResultCategory.Method,
+                    GetResultProperties(context, "M()").Category
+                );
+                Assert.Equal(
+                    DkmEvaluationResultCategory.Property,
+                    GetResultProperties(context, "P").Category
+                );
             });
         }
 
         [Fact]
         public void StorageType()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int P { get; set; }
@@ -78,12 +89,18 @@ class C
 
                 foreach (var expr in new[] { "this", "null", "1", "P", "F", "M()", "p", "l" })
                 {
-                    Assert.Equal(DkmEvaluationResultStorageType.None, GetResultProperties(context, expr).StorageType);
+                    Assert.Equal(
+                        DkmEvaluationResultStorageType.None,
+                        GetResultProperties(context, expr).StorageType
+                    );
                 }
 
                 foreach (var expr in new[] { "SP", "SF", "SM()" })
                 {
-                    Assert.Equal(DkmEvaluationResultStorageType.Static, GetResultProperties(context, expr).StorageType);
+                    Assert.Equal(
+                        DkmEvaluationResultStorageType.Static,
+                        GetResultProperties(context, expr).StorageType
+                    );
                 }
             });
         }
@@ -91,7 +108,8 @@ class C
         [Fact]
         public void AccessType()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit C
        extends [mscorlib]System.Object
 {
@@ -122,22 +140,44 @@ class C
             var runtime = CreateRuntimeInstance(module, new[] { MscorlibRef });
             var context = CreateMethodContext(runtime, methodName: "C.Test");
 
-            Assert.Equal(DkmEvaluationResultAccessType.Private, GetResultProperties(context, "Private").AccessType);
-            Assert.Equal(DkmEvaluationResultAccessType.Protected, GetResultProperties(context, "Protected").AccessType);
-            Assert.Equal(DkmEvaluationResultAccessType.Internal, GetResultProperties(context, "Internal").AccessType);
-            Assert.Equal(DkmEvaluationResultAccessType.Public, GetResultProperties(context, "Public").AccessType);
+            Assert.Equal(
+                DkmEvaluationResultAccessType.Private,
+                GetResultProperties(context, "Private").AccessType
+            );
+            Assert.Equal(
+                DkmEvaluationResultAccessType.Protected,
+                GetResultProperties(context, "Protected").AccessType
+            );
+            Assert.Equal(
+                DkmEvaluationResultAccessType.Internal,
+                GetResultProperties(context, "Internal").AccessType
+            );
+            Assert.Equal(
+                DkmEvaluationResultAccessType.Public,
+                GetResultProperties(context, "Public").AccessType
+            );
 
             // As in dev12.
-            Assert.Equal(DkmEvaluationResultAccessType.Internal, GetResultProperties(context, "ProtectedInternal").AccessType);
-            Assert.Equal(DkmEvaluationResultAccessType.Internal, GetResultProperties(context, "ProtectedAndInternal").AccessType);
+            Assert.Equal(
+                DkmEvaluationResultAccessType.Internal,
+                GetResultProperties(context, "ProtectedInternal").AccessType
+            );
+            Assert.Equal(
+                DkmEvaluationResultAccessType.Internal,
+                GetResultProperties(context, "ProtectedAndInternal").AccessType
+            );
 
-            Assert.Equal(DkmEvaluationResultAccessType.None, GetResultProperties(context, "null").AccessType);
+            Assert.Equal(
+                DkmEvaluationResultAccessType.None,
+                GetResultProperties(context, "null").AccessType
+            );
         }
 
         [Fact]
         public void AccessType_Nested()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 internal class C
@@ -155,14 +195,18 @@ internal class C
                 var context = CreateMethodContext(runtime, methodName: "C.Test");
 
                 // Used the declared accessibility, rather than the effective accessibility.
-                Assert.Equal(DkmEvaluationResultAccessType.Public, GetResultProperties(context, "F").AccessType);
+                Assert.Equal(
+                    DkmEvaluationResultAccessType.Public,
+                    GetResultProperties(context, "F").AccessType
+                );
             });
         }
 
         [Fact]
         public void ModifierFlags_Virtual()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -185,22 +229,41 @@ class C
             {
                 var context = CreateMethodContext(runtime, methodName: "C.Test");
 
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.None, GetResultProperties(context, "P").ModifierFlags);
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.Virtual, GetResultProperties(context, "VP").ModifierFlags);
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.None,
+                    GetResultProperties(context, "P").ModifierFlags
+                );
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.Virtual,
+                    GetResultProperties(context, "VP").ModifierFlags
+                );
 
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.None, GetResultProperties(context, "M()").ModifierFlags);
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.Virtual, GetResultProperties(context, "VM()").ModifierFlags);
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.None,
+                    GetResultProperties(context, "M()").ModifierFlags
+                );
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.Virtual,
+                    GetResultProperties(context, "VM()").ModifierFlags
+                );
 
                 // Field-like events are borderline since they bind as event accesses, but get emitted as field accesses.
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.None, GetResultProperties(context, "E").ModifierFlags);
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.Virtual, GetResultProperties(context, "VE").ModifierFlags);
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.None,
+                    GetResultProperties(context, "E").ModifierFlags
+                );
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.Virtual,
+                    GetResultProperties(context, "VE").ModifierFlags
+                );
             });
         }
 
         [Fact]
         public void ModifierFlags_Virtual_Variations()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 abstract class Base
@@ -223,15 +286,22 @@ abstract class Derived : Base
             {
                 var context = CreateMethodContext(runtime, methodName: "Derived.Test");
 
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.Virtual, GetResultProperties(context, "Abstract").ModifierFlags);
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.Virtual, GetResultProperties(context, "Override").ModifierFlags);
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.Virtual,
+                    GetResultProperties(context, "Abstract").ModifierFlags
+                );
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.Virtual,
+                    GetResultProperties(context, "Override").ModifierFlags
+                );
             });
         }
 
         [Fact]
         public void ModifierFlags_Constant()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -254,12 +324,18 @@ class C
 
                 foreach (var expr in new[] { "null", "1", "1 + 1", "CF", "cl" })
                 {
-                    Assert.Equal(DkmEvaluationResultTypeModifierFlags.Constant, GetResultProperties(context, expr).ModifierFlags);
+                    Assert.Equal(
+                        DkmEvaluationResultTypeModifierFlags.Constant,
+                        GetResultProperties(context, expr).ModifierFlags
+                    );
                 }
 
                 foreach (var expr in new[] { "this", "F", "SRF", "p", "l" })
                 {
-                    Assert.Equal(DkmEvaluationResultTypeModifierFlags.None, GetResultProperties(context, expr).ModifierFlags);
+                    Assert.Equal(
+                        DkmEvaluationResultTypeModifierFlags.None,
+                        GetResultProperties(context, expr).ModifierFlags
+                    );
                 }
             });
         }
@@ -267,7 +343,8 @@ class C
         [Fact]
         public void ModifierFlags_Volatile()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -286,15 +363,22 @@ class C
             {
                 var context = CreateMethodContext(runtime, methodName: "C.Test");
 
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.None, GetResultProperties(context, "F").ModifierFlags);
-                Assert.Equal(DkmEvaluationResultTypeModifierFlags.Volatile, GetResultProperties(context, "VF").ModifierFlags);
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.None,
+                    GetResultProperties(context, "F").ModifierFlags
+                );
+                Assert.Equal(
+                    DkmEvaluationResultTypeModifierFlags.Volatile,
+                    GetResultProperties(context, "VF").ModifierFlags
+                );
             });
         }
 
         [Fact]
         public void Assignment()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public virtual int P { get; set; }
@@ -313,22 +397,42 @@ class C
                 string error;
                 var testData = new CompilationTestData();
                 ImmutableArray<AssemblyIdentity> missingAssemblyIdentities;
-                context.CompileAssignment("P", "1", NoAliases, DebuggerDiagnosticFormatter.Instance, out resultProperties, out error, out missingAssemblyIdentities, EnsureEnglishUICulture.PreferredOrNull, testData);
+                context.CompileAssignment(
+                    "P",
+                    "1",
+                    NoAliases,
+                    DebuggerDiagnosticFormatter.Instance,
+                    out resultProperties,
+                    out error,
+                    out missingAssemblyIdentities,
+                    EnsureEnglishUICulture.PreferredOrNull,
+                    testData
+                );
                 Assert.Null(error);
                 Assert.Empty(missingAssemblyIdentities);
 
-                Assert.Equal(DkmClrCompilationResultFlags.PotentialSideEffect, resultProperties.Flags);
+                Assert.Equal(
+                    DkmClrCompilationResultFlags.PotentialSideEffect,
+                    resultProperties.Flags
+                );
                 Assert.Equal(default(DkmEvaluationResultCategory), resultProperties.Category); // Not Data
                 Assert.Equal(default(DkmEvaluationResultAccessType), resultProperties.AccessType); // Not Public
                 Assert.Equal(default(DkmEvaluationResultStorageType), resultProperties.StorageType);
-                Assert.Equal(default(DkmEvaluationResultTypeModifierFlags), resultProperties.ModifierFlags); // Not Virtual
+                Assert.Equal(
+                    default(DkmEvaluationResultTypeModifierFlags),
+                    resultProperties.ModifierFlags
+                ); // Not Virtual
             });
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = "https://github.com/dotnet/roslyn/issues/25702")]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = "https://github.com/dotnet/roslyn/issues/25702"
+        )]
         public void LocalDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public virtual int P { get; set; }
@@ -356,22 +460,31 @@ class C
                     out error,
                     out missingAssemblyIdentities,
                     EnsureEnglishUICulture.PreferredOrNull,
-                    testData);
+                    testData
+                );
                 Assert.Null(error);
                 Assert.Empty(missingAssemblyIdentities);
 
-                Assert.Equal(DkmClrCompilationResultFlags.PotentialSideEffect | DkmClrCompilationResultFlags.ReadOnlyResult, resultProperties.Flags);
+                Assert.Equal(
+                    DkmClrCompilationResultFlags.PotentialSideEffect
+                        | DkmClrCompilationResultFlags.ReadOnlyResult,
+                    resultProperties.Flags
+                );
                 Assert.Equal(default(DkmEvaluationResultCategory), resultProperties.Category); // Not Data
                 Assert.Equal(default(DkmEvaluationResultAccessType), resultProperties.AccessType);
                 Assert.Equal(default(DkmEvaluationResultStorageType), resultProperties.StorageType);
-                Assert.Equal(default(DkmEvaluationResultTypeModifierFlags), resultProperties.ModifierFlags);
+                Assert.Equal(
+                    default(DkmEvaluationResultTypeModifierFlags),
+                    resultProperties.ModifierFlags
+                );
             });
         }
 
         [Fact]
         public void Error()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void Test()

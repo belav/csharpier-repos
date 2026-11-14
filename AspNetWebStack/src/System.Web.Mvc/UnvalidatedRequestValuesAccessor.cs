@@ -3,5 +3,7 @@
 
 namespace System.Web.Mvc
 {
-    internal delegate IUnvalidatedRequestValues UnvalidatedRequestValuesAccessor(ControllerContext controllerContext);
+    internal delegate IUnvalidatedRequestValues UnvalidatedRequestValuesAccessor(
+        ControllerContext controllerContext
+    );
 }

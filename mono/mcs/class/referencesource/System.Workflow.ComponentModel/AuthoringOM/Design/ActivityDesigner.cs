@@ -2,52 +2,58 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
     using System.CodeDom;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //
 
     #region ActivityDesigner Class
     /// <summary>
-    /// ActivityDesigner provides a simple designer which allows user to visually design activities in the design mode. 
+    /// ActivityDesigner provides a simple designer which allows user to visually design activities in the design mode.
     /// ActivityDesigner provides simple mechanism using which the activities can participate in rendering the Workflow.
-    /// ActivityDesigner enables the user to customize layouting, drawing associated with the activity. 
+    /// ActivityDesigner enables the user to customize layouting, drawing associated with the activity.
     /// It also enables the user to extend the meta data associated with the activity.
     /// </summary>
     [ActivityDesignerTheme(typeof(ActivityDesignerTheme))]
     [SRCategory("ActivityDesigners", "System.Workflow.ComponentModel.Design.DesignerResources")]
     [DesignerSerializer(typeof(ActivityDesignerLayoutSerializer), typeof(WorkflowMarkupSerializer))]
     [ToolboxItemFilter("Microsoft.Workflow.VSDesigner", ToolboxItemFilterType.Require)]
-    [ToolboxItemFilter("System.Workflow.ComponentModel.Design.ActivitySet", ToolboxItemFilterType.Custom)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public class ActivityDesigner : IDisposable,
-                                    IDesignerFilter,
-                                    IDesigner,
-                                    IToolboxUser,
-                                    IPersistUIState,
-                                    IWorkflowDesignerMessageSink,
-                                    IWorkflowRootDesigner,
-                                    IConnectableDesigner
+    [ToolboxItemFilter(
+        "System.Workflow.ComponentModel.Design.ActivitySet",
+        ToolboxItemFilterType.Custom
+    )]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public class ActivityDesigner
+        : IDisposable,
+            IDesignerFilter,
+            IDesigner,
+            IToolboxUser,
+            IPersistUIState,
+            IWorkflowDesignerMessageSink,
+            IWorkflowRootDesigner,
+            IConnectableDesigner
     {
         #region Fields
         //Members which determine the linesize of text in ActivityDesigner
@@ -65,7 +71,14 @@ namespace System.Workflow.ComponentModel.Design
         private List<DesignerAction> designerActions;
 
         [Flags]
-        internal enum DrawingStates { Valid = 0, InvalidPosition = 1, InvalidSize = 2, InvalidDraw = 4 };
+        internal enum DrawingStates
+        {
+            Valid = 0,
+            InvalidPosition = 1,
+            InvalidSize = 2,
+            InvalidDraw = 4,
+        };
+
         private DrawingStates drawingState = DrawingStates.Valid;
 
         private Point location = Point.Empty;
@@ -84,9 +97,7 @@ namespace System.Workflow.ComponentModel.Design
         #endregion
 
         #region Construction and Destruction
-        public ActivityDesigner()
-        {
-        }
+        public ActivityDesigner() { }
 
         ~ActivityDesigner()
         {
@@ -102,10 +113,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public Activity Activity
         {
-            get
-            {
-                return this.activity;
-            }
+            get { return this.activity; }
         }
 
         /// <summary>
@@ -120,7 +128,8 @@ namespace System.Workflow.ComponentModel.Design
                 if (rootDesigner != null && IsRootDesigner)
                     parentDesigner = rootDesigner.InvokingDesigner;
                 else if (Activity != null && Activity.Parent != null)
-                    parentDesigner = ActivityDesigner.GetDesigner(Activity.Parent) as CompositeActivityDesigner;
+                    parentDesigner =
+                        ActivityDesigner.GetDesigner(Activity.Parent) as CompositeActivityDesigner;
                 return parentDesigner;
             }
         }
@@ -132,8 +141,11 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
-                return (selectionService != null && selectionService.GetComponentSelected(Activity));
+                ISelectionService selectionService =
+                    GetService(typeof(ISelectionService)) as ISelectionService;
+                return (
+                    selectionService != null && selectionService.GetComponentSelected(Activity)
+                );
             }
         }
 
@@ -144,7 +156,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                ISelectionService selectionService =
+                    GetService(typeof(ISelectionService)) as ISelectionService;
                 return (selectionService != null && selectionService.PrimarySelection == Activity);
             }
         }
@@ -169,15 +182,12 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual bool IsVisible
         {
-            get
-            {
-                return this.isVisible;
-            }
+            get { return this.isVisible; }
         }
 
         /// <summary>
-        /// Get value indicating if the activity associated with the designer can be modified. 
-        /// This property also controls the position of the designer in the workflow. 
+        /// Get value indicating if the activity associated with the designer can be modified.
+        /// This property also controls the position of the designer in the workflow.
         /// It is used in edit operations such as drag drop, delete, cut/copy/paste etc.
         /// </summary>
         public bool IsLocked
@@ -190,11 +200,13 @@ namespace System.Workflow.ComponentModel.Design
                 if (DrawingState != DrawingStates.Valid)
                     return true;
 
-                WorkflowDesignerLoader loader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                WorkflowDesignerLoader loader =
+                    GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
                 if (loader != null && loader.InDebugMode)
                     return true;
 
-                IWorkflowRootDesigner rootDesigner = ActivityDesigner.GetSafeRootDesigner(Activity.Site) as IWorkflowRootDesigner;
+                IWorkflowRootDesigner rootDesigner =
+                    ActivityDesigner.GetSafeRootDesigner(Activity.Site) as IWorkflowRootDesigner;
                 if (rootDesigner != null && rootDesigner.InvokingDesigner != null)
                     return true;
 
@@ -207,11 +219,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual Point Location
         {
-            get
-            {
-                return this.location;
-            }
-
+            get { return this.location; }
             set
             {
                 if (ParentDesigner is FreeformActivityDesigner)
@@ -227,11 +235,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual Size Size
         {
-            get
-            {
-                return this.size;
-            }
-
+            get { return this.size; }
             set
             {
                 value.Width = Math.Max(value.Width, MinimumSize.Width);
@@ -247,10 +251,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual Size MinimumSize
         {
-            get
-            {
-                return DesignerTheme.Size;
-            }
+            get { return DesignerTheme.Size; }
         }
 
         /// <summary>
@@ -270,10 +271,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual Image Image
         {
-            get
-            {
-                return this.image;
-            }
+            get { return this.image; }
             protected set
             {
                 this.image = value;
@@ -286,10 +284,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual string Text
         {
-            get
-            {
-                return this.text;
-            }
+            get { return this.text; }
             protected set
             {
                 if (value == null || value.Length == 0 || this.text == value)
@@ -305,10 +300,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public ActivityDesignerTheme DesignerTheme
         {
-            get
-            {
-                return WorkflowTheme.CurrentTheme.GetDesignerTheme(this);
-            }
+            get { return WorkflowTheme.CurrentTheme.GetDesignerTheme(this); }
         }
 
         /// <summary>
@@ -333,14 +325,11 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         protected internal WorkflowView ParentView
         {
-            get
-            {
-                return GetService(typeof(WorkflowView)) as WorkflowView;
-            }
+            get { return GetService(typeof(WorkflowView)) as WorkflowView; }
         }
 
         /// <summary>
-        /// Gets the collection of verbs to be associated with the designer. 
+        /// Gets the collection of verbs to be associated with the designer.
         /// The verbs are shown on context menu and the top level workflow menu.
         /// </summary>
         protected virtual ActivityDesignerVerbCollection Verbs
@@ -351,20 +340,57 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     this.designerVerbs = new ActivityDesignerVerbCollection();
                     if (!IsLocked)
-                        this.designerVerbs.Add(new ActivityDesignerVerb(this, DesignerVerbGroup.General, DR.GetString(DR.GenerateEventHandlers), new EventHandler(OnGenerateEventHandler), new EventHandler(OnGenerateEventHandlerStatusUpdate)));
+                        this.designerVerbs.Add(
+                            new ActivityDesignerVerb(
+                                this,
+                                DesignerVerbGroup.General,
+                                DR.GetString(DR.GenerateEventHandlers),
+                                new EventHandler(OnGenerateEventHandler),
+                                new EventHandler(OnGenerateEventHandlerStatusUpdate)
+                            )
+                        );
 
                     // Add the item to choose an activity datasource
-                    WorkflowDesignerLoader loader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                    WorkflowDesignerLoader loader =
+                        GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
                     if (this.Activity.Parent != null)
-                        this.designerVerbs.Add(new ActivityDesignerVerb(this, DesignerVerbGroup.General, DR.GetString(DR.PromoteBindings), new EventHandler(OnPromoteBindings), new EventHandler(OnPromoteBindingsStatusUpdate)));
+                        this.designerVerbs.Add(
+                            new ActivityDesignerVerb(
+                                this,
+                                DesignerVerbGroup.General,
+                                DR.GetString(DR.PromoteBindings),
+                                new EventHandler(OnPromoteBindings),
+                                new EventHandler(OnPromoteBindingsStatusUpdate)
+                            )
+                        );
 
-                    this.designerVerbs.Add(new ActivityDesignerVerb(this, DesignerVerbGroup.General, DR.GetString(DR.BindSelectedProperty), new EventHandler(OnBindProperty), new EventHandler(OnBindPropertyStatusUpdate)));
+                    this.designerVerbs.Add(
+                        new ActivityDesignerVerb(
+                            this,
+                            DesignerVerbGroup.General,
+                            DR.GetString(DR.BindSelectedProperty),
+                            new EventHandler(OnBindProperty),
+                            new EventHandler(OnBindPropertyStatusUpdate)
+                        )
+                    );
 
-                    ActivityDesignerVerb designerVerb = new ActivityDesignerVerb(this, DesignerVerbGroup.General, DR.GetString(DR.MoveLeftDesc), new EventHandler(OnMoveBranch), new EventHandler(OnStatusMoveBranch));
+                    ActivityDesignerVerb designerVerb = new ActivityDesignerVerb(
+                        this,
+                        DesignerVerbGroup.General,
+                        DR.GetString(DR.MoveLeftDesc),
+                        new EventHandler(OnMoveBranch),
+                        new EventHandler(OnStatusMoveBranch)
+                    );
                     designerVerb.Properties[DesignerUserDataKeys.MoveBranchKey] = true;
                     this.designerVerbs.Add(designerVerb);
 
-                    designerVerb = new ActivityDesignerVerb(this, DesignerVerbGroup.General, DR.GetString(DR.MoveRightDesc), new EventHandler(OnMoveBranch), new EventHandler(OnStatusMoveBranch));
+                    designerVerb = new ActivityDesignerVerb(
+                        this,
+                        DesignerVerbGroup.General,
+                        DR.GetString(DR.MoveRightDesc),
+                        new EventHandler(OnMoveBranch),
+                        new EventHandler(OnStatusMoveBranch)
+                    );
                     designerVerb.Properties[DesignerUserDataKeys.MoveBranchKey] = false;
                     this.designerVerbs.Add(designerVerb);
 
@@ -381,10 +407,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         protected virtual bool ShowSmartTag
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -392,10 +415,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         protected virtual ReadOnlyCollection<ActivityDesignerVerb> SmartTagVerbs
         {
-            get
-            {
-                return new List<ActivityDesignerVerb>().AsReadOnly();
-            }
+            get { return new List<ActivityDesignerVerb>().AsReadOnly(); }
         }
 
         /// <summary>
@@ -433,20 +453,37 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         bool isNestedInComment = ActivityDesigner.IsCommentedActivity(activity);
 
-                        WorkflowDesignerLoader loader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                        WorkflowDesignerLoader loader =
+                            GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
                         bool debugMode = (loader != null && loader.InDebugMode);
 
-                        if (activity.Enabled && !isNestedInComment && !IsLocked && activity.Site != null && !debugMode)
+                        if (
+                            activity.Enabled
+                            && !isNestedInComment
+                            && !IsLocked
+                            && activity.Site != null
+                            && !debugMode
+                        )
                         {
-                            ValidationErrorCollection validationErrors = new ValidationErrorCollection();
+                            ValidationErrorCollection validationErrors =
+                                new ValidationErrorCollection();
                             try
                             {
-                                ValidationManager validationManager = new ValidationManager(Activity.Site, false);
+                                ValidationManager validationManager = new ValidationManager(
+                                    Activity.Site,
+                                    false
+                                );
                                 using (WorkflowCompilationContext.CreateScope(validationManager))
                                 {
                                     Activity rootActivity = Helpers.GetRootActivity(this.Activity);
-                                    foreach (Validator validator in validationManager.GetValidators(activity.GetType()))
-                                        validationErrors.AddRange(validator.Validate(validationManager, activity));
+                                    foreach (
+                                        Validator validator in validationManager.GetValidators(
+                                            activity.GetType()
+                                        )
+                                    )
+                                        validationErrors.AddRange(
+                                            validator.Validate(validationManager, activity)
+                                        );
                                 }
                             }
                             catch
@@ -460,10 +497,18 @@ namespace System.Workflow.ComponentModel.Design
                                 for (int i = 0; i < validationErrors.Count; i++)
                                 {
                                     ValidationError error = validationErrors[i] as ValidationError;
-                                    Debug.Assert(error != null, "someone inserted a null or no 'ValidationError' type error in errors collection.");
+                                    Debug.Assert(
+                                        error != null,
+                                        "someone inserted a null or no 'ValidationError' type error in errors collection."
+                                    );
                                     if (error != null && !error.IsWarning)
                                     {
-                                        DesignerAction designerAction = new DesignerAction(this, i, error.ErrorText, AmbientTheme.ConfigErrorImage);
+                                        DesignerAction designerAction = new DesignerAction(
+                                            this,
+                                            i,
+                                            error.ErrorText,
+                                            AmbientTheme.ConfigErrorImage
+                                        );
                                         designerAction.PropertyName = error.PropertyName;
                                         foreach (DictionaryEntry entry in error.UserData)
                                             designerAction.UserData[entry.Key] = entry.Value;
@@ -498,19 +543,24 @@ namespace System.Workflow.ComponentModel.Design
 
                 bool isNestedInComment = ActivityDesigner.IsCommentedActivity(Activity);
 
-                WorkflowDesignerLoader loader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                WorkflowDesignerLoader loader =
+                    GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
                 bool debugMode = (loader != null && loader.InDebugMode);
 
-                if (WorkflowTheme.CurrentTheme.AmbientTheme.ShowConfigErrors &&
-                    Activity.Enabled && !isNestedInComment && !debugMode &&
-                    DesignerActions.Count > 0)
+                if (
+                    WorkflowTheme.CurrentTheme.AmbientTheme.ShowConfigErrors
+                    && Activity.Enabled
+                    && !isNestedInComment
+                    && !debugMode
+                    && DesignerActions.Count > 0
+                )
                     glyphs.Add(ConfigErrorGlyph.Default);
 
                 //Add comment glyph only for ctop level comments
                 if (!Activity.Enabled && !isNestedInComment)
                     glyphs.Add(CommentGlyph.Default);
 
-                // 
+                //
                 if (Helpers.IsActivityLocked(Activity))
                     glyphs.Add(LockedActivityGlyph.Default);
 
@@ -538,7 +588,8 @@ namespace System.Workflow.ComponentModel.Design
                 Rectangle bounds = Bounds;
                 Rectangle textRectangle = Rectangle.Empty;
                 textRectangle.X = bounds.Left + ambientTheme.Margin.Width;
-                textRectangle.X += (Image != null) ? designerTheme.ImageSize.Width + ambientTheme.Margin.Width : 0;
+                textRectangle.X +=
+                    (Image != null) ? designerTheme.ImageSize.Width + ambientTheme.Margin.Width : 0;
                 textRectangle.Y = bounds.Top + (bounds.Height - this.textSize.Height) / 2;
                 textRectangle.Size = this.textSize;
                 return textRectangle;
@@ -561,8 +612,10 @@ namespace System.Workflow.ComponentModel.Design
 
                 Rectangle bounds = Bounds;
                 Rectangle imageRectangle = Rectangle.Empty;
-                imageRectangle.X = bounds.Left + WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Width;
-                imageRectangle.Y = bounds.Top + (bounds.Height - DesignerTheme.ImageSize.Height) / 2;
+                imageRectangle.X =
+                    bounds.Left + WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Width;
+                imageRectangle.Y =
+                    bounds.Top + (bounds.Height - DesignerTheme.ImageSize.Height) / 2;
                 imageRectangle.Size = designerTheme.ImageSize;
                 return imageRectangle;
             }
@@ -570,22 +623,16 @@ namespace System.Workflow.ComponentModel.Design
 
         protected virtual CompositeActivityDesigner InvokingDesigner
         {
-            get
-            {
-                return this.invokingDesigner;
-            }
-
-            set
-            {
-                this.invokingDesigner = value;
-            }
+            get { return this.invokingDesigner; }
+            set { this.invokingDesigner = value; }
         }
 
         protected virtual ReadOnlyCollection<WorkflowDesignerMessageFilter> MessageFilters
         {
             get
             {
-                List<WorkflowDesignerMessageFilter> stockFilters = new List<WorkflowDesignerMessageFilter>();
+                List<WorkflowDesignerMessageFilter> stockFilters =
+                    new List<WorkflowDesignerMessageFilter>();
                 stockFilters.Add(new ConnectionManager());
                 stockFilters.Add(new ResizingMessageFilter());
                 stockFilters.Add(new DynamicActionMessageFilter());
@@ -602,30 +649,21 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         protected internal virtual bool EnableVisualResizing
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
         #endregion
 
         #region Private Properties
 
         #region Properties used during serialization only
-        //Note that the following property is used by ActivityDesignerLayoutSerializer to 
+        //Note that the following property is used by ActivityDesignerLayoutSerializer to
         //associate a designer with activity
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         internal string Name
         {
-            get
-            {
-                return ((Activity != null) ? Activity.Name : null);
-            }
-
-            set
-            {
-            }
+            get { return ((Activity != null) ? Activity.Name : null); }
+            set { }
         }
         #endregion
 
@@ -640,7 +678,10 @@ namespace System.Workflow.ComponentModel.Design
                     foreach (IComponent component in designerHost.Container.Components)
                     {
                         Activity activity = component as Activity;
-                        if (activity != null && ActivityDesigner.GetDesigner(activity) is FreeformActivityDesigner)
+                        if (
+                            activity != null
+                            && ActivityDesigner.GetDesigner(activity) is FreeformActivityDesigner
+                        )
                         {
                             supportsLayoutPersistence = true;
                             break;
@@ -653,31 +694,18 @@ namespace System.Workflow.ComponentModel.Design
 
         internal virtual WorkflowLayout SupportedLayout
         {
-            get
-            {
-                return new ActivityRootLayout(Activity.Site);
-            }
+            get { return new ActivityRootLayout(Activity.Site); }
         }
 
         internal SmartTag DesignerSmartTag
         {
-            get
-            {
-                return this.smartTag;
-            }
+            get { return this.smartTag; }
         }
 
         internal DrawingStates DrawingState
         {
-            get
-            {
-                return this.drawingState;
-            }
-
-            set
-            {
-                this.drawingState = value;
-            }
+            get { return this.drawingState; }
+            set { this.drawingState = value; }
         }
 
         internal Image StockImage
@@ -704,7 +732,6 @@ namespace System.Workflow.ComponentModel.Design
 
                 return this.smartTagVisible;
             }
-
             set
             {
                 if (this.smartTagVisible == value)
@@ -724,7 +751,12 @@ namespace System.Workflow.ComponentModel.Design
                 //Site can be null when we are dragging item from the toolbox onto the design surface
                 if (Activity.Site != null)
                 {
-                    foreach (PropertyDescriptor propertyDescriptor in PropertyDescriptorFilter.GetPropertiesForEvents(Activity.Site, Activity))
+                    foreach (
+                        PropertyDescriptor propertyDescriptor in PropertyDescriptorFilter.GetPropertiesForEvents(
+                            Activity.Site,
+                            Activity
+                        )
+                    )
                         propertyDescriptors.Add(propertyDescriptor);
                 }
 
@@ -740,7 +772,10 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (!Helpers.IsActivityLocked(Activity))
                 {
-                    PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(Activity, new Attribute[] { new BrowsableAttribute(true) });
+                    PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(
+                        Activity,
+                        new Attribute[] { new BrowsableAttribute(true) }
+                    );
                     if (properties != null)
                     {
                         foreach (PropertyDescriptor propDesc in properties)
@@ -765,7 +800,10 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 else
                 {
-                    string activityName = (Activity.Name.Length > MaximumIdentifierLength) ? Activity.Name.Substring(0, MaximumIdentifierLength) + "..." : Activity.Name;
+                    string activityName =
+                        (Activity.Name.Length > MaximumIdentifierLength)
+                            ? Activity.Name.Substring(0, MaximumIdentifierLength) + "..."
+                            : Activity.Name;
                     title = DR.GetString(DR.InfoTipTitle, Activity.GetType().Name, activityName);
                 }
                 return title;
@@ -776,8 +814,14 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                string tipText = (!String.IsNullOrEmpty(Activity.Description)) ? Activity.Description : ActivityDesigner.GetActivityDescription(Activity.GetType());
-                tipText = (tipText.Length > MaximumDescriptionLength) ? tipText.Substring(0, MaximumDescriptionLength) + "..." : tipText;
+                string tipText =
+                    (!String.IsNullOrEmpty(Activity.Description))
+                        ? Activity.Description
+                        : ActivityDesigner.GetActivityDescription(Activity.GetType());
+                tipText =
+                    (tipText.Length > MaximumDescriptionLength)
+                        ? tipText.Substring(0, MaximumDescriptionLength) + "..."
+                        : tipText;
                 if (RulesText.Length > 0)
                     tipText += "\n\n" + RulesText;
 
@@ -793,25 +837,39 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     this.rulesText = String.Empty;
 
-                    IDictionary<string, string> rules = DesignerHelpers.GetDeclarativeRules(Activity);
+                    IDictionary<string, string> rules = DesignerHelpers.GetDeclarativeRules(
+                        Activity
+                    );
                     if (rules.Count > 0)
                     {
                         this.rulesText = DR.GetString(DR.Rules);
 
-                        int maxRulesLength = 3 * (MaximumIdentifierLength + MaximumDescriptionLength);
+                        int maxRulesLength =
+                            3 * (MaximumIdentifierLength + MaximumDescriptionLength);
                         foreach (KeyValuePair<string, string> rule in rules)
                         {
                             this.rulesText += "\n";
 
                             string ruleName = rule.Key as string;
-                            ruleName = (ruleName.Length > MaximumIdentifierLength) ? ruleName.Substring(0, MaximumIdentifierLength) + "..." : ruleName;
+                            ruleName =
+                                (ruleName.Length > MaximumIdentifierLength)
+                                    ? ruleName.Substring(0, MaximumIdentifierLength) + "..."
+                                    : ruleName;
 
                             string ruleDescription = rule.Value as string;
-                            ruleDescription = (ruleDescription.Length > MaximumDescriptionLength) ? ruleDescription.Substring(0, MaximumDescriptionLength) + "..." : ruleDescription;
+                            ruleDescription =
+                                (ruleDescription.Length > MaximumDescriptionLength)
+                                    ? ruleDescription.Substring(0, MaximumDescriptionLength) + "..."
+                                    : ruleDescription;
                             if (ruleDescription.Length == 0)
                                 ruleDescription = DR.GetString(DR.Empty);
 
-                            this.rulesText += String.Format(CultureInfo.CurrentCulture, "{0}: {1}", ruleName, ruleDescription);
+                            this.rulesText += String.Format(
+                                CultureInfo.CurrentCulture,
+                                "{0}: {1}",
+                                ruleName,
+                                ruleDescription
+                            );
                             if (this.rulesText.Length > maxRulesLength)
                                 break;
                         }
@@ -829,7 +887,10 @@ namespace System.Workflow.ComponentModel.Design
         {
             ActivityDesignerVerb moveBranchVerb = sender as ActivityDesignerVerb;
             if (moveBranchVerb != null)
-                ParallelActivityDesigner.MoveDesigners(this, (bool)moveBranchVerb.Properties[DesignerUserDataKeys.MoveBranchKey]);
+                ParallelActivityDesigner.MoveDesigners(
+                    this,
+                    (bool)moveBranchVerb.Properties[DesignerUserDataKeys.MoveBranchKey]
+                );
         }
 
         private void OnStatusMoveBranch(object sender, EventArgs e)
@@ -845,7 +906,11 @@ namespace System.Workflow.ComponentModel.Design
             {
                 List<Activity> activities = new List<Activity>();
 
-                foreach (Activity containedActivity in ((CompositeActivity)parentDesigner.Activity).Activities)
+                foreach (
+                    Activity containedActivity in (
+                        (CompositeActivity)parentDesigner.Activity
+                    ).Activities
+                )
                 {
                     if (!Helpers.IsAlternateFlowActivity(containedActivity))
                         activities.Add(containedActivity);
@@ -856,10 +921,20 @@ namespace System.Workflow.ComponentModel.Design
                 int index = activities.IndexOf(Activity as Activity);
                 // "Move Left" should be disabled if the immediate proceeding branch is locked.
                 int proceedingLockedIndex = (index > 0) ? index - 1 : -1;
-                enableVerb = (index >= 0 && ((moveleft && index > 0 && (index - proceedingLockedIndex) > 0) || (!moveleft && index < activities.Count - 1)));
+                enableVerb = (
+                    index >= 0
+                    && (
+                        (moveleft && index > 0 && (index - proceedingLockedIndex) > 0)
+                        || (!moveleft && index < activities.Count - 1)
+                    )
+                );
             }
 
-            moveBranchVerb.Visible = (parentDesigner is ParallelActivityDesigner || parentDesigner is ActivityPreviewDesigner && !Helpers.IsAlternateFlowActivity(Activity));
+            moveBranchVerb.Visible = (
+                parentDesigner is ParallelActivityDesigner
+                || parentDesigner is ActivityPreviewDesigner
+                    && !Helpers.IsAlternateFlowActivity(Activity)
+            );
             moveBranchVerb.Enabled = enableVerb;
         }
 
@@ -875,8 +950,11 @@ namespace System.Workflow.ComponentModel.Design
             if (serviceProvider == null)
                 throw new ArgumentNullException("serviceProvider");
 
-            IDesignerHost designerHost = serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            return (designerHost != null) ? GetDesigner(designerHost.RootComponent as Activity) as ActivityDesigner : null;
+            IDesignerHost designerHost =
+                serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            return (designerHost != null)
+                ? GetDesigner(designerHost.RootComponent as Activity) as ActivityDesigner
+                : null;
         }
 
         /// <summary>
@@ -924,11 +1002,15 @@ namespace System.Workflow.ComponentModel.Design
         public virtual HitTestInfo HitTest(Point point)
         {
             HitTestInfo hitInfo = HitTestInfo.Nowhere;
-            if (ParentDesigner is FreeformActivityDesigner ||
-                (ParentDesigner == null && this is FreeformActivityDesigner))
+            if (
+                ParentDesigner is FreeformActivityDesigner
+                || (ParentDesigner == null && this is FreeformActivityDesigner)
+            )
             {
                 //Check if the hit is on connection
-                ReadOnlyCollection<ConnectionPoint> connectionPoints = GetConnectionPoints(DesignerEdges.All);
+                ReadOnlyCollection<ConnectionPoint> connectionPoints = GetConnectionPoints(
+                    DesignerEdges.All
+                );
                 for (int j = 0; j < connectionPoints.Count; j++)
                 {
                     if (connectionPoints[j].Bounds.Contains(point))
@@ -942,18 +1024,39 @@ namespace System.Workflow.ComponentModel.Design
             Rectangle bounds = Bounds;
             if (bounds.Contains(point) && hitInfo == HitTestInfo.Nowhere)
             {
-                HitTestLocations flags = (bounds.Contains(point)) ? HitTestLocations.Designer : HitTestLocations.None;
+                HitTestLocations flags =
+                    (bounds.Contains(point)) ? HitTestLocations.Designer : HitTestLocations.None;
 
-                Rectangle hitRectangle = new Rectangle(bounds.Left, bounds.Top, bounds.Left - bounds.Left, bounds.Height);
+                Rectangle hitRectangle = new Rectangle(
+                    bounds.Left,
+                    bounds.Top,
+                    bounds.Left - bounds.Left,
+                    bounds.Height
+                );
                 flags |= (hitRectangle.Contains(point)) ? HitTestLocations.Left : flags;
 
-                hitRectangle = new Rectangle(bounds.Left, bounds.Top, bounds.Width, bounds.Height - bounds.Height);
+                hitRectangle = new Rectangle(
+                    bounds.Left,
+                    bounds.Top,
+                    bounds.Width,
+                    bounds.Height - bounds.Height
+                );
                 flags |= (hitRectangle.Contains(point)) ? HitTestLocations.Top : flags;
 
-                hitRectangle = new Rectangle(bounds.Right, bounds.Top, bounds.Width - bounds.Width, bounds.Height);
+                hitRectangle = new Rectangle(
+                    bounds.Right,
+                    bounds.Top,
+                    bounds.Width - bounds.Width,
+                    bounds.Height
+                );
                 flags |= (hitRectangle.Contains(point)) ? HitTestLocations.Right : flags;
 
-                hitRectangle = new Rectangle(bounds.Left, bounds.Bottom, bounds.Width, bounds.Bottom - bounds.Bottom);
+                hitRectangle = new Rectangle(
+                    bounds.Left,
+                    bounds.Bottom,
+                    bounds.Width,
+                    bounds.Bottom - bounds.Bottom
+                );
                 flags |= (hitRectangle.Contains(point)) ? HitTestLocations.Bottom : flags;
 
                 hitInfo = new HitTestInfo(this, flags);
@@ -1016,7 +1119,8 @@ namespace System.Workflow.ComponentModel.Design
             {
                 parentView.InvalidateLogicalRectangle(Bounds);
 
-                GlyphManager glyphManager = GetService(typeof(IDesignerGlyphProviderService)) as GlyphManager;
+                GlyphManager glyphManager =
+                    GetService(typeof(IDesignerGlyphProviderService)) as GlyphManager;
                 if (glyphManager != null)
                 {
                     foreach (DesignerGlyph glyph in glyphManager.GetDesignerGlyphs(this))
@@ -1057,27 +1161,54 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             AmbientTheme ambientTheme = WorkflowTheme.CurrentTheme.AmbientTheme;
-            Bitmap designerImage = new Bitmap(Size.Width + (4 * ambientTheme.Margin.Width), Size.Height + (4 * ambientTheme.Margin.Height), PixelFormat.Format32bppArgb);
+            Bitmap designerImage = new Bitmap(
+                Size.Width + (4 * ambientTheme.Margin.Width),
+                Size.Height + (4 * ambientTheme.Margin.Height),
+                PixelFormat.Format32bppArgb
+            );
 
-            GlyphManager glyphManager = (Activity != null && Activity.Site != null) ? GetService(typeof(IDesignerGlyphProviderService)) as GlyphManager : null;
+            GlyphManager glyphManager =
+                (Activity != null && Activity.Site != null)
+                    ? GetService(typeof(IDesignerGlyphProviderService)) as GlyphManager
+                    : null;
 
             using (Graphics graphics = Graphics.FromImage(designerImage))
             using (Brush transparentBrush = new SolidBrush(Color.FromArgb(0, 255, 0, 255)))
             {
-                graphics.FillRectangle(transparentBrush, 0, 0, designerImage.Width, designerImage.Height);
-                graphics.TranslateTransform(-Location.X + 2 * ambientTheme.Margin.Width, -Location.Y + 2 * ambientTheme.Margin.Height);
+                graphics.FillRectangle(
+                    transparentBrush,
+                    0,
+                    0,
+                    designerImage.Width,
+                    designerImage.Height
+                );
+                graphics.TranslateTransform(
+                    -Location.X + 2 * ambientTheme.Margin.Width,
+                    -Location.Y + 2 * ambientTheme.Margin.Height
+                );
 
                 //We need to go thru nested designers to generate the preview
                 Rectangle bounds = Bounds;
-                Rectangle viewPort = new Rectangle(bounds.Location, new Size(bounds.Width + 1, bounds.Height + 1));
+                Rectangle viewPort = new Rectangle(
+                    bounds.Location,
+                    new Size(bounds.Width + 1, bounds.Height + 1)
+                );
                 Queue<ActivityDesigner> designers = new Queue<ActivityDesigner>();
                 designers.Enqueue(this);
                 while (designers.Count > 0)
                 {
                     ActivityDesigner designer = designers.Dequeue();
-                    designer.OnPaint(new ActivityDesignerPaintEventArgs(graphics, designer.Bounds, viewPort, designer.DesignerTheme));
+                    designer.OnPaint(
+                        new ActivityDesignerPaintEventArgs(
+                            graphics,
+                            designer.Bounds,
+                            viewPort,
+                            designer.DesignerTheme
+                        )
+                    );
 
-                    ActivityDesignerGlyphCollection glyphs = (glyphManager != null) ? glyphManager.GetDesignerGlyphs(designer) : Glyphs;
+                    ActivityDesignerGlyphCollection glyphs =
+                        (glyphManager != null) ? glyphManager.GetDesignerGlyphs(designer) : Glyphs;
                     foreach (DesignerGlyph glyph in glyphs)
                     {
                         //
@@ -1085,12 +1216,19 @@ namespace System.Workflow.ComponentModel.Design
                             glyph.Draw(graphics, designer);
                     }
 
-                    CompositeActivityDesigner compositeDesigner = designer as CompositeActivityDesigner;
+                    CompositeActivityDesigner compositeDesigner =
+                        designer as CompositeActivityDesigner;
                     if (compositeDesigner != null)
                     {
-                        foreach (ActivityDesigner containedDesigner in compositeDesigner.ContainedDesigners)
+                        foreach (
+                            ActivityDesigner containedDesigner in compositeDesigner.ContainedDesigners
+                        )
                         {
-                            if (containedDesigner != null && compositeDesigner.Expanded && compositeDesigner.IsContainedDesignerVisible(containedDesigner))
+                            if (
+                                containedDesigner != null
+                                && compositeDesigner.Expanded
+                                && compositeDesigner.IsContainedDesignerVisible(containedDesigner)
+                            )
                                 designers.Enqueue(containedDesigner);
                         }
                     }
@@ -1120,15 +1258,21 @@ namespace System.Workflow.ComponentModel.Design
                 if (designerHost != null && InvokingDesigner == null)
                     designerHost.LoadComplete += new EventHandler(OnLoadComplete);
 
-                IComponentChangeService changeService = GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                IComponentChangeService changeService =
+                    GetService(typeof(IComponentChangeService)) as IComponentChangeService;
                 if (changeService != null)
                 {
-                    changeService.ComponentChanged += new ComponentChangedEventHandler(OnComponentChanged);
-                    changeService.ComponentRename += new ComponentRenameEventHandler(OnComponentRenamed);
+                    changeService.ComponentChanged += new ComponentChangedEventHandler(
+                        OnComponentChanged
+                    );
+                    changeService.ComponentRename += new ComponentRenameEventHandler(
+                        OnComponentRenamed
+                    );
                 }
             }
 
-            this.Text = (!String.IsNullOrEmpty(activity.Name)) ? activity.Name : activity.GetType().Name;
+            this.Text =
+                (!String.IsNullOrEmpty(activity.Name)) ? activity.Name : activity.GetType().Name;
             this.Image = StockImage;
 
             //We need to update the Verbs when the designer first loads up
@@ -1155,14 +1299,23 @@ namespace System.Workflow.ComponentModel.Design
                     }
 
                     IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
-                    if (designerHost != null && InvokingDesigner == null && Activity == designerHost.RootComponent)
+                    if (
+                        designerHost != null
+                        && InvokingDesigner == null
+                        && Activity == designerHost.RootComponent
+                    )
                         designerHost.LoadComplete -= new EventHandler(OnLoadComplete);
 
-                    IComponentChangeService changeService = GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                    IComponentChangeService changeService =
+                        GetService(typeof(IComponentChangeService)) as IComponentChangeService;
                     if (changeService != null)
                     {
-                        changeService.ComponentChanged -= new ComponentChangedEventHandler(OnComponentChanged);
-                        changeService.ComponentRename -= new ComponentRenameEventHandler(OnComponentRenamed);
+                        changeService.ComponentChanged -= new ComponentChangedEventHandler(
+                            OnComponentChanged
+                        );
+                        changeService.ComponentRename -= new ComponentRenameEventHandler(
+                            OnComponentRenamed
+                        );
                     }
                 }
             }
@@ -1192,7 +1345,7 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Perform default UI action associated with the designer. 
+        /// Perform default UI action associated with the designer.
         /// Example: Emit method associated with default event in code beside file on double click.
         /// </summary>
         protected virtual void DoDefaultAction()
@@ -1200,25 +1353,43 @@ namespace System.Workflow.ComponentModel.Design
             if (IsLocked)
                 return;
 
-            DefaultEventAttribute defaultEventAttribute = TypeDescriptor.GetAttributes(Activity)[typeof(DefaultEventAttribute)] as DefaultEventAttribute;
-            if (defaultEventAttribute == null || defaultEventAttribute.Name == null || defaultEventAttribute.Name.Length == 0)
+            DefaultEventAttribute defaultEventAttribute =
+                TypeDescriptor.GetAttributes(Activity)[typeof(DefaultEventAttribute)]
+                as DefaultEventAttribute;
+            if (
+                defaultEventAttribute == null
+                || defaultEventAttribute.Name == null
+                || defaultEventAttribute.Name.Length == 0
+            )
                 return;
 
-            ActivityBindPropertyDescriptor defaultPropEvent = TypeDescriptor.GetProperties(Activity)[defaultEventAttribute.Name] as ActivityBindPropertyDescriptor;
+            ActivityBindPropertyDescriptor defaultPropEvent =
+                TypeDescriptor.GetProperties(Activity)[defaultEventAttribute.Name]
+                as ActivityBindPropertyDescriptor;
             if (defaultPropEvent != null)
             {
                 object value = defaultPropEvent.GetValue(Activity);
                 if (!(value is ActivityBind))
                 {
-                    IEventBindingService eventBindingService = (IEventBindingService)GetService(typeof(IEventBindingService));
+                    IEventBindingService eventBindingService = (IEventBindingService)GetService(
+                        typeof(IEventBindingService)
+                    );
                     if (eventBindingService != null)
                     {
-                        EventDescriptor eventDesc = eventBindingService.GetEvent(defaultPropEvent.RealPropertyDescriptor);
+                        EventDescriptor eventDesc = eventBindingService.GetEvent(
+                            defaultPropEvent.RealPropertyDescriptor
+                        );
                         if (eventDesc != null)
                         {
-                            string handler = defaultPropEvent.RealPropertyDescriptor.GetValue(Activity) as string;
+                            string handler =
+                                defaultPropEvent.RealPropertyDescriptor.GetValue(Activity)
+                                as string;
                             if (string.IsNullOrEmpty(handler))
-                                handler = DesignerHelpers.CreateUniqueMethodName(Activity, eventDesc.Name, eventDesc.EventType);
+                                handler = DesignerHelpers.CreateUniqueMethodName(
+                                    Activity,
+                                    eventDesc.Name,
+                                    eventDesc.EventType
+                                );
 
                             defaultPropEvent.SetValue(Activity, handler);
                             eventBindingService.ShowCode(Activity, eventDesc);
@@ -1278,13 +1449,15 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("properties");
 
             // NOTE: I have to do this work around, reason being IExtenderProvider.CanExtend is not used
-            // to determine whether the properties should be extended or not. So I am fixing it 
-            // on designer part 
+            // to determine whether the properties should be extended or not. So I am fixing it
+            // on designer part
             StringCollection removedProperties = new StringCollection();
             foreach (DictionaryEntry entry in properties)
             {
                 PropertyDescriptor prop = entry.Value as PropertyDescriptor;
-                ExtenderProvidedPropertyAttribute eppa = prop.Attributes[typeof(ExtenderProvidedPropertyAttribute)] as ExtenderProvidedPropertyAttribute;
+                ExtenderProvidedPropertyAttribute eppa =
+                    prop.Attributes[typeof(ExtenderProvidedPropertyAttribute)]
+                    as ExtenderProvidedPropertyAttribute;
                 if (eppa != null && eppa.Provider != null && !eppa.Provider.CanExtend(Activity))
                     removedProperties.Add(entry.Key as string);
             }
@@ -1345,9 +1518,7 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Called when the mouse drag ends.
         /// </summary>
-        protected virtual void OnMouseDragEnd()
-        {
-        }
+        protected virtual void OnMouseDragEnd() { }
 
         /// <summary>
         /// Called when the mouse cursor enters the designer bounds.
@@ -1389,7 +1560,6 @@ namespace System.Workflow.ComponentModel.Design
             if (IsVisible)
                 ShowInfoTip(InfoTipTitle, InfoTipText);
         }
-
 
         /// <summary>
         /// Called when the mouse cursor is in designer bounds.
@@ -1438,9 +1608,7 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Called when the mouse capture changes
         /// </summary>
-        protected virtual void OnMouseCaptureChanged()
-        {
-        }
+        protected virtual void OnMouseCaptureChanged() { }
 
         /// <summary>
         /// Called when the drag drop operation is in progress and mouse cursor enters the designer bounds.
@@ -1465,9 +1633,7 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Called when the drag drop operation is in progress and mouse cursor leaves the designer bounds.
         /// </summary>
-        protected virtual void OnDragLeave()
-        {
-        }
+        protected virtual void OnDragLeave() { }
 
         /// <summary>
         /// Called when the drag drop operation is completed inside designer bounds.
@@ -1524,17 +1690,13 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="sender">Scrollbar sending the message</param>
         /// <param name="value">New value of the scrolled position</param>
-        protected virtual void OnScroll(ScrollBar sender, int value)
-        {
-        }
+        protected virtual void OnScroll(ScrollBar sender, int value) { }
 
         /// <summary>
         /// Allows designer to process raw win32 message
         /// </summary>
         /// <param name="message">Message structure containing details of the message to be processed</param>
-        protected virtual void OnProcessMessage(Message message)
-        {
-        }
+        protected virtual void OnProcessMessage(Message message) { }
 
         /// <summary>
         /// Called to refresh the configuration errors associated with designers.
@@ -1553,14 +1715,19 @@ namespace System.Workflow.ComponentModel.Design
             if (designerAction == null)
                 throw new ArgumentNullException("designerAction");
 
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
-                selectionService.SetSelectedComponents(new object[] { Activity }, SelectionTypes.Replace);
+                selectionService.SetSelectedComponents(
+                    new object[] { Activity },
+                    SelectionTypes.Replace
+                );
 
             string propName = designerAction.PropertyName as string;
             if (propName != null && propName.Length > 0)
             {
-                IExtendedUIService uiService = GetService(typeof(IExtendedUIService)) as IExtendedUIService;
+                IExtendedUIService uiService =
+                    GetService(typeof(IExtendedUIService)) as IExtendedUIService;
                 if (uiService != null)
                     uiService.NavigateToProperty(propName);
             }
@@ -1602,7 +1769,7 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Stores the UI state of the designer in binary stream. 
+        /// Stores the UI state of the designer in binary stream.
         /// </summary>
         /// <param name="writer">BinaryWriter used to store the state.</param>
         protected virtual void SaveViewState(BinaryWriter writer)
@@ -1612,7 +1779,7 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Restores the UI state of the designer from binary stream. 
+        /// Restores the UI state of the designer from binary stream.
         /// </summary>
         /// <param name="reader">BinaryReader used to restore the designer state.</param>
         /// <returns></returns>
@@ -1623,7 +1790,7 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Return if an activity type is valid in context of a root designer. This function is called only if 
+        /// Return if an activity type is valid in context of a root designer. This function is called only if
         /// the designer is a root designer
         /// </summary>
         /// <param name="activityType">Type of the activity being queried</param>
@@ -1674,11 +1841,24 @@ namespace System.Workflow.ComponentModel.Design
             if (!String.IsNullOrEmpty(Text) && !TextRectangle.Size.IsEmpty)
             {
                 Font font = (SmartTagVisible) ? e.DesignerTheme.BoldFont : e.DesignerTheme.Font;
-                ActivityDesignerPaint.DrawText(e.Graphics, font, Text, TextRectangle, StringAlignment.Near, e.AmbientTheme.TextQuality, e.DesignerTheme.ForegroundBrush);
+                ActivityDesignerPaint.DrawText(
+                    e.Graphics,
+                    font,
+                    Text,
+                    TextRectangle,
+                    StringAlignment.Near,
+                    e.AmbientTheme.TextQuality,
+                    e.DesignerTheme.ForegroundBrush
+                );
             }
 
             if (Image != null && !ImageRectangle.Size.IsEmpty)
-                ActivityDesignerPaint.DrawImage(e.Graphics, Image, ImageRectangle, DesignerContentAlignment.Fill);
+                ActivityDesignerPaint.DrawImage(
+                    e.Graphics,
+                    Image,
+                    ImageRectangle,
+                    DesignerContentAlignment.Fill
+                );
         }
 
         /// <summary>
@@ -1708,15 +1888,25 @@ namespace System.Workflow.ComponentModel.Design
             if (!String.IsNullOrEmpty(Text))
             {
                 //Calculate the size of the text, we allow 10 characters per line and maximum of 2 lines
-                Size actualTextSize = ActivityDesignerPaint.MeasureString(e.Graphics, e.DesignerTheme.BoldFont, Text, StringAlignment.Center, Size.Empty);
+                Size actualTextSize = ActivityDesignerPaint.MeasureString(
+                    e.Graphics,
+                    e.DesignerTheme.BoldFont,
+                    Text,
+                    StringAlignment.Center,
+                    Size.Empty
+                );
                 Size requestedLineSize = actualTextSize;
                 requestedLineSize.Width /= Text.Length;
                 requestedLineSize.Width += ((requestedLineSize.Width % Text.Length) > 0) ? 1 : 0;
-                requestedLineSize.Width *= Math.Min(Text.Length, ActivityDesigner.MaximumCharsPerLine - 1);
+                requestedLineSize.Width *= Math.Min(
+                    Text.Length,
+                    ActivityDesigner.MaximumCharsPerLine - 1
+                );
 
                 this.textSize.Width = MinimumSize.Width - 2 * e.AmbientTheme.Margin.Width;
                 if (Image != null)
-                    this.textSize.Width -= e.DesignerTheme.ImageSize.Width + e.AmbientTheme.Margin.Width;
+                    this.textSize.Width -=
+                        e.DesignerTheme.ImageSize.Width + e.AmbientTheme.Margin.Width;
                 this.textSize.Width = Math.Min(this.textSize.Width, actualTextSize.Width);
                 this.textSize.Width = Math.Max(this.textSize.Width, requestedLineSize.Width);
 
@@ -1733,8 +1923,18 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             Size size = Size.Empty;
-            size.Width = 2 * e.AmbientTheme.Margin.Width + ((Image != null) ? (e.DesignerTheme.ImageSize.Width + e.AmbientTheme.Margin.Width) : 0) + this.textSize.Width;
-            size.Height = e.AmbientTheme.Margin.Height + Math.Max(e.DesignerTheme.ImageSize.Height, this.textSize.Height) + e.AmbientTheme.Margin.Height;
+            size.Width =
+                2 * e.AmbientTheme.Margin.Width
+                + (
+                    (Image != null)
+                        ? (e.DesignerTheme.ImageSize.Width + e.AmbientTheme.Margin.Width)
+                        : 0
+                )
+                + this.textSize.Width;
+            size.Height =
+                e.AmbientTheme.Margin.Height
+                + Math.Max(e.DesignerTheme.ImageSize.Height, this.textSize.Height)
+                + e.AmbientTheme.Margin.Height;
             return size;
         }
 
@@ -1742,9 +1942,7 @@ namespace System.Workflow.ComponentModel.Design
         /// Called when the user starts to visually resize the designer when designer is inside freeform designer
         /// </summary>
         /// <param name="e"></param>
-        protected virtual void OnBeginResizing(ActivityDesignerResizeEventArgs e)
-        {
-        }
+        protected virtual void OnBeginResizing(ActivityDesignerResizeEventArgs e) { }
 
         /// <summary>
         /// Called when the user is visually resizing the designer when designer is inside freeform designer
@@ -1779,9 +1977,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="source">Source connection point</param>
         /// <param name="target">Target connection point</param>
-        protected virtual void OnConnected(ConnectionPoint source, ConnectionPoint target)
-        {
-        }
+        protected virtual void OnConnected(ConnectionPoint source, ConnectionPoint target) { }
 
         /// <summary>
         /// Called when the activity associated with the designer is changed.
@@ -1811,7 +2007,7 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Shows specified tooltip 
+        /// Shows specified tooltip
         /// </summary>
         /// <param name="title">String specifying the tooltip title</param>
         /// <param name="infoTip">String specifying the tooltip to display</param>
@@ -1823,7 +2019,7 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Shows specified tooltip 
+        /// Shows specified tooltip
         /// </summary>
         /// <param name="infoTip">String specifying the tooltip to display</param>
         protected void ShowInfoTip(string infoTip)
@@ -1842,7 +2038,10 @@ namespace System.Workflow.ComponentModel.Design
         {
             WorkflowView parentView = ParentView;
             if (parentView != null)
-                parentView.ShowInPlaceToolTip(infoTip, parentView.LogicalRectangleToClient(rectangle));
+                parentView.ShowInPlaceToolTip(
+                    infoTip,
+                    parentView.LogicalRectangleToClient(rectangle)
+                );
         }
 
         /// <summary>
@@ -1892,10 +2091,12 @@ namespace System.Workflow.ComponentModel.Design
         {
             WorkflowView parentView = ParentView;
             if (parentView != null)
-                return new Rectangle(PointToScreen(rectangle.Location), parentView.LogicalSizeToClient(rectangle.Size));
+                return new Rectangle(
+                    PointToScreen(rectangle.Location),
+                    parentView.LogicalSizeToClient(rectangle.Size)
+                );
             else
                 return rectangle;
-
         }
 
         //for the accessible object
@@ -1913,7 +2114,10 @@ namespace System.Workflow.ComponentModel.Design
         {
             WorkflowView parentView = ParentView;
             if (parentView != null)
-                return new Rectangle(PointToLogical(rectangle.Location), parentView.ClientSizeToLogical(rectangle.Size));
+                return new Rectangle(
+                    PointToLogical(rectangle.Location),
+                    parentView.ClientSizeToLogical(rectangle.Size)
+                );
             else
                 return rectangle;
         }
@@ -1922,7 +2126,9 @@ namespace System.Workflow.ComponentModel.Design
         #region Private static Methods
         internal static ActivityDesigner GetSafeRootDesigner(IServiceProvider serviceProvider)
         {
-            return (serviceProvider != null) ? ActivityDesigner.GetRootDesigner(serviceProvider) : null;
+            return (serviceProvider != null)
+                ? ActivityDesigner.GetRootDesigner(serviceProvider)
+                : null;
         }
 
         internal static ActivityDesigner GetDesigner(Activity activity)
@@ -1931,7 +2137,8 @@ namespace System.Workflow.ComponentModel.Design
 
             if (activity != null && activity.Site != null)
             {
-                IDesignerHost designerHost = activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                IDesignerHost designerHost =
+                    activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
                 if (designerHost != null)
                     designer = designerHost.GetDesigner(activity) as ActivityDesigner;
             }
@@ -1944,11 +2151,17 @@ namespace System.Workflow.ComponentModel.Design
             if (activityType == null)
                 return null;
 
-            object[] attribs = activityType.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            object[] attribs = activityType.GetCustomAttributes(
+                typeof(DescriptionAttribute),
+                false
+            );
             if (attribs != null && attribs.GetLength(0) == 0)
                 attribs = activityType.GetCustomAttributes(typeof(DescriptionAttribute), true);
 
-            DescriptionAttribute descriptionAttribute = (attribs != null && attribs.GetLength(0) > 0) ? attribs[0] as DescriptionAttribute : null;
+            DescriptionAttribute descriptionAttribute =
+                (attribs != null && attribs.GetLength(0) > 0)
+                    ? attribs[0] as DescriptionAttribute
+                    : null;
             return (descriptionAttribute != null) ? descriptionAttribute.Description : String.Empty;
         }
 
@@ -1975,34 +2188,61 @@ namespace System.Workflow.ComponentModel.Design
             ActivityDesigner activityDesigner = new ActivityDesigner();
             ActivityDesignerTheme designerTheme = activityDesigner.DesignerTheme;
 
-            using (Bitmap temporaryBitmap = new Bitmap(designerTheme.Size.Width, designerTheme.Size.Height, PixelFormat.Format32bppArgb))
+            using (
+                Bitmap temporaryBitmap = new Bitmap(
+                    designerTheme.Size.Width,
+                    designerTheme.Size.Height,
+                    PixelFormat.Format32bppArgb
+                )
+            )
             using (Graphics graphics = Graphics.FromImage(temporaryBitmap))
             {
                 activityDesigner.Image = ActivityToolboxItem.GetToolboxImage(activity.GetType());
                 activityDesigner.Location = new Point(-1, -1);
                 activityDesigner.Location = Point.Empty;
-                activityDesigner.Size = activityDesigner.OnLayoutSize(new ActivityDesignerLayoutEventArgs(graphics, activityDesigner.DesignerTheme));
+                activityDesigner.Size = activityDesigner.OnLayoutSize(
+                    new ActivityDesignerLayoutEventArgs(graphics, activityDesigner.DesignerTheme)
+                );
             }
 
             return activityDesigner;
         }
 
-        internal static Type GetDesignerType(IServiceProvider serviceProvider, Type activityType, Type designerBaseType)
+        internal static Type GetDesignerType(
+            IServiceProvider serviceProvider,
+            Type activityType,
+            Type designerBaseType
+        )
         {
             Type designerType = null;
             AttributeCollection attribs = TypeDescriptor.GetAttributes(activityType);
             foreach (Attribute attribute in attribs)
             {
                 DesignerAttribute designerAttribute = attribute as DesignerAttribute;
-                if (designerAttribute != null && (designerBaseType == null || designerAttribute.DesignerBaseTypeName == designerBaseType.AssemblyQualifiedName))
+                if (
+                    designerAttribute != null
+                    && (
+                        designerBaseType == null
+                        || designerAttribute.DesignerBaseTypeName
+                            == designerBaseType.AssemblyQualifiedName
+                    )
+                )
                 {
                     int index = designerAttribute.DesignerTypeName.IndexOf(',');
-                    string designerTypeName = (index >= 0) ? designerAttribute.DesignerTypeName.Substring(0, index) : designerAttribute.DesignerTypeName;
+                    string designerTypeName =
+                        (index >= 0)
+                            ? designerAttribute.DesignerTypeName.Substring(0, index)
+                            : designerAttribute.DesignerTypeName;
                     designerType = activityType.Assembly.GetType(designerTypeName);
                     if (designerType == null && serviceProvider != null)
                     {
-                        ITypeResolutionService typeResolutionService = serviceProvider.GetService(typeof(ITypeResolutionService)) as ITypeResolutionService;
-                        designerType = (typeResolutionService != null) ? typeResolutionService.GetType(designerAttribute.DesignerTypeName) : null;
+                        ITypeResolutionService typeResolutionService =
+                            serviceProvider.GetService(typeof(ITypeResolutionService))
+                            as ITypeResolutionService;
+                        designerType =
+                            (typeResolutionService != null)
+                                ? typeResolutionService.GetType(designerAttribute.DesignerTypeName)
+                                : null;
                     }
 
                     if (designerType == null)
@@ -2015,10 +2255,17 @@ namespace System.Workflow.ComponentModel.Design
             return designerType;
         }
 
-        internal static ActivityDesigner CreateDesigner(IServiceProvider serviceProvider, Activity activity)
+        internal static ActivityDesigner CreateDesigner(
+            IServiceProvider serviceProvider,
+            Activity activity
+        )
         {
             IDesigner designer = null;
-            Type designerType = GetDesignerType(serviceProvider, activity.GetType(), typeof(IDesigner));
+            Type designerType = GetDesignerType(
+                serviceProvider,
+                activity.GetType(),
+                typeof(IDesigner)
+            );
             if (designerType == null)
                 designerType = GetDesignerType(serviceProvider, activity.GetType(), null);
 
@@ -2026,7 +2273,17 @@ namespace System.Workflow.ComponentModel.Design
             {
                 try
                 {
-                    designer = Activator.CreateInstance(designerType, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.CreateInstance, null, null, null) as IDesigner;
+                    designer =
+                        Activator.CreateInstance(
+                            designerType,
+                            BindingFlags.Instance
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.CreateInstance,
+                            null,
+                            null,
+                            null
+                        ) as IDesigner;
                     designer.Initialize(activity);
                 }
                 catch
@@ -2054,7 +2311,11 @@ namespace System.Workflow.ComponentModel.Design
                     if (parentDesigner == null && containedDesigner is IRootDesigner)
                         return true;
 
-                    if (parentDesigner == null || !parentDesigner.Expanded || !parentDesigner.IsContainedDesignerVisible(containedDesigner))
+                    if (
+                        parentDesigner == null
+                        || !parentDesigner.Expanded
+                        || !parentDesigner.IsContainedDesignerVisible(containedDesigner)
+                    )
                         return false;
 
                     activity = parentDesigner.Activity;
@@ -2082,22 +2343,33 @@ namespace System.Workflow.ComponentModel.Design
             PropertyDescriptor[] propertyDescriptors = EventHandlerProperties;
             foreach (PropertyDescriptor propertyDescriptor in propertyDescriptors)
             {
-                Type rtType = PropertyDescriptorUtils.GetBaseType(propertyDescriptor, Activity, Activity.Site);
+                Type rtType = PropertyDescriptorUtils.GetBaseType(
+                    propertyDescriptor,
+                    Activity,
+                    Activity.Site
+                );
                 if (rtType != null)
                 {
                     object handler = propertyDescriptor.GetValue(Activity);
                     if (!(handler is String) || String.IsNullOrEmpty((String)handler))
-                        handler = DesignerHelpers.CreateUniqueMethodName(Activity, propertyDescriptor.Name, rtType);
+                        handler = DesignerHelpers.CreateUniqueMethodName(
+                            Activity,
+                            propertyDescriptor.Name,
+                            rtType
+                        );
                     propertyDescriptor.SetValue(Activity, handler);
                     methodDescriptor = propertyDescriptor;
                 }
             }
 
-            IEventBindingService eventBindingService = GetService(typeof(IEventBindingService)) as IEventBindingService;
+            IEventBindingService eventBindingService =
+                GetService(typeof(IEventBindingService)) as IEventBindingService;
             if (eventBindingService != null)
             {
                 if (methodDescriptor is DynamicPropertyDescriptor)
-                    methodDescriptor = ((DynamicPropertyDescriptor)methodDescriptor).RealPropertyDescriptor;
+                    methodDescriptor = (
+                        (DynamicPropertyDescriptor)methodDescriptor
+                    ).RealPropertyDescriptor;
 
                 EventDescriptor eventDescriptor = eventBindingService.GetEvent(methodDescriptor);
                 if (eventDescriptor != null)
@@ -2113,24 +2385,37 @@ namespace System.Workflow.ComponentModel.Design
             if (eventVerb == null)
                 return;
 
-            IServiceProvider serviceProvider = GetService(typeof(DesignSurface)) as IServiceProvider;
+            IServiceProvider serviceProvider =
+                GetService(typeof(DesignSurface)) as IServiceProvider;
             Debug.Assert(serviceProvider != null);
 
-            List<CustomProperty> properties = CustomActivityDesignerHelper.GetCustomProperties(serviceProvider);
+            List<CustomProperty> properties = CustomActivityDesignerHelper.GetCustomProperties(
+                serviceProvider
+            );
             if (properties == null)
                 return;
 
             // get all the members of the custom activity to ensure uniqueness
-            Type customActivityType = CustomActivityDesignerHelper.GetCustomActivityType(serviceProvider);
+            Type customActivityType = CustomActivityDesignerHelper.GetCustomActivityType(
+                serviceProvider
+            );
             List<String> customPropertyNames = new List<String>();
-            foreach (MemberInfo memberInfo in customActivityType.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+            foreach (
+                MemberInfo memberInfo in customActivityType.GetMembers(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                )
+            )
             {
                 if (!customPropertyNames.Contains(memberInfo.Name))
                     customPropertyNames.Add(memberInfo.Name);
             }
 
             PropertyDescriptor[] propertyDescriptors = BindableProperties;
-            Dictionary<PropertyDescriptor, ActivityBind> promotedProperties = new Dictionary<PropertyDescriptor, ActivityBind>();
+            Dictionary<PropertyDescriptor, ActivityBind> promotedProperties =
+                new Dictionary<PropertyDescriptor, ActivityBind>();
 
             foreach (PropertyDescriptor propertyDescriptor in propertyDescriptors)
             {
@@ -2138,7 +2423,16 @@ namespace System.Workflow.ComponentModel.Design
                 if (bind != null)
                     continue;
 
-                CustomProperty newCustomProperty = CustomProperty.CreateCustomProperty(Activity.Site, DesignerHelpers.GenerateUniqueIdentifier(Activity.Site, Activity.Name + "_" + propertyDescriptor.Name, customPropertyNames.ToArray()), propertyDescriptor, Activity);
+                CustomProperty newCustomProperty = CustomProperty.CreateCustomProperty(
+                    Activity.Site,
+                    DesignerHelpers.GenerateUniqueIdentifier(
+                        Activity.Site,
+                        Activity.Name + "_" + propertyDescriptor.Name,
+                        customPropertyNames.ToArray()
+                    ),
+                    propertyDescriptor,
+                    Activity
+                );
 
                 properties.Add(newCustomProperty);
 
@@ -2146,7 +2440,16 @@ namespace System.Workflow.ComponentModel.Design
                 customPropertyNames.Add(newCustomProperty.Name);
 
                 // set a new bind
-                promotedProperties.Add(propertyDescriptor, new ActivityBind(ActivityBind.GetRelativePathExpression(Helpers.GetRootActivity(Activity), Activity), newCustomProperty.Name));
+                promotedProperties.Add(
+                    propertyDescriptor,
+                    new ActivityBind(
+                        ActivityBind.GetRelativePathExpression(
+                            Helpers.GetRootActivity(Activity),
+                            Activity
+                        ),
+                        newCustomProperty.Name
+                    )
+                );
             }
 
             //We have a restriction that we need to emit the custom properties furst before setting the binding
@@ -2158,7 +2461,8 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnBindProperty(object sender, EventArgs e)
         {
-            IExtendedUIService extendedUIService = GetService(typeof(IExtendedUIService)) as IExtendedUIService;
+            IExtendedUIService extendedUIService =
+                GetService(typeof(IExtendedUIService)) as IExtendedUIService;
             if (extendedUIService != null)
                 BindUITypeEditor.EditValue(extendedUIService.GetSelectedPropertyContext());
         }
@@ -2212,15 +2516,31 @@ namespace System.Workflow.ComponentModel.Design
 
             bool canBindProperty = false;
             string propertyName = null;
-            IExtendedUIService extendedUIService = GetService(typeof(IExtendedUIService)) as IExtendedUIService;
+            IExtendedUIService extendedUIService =
+                GetService(typeof(IExtendedUIService)) as IExtendedUIService;
             if (extendedUIService != null)
             {
-                ITypeDescriptorContext propertyContext = extendedUIService.GetSelectedPropertyContext();
-                canBindProperty = (propertyContext != null && ActivityBindPropertyDescriptor.IsBindableProperty(propertyContext.PropertyDescriptor) && !propertyContext.PropertyDescriptor.IsReadOnly);
-                propertyName = (propertyContext != null) ? propertyContext.PropertyDescriptor.Name : null;
+                ITypeDescriptorContext propertyContext =
+                    extendedUIService.GetSelectedPropertyContext();
+                canBindProperty = (
+                    propertyContext != null
+                    && ActivityBindPropertyDescriptor.IsBindableProperty(
+                        propertyContext.PropertyDescriptor
+                    )
+                    && !propertyContext.PropertyDescriptor.IsReadOnly
+                );
+                propertyName =
+                    (propertyContext != null) ? propertyContext.PropertyDescriptor.Name : null;
             }
 
-            verb.Properties["Text"] = (propertyName != null && verb.Enabled) ? string.Format(CultureInfo.CurrentCulture, DR.GetString(DR.BindSelectedPropertyFormat), propertyName) : DR.GetString(DR.BindSelectedProperty);
+            verb.Properties["Text"] =
+                (propertyName != null && verb.Enabled)
+                    ? string.Format(
+                        CultureInfo.CurrentCulture,
+                        DR.GetString(DR.BindSelectedPropertyFormat),
+                        propertyName
+                    )
+                    : DR.GetString(DR.BindSelectedProperty);
             verb.Enabled = (canBindProperty && !IsLocked);
         }
 
@@ -2229,42 +2549,61 @@ namespace System.Workflow.ComponentModel.Design
             ActivityDesigner designer = ActivityDesigner.GetDesigner(e.Component as Activity);
             if (designer != null)
                 this.Text = Activity.Name;
-
         }
 
         private void OnComponentChanged(object sender, ComponentChangedEventArgs e)
         {
-            if (e.Component != null && (e.OldValue is ActivityBind && !(e.NewValue is ActivityBind)) ||
-                (!(e.OldValue is ActivityBind) && e.NewValue is ActivityBind))
+            if (
+                e.Component != null && (e.OldValue is ActivityBind && !(e.NewValue is ActivityBind))
+                || (!(e.OldValue is ActivityBind) && e.NewValue is ActivityBind)
+            )
                 TypeDescriptor.Refresh(e.Component);
 
-            IReferenceService referenceService = GetService(typeof(IReferenceService)) as IReferenceService;
-            Activity changedActivity = (referenceService != null) ? referenceService.GetComponent(e.Component) as Activity : e.Component as Activity;
+            IReferenceService referenceService =
+                GetService(typeof(IReferenceService)) as IReferenceService;
+            Activity changedActivity =
+                (referenceService != null)
+                    ? referenceService.GetComponent(e.Component) as Activity
+                    : e.Component as Activity;
             if (changedActivity != null)
             {
                 ActivityDesigner designer = ActivityDesigner.GetDesigner(changedActivity);
                 if (designer != null)
-                    designer.OnActivityChanged(new ActivityChangedEventArgs(changedActivity, e.Member, e.OldValue, e.NewValue));
+                    designer.OnActivityChanged(
+                        new ActivityChangedEventArgs(
+                            changedActivity,
+                            e.Member,
+                            e.OldValue,
+                            e.NewValue
+                        )
+                    );
             }
         }
 
         private void OnLoadComplete(object sender, EventArgs e)
         {
-            WorkflowView workflowView = ((IRootDesigner)this).GetView(ViewTechnology.Default) as WorkflowView;
+            WorkflowView workflowView =
+                ((IRootDesigner)this).GetView(ViewTechnology.Default) as WorkflowView;
             if (workflowView != null)
                 workflowView.Idle += new EventHandler(OnFirstIdle);
         }
 
         private void OnFirstIdle(object sender, EventArgs e)
         {
-            WorkflowView workflowView = ((IRootDesigner)this).GetView(ViewTechnology.Default) as WorkflowView;
+            WorkflowView workflowView =
+                ((IRootDesigner)this).GetView(ViewTechnology.Default) as WorkflowView;
             if (workflowView != null)
                 workflowView.Idle -= new EventHandler(OnFirstIdle);
 
             // Select this component.
-            ISelectionService selectionService = (ISelectionService)GetService(typeof(ISelectionService));
+            ISelectionService selectionService = (ISelectionService)GetService(
+                typeof(ISelectionService)
+            );
             if (selectionService != null && selectionService.SelectionCount == 0)
-                selectionService.SetSelectedComponents(new object[] { Activity }, SelectionTypes.Replace);
+                selectionService.SetSelectedComponents(
+                    new object[] { Activity },
+                    SelectionTypes.Replace
+                );
 
             DesignerHelpers.RefreshDesignerActions(Activity.Site);
             Invalidate();
@@ -2286,10 +2625,7 @@ namespace System.Workflow.ComponentModel.Design
         #region IDesigner Implementation
         IComponent IDesigner.Component
         {
-            get
-            {
-                return this.activity as IComponent;
-            }
+            get { return this.activity as IComponent; }
         }
 
         DesignerVerbCollection IDesigner.Verbs
@@ -2299,10 +2635,14 @@ namespace System.Workflow.ComponentModel.Design
                 ActivityDesignerVerbCollection verbs = new ActivityDesignerVerbCollection();
                 verbs.AddRange(Verbs);
 
-                IDesignerVerbProviderService verbProviderService = GetService(typeof(IDesignerVerbProviderService)) as IDesignerVerbProviderService;
+                IDesignerVerbProviderService verbProviderService =
+                    GetService(typeof(IDesignerVerbProviderService))
+                    as IDesignerVerbProviderService;
                 if (verbProviderService != null)
                 {
-                    foreach (IDesignerVerbProvider verbProvider in verbProviderService.VerbProviders)
+                    foreach (
+                        IDesignerVerbProvider verbProvider in verbProviderService.VerbProviders
+                    )
                         verbs.AddRange(verbProvider.GetVerbs(this));
                 }
 
@@ -2372,40 +2712,32 @@ namespace System.Workflow.ComponentModel.Design
         #region IWorkflowRootDesigner Implementation
         ViewTechnology[] IRootDesigner.SupportedTechnologies
         {
-            get
-            {
-                return new ViewTechnology[] { ViewTechnology.Default };
-            }
+            get { return new ViewTechnology[] { ViewTechnology.Default }; }
         }
 
         object IRootDesigner.GetView(ViewTechnology technology)
         {
             DesignSurface surface = GetService(typeof(DesignSurface)) as DesignSurface;
             IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
-            if (this.workflowView == null && surface != null && designerHost != null && designerHost.RootComponent == Activity)
+            if (
+                this.workflowView == null
+                && surface != null
+                && designerHost != null
+                && designerHost.RootComponent == Activity
+            )
                 this.workflowView = CreateView(technology);
             return this.workflowView;
         }
 
         CompositeActivityDesigner IWorkflowRootDesigner.InvokingDesigner
         {
-            get
-            {
-                return InvokingDesigner;
-            }
-
-            set
-            {
-                InvokingDesigner = value;
-            }
+            get { return InvokingDesigner; }
+            set { InvokingDesigner = value; }
         }
 
         ReadOnlyCollection<WorkflowDesignerMessageFilter> IWorkflowRootDesigner.MessageFilters
         {
-            get
-            {
-                return MessageFilters;
-            }
+            get { return MessageFilters; }
         }
 
         bool IWorkflowRootDesigner.IsSupportedActivityType(Type activityType)
@@ -2415,10 +2747,7 @@ namespace System.Workflow.ComponentModel.Design
 
         bool IWorkflowRootDesigner.SupportsLayoutPersistence
         {
-            get
-            {
-                return SupportsLayoutPersistence;
-            }
+            get { return SupportsLayoutPersistence; }
         }
         #endregion
 
@@ -2429,7 +2758,8 @@ namespace System.Workflow.ComponentModel.Design
             bool itemSupported = true;
 
             //get ui service refernce
-            IExtendedUIService2 uiService = this.GetService(typeof(IExtendedUIService2)) as IExtendedUIService2;
+            IExtendedUIService2 uiService =
+                this.GetService(typeof(IExtendedUIService2)) as IExtendedUIService2;
             //and use it to obtain project's target framework version
             if (null != uiService)
             {
@@ -2446,8 +2776,16 @@ namespace System.Workflow.ComponentModel.Design
 
                     if (targetFramework < ActivityDesigner.FrameworkVersion_3_5)
                     {
-                        if (string.Equals(toolboxItem.TypeName, "System.Workflow.Activities.ReceiveActivity") ||
-                            string.Equals(toolboxItem.TypeName, "System.Workflow.Activities.SendActivity"))
+                        if (
+                            string.Equals(
+                                toolboxItem.TypeName,
+                                "System.Workflow.Activities.ReceiveActivity"
+                            )
+                            || string.Equals(
+                                toolboxItem.TypeName,
+                                "System.Workflow.Activities.SendActivity"
+                            )
+                        )
                         {
                             return false;
                         }
@@ -2465,7 +2803,9 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     try
                     {
-                        itemType = Type.GetType(toolboxItem.TypeName + ", " + toolboxItem.AssemblyName);
+                        itemType = Type.GetType(
+                            toolboxItem.TypeName + ", " + toolboxItem.AssemblyName
+                        );
                     }
                     catch (FileNotFoundException) { }
                     catch (FileLoadException) { }
@@ -2475,16 +2815,23 @@ namespace System.Workflow.ComponentModel.Design
                     return itemSupported;
 
                 //check if the activity is NOT supported - we ask this to the Root Designer only. If so, bail out.
-                IWorkflowRootDesigner rootDesigner = ActivityDesigner.GetSafeRootDesigner(Activity.Site) as IWorkflowRootDesigner;
+                IWorkflowRootDesigner rootDesigner =
+                    ActivityDesigner.GetSafeRootDesigner(Activity.Site) as IWorkflowRootDesigner;
                 if (rootDesigner != null)
                 {
                     if (!rootDesigner.IsSupportedActivityType(itemType))
                     {
                         return false;
                     }
-                    else if (rootDesigner.InvokingDesigner != null && rootDesigner.InvokingDesigner.Activity != null)
+                    else if (
+                        rootDesigner.InvokingDesigner != null
+                        && rootDesigner.InvokingDesigner.Activity != null
+                    )
                     {
-                        rootDesigner = ActivityDesigner.GetSafeRootDesigner(rootDesigner.InvokingDesigner.Activity.Site) as IWorkflowRootDesigner;
+                        rootDesigner =
+                            ActivityDesigner.GetSafeRootDesigner(
+                                rootDesigner.InvokingDesigner.Activity.Site
+                            ) as IWorkflowRootDesigner;
                         if (rootDesigner != null && !rootDesigner.IsSupportedActivityType(itemType))
                             return false;
                     }
@@ -2492,14 +2839,23 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (!(toolboxItem is ActivityToolboxItem))
                 {
-                    object[] attributes = itemType.GetCustomAttributes(typeof(ToolboxItemAttribute), false);
+                    object[] attributes = itemType.GetCustomAttributes(
+                        typeof(ToolboxItemAttribute),
+                        false
+                    );
                     if (attributes.Length > 0)
                     {
                         itemSupported = false;
                         foreach (Attribute attribute in attributes)
                         {
-                            ToolboxItemAttribute toolBoxItemAttribute = attribute as ToolboxItemAttribute;
-                            if (toolBoxItemAttribute != null && typeof(System.Workflow.ComponentModel.Design.ActivityToolboxItem).IsAssignableFrom(toolBoxItemAttribute.ToolboxItemType))
+                            ToolboxItemAttribute toolBoxItemAttribute =
+                                attribute as ToolboxItemAttribute;
+                            if (
+                                toolBoxItemAttribute != null
+                                && typeof(System.Workflow.ComponentModel.Design.ActivityToolboxItem).IsAssignableFrom(
+                                    toolBoxItemAttribute.ToolboxItemType
+                                )
+                            )
                             {
                                 itemSupported = true;
                                 break;
@@ -2513,7 +2869,8 @@ namespace System.Workflow.ComponentModel.Design
 
         void IToolboxUser.ToolPicked(ToolboxItem toolboxItem)
         {
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             IToolboxService toolboxService = GetService(typeof(IToolboxService)) as IToolboxService;
             if (toolboxItem == null || selectionService == null)
                 return;
@@ -2533,28 +2890,49 @@ namespace System.Workflow.ComponentModel.Design
             else if (selectedObject is CompositeActivity)
             {
                 compositeActivity = (CompositeActivity)selectedObject;
-                hitInfo = new HitTestInfo(ActivityDesigner.GetDesigner(compositeActivity), HitTestLocations.Designer);
+                hitInfo = new HitTestInfo(
+                    ActivityDesigner.GetDesigner(compositeActivity),
+                    HitTestLocations.Designer
+                );
             }
 
             //Get the parent designer for pasting
-            CompositeActivityDesigner compositeActivityDesigner = ActivityDesigner.GetDesigner(compositeActivity) as CompositeActivityDesigner;
+            CompositeActivityDesigner compositeActivityDesigner =
+                ActivityDesigner.GetDesigner(compositeActivity) as CompositeActivityDesigner;
             if (compositeActivityDesigner == null)
                 return;
 
-
-            Activity[] activities = CompositeActivityDesigner.DeserializeActivitiesFromToolboxItem(Activity.Site, toolboxItem, false);
+            Activity[] activities = CompositeActivityDesigner.DeserializeActivitiesFromToolboxItem(
+                Activity.Site,
+                toolboxItem,
+                false
+            );
             if (activities.Length == 0)
                 return;
 
-            if (!compositeActivityDesigner.CanInsertActivities(hitInfo, new List<Activity>(activities).AsReadOnly()))
+            if (
+                !compositeActivityDesigner.CanInsertActivities(
+                    hitInfo,
+                    new List<Activity>(activities).AsReadOnly()
+                )
+            )
                 return;
 
             try
             {
-                activities = CompositeActivityDesigner.DeserializeActivitiesFromToolboxItem(Activity.Site, toolboxItem, true);
+                activities = CompositeActivityDesigner.DeserializeActivitiesFromToolboxItem(
+                    Activity.Site,
+                    toolboxItem,
+                    true
+                );
                 if (activities.Length > 0)
                 {
-                    CompositeActivityDesigner.InsertActivities(compositeActivityDesigner, hitInfo, new List<Activity>(activities).AsReadOnly(), SR.GetString(SR.PastingActivities));
+                    CompositeActivityDesigner.InsertActivities(
+                        compositeActivityDesigner,
+                        hitInfo,
+                        new List<Activity>(activities).AsReadOnly(),
+                        SR.GetString(SR.PastingActivities)
+                    );
                     selectionService.SetSelectedComponents(activities, SelectionTypes.Replace);
                     ParentView.EnsureVisible(activities[0]);
                 }
@@ -2562,7 +2940,10 @@ namespace System.Workflow.ComponentModel.Design
             catch (CheckoutException ex)
             {
                 if (ex != CheckoutException.Canceled)
-                    throw new Exception(DR.GetString(DR.ActivityInsertError) + "\n" + ex.Message, ex);
+                    throw new Exception(
+                        DR.GetString(DR.ActivityInsertError) + "\n" + ex.Message,
+                        ex
+                    );
             }
         }
         #endregion
@@ -2588,11 +2969,17 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     Point logicalPoint = parentView.ClientPointToLogical(new Point(e.X, e.Y));
-                    OnMouseDown(new MouseEventArgs(e.Button, e.Clicks, logicalPoint.X, logicalPoint.Y, e.Delta));
+                    OnMouseDown(
+                        new MouseEventArgs(
+                            e.Button,
+                            e.Clicks,
+                            logicalPoint.X,
+                            logicalPoint.Y,
+                            e.Delta
+                        )
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return true;
         }
@@ -2605,11 +2992,17 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     Point logicalPoint = parentView.ClientPointToLogical(new Point(e.X, e.Y));
-                    OnMouseMove(new MouseEventArgs(e.Button, e.Clicks, logicalPoint.X, logicalPoint.Y, e.Delta));
+                    OnMouseMove(
+                        new MouseEventArgs(
+                            e.Button,
+                            e.Clicks,
+                            logicalPoint.X,
+                            logicalPoint.Y,
+                            e.Delta
+                        )
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return true;
         }
@@ -2622,11 +3015,17 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     Point logicalPoint = parentView.ClientPointToLogical(new Point(e.X, e.Y));
-                    OnMouseUp(new MouseEventArgs(e.Button, e.Clicks, logicalPoint.X, logicalPoint.Y, e.Delta));
+                    OnMouseUp(
+                        new MouseEventArgs(
+                            e.Button,
+                            e.Clicks,
+                            logicalPoint.X,
+                            logicalPoint.Y,
+                            e.Delta
+                        )
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return true;
         }
@@ -2639,11 +3038,17 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     Point logicalPoint = parentView.ClientPointToLogical(new Point(e.X, e.Y));
-                    OnMouseDoubleClick(new MouseEventArgs(e.Button, e.Clicks, logicalPoint.X, logicalPoint.Y, e.Delta));
+                    OnMouseDoubleClick(
+                        new MouseEventArgs(
+                            e.Button,
+                            e.Clicks,
+                            logicalPoint.X,
+                            logicalPoint.Y,
+                            e.Delta
+                        )
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return true;
         }
@@ -2656,11 +3061,17 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     Point logicalPoint = parentView.ClientPointToLogical(new Point(e.X, e.Y));
-                    OnMouseEnter(new MouseEventArgs(e.Button, e.Clicks, logicalPoint.X, logicalPoint.Y, e.Delta));
+                    OnMouseEnter(
+                        new MouseEventArgs(
+                            e.Button,
+                            e.Clicks,
+                            logicalPoint.X,
+                            logicalPoint.Y,
+                            e.Delta
+                        )
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return true;
         }
@@ -2673,11 +3084,17 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     Point logicalPoint = parentView.ClientPointToLogical(new Point(e.X, e.Y));
-                    OnMouseHover(new MouseEventArgs(e.Button, e.Clicks, logicalPoint.X, logicalPoint.Y, e.Delta));
+                    OnMouseHover(
+                        new MouseEventArgs(
+                            e.Button,
+                            e.Clicks,
+                            logicalPoint.X,
+                            logicalPoint.Y,
+                            e.Delta
+                        )
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return true;
         }
@@ -2688,9 +3105,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnMouseLeave();
             }
-            catch
-            {
-            }
+            catch { }
 
             return true;
         }
@@ -2707,9 +3122,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnMouseCaptureChanged();
             }
-            catch
-            {
-            }
+            catch { }
 
             return true;
         }
@@ -2722,11 +3135,18 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     Point logicalPoint = parentView.ClientPointToLogical(new Point(e.X, e.Y));
-                    OnMouseDragBegin(initialPoint, new MouseEventArgs(e.Button, e.Clicks, logicalPoint.X, logicalPoint.Y, e.Delta));
+                    OnMouseDragBegin(
+                        initialPoint,
+                        new MouseEventArgs(
+                            e.Button,
+                            e.Clicks,
+                            logicalPoint.X,
+                            logicalPoint.Y,
+                            e.Delta
+                        )
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return true;
         }
@@ -2739,11 +3159,17 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     Point logicalPoint = parentView.ClientPointToLogical(new Point(e.X, e.Y));
-                    OnMouseDragMove(new MouseEventArgs(e.Button, e.Clicks, logicalPoint.X, logicalPoint.Y, e.Delta));
+                    OnMouseDragMove(
+                        new MouseEventArgs(
+                            e.Button,
+                            e.Clicks,
+                            logicalPoint.X,
+                            logicalPoint.Y,
+                            e.Delta
+                        )
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return true;
         }
@@ -2754,9 +3180,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnMouseDragEnd();
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2766,9 +3190,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnDragEnter(e as ActivityDragEventArgs);
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2778,9 +3200,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnDragOver(e as ActivityDragEventArgs);
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2790,9 +3210,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnDragLeave();
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2802,9 +3220,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnDragDrop(e as ActivityDragEventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return true;
         }
@@ -2815,9 +3231,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnGiveFeedback(e);
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2827,9 +3241,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnQueryContinueDrag(e);
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2839,9 +3251,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnKeyDown(e);
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2851,9 +3261,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnKeyUp(e);
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2863,9 +3271,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnScroll(sender, value);
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2881,9 +3287,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnProcessMessage(message);
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
@@ -2898,9 +3302,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnLayoutPosition(new ActivityDesignerLayoutEventArgs(graphics, DesignerTheme));
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         void IWorkflowDesignerMessageSink.OnLayoutSize(Graphics graphics)
@@ -2909,9 +3311,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 Size = OnLayoutSize(new ActivityDesignerLayoutEventArgs(graphics, DesignerTheme));
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         void IWorkflowDesignerMessageSink.OnBeginResizing(DesignerEdges sizingEdge)
@@ -2920,9 +3320,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnBeginResizing(new ActivityDesignerResizeEventArgs(sizingEdge, Bounds));
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         void IWorkflowDesignerMessageSink.OnResizing(DesignerEdges sizingEdge, Rectangle bounds)
@@ -2931,9 +3329,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnResizing(new ActivityDesignerResizeEventArgs(sizingEdge, bounds));
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         void IWorkflowDesignerMessageSink.OnEndResizing()
@@ -2942,9 +3338,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnEndResizing();
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         void IWorkflowDesignerMessageSink.OnThemeChange()
@@ -2953,9 +3347,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnThemeChange(DesignerTheme);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         bool IWorkflowDesignerMessageSink.OnPaint(PaintEventArgs e, Rectangle viewPort)
@@ -2965,10 +3357,20 @@ namespace System.Workflow.ComponentModel.Design
                 Rectangle bounds = Bounds;
                 if (IsVisible && viewPort.IntersectsWith(bounds))
                 {
-                    GlyphManager glyphManager = GetService(typeof(IDesignerGlyphProviderService)) as GlyphManager;
-                    bounds.Width += 1; bounds.Height += 1;
+                    GlyphManager glyphManager =
+                        GetService(typeof(IDesignerGlyphProviderService)) as GlyphManager;
+                    bounds.Width += 1;
+                    bounds.Height += 1;
 
-                    using (GraphicsPath graphicsPath = ActivityDesignerPaint.GetDesignerPath(this, Point.Empty, new Size(DesignerTheme.BorderWidth, DesignerTheme.BorderWidth), DesignerEdges.All, false))
+                    using (
+                        GraphicsPath graphicsPath = ActivityDesignerPaint.GetDesignerPath(
+                            this,
+                            Point.Empty,
+                            new Size(DesignerTheme.BorderWidth, DesignerTheme.BorderWidth),
+                            DesignerEdges.All,
+                            false
+                        )
+                    )
                     using (Region clipRegion = new Region(graphicsPath))
                     {
                         Region oldRegion = e.Graphics.Clip;
@@ -2978,7 +3380,13 @@ namespace System.Workflow.ComponentModel.Design
                         bool restoredClipState = false;
                         try
                         {
-                            ActivityDesignerPaintEventArgs eventArgs = new ActivityDesignerPaintEventArgs(e.Graphics, bounds, viewPort, DesignerTheme);
+                            ActivityDesignerPaintEventArgs eventArgs =
+                                new ActivityDesignerPaintEventArgs(
+                                    e.Graphics,
+                                    bounds,
+                                    viewPort,
+                                    DesignerTheme
+                                );
 
                             e.Graphics.Clip = clipRegion;
                             OnPaint(eventArgs);
@@ -3001,18 +3409,22 @@ namespace System.Workflow.ComponentModel.Design
                                 e.Graphics.Clip = oldRegion;
 
                             if (DrawingState != DrawingStates.Valid)
-                                ActivityDesignerPaint.DrawInvalidDesignerIndicator(e.Graphics, this);
+                                ActivityDesignerPaint.DrawInvalidDesignerIndicator(
+                                    e.Graphics,
+                                    this
+                                );
                         }
                     }
                 }
             }
-            catch
-            {
-            }
+            catch { }
             return true;
         }
 
-        bool IWorkflowDesignerMessageSink.OnPaintWorkflowAdornments(PaintEventArgs e, Rectangle viewPort)
+        bool IWorkflowDesignerMessageSink.OnPaintWorkflowAdornments(
+            PaintEventArgs e,
+            Rectangle viewPort
+        )
         {
             //Only used in message filters
             return true;
@@ -3041,7 +3453,8 @@ namespace System.Workflow.ComponentModel.Design
 
                     smartTagRectangle.X = rectangle.Left - margin.Width / 2;
                     smartTagRectangle.Y = rectangle.Top - margin.Height / 2;
-                    smartTagRectangle.Width = imageSize.Width + glyphSize.Width / 2 + 3 * margin.Width;
+                    smartTagRectangle.Width =
+                        imageSize.Width + glyphSize.Width / 2 + 3 * margin.Width;
                     smartTagRectangle.Height = imageSize.Height + margin.Height;
                 }
 
@@ -3050,19 +3463,33 @@ namespace System.Workflow.ComponentModel.Design
 
             public override bool CanBeActivated
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
-            protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+            protected override void OnPaint(
+                Graphics graphics,
+                bool activated,
+                AmbientTheme ambientTheme,
+                ActivityDesigner designer
+            )
             {
                 Rectangle activatedBounds = GetBounds(designer, true);
 
                 bool formShown = false; //if the drop down form is shown, draw the arrow up
-                if (Form.ActiveForm != null && Form.ActiveForm.GetType().FullName.Equals(typeof(ItemPalette).FullName + "+Palette", StringComparison.Ordinal))
-                    formShown = (Form.ActiveForm.Location == designer.PointToScreen(new Point(activatedBounds.Left, activatedBounds.Bottom)));
+                if (
+                    Form.ActiveForm != null
+                    && Form.ActiveForm.GetType()
+                        .FullName.Equals(
+                            typeof(ItemPalette).FullName + "+Palette",
+                            StringComparison.Ordinal
+                        )
+                )
+                    formShown = (
+                        Form.ActiveForm.Location
+                        == designer.PointToScreen(
+                            new Point(activatedBounds.Left, activatedBounds.Bottom)
+                        )
+                    );
 
                 //work around: This is in order to show the smarttag activated when the drop down is shown but cursor leaves the active area of glyph
                 if (!activated)
@@ -3071,14 +3498,31 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         activated = true;
                     }
-                    else if (Form.ActiveForm != null && Form.ActiveForm.GetType().FullName.Equals(typeof(ItemPalette).FullName + "+Palette", StringComparison.Ordinal))
+                    else if (
+                        Form.ActiveForm != null
+                        && Form.ActiveForm.GetType()
+                            .FullName.Equals(
+                                typeof(ItemPalette).FullName + "+Palette",
+                                StringComparison.Ordinal
+                            )
+                    )
                     {
                         activated = formShown;
                     }
                 }
 
-                graphics.FillRectangle(WorkflowTheme.CurrentTheme.AmbientTheme.BackgroundBrush, activatedBounds);
-                using (Brush transparentSelectionBrush = new SolidBrush(Color.FromArgb(50, WorkflowTheme.CurrentTheme.AmbientTheme.SelectionForeColor)))
+                graphics.FillRectangle(
+                    WorkflowTheme.CurrentTheme.AmbientTheme.BackgroundBrush,
+                    activatedBounds
+                );
+                using (
+                    Brush transparentSelectionBrush = new SolidBrush(
+                        Color.FromArgb(
+                            50,
+                            WorkflowTheme.CurrentTheme.AmbientTheme.SelectionForeColor
+                        )
+                    )
+                )
                     graphics.FillRectangle(transparentSelectionBrush, activatedBounds);
                 graphics.DrawRectangle(SystemPens.ControlDarkDark, activatedBounds);
 
@@ -3095,7 +3539,12 @@ namespace System.Workflow.ComponentModel.Design
                 imageRectangle.X += margin.Width / 2;
                 imageRectangle.Y += margin.Height / 2;
                 imageRectangle.Size = imageSize;
-                ActivityDesignerPaint.DrawImage(graphics, image, imageRectangle, DesignerContentAlignment.Center);
+                ActivityDesignerPaint.DrawImage(
+                    graphics,
+                    image,
+                    imageRectangle,
+                    DesignerContentAlignment.Center
+                );
 
                 //Draw the drop down indicator
                 Rectangle dropDownRectangle = activatedBounds;
@@ -3103,7 +3552,12 @@ namespace System.Workflow.ComponentModel.Design
                 dropDownRectangle.Y += margin.Height / 2;
                 dropDownRectangle.Width = glyphSize.Width / 2;
                 dropDownRectangle.Height -= glyphSize.Height / 4;
-                using (GraphicsPath graphicsPath = ActivityDesignerPaint.GetScrollIndicatorPath(dropDownRectangle, ScrollButton.Down))
+                using (
+                    GraphicsPath graphicsPath = ActivityDesignerPaint.GetScrollIndicatorPath(
+                        dropDownRectangle,
+                        ScrollButton.Down
+                    )
+                )
                 {
                     graphics.FillPath(Brushes.Black, graphicsPath);
                     graphics.DrawPath(Pens.Black, graphicsPath);
@@ -3116,21 +3570,19 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     this.activeDesigner = designer;
                     Rectangle bounds = GetBounds(designer, true);
-                    this.activeDesigner.OnShowSmartTagVerbs(new Point(bounds.Left, bounds.Bottom + 1));
+                    this.activeDesigner.OnShowSmartTagVerbs(
+                        new Point(bounds.Left, bounds.Bottom + 1)
+                    );
                     this.activeDesigner = null;
                 }
             }
 
             internal ActivityDesigner ActiveDesigner
             {
-                get
-                {
-                    return this.activeDesigner;
-                }
+                get { return this.activeDesigner; }
             }
         }
         #endregion
     }
     #endregion
-
 }

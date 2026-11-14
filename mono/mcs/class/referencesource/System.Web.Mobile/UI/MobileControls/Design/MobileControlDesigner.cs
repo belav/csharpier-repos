@@ -7,12 +7,12 @@
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
-    using System.Collections;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
@@ -22,30 +22,29 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class MobileControlDesigner :
-        ControlDesigner, IMobileDesigner, IDeviceSpecificDesigner
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class MobileControlDesigner : ControlDesigner, IMobileDesigner, IDeviceSpecificDesigner
     {
-        private bool                            _containmentStatusDirty = true;
-        private ContainmentStatus               _containmentStatus;
-        private IDesignerHost                   _host;
-        private IWebFormsDocumentService        _iWebFormsDocumentService;
-        private IMobileWebFormServices          _iMobileWebFormServices;
-        private MobileControl                   _mobileControl;
-        private System.Windows.Forms.Control    _header;
+        private bool _containmentStatusDirty = true;
+        private ContainmentStatus _containmentStatus;
+        private IDesignerHost _host;
+        private IWebFormsDocumentService _iWebFormsDocumentService;
+        private IMobileWebFormServices _iMobileWebFormServices;
+        private MobileControl _mobileControl;
+        private System.Windows.Forms.Control _header;
 
         internal static readonly String resourceDllUrl =
             "res://" + typeof(MobileControlDesigner).Module.FullyQualifiedName;
 
-        internal static readonly String errorIcon =
-            resourceDllUrl + "//ERROR_GIF";
+        internal static readonly String errorIcon = resourceDllUrl + "//ERROR_GIF";
 
-        internal static readonly String infoIcon =
-            resourceDllUrl + "//INFO_GIF";
+        internal static readonly String infoIcon = resourceDllUrl + "//INFO_GIF";
 
         internal static readonly String defaultErrorDesignTimeHTML =
             @"
@@ -62,23 +61,28 @@ namespace System.Web.UI.Design.MobileControls
                 </table>
              ";
 
-        internal static readonly String _formPanelContainmentErrorMessage =
-            SR.GetString(SR.MobileControl_FormPanelContainmentErrorMessage);
+        internal static readonly String _formPanelContainmentErrorMessage = SR.GetString(
+            SR.MobileControl_FormPanelContainmentErrorMessage
+        );
 
-        internal static readonly String _mobilePageErrorMessage =
-            SR.GetString(SR.MobileControl_MobilePageErrorMessage);
+        internal static readonly String _mobilePageErrorMessage = SR.GetString(
+            SR.MobileControl_MobilePageErrorMessage
+        );
 
-        internal static readonly String _topPageContainmentErrorMessage =
-            SR.GetString(SR.MobileControl_TopPageContainmentErrorMessage);
+        internal static readonly String _topPageContainmentErrorMessage = SR.GetString(
+            SR.MobileControl_TopPageContainmentErrorMessage
+        );
 
-        internal static readonly String _userControlWarningMessage =
-            SR.GetString(SR.MobileControl_UserControlWarningMessage);
+        internal static readonly String _userControlWarningMessage = SR.GetString(
+            SR.MobileControl_UserControlWarningMessage
+        );
 
         private const String _appliedDeviceFiltersPropName = "AppliedDeviceFilters";
         private const String _propertyOverridesPropName = "PropertyOverrides";
         private const String _defaultDeviceSpecificIdentifier = "unique";
 
-        private static readonly string[] _nonBrowsableProperties = new string[] {
+        private static readonly string[] _nonBrowsableProperties = new string[]
+        {
             "EnableTheming",
             "Expressions",
             "SkinID",
@@ -99,10 +103,7 @@ namespace System.Web.UI.Design.MobileControls
         ]
         protected String AppliedDeviceFilters
         {
-            get
-            {
-                return String.Empty;
-            }
+            get { return String.Empty; }
         }
 
         protected ContainmentStatus ContainmentStatus
@@ -114,8 +115,7 @@ namespace System.Web.UI.Design.MobileControls
                     return _containmentStatus;
                 }
 
-                _containmentStatus =
-                    DesignerAdapterUtil.GetContainmentStatus(_mobileControl);
+                _containmentStatus = DesignerAdapterUtil.GetContainmentStatus(_mobileControl);
 
                 _containmentStatusDirty = false;
                 return _containmentStatus;
@@ -126,18 +126,20 @@ namespace System.Web.UI.Design.MobileControls
         {
             get
             {
-                return typeof(HtmlControlDesigner).InvokeMember("DesignTimeElement", 
-                    BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.NonPublic, 
-                    null, this, null, CultureInfo.InvariantCulture);
+                return typeof(HtmlControlDesigner).InvokeMember(
+                    "DesignTimeElement",
+                    BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.NonPublic,
+                    null,
+                    this,
+                    null,
+                    CultureInfo.InvariantCulture
+                );
             }
         }
 
         public override bool DesignTimeHtmlRequiresLoadComplete
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         private IDesignerHost Host
@@ -160,8 +162,9 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (_iMobileWebFormServices == null)
                 {
-                    _iMobileWebFormServices =
-                        (IMobileWebFormServices)GetService(typeof(IMobileWebFormServices));
+                    _iMobileWebFormServices = (IMobileWebFormServices)GetService(
+                        typeof(IMobileWebFormServices)
+                    );
                 }
 
                 return _iMobileWebFormServices;
@@ -174,8 +177,9 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (_iWebFormsDocumentService == null)
                 {
-                    _iWebFormsDocumentService =
-                        (IWebFormsDocumentService)GetService(typeof(IWebFormsDocumentService));
+                    _iWebFormsDocumentService = (IWebFormsDocumentService)GetService(
+                        typeof(IWebFormsDocumentService)
+                    );
 
                     Debug.Assert(_iWebFormsDocumentService != null);
                 }
@@ -189,10 +193,7 @@ namespace System.Web.UI.Design.MobileControls
         /// </summary>
         protected bool LoadComplete
         {
-            get
-            {
-                return !IWebFormsDocumentService.IsLoading;
-            }
+            get { return !IWebFormsDocumentService.IsLoading; }
         }
 
         [
@@ -205,10 +206,7 @@ namespace System.Web.UI.Design.MobileControls
         ]
         protected String PropertyOverrides
         {
-            get
-            {
-                return String.Empty;
-            }
+            get { return String.Empty; }
         }
 
         private bool ValidContainment
@@ -216,9 +214,10 @@ namespace System.Web.UI.Design.MobileControls
             get
             {
                 return (
-                    ContainmentStatus == ContainmentStatus.InForm ||
-                    ContainmentStatus == ContainmentStatus.InPanel ||
-                    ContainmentStatus == ContainmentStatus.InTemplateFrame);
+                    ContainmentStatus == ContainmentStatus.InForm
+                    || ContainmentStatus == ContainmentStatus.InPanel
+                    || ContainmentStatus == ContainmentStatus.InTemplateFrame
+                );
             }
         }
 
@@ -322,7 +321,7 @@ namespace System.Web.UI.Design.MobileControls
             return "<div style='width:100%'>" + base.GetEmptyDesignTimeHtml() + "</div>";
         }
 
-        protected override sealed String GetErrorDesignTimeHtml(Exception e)
+        protected sealed override String GetErrorDesignTimeHtml(Exception e)
         {
             return base.GetErrorDesignTimeHtml(e);
         }
@@ -333,7 +332,12 @@ namespace System.Web.UI.Design.MobileControls
         protected virtual String GetDesignTimeErrorHtml(String errorMessage, bool infoMode)
         {
             return DesignerAdapterUtil.GetDesignTimeErrorHtml(
-                errorMessage, infoMode, _mobileControl, Behavior, ContainmentStatus);
+                errorMessage,
+                infoMode,
+                _mobileControl,
+                Behavior,
+                ContainmentStatus
+            );
         }
 
         /// <summary>
@@ -362,8 +366,7 @@ namespace System.Web.UI.Design.MobileControls
             // will wipe out all control collections, therefore we need to cache
             // the Text value too.
             bool hasControls = _mobileControl.HasControls();
-            if ((_mobileControl is TextControl || _mobileControl is TextView)
-                && hasControls)
+            if ((_mobileControl is TextControl || _mobileControl is TextView) && hasControls)
             {
                 String originalText = null;
                 Control[] children = null;
@@ -439,12 +442,14 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.MobileControl,
-                "MobileControlDesigner.Initialize - Invalid MobileControl Control");
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.MobileControl,
+                "MobileControlDesigner.Initialize - Invalid MobileControl Control"
+            );
 
             base.Initialize(component);
 
-            _mobileControl = (System.Web.UI.MobileControls.MobileControl) component;
+            _mobileControl = (System.Web.UI.MobileControls.MobileControl)component;
         }
 
         protected virtual void SetStyleAttributes()
@@ -460,14 +465,18 @@ namespace System.Web.UI.Design.MobileControls
             base.OnComponentChanged(sender, ce);
 
             MemberDescriptor member = ce.Member;
-            if (member != null &&
-                member.GetType().FullName.Equals(Constants.ReflectPropertyDescriptorTypeFullName))
+            if (
+                member != null
+                && member.GetType().FullName.Equals(Constants.ReflectPropertyDescriptorTypeFullName)
+            )
             {
                 PropertyDescriptor propDesc = (PropertyDescriptor)member;
                 String propName = propDesc.Name;
 
-                if ((_mobileControl is TextControl || _mobileControl is TextView)
-                    && propName.Equals("Text"))
+                if (
+                    (_mobileControl is TextControl || _mobileControl is TextView)
+                    && propName.Equals("Text")
+                )
                 {
                     _mobileControl.Controls.Clear();
                 }
@@ -494,17 +503,29 @@ namespace System.Web.UI.Design.MobileControls
         {
             base.PreFilterProperties(properties);
 
-            properties[_appliedDeviceFiltersPropName] =
-                TypeDescriptor.CreateProperty(this.GetType(), _appliedDeviceFiltersPropName, typeof(String));
+            properties[_appliedDeviceFiltersPropName] = TypeDescriptor.CreateProperty(
+                this.GetType(),
+                _appliedDeviceFiltersPropName,
+                typeof(String)
+            );
 
-            properties[_propertyOverridesPropName] =
-                TypeDescriptor.CreateProperty(this.GetType(), _propertyOverridesPropName, typeof(String));
+            properties[_propertyOverridesPropName] = TypeDescriptor.CreateProperty(
+                this.GetType(),
+                _propertyOverridesPropName,
+                typeof(String)
+            );
 
-            foreach (string propertyName in _nonBrowsableProperties) {
-                PropertyDescriptor property = (PropertyDescriptor) properties[propertyName];
+            foreach (string propertyName in _nonBrowsableProperties)
+            {
+                PropertyDescriptor property = (PropertyDescriptor)properties[propertyName];
                 Debug.Assert(property != null, "Property is null: " + propertyName);
-                if (property != null) {
-                    properties[propertyName] = TypeDescriptor.CreateProperty(this.GetType(), property, BrowsableAttribute.No);
+                if (property != null)
+                {
+                    properties[propertyName] = TypeDescriptor.CreateProperty(
+                        this.GetType(),
+                        property,
+                        BrowsableAttribute.No
+                    );
                 }
             }
         }
@@ -527,41 +548,28 @@ namespace System.Web.UI.Design.MobileControls
         //  Begin IDeviceSpecificDesigner Implementation
         ////////////////////////////////////////////////////////////////////////
 
-        void IDeviceSpecificDesigner.SetDeviceSpecificEditor
-            (IRefreshableDeviceSpecificEditor editor)
-        {
-        }
+        void IDeviceSpecificDesigner.SetDeviceSpecificEditor(
+            IRefreshableDeviceSpecificEditor editor
+        ) { }
 
         String IDeviceSpecificDesigner.CurrentDeviceSpecificID
         {
-            get
-            {
-                return _defaultDeviceSpecificIdentifier;
-            }
+            get { return _defaultDeviceSpecificIdentifier; }
         }
 
         System.Windows.Forms.Control IDeviceSpecificDesigner.Header
         {
-            get
-            {
-                return _header;
-            }
+            get { return _header; }
         }
 
         System.Web.UI.Control IDeviceSpecificDesigner.UnderlyingControl
         {
-            get
-            {
-                return _mobileControl;
-            }
+            get { return _mobileControl; }
         }
 
         Object IDeviceSpecificDesigner.UnderlyingObject
         {
-            get
-            {
-                return _mobileControl;
-            }
+            get { return _mobileControl; }
         }
 
         void IDeviceSpecificDesigner.InitHeader(int mergingContext)
@@ -570,39 +578,39 @@ namespace System.Web.UI.Design.MobileControls
             HeaderLabel lblDescription = new HeaderLabel();
 
             lblDescription.TabIndex = 0;
-            lblDescription.Text = SR.GetString(
-                SR.MobileControl_SettingGenericChoiceDescription
-            );
+            lblDescription.Text = SR.GetString(SR.MobileControl_SettingGenericChoiceDescription);
             panel.Height = lblDescription.Height;
             panel.Width = lblDescription.Width;
             panel.Controls.Add(lblDescription);
             _header = panel;
         }
 
-        void IDeviceSpecificDesigner.RefreshHeader(int mergingContext)
-        {
-        }
+        void IDeviceSpecificDesigner.RefreshHeader(int mergingContext) { }
 
-        bool IDeviceSpecificDesigner.GetDeviceSpecific(String deviceSpecificParentID, out DeviceSpecific ds)
+        bool IDeviceSpecificDesigner.GetDeviceSpecific(
+            String deviceSpecificParentID,
+            out DeviceSpecific ds
+        )
         {
             Debug.Assert(_defaultDeviceSpecificIdentifier == deviceSpecificParentID);
-            ds = ((MobileControl) _mobileControl).DeviceSpecific;
+            ds = ((MobileControl)_mobileControl).DeviceSpecific;
             return true;
         }
 
-        void IDeviceSpecificDesigner.SetDeviceSpecific(String deviceSpecificParentID, DeviceSpecific ds)
+        void IDeviceSpecificDesigner.SetDeviceSpecific(
+            String deviceSpecificParentID,
+            DeviceSpecific ds
+        )
         {
             Debug.Assert(_defaultDeviceSpecificIdentifier == deviceSpecificParentID);
             if (null != ds)
             {
-                ds.SetOwner((MobileControl) _mobileControl);
+                ds.SetOwner((MobileControl)_mobileControl);
             }
             _mobileControl.DeviceSpecific = ds;
         }
 
-        void IDeviceSpecificDesigner.UseCurrentDeviceSpecificID()
-        {
-        }
+        void IDeviceSpecificDesigner.UseCurrentDeviceSpecificID() { }
 
         ////////////////////////////////////////////////////////////////////////
         //  End IDeviceSpecificDesigner Implementation

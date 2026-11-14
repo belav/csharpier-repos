@@ -49,7 +49,11 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static CertBagAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static CertBagAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -65,12 +69,21 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out CertBagAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out CertBagAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out CertBagAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out CertBagAsn decoded
+        )
         {
             try
             {
@@ -82,7 +95,12 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out CertBagAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out CertBagAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -95,9 +113,10 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
 
             explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
             tmpSpan = explicitReader.ReadEncodedValue();
-            decoded.CertValue = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+            decoded.CertValue = rebindSpan.Overlaps(tmpSpan, out offset)
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
             explicitReader.ThrowIfNotEmpty();
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

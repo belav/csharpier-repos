@@ -14,36 +14,39 @@
 //   SByte->UIntPtr
 //   Int16->UIntPtr
 //   Int32->UIntPtr
-	
+
 using System;
-class X {
-	public static void Main ()
-	{
-		UIntPtr a = (UIntPtr) 1;
 
-		// from uintptr
-		sbyte _sbyte = (sbyte) a;
-		short _short = (short) a;
-		int   _int   = (int) a;
+class X
+{
+    public static void Main()
+    {
+        UIntPtr a = (UIntPtr)1;
 
-		// uint64 to intptr
-		IntPtr _intptr = (IntPtr) 1;
-		ulong _ulong = (ulong) _intptr;
+        // from uintptr
+        sbyte _sbyte = (sbyte)a;
+        short _short = (short)a;
+        int _int = (int)a;
 
-		// to intptr
-		UIntPtr _uptr = (UIntPtr) _sbyte;
-		_uptr = (UIntPtr) _short;
-		_uptr = (UIntPtr) _int;
-	}
+        // uint64 to intptr
+        IntPtr _intptr = (IntPtr)1;
+        ulong _ulong = (ulong)_intptr;
 
-	static void Compile ()
-	{
-		IntPtr a = (IntPtr) 1;
-		M (a);
-	}
-	
-	static void M (long l){}
-	static void M (UInt64 l){}
-	static void M (object o){}
-	
+        // to intptr
+        UIntPtr _uptr = (UIntPtr)_sbyte;
+        _uptr = (UIntPtr)_short;
+        _uptr = (UIntPtr)_int;
+    }
+
+    static void Compile()
+    {
+        IntPtr a = (IntPtr)1;
+        M(a);
+    }
+
+    static void M(long l) { }
+
+    static void M(UInt64 l) { }
+
+    static void M(object o) { }
 }

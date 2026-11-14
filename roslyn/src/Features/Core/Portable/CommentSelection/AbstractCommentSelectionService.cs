@@ -20,9 +20,21 @@ namespace Microsoft.CodeAnalysis.CommentSelection
         public abstract string SingleLineCommentString { get; }
         public abstract bool SupportsBlockComment { get; }
 
-        public CommentSelectionInfo GetInfo()
-            => SupportsBlockComment
-                ? new(supportsSingleLineComment: true, SupportsBlockComment, SingleLineCommentString, BlockCommentStartString, BlockCommentEndString)
-                : new(supportsSingleLineComment: true, SupportsBlockComment, SingleLineCommentString, blockCommentStartString: "", blockCommentEndString: "");
+        public CommentSelectionInfo GetInfo() =>
+            SupportsBlockComment
+                ? new(
+                    supportsSingleLineComment: true,
+                    SupportsBlockComment,
+                    SingleLineCommentString,
+                    BlockCommentStartString,
+                    BlockCommentEndString
+                )
+                : new(
+                    supportsSingleLineComment: true,
+                    SupportsBlockComment,
+                    SingleLineCommentString,
+                    blockCommentStartString: "",
+                    blockCommentEndString: ""
+                );
     }
 }

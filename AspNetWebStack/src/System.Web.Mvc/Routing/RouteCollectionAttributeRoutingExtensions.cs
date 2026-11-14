@@ -20,7 +20,10 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("routes");
             }
 
-            AttributeRoutingMapper.MapAttributeRoutes(routes, new DefaultInlineConstraintResolver());
+            AttributeRoutingMapper.MapAttributeRoutes(
+                routes,
+                new DefaultInlineConstraintResolver()
+            );
         }
 
         /// <summary>
@@ -30,8 +33,10 @@ namespace System.Web.Mvc
         /// <param name="constraintResolver">
         /// The <see cref="IInlineConstraintResolver"/> to use for resolving inline constraints in route templates.
         /// </param>
-        public static void MapMvcAttributeRoutes(this RouteCollection routes,
-            IInlineConstraintResolver constraintResolver)
+        public static void MapMvcAttributeRoutes(
+            this RouteCollection routes,
+            IInlineConstraintResolver constraintResolver
+        )
         {
             if (routes == null)
             {
@@ -55,7 +60,8 @@ namespace System.Web.Mvc
         /// </param>
         public static void MapMvcAttributeRoutes(
             this RouteCollection routes,
-            IDirectRouteProvider directRouteProvider)
+            IDirectRouteProvider directRouteProvider
+        )
         {
             if (routes == null)
             {
@@ -67,7 +73,11 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("directRouteProvider");
             }
 
-            AttributeRoutingMapper.MapAttributeRoutes(routes, new DefaultInlineConstraintResolver(), directRouteProvider);
+            AttributeRoutingMapper.MapAttributeRoutes(
+                routes,
+                new DefaultInlineConstraintResolver(),
+                directRouteProvider
+            );
         }
 
         /// <summary>
@@ -83,7 +93,8 @@ namespace System.Web.Mvc
         public static void MapMvcAttributeRoutes(
             this RouteCollection routes,
             IInlineConstraintResolver constraintResolver,
-            IDirectRouteProvider directRouteProvider)
+            IDirectRouteProvider directRouteProvider
+        )
         {
             if (routes == null)
             {
@@ -100,7 +111,11 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("directRouteProvider");
             }
 
-            AttributeRoutingMapper.MapAttributeRoutes(routes, constraintResolver, directRouteProvider);
+            AttributeRoutingMapper.MapAttributeRoutes(
+                routes,
+                constraintResolver,
+                directRouteProvider
+            );
         }
     }
 }

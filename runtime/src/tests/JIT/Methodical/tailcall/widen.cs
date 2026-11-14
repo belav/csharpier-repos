@@ -578,63 +578,297 @@ public class Program_widen
 
     private static byte Return1U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         return 112;
     }
 
     private static sbyte Return1S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         return -11;
     }
 
     private static ushort Return2U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         return 11223;
     }
 
     private static short Return2S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         return -22334;
     }
 
     private static uint Return4U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         return 1122334455;
     }
 
     private static int Return4S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         return -554433221;
     }
 
     private static ulong Return8U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         return 11223344556677889911;
     }
 
     private static long Return8S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         return -998877665544332211;
     }
 
     private static byte Test1U1S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (byte)Return1S(arg);
@@ -642,7 +876,33 @@ public class Program_widen
 
     private static byte Test1U2U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (byte)Return2U(arg);
@@ -650,7 +910,33 @@ public class Program_widen
 
     private static byte Test1U2S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (byte)Return2S(arg);
@@ -658,7 +944,33 @@ public class Program_widen
 
     private static byte Test1U4U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (byte)Return4U(arg);
@@ -666,7 +978,33 @@ public class Program_widen
 
     private static byte Test1U4S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (byte)Return4S(arg);
@@ -674,7 +1012,33 @@ public class Program_widen
 
     private static byte Test1U8U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (byte)Return8U(arg);
@@ -682,7 +1046,33 @@ public class Program_widen
 
     private static byte Test1U8S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (byte)Return8S(arg);
@@ -690,7 +1080,33 @@ public class Program_widen
 
     private static sbyte Test1S1U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (sbyte)Return1U(arg);
@@ -698,7 +1114,33 @@ public class Program_widen
 
     private static sbyte Test1S2U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (sbyte)Return2U(arg);
@@ -706,7 +1148,33 @@ public class Program_widen
 
     private static sbyte Test1S2S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (sbyte)Return2S(arg);
@@ -714,7 +1182,33 @@ public class Program_widen
 
     private static sbyte Test1S4U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (sbyte)Return4U(arg);
@@ -722,7 +1216,33 @@ public class Program_widen
 
     private static sbyte Test1S4S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (sbyte)Return4S(arg);
@@ -730,7 +1250,33 @@ public class Program_widen
 
     private static sbyte Test1S8U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (sbyte)Return8U(arg);
@@ -738,7 +1284,33 @@ public class Program_widen
 
     private static sbyte Test1S8S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (sbyte)Return8S(arg);
@@ -746,7 +1318,33 @@ public class Program_widen
 
     private static ushort Test2U1U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1U(arg);
@@ -754,7 +1352,33 @@ public class Program_widen
 
     private static ushort Test2U1S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ushort)Return1S(arg);
@@ -762,7 +1386,33 @@ public class Program_widen
 
     private static ushort Test2U2S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ushort)Return2S(arg);
@@ -770,7 +1420,33 @@ public class Program_widen
 
     private static ushort Test2U4U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ushort)Return4U(arg);
@@ -778,7 +1454,33 @@ public class Program_widen
 
     private static ushort Test2U4S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ushort)Return4S(arg);
@@ -786,7 +1488,33 @@ public class Program_widen
 
     private static ushort Test2U8U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ushort)Return8U(arg);
@@ -794,7 +1522,33 @@ public class Program_widen
 
     private static ushort Test2U8S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ushort)Return8S(arg);
@@ -802,7 +1556,33 @@ public class Program_widen
 
     private static short Test2S1U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1U(arg);
@@ -810,7 +1590,33 @@ public class Program_widen
 
     private static short Test2S1S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1S(arg);
@@ -818,7 +1624,33 @@ public class Program_widen
 
     private static short Test2S2U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (short)Return2U(arg);
@@ -826,7 +1658,33 @@ public class Program_widen
 
     private static short Test2S4U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (short)Return4U(arg);
@@ -834,7 +1692,33 @@ public class Program_widen
 
     private static short Test2S4S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (short)Return4S(arg);
@@ -842,7 +1726,33 @@ public class Program_widen
 
     private static short Test2S8U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (short)Return8U(arg);
@@ -850,7 +1760,33 @@ public class Program_widen
 
     private static short Test2S8S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (short)Return8S(arg);
@@ -858,7 +1794,33 @@ public class Program_widen
 
     private static uint Test4U1U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1U(arg);
@@ -866,7 +1828,33 @@ public class Program_widen
 
     private static uint Test4U1S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (uint)Return1S(arg);
@@ -874,7 +1862,33 @@ public class Program_widen
 
     private static uint Test4U2U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return2U(arg);
@@ -882,7 +1896,33 @@ public class Program_widen
 
     private static uint Test4U2S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (uint)Return2S(arg);
@@ -890,7 +1930,33 @@ public class Program_widen
 
     private static uint Test4U4S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (uint)Return4S(arg);
@@ -898,7 +1964,33 @@ public class Program_widen
 
     private static uint Test4U8U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (uint)Return8U(arg);
@@ -906,7 +1998,33 @@ public class Program_widen
 
     private static uint Test4U8S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (uint)Return8S(arg);
@@ -914,7 +2032,33 @@ public class Program_widen
 
     private static int Test4S1U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1U(arg);
@@ -922,7 +2066,33 @@ public class Program_widen
 
     private static int Test4S1S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1S(arg);
@@ -930,7 +2100,33 @@ public class Program_widen
 
     private static int Test4S2U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return2U(arg);
@@ -938,7 +2134,33 @@ public class Program_widen
 
     private static int Test4S2S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return2S(arg);
@@ -946,7 +2168,33 @@ public class Program_widen
 
     private static int Test4S4U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (int)Return4U(arg);
@@ -954,7 +2202,33 @@ public class Program_widen
 
     private static int Test4S8U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (int)Return8U(arg);
@@ -962,7 +2236,33 @@ public class Program_widen
 
     private static int Test4S8S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (int)Return8S(arg);
@@ -970,7 +2270,33 @@ public class Program_widen
 
     private static ulong Test8U1U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1U(arg);
@@ -978,7 +2304,33 @@ public class Program_widen
 
     private static ulong Test8U1S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ulong)Return1S(arg);
@@ -986,7 +2338,33 @@ public class Program_widen
 
     private static ulong Test8U2U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return2U(arg);
@@ -994,7 +2372,33 @@ public class Program_widen
 
     private static ulong Test8U2S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ulong)Return2S(arg);
@@ -1002,7 +2406,33 @@ public class Program_widen
 
     private static ulong Test8U4U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return4U(arg);
@@ -1010,7 +2440,33 @@ public class Program_widen
 
     private static ulong Test8U4S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ulong)Return4S(arg);
@@ -1018,7 +2474,33 @@ public class Program_widen
 
     private static ulong Test8U8S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (ulong)Return8S(arg);
@@ -1026,7 +2508,33 @@ public class Program_widen
 
     private static long Test8S1U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1U(arg);
@@ -1034,7 +2542,33 @@ public class Program_widen
 
     private static long Test8S1S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return1S(arg);
@@ -1042,7 +2576,33 @@ public class Program_widen
 
     private static long Test8S2U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return2U(arg);
@@ -1050,7 +2610,33 @@ public class Program_widen
 
     private static long Test8S2S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return2S(arg);
@@ -1058,7 +2644,33 @@ public class Program_widen
 
     private static long Test8S4U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return4U(arg);
@@ -1066,7 +2678,33 @@ public class Program_widen
 
     private static long Test8S4S(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return Return4S(arg);
@@ -1074,7 +2712,33 @@ public class Program_widen
 
     private static long Test8S8U(int arg)
     {
-        if (arg == int.MaxValue) s_val = Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount + Environment.TickCount;
+        if (arg == int.MaxValue)
+            s_val =
+                Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount
+                + Environment.TickCount;
 
         ClobberReturnReg();
         return (long)Return8U(arg);

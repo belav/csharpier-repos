@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ITypeResolutionService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System;
     using System.Reflection;
 
@@ -15,33 +16,33 @@ namespace System.ComponentModel.Design {
     ///         The type resolution service is used to load types at design time.
     ///    </para>
     /// </devdoc>
-    public interface ITypeResolutionService {
+    public interface ITypeResolutionService
+    {
+        /// <devdoc>
+        ///     Retrieves the requested assembly.
+        /// </devdoc>
+        Assembly GetAssembly(AssemblyName name);
 
         /// <devdoc>
         ///     Retrieves the requested assembly.
-        /// </devdoc>    
-        Assembly GetAssembly(AssemblyName name);
-    
-        /// <devdoc>
-        ///     Retrieves the requested assembly.
-        /// </devdoc>    
+        /// </devdoc>
         Assembly GetAssembly(AssemblyName name, bool throwOnError);
-    
+
         /// <devdoc>
         ///     Loads a type with the given name.
         /// </devdoc>
         Type GetType(string name);
-    
+
         /// <devdoc>
         ///     Loads a type with the given name.
         /// </devdoc>
         Type GetType(string name, bool throwOnError);
-    
+
         /// <devdoc>
         ///     Loads a type with the given name.
         /// </devdoc>
         Type GetType(string name, bool throwOnError, bool ignoreCase);
-    
+
         /// <devdoc>
         ///     References the given assembly name.  Once an assembly has
         ///     been referenced types may be loaded from it without
@@ -57,4 +58,3 @@ namespace System.ComponentModel.Design {
         string GetPathOfAssembly(AssemblyName name);
     }
 }
-

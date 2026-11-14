@@ -116,12 +116,19 @@ namespace System.Numerics.Tests
         [Fact]
         public void PlaneConstructorTest1()
         {
-            float a = 1.0f, b = 2.0f, c = 3.0f, d = 4.0f;
+            float a = 1.0f,
+                b = 2.0f,
+                c = 3.0f,
+                d = 4.0f;
             Plane target = new Plane(a, b, c, d);
 
             Assert.True(
-                target.Normal.X == a && target.Normal.Y == b && target.Normal.Z == c && target.D == d,
-                "Plane.cstor did not return the expected value.");
+                target.Normal.X == a
+                    && target.Normal.Y == b
+                    && target.Normal.Z == c
+                    && target.D == d,
+                "Plane.cstor did not return the expected value."
+            );
         }
 
         // A test for Plane.CreateFromVertices
@@ -149,7 +156,10 @@ namespace System.Numerics.Tests
             float invRoot2 = (float)(1 / Math.Sqrt(2));
 
             Plane expected = new Plane(new Vector3(invRoot2, 0, invRoot2), -invRoot2);
-            Assert.True(MathHelper.Equal(target, expected), "Plane.cstor did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(target, expected),
+                "Plane.cstor did not return the expected value."
+            );
         }
 
         // A test for Plane (Vector3f, float)
@@ -162,7 +172,8 @@ namespace System.Numerics.Tests
             Plane target = new Plane(normal, d);
             Assert.True(
                 target.Normal == normal && target.D == d,
-                "Plane.cstor did not return the expected value.");
+                "Plane.cstor did not return the expected value."
+            );
         }
 
         // A test for Plane (Vector4f)
@@ -173,8 +184,12 @@ namespace System.Numerics.Tests
             Plane target = new Plane(value);
 
             Assert.True(
-                target.Normal.X == value.X && target.Normal.Y == value.Y && target.Normal.Z == value.Z && target.D == value.W,
-                "Plane.cstor did not return the expected value.");
+                target.Normal.X == value.X
+                    && target.Normal.Y == value.Y
+                    && target.Normal.Z == value.Z
+                    && target.D == value.W,
+                "Plane.cstor did not return the expected value."
+            );
         }
 
         [Fact]
@@ -196,7 +211,10 @@ namespace System.Numerics.Tests
 
             float expected = 10 + 12 + 12 + 5;
             float actual = Plane.DotCoordinate(target, value);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.DotCoordinate returns unexpected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Plane.DotCoordinate returns unexpected value."
+            );
         }
 
         [Fact]
@@ -207,7 +225,10 @@ namespace System.Numerics.Tests
 
             float expected = 10 + 12 + 12;
             float actual = Plane.DotNormal(target, value);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.DotCoordinate returns unexpected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Plane.DotCoordinate returns unexpected value."
+            );
         }
 
         [Fact]
@@ -220,11 +241,17 @@ namespace System.Numerics.Tests
             Plane expected = new Plane(target.Normal * invF, target.D * invF);
 
             Plane actual = Plane.Normalize(target);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Normalize returns unexpected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Plane.Normalize returns unexpected value."
+            );
 
             // normalize, normalized normal.
             actual = Plane.Normalize(actual);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Normalize returns unexpected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Plane.Normalize returns unexpected value."
+            );
         }
 
         [Fact]
@@ -235,9 +262,9 @@ namespace System.Numerics.Tests
             target = Plane.Normalize(target);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
@@ -246,16 +273,23 @@ namespace System.Numerics.Tests
             Matrix4x4 inv;
             Matrix4x4.Invert(m, out inv);
             Matrix4x4 itm = Matrix4x4.Transpose(inv);
-            float x = target.Normal.X, y = target.Normal.Y, z = target.Normal.Z, w = target.D;
+            float x = target.Normal.X,
+                y = target.Normal.Y,
+                z = target.Normal.Z,
+                w = target.D;
             expected.Normal = new Vector3(
                 x * itm.M11 + y * itm.M21 + z * itm.M31 + w * itm.M41,
                 x * itm.M12 + y * itm.M22 + z * itm.M32 + w * itm.M42,
-                x * itm.M13 + y * itm.M23 + z * itm.M33 + w * itm.M43);
+                x * itm.M13 + y * itm.M23 + z * itm.M33 + w * itm.M43
+            );
             expected.D = x * itm.M14 + y * itm.M24 + z * itm.M34 + w * itm.M44;
 
             Plane actual;
             actual = Plane.Transform(target, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Plane.Transform did not return the expected value."
+            );
         }
 
         [Fact]
@@ -266,22 +300,29 @@ namespace System.Numerics.Tests
             target = Plane.Normalize(target);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             Quaternion q = Quaternion.CreateFromRotationMatrix(m);
 
             Plane expected = new Plane();
-            float x = target.Normal.X, y = target.Normal.Y, z = target.Normal.Z, w = target.D;
+            float x = target.Normal.X,
+                y = target.Normal.Y,
+                z = target.Normal.Z,
+                w = target.D;
             expected.Normal = new Vector3(
                 x * m.M11 + y * m.M21 + z * m.M31 + w * m.M41,
                 x * m.M12 + y * m.M22 + z * m.M32 + w * m.M42,
-                x * m.M13 + y * m.M23 + z * m.M33 + w * m.M43);
+                x * m.M13 + y * m.M23 + z * m.M33 + w * m.M43
+            );
             expected.D = x * m.M14 + y * m.M24 + z * m.M34 + w * m.M44;
 
             Plane actual;
             actual = Plane.Transform(target, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Plane.Transform did not return the expected value."
+            );
         }
 
         // A test for Plane comparison involving NaN values
@@ -334,7 +375,8 @@ namespace System.Numerics.Tests
                 CultureInfo.CurrentCulture,
                 "{{Normal:{0:G} D:{1}}}",
                 target.Normal,
-                target.D);
+                target.D
+            );
 
             Assert.Equal(expected, target.ToString());
         }

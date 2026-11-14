@@ -11,7 +11,7 @@ namespace System.ServiceModel.Discovery.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
-    using System.Xml;      
+    using System.Xml;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class DynamicEndpointElement : StandardEndpointElement
@@ -19,12 +19,17 @@ namespace System.ServiceModel.Discovery.Configuration
         ConfigurationPropertyCollection properties;
 
         [ConfigurationProperty(ConfigurationStrings.DiscoveryClientSettings)]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule, Justification = "No validator requiered.")]        
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
+            Justification = "No validator requiered."
+        )]
         public DiscoveryClientSettingsElement DiscoveryClientSettings
         {
             get
             {
-                return (DiscoveryClientSettingsElement)base[ConfigurationStrings.DiscoveryClientSettings];
+                return (DiscoveryClientSettingsElement)
+                    base[ConfigurationStrings.DiscoveryClientSettings];
             }
         }
 
@@ -40,15 +45,17 @@ namespace System.ServiceModel.Discovery.Configuration
                 if (this.properties == null)
                 {
                     ConfigurationPropertyCollection properties = base.Properties;
-                    
+
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.DiscoveryClientSettings,
-                        typeof(DiscoveryClientSettingsElement),
-                        null,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));                  
+                            ConfigurationStrings.DiscoveryClientSettings,
+                            typeof(DiscoveryClientSettingsElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     this.properties = properties;
                 }
@@ -57,66 +64,112 @@ namespace System.ServiceModel.Discovery.Configuration
             }
         }
 
-        protected internal override ServiceEndpoint CreateServiceEndpoint(ContractDescription contractDescription)
+        protected internal override ServiceEndpoint CreateServiceEndpoint(
+            ContractDescription contractDescription
+        )
         {
             return new DynamicEndpoint(contractDescription);
         }
 
-        protected override void OnInitializeAndValidate(ChannelEndpointElement channelEndpointElement)
+        protected override void OnInitializeAndValidate(
+            ChannelEndpointElement channelEndpointElement
+        )
         {
             if (string.IsNullOrEmpty(channelEndpointElement.Contract))
             {
                 throw FxTrace.Exception.AsError(
                     new ConfigurationErrorsException(
-                        SR.DiscoveryConfigContractNotSpecified(channelEndpointElement.Kind)));
+                        SR.DiscoveryConfigContractNotSpecified(channelEndpointElement.Kind)
+                    )
+                );
             }
 
-            if (channelEndpointElement.Address != null && !channelEndpointElement.Address.Equals(DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri))
+            if (
+                channelEndpointElement.Address != null
+                && !channelEndpointElement.Address.Equals(
+                    DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
+                )
+            )
             {
                 throw FxTrace.Exception.AsError(
                     new ConfigurationErrorsException(
-                            SR.DiscoveryEndpointAddressIncorrect(
+                        SR.DiscoveryEndpointAddressIncorrect(
                             "address",
-                            channelEndpointElement.Address, 
-                            DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri)));
+                            channelEndpointElement.Address,
+                            DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
+                        )
+                    )
+                );
             }
         }
 
-        protected override void OnInitializeAndValidate(ServiceEndpointElement serviceEndpointElement)
-        {            
+        protected override void OnInitializeAndValidate(
+            ServiceEndpointElement serviceEndpointElement
+        )
+        {
             throw FxTrace.Exception.AsError(
                 new InvalidOperationException(
-                    SR.DiscoveryConfigDynamicEndpointInService(serviceEndpointElement.Kind)));
+                    SR.DiscoveryConfigDynamicEndpointInService(serviceEndpointElement.Kind)
+                )
+            );
         }
 
-        protected override void OnApplyConfiguration(ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement)
-        {                        
-        }
+        protected override void OnApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ServiceEndpointElement serviceEndpointElement
+        ) { }
 
-        protected override void OnApplyConfiguration(ServiceEndpoint endpoint, ChannelEndpointElement serviceEndpointElement)
+        protected override void OnApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ChannelEndpointElement serviceEndpointElement
+        )
         {
-            DynamicEndpoint dynamicEndpoint = (DynamicEndpoint)endpoint;            
-            
-            if (!dynamicEndpoint.ValidateAndInsertDiscoveryClientBindingElement(dynamicEndpoint.Binding))
-            {
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.DiscoveryClientBindingElementPresentInDynamicEndpoint));
-            }            
+            DynamicEndpoint dynamicEndpoint = (DynamicEndpoint)endpoint;
 
-            if (PropertyValueOrigin.Default == this.DiscoveryClientSettings.ElementInformation.Properties[ConfigurationStrings.Endpoint].ValueOrigin)
+            if (
+                !dynamicEndpoint.ValidateAndInsertDiscoveryClientBindingElement(
+                    dynamicEndpoint.Binding
+                )
+            )
             {
-                dynamicEndpoint.DiscoveryEndpointProvider = new ConfigurationDiscoveryEndpointProvider();
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(
+                        SR.DiscoveryClientBindingElementPresentInDynamicEndpoint
+                    )
+                );
+            }
+
+            if (
+                PropertyValueOrigin.Default
+                == this.DiscoveryClientSettings
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.Endpoint]
+                    .ValueOrigin
+            )
+            {
+                dynamicEndpoint.DiscoveryEndpointProvider =
+                    new ConfigurationDiscoveryEndpointProvider();
             }
             else
-            {                
-                dynamicEndpoint.DiscoveryEndpointProvider = new ConfigurationDiscoveryEndpointProvider(this.DiscoveryClientSettings.DiscoveryEndpoint);
+            {
+                dynamicEndpoint.DiscoveryEndpointProvider =
+                    new ConfigurationDiscoveryEndpointProvider(
+                        this.DiscoveryClientSettings.DiscoveryEndpoint
+                    );
             }
 
-            this.DiscoveryClientSettings.FindCriteria.ApplyConfiguration(dynamicEndpoint.FindCriteria);
+            this.DiscoveryClientSettings.FindCriteria.ApplyConfiguration(
+                dynamicEndpoint.FindCriteria
+            );
 
             if (dynamicEndpoint.FindCriteria.ContractTypeNames.Count == 0)
             {
                 dynamicEndpoint.FindCriteria.ContractTypeNames.Add(
-                    new XmlQualifiedName(dynamicEndpoint.Contract.Name, dynamicEndpoint.Contract.Namespace));                
+                    new XmlQualifiedName(
+                        dynamicEndpoint.Contract.Name,
+                        dynamicEndpoint.Contract.Namespace
+                    )
+                );
             }
         }
     }

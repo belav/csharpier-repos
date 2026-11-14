@@ -22,32 +22,45 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         public void ConstructedErrorTypes()
         {
             var source1 =
-@"public class A<T>
+                @"public class A<T>
 {
     public class B<U> { }
 }";
-            var compilation1 = CreateCompilation(source1, assemblyName: "91AB32B7-DDDF-4E50-87EF-4E8B0A664A41");
+            var compilation1 = CreateCompilation(
+                source1,
+                assemblyName: "91AB32B7-DDDF-4E50-87EF-4E8B0A664A41"
+            );
             compilation1.VerifyDiagnostics();
-            var reference1 = MetadataReference.CreateFromImage(compilation1.EmitToArray(options: new EmitOptions(metadataOnly: true)));
+            var reference1 = MetadataReference.CreateFromImage(
+                compilation1.EmitToArray(options: new EmitOptions(metadataOnly: true))
+            );
 
             // Binding types in source, no missing types.
             var source2 =
-@"class C1<T, U> : A<T>.B<U> { }
+                @"class C1<T, U> : A<T>.B<U> { }
 class C2<T, U> : A<T>.B<U> { }
 class C3<T> : A<T>.B<object> { }
 class C4<T> : A<object>.B<T> { }
 class C5 : A<object>.B<int> { }
 class C6 : A<string>.B<object> { }
 class C7 : A<string>.B<object> { }";
-            var compilation2 = CreateCompilation(source2, references: new[] { reference1 }, assemblyName: "91AB32B7-DDDF-4E50-87EF-4E8B0A664A42");
+            var compilation2 = CreateCompilation(
+                source2,
+                references: new[] { reference1 },
+                assemblyName: "91AB32B7-DDDF-4E50-87EF-4E8B0A664A42"
+            );
             compilation2.VerifyDiagnostics();
             CompareConstructedErrorTypes(compilation2, missingTypes: false, fromSource: true);
-            var reference2 = MetadataReference.CreateFromImage(compilation2.EmitToArray(options: new EmitOptions(metadataOnly: true)));
+            var reference2 = MetadataReference.CreateFromImage(
+                compilation2.EmitToArray(options: new EmitOptions(metadataOnly: true))
+            );
 
             // Loading types from metadata, no missing types.
-            var source3 =
-@"";
-            var compilation3 = CreateCompilation(source3, references: new[] { reference1, reference2 });
+            var source3 = @"";
+            var compilation3 = CreateCompilation(
+                source3,
+                references: new[] { reference1, reference2 }
+            );
             compilation3.VerifyDiagnostics();
             CompareConstructedErrorTypes(compilation3, missingTypes: false, fromSource: false);
 
@@ -56,19 +69,24 @@ class C7 : A<string>.B<object> { }";
             CompareConstructedErrorTypes(compilation4, missingTypes: true, fromSource: true);
 
             // Loading types from metadata, missing types, resulting in ErrorTypeSymbols.
-            var source5 =
-@"";
+            var source5 = @"";
             var compilation5 = CreateCompilation(source5, references: new[] { reference2 });
             CompareConstructedErrorTypes(compilation5, missingTypes: true, fromSource: false);
         }
 
-        private void CompareConstructedErrorTypes(CSharpCompilation compilation, bool missingTypes, bool fromSource)
+        private void CompareConstructedErrorTypes(
+            CSharpCompilation compilation,
+            bool missingTypes,
+            bool fromSource
+        )
         {
             // Get all root types.
             var allTypes = compilation.GlobalNamespace.GetTypeMembers();
 
             // Get base class for each type named "C?".
-            var types = new[] { "C1", "C2", "C3", "C4", "C5", "C6", "C7" }.Select(name => allTypes.First(t => t.Name == name).BaseType()).ToArray();
+            var types = new[] { "C1", "C2", "C3", "C4", "C5", "C6", "C7" }
+                .Select(name => allTypes.First(t => t.Name == name).BaseType())
+                .ToArray();
             foreach (var type in types)
             {
                 var constructedFrom = type.ConstructedFrom;
@@ -104,7 +122,10 @@ class C7 : A<string>.B<object> { }";
                 {
                     var typeB = types[j];
                     bool expectedEqual = (i == 5) && (j == 6);
-                    Assert.Equal(TypeSymbol.Equals(typeA, typeB, TypeCompareKind.ConsiderEverything2), expectedEqual);
+                    Assert.Equal(
+                        TypeSymbol.Equals(typeA, typeB, TypeCompareKind.ConsiderEverything2),
+                        expectedEqual
+                    );
                 }
             }
         }
@@ -113,7 +134,12 @@ class C7 : A<string>.B<object> { }";
         [Fact]
         public void ErrorInfo_01()
         {
-            var error = new MissingMetadataTypeSymbol.Nested(new UnsupportedMetadataTypeSymbol(), "Test", 0, false);
+            var error = new MissingMetadataTypeSymbol.Nested(
+                new UnsupportedMetadataTypeSymbol(),
+                "Test",
+                0,
+                false
+            );
             var info = error.ErrorInfo;
 
             Assert.Equal(ErrorCode.ERR_BogusType, (ErrorCode)info.Code);

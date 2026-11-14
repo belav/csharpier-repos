@@ -31,7 +31,8 @@ public class ExecutionStrategyEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IReadOnlyList<Exception> exceptionsEncountered,
         TimeSpan delay,
-        bool async)
+        bool async
+    )
         : base(eventDefinition, messageGenerator)
     {
         ExceptionsEncountered = exceptionsEncountered;

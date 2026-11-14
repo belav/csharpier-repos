@@ -30,7 +30,10 @@ namespace System.Data.Common.EntitySql.AST
 
             if (String.IsNullOrEmpty(alias.Name))
             {
-                throw EntityUtil.EntitySqlError(alias.ErrCtx, System.Data.Entity.Strings.InvalidEmptyIdentifier);
+                throw EntityUtil.EntitySqlError(
+                    alias.ErrCtx,
+                    System.Data.Entity.Strings.InvalidEmptyIdentifier
+                );
             }
 
             _expr = expr;

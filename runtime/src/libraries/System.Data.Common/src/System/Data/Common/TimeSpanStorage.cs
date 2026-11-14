@@ -14,9 +14,7 @@ namespace System.Data.Common
         private TimeSpan[] _values = default!; // Late-initialized
 
         public TimeSpanStorage(DataColumn column)
-        : base(column, typeof(TimeSpan), s_defaultValue, StorageType.TimeSpan)
-        {
-        }
+            : base(column, typeof(TimeSpan), s_defaultValue, StorageType.TimeSpan) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -32,7 +30,10 @@ namespace System.Data.Common
                             int record = records[i];
                             if (IsNull(record))
                                 continue;
-                            min = (TimeSpan.Compare(_values[record], min) < 0) ? _values[record] : min;
+                            min =
+                                (TimeSpan.Compare(_values[record], min) < 0)
+                                    ? _values[record]
+                                    : min;
                             hasData = true;
                         }
                         if (hasData)
@@ -48,7 +49,10 @@ namespace System.Data.Common
                             int record = records[i];
                             if (IsNull(record))
                                 continue;
-                            max = (TimeSpan.Compare(_values[record], max) >= 0) ? _values[record] : max;
+                            max =
+                                (TimeSpan.Compare(_values[record], max) >= 0)
+                                    ? _values[record]
+                                    : max;
                             hasData = true;
                         }
                         if (hasData)
@@ -68,73 +72,73 @@ namespace System.Data.Common
                         return base.Aggregate(records, kind);
 
                     case AggregateType.Sum:
+                    {
+                        decimal sum = 0;
+                        foreach (int record in records)
                         {
-                            decimal sum = 0;
-                            foreach (int record in records)
-                            {
-                                if (IsNull(record))
-                                    continue;
-                                sum += _values[record].Ticks;
-                                hasData = true;
-                            }
-                            if (hasData)
-                            {
-                                return TimeSpan.FromTicks((long)Math.Round(sum));
-                            }
-                            return null!; // TODO: This is incorrect, should be DBNull.Value
+                            if (IsNull(record))
+                                continue;
+                            sum += _values[record].Ticks;
+                            hasData = true;
                         }
+                        if (hasData)
+                        {
+                            return TimeSpan.FromTicks((long)Math.Round(sum));
+                        }
+                        return null!; // TODO: This is incorrect, should be DBNull.Value
+                    }
 
                     case AggregateType.Mean:
+                    {
+                        decimal meanSum = 0;
+                        int meanCount = 0;
+                        foreach (int record in records)
                         {
-                            decimal meanSum = 0;
-                            int meanCount = 0;
-                            foreach (int record in records)
-                            {
-                                if (IsNull(record))
-                                    continue;
-                                meanSum += _values[record].Ticks;
-                                meanCount++;
-                            }
-                            if (meanCount > 0)
-                            {
-                                return TimeSpan.FromTicks((long)Math.Round(meanSum / meanCount));
-                            }
-                            return null!; // TODO: This is incorrect, should be DBNull.Value
+                            if (IsNull(record))
+                                continue;
+                            meanSum += _values[record].Ticks;
+                            meanCount++;
                         }
+                        if (meanCount > 0)
+                        {
+                            return TimeSpan.FromTicks((long)Math.Round(meanSum / meanCount));
+                        }
+                        return null!; // TODO: This is incorrect, should be DBNull.Value
+                    }
 
                     case AggregateType.StDev:
-                        {
-                            int count = 0;
-                            decimal meanSum = 0;
+                    {
+                        int count = 0;
+                        decimal meanSum = 0;
 
+                        foreach (int record in records)
+                        {
+                            if (IsNull(record))
+                                continue;
+                            meanSum += _values[record].Ticks;
+                            count++;
+                        }
+
+                        if (count > 1)
+                        {
+                            double varSum = 0;
+                            decimal mean = meanSum / count;
                             foreach (int record in records)
                             {
                                 if (IsNull(record))
                                     continue;
-                                meanSum += _values[record].Ticks;
-                                count++;
+                                double x = (double)(_values[record].Ticks - mean);
+                                varSum += x * x;
                             }
-
-                            if (count > 1)
+                            ulong stDev = (ulong)Math.Round(Math.Sqrt(varSum / (count - 1)));
+                            if (stDev > long.MaxValue)
                             {
-                                double varSum = 0;
-                                decimal mean = meanSum / count;
-                                foreach (int record in records)
-                                {
-                                    if (IsNull(record))
-                                        continue;
-                                    double x = (double)(_values[record].Ticks - mean);
-                                    varSum += x * x;
-                                }
-                                ulong stDev = (ulong)Math.Round(Math.Sqrt(varSum / (count - 1)));
-                                if (stDev > long.MaxValue)
-                                {
-                                    stDev = long.MaxValue;
-                                }
-                                return TimeSpan.FromTicks((long)stDev);
+                                stDev = long.MaxValue;
                             }
-                            return null!; // TODO: This is incorrect, should be DBNull.Value
+                            return TimeSpan.FromTicks((long)stDev);
                         }
+                        return null!; // TODO: This is incorrect, should be DBNull.Value
+                    }
                 }
             }
             catch (OverflowException)
@@ -219,7 +223,6 @@ namespace System.Data.Common
             return value;
         }
 
-
         public override void Copy(int recordNo1, int recordNo2)
         {
             CopyBits(recordNo1, recordNo2);
@@ -274,7 +277,12 @@ namespace System.Data.Common
             return new TimeSpan[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             TimeSpan[] typedStore = (TimeSpan[])store;
             typedStore[storeIndex] = _values[record];

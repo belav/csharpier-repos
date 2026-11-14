@@ -37,7 +37,6 @@ public class GetGenerationTest
         return false;
     }
 
-
     private bool arrayTest()
     {
         s_numTests++;
@@ -66,7 +65,6 @@ public class GetGenerationTest
         return false;
     }
 
-
     private bool failTest()
     {
         s_numTests++;
@@ -93,7 +91,6 @@ public class GetGenerationTest
         return false;
     }
 
-
     public bool RunTests()
     {
         int numPassed = 0;
@@ -107,15 +104,12 @@ public class GetGenerationTest
         if (failTest())
             numPassed++;
 
-
         Console.WriteLine();
         if (s_numTests == numPassed)
             return true;
 
         return false;
     }
-
-
 
     public static int Main()
     {
@@ -126,7 +120,6 @@ public class GetGenerationTest
             Console.WriteLine("Test for GetGeneration() passed!");
             return 100;
         }
-
 
         Console.WriteLine("Test for GetGeneration() FAILED!");
         return 1;

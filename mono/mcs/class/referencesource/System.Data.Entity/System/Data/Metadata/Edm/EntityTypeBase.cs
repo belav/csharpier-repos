@@ -29,7 +29,9 @@ namespace System.Data.Metadata.Edm
         internal EntityTypeBase(string name, string namespaceName, DataSpace dataSpace)
             : base(name, namespaceName, dataSpace)
         {
-            _keyMembers = new ReadOnlyMetadataCollection<EdmMember>(new MetadataCollection<EdmMember>());
+            _keyMembers = new ReadOnlyMetadataCollection<EdmMember>(
+                new MetadataCollection<EdmMember>()
+            );
         }
         #endregion
 
@@ -47,12 +49,15 @@ namespace System.Data.Metadata.Edm
         {
             get
             {
-                // Since we allow entity types with no keys, we should first check if there are 
+                // Since we allow entity types with no keys, we should first check if there are
                 // keys defined on the base class. If yes, then return the keys otherwise, return
                 // the keys defined on this class
                 if (this.BaseType != null && ((EntityTypeBase)this.BaseType).KeyMembers.Count != 0)
                 {
-                    Debug.Assert(_keyMembers.Count == 0, "Since the base type have keys, current type cannot have keys defined");
+                    Debug.Assert(
+                        _keyMembers.Count == 0,
+                        "Since the base type have keys, current type cannot have keys defined"
+                    );
                     return ((EntityTypeBase)this.BaseType).KeyMembers;
                 }
                 else
@@ -80,7 +85,10 @@ namespace System.Data.Metadata.Edm
                     }
                     _keyMemberNames = keyNames;
                 }
-                Debug.Assert(_keyMemberNames.Length == this.KeyMembers.Count, "This list is out of sync with the key members count. This property was called before all the keymembers were added");
+                Debug.Assert(
+                    _keyMemberNames.Length == this.KeyMembers.Count,
+                    "This list is out of sync with the key members count. This property was called before all the keymembers were added"
+                );
                 return _keyMemberNames;
             }
         }
@@ -98,8 +106,10 @@ namespace System.Data.Metadata.Edm
         {
             EntityUtil.GenericCheckArgumentNull(member, "member");
             Util.ThrowIfReadOnly(this);
-            Debug.Assert(this.BaseType == null || ((EntityTypeBase)this.BaseType).KeyMembers.Count == 0,
-                "Key cannot be added if there is a basetype with keys");
+            Debug.Assert(
+                this.BaseType == null || ((EntityTypeBase)this.BaseType).KeyMembers.Count == 0,
+                "Key cannot be added if there is a basetype with keys"
+            );
 
             if (!Members.Contains(member))
             {
@@ -125,8 +135,10 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="members">members for this type</param>
         /// <param name="entityType">the membersCollection to which the members should be added</param>
-        internal static void CheckAndAddMembers(IEnumerable<EdmMember> members,
-                                                EntityType entityType)
+        internal static void CheckAndAddMembers(
+            IEnumerable<EdmMember> members,
+            EntityType entityType
+        )
         {
             foreach (EdmMember member in members)
             {
@@ -139,14 +151,13 @@ namespace System.Data.Metadata.Edm
             }
         }
 
-
         /// <summary>
-        /// Checks for each key member to be non-null 
+        /// Checks for each key member to be non-null
         /// also check for it to be present in the members collection
         /// and then adds it to the KeyMembers collection.
-        /// 
-        /// Throw if the key member is not already in the members 
-        /// collection. Cannot do much other than that as the 
+        ///
+        /// Throw if the key member is not already in the members
+        /// collection. Cannot do much other than that as the
         /// Key members is just an Ienumerable of the names
         /// of the members.
         /// </summary>
@@ -164,14 +175,15 @@ namespace System.Data.Metadata.Edm
                 EdmMember member;
                 if (!Members.TryGetValue(keyMember, false, out member))
                 {
-                    throw EntityUtil.Argument(System.Data.Entity.Strings.InvalidKeyMember(keyMember)); //--- to do, identify the right exception to throw here
+                    throw EntityUtil.Argument(
+                        System.Data.Entity.Strings.InvalidKeyMember(keyMember)
+                    ); //--- to do, identify the right exception to throw here
                 }
-                // Add the key member to the key member collection 
+                // Add the key member to the key member collection
                 AddKeyMember(member);
             }
         }
 
         #endregion
-
     }
 }

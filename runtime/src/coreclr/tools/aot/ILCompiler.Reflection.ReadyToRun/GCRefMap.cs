@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
-using System.IO;
 
 namespace ILCompiler.Reflection.ReadyToRun
 {
@@ -41,9 +41,7 @@ namespace ILCompiler.Reflection.ReadyToRun
         public readonly uint StackPop;
         public readonly GCRefMapEntry[] Entries;
 
-        public GCRefMap()
-        {
-        }
+        public GCRefMap() { }
 
         public GCRefMap(uint stackPop, GCRefMapEntry[] entries)
         {
@@ -99,8 +97,7 @@ namespace ILCompiler.Reflection.ReadyToRun
                 result |= GetBit() << (bit++);
                 result |= GetBit() << (bit++);
                 result |= GetBit() << (bit++);
-            }
-            while (GetBit() != 0);
+            } while (GetBit() != 0);
 
             return result;
         }

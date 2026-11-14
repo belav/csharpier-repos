@@ -23,9 +23,7 @@ namespace System.Data.Objects.Internal
         private static IEntityWrapper s_nullWrapper = new NullEntityWrapper();
 
         // Private constructor prevents anyone else from creating an instance
-        private NullEntityWrapper()
-        {
-        }
+        private NullEntityWrapper() { }
 
         /// <summary>
         /// The single instance of this class.
@@ -82,10 +80,7 @@ namespace System.Data.Objects.Internal
                 Debug.Fail("Cannot access EntityKey from null wrapper.");
                 return null;
             }
-            set
-            {
-                Debug.Fail("Cannot access EntityKey from null wrapper.");
-            }
+            set { Debug.Fail("Cannot access EntityKey from null wrapper."); }
         }
 
         public EntityKey GetEntityKeyFromEntity()
@@ -101,10 +96,7 @@ namespace System.Data.Objects.Internal
                 Debug.Fail("Cannot access Context from null wrapper.");
                 return null;
             }
-            set
-            {
-                Debug.Fail("Cannot access Context from null wrapper.");
-            }
+            set { Debug.Fail("Cannot access Context from null wrapper."); }
         }
 
         public MergeOption MergeOption
@@ -116,12 +108,20 @@ namespace System.Data.Objects.Internal
             }
         }
 
-        public void AttachContext(ObjectContext context, EntitySet entitySet, MergeOption mergeOption)
+        public void AttachContext(
+            ObjectContext context,
+            EntitySet entitySet,
+            MergeOption mergeOption
+        )
         {
             Debug.Fail("Cannot access Context from null wrapper.");
         }
 
-        public void ResetContext(ObjectContext context, EntitySet entitySet, MergeOption mergeOption)
+        public void ResetContext(
+            ObjectContext context,
+            EntitySet entitySet,
+            MergeOption mergeOption
+        )
         {
             Debug.Fail("Cannot access Context from null wrapper.");
         }
@@ -176,7 +176,13 @@ namespace System.Data.Objects.Internal
             Debug.Fail("Cannot access property using null wrapper.");
         }
 
-        public void SetCurrentValue(EntityEntry entry, StateManagerMemberMetadata member, int ordinal, object target, object value)
+        public void SetCurrentValue(
+            EntityEntry entry,
+            StateManagerMemberMetadata member,
+            int ordinal,
+            object target,
+            object value
+        )
         {
             Debug.Fail("Cannot set a value onto a null entity.");
         }
@@ -184,19 +190,16 @@ namespace System.Data.Objects.Internal
         public bool InitializingProxyRelatedEnds
         {
             get
-            { 
+            {
                 Debug.Fail("Cannot access flag on null wrapper.");
                 return false;
             }
-            set
-            {
-                Debug.Fail("Cannot access flag on null wrapper.");
-            }
+            set { Debug.Fail("Cannot access flag on null wrapper."); }
         }
 
         public void UpdateCurrentValueRecord(object value, EntityEntry entry)
         {
-            Debug.Fail("Cannot UpdateCurrentValueRecord on a null entity."); 
+            Debug.Fail("Cannot UpdateCurrentValueRecord on a null entity.");
         }
 
         public bool RequiresRelationshipChangeTracking

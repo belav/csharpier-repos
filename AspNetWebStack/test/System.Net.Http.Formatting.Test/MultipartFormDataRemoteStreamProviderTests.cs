@@ -10,20 +10,22 @@ using Moq;
 
 namespace System.Net.Http
 {
-    public class MultipartFormDataRemoteStreamProviderTests :
-        MultipartStreamProviderTestBase<CustomMultipartFormDataRemoteStreamProvider>
+    public class MultipartFormDataRemoteStreamProviderTests
+        : MultipartStreamProviderTestBase<CustomMultipartFormDataRemoteStreamProvider>
     {
         [Fact]
         public void FileData_IsEmpty()
         {
-            CustomMultipartFormDataRemoteStreamProvider provider = new CustomMultipartFormDataRemoteStreamProvider();
+            CustomMultipartFormDataRemoteStreamProvider provider =
+                new CustomMultipartFormDataRemoteStreamProvider();
             Assert.Empty(provider.FileData);
         }
 
         [Fact]
         public void FormData_IsEmpty()
         {
-            CustomMultipartFormDataRemoteStreamProvider provider = new CustomMultipartFormDataRemoteStreamProvider();
+            CustomMultipartFormDataRemoteStreamProvider provider =
+                new CustomMultipartFormDataRemoteStreamProvider();
             Assert.Empty(provider.FormData);
         }
 
@@ -31,12 +33,16 @@ namespace System.Net.Http
         public void GetStream_ThrowsOnNoContentDisposition()
         {
             // Arrange
-            CustomMultipartFormDataRemoteStreamProvider provider = new CustomMultipartFormDataRemoteStreamProvider();
+            CustomMultipartFormDataRemoteStreamProvider provider =
+                new CustomMultipartFormDataRemoteStreamProvider();
             HttpContent content = new StringContent(String.Empty);
             HttpContentHeaders headers = FormattingUtilities.CreateEmptyContentHeaders();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => { provider.GetStream(content, headers); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                provider.GetStream(content, headers);
+            });
         }
 
         [Fact]
@@ -67,8 +73,10 @@ namespace System.Net.Http
                 string expectedUrl = provider.UrlBase + "Filename";
                 Assert.Equal(expectedUrl, fileData.Location);
 
-                Assert.Same(content.ElementAt(1).Headers.ContentDisposition,
-                    fileData.Headers.ContentDisposition);
+                Assert.Same(
+                    content.ElementAt(1).Headers.ContentDisposition,
+                    fileData.Headers.ContentDisposition
+                );
             }
             finally
             {
@@ -97,9 +105,9 @@ namespace System.Net.Http
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => provider.GetStream(content, content.ElementAt(0).Headers),
-                "The 'GetRemoteStream' method in 'CustomMultipartFormDataRemoteStreamProvider' returned null. " +
-                "It must return a RemoteStreamResult instance containing a writable stream and a valid URL."
-                );
+                "The 'GetRemoteStream' method in 'CustomMultipartFormDataRemoteStreamProvider' returned null. "
+                    + "It must return a RemoteStreamResult instance containing a writable stream and a valid URL."
+            );
         }
 
         [Fact]
@@ -118,7 +126,7 @@ namespace System.Net.Http
             {
                 string content = String.Format(contentFormat, index);
                 string formName = String.Format(formNameFormat, index);
-                if (index < maxContents/2)
+                if (index < maxContents / 2)
                 {
                     multipartContent.Add(new StringContent(content), formName);
                 }
@@ -134,19 +142,17 @@ namespace System.Net.Http
             foreach (HttpContent content in multipartContent)
             {
                 provider.Contents.Add(content);
-                using (provider.GetStream(multipartContent, content.Headers))
-                {
-                }
+                using (provider.GetStream(multipartContent, content.Headers)) { }
             }
 
             // Act
             await provider.ExecutePostProcessingAsync();
 
             // Assert
-            Assert.Equal(maxContents/2, provider.FormData.Count);
+            Assert.Equal(maxContents / 2, provider.FormData.Count);
 
             // half contents for form data
-            for (int index = 0; index < maxContents/2; index++)
+            for (int index = 0; index < maxContents / 2; index++)
             {
                 string content = String.Format(contentFormat, index);
                 string formName = String.Format(formNameFormat, index);
@@ -155,9 +161,9 @@ namespace System.Net.Http
 
             // the other half for file data
             HttpContent[] contents = multipartContent.ToArray();
-            for (int index = maxContents/2; index < maxContents; index++)
+            for (int index = maxContents / 2; index < maxContents; index++)
             {
-                int fileDataIndex = index - (maxContents/2);
+                int fileDataIndex = index - (maxContents / 2);
                 string fileName = String.Format(fileNameFormat, index);
                 string url = provider.UrlBase + fileName;
                 Assert.Equal(url, provider.FileData[fileDataIndex].Location);

@@ -1,43 +1,45 @@
-﻿namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding
+{
     using System;
 
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false, AllowMultiple = false)]
-    public sealed class FormAttribute : ValueProviderSourceAttribute, IUnvalidatedValueProviderSource {
-
+    public sealed class FormAttribute
+        : ValueProviderSourceAttribute,
+            IUnvalidatedValueProviderSource
+    {
         private bool _validateInput = true;
 
-        public string FieldName {
-            get;
-            private set;
-        }
+        public string FieldName { get; private set; }
 
         public FormAttribute()
-            : this(null) {
-        }
+            : this(null) { }
 
-        public FormAttribute(string fieldName) {
+        public FormAttribute(string fieldName)
+        {
             FieldName = fieldName;
         }
 
-        public override IValueProvider GetValueProvider(ModelBindingExecutionContext modelBindingExecutionContext) {
-            if (modelBindingExecutionContext == null) {
+        public override IValueProvider GetValueProvider(
+            ModelBindingExecutionContext modelBindingExecutionContext
+        )
+        {
+            if (modelBindingExecutionContext == null)
+            {
                 throw new ArgumentNullException("modelBindingExecutionContext");
             }
 
             return new FormValueProvider(modelBindingExecutionContext);
         }
 
-        public override string GetModelName() {
+        public override string GetModelName()
+        {
             return FieldName;
         }
 
-        public bool ValidateInput {
-            get {
-                return _validateInput;
-            }
-            set {
-                _validateInput = value;
-            }
+        public bool ValidateInput
+        {
+            get { return _validateInput; }
+            set { _validateInput = value; }
         }
     }
 }

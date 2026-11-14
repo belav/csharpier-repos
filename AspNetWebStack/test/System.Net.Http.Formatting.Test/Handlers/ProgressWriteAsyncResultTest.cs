@@ -11,7 +11,9 @@ namespace System.Net.Http.Handlers
 {
     public class ProgressWriteAsyncResultTest
     {
-        static readonly byte[] sampleData = Encoding.UTF8.GetBytes("Hello World! Hello World! Hello World! Hello World! Hello World!");
+        static readonly byte[] sampleData = Encoding.UTF8.GetBytes(
+            "Hello World! Hello World! Hello World! Hello World! Hello World!"
+        );
 
         [Fact]
         public void Constructor_BeginWriteOnInnerStream()
@@ -22,11 +24,20 @@ namespace System.Net.Http.Handlers
 
             // Act
             IAsyncResult result = new ProgressWriteAsyncResult(
-                mockInnerStream.Object, progressStream, sampleData, 2, 4, null, null);
+                mockInnerStream.Object,
+                progressStream,
+                sampleData,
+                2,
+                4,
+                null,
+                null
+            );
 
-            // Assert 
-            mockInnerStream.Verify(s => s.BeginWrite(sampleData, 2, 4, It.IsAny<AsyncCallback>(), It.IsAny<object>()),
-                Times.Once());
+            // Assert
+            mockInnerStream.Verify(
+                s => s.BeginWrite(sampleData, 2, 4, It.IsAny<AsyncCallback>(), It.IsAny<object>()),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -36,15 +47,31 @@ namespace System.Net.Http.Handlers
             Mock<Stream> mockInnerStream = new Mock<Stream>();
             object userState = new object();
             IAsyncResult mockIAsyncResult = MockCompletedAsyncResult.Create(true, userState);
-            mockInnerStream.Setup(s => s.BeginWrite(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<AsyncCallback>(), It.IsAny<object>()))
+            mockInnerStream
+                .Setup(s =>
+                    s.BeginWrite(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+                )
                 .Returns(mockIAsyncResult);
             ProgressStream progressStream = ProgressStreamTest.CreateProgressStream();
 
             // Act
             IAsyncResult result = new ProgressWriteAsyncResult(
-                mockInnerStream.Object, progressStream, sampleData, 2, 4, null, userState);
+                mockInnerStream.Object,
+                progressStream,
+                sampleData,
+                2,
+                4,
+                null,
+                userState
+            );
 
-            // Assert 
+            // Assert
             Assert.True(result.IsCompleted);
             Assert.True(result.CompletedSynchronously);
             Assert.Same(userState, result.AsyncState);
@@ -55,15 +82,31 @@ namespace System.Net.Http.Handlers
         {
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>();
-            mockInnerStream.Setup(s => s.BeginWrite(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<AsyncCallback>(), It.IsAny<object>()))
+            mockInnerStream
+                .Setup(s =>
+                    s.BeginWrite(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+                )
                 .Throws<ApplicationException>();
             ProgressStream progressStream = ProgressStreamTest.CreateProgressStream();
 
             // Act
             IAsyncResult result = new ProgressWriteAsyncResult(
-                mockInnerStream.Object, progressStream, sampleData, 2, 2, null, null);
+                mockInnerStream.Object,
+                progressStream,
+                sampleData,
+                2,
+                2,
+                null,
+                null
+            );
 
-            // Assert 
+            // Assert
             Assert.True(result.IsCompleted);
             Assert.Throws<ApplicationException>(() => ProgressWriteAsyncResult.End(result));
         }
@@ -77,20 +120,43 @@ namespace System.Net.Http.Handlers
             Mock<Stream> mockInnerStream = new Mock<Stream>();
             object userState = new object();
             IAsyncResult mockIAsyncResult = MockCompletedAsyncResult.Create(true, userState);
-            mockInnerStream.Setup(s => s.BeginWrite(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<AsyncCallback>(), It.IsAny<object>()))
+            mockInnerStream
+                .Setup(s =>
+                    s.BeginWrite(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+                )
                 .Returns(mockIAsyncResult);
 
             MockProgressEventHandler mockProgressHandler;
-            ProgressMessageHandler progressMessageHandler = MockProgressEventHandler.CreateProgressMessageHandler(out mockProgressHandler, sendProgress: true);
+            ProgressMessageHandler progressMessageHandler =
+                MockProgressEventHandler.CreateProgressMessageHandler(
+                    out mockProgressHandler,
+                    sendProgress: true
+                );
             HttpRequestMessage request = new HttpRequestMessage();
 
-            ProgressStream progressStream = ProgressStreamTest.CreateProgressStream(progressMessageHandler: progressMessageHandler, request: request);
+            ProgressStream progressStream = ProgressStreamTest.CreateProgressStream(
+                progressMessageHandler: progressMessageHandler,
+                request: request
+            );
 
             // Act
             IAsyncResult result = new ProgressWriteAsyncResult(
-                mockInnerStream.Object, progressStream, sampleData, offset, count, null, userState);
+                mockInnerStream.Object,
+                progressStream,
+                sampleData,
+                offset,
+                count,
+                null,
+                userState
+            );
 
-            // Assert 
+            // Assert
             Assert.True(mockProgressHandler.WasInvoked);
             Assert.Same(request, mockProgressHandler.Sender);
             Assert.Equal(count, mockProgressHandler.EventArgs.BytesTransferred);

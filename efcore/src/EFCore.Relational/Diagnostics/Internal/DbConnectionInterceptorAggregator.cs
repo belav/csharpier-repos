@@ -17,8 +17,9 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override IDbConnectionInterceptor CreateChain(IEnumerable<IDbConnectionInterceptor> interceptors)
-        => new CompositeDbConnectionInterceptor(interceptors);
+    protected override IDbConnectionInterceptor CreateChain(
+        IEnumerable<IDbConnectionInterceptor> interceptors
+    ) => new CompositeDbConnectionInterceptor(interceptors);
 
     private sealed class CompositeDbConnectionInterceptor : IDbConnectionInterceptor
     {
@@ -31,7 +32,8 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
 
         public InterceptionResult<DbConnection> ConnectionCreating(
             ConnectionCreatingEventData eventData,
-            InterceptionResult<DbConnection> result)
+            InterceptionResult<DbConnection> result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -43,7 +45,8 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
 
         public DbConnection ConnectionCreated(
             ConnectionCreatedEventData eventData,
-            DbConnection result)
+            DbConnection result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -56,7 +59,8 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
         public InterceptionResult ConnectionOpening(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -70,20 +74,20 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
             DbConnection connection,
             ConnectionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].ConnectionOpeningAsync(connection, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .ConnectionOpeningAsync(connection, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
             return result;
         }
 
-        public void ConnectionOpened(
-            DbConnection connection,
-            ConnectionEndEventData eventData)
+        public void ConnectionOpened(DbConnection connection, ConnectionEndEventData eventData)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -94,11 +98,13 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
         public async Task ConnectionOpenedAsync(
             DbConnection connection,
             ConnectionEndEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].ConnectionOpenedAsync(connection, eventData, cancellationToken)
+                await _interceptors[i]
+                    .ConnectionOpenedAsync(connection, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -106,7 +112,8 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
         public InterceptionResult ConnectionClosing(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -119,20 +126,20 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
         public async ValueTask<InterceptionResult> ConnectionClosingAsync(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].ConnectionClosingAsync(connection, eventData, result)
+                result = await _interceptors[i]
+                    .ConnectionClosingAsync(connection, eventData, result)
                     .ConfigureAwait(false);
             }
 
             return result;
         }
 
-        public void ConnectionClosed(
-            DbConnection connection,
-            ConnectionEndEventData eventData)
+        public void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -142,11 +149,13 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
 
         public async Task ConnectionClosedAsync(
             DbConnection connection,
-            ConnectionEndEventData eventData)
+            ConnectionEndEventData eventData
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].ConnectionClosedAsync(connection, eventData)
+                await _interceptors[i]
+                    .ConnectionClosedAsync(connection, eventData)
                     .ConfigureAwait(false);
             }
         }
@@ -154,7 +163,8 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
         public InterceptionResult ConnectionDisposing(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -167,20 +177,20 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
         public async ValueTask<InterceptionResult> ConnectionDisposingAsync(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].ConnectionDisposingAsync(connection, eventData, result)
+                result = await _interceptors[i]
+                    .ConnectionDisposingAsync(connection, eventData, result)
                     .ConfigureAwait(false);
             }
 
             return result;
         }
 
-        public void ConnectionDisposed(
-            DbConnection connection,
-            ConnectionEndEventData eventData)
+        public void ConnectionDisposed(DbConnection connection, ConnectionEndEventData eventData)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -190,18 +200,18 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
 
         public async Task ConnectionDisposedAsync(
             DbConnection connection,
-            ConnectionEndEventData eventData)
+            ConnectionEndEventData eventData
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].ConnectionDisposedAsync(connection, eventData)
+                await _interceptors[i]
+                    .ConnectionDisposedAsync(connection, eventData)
                     .ConfigureAwait(false);
             }
         }
 
-        public void ConnectionFailed(
-            DbConnection connection,
-            ConnectionErrorEventData eventData)
+        public void ConnectionFailed(DbConnection connection, ConnectionErrorEventData eventData)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -212,11 +222,13 @@ public class DbConnectionInterceptorAggregator : InterceptorAggregator<IDbConnec
         public async Task ConnectionFailedAsync(
             DbConnection connection,
             ConnectionErrorEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].ConnectionFailedAsync(connection, eventData, cancellationToken)
+                await _interceptors[i]
+                    .ConnectionFailedAsync(connection, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }

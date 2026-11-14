@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.Diagnostics;
     using System.IO;
     using System.Xml;
-    using System.Diagnostics;
 
     abstract class BufferedMessageWriter
     {
@@ -24,7 +24,12 @@ namespace System.ServiceModel.Channels
         protected abstract XmlDictionaryWriter TakeXmlWriter(Stream stream);
         protected abstract void ReturnXmlWriter(XmlDictionaryWriter writer);
 
-        public ArraySegment<byte> WriteMessage(Message message, BufferManager bufferManager, int initialOffset, int maxSizeQuota)
+        public ArraySegment<byte> WriteMessage(
+            Message message,
+            BufferManager bufferManager,
+            int initialOffset,
+            int maxSizeQuota
+        )
         {
             int effectiveMaxSize;
 
@@ -63,13 +68,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected virtual void OnWriteStartMessage(XmlDictionaryWriter writer)
-        {
-        }
+        protected virtual void OnWriteStartMessage(XmlDictionaryWriter writer) { }
 
-        protected virtual void OnWriteEndMessage(XmlDictionaryWriter writer)
-        {
-        }
+        protected virtual void OnWriteEndMessage(XmlDictionaryWriter writer) { }
 
         void InitMessagePredicter()
         {

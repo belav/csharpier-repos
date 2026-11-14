@@ -20,7 +20,10 @@ namespace System.Security.Cryptography.X509Certificates
         public void AddEmailAddress(string emailAddress)
         {
             if (string.IsNullOrEmpty(emailAddress))
-                throw new ArgumentOutOfRangeException(nameof(emailAddress), SR.Arg_EmptyOrNullString);
+                throw new ArgumentOutOfRangeException(
+                    nameof(emailAddress),
+                    SR.Arg_EmptyOrNullString
+                );
 
             AddGeneralName(new GeneralNameAsn { Rfc822Name = emailAddress });
         }
@@ -77,10 +80,7 @@ namespace System.Security.Cryptography.X509Certificates
                 }
             }
 
-            return new X509Extension(
-                Oids.SubjectAltName,
-                writer.Encode(),
-                critical);
+            return new X509Extension(Oids.SubjectAltName, writer.Encode(), critical);
         }
 
         private void AddGeneralName(GeneralNameAsn generalName)

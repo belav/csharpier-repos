@@ -26,9 +26,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json.Utilities;
-using System.IO;
 using System.Globalization;
+using System.IO;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -57,32 +57,24 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="JArray"/> class.
         /// </summary>
-        public JArray()
-        {
-        }
+        public JArray() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JArray"/> class from another <see cref="JArray"/> object.
         /// </summary>
         /// <param name="other">A <see cref="JArray"/> object to copy from.</param>
         public JArray(JArray other)
-            : base(other, settings: null)
-        {
-        }
+            : base(other, settings: null) { }
 
         internal JArray(JArray other, JsonCloneSettings? settings)
-            : base(other, settings)
-        {
-        }
+            : base(other, settings) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JArray"/> class with the specified content.
         /// </summary>
         /// <param name="content">The contents of the array.</param>
         public JArray(params object[] content)
-            : this((object)content)
-        {
-        }
+            : this((object)content) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JArray"/> class with the specified content.
@@ -104,29 +96,32 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Loads an <see cref="JArray"/> from a <see cref="JsonReader"/>. 
+        /// Loads an <see cref="JArray"/> from a <see cref="JsonReader"/>.
         /// </summary>
         /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JArray"/>.</param>
         /// <returns>A <see cref="JArray"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static JArray Load(JsonReader reader)
+        public static new JArray Load(JsonReader reader)
         {
             return Load(reader, null);
         }
 
         /// <summary>
-        /// Loads an <see cref="JArray"/> from a <see cref="JsonReader"/>. 
+        /// Loads an <see cref="JArray"/> from a <see cref="JsonReader"/>.
         /// </summary>
         /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JArray"/>.</param>
         /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <returns>A <see cref="JArray"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static JArray Load(JsonReader reader, JsonLoadSettings? settings)
+        public static new JArray Load(JsonReader reader, JsonLoadSettings? settings)
         {
             if (reader.TokenType == JsonToken.None)
             {
                 if (!reader.Read())
                 {
-                    throw JsonReaderException.Create(reader, "Error reading JArray from JsonReader.");
+                    throw JsonReaderException.Create(
+                        reader,
+                        "Error reading JArray from JsonReader."
+                    );
                 }
             }
 
@@ -134,7 +129,13 @@ namespace Newtonsoft.Json.Linq
 
             if (reader.TokenType != JsonToken.StartArray)
             {
-                throw JsonReaderException.Create(reader, "Error reading JArray from JsonReader. Current JsonReader item is not an array: {0}".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                throw JsonReaderException.Create(
+                    reader,
+                    "Error reading JArray from JsonReader. Current JsonReader item is not an array: {0}".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        reader.TokenType
+                    )
+                );
             }
 
             JArray a = new JArray();
@@ -153,7 +154,7 @@ namespace Newtonsoft.Json.Linq
         /// <example>
         ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
         /// </example>
-        public new static JArray Parse(string json)
+        public static new JArray Parse(string json)
         {
             return Parse(json, null);
         }
@@ -168,7 +169,7 @@ namespace Newtonsoft.Json.Linq
         /// <example>
         ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
         /// </example>
-        public new static JArray Parse(string json, JsonLoadSettings? settings)
+        public static new JArray Parse(string json, JsonLoadSettings? settings)
         {
             using (JsonReader reader = new JsonTextReader(new StringReader(json)))
             {
@@ -188,7 +189,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="o">The object that will be used to create <see cref="JArray"/>.</param>
         /// <returns>A <see cref="JArray"/> with the values of the specified object.</returns>
-        public new static JArray FromObject(object o)
+        public static new JArray FromObject(object o)
         {
             return FromObject(o, JsonSerializer.CreateDefault());
         }
@@ -199,13 +200,18 @@ namespace Newtonsoft.Json.Linq
         /// <param name="o">The object that will be used to create <see cref="JArray"/>.</param>
         /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used to read the object.</param>
         /// <returns>A <see cref="JArray"/> with the values of the specified object.</returns>
-        public new static JArray FromObject(object o, JsonSerializer jsonSerializer)
+        public static new JArray FromObject(object o, JsonSerializer jsonSerializer)
         {
             JToken token = FromObjectInternal(o, jsonSerializer);
 
             if (token.Type != JTokenType.Array)
             {
-                throw new ArgumentException("Object serialized to {0}. JArray instance expected.".FormatWith(CultureInfo.InvariantCulture, token.Type));
+                throw new ArgumentException(
+                    "Object serialized to {0}. JArray instance expected.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        token.Type
+                    )
+                );
             }
 
             return (JArray)token;
@@ -240,7 +246,12 @@ namespace Newtonsoft.Json.Linq
 
                 if (!(key is int))
                 {
-                    throw new ArgumentException("Accessed JArray values with invalid key value: {0}. Int32 array index expected.".FormatWith(CultureInfo.InvariantCulture, MiscellaneousUtils.ToString(key)));
+                    throw new ArgumentException(
+                        "Accessed JArray values with invalid key value: {0}. Int32 array index expected.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            MiscellaneousUtils.ToString(key)
+                        )
+                    );
                 }
 
                 return GetItem((int)key);
@@ -251,7 +262,12 @@ namespace Newtonsoft.Json.Linq
 
                 if (!(key is int))
                 {
-                    throw new ArgumentException("Set JArray values with invalid key value: {0}. Int32 array index expected.".FormatWith(CultureInfo.InvariantCulture, MiscellaneousUtils.ToString(key)));
+                    throw new ArgumentException(
+                        "Set JArray values with invalid key value: {0}. Int32 array index expected.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            MiscellaneousUtils.ToString(key)
+                        )
+                    );
                 }
 
                 SetItem((int)key, value);
@@ -280,9 +296,8 @@ namespace Newtonsoft.Json.Linq
 
         internal override void MergeItem(object content, JsonMergeSettings? settings)
         {
-            IEnumerable? a = (IsMultiContent(content) || content is JArray)
-                ? (IEnumerable)content
-                : null;
+            IEnumerable? a =
+                (IsMultiContent(content) || content is JArray) ? (IEnumerable)content : null;
             if (a == null)
             {
                 return;

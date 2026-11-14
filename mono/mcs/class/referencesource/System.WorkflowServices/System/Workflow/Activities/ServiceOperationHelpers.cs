@@ -17,17 +17,24 @@ namespace System.Workflow.Activities
 
     internal static class ServiceOperationHelpers
     {
-        public static string GetOperationName(IServiceProvider serviceProvider, MethodInfo methodInfo)
+        public static string GetOperationName(
+            IServiceProvider serviceProvider,
+            MethodInfo methodInfo
+        )
         {
             Fx.Assert((methodInfo != null), " MethoInfo cannot be null");
 
             string operationName = methodInfo.Name;
-            object[] operationContractAttribs = methodInfo.GetCustomAttributes(typeof(OperationContractAttribute), true);
+            object[] operationContractAttribs = methodInfo.GetCustomAttributes(
+                typeof(OperationContractAttribute),
+                true
+            );
             if (operationContractAttribs != null && operationContractAttribs.Length > 0)
             {
                 if (operationContractAttribs[0] is OperationContractAttribute)
                 {
-                    OperationContractAttribute operationContractAttribute = operationContractAttribs[0] as OperationContractAttribute;
+                    OperationContractAttribute operationContractAttribute =
+                        operationContractAttribs[0] as OperationContractAttribute;
                     if (!String.IsNullOrEmpty(operationContractAttribute.Name))
                     {
                         operationName = operationContractAttribute.Name;
@@ -35,10 +42,18 @@ namespace System.Workflow.Activities
                 }
                 if (operationContractAttribs[0] is AttributeInfoAttribute)
                 {
-                    AttributeInfoAttribute attribInfoAttrib = operationContractAttribs[0] as AttributeInfoAttribute;
+                    AttributeInfoAttribute attribInfoAttrib =
+                        operationContractAttribs[0] as AttributeInfoAttribute;
                     string propertyName = "Name";
                     string namePropertyValue;
-                    if (TryGetArgumentValueAs<string>(serviceProvider, attribInfoAttrib.AttributeInfo, propertyName, out namePropertyValue))
+                    if (
+                        TryGetArgumentValueAs<string>(
+                            serviceProvider,
+                            attribInfoAttrib.AttributeInfo,
+                            propertyName,
+                            out namePropertyValue
+                        )
+                    )
                     {
                         operationName = namePropertyValue;
                     }
@@ -47,16 +62,25 @@ namespace System.Workflow.Activities
             return operationName;
         }
 
-        public static PropertyDescriptor GetServiceOperationInfoPropertyDescriptor(Activity activity)
+        public static PropertyDescriptor GetServiceOperationInfoPropertyDescriptor(
+            Activity activity
+        )
         {
             if (activity is ReceiveActivity)
             {
-                return TypeDescriptor.GetProperties(activity)[ReceiveActivity.ServiceOperationInfoProperty.Name];
+                return TypeDescriptor.GetProperties(activity)[
+                    ReceiveActivity.ServiceOperationInfoProperty.Name
+                ];
             }
             else
             {
-                Fx.Assert(activity is SendActivity, " only Receive and Send activities are valid inputs to this method");
-                return TypeDescriptor.GetProperties(activity)[SendActivity.ServiceOperationInfoProperty.Name];
+                Fx.Assert(
+                    activity is SendActivity,
+                    " only Receive and Send activities are valid inputs to this method"
+                );
+                return TypeDescriptor.GetProperties(activity)[
+                    SendActivity.ServiceOperationInfoProperty.Name
+                ];
             }
         }
 
@@ -73,25 +97,36 @@ namespace System.Workflow.Activities
             }
 
             bool isAsync = false;
-            object[] operationContractAttribs = methodInfo.GetCustomAttributes(typeof(OperationContractAttribute), true);
+            object[] operationContractAttribs = methodInfo.GetCustomAttributes(
+                typeof(OperationContractAttribute),
+                true
+            );
             Fx.Assert(operationContractAttribs != null, "returned attribs list cannot be null");
-            Fx.Assert(operationContractAttribs.Length > 0, "operation doesnt seem to be a valid operationcontract");
+            Fx.Assert(
+                operationContractAttribs.Length > 0,
+                "operation doesnt seem to be a valid operationcontract"
+            );
 
             if (operationContractAttribs[0] is OperationContractAttribute)
             {
-                OperationContractAttribute operationContractAttribute = operationContractAttribs[0] as OperationContractAttribute;
+                OperationContractAttribute operationContractAttribute =
+                    operationContractAttribs[0] as OperationContractAttribute;
                 isAsync = operationContractAttribute.AsyncPattern;
             }
             if (operationContractAttribs[0] is AttributeInfoAttribute)
             {
-                AttributeInfoAttribute attribInfoAttrib = operationContractAttribs[0] as AttributeInfoAttribute;
+                AttributeInfoAttribute attribInfoAttrib =
+                    operationContractAttribs[0] as AttributeInfoAttribute;
                 isAsync = GetOperationAsyncPattern(serviceProvider, attribInfoAttrib.AttributeInfo);
             }
 
             return isAsync;
         }
 
-        public static bool IsInitiatingOperation(IServiceProvider serviceProvider, MethodInfo methodInfo)
+        public static bool IsInitiatingOperation(
+            IServiceProvider serviceProvider,
+            MethodInfo methodInfo
+        )
         {
             if (serviceProvider == null)
             {
@@ -104,19 +139,30 @@ namespace System.Workflow.Activities
             }
 
             bool isInitiating = true;
-            object[] operationContractAttribs = methodInfo.GetCustomAttributes(typeof(OperationContractAttribute), true);
+            object[] operationContractAttribs = methodInfo.GetCustomAttributes(
+                typeof(OperationContractAttribute),
+                true
+            );
             Fx.Assert(operationContractAttribs != null, "returned attribs list cannot be null");
-            Fx.Assert(operationContractAttribs.Length > 0, "operation doesnt seem to be a valid operationcontract");
+            Fx.Assert(
+                operationContractAttribs.Length > 0,
+                "operation doesnt seem to be a valid operationcontract"
+            );
 
             if (operationContractAttribs[0] is OperationContractAttribute)
             {
-                OperationContractAttribute operationContractAttribute = operationContractAttribs[0] as OperationContractAttribute;
+                OperationContractAttribute operationContractAttribute =
+                    operationContractAttribs[0] as OperationContractAttribute;
                 isInitiating = operationContractAttribute.IsInitiating;
             }
             if (operationContractAttribs[0] is AttributeInfoAttribute)
             {
-                AttributeInfoAttribute attribInfoAttrib = operationContractAttribs[0] as AttributeInfoAttribute;
-                isInitiating = IsInitiatingOperationContract(serviceProvider, attribInfoAttrib.AttributeInfo);
+                AttributeInfoAttribute attribInfoAttrib =
+                    operationContractAttribs[0] as AttributeInfoAttribute;
+                isInitiating = IsInitiatingOperationContract(
+                    serviceProvider,
+                    attribInfoAttrib.AttributeInfo
+                );
             }
 
             return isInitiating;
@@ -124,7 +170,9 @@ namespace System.Workflow.Activities
 
         public static bool IsNullableType(Type type)
         {
-            return (Nullable.GetUnderlyingType(type.IsByRef ? type.GetElementType() : type) != null);
+            return (
+                Nullable.GetUnderlyingType(type.IsByRef ? type.GetElementType() : type) != null
+            );
         }
 
         public static bool IsValidServiceContract(Type contractType)
@@ -134,7 +182,10 @@ namespace System.Workflow.Activities
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractType");
             }
 
-            object[] contractAttribs = contractType.GetCustomAttributes(typeof(ServiceContractAttribute), false);
+            object[] contractAttribs = contractType.GetCustomAttributes(
+                typeof(ServiceContractAttribute),
+                false
+            );
             if (contractAttribs != null && contractAttribs.Length > 0)
             {
                 if (contractAttribs[0] is ServiceContractAttribute)
@@ -143,8 +194,13 @@ namespace System.Workflow.Activities
                 }
                 if (contractAttribs[0] is AttributeInfoAttribute)
                 {
-                    AttributeInfoAttribute attribInfoAttrib = contractAttribs[0] as AttributeInfoAttribute;
-                    if (typeof(ServiceContractAttribute).IsAssignableFrom(attribInfoAttrib.AttributeInfo.AttributeType))
+                    AttributeInfoAttribute attribInfoAttrib =
+                        contractAttribs[0] as AttributeInfoAttribute;
+                    if (
+                        typeof(ServiceContractAttribute).IsAssignableFrom(
+                            attribInfoAttrib.AttributeInfo.AttributeType
+                        )
+                    )
                     {
                         return true;
                     }
@@ -160,7 +216,10 @@ namespace System.Workflow.Activities
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("methodInfo");
             }
 
-            object[] operationContractAttribs = methodInfo.GetCustomAttributes(typeof(OperationContractAttribute), true);
+            object[] operationContractAttribs = methodInfo.GetCustomAttributes(
+                typeof(OperationContractAttribute),
+                true
+            );
             if (operationContractAttribs != null && operationContractAttribs.Length > 0)
             {
                 if (operationContractAttribs[0] is OperationContractAttribute)
@@ -169,8 +228,13 @@ namespace System.Workflow.Activities
                 }
                 if (operationContractAttribs[0] is AttributeInfoAttribute)
                 {
-                    AttributeInfoAttribute attribInfoAttrib = operationContractAttribs[0] as AttributeInfoAttribute;
-                    if (typeof(OperationContractAttribute).IsAssignableFrom(attribInfoAttrib.AttributeInfo.AttributeType))
+                    AttributeInfoAttribute attribInfoAttrib =
+                        operationContractAttribs[0] as AttributeInfoAttribute;
+                    if (
+                        typeof(OperationContractAttribute).IsAssignableFrom(
+                            attribInfoAttrib.AttributeInfo.AttributeType
+                        )
+                    )
                     {
                         return true;
                     }
@@ -197,11 +261,21 @@ namespace System.Workflow.Activities
             return types;
         }
 
-        internal static SessionMode GetContractSessionMode(IServiceProvider serviceProvider, AttributeInfo attribInfo)
+        internal static SessionMode GetContractSessionMode(
+            IServiceProvider serviceProvider,
+            AttributeInfo attribInfo
+        )
         {
             string propertyName = "SessionMode";
             SessionMode sessionMode = SessionMode.Allowed;
-            if (!TryGetArgumentValueAs<SessionMode>(serviceProvider, attribInfo, propertyName, out sessionMode))
+            if (
+                !TryGetArgumentValueAs<SessionMode>(
+                    serviceProvider,
+                    attribInfo,
+                    propertyName,
+                    out sessionMode
+                )
+            )
             {
                 sessionMode = SessionMode.Allowed;
             }
@@ -228,19 +302,23 @@ namespace System.Workflow.Activities
             return attributeList.ToArray();
         }
 
-        internal static bool GetOperationAsyncPattern(IServiceProvider serviceProvider, AttributeInfo attribInfo)
+        internal static bool GetOperationAsyncPattern(
+            IServiceProvider serviceProvider,
+            AttributeInfo attribInfo
+        )
         {
             string propertyName = "AsyncPattern";
             bool isAsync = false;
-            if (!TryGetArgumentValueAs<bool>(serviceProvider, attribInfo, propertyName, out isAsync))
+            if (
+                !TryGetArgumentValueAs<bool>(serviceProvider, attribInfo, propertyName, out isAsync)
+            )
             {
                 isAsync = false;
             }
             return isAsync;
         }
 
-        internal static bool IsDefined(Type attributeType,
-            Attribute[] attributes)
+        internal static bool IsDefined(Type attributeType, Attribute[] attributes)
         {
             if (attributeType == null)
             {
@@ -258,22 +336,37 @@ namespace System.Workflow.Activities
             return false;
         }
 
-        internal static bool IsInitiatingOperationContract(IServiceProvider serviceProvider, AttributeInfo attribInfo)
+        internal static bool IsInitiatingOperationContract(
+            IServiceProvider serviceProvider,
+            AttributeInfo attribInfo
+        )
         {
             string propertyName = "IsInitiating";
             bool isInitiating = true;
-            if (!TryGetArgumentValueAs<bool>(serviceProvider, attribInfo, propertyName, out isInitiating))
+            if (
+                !TryGetArgumentValueAs<bool>(
+                    serviceProvider,
+                    attribInfo,
+                    propertyName,
+                    out isInitiating
+                )
+            )
             {
                 isInitiating = true;
             }
             return isInitiating;
         }
 
-        internal static void SetWorkflowOperationBehavior(ContractDescription contractDescription, ServiceDescriptionContext context)
+        internal static void SetWorkflowOperationBehavior(
+            ContractDescription contractDescription,
+            ServiceDescriptionContext context
+        )
         {
             if (contractDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractDescription");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "contractDescription"
+                );
             }
 
             if (context == null)
@@ -284,8 +377,10 @@ namespace System.Workflow.Activities
             foreach (OperationDescription opDescription in contractDescription.Operations)
             {
                 WorkflowOperationBehavior behavior = null;
-                KeyValuePair<Type, string> operationKey =
-                    new KeyValuePair<Type, string>(opDescription.DeclaringContract.ContractType, opDescription.Name);
+                KeyValuePair<Type, string> operationKey = new KeyValuePair<Type, string>(
+                    opDescription.DeclaringContract.ContractType,
+                    opDescription.Name
+                );
 
                 if (!context.WorkflowOperationBehaviors.TryGetValue(operationKey, out behavior))
                 {
@@ -310,8 +405,12 @@ namespace System.Workflow.Activities
             }
 
             string[] argumentNames = null;
-            BindingFlags bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic;
-            FieldInfo argumentNamesField = typeof(AttributeInfo).GetField("argumentNames", bindingFlags);
+            BindingFlags bindingFlags =
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic;
+            FieldInfo argumentNamesField = typeof(AttributeInfo).GetField(
+                "argumentNames",
+                bindingFlags
+            );
             if (argumentNamesField != null)
             {
                 argumentNames = argumentNamesField.GetValue(attributeInfo) as string[];
@@ -320,8 +419,12 @@ namespace System.Workflow.Activities
             return argumentNames;
         }
 
-
-        private static bool TryGetArgumentValueAs<T>(IServiceProvider serviceProvider, AttributeInfo attribInfo, string propertyName, out T propertyValue)
+        private static bool TryGetArgumentValueAs<T>(
+            IServiceProvider serviceProvider,
+            AttributeInfo attribInfo,
+            string propertyName,
+            out T propertyValue
+        )
         {
             string[] argumentNames = GetAttributePropertyNames(attribInfo);
             int argumentIndex = -1;
@@ -346,7 +449,8 @@ namespace System.Workflow.Activities
                 propertyValue = default(T);
                 return false;
             }
-            propertyValue = (T) attribInfo.GetArgumentValueAs(serviceProvider, argumentIndex, typeof(T));
+            propertyValue = (T)
+                attribInfo.GetArgumentValueAs(serviceProvider, argumentIndex, typeof(T));
             return true;
         }
     }

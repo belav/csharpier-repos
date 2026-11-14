@@ -12,9 +12,9 @@ namespace System.ServiceModel.Channels
     using System.Text;
 
     abstract class ConnectionOrientedTransportChannelListener
-        : TransportChannelListener, 
-          IConnectionOrientedTransportFactorySettings, 
-          IConnectionOrientedListenerSettings
+        : TransportChannelListener,
+            IConnectionOrientedTransportFactorySettings,
+            IConnectionOrientedListenerSettings
     {
         int connectionBufferSize;
         bool exposeConnectionProperty;
@@ -31,8 +31,10 @@ namespace System.ServiceModel.Channels
         bool ownUpgrade;
         EndpointIdentity identity;
 
-        protected ConnectionOrientedTransportChannelListener(ConnectionOrientedTransportBindingElement bindingElement,
-            BindingContext context)
+        protected ConnectionOrientedTransportChannelListener(
+            ConnectionOrientedTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context, bindingElement.HostNameComparisonMode)
         {
             if (bindingElement.TransferMode == TransferMode.Buffered)
@@ -40,25 +42,31 @@ namespace System.ServiceModel.Channels
                 if (bindingElement.MaxReceivedMessageSize > int.MaxValue)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("bindingElement.MaxReceivedMessageSize",
-                        SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)));
+                        new ArgumentOutOfRangeException(
+                            "bindingElement.MaxReceivedMessageSize",
+                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                        )
+                    );
                 }
 
                 if (bindingElement.MaxBufferSize != bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement",
-                        SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
+                    );
                 }
             }
             else
             {
                 if (bindingElement.MaxBufferSize > bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement",
-                        SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
+                    );
                 }
             }
-
 
             this.connectionBufferSize = bindingElement.ConnectionBufferSize;
             this.exposeConnectionProperty = bindingElement.ExposeConnectionProperty;
@@ -75,23 +83,28 @@ namespace System.ServiceModel.Channels
 
             if (upgradeBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
+                    )
+                );
             }
-            else if ((upgradeBindingElements.Count == 1) && this.SupportsUpgrade(upgradeBindingElements[0]))
+            else if (
+                (upgradeBindingElements.Count == 1)
+                && this.SupportsUpgrade(upgradeBindingElements[0])
+            )
             {
                 this.upgrade = upgradeBindingElements[0].BuildServerStreamUpgradeProvider(context);
                 this.ownUpgrade = true;
                 context.BindingParameters.Remove<StreamUpgradeBindingElement>();
-                this.securityCapabilities = upgradeBindingElements[0].GetProperty<ISecurityCapabilities>(context);
+                this.securityCapabilities = upgradeBindingElements[0]
+                    .GetProperty<ISecurityCapabilities>(context);
             }
         }
 
         public int ConnectionBufferSize
         {
-            get
-            {
-                return this.connectionBufferSize;
-            }
+            get { return this.connectionBufferSize; }
         }
 
         public TimeSpan IdleTimeout
@@ -111,7 +124,10 @@ namespace System.ServiceModel.Channels
 
         internal void InitializeMaxPooledConnections(int maxOutboundConnectionsPerEndpoint)
         {
-            if (maxOutboundConnectionsPerEndpoint == ConnectionOrientedTransportDefaults.MaxOutboundConnectionsPerEndpoint)
+            if (
+                maxOutboundConnectionsPerEndpoint
+                == ConnectionOrientedTransportDefaults.MaxOutboundConnectionsPerEndpoint
+            )
             {
                 this.maxPooledConnections = ConnectionOrientedTransportDefaults.GetMaxConnections();
             }
@@ -128,10 +144,7 @@ namespace System.ServiceModel.Channels
 
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get
-            {
-                return this.HostNameComparisonModeInternal;
-            }
+            get { return this.HostNameComparisonModeInternal; }
         }
 
         public override T GetProperty<T>()
@@ -159,58 +172,37 @@ namespace System.ServiceModel.Channels
 
         public TimeSpan ChannelInitializationTimeout
         {
-            get
-            {
-                return this.channelInitializationTimeout;
-            }
+            get { return this.channelInitializationTimeout; }
         }
 
         public int MaxBufferSize
         {
-            get
-            {
-                return maxBufferSize;
-            }
+            get { return maxBufferSize; }
         }
 
         public int MaxPendingConnections
         {
-            get
-            {
-                return this.maxPendingConnections;
-            }
+            get { return this.maxPendingConnections; }
         }
 
         public TimeSpan MaxOutputDelay
         {
-            get
-            {
-                return maxOutputDelay;
-            }
+            get { return maxOutputDelay; }
         }
 
         public int MaxPendingAccepts
         {
-            get
-            {
-                return this.maxPendingAccepts;
-            }
+            get { return this.maxPendingAccepts; }
         }
 
         public StreamUpgradeProvider Upgrade
         {
-            get
-            {
-                return this.upgrade;
-            }
+            get { return this.upgrade; }
         }
 
         public TransferMode TransferMode
         {
-            get
-            {
-                return transferMode;
-            }
+            get { return transferMode; }
         }
 
         int IConnectionOrientedTransportFactorySettings.MaxBufferSize
@@ -238,12 +230,23 @@ namespace System.ServiceModel.Channels
             return MaxBufferSize;
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             StreamUpgradeProvider localUpgrade = this.Upgrade;
             if (localUpgrade != null)
             {
-                return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, localUpgrade);
+                return new ChainedOpenAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginOpen,
+                    base.OnEndOpen,
+                    localUpgrade
+                );
             }
             else
             {
@@ -294,16 +297,33 @@ namespace System.ServiceModel.Channels
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             StreamUpgradeProvider localUpgrade = GetUpgrade();
             if (localUpgrade != null)
             {
-                return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, localUpgrade);
+                return new ChainedCloseAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginClose,
+                    base.OnEndClose,
+                    localUpgrade
+                );
             }
             else
             {
-                return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose);
+                return new ChainedCloseAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginClose,
+                    base.OnEndClose
+                );
             }
         }
 
@@ -351,7 +371,15 @@ namespace System.ServiceModel.Channels
             if (encodedSize > maxViaSize)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new QuotaExceededException(SR.GetString(SR.UriLengthExceedsMaxSupportedSize, uri, encodedSize, maxViaSize)));
+                    new QuotaExceededException(
+                        SR.GetString(
+                            SR.UriLengthExceedsMaxSupportedSize,
+                            uri,
+                            encodedSize,
+                            maxViaSize
+                        )
+                    )
+                );
             }
         }
 
@@ -361,11 +389,14 @@ namespace System.ServiceModel.Channels
         }
 
         // transfers around the StreamUpgradeProvider from an ownership perspective
-        protected class ConnectionOrientedTransportReplyChannelAcceptor : TransportReplyChannelAcceptor
+        protected class ConnectionOrientedTransportReplyChannelAcceptor
+            : TransportReplyChannelAcceptor
         {
             StreamUpgradeProvider upgrade;
 
-            public ConnectionOrientedTransportReplyChannelAcceptor(ConnectionOrientedTransportChannelListener listener)
+            public ConnectionOrientedTransportReplyChannelAcceptor(
+                ConnectionOrientedTransportChannelListener listener
+            )
                 : base(listener)
             {
                 this.upgrade = listener.GetUpgrade();
@@ -395,7 +426,11 @@ namespace System.ServiceModel.Channels
                 CompletedAsyncResult.End(result);
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 ChainedBeginHandler begin1 = DummyBeginClose;
                 ChainedEndHandler end1 = DummyEndClose;
@@ -405,7 +440,15 @@ namespace System.ServiceModel.Channels
                     end1 = this.upgrade.EndClose;
                 }
 
-                return new ChainedAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, begin1, end1);
+                return new ChainedAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginClose,
+                    base.OnEndClose,
+                    begin1,
+                    end1
+                );
             }
 
             protected override void OnEndClose(IAsyncResult result)
@@ -426,7 +469,8 @@ namespace System.ServiceModel.Channels
             // used to decouple our channel and listener lifetimes
             bool TransferUpgrade()
             {
-                ConnectionOrientedTransportReplyChannel singletonChannel = (ConnectionOrientedTransportReplyChannel)base.GetCurrentChannel();
+                ConnectionOrientedTransportReplyChannel singletonChannel =
+                    (ConnectionOrientedTransportReplyChannel)base.GetCurrentChannel();
                 if (singletonChannel == null)
                 {
                     return false;
@@ -442,10 +486,11 @@ namespace System.ServiceModel.Channels
             {
                 StreamUpgradeProvider upgrade;
 
-                public ConnectionOrientedTransportReplyChannel(ChannelManagerBase channelManager, EndpointAddress localAddress)
-                    : base(channelManager, localAddress)
-                {
-                }
+                public ConnectionOrientedTransportReplyChannel(
+                    ChannelManagerBase channelManager,
+                    EndpointAddress localAddress
+                )
+                    : base(channelManager, localAddress) { }
 
                 public bool TransferUpgrade(StreamUpgradeProvider upgrade)
                 {
@@ -490,7 +535,11 @@ namespace System.ServiceModel.Channels
                     CompletedAsyncResult.End(result);
                 }
 
-                protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+                protected override IAsyncResult OnBeginClose(
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     ChainedBeginHandler begin1 = DummyBeginClose;
                     ChainedEndHandler end1 = DummyEndClose;
@@ -500,8 +549,15 @@ namespace System.ServiceModel.Channels
                         end1 = this.upgrade.EndClose;
                     }
 
-                    return new ChainedAsyncResult(timeout, callback, state, begin1, end1,
-                            base.OnBeginClose, base.OnEndClose);
+                    return new ChainedAsyncResult(
+                        timeout,
+                        callback,
+                        state,
+                        begin1,
+                        end1,
+                        base.OnBeginClose,
+                        base.OnEndClose
+                    );
                 }
 
                 protected override void OnEndClose(IAsyncResult result)

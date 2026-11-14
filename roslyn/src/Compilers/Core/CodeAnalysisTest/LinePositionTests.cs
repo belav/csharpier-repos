@@ -21,22 +21,31 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (left, right) => left != right,
                 EqualityUnit.Create(new LinePosition(1, 2)).WithEqualValues(new LinePosition(1, 2)),
                 EqualityUnit.Create(new LinePosition()).WithEqualValues(new LinePosition()),
-                EqualityUnit.Create(new LinePosition(1, 2)).WithNotEqualValues(new LinePosition(1, 3)),
-                EqualityUnit.Create(new LinePosition(1, 2)).WithNotEqualValues(new LinePosition(2, 2)));
+                EqualityUnit
+                    .Create(new LinePosition(1, 2))
+                    .WithNotEqualValues(new LinePosition(1, 3)),
+                EqualityUnit
+                    .Create(new LinePosition(1, 2))
+                    .WithNotEqualValues(new LinePosition(2, 2))
+            );
         }
 
         [Fact]
         public void Ctor1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => { var notUsed = new LinePosition(-1, 42); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var notUsed = new LinePosition(-1, 42);
+            });
         }
 
         [Fact]
         public void Ctor2()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => { var notUsed = new LinePosition(42, -1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var notUsed = new LinePosition(42, -1);
+            });
         }
 
         [Fact]
@@ -48,7 +57,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         // In general, different values are not required to have different hash codes.
-        // But for perf reasons we want hash functions with a good distribution, 
+        // But for perf reasons we want hash functions with a good distribution,
         // so we expect hash codes to differ if a single component is incremented.
         // But program correctness should be preserved even with a null hash function,
         // so we need a way to disable these tests during such correctness validation.
@@ -69,7 +78,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.NotEqual(hash2, hash4);
             Assert.NotEqual(hash3, hash4);
         }
-
 #endif
 
         [Fact]

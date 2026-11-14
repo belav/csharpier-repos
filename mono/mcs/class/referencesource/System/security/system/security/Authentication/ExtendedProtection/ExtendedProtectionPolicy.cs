@@ -16,7 +16,7 @@ using System.Text;
 namespace System.Security.Authentication.ExtendedProtection
 {
     /// <summary>
-    /// This class contains the necessary settings for specifying how Extended Protection 
+    /// This class contains the necessary settings for specifying how Extended Protection
     /// should behave. Use one of the Build* methods to create an instance of this type.
     /// </summary>
     [Serializable]
@@ -33,17 +33,27 @@ namespace System.Security.Authentication.ExtendedProtection
         private ProtectionScenario protectionScenario;
         private ChannelBinding customChannelBinding;
 
-        public ExtendedProtectionPolicy(PolicyEnforcement policyEnforcement, 
-                                        ProtectionScenario protectionScenario,
-                                        ServiceNameCollection customServiceNames)
+        public ExtendedProtectionPolicy(
+            PolicyEnforcement policyEnforcement,
+            ProtectionScenario protectionScenario,
+            ServiceNameCollection customServiceNames
+        )
         {
             if (policyEnforcement == PolicyEnforcement.Never)
             {
-                throw new ArgumentException(SR.GetString(SR.security_ExtendedProtectionPolicy_UseDifferentConstructorForNever), "policyEnforcement");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.security_ExtendedProtectionPolicy_UseDifferentConstructorForNever
+                    ),
+                    "policyEnforcement"
+                );
             }
             if (customServiceNames != null && customServiceNames.Count == 0)
             {
-                throw new ArgumentException(SR.GetString(SR.security_ExtendedProtectionPolicy_NoEmptyServiceNameCollection), "customServiceNames");
+                throw new ArgumentException(
+                    SR.GetString(SR.security_ExtendedProtectionPolicy_NoEmptyServiceNameCollection),
+                    "customServiceNames"
+                );
             }
 
             this.policyEnforcement = policyEnforcement;
@@ -51,20 +61,32 @@ namespace System.Security.Authentication.ExtendedProtection
             this.customServiceNames = customServiceNames;
         }
 
-        public ExtendedProtectionPolicy(PolicyEnforcement policyEnforcement,
-                                        ProtectionScenario protectionScenario,
-                                        ICollection customServiceNames)
-            : this(policyEnforcement, protectionScenario, 
-                   customServiceNames == null ? (ServiceNameCollection)null : new ServiceNameCollection(customServiceNames))
-        {
-        }
+        public ExtendedProtectionPolicy(
+            PolicyEnforcement policyEnforcement,
+            ProtectionScenario protectionScenario,
+            ICollection customServiceNames
+        )
+            : this(
+                policyEnforcement,
+                protectionScenario,
+                customServiceNames == null
+                    ? (ServiceNameCollection)null
+                    : new ServiceNameCollection(customServiceNames)
+            ) { }
 
-        public ExtendedProtectionPolicy(PolicyEnforcement policyEnforcement,
-                                        ChannelBinding customChannelBinding)
+        public ExtendedProtectionPolicy(
+            PolicyEnforcement policyEnforcement,
+            ChannelBinding customChannelBinding
+        )
         {
             if (policyEnforcement == PolicyEnforcement.Never)
             {
-                throw new ArgumentException(SR.GetString(SR.security_ExtendedProtectionPolicy_UseDifferentConstructorForNever), "policyEnforcement");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.security_ExtendedProtectionPolicy_UseDifferentConstructorForNever
+                    ),
+                    "policyEnforcement"
+                );
             }
             if (customChannelBinding == null)
             {
@@ -87,13 +109,22 @@ namespace System.Security.Authentication.ExtendedProtection
         {
             policyEnforcement = (PolicyEnforcement)info.GetInt32(policyEnforcementName);
             protectionScenario = (ProtectionScenario)info.GetInt32(protectionScenarioName);
-            customServiceNames = (ServiceNameCollection)info.GetValue(customServiceNamesName, typeof(ServiceNameCollection));
+            customServiceNames = (ServiceNameCollection)
+                info.GetValue(customServiceNamesName, typeof(ServiceNameCollection));
 
-            byte[] channelBindingData = (byte[])info.GetValue(customChannelBindingName, typeof(byte[]));
+            byte[] channelBindingData = (byte[])
+                info.GetValue(customChannelBindingName, typeof(byte[]));
             if (channelBindingData != null)
             {
-                customChannelBinding = SafeLocalFreeChannelBinding.LocalAlloc(channelBindingData.Length);
-                Marshal.Copy(channelBindingData, 0, customChannelBinding.DangerousGetHandle(), channelBindingData.Length);
+                customChannelBinding = SafeLocalFreeChannelBinding.LocalAlloc(
+                    channelBindingData.Length
+                );
+                Marshal.Copy(
+                    channelBindingData,
+                    0,
+                    customChannelBinding.DangerousGetHandle(),
+                    channelBindingData.Length
+                );
             }
         }
 
@@ -136,20 +167,20 @@ namespace System.Security.Authentication.ExtendedProtection
             }
 
             sb.Append("; ServiceNames=");
-            if (customServiceNames == null) 
+            if (customServiceNames == null)
             {
                 sb.Append("<null>");
             }
-            else 
+            else
             {
                 bool first = true;
-                foreach (string serviceName in customServiceNames) 
+                foreach (string serviceName in customServiceNames)
                 {
-                    if (first) 
+                    if (first)
                     {
                         first = false;
                     }
-                    else 
+                    else
                     {
                         sb.Append(", ");
                     }
@@ -163,10 +194,7 @@ namespace System.Security.Authentication.ExtendedProtection
 
         public static bool OSSupportsExtendedProtection
         {
-            get
-            {
-                return AuthenticationManager.OSSupportsExtendedProtection;
-            }
+            get { return AuthenticationManager.OSSupportsExtendedProtection; }
         }
 
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, SerializationFormatter = true)]
@@ -174,7 +202,11 @@ namespace System.Security.Authentication.ExtendedProtection
         {
             info.AddValue(policyEnforcementName, (int)policyEnforcement);
             info.AddValue(protectionScenarioName, (int)protectionScenario);
-            info.AddValue(customServiceNamesName, customServiceNames, typeof(ServiceNameCollection));
+            info.AddValue(
+                customServiceNamesName,
+                customServiceNames,
+                typeof(ServiceNameCollection)
+            );
 
             if (customChannelBinding == null)
             {
@@ -183,7 +215,12 @@ namespace System.Security.Authentication.ExtendedProtection
             else
             {
                 byte[] channelBindingData = new byte[customChannelBinding.Size];
-                Marshal.Copy(customChannelBinding.DangerousGetHandle(), channelBindingData, 0, customChannelBinding.Size);
+                Marshal.Copy(
+                    customChannelBinding.DangerousGetHandle(),
+                    channelBindingData,
+                    0,
+                    customChannelBinding.Size
+                );
                 info.AddValue(customChannelBindingName, channelBindingData, typeof(byte[]));
             }
         }

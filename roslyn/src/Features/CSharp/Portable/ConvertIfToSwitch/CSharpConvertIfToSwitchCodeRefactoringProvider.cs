@@ -16,18 +16,31 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertIfToSwitch), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertIfToSwitch
+        ),
+        Shared
+    ]
     internal sealed partial class CSharpConvertIfToSwitchCodeRefactoringProvider
-        : AbstractConvertIfToSwitchCodeRefactoringProvider<IfStatementSyntax, ExpressionSyntax, BinaryExpressionSyntax, PatternSyntax>
+        : AbstractConvertIfToSwitchCodeRefactoringProvider<
+            IfStatementSyntax,
+            ExpressionSyntax,
+            BinaryExpressionSyntax,
+            PatternSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertIfToSwitchCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertIfToSwitchCodeRefactoringProvider() { }
 
-        public override string GetTitle(bool forSwitchExpression)
-            => forSwitchExpression
+        public override string GetTitle(bool forSwitchExpression) =>
+            forSwitchExpression
                 ? CSharpFeaturesResources.Convert_to_switch_expression
                 : CSharpFeaturesResources.Convert_to_switch_statement;
 
@@ -35,16 +48,31 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
         {
             var version = options.LanguageVersion();
             var features =
-                (version >= LanguageVersion.CSharp7 ? Feature.SourcePattern | Feature.IsTypePattern | Feature.CaseGuard : 0) |
-                (version >= LanguageVersion.CSharp8 ? Feature.SwitchExpression : 0) |
-                (version >= LanguageVersion.CSharp9 ? Feature.RelationalPattern | Feature.OrPattern | Feature.AndPattern | Feature.TypePattern : 0);
+                (
+                    version >= LanguageVersion.CSharp7
+                        ? Feature.SourcePattern | Feature.IsTypePattern | Feature.CaseGuard
+                        : 0
+                )
+                | (version >= LanguageVersion.CSharp8 ? Feature.SwitchExpression : 0)
+                | (
+                    version >= LanguageVersion.CSharp9
+                        ? Feature.RelationalPattern
+                            | Feature.OrPattern
+                            | Feature.AndPattern
+                            | Feature.TypePattern
+                        : 0
+                );
             return new CSharpAnalyzer(syntaxFacts, features);
         }
 
         protected override SyntaxTriviaList GetLeadingTriviaToTransfer(SyntaxNode syntaxToRemove)
         {
-            if (syntaxToRemove is (IfStatementSyntax or BlockSyntax) and { Parent: ElseClauseSyntax elseClause } &&
-                elseClause.ElseKeyword.LeadingTrivia.Any(t => t.IsSingleOrMultiLineComment()))
+            if (
+                syntaxToRemove
+                    is (IfStatementSyntax or BlockSyntax)
+                        and { Parent: ElseClauseSyntax elseClause }
+                && elseClause.ElseKeyword.LeadingTrivia.Any(t => t.IsSingleOrMultiLineComment())
+            )
             {
                 // users sometimes write:
                 //

@@ -17,7 +17,12 @@ namespace System.Activities.Validation
         IList<ValidationError> getChildrenErrors;
         ProcessActivityTreeOptions options;
 
-        internal ValidationContext(ActivityUtilities.ChildActivity owner, ActivityUtilities.ActivityCallStack parentChain, ProcessActivityTreeOptions options, LocationReferenceEnvironment environment)
+        internal ValidationContext(
+            ActivityUtilities.ChildActivity owner,
+            ActivityUtilities.ActivityCallStack parentChain,
+            ProcessActivityTreeOptions options,
+            LocationReferenceEnvironment environment
+        )
         {
             this.owner = owner;
             this.parentChain = parentChain;
@@ -52,21 +57,29 @@ namespace System.Activities.Validation
                 {
                     currentNode = currentNode.Parent;
                 }
-                List<Activity> nodes = ActivityValidationServices.GetChildren(new ActivityUtilities.ChildActivity(currentNode, true), new ActivityUtilities.ActivityCallStack(), this.options);
+                List<Activity> nodes = ActivityValidationServices.GetChildren(
+                    new ActivityUtilities.ChildActivity(currentNode, true),
+                    new ActivityUtilities.ActivityCallStack(),
+                    this.options
+                );
                 nodes.Add(currentNode);
                 return nodes;
             }
             else
             {
                 return ActivityValidationServices.EmptyChildren;
-            }            
+            }
         }
 
         internal IEnumerable<Activity> GetChildren()
         {
             if (!this.owner.Equals(ActivityUtilities.ChildActivity.Empty))
             {
-                return ActivityValidationServices.GetChildren(this.owner, this.parentChain, this.options);
+                return ActivityValidationServices.GetChildren(
+                    this.owner,
+                    this.parentChain,
+                    this.options
+                );
             }
             else
             {

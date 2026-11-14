@@ -25,10 +25,19 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage request = CreateRequest())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() =>
-                {
-                    new FormattedContentResult<object>(statusCode, content, formatter, mediaType, request);
-                }, "formatter");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        new FormattedContentResult<object>(
+                            statusCode,
+                            content,
+                            formatter,
+                            mediaType,
+                            request
+                        );
+                    },
+                    "formatter"
+                );
             }
         }
 
@@ -43,10 +52,19 @@ namespace System.Web.Http.Results
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-            {
-                new FormattedContentResult<object>(statusCode, content, formatter, mediaType, request);
-            }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new FormattedContentResult<object>(
+                        statusCode,
+                        content,
+                        formatter,
+                        mediaType,
+                        request
+                    );
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -60,8 +78,13 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                FormattedContentResult<object> result = new FormattedContentResult<object>(expectedStatusCode, content,
-                    formatter, mediaType, request);
+                FormattedContentResult<object> result = new FormattedContentResult<object>(
+                    expectedStatusCode,
+                    content,
+                    formatter,
+                    mediaType,
+                    request
+                );
 
                 // Act
                 HttpStatusCode statusCode = result.StatusCode;
@@ -82,8 +105,13 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                FormattedContentResult<object> result = new FormattedContentResult<object>(statusCode, expectedContent,
-                    formatter, mediaType, request);
+                FormattedContentResult<object> result = new FormattedContentResult<object>(
+                    statusCode,
+                    expectedContent,
+                    formatter,
+                    mediaType,
+                    request
+                );
 
                 // Act
                 object content = result.Content;
@@ -104,8 +132,13 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                FormattedContentResult<object> result = new FormattedContentResult<object>(statusCode, content,
-                    expectedFormatter, mediaType, request);
+                FormattedContentResult<object> result = new FormattedContentResult<object>(
+                    statusCode,
+                    content,
+                    expectedFormatter,
+                    mediaType,
+                    request
+                );
 
                 // Act
                 MediaTypeFormatter formatter = result.Formatter;
@@ -126,8 +159,13 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                FormattedContentResult<object> result = new FormattedContentResult<object>(statusCode, content,
-                    formatter, expectedMediaType, request);
+                FormattedContentResult<object> result = new FormattedContentResult<object>(
+                    statusCode,
+                    content,
+                    formatter,
+                    expectedMediaType,
+                    request
+                );
 
                 // Act
                 MediaTypeHeaderValue mediaType = result.MediaType;
@@ -148,8 +186,13 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                FormattedContentResult<object> result = new FormattedContentResult<object>(statusCode, content,
-                    formatter, mediaType, expectedRequest);
+                FormattedContentResult<object> result = new FormattedContentResult<object>(
+                    statusCode,
+                    content,
+                    formatter,
+                    mediaType,
+                    expectedRequest
+                );
 
                 // Act
                 HttpRequestMessage request = result.Request;
@@ -170,8 +213,13 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                IHttpActionResult result = new FormattedContentResult<object>(expectedStatusCode, expectedContent,
-                    expectedFormatter, expectedMediaType, expectedRequest);
+                IHttpActionResult result = new FormattedContentResult<object>(
+                    expectedStatusCode,
+                    expectedContent,
+                    expectedFormatter,
+                    expectedMediaType,
+                    expectedRequest
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -184,7 +232,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(expectedStatusCode, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(content);
+                    ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(
+                        content
+                    );
                     Assert.Same(expectedContent, typedContent.Value);
                     Assert.Same(expectedFormatter, typedContent.Formatter);
                     Assert.NotNull(typedContent.Headers);
@@ -205,10 +255,19 @@ namespace System.Web.Http.Results
             ApiController controller = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-            {
-                new FormattedContentResult<object>(statusCode, content, formatter, mediaType, controller);
-            }, "controller");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new FormattedContentResult<object>(
+                        statusCode,
+                        content,
+                        formatter,
+                        mediaType,
+                        controller
+                    );
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -224,8 +283,13 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
                 controller.Request = expectedRequest;
-                IHttpActionResult result = new FormattedContentResult<object>(expectedStatusCode, expectedContent,
-                    expectedFormatter, expectedMediaType, controller);
+                IHttpActionResult result = new FormattedContentResult<object>(
+                    expectedStatusCode,
+                    expectedContent,
+                    expectedFormatter,
+                    expectedMediaType,
+                    controller
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -238,7 +302,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(expectedStatusCode, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(content);
+                    ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(
+                        content
+                    );
                     Assert.Same(expectedContent, typedContent.Value);
                     Assert.Same(expectedFormatter, typedContent.Formatter);
                     Assert.NotNull(typedContent.Headers);
@@ -257,8 +323,13 @@ namespace System.Web.Http.Results
             MediaTypeFormatter formatter = CreateFormatter();
             MediaTypeHeaderValue mediaType = CreateMediaType();
             ApiController controller = CreateController();
-            FormattedContentResult<object> result = new FormattedContentResult<object>(statusCode, content, formatter,
-                mediaType, controller);
+            FormattedContentResult<object> result = new FormattedContentResult<object>(
+                statusCode,
+                content,
+                formatter,
+                mediaType,
+                controller
+            );
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
@@ -281,8 +352,13 @@ namespace System.Web.Http.Results
             MediaTypeFormatter formatter = CreateFormatter();
             MediaTypeHeaderValue mediaType = CreateMediaType();
             ApiController controller = CreateController();
-            FormattedContentResult<object> result = new FormattedContentResult<object>(statusCode, content, formatter,
-                mediaType, controller);
+            FormattedContentResult<object> result = new FormattedContentResult<object>(
+                statusCode,
+                content,
+                formatter,
+                mediaType,
+                controller
+            );
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
@@ -312,12 +388,22 @@ namespace System.Web.Http.Results
             MediaTypeHeaderValue mediaType = CreateMediaType();
             ApiController controller = CreateController();
             Assert.Null(controller.Request);
-            FormattedContentResult<object> result = new FormattedContentResult<object>(statusCode, content, formatter,
-                mediaType, controller);
+            FormattedContentResult<object> result = new FormattedContentResult<object>(
+                statusCode,
+                content,
+                formatter,
+                mediaType,
+                controller
+            );
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                { HttpRequestMessage ignore = result.Request; }, "ApiController.Request must not be null.");
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpRequestMessage ignore = result.Request;
+                },
+                "ApiController.Request must not be null."
+            );
         }
 
         [Fact]
@@ -331,8 +417,12 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act
-            FormattedContentResult<object> result = controller.Content(expectedStatusCode, expectedContent,
-                expectedFormatter, expectedMediaType);
+            FormattedContentResult<object> result = controller.Content(
+                expectedStatusCode,
+                expectedContent,
+                expectedFormatter,
+                expectedMediaType
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -359,8 +449,12 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act
-            FormattedContentResult<object> result = controller.Content(expectedStatusCode, expectedContent,
-                expectedFormatter, expectedMediaType);
+            FormattedContentResult<object> result = controller.Content(
+                expectedStatusCode,
+                expectedContent,
+                expectedFormatter,
+                expectedMediaType
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -388,8 +482,11 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act
-            FormattedContentResult<object> result = controller.Content(expectedStatusCode, expectedContent,
-                expectedFormatter);
+            FormattedContentResult<object> result = controller.Content(
+                expectedStatusCode,
+                expectedContent,
+                expectedFormatter
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -448,8 +545,6 @@ namespace System.Web.Http.Results
             }
         }
 
-        private class FakeController : ApiController
-        {
-        }
+        private class FakeController : ApiController { }
     }
 }

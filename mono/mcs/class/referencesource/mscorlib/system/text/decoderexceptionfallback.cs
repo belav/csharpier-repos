@@ -8,16 +8,14 @@
 namespace System.Text
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Globalization;
+    using System.Runtime.Serialization;
 
     [Serializable]
     public sealed class DecoderExceptionFallback : DecoderFallback
     {
         // Construction
-        public DecoderExceptionFallback()
-        {
-        }
+        public DecoderExceptionFallback() { }
 
         public override DecoderFallbackBuffer CreateFallbackBuffer()
         {
@@ -27,10 +25,7 @@ namespace System.Text
         // Maximum number of characters that this instance of this fallback could return
         public override int MaxCharCount
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public override bool Equals(Object value)
@@ -48,7 +43,6 @@ namespace System.Text
             return 879;
         }
     }
-
 
     public sealed class DecoderExceptionFallbackBuffer : DecoderFallbackBuffer
     {
@@ -72,15 +66,12 @@ namespace System.Text
         // Exceptions are always empty
         public override int Remaining
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         private void Throw(byte[] bytesUnknown, int index)
         {
-            // Create a string representation of our bytes.            
+            // Create a string representation of our bytes.
             StringBuilder strBytes = new StringBuilder(bytesUnknown.Length * 3);
 
             int i;
@@ -90,25 +81,30 @@ namespace System.Text
                 strBytes.Append(bytesUnknown[i].ToString("X2", CultureInfo.InvariantCulture));
                 strBytes.Append("]");
             }
-            
+
             // In case the string's really long
             if (i == 20)
                 strBytes.Append(" ...");
 
             // Known index
             throw new DecoderFallbackException(
-                Environment.GetResourceString("Argument_InvalidCodePageBytesIndex",
-                   strBytes, index), bytesUnknown, index);           
+                Environment.GetResourceString(
+                    "Argument_InvalidCodePageBytesIndex",
+                    strBytes,
+                    index
+                ),
+                bytesUnknown,
+                index
+            );
         }
-
     }
 
     // Exception for decoding unknown byte sequences.
     [Serializable]
     public sealed class DecoderFallbackException : ArgumentException
     {
-        byte[]    bytesUnknown = null;
-        int       index = 0;
+        byte[] bytesUnknown = null;
+        int index = 0;
 
         public DecoderFallbackException()
             : base(Environment.GetResourceString("Arg_ArgumentException"))
@@ -128,12 +124,11 @@ namespace System.Text
             SetErrorCode(__HResults.COR_E_ARGUMENT);
         }
 
-        internal DecoderFallbackException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        internal DecoderFallbackException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-        public DecoderFallbackException(
-            String message, byte[] bytesUnknown, int index) : base(message)
+        public DecoderFallbackException(String message, byte[] bytesUnknown, int index)
+            : base(message)
         {
             this.bytesUnknown = bytesUnknown;
             this.index = index;
@@ -141,18 +136,12 @@ namespace System.Text
 
         public byte[] BytesUnknown
         {
-            get
-            {
-                return (bytesUnknown);
-            }
+            get { return (bytesUnknown); }
         }
 
         public int Index
         {
-            get
-            {
-                return this.index;
-            }
+            get { return this.index; }
         }
     }
 }

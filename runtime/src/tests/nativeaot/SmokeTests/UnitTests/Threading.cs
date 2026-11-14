@@ -15,7 +15,9 @@ internal static class Threading
 
     public static int Run()
     {
-        Console.WriteLine("    WaitSubsystemTests.DoubleSetOnEventWithTimedOutWaiterShouldNotStayInWaitersList");
+        Console.WriteLine(
+            "    WaitSubsystemTests.DoubleSetOnEventWithTimedOutWaiterShouldNotStayInWaitersList"
+        );
         WaitSubsystemTests.DoubleSetOnEventWithTimedOutWaiterShouldNotStayInWaitersList();
 
         Console.WriteLine("    WaitSubsystemTests.ManualResetEventTest");
@@ -43,16 +45,22 @@ internal static class Threading
         Console.WriteLine("    ThreadPoolTests.RunProcessorCountItemsInParallel");
         ThreadPoolTests.RunProcessorCountItemsInParallel();
 
-        Console.WriteLine("    ThreadPoolTests.RunMoreThanMaxJobsMakesOneJobWaitForStarvationDetection");
+        Console.WriteLine(
+            "    ThreadPoolTests.RunMoreThanMaxJobsMakesOneJobWaitForStarvationDetection"
+        );
         ThreadPoolTests.RunMoreThanMaxJobsMakesOneJobWaitForStarvationDetection();
 
         Console.WriteLine("    ThreadPoolTests.ThreadPoolCanPickUpOneJobWhenThreadIsAvailable");
         ThreadPoolTests.ThreadPoolCanPickUpOneJobWhenThreadIsAvailable();
 
-        Console.WriteLine("    ThreadPoolTests.ThreadPoolCanPickUpMultipleJobsWhenThreadsAreAvailable");
+        Console.WriteLine(
+            "    ThreadPoolTests.ThreadPoolCanPickUpMultipleJobsWhenThreadsAreAvailable"
+        );
         ThreadPoolTests.ThreadPoolCanPickUpMultipleJobsWhenThreadsAreAvailable();
 
-        Console.WriteLine("    ThreadPoolTests.ThreadPoolCanProcessManyWorkItemsInParallelWithoutDeadlocking");
+        Console.WriteLine(
+            "    ThreadPoolTests.ThreadPoolCanProcessManyWorkItemsInParallelWithoutDeadlocking"
+        );
         ThreadPoolTests.ThreadPoolCanProcessManyWorkItemsInParallelWithoutDeadlocking();
 
         // This test takes a long time to run (min 42 seconds sleeping). Enable for manual testing.
@@ -90,15 +98,18 @@ internal static class Threading
         Console.WriteLine("    WaitThreadTests.StateIsPasssedThroughToCallback");
         WaitThreadTests.StateIsPasssedThroughToCallback();
 
-
         // This test takes a long time to run. Enable for manual testing.
         // Console.WriteLine("    WaitThreadTests.WaitWithLongerTimeoutThanWaitThreadCanStillTimeout");
         // WaitThreadTests.WaitWithLongerTimeoutThanWaitThreadCanStillTimeout();
 
-        Console.WriteLine("    WaitThreadTests.UnregisterCallbackIsNotCalledAfterCallbackFinishesIfAnotherCallbackOnSameWaitRunning");
+        Console.WriteLine(
+            "    WaitThreadTests.UnregisterCallbackIsNotCalledAfterCallbackFinishesIfAnotherCallbackOnSameWaitRunning"
+        );
         WaitThreadTests.UnregisterCallbackIsNotCalledAfterCallbackFinishesIfAnotherCallbackOnSameWaitRunning();
 
-        Console.WriteLine("    WaitThreadTests.CallingUnregisterOnAutomaticallyUnregisteredHandleReturnsTrue");
+        Console.WriteLine(
+            "    WaitThreadTests.CallingUnregisterOnAutomaticallyUnregisteredHandleReturnsTrue"
+        );
         WaitThreadTests.CallingUnregisterOnAutomaticallyUnregisteredHandleReturnsTrue();
 
         Console.WriteLine("    WaitThreadTests.EventSetAfterUnregisterNotObservedOnWaitThread");
@@ -110,9 +121,10 @@ internal static class Threading
         Console.WriteLine("    WaitThreadTests.CanDisposeEventAfterUnblockingUnregister");
         WaitThreadTests.CanDisposeEventAfterUnblockingUnregister();
 
-        Console.WriteLine("    WaitThreadTests.UnregisterEventSignaledWhenUnregisteredEvenIfAutoUnregistered");
+        Console.WriteLine(
+            "    WaitThreadTests.UnregisterEventSignaledWhenUnregisteredEvenIfAutoUnregistered"
+        );
         WaitThreadTests.UnregisterEventSignaledWhenUnregisteredEvenIfAutoUnregistered();
-
 
         Console.WriteLine("    WaitThreadTests.BlockingUnregisterBlocksEvenIfCallbackExecuting");
         WaitThreadTests.BlockingUnregisterBlocksEvenIfCallbackExecuting();
@@ -167,14 +179,13 @@ internal static class WaitSubsystemTests
         e = null;
 
         // Multi-wait with all indexes set
-        var es =
-            new ManualResetEvent[]
-            {
-                new ManualResetEvent(true),
-                new ManualResetEvent(true),
-                new ManualResetEvent(true),
-                new ManualResetEvent(true)
-            };
+        var es = new ManualResetEvent[]
+        {
+            new ManualResetEvent(true),
+            new ManualResetEvent(true),
+            new ManualResetEvent(true),
+            new ManualResetEvent(true),
+        };
         Assert.Equal(0, WaitHandle.WaitAny(es, 0));
         Assert.Equal(0, WaitHandle.WaitAny(es, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
         Assert.Equal(0, WaitHandle.WaitAny(es));
@@ -202,7 +213,10 @@ internal static class WaitSubsystemTests
         es[1].Reset();
         es[2].Reset();
         Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(es, 0));
-        Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds));
+        Assert.Equal(
+            WaitHandle.WaitTimeout,
+            WaitHandle.WaitAny(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+        );
         Assert.False(WaitHandle.WaitAll(es, 0));
         Assert.False(WaitHandle.WaitAll(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds));
         for (int i = 0; i < es.Length; ++i)
@@ -256,14 +270,13 @@ internal static class WaitSubsystemTests
         e = null;
 
         // Multi-wait with all indexes set
-        var es =
-            new AutoResetEvent[]
-            {
-                new AutoResetEvent(true),
-                new AutoResetEvent(true),
-                new AutoResetEvent(true),
-                new AutoResetEvent(true)
-            };
+        var es = new AutoResetEvent[]
+        {
+            new AutoResetEvent(true),
+            new AutoResetEvent(true),
+            new AutoResetEvent(true),
+            new AutoResetEvent(true),
+        };
         Assert.Equal(0, WaitHandle.WaitAny(es, 0));
         for (int i = 0; i < es.Length; ++i)
         {
@@ -326,7 +339,10 @@ internal static class WaitSubsystemTests
 
         // Multi-wait with all indexes reset
         Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(es, 0));
-        Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds));
+        Assert.Equal(
+            WaitHandle.WaitTimeout,
+            WaitHandle.WaitAny(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+        );
         Assert.False(WaitHandle.WaitAll(es, 0));
         Assert.False(WaitHandle.WaitAll(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds));
         for (int i = 0; i < es.Length; ++i)
@@ -395,14 +411,13 @@ internal static class WaitSubsystemTests
         s = null;
 
         // Multi-wait with all indexes signaled
-        var ss =
-            new Semaphore[]
-            {
-                new Semaphore(1, 1),
-                new Semaphore(1, 1),
-                new Semaphore(1, 1),
-                new Semaphore(1, 1)
-            };
+        var ss = new Semaphore[]
+        {
+            new Semaphore(1, 1),
+            new Semaphore(1, 1),
+            new Semaphore(1, 1),
+            new Semaphore(1, 1),
+        };
         Assert.Equal(0, WaitHandle.WaitAny(ss, 0));
         for (int i = 0; i < ss.Length; ++i)
         {
@@ -465,7 +480,10 @@ internal static class WaitSubsystemTests
 
         // Multi-wait with all indexes unsignaled
         Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(ss, 0));
-        Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(ss, ThreadTestHelpers.ExpectedTimeoutMilliseconds));
+        Assert.Equal(
+            WaitHandle.WaitTimeout,
+            WaitHandle.WaitAny(ss, ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+        );
         Assert.False(WaitHandle.WaitAll(ss, 0));
         Assert.False(WaitHandle.WaitAll(ss, ThreadTestHelpers.ExpectedTimeoutMilliseconds));
         for (int i = 0; i < ss.Length; ++i)
@@ -482,7 +500,8 @@ internal static class WaitSubsystemTests
     {
         AutoResetEvent threadStartedEvent = new AutoResetEvent(false);
         AutoResetEvent resetEvent = new AutoResetEvent(false);
-        Thread thread = new Thread(() => {
+        Thread thread = new Thread(() =>
+        {
             threadStartedEvent.Set();
             Thread.Sleep(50);
             resetEvent.Set();
@@ -552,14 +571,7 @@ internal static class WaitSubsystemTests
         m = null;
 
         // Multi-wait with all indexes unlocked
-        var ms =
-            new Mutex[]
-            {
-                new Mutex(),
-                new Mutex(),
-                new Mutex(),
-                new Mutex()
-            };
+        var ms = new Mutex[] { new Mutex(), new Mutex(), new Mutex(), new Mutex() };
         Assert.Equal(0, WaitHandle.WaitAny(ms, 0));
         ms[0].ReleaseMutex();
         for (int i = 1; i < ms.Length; ++i)
@@ -691,53 +703,66 @@ internal static class WaitSubsystemTests
         VerifyWaitDuration(
             new ManualResetEvent(false),
             waitTimeoutMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds,
-            expectedWaitTerminationAfterMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds);
+            expectedWaitTerminationAfterMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds
+        );
         VerifyWaitDuration(
             new ManualResetEvent(true),
             waitTimeoutMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds,
-            expectedWaitTerminationAfterMilliseconds: 0);
+            expectedWaitTerminationAfterMilliseconds: 0
+        );
 
         VerifyWaitDuration(
             new AutoResetEvent(false),
             waitTimeoutMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds,
-            expectedWaitTerminationAfterMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds);
+            expectedWaitTerminationAfterMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds
+        );
         VerifyWaitDuration(
             new AutoResetEvent(true),
             waitTimeoutMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds,
-            expectedWaitTerminationAfterMilliseconds: 0);
+            expectedWaitTerminationAfterMilliseconds: 0
+        );
 
         VerifyWaitDuration(
             new Semaphore(0, 1),
             waitTimeoutMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds,
-            expectedWaitTerminationAfterMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds);
+            expectedWaitTerminationAfterMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds
+        );
         VerifyWaitDuration(
             new Semaphore(1, 1),
             waitTimeoutMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds,
-            expectedWaitTerminationAfterMilliseconds: 0);
+            expectedWaitTerminationAfterMilliseconds: 0
+        );
 
         VerifyWaitDuration(
             new Mutex(true),
             waitTimeoutMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds,
-            expectedWaitTerminationAfterMilliseconds: 0);
+            expectedWaitTerminationAfterMilliseconds: 0
+        );
         VerifyWaitDuration(
             new Mutex(false),
             waitTimeoutMilliseconds: ThreadTestHelpers.ExpectedMeasurableTimeoutMilliseconds,
-            expectedWaitTerminationAfterMilliseconds: 0);
+            expectedWaitTerminationAfterMilliseconds: 0
+        );
     }
 
     private static void VerifyWaitDuration(
         WaitHandle wh,
         int waitTimeoutMilliseconds,
-        int expectedWaitTerminationAfterMilliseconds)
+        int expectedWaitTerminationAfterMilliseconds
+    )
     {
         Assert.True(waitTimeoutMilliseconds > 0);
         Assert.True(expectedWaitTerminationAfterMilliseconds >= 0);
 
         var sw = new Stopwatch();
         sw.Restart();
-        Assert.Equal(expectedWaitTerminationAfterMilliseconds == 0, wh.WaitOne(waitTimeoutMilliseconds));
+        Assert.Equal(
+            expectedWaitTerminationAfterMilliseconds == 0,
+            wh.WaitOne(waitTimeoutMilliseconds)
+        );
         sw.Stop();
-        int waitDurationDiffMilliseconds = (int)sw.ElapsedMilliseconds - expectedWaitTerminationAfterMilliseconds;
+        int waitDurationDiffMilliseconds =
+            (int)sw.ElapsedMilliseconds - expectedWaitTerminationAfterMilliseconds;
         Assert.True(waitDurationDiffMilliseconds >= AcceptableEarlyWaitTerminationDiffMilliseconds);
         Assert.True(waitDurationDiffMilliseconds <= AcceptableLateWaitTerminationDiffMilliseconds);
     }
@@ -762,18 +787,19 @@ internal static class WaitSubsystemTests
             }
             Assert.True(m.WaitOne(0));
         }
-        Assert.Throws<OverflowException>(
-            () =>
-            {
-                // Windows allows a slightly higher maximum reacquire count than this implementation
-                Assert.True(m.WaitOne(0));
-                Assert.True(m.WaitOne(0));
-            });
+        Assert.Throws<OverflowException>(() =>
+        {
+            // Windows allows a slightly higher maximum reacquire count than this implementation
+            Assert.True(m.WaitOne(0));
+            Assert.True(m.WaitOne(0));
+        });
         Console.WriteLine(" 100%");
 
         // Single wait fails
         Assert.Throws<OverflowException>(() => m.WaitOne(0));
-        Assert.Throws<OverflowException>(() => m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+        Assert.Throws<OverflowException>(() =>
+            m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+        );
         Assert.Throws<OverflowException>(() => m.WaitOne());
 
         var e0 = new AutoResetEvent(false);
@@ -781,34 +807,32 @@ internal static class WaitSubsystemTests
         var e1 = new AutoResetEvent(false);
         var s1 = new Semaphore(0, 1);
         var h = new WaitHandle[] { e0, s0, m, e1, s1 };
-        Action<bool, bool, bool, bool> init =
-            (signale0, signals0, signale1, signals1) =>
-            {
-                if (signale0)
-                    e0.Set();
-                else
-                    e0.Reset();
-                s0.WaitOne(0);
-                if (signals0)
-                    s0.Release();
-                if (signale1)
-                    e1.Set();
-                else
-                    e1.Reset();
-                s1.WaitOne(0);
-                if (signals1)
-                    s1.Release();
-            };
-        Action<bool, bool, bool, bool> verify =
-            (e0signaled, s0signaled, e1signaled, s1signaled) =>
-            {
-                Assert.Equal(e0signaled, e0.WaitOne(0));
-                Assert.Equal(s0signaled, s0.WaitOne(0));
-                Assert.Throws<OverflowException>(() => m.WaitOne(0));
-                Assert.Equal(e1signaled, e1.WaitOne(0));
-                Assert.Equal(s1signaled, s1.WaitOne(0));
-                init(e0signaled, s0signaled, e1signaled, s1signaled);
-            };
+        Action<bool, bool, bool, bool> init = (signale0, signals0, signale1, signals1) =>
+        {
+            if (signale0)
+                e0.Set();
+            else
+                e0.Reset();
+            s0.WaitOne(0);
+            if (signals0)
+                s0.Release();
+            if (signale1)
+                e1.Set();
+            else
+                e1.Reset();
+            s1.WaitOne(0);
+            if (signals1)
+                s1.Release();
+        };
+        Action<bool, bool, bool, bool> verify = (e0signaled, s0signaled, e1signaled, s1signaled) =>
+        {
+            Assert.Equal(e0signaled, e0.WaitOne(0));
+            Assert.Equal(s0signaled, s0.WaitOne(0));
+            Assert.Throws<OverflowException>(() => m.WaitOne(0));
+            Assert.Equal(e1signaled, e1.WaitOne(0));
+            Assert.Equal(s1signaled, s1.WaitOne(0));
+            init(e0signaled, s0signaled, e1signaled, s1signaled);
+        };
 
         // WaitAny succeeds when a signaled object is before the mutex
         init(true, true, true, true);
@@ -821,7 +845,9 @@ internal static class WaitSubsystemTests
         init(false, false, true, true);
         Assert.Throws<OverflowException>(() => WaitHandle.WaitAny(h, 0));
         verify(false, false, true, true);
-        Assert.Throws<OverflowException>(() => WaitHandle.WaitAny(h, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+        Assert.Throws<OverflowException>(() =>
+            WaitHandle.WaitAny(h, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+        );
         verify(false, false, true, true);
         Assert.Throws<OverflowException>(() => WaitHandle.WaitAny(h));
         verify(false, false, true, true);
@@ -830,7 +856,9 @@ internal static class WaitSubsystemTests
         init(true, true, true, true);
         Assert.Throws<OverflowException>(() => WaitHandle.WaitAll(h, 0));
         verify(true, true, true, true);
-        Assert.Throws<OverflowException>(() => WaitHandle.WaitAll(h, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+        Assert.Throws<OverflowException>(() =>
+            WaitHandle.WaitAll(h, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+        );
         verify(true, true, true, true);
         Assert.Throws<OverflowException>(() => WaitHandle.WaitAll(h));
         verify(true, true, true, true);
@@ -879,7 +907,10 @@ internal static class TimerTests
         var waitsForThread = new Action[timers.Length];
         for (int i = 0; i < timers.Length; ++i)
         {
-            var t = ThreadTestHelpers.CreateGuardedThread(out waitsForThread[i], createTimerThreadStart);
+            var t = ThreadTestHelpers.CreateGuardedThread(
+                out waitsForThread[i],
+                createTimerThreadStart
+            );
             t.IsBackground = true;
             t.Start(i);
             threadStarted.CheckedWait();
@@ -902,10 +933,11 @@ internal static class ThreadPoolTests
     {
         int count = 0;
         AutoResetEvent e0 = new AutoResetEvent(false);
-        for(int i = 0; i < Environment.ProcessorCount; ++i)
+        for (int i = 0; i < Environment.ProcessorCount; ++i)
         {
-            ThreadPool.QueueUserWorkItem( _ => {
-                if(Interlocked.Increment(ref count) == Environment.ProcessorCount)
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                if (Interlocked.Increment(ref count) == Environment.ProcessorCount)
                 {
                     e0.Set();
                 }
@@ -914,10 +946,11 @@ internal static class ThreadPoolTests
         e0.CheckedWait();
         // Run the test again to make sure we can reuse the threads.
         count = 0;
-        for(int i = 0; i < Environment.ProcessorCount; ++i)
+        for (int i = 0; i < Environment.ProcessorCount; ++i)
         {
-            ThreadPool.QueueUserWorkItem( _ => {
-                if(Interlocked.Increment(ref count) == Environment.ProcessorCount)
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                if (Interlocked.Increment(ref count) == Environment.ProcessorCount)
                 {
                     e0.Set();
                 }
@@ -933,10 +966,11 @@ internal static class ThreadPoolTests
         AutoResetEvent jobsQueued = new AutoResetEvent(false);
         int count = 0;
         AutoResetEvent e1 = new AutoResetEvent(false);
-        for(int i = 0; i < Environment.ProcessorCount; ++i)
+        for (int i = 0; i < Environment.ProcessorCount; ++i)
         {
-            ThreadPool.QueueUserWorkItem( _ => {
-                if(Interlocked.Increment(ref count) == Environment.ProcessorCount)
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                if (Interlocked.Increment(ref count) == Environment.ProcessorCount)
                 {
                     jobsQueued.Set();
                 }
@@ -944,7 +978,7 @@ internal static class ThreadPoolTests
             });
         }
         jobsQueued.CheckedWait();
-        ThreadPool.QueueUserWorkItem( _ => e1.Set());
+        ThreadPool.QueueUserWorkItem(_ => e1.Set());
         Thread.Sleep(500); // Sleep for the gate thread delay to wait for starvation
         e1.CheckedWait();
         e0.Set();
@@ -958,10 +992,11 @@ internal static class ThreadPoolTests
         AutoResetEvent testJobCompleted = new AutoResetEvent(false);
         int count = 0;
 
-        for(int i = 0; i < Environment.ProcessorCount - 1; ++i)
+        for (int i = 0; i < Environment.ProcessorCount - 1; ++i)
         {
-            ThreadPool.QueueUserWorkItem( _ => {
-                if(Interlocked.Increment(ref count) == Environment.ProcessorCount - 1)
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                if (Interlocked.Increment(ref count) == Environment.ProcessorCount - 1)
                 {
                     jobsQueued.Set();
                 }
@@ -969,7 +1004,7 @@ internal static class ThreadPoolTests
             });
         }
         jobsQueued.CheckedWait();
-        ThreadPool.QueueUserWorkItem( _ => testJobCompleted.Set());
+        ThreadPool.QueueUserWorkItem(_ => testJobCompleted.Set());
         testJobCompleted.CheckedWait();
         e0.Set();
     }
@@ -982,10 +1017,11 @@ internal static class ThreadPoolTests
         AutoResetEvent testJobCompleted = new AutoResetEvent(false);
         int count = 0;
 
-        for(int i = 0; i < Environment.ProcessorCount - 1; ++i)
+        for (int i = 0; i < Environment.ProcessorCount - 1; ++i)
         {
-            ThreadPool.QueueUserWorkItem( _ => {
-                if(Interlocked.Increment(ref count) == Environment.ProcessorCount - 1)
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                if (Interlocked.Increment(ref count) == Environment.ProcessorCount - 1)
                 {
                     jobsQueued.Set();
                 }
@@ -997,7 +1033,7 @@ internal static class ThreadPoolTests
         int maxCount = 5;
         void Job(object _)
         {
-            if(Interlocked.Increment(ref testJobsCount) != maxCount)
+            if (Interlocked.Increment(ref testJobsCount) != maxCount)
             {
                 ThreadPool.QueueUserWorkItem(Job);
             }
@@ -1039,7 +1075,11 @@ internal static class ThreadPoolTests
         done.WaitOne();
     }
 
-    private static WaitCallback CreateRecursiveJob(int jobCount, int targetJobCount, AutoResetEvent testJobCompleted)
+    private static WaitCallback CreateRecursiveJob(
+        int jobCount,
+        int targetJobCount,
+        AutoResetEvent testJobCompleted
+    )
     {
         return _ =>
         {
@@ -1049,7 +1089,9 @@ internal static class ThreadPoolTests
             }
             else
             {
-                ThreadPool.QueueUserWorkItem(CreateRecursiveJob(jobCount + 1, targetJobCount, testJobCompleted));
+                ThreadPool.QueueUserWorkItem(
+                    CreateRecursiveJob(jobCount + 1, targetJobCount, testJobCompleted)
+                );
             }
         };
     }
@@ -1063,10 +1105,11 @@ internal static class ThreadPoolTests
         AutoResetEvent testJobCompleted = new AutoResetEvent(false);
         int count = 0;
 
-        for(int i = 0; i < Environment.ProcessorCount - 1; ++i)
+        for (int i = 0; i < Environment.ProcessorCount - 1; ++i)
         {
-            ThreadPool.QueueUserWorkItem( _ => {
-                if(Interlocked.Increment(ref count) == Environment.ProcessorCount - 1)
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                if (Interlocked.Increment(ref count) == Environment.ProcessorCount - 1)
                 {
                     jobsQueued.Set();
                 }
@@ -1074,16 +1117,16 @@ internal static class ThreadPoolTests
             });
         }
         jobsQueued.CheckedWait();
-        ThreadPool.QueueUserWorkItem( _ => testJobCompleted.Set());
+        ThreadPool.QueueUserWorkItem(_ => testJobCompleted.Set());
         testJobCompleted.CheckedWait();
         Console.Write("Sleeping to time out thread\n");
         Thread.Sleep(21000);
-        ThreadPool.QueueUserWorkItem( _ => testJobCompleted.Set());
+        ThreadPool.QueueUserWorkItem(_ => testJobCompleted.Set());
         testJobCompleted.CheckedWait();
         e0.Set();
         Console.Write("Sleeping to time out all threads\n");
         Thread.Sleep(21000);
-        ThreadPool.QueueUserWorkItem( _ => testJobCompleted.Set());
+        ThreadPool.QueueUserWorkItem(_ => testJobCompleted.Set());
         testJobCompleted.CheckedWait();
     }
 
@@ -1098,11 +1141,11 @@ internal static class ThreadPoolTests
         object syncRoot = new object();
         void ThreadLocalJob()
         {
-            if(Interlocked.Increment(ref numLocalScheduled) <= numToSchedule)
+            if (Interlocked.Increment(ref numLocalScheduled) <= numToSchedule)
             {
                 Task.Factory.StartNew(ThreadLocalJob);
             }
-            if(Interlocked.Increment(ref numLocalScheduled) <= numToSchedule)
+            if (Interlocked.Increment(ref numLocalScheduled) <= numToSchedule)
             {
                 Task.Factory.StartNew(ThreadLocalJob);
             }
@@ -1113,11 +1156,11 @@ internal static class ThreadPoolTests
         }
         void GlobalJob(object _)
         {
-            if(Interlocked.Increment(ref numGlobalScheduled) <= numToSchedule)
+            if (Interlocked.Increment(ref numGlobalScheduled) <= numToSchedule)
             {
                 ThreadPool.QueueUserWorkItem(GlobalJob);
             }
-            if(Interlocked.Increment(ref numGlobalScheduled) <= numToSchedule)
+            if (Interlocked.Increment(ref numGlobalScheduled) <= numToSchedule)
             {
                 ThreadPool.QueueUserWorkItem(GlobalJob);
             }
@@ -1139,13 +1182,14 @@ internal static class ThreadPoolTests
         var expectedUICultureInfo = CultureInfo.CurrentUICulture;
         int count = 0;
         AutoResetEvent e0 = new AutoResetEvent(false);
-        for(int i = 0; i < Environment.ProcessorCount; ++i)
+        for (int i = 0; i < Environment.ProcessorCount; ++i)
         {
-            ThreadPool.QueueUserWorkItem( _ => {
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
                 CultureInfo.CurrentCulture = cultureInfo;
                 CultureInfo.CurrentUICulture = cultureInfo;
                 Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
-                if(Interlocked.Increment(ref count) == Environment.ProcessorCount)
+                if (Interlocked.Increment(ref count) == Environment.ProcessorCount)
                 {
                     e0.Set();
                 }
@@ -1154,13 +1198,14 @@ internal static class ThreadPoolTests
         e0.CheckedWait();
         // Run the test again to make sure we can reuse the threads.
         count = 0;
-        for(int i = 0; i < Environment.ProcessorCount; ++i)
+        for (int i = 0; i < Environment.ProcessorCount; ++i)
         {
-            ThreadPool.QueueUserWorkItem( _ => {
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
                 Assert.Equal(expectedCultureInfo, CultureInfo.CurrentCulture);
                 Assert.Equal(expectedUICultureInfo, CultureInfo.CurrentUICulture);
                 Assert.Equal(ThreadPriority.Normal, Thread.CurrentThread.Priority);
-                if(Interlocked.Increment(ref count) == Environment.ProcessorCount)
+                if (Interlocked.Increment(ref count) == Environment.ProcessorCount)
                 {
                     e0.Set();
                 }
@@ -1180,10 +1225,11 @@ internal static class ThreadPoolTests
             AutoResetEvent jobsQueued = new AutoResetEvent(false);
             int count = 0;
             ThreadPool.SetMaxThreads(minThreads, unusedMax);
-            for(int i = 0; i < minThreads + 1; ++i)
+            for (int i = 0; i < minThreads + 1; ++i)
             {
-                ThreadPool.QueueUserWorkItem( _ => {
-                    if(Interlocked.Increment(ref count) == minThreads + 1)
+                ThreadPool.QueueUserWorkItem(_ =>
+                {
+                    if (Interlocked.Increment(ref count) == minThreads + 1)
                     {
                         jobsQueued.Set();
                     }
@@ -1215,13 +1261,19 @@ internal static class WaitThreadTests
     {
         var e0 = new AutoResetEvent(false);
         var e1 = new AutoResetEvent(false);
-        ThreadPool.RegisterWaitForSingleObject(e0, (_, timedOut) =>
-        {
-            if(!timedOut)
+        ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, timedOut) =>
             {
-                e1.Set();
-            }
-        }, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+                if (!timedOut)
+                {
+                    e1.Set();
+                }
+            },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            true
+        );
         e0.Set();
         e1.CheckedWait();
     }
@@ -1231,13 +1283,19 @@ internal static class WaitThreadTests
     {
         var e0 = new AutoResetEvent(false);
         var e1 = new AutoResetEvent(false);
-        ThreadPool.RegisterWaitForSingleObject(e0, (_, timedOut) =>
-        {
-            if(timedOut)
+        ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, timedOut) =>
             {
-                e1.Set();
-            }
-        }, null, ThreadTestHelpers.ExpectedTimeoutMilliseconds, true);
+                if (timedOut)
+                {
+                    e1.Set();
+                }
+            },
+            null,
+            ThreadTestHelpers.ExpectedTimeoutMilliseconds,
+            true
+        );
         e1.CheckedWait();
     }
 
@@ -1246,10 +1304,16 @@ internal static class WaitThreadTests
     {
         var e0 = new AutoResetEvent(false);
         var e1 = new AutoResetEvent(false);
-        var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) =>
-        {
-            e1.Set();
-        }, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+        var registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, __) =>
+            {
+                e1.Set();
+            },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            true
+        );
         registeredWaitHandle.Unregister(null);
         Assert.False(e1.WaitOne(ThreadTestHelpers.ExpectedTimeoutMilliseconds));
     }
@@ -1259,10 +1323,16 @@ internal static class WaitThreadTests
     {
         var e0 = new AutoResetEvent(false);
         var e1 = new AutoResetEvent(false);
-        var registered = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) =>
-        {
-            e1.Set();
-        }, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, false);
+        var registered = ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, __) =>
+            {
+                e1.Set();
+            },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            false
+        );
         for (int i = 0; i < 4; ++i)
         {
             e0.Set();
@@ -1278,7 +1348,13 @@ internal static class WaitThreadTests
     {
         var e0 = new AutoResetEvent(false);
         var e1 = new AutoResetEvent(false);
-        var registered = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) => {}, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+        var registered = ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, __) => { },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            true
+        );
         registered.Unregister(e1);
         e1.CheckedWait();
     }
@@ -1287,10 +1363,18 @@ internal static class WaitThreadTests
     public static void CanRegisterMoreThan64Waits()
     {
         RegisteredWaitHandle[] handles = new RegisteredWaitHandle[65];
-        for(int i = 0; i < 65; ++i) {
-            handles[i] = ThreadPool.RegisterWaitForSingleObject(new AutoResetEvent(false), (_, __) => {}, null, -1, true);
+        for (int i = 0; i < 65; ++i)
+        {
+            handles[i] = ThreadPool.RegisterWaitForSingleObject(
+                new AutoResetEvent(false),
+                (_, __) => { },
+                null,
+                -1,
+                true
+            );
         }
-        for(int i = 0; i < 65; ++i) {
+        for (int i = 0; i < 65; ++i)
+        {
             handles[i].Unregister(null);
         }
     }
@@ -1300,13 +1384,19 @@ internal static class WaitThreadTests
     {
         object state = new object();
         AutoResetEvent e0 = new AutoResetEvent(false);
-        ThreadPool.RegisterWaitForSingleObject(new AutoResetEvent(true), (callbackState, _) =>
-        {
-            if(state == callbackState)
+        ThreadPool.RegisterWaitForSingleObject(
+            new AutoResetEvent(true),
+            (callbackState, _) =>
             {
-                e0.Set();
-            }
-        }, state, 0, true);
+                if (state == callbackState)
+                {
+                    e0.Set();
+                }
+            },
+            state,
+            0,
+            true
+        );
         e0.CheckedWait();
     }
 
@@ -1315,7 +1405,13 @@ internal static class WaitThreadTests
     public static void WaitWithLongerTimeoutThanWaitThreadCanStillTimeout()
     {
         AutoResetEvent e0 = new AutoResetEvent(false);
-        ThreadPool.RegisterWaitForSingleObject(new AutoResetEvent(false), (_, __) => e0.Set(), null, WaitThreadTimeoutTimeMs + 1000, true);
+        ThreadPool.RegisterWaitForSingleObject(
+            new AutoResetEvent(false),
+            (_, __) => e0.Set(),
+            null,
+            WaitThreadTimeoutTimeMs + 1000,
+            true
+        );
         Thread.Sleep(WaitThreadTimeoutTimeMs);
         e0.CheckedWait();
     }
@@ -1326,10 +1422,16 @@ internal static class WaitThreadTests
         AutoResetEvent e0 = new AutoResetEvent(false);
         AutoResetEvent e1 = new AutoResetEvent(false);
         AutoResetEvent e2 = new AutoResetEvent(false);
-        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) =>
-        {
-            e2.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
-        }, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, false);
+        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, __) =>
+            {
+                e2.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
+            },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            false
+        );
         e0.Set();
         Thread.Sleep(50);
         e0.Set();
@@ -1343,7 +1445,13 @@ internal static class WaitThreadTests
     public static void CallingUnregisterOnAutomaticallyUnregisteredHandleReturnsTrue()
     {
         AutoResetEvent e0 = new AutoResetEvent(false);
-        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) => {}, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, __) => { },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            true
+        );
         e0.Set();
         Thread.Sleep(ThreadTestHelpers.ExpectedTimeoutMilliseconds);
         Assert.True(handle.Unregister(null));
@@ -1353,7 +1461,13 @@ internal static class WaitThreadTests
     public static void EventSetAfterUnregisterNotObservedOnWaitThread()
     {
         AutoResetEvent e0 = new AutoResetEvent(false);
-        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) => {}, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, __) => { },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            true
+        );
         handle.Unregister(null);
         e0.Set();
         e0.CheckedWait();
@@ -1362,16 +1476,28 @@ internal static class WaitThreadTests
     [Fact]
     public static void BlockingUnregister()
     {
-        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(new AutoResetEvent(false), (_, __) => {}, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
+            new AutoResetEvent(false),
+            (_, __) => { },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            true
+        );
         handle.Unregister(new InvalidWaitHandle());
     }
 
     [Fact]
     public static void CanDisposeEventAfterUnblockingUnregister()
     {
-        using(var e0 = new AutoResetEvent(false))
+        using (var e0 = new AutoResetEvent(false))
         {
-            RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) => {}, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+            RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
+                e0,
+                (_, __) => { },
+                null,
+                ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+                true
+            );
             handle.Unregister(null);
         }
     }
@@ -1380,7 +1506,13 @@ internal static class WaitThreadTests
     public static void UnregisterEventSignaledWhenUnregisteredEvenIfAutoUnregistered()
     {
         var e0 = new AutoResetEvent(false);
-        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) => {}, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, __) => { },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            true
+        );
         e0.Set();
         Thread.Sleep(50); // Ensure the callback has happened
         var e1 = new AutoResetEvent(false);
@@ -1393,11 +1525,17 @@ internal static class WaitThreadTests
     {
         bool callbackComplete = false;
         var e0 = new AutoResetEvent(false);
-        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(e0, (_, __) =>
-        {
-            Thread.Sleep(300);
-            callbackComplete = true;
-        }, null, ThreadTestHelpers.UnexpectedTimeoutMilliseconds, true);
+        RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
+            e0,
+            (_, __) =>
+            {
+                Thread.Sleep(300);
+                callbackComplete = true;
+            },
+            null,
+            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+            true
+        );
         e0.Set();
         Thread.Sleep(100); // Give the wait thread time to process removals.
         handle.Unregister(new InvalidWaitHandle());
@@ -1421,37 +1559,39 @@ internal static class ThreadTestHelpers
         return CreateGuardedThread(out checkForThreadErrors, out waitForThread, start);
     }
 
-    public static Thread CreateGuardedThread(out Action checkForThreadErrors, out Action waitForThread, Action<object> start)
+    public static Thread CreateGuardedThread(
+        out Action checkForThreadErrors,
+        out Action waitForThread,
+        Action<object> start
+    )
     {
         Exception backgroundEx = null;
-        var t =
-            new Thread(parameter =>
+        var t = new Thread(parameter =>
+        {
+            try
             {
-                try
-                {
-                    start(parameter);
-                }
-                catch (Exception ex)
-                {
-                    backgroundEx = ex;
-                    Interlocked.MemoryBarrier();
-                }
-            });
-        Action localCheckForThreadErrors = checkForThreadErrors = // cannot use ref or out parameters in lambda
-            () =>
+                start(parameter);
+            }
+            catch (Exception ex)
             {
+                backgroundEx = ex;
                 Interlocked.MemoryBarrier();
-                if (backgroundEx != null)
-                {
-                    throw new AggregateException(backgroundEx);
-                }
-            };
-        waitForThread =
-            () =>
+            }
+        });
+        Action localCheckForThreadErrors = checkForThreadErrors = // cannot use ref or out parameters in lambda
+        () =>
+        {
+            Interlocked.MemoryBarrier();
+            if (backgroundEx != null)
             {
-                Assert.True(t.Join(UnexpectedThreadTimeoutMilliseconds));
-                localCheckForThreadErrors();
-            };
+                throw new AggregateException(backgroundEx);
+            }
+        };
+        waitForThread = () =>
+        {
+            Assert.True(t.Join(UnexpectedThreadTimeoutMilliseconds));
+            localCheckForThreadErrors();
+        };
         return t;
     }
 
@@ -1481,9 +1621,7 @@ internal static class ThreadTestHelpers
     }
 }
 
-internal sealed class InvalidWaitHandle : WaitHandle
-{
-}
+internal sealed class InvalidWaitHandle : WaitHandle { }
 
 internal sealed class Stopwatch
 {
@@ -1503,7 +1641,8 @@ internal sealed class Stopwatch
         _isStopped = true;
     }
 
-    public long ElapsedMilliseconds => (_isStopped ? _endTimeMs : Environment.TickCount) - _startTimeMs;
+    public long ElapsedMilliseconds =>
+        (_isStopped ? _endTimeMs : Environment.TickCount) - _startTimeMs;
 }
 
 internal static class Assert
@@ -1524,7 +1663,8 @@ internal static class Assert
         throw new AssertionFailureException();
     }
 
-    public static void Same<T>(T expected, T actual) where T : class
+    public static void Same<T>(T expected, T actual)
+        where T : class
     {
         if (expected == actual)
             return;
@@ -1548,7 +1688,8 @@ internal static class Assert
         throw new AssertionFailureException();
     }
 
-    public static void Throws<T>(Action action) where T : Exception
+    public static void Throws<T>(Action action)
+        where T : Exception
     {
         // TODO: Enable Assert.Throws<T> tests. There currently seem to be some reliability issues surrounding exceptions on Unix.
         //try
@@ -1590,23 +1731,15 @@ internal static class Assert
 
 internal class AssertionFailureException : Exception
 {
-    public AssertionFailureException()
-    {
-    }
+    public AssertionFailureException() { }
 
-    public AssertionFailureException(string message) : base(message)
-    {
-    }
+    public AssertionFailureException(string message)
+        : base(message) { }
 
-    public AssertionFailureException(Exception innerException) : base(null, innerException)
-    {
-    }
+    public AssertionFailureException(Exception innerException)
+        : base(null, innerException) { }
 }
 
-internal class FactAttribute : Attribute
-{
-}
+internal class FactAttribute : Attribute { }
 
-internal class OuterLoopAttribute : Attribute
-{
-}
+internal class OuterLoopAttribute : Attribute { }

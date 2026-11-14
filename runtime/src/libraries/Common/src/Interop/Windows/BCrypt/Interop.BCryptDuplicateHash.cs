@@ -29,6 +29,7 @@ internal static partial class Interop
             out SafeBCryptHashHandle phNewHash,
             IntPtr pbHashObject,
             int cbHashObject,
-            int dwFlags);
+            int dwFlags
+        );
     }
 }

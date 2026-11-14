@@ -21,57 +21,53 @@ public class RateLimitingMiddlewareTests
         var options = CreateOptionsAccessor();
         options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>();
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new RateLimitingMiddleware(
-                    null,
-                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-                    options,
-                    Mock.Of<IServiceProvider>(),
-                    new RateLimitingMetrics(new TestMeterFactory())
-                )
+        Assert.Throws<ArgumentNullException>(() =>
+            new RateLimitingMiddleware(
+                null,
+                new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                options,
+                Mock.Of<IServiceProvider>(),
+                new RateLimitingMetrics(new TestMeterFactory())
+            )
         );
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new RateLimitingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    null,
-                    options,
-                    Mock.Of<IServiceProvider>(),
-                    new RateLimitingMetrics(new TestMeterFactory())
-                )
+        Assert.Throws<ArgumentNullException>(() =>
+            new RateLimitingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                null,
+                options,
+                Mock.Of<IServiceProvider>(),
+                new RateLimitingMetrics(new TestMeterFactory())
+            )
         );
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new RateLimitingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-                    options,
-                    null,
-                    new RateLimitingMetrics(new TestMeterFactory())
-                )
+        Assert.Throws<ArgumentNullException>(() =>
+            new RateLimitingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                options,
+                null,
+                new RateLimitingMetrics(new TestMeterFactory())
+            )
         );
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new RateLimitingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-                    options,
-                    Mock.Of<IServiceProvider>(),
-                    null
-                )
+        Assert.Throws<ArgumentNullException>(() =>
+            new RateLimitingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                options,
+                Mock.Of<IServiceProvider>(),
+                null
+            )
         );
     }
 
@@ -265,17 +261,14 @@ public class RateLimitingMiddlewareTests
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
         var name = "myEndpoint";
-        options.Value.AddFixedWindowLimiter(
-            name,
-            options =>
-            {
-                options.PermitLimit = 1;
-                options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-                options.QueueLimit = 0;
-                options.Window = TimeSpan.FromSeconds(10);
-                options.AutoReplenishment = false;
-            }
-        );
+        options.Value.AddFixedWindowLimiter(name, options =>
+        {
+            options.PermitLimit = 1;
+            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+            options.QueueLimit = 0;
+            options.Window = TimeSpan.FromSeconds(10);
+            options.AutoReplenishment = false;
+        });
         options.Value.OnRejected = (context, token) =>
         {
             onRejectedInvoked = true;
@@ -527,32 +520,20 @@ public class RateLimitingMiddlewareTests
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
         // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
-        options.Value.AddPolicy<string>(
-            endpointName1,
-            key =>
+        options.Value.AddPolicy<string>(endpointName1, key =>
+        {
+            return new RateLimitPartition<string>(duplicateKey, partitionKey =>
             {
-                return new RateLimitPartition<string>(
-                    duplicateKey,
-                    partitionKey =>
-                    {
-                        return new TestRateLimiter(false);
-                    }
-                );
-            }
-        );
-        options.Value.AddPolicy<string>(
-            endpointName2,
-            key =>
+                return new TestRateLimiter(false);
+            });
+        });
+        options.Value.AddPolicy<string>(endpointName2, key =>
+        {
+            return new RateLimitPartition<string>(duplicateKey, partitionKey =>
             {
-                return new RateLimitPartition<string>(
-                    duplicateKey,
-                    partitionKey =>
-                    {
-                        return new TestRateLimiter(true);
-                    }
-                );
-            }
-        );
+                return new TestRateLimiter(true);
+            });
+        });
         options.Value.OnRejected = (context, token) =>
         {
             globalOnRejectedInvoked = true;

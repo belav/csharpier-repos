@@ -22,7 +22,13 @@ namespace System.ServiceModel.Channels
         Uri uri;
         Uri callbackAddress;
 
-        public ClientContextProtocol(ContextExchangeMechanism contextExchangeMechanism, Uri uri, IChannel owner, Uri callbackAddress, bool contextManagementEnabled)
+        public ClientContextProtocol(
+            ContextExchangeMechanism contextExchangeMechanism,
+            Uri uri,
+            IChannel owner,
+            Uri callbackAddress,
+            bool contextManagementEnabled
+        )
             : base(contextExchangeMechanism)
         {
             if (contextExchangeMechanism == ContextExchangeMechanism.HttpCookie)
@@ -39,26 +45,19 @@ namespace System.ServiceModel.Channels
 
         protected Uri Uri
         {
-            get
-            {
-                return this.uri;
-            }
+            get { return this.uri; }
         }
 
         bool IContextManager.Enabled
         {
-            get
-            {
-                return this.contextManagementEnabled;
-            }
+            get { return this.contextManagementEnabled; }
             set
             {
                 if (this.owner.State != CommunicationState.Created)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                        SR.GetString(SR.ChannelIsOpen)
-                        ));
+                        new InvalidOperationException(SR.GetString(SR.ChannelIsOpen))
+                    );
                 }
                 this.contextManagementEnabled = value;
             }
@@ -69,9 +68,8 @@ namespace System.ServiceModel.Channels
             if (!this.contextManagementEnabled)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                    SR.GetString(SR.ContextManagementNotEnabled)
-                    ));
+                    new InvalidOperationException(SR.GetString(SR.ContextManagementNotEnabled))
+                );
             }
             return new Dictionary<string, string>(this.GetCurrentContext().Context);
         }
@@ -106,9 +104,23 @@ namespace System.ServiceModel.Channels
             }
 
             // verify that the callback context was not sent on an incoming message
-            if (message.Headers.FindHeader(CallbackContextMessageHeader.CallbackContextHeaderName, CallbackContextMessageHeader.CallbackContextHeaderNamespace) != -1)
+            if (
+                message.Headers.FindHeader(
+                    CallbackContextMessageHeader.CallbackContextHeaderName,
+                    CallbackContextMessageHeader.CallbackContextHeaderNamespace
+                ) != -1
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new ProtocolException(SR.GetString(SR.CallbackContextNotExpectedOnIncomingMessageAtClient, message.Headers.Action, CallbackContextMessageHeader.CallbackContextHeaderName, CallbackContextMessageHeader.CallbackContextHeaderNamespace)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new ProtocolException(
+                        SR.GetString(
+                            SR.CallbackContextNotExpectedOnIncomingMessageAtClient,
+                            message.Headers.Action,
+                            CallbackContextMessageHeader.CallbackContextHeaderName,
+                            CallbackContextMessageHeader.CallbackContextHeaderNamespace
+                        )
+                    )
+                );
             }
         }
 
@@ -126,8 +138,8 @@ namespace System.ServiceModel.Channels
                 if (this.contextManagementEnabled)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                        SR.GetString(SR.InvalidMessageContext)));
+                        new InvalidOperationException(SR.GetString(SR.InvalidMessageContext))
+                    );
                 }
             }
 
@@ -166,14 +178,23 @@ namespace System.ServiceModel.Channels
                 {
                     callbackAddress = callbackContext.CreateCallbackAddress(this.callbackAddress);
                 }
-                // add the CallbackContextMessageHeader only if we have a valid CallbackAddress 
+                // add the CallbackContextMessageHeader only if we have a valid CallbackAddress
                 if (callbackAddress != null)
                 {
                     if (this.ContextExchangeMechanism != ContextExchangeMechanism.ContextSoapHeader)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CallbackContextOnlySupportedInSoap)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.CallbackContextOnlySupportedInSoap)
+                            )
+                        );
                     }
-                    message.Headers.Add(new CallbackContextMessageHeader(callbackAddress, message.Version.Addressing));
+                    message.Headers.Add(
+                        new CallbackContextMessageHeader(
+                            callbackAddress,
+                            message.Version.Addressing
+                        )
+                    );
                 }
             }
         }
@@ -193,7 +214,10 @@ namespace System.ServiceModel.Channels
             {
                 lock (this.cookieContainer)
                 {
-                    this.cookieContainer.SetCookies(this.Uri, GetCookieHeaderFromContext(newContext));
+                    this.cookieContainer.SetCookies(
+                        this.Uri,
+                        GetCookieHeaderFromContext(newContext)
+                    );
                 }
             }
         }
@@ -207,19 +231,22 @@ namespace System.ServiceModel.Channels
             if (!this.contextManagementEnabled)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                    SR.GetString(SR.ContextManagementNotEnabled)
-                    ));
+                    new InvalidOperationException(SR.GetString(SR.ContextManagementNotEnabled))
+                );
             }
 
             //Cannot reset context after initialized in server case.
-            if ((isServerIssued && !this.contextInitialized) ||
-                (this.owner.State == CommunicationState.Created))
+            if (
+                (isServerIssued && !this.contextInitialized)
+                || (this.owner.State == CommunicationState.Created)
+            )
             {
                 lock (this.thisLock)
                 {
-                    if ((isServerIssued && !this.contextInitialized) ||
-                        (this.owner.State == CommunicationState.Created))
+                    if (
+                        (isServerIssued && !this.contextInitialized)
+                        || (this.owner.State == CommunicationState.Created)
+                    )
                     {
                         this.context = newContext;
                         this.contextInitialized = true;
@@ -231,20 +258,16 @@ namespace System.ServiceModel.Channels
             if (isServerIssued)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(
-                    SR.GetString(SR.InvalidContextReceived)
-                    ));
+                    new ProtocolException(SR.GetString(SR.InvalidContextReceived))
+                );
             }
             else
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                    SR.GetString(SR.CachedContextIsImmutable)
-                    ));
+                    new InvalidOperationException(SR.GetString(SR.CachedContextIsImmutable))
+                );
             }
-
         }
-
 
         string GetCookieHeaderFromContext(ContextMessageProperty contextMessageProperty)
         {
@@ -254,7 +277,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                return HttpCookieToolbox.EncodeContextAsHttpSetCookieHeader(contextMessageProperty, this.Uri);
+                return HttpCookieToolbox.EncodeContextAsHttpSetCookieHeader(
+                    contextMessageProperty,
+                    this.Uri
+                );
             }
         }
 
@@ -267,7 +293,11 @@ namespace System.ServiceModel.Channels
                 lock (this.cookieContainer)
                 {
                     // This is to allow for the possibility of that the cookie has expired
-                    if (this.cookieContainer.GetCookies(this.Uri)[HttpCookieToolbox.ContextHttpCookieName] == null)
+                    if (
+                        this.cookieContainer.GetCookies(this.Uri)[
+                            HttpCookieToolbox.ContextHttpCookieName
+                        ] == null
+                    )
                     {
                         result = ContextMessageProperty.Empty;
                     }
@@ -303,12 +333,18 @@ namespace System.ServiceModel.Channels
                             if (!string.IsNullOrEmpty(setCookieHeader))
                             {
                                 this.cookieContainer.SetCookies(this.Uri, setCookieHeader);
-                                HttpCookieToolbox.TryCreateFromHttpCookieHeader(setCookieHeader, out newContext);
+                                HttpCookieToolbox.TryCreateFromHttpCookieHeader(
+                                    setCookieHeader,
+                                    out newContext
+                                );
                             }
 
                             if (!this.contextManagementEnabled)
                             {
-                                this.cookieContainer.SetCookies(this.Uri, HttpCookieToolbox.RemoveContextHttpCookieHeader);
+                                this.cookieContainer.SetCookies(
+                                    this.Uri,
+                                    HttpCookieToolbox.RemoveContextHttpCookieHeader
+                                );
                             }
                         }
                     }
@@ -319,19 +355,22 @@ namespace System.ServiceModel.Channels
 
         ContextMessageProperty OnReceiveSoapContextHeader(Message message)
         {
-            ContextMessageProperty messageProperty = ContextMessageHeader.GetContextFromHeaderIfExists(message);
+            ContextMessageProperty messageProperty =
+                ContextMessageHeader.GetContextFromHeaderIfExists(message);
             if (messageProperty != null)
             {
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
-                        TraceCode.ContextProtocolContextRetrievedFromMessage, SR.GetString(SR.TraceCodeContextProtocolContextRetrievedFromMessage),
-                        this);
+                    TraceUtility.TraceEvent(
+                        System.Diagnostics.TraceEventType.Verbose,
+                        TraceCode.ContextProtocolContextRetrievedFromMessage,
+                        SR.GetString(SR.TraceCodeContextProtocolContextRetrievedFromMessage),
+                        this
+                    );
                 }
             }
             return messageProperty;
         }
-
 
         void OnSendHttpCookies(Message message, ContextMessageProperty context)
         {
@@ -356,7 +395,10 @@ namespace System.ServiceModel.Channels
                     {
                         this.cookieContainer.SetCookies(this.Uri, contextCookieHeader);
                         cookieHeader = this.cookieContainer.GetCookieHeader(this.Uri);
-                        this.cookieContainer.SetCookies(this.Uri, HttpCookieToolbox.RemoveContextHttpCookieHeader);
+                        this.cookieContainer.SetCookies(
+                            this.Uri,
+                            HttpCookieToolbox.RemoveContextHttpCookieHeader
+                        );
                     }
                 }
             }
@@ -365,7 +407,9 @@ namespace System.ServiceModel.Channels
             {
                 object tmpProperty;
                 HttpRequestMessageProperty property = null;
-                if (message.Properties.TryGetValue(HttpRequestMessageProperty.Name, out tmpProperty))
+                if (
+                    message.Properties.TryGetValue(HttpRequestMessageProperty.Name, out tmpProperty)
+                )
                 {
                     property = tmpProperty as HttpRequestMessageProperty;
                 }

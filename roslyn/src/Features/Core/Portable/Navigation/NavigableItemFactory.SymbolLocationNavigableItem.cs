@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Navigation
             Solution solution,
             ISymbol symbol,
             Location location,
-            ImmutableArray<TaggedText>? displayTaggedParts) : INavigableItem
+            ImmutableArray<TaggedText>? displayTaggedParts
+        ) : INavigableItem
         {
             private readonly Solution _solution = solution;
             private readonly ISymbol _symbol = symbol;
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Navigation
 
             public bool DisplayFileLocation => true;
 
-            public ImmutableArray<TaggedText> DisplayTaggedParts { get; } = displayTaggedParts.GetValueOrDefault();
+            public ImmutableArray<TaggedText> DisplayTaggedParts { get; } =
+                displayTaggedParts.GetValueOrDefault();
 
             public Glyph Glyph => _symbol.GetGlyph();
 
@@ -47,11 +49,16 @@ namespace Microsoft.CodeAnalysis.Navigation
                         ref _lazyDocument,
                         static self =>
                         {
-                            return (self._location.IsInSource && self._solution.GetDocument(self._location.SourceTree) is { } document)
+                            return (
+                                self._location.IsInSource
+                                && self._solution.GetDocument(self._location.SourceTree)
+                                    is { } document
+                            )
                                 ? INavigableItem.NavigableDocument.FromDocument(document)
                                 : null;
                         },
-                        this);
+                        this
+                    );
                 }
             }
 
@@ -59,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Navigation
 
             public bool IsStale => false;
 
-            public ImmutableArray<INavigableItem> ChildItems => ImmutableArray<INavigableItem>.Empty;
+            public ImmutableArray<INavigableItem> ChildItems =>
+                ImmutableArray<INavigableItem>.Empty;
         }
     }
 }

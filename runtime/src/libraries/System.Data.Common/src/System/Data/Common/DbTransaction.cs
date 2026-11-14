@@ -8,7 +8,8 @@ namespace System.Data.Common
 {
     public abstract class DbTransaction : MarshalByRefObject, IDbTransaction, IAsyncDisposable
     {
-        protected DbTransaction() : base() { }
+        protected DbTransaction()
+            : base() { }
 
         public DbConnection? Connection => DbConnection;
 
@@ -91,7 +92,10 @@ namespace System.Data.Common
         /// An optional token to cancel the asynchronous operation. The default value is <see cref="CancellationToken.None" />.
         /// </param>
         /// <returns>A <see cref="Task " /> representing the asynchronous operation.</returns>
-        public virtual Task SaveAsync(string savepointName, CancellationToken cancellationToken = default)
+        public virtual Task SaveAsync(
+            string savepointName,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -117,7 +121,10 @@ namespace System.Data.Common
         /// An optional token to cancel the asynchronous operation. The default value is <see cref="CancellationToken.None" />.
         /// </param>
         /// <returns>A <see cref="Task " /> representing the asynchronous operation.</returns>
-        public virtual Task RollbackAsync(string savepointName, CancellationToken cancellationToken = default)
+        public virtual Task RollbackAsync(
+            string savepointName,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -144,7 +151,10 @@ namespace System.Data.Common
         /// An optional token to cancel the asynchronous operation. The default value is <see cref="CancellationToken.None" />.
         /// </param>
         /// <returns>A <see cref="Task " /> representing the asynchronous operation.</returns>
-        public virtual Task ReleaseAsync(string savepointName, CancellationToken cancellationToken = default)
+        public virtual Task ReleaseAsync(
+            string savepointName,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -180,7 +190,7 @@ namespace System.Data.Common
         /// reclaim some resources before the transaction ends.
         /// </summary>
         /// <param name="savepointName">The name of the savepoint to release.</param>
-        public virtual void Release(string savepointName) {}
+        public virtual void Release(string savepointName) { }
 
         #endregion
     }

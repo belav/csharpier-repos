@@ -14,11 +14,19 @@ using Microsoft.Internal.Web.Utils;
 
 namespace System.Web.Helpers
 {
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Collection is not an appropriate suffix for this class")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "Collection is not an appropriate suffix for this class"
+    )]
     public class WebGridRow : DynamicObject, IEnumerable<object>
     {
         private const string RowIndexMemberName = "ROW";
-        private const BindingFlags BindFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase;
+        private const BindingFlags BindFlags =
+            BindingFlags.Public
+            | BindingFlags.Instance
+            | BindingFlags.Static
+            | BindingFlags.IgnoreCase;
 
         private WebGrid _grid;
         private IDynamicMetaObjectProvider _dynamic;
@@ -50,13 +58,21 @@ namespace System.Web.Helpers
             {
                 if (String.IsNullOrEmpty(name))
                 {
-                    throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                    throw new ArgumentException(
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "name"
+                    );
                 }
                 object value = null;
                 if (!TryGetMember(name, out value))
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                                      HelpersResources.WebGrid_ColumnNotFound, name));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            HelpersResources.WebGrid_ColumnNotFound,
+                            name
+                        )
+                    );
                 }
                 return value;
             }
@@ -97,12 +113,22 @@ namespace System.Web.Helpers
             return WebGridRenderer.GridLink(_grid, GetSelectUrl(), text);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "review: I think a method is more appropriate here")]
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "Strings are easier for Plan9 developer to work with")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "review: I think a method is more appropriate here"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "Strings are easier for Plan9 developer to work with"
+        )]
         public string GetSelectUrl()
         {
             NameValueCollection queryString = new NameValueCollection(1);
-            queryString[WebGrid.SelectionFieldName] = (_rowIndex + 1L).ToString(CultureInfo.CurrentCulture);
+            queryString[WebGrid.SelectionFieldName] = (_rowIndex + 1L).ToString(
+                CultureInfo.CurrentCulture
+            );
             return WebGrid.GetPath(queryString);
         }
 
@@ -135,7 +161,10 @@ namespace System.Web.Helpers
             }
 
             // Try to evaluate the dynamic member based on the name
-            if (_dynamic != null && DynamicHelper.TryGetMemberValue(_dynamic, memberName, out result))
+            if (
+                _dynamic != null
+                && DynamicHelper.TryGetMemberValue(_dynamic, memberName, out result)
+            )
             {
                 return true;
             }

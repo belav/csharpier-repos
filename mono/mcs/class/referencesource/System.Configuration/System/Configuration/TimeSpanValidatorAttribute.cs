@@ -5,24 +5,24 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Configuration.Internal;
 using System.Collections;
-using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration.Internal;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
-using System.Xml;
-using System.Globalization;
-using System.ComponentModel;
 using System.Security;
+using System.Security.Permissions;
 using System.Text;
+using System.Xml;
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class TimeSpanValidatorAttribute : ConfigurationValidatorAttribute {
-
+    public sealed class TimeSpanValidatorAttribute : ConfigurationValidatorAttribute
+    {
         private TimeSpan _min = TimeSpan.MinValue;
         private TimeSpan _max = TimeSpan.MaxValue;
         private bool _excludeRange = false;
@@ -30,64 +30,65 @@ namespace System.Configuration {
         public const string TimeSpanMinValue = "-10675199.02:48:05.4775808";
         public const string TimeSpanMaxValue = "10675199.02:48:05.4775807";
 
-        public TimeSpanValidatorAttribute() {
+        public TimeSpanValidatorAttribute() { }
+
+        public override ConfigurationValidatorBase ValidatorInstance
+        {
+            get { return new TimeSpanValidator(_min, _max, _excludeRange); }
         }
 
-        public override ConfigurationValidatorBase ValidatorInstance {
-            get {
-                return new TimeSpanValidator(_min, _max, _excludeRange);
-            }
+        public TimeSpan MinValue
+        {
+            get { return _min; }
         }
 
-        public TimeSpan MinValue {
-            get {
-                return _min;
-            }
+        public TimeSpan MaxValue
+        {
+            get { return _max; }
         }
 
-        public TimeSpan MaxValue {
-            get {
-                return _max;
-            }
-        }
-
-        public string MinValueString {
-            get {
-                return _min.ToString();
-            }
-            set {
+        public string MinValueString
+        {
+            get { return _min.ToString(); }
+            set
+            {
                 TimeSpan timeValue = TimeSpan.Parse(value, CultureInfo.InvariantCulture);
 
-                if (_max < timeValue) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.Validator_min_greater_than_max));
+                if (_max < timeValue)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.Validator_min_greater_than_max)
+                    );
                 }
 
                 _min = timeValue;
             }
         }
 
-        public string MaxValueString {
-            get {
-                return _max.ToString();
-            }
-            set {
+        public string MaxValueString
+        {
+            get { return _max.ToString(); }
+            set
+            {
                 TimeSpan timeValue = TimeSpan.Parse(value, CultureInfo.InvariantCulture);
 
-                if (_min > timeValue) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.Validator_min_greater_than_max));
+                if (_min > timeValue)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.Validator_min_greater_than_max)
+                    );
                 }
 
                 _max = timeValue;
             }
         }
 
-        public bool ExcludeRange {
-            get {
-                return _excludeRange;
-            }
-            set {
-                _excludeRange = value;
-            }
+        public bool ExcludeRange
+        {
+            get { return _excludeRange; }
+            set { _excludeRange = value; }
         }
     }
 }

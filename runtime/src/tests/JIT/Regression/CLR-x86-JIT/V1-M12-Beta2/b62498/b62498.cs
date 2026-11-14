@@ -3,13 +3,13 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
 
     public class BB
     {
-
         public static String Method3()
         {
             try

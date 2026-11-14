@@ -7,26 +7,27 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
-using System.Data.Common.Utils;
-using System.Data.Objects;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data.Common;
-using System.Text;
+using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
+using System.Data.Objects;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
+
 namespace System.Data.Mapping.Update.Internal
 {
     /// <summary>
-    /// requires: for structural types, member values are ordinally aligned with the members of the 
+    /// requires: for structural types, member values are ordinally aligned with the members of the
     /// structural type.
-    /// 
+    ///
     /// Stores a 'row' (or element within a row) being propagated through the update pipeline, including
     /// markup information and metadata. Internally, we maintain several different classes so that we only
     /// store the necessary state.
-    /// 
+    ///
     /// - StructuralValue (complex types, entities, and association end keys): type and member values,
     ///   one version for modified structural values and one version for unmodified structural values
     ///   (a structural type is modified if its _type_ is changed, not its values
@@ -46,9 +47,7 @@ namespace System.Data.Mapping.Update.Internal
     {
         #region Constructors
         // private constructor: only nested classes may derive from propagator result
-        private PropagatorResult()
-        {
-        }
+        private PropagatorResult() { }
         #endregion
 
         #region Fields
@@ -61,7 +60,7 @@ namespace System.Data.Mapping.Update.Internal
         /// Gets a value indicating whether this result is null.
         /// </summary>
         internal abstract bool IsNull { get; }
-        
+
         /// <summary>
         /// Gets a value indicating whether this is a simple (scalar) or complex
         /// structural) result.
@@ -71,9 +70,9 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Gets flags describing the behaviors for this element.
         /// </summary>
-        internal virtual PropagatorFlags PropagatorFlags 
+        internal virtual PropagatorFlags PropagatorFlags
         {
-            get { return PropagatorFlags.NoFlags; } 
+            get { return PropagatorFlags.NoFlags; }
         }
 
         /// <summary>
@@ -136,11 +135,15 @@ namespace System.Data.Mapping.Update.Internal
         /// Returns simple value stored in this result. Only valid when <see cref="IsSimple" /> is
         /// true.
         /// </summary>
-        /// 
+        ///
         /// <returns>Concrete value.</returns>
         internal virtual object GetSimpleValue()
         {
-            throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid, 0, "PropagatorResult.GetSimpleValue");
+            throw EntityUtil.InternalError(
+                EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid,
+                0,
+                "PropagatorResult.GetSimpleValue"
+            );
         }
 
         /// <summary>
@@ -150,7 +153,11 @@ namespace System.Data.Mapping.Update.Internal
         /// <returns>Nested result.</returns>
         internal virtual PropagatorResult GetMemberValue(int ordinal)
         {
-            throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid, 0, "PropagatorResult.GetMemberValue");
+            throw EntityUtil.InternalError(
+                EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid,
+                0,
+                "PropagatorResult.GetMemberValue"
+            );
         }
 
         /// <summary>
@@ -170,7 +177,11 @@ namespace System.Data.Mapping.Update.Internal
         /// <returns>Values of all structural members.</returns>
         internal virtual PropagatorResult[] GetMemberValues()
         {
-            throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid, 0, "PropagatorResult.GetMembersValues");
+            throw EntityUtil.InternalError(
+                EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid,
+                0,
+                "PropagatorResult.GetMembersValues"
+            );
         }
 
         /// <summary>
@@ -187,7 +198,11 @@ namespace System.Data.Mapping.Update.Internal
         /// <returns>Copy of this result with new value.</returns>
         internal virtual PropagatorResult ReplicateResultWithNewValue(object value)
         {
-            throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid, 0, "PropagatorResult.ReplicateResultWithNewValue");
+            throw EntityUtil.InternalError(
+                EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid,
+                0,
+                "PropagatorResult.ReplicateResultWithNewValue"
+            );
         }
 
         /// <summary>
@@ -210,9 +225,12 @@ namespace System.Data.Mapping.Update.Internal
         /// <returns>Merged result.</returns>
         internal virtual PropagatorResult Merge(KeyManager keyManager, PropagatorResult other)
         {
-            throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid, 0, "PropagatorResult.Merge");
+            throw EntityUtil.InternalError(
+                EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid,
+                0,
+                "PropagatorResult.Merge"
+            );
         }
-
 
 #if DEBUG
         public override string ToString()
@@ -224,11 +242,17 @@ namespace System.Data.Mapping.Update.Internal
             }
             if (NullIdentifier != Identifier)
             {
-                builder.Append("id").Append(Identifier.ToString(CultureInfo.InvariantCulture)).Append(":");
+                builder
+                    .Append("id")
+                    .Append(Identifier.ToString(CultureInfo.InvariantCulture))
+                    .Append(":");
             }
             if (NullOrdinal != RecordOrdinal)
             {
-                builder.Append("ord").Append(RecordOrdinal.ToString(CultureInfo.InvariantCulture)).Append(":");
+                builder
+                    .Append("ord")
+                    .Append(RecordOrdinal.ToString(CultureInfo.InvariantCulture))
+                    .Append(":");
             }
             if (IsSimple)
             {
@@ -242,12 +266,28 @@ namespace System.Data.Mapping.Update.Internal
                 }
                 builder.Append("{");
                 bool first = true;
-                foreach (KeyValuePair<EdmMember, PropagatorResult> memberValue in Helper.PairEnumerations(
-                    TypeHelpers.GetAllStructuralMembers(this.StructuralType), GetMemberValues()))
+                foreach (
+                    KeyValuePair<
+                        EdmMember,
+                        PropagatorResult
+                    > memberValue in Helper.PairEnumerations(
+                        TypeHelpers.GetAllStructuralMembers(this.StructuralType),
+                        GetMemberValues()
+                    )
+                )
                 {
-                    if (first) { first = false; }
-                    else { builder.Append(", "); }
-                    builder.Append(memberValue.Key.Name).Append("=").Append(memberValue.Value.ToString());
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        builder.Append(", ");
+                    }
+                    builder
+                        .Append(memberValue.Key.Name)
+                        .Append("=")
+                        .Append(memberValue.Value.ToString());
                 }
                 builder.Append("}");
             }
@@ -285,11 +325,11 @@ namespace System.Data.Mapping.Update.Internal
 
             internal override bool IsNull
             {
-                get 
+                get
                 {
                     // The result is null if it is not associated with an identifier and
                     // the value provided by the user is also null.
-                    return NullIdentifier == this.Identifier && DBNull.Value == m_value; 
+                    return NullIdentifier == this.Identifier && DBNull.Value == m_value;
                 }
             }
 
@@ -314,13 +354,24 @@ namespace System.Data.Mapping.Update.Internal
             }
         }
 
-        internal static PropagatorResult CreateServerGenSimpleValue(PropagatorFlags flags, object value, CurrentValueRecord record, int recordOrdinal)
+        internal static PropagatorResult CreateServerGenSimpleValue(
+            PropagatorFlags flags,
+            object value,
+            CurrentValueRecord record,
+            int recordOrdinal
+        )
         {
             return new ServerGenSimpleValue(flags, value, record, recordOrdinal);
         }
+
         private class ServerGenSimpleValue : SimpleValue
         {
-            internal ServerGenSimpleValue(PropagatorFlags flags, object value, CurrentValueRecord record, int recordOrdinal)
+            internal ServerGenSimpleValue(
+                PropagatorFlags flags,
+                object value,
+                CurrentValueRecord record,
+                int recordOrdinal
+            )
                 : base(flags, value)
             {
                 Debug.Assert(null != record);
@@ -353,14 +404,25 @@ namespace System.Data.Mapping.Update.Internal
             }
         }
 
-        internal static PropagatorResult CreateKeyValue(PropagatorFlags flags, object value, IEntityStateEntry stateEntry, int identifier)
+        internal static PropagatorResult CreateKeyValue(
+            PropagatorFlags flags,
+            object value,
+            IEntityStateEntry stateEntry,
+            int identifier
+        )
         {
             return new KeyValue(flags, value, stateEntry, identifier, null);
         }
 
         private class KeyValue : SimpleValue
         {
-            internal KeyValue(PropagatorFlags flags, object value, IEntityStateEntry stateEntry, int identifier, KeyValue next)
+            internal KeyValue(
+                PropagatorFlags flags,
+                object value,
+                IEntityStateEntry stateEntry,
+                int identifier,
+                KeyValue next
+            )
                 : base(flags, value)
             {
                 Debug.Assert(null != stateEntry);
@@ -395,10 +457,7 @@ namespace System.Data.Mapping.Update.Internal
 
             internal override PropagatorResult Next
             {
-                get
-                {
-                    return m_next;
-                }
+                get { return m_next; }
             }
 
             internal override PropagatorResult ReplicateResultWithNewFlags(PropagatorFlags flags)
@@ -418,7 +477,13 @@ namespace System.Data.Mapping.Update.Internal
                     // push the next value to the end of the linked list
                     next = m_next.ReplicateResultWithNewNext(next);
                 }
-                return new KeyValue(this.PropagatorFlags, m_value, m_stateEntry, m_identifier, next);
+                return new KeyValue(
+                    this.PropagatorFlags,
+                    m_value,
+                    m_stateEntry,
+                    m_identifier,
+                    next
+                );
             }
 
             internal override PropagatorResult Merge(KeyManager keyManager, PropagatorResult other)
@@ -426,7 +491,11 @@ namespace System.Data.Mapping.Update.Internal
                 KeyValue otherKey = other as KeyValue;
                 if (null == otherKey)
                 {
-                    EntityUtil.InternalError(EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid, 0, "KeyValue.Merge");
+                    EntityUtil.InternalError(
+                        EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid,
+                        0,
+                        "KeyValue.Merge"
+                    );
                 }
 
                 // Determine which key (this or otherKey) is first in the chain. Principal keys take
@@ -458,14 +527,27 @@ namespace System.Data.Mapping.Update.Internal
             }
         }
 
-        internal static PropagatorResult CreateServerGenKeyValue(PropagatorFlags flags, object value, IEntityStateEntry stateEntry, int identifier, int recordOrdinal)
+        internal static PropagatorResult CreateServerGenKeyValue(
+            PropagatorFlags flags,
+            object value,
+            IEntityStateEntry stateEntry,
+            int identifier,
+            int recordOrdinal
+        )
         {
             return new ServerGenKeyValue(flags, value, stateEntry, identifier, recordOrdinal, null);
         }
 
         private class ServerGenKeyValue : KeyValue
         {
-            internal ServerGenKeyValue(PropagatorFlags flags, object value, IEntityStateEntry stateEntry, int identifier, int recordOrdinal, KeyValue next)
+            internal ServerGenKeyValue(
+                PropagatorFlags flags,
+                object value,
+                IEntityStateEntry stateEntry,
+                int identifier,
+                int recordOrdinal,
+                KeyValue next
+            )
                 : base(flags, value, stateEntry, identifier, next)
             {
                 m_recordOrdinal = recordOrdinal;
@@ -480,12 +562,26 @@ namespace System.Data.Mapping.Update.Internal
 
             internal override PropagatorResult ReplicateResultWithNewFlags(PropagatorFlags flags)
             {
-                return new ServerGenKeyValue(flags, m_value, this.StateEntry, this.Identifier, this.RecordOrdinal, m_next);
+                return new ServerGenKeyValue(
+                    flags,
+                    m_value,
+                    this.StateEntry,
+                    this.Identifier,
+                    this.RecordOrdinal,
+                    m_next
+                );
             }
 
             internal override PropagatorResult ReplicateResultWithNewValue(object value)
             {
-                return new ServerGenKeyValue(this.PropagatorFlags, value, this.StateEntry, this.Identifier, this.RecordOrdinal, m_next);
+                return new ServerGenKeyValue(
+                    this.PropagatorFlags,
+                    value,
+                    this.StateEntry,
+                    this.Identifier,
+                    this.RecordOrdinal,
+                    m_next
+                );
             }
 
             internal override KeyValue ReplicateResultWithNewNext(KeyValue next)
@@ -495,11 +591,22 @@ namespace System.Data.Mapping.Update.Internal
                     // push the next value to the end of the linked list
                     next = m_next.ReplicateResultWithNewNext(next);
                 }
-                return new ServerGenKeyValue(PropagatorFlags, m_value, StateEntry, Identifier, RecordOrdinal, next);
+                return new ServerGenKeyValue(
+                    PropagatorFlags,
+                    m_value,
+                    StateEntry,
+                    Identifier,
+                    RecordOrdinal,
+                    next
+                );
             }
         }
 
-        internal static PropagatorResult CreateStructuralValue(PropagatorResult[] values, StructuralType structuralType, bool isModified)
+        internal static PropagatorResult CreateStructuralValue(
+            PropagatorResult[] values,
+            StructuralType structuralType,
+            bool isModified
+        )
         {
             if (isModified)
             {
@@ -510,13 +617,16 @@ namespace System.Data.Mapping.Update.Internal
                 return new UnmodifiedStructuralValue(values, structuralType);
             }
         }
+
         private class StructuralValue : PropagatorResult
         {
             internal StructuralValue(PropagatorResult[] values, StructuralType structuralType)
             {
                 Debug.Assert(null != structuralType);
                 Debug.Assert(null != values);
-                Debug.Assert(values.Length == TypeHelpers.GetAllStructuralMembers(structuralType).Count);
+                Debug.Assert(
+                    values.Length == TypeHelpers.GetAllStructuralMembers(structuralType).Count
+                );
 
                 m_values = values;
                 m_structuralType = structuralType;
@@ -552,7 +662,11 @@ namespace System.Data.Mapping.Update.Internal
 
             internal override PropagatorResult ReplicateResultWithNewFlags(PropagatorFlags flags)
             {
-                throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid, 0, "StructuralValue.ReplicateResultWithNewFlags");
+                throw EntityUtil.InternalError(
+                    EntityUtil.InternalErrorCode.UpdatePipelineResultRequestInvalid,
+                    0,
+                    "StructuralValue.ReplicateResultWithNewFlags"
+                );
             }
 
             internal override PropagatorResult Replace(Func<PropagatorResult, PropagatorResult> map)
@@ -580,23 +694,23 @@ namespace System.Data.Mapping.Update.Internal
 
         private class UnmodifiedStructuralValue : StructuralValue
         {
-            internal UnmodifiedStructuralValue(PropagatorResult[] values, StructuralType structuralType)
-                : base(values, structuralType)
-            {
-            }
+            internal UnmodifiedStructuralValue(
+                PropagatorResult[] values,
+                StructuralType structuralType
+            )
+                : base(values, structuralType) { }
 
             internal override PropagatorFlags PropagatorFlags
             {
-                get
-                {
-                    return PropagatorFlags.Preserve;
-                }
+                get { return PropagatorFlags.Preserve; }
             }
 
             internal override PropagatorResult Replace(Func<PropagatorResult, PropagatorResult> map)
             {
                 PropagatorResult[] newValues = ReplaceValues(map);
-                return null == newValues ? this : new UnmodifiedStructuralValue(newValues, m_structuralType);
+                return null == newValues
+                    ? this
+                    : new UnmodifiedStructuralValue(newValues, m_structuralType);
             }
         }
         #endregion

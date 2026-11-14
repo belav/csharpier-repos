@@ -4,19 +4,23 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [Flags]
     public enum DataProtectionPermissionFlags
     {
-        NoFlags         = 0x00,
+        NoFlags = 0x00,
 
-        ProtectData     = 0x01,
-        UnprotectData   = 0x02,
+        ProtectData = 0x01,
+        UnprotectData = 0x02,
 
-        ProtectMemory   = 0x04,
+        ProtectMemory = 0x04,
         UnprotectMemory = 0x08,
 
-        AllFlags        = 0x0F
+        AllFlags = 0x0F,
     }
 }

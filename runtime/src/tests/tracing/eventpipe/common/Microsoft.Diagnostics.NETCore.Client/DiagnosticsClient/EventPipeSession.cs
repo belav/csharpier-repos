@@ -27,17 +27,38 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
         public Stream EventStream => _response.Continuation;
 
-        internal static EventPipeSession Start(IpcEndpoint endpoint, IEnumerable<EventPipeProvider> providers, bool requestRundown, int circularBufferMB)
+        internal static EventPipeSession Start(
+            IpcEndpoint endpoint,
+            IEnumerable<EventPipeProvider> providers,
+            bool requestRundown,
+            int circularBufferMB
+        )
         {
-            IpcMessage requestMessage = CreateStartMessage(providers, requestRundown, circularBufferMB);
+            IpcMessage requestMessage = CreateStartMessage(
+                providers,
+                requestRundown,
+                circularBufferMB
+            );
             IpcResponse? response = IpcClient.SendMessageGetContinuation(endpoint, requestMessage);
             return CreateSessionFromResponse(endpoint, ref response, nameof(Start));
         }
 
-        internal static async Task<EventPipeSession> StartAsync(IpcEndpoint endpoint, IEnumerable<EventPipeProvider> providers, bool requestRundown, int circularBufferMB, CancellationToken cancellationToken)
+        internal static async Task<EventPipeSession> StartAsync(
+            IpcEndpoint endpoint,
+            IEnumerable<EventPipeProvider> providers,
+            bool requestRundown,
+            int circularBufferMB,
+            CancellationToken cancellationToken
+        )
         {
-            IpcMessage requestMessage = CreateStartMessage(providers, requestRundown, circularBufferMB);
-            IpcResponse? response = await IpcClient.SendMessageGetContinuationAsync(endpoint, requestMessage, cancellationToken).ConfigureAwait(false);
+            IpcMessage requestMessage = CreateStartMessage(
+                providers,
+                requestRundown,
+                circularBufferMB
+            );
+            IpcResponse? response = await IpcClient
+                .SendMessageGetContinuationAsync(endpoint, requestMessage, cancellationToken)
+                .ConfigureAwait(false);
             return CreateSessionFromResponse(endpoint, ref response, nameof(StartAsync));
         }
 
@@ -57,7 +78,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 // On non-abrupt exits (i.e. the target process has already exited and pipe is gone, sending Stop command will fail).
                 catch (IOException)
                 {
-                    throw new ServerNotAvailableException("Could not send Stop command. The target process may have exited.");
+                    throw new ServerNotAvailableException(
+                        "Could not send Stop command. The target process may have exited."
+                    );
                 }
             }
         }
@@ -68,25 +91,46 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 try
                 {
-                    IpcMessage response = await IpcClient.SendMessageAsync(_endpoint, requestMessage, cancellationToken).ConfigureAwait(false);
+                    IpcMessage response = await IpcClient
+                        .SendMessageAsync(_endpoint, requestMessage, cancellationToken)
+                        .ConfigureAwait(false);
 
                     DiagnosticsClient.ValidateResponseMessage(response, nameof(StopAsync));
                 }
                 // On non-abrupt exits (i.e. the target process has already exited and pipe is gone, sending Stop command will fail).
                 catch (IOException)
                 {
-                    throw new ServerNotAvailableException("Could not send Stop command. The target process may have exited.");
+                    throw new ServerNotAvailableException(
+                        "Could not send Stop command. The target process may have exited."
+                    );
                 }
             }
         }
 
-        private static IpcMessage CreateStartMessage(IEnumerable<EventPipeProvider> providers, bool requestRundown, int circularBufferMB)
+        private static IpcMessage CreateStartMessage(
+            IEnumerable<EventPipeProvider> providers,
+            bool requestRundown,
+            int circularBufferMB
+        )
         {
-            var config = new EventPipeSessionConfiguration(circularBufferMB, EventPipeSerializationFormat.NetTrace, providers, requestRundown);
-            return new IpcMessage(DiagnosticsServerCommandSet.EventPipe, (byte)EventPipeCommandId.CollectTracing2, config.SerializeV2());
+            var config = new EventPipeSessionConfiguration(
+                circularBufferMB,
+                EventPipeSerializationFormat.NetTrace,
+                providers,
+                requestRundown
+            );
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.EventPipe,
+                (byte)EventPipeCommandId.CollectTracing2,
+                config.SerializeV2()
+            );
         }
 
-        private static EventPipeSession CreateSessionFromResponse(IpcEndpoint endpoint, ref IpcResponse? response, string operationName)
+        private static EventPipeSession CreateSessionFromResponse(
+            IpcEndpoint endpoint,
+            ref IpcResponse? response,
+            string operationName
+        )
         {
             try
             {
@@ -121,7 +165,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             byte[] payload = BitConverter.GetBytes(_sessionId);
 
-            stopMessage = new IpcMessage(DiagnosticsServerCommandSet.EventPipe, (byte)EventPipeCommandId.StopTracing, payload);
+            stopMessage = new IpcMessage(
+                DiagnosticsServerCommandSet.EventPipe,
+                (byte)EventPipeCommandId.StopTracing,
+                payload
+            );
 
             return true;
         }
@@ -135,7 +183,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 {
                     Stop();
                 }
-                catch {} // swallow any exceptions that may be thrown from Stop.
+                catch { } // swallow any exceptions that may be thrown from Stop.
             }
 
             if (!_disposedValue)

@@ -25,12 +25,13 @@
 // THE SOFTWARE.
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 using System;
+
 namespace Mono.Btls
 {
-	enum MonoBtlsX509Format
-	{
-		DER = 1,
-		PEM = 2
-	}
+    enum MonoBtlsX509Format
+    {
+        DER = 1,
+        PEM = 2,
+    }
 }
 #endif

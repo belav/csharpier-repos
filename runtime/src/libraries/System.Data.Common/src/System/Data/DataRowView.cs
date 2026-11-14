@@ -6,13 +6,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data
 {
-    public class DataRowView : ICustomTypeDescriptor, IEditableObject, IDataErrorInfo, INotifyPropertyChanged
+    public class DataRowView
+        : ICustomTypeDescriptor,
+            IEditableObject,
+            IDataErrorInfo,
+            INotifyPropertyChanged
     {
         private readonly DataView _dataView;
         private readonly DataRow _row;
         private bool _delayBeginEdit;
 
-        private static readonly PropertyDescriptorCollection s_zeroPropertyDescriptorCollection = new PropertyDescriptorCollection(null);
+        private static readonly PropertyDescriptorCollection s_zeroPropertyDescriptorCollection =
+            new PropertyDescriptorCollection(null);
 
         internal DataRowView(DataView dataView, DataRow row)
         {
@@ -79,7 +84,10 @@ namespace System.Data
                 {
                     return Row[column, RowVersionDefault];
                 }
-                else if (_dataView.Table.DataSet != null && _dataView.Table.DataSet.Relations.Contains(property))
+                else if (
+                    _dataView.Table.DataSet != null
+                    && _dataView.Table.DataSet.Relations.Contains(property)
+                )
                 {
                     return CreateChildView(property);
                 }
@@ -113,7 +121,8 @@ namespace System.Data
         public DataRowVersion RowVersion => (RowVersionDefault & ~DataRowVersion.Proposed);
 
         /// <returns>Either <see cref="DataRowVersion.Default"/> or <see cref="DataRowVersion.Original"/></returns>
-        private DataRowVersion RowVersionDefault => Row.GetDefaultRowVersion(_dataView.RowStateFilter);
+        private DataRowVersion RowVersionDefault =>
+            Row.GetDefaultRowVersion(_dataView.RowStateFilter);
 
         internal int GetRecord() => Row.GetRecordFromVersion(RowVersionDefault);
 
@@ -159,7 +168,11 @@ namespace System.Data
             }
             else
             {
-                childView = new RelatedView(this, relation.ParentKey, relation.ChildColumnsReference);
+                childView = new RelatedView(
+                    this,
+                    relation.ParentKey,
+                    relation.ChildColumnsReference
+                );
             }
 
             childView.SetIndex("", DataViewRowState.CurrentRows, null); // finish construction via RelatedView.SetIndex
@@ -214,8 +227,9 @@ namespace System.Data
         public bool IsNew => (_row == _dataView._addNewRow);
 
         public bool IsEdit =>
-            Row.HasVersion(DataRowVersion.Proposed) ||  // It was edited or
-            _delayBeginEdit;                            // DataRowView.BegingEdit() was called, but not edited yet.
+            Row.HasVersion(DataRowVersion.Proposed)
+            || // It was edited or
+            _delayBeginEdit; // DataRowView.BegingEdit() was called, but not edited yet.
 
         public void Delete() => _dataView.Delete(Row);
 
@@ -226,36 +240,60 @@ namespace System.Data
         public event PropertyChangedEventHandler? PropertyChanged;
 
         // Do not try catch, we would mask users bugs. if they throw we would catch
-        internal void RaisePropertyChangedEvent(string propName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        internal void RaisePropertyChangedEvent(string propName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
 
         #region ICustomTypeDescriptor
         AttributeCollection ICustomTypeDescriptor.GetAttributes() => new AttributeCollection(null);
+
         string? ICustomTypeDescriptor.GetClassName() => null;
+
         string? ICustomTypeDescriptor.GetComponentName() => null;
 
-        [RequiresUnreferencedCode("Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All.")]
+        [RequiresUnreferencedCode(
+            "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All."
+        )]
         TypeConverter? ICustomTypeDescriptor.GetConverter() => null;
 
-        [RequiresUnreferencedCode("The built-in EventDescriptor implementation uses Reflection which requires unreferenced code.")]
+        [RequiresUnreferencedCode(
+            "The built-in EventDescriptor implementation uses Reflection which requires unreferenced code."
+        )]
         EventDescriptor? ICustomTypeDescriptor.GetDefaultEvent() => null;
 
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered."
+        )]
         PropertyDescriptor? ICustomTypeDescriptor.GetDefaultProperty() => null;
 
-        [RequiresUnreferencedCode("Editors registered in TypeDescriptor.AddEditorTable may be trimmed.")]
+        [RequiresUnreferencedCode(
+            "Editors registered in TypeDescriptor.AddEditorTable may be trimmed."
+        )]
         object? ICustomTypeDescriptor.GetEditor(Type editorBaseType) => null;
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() => new EventDescriptorCollection(null);
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() =>
+            new EventDescriptorCollection(null);
 
-        [RequiresUnreferencedCode("The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.")]
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[]? attributes) => new EventDescriptorCollection(null);
+        [RequiresUnreferencedCode(
+            "The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
+        )]
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[]? attributes) =>
+            new EventDescriptorCollection(null);
 
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered.")]
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() => ((ICustomTypeDescriptor)this).GetProperties(null);
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered."
+        )]
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() =>
+            ((ICustomTypeDescriptor)this).GetProperties(null);
 
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.")]
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
+        )]
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[]? attributes) =>
-            (_dataView.Table != null ? _dataView.Table.GetPropertyDescriptorCollection() : s_zeroPropertyDescriptorCollection);
+            (
+                _dataView.Table != null
+                    ? _dataView.Table.GetPropertyDescriptorCollection()
+                    : s_zeroPropertyDescriptorCollection
+            );
 
         object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor? pd) => this;
         #endregion

@@ -12,7 +12,5 @@ namespace System.Net.Http
     /// When parsing the "application/http" media type we need to just get the unsorted list. It
     /// will get sorted later.
     /// </summary>
-    internal class HttpUnsortedHeaders : HttpHeaders
-    {
-    }
+    internal class HttpUnsortedHeaders : HttpHeaders { }
 }

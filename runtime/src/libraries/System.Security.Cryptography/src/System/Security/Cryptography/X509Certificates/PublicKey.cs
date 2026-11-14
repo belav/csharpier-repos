@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.X509Certificates
                 subjectPublicKey,
                 out Oid localOid,
                 out AsnEncodedData localParameters,
-                out AsnEncodedData localKeyValue);
+                out AsnEncodedData localKeyValue
+            );
 
             _oid = localOid;
             EncodedParameters = localParameters;
@@ -58,7 +59,11 @@ namespace System.Security.Cryptography.X509Certificates
 
         public AsnEncodedData EncodedParameters { get; private set; }
 
-        [Obsolete(Obsoletions.PublicKeyPropertyMessage, DiagnosticId = Obsoletions.PublicKeyPropertyDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.PublicKeyPropertyMessage,
+            DiagnosticId = Obsoletions.PublicKeyPropertyDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public AsymmetricAlgorithm Key
         {
             get
@@ -69,7 +74,12 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         case Oids.Rsa:
                         case Oids.Dsa:
-                            _key = X509Pal.Instance.DecodePublicKey(_oid, EncodedKeyValue.RawData, EncodedParameters.RawData, null);
+                            _key = X509Pal.Instance.DecodePublicKey(
+                                _oid,
+                                EncodedKeyValue.RawData,
+                                EncodedParameters.RawData,
+                                null
+                            );
                             break;
 
                         default:
@@ -110,8 +120,7 @@ namespace System.Security.Cryptography.X509Certificates
         /// <returns>
         /// A byte array containing the X.509 SubjectPublicKeyInfo representation of this key.
         /// </returns>
-        public byte[] ExportSubjectPublicKeyInfo() =>
-            EncodeSubjectPublicKeyInfo().Encode();
+        public byte[] ExportSubjectPublicKeyInfo() => EncodeSubjectPublicKeyInfo().Encode();
 
         /// <summary>
         /// Creates a new instance of <see cref="PublicKey" /> from a X.509 SubjectPublicKeyInfo.
@@ -127,13 +136,17 @@ namespace System.Security.Cryptography.X509Certificates
         /// <exception cref="CryptographicException">
         /// The SubjectPublicKeyInfo could not be decoded.
         /// </exception>
-        public static PublicKey CreateFromSubjectPublicKeyInfo(ReadOnlySpan<byte> source, out int bytesRead)
+        public static PublicKey CreateFromSubjectPublicKeyInfo(
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        )
         {
             int read = DecodeSubjectPublicKeyInfo(
                 source,
                 out Oid localOid,
                 out AsnEncodedData localParameters,
-                out AsnEncodedData localKeyValue);
+                out AsnEncodedData localKeyValue
+            );
 
             bytesRead = read;
             return new PublicKey(localOid, localParameters, localKeyValue);
@@ -279,29 +292,32 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> source,
             out Oid oid,
             out AsnEncodedData parameters,
-            out AsnEncodedData keyValue)
+            out AsnEncodedData keyValue
+        )
         {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
-            using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
-            {
-                AsnValueReader reader = new AsnValueReader(source, AsnEncodingRules.DER);
-
-                int read;
-                SubjectPublicKeyInfoAsn spki;
-
-                try
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                )
                 {
-                    read = reader.PeekEncodedValue().Length;
-                    SubjectPublicKeyInfoAsn.Decode(ref reader, manager.Memory, out spki);
-                }
-                catch (AsnContentException e)
-                {
-                    throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);
-                }
+                    AsnValueReader reader = new AsnValueReader(source, AsnEncodingRules.DER);
 
-                DecodeSubjectPublicKeyInfo(ref spki, out oid, out parameters, out keyValue);
-                return read;
-            }
+                    int read;
+                    SubjectPublicKeyInfoAsn spki;
+
+                    try
+                    {
+                        read = reader.PeekEncodedValue().Length;
+                        SubjectPublicKeyInfoAsn.Decode(ref reader, manager.Memory, out spki);
+                    }
+                    catch (AsnContentException e)
+                    {
+                        throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);
+                    }
+
+                    DecodeSubjectPublicKeyInfo(ref spki, out oid, out parameters, out keyValue);
+                    return read;
+                }
         }
 
         internal static PublicKey DecodeSubjectPublicKeyInfo(ref SubjectPublicKeyInfoAsn spki)
@@ -310,7 +326,8 @@ namespace System.Security.Cryptography.X509Certificates
                 ref spki,
                 out Oid oid,
                 out AsnEncodedData parameters,
-                out AsnEncodedData keyValue);
+                out AsnEncodedData keyValue
+            );
 
             return new PublicKey(oid, parameters, keyValue);
         }
@@ -319,12 +336,12 @@ namespace System.Security.Cryptography.X509Certificates
             ref SubjectPublicKeyInfoAsn spki,
             out Oid oid,
             out AsnEncodedData parameters,
-            out AsnEncodedData keyValue)
+            out AsnEncodedData keyValue
+        )
         {
             oid = new Oid(spki.Algorithm.Algorithm, null);
             parameters = new AsnEncodedData(spki.Algorithm.Parameters.GetValueOrDefault().Span);
             keyValue = new AsnEncodedData(spki.SubjectPublicKey.Span);
         }
-
     }
 }

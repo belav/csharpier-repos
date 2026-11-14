@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,114 +26,120 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security.Policy;
 
 namespace System.Runtime.InteropServices
 {
-	[ComVisible (true)]
-	[CLSCompliant (false)]
-	[InterfaceType (ComInterfaceType.InterfaceIsDual)]
-	[Guid ("17156360-2F1A-384A-BC52-FDE93C215C5B")]
+    [ComVisible(true)]
+    [CLSCompliant(false)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid("17156360-2F1A-384A-BC52-FDE93C215C5B")]
 #if !FULL_AOT_RUNTIME
-	[TypeLibImportClass (typeof(Assembly))]
+    [TypeLibImportClass(typeof(Assembly))]
 #endif
-	public interface _Assembly
-	{
-		string ToString ();
+    public interface _Assembly
+    {
+        string ToString();
 
-		bool Equals (object other);
+        bool Equals(object other);
 
-		int GetHashCode ();
+        int GetHashCode();
 
-		Type GetType ();
+        Type GetType();
 
-		string CodeBase { get; }
+        string CodeBase { get; }
 
-		string EscapedCodeBase { get; }
+        string EscapedCodeBase { get; }
 
-		AssemblyName GetName ();
+        AssemblyName GetName();
 
-		AssemblyName GetName (bool copiedName);
+        AssemblyName GetName(bool copiedName);
 
-		string FullName { get; }
+        string FullName { get; }
 
-		MethodInfo EntryPoint { get; }
+        MethodInfo EntryPoint { get; }
 
-		Type GetType (string name);
+        Type GetType(string name);
 
-		Type GetType (string name, bool throwOnError);
+        Type GetType(string name, bool throwOnError);
 
-		Type[] GetExportedTypes ();
+        Type[] GetExportedTypes();
 
-		Type[] GetTypes();
+        Type[] GetTypes();
 
-		Stream GetManifestResourceStream (Type type, string name);
+        Stream GetManifestResourceStream(Type type, string name);
 
-		Stream GetManifestResourceStream (string name);
+        Stream GetManifestResourceStream(string name);
 
-		FileStream GetFile (string name);
+        FileStream GetFile(string name);
 
-		FileStream[] GetFiles ();
+        FileStream[] GetFiles();
 
-		FileStream[] GetFiles (bool getResourceModules);
+        FileStream[] GetFiles(bool getResourceModules);
 
-		string[] GetManifestResourceNames ();
+        string[] GetManifestResourceNames();
 
-		ManifestResourceInfo GetManifestResourceInfo (string resourceName);
+        ManifestResourceInfo GetManifestResourceInfo(string resourceName);
 
-		string Location { get; }
+        string Location { get; }
 
 #if !MOBILE
-		Evidence Evidence { get; }
+        Evidence Evidence { get; }
 #endif
 
-		object[] GetCustomAttributes (Type attributeType, bool inherit);
+        object[] GetCustomAttributes(Type attributeType, bool inherit);
 
-		object[] GetCustomAttributes (bool inherit);
+        object[] GetCustomAttributes(bool inherit);
 
-		bool IsDefined (Type attributeType, bool inherit);
+        bool IsDefined(Type attributeType, bool inherit);
 
-		//[SecurityPermission (SecurityAction.LinkDemand, SerializationFormatter = true)]
-		void GetObjectData (SerializationInfo info, StreamingContext context);
+        //[SecurityPermission (SecurityAction.LinkDemand, SerializationFormatter = true)]
+        void GetObjectData(SerializationInfo info, StreamingContext context);
 
-		Type GetType (string name, bool throwOnError, bool ignoreCase);
+        Type GetType(string name, bool throwOnError, bool ignoreCase);
 
-		Assembly GetSatelliteAssembly (CultureInfo culture);
+        Assembly GetSatelliteAssembly(CultureInfo culture);
 
-		Assembly GetSatelliteAssembly (CultureInfo culture, Version version);
+        Assembly GetSatelliteAssembly(CultureInfo culture, Version version);
 
-		Module LoadModule (string moduleName, byte[] rawModule);
+        Module LoadModule(string moduleName, byte[] rawModule);
 
-		Module LoadModule (string moduleName, byte[] rawModule, byte[] rawSymbolStore);
+        Module LoadModule(string moduleName, byte[] rawModule, byte[] rawSymbolStore);
 
-		object CreateInstance (string typeName);
+        object CreateInstance(string typeName);
 
-		object CreateInstance (string typeName, bool ignoreCase);
+        object CreateInstance(string typeName, bool ignoreCase);
 
-		object CreateInstance (string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args,
-		                       CultureInfo culture, object[] activationAttributes);
+        object CreateInstance(
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes
+        );
 
-		Module[] GetLoadedModules ();
+        Module[] GetLoadedModules();
 
-		Module[] GetLoadedModules (bool getResourceModules);
+        Module[] GetLoadedModules(bool getResourceModules);
 
-		Module[] GetModules ();
+        Module[] GetModules();
 
-		Module[] GetModules (bool getResourceModules);
+        Module[] GetModules(bool getResourceModules);
 
-		Module GetModule (string name);
+        Module GetModule(string name);
 
-		AssemblyName[] GetReferencedAssemblies ();
+        AssemblyName[] GetReferencedAssemblies();
 
 #if !MOBILE
-		bool GlobalAssemblyCache { get; }
+        bool GlobalAssemblyCache { get; }
 #endif
 
-		event ModuleResolveEventHandler ModuleResolve;
-	}
+        event ModuleResolveEventHandler ModuleResolve;
+    }
 }
-

@@ -31,52 +31,55 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-	public abstract class DelegatingHandler : HttpMessageHandler
-	{
-		bool disposed;
-		HttpMessageHandler handler;
-		
-		protected DelegatingHandler ()
-		{
-		}
-		
-		protected DelegatingHandler(HttpMessageHandler innerHandler)
-		{
-			if (innerHandler == null)
-				throw new ArgumentNullException ("innerHandler");
-			
-			InnerHandler = innerHandler;
-		}
-		
-		public HttpMessageHandler InnerHandler {
-			get {
-				return handler;
-			}
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("InnerHandler");
+    public abstract class DelegatingHandler : HttpMessageHandler
+    {
+        bool disposed;
+        HttpMessageHandler handler;
 
-				handler = value;
-			}
-		}
-		
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing && !disposed) {
-				disposed = true;
-				if (InnerHandler != null)
-					InnerHandler.Dispose ();
-			}
-			
-			base.Dispose (disposing);
-		}
+        protected DelegatingHandler() { }
 
-		protected internal override Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
-		{
-			if (InnerHandler == null) {
-				throw new InvalidOperationException (SR.net_http_handler_not_assigned);
-			}
-			return InnerHandler.SendAsync (request, cancellationToken);
-		}
-	}
+        protected DelegatingHandler(HttpMessageHandler innerHandler)
+        {
+            if (innerHandler == null)
+                throw new ArgumentNullException("innerHandler");
+
+            InnerHandler = innerHandler;
+        }
+
+        public HttpMessageHandler InnerHandler
+        {
+            get { return handler; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("InnerHandler");
+
+                handler = value;
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && !disposed)
+            {
+                disposed = true;
+                if (InnerHandler != null)
+                    InnerHandler.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
+        protected internal override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
+        {
+            if (InnerHandler == null)
+            {
+                throw new InvalidOperationException(SR.net_http_handler_not_assigned);
+            }
+            return InnerHandler.SendAsync(request, cancellationToken);
+        }
+    }
 }

@@ -4,13 +4,18 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Administration;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     [AttributeUsage(AttributeTargets.Method)]
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
-    public sealed class DurableOperationAttribute : Attribute, IOperationBehavior, IWmiInstanceProvider
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
+    public sealed class DurableOperationAttribute
+        : Attribute,
+            IOperationBehavior,
+            IWmiInstanceProvider
     {
         static DurableOperationAttribute defaultInstance = new DurableOperationAttribute();
         bool canCreateInstance;
@@ -24,10 +29,7 @@ namespace System.ServiceModel.Description
 
         public bool CanCreateInstance
         {
-            get
-            {
-                return this.canCreateInstance;
-            }
+            get { return this.canCreateInstance; }
             set
             {
                 this.canCreateInstance = value;
@@ -37,74 +39,78 @@ namespace System.ServiceModel.Description
 
         public bool CompletesInstance
         {
-            get
-            {
-                return this.completesInstance;
-            }
-            set
-            {
-                this.completesInstance = value;
-            }
+            get { return this.completesInstance; }
+            set { this.completesInstance = value; }
         }
 
         internal static DurableOperationAttribute DefaultInstance
         {
-            get
-            {
-                return defaultInstance;
-            }
+            get { return defaultInstance; }
         }
 
         public void AddBindingParameters(
             OperationDescription operationDescription,
-            BindingParameterCollection bindingParameters)
+            BindingParameterCollection bindingParameters
+        )
         {
             // empty
         }
 
-        public void ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation)
+        public void ApplyClientBehavior(
+            OperationDescription operationDescription,
+            ClientOperation clientOperation
+        )
         {
             // empty
         }
 
         public void ApplyDispatchBehavior(
             OperationDescription operationDescription,
-            DispatchOperation dispatchOperation)
+            DispatchOperation dispatchOperation
+        )
         {
             if (dispatchOperation == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("dispatchOperation");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "dispatchOperation"
+                );
             }
 
             if (dispatchOperation.Invoker == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(
-                    SR2.ExistingIOperationInvokerRequired,
-                    typeof(DurableOperationAttribute).Name)));
+                        SR2.GetString(
+                            SR2.ExistingIOperationInvokerRequired,
+                            typeof(DurableOperationAttribute).Name
+                        )
+                    )
+                );
             }
 
             if (operationDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("operationDescription");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "operationDescription"
+                );
             }
 
             if (operationDescription.DeclaringContract == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                     "operationDescription",
-                    SR2.GetString(SR2.OperationDescriptionNeedsDeclaringContract));
+                    SR2.GetString(SR2.OperationDescriptionNeedsDeclaringContract)
+                );
             }
 
             bool canCreate = CanCreateInstanceForOperation(dispatchOperation.IsOneWay);
 
-            dispatchOperation.Invoker =
-                new ServiceOperationInvoker(
+            dispatchOperation.Invoker = new ServiceOperationInvoker(
                 dispatchOperation.Invoker,
                 this.CompletesInstance,
                 canCreate,
-                operationDescription.DeclaringContract.SessionMode != SessionMode.NotAllowed);
+                operationDescription.DeclaringContract.SessionMode != SessionMode.NotAllowed
+            );
         }
 
         void IWmiInstanceProvider.FillInstance(IWmiInstance wmiInstance)

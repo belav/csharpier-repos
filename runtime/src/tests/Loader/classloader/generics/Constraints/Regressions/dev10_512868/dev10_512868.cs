@@ -6,18 +6,13 @@
 using System;
 using Xunit;
 
-
 public class GenericNode
 {
-    public GenericNode()
-    {
-    }
+    public GenericNode() { }
 }
 
 public interface IFactory<TNode>
-    where TNode : GenericNode
-{
-}
+    where TNode : GenericNode { }
 
 public static class FactoryGenerator<TNode>
     where TNode : GenericNode
@@ -31,38 +26,33 @@ public static class FactoryGenerator<TNode>
 public class ItemX : InternalItemServices<ContainerX, ItemX>
 {
     public ItemX()
-        : base()
-    {
-    }
+        : base() { }
 }
 
 public class ContainerX : InternalContainerServices<ContainerX, ItemX>
 {
     public ContainerX()
-        : base()
-    {
-    }
+        : base() { }
 }
 
-public abstract class InternalItemServices<TContainer, TItem> : ExternalItemServices<TContainer, TItem>
+public abstract class InternalItemServices<TContainer, TItem>
+    : ExternalItemServices<TContainer, TItem>
     where TContainer : GenericNode
     where TItem : InternalItemServices<TContainer, TItem>
 {
     protected InternalItemServices()
-        : base(FactoryGenerator<TContainer>.Instance, FactoryGenerator<TItem>.Instance)
-    {
-
-    }
+        : base(FactoryGenerator<TContainer>.Instance, FactoryGenerator<TItem>.Instance) { }
 }
 
 public abstract class ExternalItemServices<TContainer, TItem> : GenericNode
     where TContainer : GenericNode
     where TItem : GenericNode
 {
-    protected ExternalItemServices(IFactory<TContainer> containerFactory, IFactory<TItem> itemFactory)
-        : base()
-    {
-    }
+    protected ExternalItemServices(
+        IFactory<TContainer> containerFactory,
+        IFactory<TItem> itemFactory
+    )
+        : base() { }
 }
 
 public abstract class ExternalContainerServices<TContainer, TItem> : GenericNode
@@ -70,18 +60,16 @@ public abstract class ExternalContainerServices<TContainer, TItem> : GenericNode
     where TItem : ExternalItemServices<TContainer, TItem>
 {
     protected ExternalContainerServices(IFactory<TItem> itemFactory)
-        : base()
-    {
-    }
+        : base() { }
 }
-public abstract class InternalContainerServices<TContainer, TItem> : ExternalContainerServices<TContainer, TItem>
+
+public abstract class InternalContainerServices<TContainer, TItem>
+    : ExternalContainerServices<TContainer, TItem>
     where TContainer : GenericNode
     where TItem : ExternalItemServices<TContainer, TItem>
 {
     protected InternalContainerServices()
-        : base(FactoryGenerator<TItem>.Instance)
-    {
-    }
+        : base(FactoryGenerator<TItem>.Instance) { }
 }
 
 public class Test
@@ -114,7 +102,7 @@ public class Test
 // parameterized on the <container, item> pair.
 //
 // The hierarchy shape in this testcase could be used to provide services for
-// a <ContainerX, ItemX> instance of the tree.  
+// a <ContainerX, ItemX> instance of the tree.
 // ------------
 //
 // // Generates objects of type TNode.

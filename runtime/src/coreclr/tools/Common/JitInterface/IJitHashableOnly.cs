@@ -10,6 +10,7 @@ namespace Internal.JitInterface
     public class JitObjectComparer : IEqualityComparer<object>
     {
         public new bool Equals(object x, object y) => x == y;
+
         public int GetHashCode(object obj)
         {
             if (obj is IJitHashableOnly jitHashable)
@@ -18,9 +19,11 @@ namespace Internal.JitInterface
         }
     }
 
-    public class JitObjectComparer<T> : IEqualityComparer<T> where T:class
+    public class JitObjectComparer<T> : IEqualityComparer<T>
+        where T : class
     {
         public bool Equals(T x, T y) => x == y;
+
         public int GetHashCode(T obj)
         {
             if (obj is IJitHashableOnly jitHashable)

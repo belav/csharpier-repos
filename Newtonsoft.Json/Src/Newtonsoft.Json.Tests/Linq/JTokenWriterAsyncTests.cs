@@ -196,8 +196,11 @@ namespace Newtonsoft.Json.Tests.Linq
             await writer.WriteCommentAsync("fail");
             await writer.WriteEndArrayAsync();
 
-            StringAssert.AreEqual(@"[
-  /*fail*/]", writer.Token.ToString());
+            StringAssert.AreEqual(
+                @"[
+  /*fail*/]",
+                writer.Token.ToString()
+            );
         }
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -215,9 +218,12 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(new BigInteger(123), i.Value);
             Assert.AreEqual(JTokenType.Integer, i.Type);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   123
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 #endif
 
@@ -232,20 +238,19 @@ namespace Newtonsoft.Json.Tests.Linq
             await writer.WriteEndArrayAsync();
 
             // this is a bug. See non-async equivalent test.
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   fail,
   fail
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
         public async Task WriteTokenWithParentAsync()
         {
-            JObject o = new JObject
-            {
-                ["prop1"] = new JArray(1),
-                ["prop2"] = 1
-            };
+            JObject o = new JObject { ["prop1"] = new JArray(1), ["prop2"] = 1 };
 
             JTokenWriter writer = new JTokenWriter();
 
@@ -259,14 +264,17 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Console.WriteLine(writer.Token.ToString());
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""prop1"": [
       1
     ],
     ""prop2"": 1
   }
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -285,9 +293,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             await writer.WriteEndObjectAsync();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Prop1"": 1
-}", writer.Token.ToString());
+}",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -305,9 +316,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             await writer.WriteEndArrayAsync();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -315,9 +329,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject o = new JObject();
             JsonReader reader = o.CreateReader();
-            while (reader.Read())
-            {   
-            }
+            while (reader.Read()) { }
 
             JTokenWriter writer = new JTokenWriter();
 
@@ -342,10 +354,13 @@ namespace Newtonsoft.Json.Tests.Linq
             await writer.WriteRawValueAsync("fail");
             await writer.WriteEndArrayAsync();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   fail,
   fail
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -365,9 +380,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             await writer.WriteEndObjectAsync();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""prop1"": []
-}", writer.Token.ToString());
+}",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -375,10 +393,12 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JTokenWriter writer = new JTokenWriter
             {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
 
-            await writer.WriteValueAsync(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified));
+            await writer.WriteValueAsync(
+                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified)
+            );
 
             JValue value = (JValue)writer.Token;
             DateTime dt = (DateTime)value.Value;

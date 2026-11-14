@@ -15,13 +15,18 @@ namespace System.IO.Ports.Tests
         private static readonly int s_DEFAULT_NUM_RND_BYTES = TCSupport.MinimumBlockingByteCount;
 
         //The default number of chars to write with when testing timeout with Write(char[], int, int)
-        private static readonly int s_DEFAULT_WRITE_CHAR_ARRAY_SIZE = TCSupport.MinimumBlockingByteCount;
+        private static readonly int s_DEFAULT_WRITE_CHAR_ARRAY_SIZE =
+            TCSupport.MinimumBlockingByteCount;
 
         //The default number of bytes to write with when testing timeout with Write(byte[], int, int)
-        private static readonly int s_DEFAULT_WRITE_BYTE_ARRAY_SIZE = TCSupport.MinimumBlockingByteCount;
+        private static readonly int s_DEFAULT_WRITE_BYTE_ARRAY_SIZE =
+            TCSupport.MinimumBlockingByteCount;
 
         //The default string to write with when testing timeout with Write(str)
-        private static readonly string s_DEFAULT_STRING_TO_WRITE = new string('H', TCSupport.MinimumBlockingByteCount);
+        private static readonly string s_DEFAULT_STRING_TO_WRITE = new string(
+            'H',
+            TCSupport.MinimumBlockingByteCount
+        );
 
         //Delegate to start asynchronous write on the SerialPort com with buffer of size bufferLength
         private delegate int WriteMethodDelegate(SerialPort com, int bufferSize);
@@ -31,14 +36,21 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void BytesToWrite_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default BytesToWrite");
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 com1.Open();
                 serPortProp.VerifyPropertiesAndPrint(com1);
             }
@@ -47,14 +59,18 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void BytesToWrite_Write_byte_int_int()
         {
-            Debug.WriteLine("Verifying BytesToWrite with Write(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying BytesToWrite with Write(byte[] buffer, int offset, int count)"
+            );
             VerifyBytesToWrite(Write_byte_int_int, s_DEFAULT_NUM_RND_BYTES, false);
         }
 
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void BytesToWrite_Write_char_int_int()
         {
-            Debug.WriteLine("Verifying BytesToWrite with Write(char[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying BytesToWrite with Write(char[] buffer, int offset, int count)"
+            );
             VerifyBytesToWrite(Write_char_int_int, s_DEFAULT_NUM_RND_BYTES, false);
         }
 
@@ -74,17 +90,32 @@ namespace System.IO.Ports.Tests
         #endregion
 
         #region Verification for Test Cases
-        private void VerifyBytesToWrite(WriteMethodDelegate writeMethod, int bufferSize, bool sendNewLine)
+        private void VerifyBytesToWrite(
+            WriteMethodDelegate writeMethod,
+            int bufferSize,
+            bool sendNewLine
+        )
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
                 int expectedBytesToWrite;
                 int actualBytesToWrite;
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.SetProperty("Handshake", Handshake.RequestToSend);
                 serPortProp.SetProperty("WriteTimeout", 500);
 
@@ -109,19 +140,19 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private int Write_byte_int_int(SerialPort com, int bufferSize)
         {
             try
             {
-                com.Write(new byte[s_DEFAULT_WRITE_BYTE_ARRAY_SIZE], 0, s_DEFAULT_WRITE_BYTE_ARRAY_SIZE);
+                com.Write(
+                    new byte[s_DEFAULT_WRITE_BYTE_ARRAY_SIZE],
+                    0,
+                    s_DEFAULT_WRITE_BYTE_ARRAY_SIZE
+                );
             }
-            catch (TimeoutException)
-            {
-            }
+            catch (TimeoutException) { }
             return bufferSize;
         }
-
 
         private int Write_char_int_int(SerialPort com, int bufferSize)
         {
@@ -131,12 +162,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Write(charsToWrite, 0, charsToWrite.Length);
             }
-            catch (TimeoutException)
-            {
-            }
+            catch (TimeoutException) { }
             return com.Encoding.GetByteCount(charsToWrite);
         }
-
 
         private int Write_str(SerialPort com, int bufferSize)
         {
@@ -144,12 +172,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Write(s_DEFAULT_STRING_TO_WRITE);
             }
-            catch (TimeoutException)
-            {
-            }
+            catch (TimeoutException) { }
             return com.Encoding.GetByteCount(s_DEFAULT_STRING_TO_WRITE.ToCharArray());
         }
-
 
         private int WriteLine(SerialPort com, int bufferSize)
         {
@@ -157,10 +182,9 @@ namespace System.IO.Ports.Tests
             {
                 com.WriteLine(s_DEFAULT_STRING_TO_WRITE);
             }
-            catch (TimeoutException)
-            {
-            }
-            return com.Encoding.GetByteCount(s_DEFAULT_STRING_TO_WRITE.ToCharArray()) + com.Encoding.GetByteCount(com.NewLine.ToCharArray());
+            catch (TimeoutException) { }
+            return com.Encoding.GetByteCount(s_DEFAULT_STRING_TO_WRITE.ToCharArray())
+                + com.Encoding.GetByteCount(com.NewLine.ToCharArray());
         }
         #endregion
     }

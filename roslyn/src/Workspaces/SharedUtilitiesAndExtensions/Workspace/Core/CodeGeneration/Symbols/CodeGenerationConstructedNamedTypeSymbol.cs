@@ -18,10 +18,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public CodeGenerationConstructedNamedTypeSymbol(
             CodeGenerationNamedTypeSymbol constructedFrom,
             ImmutableArray<ITypeSymbol> typeArguments,
-            ImmutableArray<CodeGenerationAbstractNamedTypeSymbol> typeMembers)
-            : base(constructedFrom.ContainingAssembly, constructedFrom.ContainingType, constructedFrom.GetAttributes(),
-                   constructedFrom.DeclaredAccessibility, constructedFrom.Modifiers,
-                   constructedFrom.Name, constructedFrom.SpecialType, constructedFrom.NullableAnnotation, typeMembers)
+            ImmutableArray<CodeGenerationAbstractNamedTypeSymbol> typeMembers
+        )
+            : base(
+                constructedFrom.ContainingAssembly,
+                constructedFrom.ContainingType,
+                constructedFrom.GetAttributes(),
+                constructedFrom.DeclaredAccessibility,
+                constructedFrom.Modifiers,
+                constructedFrom.Name,
+                constructedFrom.SpecialType,
+                constructedFrom.NullableAnnotation,
+                typeMembers
+            )
         {
             _constructedFrom = constructedFrom;
             this.OriginalDefinition = constructedFrom.OriginalDefinition;
@@ -30,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override ImmutableArray<ITypeSymbol> TypeArguments => _typeArguments;
 
-        public override ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => _typeArguments.SelectAsArray(t => t.NullableAnnotation);
+        public override ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations =>
+            _typeArguments.SelectAsArray(t => t.NullableAnnotation);
 
         public override int Arity => _constructedFrom.Arity;
 
@@ -45,17 +55,18 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public override IEnumerable<string> MemberNames => _constructedFrom.MemberNames;
 
         public override IMethodSymbol DelegateInvokeMethod
-                // NOTE(cyrusn): remember to Construct the result if we implement this.
-                => null;
+            // NOTE(cyrusn): remember to Construct the result if we implement this.
+            =>
+            null;
 
         public override INamedTypeSymbol EnumUnderlyingType
-                // NOTE(cyrusn): remember to Construct the result if we implement this.
-                => null;
+            // NOTE(cyrusn): remember to Construct the result if we implement this.
+            =>
+            null;
 
         protected override CodeGenerationNamedTypeSymbol ConstructedFrom => _constructedFrom;
 
-        public override INamedTypeSymbol ConstructUnboundGenericType()
-            => null;
+        public override INamedTypeSymbol ConstructUnboundGenericType() => null;
 
         public override ImmutableArray<IMethodSymbol> InstanceConstructors
         {
@@ -87,19 +98,26 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public override ImmutableArray<INamedTypeSymbol> GetTypeMembers()
         {
             // TODO(cyrusn): construct these.
-            return ImmutableArray.CreateRange(_constructedFrom.TypeMembers.Cast<INamedTypeSymbol>());
+            return ImmutableArray.CreateRange(
+                _constructedFrom.TypeMembers.Cast<INamedTypeSymbol>()
+            );
         }
 
         public override TypeKind TypeKind => _constructedFrom.TypeKind;
 
-        protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(NullableAnnotation nullableAnnotation)
+        protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(
+            NullableAnnotation nullableAnnotation
+        )
         {
             return new CodeGenerationConstructedNamedTypeSymbol(
-                (CodeGenerationNamedTypeSymbol)_constructedFrom.WithNullableAnnotation(nullableAnnotation),
+                (CodeGenerationNamedTypeSymbol)
+                    _constructedFrom.WithNullableAnnotation(nullableAnnotation),
                 _typeArguments,
-                this.TypeMembers);
+                this.TypeMembers
+            );
         }
 
-        public override ImmutableArray<ITypeParameterSymbol> TypeParameters => _constructedFrom.TypeParameters;
+        public override ImmutableArray<ITypeParameterSymbol> TypeParameters =>
+            _constructedFrom.TypeParameters;
     }
 }

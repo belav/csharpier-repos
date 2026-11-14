@@ -9,11 +9,15 @@ namespace Microsoft.Web.Mvc.ModelBinding
     [ModelBinderProviderOptions(FrontOfList = true)]
     public sealed class TypeMatchModelBinderProvider : ModelBinderProvider
     {
-        public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        public override IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             return (TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext) != null)
-                       ? new TypeMatchModelBinder()
-                       : null /* no match */;
+                ? new TypeMatchModelBinder()
+                : null /* no match */
+            ;
         }
     }
 }

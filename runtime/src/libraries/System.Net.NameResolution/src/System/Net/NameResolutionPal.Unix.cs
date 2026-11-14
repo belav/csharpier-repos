@@ -16,8 +16,12 @@ namespace System.Net
         public const bool SupportsGetAddrInfoAsync = false;
 
 #pragma warning disable IDE0060
-        internal static Task? GetAddrInfoAsync(string hostName, bool justAddresses, AddressFamily family, CancellationToken cancellationToken) =>
-            throw new NotSupportedException();
+        internal static Task? GetAddrInfoAsync(
+            string hostName,
+            bool justAddresses,
+            AddressFamily family,
+            CancellationToken cancellationToken
+        ) => throw new NotSupportedException();
 #pragma warning restore IDE0060
 
         private static SocketError GetSocketErrorForNativeError(int error)
@@ -45,13 +49,20 @@ namespace System.Net
             }
         }
 
-        private static unsafe void ParseHostEntry(Interop.Sys.HostEntry hostEntry, bool justAddresses, out string? hostName, out string[] aliases, out IPAddress[] addresses)
+        private static unsafe void ParseHostEntry(
+            Interop.Sys.HostEntry hostEntry,
+            bool justAddresses,
+            out string? hostName,
+            out string[] aliases,
+            out IPAddress[] addresses
+        )
         {
             try
             {
-                hostName = !justAddresses && hostEntry.CanonicalName != null
-                    ? Marshal.PtrToStringUTF8((IntPtr)hostEntry.CanonicalName)
-                    : null;
+                hostName =
+                    !justAddresses && hostEntry.CanonicalName != null
+                        ? Marshal.PtrToStringUTF8((IntPtr)hostEntry.CanonicalName)
+                        : null;
 
                 IPAddress[] localAddresses;
                 if (hostEntry.IPAddressCount == 0)
@@ -78,8 +89,10 @@ namespace System.Net
                     for (int i = 0; i < hostEntry.IPAddressCount; i++)
                     {
                         Interop.Sys.IPAddress nativeAddr = addressHandle[i];
-                        if (Array.IndexOf(nativeAddresses, nativeAddr, 0, nativeAddressCount) == -1 &&
-                            (!nativeAddr.IsIPv6 || SocketProtocolSupportPal.OSSupportsIPv6)) // Do not include IPv6 addresses if IPV6 support is force-disabled
+                        if (
+                            Array.IndexOf(nativeAddresses, nativeAddr, 0, nativeAddressCount) == -1
+                            && (!nativeAddr.IsIPv6 || SocketProtocolSupportPal.OSSupportsIPv6)
+                        ) // Do not include IPv6 addresses if IPV6 support is force-disabled
                         {
                             nativeAddresses[nativeAddressCount++] = nativeAddr;
                         }
@@ -106,7 +119,9 @@ namespace System.Net
                         localAliases = new string[numAliases];
                         for (int i = 0; i < localAliases.Length; i++)
                         {
-                            localAliases[i] = Marshal.PtrToStringUTF8((IntPtr)hostEntry.Aliases[i])!;
+                            localAliases[i] = Marshal.PtrToStringUTF8(
+                                (IntPtr)hostEntry.Aliases[i]
+                            )!;
                         }
                     }
                 }
@@ -120,7 +135,15 @@ namespace System.Net
             }
         }
 
-        public static unsafe SocketError TryGetAddrInfo(string name, bool justAddresses, AddressFamily addressFamily, out string? hostName, out string[] aliases, out IPAddress[] addresses, out int nativeErrorCode)
+        public static unsafe SocketError TryGetAddrInfo(
+            string name,
+            bool justAddresses,
+            AddressFamily addressFamily,
+            out string? hostName,
+            out string[] aliases,
+            out IPAddress[] addresses,
+            out int nativeErrorCode
+        )
         {
             if (name == "")
             {
@@ -144,9 +167,16 @@ namespace System.Net
             return SocketError.Success;
         }
 
-        public static unsafe string? TryGetNameInfo(IPAddress addr, out SocketError socketError, out int nativeErrorCode)
+        public static unsafe string? TryGetNameInfo(
+            IPAddress addr,
+            out SocketError socketError,
+            out int nativeErrorCode
+        )
         {
-            byte* buffer = stackalloc byte[Interop.Sys.NI_MAXHOST + 1 /*for null*/];
+            byte* buffer =
+                stackalloc byte[
+                    Interop.Sys.NI_MAXHOST + 1 /*for null*/
+                ];
 
             byte isIPv6;
             int rawAddressLength;
@@ -173,11 +203,14 @@ namespace System.Net
                 Interop.Sys.NI_MAXHOST,
                 null,
                 0,
-                Interop.Sys.GetNameInfoFlags.NI_NAMEREQD);
+                Interop.Sys.GetNameInfoFlags.NI_NAMEREQD
+            );
 
             socketError = GetSocketErrorForNativeError(error);
             nativeErrorCode = error;
-            return socketError == SocketError.Success ? Marshal.PtrToStringUTF8((IntPtr)buffer) : null;
+            return socketError == SocketError.Success
+                ? Marshal.PtrToStringUTF8((IntPtr)buffer)
+                : null;
         }
 
         public static string GetHostName() => Interop.Sys.GetHostName();

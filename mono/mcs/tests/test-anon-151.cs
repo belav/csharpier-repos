@@ -1,27 +1,26 @@
 using System;
 
-public delegate void Bla ();
+public delegate void Bla();
 
 public class Driver
 {
-	public static int Main ()
-	{
-		new Driver().Repro ();
-		return 0;
-	}
+    public static int Main()
+    {
+        new Driver().Repro();
+        return 0;
+    }
 
-	void P (int a, int b) {}
+    void P(int a, int b) { }
 
-	void Repro ()
-	{ 
-		int a = -1;
-		int b = 10;
+    void Repro()
+    {
+        int a = -1;
+        int b = 10;
 
-		P (b, a++);
+        P(b, a++);
 
-		Bla c = () => P(b, ++a); 
+        Bla c = () => P(b, ++a);
 
-		P (b, a++);
-	}
-
+        P(b, a++);
+    }
 }

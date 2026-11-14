@@ -40,23 +40,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
 {
     public abstract class CoreFormatterTestsBase
     {
-        private static readonly TestComposition s_composition = EditorTestCompositions.EditorFeatures.AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
+        private static readonly TestComposition s_composition =
+            EditorTestCompositions.EditorFeatures.AddParts(
+                typeof(TestFormattingRuleFactoryServiceFactory)
+            );
 
         private readonly ITestOutputHelper _output;
 
-        protected CoreFormatterTestsBase(ITestOutputHelper output)
-            => _output = output;
+        protected CoreFormatterTestsBase(ITestOutputHelper output) => _output = output;
 
         protected abstract string GetLanguageName();
         protected abstract SyntaxNode ParseCompilationUnit(string expected);
 
         internal static void TestIndentation(
-            int point, int? expectedIndentation, ITextView textView, TestHostDocument subjectDocument, EditorOptionsService editorOptionsService)
+            int point,
+            int? expectedIndentation,
+            ITextView textView,
+            TestHostDocument subjectDocument,
+            EditorOptionsService editorOptionsService
+        )
         {
             var textUndoHistory = new Mock<ITextUndoHistoryRegistry>();
             var editorOperationsFactory = new Mock<IEditorOperationsFactoryService>();
             var editorOperations = new Mock<IEditorOperations>();
-            editorOperationsFactory.Setup(x => x.GetEditorOperations(textView)).Returns(editorOperations.Object);
+            editorOperationsFactory
+                .Setup(x => x.GetEditorOperations(textView))
+                .Returns(editorOperations.Object);
 
             var snapshot = subjectDocument.GetTextBuffer().CurrentSnapshot;
             var indentationLineFromBuffer = snapshot.GetLineFromPosition(point);
@@ -72,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             int indentationLine,
             int? expectedIndentation,
             FormattingOptions2.IndentStyle indentStyle,
-            bool useTabs)
+            bool useTabs
+        )
         {
             var language = GetLanguageName();
 
@@ -81,29 +91,49 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             var textBuffer = document.GetTextBuffer();
             var editorOptions = editorOptionsFactory.GetOptions(textBuffer);
 
-            editorOptions.SetOptionValue(DefaultOptions.IndentStyleId, indentStyle.ToEditorIndentStyle());
+            editorOptions.SetOptionValue(
+                DefaultOptions.IndentStyleId,
+                indentStyle.ToEditorIndentStyle()
+            );
             editorOptions.SetOptionValue(DefaultOptions.ConvertTabsToSpacesOptionId, !useTabs);
 
             // Remove once https://github.com/dotnet/roslyn/issues/62204 is fixed:
-            workspace.GlobalOptions.SetGlobalOption(IndentationOptionsStorage.SmartIndent, document.Project.Language, indentStyle);
+            workspace.GlobalOptions.SetGlobalOption(
+                IndentationOptionsStorage.SmartIndent,
+                document.Project.Language,
+                indentStyle
+            );
 
             var snapshot = textBuffer.CurrentSnapshot;
             var bufferGraph = new Mock<IBufferGraph>(MockBehavior.Strict);
-            bufferGraph.Setup(x => x.MapUpToSnapshot(It.IsAny<SnapshotPoint>(),
-                                                     It.IsAny<PointTrackingMode>(),
-                                                     It.IsAny<PositionAffinity>(),
-                                                     It.IsAny<ITextSnapshot>()))
-                .Returns<SnapshotPoint, PointTrackingMode, PositionAffinity, ITextSnapshot>((p, m, a, s) =>
-                {
-                    if (workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>() is TestFormattingRuleFactoryServiceFactory.Factory factory && factory.BaseIndentation != 0 && factory.TextSpan.Contains(p.Position))
+            bufferGraph
+                .Setup(x =>
+                    x.MapUpToSnapshot(
+                        It.IsAny<SnapshotPoint>(),
+                        It.IsAny<PointTrackingMode>(),
+                        It.IsAny<PositionAffinity>(),
+                        It.IsAny<ITextSnapshot>()
+                    )
+                )
+                .Returns<SnapshotPoint, PointTrackingMode, PositionAffinity, ITextSnapshot>(
+                    (p, m, a, s) =>
                     {
-                        var line = p.GetContainingLine();
-                        var projectedOffset = line.GetFirstNonWhitespaceOffset().Value - factory.BaseIndentation;
-                        return new SnapshotPoint(p.Snapshot, p.Position - projectedOffset);
-                    }
+                        if (
+                            workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>()
+                                is TestFormattingRuleFactoryServiceFactory.Factory factory
+                            && factory.BaseIndentation != 0
+                            && factory.TextSpan.Contains(p.Position)
+                        )
+                        {
+                            var line = p.GetContainingLine();
+                            var projectedOffset =
+                                line.GetFirstNonWhitespaceOffset().Value - factory.BaseIndentation;
+                            return new SnapshotPoint(p.Snapshot, p.Position - projectedOffset);
+                        }
 
-                    return p;
-                });
+                        return p;
+                    }
+                );
 
             var projectionBuffer = new Mock<ITextBuffer>(MockBehavior.Strict);
             projectionBuffer.Setup(x => x.ContentType.DisplayName).Returns("None");
@@ -115,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
 
             var provider = new SmartIndent(
                 textView.Object,
-                workspace.GetService<EditorOptionsService>());
+                workspace.GetService<EditorOptionsService>()
+            );
 
             var indentationLineFromBuffer = snapshot.GetLineFromLineNumber(indentationLine);
             var actualIndentation = provider.GetDesiredIndentation(indentationLineFromBuffer);
@@ -123,12 +154,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             Assert.Equal(expectedIndentation, actualIndentation);
         }
 
-        private protected void AssertFormatWithView(string expectedWithMarker, string codeWithMarker, OptionsCollection options = null)
+        private protected void AssertFormatWithView(
+            string expectedWithMarker,
+            string codeWithMarker,
+            OptionsCollection options = null
+        )
         {
             AssertFormatWithView(expectedWithMarker, codeWithMarker, parseOptions: null, options);
         }
 
-        private protected void AssertFormatWithView(string expectedWithMarker, string codeWithMarker, ParseOptions parseOptions, OptionsCollection options = null)
+        private protected void AssertFormatWithView(
+            string expectedWithMarker,
+            string codeWithMarker,
+            ParseOptions parseOptions,
+            OptionsCollection options = null
+        )
         {
             using var workspace = CreateWorkspace(codeWithMarker, parseOptions);
 
@@ -137,7 +177,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             // set up caret position
             var testDocument = workspace.Documents.Single();
             var view = testDocument.GetTextView();
-            view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
+            view.Caret.MoveTo(
+                new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+            );
 
             // get original buffer
             var buffer = workspace.Documents.First().GetTextBuffer();
@@ -146,21 +188,45 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
 
             var commandArgs = new FormatDocumentCommandArgs(view, view.TextBuffer);
             commandHandler.ExecuteCommand(commandArgs, TestCommandExecutionContext.Create());
-            MarkupTestFile.GetPosition(expectedWithMarker, out var expected, out int expectedPosition);
+            MarkupTestFile.GetPosition(
+                expectedWithMarker,
+                out var expected,
+                out int expectedPosition
+            );
 
             Assert.Equal(expected, view.TextSnapshot.GetText());
 
             var caretPosition = view.Caret.Position.BufferPosition.Position;
-            Assert.True(expectedPosition == caretPosition,
-                string.Format("Caret positioned incorrectly. Should have been {0}, but was {1}.", expectedPosition, caretPosition));
+            Assert.True(
+                expectedPosition == caretPosition,
+                string.Format(
+                    "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                    expectedPosition,
+                    caretPosition
+                )
+            );
         }
 
-        private TestWorkspace CreateWorkspace(string codeWithMarker, ParseOptions parseOptions = null)
-            => this.GetLanguageName() == LanguageNames.CSharp
-                ? TestWorkspace.CreateCSharp(codeWithMarker, composition: s_composition, parseOptions: parseOptions)
-                : TestWorkspace.CreateVisualBasic(codeWithMarker, composition: s_composition, parseOptions: parseOptions);
+        private TestWorkspace CreateWorkspace(
+            string codeWithMarker,
+            ParseOptions parseOptions = null
+        ) =>
+            this.GetLanguageName() == LanguageNames.CSharp
+                ? TestWorkspace.CreateCSharp(
+                    codeWithMarker,
+                    composition: s_composition,
+                    parseOptions: parseOptions
+                )
+                : TestWorkspace.CreateVisualBasic(
+                    codeWithMarker,
+                    composition: s_composition,
+                    parseOptions: parseOptions
+                );
 
-        private static string ApplyResultAndGetFormattedText(ITextBuffer buffer, IList<TextChange> changes)
+        private static string ApplyResultAndGetFormattedText(
+            ITextBuffer buffer,
+            IList<TextChange> changes
+        )
         {
             using (var edit = buffer.CreateEdit())
             {
@@ -175,45 +241,88 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             return buffer.CurrentSnapshot.GetText();
         }
 
-        private protected async Task AssertFormatAsync(string expected, string code, IEnumerable<TextSpan> spans, OptionsCollection options = null, int? baseIndentation = null)
+        private protected async Task AssertFormatAsync(
+            string expected,
+            string code,
+            IEnumerable<TextSpan> spans,
+            OptionsCollection options = null,
+            int? baseIndentation = null
+        )
         {
             using var workspace = CreateWorkspace(code);
             var hostdoc = workspace.Documents.First();
             var buffer = hostdoc.GetTextBuffer();
 
             var document = workspace.CurrentSolution.GetDocument(hostdoc.Id);
-            var documentSyntax = await ParsedDocument.CreateAsync(document, CancellationToken.None).ConfigureAwait(false);
+            var documentSyntax = await ParsedDocument
+                .CreateAsync(document, CancellationToken.None)
+                .ConfigureAwait(false);
 
             // create new buffer with cloned content
             var clonedBuffer = EditorFactory.CreateBuffer(
                 workspace.ExportProvider,
                 buffer.ContentType,
-                buffer.CurrentSnapshot.GetText());
+                buffer.CurrentSnapshot.GetText()
+            );
 
-            var formattingRuleProvider = workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleProvider =
+                workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
             if (baseIndentation.HasValue)
             {
-                var factory = (TestFormattingRuleFactoryServiceFactory.Factory)formattingRuleProvider;
+                var factory =
+                    (TestFormattingRuleFactoryServiceFactory.Factory)formattingRuleProvider;
                 factory.BaseIndentation = baseIndentation.Value;
                 factory.TextSpan = spans?.First() ?? documentSyntax.Root.FullSpan;
             }
 
             var formattingService = document.GetRequiredLanguageService<ISyntaxFormattingService>();
 
-            var formattingOptions = (options != null)
-                ? formattingService.GetFormattingOptions(options, fallbackOptions: null)
-                : formattingService.DefaultOptions;
+            var formattingOptions =
+                (options != null)
+                    ? formattingService.GetFormattingOptions(options, fallbackOptions: null)
+                    : formattingService.DefaultOptions;
 
-            var rules = formattingRuleProvider.CreateRule(documentSyntax, 0).Concat(Formatter.GetDefaultFormattingRules(document));
-            AssertFormat(workspace, expected, formattingOptions, rules, clonedBuffer, documentSyntax.Root, spans);
+            var rules = formattingRuleProvider
+                .CreateRule(documentSyntax, 0)
+                .Concat(Formatter.GetDefaultFormattingRules(document));
+            AssertFormat(
+                workspace,
+                expected,
+                formattingOptions,
+                rules,
+                clonedBuffer,
+                documentSyntax.Root,
+                spans
+            );
 
             // format with node and transform
-            AssertFormatWithTransformation(workspace, expected, formattingOptions, rules, documentSyntax.Root, spans);
+            AssertFormatWithTransformation(
+                workspace,
+                expected,
+                formattingOptions,
+                rules,
+                documentSyntax.Root,
+                spans
+            );
         }
 
-        internal void AssertFormatWithTransformation(Workspace workspace, string expected, SyntaxFormattingOptions options, IEnumerable<AbstractFormattingRule> rules, SyntaxNode root, IEnumerable<TextSpan> spans)
+        internal void AssertFormatWithTransformation(
+            Workspace workspace,
+            string expected,
+            SyntaxFormattingOptions options,
+            IEnumerable<AbstractFormattingRule> rules,
+            SyntaxNode root,
+            IEnumerable<TextSpan> spans
+        )
         {
-            var newRootNode = Formatter.Format(root, spans, workspace.Services.SolutionServices, options, rules, CancellationToken.None);
+            var newRootNode = Formatter.Format(
+                root,
+                spans,
+                workspace.Services.SolutionServices,
+                options,
+                rules,
+                CancellationToken.None
+            );
 
             Assert.Equal(expected, newRootNode.ToFullString());
 
@@ -224,9 +333,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             Assert.True(newRootNodeFromString.IsEquivalentTo(newRootNode));
         }
 
-        internal void AssertFormat(Workspace workspace, string expected, SyntaxFormattingOptions options, IEnumerable<AbstractFormattingRule> rules, ITextBuffer clonedBuffer, SyntaxNode root, IEnumerable<TextSpan> spans)
+        internal void AssertFormat(
+            Workspace workspace,
+            string expected,
+            SyntaxFormattingOptions options,
+            IEnumerable<AbstractFormattingRule> rules,
+            ITextBuffer clonedBuffer,
+            SyntaxNode root,
+            IEnumerable<TextSpan> spans
+        )
         {
-            var result = Formatter.GetFormattedTextChanges(root, spans, workspace.Services.SolutionServices, options, rules, CancellationToken.None);
+            var result = Formatter.GetFormattedTextChanges(
+                root,
+                spans,
+                workspace.Services.SolutionServices,
+                options,
+                rules,
+                CancellationToken.None
+            );
             var actual = ApplyResultAndGetFormattedText(clonedBuffer, result);
 
             if (actual != expected)
@@ -236,7 +360,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             }
         }
 
-        protected void AssertFormatWithPasteOrReturn(string expectedWithMarker, string codeWithMarker, bool allowDocumentChanges, bool isPaste = true)
+        protected void AssertFormatWithPasteOrReturn(
+            string expectedWithMarker,
+            string codeWithMarker,
+            bool allowDocumentChanges,
+            bool isPaste = true
+        )
         {
             using var workspace = CreateWorkspace(codeWithMarker);
             workspace.CanApplyChangeDocument = allowDocumentChanges;
@@ -244,7 +373,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             // set up caret position
             var testDocument = workspace.Documents.Single();
             var view = testDocument.GetTextView();
-            view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
+            view.Caret.MoveTo(
+                new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+            );
 
             // get original buffer
             var buffer = workspace.Documents.First().GetTextBuffer();
@@ -253,28 +384,55 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             {
                 var commandHandler = workspace.GetService<FormatCommandHandler>();
                 var commandArgs = new PasteCommandArgs(view, view.TextBuffer);
-                commandHandler.ExecuteCommand(commandArgs, () => { }, TestCommandExecutionContext.Create());
+                commandHandler.ExecuteCommand(
+                    commandArgs,
+                    () => { },
+                    TestCommandExecutionContext.Create()
+                );
             }
             else
             {
                 // Return Key Command
                 var commandHandler = workspace.GetService<FormatCommandHandler>();
                 var commandArgs = new ReturnKeyCommandArgs(view, view.TextBuffer);
-                commandHandler.ExecuteCommand(commandArgs, () => { }, TestCommandExecutionContext.Create());
+                commandHandler.ExecuteCommand(
+                    commandArgs,
+                    () => { },
+                    TestCommandExecutionContext.Create()
+                );
             }
 
-            MarkupTestFile.GetPosition(expectedWithMarker, out var expected, out int expectedPosition);
+            MarkupTestFile.GetPosition(
+                expectedWithMarker,
+                out var expected,
+                out int expectedPosition
+            );
 
             Assert.Equal(expected, view.TextSnapshot.GetText());
 
             var caretPosition = view.Caret.Position.BufferPosition.Position;
-            Assert.True(expectedPosition == caretPosition,
-                string.Format("Caret positioned incorrectly. Should have been {0}, but was {1}.", expectedPosition, caretPosition));
+            Assert.True(
+                expectedPosition == caretPosition,
+                string.Format(
+                    "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                    expectedPosition,
+                    caretPosition
+                )
+            );
         }
 
-        private protected async Task AssertFormatWithBaseIndentAsync(string expected, string markupCode, int baseIndentation, OptionsCollection options = null)
+        private protected async Task AssertFormatWithBaseIndentAsync(
+            string expected,
+            string markupCode,
+            int baseIndentation,
+            OptionsCollection options = null
+        )
         {
-            TestFileMarkupParser.GetSpans(markupCode, out var code, out ImmutableArray<TextSpan> spans);
+            TestFileMarkupParser.GetSpans(
+                markupCode,
+                out var code,
+                out ImmutableArray<TextSpan> spans
+            );
             await AssertFormatAsync(expected, code, spans, options, baseIndentation);
         }
 
@@ -286,9 +444,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         protected static void AssertFormatOnArbitraryNode(SyntaxNode node, string expected)
         {
             using var workspace = new AdhocWorkspace();
-            var formattingService = workspace.Services.GetLanguageServices(node.Language).GetRequiredService<ISyntaxFormattingService>();
-            var options = formattingService.GetFormattingOptions(StructuredAnalyzerConfigOptions.Empty, fallbackOptions: null);
-            var result = Formatter.Format(node, workspace.Services.SolutionServices, options, CancellationToken.None);
+            var formattingService = workspace
+                .Services.GetLanguageServices(node.Language)
+                .GetRequiredService<ISyntaxFormattingService>();
+            var options = formattingService.GetFormattingOptions(
+                StructuredAnalyzerConfigOptions.Empty,
+                fallbackOptions: null
+            );
+            var result = Formatter.Format(
+                node,
+                workspace.Services.SolutionServices,
+                options,
+                CancellationToken.None
+            );
             var actual = result.GetText().ToString();
 
             Assert.Equal(expected, actual);

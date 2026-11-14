@@ -25,9 +25,9 @@ public static class ObservableCollectionExtensions
     /// <param name="source">The collection that the binding list will stay in sync with.</param>
     /// <returns>The binding list.</returns>
     [RequiresUnreferencedCode(
-        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
+        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
+    )]
     [RequiresDynamicCode("Requires calling MakeGenericType on the property descriptor's type")]
     public static BindingList<T> ToBindingList<T>(this ObservableCollection<T> source)
-        where T : class
-        => new ObservableBackedBindingList<T>(source);
+        where T : class => new ObservableBackedBindingList<T>(source);
 }

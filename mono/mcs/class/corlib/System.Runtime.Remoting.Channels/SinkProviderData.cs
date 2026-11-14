@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,39 +34,33 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class SinkProviderData
-	{
-		string sinkName;
-		ArrayList children;
-		Hashtable properties;
-		
-		public SinkProviderData (string name)
-		{
-			sinkName = name;
-			children = new ArrayList ();
-			properties = new Hashtable ();
-		}
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class SinkProviderData
+    {
+        string sinkName;
+        ArrayList children;
+        Hashtable properties;
 
-		public IList Children
-		{
-			get {
-				return children;
-			}
-		}
+        public SinkProviderData(string name)
+        {
+            sinkName = name;
+            children = new ArrayList();
+            properties = new Hashtable();
+        }
 
-		public string Name
-	        {
-			get {
-				return sinkName;
-			}
-		}
+        public IList Children
+        {
+            get { return children; }
+        }
 
-		public IDictionary Properties
-		{
-			get {
-				return properties;
-			}
-		}
-	}
+        public string Name
+        {
+            get { return sinkName; }
+        }
+
+        public IDictionary Properties
+        {
+            get { return properties; }
+        }
+    }
 }

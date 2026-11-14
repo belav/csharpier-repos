@@ -26,19 +26,22 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="wrappedRsaSecurityTokenHandler">The RsaSecurityTokenHandler to wrap.</param>
         /// <param name="exceptionMapper">Converts token validation exceptions to SOAP faults.</param>
-        public WrappedRsaSecurityTokenAuthenticator( 
-            RsaSecurityTokenHandler wrappedRsaSecurityTokenHandler, 
-            ExceptionMapper exceptionMapper )
+        public WrappedRsaSecurityTokenAuthenticator(
+            RsaSecurityTokenHandler wrappedRsaSecurityTokenHandler,
+            ExceptionMapper exceptionMapper
+        )
             : base()
         {
-            if ( wrappedRsaSecurityTokenHandler == null )
+            if (wrappedRsaSecurityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "wrappedRsaSecurityTokenHandler" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappedRsaSecurityTokenHandler"
+                );
             }
 
-            if ( exceptionMapper == null )
+            if (exceptionMapper == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "exceptionMapper" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("exceptionMapper");
             }
 
             _wrappedRsaSecurityTokenHandler = wrappedRsaSecurityTokenHandler;
@@ -51,16 +54,18 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="token">Token to be validated.</param>
         /// <returns>Read-only collection of IAuthorizationPolicy</returns>
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore( SecurityToken token )
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             IEnumerable<ClaimsIdentity> identities = null;
             try
             {
-                identities = _wrappedRsaSecurityTokenHandler.ValidateToken( token );
+                identities = _wrappedRsaSecurityTokenHandler.ValidateToken(token);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !_exceptionMapper.HandleSecurityTokenProcessingException( ex ) )
+                if (!_exceptionMapper.HandleSecurityTokenProcessingException(ex))
                 {
                     throw;
                 }

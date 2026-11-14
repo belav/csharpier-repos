@@ -11,19 +11,36 @@ namespace System.Net.Test.Common
 
             public static string Host => GetValue("DOTNET_TEST_WEBSOCKETHOST", DefaultAzureServer);
 
-            public static string SecureHost => GetValue("DOTNET_TEST_SECUREWEBSOCKETHOST", DefaultAzureServer);
+            public static string SecureHost =>
+                GetValue("DOTNET_TEST_SECUREWEBSOCKETHOST", DefaultAzureServer);
 
             private const string EchoHandler = "WebSocket/EchoWebSocket.ashx";
             private const string EchoHeadersHandler = "WebSocket/EchoWebSocketHeaders.ashx";
 
-            public static readonly Uri RemoteEchoServer = new Uri("ws://" + Host + "/" + EchoHandler);
-            public static readonly Uri SecureRemoteEchoServer = new Uri("wss://" + SecureHost + "/" + EchoHandler);
+            public static readonly Uri RemoteEchoServer = new Uri(
+                "ws://" + Host + "/" + EchoHandler
+            );
+            public static readonly Uri SecureRemoteEchoServer = new Uri(
+                "wss://" + SecureHost + "/" + EchoHandler
+            );
 
-            public static readonly Uri RemoteEchoHeadersServer = new Uri("ws://" + Host + "/" + EchoHeadersHandler);
-            public static readonly Uri SecureRemoteEchoHeadersServer = new Uri("wss://" + SecureHost + "/" + EchoHeadersHandler);
+            public static readonly Uri RemoteEchoHeadersServer = new Uri(
+                "ws://" + Host + "/" + EchoHeadersHandler
+            );
+            public static readonly Uri SecureRemoteEchoHeadersServer = new Uri(
+                "wss://" + SecureHost + "/" + EchoHeadersHandler
+            );
 
-            public static readonly object[][] EchoServers = { new object[] { RemoteEchoServer }, new object[] { SecureRemoteEchoServer } };
-            public static readonly object[][] EchoHeadersServers = { new object[] { RemoteEchoHeadersServer }, new object[] { SecureRemoteEchoHeadersServer } };
+            public static readonly object[][] EchoServers =
+            {
+                new object[] { RemoteEchoServer },
+                new object[] { SecureRemoteEchoServer },
+            };
+            public static readonly object[][] EchoHeadersServers =
+            {
+                new object[] { RemoteEchoHeadersServer },
+                new object[] { SecureRemoteEchoHeadersServer },
+            };
         }
     }
 }

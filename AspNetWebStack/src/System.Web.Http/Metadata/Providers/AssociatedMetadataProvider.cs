@@ -16,9 +16,13 @@ namespace System.Web.Http.Metadata.Providers
     public abstract class AssociatedMetadataProvider<TModelMetadata> : ModelMetadataProvider
         where TModelMetadata : ModelMetadata
     {
-        private ConcurrentDictionary<Type, TypeInformation> _typeInfoCache = new ConcurrentDictionary<Type, TypeInformation>();
+        private ConcurrentDictionary<Type, TypeInformation> _typeInfoCache =
+            new ConcurrentDictionary<Type, TypeInformation>();
 
-        public sealed override IEnumerable<ModelMetadata> GetMetadataForProperties(object container, Type containerType)
+        public sealed override IEnumerable<ModelMetadata> GetMetadataForProperties(
+            object container,
+            Type containerType
+        )
         {
             if (containerType == null)
             {
@@ -28,7 +32,10 @@ namespace System.Web.Http.Metadata.Providers
             return GetMetadataForPropertiesImpl(container, containerType);
         }
 
-        private IEnumerable<ModelMetadata> GetMetadataForPropertiesImpl(object container, Type containerType)
+        private IEnumerable<ModelMetadata> GetMetadataForPropertiesImpl(
+            object container,
+            Type containerType
+        )
         {
             TypeInformation typeInfo = GetTypeInformation(containerType);
             foreach (KeyValuePair<string, PropertyInformation> kvp in typeInfo.Properties)
@@ -44,7 +51,11 @@ namespace System.Web.Http.Metadata.Providers
             }
         }
 
-        public sealed override ModelMetadata GetMetadataForProperty(Func<object> modelAccessor, Type containerType, string propertyName)
+        public sealed override ModelMetadata GetMetadataForProperty(
+            Func<object> modelAccessor,
+            Type containerType,
+            string propertyName
+        )
         {
             if (containerType == null)
             {
@@ -59,13 +70,21 @@ namespace System.Web.Http.Metadata.Providers
             PropertyInformation propertyInfo;
             if (!typeInfo.Properties.TryGetValue(propertyName, out propertyInfo))
             {
-                throw Error.Argument("propertyName", SRResources.Common_PropertyNotFound, containerType, propertyName);
+                throw Error.Argument(
+                    "propertyName",
+                    SRResources.Common_PropertyNotFound,
+                    containerType,
+                    propertyName
+                );
             }
 
             return CreateMetadataFromPrototype(propertyInfo.Prototype, modelAccessor);
         }
 
-        public sealed override ModelMetadata GetMetadataForType(Func<object> modelAccessor, Type modelType)
+        public sealed override ModelMetadata GetMetadataForType(
+            Func<object> modelAccessor,
+            Type modelType
+        )
         {
             if (modelType == null)
             {
@@ -77,10 +96,18 @@ namespace System.Web.Http.Metadata.Providers
         }
 
         // Override for creating the prototype metadata (without the accessor)
-        protected abstract TModelMetadata CreateMetadataPrototype(IEnumerable<Attribute> attributes, Type containerType, Type modelType, string propertyName);
+        protected abstract TModelMetadata CreateMetadataPrototype(
+            IEnumerable<Attribute> attributes,
+            Type containerType,
+            Type modelType,
+            string propertyName
+        );
 
         // Override for applying the prototype + modelAccess to yield the final metadata
-        protected abstract TModelMetadata CreateMetadataFromPrototype(TModelMetadata prototype, Func<object> modelAccessor);
+        protected abstract TModelMetadata CreateMetadataFromPrototype(
+            TModelMetadata prototype,
+            Func<object> modelAccessor
+        );
 
         private TypeInformation GetTypeInformation(Type type)
         {
@@ -99,9 +126,15 @@ namespace System.Web.Http.Metadata.Providers
             TypeInformation info = new TypeInformation();
             ICustomTypeDescriptor typeDescriptor = TypeDescriptorHelper.Get(type);
             info.TypeDescriptor = typeDescriptor;
-            info.Prototype = CreateMetadataPrototype(AsAttributes(typeDescriptor.GetAttributes()), containerType: null, modelType: type, propertyName: null);
-            
-            Dictionary<string, PropertyInformation> properties = new Dictionary<string, PropertyInformation>();
+            info.Prototype = CreateMetadataPrototype(
+                AsAttributes(typeDescriptor.GetAttributes()),
+                containerType: null,
+                modelType: type,
+                propertyName: null
+            );
+
+            Dictionary<string, PropertyInformation> properties =
+                new Dictionary<string, PropertyInformation>();
             foreach (PropertyDescriptor property in typeDescriptor.GetProperties())
             {
                 // Avoid re-generating a property descriptor if one has already been generated for the property name
@@ -115,11 +148,19 @@ namespace System.Web.Http.Metadata.Providers
             return info;
         }
 
-        private PropertyInformation CreatePropertyInformation(Type containerType, PropertyDescriptor property)
+        private PropertyInformation CreatePropertyInformation(
+            Type containerType,
+            PropertyDescriptor property
+        )
         {
             PropertyInformation info = new PropertyInformation();
             info.ValueAccessor = CreatePropertyValueAccessor(property);
-            info.Prototype = CreateMetadataPrototype(AsAttributes(property.Attributes), containerType, property.PropertyType, property.Name);
+            info.Prototype = CreateMetadataPrototype(
+                AsAttributes(property.Attributes),
+                containerType,
+                property.PropertyType,
+                property.Name
+            );
             return info;
         }
 
@@ -138,14 +179,21 @@ namespace System.Web.Http.Metadata.Providers
             if (declaringType.IsVisible)
             {
                 string propertyName = property.Name;
-                PropertyInfo propertyInfo = declaringType.GetProperty(propertyName, property.PropertyType);
+                PropertyInfo propertyInfo = declaringType.GetProperty(
+                    propertyName,
+                    property.PropertyType
+                );
 
                 if (propertyInfo != null && propertyInfo.CanRead)
                 {
                     MethodInfo getMethodInfo = propertyInfo.GetGetMethod();
                     if (getMethodInfo != null)
                     {
-                        return CreateDynamicValueAccessor(getMethodInfo, declaringType, propertyName);
+                        return CreateDynamicValueAccessor(
+                            getMethodInfo,
+                            declaringType,
+                            propertyName
+                        );
                     }
                 }
             }
@@ -157,12 +205,22 @@ namespace System.Web.Http.Metadata.Providers
         // Uses Lightweight Code Gen to generate a tiny delegate that gets the property value
         // This is an optimization to avoid having to go through the much slower System.Reflection APIs
         // e.g. generates (object o) => (Person)o.Id
-        private static Func<object, object> CreateDynamicValueAccessor(MethodInfo getMethodInfo, Type declaringType, string propertyName)
+        private static Func<object, object> CreateDynamicValueAccessor(
+            MethodInfo getMethodInfo,
+            Type declaringType,
+            string propertyName
+        )
         {
-            Contract.Assert(getMethodInfo != null && getMethodInfo.IsPublic && !getMethodInfo.IsStatic);
+            Contract.Assert(
+                getMethodInfo != null && getMethodInfo.IsPublic && !getMethodInfo.IsStatic
+            );
 
             Type propertyType = getMethodInfo.ReturnType;
-            DynamicMethod dynamicMethod = new DynamicMethod("Get" + propertyName + "From" + declaringType.Name, typeof(object), new Type[] { typeof(object) });
+            DynamicMethod dynamicMethod = new DynamicMethod(
+                "Get" + propertyName + "From" + declaringType.Name,
+                typeof(object),
+                new Type[] { typeof(object) }
+            );
             ILGenerator ilg = dynamicMethod.GetILGenerator();
 
             // Load the container onto the stack, convert from object => declaring type for the property

@@ -7,7 +7,6 @@ namespace System.Formats.Cbor.Tests
     {
         public static readonly DateTimeOffset UnixEpoch = DateTimeOffset.UnixEpoch;
 
-        public static int SingleToInt32Bits(float value)
-            => BitConverter.SingleToInt32Bits(value);
+        public static int SingleToInt32Bits(float value) => BitConverter.SingleToInt32Bits(value);
     }
 }

@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
 
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     class PeerValidationBehavior : IEndpointBehavior, IServiceBehavior
     {
         public static PeerValidationBehavior Instance
@@ -32,7 +32,7 @@ namespace System.ServiceModel.Dispatcher
 
             foreach (OperationDescription operation in contract.Operations)
             {
-                if (operation.Messages.Count > 1)   // Request-reply
+                if (operation.Messages.Count > 1) // Request-reply
                 {
                     requestReply = true;
                     break;
@@ -51,27 +51,37 @@ namespace System.ServiceModel.Dispatcher
             ValidateHelper(contract, binding);
         }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
-        {
-        }
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        ) { }
 
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
-        {
-        }
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (description == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("description");
@@ -90,8 +100,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (binding is NetPeerTcpBinding && IsRequestReplyContract(contract))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.BindingDoesnTSupportRequestReplyButContract1, binding.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.BindingDoesnTSupportRequestReplyButContract1, binding.Name)
+                    )
+                );
             }
         }
     }

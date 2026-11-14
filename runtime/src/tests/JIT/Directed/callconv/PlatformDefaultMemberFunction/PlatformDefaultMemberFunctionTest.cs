@@ -3,10 +3,10 @@
 
 using System;
 using System.Reflection;
-using System.Text;
-using Xunit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
+using Xunit;
 
 unsafe class PlatformDefaultMemberFunctionNative
 {
@@ -45,7 +45,7 @@ unsafe class PlatformDefaultMemberFunctionNative
 
     public enum E : uint
     {
-        Value = 42
+        Value = 42,
     }
 
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
@@ -53,12 +53,16 @@ unsafe class PlatformDefaultMemberFunctionNative
 
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern SizeF GetSizeFromManaged(C* c);
+
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern Width GetWidthFromManaged(C* c);
+
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern IntWrapper GetHeightAsIntFromManaged(C* c);
+
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern E GetEFromManaged(C* c);
+
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern CLong GetWidthAsLongFromManaged(C* c);
 }
@@ -72,7 +76,8 @@ public unsafe class PlatformDefaultMemberFunctionTest
         {
             float width = 1.0f;
             float height = 2.0f;
-            PlatformDefaultMemberFunctionNative.C* instance = PlatformDefaultMemberFunctionNative.CreateInstanceOfC(width, height);
+            PlatformDefaultMemberFunctionNative.C* instance =
+                PlatformDefaultMemberFunctionNative.CreateInstanceOfC(width, height);
             Test8ByteHFA(instance);
             Test4ByteHFA(instance);
             Test4ByteNonHFA(instance);
@@ -94,7 +99,10 @@ public unsafe class PlatformDefaultMemberFunctionTest
 
     private static void Test8ByteHFA(PlatformDefaultMemberFunctionNative.C* instance)
     {
-        PlatformDefaultMemberFunctionNative.SizeF result = instance->vtable->getSize(instance, 1234);
+        PlatformDefaultMemberFunctionNative.SizeF result = instance->vtable->getSize(
+            instance,
+            1234
+        );
 
         Assert.Equal(instance->width, result.width);
         Assert.Equal(instance->height, result.height);
@@ -109,7 +117,9 @@ public unsafe class PlatformDefaultMemberFunctionTest
 
     private static void Test4ByteNonHFA(PlatformDefaultMemberFunctionNative.C* instance)
     {
-        PlatformDefaultMemberFunctionNative.IntWrapper result = instance->vtable->getHeightAsInt(instance);
+        PlatformDefaultMemberFunctionNative.IntWrapper result = instance->vtable->getHeightAsInt(
+            instance
+        );
 
         Assert.Equal((int)instance->height, result.i);
     }
@@ -131,7 +141,8 @@ public unsafe class PlatformDefaultMemberFunctionTest
     private static void Test8ByteHFAUnmanagedCallersOnly()
     {
         PlatformDefaultMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);
-        PlatformDefaultMemberFunctionNative.SizeF result = PlatformDefaultMemberFunctionNative.GetSizeFromManaged(&c);
+        PlatformDefaultMemberFunctionNative.SizeF result =
+            PlatformDefaultMemberFunctionNative.GetSizeFromManaged(&c);
 
         Assert.Equal(c.width, result.width);
         Assert.Equal(c.height, result.height);
@@ -140,7 +151,8 @@ public unsafe class PlatformDefaultMemberFunctionTest
     private static void Test4ByteHFAUnmanagedCallersOnly()
     {
         PlatformDefaultMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);
-        PlatformDefaultMemberFunctionNative.Width result = PlatformDefaultMemberFunctionNative.GetWidthFromManaged(&c);
+        PlatformDefaultMemberFunctionNative.Width result =
+            PlatformDefaultMemberFunctionNative.GetWidthFromManaged(&c);
 
         Assert.Equal(c.width, result.width);
     }
@@ -148,7 +160,8 @@ public unsafe class PlatformDefaultMemberFunctionTest
     private static void Test4ByteNonHFAUnmanagedCallersOnly()
     {
         PlatformDefaultMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);
-        PlatformDefaultMemberFunctionNative.IntWrapper result = PlatformDefaultMemberFunctionNative.GetHeightAsIntFromManaged(&c);
+        PlatformDefaultMemberFunctionNative.IntWrapper result =
+            PlatformDefaultMemberFunctionNative.GetHeightAsIntFromManaged(&c);
 
         Assert.Equal((int)c.height, result.i);
     }
@@ -156,7 +169,8 @@ public unsafe class PlatformDefaultMemberFunctionTest
     private static void TestEnumUnmanagedCallersOnly()
     {
         PlatformDefaultMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);
-        PlatformDefaultMemberFunctionNative.E result = PlatformDefaultMemberFunctionNative.GetEFromManaged(&c);
+        PlatformDefaultMemberFunctionNative.E result =
+            PlatformDefaultMemberFunctionNative.GetEFromManaged(&c);
 
         Assert.Equal(c.dummy, result);
     }
@@ -169,14 +183,17 @@ public unsafe class PlatformDefaultMemberFunctionTest
         Assert.Equal((nint)c.width, result.Value);
     }
 
-    private static PlatformDefaultMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(float width, float height)
+    private static PlatformDefaultMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(
+        float width,
+        float height
+    )
     {
         return new PlatformDefaultMemberFunctionNative.C
         {
             vtable = UnmanagedCallersOnlyVtable,
             dummy = PlatformDefaultMemberFunctionNative.E.Value,
             width = width,
-            height = height
+            height = height,
         };
     }
 
@@ -188,7 +205,10 @@ public unsafe class PlatformDefaultMemberFunctionTest
         {
             if (unmanagedCallersOnlyVtable == null)
             {
-                unmanagedCallersOnlyVtable = (PlatformDefaultMemberFunctionNative.C.VtableLayout*)Marshal.AllocHGlobal(sizeof(PlatformDefaultMemberFunctionNative.C.VtableLayout));
+                unmanagedCallersOnlyVtable = (PlatformDefaultMemberFunctionNative.C.VtableLayout*)
+                    Marshal.AllocHGlobal(
+                        sizeof(PlatformDefaultMemberFunctionNative.C.VtableLayout)
+                    );
                 unmanagedCallersOnlyVtable->getSize = &GetSize;
                 unmanagedCallersOnlyVtable->getWidth = &GetWidth;
                 unmanagedCallersOnlyVtable->getHeightAsInt = &GetHeightAsInt;
@@ -199,41 +219,44 @@ public unsafe class PlatformDefaultMemberFunctionTest
         }
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvMemberFunction)})]
-    private static PlatformDefaultMemberFunctionNative.SizeF GetSize(PlatformDefaultMemberFunctionNative.C* c, int unused)
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
+    private static PlatformDefaultMemberFunctionNative.SizeF GetSize(
+        PlatformDefaultMemberFunctionNative.C* c,
+        int unused
+    )
     {
         return new PlatformDefaultMemberFunctionNative.SizeF
         {
             width = c->width,
-            height = c->height
+            height = c->height,
         };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvMemberFunction)})]
-    private static PlatformDefaultMemberFunctionNative.Width GetWidth(PlatformDefaultMemberFunctionNative.C* c)
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
+    private static PlatformDefaultMemberFunctionNative.Width GetWidth(
+        PlatformDefaultMemberFunctionNative.C* c
+    )
     {
-        return new PlatformDefaultMemberFunctionNative.Width
-        {
-            width = c->width
-        };
+        return new PlatformDefaultMemberFunctionNative.Width { width = c->width };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvMemberFunction)})]
-    private static PlatformDefaultMemberFunctionNative.IntWrapper GetHeightAsInt(PlatformDefaultMemberFunctionNative.C* c)
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
+    private static PlatformDefaultMemberFunctionNative.IntWrapper GetHeightAsInt(
+        PlatformDefaultMemberFunctionNative.C* c
+    )
     {
-        return new PlatformDefaultMemberFunctionNative.IntWrapper
-        {
-            i = (int)c->height
-        };
+        return new PlatformDefaultMemberFunctionNative.IntWrapper { i = (int)c->height };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvMemberFunction)})]
-    private static PlatformDefaultMemberFunctionNative.E GetE(PlatformDefaultMemberFunctionNative.C* c)
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
+    private static PlatformDefaultMemberFunctionNative.E GetE(
+        PlatformDefaultMemberFunctionNative.C* c
+    )
     {
         return c->dummy;
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvMemberFunction)})]
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
     private static CLong GetWidthAsLong(PlatformDefaultMemberFunctionNative.C* c)
     {
         return new CLong((nint)c->width);

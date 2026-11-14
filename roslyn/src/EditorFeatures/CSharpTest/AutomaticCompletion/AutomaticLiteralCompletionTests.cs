@@ -557,14 +557,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                SingleQuote.OpenCharacter, SingleQuote.CloseCharacter);
+                SingleQuote.OpenCharacter,
+                SingleQuote.CloseCharacter
+            );
         }
 
         internal static Holder CreateSessionDoubleQuote(string code)
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                DoubleQuote.OpenCharacter, DoubleQuote.CloseCharacter);
+                DoubleQuote.OpenCharacter,
+                DoubleQuote.CloseCharacter
+            );
         }
     }
 }

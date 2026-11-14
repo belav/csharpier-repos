@@ -26,18 +26,12 @@ namespace System.Net.NetworkInformation
 
         public override int Count
         {
-            get
-            {
-                return _addresses.Count;
-            }
+            get { return _addresses.Count; }
         }
 
         public override bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override void Add(IPAddress address)
@@ -57,10 +51,7 @@ namespace System.Net.NetworkInformation
 
         public override IPAddress this[int index]
         {
-            get
-            {
-                return _addresses[index];
-            }
+            get { return _addresses[index]; }
         }
 
         public override IEnumerator<IPAddress> GetEnumerator()

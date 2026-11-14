@@ -13,16 +13,19 @@ namespace System.Net.Http
         {
             private int _disposed; // 0==no, 1==yes
 
-            public HttpContentReadStream(HttpConnection connection) : base(connection)
-            {
-            }
+            public HttpContentReadStream(HttpConnection connection)
+                : base(connection) { }
 
             public sealed override bool CanRead => _disposed == 0;
             public sealed override bool CanWrite => false;
 
-            public sealed override void Write(ReadOnlySpan<byte> buffer) => throw new NotSupportedException(SR.net_http_content_readonly_stream);
+            public sealed override void Write(ReadOnlySpan<byte> buffer) =>
+                throw new NotSupportedException(SR.net_http_content_readonly_stream);
 
-            public sealed override ValueTask WriteAsync(ReadOnlyMemory<byte> destination, CancellationToken cancellationToken) => throw new NotSupportedException();
+            public sealed override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> destination,
+                CancellationToken cancellationToken
+            ) => throw new NotSupportedException();
 
             public virtual bool NeedsDrain => false;
 
@@ -41,7 +44,9 @@ namespace System.Net.Http
 
             public virtual ValueTask<bool> DrainAsync(int maxDrainBytes)
             {
-                Debug.Fail($"DrainAsync should not be called for this response stream: {GetType()}");
+                Debug.Fail(
+                    $"DrainAsync should not be called for this response stream: {GetType()}"
+                );
                 return new ValueTask<bool>(false);
             }
 
@@ -71,17 +76,20 @@ namespace System.Net.Http
 
             private async Task DrainOnDisposeAsync()
             {
-                HttpConnection? connection = _connection;        // Will be null after drain succeeds
+                HttpConnection? connection = _connection; // Will be null after drain succeeds
                 Debug.Assert(connection != null);
                 try
                 {
-                    bool drained = await DrainAsync(connection._pool.Settings._maxResponseDrainSize).ConfigureAwait(false);
+                    bool drained = await DrainAsync(connection._pool.Settings._maxResponseDrainSize)
+                        .ConfigureAwait(false);
 
                     if (NetEventSource.Log.IsEnabled())
                     {
-                        connection.Trace(drained ?
-                            "Connection drain succeeded" :
-                            $"Connection drain failed when MaxResponseDrainSize={connection._pool.Settings._maxResponseDrainSize} bytes or MaxResponseDrainTime=={connection._pool.Settings._maxResponseDrainTime} exceeded");
+                        connection.Trace(
+                            drained
+                                ? "Connection drain succeeded"
+                                : $"Connection drain failed when MaxResponseDrainSize={connection._pool.Settings._maxResponseDrainSize} bytes or MaxResponseDrainTime=={connection._pool.Settings._maxResponseDrainTime} exceeded"
+                        );
                     }
                 }
                 catch (Exception e)

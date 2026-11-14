@@ -15,11 +15,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.SimplifyInterpolation
 
         protected override bool PermitNonLiteralAlignmentComponents => true;
 
-        protected override SyntaxNode GetPreservedInterpolationExpressionSyntax(IOperation operation)
+        protected override SyntaxNode GetPreservedInterpolationExpressionSyntax(
+            IOperation operation
+        )
         {
             return operation.Syntax switch
             {
-                ConditionalExpressionSyntax { Parent: ParenthesizedExpressionSyntax parent } => parent,
+                ConditionalExpressionSyntax { Parent: ParenthesizedExpressionSyntax parent } =>
+                    parent,
                 var syntax => syntax,
             };
         }

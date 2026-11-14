@@ -13,7 +13,10 @@ namespace System.Runtime.DurableInstancing
     [Fx.Tag.XamlVisible(false)]
     public sealed class InstanceKeyView
     {
-        static readonly ReadOnlyDictionaryInternal<XName, InstanceValue> emptyProperties = new ReadOnlyDictionaryInternal<XName, InstanceValue>(new Dictionary<XName, InstanceValue>(0));
+        static readonly ReadOnlyDictionaryInternal<XName, InstanceValue> emptyProperties =
+            new ReadOnlyDictionaryInternal<XName, InstanceValue>(
+                new Dictionary<XName, InstanceValue>(0)
+            );
 
         IDictionary<XName, InstanceValue> metadata;
         Dictionary<XName, InstanceValue> accumulatedMetadataWrites;
@@ -21,7 +24,8 @@ namespace System.Runtime.DurableInstancing
         internal InstanceKeyView(Guid key)
         {
             InstanceKey = key;
-            InstanceKeyMetadataConsistency = InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
+            InstanceKeyMetadataConsistency =
+                InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
         }
 
         InstanceKeyView(InstanceKeyView source)
@@ -43,7 +47,10 @@ namespace System.Runtime.DurableInstancing
             {
                 IDictionary<XName, InstanceValue> pendingWrites = this.accumulatedMetadataWrites;
                 this.accumulatedMetadataWrites = null;
-                this.metadata = pendingWrites.ReadOnlyMergeInto(this.metadata ?? InstanceKeyView.emptyProperties, true);
+                this.metadata = pendingWrites.ReadOnlyMergeInto(
+                    this.metadata ?? InstanceKeyView.emptyProperties,
+                    true
+                );
                 return this.metadata;
             }
             internal set

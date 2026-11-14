@@ -32,7 +32,9 @@ namespace System.Composition.Hosting
         /// Create the composition host.
         /// </summary>
         /// <returns>The container as an <see cref="CompositionHost"/>.</returns>
-        public static CompositionHost CreateCompositionHost(params ExportDescriptorProvider[] providers)
+        public static CompositionHost CreateCompositionHost(
+            params ExportDescriptorProvider[] providers
+        )
         {
             return CreateCompositionHost((IEnumerable<ExportDescriptorProvider>)providers);
         }
@@ -41,25 +43,31 @@ namespace System.Composition.Hosting
         /// Create the composition host.
         /// </summary>
         /// <returns>The container as an <see cref="CompositionHost"/>.</returns>
-        public static CompositionHost CreateCompositionHost(IEnumerable<ExportDescriptorProvider> providers)
+        public static CompositionHost CreateCompositionHost(
+            IEnumerable<ExportDescriptorProvider> providers
+        )
         {
             if (providers is null)
             {
                 throw new ArgumentNullException(nameof(providers));
             }
 
-            var allProviders = new ExportDescriptorProvider[] {
+            var allProviders = new ExportDescriptorProvider[]
+            {
                 new LazyExportDescriptorProvider(),
                 new ExportFactoryExportDescriptorProvider(),
                 new ImportManyExportDescriptorProvider(),
                 new LazyWithMetadataExportDescriptorProvider(),
                 new CurrentScopeExportDescriptorProvider(),
-                new ExportFactoryWithMetadataExportDescriptorProvider()
+                new ExportFactoryWithMetadataExportDescriptorProvider(),
             }
-            .Concat(providers)
-            .ToArray();
+                .Concat(providers)
+                .ToArray();
 
-            var container = new LifetimeContext(new ExportDescriptorRegistry(allProviders), s_noBoundaries);
+            var container = new LifetimeContext(
+                new ExportDescriptorRegistry(allProviders),
+                s_noBoundaries
+            );
             return new CompositionHost(container);
         }
 

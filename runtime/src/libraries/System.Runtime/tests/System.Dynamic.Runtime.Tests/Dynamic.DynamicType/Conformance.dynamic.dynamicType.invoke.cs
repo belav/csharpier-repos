@@ -16,6 +16,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static bool Called = false;
+
         public static void CallMe(int x)
         {
             if (x == 1)
@@ -25,13 +26,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
 
     public class B
     {
-        public dynamic Foo
-        {
-            get;
-            set;
-        }
+        public dynamic Foo { get; set; }
 
         public dynamic Bar;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -40,7 +38,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var y = new B();
             dynamic d = new B();
             //using the property
@@ -75,8 +74,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invoke002.invoke002
 {
     // <Title> Fields and properties of dynamic type are invokeable</Title>
@@ -90,6 +87,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static bool Called = false;
+
         public static void CallMe(int x)
         {
             if (x == 1)
@@ -100,6 +98,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class B
     {
         public dynamic Foo = (Action<int>)Test.CallMe;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -108,7 +107,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var y = new B();
             dynamic d = new B();
             //using the initialized field
@@ -130,8 +130,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invoke003.invoke003
 {
     // <Title> Fields and properties of dynamic type are invokeable</Title>
@@ -145,6 +143,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static bool Called = false;
+
         public static void CallMe(int x)
         {
             if (x == 1)
@@ -157,7 +156,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
         public dynamic Bar = (Action<int>)Test.CallMe;
         public event Action<int> Foo;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -165,7 +163,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var y = new B();
             dynamic d = new B();
             //using the initialized field
@@ -188,8 +187,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invoke004.invoke004
 {
     // <Title> Fields and properties of dynamic type are invokeable</Title>
@@ -205,6 +202,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static int State = 0;
+
         public static void CallMe(int x)
         {
             Test.State = 1;
@@ -228,6 +226,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     {
         public object Foo = (Action<int>)Test.CallMe; //this is not considered invocable
         public dynamic Bar = (Action<int>)Test.CallMe; //this is considered invocable
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -236,7 +235,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var y = new B();
             dynamic d = new B();
             tests++;
@@ -265,8 +265,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invoke005.invoke005
 {
     // <Title> Fields and properties of dynamic type are invokeable</Title>
@@ -282,6 +280,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static int State = 0;
+
         public static void CallMe(int x)
         {
             Test.State = 1;
@@ -305,6 +304,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     {
         public object Foo = (Action<int>)Test.CallMe; //this is not considered invocable
         public dynamic Bar = (Action<int>)Test.CallMe; //this is considered invocable
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -313,7 +313,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var y = new B();
             dynamic d = new B();
             tests++;
@@ -342,8 +343,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invoke006.invoke006
 {
     // <Title> Fields and properties of dynamic type are invokeable</Title>
@@ -358,6 +357,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static int State = 0;
+
         public static void CallMe(int x)
         {
             Test.State = 1;
@@ -368,20 +368,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     {
         public List<dynamic> Foo = new List<object>()
         {
-        (Action<int>)Test.CallMe, (Action<int>)(x => Test.CallMe(x))}
-
-        ;
+            (Action<int>)Test.CallMe,
+            (Action<int>)(x => Test.CallMe(x)),
+        };
         public dynamic[] Bar = new dynamic[]
         {
-        (Action<int>)Test.CallMe, (Action<int>)(x => Test.CallMe(x))}
-
-        ;
+            (Action<int>)Test.CallMe,
+            (Action<int>)(x => Test.CallMe(x)),
+        };
         public dynamic this[int x]
         {
-            get
-            {
-                return (Action<int>)Test.CallMe;
-            }
+            get { return (Action<int>)Test.CallMe; }
         }
 
         [Fact]
@@ -392,7 +389,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var y = new B();
             dynamic d = new B();
             tests++;
@@ -426,8 +424,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invoke007.invoke007
 {
     // <Title> Make sure that the right member is picked </Title>
@@ -454,11 +450,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class B : A
     {
         public new int Foo;
-        public new int Bar
-        {
-            get;
-            set;
-        }
+        public new int Bar { get; set; }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -477,8 +469,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invoke008.invoke008
 {

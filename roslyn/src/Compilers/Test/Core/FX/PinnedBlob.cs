@@ -18,12 +18,10 @@ namespace Roslyn.Test.Utilities
         public int Size;
 
         public PinnedBlob(ImmutableArray<byte> blob)
-            : this(blob.AsMemory())
-        { }
+            : this(blob.AsMemory()) { }
 
         public PinnedBlob(byte[] blob)
-            : this(blob.AsMemory())
-        { }
+            : this(blob.AsMemory()) { }
 
         public unsafe PinnedBlob(ReadOnlyMemory<byte> blob)
         {

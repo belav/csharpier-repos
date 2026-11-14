@@ -17,50 +17,45 @@ namespace System.ServiceModel.Discovery.Configuration
         ConfigurationPropertyCollection properties;
 
         public UdpDiscoveryEndpointElement()
-            : base()
-        {
-        }
+            : base() { }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxResponseDelay, DefaultValue = DiscoveryDefaults.Udp.AppMaxDelayString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxResponseDelay,
+            DefaultValue = DiscoveryDefaults.Udp.AppMaxDelayString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public new TimeSpan MaxResponseDelay
         {
-            get
-            {
-                return base.MaxResponseDelay;
-            }
-
-            set
-            {
-                base.MaxResponseDelay = value;
-            }
+            get { return base.MaxResponseDelay; }
+            set { base.MaxResponseDelay = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DiscoveryMode, DefaultValue = ServiceDiscoveryMode.Adhoc)]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DiscoveryMode,
+            DefaultValue = ServiceDiscoveryMode.Adhoc
+        )]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule
+        )]
         public new ServiceDiscoveryMode DiscoveryMode
         {
-            get
-            {
-                return base.DiscoveryMode;
-            }
-
-            set
-            {
-                base.DiscoveryMode = value;
-            }
+            get { return base.DiscoveryMode; }
+            set { base.DiscoveryMode = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MulticastAddress, DefaultValue = ProtocolStrings.Udp.MulticastIPv4Address)]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MulticastAddress,
+            DefaultValue = ProtocolStrings.Udp.MulticastIPv4Address
+        )]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule
+        )]
         public Uri MulticastAddress
         {
-            get
-            {
-                return (Uri)base[ConfigurationStrings.MulticastAddress];
-            }
-
+            get { return (Uri)base[ConfigurationStrings.MulticastAddress]; }
             set
             {
                 if (value == null)
@@ -98,39 +93,47 @@ namespace System.ServiceModel.Discovery.Configuration
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.MaxResponseDelay,
-                        typeof(TimeSpan),
-                        DiscoveryDefaults.Udp.AppMaxDelay,
-                        new TimeSpanOrInfiniteConverter(),
-                        new TimeSpanOrInfiniteValidator(TimeSpan.Zero, TimeSpan.MaxValue),
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.MaxResponseDelay,
+                            typeof(TimeSpan),
+                            DiscoveryDefaults.Udp.AppMaxDelay,
+                            new TimeSpanOrInfiniteConverter(),
+                            new TimeSpanOrInfiniteValidator(TimeSpan.Zero, TimeSpan.MaxValue),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.DiscoveryMode,
-                        typeof(ServiceDiscoveryMode),
-                        ServiceDiscoveryMode.Adhoc,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.DiscoveryMode,
+                            typeof(ServiceDiscoveryMode),
+                            ServiceDiscoveryMode.Adhoc,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.MulticastAddress,
-                        typeof(Uri),
-                        UdpDiscoveryEndpoint.DefaultIPv4MulticastAddress,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.MulticastAddress,
+                            typeof(Uri),
+                            UdpDiscoveryEndpoint.DefaultIPv4MulticastAddress,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.TransportSettings,
-                        typeof(UdpTransportSettingsElement),
-                        null,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.TransportSettings,
+                            typeof(UdpTransportSettingsElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     this.properties = properties;
                 }
@@ -138,7 +141,9 @@ namespace System.ServiceModel.Discovery.Configuration
             }
         }
 
-        protected internal override ServiceEndpoint CreateServiceEndpoint(ContractDescription contractDescription)
+        protected internal override ServiceEndpoint CreateServiceEndpoint(
+            ContractDescription contractDescription
+        )
         {
             return new UdpDiscoveryEndpoint(this.DiscoveryVersion, this.MulticastAddress);
         }
@@ -148,7 +153,7 @@ namespace System.ServiceModel.Discovery.Configuration
             base.InitializeFrom(endpoint);
 
             UdpDiscoveryEndpoint source = (UdpDiscoveryEndpoint)endpoint;
-            this.MaxResponseDelay = source.MaxResponseDelay;            
+            this.MaxResponseDelay = source.MaxResponseDelay;
             this.DiscoveryMode = source.DiscoveryMode;
             this.MulticastAddress = source.MulticastAddress;
 #pragma warning disable 0618
@@ -156,27 +161,41 @@ namespace System.ServiceModel.Discovery.Configuration
 #pragma warning restore 0618
         }
 
-        protected override void OnInitializeAndValidate(ChannelEndpointElement channelEndpointElement)
+        protected override void OnInitializeAndValidate(
+            ChannelEndpointElement channelEndpointElement
+        )
         {
             base.OnInitializeAndValidate(channelEndpointElement);
 
-            ConfigurationUtility.InitializeAndValidateUdpChannelEndpointElement(channelEndpointElement);
+            ConfigurationUtility.InitializeAndValidateUdpChannelEndpointElement(
+                channelEndpointElement
+            );
         }
 
-        protected override void OnInitializeAndValidate(ServiceEndpointElement serviceEndpointElement)
+        protected override void OnInitializeAndValidate(
+            ServiceEndpointElement serviceEndpointElement
+        )
         {
             base.OnInitializeAndValidate(serviceEndpointElement);
 
-            ConfigurationUtility.InitializeAndValidateUdpServiceEndpointElement(serviceEndpointElement);
+            ConfigurationUtility.InitializeAndValidateUdpServiceEndpointElement(
+                serviceEndpointElement
+            );
         }
 
-        protected override void OnApplyConfiguration(ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement)
+        protected override void OnApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ServiceEndpointElement serviceEndpointElement
+        )
         {
             base.OnApplyConfiguration(endpoint, serviceEndpointElement);
             ApplyConfiguration(endpoint);
         }
 
-        protected override void OnApplyConfiguration(ServiceEndpoint endpoint, ChannelEndpointElement serviceEndpointElement)
+        protected override void OnApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ChannelEndpointElement serviceEndpointElement
+        )
         {
             base.OnApplyConfiguration(endpoint, serviceEndpointElement);
             ApplyConfiguration(endpoint);

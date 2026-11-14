@@ -33,9 +33,7 @@ namespace System.Web.Http.ModelBinding
             ModelBinderAttribute attr = new ModelBinderAttribute(typeof(object));
 
             Assert.Equal(typeof(object), attr.BinderType); // can still lookup illegal type
-            Assert.Throws<InvalidOperationException>(
-                () => attr.GetModelBinderProvider(config)
-            );
+            Assert.Throws<InvalidOperationException>(() => attr.GetModelBinderProvider(config));
         }
 
         [Fact]
@@ -54,8 +52,9 @@ namespace System.Web.Http.ModelBinding
             // To test dependency resolver, the registered type and actual type should be different.
             HttpConfiguration config = new HttpConfiguration();
             var mockDependencyResolver = new Mock<IDependencyResolver>();
-            mockDependencyResolver.Setup(r => r.GetService(typeof(CustomModelBinderProvider)))
-                               .Returns(new SecondCustomModelBinderProvider());
+            mockDependencyResolver
+                .Setup(r => r.GetService(typeof(CustomModelBinderProvider)))
+                .Returns(new SecondCustomModelBinderProvider());
             config.DependencyResolver = mockDependencyResolver.Object;
 
             ModelBinderAttribute attr = new ModelBinderAttribute(typeof(CustomModelBinderProvider));
@@ -71,7 +70,9 @@ namespace System.Web.Http.ModelBinding
             HttpConfiguration config = new HttpConfiguration();
             var mockDependencyResolver = new Mock<IDependencyResolver>();
             SecondCustomModelBinderProvider provider = new SecondCustomModelBinderProvider();
-            mockDependencyResolver.Setup(r => r.GetService(typeof(CustomModelBinderProvider))).Returns(provider);
+            mockDependencyResolver
+                .Setup(r => r.GetService(typeof(CustomModelBinderProvider)))
+                .Returns(provider);
             config.DependencyResolver = mockDependencyResolver.Object;
 
             ModelBinderAttribute attr = new ModelBinderAttribute(typeof(CustomModelBinderProvider));
@@ -88,7 +89,12 @@ namespace System.Web.Http.ModelBinding
         public void Set_ModelBinder_And_ValueProviders()
         {
             HttpConfiguration config = new HttpConfiguration();
-            ModelBinderAttribute attr = new ValueProviderAttribute(typeof(CustomValueProviderFactory)) { BinderType = typeof(CustomModelBinderProvider) };
+            ModelBinderAttribute attr = new ValueProviderAttribute(
+                typeof(CustomValueProviderFactory)
+            )
+            {
+                BinderType = typeof(CustomModelBinderProvider),
+            };
             IEnumerable<ValueProviderFactory> vpfs = attr.GetValueProviderFactories(config);
 
             Assert.IsType<CustomModelBinderProvider>(attr.GetModelBinderProvider(config));
@@ -103,7 +109,9 @@ namespace System.Web.Http.ModelBinding
             config.Services.Replace(typeof(ModelBinderProvider), new CustomModelBinderProvider());
 
             // binder = null, so pulls default from config. But attribute still has value by specifying the value providers.
-            ModelBinderAttribute attr = new ValueProviderAttribute(typeof(CustomValueProviderFactory));
+            ModelBinderAttribute attr = new ValueProviderAttribute(
+                typeof(CustomValueProviderFactory)
+            );
 
             // Act
             IModelBinder binder = attr.GetModelBinder(config, null);
@@ -118,7 +126,10 @@ namespace System.Web.Http.ModelBinding
         public void Get_ModelBinder_From_Binder()
         {
             HttpConfiguration config = new HttpConfiguration();
-            ModelBinderAttribute attr = new ModelBinderAttribute { BinderType = typeof(CustomModelBinder) };
+            ModelBinderAttribute attr = new ModelBinderAttribute
+            {
+                BinderType = typeof(CustomModelBinder),
+            };
 
             // Act
             IModelBinder binder = attr.GetModelBinder(config, null);
@@ -132,7 +143,10 @@ namespace System.Web.Http.ModelBinding
         public void Get_ModelBinder_From_BinderProvider()
         {
             HttpConfiguration config = new HttpConfiguration();
-            ModelBinderAttribute attr = new ModelBinderAttribute { BinderType = typeof(CustomModelBinderProvider) };
+            ModelBinderAttribute attr = new ModelBinderAttribute
+            {
+                BinderType = typeof(CustomModelBinderProvider),
+            };
 
             // Act
             IModelBinder binder = attr.GetModelBinder(config, null);
@@ -152,7 +166,10 @@ namespace System.Web.Http.ModelBinding
 
         private class CustomModelBinder : IModelBinder
         {
-            public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+            public bool BindModel(
+                HttpActionContext actionContext,
+                ModelBindingContext bindingContext
+            )
             {
                 return true;
             }

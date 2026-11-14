@@ -1,18 +1,16 @@
 class a
 {
-	protected class b
-	{
-	}
+    protected class b { }
 }
 
 class c : a
 {
-	b a_var;
-	
-	protected class d
-	{
-		b d_var;
-	}
+    b a_var;
 
-	public static void Main () {}
+    protected class d
+    {
+        b d_var;
+    }
+
+    public static void Main() { }
 }

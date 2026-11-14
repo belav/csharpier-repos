@@ -5,8 +5,8 @@
 namespace System.Activities.Hosting
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     [Fx.Tag.XamlVisible(false)]
@@ -16,47 +16,33 @@ namespace System.Activities.Hosting
         BookmarkScopeInfo scopeInfo;
         string ownerDisplayName;
 
-        internal BookmarkInfo(string bookmarkName, string ownerDisplayName, BookmarkScopeInfo scopeInfo)
+        internal BookmarkInfo(
+            string bookmarkName,
+            string ownerDisplayName,
+            BookmarkScopeInfo scopeInfo
+        )
         {
             this.BookmarkName = bookmarkName;
             this.OwnerDisplayName = ownerDisplayName;
             this.ScopeInfo = scopeInfo;
         }
-        
+
         public string BookmarkName
         {
-            get
-            {
-                return this.bookmarkName;
-            }
-            private set
-            {
-                this.bookmarkName = value;
-            }
+            get { return this.bookmarkName; }
+            private set { this.bookmarkName = value; }
         }
-        
+
         public string OwnerDisplayName
         {
-            get
-            {
-                return this.ownerDisplayName;
-            }
-            private set
-            {
-                this.ownerDisplayName = value;
-            }
+            get { return this.ownerDisplayName; }
+            private set { this.ownerDisplayName = value; }
         }
-        
+
         public BookmarkScopeInfo ScopeInfo
         {
-            get
-            {
-                return this.scopeInfo;
-            }
-            private set
-            {
-                this.scopeInfo = value;
-            }
+            get { return this.scopeInfo; }
+            private set { this.scopeInfo = value; }
         }
 
         [DataMember(Name = "BookmarkName")]

@@ -32,32 +32,45 @@ namespace System.Xml.Xsl.XsltOld
             switch (mainNode.NodeType)
             {
                 case XmlNodeType.Element:
+                {
+                    _wr.WriteStartElement(
+                        mainNode.Prefix,
+                        mainNode.LocalName,
+                        mainNode.NamespaceURI
+                    );
+                    for (int attrib = 0; attrib < record.AttributeCount; attrib++)
                     {
-                        _wr.WriteStartElement(mainNode.Prefix, mainNode.LocalName, mainNode.NamespaceURI);
-                        for (int attrib = 0; attrib < record.AttributeCount; attrib++)
+                        _documentIndex++;
+                        Debug.Assert(record.AttributeList[attrib] is BuilderInfo);
+                        BuilderInfo attrInfo = (BuilderInfo)record.AttributeList[attrib]!;
+                        if (attrInfo.NamespaceURI == XmlReservedNs.NsXmlNs)
                         {
-                            _documentIndex++;
-                            Debug.Assert(record.AttributeList[attrib] is BuilderInfo);
-                            BuilderInfo attrInfo = (BuilderInfo)record.AttributeList[attrib]!;
-                            if (attrInfo.NamespaceURI == XmlReservedNs.NsXmlNs)
-                            {
-                                if (attrInfo.Prefix.Length == 0)
-                                    _wr.WriteNamespaceDeclaration(string.Empty, attrInfo.Value);
-                                else
-                                    _wr.WriteNamespaceDeclaration(attrInfo.LocalName, attrInfo.Value);
-                            }
+                            if (attrInfo.Prefix.Length == 0)
+                                _wr.WriteNamespaceDeclaration(string.Empty, attrInfo.Value);
                             else
-                            {
-                                _wr.WriteAttributeString(attrInfo.Prefix, attrInfo.LocalName, attrInfo.NamespaceURI, attrInfo.Value);
-                            }
+                                _wr.WriteNamespaceDeclaration(attrInfo.LocalName, attrInfo.Value);
                         }
-
-                        _wr.StartElementContent();
-
-                        if (mainNode.IsEmptyTag)
-                            _wr.WriteEndElement(mainNode.Prefix, mainNode.LocalName, mainNode.NamespaceURI);
-                        break;
+                        else
+                        {
+                            _wr.WriteAttributeString(
+                                attrInfo.Prefix,
+                                attrInfo.LocalName,
+                                attrInfo.NamespaceURI,
+                                attrInfo.Value
+                            );
+                        }
                     }
+
+                    _wr.StartElementContent();
+
+                    if (mainNode.IsEmptyTag)
+                        _wr.WriteEndElement(
+                            mainNode.Prefix,
+                            mainNode.LocalName,
+                            mainNode.NamespaceURI
+                        );
+                    break;
+                }
 
                 case XmlNodeType.Text:
                     _wr.WriteString(mainNode.Value);

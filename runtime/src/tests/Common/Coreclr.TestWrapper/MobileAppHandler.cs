@@ -1,6 +1,6 @@
 using System;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,19 +20,64 @@ namespace CoreclrTestLib
         // 89 - DEVICE_FAILURE
         // 90 - APP_LAUNCH_TIMEOUT
         // 91 - ADB_FAILURE
-        private static readonly int[] _knownExitCodes = new int[] { 78, 81, 82, 83, 84, 86, 88, 89, 90, 91 };
-
-        public int InstallMobileApp(string platform, string category, string testBinaryBase, string reportBase, string targetOS)
+        private static readonly int[] _knownExitCodes = new int[]
         {
-            return HandleMobileApp("install", platform, category, testBinaryBase, reportBase, targetOS);
+            78,
+            81,
+            82,
+            83,
+            84,
+            86,
+            88,
+            89,
+            90,
+            91,
+        };
+
+        public int InstallMobileApp(
+            string platform,
+            string category,
+            string testBinaryBase,
+            string reportBase,
+            string targetOS
+        )
+        {
+            return HandleMobileApp(
+                "install",
+                platform,
+                category,
+                testBinaryBase,
+                reportBase,
+                targetOS
+            );
         }
 
-        public int UninstallMobileApp(string platform, string category, string testBinaryBase, string reportBase, string targetOS)
+        public int UninstallMobileApp(
+            string platform,
+            string category,
+            string testBinaryBase,
+            string reportBase,
+            string targetOS
+        )
         {
-            return HandleMobileApp("uninstall", platform, category, testBinaryBase, reportBase, targetOS);
+            return HandleMobileApp(
+                "uninstall",
+                platform,
+                category,
+                testBinaryBase,
+                reportBase,
+                targetOS
+            );
         }
 
-        private static int HandleMobileApp(string action, string platform, string category, string testBinaryBase, string reportBase, string targetOS)
+        private static int HandleMobileApp(
+            string action,
+            string platform,
+            string category,
+            string testBinaryBase,
+            string reportBase,
+            string targetOS
+        )
         {
             int exitCode = -100;
 
@@ -50,23 +95,35 @@ namespace CoreclrTestLib
             {
                 if ((platform != "android") && (platform != "apple"))
                 {
-                    outputWriter.WriteLine($"Incorrect value of platform. Provided {platform}. Valid strings are android and apple.");
+                    outputWriter.WriteLine(
+                        $"Incorrect value of platform. Provided {platform}. Valid strings are android and apple."
+                    );
                     platformValueFlag = false;
                 }
 
                 if ((action != "install") && (action != "uninstall"))
                 {
-                    outputWriter.WriteLine($"Incorrect value of action. Provided {action}. Valid strings are install and uninstall.");
+                    outputWriter.WriteLine(
+                        $"Incorrect value of action. Provided {action}. Valid strings are install and uninstall."
+                    );
                     actionValueFlag = false;
                 }
 
                 if (platformValueFlag && actionValueFlag)
                 {
                     int timeout = 240000; // Set timeout to 4 mins, because the installation on Android arm64/32 devices could take up to 10 mins on CI
-                    string dotnetCmd_raw = System.Environment.GetEnvironmentVariable("__TestDotNetCmd");
-                    string xharnessCmd_raw = System.Environment.GetEnvironmentVariable("XHARNESS_CLI_PATH");
-                    string dotnetCmd = string.IsNullOrEmpty(dotnetCmd_raw) ? "dotnet" : dotnetCmd_raw;
-                    string xharnessCmd = string.IsNullOrEmpty(xharnessCmd_raw) ? "xharness" : $"exec {xharnessCmd_raw}";
+                    string dotnetCmd_raw = System.Environment.GetEnvironmentVariable(
+                        "__TestDotNetCmd"
+                    );
+                    string xharnessCmd_raw = System.Environment.GetEnvironmentVariable(
+                        "XHARNESS_CLI_PATH"
+                    );
+                    string dotnetCmd = string.IsNullOrEmpty(dotnetCmd_raw)
+                        ? "dotnet"
+                        : dotnetCmd_raw;
+                    string xharnessCmd = string.IsNullOrEmpty(xharnessCmd_raw)
+                        ? "xharness"
+                        : $"exec {xharnessCmd_raw}";
                     string appExtension = platform == "android" ? "apk" : "app";
 
                     string cmdStr = $"{dotnetCmd} {xharnessCmd} {platform} {action}";
@@ -77,14 +134,16 @@ namespace CoreclrTestLib
 
                         if (action == "install")
                         {
-                            cmdStr += $" --app={testBinaryBase}/{category}.{appExtension} --output-directory={reportBase}/{action}";
+                            cmdStr +=
+                                $" --app={testBinaryBase}/{category}.{appExtension} --output-directory={reportBase}/{action}";
                         }
                     }
                     else // platform is apple
                     {
                         string targetString = "";
 
-                        switch (targetOS) {
+                        switch (targetOS)
+                        {
                             case "ios":
                                 targetString = "ios-device";
                                 break;
@@ -99,7 +158,8 @@ namespace CoreclrTestLib
                                 break;
                         }
 
-                        cmdStr += $" --output-directory={reportBase}/{action} --target={targetString}";
+                        cmdStr +=
+                            $" --output-directory={reportBase}/{action} --target={targetString}";
 
                         if (action == "install")
                         {
@@ -136,8 +196,16 @@ namespace CoreclrTestLib
                         process.Start();
 
                         var cts = new CancellationTokenSource();
-                        Task copyOutput = process.StandardOutput.BaseStream.CopyToAsync(outputStream, 4096, cts.Token);
-                        Task copyError = process.StandardError.BaseStream.CopyToAsync(errorStream, 4096, cts.Token);
+                        Task copyOutput = process.StandardOutput.BaseStream.CopyToAsync(
+                            outputStream,
+                            4096,
+                            cts.Token
+                        );
+                        Task copyError = process.StandardError.BaseStream.CopyToAsync(
+                            errorStream,
+                            4096,
+                            cts.Token
+                        );
 
                         if (process.WaitForExit(timeout))
                         {
@@ -155,12 +223,22 @@ namespace CoreclrTestLib
                             {
                                 cts.Cancel();
                             }
-                            catch {}
+                            catch { }
 
-                            outputWriter.WriteLine("\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}, start: {2}, end: {3})",
-                                    cmdStr, timeout, startTime.ToString(), endTime.ToString());
-                            errorWriter.WriteLine("\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}, start: {2}, end: {3})",
-                                    cmdStr, timeout, startTime.ToString(), endTime.ToString());
+                            outputWriter.WriteLine(
+                                "\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}, start: {2}, end: {3})",
+                                cmdStr,
+                                timeout,
+                                startTime.ToString(),
+                                endTime.ToString()
+                            );
+                            errorWriter.WriteLine(
+                                "\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}, start: {2}, end: {3})",
+                                cmdStr,
+                                timeout,
+                                startTime.ToString(),
+                                endTime.ToString()
+                            );
 
                             process.Kill(entireProcessTree: true);
                         }
@@ -180,7 +258,7 @@ namespace CoreclrTestLib
             cmd.Replace("\"", "\"\"");
 
             string cmdPrefix;
-            if(OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 cmdPrefix = "/c";
             }
@@ -194,18 +272,25 @@ namespace CoreclrTestLib
 
         private static void CreateRetryFile(string fileName, int exitCode, string appName)
         {
-            using (StreamWriter writer = new StreamWriter(fileName))  
+            using (StreamWriter writer = new StreamWriter(fileName))
             {
-                writer.WriteLine($"appName: {appName}; exitCode: {exitCode}"); 
+                writer.WriteLine($"appName: {appName}; exitCode: {exitCode}");
             }
         }
 
-        public static void CheckExitCode(int exitCode, string testBinaryBase, string category, StreamWriter outputWriter)
+        public static void CheckExitCode(
+            int exitCode,
+            string testBinaryBase,
+            string category,
+            StreamWriter outputWriter
+        )
         {
             if (_knownExitCodes.Contains(exitCode))
             {
                 CreateRetryFile($"{testBinaryBase}/.retry", exitCode, category);
-                outputWriter.WriteLine("\nInfra issue was detected and a work item retry was requested");
+                outputWriter.WriteLine(
+                    "\nInfra issue was detected and a work item retry was requested"
+                );
             }
         }
 

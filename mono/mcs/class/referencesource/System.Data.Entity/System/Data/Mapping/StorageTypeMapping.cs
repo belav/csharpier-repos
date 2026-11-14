@@ -10,16 +10,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Data.Metadata.Edm;
+using System.Text;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Represents the Mapping metadata for a type map in CS space.
     /// </summary>
     /// <example>
     /// For Example if conceptually you could represent the CS MSL file as following
-    /// --Mapping 
+    /// --Mapping
     ///   --EntityContainerMapping ( CNorthwind-->SNorthwind )
     ///     --EntitySetMapping
     ///       --EntityTypeMapping
@@ -35,7 +36,7 @@ namespace System.Data.Mapping {
     ///             --ScalarPropertyMap
     ///             --ScalarProperyMap
     ///           --ScalarPropertyMap
-    ///     --AssociationSetMapping 
+    ///     --AssociationSetMapping
     ///       --AssociationTypeMapping
     ///         --MappingFragment
     ///           --EndPropertyMap
@@ -43,17 +44,19 @@ namespace System.Data.Mapping {
     ///             --ScalarProperyMap
     ///           --EndPropertyMap
     ///             --ScalarPropertyMap
-    /// This class represents the metadata for all the Type map elements in the 
+    /// This class represents the metadata for all the Type map elements in the
     /// above example namely EntityTypeMapping, AssociationTypeMapping and CompositionTypeMapping.
     /// The TypeMapping elements contain TableMappingFragments which in turn contain the property maps.
     /// </example>
-    internal abstract class StorageTypeMapping {
+    internal abstract class StorageTypeMapping
+    {
         #region Constructors
         /// <summary>
         /// Construct the new StorageTypeMapping object.
         /// </summary>
         /// <param name="setMapping">SetMapping that contains this type mapping </param>
-        internal StorageTypeMapping(StorageSetMapping setMapping) {
+        internal StorageTypeMapping(StorageSetMapping setMapping)
+        {
             this.m_fragments = new List<StorageMappingFragment>();
             this.m_setMapping = setMapping;
         }
@@ -64,6 +67,7 @@ namespace System.Data.Mapping {
         /// ExtentMap that contains this type mapping.
         /// </summary>
         StorageSetMapping m_setMapping;
+
         /// <summary>
         /// Set of fragments that make up the type Mapping.
         /// </summary>
@@ -76,31 +80,24 @@ namespace System.Data.Mapping {
         /// </summary>
         internal ReadOnlyCollection<StorageMappingFragment> MappingFragments
         {
-            get
-            {
-                return this.m_fragments.AsReadOnly();
-            }
+            get { return this.m_fragments.AsReadOnly(); }
         }
 
-        internal StorageSetMapping SetMapping 
+        internal StorageSetMapping SetMapping
         {
-            get 
-            {
-                return m_setMapping;
-            }
+            get { return m_setMapping; }
         }
-
 
         /// <summary>
         /// a list of TypeMetadata that this mapping holds true for.
         /// </summary>
-        internal abstract ReadOnlyCollection<EdmType> Types { get;}
+        internal abstract ReadOnlyCollection<EdmType> Types { get; }
 
         /// <summary>
         /// a list of TypeMetadatas for which the mapping holds true for
-        /// not only the type specified but the sub-types of that type as well.        
+        /// not only the type specified but the sub-types of that type as well.
         /// </summary>
-        internal abstract ReadOnlyCollection<EdmType> IsOfTypes { get;}
+        internal abstract ReadOnlyCollection<EdmType> IsOfTypes { get; }
         #endregion
 
         #region Methods

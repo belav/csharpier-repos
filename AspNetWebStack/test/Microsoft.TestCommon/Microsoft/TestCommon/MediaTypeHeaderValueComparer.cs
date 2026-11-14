@@ -9,30 +9,36 @@ namespace Microsoft.TestCommon
 {
     public class MediaTypeHeaderValueComparer : IComparer<MediaTypeHeaderValue>
     {
-        private static readonly MediaTypeHeaderValueComparer mediaTypeComparer = new MediaTypeHeaderValueComparer();
+        private static readonly MediaTypeHeaderValueComparer mediaTypeComparer =
+            new MediaTypeHeaderValueComparer();
 
-        public MediaTypeHeaderValueComparer()
-        {
-        }
+        public MediaTypeHeaderValueComparer() { }
 
         public static MediaTypeHeaderValueComparer Comparer
         {
-            get
-            {
-                return mediaTypeComparer;
-            }
+            get { return mediaTypeComparer; }
         }
 
         public int Compare(MediaTypeHeaderValue mediaType1, MediaTypeHeaderValue mediaType2)
         {
-            ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(mediaType1);
-            ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(mediaType2);
+            ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(
+                mediaType1
+            );
+            ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(
+                mediaType2
+            );
 
             int returnValue = CompareBasedOnQualityFactor(parsedMediaType1, parsedMediaType2);
 
             if (returnValue == 0)
             {
-                if (!String.Equals(parsedMediaType1.Type, parsedMediaType2.Type, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !String.Equals(
+                        parsedMediaType1.Type,
+                        parsedMediaType2.Type,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     if (parsedMediaType1.IsAllMediaRange)
                     {
@@ -43,7 +49,13 @@ namespace Microsoft.TestCommon
                         return -1;
                     }
                 }
-                else if (!String.Equals(parsedMediaType1.SubType, parsedMediaType2.SubType, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    !String.Equals(
+                        parsedMediaType1.SubType,
+                        parsedMediaType2.SubType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     if (parsedMediaType1.IsSubTypeMediaRange)
                     {
@@ -73,9 +85,13 @@ namespace Microsoft.TestCommon
             return returnValue;
         }
 
-        private static int CompareBasedOnQualityFactor(ParsedMediaTypeHeaderValue parsedMediaType1, ParsedMediaTypeHeaderValue parsedMediaType2)
+        private static int CompareBasedOnQualityFactor(
+            ParsedMediaTypeHeaderValue parsedMediaType1,
+            ParsedMediaTypeHeaderValue parsedMediaType2
+        )
         {
-            double qualityDifference = parsedMediaType1.QualityFactor - parsedMediaType2.QualityFactor;
+            double qualityDifference =
+                parsedMediaType1.QualityFactor - parsedMediaType2.QualityFactor;
             if (qualityDifference < 0)
             {
                 return 1;

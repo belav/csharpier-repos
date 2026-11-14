@@ -59,13 +59,14 @@ namespace System.Web.Http.Description
 
         internal bool CanConvertPropertiesFromString()
         {
-            return GetBindableProperties().All(p => TypeHelper.CanConvertFromString(p.PropertyType));
+            return GetBindableProperties()
+                .All(p => TypeHelper.CanConvertFromString(p.PropertyType));
         }
 
         internal static IEnumerable<PropertyInfo> GetBindableProperties(Type type)
         {
             return type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                       .Where(p => p.GetGetMethod() != null && p.GetSetMethod() != null);
+                .Where(p => p.GetGetMethod() != null && p.GetSetMethod() != null);
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,30 +32,44 @@ using System.Linq;
 using System.Text;
 using Mono.Cecil;
 
-namespace Mono.CodeContracts.Rewrite.Ast {
-	abstract class ExprBinaryOpArithmetic : ExprBinaryOp {
+namespace Mono.CodeContracts.Rewrite.Ast
+{
+    abstract class ExprBinaryOpArithmetic : ExprBinaryOp
+    {
+        public ExprBinaryOpArithmetic(
+            MethodInfo methodInfo,
+            Expr left,
+            Expr right,
+            Sn signage,
+            bool overflow
+        )
+            : base(methodInfo, left, right, signage)
+        {
+            this.Overflow = overflow;
+        }
 
-		public ExprBinaryOpArithmetic (MethodInfo methodInfo, Expr left, Expr right, Sn signage, bool overflow)
-			: base (methodInfo, left, right, signage)
-		{
-			this.Overflow = overflow;
-		}
+        public bool Overflow { get; private set; }
 
-		public bool Overflow { get; private set; }
-
-		public override TypeReference ReturnType {
-			get {
-				if (base.Left.ReturnType.FullName == "System.Int8" ||
-					base.Left.ReturnType.FullName == "System.Int16") {
-					return base.MethodInfo.TypeInt32;
-				}
-				if (base.Left.ReturnType.FullName == "System.Uint8" ||
-					base.Left.ReturnType.FullName == "System.Uint16") {
-					return base.MethodInfo.TypeUInt32;
-				}
-				return base.Left.ReturnType;
-			}
-		}
-
-	}
+        public override TypeReference ReturnType
+        {
+            get
+            {
+                if (
+                    base.Left.ReturnType.FullName == "System.Int8"
+                    || base.Left.ReturnType.FullName == "System.Int16"
+                )
+                {
+                    return base.MethodInfo.TypeInt32;
+                }
+                if (
+                    base.Left.ReturnType.FullName == "System.Uint8"
+                    || base.Left.ReturnType.FullName == "System.Uint16"
+                )
+                {
+                    return base.MethodInfo.TypeUInt32;
+                }
+                return base.Left.ReturnType;
+            }
+        }
+    }
 }

@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.InteropServices;
 using SampleMetadata;
 using Xunit;
@@ -14,19 +14,28 @@ namespace System.Reflection.Tests
     public static partial class CustomAttributeTests
     {
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60579", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60579",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public static void CustomAttributeTest1()
         {
-            Type t = typeof(AttributeHolder1);  // Intentionally not projected. We're reflecting on this (and Invoking it) to get the validation baseline data.
+            Type t = typeof(AttributeHolder1); // Intentionally not projected. We're reflecting on this (and Invoking it) to get the validation baseline data.
             foreach (Type nt in t.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic))
             {
-                SampleCustomAttribute attr = nt.GetCustomAttribute<SampleCustomAttribute>(inherit: false);
-                CustomAttributeData cad = nt.CustomAttributes.Single(c => c.AttributeType == typeof(SampleCustomAttribute));
-                object value = attr.Argument;  // Capture the actual value passed to the SampleCustomAttribute constructor.
-                Type parameterType = cad.Constructor.GetParameters()[0].ParameterType;  // Capture the formal parameter type of the constructor.
+                SampleCustomAttribute attr = nt.GetCustomAttribute<SampleCustomAttribute>(
+                    inherit: false
+                );
+                CustomAttributeData cad = nt.CustomAttributes.Single(c =>
+                    c.AttributeType == typeof(SampleCustomAttribute)
+                );
+                object value = attr.Argument; // Capture the actual value passed to the SampleCustomAttribute constructor.
+                Type parameterType = cad.Constructor.GetParameters()[0].ParameterType; // Capture the formal parameter type of the constructor.
 
                 Type ntProjected = nt.Project();
-                CustomAttributeData cadProjected = ntProjected.CustomAttributes.Single(c => c.AttributeType == typeof(SampleCustomAttribute).Project());
+                CustomAttributeData cadProjected = ntProjected.CustomAttributes.Single(c =>
+                    c.AttributeType == typeof(SampleCustomAttribute).Project()
+                );
                 Assert.Equal(typeof(SampleCustomAttribute).Project(), cadProjected.AttributeType);
                 Assert.Equal(1, cadProjected.ConstructorArguments.Count);
                 cadProjected.ConstructorArguments[0].Validate(parameterType, value);
@@ -51,7 +60,10 @@ namespace System.Reflection.Tests
             Assert.Equal(1, cad.NamedArguments.Count);
             CustomAttributeNamedArgument can = cad.NamedArguments[0];
             Assert.True(can.IsField);
-            Assert.Equal(typeof(CaWithNamedArguments).Project().GetField("MyField"), can.MemberInfo);
+            Assert.Equal(
+                typeof(CaWithNamedArguments).Project().GetField("MyField"),
+                can.MemberInfo
+            );
             can.TypedValue.Validate(typeof(int).Project(), 4);
         }
 
@@ -65,17 +77,31 @@ namespace System.Reflection.Tests
             Assert.Equal(1, cad.NamedArguments.Count);
             CustomAttributeNamedArgument can = cad.NamedArguments[0];
             Assert.False(can.IsField);
-            Assert.Equal(typeof(CaWithNamedArguments).Project().GetProperty("MyProperty"), can.MemberInfo);
+            Assert.Equal(
+                typeof(CaWithNamedArguments).Project().GetProperty("MyProperty"),
+                can.MemberInfo
+            );
             can.TypedValue.Validate(typeof(int).Project(), 8);
         }
 
         private static object UnwrapEnum(this Enum e)
         {
-            FieldInfo f = e.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly).First();
+            FieldInfo f = e.GetType()
+                .GetFields(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                )
+                .First();
             return f.GetValue(e);
         }
 
-        private static void Validate(this CustomAttributeTypedArgument cat, Type parameterType, object value)
+        private static void Validate(
+            this CustomAttributeTypedArgument cat,
+            Type parameterType,
+            object value
+        )
         {
             if (value == null)
             {
@@ -104,11 +130,16 @@ namespace System.Reflection.Tests
             {
                 Assert.Equal(value.GetType().Project(), cat.ArgumentType);
                 Assert.True(cat.Value is ReadOnlyCollection<CustomAttributeTypedArgument>);
-                IList<CustomAttributeTypedArgument> cats = (IList<CustomAttributeTypedArgument>)(cat.Value);
+                IList<CustomAttributeTypedArgument> cats =
+                    (IList<CustomAttributeTypedArgument>)(cat.Value);
                 Assert.Equal(valueAsArray.Length, cats.Count);
                 for (int i = 0; i < cats.Count; i++)
                 {
-                    cats[i].Validate(valueAsArray.GetType().GetElementType(), valueAsArray.GetValue(i));
+                    cats[i]
+                        .Validate(
+                            valueAsArray.GetType().GetElementType(),
+                            valueAsArray.GetValue(i)
+                        );
                 }
             }
             else
@@ -118,14 +149,19 @@ namespace System.Reflection.Tests
             }
         }
 
-        internal static void ValidateCustomAttributesAllocatesFreshObjectsEachTime(Func<IEnumerable<CustomAttributeData>> action)
+        internal static void ValidateCustomAttributesAllocatesFreshObjectsEachTime(
+            Func<IEnumerable<CustomAttributeData>> action
+        )
         {
             IEnumerable<CustomAttributeData> cads1 = action();
             IEnumerable<CustomAttributeData> cads2 = action();
             cads1.ValidateEqualButFreshlyAllocated(cads2);
         }
 
-        internal static void ValidateEqualButFreshlyAllocated(this IEnumerable<CustomAttributeData> cads1, IEnumerable<CustomAttributeData> cads2)
+        internal static void ValidateEqualButFreshlyAllocated(
+            this IEnumerable<CustomAttributeData> cads1,
+            IEnumerable<CustomAttributeData> cads2
+        )
         {
             CustomAttributeData[] acads1 = cads1.ToArray();
             CustomAttributeData[] acads2 = cads2.ToArray();
@@ -147,14 +183,23 @@ namespace System.Reflection.Tests
                     Assert.NotSame(cad1.ConstructorArguments, cad2.ConstructorArguments);
                 }
                 Assert.True(
-                    (cad1.ConstructorArguments is ReadOnlyCollection<CustomAttributeTypedArgument>) ||
-                    (cad1.ConstructorArguments is CustomAttributeTypedArgument[] cataArr1 && cataArr1.Length == 0));
+                    (cad1.ConstructorArguments is ReadOnlyCollection<CustomAttributeTypedArgument>)
+                        || (
+                            cad1.ConstructorArguments is CustomAttributeTypedArgument[] cataArr1
+                            && cataArr1.Length == 0
+                        )
+                );
                 Assert.True(
-                    (cad2.ConstructorArguments is ReadOnlyCollection<CustomAttributeTypedArgument>) ||
-                    (cad2.ConstructorArguments is CustomAttributeTypedArgument[] cataArr2 && cataArr2.Length == 0));
+                    (cad2.ConstructorArguments is ReadOnlyCollection<CustomAttributeTypedArgument>)
+                        || (
+                            cad2.ConstructorArguments is CustomAttributeTypedArgument[] cataArr2
+                            && cataArr2.Length == 0
+                        )
+                );
                 for (int j = 0; j < cad1.ConstructorArguments.Count; j++)
                 {
-                    cad1.ConstructorArguments[j].ValidateEqualButFreshlyAllocated(cad2.ConstructorArguments[j]);
+                    cad1.ConstructorArguments[j]
+                        .ValidateEqualButFreshlyAllocated(cad2.ConstructorArguments[j]);
                 }
 
                 Assert.Equal(cad1.NamedArguments.Count, cad2.NamedArguments.Count);
@@ -163,19 +208,33 @@ namespace System.Reflection.Tests
                     Assert.NotSame(cad1.NamedArguments, cad2.NamedArguments);
                 }
                 Assert.True(
-                    (cad1.NamedArguments is ReadOnlyCollection<CustomAttributeNamedArgument>) ||
-                    (cad1.NamedArguments is CustomAttributeNamedArgument[] canaArr1 && canaArr1.Length == 0));
+                    (cad1.NamedArguments is ReadOnlyCollection<CustomAttributeNamedArgument>)
+                        || (
+                            cad1.NamedArguments is CustomAttributeNamedArgument[] canaArr1
+                            && canaArr1.Length == 0
+                        )
+                );
                 Assert.True(
-                    (cad2.NamedArguments is ReadOnlyCollection<CustomAttributeNamedArgument>) ||
-                    (cad2.NamedArguments is CustomAttributeNamedArgument[] canaArr2 && canaArr2.Length == 0));
+                    (cad2.NamedArguments is ReadOnlyCollection<CustomAttributeNamedArgument>)
+                        || (
+                            cad2.NamedArguments is CustomAttributeNamedArgument[] canaArr2
+                            && canaArr2.Length == 0
+                        )
+                );
                 for (int j = 0; j < cad1.NamedArguments.Count; j++)
                 {
-                    cad1.NamedArguments[j].TypedValue.ValidateEqualButFreshlyAllocated(cad2.NamedArguments[j].TypedValue);
+                    cad1.NamedArguments[j]
+                        .TypedValue.ValidateEqualButFreshlyAllocated(
+                            cad2.NamedArguments[j].TypedValue
+                        );
                 }
             }
         }
 
-        private static void ValidateEqualButFreshlyAllocated(this CustomAttributeTypedArgument cat1, CustomAttributeTypedArgument cat2)
+        private static void ValidateEqualButFreshlyAllocated(
+            this CustomAttributeTypedArgument cat1,
+            CustomAttributeTypedArgument cat2
+        )
         {
             Assert.Equal(cat1.ArgumentType, cat2.ArgumentType);
             if (cat1.Value == null && cat2.Value == null)
@@ -189,8 +248,10 @@ namespace System.Reflection.Tests
 
             Assert.True(cat1.Value is ReadOnlyCollection<CustomAttributeTypedArgument>);
             Assert.True(cat2.Value is ReadOnlyCollection<CustomAttributeTypedArgument>);
-            IList<CustomAttributeTypedArgument> cats1 = (IList<CustomAttributeTypedArgument>)cat1.Value;
-            IList<CustomAttributeTypedArgument> cats2 = (IList<CustomAttributeTypedArgument>)cat2.Value;
+            IList<CustomAttributeTypedArgument> cats1 =
+                (IList<CustomAttributeTypedArgument>)cat1.Value;
+            IList<CustomAttributeTypedArgument> cats2 =
+                (IList<CustomAttributeTypedArgument>)cat2.Value;
             Assert.NotSame(cats1, cats2);
             Assert.Equal(cats1.Count, cats2.Count);
             for (int i = 0; i < cats1.Count; i++)

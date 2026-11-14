@@ -48,17 +48,12 @@ public class Startup
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(
-                            new IPEndPoint(IPAddress.Loopback, 5001),
-                            listenOptions =>
-                            {
-                                listenOptions.UseHttps("testCert.pfx", "testPassword");
-                            }
-                        );
-                        options.Listen(
-                            new IPEndPoint(IPAddress.Loopback, 5000),
-                            listenOptions => { }
-                        );
+                        options.Listen(new IPEndPoint(IPAddress.Loopback, 5001), listenOptions =>
+                        {
+                            listenOptions.UseHttps("testCert.pfx", "testPassword");
+                        });
+                        options.Listen(new IPEndPoint(IPAddress.Loopback, 5000), listenOptions =>
+                        { });
                     })
                     .UseContentRoot(Directory.GetCurrentDirectory()) // for the cert file
                     .ConfigureLogging(factory =>

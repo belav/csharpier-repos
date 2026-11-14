@@ -11,9 +11,12 @@ namespace ILCompiler
 
         private readonly Action<TState, IRootingServiceProvider> _addRoots;
 
-        public GenericRootProvider(TState state, Action<TState, IRootingServiceProvider> addRootsMethod) =>
-            (_state, _addRoots) = (state, addRootsMethod);
+        public GenericRootProvider(
+            TState state,
+            Action<TState, IRootingServiceProvider> addRootsMethod
+        ) => (_state, _addRoots) = (state, addRootsMethod);
 
-        public void AddCompilationRoots(IRootingServiceProvider rootProvider) => _addRoots(_state, rootProvider);
+        public void AddCompilationRoots(IRootingServiceProvider rootProvider) =>
+            _addRoots(_state, rootProvider);
     }
 }

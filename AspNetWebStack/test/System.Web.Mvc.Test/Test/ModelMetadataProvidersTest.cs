@@ -53,7 +53,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            Resolver<ModelMetadataProvider> resolver = new Resolver<ModelMetadataProvider> { Current = provider.Object };
+            Resolver<ModelMetadataProvider> resolver = new Resolver<ModelMetadataProvider>
+            {
+                Current = provider.Object,
+            };
             ModelMetadataProviders providers = new ModelMetadataProviders(resolver);
 
             // Act

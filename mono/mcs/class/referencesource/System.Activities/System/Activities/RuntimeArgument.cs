@@ -11,8 +11,8 @@ namespace System.Activities
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime;
-    using System.Text;
     using System.Security;
+    using System.Text;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class RuntimeArgument : LocationReference
@@ -20,7 +20,7 @@ namespace System.Activities
         static InternalEvaluationOrderComparer evaluationOrderComparer;
         Argument boundArgument;
         PropertyDescriptor bindingProperty;
-        object bindingPropertyOwner;        
+        object bindingPropertyOwner;
         List<string> overloadGroupNames;
         int cacheId;
         string name;
@@ -29,21 +29,31 @@ namespace System.Activities
         Type type;
 
         public RuntimeArgument(string name, Type argumentType, ArgumentDirection direction)
-            : this(name, argumentType, direction, false)
-        {
-        }
+            : this(name, argumentType, direction, false) { }
 
-        public RuntimeArgument(string name, Type argumentType, ArgumentDirection direction, List<string> overloadGroupNames)
-            : this(name, argumentType, direction, false, overloadGroupNames)
-        {
-        }        
+        public RuntimeArgument(
+            string name,
+            Type argumentType,
+            ArgumentDirection direction,
+            List<string> overloadGroupNames
+        )
+            : this(name, argumentType, direction, false, overloadGroupNames) { }
 
-        public RuntimeArgument(string name, Type argumentType, ArgumentDirection direction, bool isRequired)
-            : this(name, argumentType, direction, isRequired, null)
-        {
-        }       
+        public RuntimeArgument(
+            string name,
+            Type argumentType,
+            ArgumentDirection direction,
+            bool isRequired
+        )
+            : this(name, argumentType, direction, isRequired, null) { }
 
-        public RuntimeArgument(string name, Type argumentType, ArgumentDirection direction, bool isRequired, List<string> overloadGroupNames)
+        public RuntimeArgument(
+            string name,
+            Type argumentType,
+            ArgumentDirection direction,
+            bool isRequired,
+            List<string> overloadGroupNames
+        )
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -60,21 +70,39 @@ namespace System.Activities
             this.name = name;
             this.type = argumentType;
             this.Direction = direction;
-            this.IsRequired = isRequired;            
+            this.IsRequired = isRequired;
             this.overloadGroupNames = overloadGroupNames;
         }
 
-        internal RuntimeArgument(string name, Type argumentType, ArgumentDirection direction, bool isRequired, List<string> overloadGroups, PropertyDescriptor bindingProperty, object propertyOwner)
+        internal RuntimeArgument(
+            string name,
+            Type argumentType,
+            ArgumentDirection direction,
+            bool isRequired,
+            List<string> overloadGroups,
+            PropertyDescriptor bindingProperty,
+            object propertyOwner
+        )
             : this(name, argumentType, direction, isRequired, overloadGroups)
         {
             this.bindingProperty = bindingProperty;
             this.bindingPropertyOwner = propertyOwner;
         }
 
-        internal RuntimeArgument(string name, Type argumentType, ArgumentDirection direction, bool isRequired, List<string> overloadGroups, Argument argument)
+        internal RuntimeArgument(
+            string name,
+            Type argumentType,
+            ArgumentDirection direction,
+            bool isRequired,
+            List<string> overloadGroups,
+            Argument argument
+        )
             : this(name, argumentType, direction, isRequired, overloadGroups)
         {
-            Fx.Assert(argument != null, "This ctor is only for arguments discovered via reflection in an IDictionary and therefore cannot be null.");
+            Fx.Assert(
+                argument != null,
+                "This ctor is only for arguments discovered via reflection in an IDictionary and therefore cannot be null."
+            );
 
             // Bind straightway since we're not dealing with a property and empty binding isn't an issue.
             Argument.Bind(argument, this);
@@ -94,31 +122,17 @@ namespace System.Activities
 
         protected override string NameCore
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         protected override Type TypeCore
         {
-            get
-            {
-                return this.type;
-            }
+            get { return this.type; }
         }
 
-        public ArgumentDirection Direction
-        {
-            get;
-            private set;
-        }
+        public ArgumentDirection Direction { get; private set; }
 
-        public bool IsRequired
-        {
-            get;
-            private set;
-        }
+        public bool IsRequired { get; private set; }
 
         public ReadOnlyCollection<string> OverloadGroupNames
         {
@@ -131,48 +145,36 @@ namespace System.Activities
 
                 return new ReadOnlyCollection<string>(this.overloadGroupNames);
             }
-        }       
-
-        internal Activity Owner
-        {
-            get;
-            private set;
         }
+
+        internal Activity Owner { get; private set; }
 
         internal bool IsInTree
         {
-            get
-            {
-                return this.Owner != null;
-            }
+            get { return this.Owner != null; }
         }
 
         internal bool IsBound
         {
-            get
-            {
-                return this.boundArgument != null;
-            }
+            get { return this.boundArgument != null; }
         }
 
         internal bool IsEvaluationOrderSpecified
         {
             get
             {
-                return this.IsBound && this.BoundArgument.EvaluationOrder != Argument.UnspecifiedEvaluationOrder;
+                return this.IsBound
+                    && this.BoundArgument.EvaluationOrder != Argument.UnspecifiedEvaluationOrder;
             }
         }
 
         internal Argument BoundArgument
         {
-            get
-            {
-                return this.boundArgument;
-            }
+            get { return this.boundArgument; }
             set
             {
                 // We allow this to be set an unlimited number of times.  We also allow it
-                // to be set back to null.                
+                // to be set back to null.
                 this.boundArgument = value;
             }
         }
@@ -191,13 +193,18 @@ namespace System.Activities
         {
             if (this.bindingProperty != null)
             {
-                Argument argument = (Argument)this.bindingProperty.GetValue(this.bindingPropertyOwner);
+                Argument argument = (Argument)
+                    this.bindingProperty.GetValue(this.bindingPropertyOwner);
 
                 if (argument == null)
                 {
-                    Fx.Assert(this.bindingProperty.PropertyType.IsGenericType, "We only support arguments that are generic types in our reflection walk.");
+                    Fx.Assert(
+                        this.bindingProperty.PropertyType.IsGenericType,
+                        "We only support arguments that are generic types in our reflection walk."
+                    );
 
-                    argument = (Argument) Activator.CreateInstance(this.bindingProperty.PropertyType);
+                    argument = (Argument)
+                        Activator.CreateInstance(this.bindingProperty.PropertyType);
                     argument.WasDesignTimeNull = true;
 
                     if (createEmptyBinding && !this.bindingProperty.IsReadOnly)
@@ -210,7 +217,9 @@ namespace System.Activities
             }
             else if (!this.IsBound)
             {
-                PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(owningElement);
+                PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(
+                    owningElement
+                );
 
                 PropertyDescriptor targetProperty = null;
 
@@ -227,7 +236,13 @@ namespace System.Activities
                     {
                         ArgumentDirection direction;
                         Type argumentType;
-                        if (ActivityUtilities.TryGetArgumentDirectionAndType(property.PropertyType, out direction, out argumentType))
+                        if (
+                            ActivityUtilities.TryGetArgumentDirectionAndType(
+                                property.PropertyType,
+                                out direction,
+                                out argumentType
+                            )
+                        )
                         {
                             if (this.Type == argumentType && this.Direction == direction)
                             {
@@ -251,13 +266,13 @@ namespace System.Activities
                     {
                         if (targetProperty.PropertyType.IsGenericType)
                         {
-                            argument = (Argument)Activator.CreateInstance(targetProperty.PropertyType);
+                            argument = (Argument)
+                                Activator.CreateInstance(targetProperty.PropertyType);
                         }
                         else
                         {
                             argument = ActivityUtilities.CreateArgument(this.Type, this.Direction);
                         }
-
                     }
                     else
                     {
@@ -278,14 +293,23 @@ namespace System.Activities
             Fx.Assert(this.IsBound, "We should always be bound when exiting this method.");
         }
 
-        internal bool InitializeRelationship(Activity parent, ref IList<ValidationError> validationErrors)
+        internal bool InitializeRelationship(
+            Activity parent,
+            ref IList<ValidationError> validationErrors
+        )
         {
             if (this.cacheId == parent.CacheId)
             {
                 // We're part of the same tree walk
                 if (this.Owner == parent)
                 {
-                    ActivityUtilities.Add(ref validationErrors, ProcessViolation(parent, SR.ArgumentIsAddedMoreThanOnce(this.Name, this.Owner.DisplayName)));
+                    ActivityUtilities.Add(
+                        ref validationErrors,
+                        ProcessViolation(
+                            parent,
+                            SR.ArgumentIsAddedMoreThanOnce(this.Name, this.Owner.DisplayName)
+                        )
+                    );
 
                     // Get out early since we've already initialized this argument.
                     return false;
@@ -293,7 +317,17 @@ namespace System.Activities
 
                 Fx.Assert(this.Owner != null, "We must have already assigned an owner.");
 
-                ActivityUtilities.Add(ref validationErrors, ProcessViolation(parent, SR.ArgumentAlreadyInUse(this.Name, this.Owner.DisplayName, parent.DisplayName)));
+                ActivityUtilities.Add(
+                    ref validationErrors,
+                    ProcessViolation(
+                        parent,
+                        SR.ArgumentAlreadyInUse(
+                            this.Name,
+                            this.Owner.DisplayName,
+                            parent.DisplayName
+                        )
+                    )
+                );
 
                 // Get out early since we've already initialized this argument.
                 return false;
@@ -301,7 +335,16 @@ namespace System.Activities
 
             if (this.boundArgument != null && this.boundArgument.RuntimeArgument != this)
             {
-                ActivityUtilities.Add(ref validationErrors, ProcessViolation(parent, SR.RuntimeArgumentBindingInvalid(this.Name, this.boundArgument.RuntimeArgument.Name)));
+                ActivityUtilities.Add(
+                    ref validationErrors,
+                    ProcessViolation(
+                        parent,
+                        SR.RuntimeArgumentBindingInvalid(
+                            this.Name,
+                            this.boundArgument.RuntimeArgument.Name
+                        )
+                    )
+                );
 
                 return false;
             }
@@ -315,14 +358,24 @@ namespace System.Activities
 
                 if (!this.BoundArgument.IsEmpty)
                 {
-                    return this.BoundArgument.Expression.InitializeRelationship(this, ref validationErrors);
+                    return this.BoundArgument.Expression.InitializeRelationship(
+                        this,
+                        ref validationErrors
+                    );
                 }
             }
 
             return true;
         }
 
-        internal bool TryPopulateValue(LocationEnvironment targetEnvironment, ActivityInstance targetActivityInstance, ActivityExecutor executor, object argumentValueOverride, Location resultLocation, bool skipFastPath)
+        internal bool TryPopulateValue(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance targetActivityInstance,
+            ActivityExecutor executor,
+            object argumentValueOverride,
+            Location resultLocation,
+            bool skipFastPath
+        )
         {
             // We populate values in the following order:
             //   Override
@@ -334,10 +387,11 @@ namespace System.Activities
             {
                 Fx.Assert(
                     resultLocation == null,
-                    "We should never have both an override and a result location unless some day " +
-                    "we decide to allow overrides for argument expressions.  If that day comes, we " +
-                    "need to deal with potential issues around someone providing and override for " +
-                    "a result - with the current code it wouldn't end up in the resultLocation.");
+                    "We should never have both an override and a result location unless some day "
+                        + "we decide to allow overrides for argument expressions.  If that day comes, we "
+                        + "need to deal with potential issues around someone providing and override for "
+                        + "a result - with the current code it wouldn't end up in the resultLocation."
+                );
 
                 Location location = this.boundArgument.CreateDefaultLocation();
                 targetEnvironment.Declare(this, location, targetActivityInstance);
@@ -353,7 +407,11 @@ namespace System.Activities
                 }
                 else
                 {
-                    return this.boundArgument.TryPopulateValue(targetEnvironment, targetActivityInstance, executor);
+                    return this.boundArgument.TryPopulateValue(
+                        targetEnvironment,
+                        targetActivityInstance,
+                        executor
+                    );
                 }
             }
             else if (resultLocation != null && this.IsResult)
@@ -387,24 +445,37 @@ namespace System.Activities
                 if (!object.ReferenceEquals(this.Owner, context.Activity))
                 {
                     throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.CanOnlyGetOwnedArguments(
-                            context.Activity.DisplayName,
-                            this.Name,
-                            this.Owner.DisplayName)));
-
+                        new InvalidOperationException(
+                            SR.CanOnlyGetOwnedArguments(
+                                context.Activity.DisplayName,
+                                this.Name,
+                                this.Owner.DisplayName
+                            )
+                        )
+                    );
                 }
 
                 if (object.ReferenceEquals(context.Environment.Definition, context.Activity))
                 {
                     if (!context.Environment.TryGetLocation(this.Id, out location))
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ArgumentDoesNotExistInEnvironment(this.Name)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.ArgumentDoesNotExistInEnvironment(this.Name)
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    Fx.Assert(this.Owner.IsFastPath, "If an activity defines an argument, then it should define an environment, unless it's SkipArgumentResolution");
-                    Fx.Assert(this.IsResult, "The only user-accessible argument that a SkipArgumentResolution activity can have is its result");
+                    Fx.Assert(
+                        this.Owner.IsFastPath,
+                        "If an activity defines an argument, then it should define an environment, unless it's SkipArgumentResolution"
+                    );
+                    Fx.Assert(
+                        this.IsResult,
+                        "The only user-accessible argument that a SkipArgumentResolution activity can have is its result"
+                    );
                     // We need to give the activity access to its result argument because, if it has
                     // no other arguments, it might have been implicitly opted into SkipArgumentResolution
                     location = context.GetIgnorableResultLocation(this);
@@ -412,12 +483,19 @@ namespace System.Activities
             }
             else
             {
-                Fx.Assert(object.ReferenceEquals(this.Owner, context.Activity) || object.ReferenceEquals(this.Owner, context.Activity.MemberOf.Owner),
-                    "This should have been validated by the activity which set AllowChainedEnvironmentAccess.");
+                Fx.Assert(
+                    object.ReferenceEquals(this.Owner, context.Activity)
+                        || object.ReferenceEquals(this.Owner, context.Activity.MemberOf.Owner),
+                    "This should have been validated by the activity which set AllowChainedEnvironmentAccess."
+                );
 
                 if (!context.Environment.TryGetLocation(this.Id, this.Owner, out location))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ArgumentDoesNotExistInEnvironment(this.Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.ArgumentDoesNotExistInEnvironment(this.Name)
+                        )
+                    );
                 }
             }
 
@@ -453,7 +531,9 @@ namespace System.Activities
             Location location;
             if (!environment.TryGetLocation(this.Id, this.Owner, out location))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ArgumentDoesNotExistInEnvironment(this.Name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.ArgumentDoesNotExistInEnvironment(this.Name))
+                );
             }
             return location;
         }
@@ -463,7 +543,7 @@ namespace System.Activities
             return new ValidationError(errorMessage, false, this.Name)
             {
                 Source = owner,
-                Id = owner.Id
+                Id = owner.Id,
             };
         }
 
@@ -471,7 +551,9 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RuntimeArgumentNotOpen(this.Name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.RuntimeArgumentNotOpen(this.Name))
+                );
             }
         }
 
@@ -491,10 +573,12 @@ namespace System.Activities
             // Reflected value for iSCSI CRC-32 polynomial 0x1edc6f41
             const UInt32 polynomial = 0x82f63b78;
 
-            [Fx.Tag.SecurityNote(Critical = "Critical because it is marked unsafe.",
-                Safe = "Safe because we aren't leaking anything. We are just using pointers to get into the string.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Critical because it is marked unsafe.",
+                Safe = "Safe because we aren't leaking anything. We are just using pointers to get into the string."
+            )]
             [SecuritySafeCritical]
-            public unsafe static UInt32 Calculate(string s)
+            public static unsafe UInt32 Calculate(string s)
             {
                 UInt32 result = 0xffffffff;
                 int byteLength = s.Length * sizeof(char);
@@ -517,7 +601,6 @@ namespace System.Activities
                 }
                 return ~result;
             }
-
         }
 
         class InternalEvaluationOrderComparer : IComparer<RuntimeArgument>
@@ -539,7 +622,9 @@ namespace System.Activities
                 {
                     if (y.IsEvaluationOrderSpecified)
                     {
-                        return x.BoundArgument.EvaluationOrder.CompareTo(y.BoundArgument.EvaluationOrder);
+                        return x.BoundArgument.EvaluationOrder.CompareTo(
+                            y.BoundArgument.EvaluationOrder
+                        );
                     }
                     else
                     {

@@ -39,10 +39,14 @@ namespace Microsoft.CodeAnalysis.CodeGen
             this.Generation = generation;
         }
 
-        public int CompareTo(DebugId other)
-            => Ordinal.CompareTo(other.Ordinal) is int result and not 0 ? result : Generation.CompareTo(other.Generation);
+        public int CompareTo(DebugId other) =>
+            Ordinal.CompareTo(other.Ordinal) is int result and not 0
+                ? result
+                : Generation.CompareTo(other.Generation);
 
-        public override string ToString()
-            => (Generation > 0) ? $"{Ordinal}{CommonGeneratedNames.GenerationSeparator}{Generation}" : Ordinal.ToString();
+        public override string ToString() =>
+            (Generation > 0)
+                ? $"{Ordinal}{CommonGeneratedNames.GenerationSeparator}{Generation}"
+                : Ordinal.ToString();
     }
 }

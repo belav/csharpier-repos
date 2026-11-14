@@ -16,6 +16,11 @@ namespace System
         /// An implementation of this interface should produce the same string of characters as an implementation of <see cref="IFormattable.ToString"/> or <see cref="ISpanFormattable.TryFormat"/>
         /// on the same type. TryFormat should return false only if there is not enough space in the destination buffer; any other failures should throw an exception.
         /// </remarks>
-        bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, ReadOnlySpan<char> format, IFormatProvider? provider);
+        bool TryFormat(
+            Span<byte> utf8Destination,
+            out int bytesWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        );
     }
 }

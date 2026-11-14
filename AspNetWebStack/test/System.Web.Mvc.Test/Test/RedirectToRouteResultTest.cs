@@ -83,13 +83,26 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<Controller> mockController = new Mock<Controller>();
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(c => c.HttpContext.Request.ApplicationPath).Returns("/somepath");
-            mockControllerContext.Setup(c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns((string s) => s);
-            mockControllerContext.Setup(c => c.HttpContext.Response.Redirect("/somepath/c/a/i", false)).Verifiable();
+            mockControllerContext
+                .Setup(c => c.HttpContext.Request.ApplicationPath)
+                .Returns("/somepath");
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>()))
+                .Returns((string s) => s);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.Redirect("/somepath/c/a/i", false))
+                .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
-            var values = new { Controller = "c", Action = "a", Id = "i" };
-            RedirectToRouteResult result = new RedirectToRouteResult(new RouteValueDictionary(values))
+            var values = new
+            {
+                Controller = "c",
+                Action = "a",
+                Id = "i",
+            };
+            RedirectToRouteResult result = new RedirectToRouteResult(
+                new RouteValueDictionary(values)
+            )
             {
                 Routes = new RouteCollection() { new Route("{controller}/{action}/{id}", null) },
             };
@@ -107,13 +120,28 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<Controller> mockController = new Mock<Controller>();
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(c => c.HttpContext.Request.ApplicationPath).Returns("/somepath");
-            mockControllerContext.Setup(c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns((string s) => s);
-            mockControllerContext.Setup(c => c.HttpContext.Response.RedirectPermanent("/somepath/c/a/i", false)).Verifiable();
+            mockControllerContext
+                .Setup(c => c.HttpContext.Request.ApplicationPath)
+                .Returns("/somepath");
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>()))
+                .Returns((string s) => s);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.RedirectPermanent("/somepath/c/a/i", false))
+                .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
-            var values = new { Controller = "c", Action = "a", Id = "i" };
-            RedirectToRouteResult result = new RedirectToRouteResult(null, new RouteValueDictionary(values), permanent: true)
+            var values = new
+            {
+                Controller = "c",
+                Action = "a",
+                Id = "i",
+            };
+            RedirectToRouteResult result = new RedirectToRouteResult(
+                null,
+                new RouteValueDictionary(values),
+                permanent: true
+            )
             {
                 Routes = new RouteCollection() { new Route("{controller}/{action}/{id}", null) },
             };
@@ -135,13 +163,26 @@ namespace System.Web.Mvc.Test
             Mock<Controller> mockController = new Mock<Controller>() { CallBase = true };
             mockController.Object.TempData = tempData;
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(c => c.HttpContext.Request.ApplicationPath).Returns("/somepath");
-            mockControllerContext.Setup(c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns((string s) => s);
-            mockControllerContext.Setup(c => c.HttpContext.Response.Redirect("/somepath/c/a/i", false)).Verifiable();
+            mockControllerContext
+                .Setup(c => c.HttpContext.Request.ApplicationPath)
+                .Returns("/somepath");
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>()))
+                .Returns((string s) => s);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.Redirect("/somepath/c/a/i", false))
+                .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
-            var values = new { Controller = "c", Action = "a", Id = "i" };
-            RedirectToRouteResult result = new RedirectToRouteResult(new RouteValueDictionary(values))
+            var values = new
+            {
+                Controller = "c",
+                Action = "a",
+                Id = "i",
+            };
+            RedirectToRouteResult result = new RedirectToRouteResult(
+                new RouteValueDictionary(values)
+            )
             {
                 Routes = new RouteCollection() { new Route("{controller}/{action}/{id}", null) },
             };
@@ -149,7 +190,10 @@ namespace System.Web.Mvc.Test
             // Act
             object value = tempData["Foo"];
             result.ExecuteResult(mockControllerContext.Object);
-            mockController.Object.TempData.Save(mockControllerContext.Object, new Mock<ITempDataProvider>().Object);
+            mockController.Object.TempData.Save(
+                mockControllerContext.Object,
+                new Mock<ITempDataProvider>().Object
+            );
 
             // Assert
             Assert.True(tempData.ContainsKey("Foo"));
@@ -160,15 +204,16 @@ namespace System.Web.Mvc.Test
         public void ExecuteResultThrowsIfVirtualPathDataIsNull()
         {
             // Arrange
-            var result = new RedirectToRouteResult(null)
-            {
-                Routes = new RouteCollection()
-            };
+            var result = new RedirectToRouteResult(null) { Routes = new RouteCollection() };
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { result.ExecuteResult(ControllerContextTest.CreateEmptyContext()); },
-                "No route in the route table matches the supplied values.");
+                delegate
+                {
+                    result.ExecuteResult(ControllerContextTest.CreateEmptyContext());
+                },
+                "No route in the route table matches the supplied values."
+            );
         }
 
         [Fact]
@@ -179,8 +224,14 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { result.ExecuteResult(null /* context */); },
-                "context");
+                delegate
+                {
+                    result.ExecuteResult(
+                        null /* context */
+                    );
+                },
+                "context"
+            );
         }
 
         [Fact]
@@ -198,14 +249,20 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             RouteData routeData = new RouteData();
-            routeData.DataTokens[ControllerContext.ParentActionViewContextToken] = new ViewContext();
-            ControllerContext context = new ControllerContext(new Mock<HttpContextBase>().Object, routeData, new Mock<ControllerBase>().Object);
+            routeData.DataTokens[ControllerContext.ParentActionViewContextToken] =
+                new ViewContext();
+            ControllerContext context = new ControllerContext(
+                new Mock<HttpContextBase>().Object,
+                routeData,
+                new Mock<ControllerBase>().Object
+            );
             RedirectToRouteResult result = new RedirectToRouteResult(new RouteValueDictionary());
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => result.ExecuteResult(context),
-                "Child actions are not allowed to perform redirect actions.");
+                "Child actions are not allowed to perform redirect actions."
+            );
         }
     }
 }

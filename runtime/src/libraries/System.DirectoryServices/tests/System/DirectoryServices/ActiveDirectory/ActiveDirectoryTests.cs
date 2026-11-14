@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
-using System.DirectoryServices.ActiveDirectory;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
+using System.Linq;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace System.DirectoryServices.Tests
@@ -16,14 +16,45 @@ namespace System.DirectoryServices.Tests
         [ConditionalFact(nameof(IsActiveDirectoryServer))]
         public void TestSchema()
         {
-            using (ActiveDirectorySchema schema = ActiveDirectorySchema.GetSchema(ActiveDirectoryContext))
+            using (
+                ActiveDirectorySchema schema = ActiveDirectorySchema.GetSchema(
+                    ActiveDirectoryContext
+                )
+            )
             {
-                Assert.True(schema.FindAllClasses().Contains(ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user")));
-                Assert.True(schema.FindAllClasses().Contains(ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "samDomainBase")));
+                Assert.True(
+                    schema
+                        .FindAllClasses()
+                        .Contains(
+                            ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user")
+                        )
+                );
+                Assert.True(
+                    schema
+                        .FindAllClasses()
+                        .Contains(
+                            ActiveDirectorySchemaClass.FindByName(
+                                ActiveDirectoryContext,
+                                "samDomainBase"
+                            )
+                        )
+                );
                 Assert.NotNull(schema.FindAllDefunctClasses());
                 Assert.NotNull(schema.FindAllDefunctProperties());
-                Assert.True(schema.FindAllProperties(PropertyTypes.Indexed).Contains(ActiveDirectorySchemaProperty.FindByName(ActiveDirectoryContext, "ou")));
-                Assert.True(schema.FindAllProperties().Contains(ActiveDirectorySchemaProperty.FindByName(ActiveDirectoryContext, "cn")));
+                Assert.True(
+                    schema
+                        .FindAllProperties(PropertyTypes.Indexed)
+                        .Contains(
+                            ActiveDirectorySchemaProperty.FindByName(ActiveDirectoryContext, "ou")
+                        )
+                );
+                Assert.True(
+                    schema
+                        .FindAllProperties()
+                        .Contains(
+                            ActiveDirectorySchemaProperty.FindByName(ActiveDirectoryContext, "cn")
+                        )
+                );
                 Assert.Equal("person", schema.FindClass("person").Name);
                 Assert.Equal("cn", schema.FindProperty("cn").Name);
 
@@ -37,28 +68,71 @@ namespace System.DirectoryServices.Tests
         [ConditionalFact(nameof(IsActiveDirectoryServer))]
         public void TestSchemaClass()
         {
-            using (ActiveDirectorySchemaClass orgClass = ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "organization"))
+            using (
+                ActiveDirectorySchemaClass orgClass = ActiveDirectorySchemaClass.FindByName(
+                    ActiveDirectoryContext,
+                    "organization"
+                )
+            )
             {
                 Assert.Equal("organization", orgClass.Name);
                 Assert.Equal("Organization", orgClass.CommonName);
                 Assert.Equal("2.5.6.4", orgClass.Oid);
-                Assert.Equal("bf967aa3-0de6-11d0-a285-00aa003049e2", orgClass.SchemaGuid.ToString());
+                Assert.Equal(
+                    "bf967aa3-0de6-11d0-a285-00aa003049e2",
+                    orgClass.SchemaGuid.ToString()
+                );
                 Assert.Equal("top", orgClass.SubClassOf.Name);
                 Assert.NotNull(orgClass.DefaultObjectSecurityDescriptor);
                 string s = orgClass.Description; // it can be null
                 Assert.False(orgClass.IsDefunct);
 
-                Assert.True(orgClass.AuxiliaryClasses.Contains(ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "samDomainBase")));
-                Assert.True(orgClass.PossibleInferiors.Contains(ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user")));
+                Assert.True(
+                    orgClass.AuxiliaryClasses.Contains(
+                        ActiveDirectorySchemaClass.FindByName(
+                            ActiveDirectoryContext,
+                            "samDomainBase"
+                        )
+                    )
+                );
+                Assert.True(
+                    orgClass.PossibleInferiors.Contains(
+                        ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user")
+                    )
+                );
 
-                ActiveDirectorySchemaClass country = ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "country");
+                ActiveDirectorySchemaClass country = ActiveDirectorySchemaClass.FindByName(
+                    ActiveDirectoryContext,
+                    "country"
+                );
                 Assert.True(orgClass.PossibleSuperiors.Contains(country));
                 int index = orgClass.PossibleSuperiors.IndexOf(country);
                 Assert.Equal(country.Name, orgClass.PossibleSuperiors[index].Name);
 
-                Assert.True(orgClass.MandatoryProperties.Contains(ActiveDirectorySchemaProperty.FindByName(ActiveDirectoryContext, "ntSecurityDescriptor")));
-                Assert.True(orgClass.OptionalProperties.Contains(ActiveDirectorySchemaProperty.FindByName(ActiveDirectoryContext, "description")));
-                Assert.True(orgClass.MandatoryProperties.Contains(ActiveDirectorySchemaProperty.FindByName(ActiveDirectoryContext, "objectClass")));
+                Assert.True(
+                    orgClass.MandatoryProperties.Contains(
+                        ActiveDirectorySchemaProperty.FindByName(
+                            ActiveDirectoryContext,
+                            "ntSecurityDescriptor"
+                        )
+                    )
+                );
+                Assert.True(
+                    orgClass.OptionalProperties.Contains(
+                        ActiveDirectorySchemaProperty.FindByName(
+                            ActiveDirectoryContext,
+                            "description"
+                        )
+                    )
+                );
+                Assert.True(
+                    orgClass.MandatoryProperties.Contains(
+                        ActiveDirectorySchemaProperty.FindByName(
+                            ActiveDirectoryContext,
+                            "objectClass"
+                        )
+                    )
+                );
 
                 using (DirectoryEntry de = orgClass.GetDirectoryEntry())
                 {
@@ -70,7 +144,12 @@ namespace System.DirectoryServices.Tests
         [ConditionalFact(nameof(IsActiveDirectoryServer))]
         public void TestSchemaProperty()
         {
-            using (ActiveDirectorySchemaProperty adsp = ActiveDirectorySchemaProperty.FindByName(ActiveDirectoryContext, "objectClass"))
+            using (
+                ActiveDirectorySchemaProperty adsp = ActiveDirectorySchemaProperty.FindByName(
+                    ActiveDirectoryContext,
+                    "objectClass"
+                )
+            )
             {
                 Assert.Equal("Object-Class", adsp.CommonName);
                 Assert.False(adsp.IsDefunct);
@@ -96,7 +175,11 @@ namespace System.DirectoryServices.Tests
         public void TestSchemaFilter()
         {
             // using (ActiveDirectorySchemaClass schema = ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user"))
-            using (ActiveDirectorySchema schema = ActiveDirectorySchema.GetSchema(ActiveDirectoryContext))
+            using (
+                ActiveDirectorySchema schema = ActiveDirectorySchema.GetSchema(
+                    ActiveDirectoryContext
+                )
+            )
             using (DirectoryEntry de = schema.GetDirectoryEntry())
             {
                 // by default there is no filters
@@ -106,7 +189,7 @@ namespace System.DirectoryServices.Tests
 
                 foreach (DirectoryEntry child in de.Children)
                 {
-                    string s  = (string) child.Properties["objectClass"][0];
+                    string s = (string)child.Properties["objectClass"][0];
                     topClassCount += s.Equals("top", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
                 }
 
@@ -121,7 +204,7 @@ namespace System.DirectoryServices.Tests
                 foreach (DirectoryEntry child in de.Children)
                 {
                     // we expect to get top only entries
-                    string s  = (string) child.Properties["objectClass"][0];
+                    string s = (string)child.Properties["objectClass"][0];
                     Assert.Equal("top", s, StringComparer.OrdinalIgnoreCase);
                     newTopClassCount += 1;
                 }
@@ -136,7 +219,7 @@ namespace System.DirectoryServices.Tests
                 de.Children.SchemaFilter.RemoveAt(0);
                 Assert.Equal(0, de.Children.SchemaFilter.Count);
 
-                de.Children.SchemaFilter.AddRange(new string [] {"top", "user"});
+                de.Children.SchemaFilter.AddRange(new string[] { "top", "user" });
                 Assert.Equal(2, de.Children.SchemaFilter.Count);
                 de.Children.SchemaFilter.Insert(0, "person");
                 Assert.Equal(3, de.Children.SchemaFilter.Count);
@@ -162,13 +245,15 @@ namespace System.DirectoryServices.Tests
                     int index = forest.Domains.IndexOf(rootDomain);
                     Assert.Equal(rootDomain.Name, forest.Domains[index].Name);
 
-                    Domain [] domains = new Domain[0];
+                    Domain[] domains = new Domain[0];
 
                     Assert.Throws<ArgumentException>(() => forest.Domains.CopyTo(domains, 0));
                     Assert.Throws<ArgumentNullException>(() => forest.Domains.CopyTo(null, 0));
 
                     domains = new Domain[forest.Domains.Count];
-                    Assert.Throws<ArgumentOutOfRangeException>(() => forest.Domains.CopyTo(domains, -1));
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        forest.Domains.CopyTo(domains, -1)
+                    );
                     forest.Domains.CopyTo(domains, 0);
 
                     Assert.NotNull(domains.FirstOrDefault(d => d.Name.Equals(rootDomain.Name)));
@@ -199,14 +284,15 @@ namespace System.DirectoryServices.Tests
                 Assert.Equal(forest.Name, forest.SchemaRoleOwner.Forest.Name);
 
                 Assert.True(
-                    forest.ForestMode == ForestMode.Unknown ||
-                    forest.ForestMode == ForestMode.Windows2000Forest ||
-                    forest.ForestMode == ForestMode.Windows2003Forest ||
-                    forest.ForestMode == ForestMode.Windows2003InterimForest ||
-                    forest.ForestMode == ForestMode.Windows2008Forest ||
-                    forest.ForestMode == ForestMode.Windows2008R2Forest ||
-                    forest.ForestMode == ForestMode.Windows2012R2Forest ||
-                    forest.ForestMode == ForestMode.Windows8Forest);
+                    forest.ForestMode == ForestMode.Unknown
+                        || forest.ForestMode == ForestMode.Windows2000Forest
+                        || forest.ForestMode == ForestMode.Windows2003Forest
+                        || forest.ForestMode == ForestMode.Windows2003InterimForest
+                        || forest.ForestMode == ForestMode.Windows2008Forest
+                        || forest.ForestMode == ForestMode.Windows2008R2Forest
+                        || forest.ForestMode == ForestMode.Windows2012R2Forest
+                        || forest.ForestMode == ForestMode.Windows8Forest
+                );
 
                 Assert.True(forest.ForestModeLevel >= 0);
                 Assert.Equal(forest.Name, forest.NamingRoleOwner.Forest.Name);
@@ -219,7 +305,7 @@ namespace System.DirectoryServices.Tests
             using (Forest forest = Forest.GetForest(ActiveDirectoryContext))
             {
                 using (ActiveDirectorySchema schema = forest.Schema)
-                using (ActiveDirectorySchemaClass  adsc = schema.FindClass("top"))
+                using (ActiveDirectorySchemaClass adsc = schema.FindClass("top"))
                 {
                     Assert.Equal("top", adsc.CommonName, StringComparer.OrdinalIgnoreCase);
                 }
@@ -256,12 +342,16 @@ namespace System.DirectoryServices.Tests
                 GlobalCatalog globalCatalog = forest.FindGlobalCatalog(forest.Sites[0].Name);
 
                 DirectoryContext forestContext = new DirectoryContext(
-                                                        DirectoryContextType.Forest,
-                                                        forest.Name,
-                                                        LdapConfiguration.Configuration.UserName,
-                                                        LdapConfiguration.Configuration.Password);
+                    DirectoryContextType.Forest,
+                    forest.Name,
+                    LdapConfiguration.Configuration.UserName,
+                    LdapConfiguration.Configuration.Password
+                );
 
-                Assert.Equal(globalCatalog.Name, GlobalCatalog.FindOne(forestContext, forest.Sites[0].Name).Name);
+                Assert.Equal(
+                    globalCatalog.Name,
+                    GlobalCatalog.FindOne(forestContext, forest.Sites[0].Name).Name
+                );
             }
         }
 
@@ -281,15 +371,16 @@ namespace System.DirectoryServices.Tests
                 Assert.True(domain.DomainModeLevel >= 0);
 
                 Assert.True(
-                    domain.DomainMode == DomainMode.Unknown ||
-                    domain.DomainMode == DomainMode.Windows2000MixedDomain ||
-                    domain.DomainMode == DomainMode.Windows2000NativeDomain ||
-                    domain.DomainMode == DomainMode.Windows2003Domain ||
-                    domain.DomainMode == DomainMode.Windows2003InterimDomain ||
-                    domain.DomainMode == DomainMode.Windows2008Domain ||
-                    domain.DomainMode == DomainMode.Windows2008R2Domain ||
-                    domain.DomainMode == DomainMode.Windows2012R2Domain ||
-                    domain.DomainMode == DomainMode.Windows8Domain);
+                    domain.DomainMode == DomainMode.Unknown
+                        || domain.DomainMode == DomainMode.Windows2000MixedDomain
+                        || domain.DomainMode == DomainMode.Windows2000NativeDomain
+                        || domain.DomainMode == DomainMode.Windows2003Domain
+                        || domain.DomainMode == DomainMode.Windows2003InterimDomain
+                        || domain.DomainMode == DomainMode.Windows2008Domain
+                        || domain.DomainMode == DomainMode.Windows2008R2Domain
+                        || domain.DomainMode == DomainMode.Windows2012R2Domain
+                        || domain.DomainMode == DomainMode.Windows8Domain
+                );
 
                 if (domain.Forest.RootDomain.Name.Equals(domain.Name))
                 {
@@ -307,10 +398,11 @@ namespace System.DirectoryServices.Tests
             using (Domain domain = Domain.GetDomain(ActiveDirectoryContext))
             {
                 DirectoryContext dc = new DirectoryContext(
-                                                    DirectoryContextType.Domain,
-                                                    domain.Name,
-                                                    LdapConfiguration.Configuration.UserName,
-                                                    LdapConfiguration.Configuration.Password);
+                    DirectoryContextType.Domain,
+                    domain.Name,
+                    LdapConfiguration.Configuration.UserName,
+                    LdapConfiguration.Configuration.Password
+                );
 
                 using (DomainController controller = DomainController.FindOne(dc))
                 {
@@ -335,11 +427,12 @@ namespace System.DirectoryServices.Tests
                     foreach (ActiveDirectoryRole adr in controller.Roles)
                     {
                         Assert.True(
-                            adr == ActiveDirectoryRole.InfrastructureRole ||
-                            adr == ActiveDirectoryRole.NamingRole ||
-                            adr == ActiveDirectoryRole.PdcRole ||
-                            adr == ActiveDirectoryRole.RidRole ||
-                            adr == ActiveDirectoryRole.SchemaRole);
+                            adr == ActiveDirectoryRole.InfrastructureRole
+                                || adr == ActiveDirectoryRole.NamingRole
+                                || adr == ActiveDirectoryRole.PdcRole
+                                || adr == ActiveDirectoryRole.RidRole
+                                || adr == ActiveDirectoryRole.SchemaRole
+                        );
 
                         Assert.True(controller.Roles.Contains(adr));
                         Assert.True(controller.Roles.IndexOf(adr) >= 0);
@@ -347,7 +440,10 @@ namespace System.DirectoryServices.Tests
 
                     Assert.NotNull(controller.SiteName);
 
-                    Assert.True(controller.OSVersion.IndexOf("Windows", StringComparison.OrdinalIgnoreCase) >= 0);
+                    Assert.True(
+                        controller.OSVersion.IndexOf("Windows", StringComparison.OrdinalIgnoreCase)
+                            >= 0
+                    );
                     Assert.True(controller.IPAddress.IndexOf('.') >= 0);
                 }
             }
@@ -359,7 +455,12 @@ namespace System.DirectoryServices.Tests
             using (Forest forest = Forest.GetForest(ActiveDirectoryContext))
             {
                 using (ActiveDirectorySite site = forest.Sites[0])
-                using (ActiveDirectorySite s = ActiveDirectorySite.FindByName(ActiveDirectoryContext, site.Name))
+                using (
+                    ActiveDirectorySite s = ActiveDirectorySite.FindByName(
+                        ActiveDirectoryContext,
+                        site.Name
+                    )
+                )
                 {
                     Assert.Equal(site.Name, s.Name);
                     Assert.True(s.Domains.Contains(forest.RootDomain));
@@ -376,7 +477,10 @@ namespace System.DirectoryServices.Tests
                         Assert.Equal(0, s.SiteLinks.IndexOf(adsl));
                         Assert.True(adsl.Sites.Contains(s));
                         Assert.True(adsl.Cost >= 0);
-                        Assert.True(adsl.TransportType == ActiveDirectoryTransportType.Rpc || adsl.TransportType == ActiveDirectoryTransportType.Smtp);
+                        Assert.True(
+                            adsl.TransportType == ActiveDirectoryTransportType.Rpc
+                                || adsl.TransportType == ActiveDirectoryTransportType.Smtp
+                        );
                     }
 
                     Assert.True(s.Servers.Contains(s.InterSiteTopologyGenerator));
@@ -393,10 +497,12 @@ namespace System.DirectoryServices.Tests
                         Assert.True(ds.Partitions.Contains(firstPartition));
                         Assert.Equal(0, ds.Partitions.IndexOf(firstPartition));
 
-                        string [] partitions = new string[0];
+                        string[] partitions = new string[0];
                         Assert.Throws<ArgumentException>(() => ds.Partitions.CopyTo(partitions, 0));
                         Assert.Throws<ArgumentNullException>(() => ds.Partitions.CopyTo(null, 0));
-                        Assert.Throws<ArgumentOutOfRangeException>(() => ds.Partitions.CopyTo(partitions, -1));
+                        Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            ds.Partitions.CopyTo(partitions, -1)
+                        );
 
                         partitions = new string[ds.Partitions.Count];
                         ds.Partitions.CopyTo(partitions, 0);
@@ -406,12 +512,17 @@ namespace System.DirectoryServices.Tests
             }
         }
 
-        private static DirectoryContext ActiveDirectoryContext => new DirectoryContext(
-                                            DirectoryContextType.DirectoryServer,
-                                            LdapConfiguration.Configuration.ServerName +
-                                            (string.IsNullOrEmpty(LdapConfiguration.Configuration.Port) ? "" : ":" + LdapConfiguration.Configuration.Port),
-                                            LdapConfiguration.Configuration.UserName,
-                                            LdapConfiguration.Configuration.Password);
-
+        private static DirectoryContext ActiveDirectoryContext =>
+            new DirectoryContext(
+                DirectoryContextType.DirectoryServer,
+                LdapConfiguration.Configuration.ServerName
+                    + (
+                        string.IsNullOrEmpty(LdapConfiguration.Configuration.Port)
+                            ? ""
+                            : ":" + LdapConfiguration.Configuration.Port
+                    ),
+                LdapConfiguration.Configuration.UserName,
+                LdapConfiguration.Configuration.Password
+            );
     }
 }

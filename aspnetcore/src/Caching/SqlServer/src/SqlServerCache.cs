@@ -75,8 +75,8 @@ public class SqlServerCache : IDistributedCache
         }
 
         _systemClock = cacheOptions.SystemClock ?? new SystemClock();
-        _expiredItemsDeletionInterval =
-            cacheOptions.ExpiredItemsDeletionInterval ?? DefaultExpiredItemsDeletionInterval;
+        _expiredItemsDeletionInterval = cacheOptions.ExpiredItemsDeletionInterval
+            ?? DefaultExpiredItemsDeletionInterval;
         _deleteExpiredCachedItemsDelegate = DeleteExpiredCacheItems;
         _defaultSlidingExpiration = cacheOptions.DefaultSlidingExpiration;
 

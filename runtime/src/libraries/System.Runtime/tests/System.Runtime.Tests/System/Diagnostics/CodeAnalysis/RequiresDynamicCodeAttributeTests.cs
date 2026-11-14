@@ -22,10 +22,7 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData(null)]
         public void TestSetUrl(string url)
         {
-            var attr = new RequiresDynamicCodeAttribute("User Message")
-            {
-                Url = url
-            };
+            var attr = new RequiresDynamicCodeAttribute("User Message") { Url = url };
 
             Assert.Equal("User Message", attr.Message);
             Assert.Equal(url, attr.Url);

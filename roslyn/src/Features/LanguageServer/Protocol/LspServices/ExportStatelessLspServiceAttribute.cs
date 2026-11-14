@@ -13,10 +13,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer;
 /// Defines an attribute to export an instance of <see cref="ILspService"/> that is re-used across
 /// all server instances in the same mef container.  Services using this export attribute should not
 /// store any kind of server specific state in them.
-/// 
+///
 /// MEF will dispose of these services when the container is disposed of.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false), MetadataAttribute]
+[
+    AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false),
+    MetadataAttribute
+]
 internal class ExportStatelessLspServiceAttribute : ExportAttribute
 {
     /// <summary>
@@ -36,9 +39,17 @@ internal class ExportStatelessLspServiceAttribute : ExportAttribute
     /// </summary>
     public bool IsStateless { get; } = true;
 
-    public ExportStatelessLspServiceAttribute(Type type, string contractName, WellKnownLspServerKinds serverKind = WellKnownLspServerKinds.Any) : base(contractName, typeof(ILspService))
+    public ExportStatelessLspServiceAttribute(
+        Type type,
+        string contractName,
+        WellKnownLspServerKinds serverKind = WellKnownLspServerKinds.Any
+    )
+        : base(contractName, typeof(ILspService))
     {
-        Contract.ThrowIfFalse(type.GetInterfaces().Contains(typeof(ILspService)), $"{type.Name} does not inherit from {nameof(ILspService)}");
+        Contract.ThrowIfFalse(
+            type.GetInterfaces().Contains(typeof(ILspService)),
+            $"{type.Name} does not inherit from {nameof(ILspService)}"
+        );
         Type = type;
         ServerKind = serverKind;
     }

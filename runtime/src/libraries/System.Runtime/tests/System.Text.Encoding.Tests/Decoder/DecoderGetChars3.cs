@@ -32,7 +32,17 @@ namespace System.Text.Tests
                 expectedChars[i] = (char)('\0' + i);
             }
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, bytes.Length, expectedChars, "001.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                bytes.Length,
+                expectedChars,
+                "001.1"
+            );
         }
 
         // PosTest2: Call GetChars with Unicode decoder to convert a ASCII byte array
@@ -55,32 +65,39 @@ namespace System.Text.Tests
                 expectedChars[i] = (char)('\0' + i);
             }
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, expectedChars.Length, expectedChars, "002.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                expectedChars.Length,
+                expectedChars,
+                "002.1"
+            );
         }
 
         // PosTest3: Call GetChars with Unicode decoder to convert a Unicode byte array
         [Fact]
         public void PosTest3()
         {
-            byte[] bytes = new byte[] {
-                217,
-                143,
-                42,
-                78,
-                0,
-                78,
-                42,
-                78,
-                75,
-                109,
-                213,
-                139
-            };
+            byte[] bytes = new byte[] { 217, 143, 42, 78, 0, 78, 42, 78, 75, 109, 213, 139 };
             char[] expected = "\u8FD9\u4E2A\u4E00\u4E2A\u6D4B\u8BD5".ToCharArray();
             char[] chars = new char[expected.Length];
             Decoder decoder = Encoding.Unicode.GetDecoder();
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length, chars, 0, expected.Length, expected, "003.1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length,
+                chars,
+                0,
+                expected.Length,
+                expected,
+                "003.1"
+            );
         }
 
         // PosTest4: Call GetChars with ASCII decoder to convert partial of ASCII byte array
@@ -96,34 +113,57 @@ namespace System.Text.Tests
                 bytes[i] = (byte)i;
             }
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length / 2, chars, 0, bytes.Length / 2, "004.1");
-            VerificationHelper(decoder, bytes, bytes.Length / 2, bytes.Length / 2, chars, chars.Length / 2, bytes.Length / 2, "004.2");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length / 2,
+                chars,
+                0,
+                bytes.Length / 2,
+                "004.1"
+            );
+            VerificationHelper(
+                decoder,
+                bytes,
+                bytes.Length / 2,
+                bytes.Length / 2,
+                chars,
+                chars.Length / 2,
+                bytes.Length / 2,
+                "004.2"
+            );
         }
 
         // PosTest5: Call GetChars with Unicode decoder to convert partial of an Unicode byte array
         [Fact]
         public void PosTest5()
         {
-            byte[] bytes = new byte[] {
-                217,
-                143,
-                42,
-                78,
-                0,
-                78,
-                42,
-                78,
-                75,
-                109,
-                213,
-                139
-            };
+            byte[] bytes = new byte[] { 217, 143, 42, 78, 0, 78, 42, 78, 75, 109, 213, 139 };
             char[] expected = "\u8FD9\u4E2A\u4E00\u4E2A\u6D4B\u8BD5".ToCharArray();
             char[] chars = new char[expected.Length];
             Decoder decoder = Encoding.Unicode.GetDecoder();
 
-            VerificationHelper(decoder, bytes, 0, bytes.Length / 2, chars, 0, chars.Length / 2, "005.1");
-            VerificationHelper(decoder, bytes, bytes.Length / 2, bytes.Length / 2, chars, 1, chars.Length / 2, "005.2");
+            VerificationHelper(
+                decoder,
+                bytes,
+                0,
+                bytes.Length / 2,
+                chars,
+                0,
+                chars.Length / 2,
+                "005.1"
+            );
+            VerificationHelper(
+                decoder,
+                bytes,
+                bytes.Length / 2,
+                bytes.Length / 2,
+                chars,
+                1,
+                chars.Length / 2,
+                "005.2"
+            );
         }
 
         // PosTest6: Call GetChars with ASCII decoder to convert arbitrary byte array
@@ -168,15 +208,43 @@ namespace System.Text.Tests
         }
         #endregion
 
-        private void VerificationHelper(Decoder decoder, byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int expected, string errorno)
+        private void VerificationHelper(
+            Decoder decoder,
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            int expected,
+            string errorno
+        )
         {
             int actual = decoder.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
             Assert.Equal(expected, actual);
         }
 
-        private void VerificationHelper(Decoder decoder, byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int expected, char[] expectedChars, string errorno)
+        private void VerificationHelper(
+            Decoder decoder,
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            int expected,
+            char[] expectedChars,
+            string errorno
+        )
         {
-            VerificationHelper(decoder, bytes, byteIndex, byteCount, chars, charIndex, expected, errorno + ".1");
+            VerificationHelper(
+                decoder,
+                bytes,
+                byteIndex,
+                byteCount,
+                chars,
+                charIndex,
+                expected,
+                errorno + ".1"
+            );
             Assert.Equal(expectedChars.Length, chars.Length);
             Assert.Equal(expectedChars, chars);
         }

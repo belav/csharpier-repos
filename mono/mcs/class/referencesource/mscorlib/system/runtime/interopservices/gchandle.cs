@@ -1,19 +1,19 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 namespace System.Runtime.InteropServices
-{    
+{
     using System;
-    using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
-    using System.Threading;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Threading;
 
-    // These are the types of handles used by the EE.  
-    // IMPORTANT: These must match the definitions in ObjectHandle.h in the EE. 
+    // These are the types of handles used by the EE.
+    // IMPORTANT: These must match the definitions in ObjectHandle.h in the EE.
     // IMPORTANT: If new values are added to the enum the GCHandle::MaxHandleType
     //            constant must be updated.
     [Serializable]
@@ -23,10 +23,10 @@ namespace System.Runtime.InteropServices
         Weak = 0,
         WeakTrackResurrection = 1,
         Normal = 2,
-        Pinned = 3
+        Pinned = 3,
     }
 
-    // This class allows you to create an opaque, GC handle to any 
+    // This class allows you to create an opaque, GC handle to any
     // COM+ object. A GC handle is used when an object reference must be
     // reachable from unmanaged memory.  There are 3 kinds of roots:
     // Normal - keeps the object from being collected.
@@ -48,7 +48,7 @@ namespace System.Runtime.InteropServices
         private const GCHandleType MaxHandleType = GCHandleType.Pinned;
 
 #if MDA_SUPPORTED
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         static GCHandle()
         {
             s_probeIsActive = Mda.IsInvalidGCHandleCookieProbeEnabled();
@@ -58,12 +58,15 @@ namespace System.Runtime.InteropServices
 #endif
 
         // Allocate a handle storing the object and the type.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal GCHandle(Object value, GCHandleType type)
         {
             // Make sure the type parameter is within the valid range for the enum.
             if ((uint)type > (uint)MaxHandleType)
-                throw new ArgumentOutOfRangeException("type", Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+                throw new ArgumentOutOfRangeException(
+                    "type",
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             Contract.EndContractBlock();
 
             m_handle = InternalAlloc(value, type);
@@ -71,10 +74,10 @@ namespace System.Runtime.InteropServices
             // Record if the handle is pinned.
             if (type == GCHandleType.Pinned)
                 SetIsPinned();
-        }  
+        }
 
         // Used in the conversion functions below.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal GCHandle(IntPtr handle)
         {
             InternalCheckDomain(handle);
@@ -85,23 +88,22 @@ namespace System.Runtime.InteropServices
         //
         // value - The object that the GC handle is created for.
         // type - The type of GC handle to create.
-        // 
+        //
         // returns a new GC handle that protects the object.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static GCHandle Alloc(Object value)
         {
             return new GCHandle(value, GCHandleType.Normal);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static GCHandle Alloc(Object value, GCHandleType type)
         {
             return new GCHandle(value, type);
         }
 
-
         // Frees a GC handle.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public void Free()
         {
             // Copy the handle instance member to a local variable. This is required to prevent
@@ -109,7 +111,10 @@ namespace System.Runtime.InteropServices
             IntPtr handle = m_handle;
 
             // Free the handle if it hasn't already been freed.
-            if (handle != IntPtr.Zero && Interlocked.CompareExchange(ref m_handle, IntPtr.Zero, handle) == handle)
+            if (
+                handle != IntPtr.Zero
+                && Interlocked.CompareExchange(ref m_handle, IntPtr.Zero, handle) == handle
+            )
             {
 #if MDA_SUPPORTED
                 // If this handle was passed out to unmanaged code, we need to remove it
@@ -128,37 +133,42 @@ namespace System.Runtime.InteropServices
             }
             else
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized")
+                );
             }
         }
-        
+
         // Target property - allows getting / updating of the handle's referent.
         public Object Target
         {
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             get
             {
                 // Check if the handle was never initialized or was freed.
                 if (m_handle == IntPtr.Zero)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized")
+                    );
 
                 return InternalGet(GetHandleValue());
             }
-    
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             set
             {
                 // Check if the handle was never initialized or was freed.
                 if (m_handle == IntPtr.Zero)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized")
+                    );
 
                 InternalSet(GetHandleValue(), value, IsPinned());
             }
         }
-        
+
         // Retrieve the address of an object in a Pinned handle.  This throws
         // an exception if the handle is any type other than Pinned.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public IntPtr AddrOfPinnedObject()
         {
             // Check if the handle was not a pinned handle.
@@ -166,10 +176,14 @@ namespace System.Runtime.InteropServices
             {
                 // Check if the handle was never initialized for was freed.
                 if (m_handle == IntPtr.Zero)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized")
+                    );
 
                 // You can only get the address of pinned handles.
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_HandleIsNotPinned"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_HandleIsNotPinned")
+                );
             }
 
             // Get the address.
@@ -179,29 +193,28 @@ namespace System.Runtime.InteropServices
         // Determine whether this handle has been allocated or not.
         public bool IsAllocated
         {
-            get
-            {
-                return m_handle != IntPtr.Zero;
-            }
+            get { return m_handle != IntPtr.Zero; }
         }
 
         // Used to create a GCHandle from an int.  This is intended to
         // be used with the reverse conversion.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static explicit operator GCHandle(IntPtr value)
         {
             return FromIntPtr(value);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static GCHandle FromIntPtr(IntPtr value)
         {
             if (value == IntPtr.Zero)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_HandleIsNotInitialized")
+                );
             Contract.EndContractBlock();
 
             IntPtr handle = value;
-            
+
 #if MDA_SUPPORTED
             if (s_probeIsActive)
             {
@@ -236,7 +249,7 @@ namespace System.Runtime.InteropServices
             }
 #endif
             return value.m_handle;
-        }       
+        }
 
         public override int GetHashCode()
         {
@@ -246,12 +259,12 @@ namespace System.Runtime.InteropServices
         public override bool Equals(Object o)
         {
             GCHandle hnd;
-            
+
             // Check that o is a GCHandle first
-            if(o == null || !(o is GCHandle))
+            if (o == null || !(o is GCHandle))
                 return false;
-            else 
-                hnd = (GCHandle) o;
+            else
+                hnd = (GCHandle)o;
 
             return m_handle == hnd.m_handle;
         }
@@ -294,35 +307,47 @@ namespace System.Runtime.InteropServices
         }
 
         // Internal native calls that this implementation uses.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern IntPtr InternalAlloc(Object value, GCHandleType type);
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void InternalFree(IntPtr handle);
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern Object InternalGet(IntPtr handle);
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void InternalSet(IntPtr handle, Object value, bool isPinned);
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern Object InternalCompareExchange(IntPtr handle, Object value, Object oldValue, bool isPinned);
-        [System.Security.SecurityCritical]  // auto-generated
+        internal static extern Object InternalCompareExchange(
+            IntPtr handle,
+            Object value,
+            Object oldValue,
+            bool isPinned
+        );
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern IntPtr InternalAddrOfPinnedObject(IntPtr handle);
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void InternalCheckDomain(IntPtr handle);
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern GCHandleType InternalGetHandleType(IntPtr handle);
@@ -333,7 +358,7 @@ namespace System.Runtime.InteropServices
 #if MDA_SUPPORTED
         // The GCHandle cookie table.
         static private volatile GCHandleCookieTable s_cookieTable = null;
-        static private volatile bool s_probeIsActive = false;
+        private static volatile bool s_probeIsActive = false;
 #endif
     }
 }

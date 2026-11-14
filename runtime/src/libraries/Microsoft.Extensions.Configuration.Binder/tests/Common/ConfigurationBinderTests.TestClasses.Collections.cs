@@ -9,9 +9,9 @@ using System.Linq;
 
 namespace Microsoft.Extensions
 #if BUILDING_SOURCE_GENERATOR_TESTS
-    .SourceGeneration
+.SourceGeneration
 #endif
-    .Configuration.Binder.Tests
+.Configuration.Binder.Tests
 {
     public partial class ConfigurationBinderCollectionTests
     {
@@ -30,22 +30,24 @@ namespace Microsoft.Extensions
         {
             public InitializedCollectionsOptions()
             {
-                AlreadyInitializedIEnumerableInterface = ListUsedInIEnumerableFieldAndShouldNotBeTouched;
+                AlreadyInitializedIEnumerableInterface =
+                    ListUsedInIEnumerableFieldAndShouldNotBeTouched;
                 AlreadyInitializedDictionary = ExistingDictionary;
             }
 
             public List<string> ListUsedInIEnumerableFieldAndShouldNotBeTouched = new()
             {
                 "This was here too",
-                "Don't touch me!"
+                "Don't touch me!",
             };
 
             public static ReadOnlyDictionary<string, string> ExistingDictionary = new(
                 new Dictionary<string, string>
                 {
-                    {"existing_key_1", "val_1"},
-                    {"existing_key_2", "val_2"}
-                });
+                    { "existing_key_1", "val_1" },
+                    { "existing_key_2", "val_2" },
+                }
+            );
 
             public IEnumerable<string> AlreadyInitializedIEnumerableInterface { get; set; }
 
@@ -63,9 +65,7 @@ namespace Microsoft.Extensions
         public class CustomList : List<string>
         {
             // Add an overload, just to make sure binding picks the right Add method
-            public void Add(string a, string b)
-            {
-            }
+            public void Add(string a, string b) { }
         }
 
         public class CustomListDerivedFromIEnumerable : IEnumerable<string>
@@ -77,13 +77,9 @@ namespace Microsoft.Extensions
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        internal interface IDerivedOne : IDerivedTwo
-        {
-        }
+        internal interface IDerivedOne : IDerivedTwo { }
 
-        internal interface IDerivedTwo : IEnumerable<string>
-        {
-        }
+        internal interface IDerivedTwo : IEnumerable<string> { }
 
         public class CustomListIndirectlyDerivedFromIEnumerable : IDerivedOne
         {
@@ -107,14 +103,14 @@ namespace Microsoft.Extensions
         {
             abc,
             def,
-            ghi
+            ghi,
         }
 
         public enum KeyUintEnum : uint
         {
             abc,
             def,
-            ghi
+            ghi,
         }
 
         public class OptionsWithArrays
@@ -144,14 +140,8 @@ namespace Microsoft.Extensions
         {
             public OptionsWithLists()
             {
-                AlreadyInitializedList = new List<string>
-                {
-                    "This was here before"
-                };
-                AlreadyInitializedListInterface = new List<string>
-                {
-                    "This was here too"
-                };
+                AlreadyInitializedList = new List<string> { "This was here before" };
+                AlreadyInitializedListInterface = new List<string> { "This was here too" };
             }
 
             public CustomList CustomList { get; set; }
@@ -181,12 +171,12 @@ namespace Microsoft.Extensions
             {
                 AlreadyInitializedStringDictionaryInterface = new Dictionary<string, string>
                 {
-                    ["123"] = "This was already here"
+                    ["123"] = "This was already here",
                 };
 
                 AlreadyInitializedHashSetDictionary = new Dictionary<string, HashSet<string>>
                 {
-                    ["123"] = new HashSet<string>(new[] { "This was already here" })
+                    ["123"] = new HashSet<string>(new[] { "This was already here" }),
                 };
             }
 
@@ -194,7 +184,8 @@ namespace Microsoft.Extensions
 
             public Dictionary<string, string> StringDictionary { get; set; }
 
-            public IDictionary<string, string> IDictionaryNoSetter { get; } = new Dictionary<string, string>();
+            public IDictionary<string, string> IDictionaryNoSetter { get; } =
+                new Dictionary<string, string>();
 
             public Dictionary<string, NestedOptions> ObjectDictionary { get; set; }
 
@@ -207,8 +198,14 @@ namespace Microsoft.Extensions
             // activate an interface
             public IDictionary<string, string> StringDictionaryInterface { get; set; }
 
-            public IDictionary<string, string> AlreadyInitializedStringDictionaryInterface { get; set; }
-            public IDictionary<string, HashSet<string>> AlreadyInitializedHashSetDictionary { get; set; }
+            public IDictionary<
+                string,
+                string
+            > AlreadyInitializedStringDictionaryInterface { get; set; }
+            public IDictionary<
+                string,
+                HashSet<string>
+            > AlreadyInitializedHashSetDictionary { get; set; }
         }
 
         public class OptionsWithInterdependentProperties
@@ -221,7 +218,11 @@ namespace Microsoft.Extensions
         {
             private Dictionary<TKey, TValue> _dict = new();
 
-            public TValue this[TKey key] { get => _dict[key]; set => _dict[key] = value; }
+            public TValue this[TKey key]
+            {
+                get => _dict[key];
+                set => _dict[key] = value;
+            }
 
             public ICollection<TKey> Keys => _dict.Keys;
 
@@ -241,7 +242,8 @@ namespace Microsoft.Extensions
 
             public bool ContainsKey(TKey key) => _dict.ContainsKey(key);
 
-            public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => throw new NotImplementedException();
+            public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) =>
+                throw new NotImplementedException();
 
             public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => _dict.GetEnumerator();
 
@@ -249,27 +251,33 @@ namespace Microsoft.Extensions
 
             public bool Remove(KeyValuePair<TKey, TValue> item) => _dict.Remove(item.Key);
 
-            public bool TryGetValue(TKey key, out TValue value) => _dict.TryGetValue(key, out value);
+            public bool TryGetValue(TKey key, out TValue value) =>
+                _dict.TryGetValue(key, out value);
 
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => _dict.GetEnumerator();
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() =>
+                _dict.GetEnumerator();
 
             // The following are members which have the same names as the IDictionary<,> members.
             // The following members test that there's no System.Reflection.AmbiguousMatchException when binding to the dictionary.
             private string? v;
-            public string? this[string key] { get => v; set => v = value; }
-            public bool TryGetValue() { return true; }
+            public string? this[string key]
+            {
+                get => v;
+                set => v = value;
+            }
 
+            public bool TryGetValue()
+            {
+                return true;
+            }
         }
 
-        public class ExtendedDictionary<TKey, TValue> : Dictionary<TKey, TValue>
-        {
-        }
+        public class ExtendedDictionary<TKey, TValue> : Dictionary<TKey, TValue> { }
 
         public class Foo
         {
             public IReadOnlyDictionary<string, int> Items { get; set; } =
                 new Dictionary<string, int> { { "existing-item1", 1 }, { "existing-item2", 2 } };
-
         }
 
         public class MyClassWithCustomSet
@@ -285,13 +293,12 @@ namespace Microsoft.Extensions
         public class ConfigWithInstantiatedIReadOnlyDictionary
         {
             public static Dictionary<string, int> _existingDictionary = new()
-                    {
-                        {"existing-item1", 1},
-                        {"existing-item2", 2},
-                    };
+            {
+                { "existing-item1", 1 },
+                { "existing-item2", 2 },
+            };
 
-            public IReadOnlyDictionary<string, int> Dictionary { get; set; } =
-                _existingDictionary;
+            public IReadOnlyDictionary<string, int> Dictionary { get; set; } = _existingDictionary;
         }
 
         public class ConfigWithNonInstantiatedReadOnlyDictionary
@@ -302,13 +309,12 @@ namespace Microsoft.Extensions
         public class ConfigWithInstantiatedConcreteDictionary
         {
             public static Dictionary<string, int> _existingDictionary = new()
-                    {
-                        {"existing-item1", 1},
-                        {"existing-item2", 2},
-                    };
+            {
+                { "existing-item1", 1 },
+                { "existing-item2", 2 },
+            };
 
-            public Dictionary<string, int> Dictionary { get; set; } =
-                _existingDictionary;
+            public Dictionary<string, int> Dictionary { get; set; } = _existingDictionary;
         }
 
         public class MyClassWithCustomCollections
@@ -318,61 +324,137 @@ namespace Microsoft.Extensions
         }
 
         public interface ICustomCollectionDerivedFromIEnumerableT<out T> : IEnumerable<T> { }
+
         public interface ICustomCollectionDerivedFromICollectionT<T> : ICollection<T> { }
 
-        public interface ICustomSet<T> : ISet<T>
-        {
-        }
+        public interface ICustomSet<T> : ISet<T> { }
 
-        public interface ICustomDictionary<T, T1> : IDictionary<T, T1>
-        {
-        }
+        public interface ICustomDictionary<T, T1> : IDictionary<T, T1> { }
 
         public class OptionsWithDifferentCollectionInterfaces
         {
-            private static IEnumerable<string> s_instantiatedIEnumerable = new List<string> { "value1", "value2" };
-            public bool IsSameInstantiatedIEnumerable() => object.ReferenceEquals(s_instantiatedIEnumerable, InstantiatedIEnumerable);
-            public IEnumerable<string> InstantiatedIEnumerable { get; set; } = s_instantiatedIEnumerable;
+            private static IEnumerable<string> s_instantiatedIEnumerable = new List<string>
+            {
+                "value1",
+                "value2",
+            };
 
-            private static IList<string> s_instantiatedIList = new List<string> { "value1", "value2" };
-            public bool IsSameInstantiatedIList() => object.ReferenceEquals(s_instantiatedIList, InstantiatedIList);
+            public bool IsSameInstantiatedIEnumerable() =>
+                object.ReferenceEquals(s_instantiatedIEnumerable, InstantiatedIEnumerable);
+
+            public IEnumerable<string> InstantiatedIEnumerable { get; set; } =
+                s_instantiatedIEnumerable;
+
+            private static IList<string> s_instantiatedIList = new List<string>
+            {
+                "value1",
+                "value2",
+            };
+
+            public bool IsSameInstantiatedIList() =>
+                object.ReferenceEquals(s_instantiatedIList, InstantiatedIList);
+
             public IList<string> InstantiatedIList { get; set; } = s_instantiatedIList;
 
-            private static IReadOnlyList<string> s_instantiatedIReadOnlyList = new List<string> { "value1", "value2" };
-            public bool IsSameInstantiatedIReadOnlyList() => object.ReferenceEquals(s_instantiatedIReadOnlyList, InstantiatedIReadOnlyList);
-            public IReadOnlyList<string> InstantiatedIReadOnlyList { get; set; } = s_instantiatedIReadOnlyList;
+            private static IReadOnlyList<string> s_instantiatedIReadOnlyList = new List<string>
+            {
+                "value1",
+                "value2",
+            };
 
-            private static IDictionary<string, string> s_instantiatedIDictionary = new Dictionary<string, string> { ["Key1"] = "value1", ["Key2"] = "value2" };
-            public IDictionary<string, string> InstantiatedIDictionary { get; set; } = s_instantiatedIDictionary;
-            public bool IsSameInstantiatedIDictionary() => object.ReferenceEquals(s_instantiatedIDictionary, InstantiatedIDictionary);
+            public bool IsSameInstantiatedIReadOnlyList() =>
+                object.ReferenceEquals(s_instantiatedIReadOnlyList, InstantiatedIReadOnlyList);
 
-            private static IReadOnlyDictionary<string, string> s_instantiatedIReadOnlyDictionary = new Dictionary<string, string> { ["Key1"] = "value1", ["Key2"] = "value2" };
-            public IReadOnlyDictionary<string, string> InstantiatedIReadOnlyDictionary { get; set; } = s_instantiatedIReadOnlyDictionary;
-            public bool IsSameInstantiatedIReadOnlyDictionary() => object.ReferenceEquals(s_instantiatedIReadOnlyDictionary, InstantiatedIReadOnlyDictionary);
+            public IReadOnlyList<string> InstantiatedIReadOnlyList { get; set; } =
+                s_instantiatedIReadOnlyList;
 
-            private static ISet<string> s_instantiatedISet = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "a", "A", "b" };
+            private static IDictionary<string, string> s_instantiatedIDictionary = new Dictionary<
+                string,
+                string
+            >
+            {
+                ["Key1"] = "value1",
+                ["Key2"] = "value2",
+            };
+            public IDictionary<string, string> InstantiatedIDictionary { get; set; } =
+                s_instantiatedIDictionary;
+
+            public bool IsSameInstantiatedIDictionary() =>
+                object.ReferenceEquals(s_instantiatedIDictionary, InstantiatedIDictionary);
+
+            private static IReadOnlyDictionary<string, string> s_instantiatedIReadOnlyDictionary =
+                new Dictionary<string, string> { ["Key1"] = "value1", ["Key2"] = "value2" };
+            public IReadOnlyDictionary<
+                string,
+                string
+            > InstantiatedIReadOnlyDictionary { get; set; } = s_instantiatedIReadOnlyDictionary;
+
+            public bool IsSameInstantiatedIReadOnlyDictionary() =>
+                object.ReferenceEquals(
+                    s_instantiatedIReadOnlyDictionary,
+                    InstantiatedIReadOnlyDictionary
+                );
+
+            private static ISet<string> s_instantiatedISet = new HashSet<string>(
+                StringComparer.OrdinalIgnoreCase
+            )
+            {
+                "a",
+                "A",
+                "b",
+            };
             public ISet<string> InstantiatedISet { get; set; } = s_instantiatedISet;
-            public bool IsSameInstantiatedISet() => object.ReferenceEquals(s_instantiatedISet, InstantiatedISet);
+
+            public bool IsSameInstantiatedISet() =>
+                object.ReferenceEquals(s_instantiatedISet, InstantiatedISet);
 
 #if NETCOREAPP
-            private static IReadOnlySet<string> s_instantiatedIReadOnlySet = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "a", "A", "b" };
-            public IReadOnlySet<string> InstantiatedIReadOnlySet { get; set; } = s_instantiatedIReadOnlySet;
-            public bool IsSameInstantiatedIReadOnlySet() => object.ReferenceEquals(s_instantiatedIReadOnlySet, InstantiatedIReadOnlySet);
+            private static IReadOnlySet<string> s_instantiatedIReadOnlySet = new HashSet<string>(
+                StringComparer.OrdinalIgnoreCase
+            )
+            {
+                "a",
+                "A",
+                "b",
+            };
+            public IReadOnlySet<string> InstantiatedIReadOnlySet { get; set; } =
+                s_instantiatedIReadOnlySet;
+
+            public bool IsSameInstantiatedIReadOnlySet() =>
+                object.ReferenceEquals(s_instantiatedIReadOnlySet, InstantiatedIReadOnlySet);
 
             public IReadOnlySet<string> UnInstantiatedIReadOnlySet { get; set; }
 #endif
-            private static ICollection<string> s_instantiatedICollection = new List<string> { "a", "b", "c" };
-            public ICollection<string> InstantiatedICollection { get; set; } = s_instantiatedICollection;
-            public bool IsSameInstantiatedICollection() => object.ReferenceEquals(s_instantiatedICollection, InstantiatedICollection);
+            private static ICollection<string> s_instantiatedICollection = new List<string>
+            {
+                "a",
+                "b",
+                "c",
+            };
+            public ICollection<string> InstantiatedICollection { get; set; } =
+                s_instantiatedICollection;
 
-            private static IReadOnlyCollection<string> s_instantiatedIReadOnlyCollection = new List<string> { "a", "b", "c" };
-            public IReadOnlyCollection<string> InstantiatedIReadOnlyCollection { get; set; } = s_instantiatedIReadOnlyCollection;
-            public bool IsSameInstantiatedIReadOnlyCollection() => object.ReferenceEquals(s_instantiatedIReadOnlyCollection, InstantiatedIReadOnlyCollection);
+            public bool IsSameInstantiatedICollection() =>
+                object.ReferenceEquals(s_instantiatedICollection, InstantiatedICollection);
+
+            private static IReadOnlyCollection<string> s_instantiatedIReadOnlyCollection =
+                new List<string> { "a", "b", "c" };
+            public IReadOnlyCollection<string> InstantiatedIReadOnlyCollection { get; set; } =
+                s_instantiatedIReadOnlyCollection;
+
+            public bool IsSameInstantiatedIReadOnlyCollection() =>
+                object.ReferenceEquals(
+                    s_instantiatedIReadOnlyCollection,
+                    InstantiatedIReadOnlyCollection
+                );
 
             public IReadOnlyCollection<string> UnInstantiatedIReadOnlyCollection { get; set; }
             public ICollection<string> UnInstantiatedICollection { get; set; }
             public ISet<string> UnInstantiatedISet { get; set; }
-            public IReadOnlyDictionary<string, string> UnInstantiatedIReadOnlyDictionary { get; set; }
+            public IReadOnlyDictionary<
+                string,
+                string
+            > UnInstantiatedIReadOnlyDictionary { get; set; }
             public IEnumerable<string> UnInstantiatedIEnumerable { get; set; }
             public IList<string> UnInstantiatedIList { get; set; }
             public IReadOnlyList<string> UnInstantiatedIReadOnlyList { get; set; }

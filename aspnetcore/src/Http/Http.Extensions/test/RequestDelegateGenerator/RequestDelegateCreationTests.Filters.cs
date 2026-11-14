@@ -623,13 +623,10 @@ app.MapGet("/", TestAction)
         await endpoint.RequestDelegate(httpContext);
 
         // Assert
-        await VerifyResponseJsonBodyAsync<TodoStruct>(
-            httpContext,
-            (todo) =>
-            {
-                Assert.Equal("Test todo", todo.Name);
-            }
-        );
+        await VerifyResponseJsonBodyAsync<TodoStruct>(httpContext, (todo) =>
+        {
+            Assert.Equal("Test todo", todo.Name);
+        });
     }
 
     private class EndpointFeature : IEndpointFeature

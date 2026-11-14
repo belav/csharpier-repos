@@ -6,21 +6,20 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
 using ILLink.Shared;
-
 using Internal.IL;
 using Internal.IL.Stubs;
-using Internal.TypeSystem;
 using Internal.JitInterface;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {
     public sealed class RyuJitCompilation : Compilation
     {
-        private readonly ConditionalWeakTable<Thread, CorInfoImpl> _corinfos = new ConditionalWeakTable<Thread, CorInfoImpl>();
+        private readonly ConditionalWeakTable<Thread, CorInfoImpl> _corinfos =
+            new ConditionalWeakTable<Thread, CorInfoImpl>();
         internal readonly RyuJitCompilationOptions _compilationOptions;
         private readonly ProfileDataManager _profileDataManager;
         private readonly MethodImportationErrorProvider _methodImportationErrorProvider;
@@ -43,8 +42,18 @@ namespace ILCompiler
             MethodImportationErrorProvider errorProvider,
             ReadOnlyFieldPolicy readOnlyFieldPolicy,
             RyuJitCompilationOptions options,
-            int parallelism)
-            : base(dependencyGraph, nodeFactory, roots, ilProvider, debugInformationProvider, devirtualizationManager, inliningPolicy, logger)
+            int parallelism
+        )
+            : base(
+                dependencyGraph,
+                nodeFactory,
+                roots,
+                ilProvider,
+                debugInformationProvider,
+                devirtualizationManager,
+                inliningPolicy,
+                logger
+            )
         {
             _compilationOptions = options;
             InstructionSetSupport = instructionSetSupport;
@@ -71,8 +80,10 @@ namespace ILCompiler
             // information proving that it isn't, give RyuJIT the constructed symbol even
             // though we just need the unconstructed one.
             // https://github.com/dotnet/runtimelab/issues/1128
-            bool canPotentiallyConstruct = _devirtualizationManager == null
-                ? true : _devirtualizationManager.CanConstructType(type);
+            bool canPotentiallyConstruct =
+                _devirtualizationManager == null
+                    ? true
+                    : _devirtualizationManager.CanConstructType(type);
             if (canPotentiallyConstruct)
                 return _nodeFactory.MaximallyConstructableType(type);
 
@@ -81,8 +92,10 @@ namespace ILCompiler
 
         public FrozenRuntimeTypeNode NecessaryRuntimeTypeIfPossible(TypeDesc type)
         {
-            bool canPotentiallyConstruct = _devirtualizationManager == null
-                ? true : _devirtualizationManager.CanConstructType(type);
+            bool canPotentiallyConstruct =
+                _devirtualizationManager == null
+                    ? true
+                    : _devirtualizationManager.CanConstructType(type);
             if (canPotentiallyConstruct)
                 return _nodeFactory.SerializedMaximallyConstructableRuntimeTypeObject(type);
 
@@ -109,7 +122,9 @@ namespace ILCompiler
             ObjectWriter.EmitObject(outputFile, nodes, NodeFactory, options, dumper, _logger);
         }
 
-        protected override void ComputeDependencyNodeDependencies(List<DependencyNodeCore<NodeFactory>> obj)
+        protected override void ComputeDependencyNodeDependencies(
+            List<DependencyNodeCore<NodeFactory>> obj
+        )
         {
             // Determine the list of method we actually need to compile
             var methodsToCompile = new List<MethodCodeNode>();
@@ -123,13 +138,16 @@ namespace ILCompiler
                     // To compute dependencies of the shadow method that tracks dictionary
                     // dependencies we need to ensure there is code for the canonical method body.
                     var dependencyMethod = (ShadowConcreteMethodNode)dependency;
-                    methodCodeNodeNeedingCode = (MethodCodeNode)dependencyMethod.CanonicalMethodNode;
+                    methodCodeNodeNeedingCode = (MethodCodeNode)
+                        dependencyMethod.CanonicalMethodNode;
                 }
 
                 // We might have already queued this method for compilation
                 MethodDesc method = methodCodeNodeNeedingCode.Method;
-                if (method.IsCanonicalMethod(CanonicalFormKind.Any)
-                    && !canonicalMethodsToCompile.Add(method))
+                if (
+                    method.IsCanonicalMethod(CanonicalFormKind.Any)
+                    && !canonicalMethodsToCompile.Add(method)
+                )
                 {
                     continue;
                 }
@@ -146,6 +164,7 @@ namespace ILCompiler
                 CompileMultiThreaded(methodsToCompile);
             }
         }
+
         private void CompileMultiThreaded(List<MethodCodeNode> methodsToCompile)
         {
             if (Logger.IsVerbose)
@@ -156,13 +175,16 @@ namespace ILCompiler
             Parallel.ForEach(
                 methodsToCompile,
                 new ParallelOptions { MaxDegreeOfParallelism = _parallelism },
-                CompileSingleMethod);
+                CompileSingleMethod
+            );
         }
-
 
         private void CompileSingleThreaded(List<MethodCodeNode> methodsToCompile)
         {
-            CorInfoImpl corInfo = _corinfos.GetValue(Thread.CurrentThread, thread => new CorInfoImpl(this));
+            CorInfoImpl corInfo = _corinfos.GetValue(
+                Thread.CurrentThread,
+                thread => new CorInfoImpl(this)
+            );
 
             foreach (MethodCodeNode methodCodeNodeNeedingCode in methodsToCompile)
             {
@@ -177,15 +199,23 @@ namespace ILCompiler
 
         private void CompileSingleMethod(MethodCodeNode methodCodeNodeNeedingCode)
         {
-            CorInfoImpl corInfo = _corinfos.GetValue(Thread.CurrentThread, thread => new CorInfoImpl(this));
+            CorInfoImpl corInfo = _corinfos.GetValue(
+                Thread.CurrentThread,
+                thread => new CorInfoImpl(this)
+            );
             CompileSingleMethod(corInfo, methodCodeNodeNeedingCode);
         }
 
-        private void CompileSingleMethod(CorInfoImpl corInfo, MethodCodeNode methodCodeNodeNeedingCode)
+        private void CompileSingleMethod(
+            CorInfoImpl corInfo,
+            MethodCodeNode methodCodeNodeNeedingCode
+        )
         {
             MethodDesc method = methodCodeNodeNeedingCode.Method;
 
-            TypeSystemException exception = _methodImportationErrorProvider.GetCompilationError(method);
+            TypeSystemException exception = _methodImportationErrorProvider.GetCompilationError(
+                method
+            );
 
             // If we previously failed to import the method, do not try to import it again and go
             // directly to the error path.
@@ -207,16 +237,28 @@ namespace ILCompiler
                 MethodIL throwingIL = TypeSystemThrowingILEmitter.EmitIL(method, exception);
                 corInfo.CompileMethod(methodCodeNodeNeedingCode, throwingIL);
 
-                if (exception is TypeSystemException.InvalidProgramException
+                if (
+                    exception is TypeSystemException.InvalidProgramException
                     && method.OwningType is MetadataType mdOwningType
-                    && mdOwningType.HasCustomAttribute("System.Runtime.InteropServices", "ClassInterfaceAttribute"))
+                    && mdOwningType.HasCustomAttribute(
+                        "System.Runtime.InteropServices",
+                        "ClassInterfaceAttribute"
+                    )
+                )
                 {
                     Logger.LogWarning(method, DiagnosticId.COMInteropNotSupportedInFullAOT);
                 }
                 if ((_compilationOptions & RyuJitCompilationOptions.UseResilience) != 0)
-                    Logger.LogMessage($"Method '{method}' will always throw because: {exception.Message}");
+                    Logger.LogMessage(
+                        $"Method '{method}' will always throw because: {exception.Message}"
+                    );
                 else
-                    Logger.LogError($"Method will always throw because: {exception.Message}", 1005, method, MessageSubCategory.AotAnalysis);
+                    Logger.LogError(
+                        $"Method will always throw because: {exception.Message}",
+                        1005,
+                        method,
+                        MessageSubCategory.AotAnalysis
+                    );
             }
         }
     }

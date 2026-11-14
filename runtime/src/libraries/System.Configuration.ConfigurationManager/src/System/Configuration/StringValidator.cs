@@ -10,12 +10,10 @@ namespace System.Configuration
         private readonly int _minLength;
 
         public StringValidator(int minLength)
-            : this(minLength, int.MaxValue, null)
-        { }
+            : this(minLength, int.MaxValue, null) { }
 
         public StringValidator(int minLength, int maxLength)
-            : this(minLength, maxLength, null)
-        { }
+            : this(minLength, maxLength, null) { }
 
         public StringValidator(int minLength, int maxLength, string invalidCharacters)
         {
@@ -49,7 +47,9 @@ namespace System.Configuration
                 _invalidChars.CopyTo(0, array, 0, _invalidChars.Length);
 
                 if (data.IndexOfAny(array) != -1)
-                    throw new ArgumentException(SR.Format(SR.Validator_string_invalid_chars, _invalidChars));
+                    throw new ArgumentException(
+                        SR.Format(SR.Validator_string_invalid_chars, _invalidChars)
+                    );
             }
         }
     }

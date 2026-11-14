@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ObjectCreation()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public C(string x) {}
@@ -48,7 +49,8 @@ class C
         [Fact]
         public void ObjectCreation_ByRefDynamicArgument1()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public C(out dynamic x, ref dynamic y) { }
@@ -62,14 +64,18 @@ class C
             var semanticInfo = GetSemanticInfoForTest<ExpressionSyntax>(sourceCode);
 
             Assert.Equal("C", semanticInfo.Type.Name);
-            Assert.Equal("C..ctor(out dynamic x, ref dynamic y)", semanticInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "C..ctor(out dynamic x, ref dynamic y)",
+                semanticInfo.Symbol.ToTestDisplayString()
+            );
             Assert.Equal(CandidateReason.None, semanticInfo.CandidateReason);
         }
 
         [Fact]
         public void ObjectCreation_ByRefDynamicArgument2()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public C(out dynamic x, dynamic y) {}
@@ -83,7 +89,10 @@ class C
             var semanticInfo = GetSemanticInfoForTest<ExpressionSyntax>(sourceCode);
 
             Assert.Equal("C", semanticInfo.Type.Name);
-            Assert.Equal("C..ctor(out dynamic x, dynamic y)", semanticInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "C..ctor(out dynamic x, dynamic y)",
+                semanticInfo.Symbol.ToTestDisplayString()
+            );
 
             Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
             Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
@@ -94,7 +103,8 @@ class C
         [Fact]
         public void DelegateInvocation()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void M()
@@ -120,7 +130,8 @@ class C
         [Fact]
         public void MethodInvocation_DynamicReceiver()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void M()
@@ -146,7 +157,8 @@ class C
         [Fact]
         public void MethodInvocation_StaticReceiver()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void M()
@@ -178,7 +190,8 @@ class C
         [Fact]
         public void MethodInvocation_TypeReceiver()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public static C Create(int arg) { return null; }
@@ -202,7 +215,8 @@ class C
         [Fact]
         public void MethodGroup_EarlyBound()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class List : List<int>
@@ -215,7 +229,10 @@ class List : List<int>
             var semanticInfo = GetSemanticInfoForTest<ExpressionSyntax>(source);
 
             Assert.Null(semanticInfo.Type);
-            Assert.Equal("void System.Collections.Generic.List<System.Int32>.Add(System.Int32 item)", semanticInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Collections.Generic.List<System.Int32>.Add(System.Int32 item)",
+                semanticInfo.Symbol.ToTestDisplayString()
+            );
             Assert.Equal(CandidateReason.None, semanticInfo.CandidateReason);
             Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
@@ -225,7 +242,8 @@ class List : List<int>
         [Fact]
         public void MethodGroup_DynamicArg()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class List : List<int>
@@ -240,7 +258,10 @@ class List : List<int>
             Assert.Null(semanticInfo.Type);
 
             // there is only one applicable candidate:
-            Assert.Equal("void System.Collections.Generic.List<System.Int32>.Add(System.Int32 item)", semanticInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Collections.Generic.List<System.Int32>.Add(System.Int32 item)",
+                semanticInfo.Symbol.ToTestDisplayString()
+            );
 
             Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
             Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
@@ -251,7 +272,8 @@ class List : List<int>
         [Fact]
         public void MethodInvocation_DynamicArg()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class List : List<int>
@@ -266,7 +288,10 @@ class List : List<int>
             Assert.True(semanticInfo.Type.IsDynamic());
 
             // there is only one applicable candidate:
-            Assert.Equal("void System.Collections.Generic.List<System.Int32>.Add(System.Int32 item)", semanticInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Collections.Generic.List<System.Int32>.Add(System.Int32 item)",
+                semanticInfo.Symbol.ToTestDisplayString()
+            );
 
             Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
             Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
@@ -277,7 +302,8 @@ class List : List<int>
         [Fact]
         public void MethodInvocation_StaticReceiver_ByRefDynamicArgument()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void M()
@@ -300,13 +326,17 @@ class C
             Assert.Equal(SpecialType.System_Int32, semanticInfo.ConvertedType.SpecialType);
             Assert.Equal(ConversionKind.Identity, semanticInfo.ImplicitConversion.Kind);
 
-            Assert.Equal("System.Int32 C.bar(ref dynamic a)", semanticInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 C.bar(ref dynamic a)",
+                semanticInfo.Symbol.ToTestDisplayString()
+            );
         }
 
         [Fact, WorkItem(531141, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531141")]
         public void MethodInvocation_StaticReceiver_IdentifierNameSyntax()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 namespace Dynamic
 {
@@ -338,10 +368,16 @@ namespace Dynamic
             Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
 
             Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
-            Assert.Equal("dynamic Dynamic.FunctionTestingWithOverloading.OverloadedFunction(dynamic d)", semanticInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "dynamic Dynamic.FunctionTestingWithOverloading.OverloadedFunction(dynamic d)",
+                semanticInfo.Symbol.ToTestDisplayString()
+            );
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
-            Assert.Equal("dynamic Dynamic.FunctionTestingWithOverloading.OverloadedFunction(dynamic d)", semanticInfo.MethodGroup.First().ToTestDisplayString());
+            Assert.Equal(
+                "dynamic Dynamic.FunctionTestingWithOverloading.OverloadedFunction(dynamic d)",
+                semanticInfo.MethodGroup.First().ToTestDisplayString()
+            );
 
             Assert.False(semanticInfo.IsCompileTimeConstant);
         }
@@ -349,7 +385,8 @@ namespace Dynamic
         [Fact]
         public void CollectionInitializer()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void M()
@@ -373,7 +410,8 @@ class C
         [Fact]
         public void ObjectInitializer()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public dynamic Z;
@@ -397,7 +435,8 @@ class C
         [Fact]
         public void Indexer_StaticReceiver()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void TestMeth()
@@ -423,7 +462,10 @@ class C
 
             Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
             Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
-            Assert.Equal("System.Int32 C.this[System.Int32 a] { get; set; }", semanticInfo.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 C.this[System.Int32 a] { get; set; }",
+                semanticInfo.Symbol.ToTestDisplayString()
+            );
 
             Assert.Equal(0, semanticInfo.MethodGroup.Length);
             Assert.False(semanticInfo.IsCompileTimeConstant);
@@ -432,7 +474,8 @@ class C
         [Fact]
         public void Indexer_DynamicReceiver()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void TestMeth()
@@ -466,7 +509,8 @@ class C
         [Fact]
         public void MemberAccess()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void TestMeth()
@@ -495,23 +539,29 @@ class C
         public void UnaryOperators()
         {
             var operators = new[] { "~", "!", "-", "+", "++", "--" };
-            var operatorNames = new[] { WellKnownMemberNames.OnesComplementOperatorName,
-                                        WellKnownMemberNames.LogicalNotOperatorName,
-                                        WellKnownMemberNames.UnaryNegationOperatorName,
-                                        WellKnownMemberNames.UnaryPlusOperatorName,
-                                        WellKnownMemberNames.IncrementOperatorName,
-                                        WellKnownMemberNames.DecrementOperatorName };
+            var operatorNames = new[]
+            {
+                WellKnownMemberNames.OnesComplementOperatorName,
+                WellKnownMemberNames.LogicalNotOperatorName,
+                WellKnownMemberNames.UnaryNegationOperatorName,
+                WellKnownMemberNames.UnaryPlusOperatorName,
+                WellKnownMemberNames.IncrementOperatorName,
+                WellKnownMemberNames.DecrementOperatorName,
+            };
 
             for (int i = 0; i < operators.Length; i++)
             {
                 var op = operators[i];
-                string sourceCode = @"
+                string sourceCode =
+                    @"
 class C
 {
     public void TestMeth()
     {
         dynamic d = null;
-        var x1 = /*<bind>*/" + op + @"d/*</bind>*/;
+        var x1 = /*<bind>*/"
+                    + op
+                    + @"d/*</bind>*/;
     }
 }
 ";
@@ -521,7 +571,10 @@ class C
                 Assert.True(semanticInfo.ConvertedType.IsDynamic());
                 Assert.Equal(ConversionKind.Identity, semanticInfo.ImplicitConversion.Kind);
 
-                Assert.Equal("dynamic dynamic." + operatorNames[i] + "(dynamic value)", semanticInfo.Symbol.ToTestDisplayString());
+                Assert.Equal(
+                    "dynamic dynamic." + operatorNames[i] + "(dynamic value)",
+                    semanticInfo.Symbol.ToTestDisplayString()
+                );
                 Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
                 Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
                 Assert.Equal(0, semanticInfo.MethodGroup.Length);
@@ -532,7 +585,8 @@ class C
         [Fact]
         public void Await()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public async Task<dynamic> M()
@@ -558,15 +612,40 @@ class C
         [Fact]
         public void BinaryOperators()
         {
-            foreach (var op in new[] { "*", "/", "%", "+", "-", "<<", ">>", "<", ">", "<=", ">=", "!=", "==", "^", "&", "|", "&&", "||" })
+            foreach (
+                var op in new[]
+                {
+                    "*",
+                    "/",
+                    "%",
+                    "+",
+                    "-",
+                    "<<",
+                    ">>",
+                    "<",
+                    ">",
+                    "<=",
+                    ">=",
+                    "!=",
+                    "==",
+                    "^",
+                    "&",
+                    "|",
+                    "&&",
+                    "||",
+                }
+            )
             {
-                string sourceCode = @"
+                string sourceCode =
+                    @"
 class C
 {
     public void TestMeth()
     {
         dynamic d = null;
-        var x1 = /*<bind>*/d" + op + @"d/*</bind>*/;
+        var x1 = /*<bind>*/d"
+                    + op
+                    + @"d/*</bind>*/;
     }
 }
 ";
@@ -582,7 +661,10 @@ class C
                 }
                 else
                 {
-                    Assert.Equal("dynamic.operator " + op + "(dynamic, dynamic)", semanticInfo.Symbol.ToString());
+                    Assert.Equal(
+                        "dynamic.operator " + op + "(dynamic, dynamic)",
+                        semanticInfo.Symbol.ToString()
+                    );
                 }
 
                 Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
@@ -595,7 +677,8 @@ class C
         [Fact]
         public void NullCoalescing()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void TestMeth()
@@ -624,7 +707,8 @@ class C
         [Fact]
         public void ConditionalExpression_DynamicCondition()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void TestMeth()
@@ -650,7 +734,8 @@ class C
         [Fact]
         public void ConditionalExpression_StaticCondition()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class C
 {
     public void TestMeth()
@@ -679,13 +764,16 @@ class C
         {
             foreach (var op in new[] { "+=", "%=", "+=", "-=", "<<=", ">>=", "^=", "&=", "|=" })
             {
-                string sourceCode = @"
+                string sourceCode =
+                    @"
 class C
 {
     public void M()
     {
         dynamic d = null;
-        /*<bind>*/d" + op + @"d/*</bind>*/;
+        /*<bind>*/d"
+                    + op
+                    + @"d/*</bind>*/;
     }
 }
 ";
@@ -695,7 +783,10 @@ class C
                 Assert.True(semanticInfo.ConvertedType.IsDynamic());
                 Assert.Equal(ConversionKind.Identity, semanticInfo.ImplicitConversion.Kind);
 
-                Assert.Equal("dynamic.operator " + op.Substring(0, op.Length - 1) + "(dynamic, dynamic)", semanticInfo.Symbol.ToString());
+                Assert.Equal(
+                    "dynamic.operator " + op.Substring(0, op.Length - 1) + "(dynamic, dynamic)",
+                    semanticInfo.Symbol.ToString()
+                );
                 Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
                 Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
                 Assert.Equal(0, semanticInfo.MethodGroup.Length);
@@ -708,7 +799,8 @@ class C
         {
             foreach (var op in new[] { "+=", "-=" })
             {
-                string sourceCode = @"
+                string sourceCode =
+                    @"
 class C
 {
     public event System.Action E;
@@ -716,7 +808,9 @@ class C
     public void M()
     {
         dynamic d = null;
-        /*<bind>*/E" + op + @"d/*</bind>*/;
+        /*<bind>*/E"
+                    + op
+                    + @"d/*</bind>*/;
     }
 }
 ";
@@ -726,7 +820,10 @@ class C
                 Assert.Equal("System.Void", semanticInfo.ConvertedType.ToTestDisplayString());
                 Assert.Equal(ConversionKind.Identity, semanticInfo.ImplicitConversion.Kind);
 
-                Assert.Equal(op == "+=" ? "void C.E.add" : "void C.E.remove", semanticInfo.Symbol.ToTestDisplayString());
+                Assert.Equal(
+                    op == "+=" ? "void C.E.add" : "void C.E.remove",
+                    semanticInfo.Symbol.ToTestDisplayString()
+                );
                 Assert.Equal(CandidateReason.LateBound, semanticInfo.CandidateReason);
                 Assert.Equal(0, semanticInfo.CandidateSymbols.Length);
                 Assert.Equal(0, semanticInfo.MethodGroup.Length);

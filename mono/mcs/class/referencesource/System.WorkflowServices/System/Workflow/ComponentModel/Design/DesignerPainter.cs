@@ -6,21 +6,19 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Workflow.ComponentModel.Design;
-    using System.Windows.Forms;
-    using System.Reflection;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Reflection;
     using System.ServiceModel;
-
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Workflow.ComponentModel.Design;
 
     // <summary>
     // This is a helper class with static methods that dont fit anywhere but are useful in general
     // </summary>
     internal static class DesignerPainter
     {
-
         public static CompositeActivityDesigner GetRootDesigner(ActivityDesigner designer)
         {
             if (designer == null)
@@ -35,11 +33,17 @@ namespace System.Workflow.ComponentModel.Design
             }
             return rootDesigner;
         }
-        public static void PaintDesigner(ActivityDesigner activityDesigner, ActivityDesignerPaintEventArgs eventArgs)
+
+        public static void PaintDesigner(
+            ActivityDesigner activityDesigner,
+            ActivityDesignerPaintEventArgs eventArgs
+        )
         {
             if (activityDesigner == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("activityDesigner");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "activityDesigner"
+                );
             }
             if (eventArgs == null)
             {
@@ -76,7 +80,11 @@ namespace System.Workflow.ComponentModel.Design
             ActivityDesigner parentDesigner = activityDesigner.ParentDesigner;
             while (!currentDesigner.IsRootDesigner)
             {
-                if (!((CompositeActivityDesigner) parentDesigner).ContainedDesigners.Contains(currentDesigner))
+                if (
+                    !((CompositeActivityDesigner)parentDesigner).ContainedDesigners.Contains(
+                        currentDesigner
+                    )
+                )
                 {
                     return false;
                 }
@@ -89,10 +97,16 @@ namespace System.Workflow.ComponentModel.Design
             return true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-        // The above suppression is required because, the parentDesigner object is changeing inside the loop and it is 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily"
+        )]
+        // The above suppression is required because, the parentDesigner object is changeing inside the loop and it is
         // not possible to cache the result of the cast as suggested by FxCop
-        private static bool IsInsidePreviewDesignerBranch(ActivityDesigner activityDesigner, out bool visible)
+        private static bool IsInsidePreviewDesignerBranch(
+            ActivityDesigner activityDesigner,
+            out bool visible
+        )
         {
             visible = false;
             ActivityDesigner currentDesigner = activityDesigner;
@@ -111,7 +125,11 @@ namespace System.Workflow.ComponentModel.Design
             }
             if (parentDesigner is ActivityPreviewDesigner)
             {
-                if (((ActivityPreviewDesigner) parentDesigner).IsContainedDesignerVisible(currentDesigner))
+                if (
+                    ((ActivityPreviewDesigner)parentDesigner).IsContainedDesignerVisible(
+                        currentDesigner
+                    )
+                )
                 {
                     visible = true;
                 }
@@ -120,11 +138,16 @@ namespace System.Workflow.ComponentModel.Design
             return false;
         }
 
-        private static void PaintDesignerInternal(ActivityDesigner activityDesigner, ActivityDesignerPaintEventArgs eventArgs)
+        private static void PaintDesignerInternal(
+            ActivityDesigner activityDesigner,
+            ActivityDesignerPaintEventArgs eventArgs
+        )
         {
-            IWorkflowDesignerMessageSink sink = (IWorkflowDesignerMessageSink) activityDesigner;
-            sink.OnPaint(new PaintEventArgs(eventArgs.Graphics, eventArgs.ClipRectangle), eventArgs.ClipRectangle);
+            IWorkflowDesignerMessageSink sink = (IWorkflowDesignerMessageSink)activityDesigner;
+            sink.OnPaint(
+                new PaintEventArgs(eventArgs.Graphics, eventArgs.ClipRectangle),
+                eventArgs.ClipRectangle
+            );
         }
     }
-
 }

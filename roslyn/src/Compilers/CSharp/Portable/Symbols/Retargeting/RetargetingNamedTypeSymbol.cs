@@ -15,8 +15,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
     /// <summary>
-    /// Represents a type of a RetargetingModuleSymbol. Essentially this is a wrapper around 
-    /// another NamedTypeSymbol that is responsible for retargeting referenced symbols from one assembly to another. 
+    /// Represents a type of a RetargetingModuleSymbol. Essentially this is a wrapper around
+    /// another NamedTypeSymbol that is responsible for retargeting referenced symbols from one assembly to another.
     /// It can retarget symbols for multiple assemblies at the same time.
     /// </summary>
     internal sealed class RetargetingNamedTypeSymbol : WrappedNamedTypeSymbol
@@ -29,16 +29,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         private ImmutableArray<TypeParameterSymbol> _lazyTypeParameters;
 
         private NamedTypeSymbol _lazyBaseType = ErrorTypeSymbol.UnknownResultType;
-        private ImmutableArray<NamedTypeSymbol> _lazyInterfaces = default(ImmutableArray<NamedTypeSymbol>);
+        private ImmutableArray<NamedTypeSymbol> _lazyInterfaces =
+            default(ImmutableArray<NamedTypeSymbol>);
 
         private NamedTypeSymbol _lazyDeclaredBaseType = ErrorTypeSymbol.UnknownResultType;
         private ImmutableArray<NamedTypeSymbol> _lazyDeclaredInterfaces;
 
         private ImmutableArray<CSharpAttributeData> _lazyCustomAttributes;
 
-        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo = CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
+        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo =
+            CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
 
-        public RetargetingNamedTypeSymbol(RetargetingModuleSymbol retargetingModule, NamedTypeSymbol underlyingType, TupleExtraData tupleData = null)
+        public RetargetingNamedTypeSymbol(
+            RetargetingModuleSymbol retargetingModule,
+            NamedTypeSymbol underlyingType,
+            TupleExtraData tupleData = null
+        )
             : base(underlyingType, tupleData)
         {
             Debug.Assert((object)retargetingModule != null);
@@ -54,10 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         private RetargetingModuleSymbol.RetargetingSymbolTranslator RetargetingTranslator
         {
-            get
-            {
-                return _retargetingModule.RetargetingTranslator;
-            }
+            get { return _retargetingModule.RetargetingTranslator; }
         }
 
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
@@ -72,8 +75,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     }
                     else
                     {
-                        ImmutableInterlocked.InterlockedCompareExchange(ref _lazyTypeParameters,
-                            this.RetargetingTranslator.Retarget(_underlyingType.TypeParameters), default(ImmutableArray<TypeParameterSymbol>));
+                        ImmutableInterlocked.InterlockedCompareExchange(
+                            ref _lazyTypeParameters,
+                            this.RetargetingTranslator.Retarget(_underlyingType.TypeParameters),
+                            default(ImmutableArray<TypeParameterSymbol>)
+                        );
                     }
                 }
 
@@ -92,10 +98,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override NamedTypeSymbol ConstructedFrom
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public override NamedTypeSymbol EnumUnderlyingType
@@ -103,19 +106,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 var underlying = _underlyingType.EnumUnderlyingType;
-                return (object)underlying == null ? null : this.RetargetingTranslator.Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByTypeCode); // comes from field's signature.
+                return (object)underlying == null
+                    ? null
+                    : this.RetargetingTranslator.Retarget(
+                        underlying,
+                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                    ); // comes from field's signature.
             }
         }
 
         public override IEnumerable<string> MemberNames
         {
-            get
-            {
-                return _underlyingType.MemberNames;
-            }
+            get { return _underlyingType.MemberNames; }
         }
 
-        internal override bool HasDeclaredRequiredMembers => _underlyingType.HasDeclaredRequiredMembers;
+        internal override bool HasDeclaredRequiredMembers =>
+            _underlyingType.HasDeclaredRequiredMembers;
 
         public override ImmutableArray<Symbol> GetMembers()
         {
@@ -148,15 +154,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             {
                 Debug.Assert((object)method != null);
 
-                int gapSize = isInterface ? Microsoft.CodeAnalysis.ModuleExtensions.GetVTableGapSize(method.MetadataName) : 0;
+                int gapSize = isInterface
+                    ? Microsoft.CodeAnalysis.ModuleExtensions.GetVTableGapSize(method.MetadataName)
+                    : 0;
                 if (gapSize > 0)
                 {
                     do
                     {
                         yield return null;
                         gapSize--;
-                    }
-                    while (gapSize > 0);
+                    } while (gapSize > 0);
                 }
                 else
                 {
@@ -183,12 +190,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers()
         {
-            return this.RetargetingTranslator.Retarget(_underlyingType.GetEarlyAttributeDecodingMembers());
+            return this.RetargetingTranslator.Retarget(
+                _underlyingType.GetEarlyAttributeDecodingMembers()
+            );
         }
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name)
         {
-            return this.RetargetingTranslator.Retarget(_underlyingType.GetEarlyAttributeDecodingMembers(name));
+            return this.RetargetingTranslator.Retarget(
+                _underlyingType.GetEarlyAttributeDecodingMembers(name)
+            );
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetTypeMembersUnordered()
@@ -206,43 +217,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             return this.RetargetingTranslator.Retarget(_underlyingType.GetTypeMembers(name));
         }
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity)
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+            ReadOnlyMemory<char> name,
+            int arity
+        )
         {
             return this.RetargetingTranslator.Retarget(_underlyingType.GetTypeMembers(name, arity));
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return this.RetargetingTranslator.Retarget(_underlyingType.ContainingSymbol);
-            }
+            get { return this.RetargetingTranslator.Retarget(_underlyingType.ContainingSymbol); }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingTranslator.GetRetargetedAttributes(_underlyingType.GetAttributes(), ref _lazyCustomAttributes);
+            return this.RetargetingTranslator.GetRetargetedAttributes(
+                _underlyingType.GetAttributes(),
+                ref _lazyCustomAttributes
+            );
         }
 
-        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
-            return this.RetargetingTranslator.RetargetAttributes(_underlyingType.GetCustomAttributesToEmit(moduleBuilder));
+            return this.RetargetingTranslator.RetargetAttributes(
+                _underlyingType.GetCustomAttributesToEmit(moduleBuilder)
+            );
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _retargetingModule.ContainingAssembly;
-            }
+            get { return _retargetingModule.ContainingAssembly; }
         }
 
         internal override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return _retargetingModule;
-            }
+            get { return _retargetingModule; }
         }
 
 #nullable enable
@@ -259,7 +271,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             Debug.Assert(!underlyingResult.IsErrorType());
             Debug.Assert((object)_underlyingType == underlyingResult.ContainingSymbol);
 
-            return this.RetargetingTranslator.Retarget(underlyingResult, RetargetOptions.RetargetPrimitiveTypesByName);
+            return this.RetargetingTranslator.Retarget(
+                underlyingResult,
+                RetargetOptions.RetargetPrimitiveTypesByName
+            );
         }
 
 #nullable disable
@@ -267,7 +282,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         private static ExtendedErrorTypeSymbol CyclicInheritanceError(TypeSymbol declaredBase)
         {
             var info = new CSDiagnosticInfo(ErrorCode.ERR_ImportedCircularBase, declaredBase);
-            return new ExtendedErrorTypeSymbol(declaredBase, LookupResultKind.NotReferencable, info, true);
+            return new ExtendedErrorTypeSymbol(
+                declaredBase,
+                LookupResultKind.NotReferencable,
+                info,
+                true
+            );
         }
 
         internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics
@@ -284,23 +304,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         var underlyingBase = _underlyingType.BaseTypeNoUseSiteDiagnostics;
                         if ((object)underlyingBase != null)
                         {
-                            acyclicBase = this.RetargetingTranslator.Retarget(underlyingBase, RetargetOptions.RetargetPrimitiveTypesByName);
+                            acyclicBase = this.RetargetingTranslator.Retarget(
+                                underlyingBase,
+                                RetargetOptions.RetargetPrimitiveTypesByName
+                            );
                         }
                     }
 
-                    if ((object)acyclicBase != null && BaseTypeAnalysis.TypeDependsOn(acyclicBase, this))
+                    if (
+                        (object)acyclicBase != null
+                        && BaseTypeAnalysis.TypeDependsOn(acyclicBase, this)
+                    )
                     {
                         return CyclicInheritanceError(acyclicBase);
                     }
 
-                    Interlocked.CompareExchange(ref _lazyBaseType, acyclicBase, ErrorTypeSymbol.UnknownResultType);
+                    Interlocked.CompareExchange(
+                        ref _lazyBaseType,
+                        acyclicBase,
+                        ErrorTypeSymbol.UnknownResultType
+                    );
                 }
 
                 return _lazyBaseType;
             }
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             if (_lazyInterfaces.IsDefault)
             {
@@ -311,10 +343,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     return declaredInterfaces;
                 }
 
-                ImmutableArray<NamedTypeSymbol> result = declaredInterfaces
-                    .SelectAsArray(t => BaseTypeAnalysis.TypeDependsOn(t, this) ? CyclicInheritanceError(t) : t);
+                ImmutableArray<NamedTypeSymbol> result = declaredInterfaces.SelectAsArray(t =>
+                    BaseTypeAnalysis.TypeDependsOn(t, this) ? CyclicInheritanceError(t) : t
+                );
 
-                ImmutableInterlocked.InterlockedCompareExchange(ref _lazyInterfaces, result, default(ImmutableArray<NamedTypeSymbol>));
+                ImmutableInterlocked.InterlockedCompareExchange(
+                    ref _lazyInterfaces,
+                    result,
+                    default(ImmutableArray<NamedTypeSymbol>)
+                );
             }
 
             return _lazyInterfaces;
@@ -325,25 +362,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             return this.RetargetingTranslator.Retarget(_underlyingType.GetInterfacesToEmit());
         }
 
-        internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+        internal override NamedTypeSymbol GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             if (ReferenceEquals(_lazyDeclaredBaseType, ErrorTypeSymbol.UnknownResultType))
             {
                 var underlyingBase = _underlyingType.GetDeclaredBaseType(basesBeingResolved);
-                var declaredBase = (object)underlyingBase != null ? this.RetargetingTranslator.Retarget(underlyingBase, RetargetOptions.RetargetPrimitiveTypesByName) : null;
-                Interlocked.CompareExchange(ref _lazyDeclaredBaseType, declaredBase, ErrorTypeSymbol.UnknownResultType);
+                var declaredBase =
+                    (object)underlyingBase != null
+                        ? this.RetargetingTranslator.Retarget(
+                            underlyingBase,
+                            RetargetOptions.RetargetPrimitiveTypesByName
+                        )
+                        : null;
+                Interlocked.CompareExchange(
+                    ref _lazyDeclaredBaseType,
+                    declaredBase,
+                    ErrorTypeSymbol.UnknownResultType
+                );
             }
 
             return _lazyDeclaredBaseType;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             if (_lazyDeclaredInterfaces.IsDefault)
             {
-                var underlyingBaseInterfaces = _underlyingType.GetDeclaredInterfaces(basesBeingResolved);
+                var underlyingBaseInterfaces = _underlyingType.GetDeclaredInterfaces(
+                    basesBeingResolved
+                );
                 var result = this.RetargetingTranslator.Retarget(underlyingBaseInterfaces);
-                ImmutableInterlocked.InterlockedCompareExchange(ref _lazyDeclaredInterfaces, result, default(ImmutableArray<NamedTypeSymbol>));
+                ImmutableInterlocked.InterlockedCompareExchange(
+                    ref _lazyDeclaredInterfaces,
+                    result,
+                    default(ImmutableArray<NamedTypeSymbol>)
+                );
             }
 
             return _lazyDeclaredInterfaces;
@@ -354,7 +411,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             if (!_lazyCachedUseSiteInfo.IsInitialized)
             {
                 AssemblySymbol primaryDependency = PrimaryDependency;
-                _lazyCachedUseSiteInfo.Initialize(primaryDependency, new UseSiteInfo<AssemblySymbol>(primaryDependency).AdjustDiagnosticInfo(CalculateUseSiteDiagnostic()));
+                _lazyCachedUseSiteInfo.Initialize(
+                    primaryDependency,
+                    new UseSiteInfo<AssemblySymbol>(primaryDependency).AdjustDiagnosticInfo(
+                        CalculateUseSiteDiagnostic()
+                    )
+                );
             }
 
             return _lazyCachedUseSiteInfo.ToUseSiteInfo(PrimaryDependency);
@@ -365,7 +427,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 NamedTypeSymbol coClass = _underlyingType.ComImportCoClass;
-                return (object)coClass == null ? null : this.RetargetingTranslator.Retarget(coClass, RetargetOptions.RetargetPrimitiveTypesByName);
+                return (object)coClass == null
+                    ? null
+                    : this.RetargetingTranslator.Retarget(
+                        coClass,
+                        RetargetOptions.RetargetPrimitiveTypesByName
+                    );
             }
         }
 
@@ -385,22 +452,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         }
 
         internal override bool IsFileLocal => _underlyingType.IsFileLocal;
-        internal override FileIdentifier AssociatedFileIdentifier => _underlyingType.AssociatedFileIdentifier;
+        internal override FileIdentifier AssociatedFileIdentifier =>
+            _underlyingType.AssociatedFileIdentifier;
 
-        internal sealed override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable();
+        internal sealed override NamedTypeSymbol AsNativeInteger() =>
+            throw ExceptionUtilities.Unreachable();
 
         internal sealed override NamedTypeSymbol NativeIntegerUnderlyingType => null;
 
         internal sealed override bool IsRecord => _underlyingType.IsRecord;
         internal sealed override bool IsRecordStruct => _underlyingType.IsRecordStruct;
-        internal sealed override bool HasPossibleWellKnownCloneMethod() => _underlyingType.HasPossibleWellKnownCloneMethod();
 
-        internal override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls()
+        internal sealed override bool HasPossibleWellKnownCloneMethod() =>
+            _underlyingType.HasPossibleWellKnownCloneMethod();
+
+        internal override IEnumerable<(
+            MethodSymbol Body,
+            MethodSymbol Implemented
+        )> SynthesizedInterfaceMethodImpls()
         {
-            foreach ((MethodSymbol body, MethodSymbol implemented) in _underlyingType.SynthesizedInterfaceMethodImpls())
+            foreach (
+                (
+                    MethodSymbol body,
+                    MethodSymbol implemented
+                ) in _underlyingType.SynthesizedInterfaceMethodImpls()
+            )
             {
-                var newBody = this.RetargetingTranslator.Retarget(body, MemberSignatureComparer.RetargetedExplicitImplementationComparer);
-                var newImplemented = this.RetargetingTranslator.Retarget(implemented, MemberSignatureComparer.RetargetedExplicitImplementationComparer);
+                var newBody = this.RetargetingTranslator.Retarget(
+                    body,
+                    MemberSignatureComparer.RetargetedExplicitImplementationComparer
+                );
+                var newImplemented = this.RetargetingTranslator.Retarget(
+                    implemented,
+                    MemberSignatureComparer.RetargetedExplicitImplementationComparer
+                );
 
                 if (newBody is object && newImplemented is object)
                 {
@@ -415,21 +500,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         }
 
 #nullable enable
-        internal sealed override bool HasCollectionBuilderAttribute(out TypeSymbol? builderType, out string? methodName)
+        internal sealed override bool HasCollectionBuilderAttribute(
+            out TypeSymbol? builderType,
+            out string? methodName
+        )
         {
-            bool result = _underlyingType.HasCollectionBuilderAttribute(out builderType, out methodName);
+            bool result = _underlyingType.HasCollectionBuilderAttribute(
+                out builderType,
+                out methodName
+            );
             if (builderType is { })
             {
-                builderType = this.RetargetingTranslator.Retarget(builderType, RetargetOptions.RetargetPrimitiveTypesByTypeCode);
+                builderType = this.RetargetingTranslator.Retarget(
+                    builderType,
+                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                );
             }
             return result;
         }
 
-        internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
+        internal sealed override bool HasAsyncMethodBuilderAttribute(
+            out TypeSymbol? builderArgument
+        )
         {
             if (_underlyingType.HasAsyncMethodBuilderAttribute(out builderArgument))
             {
-                builderArgument = this.RetargetingTranslator.Retarget(builderArgument, RetargetOptions.RetargetPrimitiveTypesByTypeCode);
+                builderArgument = this.RetargetingTranslator.Retarget(
+                    builderArgument,
+                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                );
                 return true;
             }
 

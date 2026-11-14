@@ -17,11 +17,21 @@ namespace Microsoft.CodeAnalysis.Snippets
 
         public override string Description => FeaturesResources.if_statement;
 
-        public override ImmutableArray<string> AdditionalFilterTexts { get; } = ImmutableArray.Create("statement");
+        public override ImmutableArray<string> AdditionalFilterTexts { get; } =
+            ImmutableArray.Create("statement");
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts) => syntaxFacts.IsIfStatement;
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        ) => syntaxFacts.IsIfStatement;
 
-        protected override SyntaxNode GenerateStatement(SyntaxGenerator generator, SyntaxContext syntaxContext, SyntaxNode? inlineExpression)
-            => generator.IfStatement(inlineExpression?.WithoutLeadingTrivia() ?? generator.TrueLiteralExpression(), Array.Empty<SyntaxNode>());
+        protected override SyntaxNode GenerateStatement(
+            SyntaxGenerator generator,
+            SyntaxContext syntaxContext,
+            SyntaxNode? inlineExpression
+        ) =>
+            generator.IfStatement(
+                inlineExpression?.WithoutLeadingTrivia() ?? generator.TrueLiteralExpression(),
+                Array.Empty<SyntaxNode>()
+            );
     }
 }

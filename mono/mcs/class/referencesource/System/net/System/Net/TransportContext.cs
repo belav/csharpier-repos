@@ -13,6 +13,7 @@ namespace System.Net
     public abstract class TransportContext
     {
         public abstract ChannelBinding GetChannelBinding(ChannelBindingKind kind);
+
         public virtual IEnumerable<TokenBinding> GetTlsTokenBindings()
         {
             throw new NotSupportedException();
@@ -24,7 +25,10 @@ namespace System.Net
     {
         internal ConnectStreamContext(ConnectStream connectStream)
         {
-            GlobalLog.Assert(connectStream != null, "ConnectStreamContext..ctor(): Not expecting a null connectStream!");
+            GlobalLog.Assert(
+                connectStream != null,
+                "ConnectStreamContext..ctor(): Not expecting a null connectStream!"
+            );
             this.connectStream = connectStream;
         }
 
@@ -42,7 +46,10 @@ namespace System.Net
     {
         internal SslStreamContext(SslStream sslStream)
         {
-            GlobalLog.Assert(sslStream != null, "SslStreamContext..ctor(): Not expecting a null sslStream!");
+            GlobalLog.Assert(
+                sslStream != null,
+                "SslStreamContext..ctor(): Not expecting a null sslStream!"
+            );
             this.sslStream = sslStream;
         }
 
@@ -60,7 +67,10 @@ namespace System.Net
     {
         internal HttpListenerRequestContext(HttpListenerRequest request)
         {
-            GlobalLog.Assert(request != null, "HttpListenerRequestContext..ctor(): Not expecting a null request!");
+            GlobalLog.Assert(
+                request != null,
+                "HttpListenerRequestContext..ctor(): Not expecting a null request!"
+            );
             this.request = request;
         }
 
@@ -68,8 +78,9 @@ namespace System.Net
         {
             if (kind != ChannelBindingKind.Endpoint)
             {
-                throw new NotSupportedException(SR.GetString(
-                    SR.net_listener_invalid_cbt_type, kind.ToString()));
+                throw new NotSupportedException(
+                    SR.GetString(SR.net_listener_invalid_cbt_type, kind.ToString())
+                );
             }
             return request.GetChannelBinding();
         }

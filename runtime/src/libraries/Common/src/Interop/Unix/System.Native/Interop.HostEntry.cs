@@ -13,27 +13,35 @@ internal static partial class Interop
 
         internal enum GetAddrInfoErrorFlags : int
         {
-            EAI_AGAIN = 1,      // Temporary failure in name resolution.
-            EAI_BADFLAGS = 2,   // Invalid value for `ai_flags' field.
-            EAI_FAIL = 3,       // Non-recoverable failure in name resolution.
-            EAI_FAMILY = 4,     // 'ai_family' not supported.
-            EAI_NONAME = 5,     // NAME or SERVICE is unknown.
-            EAI_BADARG = 6,     // One or more input arguments were invalid.
-            EAI_NOMORE = 7,     // No more entries are present in the list.
-            EAI_MEMORY = 8,     // Out of memory.
+            EAI_AGAIN = 1, // Temporary failure in name resolution.
+            EAI_BADFLAGS = 2, // Invalid value for `ai_flags' field.
+            EAI_FAIL = 3, // Non-recoverable failure in name resolution.
+            EAI_FAMILY = 4, // 'ai_family' not supported.
+            EAI_NONAME = 5, // NAME or SERVICE is unknown.
+            EAI_BADARG = 6, // One or more input arguments were invalid.
+            EAI_NOMORE = 7, // No more entries are present in the list.
+            EAI_MEMORY = 8, // Out of memory.
         }
 
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct HostEntry
         {
-            internal byte* CanonicalName;      // Canonical Name of the Host
-            internal byte** Aliases;           // List of aliases for the host
+            internal byte* CanonicalName; // Canonical Name of the Host
+            internal byte** Aliases; // List of aliases for the host
             internal IPAddress* IPAddressList; // Handle for socket address list
-            internal int IPAddressCount;       // Number of IP addresses in the list
+            internal int IPAddressCount; // Number of IP addresses in the list
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetHostEntryForName", StringMarshalling = StringMarshalling.Utf8)]
-        internal static unsafe partial int GetHostEntryForName(string address, AddressFamily family, HostEntry* entry);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetHostEntryForName",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
+        internal static unsafe partial int GetHostEntryForName(
+            string address,
+            AddressFamily family,
+            HostEntry* entry
+        );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_FreeHostEntry")]
         internal static unsafe partial void FreeHostEntry(HostEntry* entry);

@@ -32,7 +32,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Null(reader);
         }
 
-        private static void RoundTrip(Action<ObjectWriter> writeAction, Action<ObjectReader> readAction, bool recursive)
+        private static void RoundTrip(
+            Action<ObjectWriter> writeAction,
+            Action<ObjectReader> readAction,
+            bool recursive
+        )
         {
             using var stream = new MemoryStream();
 
@@ -46,13 +50,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
             readAction(reader);
         }
 
-        private static void TestRoundTrip(Action<ObjectWriter> writeAction, Action<ObjectReader> readAction)
+        private static void TestRoundTrip(
+            Action<ObjectWriter> writeAction,
+            Action<ObjectReader> readAction
+        )
         {
             RoundTrip(writeAction, readAction, recursive: true);
             RoundTrip(writeAction, readAction, recursive: false);
         }
 
-        private static T RoundTrip<T>(T value, Action<ObjectWriter, T> writeAction, Func<ObjectReader, T> readAction, bool recursive)
+        private static T RoundTrip<T>(
+            T value,
+            Action<ObjectWriter, T> writeAction,
+            Func<ObjectReader, T> readAction,
+            bool recursive
+        )
         {
             using var stream = new MemoryStream();
 
@@ -66,13 +78,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return readAction(reader);
         }
 
-        private static void TestRoundTrip<T>(T value, Action<ObjectWriter, T> writeAction, Func<ObjectReader, T> readAction, bool recursive)
+        private static void TestRoundTrip<T>(
+            T value,
+            Action<ObjectWriter, T> writeAction,
+            Func<ObjectReader, T> readAction,
+            bool recursive
+        )
         {
             var newValue = RoundTrip(value, writeAction, readAction, recursive);
             Assert.True(Equalish(value, newValue));
         }
 
-        private static void TestRoundTrip<T>(T value, Action<ObjectWriter, T> writeAction, Func<ObjectReader, T> readAction)
+        private static void TestRoundTrip<T>(
+            T value,
+            Action<ObjectWriter, T> writeAction,
+            Func<ObjectReader, T> readAction
+        )
         {
             TestRoundTrip(value, writeAction, readAction, recursive: true);
             TestRoundTrip(value, writeAction, readAction, recursive: false);
@@ -80,7 +101,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         private static T RoundTripValue<T>(T value, bool recursive)
         {
-            return RoundTrip(value,
+            return RoundTrip(
+                value,
                 (w, v) =>
                 {
                     if (v != null && v.GetType().IsEnum)
@@ -92,9 +114,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         w.WriteValue(v);
                     }
                 },
-                r => value != null && value.GetType().IsEnum
-                    ? (T)Enum.ToObject(typeof(T), r.ReadInt64())
-                    : (T)r.ReadValue(), recursive);
+                r =>
+                    value != null && value.GetType().IsEnum
+                        ? (T)Enum.ToObject(typeof(T), r.ReadInt64())
+                        : (T)r.ReadValue(),
+                recursive
+            );
         }
 
         private static void TestRoundTripValue<T>(T value, bool recursive)
@@ -112,7 +137,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static bool Equalish<T>(T value1, T value2)
         {
             return object.Equals(value1, value2)
-                || (value1 is Array && value2 is Array && ArrayEquals((Array)(object)value1, (Array)(object)value2));
+                || (
+                    value1 is Array
+                    && value2 is Array
+                    && ArrayEquals((Array)(object)value1, (Array)(object)value2)
+                );
         }
 
         private static bool ArrayEquals(Array seq1, Array seq2)
@@ -237,7 +266,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         private static void TestRoundTripCompressedUint(uint value)
         {
-            TestRoundTrip(value, (w, v) => ((ObjectWriter)w).WriteCompressedUInt(v), r => ((ObjectReader)r).ReadCompressedUInt());
+            TestRoundTrip(
+                value,
+                (w, v) => ((ObjectWriter)w).WriteCompressedUInt(v),
+                r => ((ObjectReader)r).ReadCompressedUInt()
+            );
         }
 
         [Fact]
@@ -245,12 +278,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             TestRoundTripCompressedUint(0);
             TestRoundTripCompressedUint(0x01u);
-            TestRoundTripCompressedUint(0x0123u);     // unique bytes tests order
-            TestRoundTripCompressedUint(0x012345u);   // unique bytes tests order
+            TestRoundTripCompressedUint(0x0123u); // unique bytes tests order
+            TestRoundTripCompressedUint(0x012345u); // unique bytes tests order
             TestRoundTripCompressedUint(0x01234567u); // unique bytes tests order
-            TestRoundTripCompressedUint(0x3Fu);       // largest value packed in one byte
-            TestRoundTripCompressedUint(0x3FFFu);     // largest value packed into two bytes
-            TestRoundTripCompressedUint(0x3FFFFFu);   // no three byte option yet, but test anyway
+            TestRoundTripCompressedUint(0x3Fu); // largest value packed in one byte
+            TestRoundTripCompressedUint(0x3FFFu); // largest value packed into two bytes
+            TestRoundTripCompressedUint(0x3FFFFFu); // no three byte option yet, but test anyway
             TestRoundTripCompressedUint(0x3FFFFFFFu); // largest unit allowed in four bytes
 
             Assert.Throws<ArgumentException>(() => TestRoundTripCompressedUint(uint.MaxValue)); // max uint not allowed
@@ -664,7 +697,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal("\uDC00\uD800", (String)reader.ReadValue()); // invalid surrogate pair
             Assert.Equal("\uD800", (String)reader.ReadValue()); // incomplete surrogate pair
             Assert.Null(reader.ReadValue());
-
             unchecked
             {
                 Assert.Equal((long)ConsoleColor.Cyan, reader.ReadInt64());
@@ -683,42 +715,42 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         public enum EByte : byte
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum ESByte : sbyte
         {
-            Value = 2
+            Value = 2,
         }
 
         public enum EShort : short
         {
-            Value = 3
+            Value = 3,
         }
 
         public enum EUShort : ushort
         {
-            Value = 4
+            Value = 4,
         }
 
         public enum EInt : int
         {
-            Value = 5
+            Value = 5,
         }
 
         public enum EUInt : uint
         {
-            Value = 6
+            Value = 6,
         }
 
         public enum ELong : long
         {
-            Value = 7
+            Value = 7,
         }
 
         public enum EULong : ulong
         {
-            Value = 8
+            Value = 8,
         }
 
         [Fact]
@@ -800,8 +832,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestRoundTripValue(values);
         }
 
-        public static IEnumerable<object[]> GetEncodingTestCases()
-            => EncodingTestHelpers.GetEncodingTestCases();
+        public static IEnumerable<object[]> GetEncodingTestCases() =>
+            EncodingTestHelpers.GetEncodingTestCases();
 
         [Theory]
         [MemberData(nameof(GetEncodingTestCases))]

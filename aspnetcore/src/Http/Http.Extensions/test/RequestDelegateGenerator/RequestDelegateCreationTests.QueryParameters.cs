@@ -146,16 +146,13 @@ app.MapGet("/hello", ([FromQuery]string? p) => p == string.Empty ? "No value, bu
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                var p = Assert.Single(endpointModel.Parameters);
-                Assert.Equal(EndpointParameterSource.Query, p.Source);
-                Assert.Equal("p", p.SymbolName);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            var p = Assert.Single(endpointModel.Parameters);
+            Assert.Equal(EndpointParameterSource.Query, p.Source);
+            Assert.Equal("p", p.SymbolName);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=");
@@ -175,13 +172,10 @@ app.MapGet("/hello", ([FromQuery]string p1, [FromQuery]string p2) => $"{p1} {p2}
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p1=Hello&p2=world!");
@@ -220,16 +214,13 @@ app.MapGet("/hello", ([FromQuery]string p1, [FromQuery]string p2) => $"{p1} {p2}
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            (endpointModel) =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                var p = Assert.Single(endpointModel.Parameters);
-                Assert.Equal(EndpointParameterSource.Query, p.Source);
-                Assert.Equal(lookupName, p.LookupName);
-            }
-        );
+        VerifyStaticEndpointModel(results, (endpointModel) =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            var p = Assert.Single(endpointModel.Parameters);
+            Assert.Equal(EndpointParameterSource.Query, p.Source);
+            Assert.Equal(lookupName, p.LookupName);
+        });
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString($"?{name}=test");

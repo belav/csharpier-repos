@@ -45,7 +45,7 @@ public class CSharpTestMethodFinderTests
             {
                 [Fact]
                 public void TestMethod1() { }
-            
+
                 public class InnerClass
                 {
                     [Fact]
@@ -65,7 +65,7 @@ public class CSharpTestMethodFinderTests
             {
                 [Fact]
                 public void Test$$Method1() { }
-            
+
                 public class InnerClass
                 {
                     [Fact]
@@ -548,42 +548,78 @@ public class CSharpTestMethodFinderTests
         return TestAsync(code, nunitDefinitions, expectedTestNames);
     }
 
-    private static async Task TestAsync(string code, string testAttributeDefinitionsCode, params string[] expectedTestNames)
+    private static async Task TestAsync(
+        string code,
+        string testAttributeDefinitionsCode,
+        params string[] expectedTestNames
+    )
     {
         var workspace = TestWorkspace.CreateCSharp(new[] { code, testAttributeDefinitionsCode });
 
         var testDocument = workspace.Documents.First();
-        var span = testDocument.CursorPosition != null ? new TextSpan(testDocument.CursorPosition.Value, 0) : testDocument.SelectedSpans.Single();
+        var span =
+            testDocument.CursorPosition != null
+                ? new TextSpan(testDocument.CursorPosition.Value, 0)
+                : testDocument.SelectedSpans.Single();
 
-        var testMethodFinder = workspace.CurrentSolution.Projects.Single().GetRequiredLanguageService<ITestMethodFinder>();
-        var testMethods = await testMethodFinder.GetPotentialTestMethodsAsync(workspace.CurrentSolution.GetRequiredDocument(testDocument.Id), span, CancellationToken.None);
-        var testMethodNames = testMethods.Cast<MethodDeclarationSyntax>().Select(m => m.Identifier.Text).ToArray();
+        var testMethodFinder = workspace
+            .CurrentSolution.Projects.Single()
+            .GetRequiredLanguageService<ITestMethodFinder>();
+        var testMethods = await testMethodFinder.GetPotentialTestMethodsAsync(
+            workspace.CurrentSolution.GetRequiredDocument(testDocument.Id),
+            span,
+            CancellationToken.None
+        );
+        var testMethodNames = testMethods
+            .Cast<MethodDeclarationSyntax>()
+            .Select(m => m.Identifier.Text)
+            .ToArray();
 
         AssertEx.Equal(expectedTestNames, testMethodNames);
     }
 
-    private static async Task TestMatchAsync(string code, string testAttributeDefinitionsCode, params string[] expectedTestNames)
+    private static async Task TestMatchAsync(
+        string code,
+        string testAttributeDefinitionsCode,
+        params string[] expectedTestNames
+    )
     {
         var workspace = TestWorkspace.CreateCSharp(new[] { code, testAttributeDefinitionsCode });
 
         var testDocument = workspace.Documents.First();
-        var span = testDocument.CursorPosition != null ? new TextSpan(testDocument.CursorPosition.Value, 0) : testDocument.SelectedSpans.Single();
+        var span =
+            testDocument.CursorPosition != null
+                ? new TextSpan(testDocument.CursorPosition.Value, 0)
+                : testDocument.SelectedSpans.Single();
 
-        var testMethodFinder = workspace.CurrentSolution.Projects.Single().GetRequiredLanguageService<ITestMethodFinder>();
-        var testMethods = await testMethodFinder.GetPotentialTestMethodsAsync(workspace.CurrentSolution.GetRequiredDocument(testDocument.Id), span, CancellationToken.None);
-        var semanticModel = await workspace.CurrentSolution.GetRequiredDocument(testDocument.Id).GetRequiredSemanticModelAsync(CancellationToken.None);
+        var testMethodFinder = workspace
+            .CurrentSolution.Projects.Single()
+            .GetRequiredLanguageService<ITestMethodFinder>();
+        var testMethods = await testMethodFinder.GetPotentialTestMethodsAsync(
+            workspace.CurrentSolution.GetRequiredDocument(testDocument.Id),
+            span,
+            CancellationToken.None
+        );
+        var semanticModel = await workspace
+            .CurrentSolution.GetRequiredDocument(testDocument.Id)
+            .GetRequiredSemanticModelAsync(CancellationToken.None);
 
         List<string> unmatchedTestNames = new();
 
         foreach (var expectedTestName in expectedTestNames)
         {
-            var matchFound = testMethods.Any(m => testMethodFinder.IsMatch(semanticModel, m, expectedTestName, CancellationToken.None));
+            var matchFound = testMethods.Any(m =>
+                testMethodFinder.IsMatch(semanticModel, m, expectedTestName, CancellationToken.None)
+            );
             if (!matchFound)
             {
                 unmatchedTestNames.Add(expectedTestName);
             }
         }
 
-        Assert.True(unmatchedTestNames.Count == 0, $"Unable to match the following test names: {string.Join(", ", unmatchedTestNames)}");
+        Assert.True(
+            unmatchedTestNames.Count == 0,
+            $"Unable to match the following test names: {string.Join(", ", unmatchedTestNames)}"
+        );
     }
 }

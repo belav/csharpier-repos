@@ -21,18 +21,12 @@ namespace Internal.TypeSystem
         /// </summary>
         public MethodSignature Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _signature.ReturnType.Context;
-            }
+            get { return _signature.ReturnType.Context; }
         }
 
         public override int GetHashCode()
@@ -42,12 +36,19 @@ namespace Internal.TypeSystem
             return _hashCode;
         }
 
-        public override TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             MethodSignatureBuilder sigBuilder = new MethodSignatureBuilder(_signature);
-            sigBuilder.ReturnType = _signature.ReturnType.InstantiateSignature(typeInstantiation, methodInstantiation);
+            sigBuilder.ReturnType = _signature.ReturnType.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
             for (int i = 0; i < _signature.Length; i++)
-                sigBuilder[i] = _signature[i].InstantiateSignature(typeInstantiation, methodInstantiation);
+                sigBuilder[i] = _signature[i]
+                    .InstantiateSignature(typeInstantiation, methodInstantiation);
 
             MethodSignature instantiatedSignature = sigBuilder.ToSignature();
             if (instantiatedSignature != _signature)

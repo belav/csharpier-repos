@@ -6,13 +6,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
     internal static class Oids
     {
         // Symmetric encryption algorithms
-        public const string Rc2 = "1.2.840.113549.3.2";          //RC2
-        public const string Rc4 = "1.2.840.113549.3.4";          //RC4
-        public const string Des = "1.3.14.3.2.7";                //DES
+        public const string Rc2 = "1.2.840.113549.3.2"; //RC2
+        public const string Rc4 = "1.2.840.113549.3.4"; //RC4
+        public const string Des = "1.3.14.3.2.7"; //DES
         public const string TripleDesCbc = "1.2.840.113549.3.7"; //3DES-CBC
-        public const string Aes128 = "2.16.840.1.101.3.4.1.2";   //AES128
-        public const string Aes192 = "2.16.840.1.101.3.4.1.22";  //AES192
-        public const string Aes256 = "2.16.840.1.101.3.4.1.42";  //AES256
+        public const string Aes128 = "2.16.840.1.101.3.4.1.2"; //AES128
+        public const string Aes192 = "2.16.840.1.101.3.4.1.22"; //AES192
+        public const string Aes256 = "2.16.840.1.101.3.4.1.42"; //AES256
 
         // Asymmetric encryption algorithms
         public const string Rsa = "1.2.840.113549.1.1.1";
@@ -37,7 +37,6 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public const string CounterSigner = "1.2.840.113549.1.9.6";
         public const string FriendlyName = "1.2.840.113549.1.9.20";
         public const string LocalKeyId = "1.2.840.113549.1.9.21";
-
 
         // Key wrap algorithms
         public const string CmsRc2Wrap = "1.2.840.113549.1.9.16.3.7";

@@ -41,8 +41,7 @@ public class ModelCacheKeyFactory : IModelCacheKeyFactory
     ///     The context to get the model cache key for.
     /// </param>
     /// <returns>The created key.</returns>
-    public virtual object Create(DbContext context)
-        => new ModelCacheKey(context);
+    public virtual object Create(DbContext context) => new ModelCacheKey(context);
 
     /// <summary>
     ///     Gets the model cache key for a given context.
@@ -52,6 +51,6 @@ public class ModelCacheKeyFactory : IModelCacheKeyFactory
     /// </param>
     /// <param name="designTime">Whether the model should contain design-time configuration.</param>
     /// <returns>The created key.</returns>
-    public virtual object Create(DbContext context, bool designTime)
-        => new ModelCacheKey(context, designTime);
+    public virtual object Create(DbContext context, bool designTime) =>
+        new ModelCacheKey(context, designTime);
 }

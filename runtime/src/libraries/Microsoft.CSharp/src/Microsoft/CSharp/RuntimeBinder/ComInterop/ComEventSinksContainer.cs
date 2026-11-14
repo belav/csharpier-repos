@@ -14,13 +14,14 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     /// </summary>
     internal sealed class ComEventSinksContainer : List<ComEventsSink>, IDisposable
     {
-        private ComEventSinksContainer()
-        {
-        }
+        private ComEventSinksContainer() { }
 
         private static readonly object s_comObjectEventSinksKey = new object();
 
-        public static ComEventSinksContainer FromRuntimeCallableWrapper(object rcw, bool createIfNotFound)
+        public static ComEventSinksContainer FromRuntimeCallableWrapper(
+            object rcw,
+            bool createIfNotFound
+        )
         {
             object data = Marshal.GetComObjectData(rcw, s_comObjectEventSinksKey);
             if (data != null || !createIfNotFound)

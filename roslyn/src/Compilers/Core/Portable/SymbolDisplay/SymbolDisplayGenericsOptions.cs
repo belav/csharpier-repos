@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis
         None = 0,
 
         /// <summary>
-        /// Includes the type parameters. 
+        /// Includes the type parameters.
         /// For example, "Goo&lt;T&gt;" in C# or "Goo(Of T)" in Visual Basic.
         /// </summary>
         IncludeTypeParameters = 1 << 0,

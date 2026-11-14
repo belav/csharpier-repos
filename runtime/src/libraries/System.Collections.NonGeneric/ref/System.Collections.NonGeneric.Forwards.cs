@@ -7,4 +7,6 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Collections.ArrayList))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Collections.Comparer))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Collections.Hashtable))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Collections.IHashCodeProvider))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Collections.IHashCodeProvider)
+)]

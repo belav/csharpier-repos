@@ -23,7 +23,9 @@ namespace System
         {
             if (key.Length == 0)
             {
-                Debug.Fail("SR::GetResourceString with empty resourceKey.  Bug in caller, or weird recursive loading problem?");
+                Debug.Fail(
+                    "SR::GetResourceString with empty resourceKey.  Bug in caller, or weird recursive loading problem?"
+                );
                 return key;
             }
 
@@ -53,7 +55,11 @@ namespace System
 
                 // Are we recursively looking up the same resource?  Note - our backout code will set
                 // the ResourceHelper's currentlyLoading stack to null if an exception occurs.
-                if (_currentlyLoading != null && _currentlyLoading.Count > 0 && _currentlyLoading.LastIndexOf(key) >= 0)
+                if (
+                    _currentlyLoading != null
+                    && _currentlyLoading.Count > 0
+                    && _currentlyLoading.LastIndexOf(key) >= 0
+                )
                 {
                     // We can start infinitely recursing for one resource lookup,
                     // then during our failure reporting, start infinitely recursing again.
@@ -67,7 +73,8 @@ namespace System
 #if SYSTEM_PRIVATE_CORELIB
                     // Note: our infrastructure for reporting this exception will again cause resource lookup.
                     // This is the most direct way of dealing with that problem.
-                    string message = $@"Encountered infinite recursion while looking up resource '{key}' in {CoreLib.Name}. Verify the installation of .NET is complete and does not need repairing, and that the state of the process has not become corrupted.";
+                    string message =
+                        $@"Encountered infinite recursion while looking up resource '{key}' in {CoreLib.Name}. Verify the installation of .NET is complete and does not need repairing, and that the state of the process has not become corrupted.";
                     Environment.FailFast(message);
 #endif
                 }
@@ -94,7 +101,10 @@ namespace System
                 string? s = ResourceManager.GetString(key, null);
                 _currentlyLoading.RemoveAt(_currentlyLoading.Count - 1); // Pop
 
-                Debug.Assert(s != null, $"Looking up resource '{key}' failed. Was your resource name misspelled? Did you rebuild after adding a resource?");
+                Debug.Assert(
+                    s != null,
+                    $"Looking up resource '{key}' failed. Was your resource name misspelled? Did you rebuild after adding a resource?"
+                );
                 return s ?? key;
             }
             catch

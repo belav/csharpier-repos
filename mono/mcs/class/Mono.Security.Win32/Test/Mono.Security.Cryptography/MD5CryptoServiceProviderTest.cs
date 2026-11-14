@@ -8,20 +8,20 @@
 //
 
 using System;
-using NUnit.Framework;
 using Mono.Security.Cryptography;
+using NUnit.Framework;
 
-namespace MonoTests.Security.Cryptography {
+namespace MonoTests.Security.Cryptography
+{
+    [TestFixture]
+    public class MD5CryptoServiceProviderTest : MD5Test
+    {
+        [SetUp]
+        public void Setup()
+        {
+            hash = new MD5CryptoServiceProvider();
+        }
 
-	[TestFixture]
-	public class MD5CryptoServiceProviderTest : MD5Test {
-
-		[SetUp]
-		public void Setup () {
-			hash = new MD5CryptoServiceProvider ();
-		}
-
-		// this will run ALL tests defined in MD5Test.cs with the MD5CryptoServiceProvider implementation
-	}
-
+        // this will run ALL tests defined in MD5Test.cs with the MD5CryptoServiceProvider implementation
+    }
 }

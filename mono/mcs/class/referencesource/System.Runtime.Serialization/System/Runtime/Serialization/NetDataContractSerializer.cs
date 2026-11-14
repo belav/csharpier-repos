@@ -5,18 +5,18 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Security;
     using System.Collections;
-    using System.Security.Permissions;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization.Formatters;
-    using System.Collections.Generic;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Xml;
 #if !NO_CONFIGURATION
     using System.Runtime.Serialization.Configuration;
 #endif
-    using System.Reflection;
 
     public sealed class NetDataContractSerializer : XmlObjectSerializer, IFormatter
     {
@@ -32,78 +32,135 @@ namespace System.Runtime.Serialization
         static Hashtable typeNameCache = new Hashtable();
 
         public NetDataContractSerializer()
-            : this(new StreamingContext(StreamingContextStates.All))
-        {
-        }
+            : this(new StreamingContext(StreamingContextStates.All)) { }
 
         public NetDataContractSerializer(StreamingContext context)
-            : this(context, Int32.MaxValue, false, FormatterAssemblyStyle.Full, null)
-        {
-        }
+            : this(context, Int32.MaxValue, false, FormatterAssemblyStyle.Full, null) { }
 
-        public NetDataContractSerializer(StreamingContext context,
+        public NetDataContractSerializer(
+            StreamingContext context,
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
             FormatterAssemblyStyle assemblyFormat,
-            ISurrogateSelector surrogateSelector)
+            ISurrogateSelector surrogateSelector
+        )
         {
-            Initialize(context, maxItemsInObjectGraph, ignoreExtensionDataObject, assemblyFormat, surrogateSelector);
+            Initialize(
+                context,
+                maxItemsInObjectGraph,
+                ignoreExtensionDataObject,
+                assemblyFormat,
+                surrogateSelector
+            );
         }
 
         public NetDataContractSerializer(string rootName, string rootNamespace)
-            : this(rootName, rootNamespace, new StreamingContext(StreamingContextStates.All), Int32.MaxValue, false, FormatterAssemblyStyle.Full, null)
-        {
-        }
+            : this(
+                rootName,
+                rootNamespace,
+                new StreamingContext(StreamingContextStates.All),
+                Int32.MaxValue,
+                false,
+                FormatterAssemblyStyle.Full,
+                null
+            ) { }
 
-        public NetDataContractSerializer(string rootName, string rootNamespace,
+        public NetDataContractSerializer(
+            string rootName,
+            string rootNamespace,
             StreamingContext context,
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
             FormatterAssemblyStyle assemblyFormat,
-            ISurrogateSelector surrogateSelector)
+            ISurrogateSelector surrogateSelector
+        )
         {
             XmlDictionary dictionary = new XmlDictionary(2);
-            Initialize(dictionary.Add(rootName), dictionary.Add(DataContract.GetNamespace(rootNamespace)), context, maxItemsInObjectGraph, ignoreExtensionDataObject, assemblyFormat, surrogateSelector);
+            Initialize(
+                dictionary.Add(rootName),
+                dictionary.Add(DataContract.GetNamespace(rootNamespace)),
+                context,
+                maxItemsInObjectGraph,
+                ignoreExtensionDataObject,
+                assemblyFormat,
+                surrogateSelector
+            );
         }
 
-        public NetDataContractSerializer(XmlDictionaryString rootName, XmlDictionaryString rootNamespace)
-            : this(rootName, rootNamespace, new StreamingContext(StreamingContextStates.All), Int32.MaxValue, false, FormatterAssemblyStyle.Full, null)
-        {
-        }
+        public NetDataContractSerializer(
+            XmlDictionaryString rootName,
+            XmlDictionaryString rootNamespace
+        )
+            : this(
+                rootName,
+                rootNamespace,
+                new StreamingContext(StreamingContextStates.All),
+                Int32.MaxValue,
+                false,
+                FormatterAssemblyStyle.Full,
+                null
+            ) { }
 
-        public NetDataContractSerializer(XmlDictionaryString rootName, XmlDictionaryString rootNamespace,
+        public NetDataContractSerializer(
+            XmlDictionaryString rootName,
+            XmlDictionaryString rootNamespace,
             StreamingContext context,
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
             FormatterAssemblyStyle assemblyFormat,
-            ISurrogateSelector surrogateSelector)
+            ISurrogateSelector surrogateSelector
+        )
         {
-            Initialize(rootName, rootNamespace, context, maxItemsInObjectGraph, ignoreExtensionDataObject, assemblyFormat, surrogateSelector);
+            Initialize(
+                rootName,
+                rootNamespace,
+                context,
+                maxItemsInObjectGraph,
+                ignoreExtensionDataObject,
+                assemblyFormat,
+                surrogateSelector
+            );
         }
 
-        void Initialize(StreamingContext context,
+        void Initialize(
+            StreamingContext context,
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
             FormatterAssemblyStyle assemblyFormat,
-            ISurrogateSelector surrogateSelector)
+            ISurrogateSelector surrogateSelector
+        )
         {
             this.context = context;
             if (maxItemsInObjectGraph < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxItemsInObjectGraph", SR.GetString(SR.ValueMustBeNonNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "maxItemsInObjectGraph",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             this.maxItemsInObjectGraph = maxItemsInObjectGraph;
             this.ignoreExtensionDataObject = ignoreExtensionDataObject;
             this.surrogateSelector = surrogateSelector;
             this.AssemblyFormat = assemblyFormat;
         }
 
-        void Initialize(XmlDictionaryString rootName, XmlDictionaryString rootNamespace,
+        void Initialize(
+            XmlDictionaryString rootName,
+            XmlDictionaryString rootNamespace,
             StreamingContext context,
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
             FormatterAssemblyStyle assemblyFormat,
-            ISurrogateSelector surrogateSelector)
+            ISurrogateSelector surrogateSelector
+        )
         {
-            Initialize(context, maxItemsInObjectGraph, ignoreExtensionDataObject, assemblyFormat, surrogateSelector);
+            Initialize(
+                context,
+                maxItemsInObjectGraph,
+                ignoreExtensionDataObject,
+                assemblyFormat,
+                surrogateSelector
+            );
             this.rootName = rootName;
             this.rootNamespace = rootNamespace;
         }
@@ -111,7 +168,10 @@ namespace System.Runtime.Serialization
         static bool? unsafeTypeForwardingEnabled;
         internal static bool UnsafeTypeForwardingEnabled
         {
-            [Fx.Tag.SecurityNote(Critical = "Calls Security Critical method NetDataContractSerializerSection.TryUnsafeGetSection.", Safe = "The ConfigSection instance is not leaked.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls Security Critical method NetDataContractSerializerSection.TryUnsafeGetSection.",
+                Safe = "The ConfigSection instance is not leaked."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -131,7 +191,10 @@ namespace System.Runtime.Serialization
                     }
 #endif
                 }
-                Fx.Assert(unsafeTypeForwardingEnabled != null, "unsafeTypeForwardingEnabled should not be null.");
+                Fx.Assert(
+                    unsafeTypeForwardingEnabled != null,
+                    "unsafeTypeForwardingEnabled should not be null."
+                );
                 return unsafeTypeForwardingEnabled.Value;
             }
         }
@@ -160,7 +223,9 @@ namespace System.Runtime.Serialization
             set
             {
                 if (value != FormatterAssemblyStyle.Full && value != FormatterAssemblyStyle.Simple)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidAssemblyFormat, value)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.InvalidAssemblyFormat, value))
+                    );
                 assemblyFormat = value;
             }
         }
@@ -227,9 +292,19 @@ namespace System.Runtime.Serialization
             InternalWriteStartObject(writer, graph, contract);
         }
 
-        void InternalWriteStartObject(XmlWriterDelegator writer, object graph, DataContract contract)
+        void InternalWriteStartObject(
+            XmlWriterDelegator writer,
+            object graph,
+            DataContract contract
+        )
         {
-            WriteRootElement(writer, contract, rootName, rootNamespace, CheckIfNeedsContractNsAtRoot(rootName, rootNamespace, contract));
+            WriteRootElement(
+                writer,
+                contract,
+                rootName,
+                rootNamespace,
+                CheckIfNeedsContractNsAtRoot(rootName, rootNamespace, contract)
+            );
         }
 
         public override void WriteObjectContent(XmlDictionaryWriter writer, object graph)
@@ -244,14 +319,30 @@ namespace System.Runtime.Serialization
             InternalWriteObjectContent(writer, graph, contract, surrogateDataContracts);
         }
 
-        void InternalWriteObjectContent(XmlWriterDelegator writer, object graph, DataContract contract, Hashtable surrogateDataContracts)
+        void InternalWriteObjectContent(
+            XmlWriterDelegator writer,
+            object graph,
+            DataContract contract,
+            Hashtable surrogateDataContracts
+        )
         {
             if (MaxItemsInObjectGraph == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
+                    )
+                );
 
             if (IsRootXmlAny(rootName, contract))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.IsAnyNotSupportedByNetDataContractSerializer, contract.UnderlyingType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(
+                            SR.IsAnyNotSupportedByNetDataContractSerializer,
+                            contract.UnderlyingType
+                        )
+                    )
+                );
             }
             else if (graph == null)
             {
@@ -266,7 +357,10 @@ namespace System.Runtime.Serialization
                 XmlObjectSerializerWriteContext context = null;
                 if (contract.CanContainReferences)
                 {
-                    context = XmlObjectSerializerWriteContext.CreateContext(this, surrogateDataContracts);
+                    context = XmlObjectSerializerWriteContext.CreateContext(
+                        this,
+                        surrogateDataContracts
+                    );
                     context.HandleGraphAtTopLevel(writer, graph, contract);
                 }
 
@@ -276,7 +370,11 @@ namespace System.Runtime.Serialization
         }
 
         // Update the overloads whenever you are changing this method
-        internal static void WriteClrTypeInfo(XmlWriterDelegator writer, DataContract dataContract, SerializationBinder binder)
+        internal static void WriteClrTypeInfo(
+            XmlWriterDelegator writer,
+            DataContract dataContract,
+            SerializationBinder binder
+        )
         {
             if (!dataContract.IsISerializable && !(dataContract is SurrogateDataContract))
             {
@@ -298,14 +396,28 @@ namespace System.Runtime.Serialization
 
                 if (clrAssemblyName == null)
                 {
-                    clrAssemblyName = (typeInformation == null) ?
-                        NetDataContractSerializer.GetTypeInformation(clrType).AssemblyString :
-                        typeInformation.AssemblyString;
+                    clrAssemblyName =
+                        (typeInformation == null)
+                            ? NetDataContractSerializer.GetTypeInformation(clrType).AssemblyString
+                            : typeInformation.AssemblyString;
 
                     // Throw in the [TypeForwardedFrom] case to prevent a partially trusted assembly from forwarding itself to an assembly with higher privileges
-                    if (!UnsafeTypeForwardingEnabled && !clrType.Assembly.IsFullyTrusted && !IsAssemblyNameForwardingSafe(clrType.Assembly.FullName, clrAssemblyName))
+                    if (
+                        !UnsafeTypeForwardingEnabled
+                        && !clrType.Assembly.IsFullyTrusted
+                        && !IsAssemblyNameForwardingSafe(clrType.Assembly.FullName, clrAssemblyName)
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.TypeCannotBeForwardedFrom, DataContract.GetClrTypeFullName(clrType), clrType.Assembly.FullName, clrAssemblyName)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(
+                                    SR.TypeCannotBeForwardedFrom,
+                                    DataContract.GetClrTypeFullName(clrType),
+                                    clrType.Assembly.FullName,
+                                    clrAssemblyName
+                                )
+                            )
+                        );
                     }
                 }
 
@@ -314,7 +426,13 @@ namespace System.Runtime.Serialization
         }
 
         // Update the overloads whenever you are changing this method
-        internal static void WriteClrTypeInfo(XmlWriterDelegator writer, Type dataContractType, SerializationBinder binder, string defaultClrTypeName, string defaultClrAssemblyName)
+        internal static void WriteClrTypeInfo(
+            XmlWriterDelegator writer,
+            Type dataContractType,
+            SerializationBinder binder,
+            string defaultClrTypeName,
+            string defaultClrAssemblyName
+        )
         {
             string clrTypeName = null;
             string clrAssemblyName = null;
@@ -338,7 +456,12 @@ namespace System.Runtime.Serialization
         }
 
         // Update the overloads whenever you are changing this method
-        internal static void WriteClrTypeInfo(XmlWriterDelegator writer, Type dataContractType, SerializationBinder binder, SerializationInfo serInfo)
+        internal static void WriteClrTypeInfo(
+            XmlWriterDelegator writer,
+            Type dataContractType,
+            SerializationBinder binder,
+            SerializationInfo serInfo
+        )
         {
             TypeInformation typeInformation = null;
             string clrTypeName = null;
@@ -357,7 +480,9 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    typeInformation = NetDataContractSerializer.GetTypeInformation(serInfo.ObjectType);
+                    typeInformation = NetDataContractSerializer.GetTypeInformation(
+                        serInfo.ObjectType
+                    );
                     clrTypeName = typeInformation.FullTypeName;
                 }
             }
@@ -370,21 +495,38 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    clrAssemblyName = (typeInformation == null) ?
-                    NetDataContractSerializer.GetTypeInformation(serInfo.ObjectType).AssemblyString :
-                    typeInformation.AssemblyString;
+                    clrAssemblyName =
+                        (typeInformation == null)
+                            ? NetDataContractSerializer
+                                .GetTypeInformation(serInfo.ObjectType)
+                                .AssemblyString
+                            : typeInformation.AssemblyString;
                 }
             }
 
             WriteClrTypeInfo(writer, clrTypeName, clrAssemblyName);
         }
 
-        static void WriteClrTypeInfo(XmlWriterDelegator writer, string clrTypeName, string clrAssemblyName)
+        static void WriteClrTypeInfo(
+            XmlWriterDelegator writer,
+            string clrTypeName,
+            string clrAssemblyName
+        )
         {
             if (clrTypeName != null)
-                writer.WriteAttributeString(Globals.SerPrefix, DictionaryGlobals.ClrTypeLocalName, DictionaryGlobals.SerializationNamespace, DataContract.GetClrTypeString(clrTypeName));
+                writer.WriteAttributeString(
+                    Globals.SerPrefix,
+                    DictionaryGlobals.ClrTypeLocalName,
+                    DictionaryGlobals.SerializationNamespace,
+                    DataContract.GetClrTypeString(clrTypeName)
+                );
             if (clrAssemblyName != null)
-                writer.WriteAttributeString(Globals.SerPrefix, DictionaryGlobals.ClrAssemblyLocalName, DictionaryGlobals.SerializationNamespace, DataContract.GetClrTypeString(clrAssemblyName));
+                writer.WriteAttributeString(
+                    Globals.SerPrefix,
+                    DictionaryGlobals.ClrAssemblyLocalName,
+                    DictionaryGlobals.SerializationNamespace,
+                    DataContract.GetClrTypeString(clrAssemblyName)
+                );
         }
 
         public override void WriteEndObject(XmlDictionaryWriter writer)
@@ -399,7 +541,10 @@ namespace System.Runtime.Serialization
 
         public override object ReadObject(XmlReader reader)
         {
-            return ReadObjectHandleExceptions(new XmlReaderDelegator(reader), true /*verifyObjectName*/);
+            return ReadObjectHandleExceptions(
+                new XmlReaderDelegator(reader),
+                true /*verifyObjectName*/
+            );
         }
 
         public override object ReadObject(XmlReader reader, bool verifyObjectName)
@@ -422,18 +567,32 @@ namespace System.Runtime.Serialization
             return IsStartObjectHandleExceptions(new XmlReaderDelegator(reader));
         }
 
-        internal override object InternalReadObject(XmlReaderDelegator xmlReader, bool verifyObjectName)
+        internal override object InternalReadObject(
+            XmlReaderDelegator xmlReader,
+            bool verifyObjectName
+        )
         {
             if (MaxItemsInObjectGraph == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
+                    )
+                );
 
             // verifyObjectName has no effect in SharedType mode
             if (!IsStartElement(xmlReader))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(SR.GetString(SR.ExpectingElementAtDeserialize, XmlNodeType.Element), xmlReader));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
+                        SR.GetString(SR.ExpectingElementAtDeserialize, XmlNodeType.Element),
+                        xmlReader
+                    )
+                );
             }
 
-            XmlObjectSerializerReadContext context = XmlObjectSerializerReadContext.CreateContext(this);
+            XmlObjectSerializerReadContext context = XmlObjectSerializerReadContext.CreateContext(
+                this
+            );
             return context.InternalDeserialize(xmlReader, null, null, null);
         }
 
@@ -444,7 +603,10 @@ namespace System.Runtime.Serialization
 
         internal DataContract GetDataContract(object obj, ref Hashtable surrogateDataContracts)
         {
-            return GetDataContract(((obj == null) ? Globals.TypeOfObject : obj.GetType()), ref surrogateDataContracts);
+            return GetDataContract(
+                ((obj == null) ? Globals.TypeOfObject : obj.GetType()),
+                ref surrogateDataContracts
+            );
         }
 
         internal DataContract GetDataContract(Type type, ref Hashtable surrogateDataContracts)
@@ -452,15 +614,29 @@ namespace System.Runtime.Serialization
             return GetDataContract(type.TypeHandle, type, ref surrogateDataContracts);
         }
 
-        internal DataContract GetDataContract(RuntimeTypeHandle typeHandle, Type type, ref Hashtable surrogateDataContracts)
+        internal DataContract GetDataContract(
+            RuntimeTypeHandle typeHandle,
+            Type type,
+            ref Hashtable surrogateDataContracts
+        )
         {
-            DataContract dataContract = GetDataContractFromSurrogateSelector(surrogateSelector, Context, typeHandle, type, ref surrogateDataContracts);
+            DataContract dataContract = GetDataContractFromSurrogateSelector(
+                surrogateSelector,
+                Context,
+                typeHandle,
+                type,
+                ref surrogateDataContracts
+            );
             if (dataContract != null)
                 return dataContract;
 
             if (cachedDataContract == null)
             {
-                dataContract = DataContract.GetDataContract(typeHandle, type, SerializationMode.SharedType);
+                dataContract = DataContract.GetDataContract(
+                    typeHandle,
+                    type,
+                    SerializationMode.SharedType
+                );
                 cachedDataContract = dataContract;
                 return dataContract;
             }
@@ -472,17 +648,30 @@ namespace System.Runtime.Serialization
             return DataContract.GetDataContract(typeHandle, type, SerializationMode.SharedType);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls the critical methods of ISurrogateSelector", Safe = "Demands for FullTrust")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls the critical methods of ISurrogateSelector",
+            Safe = "Demands for FullTrust"
+        )]
         [SecuritySafeCritical]
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static ISerializationSurrogate GetSurrogate(Type type, ISurrogateSelector surrogateSelector, StreamingContext context)
+        static ISerializationSurrogate GetSurrogate(
+            Type type,
+            ISurrogateSelector surrogateSelector,
+            StreamingContext context
+        )
         {
             ISurrogateSelector surrogateSelectorNotUsed;
             return surrogateSelector.GetSurrogate(type, context, out surrogateSelectorNotUsed);
         }
 
-        internal static DataContract GetDataContractFromSurrogateSelector(ISurrogateSelector surrogateSelector, StreamingContext context, RuntimeTypeHandle typeHandle, Type type, ref Hashtable surrogateDataContracts)
+        internal static DataContract GetDataContractFromSurrogateSelector(
+            ISurrogateSelector surrogateSelector,
+            StreamingContext context,
+            RuntimeTypeHandle typeHandle,
+            Type type,
+            ref Hashtable surrogateDataContracts
+        )
         {
             if (surrogateSelector == null)
                 return null;
@@ -505,9 +694,19 @@ namespace System.Runtime.Serialization
             else if (type.IsArray)
             {
                 Type elementType = type.GetElementType();
-                DataContract itemContract = GetDataContractFromSurrogateSelector(surrogateSelector, context, elementType.TypeHandle, elementType, ref surrogateDataContracts);
+                DataContract itemContract = GetDataContractFromSurrogateSelector(
+                    surrogateSelector,
+                    context,
+                    elementType.TypeHandle,
+                    elementType,
+                    ref surrogateDataContracts
+                );
                 if (itemContract == null)
-                    itemContract = DataContract.GetDataContract(elementType.TypeHandle, elementType, SerializationMode.SharedType);
+                    itemContract = DataContract.GetDataContract(
+                        elementType.TypeHandle,
+                        elementType,
+                        SerializationMode.SharedType
+                    );
                 surrogateContract = new CollectionDataContract(type, itemContract);
             }
             if (surrogateContract != null)
@@ -520,7 +719,6 @@ namespace System.Runtime.Serialization
             return null;
         }
 
-
         internal static TypeInformation GetTypeInformation(Type type)
         {
             TypeInformation typeInformation = null;
@@ -528,8 +726,15 @@ namespace System.Runtime.Serialization
             if (typeInformationObject == null)
             {
                 bool hasTypeForwardedFrom;
-                string assemblyName = DataContract.GetClrAssemblyName(type, out hasTypeForwardedFrom);
-                typeInformation = new TypeInformation(DataContract.GetClrTypeFullNameUsingTypeForwardedFromAttribute(type), assemblyName, hasTypeForwardedFrom);
+                string assemblyName = DataContract.GetClrAssemblyName(
+                    type,
+                    out hasTypeForwardedFrom
+                );
+                typeInformation = new TypeInformation(
+                    DataContract.GetClrTypeFullNameUsingTypeForwardedFromAttribute(type),
+                    assemblyName,
+                    hasTypeForwardedFrom
+                );
                 lock (typeNameCache)
                 {
                     typeNameCache[type] = typeInformation;
@@ -542,7 +747,10 @@ namespace System.Runtime.Serialization
             return typeInformation;
         }
 
-        static bool IsAssemblyNameForwardingSafe(string originalAssemblyName, string newAssemblyName)
+        static bool IsAssemblyNameForwardingSafe(
+            string originalAssemblyName,
+            string newAssemblyName
+        )
         {
             if (originalAssemblyName == newAssemblyName)
             {
@@ -554,22 +762,41 @@ namespace System.Runtime.Serialization
 
             // mscorlib will get loaded by the runtime regardless of its string casing or its public key token,
             // so setting the assembly name to mscorlib is always unsafe
-            if (string.Equals(newAssembly.Name, Globals.MscorlibAssemblySimpleName, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(newAssembly.Name, Globals.MscorlibFileName, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    newAssembly.Name,
+                    Globals.MscorlibAssemblySimpleName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                || string.Equals(
+                    newAssembly.Name,
+                    Globals.MscorlibFileName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
 
-            return IsPublicKeyTokenForwardingSafe(originalAssembly.GetPublicKeyToken(), newAssembly.GetPublicKeyToken());
+            return IsPublicKeyTokenForwardingSafe(
+                originalAssembly.GetPublicKeyToken(),
+                newAssembly.GetPublicKeyToken()
+            );
         }
 
         static bool IsPublicKeyTokenForwardingSafe(byte[] sourceToken, byte[] destinationToken)
         {
-            if (sourceToken == null || destinationToken == null || sourceToken.Length == 0 || destinationToken.Length == 0 || sourceToken.Length != destinationToken.Length)
+            if (
+                sourceToken == null
+                || destinationToken == null
+                || sourceToken.Length == 0
+                || destinationToken.Length == 0
+                || sourceToken.Length != destinationToken.Length
+            )
             {
                 return false;
             }
-            
+
             for (int i = 0; i < sourceToken.Length; i++)
             {
                 if (sourceToken[i] != destinationToken[i])
@@ -580,5 +807,4 @@ namespace System.Runtime.Serialization
             return true;
         }
     }
-
 }

@@ -27,8 +27,9 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     public void CanAdd()
     {
         using var context = CreateContext();
-        context.Database.CreateExecutionStrategy().Execute(
-            context, contextScoped =>
+        context
+            .Database.CreateExecutionStrategy()
+            .Execute(context, contextScoped =>
             {
                 using (contextScoped.Database.BeginTransaction())
                 {
@@ -38,8 +39,9 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
                             Name = "Blue Cloud",
                             ProductNumber = "xxxxxxxxxxx",
                             Weight = 0.01m,
-                            SellStartDate = DateTime.Now
-                        });
+                            SellStartDate = DateTime.Now,
+                        }
+                    );
                     Assert.Equal(1, contextScoped.SaveChanges());
                 }
             });
@@ -49,8 +51,9 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     public void CanUpdate()
     {
         using var context = CreateContext();
-        context.Database.CreateExecutionStrategy().Execute(
-            context, contextScoped =>
+        context
+            .Database.CreateExecutionStrategy()
+            .Execute(context, contextScoped =>
             {
                 using (contextScoped.Database.BeginTransaction())
                 {
@@ -69,14 +72,13 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     public void IncludeQuery()
     {
         using var context = CreateContext();
-        var order = context.SalesOrders
-            .OrderBy(s => s.SalesOrderID)
+        var order = context
+            .SalesOrders.OrderBy(s => s.SalesOrderID)
             .Include(s => s.Customer)
             .First();
 
         Assert.NotNull(order.Customer);
     }
 
-    protected AdventureWorksContext CreateContext()
-        => Fixture.CreateContext();
+    protected AdventureWorksContext CreateContext() => Fixture.CreateContext();
 }

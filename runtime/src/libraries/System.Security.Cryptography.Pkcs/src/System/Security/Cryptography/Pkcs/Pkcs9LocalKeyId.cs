@@ -11,16 +11,12 @@ namespace System.Security.Cryptography.Pkcs
     {
         private byte[]? _lazyKeyId;
 
-        public Pkcs9LocalKeyId() :
-            base(Oids.LocalKeyIdOid.CopyOid())
-        {
-        }
+        public Pkcs9LocalKeyId()
+            : base(Oids.LocalKeyIdOid.CopyOid()) { }
 
         public Pkcs9LocalKeyId(byte[] keyId)
             // The ReadOnlySpan constructor permits null
-            : this(new ReadOnlySpan<byte>(keyId))
-        {
-        }
+            : this(new ReadOnlySpan<byte>(keyId)) { }
 
         public Pkcs9LocalKeyId(ReadOnlySpan<byte> keyId)
             : this()
@@ -30,8 +26,7 @@ namespace System.Security.Cryptography.Pkcs
             RawData = writer.Encode();
         }
 
-        public ReadOnlyMemory<byte> KeyId =>
-            _lazyKeyId ??= Decode(RawData);
+        public ReadOnlyMemory<byte> KeyId => _lazyKeyId ??= Decode(RawData);
 
         public override void CopyFrom(AsnEncodedData asnEncodedData)
         {

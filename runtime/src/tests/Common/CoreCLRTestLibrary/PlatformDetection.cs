@@ -12,15 +12,22 @@ namespace TestLibrary
         public static bool Is32BitProcess => IntPtr.Size == 4;
         public static bool Is64BitProcess => IntPtr.Size == 8;
 
-        public static bool IsX86Process => RuntimeInformation.ProcessArchitecture == Architecture.X86;
+        public static bool IsX86Process =>
+            RuntimeInformation.ProcessArchitecture == Architecture.X86;
         public static bool IsNotX86Process => !IsX86Process;
 
         public static bool IsWindows => OperatingSystem.IsWindows();
 
-        public static bool IsBuiltInComEnabled => IsWindows
-                                            && (AppContext.TryGetSwitch("System.Runtime.InteropServices.BuiltInComInterop.IsSupported", out bool isEnabled)
-                                                ? isEnabled
-                                                : true);
+        public static bool IsBuiltInComEnabled =>
+            IsWindows
+            && (
+                AppContext.TryGetSwitch(
+                    "System.Runtime.InteropServices.BuiltInComInterop.IsSupported",
+                    out bool isEnabled
+                )
+                    ? isEnabled
+                    : true
+            );
 
         public static bool IsRareEnumsSupported => !Utilities.IsNativeAot;
 
@@ -37,10 +44,10 @@ namespace TestLibrary
                         Array.CreateInstance(typeof(int), new int[] { 5 }, new int[] { 5 });
                         nonZeroLowerBoundArraysSupported = true;
                     }
-                    catch (PlatformNotSupportedException)
-                    {
-                    }
-                    s_lazyNonZeroLowerBoundArraySupported = Tuple.Create<bool>(nonZeroLowerBoundArraysSupported);
+                    catch (PlatformNotSupportedException) { }
+                    s_lazyNonZeroLowerBoundArraySupported = Tuple.Create<bool>(
+                        nonZeroLowerBoundArraysSupported
+                    );
                 }
                 return s_lazyNonZeroLowerBoundArraySupported.Item1;
             }

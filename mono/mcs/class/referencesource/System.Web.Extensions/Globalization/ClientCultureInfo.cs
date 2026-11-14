@@ -3,18 +3,19 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.Globalization {
+
+namespace System.Web.Globalization
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Globalization;
     using System.Text;
-    using System.Web.Util;
     using System.Web.Script.Serialization;
+    using System.Web.Util;
 
-    internal class ClientCultureInfo {
-
+    internal class ClientCultureInfo
+    {
         private static Hashtable cultureScriptBlockCache = Hashtable.Synchronized(new Hashtable());
         private static readonly CultureInfo enUS = CultureInfo.GetCultureInfo(0x409);
         private static int eraNumber = 0;
@@ -29,12 +30,14 @@ namespace System.Web.Globalization {
         private string _convertScript;
         private int _adjustment;
 
-        private ClientCultureInfo(CultureInfo cultureInfo) {
+        private ClientCultureInfo(CultureInfo cultureInfo)
+        {
             name = cultureInfo.Name;
             numberFormat = cultureInfo.NumberFormat;
             dateTimeFormat = cultureInfo.DateTimeFormat;
             var calendar = dateTimeFormat == null ? null : dateTimeFormat.Calendar;
-            if (calendar != null) {
+            if (calendar != null)
+            {
                 // Dev10 425049: Support Eras for gregorian based calendars
                 // with a simple year offset, and non-gregorian calendars.
                 // Era data is stored in binary resource "culture.nlp" in mscorlib,
@@ -43,7 +46,8 @@ namespace System.Web.Globalization {
                 // [eraNumber1, eraName1, eraStartInTicks1, eraGregorianYearOffset1, eraNumber2, ...]
                 eras = new object[calendar.Eras.Length * 4];
                 int i = 0;
-                foreach (int era in calendar.Eras) {
+                foreach (int era in calendar.Eras)
+                {
                     // era number
                     eras[i + eraNumber] = era;
                     // era name
@@ -60,23 +64,28 @@ namespace System.Web.Globalization {
                     i += 4;
                 }
                 var calendarType = calendar.GetType();
-                if (calendarType != typeof(GregorianCalendar)) {
-                    if (calendarType == typeof(TaiwanCalendar)) {
+                if (calendarType != typeof(GregorianCalendar))
+                {
+                    if (calendarType == typeof(TaiwanCalendar))
+                    {
                         // Only the current era is supported, so no tick count is needed
                         //eras[eraStart] = -1830384000000;
                         eras[eraYearOffset] = 1911;
                     }
-                    else if (calendarType == typeof(KoreanCalendar)) {
+                    else if (calendarType == typeof(KoreanCalendar))
+                    {
                         // only one era to speak of, so no tick count is needed
                         //eras[eraStart] = -62135596800000;
                         eras[eraYearOffset] = -2333;
                     }
-                    else if (calendarType == typeof(ThaiBuddhistCalendar)) {
+                    else if (calendarType == typeof(ThaiBuddhistCalendar))
+                    {
                         // only one era to speak of, so no tick count is needed
                         //eras[eraStart] = -62135596800000;
                         eras[eraYearOffset] = -543;
                     }
-                    else if (calendarType == typeof(JapaneseCalendar)) {
+                    else if (calendarType == typeof(JapaneseCalendar))
+                    {
                         // there are multiple eras
                         eras[0 + eraStart] = 60022080000;
                         eras[0 + eraYearOffset] = 1988;
@@ -89,43 +98,59 @@ namespace System.Web.Globalization {
                         //eras[12 + eraStart] = -3218832000000;
                         eras[12 + eraYearOffset] = 1867;
                     }
-                    else if (calendarType == typeof(HijriCalendar)) {
+                    else if (calendarType == typeof(HijriCalendar))
+                    {
                         _convertScript = "Date.HijriCalendar.js";
                         _adjustment = ((HijriCalendar)calendar).HijriAdjustment;
                     }
-                    else if (calendarType == typeof(UmAlQuraCalendar)) {
+                    else if (calendarType == typeof(UmAlQuraCalendar))
+                    {
                         _convertScript = "Date.UmAlQuraCalendar.js";
                     }
                     // else { other calendars arent supported or have no era offsets just different names for A.D.
                 }
             }
-            
         }
 
-        internal Tuple<String, String> GetClientCultureScriptBlock() {
+        internal Tuple<String, String> GetClientCultureScriptBlock()
+        {
             return GetClientCultureScriptBlock(CultureInfo.CurrentCulture);
         }
 
-        internal static Tuple<String, String> GetClientCultureScriptBlock(CultureInfo cultureInfo) {
-            if (cultureInfo == null) {
+        internal static Tuple<String, String> GetClientCultureScriptBlock(CultureInfo cultureInfo)
+        {
+            if (cultureInfo == null)
+            {
                 return null;
             }
 
             // note: DateTimeFormat could be null since it is a virtual property, but DateTimeFormat.Calendar cannot be
-            Type calendarType = cultureInfo.DateTimeFormat == null ? null : cultureInfo.DateTimeFormat.Calendar.GetType();
-            if (cultureInfo.Equals(enUS) && (calendarType == typeof(GregorianCalendar))) {
+            Type calendarType =
+                cultureInfo.DateTimeFormat == null
+                    ? null
+                    : cultureInfo.DateTimeFormat.Calendar.GetType();
+            if (cultureInfo.Equals(enUS) && (calendarType == typeof(GregorianCalendar)))
+            {
                 return null;
             }
 
             var key = new Tuple<CultureInfo, Type>(cultureInfo, calendarType);
             Tuple<String, String> cached = cultureScriptBlockCache[key] as Tuple<String, String>;
-            if (cached == null) {
+            if (cached == null)
+            {
                 ClientCultureInfo clientCultureInfo = new ClientCultureInfo(cultureInfo);
-                string json = JavaScriptSerializer.SerializeInternal(BuildSerializeableCultureInfo(clientCultureInfo));
-                if (json.Length > 0) {
+                string json = JavaScriptSerializer.SerializeInternal(
+                    BuildSerializeableCultureInfo(clientCultureInfo)
+                );
+                if (json.Length > 0)
+                {
                     string script = "var __cultureInfo = " + json + ";";
-                    if (clientCultureInfo._adjustment != 0) {
-                        script += "\r\n__cultureInfo.dateTimeFormat.Calendar._adjustment = " + clientCultureInfo._adjustment.ToString(CultureInfo.InvariantCulture) + ";";
+                    if (clientCultureInfo._adjustment != 0)
+                    {
+                        script +=
+                            "\r\n__cultureInfo.dateTimeFormat.Calendar._adjustment = "
+                            + clientCultureInfo._adjustment.ToString(CultureInfo.InvariantCulture)
+                            + ";";
                     }
                     cached = new Tuple<String, String>(script, clientCultureInfo._convertScript);
                 }
@@ -134,7 +159,10 @@ namespace System.Web.Globalization {
             return cached;
         }
 
-        private static OrderedDictionary BuildSerializeableCultureInfo(ClientCultureInfo clientCultureInfo) {
+        private static OrderedDictionary BuildSerializeableCultureInfo(
+            ClientCultureInfo clientCultureInfo
+        )
+        {
             // It's safe to serialize the values set in the dictionary
             //  name is a string
             //  numberFormat is NumberFormatInfo which is a public type

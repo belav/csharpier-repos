@@ -14,9 +14,7 @@ namespace System.Activities.XamlIntegration
     {
         private NetDataContractXmlSerializable<DynamicUpdateMap> content;
 
-        public DynamicUpdateMapExtension()
-        {
-        }
+        public DynamicUpdateMapExtension() { }
 
         public DynamicUpdateMapExtension(DynamicUpdateMap updateMap)
         {
@@ -25,10 +23,7 @@ namespace System.Activities.XamlIntegration
 
         public DynamicUpdateMap UpdateMap
         {
-            get
-            {
-                return this.content != null ? this.content.Value : null;
-            }
+            get { return this.content != null ? this.content.Value : null; }
         }
 
         public IXmlSerializable XmlContent

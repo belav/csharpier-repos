@@ -119,6 +119,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PN_VOID,
         PN_EMPTY,
 
-        PN_COUNT,  // Not a name, this is the total count of predefined names
+        PN_COUNT, // Not a name, this is the total count of predefined names
     }
 }

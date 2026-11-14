@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using System.CommandLine.Binding;
-using System.CommandLine.Parsing;
 using System.CommandLine.Completions;
+using System.CommandLine.Parsing;
 using System.Linq;
 
 namespace System.CommandLine
@@ -16,12 +16,12 @@ namespace System.CommandLine
     {
         private ArgumentArity _arity;
         private TryConvertArgument? _convertArguments;
-        private List<Func<CompletionContext, IEnumerable<CompletionItem>>>? _completionSources = null;
+        private List<Func<CompletionContext, IEnumerable<CompletionItem>>>? _completionSources =
+            null;
         private List<Action<ArgumentResult>>? _validators = null;
 
-        private protected CliArgument(string name) : base(name, allowWhitespace: true)
-        {
-        }
+        private protected CliArgument(string name)
+            : base(name, allowWhitespace: true) { }
 
         /// <summary>
         /// Gets or sets the arity of the argument.
@@ -41,7 +41,7 @@ namespace System.CommandLine
         }
 
         /// <summary>
-        /// The name used in help output to describe the argument. 
+        /// The name used in help output to describe the argument.
         /// </summary>
         public string? HelpName { get; set; }
 
@@ -63,20 +63,27 @@ namespace System.CommandLine
                     Type? valueType = ValueType;
                     if (IsBoolean())
                     {
-                        _completionSources = new ()
+                        _completionSources = new()
                         {
-                            static _ => new CompletionItem[]
-                            {
-                                new(bool.TrueString),
-                                new(bool.FalseString)
-                            }
+                            static _ =>
+                                new CompletionItem[]
+                                {
+                                    new(bool.TrueString),
+                                    new(bool.FalseString),
+                                },
                         };
                     }
-                    else if (!valueType.IsPrimitive && (valueType.IsEnum || (valueType.TryGetNullableType(out valueType) && valueType.IsEnum)))
+                    else if (
+                        !valueType.IsPrimitive
+                        && (
+                            valueType.IsEnum
+                            || (valueType.TryGetNullableType(out valueType) && valueType.IsEnum)
+                        )
+                    )
                     {
                         _completionSources = new()
                         {
-                            _ => Enum.GetNames(valueType).Select(n => new CompletionItem(n))
+                            _ => Enum.GetNames(valueType).Select(n => new CompletionItem(n)),
                         };
                     }
                     else
@@ -98,7 +105,7 @@ namespace System.CommandLine
         /// Provides a list of argument validators. Validators can be used
         /// to provide custom errors based on user input.
         /// </summary>
-        public List<Action<ArgumentResult>> Validators => _validators ??= new ();
+        public List<Action<ArgumentResult>> Validators => _validators ??= new();
 
         internal bool HasValidators => (_validators?.Count ?? 0) > 0;
 
@@ -122,9 +129,9 @@ namespace System.CommandLine
         public override IEnumerable<CompletionItem> GetCompletions(CompletionContext context)
         {
             return CompletionSources
-                   .SelectMany(source => source.Invoke(context))
-                   .Distinct()
-                   .OrderBy(c => c.SortText, StringComparer.OrdinalIgnoreCase);
+                .SelectMany(source => source.Invoke(context))
+                .Distinct()
+                .OrderBy(c => c.SortText, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc />

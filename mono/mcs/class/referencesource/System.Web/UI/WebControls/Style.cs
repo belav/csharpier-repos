@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -17,16 +17,12 @@ namespace System.Web.UI.WebControls {
     using System.Web;
     using System.Web.UI;
 
-
     /// <devdoc>
     /// <para> Defines the properties and methods of the <see cref='System.Web.UI.WebControls.Style'/> class.</para>
     /// </devdoc>
-    [
-    ToolboxItem(false),
-    TypeConverterAttribute(typeof(EmptyStringExpandableObjectConverter))
-    ]
-    public class Style : Component, IStateManager {
-
+    [ToolboxItem(false), TypeConverterAttribute(typeof(EmptyStringExpandableObjectConverter))]
+    public class Style : Component, IStateManager
+    {
         // !!NOTE!!
         // PanelStyle also defines a set of flag contants and both sets have to
         // be unique.  Please be careful when adding new flags to either list.
@@ -60,17 +56,28 @@ namespace System.Web.UI.WebControls {
 
         // For performance, use this array instead of Enum.Format() to convert a BorderStyle to
         // a string.  CLR is investigating improving the perf of Enum.Format(). (VSWhidbey
-        internal static readonly string[] borderStyles = new string[] {"NotSet", "None", "Dotted",
-            "Dashed", "Solid", "Double", "Groove", "Ridge", "Inset", "Outset"};
-
+        internal static readonly string[] borderStyles = new string[]
+        {
+            "NotSet",
+            "None",
+            "Dotted",
+            "Dashed",
+            "Solid",
+            "Double",
+            "Groove",
+            "Ridge",
+            "Inset",
+            "Outset",
+        };
 
         /// <devdoc>
         /// Initializes a new instance of the Style class.
         /// </devdoc>
-        public Style() : this(null) {
+        public Style()
+            : this(null)
+        {
             ownStateBag = true;
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -79,7 +86,8 @@ namespace System.Web.UI.WebControls {
         ///       CreateControlStyle() and are changing some properties on the created style.
         ///    </para>
         /// </devdoc>
-        public Style(StateBag bag) {
+        public Style(StateBag bag)
+        {
             statebag = bag;
             marked = false;
             setBits = 0;
@@ -88,32 +96,34 @@ namespace System.Web.UI.WebControls {
             GC.SuppressFinalize(this);
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the background color property of the <see cref='System.Web.UI.WebControls.Style'/> class.
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(typeof(Color), ""),
-        WebSysDescription(SR.Style_BackColor),
-        NotifyParentProperty(true),
-        TypeConverterAttribute(typeof(WebColorConverter))
+            WebCategory("Appearance"),
+            DefaultValue(typeof(Color), ""),
+            WebSysDescription(SR.Style_BackColor),
+            NotifyParentProperty(true),
+            TypeConverterAttribute(typeof(WebColorConverter))
         ]
-        public Color BackColor {
-            get {
-                if (IsSet(PROP_BACKCOLOR)) {
-                    return(Color)(ViewState["BackColor"]);
+        public Color BackColor
+        {
+            get
+            {
+                if (IsSet(PROP_BACKCOLOR))
+                {
+                    return (Color)(ViewState["BackColor"]);
                 }
                 return Color.Empty;
             }
-            set {
+            set
+            {
                 ViewState["BackColor"] = value;
                 SetBit(PROP_BACKCOLOR);
             }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -121,25 +131,28 @@ namespace System.Web.UI.WebControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(typeof(Color), ""),
-        WebSysDescription(SR.Style_BorderColor),
-        NotifyParentProperty(true),
-        TypeConverterAttribute(typeof(WebColorConverter))
+            WebCategory("Appearance"),
+            DefaultValue(typeof(Color), ""),
+            WebSysDescription(SR.Style_BorderColor),
+            NotifyParentProperty(true),
+            TypeConverterAttribute(typeof(WebColorConverter))
         ]
-        public Color BorderColor {
-            get {
-                if (IsSet(PROP_BORDERCOLOR)) {
-                    return(Color)(ViewState["BorderColor"]);
+        public Color BorderColor
+        {
+            get
+            {
+                if (IsSet(PROP_BORDERCOLOR))
+                {
+                    return (Color)(ViewState["BorderColor"]);
                 }
                 return Color.Empty;
             }
-            set {
+            set
+            {
                 ViewState["BorderColor"] = value;
                 SetBit(PROP_BORDERCOLOR);
             }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -147,47 +160,59 @@ namespace System.Web.UI.WebControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(typeof(Unit), ""),
-        WebSysDescription(SR.Style_BorderWidth),
-        NotifyParentProperty(true)
+            WebCategory("Appearance"),
+            DefaultValue(typeof(Unit), ""),
+            WebSysDescription(SR.Style_BorderWidth),
+            NotifyParentProperty(true)
         ]
-        public Unit BorderWidth {
-            get {
-                if (IsSet(PROP_BORDERWIDTH)) {
-                    return(Unit)(ViewState["BorderWidth"]);
+        public Unit BorderWidth
+        {
+            get
+            {
+                if (IsSet(PROP_BORDERWIDTH))
+                {
+                    return (Unit)(ViewState["BorderWidth"]);
                 }
                 return Unit.Empty;
             }
-            set {
-                if ((value.Type == UnitType.Percentage) || (value.Value < 0)) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.Style_InvalidBorderWidth));
+            set
+            {
+                if ((value.Type == UnitType.Percentage) || (value.Value < 0))
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.Style_InvalidBorderWidth)
+                    );
                 }
                 ViewState["BorderWidth"] = value;
                 SetBit(PROP_BORDERWIDTH);
             }
         }
 
-
         /// <devdoc>
         /// <para>Gets or sets the border style property of the <see cref='System.Web.UI.WebControls.Style'/>
         /// class.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(BorderStyle.NotSet),
-        WebSysDescription(SR.Style_BorderStyle),
-        NotifyParentProperty(true)
+            WebCategory("Appearance"),
+            DefaultValue(BorderStyle.NotSet),
+            WebSysDescription(SR.Style_BorderStyle),
+            NotifyParentProperty(true)
         ]
-        public BorderStyle BorderStyle {
-            get {
-                if (IsSet(PROP_BORDERSTYLE)) {
-                    return(BorderStyle)(ViewState["BorderStyle"]);
+        public BorderStyle BorderStyle
+        {
+            get
+            {
+                if (IsSet(PROP_BORDERSTYLE))
+                {
+                    return (BorderStyle)(ViewState["BorderStyle"]);
                 }
                 return BorderStyle.NotSet;
             }
-            set {
-                if (value < BorderStyle.NotSet || value > BorderStyle.Outset) {
+            set
+            {
+                if (value < BorderStyle.NotSet || value > BorderStyle.Outset)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["BorderStyle"] = value;
@@ -195,49 +220,52 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <devdoc>
         /// <para>Gets or sets the CSS class property of the <see cref='System.Web.UI.WebControls.Style'/> class.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        WebSysDescription(SR.Style_CSSClass),
-        NotifyParentProperty(true),
-        CssClassProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            WebSysDescription(SR.Style_CSSClass),
+            NotifyParentProperty(true),
+            CssClassProperty()
         ]
-        public string CssClass {
-            get {
-                if (IsSet(PROP_CSSCLASS)) {
+        public string CssClass
+        {
+            get
+            {
+                if (IsSet(PROP_CSSCLASS))
+                {
                     string s = (string)ViewState["CssClass"];
                     return (s == null) ? String.Empty : s;
                 }
                 return String.Empty;
             }
-            set {
+            set
+            {
                 ViewState["CssClass"] = value;
                 SetBit(PROP_CSSCLASS);
             }
         }
 
-
         /// <devdoc>
         /// <para>Gets font information of the <see cref='System.Web.UI.WebControls.Style'/> class.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        WebSysDescription(SR.Style_Font),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true)
+            WebCategory("Appearance"),
+            WebSysDescription(SR.Style_Font),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true)
         ]
-        public FontInfo Font {
-            get {
+        public FontInfo Font
+        {
+            get
+            {
                 if (fontInfo == null)
                     fontInfo = new FontInfo(this);
                 return fontInfo;
             }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -247,25 +275,28 @@ namespace System.Web.UI.WebControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(typeof(Color), ""),
-        WebSysDescription(SR.Style_ForeColor),
-        NotifyParentProperty(true),
-        TypeConverterAttribute(typeof(WebColorConverter))
+            WebCategory("Appearance"),
+            DefaultValue(typeof(Color), ""),
+            WebSysDescription(SR.Style_ForeColor),
+            NotifyParentProperty(true),
+            TypeConverterAttribute(typeof(WebColorConverter))
         ]
-        public Color ForeColor {
-            get {
-                if (IsSet(PROP_FORECOLOR)) {
-                    return(Color)(ViewState["ForeColor"]);
+        public Color ForeColor
+        {
+            get
+            {
+                if (IsSet(PROP_FORECOLOR))
+                {
+                    return (Color)(ViewState["ForeColor"]);
                 }
                 return Color.Empty;
             }
-            set {
+            set
+            {
                 ViewState["ForeColor"] = value;
                 SetBit(PROP_FORECOLOR);
             }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -273,83 +304,85 @@ namespace System.Web.UI.WebControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(typeof(Unit), ""),
-        WebSysDescription(SR.Style_Height),
-        NotifyParentProperty(true)
+            WebCategory("Layout"),
+            DefaultValue(typeof(Unit), ""),
+            WebSysDescription(SR.Style_Height),
+            NotifyParentProperty(true)
         ]
-        public Unit Height {
-            get {
-                if (IsSet(PROP_HEIGHT)) {
-                    return(Unit)(ViewState["Height"]);
+        public Unit Height
+        {
+            get
+            {
+                if (IsSet(PROP_HEIGHT))
+                {
+                    return (Unit)(ViewState["Height"]);
                 }
                 return Unit.Empty;
             }
-            set {
-                if (value.Value < 0) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.Style_InvalidHeight));
+            set
+            {
+                if (value.Value < 0)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.Style_InvalidHeight)
+                    );
                 }
                 ViewState["Height"] = value;
                 SetBit(PROP_HEIGHT);
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// Gets a value indicating whether any style properties have been set.
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public virtual bool IsEmpty {
-            get {
-                return ((setBits == 0) && (RegisteredCssClass.Length == 0));
-            }
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual bool IsEmpty
+        {
+            get { return ((setBits == 0) && (RegisteredCssClass.Length == 0)); }
         }
-
 
         /// <devdoc>
         /// Returns a value indicating whether
         /// any style elements have been defined in the state bag.
         /// </devdoc>
-        protected bool IsTrackingViewState {
-            get {
-                return marked;
-            }
+        protected bool IsTrackingViewState
+        {
+            get { return marked; }
         }
-
 
         /// <devdoc>
         /// </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        EditorBrowsable(EditorBrowsableState.Advanced)
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            EditorBrowsable(EditorBrowsableState.Advanced)
         ]
-        public string RegisteredCssClass {
-            get {
-                if (registeredCssClass == null) {
+        public string RegisteredCssClass
+        {
+            get
+            {
+                if (registeredCssClass == null)
+                {
                     return String.Empty;
                 }
                 return registeredCssClass;
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// Gets the state bag that holds the style properties.
         /// Marked as internal, because FontInfo accesses view state of its owner Style
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        protected internal StateBag ViewState {
-            get {
-                if (statebag == null) {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        protected internal StateBag ViewState
+        {
+            get
+            {
+                if (statebag == null)
+                {
                     statebag = new StateBag(false);
                     if (IsTrackingViewState)
                         statebag.TrackViewState();
@@ -358,41 +391,47 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the width property of the <see cref='System.Web.UI.WebControls.Style'/> class.
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(typeof(Unit), ""),
-        WebSysDescription(SR.Style_Width),
-        NotifyParentProperty(true)
+            WebCategory("Layout"),
+            DefaultValue(typeof(Unit), ""),
+            WebSysDescription(SR.Style_Width),
+            NotifyParentProperty(true)
         ]
-        public Unit Width {
-            get {
-                if (IsSet(PROP_WIDTH)) {
-                    return(Unit)(ViewState["Width"]);
+        public Unit Width
+        {
+            get
+            {
+                if (IsSet(PROP_WIDTH))
+                {
+                    return (Unit)(ViewState["Width"]);
                 }
                 return Unit.Empty;
             }
-            set {
-                if (value.Value < 0) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.Style_InvalidWidth));
+            set
+            {
+                if (value.Value < 0)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.Style_InvalidWidth)
+                    );
                 }
                 ViewState["Width"] = value;
                 SetBit(PROP_WIDTH);
             }
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public void AddAttributesToRender(HtmlTextWriter writer) {
+        public void AddAttributesToRender(HtmlTextWriter writer)
+        {
             AddAttributesToRender(writer, null);
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -400,47 +439,53 @@ namespace System.Web.UI.WebControls {
         ///       to the client.
         ///    </para>
         /// </devdoc>
-        public virtual void AddAttributesToRender(HtmlTextWriter writer, WebControl owner) {
+        public virtual void AddAttributesToRender(HtmlTextWriter writer, WebControl owner)
+        {
             string cssClass = String.Empty;
             bool renderInlineStyle = true;
 
-            if (IsSet(PROP_CSSCLASS)) {
+            if (IsSet(PROP_CSSCLASS))
+            {
                 cssClass = (string)ViewState["CssClass"];
-                if (cssClass == null) {
+                if (cssClass == null)
+                {
                     cssClass = String.Empty;
                 }
             }
-            if (!String.IsNullOrEmpty(registeredCssClass)) {
+            if (!String.IsNullOrEmpty(registeredCssClass))
+            {
                 renderInlineStyle = false;
-                if (cssClass.Length != 0) {
+                if (cssClass.Length != 0)
+                {
                     cssClass += " " + registeredCssClass;
                 }
-                else {
+                else
+                {
                     cssClass = registeredCssClass;
                 }
             }
 
-            if (cssClass.Length > 0) {
-               writer.AddAttribute(HtmlTextWriterAttribute.Class, cssClass);
+            if (cssClass.Length > 0)
+            {
+                writer.AddAttribute(HtmlTextWriterAttribute.Class, cssClass);
             }
 
-            if (renderInlineStyle) {
+            if (renderInlineStyle)
+            {
                 CssStyleCollection styleAttributes = GetStyleAttributes(owner);
                 styleAttributes.Render(writer);
             }
         }
-
 
         /// <devdoc>
         ///    <para>
         ///       Clears the setBits int of the given bit.
         ///    </para>
         /// </devdoc>
-        internal void ClearBit(int bit) {
+        internal void ClearBit(int bit)
+        {
             setBits &= ~bit;
         }
-
-
 
         /// <devdoc>
         ///    <para>
@@ -448,59 +493,74 @@ namespace System.Web.UI.WebControls {
         ///       overwriting existing style elements if necessary.
         ///    </para>
         /// </devdoc>
-        public virtual void CopyFrom(Style s) {
-            if (RegisteredCssClass.Length != 0) {
-                throw new InvalidOperationException(SR.GetString(SR.Style_RegisteredStylesAreReadOnly));
+        public virtual void CopyFrom(Style s)
+        {
+            if (RegisteredCssClass.Length != 0)
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Style_RegisteredStylesAreReadOnly)
+                );
             }
 
-            if (s != null && !s.IsEmpty) {
+            if (s != null && !s.IsEmpty)
+            {
                 this.Font.CopyFrom(s.Font);
 
                 if (s.IsSet(PROP_CSSCLASS))
                     this.CssClass = s.CssClass;
 
-
                 // if the source Style is registered and this one isn't,
                 // reset all the styles set by the source Style so it's
                 // css class can be used to set those values
-                if (s.RegisteredCssClass.Length != 0) {
-                    if (IsSet(PROP_CSSCLASS)) {
+                if (s.RegisteredCssClass.Length != 0)
+                {
+                    if (IsSet(PROP_CSSCLASS))
+                    {
                         CssClass += " " + s.RegisteredCssClass;
                     }
-                    else {
+                    else
+                    {
                         CssClass = s.RegisteredCssClass;
                     }
 
-                    if (s.IsSet(PROP_BACKCOLOR) && (s.BackColor != Color.Empty)) {
+                    if (s.IsSet(PROP_BACKCOLOR) && (s.BackColor != Color.Empty))
+                    {
                         ViewState.Remove("BackColor");
                         ClearBit(PROP_BACKCOLOR);
                     }
-                    if (s.IsSet(PROP_FORECOLOR) && (s.ForeColor != Color.Empty)) {
+                    if (s.IsSet(PROP_FORECOLOR) && (s.ForeColor != Color.Empty))
+                    {
                         ViewState.Remove("ForeColor");
                         ClearBit(PROP_FORECOLOR);
                     }
-                    if (s.IsSet(PROP_BORDERCOLOR) && (s.BorderColor != Color.Empty)) {
+                    if (s.IsSet(PROP_BORDERCOLOR) && (s.BorderColor != Color.Empty))
+                    {
                         ViewState.Remove("BorderColor");
                         ClearBit(PROP_BORDERCOLOR);
                     }
-                    if (s.IsSet(PROP_BORDERWIDTH) && (s.BorderWidth != Unit.Empty)) {
+                    if (s.IsSet(PROP_BORDERWIDTH) && (s.BorderWidth != Unit.Empty))
+                    {
                         ViewState.Remove("BorderWidth");
                         ClearBit(PROP_BORDERWIDTH);
                     }
-                    if (s.IsSet(PROP_BORDERSTYLE)) {
+                    if (s.IsSet(PROP_BORDERSTYLE))
+                    {
                         ViewState.Remove("BorderStyle");
                         ClearBit(PROP_BORDERSTYLE);
                     }
-                    if (s.IsSet(PROP_HEIGHT) && (s.Height != Unit.Empty)) {
+                    if (s.IsSet(PROP_HEIGHT) && (s.Height != Unit.Empty))
+                    {
                         ViewState.Remove("Height");
                         ClearBit(PROP_HEIGHT);
                     }
-                    if (s.IsSet(PROP_WIDTH) && (s.Width != Unit.Empty)) {
+                    if (s.IsSet(PROP_WIDTH) && (s.Width != Unit.Empty))
+                    {
                         ViewState.Remove("Width");
                         ClearBit(PROP_WIDTH);
                     }
                 }
-                else {
+                else
+                {
                     if (s.IsSet(PROP_BACKCOLOR) && (s.BackColor != Color.Empty))
                         this.BackColor = s.BackColor;
                     if (s.IsSet(PROP_FORECOLOR) && (s.ForeColor != Color.Empty))
@@ -519,51 +579,69 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
-        protected virtual void FillStyleAttributes(CssStyleCollection attributes, IUrlResolutionService urlResolver) {
+        protected virtual void FillStyleAttributes(
+            CssStyleCollection attributes,
+            IUrlResolutionService urlResolver
+        )
+        {
             StateBag viewState = ViewState;
 
             Color c;
 
             // ForeColor
-            if (IsSet(PROP_FORECOLOR)) {
+            if (IsSet(PROP_FORECOLOR))
+            {
                 c = (Color)viewState["ForeColor"];
-                if (!c.IsEmpty) {
+                if (!c.IsEmpty)
+                {
                     attributes.Add(HtmlTextWriterStyle.Color, ColorTranslator.ToHtml(c));
                 }
             }
 
             // BackColor
-            if (IsSet(PROP_BACKCOLOR)) {
+            if (IsSet(PROP_BACKCOLOR))
+            {
                 c = (Color)viewState["BackColor"];
-                if (!c.IsEmpty) {
+                if (!c.IsEmpty)
+                {
                     attributes.Add(HtmlTextWriterStyle.BackgroundColor, ColorTranslator.ToHtml(c));
                 }
             }
 
             // BorderColor
-            if (IsSet(PROP_BORDERCOLOR)) {
+            if (IsSet(PROP_BORDERCOLOR))
+            {
                 c = (Color)viewState["BorderColor"];
-                if (!c.IsEmpty) {
+                if (!c.IsEmpty)
+                {
                     attributes.Add(HtmlTextWriterStyle.BorderColor, ColorTranslator.ToHtml(c));
                 }
             }
 
             BorderStyle bs = this.BorderStyle;
             Unit bu = this.BorderWidth;
-            if (!bu.IsEmpty) {
-                attributes.Add(HtmlTextWriterStyle.BorderWidth, bu.ToString(CultureInfo.InvariantCulture));
-                if (bs == BorderStyle.NotSet) {
-                    if (bu.Value != 0.0) {
+            if (!bu.IsEmpty)
+            {
+                attributes.Add(
+                    HtmlTextWriterStyle.BorderWidth,
+                    bu.ToString(CultureInfo.InvariantCulture)
+                );
+                if (bs == BorderStyle.NotSet)
+                {
+                    if (bu.Value != 0.0)
+                    {
                         attributes.Add(HtmlTextWriterStyle.BorderStyle, "solid");
                     }
                 }
-                else {
+                else
+                {
                     attributes.Add(HtmlTextWriterStyle.BorderStyle, borderStyles[(int)bs]);
                 }
             }
-            else {
-                if (bs != BorderStyle.NotSet) {
+            else
+            {
+                if (bs != BorderStyle.NotSet)
+                {
                     attributes.Add(HtmlTextWriterStyle.BorderStyle, borderStyles[(int)bs]);
                 }
             }
@@ -574,52 +652,73 @@ namespace System.Web.UI.WebControls {
 
             // Font.Names
             string[] names = font.Names;
-            if (names.Length > 0) {
+            if (names.Length > 0)
+            {
                 attributes.Add(HtmlTextWriterStyle.FontFamily, Style.FormatStringArray(names, ','));
             }
 
             // Font.Size
             FontUnit fu = font.Size;
-            if (fu.IsEmpty == false) {
-                attributes.Add(HtmlTextWriterStyle.FontSize, fu.ToString(CultureInfo.InvariantCulture));
+            if (fu.IsEmpty == false)
+            {
+                attributes.Add(
+                    HtmlTextWriterStyle.FontSize,
+                    fu.ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             // Font.Bold
-            if (IsSet(PROP_FONT_BOLD)) {
-                if (font.Bold) {
+            if (IsSet(PROP_FONT_BOLD))
+            {
+                if (font.Bold)
+                {
                     attributes.Add(HtmlTextWriterStyle.FontWeight, "bold");
                 }
-                else {
+                else
+                {
                     attributes.Add(HtmlTextWriterStyle.FontWeight, "normal");
                 }
             }
 
             // Font.Italic
-            if (IsSet(PROP_FONT_ITALIC)) {
-                if (font.Italic == true) {
+            if (IsSet(PROP_FONT_ITALIC))
+            {
+                if (font.Italic == true)
+                {
                     attributes.Add(HtmlTextWriterStyle.FontStyle, "italic");
                 }
-                else {
+                else
+                {
                     attributes.Add(HtmlTextWriterStyle.FontStyle, "normal");
                 }
             }
 
-            // 
+            //
             string textDecoration = String.Empty;
-            if (font.Underline) {
+            if (font.Underline)
+            {
                 textDecoration = "underline";
             }
-            if (font.Overline) {
+            if (font.Overline)
+            {
                 textDecoration += " overline";
             }
-            if (font.Strikeout) {
+            if (font.Strikeout)
+            {
                 textDecoration += " line-through";
             }
-            if (textDecoration.Length > 0) {
+            if (textDecoration.Length > 0)
+            {
                 attributes.Add(HtmlTextWriterStyle.TextDecoration, textDecoration);
             }
-            else {
-                if (IsSet(PROP_FONT_UNDERLINE) || IsSet(PROP_FONT_OVERLINE) || IsSet(PROP_FONT_STRIKEOUT)) {
+            else
+            {
+                if (
+                    IsSet(PROP_FONT_UNDERLINE)
+                    || IsSet(PROP_FONT_OVERLINE)
+                    || IsSet(PROP_FONT_STRIKEOUT)
+                )
+                {
                     attributes.Add(HtmlTextWriterStyle.TextDecoration, "none");
                 }
             }
@@ -627,65 +726,80 @@ namespace System.Web.UI.WebControls {
             Unit u;
 
             // Height
-            if (IsSet(PROP_HEIGHT)) {
+            if (IsSet(PROP_HEIGHT))
+            {
                 u = (Unit)viewState["Height"];
-                if (!u.IsEmpty) {
-                    attributes.Add(HtmlTextWriterStyle.Height, u.ToString(CultureInfo.InvariantCulture));
+                if (!u.IsEmpty)
+                {
+                    attributes.Add(
+                        HtmlTextWriterStyle.Height,
+                        u.ToString(CultureInfo.InvariantCulture)
+                    );
                 }
             }
 
             // Width
-            if (IsSet(PROP_WIDTH)) {
+            if (IsSet(PROP_WIDTH))
+            {
                 u = (Unit)viewState["Width"];
-                if (!u.IsEmpty) {
-                    attributes.Add(HtmlTextWriterStyle.Width, u.ToString(CultureInfo.InvariantCulture));
+                if (!u.IsEmpty)
+                {
+                    attributes.Add(
+                        HtmlTextWriterStyle.Width,
+                        u.ToString(CultureInfo.InvariantCulture)
+                    );
                 }
             }
         }
 
-        private static string FormatStringArray(string[] array, char delimiter) {
+        private static string FormatStringArray(string[] array, char delimiter)
+        {
             int n = array.Length;
 
-            if (n == 1) {
+            if (n == 1)
+            {
                 return array[0];
             }
-            if (n == 0) {
+            if (n == 0)
+            {
                 return String.Empty;
             }
             return String.Join(delimiter.ToString(CultureInfo.InvariantCulture), array);
         }
 
-
         /// <devdoc>
         /// Retrieves the collection of CSS style attributes represented by this style.
         /// </devdoc>
-        public CssStyleCollection GetStyleAttributes(IUrlResolutionService urlResolver) {
+        public CssStyleCollection GetStyleAttributes(IUrlResolutionService urlResolver)
+        {
             CssStyleCollection attributes = new CssStyleCollection();
 
             FillStyleAttributes(attributes, urlResolver);
             return attributes;
         }
 
-
         /// <devdoc>
         /// Returns a value indicating whether the specified style
         /// property has been defined in the state bag.
         /// </devdoc>
-        internal bool IsSet(int propKey) {
+        internal bool IsSet(int propKey)
+        {
             return (setBits & propKey) != 0;
         }
-
 
         /// <devdoc>
         /// Load the previously saved state.
         /// </devdoc>
-        protected internal void LoadViewState(object state) {
+        protected internal void LoadViewState(object state)
+        {
             if (state != null && ownStateBag)
                 ViewState.LoadViewState(state);
 
-            if (statebag != null) {
+            if (statebag != null)
+            {
                 object o = ViewState[SetBitsKey];
-                if (o != null) {
+                if (o != null)
+                {
                     markedBits = (int)o;
 
                     // markedBits indicates properties that got reloaded into
@@ -696,34 +810,39 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <devdoc>
         ///    A protected method. Marks the beginning for tracking
         ///    state changes on the control. Any changes made after "mark" will be tracked and
         ///    saved as part of the control viewstate.
         /// </devdoc>
-        protected internal virtual void TrackViewState() {
-            if (ownStateBag) {
+        protected internal virtual void TrackViewState()
+        {
+            if (ownStateBag)
+            {
                 ViewState.TrackViewState();
             }
 
             marked = true;
         }
 
-
         /// <devdoc>
         /// Copies non-blank elements from the specified style,
         /// but will not overwrite any existing style elements.
         /// </devdoc>
-        public virtual void MergeWith(Style s) {
-            if (RegisteredCssClass.Length != 0) {
-                throw new InvalidOperationException(SR.GetString(SR.Style_RegisteredStylesAreReadOnly));
+        public virtual void MergeWith(Style s)
+        {
+            if (RegisteredCssClass.Length != 0)
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Style_RegisteredStylesAreReadOnly)
+                );
             }
 
             if (s == null || s.IsEmpty)
                 return;
 
-            if (IsEmpty) {
+            if (IsEmpty)
+            {
                 // merge into an empty style is equivalent to a copy, which
                 // is more efficient
                 CopyFrom(s);
@@ -738,14 +857,27 @@ namespace System.Web.UI.WebControls {
             // If the source Style is registered and this one isn't, copy
             // the CSS class and any style props not included in the CSS class
             // if they aren't set on this Style
-            if (s.RegisteredCssClass.Length == 0) {
-                if (s.IsSet(PROP_BACKCOLOR) && (!this.IsSet(PROP_BACKCOLOR) || (BackColor == Color.Empty)))
+            if (s.RegisteredCssClass.Length == 0)
+            {
+                if (
+                    s.IsSet(PROP_BACKCOLOR)
+                    && (!this.IsSet(PROP_BACKCOLOR) || (BackColor == Color.Empty))
+                )
                     this.BackColor = s.BackColor;
-                if (s.IsSet(PROP_FORECOLOR) && (!this.IsSet(PROP_FORECOLOR) || (ForeColor == Color.Empty)))
+                if (
+                    s.IsSet(PROP_FORECOLOR)
+                    && (!this.IsSet(PROP_FORECOLOR) || (ForeColor == Color.Empty))
+                )
                     this.ForeColor = s.ForeColor;
-                if (s.IsSet(PROP_BORDERCOLOR) && (!this.IsSet(PROP_BORDERCOLOR) || (BorderColor == Color.Empty)))
+                if (
+                    s.IsSet(PROP_BORDERCOLOR)
+                    && (!this.IsSet(PROP_BORDERCOLOR) || (BorderColor == Color.Empty))
+                )
                     this.BorderColor = s.BorderColor;
-                if (s.IsSet(PROP_BORDERWIDTH) && (!this.IsSet(PROP_BORDERWIDTH) || (BorderWidth == Unit.Empty)))
+                if (
+                    s.IsSet(PROP_BORDERWIDTH)
+                    && (!this.IsSet(PROP_BORDERWIDTH) || (BorderWidth == Unit.Empty))
+                )
                     this.BorderWidth = s.BorderWidth;
                 if (s.IsSet(PROP_BORDERSTYLE) && !this.IsSet(PROP_BORDERSTYLE))
                     this.BorderStyle = s.BorderStyle;
@@ -754,22 +886,26 @@ namespace System.Web.UI.WebControls {
                 if (s.IsSet(PROP_WIDTH) && (!this.IsSet(PROP_WIDTH) || (Width == Unit.Empty)))
                     this.Width = s.Width;
             }
-            else {
-                if (IsSet(PROP_CSSCLASS)) {
+            else
+            {
+                if (IsSet(PROP_CSSCLASS))
+                {
                     CssClass += " " + s.RegisteredCssClass;
                 }
-                else {
+                else
+                {
                     CssClass = s.RegisteredCssClass;
                 }
             }
         }
 
-
         /// <devdoc>
         /// Clears out any defined style elements from the state bag.
         /// </devdoc>
-        public virtual void Reset() {
-            if (statebag != null) {
+        public virtual void Reset()
+        {
+            if (statebag != null)
+            {
                 if (IsSet(PROP_CSSCLASS))
                     ViewState.Remove("CssClass");
                 if (IsSet(PROP_BACKCOLOR))
@@ -796,14 +932,16 @@ namespace System.Web.UI.WebControls {
             setBits = 0;
         }
 
-
         /// <devdoc>
         /// Saves any state that has been modified
         /// after the TrackViewState method was invoked.
         /// </devdoc>
-        protected internal virtual object SaveViewState() {
-            if (statebag != null) {
-                if (markedBits != 0) {
+        protected internal virtual object SaveViewState()
+        {
+            if (statebag != null)
+            {
+                if (markedBits != 0)
+                {
                     // new bits or properties were changed
                     // updating the state bag at this point will automatically mark
                     // SetBitsKey as dirty, and it will be added to the resulting viewstate
@@ -816,18 +954,20 @@ namespace System.Web.UI.WebControls {
             return null;
         }
 
-
         /// <internalonly/>
-        protected internal virtual void SetBit(int bit) {
+        protected internal virtual void SetBit(int bit)
+        {
             setBits |= bit;
-            if (IsTrackingViewState) {
+            if (IsTrackingViewState)
+            {
                 // since we're tracking changes, include this property change or
                 // bit into the markedBits flag set.
                 markedBits |= bit;
             }
         }
 
-        public void SetDirty() {
+        public void SetDirty()
+        {
             ViewState.SetDirty(true);
             markedBits = setBits;
         }
@@ -836,37 +976,36 @@ namespace System.Web.UI.WebControls {
         /// Associated this Style with a CSS class as part of registration with
         /// a style sheet.
         /// </devdoc>
-        internal void SetRegisteredCssClass(string cssClass) {
+        internal void SetRegisteredCssClass(string cssClass)
+        {
             registeredCssClass = cssClass;
         }
 
         #region Implementation of IStateManager
 
         /// <internalonly/>
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return IsTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
         }
 
-
         /// <internalonly/>
-        void IStateManager.LoadViewState(object state) {
+        void IStateManager.LoadViewState(object state)
+        {
             LoadViewState(state);
         }
 
-
         /// <internalonly/>
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             TrackViewState();
         }
 
-
         /// <internalonly/>
-        object IStateManager.SaveViewState() {
+        object IStateManager.SaveViewState()
+        {
             return SaveViewState();
         }
         #endregion
     }
 }
-

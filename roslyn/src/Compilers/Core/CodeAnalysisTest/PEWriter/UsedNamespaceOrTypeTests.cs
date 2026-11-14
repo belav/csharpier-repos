@@ -27,10 +27,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
             }
 
             public override int GetHashCode() => Name.GetHashCode();
-            public override bool Equals(object obj) => (obj as EqualsProxy)?.Name.Equals(Name) == true;
+
+            public override bool Equals(object obj) =>
+                (obj as EqualsProxy)?.Name.Equals(Name) == true;
         }
 
-        private static Mock<T> CreateEqualsInterface<T>(string name) where T : class
+        private static Mock<T> CreateEqualsInterface<T>(string name)
+            where T : class
         {
             var mock = new Mock<EqualsProxy>(name) { CallBase = true };
             return mock.As<T>();
@@ -50,13 +53,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
             var value = UsedNamespaceOrType.CreateType(ref1.Object, "alias");
             var unit = EqualityUnit
                 .Create(value)
-                .WithEqualValues(
-                    value,
-                    UsedNamespaceOrType.CreateType(ref1.Object, "alias"))
+                .WithEqualValues(value, UsedNamespaceOrType.CreateType(ref1.Object, "alias"))
                 .WithNotEqualValues(
-                    UsedNamespaceOrType.CreateNamespace(new Mock<INamespace>(MockBehavior.Strict).Object),
+                    UsedNamespaceOrType.CreateNamespace(
+                        new Mock<INamespace>(MockBehavior.Strict).Object
+                    ),
                     UsedNamespaceOrType.CreateType(ref2.Object, "alias"),
-                    UsedNamespaceOrType.CreateType(ref1.Object, "different alias"));
+                    UsedNamespaceOrType.CreateType(ref1.Object, "different alias")
+                );
             RunAll(unit);
         }
 
@@ -78,12 +82,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
                 .WithEqualValues(
                     value,
                     UsedNamespaceOrType.CreateType(type1.Object, "alias"),
-                    UsedNamespaceOrType.CreateType(type2.Object, "alias"))
+                    UsedNamespaceOrType.CreateType(type2.Object, "alias")
+                )
                 .WithNotEqualValues(
                     UsedNamespaceOrType.CreateType(type1.Object, "different alias"),
                     UsedNamespaceOrType.CreateType(type2.Object, "different alias"),
                     UsedNamespaceOrType.CreateType(type3.Object, "alias"),
-                    UsedNamespaceOrType.CreateNamespace(new Mock<INamespace>(MockBehavior.Strict).Object));
+                    UsedNamespaceOrType.CreateNamespace(
+                        new Mock<INamespace>(MockBehavior.Strict).Object
+                    )
+                );
             RunAll(unit);
         }
 
@@ -93,9 +101,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
             var value = UsedNamespaceOrType.CreateExternAlias("alias1");
             var unit = EqualityUnit
                 .Create(value)
-                .WithEqualValues(
-                    value,
-                    UsedNamespaceOrType.CreateExternAlias("alias1"))
+                .WithEqualValues(value, UsedNamespaceOrType.CreateExternAlias("alias1"))
                 .WithNotEqualValues(UsedNamespaceOrType.CreateExternAlias("alias2"));
             RunAll(unit);
         }
@@ -113,11 +119,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
                 .WithEqualValues(
                     value,
                     UsedNamespaceOrType.CreateNamespace(ns1.Object),
-                    UsedNamespaceOrType.CreateNamespace(ns2.Object))
+                    UsedNamespaceOrType.CreateNamespace(ns2.Object)
+                )
                 .WithNotEqualValues(
                     UsedNamespaceOrType.CreateExternAlias("alias"),
-                    UsedNamespaceOrType.CreateNamespace(ns1.Object, CreateEqualsInterface<IAssemblyReference>("a").Object),
-                    UsedNamespaceOrType.CreateNamespace(ns3.Object));
+                    UsedNamespaceOrType.CreateNamespace(
+                        ns1.Object,
+                        CreateEqualsInterface<IAssemblyReference>("a").Object
+                    ),
+                    UsedNamespaceOrType.CreateNamespace(ns3.Object)
+                );
             RunAll(unit);
         }
 
@@ -138,11 +149,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
                     value,
                     UsedNamespaceOrType.CreateNamespace(ns1.Object, assembly1.Object),
                     UsedNamespaceOrType.CreateNamespace(ns1.Object, assembly2.Object),
-                    UsedNamespaceOrType.CreateNamespace(ns2.Object, assembly1.Object))
+                    UsedNamespaceOrType.CreateNamespace(ns2.Object, assembly1.Object)
+                )
                 .WithNotEqualValues(
                     UsedNamespaceOrType.CreateExternAlias("alias"),
-                    UsedNamespaceOrType.CreateNamespace(ns1.Object, new Mock<IAssemblyReference>(MockBehavior.Strict).Object),
-                    UsedNamespaceOrType.CreateNamespace(ns3.Object));
+                    UsedNamespaceOrType.CreateNamespace(
+                        ns1.Object,
+                        new Mock<IAssemblyReference>(MockBehavior.Strict).Object
+                    ),
+                    UsedNamespaceOrType.CreateNamespace(ns3.Object)
+                );
             RunAll(unit);
         }
     }

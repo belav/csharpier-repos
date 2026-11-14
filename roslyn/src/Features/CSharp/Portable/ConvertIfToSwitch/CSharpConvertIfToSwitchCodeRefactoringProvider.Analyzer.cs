@@ -13,10 +13,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
 {
     internal sealed partial class CSharpConvertIfToSwitchCodeRefactoringProvider
     {
-        private sealed class CSharpAnalyzer(ISyntaxFacts syntaxFacts, Feature features) : Analyzer(syntaxFacts, features)
+        private sealed class CSharpAnalyzer(ISyntaxFacts syntaxFacts, Feature features)
+            : Analyzer(syntaxFacts, features)
         {
-            public override bool HasUnreachableEndPoint(IOperation operation)
-                => !operation.SemanticModel.AnalyzeControlFlow(operation.Syntax).EndPointIsReachable;
+            public override bool HasUnreachableEndPoint(IOperation operation) =>
+                !operation.SemanticModel.AnalyzeControlFlow(operation.Syntax).EndPointIsReachable;
 
             // We do not offer a fix if the if-statement contains a break-statement, e.g.
             //
@@ -28,13 +29,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
             //      }
             //
             // When the 'break' moves into the switch, it will have different flow control impact.
-            public override bool CanConvert(IConditionalOperation operation)
-                => !operation.SemanticModel.AnalyzeControlFlow(operation.Syntax).ExitPoints.Any(static n => n.IsKind(SyntaxKind.BreakStatement));
+            public override bool CanConvert(IConditionalOperation operation) =>
+                !operation
+                    .SemanticModel.AnalyzeControlFlow(operation.Syntax)
+                    .ExitPoints.Any(static n => n.IsKind(SyntaxKind.BreakStatement));
 
-            public override bool CanImplicitlyConvert(SemanticModel semanticModel, SyntaxNode syntax, ITypeSymbol targetType)
+            public override bool CanImplicitlyConvert(
+                SemanticModel semanticModel,
+                SyntaxNode syntax,
+                ITypeSymbol targetType
+            )
             {
-                return syntax is ExpressionSyntax expressionSyntax &&
-                    semanticModel.ClassifyConversion(expressionSyntax, targetType).IsImplicit;
+                return syntax is ExpressionSyntax expressionSyntax
+                    && semanticModel.ClassifyConversion(expressionSyntax, targetType).IsImplicit;
             }
         }
     }

@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             return GetReferenceDirectives(null);
         }
 
-        internal IList<ReferenceDirectiveTriviaSyntax> GetReferenceDirectives(Func<ReferenceDirectiveTriviaSyntax, bool>? filter)
+        internal IList<ReferenceDirectiveTriviaSyntax> GetReferenceDirectives(
+            Func<ReferenceDirectiveTriviaSyntax, bool>? filter
+        )
         {
             if (!this.ContainsDirectives)
                 return SpecializedCollections.EmptyList<ReferenceDirectiveTriviaSyntax>();
@@ -43,11 +45,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         internal bool HasReferenceDirectives
             // #r and #load directives are always on the first token of the compilation unit.
-            => HasFirstTokenDirective(static n => n is ReferenceDirectiveTriviaSyntax);
+            =>
+            HasFirstTokenDirective(static n => n is ReferenceDirectiveTriviaSyntax);
 
         internal bool HasLoadDirectives
             // #r and #load directives are always on the first token of the compilation unit.
-            => HasFirstTokenDirective(static n => n is LoadDirectiveTriviaSyntax);
+            =>
+            HasFirstTokenDirective(static n => n is LoadDirectiveTriviaSyntax);
 
         private bool HasFirstTokenDirective(Func<SyntaxNode, bool> predicate)
         {
@@ -58,8 +62,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 {
                     foreach (var trivia in firstToken.LeadingTrivia)
                     {
-                        if (trivia.GetStructure() is { } structure &&
-                            predicate(structure))
+                        if (trivia.GetStructure() is { } structure && predicate(structure))
                         {
                             return true;
                         }

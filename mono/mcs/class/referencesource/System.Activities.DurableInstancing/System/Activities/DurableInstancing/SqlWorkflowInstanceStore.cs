@@ -9,18 +9,20 @@ namespace System.Activities.DurableInstancing
     using System.Linq;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
+    using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.Threading;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class SqlWorkflowInstanceStore : InstanceStore
     {
         internal const int DefaultMaximumRetries = 4;
-        internal const string CommonConnectionPoolName = "System.Activities.DurableInstancing.SqlWorkflowInstanceStore";
+        internal const string CommonConnectionPoolName =
+            "System.Activities.DurableInstancing.SqlWorkflowInstanceStore";
         static readonly TimeSpan defaultConnectionOpenTime = TimeSpan.FromSeconds(15);
-        static readonly TimeSpan defaultInstancePersistenceEventDetectionPeriod = TimeSpan.FromSeconds(5);
-        static readonly TimeSpan defaultLockRenewalPeriod = TimeSpan.FromSeconds(30);        
+        static readonly TimeSpan defaultInstancePersistenceEventDetectionPeriod =
+            TimeSpan.FromSeconds(5);
+        static readonly TimeSpan defaultLockRenewalPeriod = TimeSpan.FromSeconds(30);
         static readonly TimeSpan minimumTimeSpanAllowed = TimeSpan.FromSeconds(1);
 
         const string DefaultPromotionName = "System.Activities.InstanceMetadata";
@@ -45,18 +47,20 @@ namespace System.Activities.DurableInstancing
         // Volatile: multiple threads could simultaneously do a TestVersionAndRunAsyncResult, and read/update this value.
         volatile Version databaseVersion;
 
-        public SqlWorkflowInstanceStore() :
-            this(null)
-        {
-        }
+        public SqlWorkflowInstanceStore()
+            : this(null) { }
 
         public SqlWorkflowInstanceStore(string connectionString)
         {
-            this.InstanceEncodingOption = SqlWorkflowInstanceStoreConstants.DefaultInstanceEncodingOption;
-            this.InstanceCompletionAction = SqlWorkflowInstanceStoreConstants.DefaultInstanceCompletionAction;
-            this.InstanceLockedExceptionAction = SqlWorkflowInstanceStoreConstants.DefaultInstanceLockedExceptionAction;
+            this.InstanceEncodingOption =
+                SqlWorkflowInstanceStoreConstants.DefaultInstanceEncodingOption;
+            this.InstanceCompletionAction =
+                SqlWorkflowInstanceStoreConstants.DefaultInstanceCompletionAction;
+            this.InstanceLockedExceptionAction =
+                SqlWorkflowInstanceStoreConstants.DefaultInstanceLockedExceptionAction;
             this.HostLockRenewalPeriod = SqlWorkflowInstanceStore.defaultLockRenewalPeriod;
-            this.RunnableInstancesDetectionPeriod = SqlWorkflowInstanceStore.defaultInstancePersistenceEventDetectionPeriod;
+            this.RunnableInstancesDetectionPeriod =
+                SqlWorkflowInstanceStore.defaultInstancePersistenceEventDetectionPeriod;
             this.EnqueueRunCommands = false;
             this.LoadRetryHandler = new LoadRetryHandler();
             this.ConnectionString = connectionString;
@@ -70,10 +74,7 @@ namespace System.Activities.DurableInstancing
 
         public string ConnectionString
         {
-            get 
-            { 
-                return this.connectionString; 
-            }
+            get { return this.connectionString; }
             set
             {
                 ThrowIfReadOnly();
@@ -83,10 +84,7 @@ namespace System.Activities.DurableInstancing
 
         public bool EnqueueRunCommands
         {
-            get
-            {
-                return this.enqueueRunCommands;
-            }
+            get { return this.enqueueRunCommands; }
             set
             {
                 ThrowIfReadOnly();
@@ -96,15 +94,19 @@ namespace System.Activities.DurableInstancing
 
         public TimeSpan HostLockRenewalPeriod
         {
-            get
-            {
-                return this.hostLockRenewalPeriod;
-            }
+            get { return this.hostLockRenewalPeriod; }
             set
             {
                 if (value.CompareTo(SqlWorkflowInstanceStore.minimumTimeSpanAllowed) < 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("lockRenewalPeriod", value, SR.InvalidLockRenewalPeriod(value, SqlWorkflowInstanceStore.minimumTimeSpanAllowed));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "lockRenewalPeriod",
+                        value,
+                        SR.InvalidLockRenewalPeriod(
+                            value,
+                            SqlWorkflowInstanceStore.minimumTimeSpanAllowed
+                        )
+                    );
                 }
                 ThrowIfReadOnly();
                 this.hostLockRenewalPeriod = value;
@@ -113,10 +115,7 @@ namespace System.Activities.DurableInstancing
 
         public InstanceCompletionAction InstanceCompletionAction
         {
-            get
-            {
-                return this.instanceCompletionAction;
-            }
+            get { return this.instanceCompletionAction; }
             set
             {
                 ThrowIfReadOnly();
@@ -126,10 +125,7 @@ namespace System.Activities.DurableInstancing
 
         public InstanceEncodingOption InstanceEncodingOption
         {
-            get
-            {
-                return this.instanceEncodingOption;
-            }
+            get { return this.instanceEncodingOption; }
             set
             {
                 ThrowIfReadOnly();
@@ -139,10 +135,7 @@ namespace System.Activities.DurableInstancing
 
         public InstanceLockedExceptionAction InstanceLockedExceptionAction
         {
-            get
-            {
-                return this.instanceLockedExceptionAction;
-            }
+            get { return this.instanceLockedExceptionAction; }
             set
             {
                 ThrowIfReadOnly();
@@ -152,26 +145,26 @@ namespace System.Activities.DurableInstancing
 
         public TimeSpan RunnableInstancesDetectionPeriod
         {
-            get
-            {
-                return this.instancePersistenceEventDetectionPeriod;
-            }
+            get { return this.instancePersistenceEventDetectionPeriod; }
             set
             {
                 if (value.CompareTo(SqlWorkflowInstanceStore.minimumTimeSpanAllowed) < 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("instancePersistenceEventDetectionPeriod", value, SR.InvalidRunnableInstancesDetectionPeriod(value, SqlWorkflowInstanceStore.minimumTimeSpanAllowed));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "instancePersistenceEventDetectionPeriod",
+                        value,
+                        SR.InvalidRunnableInstancesDetectionPeriod(
+                            value,
+                            SqlWorkflowInstanceStore.minimumTimeSpanAllowed
+                        )
+                    );
                 }
                 ThrowIfReadOnly();
                 this.instancePersistenceEventDetectionPeriod = value;
             }
         }
 
-        public int MaxConnectionRetries
-        {
-            get;
-            set;
-        }
+        public int MaxConnectionRetries { get; set; }
 
         internal TimeSpan BufferedHostLockRenewalPeriod
         {
@@ -180,8 +173,16 @@ namespace System.Activities.DurableInstancing
                 Fx.Assert(this.isReadOnly, "Should not be called before there are any handles");
                 if (this.bufferedHostLockRenewalPeriod == TimeSpan.Zero)
                 {
-                    double lockBuffer = Math.Min(SqlWorkflowInstanceStoreConstants.LockOwnerTimeoutBuffer.TotalSeconds, (TimeSpan.MaxValue.Subtract(this.HostLockRenewalPeriod)).TotalSeconds);
-                    this.bufferedHostLockRenewalPeriod = TimeSpan.FromSeconds(Math.Min(Int32.MaxValue, lockBuffer + this.HostLockRenewalPeriod.TotalSeconds));
+                    double lockBuffer = Math.Min(
+                        SqlWorkflowInstanceStoreConstants.LockOwnerTimeoutBuffer.TotalSeconds,
+                        (TimeSpan.MaxValue.Subtract(this.HostLockRenewalPeriod)).TotalSeconds
+                    );
+                    this.bufferedHostLockRenewalPeriod = TimeSpan.FromSeconds(
+                        Math.Min(
+                            Int32.MaxValue,
+                            lockBuffer + this.HostLockRenewalPeriod.TotalSeconds
+                        )
+                    );
                 }
                 return this.bufferedHostLockRenewalPeriod;
             }
@@ -189,68 +190,48 @@ namespace System.Activities.DurableInstancing
 
         internal string CachedConnectionString
         {
-            get
-            {
-                return this.cachedConnectionString;
-            }
+            get { return this.cachedConnectionString; }
         }
 
-        internal LoadRetryHandler LoadRetryHandler
-        {
-            get;
-            set;
-        }
+        internal LoadRetryHandler LoadRetryHandler { get; set; }
 
         internal Dictionary<string, Tuple<List<XName>, List<XName>>> Promotions
         {
-            get
-            {
-                return this.definedPromotions;
-            }
+            get { return this.definedPromotions; }
         }
 
-        internal ILoadRetryStrategy RetryStrategy 
-        { 
-            get; 
-            set; 
-        }
+        internal ILoadRetryStrategy RetryStrategy { get; set; }
 
-        internal Guid WorkflowHostType
-        {
-            get;
-            set;
-        }
+        internal Guid WorkflowHostType { get; set; }
 
         internal bool InstanceOwnersExist
         {
-            get
-            {
-                return base.GetInstanceOwners().Length > 0;
-            }
+            get { return base.GetInstanceOwners().Length > 0; }
         }
 
         internal Version DatabaseVersion
         {
-            get
-            {
-                return this.databaseVersion;
-            }
+            get { return this.databaseVersion; }
             set
             {
-                Fx.Assert(this.databaseVersion == null || this.databaseVersion == value, "Database version should not have changed out from under us");
+                Fx.Assert(
+                    this.databaseVersion == null || this.databaseVersion == value,
+                    "Database version should not have changed out from under us"
+                );
                 this.databaseVersion = value;
             }
         }
 
         object ThisLock
         {
-            get
-            {
-                return this.definedPromotions;
-            }
+            get { return this.definedPromotions; }
         }
 
-        public void Promote(string name, IEnumerable<XName> promoteAsVariant, IEnumerable<XName> promoteAsBinary)
+        public void Promote(
+            string name,
+            IEnumerable<XName> promoteAsVariant,
+            IEnumerable<XName> promoteAsBinary
+        )
         {
             ThrowIfReadOnly();
 
@@ -266,19 +247,43 @@ namespace System.Activities.DurableInstancing
 
             if (promoteAsVariant == null && promoteAsBinary == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.NoPromotionsDefined(name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.NoPromotionsDefined(name))
+                );
             }
 
-            if (promoteAsVariant != null && promoteAsVariant.Count() > SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion)
+            if (
+                promoteAsVariant != null
+                && promoteAsVariant.Count()
+                    > SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
+            )
             {
-                throw FxTrace.Exception.Argument("promoteAsVariant", SR.PromotionTooManyDefined(name,
-                    promoteAsVariant.Count(), "variant", SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion));
+                throw FxTrace.Exception.Argument(
+                    "promoteAsVariant",
+                    SR.PromotionTooManyDefined(
+                        name,
+                        promoteAsVariant.Count(),
+                        "variant",
+                        SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
+                    )
+                );
             }
 
-            if (promoteAsBinary != null && promoteAsBinary.Count() > SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion)
+            if (
+                promoteAsBinary != null
+                && promoteAsBinary.Count()
+                    > SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
+            )
             {
-                throw FxTrace.Exception.Argument("promoteAsVariant", SR.PromotionTooManyDefined(name,
-                    promoteAsVariant.Count(), "binary", SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion));
+                throw FxTrace.Exception.Argument(
+                    "promoteAsVariant",
+                    SR.PromotionTooManyDefined(
+                        name,
+                        promoteAsVariant.Count(),
+                        "binary",
+                        SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
+                    )
+                );
             }
 
             HashSet<XName> promotedXNames = new HashSet<XName>();
@@ -290,12 +295,20 @@ namespace System.Activities.DurableInstancing
                 {
                     if (xname == null)
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CanNotDefineNullForAPromotion("variant", name)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.CanNotDefineNullForAPromotion("variant", name)
+                            )
+                        );
                     }
 
                     if (promotedXNames.Contains(xname))
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)
+                            )
+                        );
                     }
 
                     variant.Add(xname);
@@ -311,12 +324,20 @@ namespace System.Activities.DurableInstancing
                 {
                     if (name == null)
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CanNotDefineNullForAPromotion("binary", xname)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.CanNotDefineNullForAPromotion("binary", xname)
+                            )
+                        );
                     }
 
                     if (promotedXNames.Contains(xname))
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)
+                            )
+                        );
                     }
 
                     binary.Add(xname);
@@ -327,7 +348,13 @@ namespace System.Activities.DurableInstancing
             this.definedPromotions.Add(name, new Tuple<List<XName>, List<XName>>(variant, binary));
         }
 
-        protected internal override IAsyncResult BeginTryCommand(InstancePersistenceContext context, InstancePersistenceCommand command, TimeSpan timeout, AsyncCallback callback, object state)
+        protected internal override IAsyncResult BeginTryCommand(
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (context == null)
             {
@@ -339,9 +366,15 @@ namespace System.Activities.DurableInstancing
                 throw FxTrace.Exception.ArgumentNull("command");
             }
 
-            if (!this.storeLock.IsValid && !(command is CreateWorkflowOwnerCommand) && !(command is CreateWorkflowOwnerWithIdentityCommand))
+            if (
+                !this.storeLock.IsValid
+                && !(command is CreateWorkflowOwnerCommand)
+                && !(command is CreateWorkflowOwnerWithIdentityCommand)
+            )
             {
-                throw FxTrace.Exception.AsError(new InstanceOwnerException(command.Name, this.storeLock.LockOwnerId));
+                throw FxTrace.Exception.AsError(
+                    new InstanceOwnerException(command.Name, this.storeLock.LockOwnerId)
+                );
             }
 
             if (this.IsRetryCommand(command))
@@ -351,20 +384,47 @@ namespace System.Activities.DurableInstancing
 
             return BeginTryCommandSkipRetry(context, command, timeout, callback, state);
         }
-                
-        internal IAsyncResult BeginTryCommandSkipRetry(InstancePersistenceContext context, InstancePersistenceCommand command, TimeSpan timeout, AsyncCallback callback, object state)
+
+        internal IAsyncResult BeginTryCommandSkipRetry(
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (command is CreateWorkflowOwnerWithIdentityCommand)
             {
-                return this.BeginTryCommandInternalWithVersionCheck(context, command, timeout, callback, state, StoreUtilities.Version45);
+                return this.BeginTryCommandInternalWithVersionCheck(
+                    context,
+                    command,
+                    timeout,
+                    callback,
+                    state,
+                    StoreUtilities.Version45
+                );
             }
             else if (command is DetectRunnableInstancesCommand)
             {
-                return this.BeginTryCommandInternalWithVersionCheck(context, command, timeout, callback, state, StoreUtilities.Version40);
+                return this.BeginTryCommandInternalWithVersionCheck(
+                    context,
+                    command,
+                    timeout,
+                    callback,
+                    state,
+                    StoreUtilities.Version40
+                );
             }
             else if (command is SaveWorkflowCommand)
             {
-                return this.BeginTryCommandInternalWithVersionCheck(context, command, timeout, callback, state, StoreUtilities.Version40);
+                return this.BeginTryCommandInternalWithVersionCheck(
+                    context,
+                    command,
+                    timeout,
+                    callback,
+                    state,
+                    StoreUtilities.Version40
+                );
             }
             else
             {
@@ -388,69 +448,218 @@ namespace System.Activities.DurableInstancing
             }
         }
 
-        internal IAsyncResult BeginTryCommandInternalWithVersionCheck(InstancePersistenceContext context, InstancePersistenceCommand command, TimeSpan timeout, AsyncCallback callback, object state, Version targetVersion)
+        internal IAsyncResult BeginTryCommandInternalWithVersionCheck(
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            Version targetVersion
+        )
         {
-            SqlWorkflowInstanceStoreAsyncResult sqlWorkflowInstanceStoreAsyncResult = new TestDatabaseVersionAndRunAsyncResult(context, command, this, this.storeLock, Transaction.Current, timeout, targetVersion, callback, state);
+            SqlWorkflowInstanceStoreAsyncResult sqlWorkflowInstanceStoreAsyncResult =
+                new TestDatabaseVersionAndRunAsyncResult(
+                    context,
+                    command,
+                    this,
+                    this.storeLock,
+                    Transaction.Current,
+                    timeout,
+                    targetVersion,
+                    callback,
+                    state
+                );
             sqlWorkflowInstanceStoreAsyncResult.ScheduleCallback();
             return sqlWorkflowInstanceStoreAsyncResult;
         }
 
-        internal IAsyncResult BeginTryCommandInternal(InstancePersistenceContext context, InstancePersistenceCommand command, TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginTryCommandInternal(
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return BeginTryCommandInternal(context, command, Transaction.Current, timeout, callback, state);
+            return BeginTryCommandInternal(
+                context,
+                command,
+                Transaction.Current,
+                timeout,
+                callback,
+                state
+            );
         }
 
-        internal IAsyncResult BeginTryCommandInternal(InstancePersistenceContext context, InstancePersistenceCommand command, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginTryCommandInternal(
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
+            Transaction transaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             SqlWorkflowInstanceStoreAsyncResult sqlWorkflowInstanceStoreAsyncResult = null;
 
             if (command is SaveWorkflowCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new SaveWorkflowAsyncResult(context, command, this, this.storeLock, transaction, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new SaveWorkflowAsyncResult(
+                    context,
+                    command,
+                    this,
+                    this.storeLock,
+                    transaction,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is TryLoadRunnableWorkflowCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new TryLoadRunnableWorkflowAsyncResult(context, command, this, this.storeLock, transaction, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new TryLoadRunnableWorkflowAsyncResult(
+                    context,
+                    command,
+                    this,
+                    this.storeLock,
+                    transaction,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is LoadWorkflowCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new LoadWorkflowAsyncResult(context, command, this, this.storeLock, transaction, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new LoadWorkflowAsyncResult(
+                    context,
+                    command,
+                    this,
+                    this.storeLock,
+                    transaction,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is LoadWorkflowByInstanceKeyCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new LoadWorkflowByKeyAsyncResult(context, command, this, this.storeLock, transaction, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new LoadWorkflowByKeyAsyncResult(
+                    context,
+                    command,
+                    this,
+                    this.storeLock,
+                    transaction,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is ExtendLockCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new ExtendLockAsyncResult(null, command, this, this.storeLock, null, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new ExtendLockAsyncResult(
+                    null,
+                    command,
+                    this,
+                    this.storeLock,
+                    null,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is DetectRunnableInstancesCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new DetectRunnableInstancesAsyncResult(null, command, this, this.storeLock, null, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new DetectRunnableInstancesAsyncResult(
+                    null,
+                    command,
+                    this,
+                    this.storeLock,
+                    null,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is DetectActivatableWorkflowsCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new DetectActivatableWorkflowsAsyncResult(null, command, this, this.storeLock, null, timeout, callback, state);
-            }             
+                sqlWorkflowInstanceStoreAsyncResult = new DetectActivatableWorkflowsAsyncResult(
+                    null,
+                    command,
+                    this,
+                    this.storeLock,
+                    null,
+                    timeout,
+                    callback,
+                    state
+                );
+            }
             else if (command is RecoverInstanceLocksCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new RecoverInstanceLocksAsyncResult(null, command, this, this.storeLock, null, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new RecoverInstanceLocksAsyncResult(
+                    null,
+                    command,
+                    this,
+                    this.storeLock,
+                    null,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is UnlockInstanceCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new UnlockInstanceAsyncResult(null, command, this, this.storeLock, transaction, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new UnlockInstanceAsyncResult(
+                    null,
+                    command,
+                    this,
+                    this.storeLock,
+                    transaction,
+                    timeout,
+                    callback,
+                    state
+                );
             }
-            else if (command is CreateWorkflowOwnerCommand || command is CreateWorkflowOwnerWithIdentityCommand)
+            else if (
+                command is CreateWorkflowOwnerCommand
+                || command is CreateWorkflowOwnerWithIdentityCommand
+            )
             {
-                sqlWorkflowInstanceStoreAsyncResult = new CreateWorkflowOwnerAsyncResult(context, command, this, this.storeLock, transaction, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new CreateWorkflowOwnerAsyncResult(
+                    context,
+                    command,
+                    this,
+                    this.storeLock,
+                    transaction,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is DeleteWorkflowOwnerCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new DeleteWorkflowOwnerAsyncResult(context, command, this, this.storeLock, transaction, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new DeleteWorkflowOwnerAsyncResult(
+                    context,
+                    command,
+                    this,
+                    this.storeLock,
+                    transaction,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else if (command is QueryActivatableWorkflowsCommand)
             {
-                sqlWorkflowInstanceStoreAsyncResult = new QueryActivatableWorkflowAsyncResult(context, command, this, this.storeLock, transaction, timeout, callback, state);
+                sqlWorkflowInstanceStoreAsyncResult = new QueryActivatableWorkflowAsyncResult(
+                    context,
+                    command,
+                    this,
+                    this.storeLock,
+                    transaction,
+                    timeout,
+                    callback,
+                    state
+                );
             }
             else
             {
@@ -464,8 +673,10 @@ namespace System.Activities.DurableInstancing
 
         internal bool EnqueueRetry(LoadRetryAsyncResult loadRetryAsyncResult)
         {
-            Fx.Assert(this.IsLockRetryEnabled(),
-                "EnqueueRetry() should not be invoked if retry algorithm is set to NoRetry");
+            Fx.Assert(
+                this.IsLockRetryEnabled(),
+                "EnqueueRetry() should not be invoked if retry algorithm is set to NoRetry"
+            );
 
             bool result = false;
 
@@ -477,12 +688,18 @@ namespace System.Activities.DurableInstancing
             return result;
         }
 
-        internal InstancePersistenceEvent FindEvent(InstancePersistenceEvent eventType, out InstanceOwner instanceOwner)
+        internal InstancePersistenceEvent FindEvent(
+            InstancePersistenceEvent eventType,
+            out InstanceOwner instanceOwner
+        )
         {
             return FindEventHelper(eventType, out instanceOwner, false);
         }
 
-        internal InstancePersistenceEvent FindEventWithReset(InstancePersistenceEvent eventType, out InstanceOwner instanceOwner)
+        internal InstancePersistenceEvent FindEventWithReset(
+            InstancePersistenceEvent eventType,
+            out InstanceOwner instanceOwner
+        )
         {
             return FindEventHelper(eventType, out instanceOwner, true);
         }
@@ -490,22 +707,34 @@ namespace System.Activities.DurableInstancing
         internal void GenerateUnlockCommand(InstanceLockTracking instanceLockTracking)
         {
             UnlockInstanceCommand command = new UnlockInstanceCommand
-                {
-                    SurrogateOwnerId = this.storeLock.SurrogateLockOwnerId,
-                    InstanceId = instanceLockTracking.InstanceId,
-                    InstanceVersion = instanceLockTracking.InstanceVersion
-                };
-
-            using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Suppress))
             {
-                this.BeginTryCommandInternal(null, command, TimeSpan.MaxValue, this.unlockInstanceCallback, command);
+                SurrogateOwnerId = this.storeLock.SurrogateLockOwnerId,
+                InstanceId = instanceLockTracking.InstanceId,
+                InstanceVersion = instanceLockTracking.InstanceVersion,
+            };
+
+            using (
+                TransactionScope transactionScope = new TransactionScope(
+                    TransactionScopeOption.Suppress
+                )
+            )
+            {
+                this.BeginTryCommandInternal(
+                    null,
+                    command,
+                    TimeSpan.MaxValue,
+                    this.unlockInstanceCallback,
+                    command
+                );
             }
         }
 
         internal TimeSpan GetNextRetryDelay(int retryAttempt)
         {
-            Fx.Assert(this.IsLockRetryEnabled(),
-                "GetNextRetryDelay() should not be invoked if retry algorithm is set to NoRetry");
+            Fx.Assert(
+                this.IsLockRetryEnabled(),
+                "GetNextRetryDelay() should not be invoked if retry algorithm is set to NoRetry"
+            );
 
             return (this.RetryStrategy.RetryDelay(retryAttempt));
         }
@@ -520,17 +749,23 @@ namespace System.Activities.DurableInstancing
             // FindEventWithReset will allow the event to be cleaned up, even if it is signalled.  The returned event will
             // always be reset.
             InstanceOwner instanceOwner;
-            InstancePersistenceEvent requiredEvent = this.FindEventWithReset(eventToUpdate, out instanceOwner);
+            InstancePersistenceEvent requiredEvent = this.FindEventWithReset(
+                eventToUpdate,
+                out instanceOwner
+            );
             if (requiredEvent != null)
             {
                 if (signalEvent)
                 {
                     base.SignalEvent(requiredEvent, instanceOwner);
                 }
-            }            
+            }
         }
-        
-        protected override void OnFreeInstanceHandle(InstanceHandle instanceHandle, object userContext)
+
+        protected override void OnFreeInstanceHandle(
+            InstanceHandle instanceHandle,
+            object userContext
+        )
         {
             InstanceLockTracking instanceLockTracking = (InstanceLockTracking)(userContext);
             instanceLockTracking.HandleFreed();
@@ -560,17 +795,24 @@ namespace System.Activities.DurableInstancing
 
         string CreateCachedConnectionString()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(this.ConnectionString)
-                {
-                    AsynchronousProcessing = true,
-                    ConnectTimeout = (int) SqlWorkflowInstanceStore.defaultConnectionOpenTime.TotalSeconds,
-                    ApplicationName = "DefaultPool"
-                };
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(
+                this.ConnectionString
+            )
+            {
+                AsynchronousProcessing = true,
+                ConnectTimeout = (int)
+                    SqlWorkflowInstanceStore.defaultConnectionOpenTime.TotalSeconds,
+                ApplicationName = "DefaultPool",
+            };
 
             return builder.ToString();
         }
 
-        InstancePersistenceEvent FindEventHelper(InstancePersistenceEvent eventType, out InstanceOwner instanceOwner, bool withReset)
+        InstancePersistenceEvent FindEventHelper(
+            InstancePersistenceEvent eventType,
+            out InstanceOwner instanceOwner,
+            bool withReset
+        )
         {
             instanceOwner = null;
             InstanceOwner[] instanceOwners = GetInstanceOwners();
@@ -610,24 +852,26 @@ namespace System.Activities.DurableInstancing
 
         bool IsRetryCommand(InstancePersistenceCommand command)
         {
-            return 
-                (
-                this.IsLockRetryEnabled() &&
-                (
-                command is LoadWorkflowByInstanceKeyCommand ||
-                command is LoadWorkflowCommand
-                )
-                );
+            return (
+                this.IsLockRetryEnabled()
+                && (command is LoadWorkflowByInstanceKeyCommand || command is LoadWorkflowCommand)
+            );
         }
 
         void ScheduledUnlockInstance(object state)
         {
-            UnlockInstanceState unlockInstanceState = (UnlockInstanceState) state;
+            UnlockInstanceState unlockInstanceState = (UnlockInstanceState)state;
             UnlockInstanceCommand command = unlockInstanceState.UnlockInstanceCommand;
 
             try
             {
-                this.BeginTryCommandInternal(null, command, TimeSpan.MaxValue, unlockInstanceCallback, command);
+                this.BeginTryCommandInternal(
+                    null,
+                    command,
+                    TimeSpan.MaxValue,
+                    unlockInstanceCallback,
+                    command
+                );
             }
             catch (Exception e)
             {
@@ -641,20 +885,27 @@ namespace System.Activities.DurableInstancing
                     TD.UnlockInstanceException(e.Message);
                 }
                 // Keep on going - if problems are severe the host will be faulted and we'll give up then.
-                unlockInstanceState.BackoffTimeoutHelper.WaitAndBackoff(this.scheduledUnlockInstance, unlockInstanceState);
+                unlockInstanceState.BackoffTimeoutHelper.WaitAndBackoff(
+                    this.scheduledUnlockInstance,
+                    unlockInstanceState
+                );
             }
         }
 
         void SetLoadRetryStrategy()
         {
-            this.RetryStrategy = LoadRetryStrategyFactory.CreateRetryStrategy(this.InstanceLockedExceptionAction);
+            this.RetryStrategy = LoadRetryStrategyFactory.CreateRetryStrategy(
+                this.InstanceLockedExceptionAction
+            );
         }
 
         void ThrowIfReadOnly()
         {
             if (this.isReadOnly)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InstanceStoreReadOnly));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.InstanceStoreReadOnly)
+                );
             }
         }
 
@@ -677,12 +928,15 @@ namespace System.Activities.DurableInstancing
                 }
 
                 UnlockInstanceState unlockInstanceState = new UnlockInstanceState
-                    {
-                        UnlockInstanceCommand = (UnlockInstanceCommand)(result.AsyncState),
-                        BackoffTimeoutHelper = new BackoffTimeoutHelper(TimeSpan.MaxValue)
-                    };
+                {
+                    UnlockInstanceCommand = (UnlockInstanceCommand)(result.AsyncState),
+                    BackoffTimeoutHelper = new BackoffTimeoutHelper(TimeSpan.MaxValue),
+                };
 
-                unlockInstanceState.BackoffTimeoutHelper.WaitAndBackoff(this.scheduledUnlockInstance, unlockInstanceState);
+                unlockInstanceState.BackoffTimeoutHelper.WaitAndBackoff(
+                    this.scheduledUnlockInstance,
+                    unlockInstanceState
+                );
             }
         }
 

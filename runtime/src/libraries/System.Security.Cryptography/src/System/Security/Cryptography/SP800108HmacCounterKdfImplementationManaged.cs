@@ -10,7 +10,10 @@ namespace System.Security.Cryptography
     {
         private const int CharToBytesStackBufferSize = 256;
 
-        public SP800108HmacCounterKdfImplementationManaged(ReadOnlySpan<byte> key, HashAlgorithmName hashAlgorithm)
+        public SP800108HmacCounterKdfImplementationManaged(
+            ReadOnlySpan<byte> key,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             // Use the POH if we can so the key doesn't get moved around by the GC.
             _key = GC.AllocateArray<byte>(key.Length, pinned: true);
@@ -23,7 +26,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> label,
             ReadOnlySpan<byte> context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (destination.Length == 0)
             {
@@ -31,7 +35,6 @@ namespace System.Security.Cryptography
             }
 
             Debug.Assert(destination.Length <= 0x1FFFFFFF);
-
             // Do everything as checked. Over/underflows are never expected.
             checked
             {
@@ -77,22 +80,39 @@ namespace System.Security.Cryptography
             }
         }
 
-         internal static void DeriveBytesOneShot(
+        internal static void DeriveBytesOneShot(
             ReadOnlySpan<byte> key,
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<char> label,
             ReadOnlySpan<char> context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (destination.Length == 0)
             {
                 return;
             }
 
-            using (Utf8DataEncoding labelData = new Utf8DataEncoding(label, stackalloc byte[CharToBytesStackBufferSize]))
-            using (Utf8DataEncoding contextData = new Utf8DataEncoding(context, stackalloc byte[CharToBytesStackBufferSize]))
+            using (
+                Utf8DataEncoding labelData = new Utf8DataEncoding(
+                    label,
+                    stackalloc byte[CharToBytesStackBufferSize]
+                )
+            )
+            using (
+                Utf8DataEncoding contextData = new Utf8DataEncoding(
+                    context,
+                    stackalloc byte[CharToBytesStackBufferSize]
+                )
+            )
             {
-                DeriveBytesOneShot(key, hashAlgorithm, labelData.Utf8Bytes, contextData.Utf8Bytes, destination);
+                DeriveBytesOneShot(
+                    key,
+                    hashAlgorithm,
+                    labelData.Utf8Bytes,
+                    contextData.Utf8Bytes,
+                    destination
+                );
             }
         }
     }

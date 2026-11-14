@@ -28,15 +28,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol member,
             BoundNode node,
             BoundNode firstInRegion,
-            BoundNode lastInRegion)
-            : base(compilation, member, node, firstInRegion, lastInRegion)
-        {
-        }
+            BoundNode lastInRegion
+        )
+            : base(compilation, member, node, firstInRegion, lastInRegion) { }
 
         internal static (HashSet<Symbol> entry, HashSet<Symbol> exit) Analyze(
-            CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        )
         {
-            var walker = new DefinitelyAssignedWalker(compilation, member, node, firstInRegion, lastInRegion);
+            var walker = new DefinitelyAssignedWalker(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion
+            );
             try
             {
                 bool badRegion = false;
@@ -65,7 +75,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void ProcessRegion(HashSet<Symbol> definitelyAssigned)
         {
-            // this can happen multiple times as flow analysis is multi-pass.  Always 
+            // this can happen multiple times as flow analysis is multi-pass.  Always
             // take the latest data and use that to determine our result.
             definitelyAssigned.Clear();
 
@@ -83,17 +93,27 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
 #if REFERENCE_STATE
-        private void ProcessState(HashSet<Symbol> definitelyAssigned, LocalState state1, LocalState state2opt)
+        private void ProcessState(
+            HashSet<Symbol> definitelyAssigned,
+            LocalState state1,
+            LocalState state2opt
+        )
 #else
-        private void ProcessState(HashSet<Symbol> definitelyAssigned, LocalState state1, LocalState? state2opt)
+        private void ProcessState(
+            HashSet<Symbol> definitelyAssigned,
+            LocalState state1,
+            LocalState? state2opt
+        )
 #endif
         {
             foreach (var slot in state1.Assigned.TrueBits())
             {
-                if (slot < variableBySlot.Count &&
-                    state2opt?.IsAssigned(slot) != false &&
-                    variableBySlot[slot].Symbol is { } symbol &&
-                    symbol.Kind != SymbolKind.Field)
+                if (
+                    slot < variableBySlot.Count
+                    && state2opt?.IsAssigned(slot) != false
+                    && variableBySlot[slot].Symbol is { } symbol
+                    && symbol.Kind != SymbolKind.Field
+                )
                 {
                     definitelyAssigned.Add(symbol);
                 }

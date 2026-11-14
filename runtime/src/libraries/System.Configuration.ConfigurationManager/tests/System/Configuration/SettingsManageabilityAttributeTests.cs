@@ -10,8 +10,13 @@ namespace System.Configuration
         [Fact]
         public void GetValueIsExpected()
         {
-            var testSettingManageabilityAttribute = new SettingsManageabilityAttribute(SettingsManageability.Roaming);
-            Assert.Equal(SettingsManageability.Roaming, testSettingManageabilityAttribute.Manageability);
+            var testSettingManageabilityAttribute = new SettingsManageabilityAttribute(
+                SettingsManageability.Roaming
+            );
+            Assert.Equal(
+                SettingsManageability.Roaming,
+                testSettingManageabilityAttribute.Manageability
+            );
         }
     }
 }

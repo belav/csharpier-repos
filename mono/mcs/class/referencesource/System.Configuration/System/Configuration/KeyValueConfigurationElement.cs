@@ -4,33 +4,43 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
     using System.Text;
+    using System.Xml;
 
-    public class KeyValueConfigurationElement : ConfigurationElement {
+    public class KeyValueConfigurationElement : ConfigurationElement
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propKey =
-            new ConfigurationProperty("key", typeof(string), String.Empty, ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired);
-        private static readonly ConfigurationProperty _propValue =
-            new ConfigurationProperty("value", typeof(string), String.Empty, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propKey = new ConfigurationProperty(
+            "key",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        );
+        private static readonly ConfigurationProperty _propValue = new ConfigurationProperty(
+            "value",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.None
+        );
 
-        static KeyValueConfigurationElement() {
+        static KeyValueConfigurationElement()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propKey);
             _properties.Add(_propValue);
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         bool _needsInit;
@@ -40,22 +50,24 @@ namespace System.Configuration {
         //
         // Constructor
         //
-        internal KeyValueConfigurationElement() {
-        }
+        internal KeyValueConfigurationElement() { }
 
-        public KeyValueConfigurationElement(string key, string value) {
+        public KeyValueConfigurationElement(string key, string value)
+        {
             _needsInit = true;
             _initKey = key;
             _initValue = value;
         }
 
-        protected internal override void Init() {
+        protected internal override void Init()
+        {
             base.Init();
 
             // We cannot initialize configuration properties in the constructor,
-            // because Properties is an overridable virtual property that 
+            // because Properties is an overridable virtual property that
             // hence may not be available in the constructor.
-            if (_needsInit) {
+            if (_needsInit)
+            {
                 _needsInit = false;
                 base[_propKey] = _initKey;
                 Value = _initValue;
@@ -66,21 +78,21 @@ namespace System.Configuration {
         // Properties
         //
 
-        [ConfigurationProperty("key", Options = ConfigurationPropertyOptions.IsKey, DefaultValue = "")]
-        public string Key {
-            get {
-                return (string)base[_propKey];
-            }
+        [ConfigurationProperty(
+            "key",
+            Options = ConfigurationPropertyOptions.IsKey,
+            DefaultValue = ""
+        )]
+        public string Key
+        {
+            get { return (string)base[_propKey]; }
         }
 
         [ConfigurationProperty("value", DefaultValue = "")]
-        public string Value {
-            get {
-                return (string)base[_propValue];
-            }
-            set {
-                base[_propValue] = value;
-            }
+        public string Value
+        {
+            get { return (string)base[_propValue]; }
+            set { base[_propValue] = value; }
         }
     }
 }

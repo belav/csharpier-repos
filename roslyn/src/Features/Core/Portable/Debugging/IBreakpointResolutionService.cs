@@ -12,8 +12,16 @@ namespace Microsoft.CodeAnalysis.Debugging
 {
     internal interface IBreakpointResolutionService : ILanguageService
     {
-        Task<BreakpointResolutionResult?> ResolveBreakpointAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken = default);
+        Task<BreakpointResolutionResult?> ResolveBreakpointAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken = default
+        );
 
-        Task<IEnumerable<BreakpointResolutionResult>> ResolveBreakpointsAsync(Solution solution, string name, CancellationToken cancellationToken = default);
+        Task<IEnumerable<BreakpointResolutionResult>> ResolveBreakpointsAsync(
+            Solution solution,
+            string name,
+            CancellationToken cancellationToken = default
+        );
     }
 }

@@ -11,7 +11,7 @@ namespace Microsoft.Internal
         {
             get { return StringComparer.Ordinal; }
         }
-        
+
         public static StringComparer MetadataKeyNames
         {
             get { return StringComparer.Ordinal; }

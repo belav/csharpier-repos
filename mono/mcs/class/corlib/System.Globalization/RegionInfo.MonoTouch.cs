@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,18 +37,18 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Globalization {
+namespace System.Globalization
+{
+    public partial class RegionInfo
+    {
+        [DllImport("__Internal")]
+        static extern string xamarin_get_locale_country_code();
 
-	public partial class RegionInfo {
-
-		[DllImport ("__Internal")]
-		extern static string xamarin_get_locale_country_code ();
-
-		static RegionInfo CreateFromNSLocale ()
-		{
-			return new RegionInfo (xamarin_get_locale_country_code ());
-		}
-	}
+        static RegionInfo CreateFromNSLocale()
+        {
+            return new RegionInfo(xamarin_get_locale_country_code());
+        }
+    }
 }
 
 #endif

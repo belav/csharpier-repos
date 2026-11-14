@@ -44,9 +44,8 @@ public class BlazorWebJsInitializersTest
             Browser.Exists(By.Id(callback));
         }
 
-        Browser.Equal(
-            expectedInvokedCallbacks.Count,
-            () => Browser.FindElements(By.CssSelector("#initializers-content > p")).Count
+        Browser.Equal(expectedInvokedCallbacks.Count, () =>
+            Browser.FindElements(By.CssSelector("#initializers-content > p")).Count
         );
 
         if (server)
@@ -81,9 +80,8 @@ public class BlazorWebJsInitializersTest
             Browser.Exists(By.Id(callback));
         }
 
-        Browser.Equal(
-            expectedCallbacks.Count,
-            () => Browser.FindElements(By.CssSelector("#initializers-content > p")).Count
+        Browser.Equal(expectedCallbacks.Count, () =>
+            Browser.FindElements(By.CssSelector("#initializers-content > p")).Count
         );
 
         if (server)

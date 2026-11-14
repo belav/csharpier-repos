@@ -24,4 +24,3 @@ public partial class MyClass
     [DllImport("incompatible_type")]
     static extern void call_needing_marhsal_ilgen(int[] numbers);
 }
-

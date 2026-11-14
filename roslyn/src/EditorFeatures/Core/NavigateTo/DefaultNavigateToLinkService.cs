@@ -19,11 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultNavigateToLinkService()
-        {
-        }
+        public DefaultNavigateToLinkService() { }
 
-        public Task<bool> TryNavigateToLinkAsync(Uri uri, CancellationToken cancellationToken)
-            => SpecializedTasks.False;
+        public Task<bool> TryNavigateToLinkAsync(Uri uri, CancellationToken cancellationToken) =>
+            SpecializedTasks.False;
     }
 }

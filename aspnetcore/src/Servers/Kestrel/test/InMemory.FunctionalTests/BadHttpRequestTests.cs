@@ -232,9 +232,8 @@ public class BadHttpRequestTests : LoggedTest
             }
         }
 
-        Assert.All(
-            TestSink.Writes.Where(w => w.LoggerName != "Microsoft.Hosting.Lifetime"),
-            w => Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Debug)
+        Assert.All(TestSink.Writes.Where(w => w.LoggerName != "Microsoft.Hosting.Lifetime"), w =>
+            Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Debug)
         );
         Assert.Contains(TestSink.Writes, w => w.EventId.Id == 17);
     }
@@ -357,19 +356,16 @@ public class BadHttpRequestTests : LoggedTest
         var diagListener = new DiagnosticListener("BadRequestTestsDiagListener");
         string eventProviderName = "";
         string exceptionString = "";
-        var badRequestEventListener = new BadRequestEventListener(
-            diagListener,
-            (pair) =>
+        var badRequestEventListener = new BadRequestEventListener(diagListener, (pair) =>
+        {
+            eventProviderName = pair.Key;
+            var featureCollection = pair.Value as IFeatureCollection;
+            if (featureCollection is not null)
             {
-                eventProviderName = pair.Key;
-                var featureCollection = pair.Value as IFeatureCollection;
-                if (featureCollection is not null)
-                {
-                    var badRequestFeature = featureCollection.Get<IBadRequestExceptionFeature>();
-                    exceptionString = badRequestFeature.Error.ToString();
-                }
+                var badRequestFeature = featureCollection.Get<IBadRequestExceptionFeature>();
+                exceptionString = badRequestFeature.Error.ToString();
             }
-        );
+        });
 
         await using (
             var server = new TestServer(

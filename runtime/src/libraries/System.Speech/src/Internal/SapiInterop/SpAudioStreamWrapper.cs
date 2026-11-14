@@ -12,7 +12,8 @@ namespace System.Speech.Internal.SapiInterop
     {
         #region Constructors
 
-        internal SpAudioStreamWrapper(Stream stream, SpeechAudioFormatInfo audioFormat) : base(stream)
+        internal SpAudioStreamWrapper(Stream stream, SpeechAudioFormatInfo audioFormat)
+            : base(stream)
         {
             // Assume PCM to start with
             _formatType = SAPIGuids.SPDFID_WaveFormatEx;
@@ -33,7 +34,13 @@ namespace System.Speech.Internal.SapiInterop
                 {
                     byte[] wfxTemp = new byte[_wfx.Length + wfx.cbSize];
                     Array.Copy(_wfx, wfxTemp, _wfx.Length);
-                    Array.Copy(audioFormat.FormatSpecificData(), 0, wfxTemp, _wfx.Length, wfx.cbSize);
+                    Array.Copy(
+                        audioFormat.FormatSpecificData(),
+                        0,
+                        wfxTemp,
+                        _wfx.Length,
+                        wfx.cbSize
+                    );
                     _wfx = wfxTemp;
                 }
             }
@@ -151,22 +158,22 @@ namespace System.Speech.Internal.SapiInterop
         private struct RIFFHDR
         {
             internal uint _id;
-            internal int _len;             /* file length less header */
-            internal uint _type;            /* should be "WAVE" */
+            internal int _len; /* file length less header */
+            internal uint _type; /* should be "WAVE" */
         }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct BLOCKHDR
         {
-            internal uint _id;              /* should be "fmt " or "data" */
-            internal int _len;             /* block size less header */
+            internal uint _id; /* should be "fmt " or "data" */
+            internal int _len; /* block size less header */
         };
 
         [StructLayout(LayoutKind.Sequential)]
         private struct DATAHDR
         {
-            internal uint _id;              /* should be "fmt " or "data" */
-            internal int _len;              /* block size less header */
+            internal uint _id; /* should be "fmt " or "data" */
+            internal int _len; /* block size less header */
         }
 
         #endregion

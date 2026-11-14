@@ -52,7 +52,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return SafeCreateExportedDelegate(instance, _method);
         }
 
-        private static ExportedDelegate SafeCreateExportedDelegate(object? instance, MethodInfo method)
+        private static ExportedDelegate SafeCreateExportedDelegate(
+            object? instance,
+            MethodInfo method
+        )
         {
             return new ExportedDelegate(instance, method);
         }

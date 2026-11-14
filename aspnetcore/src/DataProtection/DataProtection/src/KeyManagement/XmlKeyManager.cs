@@ -98,8 +98,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
     {
         _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         _logger = _loggerFactory.CreateLogger<XmlKeyManager>();
-        _keyStorageDirectories =
-            keyStorageDirectories ?? throw new ArgumentNullException(nameof(keyStorageDirectories));
+        _keyStorageDirectories = keyStorageDirectories
+            ?? throw new ArgumentNullException(nameof(keyStorageDirectories));
 
         var keyRepository = keyManagementOptions.Value.XmlRepository;
         var keyEncryptor = keyManagementOptions.Value.XmlEncryptor;
@@ -429,8 +429,7 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 
         _logger.CreatingKey(keyId, creationDate, activationDate, expirationDate);
 
-        var newDescriptor =
-            _authenticatedEncryptorConfiguration.CreateNewDescriptor()
+        var newDescriptor = _authenticatedEncryptorConfiguration.CreateNewDescriptor()
             ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>(
                 "CreateNewDescriptor returned null."
             );
@@ -475,8 +474,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         {
             _logger.NoXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm(keyId);
         }
-        var possiblyEncryptedKeyElement =
-            KeyEncryptor?.EncryptIfNecessary(keyElement) ?? keyElement;
+        var possiblyEncryptedKeyElement = KeyEncryptor?.EncryptIfNecessary(keyElement)
+            ?? keyElement;
 
         // Persist it to the underlying repository and trigger the cancellation token.
         var friendlyName = string.Format(CultureInfo.InvariantCulture, "key-{0:D}", keyId);

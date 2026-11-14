@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override AssemblyName[] GetReferencedAssemblies()
         {
-            Debug.Assert(Assembly.GetReferencedAssemblies().Length == 0, "If this fires, we have to actually implement this method.");
+            Debug.Assert(
+                Assembly.GetReferencedAssemblies().Length == 0,
+                "If this fires, we have to actually implement this method."
+            );
             return new AssemblyName[0];
         }
 

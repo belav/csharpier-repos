@@ -45,6 +45,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
 
         OPTID_WARNNOTASERRORLIST,
 
-        LARGEST_OPTION_ID
+        LARGEST_OPTION_ID,
     }
 }

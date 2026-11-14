@@ -14,8 +14,8 @@ using Microsoft.CodeAnalysis.Tags;
 namespace Microsoft.CodeAnalysis.AddPackage
 {
     /// <summary>
-    /// This is the top level 'Install Nuget Package' code action we show in 
-    /// the lightbulb.  It will have children to 'Install Latest', 
+    /// This is the top level 'Install Nuget Package' code action we show in
+    /// the lightbulb.  It will have children to 'Install Latest',
     /// 'Install Version 'X' ..., and 'Install with package manager'.
     /// </summary>
     /// <remarks>
@@ -29,9 +29,13 @@ namespace Microsoft.CodeAnalysis.AddPackage
         string source,
         string packageName,
         bool includePrerelease,
-        Document document) : CodeAction.CodeActionWithNestedActions(string.Format(FeaturesResources.Install_package_0, packageName),
-               CreateNestedActions(installerService, source, packageName, includePrerelease, document),
-               isInlinable: false)
+        Document document
+    )
+        : CodeAction.CodeActionWithNestedActions(
+            string.Format(FeaturesResources.Install_package_0, packageName),
+            CreateNestedActions(installerService, source, packageName, includePrerelease, document),
+            isInlinable: false
+        )
     {
         /// <summary>
         /// This code action only works by installing a package.  As such, it requires a non document change (and is
@@ -41,8 +45,11 @@ namespace Microsoft.CodeAnalysis.AddPackage
 
         private static ImmutableArray<CodeAction> CreateNestedActions(
             IPackageInstallerService installerService,
-            string source, string packageName, bool includePrerelease,
-            Document document)
+            string source,
+            string packageName,
+            bool includePrerelease,
+            Document document
+        )
         {
             // Determine what versions of this package are already installed in some project
             // in this solution.  We'll offer to add those specific versions to this project,
@@ -51,14 +58,32 @@ namespace Microsoft.CodeAnalysis.AddPackage
             var codeActions = ArrayBuilder<CodeAction>.GetInstance();
 
             // First add the actions to install a specific version.
-            codeActions.AddRange(installedVersions.Select(v => CreateCodeAction(
-                installerService, source, packageName, document,
-                versionOpt: v, includePrerelease: includePrerelease, isLocal: true)));
+            codeActions.AddRange(
+                installedVersions.Select(v =>
+                    CreateCodeAction(
+                        installerService,
+                        source,
+                        packageName,
+                        document,
+                        versionOpt: v,
+                        includePrerelease: includePrerelease,
+                        isLocal: true
+                    )
+                )
+            );
 
             // Now add the action to install the specific version.
-            codeActions.Add(CreateCodeAction(
-                installerService, source, packageName, document,
-                versionOpt: null, includePrerelease: includePrerelease, isLocal: false));
+            codeActions.Add(
+                CreateCodeAction(
+                    installerService,
+                    source,
+                    packageName,
+                    document,
+                    versionOpt: null,
+                    includePrerelease: includePrerelease,
+                    isLocal: false
+                )
+            );
 
             // And finally the action to show the package manager dialog.
             codeActions.Add(new InstallWithPackageManagerCodeAction(installerService, packageName));
@@ -72,11 +97,18 @@ namespace Microsoft.CodeAnalysis.AddPackage
             Document document,
             string versionOpt,
             bool includePrerelease,
-            bool isLocal)
+            bool isLocal
+        )
         {
             return new InstallPackageDirectlyCodeAction(
-                installerService, document, source, packageName,
-                versionOpt, includePrerelease, isLocal);
+                installerService,
+                document,
+                source,
+                packageName,
+                versionOpt,
+                includePrerelease,
+                isLocal
+            );
         }
     }
 }

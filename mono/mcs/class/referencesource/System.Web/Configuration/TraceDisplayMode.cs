@@ -4,10 +4,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    public enum TraceDisplayMode {
+namespace System.Web.Configuration
+{
+    public enum TraceDisplayMode
+    {
         SortByTime = 1,
-        SortByCategory = 2
+        SortByCategory = 2,
     }
 }

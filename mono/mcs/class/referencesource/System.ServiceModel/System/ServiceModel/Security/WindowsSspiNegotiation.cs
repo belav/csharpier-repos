@@ -4,25 +4,24 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Runtime.InteropServices;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Threading;
-    using System.Globalization;
     using System.ComponentModel;
-    using System.Security.Principal;
-    using System.IdentityModel.Tokens;
-    using System.Net;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IdentityModel;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.Net;
+    using System.Runtime.InteropServices;
     using System.Security.Authentication.ExtendedProtection;
-    using IMD = System.IdentityModel.Diagnostics;
-
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Threading;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
+    using IMD = System.IdentityModel.Diagnostics;
     using SR = System.ServiceModel.SR;
 
     internal sealed class WindowsSspiNegotiation : ISspiNegotiation
@@ -51,18 +50,55 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Client side ctor
         /// </summary>
-        internal WindowsSspiNegotiation(string package, SafeFreeCredentials credentialsHandle, TokenImpersonationLevel impersonationLevel, string servicePrincipalName, bool doMutualAuth, bool interactiveLogonEnabled, bool ntlmEnabled)
-            : this(false, package, credentialsHandle, impersonationLevel, servicePrincipalName, doMutualAuth, interactiveLogonEnabled, ntlmEnabled)
-        { }
+        internal WindowsSspiNegotiation(
+            string package,
+            SafeFreeCredentials credentialsHandle,
+            TokenImpersonationLevel impersonationLevel,
+            string servicePrincipalName,
+            bool doMutualAuth,
+            bool interactiveLogonEnabled,
+            bool ntlmEnabled
+        )
+            : this(
+                false,
+                package,
+                credentialsHandle,
+                impersonationLevel,
+                servicePrincipalName,
+                doMutualAuth,
+                interactiveLogonEnabled,
+                ntlmEnabled
+            ) { }
 
         /// <summary>
         /// Server side ctor
         /// </summary>
-        internal WindowsSspiNegotiation(string package, SafeFreeCredentials credentialsHandle, string defaultServiceBinding)
-            : this(true, package, credentialsHandle, TokenImpersonationLevel.Delegation, defaultServiceBinding, false, false, true)
-        { }
+        internal WindowsSspiNegotiation(
+            string package,
+            SafeFreeCredentials credentialsHandle,
+            string defaultServiceBinding
+        )
+            : this(
+                true,
+                package,
+                credentialsHandle,
+                TokenImpersonationLevel.Delegation,
+                defaultServiceBinding,
+                false,
+                false,
+                true
+            ) { }
 
-        WindowsSspiNegotiation(bool isServer, string package, SafeFreeCredentials credentialsHandle, TokenImpersonationLevel impersonationLevel, string servicePrincipalName, bool doMutualAuth, bool interactiveLogonEnabled, bool ntlmEnabled)
+        WindowsSspiNegotiation(
+            bool isServer,
+            string package,
+            SafeFreeCredentials credentialsHandle,
+            TokenImpersonationLevel impersonationLevel,
+            string servicePrincipalName,
+            bool doMutualAuth,
+            bool interactiveLogonEnabled,
+            bool ntlmEnabled
+        )
         {
             this.tokenSize = SspiWrapper.GetVerifyPackageInfo(package).MaxToken;
             this.isServer = isServer;
@@ -123,7 +159,14 @@ namespace System.ServiceModel.Security
             get
             {
                 ThrowIfDisposed();
-                return (this.contextFlags & (this.isServer ? SspiContextFlags.AcceptIdentify : SspiContextFlags.InitIdentify)) != 0;
+                return (
+                        this.contextFlags
+                        & (
+                            this.isServer
+                                ? SspiContextFlags.AcceptIdentify
+                                : SspiContextFlags.InitIdentify
+                        )
+                    ) != 0;
             }
         }
 
@@ -146,10 +189,7 @@ namespace System.ServiceModel.Security
 
         public string KeyEncryptionAlgorithm
         {
-            get
-            {
-                return SecurityAlgorithms.WindowsSspiKeyWrap;
-            }
+            get { return SecurityAlgorithms.WindowsSspiKeyWrap; }
         }
 
         public LifeSpan LifeSpan
@@ -159,7 +199,11 @@ namespace System.ServiceModel.Security
                 ThrowIfDisposed();
                 if (this.lifespan == null)
                 {
-                    LifeSpan tmpLifeSpan = (LifeSpan)SspiWrapper.QueryContextAttributes(this.securityContext, ContextAttribute.Lifespan);
+                    LifeSpan tmpLifeSpan = (LifeSpan)
+                        SspiWrapper.QueryContextAttributes(
+                            this.securityContext,
+                            ContextAttribute.Lifespan
+                        );
 
                     if (IsCompleted)
                     {
@@ -181,7 +225,11 @@ namespace System.ServiceModel.Security
                 ThrowIfDisposed();
                 if (this.protocolName == null)
                 {
-                    NegotiationInfoClass negotiationInfo = SspiWrapper.QueryContextAttributes(this.securityContext, ContextAttribute.NegotiationInfo) as NegotiationInfoClass;
+                    NegotiationInfoClass negotiationInfo =
+                        SspiWrapper.QueryContextAttributes(
+                            this.securityContext,
+                            ContextAttribute.NegotiationInfo
+                        ) as NegotiationInfoClass;
 
                     if (IsCompleted)
                     {
@@ -212,7 +260,11 @@ namespace System.ServiceModel.Security
                 ThrowIfDisposed();
                 if (this.sizes == null)
                 {
-                    SecSizes tmpSizes = (SecSizes)SspiWrapper.QueryContextAttributes(this.securityContext, ContextAttribute.Sizes);
+                    SecSizes tmpSizes = (SecSizes)
+                        SspiWrapper.QueryContextAttributes(
+                            this.securityContext,
+                            ContextAttribute.Sizes
+                        );
 
                     if (IsCompleted)
                     {
@@ -238,7 +290,12 @@ namespace System.ServiceModel.Security
             {
                 using (SafeCloseHandle contextToken = GetContextToken())
                 {
-                    using (WindowsIdentity windowsIdentity = new WindowsIdentity(contextToken.DangerousGetHandle(), this.ProtocolName))
+                    using (
+                        WindowsIdentity windowsIdentity = new WindowsIdentity(
+                            contextToken.DangerousGetHandle(),
+                            this.ProtocolName
+                        )
+                    )
                     {
                         return windowsIdentity.Name;
                     }
@@ -250,16 +307,30 @@ namespace System.ServiceModel.Security
         public byte[] Decrypt(byte[] encryptedContent)
         {
             if (encryptedContent == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("encryptedContent");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "encryptedContent"
+                );
             ThrowIfDisposed();
 
             SecurityBuffer[] securityBuffer = new SecurityBuffer[2];
-            securityBuffer[0] = new SecurityBuffer(encryptedContent, 0, encryptedContent.Length, BufferType.Stream);
+            securityBuffer[0] = new SecurityBuffer(
+                encryptedContent,
+                0,
+                encryptedContent.Length,
+                BufferType.Stream
+            );
             securityBuffer[1] = new SecurityBuffer(0, BufferType.Data);
-            int errorCode = SspiWrapper.DecryptMessage(this.securityContext, securityBuffer, 0, true);
+            int errorCode = SspiWrapper.DecryptMessage(
+                this.securityContext,
+                securityBuffer,
+                0,
+                true
+            );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
 
             for (int i = 0; i < securityBuffer.Length; ++i)
@@ -286,18 +357,39 @@ namespace System.ServiceModel.Security
             ThrowIfDisposed();
             SecurityBuffer[] securityBuffer = new SecurityBuffer[3];
 
-            byte[] tokenBuffer = DiagnosticUtility.Utility.AllocateByteArray(SecuritySizes.SecurityTrailer);
-            securityBuffer[0] = new SecurityBuffer(tokenBuffer, 0, tokenBuffer.Length, BufferType.Token);
+            byte[] tokenBuffer = DiagnosticUtility.Utility.AllocateByteArray(
+                SecuritySizes.SecurityTrailer
+            );
+            securityBuffer[0] = new SecurityBuffer(
+                tokenBuffer,
+                0,
+                tokenBuffer.Length,
+                BufferType.Token
+            );
             byte[] dataBuffer = DiagnosticUtility.Utility.AllocateByteArray(input.Length);
             Buffer.BlockCopy(input, 0, dataBuffer, 0, input.Length);
-            securityBuffer[1] = new SecurityBuffer(dataBuffer, 0, dataBuffer.Length, BufferType.Data);
-            byte[] paddingBuffer = DiagnosticUtility.Utility.AllocateByteArray(SecuritySizes.BlockSize);
-            securityBuffer[2] = new SecurityBuffer(paddingBuffer, 0, paddingBuffer.Length, BufferType.Padding);
+            securityBuffer[1] = new SecurityBuffer(
+                dataBuffer,
+                0,
+                dataBuffer.Length,
+                BufferType.Data
+            );
+            byte[] paddingBuffer = DiagnosticUtility.Utility.AllocateByteArray(
+                SecuritySizes.BlockSize
+            );
+            securityBuffer[2] = new SecurityBuffer(
+                paddingBuffer,
+                0,
+                paddingBuffer.Length,
+                BufferType.Padding
+            );
 
             int errorCode = SspiWrapper.EncryptMessage(this.securityContext, securityBuffer, 0);
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
 
             int tokenLen = 0;
@@ -309,24 +401,37 @@ namespace System.ServiceModel.Security
                 else if (securityBuffer[i].type == BufferType.Padding)
                     paddingLen = securityBuffer[i].size;
             }
-            byte[] encryptedData = DiagnosticUtility.Utility.AllocateByteArray(checked(tokenLen + dataBuffer.Length + paddingLen));
+            byte[] encryptedData = DiagnosticUtility.Utility.AllocateByteArray(
+                checked(tokenLen + dataBuffer.Length + paddingLen)
+            );
 
             Buffer.BlockCopy(tokenBuffer, 0, encryptedData, 0, tokenLen);
             Buffer.BlockCopy(dataBuffer, 0, encryptedData, tokenLen, dataBuffer.Length);
-            Buffer.BlockCopy(paddingBuffer, 0, encryptedData, tokenLen + dataBuffer.Length, paddingLen);
+            Buffer.BlockCopy(
+                paddingBuffer,
+                0,
+                encryptedData,
+                tokenLen + dataBuffer.Length,
+                paddingLen
+            );
 
             return encryptedData;
         }
 
-        public byte[] GetOutgoingBlob(byte[] incomingBlob, ChannelBinding channelbinding, ExtendedProtectionPolicy protectionPolicy)
+        public byte[] GetOutgoingBlob(
+            byte[] incomingBlob,
+            ChannelBinding channelbinding,
+            ExtendedProtectionPolicy protectionPolicy
+        )
         {
             ThrowIfDisposed();
             int statusCode = 0;
 
             // use the confidentiality option to ensure we can encrypt messages
-            SspiContextFlags requestedFlags = SspiContextFlags.Confidentiality
-                                            | SspiContextFlags.ReplayDetect
-                                            | SspiContextFlags.SequenceDetect;
+            SspiContextFlags requestedFlags =
+                SspiContextFlags.Confidentiality
+                | SspiContextFlags.ReplayDetect
+                | SspiContextFlags.SequenceDetect;
 
             if (this.doMutualAuth)
             {
@@ -337,22 +442,37 @@ namespace System.ServiceModel.Security
             {
                 requestedFlags |= SspiContextFlags.Delegate;
             }
-            else if (this.isServer == false && this.impersonationLevel == TokenImpersonationLevel.Identification)
+            else if (
+                this.isServer == false
+                && this.impersonationLevel == TokenImpersonationLevel.Identification
+            )
             {
                 requestedFlags |= SspiContextFlags.InitIdentify;
             }
-            else if (this.isServer == false && this.impersonationLevel == TokenImpersonationLevel.Anonymous)
+            else if (
+                this.isServer == false
+                && this.impersonationLevel == TokenImpersonationLevel.Anonymous
+            )
             {
                 requestedFlags |= SspiContextFlags.InitAnonymous;
             }
 
-            ExtendedProtectionPolicyHelper policyHelper = new ExtendedProtectionPolicyHelper(channelbinding, protectionPolicy);
+            ExtendedProtectionPolicyHelper policyHelper = new ExtendedProtectionPolicyHelper(
+                channelbinding,
+                protectionPolicy
+            );
 
             if (isServer)
             {
-                if (policyHelper.PolicyEnforcement == PolicyEnforcement.Always && policyHelper.ChannelBinding == null && policyHelper.ProtectionScenario != ProtectionScenario.TrustedProxy)
+                if (
+                    policyHelper.PolicyEnforcement == PolicyEnforcement.Always
+                    && policyHelper.ChannelBinding == null
+                    && policyHelper.ProtectionScenario != ProtectionScenario.TrustedProxy
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SecurityChannelBindingMissing)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SecurityChannelBindingMissing))
+                    );
                 }
 
                 if (policyHelper.PolicyEnforcement == PolicyEnforcement.WhenSupported)
@@ -403,14 +523,16 @@ namespace System.ServiceModel.Security
             if (!this.isServer)
             {
                 //client session
-                statusCode = SspiWrapper.InitializeSecurityContext(this.credentialsHandle,
-                                                                    ref this.securityContext,
-                                                                    this.servicePrincipalName,
-                                                                    requestedFlags,
-                                                                    Endianness.Network,
-                                                                    inSecurityBuffer,
-                                                                    outSecurityBuffer,
-                                                                    ref this.contextFlags);
+                statusCode = SspiWrapper.InitializeSecurityContext(
+                    this.credentialsHandle,
+                    ref this.securityContext,
+                    this.servicePrincipalName,
+                    requestedFlags,
+                    Endianness.Network,
+                    inSecurityBuffer,
+                    outSecurityBuffer,
+                    ref this.contextFlags
+                );
             }
             else
             {
@@ -419,68 +541,96 @@ namespace System.ServiceModel.Security
                 bool isServerSecurityContextNull = this.securityContext == null;
                 SspiContextFlags serverContextFlags = this.contextFlags;
 
-                statusCode = SspiWrapper.AcceptSecurityContext(this.credentialsHandle,
-                                                                ref this.securityContext,
-                                                                requestedFlags,
-                                                                Endianness.Network,
-                                                                inSecurityBuffer,
-                                                                outSecurityBuffer,
-                                                                ref this.contextFlags);
+                statusCode = SspiWrapper.AcceptSecurityContext(
+                    this.credentialsHandle,
+                    ref this.securityContext,
+                    requestedFlags,
+                    Endianness.Network,
+                    inSecurityBuffer,
+                    outSecurityBuffer,
+                    ref this.contextFlags
+                );
 
                 if (statusCode == (int)SecurityStatus.InvalidToken && !isServerSecurityContextNull)
                 {
-                    // Call again into ASC after deleting the Securitycontext. If this securitycontext is not deleted 
+                    // Call again into ASC after deleting the Securitycontext. If this securitycontext is not deleted
                     // then when the client sends NTLM blob the service will treat it as Nego2blob and will fail to authenticate the client.
                     this.contextFlags = serverContextFlags;
                     CloseContext();
-                    statusCode = SspiWrapper.AcceptSecurityContext(this.credentialsHandle,
-                                                                    ref this.securityContext,
-                                                                    requestedFlags,
-                                                                    Endianness.Network,
-                                                                    inSecurityBuffer,
-                                                                    outSecurityBuffer,
-                                                                    ref this.contextFlags);
+                    statusCode = SspiWrapper.AcceptSecurityContext(
+                        this.credentialsHandle,
+                        ref this.securityContext,
+                        requestedFlags,
+                        Endianness.Network,
+                        inSecurityBuffer,
+                        outSecurityBuffer,
+                        ref this.contextFlags
+                    );
                 }
             }
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                IMD.SecurityTraceRecordHelper.TraceChannelBindingInformation(policyHelper, this.isServer, channelbinding);
+                IMD.SecurityTraceRecordHelper.TraceChannelBindingInformation(
+                    policyHelper,
+                    this.isServer,
+                    channelbinding
+                );
             }
 
             if ((statusCode & unchecked((int)0x80000000)) != 0)
             {
-                if (!this.isServer
+                if (
+                    !this.isServer
                     && this.interactiveNegoLogonEnabled
                     && SecurityUtils.IsOSGreaterThanOrEqualToWin7()
                     && SspiWrapper.IsSspiPromptingNeeded((uint)statusCode)
-                    && SspiWrapper.IsNegotiateExPackagePresent())
+                    && SspiWrapper.IsNegotiateExPackagePresent()
+                )
                 {
-                    // If we have prompted enough number of times (DefaultMaxPromptAttempts) with wrong credentials, then we do not prompt again and throw. 
+                    // If we have prompted enough number of times (DefaultMaxPromptAttempts) with wrong credentials, then we do not prompt again and throw.
                     if (MaxPromptAttempts >= DefaultMaxPromptAttempts)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(statusCode, SR.GetString(SR.InvalidClientCredentials)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(
+                                statusCode,
+                                SR.GetString(SR.InvalidClientCredentials)
+                            )
+                        );
                     }
 
                     IntPtr ppAuthIdentity = IntPtr.Zero;
-                    uint errorCode = SspiWrapper.SspiPromptForCredential(this.servicePrincipalName, this.clientPackageName, out ppAuthIdentity, ref this.saveClientCredentialsOnSspiUi);
+                    uint errorCode = SspiWrapper.SspiPromptForCredential(
+                        this.servicePrincipalName,
+                        this.clientPackageName,
+                        out ppAuthIdentity,
+                        ref this.saveClientCredentialsOnSspiUi
+                    );
                     if (errorCode == (uint)CredentialStatus.Success)
                     {
                         IntPtr ppNewAuthIdentity = IntPtr.Zero;
 
                         if (!this.allowNtlm)
                         {
-                            // When Ntlm is  explicitly disabled we don't want the collected 
+                            // When Ntlm is  explicitly disabled we don't want the collected
                             //creds from the Kerb/NTLM tile to be used for NTLM auth.
 
-                            uint status = UnsafeNativeMethods.SspiExcludePackage(ppAuthIdentity, "NTLM", out ppNewAuthIdentity);
+                            uint status = UnsafeNativeMethods.SspiExcludePackage(
+                                ppAuthIdentity,
+                                "NTLM",
+                                out ppNewAuthIdentity
+                            );
                         }
                         else
                         {
                             ppNewAuthIdentity = ppAuthIdentity;
                         }
 
-                        this.credentialsHandle = SspiWrapper.AcquireCredentialsHandle(this.clientPackageName, CredentialUse.Outbound, ref ppNewAuthIdentity);
+                        this.credentialsHandle = SspiWrapper.AcquireCredentialsHandle(
+                            this.clientPackageName,
+                            CredentialUse.Outbound,
+                            ref ppNewAuthIdentity
+                        );
 
                         if (IntPtr.Zero != ppNewAuthIdentity)
                         {
@@ -502,20 +652,37 @@ namespace System.ServiceModel.Security
 
                         CloseContext();
                         this.isCompleted = true;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception((int)errorCode, SR.GetString(SR.SspiErrorOrInvalidClientCredentials)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(
+                                (int)errorCode,
+                                SR.GetString(SR.SspiErrorOrInvalidClientCredentials)
+                            )
+                        );
                     }
                 }
 
                 CloseContext();
                 this.isCompleted = true;
-                if (!this.isServer && (statusCode == (int)SecurityStatus.TargetUnknown
-                    || statusCode == (int)SecurityStatus.WrongPrincipal))
+                if (
+                    !this.isServer
+                    && (
+                        statusCode == (int)SecurityStatus.TargetUnknown
+                        || statusCode == (int)SecurityStatus.WrongPrincipal
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(statusCode, SR.GetString(SR.IncorrectSpnOrUpnSpecified, this.servicePrincipalName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(
+                            statusCode,
+                            SR.GetString(SR.IncorrectSpnOrUpnSpecified, this.servicePrincipalName)
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(statusCode, SR.GetString(SR.InvalidSspiNegotiation)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(statusCode, SR.GetString(SR.InvalidSspiNegotiation))
+                    );
                 }
             }
 
@@ -541,19 +708,40 @@ namespace System.ServiceModel.Security
                 // 2. caller is not anonymous
                 // 3. protocol is not Kerberos
                 // 4. policy is set to check service binding
-                // 
-                if (isServer && ((this.contextFlags & SspiContextFlags.AcceptAnonymous) == 0) && (string.Compare(this.ProtocolName, NegotiationInfoClass.Kerberos, StringComparison.OrdinalIgnoreCase) != 0) && policyHelper.ShouldCheckServiceBinding)
+                //
+                if (
+                    isServer
+                    && ((this.contextFlags & SspiContextFlags.AcceptAnonymous) == 0)
+                    && (
+                        string.Compare(
+                            this.ProtocolName,
+                            NegotiationInfoClass.Kerberos,
+                            StringComparison.OrdinalIgnoreCase
+                        ) != 0
+                    )
+                    && policyHelper.ShouldCheckServiceBinding
+                )
                 {
                     // in the server case the servicePrincipalName is the defaultServiceBinding
-                   
+
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
                         string serviceBindingNameSentByClient;
-                        SspiWrapper.QuerySpecifiedTarget(securityContext, out serviceBindingNameSentByClient);
-                        IMD.SecurityTraceRecordHelper.TraceServiceNameBindingOnServer( serviceBindingNameSentByClient, this.servicePrincipalName, policyHelper.ServiceNameCollection);
+                        SspiWrapper.QuerySpecifiedTarget(
+                            securityContext,
+                            out serviceBindingNameSentByClient
+                        );
+                        IMD.SecurityTraceRecordHelper.TraceServiceNameBindingOnServer(
+                            serviceBindingNameSentByClient,
+                            this.servicePrincipalName,
+                            policyHelper.ServiceNameCollection
+                        );
                     }
-                    
-                    policyHelper.CheckServiceBinding(this.securityContext, this.servicePrincipalName);
+
+                    policyHelper.CheckServiceBinding(
+                        this.securityContext,
+                        this.servicePrincipalName
+                    );
                 }
             }
             else
@@ -569,7 +757,9 @@ namespace System.ServiceModel.Security
             ThrowIfDisposed();
             if (!IsValidContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception((int)SecurityStatus.InvalidHandle)
+                );
             }
 
             SspiWrapper.ImpersonateSecurityContext(this.securityContext);
@@ -615,22 +805,29 @@ namespace System.ServiceModel.Security
         {
             if (!IsValidContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception((int)SecurityStatus.InvalidHandle)
+                );
             }
 
             SafeCloseHandle token;
-            SecurityStatus status = (SecurityStatus)SspiWrapper.QuerySecurityContextToken(this.securityContext, out token);
+            SecurityStatus status = (SecurityStatus)
+                SspiWrapper.QuerySecurityContextToken(this.securityContext, out token);
             if (status != SecurityStatus.OK)
             {
                 Utility.CloseInvalidOutSafeHandle(token);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception((int)status));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception((int)status)
+                );
             }
             return token;
         }
 
         void OnBadData()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadData)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new MessageSecurityException(SR.GetString(SR.BadData))
+            );
         }
 
         void ThrowIfDisposed()
@@ -639,7 +836,9 @@ namespace System.ServiceModel.Security
             {
                 if (this.disposed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(null));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(null)
+                    );
                 }
             }
         }

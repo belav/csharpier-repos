@@ -1,5 +1,5 @@
 //
-// HttpCacheVaryByHeadersCas.cs 
+// HttpCacheVaryByHeadersCas.cs
 //	- CAS unit tests for System.Web.HttpCacheVaryByHeaders
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,57 +27,60 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web {
+namespace MonoCasTests.System.Web
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HttpCacheVaryByHeadersCas : AspNetHostingMinimal
+    {
+        private HttpResponse response;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpCacheVaryByHeadersCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            response = new HttpResponse(Console.Out);
+        }
 
-		private HttpResponse response;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            HttpCacheVaryByHeaders cache = response.Cache.VaryByHeaders;
+            Assert.IsFalse(cache.AcceptTypes, "AcceptTypes");
+            cache.AcceptTypes = true;
+            Assert.IsFalse(cache.UserAgent, "UserAgent");
+            cache.UserAgent = true;
+            Assert.IsFalse(cache.UserCharSet, "UserCharSet");
+            cache.UserCharSet = true;
+            Assert.IsFalse(cache.UserLanguage, "UserLanguage");
+            cache.UserLanguage = true;
+            Assert.IsFalse(cache["mono"], "this[string]");
+            cache["mono"] = true;
+            cache.VaryByUnspecifiedParameters();
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			response = new HttpResponse (Console.Out);
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HttpCacheVaryByHeaders cache = response.Cache.VaryByHeaders;
-			Assert.IsFalse (cache.AcceptTypes, "AcceptTypes");
-			cache.AcceptTypes = true;
-			Assert.IsFalse (cache.UserAgent, "UserAgent");
-			cache.UserAgent = true;
-			Assert.IsFalse (cache.UserCharSet, "UserCharSet");
-			cache.UserCharSet = true;
-			Assert.IsFalse (cache.UserLanguage, "UserLanguage");
-			cache.UserLanguage = true;
-			Assert.IsFalse (cache["mono"], "this[string]");
-			cache["mono"] = true;
-			cache.VaryByUnspecifiedParameters ();
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            // no public ctor is available but we know that it's properties don't have any restrictions
+            MethodInfo mi = this.Type.GetProperty("AcceptTypes").GetGetMethod();
+            Assert.IsNotNull(mi, "get_AcceptTypes");
+            return mi.Invoke(response.Cache.VaryByHeaders, null);
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// no public ctor is available but we know that it's properties don't have any restrictions
-			MethodInfo mi = this.Type.GetProperty ("AcceptTypes").GetGetMethod ();
-			Assert.IsNotNull (mi, "get_AcceptTypes");
-			return mi.Invoke (response.Cache.VaryByHeaders, null);
-		}
-
-		public override Type Type {
-			get { return typeof (HttpCacheVaryByHeaders); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HttpCacheVaryByHeaders); }
+        }
+    }
 }

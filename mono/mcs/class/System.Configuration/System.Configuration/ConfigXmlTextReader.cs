@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,27 +33,28 @@ using System.Xml;
 
 internal class ConfigXmlTextReader : XmlTextReader, IConfigErrorInfo
 {
-	private readonly string fileName;
+    private readonly string fileName;
 
-	public ConfigXmlTextReader (Stream s, string fileName) : base (s)
-	{
-		if (fileName == null)
-			throw new ArgumentNullException ("fileName");
+    public ConfigXmlTextReader(Stream s, string fileName)
+        : base(s)
+    {
+        if (fileName == null)
+            throw new ArgumentNullException("fileName");
 
-		this.fileName = fileName;
-	}
+        this.fileName = fileName;
+    }
 
-	public ConfigXmlTextReader (TextReader input, string fileName)
-		: base (input)
-	{
-		if (fileName == null)
-			throw new ArgumentNullException ("fileName");
+    public ConfigXmlTextReader(TextReader input, string fileName)
+        : base(input)
+    {
+        if (fileName == null)
+            throw new ArgumentNullException("fileName");
 
-		this.fileName = fileName;
-	}
+        this.fileName = fileName;
+    }
 
-	public string Filename {
-		get { return fileName; }
-	}
+    public string Filename
+    {
+        get { return fileName; }
+    }
 }
-

@@ -42,10 +42,7 @@ namespace System.IO.Packaging
         /// <value></value>
         public Uri TargetUri
         {
-            get
-            {
-                return _targetUri;
-            }
+            get { return _targetUri; }
         }
 
         /// <summary>
@@ -54,10 +51,7 @@ namespace System.IO.Packaging
         /// <value></value>
         public string RelationshipType
         {
-            get
-            {
-                return _relationshipType;
-            }
+            get { return _relationshipType; }
         }
 
         /// <summary>
@@ -66,10 +60,7 @@ namespace System.IO.Packaging
         /// <value></value>
         public TargetMode TargetMode
         {
-            get
-            {
-                return _targetMode;
-            }
+            get { return _targetMode; }
         }
 
         /// <summary>
@@ -78,12 +69,8 @@ namespace System.IO.Packaging
         /// <value>String</value>
         public string Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
         }
-
 
         /// <summary>
         /// PackageRelationship's owning Package object.
@@ -91,10 +78,7 @@ namespace System.IO.Packaging
         /// <value>Package</value>
         public Package Package
         {
-            get
-            {
-                return _package;
-            }
+            get { return _package; }
         }
 
         #endregion Public Properties
@@ -110,7 +94,14 @@ namespace System.IO.Packaging
         /// <param name="targetMode">enum specifying the interpretation of the base uri for the target uri</param>
         /// <param name="relationshipType">type name</param>
         /// <param name="id">unique identifier</param>
-        internal PackageRelationship(Package package, PackagePart? sourcePart, Uri targetUri, TargetMode targetMode, string relationshipType, string id)
+        internal PackageRelationship(
+            Package package,
+            PackagePart? sourcePart,
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType,
+            string id
+        )
         {
             if (package is null)
             {
@@ -146,16 +137,22 @@ namespace System.IO.Packaging
 #endif
 
             // Additional check - don't accept absolute Uri's if targetMode is Internal.
-            Debug.Assert((targetMode == TargetMode.External || !targetUri.IsAbsoluteUri),
-                "PackageRelationship target must be relative if the TargetMode is Internal");
+            Debug.Assert(
+                (targetMode == TargetMode.External || !targetUri.IsAbsoluteUri),
+                "PackageRelationship target must be relative if the TargetMode is Internal"
+            );
 
             // Additional check - Verify if the Enum value is valid
-            Debug.Assert((targetMode >= TargetMode.Internal || targetMode <= TargetMode.External),
-                "TargetMode enum value is out of Range");
+            Debug.Assert(
+                (targetMode >= TargetMode.Internal || targetMode <= TargetMode.External),
+                "TargetMode enum value is out of Range"
+            );
 
             // Look for empty string or string with just spaces
-            Debug.Assert(relationshipType.Trim() != string.Empty,
-                "RelationshipType cannot be empty string or a string with just spaces");
+            Debug.Assert(
+                relationshipType.Trim() != string.Empty,
+                "RelationshipType cannot be empty string or a string with just spaces"
+            );
 
             _package = package;
             _source = sourcePart;
@@ -171,10 +168,7 @@ namespace System.IO.Packaging
 
         internal static Uri ContainerRelationshipPartName
         {
-            get
-            {
-                return s_containerRelationshipPartName;
-            }
+            get { return s_containerRelationshipPartName; }
         }
 
         #endregion Internal Properties
@@ -188,7 +182,9 @@ namespace System.IO.Packaging
         private readonly TargetMode _targetMode;
         private readonly string _id;
 
-        private static readonly Uri s_containerRelationshipPartName = PackUriHelper.CreatePartUri(new Uri("/_rels/.rels", UriKind.Relative));
+        private static readonly Uri s_containerRelationshipPartName = PackUriHelper.CreatePartUri(
+            new Uri("/_rels/.rels", UriKind.Relative)
+        );
 
         #endregion Private Members
     }

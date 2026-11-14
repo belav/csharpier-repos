@@ -4,11 +4,10 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security.Authentication;
 #if NET7_0_OR_GREATER
 using System.Runtime.InteropServices.Marshalling;
 #endif
-using System.Security.Authentication;
-
 
 internal static partial class Interop
 {
@@ -50,7 +49,11 @@ namespace System.DirectoryServices.Protocols
         public int packageListLength;
 
 #if NET7_0_OR_GREATER
-        [CustomMarshaller(typeof(SEC_WINNT_AUTH_IDENTITY_EX), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+        [CustomMarshaller(
+            typeof(SEC_WINNT_AUTH_IDENTITY_EX),
+            MarshalMode.ManagedToUnmanagedIn,
+            typeof(Marshaller)
+        )]
         internal static class Marshaller
         {
             public static Native ConvertToUnmanaged(SEC_WINNT_AUTH_IDENTITY_EX managed)
@@ -109,7 +112,7 @@ namespace System.DirectoryServices.Protocols
         LDAP_AUTH_DIGEST = LDAP_AUTH_OTHERKIND | 0x4000,
         LDAP_AUTH_EXTERNAL = LDAP_AUTH_OTHERKIND | 0x0020,
         LDAP_AUTH_KRBV4 = 0xFF,
-        LDAP_AUTH_SIMPLE = 0x80
+        LDAP_AUTH_SIMPLE = 0x80,
     }
 
     internal enum LdapOption
@@ -129,6 +132,7 @@ namespace System.DirectoryServices.Protocols
         LDAP_OPT_HOST_NAME = 0x30,
         LDAP_OPT_ERROR_NUMBER = 0x31, // aka LDAP_OPT_RESULT_CODE
         LDAP_OPT_ERROR_STRING = 0x32, // aka LDAP_OPT_DIAGNOSTIC_MESSAGE
+
         // This one is overloaded between Windows and Linux servers:
         // in OpenLDAP, LDAP_OPT_MATCHED_DN = 0x33
         LDAP_OPT_SERVER_ERROR = 0x33, // Not Supported in Linux
@@ -159,14 +163,14 @@ namespace System.DirectoryServices.Protocols
         LDAP_OPT_URI = 0x5006, // Not Supported in Windows
         LDAP_OPT_X_SASL_REALM = 0x6101,
         LDAP_OPT_X_SASL_AUTHCID = 0x6102,
-        LDAP_OPT_X_SASL_AUTHZID = 0x6103
+        LDAP_OPT_X_SASL_AUTHZID = 0x6103,
     }
 
     internal enum ResultAll
     {
         LDAP_MSG_ALL = 1,
         LDAP_MSG_RECEIVED = 2,
-        LDAP_MSG_POLLINGALL = 3 // Not Supported in Linux
+        LDAP_MSG_POLLINGALL = 3, // Not Supported in Linux
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -186,10 +190,15 @@ namespace System.DirectoryServices.Protocols
         public IntPtr bv_val = IntPtr.Zero;
 
 #if NET7_0_OR_GREATER
-        [CustomMarshaller(typeof(BerVal), MarshalMode.ManagedToUnmanagedIn, typeof(PinningMarshaller))]
+        [CustomMarshaller(
+            typeof(BerVal),
+            MarshalMode.ManagedToUnmanagedIn,
+            typeof(PinningMarshaller)
+        )]
         internal static unsafe class PinningMarshaller
         {
-            public static ref int GetPinnableReference(BerVal managed) => ref (managed is null ? ref Unsafe.NullRef<int>() : ref managed.bv_len);
+            public static ref int GetPinnableReference(BerVal managed) =>
+                ref (managed is null ? ref Unsafe.NullRef<int>() : ref managed.bv_len);
 
             // All usages in our currently supported scenarios will always go through GetPinnableReference
             public static int* ConvertToUnmanaged(BerVal _) => throw new UnreachableException();
@@ -220,9 +229,21 @@ namespace System.DirectoryServices.Protocols
 #if NET7_0_OR_GREATER
         public static readonly unsafe int Size = sizeof(Marshaller.MarshalValue.Native);
 
-        [CustomMarshaller(typeof(LdapReferralCallback), MarshalMode.ManagedToUnmanagedIn, typeof(MarshalValue))]
-        [CustomMarshaller(typeof(LdapReferralCallback), MarshalMode.ManagedToUnmanagedRef, typeof(MarshalValue))]
-        [CustomMarshaller(typeof(LdapReferralCallback), MarshalMode.ManagedToUnmanagedOut, typeof(MarshalValue))]
+        [CustomMarshaller(
+            typeof(LdapReferralCallback),
+            MarshalMode.ManagedToUnmanagedIn,
+            typeof(MarshalValue)
+        )]
+        [CustomMarshaller(
+            typeof(LdapReferralCallback),
+            MarshalMode.ManagedToUnmanagedRef,
+            typeof(MarshalValue)
+        )]
+        [CustomMarshaller(
+            typeof(LdapReferralCallback),
+            MarshalMode.ManagedToUnmanagedOut,
+            typeof(MarshalValue)
+        )]
         public static class Marshaller
         {
             public unsafe struct MarshalValue
@@ -242,9 +263,15 @@ namespace System.DirectoryServices.Protocols
                 {
                     _managed = managed;
                     _native.sizeofcallback = sizeof(Native);
-                    _native.query = managed.query is not null ? Marshal.GetFunctionPointerForDelegate(managed.query) : IntPtr.Zero;
-                    _native.notify = managed.notify is not null ? Marshal.GetFunctionPointerForDelegate(managed.notify) : IntPtr.Zero;
-                    _native.dereference = managed.dereference is not null ? Marshal.GetFunctionPointerForDelegate(managed.dereference) : IntPtr.Zero;
+                    _native.query = managed.query is not null
+                        ? Marshal.GetFunctionPointerForDelegate(managed.query)
+                        : IntPtr.Zero;
+                    _native.notify = managed.notify is not null
+                        ? Marshal.GetFunctionPointerForDelegate(managed.notify)
+                        : IntPtr.Zero;
+                    _native.dereference = managed.dereference is not null
+                        ? Marshal.GetFunctionPointerForDelegate(managed.dereference)
+                        : IntPtr.Zero;
                 }
 
                 public Native ToUnmanaged() => _native;
@@ -256,15 +283,30 @@ namespace System.DirectoryServices.Protocols
                     return new LdapReferralCallback()
                     {
                         sizeofcallback = _native.sizeofcallback,
-                        query = _native.query != IntPtr.Zero ? Marshal.GetDelegateForFunctionPointer<QUERYFORCONNECTIONInternal>(_native.query) : null,
-                        notify = _native.notify != IntPtr.Zero ? Marshal.GetDelegateForFunctionPointer<NOTIFYOFNEWCONNECTIONInternal>(_native.notify) : null,
-                        dereference = _native.dereference != IntPtr.Zero ? Marshal.GetDelegateForFunctionPointer<DEREFERENCECONNECTIONInternal>(_native.dereference) : null
+                        query =
+                            _native.query != IntPtr.Zero
+                                ? Marshal.GetDelegateForFunctionPointer<QUERYFORCONNECTIONInternal>(
+                                    _native.query
+                                )
+                                : null,
+                        notify =
+                            _native.notify != IntPtr.Zero
+                                ? Marshal.GetDelegateForFunctionPointer<NOTIFYOFNEWCONNECTIONInternal>(
+                                    _native.notify
+                                )
+                                : null,
+                        dereference =
+                            _native.dereference != IntPtr.Zero
+                                ? Marshal.GetDelegateForFunctionPointer<DEREFERENCECONNECTIONInternal>(
+                                    _native.dereference
+                                )
+                                : null,
                     };
                 }
 
                 public void OnInvoked() => GC.KeepAlive(_managed);
 
-                public void Free() {}
+                public void Free() { }
             }
         }
 #else

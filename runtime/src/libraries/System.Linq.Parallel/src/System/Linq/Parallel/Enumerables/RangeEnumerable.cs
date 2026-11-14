@@ -44,14 +44,17 @@ namespace System.Linq.Parallel
 
             // Create individual partitions, carefully avoiding overflow
             int doneCount = 0;
-            QueryOperatorEnumerator<int, int>[] partitions = new QueryOperatorEnumerator<int, int>[partitionCount];
+            QueryOperatorEnumerator<int, int>[] partitions = new QueryOperatorEnumerator<int, int>[
+                partitionCount
+            ];
             for (int i = 0; i < partitionCount; i++)
             {
                 int partitionSize = (i < biggerPartitionCount) ? stride + 1 : stride;
                 partitions[i] = new RangeEnumerator(
                     unchecked(_from + doneCount),
                     partitionSize,
-                    doneCount);
+                    doneCount
+                );
                 doneCount += partitionSize;
             }
 

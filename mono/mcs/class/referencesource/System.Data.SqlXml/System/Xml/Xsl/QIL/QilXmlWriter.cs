@@ -12,16 +12,16 @@ using System.Globalization;
 using System.Text;
 using System.Xml;
 
-namespace System.Xml.Xsl.Qil {
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// If an annotation implements this interface, then QilXmlWriter will call ToString() on the annotation
     /// and serialize the result (if non-empty).
     /// </summary>
-    interface IQilAnnotation {
+    interface IQilAnnotation
+    {
         string Name { get; }
     };
-
 
     /// <summary>
     /// An example of QilVisitor.  Prints the QilExpression tree as XML.
@@ -36,32 +36,42 @@ namespace System.Xml.Xsl.Qil {
     /// Annotations are serialized as processing-instructions in front of a node.</para>
     /// <para>Feel free to subclass this visitor to customize its behavior.</para>
     /// </remarks>
-    internal class QilXmlWriter : QilScopedVisitor {
-        protected XmlWriter     writer;
-        protected Options       options;
-        private   NameGenerator ngen;
+    internal class QilXmlWriter : QilScopedVisitor
+    {
+        protected XmlWriter writer;
+        protected Options options;
+        private NameGenerator ngen;
 
         [Flags]
-        public enum Options {
-            None = 0,               // No options selected
-            Annotations = 1,        // Print annotations
-            TypeInfo = 2,           // Print type information using "G" option
-            RoundTripTypeInfo = 4,  // Print type information using "S" option
-            LineInfo = 8,           // Print source line information
-            NodeIdentity = 16,      // Print node identity (only works if QIL_TRACE_NODE_CREATION is defined)
-            NodeLocation = 32,      // Print node creation location (only works if QIL_TRACE_NODE_CREATION is defined)
+        public enum Options
+        {
+            None = 0, // No options selected
+            Annotations = 1, // Print annotations
+            TypeInfo = 2, // Print type information using "G" option
+            RoundTripTypeInfo = 4, // Print type information using "S" option
+            LineInfo = 8, // Print source line information
+            NodeIdentity = 16, // Print node identity (only works if QIL_TRACE_NODE_CREATION is defined)
+            NodeLocation = 32, // Print node creation location (only works if QIL_TRACE_NODE_CREATION is defined)
         };
 
         /// <summary>
         /// Construct a QilXmlWriter.
         /// </summary>
-        public QilXmlWriter(XmlWriter writer) : this(writer, Options.Annotations | Options.TypeInfo | Options.LineInfo | Options.NodeIdentity | Options.NodeLocation) {
-        }
+        public QilXmlWriter(XmlWriter writer)
+            : this(
+                writer,
+                Options.Annotations
+                    | Options.TypeInfo
+                    | Options.LineInfo
+                    | Options.NodeIdentity
+                    | Options.NodeLocation
+            ) { }
 
         /// <summary>
         /// Construct a QilXmlWriter.
         /// </summary>
-        public QilXmlWriter(XmlWriter writer, Options options) {
+        public QilXmlWriter(XmlWriter writer, Options options)
+        {
             this.writer = writer;
             this.ngen = new NameGenerator();
             this.options = options;
@@ -71,7 +81,8 @@ namespace System.Xml.Xsl.Qil {
         /// Serialize a QilExpression graph as XML.
         /// </summary>
         /// <param name="q">the QilExpression graph</param>
-        public void ToXml(QilNode node) {
+        public void ToXml(QilNode node)
+        {
             VisitAssumeReference(node);
         }
 
@@ -86,23 +97,29 @@ namespace System.Xml.Xsl.Qil {
         ///     3. IList<object> -- recursively call WriteAnnotations for each object in list
         ///     4. otherwise, do not write the annotation
         /// </summary>
-        protected virtual void WriteAnnotations(object ann) {
-            string s = null, name = null;
+        protected virtual void WriteAnnotations(object ann)
+        {
+            string s = null,
+                name = null;
 
-            if (ann == null) {
+            if (ann == null)
+            {
                 return;
             }
-            else if (ann is string) {
+            else if (ann is string)
+            {
                 s = ann as string;
             }
-            else if (ann is IQilAnnotation) {
+            else if (ann is IQilAnnotation)
+            {
                 // Get annotation's name and string value
                 IQilAnnotation qilann = ann as IQilAnnotation;
                 name = qilann.Name;
                 s = ann.ToString();
             }
-            else if (ann is IList<object>) {
-                IList<object> list = (IList<object>) ann;
+            else if (ann is IList<object>)
+            {
+                IList<object> list = (IList<object>)ann;
 
                 foreach (object annItem in list)
                     WriteAnnotations(annItem);
@@ -116,20 +133,31 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Called in order to write out source line information.
         /// </summary>
-        protected virtual void WriteLineInfo(QilNode node) {
-            this.writer.WriteAttributeString("lineInfo", string.Format(CultureInfo.InvariantCulture, "[{0},{1} -- {2},{3}]", 
-                node.SourceLine.Start.Line, node.SourceLine.Start.Pos,
-                node.SourceLine.End.Line  , node.SourceLine.End.Pos
-                ));
+        protected virtual void WriteLineInfo(QilNode node)
+        {
+            this.writer.WriteAttributeString(
+                "lineInfo",
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "[{0},{1} -- {2},{3}]",
+                    node.SourceLine.Start.Line,
+                    node.SourceLine.Start.Pos,
+                    node.SourceLine.End.Line,
+                    node.SourceLine.End.Pos
+                )
+            );
         }
 
         /// <summary>
         /// Called in order to write out the xml type of a node.
         /// </summary>
-        protected virtual void WriteXmlType(QilNode node) {
-            this.writer.WriteAttributeString("xmlType", node.XmlType.ToString((this.options & Options.RoundTripTypeInfo) != 0 ? "S" : "G"));
+        protected virtual void WriteXmlType(QilNode node)
+        {
+            this.writer.WriteAttributeString(
+                "xmlType",
+                node.XmlType.ToString((this.options & Options.RoundTripTypeInfo) != 0 ? "S" : "G")
+            );
         }
-
 
         //-----------------------------------------------
         // QilVisitor overrides
@@ -138,14 +166,19 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Override certain node types in order to add additional attributes, suppress children, etc.
         /// </summary>
-        protected override QilNode VisitChildren(QilNode node) {
-            if (node is QilLiteral) {
+        protected override QilNode VisitChildren(QilNode node)
+        {
+            if (node is QilLiteral)
+            {
                 // If literal is not handled elsewhere, print its string value
-                this.writer.WriteValue(Convert.ToString(((QilLiteral) node).Value, CultureInfo.InvariantCulture));
+                this.writer.WriteValue(
+                    Convert.ToString(((QilLiteral)node).Value, CultureInfo.InvariantCulture)
+                );
                 return node;
             }
-            else if (node is QilReference) {
-                QilReference reference = (QilReference) node;
+            else if (node is QilReference)
+            {
+                QilReference reference = (QilReference)node;
 
                 // Write the generated identifier for this iterator
                 this.writer.WriteAttributeString("id", this.ngen.NameOf(node));
@@ -154,25 +187,27 @@ namespace System.Xml.Xsl.Qil {
                 if (reference.DebugName != null)
                     this.writer.WriteAttributeString("name", reference.DebugName.ToString());
 
-                if (node.NodeType == QilNodeType.Parameter) {
+                if (node.NodeType == QilNodeType.Parameter)
+                {
                     // Don't visit parameter's name, or its default value if it is null
-                    QilParameter param = (QilParameter) node;
+                    QilParameter param = (QilParameter)node;
 
                     if (param.DefaultValue != null)
                         VisitAssumeReference(param.DefaultValue);
 
                     return node;
                 }
-             }
- 
+            }
+
             return base.VisitChildren(node);
         }
 
         /// <summary>
         /// Write references to functions or iterators like this: <RefTo id="$a"/>.
         /// </summary>
-        protected override QilNode VisitReference(QilNode node) {
-            QilReference reference = (QilReference) node;
+        protected override QilNode VisitReference(QilNode node)
+        {
+            QilReference reference = (QilReference)node;
             string name = ngen.NameOf(node);
             if (name == null)
                 name = "OUT-OF-SCOPE REFERENCE";
@@ -189,17 +224,21 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Scan through the external parameters, global variables, and function list for forward references.
         /// </summary>
-        protected override QilNode VisitQilExpression(QilExpression qil) {
+        protected override QilNode VisitQilExpression(QilExpression qil)
+        {
             IList<QilNode> fdecls = new ForwardRefFinder().Find(qil);
-            if (fdecls != null && fdecls.Count > 0) {
+            if (fdecls != null && fdecls.Count > 0)
+            {
                 this.writer.WriteStartElement("ForwardDecls");
-                foreach (QilNode n in fdecls) {
+                foreach (QilNode n in fdecls)
+                {
                     // i.e. <Function id="$a"/>
                     this.writer.WriteStartElement(Enum.GetName(typeof(QilNodeType), n.NodeType));
                     this.writer.WriteAttributeString("id", this.ngen.NameOf(n));
                     WriteXmlType(n);
 
-                    if (n.NodeType == QilNodeType.Function) {
+                    if (n.NodeType == QilNodeType.Function)
+                    {
                         // Visit Arguments and SideEffects operands
                         Visit(n[0]);
                         Visit(n[2]);
@@ -216,19 +255,22 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Serialize literal types using either "S" or "G" formatting, depending on the option which has been set.
         /// </summary>
-        protected override QilNode VisitLiteralType(QilLiteral value) {
-            this.writer.WriteString(((XmlQueryType) value).ToString((this.options & Options.TypeInfo) != 0 ? "G" : "S"));
+        protected override QilNode VisitLiteralType(QilLiteral value)
+        {
+            this.writer.WriteString(
+                ((XmlQueryType)value).ToString((this.options & Options.TypeInfo) != 0 ? "G" : "S")
+            );
             return value;
         }
 
         /// <summary>
         /// Serialize literal QName as three separate attributes.
         /// </summary>
-        protected override QilNode VisitLiteralQName(QilName value) {
+        protected override QilNode VisitLiteralQName(QilName value)
+        {
             this.writer.WriteAttributeString("name", value.ToString());
             return value;
         }
-
 
         //-----------------------------------------------
         // QilScopedVisitor overrides
@@ -237,21 +279,24 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Annotate this iterator or function with a generated name.
         /// </summary>
-        protected override void BeginScope(QilNode node) {
+        protected override void BeginScope(QilNode node)
+        {
             this.ngen.NameOf(node);
         }
 
         /// <summary>
         /// Clear the name annotation on this iterator or function.
         /// </summary>
-        protected override void EndScope(QilNode node) {
+        protected override void EndScope(QilNode node)
+        {
             this.ngen.ClearName(node);
         }
 
         /// <summary>
         /// By default, call WriteStartElement for every node type.
         /// </summary>
-        protected override void BeforeVisit(QilNode node) {
+        protected override void BeforeVisit(QilNode node)
+        {
             base.BeforeVisit(node);
 
             // Write the annotations in front of the element, to avoid issues with attributes
@@ -265,7 +310,10 @@ namespace System.Xml.Xsl.Qil {
             // Write common attributes
 #if QIL_TRACE_NODE_CREATION
             if ((this.options & Options.NodeIdentity) != 0)
-                this.writer.WriteAttributeString("nodeId", node.NodeId.ToString(CultureInfo.InvariantCulture));
+                this.writer.WriteAttributeString(
+                    "nodeId",
+                    node.NodeId.ToString(CultureInfo.InvariantCulture)
+                );
 
             if ((this.options & Options.NodeLocation) != 0)
                 this.writer.WriteAttributeString("nodeLoc", node.NodeLocation);
@@ -273,19 +321,19 @@ namespace System.Xml.Xsl.Qil {
             if ((this.options & (Options.TypeInfo | Options.RoundTripTypeInfo)) != 0)
                 WriteXmlType(node);
 
-            if ((this.options & Options.LineInfo) != 0 && node.SourceLine != null) 
+            if ((this.options & Options.LineInfo) != 0 && node.SourceLine != null)
                 WriteLineInfo(node);
         }
 
         /// <summary>
         /// By default, call WriteEndElement for every node type.
         /// </summary>
-        protected override void AfterVisit(QilNode node) {
+        protected override void AfterVisit(QilNode node)
+        {
             this.writer.WriteEndElement();
 
             base.AfterVisit(node);
         }
-
 
         //-----------------------------------------------
         // Helper methods
@@ -294,11 +342,13 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Find list of all iterators and functions which are referenced before they have been declared.
         /// </summary>
-        internal class ForwardRefFinder : QilVisitor {
+        internal class ForwardRefFinder : QilVisitor
+        {
             private List<QilNode> fwdrefs = new List<QilNode>();
             private List<QilNode> backrefs = new List<QilNode>();
 
-            public IList<QilNode> Find(QilExpression qil) {
+            public IList<QilNode> Find(QilExpression qil)
+            {
                 Visit(qil);
                 return this.fwdrefs;
             }
@@ -306,7 +356,8 @@ namespace System.Xml.Xsl.Qil {
             /// <summary>
             /// Add iterators and functions to backrefs list as they are visited.
             /// </summary>
-            protected override QilNode Visit(QilNode node) {
+            protected override QilNode Visit(QilNode node)
+            {
                 if (node is QilIterator || node is QilFunction)
                     this.backrefs.Add(node);
 
@@ -316,7 +367,8 @@ namespace System.Xml.Xsl.Qil {
             /// <summary>
             /// If reference is not in scope, then it must be a forward reference.
             /// </summary>
-            protected override QilNode VisitReference(QilNode node) {
+            protected override QilNode VisitReference(QilNode node)
+            {
                 if (!this.backrefs.Contains(node) && !this.fwdrefs.Contains(node))
                     this.fwdrefs.Add(node);
 
@@ -326,13 +378,14 @@ namespace System.Xml.Xsl.Qil {
 
         //=================================== Helper class: NameGenerator =========================================
 
-        private sealed class NameGenerator {
+        private sealed class NameGenerator
+        {
             StringBuilder name;
             int len;
             int zero;
             char start;
             char end;
-            
+
             /// <summary>
             /// Construct a new name generator with prefix "$" and alphabetical mode.
             /// </summary>
@@ -359,7 +412,7 @@ namespace System.Xml.Xsl.Qil {
                 {
                     name[len] = start;
                     int i = len;
-                    for ( ; i-- > zero && name[i]==end; )
+                    for (; i-- > zero && name[i] == end; )
                         name[i] = start;
 
                     if (i < zero)
@@ -423,12 +476,15 @@ namespace System.Xml.Xsl.Qil {
                     PriorAnnotation = a;
                 }
 
-                public override int Count {
+                public override int Count
+                {
                     get { return 1; }
                 }
 
-                public override object this[int index] {
-                    get {
+                public override object this[int index]
+                {
+                    get
+                    {
                         if (index == 0)
                             return PriorAnnotation;
 

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,60 +30,60 @@
 //
 using System;
 
-namespace System.Messaging 
+namespace System.Messaging
 {
-	public class Trustee 
-	{
-		[MonoTODO]
-		public Trustee()
-		{
-			this.name = null;
-			this.systemName = null;
-			this.trusteeType = TrusteeType.Unknown;
-		}
-		
-		[MonoTODO("What about systemName?")]
-		public Trustee(string name)
-		{
-			this.name = name;
-			this.systemName = null;
-			this.trusteeType = TrusteeType.Unknown;
-		}
-		
-		private string name;
-		private string systemName;
-		private TrusteeType trusteeType;
-		
-		public Trustee(string name, string systemName)
-		{
-			this.name = name;
-			this.systemName = systemName;
-			this.trusteeType = TrusteeType.Unknown;
-		}
-		
-		public Trustee(string name, string systemName, TrusteeType trusteeType)
-		{
-			this.name = name;
-			this.systemName = systemName;
-			this.trusteeType = trusteeType;
-		}
-		
-		public string Name 
-		{
-			get { return name; }
-			set { name = value;}
-		}
-		
-		public string SystemName 
-		{
-			get { return systemName; }
-			set { systemName = value;}
-		}
+    public class Trustee
+    {
+        [MonoTODO]
+        public Trustee()
+        {
+            this.name = null;
+            this.systemName = null;
+            this.trusteeType = TrusteeType.Unknown;
+        }
 
-		public TrusteeType TrusteeType
-		{
-			get { return trusteeType; }
-			set { trusteeType = value;}
-		}
-	}
+        [MonoTODO("What about systemName?")]
+        public Trustee(string name)
+        {
+            this.name = name;
+            this.systemName = null;
+            this.trusteeType = TrusteeType.Unknown;
+        }
+
+        private string name;
+        private string systemName;
+        private TrusteeType trusteeType;
+
+        public Trustee(string name, string systemName)
+        {
+            this.name = name;
+            this.systemName = systemName;
+            this.trusteeType = TrusteeType.Unknown;
+        }
+
+        public Trustee(string name, string systemName, TrusteeType trusteeType)
+        {
+            this.name = name;
+            this.systemName = systemName;
+            this.trusteeType = trusteeType;
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public string SystemName
+        {
+            get { return systemName; }
+            set { systemName = value; }
+        }
+
+        public TrusteeType TrusteeType
+        {
+            get { return trusteeType; }
+            set { trusteeType = value; }
+        }
+    }
 }

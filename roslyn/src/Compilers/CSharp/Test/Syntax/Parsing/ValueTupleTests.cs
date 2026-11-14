@@ -4,18 +4,19 @@
 
 #nullable disable
 
-using Xunit;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 {
     public class ValueTupleTests : ParsingTests
     {
-        public ValueTupleTests(ITestOutputHelper output) : base(output) { }
+        public ValueTupleTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
@@ -25,14 +26,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void SimpleTuple()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     (int, string) Goo()
     {
         return (1, ""Alice"");
     }
-}", options: TestOptions.Regular);
+}",
+                options: TestOptions.Regular
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -109,13 +113,16 @@ class C
         [Fact]
         public void LongTuple()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     (int, int, int, string, string, string, int, int, int) Goo()
     {
     }
-}", options: TestOptions.Regular);
+}",
+                options: TestOptions.Regular
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -223,11 +230,14 @@ class C
         [Fact]
         public void TuplesInLambda()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     var x = ((string, string) a, (int, int) b) => { };
-}", options: TestOptions.Regular);
+}",
+                options: TestOptions.Regular
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -327,11 +337,14 @@ class C
         [Fact]
         public void TuplesWithNamesInLambda()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     var x = ((string a, string) a, (int, int b) b) => { };
-}", options: TestOptions.Regular);
+}",
+                options: TestOptions.Regular
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -433,13 +446,16 @@ class C
         [Fact]
         public void TupleInParameters()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo((int, string) a)
     {
     }
-}", options: TestOptions.Regular);
+}",
+                options: TestOptions.Regular
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -499,18 +515,20 @@ class C
         [Fact]
         public void TupleTypeWithTooFewElements()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M(int x, () y, (int a) z) { }
-}", options: TestOptions.Regular,
+}",
+                options: TestOptions.Regular,
                 // (4,20): error CS8124: Tuple must contain at least two elements.
                 //     void M(int x, () y, (int a) z) { }
                 Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 20),
                 // (4,31): error CS8124: Tuple must contain at least two elements.
                 //     void M(int x, () y, (int a) z) { }
                 Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 31)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -606,18 +624,22 @@ class C
         [Fact]
         public void TupleExpressionWithTooFewElements()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     object x = ((Alice: 1), ());
-}", options: TestOptions.Regular,
+}",
+                options: TestOptions.Regular,
                 // (4,26): error CS8124: Tuple must contain at least two elements.
                 //     object x = ((Alice: 1), ());
                 Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 26),
                 // (4,30): error CS1525: Invalid expression term ')'
                 //     object x = ((Alice: 1), ());
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(4, 30)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(4, 30)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -705,27 +727,38 @@ class C
         public void MissingShortTupleErrorWhenWarningPresent()
         {
             // Diff errors
-            var test = @"
+            var test =
+                @"
 class Program
 {
     object a = (x: 3l);
 }
 ";
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,22): error CS8124: Tuple must contain at least two elements.
                 //     object a = (x: 3l);
-                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 22));
+                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 22)
+            );
 
-            CreateCompilation(test).VerifyDiagnostics(
-                // (4,21): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-                //     object a = (x: 3l);
-                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(4, 21),
-                // (4,22): error CS8124: Tuple must contain at least two elements.
-                //     object a = (x: 3l);
-                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 22));
+            CreateCompilation(test)
+                .VerifyDiagnostics(
+                    // (4,21): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                    //     object a = (x: 3l);
+                    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(4, 21),
+                    // (4,22): error CS8124: Tuple must contain at least two elements.
+                    //     object a = (x: 3l);
+                    Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 22)
+                );
         }
 
-        [Fact, WorkItem(377111, "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111")]
+        [
+            Fact,
+            WorkItem(
+                377111,
+                "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111"
+            )
+        ]
         public void TernaryVersusDeclaration_01()
         {
             UsingStatement("return (i, isValid ? Errors.IsValid : Errors.HasErrors);");
@@ -786,7 +819,13 @@ class Program
             EOF();
         }
 
-        [Fact, WorkItem(377111, "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111")]
+        [
+            Fact,
+            WorkItem(
+                377111,
+                "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111"
+            )
+        ]
         public void TernaryVersusDeclaration_02()
         {
             UsingStatement("return (isValid ? Errors.IsValid : Errors.HasErrors, i);");
@@ -847,7 +886,13 @@ class Program
             EOF();
         }
 
-        [Fact, WorkItem(377111, "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111")]
+        [
+            Fact,
+            WorkItem(
+                377111,
+                "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111"
+            )
+        ]
         public void TernaryVersusDeclaration_03()
         {
             UsingStatement("return (i, a < b, c > d);");
@@ -900,7 +945,13 @@ class Program
             EOF();
         }
 
-        [Fact, WorkItem(377111, "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111")]
+        [
+            Fact,
+            WorkItem(
+                377111,
+                "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111"
+            )
+        ]
         public void TernaryVersusDeclaration_04()
         {
             UsingStatement("return (i, a < b, c > d.x);");
@@ -964,7 +1015,13 @@ class Program
             EOF();
         }
 
-        [Fact, WorkItem(377111, "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111")]
+        [
+            Fact,
+            WorkItem(
+                377111,
+                "https://devdiv.visualstudio.com/0bdbc590-a062-4c3f-b0f6-9383f67865ee/_workitems?id=377111"
+            )
+        ]
         public void TernaryVersusDeclaration_05()
         {
             UsingStatement("return (i, a < b, c > d && x);");

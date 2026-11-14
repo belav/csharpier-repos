@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System.Runtime.CompilerServices;
@@ -18,10 +18,13 @@ namespace System
             private static volatile int _enabledState;
             private static volatile int _captureAllocatedCallStackState;
 
-            internal static bool Enabled {
-                [System.Security.SecuritySafeCritical]  // auto-generated
-                get {
-                    if (_enabledState == 0) {
+            internal static bool Enabled
+            {
+                [System.Security.SecuritySafeCritical] // auto-generated
+                get
+                {
+                    if (_enabledState == 0)
+                    {
                         if (Mda.IsStreamWriterBufferedDataLostEnabled())
                             _enabledState = 1;
                         else
@@ -32,10 +35,13 @@ namespace System
                 }
             }
 
-            internal static bool CaptureAllocatedCallStack {
-                [System.Security.SecuritySafeCritical]  // auto-generated
-                get {
-                    if (_captureAllocatedCallStackState == 0) {
+            internal static bool CaptureAllocatedCallStack
+            {
+                [System.Security.SecuritySafeCritical] // auto-generated
+                get
+                {
+                    if (_captureAllocatedCallStackState == 0)
+                    {
                         if (Mda.IsStreamWriterBufferedDataLostCaptureAllocatedCallStack())
                             _captureAllocatedCallStackState = 1;
                         else
@@ -46,44 +52,44 @@ namespace System
                 }
             }
 
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            internal static void ReportError(String text) {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            internal static void ReportError(String text)
+            {
                 Mda.ReportStreamWriterBufferedDataLost(text);
             }
-
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void ReportStreamWriterBufferedDataLost(String text);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern bool IsStreamWriterBufferedDataLostEnabled();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern bool IsStreamWriterBufferedDataLostCaptureAllocatedCallStack();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void MemberInfoCacheCreation();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void DateTimeInvalidLocalFormat();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern bool IsInvalidGCHandleCookieProbeEnabled();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void FireInvalidGCHandleCookieProbe(IntPtr cookie);

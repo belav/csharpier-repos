@@ -52,14 +52,11 @@ public class DatabaseDeveloperPageExceptionFilterTests
         var exception = new InvalidOperationException("Bang!", new Mock<DbException>().Object);
         var nextFilterInvoked = false;
 
-        await filter.HandleExceptionAsync(
-            new ErrorContext(context, exception),
-            context =>
-            {
-                nextFilterInvoked = true;
-                return Task.CompletedTask;
-            }
-        );
+        await filter.HandleExceptionAsync(new ErrorContext(context, exception), context =>
+        {
+            nextFilterInvoked = true;
+            return Task.CompletedTask;
+        });
 
         Assert.True(nextFilterInvoked);
         Assert.Equal(1, sink.Writes.Count);
@@ -83,14 +80,11 @@ public class DatabaseDeveloperPageExceptionFilterTests
         var exception = new Mock<DbException>();
         var nextFilterInvoked = false;
 
-        await filter.HandleExceptionAsync(
-            new ErrorContext(context, exception.Object),
-            context =>
-            {
-                nextFilterInvoked = true;
-                return Task.CompletedTask;
-            }
-        );
+        await filter.HandleExceptionAsync(new ErrorContext(context, exception.Object), context =>
+        {
+            nextFilterInvoked = true;
+            return Task.CompletedTask;
+        });
 
         Assert.True(nextFilterInvoked);
         Assert.Equal(1, sink.Writes.Count);
@@ -127,11 +121,9 @@ public class DatabaseDeveloperPageExceptionFilterTests
         );
 
         Assert.False(nextFilterInvoked);
-        Assert.Contains(
-            sink.Writes,
-            w =>
-                w.Message
-                == "The response has already started, the next developer page exception filter will not be executed."
+        Assert.Contains(sink.Writes, w =>
+            w.Message
+            == "The response has already started, the next developer page exception filter will not be executed."
         );
     }
 }

@@ -25,31 +25,48 @@ namespace System.Web.Http.ModelBinding
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider
                 {
                     { "someName[foo]", "42" },
-                    { "someName[baz]", "200" }
-                }
+                    { "someName[baz]", "200" },
+                },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object));
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+            );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext ec, ModelBindingContext mbc) =>
-                {
-                    mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName).ConvertTo(mbc.ModelType);
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext ec, ModelBindingContext mbc) =>
+                    {
+                        mbc.Model = mbc
+                            .ValueProvider.GetValue(mbc.ModelName)
+                            .ConvertTo(mbc.ModelType);
+                        return true;
+                    }
+                );
 
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindComplexCollectionFromIndexes(context, bindingContext, new[] { "foo", "bar", "baz" });
+            List<int> boundCollection = CollectionModelBinder<int>.BindComplexCollectionFromIndexes(
+                context,
+                bindingContext,
+                new[] { "foo", "bar", "baz" }
+            );
 
             // Assert
             Assert.Equal(new[] { 42, 0, 200 }, boundCollection.ToArray());
-            Assert.Equal(new[] { "someName[foo]", "someName[baz]" }, bindingContext.ValidationNode.ChildNodes.Select(o => o.ModelStateKey).ToArray());
+            Assert.Equal(
+                new[] { "someName[foo]", "someName[baz]" },
+                bindingContext.ValidationNode.ChildNodes.Select(o => o.ModelStateKey).ToArray()
+            );
         }
 
         [Fact]
@@ -60,33 +77,50 @@ namespace System.Web.Http.ModelBinding
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider
                 {
                     { "someName[0]", "42" },
                     { "someName[1]", "100" },
-                    { "someName[3]", "400" }
-                }
+                    { "someName[3]", "400" },
+                },
             };
 
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object));
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+            );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext ec, ModelBindingContext mbc) =>
-                {
-                    mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName).ConvertTo(mbc.ModelType);
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext ec, ModelBindingContext mbc) =>
+                    {
+                        mbc.Model = mbc
+                            .ValueProvider.GetValue(mbc.ModelName)
+                            .ConvertTo(mbc.ModelType);
+                        return true;
+                    }
+                );
 
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindComplexCollectionFromIndexes(context, bindingContext, null /* indexNames */);
+            List<int> boundCollection = CollectionModelBinder<int>.BindComplexCollectionFromIndexes(
+                context,
+                bindingContext,
+                null /* indexNames */
+            );
 
             // Assert
             Assert.Equal(new[] { 42, 100 }, boundCollection.ToArray());
-            Assert.Equal(new[] { "someName[0]", "someName[1]" }, bindingContext.ValidationNode.ChildNodes.Select(o => o.ModelStateKey).ToArray());
+            Assert.Equal(
+                new[] { "someName[0]", "someName[1]" },
+                bindingContext.ValidationNode.ChildNodes.Select(o => o.ModelStateKey).ToArray()
+            );
         }
 
         [Fact]
@@ -97,27 +131,37 @@ namespace System.Web.Http.ModelBinding
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider
                 {
                     { "someName.index", new[] { "foo", "bar", "baz" } },
                     { "someName[foo]", "42" },
                     { "someName[bar]", "100" },
-                    { "someName[baz]", "200" }
-                }
+                    { "someName[baz]", "200" },
+                },
             };
 
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object));
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+            );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext ec, ModelBindingContext mbc) =>
-                {
-                    mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName).ConvertTo(mbc.ModelType);
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext ec, ModelBindingContext mbc) =>
+                    {
+                        mbc.Model = mbc
+                            .ValueProvider.GetValue(mbc.ModelName)
+                            .ConvertTo(mbc.ModelType);
+                        return true;
+                    }
+                );
 
             CollectionModelBinder<int> modelBinder = new CollectionModelBinder<int>();
 
@@ -136,23 +180,33 @@ namespace System.Web.Http.ModelBinding
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider
                 {
-                    { "someName", new[] { "42", "100", "200" } }
-                }
+                    { "someName", new[] { "42", "100", "200" } },
+                },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object));
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+            );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext ec, ModelBindingContext mbc) =>
-                {
-                    mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName).ConvertTo(mbc.ModelType);
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext ec, ModelBindingContext mbc) =>
+                    {
+                        mbc.Model = mbc
+                            .ValueProvider.GetValue(mbc.ModelName)
+                            .ConvertTo(mbc.ModelType);
+                        return true;
+                    }
+                );
 
             CollectionModelBinder<int> modelBinder = new CollectionModelBinder<int>();
 
@@ -168,7 +222,12 @@ namespace System.Web.Http.ModelBinding
         public void BindSimpleCollection_RawValueIsEmptyCollection_ReturnsEmptyList()
         {
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(null, null, new object[0], null);
+            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(
+                null,
+                null,
+                new object[0],
+                null
+            );
 
             // Assert
             Assert.NotNull(boundCollection);
@@ -179,7 +238,12 @@ namespace System.Web.Http.ModelBinding
         public void BindSimpleCollection_RawValueIsNull_ReturnsNull()
         {
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(null, null, null, null);
+            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(
+                null,
+                null,
+                null,
+                null
+            );
 
             // Assert
             Assert.Null(boundCollection);
@@ -193,30 +257,46 @@ namespace System.Web.Http.ModelBinding
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object));
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+            );
 
             ModelValidationNode childValidationNode = null;
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext ec, ModelBindingContext mbc) =>
-                {
-                    Assert.Equal("someName", mbc.ModelName);
-                    childValidationNode = mbc.ValidationNode;
-                    mbc.Model = 42;
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext ec, ModelBindingContext mbc) =>
+                    {
+                        Assert.Equal("someName", mbc.ModelName);
+                        childValidationNode = mbc.ValidationNode;
+                        mbc.Model = 42;
+                        return true;
+                    }
+                );
 
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(context, bindingContext, new int[1], culture);
+            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(
+                context,
+                bindingContext,
+                new int[1],
+                culture
+            );
 
             // Assert
             Assert.Equal(new[] { 42 }, boundCollection.ToArray());
-            Assert.Equal(new[] { childValidationNode }, bindingContext.ValidationNode.ChildNodes.ToArray());
+            Assert.Equal(
+                new[] { childValidationNode },
+                bindingContext.ValidationNode.ChildNodes.ToArray()
+            );
         }
 
         [Fact]
@@ -225,24 +305,28 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             string propertyName = "Addresses";
             ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                                                            modelAccessor: null,
-                                                            containerType: typeof(UserWithAddress),
-                                                            propertyName: propertyName);
+                modelAccessor: null,
+                containerType: typeof(UserWithAddress),
+                propertyName: propertyName
+            );
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = modelMetadata,
                 ModelName = propertyName,
-                ValueProvider = new SimpleHttpValueProvider { { propertyName, "some value" } }
+                ValueProvider = new SimpleHttpValueProvider { { propertyName, "some value" } },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            CollectionModelBinder<UserWithAddress> binder = new CollectionModelBinder<UserWithAddress>();
+            CollectionModelBinder<UserWithAddress> binder =
+                new CollectionModelBinder<UserWithAddress>();
 
             // Act
             bool result = binder.BindModel(context, bindingContext);
 
             // Assert
             Assert.True(result);
-            List<UserWithAddress> boundModel = Assert.IsType<List<UserWithAddress>>(bindingContext.Model);
+            List<UserWithAddress> boundModel = Assert.IsType<List<UserWithAddress>>(
+                bindingContext.Model
+            );
             UserWithAddress listModel = Assert.Single(boundModel);
             Assert.Null(listModel.Addresses);
         }
@@ -253,24 +337,31 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             string propertyName = "Addresses";
             ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                                                            modelAccessor: null,
-                                                            containerType: typeof(UserWithAddress),
-                                                            propertyName: propertyName);
+                modelAccessor: null,
+                containerType: typeof(UserWithAddress),
+                propertyName: propertyName
+            );
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = modelMetadata,
                 ModelName = propertyName,
-                ValueProvider = new SimpleHttpValueProvider { { "Addresses.AddressLines", "some value" } }
+                ValueProvider = new SimpleHttpValueProvider
+                {
+                    { "Addresses.AddressLines", "some value" },
+                },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            CollectionModelBinder<UserWithAddress> binder = new CollectionModelBinder<UserWithAddress>();
+            CollectionModelBinder<UserWithAddress> binder =
+                new CollectionModelBinder<UserWithAddress>();
 
             // Act
             bool result = binder.BindModel(context, bindingContext);
 
             // Assert
             Assert.True(result);
-            List<UserWithAddress> boundModel = Assert.IsType<List<UserWithAddress>>(bindingContext.Model);
+            List<UserWithAddress> boundModel = Assert.IsType<List<UserWithAddress>>(
+                bindingContext.Model
+            );
             Assert.Empty(boundModel);
         }
 
@@ -280,24 +371,28 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             string propertyName = "Addresses";
             ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                                                            modelAccessor: null,
-                                                            containerType: typeof(UserWithAddress),
-                                                            propertyName: propertyName);
+                modelAccessor: null,
+                containerType: typeof(UserWithAddress),
+                propertyName: propertyName
+            );
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = modelMetadata,
                 ModelName = propertyName,
-                ValueProvider = new SimpleHttpValueProvider { { "Addresses.index", "10000" } }
+                ValueProvider = new SimpleHttpValueProvider { { "Addresses.index", "10000" } },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            CollectionModelBinder<UserWithAddress> binder = new CollectionModelBinder<UserWithAddress>();
+            CollectionModelBinder<UserWithAddress> binder =
+                new CollectionModelBinder<UserWithAddress>();
 
             // Act
             bool result = binder.BindModel(context, bindingContext);
 
             // Assert
             Assert.True(result);
-            List<UserWithAddress> boundModel = Assert.IsType<List<UserWithAddress>>(bindingContext.Model);
+            List<UserWithAddress> boundModel = Assert.IsType<List<UserWithAddress>>(
+                bindingContext.Model
+            );
             UserWithAddress listModel = Assert.Single(boundModel);
             Assert.Null(listModel);
         }
@@ -308,18 +403,18 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             string propertyName = "People";
             ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                                                            modelAccessor: null,
-                                                            containerType: typeof(PeopleModel),
-                                                            propertyName: propertyName);
+                modelAccessor: null,
+                containerType: typeof(PeopleModel),
+                propertyName: propertyName
+            );
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = modelMetadata,
                 ModelName = propertyName,
-                ValueProvider = new SimpleHttpValueProvider { { propertyName, "test value" } }
+                ValueProvider = new SimpleHttpValueProvider { { propertyName, "test value" } },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            CollectionModelBinder<Person> binder =
-                new CollectionModelBinder<Person>();
+            CollectionModelBinder<Person> binder = new CollectionModelBinder<Person>();
 
             // Act
             bool result = binder.BindModel(context, bindingContext);

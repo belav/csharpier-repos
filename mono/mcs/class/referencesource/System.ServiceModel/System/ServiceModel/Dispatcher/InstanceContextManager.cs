@@ -8,8 +8,8 @@ namespace System.ServiceModel.Dispatcher
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     interface IInstanceContextManager
     {
@@ -31,9 +31,7 @@ namespace System.ServiceModel.Dispatcher
         Item[] items;
 
         public InstanceContextManager(object mutex)
-            : base(mutex)
-        {
-        }
+            : base(mutex) { }
 
         public void Add(InstanceContext instanceContext)
         {
@@ -56,7 +54,9 @@ namespace System.ServiceModel.Dispatcher
             if (!added)
             {
                 instanceContext.Abort();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().ToString())
+                );
             }
         }
 
@@ -84,7 +84,11 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (instance.State == CommunicationState.Opened)
                     {
-                        IAsyncResult result = instance.BeginClose(timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(CloseInstanceContextCallback)), instance);
+                        IAsyncResult result = instance.BeginClose(
+                            timeoutHelper.RemainingTime(),
+                            Fx.ThunkCallback(new AsyncCallback(CloseInstanceContextCallback)),
+                            instance
+                        );
                         if (!result.CompletedSynchronously)
                             continue;
                         instance.EndClose(result);
@@ -137,23 +141,23 @@ namespace System.ServiceModel.Dispatcher
             catch (ObjectDisposedException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-             }
-             catch (InvalidOperationException e)
-             {
-                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-             }
-             catch (CommunicationException e)
-             {
-                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-             }
-             catch (TimeoutException e)
-             {
-                 if (TD.CloseTimeoutIsEnabled())
-                 {
-                     TD.CloseTimeout(e.Message);
-                 }
-                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-             }
+            }
+            catch (InvalidOperationException e)
+            {
+                DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+            }
+            catch (CommunicationException e)
+            {
+                DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+            }
+            catch (TimeoutException e)
+            {
+                if (TD.CloseTimeoutIsEnabled())
+                {
+                    TD.CloseTimeout(e.Message);
+                }
+                DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+            }
         }
 
         public void EndCloseInput(IAsyncResult result)
@@ -197,7 +201,11 @@ namespace System.ServiceModel.Dispatcher
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             CloseInitiate(timeoutHelper.RemainingTime());
@@ -219,7 +227,9 @@ namespace System.ServiceModel.Dispatcher
         public bool Remove(InstanceContext instanceContext)
         {
             if (instanceContext == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("instanceContext"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("instanceContext")
+                );
 
             lock (this.ThisLock)
             {
@@ -283,7 +293,12 @@ namespace System.ServiceModel.Dispatcher
         int count;
         TimeoutHelper timeoutHelper;
 
-        public CloseInputAsyncResult(TimeSpan timeout, AsyncCallback otherCallback, object state, InstanceContext[] instances)
+        public CloseInputAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback otherCallback,
+            object state,
+            InstanceContext[] instances
+        )
             : base(otherCallback, state)
         {
             this.timeoutHelper = new TimeoutHelper(timeout);
@@ -302,7 +317,12 @@ namespace System.ServiceModel.Dispatcher
                 IAsyncResult result;
                 try
                 {
-                    result = instances[index].BeginCloseInput(this.timeoutHelper.RemainingTime(), nestedCallback, callbackState);
+                    result = instances[index]
+                        .BeginCloseInput(
+                            this.timeoutHelper.RemainingTime(),
+                            nestedCallback,
+                            callbackState
+                        );
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)

@@ -31,58 +31,61 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Channels;
 
-namespace System.Data.Services {
-	[ServiceBehavior (InstanceContextMode = InstanceContextMode.PerCall)]
-	[AspNetCompatibilityRequirements (RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-	public class DataService<T> : IRequestHandler
-	{
-		DataServiceProcessingPipeline processingPipeline;
-		public void AttachHost (IDataServiceHost host)
-		{
-			if (host == null)
-				throw new ArgumentNullException();
+namespace System.Data.Services
+{
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+    [AspNetCompatibilityRequirements(
+        RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed
+    )]
+    public class DataService<T> : IRequestHandler
+    {
+        DataServiceProcessingPipeline processingPipeline;
 
-			throw new NotImplementedException();
-		}
+        public void AttachHost(IDataServiceHost host)
+        {
+            if (host == null)
+                throw new ArgumentNullException();
 
-		public void ProcessRequest()
-		{
-			throw new NotImplementedException();
-		}
+            throw new NotImplementedException();
+        }
 
-		public Message ProcessRequestForMessage (Stream messageBody)
-		{
-			if (messageBody == null)
-				throw new ArgumentNullException ("messageBody");
+        public void ProcessRequest()
+        {
+            throw new NotImplementedException();
+        }
 
-			throw new NotImplementedException();
-		}
+        public Message ProcessRequestForMessage(Stream messageBody)
+        {
+            if (messageBody == null)
+                throw new ArgumentNullException("messageBody");
 
-		protected T CurrentDataSource {
-			get; private set;
-		}
-		public DataServiceProcessingPipeline ProcessingPipeline {
-			get {
-				if (processingPipeline == null)
-					processingPipeline = new DataServiceProcessingPipeline ();
-				return processingPipeline;
-			}
-		}
-		protected virtual T CreateDataSource()
-		{
-			throw new NotImplementedException();
-		}
+            throw new NotImplementedException();
+        }
 
-		protected virtual void HandleException (HandleExceptionArgs args)
-		{
-			if (args == null)
-				throw new ArgumentNullException ("args");
+        protected T CurrentDataSource { get; private set; }
+        public DataServiceProcessingPipeline ProcessingPipeline
+        {
+            get
+            {
+                if (processingPipeline == null)
+                    processingPipeline = new DataServiceProcessingPipeline();
+                return processingPipeline;
+            }
+        }
 
-			throw new NotImplementedException();
-		}
+        protected virtual T CreateDataSource()
+        {
+            throw new NotImplementedException();
+        }
 
-		protected virtual void OnStartProcessingRequest (ProcessRequestArgs args)
-		{
-		}
-	}
+        protected virtual void HandleException(HandleExceptionArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException("args");
+
+            throw new NotImplementedException();
+        }
+
+        protected virtual void OnStartProcessingRequest(ProcessRequestArgs args) { }
+    }
 }

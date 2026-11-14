@@ -14,7 +14,8 @@ namespace System.DirectoryServices.Protocols
         internal TimeSpan _connectionTimeOut = new TimeSpan(0, 0, 30);
         internal DirectoryIdentifier _directoryIdentifier;
 
-        protected DirectoryConnection() => _certificatesCollection = new X509CertificateCollection();
+        protected DirectoryConnection() =>
+            _certificatesCollection = new X509CertificateCollection();
 
         public virtual DirectoryIdentifier Directory => _directoryIdentifier;
 
@@ -38,7 +39,10 @@ namespace System.DirectoryServices.Protocols
         {
             set
             {
-                _directoryCredential = (value != null) ? new NetworkCredential(value.UserName, value.Password, value.Domain) : null;
+                _directoryCredential =
+                    (value != null)
+                        ? new NetworkCredential(value.UserName, value.Password, value.Domain)
+                        : null;
             }
         }
 

@@ -22,15 +22,21 @@ namespace System.Data.Objects
 {
     /// <summary>
     ///   This class implements strongly-typed queries at the object-layer through
-    ///   Entity SQL text and query-building helper methods. 
+    ///   Entity SQL text and query-building helper methods.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public partial class ObjectQuery<T> : ObjectQuery, IEnumerable<T>, IQueryable<T>, IOrderedQueryable<T>, IListSource
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix"
+    )]
+    public partial class ObjectQuery<T>
+        : ObjectQuery,
+            IEnumerable<T>,
+            IQueryable<T>,
+            IOrderedQueryable<T>,
+            IListSource
     {
         internal ObjectQuery(ObjectQueryState queryState)
-            : base(queryState)
-        {
-        }
+            : base(queryState) { }
 
         #region Public Methods
 
@@ -60,7 +66,7 @@ namespace System.Data.Objects
             EntityUtil.CheckStringArgument(path, "path");
             return new ObjectQuery<T>(this.QueryState.Include(this, path));
         }
-        
+
         #endregion
 
         #region IEnumerable<T> implementation
@@ -80,7 +86,7 @@ namespace System.Data.Objects
             catch
             {
                 // if there is a problem creating the enumerator, we should dispose
-                // the enumerable (if there is no problem, the enumerator will take 
+                // the enumerable (if there is no problem, the enumerator will take
                 // care of the dispose)
                 disposableEnumerable.Dispose();
                 throw;
@@ -90,7 +96,7 @@ namespace System.Data.Objects
         #endregion
 
         #region ObjectQuery Overrides
-        
+
         internal override IEnumerator GetEnumeratorInternal()
         {
             return ((IEnumerable<T>)this).GetEnumerator();
@@ -130,18 +136,38 @@ namespace System.Data.Objects
             Type objectQueryType = typeof(ObjectQuery<T>);
             if (this.QueryState.UserSpecifiedMergeOption.HasValue)
             {
-                MethodInfo mergeAsMethod = objectQueryType.GetMethod("MergeAs", BindingFlags.Instance | BindingFlags.NonPublic);
-                Debug.Assert(mergeAsMethod != null, "Could not retrieve ObjectQuery<T>.MergeAs method using reflection?");
+                MethodInfo mergeAsMethod = objectQueryType.GetMethod(
+                    "MergeAs",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
+                Debug.Assert(
+                    mergeAsMethod != null,
+                    "Could not retrieve ObjectQuery<T>.MergeAs method using reflection?"
+                );
                 retExpr = TypeSystem.EnsureType(retExpr, objectQueryType);
-                retExpr = Expression.Call(retExpr, mergeAsMethod, Expression.Constant(this.QueryState.UserSpecifiedMergeOption.Value));
+                retExpr = Expression.Call(
+                    retExpr,
+                    mergeAsMethod,
+                    Expression.Constant(this.QueryState.UserSpecifiedMergeOption.Value)
+                );
             }
 
             if (null != this.QueryState.Span)
             {
-                MethodInfo includeSpanMethod = objectQueryType.GetMethod("IncludeSpan", BindingFlags.Instance | BindingFlags.NonPublic);
-                Debug.Assert(includeSpanMethod != null, "Could not retrieve ObjectQuery<T>.IncludeSpan method using reflection?");
+                MethodInfo includeSpanMethod = objectQueryType.GetMethod(
+                    "IncludeSpan",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
+                Debug.Assert(
+                    includeSpanMethod != null,
+                    "Could not retrieve ObjectQuery<T>.IncludeSpan method using reflection?"
+                );
                 retExpr = TypeSystem.EnsureType(retExpr, objectQueryType);
-                retExpr = Expression.Call(retExpr, includeSpanMethod, Expression.Constant(this.QueryState.Span));
+                retExpr = Expression.Call(
+                    retExpr,
+                    includeSpanMethod,
+                    Expression.Constant(this.QueryState.Span)
+                );
             }
 
             return retExpr;
@@ -169,8 +195,13 @@ namespace System.Data.Objects
 
             try
             {
-                ObjectQueryExecutionPlan execPlan = this.QueryState.GetExecutionPlan(forMergeOption);
-                return execPlan.Execute<T>(this.QueryState.ObjectContext, this.QueryState.Parameters);
+                ObjectQueryExecutionPlan execPlan = this.QueryState.GetExecutionPlan(
+                    forMergeOption
+                );
+                return execPlan.Execute<T>(
+                    this.QueryState.ObjectContext,
+                    this.QueryState.Parameters
+                );
             }
             catch
             {

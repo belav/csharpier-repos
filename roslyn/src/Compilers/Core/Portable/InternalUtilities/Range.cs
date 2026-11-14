@@ -5,6 +5,7 @@
 #if !NETCOREAPP
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
+
 namespace System
 {
     /// <summary>Represent a range has start and end indexes.</summary>
@@ -36,9 +37,7 @@ namespace System
         /// <summary>Indicates whether the current Range object is equal to another object of the same type.</summary>
         /// <param name="value">An object to compare with this object</param>
         public override bool Equals(object? value) =>
-            value is Range r &&
-            r.Start.Equals(Start) &&
-            r.End.Equals(End);
+            value is Range r && r.Start.Equals(Start) && r.End.Equals(End);
 
         /// <summary>Indicates whether the current Range object is equal to another Range object.</summary>
         /// <param name="other">An object to compare with this object</param>

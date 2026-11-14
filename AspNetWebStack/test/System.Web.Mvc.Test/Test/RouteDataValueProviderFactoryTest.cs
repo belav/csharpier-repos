@@ -40,7 +40,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { factory.GetValueProvider(null); }, "controllerContext");
+                delegate
+                {
+                    factory.GetValueProvider(null);
+                },
+                "controllerContext"
+            );
         }
     }
 }

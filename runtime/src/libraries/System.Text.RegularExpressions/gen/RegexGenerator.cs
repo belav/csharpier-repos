@@ -22,10 +22,14 @@ namespace System.Text.RegularExpressions.Generator
     {
         /// <summary>Name of the type emitted to contain helpers used by the generated code.</summary>
         private const string HelpersTypeName = "Utilities";
+
         /// <summary>Namespace containing all the generated code.</summary>
         private const string GeneratedNamespace = "System.Text.RegularExpressions.Generated";
+
         /// <summary>Code for a [GeneratedCode] attribute to put on the top-level generated members.</summary>
-        private static readonly string s_generatedCodeAttribute = $"GeneratedCodeAttribute(\"{typeof(RegexGenerator).Assembly.GetName().Name}\", \"{typeof(RegexGenerator).Assembly.GetName().Version}\")";
+        private static readonly string s_generatedCodeAttribute =
+            $"GeneratedCodeAttribute(\"{typeof(RegexGenerator).Assembly.GetName().Name}\", \"{typeof(RegexGenerator).Assembly.GetName().Version}\")";
+
         /// <summary>Header comments and usings to include at the top of every generated file.</summary>
         private static readonly string[] s_headers = new string[]
         {
@@ -36,7 +40,11 @@ namespace System.Text.RegularExpressions.Generator
             "#pragma warning disable CS0219 // Variable assigned but never used",
         };
 
-        internal record struct CompilationData(bool AllowUnsafe, bool CheckOverflow, LanguageVersion LanguageVersion);
+        internal record struct CompilationData(
+            bool AllowUnsafe,
+            bool CheckOverflow,
+            LanguageVersion LanguageVersion
+        );
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
@@ -44,9 +52,8 @@ namespace System.Text.RegularExpressions.Generator
             // - DiagnosticData in the case of a failure that should end the compilation
             // - (RegexMethod regexMethod, string runnerFactoryImplementation, Dictionary<string, string[]> requiredHelpers) in the case of valid regex
             // - (RegexMethod regexMethod, string reason, DiagnosticData diagnostic) in the case of a limited-support regex
-            IncrementalValueProvider<ImmutableArray<object>> results =
-                context.SyntaxProvider
-
+            IncrementalValueProvider<ImmutableArray<object>> results = context
+                .SyntaxProvider
                 // Find all MethodDeclarationSyntax nodes attributed with GeneratedRegex and gather the required information.
                 // The predicate will be run once for every attributed node in the same file that's being modified.
                 // The transform will be run once for every attributed node in the compilation.
@@ -58,62 +65,105 @@ namespace System.Text.RegularExpressions.Generator
                 .ForAttributeWithMetadataName(
                     GeneratedRegexAttributeName,
                     (node, _) => node is MethodDeclarationSyntax,
-                    GetRegexMethodDataOrFailureDiagnostic)
-
+                    GetRegexMethodDataOrFailureDiagnostic
+                )
                 // Filter out any parsing errors that resulted in null objects being returned.
                 .Where(static m => m is not null)
-
                 // The input here will either be a DiagnosticData (in the case of something erroneous detected in GetRegexMethodDataOrFailureDiagnostic)
                 // or it will be a RegexPatternAndSyntax containing all of the successfully parsed data from the attribute/method.
-                .Select((methodOrDiagnostic, _) =>
-                {
-                    if (methodOrDiagnostic is RegexPatternAndSyntax method)
+                .Select(
+                    (methodOrDiagnostic, _) =>
                     {
-                        try
+                        if (methodOrDiagnostic is RegexPatternAndSyntax method)
                         {
-                            RegexTree regexTree = RegexParser.Parse(method.Pattern, method.Options | RegexOptions.Compiled, method.Culture); // make sure Compiled is included to get all optimizations applied to it
-                            AnalysisResults analysis = RegexTreeAnalyzer.Analyze(regexTree);
-                            return new RegexMethod(method.DeclaringType, method.DiagnosticLocation, method.MethodName, method.Modifiers, method.Pattern, method.Options, method.MatchTimeout, regexTree, analysis, method.CompilationData);
+                            try
+                            {
+                                RegexTree regexTree = RegexParser.Parse(
+                                    method.Pattern,
+                                    method.Options | RegexOptions.Compiled,
+                                    method.Culture
+                                ); // make sure Compiled is included to get all optimizations applied to it
+                                AnalysisResults analysis = RegexTreeAnalyzer.Analyze(regexTree);
+                                return new RegexMethod(
+                                    method.DeclaringType,
+                                    method.DiagnosticLocation,
+                                    method.MethodName,
+                                    method.Modifiers,
+                                    method.Pattern,
+                                    method.Options,
+                                    method.MatchTimeout,
+                                    regexTree,
+                                    analysis,
+                                    method.CompilationData
+                                );
+                            }
+                            catch (Exception e)
+                            {
+                                return new DiagnosticData(
+                                    DiagnosticDescriptors.InvalidRegexArguments,
+                                    method.DiagnosticLocation,
+                                    e.Message
+                                );
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            return new DiagnosticData(DiagnosticDescriptors.InvalidRegexArguments, method.DiagnosticLocation, e.Message);
-                        }
+
+                        return methodOrDiagnostic;
                     }
-
-                    return methodOrDiagnostic;
-                })
-
+                )
                 // Generate the RunnerFactory for each regex, if possible.  This is where the bulk of the implementation occurs.
-                .Select((state, _) =>
-                {
-                    if (state is not RegexMethod regexMethod)
+                .Select(
+                    (state, _) =>
                     {
-                        Debug.Assert(state is DiagnosticData);
-                        return state;
+                        if (state is not RegexMethod regexMethod)
+                        {
+                            Debug.Assert(state is DiagnosticData);
+                            return state;
+                        }
+
+                        // If we're unable to generate a full implementation for this regex, report a diagnostic.
+                        // We'll still output a limited implementation that just caches a new Regex(...).
+                        if (
+                            !SupportsCodeGeneration(
+                                regexMethod,
+                                regexMethod.CompilationData.LanguageVersion,
+                                out string? reason
+                            )
+                        )
+                        {
+                            return (
+                                regexMethod,
+                                reason,
+                                new DiagnosticData(
+                                    DiagnosticDescriptors.LimitedSourceGeneration,
+                                    regexMethod.DiagnosticLocation
+                                ),
+                                regexMethod.CompilationData
+                            );
+                        }
+
+                        // Generate the core logic for the regex.
+                        Dictionary<string, string[]> requiredHelpers = new();
+                        var sw = new StringWriter();
+                        var writer = new IndentedTextWriter(sw);
+                        writer.Indent += 2;
+                        writer.WriteLine();
+                        EmitRegexDerivedTypeRunnerFactory(
+                            writer,
+                            regexMethod,
+                            requiredHelpers,
+                            regexMethod.CompilationData.CheckOverflow
+                        );
+                        writer.Indent -= 2;
+                        return (
+                            regexMethod,
+                            sw.ToString(),
+                            requiredHelpers,
+                            regexMethod.CompilationData
+                        );
                     }
-
-                    // If we're unable to generate a full implementation for this regex, report a diagnostic.
-                    // We'll still output a limited implementation that just caches a new Regex(...).
-                    if (!SupportsCodeGeneration(regexMethod, regexMethod.CompilationData.LanguageVersion, out string? reason))
-                    {
-                        return (regexMethod, reason, new DiagnosticData(DiagnosticDescriptors.LimitedSourceGeneration, regexMethod.DiagnosticLocation), regexMethod.CompilationData);
-                    }
-
-                    // Generate the core logic for the regex.
-                    Dictionary<string, string[]> requiredHelpers = new();
-                    var sw = new StringWriter();
-                    var writer = new IndentedTextWriter(sw);
-                    writer.Indent += 2;
-                    writer.WriteLine();
-                    EmitRegexDerivedTypeRunnerFactory(writer, regexMethod, requiredHelpers, regexMethod.CompilationData.CheckOverflow);
-                    writer.Indent -= 2;
-                    return (regexMethod, sw.ToString(), requiredHelpers, regexMethod.CompilationData);
-                })
-
+                )
                 // Combine all of the generated text outputs into a single batch. We then generate a single source output from that batch.
                 .Collect()
-
                 // Apply sequence equality comparison on the result array for incremental caching.
                 .WithComparer(new ObjectImmutableArraySequenceEqualityComparer());
 
@@ -162,7 +212,11 @@ namespace System.Text.RegularExpressions.Generator
                 // To minimize generated code in the event of duplicated regexes, we only emit one derived Regex type per unique
                 // expression/options/timeout.  A Dictionary<(expression, options, timeout), RegexMethod> is used to deduplicate, where the value of the
                 // pair is the implementation used for the key.
-                var emittedExpressions = new Dictionary<(string Pattern, RegexOptions Options, int? Timeout), RegexMethod>();
+                var emittedExpressions =
+                    new Dictionary<
+                        (string Pattern, RegexOptions Options, int? Timeout),
+                        RegexMethod
+                    >();
 
                 // If we have any (RegexMethod regexMethod, string generatedName, string reason, DiagnosticData diagnostic), these are regexes for which we have
                 // limited support and need to simply output boilerplate.  We need to emit their diagnostics.
@@ -172,12 +226,28 @@ namespace System.Text.RegularExpressions.Generator
                 foreach (object? result in results)
                 {
                     RegexMethod? regexMethod = null;
-                    if (result is ValueTuple<RegexMethod, string, DiagnosticData, CompilationData> limitedSupportResult)
+                    if (
+                        result
+                        is ValueTuple<
+                            RegexMethod,
+                            string,
+                            DiagnosticData,
+                            CompilationData
+                        > limitedSupportResult
+                    )
                     {
                         context.ReportDiagnostic(limitedSupportResult.Item3.ToDiagnostic());
                         regexMethod = limitedSupportResult.Item1;
                     }
-                    else if (result is ValueTuple<RegexMethod, string, Dictionary<string, string[]>, CompilationData> regexImpl)
+                    else if (
+                        result
+                        is ValueTuple<
+                            RegexMethod,
+                            string,
+                            Dictionary<string, string[]>,
+                            CompilationData
+                        > regexImpl
+                    )
                     {
                         foreach (KeyValuePair<string, string[]> helper in regexImpl.Item3)
                         {
@@ -192,7 +262,11 @@ namespace System.Text.RegularExpressions.Generator
 
                     if (regexMethod is not null)
                     {
-                        var key = (regexMethod.Pattern, regexMethod.Options, regexMethod.MatchTimeout);
+                        var key = (
+                            regexMethod.Pattern,
+                            regexMethod.Options,
+                            regexMethod.MatchTimeout
+                        );
                         if (emittedExpressions.TryGetValue(key, out RegexMethod? implementation))
                         {
                             regexMethod.IsDuplicate = true;
@@ -234,19 +308,45 @@ namespace System.Text.RegularExpressions.Generator
                 writer.Indent++;
                 foreach (object? result in results)
                 {
-                    if (result is ValueTuple<RegexMethod, string, DiagnosticData, CompilationData> limitedSupportResult)
+                    if (
+                        result
+                        is ValueTuple<
+                            RegexMethod,
+                            string,
+                            DiagnosticData,
+                            CompilationData
+                        > limitedSupportResult
+                    )
                     {
                         if (!limitedSupportResult.Item1.IsDuplicate)
                         {
-                            EmitRegexLimitedBoilerplate(writer, limitedSupportResult.Item1, limitedSupportResult.Item2, limitedSupportResult.Item4.LanguageVersion);
+                            EmitRegexLimitedBoilerplate(
+                                writer,
+                                limitedSupportResult.Item1,
+                                limitedSupportResult.Item2,
+                                limitedSupportResult.Item4.LanguageVersion
+                            );
                             writer.WriteLine();
                         }
                     }
-                    else if (result is ValueTuple<RegexMethod, string, Dictionary<string, string[]>, CompilationData> regexImpl)
+                    else if (
+                        result
+                        is ValueTuple<
+                            RegexMethod,
+                            string,
+                            Dictionary<string, string[]>,
+                            CompilationData
+                        > regexImpl
+                    )
                     {
                         if (!regexImpl.Item1.IsDuplicate)
                         {
-                            EmitRegexDerivedImplementation(writer, regexImpl.Item1, regexImpl.Item2, regexImpl.Item4.AllowUnsafe);
+                            EmitRegexDerivedImplementation(
+                                writer,
+                                regexImpl.Item1,
+                                regexImpl.Item2,
+                                regexImpl.Item4.AllowUnsafe
+                            );
                             writer.WriteLine();
                         }
                     }
@@ -257,13 +357,20 @@ namespace System.Text.RegularExpressions.Generator
                 if (requiredHelpers.Count != 0)
                 {
                     writer.Indent++;
-                    writer.WriteLine($"/// <summary>Helper methods used by generated <see cref=\"Regex\"/>-derived implementations.</summary>");
+                    writer.WriteLine(
+                        $"/// <summary>Helper methods used by generated <see cref=\"Regex\"/>-derived implementations.</summary>"
+                    );
                     writer.WriteLine($"[{s_generatedCodeAttribute}]");
                     writer.WriteLine($"file static class {HelpersTypeName}");
                     writer.WriteLine($"{{");
                     writer.Indent++;
                     bool sawFirst = false;
-                    foreach (KeyValuePair<string, string[]> helper in requiredHelpers.OrderBy(h => h.Key, StringComparer.Ordinal))
+                    foreach (
+                        KeyValuePair<string, string[]> helper in requiredHelpers.OrderBy(
+                            h => h.Key,
+                            StringComparer.Ordinal
+                        )
+                    )
                     {
                         if (sawFirst)
                         {
@@ -293,7 +400,11 @@ namespace System.Text.RegularExpressions.Generator
         // It also provides a human-readable string to explain the reason. It will be emitted by the source generator
         // as a comment into the C# code, hence there's no need to localize.
         /// </remarks>
-        private static bool SupportsCodeGeneration(RegexMethod method, LanguageVersion languageVersion, [NotNullWhen(false)] out string? reason)
+        private static bool SupportsCodeGeneration(
+            RegexMethod method,
+            LanguageVersion languageVersion,
+            [NotNullWhen(false)] out string? reason
+        )
         {
             if (languageVersion < LanguageVersion.CSharp11)
             {
@@ -317,7 +428,8 @@ namespace System.Text.RegularExpressions.Generator
                 // where you may need to do case-insensitive comparisons at match time which is the case for backreferences. For that reason,
                 // and given the Regex case equivalence table is internal and can't be called by the source generated emitted type, if
                 // the pattern contains case-insensitive backreferences, we won't try to create a source generated Regex-derived type.
-                reason = "the expression contains case-insensitive backreferences which are not supported by the source generator";
+                reason =
+                    "the expression contains case-insensitive backreferences which are not supported by the source generator";
                 return false;
             }
 
@@ -327,7 +439,10 @@ namespace System.Text.RegularExpressions.Generator
 
             static bool HasCaseInsensitiveBackReferences(RegexNode node)
             {
-                if (node.Kind is RegexNodeKind.Backreference && (node.Options & RegexOptions.IgnoreCase) != 0)
+                if (
+                    node.Kind is RegexNodeKind.Backreference
+                    && (node.Options & RegexOptions.IgnoreCase) != 0
+                )
                 {
                     return true;
                 }
@@ -352,13 +467,23 @@ namespace System.Text.RegularExpressions.Generator
         /// Diagnostics do not have value equality semantics.  Storing them in an object model
         /// used in the pipeline can result in unnecessary recompilation.
         /// </remarks>
-        private sealed record class DiagnosticData(DiagnosticDescriptor descriptor, Location location, object? arg = null)
+        private sealed record class DiagnosticData(
+            DiagnosticDescriptor descriptor,
+            Location location,
+            object? arg = null
+        )
         {
             /// <summary>Create a <see cref="Diagnostic"/> from the data.</summary>
-            public Diagnostic ToDiagnostic() => Diagnostic.Create(descriptor, location, arg is null ? Array.Empty<object>() : new[] { arg });
+            public Diagnostic ToDiagnostic() =>
+                Diagnostic.Create(
+                    descriptor,
+                    location,
+                    arg is null ? Array.Empty<object>() : new[] { arg }
+                );
         }
 
-        private sealed class ObjectImmutableArraySequenceEqualityComparer : IEqualityComparer<ImmutableArray<object>>
+        private sealed class ObjectImmutableArraySequenceEqualityComparer
+            : IEqualityComparer<ImmutableArray<object>>
         {
             public bool Equals(ImmutableArray<object> left, ImmutableArray<object> right)
             {

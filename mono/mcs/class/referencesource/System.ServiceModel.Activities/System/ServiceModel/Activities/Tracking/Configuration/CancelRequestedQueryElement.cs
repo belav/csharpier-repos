@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Configuration;
-    using System.Runtime;
     using System.Activities.Tracking;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
     public class CancelRequestedQueryElement : TrackingQueryElement
@@ -21,31 +21,60 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
                 if (this.properties == null)
                 {
                     ConfigurationPropertyCollection properties = base.Properties;
-                    properties.Add(new ConfigurationProperty(TrackingConfigurationStrings.ActivityName, typeof(System.String), "*", null, new System.Configuration.StringValidator(1, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsKey));
-                    properties.Add(new ConfigurationProperty(TrackingConfigurationStrings.ChildActivityName, typeof(System.String), "*", null, new System.Configuration.StringValidator(1, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(
+                        new ConfigurationProperty(
+                            TrackingConfigurationStrings.ActivityName,
+                            typeof(System.String),
+                            "*",
+                            null,
+                            new System.Configuration.StringValidator(1, 2147483647, null),
+                            System.Configuration.ConfigurationPropertyOptions.IsKey
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            TrackingConfigurationStrings.ChildActivityName,
+                            typeof(System.String),
+                            "*",
+                            null,
+                            new System.Configuration.StringValidator(1, 2147483647, null),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
             }
         }
 
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule,
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
             MessageId = "System.ServiceModel.Activities.Tracking.Configuration.ActivityScheduledQueryElement.ChildActivityName",
-            Justification = "StringValidator verifies minimum size")]
-        [ConfigurationProperty(TrackingConfigurationStrings.ActivityName, IsKey = true,
-            DefaultValue = TrackingConfigurationStrings.StarWildcard)]
+            Justification = "StringValidator verifies minimum size"
+        )]
+        [ConfigurationProperty(
+            TrackingConfigurationStrings.ActivityName,
+            IsKey = true,
+            DefaultValue = TrackingConfigurationStrings.StarWildcard
+        )]
         [StringValidator(MinLength = 1)]
         public string ActivityName
         {
             get { return (string)base[TrackingConfigurationStrings.ActivityName]; }
             set { base[TrackingConfigurationStrings.ActivityName] = value; }
         }
-        
-        [ConfigurationProperty(TrackingConfigurationStrings.ChildActivityName,
-            DefaultValue = TrackingConfigurationStrings.StarWildcard)]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule,
+
+        [ConfigurationProperty(
+            TrackingConfigurationStrings.ChildActivityName,
+            DefaultValue = TrackingConfigurationStrings.StarWildcard
+        )]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
             MessageId = "System.ServiceModel.Activities.Tracking.Configuration.CancelRequestedQueryElement.ChildActivityName",
-            Justification = "StringValidator verifies minimum size")]
+            Justification = "StringValidator verifies minimum size"
+        )]
         [StringValidator(MinLength = 1)]
         public string ChildActivityName
         {
@@ -56,10 +85,10 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
         protected override TrackingQuery NewTrackingQuery()
         {
             return new CancelRequestedQuery
-                {
-                    ActivityName = this.ActivityName,
-                    ChildActivityName = this.ChildActivityName
-                };
+            {
+                ActivityName = this.ActivityName,
+                ChildActivityName = this.ChildActivityName,
+            };
         }
     }
 }

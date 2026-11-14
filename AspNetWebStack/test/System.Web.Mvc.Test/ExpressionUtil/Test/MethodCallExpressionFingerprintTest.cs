@@ -18,7 +18,11 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo expectedMethod = typeof(string).GetMethod("Intern");
 
             // Act
-            MethodCallExpressionFingerprint fingerprint = new MethodCallExpressionFingerprint(expectedNodeType, expectedType, expectedMethod);
+            MethodCallExpressionFingerprint fingerprint = new MethodCallExpressionFingerprint(
+                expectedNodeType,
+                expectedType,
+                expectedMethod
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -35,8 +39,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo method = typeof(string).GetMethod("Intern");
 
             // Act
-            MethodCallExpressionFingerprint fingerprint1 = new MethodCallExpressionFingerprint(nodeType, type, method);
-            MethodCallExpressionFingerprint fingerprint2 = new MethodCallExpressionFingerprint(nodeType, type, method);
+            MethodCallExpressionFingerprint fingerprint1 = new MethodCallExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            MethodCallExpressionFingerprint fingerprint2 = new MethodCallExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -52,8 +64,15 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo method = typeof(string).GetMethod("Intern");
 
             // Act
-            MethodCallExpressionFingerprint fingerprint1 = new MethodCallExpressionFingerprint(nodeType, type, method);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            MethodCallExpressionFingerprint fingerprint1 = new MethodCallExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -68,8 +87,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo method = typeof(string).GetMethod("Intern");
 
             // Act
-            MethodCallExpressionFingerprint fingerprint1 = new MethodCallExpressionFingerprint(nodeType, type, method);
-            MethodCallExpressionFingerprint fingerprint2 = new MethodCallExpressionFingerprint(nodeType, type, null /* method */);
+            MethodCallExpressionFingerprint fingerprint1 = new MethodCallExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            MethodCallExpressionFingerprint fingerprint2 = new MethodCallExpressionFingerprint(
+                nodeType,
+                type,
+                null /* method */
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);
@@ -84,8 +111,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo method = typeof(string).GetMethod("Intern");
 
             // Act
-            MethodCallExpressionFingerprint fingerprint1 = new MethodCallExpressionFingerprint(nodeType, type, method);
-            MethodCallExpressionFingerprint fingerprint2 = new MethodCallExpressionFingerprint(nodeType, typeof(object), method);
+            MethodCallExpressionFingerprint fingerprint1 = new MethodCallExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            MethodCallExpressionFingerprint fingerprint2 = new MethodCallExpressionFingerprint(
+                nodeType,
+                typeof(object),
+                method
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

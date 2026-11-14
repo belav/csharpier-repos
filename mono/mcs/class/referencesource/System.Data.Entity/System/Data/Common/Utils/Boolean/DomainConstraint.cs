@@ -9,9 +9,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.Data.Common.Utils.Boolean
 {
@@ -33,7 +33,11 @@ namespace System.Data.Common.Utils.Boolean
         /// <param name="identifier">Identifier </param>
         /// <param name="domain">Domain of variable.</param>
         /// <param name="identifierComparer">Comparer of identifier</param>
-        internal DomainVariable(T_Variable identifier, Set<T_Element> domain, IEqualityComparer<T_Variable> identifierComparer)
+        internal DomainVariable(
+            T_Variable identifier,
+            Set<T_Element> domain,
+            IEqualityComparer<T_Variable> identifierComparer
+        )
         {
             Debug.Assert(null != identifier && null != domain);
             _identifier = identifier;
@@ -43,17 +47,25 @@ namespace System.Data.Common.Utils.Boolean
             int identifierHashCode = _identifierComparer.GetHashCode(_identifier);
             _hashCode = domainHashCode ^ identifierHashCode;
         }
-        internal DomainVariable(T_Variable identifier, Set<T_Element> domain) : this(identifier, domain, null) { }
+
+        internal DomainVariable(T_Variable identifier, Set<T_Element> domain)
+            : this(identifier, domain, null) { }
 
         /// <summary>
         /// Gets the variable.
         /// </summary>
-        internal T_Variable Identifier { get { return _identifier; } }
+        internal T_Variable Identifier
+        {
+            get { return _identifier; }
+        }
 
         /// <summary>
         /// Gets the domain of this variable.
         /// </summary>
-        internal Set<T_Element> Domain { get { return _domain; } }
+        internal Set<T_Element> Domain
+        {
+            get { return _domain; }
+        }
 
         public override int GetHashCode()
         {
@@ -62,23 +74,35 @@ namespace System.Data.Common.Utils.Boolean
 
         public override bool Equals(object obj)
         {
-            if (Object.ReferenceEquals(this, obj)) { return true; }
-            DomainVariable<T_Variable, T_Element> other = obj as DomainVariable<T_Variable, T_Element>;
-            if (null == other) { return false; }
-            if (_hashCode != other._hashCode) { return false; }
-            return (_identifierComparer.Equals(_identifier, other._identifier) && _domain.SetEquals(other._domain));
+            if (Object.ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+            DomainVariable<T_Variable, T_Element> other =
+                obj as DomainVariable<T_Variable, T_Element>;
+            if (null == other)
+            {
+                return false;
+            }
+            if (_hashCode != other._hashCode)
+            {
+                return false;
+            }
+            return (
+                _identifierComparer.Equals(_identifier, other._identifier)
+                && _domain.SetEquals(other._domain)
+            );
         }
 
         public override string ToString()
         {
-            return StringUtil.FormatInvariant("{0}{{{1}}}",
-                _identifier.ToString(), _domain);
+            return StringUtil.FormatInvariant("{0}{{{1}}}", _identifier.ToString(), _domain);
         }
     }
 
     /// <summary>
     /// Represents a constraint of the form:
-    /// 
+    ///
     ///     Var1 in Range
     /// </summary>
     /// <typeparam name="T_Element">Type of range elements.</typeparam>
@@ -94,7 +118,10 @@ namespace System.Data.Common.Utils.Boolean
         /// </summary>
         /// <param name="variable">Variable in constraint.</param>
         /// <param name="range">Range of constraint.</param>
-        internal DomainConstraint(DomainVariable<T_Variable, T_Element> variable, Set<T_Element> range)
+        internal DomainConstraint(
+            DomainVariable<T_Variable, T_Element> variable,
+            Set<T_Element> range
+        )
         {
             Debug.Assert(null != variable && null != range);
             _variable = variable;
@@ -106,19 +133,23 @@ namespace System.Data.Common.Utils.Boolean
         /// Constructor supporting a singleton range domain constraint
         /// </summary>
         internal DomainConstraint(DomainVariable<T_Variable, T_Element> variable, T_Element element)
-            : this(variable, new Set<T_Element>(new T_Element[] { element }).MakeReadOnly())
-        {
-        }
+            : this(variable, new Set<T_Element>(new T_Element[] { element }).MakeReadOnly()) { }
 
         /// <summary>
         /// Gets the variable for this constraint.
         /// </summary>
-        internal DomainVariable<T_Variable, T_Element> Variable { get { return _variable; } }
+        internal DomainVariable<T_Variable, T_Element> Variable
+        {
+            get { return _variable; }
+        }
 
         /// <summary>
         /// Get the range for this constraint.
         /// </summary>
-        internal Set<T_Element> Range { get { return _range; } }
+        internal Set<T_Element> Range
+        {
+            get { return _range; }
+        }
 
         /// <summary>
         /// Inverts this constraint (this iff. !result)
@@ -127,16 +158,28 @@ namespace System.Data.Common.Utils.Boolean
         /// <returns></returns>
         internal DomainConstraint<T_Variable, T_Element> InvertDomainConstraint()
         {
-            return new DomainConstraint<T_Variable, T_Element>(_variable,
-                _variable.Domain.Difference(_range).AsReadOnly());
+            return new DomainConstraint<T_Variable, T_Element>(
+                _variable,
+                _variable.Domain.Difference(_range).AsReadOnly()
+            );
         }
 
         public override bool Equals(object obj)
         {
-            if (Object.ReferenceEquals(this, obj)) { return true; }
-            DomainConstraint<T_Variable, T_Element> other = obj as DomainConstraint<T_Variable, T_Element>;
-            if (null == other) { return false; }
-            if (_hashCode != other._hashCode) { return false; }
+            if (Object.ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+            DomainConstraint<T_Variable, T_Element> other =
+                obj as DomainConstraint<T_Variable, T_Element>;
+            if (null == other)
+            {
+                return false;
+            }
+            if (_hashCode != other._hashCode)
+            {
+                return false;
+            }
             return (_range.SetEquals(other._range) && _variable.Equals(other._variable));
         }
 
@@ -147,8 +190,7 @@ namespace System.Data.Common.Utils.Boolean
 
         public override string ToString()
         {
-            return StringUtil.FormatInvariant("{0} in [{1}]",
-                _variable, _range);
+            return StringUtil.FormatInvariant("{0} in [{1}]", _variable, _range);
         }
     }
 }

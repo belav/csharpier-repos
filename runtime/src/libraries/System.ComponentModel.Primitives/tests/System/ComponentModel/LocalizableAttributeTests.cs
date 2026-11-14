@@ -21,7 +21,12 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> Equals_TestData()
         {
             yield return new object[] { LocalizableAttribute.Yes, LocalizableAttribute.Yes, true };
-            yield return new object[] { LocalizableAttribute.No, new LocalizableAttribute(false), true };
+            yield return new object[]
+            {
+                LocalizableAttribute.No,
+                new LocalizableAttribute(false),
+                true,
+            };
             yield return new object[] { LocalizableAttribute.Yes, LocalizableAttribute.No, false };
 
             yield return new object[] { LocalizableAttribute.Yes, new object(), false };
@@ -30,7 +35,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(LocalizableAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            LocalizableAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is LocalizableAttribute)
@@ -48,7 +57,10 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(DefaultProperties_TestData))]
-        public void DefaultProperties_GetLocalizable_ReturnsExpected(LocalizableAttribute attribute, bool expectedLocalizable)
+        public void DefaultProperties_GetLocalizable_ReturnsExpected(
+            LocalizableAttribute attribute,
+            bool expectedLocalizable
+        )
         {
             Assert.Equal(expectedLocalizable, attribute.IsLocalizable);
             Assert.Equal(!expectedLocalizable, attribute.IsDefaultAttribute());

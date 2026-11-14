@@ -32,37 +32,39 @@ using System.Data.SqlClient;
 
 namespace MonoTests.System.Data.Connected
 {
-	public class DataProvider
-	{
-		private readonly DataSet data;
+    public class DataProvider
+    {
+        private readonly DataSet data;
 
-		// TODO : The Data is now got from the Database.
-		// Needs to be modified to get the data from a config file
-		public DataProvider ()
-		{
-			data = new DataSet ();
-			string query = "Select * from numeric_family order by id ASC;";
-			query += "Select * from string_family order by id ASC;";
-			query += "Select * from binary_family order by id ASC;";
-			query += "Select * from datetime_family order by id ASC;";
+        // TODO : The Data is now got from the Database.
+        // Needs to be modified to get the data from a config file
+        public DataProvider()
+        {
+            data = new DataSet();
+            string query = "Select * from numeric_family order by id ASC;";
+            query += "Select * from string_family order by id ASC;";
+            query += "Select * from binary_family order by id ASC;";
+            query += "Select * from datetime_family order by id ASC;";
 
-			SqlDataAdapter adapter = new SqlDataAdapter (query,
-				ConnectionManager.Instance.Sql.ConnectionString);
-			adapter.TableMappings.Add ("Table", "numeric_family");
-			adapter.TableMappings.Add ("Table1", "string_family");
-			adapter.TableMappings.Add ("Table2", "binary_family");
-			adapter.TableMappings.Add ("Table3", "datetime_family");
+            SqlDataAdapter adapter = new SqlDataAdapter(
+                query,
+                ConnectionManager.Instance.Sql.ConnectionString
+            );
+            adapter.TableMappings.Add("Table", "numeric_family");
+            adapter.TableMappings.Add("Table1", "string_family");
+            adapter.TableMappings.Add("Table2", "binary_family");
+            adapter.TableMappings.Add("Table3", "datetime_family");
 
-			data.Tables.Add ("numeric_family");
-			data.Tables.Add ("string_family");
-			data.Tables.Add ("binary_family");
-			data.Tables.Add ("datetime_family");
-			adapter.Fill (data);
-		}
+            data.Tables.Add("numeric_family");
+            data.Tables.Add("string_family");
+            data.Tables.Add("binary_family");
+            data.Tables.Add("datetime_family");
+            adapter.Fill(data);
+        }
 
-		public DataSet GetDataSet ()
-		{
-			return data;
-		}
-	}
+        public DataSet GetDataSet()
+        {
+            return data;
+        }
+    }
 }

@@ -23,9 +23,8 @@ internal sealed class WorkspaceConfigurationService : IWorkspaceConfigurationSer
         _globalOptions = globalOptions;
     }
 
-    public WorkspaceConfigurationOptions Options
-        => _lazyOptions ??= _globalOptions.GetWorkspaceConfigurationOptions();
+    public WorkspaceConfigurationOptions Options =>
+        _lazyOptions ??= _globalOptions.GetWorkspaceConfigurationOptions();
 
-    internal void Clear()
-        => _lazyOptions = null;
+    internal void Clear() => _lazyOptions = null;
 }

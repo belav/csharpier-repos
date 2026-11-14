@@ -27,10 +27,9 @@ internal class CompiledPageRouteModelProvider : IPageRouteModelProvider
         ILogger<CompiledPageRouteModelProvider> logger
     )
     {
-        _applicationManager =
-            applicationManager ?? throw new ArgumentNullException(nameof(applicationManager));
-        _pagesOptions =
-            pagesOptionsAccessor?.Value
+        _applicationManager = applicationManager
+            ?? throw new ArgumentNullException(nameof(applicationManager));
+        _pagesOptions = pagesOptionsAccessor?.Value
             ?? throw new ArgumentNullException(nameof(pagesOptionsAccessor));
         _routeModelFactory = new PageRouteModelFactory(_pagesOptions, logger);
     }

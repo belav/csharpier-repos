@@ -5,14 +5,15 @@
 namespace System.ServiceModel.Security
 {
     /// <summary>
-    /// Defines constants that are used to describe Operation, ServiceContract 
+    /// Defines constants that are used to describe Operation, ServiceContract
     /// and ServiceBehavior names.
     /// </summary>
     internal static class WSTrustServiceContractConstants
     {
 #pragma warning disable 1591
         public const string ServiceBehaviorName = "SecurityTokenService";
-        public const string Namespace = "http://schemas.microsoft.com/ws/2008/06/identity/securitytokenservice";
+        public const string Namespace =
+            "http://schemas.microsoft.com/ws/2008/06/identity/securitytokenservice";
 
         public static class Contracts
         {
@@ -32,13 +33,14 @@ namespace System.ServiceModel.Security
             public const string TrustFeb2005RenewAsync = "TrustFeb2005RenewAsync";
             public const string TrustFeb2005RenewResponseAsync = "TrustFeb2005RenewResponseAsync";
             public const string TrustFeb2005ValidateAsync = "TrustFeb2005ValidateAsync";
-            public const string TrustFeb2005ValidateResponseAsync = "TrustFeb2005ValidateResponseAsync";
+            public const string TrustFeb2005ValidateResponseAsync =
+                "TrustFeb2005ValidateResponseAsync";
 
             // IWSTrustFeb2005Sync Operations.
             public const string TrustFeb2005Cancel = "TrustFeb2005Cancel";
             public const string TrustFeb2005CancelResponse = "TrustFeb2005CancelResponse";
             public const string TrustFeb2005Issue = "TrustFeb2005Issue";
-            public const string TrustFeb2005IssueResponse = "TrustFeb2005IssueResponse"; 
+            public const string TrustFeb2005IssueResponse = "TrustFeb2005IssueResponse";
             public const string TrustFeb2005Renew = "TrustFeb2005Renew";
             public const string TrustFeb2005RenewResponse = "TrustFeb2005RenewResponse";
             public const string TrustFeb2005Validate = "TrustFeb2005Validate";

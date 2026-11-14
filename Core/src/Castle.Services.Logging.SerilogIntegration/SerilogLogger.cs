@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@
 namespace Castle.Services.Logging.SerilogIntegration
 {
     using System;
-
     using Serilog;
     using Serilog.Events;
 
@@ -74,7 +73,9 @@ namespace Castle.Services.Logging.SerilogIntegration
         public Castle.Core.Logging.ILogger CreateChildLogger(string loggerName)
         {
             // Serilog calls these sub loggers. We might be able to do something here but for now I'm going leave it like this.
-            throw new NotImplementedException("Creating child loggers for Serilog is not supported");
+            throw new NotImplementedException(
+                "Creating child loggers for Serilog is not supported"
+            );
         }
 
         public void Trace(string message, Exception exception)
@@ -98,7 +99,12 @@ namespace Castle.Services.Logging.SerilogIntegration
             }
         }
 
-        public void TraceFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void TraceFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsTraceEnabled)
             {
@@ -156,7 +162,12 @@ namespace Castle.Services.Logging.SerilogIntegration
             }
         }
 
-        public void DebugFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void DebugFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsDebugEnabled)
             {
@@ -214,7 +225,12 @@ namespace Castle.Services.Logging.SerilogIntegration
             }
         }
 
-        public void ErrorFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void ErrorFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsErrorEnabled)
             {
@@ -272,7 +288,12 @@ namespace Castle.Services.Logging.SerilogIntegration
             }
         }
 
-        public void FatalFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void FatalFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsFatalEnabled)
             {
@@ -330,7 +351,12 @@ namespace Castle.Services.Logging.SerilogIntegration
             }
         }
 
-        public void InfoFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void InfoFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsInfoEnabled)
             {
@@ -388,7 +414,12 @@ namespace Castle.Services.Logging.SerilogIntegration
             }
         }
 
-        public void WarnFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void WarnFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsWarnEnabled)
             {

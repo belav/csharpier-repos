@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.Security;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Security;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SslStress
 {
@@ -32,7 +32,8 @@ namespace SslStress
 
         public SslServerBase(Configuration config)
         {
-            if (config.MaxConnections < 1) throw new ArgumentOutOfRangeException(nameof(config.MaxConnections));
+            if (config.MaxConnections < 1)
+                throw new ArgumentOutOfRangeException(nameof(config.MaxConnections));
 
             _config = config;
             _certificate = CreateSelfSignedCertificate();
@@ -40,14 +41,25 @@ namespace SslStress
             _serverTask = new Lazy<Task>(Task.Run(StartCore));
         }
 
-        protected abstract Task HandleConnection(SslStream sslStream, TcpClient client, CancellationToken token);
+        protected abstract Task HandleConnection(
+            SslStream sslStream,
+            TcpClient client,
+            CancellationToken token
+        );
 
-        protected virtual async Task<SslStream> EstablishSslStream(Stream networkStream, CancellationToken token)
+        protected virtual async Task<SslStream> EstablishSslStream(
+            Stream networkStream,
+            CancellationToken token
+        )
         {
             var sslStream = new SslStream(networkStream, leaveInnerStreamOpen: false);
             var serverOptions = new SslServerAuthenticationOptions
             {
-                ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 },
+                ApplicationProtocols = new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2,
+                },
                 ServerCertificate = _certificate,
             };
 
@@ -57,7 +69,8 @@ namespace SslStress
 
         public void Start()
         {
-            if (_cts.IsCancellationRequested) throw new ObjectDisposedException(nameof(SslServerBase));
+            if (_cts.IsCancellationRequested)
+                throw new ObjectDisposedException(nameof(SslServerBase));
             _ = _serverTask.Value;
         }
 
@@ -71,7 +84,8 @@ namespace SslStress
         {
             get
             {
-                if (!_serverTask.IsValueCreated) throw new InvalidOperationException("Server has not been started yet");
+                if (!_serverTask.IsValueCreated)
+                    throw new InvalidOperationException("Server has not been started yet");
                 return _serverTask.Value;
             }
         }
@@ -81,7 +95,9 @@ namespace SslStress
         private async Task StartCore()
         {
             _listener.Start();
-            IEnumerable<Task> workers = Enumerable.Range(1, 2 * _config.MaxConnections).Select(_ => RunSingleWorker());
+            IEnumerable<Task> workers = Enumerable
+                .Range(1, 2 * _config.MaxConnections)
+                .Select(_ => RunSingleWorker());
             try
             {
                 await Task.WhenAll(workers);
@@ -93,18 +109,18 @@ namespace SslStress
 
             async Task RunSingleWorker()
             {
-                while(!_cts.IsCancellationRequested)
+                while (!_cts.IsCancellationRequested)
                 {
                     try
                     {
                         using TcpClient client = await AcceptTcpClientAsync(_cts.Token);
-                        using SslStream stream = await EstablishSslStream(client.GetStream(), _cts.Token);
+                        using SslStream stream = await EstablishSslStream(
+                            client.GetStream(),
+                            _cts.Token
+                        );
                         await HandleConnection(stream, client, _cts.Token);
                     }
-                    catch (OperationCanceledException) when (_cts.IsCancellationRequested)
-                    {
-
-                    }
+                    catch (OperationCanceledException) when (_cts.IsCancellationRequested) { }
                     catch (Exception e)
                     {
                         if (_config.LogServer)
@@ -153,11 +169,28 @@ namespace SslStress
         protected virtual X509Certificate2 CreateSelfSignedCertificate()
         {
             using var rsa = RSA.Create();
-            var certReq = new CertificateRequest($"CN={Hostname}", rsa, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-            certReq.CertificateExtensions.Add(new X509BasicConstraintsExtension(false, false, 0, false));
-            certReq.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") }, false));
-            certReq.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false));
-            X509Certificate2 cert = certReq.CreateSelfSigned(DateTimeOffset.UtcNow.AddMonths(-1), DateTimeOffset.UtcNow.AddMonths(1));
+            var certReq = new CertificateRequest(
+                $"CN={Hostname}",
+                rsa,
+                HashAlgorithmName.SHA256,
+                RSASignaturePadding.Pkcs1
+            );
+            certReq.CertificateExtensions.Add(
+                new X509BasicConstraintsExtension(false, false, 0, false)
+            );
+            certReq.CertificateExtensions.Add(
+                new X509EnhancedKeyUsageExtension(
+                    new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                    false
+                )
+            );
+            certReq.CertificateExtensions.Add(
+                new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false)
+            );
+            X509Certificate2 cert = certReq.CreateSelfSigned(
+                DateTimeOffset.UtcNow.AddMonths(-1),
+                DateTimeOffset.UtcNow.AddMonths(1)
+            );
             if (OperatingSystem.IsWindows())
             {
                 cert = new X509Certificate2(cert.Export(X509ContentType.Pfx));

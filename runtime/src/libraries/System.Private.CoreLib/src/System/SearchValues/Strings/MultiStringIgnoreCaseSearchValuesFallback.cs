@@ -9,7 +9,8 @@ namespace System.Buffers
     {
         private readonly string[] _values;
 
-        public MultiStringIgnoreCaseSearchValuesFallback(HashSet<string> uniqueValues) : base(uniqueValues)
+        public MultiStringIgnoreCaseSearchValuesFallback(HashSet<string> uniqueValues)
+            : base(uniqueValues)
         {
             _values = new string[uniqueValues.Count];
             uniqueValues.CopyTo(_values, 0);

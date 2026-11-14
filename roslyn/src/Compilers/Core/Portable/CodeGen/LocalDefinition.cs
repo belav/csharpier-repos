@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalVariableAttributes pdbAttributes,
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags,
-            ImmutableArray<string> tupleElementNames)
+            ImmutableArray<string> tupleElementNames
+        )
         {
             _symbolOpt = symbolOpt;
             _nameOpt = nameOpt;
@@ -81,8 +82,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             _constraints = constraints;
         }
 
-        internal string GetDebuggerDisplay()
-            => $"{_slot}: {_nameOpt ?? "<unnamed>"} ({_type})";
+        internal string GetDebuggerDisplay() => $"{_slot}: {_nameOpt ?? "<unnamed>"} ({_type})";
 
         public ILocalSymbolInternal? SymbolOpt => _symbolOpt;
 
@@ -109,8 +109,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             get { throw ExceptionUtilities.Unreachable(); }
         }
 
-        public ImmutableArray<Cci.ICustomModifier> CustomModifiers
-            => ImmutableArray<Cci.ICustomModifier>.Empty;
+        public ImmutableArray<Cci.ICustomModifier> CustomModifiers =>
+            ImmutableArray<Cci.ICustomModifier>.Empty;
 
         public bool IsConstant
         {
@@ -121,11 +121,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public LocalSlotConstraints Constraints => _constraints;
 
-        public bool IsPinned
-            => (_constraints & LocalSlotConstraints.Pinned) != 0;
+        public bool IsPinned => (_constraints & LocalSlotConstraints.Pinned) != 0;
 
-        public bool IsReference
-            => (_constraints & LocalSlotConstraints.ByRef) != 0;
+        public bool IsReference => (_constraints & LocalSlotConstraints.ByRef) != 0;
 
         public LocalVariableAttributes PdbAttributes => _pdbAttributes;
 

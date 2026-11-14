@@ -36,19 +36,22 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IProjectionBufferFactoryService factoryService,
             IEditorOptions editorOptions,
             IContentType? contentType = null,
-            params SnapshotSpan[] exposedSpans)
+            params SnapshotSpan[] exposedSpans
+        )
         {
             return factoryService.CreateProjectionBufferWithoutIndentation(
                 editorOptions,
                 contentType,
-                (IEnumerable<SnapshotSpan>)exposedSpans);
+                (IEnumerable<SnapshotSpan>)exposedSpans
+            );
         }
 
         public static IProjectionBuffer CreateProjectionBufferWithoutIndentation(
             this IProjectionBufferFactoryService factoryService,
             IEditorOptions editorOptions,
             IContentType? contentType,
-            IEnumerable<SnapshotSpan> exposedSpans)
+            IEnumerable<SnapshotSpan> exposedSpans
+        )
         {
             var spans = new NormalizedSnapshotSpanCollection(exposedSpans);
 
@@ -59,7 +62,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 var buffer = spans.First().Snapshot.TextBuffer;
                 var currentSnapshot = buffer.CurrentSnapshot;
                 spans = new NormalizedSnapshotSpanCollection(
-                    spans.Select(s => s.TranslateTo(currentSnapshot, SpanTrackingMode.EdgeExclusive)));
+                    spans.Select(s =>
+                        s.TranslateTo(currentSnapshot, SpanTrackingMode.EdgeExclusive)
+                    )
+                );
             }
 
             contentType ??= factoryService.ProjectionContentType;
@@ -67,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 projectionEditResolver: null,
                 sourceSpans: Array.Empty<object>(),
                 options: ProjectionBufferOptions.None,
-                contentType: contentType);
+                contentType: contentType
+            );
 
             if (spans.Count > 0)
             {
@@ -83,7 +90,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     var startLineNumber = snapshot.GetLineNumberFromPosition(span.Start);
                     var endLineNumber = snapshot.GetLineNumberFromPosition(span.End);
 
-                    for (var lineNumber = startLineNumber; lineNumber <= endLineNumber; lineNumber++)
+                    for (
+                        var lineNumber = startLineNumber;
+                        lineNumber <= endLineNumber;
+                        lineNumber++
+                    )
                     {
                         // Compute the span clamped to this line
                         var line = snapshot.GetLineFromLineNumber(lineNumber);
@@ -94,7 +105,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                         // DetermineIndentationColumn that this matches.
                         if (line.Start == finalSpanStart)
                         {
-                            finalSpanStart += line.GetLineOffsetFromColumn(indentationColumn, editorOptions);
+                            finalSpanStart += line.GetLineOffsetFromColumn(
+                                indentationColumn,
+                                editorOptions
+                            );
 
                             // Paranoia: what if the indentation reversed our ordering?
                             if (finalSpanStart > finalSpanEnd)
@@ -105,7 +119,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
                         // We don't expect edits to happen while this projection buffer is active. We'll choose EdgeExclusive so
                         // if they do we don't end up in any cases where there is overlapping source spans.
-                        finalSpans.Add(snapshot.CreateTrackingSpan(Span.FromBounds(finalSpanStart, finalSpanEnd), SpanTrackingMode.EdgeExclusive));
+                        finalSpans.Add(
+                            snapshot.CreateTrackingSpan(
+                                Span.FromBounds(finalSpanStart, finalSpanEnd),
+                                SpanTrackingMode.EdgeExclusive
+                            )
+                        );
                     }
                 }
 
@@ -117,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
         private static int DetermineIndentationColumn(
             IEditorOptions editorOptions,
-            IEnumerable<SnapshotSpan> spans)
+            IEnumerable<SnapshotSpan> spans
+        )
         {
             int? indentationColumn = null;
             foreach (var span in spans)
@@ -140,8 +160,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 //
                 // Without throwing out the first line in the example above, the indentation column
                 // used will be 4, rather than 8.
-                var startLineFirstNonWhitespace = snapshot.GetLineFromLineNumber(startLineNumber).GetFirstNonWhitespacePosition();
-                if (startLineFirstNonWhitespace.HasValue && startLineFirstNonWhitespace.Value < span.Start)
+                var startLineFirstNonWhitespace = snapshot
+                    .GetLineFromLineNumber(startLineNumber)
+                    .GetFirstNonWhitespacePosition();
+                if (
+                    startLineFirstNonWhitespace.HasValue
+                    && startLineFirstNonWhitespace.Value < span.Start
+                )
                 {
                     startLineNumber++;
                 }
@@ -155,7 +180,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     }
 
                     indentationColumn = indentationColumn.HasValue
-                        ? Math.Min(indentationColumn.Value, line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(editorOptions))
+                        ? Math.Min(
+                            indentationColumn.Value,
+                            line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(editorOptions)
+                        )
                         : line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(editorOptions);
                 }
             }
@@ -169,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IEditorOptions editorOptions,
             ITextSnapshot snapshot,
             string separator,
-            params LineSpan[] exposedLineSpans)
+            params LineSpan[] exposedLineSpans
+        )
         {
             return CreateProjectionBuffer(
                 factoryService,
@@ -179,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 separator,
                 suffixOpt: null,
                 trim: false,
-                exposedLineSpans: exposedLineSpans);
+                exposedLineSpans: exposedLineSpans
+            );
         }
 
         public static IProjectionBuffer CreateProjectionBufferWithoutIndentation(
@@ -188,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IEditorOptions editorOptions,
             ITextSnapshot snapshot,
             string separator,
-            params LineSpan[] exposedLineSpans)
+            params LineSpan[] exposedLineSpans
+        )
         {
             return factoryService.CreateProjectionBufferWithoutIndentation(
                 registryService,
@@ -196,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 snapshot,
                 separator,
                 suffixOpt: null,
-                exposedLineSpans: exposedLineSpans);
+                exposedLineSpans: exposedLineSpans
+            );
         }
 
         public static IProjectionBuffer CreateProjectionBufferWithoutIndentation(
@@ -206,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ITextSnapshot snapshot,
             string separator,
             object? suffixOpt,
-            params LineSpan[] exposedLineSpans)
+            params LineSpan[] exposedLineSpans
+        )
         {
             return CreateProjectionBuffer(
                 factoryService,
@@ -216,19 +249,22 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 separator,
                 suffixOpt,
                 trim: true,
-                exposedLineSpans: exposedLineSpans);
+                exposedLineSpans: exposedLineSpans
+            );
         }
 
         public static IProjectionBuffer CreatePreviewProjectionBuffer(
             this IProjectionBufferFactoryService factoryService,
             IList<object> sourceSpans,
-            IContentTypeRegistryService registryService)
+            IContentTypeRegistryService registryService
+        )
         {
             return factoryService.CreateProjectionBuffer(
                 projectionEditResolver: null,
                 sourceSpans: sourceSpans,
                 options: ProjectionBufferOptions.None,
-                contentType: registryService.GetContentType(RoslynPreviewContentType));
+                contentType: registryService.GetContentType(RoslynPreviewContentType)
+            );
         }
 
         private static IProjectionBuffer CreateProjectionBuffer(
@@ -239,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             string separator,
             object? suffixOpt,
             bool trim,
-            params LineSpan[] exposedLineSpans)
+            params LineSpan[] exposedLineSpans
+        )
         {
             var spans = new List<object>();
             if (exposedLineSpans.Length > 0)
@@ -260,11 +297,16 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     foreach (var snapshotSpan in snapshotSpanRange)
                     {
                         var line = snapshotSpan.Snapshot.GetLineFromPosition(snapshotSpan.Start);
-                        var indentPosition = line.GetLineOffsetFromColumn(indentColumn, editorOptions) + line.Start;
-                        var mappedSpan = new SnapshotSpan(snapshotSpan.Snapshot,
-                            Span.FromBounds(indentPosition, snapshotSpan.End));
+                        var indentPosition =
+                            line.GetLineOffsetFromColumn(indentColumn, editorOptions) + line.Start;
+                        var mappedSpan = new SnapshotSpan(
+                            snapshotSpan.Snapshot,
+                            Span.FromBounds(indentPosition, snapshotSpan.End)
+                        );
 
-                        var trackingSpan = mappedSpan.CreateTrackingSpan(SpanTrackingMode.EdgeExclusive);
+                        var trackingSpan = mappedSpan.CreateTrackingSpan(
+                            SpanTrackingMode.EdgeExclusive
+                        );
 
                         spans.Add(trackingSpan);
 
@@ -284,7 +326,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     }
                 }
 
-                if (snapshot.GetLineNumberFromPosition(snapshotSpanRanges.Last().Last().End) < snapshot.LineCount - 1)
+                if (
+                    snapshot.GetLineNumberFromPosition(snapshotSpanRanges.Last().Last().End)
+                    < snapshot.LineCount - 1
+                )
                 {
                     spans.Add(editorOptions.GetNewLineCharacter());
                     spans.Add(separator);
@@ -311,10 +356,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 projectionEditResolver: null,
                 sourceSpans: spans,
                 options: ProjectionBufferOptions.None,
-                contentType: registryService.GetContentType(RoslynPreviewContentType));
+                contentType: registryService.GetContentType(RoslynPreviewContentType)
+            );
         }
 
-        private static IList<IList<SnapshotSpan>> CreateSnapshotSpanRanges(ITextSnapshot snapshot, LineSpan[] exposedLineSpans)
+        private static IList<IList<SnapshotSpan>> CreateSnapshotSpanRanges(
+            ITextSnapshot snapshot,
+            LineSpan[] exposedLineSpans
+        )
         {
             var result = new List<IList<SnapshotSpan>>();
             foreach (var lineSpan in exposedLineSpans)
@@ -329,7 +378,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             return result;
         }
 
-        private static IList<SnapshotSpan> CreateSnapshotSpans(ITextSnapshot snapshot, LineSpan lineSpan)
+        private static IList<SnapshotSpan> CreateSnapshotSpans(
+            ITextSnapshot snapshot,
+            LineSpan lineSpan
+        )
         {
             var result = new List<SnapshotSpan>();
             for (var i = lineSpan.Start; i < lineSpan.End; i++)

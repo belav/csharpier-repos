@@ -11,12 +11,19 @@ namespace System.Net.Security.Tests
     {
         private SslPolicyErrors _ignoredPolicyErrors;
 
-        public SslStreamCertificatePolicy(SslPolicyErrors ignoredPolicyErrors = (SslPolicyErrors)0xFFFF)
+        public SslStreamCertificatePolicy(
+            SslPolicyErrors ignoredPolicyErrors = (SslPolicyErrors)0xFFFF
+        )
         {
             _ignoredPolicyErrors = ignoredPolicyErrors;
         }
 
-        public bool SslStreamCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        public bool SslStreamCallback(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             if ((sslPolicyErrors | _ignoredPolicyErrors) == _ignoredPolicyErrors)
             {
@@ -36,8 +43,6 @@ namespace System.Net.Security.Tests
             return false;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

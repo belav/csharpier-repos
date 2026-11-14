@@ -4,12 +4,13 @@ using System;
 
 namespace System.Reflection.Metadata.ApplyUpdate.Test
 {
-    public class LambdaBodyChange {
+    public class LambdaBodyChange
+    {
+        public LambdaBodyChange() { }
 
-        public LambdaBodyChange () {}
-
-        public string MethodWithLambda () {
-            Func<string,string> fn = static (s) => "OLD " + s;
+        public string MethodWithLambda()
+        {
+            Func<string, string> fn = static (s) => "OLD " + s;
             return fn("STRING");
         }
     }

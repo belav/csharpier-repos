@@ -13,7 +13,9 @@ namespace System.Web.Razor.Generator
             if (!String.IsNullOrEmpty(context.CurrentBufferedStatement))
             {
                 context.MarkEndOfGeneratedCode();
-                context.BufferStatementFragment(context.BuildCodeString(cw => cw.WriteLineContinuation()));
+                context.BufferStatementFragment(
+                    context.BuildCodeString(cw => cw.WriteLineContinuation())
+                );
             }
             context.FlushBufferedStatement();
         }

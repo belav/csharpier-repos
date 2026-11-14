@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor,deliant
@@ -15,7 +15,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-
     internal static class Constants
     {
         public const string AutoValue = "Auto";
@@ -23,6 +22,4 @@ namespace System.Web.UI.DataVisualization.Charting
         public const string MinValue = "Min";
         public const string MaxValue = "Max";
     }
-
 }
-

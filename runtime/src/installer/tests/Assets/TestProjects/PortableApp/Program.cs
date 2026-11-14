@@ -22,7 +22,9 @@ namespace PortableApp
             switch (args[0])
             {
                 case "load_shared_library":
-                    var asm = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName("SharedLibrary"));
+                    var asm = AssemblyLoadContext.Default.LoadFromAssemblyName(
+                        new AssemblyName("SharedLibrary")
+                    );
                     FieldInfo field = asm.GetType("SharedLibrary.SharedType").GetField("Value");
                     Console.WriteLine($"SharedLibrary.SharedType.Value={field.GetValue(null)}");
                     break;

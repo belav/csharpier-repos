@@ -6,7 +6,8 @@ namespace System.ServiceModel.Diagnostics
 {
     static class DiagnosticStrings
     {
-        internal const string DiagnosticsNamespace = "http://schemas.microsoft.com/2004/09/ServiceModel/Diagnostics";
+        internal const string DiagnosticsNamespace =
+            "http://schemas.microsoft.com/2004/09/ServiceModel/Diagnostics";
 
         internal const string ActivityIdName = "E2ETrace.ActivityID";
         internal const string ActivityId = "ActivityId";
@@ -38,9 +39,34 @@ namespace System.ServiceModel.Diagnostics
         internal const string TraceRecordTag = "TraceRecord";
         internal const string ValueTag = "Value";
 
-        internal static string[][] HeadersPaths = {
-                new string[] { DiagnosticStrings.TraceRecordTag, DiagnosticStrings.ExtendedDataTag, "MessageHeaders", "Security" },
-                new string[] { DiagnosticStrings.TraceRecordTag, DiagnosticStrings.ExtendedDataTag, "MessageHeaders", "IssuedTokens" } };
-        internal static string[] PiiList = new string[] { "BinarySecret", "Entropy", "Password", "Nonce", "Username", "BinarySecurityToken", "NameIdentifier", "SubjectLocality", "AttributeValue" };
+        internal static string[][] HeadersPaths =
+        {
+            new string[]
+            {
+                DiagnosticStrings.TraceRecordTag,
+                DiagnosticStrings.ExtendedDataTag,
+                "MessageHeaders",
+                "Security",
+            },
+            new string[]
+            {
+                DiagnosticStrings.TraceRecordTag,
+                DiagnosticStrings.ExtendedDataTag,
+                "MessageHeaders",
+                "IssuedTokens",
+            },
+        };
+        internal static string[] PiiList = new string[]
+        {
+            "BinarySecret",
+            "Entropy",
+            "Password",
+            "Nonce",
+            "Username",
+            "BinarySecurityToken",
+            "NameIdentifier",
+            "SubjectLocality",
+            "AttributeValue",
+        };
     }
 }

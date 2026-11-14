@@ -42,7 +42,12 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_NEG1()
         {
-            VerifyWriteException(new char[DEFAULT_BUFFER_SIZE], -1, DEFAULT_CHAR_COUNT, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new char[DEFAULT_BUFFER_SIZE],
+                -1,
+                DEFAULT_CHAR_COUNT,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -50,19 +55,34 @@ namespace System.IO.Ports.Tests
         {
             Random rndGen = new Random(-55);
 
-            VerifyWriteException(new char[DEFAULT_BUFFER_SIZE], rndGen.Next(int.MinValue, 0), DEFAULT_CHAR_COUNT, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new char[DEFAULT_BUFFER_SIZE],
+                rndGen.Next(int.MinValue, 0),
+                DEFAULT_CHAR_COUNT,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_MinInt()
         {
-            VerifyWriteException(new char[DEFAULT_BUFFER_SIZE], int.MinValue, DEFAULT_CHAR_COUNT, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new char[DEFAULT_BUFFER_SIZE],
+                int.MinValue,
+                DEFAULT_CHAR_COUNT,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_NEG1()
         {
-            VerifyWriteException(new char[DEFAULT_BUFFER_SIZE], DEFAULT_CHAR_OFFSET, -1, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new char[DEFAULT_BUFFER_SIZE],
+                DEFAULT_CHAR_OFFSET,
+                -1,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -70,14 +90,23 @@ namespace System.IO.Ports.Tests
         {
             Random rndGen = new Random(-55);
 
-            VerifyWriteException(new char[DEFAULT_BUFFER_SIZE], DEFAULT_CHAR_OFFSET, rndGen.Next(int.MinValue, 0), typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new char[DEFAULT_BUFFER_SIZE],
+                DEFAULT_CHAR_OFFSET,
+                rndGen.Next(int.MinValue, 0),
+                typeof(ArgumentOutOfRangeException)
+            );
         }
-
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_MinInt()
         {
-            VerifyWriteException(new char[DEFAULT_BUFFER_SIZE], DEFAULT_CHAR_OFFSET, int.MinValue, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new char[DEFAULT_BUFFER_SIZE],
+                DEFAULT_CHAR_OFFSET,
+                int.MinValue,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -228,13 +257,28 @@ namespace System.IO.Ports.Tests
 
         #region Verification for Test Cases
 
-        private void VerifyWriteException(char[] buffer, int offset, int count, Type expectedException)
+        private void VerifyWriteException(
+            char[] buffer,
+            int offset,
+            int count,
+            Type expectedException
+        )
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
-                Debug.WriteLine("Verifying write method throws {0} buffer.Length={1}, offset={2}, count={3}", expectedException, bufferLength, offset, count);
+                Debug.WriteLine(
+                    "Verifying write method throws {0} buffer.Length={1}, offset={2}, count={3}",
+                    expectedException,
+                    bufferLength,
+                    offset,
+                    count
+                );
                 com.Open();
 
                 try
@@ -247,7 +291,11 @@ namespace System.IO.Ports.Tests
                 {
                     if (e.GetType() != expectedException)
                     {
-                        Fail("ERROR!!!: {0} exception was thrown expected {1}", e.GetType(), expectedException);
+                        Fail(
+                            "ERROR!!!: {0} exception was thrown expected {1}",
+                            e.GetType(),
+                            expectedException
+                        );
                     }
                 }
                 if (com.IsOpen)
@@ -270,13 +318,24 @@ namespace System.IO.Ports.Tests
             VerifyWrite(buffer, offset, count, encoding, DEFAULT_NUM_WRITES);
         }
 
-        private void VerifyWrite(char[] buffer, int offset, int count, Encoding encoding, int numWrites)
+        private void VerifyWrite(
+            char[] buffer,
+            int offset,
+            int count,
+            Encoding encoding,
+            int numWrites
+        )
         {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                Debug.WriteLine("Verifying write method buffer.Length={0}, offset={1}, count={2}, endocing={3}",
-                    buffer.Length, offset, count, encoding.EncodingName);
+                Debug.WriteLine(
+                    "Verifying write method buffer.Length={0}, offset={1}, count={2}, endocing={3}",
+                    buffer.Length,
+                    offset,
+                    count,
+                    encoding.EncodingName
+                );
 
                 com1.Encoding = encoding;
                 com1.Open();
@@ -284,21 +343,42 @@ namespace System.IO.Ports.Tests
                 if (!com2.IsOpen) //This is necessary since com1 and com2 might be the same port if we are using a loopback
                     com2.Open();
 
-                TCSupport.GetRandomChars(buffer, 0, buffer.Length, TCSupport.CharacterOptions.Surrogates);
+                TCSupport.GetRandomChars(
+                    buffer,
+                    0,
+                    buffer.Length,
+                    TCSupport.CharacterOptions.Surrogates
+                );
 
                 VerifyWriteCharArray(buffer, offset, count, com1, com2, numWrites);
             }
         }
 
-        private void VerifyWriteCharArray(char[] buffer, int offset, int count, SerialPort com1, SerialPort com2)
+        private void VerifyWriteCharArray(
+            char[] buffer,
+            int offset,
+            int count,
+            SerialPort com1,
+            SerialPort com2
+        )
         {
             VerifyWriteCharArray(buffer, offset, count, com1, com2, DEFAULT_NUM_WRITES);
         }
 
-        private void VerifyWriteCharArray(char[] buffer, int offset, int count, SerialPort com1, SerialPort com2, int numWrites)
+        private void VerifyWriteCharArray(
+            char[] buffer,
+            int offset,
+            int count,
+            SerialPort com1,
+            SerialPort com2,
+            int numWrites
+        )
         {
-            char[] oldBuffer, expectedChars, actualChars;
-            byte[] expectedBytes, actualBytes;
+            char[] oldBuffer,
+                expectedChars,
+                actualChars;
+            byte[] expectedBytes,
+                actualBytes;
             int byteRead;
             int index = 0;
 
@@ -314,7 +394,9 @@ namespace System.IO.Ports.Tests
             }
 
             com2.ReadTimeout = 500;
-            Thread.Sleep((int)(((expectedBytes.Length * numWrites * 10.0) / com1.BaudRate) * 1000) + 250);
+            Thread.Sleep(
+                (int)(((expectedBytes.Length * numWrites * 10.0) / com1.BaudRate) * 1000) + 250
+            );
 
             Assert.Equal(oldBuffer, buffer);
 
@@ -340,7 +422,11 @@ namespace System.IO.Ports.Tests
 
                 if (actualBytes.Length - index != com2.BytesToRead)
                 {
-                    Fail("ERROR!!!: Expected BytesToRead={0} actual={1}", actualBytes.Length - index, com2.BytesToRead);
+                    Fail(
+                        "ERROR!!!: Expected BytesToRead={0} actual={1}",
+                        actualBytes.Length - index,
+                        com2.BytesToRead
+                    );
                 }
             }
 
@@ -348,7 +434,11 @@ namespace System.IO.Ports.Tests
 
             if (actualChars.Length != expectedChars.Length * numWrites)
             {
-                Fail("ERROR!!!: Expected to read {0} chars actually read {1}", expectedChars.Length * numWrites, actualChars.Length);
+                Fail(
+                    "ERROR!!!: Expected to read {0} chars actually read {1}",
+                    expectedChars.Length * numWrites,
+                    actualChars.Length
+                );
             }
             else
             {
@@ -359,7 +449,12 @@ namespace System.IO.Ports.Tests
                     {
                         if (expectedChars[i] != actualChars[i + expectedChars.Length * j])
                         {
-                            Fail("ERROR!!!: Expected to read {0}  actual read {1} at {2}", (int)expectedChars[i], (int)actualChars[i + expectedChars.Length * j], i);
+                            Fail(
+                                "ERROR!!!: Expected to read {0}  actual read {1} at {2}",
+                                (int)expectedChars[i],
+                                (int)actualChars[i + expectedChars.Length * j],
+                                i
+                            );
                         }
                     }
                 }
@@ -372,7 +467,12 @@ namespace System.IO.Ports.Tests
                 {
                     if (expectedBytes[i] != actualBytes[i + expectedBytes.Length * j])
                     {
-                        Fail("ERROR!!!: Expected to read byte {0}  actual read {1} at {2}", (int)expectedBytes[i], (int)actualBytes[i + expectedBytes.Length * j], i);
+                        Fail(
+                            "ERROR!!!: Expected to read byte {0}  actual read {1} at {2}",
+                            (int)expectedBytes[i],
+                            (int)actualBytes[i + expectedBytes.Length * j],
+                            i
+                        );
                     }
                 }
             }

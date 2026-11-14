@@ -30,10 +30,13 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// to manage. The handler must not return and is expected to propagate the exception (for example, throw a native exception)
         /// into the native environment or fail fast.
         /// </remarks>
-        public unsafe delegate delegate* unmanaged<IntPtr, void> UnhandledExceptionPropagationHandler(
+        public unsafe delegate delegate* unmanaged<
+            IntPtr,
+            void> UnhandledExceptionPropagationHandler(
             Exception exception,
             RuntimeMethodHandle lastMethod,
-            out IntPtr context);
+            out IntPtr context
+        );
 
         /// <summary>
         /// Initialize the Objective-C marshalling API.
@@ -59,8 +62,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
             delegate* unmanaged<void> beginEndCallback,
             delegate* unmanaged<IntPtr, int> isReferencedCallback,
             delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization,
-            UnhandledExceptionPropagationHandler unhandledExceptionPropagationHandler)
-            => throw new PlatformNotSupportedException();
+            UnhandledExceptionPropagationHandler unhandledExceptionPropagationHandler
+        ) => throw new PlatformNotSupportedException();
 
         /// <summary>
         /// Request native reference tracking for the supplied object.
@@ -90,8 +93,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// </remarks>
         public static GCHandle CreateReferenceTrackingHandle(
             object obj,
-            out Span<IntPtr> taggedMemory)
-            => throw new PlatformNotSupportedException();
+            out Span<IntPtr> taggedMemory
+        ) => throw new PlatformNotSupportedException();
 
         /// <summary>
         /// Objective-C msgSend function override options.
@@ -102,18 +105,22 @@ namespace System.Runtime.InteropServices.ObjectiveC
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456712-objc_msgsend">msgSend()</see>.
             /// </summary>
             MsgSend,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456697-objc_msgsend_fpret">objc_msgSend_fpret()</see>.
             /// </summary>
             MsgSendFpret,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456730-objc_msgsend_stret">objc_msgSend_stret()</see>.
             /// </summary>
             MsgSendStret,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456716-objc_msgsendsuper">objc_msgSendSuper()</see>.
             /// </summary>
             MsgSendSuper,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456722-objc_msgsendsuper_stret">objc_msgSendSuper_stret()</see>.
             /// </summary>
@@ -129,8 +136,10 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// <remarks>
         /// Providing an override can enable support for Objective-C variadic argument support.
         /// </remarks>
-        public static void SetMessageSendCallback(MessageSendFunction msgSendFunction, IntPtr func)
-            => throw new PlatformNotSupportedException();
+        public static void SetMessageSendCallback(
+            MessageSendFunction msgSendFunction,
+            IntPtr func
+        ) => throw new PlatformNotSupportedException();
 
         /// <summary>
         /// Sets a pending exception to be thrown the next time the runtime is entered from an Objective-C msgSend P/Invoke.
@@ -139,7 +148,7 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// <remarks>
         /// If <c>null</c> is supplied any pending exception is discarded.
         /// </remarks>
-        public static void SetMessageSendPendingException(Exception? exception)
-            => throw new PlatformNotSupportedException();
+        public static void SetMessageSendPendingException(Exception? exception) =>
+            throw new PlatformNotSupportedException();
     }
 }

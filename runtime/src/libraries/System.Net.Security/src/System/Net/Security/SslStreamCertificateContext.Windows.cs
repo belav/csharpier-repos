@@ -14,10 +14,18 @@ namespace System.Net.Security
         internal static SslStreamCertificateContext Create(X509Certificate2 target)
         {
             // On Windows we do not need to build chain unless we are asked for it.
-            return new SslStreamCertificateContext(target, new ReadOnlyCollection<X509Certificate2>(Array.Empty<X509Certificate2>()), null);
+            return new SslStreamCertificateContext(
+                target,
+                new ReadOnlyCollection<X509Certificate2>(Array.Empty<X509Certificate2>()),
+                null
+            );
         }
 
-        private SslStreamCertificateContext(X509Certificate2 target, ReadOnlyCollection<X509Certificate2> intermediates, SslCertificateTrust? trust)
+        private SslStreamCertificateContext(
+            X509Certificate2 target,
+            ReadOnlyCollection<X509Certificate2> intermediates,
+            SslCertificateTrust? trust
+        )
         {
             if (intermediates.Count > 0)
             {
@@ -31,7 +39,10 @@ namespace System.Net.Security
                     int count = 0;
                     foreach (X509ChainStatus status in chain.ChainStatus)
                     {
-                        if (status.Status.HasFlag(X509ChainStatusFlags.PartialChain) || status.Status.HasFlag(X509ChainStatusFlags.NotSignatureValid))
+                        if (
+                            status.Status.HasFlag(X509ChainStatusFlags.PartialChain)
+                            || status.Status.HasFlag(X509ChainStatusFlags.NotSignatureValid)
+                        )
                         {
                             osCanBuildChain = false;
                             break;
@@ -44,7 +55,10 @@ namespace System.Net.Security
                     // We will try to add them to "Intermediate Certification Authorities" store.
                     if (!osCanBuildChain)
                     {
-                        X509Store? store = new X509Store(StoreName.CertificateAuthority, StoreLocation.LocalMachine);
+                        X509Store? store = new X509Store(
+                            StoreName.CertificateAuthority,
+                            StoreLocation.LocalMachine
+                        );
 
                         try
                         {
@@ -54,7 +68,10 @@ namespace System.Net.Security
                         {
                             // If using system store fails, try to fall-back to user store.
                             store.Dispose();
-                            store = new X509Store(StoreName.CertificateAuthority, StoreLocation.CurrentUser);
+                            store = new X509Store(
+                                StoreName.CertificateAuthority,
+                                StoreLocation.CurrentUser
+                            );
                             try
                             {
                                 store.Open(OpenFlags.ReadWrite);
@@ -65,7 +82,10 @@ namespace System.Net.Security
                                 store = null;
                                 if (NetEventSource.Log.IsEnabled())
                                 {
-                                    NetEventSource.Error(this, $"Failed to open certificate store for intermediates.");
+                                    NetEventSource.Error(
+                                        this,
+                                        $"Failed to open certificate store for intermediates."
+                                    );
                                 }
                             }
                         }
@@ -83,7 +103,12 @@ namespace System.Net.Security
                                 osCanBuildChain = chain.Build(target);
                                 foreach (X509ChainStatus status in chain.ChainStatus)
                                 {
-                                    if (status.Status.HasFlag(X509ChainStatusFlags.PartialChain) || status.Status.HasFlag(X509ChainStatusFlags.NotSignatureValid))
+                                    if (
+                                        status.Status.HasFlag(X509ChainStatusFlags.PartialChain)
+                                        || status.Status.HasFlag(
+                                            X509ChainStatusFlags.NotSignatureValid
+                                        )
+                                    )
                                     {
                                         osCanBuildChain = false;
                                         break;

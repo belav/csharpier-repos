@@ -18,10 +18,11 @@ namespace System.ServiceModel.Channels
         protected ReaderPosition position;
         protected XmlDictionaryReaderQuotas quotas;
         bool readBase64AsString;
+
         protected XmlByteStreamReader(XmlDictionaryReaderQuotas quotas)
         {
             this.quotas = quotas;
-            this.position = ReaderPosition.None; 
+            this.position = ReaderPosition.None;
         }
 
         public override int AttributeCount
@@ -86,13 +87,18 @@ namespace System.ServiceModel.Channels
 
         public override string LocalName
         {
-            get { return (this.position == ReaderPosition.StartElement) ? ByteStreamMessageUtility.StreamElementName : null; }
+            get
+            {
+                return (this.position == ReaderPosition.StartElement)
+                    ? ByteStreamMessageUtility.StreamElementName
+                    : null;
+            }
         }
 
         public override void MoveToStartElement()
         {
             base.MoveToStartElement();
-            this.position = ReaderPosition.StartElement; 
+            this.position = ReaderPosition.StartElement;
         }
 
         public override XmlNameTable NameTable
@@ -189,7 +195,7 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    this.OnClose(); 
+                    this.OnClose();
                 }
                 finally
                 {
@@ -204,9 +210,7 @@ namespace System.ServiceModel.Channels
             get { return this.closed; }
         }
 
-        protected virtual void OnClose()
-        {            
-        }
+        protected virtual void OnClose() { }
 
         public override string GetAttribute(int i)
         {
@@ -303,8 +307,8 @@ namespace System.ServiceModel.Channels
         {
             return false;
         }
-        
-        public override abstract int ReadContentAsBase64(byte[] buffer, int index, int count);
+
+        public abstract override int ReadContentAsBase64(byte[] buffer, int index, int count);
 
         public override int ReadContentAsBinHex(byte[] buffer, int index, int count)
         {
@@ -320,8 +324,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsClosed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(SR.XmlReaderClosed));
+                throw FxTrace.Exception.AsError(new ObjectDisposedException(SR.XmlReaderClosed));
             }
             return this.OnToByteArray();
         }
@@ -329,11 +332,10 @@ namespace System.ServiceModel.Channels
         protected abstract byte[] OnToByteArray();
 
         public Stream ToStream()
-        { 
+        {
             if (this.IsClosed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(SR.XmlReaderClosed));
+                throw FxTrace.Exception.AsError(new ObjectDisposedException(SR.XmlReaderClosed));
             }
             return this.OnToStream();
         }
@@ -345,11 +347,15 @@ namespace System.ServiceModel.Channels
             // This method is only being called from XmlByteStreamReader.ReadContentAsBase64.
             // We don't block if the position is None or StartElement since we want our XmlByteStreamReader
             // to be a little bit smarter when people just to access the content of the ByteStreamMessage.
-            if (this.position == ReaderPosition.EndElement
-             || this.position == ReaderPosition.EOF)
+            if (this.position == ReaderPosition.EndElement || this.position == ReaderPosition.EOF)
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ByteStreamReaderNotInByteStream(ByteStreamMessageUtility.StreamElementName)));
+                    new InvalidOperationException(
+                        SR.ByteStreamReaderNotInByteStream(
+                            ByteStreamMessageUtility.StreamElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -363,7 +369,7 @@ namespace System.ServiceModel.Channels
             StartElement,
             Content,
             EndElement,
-            EOF
+            EOF,
         }
     }
 }

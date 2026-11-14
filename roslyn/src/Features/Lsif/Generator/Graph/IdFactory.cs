@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         /// </summary>
         private int _globalId = 0;
 
-        public Id<T> Create<T>() where T : Element
+        public Id<T> Create<T>()
+            where T : Element
         {
             var id = Interlocked.Increment(ref _globalId);
             return new Id<T>(id);

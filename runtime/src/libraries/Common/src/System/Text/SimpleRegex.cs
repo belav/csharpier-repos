@@ -17,10 +17,15 @@ namespace System.Text
         /// <param name="input">The input to match.</param>
         /// <param name="pattern">The pattern to match against.</param>
         /// <returns>true if the input matches the pattern; otherwise, false.</returns>
-        public static bool IsMatchWithStarWildcard(ReadOnlySpan<char> input, ReadOnlySpan<char> pattern)
+        public static bool IsMatchWithStarWildcard(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<char> pattern
+        )
         {
-            int inputPos = 0, inputPosSaved = -1;
-            int patternPos = 0, patternPosSaved = -1;
+            int inputPos = 0,
+                inputPosSaved = -1;
+            int patternPos = 0,
+                patternPosSaved = -1;
 
             // Loop through each character in the input.
             while (inputPos < input.Length)
@@ -32,9 +37,14 @@ namespace System.Text
                     inputPosSaved = inputPos;
                     patternPosSaved = ++patternPos;
                 }
-                else if (patternPos < pattern.Length &&
-                    (pattern[patternPos] == input[inputPos] ||
-                     char.ToUpperInvariant(pattern[patternPos]) == char.ToUpperInvariant(input[inputPos])))
+                else if (
+                    patternPos < pattern.Length
+                    && (
+                        pattern[patternPos] == input[inputPos]
+                        || char.ToUpperInvariant(pattern[patternPos])
+                            == char.ToUpperInvariant(input[inputPos])
+                    )
+                )
                 {
                     // If the characters in the pattern and the input match, advance both.
                     inputPos++;

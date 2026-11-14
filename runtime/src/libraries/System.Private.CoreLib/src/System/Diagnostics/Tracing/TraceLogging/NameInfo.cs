@@ -10,8 +10,7 @@ namespace System.Diagnostics.Tracing
     /// TraceLogging: Stores the metadata and event identifier corresponding
     /// to a tracelogging event type+name+tags combination.
     /// </summary>
-    internal sealed class NameInfo
-        : ConcurrentSetItem<KeyValuePair<string, EventTags>, NameInfo>
+    internal sealed class NameInfo : ConcurrentSetItem<KeyValuePair<string, EventTags>, NameInfo>
     {
         /// <summary>
         /// Insure that eventIds strictly less than 'eventId' will not be
@@ -23,8 +22,10 @@ namespace System.Diagnostics.Tracing
             {
                 int snapshot = lastIdentity;
                 int newIdentity = (lastIdentity & ~0xFFFFFF) + eventId;
-                newIdentity = Math.Max(newIdentity, snapshot);      // Should be redundant.  as we only create descriptors once.
-                if (Interlocked.CompareExchange(ref lastIdentity, newIdentity, snapshot) == snapshot)
+                newIdentity = Math.Max(newIdentity, snapshot); // Should be redundant.  as we only create descriptors once.
+                if (
+                    Interlocked.CompareExchange(ref lastIdentity, newIdentity, snapshot) == snapshot
+                )
                     break;
             }
         }
@@ -71,7 +72,12 @@ namespace System.Diagnostics.Tracing
         }
 
 #if FEATURE_PERFTRACING
-        public IntPtr GetOrCreateEventHandle(EventProvider provider, TraceLoggingEventHandleTable eventHandleTable, EventDescriptor descriptor, TraceLoggingEventTypes eventTypes)
+        public IntPtr GetOrCreateEventHandle(
+            EventProvider provider,
+            TraceLoggingEventHandleTable eventHandleTable,
+            EventDescriptor descriptor,
+            TraceLoggingEventTypes eventTypes
+        )
         {
             IntPtr eventHandle;
             if ((eventHandle = eventHandleTable[descriptor.EventId]) == IntPtr.Zero)
@@ -80,14 +86,16 @@ namespace System.Diagnostics.Tracing
                 {
                     if ((eventHandle = eventHandleTable[descriptor.EventId]) == IntPtr.Zero)
                     {
-                        byte[]? metadata = EventPipeMetadataGenerator.Instance.GenerateEventMetadata(
-                            descriptor.EventId,
-                            name,
-                            (EventKeywords)descriptor.Keywords,
-                            (EventLevel)descriptor.Level,
-                            descriptor.Version,
-                            (EventOpcode)descriptor.Opcode,
-                            eventTypes);
+                        byte[]? metadata =
+                            EventPipeMetadataGenerator.Instance.GenerateEventMetadata(
+                                descriptor.EventId,
+                                name,
+                                (EventKeywords)descriptor.Keywords,
+                                (EventLevel)descriptor.Level,
+                                descriptor.Version,
+                                (EventOpcode)descriptor.Opcode,
+                                eventTypes
+                            );
                         uint metadataLength = (metadata != null) ? (uint)metadata.Length : 0;
 
                         unsafe
@@ -102,7 +110,8 @@ namespace System.Diagnostics.Tracing
                                     descriptor.Version,
                                     descriptor.Level,
                                     pMetadataBlob,
-                                    metadataLength);
+                                    metadataLength
+                                );
                             }
                         }
 

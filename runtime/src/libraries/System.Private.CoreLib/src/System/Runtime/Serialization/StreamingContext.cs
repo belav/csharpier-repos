@@ -12,15 +12,26 @@ namespace System.Runtime.Serialization
     {
         private readonly object? _additionalContext;
 
-        [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         private readonly StreamingContextStates _state;
 
-        [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public StreamingContext(StreamingContextStates state) : this(state, null)
-        {
-        }
+        [Obsolete(
+            Obsoletions.LegacyFormatterMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public StreamingContext(StreamingContextStates state)
+            : this(state, null) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public StreamingContext(StreamingContextStates state, object? additional)
         {
             _state = state;
@@ -39,14 +50,22 @@ namespace System.Runtime.Serialization
 
         public override int GetHashCode() => (int)_state;
 
-        [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public StreamingContextStates State => _state;
 
         public object? Context => _additionalContext;
     }
 
     [Flags]
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public enum StreamingContextStates
     {
         CrossProcess = 0x01,

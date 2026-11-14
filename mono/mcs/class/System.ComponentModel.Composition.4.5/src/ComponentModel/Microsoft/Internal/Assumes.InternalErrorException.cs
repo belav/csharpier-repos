@@ -16,16 +16,18 @@ namespace Microsoft.Internal
         private class InternalErrorException : Exception
         {
             public InternalErrorException(string message)
-                : base(string.Format(CultureInfo.CurrentCulture, Strings.InternalExceptionMessage, message))
-            {
-            }
+                : base(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Strings.InternalExceptionMessage,
+                        message
+                    )
+                ) { }
 
 #if FEATURE_SERIALIZATION
             [System.Security.SecuritySafeCritical]
             protected InternalErrorException(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
+                : base(info, context) { }
 #endif
         }
     }

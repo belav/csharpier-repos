@@ -7,38 +7,43 @@
 
 using System.Globalization;
 
-namespace System.Xml {
-
+namespace System.Xml
+{
     // Provides methods for performing operations that are independent of any
     // particular instance of the document object model.
-    public class XmlImplementation {
-
+    public class XmlImplementation
+    {
         private XmlNameTable nameTable;
 
         // Initializes a new instance of the XmlImplementation class.
-        public XmlImplementation() : this( new NameTable() ) {
-        }
+        public XmlImplementation()
+            : this(new NameTable()) { }
 
-        public XmlImplementation( XmlNameTable nt ) {
+        public XmlImplementation(XmlNameTable nt)
+        {
             nameTable = nt;
         }
 
         // Test if the DOM implementation implements a specific feature.
-        public bool HasFeature(string strFeature, string strVersion) {
-            if (String.Compare("XML", strFeature, StringComparison.OrdinalIgnoreCase) == 0) {
+        public bool HasFeature(string strFeature, string strVersion)
+        {
+            if (String.Compare("XML", strFeature, StringComparison.OrdinalIgnoreCase) == 0)
+            {
                 if (strVersion == null || strVersion == "1.0" || strVersion == "2.0")
                     return true;
             }
             return false;
         }
 
-        // Creates a new XmlDocument. All documents created from the same 
+        // Creates a new XmlDocument. All documents created from the same
         // XmlImplementation object share the same name table.
-        public virtual XmlDocument CreateDocument() {
-            return new XmlDocument( this );
+        public virtual XmlDocument CreateDocument()
+        {
+            return new XmlDocument(this);
         }
 
-        internal XmlNameTable NameTable {
+        internal XmlNameTable NameTable
+        {
             get { return nameTable; }
         }
     }

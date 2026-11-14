@@ -16,7 +16,10 @@ namespace System.Xml.Xsl.Runtime
     [EditorBrowsable(EditorBrowsableState.Never)]
     public struct StringConcat
     {
-        private string? _s1, _s2, _s3, _s4;
+        private string? _s1,
+            _s2,
+            _s3,
+            _s4;
         private string? _delimiter;
         private List<string?>? _strList;
         private int _idxStr;
@@ -84,10 +87,18 @@ namespace System.Xml.Xsl.Runtime
         {
             switch (_idxStr)
             {
-                case 0: _s1 = s; break;
-                case 1: _s2 = s; break;
-                case 2: _s3 = s; break;
-                case 3: _s4 = s; break;
+                case 0:
+                    _s1 = s;
+                    break;
+                case 1:
+                    _s2 = s;
+                    break;
+                case 2:
+                    _s3 = s;
+                    break;
+                case 3:
+                    _s4 = s;
+                    break;
                 case 4:
                     // Calling Clear() is expensive, allocate a new List instead
                     int capacity = (_strList == null) ? 8 : _strList.Count;

@@ -25,6 +25,12 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// <param name="options">Options to use to generate and format the code.</param>
         /// <param name="cancellationToken">To cancel document operations</param>
         /// <returns>The updated document</returns>
-        Task<Document> AddSourceToAsync(Document document, Compilation symbolCompilation, ISymbol symbol, CleanCodeGenerationOptions options, CancellationToken cancellationToken);
+        Task<Document> AddSourceToAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            CleanCodeGenerationOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

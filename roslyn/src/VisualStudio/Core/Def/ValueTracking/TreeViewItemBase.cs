@@ -110,7 +110,11 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 
         private void ChildItems_CollectionChanged(object _, NotifyCollectionChangedEventArgs args)
         {
-            if (args.Action is not NotifyCollectionChangedAction.Add and not NotifyCollectionChangedAction.Remove)
+            if (
+                args.Action
+                is not NotifyCollectionChangedAction.Add
+                    and not NotifyCollectionChangedAction.Remove
+            )
             {
                 return;
             }

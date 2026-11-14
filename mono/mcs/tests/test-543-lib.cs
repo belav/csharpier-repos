@@ -2,7 +2,7 @@
 
 public class ExternClass
 {
-    public bool this [string s, params string[] items]
+    public bool this[string s, params string[] items]
     {
         set { }
     }

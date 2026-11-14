@@ -1,13 +1,13 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 using Xunit;
 
-public class Program 
+public class Program
 {
     [Fact]
-    public static int TestEntryPoint() 
+    public static int TestEntryPoint()
     {
         return RunTest();
     }

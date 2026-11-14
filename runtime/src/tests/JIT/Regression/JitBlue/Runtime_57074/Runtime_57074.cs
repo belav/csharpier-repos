@@ -17,6 +17,7 @@ public class Program
     static uint s_9 = 1;
     static long s_13;
     static uint s_15;
+
     [Fact]
     public static int TestEntryPoint()
     {

@@ -17,7 +17,7 @@ namespace System.Net.Mail
         OnSuccess = 1,
         OnFailure = 2,
         Delay = 4,
-        Never = (int)0x08000000
+        Never = (int)0x08000000,
     }
 
     public class MailMessage : IDisposable
@@ -31,12 +31,14 @@ namespace System.Net.Mail
         private bool _isBodyHtml;
         private bool _disposed;
         private readonly Message _message;
-        private DeliveryNotificationOptions _deliveryStatusNotification = DeliveryNotificationOptions.None;
+        private DeliveryNotificationOptions _deliveryStatusNotification =
+            DeliveryNotificationOptions.None;
 
         public MailMessage()
         {
             _message = new Message();
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, _message);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Associate(this, _message);
         }
 
         public MailMessage(string from, string to)
@@ -45,16 +47,16 @@ namespace System.Net.Mail
             ArgumentException.ThrowIfNullOrEmpty(to);
 
             _message = new Message(from, to);
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, _message);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Associate(this, _message);
         }
 
-
-        public MailMessage(string from, string to, string? subject, string? body) : this(from, to)
+        public MailMessage(string from, string to, string? subject, string? body)
+            : this(from, to)
         {
             Subject = subject;
             Body = body;
         }
-
 
         public MailMessage(MailAddress from, MailAddress to)
         {
@@ -67,10 +69,7 @@ namespace System.Net.Mail
         [DisallowNull]
         public MailAddress? From
         {
-            get
-            {
-                return _message.From;
-            }
+            get { return _message.From; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -81,79 +80,48 @@ namespace System.Net.Mail
         [DisallowNull]
         public MailAddress? Sender
         {
-            get
-            {
-                return _message.Sender;
-            }
-            set
-            {
-                _message.Sender = value;
-            }
+            get { return _message.Sender; }
+            set { _message.Sender = value; }
         }
 
-        [Obsolete("ReplyTo has been deprecated. Use ReplyToList instead, which can accept multiple addresses.")]
+        [Obsolete(
+            "ReplyTo has been deprecated. Use ReplyToList instead, which can accept multiple addresses."
+        )]
         public MailAddress? ReplyTo
         {
-            get
-            {
-                return _message.ReplyTo;
-            }
-            set
-            {
-                _message.ReplyTo = value;
-            }
+            get { return _message.ReplyTo; }
+            set { _message.ReplyTo = value; }
         }
 
         public MailAddressCollection ReplyToList
         {
-            get
-            {
-                return _message.ReplyToList;
-            }
+            get { return _message.ReplyToList; }
         }
 
         public MailAddressCollection To
         {
-            get
-            {
-                return _message.To;
-            }
+            get { return _message.To; }
         }
 
         public MailAddressCollection Bcc
         {
-            get
-            {
-                return _message.Bcc;
-            }
+            get { return _message.Bcc; }
         }
 
         public MailAddressCollection CC
         {
-            get
-            {
-                return _message.CC;
-            }
+            get { return _message.CC; }
         }
 
         public MailPriority Priority
         {
-            get
-            {
-                return _message.Priority;
-            }
-            set
-            {
-                _message.Priority = value;
-            }
+            get { return _message.Priority; }
+            set { _message.Priority = value; }
         }
 
         public DeliveryNotificationOptions DeliveryNotificationOptions
         {
-            get
-            {
-                return _deliveryStatusNotification;
-            }
+            get { return _deliveryStatusNotification; }
             set
             {
                 if (7 < (uint)value && value != DeliveryNotificationOptions.Never)
@@ -167,56 +135,31 @@ namespace System.Net.Mail
         [AllowNull]
         public string Subject
         {
-            get
-            {
-                return _message.Subject ?? string.Empty;
-            }
-            set
-            {
-                _message.Subject = value;
-            }
+            get { return _message.Subject ?? string.Empty; }
+            set { _message.Subject = value; }
         }
 
         public Encoding? SubjectEncoding
         {
-            get
-            {
-                return _message.SubjectEncoding;
-            }
-            set
-            {
-                _message.SubjectEncoding = value;
-            }
+            get { return _message.SubjectEncoding; }
+            set { _message.SubjectEncoding = value; }
         }
 
         public NameValueCollection Headers
         {
-            get
-            {
-                return _message.Headers;
-            }
+            get { return _message.Headers; }
         }
 
         public Encoding? HeadersEncoding
         {
-            get
-            {
-                return _message.HeadersEncoding;
-            }
-            set
-            {
-                _message.HeadersEncoding = value;
-            }
+            get { return _message.HeadersEncoding; }
+            set { _message.HeadersEncoding = value; }
         }
 
         [AllowNull]
         public string Body
         {
-            get
-            {
-                return _body ?? string.Empty;
-            }
-
+            get { return _body ?? string.Empty; }
             set
             {
                 _body = value;
@@ -237,41 +180,21 @@ namespace System.Net.Mail
 
         public Encoding? BodyEncoding
         {
-            get
-            {
-                return _bodyEncoding;
-            }
-            set
-            {
-                _bodyEncoding = value;
-            }
+            get { return _bodyEncoding; }
+            set { _bodyEncoding = value; }
         }
 
         public TransferEncoding BodyTransferEncoding
         {
-            get
-            {
-                return _bodyTransferEncoding;
-            }
-            set
-            {
-                _bodyTransferEncoding = value;
-            }
+            get { return _bodyTransferEncoding; }
+            set { _bodyTransferEncoding = value; }
         }
-
 
         public bool IsBodyHtml
         {
-            get
-            {
-                return _isBodyHtml;
-            }
-            set
-            {
-                _isBodyHtml = value;
-            }
+            get { return _isBodyHtml; }
+            set { _isBodyHtml = value; }
         }
-
 
         public AttachmentCollection Attachments
         {
@@ -309,7 +232,6 @@ namespace System.Net.Mail
             }
         }
 
-
         private void SetContent(bool allowUnicode)
         {
             //the attachments may have changed, so we need to reset the message
@@ -323,7 +245,11 @@ namespace System.Net.Mail
             {
                 if (!string.IsNullOrEmpty(_body))
                 {
-                    _bodyView = AlternateView.CreateAlternateViewFromString(_body, _bodyEncoding, (_isBodyHtml ? MediaTypeNames.Text.Html : null));
+                    _bodyView = AlternateView.CreateAlternateViewFromString(
+                        _body,
+                        _bodyEncoding,
+                        (_isBodyHtml ? MediaTypeNames.Text.Html : null)
+                    );
                     _message.Content = _bodyView.MimePart;
                 }
             }
@@ -333,7 +259,11 @@ namespace System.Net.Mail
 
                 if (!string.IsNullOrEmpty(_body))
                 {
-                    _bodyView = AlternateView.CreateAlternateViewFromString(_body, _bodyEncoding, (_isBodyHtml ? MediaTypeNames.Text.Html : null));
+                    _bodyView = AlternateView.CreateAlternateViewFromString(
+                        _body,
+                        _bodyEncoding,
+                        (_isBodyHtml ? MediaTypeNames.Text.Html : null)
+                    );
                 }
                 else
                 {
@@ -362,7 +292,11 @@ namespace System.Net.Mail
 
                 if (!string.IsNullOrEmpty(_body))
                 {
-                    _bodyView = AlternateView.CreateAlternateViewFromString(_body, _bodyEncoding, null);
+                    _bodyView = AlternateView.CreateAlternateViewFromString(
+                        _body,
+                        _bodyEncoding,
+                        null
+                    );
                     viewsPart.Parts.Add(_bodyView.MimePart);
                 }
 
@@ -435,8 +369,12 @@ namespace System.Net.Mail
             _message.Send(writer, sendEnvelope, allowUnicode);
         }
 
-        internal IAsyncResult BeginSend(BaseWriter writer, bool allowUnicode,
-            AsyncCallback? callback, object? state)
+        internal IAsyncResult BeginSend(
+            BaseWriter writer,
+            bool allowUnicode,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             SetContent(allowUnicode);
             return _message.BeginSend(writer, allowUnicode, callback, state);
@@ -462,12 +400,22 @@ namespace System.Net.Mail
                     return s.ToString();
                 }
 
-                if ((((int)_deliveryStatusNotification) & (int)DeliveryNotificationOptions.OnSuccess) > 0)
+                if (
+                    (
+                        ((int)_deliveryStatusNotification)
+                        & (int)DeliveryNotificationOptions.OnSuccess
+                    ) > 0
+                )
                 {
                     s.Append("SUCCESS");
                     oneSet = true;
                 }
-                if ((((int)_deliveryStatusNotification) & (int)DeliveryNotificationOptions.OnFailure) > 0)
+                if (
+                    (
+                        ((int)_deliveryStatusNotification)
+                        & (int)DeliveryNotificationOptions.OnFailure
+                    ) > 0
+                )
                 {
                     if (oneSet)
                     {
@@ -476,7 +424,10 @@ namespace System.Net.Mail
                     s.Append("FAILURE");
                     oneSet = true;
                 }
-                if ((((int)_deliveryStatusNotification) & (int)DeliveryNotificationOptions.Delay) > 0)
+                if (
+                    (((int)_deliveryStatusNotification) & (int)DeliveryNotificationOptions.Delay)
+                    > 0
+                )
                 {
                     if (oneSet)
                     {

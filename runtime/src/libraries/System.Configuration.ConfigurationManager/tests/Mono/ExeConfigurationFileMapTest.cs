@@ -73,9 +73,14 @@ namespace MonoTests.System.Configuration
                 var map = new ExeConfigurationFileMap();
                 map.ExeConfigFilename = filename;
 
-                AssertExtensions.Throws<ArgumentException>("fileMap.RoamingUserConfigFilename", () =>
-                    ConfigurationManager.OpenMappedExeConfiguration(
-                        map, ConfigurationUserLevel.PerUserRoaming));
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileMap.RoamingUserConfigFilename",
+                    () =>
+                        ConfigurationManager.OpenMappedExeConfiguration(
+                            map,
+                            ConfigurationUserLevel.PerUserRoaming
+                        )
+                );
             });
         }
 
@@ -87,9 +92,14 @@ namespace MonoTests.System.Configuration
                 var map = new ExeConfigurationFileMap();
                 map.LocalUserConfigFilename = filename;
 
-                AssertExtensions.Throws<ArgumentException>("fileMap.RoamingUserConfigFilename", () =>
-                    ConfigurationManager.OpenMappedExeConfiguration(
-                        map, ConfigurationUserLevel.PerUserRoamingAndLocal));
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileMap.RoamingUserConfigFilename",
+                    () =>
+                        ConfigurationManager.OpenMappedExeConfiguration(
+                            map,
+                            ConfigurationUserLevel.PerUserRoamingAndLocal
+                        )
+                );
             });
         }
 
@@ -104,37 +114,50 @@ namespace MonoTests.System.Configuration
 
                 AssertExtensions.Throws<ArgumentException>("fileMap.LocalUserConfigFilename", () =>
                     ConfigurationManager.OpenMappedExeConfiguration(
-                        map, ConfigurationUserLevel.PerUserRoamingAndLocal));
+                        map,
+                        ConfigurationUserLevel.PerUserRoamingAndLocal
+                    )
+                );
             });
         }
 
         [Fact]
         public void MissingExeFilename()
         {
-            TestUtil.RunWithTempFiles((roaming, local) =>
-            {
-                var map = new ExeConfigurationFileMap();
-                map.RoamingUserConfigFilename = roaming;
-                map.LocalUserConfigFilename = local;
+            TestUtil.RunWithTempFiles(
+                (roaming, local) =>
+                {
+                    var map = new ExeConfigurationFileMap();
+                    map.RoamingUserConfigFilename = roaming;
+                    map.LocalUserConfigFilename = local;
 
-                AssertExtensions.Throws<ArgumentException>("fileMap.ExeConfigFilename", () =>
-                    ConfigurationManager.OpenMappedExeConfiguration(
-                        map, ConfigurationUserLevel.PerUserRoamingAndLocal));
-            });
+                    AssertExtensions.Throws<ArgumentException>("fileMap.ExeConfigFilename", () =>
+                        ConfigurationManager.OpenMappedExeConfiguration(
+                            map,
+                            ConfigurationUserLevel.PerUserRoamingAndLocal
+                        )
+                    );
+                }
+            );
         }
 
         [Fact]
         public void MissingExeFilename2()
         {
-            TestUtil.RunWithTempFile((machine) =>
-            {
-                var map = new ExeConfigurationFileMap();
-                map.MachineConfigFilename = machine;
+            TestUtil.RunWithTempFile(
+                (machine) =>
+                {
+                    var map = new ExeConfigurationFileMap();
+                    map.MachineConfigFilename = machine;
 
-                AssertExtensions.Throws<ArgumentException>("fileMap.ExeConfigFilename", () =>
-                    ConfigurationManager.OpenMappedExeConfiguration(
-                        map, ConfigurationUserLevel.None));
-            });
+                    AssertExtensions.Throws<ArgumentException>("fileMap.ExeConfigFilename", () =>
+                        ConfigurationManager.OpenMappedExeConfiguration(
+                            map,
+                            ConfigurationUserLevel.None
+                        )
+                    );
+                }
+            );
         }
     }
 }

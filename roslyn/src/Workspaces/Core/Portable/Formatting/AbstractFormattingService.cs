@@ -15,10 +15,22 @@ namespace Microsoft.CodeAnalysis.Formatting
     /// </summary>
     internal abstract class AbstractFormattingService : IFormattingService
     {
-        public Task<Document> FormatAsync(Document document, IEnumerable<TextSpan>? spans, LineFormattingOptions lineFormattingOptions, SyntaxFormattingOptions? syntaxFormattingOptions, CancellationToken cancellationToken)
+        public Task<Document> FormatAsync(
+            Document document,
+            IEnumerable<TextSpan>? spans,
+            LineFormattingOptions lineFormattingOptions,
+            SyntaxFormattingOptions? syntaxFormattingOptions,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(syntaxFormattingOptions);
-            return Formatter.FormatAsync(document, spans, syntaxFormattingOptions, rules: null, cancellationToken);
+            return Formatter.FormatAsync(
+                document,
+                spans,
+                syntaxFormattingOptions,
+                rules: null,
+                cancellationToken
+            );
         }
     }
 }

@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -51,9 +51,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         }
 
         public CSCodeWriter(TextWriter textWriter)
-            : this(textWriter, true)
-        {
-        }
+            : this(textWriter, true) { }
 
         protected override bool MustIndent(string line)
         {
@@ -88,7 +86,11 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         IDisposable WriteBrackets(string endif)
         {
             WriteLine("{");
-            return EndAction(() => { WriteLine("}"); WriteLine(endif); });
+            return EndAction(() =>
+            {
+                WriteLine("}");
+                WriteLine(endif);
+            });
         }
 
         /// <summary>
@@ -111,7 +113,12 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             return WriteBrackets();
         }
 
-        public override IDisposable WriteClass(SpecificationDefinition specificationDefinition, string name, string baseClass, params string[] interfaces)
+        public override IDisposable WriteClass(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string baseClass,
+            params string[] interfaces
+        )
         {
             var classLineBuilder = new StringBuilder(1024);
 
@@ -139,7 +146,14 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         {
             WriteLine("#region {0}", name);
             WriteLine();
-            return EndAction(delegate { WriteLine(); WriteLine("#endregion"); WriteLine(); });
+            return EndAction(
+                delegate
+                {
+                    WriteLine();
+                    WriteLine("#endregion");
+                    WriteLine();
+                }
+            );
         }
 
         public override IDisposable WriteAttribute(AttributeDefinition attributeDefinition)
@@ -149,34 +163,48 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             return null;
         }
 
-        protected virtual IDisposable WriteGeneralMethod(SpecificationDefinition specificationDefinition, string name,
-                                                bool hasReturnType, Type returnType,
-                                                IList<ParameterDefinition> parameters, IList<string> baseCallParameters)
+        protected virtual IDisposable WriteGeneralMethod(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            bool hasReturnType,
+            Type returnType,
+            IList<ParameterDefinition> parameters,
+            IList<string> baseCallParameters
+        )
         {
-            bool monoStrict = baseCallParameters != null && baseCallParameters.Count > 0 &&
-                parameters.Any(p => p.Type == typeof(DbLinq.Vendor.IVendor));
+            bool monoStrict =
+                baseCallParameters != null
+                && baseCallParameters.Count > 0
+                && parameters.Any(p => p.Type == typeof(DbLinq.Vendor.IVendor));
 
             var methodLineBuilder = new StringBuilder(1024);
 
             if (monoStrict)
-                methodLineBuilder.Append("#if !MONO_STRICT")
-                    .AppendLine();
+                methodLineBuilder.Append("#if !MONO_STRICT").AppendLine();
             methodLineBuilder.Append(GetProtectionSpecifications(specificationDefinition));
             methodLineBuilder.Append(GetDomainSpecifications(specificationDefinition));
             methodLineBuilder.Append(GetInheritanceSpecifications(specificationDefinition));
 
             if (hasReturnType)
-                methodLineBuilder.AppendFormat("{0} {1}(", GetLiteralType(returnType) ?? "void", name);
+                methodLineBuilder.AppendFormat(
+                    "{0} {1}(",
+                    GetLiteralType(returnType) ?? "void",
+                    name
+                );
             else
                 methodLineBuilder.AppendFormat("{0}(", name);
             var literalParameters = new List<string>();
             foreach (var parameter in parameters)
             {
-                string literalParameter = string.Format("{0}{3}{1} {2}",
-                                                        parameter.Attribute != null ? GetAttribute(parameter.Attribute) + " " : string.Empty,
-                                                        parameter.LiteralType ?? GetLiteralType(parameter.Type),
-                                                        parameter.Name,
-                                                        GetDirectionSpecifications(parameter.SpecificationDefinition));
+                string literalParameter = string.Format(
+                    "{0}{3}{1} {2}",
+                    parameter.Attribute != null
+                        ? GetAttribute(parameter.Attribute) + " "
+                        : string.Empty,
+                    parameter.LiteralType ?? GetLiteralType(parameter.Type),
+                    parameter.Name,
+                    GetDirectionSpecifications(parameter.SpecificationDefinition)
+                );
                 literalParameters.Add(literalParameter);
             }
             methodLineBuilder.AppendFormat("{0})", string.Join(", ", literalParameters.ToArray()));
@@ -185,48 +213,86 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                 methodLineBuilder.AppendLine();
                 bool strictArgs = parameters.Count != baseCallParameters.Count;
                 if (strictArgs)
-                    methodLineBuilder.Append("#if MONO_STRICT")
+                    methodLineBuilder
+                        .Append("#if MONO_STRICT")
                         .AppendLine()
-                        .AppendFormat("\t: base({0})", string.Join(", ", baseCallParameters.Take(parameters.Count).ToArray()))
+                        .AppendFormat(
+                            "\t: base({0})",
+                            string.Join(", ", baseCallParameters.Take(parameters.Count).ToArray())
+                        )
                         .AppendLine()
                         .Append("#else   // MONO_STRICT")
                         .AppendLine();
-                methodLineBuilder.AppendFormat("\t: base({0})", string.Join(", ", baseCallParameters.ToArray()));
+                methodLineBuilder.AppendFormat(
+                    "\t: base({0})",
+                    string.Join(", ", baseCallParameters.ToArray())
+                );
                 if (strictArgs)
-                    methodLineBuilder.AppendLine()
-                        .Append("#endif  // MONO_STRICT");
+                    methodLineBuilder.AppendLine().Append("#endif  // MONO_STRICT");
             }
             WriteLine(methodLineBuilder.ToString());
             return monoStrict ? WriteBrackets("#endif  // !MONO_STRICT") : WriteBrackets();
         }
 
-        public override IDisposable WriteCtor(SpecificationDefinition specificationDefinition, string name,
-                                                ParameterDefinition[] parameters, IList<string> baseCallParameters)
+        public override IDisposable WriteCtor(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            ParameterDefinition[] parameters,
+            IList<string> baseCallParameters
+        )
         {
-            return WriteGeneralMethod(specificationDefinition, name, false, null, parameters, baseCallParameters);
+            return WriteGeneralMethod(
+                specificationDefinition,
+                name,
+                false,
+                null,
+                parameters,
+                baseCallParameters
+            );
         }
 
-        public override IDisposable WriteMethod(SpecificationDefinition specificationDefinition, string name, Type returnType,
-                                                params ParameterDefinition[] parameters)
+        public override IDisposable WriteMethod(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            Type returnType,
+            params ParameterDefinition[] parameters
+        )
         {
-            return WriteGeneralMethod(specificationDefinition, name, true, returnType, parameters, null);
+            return WriteGeneralMethod(
+                specificationDefinition,
+                name,
+                true,
+                returnType,
+                parameters,
+                null
+            );
         }
 
-        protected void WriteFieldOrProperty(SpecificationDefinition specificationDefinition, string name, string memberType)
+        protected void WriteFieldOrProperty(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string memberType
+        )
         {
             var methodLineBuilder = new StringBuilder(1024);
 
             methodLineBuilder.Append(GetProtectionSpecifications(specificationDefinition));
             methodLineBuilder.Append(GetDomainSpecifications(specificationDefinition));
             methodLineBuilder.Append(GetInheritanceSpecifications(specificationDefinition));
-            methodLineBuilder.Append(GetSpecifications(specificationDefinition & SpecificationDefinition.Event));
+            methodLineBuilder.Append(
+                GetSpecifications(specificationDefinition & SpecificationDefinition.Event)
+            );
 
             methodLineBuilder.AppendFormat("{0} {1}", memberType, GetVariableExpression(name));
 
             Write(methodLineBuilder.ToString());
         }
 
-        public override IDisposable WriteProperty(SpecificationDefinition specificationDefinition, string name, string propertyType)
+        public override IDisposable WriteProperty(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string propertyType
+        )
         {
             WriteFieldOrProperty(specificationDefinition, name, propertyType);
             WriteLine();
@@ -237,6 +303,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         {
             WriteLine("get; set;");
         }
+
         public override IDisposable WritePropertyGet()
         {
             WriteLine("get");
@@ -249,21 +316,38 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             return WriteBrackets();
         }
 
-        public override void WriteField(SpecificationDefinition specificationDefinition, string name, string fieldType)
+        public override void WriteField(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string fieldType
+        )
         {
             WriteFieldOrProperty(specificationDefinition, name, fieldType);
             WriteLine(";");
         }
 
-        public override void WritePropertyWithBackingField(SpecificationDefinition specificationDefinition, string name, string propertyType, bool privateSetter)
+        public override void WritePropertyWithBackingField(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string propertyType,
+            bool privateSetter
+        )
         {
             WriteFieldOrProperty(specificationDefinition, name, propertyType);
             WriteLine("{{ get; {0}set; }}", privateSetter ? "private " : string.Empty);
         }
 
-        public override void WriteEvent(SpecificationDefinition specificationDefinition, string name, string eventDelegate)
+        public override void WriteEvent(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string eventDelegate
+        )
         {
-            WriteFieldOrProperty(specificationDefinition | SpecificationDefinition.Event, name, eventDelegate);
+            WriteFieldOrProperty(
+                specificationDefinition | SpecificationDefinition.Event,
+                name,
+                eventDelegate
+            );
             WriteLine(";");
         }
 
@@ -272,7 +356,6 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             WriteLine("if ({0})", expression);
             return WriteBrackets();
         }
-
 
         /// <summary>
         /// Writes the raw if.
@@ -308,7 +391,10 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         /// <param name="specificationDefinition">The specification definition.</param>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        public override IDisposable WriteEnum(SpecificationDefinition specificationDefinition, string name)
+        public override IDisposable WriteEnum(
+            SpecificationDefinition specificationDefinition,
+            string name
+        )
         {
             WriteLine("{0}enum {1}", GetProtectionSpecifications(specificationDefinition), name);
             return WriteBrackets();
@@ -318,7 +404,10 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
 
         #region Code generation - Language construction
 
-        protected bool HasSpecification(SpecificationDefinition specificationDefinition, SpecificationDefinition test)
+        protected bool HasSpecification(
+            SpecificationDefinition specificationDefinition,
+            SpecificationDefinition test
+        )
         {
             return (specificationDefinition & test) != 0;
         }
@@ -364,27 +453,41 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             return result;
         }
 
-        protected virtual string GetProtectionSpecifications(SpecificationDefinition specificationDefinition)
+        protected virtual string GetProtectionSpecifications(
+            SpecificationDefinition specificationDefinition
+        )
         {
-            string literalSpecifications = GetSpecifications(specificationDefinition & SpecificationDefinition.ProtectionClass);
+            string literalSpecifications = GetSpecifications(
+                specificationDefinition & SpecificationDefinition.ProtectionClass
+            );
             if (string.IsNullOrEmpty(literalSpecifications))
                 literalSpecifications = "public ";
             return literalSpecifications;
         }
 
-        protected virtual string GetInheritanceSpecifications(SpecificationDefinition specificationDefinition)
+        protected virtual string GetInheritanceSpecifications(
+            SpecificationDefinition specificationDefinition
+        )
         {
-            return GetSpecifications(specificationDefinition & SpecificationDefinition.InheritanceClass);
+            return GetSpecifications(
+                specificationDefinition & SpecificationDefinition.InheritanceClass
+            );
         }
 
-        protected virtual string GetDomainSpecifications(SpecificationDefinition specificationDefinition)
+        protected virtual string GetDomainSpecifications(
+            SpecificationDefinition specificationDefinition
+        )
         {
             return GetSpecifications(specificationDefinition & SpecificationDefinition.DomainClass);
         }
 
-        protected virtual string GetDirectionSpecifications(SpecificationDefinition specificationDefinition)
+        protected virtual string GetDirectionSpecifications(
+            SpecificationDefinition specificationDefinition
+        )
         {
-            return GetSpecifications(specificationDefinition & SpecificationDefinition.DirectionClass);
+            return GetSpecifications(
+                specificationDefinition & SpecificationDefinition.DirectionClass
+            );
         }
 
         protected virtual string GetAttribute(AttributeDefinition attributeDefinition)
@@ -396,7 +499,9 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             attributeLineBuilder.AppendFormat("[{0}(", attributeDefinition.Name);
             var members = new List<string>();
             foreach (var keyValue in attributeDefinition.Members)
-                members.Add(string.Format("{0} = {1}", keyValue.Key, GetLiteralValue(keyValue.Value)));
+                members.Add(
+                    string.Format("{0} = {1}", keyValue.Key, GetLiteralValue(keyValue.Value))
+                );
             attributeLineBuilder.Append(string.Join(", ", members.ToArray()));
             attributeLineBuilder.Append(")]");
 
@@ -463,24 +568,75 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             return type.Name;
         }
 
-        protected static readonly string[] Keywords = 
-            {
-                "int", "uint","ubyte", "byte", "short", "ushort", "char"
-                ,"decimal", "float", "double"
-                ,"string", "DateTime"
-                , "void", "object"
-
-                ,"private", "protected", "public", "internal"
-                ,"override", "virtual", "abstract", "partial", "static", "sealed", "readonly"
-                ,"class", "struct", "namespace", "enum", "interface", "using", "const", "enum"
-
-                ,"return", "if", "while", "for", "foreach"
-                ,"yield", "break", "goto", "switch", "case", "default"
-
-                , "as", "catch", "continue", "default", "delegate", "do"
-                , "else", "false", "true", "fixed", "finally", "in", "is", "lock"
-                , "new", "null", "out", "ref", "sizeof", "stackalloc", "throw", "typeof"
-            };
+        protected static readonly string[] Keywords =
+        {
+            "int",
+            "uint",
+            "ubyte",
+            "byte",
+            "short",
+            "ushort",
+            "char",
+            "decimal",
+            "float",
+            "double",
+            "string",
+            "DateTime",
+            "void",
+            "object",
+            "private",
+            "protected",
+            "public",
+            "internal",
+            "override",
+            "virtual",
+            "abstract",
+            "partial",
+            "static",
+            "sealed",
+            "readonly",
+            "class",
+            "struct",
+            "namespace",
+            "enum",
+            "interface",
+            "using",
+            "const",
+            "enum",
+            "return",
+            "if",
+            "while",
+            "for",
+            "foreach",
+            "yield",
+            "break",
+            "goto",
+            "switch",
+            "case",
+            "default",
+            "as",
+            "catch",
+            "continue",
+            "default",
+            "delegate",
+            "do",
+            "else",
+            "false",
+            "true",
+            "fixed",
+            "finally",
+            "in",
+            "is",
+            "lock",
+            "new",
+            "null",
+            "out",
+            "ref",
+            "sizeof",
+            "stackalloc",
+            "throw",
+            "typeof",
+        };
 
         protected virtual bool IsKeyword(string name)
         {
@@ -556,9 +712,18 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         /// <param name="trueExpression">The true expression.</param>
         /// <param name="falseExpression">The false expression.</param>
         /// <returns></returns>
-        public override string GetTernaryExpression(string conditionExpression, string trueExpression, string falseExpression)
+        public override string GetTernaryExpression(
+            string conditionExpression,
+            string trueExpression,
+            string falseExpression
+        )
         {
-            return string.Format("{0} ? {1} : {2}", conditionExpression, trueExpression, falseExpression);
+            return string.Format(
+                "{0} ? {1} : {2}",
+                conditionExpression,
+                trueExpression,
+                falseExpression
+            );
         }
 
         public override string GetNullValueExpression(string literalType)
@@ -583,7 +748,11 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         /// <param name="variableName"></param>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public override string GetVariableDeclarationInitialization(string variableType, string variableName, string expression)
+        public override string GetVariableDeclarationInitialization(
+            string variableType,
+            string variableName,
+            string expression
+        )
         {
             //return string.Format("{0} {1} = {2}", variableType, variableName, expression);
             // we can do this since we generate for C# 3

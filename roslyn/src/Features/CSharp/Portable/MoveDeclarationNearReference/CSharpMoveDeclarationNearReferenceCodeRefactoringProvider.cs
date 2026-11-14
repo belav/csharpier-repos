@@ -12,14 +12,23 @@ using Microsoft.CodeAnalysis.MoveDeclarationNearReference;
 
 namespace Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.MoveDeclarationNearReference), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.MoveDeclarationNearReference
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.InlineTemporary)]
-    internal class CSharpMoveDeclarationNearReferenceCodeRefactoringProvider : AbstractMoveDeclarationNearReferenceCodeRefactoringProvider<LocalDeclarationStatementSyntax>
+    internal class CSharpMoveDeclarationNearReferenceCodeRefactoringProvider
+        : AbstractMoveDeclarationNearReferenceCodeRefactoringProvider<LocalDeclarationStatementSyntax>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpMoveDeclarationNearReferenceCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpMoveDeclarationNearReferenceCodeRefactoringProvider() { }
     }
 }

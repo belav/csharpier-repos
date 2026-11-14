@@ -8,7 +8,7 @@ namespace System.Runtime.Serialization
 
     /// <summary>
     /// This class is used to customize the way DateTime is
-    /// serialized or deserialized by <see cref="Json.DataContractJsonSerializer"/> 
+    /// serialized or deserialized by <see cref="Json.DataContractJsonSerializer"/>
     /// </summary>
     public class DateTimeFormat
     {
@@ -22,9 +22,8 @@ namespace System.Runtime.Serialization
         /// formatProvider.
         /// </summary>
         /// <param name="formatString">Specifies the formatString to be used.</param>
-        public DateTimeFormat(string formatString) : this(formatString, DateTimeFormatInfo.CurrentInfo)
-        {
-        }
+        public DateTimeFormat(string formatString)
+            : this(formatString, DateTimeFormatInfo.CurrentInfo) { }
 
         /// <summary>
         /// Initailizes a new <see cref="DateTimeFormat"/> with the specified
@@ -54,10 +53,7 @@ namespace System.Runtime.Serialization
         /// </summary>
         public string FormatString
         {
-            get
-            {
-                return this.formatString;
-            }
+            get { return this.formatString; }
         }
 
         /// <summary>
@@ -65,26 +61,16 @@ namespace System.Runtime.Serialization
         /// </summary>
         public IFormatProvider FormatProvider
         {
-            get
-            {
-                return this.formatProvider;
-            }
+            get { return this.formatProvider; }
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="DateTimeStyles"/> on this instance.  
-        /// </summary>        
+        /// Gets or sets the <see cref="DateTimeStyles"/> on this instance.
+        /// </summary>
         public DateTimeStyles DateTimeStyles
         {
-            get
-            {
-                return this.dateTimeStyles;
-            }
-
-            set
-            {
-                this.dateTimeStyles = value;
-            }
+            get { return this.dateTimeStyles; }
+            set { this.dateTimeStyles = value; }
         }
     }
 }

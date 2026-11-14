@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -17,8 +17,7 @@ namespace System.Runtime.InteropServices.ComTypes
 {
     using System;
 
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
-
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct STATSTG
     {
         public String pwcsName;
@@ -40,8 +39,16 @@ namespace System.Runtime.InteropServices.ComTypes
     public interface IStream
     {
         // ISequentialStream portion
-        void Read([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] Byte[] pv, int cb, IntPtr pcbRead);
-        void Write([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Byte[] pv, int cb, IntPtr pcbWritten);
+        void Read(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] Byte[] pv,
+            int cb,
+            IntPtr pcbRead
+        );
+        void Write(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Byte[] pv,
+            int cb,
+            IntPtr pcbWritten
+        );
 
         // IStream portion
         void Seek(Int64 dlibMove, int dwOrigin, IntPtr plibNewPosition);

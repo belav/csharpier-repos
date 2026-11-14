@@ -23,6 +23,6 @@ namespace System.DirectoryServices
         ATTRIBUTE_QUERY = 15,
         SECURITY_MASK = 16,
         DIRSYNC_FLAG = 17,
-        EXTENDED_DN = 18
+        EXTENDED_DN = 18,
     }
 }

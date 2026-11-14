@@ -8,10 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysis.ReadyToRun;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler.PEWriter
@@ -73,7 +71,7 @@ namespace ILCompiler.PEWriter
         /// Name of the initialized data section.
         /// </summary>
         public const string SDataSectionName = ".sdata";
-        
+
         /// <summary>
         /// Name of the relocation section.
         /// </summary>
@@ -174,7 +172,8 @@ namespace ILCompiler.PEWriter
             string outputFileSimpleName,
             Func<RuntimeFunctionsTableNode> getRuntimeFunctionsTable,
             int customPESectionAlignment,
-            Func<IEnumerable<Blob>, BlobContentId> deterministicIdProvider)
+            Func<IEnumerable<Blob>, BlobContentId> deterministicIdProvider
+        )
             : base(peHeaderBuilder, deterministicIdProvider: deterministicIdProvider)
         {
             _target = target;
@@ -183,14 +182,30 @@ namespace ILCompiler.PEWriter
 
             _sectionBuilder = new SectionBuilder(target);
 
-            _textSectionIndex = _sectionBuilder.AddSection(TextSectionName, SectionCharacteristics.ContainsCode | SectionCharacteristics.MemExecute | SectionCharacteristics.MemRead, 512);
-            _dataSectionIndex = _sectionBuilder.AddSection(DataSectionName, SectionCharacteristics.ContainsInitializedData | SectionCharacteristics.MemWrite | SectionCharacteristics.MemRead, 512);
+            _textSectionIndex = _sectionBuilder.AddSection(
+                TextSectionName,
+                SectionCharacteristics.ContainsCode
+                    | SectionCharacteristics.MemExecute
+                    | SectionCharacteristics.MemRead,
+                512
+            );
+            _dataSectionIndex = _sectionBuilder.AddSection(
+                DataSectionName,
+                SectionCharacteristics.ContainsInitializedData
+                    | SectionCharacteristics.MemWrite
+                    | SectionCharacteristics.MemRead,
+                512
+            );
 
             _customPESectionAlignment = customPESectionAlignment;
 
             if (r2rHeaderExportSymbol != null)
             {
-                _sectionBuilder.AddSection(R2RPEBuilder.ExportDataSectionName, SectionCharacteristics.ContainsInitializedData | SectionCharacteristics.MemRead, 512);
+                _sectionBuilder.AddSection(
+                    R2RPEBuilder.ExportDataSectionName,
+                    SectionCharacteristics.ContainsInitializedData | SectionCharacteristics.MemRead,
+                    512
+                );
                 _sectionBuilder.AddExportSymbol("RTR_HEADER", 1, r2rHeaderExportSymbol);
                 _sectionBuilder.SetDllNameForExportDirectoryTable(outputFileSimpleName);
             }
@@ -200,18 +215,24 @@ namespace ILCompiler.PEWriter
                 // Always inject the relocation section to the end of section list
                 _sectionBuilder.AddSection(
                     R2RPEBuilder.RelocSectionName,
-                    SectionCharacteristics.ContainsInitializedData |
-                    SectionCharacteristics.MemRead |
-                    SectionCharacteristics.MemDiscardable,
-                    PEHeaderConstants.SectionAlignment);
+                    SectionCharacteristics.ContainsInitializedData
+                        | SectionCharacteristics.MemRead
+                        | SectionCharacteristics.MemDiscardable,
+                    PEHeaderConstants.SectionAlignment
+                );
             }
 
-            ImmutableArray<Section>.Builder sectionListBuilder = ImmutableArray.CreateBuilder<Section>();
+            ImmutableArray<Section>.Builder sectionListBuilder =
+                ImmutableArray.CreateBuilder<Section>();
             foreach (SectionInfo sectionInfo in _sectionBuilder.GetSections())
             {
-                ILCompiler.PEWriter.Section builderSection = _sectionBuilder.FindSection(sectionInfo.SectionName);
+                ILCompiler.PEWriter.Section builderSection = _sectionBuilder.FindSection(
+                    sectionInfo.SectionName
+                );
                 Debug.Assert(builderSection != null);
-                sectionListBuilder.Add(new Section(builderSection.Name, builderSection.Characteristics));
+                sectionListBuilder.Add(
+                    new Section(builderSection.Name, builderSection.Characteristics)
+                );
             }
 
             _sections = sectionListBuilder.ToImmutableArray();
@@ -242,18 +263,25 @@ namespace ILCompiler.PEWriter
         /// <param name="section">Target section</param>
         /// <param name="name">Textual name of the object data for diagnostic purposese</param>
         /// <param name="outputInfoBuilder">Optional output info builder to output the data item to</param>
-        public void AddObjectData(DependencyAnalysis.ObjectNode.ObjectData objectData, ObjectNodeSection section, string name, OutputInfoBuilder outputInfoBuilder)
+        public void AddObjectData(
+            DependencyAnalysis.ObjectNode.ObjectData objectData,
+            ObjectNodeSection section,
+            string name,
+            OutputInfoBuilder outputInfoBuilder
+        )
         {
             if (_written)
             {
-                throw new InternalCompilerErrorException("Inconsistent upstream behavior - AddObjectData mustn't be called after Write");
+                throw new InternalCompilerErrorException(
+                    "Inconsistent upstream behavior - AddObjectData mustn't be called after Write"
+                );
             }
 
             int targetSectionIndex;
             switch (section.Type)
             {
                 case SectionType.ReadOnly:
-                    // We put ReadOnly data into the text section to limit the number of sections.
+                // We put ReadOnly data into the text section to limit the number of sections.
                 case SectionType.Executable:
                     targetSectionIndex = _textSectionIndex;
                     break;
@@ -274,7 +302,11 @@ namespace ILCompiler.PEWriter
         /// This allows relocations (both position and size) to regions of the image. Both nodes must be in the
         /// same section and firstNode must be emitted before secondNode.
         /// </summary>
-        public void AddSymbolForRange(ISymbolNode symbol, ISymbolNode firstNode, ISymbolNode secondNode)
+        public void AddSymbolForRange(
+            ISymbolNode symbol,
+            ISymbolNode firstNode,
+            ISymbolNode secondNode
+        )
         {
             _sectionBuilder.AddSymbolForRange(symbol, firstNode, secondNode);
         }
@@ -326,57 +358,91 @@ namespace ILCompiler.PEWriter
         const int PESignatureSize = sizeof(uint);
 
         const int COFFHeaderSize =
-            sizeof(short) + // Machine
-            sizeof(short) + // NumberOfSections
-            sizeof(int) +   // TimeDateStamp:
-            sizeof(int) +   // PointerToSymbolTable
-            sizeof(int) +   // NumberOfSymbols
-            sizeof(short) + // SizeOfOptionalHeader:
+            sizeof(short)
+            + // Machine
+            sizeof(short)
+            + // NumberOfSections
+            sizeof(int)
+            + // TimeDateStamp:
+            sizeof(int)
+            + // PointerToSymbolTable
+            sizeof(int)
+            + // NumberOfSymbols
+            sizeof(short)
+            + // SizeOfOptionalHeader:
             sizeof(ushort); // Characteristics
 
         const int OffsetOfSectionAlign =
-            sizeof(short) + // Magic
-            sizeof(byte) +  // MajorLinkerVersion
-            sizeof(byte) +  // MinorLinkerVersion
-            sizeof(int) +   // SizeOfCode
-            sizeof(int) +   // SizeOfInitializedData
-            sizeof(int) +   // SizeOfUninitializedData
-            sizeof(int) +   // AddressOfEntryPoint
-            sizeof(int) +   // BaseOfCode
-            sizeof(long);   // PE32:  BaseOfData (int), ImageBase (int) 
-                            // PE32+: ImageBase (long)
-        const int OffsetOfChecksum = OffsetOfSectionAlign +
-            sizeof(int) +   // SectionAlignment
-            sizeof(int) +   // FileAlignment
-            sizeof(short) + // MajorOperatingSystemVersion
-            sizeof(short) + // MinorOperatingSystemVersion
-            sizeof(short) + // MajorImageVersion
-            sizeof(short) + // MinorImageVersion
-            sizeof(short) + // MajorSubsystemVersion
-            sizeof(short) + // MinorSubsystemVersion
-            sizeof(int) +   // Win32VersionValue
-            sizeof(int) +   // SizeOfImage
-            sizeof(int);    // SizeOfHeaders
+            sizeof(short)
+            + // Magic
+            sizeof(byte)
+            + // MajorLinkerVersion
+            sizeof(byte)
+            + // MinorLinkerVersion
+            sizeof(int)
+            + // SizeOfCode
+            sizeof(int)
+            + // SizeOfInitializedData
+            sizeof(int)
+            + // SizeOfUninitializedData
+            sizeof(int)
+            + // AddressOfEntryPoint
+            sizeof(int)
+            + // BaseOfCode
+            sizeof(long); // PE32:  BaseOfData (int), ImageBase (int)
+
+        // PE32+: ImageBase (long)
+        const int OffsetOfChecksum =
+            OffsetOfSectionAlign
+            + sizeof(int)
+            + // SectionAlignment
+            sizeof(int)
+            + // FileAlignment
+            sizeof(short)
+            + // MajorOperatingSystemVersion
+            sizeof(short)
+            + // MinorOperatingSystemVersion
+            sizeof(short)
+            + // MajorImageVersion
+            sizeof(short)
+            + // MinorImageVersion
+            sizeof(short)
+            + // MajorSubsystemVersion
+            sizeof(short)
+            + // MinorSubsystemVersion
+            sizeof(int)
+            + // Win32VersionValue
+            sizeof(int)
+            + // SizeOfImage
+            sizeof(int); // SizeOfHeaders
 
         const int OffsetOfSizeOfImage = OffsetOfChecksum - 2 * sizeof(int); // SizeOfHeaders, SizeOfImage
 
         const int SectionHeaderNameSize = 8;
-        const int SectionHeaderVirtualSize = SectionHeaderNameSize; // VirtualSize follows 
+        const int SectionHeaderVirtualSize = SectionHeaderNameSize; // VirtualSize follows
         const int SectionHeaderRVAOffset = SectionHeaderVirtualSize + sizeof(int); // RVA Offset follows VirtualSize + 4 bytes VirtualSize
         const int SectionHeaderSizeOfRawData = SectionHeaderRVAOffset + sizeof(int); // SizeOfRawData follows RVA
         const int SectionHeaderPointerToRawDataOffset = SectionHeaderSizeOfRawData + sizeof(int); // PointerToRawData immediately follows the SizeOfRawData
 
         const int SectionHeaderSize =
-            SectionHeaderNameSize +
-            sizeof(int) +   // VirtualSize
-            sizeof(int) +   // VirtualAddress
-            sizeof(int) +   // SizeOfRawData
-            sizeof(int) +   // PointerToRawData
-            sizeof(int) +   // PointerToRelocations
-            sizeof(int) +   // PointerToLineNumbers
-            sizeof(short) + // NumberOfRelocations
-            sizeof(short) + // NumberOfLineNumbers 
-            sizeof(int);    // SectionCharacteristics
+            SectionHeaderNameSize
+            + sizeof(int)
+            + // VirtualSize
+            sizeof(int)
+            + // VirtualAddress
+            sizeof(int)
+            + // SizeOfRawData
+            sizeof(int)
+            + // PointerToRawData
+            sizeof(int)
+            + // PointerToRelocations
+            sizeof(int)
+            + // PointerToLineNumbers
+            sizeof(short)
+            + // NumberOfRelocations
+            sizeof(short)
+            + // NumberOfLineNumbers
+            sizeof(int); // SectionCharacteristics
 
         /// <summary>
         /// On Linux, we must patch the section headers. This is because the CoreCLR runtime on Linux
@@ -390,16 +456,23 @@ namespace ILCompiler.PEWriter
         private void UpdateSectionRVAs(Stream outputStream)
         {
             int peHeaderSize =
-                OffsetOfChecksum +
-                sizeof(int) +             // Checksum
-                sizeof(short) +           // Subsystem
-                sizeof(short) +           // DllCharacteristics
-                4 * _target.PointerSize + // SizeOfStackReserve, SizeOfStackCommit, SizeOfHeapReserve, SizeOfHeapCommit
-                sizeof(int) +             // LoaderFlags
-                sizeof(int) +             // NumberOfRvaAndSizes
-                16 * sizeof(long);        // directory entries
+                OffsetOfChecksum
+                + sizeof(int)
+                + // Checksum
+                sizeof(short)
+                + // Subsystem
+                sizeof(short)
+                + // DllCharacteristics
+                4 * _target.PointerSize
+                + // SizeOfStackReserve, SizeOfStackCommit, SizeOfHeapReserve, SizeOfHeapCommit
+                sizeof(int)
+                + // LoaderFlags
+                sizeof(int)
+                + // NumberOfRvaAndSizes
+                16 * sizeof(long); // directory entries
 
-            int sectionHeaderOffset = DosHeaderSize + PESignatureSize + COFFHeaderSize + peHeaderSize;
+            int sectionHeaderOffset =
+                DosHeaderSize + PESignatureSize + COFFHeaderSize + peHeaderSize;
             int sectionCount = _sectionRVAs.Length;
             for (int sectionIndex = 0; sectionIndex < sectionCount; sectionIndex++)
             {
@@ -411,19 +484,34 @@ namespace ILCompiler.PEWriter
 
                     // Update VirtualSize
                     {
-                        outputStream.Seek(sectionHeaderOffset + SectionHeaderSize * sectionIndex + SectionHeaderVirtualSize, SeekOrigin.Begin);
+                        outputStream.Seek(
+                            sectionHeaderOffset
+                                + SectionHeaderSize * sectionIndex
+                                + SectionHeaderVirtualSize,
+                            SeekOrigin.Begin
+                        );
                         outputStream.Write(sizeBytes, 0, sizeBytes.Length);
                     }
                     // Update SizeOfRawData
                     {
-                        outputStream.Seek(sectionHeaderOffset + SectionHeaderSize * sectionIndex + SectionHeaderSizeOfRawData, SeekOrigin.Begin);
+                        outputStream.Seek(
+                            sectionHeaderOffset
+                                + SectionHeaderSize * sectionIndex
+                                + SectionHeaderSizeOfRawData,
+                            SeekOrigin.Begin
+                        );
                         outputStream.Write(sizeBytes, 0, sizeBytes.Length);
                     }
                 }
 
                 // Update RVAs
                 {
-                    outputStream.Seek(sectionHeaderOffset + SectionHeaderSize * sectionIndex + SectionHeaderRVAOffset, SeekOrigin.Begin);
+                    outputStream.Seek(
+                        sectionHeaderOffset
+                            + SectionHeaderSize * sectionIndex
+                            + SectionHeaderRVAOffset,
+                        SeekOrigin.Begin
+                    );
                     byte[] rvaBytes = BitConverter.GetBytes(_sectionRVAs[sectionIndex]);
                     Debug.Assert(rvaBytes.Length == sizeof(int));
                     outputStream.Write(rvaBytes, 0, rvaBytes.Length);
@@ -431,16 +519,29 @@ namespace ILCompiler.PEWriter
 
                 // Update pointer to raw data
                 {
-                    outputStream.Seek(sectionHeaderOffset + SectionHeaderSize * sectionIndex + SectionHeaderPointerToRawDataOffset, SeekOrigin.Begin);
-                    byte[] rawDataBytesBytes = BitConverter.GetBytes(_sectionPointerToRawData[sectionIndex]);
+                    outputStream.Seek(
+                        sectionHeaderOffset
+                            + SectionHeaderSize * sectionIndex
+                            + SectionHeaderPointerToRawDataOffset,
+                        SeekOrigin.Begin
+                    );
+                    byte[] rawDataBytesBytes = BitConverter.GetBytes(
+                        _sectionPointerToRawData[sectionIndex]
+                    );
                     Debug.Assert(rawDataBytesBytes.Length == sizeof(int));
                     outputStream.Write(rawDataBytesBytes, 0, rawDataBytesBytes.Length);
                 }
             }
 
             // Patch SizeOfImage to point past the end of the last section
-            outputStream.Seek(DosHeaderSize + PESignatureSize + COFFHeaderSize + OffsetOfSizeOfImage, SeekOrigin.Begin);
-            int sizeOfImage = AlignmentHelper.AlignUp(_sectionRVAs[sectionCount - 1] + _sectionRawSizes[sectionCount - 1], Header.SectionAlignment);
+            outputStream.Seek(
+                DosHeaderSize + PESignatureSize + COFFHeaderSize + OffsetOfSizeOfImage,
+                SeekOrigin.Begin
+            );
+            int sizeOfImage = AlignmentHelper.AlignUp(
+                _sectionRVAs[sectionCount - 1] + _sectionRawSizes[sectionCount - 1],
+                Header.SectionAlignment
+            );
             byte[] sizeOfImageBytes = BitConverter.GetBytes(sizeOfImage);
             Debug.Assert(sizeOfImageBytes.Length == sizeof(int));
             outputStream.Write(sizeOfImageBytes, 0, sizeOfImageBytes.Length);
@@ -453,7 +554,10 @@ namespace ILCompiler.PEWriter
         /// <param name="customAlignment">Timestamp to set in the R2R PE header</param>
         private void SetPEHeaderSectionAlignment(Stream outputStream, int customAlignment)
         {
-            outputStream.Seek(DosHeaderSize + PESignatureSize + COFFHeaderSize + OffsetOfSectionAlign, SeekOrigin.Begin);
+            outputStream.Seek(
+                DosHeaderSize + PESignatureSize + COFFHeaderSize + OffsetOfSectionAlign,
+                SeekOrigin.Begin
+            );
             byte[] alignBytes = BitConverter.GetBytes(customAlignment);
             Debug.Assert(alignBytes.Length == sizeof(int));
             outputStream.Write(alignBytes, 0, alignBytes.Length);
@@ -470,7 +574,11 @@ namespace ILCompiler.PEWriter
         private void ApplyMachineOSOverride(Stream outputStream)
         {
             byte[] patchedTargetMachine = BitConverter.GetBytes(
-                (ushort)unchecked((ushort)Header.Machine ^ (ushort)_target.MachineOSOverrideFromTarget()));
+                (ushort)
+                    unchecked(
+                        (ushort)Header.Machine ^ (ushort)_target.MachineOSOverrideFromTarget()
+                    )
+            );
             Debug.Assert(patchedTargetMachine.Length == sizeof(ushort));
 
             outputStream.Seek(DosHeaderSize + PESignatureSize, SeekOrigin.Begin);
@@ -486,10 +594,11 @@ namespace ILCompiler.PEWriter
         {
             byte[] patchedTimestamp = BitConverter.GetBytes(timeDateStamp);
             int seekSize =
-                DosHeaderSize +
-                PESignatureSize +
-                sizeof(short) +     // Machine
-                sizeof(short);      // NumberOfSections
+                DosHeaderSize
+                + PESignatureSize
+                + sizeof(short)
+                + // Machine
+                sizeof(short); // NumberOfSections
 
             outputStream.Seek(seekSize, SeekOrigin.Begin);
             outputStream.Write(patchedTimestamp, 0, patchedTimestamp.Length);
@@ -509,9 +618,10 @@ namespace ILCompiler.PEWriter
                 RuntimeFunctionsTableNode runtimeFunctionsTable = _getRuntimeFunctionsTable();
                 builder.ExceptionTable = new DirectoryEntry(
                     relativeVirtualAddress: _sectionBuilder.GetSymbolRVA(runtimeFunctionsTable),
-                    size: runtimeFunctionsTable.TableSizeExcludingSentinel);
+                    size: runtimeFunctionsTable.TableSizeExcludingSentinel
+                );
             }
-    
+
             return builder;
         }
 
@@ -524,7 +634,7 @@ namespace ILCompiler.PEWriter
         {
             return new DirectoryEntry(RelocateRVA(entry.RelativeVirtualAddress), entry.Size);
         }
-        
+
         /// <summary>
         /// Relocate a given RVA using the section offset table produced during section serialization.
         /// </summary>
@@ -545,7 +655,10 @@ namespace ILCompiler.PEWriter
                     return rva + sectionRvaDelta.DeltaRVA;
                 }
             }
-            Debug.Assert(false, "RVA is not within any of the input sections - output PE may be inconsistent");
+            Debug.Assert(
+                false,
+                "RVA is not within any of the input sections - output PE may be inconsistent"
+            );
             return rva;
         }
 
@@ -582,11 +695,21 @@ namespace ILCompiler.PEWriter
             {
                 if (outputSectionIndex > 0)
                 {
-                    sectionStartRva = Math.Max(sectionStartRva, _sectionRVAs[outputSectionIndex - 1] + _sectionRawSizes[outputSectionIndex - 1]);
+                    sectionStartRva = Math.Max(
+                        sectionStartRva,
+                        _sectionRVAs[outputSectionIndex - 1]
+                            + _sectionRawSizes[outputSectionIndex - 1]
+                    );
                 }
 
-                int newSectionStartRva = AlignmentHelper.AlignUp(sectionStartRva, _customPESectionAlignment);
-                int newSectionPointerToRawData = AlignmentHelper.AlignUp(location.PointerToRawData, _customPESectionAlignment);
+                int newSectionStartRva = AlignmentHelper.AlignUp(
+                    sectionStartRva,
+                    _customPESectionAlignment
+                );
+                int newSectionPointerToRawData = AlignmentHelper.AlignUp(
+                    location.PointerToRawData,
+                    _customPESectionAlignment
+                );
                 if (newSectionPointerToRawData > location.PointerToRawData)
                 {
                     sectionDataBuilder = new BlobBuilder();
@@ -602,11 +725,15 @@ namespace ILCompiler.PEWriter
                 const int RVAAlign = 1 << RVABitsToMatchFilePos;
                 if (outputSectionIndex > 0)
                 {
-                    sectionStartRva = Math.Max(sectionStartRva, _sectionRVAs[outputSectionIndex - 1] + _sectionRawSizes[outputSectionIndex - 1]);
+                    sectionStartRva = Math.Max(
+                        sectionStartRva,
+                        _sectionRVAs[outputSectionIndex - 1]
+                            + _sectionRawSizes[outputSectionIndex - 1]
+                    );
 
                     // when assembly is stored in a singlefile bundle, an additional skew is introduced
-                    // as the streams inside the bundle are not necessarily page aligned as we do not 
-                    // know the actual page size on the target system. 
+                    // as the streams inside the bundle are not necessarily page aligned as we do not
+                    // know the actual page size on the target system.
                     // We may need one page gap of unused VA space before the next section starts.
                     // We will assume the page size is <= RVAAlign
                     sectionStartRva += RVAAlign;
@@ -669,7 +796,7 @@ namespace ILCompiler.PEWriter
             return sectionDataBuilder;
         }
     }
-    
+
     /// <summary>
     /// Simple helper for filling in PE header information.
     /// </summary>
@@ -680,12 +807,19 @@ namespace ILCompiler.PEWriter
         /// </summary>
         /// <param name="subsystem">Targeting subsystem</param>
         /// <param name="target">Target architecture to set in the header</param>
-        public static PEHeaderBuilder Create(Subsystem subsystem, TargetDetails target, ulong imageBase)
+        public static PEHeaderBuilder Create(
+            Subsystem subsystem,
+            TargetDetails target,
+            ulong imageBase
+        )
         {
             bool is64BitTarget = target.PointerSize == sizeof(long);
 
-            Characteristics imageCharacteristics = Characteristics.ExecutableImage | Characteristics.Dll;
-            imageCharacteristics |= is64BitTarget ? Characteristics.LargeAddressAware : Characteristics.Bit32Machine;
+            Characteristics imageCharacteristics =
+                Characteristics.ExecutableImage | Characteristics.Dll;
+            imageCharacteristics |= is64BitTarget
+                ? Characteristics.LargeAddressAware
+                : Characteristics.Bit32Machine;
 
             int fileAlignment = 0x200;
             bool isWindowsOr32bit = target.IsWindows || !is64BitTarget;
@@ -716,9 +850,9 @@ namespace ILCompiler.PEWriter
 
             // Without NxCompatible the PE executable cannot execute on Windows ARM64
             DllCharacteristics dllCharacteristics =
-                DllCharacteristics.DynamicBase |
-                DllCharacteristics.NxCompatible |
-                DllCharacteristics.TerminalServerAware;
+                DllCharacteristics.DynamicBase
+                | DllCharacteristics.NxCompatible
+                | DllCharacteristics.TerminalServerAware;
 
             if (is64BitTarget)
             {
@@ -745,10 +879,27 @@ namespace ILCompiler.PEWriter
                 subsystem: subsystem,
                 dllCharacteristics: dllCharacteristics,
                 imageCharacteristics: imageCharacteristics,
-                sizeOfStackReserve: (is64BitTarget ? PE64HeaderConstants.SizeOfStackReserve : PE32HeaderConstants.SizeOfStackReserve),
-                sizeOfStackCommit: (is64BitTarget ? PE64HeaderConstants.SizeOfStackCommit : PE32HeaderConstants.SizeOfStackCommit),
-                sizeOfHeapReserve: (is64BitTarget ? PE64HeaderConstants.SizeOfHeapReserve : PE32HeaderConstants.SizeOfHeapReserve),
-                sizeOfHeapCommit: (is64BitTarget ? PE64HeaderConstants.SizeOfHeapCommit : PE32HeaderConstants.SizeOfHeapCommit));
+                sizeOfStackReserve: (
+                    is64BitTarget
+                        ? PE64HeaderConstants.SizeOfStackReserve
+                        : PE32HeaderConstants.SizeOfStackReserve
+                ),
+                sizeOfStackCommit: (
+                    is64BitTarget
+                        ? PE64HeaderConstants.SizeOfStackCommit
+                        : PE32HeaderConstants.SizeOfStackCommit
+                ),
+                sizeOfHeapReserve: (
+                    is64BitTarget
+                        ? PE64HeaderConstants.SizeOfHeapReserve
+                        : PE32HeaderConstants.SizeOfHeapReserve
+                ),
+                sizeOfHeapCommit: (
+                    is64BitTarget
+                        ? PE64HeaderConstants.SizeOfHeapCommit
+                        : PE32HeaderConstants.SizeOfHeapCommit
+                )
+            );
         }
     }
 }

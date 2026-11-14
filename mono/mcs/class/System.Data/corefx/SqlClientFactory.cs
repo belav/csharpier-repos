@@ -4,21 +4,21 @@
 
 using System;
 using System.Data;
-using System.Data.Sql;
 using System.Data.Common;
+using System.Data.Sql;
 using System.Security;
 using System.Security.Permissions;
 
 namespace System.Data.SqlClient
 {
-	partial class SqlClientFactory
-	{
-		public override bool CanCreateDataSourceEnumerator => true;
+    partial class SqlClientFactory
+    {
+        public override bool CanCreateDataSourceEnumerator => true;
 
-		public override DbDataSourceEnumerator CreateDataSourceEnumerator() => 
-			SqlDataSourceEnumerator.Instance;
+        public override DbDataSourceEnumerator CreateDataSourceEnumerator() =>
+            SqlDataSourceEnumerator.Instance;
 
-		public override CodeAccessPermission CreatePermission (PermissionState state) =>
-			new SqlClientPermission(state);
-	}
+        public override CodeAccessPermission CreatePermission(PermissionState state) =>
+            new SqlClientPermission(state);
+    }
 }

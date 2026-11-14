@@ -18,8 +18,7 @@ namespace System
         {
             private CompatPrng _prng; // mutable struct; do not make this readonly
 
-            public Net5CompatSeedImpl(int seed) =>
-                _prng.EnsureInitialized(seed);
+            public Net5CompatSeedImpl(int seed) => _prng.EnsureInitialized(seed);
 
             public override double Sample() => _prng.Sample();
 
@@ -30,9 +29,9 @@ namespace System
             public override int Next(int minValue, int maxValue)
             {
                 long range = (long)maxValue - minValue;
-                return range <= int.MaxValue ?
-                    (int)(_prng.Sample() * range) + minValue :
-                    (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
+                return range <= int.MaxValue
+                    ? (int)(_prng.Sample() * range) + minValue
+                    : (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
             }
 
             public override long NextInt64()
@@ -77,9 +76,9 @@ namespace System
 
             /// <summary>Produces a value in the range [0, ulong.MaxValue].</summary>
             private ulong NextUInt64() =>
-                 ((ulong)(uint)Next(1 << 22)) |
-                (((ulong)(uint)Next(1 << 22)) << 22) |
-                (((ulong)(uint)Next(1 << 20)) << 44);
+                ((ulong)(uint)Next(1 << 22))
+                | (((ulong)(uint)Next(1 << 22)) << 22)
+                | (((ulong)(uint)Next(1 << 20)) << 44);
 
             public override double NextDouble() => _prng.Sample();
 
@@ -109,12 +108,15 @@ namespace System
             /// <summary>Reference to the <see cref="Random"/> containing this implementation instance.</summary>
             /// <remarks>Used to ensure that any calls to other virtual members are performed using the Random-derived instance, if one exists.</remarks>
             private readonly Random _parent;
+
             /// <summary>Seed specified at construction time used to lazily initialize <see cref="_prng"/>.</summary>
             private readonly int _seed;
+
             /// <summary>Lazily-initialized algorithm backing this instance.</summary>
             private CompatPrng _prng; // mutable struct; do not make this readonly
 
-            public Net5CompatDerivedImpl(Random parent) : this(parent, Shared.Next()) { }
+            public Net5CompatDerivedImpl(Random parent)
+                : this(parent, Shared.Next()) { }
 
             public Net5CompatDerivedImpl(Random parent, int seed)
             {
@@ -144,9 +146,9 @@ namespace System
             {
                 _prng.EnsureInitialized(_seed);
                 long range = (long)maxValue - minValue;
-                return range <= int.MaxValue ?
-                    (int)(_parent.Sample() * range) + minValue :
-                    (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
+                return range <= int.MaxValue
+                    ? (int)(_parent.Sample() * range) + minValue
+                    : (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
             }
 
             public override long NextInt64()
@@ -194,9 +196,9 @@ namespace System
 
             /// <summary>Produces a value in the range [0, ulong.MaxValue].</summary>
             private unsafe ulong NextUInt64() =>
-                 ((ulong)(uint)_parent.Next(1 << 22)) |
-                (((ulong)(uint)_parent.Next(1 << 22)) << 22) |
-                (((ulong)(uint)_parent.Next(1 << 20)) << 44);
+                ((ulong)(uint)_parent.Next(1 << 22))
+                | (((ulong)(uint)_parent.Next(1 << 22)) << 22)
+                | (((ulong)(uint)_parent.Next(1 << 20)) << 44);
 
             public override double NextDouble()
             {

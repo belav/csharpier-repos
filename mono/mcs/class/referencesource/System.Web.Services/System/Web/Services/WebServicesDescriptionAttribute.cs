@@ -1,14 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="WebServicesDescriptionAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services {
-
-
+namespace System.Web.Services
+{
     using System;
-    using System.ComponentModel;   
+    using System.ComponentModel;
 
     /// <include file='doc\WebServicesDescriptionAttribute.uex' path='docs/doc[@for="WebServicesDescriptionAttribute"]/*' />
     /// <devdoc>
@@ -17,24 +16,27 @@ namespace System.Web.Services {
     ///     the member.
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    internal class WebServicesDescriptionAttribute : DescriptionAttribute {
-
+    internal class WebServicesDescriptionAttribute : DescriptionAttribute
+    {
         private bool replaced = false;
 
         /// <include file='doc\WebServicesDescriptionAttribute.uex' path='docs/doc[@for="WebServicesDescriptionAttribute.WebServicesDescriptionAttribute"]/*' />
         /// <devdoc>
         ///     Constructs a new sys description.
         /// </devdoc>
-        internal WebServicesDescriptionAttribute(string description) : base(description) {
-        }
+        internal WebServicesDescriptionAttribute(string description)
+            : base(description) { }
 
         /// <include file='doc\WebServicesDescriptionAttribute.uex' path='docs/doc[@for="WebServicesDescriptionAttribute.Description"]/*' />
         /// <devdoc>
         ///     Retrieves the description text.
         /// </devdoc>
-        public override string Description {
-            get {
-                if (!replaced) {
+        public override string Description
+        {
+            get
+            {
+                if (!replaced)
+                {
                     replaced = true;
                     DescriptionValue = Res.GetString(base.Description);
                 }

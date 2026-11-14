@@ -10,14 +10,19 @@ namespace System
 {
     [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = false)]
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public abstract partial class Attribute
     {
         protected Attribute() { }
 
 #if !NATIVEAOT
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Unused fields don't make a difference for equality")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Unused fields don't make a difference for equality"
+        )]
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             if (obj == null)
@@ -28,11 +33,17 @@ namespace System
 
             Type thisType = this.GetType();
             object thisObj = this;
-            object? thisResult, thatResult;
+            object? thisResult,
+                thatResult;
 
             while (thisType != typeof(Attribute))
             {
-                FieldInfo[] thisFields = thisType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+                FieldInfo[] thisFields = thisType.GetFields(
+                    BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.DeclaredOnly
+                );
 
                 for (int i = 0; i < thisFields.Length; i++)
                 {
@@ -50,15 +61,23 @@ namespace System
             return true;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Unused fields don't make a difference for hashcode quality")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Unused fields don't make a difference for hashcode quality"
+        )]
         public override int GetHashCode()
         {
             Type type = GetType();
 
             while (type != typeof(Attribute))
             {
-                FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+                FieldInfo[] fields = type.GetFields(
+                    BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.DeclaredOnly
+                );
                 object? vThis = null;
 
                 for (int i = 0; i < fields.Length; i++)
@@ -116,7 +135,9 @@ namespace System
                 Debug.Assert(thisValueArray.Rank == 1 && thatValueArray.Rank == 1);
                 for (int j = 0; j < thisValueArray.Length; j++)
                 {
-                    if (!AreFieldValuesEqual(thisValueArray.GetValue(j), thatValueArray.GetValue(j)))
+                    if (
+                        !AreFieldValuesEqual(thisValueArray.GetValue(j), thatValueArray.GetValue(j))
+                    )
                     {
                         return false;
                     }

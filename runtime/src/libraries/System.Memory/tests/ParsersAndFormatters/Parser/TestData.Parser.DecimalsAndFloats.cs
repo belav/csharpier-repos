@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace System.Buffers.Text.Tests
 {
@@ -23,20 +23,45 @@ namespace System.Buffers.Text.Tests
                     if (d.High == 0 && d.Mid == 0 && d.Low == 0 && d.IsNegative)
                         continue; // -0 is not roundtrippable
 
-                    foreach (ParserTestData<decimal> testData in new FormatterTestData<decimal>[] { ftd }.ToParserTheoryDataCollection())
+                    foreach (
+                        ParserTestData<decimal> testData in new FormatterTestData<decimal>[]
+                        {
+                            ftd,
+                        }.ToParserTheoryDataCollection()
+                    )
                     {
                         yield return testData;
                     }
                 }
 
-                foreach (ParserTestData<decimal> testData in GenerateNumberBasedParserTestData<decimal>(DecimalFormats, decimal.TryParse))
+                foreach (
+                    ParserTestData<decimal> testData in GenerateNumberBasedParserTestData<decimal>(
+                        DecimalFormats,
+                        decimal.TryParse
+                    )
+                )
                 {
                     yield return testData;
                 }
 
-                yield return new ParserTestData<decimal>("1e" + int.MaxValue, default, 'E', expectedSuccess: false);
-                yield return new ParserTestData<decimal>("0.01e" + int.MinValue, new MutableDecimal() { Scale = 28 }.ToDecimal(), 'E', expectedSuccess: true);
-                yield return new ParserTestData<decimal>("-0.01e" + int.MinValue, new MutableDecimal() { Scale = 28, IsNegative = true }.ToDecimal(), 'E', expectedSuccess: true);
+                yield return new ParserTestData<decimal>(
+                    "1e" + int.MaxValue,
+                    default,
+                    'E',
+                    expectedSuccess: false
+                );
+                yield return new ParserTestData<decimal>(
+                    "0.01e" + int.MinValue,
+                    new MutableDecimal() { Scale = 28 }.ToDecimal(),
+                    'E',
+                    expectedSuccess: true
+                );
+                yield return new ParserTestData<decimal>(
+                    "-0.01e" + int.MinValue,
+                    new MutableDecimal() { Scale = 28, IsNegative = true }.ToDecimal(),
+                    'E',
+                    expectedSuccess: true
+                );
             }
         }
 
@@ -44,16 +69,36 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<double> testData in GenerateNumberBasedParserTestData<double>(FloatingPointFormats, double.TryParse))
+                foreach (
+                    ParserTestData<double> testData in GenerateNumberBasedParserTestData<double>(
+                        FloatingPointFormats,
+                        double.TryParse
+                    )
+                )
                 {
                     yield return testData;
                 }
 
                 foreach (char formatSymbol in DecimalFormats.Select(f => f.Symbol))
                 {
-                    yield return new ParserTestData<double>("Infinity", double.PositiveInfinity, formatSymbol, expectedSuccess: true);
-                    yield return new ParserTestData<double>("-Infinity", double.NegativeInfinity, formatSymbol, expectedSuccess: true);
-                    yield return new ParserTestData<double>("NaN", double.NaN, formatSymbol, expectedSuccess: true);
+                    yield return new ParserTestData<double>(
+                        "Infinity",
+                        double.PositiveInfinity,
+                        formatSymbol,
+                        expectedSuccess: true
+                    );
+                    yield return new ParserTestData<double>(
+                        "-Infinity",
+                        double.NegativeInfinity,
+                        formatSymbol,
+                        expectedSuccess: true
+                    );
+                    yield return new ParserTestData<double>(
+                        "NaN",
+                        double.NaN,
+                        formatSymbol,
+                        expectedSuccess: true
+                    );
                 }
             }
         }
@@ -62,33 +107,69 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<float> testData in GenerateNumberBasedParserTestData<float>(FloatingPointFormats, float.TryParse))
+                foreach (
+                    ParserTestData<float> testData in GenerateNumberBasedParserTestData<float>(
+                        FloatingPointFormats,
+                        float.TryParse
+                    )
+                )
                 {
                     yield return testData;
                 }
 
                 foreach (char formatSymbol in DecimalFormats.Select(f => f.Symbol))
                 {
-                    yield return new ParserTestData<float>("Infinity", float.PositiveInfinity, formatSymbol, expectedSuccess: true);
-                    yield return new ParserTestData<float>("-Infinity", float.NegativeInfinity, formatSymbol, expectedSuccess: true);
-                    yield return new ParserTestData<float>("NaN", float.NaN, formatSymbol, expectedSuccess: true);
+                    yield return new ParserTestData<float>(
+                        "Infinity",
+                        float.PositiveInfinity,
+                        formatSymbol,
+                        expectedSuccess: true
+                    );
+                    yield return new ParserTestData<float>(
+                        "-Infinity",
+                        float.NegativeInfinity,
+                        formatSymbol,
+                        expectedSuccess: true
+                    );
+                    yield return new ParserTestData<float>(
+                        "NaN",
+                        float.NaN,
+                        formatSymbol,
+                        expectedSuccess: true
+                    );
                 }
             }
         }
 
-        private static IEnumerable<ParserTestData<T>> GenerateNumberBasedParserTestData<T>(IEnumerable<SupportedFormat> formats, TryParseDelegate<T> tryParse)
+        private static IEnumerable<ParserTestData<T>> GenerateNumberBasedParserTestData<T>(
+            IEnumerable<SupportedFormat> formats,
+            TryParseDelegate<T> tryParse
+        )
         {
             foreach (char formatSymbol in formats.Select(f => f.Symbol))
             {
-                foreach (ParserTestData<T> testData in GeneratedParserTestDataUsingParseExact<T>(formatSymbol, NumberTestData,
-                        (string text, string format, IFormatProvider formatProvider, out T result) =>
+                foreach (
+                    ParserTestData<T> testData in GeneratedParserTestDataUsingParseExact<T>(
+                        formatSymbol,
+                        NumberTestData,
+                        (
+                            string text,
+                            string format,
+                            IFormatProvider formatProvider,
+                            out T result
+                        ) =>
                         {
-                            NumberStyles style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign;
+                            NumberStyles style =
+                                NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign;
                             if (formatSymbol != 'F' && formatSymbol != 'f')
                             {
                                 style |= NumberStyles.AllowExponent;
                             }
-                            if ((formatSymbol == 'E' || formatSymbol == 'e') && text.IndexOf("E", StringComparison.InvariantCultureIgnoreCase) == -1)
+                            if (
+                                (formatSymbol == 'E' || formatSymbol == 'e')
+                                && text.IndexOf("E", StringComparison.InvariantCultureIgnoreCase)
+                                    == -1
+                            )
                             {
                                 result = default;
                                 return false;
@@ -97,13 +178,20 @@ namespace System.Buffers.Text.Tests
                             {
                                 return tryParse(text, style, formatProvider, out result);
                             }
-                        }))
+                        }
+                    )
+                )
                 {
                     yield return testData;
                 }
             }
         }
 
-        private delegate bool TryParseDelegate<T>(string text, NumberStyles style, IFormatProvider formatProvider, out T result);
+        private delegate bool TryParseDelegate<T>(
+            string text,
+            NumberStyles style,
+            IFormatProvider formatProvider,
+            out T result
+        );
     }
 }

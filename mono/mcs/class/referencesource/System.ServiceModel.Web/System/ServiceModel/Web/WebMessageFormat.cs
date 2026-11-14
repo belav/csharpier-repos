@@ -7,6 +7,6 @@ namespace System.ServiceModel.Web
     public enum WebMessageFormat
     {
         Xml,
-        Json
+        Json,
     }
 }

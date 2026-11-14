@@ -44,24 +44,92 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
     //       Naming
     //     IntelliSense
 
-    [ProvideLanguageEditorOptionPage(typeof(Options.AdvancedOptionPage), "CSharp", null, "Advanced", pageNameResourceId: "#102", keywordListResourceId: 306)]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.AdvancedOptionPage),
+        "CSharp",
+        null,
+        "Advanced",
+        pageNameResourceId: "#102",
+        keywordListResourceId: 306
+    )]
     [ProvideLanguageEditorToolsOptionCategory("CSharp", "Code Style", "#114")]
-    [ProvideLanguageEditorOptionPage(typeof(Options.Formatting.CodeStylePage), "CSharp", @"Code Style", "General", pageNameResourceId: "#108", keywordListResourceId: 313)]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.Formatting.CodeStylePage),
+        "CSharp",
+        @"Code Style",
+        "General",
+        pageNameResourceId: "#108",
+        keywordListResourceId: 313
+    )]
     [ProvideLanguageEditorToolsOptionCategory("CSharp", @"Code Style\Formatting", "#107")]
-    [ProvideLanguageEditorOptionPage(typeof(Options.Formatting.FormattingOptionPage), "CSharp", @"Code Style\Formatting", "General", pageNameResourceId: "#108", keywordListResourceId: 307)]
-    [ProvideLanguageEditorOptionPage(typeof(Options.Formatting.FormattingIndentationOptionPage), "CSharp", @"Code Style\Formatting", "Indentation", pageNameResourceId: "#109", keywordListResourceId: 308)]
-    [ProvideLanguageEditorOptionPage(typeof(Options.Formatting.FormattingWrappingPage), "CSharp", @"Code Style\Formatting", "Wrapping", pageNameResourceId: "#110", keywordListResourceId: 311)]
-    [ProvideLanguageEditorOptionPage(typeof(Options.Formatting.FormattingNewLinesPage), "CSharp", @"Code Style\Formatting", "NewLines", pageNameResourceId: "#111", keywordListResourceId: 309)]
-    [ProvideLanguageEditorOptionPage(typeof(Options.Formatting.FormattingSpacingPage), "CSharp", @"Code Style\Formatting", "Spacing", pageNameResourceId: "#112", keywordListResourceId: 310)]
-    [ProvideLanguageEditorOptionPage(typeof(Options.NamingStylesOptionPage), "CSharp", @"Code Style", "Naming", pageNameResourceId: "#115", keywordListResourceId: 314)]
-    [ProvideLanguageEditorOptionPage(typeof(Options.IntelliSenseOptionPage), "CSharp", null, "IntelliSense", pageNameResourceId: "#103", keywordListResourceId: 312)]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.Formatting.FormattingOptionPage),
+        "CSharp",
+        @"Code Style\Formatting",
+        "General",
+        pageNameResourceId: "#108",
+        keywordListResourceId: 307
+    )]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.Formatting.FormattingIndentationOptionPage),
+        "CSharp",
+        @"Code Style\Formatting",
+        "Indentation",
+        pageNameResourceId: "#109",
+        keywordListResourceId: 308
+    )]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.Formatting.FormattingWrappingPage),
+        "CSharp",
+        @"Code Style\Formatting",
+        "Wrapping",
+        pageNameResourceId: "#110",
+        keywordListResourceId: 311
+    )]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.Formatting.FormattingNewLinesPage),
+        "CSharp",
+        @"Code Style\Formatting",
+        "NewLines",
+        pageNameResourceId: "#111",
+        keywordListResourceId: 309
+    )]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.Formatting.FormattingSpacingPage),
+        "CSharp",
+        @"Code Style\Formatting",
+        "Spacing",
+        pageNameResourceId: "#112",
+        keywordListResourceId: 310
+    )]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.NamingStylesOptionPage),
+        "CSharp",
+        @"Code Style",
+        "Naming",
+        pageNameResourceId: "#115",
+        keywordListResourceId: 314
+    )]
+    [ProvideLanguageEditorOptionPage(
+        typeof(Options.IntelliSenseOptionPage),
+        "CSharp",
+        null,
+        "IntelliSense",
+        pageNameResourceId: "#103",
+        keywordListResourceId: 312
+    )]
     [Guid(Guids.CSharpPackageIdString)]
-    internal sealed class CSharpPackage : AbstractPackage<CSharpPackage, CSharpLanguageService>, IVsUserSettingsQuery
+    internal sealed class CSharpPackage
+        : AbstractPackage<CSharpPackage, CSharpLanguageService>,
+            IVsUserSettingsQuery
     {
         private ObjectBrowserLibraryManager _libraryManager;
         private uint _libraryManagerCookie;
 
-        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        protected override async Task InitializeAsync(
+            CancellationToken cancellationToken,
+            IProgress<ServiceProgressData> progress
+        )
         {
             try
             {
@@ -73,38 +141,56 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 {
                     var workspace = this.ComponentModel.GetService<VisualStudioWorkspace>();
                     await JoinableTaskFactory.SwitchToMainThreadAsync(ct);
-                    return new TempPECompilerService(workspace.Services.GetService<IMetadataService>());
+                    return new TempPECompilerService(
+                        workspace.Services.GetService<IMetadataService>()
+                    );
                 });
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, ErrorSeverity.General))
-            {
-            }
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, ErrorSeverity.General)) { }
         }
 
-        protected override async Task RegisterObjectBrowserLibraryManagerAsync(CancellationToken cancellationToken)
+        protected override async Task RegisterObjectBrowserLibraryManagerAsync(
+            CancellationToken cancellationToken
+        )
         {
             var workspace = this.ComponentModel.GetService<VisualStudioWorkspace>();
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            if (await GetServiceAsync(typeof(SVsObjectManager)).ConfigureAwait(true) is IVsObjectManager2 objectManager)
+            if (
+                await GetServiceAsync(typeof(SVsObjectManager)).ConfigureAwait(true)
+                is IVsObjectManager2 objectManager
+            )
             {
                 _libraryManager = new ObjectBrowserLibraryManager(this, ComponentModel, workspace);
 
-                if (ErrorHandler.Failed(objectManager.RegisterSimpleLibrary(_libraryManager, out _libraryManagerCookie)))
+                if (
+                    ErrorHandler.Failed(
+                        objectManager.RegisterSimpleLibrary(
+                            _libraryManager,
+                            out _libraryManagerCookie
+                        )
+                    )
+                )
                 {
                     _libraryManagerCookie = 0;
                 }
             }
         }
 
-        protected override async Task UnregisterObjectBrowserLibraryManagerAsync(CancellationToken cancellationToken)
+        protected override async Task UnregisterObjectBrowserLibraryManagerAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             if (_libraryManagerCookie != 0)
             {
-                if (await GetServiceAsync(typeof(SVsObjectManager)).ConfigureAwait(true) is IVsObjectManager2 objectManager)
+                if (
+                    await GetServiceAsync(typeof(SVsObjectManager)).ConfigureAwait(true)
+                    is IVsObjectManager2 objectManager
+                )
                 {
                     objectManager.UnregisterLibrary(_libraryManagerCookie);
                     _libraryManagerCookie = 0;
@@ -127,7 +213,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
         {
             if (name == "CSharp-Specific")
             {
-                return new Options.AutomationObject(ComponentModel.GetService<ILegacyGlobalOptionService>());
+                return new Options.AutomationObject(
+                    ComponentModel.GetService<ILegacyGlobalOptionService>()
+                );
             }
 
             return base.GetAutomationObject(name);
@@ -141,23 +229,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return new IVsEditorFactory[] { editorFactory, codePageEditorFactory };
         }
 
-        protected override CSharpLanguageService CreateLanguageService()
-            => new(this);
+        protected override CSharpLanguageService CreateLanguageService() => new(this);
 
-        protected override void RegisterMiscellaneousFilesWorkspaceInformation(MiscellaneousFilesWorkspace miscellaneousFilesWorkspace)
+        protected override void RegisterMiscellaneousFilesWorkspaceInformation(
+            MiscellaneousFilesWorkspace miscellaneousFilesWorkspace
+        )
         {
             miscellaneousFilesWorkspace.RegisterLanguage(
                 Guids.CSharpLanguageServiceId,
                 LanguageNames.CSharp,
-                ".csx");
+                ".csx"
+            );
         }
 
         protected override string RoslynLanguageName
         {
-            get
-            {
-                return LanguageNames.CSharp;
-            }
+            get { return LanguageNames.CSharp; }
         }
     }
 }

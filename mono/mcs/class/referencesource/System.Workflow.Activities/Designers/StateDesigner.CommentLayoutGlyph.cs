@@ -1,23 +1,23 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Windows.Forms;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
 
     internal partial class StateDesigner : FreeformActivityDesigner
     {
@@ -44,13 +44,15 @@ namespace System.Workflow.Activities
 
             public override int Priority
             {
-                get
-                {
-                    return DesignerGlyph.NormalPriority;
-                }
+                get { return DesignerGlyph.NormalPriority; }
             }
 
-            protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+            protected override void OnPaint(
+                Graphics graphics,
+                bool activated,
+                AmbientTheme ambientTheme,
+                ActivityDesigner designer
+            )
             {
                 if (designer == null)
                     throw new ArgumentNullException("designer");

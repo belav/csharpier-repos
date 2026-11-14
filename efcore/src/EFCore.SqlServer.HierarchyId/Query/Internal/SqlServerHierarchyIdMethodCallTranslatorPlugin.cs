@@ -22,9 +22,13 @@ public class SqlServerHierarchyIdMethodCallTranslatorPlugin : IMethodCallTransla
     /// </summary>
     public SqlServerHierarchyIdMethodCallTranslatorPlugin(
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
-        Translators = new IMethodCallTranslator[] { new SqlServerHierarchyIdMethodTranslator(typeMappingSource, sqlExpressionFactory) };
+        Translators = new IMethodCallTranslator[]
+        {
+            new SqlServerHierarchyIdMethodTranslator(typeMappingSource, sqlExpressionFactory),
+        };
     }
 
     /// <summary>

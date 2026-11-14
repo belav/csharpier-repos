@@ -27,9 +27,7 @@ namespace System.ComponentModel
         /// Creates a new DesignTimeVisibleAttribute set to the default
         /// value of true.
         /// </summary>
-        public DesignTimeVisibleAttribute()
-        {
-        }
+        public DesignTimeVisibleAttribute() { }
 
         /// <summary>
         /// True if this component should be shown at design time, or false
@@ -40,12 +38,16 @@ namespace System.ComponentModel
         /// <summary>
         /// Marks a component as visible in a visual designer.
         /// </summary>
-        public static readonly DesignTimeVisibleAttribute Yes = new DesignTimeVisibleAttribute(true);
+        public static readonly DesignTimeVisibleAttribute Yes = new DesignTimeVisibleAttribute(
+            true
+        );
 
         /// <summary>
         /// Marks a component as not visible in a visual designer.
         /// </summary>
-        public static readonly DesignTimeVisibleAttribute No = new DesignTimeVisibleAttribute(false);
+        public static readonly DesignTimeVisibleAttribute No = new DesignTimeVisibleAttribute(
+            false
+        );
 
         /// <summary>
         /// The default visibility. (equal to Yes.)
@@ -62,7 +64,8 @@ namespace System.ComponentModel
             return obj is DesignTimeVisibleAttribute other && other.Visible == Visible;
         }
 
-        public override int GetHashCode() => typeof(DesignTimeVisibleAttribute).GetHashCode() ^ (Visible ? -1 : 0);
+        public override int GetHashCode() =>
+            typeof(DesignTimeVisibleAttribute).GetHashCode() ^ (Visible ? -1 : 0);
 
         public override bool IsDefaultAttribute() => Visible == Default.Visible;
     }

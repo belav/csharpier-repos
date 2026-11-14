@@ -20,14 +20,23 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
         static Extensions()
         {
-            MicrosoftCodeAnalysisFeaturesAssembly = Assembly.Load(new AssemblyName("Microsoft.CodeAnalysis.Features"));
-            IDEDiagnosticIdToOptionMappingHelperType = MicrosoftCodeAnalysisFeaturesAssembly.GetType("Microsoft.CodeAnalysis.Diagnostics.IDEDiagnosticIdToOptionMappingHelper")!;
-            TryGetMappedOptionsMethod = IDEDiagnosticIdToOptionMappingHelperType.GetMethod("TryGetMappedOptions", BindingFlags.Static | BindingFlags.Public)!;
+            MicrosoftCodeAnalysisFeaturesAssembly = Assembly.Load(
+                new AssemblyName("Microsoft.CodeAnalysis.Features")
+            );
+            IDEDiagnosticIdToOptionMappingHelperType =
+                MicrosoftCodeAnalysisFeaturesAssembly.GetType(
+                    "Microsoft.CodeAnalysis.Diagnostics.IDEDiagnosticIdToOptionMappingHelper"
+                )!;
+            TryGetMappedOptionsMethod = IDEDiagnosticIdToOptionMappingHelperType.GetMethod(
+                "TryGetMappedOptions",
+                BindingFlags.Static | BindingFlags.Public
+            )!;
         }
 
-        public static bool Any(this SolutionChanges solutionChanges)
-                => solutionChanges.GetProjectChanges()
-                    .Any(x => x.GetChangedDocuments().Any() || x.GetChangedAdditionalDocuments().Any());
+        public static bool Any(this SolutionChanges solutionChanges) =>
+            solutionChanges
+                .GetProjectChanges()
+                .Any(x => x.GetChangedDocuments().Any() || x.GetChangedAdditionalDocuments().Any());
 
         /// <summary>
         /// Get the highest possible severity for any formattable document in the project.
@@ -36,10 +45,13 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             this DiagnosticAnalyzer analyzer,
             Project project,
             ImmutableHashSet<string> formattablePaths,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var severity = DiagnosticSeverity.Hidden;
-            var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project
+                .GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (compilation is null)
             {
                 return severity;
@@ -53,9 +65,16 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     continue;
                 }
 
-                var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
+                var options = await document
+                    .GetOptionsAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                var documentSeverity = analyzer.GetSeverity(document, project.AnalyzerOptions, options, compilation);
+                var documentSeverity = analyzer.GetSeverity(
+                    document,
+                    project.AnalyzerOptions,
+                    options,
+                    compilation
+                );
                 if (documentSeverity > severity)
                 {
                     severity = documentSeverity;
@@ -72,7 +91,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 ReportDiagnostic.Error => DiagnosticSeverity.Error,
                 ReportDiagnostic.Warn => DiagnosticSeverity.Warning,
                 ReportDiagnostic.Info => DiagnosticSeverity.Info,
-                _ => DiagnosticSeverity.Hidden
+                _ => DiagnosticSeverity.Hidden,
             };
         }
 
@@ -81,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             Document document,
             AnalyzerOptions? analyzerOptions,
             OptionSet options,
-            Compilation compilation)
+            Compilation compilation
+        )
         {
             var severity = DiagnosticSeverity.Hidden;
 
@@ -97,7 +117,14 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     break;
                 }
 
-                if (analyzerOptions.TryGetSeverityFromConfiguration(tree, compilation, descriptor, out var reportDiagnostic))
+                if (
+                    analyzerOptions.TryGetSeverityFromConfiguration(
+                        tree,
+                        compilation,
+                        descriptor,
+                        out var reportDiagnostic
+                    )
+                )
                 {
                     var configuredSeverity = reportDiagnostic.ToSeverity();
                     if (configuredSeverity > severity)
@@ -108,7 +135,14 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     continue;
                 }
 
-                if (TryGetSeverityFromCodeStyleOption(descriptor, compilation, options, out var codeStyleSeverity))
+                if (
+                    TryGetSeverityFromCodeStyleOption(
+                        descriptor,
+                        compilation,
+                        options,
+                        out var codeStyleSeverity
+                    )
+                )
                 {
                     if (codeStyleSeverity > severity)
                     {
@@ -130,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 DiagnosticDescriptor descriptor,
                 Compilation compilation,
                 OptionSet options,
-                out DiagnosticSeverity severity)
+                out DiagnosticSeverity severity
+            )
             {
                 severity = DiagnosticSeverity.Hidden;
 
@@ -146,7 +181,12 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 foreach (var codeStyleOptionObj in codeStyleOptions)
                 {
                     var codeStyleOption = (IOption)codeStyleOptionObj!;
-                    var option = options.GetOption(new OptionKey(codeStyleOption, codeStyleOption.IsPerLanguage ? compilation.Language : null));
+                    var option = options.GetOption(
+                        new OptionKey(
+                            codeStyleOption,
+                            codeStyleOption.IsPerLanguage ? compilation.Language : null
+                        )
+                    );
                     if (option is null)
                     {
                         continue;
@@ -159,7 +199,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     }
 
                     var notification = notificationProperty.GetValue(option);
-                    var reportDiagnosticValue = notification?.GetType().GetProperty("Severity")?.GetValue(notification);
+                    var reportDiagnosticValue = notification
+                        ?.GetType()
+                        .GetProperty("Severity")
+                        ?.GetValue(notification);
                     if (reportDiagnosticValue is null)
                     {
                         continue;

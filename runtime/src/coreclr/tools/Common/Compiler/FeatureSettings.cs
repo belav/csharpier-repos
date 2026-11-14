@@ -8,7 +8,10 @@ namespace ILCompiler
 {
     public static class FeatureSettings
     {
-        public static bool ShouldProcessElement(XPathNavigator nav, IReadOnlyDictionary<string, bool> featureSwitchValues)
+        public static bool ShouldProcessElement(
+            XPathNavigator nav,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
         {
             var feature = GetAttribute(nav, "feature");
             if (string.IsNullOrEmpty(feature))
@@ -29,7 +32,10 @@ namespace ILCompiler
 
             var isDefault = GetAttribute(nav, "featuredefault");
             bool bIsDefault = false;
-            if (!string.IsNullOrEmpty(isDefault) && (!bool.TryParse(isDefault, out bIsDefault) || !bIsDefault))
+            if (
+                !string.IsNullOrEmpty(isDefault)
+                && (!bool.TryParse(isDefault, out bIsDefault) || !bIsDefault)
+            )
             {
                 //context.LogError(null, DiagnosticId.XmlDocumentLocationHasInvalidFeatureDefault, documentLocation);
                 return false;

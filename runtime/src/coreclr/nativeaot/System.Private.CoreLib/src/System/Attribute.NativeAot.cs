@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime;
 
 namespace System
@@ -43,8 +42,14 @@ namespace System
                 Debug.Assert(!fieldType->IsPointer && !fieldType->IsFunctionPointer);
 
                 // Fetch the value of the field on both types
-                object thisResult = RuntimeImports.RhBoxAny(ref Unsafe.Add(ref thisRawData, fieldOffset), fieldType);
-                object thatResult = RuntimeImports.RhBoxAny(ref Unsafe.Add(ref thatRawData, fieldOffset), fieldType);
+                object thisResult = RuntimeImports.RhBoxAny(
+                    ref Unsafe.Add(ref thisRawData, fieldOffset),
+                    fieldType
+                );
+                object thatResult = RuntimeImports.RhBoxAny(
+                    ref Unsafe.Add(ref thatRawData, fieldOffset),
+                    fieldType
+                );
 
                 if (!AreFieldValuesEqual(thisResult, thatResult))
                 {
@@ -69,7 +74,10 @@ namespace System
 
                 Debug.Assert(!fieldType->IsPointer && !fieldType->IsFunctionPointer);
 
-                object? fieldValue = RuntimeImports.RhBoxAny(ref Unsafe.Add(ref thisRawData, fieldOffset), fieldType);
+                object? fieldValue = RuntimeImports.RhBoxAny(
+                    ref Unsafe.Add(ref thisRawData, fieldOffset),
+                    fieldType
+                );
 
                 // The hashcode of an array ignores the contents of the array, so it can produce
                 // different hashcodes for arrays with the same contents.

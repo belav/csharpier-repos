@@ -23,10 +23,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             var ws = new AdhocWorkspace();
 
-            var csservice = ws.Services.GetLanguageServices(LanguageNames.CSharp).GetService<Microsoft.CodeAnalysis.Completion.CompletionService>();
+            var csservice = ws
+                .Services.GetLanguageServices(LanguageNames.CSharp)
+                .GetService<Microsoft.CodeAnalysis.Completion.CompletionService>();
             Assert.NotNull(csservice);
 
-            var vbservice = ws.Services.GetLanguageServices(LanguageNames.VisualBasic).GetService<Microsoft.CodeAnalysis.Completion.CompletionService>();
+            var vbservice = ws
+                .Services.GetLanguageServices(LanguageNames.VisualBasic)
+                .GetService<Microsoft.CodeAnalysis.Completion.CompletionService>();
             Assert.NotNull(vbservice);
         }
     }

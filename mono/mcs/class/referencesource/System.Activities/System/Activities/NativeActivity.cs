@@ -15,16 +15,11 @@ namespace System.Activities
     public abstract class NativeActivity : Activity, IInstanceUpdatable
     {
         protected NativeActivity()
-            : base()
-        {
-        }
+            : base() { }
 
         protected internal sealed override Version ImplementationVersion
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (value != null)
@@ -38,10 +33,7 @@ namespace System.Activities
         [Fx.Tag.KnownXamlExternal]
         protected sealed override Func<Activity> Implementation
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (value != null)
@@ -53,45 +45,47 @@ namespace System.Activities
 
         protected virtual bool CanInduceIdle
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal override bool InternalCanInduceIdle
         {
-            get
-            {
-                return this.CanInduceIdle;
-            }
+            get { return this.CanInduceIdle; }
         }
 
         protected abstract void Execute(NativeActivityContext context);
 
-        protected virtual void Abort(NativeActivityAbortContext context)
-        {
-        }
+        protected virtual void Abort(NativeActivityAbortContext context) { }
 
         protected virtual void Cancel(NativeActivityContext context)
         {
             if (!context.IsCancellationRequested)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DefaultCancelationRequiresCancelHasBeenRequested));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DefaultCancelationRequiresCancelHasBeenRequested
+                    )
+                );
             }
             context.Cancel();
         }
 
-        sealed internal override void OnInternalCacheMetadata(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadata(bool createEmptyBindings)
         {
-            NativeActivityMetadata metadata = new NativeActivityMetadata(this, GetParentEnvironment(), createEmptyBindings);
+            NativeActivityMetadata metadata = new NativeActivityMetadata(
+                this,
+                GetParentEnvironment(),
+                createEmptyBindings
+            );
             CacheMetadata(metadata);
             metadata.Dispose();
         }
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity)
+            );
         }
 
         protected virtual void CacheMetadata(NativeActivityMetadata metadata)
@@ -105,10 +99,17 @@ namespace System.Activities
             SetVariablesCollection(information.GetVariables());
         }
 
-        internal sealed override void OnInternalCreateDynamicUpdateMap(DynamicUpdateMapBuilder.Finalizer finalizer, 
-            DynamicUpdateMapBuilder.IDefinitionMatcher matcher, Activity originalActivity)
+        internal sealed override void OnInternalCreateDynamicUpdateMap(
+            DynamicUpdateMapBuilder.Finalizer finalizer,
+            DynamicUpdateMapBuilder.IDefinitionMatcher matcher,
+            Activity originalActivity
+        )
         {
-            NativeActivityUpdateMapMetadata metadata = new NativeActivityUpdateMapMetadata(finalizer, matcher, this);
+            NativeActivityUpdateMapMetadata metadata = new NativeActivityUpdateMapMetadata(
+                finalizer,
+                matcher,
+                this
+            );
             try
             {
                 OnCreateDynamicUpdateMap(metadata, originalActivity);
@@ -119,28 +120,62 @@ namespace System.Activities
             }
         }
 
-        protected sealed override void OnCreateDynamicUpdateMap(UpdateMapMetadata metadata, Activity originalActivity)
+        protected sealed override void OnCreateDynamicUpdateMap(
+            UpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity)
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Runtime passes in derived class to make more functionality availble to overriders")]
-        protected virtual void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Runtime passes in derived class to make more functionality availble to overriders"
+        )]
+        protected virtual void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
-            // default UpdateMapMetadata.AllowUpdateInsideThisActivity is TRUE 
-            if (!metadata.IsUpdateExplicitlyAllowedOrDisallowed && !DoPublicChildrenMatch(metadata, this, originalActivity))
+            // default UpdateMapMetadata.AllowUpdateInsideThisActivity is TRUE
+            if (
+                !metadata.IsUpdateExplicitlyAllowedOrDisallowed
+                && !DoPublicChildrenMatch(metadata, this, originalActivity)
+            )
             {
                 metadata.DisallowUpdateInsideThisActivity(SR.PublicChildrenChangeBlockDU);
             }
         }
 
-        internal static bool DoPublicChildrenMatch(UpdateMapMetadata metadata, Activity updatedActivity, Activity originalActivity)
+        internal static bool DoPublicChildrenMatch(
+            UpdateMapMetadata metadata,
+            Activity updatedActivity,
+            Activity originalActivity
+        )
         {
-            return ActivityComparer.ListEquals(updatedActivity.Children, originalActivity.Children, metadata.AreMatch) &&
-                ActivityComparer.ListEquals(updatedActivity.Delegates, originalActivity.Delegates, metadata.AreMatch) &&
-                ActivityComparer.ListEquals(updatedActivity.ImportedChildren, originalActivity.ImportedChildren, metadata.AreMatch) &&
-                ActivityComparer.ListEquals(updatedActivity.ImportedDelegates, originalActivity.ImportedDelegates, metadata.AreMatch);
+            return ActivityComparer.ListEquals(
+                    updatedActivity.Children,
+                    originalActivity.Children,
+                    metadata.AreMatch
+                )
+                && ActivityComparer.ListEquals(
+                    updatedActivity.Delegates,
+                    originalActivity.Delegates,
+                    metadata.AreMatch
+                )
+                && ActivityComparer.ListEquals(
+                    updatedActivity.ImportedChildren,
+                    originalActivity.ImportedChildren,
+                    metadata.AreMatch
+                )
+                && ActivityComparer.ListEquals(
+                    updatedActivity.ImportedDelegates,
+                    originalActivity.ImportedDelegates,
+                    metadata.AreMatch
+                );
         }
 
         void IInstanceUpdatable.InternalUpdateInstance(NativeActivityUpdateContext updateContext)
@@ -151,10 +186,14 @@ namespace System.Activities
         protected virtual void UpdateInstance(NativeActivityUpdateContext updateContext)
         {
             // note that this may be called multiple times on this same activity but with different instances
-            // Override this only if you need to update runtime state as part of a dynamic update.            
+            // Override this only if you need to update runtime state as part of a dynamic update.
         }
 
-        internal override void InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal override void InternalExecute(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             NativeActivityContext context = executor.NativeActivityContextPool.Acquire();
             try
@@ -169,9 +208,17 @@ namespace System.Activities
             }
         }
 
-        internal override void InternalAbort(ActivityInstance instance, ActivityExecutor executor, Exception terminationReason)
+        internal override void InternalAbort(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            Exception terminationReason
+        )
         {
-            NativeActivityAbortContext context = new NativeActivityAbortContext(instance, executor, terminationReason);
+            NativeActivityAbortContext context = new NativeActivityAbortContext(
+                instance,
+                executor,
+                terminationReason
+            );
             try
             {
                 Abort(context);
@@ -182,7 +229,11 @@ namespace System.Activities
             }
         }
 
-        internal override void InternalCancel(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal override void InternalCancel(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             NativeActivityContext context = executor.NativeActivityContextPool.Acquire();
             try
@@ -200,18 +251,12 @@ namespace System.Activities
 
     public abstract class NativeActivity<TResult> : Activity<TResult>, IInstanceUpdatable
     {
-
         protected NativeActivity()
-            : base()
-        {
-        }
+            : base() { }
 
         protected internal sealed override Version ImplementationVersion
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (value != null)
@@ -225,10 +270,7 @@ namespace System.Activities
         [Fx.Tag.KnownXamlExternal]
         protected sealed override Func<Activity> Implementation
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (value != null)
@@ -240,45 +282,47 @@ namespace System.Activities
 
         protected virtual bool CanInduceIdle
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal override bool InternalCanInduceIdle
         {
-            get
-            {
-                return this.CanInduceIdle;
-            }
+            get { return this.CanInduceIdle; }
         }
 
         protected abstract void Execute(NativeActivityContext context);
 
-        protected virtual void Abort(NativeActivityAbortContext context)
-        {
-        }
+        protected virtual void Abort(NativeActivityAbortContext context) { }
 
         protected virtual void Cancel(NativeActivityContext context)
         {
             if (!context.IsCancellationRequested)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DefaultCancelationRequiresCancelHasBeenRequested));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DefaultCancelationRequiresCancelHasBeenRequested
+                    )
+                );
             }
             context.Cancel();
         }
 
-        sealed internal override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
         {
-            NativeActivityMetadata metadata = new NativeActivityMetadata(this, GetParentEnvironment(), createEmptyBindings);
+            NativeActivityMetadata metadata = new NativeActivityMetadata(
+                this,
+                GetParentEnvironment(),
+                createEmptyBindings
+            );
             CacheMetadata(metadata);
             metadata.Dispose();
         }
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity)
+            );
         }
 
         protected virtual void CacheMetadata(NativeActivityMetadata metadata)
@@ -292,10 +336,17 @@ namespace System.Activities
             SetVariablesCollection(information.GetVariables());
         }
 
-        internal sealed override void OnInternalCreateDynamicUpdateMap(DynamicUpdateMapBuilder.Finalizer finalizer,
-            DynamicUpdateMapBuilder.IDefinitionMatcher matcher, Activity originalActivity)
+        internal sealed override void OnInternalCreateDynamicUpdateMap(
+            DynamicUpdateMapBuilder.Finalizer finalizer,
+            DynamicUpdateMapBuilder.IDefinitionMatcher matcher,
+            Activity originalActivity
+        )
         {
-            NativeActivityUpdateMapMetadata metadata = new NativeActivityUpdateMapMetadata(finalizer, matcher, this);
+            NativeActivityUpdateMapMetadata metadata = new NativeActivityUpdateMapMetadata(
+                finalizer,
+                matcher,
+                this
+            );
             try
             {
                 OnCreateDynamicUpdateMap(metadata, originalActivity);
@@ -306,17 +357,31 @@ namespace System.Activities
             }
         }
 
-        protected sealed override void OnCreateDynamicUpdateMap(UpdateMapMetadata metadata, Activity originalActivity)
+        protected sealed override void OnCreateDynamicUpdateMap(
+            UpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity)
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Runtime passes in derived class to make more functionality availble to overriders")]
-        protected virtual void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Runtime passes in derived class to make more functionality availble to overriders"
+        )]
+        protected virtual void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
-            // default UpdateMapMetadata.AllowUpdateInsideThisActivity is TRUE 
-            if (!metadata.IsUpdateExplicitlyAllowedOrDisallowed && !NativeActivity.DoPublicChildrenMatch(metadata, this, originalActivity))
+            // default UpdateMapMetadata.AllowUpdateInsideThisActivity is TRUE
+            if (
+                !metadata.IsUpdateExplicitlyAllowedOrDisallowed
+                && !NativeActivity.DoPublicChildrenMatch(metadata, this, originalActivity)
+            )
             {
                 metadata.DisallowUpdateInsideThisActivity(SR.PublicChildrenChangeBlockDU);
             }
@@ -330,10 +395,14 @@ namespace System.Activities
         protected virtual void UpdateInstance(NativeActivityUpdateContext updateContext)
         {
             // note that this may be called multiple times on this same activity but with different instances
-            // Override this only if you need to update runtime state as part of a dynamic update.            
+            // Override this only if you need to update runtime state as part of a dynamic update.
         }
 
-        internal override void InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal override void InternalExecute(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             NativeActivityContext context = executor.NativeActivityContextPool.Acquire();
             try
@@ -348,9 +417,17 @@ namespace System.Activities
             }
         }
 
-        internal override void InternalAbort(ActivityInstance instance, ActivityExecutor executor, Exception terminationReason)
+        internal override void InternalAbort(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            Exception terminationReason
+        )
         {
-            NativeActivityAbortContext context = new NativeActivityAbortContext(instance, executor, terminationReason);
+            NativeActivityAbortContext context = new NativeActivityAbortContext(
+                instance,
+                executor,
+                terminationReason
+            );
             try
             {
                 Abort(context);
@@ -361,7 +438,11 @@ namespace System.Activities
             }
         }
 
-        internal override void InternalCancel(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal override void InternalCancel(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             NativeActivityContext context = executor.NativeActivityContextPool.Acquire();
             try
@@ -375,7 +456,5 @@ namespace System.Activities
                 executor.NativeActivityContextPool.Release(context);
             }
         }
-    }  
+    }
 }
-
-

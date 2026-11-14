@@ -16,7 +16,11 @@ namespace Microsoft.Cci
         private readonly ITypeDefinition _inheritingType;
         private readonly IGenericTypeParameter _parentParameter;
 
-        internal InheritedTypeParameter(ushort index, ITypeDefinition inheritingType, IGenericTypeParameter parentParameter)
+        internal InheritedTypeParameter(
+            ushort index,
+            ITypeDefinition inheritingType,
+            IGenericTypeParameter parentParameter
+        )
         {
             _index = index;
             _inheritingType = inheritingType;
@@ -56,15 +60,19 @@ namespace Microsoft.Cci
 
         public TypeParameterVariance Variance
         {
-            get { return _inheritingType.IsInterface || _inheritingType.IsDelegate ? _parentParameter.Variance : TypeParameterVariance.NonVariant; }
+            get
+            {
+                return _inheritingType.IsInterface || _inheritingType.IsDelegate
+                    ? _parentParameter.Variance
+                    : TypeParameterVariance.NonVariant;
+            }
         }
 
         #endregion
 
         #region ITypeDefinition Members
 
-        public bool IsEncDeleted
-            => false;
+        public bool IsEncDeleted => false;
 
         public ushort Alignment
         {
@@ -83,50 +91,32 @@ namespace Microsoft.Cci
 
         public IArrayTypeReference? AsArrayTypeReference
         {
-            get
-            {
-                return this as IArrayTypeReference;
-            }
+            get { return this as IArrayTypeReference; }
         }
 
         public IGenericMethodParameter? AsGenericMethodParameter
         {
-            get
-            {
-                return this as IGenericMethodParameter;
-            }
+            get { return this as IGenericMethodParameter; }
         }
 
         public IGenericMethodParameterReference? AsGenericMethodParameterReference
         {
-            get
-            {
-                return this as IGenericMethodParameterReference;
-            }
+            get { return this as IGenericMethodParameterReference; }
         }
 
         public IGenericTypeInstanceReference? AsGenericTypeInstanceReference
         {
-            get
-            {
-                return this as IGenericTypeInstanceReference;
-            }
+            get { return this as IGenericTypeInstanceReference; }
         }
 
         public IGenericTypeParameter? AsGenericTypeParameter
         {
-            get
-            {
-                return this as IGenericTypeParameter;
-            }
+            get { return this as IGenericTypeParameter; }
         }
 
         public IGenericTypeParameterReference? AsGenericTypeParameterReference
         {
-            get
-            {
-                return this as IGenericTypeParameterReference;
-            }
+            get { return this as IGenericTypeParameterReference; }
         }
 
         public INamespaceTypeDefinition? AsNamespaceTypeDefinition(EmitContext context)
@@ -136,10 +126,7 @@ namespace Microsoft.Cci
 
         public INamespaceTypeReference? AsNamespaceTypeReference
         {
-            get
-            {
-                return this as INamespaceTypeReference;
-            }
+            get { return this as INamespaceTypeReference; }
         }
 
         public INestedTypeDefinition? AsNestedTypeDefinition(EmitContext context)
@@ -149,34 +136,22 @@ namespace Microsoft.Cci
 
         public INestedTypeReference? AsNestedTypeReference
         {
-            get
-            {
-                return this as INestedTypeReference;
-            }
+            get { return this as INestedTypeReference; }
         }
 
         public ISpecializedNestedTypeReference? AsSpecializedNestedTypeReference
         {
-            get
-            {
-                return this as ISpecializedNestedTypeReference;
-            }
+            get { return this as ISpecializedNestedTypeReference; }
         }
 
         public IModifiedTypeReference? AsModifiedTypeReference
         {
-            get
-            {
-                return this as IModifiedTypeReference;
-            }
+            get { return this as IModifiedTypeReference; }
         }
 
         public IPointerTypeReference? AsPointerTypeReference
         {
-            get
-            {
-                return this as IPointerTypeReference;
-            }
+            get { return this as IPointerTypeReference; }
         }
 
         public ITypeDefinition? AsTypeDefinition(EmitContext context)
@@ -200,9 +175,7 @@ namespace Microsoft.Cci
             return _parentParameter.GetAttributes(context);
         }
 
-        public void Dispatch(MetadataVisitor visitor)
-        {
-        }
+        public void Dispatch(MetadataVisitor visitor) { }
 
         #endregion
 
@@ -210,10 +183,7 @@ namespace Microsoft.Cci
 
         public TypeDefinitionHandle TypeDef
         {
-            get
-            {
-                return default(TypeDefinitionHandle);
-            }
+            get { return default(TypeDefinitionHandle); }
         }
 
         public bool IsAlias

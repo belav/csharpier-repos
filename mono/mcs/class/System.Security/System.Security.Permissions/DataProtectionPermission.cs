@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,126 +26,134 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Globalization;
 
-namespace System.Security.Permissions {
-	
-	[Serializable]
-	public sealed class DataProtectionPermission : CodeAccessPermission, IUnrestrictedPermission {
+namespace System.Security.Permissions
+{
+    [Serializable]
+    public sealed class DataProtectionPermission : CodeAccessPermission, IUnrestrictedPermission
+    {
+        private const int version = 1;
 
-		private const int version = 1;
+        private DataProtectionPermissionFlags _flags;
 
-		private DataProtectionPermissionFlags _flags;
+        public DataProtectionPermission(PermissionState state)
+        {
+            if (PermissionHelper.CheckPermissionState(state, true) == PermissionState.Unrestricted)
+                _flags = DataProtectionPermissionFlags.AllFlags;
+        }
 
+        public DataProtectionPermission(DataProtectionPermissionFlags flag)
+        {
+            // reuse validation by the Flags property
+            Flags = flag;
+        }
 
-		public DataProtectionPermission (PermissionState state)
-		{
-			if (PermissionHelper.CheckPermissionState (state, true) == PermissionState.Unrestricted)
-				_flags = DataProtectionPermissionFlags.AllFlags;
-		}
+        public DataProtectionPermissionFlags Flags
+        {
+            get { return _flags; }
+            set
+            {
+                if ((value & ~DataProtectionPermissionFlags.AllFlags) != 0)
+                {
+                    string msg = String.Format(Locale.GetText("Invalid enum {0}"), value);
+                    throw new ArgumentException(msg, "DataProtectionPermissionFlags");
+                }
+                _flags = value;
+            }
+        }
 
-		public DataProtectionPermission (DataProtectionPermissionFlags flag) 
-		{
-			// reuse validation by the Flags property
-			Flags = flag;
-		}
+        public bool IsUnrestricted()
+        {
+            return (_flags == DataProtectionPermissionFlags.AllFlags);
+        }
 
+        public override IPermission Copy()
+        {
+            return new DataProtectionPermission(_flags);
+        }
 
-		public DataProtectionPermissionFlags Flags {
-			get { return _flags; }
-			set {
-				if ((value & ~DataProtectionPermissionFlags.AllFlags) != 0) {
-					string msg = String.Format (Locale.GetText ("Invalid enum {0}"), value);
-					throw new ArgumentException (msg, "DataProtectionPermissionFlags");
-				}
-				_flags = value;
-			}
-		}
+        public override IPermission Intersect(IPermission target)
+        {
+            DataProtectionPermission dp = Cast(target);
+            if (dp == null)
+                return null;
 
-		public bool IsUnrestricted () 
-		{
-			return (_flags == DataProtectionPermissionFlags.AllFlags);
-		}
+            if (this.IsUnrestricted() && dp.IsUnrestricted())
+                return new DataProtectionPermission(PermissionState.Unrestricted);
+            if (this.IsUnrestricted())
+                return dp.Copy();
+            if (dp.IsUnrestricted())
+                return this.Copy();
+            return new DataProtectionPermission(_flags & dp._flags);
+        }
 
-		public override IPermission Copy () 
-		{
-			return new DataProtectionPermission (_flags);
-		}
+        public override IPermission Union(IPermission target)
+        {
+            DataProtectionPermission dp = Cast(target);
+            if (dp == null)
+                return this.Copy();
 
-		public override IPermission Intersect (IPermission target) 
-		{
-			DataProtectionPermission dp = Cast (target);
-			if (dp == null)
-				return null;
+            if (this.IsUnrestricted() || dp.IsUnrestricted())
+                return new SecurityPermission(PermissionState.Unrestricted);
 
-			if (this.IsUnrestricted () && dp.IsUnrestricted ())
-				return new DataProtectionPermission (PermissionState.Unrestricted);
-			if (this.IsUnrestricted ())
-				return dp.Copy ();
-			if (dp.IsUnrestricted ())
-				return this.Copy ();
-			return new DataProtectionPermission (_flags & dp._flags);
-		}
+            return new DataProtectionPermission(_flags | dp._flags);
+        }
 
-		public override IPermission Union (IPermission target) 
-		{
-			DataProtectionPermission dp = Cast (target);
-			if (dp == null)
-				return this.Copy ();
+        public override bool IsSubsetOf(IPermission target)
+        {
+            DataProtectionPermission dp = Cast(target);
+            if (dp == null)
+                return (_flags == DataProtectionPermissionFlags.NoFlags);
 
-			if (this.IsUnrestricted () || dp.IsUnrestricted ())
-				return new SecurityPermission (PermissionState.Unrestricted);
-			
-			return new DataProtectionPermission (_flags | dp._flags);
-		}
+            if (dp.IsUnrestricted())
+                return true;
+            if (this.IsUnrestricted())
+                return false;
 
-		public override bool IsSubsetOf (IPermission target) 
-		{
-			DataProtectionPermission dp = Cast (target);
-			if (dp == null) 
-				return (_flags == DataProtectionPermissionFlags.NoFlags);
+            return ((_flags & ~dp._flags) == 0);
+        }
 
-			if (dp.IsUnrestricted ())
-				return true;
-			if (this.IsUnrestricted ())
-				return false;
+        public override void FromXml(SecurityElement securityElement)
+        {
+            // General validation in CodeAccessPermission
+            PermissionHelper.CheckSecurityElement(
+                securityElement,
+                "securityElement",
+                version,
+                version
+            );
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
 
-			return ((_flags & ~dp._flags) == 0);
-		}
+            _flags = (DataProtectionPermissionFlags)
+                Enum.Parse(
+                    typeof(DataProtectionPermissionFlags),
+                    securityElement.Attribute("Flags")
+                );
+        }
 
-		public override void FromXml (SecurityElement securityElement) 
-		{
-			// General validation in CodeAccessPermission
-			PermissionHelper.CheckSecurityElement (securityElement, "securityElement", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+        public override SecurityElement ToXml()
+        {
+            SecurityElement e = PermissionHelper.Element(typeof(DataProtectionPermission), version);
+            e.AddAttribute("Flags", _flags.ToString());
+            return e;
+        }
 
-			_flags = (DataProtectionPermissionFlags) Enum.Parse (
-				typeof (DataProtectionPermissionFlags), securityElement.Attribute ("Flags"));
-		}
+        // helpers
 
-		public override SecurityElement ToXml () 
-		{
-			SecurityElement e = PermissionHelper.Element (typeof (DataProtectionPermission), version);
-			e.AddAttribute ("Flags", _flags.ToString ());
-			return e;
-		}
+        private DataProtectionPermission Cast(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-		// helpers
+            DataProtectionPermission dp = (target as DataProtectionPermission);
+            if (dp == null)
+            {
+                PermissionHelper.ThrowInvalidPermission(target, typeof(DataProtectionPermission));
+            }
 
-		private DataProtectionPermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
-
-			DataProtectionPermission dp = (target as DataProtectionPermission);
-			if (dp == null) {
-				PermissionHelper.ThrowInvalidPermission (target, typeof (DataProtectionPermission));
-			}
-
-			return dp;
-		}
-	}
+            return dp;
+        }
+    }
 }
-

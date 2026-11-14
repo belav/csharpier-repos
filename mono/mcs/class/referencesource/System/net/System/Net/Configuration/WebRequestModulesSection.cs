@@ -6,15 +6,16 @@
 
 namespace System.Net.Configuration
 {
-    using System.Configuration;
     using System.Collections;
+    using System.Configuration;
     using System.Globalization;
-    using System.Net;    
+    using System.Net;
     using System.Reflection;
     using System.Threading;
+
     public sealed class WebRequestModulesSection : ConfigurationSection
     {
-        public WebRequestModulesSection() 
+        public WebRequestModulesSection()
         {
             this.properties.Add(this.webRequestModules);
         }
@@ -26,26 +27,39 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            try {
+            try
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-            } catch (Exception exception) {
+            }
+            catch (Exception exception)
+            {
                 throw new ConfigurationErrorsException(
-                              SR.GetString(SR.net_config_section_permission, 
-                                           ConfigurationStrings.WebRequestModulesSectionName),
-                              exception);
+                    SR.GetString(
+                        SR.net_config_section_permission,
+                        ConfigurationStrings.WebRequestModulesSectionName
+                    ),
+                    exception
+                );
             }
         }
 
         protected override void InitializeDefault()
         {
             this.WebRequestModules.Add(
-                new WebRequestModuleElement(ConfigurationStrings.Https, typeof(HttpRequestCreator)));
+                new WebRequestModuleElement(ConfigurationStrings.Https, typeof(HttpRequestCreator))
+            );
             this.WebRequestModules.Add(
-                new WebRequestModuleElement(ConfigurationStrings.Http, typeof(HttpRequestCreator)));
+                new WebRequestModuleElement(ConfigurationStrings.Http, typeof(HttpRequestCreator))
+            );
             this.WebRequestModules.Add(
-                new WebRequestModuleElement(ConfigurationStrings.File, typeof(FileWebRequestCreator)));
+                new WebRequestModuleElement(
+                    ConfigurationStrings.File,
+                    typeof(FileWebRequestCreator)
+                )
+            );
             this.WebRequestModules.Add(
-                new WebRequestModuleElement(ConfigurationStrings.Ftp, typeof(FtpWebRequestCreator)));
+                new WebRequestModuleElement(ConfigurationStrings.Ftp, typeof(FtpWebRequestCreator))
+            );
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -53,7 +67,7 @@ namespace System.Net.Configuration
             get { return this.properties; }
         }
 
-        [ConfigurationProperty("", IsDefaultCollection=true )]
+        [ConfigurationProperty("", IsDefaultCollection = true)]
         public WebRequestModuleElementCollection WebRequestModules
         {
             get { return (WebRequestModuleElementCollection)this[this.webRequestModules]; }
@@ -61,9 +75,12 @@ namespace System.Net.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty webRequestModules =
-            new ConfigurationProperty(null, typeof(WebRequestModuleElementCollection), null,
-                    ConfigurationPropertyOptions.IsDefaultCollection);
+        readonly ConfigurationProperty webRequestModules = new ConfigurationProperty(
+            null,
+            typeof(WebRequestModuleElementCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
     }
 
     internal sealed class WebRequestModulesSectionInternal
@@ -73,17 +90,28 @@ namespace System.Net.Configuration
             if (section.WebRequestModules.Count > 0)
             {
                 this.webRequestModules = new ArrayList(section.WebRequestModules.Count);
-                foreach(WebRequestModuleElement webRequestModuleElement in section.WebRequestModules)
+                foreach (
+                    WebRequestModuleElement webRequestModuleElement in section.WebRequestModules
+                )
                 {
                     try
                     {
-                        this.webRequestModules.Add(new WebRequestPrefixElement(webRequestModuleElement.Prefix, webRequestModuleElement.Type));
+                        this.webRequestModules.Add(
+                            new WebRequestPrefixElement(
+                                webRequestModuleElement.Prefix,
+                                webRequestModuleElement.Type
+                            )
+                        );
                     }
                     catch (Exception exception)
                     {
-                        if (NclUtilities.IsFatal(exception)) throw;
+                        if (NclUtilities.IsFatal(exception))
+                            throw;
 
-                        throw new ConfigurationErrorsException(SR.GetString(SR.net_config_webrequestmodules), exception);
+                        throw new ConfigurationErrorsException(
+                            SR.GetString(SR.net_config_webrequestmodules),
+                            exception
+                        );
                     }
                 }
             }
@@ -102,11 +130,14 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal WebRequestModulesSectionInternal GetSection()
+        internal static WebRequestModulesSectionInternal GetSection()
         {
             lock (WebRequestModulesSectionInternal.ClassSyncObject)
             {
-                WebRequestModulesSection section = PrivilegedConfigurationManager.GetSection(ConfigurationStrings.WebRequestModulesSectionPath) as WebRequestModulesSection;
+                WebRequestModulesSection section =
+                    PrivilegedConfigurationManager.GetSection(
+                        ConfigurationStrings.WebRequestModulesSectionPath
+                    ) as WebRequestModulesSection;
                 if (section == null)
                     return null;
 
@@ -116,14 +147,14 @@ namespace System.Net.Configuration
 
         internal ArrayList WebRequestModules
         {
-            get 
+            get
             {
                 ArrayList retval = this.webRequestModules;
                 if (retval == null)
                 {
                     retval = new ArrayList(0);
                 }
-                return retval; 
+                return retval;
             }
         }
 

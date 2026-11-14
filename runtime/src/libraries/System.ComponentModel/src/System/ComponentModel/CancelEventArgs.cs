@@ -16,9 +16,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Default constructor
         /// </summary>
-        public CancelEventArgs()
-        {
-        }
+        public CancelEventArgs() { }
 
         /// <summary>
         /// Helper constructor

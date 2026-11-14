@@ -15,7 +15,13 @@ namespace System.Linq.Expressions
     [DebuggerTypeProxy(typeof(SwitchExpressionProxy))]
     public sealed class SwitchExpression : Expression
     {
-        internal SwitchExpression(Type type, Expression switchValue, Expression? defaultBody, MethodInfo? comparison, ReadOnlyCollection<SwitchCase> cases)
+        internal SwitchExpression(
+            Type type,
+            Expression switchValue,
+            Expression? defaultBody,
+            MethodInfo? comparison,
+            ReadOnlyCollection<SwitchCase> cases
+        )
         {
             Type = type;
             SwitchValue = switchValue;
@@ -71,8 +77,11 @@ namespace System.Linq.Expressions
             {
                 if (SwitchValue.Type.IsNullableType())
                 {
-                    return (Comparison == null) ||
-                        !TypeUtils.AreEquivalent(SwitchValue.Type, Comparison.GetParametersCached()[0].ParameterType.GetNonRefType());
+                    return (Comparison == null)
+                        || !TypeUtils.AreEquivalent(
+                            SwitchValue.Type,
+                            Comparison.GetParametersCached()[0].ParameterType.GetNonRefType()
+                        );
                 }
                 return false;
             }
@@ -87,7 +96,11 @@ namespace System.Linq.Expressions
         /// <param name="cases">The <see cref="Cases"/> property of the result.</param>
         /// <param name="defaultBody">The <see cref="DefaultBody"/> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public SwitchExpression Update(Expression switchValue, IEnumerable<SwitchCase>? cases, Expression? defaultBody)
+        public SwitchExpression Update(
+            Expression switchValue,
+            IEnumerable<SwitchCase>? cases,
+            Expression? defaultBody
+        )
         {
             if (switchValue == SwitchValue && defaultBody == DefaultBody && cases != null)
             {
@@ -120,7 +133,11 @@ namespace System.Linq.Expressions
         /// <param name="defaultBody">The result of the switch if no cases are matched.</param>
         /// <param name="cases">The valid cases for this switch.</param>
         /// <returns>The created <see cref="SwitchExpression"/>.</returns>
-        public static SwitchExpression Switch(Expression switchValue, Expression? defaultBody, params SwitchCase[]? cases)
+        public static SwitchExpression Switch(
+            Expression switchValue,
+            Expression? defaultBody,
+            params SwitchCase[]? cases
+        )
         {
             return Switch(switchValue, defaultBody, null, (IEnumerable<SwitchCase>?)cases);
         }
@@ -133,7 +150,12 @@ namespace System.Linq.Expressions
         /// <param name="comparison">The equality comparison method to use.</param>
         /// <param name="cases">The valid cases for this switch.</param>
         /// <returns>The created <see cref="SwitchExpression"/>.</returns>
-        public static SwitchExpression Switch(Expression switchValue, Expression? defaultBody, MethodInfo? comparison, params SwitchCase[]? cases)
+        public static SwitchExpression Switch(
+            Expression switchValue,
+            Expression? defaultBody,
+            MethodInfo? comparison,
+            params SwitchCase[]? cases
+        )
         {
             return Switch(switchValue, defaultBody, comparison, (IEnumerable<SwitchCase>?)cases);
         }
@@ -147,9 +169,21 @@ namespace System.Linq.Expressions
         /// <param name="comparison">The equality comparison method to use.</param>
         /// <param name="cases">The valid cases for this switch.</param>
         /// <returns>The created <see cref="SwitchExpression"/>.</returns>
-        public static SwitchExpression Switch(Type? type, Expression switchValue, Expression? defaultBody, MethodInfo? comparison, params SwitchCase[]? cases)
+        public static SwitchExpression Switch(
+            Type? type,
+            Expression switchValue,
+            Expression? defaultBody,
+            MethodInfo? comparison,
+            params SwitchCase[]? cases
+        )
         {
-            return Switch(type, switchValue, defaultBody, comparison, (IEnumerable<SwitchCase>?)cases);
+            return Switch(
+                type,
+                switchValue,
+                defaultBody,
+                comparison,
+                (IEnumerable<SwitchCase>?)cases
+            );
         }
 
         /// <summary>
@@ -160,7 +194,12 @@ namespace System.Linq.Expressions
         /// <param name="comparison">The equality comparison method to use.</param>
         /// <param name="cases">The valid cases for this switch.</param>
         /// <returns>The created <see cref="SwitchExpression"/>.</returns>
-        public static SwitchExpression Switch(Expression switchValue, Expression? defaultBody, MethodInfo? comparison, IEnumerable<SwitchCase>? cases)
+        public static SwitchExpression Switch(
+            Expression switchValue,
+            Expression? defaultBody,
+            MethodInfo? comparison,
+            IEnumerable<SwitchCase>? cases
+        )
         {
             return Switch(null, switchValue, defaultBody, comparison, cases);
         }
@@ -174,10 +213,17 @@ namespace System.Linq.Expressions
         /// <param name="comparison">The equality comparison method to use.</param>
         /// <param name="cases">The valid cases for this switch.</param>
         /// <returns>The created <see cref="SwitchExpression"/>.</returns>
-        public static SwitchExpression Switch(Type? type, Expression switchValue, Expression? defaultBody, MethodInfo? comparison, IEnumerable<SwitchCase>? cases)
+        public static SwitchExpression Switch(
+            Type? type,
+            Expression switchValue,
+            Expression? defaultBody,
+            MethodInfo? comparison,
+            IEnumerable<SwitchCase>? cases
+        )
         {
             ExpressionUtils.RequiresCanRead(switchValue, nameof(switchValue));
-            if (switchValue.Type == typeof(void)) throw Error.ArgumentCannotBeOfTypeVoid(nameof(switchValue));
+            if (switchValue.Type == typeof(void))
+                throw Error.ArgumentCannotBeOfTypeVoid(nameof(switchValue));
 
             ReadOnlyCollection<SwitchCase> caseList = cases.ToReadOnly();
             ContractUtils.RequiresNotNullItems(caseList, nameof(cases));
@@ -200,7 +246,10 @@ namespace System.Linq.Expressions
                 ParameterInfo[] pms = comparison.GetParametersCached();
                 if (pms.Length != 2)
                 {
-                    throw Error.IncorrectNumberOfMethodCallArguments(comparison, nameof(comparison));
+                    throw Error.IncorrectNumberOfMethodCallArguments(
+                        comparison,
+                        nameof(comparison)
+                    );
                 }
                 // Validate that the switch value's type matches the comparison method's
                 // left hand side parameter type.
@@ -208,10 +257,16 @@ namespace System.Linq.Expressions
                 bool liftedCall = false;
                 if (!ParameterIsAssignable(leftParam, switchValue.Type))
                 {
-                    liftedCall = ParameterIsAssignable(leftParam, switchValue.Type.GetNonNullableType());
+                    liftedCall = ParameterIsAssignable(
+                        leftParam,
+                        switchValue.Type.GetNonNullableType()
+                    );
                     if (!liftedCall)
                     {
-                        throw Error.SwitchValueTypeDoesNotMatchComparisonMethodParameter(switchValue.Type, leftParam.ParameterType);
+                        throw Error.SwitchValueTypeDoesNotMatchComparisonMethodParameter(
+                            switchValue.Type,
+                            leftParam.ParameterType
+                        );
                     }
                 }
 
@@ -229,13 +284,19 @@ namespace System.Linq.Expressions
                         {
                             if (!rightOperandType.IsNullableType())
                             {
-                                throw Error.TestValueTypeDoesNotMatchComparisonMethodParameter(rightOperandType, rightParam.ParameterType);
+                                throw Error.TestValueTypeDoesNotMatchComparisonMethodParameter(
+                                    rightOperandType,
+                                    rightParam.ParameterType
+                                );
                             }
                             rightOperandType = rightOperandType.GetNonNullableType();
                         }
                         if (!ParameterIsAssignable(rightParam, rightOperandType))
                         {
-                            throw Error.TestValueTypeDoesNotMatchComparisonMethodParameter(rightOperandType, rightParam.ParameterType);
+                            throw Error.TestValueTypeDoesNotMatchComparisonMethodParameter(
+                                rightOperandType,
+                                rightParam.ParameterType
+                            );
                         }
                     }
                 }
@@ -276,7 +337,8 @@ namespace System.Linq.Expressions
 
             if (defaultBody == null)
             {
-                if (resultType != typeof(void)) throw Error.DefaultBodyMustBeSupplied(nameof(defaultBody));
+                if (resultType != typeof(void))
+                    throw Error.DefaultBodyMustBeSupplied(nameof(defaultBody));
             }
             else
             {
@@ -286,12 +348,16 @@ namespace System.Linq.Expressions
             return new SwitchExpression(resultType, switchValue, defaultBody, comparison, caseList);
         }
 
-
         /// <summary>
         /// If custom type is provided, all branches must be reference assignable to the result type.
         /// If no custom type is provided, all branches must have the same type - resultType.
         /// </summary>
-        private static void ValidateSwitchCaseType(Expression @case, bool customType, Type resultType, string parameterName)
+        private static void ValidateSwitchCaseType(
+            Expression @case,
+            bool customType,
+            Type resultType,
+            string parameterName
+        )
         {
             if (customType)
             {

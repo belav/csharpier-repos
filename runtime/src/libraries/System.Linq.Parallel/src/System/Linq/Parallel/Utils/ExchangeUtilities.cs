@@ -29,7 +29,11 @@ namespace System.Linq.Parallel
         //    useStriping                 - whether striped partitioning should be used instead of range partitioning
         //
 
-        internal static PartitionedStream<T, int> PartitionDataSource<T>(IEnumerable<T> source, int partitionCount, bool useStriping)
+        internal static PartitionedStream<T, int> PartitionDataSource<T>(
+            IEnumerable<T> source,
+            int partitionCount,
+            bool useStriping
+        )
         {
             // The partitioned stream to return.
             PartitionedStream<T, int> returnValue;
@@ -38,19 +42,26 @@ namespace System.Linq.Parallel
             {
                 // The type overrides the partitioning algorithm, so we will use it instead of the default.
                 // The returned enumerator must be the same size that we requested, otherwise we throw.
-                QueryOperatorEnumerator<T, int>[] enumerators = sourceAsPartitionable.GetPartitions(partitionCount);
+                QueryOperatorEnumerator<T, int>[] enumerators = sourceAsPartitionable.GetPartitions(
+                    partitionCount
+                );
                 if (enumerators == null)
                 {
                     throw new InvalidOperationException(SR.ParallelPartitionable_NullReturn);
                 }
                 else if (enumerators.Length != partitionCount)
                 {
-                    throw new InvalidOperationException(SR.ParallelPartitionable_IncorretElementCount);
+                    throw new InvalidOperationException(
+                        SR.ParallelPartitionable_IncorretElementCount
+                    );
                 }
 
                 // Now just copy the enumerators into the stream, validating that the result is non-null.
-                PartitionedStream<T, int> stream =
-                    new PartitionedStream<T, int>(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
+                PartitionedStream<T, int> stream = new PartitionedStream<T, int>(
+                    partitionCount,
+                    Util.GetDefaultComparer<int>(),
+                    OrdinalIndexState.Correct
+                );
                 for (int i = 0; i < partitionCount; i++)
                 {
                     QueryOperatorEnumerator<T, int> currentEnumerator = enumerators[i];
@@ -86,20 +97,51 @@ namespace System.Linq.Parallel
         //    keyComparer                 - equality comparer for the keys
         //
 
-        internal static PartitionedStream<Pair<TElement, THashKey>, int> HashRepartition<TElement, THashKey, TIgnoreKey>(
-            PartitionedStream<TElement, TIgnoreKey> source, Func<TElement, THashKey>? keySelector, IEqualityComparer<THashKey>? keyComparer,
-            IEqualityComparer<TElement>? elementComparer, CancellationToken cancellationToken)
+        internal static PartitionedStream<Pair<TElement, THashKey>, int> HashRepartition<
+            TElement,
+            THashKey,
+            TIgnoreKey
+        >(
+            PartitionedStream<TElement, TIgnoreKey> source,
+            Func<TElement, THashKey>? keySelector,
+            IEqualityComparer<THashKey>? keyComparer,
+            IEqualityComparer<TElement>? elementComparer,
+            CancellationToken cancellationToken
+        )
         {
-            TraceHelpers.TraceInfo("PartitionStream<..>.HashRepartitionStream(..):: creating **RE**partitioned stream for nested operator");
-            return new UnorderedHashRepartitionStream<TElement, THashKey, TIgnoreKey>(source, keySelector, keyComparer, elementComparer, cancellationToken);
+            TraceHelpers.TraceInfo(
+                "PartitionStream<..>.HashRepartitionStream(..):: creating **RE**partitioned stream for nested operator"
+            );
+            return new UnorderedHashRepartitionStream<TElement, THashKey, TIgnoreKey>(
+                source,
+                keySelector,
+                keyComparer,
+                elementComparer,
+                cancellationToken
+            );
         }
 
-        internal static PartitionedStream<Pair<TElement, THashKey>, TOrderKey> HashRepartitionOrdered<TElement, THashKey, TOrderKey>(
-            PartitionedStream<TElement, TOrderKey> source, Func<TElement, THashKey>? keySelector, IEqualityComparer<THashKey>? keyComparer,
-            IEqualityComparer<TElement>? elementComparer, CancellationToken cancellationToken)
+        internal static PartitionedStream<
+            Pair<TElement, THashKey>,
+            TOrderKey
+        > HashRepartitionOrdered<TElement, THashKey, TOrderKey>(
+            PartitionedStream<TElement, TOrderKey> source,
+            Func<TElement, THashKey>? keySelector,
+            IEqualityComparer<THashKey>? keyComparer,
+            IEqualityComparer<TElement>? elementComparer,
+            CancellationToken cancellationToken
+        )
         {
-            TraceHelpers.TraceInfo("PartitionStream<..>.HashRepartitionStream(..):: creating **RE**partitioned stream for nested operator");
-            return new OrderedHashRepartitionStream<TElement, THashKey, TOrderKey>(source, keySelector, keyComparer, elementComparer, cancellationToken);
+            TraceHelpers.TraceInfo(
+                "PartitionStream<..>.HashRepartitionStream(..):: creating **RE**partitioned stream for nested operator"
+            );
+            return new OrderedHashRepartitionStream<TElement, THashKey, TOrderKey>(
+                source,
+                keySelector,
+                keyComparer,
+                elementComparer,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -108,7 +150,10 @@ namespace System.Linq.Parallel
         // OrdinalIndexState.Increasing.
         //
 
-        internal static OrdinalIndexState Worse(this OrdinalIndexState state1, OrdinalIndexState state2)
+        internal static OrdinalIndexState Worse(
+            this OrdinalIndexState state1,
+            OrdinalIndexState state2
+        )
         {
             return state1 > state2 ? state1 : state2;
         }

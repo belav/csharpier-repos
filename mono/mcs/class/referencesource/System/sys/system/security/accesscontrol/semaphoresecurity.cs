@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -15,13 +15,13 @@
 
 using System;
 using System.Collections;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Security.Principal;
+using System.Threading;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Runtime.InteropServices;
-using System.IO;
-using System.Threading;
 
 namespace System.Security.AccessControl
 {
@@ -33,13 +33,13 @@ namespace System.Security.AccessControl
     [Flags, ComVisible(false)]
     public enum SemaphoreRights
     {
-        Modify               = 0x000002,
-        Delete               = 0x010000,
-        ReadPermissions      = 0x020000,
-        ChangePermissions    = 0x040000,
-        TakeOwnership        = 0x080000,
-        Synchronize          = 0x100000,  // SYNCHRONIZE
-        FullControl          = 0x1F0003
+        Modify = 0x000002,
+        Delete = 0x010000,
+        ReadPermissions = 0x020000,
+        ChangePermissions = 0x040000,
+        TakeOwnership = 0x080000,
+        Synchronize = 0x100000, // SYNCHRONIZE
+        FullControl = 0x1F0003,
     }
 
     [ComVisible(false)]
@@ -47,15 +47,33 @@ namespace System.Security.AccessControl
     {
         // Constructor for creating access rules for registry objects
 
-        public SemaphoreAccessRule(IdentityReference identity, SemaphoreRights eventRights, AccessControlType type) 
-            : this(identity, (int) eventRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+        public SemaphoreAccessRule(
+            IdentityReference identity,
+            SemaphoreRights eventRights,
+            AccessControlType type
+        )
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
-        public SemaphoreAccessRule(String identity, SemaphoreRights eventRights, AccessControlType type) 
-            : this(new NTAccount(identity), (int) eventRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+        public SemaphoreAccessRule(
+            String identity,
+            SemaphoreRights eventRights,
+            AccessControlType type
+        )
+            : this(
+                new NTAccount(identity),
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -67,29 +85,32 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type )
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                type )
-        {
-        }
+            AccessControlType type
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
-        public SemaphoreRights SemaphoreRights { 
-            get { return (SemaphoreRights) base.AccessMask; }
+        public SemaphoreRights SemaphoreRights
+        {
+            get { return (SemaphoreRights)base.AccessMask; }
         }
     }
 
     [ComVisible(false)]
     public sealed class SemaphoreAuditRule : AuditRule
     {
-        public SemaphoreAuditRule(IdentityReference identity, SemaphoreRights eventRights, AuditFlags flags)
-            : this(identity, (int) eventRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
-        {
-        }
+        public SemaphoreAuditRule(
+            IdentityReference identity,
+            SemaphoreRights eventRights,
+            AuditFlags flags
+        )
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                flags
+            ) { }
 
         /*  // Not in the spec
         public SemaphoreAuditRule(string identity, SemaphoreRights eventRights, AuditFlags flags)
@@ -98,13 +119,19 @@ namespace System.Security.AccessControl
         }
         */
 
-        internal SemaphoreAuditRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags)
+        internal SemaphoreAuditRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+
+        public SemaphoreRights SemaphoreRights
         {
-        }
-        
-        public SemaphoreRights SemaphoreRights { 
-            get { return (SemaphoreRights) base.AccessMask; }
+            get { return (SemaphoreRights)base.AccessMask; }
         }
     }
 
@@ -112,9 +139,7 @@ namespace System.Security.AccessControl
     public sealed class SemaphoreSecurity : NativeObjectSecurity
     {
         public SemaphoreSecurity()
-            : base(true, ResourceType.KernelObject)
-        {
-        }
+            : base(true, ResourceType.KernelObject) { }
 
         public SemaphoreSecurity(String name, AccessControlSections includeSections)
             : base(true, ResourceType.KernelObject, name, includeSections, _HandleErrorCode, null)
@@ -128,35 +153,71 @@ namespace System.Security.AccessControl
             // Let the underlying ACL API's demand unmanaged code permission.
         }
 
-        private static Exception _HandleErrorCode(int errorCode, string name, SafeHandle handle, object context)
+        private static Exception _HandleErrorCode(
+            int errorCode,
+            string name,
+            SafeHandle handle,
+            object context
+        )
         {
             System.Exception exception = null;
-            
-            switch (errorCode) {
-            case NativeMethods.ERROR_INVALID_NAME:
-            case NativeMethods.ERROR_INVALID_HANDLE:
-            case NativeMethods.ERROR_FILE_NOT_FOUND:
-                if ((name != null) && (name.Length != 0))
-                    exception = new WaitHandleCannotBeOpenedException(SR.GetString(SR.WaitHandleCannotBeOpenedException_InvalidHandle, name));
-                else
-                    exception = new WaitHandleCannotBeOpenedException();
-                break;
 
-            default:
-                break;
+            switch (errorCode)
+            {
+                case NativeMethods.ERROR_INVALID_NAME:
+                case NativeMethods.ERROR_INVALID_HANDLE:
+                case NativeMethods.ERROR_FILE_NOT_FOUND:
+                    if ((name != null) && (name.Length != 0))
+                        exception = new WaitHandleCannotBeOpenedException(
+                            SR.GetString(SR.WaitHandleCannotBeOpenedException_InvalidHandle, name)
+                        );
+                    else
+                        exception = new WaitHandleCannotBeOpenedException();
+                    break;
+
+                default:
+                    break;
             }
 
             return exception;
         }
 
-        public override AccessRule AccessRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
+        public override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
         {
-            return new SemaphoreAccessRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type);
+            return new SemaphoreAccessRule(
+                identityReference,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            );
         }
 
-        public override AuditRule AuditRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
+        public override AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
         {
-            return new SemaphoreAuditRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags);
+            return new SemaphoreAuditRule(
+                identityReference,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            );
         }
 
         internal AccessControlSections GetAccessControlSectionsFromChanges()
@@ -183,7 +244,7 @@ namespace System.Security.AccessControl
             {
                 AccessControlSections persistSections = GetAccessControlSectionsFromChanges();
                 if (persistSections == AccessControlSections.None)
-                    return;  // Don't need to persist anything.
+                    return; // Don't need to persist anything.
 
                 base.Persist(handle, persistSections);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
@@ -223,7 +284,7 @@ namespace System.Security.AccessControl
         {
             base.RemoveAccessRuleSpecific(rule);
         }
-                
+
         public void AddAuditRule(SemaphoreAuditRule rule)
         {
             base.AddAuditRule(rule);
@@ -253,12 +314,12 @@ namespace System.Security.AccessControl
         {
             get { return typeof(SemaphoreRights); }
         }
-        
+
         public override Type AccessRuleType
         {
             get { return typeof(SemaphoreAccessRule); }
         }
-        
+
         public override Type AuditRuleType
         {
             get { return typeof(SemaphoreAuditRule); }

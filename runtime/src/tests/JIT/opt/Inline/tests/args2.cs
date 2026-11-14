@@ -8,13 +8,13 @@ namespace JitInliningTest
 {
     public class Args2
     {
-        static internal void FillArray(out int[] myArray)
+        internal static void FillArray(out int[] myArray)
         {
             myArray = new int[5] { 1, 2, 3, 4, 5 };
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             int retval = 85;
             int[] myArray;

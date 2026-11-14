@@ -52,7 +52,9 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void IsArray()
         {
-            GenericTypeParameterBuilder typeParam = Helpers.DynamicType(TypeAttributes.Public).DefineGenericParameters("TFirst")[0];
+            GenericTypeParameterBuilder typeParam = Helpers
+                .DynamicType(TypeAttributes.Public)
+                .DefineGenericParameters("TFirst")[0];
             Assert.False(typeParam.IsArray);
             Assert.False(typeParam.IsSZArray);
 

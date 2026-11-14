@@ -4,7 +4,5 @@ using System;
 
 namespace blah
 {
-
-public delegate void MyFunnyDelegate(object sender, params object[] message);
-
+    public delegate void MyFunnyDelegate(object sender, params object[] message);
 }

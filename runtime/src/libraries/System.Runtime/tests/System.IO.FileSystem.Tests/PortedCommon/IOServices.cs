@@ -183,7 +183,11 @@ internal class IOServices
 
     public static string AddTrailingSlashIfNeeded(string path)
     {
-        if (path.Length > 0 && path[path.Length - 1] != Path.DirectorySeparatorChar && path[path.Length - 1] != Path.AltDirectorySeparatorChar)
+        if (
+            path.Length > 0
+            && path[path.Length - 1] != Path.DirectorySeparatorChar
+            && path[path.Length - 1] != Path.AltDirectorySeparatorChar
+        )
         {
             path = path + Path.DirectorySeparatorChar;
         }
@@ -197,7 +201,7 @@ internal class IOServices
     }
 
     private static string[] GetLogicalDrives()
-    {   // From .NET Framework's Directory.GetLogicalDrives
+    { // From .NET Framework's Directory.GetLogicalDrives
         int drives = DllImports.GetLogicalDrives();
         if (drives == 0)
             throw new InvalidOperationException();
@@ -206,7 +210,8 @@ internal class IOServices
         int count = 0;
         while (d != 0)
         {
-            if (((int)d & 1) != 0) count++;
+            if (((int)d & 1) != 0)
+                count++;
             d >>= 1;
         }
         string[] result = new string[count];
@@ -250,7 +255,9 @@ internal class IOServices
         long userBytes;
         if (!DllImports.GetDiskFreeSpaceEx(drive, out userBytes, out ignored, out ignored))
         {
-            throw new IOException("DriveName: " + drive + " ErrorCode:" + Marshal.GetLastPInvokeError());
+            throw new IOException(
+                "DriveName: " + drive + " ErrorCode:" + Marshal.GetLastPInvokeError()
+            );
         }
 
         return userBytes;

@@ -38,8 +38,6 @@ namespace System.Diagnostics
             Log_icall(level, ref category, ref message);
         }
 
-        public static void NotifyOfCrossThreadDependency()
-        {
-        }
+        public static void NotifyOfCrossThreadDependency() { }
     }
 }

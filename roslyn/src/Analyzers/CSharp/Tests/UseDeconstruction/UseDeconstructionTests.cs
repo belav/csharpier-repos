@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseDeconstructionDiagnosticAnalyzer,
-        CSharpUseDeconstructionCodeFixProvider>;
+        CSharpUseDeconstructionCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseDeconstruction)]
     public class UseDeconstructionTests
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestVar()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -33,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -43,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -90,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestUpdateReference()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -101,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -112,13 +118,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestTupleType()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -129,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -140,13 +149,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestVarInForEach()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.Collections.Generic;
 
                 class C
@@ -159,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     IEnumerable<(string name, int age)> GetPeople() => default;
                 }
-                """, """
+                """,
+                """
                 using System.Collections.Generic;
 
                 class C
@@ -172,13 +184,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     IEnumerable<(string name, int age)> GetPeople() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestTupleTypeInForEach()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.Collections.Generic;
 
                 class C
@@ -191,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     IEnumerable<(string name, int age)> GetPeople() => default;
                 }
-                """, """
+                """,
+                """
                 using System.Collections.Generic;
 
                 class C
@@ -204,13 +219,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     IEnumerable<(string name, int age)> GetPeople() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -221,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -232,13 +250,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -253,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -268,13 +289,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -285,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -296,13 +320,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll4()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -313,7 +339,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -324,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -348,7 +376,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestWithUserNamesThatMatchDefaultTupleNameWithVar1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -358,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string Item1, int Item2) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -368,13 +398,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string Item1, int Item2) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithUserNamesThatMatchDefaultTupleNameWithVar2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -385,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string Item1, int Item2) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -396,7 +429,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string Item1, int Item2) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -496,7 +530,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestTrivia1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -507,7 +542,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -518,7 +554,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25260")]
@@ -536,14 +573,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestWithDefaultExpressionInitializer()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -552,7 +590,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         System.Console.WriteLine(person.name + " " + person.age);
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -561,7 +600,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         System.Console.WriteLine(name + " " + age);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -589,7 +629,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestWithExplicitImplicitConversionFromNonTuple()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     class Person
@@ -603,7 +644,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         System.Console.WriteLine(person.name + " " + person.age);
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     class Person
@@ -617,7 +659,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         System.Console.WriteLine(name + " " + age);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -645,7 +688,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestWithExplicitImplicitConversionFromNonTupleInForEach()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.Linq;
                 class C
                 {
@@ -660,7 +704,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                             System.Console.WriteLine(person.name + " " + person.age);
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Linq;
                 class C
                 {
@@ -675,13 +720,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                             System.Console.WriteLine(name + " " + age);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithTupleLiteralConversion()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -690,7 +737,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         System.Console.WriteLine(person.name + " " + person.age);
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -699,13 +747,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         System.Console.WriteLine(name + " " + age);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithImplicitTupleConversion()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -716,7 +766,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -727,13 +778,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     (string name, int age) GetPerson() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithImplicitTupleConversionInForEach()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.Collections.Generic;
                 class C
                 {
@@ -745,7 +798,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     IEnumerable<(string name, int age)> GetPeople() => default;
                 }
-                """, """
+                """,
+                """
                 using System.Collections.Generic;
                 class C
                 {
@@ -757,7 +811,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     IEnumerable<(string name, int age)> GetPeople() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27251")]
@@ -797,7 +852,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         IEnumerable<(string name, int age)> GetPeople() => default;
                     }
                     """,
-                CodeActionValidationMode = Testing.CodeActionValidationMode.None
+                CodeActionValidationMode = Testing.CodeActionValidationMode.None,
             }.RunAsync();
         }
 
@@ -852,7 +907,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -870,11 +925,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     }
                     """,
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication
-                },
-                LanguageVersion = LanguageVersion.CSharp9
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
+                LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
 
@@ -901,15 +953,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     }
                     """,
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication
-                },
-                FixedState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication
-                },
-                LanguageVersion = LanguageVersion.CSharp9
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
+                FixedState = { OutputKind = OutputKind.ConsoleApplication },
+                LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
     }

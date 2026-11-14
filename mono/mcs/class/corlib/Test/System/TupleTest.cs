@@ -26,36 +26,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using NUnit.Framework;
 
 namespace MonoTests.System
 {
-	[TestFixture]
-	public class TupleTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void TupleWithRest_Invalid ()
-		{
-			new Tuple<int, int, int, int, int, int, int, int> (1, 2, 3, 4, 5, 6, 7, 8);
-		}
+    [TestFixture]
+    public class TupleTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TupleWithRest_Invalid()
+        {
+            new Tuple<int, int, int, int, int, int, int, int>(1, 2, 3, 4, 5, 6, 7, 8);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void TupleWithRest_InvalidDueToNull ()
-		{
-			new Tuple<int, object, int, int, int, int, int, Tuple<string, string>> (1, null, 3, 4, 5, 6, 7, null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TupleWithRest_InvalidDueToNull()
+        {
+            new Tuple<int, object, int, int, int, int, int, Tuple<string, string>>(
+                1,
+                null,
+                3,
+                4,
+                5,
+                6,
+                7,
+                null
+            );
+        }
 
-		[Test]
-		public void ToStringTest ()
-		{
-			var t1 = new Tuple<int, object, int, int, int, int, int, Tuple<string, string>> (1, null, 3, 4, 5, 6, 7, new Tuple<string, string> (null, null));
+        [Test]
+        public void ToStringTest()
+        {
+            var t1 = new Tuple<int, object, int, int, int, int, int, Tuple<string, string>>(
+                1,
+                null,
+                3,
+                4,
+                5,
+                6,
+                7,
+                new Tuple<string, string>(null, null)
+            );
 
-			Assert.AreEqual ("(1, , 3, 4, 5, 6, 7, , )", t1.ToString (), "#1"); 
-		}
-	}
+            Assert.AreEqual("(1, , 3, 4, 5, 6, 7, , )", t1.ToString(), "#1");
+        }
+    }
 }
-

@@ -19,7 +19,11 @@ namespace System.Activities.DurableInstancing
         {
             this.retryQueue = new BinaryHeap<DateTime, LoadRetryAsyncResult>();
             this.syncLock = new object();
-            this.retryThreadTimer = new IOThreadTimer(new Action<object>(this.OnRetryTimer), null, false);
+            this.retryThreadTimer = new IOThreadTimer(
+                new Action<object>(this.OnRetryTimer),
+                null,
+                false
+            );
         }
 
         public bool Enqueue(LoadRetryAsyncResult command)
@@ -53,8 +57,7 @@ namespace System.Activities.DurableInstancing
 
             foreach (KeyValuePair<DateTime, LoadRetryAsyncResult> value in result)
             {
-                ActionItem.Schedule
-                (
+                ActionItem.Schedule(
                     (data) =>
                     {
                         LoadRetryAsyncResult tryCommandResult = data as LoadRetryAsyncResult;

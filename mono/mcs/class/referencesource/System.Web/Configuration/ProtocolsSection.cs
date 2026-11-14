@@ -5,28 +5,33 @@
 //------------------------------------------------------------------------------
 //
 
-namespace System.Web.Configuration 
+namespace System.Web.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Web.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
-    using System.IO;
-    using System.Text;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.Globalization;
+    using System.IO;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Configuration;
     using System.Web.Hosting;
     using System.Web.Util;
-    using System.Security.Permissions;
+    using System.Xml;
 
     public sealed class ProtocolsSection : ConfigurationSection
     {
-        private static readonly ConfigurationPropertyCollection  _properties;
+        private static readonly ConfigurationPropertyCollection _properties;
 
         #region Property Declarations
-        private static readonly ConfigurationProperty   _propProtocols = 
-            new ConfigurationProperty(null, typeof(ProtocolCollection), null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsDefaultCollection);
+        private static readonly ConfigurationProperty _propProtocols = new ConfigurationProperty(
+            null,
+            typeof(ProtocolCollection),
+            null,
+            ConfigurationPropertyOptions.IsRequired
+                | ConfigurationPropertyOptions.IsDefaultCollection
+        );
         #endregion
 
         static ProtocolsSection()
@@ -35,25 +40,18 @@ namespace System.Web.Configuration
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propProtocols);
         }
-        public ProtocolsSection() 
-        {
-        }
 
-        protected override ConfigurationPropertyCollection Properties 
+        public ProtocolsSection() { }
+
+        protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         }
 
         [ConfigurationProperty("protocols", IsRequired = true, IsDefaultCollection = true)]
-        public ProtocolCollection Protocols 
+        public ProtocolCollection Protocols
         {
-            get
-            {
-                return (ProtocolCollection)base[_propProtocols];
-            }
+            get { return (ProtocolCollection)base[_propProtocols]; }
         }
     }
 
@@ -66,82 +64,76 @@ namespace System.Web.Configuration
         {
             _properties = new ConfigurationPropertyCollection();
         }
-        public ProtocolCollection()
-        {
-        }
 
-        protected override ConfigurationPropertyCollection Properties 
+        public ProtocolCollection() { }
+
+        protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         }
 
         public string[] AllKeys
         {
-            get
-            {
-                return (string[])BaseGetAllKeys();
-            }
+            get { return (string[])BaseGetAllKeys(); }
         }
 
-        public void Add( ProtocolElement protocolElement )
+        public void Add(ProtocolElement protocolElement)
         {
-            BaseAdd( protocolElement );
+            BaseAdd(protocolElement);
         }
-        public void Remove( string name ) 
+
+        public void Remove(string name)
         {
-            BaseRemove( name );
+            BaseRemove(name);
         }
-        public void Remove( ProtocolElement protocolElement ) 
-        { 
-            BaseRemove( GetElementKey( protocolElement ) );
-        }
-        public void RemoveAt( int index )
+
+        public void Remove(ProtocolElement protocolElement)
         {
-            BaseRemoveAt( index );
+            BaseRemove(GetElementKey(protocolElement));
         }
-        public new ProtocolElement this[ string name ] 
+
+        public void RemoveAt(int index)
         {
-            get 
-            {
-                return (ProtocolElement)BaseGet( name );
-            }
+            BaseRemoveAt(index);
         }
-        public ProtocolElement this[ int index ] 
+
+        public new ProtocolElement this[string name]
         {
-            get
-            {
-                return (ProtocolElement)BaseGet( index );
-            }
+            get { return (ProtocolElement)BaseGet(name); }
+        }
+        public ProtocolElement this[int index]
+        {
+            get { return (ProtocolElement)BaseGet(index); }
             set
             {
-                if ( BaseGet( index ) != null)
+                if (BaseGet(index) != null)
                 {
-                    BaseRemoveAt( index );
+                    BaseRemoveAt(index);
                 }
 
-                BaseAdd( index, value );
+                BaseAdd(index, value);
             }
         }
+
         public void Clear()
         {
             BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement() 
+        protected override ConfigurationElement CreateNewElement()
         {
             return new ProtocolElement();
         }
 
-        protected override Object GetElementKey( ConfigurationElement element )
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             string name = ((ProtocolElement)element).Name;
 
-            if ( string.IsNullOrEmpty( name ) )
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException( SR.GetString(SR.Config_collection_add_element_without_key) );
+                throw new ArgumentException(
+                    SR.GetString(SR.Config_collection_add_element_without_key)
+                );
             }
 
             return name;
@@ -150,152 +142,145 @@ namespace System.Web.Configuration
 
     public sealed class ProtocolElement : ConfigurationElement
     {
-        private static readonly ConfigurationPropertyCollection  _properties;
+        private static readonly ConfigurationPropertyCollection _properties;
 
         #region Property Declarations
-        private static readonly ConfigurationProperty   _propName = 
-            new ConfigurationProperty( "name",
-                                       typeof( string ),
-                                       null,
-                                       null,
-                                       StdValidatorsAndConverters.NonEmptyStringValidator,
-                                       ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey );
+        private static readonly ConfigurationProperty _propName = new ConfigurationProperty(
+            "name",
+            typeof(string),
+            null,
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
 
-        private static readonly ConfigurationProperty   _propProcessHandlerType =
-            new ConfigurationProperty( "processHandlerType",
-                                       typeof( string ),
-                                       null);
-        private static readonly ConfigurationProperty   _propAppDomainHandlerType =
-            new ConfigurationProperty( "appDomainHandlerType",
-                                       typeof( string ),
-                                       null);
-        private static readonly ConfigurationProperty   _propValidate =
-            new ConfigurationProperty( "validate",
-                                       typeof( bool ),
-                                       false);
+        private static readonly ConfigurationProperty _propProcessHandlerType =
+            new ConfigurationProperty("processHandlerType", typeof(string), null);
+        private static readonly ConfigurationProperty _propAppDomainHandlerType =
+            new ConfigurationProperty("appDomainHandlerType", typeof(string), null);
+        private static readonly ConfigurationProperty _propValidate = new ConfigurationProperty(
+            "validate",
+            typeof(bool),
+            false
+        );
         #endregion
 
         static ProtocolElement()
         {
             _properties = new ConfigurationPropertyCollection();
-            _properties.Add( _propName );
-            _properties.Add( _propProcessHandlerType );
-            _properties.Add( _propAppDomainHandlerType );
-            _properties.Add( _propValidate );
+            _properties.Add(_propName);
+            _properties.Add(_propProcessHandlerType);
+            _properties.Add(_propAppDomainHandlerType);
+            _properties.Add(_propValidate);
         }
 
-        public ProtocolElement( string name ) 
+        public ProtocolElement(string name)
         {
-            if ( string.IsNullOrEmpty( name ) )
+            if (string.IsNullOrEmpty(name))
             {
                 throw ExceptionUtil.ParameterNullOrEmpty("name");
             }
 
-            base[ _propName ] = name;
+            base[_propName] = name;
         }
 
-        public ProtocolElement()
-        {
-        }
+        public ProtocolElement() { }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         }
 
         [ConfigurationProperty("name", IsRequired = true, IsKey = true)]
         [StringValidator(MinLength = 1)]
-        public string Name 
+        public string Name
         {
-            get
-            {
-                return (string)base[ _propName ];
-            }
-            set
-            {
-                base[ _propName ] = value;
-            }
+            get { return (string)base[_propName]; }
+            set { base[_propName] = value; }
         }
-        
+
         [ConfigurationProperty("processHandlerType")]
         public string ProcessHandlerType
         {
-            get 
-            {
-                return (string)base[ _propProcessHandlerType ];
-            }
-            set 
-            {
-                base[ _propProcessHandlerType ] = value;
-            }
+            get { return (string)base[_propProcessHandlerType]; }
+            set { base[_propProcessHandlerType] = value; }
         }
 
         [ConfigurationProperty("appDomainHandlerType")]
         public string AppDomainHandlerType
         {
-            get 
-            {
-                return (string)base[ _propAppDomainHandlerType ];
-            }
-            set 
-            {
-                base[ _propAppDomainHandlerType ] = value;
-            }
+            get { return (string)base[_propAppDomainHandlerType]; }
+            set { base[_propAppDomainHandlerType] = value; }
         }
 
         [ConfigurationProperty("validate", DefaultValue = false)]
         public bool Validate
         {
-            get 
-            {
-                return (bool)base[ _propValidate ];
-            }
-            set 
-            {
-                base[ _propValidate ] = value;
-            }
+            get { return (bool)base[_propValidate]; }
+            set { base[_propValidate] = value; }
         }
 
-        private void ValidateTypes() {
-             // check process protocol handler
+        private void ValidateTypes()
+        {
+            // check process protocol handler
 
             Type processHandlerType;
-            try {
-                 processHandlerType = Type.GetType(ProcessHandlerType, true /*throwOnError*/);
+            try
+            {
+                processHandlerType = Type.GetType(
+                    ProcessHandlerType,
+                    true /*throwOnError*/
+                );
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 throw new ConfigurationErrorsException(
-                              e.Message, 
-                              e, 
-                              this.ElementInformation.Properties["ProcessHandlerType"].Source, 
-                              this.ElementInformation.Properties["ProcessHandlerType"].LineNumber);
+                    e.Message,
+                    e,
+                    this.ElementInformation.Properties["ProcessHandlerType"].Source,
+                    this.ElementInformation.Properties["ProcessHandlerType"].LineNumber
+                );
             }
-            ConfigUtil.CheckAssignableType( typeof(ProcessProtocolHandler), processHandlerType, this, "ProcessHandlerType");
+            ConfigUtil.CheckAssignableType(
+                typeof(ProcessProtocolHandler),
+                processHandlerType,
+                this,
+                "ProcessHandlerType"
+            );
 
             // check app domain protocol handler
 
             Type appDomainHandlerType;
-            try {
-                 appDomainHandlerType = Type.GetType(AppDomainHandlerType, true /*throwOnError*/);
+            try
+            {
+                appDomainHandlerType = Type.GetType(
+                    AppDomainHandlerType,
+                    true /*throwOnError*/
+                );
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 throw new ConfigurationErrorsException(
-                              e.Message,
-                              e, 
-                              this.ElementInformation.Properties["AppDomainHandlerType"].Source, 
-                              this.ElementInformation.Properties["AppDomainHandlerType"].LineNumber);
+                    e.Message,
+                    e,
+                    this.ElementInformation.Properties["AppDomainHandlerType"].Source,
+                    this.ElementInformation.Properties["AppDomainHandlerType"].LineNumber
+                );
             }
-            ConfigUtil.CheckAssignableType( typeof(AppDomainProtocolHandler), appDomainHandlerType, this, "AppDomainHandlerType");
-         }
+            ConfigUtil.CheckAssignableType(
+                typeof(AppDomainProtocolHandler),
+                appDomainHandlerType,
+                this,
+                "AppDomainHandlerType"
+            );
+        }
 
         protected override void PostDeserialize()
         {
-            if (Validate) {
+            if (Validate)
+            {
                 ValidateTypes();
             }
         }
     }
-}   
+}

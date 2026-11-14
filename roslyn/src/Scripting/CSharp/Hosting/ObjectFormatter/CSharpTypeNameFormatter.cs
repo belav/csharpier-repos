@@ -28,21 +28,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
         {
             switch (type)
             {
-                case SpecialType.System_Boolean: return "bool";
-                case SpecialType.System_Byte: return "byte";
-                case SpecialType.System_Char: return "char";
-                case SpecialType.System_Decimal: return "decimal";
-                case SpecialType.System_Double: return "double";
-                case SpecialType.System_Int16: return "short";
-                case SpecialType.System_Int32: return "int";
-                case SpecialType.System_Int64: return "long";
-                case SpecialType.System_SByte: return "sbyte";
-                case SpecialType.System_Single: return "float";
-                case SpecialType.System_String: return "string";
-                case SpecialType.System_UInt16: return "ushort";
-                case SpecialType.System_UInt32: return "uint";
-                case SpecialType.System_UInt64: return "ulong";
-                case SpecialType.System_Object: return "object";
+                case SpecialType.System_Boolean:
+                    return "bool";
+                case SpecialType.System_Byte:
+                    return "byte";
+                case SpecialType.System_Char:
+                    return "char";
+                case SpecialType.System_Decimal:
+                    return "decimal";
+                case SpecialType.System_Double:
+                    return "double";
+                case SpecialType.System_Int16:
+                    return "short";
+                case SpecialType.System_Int32:
+                    return "int";
+                case SpecialType.System_Int64:
+                    return "long";
+                case SpecialType.System_SByte:
+                    return "sbyte";
+                case SpecialType.System_Single:
+                    return "float";
+                case SpecialType.System_String:
+                    return "string";
+                case SpecialType.System_UInt16:
+                    return "ushort";
+                case SpecialType.System_UInt32:
+                    return "uint";
+                case SpecialType.System_UInt64:
+                    return "ulong";
+                case SpecialType.System_Object:
+                    return "object";
 
                 default:
                     return null;
@@ -52,7 +67,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
         public override string FormatTypeName(Type type, CommonTypeNameFormatterOptions options)
         {
             string stateMachineName;
-            if (GeneratedNameParser.TryParseSourceMethodNameFromGeneratedName(type.Name, GeneratedNameKind.StateMachineType, out stateMachineName))
+            if (
+                GeneratedNameParser.TryParseSourceMethodNameFromGeneratedName(
+                    type.Name,
+                    GeneratedNameKind.StateMachineType,
+                    out stateMachineName
+                )
+            )
             {
                 return stateMachineName;
             }

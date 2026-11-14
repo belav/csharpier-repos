@@ -31,7 +31,8 @@ namespace System.Collections.Immutable
         /// <typeparam name="T">The type of items stored by the collection.</typeparam>
         /// <param name="items">The items to prepopulate.</param>
         /// <returns>The new immutable collection.</returns>
-        public static ImmutableList<T> CreateRange<T>(IEnumerable<T> items) => ImmutableList<T>.Empty.AddRange(items);
+        public static ImmutableList<T> CreateRange<T>(IEnumerable<T> items) =>
+            ImmutableList<T>.Empty.AddRange(items);
 
         /// <summary>
         /// Creates a new immutable collection prefilled with the specified items.
@@ -52,7 +53,8 @@ namespace System.Collections.Immutable
         /// <typeparam name="T">The type of items stored by the collection.</typeparam>
         /// <param name="items">A span that contains the items to prepopulate the list with.</param>
         /// <returns>A new immutable list that contains the specified items.</returns>
-        public static ImmutableList<T> Create<T>(ReadOnlySpan<T> items) => ImmutableList<T>.Empty.AddRange(items);
+        public static ImmutableList<T> Create<T>(ReadOnlySpan<T> items) =>
+            ImmutableList<T>.Empty.AddRange(items);
 
         /// <summary>
         /// Creates a new immutable list builder.
@@ -67,7 +69,9 @@ namespace System.Collections.Immutable
         /// <typeparam name="TSource">The type of element in the sequence.</typeparam>
         /// <param name="source">The sequence to enumerate.</param>
         /// <returns>An immutable list.</returns>
-        public static ImmutableList<TSource> ToImmutableList<TSource>(this IEnumerable<TSource> source)
+        public static ImmutableList<TSource> ToImmutableList<TSource>(
+            this IEnumerable<TSource> source
+        )
         {
             if (source is ImmutableList<TSource> existingList)
             {
@@ -82,7 +86,9 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="builder">The builder to create the immutable list from.</param>
         /// <returns>An immutable list.</returns>
-        public static ImmutableList<TSource> ToImmutableList<TSource>(this ImmutableList<TSource>.Builder builder)
+        public static ImmutableList<TSource> ToImmutableList<TSource>(
+            this ImmutableList<TSource>.Builder builder
+        )
         {
             Requires.NotNull(builder, nameof(builder));
 
@@ -97,7 +103,11 @@ namespace System.Collections.Immutable
         /// <param name="newValue">The element to replace the old element with.</param>
         /// <returns>The new list -- even if the value being replaced is equal to the new value for that position.</returns>
         /// <exception cref="ArgumentException">Thrown when the old value does not exist in the list.</exception>
-        public static IImmutableList<T> Replace<T>(this IImmutableList<T> list, T oldValue, T newValue)
+        public static IImmutableList<T> Replace<T>(
+            this IImmutableList<T> list,
+            T oldValue,
+            T newValue
+        )
         {
             Requires.NotNull(list, nameof(list));
             return list.Replace(oldValue, newValue, EqualityComparer<T>.Default);
@@ -123,7 +133,10 @@ namespace System.Collections.Immutable
         /// <returns>
         /// A new list with the elements removed.
         /// </returns>
-        public static IImmutableList<T> RemoveRange<T>(this IImmutableList<T> list, IEnumerable<T> items)
+        public static IImmutableList<T> RemoveRange<T>(
+            this IImmutableList<T> list,
+            IEnumerable<T> items
+        )
         {
             Requires.NotNull(list, nameof(list));
             return list.RemoveRange(items, EqualityComparer<T>.Default);
@@ -164,7 +177,11 @@ namespace System.Collections.Immutable
         /// elements in the <see cref="IImmutableList{T}"/> that extends from index
         /// to the last element, if found; otherwise, -1.
         /// </returns>
-        public static int IndexOf<T>(this IImmutableList<T> list, T item, IEqualityComparer<T>? equalityComparer)
+        public static int IndexOf<T>(
+            this IImmutableList<T> list,
+            T item,
+            IEqualityComparer<T>? equalityComparer
+        )
         {
             Requires.NotNull(list, nameof(list));
             return list.IndexOf(item, 0, list.Count, equalityComparer);
@@ -192,7 +209,12 @@ namespace System.Collections.Immutable
         public static int IndexOf<T>(this IImmutableList<T> list, T item, int startIndex)
         {
             Requires.NotNull(list, nameof(list));
-            return list.IndexOf(item, startIndex, list.Count - startIndex, EqualityComparer<T>.Default);
+            return list.IndexOf(
+                item,
+                startIndex,
+                list.Count - startIndex,
+                EqualityComparer<T>.Default
+            );
         }
 
         /// <summary>
@@ -263,7 +285,11 @@ namespace System.Collections.Immutable
         /// The zero-based index of the last occurrence of item within the entire the
         /// <see cref="IImmutableList{T}"/>, if found; otherwise, -1.
         /// </returns>
-        public static int LastIndexOf<T>(this IImmutableList<T> list, T item, IEqualityComparer<T>? equalityComparer)
+        public static int LastIndexOf<T>(
+            this IImmutableList<T> list,
+            T item,
+            IEqualityComparer<T>? equalityComparer
+        )
         {
             Requires.NotNull(list, nameof(list));
 
@@ -327,7 +353,12 @@ namespace System.Collections.Immutable
         /// in the <see cref="IImmutableList{T}"/> that extends from the first element
         /// to index, if found; otherwise, -1.
         /// </returns>
-        public static int LastIndexOf<T>(this IImmutableList<T> list, T item, int startIndex, int count)
+        public static int LastIndexOf<T>(
+            this IImmutableList<T> list,
+            T item,
+            int startIndex,
+            int count
+        )
         {
             Requires.NotNull(list, nameof(list));
             return list.LastIndexOf(item, startIndex, count, EqualityComparer<T>.Default);

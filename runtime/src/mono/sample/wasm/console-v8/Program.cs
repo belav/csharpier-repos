@@ -10,7 +10,8 @@ public class Test
     {
         await Task.Delay(1);
         Console.WriteLine("Hello World!");
-        for (int i = 0; i < args.Length; i++) {
+        for (int i = 0; i < args.Length; i++)
+        {
             Console.WriteLine($"args[{i}] = {args[i]}");
         }
         return 0;

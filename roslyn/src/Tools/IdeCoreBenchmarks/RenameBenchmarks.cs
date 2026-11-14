@@ -17,7 +17,6 @@ namespace IdeCoreBenchmarks
     [MemoryDiagnoser]
     public class RenameBenchmarks
     {
-
         private Solution _solution;
         private ISymbol _symbol;
         private string _csFilePath;
@@ -25,8 +24,13 @@ namespace IdeCoreBenchmarks
         [GlobalSetup]
         public void GlobalSetup()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            _csFilePath = Path.Combine(roslynRoot, @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            _csFilePath = Path.Combine(
+                roslynRoot,
+                @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs"
+            );
 
             if (!File.Exists(_csFilePath))
             {
@@ -40,8 +44,13 @@ namespace IdeCoreBenchmarks
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
 
-            _solution = new AdhocWorkspace().CurrentSolution
-                .AddProject(projectId, "ProjectName", "AssemblyName", LanguageNames.CSharp)
+            _solution = new AdhocWorkspace()
+                .CurrentSolution.AddProject(
+                    projectId,
+                    "ProjectName",
+                    "AssemblyName",
+                    LanguageNames.CSharp
+                )
                 .AddDocument(documentId, "DocumentName", File.ReadAllText(_csFilePath));
 
             var project = _solution.Projects.First();

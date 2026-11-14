@@ -8,14 +8,14 @@ namespace System.PrivateUri.Tests
 {
     public class PercentEncodingHelperTests
     {
-        private const string OneByteUtf8 = "%41";           // A
-        private const string TwoByteUtf8 = "%C3%BC";        // \u00FC
-        private const string ThreeByteUtf8 = "%E8%AF%B6";   // \u8BF6
+        private const string OneByteUtf8 = "%41"; // A
+        private const string TwoByteUtf8 = "%C3%BC"; // \u00FC
+        private const string ThreeByteUtf8 = "%E8%AF%B6"; // \u8BF6
         private const string FourByteUtf8 = "%F0%9F%98%80"; // \uD83D\uDE00
 
         private const string InvalidOneByteUtf8 = "%FF";
-        private const string OverlongTwoByteUtf8 = "%C1%81";        // A
-        private const string OverlongThreeByteUtf8 = "%E0%83%BC";   // \u00FC
+        private const string OverlongTwoByteUtf8 = "%C1%81"; // A
+        private const string OverlongThreeByteUtf8 = "%E0%83%BC"; // \u00FC
         private const string OverlongFourByteUtf8 = "%F0%88%AF%B6"; // \u8BF6;
 
         public static IEnumerable<object[]> PercentEncodedAndDecodedUTF8Sequences()
@@ -37,12 +37,24 @@ namespace System.PrivateUri.Tests
 
             yield return Pair(InvalidOneByteUtf8 + OneByteUtf8, InvalidOneByteUtf8 + "A");
             yield return Pair(OverlongTwoByteUtf8 + TwoByteUtf8, OverlongTwoByteUtf8 + "\u00FC");
-            yield return Pair(OverlongThreeByteUtf8 + ThreeByteUtf8, OverlongThreeByteUtf8 + "\u8BF6");
-            yield return Pair(OverlongFourByteUtf8 + FourByteUtf8, OverlongFourByteUtf8 + "\uD83D\uDE00");
+            yield return Pair(
+                OverlongThreeByteUtf8 + ThreeByteUtf8,
+                OverlongThreeByteUtf8 + "\u8BF6"
+            );
+            yield return Pair(
+                OverlongFourByteUtf8 + FourByteUtf8,
+                OverlongFourByteUtf8 + "\uD83D\uDE00"
+            );
 
             yield return Pair(InvalidOneByteUtf8, InvalidOneByteUtf8);
-            yield return Pair(InvalidOneByteUtf8 + InvalidOneByteUtf8, InvalidOneByteUtf8 + InvalidOneByteUtf8);
-            yield return Pair(InvalidOneByteUtf8 + InvalidOneByteUtf8 + InvalidOneByteUtf8, InvalidOneByteUtf8 + InvalidOneByteUtf8 + InvalidOneByteUtf8);
+            yield return Pair(
+                InvalidOneByteUtf8 + InvalidOneByteUtf8,
+                InvalidOneByteUtf8 + InvalidOneByteUtf8
+            );
+            yield return Pair(
+                InvalidOneByteUtf8 + InvalidOneByteUtf8 + InvalidOneByteUtf8,
+                InvalidOneByteUtf8 + InvalidOneByteUtf8 + InvalidOneByteUtf8
+            );
 
             // 11001010 11100100 10001000 10110010 - 2-byte marker followed by 3-byte sequence
             yield return Pair("%CA" + "%E4%88%B2", "%CA" + '\u4232');
@@ -64,17 +76,21 @@ namespace System.PrivateUri.Tests
 
             // Input string:                %98%C8%D4%F3 %D4%A8 %7A %CF%DE %41 %16
             // Valid Unicode sequences:                  %D4%A8 %7A        %41 %16
-            yield return Pair("%98%C8%D4%F3" + "%D4%A8" + "%7A" + "%CF%DE" + "%41" + "%16",
-                "%98%C8%D4%F3" + '\u0528' + 'z' + "%CF%DE" + 'A' + '\x16');
+            yield return Pair(
+                "%98%C8%D4%F3" + "%D4%A8" + "%7A" + "%CF%DE" + "%41" + "%16",
+                "%98%C8%D4%F3" + '\u0528' + 'z' + "%CF%DE" + 'A' + '\x16'
+            );
 
             // 2-byte marker, valid 4-byte sequence, continuation byte
-            yield return Pair("%C6" + "%F3%BC%A1%B8" + "%B5",
-                "%C6" + "\U000FC878" + "%B5");
+            yield return Pair("%C6" + "%F3%BC%A1%B8" + "%B5", "%C6" + "\U000FC878" + "%B5");
         }
 
         [Theory]
         [MemberData(nameof(PercentEncodedAndDecodedUTF8Sequences))]
-        public static void UnescapeDataString_UnescapesUtf8Sequences(string stringToUnescape, string expected)
+        public static void UnescapeDataString_UnescapesUtf8Sequences(
+            string stringToUnescape,
+            string expected
+        )
         {
             Assert.Equal(expected, Uri.UnescapeDataString(stringToUnescape));
         }

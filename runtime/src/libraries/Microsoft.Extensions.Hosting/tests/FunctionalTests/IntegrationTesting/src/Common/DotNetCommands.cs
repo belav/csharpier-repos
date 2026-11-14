@@ -70,7 +70,10 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
         public static bool IsRunningX86OnX64(RuntimeArchitecture arch)
         {
-            return (RuntimeInformation.OSArchitecture == Architecture.X64 || RuntimeInformation.OSArchitecture == Architecture.Arm64)
+            return (
+                    RuntimeInformation.OSArchitecture == Architecture.X64
+                    || RuntimeInformation.OSArchitecture == Architecture.Arm64
+                )
                 && arch == RuntimeArchitecture.x86;
         }
     }

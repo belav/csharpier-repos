@@ -1,20 +1,20 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
-using System.Reflection;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
-using System.StubHelpers;
 using System.Globalization;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Security;
+using System.StubHelpers;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -22,8 +22,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // ICustomProperty implementation - basically a wrapper of PropertyInfo
     //
     internal sealed class CustomPropertyImpl : ICustomProperty
-    {     
-        private PropertyInfo  m_property;
+    {
+        private PropertyInfo m_property;
 
         //
         // Constructor
@@ -42,16 +42,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         public string Name
         {
-            get
-            {
-                return m_property.Name;
-            }
+            get { return m_property.Name; }
         }
-        
+
         public bool CanRead
         {
-            get 
-            { 
+            get
+            {
                 // Return false if the getter is not public
                 return m_property.GetGetMethod() != null;
             }
@@ -59,7 +56,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         public bool CanWrite
         {
-            get 
+            get
             {
                 // Return false if the setter is not public
                 return m_property.GetSetMethod() != null;
@@ -100,16 +97,22 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 target = proxy.GetTarget();
             }
 
-            // You can get PropertyInfo for properties with a private getter/public setter (or vice versa) 
-            // even if you pass BindingFlags.Public only. And in this case, passing binding flags to 
+            // You can get PropertyInfo for properties with a private getter/public setter (or vice versa)
+            // even if you pass BindingFlags.Public only. And in this case, passing binding flags to
             // GetValue/SetValue won't work as the default binder ignores those values
             // Use GetGetMethod/GetSetMethod instead
 
             // We get non-public accessors just so that we can throw the correct exception.
-            MethodInfo accessor = getValue ? m_property.GetGetMethod(true) : m_property.GetSetMethod(true);
-            
+            MethodInfo accessor = getValue
+                ? m_property.GetGetMethod(true)
+                : m_property.GetSetMethod(true);
+
             if (accessor == null)
-                throw new ArgumentException(System.Environment.GetResourceString(getValue ? "Arg_GetMethNotFnd" : "Arg_SetMethNotFnd"));
+                throw new ArgumentException(
+                    System.Environment.GetResourceString(
+                        getValue ? "Arg_GetMethNotFnd" : "Arg_SetMethNotFnd"
+                    )
+                );
 
             if (!accessor.IsPublic)
                 throw new MethodAccessException(
@@ -117,11 +120,15 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         CultureInfo.CurrentCulture,
                         Environment.GetResourceString("Arg_MethodAccessException_WithMethodName"),
                         accessor.ToString(),
-                        accessor.DeclaringType.FullName));
+                        accessor.DeclaringType.FullName
+                    )
+                );
 
             RuntimeMethodInfo rtMethod = accessor as RuntimeMethodInfo;
             if (rtMethod == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeMethodInfo"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeMethodInfo")
+                );
 
             // We can safely skip access check because this is only used in full trust scenarios.
             // And we have already verified that the property accessor is public.
@@ -131,10 +138,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         public Type Type
         {
-            get
-            {
-                return m_property.PropertyType;
-            }
+            get { return m_property.PropertyType; }
         }
     }
 }

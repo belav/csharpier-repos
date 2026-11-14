@@ -121,7 +121,8 @@ namespace RunTests
             string configuration,
             string testResultsDirectory,
             string logFilesDirectory,
-            string architecture)
+            string architecture
+        )
         {
             DotnetFilePath = dotnetFilePath;
             ArtifactsDirectory = artifactsDirectory;
@@ -160,29 +161,93 @@ namespace RunTests
             var optionSet = new OptionSet()
             {
                 { "dotnet=", "Path to dotnet", (string s) => dotnetFilePath = s },
-                { "configuration=", "Configuration to test: Debug or Release", (string s) => configuration = s },
+                {
+                    "configuration=",
+                    "Configuration to test: Debug or Release",
+                    (string s) => configuration = s
+                },
                 { "tfm=", "Target framework to test", (string s) => targetFrameworks.Add(s) },
-                { "include=", "Expression for including unit test dlls: default *.UnitTests.dll", (string s) => includeFilter.Add(s) },
-                { "exclude=", "Expression for excluding unit test dlls: default is empty", (string s) => excludeFilter.Add(s) },
-                { "arch=", "Architecture to test on: x86, x64 or arm64", (string s) => architecture = s },
+                {
+                    "include=",
+                    "Expression for including unit test dlls: default *.UnitTests.dll",
+                    (string s) => includeFilter.Add(s)
+                },
+                {
+                    "exclude=",
+                    "Expression for excluding unit test dlls: default is empty",
+                    (string s) => excludeFilter.Add(s)
+                },
+                {
+                    "arch=",
+                    "Architecture to test on: x86, x64 or arm64",
+                    (string s) => architecture = s
+                },
                 { "html", "Include HTML file output", o => includeHtml = o is object },
                 { "sequential", "Run tests sequentially", o => sequential = o is object },
                 { "helix", "Run tests on Helix", o => helix = o is object },
-                { "helixQueueName=", "Name of the Helix queue to run tests on", (string s) => helixQueueName = s },
-                { "helixApiAccessToken=", "Access token for internal helix queues", (string s) => helixApiAccessToken = s },
-                { "testfilter=", "xUnit string to pass to --filter, e.g. FullyQualifiedName~TestClass1|Category=CategoryA", (string s) => testFilter = s },
+                {
+                    "helixQueueName=",
+                    "Name of the Helix queue to run tests on",
+                    (string s) => helixQueueName = s
+                },
+                {
+                    "helixApiAccessToken=",
+                    "Access token for internal helix queues",
+                    (string s) => helixApiAccessToken = s
+                },
+                {
+                    "testfilter=",
+                    "xUnit string to pass to --filter, e.g. FullyQualifiedName~TestClass1|Category=CategoryA",
+                    (string s) => testFilter = s
+                },
                 { "timeout=", "Minute timeout to limit the tests to", (int i) => timeout = i },
-                { "out=", "Test result file directory (when running on Helix, this is relative to the Helix work item directory)", (string s) => resultFileDirectory = s },
-                { "logs=", "Log file directory (when running on Helix, this is relative to the Helix work item directory)", (string s) => logFileDirectory = s },
+                {
+                    "out=",
+                    "Test result file directory (when running on Helix, this is relative to the Helix work item directory)",
+                    (string s) => resultFileDirectory = s
+                },
+                {
+                    "logs=",
+                    "Log file directory (when running on Helix, this is relative to the Helix work item directory)",
+                    (string s) => logFileDirectory = s
+                },
                 { "display=", "Display", (Display d) => display = d },
-                { "artifactspath=", "Path to the artifacts directory", (string s) => artifactsPath = s },
+                {
+                    "artifactspath=",
+                    "Path to the artifacts directory",
+                    (string s) => artifactsPath = s
+                },
                 { "procdumppath=", "Path to procdump", (string s) => procDumpFilePath = s },
-                { "collectdumps", "Whether or not to gather dumps on timeouts and crashes", o => collectDumps = o is object },
-                { "accessToken=", "Pipeline access token with permissions to view test history", (string s) => accessToken = s },
-                { "projectUri=", "ADO project containing the pipeline", (string s) => projectUri = s },
-                { "pipelineDefinitionId=", "Pipeline definition id", (string s) => pipelineDefinitionId = s },
-                { "phaseName=", "Pipeline phase name associated with this test run", (string s) => phaseName = s },
-                { "targetBranchName=", "Target branch of this pipeline run", (string s) => targetBranchName = s },
+                {
+                    "collectdumps",
+                    "Whether or not to gather dumps on timeouts and crashes",
+                    o => collectDumps = o is object
+                },
+                {
+                    "accessToken=",
+                    "Pipeline access token with permissions to view test history",
+                    (string s) => accessToken = s
+                },
+                {
+                    "projectUri=",
+                    "ADO project containing the pipeline",
+                    (string s) => projectUri = s
+                },
+                {
+                    "pipelineDefinitionId=",
+                    "Pipeline definition id",
+                    (string s) => pipelineDefinitionId = s
+                },
+                {
+                    "phaseName=",
+                    "Pipeline phase name associated with this test run",
+                    (string s) => phaseName = s
+                },
+                {
+                    "targetBranchName=",
+                    "Target branch of this pipeline run",
+                    (string s) => targetBranchName = s
+                },
             };
 
             List<string> assemblyList;
@@ -229,7 +294,9 @@ namespace RunTests
 
             if (procDumpFilePath is { } && !collectDumps)
             {
-                ConsoleUtil.WriteLine($"procdumppath was specified without collectdumps hence it will not be used");
+                ConsoleUtil.WriteLine(
+                    $"procdumppath was specified without collectdumps hence it will not be used"
+                );
             }
 
             return new Options(
@@ -238,7 +305,8 @@ namespace RunTests
                 configuration: configuration,
                 testResultsDirectory: resultFileDirectory,
                 logFilesDirectory: logFileDirectory,
-                architecture: architecture)
+                architecture: architecture
+            )
             {
                 TargetFrameworks = targetFrameworks,
                 IncludeFilter = includeFilter,
@@ -274,7 +342,9 @@ namespace RunTests
             static string? TryGetDotNetPath()
             {
                 var dir = RuntimeEnvironment.GetRuntimeDirectory();
-                var programName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dotnet.exe" : "dotnet";
+                var programName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    ? "dotnet.exe"
+                    : "dotnet";
 
                 while (dir != null && !File.Exists(Path.Combine(dir, programName)))
                 {

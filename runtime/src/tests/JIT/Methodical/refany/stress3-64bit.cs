@@ -1,47 +1,47 @@
 // Licensed to the .NET Foundation under one or more agreements.
 using Xunit;
+
 namespace Test_stress3_64bit
 {
-// The .NET Foundation licenses this file to you under the MIT license.
+    // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace JitTest
-{
-    using System;
-
-    public class StressTest
+    namespace JitTest
     {
-        private const int ITERATIONS = 4500;
+        using System;
 
-        private static void PackRef(ref String refee, int iterCount)
+        public class StressTest
         {
-            if (++iterCount == ITERATIONS)
-            {
-                Console.WriteLine(ITERATIONS.ToString() + " refs created.");
-            }
-            else
-            {
-                TypedReference _ref = __makeref(refee);
-                PackRef(ref refee, iterCount);
-                if (__reftype(_ref) != typeof(String) ||
-                    __refvalue(_ref, String) != "Hello")
-                    throw new Exception();
-            }
-        }
+            private const int ITERATIONS = 4500;
 
-        [Fact]
-        public static int TestEntryPoint()
-        {
-            try
+            private static void PackRef(ref String refee, int iterCount)
             {
-                String N = "Hello";
-                PackRef(ref N, 0);
-                return 100;
+                if (++iterCount == ITERATIONS)
+                {
+                    Console.WriteLine(ITERATIONS.ToString() + " refs created.");
+                }
+                else
+                {
+                    TypedReference _ref = __makeref(refee);
+                    PackRef(ref refee, iterCount);
+                    if (__reftype(_ref) != typeof(String) || __refvalue(_ref, String) != "Hello")
+                        throw new Exception();
+                }
             }
-            catch (Exception)
+
+            [Fact]
+            public static int TestEntryPoint()
             {
-                return 1;
+                try
+                {
+                    String N = "Hello";
+                    PackRef(ref N, 0);
+                    return 100;
+                }
+                catch (Exception)
+                {
+                    return 1;
+                }
             }
         }
     }
-}
 }

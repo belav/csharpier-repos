@@ -13,7 +13,7 @@ namespace System.Reflection.TypeLoading
             if (toTypeInfo == null)
                 throw new NullReferenceException();
             if (fromTypeInfo == null)
-                return false;   // It would be more appropriate to throw ArgumentNullException here, but returning "false" is the desktop-compat behavior.
+                return false; // It would be more appropriate to throw ArgumentNullException here, but returning "false" is the desktop-compat behavior.
 
             if (fromTypeInfo.Equals(toTypeInfo))
                 return true;
@@ -33,7 +33,9 @@ namespace System.Reflection.TypeLoading
                 // generic type parameters. The .NET Native framework keeps the two separate. For the purpose of IsAssignableFrom(),
                 // it makes sense to unify the two for the sake of backward compat. We'll just make the transform here so that the rest of code
                 // doesn't need to know about this quirk.
-                fromTypeInfo = fromTypeInfo.GetGenericTypeDefinition().MakeGenericType(fromTypeInfo.GetGenericTypeParameters());
+                fromTypeInfo = fromTypeInfo
+                    .GetGenericTypeDefinition()
+                    .MakeGenericType(fromTypeInfo.GetGenericTypeParameters());
             }
 
             if (fromTypeInfo.CanCastTo(toTypeInfo, coreTypes))
@@ -42,7 +44,10 @@ namespace System.Reflection.TypeLoading
             // .NET Framework compat: IsAssignableFrom() considers T as assignable to Nullable<T> (but does not check if T is a generic parameter.)
             if (!fromTypeInfo.IsGenericParameter)
             {
-                if (toTypeInfo.IsConstructedGenericType && toTypeInfo.GetGenericTypeDefinition() == coreTypes[CoreType.NullableT])
+                if (
+                    toTypeInfo.IsConstructedGenericType
+                    && toTypeInfo.GetGenericTypeDefinition() == coreTypes[CoreType.NullableT]
+                )
                 {
                     Type nullableUnderlyingType = toTypeInfo.GenericTypeArguments[0];
                     if (nullableUnderlyingType.Equals(fromTypeInfo))
@@ -63,7 +68,7 @@ namespace System.Reflection.TypeLoading
                     return fromTypeInfo.CanCastArrayToInterface(toTypeInfo, coreTypes);
 
                 if (fromTypeInfo.IsSubclassOf(toTypeInfo))
-                    return true;  // T[] is castable to Array or Object.
+                    return true; // T[] is castable to Array or Object.
 
                 if (!toTypeInfo.IsArray)
                     return false;
@@ -85,7 +90,10 @@ namespace System.Reflection.TypeLoading
 
                 Type toElementTypeInfo = toTypeInfo.GetElementType()!;
                 Type fromElementTypeInfo = fromTypeInfo.GetElementType()!;
-                return fromElementTypeInfo.IsElementTypeCompatibleWith(toElementTypeInfo, coreTypes);
+                return fromElementTypeInfo.IsElementTypeCompatibleWith(
+                    toElementTypeInfo,
+                    coreTypes
+                );
             }
 
             if (fromTypeInfo.IsByRef)
@@ -95,23 +103,29 @@ namespace System.Reflection.TypeLoading
 
                 Type toElementTypeInfo = toTypeInfo.GetElementType()!;
                 Type fromElementTypeInfo = fromTypeInfo.GetElementType()!;
-                return fromElementTypeInfo.IsElementTypeCompatibleWith(toElementTypeInfo, coreTypes);
+                return fromElementTypeInfo.IsElementTypeCompatibleWith(
+                    toElementTypeInfo,
+                    coreTypes
+                );
             }
 
             if (fromTypeInfo.IsPointer)
             {
                 if (toTypeInfo.Equals(coreTypes[CoreType.Object]))
-                    return true;  // T* is castable to Object.
+                    return true; // T* is castable to Object.
 
                 if (toTypeInfo.Equals(coreTypes[CoreType.UIntPtr]))
-                    return true;  // T* is castable to UIntPtr (but not IntPtr)
+                    return true; // T* is castable to UIntPtr (but not IntPtr)
 
                 if (!toTypeInfo.IsPointer)
                     return false;
 
                 Type toElementTypeInfo = toTypeInfo.GetElementType()!;
                 Type fromElementTypeInfo = fromTypeInfo.GetElementType()!;
-                return fromElementTypeInfo.IsElementTypeCompatibleWith(toElementTypeInfo, coreTypes);
+                return fromElementTypeInfo.IsElementTypeCompatibleWith(
+                    toElementTypeInfo,
+                    coreTypes
+                );
             }
 
             if (fromTypeInfo.IsGenericParameter)
@@ -128,7 +142,10 @@ namespace System.Reflection.TypeLoading
                 if (toTypeInfo.Equals(coreTypes[CoreType.ValueType]))
                 {
                     GenericParameterAttributes attributes = fromTypeInfo.GenericParameterAttributes;
-                    if ((attributes & GenericParameterAttributes.NotNullableValueTypeConstraint) != 0)
+                    if (
+                        (attributes & GenericParameterAttributes.NotNullableValueTypeConstraint)
+                        != 0
+                    )
                         return true;
                 }
 
@@ -141,7 +158,12 @@ namespace System.Reflection.TypeLoading
                 return false;
             }
 
-            if (toTypeInfo.IsArray || toTypeInfo.IsByRef || toTypeInfo.IsPointer || toTypeInfo.IsGenericParameter)
+            if (
+                toTypeInfo.IsArray
+                || toTypeInfo.IsByRef
+                || toTypeInfo.IsPointer
+                || toTypeInfo.IsGenericParameter
+            )
                 return false;
 
             if (fromTypeInfo.MatchesWithVariance(toTypeInfo, coreTypes))
@@ -179,10 +201,28 @@ namespace System.Reflection.TypeLoading
         // Check a base type or implemented interface type for equivalence (taking into account variance for generic instantiations.)
         // Does not check ancestors recursively.
         //
-        private static bool MatchesWithVariance(this Type fromTypeInfo, Type toTypeInfo, CoreTypes coreTypes)
+        private static bool MatchesWithVariance(
+            this Type fromTypeInfo,
+            Type toTypeInfo,
+            CoreTypes coreTypes
+        )
         {
-            Debug.Assert(!(fromTypeInfo.IsArray || fromTypeInfo.IsByRef || fromTypeInfo.IsPointer || fromTypeInfo.IsGenericParameter));
-            Debug.Assert(!(toTypeInfo.IsArray || toTypeInfo.IsByRef || toTypeInfo.IsPointer || toTypeInfo.IsGenericParameter));
+            Debug.Assert(
+                !(
+                    fromTypeInfo.IsArray
+                    || fromTypeInfo.IsByRef
+                    || fromTypeInfo.IsPointer
+                    || fromTypeInfo.IsGenericParameter
+                )
+            );
+            Debug.Assert(
+                !(
+                    toTypeInfo.IsArray
+                    || toTypeInfo.IsByRef
+                    || toTypeInfo.IsPointer
+                    || toTypeInfo.IsGenericParameter
+                )
+            );
 
             if (fromTypeInfo.Equals(toTypeInfo))
                 return true;
@@ -202,16 +242,32 @@ namespace System.Reflection.TypeLoading
                 Type fromTypeArgumentInfo = fromTypeArguments[i];
                 Type toTypeArgumentInfo = toTypeArguments[i];
 
-                GenericParameterAttributes attributes = genericTypeParameters[i].GenericParameterAttributes;
+                GenericParameterAttributes attributes = genericTypeParameters[
+                    i
+                ].GenericParameterAttributes;
                 switch (attributes & GenericParameterAttributes.VarianceMask)
                 {
                     case GenericParameterAttributes.Covariant:
-                        if (!(fromTypeArgumentInfo.IsGcReferenceTypeAndCastableTo(toTypeArgumentInfo, coreTypes)))
+                        if (
+                            !(
+                                fromTypeArgumentInfo.IsGcReferenceTypeAndCastableTo(
+                                    toTypeArgumentInfo,
+                                    coreTypes
+                                )
+                            )
+                        )
                             return false;
                         break;
 
                     case GenericParameterAttributes.Contravariant:
-                        if (!(toTypeArgumentInfo.IsGcReferenceTypeAndCastableTo(fromTypeArgumentInfo, coreTypes)))
+                        if (
+                            !(
+                                toTypeArgumentInfo.IsGcReferenceTypeAndCastableTo(
+                                    fromTypeArgumentInfo,
+                                    coreTypes
+                                )
+                            )
+                        )
                             return false;
                         break;
 
@@ -221,7 +277,7 @@ namespace System.Reflection.TypeLoading
                         break;
 
                     default:
-                        throw new BadImageFormatException();  // Unexpected variance value in metadata.
+                        throw new BadImageFormatException(); // Unexpected variance value in metadata.
                 }
             }
             return true;
@@ -237,7 +293,11 @@ namespace System.Reflection.TypeLoading
         //
         // For .NET Framework compat, A& and A* follow the same rules.
         //
-        private static bool IsElementTypeCompatibleWith(this Type fromTypeInfo, Type toTypeInfo, CoreTypes coreTypes)
+        private static bool IsElementTypeCompatibleWith(
+            this Type fromTypeInfo,
+            Type toTypeInfo,
+            CoreTypes coreTypes
+        )
         {
             if (fromTypeInfo.IsGcReferenceTypeAndCastableTo(toTypeInfo, coreTypes))
                 return true;
@@ -256,16 +316,20 @@ namespace System.Reflection.TypeLoading
                 t = t.GetEnumUnderlyingType();
 
             if (t.Equals(coreTypes[CoreType.Byte]))
-                return coreTypes[CoreType.SByte] ?? throw new TypeLoadException(SR.Format(SR.CoreTypeNotFound, "System.SByte"));
+                return coreTypes[CoreType.SByte]
+                    ?? throw new TypeLoadException(SR.Format(SR.CoreTypeNotFound, "System.SByte"));
 
             if (t.Equals(coreTypes[CoreType.UInt16]))
-                return coreTypes[CoreType.Int16] ?? throw new TypeLoadException(SR.Format(SR.CoreTypeNotFound, "System.Int16"));
+                return coreTypes[CoreType.Int16]
+                    ?? throw new TypeLoadException(SR.Format(SR.CoreTypeNotFound, "System.Int16"));
 
             if (t.Equals(coreTypes[CoreType.UInt32]))
-                return coreTypes[CoreType.Int32] ?? throw new TypeLoadException(SR.Format(SR.CoreTypeNotFound, "System.Int32"));
+                return coreTypes[CoreType.Int32]
+                    ?? throw new TypeLoadException(SR.Format(SR.CoreTypeNotFound, "System.Int32"));
 
             if (t.Equals(coreTypes[CoreType.UInt64]))
-                return coreTypes[CoreType.Int64] ?? throw new TypeLoadException(SR.Format(SR.CoreTypeNotFound, "System.Int64"));
+                return coreTypes[CoreType.Int64]
+                    ?? throw new TypeLoadException(SR.Format(SR.CoreTypeNotFound, "System.Int64"));
 
             return t;
         }
@@ -275,7 +339,11 @@ namespace System.Reflection.TypeLoading
         //
         // IEnumerable<D> can cast to IEnumerable<B> if D can cast to B and if there's no possibility that D is a value type.
         //
-        private static bool IsGcReferenceTypeAndCastableTo(this Type fromTypeInfo, Type toTypeInfo, CoreTypes coreTypes)
+        private static bool IsGcReferenceTypeAndCastableTo(
+            this Type fromTypeInfo,
+            Type toTypeInfo,
+            CoreTypes coreTypes
+        )
         {
             if (fromTypeInfo.Equals(toTypeInfo))
                 return true;
@@ -295,7 +363,7 @@ namespace System.Reflection.TypeLoading
             {
                 GenericParameterAttributes attributes = t.GenericParameterAttributes;
                 if ((attributes & GenericParameterAttributes.ReferenceTypeConstraint) != 0)
-                    return true;   // generic parameter with a "class" constraint.
+                    return true; // generic parameter with a "class" constraint.
             }
 
             return t.ProvablyAGcReferenceTypeHelper(coreTypes);
@@ -323,14 +391,21 @@ namespace System.Reflection.TypeLoading
                 return false;
             }
 
-            return t.IsClass && !t.Equals(coreTypes[CoreType.Object]) && !t.Equals(coreTypes[CoreType.ValueType]) && !t.Equals(coreTypes[CoreType.Enum]);
+            return t.IsClass
+                && !t.Equals(coreTypes[CoreType.Object])
+                && !t.Equals(coreTypes[CoreType.ValueType])
+                && !t.Equals(coreTypes[CoreType.Enum]);
         }
 
         //
         // T[] casts to IList<T>. This could be handled by the normal ancestor-walking code
         // but for one complication: T[] also casts to IList<U> if T[] casts to U[].
         //
-        private static bool CanCastArrayToInterface(this Type fromTypeInfo, Type toTypeInfo, CoreTypes coreTypes)
+        private static bool CanCastArrayToInterface(
+            this Type fromTypeInfo,
+            Type toTypeInfo,
+            CoreTypes coreTypes
+        )
         {
             Debug.Assert(fromTypeInfo.IsArray);
             Debug.Assert(toTypeInfo.IsInterface);
@@ -351,7 +426,12 @@ namespace System.Reflection.TypeLoading
                         Type ifcGenericTypeDefinition = ifc.GetGenericTypeDefinition();
                         if (ifcGenericTypeDefinition.Equals(toTypeGenericTypeDefinition))
                         {
-                            if (fromElementTypeInfo!.IsElementTypeCompatibleWith(toElementTypeInfo, coreTypes))
+                            if (
+                                fromElementTypeInfo!.IsElementTypeCompatibleWith(
+                                    toElementTypeInfo,
+                                    coreTypes
+                                )
+                            )
                                 return true;
                         }
                     }

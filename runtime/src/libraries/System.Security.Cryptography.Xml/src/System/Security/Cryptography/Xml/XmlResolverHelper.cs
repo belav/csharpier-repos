@@ -30,7 +30,9 @@ namespace System.Security.Cryptography.Xml
 
             public override ICredentials Credentials
             {
-                set { /* Do nothing */ }
+                set
+                { /* Do nothing */
+                }
             }
 
             public override object GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn)
@@ -38,7 +40,11 @@ namespace System.Security.Cryptography.Xml
                 throw new XmlException(SR.Cryptography_Xml_EntityResolutionNotSupported);
             }
 
-            public override Task<object> GetEntityAsync(Uri absoluteUri, string? role, Type? ofObjectToReturn)
+            public override Task<object> GetEntityAsync(
+                Uri absoluteUri,
+                string? role,
+                Type? ofObjectToReturn
+            )
             {
                 throw new XmlException(SR.Cryptography_Xml_EntityResolutionNotSupported);
             }

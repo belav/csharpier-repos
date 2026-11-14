@@ -30,7 +30,6 @@ namespace Microsoft.Diagnostics.NETCore.Client
         public byte CommandId;
         public UInt16 Reserved = 0x0000;
 
-
         // Helper expression to quickly get V1 magic string for comparison
         // should be 14 bytes long
         public static byte[] DotnetIpcV1 => Encoding.ASCII.GetBytes("DOTNET_IPC_V1" + '\0');
@@ -59,15 +58,20 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 Size = reader.ReadUInt16(),
                 CommandSet = reader.ReadByte(),
                 CommandId = reader.ReadByte(),
-                Reserved = reader.ReadUInt16()
+                Reserved = reader.ReadUInt16(),
             };
 
             return header;
         }
 
-        public static async Task<IpcHeader> ParseAsync(Stream stream, CancellationToken cancellationToken)
+        public static async Task<IpcHeader> ParseAsync(
+            Stream stream,
+            CancellationToken cancellationToken
+        )
         {
-            byte[] buffer = await stream.ReadBytesAsync(HeaderSizeInBytes, cancellationToken).ConfigureAwait(false);
+            byte[] buffer = await stream
+                .ReadBytesAsync(HeaderSizeInBytes, cancellationToken)
+                .ConfigureAwait(false);
             using MemoryStream bufferStream = new MemoryStream(buffer);
             using BinaryReader bufferReader = new BinaryReader(bufferStream);
             IpcHeader header = Parse(bufferReader);
@@ -75,7 +79,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return header;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return $"{{ Magic={Magic}; Size={Size}; CommandSet={CommandSet}; CommandId={CommandId}; Reserved={Reserved} }}";
         }

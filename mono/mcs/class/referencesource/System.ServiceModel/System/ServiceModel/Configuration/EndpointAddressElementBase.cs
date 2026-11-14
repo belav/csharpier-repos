@@ -5,18 +5,20 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.Xml;
 
     public partial class EndpointAddressElementBase : ServiceModelConfigurationElement
     {
-        protected EndpointAddressElementBase()
-        {
-        }
+        protected EndpointAddressElementBase() { }
 
-        [ConfigurationProperty(ConfigurationStrings.Address, DefaultValue = null, Options = ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Address,
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
         public Uri Address
         {
             get { return (Uri)base[ConfigurationStrings.Address]; }
@@ -35,12 +37,13 @@ namespace System.ServiceModel.Configuration
             get { return (IdentityElement)base[ConfigurationStrings.Identity]; }
         }
 
-
-        internal protected void Copy(EndpointAddressElementBase source)
+        protected internal void Copy(EndpointAddressElementBase source)
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == source)
             {
@@ -50,7 +53,9 @@ namespace System.ServiceModel.Configuration
             this.Address = source.Address;
             this.Headers.Headers = source.Headers.Headers;
             PropertyInformationCollection properties = source.ElementInformation.Properties;
-            if (properties[ConfigurationStrings.Identity].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.Identity].ValueOrigin != PropertyValueOrigin.Default
+            )
             {
                 this.Identity.Copy(source.Identity);
             }
@@ -73,6 +78,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

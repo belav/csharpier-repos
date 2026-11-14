@@ -13,6 +13,7 @@ namespace System.CommandLine.Rendering.Views
             SizeMode = sizeMode;
             Value = value;
         }
+
         public static RowDefinition Fixed(int size)
         {
             if (size < 0.0)
@@ -30,7 +31,7 @@ namespace System.CommandLine.Rendering.Views
             }
             return new RowDefinition(SizeMode.Star, weight);
         }
-        
+
         public static RowDefinition SizeToContent() => new(SizeMode.SizeToContent, 0);
     }
 }

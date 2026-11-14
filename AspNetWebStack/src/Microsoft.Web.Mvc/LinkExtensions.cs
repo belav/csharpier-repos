@@ -13,11 +13,34 @@ namespace Microsoft.Web.Mvc
 {
     public static class LinkExtensions
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "This is a UI method and is required to use strings as Uri"), SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an Extension Method which allows the user to provide a strongly-typed argument via Expression")]
-        public static string BuildUrlFromExpression<TController>(this HtmlHelper helper, Expression<Action<TController>> action) where TController : Controller
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1055:UriReturnValuesShouldNotBeStrings",
+                Justification = "This is a UI method and is required to use strings as Uri"
+            ),
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1006:DoNotNestGenericTypesInMemberSignatures",
+                Justification = "This is an Extension Method which allows the user to provide a strongly-typed argument via Expression"
+            )
+        ]
+        public static string BuildUrlFromExpression<TController>(
+            this HtmlHelper helper,
+            Expression<Action<TController>> action
+        )
+            where TController : Controller
         {
-            return LinkBuilder.BuildUrlFromExpression(helper.ViewContext.RequestContext, helper.RouteCollection, action);
+            return LinkBuilder.BuildUrlFromExpression(
+                helper.ViewContext.RequestContext,
+                helper.RouteCollection,
+                action
+            );
         }
 
         /// <summary>
@@ -28,8 +51,17 @@ namespace Microsoft.Web.Mvc
         /// <param name="action">The Method to route to</param>
         /// <param name="linkText">The linked text to appear on the page</param>
         /// <returns>The anchor tag.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ActionLink<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText) where TController : Controller
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ActionLink<TController>(
+            this HtmlHelper helper,
+            Expression<Action<TController>> action,
+            string linkText
+        )
+            where TController : Controller
         {
             return ActionLink(helper, action, linkText, null);
         }
@@ -43,12 +75,28 @@ namespace Microsoft.Web.Mvc
         /// <param name="linkText">The linked text to appear on the page</param>
         /// <param name="htmlAttributes">Any additional HTML attributes.</param>
         /// <returns>The anchor tag.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ActionLink<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText, object htmlAttributes) where TController : Controller
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ActionLink<TController>(
+            this HtmlHelper helper,
+            Expression<Action<TController>> action,
+            string linkText,
+            object htmlAttributes
+        )
+            where TController : Controller
         {
-            RouteValueDictionary routingValues = ExpressionHelper.GetRouteValuesFromExpression(action);
+            RouteValueDictionary routingValues = ExpressionHelper.GetRouteValuesFromExpression(
+                action
+            );
 
-            return helper.RouteLink(linkText, routingValues, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return helper.RouteLink(
+                linkText,
+                routingValues,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
     }
 }

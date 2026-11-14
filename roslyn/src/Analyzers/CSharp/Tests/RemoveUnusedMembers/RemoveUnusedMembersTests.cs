@@ -18,14 +18,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnusedMembersDiagnosticAnalyzer,
-        CSharpRemoveUnusedMembersCodeFixProvider>;
+        CSharpRemoveUnusedMembersCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
     public class RemoveUnusedMembersTests
     {
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31582")]
         public async Task FieldReadViaSuppression()
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
         [InlineData("private protected")]
         public async Task NonPrivateField(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} int _goo;
 }}";
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
         [InlineData("private protected")]
         public async Task NonPrivateFieldWithConstantInitializer(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} int _goo = 0;
 }}";
@@ -85,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
         [InlineData("private protected")]
         public async Task NonPrivateFieldWithNonConstantInitializer(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} int _goo = _goo2;
     private static readonly int _goo2 = 0;
@@ -102,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
         [InlineData("private protected")]
         public async Task NonPrivateMethod(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} void M() {{ }}
 }}";
@@ -118,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
         [InlineData("private protected")]
         public async Task NonPrivateProperty(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} int P {{ get; }}
 }}";
@@ -134,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
         [InlineData("private protected")]
         public async Task NonPrivateIndexer(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility}
     int this[int arg] {{ get {{ return 0; }} set {{ }} }}
@@ -151,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
         [InlineData("private protected")]
         public async Task NonPrivateEvent(string accessibility)
         {
-            var code = $@"using System;
+            var code =
+                $@"using System;
 
 class MyClass
 {{
@@ -175,7 +183,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -192,7 +201,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -209,7 +219,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -226,7 +237,8 @@ class MyClass
                 class MyClass<T>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -257,7 +269,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -300,7 +313,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -317,7 +331,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -334,7 +349,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -439,14 +455,8 @@ class MyClass
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { code, code },
-                },
-                FixedState =
-                {
-                    Sources = { code, code },
-                },
+                TestState = { Sources = { code, code } },
+                FixedState = { Sources = { code, code } },
                 ExpectedDiagnostics =
                 {
                     // /0/Test0.cs(2,1): error CS8805: Program using top-level statements must be an executable.
@@ -467,11 +477,7 @@ class MyClass
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { code },
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication },
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
@@ -491,10 +497,7 @@ class MyClass
                     Sources = { code, code },
                     OutputKind = OutputKind.ConsoleApplication,
                 },
-                FixedState =
-                {
-                    Sources = { code, code },
-                },
+                FixedState = { Sources = { code, code } },
                 ExpectedDiagnostics =
                 {
                     // /0/Test1.cs(2,1): error CS8802: Only one compilation unit can have top-level statements.
@@ -518,7 +521,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -535,7 +539,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -553,7 +558,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -570,7 +576,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -587,7 +594,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -604,7 +612,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -622,7 +631,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -639,7 +649,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -756,7 +767,8 @@ class MyClass
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30894")]
@@ -787,7 +799,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1424,8 +1437,7 @@ class MyClass
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33994")]
         public async Task PropertyIsOnlyWritten()
         {
-            var source =
-                """
+            var source = """
                 class MyClass
                 {
                     private int {|#0:P|} { get; set; }
@@ -1436,8 +1448,14 @@ class MyClass
                 }
                 """;
 
-            var descriptor = new CSharpRemoveUnusedMembersDiagnosticAnalyzer().SupportedDiagnostics.First(x => x.Id == "IDE0052");
-            var expectedMessage = string.Format(AnalyzersResources.Private_property_0_can_be_converted_to_a_method_as_its_get_accessor_is_never_invoked, "MyClass.P");
+            var descriptor =
+                new CSharpRemoveUnusedMembersDiagnosticAnalyzer().SupportedDiagnostics.First(x =>
+                    x.Id == "IDE0052"
+                );
+            var expectedMessage = string.Format(
+                AnalyzersResources.Private_property_0_can_be_converted_to_a_method_as_its_get_accessor_is_never_invoked,
+                "MyClass.P"
+            );
 
             await new VerifyCS.Test
             {
@@ -1717,10 +1735,14 @@ class MyClass
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(code, new DiagnosticResult(
-                CSharpRemoveUnusedMembersDiagnosticAnalyzer.s_removeUnreadMembersRule)
-                .WithSpan(3, 17, 3, 18)
-                .WithArguments("MyClass.P"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                code,
+                new DiagnosticResult(
+                    CSharpRemoveUnusedMembersDiagnosticAnalyzer.s_removeUnreadMembersRule
+                )
+                    .WithSpan(3, 17, 3, 18)
+                    .WithArguments("MyClass.P")
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43191")]
@@ -1777,10 +1799,14 @@ class MyClass
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(code, new DiagnosticResult(
-                CSharpRemoveUnusedMembersDiagnosticAnalyzer.s_removeUnreadMembersRule)
-                .WithSpan(3, 17, 3, 21)
-                .WithArguments("MyClass.this"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                code,
+                new DiagnosticResult(
+                    CSharpRemoveUnusedMembersDiagnosticAnalyzer.s_removeUnreadMembersRule
+                )
+                    .WithSpan(3, 17, 3, 21)
+                    .WithArguments("MyClass.this")
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43191")]
@@ -1893,10 +1919,14 @@ class MyClass
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(code, new DiagnosticResult(
-                CSharpRemoveUnusedMembersDiagnosticAnalyzer.s_removeUnreadMembersRule)
-                .WithSpan(3, 17, 3, 18)
-                .WithArguments("MyClass.P"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                code,
+                new DiagnosticResult(
+                    CSharpRemoveUnusedMembersDiagnosticAnalyzer.s_removeUnreadMembersRule
+                )
+                    .WithSpan(3, 17, 3, 18)
+                    .WithArguments("MyClass.P")
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43191")]
@@ -1953,10 +1983,14 @@ class MyClass
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(code, new DiagnosticResult(
-                CSharpRemoveUnusedMembersDiagnosticAnalyzer.s_removeUnreadMembersRule)
-                .WithSpan(3, 17, 3, 21)
-                .WithArguments("MyClass.this"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                code,
+                new DiagnosticResult(
+                    CSharpRemoveUnusedMembersDiagnosticAnalyzer.s_removeUnreadMembersRule
+                )
+                    .WithSpan(3, 17, 3, 21)
+                    .WithArguments("MyClass.this")
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43191")]
@@ -2139,7 +2173,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -2147,13 +2182,16 @@ class MyClass
         public async Task MultipleFields_AllUnused_FixOne(
             [CombinatorialValues("[|_goo|]", "[|_goo|] = 0")] string firstField,
             [CombinatorialValues("[|_bar|]", "[|_bar|] = 2")] string secondField,
-            [CombinatorialValues(0, 1)] int diagnosticIndex)
+            [CombinatorialValues(0, 1)] int diagnosticIndex
+        )
         {
-            var source = $@"class MyClass
+            var source =
+                $@"class MyClass
 {{
     private int {firstField}, {secondField};
 }}";
-            var fixedSource = $@"class MyClass
+            var fixedSource =
+                $@"class MyClass
 {{
     private int {(diagnosticIndex == 0 ? secondField : firstField)};
 }}";
@@ -2166,11 +2204,7 @@ class MyClass
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
                 BatchFixedCode = batchFixedSource,
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = fixableDiagnostics => fixableDiagnostics[diagnosticIndex],
@@ -2194,7 +2228,8 @@ class MyClass
                     private int _bar = 0;
                     public int M() => _bar;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2214,7 +2249,8 @@ class MyClass
                     private int _goo = 0;
                     public int M() => _goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2273,7 +2309,8 @@ class MyClass
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2308,7 +2345,8 @@ class MyClass
                 partial class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2461,7 +2499,8 @@ class MyClass
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2555,7 +2594,8 @@ class MyClass
                     // 'ii' is undefined.
                     public int M() => {|CS0103:ii|};
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2765,7 +2805,8 @@ class MyClass
         [InlineData(@"[System.Runtime.InteropServices.ComUnregisterFunctionAttribute]")]
         public async Task MethodsWithSpecialAttributes(string attribute)
         {
-            var code = $@"class C
+            var code =
+                $@"class C
 {{
     {attribute}
     private void M()
@@ -2872,7 +2913,8 @@ class MyClass
 
                     public int Method() => _z;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2898,7 +2940,8 @@ class MyClass
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2918,7 +2961,8 @@ class MyClass
                 class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2956,7 +3000,8 @@ class MyClass
                         EventHandler handler = E2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3133,14 +3178,16 @@ class MyClass
                     private C(int i) { }
                 }
                 """,
-    // /0/Test0.cs(3,13): info IDE0051: Private member 'C.C' is unused
-    VerifyCS.Diagnostic("IDE0051").WithSpan(3, 13, 3, 14).WithArguments("C.C"));
+                // /0/Test0.cs(3,13): info IDE0051: Private member 'C.C' is unused
+                VerifyCS.Diagnostic("IDE0051").WithSpan(3, 13, 3, 14).WithArguments("C.C")
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/62856")]
         public async Task DontWarnForAwaiterMethods()
         {
-            const string code = @"using System;
+            const string code =
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -3164,7 +3211,8 @@ class C : ICriticalNotifyCompletion
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/62856")]
         public async Task WarnForAwaiterMethodsNotImplementingInterface()
         {
-            const string code = @"using System;
+            const string code =
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -3176,7 +3224,8 @@ class C
     public void OnCompleted(Action continuation) => Task.Run(continuation);
     public void UnsafeOnCompleted(Action continuation) => Task.Run(continuation);
 }";
-            const string fixedCode = @"using System;
+            const string fixedCode =
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 

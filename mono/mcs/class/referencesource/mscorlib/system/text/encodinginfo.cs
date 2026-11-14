@@ -8,13 +8,12 @@ namespace System.Text
     using System;
     using System.Text;
 
-
     [Serializable]
     public sealed class EncodingInfo
     {
-        int     iCodePage;          // Code Page #
-        String  strEncodingName;    // Short name (web name)
-        String  strDisplayName;     // Full localized name
+        int iCodePage; // Code Page #
+        String strEncodingName; // Short name (web name)
+        String strDisplayName; // Full localized name
 
         internal EncodingInfo(int codePage, string name, string displayName)
         {
@@ -23,33 +22,20 @@ namespace System.Text
             this.strDisplayName = displayName;
         }
 
-
         public int CodePage
         {
-            get
-            {
-                return iCodePage;
-            }
+            get { return iCodePage; }
         }
-
 
         public String Name
         {
-            get
-            {
-                return strEncodingName;
-            }
+            get { return strEncodingName; }
         }
-
 
         public String DisplayName
         {
-            get
-            {
-                return strDisplayName;
-            }
+            get { return strDisplayName; }
         }
-
 
         public Encoding GetEncoding()
         {
@@ -65,11 +51,10 @@ namespace System.Text
             }
             return (false);
         }
-        
+
         public override int GetHashCode()
         {
             return this.CodePage;
         }
-        
     }
 }

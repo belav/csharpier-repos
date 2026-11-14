@@ -100,14 +100,10 @@ public class StartupForDynamicOrder
             }
         });
 
-        app.Map(
-            "/afterrouting",
-            b =>
-                b.Run(c =>
-                {
-                    return c.Response.WriteAsync("Hello from middleware after routing");
-                })
-        );
+        app.Map("/afterrouting", b => b.Run(c =>
+            {
+                return c.Response.WriteAsync("Hello from middleware after routing");
+            }));
     }
 
     private class TransformerState
@@ -124,8 +120,7 @@ public class StartupForDynamicOrder
             RouteValueDictionary values
         )
         {
-            var kvps =
-                ((string)values?["slug"])?.Split("/")?.LastOrDefault()?.Split(",")
+            var kvps = ((string)values?["slug"])?.Split("/")?.LastOrDefault()?.Split(",")
                 ?? Array.Empty<string>();
 
             // Go to index by default if the route doesn't follow the slug pattern, we want to make sure always match to

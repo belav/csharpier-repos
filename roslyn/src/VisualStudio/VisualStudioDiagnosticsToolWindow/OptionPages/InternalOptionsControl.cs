@@ -32,13 +32,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             var viewer = new ScrollViewer()
             {
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
             };
 
             viewer.Content = optionsPanel;
 
-            // search 
-            var searchBox = new TextBox() { MinWidth = 200, HorizontalAlignment = HorizontalAlignment.Stretch };
+            // search
+            var searchBox = new TextBox()
+            {
+                MinWidth = 200,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
 
             var searchButton = new Button() { Content = "Search" };
             searchButton.Click += (o, a) =>
@@ -65,13 +69,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             };
 
             var clearButton = new Button() { Content = "Clear" };
-            clearButton.Click += (o, a) => optionsPanel.Children.OfType<CheckBox>().Do(c => c.Visibility = Visibility.Visible);
+            clearButton.Click += (o, a) =>
+                optionsPanel.Children.OfType<CheckBox>().Do(c => c.Visibility = Visibility.Visible);
 
             var searchPanel = new StackPanel()
             {
                 Orientation = Orientation.Horizontal,
                 Margin = new Thickness(5),
-                HorizontalAlignment = HorizontalAlignment.Stretch
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             };
 
             searchPanel.Children.Add(searchBox);
@@ -80,16 +85,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             // button
             var checkAllButton = new Button() { Content = "Check All" };
-            checkAllButton.Click += (o, a) => optionsPanel.Children.OfType<CheckBox>().Where(c => c.Visibility == Visibility.Visible).Do(c => c.IsChecked = true);
+            checkAllButton.Click += (o, a) =>
+                optionsPanel
+                    .Children.OfType<CheckBox>()
+                    .Where(c => c.Visibility == Visibility.Visible)
+                    .Do(c => c.IsChecked = true);
 
             var uncheckAllButton = new Button() { Content = "Uncheck All" };
-            uncheckAllButton.Click += (o, a) => optionsPanel.Children.OfType<CheckBox>().Where(c => c.Visibility == Visibility.Visible).Do(c => c.IsChecked = false);
+            uncheckAllButton.Click += (o, a) =>
+                optionsPanel
+                    .Children.OfType<CheckBox>()
+                    .Where(c => c.Visibility == Visibility.Visible)
+                    .Do(c => c.IsChecked = false);
 
             var selectionPanel = new StackPanel()
             {
                 Orientation = Orientation.Horizontal,
                 Margin = new Thickness(5),
-                HorizontalAlignment = HorizontalAlignment.Stretch
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             };
 
             selectionPanel.Children.Add(checkAllButton);
@@ -132,7 +145,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        protected void AddPerLanguageOption(Panel panel, IOption2 option, string languageName, string additional = null)
+        protected void AddPerLanguageOption(
+            Panel panel,
+            IOption2 option,
+            string languageName,
+            string additional = null
+        )
         {
             var uiElement = CreateControl(option, languageName, additional);
             if (uiElement != null)
@@ -141,11 +159,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        private UIElement CreateControl(IOption2 option, string languageName = null, string additional = null)
+        private UIElement CreateControl(
+            IOption2 option,
+            string languageName = null,
+            string additional = null
+        )
         {
             // Underscores in WPF mean that the next character is the access key for keyboard navigation
             // but thats not why our option names have underscores. Also removing them looks nicer.
-            var optionDisplay = option.Definition.ConfigName.Replace('_', ' ') + GetLanguage(languageName) + GetAdditionalText(additional);
+            var optionDisplay =
+                option.Definition.ConfigName.Replace('_', ' ')
+                + GetLanguage(languageName)
+                + GetAdditionalText(additional);
 
             if (option.Type == typeof(bool))
             {

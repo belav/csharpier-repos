@@ -147,8 +147,8 @@ internal sealed class GetDocumentCommandWorker
             // on the WebApplicationBuilder have been processed.
             var applicationLifetime = services.GetRequiredService<IHostApplicationLifetime>();
             using (
-                var registration = applicationLifetime.ApplicationStarted.Register(
-                    () => waitForStartTcs.TrySetResult(null)
+                var registration = applicationLifetime.ApplicationStarted.Register(() =>
+                    waitForStartTcs.TrySetResult(null)
                 )
             )
             {

@@ -1,13 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System;
-using System.Text;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
+using System.Text;
+using Xunit;
 
 //
 // This is the "Type Library" we are going to reflect on
@@ -19,7 +19,7 @@ namespace System.Reflection.CustomAttributesTests.Data
     {
         RED = 1,
         BLUE = 2,
-        GREEN = 3
+        GREEN = 3,
     }
 
     public class Util
@@ -54,9 +54,7 @@ namespace System.Reflection.CustomAttributesTests.Data
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public class Attr : Attribute
     {
-        public Attr()
-        {
-        }
+        public Attr() { }
 
         public Attr(int i)
         {
@@ -101,19 +99,35 @@ namespace System.Reflection.CustomAttributesTests.Data
         public readonly int[] arrayValue;
         public int[] arrayField;
         private int _property = 0;
-        public int property { get { return _property; } set { _property = value; } }
+        public int property
+        {
+            get { return _property; }
+            set { _property = value; }
+        }
         private int[] _arrayProperty;
-        public int[] arrayProperty { get { return _arrayProperty; } set { _arrayProperty = value; } }
+        public int[] arrayProperty
+        {
+            get { return _arrayProperty; }
+            set { _arrayProperty = value; }
+        }
 
         public override string ToString()
         {
-            return GetType().ToString() + " - name : " + name
-                    + "; value : " + Util.ObjectToString(value)
-                    + "; field : " + Util.ObjectToString(field)
-                    + "; property : " + Util.ObjectToString(property)
-                                        + "; array value : " + Util.ObjectToString(arrayValue)
-                                        + "; array field : " + Util.ObjectToString(arrayField)
-                                        + "; array property : " + Util.ObjectToString(arrayProperty);
+            return GetType().ToString()
+                + " - name : "
+                + name
+                + "; value : "
+                + Util.ObjectToString(value)
+                + "; field : "
+                + Util.ObjectToString(field)
+                + "; property : "
+                + Util.ObjectToString(property)
+                + "; array value : "
+                + Util.ObjectToString(arrayValue)
+                + "; array field : "
+                + Util.ObjectToString(arrayField)
+                + "; array property : "
+                + Util.ObjectToString(arrayProperty);
         }
     }
 
@@ -138,19 +152,35 @@ namespace System.Reflection.CustomAttributesTests.Data
         public readonly long[] arrayValue;
         public long[] arrayField;
         private long _property = 0;
-        public long property { get { return _property; } set { _property = value; } }
+        public long property
+        {
+            get { return _property; }
+            set { _property = value; }
+        }
         private long[] _arrayProperty;
-        public long[] arrayProperty { get { return _arrayProperty; } set { _arrayProperty = value; } }
+        public long[] arrayProperty
+        {
+            get { return _arrayProperty; }
+            set { _arrayProperty = value; }
+        }
 
         public override string ToString()
         {
-            return GetType().ToString() + " - name : " + name
-                    + "; value : " + Util.ObjectToString(value)
-                    + "; field : " + Util.ObjectToString(field)
-                    + "; property : " + Util.ObjectToString(property)
-                                        + "; array value : " + Util.ObjectToString(arrayValue)
-                                        + "; array field : " + Util.ObjectToString(arrayField)
-                                        + "; array property : " + Util.ObjectToString(arrayProperty);
+            return GetType().ToString()
+                + " - name : "
+                + name
+                + "; value : "
+                + Util.ObjectToString(value)
+                + "; field : "
+                + Util.ObjectToString(field)
+                + "; property : "
+                + Util.ObjectToString(property)
+                + "; array value : "
+                + Util.ObjectToString(arrayValue)
+                + "; array field : "
+                + Util.ObjectToString(arrayField)
+                + "; array property : "
+                + Util.ObjectToString(arrayProperty);
         }
     }
 
@@ -175,19 +205,35 @@ namespace System.Reflection.CustomAttributesTests.Data
         public readonly MyColorEnum[] arrayValue;
         public MyColorEnum[] arrayField;
         private MyColorEnum _property = 0;
-        public MyColorEnum property { get { return _property; } set { _property = value; } }
+        public MyColorEnum property
+        {
+            get { return _property; }
+            set { _property = value; }
+        }
         private MyColorEnum[] _arrayProperty;
-        public MyColorEnum[] arrayProperty { get { return _arrayProperty; } set { _arrayProperty = value; } }
+        public MyColorEnum[] arrayProperty
+        {
+            get { return _arrayProperty; }
+            set { _arrayProperty = value; }
+        }
 
         public override string ToString()
         {
-            return GetType().ToString() + " - name : " + name
-                    + "; value : " + Util.ObjectToString(value)
-                    + "; field : " + Util.ObjectToString(field)
-                    + "; property : " + Util.ObjectToString(property)
-                                        + "; array value : " + Util.ObjectToString(arrayValue)
-                                        + "; array field : " + Util.ObjectToString(arrayField)
-                                        + "; array property : " + Util.ObjectToString(arrayProperty);
+            return GetType().ToString()
+                + " - name : "
+                + name
+                + "; value : "
+                + Util.ObjectToString(value)
+                + "; field : "
+                + Util.ObjectToString(field)
+                + "; property : "
+                + Util.ObjectToString(property)
+                + "; array value : "
+                + Util.ObjectToString(arrayValue)
+                + "; array field : "
+                + Util.ObjectToString(arrayField)
+                + "; array property : "
+                + Util.ObjectToString(arrayProperty);
         }
     }
 
@@ -212,19 +258,35 @@ namespace System.Reflection.CustomAttributesTests.Data
         public readonly string[] arrayValue;
         public string[] arrayField;
         private string _property;
-        public string property { get { return _property; } set { _property = value; } }
+        public string property
+        {
+            get { return _property; }
+            set { _property = value; }
+        }
         private string[] _arrayProperty;
-        public string[] arrayProperty { get { return _arrayProperty; } set { _arrayProperty = value; } }
+        public string[] arrayProperty
+        {
+            get { return _arrayProperty; }
+            set { _arrayProperty = value; }
+        }
 
         public override string ToString()
         {
-            return GetType().ToString() + " - name : " + name
-                    + "; value : " + Util.ObjectToString(value)
-                    + "; field : " + Util.ObjectToString(field)
-                    + "; property : " + Util.ObjectToString(property)
-                                        + "; array value : " + Util.ObjectToString(arrayValue)
-                                        + "; array field : " + Util.ObjectToString(arrayField)
-                                        + "; array property : " + Util.ObjectToString(arrayProperty);
+            return GetType().ToString()
+                + " - name : "
+                + name
+                + "; value : "
+                + Util.ObjectToString(value)
+                + "; field : "
+                + Util.ObjectToString(field)
+                + "; property : "
+                + Util.ObjectToString(property)
+                + "; array value : "
+                + Util.ObjectToString(arrayValue)
+                + "; array field : "
+                + Util.ObjectToString(arrayField)
+                + "; array property : "
+                + Util.ObjectToString(arrayProperty);
         }
     }
 
@@ -243,26 +305,41 @@ namespace System.Reflection.CustomAttributesTests.Data
             arrayValue = a;
         }
 
-
         public string name;
         public readonly Type value;
         public Type field;
         public readonly Type[] arrayValue;
         public Type[] arrayField;
         private Type _property;
-        public Type property { get { return _property; } set { _property = value; } }
+        public Type property
+        {
+            get { return _property; }
+            set { _property = value; }
+        }
         private Type[] _arrayProperty;
-        public Type[] arrayProperty { get { return _arrayProperty; } set { _arrayProperty = value; } }
+        public Type[] arrayProperty
+        {
+            get { return _arrayProperty; }
+            set { _arrayProperty = value; }
+        }
 
         public override string ToString()
         {
-            return GetType().ToString() + " - name : " + name
-                                        + "; value : " + Util.ObjectToString(value)
-                                        + "; field : " + Util.ObjectToString(field)
-                                        + "; property : " + Util.ObjectToString(property)
-                                        + "; array value : " + Util.ObjectToString(arrayValue)
-                                        + "; array field : " + Util.ObjectToString(arrayField)
-                                        + "; array property : " + Util.ObjectToString(arrayProperty);
+            return GetType().ToString()
+                + " - name : "
+                + name
+                + "; value : "
+                + Util.ObjectToString(value)
+                + "; field : "
+                + Util.ObjectToString(field)
+                + "; property : "
+                + Util.ObjectToString(property)
+                + "; array value : "
+                + Util.ObjectToString(arrayValue)
+                + "; array field : "
+                + Util.ObjectToString(arrayField)
+                + "; array property : "
+                + Util.ObjectToString(arrayProperty);
         }
     }
 
@@ -287,40 +364,64 @@ namespace System.Reflection.CustomAttributesTests.Data
         public readonly object[] arrayValue;
         public object[] arrayField;
         private object _property = 0;
-        public object property { get { return _property; } set { _property = value; } }
+        public object property
+        {
+            get { return _property; }
+            set { _property = value; }
+        }
         private object[] _arrayProperty;
-        public object[] arrayProperty { get { return _arrayProperty; } set { _arrayProperty = value; } }
+        public object[] arrayProperty
+        {
+            get { return _arrayProperty; }
+            set { _arrayProperty = value; }
+        }
 
         public override string ToString()
         {
-            return GetType().ToString() + " - name : " + name
-                                        + "; value : " + Util.ObjectToString(value)
-                                        + "; field : " + Util.ObjectToString(field)
-                                        + "; property : " + Util.ObjectToString(property)
-                                        + "; array value : " + Util.ObjectToString(arrayValue)
-                                        + "; array field : " + Util.ObjectToString(arrayField)
-                                        + "; array property : " + Util.ObjectToString(arrayProperty);
+            return GetType().ToString()
+                + " - name : "
+                + name
+                + "; value : "
+                + Util.ObjectToString(value)
+                + "; field : "
+                + Util.ObjectToString(field)
+                + "; property : "
+                + Util.ObjectToString(property)
+                + "; array value : "
+                + Util.ObjectToString(arrayValue)
+                + "; array field : "
+                + Util.ObjectToString(arrayField)
+                + "; array property : "
+                + Util.ObjectToString(arrayProperty);
         }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public class NullAttr : Attribute
     {
-        public NullAttr(string s, Type t, int[] a)
-        {
-        }
+        public NullAttr(string s, Type t, int[] a) { }
 
-        public NullAttr(string s)
-        {
-        }
+        public NullAttr(string s) { }
 
         public string name;
 
         public string stringField;
         public Type typeField;
         public int[] arrayField;
-        public string stringProperty { get { return null; } set { } }
-        public Type typeProperty { get { return null; } set { } }
-        public int[] arrayProperty { get { return null; } set { } }
+        public string stringProperty
+        {
+            get { return null; }
+            set { }
+        }
+        public Type typeProperty
+        {
+            get { return null; }
+            set { }
+        }
+        public int[] arrayProperty
+        {
+            get { return null; }
+            set { }
+        }
     }
 }

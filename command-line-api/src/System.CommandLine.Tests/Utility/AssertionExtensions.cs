@@ -13,7 +13,8 @@ public static class AssertionExtensions
 {
     public static AndConstraint<GenericCollectionAssertions<T>> BeEquivalentSequenceTo<T>(
         this GenericCollectionAssertions<T> assertions,
-        params object[] expectedValues)
+        params object[] expectedValues
+    )
     {
         var actualValues = assertions.Subject.ToArray();
 
@@ -24,14 +25,15 @@ public static class AssertionExtensions
 
         using (new AssertionScope())
         {
-            foreach (var tuple in actualValues
-                                  .Zip(expectedValues, (actual, expected) => (actual, expected))
-                                  .Where(t => (t.expected == null) || (t.expected.GetType().GetProperties().Length > 0)))
-
+            foreach (
+                var tuple in actualValues
+                    .Zip(expectedValues, (actual, expected) => (actual, expected))
+                    .Where(t =>
+                        (t.expected == null) || (t.expected.GetType().GetProperties().Length > 0)
+                    )
+            )
             {
-                tuple.actual
-                     .Should()
-                     .BeEquivalentTo(tuple.expected);
+                tuple.actual.Should().BeEquivalentTo(tuple.expected);
             }
         }
 
@@ -40,14 +42,15 @@ public static class AssertionExtensions
 
     public static AndConstraint<StringCollectionAssertions> BeEquivalentSequenceTo(
         this StringCollectionAssertions assertions,
-        params string[] expectedValues)
+        params string[] expectedValues
+    )
     {
         return assertions.BeEquivalentTo(expectedValues, c => c.WithStrictOrderingFor(s => s));
     }
 
-    public static AndConstraint<StringAssertions> ShowHelp(this StringAssertions output) => 
+    public static AndConstraint<StringAssertions> ShowHelp(this StringAssertions output) =>
         output.Subject.Should().Match("*Description:*Usage:*");
 
-    public static AndConstraint<StringAssertions> NotShowHelp(this StringAssertions output) => 
+    public static AndConstraint<StringAssertions> NotShowHelp(this StringAssertions output) =>
         output.Subject.Should().NotMatch("*Description:*Usage:*");
 }

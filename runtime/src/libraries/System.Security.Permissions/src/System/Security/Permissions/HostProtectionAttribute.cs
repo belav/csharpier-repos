@@ -4,13 +4,21 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [AttributeUsage((AttributeTargets)(4205), AllowMultiple = true, Inherited = false)]
     public sealed partial class HostProtectionAttribute : CodeAccessSecurityAttribute
     {
-        public HostProtectionAttribute() : base(default(SecurityAction)) { }
-        public HostProtectionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public HostProtectionAttribute()
+            : base(default(SecurityAction)) { }
+
+        public HostProtectionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
+
         public bool ExternalProcessMgmt { get; set; }
         public bool ExternalThreading { get; set; }
         public bool MayLeakOnAbort { get; set; }
@@ -21,6 +29,10 @@ namespace System.Security.Permissions
         public bool SharedState { get; set; }
         public bool Synchronization { get; set; }
         public bool UI { get; set; }
-        public override IPermission CreatePermission() { return default(IPermission); }
+
+        public override IPermission CreatePermission()
+        {
+            return default(IPermission);
+        }
     }
 }

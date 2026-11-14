@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="MobileListItem.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Security.Permissions;
 
-namespace System.Web.UI.MobileControls 
+namespace System.Web.UI.MobileControls
 {
     /*
      * List Item type - enumeration.
@@ -21,17 +21,22 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItemType"]/*' />
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public enum MobileListItemType
     {
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItemType.HeaderItem"]/*' />
         HeaderItem,
+
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItemType.ListItem"]/*' />
         ListItem,
+
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItemType.FooterItem"]/*' />
         FooterItem,
+
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItemType.SeparatorItem"]/*' />
-        SeparatorItem
+        SeparatorItem,
     }
 
     /*
@@ -41,13 +46,18 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem"]/*' />
-    [
-        PersistName("Item"),
-        ToolboxItem(false)
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [PersistName("Item"), ToolboxItem(false)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class MobileListItem : TemplateContainer, IStateManager
     {
         private const int SELECTED = 0;
@@ -64,22 +74,20 @@ namespace System.Web.UI.MobileControls
         private BitArray _flags;
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.MobileListItem"]/*' />
-        public MobileListItem() : this(null, null, null) 
-        {
-        }
+        public MobileListItem()
+            : this(null, null, null) { }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.MobileListItem1"]/*' />
-        public MobileListItem(String text) : this(null, text, null) 
-        {
-        }
+        public MobileListItem(String text)
+            : this(null, text, null) { }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.MobileListItem2"]/*' />
-        public MobileListItem(String text, String value) : this(null, text, value)
-        {
-        }
+        public MobileListItem(String text, String value)
+            : this(null, text, value) { }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.MobileListItem3"]/*' />
-        public MobileListItem(MobileListItemType itemType) : this (null, null, null)
+        public MobileListItem(MobileListItemType itemType)
+            : this(null, null, null)
         {
             _itemType = itemType;
         }
@@ -97,22 +105,14 @@ namespace System.Web.UI.MobileControls
 
         internal MobileListItemType ItemType
         {
-            get
-            {
-                return _itemType;
-            }
+            get { return _itemType; }
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.Index"]/*' />
-        [
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Index
         {
-            get
-            {
-                return _index;
-            }
+            get { return _index; }
         }
 
         internal void SetIndex(int value)
@@ -121,18 +121,16 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.operatorMobileListItem"]/*' />
-        public static implicit operator MobileListItem(String s) 
+        public static implicit operator MobileListItem(String s)
         {
             return new MobileListItem(s);
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.Text"]/*' />
-        [
-            DefaultValue("")
-        ]        
-        public String Text 
+        [DefaultValue("")]
+        public String Text
         {
-            get 
+            get
             {
                 String s;
                 if (_text != null)
@@ -149,24 +147,21 @@ namespace System.Web.UI.MobileControls
                 }
                 return s;
             }
-
-            set 
+            set
             {
                 _text = value;
                 if (((IStateManager)this).IsTrackingViewState)
                 {
-                    _flags.Set (TEXTISDIRTY,true);
+                    _flags.Set(TEXTISDIRTY, true);
                 }
             }
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.Value"]/*' />
-        [
-            DefaultValue("")
-        ]
-        public String Value 
+        [DefaultValue("")]
+        public String Value
         {
-            get 
+            get
             {
                 String s;
                 if (_value != null)
@@ -183,38 +178,29 @@ namespace System.Web.UI.MobileControls
                 }
                 return s;
             }
-
-            set 
+            set
             {
                 _value = value;
-                if (_flags.Get (MARKED))
+                if (_flags.Get(MARKED))
                 {
-                    _flags.Set (VALUEISDIRTY,true);
+                    _flags.Set(VALUEISDIRTY, true);
                 }
             }
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.DataItem"]/*' />
-        [
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Object DataItem
         {
-            get
-            {
-                return _dataItem;
-            }
-            set
-            {
-                _dataItem = value;
-            }
+            get { return _dataItem; }
+            set { _dataItem = value; }
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.Equals"]/*' />
-        public override bool Equals(Object o) 
+        public override bool Equals(Object o)
         {
             MobileListItem other = o as MobileListItem;
-            if (other != null) 
+            if (other != null)
             {
                 return Value.Equals(other.Value) && Text.Equals(other.Text);
             }
@@ -228,13 +214,13 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.FromString"]/*' />
-        public static MobileListItem FromString(String s) 
+        public static MobileListItem FromString(String s)
         {
             return new MobileListItem(s);
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.ToString"]/*' />
-        public override String ToString() 
+        public override String ToString()
         {
             return Text;
         }
@@ -260,7 +246,7 @@ namespace System.Web.UI.MobileControls
 
         internal virtual void LoadDataState(Object state)
         {
-            if (state != null) 
+            if (state != null)
             {
                 String[] sa = (String[])state;
                 if (sa[0] != null)
@@ -276,54 +262,42 @@ namespace System.Web.UI.MobileControls
 
         /// <internalonly/>
         protected new bool IsTrackingViewState
-        {   
-            get
+        {
+            get { return _flags.Get(MARKED); }
+        }
+
+        /// <internalonly/>
+        protected new void LoadViewState(Object state)
+        {
+            LoadDataState(state);
+        }
+
+        /// <internalonly/>
+        protected new void TrackViewState()
+        {
+            _flags.Set(MARKED, true);
+        }
+
+        /// <internalonly/>
+        protected new Object SaveViewState()
+        {
+            return SaveDataState();
+        }
+
+        internal virtual bool Dirty
+        {
+            get { return (_flags.Get(TEXTISDIRTY) || _flags.Get(VALUEISDIRTY)); }
+            set
             {
-                return _flags.Get (MARKED);
+                _flags.Set(TEXTISDIRTY, value);
+                _flags.Set(VALUEISDIRTY, value);
             }
         }
 
-        /// <internalonly/>
-        protected new void LoadViewState(Object state) 
+        internal bool SelectionDirty
         {
-            LoadDataState (state);
-        }
-
-        /// <internalonly/>
-        protected new void TrackViewState() 
-        {
-            _flags.Set (MARKED, true);
-        }
-
-        /// <internalonly/>
-        protected new Object SaveViewState() 
-        {
-            return SaveDataState ();
-        }
-
-        internal virtual bool Dirty 
-        {
-            get 
-            { 
-                return (_flags.Get(TEXTISDIRTY) || _flags.Get(VALUEISDIRTY)); 
-            }
-            set 
-            { 
-                _flags.Set (TEXTISDIRTY, value); 
-                _flags.Set (VALUEISDIRTY, value); 
-            }
-        }
-
-        internal bool SelectionDirty 
-        {
-            get 
-            { 
-                return _flags.Get(SELECTIONISDIRTY);
-            }
-            set 
-            { 
-                _flags.Set (SELECTIONISDIRTY, value); 
-            }
+            get { return _flags.Get(SELECTIONISDIRTY); }
+            set { _flags.Set(SELECTIONISDIRTY, value); }
         }
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="ListItem.Selected"]/*' />
@@ -331,15 +305,13 @@ namespace System.Web.UI.MobileControls
         ///    <para>Specifies a value indicating whether the
         ///       item is selected.</para>
         /// </devdoc>
-        [
-            DefaultValue(false)
-        ]
-        public bool Selected {
-            get { 
-                return _flags.Get(SELECTED); 
-            }
-            set { 
-                _flags.Set(SELECTED,value); 
+        [DefaultValue(false)]
+        public bool Selected
+        {
+            get { return _flags.Get(SELECTED); }
+            set
+            {
+                _flags.Set(SELECTED, value);
                 if (((IStateManager)this).IsTrackingViewState)
                 {
                     SelectionDirty = true;
@@ -352,12 +324,16 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem.OnBubbleEvent"]/*' />
-        protected override bool OnBubbleEvent(Object source, EventArgs e) 
+        protected override bool OnBubbleEvent(Object source, EventArgs e)
         {
-            if (e is CommandEventArgs) 
+            if (e is CommandEventArgs)
             {
-                ListCommandEventArgs args = new ListCommandEventArgs(this, source, (CommandEventArgs)e);
-                RaiseBubbleEvent (this, args);
+                ListCommandEventArgs args = new ListCommandEventArgs(
+                    this,
+                    source,
+                    (CommandEventArgs)e
+                );
+                RaiseBubbleEvent(this, args);
                 return true;
             }
             return false;
@@ -365,26 +341,28 @@ namespace System.Web.UI.MobileControls
 
         #region Implementation of IStateManager
         /// <internalonly/>
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return IsTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
         }
 
         /// <internalonly/>
-        void IStateManager.LoadViewState(object state) {
+        void IStateManager.LoadViewState(object state)
+        {
             LoadViewState(state);
         }
 
         /// <internalonly/>
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             TrackViewState();
         }
 
         /// <internalonly/>
-        object IStateManager.SaveViewState() {
+        object IStateManager.SaveViewState()
+        {
             return SaveViewState();
         }
         #endregion
-    } 
+    }
 }

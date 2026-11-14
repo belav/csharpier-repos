@@ -13,7 +13,7 @@
 *
 * Expected:
 * In the DLL.
-* 
+*
 * DerivedType.RunGenericMethod<System.Int32,System.String>(22)
 * Call completed successfully.
 * returns 100
@@ -31,11 +31,7 @@ namespace BadOverride1
     {
         public override void RunGenericMethod<T1>(T1 value)
         {
-            Console.Write(
-                "DerivedType.RunGenericMethod<{0}>({1})\r\n",
-                typeof(T1),
-                value
-            );
+            Console.Write("DerivedType.RunGenericMethod<{0}>({1})\r\n", typeof(T1), value);
 
             return;
         }

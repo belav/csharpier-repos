@@ -22,7 +22,8 @@ public class SqlServerOutputClauseConvention : ITriggerAddedConvention, ITrigger
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SqlServerOutputClauseConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -39,11 +40,17 @@ public class SqlServerOutputClauseConvention : ITriggerAddedConvention, ITrigger
     protected virtual RelationalConventionSetBuilderDependencies RelationalDependencies { get; }
 
     /// <inheritdoc />
-    public virtual void ProcessTriggerAdded(IConventionTriggerBuilder triggerBuilder, IConventionContext<IConventionTriggerBuilder> context)
+    public virtual void ProcessTriggerAdded(
+        IConventionTriggerBuilder triggerBuilder,
+        IConventionContext<IConventionTriggerBuilder> context
+    )
     {
         var trigger = triggerBuilder.Metadata;
         var entityType = trigger.EntityType;
-        var triggerTableIdentifier = StoreObjectIdentifier.Table(trigger.GetTableName(), trigger.GetTableSchema());
+        var triggerTableIdentifier = StoreObjectIdentifier.Table(
+            trigger.GetTableName(),
+            trigger.GetTableSchema()
+        );
 
         entityType.UseSqlOutputClause(false, triggerTableIdentifier);
     }
@@ -52,13 +59,23 @@ public class SqlServerOutputClauseConvention : ITriggerAddedConvention, ITrigger
     public virtual void ProcessTriggerRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionTrigger trigger,
-        IConventionContext<IConventionTrigger> context)
+        IConventionContext<IConventionTrigger> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
-        var triggerTableIdentifier = StoreObjectIdentifier.Table(trigger.GetTableName(), trigger.GetTableSchema());
+        var triggerTableIdentifier = StoreObjectIdentifier.Table(
+            trigger.GetTableName(),
+            trigger.GetTableSchema()
+        );
 
-        if (!entityType.GetDeclaredTriggers().Any(
-                t => t.GetTableName() == trigger.GetTableName() && t.GetTableSchema() == trigger.GetTableSchema()))
+        if (
+            !entityType
+                .GetDeclaredTriggers()
+                .Any(t =>
+                    t.GetTableName() == trigger.GetTableName()
+                    && t.GetTableSchema() == trigger.GetTableSchema()
+                )
+        )
         {
             entityType.UseSqlOutputClause(null, triggerTableIdentifier);
         }

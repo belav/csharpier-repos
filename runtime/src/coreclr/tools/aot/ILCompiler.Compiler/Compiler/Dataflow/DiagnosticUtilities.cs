@@ -10,7 +10,10 @@ namespace ILCompiler.Dataflow
 {
     internal static class DiagnosticUtilities
     {
-        internal static string GetParameterNameForErrorMessage(MethodDesc method, int parameterIndex)
+        internal static string GetParameterNameForErrorMessage(
+            MethodDesc method,
+            int parameterIndex
+        )
         {
             if (method.GetTypicalMethodDefinition() is EcmaMethod ecmaMethod)
                 return ecmaMethod.GetParameterDisplayName(parameterIndex);
@@ -23,17 +26,25 @@ namespace ILCompiler.Dataflow
             return method.GetDisplayName();
         }
 
-        internal static string GetGenericParameterDeclaringMemberDisplayName(GenericParameterDesc genericParameter)
+        internal static string GetGenericParameterDeclaringMemberDisplayName(
+            GenericParameterDesc genericParameter
+        )
         {
             var param = (EcmaGenericParameter)genericParameter;
-            var parent = param.Module.GetObject(param.MetadataReader.GetGenericParameter(param.Handle).Parent);
+            var parent = param.Module.GetObject(
+                param.MetadataReader.GetGenericParameter(param.Handle).Parent
+            );
             if (parent is MethodDesc m)
                 return m.GetDisplayName();
             else
                 return ((TypeDesc)parent).GetDisplayName();
         }
 
-        internal static bool TryGetRequiresAttribute(TypeSystemEntity member, string requiresAttributeName, [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute)
+        internal static bool TryGetRequiresAttribute(
+            TypeSystemEntity member,
+            string requiresAttributeName,
+            [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute
+        )
         {
             attribute = default;
             CustomAttributeValue<TypeDesc>? decoded;
@@ -43,19 +54,31 @@ namespace ILCompiler.Dataflow
                     var ecmaMethod = method.GetTypicalMethodDefinition() as EcmaMethod;
                     if (ecmaMethod == null)
                         return false;
-                    decoded = ecmaMethod.GetDecodedCustomAttribute("System.Diagnostics.CodeAnalysis", requiresAttributeName);
+                    decoded = ecmaMethod.GetDecodedCustomAttribute(
+                        "System.Diagnostics.CodeAnalysis",
+                        requiresAttributeName
+                    );
                     break;
                 case MetadataType type:
                     var ecmaType = type.GetTypeDefinition() as EcmaType;
                     if (ecmaType == null)
                         return false;
-                    decoded = ecmaType.GetDecodedCustomAttribute("System.Diagnostics.CodeAnalysis", requiresAttributeName);
+                    decoded = ecmaType.GetDecodedCustomAttribute(
+                        "System.Diagnostics.CodeAnalysis",
+                        requiresAttributeName
+                    );
                     break;
                 case PropertyPseudoDesc property:
-                    decoded = property.GetDecodedCustomAttribute("System.Diagnostics.CodeAnalysis", requiresAttributeName);
+                    decoded = property.GetDecodedCustomAttribute(
+                        "System.Diagnostics.CodeAnalysis",
+                        requiresAttributeName
+                    );
                     break;
                 case EventPseudoDesc @event:
-                    decoded = @event.GetDecodedCustomAttribute("System.Diagnostics.CodeAnalysis", requiresAttributeName);
+                    decoded = @event.GetDecodedCustomAttribute(
+                        "System.Diagnostics.CodeAnalysis",
+                        requiresAttributeName
+                    );
                     break;
                 default:
                     // This can happen for a compiler generated method, for example if mark methods on array for reflection (through DAM)
@@ -92,27 +115,47 @@ namespace ILCompiler.Dataflow
         /// <remarks>Unlike <see cref="DoesMemberRequire(TypeSystemEntity, string, out CustomAttributeValue{TypeDesc}?)"/>
         /// if a declaring type has Requires, all methods in that type are considered "in scope" of that Requires. So this includes also
         /// instance methods (not just statics and .ctors).</remarks>
-        internal static bool IsInRequiresScope(this MethodDesc method, string requiresAttribute)
-            => IsInRequiresScope(method, requiresAttribute, out _);
+        internal static bool IsInRequiresScope(this MethodDesc method, string requiresAttribute) =>
+            IsInRequiresScope(method, requiresAttribute, out _);
 
-        internal static bool IsInRequiresScope(this MethodDesc method, string requiresAttribute, [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute)
+        internal static bool IsInRequiresScope(
+            this MethodDesc method,
+            string requiresAttribute,
+            [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute
+        )
         {
-            if (TryGetRequiresAttribute(method, requiresAttribute, out attribute) && !method.IsStaticConstructor)
+            if (
+                TryGetRequiresAttribute(method, requiresAttribute, out attribute)
+                && !method.IsStaticConstructor
+            )
                 return true;
 
-            if (method.OwningType is TypeDesc type && TryGetRequiresAttribute(type, requiresAttribute, out attribute))
+            if (
+                method.OwningType is TypeDesc type
+                && TryGetRequiresAttribute(type, requiresAttribute, out attribute)
+            )
                 return true;
 
-            if (method.GetPropertyForAccessor() is PropertyPseudoDesc property && TryGetRequiresAttribute(property, requiresAttribute, out attribute))
+            if (
+                method.GetPropertyForAccessor() is PropertyPseudoDesc property
+                && TryGetRequiresAttribute(property, requiresAttribute, out attribute)
+            )
                 return true;
 
-            if (method.GetEventForAccessor() is EventPseudoDesc @event && TryGetRequiresAttribute(@event, requiresAttribute, out attribute))
+            if (
+                method.GetEventForAccessor() is EventPseudoDesc @event
+                && TryGetRequiresAttribute(@event, requiresAttribute, out attribute)
+            )
                 return true;
 
             return false;
         }
 
-        internal static bool DoesMethodRequire(this MethodDesc method, string requiresAttribute, [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute)
+        internal static bool DoesMethodRequire(
+            this MethodDesc method,
+            string requiresAttribute,
+            [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute
+        )
         {
             attribute = null;
             if (method.IsStaticConstructor)
@@ -121,24 +164,40 @@ namespace ILCompiler.Dataflow
             if (TryGetRequiresAttribute(method, requiresAttribute, out attribute))
                 return true;
 
-            if ((method.Signature.IsStatic || method.IsConstructor) && method.OwningType is TypeDesc owningType &&
-                !owningType.IsArray && TryGetRequiresAttribute(owningType, requiresAttribute, out attribute))
+            if (
+                (method.Signature.IsStatic || method.IsConstructor)
+                && method.OwningType is TypeDesc owningType
+                && !owningType.IsArray
+                && TryGetRequiresAttribute(owningType, requiresAttribute, out attribute)
+            )
                 return true;
 
-            if (method.GetPropertyForAccessor() is PropertyPseudoDesc @property
-                && TryGetRequiresAttribute(@property, requiresAttribute, out attribute))
+            if (
+                method.GetPropertyForAccessor() is PropertyPseudoDesc @property
+                && TryGetRequiresAttribute(@property, requiresAttribute, out attribute)
+            )
                 return true;
 
-            if (method.GetEventForAccessor() is EventPseudoDesc @event
-                && TryGetRequiresAttribute(@event, requiresAttribute, out attribute))
+            if (
+                method.GetEventForAccessor() is EventPseudoDesc @event
+                && TryGetRequiresAttribute(@event, requiresAttribute, out attribute)
+            )
                 return true;
 
             return false;
         }
 
-        internal static bool DoesFieldRequire(this FieldDesc field, string requiresAttribute, [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute)
+        internal static bool DoesFieldRequire(
+            this FieldDesc field,
+            string requiresAttribute,
+            [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute
+        )
         {
-            if (!field.IsStatic || field.OwningType is not TypeDesc owningType || owningType.IsArray)
+            if (
+                !field.IsStatic
+                || field.OwningType is not TypeDesc owningType
+                || owningType.IsArray
+            )
             {
                 attribute = null;
                 return false;
@@ -147,35 +206,60 @@ namespace ILCompiler.Dataflow
             return TryGetRequiresAttribute(field.OwningType, requiresAttribute, out attribute);
         }
 
-        internal static bool DoesPropertyRequire(this PropertyPseudoDesc property, string requiresAttribute, [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute) =>
-            TryGetRequiresAttribute(property, requiresAttribute, out attribute);
+        internal static bool DoesPropertyRequire(
+            this PropertyPseudoDesc property,
+            string requiresAttribute,
+            [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute
+        ) => TryGetRequiresAttribute(property, requiresAttribute, out attribute);
 
-        internal static bool DoesEventRequire(this EventPseudoDesc @event, string requiresAttribute, [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute) =>
-            TryGetRequiresAttribute(@event, requiresAttribute, out attribute);
+        internal static bool DoesEventRequire(
+            this EventPseudoDesc @event,
+            string requiresAttribute,
+            [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute
+        ) => TryGetRequiresAttribute(@event, requiresAttribute, out attribute);
 
-        internal static bool DoesTypeRequire(this TypeDesc type, string requiresAttribute, [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute) =>
-            TryGetRequiresAttribute(type, requiresAttribute, out attribute);
+        internal static bool DoesTypeRequire(
+            this TypeDesc type,
+            string requiresAttribute,
+            [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute
+        ) => TryGetRequiresAttribute(type, requiresAttribute, out attribute);
 
         /// <summary>
         /// Determines if member requires (and thus any usage of such method should be warned about).
         /// </summary>
         /// <remarks>Unlike <see cref="IsInRequiresScope(MethodDesc, string)"/> only static methods
         /// and .ctors are reported as requires when the declaring type has Requires on it.</remarks>
-        internal static bool DoesMemberRequire(this TypeSystemEntity member, string requiresAttribute, [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute)
+        internal static bool DoesMemberRequire(
+            this TypeSystemEntity member,
+            string requiresAttribute,
+            [NotNullWhen(returnValue: true)] out CustomAttributeValue<TypeDesc>? attribute
+        )
         {
             attribute = null;
             return member switch
             {
                 MethodDesc method => DoesMethodRequire(method, requiresAttribute, out attribute),
                 FieldDesc field => DoesFieldRequire(field, requiresAttribute, out attribute),
-                PropertyPseudoDesc property => DoesPropertyRequire(property, requiresAttribute, out attribute),
-                EventPseudoDesc @event => DoesEventRequire(@event, requiresAttribute, out attribute),
-                _ => false
+                PropertyPseudoDesc property => DoesPropertyRequire(
+                    property,
+                    requiresAttribute,
+                    out attribute
+                ),
+                EventPseudoDesc @event => DoesEventRequire(
+                    @event,
+                    requiresAttribute,
+                    out attribute
+                ),
+                _ => false,
             };
         }
 
-        internal const string RequiresUnreferencedCodeAttribute = nameof(RequiresUnreferencedCodeAttribute);
+        internal const string RequiresUnreferencedCodeAttribute = nameof(
+            RequiresUnreferencedCodeAttribute
+        );
         internal const string RequiresDynamicCodeAttribute = nameof(RequiresDynamicCodeAttribute);
-        internal const string RequiresAssemblyFilesAttribute = nameof(RequiresAssemblyFilesAttribute);
+        internal const string RequiresAssemblyFilesAttribute = nameof(
+            RequiresAssemblyFilesAttribute
+        );
     }
 }

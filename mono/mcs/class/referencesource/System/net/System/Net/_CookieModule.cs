@@ -4,22 +4,25 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
+namespace System.Net
+{
+    internal static class CookieModule
+    {
+        // fields
 
-    internal static class CookieModule {
+        // constructors
 
-    // fields
+        // properties
 
-    // constructors
+        // methods
 
-    // properties
-
-    // methods
-
-        internal static void OnSendingHeaders(HttpWebRequest httpWebRequest) {
+        internal static void OnSendingHeaders(HttpWebRequest httpWebRequest)
+        {
             GlobalLog.Print("CookieModule::OnSendingHeaders()");
-            try {
-                if (httpWebRequest.CookieContainer == null) {
+            try
+            {
+                if (httpWebRequest.CookieContainer == null)
+                {
                     return;
                 }
                 //
@@ -31,26 +34,27 @@ namespace System.Net {
                 //
                 string optCookie2;
                 string cookieString = httpWebRequest.CookieContainer.GetCookieHeader(
-                    httpWebRequest.GetRemoteResourceUri(), out optCookie2);
+                    httpWebRequest.GetRemoteResourceUri(),
+                    out optCookie2
+                );
 
-                if (cookieString.Length > 0) {
-                    GlobalLog.Print("CookieModule::OnSendingHeaders() setting Cookie header to:[" + cookieString + "]");
+                if (cookieString.Length > 0)
+                {
+                    GlobalLog.Print(
+                        "CookieModule::OnSendingHeaders() setting Cookie header to:["
+                            + cookieString
+                            + "]"
+                    );
                     httpWebRequest.Headers[HttpKnownHeaderNames.Cookie] = cookieString;
 
-//<
-
-
-
-
-
+                    //<
                 }
             }
-            catch {
-            }
-
+            catch { }
         }
 
-        internal static void OnReceivedHeaders(HttpWebRequest httpWebRequest) {
+        internal static void OnReceivedHeaders(HttpWebRequest httpWebRequest)
+        {
             GlobalLog.Print("CookieModule.OnReceivedHeaders()");
             //
             // if the app doesn't want us to handle cookies then there's nothing
@@ -58,8 +62,10 @@ namespace System.Net {
             // settings could be changed between the request being made and the
             // response received
             //
-            try {
-                if (httpWebRequest.CookieContainer == null) {
+            try
+            {
+                if (httpWebRequest.CookieContainer == null)
+                {
                     return;
                 }
 
@@ -67,53 +73,65 @@ namespace System.Net {
                 // add any received cookies for this response to the container
                 //
                 HttpWebResponse response = httpWebRequest._HttpResponse as HttpWebResponse;
-                if (response == null) {
+                if (response == null)
+                {
                     return;
                 }
 
                 CookieCollection cookies = null;
-                try {
+                try
+                {
                     string cookieString = response.Headers.SetCookie;
-                    GlobalLog.Print("CookieModule::OnSendingHeaders() received Set-Cookie:[" + cookieString + "]");
-                    if ((cookieString != null) && (cookieString.Length > 0)) {
+                    GlobalLog.Print(
+                        "CookieModule::OnSendingHeaders() received Set-Cookie:["
+                            + cookieString
+                            + "]"
+                    );
+                    if ((cookieString != null) && (cookieString.Length > 0))
+                    {
                         cookies = httpWebRequest.CookieContainer.CookieCutter(
-                                                            response.ResponseUri,
-                                                            HttpKnownHeaderNames.SetCookie,
-                                                            cookieString,
-                                                            false);
+                            response.ResponseUri,
+                            HttpKnownHeaderNames.SetCookie,
+                            cookieString,
+                            false
+                        );
                     }
                 }
-                catch {
-                }
+                catch { }
 
-                try {
+                try
+                {
                     string cookieString = response.Headers.SetCookie2;
-                    GlobalLog.Print("CookieModule::OnSendingHeaders() received Set-Cookie2:[" + cookieString + "]");
-                    if ((cookieString != null) && (cookieString.Length > 0)) {
+                    GlobalLog.Print(
+                        "CookieModule::OnSendingHeaders() received Set-Cookie2:["
+                            + cookieString
+                            + "]"
+                    );
+                    if ((cookieString != null) && (cookieString.Length > 0))
+                    {
                         CookieCollection cookies2 = httpWebRequest.CookieContainer.CookieCutter(
-                                                                    response.ResponseUri,
-                                                                    HttpKnownHeaderNames.SetCookie2,
-                                                                    cookieString,
-                                                                    false);
-                        if (cookies != null && cookies.Count != 0) {
+                            response.ResponseUri,
+                            HttpKnownHeaderNames.SetCookie2,
+                            cookieString,
+                            false
+                        );
+                        if (cookies != null && cookies.Count != 0)
+                        {
                             cookies.Add(cookies2);
                         }
-                        else {
+                        else
+                        {
                             cookies = cookies2;
                         }
                     }
                 }
-                catch {
-                }
-                if (cookies != null) {
+                catch { }
+                if (cookies != null)
+                {
                     response.Cookies = cookies;
                 }
             }
-            catch {
-            }
-
+            catch { }
         }
     }
 }
-
-

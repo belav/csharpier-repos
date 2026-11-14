@@ -11,7 +11,10 @@ namespace System.Diagnostics.Tests
     [Collection("System.Diagnostics.Debug")]
     public partial class DebugTestsNoListeners : DebugTests
     {
-        protected override bool DebugUsesTraceListeners { get { return false; } }
+        protected override bool DebugUsesTraceListeners
+        {
+            get { return false; }
+        }
 
         protected void GoToNextLine()
         {
@@ -24,7 +27,10 @@ namespace System.Diagnostics.Tests
         {
             // This test when run alone verifies Debug.Write indentation, even on first call, is correct.
             Debug.Indent();
-            VerifyLogged(() => Debug.Write("pizza"),        new string(' ', Debug.IndentLevel * Debug.IndentSize) +  "pizza");
+            VerifyLogged(
+                () => Debug.Write("pizza"),
+                new string(' ', Debug.IndentLevel * Debug.IndentSize) + "pizza"
+            );
             Debug.Unindent();
             GoToNextLine();
         }
@@ -34,7 +40,12 @@ namespace System.Diagnostics.Tests
         {
             // This test when run alone verifies Debug.WriteLine indentation, even on first call, is correct.
             Debug.Indent();
-            VerifyLogged(() => Debug.WriteLine("pizza"),    new string(' ', Debug.IndentLevel * Debug.IndentSize) +  "pizza" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine("pizza"),
+                new string(' ', Debug.IndentLevel * Debug.IndentSize)
+                    + "pizza"
+                    + Environment.NewLine
+            );
             Debug.Unindent();
         }
 
@@ -44,17 +55,29 @@ namespace System.Diagnostics.Tests
             Debug.Indent();
             int expectedIndentation = Debug.IndentLevel * Debug.IndentSize;
 
-            VerifyLogged(() => Debug.Write("pizza"),        new string(' ', expectedIndentation) +  "pizza");
+            VerifyLogged(
+                () => Debug.Write("pizza"),
+                new string(' ', expectedIndentation) + "pizza"
+            );
 
             // WriteLine wont indent after Write:
-            VerifyLogged(() => Debug.WriteLine("pizza"),    "pizza" + Environment.NewLine);
+            VerifyLogged(() => Debug.WriteLine("pizza"), "pizza" + Environment.NewLine);
 
-            VerifyLogged(() => Debug.WriteLine("pizza"),    new string(' ', expectedIndentation) +  "pizza" + Environment.NewLine);
-            VerifyLogged(() => Debug.Write("pizza"),        new string(' ', expectedIndentation) +  "pizza");
+            VerifyLogged(
+                () => Debug.WriteLine("pizza"),
+                new string(' ', expectedIndentation) + "pizza" + Environment.NewLine
+            );
+            VerifyLogged(
+                () => Debug.Write("pizza"),
+                new string(' ', expectedIndentation) + "pizza"
+            );
 
             // WriteLine wont indent after Write:
-            VerifyLogged(() => Debug.WriteLine("pizza"),    "pizza" + Environment.NewLine);
-            VerifyLogged(() => Debug.WriteLine("pizza"),    new string(' ', expectedIndentation) +  "pizza" + Environment.NewLine);
+            VerifyLogged(() => Debug.WriteLine("pizza"), "pizza" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine("pizza"),
+                new string(' ', expectedIndentation) + "pizza" + Environment.NewLine
+            );
             Debug.Unindent();
         }
 
@@ -72,7 +95,10 @@ namespace System.Diagnostics.Tests
             Debug.Indent();
             int expected = Debug.IndentSize * Debug.IndentLevel;
 
-            VerifyLogged(() => Debug.WriteLine(null), new string(' ', expected) + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine(null),
+                new string(' ', expected) + Environment.NewLine
+            );
 
             // reset
             Debug.Unindent();
@@ -84,19 +110,34 @@ namespace System.Diagnostics.Tests
             VerifyLogged(() => Debug.Assert(true), "");
             VerifyLogged(() => Debug.Assert(true, "assert passed"), "");
             VerifyLogged(() => Debug.Assert(true, "assert passed", "nothing is wrong"), "");
-            VerifyLogged(() => Debug.Assert(true, "assert passed", "nothing is wrong {0} {1}", 'a', 'b'), "");
+            VerifyLogged(
+                () => Debug.Assert(true, "assert passed", "nothing is wrong {0} {1}", 'a', 'b'),
+                ""
+            );
 
             VerifyAssert(() => Debug.Assert(false), "");
             VerifyAssert(() => Debug.Assert(false, "assert passed"), "assert passed");
-            VerifyAssert(() => Debug.Assert(false, "assert passed", "nothing is wrong"), "assert passed", "nothing is wrong");
-            VerifyAssert(() => Debug.Assert(false, "assert passed", "nothing is wrong {0} {1}", 'a', 'b'), "assert passed", "nothing is wrong a b");
+            VerifyAssert(
+                () => Debug.Assert(false, "assert passed", "nothing is wrong"),
+                "assert passed",
+                "nothing is wrong"
+            );
+            VerifyAssert(
+                () => Debug.Assert(false, "assert passed", "nothing is wrong {0} {1}", 'a', 'b'),
+                "assert passed",
+                "nothing is wrong a b"
+            );
         }
 
         [Fact]
         public void Fail()
         {
             VerifyAssert(() => Debug.Fail("something bad happened"), "something bad happened");
-            VerifyAssert(() => Debug.Fail("something bad happened", "really really bad"), "something bad happened", "really really bad");
+            VerifyAssert(
+                () => Debug.Fail("something bad happened", "really really bad"),
+                "something bad happened",
+                "really really bad"
+            );
         }
 
         [Fact]
@@ -133,10 +174,19 @@ namespace System.Diagnostics.Tests
             VerifyLogged(() => Debug.WriteLine((string)null), Environment.NewLine);
             VerifyLogged(() => Debug.WriteLine((object)null), Environment.NewLine);
             VerifyLogged(() => Debug.WriteLine(5, "category"), "category: 5" + Environment.NewLine);
-            VerifyLogged(() => Debug.WriteLine((object)null, "category"), "category: " + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine((object)null, "category"),
+                "category: " + Environment.NewLine
+            );
             VerifyLogged(() => Debug.WriteLine("logged"), "logged" + Environment.NewLine);
-            VerifyLogged(() => Debug.WriteLine("logged", "category"), "category: logged" + Environment.NewLine);
-            VerifyLogged(() => Debug.WriteLine("logged", (string)null), "logged" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine("logged", "category"),
+                "category: logged" + Environment.NewLine
+            );
+            VerifyLogged(
+                () => Debug.WriteLine("logged", (string)null),
+                "logged" + Environment.NewLine
+            );
             VerifyLogged(() => Debug.WriteLine("{0} {1}", 'a', 'b'), "a b" + Environment.NewLine);
         }
 
@@ -164,13 +214,19 @@ namespace System.Diagnostics.Tests
             VerifyLogged(() => Debug.WriteLineIf(true, 5), "5" + Environment.NewLine);
             VerifyLogged(() => Debug.WriteLineIf(false, 5), "");
 
-            VerifyLogged(() => Debug.WriteLineIf(true, 5, "category"), "category: 5" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLineIf(true, 5, "category"),
+                "category: 5" + Environment.NewLine
+            );
             VerifyLogged(() => Debug.WriteLineIf(false, 5, "category"), "");
 
             VerifyLogged(() => Debug.WriteLineIf(true, "logged"), "logged" + Environment.NewLine);
             VerifyLogged(() => Debug.WriteLineIf(false, "logged"), "");
 
-            VerifyLogged(() => Debug.WriteLineIf(true, "logged", "category"), "category: logged" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLineIf(true, "logged", "category"),
+                "category: logged" + Environment.NewLine
+            );
             VerifyLogged(() => Debug.WriteLineIf(false, "logged", "category"), "");
         }
 
@@ -192,12 +248,18 @@ namespace System.Diagnostics.Tests
             // Indent once.
             Debug.Indent();
             string expectedIndentOnce = new string(' ', expectedIndentSize);
-            VerifyLogged(() => Debug.WriteLine("pizza"), expectedIndentOnce + "pizza" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine("pizza"),
+                expectedIndentOnce + "pizza" + Environment.NewLine
+            );
 
             // Indent again.
             Debug.Indent();
             string expectedIndentTwice = new string(' ', expectedIndentSize * 2);
-            VerifyLogged(() => Debug.WriteLine("pizza"), expectedIndentTwice + "pizza" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine("pizza"),
+                expectedIndentTwice + "pizza" + Environment.NewLine
+            );
 
             // Unindent.
             Debug.Unindent();
@@ -213,13 +275,22 @@ namespace System.Diagnostics.Tests
             Debug.IndentLevel = indentLevel;
             Assert.Equal(expectedIndentLevel, Debug.IndentLevel);
             string expectedIndentOnce = new string(' ', expectedIndentLevel * Debug.IndentSize);
-            VerifyLogged(() => Debug.WriteLine("pizza"), expectedIndentOnce + "pizza" + Environment.NewLine);
+            VerifyLogged(
+                () => Debug.WriteLine("pizza"),
+                expectedIndentOnce + "pizza" + Environment.NewLine
+            );
 
             // Indent once.
             Debug.Indent();
             Assert.Equal(expectedIndentLevel + 1, Debug.IndentLevel);
-            string expectedIndentTwice = new string(' ', (expectedIndentLevel + 1) * Debug.IndentSize);
-            VerifyLogged(() => Debug.WriteLine("pizza"), expectedIndentTwice + "pizza" + Environment.NewLine);
+            string expectedIndentTwice = new string(
+                ' ',
+                (expectedIndentLevel + 1) * Debug.IndentSize
+            );
+            VerifyLogged(
+                () => Debug.WriteLine("pizza"),
+                expectedIndentTwice + "pizza" + Environment.NewLine
+            );
 
             // Unindent.
             Debug.Unindent();

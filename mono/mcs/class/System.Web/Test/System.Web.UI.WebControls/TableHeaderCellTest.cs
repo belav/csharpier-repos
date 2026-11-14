@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,128 +32,137 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    public class TestTableHeaderCell : TableHeaderCell
+    {
+        public string Tag
+        {
+            get { return base.TagName; }
+        }
 
-	public class TestTableHeaderCell : TableHeaderCell {
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-		public string Tag {
-			get { return base.TagName; }
-		}
+        public string Render()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+            base.Render(writer);
+            return writer.InnerWriter.ToString();
+        }
+    }
 
-		public StateBag StateBag {
-			get { return base.ViewState; }
-		}
+    [TestFixture]
+    public class TableHeaderCellTest
+    {
+        [Test]
+        public void DefaultProperties()
+        {
+            TestTableHeaderCell th = new TestTableHeaderCell();
+            Assert.AreEqual(0, th.Attributes.Count, "Attributes.Count");
+            Assert.AreEqual(0, th.StateBag.Count, "ViewState.Count");
+            Assert.AreEqual(String.Empty, th.AbbreviatedText, "AbbreviatedText");
+            Assert.AreEqual(0, th.CategoryText.Length, "CategoryText");
+            Assert.AreEqual(TableHeaderScope.NotSet, th.Scope, "Scope");
+            Assert.AreEqual("th", th.Tag, "TagName");
+            Assert.AreEqual(0, th.Attributes.Count, "Attributes.Count-2");
+            Assert.AreEqual(0, th.StateBag.Count, "ViewState.Count-2");
+        }
 
-		public string Render ()
-		{
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
-	}
+        [Test]
+        public void NullProperties()
+        {
+            TestTableHeaderCell th = new TestTableHeaderCell();
+            th.AbbreviatedText = null;
+            Assert.AreEqual(String.Empty, th.AbbreviatedText, "AbbreviatedText");
 
-	[TestFixture]
-	public class TableHeaderCellTest {
+            th.CategoryText = new string[0];
+            Assert.AreEqual(0, th.CategoryText.Length, "CategoryText");
+            Assert.AreEqual(1, th.StateBag.Count, "ViewState.Count-1");
 
-		[Test]
-		public void DefaultProperties ()
-		{
-			TestTableHeaderCell th = new TestTableHeaderCell ();
-			Assert.AreEqual (0, th.Attributes.Count, "Attributes.Count");
-			Assert.AreEqual (0, th.StateBag.Count, "ViewState.Count");
-			Assert.AreEqual (String.Empty, th.AbbreviatedText, "AbbreviatedText");
-			Assert.AreEqual (0, th.CategoryText.Length, "CategoryText");
-			Assert.AreEqual (TableHeaderScope.NotSet, th.Scope, "Scope");
-			Assert.AreEqual ("th", th.Tag, "TagName");
-			Assert.AreEqual (0, th.Attributes.Count, "Attributes.Count-2");
-			Assert.AreEqual (0, th.StateBag.Count, "ViewState.Count-2");
-		}
+            th.Scope = TableHeaderScope.NotSet;
+            Assert.AreEqual(TableHeaderScope.NotSet, th.Scope, "Scope");
+            Assert.AreEqual(2, th.StateBag.Count, "ViewState.Count-2");
+            Assert.AreEqual(0, th.Attributes.Count, "Attributes.Count");
+        }
 
-		[Test]
-		public void NullProperties ()
-		{
-			TestTableHeaderCell th = new TestTableHeaderCell ();
-			th.AbbreviatedText = null;
-			Assert.AreEqual (String.Empty, th.AbbreviatedText, "AbbreviatedText");
+        [Test]
+        public void CleanProperties()
+        {
+            TestTableHeaderCell th = new TestTableHeaderCell();
+            th.AbbreviatedText = "header";
+            Assert.AreEqual("header", th.AbbreviatedText, "AbbreviatedText");
+            th.AbbreviatedText = null;
+            Assert.AreEqual(String.Empty, th.AbbreviatedText, "-AbbreviatedText");
+            Assert.AreEqual(0, th.StateBag.Count, "ViewState.Count-1");
 
-			th.CategoryText = new string[0];
-			Assert.AreEqual (0, th.CategoryText.Length, "CategoryText");
-			Assert.AreEqual (1, th.StateBag.Count, "ViewState.Count-1");
+            th.CategoryText = new string[1] { "mono" };
+            Assert.AreEqual(1, th.CategoryText.Length, "CategoryText");
+            th.CategoryText = new string[0];
+            Assert.AreEqual(0, th.CategoryText.Length, "-CategoryText");
+            Assert.AreEqual(1, th.StateBag.Count, "ViewState.Count-1");
 
-			th.Scope = TableHeaderScope.NotSet;
-			Assert.AreEqual (TableHeaderScope.NotSet, th.Scope, "Scope");
-			Assert.AreEqual (2, th.StateBag.Count, "ViewState.Count-2");
-			Assert.AreEqual (0, th.Attributes.Count, "Attributes.Count");
-		}
+            th.Scope = TableHeaderScope.Row;
+            Assert.AreEqual(TableHeaderScope.Row, th.Scope, "Scope");
+            th.Scope = TableHeaderScope.NotSet;
+            Assert.AreEqual(TableHeaderScope.NotSet, th.Scope, "-Scope");
+            Assert.AreEqual(2, th.StateBag.Count, "ViewState.Count-2");
+            Assert.AreEqual(0, th.Attributes.Count, "Attributes.Count");
+        }
 
-		[Test]
-		public void CleanProperties ()
-		{
-			TestTableHeaderCell th = new TestTableHeaderCell ();
-			th.AbbreviatedText = "header";
-			Assert.AreEqual ("header", th.AbbreviatedText, "AbbreviatedText");
-			th.AbbreviatedText = null;
-			Assert.AreEqual (String.Empty, th.AbbreviatedText, "-AbbreviatedText");
-			Assert.AreEqual (0, th.StateBag.Count, "ViewState.Count-1");
+        private string AdjustLineEndings(string s)
+        {
+            return s.Replace("\r\n", Environment.NewLine);
+        }
 
-			th.CategoryText = new string[1] { "mono" };
-			Assert.AreEqual (1, th.CategoryText.Length, "CategoryText");
-			th.CategoryText = new string[0];
-			Assert.AreEqual (0, th.CategoryText.Length, "-CategoryText");
-			Assert.AreEqual (1, th.StateBag.Count, "ViewState.Count-1");
+        [Test]
+        public void Render()
+        {
+            TestTableHeaderCell th = new TestTableHeaderCell();
+            string s = th.Render();
+            Assert.AreEqual(AdjustLineEndings("<th></th>"), s, "empty/default");
+            th.AbbreviatedText = "header";
+            s = th.Render();
+            Assert.AreEqual(AdjustLineEndings("<th abbr=\"header\"></th>"), s, "AbbreviatedText");
+            th.AbbreviatedText = null;
 
-			th.Scope = TableHeaderScope.Row;
-			Assert.AreEqual (TableHeaderScope.Row, th.Scope, "Scope");
-			th.Scope = TableHeaderScope.NotSet;
-			Assert.AreEqual (TableHeaderScope.NotSet, th.Scope, "-Scope");
-			Assert.AreEqual (2, th.StateBag.Count, "ViewState.Count-2");
-			Assert.AreEqual (0, th.Attributes.Count, "Attributes.Count");
-		}
+            th.CategoryText = new string[1] { "mono" };
+            s = th.Render();
+            Assert.AreEqual(AdjustLineEndings("<th axis=\"mono\"></th>"), s, "CategoryText-1");
+            th.CategoryText = new string[2] { "mono", "http://www.mono-project.com" };
+            s = th.Render();
+            Assert.AreEqual(
+                AdjustLineEndings("<th axis=\"mono,http://www.mono-project.com\"></th>"),
+                s,
+                "CategoryText-2"
+            );
+            th.CategoryText = new string[3] { "mono", "http://www.mono-project.com", "," };
+            s = th.Render();
+            Assert.AreEqual(
+                AdjustLineEndings("<th axis=\"mono,http://www.mono-project.com,,\"></th>"),
+                s,
+                "CategoryText-2"
+            );
+            th.CategoryText = new string[0];
+            s = th.Render();
+            Assert.AreEqual(AdjustLineEndings("<th></th>"), s, "CategoryText-2");
 
-		private string AdjustLineEndings (string s)
-		{
-			return s.Replace ("\r\n", Environment.NewLine);
-		}
-
-		[Test]
-		public void Render ()
-		{
-			TestTableHeaderCell th = new TestTableHeaderCell ();
-			string s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th></th>"), s, "empty/default");
-			th.AbbreviatedText = "header";
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th abbr=\"header\"></th>"), s, "AbbreviatedText");
-			th.AbbreviatedText = null;
-
-			th.CategoryText = new string[1] { "mono" };
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th axis=\"mono\"></th>"), s, "CategoryText-1");
-			th.CategoryText = new string[2] { "mono", "http://www.mono-project.com" };
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th axis=\"mono,http://www.mono-project.com\"></th>"), s, "CategoryText-2");
-			th.CategoryText = new string[3] { "mono", "http://www.mono-project.com", "," };
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th axis=\"mono,http://www.mono-project.com,,\"></th>"), s, "CategoryText-2");
-			th.CategoryText = new string[0];
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th></th>"), s, "CategoryText-2");
-
-			th.Scope = TableHeaderScope.Row;
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th scope=\"row\"></th>"), s, "Row");
-			th.Scope = TableHeaderScope.Column;
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th scope=\"column\"></th>"), s, "Column");
-			th.Scope = TableHeaderScope.NotSet;
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th></th>"), s, "NotSet");
-			th.Text = "test";
-			s = th.Render ();
-			Assert.AreEqual (AdjustLineEndings ("<th>test</th>"), s, "Text");
-		}
-	}
+            th.Scope = TableHeaderScope.Row;
+            s = th.Render();
+            Assert.AreEqual(AdjustLineEndings("<th scope=\"row\"></th>"), s, "Row");
+            th.Scope = TableHeaderScope.Column;
+            s = th.Render();
+            Assert.AreEqual(AdjustLineEndings("<th scope=\"column\"></th>"), s, "Column");
+            th.Scope = TableHeaderScope.NotSet;
+            s = th.Render();
+            Assert.AreEqual(AdjustLineEndings("<th></th>"), s, "NotSet");
+            th.Text = "test";
+            s = th.Render();
+            Assert.AreEqual(AdjustLineEndings("<th>test</th>"), s, "Text");
+        }
+    }
 }

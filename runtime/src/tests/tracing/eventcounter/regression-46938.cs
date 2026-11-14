@@ -1,29 +1,27 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Xunit;
 
 namespace EventCounterRegressionTests
 {
     public class SimpleEventListener : EventListener
-    {        
+    {
         private readonly EventLevel _level = EventLevel.Verbose;
 
         public bool SawNanFragmentation = false;
 
-        public SimpleEventListener()
-        {
-        }
+        public SimpleEventListener() { }
 
         protected override void OnEventSourceCreated(EventSource source)
         {
@@ -42,12 +40,16 @@ namespace EventCounterRegressionTests
 
             for (int i = 0; i < eventData.Payload.Count; i++)
             {
-                IDictionary<string, object> eventPayload = eventData.Payload[i] as IDictionary<string, object>;
+                IDictionary<string, object> eventPayload =
+                    eventData.Payload[i] as IDictionary<string, object>;
                 if (eventPayload != null)
                 {
                     foreach (KeyValuePair<string, object> payload in eventPayload)
                     {
-                        if (payload.Key.Equals("Name") && payload.Value.ToString().Equals("gc-fragmentation"))
+                        if (
+                            payload.Key.Equals("Name")
+                            && payload.Value.ToString().Equals("gc-fragmentation")
+                        )
                             isGCFragmentationCounter = true;
                         if (payload.Key.Equals("Mean"))
                         {
@@ -71,7 +73,7 @@ namespace EventCounterRegressionTests
             // Create an EventListener.
             using (SimpleEventListener myListener = new SimpleEventListener())
             {
-                Thread.Sleep(3000); 
+                Thread.Sleep(3000);
                 if (!myListener.SawNanFragmentation)
                 {
                     Console.WriteLine("Test passed");

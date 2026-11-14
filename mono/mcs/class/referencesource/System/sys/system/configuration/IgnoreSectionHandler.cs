@@ -4,11 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     /// <devdoc>
     /// </devdoc>
-    public class IgnoreSectionHandler : IConfigurationSectionHandler {
+    public class IgnoreSectionHandler : IConfigurationSectionHandler
+    {
         /**
          * Create
          *
@@ -19,7 +20,12 @@ namespace System.Configuration {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual object Create(Object parent, Object configContext, System.Xml.XmlNode section) {
+        public virtual object Create(
+            Object parent,
+            Object configContext,
+            System.Xml.XmlNode section
+        )
+        {
             return null;
         }
     }

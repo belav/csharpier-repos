@@ -51,7 +51,8 @@ public sealed record RelationalSqlTranslatingExpressionVisitorDependencies
         IRelationalTypeMappingSource typeMappingSource,
         IMemberTranslatorProvider memberTranslatorProvider,
         IMethodCallTranslatorProvider methodCallTranslatorProvider,
-        IAggregateMethodCallTranslatorProvider aggregateMethodCallTranslatorProvider)
+        IAggregateMethodCallTranslatorProvider aggregateMethodCallTranslatorProvider
+    )
     {
         SqlExpressionFactory = sqlExpressionFactory;
         Model = model;

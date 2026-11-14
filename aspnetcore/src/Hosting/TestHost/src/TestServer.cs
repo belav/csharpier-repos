@@ -49,8 +49,8 @@ public class TestServer : IServer
     {
         Services = services ?? throw new ArgumentNullException(nameof(services));
         Features = featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
-        var options =
-            optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
+        var options = optionsAccessor?.Value
+            ?? throw new ArgumentNullException(nameof(optionsAccessor));
         AllowSynchronousIO = options.AllowSynchronousIO;
         PreserveExecutionContext = options.PreserveExecutionContext;
         BaseAddress = options.BaseAddress;
@@ -267,13 +267,10 @@ public class TestServer : IServer
         CancellationToken cancellationToken
     )
     {
-        _application = new ApplicationWrapper<TContext>(
-            application,
-            () =>
-            {
-                ObjectDisposedException.ThrowIf(_disposed, this);
-            }
-        );
+        _application = new ApplicationWrapper<TContext>(application, () =>
+        {
+            ObjectDisposedException.ThrowIf(_disposed, this);
+        });
 
         return Task.CompletedTask;
     }

@@ -25,12 +25,12 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle ("System.Threading.Tasks.Extensions")]
-[assembly: AssemblyDescription ("System.Threading.Tasks.Extensions")]
-[assembly: AssemblyDefaultAlias ("System.Threading.Tasks.Extensions")]
-[assembly: AssemblyCompany ("Mono development team")]
-[assembly: AssemblyProduct ("Mono Common Language Infrastructure")]
-[assembly: AssemblyCopyright ("(c) Various Mono authors")]
-[assembly: AssemblyVersion ("4.2.0.0")]
-[assembly: AssemblyInformationalVersion ("4.0.0.0")]
-[assembly: AssemblyFileVersion ("4.0.0.0")]
+[assembly: AssemblyTitle("System.Threading.Tasks.Extensions")]
+[assembly: AssemblyDescription("System.Threading.Tasks.Extensions")]
+[assembly: AssemblyDefaultAlias("System.Threading.Tasks.Extensions")]
+[assembly: AssemblyCompany("Mono development team")]
+[assembly: AssemblyProduct("Mono Common Language Infrastructure")]
+[assembly: AssemblyCopyright("(c) Various Mono authors")]
+[assembly: AssemblyVersion("4.2.0.0")]
+[assembly: AssemblyInformationalVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.0.0")]

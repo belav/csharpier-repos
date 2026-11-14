@@ -13,13 +13,18 @@ internal class NUnitTestFrameworkMetadata : ITestFrameworkMetadata
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public NUnitTestFrameworkMetadata()
-    {
-    }
+    public NUnitTestFrameworkMetadata() { }
 
     public bool MatchesAttributeSyntacticName(string attributeSyntacticName)
     {
-        return attributeSyntacticName is "TestAttribute" or "TheoryAttribute" or "TestCaseAttribute" or "TestCaseSourceAttribute"
-            or "Test" or "Theory" or "TestCase" or "TestCaseSource";
+        return attributeSyntacticName
+            is "TestAttribute"
+                or "TheoryAttribute"
+                or "TestCaseAttribute"
+                or "TestCaseSourceAttribute"
+                or "Test"
+                or "Theory"
+                or "TestCase"
+                or "TestCaseSource";
     }
 }

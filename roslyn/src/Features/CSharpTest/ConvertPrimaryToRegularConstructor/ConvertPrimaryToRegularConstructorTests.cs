@@ -662,7 +662,7 @@ public class ConvertPrimaryToRegularConstructorTests
                     public struct Enumerator
                     {
                         private int _i;
-                
+
                         public Enumerator(OuterType c)
                         {
                             _i = c._i;
@@ -1757,23 +1757,23 @@ public class ConvertPrimaryToRegularConstructorTests
         await new VerifyCS.Test
         {
             TestCode = """
-               using System;
-               [method: Obsolete("", error: true)]
-               class [|C(int i)|]
-               {
-               }
-               """,
+                using System;
+                [method: Obsolete("", error: true)]
+                class [|C(int i)|]
+                {
+                }
+                """,
             FixedCode = """
-               using System;
+                using System;
 
-               class C
-               {
-                   [Obsolete("", error: true)]
-                   public [|C|](int i)
-                   {
-                   }
-               }
-               """,
+                class C
+                {
+                    [Obsolete("", error: true)]
+                    public [|C|](int i)
+                    {
+                    }
+                }
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -1784,24 +1784,24 @@ public class ConvertPrimaryToRegularConstructorTests
         await new VerifyCS.Test
         {
             TestCode = """
-               using System;
-               [Obsolete("", error: true)]
-               [method: Obsolete("", error: true)]
-               class [|C(int i)|]
-               {
-               }
-               """,
+                using System;
+                [Obsolete("", error: true)]
+                [method: Obsolete("", error: true)]
+                class [|C(int i)|]
+                {
+                }
+                """,
             FixedCode = """
-               using System;
-               [Obsolete("", error: true)]
-               class C
-               {
-                   [Obsolete("", error: true)]
-                   public C(int i)
-                   {
-                   }
-               }
-               """,
+                using System;
+                [Obsolete("", error: true)]
+                class C
+                {
+                    [Obsolete("", error: true)]
+                    public C(int i)
+                    {
+                    }
+                }
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -1824,7 +1824,7 @@ public class ConvertPrimaryToRegularConstructorTests
                 """,
             FixedCode = """
                 using System;
-     
+
                 namespace N
                 {
                     class C
@@ -1859,7 +1859,7 @@ public class ConvertPrimaryToRegularConstructorTests
                 """,
             FixedCode = """
                 using System;
-     
+
                 namespace N
                 {
                     [Obsolete("", error: true)]
@@ -1895,7 +1895,7 @@ public class ConvertPrimaryToRegularConstructorTests
                 """,
             FixedCode = """
                 using System;
-     
+
                 namespace N
                 {
                     class C
@@ -1933,7 +1933,7 @@ public class ConvertPrimaryToRegularConstructorTests
                 """,
             FixedCode = """
                 using System;
-     
+
                 namespace N
                 {
                     [Obsolete("", error: true)]
@@ -2007,7 +2007,7 @@ public class ConvertPrimaryToRegularConstructorTests
                 class C
                 {
                     int x;
-                
+
                     [CLSCompliant(false)]
                     [Obsolete("", error: true)]
                     public [|C|](int i)
@@ -2455,7 +2455,7 @@ public class ConvertPrimaryToRegularConstructorTests
             TestCode = """
                 class [|C(int i)|]
                 {
-                
+
                     #region constructors
 
                     #endregion

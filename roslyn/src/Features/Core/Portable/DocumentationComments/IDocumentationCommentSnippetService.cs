@@ -21,27 +21,36 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             in DocumentationCommentOptions options,
             CancellationToken cancellationToken,
-            bool addIndentation = true);
+            bool addIndentation = true
+        );
 
         DocumentationCommentSnippet? GetDocumentationCommentSnippetOnCommandInvoke(
             SyntaxTree syntaxTree,
             SourceText text,
             int position,
             in DocumentationCommentOptions options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         DocumentationCommentSnippet? GetDocumentationCommentSnippetOnEnterTyped(
             SyntaxTree syntaxTree,
             SourceText text,
             int position,
             in DocumentationCommentOptions options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         DocumentationCommentSnippet? GetDocumentationCommentSnippetFromPreviousLine(
             in DocumentationCommentOptions options,
             TextLine currentLine,
-            TextLine previousLine);
+            TextLine previousLine
+        );
 
-        bool IsValidTargetMember(SyntaxTree syntaxTree, SourceText text, int caretPosition, CancellationToken cancellationToken);
+        bool IsValidTargetMember(
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int caretPosition,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -77,7 +77,7 @@ namespace Microsoft.Interop
             /// Convert native data to managed data even in the case of an exception during
             /// the non-cleanup phases.
             /// </summary>
-            GuaranteedUnmarshal
+            GuaranteedUnmarshal,
         }
 
         public CodeEmitOptions CodeEmitOptions { get; init; } = new(SkipInit: true);
@@ -126,7 +126,10 @@ namespace Microsoft.Interop
         /// <returns>Managed and native identifiers</returns>
         public virtual (string managed, string native) GetIdentifiers(TypePositionInfo info)
         {
-            return (info.InstanceIdentifier, $"__{info.InstanceIdentifier.TrimStart('@')}{GeneratedNativeIdentifierSuffix}");
+            return (
+                info.InstanceIdentifier,
+                $"__{info.InstanceIdentifier.TrimStart('@')}{GeneratedNativeIdentifierSuffix}"
+            );
         }
 
         /// <summary>

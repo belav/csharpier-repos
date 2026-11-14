@@ -8,17 +8,17 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-
     internal abstract class AbstractDiagnosticPropertiesService : IDiagnosticPropertiesService
     {
-        public ImmutableDictionary<string, string> GetAdditionalProperties(Diagnostic diagnostic)
-            => GetAdditionalProperties(diagnostic, GetCompilation());
+        public ImmutableDictionary<string, string> GetAdditionalProperties(Diagnostic diagnostic) =>
+            GetAdditionalProperties(diagnostic, GetCompilation());
 
         protected abstract Compilation GetCompilation();
 
         private static ImmutableDictionary<string, string> GetAdditionalProperties(
             Diagnostic diagnostic,
-            Compilation compilation)
+            Compilation compilation
+        )
         {
             var assemblyIds = compilation.GetUnreferencedAssemblyIdentities(diagnostic);
             var requiredVersion = Compilation.GetRequiredLanguageVersion(diagnostic);
@@ -32,14 +32,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 result.Add(
                     DiagnosticPropertyConstants.UnreferencedAssemblyIdentity,
-                    assemblyIds[0].GetDisplayName());
+                    assemblyIds[0].GetDisplayName()
+                );
             }
 
             if (requiredVersion != null)
             {
-                result.Add(
-                    DiagnosticPropertyConstants.RequiredLanguageVersion,
-                    requiredVersion);
+                result.Add(DiagnosticPropertyConstants.RequiredLanguageVersion, requiredVersion);
             }
 
             return result.ToImmutable();

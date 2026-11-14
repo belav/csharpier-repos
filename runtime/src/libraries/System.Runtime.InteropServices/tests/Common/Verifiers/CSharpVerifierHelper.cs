@@ -21,22 +21,34 @@ namespace Microsoft.Interop.UnitTests.Verifiers
         /// related to nullability mapped to <see cref="ReportDiagnostic.Error"/>, which is then used to enable all
         /// of these warnings for default validation during analyzer and code fix tests.
         /// </summary>
-        internal static ImmutableDictionary<string, ReportDiagnostic> NullableWarnings { get; } = GetNullableWarningsFromCompiler();
+        internal static ImmutableDictionary<string, ReportDiagnostic> NullableWarnings { get; } =
+            GetNullableWarningsFromCompiler();
 
-        private static ImmutableDictionary<string, ReportDiagnostic> GetNullableWarningsFromCompiler()
+        private static ImmutableDictionary<
+            string,
+            ReportDiagnostic
+        > GetNullableWarningsFromCompiler()
         {
             string[] args = { "/warnaserror:nullable" };
-            var commandLineArguments = CSharpCommandLineParser.Default.Parse(args, baseDirectory: Environment.CurrentDirectory, sdkDirectory: Environment.CurrentDirectory);
+            var commandLineArguments = CSharpCommandLineParser.Default.Parse(
+                args,
+                baseDirectory: Environment.CurrentDirectory,
+                sdkDirectory: Environment.CurrentDirectory
+            );
             return commandLineArguments.CompilationOptions.SpecificDiagnosticOptions;
         }
 
-        internal static Func<Solution, ProjectId, Solution> GetAllDiagonsticsEnabledTransform(IEnumerable<DiagnosticAnalyzer> analyzers)
+        internal static Func<Solution, ProjectId, Solution> GetAllDiagonsticsEnabledTransform(
+            IEnumerable<DiagnosticAnalyzer> analyzers
+        )
         {
             return (solution, projectId) =>
             {
                 var project = solution.GetProject(projectId)!;
                 var compilationOptions = project.CompilationOptions!;
-                var diagnosticOptions = compilationOptions.SpecificDiagnosticOptions.SetItems(NullableWarnings);
+                var diagnosticOptions = compilationOptions.SpecificDiagnosticOptions.SetItems(
+                    NullableWarnings
+                );
 
                 // Explicitly enable diagnostics that are not enabled by default
                 var enableAnalyzersOptions = new Dictionary<string, ReportDiagnostic>();
@@ -56,23 +68,28 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                             DiagnosticSeverity.Warning => ReportDiagnostic.Warn,
                             DiagnosticSeverity.Info => ReportDiagnostic.Info,
                             DiagnosticSeverity.Hidden => ReportDiagnostic.Hidden,
-                            _ => ReportDiagnostic.Default
+                            _ => ReportDiagnostic.Default,
                         };
                         enableAnalyzersOptions.Add(diagnostic.Id, report);
                     }
                 }
 
                 compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                    compilationOptions.SpecificDiagnosticOptions
-                        .SetItems(NullableWarnings)
+                    compilationOptions
+                        .SpecificDiagnosticOptions.SetItems(NullableWarnings)
                         .AddRange(enableAnalyzersOptions)
-                        .AddRange(TestUtils.BindingRedirectWarnings));
+                        .AddRange(TestUtils.BindingRedirectWarnings)
+                );
                 solution = solution.WithProjectCompilationOptions(projectId, compilationOptions);
                 return solution;
             };
         }
 
-        internal static Func<Solution, ProjectId, Solution> GetTargetFrameworkAnalyzerOptionsProviderTransform(TestTargetFramework targetFramework)
+        internal static Func<
+            Solution,
+            ProjectId,
+            Solution
+        > GetTargetFrameworkAnalyzerOptionsProviderTransform(TestTargetFramework targetFramework)
         {
             return (solution, projectId) =>
             {
@@ -103,13 +120,14 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                     // since we don't have a good mechanism to ship MSBuild files from dotnet/runtime
                     // in the SDK.
                     TestTargetFramework.Net => string.Empty,
-                    _ => throw new System.Diagnostics.UnreachableException()
+                    _ => throw new System.Diagnostics.UnreachableException(),
                 };
                 return solution.AddAnalyzerConfigDocument(
                     DocumentId.CreateNewId(projectId),
                     "TargetFrameworkConfig.editorconfig",
                     SourceText.From(tfmEditorConfig, encoding: System.Text.Encoding.UTF8),
-                    filePath: "/TargetFrameworkConfig.editorconfig");
+                    filePath: "/TargetFrameworkConfig.editorconfig"
+                );
             };
         }
     }

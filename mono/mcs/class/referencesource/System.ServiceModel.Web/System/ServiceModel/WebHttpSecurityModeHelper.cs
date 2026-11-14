@@ -9,9 +9,11 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(WebHttpSecurityMode value)
         {
-            return (value == WebHttpSecurityMode.None ||
-                value == WebHttpSecurityMode.Transport ||
-                value == WebHttpSecurityMode.TransportCredentialOnly);
+            return (
+                value == WebHttpSecurityMode.None
+                || value == WebHttpSecurityMode.Transport
+                || value == WebHttpSecurityMode.TransportCredentialOnly
+            );
         }
     }
 }

@@ -13,7 +13,11 @@ namespace System.ServiceModel.Dispatcher
             parameters[0] = message;
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
             return result as Message;
         }

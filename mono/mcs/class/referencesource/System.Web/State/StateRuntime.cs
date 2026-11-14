@@ -1,21 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="StateRuntime.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * StateWebRuntime
- * 
+ *
  * Copyright (c) 1998-1999, Microsoft Corporation
- * 
+ *
  */
 
-namespace System.Web.SessionState {
+namespace System.Web.SessionState
+{
     using System.Configuration;
     using System.Globalization;
-    using System.IO;    
-    using System.Runtime.InteropServices;   
+    using System.IO;
+    using System.Runtime.InteropServices;
     using System.Security.Permissions;
     using System.Threading;
     using System.Web;
@@ -23,13 +24,18 @@ namespace System.Web.SessionState {
     using System.Web.Configuration;
     using System.Web.Util;
 
-
     /// <internalonly/>
     /// <devdoc>
     /// </devdoc>
-    [ComImport, Guid("7297744b-e188-40bf-b7e9-56698d25cf44"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IStateRuntime {
-
+    [
+        ComImport,
+        Guid("7297744b-e188-40bf-b7e9-56698d25cf44"),
+        System.Runtime.InteropServices.InterfaceTypeAttribute(
+            System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
+        )
+    ]
+    public interface IStateRuntime
+    {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -40,62 +46,44 @@ namespace System.Web.SessionState {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
+        [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
+        [SecurityPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+        void ProcessRequest(
+            [In, MarshalAs(UnmanagedType.SysInt)] IntPtr tracker,
+            [In, MarshalAs(UnmanagedType.I4)] int verb,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string uri,
+            [In, MarshalAs(UnmanagedType.I4)] int exclusive,
+            [In, MarshalAs(UnmanagedType.I4)] int timeout,
+            [In, MarshalAs(UnmanagedType.I4)] int lockCookieExists,
+            [In, MarshalAs(UnmanagedType.I4)] int lockCookie,
+            [In, MarshalAs(UnmanagedType.I4)] int contentLength,
+            [In, MarshalAs(UnmanagedType.SysInt)] IntPtr content
+        );
 
         [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         [SecurityPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         void ProcessRequest(
-               [In, MarshalAs(UnmanagedType.SysInt)]
-               IntPtr tracker,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int verb,
-               [In, MarshalAs(UnmanagedType.LPWStr)]
-               string uri,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int exclusive,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int timeout,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int lockCookieExists,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int lockCookie,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int contentLength,
-               [In, MarshalAs(UnmanagedType.SysInt)]
-               IntPtr content);
-
-        [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-        [SecurityPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
-        void ProcessRequest(
-               [In, MarshalAs(UnmanagedType.SysInt)]
-               IntPtr tracker,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int verb,
-               [In, MarshalAs(UnmanagedType.LPWStr)]
-               string uri,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int exclusive,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int extraFlags,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int timeout,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int lockCookieExists,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int lockCookie,
-               [In, MarshalAs(UnmanagedType.I4)]
-               int contentLength,
-               [In, MarshalAs(UnmanagedType.SysInt)]
-               IntPtr content);
-
+            [In, MarshalAs(UnmanagedType.SysInt)] IntPtr tracker,
+            [In, MarshalAs(UnmanagedType.I4)] int verb,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string uri,
+            [In, MarshalAs(UnmanagedType.I4)] int exclusive,
+            [In, MarshalAs(UnmanagedType.I4)] int extraFlags,
+            [In, MarshalAs(UnmanagedType.I4)] int timeout,
+            [In, MarshalAs(UnmanagedType.I4)] int lockCookieExists,
+            [In, MarshalAs(UnmanagedType.I4)] int lockCookie,
+            [In, MarshalAs(UnmanagedType.I4)] int contentLength,
+            [In, MarshalAs(UnmanagedType.SysInt)] IntPtr content
+        );
     }
-
 
     /// <internalonly/>
     /// <devdoc>
     /// </devdoc>
     [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-    public sealed class StateRuntime : IStateRuntime {
-        static StateRuntime() {
+    public sealed class StateRuntime : IStateRuntime
+    {
+        static StateRuntime()
+        {
             WebConfigurationFileMap webFileMap = new WebConfigurationFileMap();
             UserMapPath mapPath = new UserMapPath(webFileMap);
             HttpConfigurationSystem.EnsureInit(mapPath, false, true);
@@ -108,15 +96,13 @@ namespace System.Web.SessionState {
             ResetStateServerCounters();
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.Web.State.StateRuntime'/>
         ///       class.
         ///     </para>
         /// </devdoc>
-        public StateRuntime() {
-        }
+        public StateRuntime() { }
 
         /*
          * Shutdown runtime
@@ -125,40 +111,56 @@ namespace System.Web.SessionState {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void StopProcessing() {
+        public void StopProcessing()
+        {
             ResetStateServerCounters();
             HttpRuntime.Close();
         }
 
-        static void ResetStateServerCounters() {
-            PerfCounters.SetStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_TOTAL, 0);
-            PerfCounters.SetStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_ACTIVE, 0);
-            PerfCounters.SetStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_TIMED_OUT, 0);
-            PerfCounters.SetStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_ABANDONED, 0);
+        static void ResetStateServerCounters()
+        {
+            PerfCounters.SetStateServiceCounter(
+                StateServicePerfCounter.STATE_SERVICE_SESSIONS_TOTAL,
+                0
+            );
+            PerfCounters.SetStateServiceCounter(
+                StateServicePerfCounter.STATE_SERVICE_SESSIONS_ACTIVE,
+                0
+            );
+            PerfCounters.SetStateServiceCounter(
+                StateServicePerfCounter.STATE_SERVICE_SESSIONS_TIMED_OUT,
+                0
+            );
+            PerfCounters.SetStateServiceCounter(
+                StateServicePerfCounter.STATE_SERVICE_SESSIONS_ABANDONED,
+                0
+            );
         }
 
         public void ProcessRequest(
-                  IntPtr tracker,
-                  int verb,
-                  string uri,
-                  int exclusive,
-                  int timeout,
-                  int lockCookieExists,
-                  int lockCookie,
-                  int contentLength,
-                  IntPtr content
-                  ) {
+            IntPtr tracker,
+            int verb,
+            string uri,
+            int exclusive,
+            int timeout,
+            int lockCookieExists,
+            int lockCookie,
+            int contentLength,
+            IntPtr content
+        )
+        {
             ProcessRequest(
-                  tracker,
-                  verb,
-                  uri,
-                  exclusive,
-                  0,
-                  timeout,
-                  lockCookieExists,
-                  lockCookie,
-                  contentLength,
-                  content);
+                tracker,
+                verb,
+                uri,
+                exclusive,
+                0,
+                timeout,
+                lockCookieExists,
+                lockCookie,
+                contentLength,
+                content
+            );
         }
 
         /*
@@ -171,30 +173,39 @@ namespace System.Web.SessionState {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public void ProcessRequest(
-                  IntPtr tracker,
-                  int verb,
-                  string uri,
-                  int exclusive,
-                  int extraFlags,
-                  int timeout,
-                  int lockCookieExists,
-                  int lockCookie,
-                  int contentLength,
-                  IntPtr content
-                  ) {
-
-            StateHttpWorkerRequest  wr;
+            IntPtr tracker,
+            int verb,
+            string uri,
+            int exclusive,
+            int extraFlags,
+            int timeout,
+            int lockCookieExists,
+            int lockCookie,
+            int contentLength,
+            IntPtr content
+        )
+        {
+            StateHttpWorkerRequest wr;
 
             wr = new StateHttpWorkerRequest(
-                       tracker, (UnsafeNativeMethods.StateProtocolVerb) verb, uri, 
-                       (UnsafeNativeMethods.StateProtocolExclusive) exclusive, extraFlags, timeout, 
-                       lockCookieExists, lockCookie, contentLength, content);
+                tracker,
+                (UnsafeNativeMethods.StateProtocolVerb)verb,
+                uri,
+                (UnsafeNativeMethods.StateProtocolExclusive)exclusive,
+                extraFlags,
+                timeout,
+                lockCookieExists,
+                lockCookie,
+                contentLength,
+                content
+            );
 
             HttpRuntime.ProcessRequest(wr);
         }
     }
 
-    internal static class StateHeaders {
+    internal static class StateHeaders
+    {
         internal const String EXCLUSIVE_NAME = "Http_Exclusive";
         internal const String EXCLUSIVE_VALUE_ACQUIRE = "acquire";
         internal const String EXCLUSIVE_VALUE_RELEASE = "release";
@@ -212,27 +223,29 @@ namespace System.Web.SessionState {
         internal const String ACTIONFLAGS_NAME_RAW = "ActionFlags";
     };
 
-    internal sealed class CachedContent {
-        internal byte[]             _content;
-        internal IntPtr             _stateItem; // The pointer to the native memory that points to the psi
-        internal bool               _locked;
-        internal DateTime           _utcLockDate;
-        internal TimeSpan           _slidingExpiration;
-        internal int                _lockCookie;
-        internal int                _extraFlags;
-        #pragma warning disable 0649
-        internal ReadWriteSpinLock  _spinLock;
-        #pragma warning restore 0649
+    internal sealed class CachedContent
+    {
+        internal byte[] _content;
+        internal IntPtr _stateItem; // The pointer to the native memory that points to the psi
+        internal bool _locked;
+        internal DateTime _utcLockDate;
+        internal TimeSpan _slidingExpiration;
+        internal int _lockCookie;
+        internal int _extraFlags;
+#pragma warning disable 0649
+        internal ReadWriteSpinLock _spinLock;
+#pragma warning restore 0649
 
         internal CachedContent(
-                byte []     content, 
-                IntPtr      stateItem,
-                bool        locked,
-                DateTime    utcLockDate,
-                TimeSpan    slidingExpiration,
-                int         lockCookie,
-                int         extraFlags) {
-
+            byte[] content,
+            IntPtr stateItem,
+            bool locked,
+            DateTime utcLockDate,
+            TimeSpan slidingExpiration,
+            int lockCookie,
+            int extraFlags
+        )
+        {
             _content = content;
             _stateItem = stateItem;
             _locked = locked;
@@ -243,24 +256,31 @@ namespace System.Web.SessionState {
         }
     }
 
-    internal class StateApplication : IHttpHandler {
+    internal class StateApplication : IHttpHandler
+    {
         CacheItemRemovedCallback _removedHandler;
 
-        internal StateApplication() {
-            if (!HttpRuntime.IsFullTrust) {
+        internal StateApplication()
+        {
+            if (!HttpRuntime.IsFullTrust)
+            {
                 // DevDiv #89021: This type passes user-supplied data to unmanaged code, so we need
                 // to ensure that it can only be used from within a FullTrust environment.
-                throw new InvalidOperationException(SR.GetString(SR.StateApplication_FullTrustOnly));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.StateApplication_FullTrustOnly)
+                );
             }
 
             _removedHandler = new CacheItemRemovedCallback(this.OnCacheItemRemoved);
         }
 
-        public void ProcessRequest(HttpContext context) {
+        public void ProcessRequest(HttpContext context)
+        {
             // Don't send content-type header.
             context.Response.ContentType = null;
 
-            switch (context.Request.HttpVerb) {
+            switch (context.Request.HttpVerb)
+            {
                 case HttpVerb.GET:
                     DoGet(context);
                     break;
@@ -283,16 +303,19 @@ namespace System.Web.SessionState {
             }
         }
 
-        public bool IsReusable {
+        public bool IsReusable
+        {
             get { return true; }
         }
 
-        private string CreateKey(HttpRequest request) {
+        private string CreateKey(HttpRequest request)
+        {
             return CacheInternal.PrefixStateApplication + HttpUtility.UrlDecode(request.RawUrl);
         }
 
-        private void ReportInvalidHeader(HttpContext context, String header) {
-            HttpResponse    response;
+        private void ReportInvalidHeader(HttpContext context, String header)
+        {
+            HttpResponse response;
 
             response = context.Response;
             response.StatusCode = 400;
@@ -301,70 +324,98 @@ namespace System.Web.SessionState {
             response.Write("Invalid header <b>" + header + "</b></body></html>");
         }
 
-        private void ReportLocked(HttpContext context, CachedContent content) {
-            HttpResponse    response;
-            DateTime        localLockDate;
-            long            lockAge;
+        private void ReportLocked(HttpContext context, CachedContent content)
+        {
+            HttpResponse response;
+            DateTime localLockDate;
+            long lockAge;
 
-            // Note that due to a bug in the RTM state server client, 
+            // Note that due to a bug in the RTM state server client,
             // we cannot add to body of the response when sending this
             // message, otherwise the client will leak memory.
             response = context.Response;
             response.StatusCode = 423;
             localLockDate = DateTimeUtil.ConvertToLocalTime(content._utcLockDate);
             lockAge = (DateTime.UtcNow - content._utcLockDate).Ticks / TimeSpan.TicksPerSecond;
-            response.AppendHeader(StateHeaders.LOCKDATE_NAME_RAW, localLockDate.Ticks.ToString(CultureInfo.InvariantCulture));
-            response.AppendHeader(StateHeaders.LOCKAGE_NAME_RAW, lockAge.ToString(CultureInfo.InvariantCulture));
-            response.AppendHeader(StateHeaders.LOCKCOOKIE_NAME_RAW, content._lockCookie.ToString(CultureInfo.InvariantCulture));
+            response.AppendHeader(
+                StateHeaders.LOCKDATE_NAME_RAW,
+                localLockDate.Ticks.ToString(CultureInfo.InvariantCulture)
+            );
+            response.AppendHeader(
+                StateHeaders.LOCKAGE_NAME_RAW,
+                lockAge.ToString(CultureInfo.InvariantCulture)
+            );
+            response.AppendHeader(
+                StateHeaders.LOCKCOOKIE_NAME_RAW,
+                content._lockCookie.ToString(CultureInfo.InvariantCulture)
+            );
         }
 
-        private void ReportActionFlags(HttpContext context, int flags) {
-            HttpResponse    response;
+        private void ReportActionFlags(HttpContext context, int flags)
+        {
+            HttpResponse response;
 
-            // Note that due to a bug in the RTM state server client, 
+            // Note that due to a bug in the RTM state server client,
             // we cannot add to body of the response when sending this
             // message, otherwise the client will leak memory.
             response = context.Response;
-            response.AppendHeader(StateHeaders.ACTIONFLAGS_NAME_RAW, flags.ToString(CultureInfo.InvariantCulture));
+            response.AppendHeader(
+                StateHeaders.ACTIONFLAGS_NAME_RAW,
+                flags.ToString(CultureInfo.InvariantCulture)
+            );
         }
 
-        private void ReportNotFound(HttpContext context) {
+        private void ReportNotFound(HttpContext context)
+        {
             context.Response.StatusCode = 404;
         }
 
-        bool GetOptionalNonNegativeInt32HeaderValue(HttpContext context, string header, out int value)
+        bool GetOptionalNonNegativeInt32HeaderValue(
+            HttpContext context,
+            string header,
+            out int value
+        )
         {
             bool headerValid;
             string valueAsString;
 
             value = -1;
             valueAsString = context.Request.Headers[header];
-            if (valueAsString == null) {
+            if (valueAsString == null)
+            {
                 headerValid = true;
             }
-            else {
+            else
+            {
                 headerValid = false;
-                try {
+                try
+                {
                     value = Int32.Parse(valueAsString, CultureInfo.InvariantCulture);
-                    if (value >= 0) {
+                    if (value >= 0)
+                    {
                         headerValid = true;
                     }
                 }
-                catch {
-                }
+                catch { }
             }
 
-            if (!headerValid) {
+            if (!headerValid)
+            {
                 ReportInvalidHeader(context, header);
             }
 
             return headerValid;
         }
 
-        bool GetRequiredNonNegativeInt32HeaderValue(HttpContext context, string header, out int value)
+        bool GetRequiredNonNegativeInt32HeaderValue(
+            HttpContext context,
+            string header,
+            out int value
+        )
         {
             bool headerValid = GetOptionalNonNegativeInt32HeaderValue(context, header, out value);
-            if (headerValid && value == -1) {
+            if (headerValid && value == -1)
+            {
                 headerValid = false;
                 ReportInvalidHeader(context, header);
             }
@@ -372,7 +423,12 @@ namespace System.Web.SessionState {
             return headerValid;
         }
 
-        bool GetOptionalInt32HeaderValue(HttpContext context, string header, out int value, out bool found)
+        bool GetOptionalInt32HeaderValue(
+            HttpContext context,
+            string header,
+            out int value,
+            out bool found
+        )
         {
             bool headerValid;
             string valueAsString;
@@ -381,21 +437,24 @@ namespace System.Web.SessionState {
 
             value = 0;
             valueAsString = context.Request.Headers[header];
-            if (valueAsString == null) {
+            if (valueAsString == null)
+            {
                 headerValid = true;
             }
-            else {
+            else
+            {
                 headerValid = false;
-                try {
+                try
+                {
                     value = Int32.Parse(valueAsString, CultureInfo.InvariantCulture);
                     headerValid = true;
                     found = true;
                 }
-                catch {
-                }
+                catch { }
             }
 
-            if (!headerValid) {
+            if (!headerValid)
+            {
                 ReportInvalidHeader(context, header);
             }
 
@@ -408,36 +467,42 @@ namespace System.Web.SessionState {
          * Create the cache key
          * follow inproc.
          */
-        internal /*public*/ void DoGet(HttpContext context) {
-            HttpRequest     request = context.Request;
-            HttpResponse    response = context.Response;
-            Stream          responseStream;
-            byte[]          buf;
-            string          exclusiveAccess;
-            string          key;
-            CachedContent   content;
-            int             lockCookie;
-            int             timeout;
+        internal /*public*/
+        void DoGet(HttpContext context)
+        {
+            HttpRequest request = context.Request;
+            HttpResponse response = context.Response;
+            Stream responseStream;
+            byte[] buf;
+            string exclusiveAccess;
+            string key;
+            CachedContent content;
+            int lockCookie;
+            int timeout;
 
             key = CreateKey(request);
-            content = (CachedContent) HttpRuntime.Cache.InternalCache.Get(key);
-            if (content == null) {
+            content = (CachedContent)HttpRuntime.Cache.InternalCache.Get(key);
+            if (content == null)
+            {
                 ReportNotFound(context);
                 return;
             }
 
             exclusiveAccess = request.Headers[StateHeaders.EXCLUSIVE_NAME];
             content._spinLock.AcquireWriterLock();
-            try {
-                if (content._content == null) {
+            try
+            {
+                if (content._content == null)
+                {
                     ReportNotFound(context);
                     return;
                 }
-                
+
                 int initialFlags;
 
                 initialFlags = content._extraFlags;
-                if ((initialFlags & (int)SessionStateItemFlags.Uninitialized) != 0) {
+                if ((initialFlags & (int)SessionStateItemFlags.Uninitialized) != 0)
+                {
                     // It is an uninitialized item.  We have to remove that flag.
                     // We only allow one request to do that.
                     // For details, see inline doc for SessionStateItemFlags.Uninitialized flag.
@@ -445,106 +510,145 @@ namespace System.Web.SessionState {
                     // If initialFlags != return value of CompareExchange, it means another request has
                     // removed the flag.
 
-                    if (initialFlags == Interlocked.CompareExchange(
-                                            ref content._extraFlags, 
-                                            initialFlags & (~((int)SessionStateItemFlags.Uninitialized)), 
-                                            initialFlags)) {
+                    if (
+                        initialFlags
+                        == Interlocked.CompareExchange(
+                            ref content._extraFlags,
+                            initialFlags & (~((int)SessionStateItemFlags.Uninitialized)),
+                            initialFlags
+                        )
+                    )
+                    {
                         ReportActionFlags(context, (int)SessionStateActions.InitializeItem);
                     }
                 }
 
-                if (exclusiveAccess == StateHeaders.EXCLUSIVE_VALUE_RELEASE) {
-                    if (!GetRequiredNonNegativeInt32HeaderValue(context, StateHeaders.LOCKCOOKIE_NAME, out lockCookie))
+                if (exclusiveAccess == StateHeaders.EXCLUSIVE_VALUE_RELEASE)
+                {
+                    if (
+                        !GetRequiredNonNegativeInt32HeaderValue(
+                            context,
+                            StateHeaders.LOCKCOOKIE_NAME,
+                            out lockCookie
+                        )
+                    )
                         return;
-                     
-                    if (content._locked) {
-                        if (lockCookie == content._lockCookie) {
+
+                    if (content._locked)
+                    {
+                        if (lockCookie == content._lockCookie)
+                        {
                             content._locked = false;
                         }
-                        else {
+                        else
+                        {
                             ReportLocked(context, content);
                         }
                     }
-                    else {
+                    else
+                    {
                         // should be locked but isn't.
                         context.Response.StatusCode = 200;
                     }
-                } 
-                else {
-                    if (content._locked) {
+                }
+                else
+                {
+                    if (content._locked)
+                    {
                         ReportLocked(context, content);
                         return;
                     }
 
-                    if (exclusiveAccess == StateHeaders.EXCLUSIVE_VALUE_ACQUIRE) {
+                    if (exclusiveAccess == StateHeaders.EXCLUSIVE_VALUE_ACQUIRE)
+                    {
                         content._locked = true;
                         content._utcLockDate = DateTime.UtcNow;
                         content._lockCookie++;
 
-                        response.AppendHeader(StateHeaders.LOCKCOOKIE_NAME_RAW, (content._lockCookie).ToString(CultureInfo.InvariantCulture));
+                        response.AppendHeader(
+                            StateHeaders.LOCKCOOKIE_NAME_RAW,
+                            (content._lockCookie).ToString(CultureInfo.InvariantCulture)
+                        );
                     }
 
                     timeout = (int)(content._slidingExpiration.Ticks / TimeSpan.TicksPerMinute);
-                    response.AppendHeader(StateHeaders.TIMEOUT_NAME_RAW, (timeout).ToString(CultureInfo.InvariantCulture));
+                    response.AppendHeader(
+                        StateHeaders.TIMEOUT_NAME_RAW,
+                        (timeout).ToString(CultureInfo.InvariantCulture)
+                    );
                     responseStream = response.OutputStream;
                     buf = content._content;
                     responseStream.Write(buf, 0, buf.Length);
                     response.Flush();
                 }
             }
-            finally {
+            finally
+            {
                 content._spinLock.ReleaseWriterLock();
             }
         }
 
-
-        internal /*public*/ void DoPut(HttpContext context) {
-            IntPtr  stateItemDelete;
+        internal /*public*/
+        void DoPut(HttpContext context)
+        {
+            IntPtr stateItemDelete;
 
             stateItemDelete = FinishPut(context);
-            if (stateItemDelete != IntPtr.Zero) {
+            if (stateItemDelete != IntPtr.Zero)
+            {
                 UnsafeNativeMethods.STWNDDeleteStateItem(stateItemDelete);
             }
         }
 
-        unsafe IntPtr FinishPut(HttpContext context) {
-            HttpRequest         request = context.Request;   
-            HttpResponse        response = context.Response; 
-            Stream              requestStream;               
-            byte[]              buf;                         
-            int                 timeoutMinutes;
-            TimeSpan            timeout;
-            int                 extraFlags;
-            string              key;                         
-            CachedContent       content;
-            CachedContent       contentCurrent;
-            int                 lockCookie;
-            int                 lockCookieNew = 1;
-            IntPtr              stateItem;
-            CacheStoreProvider         cacheInternal = HttpRuntime.Cache.InternalCache;
+        unsafe IntPtr FinishPut(HttpContext context)
+        {
+            HttpRequest request = context.Request;
+            HttpResponse response = context.Response;
+            Stream requestStream;
+            byte[] buf;
+            int timeoutMinutes;
+            TimeSpan timeout;
+            int extraFlags;
+            string key;
+            CachedContent content;
+            CachedContent contentCurrent;
+            int lockCookie;
+            int lockCookieNew = 1;
+            IntPtr stateItem;
+            CacheStoreProvider cacheInternal = HttpRuntime.Cache.InternalCache;
 
             /* create the content */
             requestStream = request.InputStream;
             int bufferSize = (int)(requestStream.Length - requestStream.Position);
             buf = new byte[bufferSize];
-            requestStream.Read(buf, 0 , buf.Length);
+            requestStream.Read(buf, 0, buf.Length);
 
-            fixed (byte * pBuf = buf) {
+            fixed (byte* pBuf = buf)
+            {
                 // The ctor of StateHttpWorkerRequest convert the native pointer address
                 // into an array of bytes, and in our we revert it back to an IntPtr
-                stateItem = (IntPtr)(*((void **)pBuf));
+                stateItem = (IntPtr)(*((void**)pBuf));
             }
 
             /* get headers */
-            if (!GetOptionalNonNegativeInt32HeaderValue(context, StateHeaders.TIMEOUT_NAME, out timeoutMinutes)) {
+            if (
+                !GetOptionalNonNegativeInt32HeaderValue(
+                    context,
+                    StateHeaders.TIMEOUT_NAME,
+                    out timeoutMinutes
+                )
+            )
+            {
                 return stateItem;
             }
 
-            if (timeoutMinutes == -1) {
+            if (timeoutMinutes == -1)
+            {
                 timeoutMinutes = SessionStateModule.TIMEOUT_DEFAULT;
             }
 
-            if (timeoutMinutes > SessionStateModule.MAX_CACHE_BASED_TIMEOUT_MINUTES) {
+            if (timeoutMinutes > SessionStateModule.MAX_CACHE_BASED_TIMEOUT_MINUTES)
+            {
                 ReportInvalidHeader(context, StateHeaders.TIMEOUT_NAME);
                 return stateItem;
             }
@@ -552,42 +656,70 @@ namespace System.Web.SessionState {
             timeout = new TimeSpan(0, timeoutMinutes, 0);
 
             bool found;
-            if (!GetOptionalInt32HeaderValue(context, StateHeaders.EXTRAFLAGS_NAME, out extraFlags, out found)) {
+            if (
+                !GetOptionalInt32HeaderValue(
+                    context,
+                    StateHeaders.EXTRAFLAGS_NAME,
+                    out extraFlags,
+                    out found
+                )
+            )
+            {
                 return stateItem;
             }
 
-            if (!found) {
+            if (!found)
+            {
                 extraFlags = 0;
             }
 
             /* lookup current value */
             key = CreateKey(request);
-            contentCurrent = (CachedContent) cacheInternal.Get(key);
-            if (contentCurrent != null) {
+            contentCurrent = (CachedContent)cacheInternal.Get(key);
+            if (contentCurrent != null)
+            {
                 // DevDivBugs 146875: Expired Session State race condition
                 // We make sure we do not overwrite an already existing item with an uninitialized item.
-                if (((int)SessionStateItemFlags.Uninitialized & extraFlags) == 1) {
+                if (((int)SessionStateItemFlags.Uninitialized & extraFlags) == 1)
+                {
                     return stateItem;
                 }
-                
-                if (!GetOptionalNonNegativeInt32HeaderValue(context, StateHeaders.LOCKCOOKIE_NAME, out lockCookie)) {
+
+                if (
+                    !GetOptionalNonNegativeInt32HeaderValue(
+                        context,
+                        StateHeaders.LOCKCOOKIE_NAME,
+                        out lockCookie
+                    )
+                )
+                {
                     return stateItem;
                 }
 
                 contentCurrent._spinLock.AcquireWriterLock();
-                try {
-                    if (contentCurrent._content == null) {
+                try
+                {
+                    if (contentCurrent._content == null)
+                    {
                         ReportNotFound(context);
                         return stateItem;
                     }
 
                     /* Only set the item if we are the owner */
-                    if (contentCurrent._locked && (lockCookie == -1 || lockCookie != contentCurrent._lockCookie)) {
+                    if (
+                        contentCurrent._locked
+                        && (lockCookie == -1 || lockCookie != contentCurrent._lockCookie)
+                    )
+                    {
                         ReportLocked(context, contentCurrent);
                         return stateItem;
                     }
 
-                    if (contentCurrent._slidingExpiration == timeout && contentCurrent._content != null) {
+                    if (
+                        contentCurrent._slidingExpiration == timeout
+                        && contentCurrent._content != null
+                    )
+                    {
                         /* delete the old state item */
                         IntPtr stateItemOld = contentCurrent._stateItem;
 
@@ -614,19 +746,34 @@ namespace System.Web.SessionState {
                     contentCurrent._lockCookie = 0;
                     lockCookieNew = lockCookie;
                 }
-                finally {
+                finally
+                {
                     contentCurrent._spinLock.ReleaseWriterLock();
                 }
             }
 
-            content = new CachedContent(buf, stateItem, false, DateTime.MinValue, timeout, lockCookieNew, extraFlags);
-            cacheInternal.Insert(key, content, new CacheInsertOptions() {
-                                                    SlidingExpiration = timeout,
-                                                    Priority = CacheItemPriority.NotRemovable,
-                                                    OnRemovedCallback = _removedHandler
-                                                });
+            content = new CachedContent(
+                buf,
+                stateItem,
+                false,
+                DateTime.MinValue,
+                timeout,
+                lockCookieNew,
+                extraFlags
+            );
+            cacheInternal.Insert(
+                key,
+                content,
+                new CacheInsertOptions()
+                {
+                    SlidingExpiration = timeout,
+                    Priority = CacheItemPriority.NotRemovable,
+                    OnRemovedCallback = _removedHandler,
+                }
+            );
 
-            if (contentCurrent == null) {
+            if (contentCurrent == null)
+            {
                 IncrementStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_TOTAL);
                 IncrementStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_ACTIVE);
             }
@@ -634,30 +781,42 @@ namespace System.Web.SessionState {
             return IntPtr.Zero;
         }
 
-        internal /*public*/ void DoDelete(HttpContext context) {
-            string          key = CreateKey(context.Request);
-            CacheStoreProvider     cacheInternal = HttpRuntime.Cache.InternalCache;
-            CachedContent   content = (CachedContent) cacheInternal.Get(key);
+        internal /*public*/
+        void DoDelete(HttpContext context)
+        {
+            string key = CreateKey(context.Request);
+            CacheStoreProvider cacheInternal = HttpRuntime.Cache.InternalCache;
+            CachedContent content = (CachedContent)cacheInternal.Get(key);
 
             /* If the item isn't there, we probably took too long to run. */
-            if (content == null) {
+            if (content == null)
+            {
                 ReportNotFound(context);
                 return;
             }
 
             int lockCookie;
-            if (!GetOptionalNonNegativeInt32HeaderValue(context, StateHeaders.LOCKCOOKIE_NAME, out lockCookie))
+            if (
+                !GetOptionalNonNegativeInt32HeaderValue(
+                    context,
+                    StateHeaders.LOCKCOOKIE_NAME,
+                    out lockCookie
+                )
+            )
                 return;
 
             content._spinLock.AcquireWriterLock();
-            try {
-                if (content._content == null) {
+            try
+            {
+                if (content._content == null)
+                {
                     ReportNotFound(context);
                     return;
                 }
 
                 /* Only remove the item if we are the owner */
-                if (content._locked && (lockCookie == -1 || content._lockCookie != lockCookie)) {
+                if (content._locked && (lockCookie == -1 || content._lockCookie != lockCookie))
+                {
                     ReportLocked(context, content);
                     return;
                 }
@@ -669,21 +828,24 @@ namespace System.Web.SessionState {
                 content._locked = true;
                 content._lockCookie = 0;
             }
-            finally {
+            finally
+            {
                 content._spinLock.ReleaseWriterLock();
             }
-
 
             cacheInternal.Remove(key);
         }
 
-        internal /*public*/ void DoHead(HttpContext context) {
-            string  key;
-            Object  item;
+        internal /*public*/
+        void DoHead(HttpContext context)
+        {
+            string key;
+            Object item;
 
             key = CreateKey(context.Request);
             item = HttpRuntime.Cache.InternalCache.Get(key);
-            if (item == null) {
+            if (item == null)
+            {
                 ReportNotFound(context);
             }
         }
@@ -692,67 +854,84 @@ namespace System.Web.SessionState {
          * Unknown Http verb. Responds with "400 Bad Request".
          * Override this method to report different Http code.
          */
-        internal /*public*/ void DoUnknown(HttpContext context) {
+        internal /*public*/
+        void DoUnknown(HttpContext context)
+        {
             context.Response.StatusCode = 400;
         }
 
-        unsafe void OnCacheItemRemoved(String key, Object value, CacheItemRemovedReason reason) {
-            CachedContent   content;
-            IntPtr          stateItem;
+        unsafe void OnCacheItemRemoved(String key, Object value, CacheItemRemovedReason reason)
+        {
+            CachedContent content;
+            IntPtr stateItem;
 
-            content = (CachedContent) value;
+            content = (CachedContent)value;
 
             content._spinLock.AcquireWriterLock();
-            try {
+            try
+            {
                 stateItem = content._stateItem;
                 content._content = null;
                 content._stateItem = IntPtr.Zero;
             }
-            finally {
+            finally
+            {
                 content._spinLock.ReleaseWriterLock();
             }
-           
+
             UnsafeNativeMethods.STWNDDeleteStateItem(stateItem);
 
             /* If _extraFlags have IgnoreCacheItemRemoved specified,
                 don't update the counters.
              */
-            if ((content._extraFlags & (int)SessionStateItemFlags.IgnoreCacheItemRemoved) != 0) {
-                Debug.Trace("OnCacheItemRemoved", "OnCacheItemRemoved ignored (item removed, but counters not updated)");
+            if ((content._extraFlags & (int)SessionStateItemFlags.IgnoreCacheItemRemoved) != 0)
+            {
+                Debug.Trace(
+                    "OnCacheItemRemoved",
+                    "OnCacheItemRemoved ignored (item removed, but counters not updated)"
+                );
                 return;
             }
 
-            switch (reason) {
-                case CacheItemRemovedReason.Expired: 
-                    IncrementStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_TIMED_OUT);
+            switch (reason)
+            {
+                case CacheItemRemovedReason.Expired:
+                    IncrementStateServiceCounter(
+                        StateServicePerfCounter.STATE_SERVICE_SESSIONS_TIMED_OUT
+                    );
                     break;
 
                 case CacheItemRemovedReason.Removed:
-                    IncrementStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_ABANDONED);
+                    IncrementStateServiceCounter(
+                        StateServicePerfCounter.STATE_SERVICE_SESSIONS_ABANDONED
+                    );
                     break;
 
                 default:
-                    break;    
+                    break;
             }
 
             DecrementStateServiceCounter(StateServicePerfCounter.STATE_SERVICE_SESSIONS_ACTIVE);
         }
 
-        private void DecrementStateServiceCounter(StateServicePerfCounter counter) {
-            if (HttpRuntime.ShutdownInProgress) {
+        private void DecrementStateServiceCounter(StateServicePerfCounter counter)
+        {
+            if (HttpRuntime.ShutdownInProgress)
+            {
                 return;
             }
 
             PerfCounters.DecrementStateServiceCounter(counter);
         }
 
-        private void IncrementStateServiceCounter(StateServicePerfCounter counter) {
-            if (HttpRuntime.ShutdownInProgress) {
+        private void IncrementStateServiceCounter(StateServicePerfCounter counter)
+        {
+            if (HttpRuntime.ShutdownInProgress)
+            {
                 return;
             }
 
             PerfCounters.IncrementStateServiceCounter(counter);
         }
-
     }
 }

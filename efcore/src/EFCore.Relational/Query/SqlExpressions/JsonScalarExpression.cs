@@ -27,7 +27,8 @@ public class JsonScalarExpression : SqlExpression
         IReadOnlyList<PathSegment> path,
         Type type,
         RelationalTypeMapping? typeMapping,
-        bool nullable)
+        bool nullable
+    )
         : base(type, typeMapping)
     {
         Json = json;
@@ -104,12 +105,7 @@ public class JsonScalarExpression : SqlExpression
         // TODO Call update: Issue#28887
         return newJson == Json && newPath is null
             ? this
-            : new JsonScalarExpression(
-                newJson,
-                newPath ?? Path,
-                Type,
-                TypeMapping!,
-                nullable);
+            : new JsonScalarExpression(newJson, newPath ?? Path, Type, TypeMapping!, nullable);
     }
 
     /// <summary>
@@ -118,27 +114,22 @@ public class JsonScalarExpression : SqlExpression
     /// </summary>
     /// <param name="json">The <see cref="Json" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual JsonScalarExpression Update(SqlExpression json)
-        => json != Json
-            ? new JsonScalarExpression(json, Path, Type, TypeMapping!, IsNullable)
-            : this;
+    public virtual JsonScalarExpression Update(SqlExpression json) =>
+        json != Json ? new JsonScalarExpression(json, Path, Type, TypeMapping!, IsNullable) : this;
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
     {
         expressionPrinter.Visit(Json);
-        expressionPrinter
-            .Append(" -> ")
-            .Append(string.Join(".", Path.Select(e => e.ToString())));
+        expressionPrinter.Append(" -> ").Append(string.Join(".", Path.Select(e => e.ToString())));
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is JsonScalarExpression jsonScalarExpression
-            && Json.Equals(jsonScalarExpression.Json)
-            && Path.SequenceEqual(jsonScalarExpression.Path);
+    public override bool Equals(object? obj) =>
+        obj is JsonScalarExpression jsonScalarExpression
+        && Json.Equals(jsonScalarExpression.Json)
+        && Path.SequenceEqual(jsonScalarExpression.Path);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Json, Path);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Json, Path);
 }

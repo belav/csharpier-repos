@@ -27,7 +27,13 @@ namespace System.Reflection.Context.Projection
 
         public override IList<CustomAttributeTypedArgument> ConstructorArguments
         {
-            get { return _projector.Project(base.ConstructorArguments, _projector.ProjectTypedArgument); }
+            get
+            {
+                return _projector.Project(
+                    base.ConstructorArguments,
+                    _projector.ProjectTypedArgument
+                );
+            }
         }
 
         public override IList<CustomAttributeNamedArgument> NamedArguments

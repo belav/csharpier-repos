@@ -91,23 +91,20 @@ public class MinimalFormTests
                         app.UseRouting();
                         app.UseAntiforgery();
                         app.UseEndpoints(b =>
-                            b.MapPost(
-                                    "/todo",
-                                    async context =>
+                            b.MapPost("/todo", async context =>
+                                {
+                                    var form = await context.Request.ReadFormAsync();
+                                    var todo = new Todo
                                     {
-                                        var form = await context.Request.ReadFormAsync();
-                                        var todo = new Todo
-                                        {
-                                            Name = form["name"],
-                                            IsCompleted = bool.Parse(form["isComplete"]),
-                                            DueDate = DateTime.Parse(
-                                                form["dueDate"],
-                                                CultureInfo.InvariantCulture
-                                            ),
-                                        };
-                                        await context.Response.WriteAsJsonAsync(todo);
-                                    }
-                                )
+                                        Name = form["name"],
+                                        IsCompleted = bool.Parse(form["isComplete"]),
+                                        DueDate = DateTime.Parse(
+                                            form["dueDate"],
+                                            CultureInfo.InvariantCulture
+                                        ),
+                                    };
+                                    await context.Response.WriteAsJsonAsync(todo);
+                                })
                                 .WithMetadata(AntiforgeryMetadata.ValidationRequired)
                         );
                     })
@@ -232,8 +229,8 @@ public class MinimalFormTests
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await client.SendAsync(request)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await client.SendAsync(request)
         );
         Assert.Equal(
             "Endpoint HTTP: POST /todo contains anti-forgery metadata, but a middleware was not found that supports anti-forgery."
@@ -255,8 +252,8 @@ public class MinimalFormTests
                     .Configure(app =>
                     {
                         app.UseRouting();
-                        exception = Assert.Throws<InvalidOperationException>(
-                            () => app.UseAntiforgery()
+                        exception = Assert.Throws<InvalidOperationException>(() =>
+                            app.UseAntiforgery()
                         );
                         app.UseEndpoints(b => b.MapPost("/todo", ([FromForm] Todo todo) => todo));
                     })
@@ -382,66 +379,45 @@ public class MinimalFormTests
         {
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) =>
-                    builder.MapPost(
-                        "/todo",
-                        async context =>
+                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
+                    {
+                        var form = await context.Request.ReadFormAsync();
+                        var todo = new Todo
                         {
-                            var form = await context.Request.ReadFormAsync();
-                            var todo = new Todo
-                            {
-                                Name = form["name"],
-                                IsCompleted = bool.Parse(form["isComplete"]),
-                                DueDate = DateTime.Parse(
-                                    form["dueDate"],
-                                    CultureInfo.InvariantCulture
-                                ),
-                            };
-                            await context.Response.WriteAsJsonAsync(todo);
-                        }
-                    ),
+                            Name = form["name"],
+                            IsCompleted = bool.Parse(form["isComplete"]),
+                            DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture),
+                        };
+                        await context.Response.WriteAsJsonAsync(todo);
+                    }),
             };
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) =>
-                    builder.MapPost(
-                        "/todo",
-                        async context =>
+                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
+                    {
+                        var form = context.Request.Form;
+                        var todo = new Todo
                         {
-                            var form = context.Request.Form;
-                            var todo = new Todo
-                            {
-                                Name = form["name"],
-                                IsCompleted = bool.Parse(form["isComplete"]),
-                                DueDate = DateTime.Parse(
-                                    form["dueDate"],
-                                    CultureInfo.InvariantCulture
-                                ),
-                            };
-                            await context.Response.WriteAsJsonAsync(todo);
-                        }
-                    ),
+                            Name = form["name"],
+                            IsCompleted = bool.Parse(form["isComplete"]),
+                            DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture),
+                        };
+                        await context.Response.WriteAsJsonAsync(todo);
+                    }),
             };
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) =>
-                    builder.MapPost(
-                        "/todo",
-                        async context =>
+                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
+                    {
+                        var form = context.Features.Get<IFormFeature>()?.ReadForm();
+                        var todo = new Todo
                         {
-                            var form = context.Features.Get<IFormFeature>()?.ReadForm();
-                            var todo = new Todo
-                            {
-                                Name = form["name"],
-                                IsCompleted = bool.Parse(form["isComplete"]),
-                                DueDate = DateTime.Parse(
-                                    form["dueDate"],
-                                    CultureInfo.InvariantCulture
-                                ),
-                            };
-                            await context.Response.WriteAsJsonAsync(todo);
-                        }
-                    ),
+                            Name = form["name"],
+                            IsCompleted = bool.Parse(form["isComplete"]),
+                            DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture),
+                        };
+                        await context.Response.WriteAsJsonAsync(todo);
+                    }),
             };
         }
     }
@@ -489,8 +465,8 @@ public class MinimalFormTests
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await client.SendAsync(request)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await client.SendAsync(request)
         );
         Assert.Equal(
             "This form is being accessed with an invalid anti-forgery token. Validate the `IAntiforgeryValidationFeature` on the request before reading from the form.",
@@ -572,8 +548,8 @@ public class MinimalFormTests
 
         if (hasLimit)
         {
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await client.SendAsync(request)
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await client.SendAsync(request)
             );
             Assert.Equal("The maximum number of bytes have been read.", exception.Message);
         }

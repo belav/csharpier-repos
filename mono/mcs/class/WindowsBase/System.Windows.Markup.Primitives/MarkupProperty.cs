@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,52 +29,58 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Markup;
 
-namespace System.Windows.Markup.Primitives {
+namespace System.Windows.Markup.Primitives
+{
+    public abstract class MarkupProperty
+    {
+        internal MarkupProperty() { }
 
-	public abstract class MarkupProperty {
-		internal MarkupProperty ()
-		{
-		}
+        public abstract AttributeCollection Attributes { get; }
+        public abstract IEnumerable<MarkupObject> Items { get; }
+        public abstract string Name { get; }
+        public abstract Type PropertyType { get; }
+        public abstract string StringValue { get; }
+        public abstract IEnumerable<Type> TypeReferences { get; }
+        public abstract object Value { get; }
 
-		public abstract AttributeCollection Attributes { get; }
-		public abstract IEnumerable<MarkupObject> Items { get; }
-		public abstract string Name { get; }
-		public abstract Type PropertyType { get; }
-		public abstract string StringValue { get; }
-		public abstract IEnumerable<Type> TypeReferences { get; }
-		public abstract object Value { get; }
+        public virtual DependencyProperty DependencyProperty
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public virtual DependencyProperty DependencyProperty {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsAttached
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public virtual bool IsAttached {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsComposite
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public virtual bool IsComposite {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsConstructorArgument
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public virtual bool IsConstructorArgument {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsContent
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public virtual bool IsContent {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsKey
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public virtual bool IsKey {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsValueAsString
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public virtual bool IsValueAsString {
-			get { throw new NotImplementedException (); }
-		}
-
-		public virtual PropertyDescriptor PropertyDescriptor {
-			get { throw new NotImplementedException (); }
-		}
-	}
-
+        public virtual PropertyDescriptor PropertyDescriptor
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

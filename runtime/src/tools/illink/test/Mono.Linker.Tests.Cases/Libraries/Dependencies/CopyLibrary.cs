@@ -3,19 +3,20 @@
 
 namespace Mono.Linker.Tests.Cases.Libraries.Dependencies
 {
-	public interface ICopyLibraryInterfaceNoMethodImpl
-	{
-		void CopyLibraryInterfaceNoMethodImpl ();
-	}
-	public interface ICopyLibraryInterface
-	{
-		void CopyLibraryInterfaceMethod ();
-		void CopyLibraryExplicitImplementationInterfaceMethod ();
-	}
+    public interface ICopyLibraryInterfaceNoMethodImpl
+    {
+        void CopyLibraryInterfaceNoMethodImpl();
+    }
 
-	public interface ICopyLibraryStaticInterface
-	{
-		static abstract void CopyLibraryStaticInterfaceMethod ();
-		static abstract void CopyLibraryExplicitImplementationStaticInterfaceMethod ();
-	}
+    public interface ICopyLibraryInterface
+    {
+        void CopyLibraryInterfaceMethod();
+        void CopyLibraryExplicitImplementationInterfaceMethod();
+    }
+
+    public interface ICopyLibraryStaticInterface
+    {
+        static abstract void CopyLibraryStaticInterfaceMethod();
+        static abstract void CopyLibraryExplicitImplementationStaticInterfaceMethod();
+    }
 }

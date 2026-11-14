@@ -7,8 +7,5 @@ using System.Web.Caching;
 
 namespace Test
 {
-	public class AnotherInMemoryProvider : InMemoryProvider
-	{
-		
-	}
+    public class AnotherInMemoryProvider : InMemoryProvider { }
 }

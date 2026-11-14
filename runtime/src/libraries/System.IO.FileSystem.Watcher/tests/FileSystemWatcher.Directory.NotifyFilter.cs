@@ -11,9 +11,21 @@ namespace System.IO.Tests
 {
     public partial class Directory_NotifyFilter_Tests : FileSystemWatcherTest
     {
-        [LibraryImport("advapi32.dll", EntryPoint = "SetNamedSecurityInfoW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-        private static partial uint SetSecurityInfoByHandle( string name, uint objectType, uint securityInformation,
-            IntPtr owner, IntPtr group, IntPtr dacl, IntPtr sacl);
+        [LibraryImport(
+            "advapi32.dll",
+            EntryPoint = "SetNamedSecurityInfoW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
+        private static partial uint SetSecurityInfoByHandle(
+            string name,
+            uint objectType,
+            uint securityInformation,
+            IntPtr owner,
+            IntPtr group,
+            IntPtr dacl,
+            IntPtr sacl
+        );
 
         private const uint ERROR_SUCCESS = 0;
         private const uint DACL_SECURITY_INFORMATION = 0x00000004;
@@ -23,29 +35,41 @@ namespace System.IO.Tests
         [MemberData(nameof(FilterTypes))]
         public void FileSystemWatcher_Directory_NotifyFilter_Attributes(NotifyFilters filter)
         {
-            FileSystemWatcherTest.Execute(() =>
-            {
-                string dir = CreateTestDirectory(TestDirectory, "dir");
-                using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(dir)))
+            FileSystemWatcherTest.Execute(
+                () =>
                 {
-                    watcher.NotifyFilter = filter;
-                    var attributes = File.GetAttributes(dir);
+                    string dir = CreateTestDirectory(TestDirectory, "dir");
+                    using (
+                        var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(dir))
+                    )
+                    {
+                        watcher.NotifyFilter = filter;
+                        var attributes = File.GetAttributes(dir);
 
-                    Action action = () => File.SetAttributes(dir, attributes | FileAttributes.ReadOnly);
-                    Action cleanup = () => File.SetAttributes(dir, attributes);
+                        Action action = () =>
+                            File.SetAttributes(dir, attributes | FileAttributes.ReadOnly);
+                        Action cleanup = () => File.SetAttributes(dir, attributes);
 
-                    WatcherChangeTypes expected = 0;
-                    if (filter == NotifyFilters.Attributes)
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsLinux() && ((filter & LinuxFiltersForAttribute) > 0))
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsMacOS() && ((filter & OSXFiltersForModify) > 0))
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsMacOS() && ((filter & NotifyFilters.Security) > 0))
-                        expected |= WatcherChangeTypes.Changed; // Attribute change on OSX is a ChangeOwner operation which passes the Security NotifyFilter.
-                    ExpectEvent(watcher, expected, action, cleanup, dir);
-                }
-            }, maxAttempts: DefaultAttemptsForExpectedEvent, backoffFunc: (iteration) => RetryDelayMilliseconds, retryWhen: e => e is XunitException);
+                        WatcherChangeTypes expected = 0;
+                        if (filter == NotifyFilters.Attributes)
+                            expected |= WatcherChangeTypes.Changed;
+                        else if (
+                            OperatingSystem.IsLinux() && ((filter & LinuxFiltersForAttribute) > 0)
+                        )
+                            expected |= WatcherChangeTypes.Changed;
+                        else if (OperatingSystem.IsMacOS() && ((filter & OSXFiltersForModify) > 0))
+                            expected |= WatcherChangeTypes.Changed;
+                        else if (
+                            OperatingSystem.IsMacOS() && ((filter & NotifyFilters.Security) > 0)
+                        )
+                            expected |= WatcherChangeTypes.Changed; // Attribute change on OSX is a ChangeOwner operation which passes the Security NotifyFilter.
+                        ExpectEvent(watcher, expected, action, cleanup, dir);
+                    }
+                },
+                maxAttempts: DefaultAttemptsForExpectedEvent,
+                backoffFunc: (iteration) => RetryDelayMilliseconds,
+                retryWhen: e => e is XunitException
+            );
         }
 
         [Theory]
@@ -56,7 +80,8 @@ namespace System.IO.Tests
             using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(dir)))
             {
                 watcher.NotifyFilter = filter;
-                Action action = () => Directory.SetCreationTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetCreationTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 WatcherChangeTypes expected = 0;
                 if (filter == NotifyFilters.CreationTime)
@@ -100,7 +125,8 @@ namespace System.IO.Tests
             using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(dir)))
             {
                 watcher.NotifyFilter = filter;
-                Action action = () => Directory.SetLastAccessTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastAccessTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 WatcherChangeTypes expected = 0;
                 if (filter == NotifyFilters.LastAccess)
@@ -122,7 +148,8 @@ namespace System.IO.Tests
             using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(dir)))
             {
                 watcher.NotifyFilter = filter;
-                Action action = () => Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 WatcherChangeTypes expected = 0;
                 if (filter == NotifyFilters.LastWrite)
@@ -139,32 +166,53 @@ namespace System.IO.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(FilterTypes))]
-        public void FileSystemWatcher_Directory_NotifyFilter_LastWriteTime_TwoFilters(NotifyFilters filter)
+        public void FileSystemWatcher_Directory_NotifyFilter_LastWriteTime_TwoFilters(
+            NotifyFilters filter
+        )
         {
-            Assert.All(FilterTypes(), (filter2Arr =>
-            {
-                string dir = CreateTestDirectory(TestDirectory, "dir");
-                using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(dir)))
-                {
-                    filter |= (NotifyFilters)filter2Arr[0];
-                    watcher.NotifyFilter = filter;
-                    Action action = () => Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
+            Assert.All(
+                FilterTypes(),
+                (
+                    filter2Arr =>
+                    {
+                        string dir = CreateTestDirectory(TestDirectory, "dir");
+                        using (
+                            var watcher = new FileSystemWatcher(
+                                TestDirectory,
+                                Path.GetFileName(dir)
+                            )
+                        )
+                        {
+                            filter |= (NotifyFilters)filter2Arr[0];
+                            watcher.NotifyFilter = filter;
+                            Action action = () =>
+                                Directory.SetLastWriteTime(
+                                    dir,
+                                    DateTime.Now + TimeSpan.FromSeconds(10)
+                                );
 
-                    WatcherChangeTypes expected = 0;
-                    if ((filter & NotifyFilters.LastWrite) > 0)
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsLinux() && ((filter & LinuxFiltersForAttribute) > 0))
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsMacOS() && ((filter & OSXFiltersForModify) > 0))
-                        expected |= WatcherChangeTypes.Changed;
-                    ExpectEvent(watcher, expected, action, expectedPath: dir);
-                }
-            }));
+                            WatcherChangeTypes expected = 0;
+                            if ((filter & NotifyFilters.LastWrite) > 0)
+                                expected |= WatcherChangeTypes.Changed;
+                            else if (
+                                OperatingSystem.IsLinux()
+                                && ((filter & LinuxFiltersForAttribute) > 0)
+                            )
+                                expected |= WatcherChangeTypes.Changed;
+                            else if (
+                                OperatingSystem.IsMacOS() && ((filter & OSXFiltersForModify) > 0)
+                            )
+                                expected |= WatcherChangeTypes.Changed;
+                            ExpectEvent(watcher, expected, action, expectedPath: dir);
+                        }
+                    }
+                )
+            );
         }
 
         [Theory]
         [MemberData(nameof(FilterTypes))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to set security info
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes to set security info
         public void FileSystemWatcher_Directory_NotifyFilter_Security(NotifyFilters filter)
         {
             string dir = CreateTestDirectory(TestDirectory, "dir");
@@ -174,13 +222,15 @@ namespace System.IO.Tests
                 Action action = () =>
                 {
                     // ACL support is not yet available, so pinvoke directly.
-                    uint result = SetSecurityInfoByHandle(dir,
+                    uint result = SetSecurityInfoByHandle(
+                        dir,
                         SE_FILE_OBJECT,
                         DACL_SECURITY_INFORMATION, // Only setting the DACL
                         owner: IntPtr.Zero,
                         group: IntPtr.Zero,
                         dacl: IntPtr.Zero, // full access to everyone
-                        sacl: IntPtr.Zero);
+                        sacl: IntPtr.Zero
+                    );
                     Assert.Equal(ERROR_SUCCESS, result);
                 };
                 Action cleanup = () =>
@@ -211,7 +261,8 @@ namespace System.IO.Tests
                 NotifyFilters filter = NotifyFilters.LastWrite | NotifyFilters.DirectoryName;
                 watcher.NotifyFilter = filter;
 
-                Action action = () => File.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    File.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 ExpectEvent(watcher, WatcherChangeTypes.Changed, action, expectedPath: file);
             }

@@ -6,22 +6,23 @@ namespace System.ServiceModel.Syndication
 {
     using System.Collections.ObjectModel;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.CompilerServices;
 
     // sealed because the ctor results in a call to the virtual InsertItem method
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
-    public sealed class SyndicationElementExtensionCollection : Collection<SyndicationElementExtension>
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
+    public sealed class SyndicationElementExtensionCollection
+        : Collection<SyndicationElementExtension>
     {
         XmlBuffer buffer;
         bool initialized;
 
         internal SyndicationElementExtensionCollection()
-            : this((XmlBuffer) null)
-        {
-        }
+            : this((XmlBuffer)null) { }
 
         internal SyndicationElementExtensionCollection(XmlBuffer buffer)
             : base()
@@ -49,11 +50,11 @@ namespace System.ServiceModel.Syndication
         {
             if (extension is SyndicationElementExtension)
             {
-                base.Add((SyndicationElementExtension) extension);
+                base.Add((SyndicationElementExtension)extension);
             }
             else
             {
-                this.Add(extension, (DataContractSerializer) null);
+                this.Add(extension, (DataContractSerializer)null);
             }
         }
 
@@ -67,24 +68,42 @@ namespace System.ServiceModel.Syndication
             this.Add(null, null, dataContractExtension, serializer);
         }
 
-        public void Add(string outerName, string outerNamespace, object dataContractExtension, XmlObjectSerializer dataContractSerializer)
+        public void Add(
+            string outerName,
+            string outerNamespace,
+            object dataContractExtension,
+            XmlObjectSerializer dataContractSerializer
+        )
         {
             if (dataContractExtension == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("dataContractExtension");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "dataContractExtension"
+                );
             }
             if (dataContractSerializer == null)
             {
-                dataContractSerializer = new DataContractSerializer(dataContractExtension.GetType());
+                dataContractSerializer = new DataContractSerializer(
+                    dataContractExtension.GetType()
+                );
             }
-            base.Add(new SyndicationElementExtension(outerName, outerNamespace, dataContractExtension, dataContractSerializer));
+            base.Add(
+                new SyndicationElementExtension(
+                    outerName,
+                    outerNamespace,
+                    dataContractExtension,
+                    dataContractSerializer
+                )
+            );
         }
 
         public void Add(object xmlSerializerExtension, XmlSerializer serializer)
         {
             if (xmlSerializerExtension == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("xmlSerializerExtension");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "xmlSerializerExtension"
+                );
             }
             if (serializer == null)
             {
@@ -110,12 +129,23 @@ namespace System.ServiceModel.Syndication
             return reader;
         }
 
-        public Collection<TExtension> ReadElementExtensions<TExtension>(string extensionName, string extensionNamespace)
+        public Collection<TExtension> ReadElementExtensions<TExtension>(
+            string extensionName,
+            string extensionNamespace
+        )
         {
-            return ReadElementExtensions<TExtension>(extensionName, extensionNamespace, new DataContractSerializer(typeof(TExtension)));
+            return ReadElementExtensions<TExtension>(
+                extensionName,
+                extensionNamespace,
+                new DataContractSerializer(typeof(TExtension))
+            );
         }
 
-        public Collection<TExtension> ReadElementExtensions<TExtension>(string extensionName, string extensionNamespace, XmlObjectSerializer serializer)
+        public Collection<TExtension> ReadElementExtensions<TExtension>(
+            string extensionName,
+            string extensionNamespace,
+            XmlObjectSerializer serializer
+        )
         {
             if (serializer == null)
             {
@@ -124,7 +154,11 @@ namespace System.ServiceModel.Syndication
             return ReadExtensions<TExtension>(extensionName, extensionNamespace, serializer, null);
         }
 
-        public Collection<TExtension> ReadElementExtensions<TExtension>(string extensionName, string extensionNamespace, XmlSerializer serializer)
+        public Collection<TExtension> ReadElementExtensions<TExtension>(
+            string extensionName,
+            string extensionNamespace,
+            XmlSerializer serializer
+        )
         {
             if (serializer == null)
             {
@@ -233,20 +267,37 @@ namespace System.ServiceModel.Syndication
                 int index = 0;
                 while (reader.IsStartElement())
                 {
-                    base.Add(new SyndicationElementExtension(this.buffer, index, reader.LocalName, reader.NamespaceURI));
+                    base.Add(
+                        new SyndicationElementExtension(
+                            this.buffer,
+                            index,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        )
+                    );
                     reader.Skip();
                     ++index;
                 }
             }
         }
 
-        Collection<TExtension> ReadExtensions<TExtension>(string extensionName, string extensionNamespace, XmlObjectSerializer dcSerializer, XmlSerializer xmlSerializer)
+        Collection<TExtension> ReadExtensions<TExtension>(
+            string extensionName,
+            string extensionNamespace,
+            XmlObjectSerializer dcSerializer,
+            XmlSerializer xmlSerializer
+        )
         {
             if (string.IsNullOrEmpty(extensionName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ExtensionNameNotSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.ExtensionNameNotSpecified)
+                );
             }
-            Fx.Assert((dcSerializer == null) != (xmlSerializer == null), "exactly one serializer should be supplied");
+            Fx.Assert(
+                (dcSerializer == null) != (xmlSerializer == null),
+                "exactly one serializer should be supplied"
+            );
             // normalize the null and empty namespace
             if (extensionNamespace == null)
             {
@@ -255,7 +306,10 @@ namespace System.ServiceModel.Syndication
             Collection<TExtension> results = new Collection<TExtension>();
             for (int i = 0; i < this.Count; ++i)
             {
-                if (extensionName != this[i].OuterName || extensionNamespace != this[i].OuterNamespace)
+                if (
+                    extensionName != this[i].OuterName
+                    || extensionNamespace != this[i].OuterNamespace
+                )
                 {
                     continue;
                 }

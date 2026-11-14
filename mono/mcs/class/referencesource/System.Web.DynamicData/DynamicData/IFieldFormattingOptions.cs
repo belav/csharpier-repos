@@ -1,10 +1,12 @@
 ﻿using System.Security.Permissions;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     /// <summary>
     /// Interface that encapsulates common formatting fields used in multiple places
     /// </summary>
-    public interface IFieldFormattingOptions {
+    public interface IFieldFormattingOptions
+    {
         /// <summary>
         /// Same semantic as the same property on System.Web.UI.WebControls.BoundField
         /// </summary>

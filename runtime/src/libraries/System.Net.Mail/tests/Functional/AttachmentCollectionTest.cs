@@ -9,8 +9,8 @@
 // (C) 2005 John Luke
 //
 
-using Xunit;
 using System.Net.Mime;
+using Xunit;
 
 namespace System.Net.Mail.Tests
 {

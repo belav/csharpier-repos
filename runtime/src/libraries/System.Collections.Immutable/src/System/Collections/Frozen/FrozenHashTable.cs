@@ -68,7 +68,12 @@ namespace System.Collections.Frozen
             for (int index = 0; index < hashCodes.Length; index++)
             {
                 int hashCode = hashCodes[index];
-                int bucketNum = (int)HashHelpers.FastMod((uint)hashCode, (uint)bucketStarts.Length, fastModMultiplier);
+                int bucketNum = (int)
+                    HashHelpers.FastMod(
+                        (uint)hashCode,
+                        (uint)bucketStarts.Length,
+                        fastModMultiplier
+                    );
 
                 ref int bucketStart = ref bucketStarts[bucketNum];
                 nexts[index] = bucketStart;
@@ -126,7 +131,9 @@ namespace System.Collections.Frozen
         public void FindMatchingEntries(int hashCode, out int startIndex, out int endIndex)
         {
             Bucket[] buckets = _buckets;
-            ref Bucket b = ref buckets[HashHelpers.FastMod((uint)hashCode, (uint)buckets.Length, _fastModMultiplier)];
+            ref Bucket b = ref buckets[
+                HashHelpers.FastMod((uint)hashCode, (uint)buckets.Length, _fastModMultiplier)
+            ];
             startIndex = b.StartIndex;
             endIndex = b.EndIndex;
         }
@@ -146,12 +153,15 @@ namespace System.Collections.Frozen
         private static int CalcNumBuckets(ReadOnlySpan<int> hashCodes, bool hashCodesAreUnique)
         {
             Debug.Assert(hashCodes.Length != 0);
-            Debug.Assert(!hashCodesAreUnique || new HashSet<int>(hashCodes.ToArray()).Count == hashCodes.Length);
+            Debug.Assert(
+                !hashCodesAreUnique
+                    || new HashSet<int>(hashCodes.ToArray()).Count == hashCodes.Length
+            );
 
-            const double AcceptableCollisionRate = 0.05;  // What is a satisfactory rate of hash collisions?
-            const int LargeInputSizeThreshold = 1000;     // What is the limit for an input to be considered "small"?
+            const double AcceptableCollisionRate = 0.05; // What is a satisfactory rate of hash collisions?
+            const int LargeInputSizeThreshold = 1000; // What is the limit for an input to be considered "small"?
             const int MaxSmallBucketTableMultiplier = 16; // How large a bucket table should be allowed for small inputs?
-            const int MaxLargeBucketTableMultiplier = 3;  // How large a bucket table should be allowed for large inputs?
+            const int MaxLargeBucketTableMultiplier = 3; // How large a bucket table should be allowed for large inputs?
 
             // Filter out duplicate codes, since no increase in buckets will avoid collisions from duplicate input hash codes.
             HashSet<int>? codes = null;
@@ -160,7 +170,7 @@ namespace System.Collections.Frozen
             {
                 codes =
 #if NETCOREAPP2_0_OR_GREATER
-                    new HashSet<int>(hashCodes.Length);
+                new HashSet<int>(hashCodes.Length);
 #else
                     new HashSet<int>();
 #endif
@@ -181,7 +191,10 @@ namespace System.Collections.Frozen
             // give up and just use the next prime.
             ReadOnlySpan<int> primes = HashHelpers.Primes;
             int minPrimeIndexInclusive = 0;
-            while ((uint)minPrimeIndexInclusive < (uint)primes.Length && minNumBuckets > primes[minPrimeIndexInclusive])
+            while (
+                (uint)minPrimeIndexInclusive < (uint)primes.Length
+                && minNumBuckets > primes[minPrimeIndexInclusive]
+            )
             {
                 minPrimeIndexInclusive++;
             }
@@ -194,12 +207,19 @@ namespace System.Collections.Frozen
             // Determine the largest number of buckets we're willing to use, based on a multiple of the number of inputs.
             // For smaller inputs, we allow for a larger multiplier.
             int maxNumBuckets =
-                uniqueCodesCount *
-                (uniqueCodesCount >= LargeInputSizeThreshold ? MaxLargeBucketTableMultiplier : MaxSmallBucketTableMultiplier);
+                uniqueCodesCount
+                * (
+                    uniqueCodesCount >= LargeInputSizeThreshold
+                        ? MaxLargeBucketTableMultiplier
+                        : MaxSmallBucketTableMultiplier
+                );
 
             // Find the index of the smallest prime that accommodates our max buckets.
             int maxPrimeIndexExclusive = minPrimeIndexInclusive;
-            while ((uint)maxPrimeIndexExclusive < (uint)primes.Length && maxNumBuckets > primes[maxPrimeIndexExclusive])
+            while (
+                (uint)maxPrimeIndexExclusive < (uint)primes.Length
+                && maxNumBuckets > primes[maxPrimeIndexExclusive]
+            )
             {
                 maxPrimeIndexExclusive++;
             }
@@ -215,11 +235,16 @@ namespace System.Collections.Frozen
 
             int bestNumBuckets = maxNumBuckets;
             int bestNumCollisions = uniqueCodesCount;
-            int numBuckets = 0, numCollisions = 0;
+            int numBuckets = 0,
+                numCollisions = 0;
 
             // Iterate through each available prime between the min and max discovered. For each, compute
             // the collision ratio.
-            for (int primeIndex = minPrimeIndexInclusive; primeIndex < maxPrimeIndexExclusive; primeIndex++)
+            for (
+                int primeIndex = minPrimeIndexInclusive;
+                primeIndex < maxPrimeIndexExclusive;
+                primeIndex++
+            )
             {
                 // Get the number of buckets to try, and clear our seen bucket bitmap.
                 numBuckets = primes[primeIndex];

@@ -16,8 +16,8 @@ internal sealed class RazorPagesRazorViewEngineOptionsSetup
 
     public RazorPagesRazorViewEngineOptionsSetup(IOptions<RazorPagesOptions> pagesOptions)
     {
-        _pagesOptions =
-            pagesOptions?.Value ?? throw new ArgumentNullException(nameof(pagesOptions));
+        _pagesOptions = pagesOptions?.Value
+            ?? throw new ArgumentNullException(nameof(pagesOptions));
     }
 
     public void Configure(RazorViewEngineOptions options)

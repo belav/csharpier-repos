@@ -51,9 +51,8 @@ public class HostingMetricsTests
             m => Assert.Equal(1, m.Value),
             m => Assert.Equal(-1, m.Value)
         );
-        Assert.Collection(
-            requestDurationCollector.GetMeasurementSnapshot(),
-            m => AssertRequestDuration(m, "1.1", StatusCodes.Status200OK)
+        Assert.Collection(requestDurationCollector.GetMeasurementSnapshot(), m =>
+            AssertRequestDuration(m, "1.1", StatusCodes.Status200OK)
         );
 
         // Request 2 (after failure)

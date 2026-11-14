@@ -1,8 +1,8 @@
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading;
 
@@ -26,7 +26,10 @@ namespace System.Net.Sockets
             {
                 if (_bufferIsExplicitArray)
                 {
-                    bool success = MemoryMarshal.TryGetArray(_buffer, out ArraySegment<byte> arraySegment);
+                    bool success = MemoryMarshal.TryGetArray(
+                        _buffer,
+                        out ArraySegment<byte> arraySegment
+                    );
                     Debug.Assert(success);
                     return arraySegment.Array;
                 }
@@ -53,7 +56,9 @@ namespace System.Net.Sockets
                     if (!_buffer.Equals(default))
                     {
                         // Can't have both set
-                        throw new ArgumentException(SR.Format(SR.net_ambiguousbuffers, nameof(Buffer)));
+                        throw new ArgumentException(
+                            SR.Format(SR.net_ambiguousbuffers, nameof(Buffer))
+                        );
                     }
 
                     // Copy the user-provided list into our internal buffer list,
@@ -130,7 +135,9 @@ namespace System.Net.Sockets
                 // Can't have both Buffer and BufferList.
                 if (_bufferList != null)
                 {
-                    throw new ArgumentException(SR.Format(SR.net_ambiguousbuffers, nameof(BufferList)));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_ambiguousbuffers, nameof(BufferList))
+                    );
                 }
 
                 // Offset and count can't be negative and the

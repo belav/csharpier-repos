@@ -13,14 +13,16 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         Glyph? glyph = null,
         bool previewChanges = false,
         ChangeSignatureFailureKind? changeSignatureFailureKind = null,
-        string? confirmationMessage = null)
+        string? confirmationMessage = null
+    )
     {
         [MemberNotNullWhen(true, nameof(UpdatedSolution))]
         public bool Succeeded { get; } = succeeded;
         public Solution? UpdatedSolution { get; } = updatedSolution;
         public Glyph? Glyph { get; } = glyph;
         public bool PreviewChanges { get; } = previewChanges;
-        public ChangeSignatureFailureKind? ChangeSignatureFailureKind { get; } = changeSignatureFailureKind;
+        public ChangeSignatureFailureKind? ChangeSignatureFailureKind { get; } =
+            changeSignatureFailureKind;
         public string? ConfirmationMessage { get; } = confirmationMessage;
 
         /// <summary>

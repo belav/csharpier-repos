@@ -12,10 +12,7 @@ internal sealed class DexBuilder
     private readonly AndroidSdkHelper _androidSdk;
     private readonly TaskLoggingHelper _logger;
 
-    public DexBuilder(
-        TaskLoggingHelper logger,
-        AndroidSdkHelper buildTools,
-        string workingDir)
+    public DexBuilder(TaskLoggingHelper logger, AndroidSdkHelper buildTools, string workingDir)
     {
         _androidSdk = buildTools;
         _workingDir = workingDir;
@@ -41,16 +38,27 @@ internal sealed class DexBuilder
         if (classFiles.Length == 0)
             throw new InvalidOperationException("Didn't find any .class files");
 
-        Utils.RunProcess(_logger, _androidSdk.D8Path, $"--no-desugaring {string.Join(" ", classFiles)}", workingDir: _workingDir);
+        Utils.RunProcess(
+            _logger,
+            _androidSdk.D8Path,
+            $"--no-desugaring {string.Join(" ", classFiles)}",
+            workingDir: _workingDir
+        );
 
         File.Move(
             sourceFileName: Path.Combine(_workingDir, "classes.dex"),
             destFileName: outputFilePath,
-            overwrite: true);
+            overwrite: true
+        );
     }
 
     private void BuildUsingDx(string inputDir, string outputFileName)
     {
-        Utils.RunProcess(_logger, _androidSdk.DxPath, $"--dex --output={outputFileName} {inputDir}", workingDir: _workingDir);
+        Utils.RunProcess(
+            _logger,
+            _androidSdk.DxPath,
+            $"--dex --output={outputFileName} {inputDir}",
+            workingDir: _workingDir
+        );
     }
 }

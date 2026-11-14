@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
     [Trait(Traits.Feature, Traits.Features.CodeActionsWrapping)]
     public class ParameterWrappingTests : AbstractWrappingTests
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpWrappingCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpWrappingCodeRefactoringProvider();
 
         [Fact]
         public async Task TestMissingWithSyntaxError()
@@ -29,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     void Goo([||]int i, int j {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -41,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     void Goo([|int|] i, int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -53,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     void Goo(int i, int j) {[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -66,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     void Goo(int i, int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -78,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     void Goo([||]/**/int i, int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -91,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         /**/int i, int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -104,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         int i/**/, int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -117,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         int i,/**/int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -131,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         ) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -145,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         /**/) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -158,14 +170,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     }
                 }
                 """,
-
                 """
                 class C {
                     void Goo/**/(int i,
                                  int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -178,14 +190,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     }
                 }
                 """,
-
                 """
                 class C {
                     void Goo(int i,
                              int j)/**/ {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -197,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     void Goo([||]int i) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -210,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         initializer) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -229,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                              int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -248,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                              int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -267,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                     int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -286,7 +303,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                     int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -327,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         int i, int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -371,7 +390,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         int i, int j, int k) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -424,7 +444,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         int i, int j, int k) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -439,8 +460,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Goo(int i,
              int j,
@@ -451,7 +472,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i,
@@ -463,7 +484,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i,
         int j,
@@ -474,20 +495,20 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int j, int k, int l, int m, int n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int j, int k, int l, int m, int n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int j,
              int k, int l,
@@ -495,7 +516,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int j, int k,
@@ -503,14 +524,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int j,
         int k, int l, int m,
         int n) {
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -525,8 +547,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Goo(int i,
              int jj,
@@ -537,7 +559,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i,
@@ -549,7 +571,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i,
         int jj,
@@ -560,20 +582,20 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj, int kkkk, int llllllll, int mmmmmmmmmmmmmmmm, int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int jj, int kkkk, int llllllll, int mmmmmmmmmmmmmmmm, int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj,
              int kkkk,
@@ -583,7 +605,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int jj,
@@ -593,7 +615,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj,
         int kkkk, int llllllll,
@@ -601,7 +623,8 @@ class C {
         int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -616,8 +639,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Goo(int iiiii,
              int jjjjj,
@@ -628,7 +651,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int iiiii,
@@ -640,7 +663,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int iiiii,
         int jjjjj,
@@ -651,20 +674,20 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int iiiii, int jjjjj,
@@ -673,7 +696,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int iiiii,
         int jjjjj, int kkkkk,
@@ -681,7 +704,8 @@ class C {
         int nnnnn) {
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -696,8 +720,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(20),
-"""
+                GetIndentionColumn(20),
+                """
 class C {
     void Goo(int iiiii,
              int jjjjj,
@@ -708,7 +732,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int iiiii,
@@ -720,7 +744,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int iiiii,
         int jjjjj,
@@ -731,19 +755,20 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -758,8 +783,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Goo(int i,
              int jj,
@@ -770,7 +795,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i,
@@ -782,7 +807,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i,
         int jj,
@@ -793,20 +818,20 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int jj, int kkkk, int lll, int mm, int n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj,
              int kkkk, int lll,
@@ -814,7 +839,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int jj,
@@ -823,14 +848,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj,
         int kkkk, int lll,
         int mm, int n) {
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -848,8 +874,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Goo(
         int i,
@@ -861,7 +887,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i,
         int jj,
@@ -872,20 +898,20 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int jj, int kkkk, int lll, int mm, int n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj,
              int kkkk, int lll,
@@ -893,7 +919,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int jj,
@@ -902,14 +928,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj,
         int kkkk, int lll,
         int mm, int n) {
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -928,8 +955,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Goo(int i,
              int jj,
@@ -940,7 +967,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i,
         int jj,
@@ -951,20 +978,20 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int jj, int kkkk, int lll, int mm, int n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj,
              int kkkk, int lll,
@@ -972,7 +999,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(
         int i, int jj,
@@ -981,14 +1008,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo(int i, int jj,
         int kkkk, int lll,
         int mm, int n) {
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -1007,7 +1035,8 @@ class C {
                              int j) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38986")]
@@ -1026,7 +1055,8 @@ class C {
                              int j) : base(,) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1043,7 +1073,8 @@ class C {
                     public int this[int i,
                                     int j] => 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1060,7 +1091,8 @@ class C {
                     public shared int operator +(C c1,
                                                  C c2) => 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1077,7 +1109,8 @@ class C {
                     public delegate int D(C c1,
                                           C c2);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1102,7 +1135,8 @@ class C {
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1127,7 +1161,8 @@ class C {
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1142,7 +1177,8 @@ class C {
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1167,117 +1203,132 @@ class C {
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestRecord_Semicolon()
         {
             await TestInRegularAndScript1Async(
-"record R([||]int I, string S);",
-"""
+                "record R([||]int I, string S);",
+                """
 record R(int I,
          string S);
-""");
+"""
+            );
         }
 
         [Fact]
         public async Task TestClass_Semicolon()
         {
             await TestInRegularAndScript1Async(
-"class R([||]int I, string S);",
-"""
+                "class R([||]int I, string S);",
+                """
 class R(int I,
         string S);
-""");
+"""
+            );
         }
 
         [Fact]
         public async Task TestInterface_Semicolon()
         {
             await TestInRegularAndScript1Async(
-"interface R([||]int I, string S);",
-"""
+                "interface R([||]int I, string S);",
+                """
 interface R(int I,
             string S);
-""");
+"""
+            );
         }
 
         [Fact]
         public async Task TestRecord_Braces()
         {
             await TestInRegularAndScript1Async(
-"record R([||]int I, string S) { }",
-"""
+                "record R([||]int I, string S) { }",
+                """
 record R(int I,
          string S) { }
-""");
+"""
+            );
         }
 
         [Fact]
         public async Task TestClass_Braces()
         {
             await TestInRegularAndScript1Async(
-"class R([||]int I, string S) { }",
-"""
+                "class R([||]int I, string S) { }",
+                """
 class R(int I,
         string S) { }
-""");
+"""
+            );
         }
 
         [Fact]
         public async Task TestInterface_Braces()
         {
             await TestInRegularAndScript1Async(
-"interface R([||]int I, string S) { }",
-"""
+                "interface R([||]int I, string S) { }",
+                """
 interface R(int I,
             string S) { }
-""");
+"""
+            );
         }
 
         [Fact]
         public async Task TestRecordStruct_Semicolon()
         {
             await TestInRegularAndScript1Async(
-"record struct R([||]int I, string S);",
-"""
+                "record struct R([||]int I, string S);",
+                """
 record struct R(int I,
                 string S);
-""", new TestParameters(TestOptions.RegularPreview));
+""",
+                new TestParameters(TestOptions.RegularPreview)
+            );
         }
 
         [Fact]
         public async Task TestStruct_Semicolon()
         {
             await TestInRegularAndScript1Async(
-"struct R([||]int I, string S);",
-"""
+                "struct R([||]int I, string S);",
+                """
 struct R(int I,
          string S);
-""", new TestParameters(TestOptions.RegularPreview));
+""",
+                new TestParameters(TestOptions.RegularPreview)
+            );
         }
 
         [Fact]
         public async Task TestRecordStruct_Braces()
         {
             await TestInRegularAndScript1Async(
-"record struct R([||]int I, string S) { }",
-"""
+                "record struct R([||]int I, string S) { }",
+                """
 record struct R(int I,
                 string S) { }
-""", new TestParameters(TestOptions.RegularPreview));
+""",
+                new TestParameters(TestOptions.RegularPreview)
+            );
         }
 
         [Fact]
         public async Task TestStruct_Braces()
         {
             await TestInRegularAndScript1Async(
-"struct R([||]int I, string S) { }",
-"""
+                "struct R([||]int I, string S) { }",
+                """
 struct R(int I,
          string S) { }
-""", new TestParameters(TestOptions.RegularPreview));
+""",
+                new TestParameters(TestOptions.RegularPreview)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61362")]
@@ -1288,7 +1339,8 @@ struct R(int I,
                 class C {
                     public void UpsertRecord<T>[||]
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -1299,7 +1351,8 @@ struct R(int I,
                 class C {
                     public void UpsertRecord<T>[||])
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -1310,7 +1363,8 @@ struct R(int I,
                 class C {
                     public void UpsertRecord<T>[||] int i, int j)
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -1321,7 +1375,8 @@ struct R(int I,
                 class C {
                     public void UpsertRecord<T>([||]
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -1332,7 +1387,8 @@ struct R(int I,
                 class C {
                     public void UpsertRecord<T>([||]int i, int j
                 }
-                """);
+                """
+            );
         }
     }
 }

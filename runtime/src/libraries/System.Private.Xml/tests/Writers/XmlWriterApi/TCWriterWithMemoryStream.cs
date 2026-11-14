@@ -11,7 +11,11 @@ namespace System.Xml.XmlWriterApiTests
 {
     public class TCWriterWithMemoryStream
     {
-        public XmlWriter CreateMemWriter(XmlWriterUtils utils, Stream writerStream, XmlWriterSettings settings)
+        public XmlWriter CreateMemWriter(
+            XmlWriterUtils utils,
+            Stream writerStream,
+            XmlWriterSettings settings
+        )
         {
             XmlWriterSettings wSettings = settings.Clone();
             wSettings.CloseOutput = false;
@@ -23,18 +27,38 @@ namespace System.Xml.XmlWriterApiTests
             {
                 case WriterType.UTF8Writer:
                     wSettings.Encoding = Encoding.UTF8;
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.UnicodeWriter:
                     wSettings.Encoding = Encoding.Unicode;
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.WrappedWriter:
-                    XmlWriter ww = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    XmlWriter ww = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     w = WriterHelper.Create(ww, wSettings, overrideAsync: true, async: utils.Async);
                     break;
                 case WriterType.CharCheckingWriter:
-                    XmlWriter cw = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    XmlWriter cw = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     XmlWriterSettings cws = settings.Clone();
                     cws.CheckCharacters = true;
                     w = WriterHelper.Create(cw, cws, overrideAsync: true, async: utils.Async);
@@ -46,12 +70,22 @@ namespace System.Xml.XmlWriterApiTests
                 case WriterType.UTF8WriterIndent:
                     wSettings.Encoding = Encoding.UTF8;
                     wSettings.Indent = true;
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.UnicodeWriterIndent:
                     wSettings.Encoding = Encoding.Unicode;
                     wSettings.Indent = true;
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 default:
                     throw new Exception("Unknown writer type");

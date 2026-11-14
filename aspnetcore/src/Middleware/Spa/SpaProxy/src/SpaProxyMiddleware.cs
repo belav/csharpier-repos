@@ -36,8 +36,8 @@ internal sealed class SpaProxyMiddleware
     )
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
-        _spaProxyLaunchManager =
-            spaProxyLaunchManager ?? throw new ArgumentNullException(nameof(spaProxyLaunchManager));
+        _spaProxyLaunchManager = spaProxyLaunchManager
+            ?? throw new ArgumentNullException(nameof(spaProxyLaunchManager));
         _options = options ?? throw new ArgumentNullException(nameof(options));
         _hostLifetime = hostLifetime ?? throw new ArgumentNullException(nameof(hostLifetime));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));

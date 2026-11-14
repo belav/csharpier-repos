@@ -55,8 +55,9 @@ public static class GrpcSwaggerServiceExtensions
         services.Replace(
             ServiceDescriptor.Transient<ISerializerDataContractResolver>(s =>
             {
-                var serializerOptions =
-                    s.GetService<IOptions<JsonOptions>>()?.Value?.JsonSerializerOptions
+                var serializerOptions = s.GetService<
+                    IOptions<JsonOptions>
+                >()?.Value?.JsonSerializerOptions
                     ?? new JsonSerializerOptions();
                 var innerContractResolver = new JsonSerializerDataContractResolver(
                     serializerOptions

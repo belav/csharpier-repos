@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,12 +21,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
-using System.Linq;
 using System.Data.Linq.Mapping;
+using System.Linq;
 using System.Reflection;
 
 namespace DbLinq.Util
@@ -51,7 +51,14 @@ namespace DbLinq.Util
         /// <returns>A MemberInfo or null</returns>
         public static MemberInfo GetSingleMember(this Type t, string name)
         {
-            return GetSingleMember(t, name, BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.NonPublic);
+            return GetSingleMember(
+                t,
+                name,
+                BindingFlags.Public
+                    | BindingFlags.Static
+                    | BindingFlags.Instance
+                    | BindingFlags.NonPublic
+            );
         }
 
         /// <summary>
@@ -62,7 +69,11 @@ namespace DbLinq.Util
         /// <returns>A MemberInfo or null</returns>
         public static MemberInfo GetTableColumnMember(this Type t, string name)
         {
-            return GetTableColumnMember(t, name, BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance);
+            return GetTableColumnMember(
+                t,
+                name,
+                BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance
+            );
         }
 
         /// <summary>
@@ -72,11 +83,25 @@ namespace DbLinq.Util
         /// <param name="name">The column name for the member</param>
         /// <param name="bindingFlags">Binding flags</param>
         /// <returns>A MemberInfo or null</returns>
-        public static MemberInfo GetTableColumnMember(this Type t, string name, BindingFlags bindingFlags)
+        public static MemberInfo GetTableColumnMember(
+            this Type t,
+            string name,
+            BindingFlags bindingFlags
+        )
         {
-            return (from member in t.GetMembers()
-                   where (member.GetCustomAttributes(true).OfType<ColumnAttribute>().DefaultIfEmpty(new ColumnAttribute()).Single().Name == name)
-                    select member).SingleOrDefault();
+            return (
+                from member in t.GetMembers()
+                where
+                    (
+                        member
+                            .GetCustomAttributes(true)
+                            .OfType<ColumnAttribute>()
+                            .DefaultIfEmpty(new ColumnAttribute())
+                            .Single()
+                            .Name == name
+                    )
+                select member
+            ).SingleOrDefault();
         }
 
         /// <summary>
@@ -86,7 +111,11 @@ namespace DbLinq.Util
         /// <param name="name">The member name</param>
         /// <param name="bindingFlags">Binding flags</param>
         /// <returns>A MemberInfo or null</returns>
-        public static MemberInfo GetSingleMember(this Type t, string name, BindingFlags bindingFlags)
+        public static MemberInfo GetSingleMember(
+            this Type t,
+            string name,
+            BindingFlags bindingFlags
+        )
         {
             var members = t.GetMember(name, bindingFlags);
             if (members.Length > 0)

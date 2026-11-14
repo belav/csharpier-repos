@@ -11,24 +11,27 @@ namespace System.Configuration
             "name",
             typeof(string),
             "",
-            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
         private static readonly ConfigurationProperty s_propSerializeAs = new ConfigurationProperty(
             "serializeAs",
             typeof(SettingsSerializeAs),
             SettingsSerializeAs.String,
-            ConfigurationPropertyOptions.IsRequired);
+            ConfigurationPropertyOptions.IsRequired
+        );
         private static readonly ConfigurationProperty s_propValue = new ConfigurationProperty(
             "value",
             typeof(SettingValueElement),
             null,
-            ConfigurationPropertyOptions.IsRequired);
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection() { s_propName, s_propSerializeAs, s_propValue };
+            ConfigurationPropertyOptions.IsRequired
+        );
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection() { s_propName, s_propSerializeAs, s_propValue };
 
-        public SettingElement()
-        {
-        }
+        public SettingElement() { }
 
-        public SettingElement(string name, SettingsSerializeAs serializeAs) : this()
+        public SettingElement(string name, SettingsSerializeAs serializeAs)
+            : this()
         {
             Name = name;
             SerializeAs = serializeAs;
@@ -36,10 +39,7 @@ namespace System.Configuration
 
         internal string Key
         {
-            get
-            {
-                return Name;
-            }
+            get { return Name; }
         }
 
         public override bool Equals(object settings)
@@ -55,49 +55,32 @@ namespace System.Configuration
 
         protected internal override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return s_properties;
-            }
+            get { return s_properties; }
         }
 
         [ConfigurationProperty("name", IsRequired = true, IsKey = true, DefaultValue = "")]
         public string Name
         {
-            get
-            {
-                return (string)base[s_propName];
-            }
-            set
-            {
-                base[s_propName] = value;
-            }
+            get { return (string)base[s_propName]; }
+            set { base[s_propName] = value; }
         }
 
-        [ConfigurationProperty("serializeAs", IsRequired = true, DefaultValue = SettingsSerializeAs.String)]
+        [ConfigurationProperty(
+            "serializeAs",
+            IsRequired = true,
+            DefaultValue = SettingsSerializeAs.String
+        )]
         public SettingsSerializeAs SerializeAs
         {
-            get
-            {
-                return (SettingsSerializeAs)base[s_propSerializeAs];
-            }
-            set
-            {
-                base[s_propSerializeAs] = value;
-            }
+            get { return (SettingsSerializeAs)base[s_propSerializeAs]; }
+            set { base[s_propSerializeAs] = value; }
         }
 
         [ConfigurationProperty("value", IsRequired = true, DefaultValue = null)]
         public SettingValueElement Value
         {
-            get
-            {
-                return (SettingValueElement)base[s_propValue];
-            }
-            set
-            {
-                base[s_propValue] = value;
-            }
+            get { return (SettingValueElement)base[s_propValue]; }
+            set { base[s_propValue] = value; }
         }
     }
 }

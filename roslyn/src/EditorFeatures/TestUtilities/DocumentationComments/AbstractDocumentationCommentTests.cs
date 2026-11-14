@@ -32,38 +32,88 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
 
         protected abstract TestWorkspace CreateTestWorkspace(string code);
 
-        internal void VerifyTypingCharacter(string initialMarkup, string expectedMarkup, bool useTabs = false, string newLine = "\r\n", bool trimTrailingWhiteSpace = false, OptionsCollection globalOptions = null)
+        internal void VerifyTypingCharacter(
+            string initialMarkup,
+            string expectedMarkup,
+            bool useTabs = false,
+            string newLine = "\r\n",
+            bool trimTrailingWhiteSpace = false,
+            OptionsCollection globalOptions = null
+        )
         {
-            Verify(initialMarkup, expectedMarkup,
+            Verify(
+                initialMarkup,
+                expectedMarkup,
                 execute: (workspace, view, editorOperationsFactoryService) =>
                 {
                     var commandHandler = CreateCommandHandler(workspace);
 
-                    var commandArgs = new TypeCharCommandArgs(view, view.TextBuffer, DocumentationCommentCharacter);
-                    var nextHandler = CreateInsertTextHandler(view, DocumentationCommentCharacter.ToString());
+                    var commandArgs = new TypeCharCommandArgs(
+                        view,
+                        view.TextBuffer,
+                        DocumentationCommentCharacter
+                    );
+                    var nextHandler = CreateInsertTextHandler(
+                        view,
+                        DocumentationCommentCharacter.ToString()
+                    );
 
-                    commandHandler.ExecuteCommand(commandArgs, nextHandler, TestCommandExecutionContext.Create());
+                    commandHandler.ExecuteCommand(
+                        commandArgs,
+                        nextHandler,
+                        TestCommandExecutionContext.Create()
+                    );
                 },
-                useTabs, newLine, trimTrailingWhiteSpace, globalOptions);
+                useTabs,
+                newLine,
+                trimTrailingWhiteSpace,
+                globalOptions
+            );
         }
 
-        internal void VerifyPressingEnter(string initialMarkup, string expectedMarkup, bool useTabs = false, string newLine = "\r\n", bool trimTrailingWhiteSpace = false, OptionsCollection globalOptions = null)
+        internal void VerifyPressingEnter(
+            string initialMarkup,
+            string expectedMarkup,
+            bool useTabs = false,
+            string newLine = "\r\n",
+            bool trimTrailingWhiteSpace = false,
+            OptionsCollection globalOptions = null
+        )
         {
-            Verify(initialMarkup, expectedMarkup,
+            Verify(
+                initialMarkup,
+                expectedMarkup,
                 execute: (workspace, view, editorOperationsFactoryService) =>
                 {
                     var commandHandler = CreateCommandHandler(workspace);
 
                     var commandArgs = new ReturnKeyCommandArgs(view, view.TextBuffer);
                     var nextHandler = CreateInsertTextHandler(view, "\r\n");
-                    commandHandler.ExecuteCommand(commandArgs, nextHandler, TestCommandExecutionContext.Create());
+                    commandHandler.ExecuteCommand(
+                        commandArgs,
+                        nextHandler,
+                        TestCommandExecutionContext.Create()
+                    );
                 },
-                useTabs, newLine, trimTrailingWhiteSpace, globalOptions);
+                useTabs,
+                newLine,
+                trimTrailingWhiteSpace,
+                globalOptions
+            );
         }
 
-        internal void VerifyInsertCommentCommand(string initialMarkup, string expectedMarkup, bool useTabs = false, string newLine = "\r\n", bool trimTrailingWhiteSpace = false, OptionsCollection globalOptions = null)
+        internal void VerifyInsertCommentCommand(
+            string initialMarkup,
+            string expectedMarkup,
+            bool useTabs = false,
+            string newLine = "\r\n",
+            bool trimTrailingWhiteSpace = false,
+            OptionsCollection globalOptions = null
+        )
         {
-            Verify(initialMarkup, expectedMarkup,
+            Verify(
+                initialMarkup,
+                expectedMarkup,
                 execute: (workspace, view, editorOperationsFactoryService) =>
                 {
                     var commandHandler = CreateCommandHandler(workspace);
@@ -71,14 +121,31 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                     var commandArgs = new InsertCommentCommandArgs(view, view.TextBuffer);
                     Action nextHandler = delegate { };
 
-                    commandHandler.ExecuteCommand(commandArgs, nextHandler, TestCommandExecutionContext.Create());
+                    commandHandler.ExecuteCommand(
+                        commandArgs,
+                        nextHandler,
+                        TestCommandExecutionContext.Create()
+                    );
                 },
-                useTabs, newLine, trimTrailingWhiteSpace, globalOptions);
+                useTabs,
+                newLine,
+                trimTrailingWhiteSpace,
+                globalOptions
+            );
         }
 
-        internal void VerifyOpenLineAbove(string initialMarkup, string expectedMarkup, bool useTabs = false, string newLine = "\r\n", bool trimTrailingWhiteSpace = false, OptionsCollection globalOptions = null)
+        internal void VerifyOpenLineAbove(
+            string initialMarkup,
+            string expectedMarkup,
+            bool useTabs = false,
+            string newLine = "\r\n",
+            bool trimTrailingWhiteSpace = false,
+            OptionsCollection globalOptions = null
+        )
         {
-            Verify(initialMarkup, expectedMarkup,
+            Verify(
+                initialMarkup,
+                expectedMarkup,
                 execute: (workspace, view, editorOperationsFactoryService) =>
                 {
                     var commandHandler = CreateCommandHandler(workspace);
@@ -86,18 +153,37 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                     var commandArgs = new OpenLineAboveCommandArgs(view, view.TextBuffer);
                     void nextHandler()
                     {
-                        var editorOperations = editorOperationsFactoryService.GetEditorOperations(view);
+                        var editorOperations = editorOperationsFactoryService.GetEditorOperations(
+                            view
+                        );
                         editorOperations.OpenLineAbove();
                     }
 
-                    commandHandler.ExecuteCommand(commandArgs, nextHandler, TestCommandExecutionContext.Create());
+                    commandHandler.ExecuteCommand(
+                        commandArgs,
+                        nextHandler,
+                        TestCommandExecutionContext.Create()
+                    );
                 },
-                useTabs, newLine, trimTrailingWhiteSpace, globalOptions);
+                useTabs,
+                newLine,
+                trimTrailingWhiteSpace,
+                globalOptions
+            );
         }
 
-        internal void VerifyOpenLineBelow(string initialMarkup, string expectedMarkup, bool useTabs = false, string newLine = "\r\n", bool trimTrailingWhiteSpace = false, OptionsCollection globalOptions = null)
+        internal void VerifyOpenLineBelow(
+            string initialMarkup,
+            string expectedMarkup,
+            bool useTabs = false,
+            string newLine = "\r\n",
+            bool trimTrailingWhiteSpace = false,
+            OptionsCollection globalOptions = null
+        )
         {
-            Verify(initialMarkup, expectedMarkup,
+            Verify(
+                initialMarkup,
+                expectedMarkup,
                 execute: (workspace, view, editorOperationsFactoryService) =>
                 {
                     var commandHandler = CreateCommandHandler(workspace);
@@ -105,13 +191,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                     var commandArgs = new OpenLineBelowCommandArgs(view, view.TextBuffer);
                     void nextHandler()
                     {
-                        var editorOperations = editorOperationsFactoryService.GetEditorOperations(view);
+                        var editorOperations = editorOperationsFactoryService.GetEditorOperations(
+                            view
+                        );
                         editorOperations.OpenLineBelow();
                     }
 
-                    commandHandler.ExecuteCommand(commandArgs, nextHandler, TestCommandExecutionContext.Create());
+                    commandHandler.ExecuteCommand(
+                        commandArgs,
+                        nextHandler,
+                        TestCommandExecutionContext.Create()
+                    );
                 },
-                useTabs, newLine, trimTrailingWhiteSpace, globalOptions);
+                useTabs,
+                newLine,
+                trimTrailingWhiteSpace,
+                globalOptions
+            );
         }
 
         private static Action CreateInsertTextHandler(ITextView textView, string text)
@@ -131,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             bool useTabs,
             string newLine,
             bool trimTrailingWhiteSpace,
-            OptionsCollection globalOptions)
+            OptionsCollection globalOptions
+        )
         {
             using (var workspace = CreateTestWorkspace(initialMarkup))
             {
@@ -148,22 +245,31 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                 var editorOptions = optionsFactory.GetOptions(view.TextBuffer);
                 editorOptions.SetOptionValue(DefaultOptions.ConvertTabsToSpacesOptionId, !useTabs);
                 editorOptions.SetOptionValue(DefaultOptions.NewLineCharacterOptionId, newLine);
-                view.Options.SetOptionValue(DefaultOptions.TrimTrailingWhiteSpaceOptionId, trimTrailingWhiteSpace);
+                view.Options.SetOptionValue(
+                    DefaultOptions.TrimTrailingWhiteSpaceOptionId,
+                    trimTrailingWhiteSpace
+                );
 
                 if (testDocument.SelectedSpans.Any())
                 {
                     var selectedSpan = testDocument.SelectedSpans[0];
                     var isReversed = selectedSpan.Start == startCaretPosition;
 
-                    view.Selection.Select(new SnapshotSpan(view.TextSnapshot, selectedSpan.Start, selectedSpan.Length), isReversed);
+                    view.Selection.Select(
+                        new SnapshotSpan(
+                            view.TextSnapshot,
+                            selectedSpan.Start,
+                            selectedSpan.Length
+                        ),
+                        isReversed
+                    );
                 }
 
-                view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
+                view.Caret.MoveTo(
+                    new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+                );
 
-                execute(
-                    workspace,
-                    view,
-                    workspace.GetService<IEditorOperationsFactoryService>());
+                execute(workspace, view, workspace.GetService<IEditorOperationsFactoryService>());
                 MarkupTestFile.GetPosition(expectedMarkup, out var expectedCode, out int _);
 
                 var actual = view.TextSnapshot.GetText();

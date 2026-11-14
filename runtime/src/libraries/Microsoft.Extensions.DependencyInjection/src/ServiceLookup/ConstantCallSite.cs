@@ -10,12 +10,19 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private readonly Type _serviceType;
         internal object? DefaultValue => Value;
 
-        public ConstantCallSite(Type serviceType, object? defaultValue) : base(ResultCache.None(serviceType))
+        public ConstantCallSite(Type serviceType, object? defaultValue)
+            : base(ResultCache.None(serviceType))
         {
             _serviceType = serviceType ?? throw new ArgumentNullException(nameof(serviceType));
             if (defaultValue != null && !serviceType.IsInstanceOfType(defaultValue))
             {
-                throw new ArgumentException(SR.Format(SR.ConstantCantBeConvertedToServiceType, defaultValue.GetType(), serviceType));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.ConstantCantBeConvertedToServiceType,
+                        defaultValue.GetType(),
+                        serviceType
+                    )
+                );
             }
 
             Value = defaultValue;

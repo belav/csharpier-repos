@@ -31,6 +31,7 @@ namespace System.Linq.Expressions
         }
 
         private int GetLabelId(LabelTarget label) => GetId(label);
+
         private int GetParamId(ParameterExpression p) => GetId(p);
 
         private int GetId(object o)
@@ -112,12 +113,19 @@ namespace System.Linq.Expressions
             return esb.ToString();
         }
 
-        private void VisitExpressions<T>(char open, ReadOnlyCollection<T> expressions, char close) where T : Expression
+        private void VisitExpressions<T>(char open, ReadOnlyCollection<T> expressions, char close)
+            where T : Expression
         {
             VisitExpressions(open, expressions, close, ", ");
         }
 
-        private void VisitExpressions<T>(char open, ReadOnlyCollection<T> expressions, char close, string separator) where T : Expression
+        private void VisitExpressions<T>(
+            char open,
+            ReadOnlyCollection<T> expressions,
+            char close,
+            string separator
+        )
+            where T : Expression
         {
             Out(open);
             if (expressions != null)
@@ -378,11 +386,15 @@ namespace System.Linq.Expressions
 
         protected internal override Expression VisitDebugInfo(DebugInfoExpression node)
         {
-            Out($"<DebugInfo({node.Document.FileName}: {node.StartLine}, {node.StartColumn}, {node.EndLine}, {node.EndColumn})>");
+            Out(
+                $"<DebugInfo({node.Document.FileName}: {node.StartLine}, {node.StartColumn}, {node.EndLine}, {node.EndColumn})>"
+            );
             return node;
         }
 
-        protected internal override Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
+        protected internal override Expression VisitRuntimeVariables(
+            RuntimeVariablesExpression node
+        )
         {
             VisitExpressions('(', node.Variables, ')');
             return node;
@@ -413,8 +425,7 @@ namespace System.Linq.Expressions
 
         protected internal override Expression VisitMemberInit(MemberInitExpression node)
         {
-            if (node.NewExpression.ArgumentCount == 0 &&
-                node.NewExpression.Type.Name.Contains('<'))
+            if (node.NewExpression.ArgumentCount == 0 && node.NewExpression.Type.Name.Contains('<'))
             {
                 // anonymous type constructor
                 Out("new");
@@ -602,22 +613,54 @@ namespace System.Linq.Expressions
             switch (node.NodeType)
             {
                 case ExpressionType.Negate:
-                case ExpressionType.NegateChecked: Out('-'); break;
-                case ExpressionType.Not: Out("Not("); break;
-                case ExpressionType.IsFalse: Out("IsFalse("); break;
-                case ExpressionType.IsTrue: Out("IsTrue("); break;
-                case ExpressionType.OnesComplement: Out("~("); break;
-                case ExpressionType.ArrayLength: Out("ArrayLength("); break;
-                case ExpressionType.Convert: Out("Convert("); break;
-                case ExpressionType.ConvertChecked: Out("ConvertChecked("); break;
-                case ExpressionType.Throw: Out("throw("); break;
-                case ExpressionType.TypeAs: Out('('); break;
-                case ExpressionType.UnaryPlus: Out('+'); break;
-                case ExpressionType.Unbox: Out("Unbox("); break;
-                case ExpressionType.Increment: Out("Increment("); break;
-                case ExpressionType.Decrement: Out("Decrement("); break;
-                case ExpressionType.PreIncrementAssign: Out("++"); break;
-                case ExpressionType.PreDecrementAssign: Out("--"); break;
+                case ExpressionType.NegateChecked:
+                    Out('-');
+                    break;
+                case ExpressionType.Not:
+                    Out("Not(");
+                    break;
+                case ExpressionType.IsFalse:
+                    Out("IsFalse(");
+                    break;
+                case ExpressionType.IsTrue:
+                    Out("IsTrue(");
+                    break;
+                case ExpressionType.OnesComplement:
+                    Out("~(");
+                    break;
+                case ExpressionType.ArrayLength:
+                    Out("ArrayLength(");
+                    break;
+                case ExpressionType.Convert:
+                    Out("Convert(");
+                    break;
+                case ExpressionType.ConvertChecked:
+                    Out("ConvertChecked(");
+                    break;
+                case ExpressionType.Throw:
+                    Out("throw(");
+                    break;
+                case ExpressionType.TypeAs:
+                    Out('(');
+                    break;
+                case ExpressionType.UnaryPlus:
+                    Out('+');
+                    break;
+                case ExpressionType.Unbox:
+                    Out("Unbox(");
+                    break;
+                case ExpressionType.Increment:
+                    Out("Increment(");
+                    break;
+                case ExpressionType.Decrement:
+                    Out("Decrement(");
+                    break;
+                case ExpressionType.PreIncrementAssign:
+                    Out("++");
+                    break;
+                case ExpressionType.PreDecrementAssign:
+                    Out("--");
+                    break;
                 case ExpressionType.Quote:
                 case ExpressionType.PostIncrementAssign:
                 case ExpressionType.PostDecrementAssign:
@@ -640,15 +683,23 @@ namespace System.Linq.Expressions
                 case ExpressionType.TypeAs:
                     Out(" As ");
                     Out(node.Type.Name);
-                    Out(')'); break;
+                    Out(')');
+                    break;
                 case ExpressionType.Convert:
                 case ExpressionType.ConvertChecked:
                     Out(", ");
                     Out(node.Type.Name);
-                    Out(')'); break; // These were changed in .NET Core to add the type name
-                case ExpressionType.PostIncrementAssign: Out("++"); break;
-                case ExpressionType.PostDecrementAssign: Out("--"); break;
-                default: Out(')'); break;
+                    Out(')');
+                    break; // These were changed in .NET Core to add the type name
+                case ExpressionType.PostIncrementAssign:
+                    Out("++");
+                    break;
+                case ExpressionType.PostDecrementAssign:
+                    Out("--");
+                    break;
+                default:
+                    Out(')');
+                    break;
             }
             return node;
         }
@@ -775,8 +826,11 @@ namespace System.Linq.Expressions
             return node;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "The 'ToString' method cannot be trimmed on any Expression type because we are calling Expression.ToString() in this method.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "The 'ToString' method cannot be trimmed on any Expression type because we are calling Expression.ToString() in this method."
+        )]
         protected internal override Expression VisitExtension(Expression node)
         {
             // Prefer an overridden ToString, if available.
@@ -790,7 +844,11 @@ namespace System.Linq.Expressions
             Out('[');
             // For 3.5 subclasses, print the NodeType.
             // For Extension nodes, print the class name.
-            Out(node.NodeType == ExpressionType.Extension ? node.GetType().FullName : node.NodeType.ToString());
+            Out(
+                node.NodeType == ExpressionType.Extension
+                    ? node.GetType().FullName
+                    : node.NodeType.ToString()
+            );
             Out(']');
             return node;
         }

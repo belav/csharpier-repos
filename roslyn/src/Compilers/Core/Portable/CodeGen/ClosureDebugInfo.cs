@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public bool Equals(ClosureDebugInfo other)
         {
-            return SyntaxOffset == other.SyntaxOffset &&
-                   ClosureId.Equals(other.ClosureId);
+            return SyntaxOffset == other.SyntaxOffset && ClosureId.Equals(other.ClosureId);
         }
 
         public override bool Equals(object? obj)

@@ -27,8 +27,7 @@ namespace System.IO.Tests.Enumeration
         private class GetPropertiesEnumerator : FileSystemEnumerator<FileSystemEntryProperties>
         {
             public GetPropertiesEnumerator(string directory, EnumerationOptions options)
-                : base(directory, options)
-            { }
+                : base(directory, options) { }
 
             protected override bool ContinueOnError(int error)
             {
@@ -50,7 +49,7 @@ namespace System.IO.Tests.Enumeration
                     Length = entry.Length,
                     Directory = new string(entry.Directory),
                     FullPath = entry.ToFullPath(),
-                    SpecifiedFullPath = entry.ToSpecifiedFullPath()
+                    SpecifiedFullPath = entry.ToSpecifiedFullPath(),
                 };
             }
         }
@@ -86,7 +85,12 @@ namespace System.IO.Tests.Enumeration
             FileSystemInfo item1Info = CreateItem(testDirectory, item1);
             FileSystemInfo item2Info = CreateItem(testDirectory, item2);
 
-            using (var enumerator = new GetPropertiesEnumerator(testDirectory.FullName, new EnumerationOptions() { AttributesToSkip = 0 }))
+            using (
+                var enumerator = new GetPropertiesEnumerator(
+                    testDirectory.FullName,
+                    new EnumerationOptions() { AttributesToSkip = 0 }
+                )
+            )
             {
                 // Move to the first item.
                 Assert.True(enumerator.MoveNext(), "Move first");
@@ -114,7 +118,12 @@ namespace System.IO.Tests.Enumeration
                 {
                     // For Browser, all items are typed as DT_UNKNOWN.
                     Assert.False(entry.IsDirectory);
-                    Assert.Equal(entry.FileName.StartsWith('.') ? FileAttributes.Hidden : FileAttributes.Normal, entry.Attributes);
+                    Assert.Equal(
+                        entry.FileName.StartsWith('.')
+                            ? FileAttributes.Hidden
+                            : FileAttributes.Normal,
+                        entry.Attributes
+                    );
                 }
                 else
                 {
@@ -124,7 +133,10 @@ namespace System.IO.Tests.Enumeration
 
                 if (PlatformDetection.IsWindows)
                 {
-                    Assert.Equal((expected.Attributes & FileAttributes.Hidden) != 0, entry.IsHidden);
+                    Assert.Equal(
+                        (expected.Attributes & FileAttributes.Hidden) != 0,
+                        entry.IsHidden
+                    );
                     Assert.Equal(expected.CreationTimeUtc, entry.CreationTimeUtc);
                     Assert.Equal(expected.LastAccessTimeUtc, entry.LastAccessTimeUtc);
                     Assert.Equal(expected.LastWriteTimeUtc, entry.LastWriteTimeUtc);
@@ -201,7 +213,6 @@ namespace System.IO.Tests.Enumeration
             IsHiddenAttributeInternal(useDotPrefix: false, useHiddenFlag: true);
         }
 
-
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void IsHiddenAttribute_Unix()
@@ -216,8 +227,12 @@ namespace System.IO.Tests.Enumeration
 
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
 
-            FileInfo fileOne = new FileInfo(Path.Combine(testDirectory.FullName, GetTestFileName()));
-            FileInfo fileTwo = new FileInfo(Path.Combine(testDirectory.FullName, prefix + GetTestFileName()));
+            FileInfo fileOne = new FileInfo(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
+            FileInfo fileTwo = new FileInfo(
+                Path.Combine(testDirectory.FullName, prefix + GetTestFileName())
+            );
 
             fileOne.Create().Dispose();
             fileTwo.Create().Dispose();
@@ -233,9 +248,10 @@ namespace System.IO.Tests.Enumeration
             IEnumerable<string> enumerable = new FileSystemEnumerable<string>(
                 testDirectory.FullName,
                 (ref FileSystemEntry entry) => entry.ToFullPath(),
-                new EnumerationOptions() { AttributesToSkip = 0 })
+                new EnumerationOptions() { AttributesToSkip = 0 }
+            )
             {
-                ShouldIncludePredicate = (ref FileSystemEntry entry) => entry.IsHidden
+                ShouldIncludePredicate = (ref FileSystemEntry entry) => entry.IsHidden,
             };
 
             Assert.Equal(new string[] { fileTwo.FullName }, enumerable);
@@ -246,8 +262,12 @@ namespace System.IO.Tests.Enumeration
         {
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
 
-            FileInfo fileOne = new FileInfo(Path.Combine(testDirectory.FullName, GetTestFileName()));
-            FileInfo fileTwo = new FileInfo(Path.Combine(testDirectory.FullName, GetTestFileName()));
+            FileInfo fileOne = new FileInfo(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
+            FileInfo fileTwo = new FileInfo(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
 
             fileOne.Create().Dispose();
             fileTwo.Create().Dispose();
@@ -255,11 +275,13 @@ namespace System.IO.Tests.Enumeration
             fileTwo.Attributes |= FileAttributes.ReadOnly;
 
             IEnumerable<string> enumerable = new FileSystemEnumerable<string>(
-                 testDirectory.FullName,
-                 (ref FileSystemEntry entry) => entry.ToFullPath(),
-                 new EnumerationOptions() { AttributesToSkip = 0 })
+                testDirectory.FullName,
+                (ref FileSystemEntry entry) => entry.ToFullPath(),
+                new EnumerationOptions() { AttributesToSkip = 0 }
+            )
             {
-                ShouldIncludePredicate = (ref FileSystemEntry entry) => (entry.Attributes & FileAttributes.ReadOnly) != 0
+                ShouldIncludePredicate = (ref FileSystemEntry entry) =>
+                    (entry.Attributes & FileAttributes.ReadOnly) != 0,
             };
 
             Assert.Equal(new string[] { fileTwo.FullName }, enumerable);

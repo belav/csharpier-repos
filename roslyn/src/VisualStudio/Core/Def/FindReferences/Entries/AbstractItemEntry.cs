@@ -17,18 +17,27 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         {
             protected readonly StreamingFindUsagesPresenter Presenter;
 
-            public AbstractItemEntry(RoslynDefinitionBucket definitionBucket, StreamingFindUsagesPresenter presenter)
+            public AbstractItemEntry(
+                RoslynDefinitionBucket definitionBucket,
+                StreamingFindUsagesPresenter presenter
+            )
                 : base(definitionBucket)
             {
                 Presenter = presenter;
             }
 
-            public override bool TryCreateColumnContent(string columnName, [NotNullWhen(true)] out FrameworkElement? content)
+            public override bool TryCreateColumnContent(
+                string columnName,
+                [NotNullWhen(true)] out FrameworkElement? content
+            )
             {
                 if (columnName == StandardTableColumnDefinitions2.LineText)
                 {
                     var inlines = CreateLineTextInlines();
-                    var textBlock = inlines.ToTextBlock(Presenter.ClassificationFormatMap, wrap: false);
+                    var textBlock = inlines.ToTextBlock(
+                        Presenter.ClassificationFormatMap,
+                        wrap: false
+                    );
 
                     content = textBlock;
                     return true;

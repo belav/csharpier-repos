@@ -12,6 +12,7 @@ public class MainApp
         Console.WriteLine("A_NoInline");
         throw new Exception("throw in method PrintA_Inline");
     }
+
     internal static void PrintA_Inline()
     {
         Console.WriteLine("A");
@@ -50,5 +51,3 @@ public class MainApp
         return retval;
     }
 }
-
-

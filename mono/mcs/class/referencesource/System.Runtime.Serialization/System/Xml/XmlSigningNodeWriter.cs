@@ -19,7 +19,12 @@ namespace System.Xml
             this.text = text;
         }
 
-        public void SetOutput(XmlNodeWriter writer, Stream stream, bool includeComments, string[] inclusivePrefixes)
+        public void SetOutput(
+            XmlNodeWriter writer,
+            Stream stream,
+            bool includeComments,
+            string[] inclusivePrefixes
+        )
         {
             this.writer = writer;
             if (signingWriter == null)
@@ -31,22 +36,13 @@ namespace System.Xml
 
         public XmlNodeWriter NodeWriter
         {
-            get
-            {
-                return writer;
-            }
-            set
-            {
-                writer = value;
-            }
+            get { return writer; }
+            set { writer = value; }
         }
 
         public XmlCanonicalWriter CanonicalWriter
         {
-            get
-            {
-                return signingWriter;
-            }
+            get { return signingWriter; }
         }
 
         public override void Flush()
@@ -85,11 +81,31 @@ namespace System.Xml
             signingWriter.WriteStartElement(prefix, localName);
         }
 
-        public override void WriteStartElement(byte[] prefixBuffer, int prefixOffset, int prefixLength,
-                                               byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        public override void WriteStartElement(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
-            writer.WriteStartElement(prefixBuffer, prefixOffset, prefixLength, localNameBuffer, localNameOffset, localNameLength);
-            signingWriter.WriteStartElement(prefixBuffer, prefixOffset, prefixLength, localNameBuffer, localNameOffset, localNameLength);
+            writer.WriteStartElement(
+                prefixBuffer,
+                prefixOffset,
+                prefixLength,
+                localNameBuffer,
+                localNameOffset,
+                localNameLength
+            );
+            signingWriter.WriteStartElement(
+                prefixBuffer,
+                prefixOffset,
+                prefixLength,
+                localNameBuffer,
+                localNameOffset,
+                localNameLength
+            );
         }
 
         public override void WriteStartElement(string prefix, XmlDictionaryString localName)
@@ -116,11 +132,31 @@ namespace System.Xml
             signingWriter.WriteXmlnsAttribute(prefix, ns);
         }
 
-        public override void WriteXmlnsAttribute(byte[] prefixBuffer, int prefixOffset, int prefixLength,
-                                                 byte[] nsBuffer, int nsOffset, int nsLength)
+        public override void WriteXmlnsAttribute(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] nsBuffer,
+            int nsOffset,
+            int nsLength
+        )
         {
-            writer.WriteXmlnsAttribute(prefixBuffer, prefixOffset, prefixLength, nsBuffer, nsOffset, nsLength);
-            signingWriter.WriteXmlnsAttribute(prefixBuffer, prefixOffset, prefixLength, nsBuffer, nsOffset, nsLength);
+            writer.WriteXmlnsAttribute(
+                prefixBuffer,
+                prefixOffset,
+                prefixLength,
+                nsBuffer,
+                nsOffset,
+                nsLength
+            );
+            signingWriter.WriteXmlnsAttribute(
+                prefixBuffer,
+                prefixOffset,
+                prefixLength,
+                nsBuffer,
+                nsOffset,
+                nsLength
+            );
         }
 
         public override void WriteXmlnsAttribute(string prefix, XmlDictionaryString ns)
@@ -135,11 +171,31 @@ namespace System.Xml
             signingWriter.WriteStartAttribute(prefix, localName);
         }
 
-        public override void WriteStartAttribute(byte[] prefixBuffer, int prefixOffset, int prefixLength,
-                                                 byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        public override void WriteStartAttribute(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
-            writer.WriteStartAttribute(prefixBuffer, prefixOffset, prefixLength, localNameBuffer, localNameOffset, localNameLength);
-            signingWriter.WriteStartAttribute(prefixBuffer, prefixOffset, prefixLength, localNameBuffer, localNameOffset, localNameLength);
+            writer.WriteStartAttribute(
+                prefixBuffer,
+                prefixOffset,
+                prefixLength,
+                localNameBuffer,
+                localNameOffset,
+                localNameLength
+            );
+            signingWriter.WriteStartAttribute(
+                prefixBuffer,
+                prefixOffset,
+                prefixLength,
+                localNameBuffer,
+                localNameOffset,
+                localNameLength
+            );
         }
 
         public override void WriteStartAttribute(string prefix, XmlDictionaryString localName)
@@ -334,7 +390,13 @@ namespace System.Xml
             writer.WriteEndListText();
         }
 
-        public override void WriteBase64Text(byte[] trailBytes, int trailByteCount, byte[] buffer, int offset, int count)
+        public override void WriteBase64Text(
+            byte[] trailBytes,
+            int trailByteCount,
+            byte[] buffer,
+            int offset,
+            int count
+        )
         {
             if (trailByteCount > 0)
                 WriteBase64Text(trailBytes, 0, trailByteCount);

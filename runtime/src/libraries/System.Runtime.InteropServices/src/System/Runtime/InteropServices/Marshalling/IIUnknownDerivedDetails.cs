@@ -36,7 +36,8 @@ namespace System.Runtime.InteropServices.Marshalling
             {
                 return null;
             }
-            return (IIUnknownDerivedDetails?)type.GetCustomAttribute(typeof(IUnknownDerivedAttribute<,>));
+            return (IIUnknownDerivedDetails?)
+                type.GetCustomAttribute(typeof(IUnknownDerivedAttribute<,>));
         }
     }
 }

@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when a method call is invalid for the object's current state.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class InvalidOperationException : SystemException
     {
         public InvalidOperationException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_INVALIDOPERATION;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected InvalidOperationException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected InvalidOperationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

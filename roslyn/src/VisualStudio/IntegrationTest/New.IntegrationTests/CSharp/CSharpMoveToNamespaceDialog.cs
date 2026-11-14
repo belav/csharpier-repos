@@ -17,140 +17,188 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpMoveToNamespaceDialog()
-            : base(nameof(CSharpMoveToNamespaceDialog))
-        {
-        }
+            : base(nameof(CSharpMoveToNamespaceDialog)) { }
 
         [IdeFact]
         public async Task VerifyCancellation()
         {
             await SetUpEditorAsync(
-@"
+                @"
 namespace A
 {
     class C$$
     {
     }
 }
-", HangMitigatingCancellationToken);
+",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Move to namespace...",
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Move to namespace...",
                 applyFix: true,
                 blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken);
+                cancellationToken: HangMitigatingCancellationToken
+            );
 
-            await TestServices.MoveToNamespaceDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices.MoveToNamespaceDialog.ClickCancelAsync(HangMitigatingCancellationToken);
-            await TestServices.MoveToNamespaceDialog.VerifyClosedAsync(HangMitigatingCancellationToken);
+            await TestServices.MoveToNamespaceDialog.VerifyOpenAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.MoveToNamespaceDialog.ClickCancelAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.MoveToNamespaceDialog.VerifyClosedAsync(
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.EditorVerifier.TextContainsAsync(
-@"
+                @"
 namespace A
 {
     class C
     {
     }
 }
-", cancellationToken: HangMitigatingCancellationToken);
+",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task VerifyCancellationWithChange()
         {
             await SetUpEditorAsync(
-@"
+                @"
 namespace A
 {
     class C$$
     {
     }
 }
-", HangMitigatingCancellationToken);
+",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Move to namespace...",
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Move to namespace...",
                 applyFix: true,
                 blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken);
+                cancellationToken: HangMitigatingCancellationToken
+            );
 
-            await TestServices.MoveToNamespaceDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices.MoveToNamespaceDialog.SetNamespaceAsync("B", HangMitigatingCancellationToken);
-            await TestServices.MoveToNamespaceDialog.ClickCancelAsync(HangMitigatingCancellationToken);
-            await TestServices.MoveToNamespaceDialog.VerifyClosedAsync(HangMitigatingCancellationToken);
+            await TestServices.MoveToNamespaceDialog.VerifyOpenAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.MoveToNamespaceDialog.SetNamespaceAsync(
+                "B",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.MoveToNamespaceDialog.ClickCancelAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.MoveToNamespaceDialog.VerifyClosedAsync(
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.EditorVerifier.TextContainsAsync(
-@"
+                @"
 namespace A
 {
     class C
     {
     }
 }
-", cancellationToken: HangMitigatingCancellationToken);
+",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task VerifyOkNoChange()
         {
             await SetUpEditorAsync(
-@"
+                @"
 namespace A
 {
     class C$$
     {
     }
 }
-", HangMitigatingCancellationToken);
+",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Move to namespace...",
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Move to namespace...",
                 applyFix: true,
                 blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken);
+                cancellationToken: HangMitigatingCancellationToken
+            );
 
-            await TestServices.MoveToNamespaceDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
+            await TestServices.MoveToNamespaceDialog.VerifyOpenAsync(
+                HangMitigatingCancellationToken
+            );
             await TestServices.MoveToNamespaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices.MoveToNamespaceDialog.VerifyClosedAsync(HangMitigatingCancellationToken);
+            await TestServices.MoveToNamespaceDialog.VerifyClosedAsync(
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.EditorVerifier.TextContainsAsync(
-@"
+                @"
 namespace A
 {
     class C
     {
     }
 }
-", cancellationToken: HangMitigatingCancellationToken);
+",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task VerifyOkWithChange()
         {
             await SetUpEditorAsync(
-@"namespace A
+                @"namespace A
 {
     class C$$
     {
     }
 }
-", HangMitigatingCancellationToken);
+",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Move to namespace...",
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Move to namespace...",
                 applyFix: true,
                 blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken);
+                cancellationToken: HangMitigatingCancellationToken
+            );
 
-            await TestServices.MoveToNamespaceDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices.MoveToNamespaceDialog.SetNamespaceAsync("B", HangMitigatingCancellationToken);
+            await TestServices.MoveToNamespaceDialog.VerifyOpenAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.MoveToNamespaceDialog.SetNamespaceAsync(
+                "B",
+                HangMitigatingCancellationToken
+            );
             await TestServices.MoveToNamespaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices.MoveToNamespaceDialog.VerifyClosedAsync(HangMitigatingCancellationToken);
+            await TestServices.MoveToNamespaceDialog.VerifyClosedAsync(
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.EditorVerifier.TextContainsAsync(
-@"namespace B
+                @"namespace B
 {
     class C
     {
     }
 }
-", cancellationToken: HangMitigatingCancellationToken);
+",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

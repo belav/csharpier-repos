@@ -14,7 +14,7 @@ namespace System.Speech.Internal
     {
         Sapi,
         Ipa,
-        Ups
+        Ups,
     }
 
     /// <summary>
@@ -142,9 +142,9 @@ namespace System.Speech.Internal
 
             StringBuilder result = new();
             int startIndex; // Starting index of a substring being considered
-            int endIndex;   // The ending index of the last convertible substring
-            string token;           // Holds a substring of phonemes that are directly convertible from the mapping table.
-            string lastConvert;     // Holds last convertible substring, starting from startIndex.
+            int endIndex; // The ending index of the last convertible substring
+            string token; // Holds a substring of phonemes that are directly convertible from the mapping table.
+            string lastConvert; // Holds last convertible substring, starting from startIndex.
 
             string tempConvert;
             string source = new(phonemes);
@@ -204,7 +204,9 @@ namespace System.Speech.Internal
             Stream stream = assembly.GetManifestResourceStream(resourceName);
             if (stream == null)
             {
-                throw new FileLoadException(SR.Get(SRID.CannotLoadResourceFromManifest, resourceName, assembly.FullName));
+                throw new FileLoadException(
+                    SR.Get(SRID.CannotLoadResourceFromManifest, resourceName, assembly.FullName)
+                );
             }
             return new PhoneMapData(new BufferedStream(stream));
         }
@@ -216,11 +218,26 @@ namespace System.Speech.Internal
         private int _currentLangId;
         private PhoneMapData _phoneMap;
 
-        private static int[] s_langIds = new int[] { 0x804, 0x404, 0x407, 0x409, 0x40A, 0x40C, 0x411 };
-        private static string[] s_resourceNames =
-                    new string[] { "upstable_chs.upsmap", "upstable_cht.upsmap", "upstable_deu.upsmap", "upstable_enu.upsmap",
-                                   "upstable_esp.upsmap", "upstable_fra.upsmap", "upstable_jpn.upsmap",
-};
+        private static int[] s_langIds = new int[]
+        {
+            0x804,
+            0x404,
+            0x407,
+            0x409,
+            0x40A,
+            0x40C,
+            0x411,
+        };
+        private static string[] s_resourceNames = new string[]
+        {
+            "upstable_chs.upsmap",
+            "upstable_cht.upsmap",
+            "upstable_deu.upsmap",
+            "upstable_enu.upsmap",
+            "upstable_esp.upsmap",
+            "upstable_fra.upsmap",
+            "upstable_jpn.upsmap",
+        };
         private static PhoneMapData[] s_phoneMaps = new PhoneMapData[7];
         private static object s_staticLock = new();
 
@@ -250,7 +267,7 @@ namespace System.Speech.Internal
                         {
                             sapi = ReadPhoneString(reader),
                             ups = ReadPhoneString(reader),
-                            isDefault = reader.ReadInt32() != 0 ? true : false
+                            isDefault = reader.ReadInt32() != 0 ? true : false,
                         };
                     }
 
@@ -295,9 +312,11 @@ namespace System.Speech.Internal
             /// <param name="isSapi">Creating a SAPI or UPS prefix table</param>
             private Hashtable InitializePrefix(bool isSapi)
             {
-                int i, j;
+                int i,
+                    j;
                 Hashtable prefixTable = Hashtable.Synchronized(new Hashtable());
-                string from, key;
+                string from,
+                    key;
                 for (i = 0; i < _convertTable.Length; i++)
                 {
                     if (isSapi)
@@ -335,7 +354,8 @@ namespace System.Speech.Internal
                 return new string(phoneString, 0, phoneLength - 1);
             }
 
-            private Hashtable _prefixSapiTable, _prefixUpsTable;
+            private Hashtable _prefixSapiTable,
+                _prefixUpsTable;
             private ConversionUnit[] _convertTable;
         }
 

@@ -30,10 +30,13 @@ namespace System.Globalization.Tests
         {
             CultureInfo ci = new CultureInfo("en-US");
             Assert.Same(ci.Calendar, ci.DateTimeFormat.Calendar);
-            CultureInfo ci1 = (CultureInfo) ci.Clone();
+            CultureInfo ci1 = (CultureInfo)ci.Clone();
             Assert.Same(ci1.Calendar, ci1.DateTimeFormat.Calendar);
             Assert.NotSame(ci.Calendar, ci1.Calendar);
-            Assert.NotSame(((CultureInfo)(ci.Clone())).Calendar, ((CultureInfo)(ci.Clone())).Calendar);
+            Assert.NotSame(
+                ((CultureInfo)(ci.Clone())).Calendar,
+                ((CultureInfo)(ci.Clone())).Calendar
+            );
         }
     }
 }

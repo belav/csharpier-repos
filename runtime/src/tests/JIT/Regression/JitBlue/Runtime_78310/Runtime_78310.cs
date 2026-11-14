@@ -66,9 +66,7 @@ public class Runtime_78310
 
         Foo();
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Foo()
-    {
-    }
+    private static void Foo() { }
 }

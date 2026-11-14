@@ -16,6 +16,6 @@ namespace System.ComponentModel
         /// <summary>
         /// The template can accept and expose property values. Used with an IBindableTemplate.
         /// </summary>
-        TwoWay = 1
+        TwoWay = 1,
     }
 }

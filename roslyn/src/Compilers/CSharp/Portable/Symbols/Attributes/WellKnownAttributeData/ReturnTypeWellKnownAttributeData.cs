@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private ImmutableHashSet<string> _notNullIfParameterNotNull = ImmutableHashSet<string>.Empty;
+        private ImmutableHashSet<string> _notNullIfParameterNotNull =
+            ImmutableHashSet<string>.Empty;
         public ImmutableHashSet<string> NotNullIfParameterNotNull
         {
             get
@@ -52,6 +53,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _notNullIfParameterNotNull;
             }
         }
+
         public void AddNotNullIfParameterNotNull(string parameterName)
         {
             VerifySealed(expected: false);

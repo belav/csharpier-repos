@@ -13,7 +13,10 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Given the metadata for an event and an event payload, decode and deserialize the event payload.
         /// </summary>
-        internal static object[] DecodePayload(ref EventSource.EventMetadata metadata, ReadOnlySpan<byte> payload)
+        internal static object[] DecodePayload(
+            ref EventSource.EventMetadata metadata,
+            ReadOnlySpan<byte> payload
+        )
         {
             ParameterInfo[] parameters = metadata.Parameters;
             object[] decodedFields = new object[parameters.Length];
@@ -28,7 +31,9 @@ namespace System.Diagnostics.Tracing
                 }
 
                 Type parameterType = parameters[i].ParameterType;
-                Type? enumType = parameterType.IsEnum ? Enum.GetUnderlyingType(parameterType) : null;
+                Type? enumType = parameterType.IsEnum
+                    ? Enum.GetUnderlyingType(parameterType)
+                    : null;
                 if (parameterType == typeof(IntPtr))
                 {
                     decodedFields[i] = BinaryPrimitives.ReadIntPtrLittleEndian(payload);
@@ -124,10 +129,14 @@ namespace System.Diagnostics.Tracing
                     }
                     else
                     {
-                        charPayload = MemoryMarshal.Cast<byte, char>(payload.Slice(0, byteCount - 2));
+                        charPayload = MemoryMarshal.Cast<byte, char>(
+                            payload.Slice(0, byteCount - 2)
+                        );
                         payload = payload.Slice(byteCount);
                     }
-                    decodedFields[i] = BitConverter.IsLittleEndian ? new string(charPayload) : Encoding.Unicode.GetString(MemoryMarshal.Cast<char, byte>(charPayload));
+                    decodedFields[i] = BitConverter.IsLittleEndian
+                        ? new string(charPayload)
+                        : Encoding.Unicode.GetString(MemoryMarshal.Cast<char, byte>(charPayload));
                 }
                 else
                 {

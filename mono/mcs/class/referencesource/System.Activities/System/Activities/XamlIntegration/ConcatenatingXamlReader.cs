@@ -90,13 +90,10 @@ namespace System.Activities.XamlIntegration
                         return true;
                     }
                     this.readers.Current.Close();
-                }
-                while (this.readers.MoveNext());
+                } while (this.readers.MoveNext());
                 this.isEof = true;
             }
             return false;
         }
     }
 }
-
-

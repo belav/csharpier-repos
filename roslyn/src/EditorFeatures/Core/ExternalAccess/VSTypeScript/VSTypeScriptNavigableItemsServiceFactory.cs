@@ -16,10 +16,15 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-[ExportLanguageServiceFactory(typeof(INavigableItemsService), InternalLanguageNames.TypeScript), Shared]
+[
+    ExportLanguageServiceFactory(typeof(INavigableItemsService), InternalLanguageNames.TypeScript),
+    Shared
+]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal sealed class VSTypeScriptNavigableItemsServiceFactory(IVSTypeScriptGoToDefinitionServiceFactoryImplementation impl) : ILanguageServiceFactory
+internal sealed class VSTypeScriptNavigableItemsServiceFactory(
+    IVSTypeScriptGoToDefinitionServiceFactoryImplementation impl
+) : ILanguageServiceFactory
 {
     public ILanguageService? CreateLanguageService(HostLanguageServices languageServices)
     {
@@ -27,15 +32,25 @@ internal sealed class VSTypeScriptNavigableItemsServiceFactory(IVSTypeScriptGoTo
         return service != null ? new VSTypeScriptNavigableItemsService(service) : null;
     }
 
-    private sealed class VSTypeScriptNavigableItemsService(IVSTypeScriptGoToDefinitionService service) : INavigableItemsService
+    private sealed class VSTypeScriptNavigableItemsService(
+        IVSTypeScriptGoToDefinitionService service
+    ) : INavigableItemsService
     {
-        public async Task<ImmutableArray<INavigableItem>> GetNavigableItemsAsync(Document document, int position, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<INavigableItem>> GetNavigableItemsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var items = await service.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var items = await service
+                .FindDefinitionsAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (items is null)
                 return ImmutableArray<INavigableItem>.Empty;
 
-            return items.SelectAsArray(i => (INavigableItem)new VSTypeScriptNavigableItemWrapper(i));
+            return items.SelectAsArray(i =>
+                (INavigableItem)new VSTypeScriptNavigableItemWrapper(i)
+            );
         }
     }
 }

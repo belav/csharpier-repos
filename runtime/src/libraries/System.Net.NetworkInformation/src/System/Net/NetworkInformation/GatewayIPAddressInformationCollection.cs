@@ -26,26 +26,17 @@ namespace System.Net.NetworkInformation
 
         public virtual int Count
         {
-            get
-            {
-                return _addresses.Count;
-            }
+            get { return _addresses.Count; }
         }
 
         public virtual bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public virtual GatewayIPAddressInformation this[int index]
         {
-            get
-            {
-                return _addresses[index];
-            }
+            get { return _addresses[index]; }
         }
 
         public virtual void Add(GatewayIPAddressInformation address)

@@ -23,59 +23,101 @@ namespace Microsoft.CodeAnalysis.Options;
 
 internal static class CodeActionOptionsStorage
 {
-    public static Provider CreateProvider(this IGlobalOptionService globalOptions)
-        => new(globalOptions);
+    public static Provider CreateProvider(this IGlobalOptionService globalOptions) =>
+        new(globalOptions);
 
     // TODO: we can implement providers directly on IGlobalOptionService once it moves to LSP layer
-    public sealed class Provider :
-        SyntaxFormattingOptionsProvider,
-        SimplifierOptionsProvider,
-        AddImportPlacementOptionsProvider,
-        CodeCleanupOptionsProvider,
-        CodeGenerationOptionsProvider,
-        CleanCodeGenerationOptionsProvider,
-        CodeAndImportGenerationOptionsProvider,
-        CodeActionOptionsProvider
+    public sealed class Provider
+        : SyntaxFormattingOptionsProvider,
+            SimplifierOptionsProvider,
+            AddImportPlacementOptionsProvider,
+            CodeCleanupOptionsProvider,
+            CodeGenerationOptionsProvider,
+            CleanCodeGenerationOptionsProvider,
+            CodeAndImportGenerationOptionsProvider,
+            CodeActionOptionsProvider
     {
         private readonly IGlobalOptionService _globalOptions;
 
-        public Provider(IGlobalOptionService globalOptions)
-            => _globalOptions = globalOptions;
+        public Provider(IGlobalOptionService globalOptions) => _globalOptions = globalOptions;
 
-        CodeActionOptions CodeActionOptionsProvider.GetOptions(LanguageServices languageServices)
-            => _globalOptions.GetCodeActionOptions(languageServices);
+        CodeActionOptions CodeActionOptionsProvider.GetOptions(LanguageServices languageServices) =>
+            _globalOptions.GetCodeActionOptions(languageServices);
 
-        ValueTask<LineFormattingOptions> OptionsProvider<LineFormattingOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetLineFormattingOptions(languageServices.Language));
+        ValueTask<LineFormattingOptions> OptionsProvider<LineFormattingOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                _globalOptions.GetLineFormattingOptions(languageServices.Language)
+            );
 
-        ValueTask<DocumentFormattingOptions> OptionsProvider<DocumentFormattingOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetDocumentFormattingOptions());
+        ValueTask<DocumentFormattingOptions> OptionsProvider<DocumentFormattingOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.FromResult(_globalOptions.GetDocumentFormattingOptions());
 
-        ValueTask<SyntaxFormattingOptions> OptionsProvider<SyntaxFormattingOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetSyntaxFormattingOptions(languageServices));
+        ValueTask<SyntaxFormattingOptions> OptionsProvider<SyntaxFormattingOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                _globalOptions.GetSyntaxFormattingOptions(languageServices)
+            );
 
-        ValueTask<SimplifierOptions> OptionsProvider<SimplifierOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetSimplifierOptions(languageServices));
+        ValueTask<SimplifierOptions> OptionsProvider<SimplifierOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.FromResult(_globalOptions.GetSimplifierOptions(languageServices));
 
-        ValueTask<AddImportPlacementOptions> OptionsProvider<AddImportPlacementOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetAddImportPlacementOptions(languageServices));
+        ValueTask<AddImportPlacementOptions> OptionsProvider<AddImportPlacementOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                _globalOptions.GetAddImportPlacementOptions(languageServices)
+            );
 
-        ValueTask<OrganizeImportsOptions> OptionsProvider<OrganizeImportsOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetOrganizeImportsOptions(languageServices.Language));
+        ValueTask<OrganizeImportsOptions> OptionsProvider<OrganizeImportsOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                _globalOptions.GetOrganizeImportsOptions(languageServices.Language)
+            );
 
-        ValueTask<CodeCleanupOptions> OptionsProvider<CodeCleanupOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetCodeCleanupOptions(languageServices));
+        ValueTask<CodeCleanupOptions> OptionsProvider<CodeCleanupOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.FromResult(_globalOptions.GetCodeCleanupOptions(languageServices));
 
-        ValueTask<CodeGenerationOptions> OptionsProvider<CodeGenerationOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetCodeGenerationOptions(languageServices));
+        ValueTask<CodeGenerationOptions> OptionsProvider<CodeGenerationOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.FromResult(_globalOptions.GetCodeGenerationOptions(languageServices));
 
-        ValueTask<NamingStylePreferences> OptionsProvider<NamingStylePreferences>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetNamingStylePreferences(languageServices.Language));
+        ValueTask<NamingStylePreferences> OptionsProvider<NamingStylePreferences>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                _globalOptions.GetNamingStylePreferences(languageServices.Language)
+            );
 
-        ValueTask<CleanCodeGenerationOptions> OptionsProvider<CleanCodeGenerationOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetCleanCodeGenerationOptions(languageServices));
+        ValueTask<CleanCodeGenerationOptions> OptionsProvider<CleanCodeGenerationOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                _globalOptions.GetCleanCodeGenerationOptions(languageServices)
+            );
 
-        ValueTask<CodeAndImportGenerationOptions> OptionsProvider<CodeAndImportGenerationOptions>.GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetCodeAndImportGenerationOptions(languageServices));
+        ValueTask<CodeAndImportGenerationOptions> OptionsProvider<CodeAndImportGenerationOptions>.GetOptionsAsync(
+            LanguageServices languageServices,
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                _globalOptions.GetCodeAndImportGenerationOptions(languageServices)
+            );
     }
 }

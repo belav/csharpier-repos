@@ -82,7 +82,13 @@ namespace System.Web.Mvc.Test
             OutputCacheAttribute attr = new OutputCacheAttribute();
 
             // Act & assert
-            MemberHelper.TestBooleanProperty(attr, "NoStore", false /* initialValue */, false /* testDefaultValue */);
+            MemberHelper.TestBooleanProperty(
+                attr,
+                "NoStore",
+                false /* initialValue */
+                ,
+                false /* testDefaultValue */
+            );
         }
 
         [Fact]
@@ -93,7 +99,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnResultExecuting(null); }, "filterContext");
+                delegate
+                {
+                    attr.OnResultExecuting(null);
+                },
+                "filterContext"
+            );
         }
 
         [Theory]
@@ -110,13 +121,16 @@ namespace System.Web.Mvc.Test
             // Act & assert
             Assert.Throws<InvalidOperationException>(
                 () => attr.OnActionExecuting(context.Object),
-                "Duration must be a positive number.");
+                "Duration must be a positive number."
+            );
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        public void OnActionExecuting_Throws_IfVaryByParamIsNullOrEmptyAndDurationIsPositive(string varyByParam)
+        public void OnActionExecuting_Throws_IfVaryByParamIsNullOrEmptyAndDurationIsPositive(
+            string varyByParam
+        )
         {
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute();
@@ -128,7 +142,8 @@ namespace System.Web.Mvc.Test
             // Act & assert
             Assert.Throws<InvalidOperationException>(
                 () => attr.OnActionExecuting(context.Object),
-                "VaryByParam must be '*', 'none', or a semicolon-delimited list of keys.");
+                "VaryByParam must be '*', 'none', or a semicolon-delimited list of keys."
+            );
         }
 
         [Fact]
@@ -143,7 +158,8 @@ namespace System.Web.Mvc.Test
             // Act & assert
             Assert.Throws<InvalidOperationException>(
                 () => attr.OnActionExecuting(context.Object),
-                "OutputCacheAttribute for child actions only supports Duration, VaryByCustom, and VaryByParam values. Please do not set CacheProfile, Location, NoStore, SqlDependency, VaryByContentEncoding, or VaryByHeader values for child actions.");
+                "OutputCacheAttribute for child actions only supports Duration, VaryByCustom, and VaryByParam values. Please do not set CacheProfile, Location, NoStore, SqlDependency, VaryByContentEncoding, or VaryByHeader values for child actions."
+            );
         }
 
         [Fact]
@@ -221,7 +237,12 @@ namespace System.Web.Mvc.Test
             context.Setup(c => c.IsChildAction).Returns(true);
 
             // Act & assert
-            Assert.Throws<InvalidOperationException>(delegate { attr.OnActionExecuting(context.Object); });
+            Assert.Throws<InvalidOperationException>(
+                delegate
+                {
+                    attr.OnActionExecuting(context.Object);
+                }
+            );
         }
 
         [Fact]
@@ -230,13 +251,18 @@ namespace System.Web.Mvc.Test
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute()
             {
-                Location = OutputCacheLocation.None
+                Location = OutputCacheLocation.None,
             };
             Mock<ActionExecutingContext> context = new Mock<ActionExecutingContext>();
             context.Setup(c => c.IsChildAction).Returns(true);
 
             // Act & assert
-            Assert.DoesNotThrow(delegate { attr.OnActionExecuting(context.Object); });
+            Assert.DoesNotThrow(
+                delegate
+                {
+                    attr.OnActionExecuting(context.Object);
+                }
+            );
         }
 
         // GetChildActionUniqueId
@@ -280,12 +306,16 @@ namespace System.Web.Mvc.Test
             // Arrange
             var attr = new OutputCacheAttribute { VaryByCustom = "foo" };
             var application1 = new Mock<HttpApplication>();
-            application1.Setup(a => a.GetVaryByCustomString(It.IsAny<HttpContext>(), "foo")).Returns("1");
+            application1
+                .Setup(a => a.GetVaryByCustomString(It.IsAny<HttpContext>(), "foo"))
+                .Returns("1");
             var context1 = new MockActionExecutingContext();
             context1.SetupGet(c => c.HttpContext.ApplicationInstance).Returns(application1.Object);
 
             var application2 = new Mock<HttpApplication>();
-            application2.Setup(a => a.GetVaryByCustomString(It.IsAny<HttpContext>(), "foo")).Returns("2");
+            application2
+                .Setup(a => a.GetVaryByCustomString(It.IsAny<HttpContext>(), "foo"))
+                .Returns("2");
             var context2 = new MockActionExecutingContext();
             context2.SetupGet(c => c.HttpContext.ApplicationInstance).Returns(application2.Object);
 
@@ -413,8 +443,11 @@ namespace System.Web.Mvc.Test
             Assert.NotEqual(result1, result2);
         }
 
-        public static TheoryDataSet<ActionExecutingContext, string, string>
-            GetUniqueIdFromActionParameters_ReturnsValuesThatExistInFilterContextData
+        public static TheoryDataSet<
+            ActionExecutingContext,
+            string,
+            string
+        > GetUniqueIdFromActionParameters_ReturnsValuesThatExistInFilterContextData
         {
             get
             {
@@ -438,7 +471,11 @@ namespace System.Web.Mvc.Test
                 context2.ActionParameters["shouldnot-exist"] = "shouldnot-exist";
                 context2.ActionParameters["test2"] = "test2-value";
 
-                theoryData.Add(context2.Object, "test;test2", "[4]TEST[10]test-value[5]TEST2[11]test2-value");
+                theoryData.Add(
+                    context2.Object,
+                    "test;test2",
+                    "[4]TEST[10]test-value[5]TEST2[11]test2-value"
+                );
                 theoryData.Add(context2.Object, "test;test3", "[4]TEST[10]test-value[5]TEST3[-1]");
 
                 MockActionExecutingContext context3 = new MockActionExecutingContext();
@@ -451,7 +488,10 @@ namespace System.Web.Mvc.Test
         [Theory]
         [PropertyData("GetUniqueIdFromActionParameters_ReturnsValuesThatExistInFilterContextData")]
         public static void BuildUniqueIdFromActionParameters_UsesValuesForActionParametersThatExistInVaryByParams(
-            ActionExecutingContext context, string varyByParam, string expected)
+            ActionExecutingContext context,
+            string varyByParam,
+            string expected
+        )
         {
             // Arrange
             StringBuilder builder = new StringBuilder();
@@ -469,14 +509,17 @@ namespace System.Web.Mvc.Test
         [InlineData("FOO;bAr")]
         [InlineData("foo;bar")]
         public static void BuildUniqueIdFromActionParameters_LooksUpActionParametersInCaseInsensitiveManner(
-            string varyByParam)
+            string varyByParam
+        )
         {
             // Arrange
             MockActionExecutingContext context = new MockActionExecutingContext();
-            Dictionary<string, object> dictionary = new Dictionary<string, object>(StringComparer.Ordinal)
+            Dictionary<string, object> dictionary = new Dictionary<string, object>(
+                StringComparer.Ordinal
+            )
             {
-                { "foo",  "foo-value" },
-                { "Bar", "bar-value" }
+                { "foo", "foo-value" },
+                { "Bar", "bar-value" },
             };
             context.ActionParameters = dictionary;
             string expected = "[3]FOO[9]foo-value[3]BAR[9]bar-value";
@@ -495,7 +538,9 @@ namespace System.Web.Mvc.Test
         [InlineData("none")]
         [InlineData("NONE")]
         [InlineData("None")]
-        public static void BuildUniqueIdFromActionParameters_NoOpsIfVaryByParamIsNone(string varyByParam)
+        public static void BuildUniqueIdFromActionParameters_NoOpsIfVaryByParamIsNone(
+            string varyByParam
+        )
         {
             // Arrange
             StringBuilder builder = new StringBuilder();
@@ -587,15 +632,14 @@ namespace System.Web.Mvc.Test
 
         public static IEnumerable<object[]> GetChildActionUniqueId_VariesByActionParametersData
         {
-            get
-            {
-                return VaryByParamWithWhitespaceData.Select(v => new[] { v });
-            }
+            get { return VaryByParamWithWhitespaceData.Select(v => new[] { v }); }
         }
 
         [Theory]
         [PropertyData("GetChildActionUniqueId_VariesByActionParametersData")]
-        public void GetChildActionUniqueId_VariesByActionParameters_OnlyVariesByGivenParameters(string varbyParam)
+        public void GetChildActionUniqueId_VariesByActionParameters_OnlyVariesByGivenParameters(
+            string varbyParam
+        )
         {
             // Arrange
             string expected = "z2Fr6HAipKCkLdVkHMdHgeDBJyYutdqqTW07BMO31fQ=";
@@ -624,16 +668,16 @@ namespace System.Web.Mvc.Test
 
         public static IEnumerable<object[]> GetChildActionUniqueId_VariesByActionParameters_WithDifferentValuesData
         {
-            get
-            {
-                return VaryByParamWithWhitespaceData.Select(v => new[] { v, "20", "34" });
-            }
+            get { return VaryByParamWithWhitespaceData.Select(v => new[] { v, "20", "34" }); }
         }
 
         [Theory]
         [PropertyData("GetChildActionUniqueId_VariesByActionParameters_WithDifferentValuesData")]
         public void GetChildActionUniqueId_VariesByActionParameters_OnlyVariesByTheGivenParameters_MultipleSpecified_WithDifferentValues(
-            string varyByParam, string value1, string value2)
+            string varyByParam,
+            string value1,
+            string value2
+        )
         {
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute { VaryByParam = varyByParam };
@@ -660,7 +704,10 @@ namespace System.Web.Mvc.Test
         [Theory]
         [PropertyData("GetChildActionUniqueId_VariesByActionParameters_WithDifferentValuesData")]
         public void GetChildActionUniqueId_VariesByActionParameters_OnlyVariesByTheGivenParameters_MultipleSpecified_Whitespace_DifferentSecond(
-            string varyByParam, string value1, string value2)
+            string varyByParam,
+            string value1,
+            string value2
+        )
         {
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute { VaryByParam = varyByParam };
@@ -686,7 +733,10 @@ namespace System.Web.Mvc.Test
         [Theory]
         [PropertyData("GetChildActionUniqueId_VariesByActionParameters_WithDifferentValuesData")]
         public void GetChildActionUniqueId_VariesByActionParameters_OnlyVariesByTheGivenParameters_MultipleSpecified_Whitespace_DifferentThird(
-            string varyByParam, string value1, string value2)
+            string varyByParam,
+            string value1,
+            string value2
+        )
         {
             // Arrange
             OutputCacheAttribute attr = new OutputCacheAttribute { VaryByParam = varyByParam };
@@ -713,7 +763,10 @@ namespace System.Web.Mvc.Test
         public void GetChildActionUniqueId_VariesByActionParameters_MatchesActionParametersInCaseInsensitiveManner()
         {
             // Arrange
-            OutputCacheAttribute attr = new OutputCacheAttribute { VaryByParam = "foo ; bar ; blap" };
+            OutputCacheAttribute attr = new OutputCacheAttribute
+            {
+                VaryByParam = "foo ; bar ; blap",
+            };
             MockActionExecutingContext context1 = new MockActionExecutingContext();
             context1.ActionParameters["foo"] = "1";
             context1.ActionParameters["BAR"] = "2";
@@ -827,7 +880,10 @@ namespace System.Web.Mvc.Test
         [InlineData("bar", "VmmIPvA0bdX40A9EDzcQdDGenn9mW2fLitLhN3Q+q0o=")]
         [InlineData("*", "lRpCzLPVjS7Lwbix/vbtbdUWELWQOxiJaVemFCgM0ew=")]
         [InlineData("none", "IA6+zemlkqp8Ye59mwMEMYGo69mUVkAcFLa5z0keL50=")]
-        public void GetChildActionUniqueId_ReturnsDifferentValuesIfVaryByParamValueIsModified(string varyByParam, string expected)
+        public void GetChildActionUniqueId_ReturnsDifferentValuesIfVaryByParamValueIsModified(
+            string varyByParam,
+            string expected
+        )
         {
             // Arrange
             MockActionExecutingContext context = new MockActionExecutingContext();
@@ -853,7 +909,9 @@ namespace System.Web.Mvc.Test
         class MockActionExecutingContext : Mock<ActionExecutingContext>
         {
             // StringComparer.OrdinalIgnoreCase matches the behavior of ControllerActionInvoker.
-            public Dictionary<string, object> ActionParameters = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            public Dictionary<string, object> ActionParameters = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             public MockActionExecutingContext()
             {

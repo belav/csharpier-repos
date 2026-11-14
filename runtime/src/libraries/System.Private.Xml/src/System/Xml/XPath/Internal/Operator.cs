@@ -11,37 +11,43 @@ namespace MS.Internal.Xml.XPath
         public enum Op
         { // order is aligned with XPathOperator
             INVALID,
+
             /*Logical   */
             OR,
             AND,
+
             /*Equality  */
             EQ,
             NE,
+
             /*Relational*/
             LT,
             LE,
             GT,
             GE,
+
             /*Arithmetic*/
             PLUS,
             MINUS,
             MUL,
             DIV,
             MOD,
+
             /*Union     */
             UNION,
         };
 
-        private static readonly Op[] s_invertOp = {
-            /*INVALID*/ Op.INVALID,
-            /*OR     */ Op.INVALID,
-            /*END    */ Op.INVALID,
-            /*EQ     */ Op.EQ,
-            /*NE     */ Op.NE,
-            /*LT     */ Op.GT,
-            /*LE     */ Op.GE,
-            /*GT     */ Op.LT,
-            /*GE     */ Op.LE,
+        private static readonly Op[] s_invertOp =
+        {
+            /*INVALID*/Op.INVALID,
+            /*OR     */Op.INVALID,
+            /*END    */Op.INVALID,
+            /*EQ     */Op.EQ,
+            /*NE     */Op.NE,
+            /*LT     */Op.GT,
+            /*LE     */Op.GE,
+            /*GT     */Op.LT,
+            /*GE     */Op.LE,
         };
 
         public static Operator.Op InvertOperator(Operator.Op op)
@@ -61,7 +67,10 @@ namespace MS.Internal.Xml.XPath
             _opnd2 = opnd2;
         }
 
-        public override AstType Type { get { return AstType.Operator; } }
+        public override AstType Type
+        {
+            get { return AstType.Operator; }
+        }
         public override XPathResultType ReturnType
         {
             get
@@ -78,8 +87,17 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public Op OperatorType { get { return _opType; } }
-        public AstNode Operand1 { get { return _opnd1; } }
-        public AstNode Operand2 { get { return _opnd2; } }
+        public Op OperatorType
+        {
+            get { return _opType; }
+        }
+        public AstNode Operand1
+        {
+            get { return _opnd1; }
+        }
+        public AstNode Operand2
+        {
+            get { return _opnd2; }
+        }
     }
 }

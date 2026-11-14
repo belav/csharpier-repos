@@ -57,13 +57,24 @@ namespace System.Numerics.Tests
             // Log Method - base = NaN
             for (int i = 0; i < s_samples; i++)
             {
-                Assert.True(double.IsNaN(BigInteger.Log(new BigInteger(GetRandomByteArray(s_random, 10)), double.NaN)));
+                Assert.True(
+                    double.IsNaN(
+                        BigInteger.Log(new BigInteger(GetRandomByteArray(s_random, 10)), double.NaN)
+                    )
+                );
             }
 
             // Log Method - base = +Infinity
             for (int i = 0; i < s_samples; i++)
             {
-                Assert.True(double.IsNaN(BigInteger.Log(new BigInteger(GetRandomByteArray(s_random, 10)), double.PositiveInfinity)));
+                Assert.True(
+                    double.IsNaN(
+                        BigInteger.Log(
+                            new BigInteger(GetRandomByteArray(s_random, 10)),
+                            double.PositiveInfinity
+                        )
+                    )
+                );
             }
 
             // Log Method - Log(0,1)
@@ -75,7 +86,14 @@ namespace System.Numerics.Tests
                 tempByteArray1 = GetRandomByteArray(s_random, 10);
                 tempByteArray2 = GetRandomNegByteArray(s_random, 1);
                 VerifyLogString(Print(tempByteArray2) + Print(tempByteArray1) + "bLog");
-                Assert.True(double.IsNaN(BigInteger.Log(new BigInteger(GetRandomByteArray(s_random, 10)), -s_random.NextDouble())));
+                Assert.True(
+                    double.IsNaN(
+                        BigInteger.Log(
+                            new BigInteger(GetRandomByteArray(s_random, 10)),
+                            -s_random.NextDouble()
+                        )
+                    )
+                );
             }
 
             // Log Method - value < 0
@@ -91,15 +109,21 @@ namespace System.Numerics.Tests
             {
                 BigInteger temp = new BigInteger(GetRandomPosByteArray(s_random, 10));
                 double newbase = Math.Min(s_random.NextDouble(), 0.5);
-                Assert.True(ApproxEqual(BigInteger.Log(temp, newbase), Math.Log((double)temp, newbase)));
+                Assert.True(
+                    ApproxEqual(BigInteger.Log(temp, newbase), Math.Log((double)temp, newbase))
+                );
             }
 
             // Log Method - Large BigInteger and 0<base<0.5
             for (int i = 0; i < s_samples; i++)
             {
-                BigInteger temp = new BigInteger(GetRandomPosByteArray(s_random, s_random.Next(1, 100)));
+                BigInteger temp = new BigInteger(
+                    GetRandomPosByteArray(s_random, s_random.Next(1, 100))
+                );
                 double newbase = Math.Min(s_random.NextDouble(), 0.5);
-                Assert.True(ApproxEqual(BigInteger.Log(temp, newbase), Math.Log((double)temp, newbase)));
+                Assert.True(
+                    ApproxEqual(BigInteger.Log(temp, newbase), Math.Log((double)temp, newbase))
+                );
             }
 
             // Log Method - two small BigIntegers
@@ -128,7 +152,6 @@ namespace System.Numerics.Tests
 
             // Log Method - Very Large BigInteger 1 << 128 << Int.MaxValue and 2
             LargeValueLogTests(128, 1);
-
         }
 
         [Fact]
@@ -146,7 +169,12 @@ namespace System.Numerics.Tests
         /// VerifyLogString() can not operate such large values,
         /// Math.Log() can not operate such large values
         /// </summary>
-        private static void LargeValueLogTests(int startShift, int bigShiftLoopLimit, int smallShift = 0, int smallShiftLoopLimit = 1)
+        private static void LargeValueLogTests(
+            int startShift,
+            int bigShiftLoopLimit,
+            int smallShift = 0,
+            int smallShiftLoopLimit = 1
+        )
         {
             BigInteger init = BigInteger.One << startShift;
             double logbase = 2D;
@@ -155,16 +183,15 @@ namespace System.Numerics.Tests
             {
                 BigInteger temp = init << ((i + 1) * smallShift);
 
-                for (int j = 0; j<bigShiftLoopLimit; j++)
+                for (int j = 0; j < bigShiftLoopLimit; j++)
                 {
                     temp = temp << (int.MaxValue / 10);
                     double expected =
-                        (double)startShift +
-                        smallShift * (double)(i + 1) +
-                        (int.MaxValue / 10) * (double)(j + 1);
+                        (double)startShift
+                        + smallShift * (double)(i + 1)
+                        + (int.MaxValue / 10) * (double)(j + 1);
                     Assert.True(ApproxEqual(BigInteger.Log(temp, logbase), expected));
                 }
-
             }
         }
 

@@ -13,11 +13,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InlayHintResolveHandlerFactory()
-        {
-        }
+        public InlayHintResolveHandlerFactory() { }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
             var inlayHintCache = lspServices.GetRequiredService<InlayHintCache>();
             return new InlayHintResolveHandler(inlayHintCache);

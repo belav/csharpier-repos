@@ -9,7 +9,6 @@ namespace System.IdentityModel.Selectors
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Xml;
-
     using Microsoft.InfoCards.Diagnostics;
     using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
@@ -25,8 +24,6 @@ namespace System.IdentityModel.Selectors
         NativePolicyElement m_nativeElement;
 
         IntPtr m_nativePtr;
-
-
 
         //
         // Parameters:
@@ -46,10 +43,7 @@ namespace System.IdentityModel.Selectors
 
         public static int Size
         {
-            get
-            {
-                return Marshal.SizeOf(typeof(NativePolicyElement));
-            }
+            get { return Marshal.SizeOf(typeof(NativePolicyElement)); }
         }
 
         //
@@ -81,7 +75,8 @@ namespace System.IdentityModel.Selectors
             m_nativeElement.targetEndpointAddress = target;
             m_nativeElement.issuerEndpointAddress = issuer;
             m_nativeElement.issuedTokenParameters = tokenParameters;
-            m_nativeElement.policyNoticeLink = null != m_element.PolicyNoticeLink ? m_element.PolicyNoticeLink.ToString() : null;
+            m_nativeElement.policyNoticeLink =
+                null != m_element.PolicyNoticeLink ? m_element.PolicyNoticeLink.ToString() : null;
             m_nativeElement.policyNoticeVersion = m_element.PolicyNoticeVersion;
             m_nativeElement.isManagedCardProvider = m_element.IsManagedIssuer;
 
@@ -102,7 +97,6 @@ namespace System.IdentityModel.Selectors
 
         private void Dispose(bool disposing)
         {
-
             if (IntPtr.Zero != m_nativePtr)
             {
                 Marshal.DestroyStructure(m_nativePtr, typeof(NativePolicyElement));
@@ -112,7 +106,6 @@ namespace System.IdentityModel.Selectors
             {
                 GC.SuppressFinalize(this);
             }
-
         }
     }
 }

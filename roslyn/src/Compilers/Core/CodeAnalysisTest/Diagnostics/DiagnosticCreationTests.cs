@@ -16,8 +16,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         {
             var defaultSeverity = DiagnosticSeverity.Info;
             var effectiveSeverity = DiagnosticSeverity.Error;
-            var descriptor = new DiagnosticDescriptor("ID", "Title", "MessageFormat", "Category", defaultSeverity, isEnabledByDefault: true);
-            var diagnostic = Diagnostic.Create(descriptor, Location.None, effectiveSeverity, additionalLocations: null, properties: null);
+            var descriptor = new DiagnosticDescriptor(
+                "ID",
+                "Title",
+                "MessageFormat",
+                "Category",
+                defaultSeverity,
+                isEnabledByDefault: true
+            );
+            var diagnostic = Diagnostic.Create(
+                descriptor,
+                Location.None,
+                effectiveSeverity,
+                additionalLocations: null,
+                properties: null
+            );
             Assert.Equal(effectiveSeverity, diagnostic.Severity);
             Assert.Equal(0, diagnostic.WarningLevel);
         }

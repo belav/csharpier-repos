@@ -37,5 +37,5 @@ public enum EntityState
     /// <summary>
     ///     The entity is being tracked by the context but does not yet exist in the database.
     /// </summary>
-    Added = 4
+    Added = 4,
 }

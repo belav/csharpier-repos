@@ -50,24 +50,63 @@ namespace System.ComponentModel.Tests
         {
             var attribute = new ComplexBindingPropertiesAttribute("dataSource", "dataMember");
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new ComplexBindingPropertiesAttribute("dataSource", "dataMember"), true };
+            yield return new object[]
+            {
+                attribute,
+                new ComplexBindingPropertiesAttribute("dataSource", "dataMember"),
+                true,
+            };
 
-            yield return new object[] { attribute, new ComplexBindingPropertiesAttribute("other", "dataMember"), false };
-            yield return new object[] { attribute, new ComplexBindingPropertiesAttribute(null, "dataMember"), false };
+            yield return new object[]
+            {
+                attribute,
+                new ComplexBindingPropertiesAttribute("other", "dataMember"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ComplexBindingPropertiesAttribute(null, "dataMember"),
+                false,
+            };
 
-            yield return new object[] { attribute, new ComplexBindingPropertiesAttribute("dataSource", "other"), false };
-            yield return new object[] { attribute, new ComplexBindingPropertiesAttribute("dataSource", null), false };
+            yield return new object[]
+            {
+                attribute,
+                new ComplexBindingPropertiesAttribute("dataSource", "other"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ComplexBindingPropertiesAttribute("dataSource", null),
+                false,
+            };
 
-            yield return new object[] { ComplexBindingPropertiesAttribute.Default, new ComplexBindingPropertiesAttribute(), true };
+            yield return new object[]
+            {
+                ComplexBindingPropertiesAttribute.Default,
+                new ComplexBindingPropertiesAttribute(),
+                true,
+            };
 
-            yield return new object[] { new ComplexBindingPropertiesAttribute(), new object(), false };
+            yield return new object[]
+            {
+                new ComplexBindingPropertiesAttribute(),
+                new object(),
+                false,
+            };
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
         }
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(ComplexBindingPropertiesAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            ComplexBindingPropertiesAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }

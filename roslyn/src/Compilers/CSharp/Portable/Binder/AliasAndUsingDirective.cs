@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.UsingDirectiveReference = usingDirective?.GetReference();
         }
 
-        public UsingDirectiveSyntax? UsingDirective => (UsingDirectiveSyntax?)UsingDirectiveReference?.GetSyntax();
+        public UsingDirectiveSyntax? UsingDirective =>
+            (UsingDirectiveSyntax?)UsingDirectiveReference?.GetSyntax();
     }
 }

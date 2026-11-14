@@ -38,7 +38,7 @@ namespace Roslyn.Test.Performance.Utilities
         private readonly StringBuilder _buffer = new StringBuilder();
 
         /// <summary>
-        /// Constructs a new ConsoleAndFileLogger with a default log 
+        /// Constructs a new ConsoleAndFileLogger with a default log
         /// file of 'log.txt'.
         /// </summary>
         public ConsoleAndFileLogger()

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,72 +27,78 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Web.Security;
 using System.IdentityModel.Selectors;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
+using System.Web.Security;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class UserNamePasswordServiceCredential
-	{
-		internal UserNamePasswordServiceCredential ()
-		{
-		}
+    public sealed class UserNamePasswordServiceCredential
+    {
+        internal UserNamePasswordServiceCredential() { }
 
-		MembershipProvider provider;
-		TimeSpan lifetime = TimeSpan.FromMinutes (15);
-		bool cache_tokens, include_win_groups = true;
-		int max_cache_tokens = 0x80;
-		UserNamePasswordValidator validator;
-		UserNamePasswordValidationMode mode;
+        MembershipProvider provider;
+        TimeSpan lifetime = TimeSpan.FromMinutes(15);
+        bool cache_tokens,
+            include_win_groups = true;
+        int max_cache_tokens = 0x80;
+        UserNamePasswordValidator validator;
+        UserNamePasswordValidationMode mode;
 
-		internal UserNamePasswordServiceCredential Clone ()
-		{
-			return (UserNamePasswordServiceCredential) MemberwiseClone ();
-		}
+        internal UserNamePasswordServiceCredential Clone()
+        {
+            return (UserNamePasswordServiceCredential)MemberwiseClone();
+        }
 
-		[MonoTODO]
-		public UserNamePasswordValidationMode UserNamePasswordValidationMode {
-			get { return mode; }
-			set { mode = value; }
-		}
+        [MonoTODO]
+        public UserNamePasswordValidationMode UserNamePasswordValidationMode
+        {
+            get { return mode; }
+            set { mode = value; }
+        }
 
-		[MonoTODO]
-		public bool CacheLogonTokens {
-			get { return cache_tokens; }
-			set { cache_tokens = value; }
-		}
+        [MonoTODO]
+        public bool CacheLogonTokens
+        {
+            get { return cache_tokens; }
+            set { cache_tokens = value; }
+        }
 
-		[MonoTODO]
-		public TimeSpan CachedLogonTokenLifetime {
-			get { return lifetime; }
-			set { lifetime = value; }
-		}
+        [MonoTODO]
+        public TimeSpan CachedLogonTokenLifetime
+        {
+            get { return lifetime; }
+            set { lifetime = value; }
+        }
 
-		[MonoTODO]
-		public bool IncludeWindowsGroups {
-			get { return include_win_groups; }
-			set { include_win_groups = value; }
-		}
+        [MonoTODO]
+        public bool IncludeWindowsGroups
+        {
+            get { return include_win_groups; }
+            set { include_win_groups = value; }
+        }
 
-		[MonoTODO]
-		public int MaxCachedLogonTokens {
-			get { return max_cache_tokens; }
-			set { max_cache_tokens = value; }
-		}
+        [MonoTODO]
+        public int MaxCachedLogonTokens
+        {
+            get { return max_cache_tokens; }
+            set { max_cache_tokens = value; }
+        }
 
-		public UserNamePasswordValidator CustomUserNamePasswordValidator {
-			get { return validator; }
-			set { validator = value; }
-		}
+        public UserNamePasswordValidator CustomUserNamePasswordValidator
+        {
+            get { return validator; }
+            set { validator = value; }
+        }
 
-		public MembershipProvider MembershipProvider {
-			get { return provider; }
-			set { provider = value; }
-		}
-	}
+        public MembershipProvider MembershipProvider
+        {
+            get { return provider; }
+            set { provider = value; }
+        }
+    }
 }

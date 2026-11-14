@@ -37,7 +37,10 @@ namespace Microsoft.Extensions.Http.Logging
         /// <returns>The task object representing the asynchronous operation. The result of the operation is a context object that will
         /// be passed to a corresponding <see cref="LogRequestStopAsync"/> or <see cref="LogRequestFailedAsync"/>. Can be `null`
         /// if no context object is needed by the implementation.</returns>
-        ValueTask<object?> LogRequestStartAsync(HttpRequestMessage request, CancellationToken cancellationToken = default);
+        ValueTask<object?> LogRequestStartAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Logs after receiving an HTTP response.
@@ -48,7 +51,13 @@ namespace Microsoft.Extensions.Http.Logging
         /// <param name="elapsed">Time elapsed since calling <see cref="LogRequestStartAsync"/>.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        ValueTask LogRequestStopAsync(object? context, HttpRequestMessage request, HttpResponseMessage response, TimeSpan elapsed, CancellationToken cancellationToken = default);
+        ValueTask LogRequestStopAsync(
+            object? context,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            TimeSpan elapsed,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Logs the exception happened while sending an HTTP request.
@@ -60,6 +69,13 @@ namespace Microsoft.Extensions.Http.Logging
         /// <param name="elapsed">Time elapsed since calling <see cref="LogRequestStartAsync"/>.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        ValueTask LogRequestFailedAsync(object? context, HttpRequestMessage request, HttpResponseMessage? response, Exception exception, TimeSpan elapsed, CancellationToken cancellationToken = default);
+        ValueTask LogRequestFailedAsync(
+            object? context,
+            HttpRequestMessage request,
+            HttpResponseMessage? response,
+            Exception exception,
+            TimeSpan elapsed,
+            CancellationToken cancellationToken = default
+        );
     }
 }

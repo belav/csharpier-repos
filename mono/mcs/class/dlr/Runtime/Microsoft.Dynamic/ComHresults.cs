@@ -1,30 +1,32 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Microsoft Public License. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Microsoft Public License, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Microsoft Public License. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Microsoft Public License, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Microsoft Public License.
  *
  * You must not remove this notice, or any other, from this software.
  *
  *
  * ***************************************************************************/
-using System; using Microsoft;
-
+using System;
+using Microsoft;
 
 #if !SILVERLIGHT // ComObject
 
 #if CODEPLEX_40
-namespace System.Dynamic {
+namespace System.Dynamic
+{
 #else
-namespace Microsoft.Scripting {
+namespace Microsoft.Scripting
+{
 #endif
 
-    internal static class ComHresults {
-    
+    internal static class ComHresults
+    {
         internal const int S_OK = 0;
 
         internal const int CONNECT_E_NOCONNECTION = unchecked((int)0x80040200);
@@ -49,7 +51,8 @@ namespace Microsoft.Scripting {
 
         internal const int TYPE_E_LIBNOTREGISTERED = unchecked((int)0x8002801D);
 
-        internal static bool IsSuccess(int hresult) {
+        internal static bool IsSuccess(int hresult)
+        {
             return hresult >= 0;
         }
     }

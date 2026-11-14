@@ -48,6 +48,6 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         ProtectedOrFriend = ProtectedOrInternal,
 
-        Public = 6
+        Public = 6,
     }
 }

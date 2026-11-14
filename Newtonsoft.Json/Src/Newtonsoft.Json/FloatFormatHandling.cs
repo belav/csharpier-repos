@@ -47,6 +47,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Write special floating point values as the property's default value in JSON, e.g. 0.0 for a <see cref="Double"/> property, <c>null</c> for a <see cref="Nullable{T}"/> of <see cref="Double"/> property.
         /// </summary>
-        DefaultValue = 2
+        DefaultValue = 2,
     }
 }

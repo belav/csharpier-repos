@@ -15,12 +15,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     internal static class SymbolStore
     {
         // The RuntimeBinder uses a global lock when Binding that keeps this dictionary safe.
-        private static readonly Dictionary<Key, Symbol> s_dictionary = new Dictionary<Key, Symbol>();
+        private static readonly Dictionary<Key, Symbol> s_dictionary =
+            new Dictionary<Key, Symbol>();
 
         public static Symbol LookupSym(Name name, ParentSymbol parent, symbmask_t kindmask)
         {
             RuntimeBinder.EnsureLockIsTaken();
-            return s_dictionary.TryGetValue(new Key(name, parent), out Symbol sym) ? FindCorrectKind(sym, kindmask) : null;
+            return s_dictionary.TryGetValue(new Key(name, parent), out Symbol sym)
+                ? FindCorrectKind(sym, kindmask)
+                : null;
         }
 
         public static void InsertChild(ParentSymbol parent, Symbol child)
@@ -89,7 +92,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             public bool Equals(Key other) => _name == other._name && _parent == other._parent;
 
 #if  DEBUG
-            [ExcludeFromCodeCoverage(Justification = "Typed overload should always be the method called")]
+            [ExcludeFromCodeCoverage(
+                Justification = "Typed overload should always be the method called"
+            )]
 #endif
             public override bool Equals(object obj)
             {

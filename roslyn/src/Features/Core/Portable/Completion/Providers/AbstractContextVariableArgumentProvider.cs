@@ -17,7 +17,12 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         protected abstract string ThisOrMeKeyword { get; }
 
-        protected abstract bool IsInstanceContext(SyntaxTree syntaxTree, SyntaxToken targetToken, SemanticModel semanticModel, CancellationToken cancellationToken);
+        protected abstract bool IsInstanceContext(
+            SyntaxTree syntaxTree,
+            SyntaxToken targetToken,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        );
 
         public override async Task ProvideArgumentAsync(ArgumentContext context)
         {
@@ -27,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 return;
             }
 
-            var requireExactType = context.Parameter.Type.IsSpecialType()
-                || context.Parameter.RefKind != RefKind.None;
+            var requireExactType =
+                context.Parameter.Type.IsSpecialType() || context.Parameter.RefKind != RefKind.None;
             var symbols = context.SemanticModel.LookupSymbols(context.Position);
 
             // First try to find a local variable
@@ -66,8 +71,14 @@ namespace Microsoft.CodeAnalysis.Completion
                     continue;
 
                 // Require a name match for primitive types
-                if (candidate.GetSymbolType().IsSpecialType()
-                    && !string.Equals(candidate.Name, context.Parameter.Name, StringComparison.OrdinalIgnoreCase))
+                if (
+                    candidate.GetSymbolType().IsSpecialType()
+                    && !string.Equals(
+                        candidate.Name,
+                        context.Parameter.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     continue;
                 }
@@ -83,11 +94,31 @@ namespace Microsoft.CodeAnalysis.Completion
 
             // Finally, if the invocation occurs in an instance context, check the current type ('this' or 'Me')
             var tree = context.SemanticModel.SyntaxTree;
-            var targetToken = await tree.GetTouchingTokenAsync(context.Position, context.CancellationToken).ConfigureAwait(false);
-            if (IsInstanceContext(tree, targetToken, context.SemanticModel, context.CancellationToken))
+            var targetToken = await tree.GetTouchingTokenAsync(
+                    context.Position,
+                    context.CancellationToken
+                )
+                .ConfigureAwait(false);
+            if (
+                IsInstanceContext(
+                    tree,
+                    targetToken,
+                    context.SemanticModel,
+                    context.CancellationToken
+                )
+            )
             {
-                var enclosingSymbol = context.SemanticModel.GetEnclosingSymbol(targetToken.SpanStart, context.CancellationToken);
-                while (enclosingSymbol is IMethodSymbol { MethodKind: MethodKind.LocalFunction or MethodKind.AnonymousFunction })
+                var enclosingSymbol = context.SemanticModel.GetEnclosingSymbol(
+                    targetToken.SpanStart,
+                    context.CancellationToken
+                );
+                while (
+                    enclosingSymbol
+                        is IMethodSymbol
+                        {
+                            MethodKind: MethodKind.LocalFunction or MethodKind.AnonymousFunction
+                        }
+                )
                 {
                     // It is allowed to reference the instance (`this`) within a local function or anonymous function,
                     // as long as the containing method allows it
@@ -114,12 +145,18 @@ namespace Microsoft.CodeAnalysis.Completion
                     return;
                 }
 
-                if (requireExactType && !SymbolEqualityComparer.Default.Equals(context.Parameter.Type, symbolType))
+                if (
+                    requireExactType
+                    && !SymbolEqualityComparer.Default.Equals(context.Parameter.Type, symbolType)
+                )
                 {
                     return;
                 }
 
-                var conversion = context.SemanticModel.Compilation.ClassifyCommonConversion(symbolType, context.Parameter.Type);
+                var conversion = context.SemanticModel.Compilation.ClassifyCommonConversion(
+                    symbolType,
+                    context.Parameter.Type
+                );
                 if (!conversion.IsImplicit)
                 {
                     return;
@@ -155,8 +192,18 @@ namespace Microsoft.CodeAnalysis.Completion
                 if (string.Equals(bestSymbol.Name, context.Parameter.Name))
                     return string.Equals(symbol.Name, context.Parameter.Name);
 
-                if (string.Equals(bestSymbol.Name, context.Parameter.Name, StringComparison.OrdinalIgnoreCase))
-                    return string.Equals(symbol.Name, context.Parameter.Name, StringComparison.OrdinalIgnoreCase);
+                if (
+                    string.Equals(
+                        bestSymbol.Name,
+                        context.Parameter.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                    return string.Equals(
+                        symbol.Name,
+                        context.Parameter.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    );
 
                 return true;
             }

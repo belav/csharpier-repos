@@ -17,11 +17,11 @@ namespace System
         {
             // The managed calli to the newobj allocator, plus its first argument (MethodTable*).
             // In the case of the COM allocator, first arg is ComClassFactory*, not MethodTable*.
-            private readonly delegate*<void*, object?> _pfnAllocator;
+            private readonly delegate* <void*, object?> _pfnAllocator;
             private readonly void* _allocatorFirstArg;
 
             // The managed calli to the parameterless ctor, taking "this" (as object) as its first argument.
-            private readonly delegate*<object?, void> _pfnCtor;
+            private readonly delegate* <object?, void> _pfnCtor;
             private readonly bool _ctorIsPublic;
 
 #if DEBUG
@@ -44,9 +44,13 @@ namespace System
 
                 try
                 {
-                    RuntimeTypeHandle.GetActivationInfo(rt,
-                        out _pfnAllocator!, out _allocatorFirstArg,
-                        out _pfnCtor!, out _ctorIsPublic);
+                    RuntimeTypeHandle.GetActivationInfo(
+                        rt,
+                        out _pfnAllocator!,
+                        out _allocatorFirstArg,
+                        out _pfnCtor!,
+                        out _ctorIsPublic
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -54,15 +58,25 @@ namespace System
                     // the type name. Let's include it here to improve the
                     // debugging experience for our callers.
 
-                    string friendlyMessage = SR.Format(SR.Activator_CannotCreateInstance, rt, ex.Message);
+                    string friendlyMessage = SR.Format(
+                        SR.Activator_CannotCreateInstance,
+                        rt,
+                        ex.Message
+                    );
                     switch (ex)
                     {
-                        case ArgumentException: throw new ArgumentException(friendlyMessage);
-                        case PlatformNotSupportedException: throw new PlatformNotSupportedException(friendlyMessage);
-                        case NotSupportedException: throw new NotSupportedException(friendlyMessage);
-                        case MethodAccessException: throw new MethodAccessException(friendlyMessage);
-                        case MissingMethodException: throw new MissingMethodException(friendlyMessage);
-                        case MemberAccessException: throw new MemberAccessException(friendlyMessage);
+                        case ArgumentException:
+                            throw new ArgumentException(friendlyMessage);
+                        case PlatformNotSupportedException:
+                            throw new PlatformNotSupportedException(friendlyMessage);
+                        case NotSupportedException:
+                            throw new NotSupportedException(friendlyMessage);
+                        case MethodAccessException:
+                            throw new MethodAccessException(friendlyMessage);
+                        case MissingMethodException:
+                            throw new MissingMethodException(friendlyMessage);
+                        case MemberAccessException:
+                            throw new MemberAccessException(friendlyMessage);
                     }
 
                     throw; // can't make a friendlier message, rethrow original exception
@@ -72,8 +86,10 @@ namespace System
 
                 if (_pfnAllocator == null)
                 {
-                    Debug.Assert(Nullable.GetUnderlyingType(rt) != null,
-                        "Null allocator should only be returned for Nullable<T>.");
+                    Debug.Assert(
+                        Nullable.GetUnderlyingType(rt) != null,
+                        "Null allocator should only be returned for Nullable<T>."
+                    );
 
                     static object? ReturnNull(void* _) => null;
                     _pfnAllocator = &ReturnNull;
@@ -112,9 +128,15 @@ namespace System
 #if DEBUG
                 if (_originalRuntimeType != rt)
                 {
-                    Debug.Fail("Caller passed the wrong RuntimeType to this routine."
-                        + Environment.NewLineConst + "Expected: " + (_originalRuntimeType ?? (object)"<null>")
-                        + Environment.NewLineConst + "Actual: " + (rt ?? (object)"<null>"));
+                    Debug.Fail(
+                        "Caller passed the wrong RuntimeType to this routine."
+                            + Environment.NewLineConst
+                            + "Expected: "
+                            + (_originalRuntimeType ?? (object)"<null>")
+                            + Environment.NewLineConst
+                            + "Actual: "
+                            + (rt ?? (object)"<null>")
+                    );
                 }
 #endif
 
@@ -124,7 +146,8 @@ namespace System
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal void CallConstructor(object? uninitializedObject) => _pfnCtor(uninitializedObject);
+            internal void CallConstructor(object? uninitializedObject) =>
+                _pfnCtor(uninitializedObject);
         }
     }
 }

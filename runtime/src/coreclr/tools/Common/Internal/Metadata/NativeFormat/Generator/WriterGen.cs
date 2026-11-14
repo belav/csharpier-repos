@@ -4,9 +4,7 @@
 class WriterGen : CsWriter
 {
     public WriterGen(string fileName)
-        : base(fileName)
-    {
-    }
+        : base(fileName) { }
 
     public void EmitSource()
     {
@@ -44,7 +42,9 @@ class WriterGen : CsWriter
         if ((record.Flags & RecordDefFlags.ReentrantEquals) != 0)
         {
             OpenScope($"public {record.Name}()");
-            WriteLine("_equalsReentrancyGuard = new ThreadLocal<ReentrancyGuardStack>(() => new ReentrancyGuardStack());");
+            WriteLine(
+                "_equalsReentrancyGuard = new ThreadLocal<ReentrancyGuardStack>(() => new ReentrancyGuardStack());"
+            );
             CloseScope();
         }
 
@@ -81,25 +81,32 @@ class WriterGen : CsWriter
             if ((member.Flags & MemberDefFlags.NotPersisted) != 0)
                 continue;
 
-            if ((record.Flags & RecordDefFlags.CustomCompare) != 0 && (member.Flags & MemberDefFlags.Compare) == 0)
+            if (
+                (record.Flags & RecordDefFlags.CustomCompare) != 0
+                && (member.Flags & MemberDefFlags.Compare) == 0
+            )
                 continue;
 
             if ((member.Flags & MemberDefFlags.Sequence) != 0)
             {
                 if ((member.Flags & MemberDefFlags.CustomCompare) != 0)
-                    WriteLine($"if (!{member.Name}.SequenceEqual(other.{member.Name}, {member.TypeName}Comparer.Instance)) return false;");
+                    WriteLine(
+                        $"if (!{member.Name}.SequenceEqual(other.{member.Name}, {member.TypeName}Comparer.Instance)) return false;"
+                    );
                 else
-                    WriteLine($"if (!{member.Name}.SequenceEqual(other.{member.Name})) return false;");
+                    WriteLine(
+                        $"if (!{member.Name}.SequenceEqual(other.{member.Name})) return false;"
+                    );
             }
-            else
-            if ((member.Flags & (MemberDefFlags.Map | MemberDefFlags.RecordRef)) != 0)
+            else if ((member.Flags & (MemberDefFlags.Map | MemberDefFlags.RecordRef)) != 0)
             {
                 WriteLine($"if (!Object.Equals({member.Name}, other.{member.Name})) return false;");
             }
-            else
-            if ((member.Flags & MemberDefFlags.CustomCompare) != 0)
+            else if ((member.Flags & MemberDefFlags.CustomCompare) != 0)
             {
-                WriteLine($"if (!CustomComparer.Equals({member.Name}, other.{member.Name})) return false;");
+                WriteLine(
+                    $"if (!CustomComparer.Equals({member.Name}, other.{member.Name})) return false;"
+                );
             }
             else
             {
@@ -137,36 +144,44 @@ class WriterGen : CsWriter
             if ((member.Flags & MemberDefFlags.NotPersisted) != 0)
                 continue;
 
-            if ((record.Flags & RecordDefFlags.CustomCompare) != 0 && (member.Flags & MemberDefFlags.Compare) == 0)
+            if (
+                (record.Flags & RecordDefFlags.CustomCompare) != 0
+                && (member.Flags & MemberDefFlags.Compare) == 0
+            )
                 continue;
 
             if (member.TypeName as string == "ConstantStringValue")
             {
-                WriteLine($"hash = ((hash << 13) - (hash >> 19)) ^ ({member.Name} == null ? 0 : {member.Name}.GetHashCode());");
+                WriteLine(
+                    $"hash = ((hash << 13) - (hash >> 19)) ^ ({member.Name} == null ? 0 : {member.Name}.GetHashCode());"
+                );
             }
-            else
-            if ((member.Flags & MemberDefFlags.Array) != 0)
+            else if ((member.Flags & MemberDefFlags.Array) != 0)
             {
                 WriteLine($"for (int i = 0; i < {member.Name}.Length; i++)");
                 WriteLine("{");
-                WriteLine($"    hash = ((hash << 13) - (hash >> 19)) ^ {member.Name}[i].GetHashCode();");
+                WriteLine(
+                    $"    hash = ((hash << 13) - (hash >> 19)) ^ {member.Name}[i].GetHashCode();"
+                );
                 WriteLine("}");
             }
-            else
-            if ((member.Flags & (MemberDefFlags.List | MemberDefFlags.Map)) != 0)
+            else if ((member.Flags & (MemberDefFlags.List | MemberDefFlags.Map)) != 0)
             {
                 if ((member.Flags & MemberDefFlags.EnumerateForHashCode) == 0)
                     continue;
 
                 WriteLine($"for (int i = 0; i < {member.Name}.Count; i++)");
                 WriteLine("{");
-                WriteLine($"    hash = ((hash << 13) - (hash >> 19)) ^ ({member.Name}[i] == null ? 0 : {member.Name}[i].GetHashCode());");
+                WriteLine(
+                    $"    hash = ((hash << 13) - (hash >> 19)) ^ ({member.Name}[i] == null ? 0 : {member.Name}[i].GetHashCode());"
+                );
                 WriteLine("}");
             }
-            else
-            if ((member.Flags & MemberDefFlags.RecordRef) != 0 || isConstantStringValue)
+            else if ((member.Flags & MemberDefFlags.RecordRef) != 0 || isConstantStringValue)
             {
-                WriteLine($"hash = ((hash << 13) - (hash >> 19)) ^ ({member.Name} == null ? 0 : {member.Name}.GetHashCode());");
+                WriteLine(
+                    $"hash = ((hash << 13) - (hash >> 19)) ^ ({member.Name} == null ? 0 : {member.Name}.GetHashCode());"
+                );
             }
             else
             {
@@ -197,15 +212,19 @@ class WriterGen : CsWriter
                 {
                     WriteLine($"Debug.Assert({member.Name}.TrueForAll(handle => handle == null ||");
                     for (int i = 0; i < typeSet.Length; i++)
-                        WriteLine($"    handle.HandleType == HandleType.{typeSet[i]}"
-                            + ((i == typeSet.Length - 1) ? "));" : " ||"));
+                        WriteLine(
+                            $"    handle.HandleType == HandleType.{typeSet[i]}"
+                                + ((i == typeSet.Length - 1) ? "));" : " ||")
+                        );
                 }
                 else
                 {
                     WriteLine($"Debug.Assert({member.Name} == null ||");
                     for (int i = 0; i < typeSet.Length; i++)
-                        WriteLine($"    {member.Name}.HandleType == HandleType.{typeSet[i]}"
-                            + ((i == typeSet.Length - 1) ? ");" : " ||"));
+                        WriteLine(
+                            $"    {member.Name}.HandleType == HandleType.{typeSet[i]}"
+                                + ((i == typeSet.Length - 1) ? ");" : " ||")
+                        );
                 }
             }
             WriteLine($"writer.Write({member.Name});");

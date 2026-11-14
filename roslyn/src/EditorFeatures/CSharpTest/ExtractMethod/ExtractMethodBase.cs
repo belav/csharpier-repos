@@ -25,32 +25,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
     [UseExportProvider]
     public class ExtractMethodBase
     {
-        protected static async Task ExpectExtractMethodToFailAsync(string codeWithMarker, bool dontPutOutOrRefOnStruct = true, string[] features = null)
+        protected static async Task ExpectExtractMethodToFailAsync(
+            string codeWithMarker,
+            bool dontPutOutOrRefOnStruct = true,
+            string[] features = null
+        )
         {
             ParseOptions parseOptions = null;
             if (features != null)
             {
-                var featuresMapped = features.Select(x => new KeyValuePair<string, string>(x, string.Empty));
+                var featuresMapped = features.Select(x => new KeyValuePair<string, string>(
+                    x,
+                    string.Empty
+                ));
                 parseOptions = new CSharpParseOptions().WithFeatures(featuresMapped);
             }
 
-            using var workspace = TestWorkspace.CreateCSharp(codeWithMarker, parseOptions: parseOptions);
+            using var workspace = TestWorkspace.CreateCSharp(
+                codeWithMarker,
+                parseOptions: parseOptions
+            );
             var testDocument = workspace.Documents.First();
             var textSpan = testDocument.SelectedSpans.Single();
-            var treeAfterExtractMethod = await ExtractMethodAsync(workspace, testDocument, succeed: false, dontPutOutOrRefOnStruct: dontPutOutOrRefOnStruct);
+            var treeAfterExtractMethod = await ExtractMethodAsync(
+                workspace,
+                testDocument,
+                succeed: false,
+                dontPutOutOrRefOnStruct: dontPutOutOrRefOnStruct
+            );
         }
 
         protected static async Task ExpectExtractMethodToFailAsync(
             string codeWithMarker,
             string expected,
             bool dontPutOutOrRefOnStruct = true,
-            CSharpParseOptions parseOptions = null)
+            CSharpParseOptions parseOptions = null
+        )
         {
-            using var workspace = TestWorkspace.CreateCSharp(codeWithMarker, parseOptions: parseOptions);
+            using var workspace = TestWorkspace.CreateCSharp(
+                codeWithMarker,
+                parseOptions: parseOptions
+            );
             var testDocument = workspace.Documents.Single();
             var subjectBuffer = testDocument.GetTextBuffer();
 
-            var tree = await ExtractMethodAsync(workspace, testDocument, succeed: false, dontPutOutOrRefOnStruct: dontPutOutOrRefOnStruct);
+            var tree = await ExtractMethodAsync(
+                workspace,
+                testDocument,
+                succeed: false,
+                dontPutOutOrRefOnStruct: dontPutOutOrRefOnStruct
+            );
 
             using (var edit = subjectBuffer.CreateEdit())
             {
@@ -68,11 +92,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         {
             using (var workspace = TestWorkspace.CreateCSharp(codeWithMarker))
             {
-                Assert.NotNull(await Record.ExceptionAsync(async () =>
-                {
-                    var testDocument = workspace.Documents.Single();
-                    var tree = await ExtractMethodAsync(workspace, testDocument);
-                }));
+                Assert.NotNull(
+                    await Record.ExceptionAsync(async () =>
+                    {
+                        var testDocument = workspace.Documents.Single();
+                        var tree = await ExtractMethodAsync(workspace, testDocument);
+                    })
+                );
             }
         }
 
@@ -81,15 +107,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             string expected,
             bool temporaryFailing = false,
             bool dontPutOutOrRefOnStruct = true,
-            CSharpParseOptions parseOptions = null)
+            CSharpParseOptions parseOptions = null
+        )
         {
-            using var workspace = TestWorkspace.CreateCSharp(codeWithMarker, parseOptions: parseOptions);
+            using var workspace = TestWorkspace.CreateCSharp(
+                codeWithMarker,
+                parseOptions: parseOptions
+            );
             var testDocument = workspace.Documents.Single();
             var subjectBuffer = testDocument.GetTextBuffer();
 
             var tree = await ExtractMethodAsync(
-                workspace, testDocument,
-                dontPutOutOrRefOnStruct: dontPutOutOrRefOnStruct);
+                workspace,
+                testDocument,
+                dontPutOutOrRefOnStruct: dontPutOutOrRefOnStruct
+            );
 
             using (var edit = subjectBuffer.CreateEdit())
             {
@@ -120,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             TestWorkspace workspace,
             TestHostDocument testDocument,
             bool succeed = true,
-            bool dontPutOutOrRefOnStruct = true)
+            bool dontPutOutOrRefOnStruct = true
+        )
         {
             var document = workspace.CurrentSolution.GetDocument(testDocument.Id);
             Assert.NotNull(document);
@@ -129,13 +162,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             {
                 CodeGenerationOptions = CodeGenerationOptions.GetDefault(document.Project.Services),
                 CodeCleanupOptions = CodeCleanupOptions.GetDefault(document.Project.Services),
-                ExtractOptions = new() { DoNotPutOutOrRefOnStruct = dontPutOutOrRefOnStruct }
+                ExtractOptions = new() { DoNotPutOutOrRefOnStruct = dontPutOutOrRefOnStruct },
             };
 
-            var semanticDocument = await SemanticDocument.CreateAsync(document, CancellationToken.None);
-            var validator = new CSharpSelectionValidator(semanticDocument, testDocument.SelectedSpans.Single(), options.ExtractOptions, localFunction: false);
+            var semanticDocument = await SemanticDocument.CreateAsync(
+                document,
+                CancellationToken.None
+            );
+            var validator = new CSharpSelectionValidator(
+                semanticDocument,
+                testDocument.SelectedSpans.Single(),
+                options.ExtractOptions,
+                localFunction: false
+            );
 
-            var (selectedCode, status) = await validator.GetValidSelectionAsync(CancellationToken.None);
+            var (selectedCode, status) = await validator.GetValidSelectionAsync(
+                CancellationToken.None
+            );
             if (!succeed && status.Failed)
                 return null;
 
@@ -147,7 +190,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             Assert.NotNull(result);
 
             // If the test expects us to succeed, validate that we did.  If it expects us to fail, ensure we either
-            // failed or produced a message the user will have to confirm to continue. 
+            // failed or produced a message the user will have to confirm to continue.
             if (succeed)
             {
                 Assert.Equal(succeed, result.Succeeded);
@@ -161,22 +204,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             }
 
             var (doc, _) = await result.GetDocumentAsync(CancellationToken.None);
-            return doc == null
-                ? null
-                : await doc.GetSyntaxRootAsync();
+            return doc == null ? null : await doc.GetSyntaxRootAsync();
         }
 
-        protected static async Task TestSelectionAsync(string codeWithMarker, bool expectedFail = false, CSharpParseOptions parseOptions = null, TextSpan? textSpanOverride = null)
+        protected static async Task TestSelectionAsync(
+            string codeWithMarker,
+            bool expectedFail = false,
+            CSharpParseOptions parseOptions = null,
+            TextSpan? textSpanOverride = null
+        )
         {
-            using var workspace = TestWorkspace.CreateCSharp(codeWithMarker, parseOptions: parseOptions);
+            using var workspace = TestWorkspace.CreateCSharp(
+                codeWithMarker,
+                parseOptions: parseOptions
+            );
             var testDocument = workspace.Documents.Single();
             var namedSpans = testDocument.AnnotatedSpans;
 
             var document = workspace.CurrentSolution.GetDocument(testDocument.Id);
             Assert.NotNull(document);
 
-            var semanticDocument = await SemanticDocument.CreateAsync(document, CancellationToken.None);
-            var validator = new CSharpSelectionValidator(semanticDocument, textSpanOverride ?? namedSpans["b"].Single(), ExtractMethodOptions.Default, localFunction: false);
+            var semanticDocument = await SemanticDocument.CreateAsync(
+                document,
+                CancellationToken.None
+            );
+            var validator = new CSharpSelectionValidator(
+                semanticDocument,
+                textSpanOverride ?? namedSpans["b"].Single(),
+                ExtractMethodOptions.Default,
+                localFunction: false
+            );
             var (result, status) = await validator.GetValidSelectionAsync(CancellationToken.None);
 
             if (expectedFail)
@@ -194,17 +251,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
 
         protected static async Task IterateAllAsync(string code)
         {
-            using var workspace = TestWorkspace.CreateCSharp(code, CodeAnalysis.CSharp.Test.Utilities.TestOptions.Regular);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                CodeAnalysis.CSharp.Test.Utilities.TestOptions.Regular
+            );
             var document = workspace.CurrentSolution.GetDocument(workspace.Documents.First().Id);
             Assert.NotNull(document);
 
-            var semanticDocument = await SemanticDocument.CreateAsync(document, CancellationToken.None);
+            var semanticDocument = await SemanticDocument.CreateAsync(
+                document,
+                CancellationToken.None
+            );
             var root = await document.GetSyntaxRootAsync();
             var iterator = root.DescendantNodesAndSelf().Cast<SyntaxNode>();
 
             foreach (var node in iterator)
             {
-                var validator = new CSharpSelectionValidator(semanticDocument, node.Span, ExtractMethodOptions.Default, localFunction: false);
+                var validator = new CSharpSelectionValidator(
+                    semanticDocument,
+                    node.Span,
+                    ExtractMethodOptions.Default,
+                    localFunction: false
+                );
                 var (_, status) = await validator.GetValidSelectionAsync(CancellationToken.None);
 
                 // check the obvious case

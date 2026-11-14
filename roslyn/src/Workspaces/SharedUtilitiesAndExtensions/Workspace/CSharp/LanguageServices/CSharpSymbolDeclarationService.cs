@@ -17,12 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSymbolDeclarationService()
-        {
-        }
+        public CSharpSymbolDeclarationService() { }
 
-        public ImmutableArray<SyntaxReference> GetDeclarations(ISymbol symbol)
-            => symbol != null
+        public ImmutableArray<SyntaxReference> GetDeclarations(ISymbol symbol) =>
+            symbol != null
                 ? symbol.DeclaringSyntaxReferences
                 : ImmutableArray<SyntaxReference>.Empty;
     }

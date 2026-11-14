@@ -31,15 +31,20 @@ namespace System.Text.RegularExpressions
 
         /// <summary>Gets the captured span from the input string.</summary>
         /// <value>The span that is captured by the match.</value>
-        public ReadOnlySpan<char> ValueSpan => Text is string text ? text.AsSpan(Index, Length) : ReadOnlySpan<char>.Empty;
+        public ReadOnlySpan<char> ValueSpan =>
+            Text is string text ? text.AsSpan(Index, Length) : ReadOnlySpan<char>.Empty;
 
         /// <summary>Returns the substring that was matched.</summary>
         public override string ToString() => Value;
 
         /// <summary>The substring to the left of the capture</summary>
-        internal ReadOnlyMemory<char> GetLeftSubstring() => Text is string text ? text.AsMemory(0, Index) : ReadOnlyMemory<char>.Empty;
+        internal ReadOnlyMemory<char> GetLeftSubstring() =>
+            Text is string text ? text.AsMemory(0, Index) : ReadOnlyMemory<char>.Empty;
 
         /// <summary>The substring to the right of the capture</summary>
-        internal ReadOnlyMemory<char> GetRightSubstring() => Text is string text ? text.AsMemory(Index + Length, Text.Length - Index - Length) : ReadOnlyMemory<char>.Empty;
+        internal ReadOnlyMemory<char> GetRightSubstring() =>
+            Text is string text
+                ? text.AsMemory(Index + Length, Text.Length - Index - Length)
+                : ReadOnlyMemory<char>.Empty;
     }
 }

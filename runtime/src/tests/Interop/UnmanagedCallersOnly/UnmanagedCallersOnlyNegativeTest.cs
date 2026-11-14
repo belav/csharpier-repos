@@ -8,8 +8,8 @@ using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Xunit;
 using InvalidCSharp;
+using Xunit;
 
 public unsafe class Program
 {
@@ -35,12 +35,16 @@ public unsafe class Program
     [UnmanagedCallersOnly]
     public static void CallbackViaCalli(int val)
     {
-        Assert.Fail($"Functions with attribute {nameof(UnmanagedCallersOnlyAttribute)} cannot be called via calli");
+        Assert.Fail(
+            $"Functions with attribute {nameof(UnmanagedCallersOnlyAttribute)} cannot be called via calli"
+        );
     }
 
     public static void NegativeTest_ViaCalli()
     {
-        Console.WriteLine($"{nameof(NegativeTest_ViaCalli)} function via calli instruction. The CLR _will_ crash.");
+        Console.WriteLine(
+            $"{nameof(NegativeTest_ViaCalli)} function via calli instruction. The CLR _will_ crash."
+        );
 
         // It is not possible to catch the resulting ExecutionEngineException exception.
         // To observe the crashing behavior set a breakpoint in the ReversePInvokeBadTransition() function
@@ -49,7 +53,7 @@ public unsafe class Program
 
         static void TestNativeMethod()
         {
-            ((delegate*<int, void>)(delegate* unmanaged<int, void>)&CallbackViaCalli)(1234);
+            ((delegate* <int, void>)(delegate* unmanaged<int, void>)&CallbackViaCalli)(1234);
         }
     }
 }

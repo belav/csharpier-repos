@@ -7,7 +7,5 @@ namespace System.Runtime.InteropServices.Marshalling
     /// Specifies that this marshaller entry-point type is a contiguous collection marshaller.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public sealed class ContiguousCollectionMarshallerAttribute : Attribute
-    {
-    }
+    public sealed class ContiguousCollectionMarshallerAttribute : Attribute { }
 }

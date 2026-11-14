@@ -9,7 +9,7 @@ namespace System.DirectoryServices.ActiveDirectory
     public enum ActiveDirectoryTransportType
     {
         Rpc = 0,
-        Smtp = 1
+        Smtp = 1,
     }
 
     public class ReplicationNeighbor
@@ -31,7 +31,7 @@ namespace System.DirectoryServices.ActiveDirectory
             DisableScheduledSync = 0x08000000,
             CompressChanges = 0x10000000,
             NoChangeNotifications = 0x20000000,
-            PartialAttributeSet = 0x40000000
+            PartialAttributeSet = 0x40000000,
         }
 
         private readonly string? _sourceServerDN;
@@ -88,7 +88,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     else if (_sourceServerDN != null)
                     {
-                        _sourceServer = Utils.GetServerNameFromInvocationID(_sourceServerDN, SourceInvocationId, _server);
+                        _sourceServer = Utils.GetServerNameFromInvocationID(
+                            _sourceServerDN,
+                            SourceInvocationId,
+                            _server
+                        );
                         // add it to the hashtable
                         _nameTable.Add(SourceInvocationId, _sourceServer);
                     }

@@ -17,10 +17,9 @@ namespace System.Data.Mapping
     /// </summary>
     internal abstract class Map : GlobalItem
     {
-        protected Map() 
-            : base(MetadataFlags.Readonly) 
-        {
-        }
+        protected Map()
+            : base(MetadataFlags.Readonly) { }
+
         #region Properties
         /// <summary>
         /// Returns the Item that is being mapped either for ES or OE spaces.

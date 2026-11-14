@@ -12,7 +12,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal sealed partial class TopLevelSyntaxTreeIndex : AbstractSyntaxIndex<TopLevelSyntaxTreeIndex>
+    internal sealed partial class TopLevelSyntaxTreeIndex
+        : AbstractSyntaxIndex<TopLevelSyntaxTreeIndex>
     {
         private readonly DeclarationInfo _declarationInfo;
         private readonly ExtensionMethodInfo _extensionMethodInfo;
@@ -22,7 +23,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private TopLevelSyntaxTreeIndex(
             Checksum? checksum,
             DeclarationInfo declarationInfo,
-            ExtensionMethodInfo extensionMethodInfo)
+            ExtensionMethodInfo extensionMethodInfo
+        )
             : base(checksum)
         {
             _declarationInfo = declarationInfo;
@@ -31,35 +33,102 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             _declaredSymbolInfoSet = new(() => new(this.DeclaredSymbolInfos));
         }
 
-        public ImmutableArray<DeclaredSymbolInfo> DeclaredSymbolInfos => _declarationInfo.DeclaredSymbolInfos;
+        public ImmutableArray<DeclaredSymbolInfo> DeclaredSymbolInfos =>
+            _declarationInfo.DeclaredSymbolInfos;
 
         /// <summary>
         /// Same as <see cref="DeclaredSymbolInfos"/>, just stored as a set for easy containment checks.
         /// </summary>
         public HashSet<DeclaredSymbolInfo> DeclaredSymbolInfoSet => _declaredSymbolInfoSet.Value;
 
-        public ImmutableDictionary<string, ImmutableArray<int>> ReceiverTypeNameToExtensionMethodMap
-            => _extensionMethodInfo.ReceiverTypeNameToExtensionMethodMap;
+        public ImmutableDictionary<
+            string,
+            ImmutableArray<int>
+        > ReceiverTypeNameToExtensionMethodMap =>
+            _extensionMethodInfo.ReceiverTypeNameToExtensionMethodMap;
 
-        public bool ContainsExtensionMethod
-            => _extensionMethodInfo.ContainsExtensionMethod;
+        public bool ContainsExtensionMethod => _extensionMethodInfo.ContainsExtensionMethod;
 
-        public static ValueTask<TopLevelSyntaxTreeIndex> GetRequiredIndexAsync(Document document, CancellationToken cancellationToken)
-            => GetRequiredIndexAsync(SolutionKey.ToSolutionKey(document.Project.Solution), document.Project.State, (DocumentState)document.State, cancellationToken);
+        public static ValueTask<TopLevelSyntaxTreeIndex> GetRequiredIndexAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) =>
+            GetRequiredIndexAsync(
+                SolutionKey.ToSolutionKey(document.Project.Solution),
+                document.Project.State,
+                (DocumentState)document.State,
+                cancellationToken
+            );
 
-        public static ValueTask<TopLevelSyntaxTreeIndex> GetRequiredIndexAsync(SolutionKey solutionKey, ProjectState project, DocumentState document, CancellationToken cancellationToken)
-            => GetRequiredIndexAsync(solutionKey, project, document, ReadIndex, CreateIndex, cancellationToken);
+        public static ValueTask<TopLevelSyntaxTreeIndex> GetRequiredIndexAsync(
+            SolutionKey solutionKey,
+            ProjectState project,
+            DocumentState document,
+            CancellationToken cancellationToken
+        ) =>
+            GetRequiredIndexAsync(
+                solutionKey,
+                project,
+                document,
+                ReadIndex,
+                CreateIndex,
+                cancellationToken
+            );
 
-        public static ValueTask<TopLevelSyntaxTreeIndex?> GetIndexAsync(Document document, CancellationToken cancellationToken)
-            => GetIndexAsync(SolutionKey.ToSolutionKey(document.Project.Solution), document.Project.State, (DocumentState)document.State, cancellationToken);
+        public static ValueTask<TopLevelSyntaxTreeIndex?> GetIndexAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) =>
+            GetIndexAsync(
+                SolutionKey.ToSolutionKey(document.Project.Solution),
+                document.Project.State,
+                (DocumentState)document.State,
+                cancellationToken
+            );
 
-        public static ValueTask<TopLevelSyntaxTreeIndex?> GetIndexAsync(SolutionKey solutionKey, ProjectState project, DocumentState document, CancellationToken cancellationToken)
-            => GetIndexAsync(solutionKey, project, document, ReadIndex, CreateIndex, cancellationToken);
+        public static ValueTask<TopLevelSyntaxTreeIndex?> GetIndexAsync(
+            SolutionKey solutionKey,
+            ProjectState project,
+            DocumentState document,
+            CancellationToken cancellationToken
+        ) =>
+            GetIndexAsync(
+                solutionKey,
+                project,
+                document,
+                ReadIndex,
+                CreateIndex,
+                cancellationToken
+            );
 
-        public static ValueTask<TopLevelSyntaxTreeIndex?> GetIndexAsync(Document document, bool loadOnly, CancellationToken cancellationToken)
-            => GetIndexAsync(SolutionKey.ToSolutionKey(document.Project.Solution), document.Project.State, (DocumentState)document.State, loadOnly, cancellationToken);
+        public static ValueTask<TopLevelSyntaxTreeIndex?> GetIndexAsync(
+            Document document,
+            bool loadOnly,
+            CancellationToken cancellationToken
+        ) =>
+            GetIndexAsync(
+                SolutionKey.ToSolutionKey(document.Project.Solution),
+                document.Project.State,
+                (DocumentState)document.State,
+                loadOnly,
+                cancellationToken
+            );
 
-        public static ValueTask<TopLevelSyntaxTreeIndex?> GetIndexAsync(SolutionKey solutionKey, ProjectState project, DocumentState document, bool loadOnly, CancellationToken cancellationToken)
-            => GetIndexAsync(solutionKey, project, document, loadOnly, ReadIndex, CreateIndex, cancellationToken);
+        public static ValueTask<TopLevelSyntaxTreeIndex?> GetIndexAsync(
+            SolutionKey solutionKey,
+            ProjectState project,
+            DocumentState document,
+            bool loadOnly,
+            CancellationToken cancellationToken
+        ) =>
+            GetIndexAsync(
+                solutionKey,
+                project,
+                document,
+                loadOnly,
+                ReadIndex,
+                CreateIndex,
+                cancellationToken
+            );
     }
 }

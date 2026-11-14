@@ -8,12 +8,15 @@ namespace Microsoft.TestCommon
 {
     public static class RuntimeEnvironment
     {
-        private const string NetFx40FullSubKey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full";
+        private const string NetFx40FullSubKey =
+            @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full";
         private const string Version = "Version";
 
         static RuntimeEnvironment()
         {
-            object runtimeVersion = Registry.LocalMachine.OpenSubKey(RuntimeEnvironment.NetFx40FullSubKey).GetValue(RuntimeEnvironment.Version);
+            object runtimeVersion = Registry
+                .LocalMachine.OpenSubKey(RuntimeEnvironment.NetFx40FullSubKey)
+                .GetValue(RuntimeEnvironment.Version);
             string versionFor40String = runtimeVersion as string;
             if (versionFor40String != null)
             {
@@ -27,7 +30,8 @@ namespace Microsoft.TestCommon
         {
             get
             {
-                return VersionFor40.Major > 4 || (VersionFor40.Major == 4 && VersionFor40.Minor >= 5);
+                return VersionFor40.Major > 4
+                    || (VersionFor40.Major == 4 && VersionFor40.Minor >= 5);
             }
         }
     }

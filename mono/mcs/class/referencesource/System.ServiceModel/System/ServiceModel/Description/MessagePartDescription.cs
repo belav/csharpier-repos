@@ -15,7 +15,7 @@ namespace System.ServiceModel.Description
     public class MessagePartDescription
     {
         XmlName name;
-        string ns;        
+        string ns;
         int index;
         Type type;
         int serializationPosition;
@@ -32,10 +32,16 @@ namespace System.ServiceModel.Description
         {
             if (name == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("name", SR.GetString(SR.SFxParameterNameCannotBeNull));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "name",
+                    SR.GetString(SR.SFxParameterNameCannotBeNull)
+                );
             }
 
-            this.name = new XmlName(name, true /*isEncoded*/);
+            this.name = new XmlName(
+                name,
+                true /*isEncoded*/
+            );
 
             if (!string.IsNullOrEmpty(ns))
             {
@@ -89,7 +95,7 @@ namespace System.ServiceModel.Description
 
         public string Namespace
         {
-            get { return this.ns; }            
+            get { return this.ns; }
         }
 
         public Type Type
@@ -103,21 +109,23 @@ namespace System.ServiceModel.Description
             get { return index; }
             set { index = value; }
         }
-        
+
         [DefaultValue(false)]
         public bool Multiple
         {
             get { return this.multiple; }
             set { this.multiple = value; }
         }
-        
+
         public ProtectionLevel ProtectionLevel
         {
             get { return this.protectionLevel; }
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }

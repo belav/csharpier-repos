@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,44 +34,49 @@ using System;
 using System.Configuration;
 using System.Net.Mail;
 
-namespace System.Net.Configuration {
-
-        public sealed class SmtpSection : ConfigurationSection
+namespace System.Net.Configuration
+{
+    public sealed class SmtpSection : ConfigurationSection
+    {
+        [ConfigurationProperty("deliveryMethod", DefaultValue = "Network")]
+        public SmtpDeliveryMethod DeliveryMethod
         {
-                [ConfigurationProperty ("deliveryMethod", DefaultValue = "Network")]
-                public SmtpDeliveryMethod DeliveryMethod {
-					get { return (SmtpDeliveryMethod) base ["deliveryMethod"]; }
-					set { base ["deliveryMethod"] = value; }
-                }
-
-                [ConfigurationProperty ("deliveryFormat", DefaultValue = SmtpDeliveryFormat.SevenBit)]
-                public SmtpDeliveryFormat DeliveryFormat {
-                                        get { return (SmtpDeliveryFormat) base ["deliveryFormat"]; }
-                                        set { base ["deliveryFormat"] = value; }
-                }
-
-                [ConfigurationProperty ("from")]
-                public string From {
-					get { return (string) base ["from"]; }
-					set { base ["from"] = value; }
-                }
-
-                [ConfigurationProperty ("network")]
-                public SmtpNetworkElement Network {
-					get { return (SmtpNetworkElement) base ["network"]; }
-                }
-
-                [ConfigurationProperty ("specifiedPickupDirectory")]
-                public SmtpSpecifiedPickupDirectoryElement SpecifiedPickupDirectory {
-					get { return (SmtpSpecifiedPickupDirectoryElement) base ["specifiedPickupDirectory"]; }
-                }
-
-		protected override ConfigurationPropertyCollection Properties {
-			// what to do here?
-			get { return base.Properties; }
-		}
+            get { return (SmtpDeliveryMethod)base["deliveryMethod"]; }
+            set { base["deliveryMethod"] = value; }
         }
 
+        [ConfigurationProperty("deliveryFormat", DefaultValue = SmtpDeliveryFormat.SevenBit)]
+        public SmtpDeliveryFormat DeliveryFormat
+        {
+            get { return (SmtpDeliveryFormat)base["deliveryFormat"]; }
+            set { base["deliveryFormat"] = value; }
+        }
+
+        [ConfigurationProperty("from")]
+        public string From
+        {
+            get { return (string)base["from"]; }
+            set { base["from"] = value; }
+        }
+
+        [ConfigurationProperty("network")]
+        public SmtpNetworkElement Network
+        {
+            get { return (SmtpNetworkElement)base["network"]; }
+        }
+
+        [ConfigurationProperty("specifiedPickupDirectory")]
+        public SmtpSpecifiedPickupDirectoryElement SpecifiedPickupDirectory
+        {
+            get { return (SmtpSpecifiedPickupDirectoryElement)base["specifiedPickupDirectory"]; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            // what to do here?
+            get { return base.Properties; }
+        }
+    }
 }
 
 #endif

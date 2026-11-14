@@ -23,10 +23,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             ServiceType = serviceType;
         }
 
-        public static ServiceIdentifier FromDescriptor(ServiceDescriptor serviceDescriptor)
-            => new ServiceIdentifier(serviceDescriptor.ServiceKey, serviceDescriptor.ServiceType);
+        public static ServiceIdentifier FromDescriptor(ServiceDescriptor serviceDescriptor) =>
+            new ServiceIdentifier(serviceDescriptor.ServiceKey, serviceDescriptor.ServiceType);
 
-        public static ServiceIdentifier FromServiceType(Type type) => new ServiceIdentifier(null, type);
+        public static ServiceIdentifier FromServiceType(Type type) =>
+            new ServiceIdentifier(null, type);
 
         public bool Equals(ServiceIdentifier other)
         {
@@ -60,7 +61,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         public bool IsConstructedGenericType => ServiceType.IsConstructedGenericType;
 
-        public ServiceIdentifier GetGenericTypeDefinition() => new ServiceIdentifier(ServiceKey, ServiceType.GetGenericTypeDefinition());
+        public ServiceIdentifier GetGenericTypeDefinition() =>
+            new ServiceIdentifier(ServiceKey, ServiceType.GetGenericTypeDefinition());
 
         public override string? ToString()
         {

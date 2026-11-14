@@ -275,9 +275,8 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var appElement = Browser.MountTestComponent<EventPreventDefaultComponent>();
 
         appElement.FindElement(By.Id("form-1-button")).Click();
-        Browser.Equal(
-            "Event was handled",
-            () => appElement.FindElement(By.Id("event-handled")).Text
+        Browser.Equal("Event was handled", () =>
+            appElement.FindElement(By.Id("event-handled")).Text
         );
     }
 
@@ -422,12 +421,9 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Assert.Equal(string.Empty, output.Text);
 
         // We can trigger a pointer event and receive a PointerEventArgs
-        new Actions(Browser)
-            .Click(elem)
-            .Perform();
-        Browser.Equal(
-            "Microsoft.AspNetCore.Components.Web.PointerEventArgs:mouse",
-            () => output.Text
+        new Actions(Browser).Click(elem).Perform();
+        Browser.Equal("Microsoft.AspNetCore.Components.Web.PointerEventArgs:mouse", () =>
+            output.Text
         );
 
         // We can trigger a drag event and receive a DragEventArgs *on the same handler delegate*

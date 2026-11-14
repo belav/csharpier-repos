@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,33 +26,34 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("9188bc85-f92e-11d2-81ef-0060083a0bcf")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIWeakReference
+    {
+        #region nsIWeakReference
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int QueryReferent([MarshalAs(UnmanagedType.LPStruct)] Guid uuid, out IntPtr result);
 
-	[Guid ("9188bc85-f92e-11d2-81ef-0060083a0bcf")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIWeakReference {
+        #endregion
+    }
 
-#region nsIWeakReference
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int QueryReferent (
-				[MarshalAs (UnmanagedType.LPStruct)]   Guid uuid,
-				  out IntPtr result);
-
-#endregion
-	}
-
-
-	internal class nsWeakReference {
-		public static nsIWeakReference GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWeakReference obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIWeakReference).GUID, obj);
-			return o as nsIWeakReference;
-		}
-	}
+    internal class nsWeakReference
+    {
+        public static nsIWeakReference GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIWeakReference obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIWeakReference).GUID, obj);
+            return o as nsIWeakReference;
+        }
+    }
 }

@@ -12,23 +12,39 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-[ExportLspServiceFactory(typeof(DocumentPullDiagnosticHandler), ProtocolConstants.TypeScriptLanguageContract), Shared]
+[
+    ExportLspServiceFactory(
+        typeof(DocumentPullDiagnosticHandler),
+        ProtocolConstants.TypeScriptLanguageContract
+    ),
+    Shared
+]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal class VSTypeScriptDocumentPullDiagnosticHandlerFactory(
     IDiagnosticAnalyzerService analyzerService,
     IDiagnosticsRefresher diagnosticsRefresher,
-    IGlobalOptionService globalOptions) : DocumentPullDiagnosticHandlerFactory(analyzerService, diagnosticsRefresher, globalOptions)
-{
-}
+    IGlobalOptionService globalOptions
+) : DocumentPullDiagnosticHandlerFactory(analyzerService, diagnosticsRefresher, globalOptions) { }
 
-[ExportLspServiceFactory(typeof(WorkspacePullDiagnosticHandler), ProtocolConstants.TypeScriptLanguageContract), Shared]
+[
+    ExportLspServiceFactory(
+        typeof(WorkspacePullDiagnosticHandler),
+        ProtocolConstants.TypeScriptLanguageContract
+    ),
+    Shared
+]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal class VSTypeScriptWorkspacePullDiagnosticHandler(
     LspWorkspaceRegistrationService registrationService,
     IDiagnosticAnalyzerService analyzerService,
     IDiagnosticsRefresher diagnosticsRefresher,
-    IGlobalOptionService globalOptions) : WorkspacePullDiagnosticHandlerFactory(registrationService, analyzerService, diagnosticsRefresher, globalOptions)
-{
-}
+    IGlobalOptionService globalOptions
+)
+    : WorkspacePullDiagnosticHandlerFactory(
+        registrationService,
+        analyzerService,
+        diagnosticsRefresher,
+        globalOptions
+    ) { }

@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectListCommand.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -23,12 +23,18 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ObjectListCommand.uex' path='docs/doc[@for="ObjectListCommand"]/*' />
-    [
-        PersistName("Command")
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [PersistName("Command")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ObjectListCommand
     {
         private String _name;
@@ -36,9 +42,7 @@ namespace System.Web.UI.MobileControls
         private ObjectListCommandCollection _owner;
 
         /// <include file='doc\ObjectListCommand.uex' path='docs/doc[@for="ObjectListCommand.ObjectListCommand"]/*' />
-        public ObjectListCommand()
-        {
-        }
+        public ObjectListCommand() { }
 
         /// <include file='doc\ObjectListCommand.uex' path='docs/doc[@for="ObjectListCommand.ObjectListCommand1"]/*' />
         public ObjectListCommand(String name, String text)
@@ -48,61 +52,39 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectListCommand.uex' path='docs/doc[@for="ObjectListCommand.Name"]/*' />
-        [
-            DefaultValue("")
-        ]
+        [DefaultValue("")]
         public String Name
         {
-            get
-            {
-                return (_name == null) ? String.Empty : _name;
-            }
-
+            get { return (_name == null) ? String.Empty : _name; }
             set
             {
                 _name = value;
                 if (Owner != null)
                 {
-                    Owner.SetDirty ();
+                    Owner.SetDirty();
                 }
             }
         }
 
         /// <include file='doc\ObjectListCommand.uex' path='docs/doc[@for="ObjectListCommand.Text"]/*' />
-        [
-            DefaultValue("")
-        ]
+        [DefaultValue("")]
         public String Text
         {
-            get
-            {
-                return (_text == null) ? String.Empty : _text;
-            }
-
+            get { return (_text == null) ? String.Empty : _text; }
             set
             {
                 _text = value;
                 if (Owner != null)
                 {
-                    Owner.SetDirty ();
+                    Owner.SetDirty();
                 }
             }
         }
 
         internal ObjectListCommandCollection Owner
         {
-            get
-            {
-                return _owner;
-            }
-
-            set
-            {
-                _owner = value;
-            }
+            get { return _owner; }
+            set { _owner = value; }
         }
     }
 }
-
-
-

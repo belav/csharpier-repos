@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,318 +27,371 @@
 //
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml;
-using System.IO;
 
 namespace System.ServiceModel.Channels
 {
-	internal class AttributeInfo
-	{
-		public string Prefix, Name, Namespace, Value;
-	}
-	
-	internal class AttributeCollection : List<AttributeInfo>
-	{
-		public AttributeCollection ()
-		{
-		}
+    internal class AttributeInfo
+    {
+        public string Prefix,
+            Name,
+            Namespace,
+            Value;
+    }
 
-		public AttributeCollection (AttributeCollection copy)
-			: base (copy)
-		{
-		}
-	}
+    internal class AttributeCollection : List<AttributeInfo>
+    {
+        public AttributeCollection() { }
 
-	internal class XmlReaderMessage : Message
-	{
-		MessageVersion version;
-		XmlDictionaryReader reader;
-		MessageHeaders headers;
-		MessageProperties properties = new MessageProperties ();
-		bool is_empty, is_fault, body_started, body_consumed;
-		int max_headers;
-		AttributeCollection attributes;
+        public AttributeCollection(AttributeCollection copy)
+            : base(copy) { }
+    }
 
-		public XmlReaderMessage (MessageVersion version, XmlDictionaryReader reader, int maxSizeOfHeaders)
-		{
-			this.version = version;
-			this.reader = reader;
-			this.max_headers = maxSizeOfHeaders;
+    internal class XmlReaderMessage : Message
+    {
+        MessageVersion version;
+        XmlDictionaryReader reader;
+        MessageHeaders headers;
+        MessageProperties properties = new MessageProperties();
+        bool is_empty,
+            is_fault,
+            body_started,
+            body_consumed;
+        int max_headers;
+        AttributeCollection attributes;
 
-			ReadEnvelopeStart ();
-		}
+        public XmlReaderMessage(
+            MessageVersion version,
+            XmlDictionaryReader reader,
+            int maxSizeOfHeaders
+        )
+        {
+            this.version = version;
+            this.reader = reader;
+            this.max_headers = maxSizeOfHeaders;
 
-		public override MessageHeaders Headers {
-			get {
-				if (headers == null)
-					ReadHeaders ();
-				return headers;
-			}
-		}
+            ReadEnvelopeStart();
+        }
 
-		public override bool IsEmpty {
-			get {
-				ReadBodyStart ();
-				return is_empty;
-			}
-		}
+        public override MessageHeaders Headers
+        {
+            get
+            {
+                if (headers == null)
+                    ReadHeaders();
+                return headers;
+            }
+        }
 
-		public override bool IsFault {
-			get {
-				ReadBodyStart ();
-				return is_fault;
-			}
-		}
+        public override bool IsEmpty
+        {
+            get
+            {
+                ReadBodyStart();
+                return is_empty;
+            }
+        }
 
-		public override MessageProperties Properties {
-			get { return properties; }
-		}
+        public override bool IsFault
+        {
+            get
+            {
+                ReadBodyStart();
+                return is_fault;
+            }
+        }
 
-		public override MessageVersion Version {
-			get { return version; }
-		}
+        public override MessageProperties Properties
+        {
+            get { return properties; }
+        }
 
-		protected override MessageBuffer OnCreateBufferedCopy (
-			int maxBufferSize)
-		{
-			ReadBodyStart ();
-			var headers = new MessageHeaders (Headers);
-			var props = new MessageProperties (Properties);
-			if (IsEmpty)
-				return new DefaultMessageBuffer (headers, props, attributes);
-			else
-				return new DefaultMessageBuffer (maxBufferSize, headers, props, new XmlReaderBodyWriter (reader), IsFault, attributes);
-		}
+        public override MessageVersion Version
+        {
+            get { return version; }
+        }
 
-		protected override string OnGetBodyAttribute (
-			string localName, string ns)
-		{
-			ReadBodyStart ();
-			var att = attributes.FirstOrDefault (a => a.Name == localName && a.Namespace == ns);
-			return att != null ? att.Value : null;
-		}
+        protected override MessageBuffer OnCreateBufferedCopy(int maxBufferSize)
+        {
+            ReadBodyStart();
+            var headers = new MessageHeaders(Headers);
+            var props = new MessageProperties(Properties);
+            if (IsEmpty)
+                return new DefaultMessageBuffer(headers, props, attributes);
+            else
+                return new DefaultMessageBuffer(
+                    maxBufferSize,
+                    headers,
+                    props,
+                    new XmlReaderBodyWriter(reader),
+                    IsFault,
+                    attributes
+                );
+        }
 
-		protected override XmlDictionaryReader OnGetReaderAtBodyContents ()
-		{
-			if (reader.ReadState == ReadState.Closed)
-				return reader; // silly, but that's what our test expects.
-			ReadBodyStart ();
-			if (is_empty)
-				throw new InvalidOperationException ("The message body is empty.");
-			body_consumed = true;
-			return reader;
-		}
+        protected override string OnGetBodyAttribute(string localName, string ns)
+        {
+            ReadBodyStart();
+            var att = attributes.FirstOrDefault(a => a.Name == localName && a.Namespace == ns);
+            return att != null ? att.Value : null;
+        }
 
-		protected override void OnWriteBodyContents (
-			XmlDictionaryWriter writer)
-		{
-			XmlDictionaryReader reader = GetReaderAtBodyContents ();
-			while (!reader.EOF && reader.NodeType != XmlNodeType.EndElement)
-				writer.WriteNode (reader, false);
-		}
+        protected override XmlDictionaryReader OnGetReaderAtBodyContents()
+        {
+            if (reader.ReadState == ReadState.Closed)
+                return reader; // silly, but that's what our test expects.
+            ReadBodyStart();
+            if (is_empty)
+                throw new InvalidOperationException("The message body is empty.");
+            body_consumed = true;
+            return reader;
+        }
 
-		static readonly char [] whitespaceChars = new char [] {' ', '\t', '\r', '\n'};
+        protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
+        {
+            XmlDictionaryReader reader = GetReaderAtBodyContents();
+            while (!reader.EOF && reader.NodeType != XmlNodeType.EndElement)
+                writer.WriteNode(reader, false);
+        }
 
-		void ReadEnvelopeStart ()
-		{
-			reader.MoveToContent ();
-			if (reader.IsEmptyElement)
-				throw new ArgumentException ("Missing message content XML.");
-			reader.ReadStartElement ("Envelope", Version.Envelope.Namespace);
+        static readonly char[] whitespaceChars = new char[] { ' ', '\t', '\r', '\n' };
 
-			// SOAP Header
-			reader.MoveToContent ();
-		}
+        void ReadEnvelopeStart()
+        {
+            reader.MoveToContent();
+            if (reader.IsEmptyElement)
+                throw new ArgumentException("Missing message content XML.");
+            reader.ReadStartElement("Envelope", Version.Envelope.Namespace);
 
-		void ReadHeaders ()
-		{
-			if (headers != null)
-				throw new InvalidOperationException ("XmlReader at headers is already consumed.");
+            // SOAP Header
+            reader.MoveToContent();
+        }
 
-			string envNS = Version.Envelope.Namespace;
+        void ReadHeaders()
+        {
+            if (headers != null)
+                throw new InvalidOperationException("XmlReader at headers is already consumed.");
 
-			headers = new MessageHeaders (version);
-			if (reader.LocalName != "Header" || reader.NamespaceURI != envNS)
-				return;
+            string envNS = Version.Envelope.Namespace;
 
-			bool isEmptyHeader = reader.IsEmptyElement;
-			reader.ReadStartElement ("Header", envNS);
-			reader.MoveToContent ();
-			if (isEmptyHeader)
-				return;
+            headers = new MessageHeaders(version);
+            if (reader.LocalName != "Header" || reader.NamespaceURI != envNS)
+                return;
 
-			int nHeaders = 0;
-			while (!reader.EOF && reader.NodeType != XmlNodeType.EndElement) {
-				if (reader.NodeType == XmlNodeType.Element) {
-					if (nHeaders++ == max_headers)
-						throw new InvalidOperationException (String.Format ("Message header size has exceeded the maximum header size {0}", max_headers));
-					headers.Add (new MessageHeader.XmlMessageHeader (reader, Version));
-				}
-				else
-					reader.Skip ();
-				// FIXME: handle UnderstoodHeaders as well.
-				reader.MoveToContent ();
-			}
-			reader.ReadEndElement ();
-			reader.MoveToContent ();
-		}
+            bool isEmptyHeader = reader.IsEmptyElement;
+            reader.ReadStartElement("Header", envNS);
+            reader.MoveToContent();
+            if (isEmptyHeader)
+                return;
 
-		void ReadBodyStart ()
-		{
-			if (body_consumed)
-				throw new InvalidOperationException ("The message body XmlReader is already consumed.");
+            int nHeaders = 0;
+            while (!reader.EOF && reader.NodeType != XmlNodeType.EndElement)
+            {
+                if (reader.NodeType == XmlNodeType.Element)
+                {
+                    if (nHeaders++ == max_headers)
+                        throw new InvalidOperationException(
+                            String.Format(
+                                "Message header size has exceeded the maximum header size {0}",
+                                max_headers
+                            )
+                        );
+                    headers.Add(new MessageHeader.XmlMessageHeader(reader, Version));
+                }
+                else
+                    reader.Skip();
+                // FIXME: handle UnderstoodHeaders as well.
+                reader.MoveToContent();
+            }
+            reader.ReadEndElement();
+            reader.MoveToContent();
+        }
 
-			if (body_started)
-				return;
+        void ReadBodyStart()
+        {
+            if (body_consumed)
+                throw new InvalidOperationException(
+                    "The message body XmlReader is already consumed."
+                );
 
-			// read headers in advance.
-			if (headers == null)
-				ReadHeaders ();
+            if (body_started)
+                return;
 
-			// SOAP Body
-			body_started = true;
-			is_empty = reader.IsEmptyElement;
-			attributes = new AttributeCollection ();
-			reader.MoveToContent ();
-			if (reader.MoveToFirstAttribute ()) {
-				do {
-					attributes.Add (new AttributeInfo () { Prefix = reader.Prefix, Name = reader.LocalName, Namespace = reader.NamespaceURI, Value = reader.Value});
-				} while (reader.MoveToNextAttribute ());
-				reader.MoveToElement ();
-			}
-			reader.ReadStartElement ("Body", Version.Envelope.Namespace);
-			if (reader.NodeType == XmlNodeType.EndElement) {
-				is_empty = true;
-				reader.Read ();
-			} else {
-				reader.MoveToContent ();
-				if (reader.NodeType == XmlNodeType.Element &&
-				    reader.LocalName == "Fault" &&
-				    reader.NamespaceURI == Version.Envelope.Namespace)
-					is_fault = true;
-			}
-		}
+            // read headers in advance.
+            if (headers == null)
+                ReadHeaders();
 
-		protected override void OnWriteStartBody (
-			XmlDictionaryWriter writer)
-		{
-			ReadBodyStart (); // consume up to attributes
+            // SOAP Body
+            body_started = true;
+            is_empty = reader.IsEmptyElement;
+            attributes = new AttributeCollection();
+            reader.MoveToContent();
+            if (reader.MoveToFirstAttribute())
+            {
+                do
+                {
+                    attributes.Add(
+                        new AttributeInfo()
+                        {
+                            Prefix = reader.Prefix,
+                            Name = reader.LocalName,
+                            Namespace = reader.NamespaceURI,
+                            Value = reader.Value,
+                        }
+                    );
+                } while (reader.MoveToNextAttribute());
+                reader.MoveToElement();
+            }
+            reader.ReadStartElement("Body", Version.Envelope.Namespace);
+            if (reader.NodeType == XmlNodeType.EndElement)
+            {
+                is_empty = true;
+                reader.Read();
+            }
+            else
+            {
+                reader.MoveToContent();
+                if (
+                    reader.NodeType == XmlNodeType.Element
+                    && reader.LocalName == "Fault"
+                    && reader.NamespaceURI == Version.Envelope.Namespace
+                )
+                    is_fault = true;
+            }
+        }
 
-			base.OnWriteStartBody (writer);
-			foreach (var p in attributes)
-				writer.WriteAttributeString (p.Prefix, p.Name, p.Namespace, p.Value);
-		}
-	}
+        protected override void OnWriteStartBody(XmlDictionaryWriter writer)
+        {
+            ReadBodyStart(); // consume up to attributes
 
-	internal abstract class MessageImplBase : Message
-	{
-		MessageHeaders headers;
-		MessageProperties properties = new MessageProperties ();
-		AttributeCollection attributes;
+            base.OnWriteStartBody(writer);
+            foreach (var p in attributes)
+                writer.WriteAttributeString(p.Prefix, p.Name, p.Namespace, p.Value);
+        }
+    }
 
-		public MessageImplBase (MessageVersion version, string action, AttributeCollection attributes)
-		{
-			headers = new MessageHeaders (version);
-			if (action != null)
-				headers.Action = action;
-			this.attributes = attributes;
-		}
+    internal abstract class MessageImplBase : Message
+    {
+        MessageHeaders headers;
+        MessageProperties properties = new MessageProperties();
+        AttributeCollection attributes;
 
-		internal AttributeCollection Attributes {
-			get { return attributes; }
-		}
+        public MessageImplBase(
+            MessageVersion version,
+            string action,
+            AttributeCollection attributes
+        )
+        {
+            headers = new MessageHeaders(version);
+            if (action != null)
+                headers.Action = action;
+            this.attributes = attributes;
+        }
 
-		public override MessageHeaders Headers {
-			get { return headers; }
-		}
+        internal AttributeCollection Attributes
+        {
+            get { return attributes; }
+        }
 
-		public override MessageProperties Properties {
-			get { return properties; }
-		}
+        public override MessageHeaders Headers
+        {
+            get { return headers; }
+        }
 
-		public override MessageVersion Version {
-			get { return Headers.MessageVersion; }
-		}
+        public override MessageProperties Properties
+        {
+            get { return properties; }
+        }
 
-		protected override string OnGetBodyAttribute (
-			string localName, string ns)
-		{
-			var att = attributes.FirstOrDefault (a => a.Name == localName && a.Namespace == ns);
-			return att != null ? att.Value : null;
-		}
+        public override MessageVersion Version
+        {
+            get { return Headers.MessageVersion; }
+        }
 
-		protected override void OnWriteStartBody (
-			XmlDictionaryWriter writer)
-		{
-			var dic = Constants.SoapDictionary;
-			writer.WriteStartElement ("s", dic.Add ("Body"), dic.Add (Version.Envelope.Namespace));
-			foreach (var p in Attributes)
-				writer.WriteAttributeString (p.Prefix, p.Name, p.Namespace, p.Value);
-		}
-	}
+        protected override string OnGetBodyAttribute(string localName, string ns)
+        {
+            var att = attributes.FirstOrDefault(a => a.Name == localName && a.Namespace == ns);
+            return att != null ? att.Value : null;
+        }
 
-	internal class EmptyMessage : MessageImplBase
-	{
-		static readonly AttributeCollection empty_attributes = new AttributeCollection ();
+        protected override void OnWriteStartBody(XmlDictionaryWriter writer)
+        {
+            var dic = Constants.SoapDictionary;
+            writer.WriteStartElement("s", dic.Add("Body"), dic.Add(Version.Envelope.Namespace));
+            foreach (var p in Attributes)
+                writer.WriteAttributeString(p.Prefix, p.Name, p.Namespace, p.Value);
+        }
+    }
 
-		public EmptyMessage (MessageVersion version, string action)
-			: base (version, action, empty_attributes)
-		{
-		}
+    internal class EmptyMessage : MessageImplBase
+    {
+        static readonly AttributeCollection empty_attributes = new AttributeCollection();
 
-		public override bool IsEmpty {
-			get { return true; }
-		}
+        public EmptyMessage(MessageVersion version, string action)
+            : base(version, action, empty_attributes) { }
 
-		protected override void OnWriteBodyContents (
-			XmlDictionaryWriter writer)
-		{
-		}
+        public override bool IsEmpty
+        {
+            get { return true; }
+        }
 
-		protected override MessageBuffer OnCreateBufferedCopy (
-			int maxBufferSize)
-		{
-			return new DefaultMessageBuffer (Headers, Properties, Attributes);
-		}
-	}
+        protected override void OnWriteBodyContents(XmlDictionaryWriter writer) { }
 
-	internal class SimpleMessage : MessageImplBase
-	{
-		BodyWriter body;
-		bool is_fault;
+        protected override MessageBuffer OnCreateBufferedCopy(int maxBufferSize)
+        {
+            return new DefaultMessageBuffer(Headers, Properties, Attributes);
+        }
+    }
 
-		public SimpleMessage (MessageVersion version,
-			string action, BodyWriter body, bool isFault, AttributeCollection attributes)
-			: base (version, action, attributes)
-		{
-			this.body = body;
-			this.is_fault = isFault;
-		}
+    internal class SimpleMessage : MessageImplBase
+    {
+        BodyWriter body;
+        bool is_fault;
 
-		public override bool IsEmpty {
-			get { return false; }
-		}
+        public SimpleMessage(
+            MessageVersion version,
+            string action,
+            BodyWriter body,
+            bool isFault,
+            AttributeCollection attributes
+        )
+            : base(version, action, attributes)
+        {
+            this.body = body;
+            this.is_fault = isFault;
+        }
 
-		public override bool IsFault {
-			get { return is_fault; }
-		}
+        public override bool IsEmpty
+        {
+            get { return false; }
+        }
 
-		protected override void OnWriteBodyContents (
-			XmlDictionaryWriter writer)
-		{
-			body.WriteBodyContents (writer);
-		}
+        public override bool IsFault
+        {
+            get { return is_fault; }
+        }
 
-		protected override MessageBuffer OnCreateBufferedCopy (
-			int maxBufferSize)
-		{
-			var headers = new MessageHeaders (Headers);
-			var props = new MessageProperties (Properties);
-			var atts = new AttributeCollection (Attributes);
-			return new DefaultMessageBuffer (maxBufferSize, headers, props, body.CreateBufferedCopy (maxBufferSize), IsFault, atts);
-		}
-	}
+        protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
+        {
+            body.WriteBodyContents(writer);
+        }
+
+        protected override MessageBuffer OnCreateBufferedCopy(int maxBufferSize)
+        {
+            var headers = new MessageHeaders(Headers);
+            var props = new MessageProperties(Properties);
+            var atts = new AttributeCollection(Attributes);
+            return new DefaultMessageBuffer(
+                maxBufferSize,
+                headers,
+                props,
+                body.CreateBufferedCopy(maxBufferSize),
+                IsFault,
+                atts
+            );
+        }
+    }
 }
-

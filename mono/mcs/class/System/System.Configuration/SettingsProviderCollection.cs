@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,31 +34,27 @@ using System.Configuration.Provider;
 
 namespace System.Configuration
 {
-	public class SettingsProviderCollection
+    public class SettingsProviderCollection
 #if (CONFIGURATION_DEP)
-		: ProviderCollection
+        : ProviderCollection
 #endif
-	{
-		public SettingsProviderCollection ()
-		{
-		}
+    {
+        public SettingsProviderCollection() { }
 
 #if (CONFIGURATION_DEP)
-		public override void Add (ProviderBase provider)
-		{
-			if (!(provider is SettingsProvider))
-				throw new ArgumentException ("SettingsProvider is expected");
-			if (String.IsNullOrEmpty (provider.Name))
-				throw new ArgumentException ("Provider name cannot be null or empty");
-			base.Add (provider);
-		}
+        public override void Add(ProviderBase provider)
+        {
+            if (!(provider is SettingsProvider))
+                throw new ArgumentException("SettingsProvider is expected");
+            if (String.IsNullOrEmpty(provider.Name))
+                throw new ArgumentException("Provider name cannot be null or empty");
+            base.Add(provider);
+        }
 
-		public new SettingsProvider this [ string name ] { 
-			get {
-				return (SettingsProvider) base [ name ];
-			}
-		}
+        public new SettingsProvider this[string name]
+        {
+            get { return (SettingsProvider)base[name]; }
+        }
 #endif
-	}
+    }
 }
-

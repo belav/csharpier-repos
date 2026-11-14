@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,21 +30,21 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-	[TestFixture]
-	public class XamlObjectReaderSettingsTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			var s = new XamlObjectReaderSettings ();
-			Assert.IsFalse (s.RequireExplicitContentVisibility, "#1");
+    [TestFixture]
+    public class XamlObjectReaderSettingsTest
+    {
+        [Test]
+        public void DefaultValues()
+        {
+            var s = new XamlObjectReaderSettings();
+            Assert.IsFalse(s.RequireExplicitContentVisibility, "#1");
 
-			Assert.IsFalse (s.AllowProtectedMembersOnRoot, "#2");
-			Assert.IsFalse (s.IgnoreUidsOnPropertyElements, "#3");
-			Assert.IsFalse (s.ProvideLineInfo, "#4");
-			Assert.IsFalse (s.ValuesMustBeString, "#5");
-			Assert.IsNull (s.BaseUri, "#6");
-			Assert.IsNull (s.LocalAssembly, "#7");
-		}
-	}
+            Assert.IsFalse(s.AllowProtectedMembersOnRoot, "#2");
+            Assert.IsFalse(s.IgnoreUidsOnPropertyElements, "#3");
+            Assert.IsFalse(s.ProvideLineInfo, "#4");
+            Assert.IsFalse(s.ValuesMustBeString, "#5");
+            Assert.IsNull(s.BaseUri, "#6");
+            Assert.IsNull(s.LocalAssembly, "#7");
+        }
+    }
 }

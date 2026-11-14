@@ -53,15 +53,17 @@ namespace System.Security.Cryptography.X509Certificates
 
                     typeAndValue.ReadEncodedValue();
                     typeAndValue.ThrowIfNotEmpty();
-                }
-                while (rdn.HasData);
+                } while (rdn.HasData);
             }
             else
             {
                 _singleElementType = firstType;
 
                 bool overlaps = rawDataSpan.Overlaps(firstValue, out int offset);
-                Debug.Assert(overlaps, "AsnValueReader.ReadEncodedValue returns a slice of the source");
+                Debug.Assert(
+                    overlaps,
+                    "AsnValueReader.ReadEncodedValue returns a slice of the source"
+                );
                 Debug.Assert(offset > 0);
 
                 _singleElementValue = rawData.Slice(offset, firstValue.Length);
@@ -127,7 +129,10 @@ namespace System.Security.Cryptography.X509Certificates
 
             try
             {
-                AsnValueReader reader = new AsnValueReader(_singleElementValue.Span, AsnEncodingRules.DER);
+                AsnValueReader reader = new AsnValueReader(
+                    _singleElementValue.Span,
+                    AsnEncodingRules.DER
+                );
                 Asn1Tag tag = reader.PeekTag();
 
                 if (tag.TagClass == TagClass.Universal)

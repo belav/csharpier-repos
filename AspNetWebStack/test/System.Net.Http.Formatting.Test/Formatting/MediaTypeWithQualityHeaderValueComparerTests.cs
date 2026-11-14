@@ -32,7 +32,10 @@ namespace System.Net.Http.Formatting
                     { "text/xml; q=0.5", "text/xml; q=0.50" },
                     { "application/xml; q=0.5", "text/xml; q=0.5" },
                     { "application/xml; q=0.1", "text/xml; q=0.1" },
-                    { "application/xml; parameter=value1; q=0.5", "text/xml; parameter=value2; q=0.5" },
+                    {
+                        "application/xml; parameter=value1; q=0.5",
+                        "text/xml; parameter=value2; q=0.5"
+                    },
                     { "text/xml", "text/xml;q=1" },
                     { "text/xml", "text/xml;q=1.0" },
                     { "text/xml", "text/xml; q=1.00000" },
@@ -118,7 +121,7 @@ namespace System.Net.Http.Formatting
                             "*/*;q=0.4",
                             "text/plain;q=0",
                         }
-                    }
+                    },
                 };
             }
         }
@@ -126,8 +129,10 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void StaticComparer_Returns_SameInstance()
         {
-            MediaTypeWithQualityHeaderValueComparer comparer1 = MediaTypeWithQualityHeaderValueComparer.QualityComparer;
-            MediaTypeWithQualityHeaderValueComparer comparer2 = MediaTypeWithQualityHeaderValueComparer.QualityComparer;
+            MediaTypeWithQualityHeaderValueComparer comparer1 =
+                MediaTypeWithQualityHeaderValueComparer.QualityComparer;
+            MediaTypeWithQualityHeaderValueComparer comparer2 =
+                MediaTypeWithQualityHeaderValueComparer.QualityComparer;
 
             Assert.NotNull(comparer1);
             Assert.Same(comparer1, comparer2);
@@ -138,11 +143,14 @@ namespace System.Net.Http.Formatting
         public void ComparerReturnsZeroForEqualValues(string mediaType1, string mediaType2)
         {
             // Arrange
-            MediaTypeWithQualityHeaderValueComparer comparer = MediaTypeWithQualityHeaderValueComparer.QualityComparer;
+            MediaTypeWithQualityHeaderValueComparer comparer =
+                MediaTypeWithQualityHeaderValueComparer.QualityComparer;
 
             // Act
-            MediaTypeWithQualityHeaderValue mediaTypeHeaderValue1 = MediaTypeWithQualityHeaderValue.Parse(mediaType1);
-            MediaTypeWithQualityHeaderValue mediaTypeHeaderValue2 = MediaTypeWithQualityHeaderValue.Parse(mediaType2);
+            MediaTypeWithQualityHeaderValue mediaTypeHeaderValue1 =
+                MediaTypeWithQualityHeaderValue.Parse(mediaType1);
+            MediaTypeWithQualityHeaderValue mediaTypeHeaderValue2 =
+                MediaTypeWithQualityHeaderValue.Parse(mediaType2);
 
             // Assert
             Assert.Equal(0, comparer.Compare(mediaTypeHeaderValue1, mediaTypeHeaderValue2));
@@ -154,11 +162,14 @@ namespace System.Net.Http.Formatting
         public void ComparerReturnsNonZeroForNonEqualValues(string mediaType1, string mediaType2)
         {
             // Arrange
-            MediaTypeWithQualityHeaderValueComparer comparer = MediaTypeWithQualityHeaderValueComparer.QualityComparer;
+            MediaTypeWithQualityHeaderValueComparer comparer =
+                MediaTypeWithQualityHeaderValueComparer.QualityComparer;
 
             // Act
-            MediaTypeWithQualityHeaderValue mediaTypeHeaderValue1 = MediaTypeWithQualityHeaderValue.Parse(mediaType1);
-            MediaTypeWithQualityHeaderValue mediaTypeHeaderValue2 = MediaTypeWithQualityHeaderValue.Parse(mediaType2);
+            MediaTypeWithQualityHeaderValue mediaTypeHeaderValue1 =
+                MediaTypeWithQualityHeaderValue.Parse(mediaType1);
+            MediaTypeWithQualityHeaderValue mediaTypeHeaderValue2 =
+                MediaTypeWithQualityHeaderValue.Parse(mediaType2);
 
             // Assert
             Assert.Equal(-1, comparer.Compare(mediaTypeHeaderValue1, mediaTypeHeaderValue2));
@@ -170,14 +181,19 @@ namespace System.Net.Http.Formatting
         public void ComparerSortsListCorrectly(string[] unsorted, string[] expectedSorted)
         {
             // Arrange
-            IEnumerable<MediaTypeWithQualityHeaderValue> unsortedValues =
-                unsorted.Select(u => MediaTypeWithQualityHeaderValue.Parse(u));
+            IEnumerable<MediaTypeWithQualityHeaderValue> unsortedValues = unsorted.Select(u =>
+                MediaTypeWithQualityHeaderValue.Parse(u)
+            );
 
             IEnumerable<MediaTypeWithQualityHeaderValue> expectedSortedValues =
                 expectedSorted.Select(u => MediaTypeWithQualityHeaderValue.Parse(u));
 
             // Act
-            IEnumerable<MediaTypeWithQualityHeaderValue> actualSorted = unsortedValues.OrderByDescending(m => m, MediaTypeWithQualityHeaderValueComparer.QualityComparer);
+            IEnumerable<MediaTypeWithQualityHeaderValue> actualSorted =
+                unsortedValues.OrderByDescending(
+                    m => m,
+                    MediaTypeWithQualityHeaderValueComparer.QualityComparer
+                );
 
             // Assert
             Assert.True(expectedSortedValues.SequenceEqual(actualSorted));

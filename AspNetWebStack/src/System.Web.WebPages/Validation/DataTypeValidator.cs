@@ -19,7 +19,7 @@ namespace System.Web.WebPages
             Decimal,
             Url,
             Integer,
-            Float
+            Float,
         }
 
         protected override bool IsValid(HttpContextBase httpContext, string value)

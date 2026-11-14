@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -30,7 +30,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
 using DbLinq.Data.Linq.Sugar.Expressions;
 using DbLinq.Factory;
@@ -70,7 +69,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expressions"></param>
         /// <param name="queryContext"></param>
         /// <returns></returns>
-        protected virtual ExpressionQuery BuildExpressionQuery(ExpressionChain expressions, QueryContext queryContext)
+        protected virtual ExpressionQuery BuildExpressionQuery(
+            ExpressionChain expressions,
+            QueryContext queryContext
+        )
         {
             var builderContext = new BuilderContext(queryContext);
             BuildExpressionQuery(expressions, builderContext);
@@ -86,27 +88,53 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="name"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual IList<Expression> FindExpressionsByName(string name, BuilderContext builderContext)
+        protected virtual IList<Expression> FindExpressionsByName(
+            string name,
+            BuilderContext builderContext
+        )
         {
             var expressions = new List<Expression>();
-            expressions.AddRange((from t in builderContext.EnumerateAllTables() where t.Alias == name select (Expression)t).Distinct());
-            expressions.AddRange(from c in builderContext.EnumerateScopeColumns() where c.Alias == name select (Expression)c);
+            expressions.AddRange(
+                (
+                    from t in builderContext.EnumerateAllTables()
+                    where t.Alias == name
+                    select (Expression)t
+                ).Distinct()
+            );
+            expressions.AddRange(
+                from c in builderContext.EnumerateScopeColumns()
+                where c.Alias == name
+                select (Expression)c
+            );
             return expressions;
         }
 
-        protected virtual string MakeName(string aliasBase, int index, string anonymousBase, BuilderContext builderContext)
+        protected virtual string MakeName(
+            string aliasBase,
+            int index,
+            string anonymousBase,
+            BuilderContext builderContext
+        )
         {
             if (string.IsNullOrEmpty(aliasBase))
                 aliasBase = anonymousBase;
             return string.Format("{0}{1}", aliasBase, index);
         }
 
-        protected virtual string MakeTableName(string aliasBase, int index, BuilderContext builderContext)
+        protected virtual string MakeTableName(
+            string aliasBase,
+            int index,
+            BuilderContext builderContext
+        )
         {
             return MakeName(aliasBase, index, "t", builderContext);
         }
 
-        protected virtual string MakeParameterName(string aliasBase, int index, BuilderContext builderContext)
+        protected virtual string MakeParameterName(
+            string aliasBase,
+            int index,
+            BuilderContext builderContext
+        )
         {
             return MakeName(aliasBase, index, "p", builderContext);
         }
@@ -128,24 +156,39 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 foreach (var tableExpression in tables)
                 {
                     // if no alias, or duplicate alias
-                    if (string.IsNullOrEmpty(tableExpression.Alias) ||
-                        FindExpressionsByName(tableExpression.Alias, builderContext).Count > 1)
+                    if (
+                        string.IsNullOrEmpty(tableExpression.Alias)
+                        || FindExpressionsByName(tableExpression.Alias, builderContext).Count > 1
+                    )
                     {
                         int anonymousIndex = 0;
                         var aliasBase = tableExpression.Alias;
                         // we try to assign one until we have a unique alias
                         do
                         {
-                            tableExpression.Alias = MakeTableName(aliasBase, ++anonymousIndex, builderContext);
-                        } while (FindExpressionsByName(tableExpression.Alias, builderContext).Count != 1);
+                            tableExpression.Alias = MakeTableName(
+                                aliasBase,
+                                ++anonymousIndex,
+                                builderContext
+                            );
+                        } while (
+                            FindExpressionsByName(tableExpression.Alias, builderContext).Count != 1
+                        );
                     }
                 }
             }
         }
 
-        protected virtual IList<InputParameterExpression> FindParametersByName(string name, BuilderContext builderContext)
+        protected virtual IList<InputParameterExpression> FindParametersByName(
+            string name,
+            BuilderContext builderContext
+        )
         {
-            return (from p in builderContext.ExpressionQuery.Parameters where p.Alias == name select p).ToList();
+            return (
+                from p in builderContext.ExpressionQuery.Parameters
+                where p.Alias == name
+                select p
+            ).ToList();
         }
 
         /// <summary>
@@ -157,16 +200,28 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         {
             foreach (var externalParameterExpression in builderContext.ExpressionQuery.Parameters)
             {
-                if (string.IsNullOrEmpty(externalParameterExpression.Alias)
-                    || FindParametersByName(externalParameterExpression.Alias, builderContext).Count > 1)
+                if (
+                    string.IsNullOrEmpty(externalParameterExpression.Alias)
+                    || FindParametersByName(externalParameterExpression.Alias, builderContext).Count
+                        > 1
+                )
                 {
                     int anonymousIndex = 0;
                     var aliasBase = externalParameterExpression.Alias;
                     // we try to assign one until we have a unique alias
                     do
                     {
-                        externalParameterExpression.Alias = MakeTableName(aliasBase, ++anonymousIndex, builderContext);
-                    } while (FindParametersByName(externalParameterExpression.Alias, builderContext).Count > 1);
+                        externalParameterExpression.Alias = MakeTableName(
+                            aliasBase,
+                            ++anonymousIndex,
+                            builderContext
+                        );
+                    } while (
+                        FindParametersByName(
+                            externalParameterExpression.Alias,
+                            builderContext
+                        ).Count > 1
+                    );
                 }
             }
         }
@@ -176,10 +231,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// </summary>
         /// <param name="expressions"></param>
         /// <param name="builderContext"></param>
-        protected virtual void BuildExpressionQuery(ExpressionChain expressions, BuilderContext builderContext)
+        protected virtual void BuildExpressionQuery(
+            ExpressionChain expressions,
+            BuilderContext builderContext
+        )
         {
-            var previousExpression = ExpressionDispatcher.CreateTableExpression(expressions.Expressions[0], builderContext);
-            previousExpression = BuildExpressionQuery(expressions, previousExpression, builderContext);
+            var previousExpression = ExpressionDispatcher.CreateTableExpression(
+                expressions.Expressions[0],
+                builderContext
+            );
+            previousExpression = BuildExpressionQuery(
+                expressions,
+                previousExpression,
+                builderContext
+            );
             BuildOffsetsAndLimits(builderContext);
             // then prepare Parts for SQL translation
             PrepareSqlOperands(builderContext);
@@ -198,14 +263,26 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="tableExpression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected Expression BuildExpressionQuery(ExpressionChain expressions, Expression tableExpression, BuilderContext builderContext)
+        protected Expression BuildExpressionQuery(
+            ExpressionChain expressions,
+            Expression tableExpression,
+            BuilderContext builderContext
+        )
         {
-            tableExpression = ExpressionDispatcher.Analyze(expressions, tableExpression, builderContext);
+            tableExpression = ExpressionDispatcher.Analyze(
+                expressions,
+                tableExpression,
+                builderContext
+            );
             ExpressionDispatcher.BuildSelect(tableExpression, builderContext);
             return tableExpression;
         }
 
-        public virtual SelectExpression BuildSelectExpression(ExpressionChain expressions, Expression tableExpression, BuilderContext builderContext)
+        public virtual SelectExpression BuildSelectExpression(
+            ExpressionChain expressions,
+            Expression tableExpression,
+            BuilderContext builderContext
+        )
         {
             BuildExpressionQuery(expressions, tableExpression, builderContext);
             return builderContext.CurrentSelect;
@@ -221,7 +298,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             {
                 if (selectExpression.Offset != null && selectExpression.Limit != null)
                 {
-                    selectExpression.OffsetAndLimit = Expression.Add(selectExpression.Offset, selectExpression.Limit);
+                    selectExpression.OffsetAndLimit = Expression.Add(
+                        selectExpression.Offset,
+                        selectExpression.Limit
+                    );
                 }
             }
         }
@@ -254,10 +334,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="processor"></param>
         /// <param name="processOnlySqlParts"></param>
         /// <param name="builderContext"></param>
-        protected virtual void ProcessExpressions(Func<Expression, BuilderContext, Expression> processor,
-                                                  bool processOnlySqlParts, BuilderContext builderContext)
+        protected virtual void ProcessExpressions(
+            Func<Expression, BuilderContext, Expression> processor,
+            bool processOnlySqlParts,
+            BuilderContext builderContext
+        )
         {
-            for (int scopeExpressionIndex = 0; scopeExpressionIndex < builderContext.SelectExpressions.Count; scopeExpressionIndex++)
+            for (
+                int scopeExpressionIndex = 0;
+                scopeExpressionIndex < builderContext.SelectExpressions.Count;
+                scopeExpressionIndex++
+            )
             {
                 // no need to process the select itself here, all ScopeExpressions that are operands are processed as operands
                 // and the main ScopeExpression (the SELECT) is processed below
@@ -268,7 +355,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 bool falseWhere = false; // true when the full where evaluate to FALSE
                 for (int whereIndex = 0; whereIndex < scopeExpression.Where.Count; whereIndex++)
                 {
-                    Expression whereClausole = processor(scopeExpression.Where[whereIndex], builderContext);
+                    Expression whereClausole = processor(
+                        scopeExpression.Where[whereIndex],
+                        builderContext
+                    );
                     ConstantExpression constantWhereClausole = whereClausole as ConstantExpression;
                     if (constantWhereClausole != null)
                     {
@@ -290,7 +380,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     if (falseWhere)
                     {
                         scopeExpression.Where.Clear();
-                        scopeExpression.Where.Add(Expression.Equal(Expression.Constant(true), Expression.Constant(false)));
+                        scopeExpression.Where.Add(
+                            Expression.Equal(Expression.Constant(true), Expression.Constant(false))
+                        );
                     }
                     else
                         foreach (int whereIndex in whereToRemove)
@@ -303,7 +395,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 if (scopeExpression.Limit != null)
                     scopeExpression.Limit = processor(scopeExpression.Limit, builderContext);
                 if (scopeExpression.OffsetAndLimit != null)
-                    scopeExpression.OffsetAndLimit = processor(scopeExpression.OffsetAndLimit, builderContext);
+                    scopeExpression.OffsetAndLimit = processor(
+                        scopeExpression.OffsetAndLimit,
+                        builderContext
+                    );
 
                 builderContext.SelectExpressions[scopeExpressionIndex] = scopeExpression;
             }
@@ -314,12 +409,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 var newOperands = new List<Expression>();
                 foreach (var operand in builderContext.CurrentSelect.Operands)
                     newOperands.Add(processor(operand, builderContext));
-                builderContext.CurrentSelect = builderContext.CurrentSelect.ChangeOperands(newOperands);
+                builderContext.CurrentSelect = builderContext.CurrentSelect.ChangeOperands(
+                    newOperands
+                );
             }
             else
             {
                 // the output parameters and result builder
-                builderContext.CurrentSelect = (SelectExpression)processor(builderContext.CurrentSelect, builderContext);
+                builderContext.CurrentSelect = (SelectExpression)processor(
+                    builderContext.CurrentSelect,
+                    builderContext
+                );
             }
         }
 
@@ -332,10 +432,19 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             ProcessExpressions(ExpressionOptimizer.Optimize, false, builderContext);
         }
 
-        protected virtual SelectQuery BuildSqlQuery(ExpressionQuery expressionQuery, QueryContext queryContext)
+        protected virtual SelectQuery BuildSqlQuery(
+            ExpressionQuery expressionQuery,
+            QueryContext queryContext
+        )
         {
             var sql = SqlBuilder.BuildSelect(expressionQuery, queryContext);
-            var sqlQuery = new SelectQuery(queryContext.DataContext, sql, expressionQuery.Parameters, expressionQuery.RowObjectCreator, expressionQuery.Select.ExecuteMethodName);
+            var sqlQuery = new SelectQuery(
+                queryContext.DataContext,
+                sql,
+                expressionQuery.Parameters,
+                expressionQuery.RowObjectCreator,
+                expressionQuery.Select.ExecuteMethodName
+            );
             return sqlQuery;
         }
 
@@ -356,7 +465,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return cache.GetFromSelectCache(expressions);
         }
 
-        protected virtual void SetInSelectCache(ExpressionChain expressions, SelectQuery sqlSelectQuery)
+        protected virtual void SetInSelectCache(
+            ExpressionChain expressions,
+            SelectQuery sqlSelectQuery
+        )
         {
             var cache = QueryCache;
             cache.SetInSelectCache(expressions, sqlSelectQuery);
@@ -368,7 +480,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return cache.GetFromTableReaderCache(tableType, columns);
         }
 
-        protected virtual void SetInTableReaderCache(Type tableType, IList<string> columns, Delegate tableReader)
+        protected virtual void SetInTableReaderCache(
+            Type tableType,
+            IList<string> columns,
+            Delegate tableReader
+        )
         {
             var cache = queryCache;
             cache.SetInTableReaderCache(tableType, columns, tableReader);
@@ -404,19 +520,39 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             }
             else if (query.InputParameters.Count > 0)
             {
-                Profiler.At("START: GetSelectQuery(), building Expression parameters of cached query");
+                Profiler.At(
+                    "START: GetSelectQuery(), building Expression parameters of cached query"
+                );
                 var parameters = BuildExpressionParameters(expressions, queryContext);
-                query = new SelectQuery(queryContext.DataContext, query.Sql, parameters, query.RowObjectCreator, query.ExecuteMethodName);
-                Profiler.At("END: GetSelectQuery(), building Expression parameters of cached query");
+                query = new SelectQuery(
+                    queryContext.DataContext,
+                    query.Sql,
+                    parameters,
+                    query.RowObjectCreator,
+                    query.ExecuteMethodName
+                );
+                Profiler.At(
+                    "END: GetSelectQuery(), building Expression parameters of cached query"
+                );
             }
             return query;
         }
 
-        IList<InputParameterExpression> BuildExpressionParameters(ExpressionChain expressions, QueryContext queryContext)
+        IList<InputParameterExpression> BuildExpressionParameters(
+            ExpressionChain expressions,
+            QueryContext queryContext
+        )
         {
             var builderContext = new BuilderContext(queryContext);
-            var previousExpression = ExpressionDispatcher.CreateTableExpression(expressions.Expressions[0], builderContext);
-            previousExpression = BuildExpressionQuery(expressions, previousExpression, builderContext);
+            var previousExpression = ExpressionDispatcher.CreateTableExpression(
+                expressions.Expressions[0],
+                builderContext
+            );
+            previousExpression = BuildExpressionQuery(
+                expressions,
+                previousExpression,
+                builderContext
+            );
             BuildOffsetsAndLimits(builderContext);
             // then prepare Parts for SQL translation
             PrepareSqlOperands(builderContext);
@@ -431,7 +567,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="queryContext"></param>
         /// <returns></returns>
-        public virtual Delegate GetTableReader(Type tableType, IList<string> parameters, QueryContext queryContext)
+        public virtual Delegate GetTableReader(
+            Type tableType,
+            IList<string> parameters,
+            QueryContext queryContext
+        )
         {
             Delegate reader = null;
             if (queryContext.DataContext.QueryCacheEnabled)
@@ -440,8 +580,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             }
             if (reader == null)
             {
-                var lambda = ExpressionDispatcher.BuildTableReader(tableType, parameters,
-                                                                   new BuilderContext(queryContext));
+                var lambda = ExpressionDispatcher.BuildTableReader(
+                    tableType,
+                    parameters,
+                    new BuilderContext(queryContext)
+                );
                 reader = lambda.Compile();
                 if (queryContext.DataContext.QueryCacheEnabled)
                 {
@@ -451,7 +594,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return reader;
         }
 
-        private static readonly Regex parameterIdentifierEx = new Regex(@"\{(?<var>[\d.]+)\}", RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        private static readonly Regex parameterIdentifierEx = new Regex(
+            @"\{(?<var>[\d.]+)\}",
+            RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled
+        );
 
         /// <summary>
         /// Converts a direct SQL query to a safe query with named parameters
@@ -464,17 +610,22 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             // TODO cache
             var safeSql = queryContext.DataContext.Vendor.SqlProvider.GetSafeQuery(sql);
             var parameters = new List<string>();
-            var parameterizedSql = parameterIdentifierEx.Replace(safeSql, delegate(Match e)
-            {
-                var field = e.Groups[1].Value;
-                var parameterIndex = int.Parse(field);
-                while (parameters.Count <= parameterIndex)
-                    parameters.Add(string.Empty);
-                var literalParameterName =
-                    queryContext.DataContext.Vendor.SqlProvider.GetParameterName(string.Format("p{0}", parameterIndex));
-                parameters[parameterIndex] = literalParameterName;
-                return literalParameterName;
-            });
+            var parameterizedSql = parameterIdentifierEx.Replace(
+                safeSql,
+                delegate(Match e)
+                {
+                    var field = e.Groups[1].Value;
+                    var parameterIndex = int.Parse(field);
+                    while (parameters.Count <= parameterIndex)
+                        parameters.Add(string.Empty);
+                    var literalParameterName =
+                        queryContext.DataContext.Vendor.SqlProvider.GetParameterName(
+                            string.Format("p{0}", parameterIndex)
+                        );
+                    parameters[parameterIndex] = literalParameterName;
+                    return literalParameterName;
+                }
+            );
             return new DirectQuery(queryContext.DataContext, parameterizedSql, parameters);
         }
     }

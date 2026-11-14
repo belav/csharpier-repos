@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Roslyn.Utilities;
-using System;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -19,10 +19,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // When this assertion fails, it means a new syntax is being used which corresponds to a BoundCall.
                 // The developer needs to determine how this new syntax should interact with interceptors (produce an error, permit intercepting the call, etc...)
-                Debug.Assert(this.WasCompilerGenerated || this.Syntax is InvocationExpressionSyntax or ConstructorInitializerSyntax or PrimaryConstructorBaseTypeSyntax { ArgumentList: { } },
-                    $"Unexpected syntax kind for BoundCall: {this.Syntax.Kind()}");
+                Debug.Assert(
+                    this.WasCompilerGenerated
+                        || this.Syntax
+                            is InvocationExpressionSyntax
+                                or ConstructorInitializerSyntax
+                                or PrimaryConstructorBaseTypeSyntax { ArgumentList: { } },
+                    $"Unexpected syntax kind for BoundCall: {this.Syntax.Kind()}"
+                );
 
-                if (this.WasCompilerGenerated || this.Syntax is not InvocationExpressionSyntax syntax)
+                if (
+                    this.WasCompilerGenerated
+                    || this.Syntax is not InvocationExpressionSyntax syntax
+                )
                 {
                     return null;
                 }
@@ -36,7 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
                     SimpleNameSyntax name => name,
-                    _ => null
+                    _ => null,
                 };
             }
         }
@@ -110,27 +119,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public virtual ConstantValue? ConstantValueOpt
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public virtual Symbol? ExpressionSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         // Indicates any problems with lookup/symbol binding that should be reported via GetSemanticInfo.
         public virtual LookupResultKind ResultKind
         {
-            get
-            {
-                return LookupResultKind.Viable;
-            }
+            get { return LookupResultKind.Viable; }
         }
 
         /// <summary>
@@ -139,10 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public virtual bool SuppressVirtualCalls
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public new NullabilityInfo TopLevelNullability
@@ -151,8 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             set => base.TopLevelNullability = value;
         }
 
-        public CodeAnalysis.ITypeSymbol? GetPublicTypeSymbol()
-            => Type?.GetITypeSymbol(TopLevelNullability.FlowState.ToAnnotation());
+        public CodeAnalysis.ITypeSymbol? GetPublicTypeSymbol() =>
+            Type?.GetITypeSymbol(TopLevelNullability.FlowState.ToAnnotation());
 
         public virtual bool IsEquivalentToThisReference => false;
     }
@@ -164,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal partial class BoundValuePlaceholder
     {
-        public sealed override bool IsEquivalentToThisReference => throw ExceptionUtilities.Unreachable();
+        public sealed override bool IsEquivalentToThisReference =>
+            throw ExceptionUtilities.Unreachable();
     }
 
     internal partial class BoundInterpolatedStringHandlerPlaceholder
@@ -184,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal partial class BoundTupleOperandPlaceholder
     {
-        public sealed override bool IsEquivalentToThisReference => throw ExceptionUtilities.Unreachable();
+        public sealed override bool IsEquivalentToThisReference =>
+            throw ExceptionUtilities.Unreachable();
     }
 
     internal partial class BoundAwaitableValuePlaceholder
@@ -204,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal partial class BoundImplicitIndexerValuePlaceholder
     {
-        public sealed override bool IsEquivalentToThisReference => throw ExceptionUtilities.Unreachable();
+        public sealed override bool IsEquivalentToThisReference =>
+            throw ExceptionUtilities.Unreachable();
     }
 
     internal partial class BoundListPatternReceiverPlaceholder
@@ -214,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal partial class BoundListPatternIndexPlaceholder
     {
-        public sealed override bool IsEquivalentToThisReference => throw ExceptionUtilities.Unreachable();
+        public sealed override bool IsEquivalentToThisReference =>
+            throw ExceptionUtilities.Unreachable();
     }
 
     internal partial class BoundSlicePatternReceiverPlaceholder
@@ -224,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal partial class BoundSlicePatternRangePlaceholder
     {
-        public sealed override bool IsEquivalentToThisReference => throw ExceptionUtilities.Unreachable();
+        public sealed override bool IsEquivalentToThisReference =>
+            throw ExceptionUtilities.Unreachable();
     }
 
     internal partial class BoundCapturedReceiverPlaceholder
@@ -257,10 +259,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override Symbol? ExpressionSymbol
         {
-            get
-            {
-                return Expression.ExpressionSymbol;
-            }
+            get { return Expression.ExpressionSymbol; }
         }
     }
 
@@ -268,10 +267,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override Symbol ExpressionSymbol
         {
-            get
-            {
-                return this.Method;
-            }
+            get { return this.Method; }
         }
     }
 
@@ -310,14 +306,36 @@ namespace Microsoft.CodeAnalysis.CSharp
             get { return this.LocalSymbol; }
         }
 
-        public BoundLocal(SyntaxNode syntax, LocalSymbol localSymbol, ConstantValue? constantValueOpt, TypeSymbol type, bool hasErrors = false)
-            : this(syntax, localSymbol, BoundLocalDeclarationKind.None, constantValueOpt, false, type, hasErrors)
-        {
-        }
+        public BoundLocal(
+            SyntaxNode syntax,
+            LocalSymbol localSymbol,
+            ConstantValue? constantValueOpt,
+            TypeSymbol type,
+            bool hasErrors = false
+        )
+            : this(
+                syntax,
+                localSymbol,
+                BoundLocalDeclarationKind.None,
+                constantValueOpt,
+                false,
+                type,
+                hasErrors
+            ) { }
 
-        public BoundLocal Update(LocalSymbol localSymbol, ConstantValue? constantValueOpt, TypeSymbol type)
+        public BoundLocal Update(
+            LocalSymbol localSymbol,
+            ConstantValue? constantValueOpt,
+            TypeSymbol type
+        )
         {
-            return this.Update(localSymbol, this.DeclarationKind, constantValueOpt, this.IsNullableUnknown, type);
+            return this.Update(
+                localSymbol,
+                this.DeclarationKind,
+                constantValueOpt,
+                this.IsNullableUnknown,
+                type
+            );
         }
     }
 
@@ -348,7 +366,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return !this.OriginalIndexersOpt.IsDefault ? LookupResultKind.OverloadResolutionFailure : base.ResultKind;
+                return !this.OriginalIndexersOpt.IsDefault
+                    ? LookupResultKind.OverloadResolutionFailure
+                    : base.ResultKind;
             }
         }
     }
@@ -395,11 +415,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal TypeSymbol? ConstrainedToType => Data?.ConstrainedToType;
 
-        internal bool IsUnconvertedInterpolatedStringAddition => Data?.IsUnconvertedInterpolatedStringAddition ?? false;
+        internal bool IsUnconvertedInterpolatedStringAddition =>
+            Data?.IsUnconvertedInterpolatedStringAddition ?? false;
 
-        internal InterpolatedStringHandlerData? InterpolatedStringHandlerData => Data?.InterpolatedStringHandlerData;
+        internal InterpolatedStringHandlerData? InterpolatedStringHandlerData =>
+            Data?.InterpolatedStringHandlerData;
 
-        internal ImmutableArray<MethodSymbol> OriginalUserDefinedOperatorsOpt => Data?.OriginalUserDefinedOperatorsOpt ?? default(ImmutableArray<MethodSymbol>);
+        internal ImmutableArray<MethodSymbol> OriginalUserDefinedOperatorsOpt =>
+            Data?.OriginalUserDefinedOperatorsOpt ?? default(ImmutableArray<MethodSymbol>);
     }
 
     internal partial class BoundUserDefinedConditionalLogicalOperator
@@ -463,7 +486,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public BoundConversion UpdateOperand(BoundExpression operand)
         {
-            return this.Update(operand: operand, this.Conversion, this.IsBaseConversion, this.Checked, this.ExplicitCastInCode, this.ConstantValueOpt, this.ConversionGroupOpt, this.OriginalUserDefinedConversionsOpt, this.Type);
+            return this.Update(
+                operand: operand,
+                this.Conversion,
+                this.IsBaseConversion,
+                this.Checked,
+                this.ExplicitCastInCode,
+                this.ConstantValueOpt,
+                this.ConversionGroupOpt,
+                this.OriginalUserDefinedConversionsOpt,
+                this.Type
+            );
         }
 
         /// <summary>
@@ -511,7 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> newArguments,
             ImmutableArray<RefKind> newRefKinds,
             BoundObjectInitializerExpressionBase? newInitializerExpression,
-            TypeSymbol? changeTypeOpt = null)
+            TypeSymbol? changeTypeOpt = null
+        )
         {
             return Update(
                 constructor: Constructor,
@@ -523,7 +557,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 defaultArguments: default(BitVector),
                 constantValueOpt: ConstantValueOpt,
                 initializerExpressionOpt: newInitializerExpression,
-                type: changeTypeOpt ?? Type);
+                type: changeTypeOpt ?? Type
+            );
         }
     }
 
@@ -575,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // IsTrue dynamic operator is invoked at runtime if the condition is of the type dynamic.
                 // The type of the operator itself is Boolean, so we need to check its kind.
-                return this.Condition.Kind == BoundKind.UnaryOperator && ((BoundUnaryOperator)this.Condition).OperatorKind.IsDynamic();
+                return this.Condition.Kind == BoundKind.UnaryOperator
+                    && ((BoundUnaryOperator)this.Condition).OperatorKind.IsDynamic();
             }
         }
     }
@@ -584,10 +620,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override Symbol ExpressionSymbol
         {
-            get
-            {
-                return this.RangeVariableSymbol;
-            }
+            get { return this.RangeVariableSymbol; }
         }
     }
 
@@ -595,10 +628,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override Symbol ExpressionSymbol
         {
-            get
-            {
-                return this.Label;
-            }
+            get { return this.Label; }
         }
     }
 
@@ -606,10 +636,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override Symbol? ExpressionSymbol
         {
-            get
-            {
-                return this.MemberSymbol;
-            }
+            get { return this.MemberSymbol; }
         }
     }
 
@@ -617,10 +644,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override Symbol ExpressionSymbol
         {
-            get
-            {
-                return this.AddMethod;
-            }
+            get { return this.AddMethod; }
         }
     }
 
@@ -644,11 +668,26 @@ namespace Microsoft.CodeAnalysis.CSharp
         public BoundExpression TypeExpression { get; }
         public ImmutableBindingDiagnostic<AssemblySymbol> TypeDiagnostics { get; }
 
-        public BoundTypeOrValueData(Symbol valueSymbol, BoundExpression valueExpression, ImmutableBindingDiagnostic<AssemblySymbol> valueDiagnostics, BoundExpression typeExpression, ImmutableBindingDiagnostic<AssemblySymbol> typeDiagnostics)
+        public BoundTypeOrValueData(
+            Symbol valueSymbol,
+            BoundExpression valueExpression,
+            ImmutableBindingDiagnostic<AssemblySymbol> valueDiagnostics,
+            BoundExpression typeExpression,
+            ImmutableBindingDiagnostic<AssemblySymbol> typeDiagnostics
+        )
         {
-            Debug.Assert(valueSymbol != null, "Field 'valueSymbol' cannot be null (use Null=\"allow\" in BoundNodes.xml to remove this check)");
-            Debug.Assert(valueExpression != null, "Field 'valueExpression' cannot be null (use Null=\"allow\" in BoundNodes.xml to remove this check)");
-            Debug.Assert(typeExpression != null, "Field 'typeExpression' cannot be null (use Null=\"allow\" in BoundNodes.xml to remove this check)");
+            Debug.Assert(
+                valueSymbol != null,
+                "Field 'valueSymbol' cannot be null (use Null=\"allow\" in BoundNodes.xml to remove this check)"
+            );
+            Debug.Assert(
+                valueExpression != null,
+                "Field 'valueExpression' cannot be null (use Null=\"allow\" in BoundNodes.xml to remove this check)"
+            );
+            Debug.Assert(
+                typeExpression != null,
+                "Field 'typeExpression' cannot be null (use Null=\"allow\" in BoundNodes.xml to remove this check)"
+            );
 
             this.ValueSymbol = valueSymbol;
             this.ValueExpression = valueExpression;
@@ -661,11 +700,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static bool operator ==(BoundTypeOrValueData a, BoundTypeOrValueData b)
         {
-            return (object)a.ValueSymbol == (object)b.ValueSymbol &&
-                (object)a.ValueExpression == (object)b.ValueExpression &&
-                a.ValueDiagnostics == b.ValueDiagnostics &&
-                (object)a.TypeExpression == (object)b.TypeExpression &&
-                a.TypeDiagnostics == b.TypeDiagnostics;
+            return (object)a.ValueSymbol == (object)b.ValueSymbol
+                && (object)a.ValueExpression == (object)b.ValueExpression
+                && a.ValueDiagnostics == b.ValueDiagnostics
+                && (object)a.TypeExpression == (object)b.TypeExpression
+                && a.TypeDiagnostics == b.TypeDiagnostics;
         }
 
         public static bool operator !=(BoundTypeOrValueData a, BoundTypeOrValueData b)
@@ -680,10 +719,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override int GetHashCode()
         {
-            return Hash.Combine(ValueSymbol.GetHashCode(),
-                Hash.Combine(ValueExpression.GetHashCode(),
-                Hash.Combine(ValueDiagnostics.GetHashCode(),
-                Hash.Combine(TypeExpression.GetHashCode(), TypeDiagnostics.GetHashCode()))));
+            return Hash.Combine(
+                ValueSymbol.GetHashCode(),
+                Hash.Combine(
+                    ValueExpression.GetHashCode(),
+                    Hash.Combine(
+                        ValueDiagnostics.GetHashCode(),
+                        Hash.Combine(TypeExpression.GetHashCode(), TypeDiagnostics.GetHashCode())
+                    )
+                )
+            );
         }
 
         bool System.IEquatable<BoundTypeOrValueData>.Equals(BoundTypeOrValueData b)

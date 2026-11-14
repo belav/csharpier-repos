@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,7 +27,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 
 using System;
 using System.CodeDom;
@@ -38,31 +37,34 @@ using System.IO;
 using System.Reflection;
 using System.Web;
 
-namespace System.Web.Compilation {
-	[BuildProviderAppliesTo (BuildProviderAppliesTo.Code)]
-	sealed class XsdBuildProvider : BuildProvider {
-		public XsdBuildProvider()
-		{
-		}
+namespace System.Web.Compilation
+{
+    [BuildProviderAppliesTo(BuildProviderAppliesTo.Code)]
+    sealed class XsdBuildProvider : BuildProvider
+    {
+        public XsdBuildProvider() { }
 
-		public override void GenerateCode (AssemblyBuilder assemblyBuilder)
-		{
-			CodeCompileUnit unit = new CodeCompileUnit ();
-			CodeNamespace dataSetCode = new CodeNamespace(null);
-			unit.Namespaces.Add (dataSetCode);
-			
-			string path = HttpContext.Current.Request.MapPath (VirtualPath);
-			TextReader tr = new StreamReader (path);
-			
-			CodeDomProvider provider = assemblyBuilder.CodeDomProvider;
-			if (provider == null)
-				throw new HttpException ("Assembly builder has no code provider");
+        public override void GenerateCode(AssemblyBuilder assemblyBuilder)
+        {
+            CodeCompileUnit unit = new CodeCompileUnit();
+            CodeNamespace dataSetCode = new CodeNamespace(null);
+            unit.Namespaces.Add(dataSetCode);
 
-			System.Data.Design.TypedDataSetGenerator.Generate (tr.ReadToEnd (), unit, dataSetCode, provider);
+            string path = HttpContext.Current.Request.MapPath(VirtualPath);
+            TextReader tr = new StreamReader(path);
 
-			assemblyBuilder.AddCodeCompileUnit (unit);
-		}
-	}
+            CodeDomProvider provider = assemblyBuilder.CodeDomProvider;
+            if (provider == null)
+                throw new HttpException("Assembly builder has no code provider");
+
+            System.Data.Design.TypedDataSetGenerator.Generate(
+                tr.ReadToEnd(),
+                unit,
+                dataSetCode,
+                provider
+            );
+
+            assemblyBuilder.AddCodeCompileUnit(unit);
+        }
+    }
 }
-
-

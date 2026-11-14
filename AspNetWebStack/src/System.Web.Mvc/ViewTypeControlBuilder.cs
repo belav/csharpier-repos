@@ -11,7 +11,14 @@ namespace System.Web.Mvc
     {
         private string _typeName;
 
-        public override void Init(TemplateParser parser, ControlBuilder parentBuilder, Type type, string tagName, string id, IDictionary attribs)
+        public override void Init(
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            Type type,
+            string tagName,
+            string id,
+            IDictionary attribs
+        )
         {
             base.Init(parser, parentBuilder, type, tagName, id, attribs);
 
@@ -23,7 +30,8 @@ namespace System.Web.Mvc
             CodeTypeDeclaration baseType,
             CodeTypeDeclaration derivedType,
             CodeMemberMethod buildMethod,
-            CodeMemberMethod dataBindingMethod)
+            CodeMemberMethod dataBindingMethod
+        )
         {
             // Override the view's base type with the explicit base type
             derivedType.BaseTypes[0] = new CodeTypeReference(_typeName);

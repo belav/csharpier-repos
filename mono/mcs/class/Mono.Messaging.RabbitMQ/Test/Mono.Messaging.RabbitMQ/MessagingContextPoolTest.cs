@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,45 +28,42 @@
 //
 
 using System;
-
 using Mono.Messaging;
 using Mono.Messaging.RabbitMQ;
-using RabbitMQ.Client;
-
 using NUnit.Framework;
 using NUnit.Mocks;
+using RabbitMQ.Client;
 
-namespace MonoTests.Mono.Messaging.RabbitMQ {
-	
-	[TestFixture]
-	public class MessagingContentPoolTest {
-		
-		DynamicMock connectionMock;
-		IConnection connection;
-		MessageFactory messageFactory;
-		
-		public void SetUp ()
-		{
-			connectionMock = new DynamicMock (typeof (IConnection));
-			connection = (IConnection) connectionMock.MockInstance;
-			messageFactory = new MessageFactory (new RabbitMQMessagingProvider ());
-		}
-		
-		[Test]
-		public void ShouldAllocateReturnConnectionToPool ()
-		{
-			CreateConnectionDelegate handler = delegate (string host) {
-				return connection;
-			};
-			
-			MessagingContextPool pool = new MessagingContextPool (messageFactory, 
-				                                                  handler);
-			IMessagingContext context1 = pool.GetContext ("foo");
-			Assert.IsNotNull (context1);
-			context1.Dispose ();
-			IMessagingContext context2 = pool.GetContext ("foo");
-			Assert.AreEqual (context1, context2);
-		}
-	}
-	
+namespace MonoTests.Mono.Messaging.RabbitMQ
+{
+    [TestFixture]
+    public class MessagingContentPoolTest
+    {
+        DynamicMock connectionMock;
+        IConnection connection;
+        MessageFactory messageFactory;
+
+        public void SetUp()
+        {
+            connectionMock = new DynamicMock(typeof(IConnection));
+            connection = (IConnection)connectionMock.MockInstance;
+            messageFactory = new MessageFactory(new RabbitMQMessagingProvider());
+        }
+
+        [Test]
+        public void ShouldAllocateReturnConnectionToPool()
+        {
+            CreateConnectionDelegate handler = delegate(string host)
+            {
+                return connection;
+            };
+
+            MessagingContextPool pool = new MessagingContextPool(messageFactory, handler);
+            IMessagingContext context1 = pool.GetContext("foo");
+            Assert.IsNotNull(context1);
+            context1.Dispose();
+            IMessagingContext context2 = pool.GetContext("foo");
+            Assert.AreEqual(context1, context2);
+        }
+    }
 }

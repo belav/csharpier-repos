@@ -2,14 +2,14 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using Microsoft.TestCommon;
+using Moq;
 #if ASPNETWEBAPI
 using System.Net.Http;
 using System.Web.Http.Routing.Constraints;
 #else
 using System.Web.Mvc.Routing.Constraints;
 #endif
-using Microsoft.TestCommon;
-using Moq;
 
 #if ASPNETWEBAPI
 using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;
@@ -83,12 +83,12 @@ namespace System.Web.Mvc.Routing
 
 #if ASPNETWEBAPI
             string expectedMessage =
-                "The constraint entry 'custom' on the route with route template 'c/{id}' " +
-                "must have a string value or be of a type which implements 'System.Web.Http.Routing.IHttpRouteConstraint'.";
+                "The constraint entry 'custom' on the route with route template 'c/{id}' "
+                + "must have a string value or be of a type which implements 'System.Web.Http.Routing.IHttpRouteConstraint'.";
 #else
             string expectedMessage =
-                "The constraint entry 'custom' on the route with route template 'c/{id}' " +
-                "must have a string value or be of a type which implements 'System.Web.Routing.IRouteConstraint'.";
+                "The constraint entry 'custom' on the route with route template 'c/{id}' "
+                + "must have a string value or be of a type which implements 'System.Web.Routing.IRouteConstraint'.";
 #endif
 
             // Act & Assert
@@ -121,8 +121,8 @@ namespace System.Web.Mvc.Routing
             var actions = GetActions();
 
             var expectedMessage =
-                "A direct route cannot use the parameter 'controller'. " +
-                "Specify a literal path in place of this parameter to create a route to a controller.";
+                "A direct route cannot use the parameter 'controller'. "
+                + "Specify a literal path in place of this parameter to create a route to a controller.";
 
             var builder = new MockDirectRouteBuilder(actions, targetIsAction);
             builder.Template = template;
@@ -157,8 +157,8 @@ namespace System.Web.Mvc.Routing
             var actions = GetActions();
 
             var expectedMessage =
-                "A direct route for an action method cannot use the parameter 'action'. " +
-                "Specify a literal path in place of this parameter to create a route to the action.";
+                "A direct route for an action method cannot use the parameter 'action'. "
+                + "Specify a literal path in place of this parameter to create a route to the action.";
 
             var builder = new MockDirectRouteBuilder(actions, targetIsAction: true);
             builder.Template = template;
@@ -171,10 +171,7 @@ namespace System.Web.Mvc.Routing
 #if ASPNETWEBAPI
         private IReadOnlyCollection<TActionDescriptor> GetActions()
         {
-            var actions = new List<TActionDescriptor>()
-            {
-                new Mock<TActionDescriptor>().Object,
-            };
+            var actions = new List<TActionDescriptor>() { new Mock<TActionDescriptor>().Object };
 
             return actions.AsReadOnly();
         }
@@ -182,11 +179,10 @@ namespace System.Web.Mvc.Routing
         private IReadOnlyCollection<TActionDescriptor> GetActions()
         {
             var action = new Mock<ActionDescriptor>();
-            action.SetupGet(a => a.ControllerDescriptor).Returns(new Mock<ControllerDescriptor>().Object);
-            var actions = new List<ActionDescriptor>()
-            {
-                action.Object,
-            };
+            action
+                .SetupGet(a => a.ControllerDescriptor)
+                .Returns(new Mock<ControllerDescriptor>().Object);
+            var actions = new List<ActionDescriptor>() { action.Object };
 
             return actions.AsReadOnly();
         }
@@ -194,16 +190,13 @@ namespace System.Web.Mvc.Routing
 
         private class MockDirectRouteBuilder : DirectRouteBuilder
         {
-            public MockDirectRouteBuilder(IReadOnlyCollection<TActionDescriptor> actionDescriptors, bool targetIsAction)
-                : base(actionDescriptors, targetIsAction)
-            {
-            }
+            public MockDirectRouteBuilder(
+                IReadOnlyCollection<TActionDescriptor> actionDescriptors,
+                bool targetIsAction
+            )
+                : base(actionDescriptors, targetIsAction) { }
 
-            public int TimesValidateParametersCalled
-            {
-                get;
-                private set;
-            }
+            public int TimesValidateParametersCalled { get; private set; }
 
             internal override void ValidateParameters(TParsedRoute parsedRoute)
             {

@@ -28,48 +28,47 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class BuildFinishedEventArgs : BuildStatusEventArgs {
-	
-		bool succeeded;
-		
-		protected BuildFinishedEventArgs ()
-		{
-		}
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class BuildFinishedEventArgs : BuildStatusEventArgs
+    {
+        bool succeeded;
 
-		public BuildFinishedEventArgs (string message,
-						  string helpKeyword,
-						  bool succeeded)
-			: base (message, helpKeyword, null)
-		{
-			this.succeeded = succeeded;
-		}
+        protected BuildFinishedEventArgs() { }
 
-		public BuildFinishedEventArgs (string message,
-						  string helpKeyword,
-						  bool succeeded,
-						  DateTime eventTimestamp)
-			: base (message, helpKeyword, null, eventTimestamp)
-		{
-			this.succeeded = succeeded;
-		}
+        public BuildFinishedEventArgs(string message, string helpKeyword, bool succeeded)
+            : base(message, helpKeyword, null)
+        {
+            this.succeeded = succeeded;
+        }
 
-		public BuildFinishedEventArgs (string message,
-						  string helpKeyword,
-						  bool succeeded,
-						  DateTime eventTimestamp,
-						  params object [] messageArgs)
-			: base (message, helpKeyword, null, eventTimestamp, messageArgs)
-		{
-			this.succeeded = succeeded;
-		}
+        public BuildFinishedEventArgs(
+            string message,
+            string helpKeyword,
+            bool succeeded,
+            DateTime eventTimestamp
+        )
+            : base(message, helpKeyword, null, eventTimestamp)
+        {
+            this.succeeded = succeeded;
+        }
 
-		public bool Succeeded {
-			get {
-				return succeeded;
-			}
-		}
-	}
+        public BuildFinishedEventArgs(
+            string message,
+            string helpKeyword,
+            bool succeeded,
+            DateTime eventTimestamp,
+            params object[] messageArgs
+        )
+            : base(message, helpKeyword, null, eventTimestamp, messageArgs)
+        {
+            this.succeeded = succeeded;
+        }
+
+        public bool Succeeded
+        {
+            get { return succeeded; }
+        }
+    }
 }
-

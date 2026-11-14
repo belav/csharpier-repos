@@ -11,8 +11,10 @@ namespace JitTest_binop_misc_cs
         [Fact]
         public static int TestEntryPoint()
         {
-            long L1, L2;
-            ulong U1, U2;
+            long L1,
+                L2;
+            ulong U1,
+                U2;
             try
             {
                 L1 = 0x7000123480001234;
@@ -42,7 +44,7 @@ namespace JitTest_binop_misc_cs
             }
             Console.WriteLine("Passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Failed");
             return 1;
         }

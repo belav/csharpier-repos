@@ -13,7 +13,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
     {
         internal sealed class SettingsEntriesSnapshot : SettingsEntriesSnapshotBase<Setting>
         {
-            public SettingsEntriesSnapshot(ImmutableArray<Setting> data, int currentVersionNumber) : base(data, currentVersionNumber) { }
+            public SettingsEntriesSnapshot(ImmutableArray<Setting> data, int currentVersionNumber)
+                : base(data, currentVersionNumber) { }
 
             protected override bool TryGetValue(Setting result, string keyName, out object? content)
             {
@@ -34,7 +35,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
                 return location.LocationKind switch
                 {
                     LocationKind.EditorConfig or LocationKind.GlobalConfig => location.Path,
-                    _ => ServicesVSResources.Visual_Studio_Settings
+                    _ => ServicesVSResources.Visual_Studio_Settings,
                 };
             }
         }

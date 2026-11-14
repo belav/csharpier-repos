@@ -15,20 +15,18 @@ namespace System.Activities.DurableInstancing
 
     abstract class WorkflowOwnerAsyncResult : SqlWorkflowInstanceStoreAsyncResult
     {
-        public WorkflowOwnerAsyncResult
-            (
-            InstancePersistenceContext context, 
-            InstancePersistenceCommand command, 
+        public WorkflowOwnerAsyncResult(
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
             SqlWorkflowInstanceStoreLock storeLock,
             Transaction currentTransaction,
-            TimeSpan timeout, 
-            AsyncCallback callback, 
+            TimeSpan timeout,
+            AsyncCallback callback,
             object state
-            ) :
-            base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
-        {
-        }
+        )
+            : base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
+        { }
 
         protected override void GenerateSqlCommand(SqlCommand sqlCommand)
         {

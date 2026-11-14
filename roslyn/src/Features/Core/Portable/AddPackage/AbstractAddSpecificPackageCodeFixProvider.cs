@@ -12,17 +12,17 @@ using Microsoft.CodeAnalysis.SymbolSearch;
 
 namespace Microsoft.CodeAnalysis.AddPackage
 {
-    internal abstract partial class AbstractAddSpecificPackageCodeFixProvider : AbstractAddPackageCodeFixProvider
+    internal abstract partial class AbstractAddSpecificPackageCodeFixProvider
+        : AbstractAddPackageCodeFixProvider
     {
         /// <summary>
         /// Values for these parameters can be provided (during testing) for mocking purposes.
-        /// </summary> 
+        /// </summary>
         protected AbstractAddSpecificPackageCodeFixProvider(
             IPackageInstallerService packageInstallerService = null,
-            ISymbolSearchService symbolSearchService = null)
-            : base(packageInstallerService, symbolSearchService)
-        {
-        }
+            ISymbolSearchService symbolSearchService = null
+        )
+            : base(packageInstallerService, symbolSearchService) { }
 
         protected override bool IncludePrerelease => true;
 
@@ -40,7 +40,11 @@ namespace Microsoft.CodeAnalysis.AddPackage
             if (assemblyName != null)
             {
                 var assemblyNames = new HashSet<string> { assemblyName };
-                var addPackageCodeActions = await GetAddPackagesCodeActionsAsync(context, assemblyNames).ConfigureAwait(false);
+                var addPackageCodeActions = await GetAddPackagesCodeActionsAsync(
+                        context,
+                        assemblyNames
+                    )
+                    .ConfigureAwait(false);
                 context.RegisterFixes(addPackageCodeActions, context.Diagnostics);
             }
         }

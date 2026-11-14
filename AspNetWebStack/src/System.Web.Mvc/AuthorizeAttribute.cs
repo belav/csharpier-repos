@@ -8,8 +8,16 @@ using System.Web.Mvc.Properties;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Unsealed so that subclassed types can set properties in the default constructor or override our behavior.")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "Unsealed so that subclassed types can set properties in the default constructor or override our behavior."
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public class AuthorizeAttribute : FilterAttribute, IAuthorizationFilter
     {
         private static readonly char[] _splitParameter = new[] { ',' };
@@ -59,7 +67,10 @@ namespace System.Web.Mvc
                 return false;
             }
 
-            if (_usersSplit.Length > 0 && !_usersSplit.Contains(user.Identity.Name, StringComparer.OrdinalIgnoreCase))
+            if (
+                _usersSplit.Length > 0
+                && !_usersSplit.Contains(user.Identity.Name, StringComparer.OrdinalIgnoreCase)
+            )
             {
                 return false;
             }
@@ -72,7 +83,11 @@ namespace System.Web.Mvc
             return true;
         }
 
-        private void CacheValidateHandler(HttpContext context, object data, ref HttpValidationStatus validationStatus)
+        private void CacheValidateHandler(
+            HttpContext context,
+            object data,
+            ref HttpValidationStatus validationStatus
+        )
         {
             validationStatus = OnCacheAuthorization(new HttpContextWrapper(context));
         }
@@ -90,11 +105,20 @@ namespace System.Web.Mvc
                 // would have succeeded. The reason is that there's no way to hook a callback to rerun
                 // authorization before the fragment is served from the cache, so we can't guarantee that this
                 // filter will be re-run on subsequent requests.
-                throw new InvalidOperationException(MvcResources.AuthorizeAttribute_CannotUseWithinChildActionCache);
+                throw new InvalidOperationException(
+                    MvcResources.AuthorizeAttribute_CannotUseWithinChildActionCache
+                );
             }
 
-            bool skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), inherit: true)
-                                     || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), inherit: true);
+            bool skipAuthorization =
+                filterContext.ActionDescriptor.IsDefined(
+                    typeof(AllowAnonymousAttribute),
+                    inherit: true
+                )
+                || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(
+                    typeof(AllowAnonymousAttribute),
+                    inherit: true
+                );
 
             if (skipAuthorization)
             {
@@ -113,7 +137,10 @@ namespace System.Web.Mvc
 
                 HttpCachePolicyBase cachePolicy = filterContext.HttpContext.Response.Cache;
                 cachePolicy.SetProxyMaxAge(new TimeSpan(0));
-                cachePolicy.AddValidationCallback(CacheValidateHandler, null /* data */);
+                cachePolicy.AddValidationCallback(
+                    CacheValidateHandler,
+                    null /* data */
+                );
             }
             else
             {
@@ -136,7 +163,9 @@ namespace System.Web.Mvc
             }
 
             bool isAuthorized = AuthorizeCore(httpContext);
-            return (isAuthorized) ? HttpValidationStatus.Valid : HttpValidationStatus.IgnoreThisRequest;
+            return (isAuthorized)
+                ? HttpValidationStatus.Valid
+                : HttpValidationStatus.IgnoreThisRequest;
         }
 
         internal static string[] SplitString(string original)
@@ -146,10 +175,11 @@ namespace System.Web.Mvc
                 return new string[0];
             }
 
-            var split = from piece in original.Split(_splitParameter)
-                        let trimmed = piece.Trim()
-                        where !String.IsNullOrEmpty(trimmed)
-                        select trimmed;
+            var split =
+                from piece in original.Split(_splitParameter)
+                let trimmed = piece.Trim()
+                where !String.IsNullOrEmpty(trimmed)
+                select trimmed;
             return split.ToArray();
         }
     }

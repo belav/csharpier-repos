@@ -10,47 +10,47 @@ using Xunit;
 //
 public class Trace
 {
-  public Trace(string tag, string expected)
-  {
-    Console.WriteLine("-----------------------------");
-    Console.WriteLine(tag);
-    Console.WriteLine("-----------------------------");
-    _expected = expected;
-  }
-      
-  public void Write(string str)
-  {
-    _actual += str;
-    // Console.Write(str);
-  }
-
-  public void WriteLine(string str)
-  {
-    _actual += str;
-    _actual += Environment.NewLine;
-
-    // Console.WriteLine(str);
-  }
-
-  public int Match()
-  {
-    // Console.WriteLine("");
-    Console.Write(_expected);
-    if (_actual.Equals(_expected))
+    public Trace(string tag, string expected)
     {
-      Console.WriteLine(": PASS");
-      return 100;
+        Console.WriteLine("-----------------------------");
+        Console.WriteLine(tag);
+        Console.WriteLine("-----------------------------");
+        _expected = expected;
     }
-    else
-    {
-      Console.WriteLine(": FAIL: _actual='" + _actual + "'");
-      Console.WriteLine("_expected='" + _expected + "'");
-      return 999;
-    }
-  }
 
-  string _actual;
-  string _expected;
+    public void Write(string str)
+    {
+        _actual += str;
+        // Console.Write(str);
+    }
+
+    public void WriteLine(string str)
+    {
+        _actual += str;
+        _actual += Environment.NewLine;
+
+        // Console.WriteLine(str);
+    }
+
+    public int Match()
+    {
+        // Console.WriteLine("");
+        Console.Write(_expected);
+        if (_actual.Equals(_expected))
+        {
+            Console.WriteLine(": PASS");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine(": FAIL: _actual='" + _actual + "'");
+            Console.WriteLine("_expected='" + _expected + "'");
+            return 999;
+        }
+    }
+
+    string _actual;
+    string _expected;
 }
 
 //
@@ -79,23 +79,23 @@ public class TestSet
 
         // @TODO: SDM: // CountResults(new StackOverflowInLeafFunction().Run(),      ref nSuccesses, ref nFailures);
 
-        CountResults(new BaseClassTest().Run(),                 ref nSuccesses, ref nFailures);
-        CountResults(new TryCatchInFinallyTest().Run(),         ref nSuccesses, ref nFailures);
-        CountResults(new RecurseTest().Run(),                   ref nSuccesses, ref nFailures);
+        CountResults(new BaseClassTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new TryCatchInFinallyTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new RecurseTest().Run(), ref nSuccesses, ref nFailures);
         CountResults(new ThrowInFinallyNestedInTryTest().Run(), ref nSuccesses, ref nFailures); // FAIL: needs skip to parent code <TODO> investigate </TODO>
-        CountResults(new GoryManagedPresentTest().Run(),        ref nSuccesses, ref nFailures); // FAIL: needs skip to parent code <TODO> investigate </TODO>
-        CountResults(new InnerFinallyAndCatchTest().Run(),      ref nSuccesses, ref nFailures);
-        CountResults(new InnerFinallyTest().Run(),              ref nSuccesses, ref nFailures);
-        CountResults(new ThrowInFinallyTest().Run(),            ref nSuccesses, ref nFailures);
-        CountResults(new RecursiveRethrow().Run(),              ref nSuccesses, ref nFailures);
-        CountResults(new RecursiveThrowNew().Run(),             ref nSuccesses, ref nFailures);
-        CountResults(new PendingTest().Run(),                   ref nSuccesses, ref nFailures);
-        CountResults(new CollidedUnwindTest().Run(),            ref nSuccesses, ref nFailures);
-        CountResults(new BaadbaadTest().Run(),                  ref nSuccesses, ref nFailures);
-        CountResults(new GoryNativePastTest().Run(),            ref nSuccesses, ref nFailures);
-        CountResults(new ThrowInCatchTest().Run(),              ref nSuccesses, ref nFailures);
-        CountResults(new StrSwitchFinalTest().Run(),            ref nSuccesses, ref nFailures);
-        CountResults(new RethrowAndFinallysTest().Run(),        ref nSuccesses, ref nFailures);
+        CountResults(new GoryManagedPresentTest().Run(), ref nSuccesses, ref nFailures); // FAIL: needs skip to parent code <TODO> investigate </TODO>
+        CountResults(new InnerFinallyAndCatchTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new InnerFinallyTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new ThrowInFinallyTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new RecursiveRethrow().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new RecursiveThrowNew().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new PendingTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new CollidedUnwindTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new BaadbaadTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new GoryNativePastTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new ThrowInCatchTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new StrSwitchFinalTest().Run(), ref nSuccesses, ref nFailures);
+        CountResults(new RethrowAndFinallysTest().Run(), ref nSuccesses, ref nFailures);
 
         if (0 == nFailures)
         {
@@ -121,7 +121,7 @@ public class RecursiveRethrow
     public int Run()
     {
         _trace = new Trace("RecursiveRethrow", "210C0C1C2");
-        
+
         try
         {
             LoveToRecurse(2);
@@ -133,7 +133,6 @@ public class RecursiveRethrow
 
         return _trace.Match();
     }
-
 
     void SeparatorMethod(int i)
     {
@@ -170,7 +169,7 @@ public class RecursiveThrowNew
     public int Run()
     {
         _trace = new Trace("RecursiveThrowNew", "210C0(eX)C1(e0)C2(e1)CM(e2)");
-        
+
         try
         {
             LoveToRecurse(2);
@@ -183,7 +182,6 @@ public class RecursiveThrowNew
 
         return _trace.Match();
     }
-
 
     void SeparatorMethod(int i)
     {
@@ -213,132 +211,124 @@ public class RecursiveThrowNew
     }
 }
 
-
 public class BaadbaadTest
 {
-  Trace _trace;
+    Trace _trace;
 
-  public int Run()
-  {
-    _trace = new Trace("BaadbaadTest", "1234");
-        
-    try
+    public int Run()
     {
-      DoStuff();
-    }
-    catch(Exception e)
-    {
-      Console.WriteLine(e);
-      _trace.Write("4");
-    }
-    return _trace.Match();
-  }
+        _trace = new Trace("BaadbaadTest", "1234");
 
-  void DoStuff()
-  {
-    try
-    {
-      try
-      {
         try
         {
-          throw new Exception();
+            DoStuff();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-          Console.WriteLine(e);
-          _trace.Write("1");
-          throw;
+            Console.WriteLine(e);
+            _trace.Write("4");
         }
-      }
-      catch(Exception e)
-      {
-        Console.WriteLine(e);
-        _trace.Write("2");
-        throw;
-      }
+        return _trace.Match();
     }
-    catch(Exception e)
-    {
-      Console.WriteLine(e);
-      _trace.Write("3");
-      throw;
-    }
-  }
-}
 
+    void DoStuff()
+    {
+        try
+        {
+            try
+            {
+                try
+                {
+                    throw new Exception();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    _trace.Write("1");
+                    throw;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                _trace.Write("2");
+                throw;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _trace.Write("3");
+            throw;
+        }
+    }
+}
 
 class BaseClassTest
 {
-  Trace _trace;
-  
-  void f2()
-  {
-    throw new FileNotFoundException("1");
-  }
+    Trace _trace;
 
-  void f1()
-  {
-    try
+    void f2()
     {
-      f2();
+        throw new FileNotFoundException("1");
     }
-    catch(FileNotFoundException e)
-    {
-      Console.WriteLine(e);
-      _trace.Write("0" + e.Message);
-      throw e;
-    }
-    catch(IOException e)
-    {
-      Console.WriteLine(e);
-      _trace.Write("!" + e.Message);
-      throw e;
-    }
-    catch(Exception e)
-    {
-      Console.WriteLine(e);
-      _trace.Write("@" + e.Message);
-      throw e;
-    }
-  }
 
-  public int Run() 
-  {
-      _trace = new Trace("BaseClassTest", "0121");
-      
-      try
-      {
-        f1();
-      }
-      catch(Exception e)
-      {
-        Console.WriteLine(e);
-        _trace.Write("2" + e.Message);
-      }
+    void f1()
+    {
+        try
+        {
+            f2();
+        }
+        catch (FileNotFoundException e)
+        {
+            Console.WriteLine(e);
+            _trace.Write("0" + e.Message);
+            throw e;
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine(e);
+            _trace.Write("!" + e.Message);
+            throw e;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _trace.Write("@" + e.Message);
+            throw e;
+        }
+    }
 
-      return _trace.Match();
-  }
+    public int Run()
+    {
+        _trace = new Trace("BaseClassTest", "0121");
+
+        try
+        {
+            f1();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _trace.Write("2" + e.Message);
+        }
+
+        return _trace.Match();
+    }
 }
-
-
 
 public class CollidedUnwindTest
 {
-    class ExType1 : Exception
-    {
-    }
-    
-    class ExType2 : Exception
-    {
-    }
+    class ExType1 : Exception { }
+
+    class ExType2 : Exception { }
 
     Trace _trace;
-    
+
     public int Run()
     {
         _trace = new Trace("CollidedUnwindTest", "0123456789ABCDE");
-        
+
         try
         {
             _trace.Write("0");
@@ -372,7 +362,7 @@ public class CollidedUnwindTest
         try
         {
             _trace.Write("2");
-            FnBBB();   
+            FnBBB();
         }
         finally
         {
@@ -385,7 +375,7 @@ public class CollidedUnwindTest
         try
         {
             _trace.Write("3");
-            Bar();   
+            Bar();
         }
         finally
         {
@@ -412,7 +402,7 @@ public class CollidedUnwindTest
         try
         {
             _trace.Write("5");
-            FnDDD();   
+            FnDDD();
         }
         finally
         {
@@ -425,7 +415,7 @@ public class CollidedUnwindTest
         try
         {
             _trace.Write("6");
-            Fubar();   
+            Fubar();
         }
         finally
         {
@@ -447,35 +437,35 @@ public class CollidedUnwindTest
     }
 }
 
-public class ThrowInFinallyNestedInTryTest 
+public class ThrowInFinallyNestedInTryTest
 {
     Trace _trace;
-    
-    void MiddleMethod() 
+
+    void MiddleMethod()
     {
         _trace.Write("2");
-        try 
+        try
         {
             _trace.Write("3");
-            try 
+            try
             {
                 _trace.Write("4");
-            } 
-            finally 
+            }
+            finally
             {
                 _trace.Write("5");
-                try 
+                try
                 {
                     _trace.Write("6");
                     throw new System.ArgumentException();
-                } 
-                finally 
+                }
+                finally
                 {
                     _trace.Write("7");
                 }
             }
-        } 
-        finally 
+        }
+        finally
         {
             _trace.Write("8");
         }
@@ -484,20 +474,20 @@ public class ThrowInFinallyNestedInTryTest
     public int Run()
     {
         _trace = new Trace("ThrowInFinallyNestedInTryTest", "0123456789a");
-        
+
         _trace.Write("0");
-        try 
+        try
         {
             _trace.Write("1");
             MiddleMethod();
-        } 
-        catch(Exception e)
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("9");
         }
         _trace.Write("a");
-        
+
         return _trace.Match();
     }
 }
@@ -505,27 +495,27 @@ public class ThrowInFinallyNestedInTryTest
 class ThrowInFinallyTest
 {
     Trace _trace;
-    
+
     void Dumb()
     {
         _trace.Write("2");
         try
         {
             _trace.Write("3");
-            try 
+            try
             {
                 _trace.Write("4");
-                try 
+                try
                 {
                     _trace.Write("5");
                     throw new Exception("A");
-                } 
+                }
                 finally
                 {
                     _trace.Write("6");
                     throw new Exception("B");
                 }
-            } 
+            }
             finally
             {
                 _trace.Write("7");
@@ -538,17 +528,17 @@ class ThrowInFinallyTest
         }
     }
 
-    public int Run() 
+    public int Run()
     {
         _trace = new Trace("ThrowInFinallyTest", "0123456789Ca");
-        
+
         _trace.Write("0");
         try
         {
             _trace.Write("1");
             Dumb();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("9");
@@ -556,33 +546,33 @@ class ThrowInFinallyTest
         }
         _trace.Write("a");
         return _trace.Match();
-   }
+    }
 }
 
 class ThrowInCatchTest
 {
     Trace _trace;
-    
+
     public int Run()
     {
         _trace = new Trace("ThrowInCatchTest", "0123456");
         _trace.Write("0");
-        try 
+        try
         {
             _trace.Write("1");
-            try 
+            try
             {
                 _trace.Write("2");
                 throw new Exception(".....");
-            } 
-            catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 _trace.Write("3");
                 throw new Exception("5");
             }
-        } 
-        catch(Exception e)
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("4");
@@ -596,7 +586,7 @@ class ThrowInCatchTest
 class RecurseTest
 {
     Trace _trace;
-    
+
     void DoTest(int level)
     {
         _trace.Write(level.ToString());
@@ -617,8 +607,8 @@ class RecurseTest
 
     public int Run()
     {
-        int     n = 8;
-        string  expected = "";
+        int n = 8;
+        string expected = "";
 
         // create expected result string
         for (int i = n; i >= 0; i--)
@@ -627,7 +617,7 @@ class RecurseTest
         }
 
         _trace = new Trace("RecurseTest", expected);
-        
+
         DoTest(n);
 
         return _trace.Match();
@@ -637,11 +627,11 @@ class RecurseTest
 class PendingTest
 {
     Trace _trace;
-    
+
     void f3()
     {
         throw new Exception();
-    } 
+    }
 
     void f2()
     {
@@ -649,8 +639,8 @@ class PendingTest
         {
             _trace.Write("1");
             f3();
-        } 
-        catch(Exception e) 
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("2");
@@ -665,7 +655,7 @@ class PendingTest
             _trace.Write("0");
             f2();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("3");
@@ -676,12 +666,12 @@ class PendingTest
     public int Run()
     {
         _trace = new Trace("PendingTest", "0123401235");
-            
+
         try
         {
             f1();
         }
-        catch(Exception e) 
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("4");
@@ -691,7 +681,7 @@ class PendingTest
         {
             f1();
         }
-        catch(Exception e) 
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("5");
@@ -701,11 +691,10 @@ class PendingTest
     }
 }
 
-
 class GoryNativePastTest
 {
     Trace _trace;
-    
+
     void bar()
     {
         _trace.Write("2");
@@ -728,22 +717,22 @@ class GoryNativePastTest
     public int Run()
     {
         _trace = new Trace("GoryNativePastTest", "0123456");
-        
+
         _trace.Write("0");
         try
         {
-            try 
+            try
             {
                 foo();
-            } 
-            catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 _trace.Write("4");
                 throw;
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             _trace.Write("5");
             _trace.Write(e.Message);
@@ -755,14 +744,14 @@ class GoryNativePastTest
 class GoryManagedPresentTest
 {
     Trace _trace;
-    
+
     void foo(int dummy)
     {
         _trace.Write("1");
         try
         {
             _trace.Write("2");
-            try 
+            try
             {
                 _trace.Write("3");
                 if (1234 == dummy)
@@ -788,7 +777,7 @@ class GoryManagedPresentTest
 
         _trace.Write("****");
 
-    MyLabel:
+        MyLabel:
         _trace.Write("~~~~");
     }
 
@@ -801,7 +790,7 @@ class GoryManagedPresentTest
             foo(1234);
             _trace.Write("%%%%");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("6");
@@ -814,11 +803,11 @@ class GoryManagedPresentTest
 class TryCatchInFinallyTest
 {
     Trace _trace;
-    
+
     public int Run()
     {
         _trace = new Trace("TryCatchInFinallyTest", "0123456");
-        
+
         _trace.Write("0");
         try
         {
@@ -832,7 +821,7 @@ class TryCatchInFinallyTest
                 _trace.Write("3");
                 throw new InvalidProgramException();
             }
-            catch(InvalidProgramException e)
+            catch (InvalidProgramException e)
             {
                 Console.WriteLine(e);
                 _trace.Write("4");
@@ -849,12 +838,12 @@ class StrSwitchFinalTest
 {
     Trace _trace;
     static string _expected;
-    
+
     static StrSwitchFinalTest()
     {
         // Create test writer object to hold expected output
         System.IO.StringWriter expectedOut = new System.IO.StringWriter();
-        
+
         // Write expected output to string writer object
         expectedOut.WriteLine("s == one");
         expectedOut.WriteLine("In inner finally");
@@ -871,22 +860,22 @@ class StrSwitchFinalTest
         expectedOut.WriteLine("Caught an exception\r\n");
         expectedOut.WriteLine("Ok\r\n");
         expectedOut.WriteLine("In outer finally\r\n");
-        
+
         expectedOut.WriteLine("In four's finally");
         expectedOut.WriteLine("In inner finally");
         expectedOut.WriteLine("Caught an exception\r\n");
-        
+
         expectedOut.WriteLine("Ok\r\n");
-        
+
         expectedOut.WriteLine("In outer finally\r\n");
-        
+
         expectedOut.WriteLine("s == five");
         expectedOut.WriteLine("Five's finally 0");
         expectedOut.WriteLine("Five's finally 1");
         expectedOut.WriteLine("Five's finally 2");
         expectedOut.WriteLine("In inner finally");
         expectedOut.WriteLine("In outer finally\r\n");
-        
+
         expectedOut.WriteLine("Greater than five");
         expectedOut.WriteLine("in six's finally");
         expectedOut.WriteLine("In inner finally");
@@ -898,193 +887,186 @@ class StrSwitchFinalTest
     public int Run()
     {
         _trace = new Trace("StrSwitchFinalTest", _expected);
-        
-        string[] s = {"one", "two", "three", "four", "five", "six"};
 
-        for(int i = 0; i < s.Length; i++) 
+        string[] s = { "one", "two", "three", "four", "five", "six" };
+
+        for (int i = 0; i < s.Length; i++)
         {
-
-        beginloop:
-            try 
+            beginloop:
+            try
             {
-                try 
+                try
                 {
-                    try 
+                    try
                     {
-                        switch(s[i]) 
+                        switch (s[i])
                         {
                             case "one":
-                                try 
+                                try
                                 {
                                     _trace.WriteLine("s == one");
-                                } 
-                                catch 
+                                }
+                                catch
                                 {
                                     _trace.WriteLine("Exception at one");
                                 }
                                 break;
                             case "two":
-                                try 
+                                try
                                 {
                                     _trace.WriteLine("s == two");
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("After two");
                                 }
                                 break;
                             case "three":
-                                try 
+                                try
                                 {
-                                    try 
+                                    try
                                     {
                                         _trace.WriteLine("s == three");
-                                    } 
-                                    catch(System.Exception e) 
+                                    }
+                                    catch (System.Exception e)
                                     {
                                         _trace.WriteLine(e.ToString());
                                         goto continueloop;
                                     }
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("After three");
-                                    try 
-                                    { 
-                                        switch(s[s.Length-1]) 
+                                    try
+                                    {
+                                        switch (s[s.Length - 1])
                                         {
                                             case "six":
                                                 _trace.WriteLine("Ok");
                                                 _trace.WriteLine(s[s.Length]);
                                                 goto label2;
                                             default:
-                                                try 
-                                                { 
+                                                try
+                                                {
                                                     _trace.WriteLine("Ack");
                                                     goto label;
-                                                } 
-                                                catch 
+                                                }
+                                                catch
                                                 {
                                                     _trace.WriteLine("I don't think so ...");
                                                 }
                                                 break;
                                         }
-                                    label:
+                                        label:
                                         _trace.WriteLine("Unreached");
                                         throw new Exception();
-                                    } 
-                                    finally 
+                                    }
+                                    finally
                                     {
                                         _trace.WriteLine("After after three");
                                     }
-                                label2:
+                                    label2:
                                     _trace.WriteLine("Unreached");
-                        
                                 }
                                 goto continueloop;
 
                             case "four":
-                                try 
+                                try
                                 {
-                                    try 
+                                    try
                                     {
                                         _trace.WriteLine("s == " + s[s.Length]);
-                                        try 
-                                        {
-                                        } 
-                                        finally 
+                                        try { }
+                                        finally
                                         {
                                             _trace.WriteLine("Unreached");
                                         }
-                                    } 
-                                    catch (Exception e) 
+                                    }
+                                    catch (Exception e)
                                     {
                                         goto test;
-                                    rethrowex:
+                                        rethrowex:
                                         throw;
-                                    test:
-                                        if (e is System.ArithmeticException) 
+                                        test:
+                                        if (e is System.ArithmeticException)
                                         {
-
-                                            try 
+                                            try
                                             {
                                                 _trace.WriteLine("unreached ");
                                                 goto finishfour;
-                                            } 
-                                            finally 
+                                            }
+                                            finally
                                             {
                                                 _trace.WriteLine("also unreached");
                                             }
-                                        } 
-                                        else 
+                                        }
+                                        else
                                         {
                                             goto rethrowex;
                                         }
                                     }
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("In four's finally");
                                 }
                                 finishfour:
-                                    break;
+                                break;
                             case "five":
-                                try 
+                                try
                                 {
-                                    try 
+                                    try
                                     {
-                                        try 
+                                        try
                                         {
-
                                             _trace.WriteLine("s == five");
-                                        } 
-                                        finally 
+                                        }
+                                        finally
                                         {
                                             _trace.WriteLine("Five's finally 0");
                                         }
-                                    } 
-                                    catch (Exception) 
+                                    }
+                                    catch (Exception)
                                     {
                                         _trace.WriteLine("Unreached");
-                                    } 
-                                    finally 
+                                    }
+                                    finally
                                     {
                                         _trace.WriteLine("Five's finally 1");
                                     }
                                     break;
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("Five's finally 2");
                                 }
                             default:
-                                try 
+                                try
                                 {
                                     _trace.WriteLine("Greater than five");
                                     goto finish;
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("in six's finally");
-                        
                                 }
-                    
-                        };
+                        }
+                        ;
                         continue;
-                    } 
-                    finally 
+                    }
+                    finally
                     {
                         _trace.WriteLine("In inner finally");
                     }
                 }
-                catch (Exception e) 
+                catch (Exception e)
                 {
                     _trace.WriteLine("Caught an exception\r\n");
-                                            
-                    switch(s[i]) 
+
+                    switch (s[i])
                     {
                         case "three":
-                            if (e is System.IndexOutOfRangeException) 
+                            if (e is System.IndexOutOfRangeException)
                             {
                                 _trace.WriteLine("Ok\r\n");
                                 i++;
@@ -1093,7 +1075,7 @@ class StrSwitchFinalTest
                             _trace.WriteLine("Unreached\r\n");
                             break;
                         case "four":
-                            if (e is System.IndexOutOfRangeException) 
+                            if (e is System.IndexOutOfRangeException)
                             {
                                 _trace.WriteLine("Ok\r\n");
                                 i++;
@@ -1105,19 +1087,17 @@ class StrSwitchFinalTest
                             _trace.WriteLine("****** Unreached");
                             goto continueloop;
                     }
-                    
                 }
 
                 _trace.WriteLine("Unreached");
-            } 
-            finally 
+            }
+            finally
             {
                 _trace.WriteLine("In outer finally\r\n");
             }
 
-        continueloop:
+            continueloop:
             _trace.WriteLine("Continuing");
-         
         }
         finish:
 
@@ -1125,27 +1105,26 @@ class StrSwitchFinalTest
     }
 }
 
-
 public class RethrowAndFinallysTest
 {
     Trace _trace;
-    
+
     public int Run()
     {
         _trace = new Trace("RethrowAndFinallysTest", "abcdefF3ED2CB1A[done]");
-        try 
+        try
         {
             _trace.Write("a");
             try
             {
                 _trace.Write("b");
-                try 
+                try
                 {
                     _trace.Write("c");
                     try
                     {
                         _trace.Write("d");
-                        try 
+                        try
                         {
                             _trace.Write("e");
                             try
@@ -1158,7 +1137,7 @@ public class RethrowAndFinallysTest
                                 _trace.Write("F");
                             }
                         }
-                        catch(Exception e) 
+                        catch (Exception e)
                         {
                             Console.WriteLine(e);
                             _trace.Write("3");
@@ -1174,7 +1153,7 @@ public class RethrowAndFinallysTest
                         _trace.Write("D");
                     }
                 }
-                catch(Exception e) 
+                catch (Exception e)
                 {
                     Console.WriteLine(e);
                     _trace.Write("2");
@@ -1190,7 +1169,7 @@ public class RethrowAndFinallysTest
                 _trace.Write("B");
             }
         }
-        catch(Exception e) 
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("1");
@@ -1206,13 +1185,11 @@ public class RethrowAndFinallysTest
     }
 }
 
-
-
 class InnerFinallyTest
 {
     Trace _trace;
 
-    public InnerFinallyTest() 
+    public InnerFinallyTest()
     {
         // Create test writer object to hold expected output
         System.IO.StringWriter expectedOut = new System.IO.StringWriter();
@@ -1226,41 +1203,43 @@ class InnerFinallyTest
         expectedOut.WriteLine("\t\t finally 1.1.1");
         expectedOut.WriteLine(" catch 1");
         expectedOut.WriteLine(" finally 1");
-        
+
         _trace = new Trace("InnerFinallyTest", expectedOut.ToString());
     }
-    
-    public int Run() 
-    {
-        int x = 7, y = 0, z;
 
-        try 
+    public int Run()
+    {
+        int x = 7,
+            y = 0,
+            z;
+
+        try
         {
             _trace.WriteLine(" try 1");
-            try 
+            try
             {
                 _trace.WriteLine("\t try 1.1");
-            } 
-            finally 
+            }
+            finally
             {
                 _trace.WriteLine("\t finally 1.1");
-                try  
-                { 
+                try
+                {
                     _trace.WriteLine("\t\t try 1.1.1");
                     _trace.WriteLine("\t\t Throwing an exception here!");
                     z = x / y;
-                } 
-                finally  
+                }
+                finally
                 {
                     _trace.WriteLine("\t\t finally 1.1.1");
                 }
             }
-        } 
-        catch (Exception) 
+        }
+        catch (Exception)
         {
             _trace.WriteLine(" catch 1");
-        } 
-        finally  
+        }
+        finally
         {
             _trace.WriteLine(" finally 1");
         }
@@ -1269,20 +1248,21 @@ class InnerFinallyTest
     }
 }
 
-
 class InnerFinallyAndCatchTest
 {
     Trace _trace;
 
-    public int Run() 
+    public int Run()
     {
         _trace = new Trace("InnerFinallyAndCatchTest", "abcdefghijklm13");
 
-        int x = 7, y = 0, z;
+        int x = 7,
+            y = 0,
+            z;
 
-        int count = 0; 
+        int count = 0;
 
-        try 
+        try
         {
             _trace.Write("a");
             count++;
@@ -1302,21 +1282,21 @@ class InnerFinallyAndCatchTest
                 {
                     try
                     {
-                        try 
+                        try
                         {
                             _trace.Write("d");
                             count++;
-                        } 
+                        }
                         finally // 3
                         {
                             _trace.Write("e");
                             count++;
-                            try  
-                            { 
+                            try
+                            {
                                 _trace.Write("f");
                                 count++;
-                            } 
-                            finally  // 4
+                            }
+                            finally // 4
                             {
                                 _trace.Write("g");
                                 count++;
@@ -1339,18 +1319,18 @@ class InnerFinallyAndCatchTest
             }
             _trace.Write("k");
             count++;
-        } 
+        }
         catch (Exception) // C1
         {
             _trace.Write("!!");
             count++;
-        } 
-        finally  // 0
+        }
+        finally // 0
         {
             _trace.Write("l");
             count++;
         }
-        
+
         _trace.Write("m");
         count++;
 
@@ -1360,44 +1340,43 @@ class InnerFinallyAndCatchTest
     }
 }
 
-
 class StackOverflowInLeafFunction
 {
     Trace _trace;
 
-/*
-    int LeafFunction(int a, int b)
-    {
-        int c;
-        
-        try
+    /*
+        int LeafFunction(int a, int b)
         {
-            // raise stack overflow
+            int c;
+            
+            try
+            {
+                // raise stack overflow
+            }
+            catch
+            {
+                c = b / a;  // this exception will not be able to dispatch
+            }
+    
+            return c;
         }
-        catch
-        {
-            c = b / a;  // this exception will not be able to dispatch
-        }
-
-        return c;
-    }
-*/
+    */
 
     unsafe void RecursiveDeath(int depth)
     {
-        string msg    = String.Concat("caught at depth:", depth.ToString());
-        long* pStuff = stackalloc long[128]; 
+        string msg = String.Concat("caught at depth:", depth.ToString());
+        long* pStuff = stackalloc long[128];
 
         for (int i = 0; i < 128; i++)
         {
             short d = (short)depth;
-            long  dd = (long)d;
-            
-            long foo  = dd << 48;
-                 foo |= dd << 32; 
-                 foo |= dd << 16; 
-                 foo |= dd; 
-                 
+            long dd = (long)d;
+
+            long foo = dd << 48;
+            foo |= dd << 32;
+            foo |= dd << 16;
+            foo |= dd;
+
             pStuff[i] = foo;
         }
 
@@ -1409,10 +1388,9 @@ class StackOverflowInLeafFunction
         {
             Console.WriteLine(msg);
         }
-        
     }
 
-    public int Run() 
+    public int Run()
     {
         _trace = new Trace("", "123");
 
@@ -1428,8 +1406,7 @@ class StackOverflowInLeafFunction
         }
 
         _trace.Write("3");
-        
+
         return _trace.Match();
     }
 }
-

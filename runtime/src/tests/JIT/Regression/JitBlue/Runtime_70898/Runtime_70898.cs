@@ -22,7 +22,8 @@ public unsafe class Runtime_70898
         return (byte)x.Index == 1;
     }
 
-    internal static void Use<T>(T* arg) where T : unmanaged { }
+    internal static void Use<T>(T* arg)
+        where T : unmanaged { }
 
     struct StructWithIndex
     {

@@ -16,27 +16,50 @@ namespace System.Numerics
         /// <summary>
         /// Returns the vector (0,0,0,0).
         /// </summary>
-        public static Vector4 Zero { get { return new Vector4(); } }
+        public static Vector4 Zero
+        {
+            get { return new Vector4(); }
+        }
+
         /// <summary>
         /// Returns the vector (1,1,1,1).
         /// </summary>
-        public static Vector4 One { get { return new Vector4(1.0f, 1.0f, 1.0f, 1.0f); } }
+        public static Vector4 One
+        {
+            get { return new Vector4(1.0f, 1.0f, 1.0f, 1.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (1,0,0,0).
         /// </summary>
-        public static Vector4 UnitX { get { return new Vector4(1.0f, 0.0f, 0.0f, 0.0f); } }
+        public static Vector4 UnitX
+        {
+            get { return new Vector4(1.0f, 0.0f, 0.0f, 0.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (0,1,0,0).
         /// </summary>
-        public static Vector4 UnitY { get { return new Vector4(0.0f, 1.0f, 0.0f, 0.0f); } }
+        public static Vector4 UnitY
+        {
+            get { return new Vector4(0.0f, 1.0f, 0.0f, 0.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (0,0,1,0).
         /// </summary>
-        public static Vector4 UnitZ { get { return new Vector4(0.0f, 0.0f, 1.0f, 0.0f); } }
+        public static Vector4 UnitZ
+        {
+            get { return new Vector4(0.0f, 0.0f, 1.0f, 0.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (0,0,0,1).
         /// </summary>
-        public static Vector4 UnitW { get { return new Vector4(0.0f, 0.0f, 0.0f, 1.0f); } }
+        public static Vector4 UnitW
+        {
+            get { return new Vector4(0.0f, 0.0f, 0.0f, 1.0f); }
+        }
         #endregion Public Static Properties
 
         #region Public instance methods
@@ -86,7 +109,7 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Returns a String representing this Vector4 instance, using the specified format to format individual elements 
+        /// Returns a String representing this Vector4 instance, using the specified format to format individual elements
         /// and the given IFormatProvider.
         /// </summary>
         /// <param name="format">The format of individual elements.</param>
@@ -218,14 +241,19 @@ namespace System.Numerics
             }
             else
             {
-                float ls = vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z + vector.W * vector.W;
+                float ls =
+                    vector.X * vector.X
+                    + vector.Y * vector.Y
+                    + vector.Z * vector.Z
+                    + vector.W * vector.W;
                 float invNorm = 1.0f / (float)Math.Sqrt((double)ls);
 
                 return new Vector4(
                     vector.X * invNorm,
                     vector.Y * invNorm,
                     vector.Z * invNorm,
-                    vector.W * invNorm);
+                    vector.W * invNorm
+                );
             }
         }
 
@@ -275,7 +303,8 @@ namespace System.Numerics
                 value1.X + (value2.X - value1.X) * amount,
                 value1.Y + (value2.Y - value1.Y) * amount,
                 value1.Z + (value2.Z - value1.Z) * amount,
-                value1.W + (value2.W - value1.W) * amount);
+                value1.W + (value2.W - value1.W) * amount
+            );
         }
 
         /// <summary>
@@ -291,7 +320,8 @@ namespace System.Numerics
                 position.X * matrix.M11 + position.Y * matrix.M21 + matrix.M41,
                 position.X * matrix.M12 + position.Y * matrix.M22 + matrix.M42,
                 position.X * matrix.M13 + position.Y * matrix.M23 + matrix.M43,
-                position.X * matrix.M14 + position.Y * matrix.M24 + matrix.M44);
+                position.X * matrix.M14 + position.Y * matrix.M24 + matrix.M44
+            );
         }
 
         /// <summary>
@@ -304,10 +334,23 @@ namespace System.Numerics
         public static Vector4 Transform(Vector3 position, Matrix4x4 matrix)
         {
             return new Vector4(
-                position.X * matrix.M11 + position.Y * matrix.M21 + position.Z * matrix.M31 + matrix.M41,
-                position.X * matrix.M12 + position.Y * matrix.M22 + position.Z * matrix.M32 + matrix.M42,
-                position.X * matrix.M13 + position.Y * matrix.M23 + position.Z * matrix.M33 + matrix.M43,
-                position.X * matrix.M14 + position.Y * matrix.M24 + position.Z * matrix.M34 + matrix.M44);
+                position.X * matrix.M11
+                    + position.Y * matrix.M21
+                    + position.Z * matrix.M31
+                    + matrix.M41,
+                position.X * matrix.M12
+                    + position.Y * matrix.M22
+                    + position.Z * matrix.M32
+                    + matrix.M42,
+                position.X * matrix.M13
+                    + position.Y * matrix.M23
+                    + position.Z * matrix.M33
+                    + matrix.M43,
+                position.X * matrix.M14
+                    + position.Y * matrix.M24
+                    + position.Z * matrix.M34
+                    + matrix.M44
+            );
         }
 
         /// <summary>
@@ -320,10 +363,23 @@ namespace System.Numerics
         public static Vector4 Transform(Vector4 vector, Matrix4x4 matrix)
         {
             return new Vector4(
-                vector.X * matrix.M11 + vector.Y * matrix.M21 + vector.Z * matrix.M31 + vector.W * matrix.M41,
-                vector.X * matrix.M12 + vector.Y * matrix.M22 + vector.Z * matrix.M32 + vector.W * matrix.M42,
-                vector.X * matrix.M13 + vector.Y * matrix.M23 + vector.Z * matrix.M33 + vector.W * matrix.M43,
-                vector.X * matrix.M14 + vector.Y * matrix.M24 + vector.Z * matrix.M34 + vector.W * matrix.M44);
+                vector.X * matrix.M11
+                    + vector.Y * matrix.M21
+                    + vector.Z * matrix.M31
+                    + vector.W * matrix.M41,
+                vector.X * matrix.M12
+                    + vector.Y * matrix.M22
+                    + vector.Z * matrix.M32
+                    + vector.W * matrix.M42,
+                vector.X * matrix.M13
+                    + vector.Y * matrix.M23
+                    + vector.Z * matrix.M33
+                    + vector.W * matrix.M43,
+                vector.X * matrix.M14
+                    + vector.Y * matrix.M24
+                    + vector.Z * matrix.M34
+                    + vector.W * matrix.M44
+            );
         }
 
         /// <summary>
@@ -353,7 +409,8 @@ namespace System.Numerics
                 value.X * (1.0f - yy2 - zz2) + value.Y * (xy2 - wz2),
                 value.X * (xy2 + wz2) + value.Y * (1.0f - xx2 - zz2),
                 value.X * (xz2 - wy2) + value.Y * (yz2 + wx2),
-                1.0f);
+                1.0f
+            );
         }
 
         /// <summary>
@@ -383,7 +440,8 @@ namespace System.Numerics
                 value.X * (1.0f - yy2 - zz2) + value.Y * (xy2 - wz2) + value.Z * (xz2 + wy2),
                 value.X * (xy2 + wz2) + value.Y * (1.0f - xx2 - zz2) + value.Z * (yz2 - wx2),
                 value.X * (xz2 - wy2) + value.Y * (yz2 + wx2) + value.Z * (1.0f - xx2 - yy2),
-                1.0f);
+                1.0f
+            );
         }
 
         /// <summary>
@@ -413,7 +471,8 @@ namespace System.Numerics
                 value.X * (1.0f - yy2 - zz2) + value.Y * (xy2 - wz2) + value.Z * (xz2 + wy2),
                 value.X * (xy2 + wz2) + value.Y * (1.0f - xx2 - zz2) + value.Z * (yz2 - wx2),
                 value.X * (xz2 - wy2) + value.Y * (yz2 + wx2) + value.Z * (1.0f - xx2 - yy2),
-                value.W);
+                value.W
+            );
         }
         #endregion Public Static Methods
 

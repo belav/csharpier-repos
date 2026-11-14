@@ -51,7 +51,8 @@ internal abstract partial class AsynchronousViewportTaggerProvider<TTag> : IView
         IGlobalOptionService globalOptions,
         ITextBufferVisibilityTracker? visibilityTracker,
         IAsynchronousOperationListener asyncListener,
-        int extraLinesAroundViewportToTag = 100)
+        int extraLinesAroundViewportToTag = 100
+    )
     {
         ThreadingContext = threadingContext;
         GlobalOptions = globalOptions;
@@ -74,8 +75,17 @@ internal abstract partial class AsynchronousViewportTaggerProvider<TTag> : IView
 
         return;
 
-        SingleViewportTaggerProvider CreateSingleViewportTaggerProvider(ViewPortToTag viewPortToTag)
-            => new(this, viewPortToTag, threadingContext, globalOptions, visibilityTracker, asyncListener);
+        SingleViewportTaggerProvider CreateSingleViewportTaggerProvider(
+            ViewPortToTag viewPortToTag
+        ) =>
+            new(
+                this,
+                viewPortToTag,
+                threadingContext,
+                globalOptions,
+                visibilityTracker,
+                asyncListener
+            );
     }
 
     // Functionality for subclasses to control how this diagnostic tagging operates.  All the individual
@@ -89,13 +99,20 @@ internal abstract partial class AsynchronousViewportTaggerProvider<TTag> : IView
     protected virtual TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.None;
 
     /// <inheritdoc cref="AbstractAsynchronousTaggerProvider{TTag}.CreateEventSource(ITextView?, ITextBuffer)"/>
-    protected abstract ITaggerEventSource CreateEventSource(ITextView textView, ITextBuffer subjectBuffer);
+    protected abstract ITaggerEventSource CreateEventSource(
+        ITextView textView,
+        ITextBuffer subjectBuffer
+    );
 
     /// <inheritdoc cref="AbstractAsynchronousTaggerProvider{TTag}.EventChangeDelay"/>
     protected abstract TaggerDelay EventChangeDelay { get; }
 
     /// <inheritdoc cref="AbstractAsynchronousTaggerProvider{TTag}.ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/>
-    protected abstract Task ProduceTagsAsync(TaggerContext<TTag> context, DocumentSnapshotSpan spanToTag, CancellationToken cancellationToken);
+    protected abstract Task ProduceTagsAsync(
+        TaggerContext<TTag> context,
+        DocumentSnapshotSpan spanToTag,
+        CancellationToken cancellationToken
+    );
 
     /// <inheritdoc cref="AbstractAsynchronousTaggerProvider{TTag}.TagEquals(TTag, TTag)"/>
     protected abstract bool TagEquals(TTag tag1, TTag tag2);
@@ -128,6 +145,6 @@ internal abstract partial class AsynchronousViewportTaggerProvider<TTag> : IView
         return new SimpleAggregateTagger<TTag>(taggers.ToImmutableAndClear());
     }
 
-    public bool SpanEquals(SnapshotSpan? span1, SnapshotSpan? span2)
-        => TaggerUtilities.SpanEquals(span1, span2, this.SpanTrackingMode);
+    public bool SpanEquals(SnapshotSpan? span1, SnapshotSpan? span2) =>
+        TaggerUtilities.SpanEquals(span1, span2, this.SpanTrackingMode);
 }

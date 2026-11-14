@@ -8,39 +8,22 @@ namespace System.Activities.XamlIntegration
     using System.Activities;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
- 
+
     public class TextExpressionCompilerResults
     {
         ReadOnlyCollection<TextExpressionCompilerError> messages;
 
-        internal TextExpressionCompilerResults()
-        {
-        }
+        internal TextExpressionCompilerResults() { }
 
-        public Type ResultType
-        {
-            get;
-            internal set;
-        }
+        public Type ResultType { get; internal set; }
 
-        public bool HasErrors
-        {
-            get;
-            internal set;
-        }
+        public bool HasErrors { get; internal set; }
 
-        public bool HasSourceInfo
-        {
-            get;
-            internal set;
-        }
+        public bool HasSourceInfo { get; internal set; }
 
         public ReadOnlyCollection<TextExpressionCompilerError> CompilerMessages
         {
-            get
-            {
-                return this.messages;
-            }
+            get { return this.messages; }
         }
 
         internal void SetMessages(IList<TextExpressionCompilerError> messages, bool hasErrors)

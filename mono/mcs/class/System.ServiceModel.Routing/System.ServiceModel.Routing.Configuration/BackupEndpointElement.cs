@@ -10,12 +10,17 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-	public class BackupEndpointElement : ConfigurationElement
-	{
-		[ConfigurationProperty ("endpointName", DefaultValue = null, Options = ConfigurationPropertyOptions.IsRequired)]
-		public string EndpointName {
-			get { return (string) base ["endpointName"]; }
-			set { base ["endpointName"] = value; }
-		}
-	}
+    public class BackupEndpointElement : ConfigurationElement
+    {
+        [ConfigurationProperty(
+            "endpointName",
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string EndpointName
+        {
+            get { return (string)base["endpointName"]; }
+            set { base["endpointName"] = value; }
+        }
+    }
 }

@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System.Runtime;
 using System.Security;
 using System.Security.Permissions;
 using Microsoft.Win32;
-using System.Runtime;
 
 namespace System.ServiceModel.Security
 {
@@ -18,8 +18,10 @@ namespace System.ServiceModel.Security
         // Note: this is copied from System.IdentityModel.SecurityUtilsEx.RequiresFipsCompliance.
         internal static bool RequiresFipsCompliance
         {
-            [Fx.Tag.SecurityNote(Critical = "Calls an UnsafeNativeMethod and a Critical method (GetFipsAlgorithmPolicyKeyFromRegistry).",
-                Safe = "Processes the return and just returns a bool, which is safe.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls an UnsafeNativeMethod and a Critical method (GetFipsAlgorithmPolicyKeyFromRegistry).",
+                Safe = "Processes the return and just returns a bool, which is safe."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -29,7 +31,12 @@ namespace System.ServiceModel.Security
                     {
                         bool fipsEnabled;
 #pragma warning suppress 56523 //  we check for the return code of the method instead of calling GetLastWin32Error
-                        bool readPolicy = (System.ServiceModel.Channels.UnsafeNativeMethods.ERROR_SUCCESS == System.ServiceModel.Channels.UnsafeNativeMethods.BCryptGetFipsAlgorithmMode(out fipsEnabled));
+                        bool readPolicy = (
+                            System.ServiceModel.Channels.UnsafeNativeMethods.ERROR_SUCCESS
+                            == System.ServiceModel.Channels.UnsafeNativeMethods.BCryptGetFipsAlgorithmMode(
+                                out fipsEnabled
+                            )
+                        );
 
                         if (readPolicy && fipsEnabled)
                             fipsAlgorithmPolicy = 1;
@@ -51,11 +58,19 @@ namespace System.ServiceModel.Security
 
         [Fx.Tag.SecurityNote(Critical = "Asserts to get a value from the registry.")]
         [SecurityCritical]
-        [RegistryPermission(SecurityAction.Assert, Read = @"HKEY_LOCAL_MACHINE\" + fipsPolicyRegistryKey)]
+        [RegistryPermission(
+            SecurityAction.Assert,
+            Read = @"HKEY_LOCAL_MACHINE\" + fipsPolicyRegistryKey
+        )]
         static int GetFipsAlgorithmPolicyKeyFromRegistry()
         {
             int fipsAlgorithmPolicy = -1;
-            using (RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine.OpenSubKey(fipsPolicyRegistryKey, false))
+            using (
+                RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine.OpenSubKey(
+                    fipsPolicyRegistryKey,
+                    false
+                )
+            )
             {
                 if (fipsAlgorithmPolicyKey != null)
                 {
@@ -67,5 +82,4 @@ namespace System.ServiceModel.Security
             return fipsAlgorithmPolicy;
         }
     }
-
 }

@@ -22,8 +22,14 @@ namespace System.Text.Json.Tests
             yield return new object[] { "\"ABC===\"" };
             yield return new object[] { "\"ABC\"" };
             yield return new object[] { "\"ABC!\"" };
-            yield return new object[] { GenerateRandomInvalidLargeString(includeEscapedCharacter: true) };
-            yield return new object[] { GenerateRandomInvalidLargeString(includeEscapedCharacter: false) };
+            yield return new object[]
+            {
+                GenerateRandomInvalidLargeString(includeEscapedCharacter: true),
+            };
+            yield return new object[]
+            {
+                GenerateRandomInvalidLargeString(includeEscapedCharacter: false),
+            };
         }
 
         private static string GenerateRandomValidLargeString()

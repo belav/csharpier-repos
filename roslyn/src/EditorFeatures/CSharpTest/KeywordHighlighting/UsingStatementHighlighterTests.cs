@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 {
     public class UsingStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(UsingStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(UsingStatementHighlighter);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample1_1()
@@ -32,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

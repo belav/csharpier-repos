@@ -11,19 +11,20 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public CXmlSchemaValidatorTestCase(ITestOutputHelper output)
         {
             _output = output;
         }
 
-        private string m_TestData = Path.Combine(FilePathUtil.GetTestDataPath(), "XmlSchemaValidatorAPI");
+        private string m_TestData = Path.Combine(
+            FilePathUtil.GetTestDataPath(),
+            "XmlSchemaValidatorAPI"
+        );
 
         public string TestData
         {
-            get
-            {
-                return m_TestData;
-            }
+            get { return m_TestData; }
         }
 
         // Schemas Filenames
@@ -39,19 +40,32 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         protected const string XSDFILE_VALIDATE_END_ELEMENT = "ValidateEndElement.xsd";
         protected const string XSDFILE_VALIDATE_TEXT = "ValidateText.xsd";
 
-        protected const XmlSchemaValidationFlags AllFlags = XmlSchemaValidationFlags.ReportValidationWarnings |
-                                                             XmlSchemaValidationFlags.ProcessInlineSchema |
-                                                             XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                                             XmlSchemaValidationFlags.ProcessIdentityConstraints;
+        protected const XmlSchemaValidationFlags AllFlags =
+            XmlSchemaValidationFlags.ReportValidationWarnings
+            | XmlSchemaValidationFlags.ProcessInlineSchema
+            | XmlSchemaValidationFlags.ProcessSchemaLocation
+            | XmlSchemaValidationFlags.ProcessIdentityConstraints;
 
         // ========== CreateValidator ==========
 
-        protected XmlSchemaValidator CreateValidator(XmlSchemaSet schemas, XmlSchemaValidationFlags flags)
+        protected XmlSchemaValidator CreateValidator(
+            XmlSchemaSet schemas,
+            XmlSchemaValidationFlags flags
+        )
         {
-            return new XmlSchemaValidator(schemas.NameTable, schemas, new XmlNamespaceManager(schemas.NameTable), flags);
+            return new XmlSchemaValidator(
+                schemas.NameTable,
+                schemas,
+                new XmlNamespaceManager(schemas.NameTable),
+                flags
+            );
         }
 
-        protected XmlSchemaValidator CreateValidator(XmlSchemaSet schemas, IXmlNamespaceResolver nsRes, XmlSchemaValidationFlags flags)
+        protected XmlSchemaValidator CreateValidator(
+            XmlSchemaSet schemas,
+            IXmlNamespaceResolver nsRes,
+            XmlSchemaValidationFlags flags
+        )
         {
             return new XmlSchemaValidator(schemas.NameTable, schemas, nsRes, flags);
         }
@@ -61,7 +75,11 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             return CreateValidator(schemas, AllFlags);
         }
 
-        protected XmlSchemaValidator CreateValidator(string xsdFilename, string targetNamespace, XmlSchemaValidationFlags flags)
+        protected XmlSchemaValidator CreateValidator(
+            string xsdFilename,
+            string targetNamespace,
+            XmlSchemaValidationFlags flags
+        )
         {
             string path = xsdFilename;
             XmlSchemaSet schemas = new XmlSchemaSet();
@@ -159,7 +177,12 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             string ns = "http://tempuri.org/XMLSchema.xsd";
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(ss.NameTable);
-            XmlSchemaValidator val = new XmlSchemaValidator(ss.NameTable, ss, nsmgr, XmlSchemaValidationFlags.ProcessIdentityConstraints);
+            XmlSchemaValidator val = new XmlSchemaValidator(
+                ss.NameTable,
+                ss,
+                nsmgr,
+                XmlSchemaValidationFlags.ProcessIdentityConstraints
+            );
             val.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             val.Initialize();
             XmlSchemaInfo si = new XmlSchemaInfo();
@@ -192,9 +215,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         public void ValidateWithXmlReader(XmlSchemaSet schemas, string xml, string xsd)
         {
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(new NameTable());
-            XmlSchemaValidationFlags validationFlags = XmlSchemaValidationFlags.ProcessIdentityConstraints |
-            XmlSchemaValidationFlags.AllowXmlAttributes;
-            XmlSchemaValidator validator = new XmlSchemaValidator(namespaceManager.NameTable, schemas, namespaceManager, validationFlags);
+            XmlSchemaValidationFlags validationFlags =
+                XmlSchemaValidationFlags.ProcessIdentityConstraints
+                | XmlSchemaValidationFlags.AllowXmlAttributes;
+            XmlSchemaValidator validator = new XmlSchemaValidator(
+                namespaceManager.NameTable,
+                schemas,
+                namespaceManager,
+                validationFlags
+            );
             validator.Initialize();
             using (XmlReader r = XmlReader.Create(xsd))
             {
@@ -215,20 +244,34 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                                 } while (r.MoveToNextAttribute());
                                 r.MoveToElement();
                             }
-                            validator.ValidateElement(r.LocalName, r.NamespaceURI, null, null, null, null, null);
+                            validator.ValidateElement(
+                                r.LocalName,
+                                r.NamespaceURI,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            );
                             if (r.MoveToFirstAttribute())
                             {
                                 do
                                 {
                                     if (r.NamespaceURI != "http://www.w3.org/2000/xmlns/")
                                     {
-                                        validator.ValidateAttribute(r.LocalName, r.NamespaceURI, r.Value, null);
+                                        validator.ValidateAttribute(
+                                            r.LocalName,
+                                            r.NamespaceURI,
+                                            r.Value,
+                                            null
+                                        );
                                     }
                                 } while (r.MoveToNextAttribute());
                                 r.MoveToElement();
                             }
                             validator.ValidateEndOfAttributes(null);
-                            if (r.IsEmptyElement) goto case XmlNodeType.EndElement;
+                            if (r.IsEmptyElement)
+                                goto case XmlNodeType.EndElement;
                             break;
 
                         case XmlNodeType.EndElement:
@@ -259,13 +302,22 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             using (XmlReader r = XmlReader.Create(xml, rs))
             {
-                while (r.Read()) ;
+                while (r.Read())
+                    ;
             }
             Assert.Equal(0, warningCount);
             Assert.Equal(0, errorCount);
         }
 
-        public void ValidateSchemaSet(XmlSchemaSet ss, int schCount, bool isCompiled, int countGT, int countGE, int countGA, string str)
+        public void ValidateSchemaSet(
+            XmlSchemaSet ss,
+            int schCount,
+            bool isCompiled,
+            int countGT,
+            int countGE,
+            int countGA,
+            string str
+        )
         {
             _output.WriteLine(str);
             Assert.Equal(ss.Count, schCount);

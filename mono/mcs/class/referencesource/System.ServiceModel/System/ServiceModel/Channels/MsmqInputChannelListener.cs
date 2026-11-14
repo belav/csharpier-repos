@@ -3,10 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    sealed class MsmqInputChannelListener
-        : MsmqInputChannelListenerBase
+    sealed class MsmqInputChannelListener : MsmqInputChannelListenerBase
     {
-        internal MsmqInputChannelListener(MsmqBindingElementBase bindingElement, BindingContext context, MsmqReceiveParameters receiveParameters)
+        internal MsmqInputChannelListener(
+            MsmqBindingElementBase bindingElement,
+            BindingContext context,
+            MsmqReceiveParameters receiveParameters
+        )
             : base(bindingElement, context, receiveParameters)
         {
             SetSecurityTokenAuthenticator(MsmqUri.NetMsmqAddressTranslator.Scheme, context);

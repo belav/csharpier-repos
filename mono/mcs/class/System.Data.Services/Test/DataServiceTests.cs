@@ -30,55 +30,56 @@ using System;
 using System.Data.Services;
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.Services {
-	[TestFixture]
-	public class DataServiceTests {
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void AttachHostNull()
-		{
-			var d = new DataService<string>();
-			d.AttachHost (null);
-		}
+namespace MonoTests.System.Data.Services
+{
+    [TestFixture]
+    public class DataServiceTests
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AttachHostNull()
+        {
+            var d = new DataService<string>();
+            d.AttachHost(null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ProcessRequestForMessageNull()
-		{
-			var d = new DataService<string>();
-			d.ProcessRequestForMessage (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ProcessRequestForMessageNull()
+        {
+            var d = new DataService<string>();
+            d.ProcessRequestForMessage(null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void HandleExceptionNull()
-		{
-			var d = new TestDataService<string>();
-			d.TestHandleException (null);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void HandleExceptionNull()
+        {
+            var d = new TestDataService<string>();
+            d.TestHandleException(null);
+        }
+    }
 
-	public class TestDataService<T>
-		: DataService<T>
-	{
-		public T TestCurrentDataSource
-		{
-			get { return this.CurrentDataSource; }
-		}
+    public class TestDataService<T> : DataService<T>
+    {
+        public T TestCurrentDataSource
+        {
+            get { return this.CurrentDataSource; }
+        }
 
-		public T TestCreateDataSource()
-		{
-			return this.CreateDataSource();
-		}
+        public T TestCreateDataSource()
+        {
+            return this.CreateDataSource();
+        }
 
-		public void TestHandleException (HandleExceptionArgs args)
-		{
-			this.HandleException (args);
-		}
+        public void TestHandleException(HandleExceptionArgs args)
+        {
+            this.HandleException(args);
+        }
 
-		public void TestOnStartProcessingRequest (ProcessRequestArgs args)
-		{
-			this.OnStartProcessingRequest (args);
-		}
-	}
+        public void TestOnStartProcessingRequest(ProcessRequestArgs args)
+        {
+            this.OnStartProcessingRequest(args);
+        }
+    }
 }

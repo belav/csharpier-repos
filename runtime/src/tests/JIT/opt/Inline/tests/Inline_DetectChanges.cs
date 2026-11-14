@@ -6,13 +6,13 @@
 // Seed: 17821235008355468541
 // Reduced from 60.7 KiB to 0.8 KiB in 00:42:23
 // Exits with error:
-// 
+//
 // Assert failure(PID 35672 [0x00008b58], Thread: 10196 [0x27d4]): Assertion failed 'm_compGenTreeID == m_compiler->compGenTreeID' in 'Program:Foo(System.Object)' during 'Morph - Inlining' (IL size 55)
-// 
+//
 //     File: D:\dev\dotnet\runtime\src\coreclr\jit\phase.cpp Line: 47
 //     Image: D:\dev\Fuzzlyn\Fuzzlyn\publish\windows-x64\Fuzzlyn.exe
-// 
-// 
+//
+//
 
 using System;
 using System.Runtime.CompilerServices;
@@ -21,9 +21,10 @@ using Xunit;
 public class Program
 {
     internal static object s_rt;
-    internal static ulong[, ] s_3;
+    internal static ulong[,] s_3;
     internal static byte s_7;
     internal static ulong[] s_16;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -41,14 +42,21 @@ public class Program
     internal static void Foo(object o)
     {
         s_rt = o;
-        var vr3 = new sbyte[]{0};
+        var vr3 = new sbyte[] { 0 };
         var vr4 = s_3[0, 0];
         var vr5 = s_3[0, 0];
         M16(vr3, 0, ref s_16, 0, vr4, vr5, (uint)(s_7 | 0), 0);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    internal static void M16(sbyte[] arg0, short arg1, ref ulong[] arg2, byte arg3, ulong arg4, ulong arg5, uint arg6, uint arg7)
-    {
-    }
+    internal static void M16(
+        sbyte[] arg0,
+        short arg1,
+        ref ulong[] arg2,
+        byte arg3,
+        ulong arg4,
+        ulong arg5,
+        uint arg6,
+        uint arg7
+    ) { }
 }

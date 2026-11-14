@@ -39,11 +39,9 @@ public class StaticFileMiddlewareTests : LoggedTest
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         Assert.Null(response.Headers.ETag);
 
-        Assert.Contains(
-            TestSink.Writes,
-            w =>
-                w.Message.Contains("The WebRootPath was not found")
-                && w.Message.Contains("Static files may be unavailable.")
+        Assert.Contains(TestSink.Writes, w =>
+            w.Message.Contains("The WebRootPath was not found")
+            && w.Message.Contains("Static files may be unavailable.")
         );
     }
 

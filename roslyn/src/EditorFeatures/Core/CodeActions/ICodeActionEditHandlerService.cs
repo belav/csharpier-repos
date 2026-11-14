@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
         ITextBufferAssociatedViewService AssociatedViewService { get; }
 
         Task<SolutionPreviewResult?> GetPreviewsAsync(
-            Workspace workspace, ImmutableArray<CodeActionOperation> operations, CancellationToken cancellationToken);
+            Workspace workspace,
+            ImmutableArray<CodeActionOperation> operations,
+            CancellationToken cancellationToken
+        );
 
         Task<bool> ApplyAsync(
             Workspace workspace,
@@ -24,6 +27,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
             ImmutableArray<CodeActionOperation> operations,
             string title,
             IProgress<CodeAnalysisProgress> progressTracker,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

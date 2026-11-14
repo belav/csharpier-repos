@@ -37,13 +37,27 @@ namespace System.ServiceModel.Dispatcher
         readonly SessionIdleManager idleManager;
         readonly bool sendAsynchronously;
 
-        static AsyncCallback onAsyncReplyComplete = Fx.ThunkCallback(new AsyncCallback(ChannelHandler.OnAsyncReplyComplete));
-        static AsyncCallback onAsyncReceiveComplete = Fx.ThunkCallback(new AsyncCallback(ChannelHandler.OnAsyncReceiveComplete));
-        static Action<object> onContinueAsyncReceive = new Action<object>(ChannelHandler.OnContinueAsyncReceive);
-        static Action<object> onStartSyncMessagePump = new Action<object>(ChannelHandler.OnStartSyncMessagePump);
-        static Action<object> onStartAsyncMessagePump = new Action<object>(ChannelHandler.OnStartAsyncMessagePump);
-        static Action<object> onStartSingleTransactedBatch = new Action<object>(ChannelHandler.OnStartSingleTransactedBatch);
-        static Action<object> openAndEnsurePump = new Action<object>(ChannelHandler.OpenAndEnsurePump);
+        static AsyncCallback onAsyncReplyComplete = Fx.ThunkCallback(
+            new AsyncCallback(ChannelHandler.OnAsyncReplyComplete)
+        );
+        static AsyncCallback onAsyncReceiveComplete = Fx.ThunkCallback(
+            new AsyncCallback(ChannelHandler.OnAsyncReceiveComplete)
+        );
+        static Action<object> onContinueAsyncReceive = new Action<object>(
+            ChannelHandler.OnContinueAsyncReceive
+        );
+        static Action<object> onStartSyncMessagePump = new Action<object>(
+            ChannelHandler.OnStartSyncMessagePump
+        );
+        static Action<object> onStartAsyncMessagePump = new Action<object>(
+            ChannelHandler.OnStartAsyncMessagePump
+        );
+        static Action<object> onStartSingleTransactedBatch = new Action<object>(
+            ChannelHandler.OnStartSingleTransactedBatch
+        );
+        static Action<object> openAndEnsurePump = new Action<object>(
+            ChannelHandler.OpenAndEnsurePump
+        );
 
         RequestInfo requestInfo;
         ServiceChannel channel;
@@ -70,7 +84,11 @@ namespace System.ServiceModel.Dispatcher
         bool needToCreateSessionOpenNotificationMessage;
         bool shouldRejectMessageWithOnOpenActionHeader;
 
-        internal ChannelHandler(MessageVersion messageVersion, IChannelBinder binder, ServiceChannel channel)
+        internal ChannelHandler(
+            MessageVersion messageVersion,
+            IChannelBinder binder,
+            ServiceChannel channel
+        )
         {
             ClientRuntime clientRuntime = channel.ClientRuntime;
 
@@ -91,14 +109,23 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                this.receiver = new ErrorHandlingReceiver(binder, dispatchRuntime.ChannelDispatcher);
+                this.receiver = new ErrorHandlingReceiver(
+                    binder,
+                    dispatchRuntime.ChannelDispatcher
+                );
             }
             this.requestInfo = new RequestInfo(this);
-
         }
 
-        internal ChannelHandler(MessageVersion messageVersion, IChannelBinder binder, ServiceThrottle throttle,
-            ListenerHandler listener, bool wasChannelThrottled, WrappedTransaction acceptTransaction, SessionIdleManager idleManager)
+        internal ChannelHandler(
+            MessageVersion messageVersion,
+            IChannelBinder binder,
+            ServiceThrottle throttle,
+            ListenerHandler listener,
+            bool wasChannelThrottled,
+            WrappedTransaction acceptTransaction,
+            SessionIdleManager idleManager
+        )
         {
             ChannelDispatcher channelDispatcher = listener.ChannelDispatcher;
 
@@ -114,7 +141,10 @@ namespace System.ServiceModel.Dispatcher
             this.sendAsynchronously = channelDispatcher.SendAsynchronously;
             this.duplexBinder = binder as DuplexChannelBinder;
             this.hasSession = binder.HasSession;
-            this.isConcurrent = ConcurrencyBehavior.IsConcurrent(channelDispatcher, this.hasSession);
+            this.isConcurrent = ConcurrencyBehavior.IsConcurrent(
+                channelDispatcher,
+                this.hasSession
+            );
 
             if (channelDispatcher.MaxPendingReceives > 1)
             {
@@ -122,7 +152,8 @@ namespace System.ServiceModel.Dispatcher
                 this.binder = new MultipleReceiveBinder(
                     this.binder,
                     channelDispatcher.MaxPendingReceives,
-                    !this.isConcurrent);
+                    !this.isConcurrent
+                );
             }
 
             if (channelDispatcher.BufferedReceiveEnabled)
@@ -132,7 +163,17 @@ namespace System.ServiceModel.Dispatcher
 
             this.receiver = new ErrorHandlingReceiver(this.binder, channelDispatcher);
             this.idleManager = idleManager;
-            Fx.Assert((this.idleManager != null) == (this.binder.HasSession && this.listener.ChannelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout != TimeSpan.MaxValue), "idle manager is present only when there is a session with a finite receive timeout");
+            Fx.Assert(
+                (this.idleManager != null)
+                    == (
+                        this.binder.HasSession
+                        && this.listener
+                            .ChannelDispatcher
+                            .DefaultCommunicationTimeouts
+                            .ReceiveTimeout != TimeSpan.MaxValue
+                    ),
+                "idle manager is present only when there is a session with a finite receive timeout"
+            );
 
             if (channelDispatcher.IsTransactedReceive && !channelDispatcher.ReceiveContextEnabled)
             {
@@ -145,9 +186,14 @@ namespace System.ServiceModel.Dispatcher
                     if (null != throttle && throttle.MaxConcurrentCalls > 1)
                     {
                         maxConcurrentBatches = throttle.MaxConcurrentCalls;
-                        foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
+                        foreach (
+                            EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints
+                        )
                         {
-                            if (ConcurrencyMode.Multiple != endpointDispatcher.DispatchRuntime.ConcurrencyMode)
+                            if (
+                                ConcurrencyMode.Multiple
+                                != endpointDispatcher.DispatchRuntime.ConcurrencyMode
+                            )
                             {
                                 maxConcurrentBatches = 1;
                                 break;
@@ -155,20 +201,32 @@ namespace System.ServiceModel.Dispatcher
                         }
                     }
 
-                    this.sharedTransactedBatchContext = new SharedTransactedBatchContext(this, channelDispatcher, maxConcurrentBatches);
+                    this.sharedTransactedBatchContext = new SharedTransactedBatchContext(
+                        this,
+                        channelDispatcher,
+                        maxConcurrentBatches
+                    );
                     this.isMainTransactedBatchHandler = true;
                     this.throttle = null;
                 }
             }
-            else if (channelDispatcher.IsTransactedReceive && channelDispatcher.ReceiveContextEnabled && channelDispatcher.MaxTransactedBatchSize > 0)
+            else if (
+                channelDispatcher.IsTransactedReceive
+                && channelDispatcher.ReceiveContextEnabled
+                && channelDispatcher.MaxTransactedBatchSize > 0
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.IncompatibleBehaviors)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.IncompatibleBehaviors))
+                );
             }
 
             if (this.binder.HasSession)
             {
-                this.sessionOpenNotification = this.binder.Channel.GetProperty<SessionOpenNotification>();
-                this.needToCreateSessionOpenNotificationMessage = this.sessionOpenNotification != null && this.sessionOpenNotification.IsEnabled;
+                this.sessionOpenNotification =
+                    this.binder.Channel.GetProperty<SessionOpenNotification>();
+                this.needToCreateSessionOpenNotificationMessage =
+                    this.sessionOpenNotification != null && this.sessionOpenNotification.IsEnabled;
             }
 
             this.acceptTransaction = acceptTransaction;
@@ -180,7 +238,6 @@ namespace System.ServiceModel.Dispatcher
                 this.incrementedActivityCountInConstructor = true;
             }
         }
-
 
         internal ChannelHandler(ChannelHandler handler, TransactedBatchContext context)
         {
@@ -204,8 +261,10 @@ namespace System.ServiceModel.Dispatcher
 
             this.sendAsynchronously = handler.sendAsynchronously;
             this.sessionOpenNotification = handler.sessionOpenNotification;
-            this.needToCreateSessionOpenNotificationMessage = handler.needToCreateSessionOpenNotificationMessage;
-            this.shouldRejectMessageWithOnOpenActionHeader = handler.shouldRejectMessageWithOnOpenActionHeader;
+            this.needToCreateSessionOpenNotificationMessage =
+                handler.needToCreateSessionOpenNotificationMessage;
+            this.shouldRejectMessageWithOnOpenActionHeader =
+                handler.shouldRejectMessageWithOnOpenActionHeader;
         }
 
         internal IChannelBinder Binder
@@ -230,14 +289,8 @@ namespace System.ServiceModel.Dispatcher
 
         internal ServiceThrottle InstanceContextServiceThrottle
         {
-            get
-            {
-                return this.instanceContextThrottle;
-            }
-            set
-            {
-                this.instanceContextThrottle = value;
-            }
+            get { return this.instanceContextThrottle; }
+            set { this.instanceContextThrottle = value; }
         }
 
         bool IsOpen
@@ -293,7 +346,10 @@ namespace System.ServiceModel.Dispatcher
         internal static void Register(ChannelHandler handler, RequestContext request)
         {
             BufferedReceiveBinder bufferedBinder = handler.Binder as BufferedReceiveBinder;
-            Fx.Assert(bufferedBinder != null, "ChannelHandler.Binder is not a BufferedReceiveBinder");
+            Fx.Assert(
+                bufferedBinder != null,
+                "ChannelHandler.Binder is not a BufferedReceiveBinder"
+            );
 
             bufferedBinder.InjectRequest(request);
             handler.Register();
@@ -329,7 +385,7 @@ namespace System.ServiceModel.Dispatcher
                 TD.ChannelReceiveStop(this.EventTraceActivity, this.GetHashCode());
             }
 
-            for (;;)
+            for (; ; )
             {
                 RequestContext request;
 
@@ -371,16 +427,25 @@ namespace System.ServiceModel.Dispatcher
                 TD.ChannelReceiveStart(this.EventTraceActivity, this.GetHashCode());
             }
 
-            this.shouldRejectMessageWithOnOpenActionHeader = !this.needToCreateSessionOpenNotificationMessage;
+            this.shouldRejectMessageWithOnOpenActionHeader =
+                !this.needToCreateSessionOpenNotificationMessage;
             if (this.needToCreateSessionOpenNotificationMessage)
             {
                 return new CompletedAsyncResult(ChannelHandler.onAsyncReceiveComplete, this);
             }
 
-            return this.receiver.BeginTryReceive(TimeSpan.MaxValue, ChannelHandler.onAsyncReceiveComplete, this);
+            return this.receiver.BeginTryReceive(
+                TimeSpan.MaxValue,
+                ChannelHandler.onAsyncReceiveComplete,
+                this
+            );
         }
 
-        bool DispatchAndReleasePump(RequestContext request, bool cleanThread, OperationContext currentOperationContext)
+        bool DispatchAndReleasePump(
+            RequestContext request,
+            bool cleanThread,
+            OperationContext currentOperationContext
+        )
         {
             ServiceChannel channel = this.requestInfo.Channel;
             EndpointDispatcher endpoint = this.requestInfo.Endpoint;
@@ -392,26 +457,35 @@ namespace System.ServiceModel.Dispatcher
 
                 if (channel == null || dispatchBehavior == null)
                 {
-                    Fx.Assert("System.ServiceModel.Dispatcher.ChannelHandler.Dispatch(): (channel == null || dispatchBehavior == null)");
+                    Fx.Assert(
+                        "System.ServiceModel.Dispatcher.ChannelHandler.Dispatch(): (channel == null || dispatchBehavior == null)"
+                    );
                     return true;
                 }
 
                 MessageBuffer buffer = null;
                 Message message;
 
-                EventTraceActivity eventTraceActivity = TraceDispatchMessageStart(request.RequestMessage);
+                EventTraceActivity eventTraceActivity = TraceDispatchMessageStart(
+                    request.RequestMessage
+                );
                 AspNetEnvironment.Current.PrepareMessageForDispatch(request.RequestMessage);
                 if (dispatchBehavior.PreserveMessage)
                 {
                     object previousBuffer = null;
-                    if (request.RequestMessage.Properties.TryGetValue(MessageBufferPropertyName, out previousBuffer))
+                    if (
+                        request.RequestMessage.Properties.TryGetValue(
+                            MessageBufferPropertyName,
+                            out previousBuffer
+                        )
+                    )
                     {
                         buffer = (MessageBuffer)previousBuffer;
                         message = buffer.CreateMessage();
                     }
                     else
                     {
-                        // 
+                        //
                         buffer = request.RequestMessage.CreateBufferedCopy(int.MaxValue);
                         message = buffer.CreateMessage();
                     }
@@ -425,17 +499,42 @@ namespace System.ServiceModel.Dispatcher
                 if (operation == null)
                 {
                     Fx.Assert("ChannelHandler.Dispatch (operation == null)");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, "No DispatchOperationRuntime found to process message.")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "No DispatchOperationRuntime found to process message."
+                            )
+                        )
+                    );
                 }
 
-                if (this.shouldRejectMessageWithOnOpenActionHeader && message.Headers.Action == OperationDescription.SessionOpenedAction)
+                if (
+                    this.shouldRejectMessageWithOnOpenActionHeader
+                    && message.Headers.Action == OperationDescription.SessionOpenedAction
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoEndpointMatchingAddressForConnectionOpeningMessage, message.Headers.Action, "Open")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxNoEndpointMatchingAddressForConnectionOpeningMessage,
+                                message.Headers.Action,
+                                "Open"
+                            )
+                        )
+                    );
                 }
 
                 if (MessageLogger.LoggingEnabled)
                 {
-                    MessageLogger.LogMessage(ref message, (operation.IsOneWay ? MessageLoggingSource.ServiceLevelReceiveDatagram : MessageLoggingSource.ServiceLevelReceiveRequest) | MessageLoggingSource.LastChance);
+                    MessageLogger.LogMessage(
+                        ref message,
+                        (
+                            operation.IsOneWay
+                                ? MessageLoggingSource.ServiceLevelReceiveDatagram
+                                : MessageLoggingSource.ServiceLevelReceiveRequest
+                        ) | MessageLoggingSource.LastChance
+                    );
                 }
 
                 if (operation.IsTerminating && this.hasSession)
@@ -452,12 +551,20 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     hasOperationContextBeenSet = false;
-                    currentOperationContext = new OperationContext(request, message, channel, this.host);
+                    currentOperationContext = new OperationContext(
+                        request,
+                        message,
+                        channel,
+                        this.host
+                    );
                 }
 
                 if (dispatchBehavior.PreserveMessage)
                 {
-                    currentOperationContext.IncomingMessageProperties.Add(MessageBufferPropertyName, buffer);
+                    currentOperationContext.IncomingMessageProperties.Add(
+                        MessageBufferPropertyName,
+                        buffer
+                    );
                 }
 
                 if (currentOperationContext.EndpointDispatcher == null && this.listener != null)
@@ -465,10 +572,25 @@ namespace System.ServiceModel.Dispatcher
                     currentOperationContext.EndpointDispatcher = endpoint;
                 }
 
-                MessageRpc rpc = new MessageRpc(request, message, operation, channel, this.host,
-                    this, cleanThread, currentOperationContext, this.requestInfo.ExistingInstanceContext, eventTraceActivity);
+                MessageRpc rpc = new MessageRpc(
+                    request,
+                    message,
+                    operation,
+                    channel,
+                    this.host,
+                    this,
+                    cleanThread,
+                    currentOperationContext,
+                    this.requestInfo.ExistingInstanceContext,
+                    eventTraceActivity
+                );
 
-                TraceUtility.MessageFlowAtMessageReceived(message, currentOperationContext, eventTraceActivity, true);
+                TraceUtility.MessageFlowAtMessageReceived(
+                    message,
+                    currentOperationContext,
+                    eventTraceActivity,
+                    true
+                );
 
                 rpc.TransactedBatchContext = this.transactedBatchContext;
 
@@ -476,7 +598,8 @@ namespace System.ServiceModel.Dispatcher
                 // (MessageRpc implicitly owns this throttle once it's created)
                 this.requestInfo.ChannelHandlerOwnsCallThrottle = false;
                 // explicitly passing responsibility for instance throttle to MessageRpc
-                rpc.MessageRpcOwnsInstanceContextThrottle = this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle;
+                rpc.MessageRpcOwnsInstanceContextThrottle =
+                    this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle;
                 this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle = false;
 
                 // These need to happen before Dispatch but after accessing any ChannelHandler
@@ -513,8 +636,14 @@ namespace System.ServiceModel.Dispatcher
 
         RequestContext GetSessionOpenNotificationRequestContext()
         {
-            Fx.Assert(this.sessionOpenNotification != null, "this.sessionOpenNotification should not be null.");
-            Message message = Message.CreateMessage(this.Binder.Channel.GetProperty<MessageVersion>(), OperationDescription.SessionOpenedAction);
+            Fx.Assert(
+                this.sessionOpenNotification != null,
+                "this.sessionOpenNotification should not be null."
+            );
+            Message message = Message.CreateMessage(
+                this.Binder.Channel.GetProperty<MessageVersion>(),
+                OperationDescription.SessionOpenedAction
+            );
             Fx.Assert(this.LocalAddress != null, "this.LocalAddress should not be null.");
             message.Headers.To = this.LocalAddress.Uri;
             this.sessionOpenNotification.UpdateMessageProperties(message.Properties);
@@ -554,11 +683,19 @@ namespace System.ServiceModel.Dispatcher
                 bool addressMatched;
                 if (this.hasSession)
                 {
-                    this.requestInfo.Channel = this.GetSessionChannel(request.RequestMessage, out this.requestInfo.Endpoint, out addressMatched);
+                    this.requestInfo.Channel = this.GetSessionChannel(
+                        request.RequestMessage,
+                        out this.requestInfo.Endpoint,
+                        out addressMatched
+                    );
                 }
                 else
                 {
-                    this.requestInfo.Channel = this.GetDatagramChannel(request.RequestMessage, out this.requestInfo.Endpoint, out addressMatched);
+                    this.requestInfo.Channel = this.GetDatagramChannel(
+                        request.RequestMessage,
+                        out this.requestInfo.Endpoint,
+                        out addressMatched
+                    );
                 }
 
                 if (this.requestInfo.Channel == null)
@@ -580,9 +717,13 @@ namespace System.ServiceModel.Dispatcher
 
                 //For sessionful contracts, the InstanceContext throttle is not copied over to the channel
                 //as we create the channel before acquiring the lock
-                if (this.InstanceContextServiceThrottle != null && this.requestInfo.Channel.InstanceContextServiceThrottle == null)
+                if (
+                    this.InstanceContextServiceThrottle != null
+                    && this.requestInfo.Channel.InstanceContextServiceThrottle == null
+                )
                 {
-                    this.requestInfo.Channel.InstanceContextServiceThrottle = this.InstanceContextServiceThrottle;
+                    this.requestInfo.Channel.InstanceContextServiceThrottle =
+                        this.InstanceContextServiceThrottle;
                 }
             }
 
@@ -628,8 +769,8 @@ namespace System.ServiceModel.Dispatcher
                         }
                         else
                         {
-                            // Since this is not a threadpool thread, we don't know if this thread will exit 
-                            // while the IO is still pending (which would cancel the IO), so we have to get 
+                            // Since this is not a threadpool thread, we don't know if this thread will exit
+                            // while the IO is still pending (which would cancel the IO), so we have to get
                             // over to a threadpool thread which we know will not exit while there is pending IO.
                             ActionItem.Schedule(ChannelHandler.onStartAsyncMessagePump, this);
                         }
@@ -642,7 +783,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        ServiceChannel GetDatagramChannel(Message message, out EndpointDispatcher endpoint, out bool addressMatched)
+        ServiceChannel GetDatagramChannel(
+            Message message,
+            out EndpointDispatcher endpoint,
+            out bool addressMatched
+        )
         {
             addressMatched = false;
             endpoint = this.GetEndpointDispatcher(message, out addressMatched);
@@ -658,7 +803,12 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (endpoint.DatagramChannel == null)
                     {
-                        endpoint.DatagramChannel = new ServiceChannel(this.binder, endpoint, this.listener.ChannelDispatcher, this.idleManager);
+                        endpoint.DatagramChannel = new ServiceChannel(
+                            this.binder,
+                            endpoint,
+                            this.listener.ChannelDispatcher,
+                            this.idleManager
+                        );
                         this.InitializeServiceChannel(endpoint.DatagramChannel);
                     }
                 }
@@ -672,7 +822,11 @@ namespace System.ServiceModel.Dispatcher
             return this.listener.Endpoints.Lookup(message, out addressMatched);
         }
 
-        ServiceChannel GetSessionChannel(Message message, out EndpointDispatcher endpoint, out bool addressMatched)
+        ServiceChannel GetSessionChannel(
+            Message message,
+            out EndpointDispatcher endpoint,
+            out bool addressMatched
+        )
         {
             addressMatched = false;
 
@@ -685,7 +839,12 @@ namespace System.ServiceModel.Dispatcher
                         endpoint = this.GetEndpointDispatcher(message, out addressMatched);
                         if (endpoint != null)
                         {
-                            this.channel = new ServiceChannel(this.binder, endpoint, this.listener.ChannelDispatcher, this.idleManager);
+                            this.channel = new ServiceChannel(
+                                this.binder,
+                                endpoint,
+                                this.listener.ChannelDispatcher,
+                                this.idleManager
+                            );
                             this.InitializeServiceChannel(this.channel);
                         }
                     }
@@ -710,7 +869,7 @@ namespace System.ServiceModel.Dispatcher
                 // TFS#500703, when the idle timeout was hit, the constructor of ServiceChannel will abort itself directly. So
                 // the session throttle will not be released and thus lead to a service unavailablity.
                 // Note that if the channel is already aborted, the next line "channel.ServiceThrottle = this.throttle;" will throw an exception,
-                // so we are not going to do any more work inside this method. 
+                // so we are not going to do any more work inside this method.
                 // Ideally we should do a thorough refactoring work for this throttling issue. However, it's too risky as a QFE. We should consider
                 // this in a whole release.
                 // Note that the "wasChannelThrottled" boolean will only be true if we aquired the session throttle. So we don't have to check HasSession
@@ -737,7 +896,12 @@ namespace System.ServiceModel.Dispatcher
 
                 if (contractType != null)
                 {
-                    channel.Proxy = ServiceChannelFactory.CreateProxy(contractType, callbackType, MessageDirection.Output, channel);
+                    channel.Proxy = ServiceChannelFactory.CreateProxy(
+                        contractType,
+                        callbackType,
+                        MessageDirection.Output,
+                        channel
+                    );
                 }
             }
 
@@ -753,12 +917,24 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.listener != null)
             {
-                this.listener.ChannelDispatcher.ProvideFault(e, this.requestInfo.Channel == null ? this.binder.Channel.GetProperty<FaultConverter>() : this.requestInfo.Channel.GetProperty<FaultConverter>(), ref faultInfo);
+                this.listener.ChannelDispatcher.ProvideFault(
+                    e,
+                    this.requestInfo.Channel == null
+                        ? this.binder.Channel.GetProperty<FaultConverter>()
+                        : this.requestInfo.Channel.GetProperty<FaultConverter>(),
+                    ref faultInfo
+                );
             }
             else if (this.channel != null)
             {
-                DispatchRuntime dispatchBehavior = this.channel.ClientRuntime.CallbackDispatchRuntime;
-                dispatchBehavior.ChannelDispatcher.ProvideFault(e, this.channel.GetProperty<FaultConverter>(), ref faultInfo);
+                DispatchRuntime dispatchBehavior = this.channel
+                    .ClientRuntime
+                    .CallbackDispatchRuntime;
+                dispatchBehavior.ChannelDispatcher.ProvideFault(
+                    e,
+                    this.channel.GetProperty<FaultConverter>(),
+                    ref faultInfo
+                );
             }
         }
 
@@ -773,7 +949,11 @@ namespace System.ServiceModel.Dispatcher
             if (e == null)
             {
                 Fx.Assert(SR.GetString(SR.GetString(SR.SFxNonExceptionThrown)));
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.GetString(SR.SFxNonExceptionThrown))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.GetString(SR.SFxNonExceptionThrown))
+                    )
+                );
             }
             if (this.listener != null)
             {
@@ -781,7 +961,10 @@ namespace System.ServiceModel.Dispatcher
             }
             else if (this.channel != null)
             {
-                return this.channel.ClientRuntime.CallbackDispatchRuntime.ChannelDispatcher.HandleError(e, ref faultInfo);
+                return this.channel.ClientRuntime.CallbackDispatchRuntime.ChannelDispatcher.HandleError(
+                    e,
+                    ref faultInfo
+                );
             }
             else
             {
@@ -791,8 +974,11 @@ namespace System.ServiceModel.Dispatcher
 
         bool HandleError(Exception e, RequestContext request, ServiceChannel channel)
         {
-            ErrorHandlerFaultInfo faultInfo = new ErrorHandlerFaultInfo(this.messageVersion.Addressing.DefaultFaultAction);
-            bool replied, replySentAsync;
+            ErrorHandlerFaultInfo faultInfo = new ErrorHandlerFaultInfo(
+                this.messageVersion.Addressing.DefaultFaultAction
+            );
+            bool replied,
+                replySentAsync;
             ProvideFaultAndReplyFailure(request, e, ref faultInfo, out replied, out replySentAsync);
 
             if (!replySentAsync)
@@ -805,7 +991,13 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        bool HandleErrorContinuation(Exception e, RequestContext request, ServiceChannel channel, ref ErrorHandlerFaultInfo faultInfo, bool replied)
+        bool HandleErrorContinuation(
+            Exception e,
+            RequestContext request,
+            ServiceChannel channel,
+            ref ErrorHandlerFaultInfo faultInfo,
+            bool replied
+        )
         {
             if (replied)
             {
@@ -945,7 +1137,9 @@ namespace System.ServiceModel.Dispatcher
                 return false;
             }
 
-            ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? TraceUtility.ExtractActivity(request) : null;
+            ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                ? TraceUtility.ExtractActivity(request)
+                : null;
 
             using (ServiceModelActivity.BoundOperation(activity))
             {
@@ -964,7 +1158,9 @@ namespace System.ServiceModel.Dispatcher
 
                 if (this.requestInfo.RequestContext != null)
                 {
-                    Fx.Assert("ChannelHandler.HandleRequest: this.requestInfo.RequestContext != null");
+                    Fx.Assert(
+                        "ChannelHandler.HandleRequest: this.requestInfo.RequestContext != null"
+                    );
                 }
 
                 this.requestInfo.RequestContext = request;
@@ -978,7 +1174,9 @@ namespace System.ServiceModel.Dispatcher
                 // NOTE: from here on down, ensure that this code is the same as ThrottleAcquiredForCall (see 55460)
                 if (this.requestInfo.ChannelHandlerOwnsCallThrottle)
                 {
-                    Fx.Assert("ChannelHandler.HandleRequest: this.requestInfo.ChannelHandlerOwnsCallThrottle");
+                    Fx.Assert(
+                        "ChannelHandler.HandleRequest: this.requestInfo.ChannelHandlerOwnsCallThrottle"
+                    );
                 }
                 this.requestInfo.ChannelHandlerOwnsCallThrottle = true;
 
@@ -991,16 +1189,25 @@ namespace System.ServiceModel.Dispatcher
                 this.requestInfo.Channel.CompletedIOOperation();
 
                 //Only acquire InstanceContext throttle if one doesnt already exist.
-                if (!this.TryAcquireThrottle(request, (this.requestInfo.ExistingInstanceContext == null)))
+                if (
+                    !this.TryAcquireThrottle(
+                        request,
+                        (this.requestInfo.ExistingInstanceContext == null)
+                    )
+                )
                 {
                     // this.ThrottleAcquired will be called to continue
                     return false;
                 }
                 if (this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle)
                 {
-                    Fx.Assert("ChannelHandler.HandleRequest: this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle");
+                    Fx.Assert(
+                        "ChannelHandler.HandleRequest: this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle"
+                    );
                 }
-                this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle = (this.requestInfo.ExistingInstanceContext == null);
+                this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle = (
+                    this.requestInfo.ExistingInstanceContext == null
+                );
 
                 if (!this.DispatchAndReleasePump(request, true, currentOperationContext))
                 {
@@ -1092,9 +1299,11 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(System.Diagnostics.TraceEventType.Warning,
+                    TraceUtility.TraceEvent(
+                        System.Diagnostics.TraceEventType.Warning,
                         TraceCode.FailedToOpenIncomingChannel,
-                        SR.GetString(SR.TraceCodeFailedToOpenIncomingChannel));
+                        SR.GetString(SR.TraceCodeFailedToOpenIncomingChannel)
+                    );
                 }
                 SessionIdleManager idleManager = this.idleManager;
                 if (idleManager != null)
@@ -1126,7 +1335,8 @@ namespace System.ServiceModel.Dispatcher
 
         bool TryReceive(TimeSpan timeout, out RequestContext requestContext)
         {
-            this.shouldRejectMessageWithOnOpenActionHeader = !this.needToCreateSessionOpenNotificationMessage;
+            this.shouldRejectMessageWithOnOpenActionHeader =
+                !this.needToCreateSessionOpenNotificationMessage;
 
             bool valid;
             if (this.needToCreateSessionOpenNotificationMessage)
@@ -1150,39 +1360,58 @@ namespace System.ServiceModel.Dispatcher
 
         void ReplyAddressFilterDidNotMatch(RequestContext request)
         {
-            FaultCode code = FaultCode.CreateSenderFaultCode(AddressingStrings.DestinationUnreachable,
-                this.messageVersion.Addressing.Namespace);
-            string reason = SR.GetString(SR.SFxNoEndpointMatchingAddress, request.RequestMessage.Headers.To);
+            FaultCode code = FaultCode.CreateSenderFaultCode(
+                AddressingStrings.DestinationUnreachable,
+                this.messageVersion.Addressing.Namespace
+            );
+            string reason = SR.GetString(
+                SR.SFxNoEndpointMatchingAddress,
+                request.RequestMessage.Headers.To
+            );
 
             ReplyFailure(request, code, reason);
         }
 
         void ReplyContractFilterDidNotMatch(RequestContext request)
         {
-            // By default, the contract filter is just a filter over the set of initiating actions in 
+            // By default, the contract filter is just a filter over the set of initiating actions in
             // the contract, so we do error messages accordingly
             AddressingVersion addressingVersion = this.messageVersion.Addressing;
-            if (addressingVersion != AddressingVersion.None && request.RequestMessage.Headers.Action == null)
+            if (
+                addressingVersion != AddressingVersion.None
+                && request.RequestMessage.Headers.Action == null
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new MessageHeaderException(
-                    SR.GetString(SR.SFxMissingActionHeader, addressingVersion.Namespace), AddressingStrings.Action, addressingVersion.Namespace));
+                        SR.GetString(SR.SFxMissingActionHeader, addressingVersion.Namespace),
+                        AddressingStrings.Action,
+                        addressingVersion.Namespace
+                    )
+                );
             }
             else
             {
                 // some of this code is duplicated in DispatchRuntime.UnhandledActionInvoker
                 // ideally both places would use FaultConverter and ActionNotSupportedException
-                FaultCode code = FaultCode.CreateSenderFaultCode(AddressingStrings.ActionNotSupported,
-                    this.messageVersion.Addressing.Namespace);
-                string reason = SR.GetString(SR.SFxNoEndpointMatchingContract, request.RequestMessage.Headers.Action);
+                FaultCode code = FaultCode.CreateSenderFaultCode(
+                    AddressingStrings.ActionNotSupported,
+                    this.messageVersion.Addressing.Namespace
+                );
+                string reason = SR.GetString(
+                    SR.SFxNoEndpointMatchingContract,
+                    request.RequestMessage.Headers.Action
+                );
                 ReplyFailure(request, code, reason, this.messageVersion.Addressing.FaultAction);
             }
         }
 
         void ReplyChannelTerminated(RequestContext request)
         {
-            FaultCode code = FaultCode.CreateSenderFaultCode(FaultCodeConstants.Codes.SessionTerminated,
-                FaultCodeConstants.Namespaces.NetDispatch);
+            FaultCode code = FaultCode.CreateSenderFaultCode(
+                FaultCodeConstants.Codes.SessionTerminated,
+                FaultCodeConstants.Namespaces.NetDispatch
+            );
             string reason = SR.GetString(SR.SFxChannelTerminated0);
             string action = FaultCodeConstants.Actions.NetDispatcher;
             Message fault = Message.CreateMessage(this.messageVersion, code, reason, action);
@@ -1201,18 +1430,37 @@ namespace System.ServiceModel.Dispatcher
             ReplyFailure(request, fault, action, reason, code);
         }
 
-        void ReplyFailure(RequestContext request, Message fault, string action, string reason, FaultCode code)
+        void ReplyFailure(
+            RequestContext request,
+            Message fault,
+            string action,
+            string reason,
+            FaultCode code
+        )
         {
             FaultException exception = new FaultException(reason, code);
             ErrorBehavior.ThrowAndCatch(exception);
             ErrorHandlerFaultInfo faultInfo = new ErrorHandlerFaultInfo(action);
             faultInfo.Fault = fault;
-            bool replied, replySentAsync;
-            ProvideFaultAndReplyFailure(request, exception, ref faultInfo, out replied, out replySentAsync);
+            bool replied,
+                replySentAsync;
+            ProvideFaultAndReplyFailure(
+                request,
+                exception,
+                ref faultInfo,
+                out replied,
+                out replySentAsync
+            );
             this.HandleError(exception, ref faultInfo);
         }
 
-        void ProvideFaultAndReplyFailure(RequestContext request, Exception exception, ref ErrorHandlerFaultInfo faultInfo, out bool replied, out bool replySentAsync)
+        void ProvideFaultAndReplyFailure(
+            RequestContext request,
+            Exception exception,
+            ref ErrorHandlerFaultInfo faultInfo,
+            out bool replied,
+            out bool replySentAsync
+        )
         {
             replied = false;
             replySentAsync = false;
@@ -1255,8 +1503,20 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (this.sendAsynchronously)
                                 {
-                                    var state = new ContinuationState { ChannelHandler = this, Channel = channel, Exception = exception, FaultInfo = faultInfo, Request = request, Reply = reply };
-                                    var result = request.BeginReply(reply, ChannelHandler.onAsyncReplyComplete, state);
+                                    var state = new ContinuationState
+                                    {
+                                        ChannelHandler = this,
+                                        Channel = channel,
+                                        Exception = exception,
+                                        FaultInfo = faultInfo,
+                                        Request = request,
+                                        Reply = reply,
+                                    };
+                                    var result = request.BeginReply(
+                                        reply,
+                                        ChannelHandler.onAsyncReplyComplete,
+                                        state
+                                    );
                                     if (result.CompletedSynchronously)
                                     {
                                         ChannelHandler.AsyncReplyComplete(result, state);
@@ -1296,7 +1556,7 @@ namespace System.ServiceModel.Dispatcher
         }
 
         /// <summary>
-        /// Prepares a reply that can either be sent asynchronously or synchronously depending on the value of 
+        /// Prepares a reply that can either be sent asynchronously or synchronously depending on the value of
         /// sendAsynchronously
         /// </summary>
         /// <param name="request">The request context to prepare</param>
@@ -1340,13 +1600,20 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (!object.ReferenceEquals(requestID, null) && !this.isManualAddressing)
                 {
-                    System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(reply, requestID);
+                    System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(
+                        reply,
+                        requestID
+                    );
                 }
                 if (!this.hasSession && !this.isManualAddressing)
                 {
                     try
                     {
-                        canSendReply = System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(reply, requestMessage);
+                        canSendReply =
+                            System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(
+                                reply,
+                                requestMessage
+                            );
                     }
                     catch (MessageHeaderException)
                     {
@@ -1376,7 +1643,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     throw;
                 }
-                
+
                 state.ChannelHandler.HandleError(e);
             }
 
@@ -1398,7 +1665,13 @@ namespace System.ServiceModel.Dispatcher
 
             try
             {
-                state.ChannelHandler.HandleErrorContinuation(state.Exception, state.Request, state.Channel, ref state.FaultInfo, true);
+                state.ChannelHandler.HandleErrorContinuation(
+                    state.Exception,
+                    state.Request,
+                    state.Channel,
+                    ref state.FaultInfo,
+                    true
+                );
             }
             catch (Exception e)
             {
@@ -1454,15 +1727,13 @@ namespace System.ServiceModel.Dispatcher
                 OperationContext currentOperationContext = new OperationContext(this.host);
                 OperationContext.Current = currentOperationContext;
 
-                for (;;)
+                for (; ; )
                 {
                     RequestContext request;
 
                     this.requestInfo.Cleanup();
 
-                    while (!TryReceive(TimeSpan.MaxValue, out request))
-                    {
-                    }
+                    while (!TryReceive(TimeSpan.MaxValue, out request)) { }
 
                     if (!HandleRequest(request, currentOperationContext))
                     {
@@ -1486,7 +1757,7 @@ namespace System.ServiceModel.Dispatcher
         [MethodImpl(MethodImplOptions.NoInlining)]
         void SyncTransactionalMessagePump()
         {
-            for (;;)
+            for (; ; )
             {
                 bool completedSynchronously;
                 if (null == sharedTransactedBatchContext)
@@ -1533,7 +1804,7 @@ namespace System.ServiceModel.Dispatcher
                 OperationContext currentOperationContext = new OperationContext(this.host);
                 OperationContext.Current = currentOperationContext;
 
-                for (;;)
+                for (; ; )
                 {
                     this.requestInfo.Cleanup();
 
@@ -1608,7 +1879,8 @@ namespace System.ServiceModel.Dispatcher
                         throw;
                     }
                 }
-                this.transactedBatchContext = this.sharedTransactedBatchContext.CreateTransactedBatchContext();
+                this.transactedBatchContext =
+                    this.sharedTransactedBatchContext.CreateTransactedBatchContext();
             }
 
             OperationContext existingOperationContext = OperationContext.Current;
@@ -1624,7 +1896,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     this.requestInfo.Cleanup();
 
-                    bool valid = TryTransactionalReceive(this.transactedBatchContext.Transaction, out request);
+                    bool valid = TryTransactionalReceive(
+                        this.transactedBatchContext.Transaction,
+                        out request
+                    );
 
                     if (!valid)
                     {
@@ -1646,7 +1921,10 @@ namespace System.ServiceModel.Dispatcher
                         return false;
                     }
 
-                    TransactionMessageProperty.Set(this.transactedBatchContext.Transaction, request.RequestMessage);
+                    TransactionMessageProperty.Set(
+                        this.transactedBatchContext.Transaction,
+                        request.RequestMessage
+                    );
 
                     this.transactedBatchContext.InDispatch = true;
                     if (!HandleRequest(request, currentOperationContext))
@@ -1663,7 +1941,9 @@ namespace System.ServiceModel.Dispatcher
 
                     if (!TryAcquirePump())
                     {
-                        Fx.Assert("System.ServiceModel.Dispatcher.ChannelHandler.TransactedBatchLoop(): (TryAcquiredPump returned false)");
+                        Fx.Assert(
+                            "System.ServiceModel.Dispatcher.ChannelHandler.TransactedBatchLoop(): (TryAcquiredPump returned false)"
+                        );
                         return false;
                     }
 
@@ -1700,7 +1980,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 return TransactionBehavior.CreateTransaction(
                     this.listener.ChannelDispatcher.TransactionIsolationLevel,
-                    TransactionBehavior.NormalizeTimeout(this.listener.ChannelDispatcher.TransactionTimeout));
+                    TransactionBehavior.NormalizeTimeout(
+                        this.listener.ChannelDispatcher.TransactionTimeout
+                    )
+                );
             }
         }
 
@@ -1728,8 +2011,17 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        TimeSpan receiveTimeout = TimeoutHelper.Min(this.listener.ChannelDispatcher.TransactionTimeout, this.listener.ChannelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout);
-                        received = this.receiver.TryReceive(TransactionBehavior.NormalizeTimeout(receiveTimeout), out request);
+                        TimeSpan receiveTimeout = TimeoutHelper.Min(
+                            this.listener.ChannelDispatcher.TransactionTimeout,
+                            this.listener
+                                .ChannelDispatcher
+                                .DefaultCommunicationTimeouts
+                                .ReceiveTimeout
+                        );
+                        received = this.receiver.TryReceive(
+                            TransactionBehavior.NormalizeTimeout(receiveTimeout),
+                            out request
+                        );
                     }
                     scope.Complete();
                 }
@@ -1774,26 +2066,34 @@ namespace System.ServiceModel.Dispatcher
             this.requestWaitingForThrottle = null;
             if (this.requestInfo.ChannelHandlerOwnsCallThrottle)
             {
-                Fx.Assert("ChannelHandler.ThrottleAcquiredForCall: this.requestInfo.ChannelHandlerOwnsCallThrottle");
+                Fx.Assert(
+                    "ChannelHandler.ThrottleAcquiredForCall: this.requestInfo.ChannelHandlerOwnsCallThrottle"
+                );
             }
             this.requestInfo.ChannelHandlerOwnsCallThrottle = true;
 
             if (!this.TryRetrievingInstanceContext(request))
             {
-                //Should reply/close request and also close the pump                
+                //Should reply/close request and also close the pump
                 this.EnsurePump();
                 return;
             }
 
             this.requestInfo.Channel.CompletedIOOperation();
 
-            if (this.TryAcquireThrottle(request, (this.requestInfo.ExistingInstanceContext == null)))
+            if (
+                this.TryAcquireThrottle(request, (this.requestInfo.ExistingInstanceContext == null))
+            )
             {
                 if (this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle)
                 {
-                    Fx.Assert("ChannelHandler.ThrottleAcquiredForCall: this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle");
+                    Fx.Assert(
+                        "ChannelHandler.ThrottleAcquiredForCall: this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle"
+                    );
                 }
-                this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle = (this.requestInfo.ExistingInstanceContext == null);
+                this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle = (
+                    this.requestInfo.ExistingInstanceContext == null
+                );
 
                 if (this.DispatchAndReleasePump(request, false, null))
                 {
@@ -1854,10 +2154,15 @@ namespace System.ServiceModel.Dispatcher
 
                 if (this.requestInfo.DispatchRuntime != null)
                 {
-                    IContextChannel transparentProxy = this.requestInfo.Channel.Proxy as IContextChannel;
+                    IContextChannel transparentProxy =
+                        this.requestInfo.Channel.Proxy as IContextChannel;
                     try
                     {
-                        this.requestInfo.ExistingInstanceContext = this.requestInfo.DispatchRuntime.InstanceContextProvider.GetExistingInstanceContext(request.RequestMessage, transparentProxy);
+                        this.requestInfo.ExistingInstanceContext =
+                            this.requestInfo.DispatchRuntime.InstanceContextProvider.GetExistingInstanceContext(
+                                request.RequestMessage,
+                                transparentProxy
+                            );
                         releasePump = false;
                     }
                     catch (Exception e)
@@ -1890,7 +2195,10 @@ namespace System.ServiceModel.Dispatcher
                     // So we do the null check here.
                     //
                     // SFx drops a message here
-                    TraceUtility.TraceDroppedMessage(request.RequestMessage, this.requestInfo.Endpoint);
+                    TraceUtility.TraceDroppedMessage(
+                        request.RequestMessage,
+                        this.requestInfo.Endpoint
+                    );
                     request.Close();
                     return false;
                 }
@@ -1903,7 +2211,7 @@ namespace System.ServiceModel.Dispatcher
                 }
 
                 this.HandleError(e, request, channel);
-                
+
                 return false;
             }
             finally
@@ -1923,9 +2231,13 @@ namespace System.ServiceModel.Dispatcher
             this.requestWaitingForThrottle = null;
             if (this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle)
             {
-                Fx.Assert("ChannelHandler.ThrottleAcquired: this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle");
+                Fx.Assert(
+                    "ChannelHandler.ThrottleAcquired: this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle"
+                );
             }
-            this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle = (this.requestInfo.ExistingInstanceContext == null);
+            this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle = (
+                this.requestInfo.ExistingInstanceContext == null
+            );
 
             if (this.DispatchAndReleasePump(request, false, null))
             {
@@ -2039,7 +2351,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (FxTrace.Trace.IsEnd2EndActivityTracingEnabled && message != null)
             {
-                EventTraceActivity eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(message);
+                EventTraceActivity eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                    message
+                );
                 if (TD.DispatchMessageStartIsEnabled())
                 {
                     TD.DispatchMessageStart(eventTraceActivity);

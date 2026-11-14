@@ -18,13 +18,17 @@ namespace System.Web.Http.WebHost.Routing
         private readonly IExceptionHandler _exceptionHandler;
 
         public HttpRouteExceptionHandler(ExceptionDispatchInfo exceptionInfo)
-            : this(exceptionInfo, ExceptionServices.GetLogger(GlobalConfiguration.Configuration),
-            ExceptionServices.GetHandler(GlobalConfiguration.Configuration))
-        {
-        }
+            : this(
+                exceptionInfo,
+                ExceptionServices.GetLogger(GlobalConfiguration.Configuration),
+                ExceptionServices.GetHandler(GlobalConfiguration.Configuration)
+            ) { }
 
-        internal HttpRouteExceptionHandler(ExceptionDispatchInfo exceptionInfo,
-            IExceptionLogger exceptionLogger, IExceptionHandler exceptionHandler)
+        internal HttpRouteExceptionHandler(
+            ExceptionDispatchInfo exceptionInfo,
+            IExceptionLogger exceptionLogger,
+            IExceptionHandler exceptionHandler
+        )
         {
             Contract.Assert(exceptionInfo != null);
             Contract.Assert(exceptionLogger != null);
@@ -64,7 +68,7 @@ namespace System.Web.Http.WebHost.Routing
             if (canceledException != null)
             {
                 // If the route throws a cancelation exception, then we'll abort the request instead of
-                // reporting an 'error'. We don't expect this to happen, but aborting the request is 
+                // reporting an 'error'. We don't expect this to happen, but aborting the request is
                 // consistent with our behavior in other hosts.
                 context.Request.Abort();
                 return;
@@ -72,7 +76,8 @@ namespace System.Web.Http.WebHost.Routing
 
             HttpRequestMessage request = context.GetOrCreateHttpRequestMessage();
             HttpResponseMessage response = null;
-            CancellationToken cancellationToken = context.Response.GetClientDisconnectedTokenWhenFixed();
+            CancellationToken cancellationToken =
+                context.Response.GetClientDisconnectedTokenWhenFixed();
 
             HttpResponseException responseException = exception as HttpResponseException;
 
@@ -85,16 +90,29 @@ namespace System.Web.Http.WebHost.Routing
 
                     // This method call is hardened and designed not to throw exceptions (since they won't be caught
                     // and handled further by its callers).
-                    await HttpControllerHandler.CopyResponseAsync(context, request, response, _exceptionLogger,
-                        _exceptionHandler, cancellationToken);
+                    await HttpControllerHandler.CopyResponseAsync(
+                        context,
+                        request,
+                        response,
+                        _exceptionLogger,
+                        _exceptionHandler,
+                        cancellationToken
+                    );
                 }
                 else
                 {
                     // This method call is hardened and designed not to throw exceptions (since they won't be caught and
                     // handled further by its callers).
                     bool handled = await HttpControllerHandler.CopyErrorResponseAsync(
-                        WebHostExceptionCatchBlocks.HttpWebRoute, context, request, null,
-                        _exceptionInfo.SourceException, _exceptionLogger, _exceptionHandler, cancellationToken);
+                        WebHostExceptionCatchBlocks.HttpWebRoute,
+                        context,
+                        request,
+                        null,
+                        _exceptionInfo.SourceException,
+                        _exceptionLogger,
+                        _exceptionHandler,
+                        cancellationToken
+                    );
 
                     if (!handled)
                     {

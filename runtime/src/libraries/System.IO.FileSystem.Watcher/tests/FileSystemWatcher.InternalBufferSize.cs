@@ -40,14 +40,17 @@ namespace System.IO.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public void FileSystemWatcher_InternalBufferSize(bool setToHigherCapacity)
         {
             ManualResetEvent unblockHandler = new ManualResetEvent(false);
             string file = CreateTestFile(TestDirectory, "file");
             using (FileSystemWatcher watcher = CreateWatcher(TestDirectory, file, unblockHandler))
             {
-                int internalBufferOperationCapacity = CalculateInternalBufferOperationCapacity(watcher.InternalBufferSize, file);
+                int internalBufferOperationCapacity = CalculateInternalBufferOperationCapacity(
+                    watcher.InternalBufferSize,
+                    file
+                );
 
                 // Set the capacity high to ensure no error events arise.
                 if (setToHigherCapacity)
@@ -74,7 +77,10 @@ namespace System.IO.Tests
                 TestISynchronizeInvoke invoker = new TestISynchronizeInvoke();
                 watcher.SynchronizingObject = invoker;
 
-                int internalBufferOperationCapacity = CalculateInternalBufferOperationCapacity(watcher.InternalBufferSize, file);
+                int internalBufferOperationCapacity = CalculateInternalBufferOperationCapacity(
+                    watcher.InternalBufferSize,
+                    file
+                );
 
                 Action action = GetAction(unblockHandler, internalBufferOperationCapacity, file);
                 Action cleanup = GetCleanup(unblockHandler);
@@ -86,7 +92,11 @@ namespace System.IO.Tests
 
         #region Test Helpers
 
-        private FileSystemWatcher CreateWatcher(string testDirectoryPath, string filePath, ManualResetEvent unblockHandler)
+        private FileSystemWatcher CreateWatcher(
+            string testDirectoryPath,
+            string filePath,
+            ManualResetEvent unblockHandler
+        )
         {
             var watcher = new FileSystemWatcher(testDirectoryPath, Path.GetFileName(filePath));
 
@@ -96,10 +106,16 @@ namespace System.IO.Tests
             return watcher;
         }
 
-        private int CalculateInternalBufferOperationCapacity(int internalBufferSize, string filePath) =>
-            internalBufferSize / (17 + Path.GetFileName(filePath).Length);
+        private int CalculateInternalBufferOperationCapacity(
+            int internalBufferSize,
+            string filePath
+        ) => internalBufferSize / (17 + Path.GetFileName(filePath).Length);
 
-        private Action GetAction(ManualResetEvent unblockHandler, int internalBufferOperationCapacity, string filePath)
+        private Action GetAction(
+            ManualResetEvent unblockHandler,
+            int internalBufferOperationCapacity,
+            string filePath
+        )
         {
             return () =>
             {

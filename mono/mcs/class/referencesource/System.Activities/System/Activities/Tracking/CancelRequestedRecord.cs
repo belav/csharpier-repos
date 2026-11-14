@@ -5,9 +5,9 @@
 namespace System.Activities.Tracking
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -16,7 +16,11 @@ namespace System.Activities.Tracking
         ActivityInfo activity;
         ActivityInfo child;
 
-        internal CancelRequestedRecord(Guid instanceId, ActivityInstance instance, ActivityInstance child)
+        internal CancelRequestedRecord(
+            Guid instanceId,
+            ActivityInstance instance,
+            ActivityInstance child
+        )
             : base(instanceId)
         {
             Fx.Assert(child != null, "Child activity instance cannot be null.");
@@ -24,7 +28,7 @@ namespace System.Activities.Tracking
             {
                 this.Activity = new ActivityInfo(instance);
             }
-            this.Child = new ActivityInfo(child);            
+            this.Child = new ActivityInfo(child);
         }
 
         //parameter activity is null if the root activity is being cancelled.
@@ -32,7 +36,8 @@ namespace System.Activities.Tracking
             Guid instanceId,
             long recordNumber,
             ActivityInfo activity,
-            ActivityInfo child)
+            ActivityInfo child
+        )
             : base(instanceId, recordNumber)
         {
             if (child == null)
@@ -48,31 +53,19 @@ namespace System.Activities.Tracking
             : base(record)
         {
             this.Activity = record.Activity;
-            this.Child = record.Child;            
+            this.Child = record.Child;
         }
-        
+
         public ActivityInfo Activity
         {
-            get
-            {
-                return this.activity;
-            }
-            private set
-            {
-                this.activity = value;
-            }
+            get { return this.activity; }
+            private set { this.activity = value; }
         }
-        
+
         public ActivityInfo Child
         {
-            get
-            {
-                return this.child;
-            }
-            private set
-            {
-                this.child = value;
-            }
+            get { return this.child; }
+            private set { this.child = value; }
         }
 
         [DataMember(Name = "Activity")]
@@ -96,12 +89,13 @@ namespace System.Activities.Tracking
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture,
-               "CancelRequestedRecord {{ {0}, Activity {{ {1} }}, ChildActivity {{ {2} }} }}",
-               base.ToString(),
-               this.Activity != null ? this.Activity.ToString() : "<null>",
-               this.Child.ToString());
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "CancelRequestedRecord {{ {0}, Activity {{ {1} }}, ChildActivity {{ {2} }} }}",
+                base.ToString(),
+                this.Activity != null ? this.Activity.ToString() : "<null>",
+                this.Child.ToString()
+            );
         }
-
     }
 }

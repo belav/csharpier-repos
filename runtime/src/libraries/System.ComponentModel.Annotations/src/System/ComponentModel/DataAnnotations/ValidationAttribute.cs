@@ -26,7 +26,11 @@ namespace System.ComponentModel.DataAnnotations
         private string? _errorMessage;
         private Func<string>? _errorMessageResourceAccessor;
         private string? _errorMessageResourceName;
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         private Type? _errorMessageResourceType;
         private volatile bool _hasBaseIsValid;
         private string? _defaultErrorMessage;
@@ -43,18 +47,14 @@ namespace System.ComponentModel.DataAnnotations
         ///     or supply a better message.
         /// </remarks>
         protected ValidationAttribute()
-            : this(() => SR.ValidationAttribute_ValidationError)
-        {
-        }
+            : this(() => SR.ValidationAttribute_ValidationError) { }
 
         /// <summary>
         ///     Constructor that accepts a fixed validation error message.
         /// </summary>
         /// <param name="errorMessage">A non-localized error message to use in <see cref="ErrorMessageString" />.</param>
         protected ValidationAttribute(string errorMessage)
-            : this(() => errorMessage)
-        {
-        }
+            : this(() => errorMessage) { }
 
         /// <summary>
         ///     Allows for providing a resource accessor function that will be used by the <see cref="ErrorMessageString" />
@@ -73,7 +73,10 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         private protected ValidationAttribute(bool populateErrorMessageResourceAccessor)
         {
-            Debug.Assert(populateErrorMessageResourceAccessor is false, "Use the default constructor instead");
+            Debug.Assert(
+                populateErrorMessageResourceAccessor is false,
+                "Use the default constructor instead"
+            );
         }
 
         #endregion
@@ -103,7 +106,12 @@ namespace System.ComponentModel.DataAnnotations
         {
             init
             {
-                Debug.Assert(_defaultErrorMessage is null && _errorMessageResourceName is null && _errorMessage is null && _errorMessageResourceType is null);
+                Debug.Assert(
+                    _defaultErrorMessage is null
+                        && _errorMessageResourceName is null
+                        && _errorMessage is null
+                        && _errorMessageResourceType is null
+                );
                 _errorMessageResourceAccessor = value;
             }
         }
@@ -197,7 +205,10 @@ namespace System.ComponentModel.DataAnnotations
         ///         Use <see cref="ErrorMessage" /> instead of this pair if error messages are not localized.
         ///     </para>
         /// </value>
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         public Type? ErrorMessageResourceType
         {
             get => _errorMessageResourceType;
@@ -231,17 +242,22 @@ namespace System.ComponentModel.DataAnnotations
                 // The following combinations are illegal and throw InvalidOperationException:
                 //   1) Both ErrorMessage and ErrorMessageResourceName are set, or
                 //   2) None of ErrorMessage, ErrorMessageResourceName, and DefaultErrorMessage are set.
-                if ((resourceNameSet && errorMessageSet) || !(resourceNameSet || errorMessageSet || defaultMessageSet))
+                if (
+                    (resourceNameSet && errorMessageSet)
+                    || !(resourceNameSet || errorMessageSet || defaultMessageSet)
+                )
                 {
                     throw new InvalidOperationException(
-                        SR.ValidationAttribute_Cannot_Set_ErrorMessage_And_Resource);
+                        SR.ValidationAttribute_Cannot_Set_ErrorMessage_And_Resource
+                    );
                 }
 
                 // Must set both or neither of ErrorMessageResourceType and ErrorMessageResourceName
                 if (resourceTypeSet != resourceNameSet)
                 {
                     throw new InvalidOperationException(
-                        SR.ValidationAttribute_NeedBothResourceTypeAndResourceName);
+                        SR.ValidationAttribute_NeedBothResourceTypeAndResourceName
+                    );
                 }
 
                 // If set resource type (and we know resource name too), then go setup the accessor
@@ -263,15 +279,23 @@ namespace System.ComponentModel.DataAnnotations
         {
             Debug.Assert(_errorMessageResourceType != null);
             Debug.Assert(!string.IsNullOrEmpty(_errorMessageResourceName));
-            var property = _errorMessageResourceType
-                .GetProperty(_errorMessageResourceName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            var property = _errorMessageResourceType.GetProperty(
+                _errorMessageResourceName,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly
+            );
 
             if (property != null)
             {
                 var propertyGetter = property.GetMethod;
 
                 // We only support internal and public properties
-                if (propertyGetter == null || (!propertyGetter.IsAssembly && !propertyGetter.IsPublic))
+                if (
+                    propertyGetter == null
+                    || (!propertyGetter.IsAssembly && !propertyGetter.IsPublic)
+                )
                 {
                     // Set the property to null so the exception is thrown as if the property wasn't found
                     property = null;
@@ -280,28 +304,41 @@ namespace System.ComponentModel.DataAnnotations
 
             if (property == null)
             {
-                throw new InvalidOperationException(SR.Format(SR.ValidationAttribute_ResourceTypeDoesNotHaveProperty,
-                                                    _errorMessageResourceType.FullName,
-                                                    _errorMessageResourceName));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.ValidationAttribute_ResourceTypeDoesNotHaveProperty,
+                        _errorMessageResourceType.FullName,
+                        _errorMessageResourceName
+                    )
+                );
             }
 
             if (property.PropertyType != typeof(string))
             {
-                throw new InvalidOperationException(SR.Format(SR.ValidationAttribute_ResourcePropertyNotStringType,
-                                                    property.Name,
-                                                    _errorMessageResourceType.FullName));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.ValidationAttribute_ResourcePropertyNotStringType,
+                        property.Name,
+                        _errorMessageResourceType.FullName
+                    )
+                );
             }
 
             _errorMessageResourceAccessor = () => (string)property.GetValue(null, null)!;
         }
 
-        private protected ValidationResult CreateFailedValidationResult(ValidationContext validationContext)
+        private protected ValidationResult CreateFailedValidationResult(
+            ValidationContext validationContext
+        )
         {
             string[]? memberNames = validationContext.MemberName is { } memberName
                 ? new[] { memberName }
                 : null;
 
-            return new ValidationResult(FormatErrorMessage(validationContext.DisplayName), memberNames);
+            return new ValidationResult(
+                FormatErrorMessage(validationContext.DisplayName),
+                memberNames
+            );
         }
 
         #endregion
@@ -386,13 +423,17 @@ namespace System.ComponentModel.DataAnnotations
         ///     is thrown when <see cref="IsValid(object, ValidationContext)" />
         ///     has not been implemented by a derived class.
         /// </exception>
-        protected virtual ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        protected virtual ValidationResult? IsValid(
+            object? value,
+            ValidationContext validationContext
+        )
         {
             if (_hasBaseIsValid)
             {
                 // this means neither of the IsValid methods has been overridden, throw.
                 throw NotImplemented.ByDesignWithMessage(
-                    SR.ValidationAttribute_IsValid_NotImplemented);
+                    SR.ValidationAttribute_IsValid_NotImplemented
+                );
             }
 
             // call overridden method.
@@ -427,7 +468,10 @@ namespace System.ComponentModel.DataAnnotations
         ///     is thrown when <see cref="IsValid(object, ValidationContext)" />
         ///     has not been implemented by a derived class.
         /// </exception>
-        public ValidationResult? GetValidationResult(object? value, ValidationContext validationContext)
+        public ValidationResult? GetValidationResult(
+            object? value,
+            ValidationContext validationContext
+        )
         {
             ArgumentNullException.ThrowIfNull(validationContext);
 

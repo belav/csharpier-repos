@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void PatternIndexAndRangeIndexer()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     public int Length => 0;
@@ -31,7 +32,8 @@ class C
     }/*</bind>*/
 }";
             var comp = CreateCompilationWithIndexAndRange(src);
-            const string expectedOperationTree = @"
+            const string expectedOperationTree =
+                @"
 IBlockOperation (2 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: '_ = this[^0];')
     Expression:
@@ -69,11 +71,20 @@ IBlockOperation (2 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
             LengthSymbol: System.Int32 C.Length { get; }
             IndexerSymbol: System.Int32 C.Slice(System.Int32 i, System.Int32 j)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, expectedOperationTree, DiagnosticDescription.None);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedOperationTree,
+                DiagnosticDescription.None
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, expectedOperationTree, DiagnosticDescription.None);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedOperationTree,
+                DiagnosticDescription.None
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -128,7 +139,8 @@ Block[B2] - Exit
         [Fact]
         public void FromEndIndexFlow_01()
         {
-            var source = @"
+            var source =
+                @"
 class Test
 {
     void M(int arg)
@@ -139,7 +151,8 @@ class Test
 
             var compilation = CreateCompilationWithIndex(source);
 
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IBlockOperation (1 statements, 1 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   Locals: Local_1: System.Index x
   IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'var x = ^arg;')
@@ -156,9 +169,14 @@ IBlockOperation (1 statements, 1 locals) (OperationKind.Block, Type: null) (Synt
 
             var diagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, expectedOperationTree, diagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedOperationTree,
+                diagnostics
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -192,7 +210,8 @@ Block[B2] - Exit
         [Fact]
         public void RangeFlow_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -207,7 +226,8 @@ class Test
 
             var compilation = CreateCompilationWithIndexAndRange(source);
 
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IBlockOperation (4 statements, 4 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   Locals: Local_1: System.Range a
     Local_2: System.Range b
@@ -269,9 +289,14 @@ IBlockOperation (4 statements, 4 locals) (OperationKind.Block, Type: null) (Synt
 
             var diagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, expectedOperationTree, diagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedOperationTree,
+                diagnostics
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]

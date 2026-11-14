@@ -45,7 +45,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             // T-REC-X.690-201508 sec 8.2.1
             ReadOnlySpan<byte> contents = GetPrimitiveContentSpan(
@@ -53,7 +54,8 @@ namespace System.Formats.Asn1
                 ruleSet,
                 expectedTag ?? Asn1Tag.Boolean,
                 UniversalTagNumber.Boolean,
-                out int consumed);
+                out int consumed
+            );
 
             // T-REC-X.690-201508 sec 8.2.1
             if (contents.Length != 1)
@@ -111,7 +113,12 @@ namespace System.Formats.Asn1
         /// </exception>
         public bool ReadBoolean(Asn1Tag? expectedTag = null)
         {
-            bool ret = AsnDecoder.ReadBoolean(_data.Span, RuleSet, out int bytesConsumed, expectedTag);
+            bool ret = AsnDecoder.ReadBoolean(
+                _data.Span,
+                RuleSet,
+                out int bytesConsumed,
+                expectedTag
+            );
             _data = _data.Slice(bytesConsumed);
             return ret;
         }

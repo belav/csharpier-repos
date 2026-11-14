@@ -14,14 +14,20 @@ namespace System.Runtime.Intrinsics.Arm
     {
         internal Crc32() { }
 
-        public static new bool IsSupported { get => IsSupported; }
+        public static new bool IsSupported
+        {
+            get => IsSupported;
+        }
 
         [Intrinsic]
         public new abstract class Arm64 : ArmBase.Arm64
         {
             internal Arm64() { }
 
-            public static new bool IsSupported { get => IsSupported; }
+            public static new bool IsSupported
+            {
+                get => IsSupported;
+            }
 
             /// <summary>
             /// uint32_t __crc32d (uint32_t a, uint64_t b)

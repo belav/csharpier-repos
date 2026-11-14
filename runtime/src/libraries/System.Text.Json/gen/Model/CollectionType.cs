@@ -6,12 +6,14 @@ namespace System.Text.Json.SourceGeneration
     public enum CollectionType
     {
         NotApplicable,
+
         // Dictionary types
         IDictionary,
         Dictionary,
         ImmutableDictionary,
         IDictionaryOfTKeyTValue,
         IReadOnlyDictionary,
+
         // Non-dictionary types
         Array,
         List,
@@ -30,6 +32,6 @@ namespace System.Text.Json.SourceGeneration
         Queue,
         ImmutableEnumerable,
         MemoryOfT,
-        ReadOnlyMemoryOfT
+        ReadOnlyMemoryOfT,
     }
 }

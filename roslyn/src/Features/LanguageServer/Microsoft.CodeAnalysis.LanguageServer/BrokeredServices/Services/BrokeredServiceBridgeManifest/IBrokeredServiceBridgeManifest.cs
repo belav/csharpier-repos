@@ -20,6 +20,7 @@ internal interface IBrokeredServiceBridgeManifest
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask<IReadOnlyCollection<ServiceMoniker>> GetAvailableServicesAsync(CancellationToken cancellationToken);
+    ValueTask<IReadOnlyCollection<ServiceMoniker>> GetAvailableServicesAsync(
+        CancellationToken cancellationToken
+    );
 }
-

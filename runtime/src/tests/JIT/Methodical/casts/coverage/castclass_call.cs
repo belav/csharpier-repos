@@ -84,5 +84,6 @@ namespace JitTest_castclass_call_cs
     }
 
     internal class DerivedClass : TestClass { }
+
     internal class OtherClass { }
 }

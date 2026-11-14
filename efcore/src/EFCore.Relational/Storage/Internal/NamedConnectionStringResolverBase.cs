@@ -38,8 +38,7 @@ public abstract class NamedConnectionStringResolverBase
             return connectionString;
         }
 
-        var configuration = ApplicationServiceProvider
-            ?.GetService<IConfiguration>();
+        var configuration = ApplicationServiceProvider?.GetService<IConfiguration>();
 
         var resolved = configuration?[connectionName]
             ?? configuration?[DefaultSection + connectionName];
@@ -47,7 +46,8 @@ public abstract class NamedConnectionStringResolverBase
         if (resolved == null)
         {
             throw new InvalidOperationException(
-                RelationalStrings.NamedConnectionStringNotFound(connectionName));
+                RelationalStrings.NamedConnectionStringNotFound(connectionName)
+            );
         }
 
         return resolved;
@@ -66,8 +66,9 @@ public abstract class NamedConnectionStringResolverBase
             return null;
         }
 
-        return connectionString[..firstEquals].Trim().Equals(
-            "name", StringComparison.OrdinalIgnoreCase)
+        return connectionString[..firstEquals]
+            .Trim()
+            .Equals("name", StringComparison.OrdinalIgnoreCase)
             ? connectionString[(firstEquals + 1)..].Trim()
             : null;
     }

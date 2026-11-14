@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,76 +27,75 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeTypeReferenceExpressionTest
-	{
-		[Test]
-		public void Constructor0 ()
-		{
-			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression ();
-			Assert.IsNotNull (ctre.Type, "#1");
-			Assert.AreEqual (typeof (void).FullName, ctre.Type.BaseType, "#2");
-		}
+    [TestFixture]
+    public class CodeTypeReferenceExpressionTest
+    {
+        [Test]
+        public void Constructor0()
+        {
+            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression();
+            Assert.IsNotNull(ctre.Type, "#1");
+            Assert.AreEqual(typeof(void).FullName, ctre.Type.BaseType, "#2");
+        }
 
-		[Test]
-		public void Constructor1 ()
-		{
-			CodeTypeReference type1 = new CodeTypeReference ("mono1");
+        [Test]
+        public void Constructor1()
+        {
+            CodeTypeReference type1 = new CodeTypeReference("mono1");
 
-			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression (type1);
-			Assert.IsNotNull (ctre.Type, "#1");
-			Assert.AreSame (type1, ctre.Type, "#2");
+            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression(type1);
+            Assert.IsNotNull(ctre.Type, "#1");
+            Assert.AreSame(type1, ctre.Type, "#2");
 
-			ctre.Type = null;
-			Assert.IsNotNull (ctre.Type, "#3");
-			Assert.AreEqual (typeof (void).FullName, ctre.Type.BaseType, "#4");
+            ctre.Type = null;
+            Assert.IsNotNull(ctre.Type, "#3");
+            Assert.AreEqual(typeof(void).FullName, ctre.Type.BaseType, "#4");
 
-			CodeTypeReference type2 = new CodeTypeReference ("mono2");
-			ctre.Type = type2;
-			Assert.IsNotNull (ctre.Type, "#5");
-			Assert.AreSame (type2, ctre.Type, "#6");
+            CodeTypeReference type2 = new CodeTypeReference("mono2");
+            ctre.Type = type2;
+            Assert.IsNotNull(ctre.Type, "#5");
+            Assert.AreSame(type2, ctre.Type, "#6");
 
-			ctre = new CodeTypeReferenceExpression ((CodeTypeReference) null);
-			Assert.IsNotNull (ctre.Type, "#7");
-			Assert.AreEqual (typeof (void).FullName, ctre.Type.BaseType, "#8");
-		}
+            ctre = new CodeTypeReferenceExpression((CodeTypeReference)null);
+            Assert.IsNotNull(ctre.Type, "#7");
+            Assert.AreEqual(typeof(void).FullName, ctre.Type.BaseType, "#8");
+        }
 
-		[Test]
-		public void Constructor2 ()
-		{
-			string baseType = "mono";
+        [Test]
+        public void Constructor2()
+        {
+            string baseType = "mono";
 
-			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression (baseType);
-			Assert.IsNotNull (ctre.Type, "#1");
-			Assert.AreEqual (baseType, ctre.Type.BaseType, "#2");
+            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression(baseType);
+            Assert.IsNotNull(ctre.Type, "#1");
+            Assert.AreEqual(baseType, ctre.Type.BaseType, "#2");
 
-			ctre = new CodeTypeReferenceExpression ((string) null);
-			Assert.IsNotNull (ctre.Type, "#3");
-			Assert.AreEqual (typeof (void).FullName, ctre.Type.BaseType, "#4");
-		}
+            ctre = new CodeTypeReferenceExpression((string)null);
+            Assert.IsNotNull(ctre.Type, "#3");
+            Assert.AreEqual(typeof(void).FullName, ctre.Type.BaseType, "#4");
+        }
 
-		[Test]
-		public void Constructor3 ()
-		{
-			Type type = typeof (int);
+        [Test]
+        public void Constructor3()
+        {
+            Type type = typeof(int);
 
-			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression (type);
-			Assert.IsNotNull (ctre.Type, "#1");
-			Assert.AreEqual (type.FullName, ctre.Type.BaseType, "#2");
-		}
+            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression(type);
+            Assert.IsNotNull(ctre.Type, "#1");
+            Assert.AreEqual(type.FullName, ctre.Type.BaseType, "#2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor3_NullType ()
-		{
-			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression ((Type) null);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor3_NullType()
+        {
+            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression((Type)null);
+        }
+    }
 }

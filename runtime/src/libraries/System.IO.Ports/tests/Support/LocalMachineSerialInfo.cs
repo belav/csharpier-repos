@@ -13,7 +13,12 @@ namespace Legacy.Support
         private readonly bool _nullModemPresent;
         private readonly string _loopbackPortName;
 
-        public LocalMachineSerialInfo(string firstAvailablePortName, string secondAvailablePortName, string loopBackPortName, bool nullModemPresent)
+        public LocalMachineSerialInfo(
+            string firstAvailablePortName,
+            string secondAvailablePortName,
+            string loopBackPortName,
+            bool nullModemPresent
+        )
         {
             _firstAvailablePortName = firstAvailablePortName;
             _secondAvailablePortName = secondAvailablePortName;
@@ -23,34 +28,22 @@ namespace Legacy.Support
 
         public string FirstAvailablePortName
         {
-            get
-            {
-                return _firstAvailablePortName;
-            }
+            get { return _firstAvailablePortName; }
         }
 
         public string SecondAvailablePortName
         {
-            get
-            {
-                return _secondAvailablePortName;
-            }
+            get { return _secondAvailablePortName; }
         }
 
         public bool NullModemPresent
         {
-            get
-            {
-                return _nullModemPresent;
-            }
+            get { return _nullModemPresent; }
         }
 
         public string LoopbackPortName
         {
-            get
-            {
-                return _loopbackPortName;
-            }
+            get { return _loopbackPortName; }
         }
     }
 }

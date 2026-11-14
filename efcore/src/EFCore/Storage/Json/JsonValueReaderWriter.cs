@@ -17,9 +17,7 @@ public abstract class JsonValueReaderWriter
     /// <summary>
     ///     Ensures the external types extend from the generic <see cref="JsonValueReaderWriter{TValue}" />
     /// </summary>
-    internal JsonValueReaderWriter()
-    {
-    }
+    internal JsonValueReaderWriter() { }
 
     /// <summary>
     ///     Reads the value from a UTF8 JSON stream or buffer.
@@ -41,7 +39,10 @@ public abstract class JsonValueReaderWriter
     /// <param name="manager">The <see cref="Utf8JsonReaderManager" /> for the JSON being read.</param>
     /// <param name="existingObject">Can be used to update an existing object, rather than create a new one.</param>
     /// <returns>The read value.</returns>
-    public abstract object FromJson(ref Utf8JsonReaderManager manager, object? existingObject = null);
+    public abstract object FromJson(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    );
 
     /// <summary>
     ///     Writes the value to JSON.
@@ -63,7 +64,10 @@ public abstract class JsonValueReaderWriter
     /// <returns>The read value.</returns>
     public object FromJsonString(string json, object? existingObject = null)
     {
-        var readerManager = new Utf8JsonReaderManager(new JsonReaderData(Encoding.UTF8.GetBytes(json)), null);
+        var readerManager = new Utf8JsonReaderManager(
+            new JsonReaderData(Encoding.UTF8.GetBytes(json)),
+            null
+        );
         readerManager.MoveNext();
         return FromJson(ref readerManager, existingObject);
     }
@@ -103,18 +107,22 @@ public abstract class JsonValueReaderWriter
             var instanceProperty = readerWriterType.GetAnyProperty("Instance");
             try
             {
-                return instanceProperty != null
+                return
+                    instanceProperty != null
                     && instanceProperty.IsStatic()
                     && instanceProperty.GetMethod?.IsPublic == true
                     && readerWriterType.IsAssignableFrom(instanceProperty.PropertyType)
-                        ? (JsonValueReaderWriter?)instanceProperty.GetValue(null)
-                        : (JsonValueReaderWriter?)Activator.CreateInstance(readerWriterType);
+                    ? (JsonValueReaderWriter?)instanceProperty.GetValue(null)
+                    : (JsonValueReaderWriter?)Activator.CreateInstance(readerWriterType);
             }
             catch (Exception e)
             {
                 throw new InvalidOperationException(
                     CoreStrings.CannotCreateJsonValueReaderWriter(
-                        readerWriterType.ShortDisplayName()), e);
+                        readerWriterType.ShortDisplayName()
+                    ),
+                    e
+                );
             }
         }
 

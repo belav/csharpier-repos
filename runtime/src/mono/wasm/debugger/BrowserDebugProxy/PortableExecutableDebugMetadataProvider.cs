@@ -13,15 +13,23 @@ namespace Microsoft.WebAssembly.Diagnostics;
 public class PortableExecutableDebugMetadataProvider : IDebugMetadataProvider
 {
     private readonly PEReader _peReader;
+
     public PortableExecutableDebugMetadataProvider(PEReader peReader)
     {
         _peReader = peReader;
     }
-    public ImmutableArray<DebugDirectoryEntry> ReadDebugDirectory() => _peReader.ReadDebugDirectory();
 
-    public CodeViewDebugDirectoryData ReadCodeViewDebugDirectoryData(DebugDirectoryEntry entry) => _peReader.ReadCodeViewDebugDirectoryData(entry);
+    public ImmutableArray<DebugDirectoryEntry> ReadDebugDirectory() =>
+        _peReader.ReadDebugDirectory();
 
-    public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(DebugDirectoryEntry entry) => _peReader.ReadPdbChecksumDebugDirectoryData(entry);
+    public CodeViewDebugDirectoryData ReadCodeViewDebugDirectoryData(DebugDirectoryEntry entry) =>
+        _peReader.ReadCodeViewDebugDirectoryData(entry);
 
-    public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(DebugDirectoryEntry entry) => _peReader.ReadEmbeddedPortablePdbDebugDirectoryData(entry);
+    public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(
+        DebugDirectoryEntry entry
+    ) => _peReader.ReadPdbChecksumDebugDirectoryData(entry);
+
+    public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(
+        DebugDirectoryEntry entry
+    ) => _peReader.ReadEmbeddedPortablePdbDebugDirectoryData(entry);
 }

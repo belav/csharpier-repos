@@ -39,8 +39,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader11()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 0002-01-01T00:00:00+00:00
    9998-12-31T12:59:59-00:00 
 2000-02-29T23:59:59+13:60'> 0002-01-01T00:00:00+00:00
@@ -53,25 +52,25 @@ namespace System.Xml.XmlReaderTests
             var values = (DateTime[])reader.ReadContentAs(typeof(DateTime[]), null);
             Assert.Equal(3, values.Length);
 
-            Assert.Equal
-            (
-                new DateTime(2, 1, 1, 0, 0, 0)
-                    .Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))),
+            Assert.Equal(
+                new DateTime(2, 1, 1, 0, 0, 0).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))
+                ),
                 values[0]
             );
 
-            Assert.Equal
-            (
-                new DateTime(9998, 12, 31, 12, 59, 59)
-                    .Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(9998, 12, 31))),
+            Assert.Equal(
+                new DateTime(9998, 12, 31, 12, 59, 59).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(9998, 12, 31))
+                ),
                 values[1]
             );
 
-            Assert.Equal
-            (
-                new DateTime(2000, 2, 29, 23, 59, 59)
-                    .Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2000, 2, 29))
-                         - new TimeSpan(14, 0, 0)),
+            Assert.Equal(
+                new DateTime(2000, 2, 29, 23, 59, 59).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2000, 2, 29))
+                        - new TimeSpan(14, 0, 0)
+                ),
                 values[2]
             );
         }
@@ -79,8 +78,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader12()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 0002-01-01T00:00:00+00:00
    9998-12-31T12:59:59-00:00 
 2000-02-29T23:59:59+13:60'> 0002-01-01T00:00:00+00:00
@@ -93,25 +91,25 @@ namespace System.Xml.XmlReaderTests
             var values = (DateTime[])reader.ReadContentAs(typeof(DateTime[]), null);
             Assert.Equal(3, values.Length);
 
-            Assert.Equal
-            (
-                new DateTime(2, 1, 1, 0, 0, 0)
-                    .Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))),
+            Assert.Equal(
+                new DateTime(2, 1, 1, 0, 0, 0).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))
+                ),
                 values[0]
             );
 
-            Assert.Equal
-            (
-                new DateTime(9998, 12, 31, 12, 59, 59)
-                    .Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(9998, 12, 31))),
+            Assert.Equal(
+                new DateTime(9998, 12, 31, 12, 59, 59).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(9998, 12, 31))
+                ),
                 values[1]
             );
 
-            Assert.Equal
-            (
-                new DateTime(2000, 2, 29, 23, 59, 59)
-                    .Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2000, 2, 29))
-                         - new TimeSpan(14, 0, 0)),
+            Assert.Equal(
+                new DateTime(2000, 2, 29, 23, 59, 59).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2000, 2, 29))
+                        - new TimeSpan(14, 0, 0)
+                ),
                 values[2]
             );
         }
@@ -119,8 +117,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader13()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 3.14 42  13.75559 -5.743'>
  3.14 42  13.75559 -5.743 </a>"
             );
@@ -138,8 +135,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader14()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 3.14 42  13.75559 -5.743'>
  3.14 42  13.75559 -5.743 </a>"
             );
@@ -157,8 +153,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader15()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 3.14 42  13.75559 -5.743'>
  3.14 42  13.75559 -5.743 </a>"
             );
@@ -176,8 +171,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader16()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 3.14 42  13.75559 -5.743'>
  3.14 42  13.75559 -5.743 </a>"
             );
@@ -195,8 +189,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader17()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 36 442  19 -5743'>
   36 442  19 -5743</a>"
             );
@@ -214,8 +207,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader18()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 36 442  19 -5743'>
   36 442  19 -5743</a>"
             );
@@ -233,8 +225,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader19()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 36 442  -39 9223372036854775807'>
   36 442  -39 9223372036854775807</a>"
             );
@@ -266,8 +257,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader20()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 36 442  -39 9223372036854775807'>
   36 442  -39 9223372036854775807</a>"
             );
@@ -313,8 +303,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader23()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 3.14 42  13.75559 -5.743'>
  3.14 42  13.75559 -5.743 </a>"
             );
@@ -332,8 +321,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader24()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 @"<a b=' 3.14 42  13.75559 -5.743'>
  3.14 42  13.75559 -5.743 </a>"
             );
@@ -358,11 +346,7 @@ namespace System.Xml.XmlReaderTests
             Assert.Equal(2, values.Length);
             Assert.Equal(new TimeSpan(0, 0, 2, 10), values[0]);
 
-            Assert.Equal
-            (
-                new TimeSpan(0, 0, 0, 130, 0),
-                values[1]
-            );
+            Assert.Equal(new TimeSpan(0, 0, 0, 130, 0), values[1]);
         }
 
         [Fact]
@@ -375,11 +359,7 @@ namespace System.Xml.XmlReaderTests
             Assert.Equal(2, values.Length);
             Assert.Equal(new TimeSpan(0, 0, 2, 10), values[0]);
 
-            Assert.Equal
-            (
-                new TimeSpan(0, 0, 0, 130, 0),
-                values[1]
-            );
+            Assert.Equal(new TimeSpan(0, 0, 0, 130, 0), values[1]);
         }
 
         [Fact]
@@ -483,8 +463,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader33()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 "<a b='https://github.com/dotnet/wpf  https://sharplab.io/'>https://github.com/dotnet/wpf  https://sharplab.io/</a>"
             );
 
@@ -499,8 +478,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader34()
         {
-            var reader = Utils.CreateFragmentReader
-            (
+            var reader = Utils.CreateFragmentReader(
                 "<a b='https://github.com/dotnet/wpf  https://sharplab.io/'>https://github.com/dotnet/wpf  https://sharplab.io/</a>"
             );
 
@@ -515,7 +493,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader35()
         {
-            var reader = Utils.CreateFragmentReader("<a b='xmlns:os  xmlns:a'>xmlns:os xmlns:a</a>");
+            var reader = Utils.CreateFragmentReader(
+                "<a b='xmlns:os  xmlns:a'>xmlns:os xmlns:a</a>"
+            );
             reader.PositionOnElement("a");
             reader.Read();
             var values = (XmlQualifiedName[])reader.ReadContentAs(typeof(XmlQualifiedName[]), null);
@@ -527,7 +507,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader36()
         {
-            var reader = Utils.CreateFragmentReader("<a b='xmlns:os  xmlns:a'>xmlns:os xmlns:a</a>");
+            var reader = Utils.CreateFragmentReader(
+                "<a b='xmlns:os  xmlns:a'>xmlns:os xmlns:a</a>"
+            );
             reader.PositionOnElement("a");
             reader.MoveToAttribute("b");
             var values = (XmlQualifiedName[])reader.ReadContentAs(typeof(XmlQualifiedName[]), null);
@@ -539,7 +521,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader37()
         {
-            var reader = Utils.CreateFragmentReader("<a b='a  true 16 42 .555 0002-01-01T00:00:00+00:00'>sdf</a>");
+            var reader = Utils.CreateFragmentReader(
+                "<a b='a  true 16 42 .555 0002-01-01T00:00:00+00:00'>sdf</a>"
+            );
             reader.PositionOnElement("a");
             reader.MoveToAttribute("b");
             var values = (XmlAtomicValue[])reader.ReadContentAs(typeof(XmlAtomicValue[]), null);
@@ -550,8 +534,7 @@ namespace System.Xml.XmlReaderTests
             Assert.Equal(42L, values[3].ValueAsLong);
             Assert.Equal(.555, values[4].ValueAsDouble);
 
-            Assert.Equal
-            (
+            Assert.Equal(
                 new DateTime(2, 1, 1).Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))),
                 values[5].ValueAsDateTime
             );
@@ -560,7 +543,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void DeserializationOfTypedArraysByXmlReader38()
         {
-            var reader = Utils.CreateFragmentReader("<a b='a  true 16 42 .555 0002-01-01T00:00:00+00:00'>sdf</a>");
+            var reader = Utils.CreateFragmentReader(
+                "<a b='a  true 16 42 .555 0002-01-01T00:00:00+00:00'>sdf</a>"
+            );
             reader.PositionOnElement("a");
             reader.MoveToAttribute("b");
             var values = (XPathItem[])reader.ReadContentAs(typeof(XPathItem[]), null);
@@ -571,8 +556,7 @@ namespace System.Xml.XmlReaderTests
             Assert.Equal(42L, values[3].ValueAsLong);
             Assert.Equal(.555, values[4].ValueAsDouble);
 
-            Assert.Equal
-            (
+            Assert.Equal(
                 new DateTime(2, 1, 1).Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))),
                 values[5].ValueAsDateTime
             );

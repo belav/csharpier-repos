@@ -4,50 +4,50 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Internal;
-    using System.Web;
-    using System.Web.Util;
-    using System.Security;
+    using System.Globalization;
     using System.IO;
-    using System.Web.Hosting;
-    using System.Runtime.InteropServices;
     using System.Reflection;
-    using System.Collections.Specialized;
-    using System.Xml;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Principal;
     using System.Threading;
-    using System.Globalization;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using System.Xml;
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
     internal class COSERVERINFO : IDisposable
     {
-        internal COSERVERINFO(string srvname, IntPtr authinf) {
+        internal COSERVERINFO(string srvname, IntPtr authinf)
+        {
             servername = srvname;
             authinfo = authinf;
         }
 
-        #pragma warning disable 0649
+#pragma warning disable 0649
         internal int reserved1;
-        #pragma warning restore 0649
+#pragma warning restore 0649
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string servername;
-        internal IntPtr authinfo;                // COAUTHINFO*
-        #pragma warning disable 0649
+        internal IntPtr authinfo; // COAUTHINFO*
+#pragma warning disable 0649
         internal int reserved2;
-        #pragma warning restore 0649
+#pragma warning restore 0649
         void IDisposable.Dispose()
         {
             authinfo = IntPtr.Zero;
             GC.SuppressFinalize(this);
         }
-        ~COSERVERINFO()
-        {
-        }
-    }
 
+        ~COSERVERINFO() { }
+    }
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
     internal class COSERVERINFO_X64 : IDisposable
@@ -64,18 +64,17 @@ namespace System.Web.Configuration {
 #pragma warning restore 0649
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string servername;
-        internal IntPtr authinfo;                // COAUTHINFO*
+        internal IntPtr authinfo; // COAUTHINFO*
 #pragma warning disable 0649
         internal int reserved2;
         internal int padding2;
-        #pragma warning restore 0649
+#pragma warning restore 0649
         void IDisposable.Dispose()
         {
             authinfo = IntPtr.Zero;
             GC.SuppressFinalize(this);
         }
-        ~COSERVERINFO_X64()
-        {
-        }
+
+        ~COSERVERINFO_X64() { }
     }
 }

@@ -6,19 +6,22 @@ using System.Collections.Generic;
 
 namespace ILCompiler.DependencyAnalysisFramework
 {
-    public abstract class DependencyNodeCore<DependencyContextType> : DependencyNode, IDependencyNode<DependencyContextType>
+    public abstract class DependencyNodeCore<DependencyContextType>
+        : DependencyNode,
+            IDependencyNode<DependencyContextType>
     {
         public struct DependencyListEntry
         {
-            public DependencyListEntry(DependencyNodeCore<DependencyContextType> node,
-                                       string reason)
+            public DependencyListEntry(
+                DependencyNodeCore<DependencyContextType> node,
+                string reason
+            )
             {
                 Node = node;
                 Reason = reason;
             }
 
-            public DependencyListEntry(object node,
-                                       string reason)
+            public DependencyListEntry(object node, string reason)
             {
                 Node = (DependencyNodeCore<DependencyContextType>)node;
                 Reason = reason;
@@ -33,36 +36,35 @@ namespace ILCompiler.DependencyAnalysisFramework
             public DependencyList() { }
 
             public DependencyList(IEnumerable<DependencyListEntry> collection)
-                : base(collection)
-            {
-            }
+                : base(collection) { }
 
-            public void Add(DependencyNodeCore<DependencyContextType> node,
-                                       string reason)
+            public void Add(DependencyNodeCore<DependencyContextType> node, string reason)
             {
                 this.Add(new DependencyListEntry(node, reason));
             }
 
             public void Add(object node, string reason)
             {
-                this.Add(new DependencyListEntry((DependencyNodeCore<DependencyContextType>)node, reason));
+                this.Add(
+                    new DependencyListEntry((DependencyNodeCore<DependencyContextType>)node, reason)
+                );
             }
         }
 
         public struct CombinedDependencyListEntry : IEquatable<CombinedDependencyListEntry>
         {
-            public CombinedDependencyListEntry(DependencyNodeCore<DependencyContextType> node,
-                                               DependencyNodeCore<DependencyContextType> otherReasonNode,
-                                               string reason)
+            public CombinedDependencyListEntry(
+                DependencyNodeCore<DependencyContextType> node,
+                DependencyNodeCore<DependencyContextType> otherReasonNode,
+                string reason
+            )
             {
                 Node = node;
                 OtherReasonNode = otherReasonNode;
                 Reason = reason;
             }
 
-            public CombinedDependencyListEntry(object node,
-                                               object otherReasonNode,
-                                               string reason)
+            public CombinedDependencyListEntry(object node, object otherReasonNode, string reason)
             {
                 Node = (DependencyNodeCore<DependencyContextType>)node;
                 OtherReasonNode = (DependencyNodeCore<DependencyContextType>)otherReasonNode;
@@ -76,7 +78,8 @@ namespace ILCompiler.DependencyAnalysisFramework
 
             public override bool Equals(object obj)
             {
-                return obj is CombinedDependencyListEntry && Equals((CombinedDependencyListEntry)obj);
+                return obj is CombinedDependencyListEntry
+                    && Equals((CombinedDependencyListEntry)obj);
             }
 
             public override int GetHashCode()
@@ -101,33 +104,29 @@ namespace ILCompiler.DependencyAnalysisFramework
             }
         }
 
-        public abstract bool InterestingForDynamicDependencyAnalysis
-        {
-            get;
-        }
+        public abstract bool InterestingForDynamicDependencyAnalysis { get; }
 
-        public abstract bool HasDynamicDependencies
-        {
-            get;
-        }
+        public abstract bool HasDynamicDependencies { get; }
 
-        public abstract bool HasConditionalStaticDependencies
-        {
-            get;
-        }
+        public abstract bool HasConditionalStaticDependencies { get; }
 
-        public abstract bool StaticDependenciesAreComputed
-        {
-            get;
-        }
+        public abstract bool StaticDependenciesAreComputed { get; }
 
         public virtual int DependencyPhaseForDeferredStaticComputation { get; }
 
-        public abstract IEnumerable<DependencyListEntry> GetStaticDependencies(DependencyContextType context);
+        public abstract IEnumerable<DependencyListEntry> GetStaticDependencies(
+            DependencyContextType context
+        );
 
-        public abstract IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(DependencyContextType context);
+        public abstract IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            DependencyContextType context
+        );
 
-        public abstract IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<DependencyContextType>> markedNodes, int firstNode, DependencyContextType context);
+        public abstract IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<DependencyContextType>> markedNodes,
+            int firstNode,
+            DependencyContextType context
+        );
 
         internal void CallOnMarked(DependencyContextType context)
         {
@@ -154,7 +153,9 @@ namespace ILCompiler.DependencyAnalysisFramework
             return GetName(context);
         }
 
-        public static string GetNodeName(DependencyNodeCore<DependencyContextType> node, DependencyContextType context)
-            => node.GetName(context);
+        public static string GetNodeName(
+            DependencyNodeCore<DependencyContextType> node,
+            DependencyContextType context
+        ) => node.GetName(context);
     }
 }

@@ -15,20 +15,26 @@ namespace System.Runtime.InteropServices
         private readonly int[] _gcCounts = new int[3];
         private int _gcGeneration;
 
-        public HandleCollector(string? name, int initialThreshold) :
-            this(name, initialThreshold, int.MaxValue)
-        {
-        }
+        public HandleCollector(string? name, int initialThreshold)
+            : this(name, initialThreshold, int.MaxValue) { }
 
         public HandleCollector(string? name, int initialThreshold, int maximumThreshold)
         {
             if (initialThreshold < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(initialThreshold), initialThreshold, SR.Arg_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(initialThreshold),
+                    initialThreshold,
+                    SR.Arg_NeedNonNegNumRequired
+                );
             }
             if (maximumThreshold < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(maximumThreshold), maximumThreshold, SR.Arg_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(maximumThreshold),
+                    maximumThreshold,
+                    SR.Arg_NeedNonNegNumRequired
+                );
             }
             if (initialThreshold > maximumThreshold)
             {
@@ -73,9 +79,13 @@ namespace System.Runtime.InteropServices
                 }
             }
 
-            if ((collectionGeneration >= 0) &&
-                    ((collectionGeneration == 0) ||
-                    (_gcCounts[collectionGeneration] == GC.CollectionCount(collectionGeneration))))
+            if (
+                (collectionGeneration >= 0)
+                && (
+                    (collectionGeneration == 0)
+                    || (_gcCounts[collectionGeneration] == GC.CollectionCount(collectionGeneration))
+                )
+            )
             {
                 GC.Collect(collectionGeneration);
                 Thread.Sleep(10 * collectionGeneration);

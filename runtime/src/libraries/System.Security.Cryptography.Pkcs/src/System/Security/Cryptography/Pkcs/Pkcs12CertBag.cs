@@ -38,7 +38,8 @@ namespace System.Security.Cryptography.Pkcs
             : base(
                 Oids.Pkcs12CertBag,
                 EncodeBagValue(certificateType, encodedCertificate),
-                skipCopy: true)
+                skipCopy: true
+            )
         {
             _certTypeOid = certificateType.CopyOid();
 
@@ -52,8 +53,10 @@ namespace System.Security.Cryptography.Pkcs
                 Oids.Pkcs12CertBag,
                 EncodeBagValue(
                     Oids.Pkcs12X509CertBagType,
-                    PkcsHelpers.EncodeOctetString(cert.RawData)),
-                skipCopy: true)
+                    PkcsHelpers.EncodeOctetString(cert.RawData)
+                ),
+                skipCopy: true
+            )
         {
             _decoded = CertBagAsn.Decode(EncodedBagValue, AsnEncodingRules.BER);
 
@@ -79,7 +82,10 @@ namespace System.Security.Cryptography.Pkcs
             return new X509Certificate2(PkcsHelpers.DecodeOctetString(_decoded.CertValue));
         }
 
-        private static byte[] EncodeBagValue(Oid certificateType, ReadOnlyMemory<byte> encodedCertificate)
+        private static byte[] EncodeBagValue(
+            Oid certificateType,
+            ReadOnlyMemory<byte> encodedCertificate
+        )
         {
             if (certificateType is null)
             {
@@ -92,17 +98,23 @@ namespace System.Security.Cryptography.Pkcs
             return EncodeBagValue(certificateType.Value, encodedCertificate);
         }
 
-        private static byte[] EncodeBagValue(string certificateType, ReadOnlyMemory<byte> encodedCertificate)
+        private static byte[] EncodeBagValue(
+            string certificateType,
+            ReadOnlyMemory<byte> encodedCertificate
+        )
         {
             // Read to ensure that there is precisely one legally encoded value.
-            if (!AsnDecoder.TryReadEncodedValue(
-                encodedCertificate.Span,
-                AsnEncodingRules.BER,
-                out _,
-                out _,
-                out _,
-                out int consumed) ||
-                consumed != encodedCertificate.Length)
+            if (
+                !AsnDecoder.TryReadEncodedValue(
+                    encodedCertificate.Span,
+                    AsnEncodingRules.BER,
+                    out _,
+                    out _,
+                    out _,
+                    out int consumed
+                )
+                || consumed != encodedCertificate.Length
+            )
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }

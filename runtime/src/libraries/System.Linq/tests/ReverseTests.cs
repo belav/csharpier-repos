@@ -11,7 +11,9 @@ namespace System.Linq.Tests
         [Fact]
         public void InvalidArguments()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Enumerable.Reverse<string>(null));
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                Enumerable.Reverse<string>(null)
+            );
         }
 
         [Theory]
@@ -71,9 +73,7 @@ namespace System.Linq.Tests
 
             return integers
                 .Select(collection => new object[] { collection })
-                .Concat(
-                    integers.Select(c => new object[] { c.Select(i => i.ToString()) })
-                );
+                .Concat(integers.Select(c => new object[] { c.Select(i => i.ToString()) }));
         }
 
         [Fact]

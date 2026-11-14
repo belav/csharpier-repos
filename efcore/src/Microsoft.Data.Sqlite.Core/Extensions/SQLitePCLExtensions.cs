@@ -14,11 +14,10 @@ namespace SQLitePCL
             { "e_sqlcipher", true },
             { "e_sqlite3", false },
             { "sqlcipher", true },
-            { "winsqlite3", false }
+            { "winsqlite3", false },
         };
 
-        public static bool? EncryptionSupported()
-            => EncryptionSupported(out _);
+        public static bool? EncryptionSupported() => EncryptionSupported(out _);
 
         public static bool? EncryptionSupported(out string libraryName)
         {

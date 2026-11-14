@@ -11,7 +11,11 @@ namespace System.Data.Odbc
         private IsolationLevel _isolevel = IsolationLevel.Unspecified;
         private OdbcConnectionHandle? _handle;
 
-        internal OdbcTransaction(OdbcConnection connection, IsolationLevel isolevel, OdbcConnectionHandle handle)
+        internal OdbcTransaction(
+            OdbcConnection connection,
+            IsolationLevel isolevel,
+            OdbcConnectionHandle handle
+        )
         {
             _connection = connection;
             _isolevel = isolevel;
@@ -20,18 +24,12 @@ namespace System.Data.Odbc
 
         public new OdbcConnection? Connection
         { // MDAC 66655
-            get
-            {
-                return _connection;
-            }
+            get { return _connection; }
         }
 
         protected override DbConnection? DbConnection
         { // MDAC 66655
-            get
-            {
-                return Connection;
-            }
+            get { return Connection; }
         }
 
         public override IsolationLevel IsolationLevel
@@ -50,7 +48,10 @@ namespace System.Data.Odbc
                 if (IsolationLevel.Unspecified == _isolevel)
                 {
                     //Get the isolation level
-                    int sql_iso = connection.GetConnectAttr(ODBC32.SQL_ATTR.TXN_ISOLATION, ODBC32.HANDLER.THROW);
+                    int sql_iso = connection.GetConnectAttr(
+                        ODBC32.SQL_ATTR.TXN_ISOLATION,
+                        ODBC32.HANDLER.THROW
+                    );
                     _isolevel = (ODBC32.SQL_TRANSACTION)sql_iso switch
                     {
                         ODBC32.SQL_TRANSACTION.READ_UNCOMMITTED => IsolationLevel.ReadUncommitted,

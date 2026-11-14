@@ -53,8 +53,13 @@ namespace System.Web.Razor.Parser
                 }
                 else if (!At(HtmlSymbolType.Solidus))
                 {
-                    bool scriptTag = At(HtmlSymbolType.Text) &&
-                                     String.Equals(CurrentSymbol.Content, "script", StringComparison.OrdinalIgnoreCase);
+                    bool scriptTag =
+                        At(HtmlSymbolType.Text)
+                        && String.Equals(
+                            CurrentSymbol.Content,
+                            "script",
+                            StringComparison.OrdinalIgnoreCase
+                        );
                     Optional(HtmlSymbolType.Text);
                     TagContent(); // Parse the tag, don't care about the content
                     Optional(HtmlSymbolType.Solidus);

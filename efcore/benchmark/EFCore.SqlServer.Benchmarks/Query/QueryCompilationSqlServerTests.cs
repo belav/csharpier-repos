@@ -8,9 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query;
 
 public class QueryCompilationSqlServerTests : QueryCompilationTests
 {
-    public override IServiceCollection AddProviderServices(IServiceCollection services)
-        => services.AddEntityFrameworkSqlServer();
+    public override IServiceCollection AddProviderServices(IServiceCollection services) =>
+        services.AddEntityFrameworkSqlServer();
 
-    public override OrdersFixtureBase CreateFixture()
-        => new OrdersSqlServerFixture("Perf_Query_Compilation");
+    public override OrdersFixtureBase CreateFixture() =>
+        new OrdersSqlServerFixture("Perf_Query_Compilation");
 }

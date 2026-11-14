@@ -9,9 +9,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
 using System.Text;
-using System.Data.Objects;
 
 namespace System.Web.UI.WebControls
 {
@@ -28,25 +28,25 @@ namespace System.Web.UI.WebControls
             _entity = entity;
         }
 
-        internal EntityDataSourceChangingEventArgs(Exception exception) 
+        internal EntityDataSourceChangingEventArgs(Exception exception)
         {
             _exception = exception;
         }
 
-        public Exception Exception 
+        public Exception Exception
         {
             get { return _exception; }
         }
 
-        public bool ExceptionHandled 
+        public bool ExceptionHandled
         {
-            get {  return _exceptionHandled; }
+            get { return _exceptionHandled; }
             set { _exceptionHandled = value; }
         }
 
-        public object Entity 
+        public object Entity
         {
-            get {  return _entity; }
+            get { return _entity; }
         }
 
         public ObjectContext Context

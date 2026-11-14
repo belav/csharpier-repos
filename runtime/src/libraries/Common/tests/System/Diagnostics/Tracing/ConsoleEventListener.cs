@@ -9,7 +9,8 @@ namespace System.Diagnostics.Tracing
     {
         private readonly string _eventFilter;
 
-        public ConsoleEventListener() : this(string.Empty) { }
+        public ConsoleEventListener()
+            : this(string.Empty) { }
 
         public ConsoleEventListener(string filter)
         {
@@ -32,7 +33,8 @@ namespace System.Diagnostics.Tracing
         {
             lock (Console.Out)
             {
-                string text = $"[{eventData.EventSource.Name}-{eventData.EventName}]{(eventData.Payload != null ? $" ({string.Join(", ", eventData.Payload)})." : "")}";
+                string text =
+                    $"[{eventData.EventSource.Name}-{eventData.EventName}]{(eventData.Payload != null ? $" ({string.Join(", ", eventData.Payload)})." : "")}";
                 if (_eventFilter != null && text.Contains(_eventFilter))
                 {
                     ConsoleColor origForeground = Console.ForegroundColor;

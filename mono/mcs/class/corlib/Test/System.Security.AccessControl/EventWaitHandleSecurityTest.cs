@@ -14,55 +14,86 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Security.AccessControl
 {
-	[TestFixture]
-	public class EventWaitHandleSecurityTest
-	{
-		// TODO: Mono System.Threading.EventWaitHandle does not throw exceptions on failure!
-		[Test, ExpectedExceptionAttribute (typeof (UnauthorizedAccessException))]
-		public void PermissionsActuallyWork ()
-		{
-			if (PlatformID.Win32NT != Environment.OSVersion.Platform) {
-				Assert.Ignore ();
-			}
+    [TestFixture]
+    public class EventWaitHandleSecurityTest
+    {
+        // TODO: Mono System.Threading.EventWaitHandle does not throw exceptions on failure!
+        [Test, ExpectedExceptionAttribute(typeof(UnauthorizedAccessException))]
+        public void PermissionsActuallyWork()
+        {
+            if (PlatformID.Win32NT != Environment.OSVersion.Platform)
+            {
+                Assert.Ignore();
+            }
 
-			bool createdNew; EventWaitHandleSecurity security;
-			string name = @"Local\MonoTestWaitHandle";
+            bool createdNew;
+            EventWaitHandleSecurity security;
+            string name = @"Local\MonoTestWaitHandle";
 
-			using (EventWaitHandle handle = new EventWaitHandle (false, EventResetMode.ManualReset,
-			                                                     name, out createdNew)) {
-				Assert.IsFalse (handle.SafeWaitHandle.IsInvalid);
-				Assert.IsTrue (createdNew);
+            using (
+                EventWaitHandle handle = new EventWaitHandle(
+                    false,
+                    EventResetMode.ManualReset,
+                    name,
+                    out createdNew
+                )
+            )
+            {
+                Assert.IsFalse(handle.SafeWaitHandle.IsInvalid);
+                Assert.IsTrue(createdNew);
 
-				// Make sure our later error will be due to permissions and not some sharing bug.
-				bool createdAnotherNew;
-				using (EventWaitHandle anotherHandle = new EventWaitHandle (false, EventResetMode.ManualReset,
-			                                                            	    name, out createdAnotherNew)) {
-					Assert.IsFalse (anotherHandle.SafeWaitHandle.IsInvalid);
-					Assert.IsFalse (createdAnotherNew);
-				}
+                // Make sure our later error will be due to permissions and not some sharing bug.
+                bool createdAnotherNew;
+                using (
+                    EventWaitHandle anotherHandle = new EventWaitHandle(
+                        false,
+                        EventResetMode.ManualReset,
+                        name,
+                        out createdAnotherNew
+                    )
+                )
+                {
+                    Assert.IsFalse(anotherHandle.SafeWaitHandle.IsInvalid);
+                    Assert.IsFalse(createdAnotherNew);
+                }
 
-				// Let's make a deny all.
-				security = handle.GetAccessControl ();
+                // Let's make a deny all.
+                security = handle.GetAccessControl();
 
-				foreach (EventWaitHandleAccessRule rule in security.GetAccessRules
-				         (true, false, typeof (SecurityIdentifier))) {
-					security.RemoveAccessRuleSpecific (rule);
-				}
+                foreach (
+                    EventWaitHandleAccessRule rule in security.GetAccessRules(
+                        true,
+                        false,
+                        typeof(SecurityIdentifier)
+                    )
+                )
+                {
+                    security.RemoveAccessRuleSpecific(rule);
+                }
 
-				Assert.AreEqual (0, security.GetAccessRules (true, false, typeof (SecurityIdentifier)).Count);
-				handle.SetAccessControl (security);
+                Assert.AreEqual(
+                    0,
+                    security.GetAccessRules(true, false, typeof(SecurityIdentifier)).Count
+                );
+                handle.SetAccessControl(security);
 
-				security = handle.GetAccessControl ();
-				Assert.AreEqual (0, security.GetAccessRules (true, false, typeof (SecurityIdentifier)).Count);
+                security = handle.GetAccessControl();
+                Assert.AreEqual(
+                    0,
+                    security.GetAccessRules(true, false, typeof(SecurityIdentifier)).Count
+                );
 
-				// MS.NET will throw on the first line below.
-				// For Mono testing the latter verifies the rest until the EventWaitHandle bug is fixed.
-				// Also, NUnit 2.4 appears to lacks Assert.Pass ().
-				EventWaitHandle badHandle = new EventWaitHandle(false, EventResetMode.ManualReset, name);
-				if (badHandle.SafeWaitHandle.IsInvalid)
-					throw new UnauthorizedAccessException ();
-			}
-		}
-	}
+                // MS.NET will throw on the first line below.
+                // For Mono testing the latter verifies the rest until the EventWaitHandle bug is fixed.
+                // Also, NUnit 2.4 appears to lacks Assert.Pass ().
+                EventWaitHandle badHandle = new EventWaitHandle(
+                    false,
+                    EventResetMode.ManualReset,
+                    name
+                );
+                if (badHandle.SafeWaitHandle.IsInvalid)
+                    throw new UnauthorizedAccessException();
+            }
+        }
+    }
 }
-

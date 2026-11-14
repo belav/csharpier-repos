@@ -10,7 +10,11 @@ using System.Threading;
 
 namespace System.Runtime.CompilerServices
 {
-    public sealed class ConditionalWeakTable<TKey, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
+    public sealed class ConditionalWeakTable<
+        TKey,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            TValue
+    > : IEnumerable<KeyValuePair<TKey, TValue>>
         where TKey : class
         where TValue : class?
     {
@@ -29,10 +33,10 @@ namespace System.Runtime.CompilerServices
         // about managed weak table consistency. Native handles reclamation
         // may be delayed until appdomain shutdown.
 
-        private const int InitialCapacity = 8;  // Initial length of the table. Must be a power of two.
-        private readonly object _lock;          // This lock protects all mutation of data in the table.  Readers do not take this lock.
-        private volatile Container _container;  // The actual storage for the table; swapped out as the table grows.
-        private int _activeEnumeratorRefCount;  // The number of outstanding enumerators on the table
+        private const int InitialCapacity = 8; // Initial length of the table. Must be a power of two.
+        private readonly object _lock; // This lock protects all mutation of data in the table.  Readers do not take this lock.
+        private volatile Container _container; // The actual storage for the table; swapped out as the table grows.
+        private int _activeEnumeratorRefCount; // The number of outstanding enumerators on the table
 
         public ConditionalWeakTable()
         {
@@ -207,9 +211,9 @@ namespace System.Runtime.CompilerServices
             ArgumentNullException.ThrowIfNull(createValueCallback);
 
             // key is validated by TryGetValue
-            return TryGetValue(key, out TValue? existingValue) ?
-                existingValue :
-                GetValueLocked(key, createValueCallback);
+            return TryGetValue(key, out TValue? existingValue)
+                ? existingValue
+                : GetValueLocked(key, createValueCallback);
         }
 
         private TValue GetValueLocked(TKey key, CreateValueCallback createValueCallback)
@@ -239,7 +243,8 @@ namespace System.Runtime.CompilerServices
         /// to create new instances as needed.  If TValue does not have a default constructor, this will throw.
         /// </summary>
         /// <param name="key">key of the value to find. Cannot be null.</param>
-        public TValue GetOrCreateValue(TKey key) => GetValue(key, _ => Activator.CreateInstance<TValue>());
+        public TValue GetOrCreateValue(TKey key) =>
+            GetValue(key, _ => Activator.CreateInstance<TValue>());
 
         public delegate TValue CreateValueCallback(TKey key);
 
@@ -252,18 +257,21 @@ namespace System.Runtime.CompilerServices
         /// however, such as not returning entries that were collected or removed after the enumerator
         /// was retrieved but before they were enumerated.
         /// </remarks>
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator()
         {
             lock (_lock)
             {
                 Container c = _container;
-                return c is null || c.FirstFreeEntry == 0 ?
-                    GenericEmptyEnumerator<KeyValuePair<TKey, TValue>>.Instance :
-                    new Enumerator(this);
+                return c is null || c.FirstFreeEntry == 0
+                    ? GenericEmptyEnumerator<KeyValuePair<TKey, TValue>>.Instance
+                    : new Enumerator(this);
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<KeyValuePair<TKey, TValue>>)this).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() =>
+            ((IEnumerable<KeyValuePair<TKey, TValue>>)this).GetEnumerator();
 
         /// <summary>Provides an enumerator for the table.</summary>
         private sealed class Enumerator : IEnumerator<KeyValuePair<TKey, TValue>>
@@ -285,20 +293,29 @@ namespace System.Runtime.CompilerServices
             // there is any outstanding enumerator, no compaction is performed.
 
             private ConditionalWeakTable<TKey, TValue>? _table; // parent table, set to null when disposed
-            private readonly int _maxIndexInclusive;            // last index in the container that should be enumerated
-            private int _currentIndex;                          // the current index into the container
-            private KeyValuePair<TKey, TValue> _current;        // the current entry set by MoveNext and returned from Current
+            private readonly int _maxIndexInclusive; // last index in the container that should be enumerated
+            private int _currentIndex; // the current index into the container
+            private KeyValuePair<TKey, TValue> _current; // the current entry set by MoveNext and returned from Current
 
             public Enumerator(ConditionalWeakTable<TKey, TValue> table)
             {
                 Debug.Assert(table != null, "Must provide a valid table");
-                Debug.Assert(Monitor.IsEntered(table._lock), "Must hold the _lock lock to construct the enumerator");
+                Debug.Assert(
+                    Monitor.IsEntered(table._lock),
+                    "Must hold the _lock lock to construct the enumerator"
+                );
                 Debug.Assert(table._container != null, "Should not be used on a finalized table");
-                Debug.Assert(table._container.FirstFreeEntry > 0, "Should have returned an empty enumerator instead");
+                Debug.Assert(
+                    table._container.FirstFreeEntry > 0,
+                    "Should have returned an empty enumerator instead"
+                );
 
                 // Store a reference to the parent table and increase its active enumerator count.
                 _table = table;
-                Debug.Assert(table._activeEnumeratorRefCount >= 0, "Should never have a negative ref count before incrementing");
+                Debug.Assert(
+                    table._activeEnumeratorRefCount >= 0,
+                    "Should never have a negative ref count before incrementing"
+                );
                 table._activeEnumeratorRefCount++;
 
                 // Store the max index to be enumerated.
@@ -325,7 +342,10 @@ namespace System.Runtime.CompilerServices
                     lock (table._lock)
                     {
                         table._activeEnumeratorRefCount--;
-                        Debug.Assert(table._activeEnumeratorRefCount >= 0, "Should never have a negative ref count after decrementing");
+                        Debug.Assert(
+                            table._activeEnumeratorRefCount >= 0,
+                            "Should never have a negative ref count after decrementing"
+                        );
                     }
 
                     // Finalization is purely to decrement the ref count.  We can suppress it now.
@@ -436,10 +456,11 @@ namespace System.Runtime.CompilerServices
         //--------------------------------------------------------------------------------------------
         private struct Entry
         {
-            public DependentHandle depHnd;      // Holds key and value using a weak reference for the key and a strong reference
-                                                // for the value that is traversed only if the key is reachable without going through the value.
-            public int HashCode;    // Cached copy of key's hashcode
-            public int Next;        // Index of next entry, -1 if last
+            public DependentHandle depHnd; // Holds key and value using a weak reference for the key and a strong reference
+
+            // for the value that is traversed only if the key is reachable without going through the value.
+            public int HashCode; // Cached copy of key's hashcode
+            public int Next; // Index of next entry, -1 if last
         }
 
         /// <summary>
@@ -449,12 +470,12 @@ namespace System.Runtime.CompilerServices
         /// </summary>
         private sealed class Container
         {
-            private readonly ConditionalWeakTable<TKey, TValue> _parent;  // the ConditionalWeakTable with which this container is associated
-            private int[] _buckets;                // _buckets[hashcode & (_buckets.Length - 1)] contains index of the first entry in bucket (-1 if empty)
-            private Entry[] _entries;              // the table entries containing the stored dependency handles
-            private int _firstFreeEntry;           // _firstFreeEntry < _entries.Length => table has capacity,  entries grow from the bottom of the table.
-            private bool _invalid;                 // flag detects if OOM or other background exception threw us out of the lock.
-            private bool _finalized;               // set to true when initially finalized
+            private readonly ConditionalWeakTable<TKey, TValue> _parent; // the ConditionalWeakTable with which this container is associated
+            private int[] _buckets; // _buckets[hashcode & (_buckets.Length - 1)] contains index of the first entry in bucket (-1 if empty)
+            private Entry[] _entries; // the table entries containing the stored dependency handles
+            private int _firstFreeEntry; // _firstFreeEntry < _entries.Length => table has capacity,  entries grow from the bottom of the table.
+            private bool _invalid; // flag detects if OOM or other background exception threw us out of the lock.
+            private bool _finalized; // set to true when initially finalized
             private volatile object? _oldKeepAlive; // used to ensure the next allocated container isn't finalized until this one is GC'd
 
             internal Container(ConditionalWeakTable<TKey, TValue> parent)
@@ -477,7 +498,12 @@ namespace System.Runtime.CompilerServices
                 _parent = parent;
             }
 
-            private Container(ConditionalWeakTable<TKey, TValue> parent, int[] buckets, Entry[] entries, int firstFreeEntry)
+            private Container(
+                ConditionalWeakTable<TKey, TValue> parent,
+                int[] buckets,
+                Entry[] entries,
+                int firstFreeEntry
+            )
             {
                 Debug.Assert(parent != null);
                 Debug.Assert(buckets != null);
@@ -550,9 +576,17 @@ namespace System.Runtime.CompilerServices
 
                 hashCode &= int.MaxValue;
                 int bucket = hashCode & (_buckets.Length - 1);
-                for (int entriesIndex = Volatile.Read(ref _buckets[bucket]); entriesIndex != -1; entriesIndex = _entries[entriesIndex].Next)
+                for (
+                    int entriesIndex = Volatile.Read(ref _buckets[bucket]);
+                    entriesIndex != -1;
+                    entriesIndex = _entries[entriesIndex].Next
+                )
                 {
-                    if (_entries[entriesIndex].HashCode == hashCode && _entries[entriesIndex].depHnd.UnsafeGetTargetAndDependent(out value) == key)
+                    if (
+                        _entries[entriesIndex].HashCode == hashCode
+                        && _entries[entriesIndex].depHnd.UnsafeGetTargetAndDependent(out value)
+                            == key
+                    )
                     {
                         GC.KeepAlive(this); // Ensure we don't get finalized while accessing DependentHandle
 
@@ -566,11 +600,16 @@ namespace System.Runtime.CompilerServices
             }
 
             /// <summary>Gets the entry at the specified entry index.</summary>
-            internal bool TryGetEntry(int index, [NotNullWhen(true)] out TKey? key, [MaybeNullWhen(false)] out TValue value)
+            internal bool TryGetEntry(
+                int index,
+                [NotNullWhen(true)] out TKey? key,
+                [MaybeNullWhen(false)] out TValue value
+            )
             {
                 if (index < _entries.Length)
                 {
-                    object? oKey = _entries[index].depHnd.UnsafeGetTargetAndDependent(out object? oValue);
+                    object? oKey = _entries[index]
+                        .depHnd.UnsafeGetTargetAndDependent(out object? oValue);
 
                     GC.KeepAlive(this); // Ensure we don't get finalized while accessing DependentHandle
 

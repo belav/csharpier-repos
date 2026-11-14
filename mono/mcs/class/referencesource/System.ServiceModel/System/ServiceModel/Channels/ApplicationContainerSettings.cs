@@ -12,12 +12,13 @@ namespace System.ServiceModel.Channels
         public const int CurrentSession = ApplicationContainerSettingsDefaults.CurrentSession;
         public const int ServiceSession = ApplicationContainerSettingsDefaults.ServiceSession;
         const string GroupNameSuffixFormat = ";SessionId={0};PackageFullName={1}";
-                
+
         int sessionId;
 
         internal ApplicationContainerSettings()
         {
-            this.PackageFullName = ApplicationContainerSettingsDefaults.PackageFullNameDefaultString;
+            this.PackageFullName =
+                ApplicationContainerSettingsDefaults.PackageFullNameDefaultString;
             this.sessionId = ApplicationContainerSettingsDefaults.CurrentSession;
         }
 
@@ -27,26 +28,21 @@ namespace System.ServiceModel.Channels
             this.sessionId = source.sessionId;
         }
 
-        public string PackageFullName
-        {
-            get;
-            set;
-        }
+        public string PackageFullName { get; set; }
 
         public int SessionId
         {
-            get
-            {
-                return this.sessionId;
-            }
-
+            get { return this.sessionId; }
             set
             {
-                // CurrentSession default is -1 and expect the user to set 
+                // CurrentSession default is -1 and expect the user to set
                 // non-negative windows session Id.
                 if (value < ApplicationContainerSettingsDefaults.CurrentSession)
                 {
-                    throw FxTrace.Exception.Argument("value", SR.GetString(SR.SessionValueInvalid, value));
+                    throw FxTrace.Exception.Argument(
+                        "value",
+                        SR.GetString(SR.SessionValueInvalid, value)
+                    );
                 }
 
                 this.sessionId = value;
@@ -55,10 +51,7 @@ namespace System.ServiceModel.Channels
 
         internal bool TargetingAppContainer
         {
-            get
-            {
-                return !string.IsNullOrEmpty(this.PackageFullName);
-            }
+            get { return !string.IsNullOrEmpty(this.PackageFullName); }
         }
 
         internal ApplicationContainerSettings Clone()
@@ -71,7 +64,12 @@ namespace System.ServiceModel.Channels
             string suffix = string.Empty;
             if (AppContainerInfo.IsAppContainerSupported && this.TargetingAppContainer)
             {
-                suffix = string.Format(CultureInfo.InvariantCulture, GroupNameSuffixFormat, this.SessionId, this.PackageFullName);
+                suffix = string.Format(
+                    CultureInfo.InvariantCulture,
+                    GroupNameSuffixFormat,
+                    this.SessionId,
+                    this.PackageFullName
+                );
             }
 
             return suffix;

@@ -67,7 +67,6 @@ namespace ILCompiler.Reflection.ReadyToRun
                     {
                         sb.AppendLine($" {inlinerToken:X8}");
                     }
-
                 }
 
                 curParser = enumerator.GetNext();
@@ -76,6 +75,7 @@ namespace ILCompiler.Reflection.ReadyToRun
             return sb.ToString();
         }
 
-        static int RidToMethodDef(int rid) => MetadataTokens.GetToken(MetadataTokens.MethodDefinitionHandle(rid));
+        static int RidToMethodDef(int rid) =>
+            MetadataTokens.GetToken(MetadataTokens.MethodDefinitionHandle(rid));
     }
 }

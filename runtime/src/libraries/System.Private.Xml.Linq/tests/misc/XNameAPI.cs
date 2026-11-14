@@ -18,7 +18,7 @@ namespace CoreXml.Test.XLinq
                 FromString,
                 TwoParamGet,
                 ExpandedName,
-                XNamespacePlusOperator
+                XNamespacePlusOperator,
             }
 
             //[TestCase(Name = "XName API - expanded name", Param = GetNameType.ExpandedName)]
@@ -36,7 +36,10 @@ namespace CoreXml.Test.XLinq
 
                     foreach (GetNameType type in Enum.GetValues(typeof(GetNameType)))
                     {
-                        TestLog.Compare(object.ReferenceEquals(name, GetName("nonamespace")), "reference equal for " + type);
+                        TestLog.Compare(
+                            object.ReferenceEquals(name, GetName("nonamespace")),
+                            "reference equal for " + type
+                        );
                     }
                 }
 
@@ -50,11 +53,18 @@ namespace CoreXml.Test.XLinq
                         case GetNameType.TwoParamGet:
                             return XName.Get(name, ns);
                         case GetNameType.ExpandedName:
-                            return string.IsNullOrEmpty(ns) ? XName.Get(name) : XName.Get("{" + ns + "}" + name);
+                            return string.IsNullOrEmpty(ns)
+                                ? XName.Get(name)
+                                : XName.Get("{" + ns + "}" + name);
                         case GetNameType.XNamespacePlusOperator:
-                            return string.IsNullOrEmpty(ns) ? XName.Get(name) : XNamespace.Get(ns) + name;
+                            return string.IsNullOrEmpty(ns)
+                                ? XName.Get(name)
+                                : XNamespace.Get(ns) + name;
                         default:
-                            TestLog.Compare(false, "Test failed: Invalid XName creation method specified");
+                            TestLog.Compare(
+                                false,
+                                "Test failed: Invalid XName creation method specified"
+                            );
                             break;
                     }
                     return null;
@@ -75,12 +85,21 @@ namespace CoreXml.Test.XLinq
                 {
                     XName name = GetName("name", "namespace");
                     TestLog.Compare(name.LocalName.Equals("name"), "Invalid LocalName");
-                    TestLog.Compare(name.NamespaceName.Equals("namespace"), "Invalid Namespace Name");
-                    TestLog.Compare(name.Namespace.NamespaceName.Equals("namespace"), "Invalid Namespace Name");
+                    TestLog.Compare(
+                        name.NamespaceName.Equals("namespace"),
+                        "Invalid Namespace Name"
+                    );
+                    TestLog.Compare(
+                        name.Namespace.NamespaceName.Equals("namespace"),
+                        "Invalid Namespace Name"
+                    );
 
                     foreach (GetNameType type in Enum.GetValues(typeof(GetNameType)))
                     {
-                        TestLog.Compare(object.ReferenceEquals(name, GetName("name", "namespace")), "reference equal for " + type);
+                        TestLog.Compare(
+                            object.ReferenceEquals(name, GetName("name", "namespace")),
+                            "reference equal for " + type
+                        );
                     }
                 }
 
@@ -92,7 +111,13 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(name.Namespace, XNamespace.Xmlns, "Invalid Namespace");
                     foreach (GetNameType type in Enum.GetValues(typeof(GetNameType)))
                     {
-                        TestLog.Compare(object.ReferenceEquals(name, GetName("name", "http://www.w3.org/2000/xmlns/")), "reference equal for " + type);
+                        TestLog.Compare(
+                            object.ReferenceEquals(
+                                name,
+                                GetName("name", "http://www.w3.org/2000/xmlns/")
+                            ),
+                            "reference equal for " + type
+                        );
                     }
                 }
 
@@ -104,7 +129,13 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(name.Namespace, XNamespace.Xml, "Invalid Namespace");
                     foreach (GetNameType type in Enum.GetValues(typeof(GetNameType)))
                     {
-                        TestLog.Compare(object.ReferenceEquals(name, GetName("name", "http://www.w3.org/XML/1998/namespace")), "reference equal for " + type);
+                        TestLog.Compare(
+                            object.ReferenceEquals(
+                                name,
+                                GetName("name", "http://www.w3.org/XML/1998/namespace")
+                            ),
+                            "reference equal for " + type
+                        );
                     }
                 }
 
@@ -135,9 +166,18 @@ namespace CoreXml.Test.XLinq
                 {
                     XName nameOne = GetName("nameOne", "ns1");
                     XName nameTwo = GetName("nameOne", "ns1");
-                    TestLog.Compare(nameOne == nameTwo, "nameOne and nameTwo are not the same objects");
-                    TestLog.Compare(nameOne.Equals(nameTwo), "nameOne and nameTwo are not the same objects");
-                    TestLog.Compare(((IEquatable<XName>)nameOne).Equals(nameTwo), "nameOne and nameTwo are not the same objects");
+                    TestLog.Compare(
+                        nameOne == nameTwo,
+                        "nameOne and nameTwo are not the same objects"
+                    );
+                    TestLog.Compare(
+                        nameOne.Equals(nameTwo),
+                        "nameOne and nameTwo are not the same objects"
+                    );
+                    TestLog.Compare(
+                        ((IEquatable<XName>)nameOne).Equals(nameTwo),
+                        "nameOne and nameTwo are not the same objects"
+                    );
                 }
 
                 //[Variation(Priority = 0, Desc = "IEquatable: different names (NS)")]
@@ -146,8 +186,14 @@ namespace CoreXml.Test.XLinq
                     XName nameOne = GetName("nameOne", "ns1");
                     XName nameTwo = GetName("nameOne", "ns2");
                     TestLog.Compare(nameOne != nameTwo, "nameOne and nameTwo are the same objects");
-                    TestLog.Compare(!nameOne.Equals(nameTwo), "nameOne and nameTwo are the same objects");
-                    TestLog.Compare(!((IEquatable<XName>)nameOne).Equals(nameTwo), "nameOne and nameTwo are not the same objects");
+                    TestLog.Compare(
+                        !nameOne.Equals(nameTwo),
+                        "nameOne and nameTwo are the same objects"
+                    );
+                    TestLog.Compare(
+                        !((IEquatable<XName>)nameOne).Equals(nameTwo),
+                        "nameOne and nameTwo are not the same objects"
+                    );
                 }
             }
         }

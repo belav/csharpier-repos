@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -37,7 +36,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         [Theory]
         [MemberData(nameof(ManualSettingsMemberData))]
         public void GetProxy_BothAutoDetectAndManualSettingsButFailedAutoDetect_ManualSettingsUsed(
-            Uri destination, bool bypassProxy)
+            Uri destination,
+            bool bypassProxy
+        )
         {
             FakeRegistry.WinInetProxySettings.AutoDetect = true;
             FakeRegistry.WinInetProxySettings.Proxy = ManualSettingsProxyHost;
@@ -69,7 +70,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         [Theory]
         [MemberData(nameof(ManualSettingsMemberData))]
         public void GetProxy_ManualSettingsOnly_ManualSettingsUsed(
-            Uri destination, bool bypassProxy)
+            Uri destination,
+            bool bypassProxy
+        )
         {
             FakeRegistry.WinInetProxySettings.Proxy = ManualSettingsProxyHost;
             FakeRegistry.WinInetProxySettings.ProxyBypass = ManualSettingsProxyBypassList;

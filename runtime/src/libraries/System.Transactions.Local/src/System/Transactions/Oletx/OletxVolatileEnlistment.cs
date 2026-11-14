@@ -43,8 +43,7 @@ internal abstract class OletxVolatileEnlistmentContainer
 
     internal abstract void InDoubt();
 
-    internal Guid TransactionIdentifier
-        => RealOletxTransaction.Identifier;
+    internal Guid TransactionIdentifier => RealOletxTransaction.Identifier;
 }
 
 internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnlistmentContainer
@@ -77,20 +76,27 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxPhase0VolatileEnlistmentContainer)}.{nameof(TMDown)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxPhase0VolatileEnlistmentContainer)}.{nameof(TMDown)}"
+            );
         }
 
         _tmWentDown = true;
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxPhase0VolatileEnlistmentContainer)}.{nameof(TMDown)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxPhase0VolatileEnlistmentContainer)}.{nameof(TMDown)}"
+            );
         }
     }
 
     // Be sure to lock this object before calling this.
-    internal bool NewEnlistmentsAllowed
-        => Phase == -1;
+    internal bool NewEnlistmentsAllowed => Phase == -1;
 
     internal void AddEnlistment(OletxVolatileEnlistment enlistment)
     {
@@ -129,17 +135,22 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
         {
             if (etwLog.IsEnabled())
             {
-                string description = "OletxPhase0VolatileEnlistmentContainer.DependentCloneCompleted, outstandingNotifications = " +
-                    OutstandingNotifications.ToString(CultureInfo.CurrentCulture) +
-                    ", incompleteDependentClones = " +
-                    IncompleteDependentClones.ToString(CultureInfo.CurrentCulture) +
-                    ", phase = " + Phase.ToString(CultureInfo.CurrentCulture);
+                string description =
+                    "OletxPhase0VolatileEnlistmentContainer.DependentCloneCompleted, outstandingNotifications = "
+                    + OutstandingNotifications.ToString(CultureInfo.CurrentCulture)
+                    + ", incompleteDependentClones = "
+                    + IncompleteDependentClones.ToString(CultureInfo.CurrentCulture)
+                    + ", phase = "
+                    + Phase.ToString(CultureInfo.CurrentCulture);
 
                 etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, description);
             }
 
             IncompleteDependentClones--;
-            Debug.Assert(IncompleteDependentClones >= 0, "OletxPhase0VolatileEnlistmentContainer.DependentCloneCompleted - incompleteDependentClones < 0");
+            Debug.Assert(
+                IncompleteDependentClones >= 0,
+                "OletxPhase0VolatileEnlistmentContainer.DependentCloneCompleted - incompleteDependentClones < 0"
+            );
 
             // If we have not more incomplete dependent clones and we are in Phase 0, we need to "fake out" a notification completion.
             if (IncompleteDependentClones == 0 && Phase == 0)
@@ -168,9 +179,11 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
         {
             if (etwLog.IsEnabled())
             {
-                string description = "OletxPhase0VolatileEnlistmentContainer.RollbackFromTransaction, outstandingNotifications = " +
-                    OutstandingNotifications.ToString(CultureInfo.CurrentCulture) +
-                    ", incompleteDependentClones = " + IncompleteDependentClones.ToString(CultureInfo.CurrentCulture);
+                string description =
+                    "OletxPhase0VolatileEnlistmentContainer.RollbackFromTransaction, outstandingNotifications = "
+                    + OutstandingNotifications.ToString(CultureInfo.CurrentCulture)
+                    + ", incompleteDependentClones = "
+                    + IncompleteDependentClones.ToString(CultureInfo.CurrentCulture);
 
                 etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, description);
             }
@@ -190,7 +203,6 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
             etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, description);
         }
     }
-
 
     internal Phase0EnlistmentShim? Phase0EnlistmentShim
     {
@@ -227,15 +239,19 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
         {
             if (etwLog.IsEnabled())
             {
-                string description = "OletxPhase0VolatileEnlistmentContainer.DecrementOutstandingNotifications, outstandingNotifications = " +
-                    OutstandingNotifications.ToString(CultureInfo.CurrentCulture) +
-                    ", incompleteDependentClones = " +
-                    IncompleteDependentClones.ToString(CultureInfo.CurrentCulture);
+                string description =
+                    "OletxPhase0VolatileEnlistmentContainer.DecrementOutstandingNotifications, outstandingNotifications = "
+                    + OutstandingNotifications.ToString(CultureInfo.CurrentCulture)
+                    + ", incompleteDependentClones = "
+                    + IncompleteDependentClones.ToString(CultureInfo.CurrentCulture);
 
                 etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, description);
             }
             OutstandingNotifications--;
-            Debug.Assert(OutstandingNotifications >= 0, "OletxPhase0VolatileEnlistmentContainer.DecrementOutstandingNotifications - outstandingNotifications < 0");
+            Debug.Assert(
+                OutstandingNotifications >= 0,
+                "OletxPhase0VolatileEnlistmentContainer.DecrementOutstandingNotifications - outstandingNotifications < 0"
+            );
 
             CollectedVoteYes = CollectedVoteYes && voteYes;
             if (OutstandingNotifications == 0 && IncompleteDependentClones == 0)
@@ -259,11 +275,15 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
         }
         catch (COMException ex)
         {
-            if ((ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE) && etwLog.IsEnabled())
+            if (
+                (
+                    ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                    || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+                ) && etwLog.IsEnabled()
+            )
             {
                 etwLog.ExceptionConsumed(TraceSourceType.TraceSourceOleTx, ex);
             }
-
             // In the case of Phase0, there is a bug in the proxy that causes an XACT_E_PROTOCOL
             // error if the TM goes down while the enlistment is still active.  The Phase0Request is
             // sent out with abortHint false, but the state of the proxy object is not changed, causing
@@ -288,7 +308,8 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
 
         if (etwLog.IsEnabled())
         {
-            string description = "OletxPhase0VolatileEnlistmentContainer.DecrementOutstandingNotifications";
+            string description =
+                "OletxPhase0VolatileEnlistmentContainer.DecrementOutstandingNotifications";
 
             etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, description);
         }
@@ -308,7 +329,10 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                 InDoubt();
                 break;
             default:
-                Debug.Assert(false, "OletxPhase0VolatileEnlistmentContainer.OutcomeFromTransaction, outcome is not Commited or Aborted or InDoubt");
+                Debug.Assert(
+                    false,
+                    "OletxPhase0VolatileEnlistmentContainer.OutcomeFromTransaction, outcome is not Commited or Aborted or InDoubt"
+                );
                 break;
         }
     }
@@ -336,7 +360,10 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                     etwLog.InternalError();
                 }
 
-                Debug.Assert(false, "OletxPhase1VolatileEnlistmentContainer.Committed, enlistmentList element is not an OletxVolatileEnlistment.");
+                Debug.Assert(
+                    false,
+                    "OletxPhase1VolatileEnlistmentContainer.Committed, enlistmentList element is not an OletxVolatileEnlistment."
+                );
                 throw new InvalidOperationException(SR.InternalError);
             }
 
@@ -368,7 +395,10 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                     etwLog.InternalError();
                 }
 
-                Debug.Assert(false, "OletxPhase1VolatileEnlistmentContainer.Aborted, enlistmentList element is not an OletxVolatileEnlistment.");
+                Debug.Assert(
+                    false,
+                    "OletxPhase1VolatileEnlistmentContainer.Aborted, enlistmentList element is not an OletxVolatileEnlistment."
+                );
                 throw new InvalidOperationException(SR.InternalError);
             }
 
@@ -389,7 +419,7 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
             localCount = EnlistmentList.Count;
         }
 
-        for (int i = 0; i < localCount; i++ )
+        for (int i = 0; i < localCount; i++)
         {
             enlistment = EnlistmentList[i] as OletxVolatileEnlistment;
             if (enlistment == null)
@@ -400,8 +430,10 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                     etwLog.InternalError();
                 }
 
-                Debug.Fail("OletxPhase1VolatileEnlistmentContainer.InDoubt, enlistmentList element is not an OletxVolatileEnlistment.");
-                throw new InvalidOperationException( SR.InternalError);
+                Debug.Fail(
+                    "OletxPhase1VolatileEnlistmentContainer.InDoubt, enlistmentList element is not an OletxVolatileEnlistment."
+                );
+                throw new InvalidOperationException(SR.InternalError);
             }
 
             enlistment.InDoubt();
@@ -420,9 +452,11 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
         {
             if (etwLog.IsEnabled())
             {
-                string description = "OletxPhase0VolatileEnlistmentContainer.Phase0Request, abortHint = " +
-                    abortHint.ToString(CultureInfo.CurrentCulture) +
-                    ", phase = " + Phase.ToString(CultureInfo.CurrentCulture);
+                string description =
+                    "OletxPhase0VolatileEnlistmentContainer.Phase0Request, abortHint = "
+                    + abortHint.ToString(CultureInfo.CurrentCulture)
+                    + ", phase = "
+                    + Phase.ToString(CultureInfo.CurrentCulture);
 
                 etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, description);
             }
@@ -489,15 +523,17 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                     OutstandingNotifications = 1;
                 }
             }
-            else  // any other phase is bad news.
+            else // any other phase is bad news.
             {
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.InternalError("OletxPhase0VolatileEnlistmentContainer.Phase0Request, phase != -1");
+                    etwLog.InternalError(
+                        "OletxPhase0VolatileEnlistmentContainer.Phase0Request, phase != -1"
+                    );
                 }
 
                 Debug.Fail("OletxPhase0VolatileEnlistmentContainer.Phase0Request, phase != -1");
-                throw new InvalidOperationException( SR.InternalError);
+                throw new InvalidOperationException(SR.InternalError);
             }
         }
 
@@ -520,13 +556,21 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                         etwLog.InternalError();
                     }
 
-                    Debug.Fail("OletxPhase0VolatileEnlistmentContainer.Phase0Request, enlistmentList element is not an OletxVolatileEnlistment.");
-                    throw new InvalidOperationException( SR.InternalError);
+                    Debug.Fail(
+                        "OletxPhase0VolatileEnlistmentContainer.Phase0Request, enlistmentList element is not an OletxVolatileEnlistment."
+                    );
+                    throw new InvalidOperationException(SR.InternalError);
                 }
 
                 // Do the notification outside any locks.
-                Debug.Assert(enlistment.EnlistDuringPrepareRequired, "OletxPhase0VolatileEnlistmentContainer.Phase0Request, enlistmentList element not marked as EnlistmentDuringPrepareRequired.");
-                Debug.Assert(!abortHint, "OletxPhase0VolatileEnlistmentContainer.Phase0Request, abortingHint is true just before sending Prepares.");
+                Debug.Assert(
+                    enlistment.EnlistDuringPrepareRequired,
+                    "OletxPhase0VolatileEnlistmentContainer.Phase0Request, enlistmentList element not marked as EnlistmentDuringPrepareRequired."
+                );
+                Debug.Assert(
+                    !abortHint,
+                    "OletxPhase0VolatileEnlistmentContainer.Phase0Request, abortingHint is true just before sending Prepares."
+                );
 
                 enlistment.Prepare(this);
             }
@@ -534,7 +578,9 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
 
         if (etwLog.IsEnabled())
         {
-            string description = "OletxPhase0VolatileEnlistmentContainer.Phase0Request, abortHint = " + abortHint.ToString(CultureInfo.CurrentCulture);
+            string description =
+                "OletxPhase0VolatileEnlistmentContainer.Phase0Request, abortHint = "
+                + abortHint.ToString(CultureInfo.CurrentCulture);
 
             etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, description);
         }
@@ -575,7 +621,7 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                 throw TransactionException.Create(SR.TooLate, null);
             }
 
-            EnlistmentList.Add( enlistment );
+            EnlistmentList.Add(enlistment);
         }
     }
 
@@ -598,11 +644,13 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            string description = "OletxPhase1VolatileEnlistmentContainer.DependentCloneCompleted, outstandingNotifications = " +
-                OutstandingNotifications.ToString(CultureInfo.CurrentCulture) +
-                ", incompleteDependentClones = " +
-                IncompleteDependentClones.ToString(CultureInfo.CurrentCulture) +
-                ", phase = " + Phase.ToString(CultureInfo.CurrentCulture);
+            string description =
+                "OletxPhase1VolatileEnlistmentContainer.DependentCloneCompleted, outstandingNotifications = "
+                + OutstandingNotifications.ToString(CultureInfo.CurrentCulture)
+                + ", incompleteDependentClones = "
+                + IncompleteDependentClones.ToString(CultureInfo.CurrentCulture)
+                + ", phase = "
+                + Phase.ToString(CultureInfo.CurrentCulture);
 
             etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, description);
         }
@@ -613,7 +661,10 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
             IncompleteDependentClones--;
         }
 
-        Debug.Assert(OutstandingNotifications >= 0, "OletxPhase1VolatileEnlistmentContainer.DependentCloneCompleted - DependentCloneCompleted < 0");
+        Debug.Assert(
+            OutstandingNotifications >= 0,
+            "OletxPhase1VolatileEnlistmentContainer.DependentCloneCompleted - DependentCloneCompleted < 0"
+        );
 
         if (etwLog.IsEnabled())
         {
@@ -632,9 +683,11 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
         {
             if (etwLog.IsEnabled())
             {
-                string description = "OletxPhase1VolatileEnlistmentContainer.RollbackFromTransaction, outstandingNotifications = " +
-                    OutstandingNotifications.ToString(CultureInfo.CurrentCulture) +
-                    ", incompleteDependentClones = " + IncompleteDependentClones.ToString(CultureInfo.CurrentCulture);
+                string description =
+                    "OletxPhase1VolatileEnlistmentContainer.RollbackFromTransaction, outstandingNotifications = "
+                    + OutstandingNotifications.ToString(CultureInfo.CurrentCulture)
+                    + ", incompleteDependentClones = "
+                    + IncompleteDependentClones.ToString(CultureInfo.CurrentCulture);
 
                 etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, description);
             }
@@ -658,7 +711,10 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                 // not the notification actually goes out to the app.
                 Aborted();
             }
-            catch (COMException ex) when (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE)
+            catch (COMException ex)
+                when (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                    || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+                )
             {
                 lock (this)
                 {
@@ -678,7 +734,11 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, "OletxPhase1VolatileEnlistmentContainer.RollbackFromTransaction");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                "OletxPhase1VolatileEnlistmentContainer.RollbackFromTransaction"
+            );
         }
     }
 
@@ -710,16 +770,20 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
         {
             if (etwLog.IsEnabled())
             {
-                string description = "OletxPhase1VolatileEnlistmentContainer.DecrementOutstandingNotifications, outstandingNotifications = " +
-                    OutstandingNotifications.ToString(CultureInfo.CurrentCulture) +
-                    ", incompleteDependentClones = " +
-                    IncompleteDependentClones.ToString(CultureInfo.CurrentCulture);
+                string description =
+                    "OletxPhase1VolatileEnlistmentContainer.DecrementOutstandingNotifications, outstandingNotifications = "
+                    + OutstandingNotifications.ToString(CultureInfo.CurrentCulture)
+                    + ", incompleteDependentClones = "
+                    + IncompleteDependentClones.ToString(CultureInfo.CurrentCulture);
 
                 etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, description);
             }
 
             OutstandingNotifications--;
-            Debug.Assert(OutstandingNotifications >= 0, "OletxPhase1VolatileEnlistmentContainer.DecrementOutstandingNotifications - outstandingNotifications < 0");
+            Debug.Assert(
+                OutstandingNotifications >= 0,
+                "OletxPhase1VolatileEnlistmentContainer.DecrementOutstandingNotifications - outstandingNotifications < 0"
+            );
             CollectedVoteYes = CollectedVoteYes && voteYes;
             if (OutstandingNotifications == 0)
             {
@@ -741,7 +805,7 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                 {
                     localVoterShim?.Vote(true);
                 }
-                else  // we need to vote no.
+                else // we need to vote no.
                 {
                     localVoterShim?.Vote(false);
 
@@ -752,7 +816,10 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                 }
             }
         }
-        catch (COMException ex) when (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE)
+        catch (COMException ex)
+            when (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+            )
         {
             lock (this)
             {
@@ -773,7 +840,11 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, "OletxPhase1VolatileEnlistmentContainer.DecrementOutstandingNotifications");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                "OletxPhase1VolatileEnlistmentContainer.DecrementOutstandingNotifications"
+            );
         }
     }
 
@@ -800,7 +871,9 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                         driveInDoubt = true;
                         break;
                     default:
-                        Debug.Fail("OletxPhase1VolatileEnlistmentContainer.OutcomeFromTransaction, outcome is not Aborted or InDoubt");
+                        Debug.Fail(
+                            "OletxPhase1VolatileEnlistmentContainer.OutcomeFromTransaction, outcome is not Aborted or InDoubt"
+                        );
                         break;
                 }
             }
@@ -828,7 +901,7 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
             localPhase1Count = EnlistmentList.Count;
         }
 
-        for ( int i = 0; i < localPhase1Count; i++ )
+        for (int i = 0; i < localPhase1Count; i++)
         {
             enlistment = EnlistmentList[i] as OletxVolatileEnlistment;
             if (enlistment == null)
@@ -839,7 +912,9 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                     etwLog.InternalError();
                 }
 
-                Debug.Fail("OletxPhase1VolatileEnlistmentContainer.Committed, enlistmentList element is not an OletxVolatileEnlistment.");
+                Debug.Fail(
+                    "OletxPhase1VolatileEnlistmentContainer.Committed, enlistmentList element is not an OletxVolatileEnlistment."
+                );
                 throw new InvalidOperationException(SR.InternalError);
             }
 
@@ -869,8 +944,10 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                     etwLog.InternalError();
                 }
 
-                Debug.Fail("OletxPhase1VolatileEnlistmentContainer.Aborted, enlistmentList element is not an OletxVolatileEnlistment.");
-                throw new InvalidOperationException( SR.InternalError);
+                Debug.Fail(
+                    "OletxPhase1VolatileEnlistmentContainer.Aborted, enlistmentList element is not an OletxVolatileEnlistment."
+                );
+                throw new InvalidOperationException(SR.InternalError);
             }
 
             enlistment.Rollback();
@@ -899,8 +976,10 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                     etwLog.InternalError();
                 }
 
-                Debug.Fail("OletxPhase1VolatileEnlistmentContainer.InDoubt, enlistmentList element is not an OletxVolatileEnlistment.");
-                throw new InvalidOperationException( SR.InternalError);
+                Debug.Fail(
+                    "OletxPhase1VolatileEnlistmentContainer.InDoubt, enlistmentList element is not an OletxVolatileEnlistment."
+                );
+                throw new InvalidOperationException(SR.InternalError);
             }
 
             enlistment.InDoubt();
@@ -948,11 +1027,11 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
 
         if (voteNo)
         {
-            DecrementOutstandingNotifications( false );
+            DecrementOutstandingNotifications(false);
         }
         else if (localPhase1Count == 0)
         {
-            DecrementOutstandingNotifications( true );
+            DecrementOutstandingNotifications(true);
         }
         else
         {
@@ -966,8 +1045,10 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
                         etwLog.InternalError();
                     }
 
-                    Debug.Fail("OletxPhase1VolatileEnlistmentContainer.VoteRequest, enlistmentList element is not an OletxVolatileEnlistment.");
-                    throw new InvalidOperationException( SR.InternalError);
+                    Debug.Fail(
+                        "OletxPhase1VolatileEnlistmentContainer.VoteRequest, enlistmentList element is not an OletxVolatileEnlistment."
+                    );
+                    throw new InvalidOperationException(SR.InternalError);
                 }
 
                 enlistment.Prepare(this);
@@ -993,7 +1074,7 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         Prepared,
         Aborted,
         InDoubt,
-        Done
+        Done,
     }
 
     private readonly IEnlistmentNotificationInternal _iEnlistmentNotification;
@@ -1011,11 +1092,13 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
     internal OletxVolatileEnlistment(
         IEnlistmentNotificationInternal enlistmentNotification,
         EnlistmentOptions enlistmentOptions,
-        OletxTransaction oletxTransaction)
+        OletxTransaction oletxTransaction
+    )
         : base(null!, oletxTransaction)
     {
         _iEnlistmentNotification = enlistmentNotification;
-        EnlistDuringPrepareRequired = (enlistmentOptions & EnlistmentOptions.EnlistDuringPrepareRequired) != 0;
+        EnlistDuringPrepareRequired =
+            (enlistmentOptions & EnlistmentOptions.EnlistDuringPrepareRequired) != 0;
 
         // We get a container when we are asked to vote.
         _container = null;
@@ -1025,7 +1108,12 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.EnlistmentCreated(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, EnlistmentType.Volatile, enlistmentOptions);
+            etwLog.EnlistmentCreated(
+                TraceSourceType.TraceSourceOleTx,
+                InternalTraceIdentifier,
+                EnlistmentType.Volatile,
+                enlistmentOptions
+            );
         }
     }
 
@@ -1059,7 +1147,11 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Prepare);
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceOleTx,
+                        InternalTraceIdentifier,
+                        NotificationCall.Prepare
+                    );
                 }
 
                 localEnlistmentNotification.Prepare(this);
@@ -1079,7 +1171,7 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         else if (localState == OletxVolatileEnlistmentState.Done)
         {
             // Voting yes because it was an early read-only vote.
-            container.DecrementOutstandingNotifications( true );
+            container.DecrementOutstandingNotifications(true);
 
             // We must have had a race between EnlistmentDone and the proxy telling
             // us Phase0Request.  Just return.
@@ -1092,7 +1184,11 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
             container.DecrementOutstandingNotifications(true);
             return;
         }
-        else if (localState is OletxVolatileEnlistmentState.Aborting or OletxVolatileEnlistmentState.Aborted)
+        else if (
+            localState
+            is OletxVolatileEnlistmentState.Aborting
+                or OletxVolatileEnlistmentState.Aborted
+        )
         {
             // An abort has raced with this volatile Prepare
             // decrement the outstanding notifications making sure to vote no.
@@ -1108,7 +1204,7 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
             }
 
             Debug.Fail("OletxVolatileEnlistment.Prepare, invalid state.");
-            throw new InvalidOperationException( SR.InternalError);
+            throw new InvalidOperationException(SR.InternalError);
         }
     }
 
@@ -1140,7 +1236,11 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Commit);
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceOleTx,
+                        InternalTraceIdentifier,
+                        NotificationCall.Commit
+                    );
                 }
 
                 localEnlistmentNotification.Commit(this);
@@ -1183,7 +1283,11 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         {
             // The app may have already called EnlistmentDone.  If this occurs, don't bother sending
             // the notification to the app and we don't need to tell the proxy.
-            if ( _state is OletxVolatileEnlistmentState.Prepared or OletxVolatileEnlistmentState.Active)
+            if (
+                _state
+                is OletxVolatileEnlistmentState.Prepared
+                    or OletxVolatileEnlistmentState.Active
+            )
             {
                 localState = _state = OletxVolatileEnlistmentState.Aborting;
                 localEnlistmentNotification = _iEnlistmentNotification;
@@ -1203,24 +1307,28 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         {
             // Tell the application to do the work.
             case OletxVolatileEnlistmentState.Aborting:
+            {
+                if (localEnlistmentNotification != null)
                 {
-                    if (localEnlistmentNotification != null)
+                    TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
+                    if (etwLog.IsEnabled())
                     {
-                        TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
-                        if (etwLog.IsEnabled())
-                        {
-                            etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Rollback);
-                        }
-
-                        localEnlistmentNotification.Rollback(this);
+                        etwLog.EnlistmentStatus(
+                            TraceSourceType.TraceSourceOleTx,
+                            InternalTraceIdentifier,
+                            NotificationCall.Rollback
+                        );
                     }
 
-                    // There is a small race where Rollback could be called when the enlistment is already
-                    // aborting the transaciton, so just ignore that call.  When the app enlistment
-                    // finishes responding to its Rollback notification with EnlistmentDone, things will get
-                    // cleaned up.
-                    break;
+                    localEnlistmentNotification.Rollback(this);
                 }
+
+                // There is a small race where Rollback could be called when the enlistment is already
+                // aborting the transaciton, so just ignore that call.  When the app enlistment
+                // finishes responding to its Rollback notification with EnlistmentDone, things will get
+                // cleaned up.
+                break;
+            }
             case OletxVolatileEnlistmentState.Preparing:
                 // We need to tolerate this state, but we have already marked the
                 // enlistment as pendingRollback, so there is nothing else to do here.
@@ -1229,16 +1337,16 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
                 // Early Exit - state was Done
                 break;
             default:
+            {
+                TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
+                if (etwLog.IsEnabled())
                 {
-                    TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
-                    if (etwLog.IsEnabled())
-                    {
-                        etwLog.InternalError();
-                    }
-
-                    Debug.Fail("OletxVolatileEnlistment.Rollback, invalid state.");
-                    throw new InvalidOperationException(SR.InternalError);
+                    etwLog.InternalError();
                 }
+
+                Debug.Fail("OletxVolatileEnlistment.Rollback, invalid state.");
+                throw new InvalidOperationException(SR.InternalError);
+            }
         }
     }
 
@@ -1272,25 +1380,29 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         {
             // Tell the application to do the work.
             case OletxVolatileEnlistmentState.InDoubt when localEnlistmentNotification != null:
+            {
+                if (etwLog.IsEnabled())
                 {
-                    if (etwLog.IsEnabled())
-                    {
-                        etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.InDoubt);
-                    }
-
-                    localEnlistmentNotification.InDoubt(this);
-                    break;
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceOleTx,
+                        InternalTraceIdentifier,
+                        NotificationCall.InDoubt
+                    );
                 }
+
+                localEnlistmentNotification.InDoubt(this);
+                break;
+            }
             case OletxVolatileEnlistmentState.InDoubt:
+            {
+                if (etwLog.IsEnabled())
                 {
-                    if (etwLog.IsEnabled())
-                    {
-                        etwLog.InternalError();
-                    }
-
-                    Debug.Fail("OletxVolatileEnlistment.InDoubt, no enlistmentNotification member.");
-                    throw new InvalidOperationException(SR.InternalError);
+                    etwLog.InternalError();
                 }
+
+                Debug.Fail("OletxVolatileEnlistment.InDoubt, no enlistmentNotification member.");
+                throw new InvalidOperationException(SR.InternalError);
+            }
             case OletxVolatileEnlistmentState.Preparing:
                 // We have already set pendingOutcome, so there is nothing else to do.
                 break;
@@ -1298,15 +1410,15 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
                 // Early Exit - state was Done
                 break;
             default:
+            {
+                if (etwLog.IsEnabled())
                 {
-                    if (etwLog.IsEnabled())
-                    {
-                        etwLog.InternalError();
-                    }
-
-                    Debug.Fail("OletxVolatileEnlistment.InDoubt, invalid state.");
-                    throw new InvalidOperationException( SR.InternalError);
+                    etwLog.InternalError();
                 }
+
+                Debug.Fail("OletxVolatileEnlistment.InDoubt, invalid state.");
+                throw new InvalidOperationException(SR.InternalError);
+            }
         }
     }
 
@@ -1315,7 +1427,11 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(IPromotedEnlistment.EnlistmentDone)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxEnlistment)}.{nameof(IPromotedEnlistment.EnlistmentDone)}"
+            );
             etwLog.EnlistmentCallbackPositive(InternalTraceIdentifier, EnlistmentCallback.Done);
         }
 
@@ -1327,11 +1443,13 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
             localState = _state;
             localContainer = _container;
 
-            if (_state != OletxVolatileEnlistmentState.Active &&
-                _state != OletxVolatileEnlistmentState.Preparing &&
-                _state != OletxVolatileEnlistmentState.Aborting &&
-                _state != OletxVolatileEnlistmentState.Committing &&
-                _state != OletxVolatileEnlistmentState.InDoubt)
+            if (
+                _state != OletxVolatileEnlistmentState.Active
+                && _state != OletxVolatileEnlistmentState.Preparing
+                && _state != OletxVolatileEnlistmentState.Aborting
+                && _state != OletxVolatileEnlistmentState.Committing
+                && _state != OletxVolatileEnlistmentState.InDoubt
+            )
             {
                 throw TransactionException.CreateEnlistmentStateException(null, DistributedTxId);
             }
@@ -1351,7 +1469,11 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(IPromotedEnlistment.EnlistmentDone)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxEnlistment)}.{nameof(IPromotedEnlistment.EnlistmentDone)}"
+            );
         }
     }
 
@@ -1360,7 +1482,11 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"OletxPreparingEnlistment.{nameof(IPromotedEnlistment.Prepared)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxPreparingEnlistment.{nameof(IPromotedEnlistment.Prepared)}"
+            );
             etwLog.EnlistmentCallbackPositive(InternalTraceIdentifier, EnlistmentCallback.Prepared);
         }
 
@@ -1425,20 +1551,30 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"OletxPreparingEnlistment.{nameof(IPromotedEnlistment.Prepared)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxPreparingEnlistment.{nameof(IPromotedEnlistment.Prepared)}"
+            );
         }
     }
 
-    void IPromotedEnlistment.ForceRollback()
-        => ((IPromotedEnlistment)this).ForceRollback(null);
+    void IPromotedEnlistment.ForceRollback() => ((IPromotedEnlistment)this).ForceRollback(null);
 
     void IPromotedEnlistment.ForceRollback(Exception? e)
     {
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"OletxPreparingEnlistment.{nameof(IPromotedEnlistment.ForceRollback)}");
-            etwLog.EnlistmentCallbackNegative(InternalTraceIdentifier, EnlistmentCallback.ForceRollback);
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxPreparingEnlistment.{nameof(IPromotedEnlistment.ForceRollback)}"
+            );
+            etwLog.EnlistmentCallbackNegative(
+                InternalTraceIdentifier,
+                EnlistmentCallback.ForceRollback
+            );
         }
 
         OletxVolatileEnlistmentContainer localContainer;
@@ -1467,29 +1603,42 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
             localContainer = _container;
         }
 
-        Interlocked.CompareExchange(ref oletxTransaction!.RealOletxTransaction.InnerException, e, null);
+        Interlocked.CompareExchange(
+            ref oletxTransaction!.RealOletxTransaction.InnerException,
+            e,
+            null
+        );
 
         // Vote no.
         localContainer.DecrementOutstandingNotifications(false);
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"OletxPreparingEnlistment.{nameof(IPromotedEnlistment.ForceRollback)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxPreparingEnlistment.{nameof(IPromotedEnlistment.ForceRollback)}"
+            );
         }
     }
 
     void IPromotedEnlistment.Committed() => throw new InvalidOperationException();
+
     void IPromotedEnlistment.Aborted() => throw new InvalidOperationException();
+
     void IPromotedEnlistment.Aborted(Exception? e) => throw new InvalidOperationException();
+
     void IPromotedEnlistment.InDoubt() => throw new InvalidOperationException();
+
     void IPromotedEnlistment.InDoubt(Exception? e) => throw new InvalidOperationException();
 
-    byte[] IPromotedEnlistment.GetRecoveryInformation()
-        => throw TransactionException.CreateInvalidOperationException(
+    byte[] IPromotedEnlistment.GetRecoveryInformation() =>
+        throw TransactionException.CreateInvalidOperationException(
             TraceSourceType.TraceSourceOleTx,
             SR.VolEnlistNoRecoveryInfo,
             null,
-            DistributedTxId);
+            DistributedTxId
+        );
 
     InternalEnlistment? IPromotedEnlistment.InternalEnlistment
     {

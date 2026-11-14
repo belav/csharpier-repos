@@ -33,14 +33,18 @@ namespace System.Composition.TypedParts.Discovery
         private ConstructorInfo _constructor;
         private CompositeActivator _partActivator;
 
-        private static readonly IDictionary<string, object> s_noMetadata = new Dictionary<string, object>();
-        private static readonly MethodInfo s_activatorInvoke = typeof(CompositeActivator).GetTypeInfo().GetDeclaredMethod("Invoke");
+        private static readonly IDictionary<string, object> s_noMetadata =
+            new Dictionary<string, object>();
+        private static readonly MethodInfo s_activatorInvoke = typeof(CompositeActivator)
+            .GetTypeInfo()
+            .GetDeclaredMethod("Invoke");
 
         private DiscoveredPart(
             TypeInfo partType,
             AttributedModelProvider attributeContext,
             ActivationFeature[] activationFeatures,
-            Lazy<IDictionary<string, object>> partMetadata)
+            Lazy<IDictionary<string, object>> partMetadata
+        )
         {
             _partType = partType;
             _attributeContext = attributeContext;
@@ -51,7 +55,8 @@ namespace System.Composition.TypedParts.Discovery
         public DiscoveredPart(
             TypeInfo partType,
             AttributedModelProvider attributeContext,
-            ActivationFeature[] activationFeatures)
+            ActivationFeature[] activationFeatures
+        )
         {
             _partType = partType;
             _attributeContext = attributeContext;
@@ -59,9 +64,15 @@ namespace System.Composition.TypedParts.Discovery
             _partMetadata = new Lazy<IDictionary<string, object>>(() => GetPartMetadata(partType));
         }
 
-        public TypeInfo PartType { get { return _partType; } }
+        public TypeInfo PartType
+        {
+            get { return _partType; }
+        }
 
-        public bool IsShared { get { return ContractHelpers.IsShared(_partMetadata.Value); } }
+        public bool IsShared
+        {
+            get { return ContractHelpers.IsShared(_partMetadata.Value); }
+        }
 
         public void AddDiscoveredExport(DiscoveredExport export)
         {
@@ -72,25 +83,42 @@ namespace System.Composition.TypedParts.Discovery
         public CompositionDependency[] GetDependencies(DependencyAccessor definitionAccessor)
         {
             return GetPartActivatorDependencies(definitionAccessor)
-                .Concat(_activationFeatures
-                    .SelectMany(feature => feature.GetDependencies(_partType, definitionAccessor)))
+                .Concat(
+                    _activationFeatures.SelectMany(feature =>
+                        feature.GetDependencies(_partType, definitionAccessor)
+                    )
+                )
                 .Where(a => a != null)
                 .ToArray();
         }
 
-        private IEnumerable<CompositionDependency> GetPartActivatorDependencies(DependencyAccessor definitionAccessor)
+        private IEnumerable<CompositionDependency> GetPartActivatorDependencies(
+            DependencyAccessor definitionAccessor
+        )
         {
             var partTypeAsType = _partType.AsType();
 
             if (_constructor == null)
             {
-                foreach (var c in _partType.DeclaredConstructors.Where(ci => ci.IsPublic && !(ci.IsStatic)))
+                foreach (
+                    var c in _partType.DeclaredConstructors.Where(ci =>
+                        ci.IsPublic && !(ci.IsStatic)
+                    )
+                )
                 {
-                    if (_attributeContext.GetDeclaredAttribute<ImportingConstructorAttribute>(partTypeAsType, c) != null)
+                    if (
+                        _attributeContext.GetDeclaredAttribute<ImportingConstructorAttribute>(
+                            partTypeAsType,
+                            c
+                        ) != null
+                    )
                     {
                         if (_constructor != null)
                         {
-                            string message = SR.Format(SR.DiscoveredPart_MultipleImportingConstructorsFound, _partType);
+                            string message = SR.Format(
+                                SR.DiscoveredPart_MultipleImportingConstructorsFound,
+                                _partType
+                            );
                             throw new CompositionFailedException(message);
                         }
 
@@ -103,11 +131,16 @@ namespace System.Composition.TypedParts.Discovery
                     _constructor = GetConstructorInfoFromGenericType(_partType);
                 }
 
-                _constructor ??= _partType.DeclaredConstructors.FirstOrDefault(ci => ci.IsPublic && !(ci.IsStatic || ci.GetParameters().Length != 0));
+                _constructor ??= _partType.DeclaredConstructors.FirstOrDefault(ci =>
+                    ci.IsPublic && !(ci.IsStatic || ci.GetParameters().Length != 0)
+                );
 
                 if (_constructor == null)
                 {
-                    string message = SR.Format(SR.DiscoveredPart_NoImportingConstructorsFound, _partType);
+                    string message = SR.Format(
+                        SR.DiscoveredPart_NoImportingConstructorsFound,
+                        _partType
+                    );
                     throw new CompositionFailedException(message);
                 }
             }
@@ -119,15 +152,30 @@ namespace System.Composition.TypedParts.Discovery
                 var pi = cps[i];
                 var site = new ParameterImportSite(pi);
 
-                var importInfo = ContractHelpers.GetImportInfo(pi.ParameterType, _attributeContext.GetDeclaredAttributes(partTypeAsType, pi), site);
+                var importInfo = ContractHelpers.GetImportInfo(
+                    pi.ParameterType,
+                    _attributeContext.GetDeclaredAttributes(partTypeAsType, pi),
+                    site
+                );
                 if (!importInfo.AllowDefault)
                 {
-                    yield return definitionAccessor.ResolveRequiredDependency(site, importInfo.Contract, true);
+                    yield return definitionAccessor.ResolveRequiredDependency(
+                        site,
+                        importInfo.Contract,
+                        true
+                    );
                 }
                 else
                 {
                     CompositionDependency optional;
-                    if (definitionAccessor.TryResolveOptionalDependency(site, importInfo.Contract, true, out optional))
+                    if (
+                        definitionAccessor.TryResolveOptionalDependency(
+                            site,
+                            importInfo.Contract,
+                            true,
+                            out optional
+                        )
+                    )
                         yield return optional;
                 }
             }
@@ -142,15 +190,25 @@ namespace System.Composition.TypedParts.Discovery
 
             for (var index = 0; index < constructorsCount; index++)
             {
-                ConstructorInfo constructorInfo = genericPartTypeInfo.DeclaredConstructors.ElementAt(index);
+                ConstructorInfo constructorInfo =
+                    genericPartTypeInfo.DeclaredConstructors.ElementAt(index);
 
-                if (!constructorInfo.IsPublic || constructorInfo.IsStatic) continue;
+                if (!constructorInfo.IsPublic || constructorInfo.IsStatic)
+                    continue;
 
-                if (_attributeContext.GetDeclaredAttribute<ImportingConstructorAttribute>(genericPartType, constructorInfo) != null)
+                if (
+                    _attributeContext.GetDeclaredAttribute<ImportingConstructorAttribute>(
+                        genericPartType,
+                        constructorInfo
+                    ) != null
+                )
                 {
                     if (constructor != null)
                     {
-                        string message = SR.Format(SR.DiscoveredPart_MultipleImportingConstructorsFound, type);
+                        string message = SR.Format(
+                            SR.DiscoveredPart_MultipleImportingConstructorsFound,
+                            type
+                        );
                         throw new CompositionFailedException(message);
                     }
 
@@ -163,7 +221,8 @@ namespace System.Composition.TypedParts.Discovery
 
         public CompositeActivator GetActivator(IEnumerable<CompositionDependency> dependencies)
         {
-            if (_partActivator != null) return _partActivator;
+            if (_partActivator != null)
+                return _partActivator;
 
             var contextParam = Expression.Parameter(typeof(LifetimeContext), "cc");
             var operationParm = Expression.Parameter(typeof(CompositionOperation), "op");
@@ -173,7 +232,10 @@ namespace System.Composition.TypedParts.Discovery
 
             var partActivatorDependencies = dependencies
                 .Where(dep => dep.Site is ParameterImportSite)
-                .ToDictionary(d => ((ParameterImportSite)d.Site).Parameter, ParameterInfoComparer.Instance);
+                .ToDictionary(
+                    d => ((ParameterImportSite)d.Site).Parameter,
+                    ParameterInfoComparer.Instance
+                );
 
             for (var i = 0; i < cps.Length; ++i)
             {
@@ -183,8 +245,15 @@ namespace System.Composition.TypedParts.Discovery
                 if (partActivatorDependencies.TryGetValue(pi, out dep))
                 {
                     var a = dep.Target.GetDescriptor().Activator;
-                    paramActivatorCalls[i] =
-                        Expression.Convert(Expression.Call(Expression.Constant(a), s_activatorInvoke, contextParam, operationParm), pi.ParameterType);
+                    paramActivatorCalls[i] = Expression.Convert(
+                        Expression.Call(
+                            Expression.Constant(a),
+                            s_activatorInvoke,
+                            contextParam,
+                            operationParm
+                        ),
+                        pi.ParameterType
+                    );
                 }
                 else
                 {
@@ -192,14 +261,22 @@ namespace System.Composition.TypedParts.Discovery
                 }
             }
 
-            Expression body = Expression.Convert(Expression.New(_constructor, paramActivatorCalls), typeof(object));
+            Expression body = Expression.Convert(
+                Expression.New(_constructor, paramActivatorCalls),
+                typeof(object)
+            );
 
             var activator = Expression
                 .Lambda<CompositeActivator>(body, contextParam, operationParm)
                 .Compile();
 
             foreach (var activationFeature in _activationFeatures)
-                activator = activationFeature.RewriteActivator(_partType, activator, _partMetadata.Value, dependencies);
+                activator = activationFeature.RewriteActivator(
+                    _partType,
+                    activator,
+                    _partMetadata.Value,
+                    dependencies
+                );
 
             _partActivator = activator;
             return _partActivator;
@@ -208,7 +285,9 @@ namespace System.Composition.TypedParts.Discovery
         public IDictionary<string, object> GetPartMetadata(TypeInfo partType)
         {
             var partMetadata = new Dictionary<string, object>();
-            foreach (var attr in _attributeContext.GetDeclaredAttributes(partType.AsType(), partType))
+            foreach (
+                var attr in _attributeContext.GetDeclaredAttributes(partType.AsType(), partType)
+            )
             {
                 if (attr is PartMetadataAttribute ma)
                 {
@@ -223,9 +302,18 @@ namespace System.Composition.TypedParts.Discovery
         {
             for (int index = 0; index < _partType.GenericTypeParameters.Length; index++)
             {
-                foreach (var genericParameterConstraints in _partType.GenericTypeParameters[index].GetTypeInfo().GetGenericParameterConstraints())
+                foreach (
+                    var genericParameterConstraints in _partType
+                        .GenericTypeParameters[index]
+                        .GetTypeInfo()
+                        .GetGenericParameterConstraints()
+                )
                 {
-                    if (!genericParameterConstraints.GetTypeInfo().IsAssignableFrom(typeArguments[index].GetTypeInfo()))
+                    if (
+                        !genericParameterConstraints
+                            .GetTypeInfo()
+                            .IsAssignableFrom(typeArguments[index].GetTypeInfo())
+                    )
                     {
                         closed = null;
                         return false;
@@ -243,7 +331,12 @@ namespace System.Composition.TypedParts.Discovery
 
             var closedType = _partType.MakeGenericType(typeArguments).GetTypeInfo();
 
-            var result = new DiscoveredPart(closedType, _attributeContext, _activationFeatures, _partMetadata);
+            var result = new DiscoveredPart(
+                closedType,
+                _attributeContext,
+                _activationFeatures,
+                _partMetadata
+            );
 
             foreach (var export in _exports)
             {
@@ -255,7 +348,10 @@ namespace System.Composition.TypedParts.Discovery
             return true;
         }
 
-        public IEnumerable<DiscoveredExport> DiscoveredExports { get { return _exports; } }
+        public IEnumerable<DiscoveredExport> DiscoveredExports
+        {
+            get { return _exports; }
+        }
 
         // uses the fact that current usage only has comparisons
         // between ParameterInfo objects from the same constructor reference,

@@ -4,22 +4,24 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Collections;
     using System.Collections.Specialized;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    internal class ReadOnlyNameValueCollection : NameValueCollection {
+    internal class ReadOnlyNameValueCollection : NameValueCollection
+    {
+        internal ReadOnlyNameValueCollection(IEqualityComparer equalityComparer)
+            : base(equalityComparer) { }
 
-        internal ReadOnlyNameValueCollection(IEqualityComparer equalityComparer) : base(equalityComparer) {
-        }
+        internal ReadOnlyNameValueCollection(ReadOnlyNameValueCollection value)
+            : base(value) { }
 
-        internal ReadOnlyNameValueCollection(ReadOnlyNameValueCollection value) : base(value) {
-        }
-
-        internal void SetReadOnly() {
+        internal void SetReadOnly()
+        {
             IsReadOnly = true;
         }
     }

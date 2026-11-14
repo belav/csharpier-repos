@@ -9,28 +9,24 @@
 // (C)2006 Novell Inc,
 //
 
-
 namespace System.Transactions
 {
-	public class Enlistment
-	{
-		internal bool done;
+    public class Enlistment
+    {
+        internal bool done;
 
-		internal Enlistment ()
-		{
-			done = false;
-		}
+        internal Enlistment()
+        {
+            done = false;
+        }
 
-		public void Done ()
-		{
-			done = true;
+        public void Done()
+        {
+            done = true;
 
-			InternalOnDone();
-		}
+            InternalOnDone();
+        }
 
-		internal virtual void InternalOnDone ()
-		{
-		}
-	}
+        internal virtual void InternalOnDone() { }
+    }
 }
-

@@ -4,36 +4,24 @@
 
 namespace System.Activities.Statements
 {
-    using System.Collections.Generic;
     using System.Activities;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows.Markup;
 
     [ContentProperty("Action")]
     public sealed class FlowStep : FlowNode
     {
-        public FlowStep()
-        {
-        }
+        public FlowStep() { }
 
         [DefaultValue(null)]
-        public Activity Action
-        {
-            get;
-            set;
-        }
+        public Activity Action { get; set; }
 
         [DefaultValue(null)]
         [DependsOn("Action")]
-        public FlowNode Next
-        {
-            get;
-            set;
-        }
+        public FlowNode Next { get; set; }
 
-        internal override void OnOpen(Flowchart owner, NativeActivityMetadata metadata)
-        {
-        }
+        internal override void OnOpen(Flowchart owner, NativeActivityMetadata metadata) { }
 
         internal override void GetConnectedNodes(IList<FlowNode> connections)
         {
@@ -48,7 +36,11 @@ namespace System.Activities.Statements
             get { return Action; }
         }
 
-        internal bool Execute(NativeActivityContext context, CompletionCallback onCompleted, out FlowNode nextNode)
+        internal bool Execute(
+            NativeActivityContext context,
+            CompletionCallback onCompleted,
+            out FlowNode nextNode
+        )
         {
             if (Next == null)
             {
@@ -56,7 +48,7 @@ namespace System.Activities.Statements
                 {
                     TD.FlowchartNextNull(this.Owner.DisplayName);
                 }
-            }    
+            }
             if (Action == null)
             {
                 nextNode = Next;

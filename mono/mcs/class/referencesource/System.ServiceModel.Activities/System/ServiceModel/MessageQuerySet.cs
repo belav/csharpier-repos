@@ -6,22 +6,26 @@ namespace System.ServiceModel
 {
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ServiceModel.Activities;
-    using System.ServiceModel.Dispatcher;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.ServiceModel.Activities;
+    using System.ServiceModel.Dispatcher;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldHaveCorrectSuffix,
-        Justification = "Arch approved name")]
-    [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.MarkISerializableTypesWithSerializable,
-        Justification = "TODO 87908, We can consider not deriving from Dictionary")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldHaveCorrectSuffix,
+        Justification = "Arch approved name"
+    )]
+    [SuppressMessage(
+        FxCop.Category.Usage,
+        FxCop.Rule.MarkISerializableTypesWithSerializable,
+        Justification = "TODO 87908, We can consider not deriving from Dictionary"
+    )]
     public class MessageQuerySet : Dictionary<string, MessageQuery>
     {
-        public MessageQuerySet()
-        {
-        }
+        public MessageQuerySet() { }
 
         public MessageQuerySet(MessageQueryTable<string> queryTable)
         {
@@ -34,11 +38,7 @@ namespace System.ServiceModel
         }
 
         [DefaultValue(null)]
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
         public MessageQueryTable<string> GetMessageQueryTable()
         {
@@ -47,8 +47,10 @@ namespace System.ServiceModel
             return result;
         }
 
-
-        static void InvertDictionary<TKey, TValue>(IDictionary<TKey, TValue> source, IDictionary<TValue, TKey> destination)
+        static void InvertDictionary<TKey, TValue>(
+            IDictionary<TKey, TValue> source,
+            IDictionary<TValue, TKey> destination
+        )
         {
             foreach (KeyValuePair<TKey, TValue> vkpair in source)
             {

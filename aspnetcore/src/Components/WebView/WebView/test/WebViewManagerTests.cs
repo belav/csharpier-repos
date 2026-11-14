@@ -45,9 +45,8 @@ public class WebViewManagerTests
         webViewManager.ReceiveAttachPageMessage();
 
         // Act
-        Assert.Collection(
-            webViewManager.SentIpcMessages,
-            m => AssertHelpers.IsAttachWebRendererInteropMessage(m)
+        Assert.Collection(webViewManager.SentIpcMessages, m =>
+            AssertHelpers.IsAttachWebRendererInteropMessage(m)
         );
         await webViewManager.AddRootComponentAsync(
             typeof(MyComponent),
@@ -133,13 +132,12 @@ public class WebViewManagerTests
         );
 
         // Act & assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await webViewManager.AddRootComponentAsync(
-                    typeof(MyComponent),
-                    arbitraryComponentSelector,
-                    ParameterView.Empty
-                )
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await webViewManager.AddRootComponentAsync(
+                typeof(MyComponent),
+                arbitraryComponentSelector,
+                ParameterView.Empty
+            )
         );
 
         Assert.Equal(

@@ -11,30 +11,49 @@ namespace System.Reflection
     internal sealed unsafe class RuntimeParameterInfo : ParameterInfo
     {
         #region Static Members
-        internal static ParameterInfo[] GetParameters(IRuntimeMethodInfo method, MemberInfo member, Signature sig)
+        internal static ParameterInfo[] GetParameters(
+            IRuntimeMethodInfo method,
+            MemberInfo member,
+            Signature sig
+        )
         {
             Debug.Assert(method is RuntimeMethodInfo || method is RuntimeConstructorInfo);
 
             return GetParameters(method, member, sig, out _, fetchReturnParameter: false);
         }
 
-        internal static ParameterInfo GetReturnParameter(IRuntimeMethodInfo method, MemberInfo member, Signature sig)
+        internal static ParameterInfo GetReturnParameter(
+            IRuntimeMethodInfo method,
+            MemberInfo member,
+            Signature sig
+        )
         {
             Debug.Assert(method is RuntimeMethodInfo || method is RuntimeConstructorInfo);
 
-            GetParameters(method, member, sig, out ParameterInfo? returnParameter, fetchReturnParameter: true);
+            GetParameters(
+                method,
+                member,
+                sig,
+                out ParameterInfo? returnParameter,
+                fetchReturnParameter: true
+            );
             return returnParameter!;
         }
 
         private static ParameterInfo[] GetParameters(
-            IRuntimeMethodInfo methodHandle, MemberInfo member, Signature sig, out ParameterInfo? returnParameter, bool fetchReturnParameter)
+            IRuntimeMethodInfo methodHandle,
+            MemberInfo member,
+            Signature sig,
+            out ParameterInfo? returnParameter,
+            bool fetchReturnParameter
+        )
         {
             returnParameter = null;
             int sigArgCount = sig.Arguments.Length;
             ParameterInfo[] args =
-                fetchReturnParameter ? null! :
-                sigArgCount == 0 ? Array.Empty<ParameterInfo>() :
-                new ParameterInfo[sigArgCount];
+                fetchReturnParameter ? null!
+                : sigArgCount == 0 ? Array.Empty<ParameterInfo>()
+                : new ParameterInfo[sigArgCount];
 
             int tkMethodDef = RuntimeMethodHandle.GetMethodDef(methodHandle);
             int cParamDefs = 0;
@@ -43,7 +62,9 @@ namespace System.Reflection
             // are generated on the fly by the runtime.
             if (!MdToken.IsNullToken(tkMethodDef))
             {
-                MetadataImport scope = RuntimeTypeHandle.GetMetadataImport(RuntimeMethodHandle.GetDeclaringType(methodHandle));
+                MetadataImport scope = RuntimeTypeHandle.GetMetadataImport(
+                    RuntimeMethodHandle.GetDeclaringType(methodHandle)
+                );
 
                 scope.EnumParams(tkMethodDef, out MetadataEnumResult tkParamDefs);
 
@@ -51,7 +72,10 @@ namespace System.Reflection
 
                 // Not all parameters have tokens. Parameters may have no token
                 // if they have no name and no attributes.
-                if (cParamDefs > sigArgCount + 1 /* return type */)
+                if (
+                    cParamDefs
+                    > sigArgCount + 1 /* return type */
+                )
                     throw new BadImageFormatException(SR.BadImageFormat_ParameterSignatureMismatch);
 
                 for (int i = 0; i < cParamDefs; i++)
@@ -59,7 +83,11 @@ namespace System.Reflection
                     #region Populate ParameterInfos
                     int tkParamDef = tkParamDefs[i];
 
-                    scope.GetParamDefProps(tkParamDef, out int position, out ParameterAttributes attr);
+                    scope.GetParamDefProps(
+                        tkParamDef,
+                        out int position,
+                        out ParameterAttributes attr
+                    );
 
                     position--;
 
@@ -67,17 +95,35 @@ namespace System.Reflection
                     {
                         // more than one return parameter?
                         if (returnParameter != null)
-                            throw new BadImageFormatException(SR.BadImageFormat_ParameterSignatureMismatch);
+                            throw new BadImageFormatException(
+                                SR.BadImageFormat_ParameterSignatureMismatch
+                            );
 
-                        returnParameter = new RuntimeParameterInfo(sig, scope, tkParamDef, position, attr, member);
+                        returnParameter = new RuntimeParameterInfo(
+                            sig,
+                            scope,
+                            tkParamDef,
+                            position,
+                            attr,
+                            member
+                        );
                     }
                     else if (!fetchReturnParameter && position >= 0)
                     {
                         // position beyong sigArgCount?
                         if (position >= sigArgCount)
-                            throw new BadImageFormatException(SR.BadImageFormat_ParameterSignatureMismatch);
+                            throw new BadImageFormatException(
+                                SR.BadImageFormat_ParameterSignatureMismatch
+                            );
 
-                        args[position] = new RuntimeParameterInfo(sig, scope, tkParamDef, position, attr, member);
+                        args[position] = new RuntimeParameterInfo(
+                            sig,
+                            scope,
+                            tkParamDef,
+                            position,
+                            attr,
+                            member
+                        );
                     }
                     #endregion
                 }
@@ -86,7 +132,14 @@ namespace System.Reflection
             // Fill in empty ParameterInfos for those without tokens
             if (fetchReturnParameter)
             {
-                returnParameter ??= new RuntimeParameterInfo(sig, MetadataImport.EmptyImport, 0, -1, (ParameterAttributes)0, member);
+                returnParameter ??= new RuntimeParameterInfo(
+                    sig,
+                    MetadataImport.EmptyImport,
+                    0,
+                    -1,
+                    (ParameterAttributes)0,
+                    member
+                );
             }
             else
             {
@@ -97,7 +150,14 @@ namespace System.Reflection
                         if (args[i] != null)
                             continue;
 
-                        args[i] = new RuntimeParameterInfo(sig, MetadataImport.EmptyImport, 0, i, (ParameterAttributes)0, member);
+                        args[i] = new RuntimeParameterInfo(
+                            sig,
+                            MetadataImport.EmptyImport,
+                            0,
+                            i,
+                            (ParameterAttributes)0,
+                            member
+                        );
                     }
                 }
             }
@@ -167,22 +227,36 @@ namespace System.Reflection
 
             // Strictly speeking, property's don't contain parameter tokens
             // However we need this to make ca's work... oh well...
-            m_tkParamDef = MdToken.IsNullToken(accessor.MetadataToken) ? (int)MetadataTokenType.ParamDef : accessor.MetadataToken;
+            m_tkParamDef = MdToken.IsNullToken(accessor.MetadataToken)
+                ? (int)MetadataTokenType.ParamDef
+                : accessor.MetadataToken;
             m_scope = accessor.m_scope;
         }
 
         private RuntimeParameterInfo(
-            Signature signature, MetadataImport scope, int tkParamDef,
-            int position, ParameterAttributes attributes, MemberInfo member)
+            Signature signature,
+            MetadataImport scope,
+            int tkParamDef,
+            int position,
+            ParameterAttributes attributes,
+            MemberInfo member
+        )
         {
             Debug.Assert(member != null);
-            Debug.Assert(MdToken.IsNullToken(tkParamDef) == scope.Equals(MetadataImport.EmptyImport));
-            Debug.Assert(MdToken.IsNullToken(tkParamDef) || MdToken.IsTokenOfType(tkParamDef, MetadataTokenType.ParamDef));
+            Debug.Assert(
+                MdToken.IsNullToken(tkParamDef) == scope.Equals(MetadataImport.EmptyImport)
+            );
+            Debug.Assert(
+                MdToken.IsNullToken(tkParamDef)
+                    || MdToken.IsTokenOfType(tkParamDef, MetadataTokenType.ParamDef)
+            );
 
             PositionImpl = position;
             MemberImpl = member;
             m_signature = signature;
-            m_tkParamDef = MdToken.IsNullToken(tkParamDef) ? (int)MetadataTokenType.ParamDef : tkParamDef;
+            m_tkParamDef = MdToken.IsNullToken(tkParamDef)
+                ? (int)MetadataTokenType.ParamDef
+                : tkParamDef;
             m_scope = scope;
             AttrsImpl = attributes;
 
@@ -191,7 +265,12 @@ namespace System.Reflection
         }
 
         // ctor for no metadata MethodInfo in the DynamicMethod and RuntimeMethodInfo cases
-        internal RuntimeParameterInfo(MethodInfo owner, string? name, Type parameterType, int position)
+        internal RuntimeParameterInfo(
+            MethodInfo owner,
+            string? name,
+            Type parameterType,
+            int position
+        )
         {
             MemberImpl = owner;
             NameImpl = name;
@@ -291,7 +370,9 @@ namespace System.Reflection
 
         private object? GetDefaultValueFromCustomAttributeData()
         {
-            foreach (CustomAttributeData attributeData in CustomAttributeData.GetCustomAttributes(this))
+            foreach (
+                CustomAttributeData attributeData in CustomAttributeData.GetCustomAttributes(this)
+            )
             {
                 Type attributeType = attributeData.AttributeType;
                 if (attributeType == typeof(DecimalConstantAttribute))
@@ -338,7 +419,12 @@ namespace System.Reflection
             // Prioritize metadata constant over custom attribute constant
             #region Look for a default value in metadata
             // This will return DBNull.Value if no constant value is defined on m_tkParamDef in the metadata.
-            defaultValue = MdConstant.GetValue(m_scope, m_tkParamDef, ParameterType.TypeHandle, raw);
+            defaultValue = MdConstant.GetValue(
+                m_scope,
+                m_tkParamDef,
+                ParameterType.TypeHandle,
+                raw
+            );
 
             // If default value is not specified in metadata, look for it in custom attributes
             if (defaultValue == DBNull.Value)
@@ -350,7 +436,9 @@ namespace System.Reflection
                 //  If none is found, then we repeat the same process searching for DecimalConstantAttribute.
                 // IMPORTANT: Please note that there is a subtle difference in order custom attributes are inspected for
                 //  RawDefaultValue and DefaultValue.
-                defaultValue = raw ? GetDefaultValueFromCustomAttributeData() : GetDefaultValueFromCustomAttributes();
+                defaultValue = raw
+                    ? GetDefaultValueFromCustomAttributeData()
+                    : GetDefaultValueFromCustomAttributes();
 
                 if (defaultValue == DBNull.Value)
                 {
@@ -375,7 +463,8 @@ namespace System.Reflection
                 mid: GetConstructorArgument(args, 3),
                 hi: GetConstructorArgument(args, 2),
                 isNegative: ((byte)args[1].Value!) != 0,
-                scale: (byte)args[0].Value!);
+                scale: (byte)args[0].Value!
+            );
 
             static int GetConstructorArgument(IList<CustomAttributeTypedArgument> args, int index)
             {
@@ -427,20 +516,24 @@ namespace System.Reflection
 
         public override Type[] GetRequiredCustomModifiers()
         {
-            return m_signature is null ?
-                Type.EmptyTypes :
-                m_signature.GetCustomModifiers(PositionImpl + 1, true);
+            return m_signature is null
+                ? Type.EmptyTypes
+                : m_signature.GetCustomModifiers(PositionImpl + 1, true);
         }
 
         public override Type[] GetOptionalCustomModifiers()
         {
-            return m_signature is null ?
-                Type.EmptyTypes :
-                m_signature.GetCustomModifiers(PositionImpl + 1, false);
+            return m_signature is null
+                ? Type.EmptyTypes
+                : m_signature.GetCustomModifiers(PositionImpl + 1, false);
         }
 
         public override Type GetModifiedParameterType() =>
-            ModifiedType.Create(unmodifiedType: ParameterType, m_signature, parameterIndex: PositionImpl + 1);
+            ModifiedType.Create(
+                unmodifiedType: ParameterType,
+                m_signature,
+                parameterIndex: PositionImpl + 1
+            );
 
         #endregion
 

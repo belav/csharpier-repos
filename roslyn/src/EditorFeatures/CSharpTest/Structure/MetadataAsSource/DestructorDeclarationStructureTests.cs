@@ -12,20 +12,23 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource;
 
 [Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
-public class DestructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
+public class DestructorDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
 {
     protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new DestructorDeclarationStructureProvider();
+
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new DestructorDeclarationStructureProvider();
 
     [Fact]
     public async Task NoCommentsOrAttributes()
     {
         var code = """
-                class Goo
-                {
-                    $$~Goo();
-                }
-                """;
+            class Goo
+            {
+                $$~Goo();
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -34,31 +37,35 @@ public class DestructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStruc
     public async Task WithAttributes()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:[Bar]
-                    |}$$~Goo();|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:[Bar]
+                |}$$~Goo();|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task WithCommentsAndAttributes()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Bar]
-                    |}$$~Goo();|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Bar]
+                |}$$~Goo();|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 }

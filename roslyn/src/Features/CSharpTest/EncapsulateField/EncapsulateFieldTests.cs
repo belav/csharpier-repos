@@ -22,14 +22,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
     [Trait(Traits.Feature, Traits.Features.EncapsulateField)]
     public class EncapsulateFieldTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new EncapsulateFieldRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new EncapsulateFieldRefactoringProvider();
 
-        private OptionsCollection AllOptionsOff
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection AllOptionsOff =>
+            new OptionsCollection(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
         internal Task TestAllOptionsOffAsync(
@@ -39,12 +47,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             ParseOptions parseOptions = null,
             CompilationOptions compilationOptions = null,
             int index = 0,
-            OptionsCollection options = null)
+            OptionsCollection options = null
+        )
         {
             options ??= new OptionsCollection(GetLanguage());
             options.AddRange(AllOptionsOff);
 
-            return TestAsync(initialMarkup, expectedMarkup, parseOptions, compilationOptions, index, options, testHost: host);
+            return TestAsync(
+                initialMarkup,
+                expectedMarkup,
+                parseOptions,
+                compilationOptions,
+                index,
+                options,
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
@@ -214,13 +231,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected,
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
                 options: new OptionsCollection(GetLanguage())
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never, NotificationOption2.Silent }
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                        ExpressionBodyPreference.WhenPossible,
+                        NotificationOption2.Silent
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never,
+                        NotificationOption2.Silent
+                    },
                 },
-                testHost: host);
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
@@ -251,12 +279,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected,
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
                 options: new OptionsCollection(GetLanguage())
                 {
-                    {  CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                    },
                 },
-                testHost: host);
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
@@ -665,7 +699,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
         }
 
         [Theory, CombinatorialData]
-        public async Task EncapsulateSinglePublicFieldInMultipleVariableDeclarationAndUpdateReferences(TestHost host)
+        public async Task EncapsulateSinglePublicFieldInMultipleVariableDeclarationAndUpdateReferences(
+            TestHost host
+        )
         {
             var text = """
                 class goo
@@ -709,7 +745,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected, index: 0);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/694057"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/694057"),
+            CombinatorialData
+        ]
         public async Task ConstFieldNoGetter(TestHost host)
         {
             var text = """
@@ -736,7 +776,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected, index: 0);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/694276"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/694276"),
+            CombinatorialData
+        ]
         public async Task EncapsulateFieldNamedValue(TestHost host)
         {
             var text = """
@@ -763,7 +807,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected, index: 0);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/694276"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/694276"),
+            CombinatorialData
+        ]
         public async Task PublicFieldNamed__(TestHost host)
         {
             var text = """
@@ -795,7 +843,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected, index: 0);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/695046"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/695046"),
+            CombinatorialData
+        ]
         public async Task AvailableNotJustOnVariableName(TestHost host)
         {
             var text = """
@@ -808,7 +860,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestActionCountAsync(text, 2, new TestParameters(testHost: host));
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/705898"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/705898"),
+            CombinatorialData
+        ]
         public async Task CopyFieldAccessibility(TestHost host)
         {
             var text = """
@@ -902,10 +958,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                     </Project>
                 </Workspace>
                 """;
-            await TestAllOptionsOffAsync(host, text, expected, new CodeAnalysis.CSharp.CSharpParseOptions(), TestOptions.ReleaseExe);
+            await TestAllOptionsOffAsync(
+                host,
+                text,
+                expected,
+                new CodeAnalysis.CSharp.CSharpParseOptions(),
+                TestOptions.ReleaseExe
+            );
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713269"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713269"),
+            CombinatorialData
+        ]
         public async Task PreserveUnsafe(TestHost host)
         {
             var text = """
@@ -937,7 +1003,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected, index: 0);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713240"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713240"),
+            CombinatorialData
+        ]
         public async Task ConsiderReturnTypeAccessibility(TestHost host)
         {
             var text = """
@@ -979,7 +1049,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected, index: 0);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713191"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713191"),
+            CombinatorialData
+        ]
         public async Task DoNotReferToReadOnlyPropertyInConstructor(TestHost host)
         {
             var text = """
@@ -1016,7 +1090,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected, index: 0);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713191"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713191"),
+            CombinatorialData
+        ]
         public async Task DoNotReferToStaticReadOnlyPropertyInConstructor(TestHost host)
         {
             var text = """
@@ -1053,7 +1131,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected, index: 0);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/765959"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/765959"),
+            CombinatorialData
+        ]
         public async Task GenerateInTheCorrectPart(TestHost host)
         {
             var text = """
@@ -1086,7 +1168,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected);
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/829178"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/829178"),
+            CombinatorialData
+        ]
         public async Task ErrorTolerance(TestHost host)
         {
             var text = """
@@ -1099,7 +1185,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestActionCountAsync(text, count: 2, new TestParameters(testHost: host));
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/834072"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/834072"),
+            CombinatorialData
+        ]
         public async Task DuplicateFieldErrorTolerance(TestHost host)
         {
             var text = """
@@ -1113,7 +1203,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestActionCountAsync(text, count: 2, new TestParameters(testHost: host));
         }
 
-        [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/862517"), CombinatorialData]
+        [
+            Theory,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/862517"),
+            CombinatorialData
+        ]
         public async Task Trivia(TestHost host)
         {
             var text = """
@@ -1154,11 +1248,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(host, text, expected);
         }
 
-        [Theory, WorkItem(1096007, "https://github.com/dotnet/roslyn/issues/282"), CombinatorialData]
+        [
+            Theory,
+            WorkItem(1096007, "https://github.com/dotnet/roslyn/issues/282"),
+            CombinatorialData
+        ]
         public async Task DoNotEncapsulateOutsideTypeDeclaration(TestHost host)
         {
             await TestMissingInRegularAndScriptAsync(
-@"var [|x|] = 1;", new TestParameters(testHost: host));
+                @"var [|x|] = 1;",
+                new TestParameters(testHost: host)
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1166,7 +1266,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                 {
                     var [|x|] = 1;
                 }
-                """, new TestParameters(testHost: host));
+                """,
+                new TestParameters(testHost: host)
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1174,15 +1276,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                 {
                     [|x|] = 1;
                 }
-                """, new TestParameters(testHost: host));
+                """,
+                new TestParameters(testHost: host)
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/5524"), CombinatorialData]
-        public async Task AlwaysUseEnglishUSCultureWhenFixingVariableNames_TurkishDottedI(TestHost host)
+        public async Task AlwaysUseEnglishUSCultureWhenFixingVariableNames_TurkishDottedI(
+            TestHost host
+        )
         {
             using (new CultureContext(new CultureInfo("tr-TR", useUserOverride: false)))
             {
-                await TestAllOptionsOffAsync(host,
+                await TestAllOptionsOffAsync(
+                    host,
                     """
                     class C
                     {
@@ -1207,16 +1314,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                             }
                         }
                     }
-                    """);
+                    """
+                );
             }
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/5524"), CombinatorialData]
-        public async Task AlwaysUseEnglishUSCultureWhenFixingVariableNames_TurkishUndottedI(TestHost host)
+        public async Task AlwaysUseEnglishUSCultureWhenFixingVariableNames_TurkishUndottedI(
+            TestHost host
+        )
         {
             using (new CultureContext(new CultureInfo("tr-TR", useUserOverride: false)))
             {
-                await TestAllOptionsOffAsync(host,
+                await TestAllOptionsOffAsync(
+                    host,
                     """
                     class C
                     {
@@ -1241,7 +1352,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                             }
                         }
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -1250,7 +1362,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
         {
             using (new CultureContext(new CultureInfo("ar-EG", useUserOverride: false)))
             {
-                await TestAllOptionsOffAsync(host,
+                await TestAllOptionsOffAsync(
+                    host,
                     """
                     class C
                     {
@@ -1275,7 +1388,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                             }
                         }
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -1284,7 +1398,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
         {
             using (new CultureContext(new CultureInfo("es-ES", useUserOverride: false)))
             {
-                await TestAllOptionsOffAsync(host,
+                await TestAllOptionsOffAsync(
+                    host,
                     """
                     class C
                     {
@@ -1309,7 +1424,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                             }
                         }
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -1318,7 +1434,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
         {
             using (new CultureContext(new CultureInfo("el-GR", useUserOverride: false)))
             {
-                await TestAllOptionsOffAsync(host,
+                await TestAllOptionsOffAsync(
+                    host,
                     """
                     class C
                     {
@@ -1343,19 +1460,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                             }
                         }
                     }
-                    """);
+                    """
+                );
             }
         }
 
         [Theory, CombinatorialData]
         public async Task TestEncapsulateEscapedIdentifier(TestHost host)
         {
-            await TestAllOptionsOffAsync(host, """
+            await TestAllOptionsOffAsync(
+                host,
+                """
                 class C
                 {
                     int [|@class|];
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int @class;
@@ -1373,18 +1494,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestEncapsulateEscapedIdentifierAndQualifiedAccess(TestHost host)
         {
-            await TestAllOptionsOffAsync(host, """
+            await TestAllOptionsOffAsync(
+                host,
+                """
                 class C
                 {
                     int [|@class|];
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int @class;
@@ -1402,13 +1527,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                         }
                     }
                 }
-                """, options: Option(CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Error));
+                """,
+                options: Option(
+                    CodeStyleOptions2.QualifyFieldAccess,
+                    true,
+                    NotificationOption2.Error
+                )
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/7090"), CombinatorialData]
         public async Task ApplyCurrentThisPrefixStyle(TestHost host)
         {
-            await TestAllOptionsOffAsync(host,
+            await TestAllOptionsOffAsync(
+                host,
                 """
                 class C
                 {
@@ -1433,7 +1565,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                         }
                     }
                 }
-                """, options: Option(CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Error));
+                """,
+                options: Option(
+                    CodeStyleOptions2.QualifyFieldAccess,
+                    true,
+                    NotificationOption2.Error
+                )
+            );
         }
 
         [Theory, CombinatorialData, CompilerTrait(CompilerFeature.Tuples)]

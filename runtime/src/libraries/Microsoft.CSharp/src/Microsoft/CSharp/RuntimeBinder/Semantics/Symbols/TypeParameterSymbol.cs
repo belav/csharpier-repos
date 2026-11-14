@@ -18,7 +18,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private TypeArray _pBounds;
 
         public bool Covariant;
-        public bool Invariant { get { return !Covariant && !Contravariant; } }
+        public bool Invariant
+        {
+            get { return !Covariant && !Contravariant; }
+        }
         public bool Contravariant;
 
         public void SetTypeParameterType(TypeParameterType pType)

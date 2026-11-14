@@ -2,5 +2,5 @@
 
 public unsafe struct ExternalStruct
 {
-    public fixed double double_buffer [4];
+    public fixed double double_buffer[4];
 }

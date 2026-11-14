@@ -31,31 +31,55 @@ namespace System.ServiceModel.Channels
         {
             if (buffer.Array == null)
             {
-                throw FxTrace.Exception.ArgumentNull("buffer.Array", SR.ArgumentPropertyShouldNotBeNullError("buffer.Array"));
+                throw FxTrace.Exception.ArgumentNull(
+                    "buffer.Array",
+                    SR.ArgumentPropertyShouldNotBeNullError("buffer.Array")
+                );
             }
 
-            ByteStreamBufferedMessageData data = new ByteStreamBufferedMessageData(buffer, bufferManager);
+            ByteStreamBufferedMessageData data = new ByteStreamBufferedMessageData(
+                buffer,
+                bufferManager
+            );
             return CreateMessage(data, XmlDictionaryReaderQuotas.Max, true); // moveBodyReaderToContent is true, for consistency with the other implementations of Message (including the Message base class itself)
         }
 
-        internal static Message CreateMessage(Stream stream, XmlDictionaryReaderQuotas quotas, bool moveBodyReaderToContent)
+        internal static Message CreateMessage(
+            Stream stream,
+            XmlDictionaryReaderQuotas quotas,
+            bool moveBodyReaderToContent
+        )
         {
             return new InternalByteStreamMessage(stream, quotas, moveBodyReaderToContent);
         }
 
-        internal static Message CreateMessage(HttpRequestMessage httpRequestMessage, XmlDictionaryReaderQuotas quotas)
+        internal static Message CreateMessage(
+            HttpRequestMessage httpRequestMessage,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return new InternalByteStreamMessage(httpRequestMessage, quotas, true); // moveBodyReaderToContent is true, for consistency with the other implementations of Message (including the Message base class itself)
         }
 
-        internal static Message CreateMessage(HttpResponseMessage httpResponseMessage, XmlDictionaryReaderQuotas quotas)
+        internal static Message CreateMessage(
+            HttpResponseMessage httpResponseMessage,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return new InternalByteStreamMessage(httpResponseMessage, quotas, true); // moveBodyReaderToContent is true, for consistency with the other implementations of Message (including the Message base class itself)
         }
 
-        internal static Message CreateMessage(ByteStreamBufferedMessageData bufferedMessageData, XmlDictionaryReaderQuotas quotas, bool moveBodyReaderToContent)
+        internal static Message CreateMessage(
+            ByteStreamBufferedMessageData bufferedMessageData,
+            XmlDictionaryReaderQuotas quotas,
+            bool moveBodyReaderToContent
+        )
         {
-            return new InternalByteStreamMessage(bufferedMessageData, quotas, moveBodyReaderToContent);
+            return new InternalByteStreamMessage(
+                bufferedMessageData,
+                quotas,
+                moveBodyReaderToContent
+            );
         }
 
         internal static bool IsInternalByteStreamMessage(Message message)
@@ -81,27 +105,31 @@ namespace System.ServiceModel.Channels
             /// In .net 4.0:
             /// - WebMessageEncodingBindingElement uses a raw encoder, different than ByteStreamMessageEncoder.
             /// - ByteStreamMessageEncodingBindingElement uses the ByteStreamMessageEncoder.
-            /// - When the WebMessageEncodingBindingElement is used, the Message.GetReaderAtBodyContents() method returns 
+            /// - When the WebMessageEncodingBindingElement is used, the Message.GetReaderAtBodyContents() method returns
             ///   an XmlDictionaryReader positioned initially on content (the root element of the xml); that's because MoveToContent() is called
-            ///   on the reader before it's returned. 
-            /// - When the ByteStreamMessageEncodingBindingElement is used, the Message.GetReaderAtBodyContents() method returns an 
+            ///   on the reader before it's returned.
+            /// - When the ByteStreamMessageEncodingBindingElement is used, the Message.GetReaderAtBodyContents() method returns an
             ///   XmlDictionaryReader positioned initially on None (just before the root element).
-            /// 
+            ///
             /// In .net 4.5:
             /// - Both WebMessageEncodingBindingElement and ByteStreamMessageEncodingBindingElement use the ByteStreamMessageEncoder.
             /// - So we need the ByteStreamMessageEncoder to call MoveToContent() when used by WebMessageEncodingBindingElement, and not do so
             ///   when used by the ByteStreamMessageEncodingBindingElement.
             /// - Preserving the compatibility with 4.0 is important especially because 4.5 is an in-place upgrade of 4.0.
-            /// 
+            ///
             /// See 252277 @ CSDMain for other info.
             /// </remarks>
             bool moveBodyReaderToContent;
 
-            public InternalByteStreamMessage(ByteStreamBufferedMessageData bufferedMessageData, XmlDictionaryReaderQuotas quotas, bool moveBodyReaderToContent)
+            public InternalByteStreamMessage(
+                ByteStreamBufferedMessageData bufferedMessageData,
+                XmlDictionaryReaderQuotas quotas,
+                bool moveBodyReaderToContent
+            )
             {
                 // Assign both writer and reader here so that we can CreateBufferedCopy without the need to
                 // abstract between a streamed or buffered message. We're protected here by the state on Message
-                // preventing both a read/write. 
+                // preventing both a read/write.
 
                 quotas = ByteStreamMessageUtility.EnsureQuotas(quotas);
 
@@ -112,11 +140,15 @@ namespace System.ServiceModel.Channels
                 this.moveBodyReaderToContent = moveBodyReaderToContent;
             }
 
-            public InternalByteStreamMessage(Stream stream, XmlDictionaryReaderQuotas quotas, bool moveBodyReaderToContent)
+            public InternalByteStreamMessage(
+                Stream stream,
+                XmlDictionaryReaderQuotas quotas,
+                bool moveBodyReaderToContent
+            )
             {
                 // Assign both writer and reader here so that we can CreateBufferedCopy without the need to
                 // abstract between a streamed or buffered message. We're protected here by the state on Message
-                // preventing both a read/write on the same stream. 
+                // preventing both a read/write on the same stream.
 
                 quotas = ByteStreamMessageUtility.EnsureQuotas(quotas);
 
@@ -127,13 +159,20 @@ namespace System.ServiceModel.Channels
                 this.moveBodyReaderToContent = moveBodyReaderToContent;
             }
 
-            public InternalByteStreamMessage(HttpRequestMessage httpRequestMessage, XmlDictionaryReaderQuotas quotas, bool moveBodyReaderToContent)
+            public InternalByteStreamMessage(
+                HttpRequestMessage httpRequestMessage,
+                XmlDictionaryReaderQuotas quotas,
+                bool moveBodyReaderToContent
+            )
             {
-                Fx.Assert(httpRequestMessage != null, "The 'httpRequestMessage' parameter should not be null.");
+                Fx.Assert(
+                    httpRequestMessage != null,
+                    "The 'httpRequestMessage' parameter should not be null."
+                );
 
                 // Assign both writer and reader here so that we can CreateBufferedCopy without the need to
                 // abstract between a streamed or buffered message. We're protected here by the state on Message
-                // preventing both a read/write on the same stream. 
+                // preventing both a read/write on the same stream.
 
                 quotas = ByteStreamMessageUtility.EnsureQuotas(quotas);
 
@@ -144,13 +183,20 @@ namespace System.ServiceModel.Channels
                 this.moveBodyReaderToContent = moveBodyReaderToContent;
             }
 
-            public InternalByteStreamMessage(HttpResponseMessage httpResponseMessage, XmlDictionaryReaderQuotas quotas, bool moveBodyReaderToContent)
+            public InternalByteStreamMessage(
+                HttpResponseMessage httpResponseMessage,
+                XmlDictionaryReaderQuotas quotas,
+                bool moveBodyReaderToContent
+            )
             {
-                Fx.Assert(httpResponseMessage != null, "The 'httpResponseMessage' parameter should not be null.");
+                Fx.Assert(
+                    httpResponseMessage != null,
+                    "The 'httpResponseMessage' parameter should not be null."
+                );
 
                 // Assign both writer and reader here so that we can CreateBufferedCopy without the need to
                 // abstract between a streamed or buffered message. We're protected here by the state on Message
-                // preventing both a read/write on the same stream. 
+                // preventing both a read/write on the same stream.
 
                 quotas = ByteStreamMessageUtility.EnsureQuotas(quotas);
 
@@ -161,7 +207,13 @@ namespace System.ServiceModel.Channels
                 this.moveBodyReaderToContent = moveBodyReaderToContent;
             }
 
-            InternalByteStreamMessage(ByteStreamBufferedMessageData messageData, MessageHeaders headers, MessageProperties properties, XmlDictionaryReaderQuotas quotas, bool moveBodyReaderToContent)
+            InternalByteStreamMessage(
+                ByteStreamBufferedMessageData messageData,
+                MessageHeaders headers,
+                MessageProperties properties,
+                XmlDictionaryReaderQuotas quotas,
+                bool moveBodyReaderToContent
+            )
             {
                 this.headers = new MessageHeaders(headers);
                 this.properties = new MessageProperties(properties);
@@ -309,17 +361,24 @@ namespace System.ServiceModel.Channels
                 BufferedBodyWriter bufferedBodyWriter;
                 if (this.bodyWriter.IsBuffered)
                 {
-                    // Can hand this off in buffered case without making a new one. 
+                    // Can hand this off in buffered case without making a new one.
                     bufferedBodyWriter = (BufferedBodyWriter)this.bodyWriter;
                 }
                 else
                 {
-                    bufferedBodyWriter = (BufferedBodyWriter)this.bodyWriter.CreateBufferedCopy(maxBufferSize);
+                    bufferedBodyWriter = (BufferedBodyWriter)
+                        this.bodyWriter.CreateBufferedCopy(maxBufferSize);
                 }
 
-                // Protected by Message state to be called only once. 
+                // Protected by Message state to be called only once.
                 this.bodyWriter = null;
-                return new ByteStreamMessageBuffer(bufferedBodyWriter.MessageData, this.headers, this.properties, this.reader.Quotas, this.moveBodyReaderToContent);
+                return new ByteStreamMessageBuffer(
+                    bufferedBodyWriter.MessageData,
+                    this.headers,
+                    this.properties,
+                    this.reader.Quotas,
+                    this.moveBodyReaderToContent
+                );
             }
 
             protected override T OnGetBody<T>(XmlDictionaryReader reader)
@@ -344,7 +403,10 @@ namespace System.ServiceModel.Channels
                     return (T)(object)buffer;
                 }
                 throw FxTrace.Exception.AsError(
-                    new NotSupportedException(SR.ByteStreamMessageGetTypeNotSupported(typeT.FullName)));
+                    new NotSupportedException(
+                        SR.ByteStreamMessageGetTypeNotSupported(typeT.FullName)
+                    )
+                );
             }
 
             protected override XmlDictionaryReader OnGetReaderAtBodyContents()
@@ -360,7 +422,11 @@ namespace System.ServiceModel.Channels
                 return r;
             }
 
-            protected override IAsyncResult OnBeginWriteMessage(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginWriteMessage(
+                XmlDictionaryWriter writer,
+                AsyncCallback callback,
+                object state
+            )
             {
                 WriteMessagePreamble(writer);
                 return new OnWriteMessageAsyncResult(writer, this, callback, state);
@@ -376,7 +442,11 @@ namespace System.ServiceModel.Channels
                 this.bodyWriter.WriteBodyContents(writer);
             }
 
-            protected override IAsyncResult OnBeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginWriteBodyContents(
+                XmlDictionaryWriter writer,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.bodyWriter.BeginWriteBodyContents(writer, callback, state);
             }
@@ -391,13 +461,22 @@ namespace System.ServiceModel.Channels
                 InternalByteStreamMessage message;
                 XmlDictionaryWriter writer;
 
-                public OnWriteMessageAsyncResult(XmlDictionaryWriter writer, InternalByteStreamMessage message, AsyncCallback callback, object state)
+                public OnWriteMessageAsyncResult(
+                    XmlDictionaryWriter writer,
+                    InternalByteStreamMessage message,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.message = message;
                     this.writer = writer;
 
-                    IAsyncResult result = this.message.OnBeginWriteBodyContents(this.writer, PrepareAsyncCompletion(HandleWriteBodyContents), this);
+                    IAsyncResult result = this.message.OnBeginWriteBodyContents(
+                        this.writer,
+                        PrepareAsyncCompletion(HandleWriteBodyContents),
+                        this
+                    );
                     bool completeSelf = SyncContinue(result);
 
                     if (completeSelf)
@@ -408,7 +487,8 @@ namespace System.ServiceModel.Channels
 
                 static bool HandleWriteBodyContents(IAsyncResult result)
                 {
-                    OnWriteMessageAsyncResult thisPtr = (OnWriteMessageAsyncResult)result.AsyncState;
+                    OnWriteMessageAsyncResult thisPtr = (OnWriteMessageAsyncResult)
+                        result.AsyncState;
                     thisPtr.message.OnEndWriteBodyContents(result);
                     thisPtr.message.WriteMessagePostamble(thisPtr.writer);
                     return true;
@@ -419,7 +499,7 @@ namespace System.ServiceModel.Channels
                     AsyncResult.End<OnWriteMessageAsyncResult>(result);
                 }
             }
-            
+
             class BufferedBodyWriter : BodyWriter
             {
                 ByteStreamBufferedMessageData bufferedMessageData;
@@ -437,7 +517,7 @@ namespace System.ServiceModel.Channels
 
                 protected override BodyWriter OnCreateBufferedCopy(int maxBufferSize)
                 {
-                    // Never called because when copying a Buffered message, we simply hand off the existing BodyWriter 
+                    // Never called because when copying a Buffered message, we simply hand off the existing BodyWriter
                     // to the new message.
                     Fx.Assert(false, "This is never called");
                     return null;
@@ -445,8 +525,15 @@ namespace System.ServiceModel.Channels
 
                 protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
                 {
-                    writer.WriteStartElement(ByteStreamMessageUtility.StreamElementName, string.Empty);
-                    writer.WriteBase64(this.bufferedMessageData.Buffer.Array, this.bufferedMessageData.Buffer.Offset, this.bufferedMessageData.Buffer.Count);
+                    writer.WriteStartElement(
+                        ByteStreamMessageUtility.StreamElementName,
+                        string.Empty
+                    );
+                    writer.WriteBase64(
+                        this.bufferedMessageData.Buffer.Array,
+                        this.bufferedMessageData.Buffer.Offset,
+                        this.bufferedMessageData.Buffer.Count
+                    );
                     writer.WriteEndElement();
                 }
             }
@@ -454,9 +541,7 @@ namespace System.ServiceModel.Channels
             abstract class StreamedBodyWriter : BodyWriter
             {
                 private StreamedBodyWriter()
-                    : base(false)
-                {
-                }
+                    : base(false) { }
 
                 public static StreamedBodyWriter Create(Stream stream)
                 {
@@ -476,15 +561,28 @@ namespace System.ServiceModel.Channels
                 // OnCreateBufferedCopy / OnWriteBodyContents can only be called once - protected by state on Message (either copied or written once)
                 protected override BodyWriter OnCreateBufferedCopy(int maxBufferSize)
                 {
-                    using (BufferManagerOutputStream bufferedStream = new BufferManagerOutputStream(SR.MaxReceivedMessageSizeExceeded("{0}"), maxBufferSize))
+                    using (
+                        BufferManagerOutputStream bufferedStream = new BufferManagerOutputStream(
+                            SR.MaxReceivedMessageSizeExceeded("{0}"),
+                            maxBufferSize
+                        )
+                    )
                     {
-                        using (XmlDictionaryWriter writer = new XmlByteStreamWriter(bufferedStream, true))
+                        using (
+                            XmlDictionaryWriter writer = new XmlByteStreamWriter(
+                                bufferedStream,
+                                true
+                            )
+                        )
                         {
                             OnWriteBodyContents(writer);
                             writer.Flush();
                             int size;
                             byte[] bytesArray = bufferedStream.ToArray(out size);
-                            ByteStreamBufferedMessageData bufferedMessageData = new ByteStreamBufferedMessageData(new ArraySegment<byte>(bytesArray, 0, size));
+                            ByteStreamBufferedMessageData bufferedMessageData =
+                                new ByteStreamBufferedMessageData(
+                                    new ArraySegment<byte>(bytesArray, 0, size)
+                                );
                             return new BufferedBodyWriter(bufferedMessageData);
                         }
                     }
@@ -493,14 +591,26 @@ namespace System.ServiceModel.Channels
                 // OnCreateBufferedCopy / OnWriteBodyContents can only be called once - protected by state on Message (either copied or written once)
                 protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
                 {
-                    writer.WriteStartElement(ByteStreamMessageUtility.StreamElementName, string.Empty);
+                    writer.WriteStartElement(
+                        ByteStreamMessageUtility.StreamElementName,
+                        string.Empty
+                    );
                     writer.WriteValue(new ByteStreamStreamProvider(this.GetStream()));
                     writer.WriteEndElement();
                 }
 
-                protected override IAsyncResult OnBeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+                protected override IAsyncResult OnBeginWriteBodyContents(
+                    XmlDictionaryWriter writer,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
-                    return new WriteBodyContentsAsyncResult(writer, this.GetStream(), callback, state);
+                    return new WriteBodyContentsAsyncResult(
+                        writer,
+                        this.GetStream(),
+                        callback,
+                        state
+                    );
                 }
 
                 protected override void OnEndWriteBodyContents(IAsyncResult result)
@@ -534,13 +644,23 @@ namespace System.ServiceModel.Channels
                 {
                     XmlDictionaryWriter writer;
 
-                    public WriteBodyContentsAsyncResult(XmlDictionaryWriter writer, Stream stream, AsyncCallback callback, object state)
+                    public WriteBodyContentsAsyncResult(
+                        XmlDictionaryWriter writer,
+                        Stream stream,
+                        AsyncCallback callback,
+                        object state
+                    )
                         : base(callback, state)
                     {
                         this.writer = writer;
 
-                        this.writer.WriteStartElement(ByteStreamMessageUtility.StreamElementName, string.Empty);
-                        IAsyncResult result = this.writer.WriteValueAsync(new ByteStreamStreamProvider(stream)).AsAsyncResult(PrepareAsyncCompletion(HandleWriteBodyContents), this);
+                        this.writer.WriteStartElement(
+                            ByteStreamMessageUtility.StreamElementName,
+                            string.Empty
+                        );
+                        IAsyncResult result = this
+                            .writer.WriteValueAsync(new ByteStreamStreamProvider(stream))
+                            .AsAsyncResult(PrepareAsyncCompletion(HandleWriteBodyContents), this);
                         bool completeSelf = SyncContinue(result);
 
                         // Note:  The current task implementation hard codes the "IAsyncResult.CompletedSynchronously" property to false, so this fast path will never
@@ -560,7 +680,8 @@ namespace System.ServiceModel.Channels
                             t.GetAwaiter().GetResult();
                         }
 
-                        WriteBodyContentsAsyncResult thisPtr = (WriteBodyContentsAsyncResult)result.AsyncState;
+                        WriteBodyContentsAsyncResult thisPtr = (WriteBodyContentsAsyncResult)
+                            result.AsyncState;
                         thisPtr.writer.WriteEndElement();
                         return true;
                     }
@@ -577,7 +698,6 @@ namespace System.ServiceModel.Channels
 
                     public StreamBasedStreamedBodyWriter(Stream stream)
                     {
-
                         this.stream = stream;
                     }
 
@@ -591,9 +711,14 @@ namespace System.ServiceModel.Channels
                 {
                     private HttpRequestMessage httpRequestMessage;
 
-                    public HttpRequestMessageStreamedBodyWriter(HttpRequestMessage httpRequestMessage)
+                    public HttpRequestMessageStreamedBodyWriter(
+                        HttpRequestMessage httpRequestMessage
+                    )
                     {
-                        Fx.Assert(httpRequestMessage != null, "The 'httpRequestMessage' parameter should not be null.");
+                        Fx.Assert(
+                            httpRequestMessage != null,
+                            "The 'httpRequestMessage' parameter should not be null."
+                        );
 
                         this.httpRequestMessage = httpRequestMessage;
                     }
@@ -625,9 +750,14 @@ namespace System.ServiceModel.Channels
                 {
                     private HttpResponseMessage httpResponseMessage;
 
-                    public HttpResponseMessageStreamedBodyWriter(HttpResponseMessage httpResponseMessage)
+                    public HttpResponseMessageStreamedBodyWriter(
+                        HttpResponseMessage httpResponseMessage
+                    )
                     {
-                        Fx.Assert(httpResponseMessage != null, "The 'httpResponseMessage' parameter should not be null.");
+                        Fx.Assert(
+                            httpResponseMessage != null,
+                            "The 'httpResponseMessage' parameter should not be null."
+                        );
 
                         this.httpResponseMessage = httpResponseMessage;
                     }
@@ -666,7 +796,13 @@ namespace System.ServiceModel.Channels
                 bool moveBodyReaderToContent;
                 object thisLock = new object();
 
-                public ByteStreamMessageBuffer(ByteStreamBufferedMessageData messageData, MessageHeaders headers, MessageProperties properties, XmlDictionaryReaderQuotas quotas, bool moveBodyReaderToContent)
+                public ByteStreamMessageBuffer(
+                    ByteStreamBufferedMessageData messageData,
+                    MessageHeaders headers,
+                    MessageProperties properties,
+                    XmlDictionaryReaderQuotas quotas,
+                    bool moveBodyReaderToContent
+                )
                     : base()
                 {
                     this.messageData = messageData;
@@ -676,7 +812,7 @@ namespace System.ServiceModel.Channels
                     quotas.CopyTo(this.quotas);
                     this.moveBodyReaderToContent = moveBodyReaderToContent;
 
-                    this.messageData.Open();                
+                    this.messageData.Open();
                 }
 
                 public override int BufferSize
@@ -718,7 +854,13 @@ namespace System.ServiceModel.Channels
                             throw FxTrace.Exception.ObjectDisposed(SR.ObjectDisposed("message"));
                         }
 
-                        return new InternalByteStreamMessage(this.messageData, this.headers, this.properties, this.quotas, this.moveBodyReaderToContent);
+                        return new InternalByteStreamMessage(
+                            this.messageData,
+                            this.headers,
+                            this.properties,
+                            this.quotas,
+                            this.moveBodyReaderToContent
+                        );
                     }
                 }
             }

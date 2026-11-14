@@ -4,16 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.WebSockets {
+namespace System.Web.WebSockets
+{
     using System;
     using System.Threading.Tasks;
 
     // Represents a WebSocket that can be asynchronously aborted.
 
-    internal interface IAsyncAbortableWebSocket {
-
+    internal interface IAsyncAbortableWebSocket
+    {
         // Asynchronously aborts a WebSocket.
         Task AbortAsync();
-
     }
 }

@@ -47,7 +47,8 @@ internal class QueueItem<TRequest, TResponse, TRequestContext> : IQueueItem<TReq
         IMethodHandler handler,
         ILspServices lspServices,
         ILspLogger logger,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // Set the tcs state to cancelled if the token gets cancelled outside of our callback (for example the server shutting down).
         cancellationToken.Register(() => _completionSource.TrySetCanceled(cancellationToken));
@@ -70,7 +71,8 @@ internal class QueueItem<TRequest, TResponse, TRequestContext> : IQueueItem<TReq
         IMethodHandler handler,
         ILspServices lspServices,
         ILspLogger logger,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var queueItem = new QueueItem<TRequest, TResponse, TRequestContext>(
             mutatesSolutionState,
@@ -80,16 +82,23 @@ internal class QueueItem<TRequest, TResponse, TRequestContext> : IQueueItem<TReq
             handler,
             lspServices,
             logger,
-            cancellationToken);
+            cancellationToken
+        );
 
         return (queueItem, queueItem._completionSource.Task);
     }
 
-    public async Task<TRequestContext?> CreateRequestContextAsync(CancellationToken cancellationToken)
+    public async Task<TRequestContext?> CreateRequestContextAsync(
+        CancellationToken cancellationToken
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
-        var requestContextFactory = LspServices.GetRequiredService<IRequestContextFactory<TRequestContext>>();
-        var context = await requestContextFactory.CreateRequestContextAsync(this, _request, cancellationToken).ConfigureAwait(false);
+        var requestContextFactory = LspServices.GetRequiredService<
+            IRequestContextFactory<TRequestContext>
+        >();
+        var context = await requestContextFactory
+            .CreateRequestContextAsync(this, _request, cancellationToken)
+            .ConfigureAwait(false);
         return context;
     }
 
@@ -100,7 +109,10 @@ internal class QueueItem<TRequest, TResponse, TRequestContext> : IQueueItem<TReq
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>The result of the request.</returns>
-    public async Task StartRequestAsync(TRequestContext? context, CancellationToken cancellationToken)
+    public async Task StartRequestAsync(
+        TRequestContext? context,
+        CancellationToken cancellationToken
+    )
     {
         _logger.LogStartContext($"{MethodName}");
         try
@@ -117,37 +129,59 @@ internal class QueueItem<TRequest, TResponse, TRequestContext> : IQueueItem<TReq
                 // If that turns out to be the case, we could defer to the individual handler to decide
                 // what to do.
                 _logger.LogWarning($"Could not get request context for {MethodName}");
-                _completionSource.TrySetException(new InvalidOperationException($"Unable to create request context for {MethodName}"));
+                _completionSource.TrySetException(
+                    new InvalidOperationException(
+                        $"Unable to create request context for {MethodName}"
+                    )
+                );
             }
-            else if (_handler is IRequestHandler<TRequest, TResponse, TRequestContext> requestHandler)
+            else if (
+                _handler is IRequestHandler<TRequest, TResponse, TRequestContext> requestHandler
+            )
             {
-                var result = await requestHandler.HandleRequestAsync(_request, context, cancellationToken).ConfigureAwait(false);
+                var result = await requestHandler
+                    .HandleRequestAsync(_request, context, cancellationToken)
+                    .ConfigureAwait(false);
 
                 _completionSource.TrySetResult(result);
             }
-            else if (_handler is IRequestHandler<TResponse, TRequestContext> parameterlessRequestHandler)
+            else if (
+                _handler is IRequestHandler<TResponse, TRequestContext> parameterlessRequestHandler
+            )
             {
-                var result = await parameterlessRequestHandler.HandleRequestAsync(context, cancellationToken).ConfigureAwait(false);
+                var result = await parameterlessRequestHandler
+                    .HandleRequestAsync(context, cancellationToken)
+                    .ConfigureAwait(false);
 
                 _completionSource.TrySetResult(result);
             }
-            else if (_handler is INotificationHandler<TRequest, TRequestContext> notificationHandler)
+            else if (
+                _handler is INotificationHandler<TRequest, TRequestContext> notificationHandler
+            )
             {
-                await notificationHandler.HandleNotificationAsync(_request, context, cancellationToken).ConfigureAwait(false);
+                await notificationHandler
+                    .HandleNotificationAsync(_request, context, cancellationToken)
+                    .ConfigureAwait(false);
 
                 // We know that the return type of <see cref="INotificationHandler{TRequestType, RequestContextType}"/> will always be <see cref="VoidReturn" /> even if the compiler doesn't.
                 _completionSource.TrySetResult((TResponse)(object)NoValue.Instance);
             }
-            else if (_handler is INotificationHandler<TRequestContext> parameterlessNotificationHandler)
+            else if (
+                _handler is INotificationHandler<TRequestContext> parameterlessNotificationHandler
+            )
             {
-                await parameterlessNotificationHandler.HandleNotificationAsync(context, cancellationToken).ConfigureAwait(false);
+                await parameterlessNotificationHandler
+                    .HandleNotificationAsync(context, cancellationToken)
+                    .ConfigureAwait(false);
 
                 // We know that the return type of <see cref="INotificationHandler{TRequestType, RequestContextType}"/> will always be <see cref="VoidReturn" /> even if the compiler doesn't.
                 _completionSource.TrySetResult((TResponse)(object)NoValue.Instance);
             }
             else
             {
-                throw new NotImplementedException($"Unrecognized {nameof(IMethodHandler)} implementation {_handler.GetType()}. ");
+                throw new NotImplementedException(
+                    $"Unrecognized {nameof(IMethodHandler)} implementation {_handler.GetType()}. "
+                );
             }
         }
         catch (OperationCanceledException ex)

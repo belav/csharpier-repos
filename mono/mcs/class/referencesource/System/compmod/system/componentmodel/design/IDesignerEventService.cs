@@ -1,21 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDesignerEventService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel.Design {
-    using System.Diagnostics;
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides global
     ///       event notifications and the ability to create designers.</para>
     /// </devdoc>
-    public interface IDesignerEventService {
-
+    public interface IDesignerEventService
+    {
         /// <devdoc>
         ///    <para>
         ///       Gets the currently active designer.
@@ -30,7 +31,7 @@ namespace System.ComponentModel.Design {
         ///    </para>
         /// </devdoc>
         DesignerCollection Designers { get; }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Adds an event that will be raised when the currently active designer
@@ -45,14 +46,14 @@ namespace System.ComponentModel.Design {
         ///    </para>
         /// </devdoc>
         event DesignerEventHandler DesignerCreated;
-        
+
         /// <devdoc>
         ///    <para>
         ///       Adds an event that will be raised when a designer is disposed.
         ///    </para>
         /// </devdoc>
         event DesignerEventHandler DesignerDisposed;
-        
+
         /// <devdoc>
         ///    <para>
         ///       Adds an event that will be raised when the global selection changes.
@@ -61,4 +62,3 @@ namespace System.ComponentModel.Design {
         event EventHandler SelectionChanged;
     }
 }
-

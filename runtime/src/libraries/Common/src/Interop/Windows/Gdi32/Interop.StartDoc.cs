@@ -16,7 +16,9 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, in DOCINFO lpDocInfo);
+            HandleRef hDC,
+            in DOCINFO lpDocInfo
+        );
 
 #if NET7_0_OR_GREATER
         [NativeMarshalling(typeof(Marshaller))]
@@ -33,10 +35,15 @@ internal static partial class Interop
             public DOCINFO() { }
 
 #if NET7_0_OR_GREATER
-            [CustomMarshaller(typeof(DOCINFO), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+            [CustomMarshaller(
+                typeof(DOCINFO),
+                MarshalMode.ManagedToUnmanagedIn,
+                typeof(Marshaller)
+            )]
             public static class Marshaller
             {
                 public static Native ConvertToUnmanaged(DOCINFO managed) => new(managed);
+
                 public static void Free(Native native) => native.FreeNative();
 
                 internal struct Native

@@ -52,8 +52,16 @@ namespace System.DirectoryServices.ActiveDirectory
 
             for (int i = 0; i < count; i++)
             {
-                addr = IntPtr.Add(info, Marshal.SizeOf(typeof(DS_REPL_PENDING_OPS)) + i * Marshal.SizeOf(typeof(DS_REPL_OP)));
-                ReplicationOperation managedOperation = new ReplicationOperation(addr, _server, _nameTable);
+                addr = IntPtr.Add(
+                    info,
+                    Marshal.SizeOf(typeof(DS_REPL_PENDING_OPS))
+                        + i * Marshal.SizeOf(typeof(DS_REPL_OP))
+                );
+                ReplicationOperation managedOperation = new ReplicationOperation(
+                    addr,
+                    _server,
+                    _nameTable
+                );
 
                 Add(managedOperation);
             }

@@ -12,6 +12,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
 
         // The service name for an LSP server implemented using Roslyn designed to be used with the Roslyn client
         public const string RoslynContractName = "Roslyn";
+
         // The service name for an LSP server implemented using Roslyn designed to be used with the LSP SDK client
         public const string RoslynLspSdkContractName = "RoslynLSPSDK";
 

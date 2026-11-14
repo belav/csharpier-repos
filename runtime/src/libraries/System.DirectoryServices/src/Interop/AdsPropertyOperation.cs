@@ -8,6 +8,6 @@ namespace System.DirectoryServices
         Clear = 1,
         Update = 2,
         Append = 3,
-        Delete = 4
+        Delete = 4,
     }
 }

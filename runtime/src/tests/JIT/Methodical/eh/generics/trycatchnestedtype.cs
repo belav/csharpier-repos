@@ -5,10 +5,7 @@ using System;
 using System.IO;
 using Xunit;
 
-
-public class GenException<T> : Exception
-{
-}
+public class GenException<T> : Exception { }
 
 public interface IGen
 {
@@ -42,17 +39,56 @@ public class Test_trycatchnestedtype
         StringWriter expectedOut = new StringWriter();
 
         // Write expected output to string writer object
-        Exception[] expList = new Exception[] {
+        Exception[] expList = new Exception[]
+        {
             new GenException<Exception>(),
             new GenException<GenException<Exception>>(),
             new GenException<GenException<GenException<Exception>>>(),
             new GenException<GenException<GenException<GenException<Exception>>>>(),
             new GenException<GenException<GenException<GenException<GenException<Exception>>>>>(),
-            new GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>(),
-            new GenException<GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>>(),
-            new GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>>>(),
-            new GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>>>>(),
-            new GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>>>>>()
+            new GenException<
+                GenException<GenException<GenException<GenException<GenException<Exception>>>>>
+            >(),
+            new GenException<
+                GenException<
+                    GenException<GenException<GenException<GenException<GenException<Exception>>>>>
+                >
+            >(),
+            new GenException<
+                GenException<
+                    GenException<
+                        GenException<
+                            GenException<GenException<GenException<GenException<Exception>>>>
+                        >
+                    >
+                >
+            >(),
+            new GenException<
+                GenException<
+                    GenException<
+                        GenException<
+                            GenException<
+                                GenException<GenException<GenException<GenException<Exception>>>>
+                            >
+                        >
+                    >
+                >
+            >(),
+            new GenException<
+                GenException<
+                    GenException<
+                        GenException<
+                            GenException<
+                                GenException<
+                                    GenException<
+                                        GenException<GenException<GenException<Exception>>>
+                                    >
+                                >
+                            >
+                        >
+                    >
+                >
+            >(),
         };
         for (int i = 0; i < expList.Length; i++)
         {
@@ -63,7 +99,6 @@ public class Test_trycatchnestedtype
 
         // Create and initialize test log object
         testLog = new TestUtil.TestLog(expectedOut);
-
     }
 
     [Fact]
@@ -73,17 +108,56 @@ public class Test_trycatchnestedtype
         testLog.StartRecording();
 
         // create test list
-        IGen[] genList = new IGen[] {
+        IGen[] genList = new IGen[]
+        {
             new Gen<Exception>(),
             new Gen<GenException<Exception>>(),
             new Gen<GenException<GenException<Exception>>>(),
             new Gen<GenException<GenException<GenException<Exception>>>>(),
             new Gen<GenException<GenException<GenException<GenException<Exception>>>>>(),
-            new Gen<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>(),
-            new Gen<GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>>(),
-            new Gen<GenException<GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>>>(),
-            new Gen<GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>>>>(),
-            new Gen<GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<GenException<Exception>>>>>>>>>>()
+            new Gen<
+                GenException<GenException<GenException<GenException<GenException<Exception>>>>>
+            >(),
+            new Gen<
+                GenException<
+                    GenException<GenException<GenException<GenException<GenException<Exception>>>>>
+                >
+            >(),
+            new Gen<
+                GenException<
+                    GenException<
+                        GenException<
+                            GenException<GenException<GenException<GenException<Exception>>>>
+                        >
+                    >
+                >
+            >(),
+            new Gen<
+                GenException<
+                    GenException<
+                        GenException<
+                            GenException<
+                                GenException<GenException<GenException<GenException<Exception>>>>
+                            >
+                        >
+                    >
+                >
+            >(),
+            new Gen<
+                GenException<
+                    GenException<
+                        GenException<
+                            GenException<
+                                GenException<
+                                    GenException<
+                                        GenException<GenException<GenException<Exception>>>
+                                    >
+                                >
+                            >
+                        >
+                    >
+                >
+            >(),
         };
 
         // run test
@@ -97,5 +171,4 @@ public class Test_trycatchnestedtype
 
         return testLog.VerifyOutput();
     }
-
 }

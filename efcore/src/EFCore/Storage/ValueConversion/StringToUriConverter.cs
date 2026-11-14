@@ -20,9 +20,7 @@ public class StringToUriConverter : StringUriConverter<string?, Uri?>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public StringToUriConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter. This converter preserves order.
@@ -35,16 +33,11 @@ public class StringToUriConverter : StringUriConverter<string?, Uri?>
     ///     facets for the converted data.
     /// </param>
     public StringToUriConverter(ConverterMappingHints? mappingHints)
-        : base(
-            ToUri(),
-            ToString(),
-            mappingHints)
-    {
-    }
+        : base(ToUri(), ToString(), mappingHints) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(string), typeof(Uri), i => new StringToUriConverter(i.MappingHints));
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(typeof(string), typeof(Uri), i => new StringToUriConverter(i.MappingHints));
 }

@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Security
 {
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
-    using System.ServiceModel.Security.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security.Tokens;
 
     class SecurityProtocolCorrelationState
     {
@@ -20,7 +20,9 @@ namespace System.ServiceModel.Security
         public SecurityProtocolCorrelationState(SecurityToken token)
         {
             this.token = token;
-            this.activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.Current : null;
+            this.activity = DiagnosticUtility.ShouldUseActivity
+                ? ServiceModelActivity.Current
+                : null;
         }
 
         public SecurityToken Token

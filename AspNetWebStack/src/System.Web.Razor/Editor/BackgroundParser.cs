@@ -56,7 +56,12 @@ namespace System.Web.Razor.Editor
             _main.QueueChange(change);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_main", Justification = "MainThreadState is disposed when the background thread shuts down")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "_main",
+            Justification = "MainThreadState is disposed when the background thread shuts down"
+        )]
         public void Dispose()
         {
             _main.Cancel();
@@ -76,12 +81,21 @@ namespace System.Web.Razor.Editor
             }
         }
 
-        internal static bool TreesAreDifferent(Block leftTree, Block rightTree, IEnumerable<TextChange> changes)
+        internal static bool TreesAreDifferent(
+            Block leftTree,
+            Block rightTree,
+            IEnumerable<TextChange> changes
+        )
         {
             return TreesAreDifferent(leftTree, rightTree, changes, CancellationToken.None);
         }
 
-        internal static bool TreesAreDifferent(Block leftTree, Block rightTree, IEnumerable<TextChange> changes, CancellationToken cancelToken)
+        internal static bool TreesAreDifferent(
+            Block leftTree,
+            Block rightTree,
+            IEnumerable<TextChange> changes,
+            CancellationToken cancelToken
+        )
         {
             // Apply all the pending changes to the original tree
             // PERF: If this becomes a bottleneck, we can probably do it the other way around,
@@ -96,7 +110,11 @@ namespace System.Web.Razor.Editor
                 {
                     return true;
                 }
-                EditResult result = changeOwner.EditHandler.ApplyChange(changeOwner, change, force: true);
+                EditResult result = changeOwner.EditHandler.ApplyChange(
+                    changeOwner,
+                    change,
+                    force: true
+                );
                 changeOwner.ReplaceWith(result.EditedSpan);
             }
 
@@ -110,11 +128,14 @@ namespace System.Web.Razor.Editor
 #if DEBUG
             private int _id = -1;
 #endif
-            protected ThreadStateBase()
-            {
-            }
 
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This method is only empty in Release builds. In Debug builds it contains references to instance variables")]
+            protected ThreadStateBase() { }
+
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1822:MarkMembersAsStatic",
+                Justification = "This method is only empty in Release builds. In Debug builds it contains references to instance variables"
+            )]
             [Conditional("DEBUG")]
             protected void SetThreadId(int id)
             {
@@ -123,23 +144,37 @@ namespace System.Web.Razor.Editor
 #endif
             }
 
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This method is only empty in Release builds. In Debug builds it contains references to instance variables")]
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1822:MarkMembersAsStatic",
+                Justification = "This method is only empty in Release builds. In Debug builds it contains references to instance variables"
+            )]
             [Conditional("DEBUG")]
             protected void EnsureOnThread()
             {
 #if DEBUG
                 Debug.Assert(_id != -1, "SetThreadId was never called!");
-                Debug.Assert(Thread.CurrentThread.ManagedThreadId == _id, "Called from an unexpected thread!");
+                Debug.Assert(
+                    Thread.CurrentThread.ManagedThreadId == _id,
+                    "Called from an unexpected thread!"
+                );
 #endif
             }
 
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This method is only empty in Release builds. In Debug builds it contains references to instance variables")]
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1822:MarkMembersAsStatic",
+                Justification = "This method is only empty in Release builds. In Debug builds it contains references to instance variables"
+            )]
             [Conditional("DEBUG")]
             protected void EnsureNotOnThread()
             {
 #if DEBUG
                 Debug.Assert(_id != -1, "SetThreadId was never called!");
-                Debug.Assert(Thread.CurrentThread.ManagedThreadId != _id, "Called from an unexpected thread!");
+                Debug.Assert(
+                    Thread.CurrentThread.ManagedThreadId != _id,
+                    "Called from an unexpected thread!"
+                );
 #endif
             }
         }
@@ -150,7 +185,11 @@ namespace System.Web.Razor.Editor
             private ManualResetEventSlim _hasParcel = new ManualResetEventSlim(false);
             private CancellationTokenSource _currentParcelCancelSource;
 
-            [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Field is used in debug code and may be used later")]
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1823:AvoidUnusedPrivateFields",
+                Justification = "Field is used in debug code and may be used later"
+            )]
             private string _fileName;
             private object _stateLock = new object();
             private IList<TextChange> _changes = new List<TextChange>();
@@ -194,7 +233,11 @@ namespace System.Web.Razor.Editor
 
             public void QueueChange(TextChange change)
             {
-                RazorEditorTrace.TraceLine(RazorResources.Trace_QueuingParse, Path.GetFileName(_fileName), change);
+                RazorEditorTrace.TraceLine(
+                    RazorResources.Trace_QueuingParse,
+                    Path.GetFileName(_fileName),
+                    change
+                );
                 EnsureOnThread();
                 lock (_stateLock)
                 {
@@ -309,7 +352,10 @@ namespace System.Web.Razor.Editor
 
                 try
                 {
-                    RazorEditorTrace.TraceLine(RazorResources.Trace_BackgroundThreadStart, fileNameOnly);
+                    RazorEditorTrace.TraceLine(
+                        RazorResources.Trace_BackgroundThreadStart,
+                        fileNameOnly
+                    );
                     EnsureOnThread();
                     while (!_shutdownToken.IsCancellationRequested)
                     {
@@ -317,26 +363,45 @@ namespace System.Web.Razor.Editor
                         WorkParcel parcel = _main.GetParcel();
                         if (parcel.Changes.Any())
                         {
-                            RazorEditorTrace.TraceLine(RazorResources.Trace_ChangesArrived, fileNameOnly, parcel.Changes.Count);
+                            RazorEditorTrace.TraceLine(
+                                RazorResources.Trace_ChangesArrived,
+                                fileNameOnly,
+                                parcel.Changes.Count
+                            );
                             try
                             {
                                 DocumentParseCompleteEventArgs args = null;
-                                using (var linkedCancel = CancellationTokenSource.CreateLinkedTokenSource(_shutdownToken, parcel.CancelToken))
+                                using (
+                                    var linkedCancel =
+                                        CancellationTokenSource.CreateLinkedTokenSource(
+                                            _shutdownToken,
+                                            parcel.CancelToken
+                                        )
+                                )
                                 {
                                     if (!linkedCancel.IsCancellationRequested)
                                     {
                                         // Collect ALL changes
 #if EDITOR_TRACING
-                                        if (_previouslyDiscarded != null && _previouslyDiscarded.Any())
+                                        if (
+                                            _previouslyDiscarded != null
+                                            && _previouslyDiscarded.Any()
+                                        )
                                         {
-                                            RazorEditorTrace.TraceLine(RazorResources.Trace_CollectedDiscardedChanges, fileNameOnly, _previouslyDiscarded.Count);
+                                            RazorEditorTrace.TraceLine(
+                                                RazorResources.Trace_CollectedDiscardedChanges,
+                                                fileNameOnly,
+                                                _previouslyDiscarded.Count
+                                            );
                                         }
 #endif
                                         List<TextChange> allChanges;
 
                                         if (_previouslyDiscarded != null)
                                         {
-                                            allChanges = Enumerable.Concat(_previouslyDiscarded, parcel.Changes).ToList();
+                                            allChanges = Enumerable
+                                                .Concat(_previouslyDiscarded, parcel.Changes)
+                                                .ToList();
                                         }
                                         else
                                         {
@@ -347,7 +412,10 @@ namespace System.Web.Razor.Editor
 #if EDITOR_TRACING
                                         sw.Start();
 #endif
-                                        GeneratorResults results = ParseChange(finalChange.NewBuffer, linkedCancel.Token);
+                                        GeneratorResults results = ParseChange(
+                                            finalChange.NewBuffer,
+                                            linkedCancel.Token
+                                        );
 #if EDITOR_TRACING
                                         sw.Stop();
                                         elapsedMs = sw.ElapsedMilliseconds;
@@ -356,9 +424,17 @@ namespace System.Web.Razor.Editor
                                         RazorEditorTrace.TraceLine(
                                             RazorResources.Trace_ParseComplete,
                                             fileNameOnly,
-                                            elapsedMs.HasValue ? elapsedMs.Value.ToString(CultureInfo.InvariantCulture) : "?");
+                                            elapsedMs.HasValue
+                                                ? elapsedMs.Value.ToString(
+                                                    CultureInfo.InvariantCulture
+                                                )
+                                                : "?"
+                                        );
 
-                                        if (results != null && !linkedCancel.IsCancellationRequested)
+                                        if (
+                                            results != null
+                                            && !linkedCancel.IsCancellationRequested
+                                        )
                                         {
                                             // Clear discarded changes list
                                             _previouslyDiscarded = null;
@@ -367,49 +443,89 @@ namespace System.Web.Razor.Editor
 #if EDITOR_TRACING
                                             sw.Start();
 #endif
-                                            bool treeStructureChanged = _currentParseTree == null || TreesAreDifferent(_currentParseTree, results.Document, allChanges, parcel.CancelToken);
+                                            bool treeStructureChanged =
+                                                _currentParseTree == null
+                                                || TreesAreDifferent(
+                                                    _currentParseTree,
+                                                    results.Document,
+                                                    allChanges,
+                                                    parcel.CancelToken
+                                                );
 #if EDITOR_TRACING
                                             sw.Stop();
                                             elapsedMs = sw.ElapsedMilliseconds;
                                             sw.Reset();
 #endif
                                             _currentParseTree = results.Document;
-                                            RazorEditorTrace.TraceLine(RazorResources.Trace_TreesCompared,
+                                            RazorEditorTrace.TraceLine(
+                                                RazorResources.Trace_TreesCompared,
                                                 fileNameOnly,
-                                                elapsedMs.HasValue ? elapsedMs.Value.ToString(CultureInfo.InvariantCulture) : "?",
-                                                treeStructureChanged);
+                                                elapsedMs.HasValue
+                                                    ? elapsedMs.Value.ToString(
+                                                        CultureInfo.InvariantCulture
+                                                    )
+                                                    : "?",
+                                                treeStructureChanged
+                                            );
 
                                             // Build Arguments
                                             args = new DocumentParseCompleteEventArgs()
                                             {
                                                 GeneratorResults = results,
                                                 SourceChange = finalChange,
-                                                TreeStructureChanged = treeStructureChanged
+                                                TreeStructureChanged = treeStructureChanged,
                                             };
                                         }
                                         else
                                         {
                                             // Parse completed but we were cancelled in the mean time. Add these to the discarded changes set
-                                            RazorEditorTrace.TraceLine(RazorResources.Trace_ChangesDiscarded, fileNameOnly, allChanges.Count);
+                                            RazorEditorTrace.TraceLine(
+                                                RazorResources.Trace_ChangesDiscarded,
+                                                fileNameOnly,
+                                                allChanges.Count
+                                            );
                                             _previouslyDiscarded = allChanges;
                                         }
 
 #if CHECK_TREE
-                                            if (args != null)
-                                            {
-                                                // Rewind the buffer and sanity check the line mappings
-                                                finalChange.NewBuffer.Position = 0;
-                                                int lineCount = finalChange.NewBuffer.ReadToEnd().Split(new string[] { Environment.NewLine, "\r", "\n" }, StringSplitOptions.None).Count();
-                                                Debug.Assert(
-                                                    !args.GeneratorResults.DesignTimeLineMappings.Any(pair => pair.Value.StartLine > lineCount),
-                                                    "Found a design-time line mapping referring to a line outside the source file!");
-                                                Debug.Assert(
-                                                    !args.GeneratorResults.Document.Flatten().Any(span => span.Start.LineIndex > lineCount),
-                                                    "Found a span with a line number outside the source file");
-                                                Debug.Assert(
-                                                    !args.GeneratorResults.Document.Flatten().Any(span => span.Start.AbsoluteIndex > parcel.NewBuffer.Length),
-                                                    "Found a span with an absolute offset outside the source file");
-                                            }
+                                        if (args != null)
+                                        {
+                                            // Rewind the buffer and sanity check the line mappings
+                                            finalChange.NewBuffer.Position = 0;
+                                            int lineCount = finalChange
+                                                .NewBuffer.ReadToEnd()
+                                                .Split(
+                                                    new string[]
+                                                    {
+                                                        Environment.NewLine,
+                                                        "\r",
+                                                        "\n",
+                                                    },
+                                                    StringSplitOptions.None
+                                                )
+                                                .Count();
+                                            Debug.Assert(
+                                                !args.GeneratorResults.DesignTimeLineMappings.Any(
+                                                    pair => pair.Value.StartLine > lineCount
+                                                ),
+                                                "Found a design-time line mapping referring to a line outside the source file!"
+                                            );
+                                            Debug.Assert(
+                                                !args
+                                                    .GeneratorResults.Document.Flatten()
+                                                    .Any(span => span.Start.LineIndex > lineCount),
+                                                "Found a span with a line number outside the source file"
+                                            );
+                                            Debug.Assert(
+                                                !args
+                                                    .GeneratorResults.Document.Flatten()
+                                                    .Any(span =>
+                                                        span.Start.AbsoluteIndex
+                                                        > parcel.NewBuffer.Length
+                                                    ),
+                                                "Found a span with an absolute offset outside the source file"
+                                            );
+                                        }
 #endif
                                     }
                                 }
@@ -418,13 +534,15 @@ namespace System.Web.Razor.Editor
                                     _main.ReturnParcel(args);
                                 }
                             }
-                            catch (OperationCanceledException)
-                            {
-                            }
+                            catch (OperationCanceledException) { }
                         }
                         else
                         {
-                            RazorEditorTrace.TraceLine(RazorResources.Trace_NoChangesArrived, fileNameOnly, parcel.Changes.Count);
+                            RazorEditorTrace.TraceLine(
+                                RazorResources.Trace_NoChangesArrived,
+                                fileNameOnly,
+                                parcel.Changes.Count
+                            );
                             Thread.Yield();
                         }
                     }
@@ -435,7 +553,10 @@ namespace System.Web.Razor.Editor
                 }
                 finally
                 {
-                    RazorEditorTrace.TraceLine(RazorResources.Trace_BackgroundThreadShutdown, fileNameOnly);
+                    RazorEditorTrace.TraceLine(
+                        RazorResources.Trace_BackgroundThreadShutdown,
+                        fileNameOnly
+                    );
 
                     // Clean up main thread resources
                     _main.Dispose();
@@ -459,7 +580,8 @@ namespace System.Web.Razor.Editor
                         className: null,
                         rootNamespace: null,
                         sourceFileName: _fileName,
-                        cancelToken: token);
+                        cancelToken: token
+                    );
                 }
                 catch (OperationCanceledException)
                 {

@@ -78,8 +78,16 @@ namespace System.Text.Json
 
         internal readonly int CopyValue(Span<byte> utf8Destination)
         {
-            Debug.Assert(_tokenType is JsonTokenType.String or JsonTokenType.PropertyName or JsonTokenType.Number);
-            Debug.Assert(_tokenType != JsonTokenType.Number || !ValueIsEscaped, "Numbers can't contain escape characters.");
+            Debug.Assert(
+                _tokenType
+                    is JsonTokenType.String
+                        or JsonTokenType.PropertyName
+                        or JsonTokenType.Number
+            );
+            Debug.Assert(
+                _tokenType != JsonTokenType.Number || !ValueIsEscaped,
+                "Numbers can't contain escape characters."
+            );
 
             int bytesWritten;
 
@@ -142,8 +150,16 @@ namespace System.Text.Json
 
         internal readonly int CopyValue(Span<char> destination)
         {
-            Debug.Assert(_tokenType is JsonTokenType.String or JsonTokenType.PropertyName or JsonTokenType.Number);
-            Debug.Assert(_tokenType != JsonTokenType.Number || !ValueIsEscaped, "Numbers can't contain escape characters.");
+            Debug.Assert(
+                _tokenType
+                    is JsonTokenType.String
+                        or JsonTokenType.PropertyName
+                        or JsonTokenType.Number
+            );
+            Debug.Assert(
+                _tokenType != JsonTokenType.Number || !ValueIsEscaped,
+                "Numbers can't contain escape characters."
+            );
 
             scoped ReadOnlySpan<byte> unescapedSource;
             byte[]? rentedBuffer = null;
@@ -153,9 +169,10 @@ namespace System.Text.Json
             {
                 valueLength = ValueLength;
 
-                Span<byte> unescapedBuffer = valueLength <= JsonConstants.StackallocByteThreshold ?
-                    stackalloc byte[JsonConstants.StackallocByteThreshold] :
-                    (rentedBuffer = ArrayPool<byte>.Shared.Rent(valueLength));
+                Span<byte> unescapedBuffer =
+                    valueLength <= JsonConstants.StackallocByteThreshold
+                        ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                        : (rentedBuffer = ArrayPool<byte>.Shared.Rent(valueLength));
 
                 bool success = TryCopyEscapedString(unescapedBuffer, out int bytesWritten);
                 Debug.Assert(success);
@@ -168,9 +185,10 @@ namespace System.Text.Json
                     ReadOnlySequence<byte> valueSequence = ValueSequence;
                     valueLength = checked((int)valueSequence.Length);
 
-                    Span<byte> intermediate = valueLength <= JsonConstants.StackallocByteThreshold ?
-                        stackalloc byte[JsonConstants.StackallocByteThreshold] :
-                        (rentedBuffer = ArrayPool<byte>.Shared.Rent(valueLength));
+                    Span<byte> intermediate =
+                        valueLength <= JsonConstants.StackallocByteThreshold
+                            ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                            : (rentedBuffer = ArrayPool<byte>.Shared.Rent(valueLength));
 
                     valueSequence.CopyTo(intermediate);
                     unescapedSource = intermediate.Slice(0, valueLength);
@@ -205,9 +223,10 @@ namespace System.Text.Json
                 ReadOnlySequence<byte> valueSequence = ValueSequence;
                 int sequenceLength = checked((int)valueSequence.Length);
 
-                Span<byte> intermediate = sequenceLength <= JsonConstants.StackallocByteThreshold ?
-                    stackalloc byte[JsonConstants.StackallocByteThreshold] :
-                    (rentedBuffer = ArrayPool<byte>.Shared.Rent(sequenceLength));
+                Span<byte> intermediate =
+                    sequenceLength <= JsonConstants.StackallocByteThreshold
+                        ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                        : (rentedBuffer = ArrayPool<byte>.Shared.Rent(sequenceLength));
 
                 valueSequence.CopyTo(intermediate);
                 source = intermediate.Slice(0, sequenceLength);
@@ -225,7 +244,10 @@ namespace System.Text.Json
                 ArrayPool<byte>.Shared.Return(rentedBuffer);
             }
 
-            Debug.Assert(bytesWritten < source.Length, "source buffer must contain at least one escape sequence");
+            Debug.Assert(
+                bytesWritten < source.Length,
+                "source buffer must contain at least one escape sequence"
+            );
             return success;
         }
 
@@ -603,9 +625,13 @@ namespace System.Text.Json
             // NETCOREAPP implementation of the TryParse method above permits case-insensitive variants of the
             // float constants "NaN", "Infinity", "-Infinity". This differs from the NETFRAMEWORK implementation.
             // The following logic reconciles the two implementations to enforce consistent behavior.
-            if (!(Utf8Parser.TryParse(span, out value, out int bytesConsumed)
-                  && span.Length == bytesConsumed
-                  && JsonHelpers.IsFinite(value)))
+            if (
+                !(
+                    Utf8Parser.TryParse(span, out value, out int bytesConsumed)
+                    && span.Length == bytesConsumed
+                    && JsonHelpers.IsFinite(value)
+                )
+            )
             {
                 ThrowHelper.ThrowFormatException(NumericType.Single);
             }
@@ -660,9 +686,13 @@ namespace System.Text.Json
             // NETCOREAPP implementation of the TryParse method above permits case-insensitive variants of the
             // float constants "NaN", "Infinity", "-Infinity". This differs from the NETFRAMEWORK implementation.
             // The following logic reconciles the two implementations to enforce consistent behavior.
-            if (!(Utf8Parser.TryParse(span, out value, out int bytesConsumed)
-                  && span.Length == bytesConsumed
-                  && JsonHelpers.IsFinite(value)))
+            if (
+                !(
+                    Utf8Parser.TryParse(span, out value, out int bytesConsumed)
+                    && span.Length == bytesConsumed
+                    && JsonHelpers.IsFinite(value)
+                )
+            )
             {
                 ThrowHelper.ThrowFormatException(NumericType.Double);
             }
@@ -866,8 +896,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetByteCore(out byte value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out byte tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out byte tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -902,8 +934,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetSByteCore(out sbyte value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out sbyte tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out sbyte tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -937,8 +971,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetInt16Core(out short value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out short tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out short tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -972,8 +1008,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetInt32Core(out int value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out int tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out int tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -1007,8 +1045,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetInt64Core(out long value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out long tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out long tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -1043,8 +1083,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetUInt16Core(out ushort value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out ushort tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out ushort tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -1079,8 +1121,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetUInt32Core(out uint value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out uint tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out uint tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -1115,8 +1159,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetUInt64Core(out ulong value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out ulong tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out ulong tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -1145,8 +1191,10 @@ namespace System.Text.Json
 
             ReadOnlySpan<byte> span = HasValueSequence ? ValueSequence.ToArray() : ValueSpan;
 
-            if (Utf8Parser.TryParse(span, out float tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out float tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -1175,8 +1223,10 @@ namespace System.Text.Json
 
             ReadOnlySpan<byte> span = HasValueSequence ? ValueSequence.ToArray() : ValueSpan;
 
-            if (Utf8Parser.TryParse(span, out double tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out double tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -1210,8 +1260,10 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryGetDecimalCore(out decimal value, ReadOnlySpan<byte> span)
         {
-            if (Utf8Parser.TryParse(span, out decimal tmp, out int bytesConsumed)
-                && span.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(span, out decimal tmp, out int bytesConsumed)
+                && span.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -1248,19 +1300,32 @@ namespace System.Text.Json
             if (HasValueSequence)
             {
                 long sequenceLength = ValueSequence.Length;
-                if (!JsonHelpers.IsInRangeInclusive(sequenceLength, JsonConstants.MinimumDateTimeParseLength, JsonConstants.MaximumEscapedDateTimeOffsetParseLength))
+                if (
+                    !JsonHelpers.IsInRangeInclusive(
+                        sequenceLength,
+                        JsonConstants.MinimumDateTimeParseLength,
+                        JsonConstants.MaximumEscapedDateTimeOffsetParseLength
+                    )
+                )
                 {
                     value = default;
                     return false;
                 }
 
-                Span<byte> stackSpan = stackalloc byte[JsonConstants.MaximumEscapedDateTimeOffsetParseLength];
+                Span<byte> stackSpan =
+                    stackalloc byte[JsonConstants.MaximumEscapedDateTimeOffsetParseLength];
                 ValueSequence.CopyTo(stackSpan);
                 span = stackSpan.Slice(0, (int)sequenceLength);
             }
             else
             {
-                if (!JsonHelpers.IsInRangeInclusive(ValueSpan.Length, JsonConstants.MinimumDateTimeParseLength, JsonConstants.MaximumEscapedDateTimeOffsetParseLength))
+                if (
+                    !JsonHelpers.IsInRangeInclusive(
+                        ValueSpan.Length,
+                        JsonConstants.MinimumDateTimeParseLength,
+                        JsonConstants.MaximumEscapedDateTimeOffsetParseLength
+                    )
+                )
                 {
                     value = default;
                     return false;
@@ -1313,19 +1378,32 @@ namespace System.Text.Json
             if (HasValueSequence)
             {
                 long sequenceLength = ValueSequence.Length;
-                if (!JsonHelpers.IsInRangeInclusive(sequenceLength, JsonConstants.MinimumDateTimeParseLength, JsonConstants.MaximumEscapedDateTimeOffsetParseLength))
+                if (
+                    !JsonHelpers.IsInRangeInclusive(
+                        sequenceLength,
+                        JsonConstants.MinimumDateTimeParseLength,
+                        JsonConstants.MaximumEscapedDateTimeOffsetParseLength
+                    )
+                )
                 {
                     value = default;
                     return false;
                 }
 
-                Span<byte> stackSpan = stackalloc byte[JsonConstants.MaximumEscapedDateTimeOffsetParseLength];
+                Span<byte> stackSpan =
+                    stackalloc byte[JsonConstants.MaximumEscapedDateTimeOffsetParseLength];
                 ValueSequence.CopyTo(stackSpan);
                 span = stackSpan.Slice(0, (int)sequenceLength);
             }
             else
             {
-                if (!JsonHelpers.IsInRangeInclusive(ValueSpan.Length, JsonConstants.MinimumDateTimeParseLength, JsonConstants.MaximumEscapedDateTimeOffsetParseLength))
+                if (
+                    !JsonHelpers.IsInRangeInclusive(
+                        ValueSpan.Length,
+                        JsonConstants.MinimumDateTimeParseLength,
+                        JsonConstants.MaximumEscapedDateTimeOffsetParseLength
+                    )
+                )
                 {
                     value = default;
                     return false;
@@ -1407,8 +1485,10 @@ namespace System.Text.Json
 
             Debug.Assert(span.IndexOf(JsonConstants.BackSlash) == -1);
 
-            if (span.Length == JsonConstants.MaximumFormatGuidLength
-                && Utf8Parser.TryParse(span, out Guid tmp, out _, 'D'))
+            if (
+                span.Length == JsonConstants.MaximumFormatGuidLength
+                && Utf8Parser.TryParse(span, out Guid tmp, out _, 'D')
+            )
             {
                 value = tmp;
                 return true;

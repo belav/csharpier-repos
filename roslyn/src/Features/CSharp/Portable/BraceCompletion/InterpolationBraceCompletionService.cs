@@ -23,31 +23,39 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InterpolationBraceCompletionService()
-        {
-        }
+        public InterpolationBraceCompletionService() { }
 
         protected override char OpeningBrace => CurlyBrace.OpenCharacter;
         protected override char ClosingBrace => CurlyBrace.CloseCharacter;
 
-        public override bool AllowOverType(BraceCompletionContext context, CancellationToken cancellationToken)
-            => AllowOverTypeWithValidClosingToken(context);
+        public override bool AllowOverType(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeWithValidClosingToken(context);
 
         /// <summary>
         /// Only return this service as valid when we're typing curly braces inside an interpolated string.
         /// Otherwise curly braces should be completed using the <see cref="CurlyBraceCompletionService"/>
         /// </summary>
-        public override bool CanProvideBraceCompletion(char brace, int openingPosition, ParsedDocument document, CancellationToken cancellationToken)
-            => OpeningBrace == brace && IsPositionInInterpolationContext(document, openingPosition);
+        public override bool CanProvideBraceCompletion(
+            char brace,
+            int openingPosition,
+            ParsedDocument document,
+            CancellationToken cancellationToken
+        ) => OpeningBrace == brace && IsPositionInInterpolationContext(document, openingPosition);
 
-        protected override bool IsValidOpenBraceTokenAtPosition(SourceText text, SyntaxToken token, int position)
-            => IsValidOpeningBraceToken(token) && token.SpanStart == position;
+        protected override bool IsValidOpenBraceTokenAtPosition(
+            SourceText text,
+            SyntaxToken token,
+            int position
+        ) => IsValidOpeningBraceToken(token) && token.SpanStart == position;
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken token)
-            => token.IsKind(SyntaxKind.OpenBraceToken) && token.Parent.IsKind(SyntaxKind.Interpolation);
+        protected override bool IsValidOpeningBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.OpenBraceToken)
+            && token.Parent.IsKind(SyntaxKind.Interpolation);
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken token)
-            => token.IsKind(SyntaxKind.CloseBraceToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CloseBraceToken);
 
         /// <summary>
         /// Returns true when the input position could be starting an interpolation expression if a curly brace was typed.
@@ -69,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             }
 
             // We can be starting an interpolation expression if we're inside an interpolated string.
-            return token.Parent.IsKind(SyntaxKind.InterpolatedStringExpression) || token.Parent.IsParentKind(SyntaxKind.InterpolatedStringExpression);
+            return token.Parent.IsKind(SyntaxKind.InterpolatedStringExpression)
+                || token.Parent.IsParentKind(SyntaxKind.InterpolatedStringExpression);
         }
     }
 }

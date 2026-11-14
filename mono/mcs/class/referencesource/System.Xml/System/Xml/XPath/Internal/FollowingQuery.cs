@@ -1,40 +1,51 @@
 //------------------------------------------------------------------------------
 // <copyright file="followingquery.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace MS.Internal.Xml.XPath {
+namespace MS.Internal.Xml.XPath
+{
     using System;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics;
 
-    internal sealed class FollowingQuery : BaseAxisQuery {
+    internal sealed class FollowingQuery : BaseAxisQuery
+    {
         private XPathNavigator input;
         private XPathNodeIterator iterator;
 
-        public FollowingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest) : base(qyInput, name, prefix, typeTest) {}
-        private FollowingQuery(FollowingQuery other) : base(other) {
-            this.input    = Clone(other.input);
+        public FollowingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
+            : base(qyInput, name, prefix, typeTest) { }
+
+        private FollowingQuery(FollowingQuery other)
+            : base(other)
+        {
+            this.input = Clone(other.input);
             this.iterator = Clone(other.iterator);
         }
 
-        public override void Reset() {
+        public override void Reset()
+        {
             iterator = null;
             base.Reset();
         }
 
-        public override XPathNavigator Advance() {
-            if (iterator == null) {
+        public override XPathNavigator Advance()
+        {
+            if (iterator == null)
+            {
                 input = qyInput.Advance();
-                if (input == null) {
+                if (input == null)
+                {
                     return null;
                 }
 
                 XPathNavigator prev;
-                do {
+                do
+                {
                     prev = input.Clone();
                     input = qyInput.Advance();
                 } while (prev.IsDescendant(input));
@@ -42,23 +53,35 @@ namespace MS.Internal.Xml.XPath {
 
                 iterator = XPathEmptyIterator.Instance;
             }
- 
-            while (! iterator.MoveNext()) {
+
+            while (!iterator.MoveNext())
+            {
                 bool matchSelf;
-                if (input.NodeType == XPathNodeType.Attribute || input.NodeType == XPathNodeType.Namespace) {
+                if (
+                    input.NodeType == XPathNodeType.Attribute
+                    || input.NodeType == XPathNodeType.Namespace
+                )
+                {
                     input.MoveToParent();
                     matchSelf = false;
-                } else {
-                    while (! input.MoveToNext()) {
-                        if (! input.MoveToParent()) {
+                }
+                else
+                {
+                    while (!input.MoveToNext())
+                    {
+                        if (!input.MoveToParent())
+                        {
                             return null;
                         }
                     }
                     matchSelf = true;
                 }
-                if (NameTest) {
+                if (NameTest)
+                {
                     iterator = input.SelectDescendants(Name, Namespace, matchSelf);
-                } else {
+                }
+                else
+                {
                     iterator = input.SelectDescendants(TypeTest, matchSelf);
                 }
             }
@@ -67,6 +90,9 @@ namespace MS.Internal.Xml.XPath {
             return currentNode;
         }
 
-        public override XPathNodeIterator Clone() { return new FollowingQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new FollowingQuery(this);
+        }
     }
 }

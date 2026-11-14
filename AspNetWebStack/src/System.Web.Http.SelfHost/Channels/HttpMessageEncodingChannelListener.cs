@@ -10,10 +10,11 @@ namespace System.Web.Http.SelfHost.Channels
     {
         private IChannelListener<IReplyChannel> _innerChannelListener;
 
-        public HttpMessageEncodingChannelListener(Binding binding, IChannelListener<IReplyChannel> innerListener) :
-            base(binding, innerListener)
-        {
-        }
+        public HttpMessageEncodingChannelListener(
+            Binding binding,
+            IChannelListener<IReplyChannel> innerListener
+        )
+            : base(binding, innerListener) { }
 
         protected override void OnOpening()
         {
@@ -27,7 +28,11 @@ namespace System.Web.Http.SelfHost.Channels
             return WrapInnerChannel(innerChannel);
         }
 
-        protected override IAsyncResult OnBeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return _innerChannelListener.BeginAcceptChannel(timeout, callback, state);
         }
@@ -38,7 +43,11 @@ namespace System.Web.Http.SelfHost.Channels
             return WrapInnerChannel(innerChannel);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return _innerChannelListener.BeginWaitForChannel(timeout, callback, state);
         }
@@ -56,8 +65,8 @@ namespace System.Web.Http.SelfHost.Channels
         private IReplyChannel WrapInnerChannel(IReplyChannel innerChannel)
         {
             return (innerChannel != null)
-                       ? new HttpMessageEncodingReplyChannel(this, innerChannel)
-                       : (IReplyChannel)null;
+                ? new HttpMessageEncodingReplyChannel(this, innerChannel)
+                : (IReplyChannel)null;
         }
     }
 }

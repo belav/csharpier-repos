@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
  **
@@ -13,31 +13,43 @@
  **
  ===========================================================*/
 
-
-namespace System.Runtime.Serialization.Formatters.Binary{
-
+namespace System.Runtime.Serialization.Formatters.Binary
+{
     using System;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
     using System.Runtime.Serialization.Formatters;
     using System.Text;
-    using System.Collections;
-    using System.Reflection;
-#if FEATURE_REMOTING    
+#if FEATURE_REMOTING
     using System.Runtime.Remoting.Messaging;
 #endif
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
 
     // Routines to convert between the runtime type and the type as it appears on the wire
     internal static class BinaryConverter
     {
-
         // From the type create the BinaryTypeEnum and typeInformation which describes the type on the wire
 
-        internal static BinaryTypeEnum GetBinaryTypeInfo(Type type, WriteObjectInfo objectInfo, String typeName, ObjectWriter objectWriter, out Object typeInformation, out int assemId)
+        internal static BinaryTypeEnum GetBinaryTypeInfo(
+            Type type,
+            WriteObjectInfo objectInfo,
+            String typeName,
+            ObjectWriter objectWriter,
+            out Object typeInformation,
+            out int assemId
+        )
         {
-            SerTrace.Log("BinaryConverter", "GetBinaryTypeInfo Entry type ",type,", typeName ",typeName," objectInfo "+objectInfo);     
+            SerTrace.Log(
+                "BinaryConverter",
+                "GetBinaryTypeInfo Entry type ",
+                type,
+                ", typeName ",
+                typeName,
+                " objectInfo " + objectInfo
+            );
             BinaryTypeEnum binaryTypeEnum;
 
             assemId = 0;
@@ -45,8 +57,10 @@ namespace System.Runtime.Serialization.Formatters.Binary{
 
             if (Object.ReferenceEquals(type, Converter.typeofString))
                 binaryTypeEnum = BinaryTypeEnum.String;
-            else if (((objectInfo == null) || ((objectInfo != null) && !objectInfo.isSi))
-                     && (Object.ReferenceEquals(type, Converter.typeofObject)))
+            else if (
+                ((objectInfo == null) || ((objectInfo != null) && !objectInfo.isSi))
+                && (Object.ReferenceEquals(type, Converter.typeofObject))
+            )
             {
                 // If objectInfo.Si then can be a surrogate which will change the type
                 binaryTypeEnum = BinaryTypeEnum.Object;
@@ -83,10 +97,18 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                         else
                         {
                             binaryTypeEnum = BinaryTypeEnum.ObjectUser;
-                            Contract.Assert(objectInfo!=null, "[BinaryConverter.GetBinaryTypeInfo]objectInfo null for user object");
+                            Contract.Assert(
+                                objectInfo != null,
+                                "[BinaryConverter.GetBinaryTypeInfo]objectInfo null for user object"
+                            );
                             assemId = (int)objectInfo.assemId;
                             if (assemId == 0)
-                                throw new SerializationException(Environment.GetResourceString("Serialization_AssemblyId",typeInformation));
+                                throw new SerializationException(
+                                    Environment.GetResourceString(
+                                        "Serialization_AssemblyId",
+                                        typeInformation
+                                    )
+                                );
                         }
                         break;
                     default:
@@ -96,15 +118,25 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 }
             }
 
-            SerTrace.Log( "BinaryConverter", "GetBinaryTypeInfo Exit ",((Enum)binaryTypeEnum).ToString(),", typeInformation ",typeInformation," assemId ",assemId);             
+            SerTrace.Log(
+                "BinaryConverter",
+                "GetBinaryTypeInfo Exit ",
+                ((Enum)binaryTypeEnum).ToString(),
+                ", typeInformation ",
+                typeInformation,
+                " assemId ",
+                assemId
+            );
             return binaryTypeEnum;
         }
 
-
         // Used for non Si types when Parsing
-        internal static BinaryTypeEnum GetParserBinaryTypeInfo(Type type, out Object typeInformation)
+        internal static BinaryTypeEnum GetParserBinaryTypeInfo(
+            Type type,
+            out Object typeInformation
+        )
         {
-            SerTrace.Log("BinaryConverter", "GetParserBinaryTypeInfo Entry type ",type);        
+            SerTrace.Log("BinaryConverter", "GetParserBinaryTypeInfo Entry type ", type);
             BinaryTypeEnum binaryTypeEnum;
             typeInformation = null;
 
@@ -138,46 +170,87 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 }
             }
 
-            SerTrace.Log( "BinaryConverter", "GetParserBinaryTypeInfo Exit ",((Enum)binaryTypeEnum).ToString(),", typeInformation ",typeInformation);               
+            SerTrace.Log(
+                "BinaryConverter",
+                "GetParserBinaryTypeInfo Exit ",
+                ((Enum)binaryTypeEnum).ToString(),
+                ", typeInformation ",
+                typeInformation
+            );
             return binaryTypeEnum;
         }
 
         // Writes the type information on the wire
-        internal static void WriteTypeInfo(BinaryTypeEnum binaryTypeEnum, Object typeInformation, int assemId, __BinaryWriter sout)
+        internal static void WriteTypeInfo(
+            BinaryTypeEnum binaryTypeEnum,
+            Object typeInformation,
+            int assemId,
+            __BinaryWriter sout
+        )
         {
-            SerTrace.Log( "BinaryConverter", "WriteTypeInfo Entry  ",((Enum)binaryTypeEnum).ToString()," ",typeInformation," assemId ",assemId);
+            SerTrace.Log(
+                "BinaryConverter",
+                "WriteTypeInfo Entry  ",
+                ((Enum)binaryTypeEnum).ToString(),
+                " ",
+                typeInformation,
+                " assemId ",
+                assemId
+            );
 
             switch (binaryTypeEnum)
             {
                 case BinaryTypeEnum.Primitive:
                 case BinaryTypeEnum.PrimitiveArray:
-                    Contract.Assert(typeInformation!=null, "[BinaryConverter.WriteTypeInfo]typeInformation!=null");
-                    sout.WriteByte((Byte)((InternalPrimitiveTypeE)typeInformation));                    
+                    Contract.Assert(
+                        typeInformation != null,
+                        "[BinaryConverter.WriteTypeInfo]typeInformation!=null"
+                    );
+                    sout.WriteByte((Byte)((InternalPrimitiveTypeE)typeInformation));
                     break;
                 case BinaryTypeEnum.String:
                 case BinaryTypeEnum.Object:
                 case BinaryTypeEnum.StringArray:
                 case BinaryTypeEnum.ObjectArray:
-                    break;                    
+                    break;
                 case BinaryTypeEnum.ObjectUrt:
-                    Contract.Assert(typeInformation!=null, "[BinaryConverter.WriteTypeInfo]typeInformation!=null");
+                    Contract.Assert(
+                        typeInformation != null,
+                        "[BinaryConverter.WriteTypeInfo]typeInformation!=null"
+                    );
                     sout.WriteString(typeInformation.ToString());
                     break;
-                case BinaryTypeEnum.ObjectUser:                             
-                    Contract.Assert(typeInformation!=null, "[BinaryConverter.WriteTypeInfo]typeInformation!=null");
+                case BinaryTypeEnum.ObjectUser:
+                    Contract.Assert(
+                        typeInformation != null,
+                        "[BinaryConverter.WriteTypeInfo]typeInformation!=null"
+                    );
                     sout.WriteString(typeInformation.ToString());
                     sout.WriteInt32(assemId);
-                    break;                    
+                    break;
                 default:
-                    throw new SerializationException(Environment.GetResourceString("Serialization_TypeWrite",((Enum)binaryTypeEnum).ToString()));
+                    throw new SerializationException(
+                        Environment.GetResourceString(
+                            "Serialization_TypeWrite",
+                            ((Enum)binaryTypeEnum).ToString()
+                        )
+                    );
             }
-            SerTrace.Log( "BinaryConverter", "WriteTypeInfo Exit");
+            SerTrace.Log("BinaryConverter", "WriteTypeInfo Exit");
         }
 
         // Reads the type information from the wire
-        internal static Object ReadTypeInfo(BinaryTypeEnum binaryTypeEnum, __BinaryParser input, out int assemId)
+        internal static Object ReadTypeInfo(
+            BinaryTypeEnum binaryTypeEnum,
+            __BinaryParser input,
+            out int assemId
+        )
         {
-            SerTrace.Log( "BinaryConverter", "ReadTypeInfo Entry  ",((Enum)binaryTypeEnum).ToString());
+            SerTrace.Log(
+                "BinaryConverter",
+                "ReadTypeInfo Entry  ",
+                ((Enum)binaryTypeEnum).ToString()
+            );
             Object var = null;
             int readAssemId = 0;
 
@@ -191,34 +264,45 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 case BinaryTypeEnum.Object:
                 case BinaryTypeEnum.StringArray:
                 case BinaryTypeEnum.ObjectArray:
-                    break;                    
+                    break;
                 case BinaryTypeEnum.ObjectUrt:
-                    var = input.ReadString();                   
+                    var = input.ReadString();
                     break;
                 case BinaryTypeEnum.ObjectUser:
                     var = input.ReadString();
                     readAssemId = input.ReadInt32();
-                    break;                    
+                    break;
                 default:
-                    throw new SerializationException(Environment.GetResourceString("Serialization_TypeRead",((Enum)binaryTypeEnum).ToString()));                 
+                    throw new SerializationException(
+                        Environment.GetResourceString(
+                            "Serialization_TypeRead",
+                            ((Enum)binaryTypeEnum).ToString()
+                        )
+                    );
             }
-            SerTrace.Log( "BinaryConverter", "ReadTypeInfo Exit  ",var," assemId ",readAssemId);
+            SerTrace.Log("BinaryConverter", "ReadTypeInfo Exit  ", var, " assemId ", readAssemId);
             assemId = readAssemId;
             return var;
         }
 
         // Given the wire type information, returns the actual type and additional information
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void TypeFromInfo(BinaryTypeEnum binaryTypeEnum,
-                                          Object typeInformation,
-                                          ObjectReader objectReader,
-                                          BinaryAssemblyInfo assemblyInfo,
-                                          out InternalPrimitiveTypeE primitiveTypeEnum,
-                                          out String typeString,
-                                          out Type type,
-                                          out bool isVariant)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void TypeFromInfo(
+            BinaryTypeEnum binaryTypeEnum,
+            Object typeInformation,
+            ObjectReader objectReader,
+            BinaryAssemblyInfo assemblyInfo,
+            out InternalPrimitiveTypeE primitiveTypeEnum,
+            out String typeString,
+            out Type type,
+            out bool isVariant
+        )
         {
-            SerTrace.Log( "BinaryConverter", "TypeFromInfo Entry  ",((Enum)binaryTypeEnum).ToString());
+            SerTrace.Log(
+                "BinaryConverter",
+                "TypeFromInfo Entry  ",
+                ((Enum)binaryTypeEnum).ToString()
+            );
 
             isVariant = false;
             primitiveTypeEnum = InternalPrimitiveTypeE.Invalid;
@@ -228,7 +312,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             switch (binaryTypeEnum)
             {
                 case BinaryTypeEnum.Primitive:
-                    primitiveTypeEnum = (InternalPrimitiveTypeE)typeInformation;                    
+                    primitiveTypeEnum = (InternalPrimitiveTypeE)typeInformation;
                     typeString = Converter.ToComType(primitiveTypeEnum);
                     type = Converter.ToType(primitiveTypeEnum);
                     break;
@@ -239,7 +323,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 case BinaryTypeEnum.Object:
                     //typeString = "System.Object";
                     type = Converter.typeofObject;
-                    isVariant = true; 
+                    isVariant = true;
                     break;
                 case BinaryTypeEnum.ObjectArray:
                     //typeString = "System.Object[]";
@@ -250,7 +334,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                     type = Converter.typeofStringArray;
                     break;
                 case BinaryTypeEnum.PrimitiveArray:
-                    primitiveTypeEnum = (InternalPrimitiveTypeE)typeInformation;                    
+                    primitiveTypeEnum = (InternalPrimitiveTypeE)typeInformation;
                     type = Converter.ToArrayType(primitiveTypeEnum);
                     break;
                 case BinaryTypeEnum.ObjectUser:
@@ -265,19 +349,31 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                     }
                     break;
                 default:
-                    throw new SerializationException(Environment.GetResourceString("Serialization_TypeRead",((Enum)binaryTypeEnum).ToString()));                                     
+                    throw new SerializationException(
+                        Environment.GetResourceString(
+                            "Serialization_TypeRead",
+                            ((Enum)binaryTypeEnum).ToString()
+                        )
+                    );
             }
 
 #if _DEBUG
-                SerTrace.Log( "BinaryConverter", "TypeFromInfo Exit  "
-                          ,((Enum)primitiveTypeEnum).ToString(),",typeString ",Util.PString(typeString)
-                          ,", type ",Util.PString(type),", isVariant ",isVariant);      
+            SerTrace.Log(
+                "BinaryConverter",
+                "TypeFromInfo Exit  ",
+                ((Enum)primitiveTypeEnum).ToString(),
+                ",typeString ",
+                Util.PString(typeString),
+                ", type ",
+                Util.PString(type),
+                ", isVariant ",
+                isVariant
+            );
 #endif
-
         }
 
-#if _DEBUG                        
-         // Used to write type type on the record dump
+#if _DEBUG
+        // Used to write type type on the record dump
         internal static String TypeInfoTraceString(Object typeInformation)
         {
             String traceString = null;
@@ -290,7 +386,6 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             return traceString;
         }
 #endif
-
     }
 
     internal static class IOUtil
@@ -330,46 +425,42 @@ namespace System.Runtime.Serialization.Formatters.Binary{
 
         internal static Object ReadWithCode(__BinaryParser input)
         {
-             InternalPrimitiveTypeE code = (InternalPrimitiveTypeE)input.ReadByte();
-             if (code == InternalPrimitiveTypeE.Null)
-                 return null;
-             else if (code == InternalPrimitiveTypeE.String)
-                 return input.ReadString();
-             else
-                 return input.ReadValue(code);
+            InternalPrimitiveTypeE code = (InternalPrimitiveTypeE)input.ReadByte();
+            if (code == InternalPrimitiveTypeE.Null)
+                return null;
+            else if (code == InternalPrimitiveTypeE.String)
+                return input.ReadString();
+            else
+                return input.ReadValue(code);
         }
 
         internal static Object[] ReadArgs(__BinaryParser input)
         {
             int length = input.ReadInt32();
             Object[] args = new Object[length];
-            for (int i=0; i<length; i++)
+            for (int i = 0; i < length; i++)
                 args[i] = ReadWithCode(input);
             return args;
         }
-
     }
-
 
     internal static class BinaryUtil
     {
-        [Conditional("_LOGGING")]                               
+        [Conditional("_LOGGING")]
         public static void NVTraceI(String name, String value)
         {
             if (BCLDebug.CheckEnabled("BINARY"))
-                BCLDebug.Trace("BINARY", "  ",name, " = ", value);
+                BCLDebug.Trace("BINARY", "  ", name, " = ", value);
         }
 
         // Traces an name value pair
-        [Conditional("_LOGGING")]                                       
+        [Conditional("_LOGGING")]
         public static void NVTraceI(String name, Object value)
         {
             if (BCLDebug.CheckEnabled("BINARY"))
-                BCLDebug.Trace("BINARY", "  ",name, " = ", value);
+                BCLDebug.Trace("BINARY", "  ", name, " = ", value);
         }
-
     }
-
 
     // Interface for Binary Records.
     internal interface IStreamable
@@ -377,7 +468,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         [System.Security.SecurityCritical]
         void Read(__BinaryParser input);
         void Write(__BinaryWriter sout);
-#if _DEBUG        
+#if _DEBUG
         void Dump();
 #endif
     }
@@ -386,7 +477,6 @@ namespace System.Runtime.Serialization.Formatters.Binary{
     {
         internal String assemblyString;
         private Assembly assembly;
-
 
         internal BinaryAssemblyInfo(String assemblyString)
         {
@@ -405,7 +495,12 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             {
                 assembly = FormatterServices.LoadAssemblyFromStringNoThrow(assemblyString);
                 if (assembly == null)
-                    throw new SerializationException(Environment.GetResourceString("Serialization_AssemblyNotFound",assemblyString));
+                    throw new SerializationException(
+                        Environment.GetResourceString(
+                            "Serialization_AssemblyNotFound",
+                            assemblyString
+                        )
+                    );
             }
             return assembly;
         }
@@ -422,11 +517,15 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal Int32 majorVersion;
         internal Int32 minorVersion;
 
-        internal SerializationHeaderRecord()
-        {
-        }
+        internal SerializationHeaderRecord() { }
 
-        internal SerializationHeaderRecord(BinaryHeaderEnum binaryHeaderEnum, Int32 topId, Int32 headerId, Int32 majorVersion, Int32 minorVersion)
+        internal SerializationHeaderRecord(
+            BinaryHeaderEnum binaryHeaderEnum,
+            Int32 topId,
+            Int32 headerId,
+            Int32 majorVersion,
+            Int32 minorVersion
+        )
         {
             this.binaryHeaderEnum = binaryHeaderEnum;
             this.topId = topId;
@@ -435,7 +534,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             this.minorVersion = minorVersion;
         }
 
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             majorVersion = binaryFormatterMajorVersion;
             minorVersion = binaryFormatterMinorVersion;
@@ -443,26 +542,36 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             sout.WriteInt32(topId);
             sout.WriteInt32(headerId);
             sout.WriteInt32(binaryFormatterMajorVersion);
-            sout.WriteInt32(binaryFormatterMinorVersion);      
+            sout.WriteInt32(binaryFormatterMinorVersion);
         }
 
-        private static int GetInt32(byte [] buffer, int index)
+        private static int GetInt32(byte[] buffer, int index)
         {
-            return (int)(buffer[index] | buffer[index+1] << 8 | buffer[index+2] << 16 | buffer[index+3] << 24);
+            return (int)(
+                buffer[index]
+                | buffer[index + 1] << 8
+                | buffer[index + 2] << 16
+                | buffer[index + 3] << 24
+            );
         }
 
         [System.Security.SecurityCritical] // implements Critical method
-        public  void Read(__BinaryParser input)
+        public void Read(__BinaryParser input)
         {
-            byte [] headerBytes = input.ReadBytes(17);
+            byte[] headerBytes = input.ReadBytes(17);
             // Throw if we couldnt read header bytes
             if (headerBytes.Length < 17)
                 __Error.EndOfFile();
-            
+
             majorVersion = GetInt32(headerBytes, 9);
             if (majorVersion > binaryFormatterMajorVersion)
-                throw new SerializationException(Environment.GetResourceString("Serialization_InvalidFormat", BitConverter.ToString(headerBytes)));
-            
+                throw new SerializationException(
+                    Environment.GetResourceString(
+                        "Serialization_InvalidFormat",
+                        BitConverter.ToString(headerBytes)
+                    )
+                );
+
             // binaryHeaderEnum has already been read
             binaryHeaderEnum = (BinaryHeaderEnum)headerBytes[0];
             topId = GetInt32(headerBytes, 1);
@@ -470,11 +579,10 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             minorVersion = GetInt32(headerBytes, 13);
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
-
 
         [Conditional("_LOGGING")]
         private void DumpInternal()
@@ -487,29 +595,24 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 BinaryUtil.NVTraceI("headerId (Int32)", headerId);
                 BinaryUtil.NVTraceI("majorVersion (Int32)", majorVersion);
                 BinaryUtil.NVTraceI("minorVersion (Int32)", minorVersion);
-                BCLDebug.Trace("BINARY","***********************************");
+                BCLDebug.Trace("BINARY", "***********************************");
             }
         }
     }
-
 
     internal sealed class BinaryAssembly : IStreamable
     {
         internal Int32 assemId;
         internal String assemblyString;
 
-        internal BinaryAssembly()
-        {
-        }
-
+        internal BinaryAssembly() { }
 
         internal void Set(Int32 assemId, String assemblyString)
         {
-            SerTrace.Log( this, "BinaryAssembly Set ",assemId," ",assemblyString);      
+            SerTrace.Log(this, "BinaryAssembly Set ", assemId, " ", assemblyString);
             this.assemId = assemId;
             this.assemblyString = assemblyString;
         }
-
 
         public void Write(__BinaryWriter sout)
         {
@@ -535,11 +638,11 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryAssembly*****");
+                BCLDebug.Trace("BINARY", "*****BinaryAssembly*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "Assembly");
-                BinaryUtil.NVTraceI("assemId (Int32)", assemId);        
+                BinaryUtil.NVTraceI("assemId (Int32)", assemId);
                 BinaryUtil.NVTraceI("Assembly (UTF)", assemblyString);
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
@@ -549,9 +652,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal Int32 assemId;
         internal Int32 assemblyIndex;
 
-        internal BinaryCrossAppDomainAssembly()
-        {
-        }
+        internal BinaryCrossAppDomainAssembly() { }
 
         public void Write(__BinaryWriter sout)
         {
@@ -577,34 +678,30 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryCrossAppDomainAssembly*****");
+                BCLDebug.Trace("BINARY", "*****BinaryCrossAppDomainAssembly*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "CrossAppDomainAssembly");
-                BinaryUtil.NVTraceI("assemId (Int32)", assemId);        
+                BinaryUtil.NVTraceI("assemId (Int32)", assemId);
                 BinaryUtil.NVTraceI("assemblyIndex (Int32)", assemblyIndex);
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
-
 
     internal sealed class BinaryObject : IStreamable
     {
         internal Int32 objectId;
         internal Int32 mapId;
 
-        internal BinaryObject()
-        {
-        }
+        internal BinaryObject() { }
 
-        internal  void Set(Int32 objectId, Int32 mapId)
+        internal void Set(Int32 objectId, Int32 mapId)
         {
-            SerTrace.Log( this, "BinaryObject Set ",objectId," ",mapId);        
+            SerTrace.Log(this, "BinaryObject Set ", objectId, " ", mapId);
             this.objectId = objectId;
             this.mapId = mapId;
         }
 
-
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteByte((Byte)BinaryHeaderEnum.Object);
             sout.WriteInt32(objectId);
@@ -618,7 +715,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             mapId = input.ReadInt32();
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -628,11 +725,11 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryObject*****");
+                BCLDebug.Trace("BINARY", "*****BinaryObject*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "Object");
-                BinaryUtil.NVTraceI("objectId (Int32)", objectId);      
+                BinaryUtil.NVTraceI("objectId (Int32)", objectId);
                 BinaryUtil.NVTraceI("mapId (Int32)", mapId);
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
@@ -663,22 +760,31 @@ namespace System.Runtime.Serialization.Formatters.Binary{
 
         // If the argument list contains only primitive or strings it is written out as part of the header
         // if not the args are written out as a separate array
-        internal Object[] WriteArray(String uri, String methodName, String typeName, Type[] instArgs, Object[] args, Object methodSignature, Object callContext, Object[] properties)
+        internal Object[] WriteArray(
+            String uri,
+            String methodName,
+            String typeName,
+            Type[] instArgs,
+            Object[] args,
+            Object methodSignature,
+            Object callContext,
+            Object[] properties
+        )
         {
-#if FEATURE_REMOTING            
+#if FEATURE_REMOTING
             this.uri = uri;
 #endif
             this.methodName = methodName;
             this.typeName = typeName;
-#if FEATURE_REMOTING            
+#if FEATURE_REMOTING
             this.instArgs = instArgs;
 #endif
             this.args = args;
-#if FEATURE_REMOTING            
+#if FEATURE_REMOTING
             this.methodSignature = methodSignature;
 #endif
             this.callContext = callContext;
-#if FEATURE_REMOTING            
+#if FEATURE_REMOTING
             this.properties = properties;
 #endif
 
@@ -690,20 +796,26 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 argTypes = new Type[args.Length];
                 // Check if args are all string or primitives
                 bArgsPrimitive = true;
-                for (int i =0; i<args.Length; i++)
+                for (int i = 0; i < args.Length; i++)
                 {
                     if (args[i] != null)
                     {
                         argTypes[i] = args[i].GetType();
-                        bool isArgPrimitive = Converter.ToCode(argTypes[i]) != InternalPrimitiveTypeE.Invalid;
-                        if (!(isArgPrimitive || Object.ReferenceEquals(argTypes[i], Converter.typeofString)) || args[i] is ISerializable)
+                        bool isArgPrimitive =
+                            Converter.ToCode(argTypes[i]) != InternalPrimitiveTypeE.Invalid;
+                        if (
+                            !(
+                                isArgPrimitive
+                                || Object.ReferenceEquals(argTypes[i], Converter.typeofString)
+                            )
+                            || args[i] is ISerializable
+                        )
                         {
                             bArgsPrimitive = false;
                             break;
                         }
                     }
                 }
-
 
                 if (bArgsPrimitive)
                     messageEnum = MessageEnum.ArgsInline;
@@ -713,7 +825,6 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                     messageEnum = MessageEnum.ArgsInArray;
                 }
             }
-
 
             if (instArgs != null)
             {
@@ -750,7 +861,6 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 return args;
             }
 
-
             if (arraySize > 0)
             {
                 int arrayPosition = 0;
@@ -760,7 +870,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.GenericMethod))
                     callA[arrayPosition++] = instArgs;
-                
+
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.MethodSignatureInArray))
                     callA[arrayPosition++] = methodSignature;
 
@@ -770,7 +880,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.PropertyInArray))
                     callA[arrayPosition] = properties;
 
-                 return callA;
+                return callA;
             }
             else
                 return null;
@@ -789,37 +899,37 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInline))
             {
                 sout.WriteInt32(args.Length);
-                for (int i=0; i<args.Length; i++)
+                for (int i = 0; i < args.Length; i++)
                 {
                     IOUtil.WriteWithCode(argTypes[i], args[i], sout);
                 }
-
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void Read(__BinaryParser input)
         {
-             messageEnum = (MessageEnum)input.ReadInt32();
-             //uri = (String)IOUtil.ReadWithCode(input);
-             methodName = (String)IOUtil.ReadWithCode(input);
-             typeName = (String)IOUtil.ReadWithCode(input);
+            messageEnum = (MessageEnum)input.ReadInt32();
+            //uri = (String)IOUtil.ReadWithCode(input);
+            methodName = (String)IOUtil.ReadWithCode(input);
+            typeName = (String)IOUtil.ReadWithCode(input);
 
 #if FEATURE_REMOTING
-             if (IOUtil.FlagTest(messageEnum, MessageEnum.ContextInline))
-             {
-                 scallContext = (String)IOUtil.ReadWithCode(input);
-                 LogicalCallContext lcallContext = new LogicalCallContext();
-                 lcallContext.RemotingData.LogicalCallID = scallContext;
-                 callContext = lcallContext;
-             }
-#endif             
+            if (IOUtil.FlagTest(messageEnum, MessageEnum.ContextInline))
+            {
+                scallContext = (String)IOUtil.ReadWithCode(input);
+                LogicalCallContext lcallContext = new LogicalCallContext();
+                lcallContext.RemotingData.LogicalCallID = scallContext;
+                callContext = lcallContext;
+            }
+#endif
 
-             if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInline))
-                 args = IOUtil.ReadArgs(input);
+            if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInline))
+                args = IOUtil.ReadArgs(input);
         }
+
 #if FEATURE_REMOTING
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal IMethodCallMessage ReadArray(Object[] callA, Object handlerObject)
         {
             /*
@@ -834,46 +944,69 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             else
             {
                 int arrayPosition = 0;
-                
+
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInArray))
                 {
                     if (callA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     args = (Object[])callA[arrayPosition++];
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.GenericMethod))
                 {
                     if (callA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     instArgs = (Type[])callA[arrayPosition++];
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.MethodSignatureInArray))
                 {
                     if (callA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     methodSignature = callA[arrayPosition++];
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ContextInArray))
                 {
                     if (callA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     callContext = callA[arrayPosition++];
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.PropertyInArray))
                 {
                     if (callA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     properties = callA[arrayPosition++];
                 }
             }
 
-            return new MethodCall(handlerObject, new BinaryMethodCallMessage(uri, methodName, typeName, instArgs, args, methodSignature, (LogicalCallContext)callContext, (Object[])properties));
+            return new MethodCall(
+                handlerObject,
+                new BinaryMethodCallMessage(
+                    uri,
+                    methodName,
+                    typeName,
+                    instArgs,
+                    args,
+                    methodSignature,
+                    (LogicalCallContext)callContext,
+                    (Object[])properties
+                )
+            );
         }
 #endif // FEATURE_REMOTING
+
         internal void Dump()
         {
             DumpInternal();
@@ -884,32 +1017,32 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryMethodCall*****");
+                BCLDebug.Trace("BINARY", "*****BinaryMethodCall*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "MethodCall");
                 BinaryUtil.NVTraceI("messageEnum (Int32)", ((Enum)messageEnum).ToString());
                 //BinaryUtil.NVTraceI("uri",uri);
-                BinaryUtil.NVTraceI("methodName",methodName);
-                BinaryUtil.NVTraceI("typeName",typeName);
+                BinaryUtil.NVTraceI("methodName", methodName);
+                BinaryUtil.NVTraceI("typeName", typeName);
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ContextInline))
                 {
                     if (callContext is String)
-                        BinaryUtil.NVTraceI("callContext", (String)callContext);   
-#if FEATURE_REMOTING                        
+                        BinaryUtil.NVTraceI("callContext", (String)callContext);
+#if FEATURE_REMOTING
                     else
-                        BinaryUtil.NVTraceI("callContext", scallContext);   
+                        BinaryUtil.NVTraceI("callContext", scallContext);
 #endif
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInline))
                 {
                     BinaryUtil.NVTraceI("args Length", args.Length);
-                    for (int i=0; i<args.Length; i++)
+                    for (int i = 0; i < args.Length; i++)
                     {
-                        BinaryUtil.NVTraceI("arg["+i+"]", args[i]);
+                        BinaryUtil.NVTraceI("arg[" + i + "]", args[i]);
                     }
                 }
 
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
@@ -918,7 +1051,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
     {
         Object returnValue;
         Object[] args;
-#if FEATURE_REMOTING        
+#if FEATURE_REMOTING
         Exception exception;
 #endif
         Object callContext;
@@ -931,26 +1064,40 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         MessageEnum messageEnum;
         Object[] callA;
         Type returnType;
-        static Object instanceOfVoid = FormatterServices.GetUninitializedObject(Converter.typeofSystemVoid);
+        static Object instanceOfVoid = FormatterServices.GetUninitializedObject(
+            Converter.typeofSystemVoid
+        );
 
         [System.Security.SecuritySafeCritical] // static constructors should be safe to call
-        static BinaryMethodReturn()
-        {
-        }
+        static BinaryMethodReturn() { }
 
-        internal BinaryMethodReturn()
-        {
-        }
+        internal BinaryMethodReturn() { }
 
         // If the argument list contains only primitive or strings it is written out as part of the header
         // if not the args are written out as a separate array
-        internal Object[] WriteArray(Object returnValue, Object[] args, Exception exception, Object callContext, Object[] properties)
+        internal Object[] WriteArray(
+            Object returnValue,
+            Object[] args,
+            Exception exception,
+            Object callContext,
+            Object[] properties
+        )
         {
-            SerTrace.Log(this, "WriteArray returnValue ",returnValue, "exception ", exception, " callContext ",callContext," properties ", properties);
+            SerTrace.Log(
+                this,
+                "WriteArray returnValue ",
+                returnValue,
+                "exception ",
+                exception,
+                " callContext ",
+                callContext,
+                " properties ",
+                properties
+            );
 
             this.returnValue = returnValue;
             this.args = args;
-#if FEATURE_REMOTING            
+#if FEATURE_REMOTING
             this.exception = exception;
 #endif
             this.callContext = callContext;
@@ -968,13 +1115,19 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 // Check if args are all string or primitives
 
                 bArgsPrimitive = true;
-                for (int i =0; i<args.Length; i++)
+                for (int i = 0; i < args.Length; i++)
                 {
                     if (args[i] != null)
                     {
                         argTypes[i] = args[i].GetType();
-                        bool isArgPrimitive = Converter.ToCode(argTypes[i]) != InternalPrimitiveTypeE.Invalid;
-                        if (!(isArgPrimitive || Object.ReferenceEquals(argTypes[i], Converter.typeofString)))
+                        bool isArgPrimitive =
+                            Converter.ToCode(argTypes[i]) != InternalPrimitiveTypeE.Invalid;
+                        if (
+                            !(
+                                isArgPrimitive
+                                || Object.ReferenceEquals(argTypes[i], Converter.typeofString)
+                            )
+                        )
                         {
                             bArgsPrimitive = false;
                             break;
@@ -991,7 +1144,6 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 }
             }
 
-
             if (returnValue == null)
                 messageEnum |= MessageEnum.NoReturnValue;
             else if (returnValue.GetType() == typeof(void))
@@ -999,8 +1151,12 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             else
             {
                 returnType = returnValue.GetType();
-                bool isReturnTypePrimitive = Converter.ToCode(returnType) != InternalPrimitiveTypeE.Invalid;
-                if (isReturnTypePrimitive || Object.ReferenceEquals(returnType, Converter.typeofString))
+                bool isReturnTypePrimitive =
+                    Converter.ToCode(returnType) != InternalPrimitiveTypeE.Invalid;
+                if (
+                    isReturnTypePrimitive
+                    || Object.ReferenceEquals(returnType, Converter.typeofString)
+                )
                     messageEnum |= MessageEnum.ReturnValueInline;
                 else
                 {
@@ -1057,14 +1213,13 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.PropertyInArray))
                     callA[arrayPosition] = properties;
 
-                 return callA;
+                return callA;
             }
             else
                 return null;
         }
 
-
-        public void Write(__BinaryWriter sout) 
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteByte((Byte)BinaryHeaderEnum.MethodReturn);
             sout.WriteInt32((Int32)messageEnum);
@@ -1080,43 +1235,47 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInline))
             {
                 sout.WriteInt32(args.Length);
-                for (int i=0; i<args.Length; i++)
+                for (int i = 0; i < args.Length; i++)
                 {
                     IOUtil.WriteWithCode(argTypes[i], args[i], sout);
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void Read(__BinaryParser input)
         {
-             messageEnum = (MessageEnum)input.ReadInt32();
+            messageEnum = (MessageEnum)input.ReadInt32();
 
-             if (IOUtil.FlagTest(messageEnum, MessageEnum.NoReturnValue))
-                 returnValue = null;
-             else if (IOUtil.FlagTest(messageEnum, MessageEnum.ReturnValueVoid))
-             {
-                 returnValue = instanceOfVoid;            
-             }
-             else if (IOUtil.FlagTest(messageEnum, MessageEnum.ReturnValueInline))
-                 returnValue = IOUtil.ReadWithCode(input);
+            if (IOUtil.FlagTest(messageEnum, MessageEnum.NoReturnValue))
+                returnValue = null;
+            else if (IOUtil.FlagTest(messageEnum, MessageEnum.ReturnValueVoid))
+            {
+                returnValue = instanceOfVoid;
+            }
+            else if (IOUtil.FlagTest(messageEnum, MessageEnum.ReturnValueInline))
+                returnValue = IOUtil.ReadWithCode(input);
 
 #if FEATURE_REMOTING
-             if (IOUtil.FlagTest(messageEnum, MessageEnum.ContextInline))
-             {
-                 scallContext = (String)IOUtil.ReadWithCode(input);
-                 LogicalCallContext lcallContext = new LogicalCallContext();
-                 lcallContext.RemotingData.LogicalCallID = scallContext;
-                 callContext = lcallContext;
-             }
+            if (IOUtil.FlagTest(messageEnum, MessageEnum.ContextInline))
+            {
+                scallContext = (String)IOUtil.ReadWithCode(input);
+                LogicalCallContext lcallContext = new LogicalCallContext();
+                lcallContext.RemotingData.LogicalCallID = scallContext;
+                callContext = lcallContext;
+            }
 #endif
-             if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInline))
-                 args = IOUtil.ReadArgs(input);
+            if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInline))
+                args = IOUtil.ReadArgs(input);
         }
 
 #if FEATURE_REMOTING
-        [System.Security.SecurityCritical]  // auto-generated
-        internal IMethodReturnMessage ReadArray(Object[] returnA, IMethodCallMessage methodCallMessage, Object handlerObject)
+        [System.Security.SecurityCritical] // auto-generated
+        internal IMethodReturnMessage ReadArray(
+            Object[] returnA,
+            IMethodCallMessage methodCallMessage,
+            Object handlerObject
+        )
         {
             if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsIsArray))
             {
@@ -1125,45 +1284,66 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             else
             {
                 int arrayPosition = 0;
-                    
+
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInArray))
                 {
                     if (returnA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     args = (Object[])returnA[arrayPosition++];
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ReturnValueInArray))
                 {
                     if (returnA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     returnValue = returnA[arrayPosition++];
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ExceptionInArray))
                 {
                     if (returnA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     exception = (Exception)returnA[arrayPosition++];
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ContextInArray))
                 {
-                   if (returnA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                    if (returnA.Length < arrayPosition)
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     callContext = returnA[arrayPosition++];
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.PropertyInArray))
                 {
                     if (returnA.Length < arrayPosition)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_Method"));
+                        throw new SerializationException(
+                            Environment.GetResourceString("Serialization_Method")
+                        );
                     properties = returnA[arrayPosition++];
                 }
             }
-            return new MethodResponse(methodCallMessage, handlerObject,  new BinaryMethodReturnMessage(returnValue, args, exception, (LogicalCallContext)callContext, (Object[])properties));
+            return new MethodResponse(
+                methodCallMessage,
+                handlerObject,
+                new BinaryMethodReturnMessage(
+                    returnValue,
+                    args,
+                    exception,
+                    (LogicalCallContext)callContext,
+                    (Object[])properties
+                )
+            );
         }
 #endif // FEATURE_REMOTING
+
         public void Dump()
         {
             DumpInternal();
@@ -1174,7 +1354,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryMethodReturn*****");
+                BCLDebug.Trace("BINARY", "*****BinaryMethodReturn*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "MethodReturn");
                 BinaryUtil.NVTraceI("messageEnum (Int32)", ((Enum)messageEnum).ToString());
 
@@ -1184,47 +1364,42 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ContextInline))
                 {
                     if (callContext is String)
-                        BinaryUtil.NVTraceI("callContext", (String)callContext);   
-#if FEATURE_REMOTING                        
+                        BinaryUtil.NVTraceI("callContext", (String)callContext);
+#if FEATURE_REMOTING
                     else
-                        BinaryUtil.NVTraceI("callContext", scallContext);   
+                        BinaryUtil.NVTraceI("callContext", scallContext);
 #endif
                 }
 
                 if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsInline))
                 {
                     BinaryUtil.NVTraceI("args Length", args.Length);
-                    for (int i=0; i<args.Length; i++)
+                    for (int i = 0; i < args.Length; i++)
                     {
-                        BinaryUtil.NVTraceI("arg["+i+"]", args[i]);
+                        BinaryUtil.NVTraceI("arg[" + i + "]", args[i]);
                     }
                 }
 
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
-
-
 
     internal sealed class BinaryObjectString : IStreamable
     {
         internal Int32 objectId;
         internal String value;
 
-        internal BinaryObjectString()
-        {
-        }
+        internal BinaryObjectString() { }
 
-        internal  void Set(Int32 objectId, String value)
+        internal void Set(Int32 objectId, String value)
         {
-            SerTrace.Log(this, "BinaryObjectString set ",objectId," ",value);
+            SerTrace.Log(this, "BinaryObjectString set ", objectId, " ", value);
             this.objectId = objectId;
             this.value = value;
-        }   
+        }
 
-
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteByte((Byte)BinaryHeaderEnum.ObjectString);
             sout.WriteInt32(objectId);
@@ -1238,7 +1413,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             value = input.ReadString();
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1248,11 +1423,11 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryObjectString*****");
+                BCLDebug.Trace("BINARY", "*****BinaryObjectString*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "ObjectString");
-                BinaryUtil.NVTraceI("objectId (Int32)", objectId);              
+                BinaryUtil.NVTraceI("objectId (Int32)", objectId);
                 BinaryUtil.NVTraceI("value (UTF)", value);
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
@@ -1262,11 +1437,9 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal Int32 objectId;
         internal Int32 value;
 
-        internal BinaryCrossAppDomainString()
-        {
-        }
+        internal BinaryCrossAppDomainString() { }
 
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteByte((Byte)BinaryHeaderEnum.CrossAppDomainString);
             sout.WriteInt32(objectId);
@@ -1280,7 +1453,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             value = input.ReadInt32();
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1290,11 +1463,11 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryCrossAppDomainString*****");
+                BCLDebug.Trace("BINARY", "*****BinaryCrossAppDomainString*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "CrossAppDomainString");
-                BinaryUtil.NVTraceI("objectId (Int32)", objectId);              
+                BinaryUtil.NVTraceI("objectId (Int32)", objectId);
                 BinaryUtil.NVTraceI("value (Int32)", value);
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
@@ -1303,11 +1476,9 @@ namespace System.Runtime.Serialization.Formatters.Binary{
     {
         internal Int32 crossAppDomainArrayIndex;
 
-        internal BinaryCrossAppDomainMap()
-        {
-        }
+        internal BinaryCrossAppDomainMap() { }
 
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteByte((Byte)BinaryHeaderEnum.CrossAppDomainMap);
             sout.WriteInt32(crossAppDomainArrayIndex);
@@ -1319,7 +1490,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             crossAppDomainArrayIndex = input.ReadInt32();
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1329,33 +1500,35 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryCrossAppDomainMap*****");
+                BCLDebug.Trace("BINARY", "*****BinaryCrossAppDomainMap*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "CrossAppDomainMap");
-                BinaryUtil.NVTraceI("crossAppDomainArrayIndex (Int32)", crossAppDomainArrayIndex);              
-                BCLDebug.Trace("BINARY","****************************");
+                BinaryUtil.NVTraceI("crossAppDomainArrayIndex (Int32)", crossAppDomainArrayIndex);
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
-
 
     internal sealed class MemberPrimitiveTyped : IStreamable
     {
         internal InternalPrimitiveTypeE primitiveTypeEnum;
         internal Object value;
 
-        internal MemberPrimitiveTyped()
-        {
-        }
+        internal MemberPrimitiveTyped() { }
 
         internal void Set(InternalPrimitiveTypeE primitiveTypeEnum, Object value)
         {
-            SerTrace.Log(this, "MemberPrimitiveTyped Set ",((Enum)primitiveTypeEnum).ToString()," ",value);
+            SerTrace.Log(
+                this,
+                "MemberPrimitiveTyped Set ",
+                ((Enum)primitiveTypeEnum).ToString(),
+                " ",
+                value
+            );
             this.primitiveTypeEnum = primitiveTypeEnum;
             this.value = value;
-        }   
+        }
 
-
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteByte((Byte)BinaryHeaderEnum.MemberPrimitiveTyped);
             sout.WriteByte((Byte)primitiveTypeEnum); //pdj
@@ -1366,10 +1539,10 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         public void Read(__BinaryParser input)
         {
             primitiveTypeEnum = (InternalPrimitiveTypeE)input.ReadByte(); //PDJ
-            value = input.ReadValue(primitiveTypeEnum);     
+            value = input.ReadValue(primitiveTypeEnum);
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1379,15 +1552,20 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****MemberPrimitiveTyped*****");
+                BCLDebug.Trace("BINARY", "*****MemberPrimitiveTyped*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "MemberPrimitiveTyped");
-                BinaryUtil.NVTraceI("primitiveTypeEnum (Byte)", ((Enum)primitiveTypeEnum).ToString());
-                BinaryUtil.NVTraceI("value ("+ Converter.ToComType(primitiveTypeEnum)+")", value);
-                BCLDebug.Trace("BINARY","****************************");
+                BinaryUtil.NVTraceI(
+                    "primitiveTypeEnum (Byte)",
+                    ((Enum)primitiveTypeEnum).ToString()
+                );
+                BinaryUtil.NVTraceI(
+                    "value (" + Converter.ToComType(primitiveTypeEnum) + ")",
+                    value
+                );
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
-
 
     internal sealed class BinaryObjectWithMap : IStreamable
     {
@@ -1396,21 +1574,35 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal String name;
         internal Int32 numMembers;
         internal String[] memberNames;
-        internal Int32 assemId;   
+        internal Int32 assemId;
 
-        internal BinaryObjectWithMap()
-        {
-        }
+        internal BinaryObjectWithMap() { }
 
         internal BinaryObjectWithMap(BinaryHeaderEnum binaryHeaderEnum)
         {
             this.binaryHeaderEnum = binaryHeaderEnum;
         }
 
-        internal  void Set(Int32 objectId, String name, Int32 numMembers, String[] memberNames, Int32 assemId)
+        internal void Set(
+            Int32 objectId,
+            String name,
+            Int32 numMembers,
+            String[] memberNames,
+            Int32 assemId
+        )
         {
-#if _DEBUG            
-            SerTrace.Log(this, "BinaryObjectWithMap Set ",objectId," assemId ",assemId," ",Util.PString(name)," numMembers ",numMembers);
+#if _DEBUG
+            SerTrace.Log(
+                this,
+                "BinaryObjectWithMap Set ",
+                objectId,
+                " assemId ",
+                assemId,
+                " ",
+                Util.PString(name),
+                " numMembers ",
+                numMembers
+            );
 #endif
             this.objectId = objectId;
             this.name = name;
@@ -1422,17 +1614,15 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 binaryHeaderEnum = BinaryHeaderEnum.ObjectWithMapAssemId;
             else
                 binaryHeaderEnum = BinaryHeaderEnum.ObjectWithMap;
-
         }
 
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
-
             sout.WriteByte((Byte)binaryHeaderEnum);
             sout.WriteInt32(objectId);
             sout.WriteString(name);
             sout.WriteInt32(numMembers);
-            for (int i=0; i<numMembers; i++)
+            for (int i = 0; i < numMembers; i++)
                 sout.WriteString(memberNames[i]);
             if (assemId > 0)
                 sout.WriteInt32(assemId);
@@ -1445,10 +1635,10 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             name = input.ReadString();
             numMembers = input.ReadInt32();
             memberNames = new String[numMembers];
-            for (int i=0; i<numMembers; i++)
+            for (int i = 0; i < numMembers; i++)
             {
                 memberNames[i] = input.ReadString();
-                SerTrace.Log(this, "BinaryObjectWithMap Read ",i," ",memberNames[i]);
+                SerTrace.Log(this, "BinaryObjectWithMap Read ", i, " ", memberNames[i]);
             }
 
             if (binaryHeaderEnum == BinaryHeaderEnum.ObjectWithMapAssemId)
@@ -1457,8 +1647,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             }
         }
 
-
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1468,24 +1657,23 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryObjectWithMap*****");
+                BCLDebug.Trace("BINARY", "*****BinaryObjectWithMap*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", ((Enum)binaryHeaderEnum).ToString());
                 BinaryUtil.NVTraceI("objectId (Int32)", objectId);
                 BinaryUtil.NVTraceI("name (UTF)", name);
                 BinaryUtil.NVTraceI("numMembers (Int32)", numMembers);
-                for (int i=0; i<numMembers; i++)
+                for (int i = 0; i < numMembers; i++)
                     BinaryUtil.NVTraceI("memberNames (UTF)", memberNames[i]);
                 if (binaryHeaderEnum == BinaryHeaderEnum.ObjectWithMapAssemId)
-                BinaryUtil.NVTraceI("assemId (Int32)", assemId);
-                BCLDebug.Trace("BINARY","****************************");
+                    BinaryUtil.NVTraceI("assemId (Int32)", assemId);
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
 
-
-    internal  sealed class BinaryObjectWithMapTyped : IStreamable
+    internal sealed class BinaryObjectWithMapTyped : IStreamable
     {
-        internal BinaryHeaderEnum binaryHeaderEnum;     
+        internal BinaryHeaderEnum binaryHeaderEnum;
         internal Int32 objectId;
         internal String name;
         internal Int32 numMembers;
@@ -1493,11 +1681,9 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal BinaryTypeEnum[] binaryTypeEnumA;
         internal Object[] typeInformationA;
         internal Int32[] memberAssemIds;
-        internal Int32 assemId;     
+        internal Int32 assemId;
 
-        internal BinaryObjectWithMapTyped()
-        {
-        }
+        internal BinaryObjectWithMapTyped() { }
 
         internal BinaryObjectWithMapTyped(BinaryHeaderEnum binaryHeaderEnum)
         {
@@ -1523,12 +1709,30 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         }
 #endif
 
-
-        internal  void Set(Int32 objectId, String name, Int32 numMembers, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, Int32 assemId)
+        internal void Set(
+            Int32 objectId,
+            String name,
+            Int32 numMembers,
+            String[] memberNames,
+            BinaryTypeEnum[] binaryTypeEnumA,
+            Object[] typeInformationA,
+            Int32[] memberAssemIds,
+            Int32 assemId
+        )
         {
-            SerTrace.Log(this, "BinaryObjectWithMapTyped Set ",objectId," assemId ",assemId," ",name," numMembers ",numMembers);
+            SerTrace.Log(
+                this,
+                "BinaryObjectWithMapTyped Set ",
+                objectId,
+                " assemId ",
+                assemId,
+                " ",
+                name,
+                " numMembers ",
+                numMembers
+            );
             this.objectId = objectId;
-            this.assemId = assemId;         
+            this.assemId = assemId;
             this.name = name;
             this.numMembers = numMembers;
             this.memberNames = memberNames;
@@ -1540,27 +1744,30 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             if (assemId > 0)
                 binaryHeaderEnum = BinaryHeaderEnum.ObjectWithMapTypedAssemId;
             else
-                binaryHeaderEnum = BinaryHeaderEnum.ObjectWithMapTyped;             
+                binaryHeaderEnum = BinaryHeaderEnum.ObjectWithMapTyped;
         }
 
-
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
-            sout.WriteByte((Byte)binaryHeaderEnum);         
+            sout.WriteByte((Byte)binaryHeaderEnum);
             sout.WriteInt32(objectId);
             sout.WriteString(name);
             sout.WriteInt32(numMembers);
-            for (int i=0; i<numMembers; i++)
+            for (int i = 0; i < numMembers; i++)
                 sout.WriteString(memberNames[i]);
-            for (int i=0; i<numMembers; i++)
+            for (int i = 0; i < numMembers; i++)
                 sout.WriteByte((Byte)binaryTypeEnumA[i]);
-            for (int i=0; i<numMembers; i++)
+            for (int i = 0; i < numMembers; i++)
                 //if (binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUrt && binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUser)
-                    BinaryConverter.WriteTypeInfo(binaryTypeEnumA[i], typeInformationA[i], memberAssemIds[i], sout);
+                BinaryConverter.WriteTypeInfo(
+                    binaryTypeEnumA[i],
+                    typeInformationA[i],
+                    memberAssemIds[i],
+                    sout
+                );
 
             if (assemId > 0)
                 sout.WriteInt32(assemId);
-
         }
 
         [System.Security.SecurityCritical] // implements Critical method
@@ -1574,24 +1781,31 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             binaryTypeEnumA = new BinaryTypeEnum[numMembers];
             typeInformationA = new Object[numMembers];
             memberAssemIds = new Int32[numMembers];
-            for (int i=0; i<numMembers; i++)
+            for (int i = 0; i < numMembers; i++)
                 memberNames[i] = input.ReadString();
-            for (int i=0; i<numMembers; i++)
+            for (int i = 0; i < numMembers; i++)
                 binaryTypeEnumA[i] = (BinaryTypeEnum)input.ReadByte();
-            for (int i=0; i<numMembers; i++)
-                if (binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUrt && binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUser)
-                    typeInformationA[i] = BinaryConverter.ReadTypeInfo(binaryTypeEnumA[i], input, out memberAssemIds[i]);
+            for (int i = 0; i < numMembers; i++)
+                if (
+                    binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUrt
+                    && binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUser
+                )
+                    typeInformationA[i] = BinaryConverter.ReadTypeInfo(
+                        binaryTypeEnumA[i],
+                        input,
+                        out memberAssemIds[i]
+                    );
                 else
                     BinaryConverter.ReadTypeInfo(binaryTypeEnumA[i], input, out memberAssemIds[i]);
-            
+
             if (binaryHeaderEnum == BinaryHeaderEnum.ObjectWithMapTypedAssemId)
             {
-                assemId = input.ReadInt32();                
+                assemId = input.ReadInt32();
             }
         }
 
 #if _DEBUG
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1601,43 +1815,56 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****BinaryObjectWithMapTyped*****");
+                BCLDebug.Trace("BINARY", "*****BinaryObjectWithMapTyped*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", ((Enum)binaryHeaderEnum).ToString());
-                BinaryUtil.NVTraceI("objectId (Int32)", objectId);          
+                BinaryUtil.NVTraceI("objectId (Int32)", objectId);
                 BinaryUtil.NVTraceI("name (UTF)", name);
                 BinaryUtil.NVTraceI("numMembers (Int32)", numMembers);
-                for (int i=0; i<numMembers; i++)
+                for (int i = 0; i < numMembers; i++)
                     BinaryUtil.NVTraceI("memberNames (UTF)", memberNames[i]);
-                for (int i=0; i<numMembers; i++)
-                    BinaryUtil.NVTraceI("binaryTypeEnum("+i+") (Byte)", ((Enum)binaryTypeEnumA[i]).ToString());
-                for (int i=0; i<numMembers; i++)
-                    if ((binaryTypeEnumA[i] == BinaryTypeEnum.Primitive) || 
-                        (binaryTypeEnumA[i] == BinaryTypeEnum.PrimitiveArray) || 
-                        (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUrt) || 
-                        (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUser))
+                for (int i = 0; i < numMembers; i++)
+                    BinaryUtil.NVTraceI(
+                        "binaryTypeEnum(" + i + ") (Byte)",
+                        ((Enum)binaryTypeEnumA[i]).ToString()
+                    );
+                for (int i = 0; i < numMembers; i++)
+                    if (
+                        (binaryTypeEnumA[i] == BinaryTypeEnum.Primitive)
+                        || (binaryTypeEnumA[i] == BinaryTypeEnum.PrimitiveArray)
+                        || (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUrt)
+                        || (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUser)
+                    )
                     {
-                        BinaryUtil.NVTraceI("typeInformation("+i+") "+BinaryConverter.TypeInfoTraceString(typeInformationA[i]), typeInformationA[i]);
+                        BinaryUtil.NVTraceI(
+                            "typeInformation("
+                                + i
+                                + ") "
+                                + BinaryConverter.TypeInfoTraceString(typeInformationA[i]),
+                            typeInformationA[i]
+                        );
                         if (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUser)
-                             BinaryUtil.NVTraceI("memberAssemId("+i+") (Int32)", memberAssemIds[i]);
+                            BinaryUtil.NVTraceI(
+                                "memberAssemId(" + i + ") (Int32)",
+                                memberAssemIds[i]
+                            );
                     }
 
-                    /*
-                    for (int i=0; i<numMembers; i++)
-                    {
-                    if (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUser)
-                    BinaryUtil.NVTraceI("memberAssemId("+i+") (Int32)", memberAssemIds[i]);
-                    }
-            */
+                /*
+                for (int i=0; i<numMembers; i++)
+                {
+                if (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUser)
+                BinaryUtil.NVTraceI("memberAssemId("+i+") (Int32)", memberAssemIds[i]);
+                }
+        */
                 if (binaryHeaderEnum == BinaryHeaderEnum.ObjectWithMapTypedAssemId)
                     BinaryUtil.NVTraceI("assemId (Int32)", assemId);
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
 #endif
     }
 
-
-    internal  sealed class BinaryArray : IStreamable
+    internal sealed class BinaryArray : IStreamable
     {
         internal Int32 objectId;
         internal Int32 rank;
@@ -1652,20 +1879,38 @@ namespace System.Runtime.Serialization.Formatters.Binary{
 
         internal BinaryArray()
         {
-            SerTrace.Log( this, "BinaryArray Constructor 1 ");
+            SerTrace.Log(this, "BinaryArray Constructor 1 ");
         }
 
         // Read constructor
         internal BinaryArray(BinaryHeaderEnum binaryHeaderEnum)
         {
-            SerTrace.Log( this, "BinaryArray Constructor 2 ",   ((Enum)binaryHeaderEnum).ToString());
+            SerTrace.Log(this, "BinaryArray Constructor 2 ", ((Enum)binaryHeaderEnum).ToString());
             this.binaryHeaderEnum = binaryHeaderEnum;
         }
 
-
-        internal void Set(Int32 objectId, Int32 rank, Int32[] lengthA, Int32[] lowerBoundA, BinaryTypeEnum binaryTypeEnum, Object typeInformation, BinaryArrayTypeEnum binaryArrayTypeEnum, int assemId)
+        internal void Set(
+            Int32 objectId,
+            Int32 rank,
+            Int32[] lengthA,
+            Int32[] lowerBoundA,
+            BinaryTypeEnum binaryTypeEnum,
+            Object typeInformation,
+            BinaryArrayTypeEnum binaryArrayTypeEnum,
+            int assemId
+        )
         {
-            SerTrace.Log( this, "BinaryArray Set objectId ",objectId," rank ",rank," ",((Enum)binaryTypeEnum).ToString(),", assemId ",assemId);
+            SerTrace.Log(
+                this,
+                "BinaryArray Set objectId ",
+                objectId,
+                " rank ",
+                rank,
+                " ",
+                ((Enum)binaryTypeEnum).ToString(),
+                ", assemId ",
+                assemId
+            );
             this.objectId = objectId;
             this.binaryArrayTypeEnum = binaryArrayTypeEnum;
             this.rank = rank;
@@ -1685,13 +1930,12 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 else if (binaryTypeEnum == BinaryTypeEnum.Object)
                     binaryHeaderEnum = BinaryHeaderEnum.ArraySingleObject;
             }
-            SerTrace.Log( this, "BinaryArray Set Exit ",((Enum)binaryHeaderEnum).ToString());
+            SerTrace.Log(this, "BinaryArray Set Exit ", ((Enum)binaryHeaderEnum).ToString());
         }
 
-
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
-            SerTrace.Log( this, "Write");
+            SerTrace.Log(this, "Write");
             switch (binaryHeaderEnum)
             {
                 case BinaryHeaderEnum.ArraySinglePrimitive:
@@ -1715,20 +1959,21 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                     sout.WriteInt32(objectId);
                     sout.WriteByte((Byte)binaryArrayTypeEnum);
                     sout.WriteInt32(rank);
-                    for (int i=0; i<rank; i++)
+                    for (int i = 0; i < rank; i++)
                         sout.WriteInt32(lengthA[i]);
-                    if ((binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset) ||
-                        (binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset) ||
-                        (binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset))
+                    if (
+                        (binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset)
+                        || (binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset)
+                        || (binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset)
+                    )
                     {
-                        for (int i=0; i<rank; i++)
+                        for (int i = 0; i < rank; i++)
                             sout.WriteInt32(lowerBoundA[i]);
                     }
                     sout.WriteByte((Byte)binaryTypeEnum);
                     BinaryConverter.WriteTypeInfo(binaryTypeEnum, typeInformation, assemId, sout);
                     break;
             }
-
         }
 
         [System.Security.SecurityCritical] // implements Critical method
@@ -1766,29 +2011,35 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                     binaryTypeEnum = BinaryTypeEnum.Object;
                     typeInformation = null;
                     break;
-        default:
+                default:
                     objectId = input.ReadInt32();
                     binaryArrayTypeEnum = (BinaryArrayTypeEnum)input.ReadByte();
                     rank = input.ReadInt32();
                     lengthA = new Int32[rank];
                     lowerBoundA = new Int32[rank];
-                    for (int i=0; i<rank; i++)
-                        lengthA[i] = input.ReadInt32();         
-                    if ((binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset) ||
-                        (binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset) ||
-                        (binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset))
+                    for (int i = 0; i < rank; i++)
+                        lengthA[i] = input.ReadInt32();
+                    if (
+                        (binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset)
+                        || (binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset)
+                        || (binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset)
+                    )
                     {
-                        for (int i=0; i<rank; i++)
+                        for (int i = 0; i < rank; i++)
                             lowerBoundA[i] = input.ReadInt32();
                     }
                     binaryTypeEnum = (BinaryTypeEnum)input.ReadByte();
-                    typeInformation = BinaryConverter.ReadTypeInfo(binaryTypeEnum, input, out assemId);
+                    typeInformation = BinaryConverter.ReadTypeInfo(
+                        binaryTypeEnum,
+                        input,
+                        out assemId
+                    );
                     break;
             }
         }
 
-#if _DEBUG                        
-        public  void Dump()
+#if _DEBUG
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1801,56 +2052,85 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 switch (binaryHeaderEnum)
                 {
                     case BinaryHeaderEnum.ArraySinglePrimitive:
-                        BCLDebug.Trace("BINARY","*****ArraySinglePrimitive*****");
-                        BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", ((Enum)binaryHeaderEnum).ToString());
-                        BinaryUtil.NVTraceI("objectId (Int32)", objectId);                              
+                        BCLDebug.Trace("BINARY", "*****ArraySinglePrimitive*****");
+                        BinaryUtil.NVTraceI(
+                            "binaryHeaderEnum (Byte)",
+                            ((Enum)binaryHeaderEnum).ToString()
+                        );
+                        BinaryUtil.NVTraceI("objectId (Int32)", objectId);
                         BinaryUtil.NVTraceI("length (Int32)", lengthA[0]);
-                        BinaryUtil.NVTraceI("InternalPrimitiveTypeE (Byte)", ((Enum)typeInformation).ToString());
-                        BCLDebug.Trace("BINARY","****************************");
+                        BinaryUtil.NVTraceI(
+                            "InternalPrimitiveTypeE (Byte)",
+                            ((Enum)typeInformation).ToString()
+                        );
+                        BCLDebug.Trace("BINARY", "****************************");
                         break;
                     case BinaryHeaderEnum.ArraySingleString:
-                        BCLDebug.Trace("BINARY","*****ArraySingleString*****");
-                        BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", ((Enum)binaryHeaderEnum).ToString());
+                        BCLDebug.Trace("BINARY", "*****ArraySingleString*****");
+                        BinaryUtil.NVTraceI(
+                            "binaryHeaderEnum (Byte)",
+                            ((Enum)binaryHeaderEnum).ToString()
+                        );
                         BinaryUtil.NVTraceI("objectId (Int32)", objectId);
                         BinaryUtil.NVTraceI("length (Int32)", lengthA[0]);
-                        BCLDebug.Trace("BINARY","****************************");
+                        BCLDebug.Trace("BINARY", "****************************");
                         break;
                     case BinaryHeaderEnum.ArraySingleObject:
-                        BCLDebug.Trace("BINARY","*****ArraySingleObject*****");
-                        BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", ((Enum)binaryHeaderEnum).ToString());
+                        BCLDebug.Trace("BINARY", "*****ArraySingleObject*****");
+                        BinaryUtil.NVTraceI(
+                            "binaryHeaderEnum (Byte)",
+                            ((Enum)binaryHeaderEnum).ToString()
+                        );
                         BinaryUtil.NVTraceI("objectId (Int32)", objectId);
                         BinaryUtil.NVTraceI("length (Int32)", lengthA[0]);
-                        BCLDebug.Trace("BINARY","****************************");
+                        BCLDebug.Trace("BINARY", "****************************");
                         break;
                     default:
-                        BCLDebug.Trace("BINARY","*****BinaryArray*****");
-                        BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", ((Enum)binaryHeaderEnum).ToString());
-                        BinaryUtil.NVTraceI("objectId (Int32)", objectId);                              
-                        BinaryUtil.NVTraceI("binaryArrayTypeEnum (Byte)", ((Enum)binaryArrayTypeEnum).ToString());              
+                        BCLDebug.Trace("BINARY", "*****BinaryArray*****");
+                        BinaryUtil.NVTraceI(
+                            "binaryHeaderEnum (Byte)",
+                            ((Enum)binaryHeaderEnum).ToString()
+                        );
+                        BinaryUtil.NVTraceI("objectId (Int32)", objectId);
+                        BinaryUtil.NVTraceI(
+                            "binaryArrayTypeEnum (Byte)",
+                            ((Enum)binaryArrayTypeEnum).ToString()
+                        );
                         BinaryUtil.NVTraceI("rank (Int32)", rank);
-                        for (int i=0; i<rank; i++)
+                        for (int i = 0; i < rank; i++)
                             BinaryUtil.NVTraceI("length (Int32)", lengthA[i]);
-                        if ((binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset) ||
-                            (binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset) ||
-                            (binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset))
+                        if (
+                            (binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset)
+                            || (binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset)
+                            || (binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset)
+                        )
                         {
-                            for (int i=0; i<rank; i++)
+                            for (int i = 0; i < rank; i++)
                                 BinaryUtil.NVTraceI("lowerBound (Int32)", lowerBoundA[i]);
                         }
-                        BinaryUtil.NVTraceI("binaryTypeEnum (Byte)", ((Enum)binaryTypeEnum).ToString());
-                        if ((binaryTypeEnum == BinaryTypeEnum.Primitive) || 
-                            (binaryTypeEnum == BinaryTypeEnum.PrimitiveArray) || 
-                            (binaryTypeEnum == BinaryTypeEnum.ObjectUrt) || 
-                            (binaryTypeEnum == BinaryTypeEnum.ObjectUser))
-                            BinaryUtil.NVTraceI("typeInformation "+BinaryConverter.TypeInfoTraceString(typeInformation), typeInformation);
+                        BinaryUtil.NVTraceI(
+                            "binaryTypeEnum (Byte)",
+                            ((Enum)binaryTypeEnum).ToString()
+                        );
+                        if (
+                            (binaryTypeEnum == BinaryTypeEnum.Primitive)
+                            || (binaryTypeEnum == BinaryTypeEnum.PrimitiveArray)
+                            || (binaryTypeEnum == BinaryTypeEnum.ObjectUrt)
+                            || (binaryTypeEnum == BinaryTypeEnum.ObjectUser)
+                        )
+                            BinaryUtil.NVTraceI(
+                                "typeInformation "
+                                    + BinaryConverter.TypeInfoTraceString(typeInformation),
+                                typeInformation
+                            );
                         if (binaryTypeEnum == BinaryTypeEnum.ObjectUser)
                             BinaryUtil.NVTraceI("assemId (Int32)", assemId);
-                        BCLDebug.Trace("BINARY","****************************");
+                        BCLDebug.Trace("BINARY", "****************************");
                         break;
                 }
             }
         }
-#endif        
+#endif
     }
 
     internal sealed class MemberPrimitiveUnTyped : IStreamable
@@ -1860,26 +2140,28 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal InternalPrimitiveTypeE typeInformation;
         internal Object value;
 
-        internal MemberPrimitiveUnTyped()
-        {
-        }
+        internal MemberPrimitiveUnTyped() { }
 
-        internal  void Set(InternalPrimitiveTypeE typeInformation, Object value)
+        internal void Set(InternalPrimitiveTypeE typeInformation, Object value)
         {
-            SerTrace.Log( this, "MemberPrimitiveUnTyped Set typeInformation ",typeInformation," value ",value);
+            SerTrace.Log(
+                this,
+                "MemberPrimitiveUnTyped Set typeInformation ",
+                typeInformation,
+                " value ",
+                value
+            );
             this.typeInformation = typeInformation;
             this.value = value;
         }
 
-        internal  void Set(InternalPrimitiveTypeE typeInformation)
+        internal void Set(InternalPrimitiveTypeE typeInformation)
         {
-            SerTrace.Log(this, "MemberPrimitiveUnTyped  Set ",typeInformation);
+            SerTrace.Log(this, "MemberPrimitiveUnTyped  Set ", typeInformation);
             this.typeInformation = typeInformation;
         }
 
-
-
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteValue(typeInformation, value);
         }
@@ -1891,7 +2173,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             value = input.ReadValue(typeInformation);
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1902,29 +2184,26 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             if (BCLDebug.CheckEnabled("BINARY"))
             {
                 String typeString = Converter.ToComType(typeInformation);
-                BCLDebug.Trace("BINARY","*****MemberPrimitiveUnTyped*****");
-                BinaryUtil.NVTraceI("value ("+typeString+")", value);
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "*****MemberPrimitiveUnTyped*****");
+                BinaryUtil.NVTraceI("value (" + typeString + ")", value);
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
 
-
-    internal  sealed class MemberReference : IStreamable
+    internal sealed class MemberReference : IStreamable
     {
         internal Int32 idRef;
 
-        internal MemberReference()
-        {
-        }
+        internal MemberReference() { }
 
-        internal  void Set(Int32 idRef)
+        internal void Set(Int32 idRef)
         {
-            SerTrace.Log( this, "MemberReference Set ",idRef);
+            SerTrace.Log(this, "MemberReference Set ", idRef);
             this.idRef = idRef;
         }
 
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteByte((Byte)BinaryHeaderEnum.MemberReference);
             sout.WriteInt32(idRef);
@@ -1937,7 +2216,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             idRef = input.ReadInt32();
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -1947,28 +2226,29 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****MemberReference*****");       
-                BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", ((Enum)BinaryHeaderEnum.MemberReference).ToString());        
+                BCLDebug.Trace("BINARY", "*****MemberReference*****");
+                BinaryUtil.NVTraceI(
+                    "binaryHeaderEnum (Byte)",
+                    ((Enum)BinaryHeaderEnum.MemberReference).ToString()
+                );
                 BinaryUtil.NVTraceI("idRef (Int32)", idRef);
-                BCLDebug.Trace("BINARY","****************************");
+                BCLDebug.Trace("BINARY", "****************************");
             }
         }
     }
 
-    internal  sealed class ObjectNull : IStreamable
+    internal sealed class ObjectNull : IStreamable
     {
         internal int nullCount;
 
-        internal ObjectNull()
-        {
-        }
+        internal ObjectNull() { }
 
         internal void SetNullCount(int nullCount)
         {
             this.nullCount = nullCount;
         }
 
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             if (nullCount == 1)
             {
@@ -1983,19 +2263,18 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             else
             {
                 sout.WriteByte((Byte)BinaryHeaderEnum.ObjectNullMultiple);
-                sout.WriteInt32(nullCount);                
+                sout.WriteInt32(nullCount);
                 //Console.WriteLine("Write nullCount "+nullCount);
             }
         }
 
-
         [System.Security.SecurityCritical] // implements Critical method
-        public  void Read(__BinaryParser input)
+        public void Read(__BinaryParser input)
         {
             Read(input, BinaryHeaderEnum.ObjectNull);
         }
 
-        public  void Read(__BinaryParser input, BinaryHeaderEnum binaryHeaderEnum)
+        public void Read(__BinaryParser input, BinaryHeaderEnum binaryHeaderEnum)
         {
             //binaryHeaderEnum = input.ReadByte(); already read
             switch (binaryHeaderEnum)
@@ -2014,7 +2293,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             }
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal();
         }
@@ -2024,7 +2303,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****ObjectNull*****");
+                BCLDebug.Trace("BINARY", "*****ObjectNull*****");
                 if (nullCount == 1)
                 {
                     BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "ObjectNull");
@@ -2040,19 +2319,16 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                     BinaryUtil.NVTraceI("nullCount (Int32)", nullCount);
                 }
 
-                BCLDebug.Trace("BINARY","********************");
+                BCLDebug.Trace("BINARY", "********************");
             }
         }
     }
 
     internal sealed class MessageEnd : IStreamable
     {
+        internal MessageEnd() { }
 
-        internal MessageEnd()
-        {
-        }
-
-        public  void Write(__BinaryWriter sout)
+        public void Write(__BinaryWriter sout)
         {
             sout.WriteByte((Byte)BinaryHeaderEnum.MessageEnd);
         }
@@ -2063,12 +2339,12 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             //binaryHeaderEnum = input.ReadByte(); already read
         }
 
-        public  void Dump()
+        public void Dump()
         {
             DumpInternal(null);
         }
 
-        public  void Dump(Stream sout)
+        public void Dump(Stream sout)
         {
             DumpInternal(sout);
         }
@@ -2078,7 +2354,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         {
             if (BCLDebug.CheckEnabled("BINARY"))
             {
-                BCLDebug.Trace("BINARY","*****MessageEnd*****");
+                BCLDebug.Trace("BINARY", "*****MessageEnd*****");
                 BinaryUtil.NVTraceI("binaryHeaderEnum (Byte)", "MessageEnd");
                 long length = -1;
                 if (sout != null && sout.CanSeek)
@@ -2086,14 +2362,13 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                     length = sout.Length;
                     BinaryUtil.NVTraceI("Total Message Length in Bytes ", length);
                 }
-                BCLDebug.Trace("BINARY","********************");
+                BCLDebug.Trace("BINARY", "********************");
             }
         }
     }
 
-
     // When an ObjectWithMap or an ObjectWithMapTyped is read off the stream, an ObjectMap class is created
-    // to remember the type information. 
+    // to remember the type information.
     internal sealed class ObjectMap
     {
         internal String objectName;
@@ -2109,10 +2384,23 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal Int32 objectId;
         internal BinaryAssemblyInfo assemblyInfo;
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ObjectMap(String objectName, Type objectType, String[] memberNames, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo)
+        [System.Security.SecurityCritical] // auto-generated
+        internal ObjectMap(
+            String objectName,
+            Type objectType,
+            String[] memberNames,
+            ObjectReader objectReader,
+            Int32 objectId,
+            BinaryAssemblyInfo assemblyInfo
+        )
         {
-            SerTrace.Log( this, "Constructor 1 objectName ",objectName, ", objectType ",objectType);                            
+            SerTrace.Log(
+                this,
+                "Constructor 1 objectName ",
+                objectName,
+                ", objectType ",
+                objectType
+            );
             this.objectName = objectName;
             this.objectType = objectType;
             this.memberNames = memberNames;
@@ -2121,24 +2409,37 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             this.assemblyInfo = assemblyInfo;
 
             objectInfo = objectReader.CreateReadObjectInfo(objectType);
-            memberTypes = objectInfo.GetMemberTypes(memberNames, objectType); 
+            memberTypes = objectInfo.GetMemberTypes(memberNames, objectType);
 
             binaryTypeEnumA = new BinaryTypeEnum[memberTypes.Length];
             typeInformationA = new Object[memberTypes.Length];
 
-            for (int i=0; i<memberTypes.Length; i++)
+            for (int i = 0; i < memberTypes.Length; i++)
             {
                 Object typeInformation = null;
-                BinaryTypeEnum binaryTypeEnum = BinaryConverter.GetParserBinaryTypeInfo(memberTypes[i], out typeInformation);
+                BinaryTypeEnum binaryTypeEnum = BinaryConverter.GetParserBinaryTypeInfo(
+                    memberTypes[i],
+                    out typeInformation
+                );
                 binaryTypeEnumA[i] = binaryTypeEnum;
                 typeInformationA[i] = typeInformation;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ObjectMap(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, int[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+        [System.Security.SecurityCritical] // auto-generated
+        internal ObjectMap(
+            String objectName,
+            String[] memberNames,
+            BinaryTypeEnum[] binaryTypeEnumA,
+            Object[] typeInformationA,
+            int[] memberAssemIds,
+            ObjectReader objectReader,
+            Int32 objectId,
+            BinaryAssemblyInfo assemblyInfo,
+            SizedArray assemIdToAssemblyTable
+        )
         {
-            SerTrace.Log( this, "Constructor 2 objectName ",objectName);
+            SerTrace.Log(this, "Constructor 2 objectName ", objectName);
             this.objectName = objectName;
             this.memberNames = memberNames;
             this.binaryTypeEnumA = binaryTypeEnumA;
@@ -2148,21 +2449,31 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             this.assemblyInfo = assemblyInfo;
 
             if (assemblyInfo == null)
-                throw new SerializationException(Environment.GetResourceString("Serialization_Assembly",objectName));
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_Assembly", objectName)
+                );
 
             objectType = objectReader.GetType(assemblyInfo, objectName);
 
             memberTypes = new Type[memberNames.Length];
 
-            for (int i=0; i<memberNames.Length; i++)
+            for (int i = 0; i < memberNames.Length; i++)
             {
                 InternalPrimitiveTypeE primitiveTypeEnum;
                 String typeString;
                 Type type;
                 bool isVariant;
 
-                BinaryConverter.TypeFromInfo(binaryTypeEnumA[i], typeInformationA[i], objectReader, (BinaryAssemblyInfo)assemIdToAssemblyTable[memberAssemIds[i]],
-                                             out primitiveTypeEnum, out typeString, out type, out isVariant);
+                BinaryConverter.TypeFromInfo(
+                    binaryTypeEnumA[i],
+                    typeInformationA[i],
+                    objectReader,
+                    (BinaryAssemblyInfo)assemIdToAssemblyTable[memberAssemIds[i]],
+                    out primitiveTypeEnum,
+                    out typeString,
+                    out type,
+                    out isVariant
+                );
                 //if ((object)type == null)
                 //    throw new SerializationException(String.Format(Environment.GetResourceString("Serialization_TypeResolved"),objectName+" "+memberNames[i]+" "+typeInformationA[i]));
                 memberTypes[i] = type;
@@ -2170,7 +2481,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
 
             objectInfo = objectReader.CreateReadObjectInfo(objectType, memberNames, null);
             if (!objectInfo.isSi)
-                objectInfo.GetMemberTypes(memberNames, objectInfo.objectType);  // Check version match
+                objectInfo.GetMemberTypes(memberNames, objectInfo.objectType); // Check version match
         }
 
         internal ReadObjectInfo CreateObjectInfo(ref SerializationInfo si, ref Object[] memberData)
@@ -2189,19 +2500,52 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             }
         }
 
-
         // No member type information
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static ObjectMap Create(String name, Type objectType, String[] memberNames, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static ObjectMap Create(
+            String name,
+            Type objectType,
+            String[] memberNames,
+            ObjectReader objectReader,
+            Int32 objectId,
+            BinaryAssemblyInfo assemblyInfo
+        )
         {
-            return new ObjectMap(name, objectType, memberNames, objectReader, objectId, assemblyInfo);
+            return new ObjectMap(
+                name,
+                objectType,
+                memberNames,
+                objectReader,
+                objectId,
+                assemblyInfo
+            );
         }
 
-        // Member type information 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static ObjectMap Create(String name, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, int[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+        // Member type information
+        [System.Security.SecurityCritical] // auto-generated
+        internal static ObjectMap Create(
+            String name,
+            String[] memberNames,
+            BinaryTypeEnum[] binaryTypeEnumA,
+            Object[] typeInformationA,
+            int[] memberAssemIds,
+            ObjectReader objectReader,
+            Int32 objectId,
+            BinaryAssemblyInfo assemblyInfo,
+            SizedArray assemIdToAssemblyTable
+        )
         {
-            return new ObjectMap(name, memberNames, binaryTypeEnumA, typeInformationA, memberAssemIds, objectReader, objectId, assemblyInfo, assemIdToAssemblyTable);           
+            return new ObjectMap(
+                name,
+                memberNames,
+                binaryTypeEnumA,
+                typeInformationA,
+                memberAssemIds,
+                objectReader,
+                objectId,
+                assemblyInfo,
+                assemIdToAssemblyTable
+            );
         }
     }
 
@@ -2214,7 +2558,6 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal static int opRecordIdCount = 1;
         internal int opRecordId;
 
-
         // Control
         internal bool isInitial;
         internal int count; //Progress count
@@ -2225,13 +2568,13 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         internal InternalObjectTypeE objectTypeEnum = InternalObjectTypeE.Empty;
         internal InternalMemberTypeE memberTypeEnum;
         internal InternalMemberValueE memberValueEnum;
-        internal Type dtType;   
+        internal Type dtType;
 
         // Array Information
         internal int numItems;
         internal BinaryTypeEnum binaryTypeEnum;
         internal Object typeInformation;
-// disable csharp compiler warning #0414: field assigned unused value
+        // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         internal int nullCount;
 #pragma warning restore 0414
@@ -2246,16 +2589,16 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         // ParseRecord
         internal ParseRecord pr = new ParseRecord();
 
-
         internal ObjectProgress()
         {
             Counter();
         }
 
-        [Conditional("SER_LOGGING")]                                    
+        [Conditional("SER_LOGGING")]
         private void Counter()
         {
-            lock(this) {
+            lock (this)
+            {
                 opRecordId = opRecordIdCount++;
                 if (opRecordIdCount > 1000)
                     opRecordIdCount = 1;
@@ -2273,7 +2616,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             objectTypeEnum = InternalObjectTypeE.Empty;
             memberTypeEnum = InternalMemberTypeE.Empty;
             memberValueEnum = InternalMemberValueE.Empty;
-            dtType = null;  
+            dtType = null;
 
             // Array Information
             numItems = 0;
@@ -2291,7 +2634,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             pr.Init();
         }
 
-        //Array item entry of nulls has a count of nulls represented by that item. The first null has been 
+        //Array item entry of nulls has a count of nulls represented by that item. The first null has been
         // incremented by GetNext, the rest of the null counts are incremented here
         internal void ArrayCountIncrement(int value)
         {
@@ -2299,7 +2642,7 @@ namespace System.Runtime.Serialization.Formatters.Binary{
         }
 
         // Specifies what is to parsed next from the wire.
-        internal bool GetNext(out BinaryTypeEnum outBinaryTypeEnum, out Object outTypeInformation)  
+        internal bool GetNext(out BinaryTypeEnum outBinaryTypeEnum, out Object outTypeInformation)
         {
             //Initialize the out params up here.
             //<
@@ -2307,31 +2650,37 @@ namespace System.Runtime.Serialization.Formatters.Binary{
             outTypeInformation = null;
 
 #if _DEBUG
-            SerTrace.Log( this, "GetNext Entry");
+            SerTrace.Log(this, "GetNext Entry");
             Dump();
 #endif
 
             if (objectTypeEnum == InternalObjectTypeE.Array)
             {
-                SerTrace.Log( this, "GetNext Array");                   
+                SerTrace.Log(this, "GetNext Array");
                 // Array
                 if (count == numItems)
                     return false;
                 else
                 {
-                    outBinaryTypeEnum =  binaryTypeEnum;
+                    outBinaryTypeEnum = binaryTypeEnum;
                     outTypeInformation = typeInformation;
                     if (count == 0)
                         isInitial = false;
                     count++;
-                    SerTrace.Log( this, "GetNext Array Exit ",((Enum)outBinaryTypeEnum).ToString()," ",outTypeInformation);                                 
+                    SerTrace.Log(
+                        this,
+                        "GetNext Array Exit ",
+                        ((Enum)outBinaryTypeEnum).ToString(),
+                        " ",
+                        outTypeInformation
+                    );
                     return true;
                 }
             }
             else
             {
                 // Member
-                SerTrace.Log( this, "GetNext Member");                              
+                SerTrace.Log(this, "GetNext Member");
                 if ((count == memberLength) && (!isInitial))
                     return false;
                 else
@@ -2343,27 +2692,40 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                     name = memberNames[count];
                     if (memberTypes == null)
                     {
-                        SerTrace.Log( this, "GetNext memberTypes = null");
+                        SerTrace.Log(this, "GetNext memberTypes = null");
                     }
                     dtType = memberTypes[count];
                     count++;
-                    SerTrace.Log( this, "GetNext Member Exit ",((Enum)outBinaryTypeEnum).ToString()," ",outTypeInformation," memberName ",name);                    
+                    SerTrace.Log(
+                        this,
+                        "GetNext Member Exit ",
+                        ((Enum)outBinaryTypeEnum).ToString(),
+                        " ",
+                        outTypeInformation,
+                        " memberName ",
+                        name
+                    );
                     return true;
                 }
             }
         }
 
 #if _DEBUG
-// Get a String describing the ObjectProgress Record
-        public  String Trace()
+        // Get a String describing the ObjectProgress Record
+        public String Trace()
         {
-            return "ObjectProgress "+opRecordId+" name "+Util.PString(name)+" expectedType "+((Enum)expectedType).ToString();
+            return "ObjectProgress "
+                + opRecordId
+                + " name "
+                + Util.PString(name)
+                + " expectedType "
+                + ((Enum)expectedType).ToString();
         }
 
         // Dump contents of record
 
-        [Conditional("SER_LOGGING")]                            
-        internal  void Dump()
+        [Conditional("SER_LOGGING")]
+        internal void Dump()
         {
             try
             {
@@ -2375,50 +2737,44 @@ namespace System.Runtime.Serialization.Formatters.Binary{
                 Util.NVTrace("expectedTypeInformation", expectedTypeInformation);
                 SerTrace.Log("ParseRecord Information");
                 Util.NVTrace("name", name);
-                Util.NVTrace("objectTypeEnum",((Enum)objectTypeEnum).ToString());
-                Util.NVTrace("memberTypeEnum",((Enum)memberTypeEnum).ToString());
-                Util.NVTrace("memberValueEnum",((Enum)memberValueEnum).ToString());
+                Util.NVTrace("objectTypeEnum", ((Enum)objectTypeEnum).ToString());
+                Util.NVTrace("memberTypeEnum", ((Enum)memberTypeEnum).ToString());
+                Util.NVTrace("memberValueEnum", ((Enum)memberValueEnum).ToString());
                 if (dtType != null)
                     Util.NVTrace("dtType", dtType.ToString());
                 SerTrace.Log("Array Information");
                 Util.NVTrace("numItems", numItems);
-                Util.NVTrace("binaryTypeEnum",((Enum)binaryTypeEnum).ToString());
+                Util.NVTrace("binaryTypeEnum", ((Enum)binaryTypeEnum).ToString());
                 Util.NVTrace("typeInformation", typeInformation);
                 SerTrace.Log("Member Information");
                 Util.NVTrace("memberLength", memberLength);
                 if (binaryTypeEnumA != null)
                 {
-                    for (int i=0; i<memberLength; i++)
-                        Util.NVTrace("binaryTypeEnumA",((Enum)binaryTypeEnumA[i]).ToString());
+                    for (int i = 0; i < memberLength; i++)
+                        Util.NVTrace("binaryTypeEnumA", ((Enum)binaryTypeEnumA[i]).ToString());
                 }
                 if (typeInformationA != null)
                 {
-                    for (int i=0; i<memberLength; i++)
+                    for (int i = 0; i < memberLength; i++)
                         Util.NVTrace("typeInformationA", typeInformationA[i]);
                 }
                 if (memberNames != null)
                 {
-                    for (int i=0; i<memberLength; i++)
+                    for (int i = 0; i < memberLength; i++)
                         Util.NVTrace("memberNames", memberNames[i]);
                 }
                 if (memberTypes != null)
                 {
-                    for (int i=0; i<memberLength; i++)
+                    for (int i = 0; i < memberLength; i++)
                         Util.NVTrace("memberTypes", memberTypes[i].ToString());
                 }
             }
             catch (Exception e)
             {
                 BCLDebug.Log("[ObjectProgress.Dump]Unable to Dump Object Progress.");
-                BCLDebug.Log("[ObjectProgress.Dump]Error: "+e);
+                BCLDebug.Log("[ObjectProgress.Dump]Error: " + e);
             }
         }
-#endif 
+#endif
     }
-
-        }
-
-
-
-
-    
+}

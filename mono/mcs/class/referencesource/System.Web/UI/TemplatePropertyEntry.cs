@@ -4,34 +4,30 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     /// <devdoc>
     /// PropertyEntry for ITemplate properties
     /// </devdoc>
-    public class TemplatePropertyEntry : BuilderPropertyEntry {
+    public class TemplatePropertyEntry : BuilderPropertyEntry
+    {
         private bool _bindableTemplate;
 
-        internal TemplatePropertyEntry() {
-        }
-        
-        internal TemplatePropertyEntry(bool bindableTemplate) {
+        internal TemplatePropertyEntry() { }
+
+        internal TemplatePropertyEntry(bool bindableTemplate)
+        {
             _bindableTemplate = bindableTemplate;
         }
 
-        internal bool IsMultiple {
-            get {
-                return Util.IsMultiInstanceTemplateProperty(PropertyInfo);
-            }
+        internal bool IsMultiple
+        {
+            get { return Util.IsMultiInstanceTemplateProperty(PropertyInfo); }
         }
 
-        public bool BindableTemplate {
-            get {
-                return _bindableTemplate;
-            }
+        public bool BindableTemplate
+        {
+            get { return _bindableTemplate; }
         }
     }
-
-
 }
-
-

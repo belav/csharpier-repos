@@ -21,7 +21,8 @@ public class PropertyOverridesConvention : IPropertyAddedConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public PropertyOverridesConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -40,7 +41,8 @@ public class PropertyOverridesConvention : IPropertyAddedConvention
     /// <inheritdoc />
     public virtual void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionPropertyBuilder> context)
+        IConventionContext<IConventionPropertyBuilder> context
+    )
     {
         var property = propertyBuilder.Metadata;
         if (!property.DeclaringType.HasSharedClrType)

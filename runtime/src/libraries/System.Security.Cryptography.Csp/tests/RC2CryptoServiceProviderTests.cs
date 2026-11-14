@@ -31,7 +31,6 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
             }
         }
 
-
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public static void UseSalt_Success()

@@ -13,13 +13,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
      */
     internal enum ACCESS
     {
-        ACC_UNKNOWN,     // Not yet determined.
+        ACC_UNKNOWN, // Not yet determined.
         ACC_PRIVATE,
         ACC_INTERNAL_AND_PROTECTED,
         ACC_INTERNAL,
         ACC_PROTECTED,
-        ACC_INTERNALPROTECTED,   // internal OR protected
-        ACC_PUBLIC
+        ACC_INTERNALPROTECTED, // internal OR protected
+        ACC_PUBLIC,
     }
 
     // The kinds of aggregates.
@@ -33,7 +33,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Struct,
         Enum,
 
-        Lim
+        Lim,
     }
 
     /////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         New = 0x01,
         Ref = 0x02,
-        Val = 0x04
+        Val = 0x04,
     }
 
     // ----------------------------------------------------------------------------
@@ -57,15 +57,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal abstract class Symbol
     {
-        private SYMKIND _kind;     // the symbol kind
-        private ACCESS _access;    // access level
+        private SYMKIND _kind; // the symbol kind
+        private ACCESS _access; // access level
 
         // If this is true, then we had an error the first time so do not give an error the second time.
 
-        public Name name;         // name of the symbol
-        public ParentSymbol parent;  // parent of the symbol
-        public Symbol nextChild;     // next child of this parent
-        public Symbol nextSameName;  // next child of this parent with same name.
+        public Name name; // name of the symbol
+        public ParentSymbol parent; // parent of the symbol
+        public Symbol nextChild; // next child of this parent
+        public Symbol nextSameName; // next child of this parent with same name.
 
         public Symbol LookupNext(symbmask_t kindmask)
         {

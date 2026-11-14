@@ -111,14 +111,14 @@ internal static class ControllerActionDescriptorBuilder
         ActionModel action
     )
     {
-        var isVisible =
-            action.ApiExplorer?.IsVisible
+        var isVisible = action.ApiExplorer?.IsVisible
             ?? controller.ApiExplorer?.IsVisible
             ?? application.ApiExplorer?.IsVisible
             ?? false;
 
-        var isVisibleSetOnActionOrController =
-            action.ApiExplorer?.IsVisible ?? controller.ApiExplorer?.IsVisible ?? false;
+        var isVisibleSetOnActionOrController = action.ApiExplorer?.IsVisible
+            ?? controller.ApiExplorer?.IsVisible
+            ?? false;
 
         // ApiExplorer isn't supported on conventional-routed actions, but we still allow you to configure
         // it at the application level when you have a mix of controller types. We'll just skip over enabling

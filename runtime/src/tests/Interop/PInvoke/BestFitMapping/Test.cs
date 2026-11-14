@@ -2,34 +2,44 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 using Xunit;
-
 using static TestData;
 
 internal unsafe class Test
 {
-    internal record DataContext<T, U>(T Invalid, T Unmappable, T Valid, Func<T, U> GetValueToCompare);
+    internal record DataContext<T, U>(
+        T Invalid,
+        T Unmappable,
+        T Valid,
+        Func<T, U> GetValueToCompare
+    );
 
     internal readonly struct Functions<T>
     {
         public Functions(
-            delegate*<T, bool> inByValue,
-            delegate*<ref T, bool> inByRef,
-            delegate*<ref T, bool> inOutByRef)
+            delegate* <T, bool> inByValue,
+            delegate* <ref T, bool> inByRef,
+            delegate* <ref T, bool> inOutByRef
+        )
         {
             In = inByValue;
             InByRef = inByRef;
             InOutByRef = inOutByRef;
         }
 
-        public readonly delegate*<T, bool> In;
-        public readonly delegate*<ref T, bool> InByRef;
-        public readonly delegate*<ref T, bool> InOutByRef;
+        public readonly delegate* <T, bool> In;
+        public readonly delegate* <ref T, bool> InByRef;
+        public readonly delegate* <ref T, bool> InOutByRef;
     }
 
-    public static void Validate<T, U>(bool bestFitMapping, bool throwOnUnmappableChar, Functions<T> funcs, DataContext<T, U> data)
+    public static void Validate<T, U>(
+        bool bestFitMapping,
+        bool throwOnUnmappableChar,
+        Functions<T> funcs,
+        DataContext<T, U> data
+    )
     {
         Console.WriteLine($" ---- Marshal {typeof(T).Name}");
 
@@ -76,11 +86,17 @@ internal unsafe class Test
 
             unmappable = data.Unmappable;
             Assert.True(funcs.InByRef(ref unmappable));
-            Assert.Equal(data.GetValueToCompare(data.Unmappable), data.GetValueToCompare(unmappable));
+            Assert.Equal(
+                data.GetValueToCompare(data.Unmappable),
+                data.GetValueToCompare(unmappable)
+            );
 
             unmappable = data.Unmappable;
             Assert.True(funcs.InOutByRef(ref unmappable));
-            Assert.NotEqual(data.GetValueToCompare(data.Unmappable), data.GetValueToCompare(unmappable));
+            Assert.NotEqual(
+                data.GetValueToCompare(data.Unmappable),
+                data.GetValueToCompare(unmappable)
+            );
         }
 
         T valid = data.Valid;
@@ -95,27 +111,63 @@ internal unsafe class Test
         Assert.Equal(data.GetValueToCompare(data.Valid), data.GetValueToCompare(valid));
     }
 
-    public static void ValidateChar(bool bestFitMapping, bool throwOnUnmappableChar, Functions<char> funcs)
+    public static void ValidateChar(
+        bool bestFitMapping,
+        bool throwOnUnmappableChar,
+        Functions<char> funcs
+    )
     {
-        var context = new DataContext<char, char>(InvalidChar, UnmappableChar, ValidChar, (char c) => c);
+        var context = new DataContext<char, char>(
+            InvalidChar,
+            UnmappableChar,
+            ValidChar,
+            (char c) => c
+        );
         Validate(bestFitMapping, throwOnUnmappableChar, funcs, context);
     }
 
-    public static void ValidateString(bool bestFitMapping, bool throwOnUnmappableChar, Functions<string> funcs)
+    public static void ValidateString(
+        bool bestFitMapping,
+        bool throwOnUnmappableChar,
+        Functions<string> funcs
+    )
     {
-        var context = new DataContext<string, string>(InvalidString, UnmappableString, ValidString, (string s) => s);
+        var context = new DataContext<string, string>(
+            InvalidString,
+            UnmappableString,
+            ValidString,
+            (string s) => s
+        );
         Validate(bestFitMapping, throwOnUnmappableChar, funcs, context);
     }
 
-    public static void ValidateStringBuilder(bool bestFitMapping, bool throwOnUnmappableChar, Functions<StringBuilder> funcs)
+    public static void ValidateStringBuilder(
+        bool bestFitMapping,
+        bool throwOnUnmappableChar,
+        Functions<StringBuilder> funcs
+    )
     {
-        var context = new DataContext<StringBuilder, string>(InvalidStringBuilder, UnmappableStringBuilder, ValidStringBuilder, (StringBuilder s) => s.ToString());
+        var context = new DataContext<StringBuilder, string>(
+            InvalidStringBuilder,
+            UnmappableStringBuilder,
+            ValidStringBuilder,
+            (StringBuilder s) => s.ToString()
+        );
         Validate(bestFitMapping, throwOnUnmappableChar, funcs, context);
     }
 
-    public static void ValidateStringArray(bool bestFitMapping, bool throwOnUnmappableChar, Functions<string[]> funcs)
+    public static void ValidateStringArray(
+        bool bestFitMapping,
+        bool throwOnUnmappableChar,
+        Functions<string[]> funcs
+    )
     {
-        var context = new DataContext<string[], string>(InvalidStringArray, UnmappableStringArray, ValidStringArray, (string[] s) => s[0]);
+        var context = new DataContext<string[], string>(
+            InvalidStringArray,
+            UnmappableStringArray,
+            ValidStringArray,
+            (string[] s) => s[0]
+        );
         Validate(bestFitMapping, throwOnUnmappableChar, funcs, context);
     }
 }

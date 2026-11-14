@@ -38,7 +38,15 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             w.WriteEndElement();
             w.Dispose();
-            Assert.True(utils.CompareString("<Root>" + wSettings.NewLineChars + "  <child />" + wSettings.NewLineChars + "</Root>"));
+            Assert.True(
+                utils.CompareString(
+                    "<Root>"
+                        + wSettings.NewLineChars
+                        + "  <child />"
+                        + wSettings.NewLineChars
+                        + "</Root>"
+                )
+            );
         }
 
         [Theory]
@@ -150,7 +158,24 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteElementString("foo", "");
             w.WriteEndElement();
             w.Dispose();
-            CError.Compare(utils.CompareString("<?xml version=\"1.0\"?>" + wSettings.NewLineChars + "<!DOCTYPE root [foo]>" + wSettings.NewLineChars + "<root>" + wSettings.NewLineChars + "  <?pi pi?>" + wSettings.NewLineChars + "  <!--comment-->" + wSettings.NewLineChars + "  <foo />" + wSettings.NewLineChars + "</root>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<?xml version=\"1.0\"?>"
+                        + wSettings.NewLineChars
+                        + "<!DOCTYPE root [foo]>"
+                        + wSettings.NewLineChars
+                        + "<root>"
+                        + wSettings.NewLineChars
+                        + "  <?pi pi?>"
+                        + wSettings.NewLineChars
+                        + "  <!--comment-->"
+                        + wSettings.NewLineChars
+                        + "  <foo />"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -174,7 +199,18 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteStartElement("foo");
             w.WriteElementString("bar", "text2");
             w.Dispose();
-            CError.Compare(utils.CompareString("<master>" + wSettings.NewLineChars + "  <root>" + wSettings.NewLineChars + "    <foo>text</foo>" + wSettings.NewLineChars + "  </root>text<foo><bar>text2</bar></foo></master>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<master>"
+                        + wSettings.NewLineChars
+                        + "  <root>"
+                        + wSettings.NewLineChars
+                        + "    <foo>text</foo>"
+                        + wSettings.NewLineChars
+                        + "  </root>text<foo><bar>text2</bar></foo></master>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -265,7 +301,24 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteStartElement("e4");
             w.WriteEndDocument();
             w.Dispose();
-            CError.Compare(utils.CompareString("<e1>" + wSettings.NewLineChars + "  <e2>" + wSettings.NewLineChars + "    <e3>" + wSettings.NewLineChars + "      <e4 />" + wSettings.NewLineChars + "    </e3>" + wSettings.NewLineChars + "  </e2>" + wSettings.NewLineChars + "</e1>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<e1>"
+                        + wSettings.NewLineChars
+                        + "  <e2>"
+                        + wSettings.NewLineChars
+                        + "    <e3>"
+                        + wSettings.NewLineChars
+                        + "      <e4 />"
+                        + wSettings.NewLineChars
+                        + "    </e3>"
+                        + wSettings.NewLineChars
+                        + "  </e2>"
+                        + wSettings.NewLineChars
+                        + "</e1>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -287,7 +340,24 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             w.WriteEndElement();
             w.Dispose();
-            CError.Compare(utils.CompareString("<e1>" + wSettings.NewLineChars + "  <e2>" + wSettings.NewLineChars + "    <e3>" + wSettings.NewLineChars + "      <e4 />" + wSettings.NewLineChars + "    </e3>" + wSettings.NewLineChars + "  </e2>" + wSettings.NewLineChars + "</e1>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<e1>"
+                        + wSettings.NewLineChars
+                        + "  <e2>"
+                        + wSettings.NewLineChars
+                        + "    <e3>"
+                        + wSettings.NewLineChars
+                        + "      <e4 />"
+                        + wSettings.NewLineChars
+                        + "    </e3>"
+                        + wSettings.NewLineChars
+                        + "  </e2>"
+                        + wSettings.NewLineChars
+                        + "</e1>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -309,7 +379,24 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteFullEndElement();
             w.WriteFullEndElement();
             w.Dispose();
-            CError.Compare(utils.CompareString("<e1>" + wSettings.NewLineChars + "  <e2>" + wSettings.NewLineChars + "    <e3>" + wSettings.NewLineChars + "      <e4></e4>" + wSettings.NewLineChars + "    </e3>" + wSettings.NewLineChars + "  </e2>" + wSettings.NewLineChars + "</e1>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<e1>"
+                        + wSettings.NewLineChars
+                        + "  <e2>"
+                        + wSettings.NewLineChars
+                        + "    <e3>"
+                        + wSettings.NewLineChars
+                        + "      <e4></e4>"
+                        + wSettings.NewLineChars
+                        + "    </e3>"
+                        + wSettings.NewLineChars
+                        + "  </e2>"
+                        + wSettings.NewLineChars
+                        + "</e1>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -329,7 +416,16 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteComment("c");
             w.WriteProcessingInstruction("pi", "pi");
             w.Dispose();
-            CError.Compare(utils.CompareString("<root />" + wSettings.NewLineChars + "<!--c-->" + wSettings.NewLineChars + "<?pi pi?>  <!--c--><?pi pi?>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<root />"
+                        + wSettings.NewLineChars
+                        + "<!--c-->"
+                        + wSettings.NewLineChars
+                        + "<?pi pi?>  <!--c--><?pi pi?>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -348,7 +444,16 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteAttributeString("a2", "value");
             w.WriteEndDocument();
             w.Dispose();
-            CError.Compare(utils.CompareString("<root a1=\"value\">" + wSettings.NewLineChars + "  <foo a2=\"value\" />" + wSettings.NewLineChars + "</root>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<root a1=\"value\">"
+                        + wSettings.NewLineChars
+                        + "  <foo a2=\"value\" />"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -365,7 +470,10 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteProcessingInstruction("pi", "value");
             w.WriteStartElement("root");
             w.Dispose();
-            CError.Compare(utils.CompareString("<?pi value?>" + wSettings.NewLineChars + "<root />"), "");
+            CError.Compare(
+                utils.CompareString("<?pi value?>" + wSettings.NewLineChars + "<root />"),
+                ""
+            );
             return;
         }
 
@@ -382,7 +490,10 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteComment("value");
             w.WriteStartElement("root");
             w.Dispose();
-            CError.Compare(utils.CompareString("<!--value-->" + wSettings.NewLineChars + "<root />"), "");
+            CError.Compare(
+                utils.CompareString("<!--value-->" + wSettings.NewLineChars + "<root />"),
+                ""
+            );
             return;
         }
 
@@ -447,7 +558,18 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteString("text");
                 w.WriteStartElement("a");
             }
-            CError.Compare(utils.CompareString("<root>" + wSettings.NewLineChars + "  <child>" + wSettings.NewLineChars + "    <a />text<a /></child>" + wSettings.NewLineChars + "</root>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<root>"
+                        + wSettings.NewLineChars
+                        + "  <child>"
+                        + wSettings.NewLineChars
+                        + "    <a />text<a /></child>"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -463,7 +585,8 @@ namespace System.Xml.XmlWriterApiTests
                 XmlWriterSettings wSettings = new XmlWriterSettings();
                 wSettings.OmitXmlDeclaration = true;
                 wSettings.Indent = true;
-                wSettings.ConformanceLevel = (i % 2) == 0 ? ConformanceLevel.Auto : ConformanceLevel.Document;
+                wSettings.ConformanceLevel =
+                    (i % 2) == 0 ? ConformanceLevel.Auto : ConformanceLevel.Document;
                 CError.WriteLine("ConformanceLevel: {0}", wSettings.ConformanceLevel.ToString());
 
                 using (XmlWriter w = utils.CreateWriter(wSettings))
@@ -496,7 +619,8 @@ namespace System.Xml.XmlWriterApiTests
                 XmlWriterSettings wSettings = new XmlWriterSettings();
                 wSettings.OmitXmlDeclaration = false;
                 wSettings.Indent = true;
-                wSettings.ConformanceLevel = (i % 2) == 0 ? ConformanceLevel.Auto : ConformanceLevel.Document;
+                wSettings.ConformanceLevel =
+                    (i % 2) == 0 ? ConformanceLevel.Auto : ConformanceLevel.Document;
                 CError.WriteLine("ConformanceLevel: {0}", wSettings.ConformanceLevel.ToString());
 
                 XmlWriter w = utils.CreateWriter(wSettings);
@@ -504,7 +628,10 @@ namespace System.Xml.XmlWriterApiTests
                 if (wSettings.ConformanceLevel == ConformanceLevel.Auto)
                 {
                     // Write the decl as PI - since WriteStartDocument would switch to Document mode
-                    w.WriteProcessingInstruction("xml", string.Format("version=\"1.0\" encoding=\"{0}\"", encoding.WebName));
+                    w.WriteProcessingInstruction(
+                        "xml",
+                        string.Format("version=\"1.0\" encoding=\"{0}\"", encoding.WebName)
+                    );
                 }
                 else
                 {
@@ -512,7 +639,12 @@ namespace System.Xml.XmlWriterApiTests
                 }
                 w.WriteStartElement("root");
                 w.Dispose();
-                string expectedResult = string.Format("<?xml version=\"1.0\" encoding=\"{0}\"?>" + wSettings.NewLineChars + "<root />", encoding.WebName);
+                string expectedResult = string.Format(
+                    "<?xml version=\"1.0\" encoding=\"{0}\"?>"
+                        + wSettings.NewLineChars
+                        + "<root />",
+                    encoding.WebName
+                );
                 CError.Compare(utils.CompareString(expectedResult), "");
             }
         }
@@ -538,7 +670,18 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteEndElement();
                 w.WriteEndElement();
             }
-            CError.Compare(utils.CompareString("<root>" + wSettings.NewLineChars + "  <e1>" + wSettings.NewLineChars + "    <e2 />text</e1>" + wSettings.NewLineChars + "</root>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<root>"
+                        + wSettings.NewLineChars
+                        + "  <e1>"
+                        + wSettings.NewLineChars
+                        + "    <e2 />text</e1>"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                ),
+                ""
+            );
             return;
         }
 
@@ -559,7 +702,18 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteStartElement("root");
                 w.WriteEndElement();
             }
-            CError.Compare(utils.CompareString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + wSettings.NewLineChars + "<?piname1 pitext1?>" + wSettings.NewLineChars + "<?piname2 pitext2?>" + wSettings.NewLineChars + "<root />"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                        + wSettings.NewLineChars
+                        + "<?piname1 pitext1?>"
+                        + wSettings.NewLineChars
+                        + "<?piname2 pitext2?>"
+                        + wSettings.NewLineChars
+                        + "<root />"
+                ),
+                ""
+            );
             return;
         }
 
@@ -580,7 +734,20 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteProcessingInstruction("piname2", "pitext2");
                 w.WriteStartElement("root");
             }
-            CError.Compare(utils.CompareString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + wSettings.NewLineChars + "<!DOCTYPE name PUBLIC \"publicid\" \"systemid\"[subset]>" + wSettings.NewLineChars + "<?piname1 pitext1?>" + wSettings.NewLineChars + "<?piname2 pitext2?>" + wSettings.NewLineChars + "<root />"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                        + wSettings.NewLineChars
+                        + "<!DOCTYPE name PUBLIC \"publicid\" \"systemid\"[subset]>"
+                        + wSettings.NewLineChars
+                        + "<?piname1 pitext1?>"
+                        + wSettings.NewLineChars
+                        + "<?piname2 pitext2?>"
+                        + wSettings.NewLineChars
+                        + "<root />"
+                ),
+                ""
+            );
             return;
         }
 
@@ -619,7 +786,32 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteEndElement();
                 w.WriteEndElement();
             }
-            CError.Compare(utils.CompareString("<?piname1 pitext1?>" + wSettings.NewLineChars + "<!--comment1-->" + wSettings.NewLineChars + "<?piname2 pitext2?>" + wSettings.NewLineChars + "<root>" + wSettings.NewLineChars + "  <e1>" + wSettings.NewLineChars + "    <e2>" + wSettings.NewLineChars + "      <e3>" + wSettings.NewLineChars + "        <e4 />text1<?piname3 pitext3?></e3>" + wSettings.NewLineChars + "      <!--comment2--><![CDATA[cdata1]]>text2<?piname4 pitext4?><![CDATA[cdata2]]><!--comment3--><?piname5 pitext5?></e2>" + wSettings.NewLineChars + "  </e1>" + wSettings.NewLineChars + "</root>"), "");
+            CError.Compare(
+                utils.CompareString(
+                    "<?piname1 pitext1?>"
+                        + wSettings.NewLineChars
+                        + "<!--comment1-->"
+                        + wSettings.NewLineChars
+                        + "<?piname2 pitext2?>"
+                        + wSettings.NewLineChars
+                        + "<root>"
+                        + wSettings.NewLineChars
+                        + "  <e1>"
+                        + wSettings.NewLineChars
+                        + "    <e2>"
+                        + wSettings.NewLineChars
+                        + "      <e3>"
+                        + wSettings.NewLineChars
+                        + "        <e4 />text1<?piname3 pitext3?></e3>"
+                        + wSettings.NewLineChars
+                        + "      <!--comment2--><![CDATA[cdata1]]>text2<?piname4 pitext4?><![CDATA[cdata2]]><!--comment3--><?piname5 pitext5?></e2>"
+                        + wSettings.NewLineChars
+                        + "  </e1>"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                ),
+                ""
+            );
             return;
         }
     }

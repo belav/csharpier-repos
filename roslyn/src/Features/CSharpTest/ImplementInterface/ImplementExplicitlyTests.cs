@@ -21,11 +21,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         private const int SameInterface = 1;
         private const int AllInterfaces = 2;
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpImplementExplicitlyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpImplementExplicitlyCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task TestSingleMember()
@@ -56,7 +59,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                     public void Bar() { }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -88,7 +93,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                     public void Bar() { }
                 }
-                """, index: SameInterface);
+                """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -120,7 +127,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                     void IBar.Bar() { }
                 }
-                """, index: AllInterfaces);
+                """,
+                index: AllInterfaces
+            );
         }
 
         [Fact]
@@ -142,7 +151,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     int IGoo.Goo1 { get { } }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -164,7 +175,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     event Action IGoo.E { add { } remove { } }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -178,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     void IGoo.[||]Goo1() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -192,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     public void [||]Goo1() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -220,7 +235,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     int IGoo.M(int i) { return ((IGoo)this).M(i); }
                     event Action IGoo.Ev { add { ((IGoo)this).Ev += value; } remove { ((IGoo)this).Ev -= value; } }
                 }
-                """, index: SameInterface);
+                """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -248,7 +265,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     int IGoo.M(int i) { return ((IGoo)this).M(i); }
                     event Action IGoo.Ev { add { ((IGoo)this).Ev += value; } remove { ((IGoo)this).Ev -= value; } }
                 }
-                """, index: SameInterface);
+                """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -306,7 +325,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                         var v1 = nameof(((IGoo)this).Prop);
                     }
                 }
-                """, index: SameInterface);
+                """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -364,7 +385,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                         var v1 = nameof(((IGoo)this).Prop);
                     }
                 }
-                """, index: SameInterface);
+                """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -438,7 +461,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                         var v1 = nameof(((IGoo)c).Prop);
                     }
                 }
-                """, index: SameInterface);
+                """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -518,7 +543,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                         </Document>
                     </Project>
                 </Workspace>
-                """, index: SameInterface);
+                """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -552,7 +579,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                         throw new System.Exception();
                     }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -586,7 +615,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                         return ((IGoo)this).M(1);
                     }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
@@ -618,7 +649,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
@@ -650,7 +682,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
@@ -682,103 +715,107 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
         public async Task TestWithMismatchedDefault1()
         {
             await TestInRegularAndScriptAsync(
-    """
-    interface IRepro
-    {
-        void A(int value);
-    }
+                """
+                interface IRepro
+                {
+                    void A(int value);
+                }
 
-    class Repro : IRepro
-    {
-        public void [||]A(int value = 1)
-        {
-        }
-    }
-    """,
-    """
-    interface IRepro
-    {
-        void A(int value);
-    }
+                class Repro : IRepro
+                {
+                    public void [||]A(int value = 1)
+                    {
+                    }
+                }
+                """,
+                """
+                interface IRepro
+                {
+                    void A(int value);
+                }
 
-    class Repro : IRepro
-    {
-        void IRepro.A(int value = 1)
-        {
-        }
-    }
-    """);
+                class Repro : IRepro
+                {
+                    void IRepro.A(int value = 1)
+                    {
+                    }
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
         public async Task TestWithMismatchedDefault2()
         {
             await TestInRegularAndScriptAsync(
-    """
-    interface IRepro
-    {
-        void A(int value = 0);
-    }
+                """
+                interface IRepro
+                {
+                    void A(int value = 0);
+                }
 
-    class Repro : IRepro
-    {
-        public void [||]A(int value)
-        {
-        }
-    }
-    """,
-    """
-    interface IRepro
-    {
-        void A(int value = 0);
-    }
+                class Repro : IRepro
+                {
+                    public void [||]A(int value)
+                    {
+                    }
+                }
+                """,
+                """
+                interface IRepro
+                {
+                    void A(int value = 0);
+                }
 
-    class Repro : IRepro
-    {
-        void IRepro.A(int value)
-        {
-        }
-    }
-    """);
+                class Repro : IRepro
+                {
+                    void IRepro.A(int value)
+                    {
+                    }
+                }
+                """
+            );
         }
 
         [Fact]
         public async Task TestPreserveReadOnly()
         {
             await TestInRegularAndScriptAsync(
-    """
-    interface IRepro
-    {
-        void A();
-    }
+                """
+                interface IRepro
+                {
+                    void A();
+                }
 
-    class Repro : IRepro
-    {
-        public readonly void [||]A()
-        {
-        }
-    }
-    """,
-    """
-    interface IRepro
-    {
-        void A();
-    }
+                class Repro : IRepro
+                {
+                    public readonly void [||]A()
+                    {
+                    }
+                }
+                """,
+                """
+                interface IRepro
+                {
+                    void A();
+                }
 
-    class Repro : IRepro
-    {
-        readonly void IRepro.A()
-        {
-        }
-    }
-    """);
+                class Repro : IRepro
+                {
+                    readonly void IRepro.A()
+                    {
+                    }
+                }
+                """
+            );
         }
     }
 }

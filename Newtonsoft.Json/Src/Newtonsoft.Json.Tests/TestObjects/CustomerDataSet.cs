@@ -43,38 +43,59 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         private CustomersDataTable tableCustomers;
 
-        private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+        private global::System.Data.SchemaSerializationMode _schemaSerializationMode =
+            global::System.Data.SchemaSerializationMode.IncludeSchema;
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         public CustomerDataSet()
         {
             BeginInit();
             InitClass();
-            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
+            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler =
+                new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             base.Relations.CollectionChanged += schemaChangedHandler;
             EndInit();
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected CustomerDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-            base(info, context, false)
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
+        protected CustomerDataSet(
+            global::System.Runtime.Serialization.SerializationInfo info,
+            global::System.Runtime.Serialization.StreamingContext context
+        )
+            : base(info, context, false)
         {
             if ((IsBinarySerialized(info, context) == true))
             {
                 InitVars(false);
-                global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
+                global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 =
+                    new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
                 Tables.CollectionChanged += schemaChangedHandler1;
                 Relations.CollectionChanged += schemaChangedHandler1;
                 return;
             }
             string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
-            if ((DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema))
+            if (
+                (
+                    DetermineSchemaSerializationMode(info, context)
+                    == global::System.Data.SchemaSerializationMode.IncludeSchema
+                )
+            )
             {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
-                ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                ds.ReadXmlSchema(
+                    new global::System.Xml.XmlTextReader(
+                        new global::System.IO.StringReader(strSchema)
+                    )
+                );
                 if ((ds.Tables["Customers"] != null))
                 {
                     base.Tables.Add(new CustomersDataTable(ds.Tables["Customers"]));
@@ -90,27 +111,42 @@ namespace Newtonsoft.Json.Tests.TestObjects
             }
             else
             {
-                ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                ReadXmlSchema(
+                    new global::System.Xml.XmlTextReader(
+                        new global::System.IO.StringReader(strSchema)
+                    )
+                );
             }
             GetSerializationData(info, context);
-            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
+            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler =
+                new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             Relations.CollectionChanged += schemaChangedHandler;
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(
+            global::System.ComponentModel.DesignerSerializationVisibility.Content
+        )]
         public CustomersDataTable Customers
         {
             get { return tableCustomers; }
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         [global::System.ComponentModel.BrowsableAttribute(true)]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
+        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            global::System.ComponentModel.DesignerSerializationVisibility.Visible
+        )]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode
         {
             get { return _schemaSerializationMode; }
@@ -118,23 +154,36 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
+        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            global::System.ComponentModel.DesignerSerializationVisibility.Hidden
+        )]
         public new global::System.Data.DataTableCollection Tables
         {
             get { return base.Tables; }
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
+        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            global::System.ComponentModel.DesignerSerializationVisibility.Hidden
+        )]
         public new global::System.Data.DataRelationCollection Relations
         {
             get { return base.Relations; }
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         protected override void InitializeDerivedDataSet()
         {
             BeginInit();
@@ -143,7 +192,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         public override global::System.Data.DataSet Clone()
         {
             CustomerDataSet cln = ((CustomerDataSet)(base.Clone()));
@@ -153,24 +205,38 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         protected override bool ShouldSerializeTables()
         {
             return false;
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         protected override bool ShouldSerializeRelations()
         {
             return false;
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader)
         {
-            if ((DetermineSchemaSerializationMode(reader) == global::System.Data.SchemaSerializationMode.IncludeSchema))
+            if (
+                (
+                    DetermineSchemaSerializationMode(reader)
+                    == global::System.Data.SchemaSerializationMode.IncludeSchema
+                )
+            )
             {
                 Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
@@ -196,24 +262,36 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable()
         {
             global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
             WriteXmlSchema(new global::System.Xml.XmlTextWriter(stream, null));
             stream.Position = 0;
-            return global::System.Xml.Schema.XmlSchema.Read(new global::System.Xml.XmlTextReader(stream), null);
+            return global::System.Xml.Schema.XmlSchema.Read(
+                new global::System.Xml.XmlTextReader(stream),
+                null
+            );
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         internal void InitVars()
         {
             InitVars(true);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         internal void InitVars(bool initTable)
         {
             tableCustomers = ((CustomersDataTable)(base.Tables["Customers"]));
@@ -227,7 +305,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         private void InitClass()
         {
             DataSetName = "CustomerDataSet";
@@ -239,15 +320,24 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         private bool ShouldSerializeCustomers()
         {
             return false;
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e)
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
+        private void SchemaChanged(
+            object sender,
+            global::System.ComponentModel.CollectionChangeEventArgs e
+        )
         {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove))
             {
@@ -256,13 +346,21 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
+        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(
+            global::System.Xml.Schema.XmlSchemaSet xs
+        )
         {
             CustomerDataSet ds = new CustomerDataSet();
-            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-            global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
+            global::System.Xml.Schema.XmlSchemaComplexType type =
+                new global::System.Xml.Schema.XmlSchemaComplexType();
+            global::System.Xml.Schema.XmlSchemaSequence sequence =
+                new global::System.Xml.Schema.XmlSchemaSequence();
+            global::System.Xml.Schema.XmlSchemaAny any =
+                new global::System.Xml.Schema.XmlSchemaAny();
             any.Namespace = ds.Namespace;
             sequence.Items.Add(any);
             type.Particle = sequence;
@@ -275,7 +373,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 {
                     global::System.Xml.Schema.XmlSchema schema = null;
                     dsSchema.Write(s1);
-                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                    for (
+                        global::System.Collections.IEnumerator schemas = xs.Schemas(
+                                dsSchema.TargetNamespace
+                            )
+                            .GetEnumerator();
+                        schemas.MoveNext();
+
+                    )
                     {
                         schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                         s2.SetLength(0);
@@ -284,8 +389,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
                         {
                             s1.Position = 0;
                             s2.Position = 0;
-                            for (; ((s1.Position != s1.Length)
-                                    && (s1.ReadByte() == s2.ReadByte()));)
+                            for (
+                                ;
+                                ((s1.Position != s1.Length) && (s1.ReadByte() == s2.ReadByte()));
+
+                            )
                             {
                                 ;
                             }
@@ -312,20 +420,31 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return type;
         }
 
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void CustomersRowChangeEventHandler(object sender, CustomersRowChangeEvent e);
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
+        public delegate void CustomersRowChangeEventHandler(
+            object sender,
+            CustomersRowChangeEvent e
+        );
 
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CustomersDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable
+        public partial class CustomersDataTable
+            : global::System.Data.DataTable,
+                global::System.Collections.IEnumerable
         {
             private global::System.Data.DataColumn columnCustomerID;
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public CustomersDataTable()
             {
                 TableName = "Customers";
@@ -335,7 +454,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             internal CustomersDataTable(global::System.Data.DataTable table)
             {
                 TableName = table.TableName;
@@ -356,22 +478,34 @@ namespace Newtonsoft.Json.Tests.TestObjects
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected CustomersDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                base(info, context)
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
+            protected CustomersDataTable(
+                global::System.Runtime.Serialization.SerializationInfo info,
+                global::System.Runtime.Serialization.StreamingContext context
+            )
+                : base(info, context)
             {
                 InitVars();
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public global::System.Data.DataColumn CustomerIDColumn
             {
                 get { return columnCustomerID; }
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             [global::System.ComponentModel.Browsable(false)]
             public int Count
             {
@@ -379,54 +513,78 @@ namespace Newtonsoft.Json.Tests.TestObjects
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public CustomersRow this[int index]
             {
                 get { return ((CustomersRow)(Rows[index])); }
             }
 
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public event CustomersRowChangeEventHandler CustomersRowChanging;
 
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public event CustomersRowChangeEventHandler CustomersRowChanged;
 
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public event CustomersRowChangeEventHandler CustomersRowDeleting;
 
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public event CustomersRowChangeEventHandler CustomersRowDeleted;
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public void AddCustomersRow(CustomersRow row)
             {
                 Rows.Add(row);
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public CustomersRow AddCustomersRow(string CustomerID)
             {
                 CustomersRow rowCustomersRow = ((CustomersRow)(NewRow()));
-                object[] columnValuesArray = new object[]
-                {
-                    CustomerID
-                };
+                object[] columnValuesArray = new object[] { CustomerID };
                 rowCustomersRow.ItemArray = columnValuesArray;
                 Rows.Add(rowCustomersRow);
                 return rowCustomersRow;
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public virtual global::System.Collections.IEnumerator GetEnumerator()
             {
                 return Rows.GetEnumerator();
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public override global::System.Data.DataTable Clone()
             {
                 CustomersDataTable cln = ((CustomersDataTable)(base.Clone()));
@@ -435,122 +593,185 @@ namespace Newtonsoft.Json.Tests.TestObjects
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             protected override global::System.Data.DataTable CreateInstance()
             {
                 return new CustomersDataTable();
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             internal void InitVars()
             {
                 columnCustomerID = base.Columns["CustomerID"];
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             private void InitClass()
             {
-                columnCustomerID = new global::System.Data.DataColumn("CustomerID", typeof(string), null, global::System.Data.MappingType.Element);
+                columnCustomerID = new global::System.Data.DataColumn(
+                    "CustomerID",
+                    typeof(string),
+                    null,
+                    global::System.Data.MappingType.Element
+                );
                 base.Columns.Add(columnCustomerID);
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public CustomersRow NewCustomersRow()
             {
                 return ((CustomersRow)(NewRow()));
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
+            protected override global::System.Data.DataRow NewRowFromBuilder(
+                global::System.Data.DataRowBuilder builder
+            )
             {
                 return new CustomersRow(builder);
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             protected override global::System.Type GetRowType()
             {
                 return typeof(CustomersRow);
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
             {
                 base.OnRowChanged(e);
                 if ((CustomersRowChanged != null))
                 {
-                    CustomersRowChanged(this, new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action));
+                    CustomersRowChanged(
+                        this,
+                        new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action)
+                    );
                 }
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
             {
                 base.OnRowChanging(e);
                 if ((CustomersRowChanging != null))
                 {
-                    CustomersRowChanging(this, new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action));
+                    CustomersRowChanging(
+                        this,
+                        new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action)
+                    );
                 }
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
             {
                 base.OnRowDeleted(e);
                 if ((CustomersRowDeleted != null))
                 {
-                    CustomersRowDeleted(this, new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action));
+                    CustomersRowDeleted(
+                        this,
+                        new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action)
+                    );
                 }
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
             {
                 base.OnRowDeleting(e);
                 if ((CustomersRowDeleting != null))
                 {
-                    CustomersRowDeleting(this, new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action));
+                    CustomersRowDeleting(
+                        this,
+                        new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action)
+                    );
                 }
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public void RemoveCustomersRow(CustomersRow row)
             {
                 Rows.Remove(row);
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(
+                global::System.Xml.Schema.XmlSchemaSet xs
+            )
             {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                global::System.Xml.Schema.XmlSchemaComplexType type =
+                    new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence =
+                    new global::System.Xml.Schema.XmlSchemaSequence();
                 CustomerDataSet ds = new CustomerDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                global::System.Xml.Schema.XmlSchemaAny any1 =
+                    new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
                 any1.MaxOccurs = decimal.MaxValue;
                 any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                global::System.Xml.Schema.XmlSchemaAny any2 =
+                    new global::System.Xml.Schema.XmlSchemaAny();
                 any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
                 any2.MinOccurs = new decimal(1);
                 any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 =
+                    new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute1.Name = "namespace";
                 attribute1.FixedValue = ds.Namespace;
                 type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 =
+                    new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "CustomersDataTable";
                 type.Attributes.Add(attribute2);
@@ -564,7 +785,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        for (
+                            global::System.Collections.IEnumerator schemas = xs.Schemas(
+                                    dsSchema.TargetNamespace
+                                )
+                                .GetEnumerator();
+                            schemas.MoveNext();
+
+                        )
                         {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
@@ -573,8 +801,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
                             {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length)
-                                        && (s1.ReadByte() == s2.ReadByte()));)
+                                for (
+                                    ;
+                                    (
+                                        (s1.Position != s1.Length)
+                                        && (s1.ReadByte() == s2.ReadByte())
+                                    );
+
+                                )
                                 {
                                     ;
                                 }
@@ -610,15 +844,21 @@ namespace Newtonsoft.Json.Tests.TestObjects
             private CustomersDataTable tableCustomers;
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal CustomersRow(global::System.Data.DataRowBuilder rb) :
-                base(rb)
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
+            internal CustomersRow(global::System.Data.DataRowBuilder rb)
+                : base(rb)
             {
                 tableCustomers = ((CustomersDataTable)(Table));
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public string CustomerID
             {
                 get
@@ -629,21 +869,30 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     }
                     catch (global::System.InvalidCastException e)
                     {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CustomerID\' in table \'Customers\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException(
+                            "The value for column \'CustomerID\' in table \'Customers\' is DBNull.",
+                            e
+                        );
                     }
                 }
                 set { this[tableCustomers.CustomerIDColumn] = value; }
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public bool IsCustomerIDNull()
             {
                 return IsNull(tableCustomers.CustomerIDColumn);
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public void SetCustomerIDNull()
             {
                 this[tableCustomers.CustomerIDColumn] = global::System.Convert.DBNull;
@@ -653,7 +902,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
         /// <summary>
         ///Row event argument class
         ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+            "System.Data.Design.TypedDataSetGenerator",
+            "4.0.0.0"
+        )]
         public class CustomersRowChangeEvent : global::System.EventArgs
         {
             private CustomersRow eventRow;
@@ -661,22 +913,34 @@ namespace Newtonsoft.Json.Tests.TestObjects
             private global::System.Data.DataRowAction eventAction;
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CustomersRowChangeEvent(CustomersRow row, global::System.Data.DataRowAction action)
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
+            public CustomersRowChangeEvent(
+                CustomersRow row,
+                global::System.Data.DataRowAction action
+            )
             {
                 eventRow = row;
                 eventAction = action;
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public CustomersRow Row
             {
                 get { return eventRow; }
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
+                "System.Data.Design.TypedDataSetGenerator",
+                "4.0.0.0"
+            )]
             public global::System.Data.DataRowAction Action
             {
                 get { return eventAction; }

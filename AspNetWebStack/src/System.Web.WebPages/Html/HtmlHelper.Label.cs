@@ -29,11 +29,18 @@ namespace System.Web.WebPages.Html
             return Label(labelText, labelFor, AnonymousObjectToHtmlAttributes(attributes));
         }
 
-        public IHtmlString Label(string labelText, string labelFor, IDictionary<string, object> attributes)
+        public IHtmlString Label(
+            string labelText,
+            string labelFor,
+            IDictionary<string, object> attributes
+        )
         {
             if (String.IsNullOrEmpty(labelText))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "labelText");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "labelText"
+                );
             }
 
             labelFor = labelFor ?? labelText;

@@ -6,7 +6,7 @@ using System;
 namespace ServerSimulator
 {
     /// <summary>
-    /// This class simulates a cache of user-defined size filled with 
+    /// This class simulates a cache of user-defined size filled with
     /// arrays of objects of user-defined size, replacing them using either a FIFO or random algorithm
     /// </summary>
     internal sealed class Cache
@@ -20,7 +20,9 @@ namespace ServerSimulator
 
         public Cache(bool fifo)
         {
-            cache_item_size = (int)(ServerSimulator.Params.CacheSize * ServerSimulator.Params.CacheReplacementRate);
+            cache_item_size = (int)(
+                ServerSimulator.Params.CacheSize * ServerSimulator.Params.CacheReplacementRate
+            );
             cache_length = (int)(1 / ServerSimulator.Params.CacheReplacementRate);
             cache_list = new Object[cache_length];
             cache_item_count = 0;
@@ -77,10 +79,7 @@ namespace ServerSimulator
         // returns true if the cache is full
         public bool IsFull
         {
-            get
-            {
-                return (cache_item_count == cache_length);
-            }
+            get { return (cache_item_count == cache_length); }
         }
     }
 }

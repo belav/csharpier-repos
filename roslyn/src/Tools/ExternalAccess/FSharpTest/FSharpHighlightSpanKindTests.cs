@@ -29,29 +29,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.UnitTests
             switch (kind)
             {
                 case FSharpHighlightSpanKind.None:
-                    {
-                        return HighlightSpanKind.None;
-                    }
+                {
+                    return HighlightSpanKind.None;
+                }
 
                 case FSharpHighlightSpanKind.Definition:
-                    {
-                        return HighlightSpanKind.Definition;
-                    }
+                {
+                    return HighlightSpanKind.Definition;
+                }
 
                 case FSharpHighlightSpanKind.Reference:
-                    {
-                        return HighlightSpanKind.Reference;
-                    }
+                {
+                    return HighlightSpanKind.Reference;
+                }
 
                 case FSharpHighlightSpanKind.WrittenReference:
-                    {
-                        return HighlightSpanKind.WrittenReference;
-                    }
+                {
+                    return HighlightSpanKind.WrittenReference;
+                }
 
                 default:
-                    {
-                        throw ExceptionUtilities.UnexpectedValue(kind);
-                    }
+                {
+                    throw ExceptionUtilities.UnexpectedValue(kind);
+                }
             }
         }
 

@@ -13,39 +13,51 @@ namespace System.Json
     /// <summary>
     /// Represents a JavaScript Object Notation (JSON) primitive type in the common language runtime (CLR).
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "JsonPrimitive does not represent a collection.")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "JsonPrimitive does not represent a collection."
+    )]
     [DataContract]
     public sealed class JsonPrimitive : JsonValue
     {
         internal const string DateTimeIsoFormat = "yyyy-MM-ddTHH:mm:ss.fffK";
         private const string UtcString = "UTC";
         private const string GmtString = "GMT";
-        private static readonly long UnixEpochTicks = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
+        private static readonly long UnixEpochTicks = new DateTime(
+            1970,
+            1,
+            1,
+            0,
+            0,
+            0,
+            DateTimeKind.Utc
+        ).Ticks;
         private static readonly char[] FloatingPointChars = new char[] { '.', 'e', 'E' };
         private static readonly Type jsonPrimitiveType = typeof(JsonPrimitive);
         private static readonly Type uriType = typeof(Uri);
 
-        private static readonly Dictionary<Type, Func<string, ConvertResult>> stringConverters = new Dictionary<Type, Func<string, ConvertResult>>
-        {
-            { typeof(bool), new Func<string, ConvertResult>(StringToBool) },
-            { typeof(byte), new Func<string, ConvertResult>(StringToByte) },
-            { typeof(char), new Func<string, ConvertResult>(StringToChar) },
-            { typeof(sbyte), new Func<string, ConvertResult>(StringToSByte) },
-            { typeof(short), new Func<string, ConvertResult>(StringToShort) },
-            { typeof(int), new Func<string, ConvertResult>(StringToInt) },
-            { typeof(long), new Func<string, ConvertResult>(StringToLong) },
-            { typeof(ushort), new Func<string, ConvertResult>(StringToUShort) },
-            { typeof(uint), new Func<string, ConvertResult>(StringToUInt) },
-            { typeof(ulong), new Func<string, ConvertResult>(StringToULong) },
-            { typeof(float), new Func<string, ConvertResult>(StringToFloat) },
-            { typeof(double), new Func<string, ConvertResult>(StringToDouble) },
-            { typeof(decimal), new Func<string, ConvertResult>(StringToDecimal) },
-            { typeof(DateTime), new Func<string, ConvertResult>(StringToDateTime) },
-            { typeof(DateTimeOffset), new Func<string, ConvertResult>(StringToDateTimeOffset) },
-            { typeof(Guid), new Func<string, ConvertResult>(StringToGuid) },
-            { typeof(Uri), new Func<string, ConvertResult>(StringToUri) },
-        };
+        private static readonly Dictionary<Type, Func<string, ConvertResult>> stringConverters =
+            new Dictionary<Type, Func<string, ConvertResult>>
+            {
+                { typeof(bool), new Func<string, ConvertResult>(StringToBool) },
+                { typeof(byte), new Func<string, ConvertResult>(StringToByte) },
+                { typeof(char), new Func<string, ConvertResult>(StringToChar) },
+                { typeof(sbyte), new Func<string, ConvertResult>(StringToSByte) },
+                { typeof(short), new Func<string, ConvertResult>(StringToShort) },
+                { typeof(int), new Func<string, ConvertResult>(StringToInt) },
+                { typeof(long), new Func<string, ConvertResult>(StringToLong) },
+                { typeof(ushort), new Func<string, ConvertResult>(StringToUShort) },
+                { typeof(uint), new Func<string, ConvertResult>(StringToUInt) },
+                { typeof(ulong), new Func<string, ConvertResult>(StringToULong) },
+                { typeof(float), new Func<string, ConvertResult>(StringToFloat) },
+                { typeof(double), new Func<string, ConvertResult>(StringToDouble) },
+                { typeof(decimal), new Func<string, ConvertResult>(StringToDecimal) },
+                { typeof(DateTime), new Func<string, ConvertResult>(StringToDateTime) },
+                { typeof(DateTimeOffset), new Func<string, ConvertResult>(StringToDateTimeOffset) },
+                { typeof(Guid), new Func<string, ConvertResult>(StringToGuid) },
+                { typeof(Uri), new Func<string, ConvertResult>(StringToUri) },
+            };
 
         [DataMember]
         private object value;
@@ -234,8 +246,11 @@ namespace System.Json
         /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
         /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.String"/>.</remarks>
         /// <exception cref="System.ArgumentNullException">value is null.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads",
-            Justification = "This operator does not intend to represent a Uri overload.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1057:StringUriOverloadsCallSystemUriOverloads",
+            Justification = "This operator does not intend to represent a Uri overload."
+        )]
         public JsonPrimitive(string value)
         {
             if (value == null)
@@ -350,8 +365,11 @@ namespace System.Json
         /// <summary>
         /// Gets the value represented by this instance.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "Value in this context clearly refers to the underlying CLR value")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "Value in this context clearly refers to the underlying CLR value"
+        )]
         public object Value
         {
             get { return value; }
@@ -395,7 +413,11 @@ namespace System.Json
                         jsonType = JsonType.String;
                         break;
                     default:
-                        if (type == typeof(Uri) || type == typeof(Guid) || type == typeof(DateTimeOffset))
+                        if (
+                            type == typeof(Uri)
+                            || type == typeof(Guid)
+                            || type == typeof(DateTimeOffset)
+                        )
                         {
                             jsonType = JsonType.String;
                         }
@@ -459,16 +481,40 @@ namespace System.Json
                 switch (failure)
                 {
                     case ReadAsFailureKind.InvalidFormat:
-                        throw new FormatException(RS.Format(Properties.Resources.CannotReadPrimitiveAsType, valueStr, typeOfTName));
+                        throw new FormatException(
+                            RS.Format(
+                                Properties.Resources.CannotReadPrimitiveAsType,
+                                valueStr,
+                                typeOfTName
+                            )
+                        );
                     case ReadAsFailureKind.InvalidDateFormat:
-                        throw new FormatException(RS.Format(Properties.Resources.InvalidDateFormat, valueStr, typeOfTName));
+                        throw new FormatException(
+                            RS.Format(Properties.Resources.InvalidDateFormat, valueStr, typeOfTName)
+                        );
                     case ReadAsFailureKind.InvalidUriFormat:
-                        throw new UriFormatException(RS.Format(Properties.Resources.InvalidUriFormat, jsonPrimitiveType.Name, valueStr, typeOfTName, uriType.Name));
+                        throw new UriFormatException(
+                            RS.Format(
+                                Properties.Resources.InvalidUriFormat,
+                                jsonPrimitiveType.Name,
+                                valueStr,
+                                typeOfTName,
+                                uriType.Name
+                            )
+                        );
                     case ReadAsFailureKind.Overflow:
-                        throw new OverflowException(RS.Format(Properties.Resources.OverflowReadAs, valueStr, typeOfTName));
+                        throw new OverflowException(
+                            RS.Format(Properties.Resources.OverflowReadAs, valueStr, typeOfTName)
+                        );
                     case ReadAsFailureKind.InvalidCast:
                     default:
-                        throw new InvalidCastException(RS.Format(Properties.Resources.CannotReadPrimitiveAsType, valueStr, typeOfTName));
+                        throw new InvalidCastException(
+                            RS.Format(
+                                Properties.Resources.CannotReadPrimitiveAsType,
+                                valueStr,
+                                typeOfTName
+                            )
+                        );
                 }
             }
         }
@@ -479,8 +525,12 @@ namespace System.Json
         /// <param name="type">The type to which the conversion is being performed.</param>
         /// <param name="value">An object instance to be initialized with this instance or null if the conversion cannot be performed.</param>
         /// <returns>true if this <see cref="System.Json.JsonPrimitive"/> instance can be read as the specified type; otherwise, false.</returns>
-        [SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "value",
-            Justification = "field is used with 'this' and arg is out param which makes it harder to be misused.")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1500:VariableNamesShouldNotMatchFieldNames",
+            MessageId = "value",
+            Justification = "field is used with 'this' and arg is out param which makes it harder to be misused."
+        )]
         public override bool TryReadAs(Type type, out object value)
         {
             return TryReadAsInternal(type, out value) == ReadAsFailureKind.NoFailure;
@@ -505,13 +555,22 @@ namespace System.Json
             switch (jsonType)
             {
                 case JsonType.Boolean:
-                    jsonWriter.WriteAttributeString(JXmlToJsonValueConverter.TypeAttributeName, JXmlToJsonValueConverter.BooleanAttributeValue);
+                    jsonWriter.WriteAttributeString(
+                        JXmlToJsonValueConverter.TypeAttributeName,
+                        JXmlToJsonValueConverter.BooleanAttributeValue
+                    );
                     break;
                 case JsonType.Number:
-                    jsonWriter.WriteAttributeString(JXmlToJsonValueConverter.TypeAttributeName, JXmlToJsonValueConverter.NumberAttributeValue);
+                    jsonWriter.WriteAttributeString(
+                        JXmlToJsonValueConverter.TypeAttributeName,
+                        JXmlToJsonValueConverter.NumberAttributeValue
+                    );
                     break;
                 default:
-                    jsonWriter.WriteAttributeString(JXmlToJsonValueConverter.TypeAttributeName, JXmlToJsonValueConverter.StringAttributeValue);
+                    jsonWriter.WriteAttributeString(
+                        JXmlToJsonValueConverter.TypeAttributeName,
+                        JXmlToJsonValueConverter.StringAttributeValue
+                    );
                     break;
             }
 
@@ -522,7 +581,9 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             bool tempBool;
-            result.ReadAsFailureKind = Boolean.TryParse(valueString, out tempBool) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidFormat;
+            result.ReadAsFailureKind = Boolean.TryParse(valueString, out tempBool)
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidFormat;
             result.Value = tempBool;
             return result;
         }
@@ -531,7 +592,9 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             byte tempByte;
-            result.ReadAsFailureKind = Byte.TryParse(valueString, out tempByte) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = Byte.TryParse(valueString, out tempByte)
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
                 result.ReadAsFailureKind = StringToNumberConverter<byte>(valueString, out tempByte);
@@ -545,7 +608,9 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             char tempChar;
-            result.ReadAsFailureKind = Char.TryParse(valueString, out tempChar) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidFormat;
+            result.ReadAsFailureKind = Char.TryParse(valueString, out tempChar)
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidFormat;
             result.Value = tempChar;
             return result;
         }
@@ -554,10 +619,20 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             decimal tempDecimal;
-            result.ReadAsFailureKind = Decimal.TryParse(valueString, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out tempDecimal) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = Decimal.TryParse(
+                valueString,
+                NumberStyles.Float,
+                NumberFormatInfo.InvariantInfo,
+                out tempDecimal
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
-                result.ReadAsFailureKind = StringToNumberConverter<decimal>(valueString, out tempDecimal);
+                result.ReadAsFailureKind = StringToNumberConverter<decimal>(
+                    valueString,
+                    out tempDecimal
+                );
             }
 
             result.Value = tempDecimal;
@@ -568,7 +643,9 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             DateTime tempDateTime;
-            result.ReadAsFailureKind = TryParseDateTime(valueString, out tempDateTime) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidDateFormat;
+            result.ReadAsFailureKind = TryParseDateTime(valueString, out tempDateTime)
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidDateFormat;
             result.Value = tempDateTime;
             return result;
         }
@@ -577,7 +654,9 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             DateTimeOffset tempDateTimeOffset;
-            result.ReadAsFailureKind = TryParseDateTimeOffset(valueString, out tempDateTimeOffset) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidDateFormat;
+            result.ReadAsFailureKind = TryParseDateTimeOffset(valueString, out tempDateTimeOffset)
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidDateFormat;
             result.Value = tempDateTimeOffset;
             return result;
         }
@@ -586,26 +665,38 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             double tempDouble;
-            result.ReadAsFailureKind = Double.TryParse(valueString, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out tempDouble) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = Double.TryParse(
+                valueString,
+                NumberStyles.Float,
+                NumberFormatInfo.InvariantInfo,
+                out tempDouble
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
-                result.ReadAsFailureKind = StringToNumberConverter<double>(valueString, out tempDouble);
+                result.ReadAsFailureKind = StringToNumberConverter<double>(
+                    valueString,
+                    out tempDouble
+                );
             }
 
             result.Value = tempDouble;
             return result;
         }
 
-	private static bool TryGuidParse (string value, out Guid guid)
-	{
-		return Guid.TryParse (value, out guid);
-	}
+        private static bool TryGuidParse(string value, out Guid guid)
+        {
+            return Guid.TryParse(value, out guid);
+        }
 
         private static ConvertResult StringToGuid(string valueString)
         {
             ConvertResult result = new ConvertResult();
             Guid tempGuid;
-            result.ReadAsFailureKind = TryGuidParse(valueString, out tempGuid) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidFormat;
+            result.ReadAsFailureKind = TryGuidParse(valueString, out tempGuid)
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidFormat;
             result.Value = tempGuid;
             return result;
         }
@@ -614,10 +705,20 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             short tempShort;
-            result.ReadAsFailureKind = Int16.TryParse(valueString, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out tempShort) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = Int16.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                NumberFormatInfo.InvariantInfo,
+                out tempShort
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
-                result.ReadAsFailureKind = StringToNumberConverter<short>(valueString, out tempShort);
+                result.ReadAsFailureKind = StringToNumberConverter<short>(
+                    valueString,
+                    out tempShort
+                );
             }
 
             result.Value = tempShort;
@@ -628,7 +729,14 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             int tempInt;
-            result.ReadAsFailureKind = Int32.TryParse(valueString, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out tempInt) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = Int32.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                NumberFormatInfo.InvariantInfo,
+                out tempInt
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
                 result.ReadAsFailureKind = StringToNumberConverter<int>(valueString, out tempInt);
@@ -642,7 +750,14 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             long tempLong;
-            result.ReadAsFailureKind = Int64.TryParse(valueString, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out tempLong) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = Int64.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                NumberFormatInfo.InvariantInfo,
+                out tempLong
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
                 result.ReadAsFailureKind = StringToNumberConverter<long>(valueString, out tempLong);
@@ -656,10 +771,20 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             sbyte tempSByte;
-            result.ReadAsFailureKind = SByte.TryParse(valueString, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out tempSByte) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = SByte.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                NumberFormatInfo.InvariantInfo,
+                out tempSByte
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
-                result.ReadAsFailureKind = StringToNumberConverter<sbyte>(valueString, out tempSByte);
+                result.ReadAsFailureKind = StringToNumberConverter<sbyte>(
+                    valueString,
+                    out tempSByte
+                );
             }
 
             result.Value = tempSByte;
@@ -670,10 +795,20 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             float tempFloat;
-            result.ReadAsFailureKind = Single.TryParse(valueString, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out tempFloat) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = Single.TryParse(
+                valueString,
+                NumberStyles.Float,
+                NumberFormatInfo.InvariantInfo,
+                out tempFloat
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
-                result.ReadAsFailureKind = StringToNumberConverter<float>(valueString, out tempFloat);
+                result.ReadAsFailureKind = StringToNumberConverter<float>(
+                    valueString,
+                    out tempFloat
+                );
             }
 
             result.Value = tempFloat;
@@ -684,10 +819,20 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             ushort tempUShort;
-            result.ReadAsFailureKind = UInt16.TryParse(valueString, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out tempUShort) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = UInt16.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                NumberFormatInfo.InvariantInfo,
+                out tempUShort
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
-                result.ReadAsFailureKind = StringToNumberConverter<ushort>(valueString, out tempUShort);
+                result.ReadAsFailureKind = StringToNumberConverter<ushort>(
+                    valueString,
+                    out tempUShort
+                );
             }
 
             result.Value = tempUShort;
@@ -698,7 +843,14 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             uint tempUInt;
-            result.ReadAsFailureKind = UInt32.TryParse(valueString, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out tempUInt) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = UInt32.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                NumberFormatInfo.InvariantInfo,
+                out tempUInt
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
                 result.ReadAsFailureKind = StringToNumberConverter<uint>(valueString, out tempUInt);
@@ -712,10 +864,20 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             ulong tempULong;
-            result.ReadAsFailureKind = UInt64.TryParse(valueString, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out tempULong) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidCast;
+            result.ReadAsFailureKind = UInt64.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                NumberFormatInfo.InvariantInfo,
+                out tempULong
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidCast;
             if (result.ReadAsFailureKind != ReadAsFailureKind.NoFailure)
             {
-                result.ReadAsFailureKind = StringToNumberConverter<ulong>(valueString, out tempULong);
+                result.ReadAsFailureKind = StringToNumberConverter<ulong>(
+                    valueString,
+                    out tempULong
+                );
             }
 
             result.Value = tempULong;
@@ -726,32 +888,58 @@ namespace System.Json
         {
             ConvertResult result = new ConvertResult();
             Uri tempUri;
-            result.ReadAsFailureKind = Uri.TryCreate(valueString, UriKind.RelativeOrAbsolute, out tempUri) ? ReadAsFailureKind.NoFailure : ReadAsFailureKind.InvalidUriFormat;
+            result.ReadAsFailureKind = Uri.TryCreate(
+                valueString,
+                UriKind.RelativeOrAbsolute,
+                out tempUri
+            )
+                ? ReadAsFailureKind.NoFailure
+                : ReadAsFailureKind.InvalidUriFormat;
             result.Value = tempUri;
             return result;
         }
 
-        private static ReadAsFailureKind StringToNumberConverter<T>(string valueString, out T valueNumber)
+        private static ReadAsFailureKind StringToNumberConverter<T>(
+            string valueString,
+            out T valueNumber
+        )
         {
             string str = valueString.Trim();
 
             if (str.IndexOfAny(FloatingPointChars) < 0)
             {
                 long longVal;
-                if (Int64.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out longVal))
+                if (
+                    Int64.TryParse(
+                        str,
+                        NumberStyles.Float,
+                        CultureInfo.InvariantCulture,
+                        out longVal
+                    )
+                )
                 {
                     return NumberToNumberConverter<T>(longVal, out valueNumber);
                 }
             }
 
             decimal decValue;
-            if (Decimal.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out decValue) && decValue != 0)
+            if (
+                Decimal.TryParse(
+                    str,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out decValue
+                )
+                && decValue != 0
+            )
             {
                 return NumberToNumberConverter<T>(decValue, out valueNumber);
             }
 
             double dblValue;
-            if (Double.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out dblValue))
+            if (
+                Double.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out dblValue)
+            )
             {
                 return NumberToNumberConverter<T>(dblValue, out valueNumber);
             }
@@ -760,10 +948,17 @@ namespace System.Json
             return ReadAsFailureKind.InvalidFormat;
         }
 
-        private static ReadAsFailureKind NumberToNumberConverter<T>(object valueObject, out T valueNumber)
+        private static ReadAsFailureKind NumberToNumberConverter<T>(
+            object valueObject,
+            out T valueNumber
+        )
         {
             object value;
-            ReadAsFailureKind failureKind = NumberToNumberConverter(typeof(T), valueObject, out value);
+            ReadAsFailureKind failureKind = NumberToNumberConverter(
+                typeof(T),
+                valueObject,
+                out value
+            );
             if (failureKind == ReadAsFailureKind.NoFailure)
             {
                 valueNumber = (T)value;
@@ -776,11 +971,19 @@ namespace System.Json
             return failureKind;
         }
 
-        private static ReadAsFailureKind NumberToNumberConverter(Type type, object valueObject, out object valueNumber)
+        private static ReadAsFailureKind NumberToNumberConverter(
+            Type type,
+            object valueObject,
+            out object valueNumber
+        )
         {
             try
             {
-                valueNumber = System.Convert.ChangeType(valueObject, type, CultureInfo.InvariantCulture);
+                valueNumber = System.Convert.ChangeType(
+                    valueObject,
+                    type,
+                    CultureInfo.InvariantCulture
+                );
                 return ReadAsFailureKind.NoFailure;
             }
             catch (OverflowException)
@@ -792,9 +995,18 @@ namespace System.Json
 
         private static bool TryParseDateTime(string valueString, out DateTime dateTime)
         {
-            string filteredValue = valueString.EndsWith(UtcString, StringComparison.Ordinal) ? valueString.Replace(UtcString, GmtString) : valueString;
+            string filteredValue = valueString.EndsWith(UtcString, StringComparison.Ordinal)
+                ? valueString.Replace(UtcString, GmtString)
+                : valueString;
 
-            if (DateTime.TryParse(filteredValue, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out dateTime))
+            if (
+                DateTime.TryParse(
+                    filteredValue,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.RoundtripKind,
+                    out dateTime
+                )
+            )
             {
                 return true;
             }
@@ -807,11 +1019,23 @@ namespace System.Json
             return false;
         }
 
-        private static bool TryParseDateTimeOffset(string valueString, out DateTimeOffset dateTimeOffset)
+        private static bool TryParseDateTimeOffset(
+            string valueString,
+            out DateTimeOffset dateTimeOffset
+        )
         {
-            string filteredValue = valueString.EndsWith(UtcString, StringComparison.Ordinal) ? valueString.Replace(UtcString, GmtString) : valueString;
+            string filteredValue = valueString.EndsWith(UtcString, StringComparison.Ordinal)
+                ? valueString.Replace(UtcString, GmtString)
+                : valueString;
 
-            if (DateTimeOffset.TryParse(filteredValue, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out dateTimeOffset))
+            if (
+                DateTimeOffset.TryParse(
+                    filteredValue,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.RoundtripKind,
+                    out dateTimeOffset
+                )
+            )
             {
                 return true;
             }
@@ -840,9 +1064,15 @@ namespace System.Json
             const string DateTimeSuffix = ")/";
             const int DateTimeSuffixLength = 2;
 
-            if (valueString.StartsWith(DateTimePrefix, StringComparison.Ordinal) && valueString.EndsWith(DateTimeSuffix, StringComparison.Ordinal))
+            if (
+                valueString.StartsWith(DateTimePrefix, StringComparison.Ordinal)
+                && valueString.EndsWith(DateTimeSuffix, StringComparison.Ordinal)
+            )
             {
-                string ticksValue = valueString.Substring(DateTimePrefixLength, valueString.Length - DateTimePrefixLength - DateTimeSuffixLength);
+                string ticksValue = valueString.Substring(
+                    DateTimePrefixLength,
+                    valueString.Length - DateTimePrefixLength - DateTimeSuffixLength
+                );
                 DateTimeKind dateTimeKind = DateTimeKind.Utc;
 
                 int indexOfTimeZoneOffset = ticksValue.IndexOf('+', 1);
@@ -855,11 +1085,13 @@ namespace System.Json
                 // If an offset is present, verify it is properly formatted. Actual value is ignored (see spec).
                 if (indexOfTimeZoneOffset != -1)
                 {
-                    if (indexOfTimeZoneOffset + 5 == ticksValue.Length
+                    if (
+                        indexOfTimeZoneOffset + 5 == ticksValue.Length
                         && IsLatinDigit(ticksValue[indexOfTimeZoneOffset + 1])
                         && IsLatinDigit(ticksValue[indexOfTimeZoneOffset + 2])
                         && IsLatinDigit(ticksValue[indexOfTimeZoneOffset + 3])
-                        && IsLatinDigit(ticksValue[indexOfTimeZoneOffset + 4]))
+                        && IsLatinDigit(ticksValue[indexOfTimeZoneOffset + 4])
+                    )
                     {
                         ticksValue = ticksValue.Substring(0, indexOfTimeZoneOffset);
                         dateTimeKind = DateTimeKind.Local;
@@ -872,7 +1104,14 @@ namespace System.Json
                 }
 
                 long millisecondsSinceUnixEpoch;
-                if (Int64.TryParse(ticksValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out millisecondsSinceUnixEpoch))
+                if (
+                    Int64.TryParse(
+                        ticksValue,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out millisecondsSinceUnixEpoch
+                    )
+                )
                 {
                     long ticks = (millisecondsSinceUnixEpoch * 10000) + UnixEpochTicks;
                     if (ticks < DateTime.MaxValue.Ticks)
@@ -892,7 +1131,10 @@ namespace System.Json
             return false;
         }
 
-        private static bool TryParseAspNetDateTimeFormat(string valueString, out DateTimeOffset dateTimeOffset)
+        private static bool TryParseAspNetDateTimeFormat(
+            string valueString,
+            out DateTimeOffset dateTimeOffset
+        )
         {
             DateTime dateTime;
             if (TryParseAspNetDateTimeFormat(valueString, out dateTime))
@@ -918,7 +1160,8 @@ namespace System.Json
             }
 
             StringBuilder sb = null;
-            int startIndex = 0, count = 0;
+            int startIndex = 0,
+                count = 0;
             for (int i = 0; i < val.Length; i++)
             {
                 if (val[i] == '\\')
@@ -930,7 +1173,10 @@ namespace System.Json
                     }
 
                     sb.Append(val, startIndex, count);
-                    Contract.Assert(i < val.Length, "Found that a '\' was the last character in a string, which is invalid JSON. Verify the calling method uses a valid JSON string as the input parameter of this method.");
+                    Contract.Assert(
+                        i < val.Length,
+                        "Found that a '\' was the last character in a string, which is invalid JSON. Verify the calling method uses a valid JSON string as the input parameter of this method."
+                    );
                     switch (val[i])
                     {
                         case '"':
@@ -955,7 +1201,15 @@ namespace System.Json
                             sb.Append('\t');
                             break;
                         case 'u':
-                            Contract.Assert((i + 3) < val.Length, String.Format(CultureInfo.CurrentCulture, "Unexpected char {0} at position {1}. The unicode escape sequence should be followed by 4 digits.", val[i], i));
+                            Contract.Assert(
+                                (i + 3) < val.Length,
+                                String.Format(
+                                    CultureInfo.CurrentCulture,
+                                    "Unexpected char {0} at position {1}. The unicode escape sequence should be followed by 4 digits.",
+                                    val[i],
+                                    i
+                                )
+                            );
                             sb.Append(ParseChar(val.Substring(i + 1, 4), NumberStyles.HexNumber));
                             i += 4;
                             break;
@@ -1004,8 +1258,12 @@ namespace System.Json
             }
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "value",
-            Justification = "field is used with 'this' and arg is out param which makes it harder to be misused.")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1500:VariableNamesShouldNotMatchFieldNames",
+            MessageId = "value",
+            Justification = "field is used with 'this' and arg is out param which makes it harder to be misused."
+        )]
         private ReadAsFailureKind TryReadAsInternal(Type type, out object value)
         {
             if (base.TryReadAs(type, out value))
@@ -1053,7 +1311,12 @@ namespace System.Json
             if (jsonType == JsonType.String)
             {
                 string str = UnescapeJsonString(ToString());
-                Contract.Assert(str.Length >= 2 && str.StartsWith("\"", StringComparison.Ordinal) && str.EndsWith("\"", StringComparison.Ordinal), "The unescaped string must begin and end with quotes.");
+                Contract.Assert(
+                    str.Length >= 2
+                        && str.StartsWith("\"", StringComparison.Ordinal)
+                        && str.EndsWith("\"", StringComparison.Ordinal),
+                    "The unescaped string must begin and end with quotes."
+                );
                 str = str.Substring(1, str.Length - 2);
 
                 if (stringConverters.ContainsKey(type))
@@ -1091,11 +1354,15 @@ namespace System.Json
                 case TypeCode.UInt32:
                 case TypeCode.UInt64:
                 case TypeCode.Decimal:
-                    jsonWriter.WriteValue(String.Format(CultureInfo.InvariantCulture, "{0}", value));
+                    jsonWriter.WriteValue(
+                        String.Format(CultureInfo.InvariantCulture, "{0}", value)
+                    );
                     break;
                 case TypeCode.Single:
                 case TypeCode.Double:
-                    jsonWriter.WriteValue(String.Format(CultureInfo.InvariantCulture, "{0:R}", value));
+                    jsonWriter.WriteValue(
+                        String.Format(CultureInfo.InvariantCulture, "{0:R}", value)
+                    );
                     break;
                 case TypeCode.Char:
                     jsonWriter.WriteValue(new string((char)value, 1));
@@ -1104,17 +1371,29 @@ namespace System.Json
                     jsonWriter.WriteValue((string)value);
                     break;
                 case TypeCode.DateTime:
-                    jsonWriter.WriteValue(((DateTime)value).ToString(DateTimeIsoFormat, CultureInfo.InvariantCulture));
+                    jsonWriter.WriteValue(
+                        ((DateTime)value).ToString(DateTimeIsoFormat, CultureInfo.InvariantCulture)
+                    );
                     break;
                 default:
                     if (valueType == typeof(Uri))
                     {
                         Uri uri = (Uri)value;
-                        jsonWriter.WriteValue(uri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped));
+                        jsonWriter.WriteValue(
+                            uri.GetComponents(
+                                UriComponents.SerializationInfoString,
+                                UriFormat.UriEscaped
+                            )
+                        );
                     }
                     else if (valueType == typeof(DateTimeOffset))
                     {
-                        jsonWriter.WriteValue(((DateTimeOffset)value).ToString(DateTimeIsoFormat, CultureInfo.InvariantCulture));
+                        jsonWriter.WriteValue(
+                            ((DateTimeOffset)value).ToString(
+                                DateTimeIsoFormat,
+                                CultureInfo.InvariantCulture
+                            )
+                        );
                     }
                     else
                     {

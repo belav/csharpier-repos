@@ -21,55 +21,55 @@ namespace System.Runtime.Serialization
         /// <SecurityNote>
         /// Review - changes to const could affect code generation logic; any changes should be reviewed.
         /// </SecurityNote>
-        internal const BindingFlags ScanAllMembers = BindingFlags.Static | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+        internal const BindingFlags ScanAllMembers =
+            BindingFlags.Static
+            | BindingFlags.Instance
+            | BindingFlags.NonPublic
+            | BindingFlags.Public;
 
         private static XmlQualifiedName? s_idQualifiedName;
         internal static XmlQualifiedName IdQualifiedName =>
-            s_idQualifiedName ??= new XmlQualifiedName(Globals.IdLocalName, Globals.SerializationNamespace);
+            s_idQualifiedName ??= new XmlQualifiedName(
+                Globals.IdLocalName,
+                Globals.SerializationNamespace
+            );
 
         private static XmlQualifiedName? s_refQualifiedName;
         internal static XmlQualifiedName RefQualifiedName =>
-            s_refQualifiedName ??= new XmlQualifiedName(Globals.RefLocalName, Globals.SerializationNamespace);
+            s_refQualifiedName ??= new XmlQualifiedName(
+                Globals.RefLocalName,
+                Globals.SerializationNamespace
+            );
 
         private static Type? s_typeOfObject;
-        internal static Type TypeOfObject =>
-            s_typeOfObject ??= typeof(object);
+        internal static Type TypeOfObject => s_typeOfObject ??= typeof(object);
 
         private static Type? s_typeOfValueType;
-        internal static Type TypeOfValueType =>
-            s_typeOfValueType ??= typeof(ValueType);
+        internal static Type TypeOfValueType => s_typeOfValueType ??= typeof(ValueType);
 
         private static Type? s_typeOfArray;
-        internal static Type TypeOfArray =>
-            s_typeOfArray ??= typeof(Array);
+        internal static Type TypeOfArray => s_typeOfArray ??= typeof(Array);
 
         private static Type? s_typeOfString;
-        internal static Type TypeOfString =>
-            s_typeOfString ??= typeof(string);
+        internal static Type TypeOfString => s_typeOfString ??= typeof(string);
 
         private static Type? s_typeOfInt;
-        internal static Type TypeOfInt =>
-            s_typeOfInt ??= typeof(int);
+        internal static Type TypeOfInt => s_typeOfInt ??= typeof(int);
 
         private static Type? s_typeOfULong;
-        internal static Type TypeOfULong =>
-            s_typeOfULong ??= typeof(ulong);
+        internal static Type TypeOfULong => s_typeOfULong ??= typeof(ulong);
 
         private static Type? s_typeOfVoid;
-        internal static Type TypeOfVoid =>
-            s_typeOfVoid ??= typeof(void);
+        internal static Type TypeOfVoid => s_typeOfVoid ??= typeof(void);
 
         private static Type? s_typeOfByteArray;
-        internal static Type TypeOfByteArray =>
-            s_typeOfByteArray ??= typeof(byte[]);
+        internal static Type TypeOfByteArray => s_typeOfByteArray ??= typeof(byte[]);
 
         private static Type? s_typeOfTimeSpan;
-        internal static Type TypeOfTimeSpan =>
-            s_typeOfTimeSpan ??= typeof(TimeSpan);
+        internal static Type TypeOfTimeSpan => s_typeOfTimeSpan ??= typeof(TimeSpan);
 
         private static Type? s_typeOfGuid;
-        internal static Type TypeOfGuid =>
-            s_typeOfGuid ??= typeof(Guid);
+        internal static Type TypeOfGuid => s_typeOfGuid ??= typeof(Guid);
 
         private static Type? s_typeOfDateTimeOffset;
         internal static Type TypeOfDateTimeOffset =>
@@ -80,16 +80,14 @@ namespace System.Runtime.Serialization
             s_typeOfDateTimeOffsetAdapter ??= typeof(DateTimeOffsetAdapter);
 
         private static Type? s_typeOfMemoryStream;
-        internal static Type TypeOfMemoryStream =>
-            s_typeOfMemoryStream ??= typeof(MemoryStream);
+        internal static Type TypeOfMemoryStream => s_typeOfMemoryStream ??= typeof(MemoryStream);
 
         private static Type? s_typeOfMemoryStreamAdapter;
         internal static Type TypeOfMemoryStreamAdapter =>
             s_typeOfMemoryStreamAdapter ??= typeof(MemoryStreamAdapter);
 
         private static Type? s_typeOfUri;
-        internal static Type TypeOfUri =>
-            s_typeOfUri ??= typeof(Uri);
+        internal static Type TypeOfUri => s_typeOfUri ??= typeof(Uri);
 
         private static Type? s_typeOfTypeEnumerable;
         internal static Type TypeOfTypeEnumerable =>
@@ -100,8 +98,7 @@ namespace System.Runtime.Serialization
             s_typeOfStreamingContext ??= typeof(StreamingContext);
 
         private static Type? s_typeOfISerializable;
-        internal static Type TypeOfISerializable =>
-            s_typeOfISerializable ??= typeof(ISerializable);
+        internal static Type TypeOfISerializable => s_typeOfISerializable ??= typeof(ISerializable);
 
         private static Type? s_typeOfIDeserializationCallback;
         internal static Type TypeOfIDeserializationCallback =>
@@ -131,7 +128,8 @@ namespace System.Runtime.Serialization
 
         private static Type? s_typeOfXmlFormatGetOnlyCollectionReaderDelegate;
         internal static Type TypeOfXmlFormatGetOnlyCollectionReaderDelegate =>
-            s_typeOfXmlFormatGetOnlyCollectionReaderDelegate ??= typeof(XmlFormatGetOnlyCollectionReaderDelegate);
+            s_typeOfXmlFormatGetOnlyCollectionReaderDelegate ??=
+                typeof(XmlFormatGetOnlyCollectionReaderDelegate);
 
         private static Type? s_typeOfKnownTypeAttribute;
         internal static Type TypeOfKnownTypeAttribute =>
@@ -158,8 +156,7 @@ namespace System.Runtime.Serialization
             s_typeOfOptionalFieldAttribute ??= typeof(OptionalFieldAttribute);
 
         private static Type? s_typeOfObjectArray;
-        internal static Type TypeOfObjectArray =>
-            s_typeOfObjectArray ??= typeof(object[]);
+        internal static Type TypeOfObjectArray => s_typeOfObjectArray ??= typeof(object[]);
 
         private static Type? s_typeOfOnSerializingAttribute;
         internal static Type TypeOfOnSerializingAttribute =>
@@ -198,8 +195,7 @@ namespace System.Runtime.Serialization
             s_typeOfXmlQualifiedName ??= typeof(XmlQualifiedName);
 
         private static Type? s_typeOfXmlSchemaType;
-        internal static Type TypeOfXmlSchemaType =>
-            s_typeOfXmlSchemaType ??= typeof(XmlSchemaType);
+        internal static Type TypeOfXmlSchemaType => s_typeOfXmlSchemaType ??= typeof(XmlSchemaType);
 
         private static Type? s_typeOfIExtensibleDataObject;
         internal static Type TypeOfIExtensibleDataObject =>
@@ -214,20 +210,17 @@ namespace System.Runtime.Serialization
             s_typeOfISerializableDataNode ??= typeof(ISerializableDataNode);
 
         private static Type? s_typeOfClassDataNode;
-        internal static Type TypeOfClassDataNode =>
-            s_typeOfClassDataNode ??= typeof(ClassDataNode);
+        internal static Type TypeOfClassDataNode => s_typeOfClassDataNode ??= typeof(ClassDataNode);
 
         private static Type? s_typeOfCollectionDataNode;
         internal static Type TypeOfCollectionDataNode =>
             s_typeOfCollectionDataNode ??= typeof(CollectionDataNode);
 
         private static Type? s_typeOfXmlDataNode;
-        internal static Type TypeOfXmlDataNode =>
-            s_typeOfXmlDataNode ??= typeof(XmlDataNode);
+        internal static Type TypeOfXmlDataNode => s_typeOfXmlDataNode ??= typeof(XmlDataNode);
 
         private static Type? s_typeOfNullable;
-        internal static Type TypeOfNullable =>
-            s_typeOfNullable ??= typeof(Nullable<>);
+        internal static Type TypeOfNullable => s_typeOfNullable ??= typeof(Nullable<>);
 
         private static Type? s_typeOfReflectionPointer;
         internal static Type TypeOfReflectionPointer =>
@@ -238,48 +231,40 @@ namespace System.Runtime.Serialization
             s_typeOfIDictionaryGeneric ??= typeof(IDictionary<,>);
 
         private static Type? s_typeOfIDictionary;
-        internal static Type TypeOfIDictionary =>
-            s_typeOfIDictionary ??= typeof(IDictionary);
+        internal static Type TypeOfIDictionary => s_typeOfIDictionary ??= typeof(IDictionary);
 
         private static Type? s_typeOfIListGeneric;
-        internal static Type TypeOfIListGeneric =>
-            s_typeOfIListGeneric ??= typeof(IList<>);
+        internal static Type TypeOfIListGeneric => s_typeOfIListGeneric ??= typeof(IList<>);
 
         private static Type? s_typeOfIList;
-        internal static Type TypeOfIList =>
-            s_typeOfIList ??= typeof(IList);
+        internal static Type TypeOfIList => s_typeOfIList ??= typeof(IList);
 
         private static Type? s_typeOfICollectionGeneric;
         internal static Type TypeOfICollectionGeneric =>
             s_typeOfICollectionGeneric ??= typeof(ICollection<>);
 
         private static Type? s_typeOfICollection;
-        internal static Type TypeOfICollection =>
-            s_typeOfICollection ??= typeof(ICollection);
+        internal static Type TypeOfICollection => s_typeOfICollection ??= typeof(ICollection);
 
         private static Type? s_typeOfIEnumerableGeneric;
         internal static Type TypeOfIEnumerableGeneric =>
             s_typeOfIEnumerableGeneric ??= typeof(IEnumerable<>);
 
         private static Type? s_typeOfIEnumerable;
-        internal static Type TypeOfIEnumerable =>
-            s_typeOfIEnumerable ??= typeof(IEnumerable);
+        internal static Type TypeOfIEnumerable => s_typeOfIEnumerable ??= typeof(IEnumerable);
 
         private static Type? s_typeOfIEnumeratorGeneric;
         internal static Type TypeOfIEnumeratorGeneric =>
             s_typeOfIEnumeratorGeneric ??= typeof(IEnumerator<>);
 
         private static Type? s_typeOfIEnumerator;
-        internal static Type TypeOfIEnumerator =>
-            s_typeOfIEnumerator ??= typeof(IEnumerator);
+        internal static Type TypeOfIEnumerator => s_typeOfIEnumerator ??= typeof(IEnumerator);
 
         private static Type? s_typeOfKeyValuePair;
-        internal static Type TypeOfKeyValuePair =>
-            s_typeOfKeyValuePair ??= typeof(KeyValuePair<,>);
+        internal static Type TypeOfKeyValuePair => s_typeOfKeyValuePair ??= typeof(KeyValuePair<,>);
 
         private static Type? s_typeOfKeyValue;
-        internal static Type TypeOfKeyValue =>
-            s_typeOfKeyValue ??= typeof(KeyValue<,>);
+        internal static Type TypeOfKeyValue => s_typeOfKeyValue ??= typeof(KeyValue<,>);
 
         private static Type? s_typeOfIDictionaryEnumerator;
         internal static Type TypeOfIDictionaryEnumerator =>
@@ -291,7 +276,8 @@ namespace System.Runtime.Serialization
 
         private static Type? s_typeOfGenericDictionaryEnumerator;
         internal static Type TypeOfGenericDictionaryEnumerator =>
-            s_typeOfGenericDictionaryEnumerator ??= typeof(CollectionDataContract.GenericDictionaryEnumerator<,>);
+            s_typeOfGenericDictionaryEnumerator ??=
+                typeof(CollectionDataContract.GenericDictionaryEnumerator<,>);
 
         private static Type? s_typeOfDictionaryGeneric;
         internal static Type TypeOfDictionaryGeneric =>
@@ -302,36 +288,42 @@ namespace System.Runtime.Serialization
         {
             [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-            get => s_typeOfHashtable ??= TypeOfDictionaryGeneric.MakeGenericType(TypeOfObject, TypeOfObject);
+            get =>
+                s_typeOfHashtable ??= TypeOfDictionaryGeneric.MakeGenericType(
+                    TypeOfObject,
+                    TypeOfObject
+                );
         }
 
         private static Type? s_typeOfXmlElement;
-        internal static Type TypeOfXmlElement =>
-            s_typeOfXmlElement ??= typeof(XmlElement);
+        internal static Type TypeOfXmlElement => s_typeOfXmlElement ??= typeof(XmlElement);
 
         private static Type? s_typeOfXmlNodeArray;
-        internal static Type TypeOfXmlNodeArray =>
-            s_typeOfXmlNodeArray ??= typeof(XmlNode[]);
+        internal static Type TypeOfXmlNodeArray => s_typeOfXmlNodeArray ??= typeof(XmlNode[]);
 
         private static Type? s_typeOfDBNull;
-        internal static Type TypeOfDBNull =>
-            s_typeOfDBNull ??= typeof(DBNull);
+        internal static Type TypeOfDBNull => s_typeOfDBNull ??= typeof(DBNull);
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)]
         private static Type? s_typeOfSchemaDefinedType;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)]
         internal static Type TypeOfSchemaDefinedType =>
             s_typeOfSchemaDefinedType ??= typeof(SchemaDefinedType);
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)]
         private static Type? s_typeOfSchemaDefinedEnum;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)]
         internal static Type TypeOfSchemaDefinedEnum =>
             s_typeOfSchemaDefinedEnum ??= typeof(SchemaDefinedEnum);
 
         private static MemberInfo? s_schemaMemberInfoPlaceholder;
         internal static MemberInfo SchemaMemberInfoPlaceholder =>
-            s_schemaMemberInfoPlaceholder ??= TypeOfSchemaDefinedType.GetField(nameof(SchemaDefinedType._xmlName), BindingFlags.NonPublic | BindingFlags.Instance)!;
+            s_schemaMemberInfoPlaceholder ??= TypeOfSchemaDefinedType.GetField(
+                nameof(SchemaDefinedType._xmlName),
+                BindingFlags.NonPublic | BindingFlags.Instance
+            )!;
 
         private static Uri? s_dataContractXsdBaseNamespaceUri;
         internal static Uri DataContractXsdBaseNamespaceUri =>
@@ -341,13 +333,17 @@ namespace System.Runtime.Serialization
         public const bool DefaultEmitDefaultValue = true;
         public const int DefaultOrder = 0;
         public const bool DefaultIsReference = false;
+
         // The value string.Empty aids comparisons (can do simple length checks
         //     instead of string comparison method calls in IL.)
         public static readonly string NewObjectId = string.Empty;
         public const string NullObjectId = null;
-        public const string FullSRSInternalsVisiblePattern = @"^[\s]*System\.Runtime\.Serialization[\s]*,[\s]*PublicKey[\s]*=[\s]*(?i:00240000048000009400000006020000002400005253413100040000010001008d56c76f9e8649383049f383c44be0ec204181822a6c31cf5eb7ef486944d032188ea1d3920763712ccb12d75fb77e9811149e6148e5d32fbaab37611c1878ddc19e20ef135d0cb2cff2bfec3d115810c3d9069638fe4be215dbf795861920e5ab6f7db2e2ceef136ac23d5dd2bf031700aec232f6c6b1c785b4305c123b37ab)[\s]*$";
+        public const string FullSRSInternalsVisiblePattern =
+            @"^[\s]*System\.Runtime\.Serialization[\s]*,[\s]*PublicKey[\s]*=[\s]*(?i:00240000048000009400000006020000002400005253413100040000010001008d56c76f9e8649383049f383c44be0ec204181822a6c31cf5eb7ef486944d032188ea1d3920763712ccb12d75fb77e9811149e6148e5d32fbaab37611c1878ddc19e20ef135d0cb2cff2bfec3d115810c3d9069638fe4be215dbf795861920e5ab6f7db2e2ceef136ac23d5dd2bf031700aec232f6c6b1c785b4305c123b37ab)[\s]*$";
+
         [GeneratedRegex(FullSRSInternalsVisiblePattern)]
         public static partial Regex FullSRSInternalsVisibleRegex();
+
         public const char SpaceChar = ' ';
         public const char OpenBracketChar = '[';
         public const char CloseBracketChar = ']';
@@ -358,7 +354,8 @@ namespace System.Runtime.Serialization
         public const string SerPrefix = "z";
         public const string SerPrefixForSchema = "ser";
         public const string ElementPrefix = "q";
-        public const string DataContractXsdBaseNamespace = "http://schemas.datacontract.org/2004/07/";
+        public const string DataContractXsdBaseNamespace =
+            "http://schemas.datacontract.org/2004/07/";
         public const string DataContractXmlNamespace = DataContractXsdBaseNamespace + "System.Xml";
         public const string SchemaInstanceNamespace = "http://www.w3.org/2001/XMLSchema-instance";
         public const string SchemaNamespace = "http://www.w3.org/2001/XMLSchema";
@@ -375,7 +372,8 @@ namespace System.Runtime.Serialization
         public const string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
         public const string XmlnsPrefix = "xmlns";
         public const string SchemaLocalName = "schema";
-        public const string CollectionsNamespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
+        public const string CollectionsNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
         public const string DefaultClrNamespace = "GeneratedNamespace";
         public const string DefaultTypeName = "GeneratedType";
         public const string DefaultGeneratedMember = "GeneratedMember";
@@ -408,13 +406,16 @@ namespace System.Runtime.Serialization
         public const string EnumeratorFieldName = "enumerator";
         public const string SerializationEntryFieldName = "entry";
         public const string ExtensionDataSetMethod = "set_ExtensionData";
-        public const string ExtensionDataSetExplicitMethod = "System.Runtime.Serialization.IExtensibleDataObject.set_ExtensionData";
+        public const string ExtensionDataSetExplicitMethod =
+            "System.Runtime.Serialization.IExtensibleDataObject.set_ExtensionData";
         public const string ExtensionDataObjectPropertyName = "ExtensionData";
         public const string ExtensionDataObjectFieldName = "extensionDataField";
         public const string AddMethodName = "Add";
         public const string GetCurrentMethodName = "get_Current";
+
         // NOTE: These values are used in schema below. If you modify any value, please make the same change in the schema.
-        public const string SerializationNamespace = "http://schemas.microsoft.com/2003/10/Serialization/";
+        public const string SerializationNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/";
         public const string ClrTypeLocalName = "Type";
         public const string ClrAssemblyLocalName = "Assembly";
         public const string IsValueTypeLocalName = "IsValueType";
@@ -439,9 +440,11 @@ namespace System.Runtime.Serialization
         public const string MscorlibAssemblyName = "0";
         public const string ParseMethodName = "Parse";
         public const string SafeSerializationManagerName = "SafeSerializationManager";
-        public const string SafeSerializationManagerNamespace = "http://schemas.datacontract.org/2004/07/System.Runtime.Serialization";
+        public const string SafeSerializationManagerNamespace =
+            "http://schemas.datacontract.org/2004/07/System.Runtime.Serialization";
         public const string ISerializableFactoryTypeLocalName = "FactoryType";
-        public const string SerializationSchema = @"<?xml version='1.0' encoding='utf-8'?>
+        public const string SerializationSchema =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified' attributeFormDefault='qualified' xmlns:tns='http://schemas.microsoft.com/2003/10/Serialization/' targetNamespace='http://schemas.microsoft.com/2003/10/Serialization/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:element name='anyType' nillable='true' type='xs:anyType' />
   <xs:element name='anyURI' nillable='true' type='xs:anyURI' />

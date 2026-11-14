@@ -9,8 +9,10 @@ namespace System.Net.Http.Formatting
     public class HttpBindingSecurityModeHelperTest : EnumHelperTestBase<HttpBindingSecurityMode>
     {
         public HttpBindingSecurityModeHelperTest()
-            : base(HttpBindingSecurityModeHelper.IsDefined, HttpBindingSecurityModeHelper.Validate, (HttpBindingSecurityMode)999)
-        {
-        }
+            : base(
+                HttpBindingSecurityModeHelper.IsDefined,
+                HttpBindingSecurityModeHelper.Validate,
+                (HttpBindingSecurityMode)999
+            ) { }
     }
 }

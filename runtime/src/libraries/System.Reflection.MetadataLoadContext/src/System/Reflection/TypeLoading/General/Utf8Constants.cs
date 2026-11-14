@@ -8,8 +8,10 @@ namespace System.Reflection.TypeLoading
         public static ReadOnlySpan<byte> System => "System"u8;
         public static ReadOnlySpan<byte> SystemReflection => "System.Reflection"u8;
         public static ReadOnlySpan<byte> SystemCollectionsGeneric => "System.Collections.Generic"u8;
-        public static ReadOnlySpan<byte> SystemRuntimeInteropServices => "System.Runtime.InteropServices"u8;
-        public static ReadOnlySpan<byte> SystemRuntimeCompilerServices => "System.Runtime.CompilerServices"u8;
+        public static ReadOnlySpan<byte> SystemRuntimeInteropServices =>
+            "System.Runtime.InteropServices"u8;
+        public static ReadOnlySpan<byte> SystemRuntimeCompilerServices =>
+            "System.Runtime.CompilerServices"u8;
 
         public static ReadOnlySpan<byte> Array => "Array"u8;
         public static ReadOnlySpan<byte> Boolean => "Boolean"u8;

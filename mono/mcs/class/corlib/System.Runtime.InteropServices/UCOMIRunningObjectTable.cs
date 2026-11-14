@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,19 +31,27 @@
 #if !FULL_AOT_RUNTIME
 namespace System.Runtime.InteropServices
 {
-	[Obsolete]
-	[ComImport]
-	[Guid ("00000010-0000-0000-c000-000000000046")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	public interface UCOMIRunningObjectTable
-	{
-		void Register (int grfFlags, [MarshalAs (UnmanagedType.Interface)] object punkObject, UCOMIMoniker pmkObjectName, out int pdwRegister);
-		void Revoke (int dwRegister);
-		void IsRunning (UCOMIMoniker pmkObjectName);
-		void GetObject (UCOMIMoniker pmkObjectName, [MarshalAs (UnmanagedType.Interface)] out object ppunkObject);
-		void NoteChangeTime (int dwRegister, ref FILETIME pfiletime);
-		void GetTimeOfLastChange (UCOMIMoniker pmkObjectName, out FILETIME pfiletime);
-		void EnumRunning (out UCOMIEnumMoniker ppenumMoniker);
-	}
+    [Obsolete]
+    [ComImport]
+    [Guid("00000010-0000-0000-c000-000000000046")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface UCOMIRunningObjectTable
+    {
+        void Register(
+            int grfFlags,
+            [MarshalAs(UnmanagedType.Interface)] object punkObject,
+            UCOMIMoniker pmkObjectName,
+            out int pdwRegister
+        );
+        void Revoke(int dwRegister);
+        void IsRunning(UCOMIMoniker pmkObjectName);
+        void GetObject(
+            UCOMIMoniker pmkObjectName,
+            [MarshalAs(UnmanagedType.Interface)] out object ppunkObject
+        );
+        void NoteChangeTime(int dwRegister, ref FILETIME pfiletime);
+        void GetTimeOfLastChange(UCOMIMoniker pmkObjectName, out FILETIME pfiletime);
+        void EnumRunning(out UCOMIEnumMoniker ppenumMoniker);
+    }
 }
 #endif

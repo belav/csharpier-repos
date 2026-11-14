@@ -9,13 +9,15 @@ namespace System.Web.Http.ModelBinding
     public abstract class ModelBindingTests : HttpServerTestBase
     {
         protected ModelBindingTests()
-            : base("http://localhost/")
-        {
-        }
+            : base("http://localhost/") { }
 
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {
-            configuration.Routes.MapHttpRoute("Default", "{controller}/{action}", new { controller = "ModelBinding" });
+            configuration.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}",
+                new { controller = "ModelBinding" }
+            );
         }
     }
 }

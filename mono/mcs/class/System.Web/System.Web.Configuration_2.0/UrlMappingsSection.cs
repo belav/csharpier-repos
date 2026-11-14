@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,40 +31,47 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class UrlMappingsSection : ConfigurationSection
+    {
+        static ConfigurationProperty enabledProp;
+        static ConfigurationProperty urlMappingsProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static UrlMappingsSection()
+        {
+            enabledProp = new ConfigurationProperty("enabled", typeof(bool), true);
+            urlMappingsProp = new ConfigurationProperty(
+                "",
+                typeof(UrlMappingCollection),
+                null,
+                null,
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
+            properties = new ConfigurationPropertyCollection();
 
-	public sealed class UrlMappingsSection : ConfigurationSection
-	{
-		static ConfigurationProperty enabledProp;
-		static ConfigurationProperty urlMappingsProp;
-		static ConfigurationPropertyCollection properties;
+            properties.Add(enabledProp);
+            properties.Add(urlMappingsProp);
+        }
 
-		static UrlMappingsSection ()
-		{
-			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
-			urlMappingsProp = new ConfigurationProperty ("", typeof (UrlMappingCollection), null,
-								     null, null, ConfigurationPropertyOptions.IsDefaultCollection);
-			properties = new ConfigurationPropertyCollection ();
+        [ConfigurationProperty("enabled", DefaultValue = "True")]
+        public bool IsEnabled
+        {
+            get { return (bool)base[enabledProp]; }
+            set { base[enabledProp] = value; }
+        }
 
-			properties.Add (enabledProp);
-			properties.Add (urlMappingsProp);
-		}
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public UrlMappingCollection UrlMappings
+        {
+            get { return (UrlMappingCollection)base[urlMappingsProp]; }
+        }
 
-		[ConfigurationProperty ("enabled", DefaultValue = "True")]
-		public bool IsEnabled {
-			get { return (bool) base [enabledProp];}
-			set { base[enabledProp] = value; }
-		}
-
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public UrlMappingCollection UrlMappings {
-			get { return (UrlMappingCollection) base [urlMappingsProp];}
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

@@ -77,6 +77,6 @@ namespace RabbitMQ.Client
         /// A valid received connection.close or channel.close event
         /// will manifest as a shutdown with this ShutdownInitiator.
         ///</remarks>
-        Peer
+        Peer,
     };
 }

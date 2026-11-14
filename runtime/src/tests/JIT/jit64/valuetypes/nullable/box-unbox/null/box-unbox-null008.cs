@@ -1,9 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
@@ -13,7 +12,8 @@ public class NullableTest
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }
@@ -39,5 +39,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

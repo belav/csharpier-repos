@@ -14,9 +14,11 @@ internal class SpecificSymbolValueSource : IValueSource
         _symbol = symbol ?? throw new ArgumentNullException(nameof(symbol));
     }
 
-    public bool TryGetValue(IValueDescriptor valueDescriptor,
+    public bool TryGetValue(
+        IValueDescriptor valueDescriptor,
         BindingContext? bindingContext,
-        out object? boundValue)
+        out object? boundValue
+    )
     {
         switch (_symbol)
         {

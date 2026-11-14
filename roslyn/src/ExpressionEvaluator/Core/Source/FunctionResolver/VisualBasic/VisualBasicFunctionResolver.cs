@@ -11,14 +11,17 @@ using Microsoft.VisualStudio.Debugger.FunctionResolution;
 
 namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 {
-    [DkmReportNonFatalWatsonException(ExcludeExceptionType = typeof(NotImplementedException)), DkmContinueCorruptingException]
+    [
+        DkmReportNonFatalWatsonException(ExcludeExceptionType = typeof(NotImplementedException)),
+        DkmContinueCorruptingException
+    ]
     internal sealed class VisualBasicFunctionResolver : FunctionResolver
     {
-        public VisualBasicFunctionResolver()
-        {
-        }
+        public VisualBasicFunctionResolver() { }
 
-        internal override RequestSignature GetParsedSignature(DkmRuntimeFunctionResolutionRequest request)
+        internal override RequestSignature GetParsedSignature(
+            DkmRuntimeFunctionResolutionRequest request
+        )
         {
             return MemberSignatureParser.Parse(request.FunctionName);
         }

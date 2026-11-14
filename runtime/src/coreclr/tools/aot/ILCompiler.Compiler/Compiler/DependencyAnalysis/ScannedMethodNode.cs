@@ -3,12 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using CombinedDependencyList = System.Collections.Generic.List<ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.CombinedDependencyListEntry>;
 using Debug = System.Diagnostics.Debug;
 
@@ -44,7 +41,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => _dependencies != null;
 
-        public void InitializeDependencies(NodeFactory factory, IEnumerable<DependencyListEntry> dependencies, TypeSystemException scanningException = null)
+        public void InitializeDependencies(
+            NodeFactory factory,
+            IEnumerable<DependencyListEntry> dependencies,
+            TypeSystemException scanningException = null
+        )
         {
             _dependencies = new DependencyList(dependencies);
 
@@ -54,8 +55,14 @@ namespace ILCompiler.DependencyAnalysis
                 // This dependency is redundant with the dependency list we constructed above, with a notable
                 // exception of special unboxing thunks for byref-like types. Those don't actually unbox anything
                 // and their body is a dummy. We capture the dependency here.
-                MethodDesc nonUnboxingMethod = factory.TypeSystemContext.GetTargetOfSpecialUnboxingThunk(_method);
-                _dependencies.Add(new DependencyListEntry(factory.MethodEntrypoint(nonUnboxingMethod, false), "Non-unboxing method"));
+                MethodDesc nonUnboxingMethod =
+                    factory.TypeSystemContext.GetTargetOfSpecialUnboxingThunk(_method);
+                _dependencies.Add(
+                    new DependencyListEntry(
+                        factory.MethodEntrypoint(nonUnboxingMethod, false),
+                        "Non-unboxing method"
+                    )
+                );
             }
 
             _exception = scanningException;
@@ -72,19 +79,34 @@ namespace ILCompiler.DependencyAnalysis
             return _dependencies;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
             CombinedDependencyList dependencies = null;
-            CodeBasedDependencyAlgorithm.AddConditionalDependenciesDueToMethodCodePresence(ref dependencies, factory, _method);
-            return dependencies ?? (IEnumerable<CombinedDependencyListEntry>)Array.Empty<CombinedDependencyListEntry>();
+            CodeBasedDependencyAlgorithm.AddConditionalDependenciesDueToMethodCodePresence(
+                ref dependencies,
+                factory,
+                _method
+            );
+            return dependencies
+                ?? (IEnumerable<CombinedDependencyListEntry>)
+                    Array.Empty<CombinedDependencyListEntry>();
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
+
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool HasDynamicDependencies => false;
-        public override bool HasConditionalStaticDependencies => CodeBasedDependencyAlgorithm.HasConditionalDependenciesDueToMethodCodePresence(_method);
+        public override bool HasConditionalStaticDependencies =>
+            CodeBasedDependencyAlgorithm.HasConditionalDependenciesDueToMethodCodePresence(_method);
 
         int ISortableNode.ClassCode => -1381809560;
 

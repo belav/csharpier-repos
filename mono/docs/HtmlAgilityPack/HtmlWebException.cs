@@ -15,9 +15,7 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="message">The exception's message.</param>
         public HtmlWebException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         #endregion
     }

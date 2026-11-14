@@ -10,14 +10,20 @@ namespace System.IO.Compression.Tests
     [Collection(nameof(DisableParallelization))]
     public class zip_LargeFiles : ZipFileTestBase
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsSpeedOptimized), nameof(PlatformDetection.Is64BitProcess))] // don't run it on slower runtimes
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSpeedOptimized),
+            nameof(PlatformDetection.Is64BitProcess)
+        )] // don't run it on slower runtimes
         [OuterLoop("It requires almost 12 GB of free disk space")]
         public static void UnzipOver4GBZipFile()
         {
             byte[] buffer = GC.AllocateUninitializedArray<byte>(1_000_000_000); // 1 GB
 
             string zipArchivePath = Path.Combine(Path.GetTempPath(), "over4GB.zip");
-            DirectoryInfo tempDir = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), "over4GB"));
+            DirectoryInfo tempDir = Directory.CreateDirectory(
+                Path.Combine(Path.GetTempPath(), "over4GB")
+            );
 
             try
             {
@@ -26,7 +32,12 @@ namespace System.IO.Compression.Tests
                     File.WriteAllBytes(Path.Combine(tempDir.FullName, $"{i}.test"), buffer);
                 }
 
-                ZipFile.CreateFromDirectory(tempDir.FullName, zipArchivePath, CompressionLevel.NoCompression, includeBaseDirectory: false);
+                ZipFile.CreateFromDirectory(
+                    tempDir.FullName,
+                    zipArchivePath,
+                    CompressionLevel.NoCompression,
+                    includeBaseDirectory: false
+                );
 
                 using ZipArchive zipArchive = ZipFile.OpenRead(zipArchivePath);
                 foreach (ZipArchiveEntry entry in zipArchive.Entries)

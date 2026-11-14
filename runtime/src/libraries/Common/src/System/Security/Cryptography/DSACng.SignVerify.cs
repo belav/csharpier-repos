@@ -28,7 +28,13 @@ namespace System.Security.Cryptography
             {
                 unsafe
                 {
-                    return CngCommon.SignHash(keyHandle, source, AsymmetricPaddingMode.None, null, source.Length * 2);
+                    return CngCommon.SignHash(
+                        keyHandle,
+                        source,
+                        AsymmetricPaddingMode.None,
+                        null,
+                        source.Length * 2
+                    );
                 }
             }
         }
@@ -37,14 +43,24 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             DSASignatureFormat signatureFormat,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             Span<byte> stackBuf = stackalloc byte[WindowsMaxQSize];
             ReadOnlySpan<byte> source = AdjustHashSizeIfNecessary(hash, stackBuf);
 
             using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
             {
-                if (!CngCommon.TrySignHash(keyHandle, source, destination, AsymmetricPaddingMode.None, null, out bytesWritten))
+                if (
+                    !CngCommon.TrySignHash(
+                        keyHandle,
+                        source,
+                        destination,
+                        AsymmetricPaddingMode.None,
+                        null,
+                        out bytesWritten
+                    )
+                )
                 {
                     bytesWritten = 0;
                     return false;
@@ -58,16 +74,20 @@ namespace System.Security.Cryptography
 
             if (signatureFormat != DSASignatureFormat.Rfc3279DerSequence)
             {
-                Debug.Fail($"Missing internal implementation handler for signature format {signatureFormat}");
+                Debug.Fail(
+                    $"Missing internal implementation handler for signature format {signatureFormat}"
+                );
                 throw new CryptographicException(
                     SR.Cryptography_UnknownSignatureFormat,
-                    signatureFormat.ToString());
+                    signatureFormat.ToString()
+                );
             }
 
             return AsymmetricAlgorithmHelpers.TryConvertIeee1363ToDer(
                 destination.Slice(0, bytesWritten),
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
@@ -75,13 +95,18 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(rgbHash);
             ArgumentNullException.ThrowIfNull(rgbSignature);
 
-            return VerifySignatureCore(rgbHash, rgbSignature, DSASignatureFormat.IeeeP1363FixedFieldConcatenation);
+            return VerifySignatureCore(
+                rgbHash,
+                rgbSignature,
+                DSASignatureFormat.IeeeP1363FixedFieldConcatenation
+            );
         }
 
         protected override bool VerifySignatureCore(
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             Span<byte> stackBuf = stackalloc byte[WindowsMaxQSize];
             ReadOnlySpan<byte> source = AdjustHashSizeIfNecessary(hash, stackBuf);
@@ -90,26 +115,42 @@ namespace System.Security.Cryptography
             {
                 // source.Length is the field size, in bytes, so just convert to bits.
                 int fieldSizeBits = source.Length * 8;
-                signature = this.ConvertSignatureToIeeeP1363(signatureFormat, signature, fieldSizeBits);
+                signature = this.ConvertSignatureToIeeeP1363(
+                    signatureFormat,
+                    signature,
+                    fieldSizeBits
+                );
             }
             else if (signatureFormat != DSASignatureFormat.IeeeP1363FixedFieldConcatenation)
             {
-                Debug.Fail($"Missing internal implementation handler for signature format {signatureFormat}");
+                Debug.Fail(
+                    $"Missing internal implementation handler for signature format {signatureFormat}"
+                );
                 throw new CryptographicException(
                     SR.Cryptography_UnknownSignatureFormat,
-                    signatureFormat.ToString());
+                    signatureFormat.ToString()
+                );
             }
 
             using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
             {
                 unsafe
                 {
-                    return CngCommon.VerifyHash(keyHandle, source, signature, AsymmetricPaddingMode.None, null);
+                    return CngCommon.VerifyHash(
+                        keyHandle,
+                        source,
+                        signature,
+                        AsymmetricPaddingMode.None,
+                        null
+                    );
                 }
             }
         }
 
-        private ReadOnlySpan<byte> AdjustHashSizeIfNecessary(ReadOnlySpan<byte> hash, Span<byte> stackBuf)
+        private ReadOnlySpan<byte> AdjustHashSizeIfNecessary(
+            ReadOnlySpan<byte> hash,
+            Span<byte> stackBuf
+        )
         {
             Debug.Assert(stackBuf.Length == WindowsMaxQSize);
 
@@ -159,7 +200,10 @@ namespace System.Security.Cryptography
                 fixed (byte* pBlobBytes = blob)
                 {
                     BCRYPT_DSA_KEY_BLOB_V2* pBlob = (BCRYPT_DSA_KEY_BLOB_V2*)pBlobBytes;
-                    if (pBlob->Magic != KeyBlobMagicNumber.BCRYPT_DSA_PUBLIC_MAGIC_V2 && pBlob->Magic != KeyBlobMagicNumber.BCRYPT_DSA_PRIVATE_MAGIC_V2)
+                    if (
+                        pBlob->Magic != KeyBlobMagicNumber.BCRYPT_DSA_PUBLIC_MAGIC_V2
+                        && pBlob->Magic != KeyBlobMagicNumber.BCRYPT_DSA_PRIVATE_MAGIC_V2
+                    )
                     {
                         // This is a V1 BCRYPT_DSA_KEY_BLOB, which hardcodes the Q length to 20 bytes.
                         return Sha1HashOutputSize;

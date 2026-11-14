@@ -25,8 +25,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="metadataWorkspace">runtime metadata container</param>
         /// <param name="targetDataspace">target dataspace for the perspective</param>
-        internal Perspective(MetadataWorkspace metadataWorkspace,
-                             DataSpace targetDataspace)
+        internal Perspective(MetadataWorkspace metadataWorkspace, DataSpace targetDataspace)
         {
             EntityUtil.CheckArgumentNull(metadataWorkspace, "metadataWorkspace");
 
@@ -53,14 +52,25 @@ namespace System.Data.Metadata.Edm
         /// <param name="memberName">the name of the member in the source perspective</param>
         /// <param name="ignoreCase">Whether to do case-sensitive member look up or not</param>
         /// <param name="outMember">returns the member in target space, if a match is found</param>
-        internal virtual bool TryGetMember(StructuralType type, String memberName, bool ignoreCase, out EdmMember outMember)
+        internal virtual bool TryGetMember(
+            StructuralType type,
+            String memberName,
+            bool ignoreCase,
+            out EdmMember outMember
+        )
         {
             EntityUtil.CheckArgumentNull(type, "type");
             EntityUtil.CheckStringArgument(memberName, "memberName");
             outMember = null;
             return type.Members.TryGetValue(memberName, ignoreCase, out outMember);
         }
-        internal bool TryGetEnumMember(EnumType type, String memberName, bool ignoreCase, out EnumMember outMember)
+
+        internal bool TryGetEnumMember(
+            EnumType type,
+            String memberName,
+            bool ignoreCase,
+            out EnumMember outMember
+        )
         {
             EntityUtil.CheckArgumentNull(type, "type");
             EntityUtil.CheckStringArgument(memberName, "memberName");
@@ -76,7 +86,12 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">Whether to do case-sensitive member look up or not</param>
         /// <param name="outSet">extent in target space, if a match is found</param>
         /// <returns>returns true, if a match is found otherwise returns false</returns>
-        internal bool TryGetExtent(EntityContainer entityContainer, String extentName, bool ignoreCase, out EntitySetBase outSet)
+        internal bool TryGetExtent(
+            EntityContainer entityContainer,
+            String extentName,
+            bool ignoreCase,
+            out EntitySetBase outSet
+        )
         {
             // There are no entity containers in the OSpace. So there is no mapping involved.
             // Hence the name should be a valid name in the CSpace.
@@ -86,25 +101,40 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the function import in the target space, for the given entity container.
         /// </summary>
-        internal bool TryGetFunctionImport(EntityContainer entityContainer, String functionImportName, bool ignoreCase, out EdmFunction functionImport)
+        internal bool TryGetFunctionImport(
+            EntityContainer entityContainer,
+            String functionImportName,
+            bool ignoreCase,
+            out EdmFunction functionImport
+        )
         {
             // There are no entity containers in the OSpace. So there is no mapping involved.
             // Hence the name should be a valid name in the CSpace.
             functionImport = null;
             if (ignoreCase)
             {
-                functionImport = entityContainer.FunctionImports.Where(fi => String.Equals(fi.Name, functionImportName, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+                functionImport = entityContainer
+                    .FunctionImports.Where(fi =>
+                        String.Equals(
+                            fi.Name,
+                            functionImportName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    .SingleOrDefault();
             }
             else
             {
-                functionImport = entityContainer.FunctionImports.Where(fi => fi.Name == functionImportName).SingleOrDefault();
+                functionImport = entityContainer
+                    .FunctionImports.Where(fi => fi.Name == functionImportName)
+                    .SingleOrDefault();
             }
             return functionImport != null;
         }
 
         /// <summary>
         /// Get the default entity container
-        /// returns null for any perspective other 
+        /// returns null for any perspective other
         /// than the CLR perspective
         /// </summary>
         /// <returns>The default container</returns>
@@ -120,9 +150,18 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="entityContainer">returns the entity container if a match is found</param>
         /// <returns>returns true if a match is found, otherwise false</returns>
-        internal virtual bool TryGetEntityContainer(string name, bool ignoreCase, out EntityContainer entityContainer)
+        internal virtual bool TryGetEntityContainer(
+            string name,
+            bool ignoreCase,
+            out EntityContainer entityContainer
+        )
         {
-            return MetadataWorkspace.TryGetEntityContainer(name, ignoreCase, TargetDataspace, out entityContainer);
+            return MetadataWorkspace.TryGetEntityContainer(
+                name,
+                ignoreCase,
+                TargetDataspace,
+                out entityContainer
+            );
         }
 
         /// <summary>
@@ -132,7 +171,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="typeUsage">TypeUsage for the type</param>
         /// <returns>returns true if a match was found, otherwise false</returns>
-        internal abstract bool TryGetTypeByName(string fullName, bool ignoreCase, out TypeUsage typeUsage);
+        internal abstract bool TryGetTypeByName(
+            string fullName,
+            bool ignoreCase,
+            out TypeUsage typeUsage
+        );
 
         /// <summary>
         /// Returns overloads of a function with the given name in the target space.
@@ -142,7 +185,12 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="functionOverloads">function overloads</param>
         /// <returns>returns true if a match was found, otherwise false</returns>
-        internal bool TryGetFunctionByName(string namespaceName, string functionName, bool ignoreCase, out IList<EdmFunction> functionOverloads)
+        internal bool TryGetFunctionByName(
+            string namespaceName,
+            string functionName,
+            bool ignoreCase,
+            out IList<EdmFunction> functionOverloads
+        )
         {
             EntityUtil.CheckStringArgument(namespaceName, "namespaceName");
             EntityUtil.CheckStringArgument(functionName, "functionName");
@@ -150,11 +198,13 @@ namespace System.Data.Metadata.Edm
             var fullName = namespaceName + "." + functionName;
 
             // First look for a model-defined function in the target space.
-            ItemCollection itemCollection = m_metadataWorkspace.GetItemCollection(m_targetDataspace);
+            ItemCollection itemCollection = m_metadataWorkspace.GetItemCollection(
+                m_targetDataspace
+            );
             IList<EdmFunction> overloads =
-                m_targetDataspace == DataSpace.SSpace ?
-                ((StoreItemCollection)itemCollection).GetCTypeFunctions(fullName, ignoreCase) :
-                itemCollection.GetFunctions(fullName, ignoreCase);
+                m_targetDataspace == DataSpace.SSpace
+                    ? ((StoreItemCollection)itemCollection).GetCTypeFunctions(fullName, ignoreCase)
+                    : itemCollection.GetFunctions(fullName, ignoreCase);
 
             if (m_targetDataspace == DataSpace.CSpace)
             {
@@ -162,10 +212,23 @@ namespace System.Data.Metadata.Edm
                 if (overloads == null || overloads.Count == 0)
                 {
                     EntityContainer entityContainer;
-                    if (this.TryGetEntityContainer(namespaceName, /*ignoreCase:*/ false, out entityContainer))
+                    if (
+                        this.TryGetEntityContainer(
+                            namespaceName, /*ignoreCase:*/
+                            false,
+                            out entityContainer
+                        )
+                    )
                     {
                         EdmFunction functionImport;
-                        if (this.TryGetFunctionImport(entityContainer, functionName, /*ignoreCase:*/ false, out functionImport))
+                        if (
+                            this.TryGetFunctionImport(
+                                entityContainer,
+                                functionName, /*ignoreCase:*/
+                                false,
+                                out functionImport
+                            )
+                        )
                         {
                             overloads = new EdmFunction[] { functionImport };
                         }
@@ -176,9 +239,17 @@ namespace System.Data.Metadata.Edm
                 if (overloads == null || overloads.Count == 0)
                 {
                     ItemCollection storeItemCollection;
-                    if (m_metadataWorkspace.TryGetItemCollection(DataSpace.SSpace, out storeItemCollection))
+                    if (
+                        m_metadataWorkspace.TryGetItemCollection(
+                            DataSpace.SSpace,
+                            out storeItemCollection
+                        )
+                    )
                     {
-                        overloads = ((StoreItemCollection)storeItemCollection).GetCTypeFunctions(fullName, ignoreCase);
+                        overloads = ((StoreItemCollection)storeItemCollection).GetCTypeFunctions(
+                            fullName,
+                            ignoreCase
+                        );
                     }
                 }
             }
@@ -192,10 +263,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         internal MetadataWorkspace MetadataWorkspace
         {
-            get
-            {
-                return m_metadataWorkspace;
-            }
+            get { return m_metadataWorkspace; }
         }
 
         /// <summary>
@@ -204,9 +272,15 @@ namespace System.Data.Metadata.Edm
         /// <param name="primitiveTypeKind"></param>
         /// <param name="primitiveType"></param>
         /// <returns></returns>
-        internal virtual bool TryGetMappedPrimitiveType(PrimitiveTypeKind primitiveTypeKind, out PrimitiveType primitiveType)
+        internal virtual bool TryGetMappedPrimitiveType(
+            PrimitiveTypeKind primitiveTypeKind,
+            out PrimitiveType primitiveType
+        )
         {
-            primitiveType = m_metadataWorkspace.GetMappedPrimitiveType(primitiveTypeKind, DataSpace.CSpace);
+            primitiveType = m_metadataWorkspace.GetMappedPrimitiveType(
+                primitiveTypeKind,
+                DataSpace.CSpace
+            );
 
             return (null != primitiveType);
         }
@@ -219,10 +293,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         internal DataSpace TargetDataspace
         {
-            get
-            {
-                return m_targetDataspace;
-            }
+            get { return m_targetDataspace; }
         }
         #endregion
     }

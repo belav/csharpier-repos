@@ -21,7 +21,6 @@ namespace System.Xml.Xsl.Qil
             this.f = f;
         }
 
-
         //-----------------------------------------------
         // QilVisitor overrides
         //-----------------------------------------------
@@ -37,7 +36,8 @@ namespace System.Xml.Xsl.Qil
             // Visit children
             for (int i = 0; i < parent.Count; i++)
             {
-                QilNode oldChild = parent[i], newChild;
+                QilNode oldChild = parent[i],
+                    newChild;
                 XmlQueryType? oldChildType = oldChild?.XmlType;
 
                 // Visit child
@@ -47,7 +47,10 @@ namespace System.Xml.Xsl.Qil
                     newChild = Visit(oldChild!);
 
                 // Only replace child and recalculate type if oldChild != newChild or oldChild.XmlType != newChild.XmlType
-                if ((object?)oldChild != (object)newChild || (newChild != null && (object?)oldChildType != (object?)newChild.XmlType))
+                if (
+                    (object?)oldChild != (object)newChild
+                    || (newChild != null && (object?)oldChildType != (object?)newChild.XmlType)
+                )
                 {
                     recalcType = true;
                     parent[i] = newChild;
@@ -59,7 +62,6 @@ namespace System.Xml.Xsl.Qil
 
             return parent;
         }
-
 
         //-----------------------------------------------
         // QilReplaceVisitor methods
@@ -78,7 +80,10 @@ namespace System.Xml.Xsl.Qil
             // cardinality to be recalculated.
             // For example, (Sequence (TextCtor (Error "error")) (Int32 1)) => (Sequence (Error "error") (Int32 1))
             // In this case, cardinality has gone from More to One
-            Debug.Assert(newType.IsSubtypeOf(XmlQueryTypeFactory.AtMost(oldType, oldType.Cardinality)), "Replace shouldn't relax original type");
+            Debug.Assert(
+                newType.IsSubtypeOf(XmlQueryTypeFactory.AtMost(oldType, oldType.Cardinality)),
+                "Replace shouldn't relax original type"
+            );
 
             node.XmlType = newType;
         }

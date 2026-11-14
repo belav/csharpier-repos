@@ -7,31 +7,34 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class ToSqlQueryTestBase : NonSharedModelTestBase
 {
-    protected override string StoreName
-        => "ToSqlQueryTests";
+    protected override string StoreName => "ToSqlQueryTests";
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))] // Issue #27629
     public virtual async Task Entity_type_with_navigation_mapped_to_SqlQuery(bool async)
     {
-        var contextFactory = await InitializeAsync<Context27629>(
-            seed: c =>
+        var contextFactory = await InitializeAsync<Context27629>(seed: c =>
+        {
+            var author = new Author
             {
-                var author = new Author { Name = "Toast", Posts = { new Post { Title = "Sausages of the world!" } } };
-                c.Add(author);
-                c.SaveChanges();
+                Name = "Toast",
+                Posts = { new Post { Title = "Sausages of the world!" } },
+            };
+            c.Add(author);
+            c.SaveChanges();
 
-                var postStat = new PostStat { Count = 10, Author = author };
-                author.PostStat = postStat;
-                c.Add(postStat);
-                c.SaveChanges();
-            });
+            var postStat = new PostStat { Count = 10, Author = author };
+            author.PostStat = postStat;
+            c.Add(postStat);
+            c.SaveChanges();
+        });
 
         using var context = contextFactory.CreateContext();
 
-        var authors = await
-            (from o in context.Authors
-             select new { Author = o, PostCount = o.PostStat!.Count }).ToListAsync();
+        var authors = await (
+            from o in context.Authors
+            select new { Author = o, PostCount = o.PostStat!.Count }
+        ).ToListAsync();
 
         Assert.Single(authors);
         Assert.Equal("Toast", authors[0].Author.Name);
@@ -41,54 +44,45 @@ public abstract class ToSqlQueryTestBase : NonSharedModelTestBase
     protected class Context27629 : DbContext
     {
         public Context27629(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        public DbSet<Author> Authors
-            => Set<Author>();
+        public DbSet<Author> Authors => Set<Author>();
 
-        public DbSet<Post> Posts
-            => Set<Post>();
+        public DbSet<Post> Posts => Set<Post>();
 
-        public DbSet<PostStat> PostStats
-            => Set<PostStat>();
+        public DbSet<PostStat> PostStats => Set<PostStat>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Author>(
-                builder =>
-                {
-                    builder.ToTable("Authors");
-                    builder.Property(o => o.Name).HasMaxLength(50);
-                });
+            modelBuilder.Entity<Author>(builder =>
+            {
+                builder.ToTable("Authors");
+                builder.Property(o => o.Name).HasMaxLength(50);
+            });
 
-            modelBuilder.Entity<Post>(
-                builder =>
-                {
-                    builder.ToTable("Posts");
-                    builder.Property(o => o.Title).HasMaxLength(50);
-                    builder.Property(o => o.Content).HasMaxLength(500);
+            modelBuilder.Entity<Post>(builder =>
+            {
+                builder.ToTable("Posts");
+                builder.Property(o => o.Title).HasMaxLength(50);
+                builder.Property(o => o.Content).HasMaxLength(500);
 
-                    builder
-                        .HasOne(o => o.Author)
-                        .WithMany(o => o.Posts)
-                        .HasForeignKey(o => o.AuthorId)
-                        .OnDelete(DeleteBehavior.ClientCascade);
-                });
+                builder
+                    .HasOne(o => o.Author)
+                    .WithMany(o => o.Posts)
+                    .HasForeignKey(o => o.AuthorId)
+                    .OnDelete(DeleteBehavior.ClientCascade);
+            });
 
-            modelBuilder.Entity<PostStat>(
-                builder =>
-                {
-                    builder
-                        .ToSqlQuery("SELECT * FROM PostStats")
-                        .HasKey(o => o.AuthorId);
+            modelBuilder.Entity<PostStat>(builder =>
+            {
+                builder.ToSqlQuery("SELECT * FROM PostStats").HasKey(o => o.AuthorId);
 
-                    builder
-                        .HasOne(o => o.Author)
-                        .WithOne().HasForeignKey<PostStat>(o => o.AuthorId)
-                        .OnDelete(DeleteBehavior.ClientCascade);
-                });
+                builder
+                    .HasOne(o => o.Author)
+                    .WithOne()
+                    .HasForeignKey<PostStat>(o => o.AuthorId)
+                    .OnDelete(DeleteBehavior.ClientCascade);
+            });
         }
     }
 
@@ -116,12 +110,10 @@ public abstract class ToSqlQueryTestBase : NonSharedModelTestBase
         public long? Count { get; set; }
     }
 
-    public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction) =>
+        facade.UseTransaction(transaction.GetDbTransaction());
 
-    protected TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    protected TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected void ClearLog()
-        => TestSqlLoggerFactory.Clear();
+    protected void ClearLog() => TestSqlLoggerFactory.Clear();
 }

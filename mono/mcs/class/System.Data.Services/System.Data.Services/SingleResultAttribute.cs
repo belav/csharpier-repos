@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Data.Services {
-	[AttributeUsage (AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-	public sealed class SingleResultAttribute : Attribute {
-	}
+namespace System.Data.Services
+{
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    public sealed class SingleResultAttribute : Attribute { }
 }

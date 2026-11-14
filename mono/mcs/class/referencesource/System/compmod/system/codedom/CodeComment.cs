@@ -1,28 +1,25 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeComment.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para> Represents a comment.</para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeComment : CodeObject {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeComment : CodeObject
+    {
         private string text;
         private bool docComment = false;
 
@@ -31,8 +28,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeComment'/>.
         ///    </para>
         /// </devdoc>
-        public CodeComment() {
-        }
+        public CodeComment() { }
 
         /// <devdoc>
         ///    <para>
@@ -40,14 +36,16 @@ namespace System.CodeDom {
         ///       contents.
         ///    </para>
         /// </devdoc>
-        public CodeComment(string text) {
+        public CodeComment(string text)
+        {
             Text = text;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeComment(string text, bool docComment) {
+        public CodeComment(string text, bool docComment)
+        {
             Text = text;
             this.docComment = docComment;
         }
@@ -55,13 +53,10 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool DocComment {
-            get {
-                return docComment;
-            }
-            set {
-                docComment = value;
-            }
+        public bool DocComment
+        {
+            get { return docComment; }
+            set { docComment = value; }
         }
 
         /// <devdoc>
@@ -70,13 +65,10 @@ namespace System.CodeDom {
         ///       the text of the comment.
         ///    </para>
         /// </devdoc>
-        public string Text {
-            get {
-                return (text == null) ? string.Empty : text;
-            }
-            set {
-                text = value;
-            }
+        public string Text
+        {
+            get { return (text == null) ? string.Empty : text; }
+            set { text = value; }
         }
     }
 }

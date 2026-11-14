@@ -1,19 +1,24 @@
 //------------------------------------------------------------------------------
 // <copyright file="BindingList.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope="type", Target="System.ComponentModel.BindingList`1")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Microsoft.Naming",
+    "CA1710:IdentifiersShouldHaveCorrectSuffix",
+    Scope = "type",
+    Target = "System.ComponentModel.BindingList`1"
+)]
 
 namespace System.ComponentModel
 {
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Reflection;
     using System.Security.Permissions;
     using CodeAccessPermission = System.Security.CodeAccessPermission;
 
@@ -22,12 +27,16 @@ namespace System.ComponentModel
     /// </devdoc>
     [HostProtection(SharedState = true)]
     [Serializable]
-    public class BindingList<T> : Collection<T>, IBindingList, ICancelAddNew, IRaiseItemChangedEvents
+    public class BindingList<T>
+        : Collection<T>,
+            IBindingList,
+            ICancelAddNew,
+            IRaiseItemChangedEvents
     {
         private int addNewPos = -1;
         private bool raiseListChangedEvents = true;
         private bool raiseItemChangedEvents = false;
-        
+
         [NonSerialized()]
         private PropertyDescriptorCollection itemTypeProperties = null;
 
@@ -54,7 +63,9 @@ namespace System.ComponentModel
         /// <devdoc>
         ///     Default constructor.
         /// </devdoc>
-        public BindingList() : base() {
+        public BindingList()
+            : base()
+        {
             Initialize();
         }
 
@@ -62,35 +73,51 @@ namespace System.ComponentModel
         /// <devdoc>
         ///     Constructor that allows substitution of the inner list with a custom list.
         /// </devdoc>
-        public BindingList(IList<T> list) : base(list) {
+        public BindingList(IList<T> list)
+            : base(list)
+        {
             Initialize();
         }
 
-        private void Initialize() {
+        private void Initialize()
+        {
             // Set the default value of AllowNew based on whether type T has a default constructor
             this.allowNew = ItemTypeHasDefaultConstructor;
 
             // Check for INotifyPropertyChanged
-            if (typeof(INotifyPropertyChanged).IsAssignableFrom(typeof(T))) {
+            if (typeof(INotifyPropertyChanged).IsAssignableFrom(typeof(T)))
+            {
                 // Supports INotifyPropertyChanged
                 this.raiseItemChangedEvents = true;
 
                 // Loop thru the items already in the collection and hook their change notification.
-                foreach (T item in this.Items) {
+                foreach (T item in this.Items)
+                {
                     HookPropertyChanged(item);
                 }
             }
         }
 
-        private bool ItemTypeHasDefaultConstructor {
-            get {
+        private bool ItemTypeHasDefaultConstructor
+        {
+            get
+            {
                 Type itemType = typeof(T);
 
-                if (itemType.IsPrimitive) {
+                if (itemType.IsPrimitive)
+                {
                     return true;
                 }
 
-                if (itemType.GetConstructor(BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance, null, new Type[0], null) != null) {
+                if (
+                    itemType.GetConstructor(
+                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance,
+                        null,
+                        new Type[0],
+                        null
+                    ) != null
+                )
+                {
                     return true;
                 }
 
@@ -106,18 +133,23 @@ namespace System.ComponentModel
         /// <devdoc>
         ///     Event that allows a custom item to be provided as the new item added to the list by AddNew().
         /// </devdoc>
-        public event AddingNewEventHandler AddingNew {
-            add {
+        public event AddingNewEventHandler AddingNew
+        {
+            add
+            {
                 bool allowNewWasTrue = AllowNew;
                 onAddingNew += value;
-                if (allowNewWasTrue != AllowNew) {
+                if (allowNewWasTrue != AllowNew)
+                {
                     FireListChanged(ListChangedType.Reset, -1);
                 }
             }
-            remove {
+            remove
+            {
                 bool allowNewWasTrue = AllowNew;
                 onAddingNew -= value;
-                if (allowNewWasTrue != AllowNew) {
+                if (allowNewWasTrue != AllowNew)
+                {
                     FireListChanged(ListChangedType.Reset, -1);
                 }
             }
@@ -127,14 +159,17 @@ namespace System.ComponentModel
         /// <devdoc>
         ///     Raises the AddingNew event.
         /// </devdoc>
-        protected virtual void OnAddingNew(AddingNewEventArgs e) {
-            if (onAddingNew != null) {
+        protected virtual void OnAddingNew(AddingNewEventArgs e)
+        {
+            if (onAddingNew != null)
+            {
                 onAddingNew(this, e);
             }
         }
 
         // Private helper method
-        private object FireAddingNew() {
+        private object FireAddingNew()
+        {
             AddingNewEventArgs e = new AddingNewEventArgs(null);
             OnAddingNew(e);
             return e.NewObject;
@@ -148,33 +183,32 @@ namespace System.ComponentModel
         /// <devdoc>
         ///     Event that reports changes to the list or to items in the list.
         /// </devdoc>
-        public event ListChangedEventHandler ListChanged {
-            add {
-                onListChanged += value;
-            }
-            remove {
-                onListChanged -= value;
-            }
+        public event ListChangedEventHandler ListChanged
+        {
+            add { onListChanged += value; }
+            remove { onListChanged -= value; }
         }
 
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.OnListChanged"]/*' />
         /// <devdoc>
         ///     Raises the ListChanged event.
         /// </devdoc>
-        protected virtual void OnListChanged(ListChangedEventArgs e) {
-            if (onListChanged != null) {
+        protected virtual void OnListChanged(ListChangedEventArgs e)
+        {
+            if (onListChanged != null)
+            {
                 onListChanged(this, e);
             }
         }
 
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.RaiseListChangedEvents"]/* />
-        public bool RaiseListChangedEvents {
-            get {
-                return this.raiseListChangedEvents;
-            }
-
-            set {
-                if (this.raiseListChangedEvents != value) {
+        public bool RaiseListChangedEvents
+        {
+            get { return this.raiseListChangedEvents; }
+            set
+            {
+                if (this.raiseListChangedEvents != value)
+                {
                     this.raiseListChangedEvents = value;
                 }
             }
@@ -183,20 +217,24 @@ namespace System.ComponentModel
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.ResetBindings"]/*' />
         /// <devdoc>
         /// </devdoc>
-        public void ResetBindings() {
+        public void ResetBindings()
+        {
             FireListChanged(ListChangedType.Reset, -1);
         }
 
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.ResetItem"]/*' />
         /// <devdoc>
         /// </devdoc>
-        public void ResetItem(int position) {
+        public void ResetItem(int position)
+        {
             FireListChanged(ListChangedType.ItemChanged, position);
         }
 
         // Private helper method
-        private void FireListChanged(ListChangedType type, int index) {
-            if (this.raiseListChangedEvents) {
+        private void FireListChanged(ListChangedType type, int index)
+        {
+            if (this.raiseListChangedEvents)
+            {
                 OnListChanged(new ListChangedEventArgs(type, index));
             }
         }
@@ -208,11 +246,14 @@ namespace System.ComponentModel
         // Collection<T> funnels all list changes through the four virtual methods below.
         // We override these so that we can commit any pending new item and fire the proper ListChanged events.
 
-        protected override void ClearItems() {
+        protected override void ClearItems()
+        {
             EndNew(addNewPos);
 
-            if (this.raiseItemChangedEvents) {
-                foreach (T item in this.Items) {
+            if (this.raiseItemChangedEvents)
+            {
+                foreach (T item in this.Items)
+                {
                     UnhookPropertyChanged(item);
                 }
             }
@@ -221,26 +262,31 @@ namespace System.ComponentModel
             FireListChanged(ListChangedType.Reset, -1);
         }
 
-        protected override void InsertItem(int index, T item) {
+        protected override void InsertItem(int index, T item)
+        {
             EndNew(addNewPos);
             base.InsertItem(index, item);
 
-            if (this.raiseItemChangedEvents) {
+            if (this.raiseItemChangedEvents)
+            {
                 HookPropertyChanged(item);
             }
 
             FireListChanged(ListChangedType.ItemAdded, index);
         }
-        
-        protected override void RemoveItem(int index) {
+
+        protected override void RemoveItem(int index)
+        {
             // Need to all RemoveItem if this on the AddNew item
-            if (!this.allowRemove && !(this.addNewPos >= 0 && this.addNewPos == index)) {
+            if (!this.allowRemove && !(this.addNewPos >= 0 && this.addNewPos == index))
+            {
                 throw new NotSupportedException();
             }
 
             EndNew(addNewPos);
 
-            if (this.raiseItemChangedEvents) {
+            if (this.raiseItemChangedEvents)
+            {
                 UnhookPropertyChanged(this[index]);
             }
 
@@ -248,21 +294,23 @@ namespace System.ComponentModel
             FireListChanged(ListChangedType.ItemDeleted, index);
         }
 
-        protected override void SetItem(int index, T item) {
-
-            if (this.raiseItemChangedEvents) {
+        protected override void SetItem(int index, T item)
+        {
+            if (this.raiseItemChangedEvents)
+            {
                 UnhookPropertyChanged(this[index]);
             }
 
             base.SetItem(index, item);
-            
-            if (this.raiseItemChangedEvents) {
+
+            if (this.raiseItemChangedEvents)
+            {
                 HookPropertyChanged(item);
             }
-            
+
             FireListChanged(ListChangedType.ItemChanged, index);
         }
-        
+
         #endregion
 
         #region ICancelAddNew interface
@@ -273,7 +321,8 @@ namespace System.ComponentModel
         /// </devdoc>
         public virtual void CancelNew(int itemIndex)
         {
-            if (addNewPos >= 0 && addNewPos == itemIndex) {
+            if (addNewPos >= 0 && addNewPos == itemIndex)
+            {
                 RemoveItem(addNewPos);
                 addNewPos = -1;
             }
@@ -285,7 +334,8 @@ namespace System.ComponentModel
         /// </devdoc>
         public virtual void EndNew(int itemIndex)
         {
-            if (addNewPos >= 0 && addNewPos == itemIndex) {
+            if (addNewPos >= 0 && addNewPos == itemIndex)
+            {
                 addNewPos = -1;
             }
         }
@@ -304,25 +354,26 @@ namespace System.ComponentModel
         ///     that changes the contents of the list (such as an Insert or Remove). When an add operation is
         ///     cancelled, the new item is removed from the list.
         /// </devdoc>
-        public T AddNew() {
+        public T AddNew()
+        {
             return (T)((this as IBindingList).AddNew());
         }
 
-        object IBindingList.AddNew() {
+        object IBindingList.AddNew()
+        {
             // Create new item and add it to list
             object newItem = AddNewCore();
 
             // Record position of new item (to support cancellation later on)
-            addNewPos = (newItem != null) ? IndexOf((T) newItem) : -1;
+            addNewPos = (newItem != null) ? IndexOf((T)newItem) : -1;
 
             // Return new item to caller
             return newItem;
         }
 
-        private bool AddingNewHandled {
-            get {
-                return onAddingNew != null && onAddingNew.GetInvocationList().Length > 0;
-            }
+        private bool AddingNewHandled
+        {
+            get { return onAddingNew != null && onAddingNew.GetInvocationList().Length > 0; }
         }
 
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.AddNewCore"]/*' />
@@ -333,21 +384,25 @@ namespace System.ComponentModel
         ///     supply a custom item to add to the list. Otherwise an item of type T is created.
         ///     The new item is then added to the end of the list.
         /// </devdoc>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2113:SecureLateBindingMethods")]
-        protected virtual object AddNewCore() {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA2113:SecureLateBindingMethods"
+        )]
+        protected virtual object AddNewCore()
+        {
             // Allow event handler to supply the new item for us
             object newItem = FireAddingNew();
 
             // If event hander did not supply new item, create one ourselves
-            if (newItem == null) {
-
-                Type type = typeof(T);                
+            if (newItem == null)
+            {
+                Type type = typeof(T);
                 newItem = SecurityUtils.SecureCreateInstance(type);
             }
 
             // Add item to end of list. Note: If event handler returned an item not of type T,
             // the cast below will trigger an InvalidCastException. This is by design.
-            Add((T) newItem);
+            Add((T)newItem);
 
             // Return new item to caller
             return newItem;
@@ -356,9 +411,11 @@ namespace System.ComponentModel
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.AllowNew"]/*' />
         /// <devdoc>
         /// </devdoc>
-        public bool AllowNew {
-            get {
-                //If the user set AllowNew, return what they set.  If we have a default constructor, allowNew will be 
+        public bool AllowNew
+        {
+            get
+            {
+                //If the user set AllowNew, return what they set.  If we have a default constructor, allowNew will be
                 //true and we should just return true.
                 if (userSetAllowNew || allowNew)
                 {
@@ -368,212 +425,222 @@ namespace System.ComponentModel
                 //If there's a handler for this, we should allow new.
                 return AddingNewHandled;
             }
-            set {
+            set
+            {
                 bool oldAllowNewValue = AllowNew;
                 userSetAllowNew = true;
                 //Note that we don't want to set allowNew only if AllowNew didn't match value,
                 //since AllowNew can depend on onAddingNew handler
                 this.allowNew = value;
-                if (oldAllowNewValue != value) {
+                if (oldAllowNewValue != value)
+                {
                     FireListChanged(ListChangedType.Reset, -1);
                 }
             }
         }
 
-        /* private */ bool IBindingList.AllowNew {
-            get {
-                return AllowNew;
-            }
+        /* private */bool IBindingList.AllowNew
+        {
+            get { return AllowNew; }
         }
 
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.AllowEdit"]/*' />
         /// <devdoc>
         /// </devdoc>
-        public bool AllowEdit {
-            get {
-                return this.allowEdit;
-            }
-            set {
-                if (this.allowEdit != value) {
+        public bool AllowEdit
+        {
+            get { return this.allowEdit; }
+            set
+            {
+                if (this.allowEdit != value)
+                {
                     this.allowEdit = value;
                     FireListChanged(ListChangedType.Reset, -1);
                 }
             }
         }
 
-        /* private */ bool IBindingList.AllowEdit {
-            get {
-                return AllowEdit;
-            }
+        /* private */bool IBindingList.AllowEdit
+        {
+            get { return AllowEdit; }
         }
 
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.AllowRemove"]/*' />
         /// <devdoc>
         /// </devdoc>
-        public bool AllowRemove {
-            get {
-                return this.allowRemove;
-            }
-            set {
-                if (this.allowRemove != value) {
+        public bool AllowRemove
+        {
+            get { return this.allowRemove; }
+            set
+            {
+                if (this.allowRemove != value)
+                {
                     this.allowRemove = value;
                     FireListChanged(ListChangedType.Reset, -1);
                 }
             }
         }
 
-        /* private */ bool IBindingList.AllowRemove {
-            get {
-                return AllowRemove;
-            }
+        /* private */bool IBindingList.AllowRemove
+        {
+            get { return AllowRemove; }
         }
 
-        bool IBindingList.SupportsChangeNotification {
-            get {
-                return SupportsChangeNotificationCore;
-            }
+        bool IBindingList.SupportsChangeNotification
+        {
+            get { return SupportsChangeNotificationCore; }
         }
 
-        protected virtual bool SupportsChangeNotificationCore {
-            get {
-                return true;
-            }
+        protected virtual bool SupportsChangeNotificationCore
+        {
+            get { return true; }
         }
 
-        bool IBindingList.SupportsSearching {
-            get {
-                return SupportsSearchingCore;
-            }
+        bool IBindingList.SupportsSearching
+        {
+            get { return SupportsSearchingCore; }
         }
 
-        protected virtual bool SupportsSearchingCore {
-            get {
-                return false;
-            }
+        protected virtual bool SupportsSearchingCore
+        {
+            get { return false; }
         }
 
-        bool IBindingList.SupportsSorting {
-            get {
-                return SupportsSortingCore;
-            }
+        bool IBindingList.SupportsSorting
+        {
+            get { return SupportsSortingCore; }
         }
 
-        protected virtual bool SupportsSortingCore {
-            get {
-                return false;
-            }
+        protected virtual bool SupportsSortingCore
+        {
+            get { return false; }
         }
 
-        bool IBindingList.IsSorted {
-            get {
-                return IsSortedCore;
-            }
+        bool IBindingList.IsSorted
+        {
+            get { return IsSortedCore; }
         }
 
-        protected virtual bool IsSortedCore {
-            get {
-                return false;
-            }
+        protected virtual bool IsSortedCore
+        {
+            get { return false; }
         }
 
-        PropertyDescriptor IBindingList.SortProperty {
-            get {
-                return SortPropertyCore;
-            }
+        PropertyDescriptor IBindingList.SortProperty
+        {
+            get { return SortPropertyCore; }
         }
 
-        protected virtual PropertyDescriptor SortPropertyCore {
-            get {
-                return null;
-            }
+        protected virtual PropertyDescriptor SortPropertyCore
+        {
+            get { return null; }
         }
 
-        ListSortDirection IBindingList.SortDirection {
-            get {
-                return SortDirectionCore;
-            }
+        ListSortDirection IBindingList.SortDirection
+        {
+            get { return SortDirectionCore; }
         }
 
-        protected virtual ListSortDirection SortDirectionCore {
-            get {
-                return ListSortDirection.Ascending;
-            }
+        protected virtual ListSortDirection SortDirectionCore
+        {
+            get { return ListSortDirection.Ascending; }
         }
 
-        void IBindingList.ApplySort(PropertyDescriptor prop, ListSortDirection direction) {
+        void IBindingList.ApplySort(PropertyDescriptor prop, ListSortDirection direction)
+        {
             ApplySortCore(prop, direction);
         }
 
-        protected virtual void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction) {
+        protected virtual void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
+        {
             throw new NotSupportedException();
         }
 
-        void IBindingList.RemoveSort() {
+        void IBindingList.RemoveSort()
+        {
             RemoveSortCore();
         }
 
-        protected virtual void RemoveSortCore() {
+        protected virtual void RemoveSortCore()
+        {
             throw new NotSupportedException();
         }
 
-        int IBindingList.Find(PropertyDescriptor prop, object key) {
+        int IBindingList.Find(PropertyDescriptor prop, object key)
+        {
             return FindCore(prop, key);
         }
 
-        protected virtual int FindCore(PropertyDescriptor prop, object key) {
+        protected virtual int FindCore(PropertyDescriptor prop, object key)
+        {
             throw new NotSupportedException();
         }
 
-        void IBindingList.AddIndex(PropertyDescriptor prop) {
+        void IBindingList.AddIndex(PropertyDescriptor prop)
+        {
             // Not supported
         }
 
-        void IBindingList.RemoveIndex(PropertyDescriptor prop) {
+        void IBindingList.RemoveIndex(PropertyDescriptor prop)
+        {
             // Not supported
         }
 
         #endregion
 
         #region Property Change Support
-        
-        private void HookPropertyChanged(T item) {
+
+        private void HookPropertyChanged(T item)
+        {
             INotifyPropertyChanged inpc = (item as INotifyPropertyChanged);
-            
+
             // Note: inpc may be null if item is null, so always check.
-            if (null != inpc) {
-                if (propertyChangedEventHandler == null) {
-                    propertyChangedEventHandler = new PropertyChangedEventHandler(Child_PropertyChanged);
+            if (null != inpc)
+            {
+                if (propertyChangedEventHandler == null)
+                {
+                    propertyChangedEventHandler = new PropertyChangedEventHandler(
+                        Child_PropertyChanged
+                    );
                 }
                 inpc.PropertyChanged += propertyChangedEventHandler;
             }
         }
-        
-        private void UnhookPropertyChanged(T item) {
+
+        private void UnhookPropertyChanged(T item)
+        {
             INotifyPropertyChanged inpc = (item as INotifyPropertyChanged);
-    
+
             // Note: inpc may be null if item is null, so always check.
-            if (null != inpc && null != propertyChangedEventHandler) {
+            if (null != inpc && null != propertyChangedEventHandler)
+            {
                 inpc.PropertyChanged -= propertyChangedEventHandler;
             }
         }
-        
-        void Child_PropertyChanged(object sender, PropertyChangedEventArgs e) {
-            if (this.RaiseListChangedEvents) {
-                if (sender == null || e == null || string.IsNullOrEmpty(e.PropertyName)) {
+
+        void Child_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (this.RaiseListChangedEvents)
+            {
+                if (sender == null || e == null || string.IsNullOrEmpty(e.PropertyName))
+                {
                     // Fire reset event (per INotifyPropertyChanged spec)
                     ResetBindings();
                 }
-                else {
+                else
+                {
                     // The change event is broken should someone pass an item to us that is not
                     // of type T.  Still, if they do so, detect it and ignore.  It is an incorrect
                     // and rare enough occurrence that we do not want to slow the mainline path
                     // with "is" checks.
                     T item;
-                     
-                    try {
+
+                    try
+                    {
                         item = (T)sender;
                     }
-                    catch(InvalidCastException) {
+                    catch (InvalidCastException)
+                    {
                         ResetBindings();
                         return;
                     }
@@ -581,20 +648,26 @@ namespace System.ComponentModel
                     // Find the position of the item.  This should never be -1.  If it is,
                     // somehow the item has been removed from our list without our knowledge.
                     int pos = lastChangeIndex;
-                    
-                    if (pos < 0 || pos >= Count || !this[pos].Equals(item)) {
+
+                    if (pos < 0 || pos >= Count || !this[pos].Equals(item))
+                    {
                         pos = this.IndexOf(item);
                         lastChangeIndex = pos;
                     }
 
-                    if (pos == -1) {
-                        Debug.Fail("Item is no longer in our list but we are still getting change notifications.");
+                    if (pos == -1)
+                    {
+                        Debug.Fail(
+                            "Item is no longer in our list but we are still getting change notifications."
+                        );
                         UnhookPropertyChanged(item);
                         ResetBindings();
                     }
-                    else {
+                    else
+                    {
                         // Get the property descriptor
-                        if (null == this.itemTypeProperties) {
+                        if (null == this.itemTypeProperties)
+                        {
                             // Get Shape
                             itemTypeProperties = TypeDescriptor.GetProperties(typeof(T));
                             Debug.Assert(itemTypeProperties != null);
@@ -604,7 +677,11 @@ namespace System.ComponentModel
 
                         // Create event args.  If there was no matching property descriptor,
                         // we raise the list changed anyway.
-                        ListChangedEventArgs args = new ListChangedEventArgs(ListChangedType.ItemChanged, pos, pd);
+                        ListChangedEventArgs args = new ListChangedEventArgs(
+                            ListChangedType.ItemChanged,
+                            pos,
+                            pd
+                        );
 
                         // Fire the ItemChanged event
                         OnListChanged(args);
@@ -612,7 +689,7 @@ namespace System.ComponentModel
                 }
             }
         }
-        
+
         #endregion
 
         #region IRaiseItemChangedEvents interface
@@ -623,13 +700,11 @@ namespace System.ComponentModel
         ///     of type ItemChanged as a result of property changes on individual list items
         ///     unless those items support INotifyPropertyChanged
         /// </devdoc>
-        bool IRaiseItemChangedEvents.RaisesItemChangedEvents {
-            get {
-                return this.raiseItemChangedEvents;
-            }
+        bool IRaiseItemChangedEvents.RaisesItemChangedEvents
+        {
+            get { return this.raiseItemChangedEvents; }
         }
 
         #endregion
-
     }
 }

@@ -51,12 +51,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             return kind & UnaryOperatorKind.Checked;
         }
 
-        public static UnaryOperatorKind WithOverflowChecksIfApplicable(this UnaryOperatorKind kind, bool enabled)
+        public static UnaryOperatorKind WithOverflowChecksIfApplicable(
+            this UnaryOperatorKind kind,
+            bool enabled
+        )
         {
             if (enabled)
             {
                 // If it's dynamic and we're in a checked context then just mark it as checked,
-                // regardless of whether it is +x -x !x ~x ++x --x x++ or x--. Let the lowering 
+                // regardless of whether it is +x -x !x ~x ++x --x x++ or x--. Let the lowering
                 // pass sort out what to do with it.
 
                 if (kind.IsDynamic())
@@ -117,7 +120,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        public static UnaryOperatorKind WithType(this UnaryOperatorKind kind, UnaryOperatorKind type)
+        public static UnaryOperatorKind WithType(
+            this UnaryOperatorKind kind,
+            UnaryOperatorKind type
+        )
         {
             Debug.Assert(kind == (kind & ~UnaryOperatorKind.TypeMask));
             Debug.Assert(type == (type & UnaryOperatorKind.TypeMask));
@@ -180,7 +186,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        public static BinaryOperatorKind WithType(this BinaryOperatorKind kind, BinaryOperatorKind type)
+        public static BinaryOperatorKind WithType(
+            this BinaryOperatorKind kind,
+            BinaryOperatorKind type
+        )
         {
             Debug.Assert(kind == (kind & ~BinaryOperatorKind.TypeMask));
             Debug.Assert(type == (type & BinaryOperatorKind.TypeMask));
@@ -235,7 +244,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        public static BinaryOperatorKind WithOverflowChecksIfApplicable(this BinaryOperatorKind kind, bool enabled)
+        public static BinaryOperatorKind WithOverflowChecksIfApplicable(
+            this BinaryOperatorKind kind,
+            bool enabled
+        )
         {
             if (enabled)
             {
@@ -330,47 +342,78 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static bool IsShift(this BinaryOperatorKind kind)
         {
             BinaryOperatorKind type = kind.Operator();
-            return type == BinaryOperatorKind.LeftShift || type == BinaryOperatorKind.RightShift || type == BinaryOperatorKind.UnsignedRightShift;
+            return type == BinaryOperatorKind.LeftShift
+                || type == BinaryOperatorKind.RightShift
+                || type == BinaryOperatorKind.UnsignedRightShift;
         }
 
-        public static ExpressionType ToExpressionType(this BinaryOperatorKind kind, bool isCompoundAssignment)
+        public static ExpressionType ToExpressionType(
+            this BinaryOperatorKind kind,
+            bool isCompoundAssignment
+        )
         {
             if (isCompoundAssignment)
             {
                 switch (kind.Operator())
                 {
-                    case BinaryOperatorKind.Multiplication: return ExpressionType.MultiplyAssign;
-                    case BinaryOperatorKind.Addition: return ExpressionType.AddAssign;
-                    case BinaryOperatorKind.Subtraction: return ExpressionType.SubtractAssign;
-                    case BinaryOperatorKind.Division: return ExpressionType.DivideAssign;
-                    case BinaryOperatorKind.Remainder: return ExpressionType.ModuloAssign;
-                    case BinaryOperatorKind.LeftShift: return ExpressionType.LeftShiftAssign;
-                    case BinaryOperatorKind.RightShift: return ExpressionType.RightShiftAssign;
-                    case BinaryOperatorKind.And: return ExpressionType.AndAssign;
-                    case BinaryOperatorKind.Xor: return ExpressionType.ExclusiveOrAssign;
-                    case BinaryOperatorKind.Or: return ExpressionType.OrAssign;
+                    case BinaryOperatorKind.Multiplication:
+                        return ExpressionType.MultiplyAssign;
+                    case BinaryOperatorKind.Addition:
+                        return ExpressionType.AddAssign;
+                    case BinaryOperatorKind.Subtraction:
+                        return ExpressionType.SubtractAssign;
+                    case BinaryOperatorKind.Division:
+                        return ExpressionType.DivideAssign;
+                    case BinaryOperatorKind.Remainder:
+                        return ExpressionType.ModuloAssign;
+                    case BinaryOperatorKind.LeftShift:
+                        return ExpressionType.LeftShiftAssign;
+                    case BinaryOperatorKind.RightShift:
+                        return ExpressionType.RightShiftAssign;
+                    case BinaryOperatorKind.And:
+                        return ExpressionType.AndAssign;
+                    case BinaryOperatorKind.Xor:
+                        return ExpressionType.ExclusiveOrAssign;
+                    case BinaryOperatorKind.Or:
+                        return ExpressionType.OrAssign;
                 }
             }
             else
             {
                 switch (kind.Operator())
                 {
-                    case BinaryOperatorKind.Multiplication: return ExpressionType.Multiply;
-                    case BinaryOperatorKind.Addition: return ExpressionType.Add;
-                    case BinaryOperatorKind.Subtraction: return ExpressionType.Subtract;
-                    case BinaryOperatorKind.Division: return ExpressionType.Divide;
-                    case BinaryOperatorKind.Remainder: return ExpressionType.Modulo;
-                    case BinaryOperatorKind.LeftShift: return ExpressionType.LeftShift;
-                    case BinaryOperatorKind.RightShift: return ExpressionType.RightShift;
-                    case BinaryOperatorKind.Equal: return ExpressionType.Equal;
-                    case BinaryOperatorKind.NotEqual: return ExpressionType.NotEqual;
-                    case BinaryOperatorKind.GreaterThan: return ExpressionType.GreaterThan;
-                    case BinaryOperatorKind.LessThan: return ExpressionType.LessThan;
-                    case BinaryOperatorKind.GreaterThanOrEqual: return ExpressionType.GreaterThanOrEqual;
-                    case BinaryOperatorKind.LessThanOrEqual: return ExpressionType.LessThanOrEqual;
-                    case BinaryOperatorKind.And: return ExpressionType.And;
-                    case BinaryOperatorKind.Xor: return ExpressionType.ExclusiveOr;
-                    case BinaryOperatorKind.Or: return ExpressionType.Or;
+                    case BinaryOperatorKind.Multiplication:
+                        return ExpressionType.Multiply;
+                    case BinaryOperatorKind.Addition:
+                        return ExpressionType.Add;
+                    case BinaryOperatorKind.Subtraction:
+                        return ExpressionType.Subtract;
+                    case BinaryOperatorKind.Division:
+                        return ExpressionType.Divide;
+                    case BinaryOperatorKind.Remainder:
+                        return ExpressionType.Modulo;
+                    case BinaryOperatorKind.LeftShift:
+                        return ExpressionType.LeftShift;
+                    case BinaryOperatorKind.RightShift:
+                        return ExpressionType.RightShift;
+                    case BinaryOperatorKind.Equal:
+                        return ExpressionType.Equal;
+                    case BinaryOperatorKind.NotEqual:
+                        return ExpressionType.NotEqual;
+                    case BinaryOperatorKind.GreaterThan:
+                        return ExpressionType.GreaterThan;
+                    case BinaryOperatorKind.LessThan:
+                        return ExpressionType.LessThan;
+                    case BinaryOperatorKind.GreaterThanOrEqual:
+                        return ExpressionType.GreaterThanOrEqual;
+                    case BinaryOperatorKind.LessThanOrEqual:
+                        return ExpressionType.LessThanOrEqual;
+                    case BinaryOperatorKind.And:
+                        return ExpressionType.And;
+                    case BinaryOperatorKind.Xor:
+                        return ExpressionType.ExclusiveOr;
+                    case BinaryOperatorKind.Or:
+                        return ExpressionType.Or;
                 }
             }
 
@@ -389,12 +432,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case UnaryOperatorKind.PrefixDecrement:
                     return ExpressionType.Decrement;
 
-                case UnaryOperatorKind.UnaryPlus: return ExpressionType.UnaryPlus;
-                case UnaryOperatorKind.UnaryMinus: return ExpressionType.Negate;
-                case UnaryOperatorKind.LogicalNegation: return ExpressionType.Not;
-                case UnaryOperatorKind.BitwiseComplement: return ExpressionType.OnesComplement;
-                case UnaryOperatorKind.True: return ExpressionType.IsTrue;
-                case UnaryOperatorKind.False: return ExpressionType.IsFalse;
+                case UnaryOperatorKind.UnaryPlus:
+                    return ExpressionType.UnaryPlus;
+                case UnaryOperatorKind.UnaryMinus:
+                    return ExpressionType.Negate;
+                case UnaryOperatorKind.LogicalNegation:
+                    return ExpressionType.Not;
+                case UnaryOperatorKind.BitwiseComplement:
+                    return ExpressionType.OnesComplement;
+                case UnaryOperatorKind.True:
+                    return ExpressionType.IsTrue;
+                case UnaryOperatorKind.False:
+                    return ExpressionType.IsFalse;
                 default:
                     throw ExceptionUtilities.UnexpectedValue(kind.Operator());
             }
@@ -404,25 +453,34 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static string Dump(this BinaryOperatorKind kind)
         {
             var b = new StringBuilder();
-            if ((kind & BinaryOperatorKind.Lifted) != 0) b.Append("Lifted");
-            if ((kind & BinaryOperatorKind.Logical) != 0) b.Append("Logical");
-            if ((kind & BinaryOperatorKind.Checked) != 0) b.Append("Checked");
+            if ((kind & BinaryOperatorKind.Lifted) != 0)
+                b.Append("Lifted");
+            if ((kind & BinaryOperatorKind.Logical) != 0)
+                b.Append("Logical");
+            if ((kind & BinaryOperatorKind.Checked) != 0)
+                b.Append("Checked");
             var type = kind & BinaryOperatorKind.TypeMask;
-            if (type != 0) b.Append(type.ToString());
+            if (type != 0)
+                b.Append(type.ToString());
             var op = kind & BinaryOperatorKind.OpMask;
-            if (op != 0) b.Append(op.ToString());
+            if (op != 0)
+                b.Append(op.ToString());
             return b.ToString();
         }
 
         public static string Dump(this UnaryOperatorKind kind)
         {
             var b = new StringBuilder();
-            if ((kind & UnaryOperatorKind.Lifted) != 0) b.Append("Lifted");
-            if ((kind & UnaryOperatorKind.Checked) != 0) b.Append("Checked");
+            if ((kind & UnaryOperatorKind.Lifted) != 0)
+                b.Append("Lifted");
+            if ((kind & UnaryOperatorKind.Checked) != 0)
+                b.Append("Checked");
             var type = kind & UnaryOperatorKind.TypeMask;
-            if (type != 0) b.Append(type.ToString());
+            if (type != 0)
+                b.Append(type.ToString());
             var op = kind & UnaryOperatorKind.OpMask;
-            if (op != 0) b.Append(op.ToString());
+            if (op != 0)
+                b.Append(op.ToString());
             return b.ToString();
         }
 #endif

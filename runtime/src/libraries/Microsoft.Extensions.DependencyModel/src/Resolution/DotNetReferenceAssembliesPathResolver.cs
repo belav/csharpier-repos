@@ -9,7 +9,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
 {
     public class DotNetReferenceAssembliesPathResolver
     {
-        public static readonly string DotNetReferenceAssembliesPathEnv = "DOTNET_REFERENCE_ASSEMBLIES_PATH";
+        public static readonly string DotNetReferenceAssembliesPathEnv =
+            "DOTNET_REFERENCE_ASSEMBLIES_PATH";
 
         internal static string? Resolve(IEnvironment environment, IFileSystem fileSystem)
         {
@@ -35,16 +36,20 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
 #else
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
 #endif
-                )
+            )
             {
                 return null;
             }
 
             if (
 #if !NETFRAMEWORK
-                RuntimeInformation.IsOSPlatform(OSPlatform.OSX) &&
+                RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                &&
 #endif
-                fileSystem.Directory.Exists("/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/xbuild-frameworks"))
+                fileSystem.Directory.Exists(
+                    "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/xbuild-frameworks"
+                )
+            )
             {
                 return "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/xbuild-frameworks";
             }

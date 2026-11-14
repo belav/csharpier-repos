@@ -27,7 +27,9 @@ namespace System.Web.Mvc
 
     internal sealed class TypeCacheSerializer
     {
-        private static readonly Guid _mvcVersionId = typeof(TypeCacheSerializer).Module.ModuleVersionId;
+        private static readonly Guid _mvcVersionId = typeof(TypeCacheSerializer)
+            .Module
+            .ModuleVersionId;
 
         // used for unit testing
 
@@ -38,7 +40,11 @@ namespace System.Web.Mvc
 
         internal DateTime? CurrentDateOverride { get; set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This is an instance method for consistency with the SerializeTypes() method.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This is an instance method for consistency with the SerializeTypes() method."
+        )]
         public List<Type> DeserializeTypes(TextReader input)
         {
             XmlDocument doc = new XmlDocument();
@@ -86,17 +92,20 @@ namespace System.Web.Mvc
 
         public void SerializeTypes(IEnumerable<Type> types, TextWriter output)
         {
-            var groupedByAssembly = from type in types
-                                    group type by type.Module
-                                        into groupedByModule
-                                        group groupedByModule by groupedByModule.Key.Assembly;
+            var groupedByAssembly =
+                from type in types
+                group type by type.Module into groupedByModule
+                group groupedByModule by groupedByModule.Key.Assembly;
 
             XmlDocument doc = new XmlDocument();
             doc.AppendChild(doc.CreateComment(MvcResources.TypeCache_DoNotModify));
 
             XmlElement typeCacheElement = doc.CreateElement("typeCache");
             doc.AppendChild(typeCacheElement);
-            typeCacheElement.SetAttribute("lastModified", CurrentDate.ToString(CultureInfo.InvariantCulture));
+            typeCacheElement.SetAttribute(
+                "lastModified",
+                CurrentDate.ToString(CultureInfo.InvariantCulture)
+            );
             typeCacheElement.SetAttribute("mvcVersionId", _mvcVersionId.ToString());
 
             foreach (var assemblyGroup in groupedByAssembly)
@@ -109,7 +118,10 @@ namespace System.Web.Mvc
                 {
                     XmlElement moduleElement = doc.CreateElement("module");
                     assemblyElement.AppendChild(moduleElement);
-                    moduleElement.SetAttribute("versionId", moduleGroup.Key.ModuleVersionId.ToString());
+                    moduleElement.SetAttribute(
+                        "versionId",
+                        moduleGroup.Key.ModuleVersionId.ToString()
+                    );
 
                     foreach (Type type in moduleGroup)
                     {

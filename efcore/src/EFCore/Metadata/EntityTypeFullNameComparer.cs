@@ -17,11 +17,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
 ///     for more information and examples.
 /// </remarks>
-public sealed class EntityTypeFullNameComparer : IComparer<IReadOnlyEntityType>, IEqualityComparer<IReadOnlyEntityType>
+public sealed class EntityTypeFullNameComparer
+    : IComparer<IReadOnlyEntityType>,
+        IEqualityComparer<IReadOnlyEntityType>
 {
-    private EntityTypeFullNameComparer()
-    {
-    }
+    private EntityTypeFullNameComparer() { }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.
@@ -60,14 +60,12 @@ public sealed class EntityTypeFullNameComparer : IComparer<IReadOnlyEntityType>,
     /// <param name="x">The first object to compare.</param>
     /// <param name="y">The second object to compare.</param>
     /// <returns><see langword="true" /> if the specified objects are equal; otherwise, <see langword="false" />.</returns>
-    public bool Equals(IReadOnlyEntityType? x, IReadOnlyEntityType? y)
-        => Compare(x, y) == 0;
+    public bool Equals(IReadOnlyEntityType? x, IReadOnlyEntityType? y) => Compare(x, y) == 0;
 
     /// <summary>
     ///     Returns a hash code for the specified object.
     /// </summary>
     /// <param name="obj">The for which a hash code is to be returned.</param>
     /// <returns>A hash code for the specified object.</returns>
-    public int GetHashCode(IReadOnlyEntityType obj)
-        => obj.Name.GetHashCode();
+    public int GetHashCode(IReadOnlyEntityType obj) => obj.Name.GetHashCode();
 }

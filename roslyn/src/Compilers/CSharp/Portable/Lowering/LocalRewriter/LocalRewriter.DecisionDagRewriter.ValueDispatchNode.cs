@@ -37,12 +37,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     public readonly ImmutableArray<(ConstantValue value, LabelSymbol label)> Cases;
                     public readonly LabelSymbol Otherwise;
-                    public SwitchDispatch(SyntaxNode syntax, ImmutableArray<(ConstantValue value, LabelSymbol label)> dispatches, LabelSymbol otherwise) : base(syntax)
+
+                    public SwitchDispatch(
+                        SyntaxNode syntax,
+                        ImmutableArray<(ConstantValue value, LabelSymbol label)> dispatches,
+                        LabelSymbol otherwise
+                    )
+                        : base(syntax)
                     {
                         this.Cases = dispatches;
                         this.Otherwise = otherwise;
                     }
-                    public override string ToString() => "[" + string.Join(",", Cases.Select(c => c.value)) + "]";
+
+                    public override string ToString() =>
+                        "[" + string.Join(",", Cases.Select(c => c.value)) + "]";
                 }
 
                 /// <summary>
@@ -51,7 +59,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 internal sealed class LeafDispatchNode : ValueDispatchNode
                 {
                     public readonly LabelSymbol Label;
-                    public LeafDispatchNode(SyntaxNode syntax, LabelSymbol Label) : base(syntax) => this.Label = Label;
+
+                    public LeafDispatchNode(SyntaxNode syntax, LabelSymbol Label)
+                        : base(syntax) => this.Label = Label;
+
                     public override string ToString() => "Leaf";
                 }
 
@@ -79,27 +90,49 @@ namespace Microsoft.CodeAnalysis.CSharp
 #endif
                     public readonly ConstantValue Value;
                     public readonly BinaryOperatorKind Operator;
+
                     /// <summary>The side of the test handling lower values. The true side for &lt; and &lt;=, the false side for > and >=.</summary>
                     private ValueDispatchNode Left { get; set; }
+
                     /// <summary>The side of the test handling higher values. The false side for &lt; and &lt;=, the true side for > and >=.</summary>
                     private ValueDispatchNode Right { get; set; }
-                    private RelationalDispatch(SyntaxNode syntax, ConstantValue value, BinaryOperatorKind op, ValueDispatchNode left, ValueDispatchNode right) : base(syntax)
+
+                    private RelationalDispatch(
+                        SyntaxNode syntax,
+                        ConstantValue value,
+                        BinaryOperatorKind op,
+                        ValueDispatchNode left,
+                        ValueDispatchNode right
+                    )
+                        : base(syntax)
                     {
                         Debug.Assert(op.OperandTypes() != 0);
                         this.Value = value;
                         this.Operator = op;
                         WithLeftAndRight(left, right);
                     }
+
                     public ValueDispatchNode WhenTrue => IsReversed(Operator) ? Right : Left;
                     public ValueDispatchNode WhenFalse => IsReversed(Operator) ? Left : Right;
-                    public override string ToString() => $"RelationalDispatch.{Height}({Left} {Operator.Operator()} {Value} {Right})";
+
+                    public override string ToString() =>
+                        $"RelationalDispatch.{Height}({Left} {Operator.Operator()} {Value} {Right})";
 
                     /// <summary>
                     /// Is the operator among those for which <see cref="WhenTrue"/> is <see cref="Right"/>?
                     /// </summary>
-                    private static bool IsReversed(BinaryOperatorKind op) => op.Operator() switch { BinaryOperatorKind.GreaterThan => true, BinaryOperatorKind.GreaterThanOrEqual => true, _ => false };
+                    private static bool IsReversed(BinaryOperatorKind op) =>
+                        op.Operator() switch
+                        {
+                            BinaryOperatorKind.GreaterThan => true,
+                            BinaryOperatorKind.GreaterThanOrEqual => true,
+                            _ => false,
+                        };
 
-                    private RelationalDispatch WithLeftAndRight(ValueDispatchNode left, ValueDispatchNode right)
+                    private RelationalDispatch WithLeftAndRight(
+                        ValueDispatchNode left,
+                        ValueDispatchNode right
+                    )
                     {
                         // Note that this is a destructive implementation to reduce GC garbage.
                         // That requires clients to stop using the input node once this has been called.
@@ -119,25 +152,44 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return this;
                     }
 
-                    public RelationalDispatch WithTrueAndFalseChildren(ValueDispatchNode whenTrue, ValueDispatchNode whenFalse)
+                    public RelationalDispatch WithTrueAndFalseChildren(
+                        ValueDispatchNode whenTrue,
+                        ValueDispatchNode whenFalse
+                    )
                     {
                         if (whenTrue == this.WhenTrue && whenFalse == this.WhenFalse)
                             return this;
 
                         Debug.Assert(whenTrue.Height == this.WhenTrue.Height);
                         Debug.Assert(whenFalse.Height == this.WhenFalse.Height);
-                        var (left, right) = IsReversed(Operator) ? (whenFalse, whenTrue) : (whenTrue, whenFalse);
+                        var (left, right) = IsReversed(Operator)
+                            ? (whenFalse, whenTrue)
+                            : (whenTrue, whenFalse);
                         return WithLeftAndRight(left, right);
                     }
 
-                    public static ValueDispatchNode CreateBalanced(SyntaxNode syntax, ConstantValue value, BinaryOperatorKind op, ValueDispatchNode whenTrue, ValueDispatchNode whenFalse)
+                    public static ValueDispatchNode CreateBalanced(
+                        SyntaxNode syntax,
+                        ConstantValue value,
+                        BinaryOperatorKind op,
+                        ValueDispatchNode whenTrue,
+                        ValueDispatchNode whenFalse
+                    )
                     {
                         // Keep the lower numbers on the left and the higher numbers on the right.
-                        var (left, right) = IsReversed(op) ? (whenFalse, whenTrue) : (whenTrue, whenFalse);
+                        var (left, right) = IsReversed(op)
+                            ? (whenFalse, whenTrue)
+                            : (whenTrue, whenFalse);
                         return CreateBalancedCore(syntax, value, op, left: left, right: right);
                     }
 
-                    private static ValueDispatchNode CreateBalancedCore(SyntaxNode syntax, ConstantValue value, BinaryOperatorKind op, ValueDispatchNode left, ValueDispatchNode right)
+                    private static ValueDispatchNode CreateBalancedCore(
+                        SyntaxNode syntax,
+                        ConstantValue value,
+                        BinaryOperatorKind op,
+                        ValueDispatchNode left,
+                        ValueDispatchNode right
+                    )
                     {
                         Debug.Assert(op.OperandTypes() != 0);
 
@@ -148,14 +200,38 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (left.Height > (right.Height + 1))
                         {
                             var l = (RelationalDispatch)left;
-                            var newRight = CreateBalancedCore(syntax, value, op, left: l.Right, right: right);
-                            (syntax, value, op, left, right) = (l.Syntax, l.Value, l.Operator, l.Left, newRight);
+                            var newRight = CreateBalancedCore(
+                                syntax,
+                                value,
+                                op,
+                                left: l.Right,
+                                right: right
+                            );
+                            (syntax, value, op, left, right) = (
+                                l.Syntax,
+                                l.Value,
+                                l.Operator,
+                                l.Left,
+                                newRight
+                            );
                         }
                         else if (right.Height > (left.Height + 1))
                         {
                             var r = (RelationalDispatch)right;
-                            var newLeft = CreateBalancedCore(syntax, value, op, left: left, right: r.Left);
-                            (syntax, value, op, left, right) = (r.Syntax, r.Value, r.Operator, newLeft, r.Right);
+                            var newLeft = CreateBalancedCore(
+                                syntax,
+                                value,
+                                op,
+                                left: left,
+                                right: r.Left
+                            );
+                            (syntax, value, op, left, right) = (
+                                r.Syntax,
+                                r.Value,
+                                r.Operator,
+                                newLeft,
+                                r.Right
+                            );
                         }
 
                         // That should have brought the two sides within a height difference of two.
@@ -183,7 +259,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 var B = y.Left;
                                 var C = y.Right;
                                 var D = right;
-                                return y.WithLeftAndRight(x.WithLeftAndRight(A, B), new RelationalDispatch(syntax, value, op, C, D));
+                                return y.WithLeftAndRight(
+                                    x.WithLeftAndRight(A, B),
+                                    new RelationalDispatch(syntax, value, op, C, D)
+                                );
                             }
                             else
                             {
@@ -201,7 +280,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 var x = y.Left;
                                 var C = y.Right;
                                 var D = right;
-                                return y.WithLeftAndRight(x, new RelationalDispatch(syntax, value, op, C, D));
+                                return y.WithLeftAndRight(
+                                    x,
+                                    new RelationalDispatch(syntax, value, op, C, D)
+                                );
                             }
                         }
                         else if (right.Height == left.Height + 2)
@@ -224,7 +306,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 var B = y.Left;
                                 var C = y.Right;
                                 var D = z.Right;
-                                return y.WithLeftAndRight(new RelationalDispatch(syntax, value, op, A, B), z.WithLeftAndRight(C, D));
+                                return y.WithLeftAndRight(
+                                    new RelationalDispatch(syntax, value, op, A, B),
+                                    z.WithLeftAndRight(C, D)
+                                );
                             }
                             else
                             {
@@ -242,7 +327,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 var y = rightDispatch;
                                 var B = y.Left;
                                 var z = y.Right;
-                                return y.WithLeftAndRight(new RelationalDispatch(syntax, value, op, A, B), z);
+                                return y.WithLeftAndRight(
+                                    new RelationalDispatch(syntax, value, op, A, B),
+                                    z
+                                );
                             }
                         }
                         #endregion Rebalance the top of the tree if necessary

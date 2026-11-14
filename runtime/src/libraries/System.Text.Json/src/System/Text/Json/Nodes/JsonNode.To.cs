@@ -22,7 +22,11 @@ namespace System.Text.Json.Nodes
                 defaultBufferSize = options.DefaultBufferSize;
             }
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(writerOptions, defaultBufferSize, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                writerOptions,
+                defaultBufferSize,
+                out PooledByteBufferWriter output
+            );
             try
             {
                 WriteTo(writer, options);
@@ -49,14 +53,20 @@ namespace System.Text.Json.Nodes
                     return jsonString.Value;
                 }
 
-                if (this is JsonValue<JsonElement> jsonElement &&
-                    jsonElement.Value.ValueKind == JsonValueKind.String)
+                if (
+                    this is JsonValue<JsonElement> jsonElement
+                    && jsonElement.Value.ValueKind == JsonValueKind.String
+                )
                 {
                     return jsonElement.Value.GetString()!;
                 }
             }
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(new JsonWriterOptions { Indented = true }, JsonSerializerOptions.BufferSizeDefault, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                new JsonWriterOptions { Indented = true },
+                JsonSerializerOptions.BufferSizeDefault,
+                out PooledByteBufferWriter output
+            );
             try
             {
                 WriteTo(writer);

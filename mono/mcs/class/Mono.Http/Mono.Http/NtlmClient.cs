@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,126 +35,147 @@ using Mono.Security.Protocol.Ntlm;
 
 namespace Mono.Http
 {
-	class NtlmSession
-	{
-		MessageBase message;
+    class NtlmSession
+    {
+        MessageBase message;
 
-		public NtlmSession () 
-		{
-		}
+        public NtlmSession() { }
 
-		public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials) 
-		{
-			HttpWebRequest request = webRequest as HttpWebRequest;
-			if (request == null)
-				return null;
-	
-			NetworkCredential cred = credentials.GetCredential (request.RequestUri, "NTLM");
-			if (cred == null)
-				return null;
+        public Authorization Authenticate(
+            string challenge,
+            WebRequest webRequest,
+            ICredentials credentials
+        )
+        {
+            HttpWebRequest request = webRequest as HttpWebRequest;
+            if (request == null)
+                return null;
 
-			string userName = cred.UserName;
-			string domain = cred.Domain;
-			string password = cred.Password;
-			if (userName == null || userName == "")
-				return null;
-			domain = domain != null && domain.Length > 0 ? domain : request.Headers ["Host"];
+            NetworkCredential cred = credentials.GetCredential(request.RequestUri, "NTLM");
+            if (cred == null)
+                return null;
 
-			bool completed = false;
-			if (message == null) {
-				Type1Message type1 = new Type1Message ();
-				type1.Domain = domain;
-				message = type1;
-			} else if (message.Type == 1) {
-				// Should I check the credentials?
-				if (challenge == null) {
-					message = null;
-					return null;
-				}
+            string userName = cred.UserName;
+            string domain = cred.Domain;
+            string password = cred.Password;
+            if (userName == null || userName == "")
+                return null;
+            domain = domain != null && domain.Length > 0 ? domain : request.Headers["Host"];
 
-				Type2Message type2 = new Type2Message (Convert.FromBase64String (challenge));
-				if (password == null)
-					password = "";
+            bool completed = false;
+            if (message == null)
+            {
+                Type1Message type1 = new Type1Message();
+                type1.Domain = domain;
+                message = type1;
+            }
+            else if (message.Type == 1)
+            {
+                // Should I check the credentials?
+                if (challenge == null)
+                {
+                    message = null;
+                    return null;
+                }
 
-				Type3Message type3 = new Type3Message ();
-				type3.Domain = domain;
-				type3.Username = userName;
-				type3.Challenge = type2.Nonce;
-				type3.Password = password;
-				message = type3;
-				completed = true;
-			} else {
-				// Should I check the credentials?
-				// type must be 3 here
-				if (challenge == null || challenge == String.Empty) {
-					Type1Message type1 = new Type1Message ();
-					type1.Domain = domain;
-					message = type1;
-				} else {
-					completed = true;
-				}
-			}
-			
-			string token = "NTLM " + Convert.ToBase64String (message.GetBytes ());
-			return new Authorization (token, completed);
-		}
-	}
+                Type2Message type2 = new Type2Message(Convert.FromBase64String(challenge));
+                if (password == null)
+                    password = "";
 
-	public class NtlmClient : IAuthenticationModule
-	{
-		static Hashtable cache;
+                Type3Message type3 = new Type3Message();
+                type3.Domain = domain;
+                type3.Username = userName;
+                type3.Challenge = type2.Nonce;
+                type3.Password = password;
+                message = type3;
+                completed = true;
+            }
+            else
+            {
+                // Should I check the credentials?
+                // type must be 3 here
+                if (challenge == null || challenge == String.Empty)
+                {
+                    Type1Message type1 = new Type1Message();
+                    type1.Domain = domain;
+                    message = type1;
+                }
+                else
+                {
+                    completed = true;
+                }
+            }
 
-		static NtlmClient () 
-		{
-			cache = new Hashtable ();
-		}
-	
-		public NtlmClient () {}
-	
-		public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials) 
-		{
-			if (credentials == null || challenge == null)
-				return null;
-	
-			string header = challenge.Trim ();
-			int idx = header.ToLower ().IndexOf ("ntlm");
-			if (idx == -1)
-				return null;
+            string token = "NTLM " + Convert.ToBase64String(message.GetBytes());
+            return new Authorization(token, completed);
+        }
+    }
 
-			idx = header.IndexOfAny (new char [] {' ', '\t'});
-			if (idx != -1) {
-				header = header.Substring (idx).Trim ();
-			} else {
-				header = null;
-			}
+    public class NtlmClient : IAuthenticationModule
+    {
+        static Hashtable cache;
 
-			HttpWebRequest request = webRequest as HttpWebRequest;
-			if (request == null)
-				return null;
+        static NtlmClient()
+        {
+            cache = new Hashtable();
+        }
 
-			lock (cache) {
-				NtlmSession ds = (NtlmSession) cache [request.RequestUri];
-				if (ds == null) {
-					ds = new NtlmSession ();
-					cache.Add (request.RequestUri, ds);
-				}
+        public NtlmClient() { }
 
-				return ds.Authenticate (header, webRequest, credentials);
-			}
-		}
+        public Authorization Authenticate(
+            string challenge,
+            WebRequest webRequest,
+            ICredentials credentials
+        )
+        {
+            if (credentials == null || challenge == null)
+                return null;
 
-		public Authorization PreAuthenticate (WebRequest webRequest, ICredentials credentials) 
-		{
-			return null;
-		}
-	
-		public string AuthenticationType { 
-			get { return "NTLM"; }
-		}
-	
-		public bool CanPreAuthenticate { 
-			get { return false; }
-		}
-	}
+            string header = challenge.Trim();
+            int idx = header.ToLower().IndexOf("ntlm");
+            if (idx == -1)
+                return null;
+
+            idx = header.IndexOfAny(new char[] { ' ', '\t' });
+            if (idx != -1)
+            {
+                header = header.Substring(idx).Trim();
+            }
+            else
+            {
+                header = null;
+            }
+
+            HttpWebRequest request = webRequest as HttpWebRequest;
+            if (request == null)
+                return null;
+
+            lock (cache)
+            {
+                NtlmSession ds = (NtlmSession)cache[request.RequestUri];
+                if (ds == null)
+                {
+                    ds = new NtlmSession();
+                    cache.Add(request.RequestUri, ds);
+                }
+
+                return ds.Authenticate(header, webRequest, credentials);
+            }
+        }
+
+        public Authorization PreAuthenticate(WebRequest webRequest, ICredentials credentials)
+        {
+            return null;
+        }
+
+        public string AuthenticationType
+        {
+            get { return "NTLM"; }
+        }
+
+        public bool CanPreAuthenticate
+        {
+            get { return false; }
+        }
+    }
 }
-

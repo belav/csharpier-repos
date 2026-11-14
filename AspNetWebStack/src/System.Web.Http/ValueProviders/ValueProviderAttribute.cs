@@ -12,17 +12,23 @@ namespace System.Web.Http.ValueProviders
     /// <summary>
     /// This attribute is used to specify a custom <see cref="ValueProviderFactory"/>.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "property already exposed in plural form")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1019:DefineAccessorsForAttributeArguments",
+        Justification = "property already exposed in plural form"
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Parameter,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public sealed class ValueProviderAttribute : ModelBinderAttribute
     {
         private readonly Type[] _valueProviderFactoryTypes;
 
         // Provide CLS compliant overload
         public ValueProviderAttribute(Type valueProviderFactory)
-            : this(new Type[] { valueProviderFactory })
-        {
-        }
+            : this(new Type[] { valueProviderFactory }) { }
 
         // Convenience for multiple types. This is not cls-compliant.
         public ValueProviderAttribute(params Type[] valueProviderFactories)
@@ -35,7 +41,9 @@ namespace System.Web.Http.ValueProviders
             get { return _valueProviderFactoryTypes; }
         }
 
-        public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(HttpConfiguration configuration)
+        public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(
+            HttpConfiguration configuration
+        )
         {
             // By default, just get all registered value provider factories
             return Array.ConvertAll(_valueProviderFactoryTypes, Instantiate);
@@ -50,7 +58,11 @@ namespace System.Web.Http.ValueProviders
 
             if (!typeof(ValueProviderFactory).IsAssignableFrom(factoryType))
             {
-                throw Error.InvalidOperation(SRResources.ValueProviderFactory_Cannot_Create, typeof(ValueProviderFactory), factoryType);
+                throw Error.InvalidOperation(
+                    SRResources.ValueProviderFactory_Cannot_Create,
+                    typeof(ValueProviderFactory),
+                    factoryType
+                );
             }
 
             return (ValueProviderFactory)Activator.CreateInstance(factoryType);

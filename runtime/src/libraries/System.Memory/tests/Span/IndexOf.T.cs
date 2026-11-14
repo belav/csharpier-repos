@@ -79,7 +79,10 @@ namespace System.SpanTests
                 foreach (TInt elem in a)
                 {
                     int numCompares = log.CountCompares(elem.Value, 9999);
-                    Assert.True(numCompares == 1, $"Expected {numCompares} == 1 for element {elem.Value}.");
+                    Assert.True(
+                        numCompares == 1,
+                        $"Expected {numCompares} == 1 for element {elem.Value}."
+                    );
                 }
             }
         }
@@ -90,12 +93,11 @@ namespace System.SpanTests
             const int GuardValue = 77777;
             const int GuardLength = 50;
 
-            Action<int, int> checkForOutOfRangeAccess =
-                delegate (int x, int y)
-                {
-                    if (x == GuardValue || y == GuardValue)
-                        throw new Exception("Detected out of range access in IndexOf()");
-                };
+            Action<int, int> checkForOutOfRangeAccess = delegate(int x, int y)
+            {
+                if (x == GuardValue || y == GuardValue)
+                    throw new Exception("Detected out of range access in IndexOf()");
+            };
 
             for (int length = 0; length < 100; length++)
             {
@@ -196,7 +198,8 @@ namespace System.SpanTests
         [Fact]
         public static void NotBitwiseEquatableUsesCustomIEquatableImplementationForActualComparison()
         {
-            const byte Ten = 10, NotTen = 11;
+            const byte Ten = 10,
+                NotTen = 11;
             for (int length = 1; length < 100; length++)
             {
                 TwoBytes[] array = new TwoBytes[length];
@@ -208,25 +211,43 @@ namespace System.SpanTests
                 Span<TwoBytes> span = new Span<TwoBytes>(array);
                 ReadOnlySpan<TwoBytes> ros = new ReadOnlySpan<TwoBytes>(array);
 
-                ReadOnlySpan<TwoBytes> noMatch2 = new TwoBytes[2] { new TwoBytes(10, NotTen), new TwoBytes(10, NotTen) };
+                ReadOnlySpan<TwoBytes> noMatch2 = new TwoBytes[2]
+                {
+                    new TwoBytes(10, NotTen),
+                    new TwoBytes(10, NotTen),
+                };
                 Assert.Equal(-1, span.IndexOfAny(noMatch2));
                 Assert.Equal(-1, ros.IndexOfAny(noMatch2));
                 Assert.Equal(-1, span.LastIndexOfAny(noMatch2));
                 Assert.Equal(-1, ros.LastIndexOfAny(noMatch2));
 
-                ReadOnlySpan<TwoBytes> noMatch3 = new TwoBytes[3] { new TwoBytes(10, NotTen), new TwoBytes(10, NotTen), new TwoBytes(10, NotTen) };
+                ReadOnlySpan<TwoBytes> noMatch3 = new TwoBytes[3]
+                {
+                    new TwoBytes(10, NotTen),
+                    new TwoBytes(10, NotTen),
+                    new TwoBytes(10, NotTen),
+                };
                 Assert.Equal(-1, span.IndexOfAny(noMatch3));
                 Assert.Equal(-1, ros.IndexOfAny(noMatch3));
                 Assert.Equal(-1, span.LastIndexOfAny(noMatch3));
                 Assert.Equal(-1, ros.LastIndexOfAny(noMatch3));
 
-                ReadOnlySpan<TwoBytes> match2 = new TwoBytes[2] { new TwoBytes(0, Ten), new TwoBytes(0, Ten) };
+                ReadOnlySpan<TwoBytes> match2 = new TwoBytes[2]
+                {
+                    new TwoBytes(0, Ten),
+                    new TwoBytes(0, Ten),
+                };
                 Assert.Equal(0, span.IndexOfAny(match2));
                 Assert.Equal(0, ros.IndexOfAny(match2));
                 Assert.Equal(0, span.LastIndexOfAny(match2));
                 Assert.Equal(0, ros.LastIndexOfAny(match2));
 
-                ReadOnlySpan<TwoBytes> match3 = new TwoBytes[3] { new TwoBytes(0, Ten), new TwoBytes(0, Ten), new TwoBytes(0, Ten) };
+                ReadOnlySpan<TwoBytes> match3 = new TwoBytes[3]
+                {
+                    new TwoBytes(0, Ten),
+                    new TwoBytes(0, Ten),
+                    new TwoBytes(0, Ten),
+                };
                 Assert.Equal(0, span.IndexOfAny(match3));
                 Assert.Equal(0, ros.IndexOfAny(match3));
                 Assert.Equal(0, span.LastIndexOfAny(match3));
@@ -246,7 +267,8 @@ namespace System.SpanTests
 
         private readonly struct TwoBytes : IEquatable<TwoBytes>
         {
-            private readonly byte _first, _second;
+            private readonly byte _first,
+                _second;
 
             public TwoBytes(byte first, byte second)
             {
@@ -255,7 +277,8 @@ namespace System.SpanTests
             }
 
             // it compares different fields on purpose
-            public bool Equals(TwoBytes other) => _first == other._second && _second == other._first;
+            public bool Equals(TwoBytes other) =>
+                _first == other._second && _second == other._first;
         }
     }
 }

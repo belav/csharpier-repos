@@ -53,8 +53,13 @@ namespace System.ComponentModel.DataAnnotations
     ///     </para>
     /// </remarks>
     [AttributeUsage(
-        AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method |
-        AttributeTargets.Parameter, AllowMultiple = true)]
+        AttributeTargets.Class
+            | AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Method
+            | AttributeTargets.Parameter,
+        AllowMultiple = true
+    )]
     public sealed class CustomValidationAttribute : ValidationAttribute
     {
         #region Member Fields
@@ -84,7 +89,11 @@ namespace System.ComponentModel.DataAnnotations
         ///     <see cref="Method" />.
         /// </param>
         /// <param name="method">The name of the method to invoke in <paramref name="validatorType" />.</param>
-        public CustomValidationAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type validatorType, string method)
+        public CustomValidationAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type validatorType,
+            string method
+        )
             : base(() => SR.CustomValidationAttribute_ValidationError)
         {
             ValidatorType = validatorType;
@@ -134,7 +143,10 @@ namespace System.ComponentModel.DataAnnotations
         /// </param>
         /// <returns>Whatever the <see cref="Method" /> in <see cref="ValidatorType" /> returns.</returns>
         /// <exception cref="InvalidOperationException"> is thrown if the current attribute is malformed.</exception>
-        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(
+            object? value,
+            ValidationContext validationContext
+        )
         {
             // If attribute is not valid, throw an exception right away to inform the developer
             ThrowIfAttributeNotWellFormed();
@@ -147,11 +159,15 @@ namespace System.ComponentModel.DataAnnotations
             object? convertedValue;
             if (!TryConvertValue(value, out convertedValue))
             {
-                return new ValidationResult(SR.Format(SR.CustomValidationAttribute_Type_Conversion_Failed,
-                                            (value != null ? value.GetType().ToString() : "null"),
-                                            _firstParameterType,
-                                            ValidatorType,
-                                            Method));
+                return new ValidationResult(
+                    SR.Format(
+                        SR.CustomValidationAttribute_Type_Conversion_Failed,
+                        (value != null ? value.GetType().ToString() : "null"),
+                        _firstParameterType,
+                        ValidatorType,
+                        Method
+                    )
+                );
             }
 
             // Invoke the method.  Catch TargetInvocationException merely to unwrap it.
@@ -208,7 +224,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     Checks whether the current attribute instance itself is valid for use.
         /// </summary>
         /// <returns>The error message why it is not well-formed, null if it is well-formed.</returns>
-        private string? CheckAttributeWellFormed() => ValidateValidatorTypeParameter() ?? ValidateMethodParameter();
+        private string? CheckAttributeWellFormed() =>
+            ValidateValidatorTypeParameter() ?? ValidateMethodParameter();
 
         /// <summary>
         ///     Internal helper to determine whether <see cref="ValidatorType" /> is legal for use.
@@ -223,7 +240,10 @@ namespace System.ComponentModel.DataAnnotations
 
             if (!ValidatorType.IsVisible)
             {
-                return SR.Format(SR.CustomValidationAttribute_Type_Must_Be_Public, ValidatorType.Name);
+                return SR.Format(
+                    SR.CustomValidationAttribute_Type_Must_Be_Public,
+                    ValidatorType.Name
+                );
             }
 
             return null;
@@ -241,17 +261,26 @@ namespace System.ComponentModel.DataAnnotations
             }
 
             // Named method must be public and static
-            var methodInfo = ValidatorType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+            var methodInfo = ValidatorType
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
                 .SingleOrDefault(m => string.Equals(m.Name, Method, StringComparison.Ordinal));
             if (methodInfo == null)
             {
-                return SR.Format(SR.CustomValidationAttribute_Method_Not_Found, Method, ValidatorType.Name);
+                return SR.Format(
+                    SR.CustomValidationAttribute_Method_Not_Found,
+                    Method,
+                    ValidatorType.Name
+                );
             }
 
             // Method must return a ValidationResult or derived class
             if (!typeof(ValidationResult).IsAssignableFrom(methodInfo.ReturnType))
             {
-                return SR.Format(SR.CustomValidationAttribute_Method_Must_Return_ValidationResult, Method, ValidatorType.Name);
+                return SR.Format(
+                    SR.CustomValidationAttribute_Method_Must_Return_ValidationResult,
+                    Method,
+                    ValidatorType.Name
+                );
             }
 
             ParameterInfo[] parameterInfos = methodInfo.GetParameters();
@@ -259,7 +288,11 @@ namespace System.ComponentModel.DataAnnotations
             // Must declare at least one input parameter for the value and it cannot be ByRef
             if (parameterInfos.Length == 0 || parameterInfos[0].ParameterType.IsByRef)
             {
-                return SR.Format(SR.CustomValidationAttribute_Method_Signature, Method, ValidatorType.Name);
+                return SR.Format(
+                    SR.CustomValidationAttribute_Method_Signature,
+                    Method,
+                    ValidatorType.Name
+                );
             }
 
             // We accept 2 forms:
@@ -269,9 +302,16 @@ namespace System.ComponentModel.DataAnnotations
 
             if (!_isSingleArgumentMethod)
             {
-                if ((parameterInfos.Length != 2) || (parameterInfos[1].ParameterType != typeof(ValidationContext)))
+                if (
+                    (parameterInfos.Length != 2)
+                    || (parameterInfos[1].ParameterType != typeof(ValidationContext))
+                )
                 {
-                    return SR.Format(SR.CustomValidationAttribute_Method_Signature, Method, ValidatorType.Name);
+                    return SR.Format(
+                        SR.CustomValidationAttribute_Method_Signature,
+                        Method,
+                        ValidatorType.Name
+                    );
                 }
             }
 
@@ -307,9 +347,13 @@ namespace System.ComponentModel.DataAnnotations
             // Null is permitted for reference types or for Nullable<>'s only
             if (value == null)
             {
-                if (expectedValueType.IsValueType
-                    && (!expectedValueType.IsGenericType
-                        || expectedValueType.GetGenericTypeDefinition() != typeof(Nullable<>)))
+                if (
+                    expectedValueType.IsValueType
+                    && (
+                        !expectedValueType.IsGenericType
+                        || expectedValueType.GetGenericTypeDefinition() != typeof(Nullable<>)
+                    )
+                )
                 {
                     return false;
                 }
@@ -328,7 +372,11 @@ namespace System.ComponentModel.DataAnnotations
             // Any expected exception returns a false
             try
             {
-                convertedValue = Convert.ChangeType(value, expectedValueType, CultureInfo.CurrentCulture);
+                convertedValue = Convert.ChangeType(
+                    value,
+                    expectedValueType,
+                    CultureInfo.CurrentCulture
+                );
                 return true;
             }
             catch (FormatException)

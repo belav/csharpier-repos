@@ -43,8 +43,7 @@ using NUnit.Framework;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 {
-
-    #region Types
+#region Types
     public class XmlJsonWriter : JsonWriter
     {
         private readonly XmlWriter _writer;
@@ -320,7 +319,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             }
         }
     }
-    #endregion
+#endregion
 
     [TestFixture]
     public class CustomJsonWriter : TestFixtureBase
@@ -328,22 +327,23 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             var user = new
             {
                 Name = "James",
                 Age = 30,
                 Enabled = true,
-                Roles = new[]
-                {
-                    "Publisher",
-                    "Administrator"
-                }
+                Roles = new[] { "Publisher", "Administrator" },
             };
 
             StringWriter sw = new StringWriter();
 
-            using (XmlWriter xmlWriter = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true }))
+            using (
+                XmlWriter xmlWriter = XmlWriter.Create(
+                    sw,
+                    new XmlWriterSettings { OmitXmlDeclaration = true }
+                )
+            )
             using (XmlJsonWriter writer = new XmlJsonWriter(xmlWriter))
             {
                 writer.Formatting = Formatting.Indented;
@@ -362,11 +362,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             //    <Item type="String">Administrator</Item>
             //  </Roles>
             //</Root>
-            #endregion
+#endregion
 
             sw = new StringWriter();
 
-            using (XmlWriter xmlWriter = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true }))
+            using (
+                XmlWriter xmlWriter = XmlWriter.Create(
+                    sw,
+                    new XmlWriterSettings { OmitXmlDeclaration = true }
+                )
+            )
             using (XmlJsonWriter writer = new XmlJsonWriter(xmlWriter))
             {
                 writer.Formatting = Formatting.Indented;
@@ -389,7 +394,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                 writer.WriteValue(new DateTime(2001, 2, 22, 20, 59, 59, DateTimeKind.Utc));
 
                 writer.WritePropertyName("DateTimeOffset");
-                writer.WriteValue(new DateTimeOffset(2001, 2, 22, 20, 59, 59, TimeSpan.FromHours(12)));
+                writer.WriteValue(
+                    new DateTimeOffset(2001, 2, 22, 20, 59, 59, TimeSpan.FromHours(12))
+                );
 
                 writer.WritePropertyName("Float");
                 writer.WriteValue(1.1f);

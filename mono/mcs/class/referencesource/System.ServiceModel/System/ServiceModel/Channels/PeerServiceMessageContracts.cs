@@ -4,11 +4,10 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Diagnostics;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-
 
     [MessageContract(IsWrapped = false)]
     class ConnectInfo
@@ -23,6 +22,7 @@ namespace System.ServiceModel.Channels
             public PeerNodeAddress address;
 
             public ConnectInfoDC() { }
+
             public ConnectInfoDC(ulong nodeId, PeerNodeAddress address)
             {
                 this.nodeId = nodeId;
@@ -102,7 +102,9 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.body.referrals != null ? Array.AsReadOnly<Referral>(this.body.referrals) : null;
+                return this.body.referrals != null
+                    ? Array.AsReadOnly<Referral>(this.body.referrals)
+                    : null;
             }
         }
 
@@ -123,16 +125,17 @@ namespace System.ServiceModel.Channels
         InternalFailure = PeerCloseReason.InternalFailure,
     }
 
-
     //
     // Service contract used for neighbor-to-neighbor communication
     // Sending messages is asynchronous and processing incoming messages is synchronous.
     // Used for Service implementation
     //
-    [ServiceContract(Name = PeerStrings.ServiceContractName,
-                 Namespace = PeerStrings.Namespace,
-                 SessionMode = SessionMode.Required,
-                 CallbackContract = typeof(IPeerServiceContract))]
+    [ServiceContract(
+        Name = PeerStrings.ServiceContractName,
+        Namespace = PeerStrings.Namespace,
+        SessionMode = SessionMode.Required,
+        CallbackContract = typeof(IPeerServiceContract)
+    )]
     interface IPeerServiceContract
     {
         [OperationContract(IsOneWay = true, Action = PeerStrings.ConnectAction)]
@@ -156,7 +159,8 @@ namespace System.ServiceModel.Channels
 
         [OperationContract(
             Action = TrustFeb2005Strings.RequestSecurityToken,
-            ReplyAction = TrustFeb2005Strings.RequestSecurityTokenResponse)]
+            ReplyAction = TrustFeb2005Strings.RequestSecurityTokenResponse
+        )]
         Message ProcessRequestSecurityToken(Message message);
 
         [OperationContract(IsOneWay = true, Action = PeerStrings.PingAction)]
@@ -164,42 +168,45 @@ namespace System.ServiceModel.Channels
 
         [OperationContract(IsOneWay = true, Action = Addressing10Strings.FaultAction)]
         void Fault(Message message);
-
     }
 
-    [ServiceContract(Name = PeerStrings.ServiceContractName,
-                 Namespace = PeerStrings.Namespace,
-                 SessionMode = SessionMode.Required,
-                 CallbackContract = typeof(IPeerService))]
-    interface IPeerProxy : IPeerServiceContract, IOutputChannel
-    {
-    }
+    [ServiceContract(
+        Name = PeerStrings.ServiceContractName,
+        Namespace = PeerStrings.Namespace,
+        SessionMode = SessionMode.Required,
+        CallbackContract = typeof(IPeerService)
+    )]
+    interface IPeerProxy : IPeerServiceContract, IOutputChannel { }
 
-    [ServiceContract(Name = PeerStrings.ServiceContractName,
-                     Namespace = PeerStrings.Namespace,
-                     SessionMode = SessionMode.Required,
-                     CallbackContract = typeof(IPeerProxy))]
-    interface IPeerService : IPeerServiceContract
-    {
-    }
+    [ServiceContract(
+        Name = PeerStrings.ServiceContractName,
+        Namespace = PeerStrings.Namespace,
+        SessionMode = SessionMode.Required,
+        CallbackContract = typeof(IPeerProxy)
+    )]
+    interface IPeerService : IPeerServiceContract { }
 
     static class PeerConnectorHelper
     {
         public static bool IsDefined(DisconnectReason value)
         {
-            return ((value == DisconnectReason.LeavingMesh) ||
-                    (value == DisconnectReason.NotUsefulNeighbor) ||
-                    (value == DisconnectReason.DuplicateNeighbor) ||
-                    (value == DisconnectReason.DuplicateNodeId) ||
-                    (value == DisconnectReason.NodeBusy) ||
-                    (value == DisconnectReason.InternalFailure));
+            return (
+                (value == DisconnectReason.LeavingMesh)
+                || (value == DisconnectReason.NotUsefulNeighbor)
+                || (value == DisconnectReason.DuplicateNeighbor)
+                || (value == DisconnectReason.DuplicateNodeId)
+                || (value == DisconnectReason.NodeBusy)
+                || (value == DisconnectReason.InternalFailure)
+            );
         }
 
         public static bool IsDefined(RefuseReason value)
         {
-            return ((value == RefuseReason.DuplicateNodeId) ||
-                    (value == RefuseReason.DuplicateNeighbor) ||
-                    (value == RefuseReason.NodeBusy));
+            return (
+                (value == RefuseReason.DuplicateNodeId)
+                || (value == RefuseReason.DuplicateNeighbor)
+                || (value == RefuseReason.NodeBusy)
+            );
         }
     }
 
@@ -207,10 +214,10 @@ namespace System.ServiceModel.Channels
     class Referral
     {
         [DataMember(Name = "NodeId")]
-        ulong nodeId;               // Referral NodeId
+        ulong nodeId; // Referral NodeId
 
         [DataMember(Name = "Address")]
-        PeerNodeAddress address;    // Referral address
+        PeerNodeAddress address; // Referral address
 
         public Referral(ulong nodeId, PeerNodeAddress address)
         {
@@ -244,6 +251,7 @@ namespace System.ServiceModel.Channels
             public Referral[] referrals;
 
             public RefuseInfoDC() { }
+
             public RefuseInfoDC(RefuseReason reason, Referral[] referrals)
             {
                 this.reason = reason;
@@ -271,7 +279,12 @@ namespace System.ServiceModel.Channels
 
         public IList<Referral> Referrals
         {
-            get { return this.body.referrals != null ? Array.AsReadOnly<Referral>(this.body.referrals) : null; }
+            get
+            {
+                return this.body.referrals != null
+                    ? Array.AsReadOnly<Referral>(this.body.referrals)
+                    : null;
+            }
         }
 
         public bool HasBody()
@@ -351,6 +364,7 @@ namespace System.ServiceModel.Channels
             public Referral[] referrals;
 
             public WelcomeInfoDC() { }
+
             public WelcomeInfoDC(ulong nodeId, Referral[] referrals)
             {
                 this.nodeId = nodeId;
@@ -362,6 +376,7 @@ namespace System.ServiceModel.Channels
         {
             this.body = new WelcomeInfoDC();
         }
+
         public WelcomeInfo(ulong nodeId, Referral[] referrals)
         {
             this.body = new WelcomeInfoDC(nodeId, referrals);
@@ -377,7 +392,12 @@ namespace System.ServiceModel.Channels
 
         public IList<Referral> Referrals
         {
-            get { return this.body.referrals != null ? Array.AsReadOnly<Referral>(this.body.referrals) : null; }
+            get
+            {
+                return this.body.referrals != null
+                    ? Array.AsReadOnly<Referral>(this.body.referrals)
+                    : null;
+            }
         }
 
         public bool HasBody()
@@ -386,4 +406,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

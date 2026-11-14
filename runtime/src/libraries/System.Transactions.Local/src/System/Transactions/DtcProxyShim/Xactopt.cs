@@ -12,8 +12,8 @@ namespace System.Transactions.DtcProxyShim;
 [StructLayout(LayoutKind.Sequential)]
 internal struct Xactopt
 {
-    internal Xactopt(uint ulTimeout, string szDescription)
-        => (UlTimeout, SzDescription) = (ulTimeout, szDescription);
+    internal Xactopt(uint ulTimeout, string szDescription) =>
+        (UlTimeout, SzDescription) = (ulTimeout, szDescription);
 
     public uint UlTimeout;
 
@@ -33,18 +33,19 @@ internal struct Xactopt
 
         public static unsafe XactoptNative ConvertToUnmanaged(Xactopt managed)
         {
-            XactoptNative native = new()
-            {
-                UlTimeout = managed.UlTimeout,
-            };
+            XactoptNative native = new() { UlTimeout = managed.UlTimeout };
 
             // Usage of Xactopt never passes non-ASCII chars, so we can ignore them.
-            Encoding.ASCII.TryGetBytes(managed.SzDescription, new Span<byte>(native.SzDescription, 40), out _);
+            Encoding.ASCII.TryGetBytes(
+                managed.SzDescription,
+                new Span<byte>(native.SzDescription, 40),
+                out _
+            );
 
             return native;
         }
 
-        public static unsafe Xactopt ConvertToManaged(XactoptNative unmanaged)
-        => new(unmanaged.UlTimeout, Encoding.ASCII.GetString(unmanaged.SzDescription, 40));
+        public static unsafe Xactopt ConvertToManaged(XactoptNative unmanaged) =>
+            new(unmanaged.UlTimeout, Encoding.ASCII.GetString(unmanaged.SzDescription, 40));
     }
 }

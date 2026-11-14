@@ -15,9 +15,11 @@ namespace System.ComponentModel.Composition.Registration
             private readonly Action<ImportBuilder> _configureImport;
             private readonly Action<ExportBuilder> _configureExport;
 
-            public PropertyExpressionAdapter(Expression<Func<T, object>> propertyFilter,
+            public PropertyExpressionAdapter(
+                Expression<Func<T, object>> propertyFilter,
                 Action<ImportBuilder> configureImport = null,
-                Action<ExportBuilder> configureExport = null)
+                Action<ExportBuilder> configureExport = null
+            )
             {
                 _propertyInfo = SelectProperties(propertyFilter);
                 _configureImport = configureImport;
@@ -57,7 +59,10 @@ namespace System.ComponentModel.Composition.Registration
                 }
 
                 // An error occurred the expression must be a Property Member Expression
-                throw new ArgumentException(SR.Format(SR.Argument_ExpressionMustBePropertyMember, nameof(propertyFilter)), nameof(propertyFilter));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_ExpressionMustBePropertyMember, nameof(propertyFilter)),
+                    nameof(propertyFilter)
+                );
             }
 
             private static Expression<Func<T, object>> Reduce(Expression<Func<T, object>> expr)
@@ -75,7 +80,9 @@ namespace System.ComponentModel.Composition.Registration
             private ConstructorInfo _constructorInfo;
             private Dictionary<ParameterInfo, Action<ImportBuilder>> _importBuilders;
 
-            public ConstructorExpressionAdapter(Expression<Func<ParameterImportBuilder, T>> selectConstructor)
+            public ConstructorExpressionAdapter(
+                Expression<Func<ParameterImportBuilder, T>> selectConstructor
+            )
             {
                 ParseSelectConstructor(selectConstructor);
             }
@@ -85,16 +92,26 @@ namespace System.ComponentModel.Composition.Registration
                 return _constructorInfo;
             }
 
-            public void ConfigureConstructorImports(ParameterInfo parameterInfo, ImportBuilder importBuilder)
+            public void ConfigureConstructorImports(
+                ParameterInfo parameterInfo,
+                ImportBuilder importBuilder
+            )
             {
-                if (_importBuilders != null &&
-                    _importBuilders.TryGetValue(parameterInfo, out Action<ImportBuilder> parameterImportBuilder))
+                if (
+                    _importBuilders != null
+                    && _importBuilders.TryGetValue(
+                        parameterInfo,
+                        out Action<ImportBuilder> parameterImportBuilder
+                    )
+                )
                 {
                     parameterImportBuilder(importBuilder);
                 }
             }
 
-            private void ParseSelectConstructor(Expression<Func<ParameterImportBuilder, T>> constructorFilter)
+            private void ParseSelectConstructor(
+                Expression<Func<ParameterImportBuilder, T>> constructorFilter
+            )
             {
                 if (constructorFilter is null)
                 {
@@ -104,7 +121,13 @@ namespace System.ComponentModel.Composition.Registration
                 Expression expr = Reduce(constructorFilter).Body;
                 if (expr.NodeType != ExpressionType.New)
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_ExpressionMustBePropertyMember, nameof(constructorFilter)), nameof(constructorFilter));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Argument_ExpressionMustBePropertyMember,
+                            nameof(constructorFilter)
+                        ),
+                        nameof(constructorFilter)
+                    );
                 }
 
                 var newExpression = (NewExpression)expr;
@@ -126,9 +149,13 @@ namespace System.ComponentModel.Composition.Registration
                                 var lambdaExpression = (LambdaExpression)parameter;
                                 Delegate importDelegate = lambdaExpression.Compile();
 
-                                _importBuilders ??= new Dictionary<ParameterInfo, Action<ImportBuilder>>();
+                                _importBuilders ??=
+                                    new Dictionary<ParameterInfo, Action<ImportBuilder>>();
 
-                                _importBuilders.Add(parameterInfos[index], (Action<ImportBuilder>)importDelegate);
+                                _importBuilders.Add(
+                                    parameterInfos[index],
+                                    (Action<ImportBuilder>)importDelegate
+                                );
                                 ++index;
                             }
                         }
@@ -136,7 +163,9 @@ namespace System.ComponentModel.Composition.Registration
                 }
             }
 
-            private static Expression<Func<ParameterImportBuilder, T>> Reduce(Expression<Func<ParameterImportBuilder, T>> expr)
+            private static Expression<Func<ParameterImportBuilder, T>> Reduce(
+                Expression<Func<ParameterImportBuilder, T>> expr
+            )
             {
                 while (expr.CanReduce)
                 {
@@ -147,11 +176,12 @@ namespace System.ComponentModel.Composition.Registration
             }
         }
 
-        internal PartBuilder(Predicate<Type> selectType) : base(selectType)
-        {
-        }
+        internal PartBuilder(Predicate<Type> selectType)
+            : base(selectType) { }
 
-        public PartBuilder<T> SelectConstructor(Expression<Func<ParameterImportBuilder, T>> constructorFilter)
+        public PartBuilder<T> SelectConstructor(
+            Expression<Func<ParameterImportBuilder, T>> constructorFilter
+        )
         {
             if (constructorFilter is null)
             {
@@ -164,7 +194,6 @@ namespace System.ComponentModel.Composition.Registration
             return this;
         }
 
-
         public PartBuilder<T> ExportProperty(Expression<Func<T, object>> propertyFilter)
         {
             return ExportProperty(propertyFilter, null);
@@ -172,7 +201,8 @@ namespace System.ComponentModel.Composition.Registration
 
         public PartBuilder<T> ExportProperty(
             Expression<Func<T, object>> propertyFilter,
-            Action<ExportBuilder> exportConfiguration)
+            Action<ExportBuilder> exportConfiguration
+        )
         {
             if (propertyFilter is null)
             {
@@ -190,8 +220,10 @@ namespace System.ComponentModel.Composition.Registration
             return ExportProperty<TContract>(propertyFilter, null);
         }
 
-        public PartBuilder<T> ExportProperty<TContract>(Expression<Func<T, object>> propertyFilter,
-            Action<ExportBuilder> exportConfiguration)
+        public PartBuilder<T> ExportProperty<TContract>(
+            Expression<Func<T, object>> propertyFilter,
+            Action<ExportBuilder> exportConfiguration
+        )
         {
             if (propertyFilter is null)
             {
@@ -209,8 +241,10 @@ namespace System.ComponentModel.Composition.Registration
             return ImportProperty(propertyFilter, null);
         }
 
-        public PartBuilder<T> ImportProperty(Expression<Func<T, object>> propertyFilter,
-            Action<ImportBuilder> importConfiguration)
+        public PartBuilder<T> ImportProperty(
+            Expression<Func<T, object>> propertyFilter,
+            Action<ImportBuilder> importConfiguration
+        )
         {
             if (propertyFilter is null)
             {
@@ -228,8 +262,10 @@ namespace System.ComponentModel.Composition.Registration
             return ImportProperty<TContract>(propertyFilter, null);
         }
 
-        public PartBuilder<T> ImportProperty<TContract>(Expression<Func<T, object>> propertyFilter,
-            Action<ImportBuilder> importConfiguration)
+        public PartBuilder<T> ImportProperty<TContract>(
+            Expression<Func<T, object>> propertyFilter,
+            Action<ImportBuilder> importConfiguration
+        )
         {
             if (propertyFilter is null)
             {

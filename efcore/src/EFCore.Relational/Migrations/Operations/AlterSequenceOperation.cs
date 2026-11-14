@@ -28,6 +28,5 @@ public class AlterSequenceOperation : SequenceOperation, IAlterMigrationOperatio
     public virtual SequenceOperation OldSequence { get; set; } = new CreateSequenceOperation();
 
     /// <inheritdoc />
-    IMutableAnnotatable IAlterMigrationOperation.OldAnnotations
-        => OldSequence;
+    IMutableAnnotatable IAlterMigrationOperation.OldAnnotations => OldSequence;
 }

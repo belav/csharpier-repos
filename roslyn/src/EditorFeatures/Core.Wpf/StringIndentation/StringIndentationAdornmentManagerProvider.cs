@@ -5,8 +5,8 @@
 using System;
 using System.ComponentModel.Composition;
 using Microsoft.CodeAnalysis.Editor.Implementation.Adornments;
-using Microsoft.CodeAnalysis.Editor.StringIndentation;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+using Microsoft.CodeAnalysis.Editor.StringIndentation;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
@@ -22,15 +22,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
     [Export(typeof(IWpfTextViewCreationListener))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
-    internal class StringIndentationAdornmentManagerProvider :
-        AbstractAdornmentManagerProvider<StringIndentationTag>
+    internal class StringIndentationAdornmentManagerProvider
+        : AbstractAdornmentManagerProvider<StringIndentationTag>
     {
         private const string LayerName = "RoslynStringIndentation";
 
         [Export]
         [Name(LayerName)]
         [ContentType(ContentTypeNames.RoslynContentType)]
-        [Order(After = PredefinedAdornmentLayers.Selection, Before = PredefinedAdornmentLayers.Squiggle)]
+        [Order(
+            After = PredefinedAdornmentLayers.Selection,
+            Before = PredefinedAdornmentLayers.Squiggle
+        )]
 #pragma warning disable 0169
 #pragma warning disable IDE0051 // Remove unused private members
         private readonly AdornmentLayerDefinition? _stringIndentationLayer;
@@ -43,10 +46,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
             IThreadingContext threadingContext,
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
             : base(threadingContext, tagAggregatorFactoryService, globalOptions, listenerProvider)
-        {
-        }
+        { }
 
         protected override string FeatureAttributeName => FeatureAttribute.StringIndentation;
         protected override string AdornmentLayerName => LayerName;
@@ -54,7 +57,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
         protected override void CreateAdornmentManager(IWpfTextView textView)
         {
             // the manager keeps itself alive by listening to text view events.
-            _ = new StringIndentationAdornmentManager(ThreadingContext, textView, TagAggregatorFactoryService, AsyncListener, AdornmentLayerName);
+            _ = new StringIndentationAdornmentManager(
+                ThreadingContext,
+                textView,
+                TagAggregatorFactoryService,
+                AsyncListener,
+                AdornmentLayerName
+            );
         }
     }
 }

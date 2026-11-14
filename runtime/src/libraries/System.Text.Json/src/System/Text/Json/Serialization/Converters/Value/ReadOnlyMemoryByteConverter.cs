@@ -7,12 +7,20 @@ namespace System.Text.Json.Serialization.Converters
     {
         public override bool HandleNull => true;
 
-        public override ReadOnlyMemory<byte> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ReadOnlyMemory<byte> Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.TokenType is JsonTokenType.Null ? default : reader.GetBytesFromBase64();
         }
 
-        public override void Write(Utf8JsonWriter writer, ReadOnlyMemory<byte> value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            ReadOnlyMemory<byte> value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteBase64StringValue(value.Span);
         }

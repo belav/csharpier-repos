@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// Each application of an attribute is effectively a constructor call.  Since the attribute constructor
     /// might have a CallerMemberName parameter, we need to keep track of which method/property/event
-    /// the attribute is on/in (e.g. on a parameter) so that we can use the name of that member as the 
+    /// the attribute is on/in (e.g. on a parameter) so that we can use the name of that member as the
     /// CallerMemberName argument.
     /// This binder is also needed when a <see cref="NameofBinder"/> introduces type parameters to a scope within an attribute.
     /// </summary>
@@ -40,10 +40,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         internal Symbol AttributedMember
         {
-            get
-            {
-                return _attributedMember;
-            }
+            get { return _attributedMember; }
         }
 
         /// <summary>
@@ -67,10 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal Symbol AttributeTarget
         {
-            get
-            {
-                return _attributeTarget;
-            }
+            get { return _attributeTarget; }
         }
     }
 }

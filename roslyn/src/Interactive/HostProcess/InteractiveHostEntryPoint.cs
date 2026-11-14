@@ -20,9 +20,17 @@ namespace Microsoft.CodeAnalysis.Interactive
             FatalError.SetHandlers(FailFast.Handler, nonFatalHandler: null);
 
             // Disables Windows Error Reporting for the process, so that the process fails fast.
-            SetErrorMode(GetErrorMode() | ErrorMode.SEM_FAILCRITICALERRORS | ErrorMode.SEM_NOOPENFILEERRORBOX | ErrorMode.SEM_NOGPFAULTERRORBOX);
+            SetErrorMode(
+                GetErrorMode()
+                    | ErrorMode.SEM_FAILCRITICALERRORS
+                    | ErrorMode.SEM_NOOPENFILEERRORBOX
+                    | ErrorMode.SEM_NOGPFAULTERRORBOX
+            );
 
-            Contract.ThrowIfFalse(args.Length == 4, "Expecting arguments: <pipe name> <client process id> <culture name> <ui culture name>");
+            Contract.ThrowIfFalse(
+                args.Length == 4,
+                "Expecting arguments: <pipe name> <client process id> <culture name> <ui culture name>"
+            );
 
             var pipeName = args[0];
             var clientProcessId = int.Parse(args[1], CultureInfo.InvariantCulture);
@@ -51,11 +59,15 @@ namespace Microsoft.CodeAnalysis.Interactive
                 resetEvent.Wait();
             }
 
-            var invokeOnMainThread = new Func<Func<object>, object>(operation => control!.Invoke(operation));
+            var invokeOnMainThread = new Func<Func<object>, object>(operation =>
+                control!.Invoke(operation)
+            );
 
             try
             {
-                await InteractiveHost.Service.RunServerAsync(pipeName, clientProcessId, invokeOnMainThread).ConfigureAwait(false);
+                await InteractiveHost
+                    .Service.RunServerAsync(pipeName, clientProcessId, invokeOnMainThread)
+                    .ConfigureAwait(false);
                 return 0;
             }
             catch (Exception e)
@@ -81,14 +93,14 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             /// <summary>
             /// The system does not display the critical-error-handler message box. Instead, the system sends the error to the calling process.
-            /// Best practice is that all applications call the process-wide SetErrorMode function with a parameter of SEM_FAILCRITICALERRORS at startup. 
+            /// Best practice is that all applications call the process-wide SetErrorMode function with a parameter of SEM_FAILCRITICALERRORS at startup.
             /// This is to prevent error mode dialogs from blocking the application.
             /// </summary>
             SEM_NOGPFAULTERRORBOX = 0x0002,
 
             /// <summary>
-            /// The system automatically fixes memory alignment faults and makes them invisible to the application. 
-            /// It does this for the calling process and any descendant processes. This feature is only supported by 
+            /// The system automatically fixes memory alignment faults and makes them invisible to the application.
+            /// It does this for the calling process and any descendant processes. This feature is only supported by
             /// certain processor architectures. For more information, see the Remarks section.
             /// After this value is set for a process, subsequent attempts to clear the value are ignored.
             /// </summary>

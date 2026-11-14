@@ -54,7 +54,8 @@ public sealed record QueryContextDependencies
         IConcurrencyDetector concurrencyDetector,
         IExceptionDetector exceptionDetector,
         IDiagnosticsLogger<DbLoggerCategory.Database.Command> commandLogger,
-        IDiagnosticsLogger<DbLoggerCategory.Query> queryLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> queryLogger
+    )
     {
         CurrentContext = currentContext;
         ExecutionStrategy = executionStrategy;
@@ -76,8 +77,7 @@ public sealed record QueryContextDependencies
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public IStateManager StateManager
-        => CurrentContext.GetDependencies().StateManager;
+    public IStateManager StateManager => CurrentContext.GetDependencies().StateManager;
 
     /// <summary>
     ///     The execution strategy.

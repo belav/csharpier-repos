@@ -3,8 +3,10 @@
 // </copyright>
 using System;
 
-namespace System.Runtime.Caching {
-    public class CacheEntryUpdateArguments {
+namespace System.Runtime.Caching
+{
+    public class CacheEntryUpdateArguments
+    {
         private String _key;
         private CacheEntryRemovedReason _reason;
         private String _regionName;
@@ -12,37 +14,51 @@ namespace System.Runtime.Caching {
         private CacheItem _updatedCacheItem;
         private CacheItemPolicy _updatedCacheItemPolicy;
 
-        public String Key { 
-            get { return _key; } 
+        public String Key
+        {
+            get { return _key; }
         }
 
-        public CacheEntryRemovedReason RemovedReason { 
-            get { return _reason; } 
+        public CacheEntryRemovedReason RemovedReason
+        {
+            get { return _reason; }
         }
 
-        public String RegionName { 
+        public String RegionName
+        {
             get { return _regionName; }
         }
 
-        public ObjectCache Source { 
+        public ObjectCache Source
+        {
             get { return _source; }
         }
 
-        public CacheItem UpdatedCacheItem { 
+        public CacheItem UpdatedCacheItem
+        {
             get { return _updatedCacheItem; }
             set { _updatedCacheItem = value; }
         }
 
-        public CacheItemPolicy UpdatedCacheItemPolicy {
+        public CacheItemPolicy UpdatedCacheItemPolicy
+        {
             get { return _updatedCacheItemPolicy; }
             set { _updatedCacheItemPolicy = value; }
         }
 
-        public CacheEntryUpdateArguments(ObjectCache source, CacheEntryRemovedReason reason, String key, String regionName) {
-            if (source == null) {
+        public CacheEntryUpdateArguments(
+            ObjectCache source,
+            CacheEntryRemovedReason reason,
+            String key,
+            String regionName
+        )
+        {
+            if (source == null)
+            {
                 throw new ArgumentNullException("source");
             }
-            if (key == null) {
+            if (key == null)
+            {
                 throw new ArgumentNullException("key");
             }
             _source = source;
@@ -52,5 +68,3 @@ namespace System.Runtime.Caching {
         }
     }
 }
-
-

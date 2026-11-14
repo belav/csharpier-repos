@@ -558,8 +558,7 @@ internal partial class RedisOutputCacheStore
 
     private void TryRegisterProfiler(IConnectionMultiplexer connection)
     {
-        _ =
-            connection
+        _ = connection
             ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
 
         if (_options.ProfilingSession is not null)

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace JitTest
 {
     using System;
@@ -22,7 +23,7 @@ namespace JitTest
         private ushort _wProcessorRevision;
 
         [DllImport("kernel32", CharSet = CharSet.Ansi)]
-        public extern static void GetSystemInfo(ref SYSTEM_INFO si);
+        public static extern void GetSystemInfo(ref SYSTEM_INFO si);
 
         [Fact]
         public static void TestEntryPoint()
@@ -35,7 +36,11 @@ namespace JitTest
             finally
             {
                 Console.WriteLine(si._dwNumberOfProcessors.ToString() + " processor(s) found");
-                Console.WriteLine("Allocation granularity is " + si._dwAllocationGranularity.ToString() + " for this system.");
+                Console.WriteLine(
+                    "Allocation granularity is "
+                        + si._dwAllocationGranularity.ToString()
+                        + " for this system."
+                );
             }
         }
     }

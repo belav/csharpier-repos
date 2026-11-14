@@ -12,7 +12,17 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 {
     internal partial class AbstractMetadataAsSourceService
     {
-        private class WrappedMethodSymbol(IMethodSymbol methodSymbol, bool canImplementImplicitly, IDocumentationCommentFormattingService docCommentFormattingService) : AbstractWrappedSymbol(methodSymbol, canImplementImplicitly, docCommentFormattingService), IMethodSymbol
+        private class WrappedMethodSymbol(
+            IMethodSymbol methodSymbol,
+            bool canImplementImplicitly,
+            IDocumentationCommentFormattingService docCommentFormattingService
+        )
+            : AbstractWrappedSymbol(
+                methodSymbol,
+                canImplementImplicitly,
+                docCommentFormattingService
+            ),
+                IMethodSymbol
         {
             private readonly IMethodSymbol _symbol = methodSymbol;
 
@@ -20,14 +30,16 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public ISymbol AssociatedSymbol => _symbol.AssociatedSymbol;
 
-            public INamedTypeSymbol AssociatedAnonymousDelegate => _symbol.AssociatedAnonymousDelegate;
+            public INamedTypeSymbol AssociatedAnonymousDelegate =>
+                _symbol.AssociatedAnonymousDelegate;
 
             public IMethodSymbol ConstructedFrom => _symbol.ConstructedFrom;
 
             public bool IsReadOnly => _symbol.IsReadOnly;
             public bool IsInitOnly => _symbol.IsInitOnly;
 
-            public System.Reflection.MethodImplAttributes MethodImplementationFlags => _symbol.MethodImplementationFlags;
+            public System.Reflection.MethodImplAttributes MethodImplementationFlags =>
+                _symbol.MethodImplementationFlags;
 
             public ImmutableArray<IMethodSymbol> ExplicitInterfaceImplementations
             {
@@ -51,10 +63,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public new IMethodSymbol OriginalDefinition
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             public IMethodSymbol OverriddenMethod => _symbol.OverriddenMethod;
@@ -69,13 +78,17 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public ITypeSymbol ReceiverType => _symbol.ReceiverType;
 
-            public NullableAnnotation ReceiverNullableAnnotation => _symbol.ReceiverNullableAnnotation;
+            public NullableAnnotation ReceiverNullableAnnotation =>
+                _symbol.ReceiverNullableAnnotation;
 
             public IMethodSymbol ReducedFrom
-                    // This implementation feels incorrect!
-                    => _symbol.ReducedFrom;
+                // This implementation feels incorrect!
+                =>
+                _symbol.ReducedFrom;
 
-            public ITypeSymbol GetTypeInferredDuringReduction(ITypeParameterSymbol reducedFromTypeParameter)
+            public ITypeSymbol GetTypeInferredDuringReduction(
+                ITypeParameterSymbol reducedFromTypeParameter
+            )
             {
                 // This implementation feels incorrect, but it follows the pattern that other extension method related APIs are using!
                 return _symbol.GetTypeInferredDuringReduction(reducedFromTypeParameter);
@@ -93,27 +106,30 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public NullableAnnotation ReturnNullableAnnotation => _symbol.ReturnNullableAnnotation;
 
-            public ImmutableArray<AttributeData> GetReturnTypeAttributes()
-                => _symbol.GetReturnTypeAttributes();
+            public ImmutableArray<AttributeData> GetReturnTypeAttributes() =>
+                _symbol.GetReturnTypeAttributes();
 
             public ImmutableArray<CustomModifier> RefCustomModifiers => _symbol.RefCustomModifiers;
 
-            public ImmutableArray<CustomModifier> ReturnTypeCustomModifiers => _symbol.ReturnTypeCustomModifiers;
+            public ImmutableArray<CustomModifier> ReturnTypeCustomModifiers =>
+                _symbol.ReturnTypeCustomModifiers;
 
             public ImmutableArray<ITypeSymbol> TypeArguments => _symbol.TypeArguments;
 
-            public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => _symbol.TypeArgumentNullableAnnotations;
+            public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations =>
+                _symbol.TypeArgumentNullableAnnotations;
 
             public ImmutableArray<ITypeParameterSymbol> TypeParameters => _symbol.TypeParameters;
 
-            public IMethodSymbol Construct(params ITypeSymbol[] typeArguments)
-                => _symbol.Construct(typeArguments);
+            public IMethodSymbol Construct(params ITypeSymbol[] typeArguments) =>
+                _symbol.Construct(typeArguments);
 
-            public IMethodSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations)
-                => _symbol.Construct(typeArguments, typeArgumentNullableAnnotations);
+            public IMethodSymbol Construct(
+                ImmutableArray<ITypeSymbol> typeArguments,
+                ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations
+            ) => _symbol.Construct(typeArguments, typeArgumentNullableAnnotations);
 
-            public DllImportData GetDllImportData()
-                => _symbol.GetDllImportData();
+            public DllImportData GetDllImportData() => _symbol.GetDllImportData();
 
             public IMethodSymbol ReduceExtensionMethod(ITypeSymbol receiverType)
             {
@@ -129,7 +145,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public SignatureCallingConvention CallingConvention => _symbol.CallingConvention;
 
-            public ImmutableArray<INamedTypeSymbol> UnmanagedCallingConventionTypes => _symbol.UnmanagedCallingConventionTypes;
+            public ImmutableArray<INamedTypeSymbol> UnmanagedCallingConventionTypes =>
+                _symbol.UnmanagedCallingConventionTypes;
         }
     }
 }

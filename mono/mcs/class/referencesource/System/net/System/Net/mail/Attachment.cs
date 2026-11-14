@@ -1,7 +1,7 @@
 using System.IO;
 using System.Net.Mime;
-using System.Text;
 using System.Runtime.Versioning;
+using System.Text;
 
 namespace System.Net.Mail
 {
@@ -10,40 +10,46 @@ namespace System.Net.Mail
         internal bool disposed = false;
         MimePart part = new MimePart();
 
-        internal AttachmentBase(){
+        internal AttachmentBase() { }
+
+        [ResourceExposure(ResourceScope.Machine)]
+        [ResourceConsumption(ResourceScope.Machine)]
+        protected AttachmentBase(string fileName)
+        {
+            SetContentFromFile(fileName, String.Empty);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        protected AttachmentBase(string fileName) {
-            SetContentFromFile(fileName, String.Empty);
-        }
-    
-        [ResourceExposure(ResourceScope.Machine)]
-        [ResourceConsumption(ResourceScope.Machine)]
-        protected AttachmentBase(string fileName, string mediaType) {
+        protected AttachmentBase(string fileName, string mediaType)
+        {
             SetContentFromFile(fileName, mediaType);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        protected AttachmentBase(string fileName, ContentType contentType) {
+        protected AttachmentBase(string fileName, ContentType contentType)
+        {
             SetContentFromFile(fileName, contentType);
         }
 
-        protected AttachmentBase(Stream contentStream) {
+        protected AttachmentBase(Stream contentStream)
+        {
             part.SetContent(contentStream);
         }
 
-        protected AttachmentBase(Stream contentStream, string mediaType) {
+        protected AttachmentBase(Stream contentStream, string mediaType)
+        {
             part.SetContent(contentStream, null, mediaType);
         }
-        
-        internal AttachmentBase(Stream contentStream, string name, string mediaType) {
+
+        internal AttachmentBase(Stream contentStream, string name, string mediaType)
+        {
             part.SetContent(contentStream, name, mediaType);
         }
 
-        protected AttachmentBase(Stream contentStream, ContentType contentType) {
+        protected AttachmentBase(Stream contentStream, ContentType contentType)
+        {
             part.SetContent(contentStream, contentType);
         }
 
@@ -61,14 +67,21 @@ namespace System.Net.Mail
             }
         }
 
-        internal static string ShortNameFromFile(string fileName) {
+        internal static string ShortNameFromFile(string fileName)
+        {
             string name;
-            int start = fileName.LastIndexOfAny(new char[] { '\\', ':' }, fileName.Length - 1, fileName.Length);
+            int start = fileName.LastIndexOfAny(
+                new char[] { '\\', ':' },
+                fileName.Length - 1,
+                fileName.Length
+            );
 
-            if (start > 0) {
+            if (start > 0)
+            {
                 name = fileName.Substring(start + 1, fileName.Length - start - 1);
             }
-            else {
+            else
+            {
                 name = fileName;
             }
             return name;
@@ -76,131 +89,176 @@ namespace System.Net.Mail
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal void SetContentFromFile(string fileName, ContentType contentType) {
-            if (fileName == null) {
+        internal void SetContentFromFile(string fileName, ContentType contentType)
+        {
+            if (fileName == null)
+            {
                 throw new ArgumentNullException("fileName");
             }
-        
+
             if (fileName == String.Empty)
             {
-                throw new ArgumentException(SR.GetString(SR.net_emptystringcall,"fileName"), "fileName");
+                throw new ArgumentException(
+                    SR.GetString(SR.net_emptystringcall, "fileName"),
+                    "fileName"
+                );
             }
-            
-            Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+            Stream stream = new FileStream(
+                fileName,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
             part.SetContent(stream, contentType);
         }
 
-
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal void SetContentFromFile(string fileName, string mediaType) {
-            if (fileName == null) {
+        internal void SetContentFromFile(string fileName, string mediaType)
+        {
+            if (fileName == null)
+            {
                 throw new ArgumentNullException("fileName");
             }
-        
+
             if (fileName == String.Empty)
             {
-                throw new ArgumentException(SR.GetString(SR.net_emptystringcall,"fileName"), "fileName");
+                throw new ArgumentException(
+                    SR.GetString(SR.net_emptystringcall, "fileName"),
+                    "fileName"
+                );
             }
-            
-            Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-            part.SetContent(stream,null,mediaType);
+
+            Stream stream = new FileStream(
+                fileName,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
+            part.SetContent(stream, null, mediaType);
         }
 
-        internal void SetContentFromString(string contentString, ContentType contentType) {
-            if (contentString == null) {
+        internal void SetContentFromString(string contentString, ContentType contentType)
+        {
+            if (contentString == null)
+            {
                 throw new ArgumentNullException("content");
             }
 
-            if (part.Stream != null) {
+            if (part.Stream != null)
+            {
                 part.Stream.Close();
             }
 
             Encoding encoding;
 
-            if (contentType != null && contentType.CharSet != null) {
+            if (contentType != null && contentType.CharSet != null)
+            {
                 encoding = Text.Encoding.GetEncoding(contentType.CharSet);
             }
-            else{
-                if (MimeBasePart.IsAscii(contentString,false)) {
+            else
+            {
+                if (MimeBasePart.IsAscii(contentString, false))
+                {
                     encoding = Text.Encoding.ASCII;
                 }
-                else {
+                else
+                {
                     encoding = Text.Encoding.GetEncoding(MimeBasePart.defaultCharSet);
                 }
             }
             byte[] buffer = encoding.GetBytes(contentString);
-            part.SetContent(new MemoryStream(buffer),contentType);
+            part.SetContent(new MemoryStream(buffer), contentType);
 
-            
-            if (MimeBasePart.ShouldUseBase64Encoding(encoding)){
+            if (MimeBasePart.ShouldUseBase64Encoding(encoding))
+            {
                 part.TransferEncoding = TransferEncoding.Base64;
             }
-            else{
+            else
+            {
                 part.TransferEncoding = TransferEncoding.QuotedPrintable;
             }
         }
 
-        internal void SetContentFromString(string contentString, Encoding encoding, string mediaType) {
-            if (contentString == null) {
+        internal void SetContentFromString(
+            string contentString,
+            Encoding encoding,
+            string mediaType
+        )
+        {
+            if (contentString == null)
+            {
                 throw new ArgumentNullException("content");
             }
-            
-            if (part.Stream != null) {
+
+            if (part.Stream != null)
+            {
                 part.Stream.Close();
             }
 
-            if (mediaType == null || mediaType == string.Empty) {
+            if (mediaType == null || mediaType == string.Empty)
+            {
                 mediaType = MediaTypeNames.Text.Plain;
             }
 
             //validate the mediaType
             int offset = 0;
-            try{
+            try
+            {
                 string value = MailBnfHelper.ReadToken(mediaType, ref offset, null);
                 if (value.Length == 0 || offset >= mediaType.Length || mediaType[offset++] != '/')
-                   throw new ArgumentException(SR.GetString(SR.MediaTypeInvalid), "mediaType");
+                    throw new ArgumentException(SR.GetString(SR.MediaTypeInvalid), "mediaType");
                 value = MailBnfHelper.ReadToken(mediaType, ref offset, null);
-                if(value.Length == 0 || offset < mediaType.Length){
+                if (value.Length == 0 || offset < mediaType.Length)
+                {
                     throw new ArgumentException(SR.GetString(SR.MediaTypeInvalid), "mediaType");
                 }
             }
-            catch(FormatException){
+            catch (FormatException)
+            {
                 throw new ArgumentException(SR.GetString(SR.MediaTypeInvalid), "mediaType");
             }
 
-
             ContentType contentType = new ContentType(mediaType);
 
-            if (encoding == null){
-                if (MimeBasePart.IsAscii(contentString,false)) {
+            if (encoding == null)
+            {
+                if (MimeBasePart.IsAscii(contentString, false))
+                {
                     encoding = Text.Encoding.ASCII;
                 }
-                else {
+                else
+                {
                     encoding = Text.Encoding.GetEncoding(MimeBasePart.defaultCharSet);
                 }
             }
 
             contentType.CharSet = encoding.BodyName;
             byte[] buffer = encoding.GetBytes(contentString);
-            part.SetContent(new MemoryStream(buffer),contentType);
+            part.SetContent(new MemoryStream(buffer), contentType);
 
-            if (MimeBasePart.ShouldUseBase64Encoding(encoding)){
+            if (MimeBasePart.ShouldUseBase64Encoding(encoding))
+            {
                 part.TransferEncoding = TransferEncoding.Base64;
             }
-            else{
+            else
+            {
                 part.TransferEncoding = TransferEncoding.QuotedPrintable;
             }
         }
 
-
-        internal virtual void PrepareForSending(bool allowUnicode){
+        internal virtual void PrepareForSending(bool allowUnicode)
+        {
             part.ResetStream();
         }
-               
-        public Stream ContentStream {
-            get {
-                if (disposed) {
+
+        public Stream ContentStream
+        {
+            get
+            {
+                if (disposed)
+                {
                     throw new ObjectDisposedException(this.GetType().FullName);
                 }
 
@@ -225,7 +283,6 @@ namespace System.Net.Mail
                 }
                 return cid;
             }
-
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -234,7 +291,7 @@ namespace System.Net.Mail
                 }
                 else
                 {
-                    if(value.IndexOfAny(new char[] { '<', '>' }) != -1)
+                    if (value.IndexOfAny(new char[] { '<', '>' }) != -1)
                     {
                         throw new ArgumentException(SR.GetString(SR.MailHeaderInvalidCID), "value");
                     }
@@ -244,23 +301,16 @@ namespace System.Net.Mail
             }
         }
 
-        public ContentType ContentType {
-            get {
-                return part.ContentType;
-            }
-
-            set {
-                part.ContentType = value;
-            }
+        public ContentType ContentType
+        {
+            get { return part.ContentType; }
+            set { part.ContentType = value; }
         }
 
-        public TransferEncoding TransferEncoding {
-            get {
-                return part.TransferEncoding;
-            }
-            set {
-                part.TransferEncoding = value;
-            }
+        public TransferEncoding TransferEncoding
+        {
+            get { return part.TransferEncoding; }
+            set { part.TransferEncoding = value; }
         }
 
         internal Uri ContentLocation
@@ -274,43 +324,35 @@ namespace System.Net.Mail
                 }
                 return uri;
             }
-
             set
             {
-                part.ContentLocation = value == null ? null : value.IsAbsoluteUri ? value.AbsoluteUri : value.OriginalString;
+                part.ContentLocation =
+                    value == null ? null
+                    : value.IsAbsoluteUri ? value.AbsoluteUri
+                    : value.OriginalString;
             }
         }
 
-        internal MimePart MimePart {
-            get {
-                return part;
-            }
+        internal MimePart MimePart
+        {
+            get { return part; }
         }
     }
 
     public class Attachment : AttachmentBase
     {
-
-
         string name;
         Encoding nameEncoding;
 
-        internal Attachment(){
+        internal Attachment()
+        {
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public Attachment(string fileName) :base(fileName)
-        { 
-            Name = ShortNameFromFile(fileName);
-            MimePart.ContentDisposition = new ContentDisposition();
-        }
-
-        [ResourceExposure(ResourceScope.Machine)]
-        [ResourceConsumption(ResourceScope.Machine)]
-        public Attachment(string fileName, string mediaType) :
-            base(fileName, mediaType)
+        public Attachment(string fileName)
+            : base(fileName)
         {
             Name = ShortNameFromFile(fileName);
             MimePart.ContentDisposition = new ContentDisposition();
@@ -318,64 +360,90 @@ namespace System.Net.Mail
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public Attachment(string fileName, ContentType contentType) :
-            base(fileName, contentType)
-        { 
-            if (contentType.Name == null || contentType.Name == String.Empty) {
+        public Attachment(string fileName, string mediaType)
+            : base(fileName, mediaType)
+        {
+            Name = ShortNameFromFile(fileName);
+            MimePart.ContentDisposition = new ContentDisposition();
+        }
+
+        [ResourceExposure(ResourceScope.Machine)]
+        [ResourceConsumption(ResourceScope.Machine)]
+        public Attachment(string fileName, ContentType contentType)
+            : base(fileName, contentType)
+        {
+            if (contentType.Name == null || contentType.Name == String.Empty)
+            {
                 Name = ShortNameFromFile(fileName);
             }
-            else{
+            else
+            {
                 Name = contentType.Name;
             }
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(Stream contentStream, string name) :
-            base(contentStream, null, null)
-        { 
+        public Attachment(Stream contentStream, string name)
+            : base(contentStream, null, null)
+        {
             Name = name;
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(Stream contentStream, string name, string mediaType) :
-            base(contentStream, null, mediaType)
-        { 
+        public Attachment(Stream contentStream, string name, string mediaType)
+            : base(contentStream, null, mediaType)
+        {
             Name = name;
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(Stream contentStream, ContentType contentType) :
-            base(contentStream, contentType)
-        { 
+        public Attachment(Stream contentStream, ContentType contentType)
+            : base(contentStream, contentType)
+        {
             Name = contentType.Name;
             MimePart.ContentDisposition = new ContentDisposition();
         }
-            
-        internal void SetContentTypeName(bool allowUnicode){
-            if (!allowUnicode && name != null && name.Length != 0 && !MimeBasePart.IsAscii(name, false)) {
+
+        internal void SetContentTypeName(bool allowUnicode)
+        {
+            if (
+                !allowUnicode
+                && name != null
+                && name.Length != 0
+                && !MimeBasePart.IsAscii(name, false)
+            )
+            {
                 Encoding encoding = NameEncoding;
-                if(encoding == null){
+                if (encoding == null)
+                {
                     encoding = Encoding.GetEncoding(MimeBasePart.defaultCharSet);
                 }
-                MimePart.ContentType.Name = MimeBasePart.EncodeHeaderValue(name, encoding ,MimeBasePart.ShouldUseBase64Encoding(encoding));
+                MimePart.ContentType.Name = MimeBasePart.EncodeHeaderValue(
+                    name,
+                    encoding,
+                    MimeBasePart.ShouldUseBase64Encoding(encoding)
+                );
             }
-            else{
+            else
+            {
                 MimePart.ContentType.Name = name;
             }
         }
 
-        public string Name {
-            get {
-                return name;
-            }
-            set {
+        public string Name
+        {
+            get { return name; }
+            set
+            {
                 Encoding nameEncoding = MimeBasePart.DecodeEncoding(value);
-                if(nameEncoding != null){
+                if (nameEncoding != null)
+                {
                     this.nameEncoding = nameEncoding;
                     this.name = MimeBasePart.DecodeHeaderValue(value);
                     MimePart.ContentType.Name = value;
                 }
-                else{
+                else
+                {
                     this.name = value;
                     SetContentTypeName(true);
                     // This keeps ContentType.Name up to date for user viewability, but isn't necessary.
@@ -384,52 +452,56 @@ namespace System.Net.Mail
             }
         }
 
-
-        public Encoding NameEncoding {
-            get {
-                return nameEncoding;
-            }
-            set {
+        public Encoding NameEncoding
+        {
+            get { return nameEncoding; }
+            set
+            {
                 nameEncoding = value;
-                if(name != null && name != String.Empty){
+                if (name != null && name != String.Empty)
+                {
                     SetContentTypeName(true);
                 }
             }
         }
 
-
-
         public ContentDisposition ContentDisposition
         {
-            get
+            get { return MimePart.ContentDisposition; }
+        }
+
+        internal override void PrepareForSending(bool allowUnicode)
+        {
+            if (name != null && name != String.Empty)
             {
-                return MimePart.ContentDisposition;
-            }
-        }    
-
-
-        internal override void PrepareForSending(bool allowUnicode){
-            if(name != null && name != String.Empty){
                 SetContentTypeName(allowUnicode);
             }
             base.PrepareForSending(allowUnicode);
         }
 
-        public static Attachment CreateAttachmentFromString(string content, string name){
+        public static Attachment CreateAttachmentFromString(string content, string name)
+        {
             Attachment a = new Attachment();
-            a.SetContentFromString(content,null, String.Empty);
+            a.SetContentFromString(content, null, String.Empty);
             a.Name = name;
             return a;
         }
 
-        public static Attachment CreateAttachmentFromString(string content, string name, Encoding contentEncoding, string mediaType){
+        public static Attachment CreateAttachmentFromString(
+            string content,
+            string name,
+            Encoding contentEncoding,
+            string mediaType
+        )
+        {
             Attachment a = new Attachment();
             a.SetContentFromString(content, contentEncoding, mediaType);
             a.Name = name;
             return a;
         }
 
-        public static Attachment CreateAttachmentFromString(string content, ContentType contentType){
+        public static Attachment CreateAttachmentFromString(string content, ContentType contentType)
+        {
             Attachment a = new Attachment();
             a.SetContentFromString(content, contentType);
             a.Name = contentType.Name;

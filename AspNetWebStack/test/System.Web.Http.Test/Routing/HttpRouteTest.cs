@@ -21,7 +21,10 @@ namespace System.Web.Http.Routing
         {
             HttpRoute route = new HttpRoute("{controller}/{id}");
             Uri uri = new Uri("http://localhost/test/" + id + "/");
-            IHttpRouteData routeData = route.GetRouteData("", new HttpRequestMessage(HttpMethod.Get, uri));
+            IHttpRouteData routeData = route.GetRouteData(
+                "",
+                new HttpRequestMessage(HttpMethod.Get, uri)
+            );
             Assert.Equal("test", routeData.Values["controller"]);
             Assert.Equal(id, routeData.Values["id"]);
         }

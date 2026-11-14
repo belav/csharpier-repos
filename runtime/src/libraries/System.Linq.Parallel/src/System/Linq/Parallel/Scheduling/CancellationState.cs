@@ -52,7 +52,7 @@ namespace System.Linq.Parallel
         /// <summary>
         /// Poll frequency (number of loops per cancellation check) for situations where per-1-loop testing is too high an overhead.
         /// </summary>
-        internal const int POLL_INTERVAL = 63;  //must be of the form (2^n)-1.
+        internal const int POLL_INTERVAL = 63; //must be of the form (2^n)-1.
 
         // The two main situations requiring POLL_INTERVAL are:
         //    1. inner loops of sorting/merging operations
@@ -68,7 +68,9 @@ namespace System.Linq.Parallel
         // (Note, this only behaves as expected if FREQ is of the form (2^n)-1
 
         // Test if external cancellation was requested and occurred, and if so throw a standardize OCE with standardized message
-        internal static void ThrowWithStandardMessageIfCanceled(CancellationToken externalCancellationToken)
+        internal static void ThrowWithStandardMessageIfCanceled(
+            CancellationToken externalCancellationToken
+        )
         {
             if (externalCancellationToken.IsCancellationRequested)
             {

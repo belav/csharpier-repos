@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,110 +28,116 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-	[ListBindable (false)]
-	public class DataGridViewSelectedColumnCollection : BaseCollection, IList, ICollection, IEnumerable
-	{
-		internal DataGridViewSelectedColumnCollection ()
-		{
-		}
+    [ListBindable(false)]
+    public class DataGridViewSelectedColumnCollection
+        : BaseCollection,
+            IList,
+            ICollection,
+            IEnumerable
+    {
+        internal DataGridViewSelectedColumnCollection() { }
 
-		bool IList.IsFixedSize {
-			get { return base.List.IsFixedSize; }
-		}
+        bool IList.IsFixedSize
+        {
+            get { return base.List.IsFixedSize; }
+        }
 
-		object IList.this [int index] {
-			get { return this [index]; }
-			set { throw new NotSupportedException("Can't insert or modify this collection."); }
-		}
+        object IList.this[int index]
+        {
+            get { return this[index]; }
+            set { throw new NotSupportedException("Can't insert or modify this collection."); }
+        }
 
-		public DataGridViewColumn this [int index] {
-			get { return (DataGridViewColumn) base.List [index]; }
-		}
+        public DataGridViewColumn this[int index]
+        {
+            get { return (DataGridViewColumn)base.List[index]; }
+        }
 
-		int IList.Add (object value)
-		{
-			throw new NotSupportedException ("Can't add elements to this collection.");
-		}
+        int IList.Add(object value)
+        {
+            throw new NotSupportedException("Can't add elements to this collection.");
+        }
 
-		void IList.Clear ()
-		{
-			Clear ();
-		}
+        void IList.Clear()
+        {
+            Clear();
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public void Clear ()
-		{
-			throw new NotSupportedException ("This collection cannot be cleared.");
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Clear()
+        {
+            throw new NotSupportedException("This collection cannot be cleared.");
+        }
 
-		bool IList.Contains (object value)
-		{
-			return Contains (value as DataGridViewColumn);
-		}
+        bool IList.Contains(object value)
+        {
+            return Contains(value as DataGridViewColumn);
+        }
 
-		public bool Contains (DataGridViewColumn dataGridViewColumn)
-		{
-			return base.List.Contains (dataGridViewColumn);
-		}
+        public bool Contains(DataGridViewColumn dataGridViewColumn)
+        {
+            return base.List.Contains(dataGridViewColumn);
+        }
 
-		public void CopyTo (DataGridViewColumn [] array, int index)
-		{
-			base.List.CopyTo (array, index);
-		}
+        public void CopyTo(DataGridViewColumn[] array, int index)
+        {
+            base.List.CopyTo(array, index);
+        }
 
-		int IList.IndexOf (object value)
-		{
-			return base.List.IndexOf (value);
-		}
+        int IList.IndexOf(object value)
+        {
+            return base.List.IndexOf(value);
+        }
 
-		void IList.Insert (int index, object value)
-		{
-			Insert (index, value as DataGridViewColumn);
-		}
+        void IList.Insert(int index, object value)
+        {
+            Insert(index, value as DataGridViewColumn);
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public void Insert (int index, DataGridViewColumn dataGridViewColumn)
-		{
-			throw new NotSupportedException ("Insert is not allowed.");
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Insert(int index, DataGridViewColumn dataGridViewColumn)
+        {
+            throw new NotSupportedException("Insert is not allowed.");
+        }
 
-		void IList.Remove (object value)
-		{
-			throw new NotSupportedException ("Can't remove elements of this collection.");
-		}
+        void IList.Remove(object value)
+        {
+            throw new NotSupportedException("Can't remove elements of this collection.");
+        }
 
-		void IList.RemoveAt (int index)
-		{
-			throw new NotSupportedException ("Can't remove elements of this collection.");
-		}
+        void IList.RemoveAt(int index)
+        {
+            throw new NotSupportedException("Can't remove elements of this collection.");
+        }
 
-		protected override ArrayList List {
-			get { return base.List; }
-		}
+        protected override ArrayList List
+        {
+            get { return base.List; }
+        }
 
-		internal void InternalAdd (DataGridViewColumn dataGridViewColumn)
-		{
-			base.List.Add (dataGridViewColumn);
-		}
+        internal void InternalAdd(DataGridViewColumn dataGridViewColumn)
+        {
+            base.List.Add(dataGridViewColumn);
+        }
 
-		internal void InternalAddRange (DataGridViewSelectedColumnCollection columns)
-		{
-			if (columns == null)
-				return;
+        internal void InternalAddRange(DataGridViewSelectedColumnCollection columns)
+        {
+            if (columns == null)
+                return;
 
-			// Believe it or not, MS adds the columns in reverse order...
-			for (int i = columns.Count - 1; i >= 0; i--)
-				base.List.Add (columns [i]);
-		}
-		
-		internal void InternalClear ()
-		{
-			List.Clear ();
-		}
-		
-		internal void InternalRemove (DataGridViewColumn dataGridViewColumn)
-		{
-			base.List.Remove(dataGridViewColumn);
-		}
-	}
+            // Believe it or not, MS adds the columns in reverse order...
+            for (int i = columns.Count - 1; i >= 0; i--)
+                base.List.Add(columns[i]);
+        }
+
+        internal void InternalClear()
+        {
+            List.Clear();
+        }
+
+        internal void InternalRemove(DataGridViewColumn dataGridViewColumn)
+        {
+            base.List.Remove(dataGridViewColumn);
+        }
+    }
 }

@@ -21,12 +21,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ISymbol symbol,
             SyntaxToken token,
             int descriptionPosition,
-            CompletionItemRules rules)
+            CompletionItemRules rules
+        )
         {
             var props = ImmutableArray.Create(
                 new KeyValuePair<string, string>("Line", line.ToString()),
                 new KeyValuePair<string, string>("Modifiers", modifiers.ToString()),
-                new KeyValuePair<string, string>("TokenSpanEnd", token.Span.End.ToString()));
+                new KeyValuePair<string, string>("TokenSpanEnd", token.Span.End.ToString())
+            );
 
             return SymbolCompletionItem.CreateWithSymbolId(
                 displayText: displayText,
@@ -35,16 +37,23 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 contextPosition: descriptionPosition,
                 properties: props,
                 rules: rules,
-                isComplexTextEdit: true);
+                isComplexTextEdit: true
+            );
         }
 
-        public static Task<CompletionDescription> GetDescriptionAsync(CompletionItem item, Document document, SymbolDescriptionOptions options, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, options, cancellationToken);
+        public static Task<CompletionDescription> GetDescriptionAsync(
+            CompletionItem item,
+            Document document,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        ) => SymbolCompletionItem.GetDescriptionAsync(item, document, options, cancellationToken);
 
         public static DeclarationModifiers GetModifiers(CompletionItem item)
         {
-            if (item.TryGetProperty("Modifiers", out var text) &&
-                DeclarationModifiers.TryParse(text, out var modifiers))
+            if (
+                item.TryGetProperty("Modifiers", out var text)
+                && DeclarationModifiers.TryParse(text, out var modifiers)
+            )
             {
                 return modifiers;
             }
@@ -54,8 +63,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         public static int GetLine(CompletionItem item)
         {
-            if (item.TryGetProperty("Line", out var text)
-                && int.TryParse(text, out var number))
+            if (item.TryGetProperty("Line", out var text) && int.TryParse(text, out var number))
             {
                 return number;
             }
@@ -65,8 +73,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         public static int GetTokenSpanEnd(CompletionItem item)
         {
-            if (item.TryGetProperty("TokenSpanEnd", out var text)
-                && int.TryParse(text, out var number))
+            if (
+                item.TryGetProperty("TokenSpanEnd", out var text)
+                && int.TryParse(text, out var number)
+            )
             {
                 return number;
             }

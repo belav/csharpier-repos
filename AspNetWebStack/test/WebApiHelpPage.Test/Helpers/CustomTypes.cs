@@ -65,9 +65,7 @@ namespace WebApiHelpPageWebHost.UnitTest
 
     public class TypeWithNoDefaultConstructor
     {
-        public TypeWithNoDefaultConstructor(int id, string name)
-        {
-        }
+        public TypeWithNoDefaultConstructor(int id, string name) { }
     }
 
     internal class NonPublicType { }
@@ -141,7 +139,7 @@ namespace WebApiHelpPageWebHost.UnitTest
     {
         [EnumMember]
         Value,
-        NoValue
+        NoValue,
     }
 
     [DataContract]
@@ -173,7 +171,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         public int Member { get; set; }
 
         [IgnoreDataMember]
-        public int NoDataMember{ get; set; }
+        public int NoDataMember { get; set; }
 
         [DataMember]
         public int DataMember { get; set; }

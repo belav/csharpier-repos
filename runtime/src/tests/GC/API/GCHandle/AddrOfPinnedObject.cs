@@ -13,7 +13,7 @@ public class Test_AddrOfPinnedObject
         int[] array = new int[25];
 
         Console.WriteLine("Allocating a pinned handle to object..");
-        GCHandle handle = GCHandle.Alloc(array, GCHandleType.Pinned);  // pinned this object.
+        GCHandle handle = GCHandle.Alloc(array, GCHandleType.Pinned); // pinned this object.
 
         IntPtr addr1 = handle.AddrOfPinnedObject();
         Console.WriteLine("AddrOfPinnedObject = {0}", addr1);

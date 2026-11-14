@@ -20,7 +20,9 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         {
             Contract.Assert(result != null, "CompletedAsyncResult<T> was null.");
             Contract.Assert(result.IsCompleted, "CompletedAsyncResult<T> was not completed!");
-            CompletedAsyncResult<T> completedResult = AsyncResult.End<CompletedAsyncResult<T>>(result);
+            CompletedAsyncResult<T> completedResult = AsyncResult.End<CompletedAsyncResult<T>>(
+                result
+            );
             return completedResult.data;
         }
     }

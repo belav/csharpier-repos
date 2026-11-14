@@ -16,6 +16,6 @@ public class TemporaryDateTimeOffsetValueGeneratorTest
     }
 
     [ConditionalFact]
-    public void Generates_temporary_values()
-        => Assert.True(new TemporaryDateTimeOffsetValueGenerator().GeneratesTemporaryValues);
+    public void Generates_temporary_values() =>
+        Assert.True(new TemporaryDateTimeOffsetValueGenerator().GeneratesTemporaryValues);
 }

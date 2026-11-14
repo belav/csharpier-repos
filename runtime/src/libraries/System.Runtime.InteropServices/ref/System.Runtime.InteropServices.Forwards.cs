@@ -5,11 +5,25 @@
 // ------------------------------------------------------------------------------
 
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.UnmanagedMemoryStream))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.CriticalHandle))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.GCHandle))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.GCHandleType))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.InAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.SafeBuffer))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.SafeHandle))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.UnmanagedType))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.CriticalHandle)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.GCHandle)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.GCHandleType)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.InAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.SafeBuffer)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.SafeHandle)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.UnmanagedType)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Reflection.Missing))]

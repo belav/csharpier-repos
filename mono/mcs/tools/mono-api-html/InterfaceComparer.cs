@@ -1,9 +1,9 @@
-// 
+//
 // Authors
 //    Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright 2013 Xamarin Inc. http://www.xamarin.com
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -27,26 +27,26 @@
 using System;
 using System.Xml.Linq;
 
-namespace Mono.ApiTools {
+namespace Mono.ApiTools
+{
+    class InterfaceComparer : MemberComparer
+    {
+        public InterfaceComparer(State state)
+            : base(state) { }
 
-	class InterfaceComparer : MemberComparer {
+        public override string GroupName
+        {
+            get { return "interfaces"; }
+        }
 
-		public InterfaceComparer (State state)
-			: base (state)
-		{
-		}
+        public override string ElementName
+        {
+            get { return "interface"; }
+        }
 
-		public override string GroupName {
-			get { return "interfaces"; }
-		}
-
-		public override string ElementName {
-			get { return "interface"; }
-		}
-
-		public override string GetDescription (XElement e)
-		{
-			return e.GetTypeName ("name", State);
-		}
-	}
+        public override string GetDescription(XElement e)
+        {
+            return e.GetTypeName("name", State);
+        }
+    }
 }

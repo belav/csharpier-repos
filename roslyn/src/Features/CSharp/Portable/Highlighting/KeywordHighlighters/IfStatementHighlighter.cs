@@ -24,12 +24,13 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public IfStatementHighlighter()
-        {
-        }
+        public IfStatementHighlighter() { }
 
         protected override void AddHighlights(
-            IfStatementSyntax ifStatement, List<TextSpan> highlights, CancellationToken cancellationToken)
+            IfStatementSyntax ifStatement,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        )
         {
             if (ifStatement.Parent.Kind() != SyntaxKind.ElseClause)
             {
@@ -37,8 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting
             }
         }
 
-        private static void ComputeSpans(
-            IfStatementSyntax ifStatement, List<TextSpan> highlights)
+        private static void ComputeSpans(IfStatementSyntax ifStatement, List<TextSpan> highlights)
         {
             highlights.Add(ifStatement.IfKeyword.Span);
 
@@ -53,9 +53,12 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting
                     if (OnlySpacesBetween(elseKeyword, elseIfStatement.IfKeyword))
                     {
                         // Highlight both else and if tokens if they are on the same line
-                        highlights.Add(TextSpan.FromBounds(
-                            elseKeyword.SpanStart,
-                            elseIfStatement.IfKeyword.Span.End));
+                        highlights.Add(
+                            TextSpan.FromBounds(
+                                elseKeyword.SpanStart,
+                                elseIfStatement.IfKeyword.Span.End
+                            )
+                        );
                     }
                     else
                     {
@@ -78,8 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting
 
         public static bool OnlySpacesBetween(SyntaxToken first, SyntaxToken second)
         {
-            return first.TrailingTrivia.AsString().All(c => c == ' ') &&
-                   second.LeadingTrivia.AsString().All(c => c == ' ');
+            return first.TrailingTrivia.AsString().All(c => c == ' ')
+                && second.LeadingTrivia.AsString().All(c => c == ' ');
         }
     }
 }

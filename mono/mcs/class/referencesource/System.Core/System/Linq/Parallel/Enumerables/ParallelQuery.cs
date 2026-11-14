@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -14,8 +14,8 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Parallel;
 using System.Diagnostics.Contracts;
+using System.Linq.Parallel;
 
 namespace System.Linq
 {
@@ -95,9 +95,7 @@ namespace System.Linq
     public class ParallelQuery<TSource> : ParallelQuery, IEnumerable<TSource>
     {
         internal ParallelQuery(QuerySettings settings)
-            : base(settings)
-        {
-        }
+            : base(settings) { }
 
         internal sealed override ParallelQuery<TCastTo> Cast<TCastTo>()
         {
@@ -108,8 +106,7 @@ namespace System.Linq
         {
             // @PERF: Currently defined in terms of other operators. This isn't the most performant
             //      solution (because it results in two operators) but is simple to implement.
-            return this
-                .Where<TSource>(elem => elem is TCastTo)
+            return this.Where<TSource>(elem => elem is TCastTo)
                 .Select<TSource, TCastTo>(elem => (TCastTo)(object)elem);
         }
 

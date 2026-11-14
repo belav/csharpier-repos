@@ -29,88 +29,115 @@ using System.Reflection;
 
 namespace System.Windows.Forms.Theming
 {
-	internal class ThemeElements
-	{
-		private static ThemeElementsDefault theme;
-		public static ThemeElementsDefault CurrentTheme {
-			get { return theme; }
-		}
+    internal class ThemeElements
+    {
+        private static ThemeElementsDefault theme;
+        public static ThemeElementsDefault CurrentTheme
+        {
+            get { return theme; }
+        }
 
-		static ThemeElements ()
-		{
-			if (Application.VisualStylesEnabled)
-				theme = new ThemeElementsVisualStyles ();
-			else
-				theme = new ThemeElementsDefault ();
-		}
+        static ThemeElements()
+        {
+            if (Application.VisualStylesEnabled)
+                theme = new ThemeElementsVisualStyles();
+            else
+                theme = new ThemeElementsDefault();
+        }
 
-		#region Buttons
-		public static void DrawButton (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor)
-		{
-			theme.ButtonPainter.Draw (g, bounds, state, backColor, foreColor);
-		}
+        #region Buttons
+        public static void DrawButton(
+            Graphics g,
+            Rectangle bounds,
+            ButtonThemeState state,
+            Color backColor,
+            Color foreColor
+        )
+        {
+            theme.ButtonPainter.Draw(g, bounds, state, backColor, foreColor);
+        }
 
-		public static void DrawFlatButton (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor, FlatButtonAppearance appearance)
-		{
-			theme.ButtonPainter.DrawFlat (g, bounds, state, backColor, foreColor, appearance);
-		}
+        public static void DrawFlatButton(
+            Graphics g,
+            Rectangle bounds,
+            ButtonThemeState state,
+            Color backColor,
+            Color foreColor,
+            FlatButtonAppearance appearance
+        )
+        {
+            theme.ButtonPainter.DrawFlat(g, bounds, state, backColor, foreColor, appearance);
+        }
 
-		public static void DrawPopupButton (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor)
-		{
-			theme.ButtonPainter.DrawPopup (g, bounds, state, backColor, foreColor);
-		}
-		#endregion
-		
-		#region Painters
+        public static void DrawPopupButton(
+            Graphics g,
+            Rectangle bounds,
+            ButtonThemeState state,
+            Color backColor,
+            Color foreColor
+        )
+        {
+            theme.ButtonPainter.DrawPopup(g, bounds, state, backColor, foreColor);
+        }
+        #endregion
 
-		public virtual Default.ButtonPainter ButtonPainter {
-			get { return theme.ButtonPainter; }
-		}
+        #region Painters
 
-		public static Default.LabelPainter LabelPainter	{
-			get { return theme.LabelPainter; }
-		}
+        public virtual Default.ButtonPainter ButtonPainter
+        {
+            get { return theme.ButtonPainter; }
+        }
 
-		public static Default.LinkLabelPainter LinkLabelPainter	{
-			get { return theme.LinkLabelPainter; }
-		}
+        public static Default.LabelPainter LabelPainter
+        {
+            get { return theme.LabelPainter; }
+        }
 
-		public virtual Default.TabControlPainter TabControlPainter {
-			get { return theme.TabControlPainter; }
-		}
+        public static Default.LinkLabelPainter LinkLabelPainter
+        {
+            get { return theme.LinkLabelPainter; }
+        }
 
-		public virtual Default.CheckBoxPainter CheckBoxPainter {
-			get { return theme.CheckBoxPainter; }
-		}
+        public virtual Default.TabControlPainter TabControlPainter
+        {
+            get { return theme.TabControlPainter; }
+        }
 
-		public virtual Default.RadioButtonPainter RadioButtonPainter {
-			get { return theme.RadioButtonPainter; }
-		}
+        public virtual Default.CheckBoxPainter CheckBoxPainter
+        {
+            get { return theme.CheckBoxPainter; }
+        }
 
-		public virtual Default.ToolStripPainter ToolStripPainter {
-			get { return theme.ToolStripPainter; }
-		}
+        public virtual Default.RadioButtonPainter RadioButtonPainter
+        {
+            get { return theme.RadioButtonPainter; }
+        }
 
-		#endregion
-	}
+        public virtual Default.ToolStripPainter ToolStripPainter
+        {
+            get { return theme.ToolStripPainter; }
+        }
 
-	#region Internal Enums
-	[Flags]
-	internal enum ButtonThemeState
-	{
-		Normal = 1,
-		Entered = 2,
-		Pressed = 4,
-		Disabled = 8,
-		Default = 16
-	}
+        #endregion
+    }
 
-	internal enum ElementState
-	{
-		Normal = 1,
-		Hot = 2,
-		Pressed = 3,
-		Disabled = 4
-	}
-	#endregion
+    #region Internal Enums
+    [Flags]
+    internal enum ButtonThemeState
+    {
+        Normal = 1,
+        Entered = 2,
+        Pressed = 4,
+        Disabled = 8,
+        Default = 16,
+    }
+
+    internal enum ElementState
+    {
+        Normal = 1,
+        Hot = 2,
+        Pressed = 3,
+        Disabled = 4,
+    }
+    #endregion
 }

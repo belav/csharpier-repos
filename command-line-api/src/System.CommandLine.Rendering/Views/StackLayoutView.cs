@@ -6,9 +6,7 @@ namespace System.CommandLine.Rendering.Views
     public class StackLayoutView : LayoutView<View>
     {
         public StackLayoutView()
-                : this(Orientation.Vertical)
-        {
-        }
+            : this(Orientation.Vertical) { }
 
         public StackLayoutView(Orientation orientation)
         {
@@ -80,7 +78,9 @@ namespace System.CommandLine.Rendering.Views
                 case Orientation.Horizontal:
                     return GetAdjustedSizeHorizontal(renderer, maxSize);
                 default:
-                    throw new InvalidOperationException($"Orientation {Orientation} is not implemented");
+                    throw new InvalidOperationException(
+                        $"Orientation {Orientation} is not implemented"
+                    );
             }
         }
 
@@ -129,4 +129,3 @@ namespace System.CommandLine.Rendering.Views
         }
     }
 }
-

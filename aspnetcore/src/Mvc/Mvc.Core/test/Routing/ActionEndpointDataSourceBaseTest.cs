@@ -72,9 +72,8 @@ public abstract class ActionEndpointDataSourceBaseTest
         var endpoints2 = dataSource.Endpoints;
 
         // Assert
-        Assert.Collection(
-            endpoints1,
-            (e) => Assert.Equal("/test", Assert.IsType<RouteEndpoint>(e).RoutePattern.RawText)
+        Assert.Collection(endpoints1, (e) =>
+            Assert.Equal("/test", Assert.IsType<RouteEndpoint>(e).RoutePattern.RawText)
         );
         Assert.Same(endpoints1, endpoints2);
 
@@ -117,16 +116,13 @@ public abstract class ActionEndpointDataSourceBaseTest
         // Act
         var endpoints = dataSource.Endpoints;
 
-        Assert.Collection(
-            endpoints,
-            (e) =>
-            {
-                var routePattern = Assert.IsType<RouteEndpoint>(e).RoutePattern;
-                Assert.Equal("/test", routePattern.RawText);
-                Assert.Equal("TestController", routePattern.RequiredValues["controller"]);
-                Assert.Equal("TestAction", routePattern.RequiredValues["action"]);
-            }
-        );
+        Assert.Collection(endpoints, (e) =>
+        {
+            var routePattern = Assert.IsType<RouteEndpoint>(e).RoutePattern;
+            Assert.Equal("/test", routePattern.RawText);
+            Assert.Equal("TestController", routePattern.RequiredValues["controller"]);
+            Assert.Equal("TestAction", routePattern.RequiredValues["action"]);
+        });
 
         actionDescriptorCollectionProviderMock
             .Setup(m => m.ActionDescriptors)
@@ -149,16 +145,13 @@ public abstract class ActionEndpointDataSourceBaseTest
         var newEndpoints = dataSource.Endpoints;
 
         Assert.NotSame(endpoints, newEndpoints);
-        Assert.Collection(
-            newEndpoints,
-            (e) =>
-            {
-                var routePattern = Assert.IsType<RouteEndpoint>(e).RoutePattern;
-                Assert.Equal("/test", routePattern.RawText);
-                Assert.Equal("NewTestController", routePattern.RequiredValues["controller"]);
-                Assert.Equal("NewTestAction", routePattern.RequiredValues["action"]);
-            }
-        );
+        Assert.Collection(newEndpoints, (e) =>
+        {
+            var routePattern = Assert.IsType<RouteEndpoint>(e).RoutePattern;
+            Assert.Equal("/test", routePattern.RawText);
+            Assert.Equal("NewTestController", routePattern.RequiredValues["controller"]);
+            Assert.Equal("NewTestAction", routePattern.RequiredValues["action"]);
+        });
     }
 
     private protected ActionEndpointDataSourceBase CreateDataSource(

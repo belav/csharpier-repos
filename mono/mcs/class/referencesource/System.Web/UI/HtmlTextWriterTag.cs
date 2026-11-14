@@ -1,19 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlTextWriterTag.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
-
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public enum HtmlTextWriterTag {
-
-
+    public enum HtmlTextWriterTag
+    {
         Unknown,
 
         /// <devdoc>

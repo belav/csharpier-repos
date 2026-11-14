@@ -23,6 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
@@ -31,14 +34,12 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System;
-using System.Collections.Generic;
+
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
 {
@@ -49,7 +50,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JArray packages = JArray.Parse(@"[
+            JArray packages = JArray.Parse(
+                @"[
               {
                 'PackageId': 'Newtonsoft.Json',
                 'Version': '11.0.1',
@@ -60,14 +62,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
                 'Version': '3.9.0',
                 'ReleaseDate': '2017-11-10T00:00:00'
               }
-            ]");
+            ]"
+            );
 
             // Find Newtonsoft packages
-            List<JToken> newtonsoftPackages = packages.SelectTokens(@"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]").ToList();
+            List<JToken> newtonsoftPackages = packages
+                .SelectTokens(@"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]")
+                .ToList();
 
             foreach (JToken item in newtonsoftPackages)
             {
-                Console.WriteLine((string) item["PackageId"]);
+                Console.WriteLine((string)item["PackageId"]);
             }
             // Newtonsoft.Json
             #endregion

@@ -81,7 +81,8 @@ WHERE [Id] = @p4;
 DELETE FROM [Author]
 OUTPUT 1
 WHERE [Id] = @p5;
-""");
+"""
+        );
     }
 
     [ConditionalFact] // Issue #29502
@@ -93,28 +94,30 @@ WHERE [Id] = @p5;
                 mb.Entity<User>().ToTable("Users");
                 mb.Entity<DailyDigest>().ToTable("DailyDigests");
             },
-            createTestStore: () => SqlServerTestStore.GetOrCreateWithScriptPath(
-                "Issue29502",
-                Path.Combine("Update", "Issue29502.sql"),
-                shared: false));
+            createTestStore: () =>
+                SqlServerTestStore.GetOrCreateWithScriptPath(
+                    "Issue29502",
+                    Path.Combine("Update", "Issue29502.sql"),
+                    shared: false
+                )
+        );
 
-        await ExecuteWithStrategyInTransactionAsync(
-            contextFactory,
-            async context =>
+        await ExecuteWithStrategyInTransactionAsync(contextFactory, async context =>
+        {
+            var digests = await context
+                .Set<User>()
+                .OrderBy(u => u.TimeCreatedUtc)
+                .Take(23)
+                .Select(u => new DailyDigest { User = u })
+                .ToListAsync();
+
+            foreach (var digest in digests)
             {
-                var digests = await context.Set<User>()
-                    .OrderBy(u => u.TimeCreatedUtc)
-                    .Take(23)
-                    .Select(u => new DailyDigest { User = u })
-                    .ToListAsync();
+                context.Set<DailyDigest>().Add(digest);
+            }
 
-                foreach (var digest in digests)
-                {
-                    context.Set<DailyDigest>().Add(digest);
-                }
-
-                await context.SaveChangesAsync();
-            });
+            await context.SaveChangesAsync();
+        });
     }
 
     public class User
@@ -130,12 +133,16 @@ WHERE [Id] = @p5;
         public User User { get; set; }
     }
 
-    public override async Task DbUpdateException_Entries_is_correct_with_multiple_inserts(bool async)
+    public override async Task DbUpdateException_Entries_is_correct_with_multiple_inserts(
+        bool async
+    )
     {
         // SQL Server's bulk insert support makes it impossible to populate the entry which caused the exception, since the position
         // used to find the entry is returned as an output column, but the row is never received in case of an exception.
         // Instead we make sure Entries contains all entries.
-        var contextFactory = await InitializeAsync<DbContext>(onModelCreating: mb => mb.Entity<Blog>().HasIndex(b => b.Name).IsUnique());
+        var contextFactory = await InitializeAsync<DbContext>(onModelCreating: mb =>
+            mb.Entity<Blog>().HasIndex(b => b.Name).IsUnique()
+        );
 
         await ExecuteWithStrategyInTransactionAsync(
             contextFactory,
@@ -158,8 +165,10 @@ WHERE [Id] = @p5;
                     exception.Entries.Select(e => (Blog)e.Entity).OrderBy(b => b.Name),
                     b => Assert.Equal("Blog1", b.Name),
                     b => Assert.Equal("Blog2", b.Name),
-                    b => Assert.Equal("Blog3", b.Name));
-            });
+                    b => Assert.Equal("Blog3", b.Name)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -187,12 +196,12 @@ WHEN NOT MATCHED THEN
 INSERT ([Name])
 VALUES (i.[Name])
 OUTPUT INSERTED.[Id], i._Position;
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 }

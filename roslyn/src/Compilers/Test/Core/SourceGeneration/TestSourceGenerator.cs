@@ -14,9 +14,9 @@ internal class TestSourceGenerator : ISourceGenerator
     public Action<GeneratorInitializationContext>? InitializeImpl;
     public Action<GeneratorExecutionContext>? ExecuteImpl;
 
-    public void Execute(GeneratorExecutionContext context)
-        => (ExecuteImpl ?? throw new NotImplementedException()).Invoke(context);
+    public void Execute(GeneratorExecutionContext context) =>
+        (ExecuteImpl ?? throw new NotImplementedException()).Invoke(context);
 
-    public void Initialize(GeneratorInitializationContext context)
-        => InitializeImpl?.Invoke(context);
+    public void Initialize(GeneratorInitializationContext context) =>
+        InitializeImpl?.Invoke(context);
 }

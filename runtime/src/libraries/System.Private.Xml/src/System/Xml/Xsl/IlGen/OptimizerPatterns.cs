@@ -10,42 +10,42 @@ namespace System.Xml.Xsl.IlGen
     internal enum OptimizerPatternName
     {
         None,
-        DodReverse,                         // (Dod $reverse-axis:*)
-        EqualityIndex,                      // ILGen will build an equality index when this pattern is recognized
-        FilterAttributeKind,                // (Filter $iter:(Content *) (IsType $iter Attribute))
-        FilterContentKind,                  // (Filter $iter:* (IsType $iter $kind:*))
-        FilterElements,                     // (Filter $iter:* (And (IsType $iter Element) (NameOf $iter (LiteralQName * * *))))
-        IsDocOrderDistinct,                 // True if the annotated expression always returns nodes in document order, with no duplicates
-        IsPositional,                       // True if the annotated iterator should track current position during iteration
-        JoinAndDod,                         // (Dod (Loop $path1:* $path2:*)), where $path2.ContextNode = $path1
-        MaxPosition,                        // True if the position range of the annoted iterator or length expression has a maximum
-        SameDepth,                          // True if the annotated expression always returns nodes at the same depth in the tree
-        Step,                               // True if the annotated expression returns nodes from one of the simple axis operators, or from a union of Content operators
-        SingleTextRtf,                      // (RtfCtor (TextCtor *) *)
-        Axis,                               // (AnyAxis *)
-        MaybeSideEffects,                   // True if annotated expression might have side effects
-        TailCall,                           // (Invoke * *) True if invocation can be compiled as using .tailcall
-        DodMerge,                           // (Dod (Loop * (Invoke * *))), where invoked function returns nodes in document order
-        IsReferenced,                       // True if the annotated global iterator is referenced at least once
+        DodReverse, // (Dod $reverse-axis:*)
+        EqualityIndex, // ILGen will build an equality index when this pattern is recognized
+        FilterAttributeKind, // (Filter $iter:(Content *) (IsType $iter Attribute))
+        FilterContentKind, // (Filter $iter:* (IsType $iter $kind:*))
+        FilterElements, // (Filter $iter:* (And (IsType $iter Element) (NameOf $iter (LiteralQName * * *))))
+        IsDocOrderDistinct, // True if the annotated expression always returns nodes in document order, with no duplicates
+        IsPositional, // True if the annotated iterator should track current position during iteration
+        JoinAndDod, // (Dod (Loop $path1:* $path2:*)), where $path2.ContextNode = $path1
+        MaxPosition, // True if the position range of the annoted iterator or length expression has a maximum
+        SameDepth, // True if the annotated expression always returns nodes at the same depth in the tree
+        Step, // True if the annotated expression returns nodes from one of the simple axis operators, or from a union of Content operators
+        SingleTextRtf, // (RtfCtor (TextCtor *) *)
+        Axis, // (AnyAxis *)
+        MaybeSideEffects, // True if annotated expression might have side effects
+        TailCall, // (Invoke * *) True if invocation can be compiled as using .tailcall
+        DodMerge, // (Dod (Loop * (Invoke * *))), where invoked function returns nodes in document order
+        IsReferenced, // True if the annotated global iterator is referenced at least once
     }
 
     internal enum OptimizerPatternArgument
     {
-        StepNode = 0,                       // Step, QilNode: The QilNode of the inner step expression (Content, DescendantOrSelf, XPathFollowing, Union, etc.)
-        StepInput = 1,                      // Step, QilNode: The expression from which navigation begins
+        StepNode = 0, // Step, QilNode: The QilNode of the inner step expression (Content, DescendantOrSelf, XPathFollowing, Union, etc.)
+        StepInput = 1, // Step, QilNode: The expression from which navigation begins
 
-        ElementQName = 2,                   // FilterElements, QilLiteral: All but elements of this QName are filtered by FilterElements expression
+        ElementQName = 2, // FilterElements, QilLiteral: All but elements of this QName are filtered by FilterElements expression
 
-        KindTestType = 2,                   // FilterContentKind, XmlType: All but nodes of this XmlType are filtered by FilterContentKind expression
+        KindTestType = 2, // FilterContentKind, XmlType: All but nodes of this XmlType are filtered by FilterContentKind expression
 
-        IndexedNodes = 0,                   // EqualityIndex, QilNode: Expression that returns the nodes to be indexed
-        KeyExpression = 1,                  // EqualityIndex, QilNode: Expression that returns the keys for the index
+        IndexedNodes = 0, // EqualityIndex, QilNode: Expression that returns the nodes to be indexed
+        KeyExpression = 1, // EqualityIndex, QilNode: Expression that returns the keys for the index
 
-        DodStep = 2,                        // JoinAndDod | DodReverse, QilNode: Last step in a JoinAndDod expression, or only step in DodReverse expression
+        DodStep = 2, // JoinAndDod | DodReverse, QilNode: Last step in a JoinAndDod expression, or only step in DodReverse expression
 
-        MaxPosition = 2,                    // MaxPosition, int: Maximum position of the annotated iterator or length expression
+        MaxPosition = 2, // MaxPosition, int: Maximum position of the annotated iterator or length expression
 
-        RtfText = 2,                        // SingleTextRtf, QilNode: Expression that constructs the text of the simple text Rtf
+        RtfText = 2, // SingleTextRtf, QilNode: Expression that constructs the text of the simple text Rtf
     }
 
     /// <summary>
@@ -56,9 +56,11 @@ namespace System.Xml.Xsl.IlGen
     {
         private static readonly int s_patternCount = Enum.GetValues<OptimizerPatternName>().Length;
 
-        private int _patterns;               // Set of patterns that the annotated Qil node and its subtree matches
-        private bool _isReadOnly;            // True if setters are disabled in the case of singleton OptimizerPatterns
-        private object? _arg0, _arg1, _arg2;    // Arguments to the matching patterns
+        private int _patterns; // Set of patterns that the annotated Qil node and its subtree matches
+        private bool _isReadOnly; // True if setters are disabled in the case of singleton OptimizerPatterns
+        private object? _arg0,
+            _arg1,
+            _arg2; // Arguments to the matching patterns
 
         private static volatile OptimizerPatterns? s_zeroOrOneDefault;
         private static volatile OptimizerPatterns? s_maybeManyDefault;
@@ -168,34 +170,61 @@ namespace System.Xml.Xsl.IlGen
                 switch (pattern)
                 {
                     case OptimizerPatternName.Step:
-                        annDst.AddArgument(OptimizerPatternArgument.StepNode, annSrc.GetArgument(OptimizerPatternArgument.StepNode));
-                        annDst.AddArgument(OptimizerPatternArgument.StepInput, annSrc.GetArgument(OptimizerPatternArgument.StepInput));
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.StepNode,
+                            annSrc.GetArgument(OptimizerPatternArgument.StepNode)
+                        );
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.StepInput,
+                            annSrc.GetArgument(OptimizerPatternArgument.StepInput)
+                        );
                         break;
 
                     case OptimizerPatternName.FilterElements:
-                        annDst.AddArgument(OptimizerPatternArgument.ElementQName, annSrc.GetArgument(OptimizerPatternArgument.ElementQName));
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.ElementQName,
+                            annSrc.GetArgument(OptimizerPatternArgument.ElementQName)
+                        );
                         break;
 
                     case OptimizerPatternName.FilterContentKind:
-                        annDst.AddArgument(OptimizerPatternArgument.KindTestType, annSrc.GetArgument(OptimizerPatternArgument.KindTestType));
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.KindTestType,
+                            annSrc.GetArgument(OptimizerPatternArgument.KindTestType)
+                        );
                         break;
 
                     case OptimizerPatternName.EqualityIndex:
-                        annDst.AddArgument(OptimizerPatternArgument.IndexedNodes, annSrc.GetArgument(OptimizerPatternArgument.IndexedNodes));
-                        annDst.AddArgument(OptimizerPatternArgument.KeyExpression, annSrc.GetArgument(OptimizerPatternArgument.KeyExpression));
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.IndexedNodes,
+                            annSrc.GetArgument(OptimizerPatternArgument.IndexedNodes)
+                        );
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.KeyExpression,
+                            annSrc.GetArgument(OptimizerPatternArgument.KeyExpression)
+                        );
                         break;
 
                     case OptimizerPatternName.DodReverse:
                     case OptimizerPatternName.JoinAndDod:
-                        annDst.AddArgument(OptimizerPatternArgument.DodStep, annSrc.GetArgument(OptimizerPatternArgument.DodStep));
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.DodStep,
+                            annSrc.GetArgument(OptimizerPatternArgument.DodStep)
+                        );
                         break;
 
                     case OptimizerPatternName.MaxPosition:
-                        annDst.AddArgument(OptimizerPatternArgument.MaxPosition, annSrc.GetArgument(OptimizerPatternArgument.MaxPosition));
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.MaxPosition,
+                            annSrc.GetArgument(OptimizerPatternArgument.MaxPosition)
+                        );
                         break;
 
                     case OptimizerPatternName.SingleTextRtf:
-                        annDst.AddArgument(OptimizerPatternArgument.RtfText, annSrc.GetArgument(OptimizerPatternArgument.RtfText));
+                        annDst.AddArgument(
+                            OptimizerPatternArgument.RtfText,
+                            annSrc.GetArgument(OptimizerPatternArgument.RtfText)
+                        );
                         break;
                 }
             }
@@ -210,9 +239,15 @@ namespace System.Xml.Xsl.IlGen
 
             switch ((int)argId)
             {
-                case 0: _arg0 = arg; break;
-                case 1: _arg1 = arg; break;
-                case 2: _arg2 = arg; break;
+                case 0:
+                    _arg0 = arg;
+                    break;
+                case 1:
+                    _arg1 = arg;
+                    break;
+                case 2:
+                    _arg2 = arg;
+                    break;
                 default:
                     Debug.Fail("Cannot handle more than 2 arguments.");
                     break;
@@ -228,9 +263,15 @@ namespace System.Xml.Xsl.IlGen
 
             switch ((int)argNum)
             {
-                case 0: arg = _arg0; break;
-                case 1: arg = _arg1; break;
-                case 2: arg = _arg2; break;
+                case 0:
+                    arg = _arg0;
+                    break;
+                case 1:
+                    arg = _arg1;
+                    break;
+                case 2:
+                    arg = _arg2;
+                    break;
             }
 
             Debug.Assert(arg != null, $"There is no '{argNum}' argument.");

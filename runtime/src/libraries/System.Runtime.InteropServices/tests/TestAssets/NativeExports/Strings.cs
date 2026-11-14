@@ -134,7 +134,7 @@ namespace NativeExports
             *s = ret;
         }
 
-        internal static ushort* Reverse(ushort *s)
+        internal static ushort* Reverse(ushort* s)
         {
             if (s == null)
                 return null;

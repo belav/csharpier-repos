@@ -22,10 +22,13 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             {
                 var testSourceCode = await File.ReadAllTextAsync(src).ConfigureAwait(false);
 
-                var (d, r) = await RoslynTestUtils.RunGenerator(
-                    new LoggerMessageGenerator(),
-                    new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
-                    new[] { testSourceCode }).ConfigureAwait(false);
+                var (d, r) = await RoslynTestUtils
+                    .RunGenerator(
+                        new LoggerMessageGenerator(),
+                        new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
+                        new[] { testSourceCode }
+                    )
+                    .ConfigureAwait(false);
 
                 Assert.True(src.Contains("WithDiagnostics") ? !d.IsEmpty : d.IsEmpty);
                 Assert.Single(r);
@@ -35,7 +38,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task TestBaseline_TestWithSkipEnabledCheck_Success()
         {
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     internal static partial class TestWithSkipEnabledCheck
@@ -44,13 +48,17 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public static partial void M0(ILogger logger);
     }
 }";
-            await VerifyAgainstBaselineUsingFile("TestWithSkipEnabledCheck.generated.txt", testSourceCode);
+            await VerifyAgainstBaselineUsingFile(
+                "TestWithSkipEnabledCheck.generated.txt",
+                testSourceCode
+            );
         }
 
         [Fact]
         public async Task TestBaseline_TestWithDefaultValues_Success()
         {
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     internal static partial class TestWithDefaultValues
@@ -59,7 +67,10 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public static partial void M0(ILogger logger, LogLevel level);
     }
 }";
-            await VerifyAgainstBaselineUsingFile("TestWithDefaultValues.generated.txt", testSourceCode);
+            await VerifyAgainstBaselineUsingFile(
+                "TestWithDefaultValues.generated.txt",
+                testSourceCode
+            );
         }
 
         [Theory]
@@ -69,7 +80,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [InlineData("0, LogLevel.Error, \"M0 {a1} {a2}\", SkipEnabledCheck = false")]
         public async Task TestBaseline_TestWithTwoParams_Success(string argumentList)
         {
-            string testSourceCode = $@"
+            string testSourceCode =
+                $@"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {{
     internal static partial class TestWithTwoParams
@@ -85,7 +97,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public async Task TestBaseline_TestWithMoreThan6Params_Success()
         {
             // TODO: Remove support for more than 6 arguments
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     internal static partial class TestWithMoreThan6Params
@@ -94,13 +107,17 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public static partial void Method9(ILogger logger, int p1, int p2, int p3, int p4, int p5, int p6, System.Collections.Generic.IEnumerable<int> p7);
     }
 }";
-            await VerifyAgainstBaselineUsingFile("TestWithMoreThan6Params.generated.txt", testSourceCode);
+            await VerifyAgainstBaselineUsingFile(
+                "TestWithMoreThan6Params.generated.txt",
+                testSourceCode
+            );
         }
 
         [Fact]
         public async Task TestBaseline_TestWithDynamicLogLevel_Success()
         {
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     internal static partial class TestWithDynamicLogLevel
@@ -109,13 +126,17 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public static partial void M9(LogLevel level, ILogger logger);
     }
 }";
-            await VerifyAgainstBaselineUsingFile("TestWithDynamicLogLevel.generated.txt", testSourceCode);
+            await VerifyAgainstBaselineUsingFile(
+                "TestWithDynamicLogLevel.generated.txt",
+                testSourceCode
+            );
         }
 
         [Fact]
         public async Task TestBaseline_TestWithNestedClass_Success()
         {
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     namespace NestedNamespace
@@ -144,14 +165,18 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         internal class Class2 { }
     }
 }";
-            await VerifyAgainstBaselineUsingFile("TestWithNestedClass.generated.txt", testSourceCode);
+            await VerifyAgainstBaselineUsingFile(
+                "TestWithNestedClass.generated.txt",
+                testSourceCode
+            );
         }
 
 #if ROSLYN4_0_OR_GREATER
         [Fact]
         public async Task TestBaseline_TestWithFileScopedNamespace_Success()
         {
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses;
 
 internal static partial class TestWithDefaultValues
@@ -159,26 +184,45 @@ internal static partial class TestWithDefaultValues
     [LoggerMessage]
     public static partial void M0(ILogger logger, LogLevel level);
 }";
-            await VerifyAgainstBaselineUsingFile("TestWithDefaultValues.generated.txt", testSourceCode);
+            await VerifyAgainstBaselineUsingFile(
+                "TestWithDefaultValues.generated.txt",
+                testSourceCode
+            );
         }
 #endif
 
         private async Task VerifyAgainstBaselineUsingFile(string filename, string testSourceCode)
         {
-            string baseline = LineEndingsHelper.Normalize(await File.ReadAllTextAsync(Path.Combine("Baselines", filename)).ConfigureAwait(false));
-            string[] expectedLines = baseline.Replace("%VERSION%", typeof(LoggerMessageGenerator).Assembly.GetName().Version?.ToString())
-                                             .Split(Environment.NewLine);
+            string baseline = LineEndingsHelper.Normalize(
+                await File.ReadAllTextAsync(Path.Combine("Baselines", filename))
+                    .ConfigureAwait(false)
+            );
+            string[] expectedLines = baseline
+                .Replace(
+                    "%VERSION%",
+                    typeof(LoggerMessageGenerator).Assembly.GetName().Version?.ToString()
+                )
+                .Split(Environment.NewLine);
 
-            var (d, r) = await RoslynTestUtils.RunGenerator(
-                new LoggerMessageGenerator(),
-                new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
-                new[] { testSourceCode }).ConfigureAwait(false);
+            var (d, r) = await RoslynTestUtils
+                .RunGenerator(
+                    new LoggerMessageGenerator(),
+                    new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
+                    new[] { testSourceCode }
+                )
+                .ConfigureAwait(false);
 
             Assert.Empty(d);
             Assert.Single(r);
 
-            Assert.True(RoslynTestUtils.CompareLines(expectedLines, r[0].SourceText,
-                out string errorMessage), errorMessage);
+            Assert.True(
+                RoslynTestUtils.CompareLines(
+                    expectedLines,
+                    r[0].SourceText,
+                    out string errorMessage
+                ),
+                errorMessage
+            );
         }
     }
 }

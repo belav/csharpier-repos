@@ -7,25 +7,25 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.Utils;
-using System.Data.Metadata.Edm;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Data.EntityModel;
 using System.Collections.Generic;
+using System.Data.Common.Utils;
+using System.Data.EntityModel;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Data.Metadata.Edm;
 using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration
 {
-
     // This class is responsible for keeping track of the results from view
     // generation - errors and correct views
     internal class ViewGenResults : InternalBase
     {
-
         #region Constructor
         internal ViewGenResults()
         {
-            m_views = new KeyToListMap<EntitySetBase, GeneratedView>(EqualityComparer<EntitySetBase>.Default);
+            m_views = new KeyToListMap<EntitySetBase, GeneratedView>(
+                EqualityComparer<EntitySetBase>.Default
+            );
             m_errorLog = new ErrorLog();
         }
         #endregion
@@ -39,30 +39,24 @@ namespace System.Data.Mapping.ViewGeneration
         // effects: Returns the generated views
         internal KeyToListMap<EntitySetBase, GeneratedView> Views
         {
-            get
-            {
-                return m_views;
-            }
+            get { return m_views; }
         }
 
         // effects: Returns the errors that were generated. If no errors,
         // returns an empty list
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")] // referenced (indirectly) by System.Data.Entity.Design.dll
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )] // referenced (indirectly) by System.Data.Entity.Design.dll
         internal IEnumerable<EdmSchemaError> Errors
         {
-            get
-            {
-                return m_errorLog.Errors;
-            }
+            get { return m_errorLog.Errors; }
         }
 
         // effects: Returns true iff any error was generated
         internal bool HasErrors
         {
-            get
-            {
-                return m_errorLog.Count > 0;
-            }
+            get { return m_errorLog.Count > 0; }
         }
         #endregion
 

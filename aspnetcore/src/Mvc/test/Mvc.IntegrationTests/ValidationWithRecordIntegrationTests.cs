@@ -93,9 +93,8 @@ public class ValidationWithRecordIntegrationTests
         Assert.False(modelState.IsValid);
 
         var entry = Assert
-            .Single(
-                modelState,
-                e => string.Equals(e.Key, "AccountId", StringComparison.OrdinalIgnoreCase)
+            .Single(modelState, e =>
+                string.Equals(e.Key, "AccountId", StringComparison.OrdinalIgnoreCase)
             )
             .Value;
         var error = Assert.Single(entry.Errors);
@@ -2069,14 +2068,11 @@ public class ValidationWithRecordIntegrationTests
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, int>>(modelBindingResult.Model);
-        Assert.Collection(
-            model.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal("key0", kvp.Key);
-                Assert.Equal(10, kvp.Value);
-            }
-        );
+        Assert.Collection(model.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal("key0", kvp.Key);
+            Assert.Equal(10, kvp.Value);
+        });
 
         Assert.True(modelState.IsValid);
         Assert.Equal(ModelValidationState.Valid, modelState.ValidationState);
@@ -2119,14 +2115,11 @@ public class ValidationWithRecordIntegrationTests
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, NeverValid>>(modelBindingResult.Model);
-        Assert.Collection(
-            model.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal("key0", kvp.Key);
-                Assert.Equal("value0", kvp.Value.NeverValidProperty);
-            }
-        );
+        Assert.Collection(model.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal("key0", kvp.Key);
+            Assert.Equal("value0", kvp.Value.NeverValidProperty);
+        });
 
         Assert.False(modelState.IsValid);
         Assert.Equal(ModelValidationState.Invalid, modelState.ValidationState);
@@ -2409,14 +2402,13 @@ public class ValidationWithRecordIntegrationTests
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                parameterBinder.BindModelAsync(
-                    parameter,
-                    testContext,
-                    modelMetadataProvider,
-                    modelMetadata
-                )
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            )
         );
 
         Assert.Equal(expected, ex.Message);
@@ -2452,14 +2444,13 @@ public class ValidationWithRecordIntegrationTests
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                parameterBinder.BindModelAsync(
-                    parameter,
-                    testContext,
-                    modelMetadataProvider,
-                    modelMetadata
-                )
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            )
         );
 
         Assert.Equal(expected, ex.Message);
@@ -2500,14 +2491,13 @@ public class ValidationWithRecordIntegrationTests
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                parameterBinder.BindModelAsync(
-                    parameter,
-                    testContext,
-                    modelMetadataProvider,
-                    modelMetadata
-                )
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            )
         );
 
         Assert.Equal(expected, ex.Message);

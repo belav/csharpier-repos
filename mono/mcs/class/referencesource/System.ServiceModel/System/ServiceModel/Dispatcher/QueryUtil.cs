@@ -13,9 +13,10 @@ namespace System.ServiceModel.Dispatcher
     {
         // Clear all pools
         void Reset();
+
         // Trim pools
         void Trim();
-    } 
+    }
 #endif
 
     //
@@ -23,8 +24,8 @@ namespace System.ServiceModel.Dispatcher
     //
     internal struct QueryRange
     {
-        internal int end;       // INCLUSIVE - the end of the range
-        internal int start;     // INCLUSIVE - the start of the range
+        internal int end; // INCLUSIVE - the end of the range
+        internal int start; // INCLUSIVE - the start of the range
 #if NO
         internal QueryRange(int offset, QueryRange range)
         {
@@ -32,6 +33,7 @@ namespace System.ServiceModel.Dispatcher
             this.end = range.end + offset;
         }
 #endif
+
         internal QueryRange(int start, int end)
         {
             this.start = start;
@@ -40,42 +42,35 @@ namespace System.ServiceModel.Dispatcher
 
         internal int Count
         {
-            get
-            {
-                return this.end - this.start + 1;
-            }
+            get { return this.end - this.start + 1; }
         }
-#if NO        
+#if NO
         internal int this[int offset]
         {
-            get
-            {
-                return this.start + offset;
-            }
+            get { return this.start + offset; }
         }
-                
+
         internal bool IsNotEmpty
         {
-            get
-            {
-                return (this.end >= this.start);
-            }
+            get { return (this.end >= this.start); }
         }
 
         internal void Clear()
         {
             this.end = this.start - 1;
         }
-                        
+
         internal void Grow(int offset)
         {
             this.end += offset;
         }
 #endif
+
         internal bool IsInRange(int point)
         {
             return (this.start <= point && point <= this.end);
         }
+
 #if NO
         internal void Set(int start, int end)
         {
@@ -83,6 +78,7 @@ namespace System.ServiceModel.Dispatcher
             this.end = end;
         }
 #endif
+
         internal void Shift(int offset)
         {
             this.start += offset;
@@ -97,17 +93,17 @@ namespace System.ServiceModel.Dispatcher
     ///     This allows us to reuse buffers with impunity.
     ///  2. We want to be able to replace the internal buffer in a collection with a different one. Again,
     ///     this is to help with pooling
-    ///  3. We want to be able to control how fast buffers grow. 
+    ///  3. We want to be able to control how fast buffers grow.
     ///  4. Does absolutely no bounds or null checking. As fast as we can make it. All checking should be done
     ///  by whoever wraps this. Checking is unnecessary for many internal uses where we need optimal perf.
     ///  5. Does more precise trimming
     ///  6. AND this is a struct
     ///
-    /// </summary>        
+    /// </summary>
     internal struct QueryBuffer<T>
     {
-        internal T[] buffer;    // buffer of T. Frequently larger than count
-        internal int count;     // Actual # of items
+        internal T[] buffer; // buffer of T. Frequently larger than count
+        internal int count; // Actual # of items
         internal static T[] EmptyBuffer = new T[0];
 
         /// <summary>
@@ -126,92 +122,79 @@ namespace System.ServiceModel.Dispatcher
             }
             this.count = 0;
         }
+
 #if NO
-		internal QueryBuffer(QueryBuffer<T> buffer)
-		{
-		    this.buffer = (T[]) buffer.buffer.Clone();
-		    this.count = buffer.count;
-		}
-		
-		internal QueryBuffer(T[] buffer)
-		{
-      Fx.Assert(null != buffer, "");
+        internal QueryBuffer(QueryBuffer<T> buffer)
+        {
+            this.buffer = (T[])buffer.buffer.Clone();
+            this.count = buffer.count;
+        }
+
+        internal QueryBuffer(T[] buffer)
+        {
+            Fx.Assert(null != buffer, "");
             this.buffer = buffer;
             this.count = 0;
         }
-	
-		/// <summary>
-		/// Get and set the internal buffer
-		/// If you set the buffer, the count will automatically be set to 0
-		/// </summary>
-		internal T[] Buffer
-		{
-		    get
-		    {
-		        return this.buffer;
-		    }
-		    set
-		    {
-          Fx.Assert(null != value, "");
-		        this.buffer = value;
-		        this.count = 0;
-		    }
-		}
+
+        /// <summary>
+        /// Get and set the internal buffer
+        /// If you set the buffer, the count will automatically be set to 0
+        /// </summary>
+        internal T[] Buffer
+        {
+            get { return this.buffer; }
+            set
+            {
+                Fx.Assert(null != value, "");
+                this.buffer = value;
+                this.count = 0;
+            }
+        }
 #endif
+
         /// <summary>
         /// # of items
         /// </summary>
         internal int Count
         {
-            get
-            {
-                return this.count;
-            }
+            get { return this.count; }
 #if NO
-		    set
-		    {
-          Fx.Assert(value >= 0 && value <= this.buffer.Length, "");
-		        this.count = value;
-		    }
+            set
+            {
+                Fx.Assert(value >= 0 && value <= this.buffer.Length, "");
+                this.count = value;
+            }
 #endif
         }
 
 #if NO
-		/// <summary>
-		/// How much can it hold
-		/// </summary>
-		internal int Capacity
-		{
-		    get
-		    {
-		        return this.buffer.Length;
-		    }
-		    set
-		    {
-          Fx.Assert(value >= this.count, "");
-		        if (value > this.buffer.Length)
-		        {
-		            Array.Resize<T>(ref this.buffer, value);
-		        }
-		    }
-		}
+        /// <summary>
+        /// How much can it hold
+        /// </summary>
+        internal int Capacity
+        {
+            get { return this.buffer.Length; }
+            set
+            {
+                Fx.Assert(value >= this.count, "");
+                if (value > this.buffer.Length)
+                {
+                    Array.Resize<T>(ref this.buffer, value);
+                }
+            }
+        }
 #endif
 
         internal T this[int index]
         {
-            get
-            {
-                return this.buffer[index];
-            }
-            set
-            {
-                this.buffer[index] = value;
-            }
+            get { return this.buffer[index]; }
+            set { this.buffer[index] = value; }
         }
 
 #if NO
-		internal void Add()
-		{
+        internal void Add()
+        {
             if (this.count == this.buffer.Length)
             {
                 Array.Resize<T>(ref this.buffer, this.count > 0 ? this.count * 2 : 16);
@@ -238,8 +221,8 @@ namespace System.ServiceModel.Dispatcher
         /// </summary>
         internal void AddReference(ref T t)
         {
-		    if (this.count == this.buffer.Length)
-		    {
+            if (this.count == this.buffer.Length)
+            {
                 Array.Resize<T>(ref this.buffer, this.count > 0 ? this.count * 2 : 16);
             }
             this.buffer[this.count++] = t;
@@ -268,7 +251,7 @@ namespace System.ServiceModel.Dispatcher
             this.count = newCount;
         }
 
-#if NO 
+#if NO
         internal void Add(T[] addBuffer, int startAt, int addCount)
         {
             int newCount = this.count + addCount;
@@ -280,15 +263,15 @@ namespace System.ServiceModel.Dispatcher
             Array.Copy(addBuffer, startAt, this.buffer, this.count, addCount);
             this.count = newCount;
         }
-        
+
         /// <summary>
-		/// Add without attempting to grow the buffer. Faster, but must be used with care.
-		/// Caller must ensure that the buffer is large enough.
-		/// </summary>
+        /// Add without attempting to grow the buffer. Faster, but must be used with care.
+        /// Caller must ensure that the buffer is large enough.
+        /// </summary>
         internal void AddOnly(T t)
-		{
-		    this.buffer[this.count++] = t;
-		}
+        {
+            this.buffer[this.count++] = t;
+        }
 #endif
 
         /// <summary>
@@ -299,15 +282,15 @@ namespace System.ServiceModel.Dispatcher
             this.count = 0;
         }
 
-#if NO        
+#if NO
         //
         // Copy from one location in the buffer to another
         //
         internal void Copy(int from, int to)
         {
-            this.buffer[to] = this.buffer[from];    
+            this.buffer[to] = this.buffer[from];
         }
-        
+
         internal void Copy(int from, int to, int count)
         {
             Array.Copy(this.buffer, from, this.buffer, to, count);
@@ -351,23 +334,23 @@ namespace System.ServiceModel.Dispatcher
 
 #if NO
         /// <summary>
-		/// Ensure that the internal buffer has adequate capacity
-		/// </summary>
-		internal void EnsureCapacity(int capacity)
-		{
-		    if (capacity > this.buffer.Length)
-		    {
-		        this.Grow(capacity);
+        /// Ensure that the internal buffer has adequate capacity
+        /// </summary>
+        internal void EnsureCapacity(int capacity)
+        {
+            if (capacity > this.buffer.Length)
+            {
+                this.Grow(capacity);
             }
-		}		
+        }
 
-  
         internal void Erase()
         {
             Array.Clear(this.buffer, 0, this.count);
             this.count = 0;
         }
 #endif
+
         void Grow(int capacity)
         {
             int newCapacity = this.buffer.Length * 2;
@@ -397,24 +380,27 @@ namespace System.ServiceModel.Dispatcher
             }
             return -1;
         }
-#if NO 
+
+#if NO
         internal void InsertAt(T t, int at)
         {
             this.ReserveAt(at, 1);
             this.buffer[at] = t;
         }
 #endif
+
         internal bool IsValidIndex(int index)
         {
             return (index >= 0 && index < this.count);
         }
-#if NO        
+
+#if NO
         internal T Pop()
         {
             Fx.Assert(this.count > 0, "");
             return this.buffer[--this.count];
         }
-        
+
         internal void Push(T t)
         {
             this.Add(t);
@@ -445,7 +431,7 @@ namespace System.ServiceModel.Dispatcher
             int newCount;
             if (index > this.count)
             {
-                // We want to reserve starting at a location past what is current committed. 
+                // We want to reserve starting at a location past what is current committed.
                 // No shifting needed
                 newCount = index + reserveCount + 1;
                 if (newCount >= this.buffer.Length)
@@ -463,7 +449,13 @@ namespace System.ServiceModel.Dispatcher
                     this.Grow(newCount);
                 }
                 // Move to make room
-                Array.Copy(this.buffer, index, this.buffer, index + reserveCount, this.count - index);
+                Array.Copy(
+                    this.buffer,
+                    index,
+                    this.buffer,
+                    index + reserveCount,
+                    this.count - index
+                );
             }
             this.count = newCount;
         }
@@ -534,7 +526,7 @@ namespace System.ServiceModel.Dispatcher
     }
 
     internal struct SortedBuffer<T, C>
-            where C : IComparer<T>
+        where C : IComparer<T>
     {
         int size;
         T[] buffer;
@@ -551,25 +543,22 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                Fx.Assert(object.ReferenceEquals(DefaultComparer.Comparer, comparerInstance), "The SortedBuffer type has already been initialized with a different comparer instance.");
+                Fx.Assert(
+                    object.ReferenceEquals(DefaultComparer.Comparer, comparerInstance),
+                    "The SortedBuffer type has already been initialized with a different comparer instance."
+                );
             }
         }
 
         internal T this[int index]
         {
-            get
-            {
-                return GetAt(index);
-            }
+            get { return GetAt(index); }
         }
 
         internal int Capacity
         {
-#if NO        
-            get
-            {
-                return this.buffer == null ? 0 : this.buffer.Length;
-            }
+#if NO
+            get { return this.buffer == null ? 0 : this.buffer.Length; }
 #endif
             set
             {
@@ -597,10 +586,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal int Count
         {
-            get
-            {
-                return this.size;
-            }
+            get { return this.size; }
         }
 
         internal int Add(T item)
@@ -631,16 +617,19 @@ namespace System.ServiceModel.Dispatcher
             Array.Copy(this.buffer, 0, array, start, length);
         }
 #endif
+
         internal void Clear()
         {
             this.size = 0;
         }
+
 #if NO
         internal bool Contains(T item)
         {
             return IndexOf(item) >= 0;
         }
 #endif
+
         internal void Exchange(T old, T replace)
         {
             if (Comparer.Compare(old, replace) == 0)
@@ -685,7 +674,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (i >= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new ArgumentException(SR.GetString(SR.QueryItemAlreadyExists)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new ArgumentException(SR.GetString(SR.QueryItemAlreadyExists))
+                );
             }
 
             // If an item is not found, Search returns the bitwise negation of
@@ -781,7 +772,8 @@ namespace System.ServiceModel.Dispatcher
             // [low, high)
             int low = 0;
             int high = this.size;
-            int mid, result;
+            int mid,
+                result;
 
             // Binary search is implemented here so we could look for a type that is different from the
             // buffer type.  Also, the search switches to linear for 8 or fewer elements.
@@ -829,6 +821,7 @@ namespace System.ServiceModel.Dispatcher
             // Return the bitwise negation of the insertion index
             return ~bound;
         }
+
 #if NO
         internal T[] ToArray()
         {
@@ -837,6 +830,7 @@ namespace System.ServiceModel.Dispatcher
             return tmp;
         }
 #endif
+
         internal void Trim()
         {
             this.Capacity = this.size;

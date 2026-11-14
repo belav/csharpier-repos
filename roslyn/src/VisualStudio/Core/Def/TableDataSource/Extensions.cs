@@ -14,7 +14,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     internal static class Extensions
     {
-        public static ImmutableArray<ITrackingPoint> CreateTrackingPoints<TItem>(this Workspace workspace, DocumentId? documentId, ImmutableArray<TItem> items)
+        public static ImmutableArray<ITrackingPoint> CreateTrackingPoints<TItem>(
+            this Workspace workspace,
+            DocumentId? documentId,
+            ImmutableArray<TItem> items
+        )
             where TItem : TableItem
         {
             if (documentId == null)
@@ -70,7 +74,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             }
 
             var adjustedColumn = Math.Max(position.Character, 0);
-            return snapshot.CreateTrackingPoint(textLine.Start + adjustedColumn, PointTrackingMode.Positive);
+            return snapshot.CreateTrackingPoint(
+                textLine.Start + adjustedColumn,
+                PointTrackingMode.Positive
+            );
         }
     }
 }

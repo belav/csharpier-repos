@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDataErrorInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
 
     /// <devdoc>
@@ -15,18 +15,15 @@ namespace System.ComponentModel {
     // 1. an error for each piece of data that can be indexed
     // 2. an error that is valid on the entire data
     //
-    public interface IDataErrorInfo {
-
+    public interface IDataErrorInfo
+    {
         /// <devdoc>
         /// </devdoc>
-        string this[string columnName] {
-            get;
-        }
+        string this[string columnName] { get; }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        string Error {
-            get;
-        }
+        string Error { get; }
     }
 }

@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
 
@@ -16,8 +16,14 @@ namespace System.ServiceModel.Channels
         ContextExchangeMechanism contextExchangeMechanism;
         Uri listenBaseAddress;
 
-        public ContextChannelListener(BindingContext context, ContextExchangeMechanism contextExchangeMechanism)
-            : base(context == null ? null : context.Binding, context == null ? null : context.BuildInnerChannelListener<TChannel>())
+        public ContextChannelListener(
+            BindingContext context,
+            ContextExchangeMechanism contextExchangeMechanism
+        )
+            : base(
+                context == null ? null : context.Binding,
+                context == null ? null : context.BuildInnerChannelListener<TChannel>()
+            )
         {
             if (context == null)
             {
@@ -25,7 +31,9 @@ namespace System.ServiceModel.Channels
             }
             if (!ContextExchangeMechanismHelper.IsDefined(contextExchangeMechanism))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("contextExchangeMechanism"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("contextExchangeMechanism")
+                );
             }
 
             this.contextExchangeMechanism = contextExchangeMechanism;
@@ -34,22 +42,38 @@ namespace System.ServiceModel.Channels
 
         protected override TChannel OnAcceptChannel(TimeSpan timeout)
         {
-            return this.InternalAcceptChannel(((IChannelListener<TChannel>)this.InnerChannelListener).AcceptChannel(timeout));
+            return this.InternalAcceptChannel(
+                ((IChannelListener<TChannel>)this.InnerChannelListener).AcceptChannel(timeout)
+            );
         }
 
-        protected override IAsyncResult OnBeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return ((IChannelListener<TChannel>)this.InnerChannelListener).BeginAcceptChannel(timeout, callback, state);
+            return ((IChannelListener<TChannel>)this.InnerChannelListener).BeginAcceptChannel(
+                timeout,
+                callback,
+                state
+            );
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannelListener.BeginWaitForChannel(timeout, callback, state);
         }
 
         protected override TChannel OnEndAcceptChannel(IAsyncResult result)
         {
-            return this.InternalAcceptChannel(((IChannelListener<TChannel>)this.InnerChannelListener).EndAcceptChannel(result));
+            return this.InternalAcceptChannel(
+                ((IChannelListener<TChannel>)this.InnerChannelListener).EndAcceptChannel(result)
+            );
         }
 
         protected override bool OnEndWaitForChannel(IAsyncResult result)
@@ -71,29 +95,63 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.ContextChannelListenerChannelAccepted,
-                     SR.GetString(SR.TraceCodeContextChannelListenerChannelAccepted), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.ContextChannelListenerChannelAccepted,
+                    SR.GetString(SR.TraceCodeContextChannelListenerChannelAccepted),
+                    this
+                );
             }
 
             if (typeof(TChannel) == typeof(IInputChannel))
             {
-                return (TChannel)(object)new ContextInputChannel(this, (IInputChannel)innerChannel, this.contextExchangeMechanism);
+                return (TChannel)
+                    (object)
+                        new ContextInputChannel(
+                            this,
+                            (IInputChannel)innerChannel,
+                            this.contextExchangeMechanism
+                        );
             }
             else if (typeof(TChannel) == typeof(IInputSessionChannel))
             {
-                return (TChannel)(object)new ContextInputSessionChannel(this, (IInputSessionChannel)innerChannel, this.contextExchangeMechanism);
+                return (TChannel)
+                    (object)
+                        new ContextInputSessionChannel(
+                            this,
+                            (IInputSessionChannel)innerChannel,
+                            this.contextExchangeMechanism
+                        );
             }
             else if (typeof(TChannel) == typeof(IReplyChannel))
             {
-                return (TChannel)(object)new ContextReplyChannel(this, (IReplyChannel)innerChannel, this.contextExchangeMechanism);
+                return (TChannel)
+                    (object)
+                        new ContextReplyChannel(
+                            this,
+                            (IReplyChannel)innerChannel,
+                            this.contextExchangeMechanism
+                        );
             }
             else if (typeof(TChannel) == typeof(IReplySessionChannel))
             {
-                return (TChannel)(object)new ContextReplySessionChannel(this, (IReplySessionChannel)innerChannel, this.contextExchangeMechanism);
+                return (TChannel)
+                    (object)
+                        new ContextReplySessionChannel(
+                            this,
+                            (IReplySessionChannel)innerChannel,
+                            this.contextExchangeMechanism
+                        );
             }
             else // IDuplexSessionChannel
             {
-                return (TChannel)(object)new ContextDuplexSessionChannel(this, (IDuplexSessionChannel)innerChannel, this.contextExchangeMechanism);
+                return (TChannel)
+                    (object)
+                        new ContextDuplexSessionChannel(
+                            this,
+                            (IDuplexSessionChannel)innerChannel,
+                            this.contextExchangeMechanism
+                        );
             }
         }
     }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,38 +30,44 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Web {
+namespace System.Web
+{
+    [Serializable]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
+    public sealed class AspNetHostingPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        private AspNetHostingPermissionLevel _level;
 
-	[Serializable]
-	[AttributeUsage (AttributeTargets.All, AllowMultiple = true, Inherited = false)]
-	public sealed class AspNetHostingPermissionAttribute : CodeAccessSecurityAttribute {
+        public AspNetHostingPermissionAttribute(SecurityAction action)
+            : base(action)
+        {
+            // LAMESPEC: seems to initialize to None
+            _level = AspNetHostingPermissionLevel.None;
+        }
 
-		private AspNetHostingPermissionLevel _level;
+        public override IPermission CreatePermission()
+        {
+            if (base.Unrestricted)
+                return new AspNetHostingPermission(PermissionState.Unrestricted);
+            else
+                return new AspNetHostingPermission(_level);
+        }
 
-		public AspNetHostingPermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-			// LAMESPEC: seems to initialize to None
-			_level = AspNetHostingPermissionLevel.None;
-		}
-
-		public override IPermission CreatePermission ()
-		{
-			if (base.Unrestricted)
-				return new AspNetHostingPermission (PermissionState.Unrestricted);
-			else
-				return new AspNetHostingPermission (_level);
-		}
-
-		public AspNetHostingPermissionLevel Level {
-			get { return _level; }
-			set {
-				if ((value < AspNetHostingPermissionLevel.None) || (value > AspNetHostingPermissionLevel.Unrestricted)) {
-					string msg = Locale.GetText ("Invalid enum {0}.");
-					throw new ArgumentException (String.Format (msg, value), "Level");
-				}
-				_level = value;
-			}
-		}
-	}
+        public AspNetHostingPermissionLevel Level
+        {
+            get { return _level; }
+            set
+            {
+                if (
+                    (value < AspNetHostingPermissionLevel.None)
+                    || (value > AspNetHostingPermissionLevel.Unrestricted)
+                )
+                {
+                    string msg = Locale.GetText("Invalid enum {0}.");
+                    throw new ArgumentException(String.Format(msg, value), "Level");
+                }
+                _level = value;
+            }
+        }
+    }
 }

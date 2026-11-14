@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -30,7 +29,11 @@ namespace System.Net.Http.Tests
 
             MediaTypeHeaderValue expected = new MediaTypeHeaderValue("text/plain");
             expected.CharSet = "utf-8";
-            Assert.True(expected.Equals(parser.ParseValue("   text / plain ; charset = utf-8 ", null, ref index)));
+            Assert.True(
+                expected.Equals(
+                    parser.ParseValue("   text / plain ; charset = utf-8 ", null, ref index)
+                )
+            );
             Assert.Equal(34, index);
         }
 
@@ -42,7 +45,10 @@ namespace System.Net.Http.Tests
             int index = 0;
 
             // only one value allowed.
-            Assert.Throws<FormatException>(() => { parser.ParseValue("text/plain; charset=utf-8, next/mediatype", null, ref index); });
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue("text/plain; charset=utf-8, next/mediatype", null, ref index);
+            });
         }
 
         [Fact]
@@ -51,7 +57,10 @@ namespace System.Net.Http.Tests
             MediaTypeHeaderParser parser = MediaTypeHeaderParser.SingleValueParser;
             int index = 0;
 
-            Assert.Throws<FormatException>(() => { parser.ParseValue(null, null, ref index); });
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue(null, null, ref index);
+            });
         }
 
         [Fact]
@@ -70,7 +79,9 @@ namespace System.Net.Http.Tests
         [Fact]
         public void TryParse_SetOfValidValueStringsForMediaTypeWithQuality_ParsedCorrectly()
         {
-            MediaTypeWithQualityHeaderValue expected = new MediaTypeWithQualityHeaderValue("text/plain");
+            MediaTypeWithQualityHeaderValue expected = new MediaTypeWithQualityHeaderValue(
+                "text/plain"
+            );
             CheckValidParsedValue("text/plain", 0, expected, 10, true);
             CheckValidParsedValue("text/plain,", 0, expected, 11, true);
             CheckValidParsedValue("text/plain , ", 0, expected, 13, true);
@@ -92,7 +103,13 @@ namespace System.Net.Http.Tests
             expected.CharSet = "utf-8";
             CheckValidParsedValue("  text/plain;charset=utf-8", 2, expected, 26, true);
             CheckValidParsedValue("  text/plain;charset=utf-8, ", 1, expected, 28, true);
-            CheckValidParsedValue("  text/plain;charset=utf-8, next/mediatype", 2, expected, 28, true);
+            CheckValidParsedValue(
+                "  text/plain;charset=utf-8, next/mediatype",
+                2,
+                expected,
+                28,
+                true
+            );
         }
 
         [Fact]
@@ -114,7 +131,13 @@ namespace System.Net.Http.Tests
 
             void Check(string input)
             {
-                CheckValidParsedValue(input, 0, expected, expectedIndex: input?.Length ?? 0, supportsMultipleValues: true);
+                CheckValidParsedValue(
+                    input,
+                    0,
+                    expected,
+                    expectedIndex: input?.Length ?? 0,
+                    supportsMultipleValues: true
+                );
 
                 CheckInvalidParsedValue(input, 0, supportsMultipleValues: false);
             }
@@ -148,24 +171,45 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private static void CheckValidParsedValue(string input, int startIndex, MediaTypeHeaderValue expectedResult,
-            int expectedIndex, bool supportsMultipleValues)
+        private static void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            MediaTypeHeaderValue expectedResult,
+            int expectedIndex,
+            bool supportsMultipleValues
+        )
         {
-            MediaTypeHeaderParser parser = supportsMultipleValues ? MediaTypeHeaderParser.MultipleValuesParser : MediaTypeHeaderParser.SingleValueParser;
+            MediaTypeHeaderParser parser = supportsMultipleValues
+                ? MediaTypeHeaderParser.MultipleValuesParser
+                : MediaTypeHeaderParser.SingleValueParser;
 
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out object result),
-                string.Format("TryParse returned false. Input: '{0}', Index: {1}", input, startIndex));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out object result),
+                string.Format(
+                    "TryParse returned false. Input: '{0}', Index: {1}",
+                    input,
+                    startIndex
+                )
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(expectedResult, result);
         }
 
-        private static void CheckInvalidParsedValue(string input, int startIndex, bool supportsMultipleValues)
+        private static void CheckInvalidParsedValue(
+            string input,
+            int startIndex,
+            bool supportsMultipleValues
+        )
         {
-            MediaTypeHeaderParser parser = supportsMultipleValues ? MediaTypeHeaderParser.MultipleValuesParser : MediaTypeHeaderParser.SingleValueParser;
+            MediaTypeHeaderParser parser = supportsMultipleValues
+                ? MediaTypeHeaderParser.MultipleValuesParser
+                : MediaTypeHeaderParser.SingleValueParser;
 
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out object result),
-                string.Format("TryParse returned true. Input: '{0}', Index: {1}", input, startIndex));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out object result),
+                string.Format("TryParse returned true. Input: '{0}', Index: {1}", input, startIndex)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

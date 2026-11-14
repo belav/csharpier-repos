@@ -7,7 +7,8 @@ using System.Diagnostics;
 
 internal static class DataSetUtil
 {
-    internal static void CheckArgumentNull<T>(T argumentValue, string argumentName) where T : class
+    internal static void CheckArgumentNull<T>(T argumentValue, string argumentName)
+        where T : class
     {
         if (null == argumentValue)
         {
@@ -25,7 +26,10 @@ internal static class DataSetUtil
         return new ArgumentNullException(message);
     }
 
-    internal static ArgumentOutOfRangeException ArgumentOutOfRange(string message, string parameterName)
+    internal static ArgumentOutOfRangeException ArgumentOutOfRange(
+        string message,
+        string parameterName
+    )
     {
         return new ArgumentOutOfRangeException(parameterName, message);
     }
@@ -47,7 +51,14 @@ internal static class DataSetUtil
 
     internal static ArgumentOutOfRangeException InvalidEnumerationValue(Type type, int value)
     {
-        return ArgumentOutOfRange(SR.Format(SR.DataSetLinq_InvalidEnumerationValue, type.Name, value.ToString(System.Globalization.CultureInfo.InvariantCulture)), type.Name);
+        return ArgumentOutOfRange(
+            SR.Format(
+                SR.DataSetLinq_InvalidEnumerationValue,
+                type.Name,
+                value.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            ),
+            type.Name
+        );
     }
 
     internal static ArgumentOutOfRangeException InvalidDataRowState(DataRowState value)
@@ -82,17 +93,18 @@ internal static class DataSetUtil
         return InvalidEnumerationValue(typeof(LoadOption), (int)value);
     }
 
-
     internal static bool IsCatchableExceptionType(Exception e)
     {
         // a 'catchable' exception is defined by what it is not.
         // only StackOverflowException & ThreadAbortException are sealed classes
 
-        return ((e.GetType() != typeof(StackOverflowException)) &&
-                 (e.GetType() != typeof(OutOfMemoryException)) &&
-                 (e.GetType() != typeof(System.Threading.ThreadAbortException)) &&
-                 (e.GetType() != typeof(NullReferenceException)) &&
-                 (e.GetType() != typeof(System.Security.SecurityException)) &&
-                 !typeof(System.Security.SecurityException).IsAssignableFrom(e.GetType()));
+        return (
+            (e.GetType() != typeof(StackOverflowException))
+            && (e.GetType() != typeof(OutOfMemoryException))
+            && (e.GetType() != typeof(System.Threading.ThreadAbortException))
+            && (e.GetType() != typeof(NullReferenceException))
+            && (e.GetType() != typeof(System.Security.SecurityException))
+            && !typeof(System.Security.SecurityException).IsAssignableFrom(e.GetType())
+        );
     }
 }

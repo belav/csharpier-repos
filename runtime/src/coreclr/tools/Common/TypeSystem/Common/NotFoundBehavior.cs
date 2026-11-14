@@ -7,6 +7,6 @@ namespace Internal.TypeSystem
     {
         Throw,
         ReturnNull,
-        ReturnResolutionFailure
+        ReturnResolutionFailure,
     }
 }

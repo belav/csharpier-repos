@@ -10,8 +10,10 @@ internal class AA
 {
     [FieldOffset(13)]
     public long tmp1;
+
     [FieldOffset(7)]
     public long tmp2;
+
     [FieldOffset(7)]
     public long tmp3;
 
@@ -20,8 +22,10 @@ internal class AA
 
     [FieldOffset(36)]
     public int tmp4;
+
     [FieldOffset(44)]
     public long tmp5;
+
     [FieldOffset(39)]
     public uint tmp6;
 
@@ -41,14 +45,20 @@ internal class AA
     public static AA[,,] aa_init = new AA[1, 101, 2];
     public static AA[,,] aa_zero = new AA[1, 101, 2];
     public static object b_init = new AA(100);
-    public static AA _init, _zero;
+    public static AA _init,
+        _zero;
 
-    public static float call_target(float arg) { return arg; }
-    public static float call_target_ref(ref float arg) { return arg; }
-
-    public void verify()
+    public static float call_target(float arg)
     {
+        return arg;
     }
+
+    public static float call_target_ref(ref float arg)
+    {
+        return arg;
+    }
+
+    public void verify() { }
 
     public static void verify_all()
     {
@@ -77,7 +87,8 @@ internal class AA
 
 internal struct BB
 {
-    public static AA f_init, f_zero;
+    public static AA f_init,
+        f_zero;
 }
 
 public static class Test_expl_gc_float_1

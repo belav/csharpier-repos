@@ -29,270 +29,346 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Globalization;
+using System.Reflection;
+using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using System.Text;
 
 namespace Microsoft.Build.BuildEngine
 {
-	class MemberInvocationReference : IReference
-	{
-		Type type;
-		readonly string name;
+    class MemberInvocationReference : IReference
+    {
+        Type type;
+        readonly string name;
 
-		static readonly char[] ArgumentTrimChars = new char[] { '\"', '\'', '`' };
-		static readonly object ConversionFailed = new object ();
+        static readonly char[] ArgumentTrimChars = new char[] { '\"', '\'', '`' };
+        static readonly object ConversionFailed = new object();
 
-		public MemberInvocationReference (Type type, string name)
-		{
-			this.type = type;
-			this.name = name;
-		}
+        public MemberInvocationReference(Type type, string name)
+        {
+            this.type = type;
+            this.name = name;
+        }
 
-		public List<string> Arguments { get; set; }
+        public List<string> Arguments { get; set; }
 
-		public IReference Instance { get; set; }
+        public IReference Instance { get; set; }
 
-		public string ConvertToString (Project project, ExpressionOptions options)
-		{
-			return ConvertResult (Invoke (project, options));
-		}
+        public string ConvertToString(Project project, ExpressionOptions options)
+        {
+            return ConvertResult(Invoke(project, options));
+        }
 
-		object Invoke (Project project, ExpressionOptions options)
-		{
-			var flags = BindingFlags.IgnoreCase | BindingFlags.Public;
-			object target;
-			string member_name = name;
+        object Invoke(Project project, ExpressionOptions options)
+        {
+            var flags = BindingFlags.IgnoreCase | BindingFlags.Public;
+            object target;
+            string member_name = name;
 
-			if (Instance == null) {
-				target = null;
-				if (string.Equals (member_name, "new", StringComparison.OrdinalIgnoreCase)) {
-					member_name = ConstructorInfo.ConstructorName;
-					flags |= BindingFlags.CreateInstance | BindingFlags.Instance;
-				} else {
-					flags |= BindingFlags.Static;
-				}
-			} else {
-				var mir = Instance as MemberInvocationReference;
-				if (mir != null) {
-					target = mir.Invoke (project, options);
-					if (target == null) {
-						throw new NotImplementedException ("Instance method on null value");
-					}
+            if (Instance == null)
+            {
+                target = null;
+                if (string.Equals(member_name, "new", StringComparison.OrdinalIgnoreCase))
+                {
+                    member_name = ConstructorInfo.ConstructorName;
+                    flags |= BindingFlags.CreateInstance | BindingFlags.Instance;
+                }
+                else
+                {
+                    flags |= BindingFlags.Static;
+                }
+            }
+            else
+            {
+                var mir = Instance as MemberInvocationReference;
+                if (mir != null)
+                {
+                    target = mir.Invoke(project, options);
+                    if (target == null)
+                    {
+                        throw new NotImplementedException("Instance method on null value");
+                    }
 
-					type = target.GetType ();
-				} else {
-					target = Instance.ConvertToString (project, options);
-					type = typeof (string);
-				}
+                    type = target.GetType();
+                }
+                else
+                {
+                    target = Instance.ConvertToString(project, options);
+                    type = typeof(string);
+                }
 
-				flags |= BindingFlags.Instance;
-			}
+                flags |= BindingFlags.Instance;
+            }
 
-			object[] args;
-			if (Arguments == null) {
-				if ((flags & BindingFlags.CreateInstance) == 0)
-					flags |= BindingFlags.GetProperty;
-				args = null;
-			} else {
-				if ((flags & BindingFlags.CreateInstance) == 0)
-					flags |= BindingFlags.InvokeMethod;
-				ExpandArguments (project, options);
-				args = PrepareMethodArguments (member_name, flags);
-				if (args == null)
-					throw new InvalidProjectFileException (string.Format ("Method '{0}({1})' arguments cannot be evaluated'", name, string.Join (", ", Arguments.ToArray ())));
-			}
+            object[] args;
+            if (Arguments == null)
+            {
+                if ((flags & BindingFlags.CreateInstance) == 0)
+                    flags |= BindingFlags.GetProperty;
+                args = null;
+            }
+            else
+            {
+                if ((flags & BindingFlags.CreateInstance) == 0)
+                    flags |= BindingFlags.InvokeMethod;
+                ExpandArguments(project, options);
+                args = PrepareMethodArguments(member_name, flags);
+                if (args == null)
+                    throw new InvalidProjectFileException(
+                        string.Format(
+                            "Method '{0}({1})' arguments cannot be evaluated'",
+                            name,
+                            string.Join(", ", Arguments.ToArray())
+                        )
+                    );
+            }
 
-			object value;
-			try {
-				value = type.InvokeMember (member_name, flags, null, target, args, CultureInfo.InvariantCulture);
-			} catch (MissingMethodException) {
-				//
-				// It can be field/constant instead of a property
-				//
-				if (args == null && Instance == null) {
-					flags &= ~BindingFlags.GetProperty;
-					flags |= BindingFlags.GetField;
-					value = type.InvokeMember (member_name, flags, null, null, null, CultureInfo.InvariantCulture);
-				} else {
-					throw;
-				}
-			}
+            object value;
+            try
+            {
+                value = type.InvokeMember(
+                    member_name,
+                    flags,
+                    null,
+                    target,
+                    args,
+                    CultureInfo.InvariantCulture
+                );
+            }
+            catch (MissingMethodException)
+            {
+                //
+                // It can be field/constant instead of a property
+                //
+                if (args == null && Instance == null)
+                {
+                    flags &= ~BindingFlags.GetProperty;
+                    flags |= BindingFlags.GetField;
+                    value = type.InvokeMember(
+                        member_name,
+                        flags,
+                        null,
+                        null,
+                        null,
+                        CultureInfo.InvariantCulture
+                    );
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-			return value;
-		}
+            return value;
+        }
 
-		static string TrimFirstAndLast(string unTrimmed)
-		{
-			if (unTrimmed.Length > 1 && Array.IndexOf (ArgumentTrimChars, unTrimmed [0]) != -1 && Array.IndexOf (ArgumentTrimChars, unTrimmed [unTrimmed.Length - 1]) != -1) {
-				return unTrimmed.Substring (1, unTrimmed.Length - 2);
-			}
-			return unTrimmed;
-		}
+        static string TrimFirstAndLast(string unTrimmed)
+        {
+            if (
+                unTrimmed.Length > 1
+                && Array.IndexOf(ArgumentTrimChars, unTrimmed[0]) != -1
+                && Array.IndexOf(ArgumentTrimChars, unTrimmed[unTrimmed.Length - 1]) != -1
+            )
+            {
+                return unTrimmed.Substring(1, unTrimmed.Length - 2);
+            }
+            return unTrimmed;
+        }
 
-		void ExpandArguments (Project project, ExpressionOptions options)
-		{
-			for (int i = 0; i < Arguments.Count; ++i) {
-				string arg = Arguments [i].Trim ();
-				if (string.Equals (arg, "null", StringComparison.OrdinalIgnoreCase)) {
-					arg = null;
-				} else {
-					arg = Expression.ParseAs<string> (arg, ParseOptions.None,
-						project, options);
+        void ExpandArguments(Project project, ExpressionOptions options)
+        {
+            for (int i = 0; i < Arguments.Count; ++i)
+            {
+                string arg = Arguments[i].Trim();
+                if (string.Equals(arg, "null", StringComparison.OrdinalIgnoreCase))
+                {
+                    arg = null;
+                }
+                else
+                {
+                    arg = Expression.ParseAs<string>(arg, ParseOptions.None, project, options);
 
-					arg = TrimFirstAndLast (arg);
-				}
+                    arg = TrimFirstAndLast(arg);
+                }
 
-				Arguments [i] = arg;
-			}
-		}
+                Arguments[i] = arg;
+            }
+        }
 
-		object[] PrepareMethodArguments (string name, BindingFlags flags)
-		{
-			var candidates = type.GetMember (name, MemberTypes.Method | MemberTypes.Constructor, flags);
-			object[] args = null;
-			ParameterInfo[] best = null;
-			foreach (MethodBase candidate in candidates) {
-				var parameters = candidate.GetParameters ();
-				if (parameters.Length != Arguments.Count)
-					continue;
+        object[] PrepareMethodArguments(string name, BindingFlags flags)
+        {
+            var candidates = type.GetMember(
+                name,
+                MemberTypes.Method | MemberTypes.Constructor,
+                flags
+            );
+            object[] args = null;
+            ParameterInfo[] best = null;
+            foreach (MethodBase candidate in candidates)
+            {
+                var parameters = candidate.GetParameters();
+                if (parameters.Length != Arguments.Count)
+                    continue;
 
-				if (parameters.Length == 0)
-					return new object [0];
+                if (parameters.Length == 0)
+                    return new object[0];
 
-				object[] cand_args = null;
-				for (int i = 0; i < parameters.Length; ++i) {
-					var target = ConvertArgument (Arguments [i], parameters [i]);
-					if (target == ConversionFailed) {
-						cand_args = null;
-						break;
-					}
+                object[] cand_args = null;
+                for (int i = 0; i < parameters.Length; ++i)
+                {
+                    var target = ConvertArgument(Arguments[i], parameters[i]);
+                    if (target == ConversionFailed)
+                    {
+                        cand_args = null;
+                        break;
+                    }
 
-					if (cand_args == null)
-						cand_args = new object[parameters.Length];
+                    if (cand_args == null)
+                        cand_args = new object[parameters.Length];
 
-					cand_args [i] = target;
-				}
+                    cand_args[i] = target;
+                }
 
-				if (cand_args == null)
-					continue;
+                if (cand_args == null)
+                    continue;
 
-				if (args == null) {
-					args = cand_args;
-					best = parameters;
-					continue;
-				}
+                if (args == null)
+                {
+                    args = cand_args;
+                    best = parameters;
+                    continue;
+                }
 
-				if (BetterCandidate (best, parameters) > 1) {
-					args = cand_args;
-					best = parameters;
-				}
-			}
+                if (BetterCandidate(best, parameters) > 1)
+                {
+                    args = cand_args;
+                    best = parameters;
+                }
+            }
 
-			return args;
-		}
+            return args;
+        }
 
-		static object ConvertArgument (object value, ParameterInfo target)
-		{
-			var ptype = target.ParameterType;
-			if (ptype.IsEnum) {
-				var s = value as string;
-				if (s != null)
-					return ConvertToEnum (s, ptype);
-			} else if (ptype == typeof (char[])) {
-				var s = value as string;
-				if (s != null)
-					return s.ToCharArray ();
-			}
+        static object ConvertArgument(object value, ParameterInfo target)
+        {
+            var ptype = target.ParameterType;
+            if (ptype.IsEnum)
+            {
+                var s = value as string;
+                if (s != null)
+                    return ConvertToEnum(s, ptype);
+            }
+            else if (ptype == typeof(char[]))
+            {
+                var s = value as string;
+                if (s != null)
+                    return s.ToCharArray();
+            }
 
-			try {
-				return Convert.ChangeType (value, ptype, CultureInfo.InvariantCulture);
-			} catch {
-				return ConversionFailed;
-			}
-		}
+            try
+            {
+                return Convert.ChangeType(value, ptype, CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                return ConversionFailed;
+            }
+        }
 
-		static object ConvertToEnum (string s, Type type)
-		{
-			var dot = s.IndexOf ('.');
-			if (dot < 0)
-				return ConversionFailed;
+        static object ConvertToEnum(string s, Type type)
+        {
+            var dot = s.IndexOf('.');
+            if (dot < 0)
+                return ConversionFailed;
 
-			var fn = type.FullName + ".";
-			if (s.StartsWith (fn, StringComparison.Ordinal)) {
-				s = s.Substring (fn.Length);
-			} else if (s.StartsWith (type.Name, StringComparison.Ordinal) && s [type.Name.Length] == '.') {
-				s = s.Substring (type.Name.Length + 1);
-			}
+            var fn = type.FullName + ".";
+            if (s.StartsWith(fn, StringComparison.Ordinal))
+            {
+                s = s.Substring(fn.Length);
+            }
+            else if (
+                s.StartsWith(type.Name, StringComparison.Ordinal)
+                && s[type.Name.Length] == '.'
+            )
+            {
+                s = s.Substring(type.Name.Length + 1);
+            }
 
-			try {
-				return Enum.Parse (type, s);
-			} catch {
-				return ConversionFailed;
-			}
-		}
+            try
+            {
+                return Enum.Parse(type, s);
+            }
+            catch
+            {
+                return ConversionFailed;
+            }
+        }
 
-		static string ConvertResult (object value)
-		{
-			if (value is string)
-				return (string)value;
+        static string ConvertResult(object value)
+        {
+            if (value is string)
+                return (string)value;
 
-			var e = value as IEnumerable;
-			if (e != null) {
-				var sb = new StringBuilder ();
-				foreach (var entry in e) {
-					if (sb.Length > 0)
-						sb.Append (";");
+            var e = value as IEnumerable;
+            if (e != null)
+            {
+                var sb = new StringBuilder();
+                foreach (var entry in e)
+                {
+                    if (sb.Length > 0)
+                        sb.Append(";");
 
-					sb.Append (ConvertResult (entry));
-				}
+                    sb.Append(ConvertResult(entry));
+                }
 
-				return sb.ToString ();
-			}
+                return sb.ToString();
+            }
 
-			return value == null ? "" : value.ToString ();
-		}
+            return value == null ? "" : value.ToString();
+        }
 
-		//
-		// Returns better candidate for untyped string values. We can really do only
-		// preference for string over any other types
-		//
-		// 1: a is better
-		// 2: b is better
-		// 0: neither is better
-		//
-		static int BetterCandidate (ParameterInfo[] a, ParameterInfo[] b)
-		{
-			int res = 0;
-			for (int i = 0; i < a.Length; ++i) {
-				var atype = a [i].ParameterType;
-				var btype = b [i].ParameterType;
+        //
+        // Returns better candidate for untyped string values. We can really do only
+        // preference for string over any other types
+        //
+        // 1: a is better
+        // 2: b is better
+        // 0: neither is better
+        //
+        static int BetterCandidate(ParameterInfo[] a, ParameterInfo[] b)
+        {
+            int res = 0;
+            for (int i = 0; i < a.Length; ++i)
+            {
+                var atype = a[i].ParameterType;
+                var btype = b[i].ParameterType;
 
-				if (atype == typeof (string) && btype != atype) {
-					if (res < 2)
-						res = 1;
-					continue;
-				}
+                if (atype == typeof(string) && btype != atype)
+                {
+                    if (res < 2)
+                        res = 1;
+                    continue;
+                }
 
-				if (btype == typeof (string) && btype != atype) {
-					if (res != 1)
-						res = 2;
+                if (btype == typeof(string) && btype != atype)
+                {
+                    if (res != 1)
+                        res = 2;
 
-					continue;
-				}
-			}
+                    continue;
+                }
+            }
 
-			return res;
-		}
+            return res;
+        }
 
-		public ITaskItem[] ConvertToITaskItemArray (Project project, ExpressionOptions options)
-		{
-			var items = new ITaskItem[1];
-			items[0] = new TaskItem (ConvertToString (project, options));
+        public ITaskItem[] ConvertToITaskItemArray(Project project, ExpressionOptions options)
+        {
+            var items = new ITaskItem[1];
+            items[0] = new TaskItem(ConvertToString(project, options));
 
-			return items;
-		}
-	}
+            return items;
+        }
+    }
 }

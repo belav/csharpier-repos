@@ -7,11 +7,10 @@ public class PartitionKeyTest : IClassFixture<PartitionKeyTest.CosmosPartitionKe
 {
     private const string DatabaseName = nameof(PartitionKeyTest);
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
     protected CosmosPartitionKeyFixture Fixture { get; }
 
@@ -24,8 +23,7 @@ public class PartitionKeyTest : IClassFixture<PartitionKeyTest.CosmosPartitionKe
     [ConditionalFact]
     public virtual async Task Can_add_update_delete_end_to_end_with_partition_key()
     {
-        const string readSql =
-            """
+        const string readSql = """
 SELECT c
 FROM root c
 WHERE (c["Discriminator"] = "Customer")
@@ -38,14 +36,14 @@ OFFSET 0 LIMIT 1
             readSql,
             ctx => ctx.Customers.OrderBy(c => c.PartitionKey).LastAsync(),
             ctx => ctx.Customers.OrderBy(c => c.PartitionKey).ToListAsync(),
-            2);
+            2
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Can_add_update_delete_end_to_end_with_with_partition_key_extension()
     {
-        const string readSql =
-            """
+        const string readSql = """
 SELECT c
 FROM root c
 WHERE (c["Discriminator"] = "Customer")
@@ -57,14 +55,14 @@ OFFSET 0 LIMIT 1
             readSql,
             ctx => ctx.Customers.WithPartitionKey("2").LastAsync(),
             ctx => ctx.Customers.WithPartitionKey("2").ToListAsync(),
-            1);
+            1
+        );
     }
 
     [ConditionalFact]
     public async Task Can_query_with_implicit_partition_key_filter()
     {
-        const string readSql =
-            """
+        const string readSql = """
 SELECT c
 FROM root c
 WHERE ((c["Discriminator"] = "Customer") AND ((c["Id"] = 42) OR (c["Name"] = "John Snow")))
@@ -72,15 +70,18 @@ OFFSET 0 LIMIT 1
 """;
 
         await PartitionKeyTestAsync(
-            ctx => ctx.Customers
-                .Where(b => (b.Id == 42 || b.Name == "John Snow") && b.PartitionKey == 1)
-                .FirstAsync(),
+            ctx =>
+                ctx.Customers.Where(b =>
+                        (b.Id == 42 || b.Name == "John Snow") && b.PartitionKey == 1
+                    )
+                    .FirstAsync(),
             readSql,
             ctx => ctx.Customers.WithPartitionKey("2").LastAsync(),
-            ctx => ctx.Customers
-                .Where(b => b.Id == 42 && (b.PartitionKey == 1 || b.PartitionKey == 2))
-                .ToListAsync(),
-            2);
+            ctx =>
+                ctx.Customers.Where(b => b.Id == 42 && (b.PartitionKey == 1 || b.PartitionKey == 2))
+                    .ToListAsync(),
+            2
+        );
     }
 
     protected virtual async Task PartitionKeyTestAsync(
@@ -88,20 +89,21 @@ OFFSET 0 LIMIT 1
         string readSql,
         Func<PartitionKeyContext, Task<Customer>> readLastTask,
         Func<PartitionKeyContext, Task<List<Customer>>> readListTask,
-        int listCount)
+        int listCount
+    )
     {
         var customer1 = new Customer
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = 1
+            PartitionKey = 1,
         };
 
         var customer2 = new Customer
         {
             Id = 42,
             Name = "Theon Twin",
-            PartitionKey = 2
+            PartitionKey = 2,
         };
 
         await using (var innerContext = CreateContext())
@@ -145,7 +147,8 @@ OFFSET 0 LIMIT 1
 
             Assert.Equal(
                 CoreStrings.KeyReadOnly(nameof(Customer.PartitionKey), nameof(Customer)),
-                Assert.Throws<InvalidOperationException>(() => innerContext.SaveChanges()).Message);
+                Assert.Throws<InvalidOperationException>(() => innerContext.SaveChanges()).Message
+            );
         }
 
         // Read update & delete
@@ -170,22 +173,18 @@ OFFSET 0 LIMIT 1
         }
     }
 
-    protected PartitionKeyContext CreateContext()
-        => Fixture.CreateContext();
+    protected PartitionKeyContext CreateContext() => Fixture.CreateContext();
 
     public class CosmosPartitionKeyFixture : SharedStoreFixtureBase<PartitionKeyContext>
     {
-        protected override string StoreName
-            => DatabaseName;
+        protected override string StoreName => DatabaseName;
 
-        protected override bool UsePooling
-            => false;
+        protected override bool UsePooling => false;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+        public TestSqlLoggerFactory TestSqlLoggerFactory =>
+            (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
     }
 
     public class PartitionKeyContext : DbContext
@@ -193,18 +192,15 @@ OFFSET 0 LIMIT 1
         public virtual DbSet<Customer> Customers { get; set; }
 
         public PartitionKeyContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Customer>(
-                cb =>
-                {
-                    cb.HasPartitionKey(c => c.PartitionKey);
-                    cb.Property(c => c.PartitionKey).HasConversion<string>();
-                    cb.HasKey(c => new { c.Id, c.PartitionKey });
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Customer>(cb =>
+            {
+                cb.HasPartitionKey(c => c.PartitionKey);
+                cb.Property(c => c.PartitionKey).HasConversion<string>();
+                cb.HasKey(c => new { c.Id, c.PartitionKey });
+            });
     }
 
     public class Customer

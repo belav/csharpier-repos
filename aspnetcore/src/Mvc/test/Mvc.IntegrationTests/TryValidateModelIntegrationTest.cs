@@ -147,10 +147,8 @@ public class TryValidateModelIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
         var modelState = testContext.ModelState;
         var model = new ModelLevelErrorTest();
-        var controller = CreateController(
-            testContext,
-            testContext.MetadataProvider,
-            o => o.ValidateComplexTypesIfChildValidationFails = true
+        var controller = CreateController(testContext, testContext.MetadataProvider, o =>
+            o.ValidateComplexTypesIfChildValidationFails = true
         );
 
         // Act
@@ -172,10 +170,8 @@ public class TryValidateModelIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
         var modelState = testContext.ModelState;
         var model = new ModelLevelErrorTest();
-        var controller = CreateController(
-            testContext,
-            testContext.MetadataProvider,
-            o => o.ValidateComplexTypesIfChildValidationFails = false
+        var controller = CreateController(testContext, testContext.MetadataProvider, o =>
+            o.ValidateComplexTypesIfChildValidationFails = false
         );
 
         // Act

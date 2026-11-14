@@ -83,9 +83,16 @@ namespace System.IO.IsolatedStorage
             return null;
         }
 
-        [UnconditionalSuppressMessage("SingleFile", "IL3000:Avoid accessing Assembly file path when publishing as a single file",
-            Justification = "Code handles single-file deployment by using the information of the .exe file")]
-        internal static void GetDefaultIdentityAndHash(out object identity, out string hash, char separator)
+        [UnconditionalSuppressMessage(
+            "SingleFile",
+            "IL3000:Avoid accessing Assembly file path when publishing as a single file",
+            Justification = "Code handles single-file deployment by using the information of the .exe file"
+        )]
+        internal static void GetDefaultIdentityAndHash(
+            out object identity,
+            out string hash,
+            char separator
+        )
         {
             // In .NET Framework IsolatedStorage uses identity from System.Security.Policy.Evidence to build
             // the folder structure on disk. It would use the "best" available evidence in this order:
@@ -130,14 +137,27 @@ namespace System.IO.IsolatedStorage
             if (string.IsNullOrEmpty(location))
                 throw new IsolatedStorageException(SR.IsolatedStorage_Init);
             Uri locationUri = new Uri(location);
-            hash = string.Concat("Url", new ReadOnlySpan<char>(in separator), IdentityHelper.GetNormalizedUriHash(locationUri));
+            hash = string.Concat(
+                "Url",
+                new ReadOnlySpan<char>(in separator),
+                IdentityHelper.GetNormalizedUriHash(locationUri)
+            );
             identity = locationUri;
         }
 
-        internal static bool IsMachine(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Machine) != 0);
-        internal static bool IsAssembly(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Assembly) != 0);
-        internal static bool IsApplication(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Application) != 0);
-        internal static bool IsRoaming(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Roaming) != 0);
-        internal static bool IsDomain(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Domain) != 0);
+        internal static bool IsMachine(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Machine) != 0);
+
+        internal static bool IsAssembly(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Assembly) != 0);
+
+        internal static bool IsApplication(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Application) != 0);
+
+        internal static bool IsRoaming(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Roaming) != 0);
+
+        internal static bool IsDomain(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Domain) != 0);
     }
 }

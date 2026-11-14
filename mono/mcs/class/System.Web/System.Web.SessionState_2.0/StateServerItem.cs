@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,43 +30,45 @@
 //
 using System;
 
-namespace System.Web.SessionState {
-	[Serializable]
-	internal class StateServerItem {
-		public byte [] CollectionData;
-		public byte [] StaticObjectsData;
-		DateTime last_access;
-		public int Timeout;
-		public Int32 LockId;
-		public bool Locked;
-		public DateTime LockedTime;
-		public SessionStateActions Action;
+namespace System.Web.SessionState
+{
+    [Serializable]
+    internal class StateServerItem
+    {
+        public byte[] CollectionData;
+        public byte[] StaticObjectsData;
+        DateTime last_access;
+        public int Timeout;
+        public Int32 LockId;
+        public bool Locked;
+        public DateTime LockedTime;
+        public SessionStateActions Action;
 
-		public StateServerItem (int timeout) : this (null, null, timeout)
-		{
-		}
-		
-		public StateServerItem (byte [] collection_data, byte [] sobjs_data, int timeout)
-		{
-			this.CollectionData = collection_data;
-			this.StaticObjectsData = sobjs_data;
-			this.Timeout = timeout;
-			this.last_access = DateTime.UtcNow;
-			this.Locked = false;
-			this.LockId = Int32.MinValue;
-			this.LockedTime = DateTime.MinValue;
-			this.Action = SessionStateActions.None;
-		}
-		
-		public void Touch ()
-		{
-			last_access = DateTime.UtcNow;
-		}
+        public StateServerItem(int timeout)
+            : this(null, null, timeout) { }
 
-		public bool IsAbandoned () {
-			if (last_access.AddMinutes (Timeout) < DateTime.UtcNow)
-				return true;
-			return false;
-		}
-	}
+        public StateServerItem(byte[] collection_data, byte[] sobjs_data, int timeout)
+        {
+            this.CollectionData = collection_data;
+            this.StaticObjectsData = sobjs_data;
+            this.Timeout = timeout;
+            this.last_access = DateTime.UtcNow;
+            this.Locked = false;
+            this.LockId = Int32.MinValue;
+            this.LockedTime = DateTime.MinValue;
+            this.Action = SessionStateActions.None;
+        }
+
+        public void Touch()
+        {
+            last_access = DateTime.UtcNow;
+        }
+
+        public bool IsAbandoned()
+        {
+            if (last_access.AddMinutes(Timeout) < DateTime.UtcNow)
+                return true;
+            return false;
+        }
+    }
 }

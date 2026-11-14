@@ -26,7 +26,8 @@ public class SqlServerAggregateFunctionExpression : SqlExpression
         bool nullable,
         IEnumerable<bool> argumentsPropagateNullability,
         Type type,
-        RelationalTypeMapping? typeMapping)
+        RelationalTypeMapping? typeMapping
+    )
         : base(type, typeMapping)
     {
         Name = name;
@@ -132,7 +133,8 @@ public class SqlServerAggregateFunctionExpression : SqlExpression
                 IsNullable,
                 ArgumentsPropagateNullability,
                 Type,
-                TypeMapping)
+                TypeMapping
+            )
             : this;
     }
 
@@ -142,15 +144,18 @@ public class SqlServerAggregateFunctionExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SqlServerAggregateFunctionExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
-        => new(
+    public virtual SqlServerAggregateFunctionExpression ApplyTypeMapping(
+        RelationalTypeMapping? typeMapping
+    ) =>
+        new(
             Name,
             Arguments,
             Orderings,
             IsNullable,
             ArgumentsPropagateNullability,
             Type,
-            typeMapping ?? TypeMapping);
+            typeMapping ?? TypeMapping
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -160,18 +165,20 @@ public class SqlServerAggregateFunctionExpression : SqlExpression
     /// </summary>
     public virtual SqlServerAggregateFunctionExpression Update(
         IReadOnlyList<SqlExpression> arguments,
-        IReadOnlyList<OrderingExpression> orderings)
-        => (ReferenceEquals(arguments, Arguments) || arguments.SequenceEqual(Arguments))
-            && (ReferenceEquals(orderings, Orderings) || orderings.SequenceEqual(Orderings))
-                ? this
-                : new SqlServerAggregateFunctionExpression(
-                    Name,
-                    arguments,
-                    orderings,
-                    IsNullable,
-                    ArgumentsPropagateNullability,
-                    Type,
-                    TypeMapping);
+        IReadOnlyList<OrderingExpression> orderings
+    ) =>
+        (ReferenceEquals(arguments, Arguments) || arguments.SequenceEqual(Arguments))
+        && (ReferenceEquals(orderings, Orderings) || orderings.SequenceEqual(Orderings))
+            ? this
+            : new SqlServerAggregateFunctionExpression(
+                Name,
+                arguments,
+                orderings,
+                IsNullable,
+                ArgumentsPropagateNullability,
+                Type,
+                TypeMapping
+            );
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -191,12 +198,13 @@ public class SqlServerAggregateFunctionExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is SqlServerAggregateFunctionExpression sqlServerFunctionExpression && Equals(sqlServerFunctionExpression);
+    public override bool Equals(object? obj) =>
+        obj is SqlServerAggregateFunctionExpression sqlServerFunctionExpression
+        && Equals(sqlServerFunctionExpression);
 
-    private bool Equals(SqlServerAggregateFunctionExpression? other)
-        => ReferenceEquals(this, other)
-            || other is not null
+    private bool Equals(SqlServerAggregateFunctionExpression? other) =>
+        ReferenceEquals(this, other)
+        || other is not null
             && base.Equals(other)
             && Name == other.Name
             && Arguments.SequenceEqual(other.Arguments)

@@ -19,20 +19,32 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             /// <summary>
             /// Spans of member nodes for incremental analysis.
             /// </summary>
-            private readonly record struct MemberSpans(DocumentId DocumentId, VersionStamp Version, ImmutableArray<TextSpan> Spans);
+            private readonly record struct MemberSpans(
+                DocumentId DocumentId,
+                VersionStamp Version,
+                ImmutableArray<TextSpan> Spans
+            );
 
             private readonly object _gate = new();
             private MemberSpans _savedMemberSpans;
 
-            private async Task<ImmutableArray<TextSpan>> GetOrCreateMemberSpansAsync(Document document, VersionStamp version, CancellationToken cancellationToken)
+            private async Task<ImmutableArray<TextSpan>> GetOrCreateMemberSpansAsync(
+                Document document,
+                VersionStamp version,
+                CancellationToken cancellationToken
+            )
             {
                 lock (_gate)
                 {
-                    if (_savedMemberSpans.DocumentId == document.Id && _savedMemberSpans.Version == version)
+                    if (
+                        _savedMemberSpans.DocumentId == document.Id
+                        && _savedMemberSpans.Version == version
+                    )
                         return _savedMemberSpans.Spans;
                 }
 
-                var memberSpans = await CreateMemberSpansAsync(document, version, cancellationToken).ConfigureAwait(false);
+                var memberSpans = await CreateMemberSpansAsync(document, version, cancellationToken)
+                    .ConfigureAwait(false);
 
                 lock (_gate)
                 {
@@ -41,16 +53,26 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 return memberSpans;
 
-                static async Task<ImmutableArray<TextSpan>> CreateMemberSpansAsync(Document document, VersionStamp version, CancellationToken cancellationToken)
+                static async Task<ImmutableArray<TextSpan>> CreateMemberSpansAsync(
+                    Document document,
+                    VersionStamp version,
+                    CancellationToken cancellationToken
+                )
                 {
                     var service = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                    var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                    var root = await document
+                        .GetRequiredSyntaxRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     var members = service.GetMethodLevelMembers(root);
                     return members.SelectAsArray(m => m.FullSpan);
                 }
             }
 
-            private void SaveMemberSpans(DocumentId documentId, VersionStamp version, ImmutableArray<TextSpan> memberSpans)
+            private void SaveMemberSpans(
+                DocumentId documentId,
+                VersionStamp version,
+                ImmutableArray<TextSpan> memberSpans
+            )
             {
                 lock (_gate)
                 {

@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.Globalization;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;
@@ -21,9 +21,11 @@ namespace System.ServiceModel.Description
     {
         static Type WebScriptEndpointType = typeof(WebScriptEndpoint);
 
-        public WebScriptEndpoint(ContractDescription contract) :
-            this(contract, null /* address */)
-        { }
+        public WebScriptEndpoint(ContractDescription contract)
+            : this(
+                contract,
+                null /* address */
+            ) { }
 
         public WebScriptEndpoint(ContractDescription contract, EndpointAddress address)
             : base(contract, address)
@@ -33,12 +35,21 @@ namespace System.ServiceModel.Description
 
         WebScriptEnablingBehavior webScriptEnablingBehavior
         {
-            get 
+            get
             {
-                WebScriptEnablingBehavior webScriptEnablingBehavior = this.Behaviors.Find<WebScriptEnablingBehavior>();
+                WebScriptEnablingBehavior webScriptEnablingBehavior =
+                    this.Behaviors.Find<WebScriptEnablingBehavior>();
                 if (webScriptEnablingBehavior == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.WebBehaviorNotFoundWithEndpoint, WebEndpointType.Name, typeof(WebScriptEnablingBehavior).Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WebBehaviorNotFoundWithEndpoint,
+                                WebEndpointType.Name,
+                                typeof(WebScriptEnablingBehavior).Name
+                            )
+                        )
+                    );
                 }
                 return webScriptEnablingBehavior;
             }
@@ -49,5 +60,4 @@ namespace System.ServiceModel.Description
             get { return WebScriptEndpointType; }
         }
     }
-
 }

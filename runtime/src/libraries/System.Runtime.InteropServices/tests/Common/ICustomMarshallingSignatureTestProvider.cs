@@ -7,7 +7,11 @@ namespace Microsoft.Interop.UnitTests
     {
         public string BasicParameterByValue(string type, string preDeclaration = "");
 
-        public string BasicParameterWithByRefModifier(string byRefModifier, string type, string preDeclaration = "");
+        public string BasicParameterWithByRefModifier(
+            string byRefModifier,
+            string type,
+            string preDeclaration = ""
+        );
 
         public string BasicReturnType(string type, string preDeclaration = "");
 
@@ -15,18 +19,32 @@ namespace Microsoft.Interop.UnitTests
 
         public string BasicParametersAndModifiersNoRef(string typeName, string preDeclaration = "");
 
-        public string MarshalUsingParametersAndModifiers(string type, string marshallerType, string preDeclaration = "");
+        public string MarshalUsingParametersAndModifiers(
+            string type,
+            string marshallerType,
+            string preDeclaration = ""
+        );
 
         public string MarshalUsingCollectionCountInfoParametersAndModifiers(string collectionType);
 
-        public string MarshalUsingCollectionParametersAndModifiers(string type, string marshallerType);
+        public string MarshalUsingCollectionParametersAndModifiers(
+            string type,
+            string marshallerType
+        );
 
         public string MarshalUsingCollectionOutConstantLength(string type, string predeclaration);
 
-        public string MarshalUsingCollectionReturnConstantLength(string type, string predeclaration);
+        public string MarshalUsingCollectionReturnConstantLength(
+            string type,
+            string predeclaration
+        );
 
         public string MarshalUsingCollectionReturnValueLength(string type, string marshallerType);
 
-        public string CustomElementMarshalling(string type, string marshallerType, string preDeclaration = "");
+        public string CustomElementMarshalling(
+            string type,
+            string marshallerType,
+            string preDeclaration = ""
+        );
     }
 }

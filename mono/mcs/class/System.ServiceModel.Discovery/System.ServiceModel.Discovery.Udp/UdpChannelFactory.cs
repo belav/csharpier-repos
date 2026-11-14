@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,57 +31,67 @@ using System.ServiceModel.Discovery;
 
 namespace System.ServiceModel.Discovery.Udp
 {
-	internal class UdpChannelFactory : ChannelFactoryBase<IDuplexChannel>
-	{
-		public UdpChannelFactory (UdpTransportBindingElement source, BindingContext ctx)
-		{
-			Source = source;
-			Context = ctx;
-		}
-		
-		protected override void OnOpen (TimeSpan timeout)
-		{
-		}
-		
-		protected override void OnClose (TimeSpan timeout)
-		{
-		}
-		
-		Action<TimeSpan> open_delegate, close_delegate;
-		
-		protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			if (open_delegate == null)
-				open_delegate = new Action<TimeSpan> (OnOpen);
-			return open_delegate.BeginInvoke (timeout, callback, state);
-		}
-		
-		protected override void OnEndOpen (IAsyncResult result)
-		{
-			open_delegate.EndInvoke (result);
-		}
-		
-		protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			if (close_delegate == null)
-				close_delegate = new Action<TimeSpan> (OnClose);
-			return close_delegate.BeginInvoke (timeout, callback, state);
-		}
-		
-		protected override void OnEndClose (IAsyncResult result)
-		{
-			close_delegate.EndInvoke (result);
-		}
-		
-		protected override IDuplexChannel OnCreateChannel (EndpointAddress address, Uri via)
-		{
-			var uri = via ?? address.Uri;
-			if (uri.Scheme != "soap.udp")
-				throw new ArgumentException (String.Format ("Unexpected endpoint address URI scheme: expected 'soap.udp' but got '{0}'", address.Uri.Scheme));
-			return new UdpDuplexChannel (this, Context, address, via);
-		}
-		
-		public UdpTransportBindingElement Source { get; private set; }
-		public BindingContext Context { get; private set; }
-	}
+    internal class UdpChannelFactory : ChannelFactoryBase<IDuplexChannel>
+    {
+        public UdpChannelFactory(UdpTransportBindingElement source, BindingContext ctx)
+        {
+            Source = source;
+            Context = ctx;
+        }
+
+        protected override void OnOpen(TimeSpan timeout) { }
+
+        protected override void OnClose(TimeSpan timeout) { }
+
+        Action<TimeSpan> open_delegate,
+            close_delegate;
+
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            if (open_delegate == null)
+                open_delegate = new Action<TimeSpan>(OnOpen);
+            return open_delegate.BeginInvoke(timeout, callback, state);
+        }
+
+        protected override void OnEndOpen(IAsyncResult result)
+        {
+            open_delegate.EndInvoke(result);
+        }
+
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            if (close_delegate == null)
+                close_delegate = new Action<TimeSpan>(OnClose);
+            return close_delegate.BeginInvoke(timeout, callback, state);
+        }
+
+        protected override void OnEndClose(IAsyncResult result)
+        {
+            close_delegate.EndInvoke(result);
+        }
+
+        protected override IDuplexChannel OnCreateChannel(EndpointAddress address, Uri via)
+        {
+            var uri = via ?? address.Uri;
+            if (uri.Scheme != "soap.udp")
+                throw new ArgumentException(
+                    String.Format(
+                        "Unexpected endpoint address URI scheme: expected 'soap.udp' but got '{0}'",
+                        address.Uri.Scheme
+                    )
+                );
+            return new UdpDuplexChannel(this, Context, address, via);
+        }
+
+        public UdpTransportBindingElement Source { get; private set; }
+        public BindingContext Context { get; private set; }
+    }
 }

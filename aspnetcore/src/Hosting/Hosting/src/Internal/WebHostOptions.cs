@@ -21,8 +21,7 @@ internal sealed class WebHostOptions
 
         string? GetConfig(string key) => primaryConfiguration[key] ?? fallbackConfiguration?[key];
 
-        ApplicationName =
-            environment?.ApplicationName
+        ApplicationName = environment?.ApplicationName
             ?? GetConfig(WebHostDefaults.ApplicationKey)
             ?? Assembly.GetEntryAssembly()?.GetName().Name
             ?? string.Empty;
@@ -108,9 +107,9 @@ internal sealed class WebHostOptions
     private static IReadOnlyList<string> Split(string? value)
     {
         return value?.Split(
-                ';',
-                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
-            ) ?? Array.Empty<string>();
+            ';',
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+        ) ?? Array.Empty<string>();
     }
 
     private static IReadOnlyList<string> Split(string applicationName, string? environment)

@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Host.Mef
     {
         /// <summary>
         /// file extensions this <see cref="IDynamicFileInfoProvider"/> can handle such as cshtml
-        /// 
+        ///
         /// match will be done by <see cref="StringComparer.OrdinalIgnoreCase"/>
         /// </summary>
         public IEnumerable<string> Extensions { get; }

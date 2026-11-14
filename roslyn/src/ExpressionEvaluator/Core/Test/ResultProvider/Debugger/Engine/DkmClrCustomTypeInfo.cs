@@ -28,11 +28,15 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             Payload = payload;
         }
 
-        public static DkmClrCustomTypeInfo Create(Guid payloadTypeId, ReadOnlyCollection<byte> payload)
+        public static DkmClrCustomTypeInfo Create(
+            Guid payloadTypeId,
+            ReadOnlyCollection<byte> payload
+        )
         {
             return new DkmClrCustomTypeInfo(payloadTypeId, payload);
         }
 
-        private string DebuggerDisplay => $"[{string.Join(", ", Payload.Select(b => $"0x{b:x2}"))}] from {PayloadTypeId}";
+        private string DebuggerDisplay =>
+            $"[{string.Join(", ", Payload.Select(b => $"0x{b:x2}"))}] from {PayloadTypeId}";
     }
 }

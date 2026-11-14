@@ -6,17 +6,18 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for RC2, not consuming it.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for RC2, not consuming it."
+    )]
     internal sealed partial class RC2Implementation : RC2
     {
         private const int BitsPerByte = 8;
 
         public override int EffectiveKeySize
         {
-            get
-            {
-                return KeySizeValue;
-            }
+            get { return KeySizeValue; }
             set
             {
                 if (value != KeySizeValue)
@@ -54,7 +55,11 @@ namespace System.Security.Cryptography
             Key = RandomNumberGenerator.GetBytes(KeySize / BitsPerByte);
         }
 
-        private UniversalCryptoTransform CreateTransform(byte[] rgbKey, byte[]? rgbIV, bool encrypting)
+        private UniversalCryptoTransform CreateTransform(
+            byte[] rgbKey,
+            byte[]? rgbIV,
+            bool encrypting
+        )
         {
             ArgumentNullException.ThrowIfNull(rgbKey);
 
@@ -76,14 +81,24 @@ namespace System.Security.Cryptography
             }
 
             Debug.Assert(EffectiveKeySize == KeySize);
-            return CreateTransformCore(Mode, Padding, rgbKey, rgbIV, BlockSize / BitsPerByte, FeedbackSize / BitsPerByte, GetPaddingSize(), encrypting);
+            return CreateTransformCore(
+                Mode,
+                Padding,
+                rgbKey,
+                rgbIV,
+                BlockSize / BitsPerByte,
+                FeedbackSize / BitsPerByte,
+                GetPaddingSize(),
+                encrypting
+            );
         }
 
         protected override bool TryDecryptEcbCore(
             ReadOnlySpan<byte> ciphertext,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (!ValidKeySize(Key.Length))
                 throw new InvalidOperationException(SR.Cryptography_InvalidKeySize);
@@ -95,11 +110,18 @@ namespace System.Security.Cryptography
                 iv: null,
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: BlockSize / BitsPerByte,
-                encrypting: false);
+                encrypting: false
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotDecrypt(cipher, paddingMode, ciphertext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotDecrypt(
+                    cipher,
+                    paddingMode,
+                    ciphertext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -107,7 +129,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (!ValidKeySize(Key.Length))
                 throw new InvalidOperationException(SR.Cryptography_InvalidKeySize);
@@ -119,11 +142,18 @@ namespace System.Security.Cryptography
                 iv: default,
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: BlockSize / BitsPerByte,
-                encrypting: true);
+                encrypting: true
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotEncrypt(cipher, paddingMode, plaintext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotEncrypt(
+                    cipher,
+                    paddingMode,
+                    plaintext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -132,7 +162,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (!ValidKeySize(Key.Length))
                 throw new InvalidOperationException(SR.Cryptography_InvalidKeySize);
@@ -144,11 +175,18 @@ namespace System.Security.Cryptography
                 iv,
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: BlockSize / BitsPerByte,
-                encrypting: true);
+                encrypting: true
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotEncrypt(cipher, paddingMode, plaintext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotEncrypt(
+                    cipher,
+                    paddingMode,
+                    plaintext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -157,7 +195,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (!ValidKeySize(Key.Length))
                 throw new InvalidOperationException(SR.Cryptography_InvalidKeySize);
@@ -169,11 +208,18 @@ namespace System.Security.Cryptography
                 iv,
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: BlockSize / BitsPerByte,
-                encrypting: false);
+                encrypting: false
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotDecrypt(cipher, paddingMode, ciphertext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotDecrypt(
+                    cipher,
+                    paddingMode,
+                    ciphertext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -183,9 +229,12 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             PaddingMode paddingMode,
             int feedbackSizeInBits,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
-            throw new CryptographicException(SR.Format(SR.Cryptography_CipherModeNotSupported, CipherMode.CFB));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_CipherModeNotSupported, CipherMode.CFB)
+            );
         }
 
         protected override bool TryEncryptCfbCore(
@@ -194,15 +243,20 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             PaddingMode paddingMode,
             int feedbackSizeInBits,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
-            throw new CryptographicException(SR.Format(SR.Cryptography_CipherModeNotSupported, CipherMode.CFB));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_CipherModeNotSupported, CipherMode.CFB)
+            );
         }
 
         private static void ValidateCFBFeedbackSize(int feedback)
         {
             // CFB not supported at all
-            throw new CryptographicException(SR.Format(SR.Cryptography_CipherModeFeedbackNotSupported, feedback, CipherMode.CFB));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_CipherModeFeedbackNotSupported, feedback, CipherMode.CFB)
+            );
         }
 
         private int GetPaddingSize()

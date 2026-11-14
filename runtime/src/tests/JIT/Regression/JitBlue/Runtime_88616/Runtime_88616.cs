@@ -40,9 +40,7 @@ public class Runtime_88616
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume(ref S s)
-    {
-    }
+    private static void Consume(ref S s) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int Check(S s)
@@ -58,6 +56,10 @@ public class Runtime_88616
 
     private struct S
     {
-        public long A, B, C, D, E;
+        public long A,
+            B,
+            C,
+            D,
+            E;
     }
 }

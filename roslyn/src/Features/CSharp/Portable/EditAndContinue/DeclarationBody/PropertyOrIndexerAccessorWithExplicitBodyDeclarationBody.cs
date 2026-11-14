@@ -21,23 +21,19 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue;
 ///   T this[...] { get { ... } }
 ///   T this[...] { set { ... } }
 /// </summary>
-internal sealed class PropertyOrIndexerAccessorWithExplicitBodyDeclarationBody(AccessorDeclarationSyntax accessor) : PropertyOrIndexerAccessorDeclarationBody
+internal sealed class PropertyOrIndexerAccessorWithExplicitBodyDeclarationBody(
+    AccessorDeclarationSyntax accessor
+) : PropertyOrIndexerAccessorDeclarationBody
 {
-    public SyntaxNode Body
-        => (SyntaxNode?)accessor.Body ?? accessor.ExpressionBody!.Expression;
+    public SyntaxNode Body => (SyntaxNode?)accessor.Body ?? accessor.ExpressionBody!.Expression;
 
-    public override SyntaxNode? ExplicitBody
-        => Body;
+    public override SyntaxNode? ExplicitBody => Body;
 
-    public override SyntaxNode? HeaderActiveStatement
-        => null;
+    public override SyntaxNode? HeaderActiveStatement => null;
 
-    public override TextSpan HeaderActiveStatementSpan
-        => default;
+    public override TextSpan HeaderActiveStatementSpan => default;
 
-    public override SyntaxNode? MatchRoot
-        => (SyntaxNode?)accessor.Body ?? accessor.ExpressionBody!;
+    public override SyntaxNode? MatchRoot => (SyntaxNode?)accessor.Body ?? accessor.ExpressionBody!;
 
-    public sealed override IEnumerable<SyntaxToken>? GetActiveTokens()
-        => Body.DescendantTokens();
+    public sealed override IEnumerable<SyntaxToken>? GetActiveTokens() => Body.DescendantTokens();
 }

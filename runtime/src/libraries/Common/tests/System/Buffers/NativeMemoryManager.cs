@@ -74,7 +74,7 @@ namespace System.Buffers
                 _retainedCount++;
             }
 
-            void* pointer = (void*)((byte*)_ptr + elementIndex);    // T = byte
+            void* pointer = (void*)((byte*)_ptr + elementIndex); // T = byte
             return new MemoryHandle(pointer, default, this);
         }
 

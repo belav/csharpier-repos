@@ -13,7 +13,9 @@ namespace System.Net.Http
         {
             // Arrange
             HttpContentHeaders source = FormattingUtilities.CreateEmptyContentHeaders();
-            source.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf8; parameter=value");
+            source.ContentType = MediaTypeHeaderValue.Parse(
+                "application/json; charset=utf8; parameter=value"
+            );
             source.ContentLength = 1234;
             source.ContentLocation = new Uri("http://some.host");
             source.Add("test-name1", "test-value1");

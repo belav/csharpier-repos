@@ -27,8 +27,10 @@ namespace System.Xml
         private readonly Dictionary<XmlQualifiedName, XmlQualifiedName?>? _lookupCDataElems;
         private readonly BitStack? _bitsCData;
         private readonly XmlQualifiedName? _qnameCData;
-        private bool _outputDocType, _inAttr;
-        private readonly string? _systemId, _publicId;
+        private bool _outputDocType,
+            _inAttr;
+        private readonly string? _systemId,
+            _publicId;
 
         public QueryOutputWriterV1(XmlWriter writer, XmlWriterSettings settings)
         {
@@ -67,7 +69,10 @@ namespace System.Xml
                     }
                 }
 
-                if (settings.CDataSectionElements != null && settings.CDataSectionElements.Count > 0)
+                if (
+                    settings.CDataSectionElements != null
+                    && settings.CDataSectionElements.Count > 0
+                )
                 {
                     _bitsCData = new BitStack();
                     _lookupCDataElems = new Dictionary<XmlQualifiedName, XmlQualifiedName?>();
@@ -90,17 +95,13 @@ namespace System.Xml
             }
         }
 
-
         //-----------------------------------------------
         // XmlWriter interface
         //-----------------------------------------------
 
         public override WriteState WriteState
         {
-            get
-            {
-                return _wrapped.WriteState;
-            }
+            get { return _wrapped.WriteState; }
         }
 
         public override void WriteStartDocument()
@@ -145,10 +146,11 @@ namespace System.Xml
                 if (ws == WriteState.Start || ws == WriteState.Prolog)
                 {
                     _wrapped.WriteDocType(
-                            string.IsNullOrEmpty(prefix) ? localName : $"{prefix}:{localName}",
-                            _publicId,
-                            _systemId,
-                            null);
+                        string.IsNullOrEmpty(prefix) ? localName : $"{prefix}:{localName}",
+                        _publicId,
+                        _systemId,
+                        null
+                    );
                 }
 
                 _outputDocType = false;
@@ -304,7 +306,6 @@ namespace System.Xml
         {
             return _wrapped.LookupPrefix(ns);
         }
-
 
         //-----------------------------------------------
         // Helper methods

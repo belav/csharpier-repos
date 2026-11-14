@@ -15,25 +15,30 @@ namespace System.Net.Http
         /// https://tools.ietf.org/html/draft-ietf-quic-http-24#section-6.2.1
         /// </summary>
         Control = 0x00,
+
         /// <summary>
         /// https://tools.ietf.org/html/draft-ietf-quic-http-24#section-6.2.2
         /// </summary>
         Push = 0x01,
+
         /// <summary>
         /// https://tools.ietf.org/html/draft-ietf-quic-qpack-11#section-4.2
         /// </summary>
         QPackEncoder = 0x02,
+
         /// <summary>
         /// https://tools.ietf.org/html/draft-ietf-quic-qpack-11#section-4.2
         /// </summary>
         QPackDecoder = 0x03,
+
         /// <summary>
         /// https://ietf-wg-webtrans.github.io/draft-ietf-webtrans-http3/draft-ietf-webtrans-http3.html#name-unidirectional-streams
         /// </summary>
         WebTransportUnidirectional = 0x54,
+
         /// <summary>
         /// https://ietf-wg-webtrans.github.io/draft-ietf-webtrans-http3/draft-ietf-webtrans-http3.html#name-bidirectional-streams
         /// </summary>
-        WebTransportBidirectional = 0x41
+        WebTransportBidirectional = 0x41,
     }
 }

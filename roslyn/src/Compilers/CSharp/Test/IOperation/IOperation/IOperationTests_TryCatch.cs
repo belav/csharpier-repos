@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TryCatchFinally_Basic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -39,7 +40,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -79,14 +81,19 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatchFinally_Parent()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -108,7 +115,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
     Body: 
@@ -149,14 +157,19 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_SingleCatchClause()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -170,7 +183,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -188,20 +202,28 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Finally: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0168: The variable 'e' is declared but never used
                 //         catch (System.IO.IOException e)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e").WithArguments("e").WithLocation(9, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                    .WithArguments("e")
+                    .WithLocation(9, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_SingleCatchClauseAndFilter()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -215,7 +237,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -244,14 +267,19 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_MultipleCatchClausesWithDifferentCaughtTypes()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -268,7 +296,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -305,20 +334,28 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Finally: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0168: The variable 'e' is declared but never used
                 //         catch (System.IO.IOException e)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e").WithArguments("e").WithLocation(9, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                    .WithArguments("e")
+                    .WithLocation(9, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_MultipleCatchClausesWithDuplicateCaughtTypes()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -335,7 +372,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null, IsInvalid) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -372,23 +410,33 @@ ITryOperation (OperationKind.Try, Type: null, IsInvalid) (Syntax: 'try ... }')
   Finally: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0160: A previous catch clause already catches all exceptions of this or of a super type ('IOException')
                 //         catch (System.IO.IOException e) when (e.Message != null)
-                Diagnostic(ErrorCode.ERR_UnreachableCatch, "System.IO.IOException").WithArguments("System.IO.IOException").WithLocation(12, 16),
+                Diagnostic(ErrorCode.ERR_UnreachableCatch, "System.IO.IOException")
+                    .WithArguments("System.IO.IOException")
+                    .WithLocation(12, 16),
                 // CS0168: The variable 'e' is declared but never used
                 //         catch (System.IO.IOException e)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e").WithArguments("e").WithLocation(9, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                    .WithArguments("e")
+                    .WithLocation(9, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_CatchClauseWithoutExceptionLocal()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -404,7 +452,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -421,14 +470,19 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_CatchClauseWithoutCaughtTypeOrExceptionLocal()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o)
@@ -442,7 +496,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -459,14 +514,19 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_FinallyWithoutCatchClause()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -483,7 +543,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -503,14 +564,19 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_TryBlockWithLocalDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -527,7 +593,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (1 statements, 1 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -552,20 +619,28 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Finally: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i' is assigned but its value is never used
                 //             int i = 0;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(10, 17)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(10, 17),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_CatchClauseWithLocalDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -582,7 +657,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -607,20 +683,28 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Finally: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i' is assigned but its value is never used
                 //             int i = 0;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(13, 17)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(13, 17),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_CatchFilterWithLocalDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -636,7 +720,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -658,14 +743,19 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_CatchFilterAndSourceWithLocalDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -681,7 +771,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -704,20 +795,28 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Finally: 
     null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(11,26): warning CS0168: The variable 'e' is declared but never used
                 //         catch (Exception e) when (o is string s)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e").WithArguments("e").WithLocation(11, 26)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                    .WithArguments("e")
+                    .WithLocation(11, 26),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_FinallyWithLocalDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -732,7 +831,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
@@ -750,20 +850,28 @@ ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
           Initializer: 
             null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'i' is assigned but its value is never used
                 //             int i = 0;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(11, 17)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(11, 17),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TryStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_InvalidCaughtType()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -777,7 +885,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICatchClauseOperation (Exception type: System.Int32) (OperationKind.CatchClause, Type: null, IsInvalid) (Syntax: 'catch (int  ... }')
   Locals: Local_1: System.Int32 e
   ExceptionDeclarationOrExpression: 
@@ -789,23 +898,31 @@ ICatchClauseOperation (Exception type: System.Int32) (OperationKind.CatchClause,
   Handler: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0155: The type caught or thrown must be derived from System.Exception
                 //         /*<bind>*/catch (int e)
                 Diagnostic(ErrorCode.ERR_BadExceptionType, "int").WithLocation(9, 26),
                 // CS0168: The variable 'e' is declared but never used
                 //         /*<bind>*/catch (int e)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e").WithArguments("e").WithLocation(9, 30)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                    .WithArguments("e")
+                    .WithLocation(9, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<CatchClauseSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<CatchClauseSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_GetOperationForCatchClause()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -819,7 +936,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICatchClauseOperation (Exception type: System.IO.IOException) (OperationKind.CatchClause, Type: null) (Syntax: 'catch (Syst ... }')
   Locals: Local_1: System.IO.IOException e
   ExceptionDeclarationOrExpression: 
@@ -842,14 +960,19 @@ ICatchClauseOperation (Exception type: System.IO.IOException) (OperationKind.Cat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<CatchClauseSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<CatchClauseSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_GetOperationForCatchDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -863,21 +986,27 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: System.IO.IOException e) (OperationKind.VariableDeclarator, Type: null) (Syntax: '(System.IO. ... xception e)')
   Initializer: 
     null
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<CatchDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<CatchDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_GetOperationForCatchFilterClause()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -901,7 +1030,8 @@ class C
         [Fact]
         public void TryCatch_GetOperationForCatchFilterClauseExpression()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -917,7 +1047,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.NotEquals) (OperationKind.Binary, Type: System.Boolean) (Syntax: 's != null')
   Left: 
     IParameterReferenceOperation: s (OperationKind.ParameterReference, Type: System.String) (Syntax: 's')
@@ -929,14 +1060,19 @@ IBinaryOperation (BinaryOperatorKind.NotEquals) (OperationKind.Binary, Type: Sys
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TryCatch_GetOperationForFinallyClause()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -961,7 +1097,8 @@ class C
         [Fact]
         public void TryFlow_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F()
@@ -977,7 +1114,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1011,7 +1149,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F()
@@ -1027,7 +1166,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1042,7 +1182,8 @@ Block[B1] - Exit
         [Fact]
         public void TryFlow_03()
         {
-            var source = @"
+            var source =
+                @"
 class Exception1 : System.Exception { }
 class Exception2 : Exception1 { }
 class Exception3 : Exception2 { }
@@ -1092,7 +1233,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1310,7 +1452,8 @@ Block[B12] - Exit
         [Fact]
         public void TryFlow_04()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool input, int result)
@@ -1332,7 +1475,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1403,7 +1547,8 @@ Block[B5] - Exit
         [Fact]
         public void TryFlow_05()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -1425,7 +1570,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1459,7 +1605,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_06()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -1483,7 +1630,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1535,7 +1683,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_07()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -1563,7 +1712,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1652,7 +1802,8 @@ Block[B6] - Exit
         [Fact]
         public void TryFlow_08()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -1678,7 +1829,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1719,7 +1871,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_09()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -1744,7 +1897,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1817,7 +1971,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_10()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -1841,7 +1996,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1905,7 +2061,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_11()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -1930,7 +2087,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1997,7 +2155,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_12()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -2021,7 +2180,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2079,7 +2239,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_13()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -2104,7 +2265,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2171,7 +2333,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_14()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -2195,7 +2358,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2253,7 +2417,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_15()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -2276,7 +2441,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2319,7 +2485,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_16()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -2341,7 +2508,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2375,7 +2543,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_17()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -2400,7 +2569,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2467,7 +2637,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_18()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class Exception1 : System.Exception { }
@@ -2491,7 +2662,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2549,7 +2721,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_19()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool input)
@@ -2569,7 +2742,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2610,7 +2784,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_20()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool input)
@@ -2631,7 +2806,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2668,7 +2844,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_21()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -2691,7 +2868,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2726,7 +2904,8 @@ Block[B2] - Exit
         [Fact]
         public void TryFlow_22()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -2745,7 +2924,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2778,7 +2958,8 @@ Block[B2] - Exit
         [Fact]
         public void TryFlow_23()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -2802,7 +2983,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2851,7 +3033,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_24()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -2877,7 +3060,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2912,7 +3096,8 @@ Block[B2] - Exit
         [Fact]
         public void TryFlow_25()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -2954,7 +3139,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3123,7 +3309,8 @@ Block[B11] - Exit
         [Fact]
         public void TryFlow_26()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -3146,7 +3333,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3203,7 +3391,8 @@ Block[B4] - Exit
         [Fact]
         public void TryFlow_27()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -3228,9 +3417,10 @@ class C
                 // (15,13): error CS0157: Control cannot leave the body of a finally clause
                 //             return;
                 Diagnostic(ErrorCode.ERR_BadFinallyLeave, "return").WithLocation(15, 13)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3279,7 +3469,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_28()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -3302,7 +3493,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3350,7 +3542,8 @@ Block[B3] - Exit
         [Fact]
         public void TryFlow_29()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -3374,7 +3567,8 @@ label1:     ;
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3402,11 +3596,13 @@ Block[B2] - Exit
 ";
             VerifyFlowGraphForTest<BlockSyntax>(compilation, expectedGraph);
         }
+
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TryFlow_30()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool result)
@@ -3424,9 +3620,10 @@ class C
                 // (9,9): error CS1524: Expected catch or finally
                 //         }
                 Diagnostic(ErrorCode.ERR_ExpectedEndTry, "}").WithLocation(9, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3453,7 +3650,8 @@ Block[B2] - Exit
         [Fact]
         public void ExceptionDispatch_01()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -3471,7 +3669,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3515,14 +3714,19 @@ Block[B3] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_02()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -3540,7 +3744,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3584,14 +3789,19 @@ Block[B3] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_03()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     bool M(bool b)
@@ -3611,7 +3821,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3657,14 +3868,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_04()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -3680,7 +3896,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3718,14 +3935,19 @@ Block[B3] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_05()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -3741,7 +3963,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3786,14 +4009,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_06()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -3809,7 +4037,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3854,14 +4083,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_07()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -3886,7 +4120,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3944,14 +4179,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_08()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -3976,7 +4216,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4034,14 +4275,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_09()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4060,7 +4306,8 @@ class P
     static bool[] ThisCanThrow() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4106,20 +4353,26 @@ Block[B3] - Exit
     Predecessors: [B1*2] [B2]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(9,24): warning CS0162: Unreachable code detected
                 //             if (false) return;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(9, 24)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(9, 24),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_10()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4138,7 +4391,8 @@ class P
     static bool[] ThisCanThrow() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4186,14 +4440,19 @@ Block[B3] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_11()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     bool[] M(bool b)
@@ -4213,7 +4472,8 @@ class P
     static bool[] ThisCanThrow() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4271,14 +4531,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_12()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     bool[] M(bool b)
@@ -4298,7 +4563,8 @@ class P
     static bool[] ThisCanThrow() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4354,20 +4620,26 @@ Block[B5] - Exit
     Predecessors: [B2] [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,24): warning CS0162: Unreachable code detected
                 //             if (false) return ThisCanThrow();
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(8, 24)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(8, 24),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_13()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4391,7 +4663,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4446,14 +4719,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_14()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4477,7 +4755,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4532,14 +4811,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_15()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4563,7 +4847,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4631,20 +4916,26 @@ Block[B5] - Exit
     Predecessors: [B1] [B3] [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(12,25): warning CS7095: Filter expression is a constant 'true', consider removing the filter
                 //             catch when (true)
-                Diagnostic(ErrorCode.WRN_FilterIsConstantTrue, "true").WithLocation(12, 25)
+                Diagnostic(ErrorCode.WRN_FilterIsConstantTrue, "true").WithLocation(12, 25),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_16()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4668,7 +4959,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4736,20 +5028,27 @@ Block[B5] - Exit
     Predecessors: [B1] [B3] [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(12,25): warning CS8360: Filter expression is a constant 'false', consider removing the try-catch block
                 //             catch when (false)
-                Diagnostic(ErrorCode.WRN_FilterIsConstantFalseRedundantTryCatch, "false").WithLocation(12, 25)
+                Diagnostic(ErrorCode.WRN_FilterIsConstantFalseRedundantTryCatch, "false")
+                    .WithLocation(12, 25),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_17()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4773,7 +5072,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4846,14 +5146,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_18()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4877,7 +5182,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4959,14 +5265,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_19()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -4990,7 +5301,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5072,14 +5384,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_20()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5103,7 +5420,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5187,14 +5505,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_21()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5218,7 +5541,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5302,14 +5626,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_22()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5330,7 +5659,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5380,20 +5710,26 @@ Block[B4] - Exit
     Predecessors: [B1] [B2] [B3]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(13,9): error CS1017: Catch clauses cannot follow the general catch clause of a try statement
                 //         catch
-                Diagnostic(ErrorCode.ERR_TooManyCatches, "catch").WithLocation(13, 9)
+                Diagnostic(ErrorCode.ERR_TooManyCatches, "catch").WithLocation(13, 9),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_23()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5414,7 +5750,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5479,20 +5816,26 @@ Block[B5] - Exit
     Predecessors: [B1] [B3] [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(10,21): warning CS7095: Filter expression is a constant 'true', consider removing the filter
                 //         catch when (true)
-                Diagnostic(ErrorCode.WRN_FilterIsConstantTrue, "true").WithLocation(10, 21)
+                Diagnostic(ErrorCode.WRN_FilterIsConstantTrue, "true").WithLocation(10, 21),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_24()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5513,7 +5856,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5578,20 +5922,26 @@ Block[B5] - Exit
     Predecessors: [B1] [B3] [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(10,21): warning CS8359: Filter expression is a constant 'false', consider removing the catch clause
                 //         catch when (false)
-                Diagnostic(ErrorCode.WRN_FilterIsConstantFalse, "false").WithLocation(10, 21)
+                Diagnostic(ErrorCode.WRN_FilterIsConstantFalse, "false").WithLocation(10, 21),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_25()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5612,7 +5962,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5682,14 +6033,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_26()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5716,7 +6072,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5797,14 +6154,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_27()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5825,7 +6187,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5904,14 +6267,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_28()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -5932,7 +6300,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6011,14 +6380,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_29()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6039,7 +6413,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6120,14 +6495,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_30()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6148,7 +6528,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6229,14 +6610,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_31()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6261,7 +6647,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6323,14 +6710,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_32()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6352,7 +6744,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6416,20 +6809,28 @@ Block[B4] - Exit
     Predecessors: [B1] [B2] [B3]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(10,46): warning CS0168: The variable 'e' is declared but never used
                 //         catch (System.NullReferenceException e)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e").WithArguments("e").WithLocation(10, 46)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                    .WithArguments("e")
+                    .WithLocation(10, 46),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_33()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6453,7 +6854,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6513,20 +6915,28 @@ Block[B4] - Exit
     Predecessors: [B1] [B2] [B3]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(12,50): warning CS0168: The variable 'e' is declared but never used
                 //             catch (System.NullReferenceException e)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e").WithArguments("e").WithLocation(12, 50)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                    .WithArguments("e")
+                    .WithLocation(12, 50),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_34()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6541,7 +6951,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6583,14 +6994,19 @@ Block[B5] - Exit [UnReachable]
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_35()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6605,7 +7021,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6647,14 +7064,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_36()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6669,7 +7091,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -6711,14 +7134,19 @@ class P
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_37()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6735,7 +7163,8 @@ label1:     ;
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -6777,14 +7206,19 @@ label1:     ;
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_38()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6801,7 +7235,8 @@ label1:     ;
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -6841,23 +7276,29 @@ label1:     ;
         Predecessors: [B1]
         Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(11,24): warning CS0162: Unreachable code detected
                 //             if (false) goto label1;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "goto").WithLocation(11, 24),
                 // file.cs(13,1): warning CS0162: Unreachable code detected
                 // label1:     ;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "label1").WithLocation(13, 1)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "label1").WithLocation(13, 1),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_39()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6886,7 +7327,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6955,7 +7397,8 @@ Block[B5] - Exit
     Predecessors: [B1] [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(19,17): error CS0724: A throw statement with no arguments is not allowed in a finally clause that is nested inside the nearest enclosing catch clause
                 //                 throw;
                 Diagnostic(ErrorCode.ERR_BadEmptyThrowInFinally, "throw").WithLocation(19, 17),
@@ -6967,17 +7410,22 @@ Block[B5] - Exit
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "label1").WithLocation(20, 5),
                 // file.cs(23,13): warning CS0162: Unreachable code detected
                 //             b = false;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "b").WithLocation(23, 13)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "b").WithLocation(23, 13),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_40()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool b)
@@ -6998,7 +7446,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7063,20 +7512,26 @@ Block[B5] - Exit
     Predecessors: [B1] [B3] [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(10,53): warning CS7095: Filter expression is a constant 'true', consider removing the filter
                 //         catch (System.NullReferenceException) when (true)
-                Diagnostic(ErrorCode.WRN_FilterIsConstantTrue, "true").WithLocation(10, 53)
+                Diagnostic(ErrorCode.WRN_FilterIsConstantTrue, "true").WithLocation(10, 53),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_41()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(int x)
@@ -7103,7 +7558,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -7168,20 +7624,26 @@ class P
         Predecessors: [B3]
         Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(17,13): warning CS0162: Unreachable code detected
                 //             x = 2;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_42()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(int x)
@@ -7208,7 +7670,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -7271,20 +7734,26 @@ class P
         Predecessors: [B3]
         Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(17,13): warning CS0162: Unreachable code detected
                 //             x = 2;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_43()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(int x)
@@ -7311,7 +7780,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -7375,20 +7845,26 @@ class P
         Predecessors: [B4]
         Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(17,13): warning CS0162: Unreachable code detected
                 //             x = 2;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ExceptionDispatch_44()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M()
@@ -7416,7 +7892,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -7470,20 +7947,26 @@ class P
         Predecessors: [B1] [B2] [B3]
         Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(15,21): error CS0157: Control cannot leave the body of a finally clause
                 //                     return;
-                Diagnostic(ErrorCode.ERR_BadFinallyLeave, "return").WithLocation(15, 21)
+                Diagnostic(ErrorCode.ERR_BadFinallyLeave, "return").WithLocation(15, 21),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void FinallyDispatch_01()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(int x)
@@ -7510,7 +7993,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7578,20 +8062,26 @@ Block[B5] - Exit
     Predecessors: [B1] [B3]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(17,13): warning CS0162: Unreachable code detected
                 //             x = 2;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void FinallyDispatch_02()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(int x)
@@ -7618,7 +8108,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -7678,20 +8169,26 @@ class P
         Predecessors: [B1] [B3]
         Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(17,13): warning CS0162: Unreachable code detected
                 //             x = 2;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void FinallyDispatch_03()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(int x)
@@ -7718,7 +8215,8 @@ class P
     static bool ThisCanThrow() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7785,20 +8283,26 @@ Block[B6] - Exit [UnReachable]
     Predecessors: [B1] [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(17,13): warning CS0162: Unreachable code detected
                 //             x = 2;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(17, 13),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchExpressionInExceptionFilter()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -7826,7 +8330,8 @@ class C
     }
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7984,7 +8489,8 @@ Block[B13] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedIoperationTree = @"
+            var expectedIoperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   ITryOperation (OperationKind.Try, Type: null) (Syntax: 'try ... }')
     Body: 
@@ -8056,7 +8562,11 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 
             var comp = CreateCompilation(source);
             VerifyOperationTreeForTest<BlockSyntax>(comp, expectedIoperationTree);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

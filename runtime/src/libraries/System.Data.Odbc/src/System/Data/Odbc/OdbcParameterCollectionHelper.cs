@@ -14,10 +14,7 @@ namespace System.Data.Odbc
 
         public override int Count
         {
-            get
-            {
-                return ((null != _items) ? _items.Count : 0);
-            }
+            get { return ((null != _items) ? _items.Count : 0); }
         }
 
         private List<OdbcParameter> InnerList
@@ -37,34 +34,22 @@ namespace System.Data.Odbc
 
         public override bool IsFixedSize
         {
-            get
-            {
-                return ((System.Collections.IList)InnerList).IsFixedSize;
-            }
+            get { return ((System.Collections.IList)InnerList).IsFixedSize; }
         }
 
         public override bool IsReadOnly
         {
-            get
-            {
-                return ((System.Collections.IList)InnerList).IsReadOnly;
-            }
+            get { return ((System.Collections.IList)InnerList).IsReadOnly; }
         }
 
         public override bool IsSynchronized
         {
-            get
-            {
-                return ((System.Collections.ICollection)InnerList).IsSynchronized;
-            }
+            get { return ((System.Collections.ICollection)InnerList).IsSynchronized; }
         }
 
         public override object SyncRoot
         {
-            get
-            {
-                return ((System.Collections.ICollection)InnerList).SyncRoot;
-            }
+            get { return ((System.Collections.ICollection)InnerList).SyncRoot; }
         }
 
         public override int Add(object value)
@@ -255,7 +240,10 @@ namespace System.Data.Odbc
         private void RemoveIndex(int index)
         {
             List<OdbcParameter> items = InnerList;
-            Debug.Assert((null != items) && (0 <= index) && (index < Count), "RemoveIndex, invalid");
+            Debug.Assert(
+                (null != items) && (0 <= index) && (index < Count),
+                "RemoveIndex, invalid"
+            );
             OdbcParameter item = items[index];
             items.RemoveAt(index);
             item.ResetParent();
@@ -264,7 +252,10 @@ namespace System.Data.Odbc
         private void Replace(int index, object newValue)
         {
             List<OdbcParameter> items = InnerList;
-            Debug.Assert((null != items) && (0 <= index) && (index < Count), "Replace Index invalid");
+            Debug.Assert(
+                (null != items) && (0 <= index) && (index < Count),
+                "Replace Index invalid"
+            );
             ValidateType(newValue);
             Validate(index, newValue);
             OdbcParameter item = items[index];
@@ -321,8 +312,16 @@ namespace System.Data.Odbc
                 if (InnerList.Count > 0)
                 {
                     OdbcParameter lastParameter = InnerList[^1];
-                    if (lastParameter.ParameterName.StartsWith(ADP.Parameter, StringComparison.Ordinal)
-                        && int.TryParse(lastParameter.ParameterName.AsSpan(ADP.Parameter.Length), out int lastIndex))
+                    if (
+                        lastParameter.ParameterName.StartsWith(
+                            ADP.Parameter,
+                            StringComparison.Ordinal
+                        )
+                        && int.TryParse(
+                            lastParameter.ParameterName.AsSpan(ADP.Parameter.Length),
+                            out int lastIndex
+                        )
+                    )
                     {
                         index = lastIndex + 1;
                     }

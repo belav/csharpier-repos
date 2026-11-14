@@ -29,9 +29,7 @@ namespace Microsoft.CodeAnalysis.Options
     }
 
     /// <inheritdoc cref="ISingleValuedOption"/>
-    internal interface ISingleValuedOption<T> : ISingleValuedOption
-    {
-    }
+    internal interface ISingleValuedOption<T> : ISingleValuedOption { }
 
     internal partial class Option2<T> : ISingleValuedOption<T>
     {
@@ -39,7 +37,11 @@ namespace Microsoft.CodeAnalysis.Options
         public IPublicOption? PublicOption { get; }
         public string? LanguageName { get; }
 
-        internal Option2(OptionDefinition<T> definition, string? languageName, Func<IOption2, IPublicOption>? publicOptionFactory)
+        internal Option2(
+            OptionDefinition<T> definition,
+            string? languageName,
+            Func<IOption2, IPublicOption>? publicOptionFactory
+        )
         {
             Definition = definition;
             LanguageName = languageName;
@@ -52,8 +54,20 @@ namespace Microsoft.CodeAnalysis.Options
             OptionGroup? group = null,
             string? languageName = null,
             bool isEditorConfigOption = false,
-            EditorConfigValueSerializer<T>? serializer = null)
-            : this(new OptionDefinition<T>(defaultValue, serializer, group, name, storageMapping: null, isEditorConfigOption), languageName, publicOptionFactory: null)
+            EditorConfigValueSerializer<T>? serializer = null
+        )
+            : this(
+                new OptionDefinition<T>(
+                    defaultValue,
+                    serializer,
+                    group,
+                    name,
+                    storageMapping: null,
+                    isEditorConfigOption
+                ),
+                languageName,
+                publicOptionFactory: null
+            )
         {
             VerifyNamingConvention();
         }
@@ -67,10 +81,27 @@ namespace Microsoft.CodeAnalysis.Options
                 return;
             }
 
-            Debug.Assert(LanguageName is null == (Definition.ConfigName.StartsWith("dotnet_", StringComparison.Ordinal) ||
-                Definition.ConfigName is "file_header_template" or "insert_final_newline"));
-            Debug.Assert(LanguageName is LanguageNames.CSharp == Definition.ConfigName.StartsWith(OptionDefinition.CSharpConfigNamePrefix, StringComparison.Ordinal));
-            Debug.Assert(LanguageName is LanguageNames.VisualBasic == Definition.ConfigName.StartsWith(OptionDefinition.VisualBasicConfigNamePrefix, StringComparison.Ordinal));
+            Debug.Assert(
+                LanguageName is null
+                    == (
+                        Definition.ConfigName.StartsWith("dotnet_", StringComparison.Ordinal)
+                        || Definition.ConfigName is "file_header_template" or "insert_final_newline"
+                    )
+            );
+            Debug.Assert(
+                LanguageName is LanguageNames.CSharp
+                    == Definition.ConfigName.StartsWith(
+                        OptionDefinition.CSharpConfigNamePrefix,
+                        StringComparison.Ordinal
+                    )
+            );
+            Debug.Assert(
+                LanguageName is LanguageNames.VisualBasic
+                    == Definition.ConfigName.StartsWith(
+                        OptionDefinition.VisualBasicConfigNamePrefix,
+                        StringComparison.Ordinal
+                    )
+            );
         }
 
         public T DefaultValue => Definition.DefaultValue;
@@ -84,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Options
         object? IOption.DefaultValue => Definition.DefaultValue;
         bool IOption.IsPerLanguage => false;
         Type IOption.Type => Definition.Type;
-        ImmutableArray<OptionStorageLocation> IOption.StorageLocations => ImmutableArray<OptionStorageLocation>.Empty;
+        ImmutableArray<OptionStorageLocation> IOption.StorageLocations =>
+            ImmutableArray<OptionStorageLocation>.Empty;
 #endif
 
         public override string ToString() => Definition.ToString();
@@ -103,7 +135,6 @@ namespace Microsoft.CodeAnalysis.Options
             return Definition == other?.Definition;
         }
 
-        public static implicit operator OptionKey2(Option2<T> option)
-            => new(option);
+        public static implicit operator OptionKey2(Option2<T> option) => new(option);
     }
 }

@@ -18,8 +18,10 @@ namespace System.Net.Http.Headers
         internal static readonly TransferCodingHeaderParser MultipleValueWithQualityParser =
             new TransferCodingHeaderParser(true, CreateTransferCodingWithQuality);
 
-        private TransferCodingHeaderParser(bool supportsMultipleValues,
-            Func<TransferCodingHeaderValue> transferCodingCreator)
+        private TransferCodingHeaderParser(
+            bool supportsMultipleValues,
+            Func<TransferCodingHeaderValue> transferCodingCreator
+        )
             : base(supportsMultipleValues)
         {
             Debug.Assert(transferCodingCreator != null);
@@ -27,18 +29,28 @@ namespace System.Net.Http.Headers
             _transferCodingCreator = transferCodingCreator;
         }
 
-        protected override int GetParsedValueLength(string value, int startIndex, object? storeValue,
-            out object? parsedValue)
+        protected override int GetParsedValueLength(
+            string value,
+            int startIndex,
+            object? storeValue,
+            out object? parsedValue
+        )
         {
-            int resultLength = TransferCodingHeaderValue.GetTransferCodingLength(value, startIndex,
-                _transferCodingCreator, out TransferCodingHeaderValue? temp);
+            int resultLength = TransferCodingHeaderValue.GetTransferCodingLength(
+                value,
+                startIndex,
+                _transferCodingCreator,
+                out TransferCodingHeaderValue? temp
+            );
 
             parsedValue = temp;
             return resultLength;
         }
 
-        private static TransferCodingHeaderValue CreateTransferCoding() => new TransferCodingHeaderValue();
+        private static TransferCodingHeaderValue CreateTransferCoding() =>
+            new TransferCodingHeaderValue();
 
-        private static TransferCodingWithQualityHeaderValue CreateTransferCodingWithQuality() => new TransferCodingWithQualityHeaderValue();
+        private static TransferCodingWithQualityHeaderValue CreateTransferCodingWithQuality() =>
+            new TransferCodingWithQualityHeaderValue();
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,60 +32,57 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI.WebControls
 {
-	public class ListViewUpdatedEventArgs : EventArgs
-	{
-		IOrderedDictionary _newValues;
-		IOrderedDictionary _oldValues;
+    public class ListViewUpdatedEventArgs : EventArgs
+    {
+        IOrderedDictionary _newValues;
+        IOrderedDictionary _oldValues;
 
-		internal ListViewUpdatedEventArgs (int affectedRows, Exception exception, IOrderedDictionary newValues, IOrderedDictionary oldValues)
-			: this (affectedRows, exception)
-		{
-			_newValues = newValues;
-			_oldValues = oldValues;
-		}
-		
-		public ListViewUpdatedEventArgs (int affectedRows, Exception exception)
-		{
-			AffectedRows = affectedRows;
-			Exception = exception;
-			ExceptionHandled = false;
-			KeepInEditMode = false;
-		}
-		
-		public int AffectedRows {
-			get;
-			private set;
-		}
-		
-		public Exception Exception {
-			get;
-			private set;
-		}
-		
-		public bool ExceptionHandled {
-			get;
-			set;
-		}
-		
-		public bool KeepInEditMode {
-			get;
-			set;
-		}
-		
-		public IOrderedDictionary NewValues {
-			get {
-				if (_newValues == null)
-					_newValues = new OrderedDictionary ();
-				return _newValues;
-			}
-		}
-		
-		public IOrderedDictionary OldValues {
-			get {
-				if (_oldValues == null)
-					_oldValues = new OrderedDictionary ();
-				return _newValues;
-			}
-		}
-	}
+        internal ListViewUpdatedEventArgs(
+            int affectedRows,
+            Exception exception,
+            IOrderedDictionary newValues,
+            IOrderedDictionary oldValues
+        )
+            : this(affectedRows, exception)
+        {
+            _newValues = newValues;
+            _oldValues = oldValues;
+        }
+
+        public ListViewUpdatedEventArgs(int affectedRows, Exception exception)
+        {
+            AffectedRows = affectedRows;
+            Exception = exception;
+            ExceptionHandled = false;
+            KeepInEditMode = false;
+        }
+
+        public int AffectedRows { get; private set; }
+
+        public Exception Exception { get; private set; }
+
+        public bool ExceptionHandled { get; set; }
+
+        public bool KeepInEditMode { get; set; }
+
+        public IOrderedDictionary NewValues
+        {
+            get
+            {
+                if (_newValues == null)
+                    _newValues = new OrderedDictionary();
+                return _newValues;
+            }
+        }
+
+        public IOrderedDictionary OldValues
+        {
+            get
+            {
+                if (_oldValues == null)
+                    _oldValues = new OrderedDictionary();
+                return _newValues;
+            }
+        }
+    }
 }

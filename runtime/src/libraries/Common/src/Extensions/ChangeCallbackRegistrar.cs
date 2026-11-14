@@ -19,7 +19,13 @@ namespace Microsoft.Extensions.Internal
         /// <param name="onFailure">The action to execute when an <see cref="ObjectDisposedException"/> is thrown. Should be used to set the IChangeToken's ActiveChangeCallbacks property to false.</param>
         /// <param name="onFailureState">The state to be passed into the <paramref name="onFailure"/> action.</param>
         /// <returns>The <see cref="CancellationToken"/> registration.</returns>
-        internal static IDisposable UnsafeRegisterChangeCallback<T>(Action<object?> callback, object? state, CancellationToken token, Action<T> onFailure, T onFailureState)
+        internal static IDisposable UnsafeRegisterChangeCallback<T>(
+            Action<object?> callback,
+            object? state,
+            CancellationToken token,
+            Action<T> onFailure,
+            T onFailureState
+        )
         {
 #if NETCOREAPP || NETSTANDARD2_1
             try

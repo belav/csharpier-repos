@@ -19,11 +19,11 @@ namespace System.Activities.Core.Presentation
     using System.Linq;
     using System.Runtime;
     using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
-    using System.Windows.Input;
-    using System.Windows.Threading;
     using System.Windows.Automation;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Threading;
 
     partial class StateDesigner
     {
@@ -39,7 +39,10 @@ namespace System.Activities.Core.Presentation
 
         const double StateMinWidth = 20;
 
-        public static readonly RoutedCommand SetAsInitialCommand = new RoutedCommand("SetAsInitial", typeof(StateDesigner));
+        public static readonly RoutedCommand SetAsInitialCommand = new RoutedCommand(
+            "SetAsInitial",
+            typeof(StateDesigner)
+        );
 
         public StateDesigner()
         {
@@ -59,43 +62,73 @@ namespace System.Activities.Core.Presentation
         {
             Type stateType = typeof(State);
             builder.AddCustomAttributes(stateType, new DesignerAttribute(typeof(StateDesigner)));
-            builder.AddCustomAttributes(stateType, stateType.GetProperty(StateDesigner.EntryPropertyName), BrowsableAttribute.No);
-            builder.AddCustomAttributes(stateType, stateType.GetProperty(StateDesigner.ExitPropertyName), BrowsableAttribute.No);
-            builder.AddCustomAttributes(stateType, stateType.GetProperty(StateDesigner.TransitionsPropertyName), BrowsableAttribute.No);
-            builder.AddCustomAttributes(stateType, stateType.GetProperty(StateDesigner.IsFinalPropertyName), BrowsableAttribute.No);
-            builder.AddCustomAttributes(stateType, stateType.GetProperty(StateDesigner.VariablesPropertyName), BrowsableAttribute.No);
+            builder.AddCustomAttributes(
+                stateType,
+                stateType.GetProperty(StateDesigner.EntryPropertyName),
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                stateType,
+                stateType.GetProperty(StateDesigner.ExitPropertyName),
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                stateType,
+                stateType.GetProperty(StateDesigner.TransitionsPropertyName),
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                stateType,
+                stateType.GetProperty(StateDesigner.IsFinalPropertyName),
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                stateType,
+                stateType.GetProperty(StateDesigner.VariablesPropertyName),
+                BrowsableAttribute.No
+            );
 
             builder.AddCustomAttributes(stateType, new ShowInOutlineViewAttribute());
             builder.AddCustomAttributes(stateType, new AllowBreakpointAttribute());
-            builder.AddCustomAttributes(stateType, stateType.GetProperty(StateDesigner.TransitionsPropertyName), new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false });
-            builder.AddCustomAttributes(stateType, new ActivityDesignerOptionsAttribute
-            {
-                OutlineViewIconProvider = (modelItem) =>
+            builder.AddCustomAttributes(
+                stateType,
+                stateType.GetProperty(StateDesigner.TransitionsPropertyName),
+                new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false }
+            );
+            builder.AddCustomAttributes(
+                stateType,
+                new ActivityDesignerOptionsAttribute
                 {
-                    ResourceDictionary icons = EditorResources.GetIcons();
-
-                    if (modelItem != null)
+                    OutlineViewIconProvider = (modelItem) =>
                     {
-                        object icon = null;
+                        ResourceDictionary icons = EditorResources.GetIcons();
 
-                        if (StateContainerEditor.IsFinalState(modelItem) && icons.Contains("FinalStateIcon"))
+                        if (modelItem != null)
                         {
-                            icon = icons["FinalStateIcon"];
-                        }
-                        else if (icons.Contains("StateIcon"))
-                        {
-                            icon = icons["StateIcon"];
+                            object icon = null;
+
+                            if (
+                                StateContainerEditor.IsFinalState(modelItem)
+                                && icons.Contains("FinalStateIcon")
+                            )
+                            {
+                                icon = icons["FinalStateIcon"];
+                            }
+                            else if (icons.Contains("StateIcon"))
+                            {
+                                icon = icons["StateIcon"];
+                            }
+
+                            if (icon != null && icon is DrawingBrush)
+                            {
+                                return (DrawingBrush)icon;
+                            }
                         }
 
-                        if (icon != null && icon is DrawingBrush)
-                        {
-                            return (DrawingBrush)icon;
-                        }
-                    }
-
-                    return null;
+                        return null;
+                    },
                 }
-            });
+            );
         }
 
         protected override void OnShowExpandedChanged(bool newValue)
@@ -124,24 +157,40 @@ namespace System.Activities.Core.Presentation
             return status;
         }
 
-
         void OnSetAsInitialCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            ModelItem stateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(this.ModelItem);
-            e.CanExecute = (!this.IsReadOnly && stateMachineModelItem != null && this.ModelItem != stateMachineModelItem.Properties[StateMachineDesigner.InitialStatePropertyName].Value &&
-                            !this.IsFinalState() &&
-                            !this.IsRootDesigner && StateContainerEditor.GetEmptyConnectionPoints(this).Count > 0);
+            ModelItem stateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(
+                this.ModelItem
+            );
+            e.CanExecute = (
+                !this.IsReadOnly
+                && stateMachineModelItem != null
+                && this.ModelItem
+                    != stateMachineModelItem
+                        .Properties[StateMachineDesigner.InitialStatePropertyName]
+                        .Value
+                && !this.IsFinalState()
+                && !this.IsRootDesigner
+                && StateContainerEditor.GetEmptyConnectionPoints(this).Count > 0
+            );
             e.Handled = true;
         }
 
         void OnSetAsInitialExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            ModelItem stateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(this.ModelItem);
+            ModelItem stateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(
+                this.ModelItem
+            );
 
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.SetInitialState))
             {
-                this.ViewStateService.RemoveViewState(stateMachineModelItem, StateContainerEditor.ConnectorLocationViewStateKey);
-                stateMachineModelItem.Properties[StateMachineDesigner.InitialStatePropertyName].SetValue(this.ModelItem.GetCurrentValue());
+                this.ViewStateService.RemoveViewState(
+                    stateMachineModelItem,
+                    StateContainerEditor.ConnectorLocationViewStateKey
+                );
+                stateMachineModelItem
+                    .Properties[StateMachineDesigner.InitialStatePropertyName]
+                    .SetValue(this.ModelItem.GetCurrentValue());
                 es.Complete();
             }
             e.Handled = true;
@@ -165,7 +214,9 @@ namespace System.Activities.Core.Presentation
         public FreeFormPanel GetStateMachineFreeFormPanel()
         {
             StateDesigner current = this;
-            WorkflowViewElement parent = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(current);
+            WorkflowViewElement parent = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(
+                current
+            );
             while (parent != null)
             {
                 if (parent is StateDesigner)
@@ -222,14 +273,25 @@ namespace System.Activities.Core.Presentation
 
             if (StateContainerEditor.CopiedTransitionDestinationState != null)
             {
-                WorkflowViewElement view = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(stateContainerEditor);
+                WorkflowViewElement view = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(
+                    stateContainerEditor
+                );
                 if (view != null)
                 {
-                    StateContainerEditor container = (StateContainerEditor)DragDropHelper.GetCompositeView(view);
+                    StateContainerEditor container = (StateContainerEditor)
+                        DragDropHelper.GetCompositeView(view);
                     string errorMessage;
-                    if (container != null && container.CanPasteTransition(StateContainerEditor.CopiedTransitionDestinationState, out errorMessage, view.ModelItem))
+                    if (
+                        container != null
+                        && container.CanPasteTransition(
+                            StateContainerEditor.CopiedTransitionDestinationState,
+                            out errorMessage,
+                            view.ModelItem
+                        )
+                    )
                     {
-                        stateContainerEditor.ToolTip = SR.EditStateToolTip + Environment.NewLine + SR.PasteTransitionToolTip;
+                        stateContainerEditor.ToolTip =
+                            SR.EditStateToolTip + Environment.NewLine + SR.PasteTransitionToolTip;
                         return;
                     }
                 }

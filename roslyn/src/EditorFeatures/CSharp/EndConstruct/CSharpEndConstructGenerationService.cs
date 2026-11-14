@@ -19,15 +19,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EndConstructGeneration
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEndConstructGenerationService()
-        {
-        }
+        public CSharpEndConstructGenerationService() { }
 
         public bool TryDo(
             ITextView textView,
             ITextBuffer subjectBuffer,
             char typedChar,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return false;
         }

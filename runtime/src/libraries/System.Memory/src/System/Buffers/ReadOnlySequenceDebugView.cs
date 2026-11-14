@@ -28,10 +28,7 @@ namespace System.Buffers
                 segments[i] = readOnlyMemory;
                 i++;
             }
-            _segments = new ReadOnlySequenceDebugViewSegments()
-            {
-                Segments = segments
-            };
+            _segments = new ReadOnlySequenceDebugViewSegments() { Segments = segments };
         }
 
         public ReadOnlySequenceDebugViewSegments BufferSegments => _segments;

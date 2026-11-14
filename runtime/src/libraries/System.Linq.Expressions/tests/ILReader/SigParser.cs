@@ -4,10 +4,10 @@
 // Code adapted from https://blogs.msdn.microsoft.com/davbr/2005/10/13/sigparse-cpp
 
 using sig_byte = System.Byte;
-using sig_elem_type = System.Byte;
-using sig_index_type = System.Byte;
-using sig_index = System.Int32;
 using sig_count = System.Int32;
+using sig_elem_type = System.Byte;
+using sig_index = System.Int32;
+using sig_index_type = System.Byte;
 using sig_mem_number = System.Int32;
 
 namespace System.Linq.Expressions.Tests
@@ -119,15 +119,14 @@ namespace System.Linq.Expressions.Tests
         private const int ELEMENT_TYPE_PINNED = 0x45; // Denotes a local variable that points at a pinned object
 
         private const int SIG_METHOD_DEFAULT = 0x0; // default calling convention
-        private const int SIG_METHOD_C = 0x1;// C calling convention
-        private const int SIG_METHOD_STDCALL = 0x2;// Stdcall calling convention
+        private const int SIG_METHOD_C = 0x1; // C calling convention
+        private const int SIG_METHOD_STDCALL = 0x2; // Stdcall calling convention
         private const int SIG_METHOD_THISCALL = 0x3; // thiscall  calling convention
         private const int SIG_METHOD_FASTCALL = 0x4; // fastcall calling convention
-        private const int SIG_METHOD_VARARG = 0x5;// vararg calling convention
+        private const int SIG_METHOD_VARARG = 0x5; // vararg calling convention
         private const int SIG_FIELD = 0x6; // encodes a field
         private const int SIG_LOCAL_SIG = 0x7; // used for the .locals directive
         private const int SIG_PROPERTY = 0x8; // used to encode a property
-
 
         private const int SIG_GENERIC = 0x10; // used to indicate that the method has one or more generic parameters.
         private const int SIG_HASTHIS = 0x20; // used to encode the keyword instance in the calling convention
@@ -143,6 +142,7 @@ namespace System.Linq.Expressions.Tests
 
         // a method with given elem_type
         protected virtual void NotifyBeginMethod(sig_elem_type elem_type) { }
+
         protected virtual void NotifyEndMethod() { }
 
         // total parameters for the method
@@ -150,10 +150,12 @@ namespace System.Linq.Expressions.Tests
 
         // starting a return type
         protected virtual void NotifyBeginRetType() { }
+
         protected virtual void NotifyEndRetType() { }
 
         // starting a parameter
         protected virtual void NotifyBeginParam() { }
+
         protected virtual void NotifyEndParam() { }
 
         // sentinel indication the location of the "..." in the method signature
@@ -164,10 +166,12 @@ namespace System.Linq.Expressions.Tests
 
         // a field with given elem_type
         protected virtual void NotifyBeginField(sig_elem_type elem_type) { }
+
         protected virtual void NotifyEndField() { }
 
         // a block of locals with given elem_type (always just LOCAL_SIG for now)
         protected virtual void NotifyBeginLocals(sig_elem_type elem_type) { }
+
         protected virtual void NotifyEndLocals() { }
 
         // count of locals with a block
@@ -175,6 +179,7 @@ namespace System.Linq.Expressions.Tests
 
         // starting a new local within a local block
         protected virtual void NotifyBeginLocal() { }
+
         protected virtual void NotifyEndLocal() { }
 
         // the only constraint available to locals at the moment is ELEMENT_TYPE_PINNED
@@ -182,10 +187,12 @@ namespace System.Linq.Expressions.Tests
 
         // a property with given element type
         protected virtual void NotifyBeginProperty(sig_elem_type elem_type) { }
+
         protected virtual void NotifyEndProperty() { }
 
         // starting array shape information for array types
         protected virtual void NotifyBeginArrayShape() { }
+
         protected virtual void NotifyEndArrayShape() { }
 
         // array rank (total number of dimensions)
@@ -193,15 +200,18 @@ namespace System.Linq.Expressions.Tests
 
         // number of dimensions with specified sizes followed by the size of each
         protected virtual void NotifyNumSizes(sig_count count) { }
+
         protected virtual void NotifySize(sig_count count) { }
 
         // BUG BUG lower bounds can be negative, how can this be encoded?
         // number of dimensions with specified lower bounds followed by lower bound of each
         protected virtual void NotifyNumLoBounds(sig_count count) { }
+
         protected virtual void NotifyLoBound(sig_count count) { }
 
         // starting a normal type (occurs in many contexts such as param, field, local, etc)
         protected virtual void NotifyBeginType() { }
+
         protected virtual void NotifyEndType() { }
 
         protected virtual void NotifyTypedByref() { }
@@ -215,14 +225,23 @@ namespace System.Linq.Expressions.Tests
         protected virtual void NotifyVoid() { }
 
         // the type has the indicated custom modifiers (which can be optional or required)
-        protected virtual void NotifyCustomMod(sig_elem_type cmod, sig_index token, sig_index_type indexType, sig_index index) { }
+        protected virtual void NotifyCustomMod(
+            sig_elem_type cmod,
+            sig_index token,
+            sig_index_type indexType,
+            sig_index index
+        ) { }
 
         // the type is a simple type, the elem_type defines it fully
         protected virtual void NotifyTypeSimple(sig_elem_type elem_type) { }
 
         // the type is specified by the given index of the given index type (normally a type index in the type metadata)
         // this callback is normally qualified by other ones such as NotifyTypeClass or NotifyTypeValueType
-        protected virtual void NotifyTypeDefOrRef(sig_index token, sig_index_type indexType, int index) { }
+        protected virtual void NotifyTypeDefOrRef(
+            sig_index token,
+            sig_index_type indexType,
+            int index
+        ) { }
 
         // number indicates the number of type specifications for the generic types that will follow
         protected virtual void NotifyTypeGenericInst(sig_mem_number number) { }
@@ -267,21 +286,21 @@ namespace System.Linq.Expressions.Tests
 
             switch (elem_type & 0xf)
             {
-                case SIG_METHOD_DEFAULT:  // default calling convention
-                case SIG_METHOD_C:    // C calling convention
+                case SIG_METHOD_DEFAULT: // default calling convention
+                case SIG_METHOD_C: // C calling convention
                 case SIG_METHOD_STDCALL: // Stdcall calling convention
                 case SIG_METHOD_THISCALL: // thiscall  calling convention
                 case SIG_METHOD_FASTCALL: // fastcall calling convention
-                case SIG_METHOD_VARARG:   // vararg calling convention
+                case SIG_METHOD_VARARG: // vararg calling convention
                     return ParseMethod(elem_type);
 
-                case SIG_FIELD:           // encodes a field
+                case SIG_FIELD: // encodes a field
                     return ParseField(elem_type);
 
-                case SIG_LOCAL_SIG:       // used for the .locals directive
+                case SIG_LOCAL_SIG: // used for the .locals directive
                     return ParseLocals(elem_type);
 
-                case SIG_PROPERTY:        // used to encode a property
+                case SIG_PROPERTY: // used to encode a property
                     return ParseProperty(elem_type);
 
                 default:
@@ -291,7 +310,6 @@ namespace System.Linq.Expressions.Tests
 
             return false;
         }
-
 
         bool ParseByte(out sig_byte pbOut)
         {
@@ -865,7 +883,11 @@ namespace System.Linq.Expressions.Tests
             return true;
         }
 
-        bool ParseTypeDefOrRefEncoded(out sig_index pEncoded, out sig_index_type pIndexTypeOut, out sig_index pIndexOut)
+        bool ParseTypeDefOrRefEncoded(
+            out sig_index pEncoded,
+            out sig_index_type pIndexTypeOut,
+            out sig_index pIndexOut
+        )
         {
             pIndexTypeOut = 0;
             pIndexOut = 0;
@@ -886,7 +908,10 @@ namespace System.Linq.Expressions.Tests
 
             // parse the variable length number format (0-4 bytes)
 
-            sig_byte b1 = 0, b2 = 0, b3 = 0, b4 = 0;
+            sig_byte b1 = 0,
+                b2 = 0,
+                b3 = 0,
+                b4 = 0;
 
             // at least one byte in the encoding, read that
 

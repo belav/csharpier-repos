@@ -14,12 +14,27 @@ namespace System.Net.NetworkInformation
             _address = address;
         }
 
-        public override IPAddress Address { get { return _address; } }
+        public override IPAddress Address
+        {
+            get { return _address; }
+        }
 
         [UnsupportedOSPlatform("linux")]
-        public override bool IsDnsEligible { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsDnsEligible
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         [UnsupportedOSPlatform("linux")]
-        public override bool IsTransient { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsTransient
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
     }
 }

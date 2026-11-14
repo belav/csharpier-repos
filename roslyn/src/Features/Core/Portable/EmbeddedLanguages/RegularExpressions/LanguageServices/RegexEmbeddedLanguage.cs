@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
 
         public RegexEmbeddedLanguage(
             AbstractEmbeddedLanguagesProvider provider,
-            EmbeddedLanguageInfo info)
+            EmbeddedLanguageInfo info
+        )
         {
             Info = info;
 
@@ -31,18 +32,25 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
         }
 
         internal async Task<(RegexTree tree, SyntaxToken token)> TryGetTreeAndTokenAtPositionAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = root.FindToken(position);
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var detector = RegexLanguageDetector.GetOrCreate(semanticModel.Compilation, this.Info);
             var tree = detector.TryParseString(token, semanticModel, cancellationToken);
             return tree == null ? default : (tree, token);
         }
 
-        public string EscapeText(string text, SyntaxToken token)
-            => _provider.EscapeText(text, token);
+        public string EscapeText(string text, SyntaxToken token) =>
+            _provider.EscapeText(text, token);
     }
 }

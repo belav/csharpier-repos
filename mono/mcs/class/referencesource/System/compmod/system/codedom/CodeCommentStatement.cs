@@ -1,28 +1,25 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeCommentStatement.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para> Represents a comment.</para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeCommentStatement : CodeStatement {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeCommentStatement : CodeStatement
+    {
         private CodeComment comment;
 
         /// <devdoc>
@@ -30,13 +27,13 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeCommentStatement'/>.
         ///    </para>
         /// </devdoc>
-        public CodeCommentStatement() {
-        }
+        public CodeCommentStatement() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeCommentStatement(CodeComment comment) {
+        public CodeCommentStatement(CodeComment comment)
+        {
             this.comment = comment;
         }
 
@@ -46,27 +43,26 @@ namespace System.CodeDom {
         ///       contents.
         ///    </para>
         /// </devdoc>
-        public CodeCommentStatement(string text) {
+        public CodeCommentStatement(string text)
+        {
             comment = new CodeComment(text);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeCommentStatement(string text, bool docComment) {
+        public CodeCommentStatement(string text, bool docComment)
+        {
             comment = new CodeComment(text, docComment);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeComment Comment {
-            get {
-                return comment;
-            }
-            set {
-                comment = value;
-            }
+        public CodeComment Comment
+        {
+            get { return comment; }
+            set { comment = value; }
         }
     }
 }

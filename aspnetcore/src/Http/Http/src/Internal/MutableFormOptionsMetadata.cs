@@ -16,14 +16,14 @@ internal struct MutableFormOptionsMetadata(IFormOptionsMetadata formOptionsMetad
             ValueCountLimit = ValueCountLimit ?? baseFormOptions.ValueCountLimit,
             KeyLengthLimit = KeyLengthLimit ?? baseFormOptions.KeyLengthLimit,
             ValueLengthLimit = ValueLengthLimit ?? baseFormOptions.ValueLengthLimit,
-            MultipartBoundaryLengthLimit =
-                MultipartBoundaryLengthLimit ?? baseFormOptions.MultipartBoundaryLengthLimit,
-            MultipartHeadersCountLimit =
-                MultipartHeadersCountLimit ?? baseFormOptions.MultipartHeadersCountLimit,
-            MultipartHeadersLengthLimit =
-                MultipartHeadersLengthLimit ?? baseFormOptions.MultipartHeadersLengthLimit,
-            MultipartBodyLengthLimit =
-                MultipartBodyLengthLimit ?? baseFormOptions.MultipartBodyLengthLimit,
+            MultipartBoundaryLengthLimit = MultipartBoundaryLengthLimit
+                ?? baseFormOptions.MultipartBoundaryLengthLimit,
+            MultipartHeadersCountLimit = MultipartHeadersCountLimit
+                ?? baseFormOptions.MultipartHeadersCountLimit,
+            MultipartHeadersLengthLimit = MultipartHeadersLengthLimit
+                ?? baseFormOptions.MultipartHeadersLengthLimit,
+            MultipartBodyLengthLimit = MultipartBodyLengthLimit
+                ?? baseFormOptions.MultipartBodyLengthLimit,
         };
 
     public bool? BufferBody { get; set; } = formOptionsMetadata.BufferBody;

@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="DefaultEventAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -16,7 +17,8 @@ namespace System.ComponentModel {
     ///       component.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class DefaultEventAttribute : Attribute {
+    public sealed class DefaultEventAttribute : Attribute
+    {
         /// <devdoc>
         ///     This is the default event name.
         /// </devdoc>
@@ -28,10 +30,10 @@ namespace System.ComponentModel {
         ///       a new instance of the <see cref='System.ComponentModel.DefaultEventAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        public DefaultEventAttribute(string name) {
+        public DefaultEventAttribute(string name)
+        {
             this.name = name;
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -39,10 +41,9 @@ namespace System.ComponentModel {
         ///       the component this attribute is bound to.
         ///    </para>
         /// </devdoc>
-        public string Name {
-            get {
-                return name;
-            }
+        public string Name
+        {
+            get { return name; }
         }
 
         /// <devdoc>
@@ -54,12 +55,14 @@ namespace System.ComponentModel {
         /// </devdoc>
         public static readonly DefaultEventAttribute Default = new DefaultEventAttribute(null);
 
-        public override bool Equals(object obj) {
-            DefaultEventAttribute other = obj as DefaultEventAttribute; 
+        public override bool Equals(object obj)
+        {
+            DefaultEventAttribute other = obj as DefaultEventAttribute;
             return (other != null) && other.Name == name;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
     }

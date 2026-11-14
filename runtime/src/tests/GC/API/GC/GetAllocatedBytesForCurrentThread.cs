@@ -3,11 +3,11 @@
 // Tests GC.Collect()
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 
-public class Test_GetAllocatedBytesForCurrentThread 
+public class Test_GetAllocatedBytesForCurrentThread
 {
     static Random Rand = new Random();
 
@@ -31,7 +31,7 @@ public class Test_GetAllocatedBytesForCurrentThread
 
     static int Alloc(List<object> list, int size)
     {
-        int toAlloc = Rand.Next(size / 2 , (int)((float)size * 1.5));
+        int toAlloc = Rand.Next(size / 2, (int)((float)size * 1.5));
         Console.WriteLine("allocating {0} bytes", toAlloc);
         int allocated = 0;
 
@@ -51,9 +51,9 @@ public class Test_GetAllocatedBytesForCurrentThread
         for (int i = 0; i < 100; i++)
         {
             List<object> list = new List<object>();
-            allocatedBytes = Alloc(list, 80*1024*1024);
+            allocatedBytes = Alloc(list, 80 * 1024 * 1024);
 
-            if (!GetAllocatedBytesForCurrentThread (100000)) 
+            if (!GetAllocatedBytesForCurrentThread(100000))
             {
                 return false;
             }
@@ -68,14 +68,16 @@ public class Test_GetAllocatedBytesForCurrentThread
     {
         const string name = "GetAllocatedBytesForCurrentThread";
         var typeInfo = typeof(GC).GetTypeInfo();
-        var method = typeInfo.GetMethod(name, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+        var method = typeInfo.GetMethod(
+            name,
+            BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+        );
 
         long nBytesBefore = 0;
         long nBytesAfter = 0;
 
         int countBefore = GC.CollectionCount(0);
         int bytesDiff = 0;
-
 
         for (int i = 0; i < 10000; ++i)
         {
@@ -88,17 +90,24 @@ public class Test_GetAllocatedBytesForCurrentThread
 
             nBytesAfter = (long)method.Invoke(null, null);
 
-            if (nBytesAfter == nBytesBefore)  // Shouldn't be the same 
+            if (nBytesAfter == nBytesBefore) // Shouldn't be the same
             {
                 int countAfter = GC.CollectionCount(0);
-                Console.WriteLine("b: {0}, a: {1}, iter {2}, {3}->{4}", nBytesBefore, nBytesAfter, i, countBefore, countAfter);
+                Console.WriteLine(
+                    "b: {0}, a: {1}, iter {2}, {3}->{4}",
+                    nBytesBefore,
+                    nBytesAfter,
+                    i,
+                    countBefore,
+                    countAfter
+                );
                 return false;
             }
         }
         return true;
     }
 
-    public static int Main() 
+    public static int Main()
     {
         // First test with collection
         if (!TestCore1(true))
@@ -118,7 +127,6 @@ public class Test_GetAllocatedBytesForCurrentThread
             Console.WriteLine("Test for GetAllocatedBytesForCurrentThread() failed!");
             return 1;
         }
-
 
         Console.WriteLine("Test for GetAllocatedBytesForCurrentThread() passed!");
         return 100;

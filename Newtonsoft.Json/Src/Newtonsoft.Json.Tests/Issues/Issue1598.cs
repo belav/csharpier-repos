@@ -51,42 +51,36 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test()
         {
             Activities activities = new Activities();
-            activities.List = new List<Activity>
-            {
-                new Activity
-                {
-                    Name = "An activity"
-                }
-            };
+            activities.List = new List<Activity> { new Activity { Name = "An activity" } };
 
             string json = JsonConvert.SerializeObject(activities, Formatting.Indented);
             // note that this has been reverted back in 11.0.2 because it is causing compat issues
             // https://github.com/JamesNK/Newtonsoft.Json/issues/1627
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""An activity""
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void Test_SubClass()
         {
             ActivitiesSubClass activities = new ActivitiesSubClass();
-            activities.List = new List<Activity>
-            {
-                new Activity
-                {
-                    Name = "An activity"
-                }
-            };
+            activities.List = new List<Activity> { new Activity { Name = "An activity" } };
 
             string json = JsonConvert.SerializeObject(activities, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""An activity""
   }
-]", json);
+]",
+                json
+            );
         }
 
         public class Activity
@@ -94,9 +88,7 @@ namespace Newtonsoft.Json.Tests.Issues
             public string Name { get; set; }
         }
 
-        public class ActivitiesSubClass : Activities
-        {
-        }
+        public class ActivitiesSubClass : Activities { }
 
         [DataContract]
         public class Activities : IEnumerable<Activity>

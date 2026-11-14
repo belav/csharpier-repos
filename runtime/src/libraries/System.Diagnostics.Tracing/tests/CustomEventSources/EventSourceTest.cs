@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
@@ -26,68 +26,151 @@ namespace SdtEventSources
     [EventSource(Guid = "69e2aa3e-083b-5014-cad4-3e511a0b94cf", Name = "EventSourceTest")]
     public sealed class EventSourceTest : EventSource
     {
-        public EventSourceTest(bool useSelfDescribingEvents = false, bool throwOnEventWriteErrors = false)
-            : base((useSelfDescribingEvents ? EventSourceSettings.EtwSelfDescribingEventFormat : EventSourceSettings.EtwManifestEventFormat)
-                  | (throwOnEventWriteErrors ? EventSourceSettings.ThrowOnEventWriteErrors : 0))
-        { }
+        public EventSourceTest(
+            bool useSelfDescribingEvents = false,
+            bool throwOnEventWriteErrors = false
+        )
+            : base(
+                (
+                    useSelfDescribingEvents
+                        ? EventSourceSettings.EtwSelfDescribingEventFormat
+                        : EventSourceSettings.EtwManifestEventFormat
+                ) | (throwOnEventWriteErrors ? EventSourceSettings.ThrowOnEventWriteErrors : 0)
+            ) { }
 
         protected override void OnEventCommand(EventCommandEventArgs command)
         {
             Debug.WriteLine(string.Format("EventSourceTest: Got Command {0}", command.Command));
-            Debug.WriteLine("  Args: " + string.Join(", ", command.Arguments.Select((pair) => string.Format("{0} -> {1}", pair.Key, pair.Value))));
+            Debug.WriteLine(
+                "  Args: "
+                    + string.Join(
+                        ", ",
+                        command.Arguments.Select(
+                            (pair) => string.Format("{0} -> {1}", pair.Key, pair.Value)
+                        )
+                    )
+            );
         }
 
         [Event(1, Keywords = Keywords.HasNoArgs, Level = EventLevel.Informational)]
-        public void Event0() { WriteEvent(1); }
+        public void Event0()
+        {
+            WriteEvent(1);
+        }
 
         [Event(2, Keywords = Keywords.HasIntArgs, Level = EventLevel.Informational)]
-        public void EventI(int arg1) { WriteEvent(2, arg1); }
+        public void EventI(int arg1)
+        {
+            WriteEvent(2, arg1);
+        }
 
         [Event(3, Keywords = Keywords.HasIntArgs, Level = EventLevel.Informational)]
-        public void EventII(int arg1, int arg2) { WriteEvent(3, arg1, arg2); }
+        public void EventII(int arg1, int arg2)
+        {
+            WriteEvent(3, arg1, arg2);
+        }
 
         [Event(4, Keywords = Keywords.HasIntArgs, Level = EventLevel.Informational)]
-        public void EventIII(int arg1, int arg2, int arg3 = 12) { WriteEvent(4, arg1, arg2, arg3); }
+        public void EventIII(int arg1, int arg2, int arg3 = 12)
+        {
+            WriteEvent(4, arg1, arg2, arg3);
+        }
 
         [Event(5, Keywords = Keywords.HasLongArgs, Level = EventLevel.Informational)]
-        public void EventL(long arg1) { WriteEvent(5, arg1); }
+        public void EventL(long arg1)
+        {
+            WriteEvent(5, arg1);
+        }
 
         [Event(6, Keywords = Keywords.HasLongArgs, Level = EventLevel.Informational)]
-        public void EventLL(long arg1, long arg2) { WriteEvent(6, arg1, arg2); }
+        public void EventLL(long arg1, long arg2)
+        {
+            WriteEvent(6, arg1, arg2);
+        }
 
         [Event(7, Keywords = Keywords.HasLongArgs, Level = EventLevel.Informational)]
-        public void EventLLL(long arg1, long arg2, long arg3) { WriteEvent(7, arg1, arg2, arg3); }
+        public void EventLLL(long arg1, long arg2, long arg3)
+        {
+            WriteEvent(7, arg1, arg2, arg3);
+        }
 
         [Event(8, Keywords = Keywords.HasStringArgs, Level = EventLevel.Informational)]
-        public void EventS(string arg1) { WriteEvent(8, arg1); }
+        public void EventS(string arg1)
+        {
+            WriteEvent(8, arg1);
+        }
 
         [Event(9, Keywords = Keywords.HasStringArgs, Level = EventLevel.Informational)]
-        public void EventSS(string arg1, string arg2) { WriteEvent(9, arg1, arg2); }
+        public void EventSS(string arg1, string arg2)
+        {
+            WriteEvent(9, arg1, arg2);
+        }
 
         [Event(10, Keywords = Keywords.HasStringArgs, Level = EventLevel.Informational)]
-        public void EventSSS(string arg1, string arg2, string arg3) { WriteEvent(10, arg1, arg2, arg3); }
+        public void EventSSS(string arg1, string arg2, string arg3)
+        {
+            WriteEvent(10, arg1, arg2, arg3);
+        }
 
-        [Event(11, Keywords = Keywords.HasStringArgs | Keywords.HasIntArgs, Level = EventLevel.Informational)]
-        public void EventSI(string arg1, int arg2) { WriteEvent(11, arg1, arg2); }
+        [Event(
+            11,
+            Keywords = Keywords.HasStringArgs | Keywords.HasIntArgs,
+            Level = EventLevel.Informational
+        )]
+        public void EventSI(string arg1, int arg2)
+        {
+            WriteEvent(11, arg1, arg2);
+        }
 
-        [Event(12, Keywords = Keywords.HasStringArgs | Keywords.HasLongArgs, Level = EventLevel.Informational)]
-        public void EventSL(string arg1, long arg2) { WriteEvent(12, arg1, arg2); }
+        [Event(
+            12,
+            Keywords = Keywords.HasStringArgs | Keywords.HasLongArgs,
+            Level = EventLevel.Informational
+        )]
+        public void EventSL(string arg1, long arg2)
+        {
+            WriteEvent(12, arg1, arg2);
+        }
 
-        [Event(13, Keywords = Keywords.HasStringArgs | Keywords.HasIntArgs, Level = EventLevel.Informational)]
-        public void EventSII(string arg1, int arg2, int arg3) { WriteEvent(13, arg1, arg2, arg3); }
+        [Event(
+            13,
+            Keywords = Keywords.HasStringArgs | Keywords.HasIntArgs,
+            Level = EventLevel.Informational
+        )]
+        public void EventSII(string arg1, int arg2, int arg3)
+        {
+            WriteEvent(13, arg1, arg2, arg3);
+        }
 
         [Event(14, Keywords = Keywords.HasStringArgs, Level = EventLevel.Informational)]
-        public void Message(string arg1) { WriteEvent(14, arg1); }
+        public void Message(string arg1)
+        {
+            WriteEvent(14, arg1);
+        }
 
-        [Event(15, Keywords = Keywords.HasNoArgs, Level = EventLevel.Informational, Task = Tasks.WorkItem)]
-        public void StartTrackingActivity() { WriteEvent(15); }
+        [Event(
+            15,
+            Keywords = Keywords.HasNoArgs,
+            Level = EventLevel.Informational,
+            Task = Tasks.WorkItem
+        )]
+        public void StartTrackingActivity()
+        {
+            WriteEvent(15);
+        }
 
-        [Event(17, Keywords = Keywords.Transfer | Keywords.HasStringArgs, Opcode = EventOpcode.Send, Task = Tasks.WorkItem)]
+        [Event(
+            17,
+            Keywords = Keywords.Transfer | Keywords.HasStringArgs,
+            Opcode = EventOpcode.Send,
+            Task = Tasks.WorkItem
+        )]
         public unsafe void LogTaskScheduled(Guid RelatedActivityId, string message)
         {
             unsafe
             {
-                if (message == null) message = "";
+                if (message == null)
+                    message = "";
                 fixed (char* string1Bytes = message)
                 {
                     EventSource.EventData* descrs = stackalloc EventSource.EventData[1];
@@ -98,29 +181,53 @@ namespace SdtEventSources
             }
         }
 
-        [Event(18, Keywords = Keywords.HasStringArgs | Keywords.HasIntArgs, Level = EventLevel.Informational)]
+        [Event(
+            18,
+            Keywords = Keywords.HasStringArgs | Keywords.HasIntArgs,
+            Level = EventLevel.Informational
+        )]
         public void SlowerHelper(int arg1, string arg2)
-        { if (IsEnabled()) WriteEvent(18, arg1, arg2); }
-
+        {
+            if (IsEnabled())
+                WriteEvent(18, arg1, arg2);
+        }
 
         [Event(19, Keywords = Keywords.HasEnumArgs, Level = EventLevel.Informational)]
-        public void EventEnum(MyColor x) { WriteEvent(19, (int)x); }
+        public void EventEnum(MyColor x)
+        {
+            WriteEvent(19, (int)x);
+        }
 
         [Event(20, Keywords = Keywords.HasEnumArgs, Level = EventLevel.Informational)]
-        public void EventEnum1(MyColor x) { WriteEvent(20, x); }
+        public void EventEnum1(MyColor x)
+        {
+            WriteEvent(20, x);
+        }
 
         [Event(21, Keywords = Keywords.HasEnumArgs, Level = EventLevel.Informational)]
-        public void EventFlags(MyFlags x) { WriteEvent(21, (int)x); }
+        public void EventFlags(MyFlags x)
+        {
+            WriteEvent(21, (int)x);
+        }
 
         [Event(22, Keywords = Keywords.HasEnumArgs, Level = EventLevel.Informational)]
-        public void EventFlags1(MyFlags x) { WriteEvent(22, x); }
+        public void EventFlags1(MyFlags x)
+        {
+            WriteEvent(22, x);
+        }
 
-        [Event(23, Keywords = Keywords.Transfer | Keywords.HasStringArgs, Opcode = EventOpcode.Send, Task = Tasks.WorkItemBad)]
+        [Event(
+            23,
+            Keywords = Keywords.Transfer | Keywords.HasStringArgs,
+            Opcode = EventOpcode.Send,
+            Task = Tasks.WorkItemBad
+        )]
         public void LogTaskScheduledBad(Guid RelatedActivityId, string message)
         {
             unsafe
             {
-                if (message == null) message = "";
+                if (message == null)
+                    message = "";
                 fixed (char* string1Bytes = message)
                 {
                     EventSource.EventData* descrs = stackalloc EventSource.EventData[1];
@@ -132,34 +239,90 @@ namespace SdtEventSources
         }
 
         // v4.5 does not support DateTime (until v4.5.1)
-        [Event(24, Keywords = Keywords.HasDateTimeArgs,
-         Message = "DateTime passed in: <{0}>",
-         Opcode = Opcodes.Opcode1,
-         Task = Tasks.WorkDateTime,
-         Level = EventLevel.Informational)]
-        public void EventDateTime(DateTime dt) { WriteEvent(24, dt); }
+        [Event(
+            24,
+            Keywords = Keywords.HasDateTimeArgs,
+            Message = "DateTime passed in: <{0}>",
+            Opcode = Opcodes.Opcode1,
+            Task = Tasks.WorkDateTime,
+            Level = EventLevel.Informational
+        )]
+        public void EventDateTime(DateTime dt)
+        {
+            WriteEvent(24, dt);
+        }
 
         [Event(25, Keywords = Keywords.HasNoArgs, Level = EventLevel.Informational)]
-        public void EventWithManyTypeArgs(string msg, long l, uint ui, ulong ui64, char c,
-                                          byte b, sbyte sb, short sh, ushort ush,
-                                          float f, double d, Guid guid)
+        public void EventWithManyTypeArgs(
+            string msg,
+            long l,
+            uint ui,
+            ulong ui64,
+            char c,
+            byte b,
+            sbyte sb,
+            short sh,
+            ushort ush,
+            float f,
+            double d,
+            Guid guid
+        )
         {
             if (IsEnabled(EventLevel.Informational, Keywords.HasNoArgs))
                 WriteEvent(25, msg, l, ui, ui64, c, b, sb, sh, ush, f, d, guid);
         }
 
         [Event(26)]
-        public void EventWith7Strings(string s0, string s1, string s2, string s3, string s4, string s5, string s6)
-        { WriteEvent(26, s0, s1, s2, s3, s4, s5, s6); }
+        public void EventWith7Strings(
+            string s0,
+            string s1,
+            string s2,
+            string s3,
+            string s4,
+            string s5,
+            string s6
+        )
+        {
+            WriteEvent(26, s0, s1, s2, s3, s4, s5, s6);
+        }
 
         [Event(27)]
-        public void EventWith9Strings(string s0, string s1, string s2, string s3, string s4, string s5, string s6, string s7, string s8)
-        { WriteEvent(27, s0, s1, s2, s3, s4, s5, s6, s7, s8); }
+        public void EventWith9Strings(
+            string s0,
+            string s1,
+            string s2,
+            string s3,
+            string s4,
+            string s5,
+            string s6,
+            string s7,
+            string s8
+        )
+        {
+            WriteEvent(27, s0, s1, s2, s3, s4, s5, s6, s7, s8);
+        }
 
-        [Event(29, Keywords = Keywords.Transfer | Keywords.HasNoArgs, Level = EventLevel.Informational, Opcode = EventOpcode.Send, Task = Tasks.WorkManyArgs)]
-        public void EventWithXferManyTypeArgs(Guid RelatedActivityId, long l, uint ui, ulong ui64, char ch,
-                                          byte b, sbyte sb, short sh, ushort ush,
-                                          float f, double d, Guid guid)
+        [Event(
+            29,
+            Keywords = Keywords.Transfer | Keywords.HasNoArgs,
+            Level = EventLevel.Informational,
+            Opcode = EventOpcode.Send,
+            Task = Tasks.WorkManyArgs
+        )]
+        public void EventWithXferManyTypeArgs(
+            Guid RelatedActivityId,
+            long l,
+            uint ui,
+            ulong ui64,
+            char ch,
+            byte b,
+            sbyte sb,
+            short sh,
+            ushort ush,
+            float f,
+            double d,
+            Guid guid
+        )
         {
             if (IsEnabled(EventLevel.Informational, Keywords.HasNoArgs))
             {
@@ -195,11 +358,33 @@ namespace SdtEventSources
 
         [Event(30)]
         // 4.5 EventSource does not support IntPtr args
-        public void EventWithWeirdArgs(IntPtr iptr, bool b, MyLongEnum le /*, decimal dec*/)
-        { WriteEvent(30, iptr, b, le /*, dec*/); }
+        public void EventWithWeirdArgs(
+            IntPtr iptr,
+            bool b,
+            MyLongEnum le /*, decimal dec*/
+        )
+        {
+            WriteEvent(
+                30,
+                iptr,
+                b,
+                le /*, dec*/
+            );
+        }
 
-        [Event(31, Keywords = Keywords.Transfer | Keywords.HasNoArgs, Level = EventLevel.Informational, Opcode = EventOpcode.Send, Task = Tasks.WorkWeirdArgs)]
-        public void EventWithXferWeirdArgs(Guid RelatedActivityId, IntPtr iptr, bool b, MyLongEnum le /*, decimal dec */)
+        [Event(
+            31,
+            Keywords = Keywords.Transfer | Keywords.HasNoArgs,
+            Level = EventLevel.Informational,
+            Opcode = EventOpcode.Send,
+            Task = Tasks.WorkWeirdArgs
+        )]
+        public void EventWithXferWeirdArgs(
+            Guid RelatedActivityId,
+            IntPtr iptr,
+            bool b,
+            MyLongEnum le /*, decimal dec */
+        )
         {
             unsafe
             {
@@ -213,39 +398,58 @@ namespace SdtEventSources
                 descrs[2].Size = 8;
                 // descrs[3].DataPointer = (IntPtr)(&dec);
                 // descrs[3].Size = 16;
-                WriteEventWithRelatedActivityIdCore(31, &RelatedActivityId, 3 /*4*/, descrs);
+                WriteEventWithRelatedActivityIdCore(
+                    31,
+                    &RelatedActivityId,
+                    3 /*4*/
+                    ,
+                    descrs
+                );
             }
         }
 
         [NonEvent]
         public void NonEvent()
-        { EventWithString(DateTime.Now.ToString()); }
+        {
+            EventWithString(DateTime.Now.ToString());
+        }
 
         // The above produces different results on 4.5 vs. 4.5.1. Skip the test for those EventSources
         [Event(32, Level = EventLevel.Informational, Message = "msg={0}, n={1}!")]
         public void EventWithEscapingMessage(string msg, int n)
-        { WriteEvent(32, msg, n); }
+        {
+            WriteEvent(32, msg, n);
+        }
 
         // The above produces different results on 4.5 vs. 4.5.1. Skip the test for those EventSources
         [Event(33, Level = EventLevel.Informational, Message = "{{msg}}={0}! percentage={1}%")]
         public void EventWithMoreEscapingMessage(string msg, int percentage)
-        { WriteEvent(33, msg, percentage); }
+        {
+            WriteEvent(33, msg, percentage);
+        }
 
         [Event(36, Level = EventLevel.Informational, Message = "Int arg after byte ptr: {2}")]
-        public unsafe void EventWithIncorrectNumberOfParameters(string message, string path = "", int line = 0)
+        public unsafe void EventWithIncorrectNumberOfParameters(
+            string message,
+            string path = "",
+            int line = 0
+        )
         {
             string text = string.Concat("{", path, ":", line, "}", message);
             WriteEvent(36, text);
         }
 
-
         [Event(39, Level = EventLevel.Informational, Message = "int int string event")]
         public void EventWithIntIntString(int i1, int i2, string str)
-        { WriteEvent(39, i1, i2, str); }
+        {
+            WriteEvent(39, i1, i2, str);
+        }
 
         [Event(40, Level = EventLevel.Informational, Message = "int long string")]
         public void EventWithIntLongString(int i1, long l1, string str)
-        { WriteEvent(40, i1, l1, str); }
+        {
+            WriteEvent(40, i1, l1, str);
+        }
 
         [Event(41)]
         public void EventWithString(string str)
@@ -343,13 +547,9 @@ namespace SdtEventSources
                 descrs[0] = new EventData
                 {
                     DataPointer = (IntPtr)(&bufferLength),
-                    Size = sizeof(int)
+                    Size = sizeof(int),
                 };
-                descrs[1] = new EventData
-                {
-                    DataPointer = (IntPtr)arg1Ptr,
-                    Size = arr.Length
-                };
+                descrs[1] = new EventData { DataPointer = (IntPtr)arg1Ptr, Size = arr.Length };
 
                 WriteEventCore(53, 2, descrs);
             }
@@ -358,11 +558,7 @@ namespace SdtEventSources
         [Event(54)]
         public unsafe void EventWithBytePointer(byte* ptr, int length)
         {
-            var data = new EventData
-            {
-                DataPointer = (IntPtr)ptr,
-                Size = length
-            };
+            var data = new EventData { DataPointer = (IntPtr)ptr, Size = length };
 
             WriteEventCore(54, 1, &data);
         }
@@ -420,51 +616,99 @@ namespace SdtEventSources
     public sealed class EventSourceNoAttribute : EventSource
     {
         [Event(1, Level = EventLevel.Informational)]
-        public void Event0() { WriteEvent(1); }
+        public void Event0()
+        {
+            WriteEvent(1);
+        }
 
         [Event(2, Level = EventLevel.Informational)]
-        public void EventI(int arg1) { WriteEvent(2, arg1); }
+        public void EventI(int arg1)
+        {
+            WriteEvent(2, arg1);
+        }
 
         [Event(3, Level = EventLevel.Informational)]
-        public void EventII(int arg1, int arg2) { WriteEvent(3, arg1, arg2); }
+        public void EventII(int arg1, int arg2)
+        {
+            WriteEvent(3, arg1, arg2);
+        }
 
         [Event(4, Level = EventLevel.Informational)]
-        public void EventIII(int arg1, int arg2, int arg3 = 12) { WriteEvent(4, arg1, arg2, arg3); }
+        public void EventIII(int arg1, int arg2, int arg3 = 12)
+        {
+            WriteEvent(4, arg1, arg2, arg3);
+        }
 
         [Event(5, Level = EventLevel.Informational)]
-        public void EventL(long arg1) { WriteEvent(5, arg1); }
+        public void EventL(long arg1)
+        {
+            WriteEvent(5, arg1);
+        }
 
         [Event(6, Level = EventLevel.Informational)]
-        public void EventLL(long arg1, long arg2) { WriteEvent(6, arg1, arg2); }
+        public void EventLL(long arg1, long arg2)
+        {
+            WriteEvent(6, arg1, arg2);
+        }
 
         [Event(7, Level = EventLevel.Informational)]
-        public void EventLLL(long arg1, long arg2, long arg3) { WriteEvent(7, arg1, arg2, arg3); }
+        public void EventLLL(long arg1, long arg2, long arg3)
+        {
+            WriteEvent(7, arg1, arg2, arg3);
+        }
 
         [Event(8, Level = EventLevel.Informational)]
-        public void EventS(string arg1) { WriteEvent(8, arg1); }
+        public void EventS(string arg1)
+        {
+            WriteEvent(8, arg1);
+        }
 
         [Event(9, Level = EventLevel.Informational)]
-        public void EventSS(string arg1, string arg2) { WriteEvent(9, arg1, arg2); }
+        public void EventSS(string arg1, string arg2)
+        {
+            WriteEvent(9, arg1, arg2);
+        }
 
         [Event(10, Level = EventLevel.Informational)]
-        public void EventSSS(string arg1, string arg2, string arg3) { WriteEvent(10, arg1, arg2, arg3); }
+        public void EventSSS(string arg1, string arg2, string arg3)
+        {
+            WriteEvent(10, arg1, arg2, arg3);
+        }
 
         [Event(11, Level = EventLevel.Informational)]
-        public void EventSI(string arg1, int arg2) { WriteEvent(11, arg1, arg2); }
+        public void EventSI(string arg1, int arg2)
+        {
+            WriteEvent(11, arg1, arg2);
+        }
 
         [Event(12, Level = EventLevel.Informational)]
-        public void EventSL(string arg1, long arg2) { WriteEvent(12, arg1, arg2); }
+        public void EventSL(string arg1, long arg2)
+        {
+            WriteEvent(12, arg1, arg2);
+        }
 
         [Event(13, Level = EventLevel.Informational)]
-        public void EventSII(string arg1, int arg2, int arg3) { WriteEvent(13, arg1, arg2, arg3); }
+        public void EventSII(string arg1, int arg2, int arg3)
+        {
+            WriteEvent(13, arg1, arg2, arg3);
+        }
 
         [Event(14, Level = EventLevel.Informational)]
-        public void Message(string arg1) { WriteEvent(14, arg1); }
+        public void Message(string arg1)
+        {
+            WriteEvent(14, arg1);
+        }
 
         [Event(15, Level = EventLevel.Informational)]
-        public void StartTrackingActivity() { WriteEvent(15); }
+        public void StartTrackingActivity()
+        {
+            WriteEvent(15);
+        }
 
         // Make sure this is before any #if so it gets a deterministic ID
-        public void EventNoAttributes(string s) { WriteEvent(16, s); }
+        public void EventNoAttributes(string s)
+        {
+            WriteEvent(16, s);
+        }
     }
 }

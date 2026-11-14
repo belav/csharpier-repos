@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,40 +32,45 @@ using System.Configuration;
 
 namespace System.Configuration
 {
-	partial class ConfigurationElementCollection
-	{
-		sealed class ConfigurationRemoveElement : ConfigurationElement
-		{
-			readonly ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection ();
-			readonly ConfigurationElement _origElement;
-			readonly ConfigurationElementCollection _origCollection;
+    partial class ConfigurationElementCollection
+    {
+        sealed class ConfigurationRemoveElement : ConfigurationElement
+        {
+            readonly ConfigurationPropertyCollection properties =
+                new ConfigurationPropertyCollection();
+            readonly ConfigurationElement _origElement;
+            readonly ConfigurationElementCollection _origCollection;
 
-			internal ConfigurationRemoveElement (ConfigurationElement origElement, ConfigurationElementCollection origCollection)
-			{
-				_origElement = origElement;
-				_origCollection = origCollection;
+            internal ConfigurationRemoveElement(
+                ConfigurationElement origElement,
+                ConfigurationElementCollection origCollection
+            )
+            {
+                _origElement = origElement;
+                _origCollection = origCollection;
 
-				foreach (ConfigurationProperty p in origElement.Properties)
-					if (p.IsKey) {
-						properties.Add (p);
-					}
-			}
+                foreach (ConfigurationProperty p in origElement.Properties)
+                    if (p.IsKey)
+                    {
+                        properties.Add(p);
+                    }
+            }
 
-			internal object KeyValue
-			{
-				get
-				{
-					foreach (ConfigurationProperty p in Properties)
-						_origElement [p] = this [p];
+            internal object KeyValue
+            {
+                get
+                {
+                    foreach (ConfigurationProperty p in Properties)
+                        _origElement[p] = this[p];
 
-					return _origCollection.GetElementKey (_origElement);
-				}
-			}
+                    return _origCollection.GetElementKey(_origElement);
+                }
+            }
 
-			protected internal override ConfigurationPropertyCollection Properties
-			{
-				get { return properties; }
-			}
-		}
-	}
+            protected internal override ConfigurationPropertyCollection Properties
+            {
+                get { return properties; }
+            }
+        }
+    }
 }

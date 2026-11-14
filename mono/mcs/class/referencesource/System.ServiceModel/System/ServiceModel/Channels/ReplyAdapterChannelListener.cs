@@ -5,23 +5,22 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.Runtime.Serialization;
     using System.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Xml;
     using System.Threading;
+    using System.Xml;
 
-    abstract class ReplyOverDuplexChannelListenerBase<TOuterChannel, TInnerChannel> : LayeredChannelListener<TOuterChannel>
+    abstract class ReplyOverDuplexChannelListenerBase<TOuterChannel, TInnerChannel>
+        : LayeredChannelListener<TOuterChannel>
         where TOuterChannel : class, IReplyChannel
         where TInnerChannel : class, IDuplexChannel
     {
         IChannelListener<TInnerChannel> innerChannelListener;
 
         public ReplyOverDuplexChannelListenerBase(BindingContext context)
-            : base(context.Binding, context.BuildInnerChannelListener<TInnerChannel>())
-        {
-        }
+            : base(context.Binding, context.BuildInnerChannelListener<TInnerChannel>()) { }
 
         protected override void OnOpening()
         {
@@ -35,8 +34,11 @@ namespace System.ServiceModel.Channels
             return WrapInnerChannel(innerChannel);
         }
 
-
-        protected override IAsyncResult OnBeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannelListener.BeginAcceptChannel(timeout, callback, state);
         }
@@ -52,7 +54,11 @@ namespace System.ServiceModel.Channels
             return this.innerChannelListener.WaitForChannel(timeout);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannelListener.BeginWaitForChannel(timeout, callback, state);
         }
@@ -62,7 +68,10 @@ namespace System.ServiceModel.Channels
             return this.innerChannelListener.EndWaitForChannel(result);
         }
 
-        protected abstract TOuterChannel CreateWrappedChannel(ChannelManagerBase channelManager, TInnerChannel innerChannel);
+        protected abstract TOuterChannel CreateWrappedChannel(
+            ChannelManagerBase channelManager,
+            TInnerChannel innerChannel
+        );
 
         TOuterChannel WrapInnerChannel(TInnerChannel innerChannel)
         {
@@ -77,47 +86,50 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    class ReplyOverDuplexChannelListener : ReplyOverDuplexChannelListenerBase<IReplyChannel, IDuplexChannel>
+    class ReplyOverDuplexChannelListener
+        : ReplyOverDuplexChannelListenerBase<IReplyChannel, IDuplexChannel>
     {
         public ReplyOverDuplexChannelListener(BindingContext context)
-            : base(context)
-        {
-        }
+            : base(context) { }
 
-        protected override IReplyChannel CreateWrappedChannel(ChannelManagerBase channelManager, IDuplexChannel innerChannel)
+        protected override IReplyChannel CreateWrappedChannel(
+            ChannelManagerBase channelManager,
+            IDuplexChannel innerChannel
+        )
         {
             return new ReplyOverDuplexChannel(channelManager, innerChannel);
         }
     }
 
-    class ReplySessionOverDuplexSessionChannelListener : ReplyOverDuplexChannelListenerBase<IReplySessionChannel, IDuplexSessionChannel>
+    class ReplySessionOverDuplexSessionChannelListener
+        : ReplyOverDuplexChannelListenerBase<IReplySessionChannel, IDuplexSessionChannel>
     {
         public ReplySessionOverDuplexSessionChannelListener(BindingContext context)
-            : base(context)
-        {
-        }
+            : base(context) { }
 
-        protected override IReplySessionChannel CreateWrappedChannel(ChannelManagerBase channelManager, IDuplexSessionChannel innerChannel)
+        protected override IReplySessionChannel CreateWrappedChannel(
+            ChannelManagerBase channelManager,
+            IDuplexSessionChannel innerChannel
+        )
         {
             return new ReplySessionOverDuplexSessionChannel(channelManager, innerChannel);
         }
     }
 
-
-    abstract class ReplyOverDuplexChannelBase<TInnerChannel> : LayeredChannel<TInnerChannel>, IReplyChannel
+    abstract class ReplyOverDuplexChannelBase<TInnerChannel>
+        : LayeredChannel<TInnerChannel>,
+            IReplyChannel
         where TInnerChannel : class, IDuplexChannel
     {
-        public ReplyOverDuplexChannelBase(ChannelManagerBase channelManager, TInnerChannel innerChannel)
-            : base(channelManager, innerChannel)
-        {
-        }
+        public ReplyOverDuplexChannelBase(
+            ChannelManagerBase channelManager,
+            TInnerChannel innerChannel
+        )
+            : base(channelManager, innerChannel) { }
 
         public EndpointAddress LocalAddress
         {
-            get
-            {
-                return this.InnerChannel.LocalAddress;
-            }
+            get { return this.InnerChannel.LocalAddress; }
         }
 
         public RequestContext ReceiveRequest()
@@ -135,7 +147,11 @@ namespace System.ServiceModel.Channels
             return BeginReceiveRequest(this.DefaultReceiveTimeout, callback, state);
         }
 
-        public IAsyncResult BeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return ReplyChannel.HelpBeginReceiveRequest(this, timeout, callback, state);
         }
@@ -157,7 +173,11 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        public IAsyncResult BeginTryReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginTryReceive(timeout, callback, state);
         }
@@ -179,7 +199,11 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.WaitForMessage(timeout);
         }
 
-        public IAsyncResult BeginWaitForRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginWaitForMessage(timeout, callback, state);
         }
@@ -210,7 +234,11 @@ namespace System.ServiceModel.Channels
             bool disposed;
             Object thisLock;
 
-            public DuplexRequestContext(Message request, IDefaultCommunicationTimeouts defaultTimeouts, IDuplexChannel innerChannel)
+            public DuplexRequestContext(
+                Message request,
+                IDefaultCommunicationTimeouts defaultTimeouts,
+                IDuplexChannel innerChannel
+            )
             {
                 this.request = request;
                 this.defaultTimeouts = defaultTimeouts;
@@ -224,10 +252,7 @@ namespace System.ServiceModel.Channels
 
             public override Message RequestMessage
             {
-                get
-                {
-                    return this.request;
-                }
+                get { return this.request; }
             }
 
             public override void Abort()
@@ -256,12 +281,21 @@ namespace System.ServiceModel.Channels
                 this.innerChannel.Send(message);
             }
 
-            public override IAsyncResult BeginReply(Message message, AsyncCallback callback, object state)
+            public override IAsyncResult BeginReply(
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return BeginReply(message, this.defaultTimeouts.SendTimeout, callback, state);
             }
 
-            public override IAsyncResult BeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public override IAsyncResult BeginReply(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 PrepareReply(message);
                 return this.innerChannel.BeginSend(message, timeout, callback, state);
@@ -301,17 +335,23 @@ namespace System.ServiceModel.Channels
 
     class ReplyOverDuplexChannel : ReplyOverDuplexChannelBase<IDuplexChannel>
     {
-        public ReplyOverDuplexChannel(ChannelManagerBase channelManager, IDuplexChannel innerChannel)
-            : base(channelManager, innerChannel)
-        {
-        }
+        public ReplyOverDuplexChannel(
+            ChannelManagerBase channelManager,
+            IDuplexChannel innerChannel
+        )
+            : base(channelManager, innerChannel) { }
     }
 
-    class ReplySessionOverDuplexSessionChannel : ReplyOverDuplexChannelBase<IDuplexSessionChannel>, IReplySessionChannel
+    class ReplySessionOverDuplexSessionChannel
+        : ReplyOverDuplexChannelBase<IDuplexSessionChannel>,
+            IReplySessionChannel
     {
         ReplySessionOverDuplexSession session;
 
-        public ReplySessionOverDuplexSessionChannel(ChannelManagerBase channelManager, IDuplexSessionChannel innerChannel)
+        public ReplySessionOverDuplexSessionChannel(
+            ChannelManagerBase channelManager,
+            IDuplexSessionChannel innerChannel
+        )
             : base(channelManager, innerChannel)
         {
             this.session = new ReplySessionOverDuplexSession(innerChannel.Session);
@@ -319,10 +359,7 @@ namespace System.ServiceModel.Channels
 
         public IInputSession Session
         {
-            get
-            {
-                return this.session;
-            }
+            get { return this.session; }
         }
 
         class ReplySessionOverDuplexSession : IInputSession
@@ -333,50 +370,64 @@ namespace System.ServiceModel.Channels
             {
                 if (innerSession == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("innerSession");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "innerSession"
+                    );
                 }
                 this.innerSession = innerSession;
             }
 
             public string Id
             {
-                get
-                {
-                    return this.innerSession.Id;
-                }
+                get { return this.innerSession.Id; }
             }
         }
     }
 
     class ReplyAdapterBindingElement : BindingElement
     {
-        public ReplyAdapterBindingElement()
-        {
-        }
+        public ReplyAdapterBindingElement() { }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
-            if (context.CanBuildInnerChannelListener<IReplySessionChannel>() ||
-                context.CanBuildInnerChannelListener<IReplyChannel>())
+            if (
+                context.CanBuildInnerChannelListener<IReplySessionChannel>()
+                || context.CanBuildInnerChannelListener<IReplyChannel>()
+            )
             {
                 return context.BuildInnerChannelListener<TChannel>();
             }
-            else if ((typeof(TChannel) == typeof(IReplySessionChannel)) && context.CanBuildInnerChannelListener<IDuplexSessionChannel>())
+            else if (
+                (typeof(TChannel) == typeof(IReplySessionChannel))
+                && context.CanBuildInnerChannelListener<IDuplexSessionChannel>()
+            )
             {
-                return (IChannelListener<TChannel>)new ReplySessionOverDuplexSessionChannelListener(context);
+                return (IChannelListener<TChannel>)
+                    new ReplySessionOverDuplexSessionChannelListener(context);
             }
-            else if ((typeof(TChannel) == typeof(IReplyChannel)) && context.CanBuildInnerChannelListener<IDuplexChannel>())
+            else if (
+                (typeof(TChannel) == typeof(IReplyChannel))
+                && context.CanBuildInnerChannelListener<IDuplexChannel>()
+            )
             {
                 return (IChannelListener<TChannel>)new ReplyOverDuplexChannelListener(context);
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
         }
 
@@ -384,13 +435,17 @@ namespace System.ServiceModel.Channels
         {
             if (typeof(TChannel) == typeof(IReplySessionChannel))
             {
-                return (context.CanBuildInnerChannelListener<IReplySessionChannel>()
-                        || context.CanBuildInnerChannelListener<IDuplexSessionChannel>());
+                return (
+                    context.CanBuildInnerChannelListener<IReplySessionChannel>()
+                    || context.CanBuildInnerChannelListener<IDuplexSessionChannel>()
+                );
             }
             else if (typeof(TChannel) == typeof(IReplyChannel))
             {
-                return (context.CanBuildInnerChannelListener<IReplyChannel>()
-                    || context.CanBuildInnerChannelListener<IDuplexChannel>());
+                return (
+                    context.CanBuildInnerChannelListener<IReplyChannel>()
+                    || context.CanBuildInnerChannelListener<IDuplexChannel>()
+                );
             }
             else
             {

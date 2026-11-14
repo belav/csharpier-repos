@@ -66,11 +66,12 @@ namespace System.IdentityModel.Selectors
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
             return CanWriteKeyIdentifierClauseCore(keyIdentifierClause);
         }
-
 
         public SecurityToken ReadToken(XmlReader reader, SecurityTokenResolver tokenResolver)
         {
@@ -125,7 +126,10 @@ namespace System.IdentityModel.Selectors
             return ReadKeyIdentifierClauseCore(reader);
         }
 
-        public void WriteKeyIdentifierClause(XmlWriter writer, SecurityKeyIdentifierClause keyIdentifierClause)
+        public void WriteKeyIdentifierClause(
+            XmlWriter writer,
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             if (writer == null)
             {
@@ -133,11 +137,12 @@ namespace System.IdentityModel.Selectors
             }
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
             WriteKeyIdentifierClauseCore(writer, keyIdentifierClause);
         }
-
 
         // protected abstract methods
         protected abstract bool CanReadTokenCore(XmlReader reader);
@@ -145,18 +150,30 @@ namespace System.IdentityModel.Selectors
         protected abstract bool CanReadKeyIdentifierCore(XmlReader reader);
         protected abstract bool CanWriteKeyIdentifierCore(SecurityKeyIdentifier keyIdentifier);
         protected abstract bool CanReadKeyIdentifierClauseCore(XmlReader reader);
-        protected abstract bool CanWriteKeyIdentifierClauseCore(SecurityKeyIdentifierClause keyIdentifierClause);
+        protected abstract bool CanWriteKeyIdentifierClauseCore(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        );
 
-        protected abstract SecurityToken ReadTokenCore(XmlReader reader, SecurityTokenResolver tokenResolver);
+        protected abstract SecurityToken ReadTokenCore(
+            XmlReader reader,
+            SecurityTokenResolver tokenResolver
+        );
         protected abstract void WriteTokenCore(XmlWriter writer, SecurityToken token);
         protected abstract SecurityKeyIdentifier ReadKeyIdentifierCore(XmlReader reader);
-        protected abstract void WriteKeyIdentifierCore(XmlWriter writer, SecurityKeyIdentifier keyIdentifier);
-        protected abstract SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(XmlReader reader);
-        protected abstract void WriteKeyIdentifierClauseCore(XmlWriter writer, SecurityKeyIdentifierClause keyIdentifierClause);
+        protected abstract void WriteKeyIdentifierCore(
+            XmlWriter writer,
+            SecurityKeyIdentifier keyIdentifier
+        );
+        protected abstract SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(
+            XmlReader reader
+        );
+        protected abstract void WriteKeyIdentifierClauseCore(
+            XmlWriter writer,
+            SecurityKeyIdentifierClause keyIdentifierClause
+        );
 
         internal abstract class KeyIdentifierClauseEntry
         {
-
             protected abstract XmlDictionaryString LocalName { get; }
             protected abstract XmlDictionaryString NamespaceUri { get; }
 
@@ -165,11 +182,16 @@ namespace System.IdentityModel.Selectors
                 return reader.IsStartElement(this.LocalName, this.NamespaceUri);
             }
 
-            public abstract SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(XmlDictionaryReader reader);
+            public abstract SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(
+                XmlDictionaryReader reader
+            );
 
             public abstract bool SupportsCore(SecurityKeyIdentifierClause keyIdentifierClause);
 
-            public abstract void WriteKeyIdentifierClauseCore(XmlDictionaryWriter writer, SecurityKeyIdentifierClause keyIdentifierClause);
+            public abstract void WriteKeyIdentifierClauseCore(
+                XmlDictionaryWriter writer,
+                SecurityKeyIdentifierClause keyIdentifierClause
+            );
         }
 
         internal abstract class StrEntry
@@ -177,16 +199,31 @@ namespace System.IdentityModel.Selectors
             public abstract string GetTokenTypeUri();
             public abstract Type GetTokenType(SecurityKeyIdentifierClause clause);
             public abstract bool CanReadClause(XmlDictionaryReader reader, string tokenType);
-            public abstract SecurityKeyIdentifierClause ReadClause(XmlDictionaryReader reader, byte[] derivationNonce, int derivationLength, string tokenType);
+            public abstract SecurityKeyIdentifierClause ReadClause(
+                XmlDictionaryReader reader,
+                byte[] derivationNonce,
+                int derivationLength,
+                string tokenType
+            );
             public abstract bool SupportsCore(SecurityKeyIdentifierClause clause);
-            public abstract void WriteContent(XmlDictionaryWriter writer, SecurityKeyIdentifierClause clause);
+            public abstract void WriteContent(
+                XmlDictionaryWriter writer,
+                SecurityKeyIdentifierClause clause
+            );
         }
 
         internal abstract class SerializerEntries
         {
             public virtual void PopulateTokenEntries(IList<TokenEntry> tokenEntries) { }
-            public virtual void PopulateKeyIdentifierEntries(IList<KeyIdentifierEntry> keyIdentifierEntries) { }
-            public virtual void PopulateKeyIdentifierClauseEntries(IList<KeyIdentifierClauseEntry> keyIdentifierClauseEntries) { }
+
+            public virtual void PopulateKeyIdentifierEntries(
+                IList<KeyIdentifierEntry> keyIdentifierEntries
+            ) { }
+
+            public virtual void PopulateKeyIdentifierClauseEntries(
+                IList<KeyIdentifierClauseEntry> keyIdentifierClauseEntries
+            ) { }
+
             public virtual void PopulateStrEntries(IList<StrEntry> strEntries) { }
         }
 
@@ -204,7 +241,10 @@ namespace System.IdentityModel.Selectors
 
             public abstract bool SupportsCore(SecurityKeyIdentifier keyIdentifier);
 
-            public abstract void WriteKeyIdentifierCore(XmlDictionaryWriter writer, SecurityKeyIdentifier keyIdentifier);
+            public abstract void WriteKeyIdentifierCore(
+                XmlDictionaryWriter writer,
+                SecurityKeyIdentifier keyIdentifier
+            );
         }
 
         internal abstract class TokenEntry
@@ -213,7 +253,10 @@ namespace System.IdentityModel.Selectors
 
             protected abstract XmlDictionaryString LocalName { get; }
             protected abstract XmlDictionaryString NamespaceUri { get; }
-            public Type TokenType { get { return GetTokenTypes()[0]; } }
+            public Type TokenType
+            {
+                get { return GetTokenTypes()[0]; }
+            }
             public abstract string TokenTypeUri { get; }
             protected abstract string ValueTypeUri { get; }
 
@@ -241,9 +284,6 @@ namespace System.IdentityModel.Selectors
             {
                 return (this.TokenTypeUri == tokenTypeUri);
             }
-
         }
-
     }
-
 }

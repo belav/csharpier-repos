@@ -19,30 +19,37 @@ public class CommandLineIVTTests : CommandLineTestBase
             internal class A {}
             """;
 
-        var comp1 = CreateCompilation(source1, options: TestOptions.DebugDll, assemblyName: "N1", targetFramework: TargetFramework.Mscorlib461);
+        var comp1 = CreateCompilation(
+            source1,
+            options: TestOptions.DebugDll,
+            assemblyName: "N1",
+            targetFramework: TargetFramework.Mscorlib461
+        );
 
         var dir = Temp.CreateDirectory();
 
-        var source2 = dir.CreateFile("B.cs").WriteAllText("""
-            namespace N2;
-            internal class B : N1.A {}
-            """);
+        var source2 = dir.CreateFile("B.cs")
+            .WriteAllText(
+                """
+                namespace N2;
+                internal class B : N1.A {}
+                """
+            );
 
         var sw = new StringWriter();
 
-        var compiler = CreateCSharpCompiler(new[] {
-            "/nologo",
-            "/t:library",
-            "/preferreduilang:en",
-            "/reportivts",
-            source2.Path,
-        }, additionalReferences: new[] { comp1.ToMetadataReference() });
+        var compiler = CreateCSharpCompiler(
+            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path },
+            additionalReferences: new[] { comp1.ToMetadataReference() }
+        );
 
         var errorCode = compiler.Run(sw);
 
         Assert.Equal(CommonCompiler.Failed, errorCode);
-        var outputFilePath = $"{Path.GetFileName(dir.Path)}{Path.DirectorySeparatorChar}{Path.GetFileName(source2.Path)}";
-        AssertEx.AssertEqualToleratingWhitespaceDifferences($"""
+        var outputFilePath =
+            $"{Path.GetFileName(dir.Path)}{Path.DirectorySeparatorChar}{Path.GetFileName(source2.Path)}";
+        AssertEx.AssertEqualToleratingWhitespaceDifferences(
+            $"""
 {outputFilePath}(2,23): error CS0122: 'A' is inaccessible due to its protection level
 {outputFilePath}(2,23): error CS9163: 'A' is defined in assembly 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
 
@@ -84,7 +91,9 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
   Grants IVT to current assembly: False
   Grants IVTs to:
     Nothing
-""", sw.ToString().Trim());
+""",
+            sw.ToString().Trim()
+        );
     }
 
     [Fact]
@@ -96,30 +105,37 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
             internal class A {}
             """;
 
-        var comp1 = CreateCompilation(source1, options: TestOptions.DebugDll, assemblyName: "N1", targetFramework: TargetFramework.Mscorlib461);
+        var comp1 = CreateCompilation(
+            source1,
+            options: TestOptions.DebugDll,
+            assemblyName: "N1",
+            targetFramework: TargetFramework.Mscorlib461
+        );
 
         var dir = Temp.CreateDirectory();
 
-        var source2 = dir.CreateFile("B.cs").WriteAllText("""
-            namespace N2;
-            internal class B : N1.A {}
-            """);
+        var source2 = dir.CreateFile("B.cs")
+            .WriteAllText(
+                """
+                namespace N2;
+                internal class B : N1.A {}
+                """
+            );
 
         var sw = new StringWriter();
 
-        var compiler = CreateCSharpCompiler(new[] {
-            "/nologo",
-            "/t:library",
-            "/preferreduilang:en",
-            "/reportivts",
-            source2.Path,
-        }, additionalReferences: new[] { comp1.ToMetadataReference() });
+        var compiler = CreateCSharpCompiler(
+            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path },
+            additionalReferences: new[] { comp1.ToMetadataReference() }
+        );
 
         var errorCode = compiler.Run(sw);
 
         Assert.Equal(CommonCompiler.Succeeded, errorCode);
-        var outputFilePath = $"{Path.GetFileName(dir.Path)}{Path.DirectorySeparatorChar}{Path.GetFileName(source2.Path)}";
-        AssertEx.AssertEqualToleratingWhitespaceDifferences($"""
+        var outputFilePath =
+            $"{Path.GetFileName(dir.Path)}{Path.DirectorySeparatorChar}{Path.GetFileName(source2.Path)}";
+        AssertEx.AssertEqualToleratingWhitespaceDifferences(
+            $"""
 
 Printing 'InternalsVisibleToAttribute' information for the current compilation and all referenced assemblies.
 Current assembly: 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
@@ -160,7 +176,9 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
   Grants IVTs to:
     Assembly name: 'B'
     Public Keys:
-""", sw.ToString().Trim());
+""",
+            sw.ToString().Trim()
+        );
     }
 
     [Fact]
@@ -174,31 +192,38 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
             }
             """;
 
-        var comp1 = CreateCompilation(source1, options: TestOptions.DebugDll, assemblyName: "N1", targetFramework: TargetFramework.Mscorlib461);
+        var comp1 = CreateCompilation(
+            source1,
+            options: TestOptions.DebugDll,
+            assemblyName: "N1",
+            targetFramework: TargetFramework.Mscorlib461
+        );
 
         var dir = Temp.CreateDirectory();
 
-        var source2 = dir.CreateFile("B.cs").WriteAllText("""
-            var a = new N1.A();
-            _ = a.Prop;
-            a.Prop = "hello";
-            """);
+        var source2 = dir.CreateFile("B.cs")
+            .WriteAllText(
+                """
+                var a = new N1.A();
+                _ = a.Prop;
+                a.Prop = "hello";
+                """
+            );
 
         var sw = new StringWriter();
 
-        var compiler = CreateCSharpCompiler(new[] {
-            "/nologo",
-            "/t:exe",
-            "/preferreduilang:en",
-            "/reportivts",
-            source2.Path,
-        }, additionalReferences: new[] { comp1.ToMetadataReference() });
+        var compiler = CreateCSharpCompiler(
+            new[] { "/nologo", "/t:exe", "/preferreduilang:en", "/reportivts", source2.Path },
+            additionalReferences: new[] { comp1.ToMetadataReference() }
+        );
 
         var errorCode = compiler.Run(sw);
 
         Assert.Equal(CommonCompiler.Failed, errorCode);
-        var outputFilePath = $"{Path.GetFileName(dir.Path)}{Path.DirectorySeparatorChar}{Path.GetFileName(source2.Path)}";
-        AssertEx.AssertEqualToleratingWhitespaceDifferences($"""
+        var outputFilePath =
+            $"{Path.GetFileName(dir.Path)}{Path.DirectorySeparatorChar}{Path.GetFileName(source2.Path)}";
+        AssertEx.AssertEqualToleratingWhitespaceDifferences(
+            $"""
 {outputFilePath}(2,7): error CS0122: 'A.Prop' is inaccessible due to its protection level
 {outputFilePath}(3,3): error CS0122: 'A.Prop' is inaccessible due to its protection level
 {outputFilePath}(2,7): error CS9163: 'A.Prop' is defined in assembly 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
@@ -243,7 +268,9 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
   Grants IVTs to:
     Nothing
 
-""", sw.ToString().Trim());
+""",
+            sw.ToString().Trim()
+        );
     }
 
     [Fact]
@@ -257,33 +284,40 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
             }
             """;
 
-        var comp1 = CreateCompilation(source1, options: TestOptions.DebugDll, assemblyName: "N1", targetFramework: TargetFramework.Mscorlib461);
+        var comp1 = CreateCompilation(
+            source1,
+            options: TestOptions.DebugDll,
+            assemblyName: "N1",
+            targetFramework: TargetFramework.Mscorlib461
+        );
 
         var dir = Temp.CreateDirectory();
 
-        var source2 = dir.CreateFile("B.cs").WriteAllText("""
-            namespace N2;
-            public class B : N1.A
-            {
-                public void M() { }
-            }
-            """);
+        var source2 = dir.CreateFile("B.cs")
+            .WriteAllText(
+                """
+                namespace N2;
+                public class B : N1.A
+                {
+                    public void M() { }
+                }
+                """
+            );
 
         var sw = new StringWriter();
 
-        var compiler = CreateCSharpCompiler(new[] {
-            "/nologo",
-            "/t:library",
-            "/preferreduilang:en",
-            "/reportivts",
-            source2.Path,
-        }, additionalReferences: new[] { comp1.ToMetadataReference() });
+        var compiler = CreateCSharpCompiler(
+            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path },
+            additionalReferences: new[] { comp1.ToMetadataReference() }
+        );
 
         var errorCode = compiler.Run(sw);
 
         Assert.Equal(CommonCompiler.Failed, errorCode);
-        var outputFilePath = $"{Path.GetFileName(dir.Path)}{Path.DirectorySeparatorChar}{Path.GetFileName(source2.Path)}";
-        AssertEx.AssertEqualToleratingWhitespaceDifferences($"""
+        var outputFilePath =
+            $"{Path.GetFileName(dir.Path)}{Path.DirectorySeparatorChar}{Path.GetFileName(source2.Path)}";
+        AssertEx.AssertEqualToleratingWhitespaceDifferences(
+            $"""
 {outputFilePath}(4,17): error CS9044: 'B' does not implement interface member 'A.M()'. 'B.M()' cannot implicitly implement an inaccessible member.
 {outputFilePath}(4,17): error CS9163: 'A.M()' is defined in assembly 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
 
@@ -325,7 +359,9 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
   Grants IVT to current assembly: False
   Grants IVTs to:
     Nothing
-""", sw.ToString().Trim());
+""",
+            sw.ToString().Trim()
+        );
     }
 
     [Theory]
@@ -333,11 +369,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
     [InlineData("/reportivts+")]
     public void TurnOnLast(string onFlag)
     {
-        var compiler = CreateCSharpCompiler(new[] {
-            "/nologo",
-            "/reportivts-",
-            onFlag,
-        });
+        var compiler = CreateCSharpCompiler(new[] { "/nologo", "/reportivts-", onFlag });
 
         Assert.True(compiler.Arguments.ReportInternalsVisibleToAttributes);
     }
@@ -347,11 +379,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
     [InlineData("/reportivts+")]
     public void TurnOffLast(string onFlag)
     {
-        var compiler = CreateCSharpCompiler(new[] {
-            "/nologo",
-            onFlag,
-            "/reportivts-",
-        });
+        var compiler = CreateCSharpCompiler(new[] { "/nologo", onFlag, "/reportivts-" });
 
         Assert.False(compiler.Arguments.ReportInternalsVisibleToAttributes);
     }
@@ -359,10 +387,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
     [Fact]
     public void BadReportIvtsValue()
     {
-        var compiler = CreateCSharpCompiler(new[] {
-            "/nologo",
-            "/reportivts:bad",
-        });
+        var compiler = CreateCSharpCompiler(new[] { "/nologo", "/reportivts:bad" });
 
         Assert.False(compiler.Arguments.ReportInternalsVisibleToAttributes);
         compiler.Arguments.Errors.Verify(

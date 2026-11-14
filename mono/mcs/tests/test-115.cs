@@ -5,38 +5,40 @@
 //
 using System;
 
-class A {
-	public static explicit operator X (A foo)
-	{
-		X myX = new X();
+class A
+{
+    public static explicit operator X(A foo)
+    {
+        X myX = new X();
 
-		return myX;
-	}
+        return myX;
+    }
 }
 
-class X {
+class X { }
+
+class Y : X { }
+
+class blah
+{
+    public static int Main()
+    {
+        A testA = new A();
+
+        X testX = (X)testA;
+
+        try
+        {
+            Y testY = (Y)testA;
+        }
+        catch (InvalidCastException)
+        {
+            return 0;
+        }
+
+        //
+        // We should have thrown the exception above
+        //
+        return 1;
+    }
 }
-
-class Y : X {
-}
-
-class blah {
-	public static int Main ()
-	{
-		A testA = new A();
-		
-		X testX = (X) testA;
-
-		try {
-			Y testY = (Y) testA;
-		} catch (InvalidCastException){
-			return 0;
-		}
-
-		//
-		// We should have thrown the exception above
-		//
-		return 1;
-	}
-}
-		

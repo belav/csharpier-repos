@@ -34,10 +34,7 @@ namespace System.Activities.Runtime
 
         public BookmarkScope Default
         {
-            get
-            {
-                return this.defaultScope;
-            }
+            get { return this.defaultScope; }
         }
 
         public bool HasKeysToUpdate
@@ -73,12 +70,19 @@ namespace System.Activities.Runtime
         }
 
         [DataMember(EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal Dictionary<BookmarkScope, BookmarkManager> SerializedBookmarkManagers
         {
             get
             {
-                Fx.Assert(this.bookmarkManagers != null && this.bookmarkManagers.Count > 0, "We always have the default sub instance.");
+                Fx.Assert(
+                    this.bookmarkManagers != null && this.bookmarkManagers.Count > 0,
+                    "We always have the default sub instance."
+                );
 
                 return this.bookmarkManagers;
             }
@@ -90,7 +94,11 @@ namespace System.Activities.Runtime
         }
 
         [DataMember(EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal List<BookmarkScope> SerializedUninitializedScopes
         {
             get
@@ -119,7 +127,13 @@ namespace System.Activities.Runtime
             return temp;
         }
 
-        public Bookmark CreateBookmark(string name, BookmarkScope scope, BookmarkCallback callback, ActivityInstance owningInstance, BookmarkOptions options)
+        public Bookmark CreateBookmark(
+            string name,
+            BookmarkScope scope,
+            BookmarkCallback callback,
+            ActivityInstance owningInstance,
+            BookmarkOptions options
+        )
         {
             Fx.Assert(scope != null, "We should never have a null scope.");
 
@@ -133,13 +147,19 @@ namespace System.Activities.Runtime
 
             if (!this.bookmarkManagers.TryGetValue(lookupScope, out manager))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RegisteredBookmarkScopeRequired));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.RegisteredBookmarkScopeRequired)
+                );
             }
 
             return manager.CreateBookmark(name, callback, owningInstance, options);
         }
 
-        public bool RemoveBookmark(Bookmark bookmark, BookmarkScope scope, ActivityInstance instanceAttemptingRemove)
+        public bool RemoveBookmark(
+            Bookmark bookmark,
+            BookmarkScope scope,
+            ActivityInstance instanceAttemptingRemove
+        )
         {
             Fx.Assert(scope != null, "We should never have a null scope.");
 
@@ -161,7 +181,15 @@ namespace System.Activities.Runtime
             }
         }
 
-        public BookmarkResumptionResult TryGenerateWorkItem(ActivityExecutor executor, ref Bookmark bookmark, BookmarkScope scope, object value, ActivityInstance isolationInstance, bool nonScopedBookmarksExist, out ActivityExecutionWorkItem workItem)
+        public BookmarkResumptionResult TryGenerateWorkItem(
+            ActivityExecutor executor,
+            ref Bookmark bookmark,
+            BookmarkScope scope,
+            object value,
+            ActivityInstance isolationInstance,
+            bool nonScopedBookmarksExist,
+            out ActivityExecutionWorkItem workItem
+        )
         {
             Fx.Assert(scope != null, "We should never have a null sub instance.");
 
@@ -180,7 +208,10 @@ namespace System.Activities.Runtime
 
             if (manager == null)
             {
-                Fx.Assert(lookupScope != null, "The sub instance should not be default if we are here.");
+                Fx.Assert(
+                    lookupScope != null,
+                    "The sub instance should not be default if we are here."
+                );
 
                 BookmarkResumptionResult finalResult = BookmarkResumptionResult.NotFound;
 
@@ -191,12 +222,22 @@ namespace System.Activities.Runtime
                     {
                         BookmarkScope uninitializedScope = this.uninitializedScopes[i];
 
-                        Fx.Assert(this.bookmarkManagers.ContainsKey(uninitializedScope), "We must always have the uninitialized sub instances.");
+                        Fx.Assert(
+                            this.bookmarkManagers.ContainsKey(uninitializedScope),
+                            "We must always have the uninitialized sub instances."
+                        );
 
                         Bookmark internalBookmark;
                         BookmarkCallbackWrapper callbackWrapper;
                         BookmarkResumptionResult resumptionResult;
-                        if (!this.bookmarkManagers[uninitializedScope].TryGetBookmarkFromInternalList(bookmark, out internalBookmark, out callbackWrapper))
+                        if (
+                            !this.bookmarkManagers[uninitializedScope]
+                                .TryGetBookmarkFromInternalList(
+                                    bookmark,
+                                    out internalBookmark,
+                                    out callbackWrapper
+                                )
+                        )
                         {
                             resumptionResult = BookmarkResumptionResult.NotFound;
                         }
@@ -204,9 +245,17 @@ namespace System.Activities.Runtime
                         {
                             resumptionResult = BookmarkResumptionResult.NotReady;
                         }
-                        else 
+                        else
                         {
-                            resumptionResult = this.bookmarkManagers[uninitializedScope].TryGenerateWorkItem(executor, true, ref bookmark, value, isolationInstance, out workItem);
+                            resumptionResult = this.bookmarkManagers[uninitializedScope]
+                                .TryGenerateWorkItem(
+                                    executor,
+                                    true,
+                                    ref bookmark,
+                                    value,
+                                    isolationInstance,
+                                    out workItem
+                                );
                         }
 
                         if (resumptionResult == BookmarkResumptionResult.Success)
@@ -216,7 +265,10 @@ namespace System.Activities.Runtime
                             // FlushBookmarkScopeKeys would try to flush it out, but it won't have the transaction correct so will hang waiting for
                             // the transaction that has the PersistenceContext locked to complete. But it won't complete successfully until
                             // we finish processing here.
-                            InitializeBookmarkScopeWithoutKeyAssociation(uninitializedScope, scope.Id);
+                            InitializeBookmarkScopeWithoutKeyAssociation(
+                                uninitializedScope,
+                                scope.Id
+                            );
 
                             // We've found what we were looking for
                             return BookmarkResumptionResult.Success;
@@ -256,7 +308,13 @@ namespace System.Activities.Runtime
                 Bookmark bookmarkFromList;
                 BookmarkCallbackWrapper callbackWrapper;
                 BookmarkResumptionResult resumptionResult;
-                if (!manager.TryGetBookmarkFromInternalList(bookmark, out bookmarkFromList, out callbackWrapper))
+                if (
+                    !manager.TryGetBookmarkFromInternalList(
+                        bookmark,
+                        out bookmarkFromList,
+                        out callbackWrapper
+                    )
+                )
                 {
                     resumptionResult = BookmarkResumptionResult.NotFound;
                 }
@@ -268,10 +326,16 @@ namespace System.Activities.Runtime
                     }
                     else
                     {
-                        resumptionResult = manager.TryGenerateWorkItem(executor, true, ref bookmark, value, isolationInstance, out workItem);
+                        resumptionResult = manager.TryGenerateWorkItem(
+                            executor,
+                            true,
+                            ref bookmark,
+                            value,
+                            isolationInstance,
+                            out workItem
+                        );
                     }
-               }
-
+                }
 
                 if (resumptionResult == BookmarkResumptionResult.NotFound)
                 {
@@ -321,7 +385,6 @@ namespace System.Activities.Runtime
                 }
             }
 
-
             if (manager != null)
             {
                 List<BookmarkInfo> bookmarks = new List<BookmarkInfo>();
@@ -368,7 +431,10 @@ namespace System.Activities.Runtime
             CreateAssociatedKey(lookupScope);
         }
 
-        public BookmarkScope InitializeBookmarkScopeWithoutKeyAssociation(BookmarkScope scope, Guid id)
+        public BookmarkScope InitializeBookmarkScopeWithoutKeyAssociation(
+            BookmarkScope scope,
+            Guid id
+        )
         {
             Fx.Assert(!scope.IsInitialized, "This should have been checked by the caller.");
 
@@ -381,14 +447,21 @@ namespace System.Activities.Runtime
 
             if (this.uninitializedScopes == null || !this.uninitializedScopes.Contains(lookupScope))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BookmarkScopeNotRegisteredForInitialize));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkScopeNotRegisteredForInitialize)
+                );
             }
 
-            Fx.Assert(this.bookmarkManagers != null, "This is never null if uninitializedScopes is non-null.");
+            Fx.Assert(
+                this.bookmarkManagers != null,
+                "This is never null if uninitializedScopes is non-null."
+            );
 
             if (this.bookmarkManagers.ContainsKey(new BookmarkScope(id)))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BookmarkScopeWithIdAlreadyExists(id)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkScopeWithIdAlreadyExists(id))
+                );
             }
 
             BookmarkManager bookmarks = this.bookmarkManagers[lookupScope];
@@ -403,7 +476,10 @@ namespace System.Activities.Runtime
 
             if (TD.BookmarkScopeInitializedIsEnabled())
             {
-                TD.BookmarkScopeInitialized(temporaryId.ToString(CultureInfo.InvariantCulture), lookupScope.Id.ToString());
+                TD.BookmarkScopeInitialized(
+                    temporaryId.ToString(CultureInfo.InvariantCulture),
+                    lookupScope.Id.ToString()
+                );
             }
 
             return lookupScope;
@@ -457,7 +533,7 @@ namespace System.Activities.Runtime
                 }
 
                 //
-                // We did not find one, e.g. the first receive will get the correlation id from the 
+                // We did not find one, e.g. the first receive will get the correlation id from the
                 // correlation channel
                 //
                 if (scope == null)
@@ -467,7 +543,13 @@ namespace System.Activities.Runtime
 
                     if (TD.CreateBookmarkScopeIsEnabled())
                     {
-                        TD.CreateBookmarkScope(string.Format(CultureInfo.InvariantCulture, "Id: {0}", ActivityUtilities.GetTraceString(scope)));
+                        TD.CreateBookmarkScope(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "Id: {0}",
+                                ActivityUtilities.GetTraceString(scope)
+                            )
+                        );
                     }
                 }
 
@@ -492,19 +574,26 @@ namespace System.Activities.Runtime
 
             if (this.bookmarkManagers == null || !this.bookmarkManagers.ContainsKey(scope))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BookmarkScopeNotRegisteredForUnregister));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkScopeNotRegisteredForUnregister)
+                );
             }
 
             if (this.bookmarkManagers[scope].HasBookmarks)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BookmarkScopeHasBookmarks));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkScopeHasBookmarks)
+                );
             }
 
             this.bookmarkManagers.Remove(scope);
 
             if (!scope.IsInitialized)
             {
-                Fx.Assert(this.uninitializedScopes != null && this.uninitializedScopes.Contains(scope), "Something is wrong with our housekeeping.");
+                Fx.Assert(
+                    this.uninitializedScopes != null && this.uninitializedScopes.Contains(scope),
+                    "Something is wrong with our housekeeping."
+                );
 
                 this.uninitializedScopes.Remove(scope);
             }
@@ -515,13 +604,19 @@ namespace System.Activities.Runtime
                     this.keysToDisassociate = new List<InstanceKey>(2);
                 }
                 this.keysToDisassociate.Add(new InstanceKey(scope.Id));
-                Fx.Assert(this.uninitializedScopes == null || !this.uninitializedScopes.Contains(scope), "We shouldn't have this in the uninitialized list.");
+                Fx.Assert(
+                    this.uninitializedScopes == null || !this.uninitializedScopes.Contains(scope),
+                    "We shouldn't have this in the uninitialized list."
+                );
             }
         }
 
         bool IsStable(BookmarkScope scope, bool nonScopedBookmarksExist)
         {
-            Fx.Assert(this.bookmarkManagers.ContainsKey(scope), "The caller should have made sure this scope exists in the bookmark managers dictionary.");
+            Fx.Assert(
+                this.bookmarkManagers.ContainsKey(scope),
+                "The caller should have made sure this scope exists in the bookmark managers dictionary."
+            );
 
             if (nonScopedBookmarksExist)
             {
@@ -530,7 +625,12 @@ namespace System.Activities.Runtime
 
             if (this.bookmarkManagers != null)
             {
-                foreach (KeyValuePair<BookmarkScope, BookmarkManager> scopeBookmarks in this.bookmarkManagers)
+                foreach (
+                    KeyValuePair<
+                        BookmarkScope,
+                        BookmarkManager
+                    > scopeBookmarks in this.bookmarkManagers
+                )
                 {
                     IEquatable<BookmarkScope> comparison = scopeBookmarks.Key;
                     if (!comparison.Equals(scope))
@@ -554,7 +654,16 @@ namespace System.Activities.Runtime
                 {
                     ExclusiveHandle handle = bookmark.ExclusiveHandles[i];
                     Fx.Assert(handle != null, "Internal error..ExclusiveHandle was null");
-                    if ((handle.ImportantBookmarks != null && handle.ImportantBookmarks.Contains(bookmark)) && (handle.UnimportantBookmarks != null && handle.UnimportantBookmarks.Count != 0))
+                    if (
+                        (
+                            handle.ImportantBookmarks != null
+                            && handle.ImportantBookmarks.Contains(bookmark)
+                        )
+                        && (
+                            handle.UnimportantBookmarks != null
+                            && handle.UnimportantBookmarks.Count != 0
+                        )
+                    )
                     {
                         return true;
                     }
@@ -563,7 +672,11 @@ namespace System.Activities.Runtime
             return false;
         }
 
-        public void PurgeBookmarks(BookmarkManager nonScopedBookmarkManager, Bookmark singleBookmark, IList<Bookmark> multipleBookmarks)
+        public void PurgeBookmarks(
+            BookmarkManager nonScopedBookmarkManager,
+            Bookmark singleBookmark,
+            IList<Bookmark> multipleBookmarks
+        )
         {
             if (singleBookmark != null)
             {
@@ -594,7 +707,10 @@ namespace System.Activities.Runtime
                     lookupScope = this.defaultScope;
                 }
 
-                Fx.Assert(this.bookmarkManagers.ContainsKey(bookmark.Scope), "We should have the single bookmark's sub instance registered");
+                Fx.Assert(
+                    this.bookmarkManagers.ContainsKey(bookmark.Scope),
+                    "We should have the single bookmark's sub instance registered"
+                );
                 manager = this.bookmarkManagers[bookmark.Scope];
             }
             else

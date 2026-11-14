@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             public ProjectSearchScope(
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 Project project,
-                bool exact)
+                bool exact
+            )
                 : base(provider, exact)
             {
                 Contract.ThrowIfFalse(project.SupportsCompilation);
@@ -25,7 +26,10 @@ namespace Microsoft.CodeAnalysis.AddImport
             public override SymbolReference CreateReference<T>(SymbolResult<T> symbol)
             {
                 return new ProjectSymbolReference(
-                    provider, symbol.WithSymbol<INamespaceOrTypeSymbol>(symbol.Symbol), _project);
+                    provider,
+                    symbol.WithSymbol<INamespaceOrTypeSymbol>(symbol.Symbol),
+                    _project
+                );
             }
         }
     }

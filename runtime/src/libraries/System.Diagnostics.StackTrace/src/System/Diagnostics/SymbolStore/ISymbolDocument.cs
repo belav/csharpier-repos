@@ -24,7 +24,6 @@ namespace System.Diagnostics.SymbolStore
         // Access to embedded source.
         bool HasEmbeddedSource { get; }
         int SourceLength { get; }
-        byte[] GetSourceRange(int startLine, int startColumn,
-                              int endLine, int endColumn);
+        byte[] GetSourceRange(int startLine, int startColumn, int endLine, int endColumn);
     }
 }

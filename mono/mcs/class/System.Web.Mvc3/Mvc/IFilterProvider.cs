@@ -1,7 +1,12 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System.Collections.Generic;
 
-    public interface IFilterProvider {
-        IEnumerable<Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor);
+    public interface IFilterProvider
+    {
+        IEnumerable<Filter> GetFilters(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor
+        );
     }
 }

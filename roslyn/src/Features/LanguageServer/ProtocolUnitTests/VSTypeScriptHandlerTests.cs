@@ -27,19 +27,20 @@ using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
+
 public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
 {
-    public VSTypeScriptHandlerTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    {
-    }
+    public VSTypeScriptHandlerTests(ITestOutputHelper testOutputHelper)
+        : base(testOutputHelper) { }
 
-    protected override TestComposition Composition => base.Composition.AddParts(typeof(TypeScriptHandlerFactory));
+    protected override TestComposition Composition =>
+        base.Composition.AddParts(typeof(TypeScriptHandlerFactory));
 
     [Fact]
     public async Task TestExternalAccessTypeScriptHandlerInvoked()
     {
         var workspaceXml =
-@$"<Workspace>
+            @$"<Workspace>
     <Project Language=""TypeScript"" CommonReferences=""true"" AssemblyName=""TypeScriptProj"">
         <Document FilePath=""C:\T.ts""></Document>
     </Project>
@@ -48,9 +49,16 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
         await using var testLspServer = await CreateTsTestLspServerAsync(workspaceXml);
 
         var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
-        var request = new TSRequest(document.GetURI(), ProtocolConversions.ProjectIdToProjectContextId(document.Project.Id));
+        var request = new TSRequest(
+            document.GetURI(),
+            ProtocolConversions.ProjectIdToProjectContextId(document.Project.Id)
+        );
 
-        var response = await testLspServer.ExecuteRequestAsync<TSRequest, int>(TypeScriptHandler.MethodName, request, CancellationToken.None);
+        var response = await testLspServer.ExecuteRequestAsync<TSRequest, int>(
+            TypeScriptHandler.MethodName,
+            request,
+            CancellationToken.None
+        );
         Assert.Equal(TypeScriptHandler.Response, response);
     }
 
@@ -58,7 +66,7 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
     public async Task TestRoslynTypeScriptHandlerInvoked()
     {
         var workspaceXml =
-@$"<Workspace>
+            @$"<Workspace>
     <Project Language=""TypeScript"" CommonReferences=""true"" AssemblyName=""TypeScriptProj"">
         <Document FilePath=""C:\T.ts""></Document>
     </Project>
@@ -66,7 +74,11 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
 
         var options = new InitializationOptions()
         {
-            OptionUpdater = globalOptions => globalOptions.SetGlobalOption(InternalDiagnosticsOptionsStorage.NormalDiagnosticMode, DiagnosticMode.LspPull)
+            OptionUpdater = globalOptions =>
+                globalOptions.SetGlobalOption(
+                    InternalDiagnosticsOptionsStorage.NormalDiagnosticMode,
+                    DiagnosticMode.LspPull
+                ),
         };
 
         await using var testLspServer = await CreateTsTestLspServerAsync(workspaceXml, options);
@@ -74,10 +86,17 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
         var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
         var documentPullRequest = new VSInternalDocumentDiagnosticsParams
         {
-            TextDocument = CreateTextDocumentIdentifier(document.GetURI(), document.Project.Id)
+            TextDocument = CreateTextDocumentIdentifier(document.GetURI(), document.Project.Id),
         };
 
-        var response = await testLspServer.ExecuteRequestAsync<VSInternalDocumentDiagnosticsParams, VSInternalDiagnosticReport[]>(VSInternalMethods.DocumentPullDiagnosticName, documentPullRequest, CancellationToken.None);
+        var response = await testLspServer.ExecuteRequestAsync<
+            VSInternalDocumentDiagnosticsParams,
+            VSInternalDiagnosticReport[]
+        >(
+            VSInternalMethods.DocumentPullDiagnosticName,
+            documentPullRequest,
+            CancellationToken.None
+        );
         Assert.Empty(response);
     }
 
@@ -85,7 +104,7 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
     public async Task TestGetSimplifierOptionsOnTypeScriptDocument()
     {
         var workspaceXml =
-@$"<Workspace>
+            @$"<Workspace>
     <Project Language=""TypeScript"" CommonReferences=""true"" AssemblyName=""TypeScriptProj"">
         <Document FilePath=""C:\T.ts""></Document>
     </Project>
@@ -93,28 +112,49 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
 
         await using var testLspServer = await CreateTsTestLspServerAsync(workspaceXml);
         var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
-        var simplifierOptions = testLspServer.TestWorkspace.GlobalOptions.GetSimplifierOptions(document.Project.Services, fallbackOptions: null);
+        var simplifierOptions = testLspServer.TestWorkspace.GlobalOptions.GetSimplifierOptions(
+            document.Project.Services,
+            fallbackOptions: null
+        );
         Assert.Same(SimplifierOptions.CommonDefaults, simplifierOptions);
     }
 
-    private async Task<TestLspServer> CreateTsTestLspServerAsync(string workspaceXml, InitializationOptions? options = null)
+    private async Task<TestLspServer> CreateTsTestLspServerAsync(
+        string workspaceXml,
+        InitializationOptions? options = null
+    )
     {
         var (clientStream, serverStream) = FullDuplexStream.CreatePair();
 
-        var testWorkspace = CreateWorkspace(options, mutatingLspWorkspace: false, workspaceKind: null);
+        var testWorkspace = CreateWorkspace(
+            options,
+            mutatingLspWorkspace: false,
+            workspaceKind: null
+        );
         testWorkspace.InitializeDocuments(XElement.Parse(workspaceXml), openDocuments: false);
 
         // Ensure workspace operations are completed so we don't get unexpected workspace changes while running.
         await WaitForWorkspaceOperationsAsync(testWorkspace);
         var languageServerTarget = CreateLanguageServer(serverStream, serverStream, testWorkspace);
 
-        return await TestLspServer.CreateAsync(testWorkspace, new ClientCapabilities(), languageServerTarget, clientStream);
+        return await TestLspServer.CreateAsync(
+            testWorkspace,
+            new ClientCapabilities(),
+            languageServerTarget,
+            clientStream
+        );
     }
 
-    private static RoslynLanguageServer CreateLanguageServer(Stream inputStream, Stream outputStream, TestWorkspace workspace)
+    private static RoslynLanguageServer CreateLanguageServer(
+        Stream inputStream,
+        Stream outputStream,
+        TestWorkspace workspace
+    )
     {
-        var capabilitiesProvider = workspace.ExportProvider.GetExportedValue<ExperimentalCapabilitiesProvider>();
-        var servicesProvider = workspace.ExportProvider.GetExportedValue<VSTypeScriptLspServiceProvider>();
+        var capabilitiesProvider =
+            workspace.ExportProvider.GetExportedValue<ExperimentalCapabilitiesProvider>();
+        var servicesProvider =
+            workspace.ExportProvider.GetExportedValue<VSTypeScriptLspServiceProvider>();
 
         var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(outputStream, inputStream))
         {
@@ -124,12 +164,14 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
         var logger = NoOpLspLogger.Instance;
 
         var languageServer = new RoslynLanguageServer(
-            servicesProvider, jsonRpc,
+            servicesProvider,
+            jsonRpc,
             capabilitiesProvider,
             logger,
             workspace.Services.HostServices,
             ImmutableArray.Create(InternalLanguageNames.TypeScript),
-            WellKnownLspServerKinds.RoslynTypeScriptLspServer);
+            WellKnownLspServerKinds.RoslynTypeScriptLspServer
+        );
 
         jsonRpc.StartListening();
         return languageServer;
@@ -142,9 +184,7 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TypeScriptHandlerFactory()
-        {
-        }
+        public TypeScriptHandlerFactory() { }
 
         protected override IVSTypeScriptRequestHandler CreateRequestHandler()
         {
@@ -163,12 +203,18 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
 
         protected override bool RequiresLSPSolution => true;
 
-        protected override TypeScriptTextDocumentIdentifier? GetTypeSciptTextDocumentIdentifier(TSRequest request)
+        protected override TypeScriptTextDocumentIdentifier? GetTypeSciptTextDocumentIdentifier(
+            TSRequest request
+        )
         {
             return new TypeScriptTextDocumentIdentifier(request.Document, request.Project);
         }
 
-        protected override Task<int> HandleRequestAsync(TSRequest request, TypeScriptRequestContext context, CancellationToken cancellationToken)
+        protected override Task<int> HandleRequestAsync(
+            TSRequest request,
+            TypeScriptRequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Assert.NotNull(context.Solution);
             AssertEx.NotNull(context.Document);

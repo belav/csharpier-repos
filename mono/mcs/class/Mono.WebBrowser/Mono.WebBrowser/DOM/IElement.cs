@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,42 +28,41 @@ using System.IO;
 
 namespace Mono.WebBrowser.DOM
 {
-	public interface IElement : INode
-	{
-		IElementCollection 	All { get; }
-		IElementCollection 	Children { get; }
+    public interface IElement : INode
+    {
+        IElementCollection All { get; }
+        IElementCollection Children { get; }
 
-		int ClientWidth		{ get; }
-		int ClientHeight	{ get; }
-		int ScrollHeight	{ get; }
-		int ScrollWidth		{ get; }
-		int ScrollLeft		{ get; set;}
-		int ScrollTop		{ get; set; }
-		int OffsetHeight	{ get; }
-		int OffsetWidth		{ get; }
-		int OffsetLeft		{ get; }
-		int OffsetTop		{ get; }
-		IElement OffsetParent { get; }
+        int ClientWidth { get; }
+        int ClientHeight { get; }
+        int ScrollHeight { get; }
+        int ScrollWidth { get; }
+        int ScrollLeft { get; set; }
+        int ScrollTop { get; set; }
+        int OffsetHeight { get; }
+        int OffsetWidth { get; }
+        int OffsetLeft { get; }
+        int OffsetTop { get; }
+        IElement OffsetParent { get; }
 
-		string 				InnerText { get; set; }
-		string 				InnerHTML { get; set; }
-		string 				OuterText { get; set; }
-		string 				OuterHTML { get; set; }
-		string 				Style { get; set; }
-		int 				TabIndex { get; set; }
-		string 				TagName { get; }
-		bool				Disabled { get; set; }
-		Stream				ContentStream { get; }
+        string InnerText { get; set; }
+        string InnerHTML { get; set; }
+        string OuterText { get; set; }
+        string OuterHTML { get; set; }
+        string Style { get; set; }
+        int TabIndex { get; set; }
+        string TagName { get; }
+        bool Disabled { get; set; }
+        Stream ContentStream { get; }
 
-		IElement			AppendChild (IElement child);
-		void				Blur ();
-		void				Focus ();
-		bool 				HasAttribute (string name);
-		string 				GetAttribute (string name);
-		IElementCollection 	GetElementsByTagName (string id);
-		int 				GetHashCode ();
-		void				ScrollIntoView (bool alignWithTop);
-		void 				SetAttribute (string name, string value);
-		
-	}
+        IElement AppendChild(IElement child);
+        void Blur();
+        void Focus();
+        bool HasAttribute(string name);
+        string GetAttribute(string name);
+        IElementCollection GetElementsByTagName(string id);
+        int GetHashCode();
+        void ScrollIntoView(bool alignWithTop);
+        void SetAttribute(string name, string value);
+    }
 }

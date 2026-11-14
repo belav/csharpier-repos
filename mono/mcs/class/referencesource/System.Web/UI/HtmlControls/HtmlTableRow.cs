@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlTableRow.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
-
 
     /// <devdoc>
     ///    <para>
@@ -22,17 +22,13 @@ namespace System.Web.UI.HtmlControls {
     ///       &lt;tr&gt; elements enclosed within an <see cref='System.Web.UI.HtmlControls.HtmlTable'/> control.
     ///    </para>
     /// </devdoc>
-    [
-    ParseChildren(true, "Cells")
-    ]
-    public class HtmlTableRow : HtmlContainerControl {
+    [ParseChildren(true, "Cells")]
+    public class HtmlTableRow : HtmlContainerControl
+    {
         HtmlTableCellCollection cells;
 
-
-        public HtmlTableRow() : base("tr") {
-        }
-
-
+        public HtmlTableRow()
+            : base("tr") { }
 
         /// <devdoc>
         ///    <para>
@@ -41,19 +37,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Align {
-            get {
+        public string Align
+        {
+            get
+            {
                 string s = Attributes["align"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["align"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["align"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -67,18 +62,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
-        public virtual HtmlTableCellCollection Cells {
-            get {
+        public virtual HtmlTableCellCollection Cells
+        {
+            get
+            {
                 if (cells == null)
                     cells = new HtmlTableCellCollection(this);
 
                 return cells;
             }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -87,21 +83,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string BgColor {
-            get {
+        public string BgColor
+        {
+            get
+            {
                 string s = Attributes["bgcolor"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["bgcolor"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["bgcolor"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -109,21 +103,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string BorderColor {
-            get {
+        public string BorderColor
+        {
+            get
+            {
                 string s = Attributes["bordercolor"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["bordercolor"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["bordercolor"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -131,47 +123,57 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Height {
-            get {
+        public string Height
+        {
+            get
+            {
                 string s = Attributes["height"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["height"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["height"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string InnerHtml {
-            get {
-                throw new NotSupportedException(SR.GetString(SR.InnerHtml_not_supported, this.GetType().Name));
+        public override string InnerHtml
+        {
+            get
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.InnerHtml_not_supported, this.GetType().Name)
+                );
             }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.InnerHtml_not_supported, this.GetType().Name));
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.InnerHtml_not_supported, this.GetType().Name)
+                );
             }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string InnerText {
-            get {
-                throw new NotSupportedException(SR.GetString(SR.InnerText_not_supported, this.GetType().Name));
+        public override string InnerText
+        {
+            get
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.InnerText_not_supported, this.GetType().Name)
+                );
             }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.InnerText_not_supported, this.GetType().Name));
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.InnerText_not_supported, this.GetType().Name)
+                );
             }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -180,26 +182,25 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string VAlign {
-            get {
+        public string VAlign
+        {
+            get
+            {
                 string s = Attributes["valign"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["valign"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["valign"] = MapStringAttributeToString(value); }
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected internal override void RenderChildren(HtmlTextWriter writer) {
+        protected internal override void RenderChildren(HtmlTextWriter writer)
+        {
             writer.WriteLine();
             writer.Indent++;
             base.RenderChildren(writer);
@@ -207,54 +208,65 @@ namespace System.Web.UI.HtmlControls {
             writer.Indent--;
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void RenderEndTag(HtmlTextWriter writer) {
+        protected override void RenderEndTag(HtmlTextWriter writer)
+        {
             base.RenderEndTag(writer);
             writer.WriteLine();
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override ControlCollection CreateControlCollection() {
+        protected override ControlCollection CreateControlCollection()
+        {
             return new HtmlTableCellControlCollection(this);
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected class HtmlTableCellControlCollection : ControlCollection {
-
-            internal HtmlTableCellControlCollection (Control owner) : base(owner) {
-            }
-
+        protected class HtmlTableCellControlCollection : ControlCollection
+        {
+            internal HtmlTableCellControlCollection(Control owner)
+                : base(owner) { }
 
             /// <devdoc>
             /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new control is added
             ///    to the end of the array.</para>
             /// </devdoc>
-            public override void Add(Control child) {
+            public override void Add(Control child)
+            {
                 if (child is HtmlTableCell)
                     base.Add(child);
                 else
-                    throw new ArgumentException(SR.GetString(SR.Cannot_Have_Children_Of_Type, "HtmlTableRow", child.GetType().Name.ToString(CultureInfo.InvariantCulture))); // throw an exception here
+                    throw new ArgumentException(
+                        SR.GetString(
+                            SR.Cannot_Have_Children_Of_Type,
+                            "HtmlTableRow",
+                            child.GetType().Name.ToString(CultureInfo.InvariantCulture)
+                        )
+                    ); // throw an exception here
             }
-            
 
             /// <devdoc>
             /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new control is added
             ///    to the array at the specified index location.</para>
             /// </devdoc>
-            public override void AddAt(int index, Control child) {
+            public override void AddAt(int index, Control child)
+            {
                 if (child is HtmlTableCell)
                     base.AddAt(index, child);
                 else
-                    throw new ArgumentException(SR.GetString(SR.Cannot_Have_Children_Of_Type, "HtmlTableRow", child.GetType().Name.ToString(CultureInfo.InvariantCulture))); // throw an exception here
+                    throw new ArgumentException(
+                        SR.GetString(
+                            SR.Cannot_Have_Children_Of_Type,
+                            "HtmlTableRow",
+                            child.GetType().Name.ToString(CultureInfo.InvariantCulture)
+                        )
+                    ); // throw an exception here
             }
         }
     }

@@ -12,12 +12,14 @@ namespace System.IO.Tests
     public class MemoryStreamTests : StandaloneStreamConformanceTests
     {
         protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) =>
-            Task.FromResult<Stream>(new MemoryStream(initialData ?? Array.Empty<byte>(), writable: false));
+            Task.FromResult<Stream>(
+                new MemoryStream(initialData ?? Array.Empty<byte>(), writable: false)
+            );
 
         protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
             Task.FromResult<Stream>(
-                initialData != null ? new MemoryStream(initialData) :
-                new MemoryStream());
+                initialData != null ? new MemoryStream(initialData) : new MemoryStream()
+            );
 
         protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
             Task.FromResult<Stream>(null);
@@ -28,7 +30,19 @@ namespace System.IO.Tests
             using (MemoryStream ms2 = new MemoryStream())
             {
                 byte[] bytArrRet;
-                byte[] bytArr = new byte[] { byte.MinValue, byte.MaxValue, 1, 2, 3, 4, 5, 6, 128, 250 };
+                byte[] bytArr = new byte[]
+                {
+                    byte.MinValue,
+                    byte.MaxValue,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    128,
+                    250,
+                };
 
                 // [] Write to FileStream, check the filestream
                 ms2.Write(bytArr, 0, bytArr.Length);
@@ -52,7 +66,19 @@ namespace System.IO.Tests
             using (MemoryStream ms3 = new MemoryStream())
             {
                 byte[] bytArrRet;
-                byte[] bytArr = new byte[] { byte.MinValue, byte.MaxValue, 1, 2, 3, 4, 5, 6, 128, 250 };
+                byte[] bytArr = new byte[]
+                {
+                    byte.MinValue,
+                    byte.MaxValue,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    128,
+                    250,
+                };
 
                 ms2.Write(bytArr, 0, bytArr.Length);
                 ms2.WriteTo(ms3);
@@ -86,30 +112,34 @@ namespace System.IO.Tests
 
         public static IEnumerable<object[]> MemoryStream_PositionOverflow_Throws_MemberData() =>
             from mode in Enum.GetValues<SeekMode>()
-            from bufferContext in
-                new (int bufferSize, int origin)[]
-                {
-                    (0, 0),
-                    (1, 0),
-                    (1, 1),
-                    (10, 0),
-                    (10, 5),
-                    (10, 10),
-                    (Array.MaxLength, 0),
-                    (Array.MaxLength, Array.MaxLength)
-                }
-            select new object[] {mode, bufferContext.bufferSize, bufferContext.origin};
+            from bufferContext in new (int bufferSize, int origin)[]
+            {
+                (0, 0),
+                (1, 0),
+                (1, 1),
+                (10, 0),
+                (10, 5),
+                (10, 10),
+                (Array.MaxLength, 0),
+                (Array.MaxLength, Array.MaxLength),
+            }
+            select new object[] { mode, bufferContext.bufferSize, bufferContext.origin };
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.Is64BitProcess))]
         [MemberData(nameof(MemoryStream_PositionOverflow_Throws_MemberData))]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "https://github.com/dotnet/runtime/issues/92467")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "https://github.com/dotnet/runtime/issues/92467"
+        )]
         public void MemoryStream_SeekOverflow_Throws(SeekMode mode, int bufferSize, int origin)
         {
             byte[] buffer = new byte[bufferSize];
             using (MemoryStream ms = new MemoryStream(buffer, origin, buffer.Length - origin, true))
             {
                 Seek(mode, ms, int.MaxValue - origin);
-                Assert.Throws<ArgumentOutOfRangeException>(() => Seek(mode, ms, (long)int.MaxValue - origin + 1));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    Seek(mode, ms, (long)int.MaxValue - origin + 1)
+                );
                 Assert.ThrowsAny<Exception>(() => Seek(mode, ms, long.MinValue + 1));
                 Assert.ThrowsAny<Exception>(() => Seek(mode, ms, long.MaxValue - 1));
             }
@@ -151,8 +181,10 @@ namespace System.IO.Tests
 
         private class ReadWriteOverridingMemoryStream : MemoryStream
         {
-            public bool ReadArrayInvoked, WriteArrayInvoked;
-            public bool ReadAsyncArrayInvoked, WriteAsyncArrayInvoked;
+            public bool ReadArrayInvoked,
+                WriteArrayInvoked;
+            public bool ReadAsyncArrayInvoked,
+                WriteAsyncArrayInvoked;
 
             public override int Read(byte[] buffer, int offset, int count)
             {
@@ -166,13 +198,23 @@ namespace System.IO.Tests
                 base.Write(buffer, offset, count);
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 ReadAsyncArrayInvoked = true;
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 WriteAsyncArrayInvoked = true;
                 return base.WriteAsync(buffer, offset, count, cancellationToken);

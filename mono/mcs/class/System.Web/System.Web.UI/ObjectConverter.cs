@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,17 +30,17 @@ using System.Security.Permissions;
 
 namespace System.Web.UI
 {
-	[Obsolete ("The recommended alternative is System.Convert and String.Format. http://go.microsoft.com/fwlink/?linkid=14202")]
-	// CAS - no InheritanceDemand here as the class is sealed
-	public sealed class ObjectConverter
-	{
-		public ObjectConverter ()
-		{
-		}
+    [Obsolete(
+        "The recommended alternative is System.Convert and String.Format. http://go.microsoft.com/fwlink/?linkid=14202"
+    )]
+    // CAS - no InheritanceDemand here as the class is sealed
+    public sealed class ObjectConverter
+    {
+        public ObjectConverter() { }
 
-		public static object ConvertValue (object value, Type toType, string formatString)
-		{
-			throw new NotImplementedException ("Not implemented and [Obsolete]");
-		}
-	}
+        public static object ConvertValue(object value, Type toType, string formatString)
+        {
+            throw new NotImplementedException("Not implemented and [Obsolete]");
+        }
+    }
 }

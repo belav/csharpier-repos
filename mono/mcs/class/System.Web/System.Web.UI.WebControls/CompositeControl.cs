@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,57 +31,71 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[Designer ("System.Web.UI.Design.WebControls.CompositeControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	public abstract class CompositeControl : WebControl, INamingContainer, ICompositeControlDesignerAccessor
-	{
-		public override bool SupportsDisabledAttribute {
-			get { return RenderingCompatibilityLessThan40; }
-		}
-		protected CompositeControl ()
-		{
-		}
+    // CAS
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [Designer(
+        "System.Web.UI.Design.WebControls.CompositeControlDesigner, "
+            + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    public abstract class CompositeControl
+        : WebControl,
+            INamingContainer,
+            ICompositeControlDesignerAccessor
+    {
+        public override bool SupportsDisabledAttribute
+        {
+            get { return RenderingCompatibilityLessThan40; }
+        }
 
-		public override void DataBind ()
-		{
-			/* make sure all the child controls have been created */
-			EnsureChildControls ();
-			/* and then... */
-			base.DataBind();
-		}
+        protected CompositeControl() { }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			/* make sure all the child controls have been created */
-			EnsureChildControls ();
-			/* and then... */
-			base.Render (writer);
-		}
+        public override void DataBind()
+        {
+            /* make sure all the child controls have been created */
+            EnsureChildControls();
+            /* and then... */
+            base.DataBind();
+        }
 
-		void ICompositeControlDesignerAccessor.RecreateChildControls ()
-		{
-			RecreateChildControls ();
-		}
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            /* make sure all the child controls have been created */
+            EnsureChildControls();
+            /* and then... */
+            base.Render(writer);
+        }
 
-		[MonoTODO("not sure exactly what this one does..")]
-		protected virtual void RecreateChildControls ()
-		{
-			/* for now just call CreateChildControls to force
-			 * the recreation of our children. */
-			CreateChildControls ();
-		}
-	
-		public override ControlCollection Controls {
-			get {
-				/* make sure all the child controls have been created */
-				EnsureChildControls ();
-				/* and then... */
-				return base.Controls;
-			}
-		}
-	}
+        void ICompositeControlDesignerAccessor.RecreateChildControls()
+        {
+            RecreateChildControls();
+        }
+
+        [MonoTODO("not sure exactly what this one does..")]
+        protected virtual void RecreateChildControls()
+        {
+            /* for now just call CreateChildControls to force
+             * the recreation of our children. */
+            CreateChildControls();
+        }
+
+        public override ControlCollection Controls
+        {
+            get
+            {
+                /* make sure all the child controls have been created */
+                EnsureChildControls();
+                /* and then... */
+                return base.Controls;
+            }
+        }
+    }
 }
-

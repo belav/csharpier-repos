@@ -11,9 +11,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
     /// <summary>
     /// Some features of the compiler (such as anonymous types, pay-as-you-go, NoPIA, ...)
     /// rely on all referenced symbols to go through translate mechanism. Because by default
-    /// symbol translator does not translate some of indirectly referenced symbols, such as 
+    /// symbol translator does not translate some of indirectly referenced symbols, such as
     /// type argument, we have to force translation here
-    /// 
+    ///
     /// This class provides unified implementation for this functionality.
     /// </summary>
     internal static class ReferenceDependencyWalker
@@ -42,7 +42,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
         }
 
-        private static void VisitTypeReference(Cci.ITypeReference typeReference, EmitContext context)
+        private static void VisitTypeReference(
+            Cci.ITypeReference typeReference,
+            EmitContext context
+        )
         {
             RoslynDebug.Assert(typeReference != null);
 
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
 
             // Visit generic arguments
-            Cci.IGenericTypeInstanceReference? genericInstance = typeReference.AsGenericTypeInstanceReference;
+            Cci.IGenericTypeInstanceReference? genericInstance =
+                typeReference.AsGenericTypeInstanceReference;
             if (genericInstance != null)
             {
                 foreach (var arg in genericInstance.GetGenericArguments(context))
@@ -98,7 +102,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
         }
 
-        private static void VisitMethodReference(Cci.IMethodReference methodReference, EmitContext context)
+        private static void VisitMethodReference(
+            Cci.IMethodReference methodReference,
+            EmitContext context
+        )
         {
             RoslynDebug.Assert(methodReference != null);
 
@@ -106,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             VisitTypeReference(methodReference.GetContainingType(context), context);
 
             // Visit generic arguments if any
-            Cci.IGenericMethodInstanceReference? genericInstance = methodReference.AsGenericMethodInstanceReference;
+            Cci.IGenericMethodInstanceReference? genericInstance =
+                methodReference.AsGenericMethodInstanceReference;
             if (genericInstance != null)
             {
                 foreach (var arg in genericInstance.GetGenericArguments(context))
@@ -117,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
 
             // Translate substituted method to original definition
-            Cci.ISpecializedMethodReference? specializedMethod = methodReference.AsSpecializedMethodReference;
+            Cci.ISpecializedMethodReference? specializedMethod =
+                methodReference.AsSpecializedMethodReference;
             if (specializedMethod != null)
             {
                 methodReference = specializedMethod.UnspecializedVersion;
@@ -147,7 +156,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
         }
 
-        private static void VisitParameters(ImmutableArray<Cci.IParameterTypeInformation> parameters, EmitContext context)
+        private static void VisitParameters(
+            ImmutableArray<Cci.IParameterTypeInformation> parameters,
+            EmitContext context
+        )
         {
             foreach (var param in parameters)
             {
@@ -159,7 +171,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
         }
 
-        private static void VisitFieldReference(Cci.IFieldReference fieldReference, EmitContext context)
+        private static void VisitFieldReference(
+            Cci.IFieldReference fieldReference,
+            EmitContext context
+        )
         {
             RoslynDebug.Assert(fieldReference != null);
 
@@ -167,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             VisitTypeReference(fieldReference.GetContainingType(context), context);
 
             // Translate substituted field to original definition
-            Cci.ISpecializedFieldReference? specializedField = fieldReference.AsSpecializedFieldReference;
+            Cci.ISpecializedFieldReference? specializedField =
+                fieldReference.AsSpecializedFieldReference;
             if (specializedField != null)
             {
                 fieldReference = specializedField.UnspecializedVersion;
@@ -179,7 +195,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             VisitCustomModifiers(fieldReference.RefCustomModifiers, context);
         }
 
-        private static void VisitCustomModifiers(ImmutableArray<Cci.ICustomModifier> customModifiers, in EmitContext context)
+        private static void VisitCustomModifiers(
+            ImmutableArray<Cci.ICustomModifier> customModifiers,
+            in EmitContext context
+        )
         {
             foreach (var typeModifier in customModifiers)
             {

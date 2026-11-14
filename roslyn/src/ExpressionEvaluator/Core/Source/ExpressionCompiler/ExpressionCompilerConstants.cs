@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal const string TypeVariablesClassName = "<>c__TypeVariables";
         internal const string IntrinsicAssemblyNamespace = "Microsoft.VisualStudio.Debugger.Clr";
         internal const string IntrinsicAssemblyTypeName = "IntrinsicMethods";
-        internal const string IntrinsicAssemblyTypeMetadataName = IntrinsicAssemblyNamespace + "." + IntrinsicAssemblyTypeName;
+        internal const string IntrinsicAssemblyTypeMetadataName =
+            IntrinsicAssemblyNamespace + "." + IntrinsicAssemblyTypeName;
         internal const string GetExceptionMethodName = "GetException";
         internal const string GetStowedExceptionMethodName = "GetStowedException";
         internal const string GetObjectAtAddressMethodName = "GetObjectAtAddress";

@@ -314,8 +314,7 @@ internal sealed class StartupLoader
         var startupNameWithoutEnv = "Startup";
 
         // Check the most likely places first
-        var type =
-            assembly.GetType(startupNameWithEnv)
+        var type = assembly.GetType(startupNameWithEnv)
             ?? assembly.GetType(startupAssemblyName + "." + startupNameWithEnv)
             ?? assembly.GetType(startupNameWithoutEnv)
             ?? assembly.GetType(startupAssemblyName + "." + startupNameWithoutEnv);
@@ -405,14 +404,13 @@ internal sealed class StartupLoader
         string environmentName
     )
     {
-        var servicesMethod =
-            FindMethod(
-                startupType,
-                "Configure{0}Services",
-                environmentName,
-                typeof(IServiceProvider),
-                required: false
-            )
+        var servicesMethod = FindMethod(
+            startupType,
+            "Configure{0}Services",
+            environmentName,
+            typeof(IServiceProvider),
+            required: false
+        )
             ?? FindMethod(
                 startupType,
                 "Configure{0}Services",

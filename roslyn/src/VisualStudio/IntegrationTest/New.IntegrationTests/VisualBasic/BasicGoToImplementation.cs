@@ -21,29 +21,56 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGoToImplementation()
-                    : base(nameof(BasicGoToImplementation))
-        {
-        }
+            : base(nameof(BasicGoToImplementation)) { }
 
         [IdeTheory]
         [CombinatorialData]
         public async Task SimpleGoToImplementation(bool asyncNavigation)
         {
-            await TestServices.Editor.ConfigureAsyncNavigation(asyncNavigation ? AsyncNavigationKind.Asynchronous : AsyncNavigationKind.Synchronous, HangMitigatingCancellationToken);
+            await TestServices.Editor.ConfigureAsyncNavigation(
+                asyncNavigation
+                    ? AsyncNavigationKind.Asynchronous
+                    : AsyncNavigationKind.Synchronous,
+                HangMitigatingCancellationToken
+            );
 
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(project, "FileImplementation.vb", cancellationToken: HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.OpenFileAsync(project, "FileImplementation.vb", HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddFileAsync(
+                project,
+                "FileImplementation.vb",
+                cancellationToken: HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                project,
+                "FileImplementation.vb",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.SetTextAsync(
-@"Class Implementation
+                @"Class Implementation
   Implements IGoo
-End Class", HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddFileAsync(project, "FileInterface.vb", cancellationToken: HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.OpenFileAsync(project, "FileInterface.vb", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.AddFileAsync(
+                project,
+                "FileInterface.vb",
+                cancellationToken: HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                project,
+                "FileInterface.vb",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.SetTextAsync(
-@"Interface IGoo 
-End Interface", HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync("Interface IGoo", charsOffset: 0, HangMitigatingCancellationToken);
+                @"Interface IGoo 
+End Interface",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Editor.PlaceCaretAsync(
+                "Interface IGoo",
+                charsOffset: 0,
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.GoToImplementationAsync(HangMitigatingCancellationToken);
 
             string identifierWithCaret;
@@ -55,21 +82,48 @@ End Interface", HangMitigatingCancellationToken);
             else
             {
                 // The navigation completed asynchronously, so navigate to the first item in the results list
-                Assert.Equal($"'IGoo' implementations - Entire solution", await TestServices.Shell.GetActiveWindowCaptionAsync(HangMitigatingCancellationToken));
-                var results = await TestServices.FindReferencesWindow.GetContentsAsync(HangMitigatingCancellationToken);
+                Assert.Equal(
+                    $"'IGoo' implementations - Entire solution",
+                    await TestServices.Shell.GetActiveWindowCaptionAsync(
+                        HangMitigatingCancellationToken
+                    )
+                );
+                var results = await TestServices.FindReferencesWindow.GetContentsAsync(
+                    HangMitigatingCancellationToken
+                );
                 AssertEx.EqualOrDiff(
                     $"<unknown>: Class Implementation",
-                    string.Join(Environment.NewLine, results.Select(result => $"{result.GetItemOrigin()?.ToString() ?? "<unknown>"}: {result.GetText()}")));
+                    string.Join(
+                        Environment.NewLine,
+                        results.Select(result =>
+                            $"{result.GetItemOrigin()?.ToString() ?? "<unknown>"}: {result.GetText()}"
+                        )
+                    )
+                );
                 results[0].NavigateTo(isPreview: false, shouldActivate: true);
 
-                await TestServices.Workarounds.WaitForNavigationAsync(HangMitigatingCancellationToken);
+                await TestServices.Workarounds.WaitForNavigationAsync(
+                    HangMitigatingCancellationToken
+                );
 
                 identifierWithCaret = "$$Implementation";
             }
 
-            Assert.Equal($"FileImplementation.vb", await TestServices.Shell.GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken));
-            await TestServices.EditorVerifier.TextContainsAsync($@"Class {identifierWithCaret}", assertCaretPosition: true);
-            Assert.False(await TestServices.Shell.IsActiveTabProvisionalAsync(HangMitigatingCancellationToken));
+            Assert.Equal(
+                $"FileImplementation.vb",
+                await TestServices.Shell.GetActiveDocumentFileNameAsync(
+                    HangMitigatingCancellationToken
+                )
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                $@"Class {identifierWithCaret}",
+                assertCaretPosition: true
+            );
+            Assert.False(
+                await TestServices.Shell.IsActiveTabProvisionalAsync(
+                    HangMitigatingCancellationToken
+                )
+            );
         }
     }
 }

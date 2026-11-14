@@ -1,5 +1,5 @@
 //
-// HostingEnvironmentSectionTest.cs 
+// HostingEnvironmentSectionTest.cs
 //	- unit tests for System.Web.Configuration.HostingEnvironmentSection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,45 +27,42 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using System.Web.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class HostingEnvironmentSectionTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            HostingEnvironmentSection s = new HostingEnvironmentSection();
 
-	[TestFixture]
-	public class HostingEnvironmentSectionTest  {
+            Assert.AreEqual(TimeSpan.MaxValue, s.IdleTimeout, "A1");
+            Assert.IsTrue(s.ShadowCopyBinAssemblies, "A2");
+            Assert.AreEqual(TimeSpan.FromSeconds(30), s.ShutdownTimeout, "A3");
+        }
 
-		[Test]
-		public void Defaults ()
-		{
-			HostingEnvironmentSection s = new HostingEnvironmentSection ();
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void IdleTimeout_validationFailure()
+        {
+            HostingEnvironmentSection s = new HostingEnvironmentSection();
+            s.IdleTimeout = TimeSpan.FromSeconds(-1);
+        }
 
-			Assert.AreEqual (TimeSpan.MaxValue, s.IdleTimeout, "A1");
-			Assert.IsTrue (s.ShadowCopyBinAssemblies, "A2");
-			Assert.AreEqual (TimeSpan.FromSeconds (30), s.ShutdownTimeout, "A3");
-		}
-
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void IdleTimeout_validationFailure ()
-		{
-			HostingEnvironmentSection s = new HostingEnvironmentSection ();
-			s.IdleTimeout = TimeSpan.FromSeconds (-1);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void ShutdownTimeout_validationFailure ()
-		{
-			HostingEnvironmentSection s = new HostingEnvironmentSection ();
-			s.ShutdownTimeout = TimeSpan.FromSeconds (-1);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void ShutdownTimeout_validationFailure()
+        {
+            HostingEnvironmentSection s = new HostingEnvironmentSection();
+            s.ShutdownTimeout = TimeSpan.FromSeconds(-1);
+        }
+    }
 }
-

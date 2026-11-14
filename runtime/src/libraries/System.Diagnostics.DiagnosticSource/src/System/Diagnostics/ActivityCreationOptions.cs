@@ -25,7 +25,15 @@ namespace System.Diagnostics
         /// <param name="tags">Key-value pairs list for the tags to create the Activity object with.<see cref="ActivityContext"/></param>
         /// <param name="links"><see cref="ActivityLink"/> list to create the Activity object with.</param>
         /// <param name="idFormat">The default Id format to use.</param>
-        internal ActivityCreationOptions(ActivitySource source, string name, T parent, ActivityKind kind, IEnumerable<KeyValuePair<string, object?>>? tags, IEnumerable<ActivityLink>? links, ActivityIdFormat idFormat)
+        internal ActivityCreationOptions(
+            ActivitySource source,
+            string name,
+            T parent,
+            ActivityKind kind,
+            IEnumerable<KeyValuePair<string, object?>>? tags,
+            IEnumerable<ActivityLink>? links,
+            ActivityIdFormat idFormat
+        )
         {
             Source = source;
             Name = name;
@@ -64,7 +72,7 @@ namespace System.Diagnostics
 
                     if (IdFormat == ActivityIdFormat.Unknown)
                     {
-                        IdFormat =ActivityIdFormat.Hierarchical;
+                        IdFormat = ActivityIdFormat.Hierarchical;
                     }
                 }
                 else
@@ -77,7 +85,10 @@ namespace System.Diagnostics
                 _context = default;
                 if (IdFormat == ActivityIdFormat.Unknown)
                 {
-                    IdFormat = Activity.Current != null ? Activity.Current.IdFormat : Activity.DefaultIdFormat;
+                    IdFormat =
+                        Activity.Current != null
+                            ? Activity.Current.IdFormat
+                            : Activity.DefaultIdFormat;
                 }
             }
         }
@@ -130,13 +141,24 @@ namespace System.Diagnostics
         {
             get
             {
-                if (Parent is ActivityContext && IdFormat == ActivityIdFormat.W3C && _context == default)
+                if (
+                    Parent is ActivityContext
+                    && IdFormat == ActivityIdFormat.W3C
+                    && _context == default
+                )
                 {
                     Func<ActivityTraceId>? traceIdGenerator = Activity.TraceIdGenerator;
-                    ActivityTraceId id = traceIdGenerator == null ? ActivityTraceId.CreateRandom() : traceIdGenerator();
+                    ActivityTraceId id =
+                        traceIdGenerator == null
+                            ? ActivityTraceId.CreateRandom()
+                            : traceIdGenerator();
 
                     // Because the struct is readonly, we cannot directly assign _context. We have to workaround it by calling Unsafe.AsRef
-                    Unsafe.AsRef(in _context) = new ActivityContext(id, default, ActivityTraceFlags.None);
+                    Unsafe.AsRef(in _context) = new ActivityContext(
+                        id,
+                        default,
+                        ActivityTraceFlags.None
+                    );
                 }
 
                 return _context.TraceId;
@@ -149,14 +171,12 @@ namespace System.Diagnostics
         public string? TraceState
         {
             get => _traceState;
-            init
-            {
-                _traceState = value;
-            }
+            init { _traceState = value; }
         }
 
         // SetTraceState is to set the _traceState without the need of copying the whole structure.
-        internal void SetTraceState(string? traceState) => Unsafe.AsRef(in _traceState) = traceState;
+        internal void SetTraceState(string? traceState) =>
+            Unsafe.AsRef(in _traceState) = traceState;
 
         /// <summary>
         /// Retrieve Id format of to use for the Activity we may create.

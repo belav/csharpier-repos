@@ -47,14 +47,26 @@ namespace System.Text.Json.Nodes.Tests
             JsonType_Deserializes_Null<JsonObject>();
         }
 
-        private static void JsonType_Deserializes_Null<TNode>() where TNode : JsonNode
+        private static void JsonType_Deserializes_Null<TNode>()
+            where TNode : JsonNode
         {
             Assert.Null(JsonSerializer.Deserialize<TNode>("null"));
             Assert.Collection(JsonSerializer.Deserialize<TNode[]>("[null]"), Assert.Null);
-            Assert.Collection(JsonSerializer.Deserialize<IReadOnlyDictionary<string, TNode>>("{ \"Value\": null }"), kv => Assert.Null(kv.Value));
-            Assert.Null(JsonSerializer.Deserialize<ObjectWithNodeProperty<TNode>>("{ \"Value\": null }").Value);
+            Assert.Collection(
+                JsonSerializer.Deserialize<IReadOnlyDictionary<string, TNode>>(
+                    "{ \"Value\": null }"
+                ),
+                kv => Assert.Null(kv.Value)
+            );
+            Assert.Null(
+                JsonSerializer
+                    .Deserialize<ObjectWithNodeProperty<TNode>>("{ \"Value\": null }")
+                    .Value
+            );
         }
-        private record ObjectWithNodeProperty<TNode>(TNode Value) where TNode : JsonNode;
+
+        private record ObjectWithNodeProperty<TNode>(TNode Value)
+            where TNode : JsonNode;
 
         [Fact]
         public static void AsMethods_Throws()
@@ -120,7 +132,6 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Throws<InvalidOperationException>(() => JsonNode.Parse("{}").GetElementIndex());
             Assert.Throws<InvalidOperationException>(() => JsonNode.Parse("5").GetElementIndex());
         }
-
 
         [Fact]
         public static void ReplaceWith()

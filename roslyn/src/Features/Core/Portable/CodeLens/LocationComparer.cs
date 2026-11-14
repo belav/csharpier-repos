@@ -18,8 +18,11 @@ namespace Microsoft.CodeAnalysis.CodeLens
         {
             if (x != null && x.IsInSource && y != null && y.IsInSource)
             {
-                return x.SourceSpan.Equals(y.SourceSpan) &&
-                       x.SourceTree.FilePath.Equals(y.SourceTree.FilePath, StringComparison.OrdinalIgnoreCase);
+                return x.SourceSpan.Equals(y.SourceSpan)
+                    && x.SourceTree.FilePath.Equals(
+                        y.SourceTree.FilePath,
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
             return object.Equals(x, y);
@@ -29,8 +32,10 @@ namespace Microsoft.CodeAnalysis.CodeLens
         {
             if (obj != null && obj.IsInSource)
             {
-                return Hash.Combine(obj.SourceSpan.GetHashCode(),
-                   StringComparer.OrdinalIgnoreCase.GetHashCode(obj.SourceTree.FilePath));
+                return Hash.Combine(
+                    obj.SourceSpan.GetHashCode(),
+                    StringComparer.OrdinalIgnoreCase.GetHashCode(obj.SourceTree.FilePath)
+                );
             }
 
             return obj?.GetHashCode() ?? 0;

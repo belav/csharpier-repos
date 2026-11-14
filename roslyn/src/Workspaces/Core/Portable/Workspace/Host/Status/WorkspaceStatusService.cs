@@ -18,9 +18,7 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceStatusService()
-        {
-        }
+        public WorkspaceStatusService() { }
 
         event EventHandler IWorkspaceStatusService.StatusChanged
         {

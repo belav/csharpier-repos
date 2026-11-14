@@ -26,26 +26,23 @@ public class NavigationLockPrerenderingTest
         Navigate("/locked-navigation");
 
         // Assert that the component rendered successfully
-        Browser.Equal(
-            "Prevented navigations: 0",
-            () => Browser.FindElement(By.Id("num-prevented-navigations")).Text
+        Browser.Equal("Prevented navigations: 0", () =>
+            Browser.FindElement(By.Id("num-prevented-navigations")).Text
         );
 
         BeginInteractivity();
 
         // Assert that internal navigations are blocked
         Browser.Click(By.Id("internal-navigation-link"));
-        Browser.Equal(
-            "Prevented navigations: 1",
-            () => Browser.FindElement(By.Id("num-prevented-navigations")).Text
+        Browser.Equal("Prevented navigations: 1", () =>
+            Browser.FindElement(By.Id("num-prevented-navigations")).Text
         );
 
         // Assert that external navigations are blocked
         Browser.Navigate().GoToUrl("about:blank");
         Browser.SwitchTo().Alert().Dismiss();
-        Browser.Equal(
-            "Prevented navigations: 1",
-            () => Browser.FindElement(By.Id("num-prevented-navigations")).Text
+        Browser.Equal("Prevented navigations: 1", () =>
+            Browser.FindElement(By.Id("num-prevented-navigations")).Text
         );
     }
 
@@ -54,12 +51,11 @@ public class NavigationLockPrerenderingTest
         Browser.Exists(By.Id("load-boot-script")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                (bool)
-                    javascript.ExecuteScript(
-                        "return window['__aspnetcore__testing__blazor__started__'] === true;"
-                    )
+        Browser.True(() =>
+            (bool)
+                javascript.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor__started__'] === true;"
+                )
         );
     }
 }

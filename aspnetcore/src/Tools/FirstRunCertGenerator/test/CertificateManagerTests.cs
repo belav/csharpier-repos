@@ -76,9 +76,8 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
                 StoreLocation.CurrentUser,
                 isValid: false
             );
-            var httpsCertificate = Assert.Single(
-                httpsCertificates,
-                c => c.Subject == TestCertificateSubject
+            var httpsCertificate = Assert.Single(httpsCertificates, c =>
+                c.Subject == TestCertificateSubject
             );
             Assert.True(httpsCertificate.HasPrivateKey);
             Assert.Equal(TestCertificateSubject, httpsCertificate.Subject);
@@ -88,47 +87,38 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
 
             Assert.Equal(now.LocalDateTime, httpsCertificate.NotBefore);
             Assert.Equal(now.AddYears(1).LocalDateTime, httpsCertificate.NotAfter);
-            Assert.Contains(
-                httpsCertificate.Extensions.OfType<X509Extension>(),
-                e =>
-                    e is X509BasicConstraintsExtension basicConstraints
-                    && basicConstraints.Critical == true
-                    && basicConstraints.CertificateAuthority == false
-                    && basicConstraints.HasPathLengthConstraint == false
-                    && basicConstraints.PathLengthConstraint == 0
+            Assert.Contains(httpsCertificate.Extensions.OfType<X509Extension>(), e =>
+                e is X509BasicConstraintsExtension basicConstraints
+                && basicConstraints.Critical == true
+                && basicConstraints.CertificateAuthority == false
+                && basicConstraints.HasPathLengthConstraint == false
+                && basicConstraints.PathLengthConstraint == 0
             );
 
-            Assert.Contains(
-                httpsCertificate.Extensions.OfType<X509Extension>(),
-                e =>
-                    e is X509KeyUsageExtension keyUsage
-                    && keyUsage.Critical == true
-                    && keyUsage.KeyUsages
-                        == (X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DigitalSignature)
+            Assert.Contains(httpsCertificate.Extensions.OfType<X509Extension>(), e =>
+                e is X509KeyUsageExtension keyUsage
+                && keyUsage.Critical == true
+                && keyUsage.KeyUsages
+                    == (X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DigitalSignature)
             );
 
-            Assert.Contains(
-                httpsCertificate.Extensions.OfType<X509Extension>(),
-                e =>
-                    e is X509EnhancedKeyUsageExtension enhancedKeyUsage
-                    && enhancedKeyUsage.Critical == true
-                    && enhancedKeyUsage.EnhancedKeyUsages.OfType<Oid>().Single() is Oid keyUsage
-                    && keyUsage.Value == "1.3.6.1.5.5.7.3.1"
+            Assert.Contains(httpsCertificate.Extensions.OfType<X509Extension>(), e =>
+                e is X509EnhancedKeyUsageExtension enhancedKeyUsage
+                && enhancedKeyUsage.Critical == true
+                && enhancedKeyUsage.EnhancedKeyUsages.OfType<Oid>().Single() is Oid keyUsage
+                && keyUsage.Value == "1.3.6.1.5.5.7.3.1"
             );
 
             // Subject alternative name
-            Assert.Contains(
-                httpsCertificate.Extensions.OfType<X509Extension>(),
-                e => e.Critical == true && e.Oid.Value == "2.5.29.17"
+            Assert.Contains(httpsCertificate.Extensions.OfType<X509Extension>(), e =>
+                e.Critical == true && e.Oid.Value == "2.5.29.17"
             );
 
             // ASP.NET HTTPS Development certificate extension
-            Assert.Contains(
-                httpsCertificate.Extensions.OfType<X509Extension>(),
-                e =>
-                    e.Critical == false
-                    && e.Oid.Value == CertificateManager.AspNetHttpsOid
-                    && e.RawData[0] == _manager.AspNetHttpsCertificateVersion
+            Assert.Contains(httpsCertificate.Extensions.OfType<X509Extension>(), e =>
+                e.Critical == false
+                && e.Oid.Value == CertificateManager.AspNetHttpsOid
+                && e.RawData[0] == _manager.AspNetHttpsCertificateVersion
             );
 
             Assert.Equal(
@@ -755,20 +745,16 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
         var firstCertificate = httpsCertificateList[0];
         var secondCertificate = httpsCertificateList[1];
 
-        Assert.Contains(
-            firstCertificate.Extensions.OfType<X509Extension>(),
-            e =>
-                e.Critical == false
-                && e.Oid.Value == CertificateManager.AspNetHttpsOid
-                && e.RawData[0] == 2
+        Assert.Contains(firstCertificate.Extensions.OfType<X509Extension>(), e =>
+            e.Critical == false
+            && e.Oid.Value == CertificateManager.AspNetHttpsOid
+            && e.RawData[0] == 2
         );
 
-        Assert.Contains(
-            secondCertificate.Extensions.OfType<X509Extension>(),
-            e =>
-                e.Critical == false
-                && e.Oid.Value == CertificateManager.AspNetHttpsOid
-                && e.RawData[0] == 1
+        Assert.Contains(secondCertificate.Extensions.OfType<X509Extension>(), e =>
+            e.Critical == false
+            && e.Oid.Value == CertificateManager.AspNetHttpsOid
+            && e.RawData[0] == 1
         );
     }
 

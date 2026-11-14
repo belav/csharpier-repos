@@ -27,7 +27,9 @@ namespace System.Web.Mvc.Test
             // Assert
             Assert.Equal(2, selector.AliasedMethods.Length);
 
-            List<MethodInfo> sortedAliasedMethods = selector.AliasedMethods.OrderBy(methodInfo => methodInfo.Name).ToList();
+            List<MethodInfo> sortedAliasedMethods = selector
+                .AliasedMethods.OrderBy(methodInfo => methodInfo.Name)
+                .ToList();
             Assert.Equal("Bar", sortedAliasedMethods[0].Name);
             Assert.Equal("FooRenamed", sortedAliasedMethods[1].Name);
         }
@@ -51,7 +53,10 @@ namespace System.Web.Mvc.Test
             ActionMethodSelector selector = new ActionMethodSelector(controllerType);
 
             // Act
-            MethodInfo matchedMethod = selector.FindActionMethod(new ControllerContext(), "OneMatch");
+            MethodInfo matchedMethod = selector.FindActionMethod(
+                new ControllerContext(),
+                "OneMatch"
+            );
 
             // Assert
             Assert.Equal("OneMatch", matchedMethod.Name);
@@ -69,7 +74,10 @@ namespace System.Web.Mvc.Test
             ActionMethodSelector selector = new ActionMethodSelector(controllerType);
 
             // Act
-            MethodInfo matchedMethod = selector.FindActionMethod(new ControllerContext(), "ShouldMatchMethodWithSelectionAttribute");
+            MethodInfo matchedMethod = selector.FindActionMethod(
+                new ControllerContext(),
+                "ShouldMatchMethodWithSelectionAttribute"
+            );
 
             // Assert
             Assert.Equal("MethodHasSelectionAttribute1", matchedMethod.Name);
@@ -83,7 +91,10 @@ namespace System.Web.Mvc.Test
             ActionMethodSelector selector = new ActionMethodSelector(controllerType);
 
             // Act
-            MethodInfo matchedMethod = selector.FindActionMethod(new ControllerContext(), "MiddleMatch");
+            MethodInfo matchedMethod = selector.FindActionMethod(
+                new ControllerContext(),
+                "MiddleMatch"
+            );
 
             // Assert
             Assert.Equal("MiddleMatch", matchedMethod.Name);
@@ -97,7 +108,10 @@ namespace System.Web.Mvc.Test
             ActionMethodSelector selector = new ActionMethodSelector(controllerType);
 
             // Act
-            MethodInfo matchedMethod = selector.FindActionMethod(new ControllerContext(), "MiddleMatch");
+            MethodInfo matchedMethod = selector.FindActionMethod(
+                new ControllerContext(),
+                "MiddleMatch"
+            );
 
             // Assert
             Assert.Equal("MiddleMatch", matchedMethod.Name);
@@ -125,7 +139,10 @@ namespace System.Web.Mvc.Test
             ActionMethodSelector selector = new ActionMethodSelector(controllerType);
 
             // Act
-            MethodInfo matchedMethod = selector.FindActionMethod(new ControllerContext(), "ZeroMatch");
+            MethodInfo matchedMethod = selector.FindActionMethod(
+                new ControllerContext(),
+                "ZeroMatch"
+            );
 
             // Assert
             Assert.Null(matchedMethod);
@@ -162,7 +179,10 @@ namespace System.Web.Mvc.Test
             selector.StandardRouteMethods.Remove(controllerType.GetMethod("DirectRouteOnly"));
 
             // Act
-            MethodInfo matchedMethod = selector.FindActionMethod(new ControllerContext(), "DirectRouteOnly");
+            MethodInfo matchedMethod = selector.FindActionMethod(
+                new ControllerContext(),
+                "DirectRouteOnly"
+            );
 
             // Assert
             Assert.Null(matchedMethod);
@@ -177,10 +197,16 @@ namespace System.Web.Mvc.Test
 
             // Act & veriy
             Assert.Throws<AmbiguousMatchException>(
-                delegate { selector.FindActionMethod(new ControllerContext(), "TwoMatch"); },
-                "The current request for action 'TwoMatch' on controller type 'SelectionAttributeController' is ambiguous between the following action methods:" + Environment.NewLine
-              + "Void TwoMatch2() on type System.Web.Mvc.Test.ActionMethodSelectorTest+SelectionAttributeController" + Environment.NewLine
-              + "Void TwoMatch() on type System.Web.Mvc.Test.ActionMethodSelectorTest+SelectionAttributeController");
+                delegate
+                {
+                    selector.FindActionMethod(new ControllerContext(), "TwoMatch");
+                },
+                "The current request for action 'TwoMatch' on controller type 'SelectionAttributeController' is ambiguous between the following action methods:"
+                    + Environment.NewLine
+                    + "Void TwoMatch2() on type System.Web.Mvc.Test.ActionMethodSelectorTest+SelectionAttributeController"
+                    + Environment.NewLine
+                    + "Void TwoMatch() on type System.Web.Mvc.Test.ActionMethodSelectorTest+SelectionAttributeController"
+            );
         }
 
         [Fact]
@@ -195,7 +221,10 @@ namespace System.Web.Mvc.Test
             // Assert
             Assert.Single(selector.NonAliasedMethods);
 
-            List<MethodInfo> sortedMethods = selector.NonAliasedMethods["foo"].OrderBy(methodInfo => methodInfo.GetParameters().Length).ToList();
+            List<MethodInfo> sortedMethods = selector
+                .NonAliasedMethods["foo"]
+                .OrderBy(methodInfo => methodInfo.GetParameters().Length)
+                .ToList();
             Assert.Equal("Foo", sortedMethods[0].Name);
             Assert.Empty(sortedMethods[0].GetParameters());
             Assert.Equal("Foo", sortedMethods[1].Name);
@@ -204,36 +233,22 @@ namespace System.Web.Mvc.Test
 
         private class MethodLocatorController : Controller
         {
-            public void Foo()
-            {
-            }
+            public void Foo() { }
 
-            public void Foo(string s)
-            {
-            }
+            public void Foo(string s) { }
 
             [ActionName("Foo")]
-            public void FooRenamed()
-            {
-            }
+            public void FooRenamed() { }
 
             [ActionName("Bar")]
-            public void Bar()
-            {
-            }
+            public void Bar() { }
 
             [ActionName("PrivateVoid")]
-            private void PrivateVoid()
-            {
-            }
+            private void PrivateVoid() { }
 
-            protected void ProtectedVoidAction()
-            {
-            }
+            protected void ProtectedVoidAction() { }
 
-            public static void StaticMethod()
-            {
-            }
+            public static void StaticMethod() { }
 
             // ensure that methods inheriting from Controller or a base class are not matched
             [ActionName("Blah")]
@@ -253,19 +268,13 @@ namespace System.Web.Mvc.Test
         {
             [Match(false)]
             [ActionName("MiddleMatch")]
-            public void SkipMatchBefore()
-            {
-            }
+            public void SkipMatchBefore() { }
 
-            public void MiddleMatch()
-            {
-            }
+            public void MiddleMatch() { }
 
             [Match(false)]
             [ActionName("MiddleMatch")]
-            public void SkipMatchAfter()
-            {
-            }
+            public void SkipMatchAfter() { }
         }
 
         private class ControllerMatchMultipleAttributes : Controller
@@ -273,99 +282,65 @@ namespace System.Web.Mvc.Test
             [Match(false)]
             [Match(true)]
             [ActionName("Match")]
-            public void SkipMatchBeforeOneOptOut()
-            {
-            }
+            public void SkipMatchBeforeOneOptOut() { }
 
             [Match(true)]
             [Match(true)]
-            public void Match()
-            {
-            }
+            public void Match() { }
 
             [ActionName("Match")]
-            public void SkipMatchAfterNoAttribute()
-            {
-            }
+            public void SkipMatchAfterNoAttribute() { }
         }
 
         private class ControllerMatchMiddleWithAttribute : Controller
         {
             [Match(false)]
             [ActionName("MiddleMatch")]
-            public void SkipMatchBeforeNonMatch()
-            {
-            }
+            public void SkipMatchBeforeNonMatch() { }
 
             [ActionName("MiddleMatch")]
-            public void SkipMatchBeforeNoSelection()
-            {
-            }
+            public void SkipMatchBeforeNoSelection() { }
 
             [Match(true)]
-            public void MiddleMatch()
-            {
-            }
+            public void MiddleMatch() { }
 
             [ActionName("MiddleMatch")]
-            public void SkipMatchAfterNoSelection()
-            {
-            }
+            public void SkipMatchAfterNoSelection() { }
 
             [Match(false)]
             [ActionName("MiddleMatch")]
-            public void SkipMatchAfterNonMatch()
-            {
-            }
+            public void SkipMatchAfterNonMatch() { }
         }
 
         private class SelectionAttributeController : Controller
         {
             [Match(false)]
-            public void OneMatch()
-            {
-            }
+            public void OneMatch() { }
 
-            public void OneMatch(string s)
-            {
-            }
+            public void OneMatch(string s) { }
 
-            public void TwoMatch()
-            {
-            }
+            public void TwoMatch() { }
 
             [ActionName("TwoMatch")]
-            public void TwoMatch2()
-            {
-            }
+            public void TwoMatch2() { }
 
             [Match(true), ActionName("ShouldMatchMethodWithSelectionAttribute")]
-            public void MethodHasSelectionAttribute1()
-            {
-            }
+            public void MethodHasSelectionAttribute1() { }
 
             [ActionName("ShouldMatchMethodWithSelectionAttribute")]
-            public void MethodDoesNotHaveSelectionAttribute1()
-            {
-            }
+            public void MethodDoesNotHaveSelectionAttribute1() { }
         }
 
         private class WithRoutingAttributeController : Controller
         {
             [Route("route")]
             [ActionName("Action")] // to make things confusing
-            public void ActionWithoutRoute()
-            {
-            }
+            public void ActionWithoutRoute() { }
 
-            public void Action()
-            {
-            }
+            public void Action() { }
 
             [Route("routeonly")]
-            public void DirectRouteOnly()
-            {
-            }
+            public void DirectRouteOnly() { }
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
@@ -378,7 +353,10 @@ namespace System.Web.Mvc.Test
                 _match = match;
             }
 
-            public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+            public override bool IsValidForRequest(
+                ControllerContext controllerContext,
+                MethodInfo methodInfo
+            )
             {
                 return _match;
             }

@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// <param name="task">The task whose completion should signal the completion of the returned awaitable.</param>
         /// <param name="captureContext">if set to <c>true</c> the continuation will be scheduled on the caller's context; <c>false</c> to always execute the continuation on the threadpool.</param>
         /// <returns>An awaitable.</returns>
-        public static NoThrowTaskAwaitable NoThrowAwaitableInternal(this Task task, bool captureContext = true)
+        public static NoThrowTaskAwaitable NoThrowAwaitableInternal(
+            this Task task,
+            bool captureContext = true
+        )
         {
             return new NoThrowTaskAwaitable(task, captureContext);
         }

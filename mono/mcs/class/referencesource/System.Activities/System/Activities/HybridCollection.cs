@@ -5,10 +5,10 @@
 namespace System.Activities
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     // used internally for performance in cases where a common usage pattern is a single item
     [DataContract]
@@ -18,13 +18,14 @@ namespace System.Activities
         List<T> multipleItems;
         T singleItem;
 
-        public HybridCollection()
-        {
-        }
+        public HybridCollection() { }
 
         public HybridCollection(T initialItem)
         {
-            Fx.Assert(initialItem != null, "null is used as a sentinal value and is not a valid item value for a hybrid collection");
+            Fx.Assert(
+                initialItem != null,
+                "null is used as a sentinal value and is not a valid item value for a hybrid collection"
+            );
             this.singleItem = initialItem;
         }
 
@@ -39,7 +40,10 @@ namespace System.Activities
                 }
                 else if (this.multipleItems != null)
                 {
-                    Fx.Assert(index >= 0 && index < this.multipleItems.Count, "Out of range with multiple items.");
+                    Fx.Assert(
+                        index >= 0 && index < this.multipleItems.Count,
+                        "Out of range with multiple items."
+                    );
 
                     return this.multipleItems[index];
                 }
@@ -69,18 +73,12 @@ namespace System.Activities
 
         protected T SingleItem
         {
-            get
-            {
-                return this.singleItem;
-            }
+            get { return this.singleItem; }
         }
 
         protected IList<T> MultipleItems
         {
-            get
-            {
-                return this.multipleItems;
-            }
+            get { return this.multipleItems; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "multipleItems")]
@@ -99,7 +97,10 @@ namespace System.Activities
 
         public void Add(T item)
         {
-            Fx.Assert(item != null, "null is used as a sentinal value and is not a valid item value for a hybrid collection");
+            Fx.Assert(
+                item != null,
+                "null is used as a sentinal value and is not a valid item value for a hybrid collection"
+            );
             if (this.multipleItems != null)
             {
                 this.multipleItems.Add(item);
@@ -152,13 +153,22 @@ namespace System.Activities
         {
             if (this.singleItem != null)
             {
-                Fx.Assert(object.Equals(item, this.singleItem), "The given item should be in this list. Something is wrong in our housekeeping.");
+                Fx.Assert(
+                    object.Equals(item, this.singleItem),
+                    "The given item should be in this list. Something is wrong in our housekeeping."
+                );
                 this.singleItem = null;
             }
             else
             {
-                Fx.Assert(this.multipleItems != null && this.multipleItems.Contains(item), "The given item should be in this list. Something is wrong in our housekeeping.");
-                int position = (searchingFromEnd) ? this.multipleItems.LastIndexOf(item) : this.multipleItems.IndexOf(item);
+                Fx.Assert(
+                    this.multipleItems != null && this.multipleItems.Contains(item),
+                    "The given item should be in this list. Something is wrong in our housekeeping."
+                );
+                int position =
+                    (searchingFromEnd)
+                        ? this.multipleItems.LastIndexOf(item)
+                        : this.multipleItems.IndexOf(item);
                 if (position != -1)
                 {
                     this.multipleItems.RemoveAt(position);

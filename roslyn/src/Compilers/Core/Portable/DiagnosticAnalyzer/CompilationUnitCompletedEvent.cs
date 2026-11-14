@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal sealed class CompilationUnitCompletedEvent : CompilationEvent
     {
-        public CompilationUnitCompletedEvent(Compilation compilation, SyntaxTree compilationUnit, TextSpan? filterSpan = null)
+        public CompilationUnitCompletedEvent(
+            Compilation compilation,
+            SyntaxTree compilationUnit,
+            TextSpan? filterSpan = null
+        )
             : base(compilation)
         {
             Debug.Assert(compilation.ContainsSyntaxTree(compilationUnit));
@@ -33,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         public TextSpan? FilterSpan { get; }
 
-        public override string ToString()
-            => $"CompilationUnitCompletedEvent({CompilationUnit.FilePath}){FilterSpan}";
+        public override string ToString() =>
+            $"CompilationUnitCompletedEvent({CompilationUnit.FilePath}){FilterSpan}";
     }
 }

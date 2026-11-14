@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             if (assemblyFilePath != null)
             {
-                CompilerPathUtilities.RequireAbsolutePath(assemblyFilePath, nameof(assemblyFilePath));
+                CompilerPathUtilities.RequireAbsolutePath(
+                    assemblyFilePath,
+                    nameof(assemblyFilePath)
+                );
             }
 
             if (pdbFilePath != null)
@@ -38,8 +41,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <summary>
         /// Opens an assembly file produced by the compiler (corresponds to OutputAssembly build task parameter).
         /// </summary>
-        protected override Stream OpenAssemblyStream()
-            => AssemblyFilePath != null ? FileUtilities.OpenRead(AssemblyFilePath) : null;
+        protected override Stream OpenAssemblyStream() =>
+            AssemblyFilePath != null ? FileUtilities.OpenRead(AssemblyFilePath) : null;
 
         /// <summary>
         /// Opens a PDB file produced by the compiler.
@@ -48,7 +51,7 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <remarks>
         /// The stream must be readable and seekable.
         /// </remarks>
-        protected override Stream OpenPdbStream()
-            => PdbFilePath != null ? FileUtilities.OpenRead(PdbFilePath) : null;
+        protected override Stream OpenPdbStream() =>
+            PdbFilePath != null ? FileUtilities.OpenRead(PdbFilePath) : null;
     }
 }

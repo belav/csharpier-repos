@@ -30,11 +30,11 @@ using System;
 
 namespace Mono.Tools.LocaleBuilder
 {
-	public enum CalendarType
-	{
-		Gregorian = 1,
-		ThaiBuddhist = 2,
-		UmAlQuraCalendar = 3,
-		HijriCalendar = 4
-	}
+    public enum CalendarType
+    {
+        Gregorian = 1,
+        ThaiBuddhist = 2,
+        UmAlQuraCalendar = 3,
+        HijriCalendar = 4,
+    }
 }

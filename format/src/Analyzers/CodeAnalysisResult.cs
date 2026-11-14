@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
         private readonly ImmutableHashSet<string> _diagnostics;
         private readonly ImmutableHashSet<string> _excludeDiagnostics;
 
-        public CodeAnalysisResult(ImmutableHashSet<string> diagnostics, ImmutableHashSet<string> excludeDiagnostics)
+        public CodeAnalysisResult(
+            ImmutableHashSet<string> diagnostics,
+            ImmutableHashSet<string> excludeDiagnostics
+        )
         {
             _diagnostics = diagnostics;
             _excludeDiagnostics = excludeDiagnostics;
@@ -40,7 +43,6 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             }
         }
 
-        public IReadOnlyDictionary<Project, List<Diagnostic>> Diagnostics
-            => _dictionary;
+        public IReadOnlyDictionary<Project, List<Diagnostic>> Diagnostics => _dictionary;
     }
 }

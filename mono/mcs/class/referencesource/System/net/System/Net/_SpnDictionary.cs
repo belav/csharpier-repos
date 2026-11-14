@@ -18,14 +18,15 @@ Revision History:
 
 --*/
 
-namespace System.Net {
+namespace System.Net
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Security.Permissions;
 
-    internal class SpnDictionary : StringDictionary {
-
+    internal class SpnDictionary : StringDictionary
+    {
         //
         //A Hashtable can support one writer and multiple readers concurrently
         //
@@ -36,27 +37,31 @@ namespace System.Net {
 
         //
         //
-        internal SpnDictionary():base() {
-        }
+        internal SpnDictionary()
+            : base() { }
+
         //
         //
         //
-        public override int Count {
-            get {
+        public override int Count
+        {
+            get
+            {
 #if MONO_FEATURE_CAS
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
                 return m_SyncTable.Count;
             }
         }
+
         //
         // We are thread safe
         //
-        public override bool IsSynchronized {
-            get {
-                return true;
-            }
+        public override bool IsSynchronized
+        {
+            get { return true; }
         }
+
         //
         // Internal lookup, bypasses security checks
         //
@@ -66,22 +71,35 @@ namespace System.Net {
             string key = null;
 
             // This lock is required to avoid getting InvalidOperationException
-            // because the collection was modified during enumeration. By design 
-            // a Synchronized Hashtable throws if modifications occur while an 
-            // enumeration is in progress. Manually locking the Hashtable to 
-            // prevent modification during enumeration is the best solution. 
+            // because the collection was modified during enumeration. By design
+            // a Synchronized Hashtable throws if modifications occur while an
+            // enumeration is in progress. Manually locking the Hashtable to
+            // prevent modification during enumeration is the best solution.
             // Catching the exception and retrying could potentially never
             // succeed in the face of significant updates.
-            lock (m_SyncTable.SyncRoot) {
-                foreach (object o in m_SyncTable.Keys){
-                    string s = (string) o;
-                    if(s != null && s.Length > lastLength){
-                        if(String.Compare(s,0,canonicalKey,0,s.Length,StringComparison.OrdinalIgnoreCase) == 0){
-                             lastLength = s.Length;
-                             key = s;
+            lock (m_SyncTable.SyncRoot)
+            {
+                foreach (object o in m_SyncTable.Keys)
+                {
+                    string s = (string)o;
+                    if (s != null && s.Length > lastLength)
+                    {
+                        if (
+                            String.Compare(
+                                s,
+                                0,
+                                canonicalKey,
+                                0,
+                                s.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                        {
+                            lastLength = s.Length;
+                            key = s;
                         }
                     }
-                }  
+                }
             }
             return (key != null) ? (SpnToken)m_SyncTable[key] : null;
         }
@@ -90,43 +108,56 @@ namespace System.Net {
         {
             m_SyncTable[canonicalKey] = spnToken;
         }
+
         //
         // Public lookup method
         //
-        public override string this[string key] {
-            get {
+        public override string this[string key]
+        {
+            get
+            {
                 key = GetCanonicalKey(key);
                 SpnToken token = InternalGet(key);
                 return (token == null ? null : token.Spn);
             }
-            set {
+            set
+            {
                 key = GetCanonicalKey(key);
                 // Value may be null
                 InternalSet(key, new SpnToken(value));
             }
         }
+
         //
-        public override ICollection Keys {
-            get {
+        public override ICollection Keys
+        {
+            get
+            {
 #if MONO_FEATURE_CAS
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
                 return m_SyncTable.Keys;
             }
         }
+
         //
-        public override object SyncRoot {
-            [HostProtection(Synchronization=true)]
-            get {
+        public override object SyncRoot
+        {
+            [HostProtection(Synchronization = true)]
+            get
+            {
 #if MONO_FEATURE_CAS
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
                 return m_SyncTable;
             }
         }
+
         //
-        public override ICollection Values {
-            get {
+        public override ICollection Values
+        {
+            get
+            {
 #if MONO_FEATURE_CAS
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
@@ -137,25 +168,33 @@ namespace System.Net {
                 return m_ValuesWrapper;
             }
         }
+
         //
-        public override void Add(string key, string value) {
+        public override void Add(string key, string value)
+        {
             key = GetCanonicalKey(key);
             m_SyncTable.Add(key, new SpnToken(value));
         }
+
         //
-        public override void Clear() {
+        public override void Clear()
+        {
 #if MONO_FEATURE_CAS
             ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
             m_SyncTable.Clear();
         }
+
         //
-        public override bool ContainsKey(string key) {
+        public override bool ContainsKey(string key)
+        {
             key = GetCanonicalKey(key);
             return m_SyncTable.ContainsKey(key);
         }
+
         //
-        public override bool ContainsValue(string value) {
+        public override bool ContainsValue(string value)
+        {
 #if MONO_FEATURE_CAS
             ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
@@ -168,7 +207,8 @@ namespace System.Net {
         }
 
         // We have to unwrap the SpnKey and just expose the Spn
-        public override void CopyTo(Array array, int index) {
+        public override void CopyTo(Array array, int index)
+        {
 #if MONO_FEATURE_CAS
             ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
@@ -181,8 +221,10 @@ namespace System.Net {
                 offset++;
             }
         }
+
         //
-        public override IEnumerator GetEnumerator() {
+        public override IEnumerator GetEnumerator()
+        {
 #if MONO_FEATURE_CAS
             ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
@@ -194,8 +236,10 @@ namespace System.Net {
                 yield return new DictionaryEntry(key, spnToken.Spn);
             }
         }
+
         //
-        public override void Remove(string key) {
+        public override void Remove(string key)
+        {
             key = GetCanonicalKey(key);
             m_SyncTable.Remove(key);
         }
@@ -205,17 +249,26 @@ namespace System.Net {
         //
         private static string GetCanonicalKey(string key)
         {
-            if( key == null ) {
+            if (key == null)
+            {
                 throw new ArgumentNullException("key");
             }
-            try {
+            try
+            {
                 Uri uri = new Uri(key);
-                key = uri.GetParts(UriComponents.Scheme | UriComponents.Host | UriComponents.Port | UriComponents.Path, UriFormat.SafeUnescaped);
+                key = uri.GetParts(
+                    UriComponents.Scheme
+                        | UriComponents.Host
+                        | UriComponents.Port
+                        | UriComponents.Path,
+                    UriFormat.SafeUnescaped
+                );
 #if MONO_FEATURE_CAS
                 new WebPermission(NetworkAccess.Connect, new Uri(key)).Demand();
 #endif
             }
-            catch(UriFormatException e) {
+            catch (UriFormatException e)
+            {
                 throw new ArgumentException(SR.GetString(SR.net_mustbeuri, "key"), "key", e);
             }
             return key;
@@ -234,7 +287,10 @@ namespace System.Net {
             }
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException("index", SR.GetString(SR.ArgumentOutOfRange_NeedNonNegNum));
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    SR.GetString(SR.ArgumentOutOfRange_NeedNonNegNum)
+                );
             }
             if ((array.Length - index) < count)
             {
@@ -255,7 +311,7 @@ namespace System.Net {
             public void CopyTo(Array array, int index)
             {
                 CheckCopyToArguments(array, index, Count);
-                
+
                 int offset = 0;
                 foreach (object entry in this)
                 {
@@ -307,8 +363,7 @@ namespace System.Net {
         }
 
         internal SpnToken(string spn)
-            : this(spn, true)
-        { }
+            : this(spn, true) { }
 
         internal SpnToken(string spn, bool trusted)
         {

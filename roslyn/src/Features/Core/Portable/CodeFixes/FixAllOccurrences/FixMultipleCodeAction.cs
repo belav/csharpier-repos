@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     internal partial class FixMultipleCodeAction(
         IFixAllState fixAllState,
         string title,
-        string computingFixWaitDialogMessage) : AbstractFixAllCodeFixCodeAction(fixAllState, showPreviewChangesDialog: false)
+        string computingFixWaitDialogMessage
+    ) : AbstractFixAllCodeFixCodeAction(fixAllState, showPreviewChangesDialog: false)
     {
         private readonly string _title = title;
         private readonly string _computingFixWaitDialogMessage = computingFixWaitDialogMessage;

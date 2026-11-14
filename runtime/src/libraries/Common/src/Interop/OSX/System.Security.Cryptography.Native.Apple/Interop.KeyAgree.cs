@@ -17,13 +17,15 @@ internal static partial class Interop
             SafeSecKeyRefHandle privateKey,
             SafeSecKeyRefHandle publicKey,
             out SafeCFDataHandle cfDataOut,
-            out SafeCFErrorHandle cfErrorOut);
+            out SafeCFErrorHandle cfErrorOut
+        );
 
         internal static byte[]? EcdhKeyAgree(
             SafeSecKeyRefHandle privateKey,
             SafeSecKeyRefHandle publicKey,
             Span<byte> opportunisticDestination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             const int Success = 1;
             const int kErrorSeeError = -2;
@@ -43,7 +45,13 @@ internal static partial class Interop
 
                 if (status == Success && !data.IsInvalid)
                 {
-                    if (CoreFoundation.TryCFWriteData(data, opportunisticDestination, out bytesWritten))
+                    if (
+                        CoreFoundation.TryCFWriteData(
+                            data,
+                            opportunisticDestination,
+                            out bytesWritten
+                        )
+                    )
                     {
                         return null;
                     }

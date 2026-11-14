@@ -2,27 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Linq;
 using System.Data.Common;
-using System.Linq.Expressions;
+using System.Data.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Transactions;
-using System.Reflection;
-using System.Diagnostics.CodeAnalysis;
 
-namespace System.Data.Linq.Provider {
-
+namespace System.Data.Linq.Provider
+{
     /// <summary>
     /// A data provider implements this interface to hook into the LINQ to SQL framework.
     /// </summary>
-    internal interface IProvider : IDisposable {
+    internal interface IProvider : IDisposable
+    {
         /// <summary>
         /// Initializes the database provider with the data services object and connection.
         /// </summary>
         /// <param name="dataServices"></param>
-        /// <param name="connection">A connection string, connection object or transaction object 
+        /// <param name="connection">A connection string, connection object or transaction object
         /// used to seed the provider with database connection information.</param>
         void Initialize(IDataServices dataServices, object connection);
 
@@ -119,18 +120,20 @@ namespace System.Data.Linq.Provider {
     /// <summary>
     /// A compiled query.
     /// </summary>
-    internal interface ICompiledQuery {
+    internal interface ICompiledQuery
+    {
         /// <summary>
         /// Executes the compiled query using the specified provider and a set of arguments.
         /// </summary>
         /// <param name="provider">The provider that will execute the compiled query.</param>
-        /// <param name="arguments">Argument values to supply to the parameters of the compiled query, 
+        /// <param name="arguments">Argument values to supply to the parameters of the compiled query,
         /// when the query is specified as a LambdaExpression.</param>
         /// <returns></returns>
         IExecuteResult Execute(IProvider provider, object[] arguments);
     }
 
-    internal static class DataManipulation {
+    internal static class DataManipulation
+    {
         /// <summary>
         /// The method signature used to encode an Insert command.
         /// The method will throw a NotImplementedException if called directly.
@@ -140,11 +143,26 @@ namespace System.Data.Linq.Provider {
         /// <param name="item"></param>
         /// <param name="resultSelector"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Microsoft: The method is being used to represent a method signature")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "resultSelector", Justification = "Microsoft: The method is being used to represent a method signature")]
-        public static TResult Insert<TEntity, TResult>(TEntity item, Func<TEntity, TResult> resultSelector) {
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "item",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "resultSelector",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        public static TResult Insert<TEntity, TResult>(
+            TEntity item,
+            Func<TEntity, TResult> resultSelector
+        )
+        {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// The method signature used to encode an Insert command.
         /// The method will throw a NotImplementedException if called directly.
@@ -152,10 +170,17 @@ namespace System.Data.Linq.Provider {
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="item"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Microsoft: The method is being used to represent a method signature")]
-        public static int Insert<TEntity>(TEntity item) {
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "item",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        public static int Insert<TEntity>(TEntity item)
+        {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// The method signature used to encode an Update command.
         /// The method will throw a NotImplementedException if called directly.
@@ -166,12 +191,33 @@ namespace System.Data.Linq.Provider {
         /// <param name="check"></param>
         /// <param name="resultSelector"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Microsoft: The method is being used to represent a method signature")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "check", Justification = "Microsoft: The method is being used to represent a method signature")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "resultSelector", Justification = "Microsoft: The method is being used to represent a method signature")]
-        public static TResult Update<TEntity, TResult>(TEntity item, Func<TEntity, bool> check, Func<TEntity, TResult> resultSelector) {
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "item",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "check",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "resultSelector",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        public static TResult Update<TEntity, TResult>(
+            TEntity item,
+            Func<TEntity, bool> check,
+            Func<TEntity, TResult> resultSelector
+        )
+        {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// The method signature used to encode an Update command.
         /// The method will throw a NotImplementedException if called directly.
@@ -181,11 +227,26 @@ namespace System.Data.Linq.Provider {
         /// <param name="item"></param>
         /// <param name="resultSelector"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Microsoft: The method is being used to represent a method signature")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "resultSelector", Justification = "Microsoft: The method is being used to represent a method signature")]
-        public static TResult Update<TEntity, TResult>(TEntity item, Func<TEntity, TResult> resultSelector) {
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "item",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "resultSelector",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        public static TResult Update<TEntity, TResult>(
+            TEntity item,
+            Func<TEntity, TResult> resultSelector
+        )
+        {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// The method signature used to encode an Update command.
         /// The method will throw a NotImplementedException if called directly.
@@ -194,11 +255,23 @@ namespace System.Data.Linq.Provider {
         /// <param name="item"></param>
         /// <param name="check"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Microsoft: The method is being used to represent a method signature")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "check", Justification = "Microsoft: The method is being used to represent a method signature")]
-        public static int Update<TEntity>(TEntity item, Func<TEntity, bool> check) {
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "item",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "check",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        public static int Update<TEntity>(TEntity item, Func<TEntity, bool> check)
+        {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// The method signature used to encode an Update command.
         /// The method will throw a NotImplementedException if called directly.
@@ -206,10 +279,17 @@ namespace System.Data.Linq.Provider {
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="item"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Microsoft: The method is being used to represent a method signature")]
-        public static int Update<TEntity>(TEntity item) {
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "item",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        public static int Update<TEntity>(TEntity item)
+        {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// The method signature used to encode a Delete command.
         /// The method will throw a NotImplementedException if called directly.
@@ -218,11 +298,23 @@ namespace System.Data.Linq.Provider {
         /// <param name="item"></param>
         /// <param name="check"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Microsoft: The method is being used to represent a method signature")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "check", Justification = "Microsoft: The method is being used to represent a method signature")]
-        public static int Delete<TEntity>(TEntity item, Func<TEntity, bool> check) {
-            throw new NotImplementedException(); 
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "item",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "check",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        public static int Delete<TEntity>(TEntity item, Func<TEntity, bool> check)
+        {
+            throw new NotImplementedException();
         }
+
         /// <summary>
         /// The method signature used to encode a Delete command.
         /// The method will throw a NotImplementedException if called directly.
@@ -230,8 +322,14 @@ namespace System.Data.Linq.Provider {
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="item"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Microsoft: The method is being used to represent a method signature")]
-        public static int Delete<TEntity>(TEntity item) {
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "item",
+            Justification = "Microsoft: The method is being used to represent a method signature"
+        )]
+        public static int Delete<TEntity>(TEntity item)
+        {
             throw new NotImplementedException();
         }
     }

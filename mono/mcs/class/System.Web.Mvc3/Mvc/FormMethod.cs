@@ -1,6 +1,8 @@
-﻿namespace System.Web.Mvc {
-    public enum FormMethod {
+﻿namespace System.Web.Mvc
+{
+    public enum FormMethod
+    {
         Get,
-        Post
+        Post,
     }
 }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             string? binaryLogPath,
             bool logWorkspaceWarnings,
             ILogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var properties = new Dictionary<string, string>(StringComparer.Ordinal)
             {
@@ -45,17 +46,32 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
 
             if (workspaceType == WorkspaceType.Solution)
             {
-                await workspace.OpenSolutionAsync(solutionOrProjectPath, msbuildLogger: binlog, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await workspace
+                    .OpenSolutionAsync(
+                        solutionOrProjectPath,
+                        msbuildLogger: binlog,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {
                 try
                 {
-                    await workspace.OpenProjectAsync(solutionOrProjectPath, msbuildLogger: binlog, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    await workspace
+                        .OpenProjectAsync(
+                            solutionOrProjectPath,
+                            msbuildLogger: binlog,
+                            cancellationToken: cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 catch (InvalidOperationException)
                 {
-                    logger.LogError(Resources.Could_not_format_0_Format_currently_supports_only_CSharp_and_Visual_Basic_projects, solutionOrProjectPath);
+                    logger.LogError(
+                        Resources.Could_not_format_0_Format_currently_supports_only_CSharp_and_Visual_Basic_projects,
+                        solutionOrProjectPath
+                    );
                     workspace.Dispose();
                     return null;
                 }
@@ -65,13 +81,19 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
 
             return workspace;
 
-            static void LogWorkspaceDiagnostics(ILogger logger, bool logWorkspaceWarnings, ImmutableList<WorkspaceDiagnostic> diagnostics)
+            static void LogWorkspaceDiagnostics(
+                ILogger logger,
+                bool logWorkspaceWarnings,
+                ImmutableList<WorkspaceDiagnostic> diagnostics
+            )
             {
                 if (!logWorkspaceWarnings)
                 {
                     if (!diagnostics.IsEmpty)
                     {
-                        logger.LogWarning(Resources.Warnings_were_encountered_while_loading_the_workspace_Set_the_verbosity_option_to_the_diagnostic_level_to_log_warnings);
+                        logger.LogWarning(
+                            Resources.Warnings_were_encountered_while_loading_the_workspace_Set_the_verbosity_option_to_the_diagnostic_level_to_log_warnings
+                        );
                     }
 
                     return;

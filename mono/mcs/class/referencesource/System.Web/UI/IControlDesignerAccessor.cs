@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System.Collections;
 
     /// <devdoc>
@@ -16,21 +16,16 @@ namespace System.Web.UI {
     /// ****************************************************************************
     ///
     /// </devdoc>
-    public interface IControlDesignerAccessor {
-
-
+    public interface IControlDesignerAccessor
+    {
         /// <devdoc>
         /// </devdoc>
-        IDictionary UserData {
-            get;
-        }
-
+        IDictionary UserData { get; }
 
         /// <devdoc>
         /// Gets design mode state from the control.
         /// </devdoc>
         IDictionary GetDesignModeState();
-
 
         /// <devdoc>
         /// Sets design mode state for the control before rendering at design-time.
@@ -39,5 +34,4 @@ namespace System.Web.UI {
 
         void SetOwnerControl(Control owner);
     }
-
 }

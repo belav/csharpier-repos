@@ -3,20 +3,19 @@
 //
 // CONTENTS
 //     Value-add wrapper on top of standard CLR monitor
-// 
+//
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
-using System.Xml;
 using System.Reflection;
 using System.Threading;
-using System.Diagnostics;
 using System.Transactions;
-
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
 
 namespace System.Workflow.Runtime
 {
@@ -24,17 +23,32 @@ namespace System.Workflow.Runtime
     {
         internal static InstanceLock CreateWorkflowExecutorLock(Guid id)
         {
-            return new InstanceLock(id, "Workflow Executor Lock: " + id.ToString(), 50, LockPriorityOperator.GreaterThanOrReentrant);
+            return new InstanceLock(
+                id,
+                "Workflow Executor Lock: " + id.ToString(),
+                50,
+                LockPriorityOperator.GreaterThanOrReentrant
+            );
         }
 
         internal static InstanceLock CreateWorkflowSchedulerLock(Guid id)
         {
-            return new InstanceLock(id, "Workflow Scheduler Lock: " + id.ToString(), 40, LockPriorityOperator.GreaterThan);
+            return new InstanceLock(
+                id,
+                "Workflow Scheduler Lock: " + id.ToString(),
+                40,
+                LockPriorityOperator.GreaterThan
+            );
         }
 
         internal static InstanceLock CreateWorkflowMessageDeliveryLock(Guid id)
         {
-            return new InstanceLock(id, "Workflow Message Delivery Lock: " + id.ToString(), 35, LockPriorityOperator.GreaterThanOrReentrant);
+            return new InstanceLock(
+                id,
+                "Workflow Message Delivery Lock: " + id.ToString(),
+                35,
+                LockPriorityOperator.GreaterThanOrReentrant
+            );
         }
     }
 
@@ -44,7 +58,7 @@ namespace System.Workflow.Runtime
         GreaterThanOrReentrant,
     }
 
-    internal sealed class InstanceLock 
+    internal sealed class InstanceLock
     {
         #region Static Data/Methods
 
@@ -90,18 +104,12 @@ namespace System.Workflow.Runtime
 
         internal int Priority
         {
-            get
-            {
-                return this.m_priority;
-            }
+            get { return this.m_priority; }
         }
 
         internal LockPriorityOperator Operator
         {
-            get
-            {
-                return this.m_operator;
-            }
+            get { return this.m_operator; }
         }
 
         internal InstanceLock(Guid id, String name, int priority, LockPriorityOperator lockOperator)
@@ -114,10 +122,7 @@ namespace System.Workflow.Runtime
 
         internal Guid InstanceId
         {
-            get
-            {
-                return this.m_instanceId;
-            }
+            get { return this.m_instanceId; }
         }
 
         internal InstanceLockGuard Enter()
@@ -174,14 +179,24 @@ namespace System.Workflow.Runtime
                     switch (theLock.Operator)
                     {
                         case LockPriorityOperator.GreaterThan:
-                            if (heldLock.InstanceId == theLock.InstanceId && heldLock.Priority <= theLock.Priority)
-                                throw new InvalidOperationException(ExecutionStringManager.InstanceOperationNotValidinWorkflowThread);
+                            if (
+                                heldLock.InstanceId == theLock.InstanceId
+                                && heldLock.Priority <= theLock.Priority
+                            )
+                                throw new InvalidOperationException(
+                                    ExecutionStringManager.InstanceOperationNotValidinWorkflowThread
+                                );
                             break;
 
                         case LockPriorityOperator.GreaterThanOrReentrant:
                             // the checks here assume that locks have unique priorities
-                            if (heldLock.InstanceId == theLock.InstanceId && heldLock.Priority < theLock.Priority)
-                                throw new InvalidOperationException(ExecutionStringManager.InstanceOperationNotValidinWorkflowThread);
+                            if (
+                                heldLock.InstanceId == theLock.InstanceId
+                                && heldLock.Priority < theLock.Priority
+                            )
+                                throw new InvalidOperationException(
+                                    ExecutionStringManager.InstanceOperationNotValidinWorkflowThread
+                                );
                             break;
 
                         default:
@@ -200,14 +215,12 @@ namespace System.Workflow.Runtime
 
                 EnforceGuard(theLock);
 
-                try
-                {
-                }
+                try { }
                 finally
                 {
                     bool success = false;
 #pragma warning disable 0618
-//@
+                    //@
                     Monitor.Enter(this.m_lock);
 #pragma warning restore 0618
                     try
@@ -262,9 +275,18 @@ namespace System.Workflow.Runtime
             workflowExec = w;
         }
 
-        private static void FireEvents(List<SchedulerLockGuardInfo> eventList, WorkflowExecutor workflowExec)
+        private static void FireEvents(
+            List<SchedulerLockGuardInfo> eventList,
+            WorkflowExecutor workflowExec
+        )
         {
-            if (!workflowExec.IsInstanceValid && (workflowExec.WorkflowStatus == WorkflowStatus.Completed || workflowExec.WorkflowStatus == WorkflowStatus.Terminated))
+            if (
+                !workflowExec.IsInstanceValid
+                && (
+                    workflowExec.WorkflowStatus == WorkflowStatus.Completed
+                    || workflowExec.WorkflowStatus == WorkflowStatus.Terminated
+                )
+            )
             {
                 // The workflow is dead, let the instance have a hard ref to the corpse for support of the query apis.
                 workflowExec.WorkflowInstance.DeadWorkflow = workflowExec;
@@ -301,7 +323,9 @@ namespace System.Workflow.Runtime
 
         internal static void Exit(InstanceLock il, WorkflowExecutor w)
         {
-            List<SchedulerLockGuardInfo> eventList = new List<SchedulerLockGuardInfo>(w.EventsToFireList);
+            List<SchedulerLockGuardInfo> eventList = new List<SchedulerLockGuardInfo>(
+                w.EventsToFireList
+            );
             w.EventsToFireList.Clear();
             il.Exit();
             FireEvents(eventList, w);
@@ -309,7 +333,9 @@ namespace System.Workflow.Runtime
 
         public void Dispose()
         {
-            List<SchedulerLockGuardInfo> eventList = new List<SchedulerLockGuardInfo>(workflowExec.EventsToFireList);
+            List<SchedulerLockGuardInfo> eventList = new List<SchedulerLockGuardInfo>(
+                workflowExec.EventsToFireList
+            );
             workflowExec.EventsToFireList.Clear();
             lg.Dispose();
             FireEvents(eventList, workflowExec);
@@ -329,7 +355,11 @@ namespace System.Workflow.Runtime
             eventInfo = null;
         }
 
-        internal SchedulerLockGuardInfo(Object _sender, WorkflowEventInternal _eventType, object _eventInfo)
+        internal SchedulerLockGuardInfo(
+            Object _sender,
+            WorkflowEventInternal _eventType,
+            object _eventInfo
+        )
             : this(_sender, _eventType)
         {
             eventInfo = _eventInfo;
@@ -337,26 +367,17 @@ namespace System.Workflow.Runtime
 
         internal Object Sender
         {
-            get
-            {
-                return sender;
-            }
+            get { return sender; }
         }
 
         internal WorkflowEventInternal EventType
         {
-            get
-            {
-                return eventType;
-            }
+            get { return eventType; }
         }
 
         internal Object EventInfo
         {
-            get
-            {
-                return eventInfo;
-            }
+            get { return eventInfo; }
         }
     }
 }

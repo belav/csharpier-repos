@@ -1,9 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
-
 using Internal.Runtime.Augments;
 using Internal.TypeSystem;
 
@@ -49,13 +47,13 @@ namespace Internal.TypeSystem
 
     internal static class RuntimeHandleExtensions
     {
-        public static bool IsNull(this RuntimeTypeHandle rtth)
-            => RuntimeTypeHandle.ToIntPtr(rtth) == 0;
+        public static bool IsNull(this RuntimeTypeHandle rtth) =>
+            RuntimeTypeHandle.ToIntPtr(rtth) == 0;
 
-        public static unsafe bool IsDynamic(this RuntimeFieldHandle rtfh)
-            => (RuntimeFieldHandle.ToIntPtr(rtfh) & 1) != 0;
+        public static unsafe bool IsDynamic(this RuntimeFieldHandle rtfh) =>
+            (RuntimeFieldHandle.ToIntPtr(rtfh) & 1) != 0;
 
-        public static unsafe bool IsDynamic(this RuntimeMethodHandle rtmh)
-            => (RuntimeMethodHandle.ToIntPtr(rtmh) & 1) != 0;
+        public static unsafe bool IsDynamic(this RuntimeMethodHandle rtmh) =>
+            (RuntimeMethodHandle.ToIntPtr(rtmh) & 1) != 0;
     }
 }

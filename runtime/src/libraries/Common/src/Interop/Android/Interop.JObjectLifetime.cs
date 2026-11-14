@@ -10,18 +10,22 @@ internal static partial class Interop
 {
     internal static partial class JObjectLifetime
     {
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_NewGlobalReference")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_NewGlobalReference"
+        )]
         internal static partial IntPtr NewGlobalReference(IntPtr obj);
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_DeleteGlobalReference")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_DeleteGlobalReference"
+        )]
         internal static partial void DeleteGlobalReference(IntPtr obj);
 
         internal class SafeJObjectHandle : SafeHandle
         {
             public SafeJObjectHandle()
-                : base(IntPtr.Zero, ownsHandle: true)
-            {
-            }
+                : base(IntPtr.Zero, ownsHandle: true) { }
 
             internal SafeJObjectHandle(IntPtr ptr)
                 : base(IntPtr.Zero, ownsHandle: true)

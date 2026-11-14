@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,125 +32,136 @@ using System.IO;
 using System.Net.Mime;
 using System.Text;
 
-namespace System.Net.Mail {
-	public class Attachment : AttachmentBase
-	{
-		#region Fields
+namespace System.Net.Mail
+{
+    public class Attachment : AttachmentBase
+    {
+        #region Fields
 
-		ContentDisposition contentDisposition = new ContentDisposition ();
-		Encoding nameEncoding;
+        ContentDisposition contentDisposition = new ContentDisposition();
+        Encoding nameEncoding;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public Attachment (string fileName)
-			: base (fileName) {
-			InitName (fileName);
-		}
+        public Attachment(string fileName)
+            : base(fileName)
+        {
+            InitName(fileName);
+        }
 
-		public Attachment (string fileName, string mediaType)
-			: base (fileName, mediaType) {
-			InitName (fileName);
-		}
+        public Attachment(string fileName, string mediaType)
+            : base(fileName, mediaType)
+        {
+            InitName(fileName);
+        }
 
-		public Attachment (string fileName, ContentType contentType)
-			: base (fileName, contentType) {
-			InitName (fileName);
-		}
+        public Attachment(string fileName, ContentType contentType)
+            : base(fileName, contentType)
+        {
+            InitName(fileName);
+        }
 
-		public Attachment (Stream contentStream, ContentType contentType)
-			: base (contentStream, contentType) {
-		}
+        public Attachment(Stream contentStream, ContentType contentType)
+            : base(contentStream, contentType) { }
 
-		public Attachment (Stream contentStream, string name)
-			: base (contentStream) {
-			Name = name;
-		}
+        public Attachment(Stream contentStream, string name)
+            : base(contentStream)
+        {
+            Name = name;
+        }
 
-		public Attachment (Stream contentStream, string name, string mediaType)
-			: base (contentStream, mediaType) {
-			Name = name;
-		}
+        public Attachment(Stream contentStream, string name, string mediaType)
+            : base(contentStream, mediaType)
+        {
+            Name = name;
+        }
 
+        #endregion // Constructors
 
+        #region Properties
 
-		#endregion // Constructors
+        public ContentDisposition ContentDisposition
+        {
+            get { return contentDisposition; }
+        }
 
-		#region Properties
+        public string Name
+        {
+            get { return ContentType.Name; }
+            set { ContentType.Name = value; }
+        }
 
-		public ContentDisposition ContentDisposition {
-			get { return contentDisposition; }
-		}
+        public Encoding NameEncoding
+        {
+            get { return nameEncoding; }
+            set { nameEncoding = value; }
+        }
 
-		public string Name {
-			get { return ContentType.Name; }
-			set { ContentType.Name = value; }
-		}
+        #endregion // Properties
 
-		public Encoding NameEncoding {
-			get { return nameEncoding; }
-			set { nameEncoding = value; }
-		}
+        #region Methods
 
-		#endregion // Properties
+        public static Attachment CreateAttachmentFromString(string content, ContentType contentType)
+        {
+            if (content == null)
+                throw new ArgumentNullException("content");
+            MemoryStream ms = new MemoryStream();
+            StreamWriter sw = new StreamWriter(ms);
+            sw.Write(content);
+            sw.Flush();
+            ms.Position = 0;
+            Attachment a = new Attachment(ms, contentType);
+            a.TransferEncoding = TransferEncoding.QuotedPrintable;
+            return a;
+        }
 
-		#region Methods
-		
-		public static Attachment CreateAttachmentFromString (string content, ContentType contentType)
-		{
-			if (content == null)
-				throw new ArgumentNullException ("content");
-			MemoryStream ms = new MemoryStream ();
-			StreamWriter sw = new StreamWriter (ms);
-			sw.Write (content);
-			sw.Flush ();
-			ms.Position = 0;
-			Attachment a = new Attachment (ms, contentType);
-			a.TransferEncoding = TransferEncoding.QuotedPrintable;
-			return a;
-		}
-		
-		public static Attachment CreateAttachmentFromString (string content, string name)
-		{
-			if (content == null)
-				throw new ArgumentNullException ("content");
-			MemoryStream ms = new MemoryStream ();
-			StreamWriter sw = new StreamWriter (ms);
-			sw.Write (content);
-			sw.Flush ();
-			ms.Position = 0;
-			Attachment a = new Attachment (ms, new ContentType ("text/plain"));
-			a.TransferEncoding = TransferEncoding.QuotedPrintable;
-			a.Name = name;
-			return a;
-		}
-		
-		public static Attachment CreateAttachmentFromString (string content, string name, Encoding contentEncoding, string mediaType)
-		{
-			if (content == null)
-				throw new ArgumentNullException ("content");
-			MemoryStream ms = new MemoryStream ();
-			StreamWriter sw = new StreamWriter (ms, contentEncoding);
-			sw.Write (content);
-			sw.Flush ();
-			ms.Position = 0;
-			Attachment a = new Attachment (ms, name, mediaType);
-			a.TransferEncoding = MailMessage.GuessTransferEncoding (contentEncoding);
-			a.ContentType.CharSet = sw.Encoding.BodyName;
-			return a;
-		}
+        public static Attachment CreateAttachmentFromString(string content, string name)
+        {
+            if (content == null)
+                throw new ArgumentNullException("content");
+            MemoryStream ms = new MemoryStream();
+            StreamWriter sw = new StreamWriter(ms);
+            sw.Write(content);
+            sw.Flush();
+            ms.Position = 0;
+            Attachment a = new Attachment(ms, new ContentType("text/plain"));
+            a.TransferEncoding = TransferEncoding.QuotedPrintable;
+            a.Name = name;
+            return a;
+        }
 
-		#endregion // Methods
+        public static Attachment CreateAttachmentFromString(
+            string content,
+            string name,
+            Encoding contentEncoding,
+            string mediaType
+        )
+        {
+            if (content == null)
+                throw new ArgumentNullException("content");
+            MemoryStream ms = new MemoryStream();
+            StreamWriter sw = new StreamWriter(ms, contentEncoding);
+            sw.Write(content);
+            sw.Flush();
+            ms.Position = 0;
+            Attachment a = new Attachment(ms, name, mediaType);
+            a.TransferEncoding = MailMessage.GuessTransferEncoding(contentEncoding);
+            a.ContentType.CharSet = sw.Encoding.BodyName;
+            return a;
+        }
 
-		private void InitName (string fileName) {
-			if (fileName == null) {
-				throw new ArgumentNullException ("fileName");
-			}
+        #endregion // Methods
 
-			Name = Path.GetFileName (fileName);
-		}
+        private void InitName(string fileName)
+        {
+            if (fileName == null)
+            {
+                throw new ArgumentNullException("fileName");
+            }
 
-	}
+            Name = Path.GetFileName(fileName);
+        }
+    }
 }
-

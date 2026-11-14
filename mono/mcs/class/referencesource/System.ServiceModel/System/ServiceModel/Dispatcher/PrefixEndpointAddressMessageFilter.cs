@@ -4,14 +4,13 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Text;
     using System.Xml;
-
     using HeaderBit = System.ServiceModel.Dispatcher.EndpointAddressProcessor.HeaderBit;
 
     public class PrefixEndpointAddressMessageFilter : MessageFilter
@@ -22,11 +21,12 @@ namespace System.ServiceModel.Dispatcher
         HostNameComparisonMode hostNameComparisonMode;
 
         public PrefixEndpointAddressMessageFilter(EndpointAddress address)
-            : this(address, false)
-        {
-        }
+            : this(address, false) { }
 
-        public PrefixEndpointAddressMessageFilter(EndpointAddress address, bool includeHostNameInComparison)
+        public PrefixEndpointAddressMessageFilter(
+            EndpointAddress address,
+            bool includeHostNameInComparison
+        )
         {
             if (address == null)
             {
@@ -36,7 +36,7 @@ namespace System.ServiceModel.Dispatcher
             this.address = address;
             this.helper = new EndpointAddressMessageFilterHelper(this.address);
 
-            this.hostNameComparisonMode = includeHostNameInComparison 
+            this.hostNameComparisonMode = includeHostNameInComparison
                 ? HostNameComparisonMode.Exact
                 : HostNameComparisonMode.StrongWildcard;
 
@@ -101,6 +101,5 @@ namespace System.ServiceModel.Dispatcher
         {
             get { return this.helper.HeaderLookup; }
         }
-
     }
 }

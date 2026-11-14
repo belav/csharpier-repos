@@ -20,9 +20,28 @@ namespace Microsoft.CodeAnalysis.CSharp
             return RewriteAwaitExpression((BoundExpression)base.VisitAwaitExpression(node)!, used);
         }
 
-        private BoundExpression RewriteAwaitExpression(SyntaxNode syntax, BoundExpression rewrittenExpression, BoundAwaitableInfo awaitableInfo, TypeSymbol type, BoundAwaitExpressionDebugInfo debugInfo, bool used)
+        private BoundExpression RewriteAwaitExpression(
+            SyntaxNode syntax,
+            BoundExpression rewrittenExpression,
+            BoundAwaitableInfo awaitableInfo,
+            TypeSymbol type,
+            BoundAwaitExpressionDebugInfo debugInfo,
+            bool used
+        )
         {
-            return RewriteAwaitExpression(new BoundAwaitExpression(syntax, rewrittenExpression, awaitableInfo, debugInfo, type) { WasCompilerGenerated = true }, used);
+            return RewriteAwaitExpression(
+                new BoundAwaitExpression(
+                    syntax,
+                    rewrittenExpression,
+                    awaitableInfo,
+                    debugInfo,
+                    type
+                )
+                {
+                    WasCompilerGenerated = true,
+                },
+                used
+            );
         }
 
         /// <summary>
@@ -45,14 +64,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             // that the await result itself is stored into a temp at the statement level, as that is
             // the form handled by async lowering.
             _needsSpilling = true;
-            var tempAccess = _factory.StoreToTemp(rewrittenAwait, out BoundAssignmentOperator tempAssignment, syntaxOpt: rewrittenAwait.Syntax,
-                kind: SynthesizedLocalKind.Spill);
+            var tempAccess = _factory.StoreToTemp(
+                rewrittenAwait,
+                out BoundAssignmentOperator tempAssignment,
+                syntaxOpt: rewrittenAwait.Syntax,
+                kind: SynthesizedLocalKind.Spill
+            );
             return new BoundSpillSequence(
                 syntax: rewrittenAwait.Syntax,
                 locals: ImmutableArray.Create<LocalSymbol>(tempAccess.LocalSymbol),
                 sideEffects: ImmutableArray.Create<BoundExpression>(tempAssignment),
                 value: tempAccess,
-                type: tempAccess.Type);
+                type: tempAccess.Type
+            );
         }
     }
 }

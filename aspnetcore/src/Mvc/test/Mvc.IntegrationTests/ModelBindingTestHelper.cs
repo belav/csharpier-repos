@@ -33,8 +33,8 @@ public static class ModelBindingTestHelper
             mvcOptions
         );
         var services = httpContext.RequestServices;
-        metadataProvider =
-            metadataProvider ?? services.GetRequiredService<IModelMetadataProvider>();
+        metadataProvider = metadataProvider
+            ?? services.GetRequiredService<IModelMetadataProvider>();
         var options = services.GetRequiredService<IOptions<MvcOptions>>();
 
         var context = new ModelBindingTestContext

@@ -16,12 +16,21 @@ namespace System.IO.Tests
             Directory.CreateDirectory(path);
 
             Assert.True(Exists(IOServices.RemoveTrailingSlash(path)));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path))));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path))));
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path)))
+            );
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path)))
+            );
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser & ~TestPlatforms.iOS & ~TestPlatforms.tvOS)]  // Uses P/Invokes
+        [PlatformSpecific(
+            TestPlatforms.AnyUnix
+                & ~TestPlatforms.Browser
+                & ~TestPlatforms.iOS
+                & ~TestPlatforms.tvOS
+        )] // Uses P/Invokes
         public void TrueForNonRegularFile()
         {
             string fileName = GetTestFilePath();

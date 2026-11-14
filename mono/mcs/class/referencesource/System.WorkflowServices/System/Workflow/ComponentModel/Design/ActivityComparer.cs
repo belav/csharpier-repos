@@ -5,6 +5,6 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System.Workflow.ComponentModel;
 
-    internal delegate bool ActivityComparer<TActivity>(TActivity source, TActivity target) where TActivity : Activity;
-
+    internal delegate bool ActivityComparer<TActivity>(TActivity source, TActivity target)
+        where TActivity : Activity;
 }

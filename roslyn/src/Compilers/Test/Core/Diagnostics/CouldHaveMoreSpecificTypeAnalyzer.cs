@@ -17,26 +17,36 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         private const string SystemCategory = "System";
 
-        public static readonly DiagnosticDescriptor LocalCouldHaveMoreSpecificTypeDescriptor = new DiagnosticDescriptor(
-            "LocalCouldHaveMoreSpecificType",
-            "Local Could Have More Specific Type",
-            "Local variable {0} could be declared with more specific type {1}.",
-            SystemCategory,
-            DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+        public static readonly DiagnosticDescriptor LocalCouldHaveMoreSpecificTypeDescriptor =
+            new DiagnosticDescriptor(
+                "LocalCouldHaveMoreSpecificType",
+                "Local Could Have More Specific Type",
+                "Local variable {0} could be declared with more specific type {1}.",
+                SystemCategory,
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
-        public static readonly DiagnosticDescriptor FieldCouldHaveMoreSpecificTypeDescriptor = new DiagnosticDescriptor(
-           "FieldCouldHaveMoreSpecificType",
-           "Field Could Have More Specific Type",
-           "Field {0} could be declared with more specific type {1}.",
-           SystemCategory,
-           DiagnosticSeverity.Warning,
-           isEnabledByDefault: true);
+        public static readonly DiagnosticDescriptor FieldCouldHaveMoreSpecificTypeDescriptor =
+            new DiagnosticDescriptor(
+                "FieldCouldHaveMoreSpecificType",
+                "Field Could Have More Specific Type",
+                "Field {0} could be declared with more specific type {1}.",
+                SystemCategory,
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
         /// <summary>Gets the set of supported diagnostic descriptors from this analyzer.</summary>
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
         {
-            get { return ImmutableArray.Create(LocalCouldHaveMoreSpecificTypeDescriptor, FieldCouldHaveMoreSpecificTypeDescriptor); }
+            get
+            {
+                return ImmutableArray.Create(
+                    LocalCouldHaveMoreSpecificTypeDescriptor,
+                    FieldCouldHaveMoreSpecificTypeDescriptor
+                );
+            }
         }
 
         public sealed override void Initialize(AnalysisContext context)
@@ -44,78 +54,143 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             context.RegisterCompilationStartAction(
                 (compilationContext) =>
                 {
-                    Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>> fieldsSourceTypes = new Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>>();
+                    Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>> fieldsSourceTypes =
+                        new Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>>();
 
                     compilationContext.RegisterOperationBlockStartAction(
                         (operationBlockContext) =>
                         {
-                            if (operationBlockContext.OwningSymbol is IMethodSymbol containingMethod)
+                            if (
+                                operationBlockContext.OwningSymbol is IMethodSymbol containingMethod
+                            )
                             {
-                                Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>> localsSourceTypes = new Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>>();
+                                Dictionary<
+                                    ILocalSymbol,
+                                    HashSet<INamedTypeSymbol>
+                                > localsSourceTypes =
+                                    new Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>>();
 
                                 // Track explicit assignments.
                                 operationBlockContext.RegisterOperationAction(
-                                   (operationContext) =>
-                                   {
-                                       if (operationContext.Operation is IAssignmentOperation assignment)
-                                       {
-                                           AssignTo(assignment.Target, localsSourceTypes, fieldsSourceTypes, assignment.Value);
-                                       }
-                                       else if (operationContext.Operation is IIncrementOrDecrementOperation increment)
-                                       {
-                                           SyntaxNode syntax = increment.Syntax;
-                                           ITypeSymbol type = increment.Type;
-                                           var constantValue = ConstantValue.Create(1);
-                                           bool isImplicit = increment.IsImplicit;
-                                           var value = new LiteralOperation(increment.SemanticModel, syntax, type, constantValue, isImplicit);
+                                    (operationContext) =>
+                                    {
+                                        if (
+                                            operationContext.Operation
+                                            is IAssignmentOperation assignment
+                                        )
+                                        {
+                                            AssignTo(
+                                                assignment.Target,
+                                                localsSourceTypes,
+                                                fieldsSourceTypes,
+                                                assignment.Value
+                                            );
+                                        }
+                                        else if (
+                                            operationContext.Operation
+                                            is IIncrementOrDecrementOperation increment
+                                        )
+                                        {
+                                            SyntaxNode syntax = increment.Syntax;
+                                            ITypeSymbol type = increment.Type;
+                                            var constantValue = ConstantValue.Create(1);
+                                            bool isImplicit = increment.IsImplicit;
+                                            var value = new LiteralOperation(
+                                                increment.SemanticModel,
+                                                syntax,
+                                                type,
+                                                constantValue,
+                                                isImplicit
+                                            );
 
-                                           AssignTo(increment.Target, localsSourceTypes, fieldsSourceTypes, value);
-                                       }
-                                       else
-                                       {
-                                           throw TestExceptionUtilities.UnexpectedValue(operationContext.Operation);
-                                       }
-                                   },
-                                   OperationKind.SimpleAssignment,
-                                   OperationKind.CompoundAssignment,
-                                   OperationKind.Increment);
+                                            AssignTo(
+                                                increment.Target,
+                                                localsSourceTypes,
+                                                fieldsSourceTypes,
+                                                value
+                                            );
+                                        }
+                                        else
+                                        {
+                                            throw TestExceptionUtilities.UnexpectedValue(
+                                                operationContext.Operation
+                                            );
+                                        }
+                                    },
+                                    OperationKind.SimpleAssignment,
+                                    OperationKind.CompoundAssignment,
+                                    OperationKind.Increment
+                                );
 
                                 // Track arguments that match out or ref parameters.
                                 operationBlockContext.RegisterOperationAction(
                                     (operationContext) =>
                                     {
-                                        IInvocationOperation invocation = (IInvocationOperation)operationContext.Operation;
-                                        foreach (IArgumentOperation argument in invocation.Arguments)
+                                        IInvocationOperation invocation = (IInvocationOperation)
+                                            operationContext.Operation;
+                                        foreach (
+                                            IArgumentOperation argument in invocation.Arguments
+                                        )
                                         {
-                                            if (argument.Parameter.RefKind == RefKind.Out || argument.Parameter.RefKind == RefKind.Ref)
+                                            if (
+                                                argument.Parameter.RefKind == RefKind.Out
+                                                || argument.Parameter.RefKind == RefKind.Ref
+                                            )
                                             {
-                                                AssignTo(argument.Value, localsSourceTypes, fieldsSourceTypes, argument.Parameter.Type);
+                                                AssignTo(
+                                                    argument.Value,
+                                                    localsSourceTypes,
+                                                    fieldsSourceTypes,
+                                                    argument.Parameter.Type
+                                                );
                                             }
                                         }
                                     },
-                                    OperationKind.Invocation);
+                                    OperationKind.Invocation
+                                );
 
                                 // Track local variable initializations.
                                 operationBlockContext.RegisterOperationAction(
                                     (operationContext) =>
                                     {
-                                        IVariableInitializerOperation initializer = (IVariableInitializerOperation)operationContext.Operation;
+                                        IVariableInitializerOperation initializer =
+                                            (IVariableInitializerOperation)
+                                                operationContext.Operation;
                                         // If the parent is a single variable declaration, just process that one variable. If it's a multi variable
                                         // declaration, process all variables being assigned
-                                        if (initializer.Parent is IVariableDeclaratorOperation singleVariableDeclaration)
+                                        if (
+                                            initializer.Parent
+                                            is IVariableDeclaratorOperation singleVariableDeclaration
+                                        )
                                         {
                                             ILocalSymbol local = singleVariableDeclaration.Symbol;
-                                            AssignTo(local, local.Type, localsSourceTypes, initializer.Value);
+                                            AssignTo(
+                                                local,
+                                                local.Type,
+                                                localsSourceTypes,
+                                                initializer.Value
+                                            );
                                         }
-                                        else if (initializer.Parent is IVariableDeclarationOperation multiVariableDeclaration)
+                                        else if (
+                                            initializer.Parent
+                                            is IVariableDeclarationOperation multiVariableDeclaration
+                                        )
                                         {
-                                            foreach (ILocalSymbol local in multiVariableDeclaration.GetDeclaredVariables())
+                                            foreach (
+                                                ILocalSymbol local in multiVariableDeclaration.GetDeclaredVariables()
+                                            )
                                             {
-                                                AssignTo(local, local.Type, localsSourceTypes, initializer.Value);
+                                                AssignTo(
+                                                    local,
+                                                    local.Type,
+                                                    localsSourceTypes,
+                                                    initializer.Value
+                                                );
                                             }
                                         }
                                     },
-                                    OperationKind.VariableInitializer);
+                                    OperationKind.VariableInitializer
+                                );
 
                                 // Report locals that could have more specific types.
                                 operationBlockContext.RegisterOperationBlockEndAction(
@@ -123,26 +198,47 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     {
                                         foreach (ILocalSymbol local in localsSourceTypes.Keys)
                                         {
-                                            if (HasMoreSpecificSourceType(local, local.Type, localsSourceTypes, out var mostSpecificSourceType))
+                                            if (
+                                                HasMoreSpecificSourceType(
+                                                    local,
+                                                    local.Type,
+                                                    localsSourceTypes,
+                                                    out var mostSpecificSourceType
+                                                )
+                                            )
                                             {
-                                                Report(operationBlockEndContext, local, mostSpecificSourceType, LocalCouldHaveMoreSpecificTypeDescriptor);
+                                                Report(
+                                                    operationBlockEndContext,
+                                                    local,
+                                                    mostSpecificSourceType,
+                                                    LocalCouldHaveMoreSpecificTypeDescriptor
+                                                );
                                             }
                                         }
-                                    });
+                                    }
+                                );
                             }
-                        });
+                        }
+                    );
 
                     // Track field initializations.
                     compilationContext.RegisterOperationAction(
                         (operationContext) =>
                         {
-                            IFieldInitializerOperation initializer = (IFieldInitializerOperation)operationContext.Operation;
+                            IFieldInitializerOperation initializer = (IFieldInitializerOperation)
+                                operationContext.Operation;
                             foreach (IFieldSymbol initializedField in initializer.InitializedFields)
                             {
-                                AssignTo(initializedField, initializedField.Type, fieldsSourceTypes, initializer.Value);
+                                AssignTo(
+                                    initializedField,
+                                    initializedField.Type,
+                                    fieldsSourceTypes,
+                                    initializer.Value
+                                );
                             }
                         },
-                        OperationKind.FieldInitializer);
+                        OperationKind.FieldInitializer
+                    );
 
                     // Report fields that could have more specific types.
                     compilationContext.RegisterCompilationEndAction(
@@ -150,21 +246,43 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         {
                             foreach (IFieldSymbol field in fieldsSourceTypes.Keys)
                             {
-                                if (HasMoreSpecificSourceType(field, field.Type, fieldsSourceTypes, out var mostSpecificSourceType))
+                                if (
+                                    HasMoreSpecificSourceType(
+                                        field,
+                                        field.Type,
+                                        fieldsSourceTypes,
+                                        out var mostSpecificSourceType
+                                    )
+                                )
                                 {
-                                    Report(compilationEndContext, field, mostSpecificSourceType, FieldCouldHaveMoreSpecificTypeDescriptor);
+                                    Report(
+                                        compilationEndContext,
+                                        field,
+                                        mostSpecificSourceType,
+                                        FieldCouldHaveMoreSpecificTypeDescriptor
+                                    );
                                 }
                             }
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
-        private static bool HasMoreSpecificSourceType<SymbolType>(SymbolType symbol, ITypeSymbol symbolType, Dictionary<SymbolType, HashSet<INamedTypeSymbol>> symbolsSourceTypes, out INamedTypeSymbol commonSourceType)
+        private static bool HasMoreSpecificSourceType<SymbolType>(
+            SymbolType symbol,
+            ITypeSymbol symbolType,
+            Dictionary<SymbolType, HashSet<INamedTypeSymbol>> symbolsSourceTypes,
+            out INamedTypeSymbol commonSourceType
+        )
         {
             if (symbolsSourceTypes.TryGetValue(symbol, out var sourceTypes))
             {
                 commonSourceType = CommonType(sourceTypes);
-                if (commonSourceType != null && DerivesFrom(commonSourceType, (INamedTypeSymbol)symbolType))
+                if (
+                    commonSourceType != null
+                    && DerivesFrom(commonSourceType, (INamedTypeSymbol)symbolType)
+                )
                 {
                     return true;
                 }
@@ -202,12 +320,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private static bool DerivesFrom(INamedTypeSymbol derivedType, INamedTypeSymbol baseType)
         {
-            if (derivedType.TypeKind == TypeKind.Class || derivedType.TypeKind == TypeKind.Structure)
+            if (
+                derivedType.TypeKind == TypeKind.Class
+                || derivedType.TypeKind == TypeKind.Structure
+            )
             {
                 INamedTypeSymbol derivedBaseType = derivedType.BaseType;
-                return derivedBaseType != null && (derivedBaseType.Equals(baseType) || DerivesFrom(derivedBaseType, baseType));
+                return derivedBaseType != null
+                    && (derivedBaseType.Equals(baseType) || DerivesFrom(derivedBaseType, baseType));
             }
-
             else if (derivedType.TypeKind == TypeKind.Interface)
             {
                 if (derivedType.Interfaces.Contains(baseType))
@@ -223,18 +344,29 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     }
                 }
 
-                return baseType.TypeKind == TypeKind.Class && baseType.SpecialType == SpecialType.System_Object;
+                return baseType.TypeKind == TypeKind.Class
+                    && baseType.SpecialType == SpecialType.System_Object;
             }
 
             return false;
         }
 
-        private static void AssignTo(IOperation target, Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>> localsSourceTypes, Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>> fieldsSourceTypes, IOperation sourceValue)
+        private static void AssignTo(
+            IOperation target,
+            Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>> localsSourceTypes,
+            Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>> fieldsSourceTypes,
+            IOperation sourceValue
+        )
         {
             AssignTo(target, localsSourceTypes, fieldsSourceTypes, OriginalType(sourceValue));
         }
 
-        private static void AssignTo(IOperation target, Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>> localsSourceTypes, Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>> fieldsSourceTypes, ITypeSymbol sourceType)
+        private static void AssignTo(
+            IOperation target,
+            Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>> localsSourceTypes,
+            Dictionary<IFieldSymbol, HashSet<INamedTypeSymbol>> fieldsSourceTypes,
+            ITypeSymbol sourceType
+        )
         {
             OperationKind targetKind = target.Kind;
             if (targetKind == OperationKind.LocalReference)
@@ -249,12 +381,22 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
         }
 
-        private static void AssignTo<SymbolType>(SymbolType target, ITypeSymbol targetType, Dictionary<SymbolType, HashSet<INamedTypeSymbol>> sourceTypes, IOperation sourceValue)
+        private static void AssignTo<SymbolType>(
+            SymbolType target,
+            ITypeSymbol targetType,
+            Dictionary<SymbolType, HashSet<INamedTypeSymbol>> sourceTypes,
+            IOperation sourceValue
+        )
         {
             AssignTo(target, targetType, sourceTypes, OriginalType(sourceValue));
         }
 
-        private static void AssignTo<SymbolType>(SymbolType target, ITypeSymbol targetType, Dictionary<SymbolType, HashSet<INamedTypeSymbol>> sourceTypes, ITypeSymbol sourceType)
+        private static void AssignTo<SymbolType>(
+            SymbolType target,
+            ITypeSymbol targetType,
+            Dictionary<SymbolType, HashSet<INamedTypeSymbol>> sourceTypes,
+            ITypeSymbol sourceType
+        )
         {
             if (sourceType != null && targetType != null)
             {
@@ -262,8 +404,22 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 TypeKind sourceTypeKind = sourceType.TypeKind;
 
                 // Don't suggest using an interface type instead of a class type, or vice versa.
-                if ((targetTypeKind == sourceTypeKind && (targetTypeKind == TypeKind.Class || targetTypeKind == TypeKind.Interface)) ||
-                    (targetTypeKind == TypeKind.Class && (sourceTypeKind == TypeKind.Structure || sourceTypeKind == TypeKind.Interface) && targetType.SpecialType == SpecialType.System_Object))
+                if (
+                    (
+                        targetTypeKind == sourceTypeKind
+                        && (
+                            targetTypeKind == TypeKind.Class || targetTypeKind == TypeKind.Interface
+                        )
+                    )
+                    || (
+                        targetTypeKind == TypeKind.Class
+                        && (
+                            sourceTypeKind == TypeKind.Structure
+                            || sourceTypeKind == TypeKind.Interface
+                        )
+                        && targetType.SpecialType == SpecialType.System_Object
+                    )
+                )
                 {
                     if (!sourceTypes.TryGetValue(target, out var symbolSourceTypes))
                     {
@@ -290,14 +446,38 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             return value.Type;
         }
 
-        private void Report(OperationBlockAnalysisContext context, ILocalSymbol local, ITypeSymbol moreSpecificType, DiagnosticDescriptor descriptor)
+        private void Report(
+            OperationBlockAnalysisContext context,
+            ILocalSymbol local,
+            ITypeSymbol moreSpecificType,
+            DiagnosticDescriptor descriptor
+        )
         {
-            context.ReportDiagnostic(Diagnostic.Create(descriptor, local.Locations.FirstOrDefault(), local, moreSpecificType));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    descriptor,
+                    local.Locations.FirstOrDefault(),
+                    local,
+                    moreSpecificType
+                )
+            );
         }
 
-        private void Report(CompilationAnalysisContext context, IFieldSymbol field, ITypeSymbol moreSpecificType, DiagnosticDescriptor descriptor)
+        private void Report(
+            CompilationAnalysisContext context,
+            IFieldSymbol field,
+            ITypeSymbol moreSpecificType,
+            DiagnosticDescriptor descriptor
+        )
         {
-            context.ReportDiagnostic(Diagnostic.Create(descriptor, field.Locations.FirstOrDefault(), field, moreSpecificType));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    descriptor,
+                    field.Locations.FirstOrDefault(),
+                    field,
+                    moreSpecificType
+                )
+            );
         }
     }
 }

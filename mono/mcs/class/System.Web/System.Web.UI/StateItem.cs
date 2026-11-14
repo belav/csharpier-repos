@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,40 +29,33 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
-
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-        public sealed class StateItem
+namespace System.Web.UI
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class StateItem
+    {
+        bool _isDirty = false;
+        object _value = null;
+        public bool IsDirty
         {
-                bool _isDirty = false;
-                object _value = null;
-                public bool IsDirty
-                {
-                        get
-                        {
-                                return _isDirty;
-                        }
-                        set
-                        {
-                                _isDirty = value;
-                        }
-                }
-                public object Value
-                {
-                        get
-                        {
-                                return _value;
-                        }
-                        set
-                        {
-                                _value = value;
-                        }
-                }
-                StateItem() {}
-                internal StateItem(Object value)
-                {
-                        _value = value;
-                }
+            get { return _isDirty; }
+            set { _isDirty = value; }
         }
+        public object Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        }
+
+        StateItem() { }
+
+        internal StateItem(Object value)
+        {
+            _value = value;
+        }
+    }
 }

@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Dispatcher;
     using System.Collections;
+    using System.ServiceModel.Dispatcher;
     using System.Text;
     using System.Xml;
 
@@ -28,13 +28,22 @@ namespace System.ServiceModel.Configuration
         {
             return XPathMessageFilterElementComparer.ParseXPathString(filter, false);
         }
+
         internal static string ParseXPathString(XPathMessageFilter filter, bool throwOnFailure)
         {
             XPathLexer lexer = new XPathLexer(filter.XPath);
-            return XPathMessageFilterElementComparer.ParseXPathString(lexer, filter.Namespaces, throwOnFailure);
+            return XPathMessageFilterElementComparer.ParseXPathString(
+                lexer,
+                filter.Namespaces,
+                throwOnFailure
+            );
         }
 
-        static string ParseXPathString(XPathLexer lexer, XmlNamespaceManager namespaceManager, bool throwOnFailure)
+        static string ParseXPathString(
+            XPathLexer lexer,
+            XmlNamespaceManager namespaceManager,
+            bool throwOnFailure
+        )
         {
             string retVal = String.Empty;
 
@@ -42,7 +51,13 @@ namespace System.ServiceModel.Configuration
             if (lexer.MoveNext())
             {
                 XPathToken token = lexer.Token;
-                StringBuilder xPathString = new StringBuilder(XPathMessageFilterElementComparer.ParseXPathString(lexer, namespaceManager, throwOnFailure));
+                StringBuilder xPathString = new StringBuilder(
+                    XPathMessageFilterElementComparer.ParseXPathString(
+                        lexer,
+                        namespaceManager,
+                        throwOnFailure
+                    )
+                );
 
                 if (XPathTokenID.NameTest == token.TokenID)
                 {
@@ -52,13 +67,25 @@ namespace System.ServiceModel.Configuration
                         string ns = namespaceManager.LookupNamespace(nsPrefix);
                         if (!String.IsNullOrEmpty(ns))
                         {
-                            xPathString = xPathString.Replace(nsPrefix, ns, currentTokenStart, nsPrefix.Length);
+                            xPathString = xPathString.Replace(
+                                nsPrefix,
+                                ns,
+                                currentTokenStart,
+                                nsPrefix.Length
+                            );
                         }
                         else
                         {
                             if (throwOnFailure)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new IndexOutOfRangeException(SR.GetString(SR.ConfigXPathNamespacePrefixNotFound, nsPrefix)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new IndexOutOfRangeException(
+                                        SR.GetString(
+                                            SR.ConfigXPathNamespacePrefixNotFound,
+                                            nsPrefix
+                                        )
+                                    )
+                                );
                             }
                         }
                     }
@@ -80,11 +107,15 @@ namespace System.ServiceModel.Configuration
 
             if (obj.GetType().IsAssignableFrom(typeof(XPathMessageFilter)))
             {
-                elementKey = XPathMessageFilterElementComparer.ParseXPathString((XPathMessageFilter)obj);
+                elementKey = XPathMessageFilterElementComparer.ParseXPathString(
+                    (XPathMessageFilter)obj
+                );
             }
             else if (obj.GetType().IsAssignableFrom(typeof(XPathMessageFilterElement)))
             {
-                elementKey = XPathMessageFilterElementComparer.ParseXPathString(((XPathMessageFilterElement)obj).Filter);
+                elementKey = XPathMessageFilterElementComparer.ParseXPathString(
+                    ((XPathMessageFilterElement)obj).Filter
+                );
             }
             else if (obj.GetType().IsAssignableFrom(typeof(string)))
             {
@@ -93,8 +124,14 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(elementKey))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.ConfigCannotParseXPathFilter, obj.GetType().AssemblyQualifiedName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ConfigCannotParseXPathFilter,
+                            obj.GetType().AssemblyQualifiedName
+                        )
+                    )
+                );
             }
 
             return elementKey;

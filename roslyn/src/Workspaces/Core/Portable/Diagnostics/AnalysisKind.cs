@@ -13,6 +13,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         Syntax,
         Semantic,
-        NonLocal
+        NonLocal,
     }
 }

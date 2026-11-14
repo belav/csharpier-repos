@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 /**
  * A simple Com+ application.
  */
@@ -24,16 +25,16 @@ namespace DefaultNamespace
         public static void TestEntryPoint()
         {
             int i = 10;
-            int j = i - 5;              // j = 5
+            int j = i - 5; // j = 5
             int sum = 0;
 
-            sum = Add(i, j);            // sum = 15
-            sum = Add(sum, i);          // sum = 25
-            sum = Add(j, sum);          // sum = 30
+            sum = Add(i, j); // sum = 15
+            sum = Add(sum, i); // sum = 25
+            sum = Add(j, sum); // sum = 30
 
             i = 10;
-            j = sum / i;                // j = 3
-            sum = Add(40, j);  // sum = 43
+            j = sum / i; // j = 3
+            sum = Add(40, j); // sum = 43
 
             x();
         }
@@ -49,12 +50,9 @@ namespace DefaultNamespace
         {
             int foo;
 
-            foo
-               =
-               1;
+            foo = 1;
 
-            foo =
-               2;
+            foo = 2;
 
             foo = 3;
 
@@ -80,11 +78,7 @@ namespace DefaultNamespace
             int c = 3;
             int d = 4;
             int e = 5;
-            int f = a +
-                    b +
-                    c +
-                    d +
-                    e;
+            int f = a + b + c + d + e;
 
             return (true);
         }

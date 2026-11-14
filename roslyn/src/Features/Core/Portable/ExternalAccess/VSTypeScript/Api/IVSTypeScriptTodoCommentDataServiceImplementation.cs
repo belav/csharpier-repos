@@ -9,7 +9,11 @@ using Microsoft.CodeAnalysis.TaskList;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 
-internal readonly struct VSTypeScriptTaskListItem(VSTypeScriptTaskListItemDescriptorWrapper descriptor, string message, int position)
+internal readonly struct VSTypeScriptTaskListItem(
+    VSTypeScriptTaskListItemDescriptorWrapper descriptor,
+    string message,
+    int position
+)
 {
     public VSTypeScriptTaskListItemDescriptorWrapper Descriptor { get; } = descriptor;
     public string Message { get; } = message;
@@ -27,12 +31,19 @@ internal readonly struct VSTypeScriptTaskListItemDescriptorWrapper
         Descriptor = descriptor;
     }
 
-    public static ImmutableArray<VSTypeScriptTaskListItemDescriptorWrapper> Parse(ImmutableArray<string> items)
-        => TaskListItemDescriptor.Parse(items).SelectAsArray(d => new VSTypeScriptTaskListItemDescriptorWrapper(d));
+    public static ImmutableArray<VSTypeScriptTaskListItemDescriptorWrapper> Parse(
+        ImmutableArray<string> items
+    ) =>
+        TaskListItemDescriptor
+            .Parse(items)
+            .SelectAsArray(d => new VSTypeScriptTaskListItemDescriptorWrapper(d));
 }
 
 internal interface IVSTypeScriptTaskListServiceImplementation
 {
     Task<ImmutableArray<VSTypeScriptTaskListItem>> GetTaskListItemsAsync(
-        Document document, ImmutableArray<VSTypeScriptTaskListItemDescriptorWrapper> value, CancellationToken cancellationToken);
+        Document document,
+        ImmutableArray<VSTypeScriptTaskListItemDescriptorWrapper> value,
+        CancellationToken cancellationToken
+    );
 }

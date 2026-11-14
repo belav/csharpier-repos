@@ -26,20 +26,76 @@ namespace System.Numerics
         // https://github.com/dotnet/roslyn/pull/24621
 
         private static ReadOnlySpan<byte> TrailingZeroCountDeBruijn => // 32
-        [
-            00, 01, 28, 02, 29, 14, 24, 03,
-            30, 22, 20, 15, 25, 17, 04, 08,
-            31, 27, 13, 23, 21, 19, 16, 07,
-            26, 12, 18, 06, 11, 05, 10, 09
-        ];
+            [
+                00,
+                01,
+                28,
+                02,
+                29,
+                14,
+                24,
+                03,
+                30,
+                22,
+                20,
+                15,
+                25,
+                17,
+                04,
+                08,
+                31,
+                27,
+                13,
+                23,
+                21,
+                19,
+                16,
+                07,
+                26,
+                12,
+                18,
+                06,
+                11,
+                05,
+                10,
+                09,
+            ];
 
         private static ReadOnlySpan<byte> Log2DeBruijn => // 32
-        [
-            00, 09, 01, 10, 13, 21, 02, 29,
-            11, 14, 16, 18, 22, 25, 03, 30,
-            08, 12, 20, 28, 15, 17, 24, 07,
-            19, 27, 23, 06, 26, 05, 04, 31
-        ];
+            [
+                00,
+                09,
+                01,
+                10,
+                13,
+                21,
+                02,
+                29,
+                11,
+                14,
+                16,
+                18,
+                22,
+                25,
+                03,
+                30,
+                08,
+                12,
+                20,
+                28,
+                15,
+                17,
+                24,
+                07,
+                19,
+                27,
+                23,
+                06,
+                26,
+                05,
+                04,
+                31,
+            ];
 
         /// <summary>
         /// Evaluate whether a given integral value is a power of 2.
@@ -394,7 +450,8 @@ namespace System.Numerics
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
                 ref MemoryMarshal.GetReference(Log2DeBruijn),
                 // uint|long -> IntPtr cast on 32-bit platforms does expensive overflow checks not needed here
-                (IntPtr)(int)((value * 0x07C4ACDDu) >> 27));
+                (IntPtr)(int)((value * 0x07C4ACDDu) >> 27)
+            );
         }
 
         /// <summary>Returns the integer (ceiling) log of the specified value, base 2.</summary>
@@ -443,7 +500,9 @@ namespace System.Numerics
                 // PopCount works on vector so convert input value to vector first.
 
                 Vector64<uint> input = Vector64.CreateScalar(value);
-                Vector64<byte> aggregated = AdvSimd.Arm64.AddAcross(AdvSimd.PopCount(input.AsByte()));
+                Vector64<byte> aggregated = AdvSimd.Arm64.AddAcross(
+                    AdvSimd.PopCount(input.AsByte())
+                );
                 return aggregated.ToScalar();
             }
 
@@ -483,7 +542,9 @@ namespace System.Numerics
             {
                 // PopCount works on vector so convert input value to vector first.
                 Vector64<ulong> input = Vector64.Create(value);
-                Vector64<byte> aggregated = AdvSimd.Arm64.AddAcross(AdvSimd.PopCount(input.AsByte()));
+                Vector64<byte> aggregated = AdvSimd.Arm64.AddAcross(
+                    AdvSimd.PopCount(input.AsByte())
+                );
                 return aggregated.ToScalar();
             }
 
@@ -532,8 +593,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int TrailingZeroCount(int value)
-            => TrailingZeroCount((uint)value);
+        public static int TrailingZeroCount(int value) => TrailingZeroCount((uint)value);
 
         /// <summary>
         /// Count the number of trailing zero bits in an integer value.
@@ -577,7 +637,8 @@ namespace System.Numerics
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_0111_1100_1011_0101_0011_0001u
                 ref MemoryMarshal.GetReference(TrailingZeroCountDeBruijn),
                 // uint|long -> IntPtr cast on 32-bit platforms does expensive overflow checks not needed here
-                (IntPtr)(int)(((value & (uint)-(int)value) * 0x077CB531u) >> 27)); // Multi-cast mitigates redundant conv.u8
+                (IntPtr)(int)(((value & (uint)-(int)value) * 0x077CB531u) >> 27)
+            ); // Multi-cast mitigates redundant conv.u8
         }
 
         /// <summary>
@@ -587,8 +648,7 @@ namespace System.Numerics
         /// <param name="value">The value.</param>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int TrailingZeroCount(long value)
-            => TrailingZeroCount((ulong)value);
+        public static int TrailingZeroCount(long value) => TrailingZeroCount((ulong)value);
 
         /// <summary>
         /// Count the number of trailing zero bits in a mask.
@@ -676,8 +736,8 @@ namespace System.Numerics
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static uint RotateLeft(uint value, int offset)
-            => (value << offset) | (value >> (32 - offset));
+        public static uint RotateLeft(uint value, int offset) =>
+            (value << offset) | (value >> (32 - offset));
 
         /// <summary>
         /// Rotates the specified value left by the specified number of bits.
@@ -690,8 +750,8 @@ namespace System.Numerics
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static ulong RotateLeft(ulong value, int offset)
-            => (value << offset) | (value >> (64 - offset));
+        public static ulong RotateLeft(ulong value, int offset) =>
+            (value << offset) | (value >> (64 - offset));
 
         /// <summary>
         /// Rotates the specified value left by the specified number of bits.
@@ -725,8 +785,8 @@ namespace System.Numerics
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static uint RotateRight(uint value, int offset)
-            => (value >> offset) | (value << (32 - offset));
+        public static uint RotateRight(uint value, int offset) =>
+            (value >> offset) | (value << (32 - offset));
 
         /// <summary>
         /// Rotates the specified value right by the specified number of bits.
@@ -739,8 +799,8 @@ namespace System.Numerics
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static ulong RotateRight(ulong value, int offset)
-            => (value >> offset) | (value << (64 - offset));
+        public static ulong RotateRight(ulong value, int offset) =>
+            (value >> offset) | (value << (64 - offset));
 
         /// <summary>
         /// Rotates the specified value right by the specified number of bits.

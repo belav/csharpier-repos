@@ -11,16 +11,17 @@ namespace Microsoft.EntityFrameworkCore.Storage.Json;
 public abstract class JsonValueReaderWriter<TValue> : JsonValueReaderWriter
 {
     /// <inheritdoc />
-    public sealed override object FromJson(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => FromJsonTyped(ref manager, existingObject)!;
+    public sealed override object FromJson(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => FromJsonTyped(ref manager, existingObject)!;
 
     /// <inheritdoc />
-    public sealed override void ToJson(Utf8JsonWriter writer, object value)
-        => ToJsonTyped(writer, (TValue)value!);
+    public sealed override void ToJson(Utf8JsonWriter writer, object value) =>
+        ToJsonTyped(writer, (TValue)value!);
 
     /// <inheritdoc />
-    public sealed override Type ValueType
-        => typeof(TValue);
+    public sealed override Type ValueType => typeof(TValue);
 
     /// <summary>
     ///     Reads the value from JSON.
@@ -42,7 +43,10 @@ public abstract class JsonValueReaderWriter<TValue> : JsonValueReaderWriter
     /// <param name="manager">The <see cref="Utf8JsonReaderManager" /> for the JSON being read.</param>
     /// <param name="existingObject">Can be used to update an existing object, rather than create a new one.</param>
     /// <returns>The read value.</returns>
-    public abstract TValue FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null);
+    public abstract TValue FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    );
 
     /// <summary>
     ///     Writes the value to JSON.

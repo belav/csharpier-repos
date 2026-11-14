@@ -21,10 +21,7 @@ namespace System.ServiceModel.Channels
 
         public int InternalPendingItems
         {
-            get
-            {
-                return this.inputQueue.PendingCount;
-            }
+            get { return this.inputQueue.PendingCount; }
         }
 
         public int PendingItems
@@ -41,7 +38,11 @@ namespace System.ServiceModel.Channels
             EnqueueAndDispatch(item, null);
         }
 
-        public void EnqueueAndDispatch(TDisposable item, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void EnqueueAndDispatch(
+            TDisposable item,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
             OnEnqueueItem(item);
 
@@ -49,7 +50,11 @@ namespace System.ServiceModel.Channels
             inputQueue.EnqueueAndDispatch(item, dequeuedCallback, canDispatchOnThisThread);
         }
 
-        public void EnqueueAndDispatch(Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void EnqueueAndDispatch(
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
             // NOTE: don't need to check IsDisposed here: InputQueue will handle dispose
             inputQueue.EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
@@ -94,9 +99,7 @@ namespace System.ServiceModel.Channels
             inputQueue.Shutdown(() => this.GetPendingException());
         }
 
-        protected virtual void OnEnqueueItem(TDisposable item)
-        {
-        }
+        protected virtual void OnEnqueueItem(TDisposable item) { }
 
         protected IAsyncResult BeginDequeue(TimeSpan timeout, AsyncCallback callback, object state)
         {
@@ -142,7 +145,11 @@ namespace System.ServiceModel.Channels
             return dequeued;
         }
 
-        protected IAsyncResult BeginWaitForItem(TimeSpan timeout, AsyncCallback callback, object state)
+        protected IAsyncResult BeginWaitForItem(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.ThrowIfNotOpened();
             return inputQueue.BeginWaitForItem(timeout, callback, state);
@@ -174,7 +181,11 @@ namespace System.ServiceModel.Channels
             inputQueue.Close();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             inputQueue.Close();
             return new CompletedAsyncResult(callback, state);

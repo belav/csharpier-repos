@@ -23,10 +23,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
-using System.ComponentModel;
-
 using System.Collections;
+using System.ComponentModel;
+using Xunit;
 
 namespace System.Data.Tests
 {
@@ -228,14 +227,20 @@ namespace System.Data.Tests
             Assert.False(dt.Columns.CanRemove(dt.Columns[0]));
             Assert.True(dt.Columns.CanRemove(dt.Columns[1]));
         }
+
         [Fact]
         public void TestCanRemove_ForigenConstraint()
         {
             DataSet ds = DataProvider.CreateForeignConstraint();
 
-            Assert.False(ds.Tables["child"].Columns.CanRemove(ds.Tables["child"].Columns["parentId"]));
-            Assert.False(ds.Tables["parent"].Columns.CanRemove(ds.Tables["child"].Columns["parentId"]));
+            Assert.False(
+                ds.Tables["child"].Columns.CanRemove(ds.Tables["child"].Columns["parentId"])
+            );
+            Assert.False(
+                ds.Tables["parent"].Columns.CanRemove(ds.Tables["child"].Columns["parentId"])
+            );
         }
+
         [Fact]
         public void TestCanRemove_ParentRelations()
         {
@@ -246,7 +251,13 @@ namespace System.Data.Tests
             ds.Tables["table1"].Columns.Add("col1");
             ds.Tables["table2"].Columns.Add("col1");
 
-            ds.Tables[1].ParentRelations.Add("name1", ds.Tables[0].Columns["col1"], ds.Tables[1].Columns["col1"], false);
+            ds.Tables[1]
+                .ParentRelations.Add(
+                    "name1",
+                    ds.Tables[0].Columns["col1"],
+                    ds.Tables[1].Columns["col1"],
+                    false
+                );
 
             Assert.False(ds.Tables[1].Columns.CanRemove(ds.Tables[1].Columns["col1"]));
             Assert.False(ds.Tables[0].Columns.CanRemove(ds.Tables[0].Columns["col1"]));
@@ -267,7 +278,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(Columns_CollectionChanged);
+            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(
+                Columns_CollectionChanged
+            );
             _counter = 0;
             DataColumn c = dt.Columns.Add("tempCol");
 
@@ -280,7 +293,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(Columns_CollectionChanged);
+            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(
+                Columns_CollectionChanged
+            );
             DataColumn c = dt.Columns.Add("tempCol");
             _counter = 0;
             dt.Columns.Remove("tempCol");
@@ -294,7 +309,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(Columns_CollectionChanged);
+            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(
+                Columns_CollectionChanged
+            );
             dt.Columns.Add("tempCol");
             _counter = 0;
             dt.Columns[0].ColumnName = "tempCol2";
@@ -303,6 +320,7 @@ namespace System.Data.Tests
         }
 
         private object _change_element;
+
         private void Columns_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             _counter++;
@@ -624,8 +642,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            IndexOutOfRangeException ex =
-                Assert.Throws<IndexOutOfRangeException>(() => dt.Columns[-1]);
+            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() =>
+                dt.Columns[-1]
+            );
             // Cannot find column -1
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -636,11 +655,11 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            IndexOutOfRangeException ex =
-                Assert.Throws<IndexOutOfRangeException>(() => dt.Columns[6]);
+            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() =>
+                dt.Columns[6]
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
-
         }
 
         [Fact] // this [String]
@@ -680,8 +699,7 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            ArgumentNullException ex =
-                Assert.Throws<ArgumentNullException>(() => dt.Columns[null]);
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => dt.Columns[null]);
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("name", ex.ParamName);
@@ -709,8 +727,6 @@ namespace System.Data.Tests
             Assert.Equal(1, dt.Rows[0][0]);
             Assert.Equal(2, dt.Rows[0][1]);
 
-
-
             //------Check Remove middle column---------
             dt = dtSource.Clone();
             dt.ImportRow(dtSource.Rows[0]);
@@ -720,7 +736,6 @@ namespace System.Data.Tests
             Assert.False(dt.Columns.Contains("Col_1"));
             Assert.Equal(0, dt.Rows[0][0]);
             Assert.Equal(2, dt.Rows[0][1]);
-
 
             //------Check Remove last column---------
             dt = dtSource.Clone();
@@ -732,7 +747,6 @@ namespace System.Data.Tests
             Assert.False(dt.Columns.Contains("Col_2"));
             Assert.Equal(0, dt.Rows[0][0]);
             Assert.Equal(1, dt.Rows[0][1]);
-
 
             //------Check Remove column exception---------
             dt = dtSource.Clone();
@@ -757,7 +771,9 @@ namespace System.Data.Tests
         public void RemoveAt_Integer()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
-            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(Columns_CollectionChanged1);
+            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(
+                Columns_CollectionChanged1
+            );
             int originalColumnCount = dt.Columns.Count;
             dt.Columns.RemoveAt(0);
             Assert.Equal(originalColumnCount - 1, dt.Columns.Count);

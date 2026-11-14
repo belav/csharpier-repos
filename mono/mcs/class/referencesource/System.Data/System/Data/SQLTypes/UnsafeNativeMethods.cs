@@ -8,56 +8,53 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Security;
-using Microsoft.Win32.SafeHandles;
 using System.Data.Common;
-using System.Runtime.Versioning;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using System.Security;
+using System.Text;
+using Microsoft.Win32.SafeHandles;
 
-namespace System.Data.SqlTypes 
+namespace System.Data.SqlTypes
 {
     [SuppressUnmanagedCodeSecurity]
     internal static class UnsafeNativeMethods
     {
         #region PInvoke methods
-        
+
         [DllImport("NtDll.dll", CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal static extern UInt32 NtCreateFile
-            (
-                out Microsoft.Win32.SafeHandles.SafeFileHandle fileHandle,
-                Int32 desiredAccess,
-                ref OBJECT_ATTRIBUTES objectAttributes,
-                out IO_STATUS_BLOCK ioStatusBlock,
-                ref Int64 allocationSize,
-                UInt32 fileAttributes,
-                System.IO.FileShare shareAccess,
-                UInt32 createDisposition,
-                UInt32 createOptions,
-                SafeHandle eaBuffer,
-                UInt32 eaLength
-            );
+        internal static extern UInt32 NtCreateFile(
+            out Microsoft.Win32.SafeHandles.SafeFileHandle fileHandle,
+            Int32 desiredAccess,
+            ref OBJECT_ATTRIBUTES objectAttributes,
+            out IO_STATUS_BLOCK ioStatusBlock,
+            ref Int64 allocationSize,
+            UInt32 fileAttributes,
+            System.IO.FileShare shareAccess,
+            UInt32 createDisposition,
+            UInt32 createOptions,
+            SafeHandle eaBuffer,
+            UInt32 eaLength
+        );
 
         [DllImport("Kernel32.dll", SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern FileType GetFileType
-            (
-                Microsoft.Win32.SafeHandles.SafeFileHandle hFile
-            );
+        internal static extern FileType GetFileType(
+            Microsoft.Win32.SafeHandles.SafeFileHandle hFile
+        );
 
         // do not use this PInvoke directly, use SafeGetFullPathName instead
         [DllImport("Kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.Machine)]
-        private static extern int GetFullPathName
-            (
-                string path, 
-                int numBufferChars,
-                StringBuilder buffer,
-                IntPtr lpFilePartOrNull
-            );
+        private static extern int GetFullPathName(
+            string path,
+            int numBufferChars,
+            StringBuilder buffer,
+            IntPtr lpFilePartOrNull
+        );
 
         /// <summary>
         /// safe wrapper for GetFullPathName
@@ -88,7 +85,7 @@ namespace System.Data.SqlTypes
 
             if (cchRequiredSize == 0)
             {
-                // GetFullPathName call failed 
+                // GetFullPathName call failed
                 int lastError = Marshal.GetLastWin32Error();
                 if (lastError == 0)
                 {
@@ -101,18 +98,23 @@ namespace System.Data.SqlTypes
                 }
                 else
                 {
-                    System.ComponentModel.Win32Exception e = new System.ComponentModel.Win32Exception(lastError);
+                    System.ComponentModel.Win32Exception e =
+                        new System.ComponentModel.Win32Exception(lastError);
                     ADP.TraceExceptionAsReturnValue(e);
                     throw e;
                 }
             }
 
             // this should not happen since we already reallocate
-            Debug.Assert(cchRequiredSize <= buffer.Capacity, string.Format(
-                System.Globalization.CultureInfo.InvariantCulture,
-                "second call to GetFullPathName returned greater size: {0} > {1}", 
-                cchRequiredSize, 
-                buffer.Capacity));
+            Debug.Assert(
+                cchRequiredSize <= buffer.Capacity,
+                string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    "second call to GetFullPathName returned greater size: {0} > {1}",
+                    cchRequiredSize,
+                    buffer.Capacity
+                )
+            );
 
             return buffer.ToString();
         }
@@ -156,82 +158,72 @@ namespace System.Data.SqlTypes
 
         [DllImport("Kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal static extern bool DeviceIoControl
-            (
-                Microsoft.Win32.SafeHandles.SafeFileHandle fileHandle,
-                uint ioControlCode,
-                IntPtr inBuffer,
-                uint cbInBuffer,
-                IntPtr outBuffer,
-                uint cbOutBuffer,
-                out uint cbBytesReturned,
-                IntPtr overlapped
-            );
+        internal static extern bool DeviceIoControl(
+            Microsoft.Win32.SafeHandles.SafeFileHandle fileHandle,
+            uint ioControlCode,
+            IntPtr inBuffer,
+            uint cbInBuffer,
+            IntPtr outBuffer,
+            uint cbOutBuffer,
+            out uint cbBytesReturned,
+            IntPtr overlapped
+        );
 
         [DllImport("NtDll.dll")]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern UInt32 RtlNtStatusToDosError
-            (
-                UInt32 status
-            );
+        internal static extern UInt32 RtlNtStatusToDosError(UInt32 status);
 
         #region definitions from devioctl.h
 
         internal const ushort FILE_DEVICE_FILE_SYSTEM = 0x0009;
-        
+
         internal enum Method
         {
             METHOD_BUFFERED,
             METHOD_IN_DIRECT,
             METHOD_OUT_DIRECT,
-            METHOD_NEITHER
+            METHOD_NEITHER,
         };
 
         internal enum Access
         {
             FILE_ANY_ACCESS,
             FILE_READ_ACCESS,
-            FILE_WRITE_ACCESS
+            FILE_WRITE_ACCESS,
         }
 
-        internal static uint CTL_CODE
-            (
-                ushort deviceType,
-                ushort function,
-                byte method,
-                byte access
-            )
+        internal static uint CTL_CODE(ushort deviceType, ushort function, byte method, byte access)
         {
-            if ( function > 4095 )
-                throw ADP.ArgumentOutOfRange ( "function" );
+            if (function > 4095)
+                throw ADP.ArgumentOutOfRange("function");
 
-            return (uint) ( ( deviceType << 16 ) | ( access << 14 ) | ( function << 2 ) | method );
+            return (uint)((deviceType << 16) | (access << 14) | (function << 2) | method);
         }
 
         #endregion
-        
-        #endregion
-        
-        #region Error codes
-        
-        internal const int ERROR_INVALID_HANDLE             = 6;
-        internal const int ERROR_MR_MID_NOT_FOUND           = 317;
-        
-        internal const uint STATUS_INVALID_PARAMETER        = 0xc000000d;
-        internal const uint STATUS_SHARING_VIOLATION        = 0xc0000043;
-        internal const uint STATUS_OBJECT_NAME_NOT_FOUND    = 0xc0000034;
 
         #endregion
-        
+
+        #region Error codes
+
+        internal const int ERROR_INVALID_HANDLE = 6;
+        internal const int ERROR_MR_MID_NOT_FOUND = 317;
+
+        internal const uint STATUS_INVALID_PARAMETER = 0xc000000d;
+        internal const uint STATUS_SHARING_VIOLATION = 0xc0000043;
+        internal const uint STATUS_OBJECT_NAME_NOT_FOUND = 0xc0000034;
+
+        #endregion
+
         internal const uint SEM_FAILCRITICALERRORS = 0x0001;
-        
+
         internal enum FileType : uint
         {
-            Unknown = 0x0000,   // FILE_TYPE_UNKNOWN
-            Disk    = 0x0001,   // FILE_TYPE_DISK
-            Char    = 0x0002,   // FILE_TYPE_CHAR
-            Pipe    = 0x0003,   // FILE_TYPE_PIPE
-            Remote  = 0x8000    // FILE_TYPE_REMOTE
+            Unknown = 0x0000, // FILE_TYPE_UNKNOWN
+            Disk = 0x0001, // FILE_TYPE_DISK
+            Char = 0x0002, // FILE_TYPE_CHAR
+            Pipe = 0x0003, // FILE_TYPE_PIPE
+            Remote = 0x8000, // FILE_TYPE_REMOTE
         }
 
         #region definitions from wdm.h
@@ -263,13 +255,14 @@ namespace System.Data.SqlTypes
             SecurityAnonymous,
             SecurityIdentification,
             SecurityImpersonation,
-            SecurityDelegation
+            SecurityDelegation,
         }
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct SECURITY_QUALITY_OF_SERVICE
         {
             internal UInt32 length;
+
             [MarshalAs(UnmanagedType.I4)]
             internal int impersonationLevel;
             internal byte contextDynamicTrackingMode;
@@ -300,7 +293,7 @@ namespace System.Data.SqlTypes
             FILE_SEQUENTIAL_ONLY = 0x00000004,
             FILE_NO_INTERMEDIATE_BUFFERING = 0x00000008,
             FILE_SYNCHRONOUS_IO_NONALERT = 0x00000020,
-            FILE_RANDOM_ACCESS = 0x00000800
+            FILE_RANDOM_ACCESS = 0x00000800,
         }
 
         internal enum CreationDisposition : uint
@@ -310,17 +303,17 @@ namespace System.Data.SqlTypes
             FILE_CREATE = 2,
             FILE_OPEN_IF = 3,
             FILE_OVERWRITE = 4,
-            FILE_OVERWRITE_IF = 5
+            FILE_OVERWRITE_IF = 5,
         }
-        
+
         #endregion
 
         #region definitions from winnt.h
 
-        internal const int FILE_READ_DATA       = 0x0001;
-        internal const int FILE_WRITE_DATA      = 0x0002;
+        internal const int FILE_READ_DATA = 0x0001;
+        internal const int FILE_WRITE_DATA = 0x0002;
         internal const int FILE_READ_ATTRIBUTES = 0x0080;
-        internal const int SYNCHRONIZE          = 0x00100000;
+        internal const int SYNCHRONIZE = 0x00100000;
 
         #endregion
 
@@ -329,18 +322,17 @@ namespace System.Data.SqlTypes
         [Flags]
         internal enum Attributes : uint
         {
-            Inherit             = 0x00000002,
-            Permanent           = 0x00000010,
-            Exclusive           = 0x00000020,
-            CaseInsensitive     = 0x00000040,
-            OpenIf              = 0x00000080,
-            OpenLink            = 0x00000100,
-            KernelHandle        = 0x00000200,
-            ForceAccessCheck    = 0x00000400,
-            ValidAttributes     = 0x000007F2
+            Inherit = 0x00000002,
+            Permanent = 0x00000010,
+            Exclusive = 0x00000020,
+            CaseInsensitive = 0x00000040,
+            OpenIf = 0x00000080,
+            OpenLink = 0x00000100,
+            KernelHandle = 0x00000200,
+            ForceAccessCheck = 0x00000400,
+            ValidAttributes = 0x000007F2,
         }
 
         #endregion
-
     }
 }

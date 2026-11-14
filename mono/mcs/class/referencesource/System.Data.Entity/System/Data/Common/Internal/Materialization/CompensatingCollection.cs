@@ -15,10 +15,12 @@ namespace System.Data.Common.Internal.Materialization
     /// <summary>
     /// What we return from our materialization of a collection column must be
     /// exactly the type that the compilers expected when they generated the
-    /// code that asked for it.  This class wraps our enumerators and derives 
+    /// code that asked for it.  This class wraps our enumerators and derives
     /// from all the possible options, covering all the bases.
     /// </summary>
-    internal class CompensatingCollection<TElement> : IOrderedQueryable<TElement>, IOrderedEnumerable<TElement>
+    internal class CompensatingCollection<TElement>
+        : IOrderedQueryable<TElement>,
+            IOrderedEnumerable<TElement>
     {
         #region private state
 
@@ -64,9 +66,15 @@ namespace System.Data.Common.Internal.Materialization
 
         #region IOrderedEnumerable<TElement> Members
 
-        IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.CreateOrderedEnumerable<K>(Func<TElement, K> keySelector, IComparer<K> comparer, bool descending)
+        IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.CreateOrderedEnumerable<K>(
+            Func<TElement, K> keySelector,
+            IComparer<K> comparer,
+            bool descending
+        )
         {
-            throw EntityUtil.NotSupported(System.Data.Entity.Strings.ELinq_CreateOrderedEnumerableNotSupported);
+            throw EntityUtil.NotSupported(
+                System.Data.Entity.Strings.ELinq_CreateOrderedEnumerableNotSupported
+            );
         }
 
         #endregion
@@ -87,7 +95,9 @@ namespace System.Data.Common.Internal.Materialization
         {
             get
             {
-                throw EntityUtil.NotSupported(System.Data.Entity.Strings.ELinq_UnsupportedQueryableMethod);
+                throw EntityUtil.NotSupported(
+                    System.Data.Entity.Strings.ELinq_UnsupportedQueryableMethod
+                );
             }
         }
 

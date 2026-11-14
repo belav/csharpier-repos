@@ -3,12 +3,12 @@
 
 using System;
 using System.IO;
-using Xunit;
-using Microsoft.DotNet.Cli.Build.Framework;
-using Microsoft.DotNet.CoreSetup.Test;
-using BundleTests.Helpers;
 using System.Runtime.InteropServices;
 using System.Text;
+using BundleTests.Helpers;
+using Microsoft.DotNet.Cli.Build.Framework;
+using Microsoft.DotNet.CoreSetup.Test;
+using Xunit;
 
 namespace AppHost.Bundle.Tests
 {
@@ -23,12 +23,14 @@ namespace AppHost.Bundle.Tests
 
         private void RunTheApp(string path, bool selfContained)
         {
-            Command.Create(path)
+            Command
+                .Create(path)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .DotNetRoot(selfContained ? null : TestContext.BuiltDotNet.BinPath)
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World!");
         }
 
@@ -40,7 +42,8 @@ namespace AppHost.Bundle.Tests
             // We will create a universal binary with just one arch slice and run it.
             // It is enough for testing purposes. The code that finds the releavant slice
             // would work the same regardless if there is 1, 2, 3 or more slices.
-            Command.Create("lipo", $"-create -arch {arch} {path} -output {fatApp}")
+            Command
+                .Create("lipo", $"-create -arch {arch} {path} -output {fatApp}")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
@@ -75,9 +78,14 @@ namespace AppHost.Bundle.Tests
             {
                 // StandaloneApp sets FileVersion to NETCoreApp version. On Windows, this should be copied to singlefilehost resources.
                 string expectedVersion = TestContext.MicrosoftNETCoreAppVersion.Contains('-')
-                    ? TestContext.MicrosoftNETCoreAppVersion[..TestContext.MicrosoftNETCoreAppVersion.IndexOf('-')]
+                    ? TestContext.MicrosoftNETCoreAppVersion[
+                        ..TestContext.MicrosoftNETCoreAppVersion.IndexOf('-')
+                    ]
                     : TestContext.MicrosoftNETCoreAppVersion;
-                Assert.Equal(expectedVersion, System.Diagnostics.FileVersionInfo.GetVersionInfo(singleFile).FileVersion);
+                Assert.Equal(
+                    expectedVersion,
+                    System.Diagnostics.FileVersionInfo.GetVersionInfo(singleFile).FileVersion
+                );
             }
         }
 

@@ -3,7 +3,9 @@
 
 using Microsoft.EntityFrameworkCore.Design.Internal;
 
-[assembly: DesignTimeProviderServices("Microsoft.EntityFrameworkCore.InMemory.Design.Internal.InMemoryDesignTimeServices")]
+[assembly: DesignTimeProviderServices(
+    "Microsoft.EntityFrameworkCore.InMemory.Design.Internal.InMemoryDesignTimeServices"
+)]
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Design.Internal;
 
@@ -27,7 +29,10 @@ public class InMemoryDesignTimeServices : IDesignTimeServices
 
 #pragma warning disable EF1001 // Internal EF Core API usage.
         new EntityFrameworkDesignServicesBuilder(serviceCollection)
-            .TryAdd<ICSharpRuntimeAnnotationCodeGenerator, InMemoryCSharpRuntimeAnnotationCodeGenerator>()
+            .TryAdd<
+                ICSharpRuntimeAnnotationCodeGenerator,
+                InMemoryCSharpRuntimeAnnotationCodeGenerator
+            >()
 #pragma warning restore EF1001 // Internal EF Core API usage.
             .TryAddCoreServices();
     }

@@ -15,7 +15,8 @@ namespace System.Xml.Xsl.IlGen
     /// This internal class maintains a list of unique values.  Each unique value is assigned a unique ID, which can
     /// be used to quickly access the value, since it corresponds to the value's position in the list.
     /// </summary>
-    internal sealed class UniqueList<T> where T : notnull
+    internal sealed class UniqueList<T>
+        where T : notnull
     {
         private readonly Dictionary<T, int> _lookup = new Dictionary<T, int>();
         private readonly List<T> _list = new List<T>();
@@ -44,7 +45,6 @@ namespace System.Xml.Xsl.IlGen
             return _list.ToArray();
         }
     }
-
 
     /// <summary>
     /// Manages all static data that is used by the runtime.  This includes:
@@ -119,7 +119,10 @@ namespace System.Xml.Xsl.IlGen
                 Debug.Assert(ndNmspDecl != null);
                 Debug.Assert(ndNmspDecl.Left is QilLiteral && ndNmspDecl.Right is QilLiteral);
 
-                prefixMappings[i] = new StringPair((string)(QilLiteral)ndNmspDecl.Left, (string)(QilLiteral)ndNmspDecl.Right);
+                prefixMappings[i] = new StringPair(
+                    (string)(QilLiteral)ndNmspDecl.Left,
+                    (string)(QilLiteral)ndNmspDecl.Right
+                );
             }
 
             // Add mappings to list and return index
@@ -163,7 +166,13 @@ namespace System.Xml.Xsl.IlGen
         /// Add early bound information to a list that is used by this query.  Return the index of
         /// the early bound information in the list.
         /// </summary>
-        public int DeclareEarlyBound(string namespaceUri, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type ebType)
+        public int DeclareEarlyBound(
+            string namespaceUri,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type ebType
+        )
         {
             _earlyInfo ??= new UniqueList<EarlyBoundInfo>();
 

@@ -2,12 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
+using ILCompiler.DependencyAnalysis;
 using Internal.IL;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis;
-
 using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 
 namespace ILCompiler
@@ -20,7 +17,12 @@ namespace ILCompiler
         private readonly IEnumerable<DefType> _typesWithStructMarshalling;
         private readonly IEnumerable<DefType> _typesWithDelegateMarshalling;
 
-        public AnalysisBasedInteropStubManager(InteropStateManager interopStateManager, PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration, IEnumerable<DefType> typesWithStructMarshalling, IEnumerable<DefType> typesWithDelegateMarshalling)
+        public AnalysisBasedInteropStubManager(
+            InteropStateManager interopStateManager,
+            PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration,
+            IEnumerable<DefType> typesWithStructMarshalling,
+            IEnumerable<DefType> typesWithDelegateMarshalling
+        )
             : base(interopStateManager, pInvokeILEmitterConfiguration)
         {
             _typesWithStructMarshalling = typesWithStructMarshalling;
@@ -40,16 +42,22 @@ namespace ILCompiler
             }
         }
 
-        public override void AddDependenciesDueToMethodCodePresence(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
-        {
-        }
+        public override void AddDependenciesDueToMethodCodePresence(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        ) { }
 
-        public override void AddInterestingInteropConstructedTypeDependencies(ref DependencyList dependencies, NodeFactory factory, TypeDesc type)
-        {
-        }
+        public override void AddInterestingInteropConstructedTypeDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc type
+        ) { }
 
-        public override void AddMarshalAPIsGenericDependencies(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
-        {
-        }
+        public override void AddMarshalAPIsGenericDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        ) { }
     }
 }

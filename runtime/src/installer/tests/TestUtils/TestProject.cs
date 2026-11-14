@@ -7,28 +7,59 @@ namespace Microsoft.DotNet.CoreSetup.Test
 {
     public class TestProject : TestArtifact
     {
-        public string ProjectDirectory { get => Location; }
-        public string ProjectName { get => Name; }
+        public string ProjectDirectory
+        {
+            get => Location;
+        }
+        public string ProjectName
+        {
+            get => Name;
+        }
 
         public string AssemblyName { get; private set; }
         public string OutputDirectory { get; set; }
         public string ProjectFile { get; private set; }
         public string ProjectAssetsJson { get; private set; }
-        public string RuntimeConfigJson { get => BuiltApp?.RuntimeConfigJson; }
-        public string RuntimeDevConfigJson { get => BuiltApp?.RuntimeDevConfigJson; }
-        public string DepsJson { get => BuiltApp?.DepsJson; }
-        public string AppDll { get => BuiltApp?.AppDll; }
-        public string AppExe { get => BuiltApp?.AppExe; }
-        public string HostPolicyDll { get => BuiltApp?.HostPolicyDll; }
-        public string HostFxrDll { get => BuiltApp?.HostFxrDll; }
-        public string CoreClrDll { get => BuiltApp?.CoreClrDll; }
+        public string RuntimeConfigJson
+        {
+            get => BuiltApp?.RuntimeConfigJson;
+        }
+        public string RuntimeDevConfigJson
+        {
+            get => BuiltApp?.RuntimeDevConfigJson;
+        }
+        public string DepsJson
+        {
+            get => BuiltApp?.DepsJson;
+        }
+        public string AppDll
+        {
+            get => BuiltApp?.AppDll;
+        }
+        public string AppExe
+        {
+            get => BuiltApp?.AppExe;
+        }
+        public string HostPolicyDll
+        {
+            get => BuiltApp?.HostPolicyDll;
+        }
+        public string HostFxrDll
+        {
+            get => BuiltApp?.HostFxrDll;
+        }
+        public string CoreClrDll
+        {
+            get => BuiltApp?.CoreClrDll;
+        }
 
         public TestApp BuiltApp { get; private set; }
 
         public TestProject(
             string projectDirectory,
             string outputDirectory = null,
-            string assemblyName = null)
+            string assemblyName = null
+        )
             : base(projectDirectory)
         {
             Initialize(outputDirectory, assemblyName);

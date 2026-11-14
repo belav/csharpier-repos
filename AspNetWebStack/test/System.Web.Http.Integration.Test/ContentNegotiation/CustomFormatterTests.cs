@@ -33,11 +33,13 @@ namespace System.Web.Http.ContentNegotiation
             Order reqOrdr = new Order() { OrderId = "100", OrderValue = 100.00 };
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = new ObjectContent<Order>(reqOrdr, new XmlMediaTypeFormatter())
+                Content = new ObjectContent<Order>(reqOrdr, new XmlMediaTypeFormatter()),
             };
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoOrder");
             request.Method = HttpMethod.Post;
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plainwithversioninfo"));
+            request.Headers.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("text/plainwithversioninfo")
+            );
 
             HttpResponseMessage response = await httpClient.SendAsync(request);
 
@@ -48,7 +50,10 @@ namespace System.Web.Http.ContentNegotiation
             Assert.Equal("1.3.5.0", versionHdr.First());
             Assert.NotNull(response.Content);
             Assert.NotNull(response.Content.Headers.ContentType);
-            Assert.Equal("text/plainwithversioninfo", response.Content.Headers.ContentType.MediaType);
+            Assert.Equal(
+                "text/plainwithversioninfo",
+                response.Content.Headers.ContentType.MediaType
+            );
         }
 
         [Fact]
@@ -56,7 +61,7 @@ namespace System.Web.Http.ContentNegotiation
         {
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = new ObjectContent<string>("Hello World!", new PlainTextFormatter())
+                Content = new ObjectContent<string>("Hello World!", new PlainTextFormatter()),
             };
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoString");
             request.Method = HttpMethod.Post;
@@ -75,7 +80,7 @@ namespace System.Web.Http.ContentNegotiation
         {
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = new ObjectContent<int>(100, new PlainTextFormatter())
+                Content = new ObjectContent<int>(100, new PlainTextFormatter()),
             };
 
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoInt");
@@ -96,7 +101,7 @@ namespace System.Web.Http.ContentNegotiation
             Order reqOrdr = new Order() { OrderId = "100", OrderValue = 100.00 };
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = new ObjectContent<Order>(reqOrdr, new PlainTextFormatter())
+                Content = new ObjectContent<Order>(reqOrdr, new PlainTextFormatter()),
             };
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoOrder");
             request.Method = HttpMethod.Post;
@@ -113,7 +118,11 @@ namespace System.Web.Http.ContentNegotiation
         {
             baseAddress = "http://localhost/";
             config = new HttpSelfHostConfiguration(baseAddress);
-            config.Routes.MapHttpRoute("Default", "{controller}/{action}", new { controller = "CustomFormatterTests", action = "EchoOrder" });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}",
+                new { controller = "CustomFormatterTests", action = "EchoOrder" }
+            );
             config.MessageHandlers.Add(new ConvertToStreamMessageHandler());
             config.Formatters.Add(new PlainTextFormatterWithVersionInfo());
             config.Formatters.Add(new PlainTextFormatter());
@@ -140,13 +149,22 @@ namespace System.Web.Http.ContentNegotiation
             return true;
         }
 
-        public override void SetDefaultContentHeaders(Type objectType, HttpContentHeaders contentHeaders, MediaTypeHeaderValue mediaType)
+        public override void SetDefaultContentHeaders(
+            Type objectType,
+            HttpContentHeaders contentHeaders,
+            MediaTypeHeaderValue mediaType
+        )
         {
             base.SetDefaultContentHeaders(objectType, contentHeaders, mediaType);
             contentHeaders.TryAddWithoutValidation("Version", "1.3.5.0");
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             string stringContent = null;
 
@@ -161,7 +179,13 @@ namespace System.Web.Http.ContentNegotiation
             return tcs.Task;
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext
+        )
         {
             var output = value.ToString();
             var writer = new StreamWriter(writeStream);
@@ -192,7 +216,12 @@ namespace System.Web.Http.ContentNegotiation
             return true;
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             object result = null;
 
@@ -215,7 +244,13 @@ namespace System.Web.Http.ContentNegotiation
             return tcs.Task;
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext
+        )
         {
             var output = value == null ? String.Empty : value.ToString();
             var writer = new StreamWriter(writeStream);

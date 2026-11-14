@@ -37,8 +37,16 @@ namespace System.ServiceModel.Channels
         XmlDictionaryReaderQuotas bufferedReadReaderQuotas;
         BinaryVersion binaryVersion;
 
-        public BinaryMessageEncoderFactory(MessageVersion messageVersion, int maxReadPoolSize, int maxWritePoolSize, int maxSessionSize,
-            XmlDictionaryReaderQuotas readerQuotas, long maxReceivedMessageSize, BinaryVersion version, CompressionFormat compressionFormat)
+        public BinaryMessageEncoderFactory(
+            MessageVersion messageVersion,
+            int maxReadPoolSize,
+            int maxWritePoolSize,
+            int maxSessionSize,
+            XmlDictionaryReaderQuotas readerQuotas,
+            long maxReceivedMessageSize,
+            BinaryVersion version,
+            CompressionFormat compressionFormat
+        )
         {
             this.messageVersion = messageVersion;
             this.maxReadPoolSize = maxReadPoolSize;
@@ -67,10 +75,7 @@ namespace System.ServiceModel.Channels
 
         public override MessageEncoder Encoder
         {
-            get
-            {
-                return messageEncoder;
-            }
+            get { return messageEncoder; }
         }
 
         public override MessageVersion MessageVersion
@@ -85,10 +90,7 @@ namespace System.ServiceModel.Channels
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get
-            {
-                return readerQuotas;
-            }
+            get { return readerQuotas; }
         }
 
         public int MaxReadPoolSize
@@ -106,11 +108,7 @@ namespace System.ServiceModel.Channels
             get { return this.compressionFormat; }
         }
 
-        long MaxReceivedMessageSize
-        {
-            get;
-            set;
-        }
+        long MaxReceivedMessageSize { get; set; }
 
         object ThisLock
         {
@@ -128,7 +126,9 @@ namespace System.ServiceModel.Channels
                         if (recycledStatePool == null)
                         {
                             //running = true;
-                            recycledStatePool = new SynchronizedPool<RecycledMessageState>(maxReadPoolSize);
+                            recycledStatePool = new SynchronizedPool<RecycledMessageState>(
+                                maxReadPoolSize
+                            );
                         }
                     }
                 }
@@ -150,14 +150,21 @@ namespace System.ServiceModel.Channels
                     if (streamedWriterPool == null)
                     {
                         //running = true;
-                        streamedWriterPool = new SynchronizedPool<XmlDictionaryWriter>(maxWritePoolSize);
+                        streamedWriterPool = new SynchronizedPool<XmlDictionaryWriter>(
+                            maxWritePoolSize
+                        );
                     }
                 }
             }
             XmlDictionaryWriter xmlWriter = streamedWriterPool.Take();
             if (xmlWriter == null)
             {
-                xmlWriter = XmlDictionaryWriter.CreateBinaryWriter(stream, binaryVersion.Dictionary, null, false);
+                xmlWriter = XmlDictionaryWriter.CreateBinaryWriter(
+                    stream,
+                    binaryVersion.Dictionary,
+                    null,
+                    false
+                );
                 if (TD.WritePoolMissIsEnabled())
                 {
                     TD.WritePoolMiss(xmlWriter.GetType().Name);
@@ -165,7 +172,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                ((IXmlBinaryWriterInitializer)xmlWriter).SetOutput(stream, binaryVersion.Dictionary, null, false);
+                ((IXmlBinaryWriterInitializer)xmlWriter).SetOutput(
+                    stream,
+                    binaryVersion.Dictionary,
+                    null,
+                    false
+                );
             }
             return xmlWriter;
         }
@@ -185,7 +197,9 @@ namespace System.ServiceModel.Channels
                     if (bufferedWriterPool == null)
                     {
                         //running = true;
-                        bufferedWriterPool = new SynchronizedPool<BinaryBufferedMessageWriter>(maxWritePoolSize);
+                        bufferedWriterPool = new SynchronizedPool<BinaryBufferedMessageWriter>(
+                            maxWritePoolSize
+                        );
                     }
                 }
             }
@@ -216,7 +230,9 @@ namespace System.ServiceModel.Channels
                     if (streamedReaderPool == null)
                     {
                         //running = true;
-                        streamedReaderPool = new SynchronizedPool<XmlDictionaryReader>(maxReadPoolSize);
+                        streamedReaderPool = new SynchronizedPool<XmlDictionaryReader>(
+                            maxReadPoolSize
+                        );
                     }
                 }
             }
@@ -224,11 +240,13 @@ namespace System.ServiceModel.Channels
             XmlDictionaryReader xmlReader = streamedReaderPool.Take();
             if (xmlReader == null)
             {
-                xmlReader = XmlDictionaryReader.CreateBinaryReader(stream,
+                xmlReader = XmlDictionaryReader.CreateBinaryReader(
+                    stream,
                     binaryVersion.Dictionary,
                     readerQuotas,
                     null,
-                    onStreamedReaderClose);
+                    onStreamedReaderClose
+                );
                 if (TD.ReadPoolMissIsEnabled())
                 {
                     TD.ReadPoolMiss(xmlReader.GetType().Name);
@@ -236,11 +254,13 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                ((IXmlBinaryReaderInitializer)xmlReader).SetInput(stream,
+                ((IXmlBinaryReaderInitializer)xmlReader).SetInput(
+                    stream,
                     binaryVersion.Dictionary,
                     readerQuotas,
                     null,
-                    onStreamedReaderClose);
+                    onStreamedReaderClose
+                );
             }
 
             return xmlReader;
@@ -260,7 +280,9 @@ namespace System.ServiceModel.Channels
                     if (bufferedDataPool == null)
                     {
                         //running = true;
-                        bufferedDataPool = new SynchronizedPool<BinaryBufferedMessageData>(maxReadPoolSize);
+                        bufferedDataPool = new SynchronizedPool<BinaryBufferedMessageData>(
+                            maxReadPoolSize
+                        );
                     }
                 }
             }
@@ -320,19 +342,27 @@ namespace System.ServiceModel.Channels
 
                 if (xmlReader != null)
                 {
-                    ((IXmlBinaryReaderInitializer)xmlReader).SetInput(buffer.Array, buffer.Offset, buffer.Count,
+                    ((IXmlBinaryReaderInitializer)xmlReader).SetInput(
+                        buffer.Array,
+                        buffer.Offset,
+                        buffer.Count,
                         factory.binaryVersion.Dictionary,
                         factory.bufferedReadReaderQuotas,
                         messageEncoder.ReaderSession,
-                        onClose);
+                        onClose
+                    );
                 }
                 else
                 {
-                    xmlReader = XmlDictionaryReader.CreateBinaryReader(buffer.Array, buffer.Offset, buffer.Count,
+                    xmlReader = XmlDictionaryReader.CreateBinaryReader(
+                        buffer.Array,
+                        buffer.Offset,
+                        buffer.Count,
                         factory.binaryVersion.Dictionary,
                         factory.bufferedReadReaderQuotas,
                         messageEncoder.ReaderSession,
-                        onClose);
+                        onClose
+                    );
                     if (TD.ReadPoolMissIsEnabled())
                     {
                         TD.ReadPoolMiss(xmlReader.GetType().Name);
@@ -364,7 +394,10 @@ namespace System.ServiceModel.Channels
                 this.dictionary = dictionary;
             }
 
-            public BinaryBufferedMessageWriter(IXmlDictionary dictionary, XmlBinaryWriterSession session)
+            public BinaryBufferedMessageWriter(
+                IXmlDictionary dictionary,
+                XmlBinaryWriterSession session
+            )
             {
                 this.dictionary = dictionary;
                 this.session = session;
@@ -375,12 +408,22 @@ namespace System.ServiceModel.Channels
                 XmlDictionaryWriter returnedWriter = writer;
                 if (returnedWriter == null)
                 {
-                    returnedWriter = XmlDictionaryWriter.CreateBinaryWriter(stream, dictionary, session, false);
+                    returnedWriter = XmlDictionaryWriter.CreateBinaryWriter(
+                        stream,
+                        dictionary,
+                        session,
+                        false
+                    );
                 }
                 else
                 {
                     writer = null;
-                    ((IXmlBinaryWriterInitializer)returnedWriter).SetOutput(stream, dictionary, session, false);
+                    ((IXmlBinaryWriterInitializer)returnedWriter).SetOutput(
+                        stream,
+                        dictionary,
+                        session,
+                        false
+                    );
                 }
                 return returnedWriter;
             }
@@ -396,9 +439,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class BinaryMessageEncoder : MessageEncoder, ICompressedMessageEncoder, ITraceSourceStringProvider
+        class BinaryMessageEncoder
+            : MessageEncoder,
+                ICompressedMessageEncoder,
+                ITraceSourceStringProvider
         {
-            const string SupportedCompressionTypesMessageProperty = "BinaryMessageEncoder.SupportedCompressionTypes";
+            const string SupportedCompressionTypesMessageProperty =
+                "BinaryMessageEncoder.SupportedCompressionTypes";
 
             BinaryMessageEncoderFactory factory;
             bool isSession;
@@ -418,17 +465,27 @@ namespace System.ServiceModel.Channels
             string gzipCompressedContentType;
             string deflateCompressedContentType;
             CompressionFormat sessionCompressionFormat;
-            readonly long maxReceivedMessageSize; 
+            readonly long maxReceivedMessageSize;
 
-            public BinaryMessageEncoder(BinaryMessageEncoderFactory factory, bool isSession, int maxSessionSize)
+            public BinaryMessageEncoder(
+                BinaryMessageEncoderFactory factory,
+                bool isSession,
+                int maxSessionSize
+            )
             {
                 this.factory = factory;
                 this.isSession = isSession;
                 this.maxSessionSize = maxSessionSize;
                 this.remainingReaderSessionSize = maxSessionSize;
-                this.normalContentType = isSession ? factory.binaryVersion.SessionContentType : factory.binaryVersion.ContentType;
-                this.gzipCompressedContentType = isSession ? BinaryVersion.GZipVersion1.SessionContentType : BinaryVersion.GZipVersion1.ContentType;
-                this.deflateCompressedContentType = isSession ? BinaryVersion.DeflateVersion1.SessionContentType : BinaryVersion.DeflateVersion1.ContentType;
+                this.normalContentType = isSession
+                    ? factory.binaryVersion.SessionContentType
+                    : factory.binaryVersion.ContentType;
+                this.gzipCompressedContentType = isSession
+                    ? BinaryVersion.GZipVersion1.SessionContentType
+                    : BinaryVersion.GZipVersion1.ContentType;
+                this.deflateCompressedContentType = isSession
+                    ? BinaryVersion.DeflateVersion1.SessionContentType
+                    : BinaryVersion.DeflateVersion1.ContentType;
                 this.sessionCompressionFormat = this.factory.CompressionFormat;
                 this.maxReceivedMessageSize = this.factory.MaxReceivedMessageSize;
 
@@ -448,10 +505,7 @@ namespace System.ServiceModel.Channels
 
             public override string ContentType
             {
-                get
-                {
-                    return this.contentType;
-                }
+                get { return this.contentType; }
             }
 
             public override MessageVersion MessageVersion
@@ -474,7 +528,11 @@ namespace System.ServiceModel.Channels
                 get { return this.factory.CompressionFormat != CompressionFormat.None; }
             }
 
-            ArraySegment<byte> AddSessionInformationToMessage(ArraySegment<byte> messageData, BufferManager bufferManager, int maxMessageSize)
+            ArraySegment<byte> AddSessionInformationToMessage(
+                ArraySegment<byte> messageData,
+                BufferManager bufferManager,
+                int maxMessageSize
+            )
             {
                 int dictionarySize = 0;
                 byte[] buffer = messageData.Array;
@@ -497,19 +555,34 @@ namespace System.ServiceModel.Channels
                         {
                             TD.MaxSentMessageSizeExceeded(excMsg);
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QuotaExceededException(excMsg));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new QuotaExceededException(excMsg)
+                        );
                     }
 
-                    int requiredBufferSize = messageData.Offset + messageData.Count + dictionarySize;
+                    int requiredBufferSize =
+                        messageData.Offset + messageData.Count + dictionarySize;
                     if (buffer.Length < requiredBufferSize)
                     {
                         byte[] newBuffer = bufferManager.TakeBuffer(requiredBufferSize);
-                        Buffer.BlockCopy(buffer, messageData.Offset, newBuffer, messageData.Offset, messageData.Count);
+                        Buffer.BlockCopy(
+                            buffer,
+                            messageData.Offset,
+                            newBuffer,
+                            messageData.Offset,
+                            messageData.Count
+                        );
                         bufferManager.ReturnBuffer(buffer);
                         buffer = newBuffer;
                     }
 
-                    Buffer.BlockCopy(buffer, messageData.Offset, buffer, messageData.Offset + dictionarySize, messageData.Count);
+                    Buffer.BlockCopy(
+                        buffer,
+                        messageData.Offset,
+                        buffer,
+                        messageData.Offset + dictionarySize,
+                        messageData.Count
+                    );
 
                     int offset = messageData.Offset;
                     for (int i = 0; i < newStrings.Count; i++)
@@ -517,7 +590,13 @@ namespace System.ServiceModel.Channels
                         string newString = newStrings[i].Value;
                         int utf8ValueSize = Encoding.UTF8.GetByteCount(newString);
                         offset += IntEncoder.Encode(utf8ValueSize, buffer, offset);
-                        offset += Encoding.UTF8.GetBytes(newString, 0, newString.Length, buffer, offset);
+                        offset += Encoding.UTF8.GetBytes(
+                            newString,
+                            0,
+                            newString.Length,
+                            buffer,
+                            offset
+                        );
                     }
 
                     writerSession.ClearNewStrings();
@@ -534,7 +613,9 @@ namespace System.ServiceModel.Channels
             {
                 if (isReaderSessionInvalid)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataException(SR.GetString(SR.BinaryEncoderSessionInvalid)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidDataException(SR.GetString(SR.BinaryEncoderSessionInvalid))
+                    );
                 }
 
                 byte[] buffer = messageData.Array;
@@ -550,25 +631,34 @@ namespace System.ServiceModel.Channels
                     dictionarySize = decoder.Value;
                     if (dictionarySize > messageData.Count)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataException(SR.GetString(SR.BinaryEncoderSessionMalformed)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidDataException(SR.GetString(SR.BinaryEncoderSessionMalformed))
+                        );
                     }
                     newOffset = messageData.Offset + headerSize + dictionarySize;
                     newSize = messageData.Count - headerSize - dictionarySize;
                     if (newSize < 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataException(SR.GetString(SR.BinaryEncoderSessionMalformed)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidDataException(SR.GetString(SR.BinaryEncoderSessionMalformed))
+                        );
                     }
                     if (dictionarySize > 0)
                     {
                         if (dictionarySize > remainingReaderSessionSize)
                         {
-                            string message = SR.GetString(SR.BinaryEncoderSessionTooLarge, this.maxSessionSize);
+                            string message = SR.GetString(
+                                SR.BinaryEncoderSessionTooLarge,
+                                this.maxSessionSize
+                            );
                             if (TD.MaxSessionSizeReachedIsEnabled())
                             {
                                 TD.MaxSessionSizeReached(message);
                             }
                             Exception inner = new QuotaExceededException(message);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(message, inner));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationException(message, inner)
+                            );
                         }
                         else
                         {
@@ -587,7 +677,11 @@ namespace System.ServiceModel.Channels
                             size -= bytesDecoded;
                             if (utf8ValueSize > size)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataException(SR.GetString(SR.BinaryEncoderSessionMalformed)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new InvalidDataException(
+                                        SR.GetString(SR.BinaryEncoderSessionMalformed)
+                                    )
+                                );
                             }
                             string value = Encoding.UTF8.GetString(buffer, offset, utf8ValueSize);
                             offset += utf8ValueSize;
@@ -609,11 +703,17 @@ namespace System.ServiceModel.Channels
                 return new ArraySegment<byte>(buffer, newOffset, newSize);
             }
 
-            public override Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager, string contentType)
+            public override Message ReadMessage(
+                ArraySegment<byte> buffer,
+                BufferManager bufferManager,
+                string contentType
+            )
             {
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bufferManager");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "bufferManager"
+                    );
                 }
 
                 CompressionFormat compressionFormat = this.CheckContentType(contentType);
@@ -625,7 +725,12 @@ namespace System.ServiceModel.Channels
 
                 if (compressionFormat != CompressionFormat.None)
                 {
-                    MessageEncoderCompressionHandler.DecompressBuffer(ref buffer, bufferManager, compressionFormat, this.maxReceivedMessageSize);
+                    MessageEncoderCompressionHandler.DecompressBuffer(
+                        ref buffer,
+                        bufferManager,
+                        compressionFormat,
+                        this.maxReceivedMessageSize
+                    );
                 }
 
                 if (isSession)
@@ -633,7 +738,11 @@ namespace System.ServiceModel.Channels
                     if (readerSession == null)
                     {
                         readerSession = new XmlBinaryReaderSession();
-                        messagePatterns = new MessagePatterns(factory.binaryVersion.Dictionary, readerSession, this.MessageVersion);
+                        messagePatterns = new MessagePatterns(
+                            factory.binaryVersion.Dictionary,
+                            readerSession,
+                            this.MessageVersion
+                        );
                     }
                     try
                     {
@@ -649,7 +758,13 @@ namespace System.ServiceModel.Channels
                 Message message;
                 if (messagePatterns != null)
                 {
-                    message = messagePatterns.TryCreateMessage(buffer.Array, buffer.Offset, buffer.Count, bufferManager, messageData);
+                    message = messagePatterns.TryCreateMessage(
+                        buffer.Array,
+                        buffer.Offset,
+                        buffer.Count,
+                        bufferManager,
+                        messageData
+                    );
                 }
                 else
                 {
@@ -672,7 +787,8 @@ namespace System.ServiceModel.Channels
                     TD.MessageReadByEncoder(
                         EventTraceActivityHelper.TryExtractActivity(message, true),
                         buffer.Count,
-                        this);
+                        this
+                    );
                 }
 
                 if (MessageLogger.LogMessagesAtTransportLevel)
@@ -683,7 +799,11 @@ namespace System.ServiceModel.Channels
                 return message;
             }
 
-            public override Message ReadMessage(Stream stream, int maxSizeOfHeaders, string contentType)
+            public override Message ReadMessage(
+                Stream stream,
+                int maxSizeOfHeaders,
+                string contentType
+            )
             {
                 if (stream == null)
                 {
@@ -700,17 +820,27 @@ namespace System.ServiceModel.Channels
                 if (compressionFormat != CompressionFormat.None)
                 {
                     stream = new MaxMessageSizeStream(
-                        MessageEncoderCompressionHandler.GetDecompressStream(stream, compressionFormat), this.maxReceivedMessageSize);
+                        MessageEncoderCompressionHandler.GetDecompressStream(
+                            stream,
+                            compressionFormat
+                        ),
+                        this.maxReceivedMessageSize
+                    );
                 }
 
                 XmlDictionaryReader reader = factory.TakeStreamedReader(stream);
-                Message message = Message.CreateMessage(reader, maxSizeOfHeaders, factory.messageVersion);
+                Message message = Message.CreateMessage(
+                    reader,
+                    maxSizeOfHeaders,
+                    factory.messageVersion
+                );
                 message.Properties.Encoder = this;
 
                 if (TD.StreamedMessageReadByEncoderIsEnabled())
                 {
                     TD.StreamedMessageReadByEncoder(
-                        EventTraceActivityHelper.TryExtractActivity(message, true));
+                        EventTraceActivityHelper.TryExtractActivity(message, true)
+                    );
                 }
 
                 if (MessageLogger.LogMessagesAtTransportLevel)
@@ -720,7 +850,12 @@ namespace System.ServiceModel.Channels
                 return message;
             }
 
-            public override ArraySegment<byte> WriteMessage(Message message, int maxMessageSize, BufferManager bufferManager, int messageOffset)
+            public override ArraySegment<byte> WriteMessage(
+                Message message,
+                int maxMessageSize,
+                BufferManager bufferManager,
+                int messageOffset
+            )
             {
                 if (message == null)
                 {
@@ -729,14 +864,20 @@ namespace System.ServiceModel.Channels
 
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bufferManager");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "bufferManager"
+                    );
                 }
 
                 if (maxMessageSize < 0)
                 {
-
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxMessageSize", maxMessageSize,
-                        SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maxMessageSize",
+                            maxMessageSize,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
 
                 EventTraceActivity eventTraceActivity = null;
@@ -753,15 +894,23 @@ namespace System.ServiceModel.Channels
                     if (writerSession == null)
                     {
                         writerSession = new XmlBinaryWriterSessionWithQuota(maxSessionSize);
-                        sessionMessageWriter = new BinaryBufferedMessageWriter(factory.binaryVersion.Dictionary, writerSession);
+                        sessionMessageWriter = new BinaryBufferedMessageWriter(
+                            factory.binaryVersion.Dictionary,
+                            writerSession
+                        );
                     }
                     messageOffset += IntEncoder.MaxEncodedSize;
                 }
 
                 if (messageOffset < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("messageOffset", messageOffset,
-                        SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "messageOffset",
+                            messageOffset,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
 
                 if (messageOffset > maxMessageSize)
@@ -771,7 +920,9 @@ namespace System.ServiceModel.Channels
                     {
                         TD.MaxSentMessageSizeExceeded(excMsg);
                     }
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QuotaExceededException(excMsg));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QuotaExceededException(excMsg)
+                    );
                 }
 
                 ThrowIfMismatchedMessageVersion(message);
@@ -784,9 +935,17 @@ namespace System.ServiceModel.Channels
                 {
                     messageWriter = factory.TakeBufferedWriter();
                 }
-                ArraySegment<byte> messageData = messageWriter.WriteMessage(message, bufferManager, messageOffset, maxMessageSize);
+                ArraySegment<byte> messageData = messageWriter.WriteMessage(
+                    message,
+                    bufferManager,
+                    messageOffset,
+                    maxMessageSize
+                );
 
-                if (MessageLogger.LogMessagesAtTransportLevel && !this.readerSessionForLoggingIsInvalid)
+                if (
+                    MessageLogger.LogMessagesAtTransportLevel
+                    && !this.readerSessionForLoggingIsInvalid
+                )
                 {
                     if (isSession)
                     {
@@ -796,14 +955,32 @@ namespace System.ServiceModel.Channels
                         }
                         if (this.writerSession.HasNewStrings)
                         {
-                            foreach (XmlDictionaryString xmlDictionaryString in this.writerSession.GetNewStrings())
+                            foreach (
+                                XmlDictionaryString xmlDictionaryString in this.writerSession.GetNewStrings()
+                            )
                             {
-                                this.readerSessionForLogging.Add(this.writeIdCounter++, xmlDictionaryString.Value);
+                                this.readerSessionForLogging.Add(
+                                    this.writeIdCounter++,
+                                    xmlDictionaryString.Value
+                                );
                             }
                         }
                     }
-                    XmlDictionaryReader xmlDictionaryReader = XmlDictionaryReader.CreateBinaryReader(messageData.Array, messageData.Offset, messageData.Count, XD.Dictionary, XmlDictionaryReaderQuotas.Max, this.readerSessionForLogging, null);
-                    MessageLogger.LogMessage(ref message, xmlDictionaryReader, MessageLoggingSource.TransportSend);
+                    XmlDictionaryReader xmlDictionaryReader =
+                        XmlDictionaryReader.CreateBinaryReader(
+                            messageData.Array,
+                            messageData.Offset,
+                            messageData.Count,
+                            XD.Dictionary,
+                            XmlDictionaryReaderQuotas.Max,
+                            this.readerSessionForLogging,
+                            null
+                        );
+                    MessageLogger.LogMessage(
+                        ref message,
+                        xmlDictionaryReader,
+                        MessageLoggingSource.TransportSend
+                    );
                 }
                 else
                 {
@@ -811,7 +988,11 @@ namespace System.ServiceModel.Channels
                 }
                 if (isSession)
                 {
-                    messageData = AddSessionInformationToMessage(messageData, bufferManager, maxMessageSize);
+                    messageData = AddSessionInformationToMessage(
+                        messageData,
+                        bufferManager,
+                        maxMessageSize
+                    );
                 }
                 else
                 {
@@ -823,13 +1004,18 @@ namespace System.ServiceModel.Channels
                     TD.MessageWrittenByEncoder(
                         eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message),
                         messageData.Count,
-                        this);
+                        this
+                    );
                 }
 
                 CompressionFormat compressionFormat = this.CheckCompressedWrite(message);
                 if (compressionFormat != CompressionFormat.None)
                 {
-                    MessageEncoderCompressionHandler.CompressBuffer(ref messageData, bufferManager, compressionFormat);
+                    MessageEncoderCompressionHandler.CompressBuffer(
+                        ref messageData,
+                        bufferManager,
+                        compressionFormat
+                    );
                 }
 
                 return messageData;
@@ -839,11 +1025,15 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("message")
+                    );
                 }
                 if (stream == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("stream"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("stream")
+                    );
                 }
 
                 EventTraceActivity eventTraceActivity = null;
@@ -856,7 +1046,10 @@ namespace System.ServiceModel.Channels
                 CompressionFormat compressionFormat = this.CheckCompressedWrite(message);
                 if (compressionFormat != CompressionFormat.None)
                 {
-                    stream = MessageEncoderCompressionHandler.GetCompressStream(stream, compressionFormat);
+                    stream = MessageEncoderCompressionHandler.GetCompressStream(
+                        stream,
+                        compressionFormat
+                    );
                 }
 
                 ThrowIfMismatchedMessageVersion(message);
@@ -867,7 +1060,9 @@ namespace System.ServiceModel.Channels
 
                 if (TD.StreamedMessageWrittenByEncoderIsEnabled())
                 {
-                    TD.StreamedMessageWrittenByEncoder(eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message));
+                    TD.StreamedMessageWrittenByEncoder(
+                        eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message)
+                    );
                 }
 
                 factory.ReturnStreamedWriter(xmlWriter);
@@ -888,11 +1083,28 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.CompressionEnabled)
                     {
-                        supported = (this.factory.CompressionFormat == CompressionFormat.GZip &&
-                            base.IsContentTypeSupported(contentType, this.gzipCompressedContentType, this.gzipCompressedContentType)) ||
-                            (this.factory.CompressionFormat == CompressionFormat.Deflate &&
-                            base.IsContentTypeSupported(contentType, this.deflateCompressedContentType, this.deflateCompressedContentType)) ||
-                            base.IsContentTypeSupported(contentType, this.normalContentType, this.normalContentType);
+                        supported =
+                            (
+                                this.factory.CompressionFormat == CompressionFormat.GZip
+                                && base.IsContentTypeSupported(
+                                    contentType,
+                                    this.gzipCompressedContentType,
+                                    this.gzipCompressedContentType
+                                )
+                            )
+                            || (
+                                this.factory.CompressionFormat == CompressionFormat.Deflate
+                                && base.IsContentTypeSupported(
+                                    contentType,
+                                    this.deflateCompressedContentType,
+                                    this.deflateCompressedContentType
+                                )
+                            )
+                            || base.IsContentTypeSupported(
+                                contentType,
+                                this.normalContentType,
+                                this.normalContentType
+                            );
                     }
                     else
                     {
@@ -904,11 +1116,23 @@ namespace System.ServiceModel.Channels
 
             public void SetSessionContentType(string contentType)
             {
-                if (base.IsContentTypeSupported(contentType, this.gzipCompressedContentType, this.gzipCompressedContentType))
+                if (
+                    base.IsContentTypeSupported(
+                        contentType,
+                        this.gzipCompressedContentType,
+                        this.gzipCompressedContentType
+                    )
+                )
                 {
                     this.sessionCompressionFormat = CompressionFormat.GZip;
                 }
-                else if (base.IsContentTypeSupported(contentType, this.deflateCompressedContentType, this.deflateCompressedContentType))
+                else if (
+                    base.IsContentTypeSupported(
+                        contentType,
+                        this.deflateCompressedContentType,
+                        this.deflateCompressedContentType
+                    )
+                )
                 {
                     this.sessionCompressionFormat = CompressionFormat.Deflate;
                 }
@@ -918,14 +1142,27 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            public void AddCompressedMessageProperties(Message message, string supportedCompressionTypes)
+            public void AddCompressedMessageProperties(
+                Message message,
+                string supportedCompressionTypes
+            )
             {
-                message.Properties.Add(SupportedCompressionTypesMessageProperty, supportedCompressionTypes);
+                message.Properties.Add(
+                    SupportedCompressionTypesMessageProperty,
+                    supportedCompressionTypes
+                );
             }
 
-            static bool ContentTypeEqualsOrStartsWith(string contentType, string supportedContentType)
+            static bool ContentTypeEqualsOrStartsWith(
+                string contentType,
+                string supportedContentType
+            )
             {
-                return contentType == supportedContentType || contentType.StartsWith(supportedContentType, StringComparison.OrdinalIgnoreCase);
+                return contentType == supportedContentType
+                    || contentType.StartsWith(
+                        supportedContentType,
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
             CompressionFormat CheckContentType(string contentType)
@@ -941,16 +1178,36 @@ namespace System.ServiceModel.Channels
                     {
                         if (!ContentTypeEqualsOrStartsWith(contentType, this.ContentType))
                         {
-                            throw FxTrace.Exception.AsError(new ProtocolException(SR.GetString(SR.EncoderUnrecognizedContentType, contentType, this.ContentType)));
+                            throw FxTrace.Exception.AsError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.EncoderUnrecognizedContentType,
+                                        contentType,
+                                        this.ContentType
+                                    )
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        if (this.factory.CompressionFormat == CompressionFormat.GZip && ContentTypeEqualsOrStartsWith(contentType, this.gzipCompressedContentType))
+                        if (
+                            this.factory.CompressionFormat == CompressionFormat.GZip
+                            && ContentTypeEqualsOrStartsWith(
+                                contentType,
+                                this.gzipCompressedContentType
+                            )
+                        )
                         {
                             compressionFormat = CompressionFormat.GZip;
                         }
-                        else if (this.factory.CompressionFormat == CompressionFormat.Deflate && ContentTypeEqualsOrStartsWith(contentType, this.deflateCompressedContentType))
+                        else if (
+                            this.factory.CompressionFormat == CompressionFormat.Deflate
+                            && ContentTypeEqualsOrStartsWith(
+                                contentType,
+                                this.deflateCompressedContentType
+                            )
+                        )
                         {
                             compressionFormat = CompressionFormat.Deflate;
                         }
@@ -960,7 +1217,15 @@ namespace System.ServiceModel.Channels
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(new ProtocolException(SR.GetString(SR.EncoderUnrecognizedContentType, contentType, this.ContentType)));
+                            throw FxTrace.Exception.AsError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.EncoderUnrecognizedContentType,
+                                        contentType,
+                                        this.ContentType
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -974,14 +1239,29 @@ namespace System.ServiceModel.Channels
                 if (compressionFormat != CompressionFormat.None && !this.isSession)
                 {
                     string acceptEncoding;
-                    if (message.Properties.TryGetValue<string>(SupportedCompressionTypesMessageProperty, out acceptEncoding) &&
-                        acceptEncoding != null)
+                    if (
+                        message.Properties.TryGetValue<string>(
+                            SupportedCompressionTypesMessageProperty,
+                            out acceptEncoding
+                        )
+                        && acceptEncoding != null
+                    )
                     {
                         acceptEncoding = acceptEncoding.ToLowerInvariant();
-                        if ((compressionFormat == CompressionFormat.GZip &&
-                            !acceptEncoding.Contains(MessageEncoderCompressionHandler.GZipContentEncoding)) ||
-                            (compressionFormat == CompressionFormat.Deflate &&
-                            !acceptEncoding.Contains(MessageEncoderCompressionHandler.DeflateContentEncoding)))
+                        if (
+                            (
+                                compressionFormat == CompressionFormat.GZip
+                                && !acceptEncoding.Contains(
+                                    MessageEncoderCompressionHandler.GZipContentEncoding
+                                )
+                            )
+                            || (
+                                compressionFormat == CompressionFormat.Deflate
+                                && !acceptEncoding.Contains(
+                                    MessageEncoderCompressionHandler.DeflateContentEncoding
+                                )
+                            )
+                        )
                         {
                             compressionFormat = CompressionFormat.None;
                         }
@@ -1133,8 +1413,13 @@ namespace System.ServiceModel.Channels
         {
             if (key < 0 || key >= 0x4000)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("key", key,
-                    SR.GetString(SR.ValueMustBeInRange, 0, 0x4000)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "key",
+                        key,
+                        SR.GetString(SR.ValueMustBeInRange, 0, 0x4000)
+                    )
+                );
             }
             if (key >= 0x80)
             {
@@ -1156,8 +1441,13 @@ namespace System.ServiceModel.Channels
         {
             if (value < 0 || value > 0xFF)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                    SR.GetString(SR.ValueMustBeInRange, 0, 0xFF)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "value",
+                        value,
+                        SR.GetString(SR.ValueMustBeInRange, 0, 0xFF)
+                    )
+                );
             }
             this.bytes.Add((byte)value);
         }
@@ -1182,8 +1472,13 @@ namespace System.ServiceModel.Channels
         {
             if (prefix < 'a' && prefix > 'z')
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("prefix", prefix,
-                    SR.GetString(SR.ValueMustBeInRange, 'a', 'z')));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "prefix",
+                        prefix,
+                        SR.GetString(SR.ValueMustBeInRange, 'a', 'z')
+                    )
+                );
             }
             return prefix - 'a';
         }
@@ -1222,12 +1517,22 @@ namespace System.ServiceModel.Channels
                 case 2:
                     return (buffer[offset] & 0x7f) + (buffer[offset + 1] << 7);
                 case 3:
-                    return (buffer[offset] & 0x7f) + ((buffer[offset + 1] & 0x7f) << 7) + (buffer[offset + 2] << 14);
+                    return (buffer[offset] & 0x7f)
+                        + ((buffer[offset + 1] & 0x7f) << 7)
+                        + (buffer[offset + 2] << 14);
                 case 4:
-                    return (buffer[offset] & 0x7f) + ((buffer[offset + 1] & 0x7f) << 7) + ((buffer[offset + 2] & 0x7f) << 14) + (buffer[offset + 3] << 21);
+                    return (buffer[offset] & 0x7f)
+                        + ((buffer[offset + 1] & 0x7f) << 7)
+                        + ((buffer[offset + 2] & 0x7f) << 14)
+                        + (buffer[offset + 3] << 21);
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("size", size,
-                        SR.GetString(SR.ValueMustBeInRange, 1, 4)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "size",
+                            size,
+                            SR.GetString(SR.ValueMustBeInRange, 1, 4)
+                        )
+                    );
             }
         }
 
@@ -1236,7 +1541,7 @@ namespace System.ServiceModel.Channels
             return ParseInt32(buffer, offset, size);
         }
 
-        public unsafe static UniqueId ParseUniqueID(byte[] buffer, int offset, int size)
+        public static unsafe UniqueId ParseUniqueID(byte[] buffer, int offset, int size)
         {
             return new UniqueId(buffer, offset);
         }
@@ -1257,7 +1562,6 @@ namespace System.ServiceModel.Channels
             }
             return buffer2.Length;
         }
-
 
         public static bool MatchAttributeNode(byte[] buffer, int offset, int size)
         {
@@ -1348,77 +1652,154 @@ namespace System.ServiceModel.Channels
             char addressingPrefix = AddressingStrings.Prefix[0];
 
             // <s:Envelope xmlns:s="soap-ns" xmlns="addressing-ns">
-            builder.AppendPrefixDictionaryElement(messagePrefix, builder.GetStaticKey(messageDictionary.Envelope.Key));
-            builder.AppendDictionaryXmlnsAttribute(messagePrefix, builder.GetStaticKey(message12Dictionary.Namespace.Key));
-            builder.AppendDictionaryXmlnsAttribute(addressingPrefix, builder.GetStaticKey(addressing10Dictionary.Namespace.Key));
+            builder.AppendPrefixDictionaryElement(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.Envelope.Key)
+            );
+            builder.AppendDictionaryXmlnsAttribute(
+                messagePrefix,
+                builder.GetStaticKey(message12Dictionary.Namespace.Key)
+            );
+            builder.AppendDictionaryXmlnsAttribute(
+                addressingPrefix,
+                builder.GetStaticKey(addressing10Dictionary.Namespace.Key)
+            );
 
             // <s:Header>
-            builder.AppendPrefixDictionaryElement(messagePrefix, builder.GetStaticKey(messageDictionary.Header.Key));
+            builder.AppendPrefixDictionaryElement(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.Header.Key)
+            );
 
             // <a:Action>...
-            builder.AppendPrefixDictionaryElement(addressingPrefix, builder.GetStaticKey(addressingDictionary.Action.Key));
-            builder.AppendPrefixDictionaryAttribute(messagePrefix, builder.GetStaticKey(messageDictionary.MustUnderstand.Key), '1');
+            builder.AppendPrefixDictionaryElement(
+                addressingPrefix,
+                builder.GetStaticKey(addressingDictionary.Action.Key)
+            );
+            builder.AppendPrefixDictionaryAttribute(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.MustUnderstand.Key),
+                '1'
+            );
             builder.AppendDictionaryTextWithEndElement();
             commonFragment = builder.ToByteArray();
 
             // <a:MessageID>...
-            builder.AppendPrefixDictionaryElement(addressingPrefix, builder.GetStaticKey(addressingDictionary.MessageId.Key));
+            builder.AppendPrefixDictionaryElement(
+                addressingPrefix,
+                builder.GetStaticKey(addressingDictionary.MessageId.Key)
+            );
             builder.AppendUniqueIDWithEndElement();
             requestFragment1 = builder.ToByteArray();
 
             // <a:ReplyTo><a:Address>static-anonymous-key</a:Address></a:ReplyTo>
-            builder.AppendPrefixDictionaryElement(addressingPrefix, builder.GetStaticKey(addressingDictionary.ReplyTo.Key));
-            builder.AppendPrefixDictionaryElement(addressingPrefix, builder.GetStaticKey(addressingDictionary.Address.Key));
-            builder.AppendDictionaryTextWithEndElement(builder.GetStaticKey(addressing10Dictionary.Anonymous.Key));
+            builder.AppendPrefixDictionaryElement(
+                addressingPrefix,
+                builder.GetStaticKey(addressingDictionary.ReplyTo.Key)
+            );
+            builder.AppendPrefixDictionaryElement(
+                addressingPrefix,
+                builder.GetStaticKey(addressingDictionary.Address.Key)
+            );
+            builder.AppendDictionaryTextWithEndElement(
+                builder.GetStaticKey(addressing10Dictionary.Anonymous.Key)
+            );
             builder.AppendEndElement();
 
             // <a:To>session-to-key</a:To>
-            builder.AppendPrefixDictionaryElement(addressingPrefix, builder.GetStaticKey(addressingDictionary.To.Key));
-            builder.AppendPrefixDictionaryAttribute(messagePrefix, builder.GetStaticKey(messageDictionary.MustUnderstand.Key), '1');
+            builder.AppendPrefixDictionaryElement(
+                addressingPrefix,
+                builder.GetStaticKey(addressingDictionary.To.Key)
+            );
+            builder.AppendPrefixDictionaryAttribute(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.MustUnderstand.Key),
+                '1'
+            );
             builder.AppendDictionaryTextWithEndElement(builder.GetSessionKey(ToValueSessionKey));
 
             // </s:Header>
             builder.AppendEndElement();
 
             // <s:Body>
-            builder.AppendPrefixDictionaryElement(messagePrefix, builder.GetStaticKey(messageDictionary.Body.Key));
+            builder.AppendPrefixDictionaryElement(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.Body.Key)
+            );
             requestFragment2 = builder.ToByteArray();
 
             // <a:RelatesTo>...
-            builder.AppendPrefixDictionaryElement(addressingPrefix, builder.GetStaticKey(addressingDictionary.RelatesTo.Key));
+            builder.AppendPrefixDictionaryElement(
+                addressingPrefix,
+                builder.GetStaticKey(addressingDictionary.RelatesTo.Key)
+            );
             builder.AppendUniqueIDWithEndElement();
             responseFragment1 = builder.ToByteArray();
 
             // <a:To>static-anonymous-key</a:To>
-            builder.AppendPrefixDictionaryElement(addressingPrefix, builder.GetStaticKey(addressingDictionary.To.Key));
-            builder.AppendPrefixDictionaryAttribute(messagePrefix, builder.GetStaticKey(messageDictionary.MustUnderstand.Key), '1');
-            builder.AppendDictionaryTextWithEndElement(builder.GetStaticKey(addressing10Dictionary.Anonymous.Key));
+            builder.AppendPrefixDictionaryElement(
+                addressingPrefix,
+                builder.GetStaticKey(addressingDictionary.To.Key)
+            );
+            builder.AppendPrefixDictionaryAttribute(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.MustUnderstand.Key),
+                '1'
+            );
+            builder.AppendDictionaryTextWithEndElement(
+                builder.GetStaticKey(addressing10Dictionary.Anonymous.Key)
+            );
 
             // </s:Header>
             builder.AppendEndElement();
 
             // <s:Body>
-            builder.AppendPrefixDictionaryElement(messagePrefix, builder.GetStaticKey(messageDictionary.Body.Key));
+            builder.AppendPrefixDictionaryElement(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.Body.Key)
+            );
             responseFragment2 = builder.ToByteArray();
 
             // <s:Envelope xmlns:s="soap-ns" xmlns="addressing-ns">
-            builder.AppendPrefixDictionaryElement(messagePrefix, builder.GetStaticKey(messageDictionary.Envelope.Key));
-            builder.AppendDictionaryXmlnsAttribute(messagePrefix, builder.GetStaticKey(message12Dictionary.Namespace.Key));
-            builder.AppendDictionaryXmlnsAttribute(addressingPrefix, builder.GetStaticKey(addressing10Dictionary.Namespace.Key));
+            builder.AppendPrefixDictionaryElement(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.Envelope.Key)
+            );
+            builder.AppendDictionaryXmlnsAttribute(
+                messagePrefix,
+                builder.GetStaticKey(message12Dictionary.Namespace.Key)
+            );
+            builder.AppendDictionaryXmlnsAttribute(
+                addressingPrefix,
+                builder.GetStaticKey(addressing10Dictionary.Namespace.Key)
+            );
 
             // <s:Body>
-            builder.AppendPrefixDictionaryElement(messagePrefix, builder.GetStaticKey(messageDictionary.Body.Key));
+            builder.AppendPrefixDictionaryElement(
+                messagePrefix,
+                builder.GetStaticKey(messageDictionary.Body.Key)
+            );
             bodyFragment = builder.ToByteArray();
         }
 
-        public MessagePatterns(IXmlDictionary dictionary, XmlBinaryReaderSession readerSession, MessageVersion messageVersion)
+        public MessagePatterns(
+            IXmlDictionary dictionary,
+            XmlBinaryReaderSession readerSession,
+            MessageVersion messageVersion
+        )
         {
             this.dictionary = dictionary;
             this.readerSession = readerSession;
             this.messageVersion = messageVersion;
         }
 
-        public Message TryCreateMessage(byte[] buffer, int offset, int size, BufferManager bufferManager, BufferedMessageData messageData)
+        public Message TryCreateMessage(
+            byte[] buffer,
+            int offset,
+            int size,
+            BufferManager bufferManager,
+            BufferedMessageData messageData
+        )
         {
             RelatesToHeader relatesToHeader;
             MessageIDHeader messageIDHeader;
@@ -1427,7 +1808,12 @@ namespace System.ServiceModel.Channels
             int currentOffset = offset;
             int remainingSize = size;
 
-            int bytesMatched = BinaryFormatParser.MatchBytes(buffer, currentOffset, remainingSize, commonFragment);
+            int bytesMatched = BinaryFormatParser.MatchBytes(
+                buffer,
+                currentOffset,
+                remainingSize,
+                commonFragment
+            );
             if (bytesMatched == 0)
             {
                 return null;
@@ -1447,13 +1833,22 @@ namespace System.ServiceModel.Channels
 
             int totalBytesMatched;
 
-            bytesMatched = BinaryFormatParser.MatchBytes(buffer, currentOffset, remainingSize, requestFragment1);
+            bytesMatched = BinaryFormatParser.MatchBytes(
+                buffer,
+                currentOffset,
+                remainingSize,
+                requestFragment1
+            );
             if (bytesMatched != 0)
             {
                 currentOffset += bytesMatched;
                 remainingSize -= bytesMatched;
 
-                bytesMatched = BinaryFormatParser.MatchUniqueID(buffer, currentOffset, remainingSize);
+                bytesMatched = BinaryFormatParser.MatchUniqueID(
+                    buffer,
+                    currentOffset,
+                    remainingSize
+                );
                 if (bytesMatched == 0)
                 {
                     return null;
@@ -1463,7 +1858,12 @@ namespace System.ServiceModel.Channels
                 currentOffset += bytesMatched;
                 remainingSize -= bytesMatched;
 
-                bytesMatched = BinaryFormatParser.MatchBytes(buffer, currentOffset, remainingSize, requestFragment2);
+                bytesMatched = BinaryFormatParser.MatchBytes(
+                    buffer,
+                    currentOffset,
+                    remainingSize,
+                    requestFragment2
+                );
                 if (bytesMatched == 0)
                 {
                     return null;
@@ -1476,7 +1876,11 @@ namespace System.ServiceModel.Channels
                     return null;
                 }
 
-                UniqueId messageId = BinaryFormatParser.ParseUniqueID(buffer, messageIDOffset, messageIDSize);
+                UniqueId messageId = BinaryFormatParser.ParseUniqueID(
+                    buffer,
+                    messageIDOffset,
+                    messageIDSize
+                );
                 messageIDHeader = MessageIDHeader.Create(messageId, messageVersion.Addressing);
                 relatesToHeader = null;
 
@@ -1485,11 +1889,17 @@ namespace System.ServiceModel.Channels
                     return null;
                 }
 
-                totalBytesMatched = requestFragment1.Length + messageIDSize + requestFragment2.Length;
+                totalBytesMatched =
+                    requestFragment1.Length + messageIDSize + requestFragment2.Length;
             }
             else
             {
-                bytesMatched = BinaryFormatParser.MatchBytes(buffer, currentOffset, remainingSize, responseFragment1);
+                bytesMatched = BinaryFormatParser.MatchBytes(
+                    buffer,
+                    currentOffset,
+                    remainingSize,
+                    responseFragment1
+                );
 
                 if (bytesMatched == 0)
                 {
@@ -1499,7 +1909,11 @@ namespace System.ServiceModel.Channels
                 currentOffset += bytesMatched;
                 remainingSize -= bytesMatched;
 
-                bytesMatched = BinaryFormatParser.MatchUniqueID(buffer, currentOffset, remainingSize);
+                bytesMatched = BinaryFormatParser.MatchUniqueID(
+                    buffer,
+                    currentOffset,
+                    remainingSize
+                );
                 if (bytesMatched == 0)
                 {
                     return null;
@@ -1509,7 +1923,12 @@ namespace System.ServiceModel.Channels
                 currentOffset += bytesMatched;
                 remainingSize -= bytesMatched;
 
-                bytesMatched = BinaryFormatParser.MatchBytes(buffer, currentOffset, remainingSize, responseFragment2);
+                bytesMatched = BinaryFormatParser.MatchBytes(
+                    buffer,
+                    currentOffset,
+                    remainingSize,
+                    responseFragment2
+                );
                 if (bytesMatched == 0)
                 {
                     return null;
@@ -1522,12 +1941,17 @@ namespace System.ServiceModel.Channels
                     return null;
                 }
 
-                UniqueId messageId = BinaryFormatParser.ParseUniqueID(buffer, messageIDOffset, messageIDSize);
+                UniqueId messageId = BinaryFormatParser.ParseUniqueID(
+                    buffer,
+                    messageIDOffset,
+                    messageIDSize
+                );
                 relatesToHeader = RelatesToHeader.Create(messageId, messageVersion.Addressing);
                 messageIDHeader = null;
                 toString = XD.Addressing10Dictionary.Anonymous;
 
-                totalBytesMatched = responseFragment1.Length + messageIDSize + responseFragment2.Length;
+                totalBytesMatched =
+                    responseFragment1.Length + messageIDSize + responseFragment2.Length;
             }
 
             totalBytesMatched += commonFragment.Length + actionSize;
@@ -1540,7 +1964,10 @@ namespace System.ServiceModel.Channels
                 return null;
             }
 
-            ActionHeader actionHeader = ActionHeader.Create(actionString, messageVersion.Addressing);
+            ActionHeader actionHeader = ActionHeader.Create(
+                actionString,
+                messageVersion.Addressing
+            );
 
             if (toHeader == null)
             {
@@ -1623,8 +2050,12 @@ namespace System.ServiceModel.Channels
                 this.reader = reader;
             }
 
-            public PatternMessage(IBufferedMessageData messageData, MessageVersion messageVersion,
-                KeyValuePair<string, object>[] properties, MessageHeaders headers)
+            public PatternMessage(
+                IBufferedMessageData messageData,
+                MessageVersion messageVersion,
+                KeyValuePair<string, object>[] properties,
+                MessageHeaders headers
+            )
             {
                 this.messageData = messageData;
                 this.messageData.Open();
@@ -1661,7 +2092,6 @@ namespace System.ServiceModel.Channels
                 this.reader = reader;
             }
 
-
             public override MessageHeaders Headers
             {
                 get
@@ -1670,7 +2100,9 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
 
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateMessageDisposedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateMessageDisposedException()
+                        );
                     }
                     return headers;
                 }
@@ -1684,7 +2116,9 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
 
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateMessageDisposedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateMessageDisposedException()
+                        );
                     }
                     return properties;
                 }
@@ -1707,7 +2141,9 @@ namespace System.ServiceModel.Channels
                     if (IsDisposed)
                     {
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateMessageDisposedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateMessageDisposedException()
+                        );
                     }
                     return headers.MessageVersion;
                 }
@@ -1817,10 +2253,17 @@ namespace System.ServiceModel.Channels
 
             protected override MessageBuffer OnCreateBufferedCopy(int maxBufferSize)
             {
-                KeyValuePair<string, object>[] properties = new KeyValuePair<string, object>[Properties.Count];
+                KeyValuePair<string, object>[] properties = new KeyValuePair<string, object>[
+                    Properties.Count
+                ];
                 ((ICollection<KeyValuePair<string, object>>)Properties).CopyTo(properties, 0);
                 messageData.EnableMultipleUsers();
-                return new PatternMessageBuffer(this.messageData, this.Version, properties, this.headers);
+                return new PatternMessageBuffer(
+                    this.messageData,
+                    this.Version,
+                    properties,
+                    this.headers
+                );
             }
 
             protected override XmlDictionaryReader OnGetReaderAtBodyContents()
@@ -1846,8 +2289,12 @@ namespace System.ServiceModel.Channels
             object thisLock = new object();
             RecycledMessageState recycledMessageState;
 
-            public PatternMessageBuffer(IBufferedMessageData messageDataAtBody, MessageVersion messageVersion,
-                KeyValuePair<string, object>[] properties, MessageHeaders headers)
+            public PatternMessageBuffer(
+                IBufferedMessageData messageDataAtBody,
+                MessageVersion messageVersion,
+                KeyValuePair<string, object>[] properties,
+                MessageHeaders headers
+            )
             {
                 this.messageDataAtBody = messageDataAtBody;
                 this.messageDataAtBody.Open();
@@ -1876,7 +2323,9 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.closed)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                CreateBufferDisposedException()
+                            );
                         }
 
                         return messageDataAtBody.Buffer.Count;
@@ -1886,10 +2335,7 @@ namespace System.ServiceModel.Channels
 
             object ThisLock
             {
-                get
-                {
-                    return this.thisLock;
-                }
+                get { return this.thisLock; }
             }
 
             public override void Close()
@@ -1917,11 +2363,17 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.closed)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateBufferDisposedException()
+                        );
                     }
 
-                    return new PatternMessage(this.messageDataAtBody, this.messageVersion, this.properties,
-                        this.headers);
+                    return new PatternMessage(
+                        this.messageDataAtBody,
+                        this.messageVersion,
+                        this.properties,
+                        this.headers
+                    );
                 }
             }
         }

@@ -245,25 +245,20 @@ public class MvcServiceCollectionExtensionsTest
 
         // Assert
         // Adds controllers
-        Assert.Contains(
-            services,
-            s =>
-                s.ServiceType == typeof(IActionInvokerProvider)
-                && s.ImplementationType == typeof(ControllerActionInvokerProvider)
+        Assert.Contains(services, s =>
+            s.ServiceType == typeof(IActionInvokerProvider)
+            && s.ImplementationType == typeof(ControllerActionInvokerProvider)
         );
         // Adds ApiExplorer
-        Assert.Contains(
-            services,
-            s => s.ServiceType == typeof(IApiDescriptionGroupCollectionProvider)
+        Assert.Contains(services, s =>
+            s.ServiceType == typeof(IApiDescriptionGroupCollectionProvider)
         );
         // Adds CORS
         Assert.Contains(services, s => s.ServiceType == typeof(CorsAuthorizationFilter));
         // Adds DataAnnotations
-        Assert.Contains(
-            services,
-            s =>
-                s.ServiceType == typeof(IConfigureOptions<MvcOptions>)
-                && s.ImplementationType == typeof(MvcDataAnnotationsMvcOptionsSetup)
+        Assert.Contains(services, s =>
+            s.ServiceType == typeof(IConfigureOptions<MvcOptions>)
+            && s.ImplementationType == typeof(MvcDataAnnotationsMvcOptionsSetup)
         );
         // Adds FormatterMappings
         Assert.Contains(services, s => s.ServiceType == typeof(FormatFilter));
@@ -336,22 +331,19 @@ public class MvcServiceCollectionExtensionsTest
         services.AddMvc();
 
         // Assert
-        var descriptor = Assert.Single(
-            services,
-            d => d.ServiceType == typeof(ApplicationPartManager)
+        var descriptor = Assert.Single(services, d =>
+            d.ServiceType == typeof(ApplicationPartManager)
         );
         Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
         Assert.NotNull(descriptor.ImplementationInstance);
         var manager = Assert.IsType<ApplicationPartManager>(descriptor.ImplementationInstance);
 
         Assert.Equal(2, manager.ApplicationParts.Count);
-        Assert.Single(
-            manager.ApplicationParts.OfType<AssemblyPart>(),
-            p => p.Assembly == mvcRazorAssembly
+        Assert.Single(manager.ApplicationParts.OfType<AssemblyPart>(), p =>
+            p.Assembly == mvcRazorAssembly
         );
-        Assert.Single(
-            manager.ApplicationParts.OfType<AssemblyPart>(),
-            p => p.Assembly == mvcTagHelpersAssembly
+        Assert.Single(manager.ApplicationParts.OfType<AssemblyPart>(), p =>
+            p.Assembly == mvcTagHelpersAssembly
         );
     }
 
@@ -373,22 +365,19 @@ public class MvcServiceCollectionExtensionsTest
         services.AddMvc();
 
         // Assert
-        var descriptor = Assert.Single(
-            services,
-            d => d.ServiceType == typeof(ApplicationPartManager)
+        var descriptor = Assert.Single(services, d =>
+            d.ServiceType == typeof(ApplicationPartManager)
         );
         Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
         Assert.NotNull(descriptor.ImplementationInstance);
         var manager = Assert.IsType<ApplicationPartManager>(descriptor.ImplementationInstance);
 
         Assert.Equal(2, manager.ApplicationParts.Count);
-        Assert.Single(
-            manager.ApplicationParts.OfType<AssemblyPart>(),
-            p => p.Assembly == mvcRazorAssembly
+        Assert.Single(manager.ApplicationParts.OfType<AssemblyPart>(), p =>
+            p.Assembly == mvcRazorAssembly
         );
-        Assert.Single(
-            manager.ApplicationParts.OfType<AssemblyPart>(),
-            p => p.Assembly == mvcTagHelpersAssembly
+        Assert.Single(manager.ApplicationParts.OfType<AssemblyPart>(), p =>
+            p.Assembly == mvcTagHelpersAssembly
         );
     }
 
@@ -408,9 +397,8 @@ public class MvcServiceCollectionExtensionsTest
         services.AddMvc();
 
         // Assert
-        var descriptor = Assert.Single(
-            services,
-            d => d.ServiceType == typeof(ApplicationPartManager)
+        var descriptor = Assert.Single(services, d =>
+            d.ServiceType == typeof(ApplicationPartManager)
         );
         Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
         Assert.NotNull(descriptor.ImplementationInstance);
@@ -437,9 +425,8 @@ public class MvcServiceCollectionExtensionsTest
         services.AddMvc();
 
         // Assert
-        var descriptor = Assert.Single(
-            services,
-            d => d.ServiceType == typeof(ApplicationPartManager)
+        var descriptor = Assert.Single(services, d =>
+            d.ServiceType == typeof(ApplicationPartManager)
         );
         Assert.Same(manager, descriptor.ImplementationInstance);
     }
@@ -495,9 +482,8 @@ public class MvcServiceCollectionExtensionsTest
         services.AddMvc();
 
         // Assert
-        var descriptor = Assert.Single(
-            services,
-            item => item.ServiceType == typeof(ITempDataProvider)
+        var descriptor = Assert.Single(services, item =>
+            item.ServiceType == typeof(ITempDataProvider)
         );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
@@ -512,9 +498,8 @@ public class MvcServiceCollectionExtensionsTest
         var builder = services.AddMvc();
 
         // Assert
-        Assert.DoesNotContain(
-            services,
-            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+        Assert.DoesNotContain(services, item =>
+            item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
         );
     }
 

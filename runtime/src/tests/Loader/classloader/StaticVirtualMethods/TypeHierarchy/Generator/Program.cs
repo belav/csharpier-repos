@@ -14,26 +14,27 @@ namespace VirtualStaticInterfaceMethodTestGen
         {
             OnBaseType,
             OnBothBaseAndDerived,
-            OnBothBaseAndDerivedBaseIsAbstract
+            OnBothBaseAndDerivedBaseIsAbstract,
         }
 
         public struct TestScenario
         {
-            public TestScenario(int scenarioIndex,
+            public TestScenario(
+                int scenarioIndex,
                 string InterfaceReturnType,
-            string InterfaceTypeGenericParams,
-            string BaseTypeGenericParams,
-            string BaseTypeReturnType,
-            string InterfaceTypeInstantiationOnBaseType,
-            string DerivedTypeGenericParams,
-            string DerivedTypeReturnType,
-            string InterfaceTypeInstantiationOnDerivedType,
-            string BaseTypeInstantiationOnDerivedType,
-            string DerivedTypeInstantiation,
-            string CallReturnType,
-            string CallInterfaceTypeInstantiation,
-            InterfaceImplementationApproach InterfaceImplementationApproach
-                )
+                string InterfaceTypeGenericParams,
+                string BaseTypeGenericParams,
+                string BaseTypeReturnType,
+                string InterfaceTypeInstantiationOnBaseType,
+                string DerivedTypeGenericParams,
+                string DerivedTypeReturnType,
+                string InterfaceTypeInstantiationOnDerivedType,
+                string BaseTypeInstantiationOnDerivedType,
+                string DerivedTypeInstantiation,
+                string CallReturnType,
+                string CallInterfaceTypeInstantiation,
+                InterfaceImplementationApproach InterfaceImplementationApproach
+            )
             {
                 ScenarioName = $"Scenario{scenarioIndex}";
 
@@ -44,13 +45,15 @@ namespace VirtualStaticInterfaceMethodTestGen
                 this.InterfaceTypeInstantiationOnBaseType = InterfaceTypeInstantiationOnBaseType;
                 this.DerivedTypeGenericParams = DerivedTypeGenericParams;
                 this.DerivedTypeReturnType = DerivedTypeReturnType;
-                this.InterfaceTypeInstantiationOnDerivedType = InterfaceTypeInstantiationOnDerivedType;
+                this.InterfaceTypeInstantiationOnDerivedType =
+                    InterfaceTypeInstantiationOnDerivedType;
                 this.BaseTypeInstantiationOnDerivedType = BaseTypeInstantiationOnDerivedType;
                 this.DerivedTypeInstantiation = DerivedTypeInstantiation;
                 this.CallReturnType = CallReturnType;
                 this.CallInterfaceTypeInstantiation = CallInterfaceTypeInstantiation;
                 this.InterfaceImplementationApproach = InterfaceImplementationApproach;
             }
+
             public readonly string ScenarioName;
             public readonly string InterfaceReturnType;
             public readonly string InterfaceTypeGenericParams;
@@ -67,6 +70,7 @@ namespace VirtualStaticInterfaceMethodTestGen
             public readonly InterfaceImplementationApproach InterfaceImplementationApproach;
 
             public override string ToString() => ScenarioName;
+
             public static IEnumerable<TestScenario> GetScenarios()
             {
                 int scenarioIndex = 1;
@@ -87,7 +91,8 @@ namespace VirtualStaticInterfaceMethodTestGen
                     {
                         foreach (string baseTypeGenericParams in new string[] { "", "<T>" })
                         {
-                            List<string> possibleInterfaceTypeInstantiationOnBaseType = new List<string>();
+                            List<string> possibleInterfaceTypeInstantiationOnBaseType =
+                                new List<string>();
                             if (interfaceTypeGenericParams == "")
                             {
                                 possibleInterfaceTypeInstantiationOnBaseType.Add("");
@@ -98,10 +103,14 @@ namespace VirtualStaticInterfaceMethodTestGen
                                 if (baseTypeGenericParams == "<T>")
                                 {
                                     possibleInterfaceTypeInstantiationOnBaseType.Add("<!0>");
-                                    possibleInterfaceTypeInstantiationOnBaseType.Add("<class [System.Runtime]System.Action`1<!0>>");
+                                    possibleInterfaceTypeInstantiationOnBaseType.Add(
+                                        "<class [System.Runtime]System.Action`1<!0>>"
+                                    );
                                 }
                             }
-                            foreach (string interfaceTypeInstantiationOnBaseType in possibleInterfaceTypeInstantiationOnBaseType)
+                            foreach (
+                                string interfaceTypeInstantiationOnBaseType in possibleInterfaceTypeInstantiationOnBaseType
+                            )
                             {
                                 List<string> possibleBaseTypeReturnTypes = new List<string>();
                                 if (!interfaceReturnType.Contains("!0"))
@@ -114,34 +123,62 @@ namespace VirtualStaticInterfaceMethodTestGen
                                 }
                                 else
                                 {
-                                    possibleBaseTypeReturnTypes.Add(ApplyGenericSubstitution(interfaceReturnType, interfaceTypeInstantiationOnBaseType));
+                                    possibleBaseTypeReturnTypes.Add(
+                                        ApplyGenericSubstitution(
+                                            interfaceReturnType,
+                                            interfaceTypeInstantiationOnBaseType
+                                        )
+                                    );
                                 }
 
                                 foreach (string baseTypeReturnType in possibleBaseTypeReturnTypes)
                                 {
-                                    foreach (string derivedTypeGenericParams in new string[] { "", "<V>" })
+                                    foreach (
+                                        string derivedTypeGenericParams in new string[]
+                                        {
+                                            "",
+                                            "<V>",
+                                        }
+                                    )
                                     {
-                                        List<string> possibleBaseTypeInstantiationOnDerivedType = new List<string>();
+                                        List<string> possibleBaseTypeInstantiationOnDerivedType =
+                                            new List<string>();
                                         if (baseTypeGenericParams == "")
                                         {
                                             possibleBaseTypeInstantiationOnDerivedType.Add("");
                                         }
                                         else
                                         {
-                                            possibleBaseTypeInstantiationOnDerivedType.Add("<string>");
+                                            possibleBaseTypeInstantiationOnDerivedType.Add(
+                                                "<string>"
+                                            );
                                             if (derivedTypeGenericParams == "<V>")
                                             {
-                                                possibleBaseTypeInstantiationOnDerivedType.Add("<!0>");
-                                                possibleBaseTypeInstantiationOnDerivedType.Add("<class [System.Runtime]System.Func`1<!0>>");
+                                                possibleBaseTypeInstantiationOnDerivedType.Add(
+                                                    "<!0>"
+                                                );
+                                                possibleBaseTypeInstantiationOnDerivedType.Add(
+                                                    "<class [System.Runtime]System.Func`1<!0>>"
+                                                );
                                             }
                                         }
 
-                                        foreach (string baseTypeInstantiationOnDerivedType in possibleBaseTypeInstantiationOnDerivedType)
+                                        foreach (
+                                            string baseTypeInstantiationOnDerivedType in possibleBaseTypeInstantiationOnDerivedType
+                                        )
                                         {
-                                            string interfaceTypeInstantiationOnDerivedType = ApplyGenericSubstitution(interfaceTypeInstantiationOnBaseType, baseTypeInstantiationOnDerivedType);
-                                            string derivedTypeReturnType = ApplyGenericSubstitution(interfaceReturnType, interfaceTypeInstantiationOnDerivedType);
+                                            string interfaceTypeInstantiationOnDerivedType =
+                                                ApplyGenericSubstitution(
+                                                    interfaceTypeInstantiationOnBaseType,
+                                                    baseTypeInstantiationOnDerivedType
+                                                );
+                                            string derivedTypeReturnType = ApplyGenericSubstitution(
+                                                interfaceReturnType,
+                                                interfaceTypeInstantiationOnDerivedType
+                                            );
 
-                                            List<string> possibleDerivedTypeInstantiation = new List<string>();
+                                            List<string> possibleDerivedTypeInstantiation =
+                                                new List<string>();
                                             if (derivedTypeGenericParams == "")
                                             {
                                                 possibleDerivedTypeInstantiation.Add("");
@@ -152,12 +189,23 @@ namespace VirtualStaticInterfaceMethodTestGen
                                                 possibleDerivedTypeInstantiation.Add("<int32>");
                                             }
 
-                                            foreach (string derivedTypeInstantiation in possibleDerivedTypeInstantiation)
+                                            foreach (
+                                                string derivedTypeInstantiation in possibleDerivedTypeInstantiation
+                                            )
                                             {
                                                 string callReturnType = interfaceReturnType;
-                                                string callInterfaceTypeInstantiation = ApplyGenericSubstitution(interfaceTypeInstantiationOnDerivedType, derivedTypeInstantiation);
+                                                string callInterfaceTypeInstantiation =
+                                                    ApplyGenericSubstitution(
+                                                        interfaceTypeInstantiationOnDerivedType,
+                                                        derivedTypeInstantiation
+                                                    );
 
-                                                foreach (var interfaceImplementationApproach in (InterfaceImplementationApproach[])Enum.GetValues(typeof(InterfaceImplementationApproach)))
+                                                foreach (
+                                                    var interfaceImplementationApproach in (InterfaceImplementationApproach[])
+                                                        Enum.GetValues(
+                                                            typeof(InterfaceImplementationApproach)
+                                                        )
+                                                )
                                                 {
                                                     if (baseTypeReturnType == "string")
                                                     {
@@ -165,20 +213,22 @@ namespace VirtualStaticInterfaceMethodTestGen
                                                         // We decided covariant scenarios aren't supported
                                                         continue;
                                                     }
-                                                    yield return new TestScenario(scenarioIndex++,
-                                                                                  interfaceReturnType,
-                                                                                  interfaceTypeGenericParams,
-                                                                                  baseTypeGenericParams,
-                                                                                  baseTypeReturnType,
-                                                                                  interfaceTypeInstantiationOnBaseType,
-                                                                                  derivedTypeGenericParams,
-                                                                                  derivedTypeReturnType,
-                                                                                  interfaceTypeInstantiationOnDerivedType,
-                                                                                  baseTypeInstantiationOnDerivedType,
-                                                                                  derivedTypeInstantiation,
-                                                                                  callReturnType,
-                                                                                  callInterfaceTypeInstantiation,
-                                                                                  interfaceImplementationApproach);
+                                                    yield return new TestScenario(
+                                                        scenarioIndex++,
+                                                        interfaceReturnType,
+                                                        interfaceTypeGenericParams,
+                                                        baseTypeGenericParams,
+                                                        baseTypeReturnType,
+                                                        interfaceTypeInstantiationOnBaseType,
+                                                        derivedTypeGenericParams,
+                                                        derivedTypeReturnType,
+                                                        interfaceTypeInstantiationOnDerivedType,
+                                                        baseTypeInstantiationOnDerivedType,
+                                                        derivedTypeInstantiation,
+                                                        callReturnType,
+                                                        callInterfaceTypeInstantiation,
+                                                        interfaceImplementationApproach
+                                                    );
                                                 }
                                             }
                                         }
@@ -214,7 +264,9 @@ namespace VirtualStaticInterfaceMethodTestGen
             tw.WriteLine("// Licensed to the .NET Foundation under one or more agreements.");
             tw.WriteLine("// The .NET Foundation licenses this file to you under the MIT license.");
             tw.WriteLine("");
-            tw.WriteLine("// THIS FILE IS AUTOGENERATED EDIT Generator/Program.cs instead and rerun the generator");
+            tw.WriteLine(
+                "// THIS FILE IS AUTOGENERATED EDIT Generator/Program.cs instead and rerun the generator"
+            );
             tw.WriteLine(".assembly extern System.Console {}");
             tw.WriteLine(".assembly extern mscorlib {}");
             tw.WriteLine(".assembly extern System.Runtime {}");
@@ -225,6 +277,7 @@ namespace VirtualStaticInterfaceMethodTestGen
         {
             tw.WriteLine($".assembly extern {assemblyName} {{}}");
         }
+
         static void EmitAssemblyRecord(TextWriter tw, string assemblyName)
         {
             tw.WriteLine($".assembly {assemblyName} {{}}");
@@ -293,7 +346,9 @@ namespace VirtualStaticInterfaceMethodTestGen
 
         static void EmitMethod(TextWriter tw, MethodDesc md)
         {
-            tw.WriteLine($"  .method { md.MethodFlags} {md.ReturnType} {md.Name}({md.Arguments}) cil managed noinlining");
+            tw.WriteLine(
+                $"  .method {md.MethodFlags} {md.ReturnType} {md.Name}({md.Arguments}) cil managed noinlining"
+            );
             tw.WriteLine("  {");
             if (md.MethodImpls != null)
             {
@@ -324,6 +379,7 @@ namespace VirtualStaticInterfaceMethodTestGen
                 return typeName;
             }
         }
+
         static void Main(string[] args)
         {
             int maxCases = Int32.MaxValue;
@@ -336,7 +392,9 @@ namespace VirtualStaticInterfaceMethodTestGen
                 maxCases = Int32.Parse(args[1]);
                 scenarioSuffix = args[2];
             }
-            using StreamWriter twOutputTest = new StreamWriter(Path.Combine(rootPath, @$"{TestAssemblyName}{scenarioSuffix}.il"));
+            using StreamWriter twOutputTest = new StreamWriter(
+                Path.Combine(rootPath, @$"{TestAssemblyName}{scenarioSuffix}.il")
+            );
 
             StringWriter swMainMethodBody = new StringWriter();
             StringWriter swTestClassMethods = new StringWriter();
@@ -355,7 +413,11 @@ namespace VirtualStaticInterfaceMethodTestGen
                 ClassDesc iface = new ClassDesc();
                 iface.ClassFlags = "interface public abstract auto ansi";
                 iface.GenericParams = scenario.InterfaceTypeGenericParams;
-                iface.Name = "Interface" + scenarioName + GenericTypeSuffix(scenario.InterfaceTypeGenericParams); ;
+                iface.Name =
+                    "Interface"
+                    + scenarioName
+                    + GenericTypeSuffix(scenario.InterfaceTypeGenericParams);
+                ;
 
                 EmitClass(twOutputTest, iface);
                 MethodDesc ifaceMethod = new MethodDesc();
@@ -386,10 +448,14 @@ namespace VirtualStaticInterfaceMethodTestGen
                         throw new Exception("Unknown interface approach");
                 }
                 baseType.GenericParams = scenario.BaseTypeGenericParams;
-                baseType.Name = "Base" + scenarioName + GenericTypeSuffix(scenario.BaseTypeGenericParams);
+                baseType.Name =
+                    "Base" + scenarioName + GenericTypeSuffix(scenario.BaseTypeGenericParams);
                 if (scenario.InterfaceImplementationApproach.ToString().Contains("Base"))
                 {
-                    baseType.InterfacesImplemented = new string[] { ToILDasmTypeName(iface.Name, scenario.InterfaceTypeInstantiationOnBaseType) };
+                    baseType.InterfacesImplemented = new string[]
+                    {
+                        ToILDasmTypeName(iface.Name, scenario.InterfaceTypeInstantiationOnBaseType),
+                    };
                 }
                 EmitClass(twOutputTest, baseType);
                 switch (scenario.InterfaceImplementationApproach)
@@ -402,8 +468,12 @@ namespace VirtualStaticInterfaceMethodTestGen
                         ifaceImplMethod.ReturnType = scenario.BaseTypeReturnType;
                         ifaceImplMethod.Name = "Method";
                         EmitMethod(twOutputTest, ifaceImplMethod);
-                        twOutputTest.WriteLine($"    .override method {scenario.InterfaceReturnType} {ToILDasmTypeName(iface.Name, scenario.InterfaceTypeInstantiationOnBaseType)}::Method()");
-                        twOutputTest.WriteLine($"    .locals init ({scenario.BaseTypeReturnType} V_O)");
+                        twOutputTest.WriteLine(
+                            $"    .override method {scenario.InterfaceReturnType} {ToILDasmTypeName(iface.Name, scenario.InterfaceTypeInstantiationOnBaseType)}::Method()"
+                        );
+                        twOutputTest.WriteLine(
+                            $"    .locals init ({scenario.BaseTypeReturnType} V_O)"
+                        );
                         twOutputTest.WriteLine($"    ldloca.s 0");
                         twOutputTest.WriteLine($"    initobj {scenario.BaseTypeReturnType}");
                         twOutputTest.WriteLine($"    ldloc.0");
@@ -421,7 +491,10 @@ namespace VirtualStaticInterfaceMethodTestGen
 
                 // Emit derived class.
                 ClassDesc derivedType = new ClassDesc();
-                derivedType.BaseType = ToILDasmTypeName(baseType.Name, scenario.BaseTypeInstantiationOnDerivedType);
+                derivedType.BaseType = ToILDasmTypeName(
+                    baseType.Name,
+                    scenario.BaseTypeInstantiationOnDerivedType
+                );
                 switch (scenario.InterfaceImplementationApproach)
                 {
                     case InterfaceImplementationApproach.OnBaseType:
@@ -433,11 +506,18 @@ namespace VirtualStaticInterfaceMethodTestGen
                     default:
                         throw new Exception("Unknown interface approach");
                 }
-                derivedType.Name = "Derived" + scenarioName + GenericTypeSuffix(scenario.DerivedTypeGenericParams);
+                derivedType.Name =
+                    "Derived" + scenarioName + GenericTypeSuffix(scenario.DerivedTypeGenericParams);
                 derivedType.GenericParams = scenario.DerivedTypeGenericParams;
                 if (scenario.InterfaceImplementationApproach.ToString().Contains("Derived"))
                 {
-                    derivedType.InterfacesImplemented = new string[] { ToILDasmTypeName(iface.Name, scenario.InterfaceTypeInstantiationOnDerivedType) };
+                    derivedType.InterfacesImplemented = new string[]
+                    {
+                        ToILDasmTypeName(
+                            iface.Name,
+                            scenario.InterfaceTypeInstantiationOnDerivedType
+                        ),
+                    };
                 }
 
                 EmitClass(twOutputTest, derivedType);
@@ -454,8 +534,12 @@ namespace VirtualStaticInterfaceMethodTestGen
                         ifaceImplMethod.ReturnType = scenario.DerivedTypeReturnType;
                         ifaceImplMethod.Name = "MethodImplOnDerived";
                         EmitMethod(twOutputTest, ifaceImplMethod);
-                        twOutputTest.WriteLine($"    .override method {scenario.InterfaceReturnType} {ToILDasmTypeName(iface.Name, scenario.InterfaceTypeInstantiationOnDerivedType)}::Method()");
-                        twOutputTest.WriteLine($"    .locals init ({scenario.DerivedTypeReturnType} V_O)");
+                        twOutputTest.WriteLine(
+                            $"    .override method {scenario.InterfaceReturnType} {ToILDasmTypeName(iface.Name, scenario.InterfaceTypeInstantiationOnDerivedType)}::Method()"
+                        );
+                        twOutputTest.WriteLine(
+                            $"    .locals init ({scenario.DerivedTypeReturnType} V_O)"
+                        );
                         twOutputTest.WriteLine($"    ldloca.s 0");
                         twOutputTest.WriteLine($"    initobj {scenario.DerivedTypeReturnType}");
                         twOutputTest.WriteLine($"    ldloc.0");
@@ -478,8 +562,12 @@ namespace VirtualStaticInterfaceMethodTestGen
                 mdIndividualTestMethod.Arguments = "";
 
                 EmitMethod(swTestClassMethods, mdIndividualTestMethod);
-                swTestClassMethods.WriteLine($"    constrained. {ToILDasmTypeName(derivedType.Name, scenario.DerivedTypeInstantiation)}");
-                swTestClassMethods.WriteLine($"    call {scenario.CallReturnType} {ToILDasmTypeName(iface.Name, scenario.CallInterfaceTypeInstantiation)}::Method()");
+                swTestClassMethods.WriteLine(
+                    $"    constrained. {ToILDasmTypeName(derivedType.Name, scenario.DerivedTypeInstantiation)}"
+                );
+                swTestClassMethods.WriteLine(
+                    $"    call {scenario.CallReturnType} {ToILDasmTypeName(iface.Name, scenario.CallInterfaceTypeInstantiation)}::Method()"
+                );
                 if (scenario.CallReturnType != "void")
                 {
                     // TODO: should we rather convert the value to string and stsfld Statics.String?
@@ -487,20 +575,28 @@ namespace VirtualStaticInterfaceMethodTestGen
                 }
                 swTestClassMethods.WriteLine($"    ldstr \"{scenarioName}\"");
                 swTestClassMethods.WriteLine($"    ldnull");
-                swTestClassMethods.WriteLine($"    call void {CommonCsPrefix}Statics::CheckForFailure(string,string)");
+                swTestClassMethods.WriteLine(
+                    $"    call void {CommonCsPrefix}Statics::CheckForFailure(string,string)"
+                );
                 swTestClassMethods.WriteLine($"    ret");
                 EmitEndMethod(swTestClassMethods, mdIndividualTestMethod);
                 // Call test method from main method
                 swMainMethodBody.WriteLine("    .try {");
-                swMainMethodBody.WriteLine($"        call void TestEntrypoint::{mdIndividualTestMethod.Name}()");
+                swMainMethodBody.WriteLine(
+                    $"        call void TestEntrypoint::{mdIndividualTestMethod.Name}()"
+                );
                 swMainMethodBody.WriteLine($"        leave.s {scenarioName}Done");
                 swMainMethodBody.WriteLine("    } catch [System.Runtime]System.Exception {");
                 swMainMethodBody.WriteLine($"        stloc.0");
                 swMainMethodBody.WriteLine($"        ldstr \"{scenarioName}\"");
                 swMainMethodBody.WriteLine($"        ldnull");
                 swMainMethodBody.WriteLine($"        ldloc.0");
-                swMainMethodBody.WriteLine($"        callvirt   instance string [System.Runtime]System.Object::ToString()");
-                swMainMethodBody.WriteLine($"        call void [TypeHierarchyCommonCs]Statics::CheckForFailure(string,string,string)");
+                swMainMethodBody.WriteLine(
+                    $"        callvirt   instance string [System.Runtime]System.Object::ToString()"
+                );
+                swMainMethodBody.WriteLine(
+                    $"        call void [TypeHierarchyCommonCs]Statics::CheckForFailure(string,string,string)"
+                );
                 swMainMethodBody.WriteLine($"        leave.s {scenarioName}Done");
                 swMainMethodBody.WriteLine("    }");
                 swMainMethodBody.WriteLine($"{scenarioName}Done: nop");
@@ -535,7 +631,7 @@ namespace VirtualStaticInterfaceMethodTestGen
             twOutputTest.WriteLine("    .entrypoint");
             twOutputTest.WriteLine("    .locals init (class [System.Runtime]System.Exception V_0)");
             twOutputTest.Write(swMainMethodBody.ToString());
-            twOutputTest.WriteLine($"    call int32 { CommonCsPrefix}Statics::ReportResults()");
+            twOutputTest.WriteLine($"    call int32 {CommonCsPrefix}Statics::ReportResults()");
             twOutputTest.WriteLine("    ret");
 
             EmitEndMethod(twOutputTest, mainMethod);

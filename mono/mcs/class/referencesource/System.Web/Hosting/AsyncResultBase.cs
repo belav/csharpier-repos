@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="AsyncResultBase.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -10,32 +10,42 @@
  * Copyright (c) 2010 Microsoft Corporation
  */
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
     using System.Runtime.ExceptionServices;
     using System.Threading;
     using System.Web.Util;
 
-    internal abstract class AsyncResultBase : IAsyncResult {
+    internal abstract class AsyncResultBase : IAsyncResult
+    {
         private ManualResetEventSlim _mre; // unlike ManualResetEvent, this creates a kernel object lazily
-        private AsyncCallback        _callback;
-        private Object               _asyncState;
-        private volatile bool        _completed;
-        private volatile bool        _completedSynchronously;
-        private volatile int         _hresult;
-        private Thread               _threadWhichStartedOperation;
+        private AsyncCallback _callback;
+        private Object _asyncState;
+        private volatile bool _completed;
+        private volatile bool _completedSynchronously;
+        private volatile int _hresult;
+        private Thread _threadWhichStartedOperation;
         private volatile ExceptionDispatchInfo _error;
 
-        protected AsyncResultBase(AsyncCallback cb, Object state) {
-            _callback    = cb;
-            _asyncState  = state;
+        protected AsyncResultBase(AsyncCallback cb, Object state)
+        {
+            _callback = cb;
+            _asyncState = state;
             _mre = new ManualResetEventSlim();
         }
 
-        internal abstract void Complete(int bytesCompleted, int hresult, IntPtr pAsyncCompletionContext, bool synchronous);
+        internal abstract void Complete(
+            int bytesCompleted,
+            int hresult,
+            IntPtr pAsyncCompletionContext,
+            bool synchronous
+        );
 
-        protected void Complete(int hresult, bool synchronous) {
-            if (Volatile.Read(ref _threadWhichStartedOperation) == Thread.CurrentThread) {
+        protected void Complete(int hresult, bool synchronous)
+        {
+            if (Volatile.Read(ref _threadWhichStartedOperation) == Thread.CurrentThread)
+            {
                 // If we're calling Complete on the same thread which kicked off the operation, then
                 // we ignore the 'synchronous' value that the caller provided to us since we know
                 // for a fact that this is really a synchronous completion. This is only checked if
@@ -61,26 +71,42 @@ namespace System.Web.Hosting {
         // captured thread can be cleared out, preventing an asynchronous invocation on the same thread
         // from being mistaken for a synchronous invocation.
 
-        internal void MarkCallToBeginMethodStarted() {
-            Thread originalThread = Interlocked.CompareExchange(ref _threadWhichStartedOperation, Thread.CurrentThread, null);
-            Debug.Assert(originalThread == null, "Another thread already called MarkCallToBeginMethodStarted.");
+        internal void MarkCallToBeginMethodStarted()
+        {
+            Thread originalThread = Interlocked.CompareExchange(
+                ref _threadWhichStartedOperation,
+                Thread.CurrentThread,
+                null
+            );
+            Debug.Assert(
+                originalThread == null,
+                "Another thread already called MarkCallToBeginMethodStarted."
+            );
         }
 
-        internal void MarkCallToBeginMethodCompleted() {
+        internal void MarkCallToBeginMethodCompleted()
+        {
             Thread originalThread = Interlocked.Exchange(ref _threadWhichStartedOperation, null);
-            Debug.Assert(originalThread == Thread.CurrentThread, "This thread did not call MarkCallToBeginMethodStarted.");
+            Debug.Assert(
+                originalThread == Thread.CurrentThread,
+                "This thread did not call MarkCallToBeginMethodStarted."
+            );
         }
 
-        internal void ReleaseWaitHandleWhenSignaled() {
-            try {
+        internal void ReleaseWaitHandleWhenSignaled()
+        {
+            try
+            {
                 _mre.Wait();
             }
-            finally {
+            finally
+            {
                 _mre.Dispose();
             }
         }
 
-        internal void SetError(Exception error) {
+        internal void SetError(Exception error)
+        {
             Debug.Assert(error != null);
             _error = ExceptionDispatchInfo.Capture(error);
         }
@@ -88,16 +114,35 @@ namespace System.Web.Hosting {
         // Properties that are not part of IAsyncResult
         //
 
-        internal int HResult { get { return _hresult; } set { _hresult = value; } }
-        internal ExceptionDispatchInfo Error { get { return _error; } }
+        internal int HResult
+        {
+            get { return _hresult; }
+            set { _hresult = value; }
+        }
+        internal ExceptionDispatchInfo Error
+        {
+            get { return _error; }
+        }
 
         //
         // IAsyncResult implementation
         //
 
-        public bool         IsCompleted { get { return _completed; } }
-        public bool         CompletedSynchronously { get { return _completedSynchronously; } }
-        public Object       AsyncState { get { return _asyncState; } }
-        public WaitHandle   AsyncWaitHandle { get { return _mre.WaitHandle; } } // wait not supported
+        public bool IsCompleted
+        {
+            get { return _completed; }
+        }
+        public bool CompletedSynchronously
+        {
+            get { return _completedSynchronously; }
+        }
+        public Object AsyncState
+        {
+            get { return _asyncState; }
+        }
+        public WaitHandle AsyncWaitHandle
+        {
+            get { return _mre.WaitHandle; }
+        } // wait not supported
     }
 }

@@ -51,9 +51,18 @@ namespace System.Text.Encodings.Web.Tests
             for (int i = 0; i <= char.MaxValue; i++)
             {
                 bool isAllowed = false;
-                if (i % 3 == 0) { isAllowed = true; }
-                if (i % 5 == 0) { isAllowed = false; }
-                if (i % 7 == 0) { isAllowed = true; }
+                if (i % 3 == 0)
+                {
+                    isAllowed = true;
+                }
+                if (i % 5 == 0)
+                {
+                    isAllowed = false;
+                }
+                if (i % 7 == 0)
+                {
+                    isAllowed = true;
+                }
                 Assert.Equal(isAllowed, bitmap.IsCharAllowed((char)i));
                 Assert.Equal(isAllowed, bitmap.IsCodePointAllowed((uint)i));
             }
@@ -102,7 +111,10 @@ namespace System.Text.Encodings.Web.Tests
                 }
                 else
                 {
-                    Assert.Equal(UnicodeTestHelpers.IsCharacterDefined((char)i), bitmap.IsCharAllowed((char)i));
+                    Assert.Equal(
+                        UnicodeTestHelpers.IsCharacterDefined((char)i),
+                        bitmap.IsCharAllowed((char)i)
+                    );
                 }
             }
         }

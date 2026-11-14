@@ -4,7 +4,6 @@
 using System;
 using System.Text;
 using System.Threading;
-
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
@@ -13,7 +12,8 @@ namespace Generators
     public partial class EventSourceGenerator
     {
         /// <summary>Code for a [GeneratedCode] attribute to put on the top-level generated members.</summary>
-        private static readonly string s_generatedCodeAttribute = $"[global::System.CodeDom.Compiler.GeneratedCodeAttribute(\"{typeof(EventSourceGenerator).Assembly.GetName().Name}\", \"{typeof(EventSourceGenerator).Assembly.GetName().Version}\")]";
+        private static readonly string s_generatedCodeAttribute =
+            $"[global::System.CodeDom.Compiler.GeneratedCodeAttribute(\"{typeof(EventSourceGenerator).Assembly.GetName().Name}\", \"{typeof(EventSourceGenerator).Assembly.GetName().Version}\")]";
 
         private static void EmitSourceFile(SourceProductionContext context, EventSourceClass ec)
         {
@@ -24,46 +24,61 @@ namespace Generators
             sb.AppendLine("using System;");
             GenType(ec, sb);
 
-            context.AddSource($"{ec.ClassName}.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
+            context.AddSource(
+                $"{ec.ClassName}.g.cs",
+                SourceText.From(sb.ToString(), Encoding.UTF8)
+            );
         }
 
         private static void GenType(EventSourceClass ec, StringBuilder sb)
         {
             if (!string.IsNullOrWhiteSpace(ec.Namespace))
             {
-                sb.AppendLine($@"
+                sb.AppendLine(
+                    $@"
 namespace {ec.Namespace}
-{{");
+{{"
+                );
             }
 
-            sb.AppendLine($@"
+            sb.AppendLine(
+                $@"
     {s_generatedCodeAttribute}
     partial class {ec.ClassName}
-    {{");
+    {{"
+            );
             GenerateConstructor(ec, sb);
 
             GenerateProviderMetadata(ec.SourceName, sb);
 
-            sb.AppendLine($@"
-    }}");
+            sb.AppendLine(
+                $@"
+    }}"
+            );
 
             if (!string.IsNullOrWhiteSpace(ec.Namespace))
             {
-                sb.AppendLine($@"
-}}");
+                sb.AppendLine(
+                    $@"
+}}"
+                );
             }
         }
 
         private static void GenerateConstructor(EventSourceClass ec, StringBuilder sb)
         {
-            sb.AppendLine($@"
-        private {ec.ClassName}() : base(new Guid({ec.Guid.ToString("x").Replace("{", "").Replace("}", "")}), ""{ec.SourceName}"") {{ }}");
+            sb.AppendLine(
+                $@"
+        private {ec.ClassName}() : base(new Guid({ec.Guid.ToString("x").Replace("{", "").Replace("}", "")}), ""{ec.SourceName}"") {{ }}"
+            );
         }
 
         private static void GenerateProviderMetadata(string sourceName, StringBuilder sb)
         {
-            sb.Append(@"
-        private protected override ReadOnlySpan<byte> ProviderMetadata => new byte[] { ");
+            sb.Append(
+                @"
+        private protected override ReadOnlySpan<byte> ProviderMetadata => new byte[] { "
+            );
 
             byte[] metadataBytes = MetadataForString(sourceName);
             foreach (byte b in metadataBytes)

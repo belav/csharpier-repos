@@ -81,8 +81,7 @@ namespace System.Diagnostics
         }
 
         /// <summary>Gets parent process ID</summary>
-        private static int GetParentProcessId =>
-            throw new PlatformNotSupportedException();
+        private static int GetParentProcessId => throw new PlatformNotSupportedException();
 
         /// <summary>
         /// Gets or sets which processors the threads in this process can be scheduled to run on.
@@ -106,7 +105,12 @@ namespace System.Diagnostics
         /// <param name="newMax">The new maximum working set limit, or null not to change it.</param>
         /// <param name="resultingMin">The resulting minimum working set limit after any changes applied.</param>
         /// <param name="resultingMax">The resulting maximum working set limit after any changes applied.</param>
-        private static void SetWorkingSetLimitsCore(IntPtr? newMin, IntPtr? newMax, out IntPtr resultingMin, out IntPtr resultingMax)
+        private static void SetWorkingSetLimitsCore(
+            IntPtr? newMin,
+            IntPtr? newMax,
+            out IntPtr resultingMin,
+            out IntPtr resultingMax
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -127,6 +131,7 @@ namespace System.Diagnostics
             // InvalidOperationException signifies conditions such as the process already being dead.
             // Win32Exception signifies issues such as insufficient permissions to get details on the process.
             // In either case, the predicate couldn't be applied so return the fallback result.
-            e is InvalidOperationException || e is Win32Exception;
+            e is InvalidOperationException
+            || e is Win32Exception;
     }
 }

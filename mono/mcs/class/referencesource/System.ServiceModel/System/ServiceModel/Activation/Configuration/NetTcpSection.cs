@@ -12,7 +12,7 @@ namespace System.ServiceModel.Activation.Configuration
     public sealed partial class NetTcpSection : ConfigurationSection
     {
         PropertyInformationCollection propertyInfo;
-        
+
         public NetTcpSection()
             : base()
         {
@@ -22,12 +22,17 @@ namespace System.ServiceModel.Activation.Configuration
         [ConfigurationProperty(ConfigurationStrings.AllowAccounts)]
         public SecurityIdentifierElementCollection AllowAccounts
         {
-            get { return (SecurityIdentifierElementCollection)base[ConfigurationStrings.AllowAccounts]; }
+            get
+            {
+                return (SecurityIdentifierElementCollection)
+                    base[ConfigurationStrings.AllowAccounts];
+            }
         }
 
-        static internal NetTcpSection GetSection()
+        internal static NetTcpSection GetSection()
         {
-            NetTcpSection retval = (NetTcpSection)ConfigurationManager.GetSection(ConfigurationStrings.NetTcpSectionPath);
+            NetTcpSection retval = (NetTcpSection)
+                ConfigurationManager.GetSection(ConfigurationStrings.NetTcpSectionPath);
             if (retval == null)
             {
                 retval = new NetTcpSection();
@@ -40,14 +45,17 @@ namespace System.ServiceModel.Activation.Configuration
             this.AllowAccounts.SetDefaultIdentifiers();
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ListenBacklog, DefaultValue = ListenerConstants.DefaultListenBacklog)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ListenBacklog,
+            DefaultValue = ListenerConstants.DefaultListenBacklog
+        )]
         [IntegerValidator(MinValue = 0)]
         public int ListenBacklog
         {
-            get 
+            get
             {
                 int listenBacklog = (int)base[ConfigurationStrings.ListenBacklog];
-                
+
                 if (listenBacklog != ListenerConstants.DefaultListenBacklog)
                 {
                     // if the user changed the default, return user's value
@@ -62,7 +70,10 @@ namespace System.ServiceModel.Activation.Configuration
             set { base[ConfigurationStrings.ListenBacklog] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingConnections, DefaultValue = ListenerConstants.DefaultMaxPendingConnections)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingConnections,
+            DefaultValue = ListenerConstants.DefaultMaxPendingConnections
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxPendingConnections
         {
@@ -70,14 +81,17 @@ namespace System.ServiceModel.Activation.Configuration
             set { base[ConfigurationStrings.MaxPendingConnections] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingAccepts, DefaultValue = ListenerConstants.DefaultMaxPendingAccepts)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingAccepts,
+            DefaultValue = ListenerConstants.DefaultMaxPendingAccepts
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxPendingAccepts
         {
             get
             {
                 int maxPendingAccepts = (int)base[ConfigurationStrings.MaxPendingAccepts];
-                
+
                 if (maxPendingAccepts != ListenerConstants.DefaultMaxPendingAccepts)
                 {
                     // if the user changed the default, return user's value
@@ -92,16 +106,24 @@ namespace System.ServiceModel.Activation.Configuration
             set { base[ConfigurationStrings.MaxPendingAccepts] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReceiveTimeout, DefaultValue = ListenerConstants.DefaultReceiveTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReceiveTimeout,
+            DefaultValue = ListenerConstants.DefaultReceiveTimeoutString
+        )]
         [System.ComponentModel.TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
-        [System.ServiceModel.Configuration.ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
+        [System.ServiceModel.Configuration.ServiceModelTimeSpanValidator(
+            MinValueString = ConfigurationStrings.TimeSpanZero
+        )]
         public TimeSpan ReceiveTimeout
         {
             get { return (TimeSpan)base[ConfigurationStrings.ReceiveTimeout]; }
             set { base[ConfigurationStrings.ReceiveTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TeredoEnabled, DefaultValue = ListenerConstants.DefaultTeredoEnabled)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TeredoEnabled,
+            DefaultValue = ListenerConstants.DefaultTeredoEnabled
+        )]
         public bool TeredoEnabled
         {
             get { return (bool)base[ConfigurationStrings.TeredoEnabled]; }

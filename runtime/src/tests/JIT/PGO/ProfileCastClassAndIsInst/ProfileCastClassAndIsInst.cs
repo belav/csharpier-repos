@@ -7,10 +7,15 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 
 public interface IInterface { }
+
 public interface IGenericInterface<T> { }
+
 public class ClassA : IInterface { }
+
 public class ClassB : ClassA { }
+
 public class ClassC { }
+
 public struct GenericStruct<T> : IGenericInterface<T> { }
 
 public class Program
@@ -52,9 +57,9 @@ public class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     static IGenericInterface<T> CastToGenericInterface<T>(object o) => (IGenericInterface<T>)o;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void AssertThrows<T>(Action action, [CallerLineNumber] int line = 0) where T : Exception
+    static void AssertThrows<T>(Action action, [CallerLineNumber] int line = 0)
+        where T : Exception
     {
         try
         {

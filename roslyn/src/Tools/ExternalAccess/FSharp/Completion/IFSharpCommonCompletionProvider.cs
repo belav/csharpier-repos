@@ -19,9 +19,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
         public abstract bool IsInsertionTrigger(SourceText text, int insertedCharacterPosition);
 
         public abstract Task<TextChange?> GetTextChangeAsync(
-            Func<CompletionItem, char?, CancellationToken, Task<TextChange?>> baseGetTextChangeAsync,
+            Func<
+                CompletionItem,
+                char?,
+                CancellationToken,
+                Task<TextChange?>
+            > baseGetTextChangeAsync,
             CompletionItem selectedItem,
             char? ch,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

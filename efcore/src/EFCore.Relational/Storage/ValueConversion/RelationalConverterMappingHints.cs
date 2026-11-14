@@ -31,7 +31,8 @@ public class RelationalConverterMappingHints : ConverterMappingHints
         bool? unicode = null,
         bool? fixedLength = null,
         Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null,
-        DbType? dbType = null)
+        DbType? dbType = null
+    )
         : base(size, precision, scale, unicode, valueGeneratorFactory)
     {
         IsFixedLength = fixedLength;
@@ -55,15 +56,16 @@ public class RelationalConverterMappingHints : ConverterMappingHints
         int? scale,
         bool? unicode,
         bool? fixedLength,
-        Func<IProperty, ITypeBase, ValueGenerator>? valueGeneratorFactory)
+        Func<IProperty, ITypeBase, ValueGenerator>? valueGeneratorFactory
+    )
         : base(size, precision, scale, unicode, valueGeneratorFactory)
     {
         IsFixedLength = fixedLength;
     }
 
     /// <inheritdoc />
-    public override ConverterMappingHints With(ConverterMappingHints? hints)
-        => hints == null
+    public override ConverterMappingHints With(ConverterMappingHints? hints) =>
+        hints == null
             ? this
             : new RelationalConverterMappingHints(
                 hints.Size ?? Size,
@@ -74,11 +76,12 @@ public class RelationalConverterMappingHints : ConverterMappingHints
 #pragma warning disable CS0612 // Type or member is obsolete
                 hints.ValueGeneratorFactory ?? ValueGeneratorFactory,
 #pragma warning restore CS0612 // Type or member is obsolete
-                (hints as RelationalConverterMappingHints)?.DbType ?? DbType);
+                (hints as RelationalConverterMappingHints)?.DbType ?? DbType
+            );
 
     /// <inheritdoc />
-    public override ConverterMappingHints OverrideWith(ConverterMappingHints? hints)
-        => hints == null
+    public override ConverterMappingHints OverrideWith(ConverterMappingHints? hints) =>
+        hints == null
             ? this
             : new RelationalConverterMappingHints(
                 Size ?? hints.Size,
@@ -89,7 +92,8 @@ public class RelationalConverterMappingHints : ConverterMappingHints
 #pragma warning disable CS0612 // Type or member is obsolete
                 ValueGeneratorFactory ?? hints.ValueGeneratorFactory,
 #pragma warning restore CS0612 // Type or member is obsolete
-                DbType ?? (hints as RelationalConverterMappingHints)?.DbType);
+                DbType ?? (hints as RelationalConverterMappingHints)?.DbType
+            );
 
     /// <summary>
     ///     Whether or not the mapped data type is fixed length.

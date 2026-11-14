@@ -23,50 +23,83 @@ using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
 {
-    [ExportConfigurationFixProvider(PredefinedConfigurationFixProviderNames.ConfigureCodeStyleOption, LanguageNames.CSharp, LanguageNames.VisualBasic), Shared]
+    [
+        ExportConfigurationFixProvider(
+            PredefinedConfigurationFixProviderNames.ConfigureCodeStyleOption,
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic
+        ),
+        Shared
+    ]
     [ExtensionOrder(Before = PredefinedConfigurationFixProviderNames.ConfigureSeverity)]
     [ExtensionOrder(After = PredefinedConfigurationFixProviderNames.Suppression)]
-    internal sealed partial class ConfigureCodeStyleOptionCodeFixProvider : IConfigurationFixProvider
+    internal sealed partial class ConfigureCodeStyleOptionCodeFixProvider
+        : IConfigurationFixProvider
     {
-        private static readonly ImmutableArray<bool> s_boolValues = ImmutableArray.Create(true, false);
+        private static readonly ImmutableArray<bool> s_boolValues = ImmutableArray.Create(
+            true,
+            false
+        );
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public ConfigureCodeStyleOptionCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public ConfigureCodeStyleOptionCodeFixProvider() { }
 
         public bool IsFixableDiagnostic(Diagnostic diagnostic)
         {
             // We only offer fix for configurable code style diagnostics which have one of more editorconfig based storage locations.
             // Also skip suppressed diagnostics defensively, though the code fix engine should ideally never call us for suppressed diagnostics.
-            if (diagnostic.IsSuppressed ||
-                SuppressionHelpers.IsNotConfigurableDiagnostic(diagnostic) ||
-                diagnostic.Location.SourceTree == null)
+            if (
+                diagnostic.IsSuppressed
+                || SuppressionHelpers.IsNotConfigurableDiagnostic(diagnostic)
+                || diagnostic.Location.SourceTree == null
+            )
             {
                 return false;
             }
 
             var language = diagnostic.Location.SourceTree.Options.Language;
-            return IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(diagnostic.Id, language, out _);
+            return IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(
+                diagnostic.Id,
+                language,
+                out _
+            );
         }
 
-        public FixAllProvider? GetFixAllProvider()
-            => null;
+        public FixAllProvider? GetFixAllProvider() => null;
 
-        public Task<ImmutableArray<CodeFix>> GetFixesAsync(TextDocument document, TextSpan span, IEnumerable<Diagnostic> diagnostics, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
-            => Task.FromResult(GetConfigurations(document.Project, diagnostics));
+        public Task<ImmutableArray<CodeFix>> GetFixesAsync(
+            TextDocument document,
+            TextSpan span,
+            IEnumerable<Diagnostic> diagnostics,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(GetConfigurations(document.Project, diagnostics));
 
-        public Task<ImmutableArray<CodeFix>> GetFixesAsync(Project project, IEnumerable<Diagnostic> diagnostics, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
-            => Task.FromResult(GetConfigurations(project, diagnostics));
+        public Task<ImmutableArray<CodeFix>> GetFixesAsync(
+            Project project,
+            IEnumerable<Diagnostic> diagnostics,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(GetConfigurations(project, diagnostics));
 
-        private static ImmutableArray<CodeFix> GetConfigurations(Project project, IEnumerable<Diagnostic> diagnostics)
+        private static ImmutableArray<CodeFix> GetConfigurations(
+            Project project,
+            IEnumerable<Diagnostic> diagnostics
+        )
         {
             var result = ArrayBuilder<CodeFix>.GetInstance();
             foreach (var diagnostic in diagnostics)
             {
                 // First get all the relevant code style options for the diagnostic.
-                var codeStyleOptions = ConfigurationUpdater.GetCodeStyleOptionsForDiagnostic(diagnostic, project);
+                var codeStyleOptions = ConfigurationUpdater.GetCodeStyleOptionsForDiagnostic(
+                    diagnostic,
+                    project
+                );
                 if (codeStyleOptions.IsEmpty)
                 {
                     continue;
@@ -79,7 +112,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 var hasMultipleOptions = codeStyleOptions.Length > 1;
                 foreach (var option in codeStyleOptions)
                 {
-                    var topLevelAction = GetCodeActionForCodeStyleOption(option, diagnostic, hasMultipleOptions);
+                    var topLevelAction = GetCodeActionForCodeStyleOption(
+                        option,
+                        diagnostic,
+                        hasMultipleOptions
+                    );
                     if (topLevelAction != null)
                     {
                         nestedActions.Add(topLevelAction);
@@ -89,9 +126,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 if (nestedActions.Count != 0)
                 {
                     // Wrap actions by another level if the diagnostic ID has multiple associated code style options to reduce clutter.
-                    var resultCodeAction = nestedActions.Count > 1
-                        ? new TopLevelConfigureCodeStyleOptionCodeAction(diagnostic, nestedActions.ToImmutable())
-                        : nestedActions.Single();
+                    var resultCodeAction =
+                        nestedActions.Count > 1
+                            ? new TopLevelConfigureCodeStyleOptionCodeAction(
+                                diagnostic,
+                                nestedActions.ToImmutable()
+                            )
+                            : nestedActions.Single();
 
                     result.Add(new CodeFix(project, resultCodeAction, diagnostic));
                 }
@@ -100,7 +141,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
             return result.ToImmutableAndFree();
 
             // Local functions
-            TopLevelConfigureCodeStyleOptionCodeAction? GetCodeActionForCodeStyleOption(IOption2 option, Diagnostic diagnostic, bool hasMultipleOptions)
+            TopLevelConfigureCodeStyleOptionCodeAction? GetCodeActionForCodeStyleOption(
+                IOption2 option,
+                Diagnostic diagnostic,
+                bool hasMultipleOptions
+            )
             {
                 // Add a code action for every valid value of the given code style option.
                 // We only support light-bulb configuration of code style options with boolean or enum values.
@@ -133,8 +178,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                     // In that case, we will already have a containing top level action for the diagnostic.
                     // Otherwise, use the diagnostic information in the title.
                     return hasMultipleOptions
-                        ? new TopLevelConfigureCodeStyleOptionCodeAction(optionName, nestedActions.ToImmutable())
-                        : new TopLevelConfigureCodeStyleOptionCodeAction(diagnostic, nestedActions.ToImmutable());
+                        ? new TopLevelConfigureCodeStyleOptionCodeAction(
+                            optionName,
+                            nestedActions.ToImmutable()
+                        )
+                        : new TopLevelConfigureCodeStyleOptionCodeAction(
+                            diagnostic,
+                            nestedActions.ToImmutable()
+                        );
                 }
 
                 return null;
@@ -144,14 +195,26 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 {
                     // Create a new code style option value with the newValue
                     var configuredCodeStyleOption = codeStyleOption.WithValue(newValue);
-                    var optionValue = option.Definition.Serializer.Serialize(configuredCodeStyleOption);
+                    var optionValue = option.Definition.Serializer.Serialize(
+                        configuredCodeStyleOption
+                    );
 
                     // Add code action to configure the optionValue.
                     nestedActions.Add(
                         SolutionChangeAction.Create(
                             optionValue,
-                            cancellationToken => ConfigurationUpdater.ConfigureCodeStyleOptionAsync(optionName, optionValue, diagnostic, option.IsPerLanguage, project, cancellationToken),
-                            optionValue));
+                            cancellationToken =>
+                                ConfigurationUpdater.ConfigureCodeStyleOptionAsync(
+                                    optionName,
+                                    optionValue,
+                                    diagnostic,
+                                    option.IsPerLanguage,
+                                    project,
+                                    cancellationToken
+                                ),
+                            optionValue
+                        )
+                    );
                 }
             }
         }

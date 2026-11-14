@@ -2,12 +2,11 @@
 // <copyright file="SchemaImporterExtensionElementCollection.cs" company="Microsoft Corporation">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 #if CONFIGURATION_DEP
 namespace System.Xml.Serialization.Configuration
 {
-
     using System;
     using System.Configuration;
     using System.Security.Permissions;
@@ -15,32 +14,24 @@ namespace System.Xml.Serialization.Configuration
     [ConfigurationCollection(typeof(SchemaImporterExtensionElement))]
     public sealed class SchemaImporterExtensionElementCollection : ConfigurationElementCollection
     {
-        public SchemaImporterExtensionElementCollection() 
-        {
-        }
-        
+        public SchemaImporterExtensionElementCollection() { }
+
         public SchemaImporterExtensionElement this[int index]
         {
-            get
-            {
-                return (SchemaImporterExtensionElement)BaseGet(index);
-            }
+            get { return (SchemaImporterExtensionElement)BaseGet(index); }
             set
             {
                 if (BaseGet(index) != null)
                 {
                     BaseRemoveAt(index);
                 }
-                BaseAdd(index,value);
+                BaseAdd(index, value);
             }
         }
-         
+
         public new SchemaImporterExtensionElement this[string name]
         {
-            get
-            {
-                return (SchemaImporterExtensionElement)BaseGet(name);
-            }
+            get { return (SchemaImporterExtensionElement)BaseGet(name); }
             set
             {
                 if (BaseGet(name) != null)
@@ -50,7 +41,7 @@ namespace System.Xml.Serialization.Configuration
                 BaseAdd(value);
             }
         }
-         
+
         public void Add(SchemaImporterExtensionElement element)
         {
             BaseAdd(element);
@@ -61,12 +52,12 @@ namespace System.Xml.Serialization.Configuration
             BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement() 
+        protected override ConfigurationElement CreateNewElement()
         {
             return new SchemaImporterExtensionElement();
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) 
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             return ((SchemaImporterExtensionElement)element).Key;
         }
@@ -75,13 +66,13 @@ namespace System.Xml.Serialization.Configuration
         {
             return BaseIndexOf(element);
         }
-         
-        public void Remove(SchemaImporterExtensionElement element) 
+
+        public void Remove(SchemaImporterExtensionElement element)
         {
             BaseRemove(element.Key);
         }
 
-        public void Remove(string name) 
+        public void Remove(string name)
         {
             BaseRemove(name);
         }
@@ -90,9 +81,7 @@ namespace System.Xml.Serialization.Configuration
         {
             BaseRemoveAt(index);
         }
-
-    } 
-
+    }
 }
 
 #endif

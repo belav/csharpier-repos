@@ -21,19 +21,30 @@ namespace System.Net.Configuration
 
         static HttpListenerElement()
         {
-            unescapeRequestUrl = new ConfigurationProperty(ConfigurationStrings.UnescapeRequestUrl, typeof(bool),
-                UnescapeRequestUrlDefaultValue, ConfigurationPropertyOptions.None);
-            
-            timeouts = new ConfigurationProperty(ConfigurationStrings.Timeouts, typeof(HttpListenerTimeoutsElement), null,
-                ConfigurationPropertyOptions.None);
+            unescapeRequestUrl = new ConfigurationProperty(
+                ConfigurationStrings.UnescapeRequestUrl,
+                typeof(bool),
+                UnescapeRequestUrlDefaultValue,
+                ConfigurationPropertyOptions.None
+            );
+
+            timeouts = new ConfigurationProperty(
+                ConfigurationStrings.Timeouts,
+                typeof(HttpListenerTimeoutsElement),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
             properties = new ConfigurationPropertyCollection();
             properties.Add(unescapeRequestUrl);
             properties.Add(timeouts);
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UnescapeRequestUrl, DefaultValue = UnescapeRequestUrlDefaultValue, 
-            IsRequired = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.UnescapeRequestUrl,
+            DefaultValue = UnescapeRequestUrlDefaultValue,
+            IsRequired = false
+        )]
         public bool UnescapeRequestUrl
         {
             get { return (bool)this[unescapeRequestUrl]; }
@@ -51,4 +62,3 @@ namespace System.Net.Configuration
         }
     }
 }
-

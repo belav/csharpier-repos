@@ -14,34 +14,31 @@
 
 namespace Castle.DynamicProxy.Contributors
 {
-	using System;
+    using System;
+    using Castle.DynamicProxy.Generators;
+    using Castle.DynamicProxy.Generators.Emitters;
+    using Castle.DynamicProxy.Internal;
 
-	using Castle.DynamicProxy.Generators;
-	using Castle.DynamicProxy.Generators.Emitters;
-	using Castle.DynamicProxy.Internal;
+    /// <summary>
+    ///   Reproduces the proxied type's non-inheritable custom attributes on the proxy type.
+    /// </summary>
+    internal sealed class NonInheritableAttributesContributor : ITypeContributor
+    {
+        private readonly Type targetType;
 
-	/// <summary>
-	///   Reproduces the proxied type's non-inheritable custom attributes on the proxy type.
-	/// </summary>
-	internal sealed class NonInheritableAttributesContributor : ITypeContributor
-	{
-		private readonly Type targetType;
+        public NonInheritableAttributesContributor(Type targetType)
+        {
+            this.targetType = targetType;
+        }
 
-		public NonInheritableAttributesContributor(Type targetType)
-		{
-			this.targetType = targetType;
-		}
+        public void Generate(ClassEmitter emitter)
+        {
+            foreach (var attribute in targetType.GetNonInheritableAttributes())
+            {
+                emitter.DefineCustomAttribute(attribute.Builder);
+            }
+        }
 
-		public void Generate(ClassEmitter emitter)
-		{
-			foreach (var attribute in targetType.GetNonInheritableAttributes())
-			{
-				emitter.DefineCustomAttribute(attribute.Builder);
-			}
-		}
-
-		public void CollectElementsToProxy(IProxyGenerationHook hook, MetaType model)
-		{
-		}
-	}
+        public void CollectElementsToProxy(IProxyGenerationHook hook, MetaType model) { }
+    }
 }

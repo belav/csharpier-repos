@@ -29,14 +29,8 @@ namespace System.Web.Http.Batch
 
         public override X509Certificate2 ClientCertificate
         {
-            get
-            {
-                return _batchContext.ClientCertificate;
-            }
-            set
-            {
-                _batchContext.ClientCertificate = value;
-            }
+            get { return _batchContext.ClientCertificate; }
+            set { _batchContext.ClientCertificate = value; }
         }
 
         public override HttpConfiguration Configuration
@@ -55,38 +49,20 @@ namespace System.Web.Http.Batch
 
         public override bool IncludeErrorDetail
         {
-            get
-            {
-                return _batchContext.IncludeErrorDetail;
-            }
-            set
-            {
-                _batchContext.IncludeErrorDetail = value;
-            }
+            get { return _batchContext.IncludeErrorDetail; }
+            set { _batchContext.IncludeErrorDetail = value; }
         }
 
         public override bool IsLocal
         {
-            get
-            {
-                return _batchContext.IsLocal;
-            }
-            set
-            {
-                _batchContext.IsLocal = value;
-            }
+            get { return _batchContext.IsLocal; }
+            set { _batchContext.IsLocal = value; }
         }
 
         public override IPrincipal Principal
         {
-            get
-            {
-                return _batchContext.Principal;
-            }
-            set
-            {
-                _batchContext.Principal = value;
-            }
+            get { return _batchContext.Principal; }
+            set { _batchContext.Principal = value; }
         }
 
         public override IHttpRouteData RouteData
@@ -119,14 +95,8 @@ namespace System.Web.Http.Batch
 
         public override string VirtualPathRoot
         {
-            get
-            {
-                return _batchContext.VirtualPathRoot;
-            }
-            set
-            {
-                _batchContext.VirtualPathRoot = value;
-            }
+            get { return _batchContext.VirtualPathRoot; }
+            set { _batchContext.VirtualPathRoot = value; }
         }
     }
 }

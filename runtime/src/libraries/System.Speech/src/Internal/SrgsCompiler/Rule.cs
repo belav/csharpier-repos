@@ -20,18 +20,40 @@ namespace System.Speech.Internal.SrgsCompiler
             _iSerialize = iSerialize;
         }
 
-        internal Rule(Backend backend, string name, CfgRule cfgRule, int iSerialize, GrammarOptions SemanticFormat, ref int cImportedRules)
+        internal Rule(
+            Backend backend,
+            string name,
+            CfgRule cfgRule,
+            int iSerialize,
+            GrammarOptions SemanticFormat,
+            ref int cImportedRules
+        )
             : base(backend, null)
         {
             _rule = this;
             Init(name, cfgRule, iSerialize, SemanticFormat, ref cImportedRules);
         }
 
-        internal Rule(Backend backend, string name, int offsetName, SPCFGRULEATTRIBUTES attributes, int id, int iSerialize, GrammarOptions SemanticFormat, ref int cImportedRules)
+        internal Rule(
+            Backend backend,
+            string name,
+            int offsetName,
+            SPCFGRULEATTRIBUTES attributes,
+            int id,
+            int iSerialize,
+            GrammarOptions SemanticFormat,
+            ref int cImportedRules
+        )
             : base(backend, null)
         {
             _rule = this;
-            Init(name, new CfgRule(id, offsetName, attributes), iSerialize, SemanticFormat, ref cImportedRules);
+            Init(
+                name,
+                new CfgRule(id, offsetName, attributes),
+                iSerialize,
+                SemanticFormat,
+                ref cImportedRules
+            );
         }
 
         #endregion
@@ -46,15 +68,21 @@ namespace System.Speech.Internal.SrgsCompiler
 
             if (rule1._cfgRule.Import)
             {
-                return (rule2._cfgRule.Import) ? rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset : -1;
+                return (rule2._cfgRule.Import)
+                    ? rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset
+                    : -1;
             }
             else if (rule1._cfgRule.Dynamic)
             {
-                return (rule2._cfgRule.Dynamic) ? rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset : 1;
+                return (rule2._cfgRule.Dynamic)
+                    ? rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset
+                    : 1;
             }
             else
             {
-                return (rule2._cfgRule.Import) ? 1 : (rule2._cfgRule.Dynamic) ? -1 : rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset;
+                return (rule2._cfgRule.Import) ? 1
+                    : (rule2._cfgRule.Dynamic) ? -1
+                    : rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset;
             }
         }
 
@@ -77,7 +105,12 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal void Validate()
         {
-            if ((!_cfgRule.Dynamic) && (!_cfgRule.Import) && _id != "VOID" && _firstState.NumArcs == 0)
+            if (
+                (!_cfgRule.Dynamic)
+                && (!_cfgRule.Import)
+                && _id != "VOID"
+                && _firstState.NumArcs == 0
+            )
             {
                 XmlParser.ThrowSrgsException(SRID.EmptyRule);
             }
@@ -115,16 +148,18 @@ namespace System.Speech.Internal.SrgsCompiler
             rule._cfgRule = new CfgRule(idWord, offsetName, _cfgRule._flag)
             {
                 DirtyRule = true,
-                FirstArcIndex = 0
+                FirstArcIndex = 0,
             };
             return rule;
         }
 
         internal void Serialize(StreamMarshaler streamBuffer)
         {
-
             // Dynamic rules and imports have no arcs
-            _cfgRule.FirstArcIndex = _firstState != null && !_firstState.OutArcs.IsEmpty ? (uint)_firstState.SerializeId : 0;
+            _cfgRule.FirstArcIndex =
+                _firstState != null && !_firstState.OutArcs.IsEmpty
+                    ? (uint)_firstState.SerializeId
+                    : 0;
 
             _cfgRule.DirtyRule = true;
 
@@ -145,7 +180,11 @@ namespace System.Speech.Internal.SrgsCompiler
                 TrimEndEpsilons(_endArc, _backend);
 
                 // If the first arc was an epsilon value then there is no need to create a new state
-                if (_startArc.IsEpsilonTransition && _startArc.End != null && Graph.MoveSemanticTagRight(_startArc))
+                if (
+                    _startArc.IsEpsilonTransition
+                    && _startArc.End != null
+                    && Graph.MoveSemanticTagRight(_startArc)
+                )
                 {
                     // Discard the arc and replace it with the startArc
                     _firstState = _startArc.End;
@@ -165,7 +204,9 @@ namespace System.Speech.Internal.SrgsCompiler
 
         void IRule.CreateScript(IGrammar grammar, string rule, string method, RuleMethodScript type)
         {
-            ((GrammarElement)grammar).CustomGrammar._scriptRefs.Add(new ScriptRef(rule, method, type));
+            ((GrammarElement)grammar).CustomGrammar._scriptRefs.Add(
+                new ScriptRef(rule, method, type)
+            );
         }
 
         #endregion
@@ -174,53 +215,41 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal string Name
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
         }
 
         string IRule.BaseClass
         {
-            get
-            {
-                return _baseclass;
-            }
-            set
-            {
-                _baseclass = value;
-            }
+            get { return _baseclass; }
+            set { _baseclass = value; }
         }
 
         internal string BaseClass
         {
-            get
-            {
-                return _baseclass;
-            }
+            get { return _baseclass; }
         }
 
         internal StringBuilder Script
         {
-            get
-            {
-                return _script;
-            }
+            get { return _script; }
         }
 
         internal StringBuilder Constructors
         {
-            get
-            {
-                return _constructors;
-            }
+            get { return _constructors; }
         }
 
         #endregion
 
         #region Private Methods
 
-        private void Init(string id, CfgRule cfgRule, int iSerialize, GrammarOptions SemanticFormat, ref int cImportedRules)
+        private void Init(
+            string id,
+            CfgRule cfgRule,
+            int iSerialize,
+            GrammarOptions SemanticFormat,
+            ref int cImportedRules
+        )
         {
             _id = id;
             _cfgRule = cfgRule;
@@ -245,7 +274,11 @@ namespace System.Speech.Internal.SrgsCompiler
             if (endState != null)
             {
                 // Remove the end arc if possible, check done by MoveSemanticTagRight
-                if (endArc.IsEpsilonTransition && endState.OutArcs.CountIsOne && Graph.MoveSemanticTagLeft(endArc))
+                if (
+                    endArc.IsEpsilonTransition
+                    && endState.OutArcs.CountIsOne
+                    && Graph.MoveSemanticTagLeft(endArc)
+                )
                 {
                     // State has a single input epsilon transition
                     // Delete the input epsilon transition and delete state.

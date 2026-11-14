@@ -16,15 +16,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         public static void Organize(
             SyntaxList<ExternAliasDirectiveSyntax> externAliasList,
             SyntaxList<UsingDirectiveSyntax> usingList,
-            bool placeSystemNamespaceFirst, bool separateGroups,
+            bool placeSystemNamespaceFirst,
+            bool separateGroups,
             SyntaxTrivia newLineTrivia,
             out SyntaxList<ExternAliasDirectiveSyntax> organizedExternAliasList,
-            out SyntaxList<UsingDirectiveSyntax> organizedUsingList)
+            out SyntaxList<UsingDirectiveSyntax> organizedUsingList
+        )
         {
             OrganizeWorker(
-                externAliasList, usingList, placeSystemNamespaceFirst,
+                externAliasList,
+                usingList,
+                placeSystemNamespaceFirst,
                 newLineTrivia,
-                out organizedExternAliasList, out organizedUsingList);
+                out organizedExternAliasList,
+                out organizedUsingList
+            );
 
             if (separateGroups)
             {
@@ -44,19 +50,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     var lastUsing = organizedUsingList[i - 1];
                     var currentUsing = organizedUsingList[i];
 
-                    if (NeedsGrouping(lastUsing, currentUsing) &&
-                        !currentUsing.GetLeadingTrivia().Any(t => t.IsEndOfLine()))
+                    if (
+                        NeedsGrouping(lastUsing, currentUsing)
+                        && !currentUsing.GetLeadingTrivia().Any(t => t.IsEndOfLine())
+                    )
                     {
-                        var newCurrentUsing = currentUsing.WithPrependedLeadingTrivia(newLineTrivia);
-                        organizedUsingList = organizedUsingList.Replace(currentUsing, newCurrentUsing);
+                        var newCurrentUsing = currentUsing.WithPrependedLeadingTrivia(
+                            newLineTrivia
+                        );
+                        organizedUsingList = organizedUsingList.Replace(
+                            currentUsing,
+                            newCurrentUsing
+                        );
                     }
                 }
             }
         }
 
-        public static bool NeedsGrouping(
-            UsingDirectiveSyntax using1,
-            UsingDirectiveSyntax using2)
+        public static bool NeedsGrouping(UsingDirectiveSyntax using1, UsingDirectiveSyntax using2)
         {
             var directive1IsUsingStatic = using1.StaticKeyword.IsKind(SyntaxKind.StaticKeyword);
             var directive2IsUsingStatic = using2.StaticKeyword.IsKind(SyntaxKind.StaticKeyword);
@@ -98,22 +109,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             bool placeSystemNamespaceFirst,
             SyntaxTrivia newLineTrivia,
             out SyntaxList<ExternAliasDirectiveSyntax> organizedExternAliasList,
-            out SyntaxList<UsingDirectiveSyntax> organizedUsingList)
+            out SyntaxList<UsingDirectiveSyntax> organizedUsingList
+        )
         {
             if (externAliasList.Count > 0 || usingList.Count > 0)
             {
-                // Merge the list of usings and externs into one list.  
+                // Merge the list of usings and externs into one list.
                 // order them in the order that they were originally in the
                 // file.
-                var initialList = usingList.Cast<SyntaxNode>()
-                                           .Concat(externAliasList)
-                                           .OrderBy(n => n.SpanStart).ToList();
+                var initialList = usingList
+                    .Cast<SyntaxNode>()
+                    .Concat(externAliasList)
+                    .OrderBy(n => n.SpanStart)
+                    .ToList();
 
                 if (!initialList.SpansPreprocessorDirective())
                 {
                     // If there is a banner comment that precedes the nodes,
                     // then remove it and store it for later.
-                    initialList[0] = initialList[0].GetNodeWithoutLeadingBannerAndPreprocessorDirectives(out var leadingTrivia);
+                    initialList[0] = initialList[0]
+                        .GetNodeWithoutLeadingBannerAndPreprocessorDirectives(
+                            out var leadingTrivia
+                        );
 
                     var comparer = placeSystemNamespaceFirst
                         ? UsingsAndExternAliasesDirectiveComparer.SystemFirstInstance
@@ -132,12 +149,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         finalList[0] = finalList[0].WithPrependedLeadingTrivia(leadingTrivia);
 
                         // Now split out the externs and usings back into two separate lists.
-                        organizedExternAliasList = finalList.Where(t => t is ExternAliasDirectiveSyntax)
-                                                            .Cast<ExternAliasDirectiveSyntax>()
-                                                            .ToSyntaxList();
-                        organizedUsingList = finalList.Where(t => t is UsingDirectiveSyntax)
-                                                      .Cast<UsingDirectiveSyntax>()
-                                                      .ToSyntaxList();
+                        organizedExternAliasList = finalList
+                            .Where(t => t is ExternAliasDirectiveSyntax)
+                            .Cast<ExternAliasDirectiveSyntax>()
+                            .ToSyntaxList();
+                        organizedUsingList = finalList
+                            .Where(t => t is UsingDirectiveSyntax)
+                            .Cast<UsingDirectiveSyntax>()
+                            .ToSyntaxList();
                         return;
                     }
                 }
@@ -156,7 +175,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 var node = list[i];
                 var trailingTrivia = node.GetTrailingTrivia();
 
-                if (!trailingTrivia.Any() || trailingTrivia.Last().Kind() != SyntaxKind.EndOfLineTrivia)
+                if (
+                    !trailingTrivia.Any()
+                    || trailingTrivia.Last().Kind() != SyntaxKind.EndOfLineTrivia
+                )
                 {
                     list[i] = node.WithTrailingTrivia(trailingTrivia.Concat(newLineTrivia));
                 }
@@ -173,7 +195,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             list[0] = TrimLeadingNewLines(list[0]);
         }
 
-        private static SyntaxNode TrimLeadingNewLines(SyntaxNode node)
-            => node.WithLeadingTrivia(node.GetLeadingTrivia().SkipWhile(t => t.Kind() == SyntaxKind.EndOfLineTrivia));
+        private static SyntaxNode TrimLeadingNewLines(SyntaxNode node) =>
+            node.WithLeadingTrivia(
+                node.GetLeadingTrivia().SkipWhile(t => t.Kind() == SyntaxKind.EndOfLineTrivia)
+            );
     }
 }

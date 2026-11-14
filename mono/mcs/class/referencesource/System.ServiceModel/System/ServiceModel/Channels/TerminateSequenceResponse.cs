@@ -13,9 +13,7 @@ namespace System.ServiceModel.Channels
         UniqueId identifier;
 
         public TerminateSequenceResponse()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         public TerminateSequenceResponse(UniqueId identifier)
             : base(true)
@@ -25,14 +23,8 @@ namespace System.ServiceModel.Channels
 
         public UniqueId Identifier
         {
-            get
-            {
-                return this.identifier;
-            }
-            set
-            {
-                this.identifier = value;
-            }
+            get { return this.identifier; }
+            set { this.identifier = value; }
         }
 
         public static TerminateSequenceResponseInfo Create(XmlDictionaryReader reader)
@@ -42,8 +34,11 @@ namespace System.ServiceModel.Channels
                 Fx.Assert("Argument reader cannot be null.");
             }
 
-            TerminateSequenceResponseInfo terminateSequenceInfo = new TerminateSequenceResponseInfo();
-            XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(ReliableMessagingVersion.WSReliableMessaging11);
+            TerminateSequenceResponseInfo terminateSequenceInfo =
+                new TerminateSequenceResponseInfo();
+            XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(
+                ReliableMessagingVersion.WSReliableMessaging11
+            );
 
             reader.ReadStartElement(DXD.Wsrm11Dictionary.TerminateSequenceResponse, wsrmNs);
 
@@ -63,7 +58,9 @@ namespace System.ServiceModel.Channels
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
         {
-            XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(ReliableMessagingVersion.WSReliableMessaging11);
+            XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(
+                ReliableMessagingVersion.WSReliableMessaging11
+            );
             writer.WriteStartElement(DXD.Wsrm11Dictionary.TerminateSequenceResponse, wsrmNs);
             writer.WriteStartElement(XD.WsrmFeb2005Dictionary.Identifier, wsrmNs);
             writer.WriteValue(this.identifier);

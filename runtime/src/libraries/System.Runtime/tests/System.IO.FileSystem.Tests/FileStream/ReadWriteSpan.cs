@@ -12,7 +12,16 @@ namespace System.IO.Tests
         [Fact]
         public void CallSpanReadWriteOnDerivedFileStream_ArrayMethodsUsed()
         {
-            using (var fs = new DerivedFileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.None, bufferSize: 0x1000, FileOptions.None))
+            using (
+                var fs = new DerivedFileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.None,
+                    bufferSize: 0x1000,
+                    FileOptions.None
+                )
+            )
             {
                 Assert.False(fs.WriteArrayInvoked);
                 Assert.False(fs.ReadArrayInvoked);
@@ -31,7 +40,16 @@ namespace System.IO.Tests
         [Fact]
         public async Task CallMemoryReadWriteAsyncOnDerivedFileStream_ArrayMethodsUsed()
         {
-            using (var fs = new DerivedFileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.None, bufferSize: 0x1000, FileOptions.None))
+            using (
+                var fs = new DerivedFileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.None,
+                    bufferSize: 0x1000,
+                    FileOptions.None
+                )
+            )
             {
                 Assert.False(fs.WriteAsyncArrayInvoked);
                 Assert.False(fs.ReadAsyncArrayInvoked);
@@ -50,13 +68,20 @@ namespace System.IO.Tests
 
     internal sealed class DerivedFileStream : FileStream
     {
-        public bool ReadArrayInvoked = false, WriteArrayInvoked = false;
-        public bool ReadAsyncArrayInvoked = false, WriteAsyncArrayInvoked = false;
+        public bool ReadArrayInvoked = false,
+            WriteArrayInvoked = false;
+        public bool ReadAsyncArrayInvoked = false,
+            WriteAsyncArrayInvoked = false;
 
-        public DerivedFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options) :
-            base(path, mode, access, share, bufferSize, options)
-        {
-        }
+        public DerivedFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options
+        )
+            : base(path, mode, access, share, bufferSize, options) { }
 
         public override int Read(byte[] array, int offset, int count)
         {
@@ -70,13 +95,23 @@ namespace System.IO.Tests
             base.Write(array, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ReadAsyncArrayInvoked = true;
             return base.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             WriteAsyncArrayInvoked = true;
             return base.WriteAsync(buffer, offset, count, cancellationToken);

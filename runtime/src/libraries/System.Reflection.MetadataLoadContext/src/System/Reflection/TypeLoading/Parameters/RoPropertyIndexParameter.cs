@@ -27,12 +27,20 @@ namespace System.Reflection.TypeLoading
         public sealed override string? Name => _backingParameter.Name;
         public sealed override Type ParameterType => _backingParameter.ParameterType;
         public sealed override ParameterAttributes Attributes => _backingParameter.Attributes;
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => _backingParameter.CustomAttributes;
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            _backingParameter.CustomAttributes;
         public sealed override bool HasDefaultValue => _backingParameter.HasDefaultValue;
         public sealed override object? RawDefaultValue => _backingParameter.RawDefaultValue;
-        public sealed override Type[] GetOptionalCustomModifiers() => _backingParameter.GetOptionalCustomModifiers();
-        public sealed override Type[] GetRequiredCustomModifiers() => _backingParameter.GetRequiredCustomModifiers();
-        public sealed override Type GetModifiedParameterType() => _backingParameter.GetModifiedParameterType();
+
+        public sealed override Type[] GetOptionalCustomModifiers() =>
+            _backingParameter.GetOptionalCustomModifiers();
+
+        public sealed override Type[] GetRequiredCustomModifiers() =>
+            _backingParameter.GetRequiredCustomModifiers();
+
+        public sealed override Type GetModifiedParameterType() =>
+            _backingParameter.GetModifiedParameterType();
+
         public sealed override string ToString() => _backingParameter.ToString();
     }
 }

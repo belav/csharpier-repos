@@ -46,20 +46,23 @@ namespace System.Web.Http
 
         internal IAuthenticationFilter InnerFilter
         {
-            get
-            {
-                return _innerFilter;
-            }
+            get { return _innerFilter; }
         }
 
         /// <inheritdoc />
-        public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
+        public Task AuthenticateAsync(
+            HttpAuthenticationContext context,
+            CancellationToken cancellationToken
+        )
         {
             return _innerFilter.AuthenticateAsync(context, cancellationToken);
         }
 
         /// <inheritdoc />
-        public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
+        public Task ChallengeAsync(
+            HttpAuthenticationChallengeContext context,
+            CancellationToken cancellationToken
+        )
         {
             return _innerFilter.ChallengeAsync(context, cancellationToken);
         }

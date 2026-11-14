@@ -10,23 +10,15 @@ namespace System.IdentityModel.Tokens
     public class SecurityTokenException : SystemException
     {
         public SecurityTokenException()
-            : base()
-        {
-        }
+            : base() { }
 
         public SecurityTokenException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public SecurityTokenException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected SecurityTokenException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

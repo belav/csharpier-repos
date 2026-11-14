@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,110 +26,116 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.IO;
+using NUnit.Framework;
 
-namespace MonoTests.System {
+namespace MonoTests.System
+{
+    public class UnitTestFileStyleUriParser : FileStyleUriParser
+    {
+        static bool registered;
 
-	public class UnitTestFileStyleUriParser: FileStyleUriParser {
+        public static bool Registered
+        {
+            get { return registered; }
+        }
 
-		static bool registered;
+        protected override string GetComponents(Uri uri, UriComponents components, UriFormat format)
+        {
+            throw new UriFormatException();
+            // return components.ToString ();
+        }
 
-		public static bool Registered {
-			get { return registered; }
-		}
+        protected override void InitializeAndValidate(Uri uri, out UriFormatException parsingError)
+        {
+            throw new NotImplementedException();
+            // base.InitializeAndValidate (uri, out parsingError);
+        }
 
-		protected override string GetComponents (Uri uri, UriComponents components, UriFormat format)
-		{
-			throw new UriFormatException ();
-			// return components.ToString ();
-		}
+        protected override bool IsBaseOf(Uri baseUri, Uri relativeUri)
+        {
+            throw new NotSupportedException();
+            // return base.IsBaseOf (baseUri, relativeUri);
+        }
 
-		protected override void InitializeAndValidate (Uri uri, out UriFormatException parsingError)
-		{
-			throw new NotImplementedException ();
-			// base.InitializeAndValidate (uri, out parsingError);
-		}
+        protected override bool IsWellFormedOriginalString(Uri uri)
+        {
+            throw new FormatException();
+            // return base.IsWellFormedOriginalString (uri);
+        }
 
-		protected override bool IsBaseOf (Uri baseUri, Uri relativeUri)
-		{
-			throw new NotSupportedException ();
-			// return base.IsBaseOf (baseUri, relativeUri);
-		}
+        protected override UriParser OnNewUri()
+        {
+            throw new OverflowException();
+            // return base.OnNewUri ();
+        }
 
-		protected override bool IsWellFormedOriginalString (Uri uri)
-		{
-			throw new FormatException ();
-			// return base.IsWellFormedOriginalString (uri);
-		}
+        protected override void OnRegister(string schemeName, int defaultPort)
+        {
+            registered = true;
+            // try to mess up registration
+            base.OnRegister(schemeName, 4040);
+            base.OnRegister("s" + schemeName, 4444);
+        }
 
-		protected override UriParser OnNewUri ()
-		{
-			throw new OverflowException ();
-			// return base.OnNewUri ();
-		}
+        protected override string Resolve(
+            Uri baseUri,
+            Uri relativeUri,
+            out UriFormatException parsingError
+        )
+        {
+            throw new OutOfMemoryException();
+            // return base.Resolve (baseUri, relativeUri, out parsingError);
+        }
+    }
 
-		protected override void OnRegister (string schemeName, int defaultPort)
-		{
-			registered = true;
-			// try to mess up registration
-			base.OnRegister (schemeName, 4040);
-			base.OnRegister ("s" + schemeName, 4444);
-		}
+    [TestFixture]
+    public class FileStyleUriParserTest
+    {
+        private UnitTestFileStyleUriParser parser;
 
-		protected override string Resolve (Uri baseUri, Uri relativeUri, out UriFormatException parsingError)
-		{
-			throw new OutOfMemoryException ();
-			// return base.Resolve (baseUri, relativeUri, out parsingError);
-		}
-	}
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            parser = new UnitTestFileStyleUriParser();
+            // unit tests are being reused in CAS tests
+            if (!UriParser.IsKnownScheme("filex"))
+                UriParser.Register(parser, "filex", 8080);
 
-	[TestFixture]
-	public class FileStyleUriParserTest {
+            Assert.IsTrue(UnitTestFileStyleUriParser.Registered, "Registered");
+            // our parser code was called
+        }
 
-		private UnitTestFileStyleUriParser parser;
+        [Test]
+        public void Filex()
+        {
+            Uri uri = new Uri("filex:///readme.txt");
+            Assert.AreEqual(8080, uri.Port, "Port");
+            // OnRegister cannot be used to change the registering informations
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			parser = new UnitTestFileStyleUriParser ();
-			// unit tests are being reused in CAS tests
-			if (!UriParser.IsKnownScheme ("filex"))
-				UriParser.Register (parser, "filex", 8080);
+        [Test]
+        [Category("NotWorking")]
+        public void Filex_Methods()
+        {
+            Uri uri = new Uri("filex:///readme.txt");
+            Assert.AreEqual(
+                "readme.txt",
+                uri.GetComponents(UriComponents.Path, UriFormat.SafeUnescaped),
+                "GetComponents"
+            );
+            Assert.IsTrue(uri.IsBaseOf(uri), "IsBaseOf");
+            Assert.IsTrue(uri.IsWellFormedOriginalString(), "IsWellFormedOriginalString");
+            // ??? our parser doesn't seems to be called :(
+        }
 
-			Assert.IsTrue (UnitTestFileStyleUriParser.Registered, "Registered");
-			// our parser code was called
-		}
-
-		[Test]
-		public void Filex ()
-		{
-			Uri uri = new Uri ("filex:///readme.txt");
-			Assert.AreEqual (8080, uri.Port, "Port");
-			// OnRegister cannot be used to change the registering informations
-		}
-
-		[Test]
-		[Category ("NotWorking")]
-		public void Filex_Methods ()
-		{
-			Uri uri = new Uri ("filex:///readme.txt");
-			Assert.AreEqual ("readme.txt", uri.GetComponents (UriComponents.Path, UriFormat.SafeUnescaped), "GetComponents");
-			Assert.IsTrue (uri.IsBaseOf (uri), "IsBaseOf");
-			Assert.IsTrue (uri.IsWellFormedOriginalString (), "IsWellFormedOriginalString");
-			// ??? our parser doesn't seems to be called :(
-		}
-
-		[Test]
-		public void SecureFilex ()
-		{
-			Uri uri = new Uri ("sfilex:///readme.txt");
-			Assert.AreEqual (-1, uri.Port, "Port");
-			// OnRegister cannot be used to change the registering informations
-		}
-	}
+        [Test]
+        public void SecureFilex()
+        {
+            Uri uri = new Uri("sfilex:///readme.txt");
+            Assert.AreEqual(-1, uri.Port, "Port");
+            // OnRegister cannot be used to change the registering informations
+        }
+    }
 }
-

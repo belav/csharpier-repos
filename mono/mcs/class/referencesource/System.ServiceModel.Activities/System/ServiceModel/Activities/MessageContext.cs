@@ -13,9 +13,7 @@ namespace System.ServiceModel.Activities
         Message message;
         Guid traceId;
 
-        public MessageContext()
-        {
-        }
+        public MessageContext() { }
 
         internal MessageContext(Message message)
         {
@@ -24,28 +22,14 @@ namespace System.ServiceModel.Activities
 
         public virtual Message Message
         {
-            get
-            {
-                return this.message;
-            }
-
-            set
-            {
-                this.message = value;
-            }
+            get { return this.message; }
+            set { this.message = value; }
         }
 
         public virtual Guid EndToEndTracingId
         {
-            get 
-            { 
-                return this.traceId; 
-            }
-            
-            set 
-            { 
-                this.traceId = value; 
-            }
+            get { return this.traceId; }
+            set { this.traceId = value; }
         }
     }
 }

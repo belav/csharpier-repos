@@ -84,8 +84,9 @@ internal sealed class KeyRingProvider : ICacheableKeyRingProvider, IKeyRingProvi
         // new keys endlessly, eventually falling back to the one we just added if all else fails.
         if (keyJustAdded != null)
         {
-            var keyToUse =
-                defaultKeyPolicy.DefaultKey ?? defaultKeyPolicy.FallbackKey ?? keyJustAdded;
+            var keyToUse = defaultKeyPolicy.DefaultKey
+                ?? defaultKeyPolicy.FallbackKey
+                ?? keyJustAdded;
             return CreateCacheableKeyRingCoreStep2(now, cacheExpirationToken, keyToUse, allKeys);
         }
 

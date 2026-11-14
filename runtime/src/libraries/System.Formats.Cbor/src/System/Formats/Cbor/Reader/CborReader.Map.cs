@@ -34,9 +34,17 @@ namespace System.Formats.Cbor
 
             if (header.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
             {
-                if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
+                if (
+                    _isConformanceModeCheckEnabled
+                    && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+                )
                 {
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_RequiresDefiniteLengthItems, ConformanceMode));
+                    throw new CborContentException(
+                        SR.Format(
+                            SR.Cbor_ConformanceMode_RequiresDefiniteLengthItems,
+                            ConformanceMode
+                        )
+                    );
                 }
 
                 AdvanceBuffer(1);
@@ -103,7 +111,10 @@ namespace System.Formats.Cbor
         {
             Debug.Assert(_currentKeyOffset != null && _itemsRead % 2 == 0);
 
-            (int Offset, int Length) currentKeyRange = (_currentKeyOffset.Value, _offset - _currentKeyOffset.Value);
+            (int Offset, int Length) currentKeyRange = (
+                _currentKeyOffset.Value,
+                _offset - _currentKeyOffset.Value
+            );
 
             if (_isConformanceModeCheckEnabled)
             {
@@ -136,19 +147,33 @@ namespace System.Formats.Cbor
                 (int Offset, int Length) previousKeyEncodingRange = _previousKeyEncodingRange.Value;
 
                 ReadOnlySpan<byte> buffer = _data.Span;
-                ReadOnlySpan<byte> previousKeyEncoding = buffer.Slice(previousKeyEncodingRange.Offset, previousKeyEncodingRange.Length);
-                ReadOnlySpan<byte> currentKeyEncoding = buffer.Slice(currentKeyEncodingRange.Offset, currentKeyEncodingRange.Length);
+                ReadOnlySpan<byte> previousKeyEncoding = buffer.Slice(
+                    previousKeyEncodingRange.Offset,
+                    previousKeyEncodingRange.Length
+                );
+                ReadOnlySpan<byte> currentKeyEncoding = buffer.Slice(
+                    currentKeyEncodingRange.Offset,
+                    currentKeyEncodingRange.Length
+                );
 
-                int cmp = CborConformanceModeHelpers.CompareKeyEncodings(previousKeyEncoding, currentKeyEncoding, ConformanceMode);
+                int cmp = CborConformanceModeHelpers.CompareKeyEncodings(
+                    previousKeyEncoding,
+                    currentKeyEncoding,
+                    ConformanceMode
+                );
                 if (cmp > 0)
                 {
                     ResetBuffer(currentKeyEncodingRange.Offset);
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_KeysNotInSortedOrder, ConformanceMode));
+                    throw new CborContentException(
+                        SR.Format(SR.Cbor_ConformanceMode_KeysNotInSortedOrder, ConformanceMode)
+                    );
                 }
                 else if (cmp == 0 && CborConformanceModeHelpers.RequiresUniqueKeys(ConformanceMode))
                 {
                     ResetBuffer(currentKeyEncodingRange.Offset);
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_ContainsDuplicateKeys, ConformanceMode));
+                    throw new CborContentException(
+                        SR.Format(SR.Cbor_ConformanceMode_ContainsDuplicateKeys, ConformanceMode)
+                    );
                 }
             }
 
@@ -164,7 +189,9 @@ namespace System.Formats.Cbor
             if (!keyEncodingRanges.Add(currentKeyEncodingRange))
             {
                 ResetBuffer(currentKeyEncodingRange.Offset);
-                throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_ContainsDuplicateKeys, ConformanceMode));
+                throw new CborContentException(
+                    SR.Format(SR.Cbor_ConformanceMode_ContainsDuplicateKeys, ConformanceMode)
+                );
             }
         }
 
@@ -175,8 +202,12 @@ namespace System.Formats.Cbor
                 return _keyEncodingRanges;
             }
 
-            if (_pooledKeyEncodingRangeAllocations != null &&
-                _pooledKeyEncodingRangeAllocations.TryPop(out HashSet<(int Offset, int Length)>? result))
+            if (
+                _pooledKeyEncodingRangeAllocations != null
+                && _pooledKeyEncodingRangeAllocations.TryPop(
+                    out HashSet<(int Offset, int Length)>? result
+                )
+            )
             {
                 result.Clear();
                 return _keyEncodingRanges = result;
@@ -190,7 +221,8 @@ namespace System.Formats.Cbor
         {
             if (allocation != null)
             {
-                _pooledKeyEncodingRangeAllocations ??= new Stack<HashSet<(int Offset, int Length)>>();
+                _pooledKeyEncodingRangeAllocations ??=
+                    new Stack<HashSet<(int Offset, int Length)>>();
                 _pooledKeyEncodingRangeAllocations.Push(allocation);
             }
         }
@@ -217,7 +249,10 @@ namespace System.Formats.Cbor
 
             public bool Equals((int Offset, int Length) x, (int Offset, int Length) y)
             {
-                return CborConformanceModeHelpers.AreEqualKeyEncodings(GetKeyEncoding(x), GetKeyEncoding(y));
+                return CborConformanceModeHelpers.AreEqualKeyEncodings(
+                    GetKeyEncoding(x),
+                    GetKeyEncoding(y)
+                );
             }
         }
     }

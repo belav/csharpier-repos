@@ -67,9 +67,15 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_Int_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new Queue(-1, 1)); // Capacity < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("growFactor", () => new Queue(1, (float)0.99)); // Grow factor < 1
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("growFactor", () => new Queue(1, (float)10.01)); // Grow factor > 10
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new Queue(-1, 1)
+            ); // Capacity < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("growFactor", () =>
+                new Queue(1, (float)0.99)
+            ); // Grow factor < 1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("growFactor", () =>
+                new Queue(1, (float)10.01)
+            ); // Grow factor > 10
         }
 
         [Fact]
@@ -91,7 +97,10 @@ namespace System.Collections.Tests
             AssertExtensions.Throws<ArgumentNullException>("col", () => new Queue(null)); // Collection is null
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void DebuggerAttribute()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(new Queue());
@@ -102,14 +111,20 @@ namespace System.Collections.Tests
             testQueue.Enqueue("b");
             testQueue.Enqueue(2);
 
-            DebuggerAttributeInfo debuggerAttribute = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(testQueue);
-            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(property => property.Name == "Items");
+            DebuggerAttributeInfo debuggerAttribute =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(testQueue);
+            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(property =>
+                property.Name == "Items"
+            );
             object[] items = (object[])infoProperty.GetValue(debuggerAttribute.Instance);
 
             Assert.Equal(testQueue.ToArray(), items);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void DebuggerAttribute_NullQueue_ThrowsArgumentNullException()
         {
             bool threwNull = false;
@@ -156,6 +171,7 @@ namespace System.Collections.Tests
                 Assert.Equal(0, queue2.Count);
             });
         }
+
         [Fact]
         public static void Clone()
         {
@@ -375,12 +391,20 @@ namespace System.Collections.Tests
             Queue queue1 = Helpers.CreateIntQueue(100);
             Helpers.PerformActionOnAllQueueWrappers(queue1, queue2 =>
             {
-                AssertExtensions.Throws<ArgumentNullException>("array", () => queue2.CopyTo(null, 0)); // Array is null
-                AssertExtensions.Throws<ArgumentException>("array", null, () => queue2.CopyTo(new object[150, 150], 0)); // Array is multidimensional
+                AssertExtensions.Throws<ArgumentNullException>("array", () =>
+                    queue2.CopyTo(null, 0)
+                ); // Array is null
+                AssertExtensions.Throws<ArgumentException>("array", null, () =>
+                    queue2.CopyTo(new object[150, 150], 0)
+                ); // Array is multidimensional
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => queue2.CopyTo(new object[150], -1)); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    queue2.CopyTo(new object[150], -1)
+                ); // Index < 0
 
-                AssertExtensions.Throws<ArgumentException>(null, () => queue2.CopyTo(new object[150], 51)); // Index + queue.Count > array.Length
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    queue2.CopyTo(new object[150], 51)
+                ); // Index + queue.Count > array.Length
             });
         }
 
@@ -564,10 +588,10 @@ namespace System.Collections.Tests
                 Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
                 Assert.Equal(dequeued, enumerator.Current);
 
-
                 // Current throws if the current index is < 0 or >= count
                 enumerator = queue2.GetEnumerator();
-                while (enumerator.MoveNext()) ;
+                while (enumerator.MoveNext())
+                    ;
 
                 Assert.False(enumerator.MoveNext());
                 Assert.False(enumerator.MoveNext());
@@ -940,7 +964,12 @@ namespace System.Collections.Tests
 
             for (int i = 0; i < _threadsToUse; i++)
             {
-                tasks[i] = Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                tasks[i] = Task.Factory.StartNew(
+                    action,
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
             }
 
             _threadCount = _threadsToUse;

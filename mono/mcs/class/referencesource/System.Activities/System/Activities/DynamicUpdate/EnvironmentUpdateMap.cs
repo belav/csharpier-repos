@@ -7,69 +7,39 @@ namespace System.Activities.DynamicUpdate
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.ComponentModel;
 
     [DataContract]
     internal class EnvironmentUpdateMap
     {
-        IList<EnvironmentUpdateMapEntry> variableEntries;       
-        IList<EnvironmentUpdateMapEntry> privateVariableEntries;       
-        IList<EnvironmentUpdateMapEntry> argumentEntries;       
-        
-        public EnvironmentUpdateMap()
-        {
-        }
+        IList<EnvironmentUpdateMapEntry> variableEntries;
+        IList<EnvironmentUpdateMapEntry> privateVariableEntries;
+        IList<EnvironmentUpdateMapEntry> argumentEntries;
+
+        public EnvironmentUpdateMap() { }
 
         [DataMember(EmitDefaultValue = false)]
-        public int NewArgumentCount
-        {
-            get;
-            set;
-        }
+        public int NewArgumentCount { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public int OldArgumentCount
-        {
-            get;
-            set;
-        }
+        public int OldArgumentCount { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public int NewVariableCount
-        {
-            get;
-            set;
-        }
+        public int NewVariableCount { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public int OldVariableCount
-        {
-            get;
-            set;
-        }
+        public int OldVariableCount { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public int NewPrivateVariableCount
-        {
-            get;
-            set;
-        }
+        public int NewPrivateVariableCount { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public int OldPrivateVariableCount
-        {
-            get;
-            set;
-        }
+        public int OldPrivateVariableCount { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public int RuntimeDelegateArgumentCount
-        {
-            get;
-            set;
-        }
+        public int RuntimeDelegateArgumentCount { get; set; }
 
         [DataMember(EmitDefaultValue = false, Name = "variableEntries")]
         internal IList<EnvironmentUpdateMapEntry> SerializedVariableEntries
@@ -96,17 +66,24 @@ namespace System.Activities.DynamicUpdate
         {
             get
             {
-                return (this.OldArgumentCount + this.OldVariableCount + this.OldPrivateVariableCount + this.RuntimeDelegateArgumentCount) == 0 &&
-                (this.NewArgumentCount + this.NewVariableCount + this.NewPrivateVariableCount + this.RuntimeDelegateArgumentCount) > 0;
+                return (
+                        this.OldArgumentCount
+                        + this.OldVariableCount
+                        + this.OldPrivateVariableCount
+                        + this.RuntimeDelegateArgumentCount
+                    ) == 0
+                    && (
+                        this.NewArgumentCount
+                        + this.NewVariableCount
+                        + this.NewPrivateVariableCount
+                        + this.RuntimeDelegateArgumentCount
+                    ) > 0;
             }
         }
 
         internal bool HasVariableEntries
         {
-            get
-            {
-                return this.variableEntries != null && this.variableEntries.Count > 0;
-            }
+            get { return this.variableEntries != null && this.variableEntries.Count > 0; }
         }
 
         internal bool HasPrivateVariableEntries
@@ -119,10 +96,7 @@ namespace System.Activities.DynamicUpdate
 
         internal bool HasArgumentEntries
         {
-            get
-            {
-                return this.argumentEntries != null && this.argumentEntries.Count > 0;
-            }
+            get { return this.argumentEntries != null && this.argumentEntries.Count > 0; }
         }
 
         public IList<EnvironmentUpdateMapEntry> VariableEntries
@@ -164,8 +138,11 @@ namespace System.Activities.DynamicUpdate
             }
         }
 
-        internal static EnvironmentUpdateMap Merge(EnvironmentUpdateMap first, EnvironmentUpdateMap second,
-            DynamicUpdateMap.MergeErrorContext errorContext)
+        internal static EnvironmentUpdateMap Merge(
+            EnvironmentUpdateMap first,
+            EnvironmentUpdateMap second,
+            DynamicUpdateMap.MergeErrorContext errorContext
+        )
         {
             if (first == null || second == null)
             {
@@ -184,14 +161,30 @@ namespace System.Activities.DynamicUpdate
                 NewPrivateVariableCount = second.NewPrivateVariableCount,
             };
 
-            result.variableEntries = Merge(result.NewVariableCount, first.VariableEntries, second.VariableEntries);
-            result.privateVariableEntries = Merge(result.NewPrivateVariableCount, first.PrivateVariableEntries, second.PrivateVariableEntries);
-            result.argumentEntries = Merge(result.NewArgumentCount, first.ArgumentEntries, second.ArgumentEntries);
+            result.variableEntries = Merge(
+                result.NewVariableCount,
+                first.VariableEntries,
+                second.VariableEntries
+            );
+            result.privateVariableEntries = Merge(
+                result.NewPrivateVariableCount,
+                first.PrivateVariableEntries,
+                second.PrivateVariableEntries
+            );
+            result.argumentEntries = Merge(
+                result.NewArgumentCount,
+                first.ArgumentEntries,
+                second.ArgumentEntries
+            );
 
-            if (result.OldArgumentCount != result.NewArgumentCount ||
-                result.OldVariableCount != result.NewVariableCount ||
-                result.OldPrivateVariableCount != result.NewPrivateVariableCount ||
-                result.HasArgumentEntries || result.HasVariableEntries || result.HasPrivateVariableEntries)
+            if (
+                result.OldArgumentCount != result.NewArgumentCount
+                || result.OldVariableCount != result.NewVariableCount
+                || result.OldPrivateVariableCount != result.NewPrivateVariableCount
+                || result.HasArgumentEntries
+                || result.HasVariableEntries
+                || result.HasPrivateVariableEntries
+            )
             {
                 return result;
             }
@@ -203,7 +196,10 @@ namespace System.Activities.DynamicUpdate
 
         internal int? GetOldVariableIndex(int newIndex)
         {
-            EnvironmentUpdateMapEntry environmentEntry = FindByNewIndex(this.VariableEntries, newIndex);
+            EnvironmentUpdateMapEntry environmentEntry = FindByNewIndex(
+                this.VariableEntries,
+                newIndex
+            );
             if (environmentEntry != null)
             {
                 return environmentEntry.IsAddition ? (int?)null : environmentEntry.OldOffset;
@@ -237,21 +233,36 @@ namespace System.Activities.DynamicUpdate
             return null;
         }
 
-        static void ThrowIfMapsIncompatible(EnvironmentUpdateMap first, EnvironmentUpdateMap second,
-            DynamicUpdateMap.MergeErrorContext errorContext)
+        static void ThrowIfMapsIncompatible(
+            EnvironmentUpdateMap first,
+            EnvironmentUpdateMap second,
+            DynamicUpdateMap.MergeErrorContext errorContext
+        )
         {
-            if (first.NewArgumentCount != second.OldArgumentCount ||
-                first.NewVariableCount != second.OldVariableCount ||
-                first.NewPrivateVariableCount != second.OldPrivateVariableCount)
+            if (
+                first.NewArgumentCount != second.OldArgumentCount
+                || first.NewVariableCount != second.OldVariableCount
+                || first.NewPrivateVariableCount != second.OldPrivateVariableCount
+            )
             {
-                errorContext.Throw(SR.InvalidMergeMapEnvironmentCount(
-                    first.NewArgumentCount, first.NewVariableCount, first.NewPrivateVariableCount,
-                    second.OldArgumentCount, second.OldVariableCount, second.OldPrivateVariableCount));
+                errorContext.Throw(
+                    SR.InvalidMergeMapEnvironmentCount(
+                        first.NewArgumentCount,
+                        first.NewVariableCount,
+                        first.NewPrivateVariableCount,
+                        second.OldArgumentCount,
+                        second.OldVariableCount,
+                        second.OldPrivateVariableCount
+                    )
+                );
             }
         }
 
-        static IList<EnvironmentUpdateMapEntry> Merge(int finalCount, IList<EnvironmentUpdateMapEntry> first,
-            IList<EnvironmentUpdateMapEntry> second)
+        static IList<EnvironmentUpdateMapEntry> Merge(
+            int finalCount,
+            IList<EnvironmentUpdateMapEntry> first,
+            IList<EnvironmentUpdateMapEntry> second
+        )
         {
             List<EnvironmentUpdateMapEntry> result = new List<EnvironmentUpdateMapEntry>();
             for (int i = 0; i < finalCount; i++)
@@ -266,14 +277,19 @@ namespace System.Activities.DynamicUpdate
             return result.Count > 0 ? result : null;
         }
 
-        static EnvironmentUpdateMapEntry MergeEntry(int finalIndex, IList<EnvironmentUpdateMapEntry> first,
-            IList<EnvironmentUpdateMapEntry> second)
+        static EnvironmentUpdateMapEntry MergeEntry(
+            int finalIndex,
+            IList<EnvironmentUpdateMapEntry> first,
+            IList<EnvironmentUpdateMapEntry> second
+        )
         {
             EnvironmentUpdateMapEntry secondEntry = FindByNewIndex(second, finalIndex);
             EnvironmentUpdateMapEntry firstEntry;
             if (secondEntry != null)
             {
-                firstEntry = secondEntry.IsAddition ? null : FindByNewIndex(first, secondEntry.OldOffset);
+                firstEntry = secondEntry.IsAddition
+                    ? null
+                    : FindByNewIndex(first, secondEntry.OldOffset);
             }
             else
             {
@@ -283,7 +299,10 @@ namespace System.Activities.DynamicUpdate
             return EnvironmentUpdateMapEntry.Merge(firstEntry, secondEntry);
         }
 
-        static EnvironmentUpdateMapEntry FindByNewIndex(IList<EnvironmentUpdateMapEntry> entries, int newIndex)
+        static EnvironmentUpdateMapEntry FindByNewIndex(
+            IList<EnvironmentUpdateMapEntry> entries,
+            int newIndex
+        )
         {
             foreach (EnvironmentUpdateMapEntry environmentEntry in entries)
             {

@@ -17,23 +17,34 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// Compiles a list of all labels that are targeted by gotos within a
     /// node, but are not declared within the node.
     /// </summary>
-    internal sealed class UnmatchedGotoFinder : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+    internal sealed class UnmatchedGotoFinder
+        : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
     {
         private readonly Dictionary<BoundNode, HashSet<LabelSymbol>> _unmatchedLabelsCache; // NB: never modified.
 
         private HashSet<LabelSymbol> _gotos;
         private HashSet<LabelSymbol> _targets;
 
-        private UnmatchedGotoFinder(Dictionary<BoundNode, HashSet<LabelSymbol>> unmatchedLabelsCache, int recursionDepth)
+        private UnmatchedGotoFinder(
+            Dictionary<BoundNode, HashSet<LabelSymbol>> unmatchedLabelsCache,
+            int recursionDepth
+        )
             : base(recursionDepth)
         {
             Debug.Assert(unmatchedLabelsCache != null);
             _unmatchedLabelsCache = unmatchedLabelsCache;
         }
 
-        public static HashSet<LabelSymbol> Find(BoundNode node, Dictionary<BoundNode, HashSet<LabelSymbol>> unmatchedLabelsCache, int recursionDepth)
+        public static HashSet<LabelSymbol> Find(
+            BoundNode node,
+            Dictionary<BoundNode, HashSet<LabelSymbol>> unmatchedLabelsCache,
+            int recursionDepth
+        )
         {
-            UnmatchedGotoFinder finder = new UnmatchedGotoFinder(unmatchedLabelsCache, recursionDepth);
+            UnmatchedGotoFinder finder = new UnmatchedGotoFinder(
+                unmatchedLabelsCache,
+                recursionDepth
+            );
             finder.Visit(node);
             HashSet<LabelSymbol> gotos = finder._gotos;
             HashSet<LabelSymbol> targets = finder._targets;

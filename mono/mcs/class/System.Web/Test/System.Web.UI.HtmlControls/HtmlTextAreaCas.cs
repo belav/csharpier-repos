@@ -1,5 +1,5 @@
 //
-// HtmlTextAreaCas.cs 
+// HtmlTextAreaCas.cs
 //	- CAS unit tests for System.Web.UI.HtmlControls.HtmlTextArea
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,42 +27,41 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security.Permissions;
 using System.Web.UI.HtmlControls;
-
 using MonoTests.System.Web.UI.HtmlControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.HtmlControls {
+namespace MonoCasTests.System.Web.UI.HtmlControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HtmlTextAreaCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            HtmlTextAreaTest unit = new HtmlTextAreaTest();
+            unit.DefaultProperties();
+            unit.NullProperties();
+            unit.CleanProperties();
+            unit.Name();
+            unit.Value();
+            unit.RenderAttributes();
+            unit.Render();
+            unit.AddParsedSubObject_LiteralControl();
+            unit.AddParsedSubObject_DataBoundLiteralControl();
+            unit.IPostBackDataHandler_RaisePostBackEvent();
+            unit.IPostBackDataHandler_LoadPostData();
+            unit.RaisePostBackEvent();
+            unit.LoadPostData();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlTextAreaCas : AspNetHostingMinimal {
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlTextAreaTest unit = new HtmlTextAreaTest ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.CleanProperties ();
-			unit.Name ();
-			unit.Value ();
-			unit.RenderAttributes ();
-			unit.Render ();
-			unit.AddParsedSubObject_LiteralControl ();
-			unit.AddParsedSubObject_DataBoundLiteralControl ();
-			unit.IPostBackDataHandler_RaisePostBackEvent ();
-			unit.IPostBackDataHandler_LoadPostData ();
-			unit.RaisePostBackEvent ();
-			unit.LoadPostData ();
-		}
-
-		public override Type Type {
-			get { return typeof (HtmlTextArea); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HtmlTextArea); }
+        }
+    }
 }

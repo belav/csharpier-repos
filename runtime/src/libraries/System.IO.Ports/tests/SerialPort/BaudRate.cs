@@ -22,21 +22,32 @@ namespace System.IO.Ports.Tests
 
         private const int NUM_TRYS = 5;
 
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         #region Test Cases
         [KnownFailure] // either hanging or really slow
         [ConditionalFact(nameof(HasNullModem))]
         public void BaudRate_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default BaudRate");
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Open();
 
@@ -110,7 +121,11 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyException(int baudRate, ThrowAt throwAt, Type expectedException)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 VerifyExceptionAtOpen(com, baudRate, throwAt, expectedException);
 
@@ -121,7 +136,12 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        private void VerifyExceptionAtOpen(SerialPort com, int baudRate, ThrowAt throwAt, Type expectedException)
+        private void VerifyExceptionAtOpen(
+            SerialPort com,
+            int baudRate,
+            ThrowAt throwAt,
+            Type expectedException
+        )
         {
             int origBaudRate = com.BaudRate;
             SerialPortProperties serPortProp = new SerialPortProperties();
@@ -136,7 +156,10 @@ namespace System.IO.Ports.Tests
                 serPortProp.SetAllPropertiesToDefaults();
             }
 
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             if (ThrowAt.Open == throwAt)
                 serPortProp.SetProperty("BaudRate", baudRate);
@@ -150,18 +173,24 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Assert.Fail($"ERROR!!! Expected Open() to throw {expectedException} and nothing was thrown");
+                    Assert.Fail(
+                        $"ERROR!!! Expected Open() to throw {expectedException} and nothing was thrown"
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Assert.Fail($"ERROR!!! Expected Open() NOT to throw an exception and {e.GetType()} was thrown");
+                    Assert.Fail(
+                        $"ERROR!!! Expected Open() NOT to throw an exception and {e.GetType()} was thrown"
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Assert.Fail($"ERROR!!! Expected Open() throw {expectedException} and {e.GetType()} was thrown: {e}");
+                    Assert.Fail(
+                        $"ERROR!!! Expected Open() throw {expectedException} and {e.GetType()} was thrown: {e}"
+                    );
                 }
             }
 
@@ -176,14 +205,19 @@ namespace System.IO.Ports.Tests
 
             com.Open();
             serPortProp.SetAllPropertiesToOpenDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
                 com.BaudRate = baudRate;
                 if (null != expectedException)
                 {
-                    Assert.Fail($"ERROR!!! Expected setting the BaudRate after Open() to throw {expectedException} and nothing was thrown");
+                    Assert.Fail(
+                        $"ERROR!!! Expected setting the BaudRate after Open() to throw {expectedException} and nothing was thrown"
+                    );
                 }
                 else
                 {
@@ -194,11 +228,15 @@ namespace System.IO.Ports.Tests
             {
                 if (null == expectedException)
                 {
-                    Assert.Fail($"ERROR!!! Expected setting the BaudRate after Open() NOT to throw an exception and {e.GetType()} was thrown");
+                    Assert.Fail(
+                        $"ERROR!!! Expected setting the BaudRate after Open() NOT to throw an exception and {e.GetType()} was thrown"
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Assert.Fail($"ERROR!!! Expected setting the BaudRate after Open() throw {expectedException} and {e.GetType()} was thrown");
+                    Assert.Fail(
+                        $"ERROR!!! Expected setting the BaudRate after Open() throw {expectedException} and {e.GetType()} was thrown"
+                    );
                 }
             }
 
@@ -216,7 +254,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyBaudRateAtOpen(int baudRate)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -224,7 +266,10 @@ namespace System.IO.Ports.Tests
                 com1.BaudRate = baudRate;
                 com1.Open();
                 serPortProp.SetProperty("BaudRate", baudRate);
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
                 VerifyBaudRate(com1);
@@ -234,7 +279,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyBaudRateAfterOpen(int baudRate)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -242,7 +291,10 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com1.BaudRate = baudRate;
                 serPortProp.SetProperty("BaudRate", baudRate);
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
                 VerifyBaudRate(com1);
@@ -252,14 +304,23 @@ namespace System.IO.Ports.Tests
 
         private void VerifyBaudRate(SerialPort com1)
         {
-            int numBytesToSend = Math.Max((int)((com1.BaudRate * (DEFAULT_TIME / 1000.0)) / 10.0), 64);
+            int numBytesToSend = Math.Max(
+                (int)((com1.BaudRate * (DEFAULT_TIME / 1000.0)) / 10.0),
+                64
+            );
             byte[] xmitBytes = new byte[numBytesToSend];
             byte[] rcvBytes = new byte[numBytesToSend];
             Random rndGen = new Random();
             Stopwatch sw = new Stopwatch();
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
-                double expectedTime, actualTime, percentageDifference;
+                double expectedTime,
+                    actualTime,
+                    percentageDifference;
 
                 //Generate some random byte to read/write at this baudrate
                 for (int i = 0; i < xmitBytes.Length; i++)
@@ -286,10 +347,14 @@ namespace System.IO.Ports.Tests
 
                     com2.DiscardInBuffer();
 
-                    IAsyncResult beginWriteResult = com1.BaseStream.BeginWrite(xmitBytes, 0, xmitBytes.Length, null, null);
-                    while (0 == (bytesToRead = com2.BytesToRead))
-                    {
-                    }
+                    IAsyncResult beginWriteResult = com1.BaseStream.BeginWrite(
+                        xmitBytes,
+                        0,
+                        xmitBytes.Length,
+                        null,
+                        null
+                    );
+                    while (0 == (bytesToRead = com2.BytesToRead)) { }
 
                     sw.Start();
                     while (numBytesToSend > com2.BytesToRead)
@@ -314,8 +379,14 @@ namespace System.IO.Ports.Tests
                 //then the expected baud rate must not have been used and we should report an error
                 if (MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE < percentageDifference)
                 {
-                    Assert.Fail(string.Format("ERROR!!! BuadRate not used Expected time:{0}, actual time:{1} percentageDifference:{2}",
-                        expectedTime, actualTime, percentageDifference));
+                    Assert.Fail(
+                        string.Format(
+                            "ERROR!!! BuadRate not used Expected time:{0}, actual time:{1} percentageDifference:{2}",
+                            expectedTime,
+                            actualTime,
+                            percentageDifference
+                        )
+                    );
                 }
 
                 com2.Read(rcvBytes, 0, rcvBytes.Length);

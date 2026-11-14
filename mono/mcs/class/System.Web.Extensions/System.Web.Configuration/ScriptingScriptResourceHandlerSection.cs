@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,32 +29,25 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Configuration;
+using System.Text;
 
 namespace System.Web.Configuration
 {
-	public sealed class ScriptingScriptResourceHandlerSection : ConfigurationSection
-	{
-		[ConfigurationPropertyAttribute ("enableCaching", DefaultValue = true)]
-		public bool EnableCaching {
-			get {
-				return (bool) this ["enableCaching"];
-			}
-			set {
-				this ["enableCaching"] = value;
-			}
-		}
+    public sealed class ScriptingScriptResourceHandlerSection : ConfigurationSection
+    {
+        [ConfigurationPropertyAttribute("enableCaching", DefaultValue = true)]
+        public bool EnableCaching
+        {
+            get { return (bool)this["enableCaching"]; }
+            set { this["enableCaching"] = value; }
+        }
 
-		[ConfigurationPropertyAttribute ("enableCompression", DefaultValue = true)]
-		public bool EnableCompression {
-			get {
-				return (bool) this ["enableCompression"];
-			}
-			set {
-				this ["enableCompression"] = value;
-			}
-		}
-	}
+        [ConfigurationPropertyAttribute("enableCompression", DefaultValue = true)]
+        public bool EnableCompression
+        {
+            get { return (bool)this["enableCompression"]; }
+            set { this["enableCompression"] = value; }
+        }
+    }
 }
-

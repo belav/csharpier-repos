@@ -23,10 +23,15 @@ namespace System.ServiceModel
                 }
                 if (value == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.SFxNameCannotBeEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxNameCannotBeEmpty)
+                        )
+                    );
                 }
-                name = value; isNameSetExplicit = true;
+                name = value;
+                isNameSetExplicit = true;
             }
         }
 

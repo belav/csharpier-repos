@@ -20,5 +20,9 @@ internal interface INavigableItemsService : ILanguageService
     /// <summary>
     /// Finds the definitions for the symbol at the specific position in the document.
     /// </summary>
-    Task<ImmutableArray<INavigableItem>> GetNavigableItemsAsync(Document document, int position, CancellationToken cancellationToken);
+    Task<ImmutableArray<INavigableItem>> GetNavigableItemsAsync(
+        Document document,
+        int position,
+        CancellationToken cancellationToken
+    );
 }

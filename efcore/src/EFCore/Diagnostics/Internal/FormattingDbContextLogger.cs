@@ -26,7 +26,8 @@ public class FormattingDbContextLogger : IDbContextLogger
     public FormattingDbContextLogger(
         Action<string> sink,
         Func<EventId, LogLevel, bool> filter,
-        DbContextLoggerOptions options)
+        DbContextLoggerOptions options
+    )
     {
         _sink = sink;
         _filter = filter;
@@ -56,7 +57,9 @@ public class FormattingDbContextLogger : IDbContextLogger
 
             if ((_options & DbContextLoggerOptions.LocalTime) != 0)
             {
-                messageBuilder.Append(DateTime.Now.ToShortDateString()).Append(DateTime.Now.ToString(" HH:mm:ss.fff "));
+                messageBuilder
+                    .Append(DateTime.Now.ToShortDateString())
+                    .Append(DateTime.Now.ToString(" HH:mm:ss.fff "));
             }
 
             if ((_options & DbContextLoggerOptions.UtcTime) != 0)
@@ -66,7 +69,11 @@ public class FormattingDbContextLogger : IDbContextLogger
 
             if ((_options & DbContextLoggerOptions.Id) != 0)
             {
-                messageBuilder.Append(eventData.EventIdCode).Append('[').Append(eventId.Id).Append("] ");
+                messageBuilder
+                    .Append(eventData.EventIdCode)
+                    .Append('[')
+                    .Append(eventId.Id)
+                    .Append("] ");
             }
 
             if ((_options & DbContextLoggerOptions.Category) != 0)
@@ -90,18 +97,28 @@ public class FormattingDbContextLogger : IDbContextLogger
             }
             else
             {
-                message = (_options & DbContextLoggerOptions.SingleLine) != 0
-                    ? messageBuilder
-                        .Append("-> ")
-                        .Append(message)
-                        .Replace(Environment.NewLine, "", preambleLength, messageBuilder.Length - preambleLength)
-                        .ToString()
-                    : messageBuilder
-                        .AppendLine()
-                        .Append(message)
-                        .Replace(
-                            Environment.NewLine, Environment.NewLine + padding, preambleLength, messageBuilder.Length - preambleLength)
-                        .ToString();
+                message =
+                    (_options & DbContextLoggerOptions.SingleLine) != 0
+                        ? messageBuilder
+                            .Append("-> ")
+                            .Append(message)
+                            .Replace(
+                                Environment.NewLine,
+                                "",
+                                preambleLength,
+                                messageBuilder.Length - preambleLength
+                            )
+                            .ToString()
+                        : messageBuilder
+                            .AppendLine()
+                            .Append(message)
+                            .Replace(
+                                Environment.NewLine,
+                                Environment.NewLine + padding,
+                                preambleLength,
+                                messageBuilder.Length - preambleLength
+                            )
+                            .ToString();
             }
         }
 
@@ -109,11 +126,10 @@ public class FormattingDbContextLogger : IDbContextLogger
     }
 
     /// <inheritdoc />
-    public virtual bool ShouldLog(EventId eventId, LogLevel logLevel)
-        => _filter(eventId, logLevel);
+    public virtual bool ShouldLog(EventId eventId, LogLevel logLevel) => _filter(eventId, logLevel);
 
-    private static string GetLogLevelString(LogLevel logLevel)
-        => logLevel switch
+    private static string GetLogLevelString(LogLevel logLevel) =>
+        logLevel switch
         {
             LogLevel.Trace => "trce: ",
             LogLevel.Debug => "dbug: ",
@@ -121,6 +137,6 @@ public class FormattingDbContextLogger : IDbContextLogger
             LogLevel.Warning => "warn: ",
             LogLevel.Error => "fail: ",
             LogLevel.Critical => "crit: ",
-            _ => "none"
+            _ => "none",
         };
 }

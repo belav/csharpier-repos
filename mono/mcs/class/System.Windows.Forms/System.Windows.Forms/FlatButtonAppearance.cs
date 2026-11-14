@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,141 +25,157 @@
 // Author:
 //      Daniel Nauck    (dna(at)mono-project(dot)de)
 
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace System.Windows.Forms
 {
-	[TypeConverter (typeof (FlatButtonAppearanceConverter))]
-	public class FlatButtonAppearance
-	{
-		private Color borderColor = Color.Empty;
-		private int borderSize = 1;
-		private Color checkedBackColor = Color.Empty;
-		private Color mouseDownBackColor = Color.Empty;
-		private Color mouseOverBackColor = Color.Empty;
-		private ButtonBase owner = null;
+    [TypeConverter(typeof(FlatButtonAppearanceConverter))]
+    public class FlatButtonAppearance
+    {
+        private Color borderColor = Color.Empty;
+        private int borderSize = 1;
+        private Color checkedBackColor = Color.Empty;
+        private Color mouseDownBackColor = Color.Empty;
+        private Color mouseOverBackColor = Color.Empty;
+        private ButtonBase owner = null;
 
-		internal FlatButtonAppearance (ButtonBase owner)
-		{
-			this.owner = owner;
-		}
+        internal FlatButtonAppearance(ButtonBase owner)
+        {
+            this.owner = owner;
+        }
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(typeof(Color), "")]
-		[NotifyParentProperty(true)]
-		[Browsable(true)]
-		public Color BorderColor
-		{
-			get { return borderColor; }
-			set {
-				if(borderColor == value)
-					return;
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(typeof(Color), "")]
+        [NotifyParentProperty(true)]
+        [Browsable(true)]
+        public Color BorderColor
+        {
+            get { return borderColor; }
+            set
+            {
+                if (borderColor == value)
+                    return;
 
-				if (value == Color.Transparent)
-					throw new NotSupportedException ("Cannot have a Transparent border.");
-					
-				borderColor = value;
-				
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
+                if (value == Color.Transparent)
+                    throw new NotSupportedException("Cannot have a Transparent border.");
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(1)]
-		[NotifyParentProperty(true)]
-		[Browsable(true)]
-		public int BorderSize
-		{
-			get { return borderSize; }
-			set {
-				if(borderSize == value)
-					return;
+                borderColor = value;
 
-				if (value < 0)
-					throw new ArgumentOutOfRangeException ("value", string.Format ("'{0}' is not a valid value for 'BorderSize'. 'BorderSize' must be greater or equal than {1}.", value, 0));
+                if (owner != null)
+                    owner.Invalidate();
+            }
+        }
 
-				borderSize = value;
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(1)]
+        [NotifyParentProperty(true)]
+        [Browsable(true)]
+        public int BorderSize
+        {
+            get { return borderSize; }
+            set
+            {
+                if (borderSize == value)
+                    return;
 
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        string.Format(
+                            "'{0}' is not a valid value for 'BorderSize'. 'BorderSize' must be greater or equal than {1}.",
+                            value,
+                            0
+                        )
+                    );
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(typeof(Color), "")]
-		[NotifyParentProperty(true)]
-		[Browsable(true)]
-		public Color CheckedBackColor 
-		{
-			get { return checkedBackColor; }
-			set {
-				if(checkedBackColor == value)
-					return;
+                borderSize = value;
 
-				checkedBackColor = value;
+                if (owner != null)
+                    owner.Invalidate();
+            }
+        }
 
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(typeof(Color), "")]
+        [NotifyParentProperty(true)]
+        [Browsable(true)]
+        public Color CheckedBackColor
+        {
+            get { return checkedBackColor; }
+            set
+            {
+                if (checkedBackColor == value)
+                    return;
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(typeof(Color), "")]
-		[Browsable(true)]
-		[NotifyParentProperty(true)]
-		public Color MouseDownBackColor
-		{
-			get { return mouseDownBackColor; }
-			set {
-				if(mouseDownBackColor == value)
-					return;
+                checkedBackColor = value;
 
-				mouseDownBackColor = value;
+                if (owner != null)
+                    owner.Invalidate();
+            }
+        }
 
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(typeof(Color), "")]
+        [Browsable(true)]
+        [NotifyParentProperty(true)]
+        public Color MouseDownBackColor
+        {
+            get { return mouseDownBackColor; }
+            set
+            {
+                if (mouseDownBackColor == value)
+                    return;
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(typeof(Color), "")]
-		[NotifyParentProperty(true)]
-		[Browsable(true)]
-		public Color MouseOverBackColor
-		{
-			get { return mouseOverBackColor; }
-			set {
-				if(mouseOverBackColor == value)
-					return;
+                mouseDownBackColor = value;
 
-				mouseOverBackColor = value;
+                if (owner != null)
+                    owner.Invalidate();
+            }
+        }
 
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
-	}
-	
-	internal class FlatButtonAppearanceConverter : ExpandableObjectConverter
-	{
-		public override object ConvertTo (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
-		{
-			if (destinationType == typeof (string))
-			    return String.Empty;
-			return base.ConvertTo (context, culture, value, destinationType);
-		}
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(typeof(Color), "")]
+        [NotifyParentProperty(true)]
+        [Browsable(true)]
+        public Color MouseOverBackColor
+        {
+            get { return mouseOverBackColor; }
+            set
+            {
+                if (mouseOverBackColor == value)
+                    return;
 
-		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
-		{
-			if (destinationType == typeof (string))
-				return true;
-			return base.CanConvertTo (context, destinationType);
-		}
-	}
+                mouseOverBackColor = value;
+
+                if (owner != null)
+                    owner.Invalidate();
+            }
+        }
+    }
+
+    internal class FlatButtonAppearanceConverter : ExpandableObjectConverter
+    {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (destinationType == typeof(string))
+                return String.Empty;
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType == typeof(string))
+                return true;
+            return base.CanConvertTo(context, destinationType);
+        }
+    }
 }

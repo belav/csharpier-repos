@@ -1,4 +1,3 @@
-
 using System.Configuration;
 
 namespace System.Net.Configuration
@@ -20,9 +19,15 @@ namespace System.Net.Configuration
             requestQueue = CreateTimeSpanProperty(ConfigurationStrings.RequestQueue);
             idleConnection = CreateTimeSpanProperty(ConfigurationStrings.IdleConnection);
             headerWait = CreateTimeSpanProperty(ConfigurationStrings.HeaderWait);
-            
-            minSendBytesPerSecond = new ConfigurationProperty(ConfigurationStrings.MinSendBytesPerSecond, 
-                typeof(long), 0L, null, new LongValidator(), ConfigurationPropertyOptions.None);
+
+            minSendBytesPerSecond = new ConfigurationProperty(
+                ConfigurationStrings.MinSendBytesPerSecond,
+                typeof(long),
+                0L,
+                null,
+                new LongValidator(),
+                ConfigurationPropertyOptions.None
+            );
 
             properties = new ConfigurationPropertyCollection();
             properties.Add(entityBody);
@@ -35,41 +40,71 @@ namespace System.Net.Configuration
 
         private static ConfigurationProperty CreateTimeSpanProperty(string name)
         {
-            return new ConfigurationProperty(name, typeof(TimeSpan), TimeSpan.Zero, null, new TimeSpanValidator(),
-                ConfigurationPropertyOptions.None);
+            return new ConfigurationProperty(
+                name,
+                typeof(TimeSpan),
+                TimeSpan.Zero,
+                null,
+                new TimeSpanValidator(),
+                ConfigurationPropertyOptions.None
+            );
         }
 
-        [ConfigurationProperty(ConfigurationStrings.EntityBody, DefaultValue = 0, IsRequired = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.EntityBody,
+            DefaultValue = 0,
+            IsRequired = false
+        )]
         public TimeSpan EntityBody
         {
             get { return (TimeSpan)this[entityBody]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DrainEntityBody, DefaultValue = 0, IsRequired = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DrainEntityBody,
+            DefaultValue = 0,
+            IsRequired = false
+        )]
         public TimeSpan DrainEntityBody
         {
             get { return (TimeSpan)this[drainEntityBody]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.RequestQueue, DefaultValue = 0, IsRequired = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.RequestQueue,
+            DefaultValue = 0,
+            IsRequired = false
+        )]
         public TimeSpan RequestQueue
         {
             get { return (TimeSpan)this[requestQueue]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IdleConnection, DefaultValue = 0, IsRequired = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IdleConnection,
+            DefaultValue = 0,
+            IsRequired = false
+        )]
         public TimeSpan IdleConnection
         {
             get { return (TimeSpan)this[idleConnection]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.HeaderWait, DefaultValue = 0, IsRequired = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.HeaderWait,
+            DefaultValue = 0,
+            IsRequired = false
+        )]
         public TimeSpan HeaderWait
         {
             get { return (TimeSpan)this[headerWait]; }
         }
-        
-        [ConfigurationProperty(ConfigurationStrings.MinSendBytesPerSecond, DefaultValue = 0L, IsRequired = false)]
+
+        [ConfigurationProperty(
+            ConfigurationStrings.MinSendBytesPerSecond,
+            DefaultValue = 0L,
+            IsRequired = false
+        )]
         public long MinSendBytesPerSecond
         {
             get { return (long)this[minSendBytesPerSecond]; }
@@ -109,8 +144,11 @@ namespace System.Net.Configuration
                 // All timeouts are defined as USHORT in native layer. Make sure that timeout value is within range.
                 if (seconds < 0 || seconds > ushort.MaxValue)
                 {
-                    throw new ArgumentOutOfRangeException("value", timeout,
-                        SR.GetString(SR.ArgumentOutOfRange_Bounds_Lower_Upper, "0:0:0", "18:12:15"));
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        timeout,
+                        SR.GetString(SR.ArgumentOutOfRange_Bounds_Lower_Upper, "0:0:0", "18:12:15")
+                    );
                 }
             }
         }
@@ -129,11 +167,13 @@ namespace System.Net.Configuration
                 // We need to use long as the public CLS compliant value, but really this is a UInt32
                 if (input < 0 || input > UInt32.MaxValue)
                 {
-                    throw new ArgumentOutOfRangeException("value", input, 
-                        SR.GetString(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 0, UInt32.MaxValue));
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        input,
+                        SR.GetString(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 0, UInt32.MaxValue)
+                    );
                 }
             }
         }
     }
 }
-

@@ -183,8 +183,7 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
                 else
                 {
                     // We're working with a runtime-compiled page and have to Load it.
-                    var compiled =
-                        actionDescriptor!.CompiledPageDescriptor
+                    var compiled = actionDescriptor!.CompiledPageDescriptor
                         ?? await _loader.LoadAsync(actionDescriptor, endpoint.Metadata);
                     loadedEndpoints[j] = compiled.Endpoint!;
                 }

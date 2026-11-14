@@ -16,13 +16,21 @@ const string rulesMissingDocumentationFileName = "RulesMissingDocumentation.md";
 
 if (args.Length != expectedArguments)
 {
-    await Console.Error.WriteLineAsync($"Excepted {expectedArguments} arguments, found {args.Length}: {string.Join(';', args)}").ConfigureAwait(false);
+    await Console
+        .Error.WriteLineAsync(
+            $"Excepted {expectedArguments} arguments, found {args.Length}: {string.Join(';', args)}"
+        )
+        .ConfigureAwait(false);
     return 1;
 }
 
 if (!args[0].StartsWith(validateOnlyPrefix, StringComparison.OrdinalIgnoreCase))
 {
-    await Console.Error.WriteLineAsync($"Excepted the first argument to start with `{validateOnlyPrefix}`. found `{args[0]}`.").ConfigureAwait(false);
+    await Console
+        .Error.WriteLineAsync(
+            $"Excepted the first argument to start with `{validateOnlyPrefix}`. found `{args[0]}`."
+        )
+        .ConfigureAwait(false);
     return 1;
 }
 
@@ -41,11 +49,13 @@ var directory = Directory.CreateDirectory(analyzerDocumentationFileDir);
 var fileWithPath = Path.Combine(directory.FullName, rulesMissingDocumentationFileName);
 
 var builder = new StringBuilder();
-builder.Append(@"# Rules without documentation
+builder.Append(
+    @"# Rules without documentation
 
 Rule ID | Missing Help Link | Title |
 --------|-------------------|-------|
-");
+"
+);
 
 var actualContent = Array.Empty<string>();
 if (validateOnly)
@@ -61,8 +71,10 @@ foreach (var ruleById in allRulesById)
     DiagnosticDescriptor descriptor = ruleById.Value;
 
     var helpLinkUri = descriptor.HelpLinkUri;
-    if (!string.IsNullOrWhiteSpace(helpLinkUri) &&
-        await checkHelpLinkAsync(helpLinkUri).ConfigureAwait(false))
+    if (
+        !string.IsNullOrWhiteSpace(helpLinkUri)
+        && await checkHelpLinkAsync(helpLinkUri).ConfigureAwait(false)
+    )
     {
         // Rule with valid documentation link
         continue;
@@ -83,7 +95,11 @@ foreach (var ruleById in allRulesById)
         // However, we consider "missing" entries as invalid. This is to force updating the file when new rules are added.
         if (!actualContent.Contains(line))
         {
-            await Console.Error.WriteLineAsync($"Missing entry in '{fileWithPath}'. Please add the below entry to this file to fix the build:").ConfigureAwait(false);
+            await Console
+                .Error.WriteLineAsync(
+                    $"Missing entry in '{fileWithPath}'. Please add the below entry to this file to fix the build:"
+                )
+                .ConfigureAwait(false);
             await Console.Error.WriteLineAsync(line).ConfigureAwait(false);
             // The file is missing an entry. Mark it as invalid and break the loop as there is no need to continue validating.
             return 1;
@@ -119,21 +135,34 @@ async Task<bool> checkHelpLinkAsync(string helpLink)
     }
 }
 
-static SortedList<string, DiagnosticDescriptor> getAllRulesById(string binDirectory, string configuration)
+static SortedList<string, DiagnosticDescriptor> getAllRulesById(
+    string binDirectory,
+    string configuration
+)
 {
     var allRulesById = new SortedList<string, DiagnosticDescriptor>();
 
     foreach (string assembly in s_assemblies)
     {
         var assemblyName = Path.GetFileNameWithoutExtension(assembly);
-        string path = Path.Combine(binDirectory, assemblyName, configuration, "netstandard2.0", assembly);
+        string path = Path.Combine(
+            binDirectory,
+            assemblyName,
+            configuration,
+            "netstandard2.0",
+            assembly
+        );
         if (!File.Exists(path))
         {
             throw new Exception($"'{path}' does not exist");
         }
 
-        var analyzerFileReference = new AnalyzerFileReference(path, AnalyzerAssemblyLoader.Instance);
-        analyzerFileReference.AnalyzerLoadFailed += (sender, e) => throw e.Exception ?? new NotSupportedException(e.Message);
+        var analyzerFileReference = new AnalyzerFileReference(
+            path,
+            AnalyzerAssemblyLoader.Instance
+        );
+        analyzerFileReference.AnalyzerLoadFailed += (sender, e) =>
+            throw e.Exception ?? new NotSupportedException(e.Message);
         var analyzers = analyzerFileReference.GetAnalyzersForAllLanguages();
 
         foreach (var analyzer in analyzers)
@@ -155,7 +184,8 @@ partial class Program
     private static readonly ImmutableArray<string> s_assemblies = ImmutableArray.Create(
         "Microsoft.CodeAnalysis.Features.dll",
         "Microsoft.CodeAnalysis.CSharp.Features.dll",
-        "Microsoft.CodeAnalysis.VisualBasic.Features.dll");
+        "Microsoft.CodeAnalysis.VisualBasic.Features.dll"
+    );
 
     private sealed class AnalyzerAssemblyLoader : IAnalyzerAssemblyLoader
     {
@@ -163,9 +193,7 @@ partial class Program
 
         private AnalyzerAssemblyLoader() { }
 
-        public void AddDependencyLocation(string fullPath)
-        {
-        }
+        public void AddDependencyLocation(string fullPath) { }
 
         public Assembly LoadFromPath(string fullPath)
         {

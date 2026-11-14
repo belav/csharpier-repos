@@ -4,6 +4,7 @@
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     using ConstraintInAnotherNamespace;
+
     namespace UsesConstraintInAnotherNamespace
     {
         public partial class MessagePrinter<T>
@@ -16,7 +17,11 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 
             internal static partial class Log
             {
-                [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "The message is {Text}.")]
+                [LoggerMessage(
+                    EventId = 1,
+                    Level = LogLevel.Information,
+                    Message = "The message is {Text}."
+                )]
                 internal static partial void Message(ILogger logger, string? text);
             }
         }
@@ -29,9 +34,14 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
                 Log<Message>.Message(logger, message);
             }
 
-            internal static partial class Log<U> where U : Message
+            internal static partial class Log<U>
+                where U : Message
             {
-                [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "The message is {Text}.")]
+                [LoggerMessage(
+                    EventId = 1,
+                    Level = LogLevel.Information,
+                    Message = "The message is {Text}."
+                )]
                 internal static partial void Message(ILogger logger, U text);
             }
         }
@@ -43,9 +53,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy)
-        {
-        }
+        public static void Foo(T dummy) { }
     }
 
     internal static partial class ConstraintsTestExtensions1<T>
@@ -54,9 +62,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy)
-        {
-        }
+        public static void Foo(T dummy) { }
     }
 
     internal static partial class ConstraintsTestExtensions2<T>
@@ -65,9 +71,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy)
-        {
-        }
+        public static void Foo(T dummy) { }
     }
 
     internal static partial class ConstraintsTestExtensions3<T>
@@ -76,9 +80,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy)
-        {
-        }
+        public static void Foo(T dummy) { }
     }
 
     internal static partial class ConstraintsTestExtensions4<T>
@@ -87,9 +89,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy)
-        {
-        }
+        public static void Foo(T dummy) { }
     }
 
     internal static partial class ConstraintsTestExtensions5<T>
@@ -98,9 +98,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy)
-        {
-        }
+        public static void Foo(T dummy) { }
     }
 }
 

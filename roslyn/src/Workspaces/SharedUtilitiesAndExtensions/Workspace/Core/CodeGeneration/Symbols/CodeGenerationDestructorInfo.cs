@@ -11,15 +11,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class CodeGenerationDestructorInfo
     {
-        private static readonly ConditionalWeakTable<IMethodSymbol, CodeGenerationDestructorInfo> s_destructorToInfoMap =
-            new();
+        private static readonly ConditionalWeakTable<
+            IMethodSymbol,
+            CodeGenerationDestructorInfo
+        > s_destructorToInfoMap = new();
 
         private readonly string _typeName;
         private readonly ImmutableArray<SyntaxNode> _statements;
 
-        private CodeGenerationDestructorInfo(
-            string typeName,
-            ImmutableArray<SyntaxNode> statements)
+        private CodeGenerationDestructorInfo(string typeName, ImmutableArray<SyntaxNode> statements)
         {
             _typeName = typeName;
             _statements = statements;
@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public static void Attach(
             IMethodSymbol destructor,
             string typeName,
-            ImmutableArray<SyntaxNode> statements)
+            ImmutableArray<SyntaxNode> statements
+        )
         {
             var info = new CodeGenerationDestructorInfo(typeName, statements);
             s_destructorToInfoMap.Add(destructor, info);
@@ -40,16 +41,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return info;
         }
 
-        public static ImmutableArray<SyntaxNode> GetStatements(IMethodSymbol destructor)
-            => GetStatements(GetInfo(destructor));
+        public static ImmutableArray<SyntaxNode> GetStatements(IMethodSymbol destructor) =>
+            GetStatements(GetInfo(destructor));
 
-        public static string GetTypeName(IMethodSymbol destructor)
-            => GetTypeName(GetInfo(destructor), destructor);
+        public static string GetTypeName(IMethodSymbol destructor) =>
+            GetTypeName(GetInfo(destructor), destructor);
 
-        private static ImmutableArray<SyntaxNode> GetStatements(CodeGenerationDestructorInfo info)
-            => info?._statements ?? default;
+        private static ImmutableArray<SyntaxNode> GetStatements(
+            CodeGenerationDestructorInfo info
+        ) => info?._statements ?? default;
 
-        private static string GetTypeName(CodeGenerationDestructorInfo info, IMethodSymbol constructor)
-            => info == null ? constructor.ContainingType.Name : info._typeName;
+        private static string GetTypeName(
+            CodeGenerationDestructorInfo info,
+            IMethodSymbol constructor
+        ) => info == null ? constructor.ContainingType.Name : info._typeName;
     }
 }

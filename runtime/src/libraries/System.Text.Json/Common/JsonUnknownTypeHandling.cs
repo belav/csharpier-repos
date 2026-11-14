@@ -12,9 +12,10 @@ namespace System.Text.Json.Serialization
         /// A type declared as <see cref="object"/> is deserialized as a <see cref="JsonElement"/>.
         /// </summary>
         JsonElement = 0,
+
         /// <summary>
         /// A type declared as <see cref="object"/> is deserialized as a <see cref="JsonNode"/>.
         /// </summary>
-        JsonNode = 1
+        JsonNode = 1,
     }
 }

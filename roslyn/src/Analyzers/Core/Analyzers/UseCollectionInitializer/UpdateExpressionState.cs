@@ -17,16 +17,16 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer;
 /// Common immutable state and helpers used by "convert object creation to collection initializer/expression" and "use
 /// collection expression for builder pattern".
 /// </summary>
-internal readonly struct UpdateExpressionState<
-    TExpressionSyntax,
-    TStatementSyntax>
+internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSyntax>
     where TExpressionSyntax : SyntaxNode
     where TStatementSyntax : SyntaxNode
 {
-    private static readonly ImmutableArray<(string name, bool isLinq)> s_multiAddNames = ImmutableArray.Create(
-        (nameof(List<int>.AddRange), isLinq: false),
-        (nameof(Enumerable.Concat), isLinq: true),
-        (nameof(Enumerable.Append), isLinq: true));
+    private static readonly ImmutableArray<(string name, bool isLinq)> s_multiAddNames =
+        ImmutableArray.Create(
+            (nameof(List<int>.AddRange), isLinq: false),
+            (nameof(Enumerable.Concat), isLinq: true),
+            (nameof(Enumerable.Append), isLinq: true)
+        );
 
     public readonly SemanticModel SemanticModel;
     public readonly ISyntaxFacts SyntaxFacts;
@@ -57,7 +57,8 @@ internal readonly struct UpdateExpressionState<
         ISyntaxFacts syntaxFacts,
         TExpressionSyntax startExpression,
         SyntaxNodeOrToken valuePattern,
-        ISymbol? initializedSymbol)
+        ISymbol? initializedSymbol
+    )
     {
         SemanticModel = semanticModel;
         SyntaxFacts = syntaxFacts;
@@ -67,10 +68,13 @@ internal readonly struct UpdateExpressionState<
         InitializedSymbol = initializedSymbol;
     }
 
-    public IEnumerable<TStatementSyntax> GetSubsequentStatements()
-        => ContainingStatement is null
+    public IEnumerable<TStatementSyntax> GetSubsequentStatements() =>
+        ContainingStatement is null
             ? SpecializedCollections.EmptyEnumerable<TStatementSyntax>()
-            : UseCollectionInitializerHelpers.GetSubsequentStatements(SyntaxFacts, ContainingStatement);
+            : UseCollectionInitializerHelpers.GetSubsequentStatements(
+                SyntaxFacts,
+                ContainingStatement
+            );
 
     /// <summary>
     /// <see langword="true"/> if this <paramref name="expression"/> is a reference to the object-creation value, or the
@@ -82,15 +86,15 @@ internal readonly struct UpdateExpressionState<
     {
         if (ValuePattern.IsToken)
         {
-            return SyntaxFacts.IsIdentifierName(expression) &&
-                SyntaxFacts.AreEquivalent(
+            return SyntaxFacts.IsIdentifierName(expression)
+                && SyntaxFacts.AreEquivalent(
                     ValuePattern.AsToken(),
-                    SyntaxFacts.GetIdentifierOfSimpleName(expression));
+                    SyntaxFacts.GetIdentifierOfSimpleName(expression)
+                );
         }
         else
         {
-            return SyntaxFacts.AreEquivalent(
-                ValuePattern.AsNode(), expression);
+            return SyntaxFacts.AreEquivalent(ValuePattern.AsNode(), expression);
         }
     }
 
@@ -102,20 +106,28 @@ internal readonly struct UpdateExpressionState<
     /// </summary>
     public bool NodeContainsValuePatternOrReferencesInitializedSymbol(
         SyntaxNode expression,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        foreach (var subExpression in expression.DescendantNodesAndSelf().OfType<TExpressionSyntax>())
+        foreach (
+            var subExpression in expression.DescendantNodesAndSelf().OfType<TExpressionSyntax>()
+        )
         {
-            if (!SyntaxFacts.IsNameOfSimpleMemberAccessExpression(subExpression) &&
-                !SyntaxFacts.IsNameOfMemberBindingExpression(subExpression))
+            if (
+                !SyntaxFacts.IsNameOfSimpleMemberAccessExpression(subExpression)
+                && !SyntaxFacts.IsNameOfMemberBindingExpression(subExpression)
+            )
             {
                 if (ValuePatternMatches(subExpression))
                     return true;
             }
 
-            if (InitializedSymbol != null &&
-                InitializedSymbol.Equals(
-                    SemanticModel.GetSymbolInfo(subExpression, cancellationToken).GetAnySymbol()))
+            if (
+                InitializedSymbol != null
+                && InitializedSymbol.Equals(
+                    SemanticModel.GetSymbolInfo(subExpression, cancellationToken).GetAnySymbol()
+                )
+            )
             {
                 return true;
             }
@@ -129,15 +141,19 @@ internal readonly struct UpdateExpressionState<
         bool allowLinq,
         CancellationToken cancellationToken,
         [NotNullWhen(true)] out TExpressionSyntax? instance,
-        out bool useSpread)
+        out bool useSpread
+    )
     {
         // Look for a call to Add taking 1 arg
-        if (this.TryAnalyzeAddInvocation(
+        if (
+            this.TryAnalyzeAddInvocation(
                 invocationExpression,
                 requiredArgumentName: null,
                 forCollectionExpression: true,
                 cancellationToken,
-                out instance))
+                out instance
+            )
+        )
         {
             useSpread = false;
             return true;
@@ -149,13 +165,16 @@ internal readonly struct UpdateExpressionState<
             if (isLinq && !allowLinq)
                 continue;
 
-            if (this.TryAnalyzeMultiAddInvocation(
+            if (
+                this.TryAnalyzeMultiAddInvocation(
                     invocationExpression,
                     multiAddName,
                     requiredArgumentName: null,
                     cancellationToken,
                     out instance,
-                    out useSpread))
+                    out useSpread
+                )
+            )
             {
                 return true;
             }
@@ -173,15 +192,19 @@ internal readonly struct UpdateExpressionState<
         string? requiredArgumentName,
         bool forCollectionExpression,
         CancellationToken cancellationToken,
-        [NotNullWhen(true)] out TExpressionSyntax? instance)
+        [NotNullWhen(true)] out TExpressionSyntax? instance
+    )
     {
-        if (!TryAnalyzeInvocation(
+        if (
+            !TryAnalyzeInvocation(
                 invocationExpression,
                 WellKnownMemberNames.CollectionInitializerAddMethodName,
                 requiredArgumentName,
                 cancellationToken,
                 out instance,
-                out var arguments))
+                out var arguments
+            )
+        )
         {
             return false;
         }
@@ -206,16 +229,20 @@ internal readonly struct UpdateExpressionState<
         string? requiredArgumentName,
         CancellationToken cancellationToken,
         [NotNullWhen(true)] out TExpressionSyntax? instance,
-        out bool useSpread)
+        out bool useSpread
+    )
     {
         useSpread = false;
-        if (!TryAnalyzeInvocation(
+        if (
+            !TryAnalyzeInvocation(
                 invocationExpression,
                 methodName,
                 requiredArgumentName,
                 cancellationToken,
                 out instance,
-                out var arguments))
+                out var arguments
+            )
+        )
         {
             return false;
         }
@@ -230,7 +257,9 @@ internal readonly struct UpdateExpressionState<
         // values)`  If the former, we only allow a single argument.  If the latter, we can allow multiple
         // expressions.  The former will be converted to a spread element.  The latter will be added
         // individually.
-        var method = this.SemanticModel.GetSymbolInfo(memberAccess, cancellationToken).GetAnySymbol() as IMethodSymbol;
+        var method =
+            this.SemanticModel.GetSymbolInfo(memberAccess, cancellationToken).GetAnySymbol()
+            as IMethodSymbol;
         if (method is null)
             return false;
 
@@ -246,7 +275,12 @@ internal readonly struct UpdateExpressionState<
                 return true;
 
             // For single argument case, have to determine which form we're calling.
-            var convertedType = this.SemanticModel.GetTypeInfo(SyntaxFacts.GetExpressionOfArgument(arguments[0]), cancellationToken).ConvertedType;
+            var convertedType = this
+                .SemanticModel.GetTypeInfo(
+                    SyntaxFacts.GetExpressionOfArgument(arguments[0]),
+                    cancellationToken
+                )
+                .ConvertedType;
             useSpread = parameter.Type.Equals(convertedType);
         }
         else
@@ -257,7 +291,13 @@ internal readonly struct UpdateExpressionState<
                 return false;
 
             // Check for things like `Concat<T>(this IEnumerable<T> source, T value)`.  In that case, we wouldn't want to spread.
-            useSpread = method.GetOriginalUnreducedDefinition() is not IMethodSymbol { IsExtensionMethod: true, Parameters: [_, { Type: ITypeParameterSymbol }] };
+            useSpread =
+                method.GetOriginalUnreducedDefinition()
+                    is not IMethodSymbol
+                    {
+                        IsExtensionMethod: true,
+                        Parameters: [_, { Type: ITypeParameterSymbol }]
+                    };
         }
 
         return true;
@@ -269,7 +309,8 @@ internal readonly struct UpdateExpressionState<
         string? requiredArgumentName,
         CancellationToken cancellationToken,
         [NotNullWhen(true)] out TExpressionSyntax? instance,
-        out SeparatedSyntaxList<SyntaxNode> arguments)
+        out SeparatedSyntaxList<SyntaxNode> arguments
+    )
     {
         arguments = default;
         instance = null;
@@ -284,11 +325,17 @@ internal readonly struct UpdateExpressionState<
         if (requiredArgumentName != null && arguments.Count != 1)
             return false;
 
-        var memberAccess = this.SyntaxFacts.GetExpressionOfInvocationExpression(invocationExpression);
+        var memberAccess = this.SyntaxFacts.GetExpressionOfInvocationExpression(
+            invocationExpression
+        );
         if (!this.SyntaxFacts.IsSimpleMemberAccessExpression(memberAccess))
             return false;
 
-        this.SyntaxFacts.GetPartsOfMemberAccessExpression(memberAccess, out var localInstance, out var memberName);
+        this.SyntaxFacts.GetPartsOfMemberAccessExpression(
+            memberAccess,
+            out var localInstance,
+            out var memberName
+        );
         this.SyntaxFacts.GetNameAndArityOfSimpleName(memberName, out var name, out var arity);
 
         if (arity != 0 || !Equals(name, methodName))
@@ -300,7 +347,12 @@ internal readonly struct UpdateExpressionState<
                 return false;
 
             var argumentExpression = this.SyntaxFacts.GetExpressionOfArgument(argument);
-            if (NodeContainsValuePatternOrReferencesInitializedSymbol(argumentExpression, cancellationToken))
+            if (
+                NodeContainsValuePatternOrReferencesInitializedSymbol(
+                    argumentExpression,
+                    cancellationToken
+                )
+            )
                 return false;
 
             // VB allows for a collection initializer to be an argument.  i.e. `Goo({a, b, c})`.  This argument
@@ -310,7 +362,10 @@ internal readonly struct UpdateExpressionState<
             //
             // is not legal.  That's because instead of adding `{ a, b, c }` as a single element to the list, VB
             // instead looks for an 3-argument `Add` method to invoke on `List<T>` (which clearly fails).
-            if (this.SyntaxFacts.SyntaxKinds.CollectionInitializerExpression == argumentExpression.RawKind)
+            if (
+                this.SyntaxFacts.SyntaxKinds.CollectionInitializerExpression
+                == argumentExpression.RawKind
+            )
                 return false;
 
             // If the caller is requiring a particular argument name, then validate that is what this argument
@@ -320,7 +375,11 @@ internal readonly struct UpdateExpressionState<
                 if (!this.SyntaxFacts.IsIdentifierName(argumentExpression))
                     return false;
 
-                this.SyntaxFacts.GetNameAndArityOfSimpleName(argumentExpression, out var suppliedName, out _);
+                this.SyntaxFacts.GetNameAndArityOfSimpleName(
+                    argumentExpression,
+                    out var suppliedName,
+                    out _
+                );
                 if (requiredArgumentName != suppliedName)
                     return false;
             }
@@ -338,7 +397,8 @@ internal readonly struct UpdateExpressionState<
     public Match<TStatementSyntax>? TryAnalyzeStatementForCollectionExpression(
         IUpdateExpressionSyntaxHelper<TExpressionSyntax, TStatementSyntax> syntaxHelper,
         TStatementSyntax statement,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var @this = this;
 
@@ -355,11 +415,19 @@ internal readonly struct UpdateExpressionState<
 
         Match<TStatementSyntax>? TryAnalyzeExpressionStatement(TStatementSyntax expressionStatement)
         {
-            var expression = (TExpressionSyntax)@this.SyntaxFacts.GetExpressionOfExpressionStatement(expressionStatement);
+            var expression = (TExpressionSyntax)
+                @this.SyntaxFacts.GetExpressionOfExpressionStatement(expressionStatement);
 
             // Look for a call to Add or AddRange
-            if (@this.TryAnalyzeInvocationForCollectionExpression(expression, allowLinq: false, cancellationToken, out var instance, out var useSpread) &&
-                @this.ValuePatternMatches(instance))
+            if (
+                @this.TryAnalyzeInvocationForCollectionExpression(
+                    expression,
+                    allowLinq: false,
+                    cancellationToken,
+                    out var instance,
+                    out var useSpread
+                ) && @this.ValuePatternMatches(instance)
+            )
             {
                 return new Match<TStatementSyntax>(expressionStatement, useSpread);
             }
@@ -369,7 +437,13 @@ internal readonly struct UpdateExpressionState<
 
         Match<TStatementSyntax>? TryAnalyzeForeachStatement(TStatementSyntax foreachStatement)
         {
-            syntaxHelper.GetPartsOfForeachStatement(foreachStatement, out var awaitKeyword, out var identifier, out _, out var foreachStatements);
+            syntaxHelper.GetPartsOfForeachStatement(
+                foreachStatement,
+                out var awaitKeyword,
+                out var identifier,
+                out _,
+                out var foreachStatements
+            );
             if (awaitKeyword != default)
                 return null;
 
@@ -380,15 +454,19 @@ internal readonly struct UpdateExpressionState<
             //
             // By passing 'x' into TryAnalyzeInvocation below, we ensure that it is an enumerated value from `expr`
             // being added to `dest`.
-            if (foreachStatements.ToImmutableArray() is [TStatementSyntax childStatement] &&
-                @this.SyntaxFacts.IsExpressionStatement(childStatement) &&
-                @this.TryAnalyzeAddInvocation(
-                    (TExpressionSyntax)@this.SyntaxFacts.GetExpressionOfExpressionStatement(childStatement),
+            if (
+                foreachStatements.ToImmutableArray() is [TStatementSyntax childStatement]
+                && @this.SyntaxFacts.IsExpressionStatement(childStatement)
+                && @this.TryAnalyzeAddInvocation(
+                    (TExpressionSyntax)
+                        @this.SyntaxFacts.GetExpressionOfExpressionStatement(childStatement),
                     requiredArgumentName: identifier.Text,
                     forCollectionExpression: true,
                     cancellationToken,
-                    out var instance) &&
-                @this.ValuePatternMatches(instance))
+                    out var instance
+                )
+                && @this.ValuePatternMatches(instance)
+            )
             {
                 // `foreach` will become `..expr` when we make it into a collection expression.
                 return new Match<TStatementSyntax>(foreachStatement, UseSpread: true);
@@ -411,37 +489,54 @@ internal readonly struct UpdateExpressionState<
             //  else
             //      expr.Add(z)
 
-            syntaxHelper.GetPartsOfIfStatement(ifStatement, out _, out var whenTrue, out var whenFalse);
+            syntaxHelper.GetPartsOfIfStatement(
+                ifStatement,
+                out _,
+                out var whenTrue,
+                out var whenFalse
+            );
             var whenTrueStatements = whenTrue.ToImmutableArray();
 
-            if (whenTrueStatements is [TStatementSyntax trueChildStatement] &&
-                @this.SyntaxFacts.IsExpressionStatement(trueChildStatement) &&
-                @this.TryAnalyzeAddInvocation(
-                    (TExpressionSyntax)@this.SyntaxFacts.GetExpressionOfExpressionStatement(trueChildStatement),
+            if (
+                whenTrueStatements is [TStatementSyntax trueChildStatement]
+                && @this.SyntaxFacts.IsExpressionStatement(trueChildStatement)
+                && @this.TryAnalyzeAddInvocation(
+                    (TExpressionSyntax)
+                        @this.SyntaxFacts.GetExpressionOfExpressionStatement(trueChildStatement),
                     requiredArgumentName: null,
                     forCollectionExpression: true,
                     cancellationToken,
-                    out var instance) &&
-                @this.ValuePatternMatches(instance))
+                    out var instance
+                )
+                && @this.ValuePatternMatches(instance)
+            )
             {
                 if (whenFalse is null)
                 {
                     // add the form `.. x ? [y] : []` to the result
-                    return @this.SyntaxFacts.SupportsCollectionExpressionNaturalType(ifStatement.SyntaxTree.Options)
+                    return @this.SyntaxFacts.SupportsCollectionExpressionNaturalType(
+                        ifStatement.SyntaxTree.Options
+                    )
                         ? new Match<TStatementSyntax>(ifStatement, UseSpread: true)
                         : null;
                 }
 
                 var whenFalseStatements = whenFalse.ToImmutableArray();
-                if (whenFalseStatements is [TStatementSyntax falseChildStatement] &&
-                    @this.SyntaxFacts.IsExpressionStatement(falseChildStatement) &&
-                    @this.TryAnalyzeAddInvocation(
-                        (TExpressionSyntax)@this.SyntaxFacts.GetExpressionOfExpressionStatement(falseChildStatement),
+                if (
+                    whenFalseStatements is [TStatementSyntax falseChildStatement]
+                    && @this.SyntaxFacts.IsExpressionStatement(falseChildStatement)
+                    && @this.TryAnalyzeAddInvocation(
+                        (TExpressionSyntax)
+                            @this.SyntaxFacts.GetExpressionOfExpressionStatement(
+                                falseChildStatement
+                            ),
                         requiredArgumentName: null,
                         forCollectionExpression: true,
                         cancellationToken,
-                        out instance) &&
-                    @this.ValuePatternMatches(instance))
+                        out instance
+                    )
+                    && @this.ValuePatternMatches(instance)
+                )
                 {
                     // add the form `x ? y : z` to the result
                     return new Match<TStatementSyntax>(ifStatement, UseSpread: false);

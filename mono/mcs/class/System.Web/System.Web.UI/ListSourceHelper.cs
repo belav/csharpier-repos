@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,102 +29,111 @@
 //
 
 using System.Collections;
-using System.Collections.Specialized;
-using System.Text;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Text;
 
-namespace System.Web.UI {
-	public static class ListSourceHelper {
-		
-		public static bool ContainsListCollection (IDataSource dataSource)
-		{
-			return dataSource.GetViewNames ().Count > 0;
-		}
-		
-		public static IList GetList (IDataSource dataSource)
-		{
-			if (dataSource.GetViewNames ().Count == 0)
-				return null;
+namespace System.Web.UI
+{
+    public static class ListSourceHelper
+    {
+        public static bool ContainsListCollection(IDataSource dataSource)
+        {
+            return dataSource.GetViewNames().Count > 0;
+        }
 
-			ListSourceList list = new ListSourceList ();
-			list.Add (dataSource);
-			return list;
-		}
+        public static IList GetList(IDataSource dataSource)
+        {
+            if (dataSource.GetViewNames().Count == 0)
+                return null;
 
-		sealed class ListSourceList : List<IDataSource>, ITypedList
-		{
-			#region ITypedList Members
+            ListSourceList list = new ListSourceList();
+            list.Add(dataSource);
+            return list;
+        }
 
-			PropertyDescriptorCollection ITypedList.GetItemProperties (PropertyDescriptor [] listAccessors) {
-				ICollection viewNames = this [0].GetViewNames ();
-				PropertyDescriptor [] a = new PropertyDescriptor [viewNames.Count];
-				int i = 0;
-				foreach (string viewName in viewNames) {
-					a[i++] = new ListSourcePropertyDescriptor (viewName, null);
-				}
-				return new PropertyDescriptorCollection (a);
-			}
+        sealed class ListSourceList : List<IDataSource>, ITypedList
+        {
+            #region ITypedList Members
 
-			string ITypedList.GetListName (PropertyDescriptor [] listAccessors) {
-				return String.Empty;
-			}
+            PropertyDescriptorCollection ITypedList.GetItemProperties(
+                PropertyDescriptor[] listAccessors
+            )
+            {
+                ICollection viewNames = this[0].GetViewNames();
+                PropertyDescriptor[] a = new PropertyDescriptor[viewNames.Count];
+                int i = 0;
+                foreach (string viewName in viewNames)
+                {
+                    a[i++] = new ListSourcePropertyDescriptor(viewName, null);
+                }
+                return new PropertyDescriptorCollection(a);
+            }
 
-			#endregion
-		}
+            string ITypedList.GetListName(PropertyDescriptor[] listAccessors)
+            {
+                return String.Empty;
+            }
 
-		sealed class ListSourcePropertyDescriptor : PropertyDescriptor
-		{
-			public ListSourcePropertyDescriptor (MemberDescriptor descr)
-				: base (descr) {
-			}
+            #endregion
+        }
 
-			public ListSourcePropertyDescriptor (string name, Attribute [] attrs)
-				: base (name, attrs) {
-			}
+        sealed class ListSourcePropertyDescriptor : PropertyDescriptor
+        {
+            public ListSourcePropertyDescriptor(MemberDescriptor descr)
+                : base(descr) { }
 
-			public ListSourcePropertyDescriptor (MemberDescriptor descr, Attribute [] attrs)
-				: base (descr, attrs) {
-			}
+            public ListSourcePropertyDescriptor(string name, Attribute[] attrs)
+                : base(name, attrs) { }
 
-			public override bool CanResetValue (object component) {
-				throw new NotImplementedException ();
-			}
+            public ListSourcePropertyDescriptor(MemberDescriptor descr, Attribute[] attrs)
+                : base(descr, attrs) { }
 
-			public override Type ComponentType {
-				get { throw new NotImplementedException (); }
-			}
+            public override bool CanResetValue(object component)
+            {
+                throw new NotImplementedException();
+            }
 
-			public override object GetValue (object component) {
-				IDataSource dataSource = component as IDataSource;
-				if (dataSource == null)
-					return null;
+            public override Type ComponentType
+            {
+                get { throw new NotImplementedException(); }
+            }
 
-				DataSourceView view = dataSource.GetView (Name);
-				return view.ExecuteSelect (DataSourceSelectArguments.Empty);
-			}
+            public override object GetValue(object component)
+            {
+                IDataSource dataSource = component as IDataSource;
+                if (dataSource == null)
+                    return null;
 
-			public override bool IsReadOnly {
-				get { return true; }
-			}
+                DataSourceView view = dataSource.GetView(Name);
+                return view.ExecuteSelect(DataSourceSelectArguments.Empty);
+            }
 
-			public override Type PropertyType {
-				get { return typeof(IEnumerable); }
-			}
+            public override bool IsReadOnly
+            {
+                get { return true; }
+            }
 
-			public override void ResetValue (object component) {
-				throw new NotImplementedException ();
-			}
+            public override Type PropertyType
+            {
+                get { return typeof(IEnumerable); }
+            }
 
-			public override void SetValue (object component, object value) {
-				throw new NotImplementedException ();
-			}
+            public override void ResetValue(object component)
+            {
+                throw new NotImplementedException();
+            }
 
-			public override bool ShouldSerializeValue (object component) {
-				throw new NotImplementedException ();
-			}
-		}
-	}
-	
+            public override void SetValue(object component, object value)
+            {
+                throw new NotImplementedException();
+            }
 
+            public override bool ShouldSerializeValue(object component)
+            {
+                throw new NotImplementedException();
+            }
+        }
+    }
 }

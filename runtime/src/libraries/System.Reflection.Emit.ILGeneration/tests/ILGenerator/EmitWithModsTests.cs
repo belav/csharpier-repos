@@ -22,17 +22,15 @@ namespace System.Reflection.Emit.Tests
         {
             MethodInfo methodToCall = typeof(IHelper).GetMethod("PassThrough");
 
-            var dynamicMethod = new DynamicMethod("CallingPassThrough",
+            var dynamicMethod = new DynamicMethod(
+                "CallingPassThrough",
                 MethodAttributes.Public | MethodAttributes.Static,
                 CallingConventions.Standard,
                 typeof(int),
-                new[]
-                {
-                  typeof(IHelper),
-                  typeof(int),
-                },
+                new[] { typeof(IHelper), typeof(int) },
                 typeof(EmitWithMods),
-                true);
+                true
+            );
 
             ILGenerator il = dynamicMethod.GetILGenerator();
 
@@ -48,7 +46,9 @@ namespace System.Reflection.Emit.Tests
 
             il.Emit(OpCodes.Ret);
 
-            var func = (Func<IHelper, int, int>)dynamicMethod.CreateDelegate(typeof(Func<IHelper, int, int>));
+            var func =
+                (Func<IHelper, int, int>)
+                    dynamicMethod.CreateDelegate(typeof(Func<IHelper, int, int>));
 
             var helperInstance = new Helper();
 
@@ -57,5 +57,4 @@ namespace System.Reflection.Emit.Tests
             Assert.Equal(888, sum);
         }
     }
-
 }

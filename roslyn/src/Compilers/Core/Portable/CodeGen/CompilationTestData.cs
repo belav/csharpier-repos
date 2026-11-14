@@ -2,11 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.Cci;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.Symbols;
-using Microsoft.DiaSymReader;
-using Roslyn.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -14,6 +9,11 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Microsoft.Cci;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CodeAnalysis.Symbols;
+using Microsoft.DiaSymReader;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         // The map is used for storing a list of methods and their associated IL.
-        public readonly ConcurrentDictionary<IMethodSymbolInternal, MethodData> Methods = new ConcurrentDictionary<IMethodSymbolInternal, MethodData>();
+        public readonly ConcurrentDictionary<IMethodSymbolInternal, MethodData> Methods =
+            new ConcurrentDictionary<IMethodSymbolInternal, MethodData>();
 
         // The emitted module.
         public CommonPEModuleBuilder? Module;
@@ -85,49 +86,50 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         private static readonly SymbolDisplayFormat _testDataKeyFormat = new SymbolDisplayFormat(
-            compilerInternalOptions:
-                SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames |
-                SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes,
+            compilerInternalOptions: SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
+                | SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes,
             globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining,
             typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance,
-            memberOptions:
-                SymbolDisplayMemberOptions.IncludeParameters |
-                SymbolDisplayMemberOptions.IncludeContainingType |
-                SymbolDisplayMemberOptions.IncludeExplicitInterface,
-            parameterOptions:
-                SymbolDisplayParameterOptions.IncludeParamsRefOut |
-                SymbolDisplayParameterOptions.IncludeExtensionThis |
-                SymbolDisplayParameterOptions.IncludeType,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeContainingType
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeExtensionThis
+                | SymbolDisplayParameterOptions.IncludeType,
             // Not showing the name is important because we visit parameters to display their
             // types.  If we visited their types directly, we wouldn't get ref/out/params.
-            miscellaneousOptions:
-                SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                SymbolDisplayMiscellaneousOptions.ExpandValueTuple |
-                SymbolDisplayMiscellaneousOptions.UseSpecialTypes |
-                SymbolDisplayMiscellaneousOptions.UseAsterisksInMultiDimensionalArrays |
-                SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName);
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.ExpandValueTuple
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.UseAsterisksInMultiDimensionalArrays
+                | SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
+        );
 
-        private static readonly SymbolDisplayFormat _testDataOperatorKeyFormat = new SymbolDisplayFormat(
-             _testDataKeyFormat.CompilerInternalOptions,
-             _testDataKeyFormat.GlobalNamespaceStyle,
-             _testDataKeyFormat.TypeQualificationStyle,
-             _testDataKeyFormat.GenericsOptions,
-             _testDataKeyFormat.MemberOptions | SymbolDisplayMemberOptions.IncludeType,
-             _testDataKeyFormat.ParameterOptions,
-             _testDataKeyFormat.DelegateStyle,
-             _testDataKeyFormat.ExtensionMethodStyle,
-             _testDataKeyFormat.PropertyStyle,
-             _testDataKeyFormat.LocalOptions,
-             _testDataKeyFormat.KindOptions,
-             _testDataKeyFormat.MiscellaneousOptions);
+        private static readonly SymbolDisplayFormat _testDataOperatorKeyFormat =
+            new SymbolDisplayFormat(
+                _testDataKeyFormat.CompilerInternalOptions,
+                _testDataKeyFormat.GlobalNamespaceStyle,
+                _testDataKeyFormat.TypeQualificationStyle,
+                _testDataKeyFormat.GenericsOptions,
+                _testDataKeyFormat.MemberOptions | SymbolDisplayMemberOptions.IncludeType,
+                _testDataKeyFormat.ParameterOptions,
+                _testDataKeyFormat.DelegateStyle,
+                _testDataKeyFormat.ExtensionMethodStyle,
+                _testDataKeyFormat.PropertyStyle,
+                _testDataKeyFormat.LocalOptions,
+                _testDataKeyFormat.KindOptions,
+                _testDataKeyFormat.MiscellaneousOptions
+            );
 
         private static string GetMethodName(IMethodSymbolInternal methodSymbol)
         {
             IMethodSymbol iMethod = (IMethodSymbol)methodSymbol.GetISymbol();
-            var format = (iMethod.MethodKind == MethodKind.UserDefinedOperator) ?
-                _testDataOperatorKeyFormat :
-                _testDataKeyFormat;
+            var format =
+                (iMethod.MethodKind == MethodKind.UserDefinedOperator)
+                    ? _testDataOperatorKeyFormat
+                    : _testDataKeyFormat;
             return iMethod.ToDisplayString(format);
         }
     }

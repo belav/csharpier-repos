@@ -1,22 +1,23 @@
 //------------------------------------------------------------------------------
 // <copyright file="IExtenderProviderService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {  
-    using System.Diagnostics;
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides an interface to add and remove extender providers.</para>
     /// </devdoc>
-    public interface IExtenderProviderService {
-
+    public interface IExtenderProviderService
+    {
         /// <devdoc>
         ///    <para>
         ///       Adds an extender provider.
@@ -33,4 +34,3 @@ namespace System.ComponentModel.Design {
         void RemoveExtenderProvider(IExtenderProvider provider);
     }
 }
-

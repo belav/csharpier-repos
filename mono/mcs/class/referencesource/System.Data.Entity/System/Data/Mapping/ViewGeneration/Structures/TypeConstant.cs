@@ -7,16 +7,16 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Text;
 using System.Collections.Generic;
-using System.Data.Mapping.ViewGeneration.CqlGeneration;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.CqlGeneration;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
@@ -97,16 +97,26 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             }
         }
 
-        internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias
+        )
         {
             AsCql(
                 // createRef action
                 (refScopeEntitySet, keyMemberOutputPaths) =>
                 {
                     // Construct a scoped reference: CreateRef(CPerson1Set, NewRow(pid1, pid2), CPerson1)
-                    EntityType refEntityType = (EntityType)(((RefType)outputMember.EdmType).ElementType);
+                    EntityType refEntityType = (EntityType)(
+                        ((RefType)outputMember.EdmType).ElementType
+                    );
                     builder.Append("CreateRef(");
-                    CqlWriter.AppendEscapedQualifiedName(builder, refScopeEntitySet.EntityContainer.Name, refScopeEntitySet.Name);
+                    CqlWriter.AppendEscapedQualifiedName(
+                        builder,
+                        refScopeEntitySet.EntityContainer.Name,
+                        refScopeEntitySet.Name
+                    );
                     builder.Append(", row(");
                     for (int i = 0; i < keyMemberOutputPaths.Count; ++i)
                     {
@@ -115,7 +125,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                             builder.Append(", ");
                         }
                         // Given the member, we need its aliased name
-                        string fullFieldAlias = CqlWriter.GetQualifiedName(blockAlias, keyMemberOutputPaths[i].CqlFieldAlias);
+                        string fullFieldAlias = CqlWriter.GetQualifiedName(
+                            blockAlias,
+                            keyMemberOutputPaths[i].CqlFieldAlias
+                        );
                         builder.Append(fullFieldAlias);
                     }
                     builder.Append("), ");
@@ -135,12 +148,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                             builder.Append(", ");
                         }
                         // Given the member, we need its aliased name: CPerson1_Pid
-                        string fullFieldAlias = CqlWriter.GetQualifiedName(blockAlias, membersOutputPaths[i].CqlFieldAlias);
+                        string fullFieldAlias = CqlWriter.GetQualifiedName(
+                            blockAlias,
+                            membersOutputPaths[i].CqlFieldAlias
+                        );
                         builder.Append(fullFieldAlias);
                     }
                     builder.Append(')');
                 },
-                outputMember);
+                outputMember
+            );
 
             return builder;
         }
@@ -154,19 +171,24 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 (refScopeEntitySet, keyMemberOutputPaths) =>
                 {
                     // Construct a scoped reference: CreateRef(CPerson1Set, NewRow(pid1, pid2), CPerson1)
-                    EntityType refEntityType = (EntityType)(((RefType)outputMember.EdmType).ElementType);
+                    EntityType refEntityType = (EntityType)(
+                        ((RefType)outputMember.EdmType).ElementType
+                    );
                     cqt = refScopeEntitySet.CreateRef(
                         refEntityType,
-                        keyMemberOutputPaths.Select(km => row.Property(km.CqlFieldAlias)));
+                        keyMemberOutputPaths.Select(km => row.Property(km.CqlFieldAlias))
+                    );
                 },
                 // createType action
                 (membersOutputPaths) =>
                 {
                     // Construct an entity/complex/Association type in the Members order for fields: CPerson(CPerson1_Pid, CPerson1_Name)
-                    cqt = TypeUsage.Create(m_edmType).New(
-                        membersOutputPaths.Select(m => row.Property(m.CqlFieldAlias)));
+                    cqt = TypeUsage
+                        .Create(m_edmType)
+                        .New(membersOutputPaths.Select(m => row.Property(m.CqlFieldAlias)));
                 },
-                outputMember);
+                outputMember
+            );
 
             return cqt;
         }
@@ -176,14 +198,20 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <paramref name="outputMember"/>'s type, i.e, an expression of the form "Type(....)"
         /// If <paramref name="outputMember"/> is an association end then instead of constructing an Entity or Complex type, constructs a reference.
         /// </summary>
-        private void AsCql(Action<EntitySet, IList<MemberPath>> createRef, Action<IList<MemberPath>> createType, MemberPath outputMember)
+        private void AsCql(
+            Action<EntitySet, IList<MemberPath>> createRef,
+            Action<IList<MemberPath>> createType,
+            MemberPath outputMember
+        )
         {
             EntitySet refScopeEntitySet = outputMember.GetScopeOfRelationEnd();
             if (refScopeEntitySet != null)
             {
                 // Construct a scoped reference: CreateRef(CPerson1Set, NewRow(pid1, pid2), CPerson1)
                 EntityType entityType = refScopeEntitySet.ElementType;
-                List<MemberPath> keyMemberOutputPaths = new List<MemberPath>(entityType.KeyMembers.Select(km => new MemberPath(outputMember, km)));
+                List<MemberPath> keyMemberOutputPaths = new List<MemberPath>(
+                    entityType.KeyMembers.Select(km => new MemberPath(outputMember, km))
+                );
                 createRef(refScopeEntitySet, keyMemberOutputPaths);
             }
             else

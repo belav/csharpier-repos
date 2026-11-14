@@ -17,7 +17,9 @@ public struct MutableStruct
     }
 
     public void Add(long value) => AddInternal(value);
+
     private void AddInternal(long value) => InternalValue += value;
+
     public MutableStruct(long value) => InternalValue = value;
 }
 

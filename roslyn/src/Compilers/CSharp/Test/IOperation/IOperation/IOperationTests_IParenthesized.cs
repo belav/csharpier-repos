@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestParenthesized()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -33,7 +34,8 @@ class P
         [Fact]
         public void TestParenthesizedChild()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -42,7 +44,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: System.Int32) (Syntax: 'a + b')
   Left: 
     IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'a')
@@ -51,14 +54,19 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: System.In
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedParent()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -67,7 +75,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (a + b);')
   ReturnedValue: 
     IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: System.Int32) (Syntax: 'a + b')
@@ -78,14 +87,19 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (a + b);')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedMultipleNesting()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -102,7 +116,8 @@ class P
         [Fact]
         public void TestParenthesizedMultipleNestingParent()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -111,7 +126,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (((a + b)));')
   ReturnedValue: 
     IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: System.Int32) (Syntax: 'a + b')
@@ -122,14 +138,19 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (((a + b)))
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedMultipleNesting02()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b, int c)
@@ -146,7 +167,8 @@ class P
         [Fact]
         public void TestParenthesizedMultipleNesting02Parent()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b, int c)
@@ -155,7 +177,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (((a + b) * c));')
   ReturnedValue: 
     IBinaryOperation (BinaryOperatorKind.Multiply) (OperationKind.Binary, Type: System.Int32) (Syntax: '(a + b) * c')
@@ -170,14 +193,19 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (((a + b) *
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedMultipleNesting03()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -194,7 +222,8 @@ class P
         [Fact]
         public void TestParenthesizedMultipleNesting03Parent()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -203,7 +232,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (((a + b)));')
   ReturnedValue: 
     IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: System.Int32) (Syntax: 'a + b')
@@ -214,14 +244,19 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (((a + b)))
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedMultipleNesting04()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -238,7 +273,8 @@ class P
         [Fact]
         public void TestParenthesizedMultipleNesting05()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1(int a, int b)
@@ -255,7 +291,8 @@ class P
         [Fact]
         public void TestParenthesizedImplicitConversion()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static long M1(int a, int b)
@@ -272,7 +309,8 @@ class P
         [Fact]
         public void TestParenthesizedImplicitConversionParent()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static long M1(int a, int b)
@@ -281,7 +319,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (a + b);')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Int64, IsImplicit) (Syntax: 'a + b')
@@ -295,14 +334,19 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (a + b);')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedExplicitConversion()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static double M1(int a, int b)
@@ -319,7 +363,8 @@ class P
         [Fact]
         public void TestParenthesizedExplicitConversionParent()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static double M1(int a, int b)
@@ -328,7 +373,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (double)(a + b);')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Double) (Syntax: '(double)(a + b)')
@@ -342,14 +388,19 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (double)(a 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedConstantValue()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1()
@@ -366,7 +417,8 @@ class P
         [Fact]
         public void TestParenthesizedConstantValueParent()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1()
@@ -375,21 +427,27 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return (5);')
   ReturnedValue: 
     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 5) (Syntax: '5')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedQueryClause()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 
 class P
@@ -408,7 +466,8 @@ class P
         [Fact]
         public void TestParenthesizedQueryClauseParent()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 
 class P
@@ -419,7 +478,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return from ... elect (-r);')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Object, IsImplicit) (Syntax: 'from r in a select (-r)')
@@ -453,14 +513,19 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return from ... el
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestParenthesizedErrorOperand()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1()
@@ -477,7 +542,8 @@ class P
         [Fact]
         public void TestParenthesizedErrorOperandParent()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static int M1()
@@ -486,26 +552,35 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return (a);')
   ReturnedValue: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'a')
       Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0103: The name 'a' does not exist in the current context
                 //         return /*<bind>*/(a)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "a").WithArguments("a").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "a")
+                    .WithArguments("a")
+                    .WithLocation(6, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ParenthesizedFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i)
@@ -516,7 +591,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -536,14 +612,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ParenthesizedFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i, bool b)
@@ -554,7 +635,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -609,14 +691,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ParenthesizedFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i, bool b)
@@ -627,7 +714,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -682,14 +770,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ParenthesizedFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C2 c, bool b)
@@ -707,7 +800,8 @@ class C2 { public int i; }
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -775,7 +869,11 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

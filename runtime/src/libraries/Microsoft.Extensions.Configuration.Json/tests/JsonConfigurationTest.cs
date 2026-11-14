@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void CanLoadValidJsonFromStreamProvider()
         {
-            var json = @"
+            var json =
+                @"
 {
     ""firstname"": ""test"",
     ""test.last.name"": ""last.name"",
@@ -33,7 +34,9 @@ namespace Microsoft.Extensions.Configuration
             ""zipcode"": ""12345""
         }
 }";
-            var config = new ConfigurationBuilder().AddJsonStream(TestStreamHelpers.StringToStream(json)).Build();
+            var config = new ConfigurationBuilder()
+                .AddJsonStream(TestStreamHelpers.StringToStream(json))
+                .Build();
             Assert.Equal("test", config["firstname"]);
             Assert.Equal("last.name", config["test.last.name"]);
             Assert.Equal("Something street", config["residential.address:STREET.name"]);
@@ -43,19 +46,22 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void ReloadThrowsFromStreamProvider()
         {
-            var json = @"
+            var json =
+                @"
 {
     ""firstname"": ""test""
 }";
-            var config = new ConfigurationBuilder().AddJsonStream(TestStreamHelpers.StringToStream(json)).Build();
+            var config = new ConfigurationBuilder()
+                .AddJsonStream(TestStreamHelpers.StringToStream(json))
+                .Build();
             Assert.Throws<InvalidOperationException>(() => config.Reload());
         }
-
 
         [Fact]
         public void LoadKeyValuePairsFromValidJson()
         {
-            var json = @"
+            var json =
+                @"
 {
     ""firstname"": ""test"",
     ""test.last.name"": ""last.name"",
@@ -75,7 +81,8 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void LoadMethodCanHandleEmptyValue()
         {
-            var json = @"
+            var json =
+                @"
 {
     ""name"": """"
 }";
@@ -92,7 +99,8 @@ namespace Microsoft.Extensions.Configuration
             {
                 CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
 
-                var json = @"
+                var json =
+                    @"
 {
     ""number"": 3.14
 }";
@@ -110,8 +118,7 @@ namespace Microsoft.Extensions.Configuration
         {
             var json = @"""test""";
 
-            var exception = Assert.Throws<FormatException>(
-                () => LoadProvider(json));
+            var exception = Assert.Throws<FormatException>(() => LoadProvider(json));
 
             Assert.NotNull(exception.Message);
         }
@@ -119,7 +126,8 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void SupportAndIgnoreComments()
         {
-            var json = @"/* Comments */
+            var json =
+                @"/* Comments */
                 {/* Comments */
                 ""name"": /* Comments */ ""test"",
                 ""address"": {
@@ -136,7 +144,8 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void SupportAndIgnoreTrailingCommas()
         {
-            var json = @"
+            var json =
+                @"
 {
     ""firstname"": ""test"",
     ""test.last.name"": ""last.name"",
@@ -156,7 +165,8 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void ThrowExceptionWhenUnexpectedEndFoundBeforeFinishParsing()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""name"": ""test"",
                 ""address"": {
                     ""street"": ""Something street"",
@@ -170,7 +180,8 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void ThrowExceptionWhenMissingCurlyBeforeFinishParsing()
         {
-            var json = @"
+            var json =
+                @"
             {
               ""Data"": {
             ";
@@ -184,7 +195,9 @@ namespace Microsoft.Extensions.Configuration
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(() => new ConfigurationBuilder().AddJsonFile(path: null));
+            var exception = Assert.Throws<ArgumentException>(() =>
+                new ConfigurationBuilder().AddJsonFile(path: null)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -194,7 +207,9 @@ namespace Microsoft.Extensions.Configuration
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(() => new ConfigurationBuilder().AddJsonFile(string.Empty));
+            var exception = Assert.Throws<ArgumentException>(() =>
+                new ConfigurationBuilder().AddJsonFile(string.Empty)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -202,17 +217,25 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void JsonConfiguration_Throws_On_Missing_Configuration_File()
         {
-            var config = new ConfigurationBuilder().AddJsonFile("NotExistingConfig.json", optional: false);
+            var config = new ConfigurationBuilder().AddJsonFile(
+                "NotExistingConfig.json",
+                optional: false
+            );
             var exception = Assert.Throws<FileNotFoundException>(() => config.Build());
 
             // Assert
-            Assert.StartsWith($"The configuration file 'NotExistingConfig.json' was not found and is not optional. The expected physical path was '", exception.Message);
+            Assert.StartsWith(
+                $"The configuration file 'NotExistingConfig.json' was not found and is not optional. The expected physical path was '",
+                exception.Message
+            );
         }
 
         [Fact]
         public void JsonConfiguration_Does_Not_Throw_On_Optional_Configuration()
         {
-            var config = new ConfigurationBuilder().AddJsonFile("NotExistingConfig.json", optional: true).Build();
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("NotExistingConfig.json", optional: true)
+                .Build();
         }
 
         [Fact]
@@ -225,16 +248,26 @@ namespace Microsoft.Extensions.Configuration
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void AddJsonFile_FileProvider_Gets_Disposed_When_It_Was_Not_Created_By_The_User(bool disposeConfigRoot)
+        public void AddJsonFile_FileProvider_Gets_Disposed_When_It_Was_Not_Created_By_The_User(
+            bool disposeConfigRoot
+        )
         {
-            string filePath = Path.Combine(Path.GetTempPath(), $"{nameof(AddJsonFile_FileProvider_Gets_Disposed_When_It_Was_Not_Created_By_The_User)}.json");
+            string filePath = Path.Combine(
+                Path.GetTempPath(),
+                $"{nameof(AddJsonFile_FileProvider_Gets_Disposed_When_It_Was_Not_Created_By_The_User)}.json"
+            );
             File.WriteAllText(filePath, @"{ ""some"": ""value"" }");
 
-            IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile(filePath, optional: false).Build();
-            JsonConfigurationProvider jsonConfigurationProvider = config.Providers.OfType<JsonConfigurationProvider>().Single();
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddJsonFile(filePath, optional: false)
+                .Build();
+            JsonConfigurationProvider jsonConfigurationProvider = config
+                .Providers.OfType<JsonConfigurationProvider>()
+                .Single();
 
             Assert.NotNull(jsonConfigurationProvider.Source.FileProvider);
-            PhysicalFileProvider fileProvider = (PhysicalFileProvider)jsonConfigurationProvider.Source.FileProvider;
+            PhysicalFileProvider fileProvider = (PhysicalFileProvider)
+                jsonConfigurationProvider.Source.FileProvider;
             Assert.False(GetIsDisposed(fileProvider));
 
             if (disposeConfigRoot)
@@ -252,16 +285,24 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void AddJsonFile_FileProvider_Is_Not_Disposed_When_It_Is_Owned_By_The_User()
         {
-            string filePath = Path.Combine(Path.GetTempPath(), $"{nameof(AddJsonFile_FileProvider_Is_Not_Disposed_When_It_Is_Owned_By_The_User)}.json");
+            string filePath = Path.Combine(
+                Path.GetTempPath(),
+                $"{nameof(AddJsonFile_FileProvider_Is_Not_Disposed_When_It_Is_Owned_By_The_User)}.json"
+            );
             File.WriteAllText(filePath, @"{ ""some"": ""value"" }");
 
             PhysicalFileProvider fileProvider = new(Path.GetDirectoryName(filePath));
-            JsonConfigurationProvider configurationProvider = new(new JsonConfigurationSource()
-            {
-                Path = filePath,
-                FileProvider = fileProvider
-            });
-            IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile(configurationProvider.Source.FileProvider, filePath, optional: true, reloadOnChange: false).Build();
+            JsonConfigurationProvider configurationProvider = new(
+                new JsonConfigurationSource() { Path = filePath, FileProvider = fileProvider }
+            );
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddJsonFile(
+                    configurationProvider.Source.FileProvider,
+                    filePath,
+                    optional: true,
+                    reloadOnChange: false
+                )
+                .Build();
 
             Assert.False(GetIsDisposed(fileProvider));
 
@@ -277,7 +318,10 @@ namespace Microsoft.Extensions.Configuration
 
         private static bool GetIsDisposed(PhysicalFileProvider fileProvider)
         {
-            System.Reflection.FieldInfo isDisposedField = typeof(PhysicalFileProvider).GetField("_disposed", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            System.Reflection.FieldInfo isDisposedField = typeof(PhysicalFileProvider).GetField(
+                "_disposed",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic
+            );
             return (bool)isDisposedField.GetValue(fileProvider);
         }
     }

@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,258 +33,305 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public sealed class DiscoveryClient : ICommunicationObject, IDisposable
-	{
-		internal interface IDiscoveryCommon
-		{
-			IAsyncResult BeginFind (FindCriteria criteria, AsyncCallback callback, object state);
-			FindResponse EndFind (IAsyncResult result);
-			IAsyncResult BeginResolve (ResolveCriteria criteria, AsyncCallback callback, object state);
-			ResolveResponse EndResolve (IAsyncResult result);
-		}
-		
-		public DiscoveryClient ()
-			: this (String.Empty)
-		{
-		}
+    public sealed class DiscoveryClient : ICommunicationObject, IDisposable
+    {
+        internal interface IDiscoveryCommon
+        {
+            IAsyncResult BeginFind(FindCriteria criteria, AsyncCallback callback, object state);
+            FindResponse EndFind(IAsyncResult result);
+            IAsyncResult BeginResolve(
+                ResolveCriteria criteria,
+                AsyncCallback callback,
+                object state
+            );
+            ResolveResponse EndResolve(IAsyncResult result);
+        }
 
-		public DiscoveryClient (DiscoveryEndpoint discoveryEndpoint)
-		{
-			if (discoveryEndpoint == null)
-				throw new ArgumentNullException ("discoveryEndpoint");
+        public DiscoveryClient()
+            : this(String.Empty) { }
 
-			// create DiscoveryTargetClientXX for each version:
-			// Managed -> DiscoveryTargetClientType (request-reply)
-			// Adhoc   -> DiscoveryProxyClientType (duplex)
-			if (discoveryEndpoint.DiscoveryMode == ServiceDiscoveryMode.Managed)
-				client = Activator.CreateInstance (discoveryEndpoint.DiscoveryVersion.DiscoveryProxyClientType, new object [] {discoveryEndpoint});
-			else
-				client = Activator.CreateInstance (discoveryEndpoint.DiscoveryVersion.DiscoveryTargetClientType, new object [] {discoveryEndpoint});
-		}
+        public DiscoveryClient(DiscoveryEndpoint discoveryEndpoint)
+        {
+            if (discoveryEndpoint == null)
+                throw new ArgumentNullException("discoveryEndpoint");
 
-		public DiscoveryClient (string endpointConfigurationName)
-		{
-			throw new NotImplementedException ();
-		}
+            // create DiscoveryTargetClientXX for each version:
+            // Managed -> DiscoveryTargetClientType (request-reply)
+            // Adhoc   -> DiscoveryProxyClientType (duplex)
+            if (discoveryEndpoint.DiscoveryMode == ServiceDiscoveryMode.Managed)
+                client = Activator.CreateInstance(
+                    discoveryEndpoint.DiscoveryVersion.DiscoveryProxyClientType,
+                    new object[] { discoveryEndpoint }
+                );
+            else
+                client = Activator.CreateInstance(
+                    discoveryEndpoint.DiscoveryVersion.DiscoveryTargetClientType,
+                    new object[] { discoveryEndpoint }
+                );
+        }
 
-		// FIXME: make it dynamic (dmcs crashes for now)
-		object client;
+        public DiscoveryClient(string endpointConfigurationName)
+        {
+            throw new NotImplementedException();
+        }
 
-		public ChannelFactory ChannelFactory {
-			get { return (ChannelFactory) client.GetType ().GetProperty ("ChannelFactory").GetValue (client, null); }
-		}
+        // FIXME: make it dynamic (dmcs crashes for now)
+        object client;
 
-		public ClientCredentials ClientCredentials {
-			get { return ChannelFactory.Credentials; }
-		}
+        public ChannelFactory ChannelFactory
+        {
+            get
+            {
+                return (ChannelFactory)
+                    client.GetType().GetProperty("ChannelFactory").GetValue(client, null);
+            }
+        }
 
-		public ServiceEndpoint Endpoint {
-			get { return ChannelFactory.Endpoint; }
-		}
+        public ClientCredentials ClientCredentials
+        {
+            get { return ChannelFactory.Credentials; }
+        }
 
-		public IClientChannel InnerChannel {
-			get { return (IClientChannel) client.GetType ().GetProperty ("InnerChannel").GetValue (client, null); }
-		}
+        public ServiceEndpoint Endpoint
+        {
+            get { return ChannelFactory.Endpoint; }
+        }
 
-		CommunicationState State {
-			get { return ((ICommunicationObject) this).State; }
-		}
+        public IClientChannel InnerChannel
+        {
+            get
+            {
+                return (IClientChannel)
+                    client.GetType().GetProperty("InnerChannel").GetValue(client, null);
+            }
+        }
 
-		CommunicationState ICommunicationObject.State {
-			get { return ((ICommunicationObject) client).State; }
-		}
+        CommunicationState State
+        {
+            get { return ((ICommunicationObject)this).State; }
+        }
 
-		public event EventHandler<FindCompletedEventArgs> FindCompleted;
-		public event EventHandler<FindProgressChangedEventArgs> FindProgressChanged;
-		public event EventHandler<AnnouncementEventArgs> ProxyAvailable;
-		public event EventHandler<ResolveCompletedEventArgs> ResolveCompleted;
+        CommunicationState ICommunicationObject.State
+        {
+            get { return ((ICommunicationObject)client).State; }
+        }
 
-		event EventHandler ICommunicationObject.Closed {
-			add { InnerChannel.Closed += value; }
-			remove { InnerChannel.Closed -= value; }
-		}
-		event EventHandler ICommunicationObject.Closing {
-			add { InnerChannel.Closing += value; }
-			remove { InnerChannel.Closing -= value; }
-		}
-		event EventHandler ICommunicationObject.Faulted {
-			add { InnerChannel.Faulted += value; }
-			remove { InnerChannel.Faulted -= value; }
-		}
-		event EventHandler ICommunicationObject.Opened {
-			add { InnerChannel.Opened += value; }
-			remove { InnerChannel.Opened -= value; }
-		}
-		event EventHandler ICommunicationObject.Opening {
-			add { InnerChannel.Opening += value; }
-			remove { InnerChannel.Opening -= value; }
-		}
+        public event EventHandler<FindCompletedEventArgs> FindCompleted;
+        public event EventHandler<FindProgressChangedEventArgs> FindProgressChanged;
+        public event EventHandler<AnnouncementEventArgs> ProxyAvailable;
+        public event EventHandler<ResolveCompletedEventArgs> ResolveCompleted;
 
-		public void Open ()
-		{
-			((ICommunicationObject) this).Open ();
-		}
+        event EventHandler ICommunicationObject.Closed
+        {
+            add { InnerChannel.Closed += value; }
+            remove { InnerChannel.Closed -= value; }
+        }
+        event EventHandler ICommunicationObject.Closing
+        {
+            add { InnerChannel.Closing += value; }
+            remove { InnerChannel.Closing -= value; }
+        }
+        event EventHandler ICommunicationObject.Faulted
+        {
+            add { InnerChannel.Faulted += value; }
+            remove { InnerChannel.Faulted -= value; }
+        }
+        event EventHandler ICommunicationObject.Opened
+        {
+            add { InnerChannel.Opened += value; }
+            remove { InnerChannel.Opened -= value; }
+        }
+        event EventHandler ICommunicationObject.Opening
+        {
+            add { InnerChannel.Opening += value; }
+            remove { InnerChannel.Opening -= value; }
+        }
 
-		public void Close ()
-		{
-			((ICommunicationObject) this).Close ();
-		}
+        public void Open()
+        {
+            ((ICommunicationObject)this).Open();
+        }
 
-		bool cancelled;
+        public void Close()
+        {
+            ((ICommunicationObject)this).Close();
+        }
 
-		public void CancelAsync (object userState)
-		{
-			throw new NotImplementedException ();
-		}
+        bool cancelled;
 
-		// find
+        public void CancelAsync(object userState)
+        {
+            throw new NotImplementedException();
+        }
 
-		public FindResponse Find (FindCriteria criteria)
-		{
-			return EndFind (BeginFind (criteria, null, null));
-		}
+        // find
 
-		public void FindAsync (FindCriteria criteria)
-		{
-			FindAsync (criteria, null);
-		}
+        public FindResponse Find(FindCriteria criteria)
+        {
+            return EndFind(BeginFind(criteria, null, null));
+        }
 
-		public void FindAsync (FindCriteria criteria, object userState)
-		{
-			AsyncCallback cb = delegate (IAsyncResult result) {
-				FindResponse ret = null;
-				Exception error = null;
-				try {
-					ret = EndFind (result);
-				} catch (Exception ex) {
-					error = ex;
-				}
-				OnFindCompleted (new FindCompletedEventArgs (ret, error, cancelled, result.AsyncState));
-			};
-			cancelled = false;
-			BeginFind (criteria, cb, userState);
-		}
+        public void FindAsync(FindCriteria criteria)
+        {
+            FindAsync(criteria, null);
+        }
 
-		void OnFindCompleted (FindCompletedEventArgs args)
-		{
-			if (FindCompleted != null)
-				FindCompleted (this, args);
-		}
+        public void FindAsync(FindCriteria criteria, object userState)
+        {
+            AsyncCallback cb = delegate(IAsyncResult result)
+            {
+                FindResponse ret = null;
+                Exception error = null;
+                try
+                {
+                    ret = EndFind(result);
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                }
+                OnFindCompleted(
+                    new FindCompletedEventArgs(ret, error, cancelled, result.AsyncState)
+                );
+            };
+            cancelled = false;
+            BeginFind(criteria, cb, userState);
+        }
 
-		IAsyncResult BeginFind (FindCriteria criteria, AsyncCallback callback, object state)
-		{
-			return ((IDiscoveryCommon) client).BeginFind (criteria, callback, state);
-		}
-		
-		FindResponse EndFind (IAsyncResult result)
-		{
-			return ((IDiscoveryCommon) client).EndFind (result);
-		}
+        void OnFindCompleted(FindCompletedEventArgs args)
+        {
+            if (FindCompleted != null)
+                FindCompleted(this, args);
+        }
 
-		// resolve
+        IAsyncResult BeginFind(FindCriteria criteria, AsyncCallback callback, object state)
+        {
+            return ((IDiscoveryCommon)client).BeginFind(criteria, callback, state);
+        }
 
-		public ResolveResponse Resolve (ResolveCriteria criteria)
-		{
-			return EndResolve (BeginResolve (criteria, null, null));
-		}
+        FindResponse EndFind(IAsyncResult result)
+        {
+            return ((IDiscoveryCommon)client).EndFind(result);
+        }
 
-		public void ResolveAsync (ResolveCriteria criteria)
-		{
-			ResolveAsync (criteria, null);
-		}
+        // resolve
 
-		public void ResolveAsync (ResolveCriteria criteria, object userState)
-		{
-			AsyncCallback cb = delegate (IAsyncResult result) {
-				ResolveResponse ret = null;
-				Exception error = null;
-				try {
-					ret = EndResolve (result);
-				} catch (Exception ex) {
-					error = ex;
-				}
-				OnResolveCompleted (new ResolveCompletedEventArgs (ret, error, cancelled, result.AsyncState));
-			};
-			cancelled = false;
-			BeginResolve (criteria, cb, userState);
-		}
+        public ResolveResponse Resolve(ResolveCriteria criteria)
+        {
+            return EndResolve(BeginResolve(criteria, null, null));
+        }
 
-		void OnResolveCompleted (ResolveCompletedEventArgs args)
-		{
-			if (ResolveCompleted != null)
-				ResolveCompleted (this, args);
-		}
+        public void ResolveAsync(ResolveCriteria criteria)
+        {
+            ResolveAsync(criteria, null);
+        }
 
-		IAsyncResult BeginResolve (ResolveCriteria criteria, AsyncCallback callback, object state)
-		{
-			return ((IDiscoveryCommon) client).BeginResolve (criteria, callback, state);
-		}
-		
-		ResolveResponse EndResolve (IAsyncResult result)
-		{
-			return ((IDiscoveryCommon) client).EndResolve (result);
-		}
+        public void ResolveAsync(ResolveCriteria criteria, object userState)
+        {
+            AsyncCallback cb = delegate(IAsyncResult result)
+            {
+                ResolveResponse ret = null;
+                Exception error = null;
+                try
+                {
+                    ret = EndResolve(result);
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                }
+                OnResolveCompleted(
+                    new ResolveCompletedEventArgs(ret, error, cancelled, result.AsyncState)
+                );
+            };
+            cancelled = false;
+            BeginResolve(criteria, cb, userState);
+        }
 
-		// explicit interface impl.
+        void OnResolveCompleted(ResolveCompletedEventArgs args)
+        {
+            if (ResolveCompleted != null)
+                ResolveCompleted(this, args);
+        }
 
-		void ICommunicationObject.Open ()
-		{
-			InnerChannel.Open ();
-		}
+        IAsyncResult BeginResolve(ResolveCriteria criteria, AsyncCallback callback, object state)
+        {
+            return ((IDiscoveryCommon)client).BeginResolve(criteria, callback, state);
+        }
 
-		void ICommunicationObject.Open (TimeSpan timeout)
-		{
-			InnerChannel.Open (timeout);
-		}
+        ResolveResponse EndResolve(IAsyncResult result)
+        {
+            return ((IDiscoveryCommon)client).EndResolve(result);
+        }
 
-		void ICommunicationObject.Close ()
-		{
-			InnerChannel.Close ();
-		}
+        // explicit interface impl.
 
-		void ICommunicationObject.Close (TimeSpan timeout)
-		{
-			InnerChannel.Close (timeout);
-		}
+        void ICommunicationObject.Open()
+        {
+            InnerChannel.Open();
+        }
 
-		IAsyncResult ICommunicationObject.BeginOpen (AsyncCallback callback, object state)
-		{
-			return InnerChannel.BeginOpen (callback, state);
-		}
+        void ICommunicationObject.Open(TimeSpan timeout)
+        {
+            InnerChannel.Open(timeout);
+        }
 
-		IAsyncResult ICommunicationObject.BeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return InnerChannel.BeginOpen (timeout, callback, state);
-		}
+        void ICommunicationObject.Close()
+        {
+            InnerChannel.Close();
+        }
 
-		IAsyncResult ICommunicationObject.BeginClose (AsyncCallback callback, object state)
-		{
-			return InnerChannel.BeginClose (callback, state);
-		}
+        void ICommunicationObject.Close(TimeSpan timeout)
+        {
+            InnerChannel.Close(timeout);
+        }
 
-		IAsyncResult ICommunicationObject.BeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return InnerChannel.BeginClose (timeout, callback, state);
-		}
+        IAsyncResult ICommunicationObject.BeginOpen(AsyncCallback callback, object state)
+        {
+            return InnerChannel.BeginOpen(callback, state);
+        }
 
-		void ICommunicationObject.EndOpen (IAsyncResult result)
-		{
-			InnerChannel.EndOpen (result);
-		}
+        IAsyncResult ICommunicationObject.BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return InnerChannel.BeginOpen(timeout, callback, state);
+        }
 
-		void ICommunicationObject.EndClose (IAsyncResult result)
-		{
-			InnerChannel.EndClose (result);
-		}
+        IAsyncResult ICommunicationObject.BeginClose(AsyncCallback callback, object state)
+        {
+            return InnerChannel.BeginClose(callback, state);
+        }
 
-		void ICommunicationObject.Abort ()
-		{
-			InnerChannel.Abort ();
-		}
+        IAsyncResult ICommunicationObject.BeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return InnerChannel.BeginClose(timeout, callback, state);
+        }
 
-		void IDisposable.Dispose ()
-		{
-			InnerChannel.Dispose ();
-		}
-	}
+        void ICommunicationObject.EndOpen(IAsyncResult result)
+        {
+            InnerChannel.EndOpen(result);
+        }
+
+        void ICommunicationObject.EndClose(IAsyncResult result)
+        {
+            InnerChannel.EndClose(result);
+        }
+
+        void ICommunicationObject.Abort()
+        {
+            InnerChannel.Abort();
+        }
+
+        void IDisposable.Dispose()
+        {
+            InnerChannel.Dispose();
+        }
+    }
 }

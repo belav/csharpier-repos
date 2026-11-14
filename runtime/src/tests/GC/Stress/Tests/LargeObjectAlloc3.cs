@@ -6,7 +6,6 @@
 // and committed from the LargeObjectHeap
 // The Finalizer makes sure that the GC is actually collecting the large objects
 
-
 using System;
 
 namespace LargeObjectTest
@@ -54,9 +53,7 @@ namespace LargeObjectTest
             int loop = 1;
             LargeObject largeobj;
 
-
             TestLibrary.Logging.WriteLine("Test should pass with ExitCode 100\n");
-
 
             while (loop < 100)
             {
@@ -66,7 +63,10 @@ namespace LargeObjectTest
                     try
                     {
                         largeobj = new LargeObject(size);
-                        TestLibrary.Logging.WriteLine("Allocated LargeObject: {0} bytes", size * 4 * 1024 * 50);
+                        TestLibrary.Logging.WriteLine(
+                            "Allocated LargeObject: {0} bytes",
+                            size * 4 * 1024 * 50
+                        );
                     }
                     catch (Exception e)
                     {
@@ -91,4 +91,3 @@ namespace LargeObjectTest
         }
     }
 }
-

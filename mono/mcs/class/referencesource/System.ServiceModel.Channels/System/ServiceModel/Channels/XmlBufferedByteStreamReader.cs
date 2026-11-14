@@ -11,15 +11,19 @@ namespace System.ServiceModel.Channels
 
     class XmlBufferedByteStreamReader : XmlByteStreamReader
     {
-        ByteStreamBufferedMessageData bufferedMessageData; 
+        ByteStreamBufferedMessageData bufferedMessageData;
         int offset;
         static byte[] emptyByteArray = new byte[0];
 
-        public XmlBufferedByteStreamReader(ByteStreamBufferedMessageData bufferedMessageData, XmlDictionaryReaderQuotas quotas) : base (quotas)
+        public XmlBufferedByteStreamReader(
+            ByteStreamBufferedMessageData bufferedMessageData,
+            XmlDictionaryReaderQuotas quotas
+        )
+            : base(quotas)
         {
             Fx.Assert(bufferedMessageData != null, "bufferedMessageData is null");
             this.bufferedMessageData = bufferedMessageData;
-            this.bufferedMessageData.Open(); 
+            this.bufferedMessageData.Open();
 
             this.offset = bufferedMessageData.Buffer.Offset;
             this.quotas = quotas;
@@ -29,7 +33,7 @@ namespace System.ServiceModel.Channels
         protected override void OnClose()
         {
             this.bufferedMessageData.Close();
-            this.bufferedMessageData = null; 
+            this.bufferedMessageData = null;
             this.offset = 0;
             base.OnClose();
         }
@@ -41,7 +45,7 @@ namespace System.ServiceModel.Channels
 
             if (count == 0)
             {
-                return 0; 
+                return 0;
             }
 
             int bytesToCopy = Math.Min(bufferedMessageData.Buffer.Count - this.offset, count);
@@ -49,12 +53,18 @@ namespace System.ServiceModel.Channels
             if (bytesToCopy == 0)
             {
                 this.position = ReaderPosition.EndElement;
-                return 0; 
+                return 0;
             }
 
-            Buffer.BlockCopy(this.bufferedMessageData.Buffer.Array, this.offset, buffer, index, bytesToCopy);
+            Buffer.BlockCopy(
+                this.bufferedMessageData.Buffer.Array,
+                this.offset,
+                buffer,
+                index,
+                bytesToCopy
+            );
             this.offset += bytesToCopy;
-            
+
             return bytesToCopy;
         }
 
@@ -62,7 +72,13 @@ namespace System.ServiceModel.Channels
         {
             int bytesToCopy = bufferedMessageData.Buffer.Count;
             byte[] buffer = new byte[bytesToCopy];
-            Buffer.BlockCopy(this.bufferedMessageData.Buffer.Array, this.bufferedMessageData.Buffer.Offset, buffer, 0, bytesToCopy);
+            Buffer.BlockCopy(
+                this.bufferedMessageData.Buffer.Array,
+                this.bufferedMessageData.Buffer.Offset,
+                buffer,
+                0,
+                bytesToCopy
+            );
             return buffer;
         }
 
@@ -80,7 +96,7 @@ namespace System.ServiceModel.Channels
                 length = bufferedMessageData.Buffer.Count;
                 return true;
             }
-            length = -1; 
+            length = -1;
             return false;
         }
     }

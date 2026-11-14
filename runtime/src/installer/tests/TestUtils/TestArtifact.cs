@@ -13,9 +13,11 @@ namespace Microsoft.DotNet.CoreSetup.Test
     public class TestArtifact : IDisposable
     {
         private static readonly Lazy<bool> _preserveTestRuns = new Lazy<bool>(() =>
-            TestContext.GetTestContextVariableOrNull("PRESERVE_TEST_RUNS") == "1");
+            TestContext.GetTestContextVariableOrNull("PRESERVE_TEST_RUNS") == "1"
+        );
 
         public static bool PreserveTestRuns() => _preserveTestRuns.Value;
+
         public static string TestArtifactsPath => TestContext.TestArtifactsPath;
 
         public string Location { get; }
@@ -45,10 +47,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public static TestArtifact Create(string name)
         {
             var (location, parentPath) = GetNewTestArtifactPath(name);
-            return new TestArtifact(location)
-            {
-                DirectoryToDelete = parentPath
-            };
+            return new TestArtifact(location) { DirectoryToDelete = parentPath };
         }
 
         protected void RegisterCopy(TestArtifact artifact)
@@ -67,7 +66,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
                     // Delete lock file last
                     File.Delete($"{DirectoryToDelete}.lock");
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine("delete failed" + e);
                 }
@@ -107,13 +107,21 @@ namespace Microsoft.DotNet.CoreSetup.Test
             throw lastException;
         }
 
-        protected static void CopyRecursive(string sourceDirectory, string destinationDirectory, bool overwrite = false)
+        protected static void CopyRecursive(
+            string sourceDirectory,
+            string destinationDirectory,
+            bool overwrite = false
+        )
         {
             FileUtils.EnsureDirectoryExists(destinationDirectory);
 
             foreach (var dir in Directory.EnumerateDirectories(sourceDirectory))
             {
-                CopyRecursive(dir, Path.Combine(destinationDirectory, Path.GetFileName(dir)), overwrite);
+                CopyRecursive(
+                    dir,
+                    Path.Combine(destinationDirectory, Path.GetFileName(dir)),
+                    overwrite
+                );
             }
 
             foreach (var file in Directory.EnumerateFiles(sourceDirectory))

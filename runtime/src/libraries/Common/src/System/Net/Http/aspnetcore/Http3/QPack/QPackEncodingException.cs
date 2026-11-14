@@ -10,19 +10,19 @@ namespace System.Net.Http.QPack
     internal sealed class QPackEncodingException : Exception
     {
         public QPackEncodingException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
+
         public QPackEncodingException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
 #endif
-        private QPackEncodingException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private QPackEncodingException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

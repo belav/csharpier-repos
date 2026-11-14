@@ -49,14 +49,20 @@ namespace System.ComponentModel.Design
         /// </summary>
         private static string GetLocalPath(string fileName)
         {
-            Debug.Assert(fileName != null && fileName.Length > 0, "Cannot get local path, fileName is not valid");
+            Debug.Assert(
+                fileName != null && fileName.Length > 0,
+                "Cannot get local path, fileName is not valid"
+            );
 
             Uri uri = new Uri(fileName);
             return uri.LocalPath + uri.Fragment;
         }
 
-        [UnconditionalSuppressMessage("SingleFile", "IL3000: Avoid accessing Assembly file path when publishing as a single file",
-            Justification = "Suppressing the warning until gets fixed, see https://github.com/dotnet/runtime/issues/50821")]
+        [UnconditionalSuppressMessage(
+            "SingleFile",
+            "IL3000: Avoid accessing Assembly file path when publishing as a single file",
+            Justification = "Suppressing the warning until gets fixed, see https://github.com/dotnet/runtime/issues/50821"
+        )]
         public override string? GetSavedLicenseKey(Type type, Assembly? resourceAssembly)
         {
             if (_savedLicenseKeys == null || _savedLicenseKeys[type.AssemblyQualifiedName!] == null)
@@ -81,11 +87,18 @@ namespace System.ComponentModel.Design
 
                         // Since the casing may be different depending on how the assembly was loaded,
                         // we'll do a case insensitive lookup for this manifest resource stream...
-                        s ??= CaseInsensitiveManifestResourceStreamLookup(asm, fileName + ".licenses");
+                        s ??= CaseInsensitiveManifestResourceStreamLookup(
+                            asm,
+                            fileName + ".licenses"
+                        );
 
                         if (s != null)
                         {
-                            DesigntimeLicenseContextSerializer.Deserialize(s, fileName.ToUpperInvariant(), this);
+                            DesigntimeLicenseContextSerializer.Deserialize(
+                                s,
+                                fileName.ToUpperInvariant(),
+                                this
+                            );
                             break;
                         }
                     }
@@ -107,11 +120,27 @@ namespace System.ComponentModel.Design
                             string shortAssemblyName = resourceAssembly.GetName().Name!;
                             // If the assembly has been renamed, we try our best to find a good match in the available resources
                             // by looking at the assembly name (which doesn't change even after a file rename) + ".exe.licenses" or + ".dll.licenses"
-                            foreach (string existingName in resourceAssembly.GetManifestResourceNames())
+                            foreach (
+                                string existingName in resourceAssembly.GetManifestResourceNames()
+                            )
                             {
-                                if (comparer.Compare(existingName, licResourceName, CompareOptions.IgnoreCase) == 0 ||
-                                 comparer.Compare(existingName, shortAssemblyName + ".exe.licenses", CompareOptions.IgnoreCase) == 0 ||
-                                 comparer.Compare(existingName, shortAssemblyName + ".dll.licenses", CompareOptions.IgnoreCase) == 0)
+                                if (
+                                    comparer.Compare(
+                                        existingName,
+                                        licResourceName,
+                                        CompareOptions.IgnoreCase
+                                    ) == 0
+                                    || comparer.Compare(
+                                        existingName,
+                                        shortAssemblyName + ".exe.licenses",
+                                        CompareOptions.IgnoreCase
+                                    ) == 0
+                                    || comparer.Compare(
+                                        existingName,
+                                        shortAssemblyName + ".dll.licenses",
+                                        CompareOptions.IgnoreCase
+                                    ) == 0
+                                )
                                 {
                                     resolvedName = existingName;
                                     break;
@@ -124,7 +153,11 @@ namespace System.ComponentModel.Design
                         }
                         if (s != null)
                         {
-                            DesigntimeLicenseContextSerializer.Deserialize(s, fileName.ToUpperInvariant(), this);
+                            DesigntimeLicenseContextSerializer.Deserialize(
+                                s,
+                                fileName.ToUpperInvariant(),
+                                this
+                            );
                         }
                     }
                 }
@@ -138,7 +171,10 @@ namespace System.ComponentModel.Design
         * we are attempting to locate could have different casing
         * depending on how the assembly was loaded.
         **/
-        private static Stream? CaseInsensitiveManifestResourceStreamLookup(Assembly satellite, string name)
+        private static Stream? CaseInsensitiveManifestResourceStreamLookup(
+            Assembly satellite,
+            string name
+        )
         {
             CompareInfo comparer = CultureInfo.InvariantCulture.CompareInfo;
 
@@ -148,9 +184,11 @@ namespace System.ComponentModel.Design
             string assemblyShortName = satellite.GetName().Name!;
             foreach (string existingName in satellite.GetManifestResourceNames())
             {
-                if (comparer.Compare(existingName, name, CompareOptions.IgnoreCase) == 0 ||
-                    comparer.Compare(existingName, assemblyShortName + ".exe.licenses") == 0 ||
-                    comparer.Compare(existingName, assemblyShortName + ".dll.licenses") == 0)
+                if (
+                    comparer.Compare(existingName, name, CompareOptions.IgnoreCase) == 0
+                    || comparer.Compare(existingName, assemblyShortName + ".exe.licenses") == 0
+                    || comparer.Compare(existingName, assemblyShortName + ".dll.licenses") == 0
+                )
                 {
                     name = existingName;
                     break;

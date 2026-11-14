@@ -13,34 +13,54 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class ArrowExpressionClausePlacementDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class ArrowExpressionClausePlacementDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ArrowExpressionClausePlacementDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.ArrowExpressionClausePlacementDiagnosticId,
-                   EnforceOnBuildValues.ArrowExpressionClausePlacement,
-                   CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
-                   new LocalizableResourceString(
-                       nameof(CSharpAnalyzersResources.Blank_line_not_allowed_after_arrow_expression_clause_token), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
+            : base(
+                IDEDiagnosticIds.ArrowExpressionClausePlacementDiagnosticId,
+                EnforceOnBuildValues.ArrowExpressionClausePlacement,
+                CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                new LocalizableResourceString(
+                    nameof(
+                        CSharpAnalyzersResources.Blank_line_not_allowed_after_arrow_expression_clause_token
+                    ),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
+
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
+            );
+
+        private void AnalyzeTree(
+            SyntaxTreeAnalysisContext context,
+            CompilationOptions compilationOptions
+        )
         {
-        }
-
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
-
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(context =>
-                context.RegisterSyntaxTreeAction(treeContext => AnalyzeTree(treeContext, context.Compilation.Options)));
-
-        private void AnalyzeTree(SyntaxTreeAnalysisContext context, CompilationOptions compilationOptions)
-        {
-            var option = context.GetCSharpAnalyzerOptions().AllowBlankLineAfterTokenInArrowExpressionClause;
-            if (option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification))
+            var option = context
+                .GetCSharpAnalyzerOptions()
+                .AllowBlankLineAfterTokenInArrowExpressionClause;
+            if (
+                option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification)
+            )
                 return;
 
             Recurse(context, option.Notification, context.GetAnalysisRoot(findInTrivia: false));
         }
 
-        private void Recurse(SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, SyntaxNode node)
+        private void Recurse(
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            SyntaxNode node
+        )
         {
             context.CancellationToken.ThrowIfCancellationRequested();
 
@@ -58,7 +78,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
         }
 
         private void ProcessArrowExpressionClause(
-            SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, ArrowExpressionClauseSyntax arrowExpressionClause)
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            ArrowExpressionClauseSyntax arrowExpressionClause
+        )
         {
             // get
             //     => 1 + 2;
@@ -68,18 +91,25 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
                 return;
 
             // Don't bother analyzing nodes that have syntax errors in them.
-            if (arrowExpressionClause.GetDiagnostics().Any(static d => d.Severity == DiagnosticSeverity.Error))
+            if (
+                arrowExpressionClause
+                    .GetDiagnostics()
+                    .Any(static d => d.Severity == DiagnosticSeverity.Error)
+            )
                 return;
 
             if (IsOk(arrowExpressionClause.ArrowToken))
                 return;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                arrowExpressionClause.ArrowToken.GetLocation(),
-                notificationOption,
-                additionalLocations: null,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    arrowExpressionClause.ArrowToken.GetLocation(),
+                    notificationOption,
+                    additionalLocations: null,
+                    properties: null
+                )
+            );
 
             return;
 
@@ -100,8 +130,15 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
                 if (nextToken == default)
                     return true;
 
-                if (nextToken.LeadingTrivia.Any(static t => t.Kind() is
-                        SyntaxKind.IfDirectiveTrivia or SyntaxKind.ElseDirectiveTrivia or SyntaxKind.ElifDirectiveTrivia or SyntaxKind.EndIfDirectiveTrivia))
+                if (
+                    nextToken.LeadingTrivia.Any(static t =>
+                        t.Kind()
+                            is SyntaxKind.IfDirectiveTrivia
+                                or SyntaxKind.ElseDirectiveTrivia
+                                or SyntaxKind.ElifDirectiveTrivia
+                                or SyntaxKind.EndIfDirectiveTrivia
+                    )
+                )
                 {
                     return true;
                 }

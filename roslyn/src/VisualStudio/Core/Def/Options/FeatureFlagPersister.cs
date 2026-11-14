@@ -21,7 +21,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
             _featureFlags = featureFlags;
         }
 
-        public bool TryFetch(OptionKey2 optionKey, string flagName, [NotNullWhen(true)] out object? value)
+        public bool TryFetch(
+            OptionKey2 optionKey,
+            string flagName,
+            [NotNullWhen(true)] out object? value
+        )
         {
             if (_featureFlags == null)
             {
@@ -57,9 +61,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
             {
                 ((IVsFeatureFlags2?)_featureFlags)?.EnableFeatureFlag(flagName, flag);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
     }
 }

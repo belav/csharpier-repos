@@ -3,7 +3,10 @@
 
 namespace System.Web.Mvc
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Property,
+        AllowMultiple = true
+    )]
     public sealed class AdditionalMetadataAttribute : Attribute, IMetadataAware
     {
         private object _typeId = new object();

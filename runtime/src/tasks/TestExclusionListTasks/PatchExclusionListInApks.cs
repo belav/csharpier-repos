@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+
 namespace TestExclusionListTasks;
 
 public class PatchExclusionListInApks : Task
@@ -36,7 +37,8 @@ public class PatchExclusionListInApks : Task
 
         string testExclusionList = string.Join(
             '\n',
-            (ExcludedTests ?? Enumerable.Empty<ITaskItem>()).Select(t => t.ItemSpec));
+            (ExcludedTests ?? Enumerable.Empty<ITaskItem>()).Select(t => t.ItemSpec)
+        );
         foreach (ITaskItem apk in ApkPaths ?? Enumerable.Empty<ITaskItem>())
         {
             string apkPath = apk.GetMetadata("FullPath")!;
@@ -44,9 +46,16 @@ public class PatchExclusionListInApks : Task
             using (ZipArchive apkArchive = ZipFile.Open(apkPath, ZipArchiveMode.Update))
             {
                 ZipArchiveEntry assetsZipEntry = apkArchive.GetEntry("assets/assets.zip")!;
-                using ZipArchive assetsArchive = new ZipArchive(assetsZipEntry.Open(), ZipArchiveMode.Update);
-                ZipArchiveEntry testExclusionListEntry = assetsArchive.GetEntry("TestExclusionList.txt")!;
-                using StreamWriter textExclusionListWriter = new StreamWriter(testExclusionListEntry.Open());
+                using ZipArchive assetsArchive = new ZipArchive(
+                    assetsZipEntry.Open(),
+                    ZipArchiveMode.Update
+                );
+                ZipArchiveEntry testExclusionListEntry = assetsArchive.GetEntry(
+                    "TestExclusionList.txt"
+                )!;
+                using StreamWriter textExclusionListWriter = new StreamWriter(
+                    testExclusionListEntry.Open()
+                );
                 textExclusionListWriter.WriteLine(testExclusionList);
             }
             apkBuilder.ZipAndSignApk(apkPath);

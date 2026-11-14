@@ -124,7 +124,8 @@ public readonly record struct ColumnModificationParameters
         bool key,
         bool condition,
         bool sensitiveLoggingEnabled,
-        bool? isNullable = null)
+        bool? isNullable = null
+    )
     {
         Column = null;
         ColumnName = columnName;
@@ -170,7 +171,8 @@ public readonly record struct ColumnModificationParameters
         bool key,
         bool condition,
         bool sensitiveLoggingEnabled,
-        bool? isNullable = null)
+        bool? isNullable = null
+    )
     {
         Column = column;
         ColumnName = column.Name;
@@ -214,7 +216,8 @@ public readonly record struct ColumnModificationParameters
         bool valueIsWrite,
         bool columnIsKey,
         bool columnIsCondition,
-        bool sensitiveLoggingEnabled)
+        bool sensitiveLoggingEnabled
+    )
     {
         Column = column;
         ColumnName = column.Name;
@@ -265,7 +268,8 @@ public readonly record struct ColumnModificationParameters
         bool key,
         bool condition,
         bool sensitiveLoggingEnabled,
-        bool? isNullable = null)
+        bool? isNullable = null
+    )
     {
         Column = null;
         ColumnName = columnName;

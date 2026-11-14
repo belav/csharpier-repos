@@ -9,13 +9,13 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class DocumentationCommentIDVisitor : CSharpSymbolVisitor<StringBuilder, object>
+    internal sealed partial class DocumentationCommentIDVisitor
+        : CSharpSymbolVisitor<StringBuilder, object>
     {
-        public static readonly DocumentationCommentIDVisitor Instance = new DocumentationCommentIDVisitor();
+        public static readonly DocumentationCommentIDVisitor Instance =
+            new DocumentationCommentIDVisitor();
 
-        private DocumentationCommentIDVisitor()
-        {
-        }
+        private DocumentationCommentIDVisitor() { }
 
         public override object DefaultVisit(Symbol symbol, StringBuilder builder)
         {

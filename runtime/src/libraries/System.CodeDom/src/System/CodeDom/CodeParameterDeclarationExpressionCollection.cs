@@ -9,12 +9,16 @@ namespace System.CodeDom
     {
         public CodeParameterDeclarationExpressionCollection() { }
 
-        public CodeParameterDeclarationExpressionCollection(CodeParameterDeclarationExpressionCollection value)
+        public CodeParameterDeclarationExpressionCollection(
+            CodeParameterDeclarationExpressionCollection value
+        )
         {
             AddRange(value);
         }
 
-        public CodeParameterDeclarationExpressionCollection(CodeParameterDeclarationExpression[] value)
+        public CodeParameterDeclarationExpressionCollection(
+            CodeParameterDeclarationExpression[] value
+        )
         {
             AddRange(value);
         }
@@ -56,11 +60,13 @@ namespace System.CodeDom
 
         public bool Contains(CodeParameterDeclarationExpression value) => List.Contains(value);
 
-        public void CopyTo(CodeParameterDeclarationExpression[] array, int index) => List.CopyTo(array, index);
+        public void CopyTo(CodeParameterDeclarationExpression[] array, int index) =>
+            List.CopyTo(array, index);
 
         public int IndexOf(CodeParameterDeclarationExpression value) => List.IndexOf(value);
 
-        public void Insert(int index, CodeParameterDeclarationExpression value) => List.Insert(index, value);
+        public void Insert(int index, CodeParameterDeclarationExpression value) =>
+            List.Insert(index, value);
 
         public void Remove(CodeParameterDeclarationExpression value) => List.Remove(value);
     }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,88 +37,98 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	[DebuggerDisplay ("Action={action}, Direction={direction}, MessageType={messageType}")]
-	public class MessageDescription
-	{
-		string action;
-		MessageDirection direction;
-		MessagePropertyDescriptionCollection properties
-			= new MessagePropertyDescriptionCollection ();
-		MessageBodyDescription body = new MessageBodyDescription ();
-		MessageHeaderDescriptionCollection headers
-			= new MessageHeaderDescriptionCollection ();
-		Type message_type;
-		bool has_protection_level;
-		ProtectionLevel protection_level;
+    [DebuggerDisplay("Action={action}, Direction={direction}, MessageType={messageType}")]
+    public class MessageDescription
+    {
+        string action;
+        MessageDirection direction;
+        MessagePropertyDescriptionCollection properties =
+            new MessagePropertyDescriptionCollection();
+        MessageBodyDescription body = new MessageBodyDescription();
+        MessageHeaderDescriptionCollection headers = new MessageHeaderDescriptionCollection();
+        Type message_type;
+        bool has_protection_level;
+        ProtectionLevel protection_level;
 
-		public MessageDescription (string action,
-			MessageDirection direction)
-		{
-			this.action = action;
-			this.direction = direction;
-		}
+        public MessageDescription(string action, MessageDirection direction)
+        {
+            this.action = action;
+            this.direction = direction;
+        }
 
-		internal bool IsRequest { get; set; }
+        internal bool IsRequest { get; set; }
 
-		public string Action {
-			get { return action; }
-		}
+        public string Action
+        {
+            get { return action; }
+        }
 
-		public MessageBodyDescription Body {
-			get { return body; }
-		}
+        public MessageBodyDescription Body
+        {
+            get { return body; }
+        }
 
-		public MessageDirection Direction {
-			get { return direction; }
-		}
+        public MessageDirection Direction
+        {
+            get { return direction; }
+        }
 
-		public MessageHeaderDescriptionCollection Headers {
-			get { return headers; }
-		}
+        public MessageHeaderDescriptionCollection Headers
+        {
+            get { return headers; }
+        }
 
-		public bool HasProtectionLevel {
-			get { return has_protection_level; }
-		}
+        public bool HasProtectionLevel
+        {
+            get { return has_protection_level; }
+        }
 
-		public ProtectionLevel ProtectionLevel {
-			get { return protection_level; }
-			set {
-				protection_level = value;
-				has_protection_level = true;
-			}
-		}
+        public ProtectionLevel ProtectionLevel
+        {
+            get { return protection_level; }
+            set
+            {
+                protection_level = value;
+                has_protection_level = true;
+            }
+        }
 
-		public Type MessageType {
-			get { return message_type; }
-			set { message_type = value; }
-		}
+        public Type MessageType
+        {
+            get { return message_type; }
+            set { message_type = value; }
+        }
 
-		public MessagePropertyDescriptionCollection Properties {
-			get { return properties; }
-		}
+        public MessagePropertyDescriptionCollection Properties
+        {
+            get { return properties; }
+        }
 
-		#region internals required for moonlight compatibility
+        #region internals required for moonlight compatibility
 
-		internal bool IsTypedMessage {
-			get { return MessageType == null; }
-		}
+        internal bool IsTypedMessage
+        {
+            get { return MessageType == null; }
+        }
 
-		internal bool IsUntypedMessage {
-			get { return IsOfType (typeof (Message)); }
-		}
+        internal bool IsUntypedMessage
+        {
+            get { return IsOfType(typeof(Message)); }
+        }
 
-		internal bool IsVoid {
-			get { return IsOfType (typeof (void)); }
-		}
+        internal bool IsVoid
+        {
+            get { return IsOfType(typeof(void)); }
+        }
 
-		bool IsOfType (Type t)
-		{
-			if (direction == MessageDirection.Output)
-				return Body != null && Body.ReturnValue != null && Body.ReturnValue.Type == t;
-			else
-				return Body.Parts.Count == 1 && Body.Parts [0].Type == t;
-		}
+        bool IsOfType(Type t)
+        {
+            if (direction == MessageDirection.Output)
+                return Body != null && Body.ReturnValue != null && Body.ReturnValue.Type == t;
+            else
+                return Body.Parts.Count == 1 && Body.Parts[0].Type == t;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -18,7 +18,8 @@ namespace System.ServiceModel
         [ThreadStatic]
         static Holder currentContext;
 
-        static AsyncLocal<OperationContext> currentAsyncLocalContext = new AsyncLocal<OperationContext>();
+        static AsyncLocal<OperationContext> currentAsyncLocalContext =
+            new AsyncLocal<OperationContext>();
 
         ServiceChannel channel;
         Message clientReply;
@@ -42,7 +43,9 @@ namespace System.ServiceModel
         public OperationContext(IContextChannel channel)
         {
             if (channel == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("channel"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("channel")
+                );
 
             ServiceChannel serviceChannel = channel as ServiceChannel;
 
@@ -59,25 +62,34 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInvalidChannelToOperationContext)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxInvalidChannelToOperationContext)
+                    )
+                );
             }
         }
 
         internal OperationContext(ServiceHostBase host)
-            : this(host, MessageVersion.Soap12WSAddressing10)
-        {
-        }
+            : this(host, MessageVersion.Soap12WSAddressing10) { }
 
         internal OperationContext(ServiceHostBase host, MessageVersion outgoingMessageVersion)
         {
             if (outgoingMessageVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("outgoingMessageVersion"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("outgoingMessageVersion")
+                );
 
             this.host = host;
             this.outgoingMessageVersion = outgoingMessageVersion;
         }
 
-        internal OperationContext(RequestContext requestContext, Message request, ServiceChannel channel, ServiceHostBase host)
+        internal OperationContext(
+            RequestContext requestContext,
+            Message request,
+            ServiceChannel channel,
+            ServiceHostBase host
+        )
         {
             this.channel = channel;
             this.host = host;
@@ -95,9 +107,10 @@ namespace System.ServiceModel
         {
             get
             {
-                return ShouldUseAsyncLocalContext ? OperationContext.currentAsyncLocalContext.Value : CurrentHolder.Context;
+                return ShouldUseAsyncLocalContext
+                    ? OperationContext.currentAsyncLocalContext.Value
+                    : CurrentHolder.Context;
             }
-
             set
             {
                 if (ShouldUseAsyncLocalContext && value != null && value.isAsyncFlowEnabled)
@@ -107,7 +120,7 @@ namespace System.ServiceModel
                 else
                 {
                     CurrentHolder.Context = value;
-                }                
+                }
             }
         }
 
@@ -129,28 +142,22 @@ namespace System.ServiceModel
         {
             get
             {
-                return !ServiceModelAppSettings.DisableOperationContextAsyncFlow && CurrentHolder.Context == null && OperationContext.currentAsyncLocalContext.Value != null && OperationContext.currentAsyncLocalContext.Value.isAsyncFlowEnabled;
+                return !ServiceModelAppSettings.DisableOperationContextAsyncFlow
+                    && CurrentHolder.Context == null
+                    && OperationContext.currentAsyncLocalContext.Value != null
+                    && OperationContext.currentAsyncLocalContext.Value.isAsyncFlowEnabled;
             }
         }
 
         public EndpointDispatcher EndpointDispatcher
         {
-            get
-            {
-                return this.endpointDispatcher;
-            }
-            set
-            {
-                this.endpointDispatcher = value;
-            }
+            get { return this.endpointDispatcher; }
+            set { this.endpointDispatcher = value; }
         }
 
         public bool IsUserContext
         {
-            get
-            {
-                return (this.request == null);
-            }
+            get { return (this.request == null); }
         }
 
         public IExtensionCollection<OperationContext> Extensions
@@ -176,8 +183,9 @@ namespace System.ServiceModel
             get
             {
                 MessageProperties properties = this.IncomingMessageProperties;
-                return properties != null && properties.Security != null &&
-                    properties.Security.HasIncomingSupportingTokens;
+                return properties != null
+                    && properties.Security != null
+                    && properties.Security.HasIncomingSupportingTokens;
             }
         }
 
@@ -303,15 +311,18 @@ namespace System.ServiceModel
                     IChannel inner = this.channel.InnerChannel;
                     if (inner != null)
                     {
-                        ISessionChannel<IDuplexSession> duplex = inner as ISessionChannel<IDuplexSession>;
+                        ISessionChannel<IDuplexSession> duplex =
+                            inner as ISessionChannel<IDuplexSession>;
                         if ((duplex != null) && (duplex.Session != null))
                             return duplex.Session.Id;
 
-                        ISessionChannel<IInputSession> input = inner as ISessionChannel<IInputSession>;
+                        ISessionChannel<IInputSession> input =
+                            inner as ISessionChannel<IInputSession>;
                         if ((input != null) && (input.Session != null))
                             return input.Session.Id;
 
-                        ISessionChannel<IOutputSession> output = inner as ISessionChannel<IOutputSession>;
+                        ISessionChannel<IOutputSession> output =
+                            inner as ISessionChannel<IOutputSession>;
                         if ((output != null) && (output.Session != null))
                             return output.Session.Id;
                     }
@@ -328,7 +339,8 @@ namespace System.ServiceModel
                 if (properties != null && properties.Security != null)
                 {
                     return new System.Collections.ObjectModel.ReadOnlyCollection<SupportingTokenSpecification>(
-                        properties.Security.IncomingSupportingTokens);
+                        properties.Security.IncomingSupportingTokens
+                    );
                 }
                 return null;
             }
@@ -340,11 +352,7 @@ namespace System.ServiceModel
             set { this.threadPrincipal = value; }
         }
 
-        public ClaimsPrincipal ClaimsPrincipal
-        {
-            get;
-            internal set;
-        }
+        public ClaimsPrincipal ClaimsPrincipal { get; internal set; }
 
         internal TransactionRpcFacet TransactionFacet
         {
@@ -454,7 +462,9 @@ namespace System.ServiceModel
         {
             if (this.txFacet == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NoTransactionInContext)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.NoTransactionInContext))
+                );
             }
 
             this.txFacet.Completed();
@@ -471,17 +481,9 @@ namespace System.ServiceModel
 
             public OperationContext Context
             {
-                get
-                {
-                    return this.context;
-                }
-
-                set
-                {
-                    this.context = value;
-                }
+                get { return this.context; }
+                set { this.context = value; }
             }
         }
     }
 }
-

@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
-using Point = System.Numerics.Vector3;
 using Xunit;
+using Point = System.Numerics.Vector3;
 
 namespace VectorTests
 {
     public class Program
     {
         const float EPS = Single.Epsilon * 5;
-		
+
         static bool CheckEQ(float a, float b)
         {
             return Math.Abs(a - b) < EPS;

@@ -3,49 +3,48 @@ using System.Threading.Tasks;
 
 class X
 {
-	public static void Main ()
-	{
-		new X ().Test ();
-	}
+    public static void Main()
+    {
+        new X().Test();
+    }
 
-	void Test ()
-	{
-		object v1 = null;
+    void Test()
+    {
+        object v1 = null;
 
-		Action a = () =>
-		{
-			if (v1 == null)
-			{
-				object v2 = null;
+        Action a = () =>
+        {
+            if (v1 == null)
+            {
+                object v2 = null;
 
-				Action a2 = () =>
-				{
-					Console.WriteLine (v2);
-				};
-				
-				Action a3 = async () =>
-				{
-					// This scope needs to access to Scope which can do ldftn on instance method
-					{
-					Func<Task> a4 = async () =>
-					{
-						await Foo ();
-					};
-					}
+                Action a2 = () =>
+                {
+                    Console.WriteLine(v2);
+                };
 
-					await Task.Yield ();
-				};
+                Action a3 = async () =>
+                {
+                    // This scope needs to access to Scope which can do ldftn on instance method
+                    {
+                        Func<Task> a4 = async () =>
+                        {
+                            await Foo();
+                        };
+                    }
 
-				a3 ();
-			}
-		};
+                    await Task.Yield();
+                };
 
-		a ();
-	}
+                a3();
+            }
+        };
 
-	async Task Foo ()
-	{
-		await Task.FromResult (1);
-	}
+        a();
+    }
 
+    async Task Foo()
+    {
+        await Task.FromResult(1);
+    }
 }

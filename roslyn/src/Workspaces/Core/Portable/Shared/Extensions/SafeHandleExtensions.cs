@@ -31,7 +31,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             try
             {
                 handle.DangerousAddRef(ref success);
-                Debug.Assert(success, $"{nameof(SafeHandle.DangerousAddRef)} does not return when {nameof(success)} is false.");
+                Debug.Assert(
+                    success,
+                    $"{nameof(SafeHandle.DangerousAddRef)} does not return when {nameof(success)} is false."
+                );
 
                 return new SafeHandleLease(handle);
             }

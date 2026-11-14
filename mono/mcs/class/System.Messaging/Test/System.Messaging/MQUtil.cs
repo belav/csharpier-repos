@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,51 +33,56 @@ using System.Messaging;
 
 namespace MonoTests.System.Messaging
 {
-	public class MQUtil
-	{
-		public static string CreateQueueName ()
-		{
-			string testServer = Environment.GetEnvironmentVariable ("MONO_TEST_RABBITMQ_SERVER");
-			if (testServer == null)
-			{
-				testServer = @".\private$";
-			}
-			
-			return testServer + @"\" + Guid.NewGuid ().ToString ();
-		}
-		
-		public static MessageQueue GetQueue (string path)
-		{
-			return GetQueue (path, false);
-		}
-		
-		public static MessageQueue GetQueue ()
-		{
-			return GetQueue (CreateQueueName ());
-		}
-		
-		public static MessageQueue GetQueue (string path, bool isTransactional)
-		{
-			return GetQueue (path, isTransactional,
-			                 new BinaryMessageFormatter ());
-		}
-		
-		public static MessageQueue GetQueue (string path, IMessageFormatter formatter)
-		{
-			return GetQueue (path, false, formatter);
-		}
-		
-		public static MessageQueue GetQueue (string path, bool isTransactional, 
-		                                     IMessageFormatter formatter)
-		{
-			MessageQueue q;
-			if (MessageQueue.Exists (path)) {
-				q = new MessageQueue (path);
-			} else {
-				q = MessageQueue.Create (path, isTransactional);
-			}
-			q.Formatter = formatter;
-			return q;
-		}		
-	}
+    public class MQUtil
+    {
+        public static string CreateQueueName()
+        {
+            string testServer = Environment.GetEnvironmentVariable("MONO_TEST_RABBITMQ_SERVER");
+            if (testServer == null)
+            {
+                testServer = @".\private$";
+            }
+
+            return testServer + @"\" + Guid.NewGuid().ToString();
+        }
+
+        public static MessageQueue GetQueue(string path)
+        {
+            return GetQueue(path, false);
+        }
+
+        public static MessageQueue GetQueue()
+        {
+            return GetQueue(CreateQueueName());
+        }
+
+        public static MessageQueue GetQueue(string path, bool isTransactional)
+        {
+            return GetQueue(path, isTransactional, new BinaryMessageFormatter());
+        }
+
+        public static MessageQueue GetQueue(string path, IMessageFormatter formatter)
+        {
+            return GetQueue(path, false, formatter);
+        }
+
+        public static MessageQueue GetQueue(
+            string path,
+            bool isTransactional,
+            IMessageFormatter formatter
+        )
+        {
+            MessageQueue q;
+            if (MessageQueue.Exists(path))
+            {
+                q = new MessageQueue(path);
+            }
+            else
+            {
+                q = MessageQueue.Create(path, isTransactional);
+            }
+            q.Formatter = formatter;
+            return q;
+        }
+    }
 }

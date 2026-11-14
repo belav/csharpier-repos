@@ -27,10 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public NamespaceKind Kind
         {
-            get
-            {
-                return _kind;
-            }
+            get { return _kind; }
         }
 
         /// <summary>

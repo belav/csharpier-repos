@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-
 using Xunit;
 
 namespace System.Data.Tests.SqlTypes
@@ -18,7 +17,8 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void Constructor_Stream_Unicode()
         {
-            string xmlStr = "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
+            string xmlStr =
+                "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
             MemoryStream stream = new MemoryStream(Encoding.Unicode.GetBytes(xmlStr));
             SqlXml xmlSql = new SqlXml(stream);
             Assert.False(xmlSql.IsNull);
@@ -46,7 +46,8 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void Constructor_StringReader()
         {
-            string xmlStr = "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
+            string xmlStr =
+                "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
             XmlReader xrdr = new XmlTextReader(new StringReader(xmlStr));
             SqlXml xmlSql = new SqlXml(xrdr);
             Assert.False(xmlSql.IsNull);
@@ -76,7 +77,8 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void CreateReader_Stream_Unicode()
         {
-            string xmlStr = "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
+            string xmlStr =
+                "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
             MemoryStream stream = new MemoryStream(Encoding.Unicode.GetBytes(xmlStr));
             SqlXml xmlSql = new SqlXml(stream);
 
@@ -89,7 +91,8 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void CreateReader_XmlTextReader_CanReadContent()
         {
-            string xmlStr = "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
+            string xmlStr =
+                "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
             XmlReader rdr = new XmlTextReader(new StringReader(xmlStr));
             SqlXml xmlSql = new SqlXml(rdr);
 
@@ -108,8 +111,14 @@ namespace System.Data.Tests.SqlTypes
             {
                 if (_filesAndBaselines is null)
                 {
-                    IEnumerable<string> text = Directory.EnumerateFiles(Path.Combine("SqlXml.CreateReader", "Baseline-Text"), "*.xml");
-                    IEnumerable<string> binary = Directory.EnumerateFiles(Path.Combine("SqlXml.CreateReader", "SqlBinaryXml"), "*.bmx");
+                    IEnumerable<string> text = Directory.EnumerateFiles(
+                        Path.Combine("SqlXml.CreateReader", "Baseline-Text"),
+                        "*.xml"
+                    );
+                    IEnumerable<string> binary = Directory.EnumerateFiles(
+                        Path.Combine("SqlXml.CreateReader", "SqlBinaryXml"),
+                        "*.bmx"
+                    );
 
                     // Make sure that we found our test files; otherwise the theories would succeed without validating anything
                     Assert.NotEmpty(text);
@@ -118,18 +127,28 @@ namespace System.Data.Tests.SqlTypes
                     TheoryData<string, string> filesAndBaselines = new TheoryData<string, string>();
 
                     // Use the Text XML files as their own baselines
-                    filesAndBaselines.Append(text.Select(f => new string[] { TextXmlFileName(f), TextXmlFileName(f) }).ToArray());
+                    filesAndBaselines.Append(
+                        text.Select(f => new string[] { TextXmlFileName(f), TextXmlFileName(f) })
+                            .ToArray()
+                    );
 
                     // Use the matching Text XML files as the baselines for the SQL Binary XML files
-                    filesAndBaselines.Append(binary
-                        .Select(Path.GetFileNameWithoutExtension)
-                        .Intersect(text.Select(Path.GetFileNameWithoutExtension))
-                        .Select(f => new string[] { SqlBinaryXmlFileName(f), TextXmlFileName(f) }).ToArray());
+                    filesAndBaselines.Append(
+                        binary
+                            .Select(Path.GetFileNameWithoutExtension)
+                            .Intersect(text.Select(Path.GetFileNameWithoutExtension))
+                            .Select(f =>
+                                new string[] { SqlBinaryXmlFileName(f), TextXmlFileName(f) }
+                            )
+                            .ToArray()
+                    );
 
                     _filesAndBaselines = filesAndBaselines;
 
-                    string TextXmlFileName(string name) => Path.Combine("SqlXml.CreateReader", "Baseline-Text", $"{name}.xml");
-                    string SqlBinaryXmlFileName(string name) => Path.Combine("SqlXml.CreateReader", "SqlBinaryXml", $"{name}.bmx");
+                    string TextXmlFileName(string name) =>
+                        Path.Combine("SqlXml.CreateReader", "Baseline-Text", $"{name}.xml");
+                    string SqlBinaryXmlFileName(string name) =>
+                        Path.Combine("SqlXml.CreateReader", "SqlBinaryXml", $"{name}.bmx");
                 }
             }
 
@@ -147,14 +166,18 @@ namespace System.Data.Tests.SqlTypes
                 using StringWriter writer = new StringWriter();
                 using XmlWriter xmlWriter = new XmlTextWriter(writer);
 
-                while (reader.Read()) xmlWriter.WriteNode(reader, false);
+                while (reader.Read())
+                    xmlWriter.WriteNode(reader, false);
 
                 return writer.ToString();
             }
         }
 
         [Theory]
-        [MemberData(nameof(CreateReader_TestFiles.FilesAndBaselines), MemberType = typeof(CreateReader_TestFiles))]
+        [MemberData(
+            nameof(CreateReader_TestFiles.FilesAndBaselines),
+            MemberType = typeof(CreateReader_TestFiles)
+        )]
         public void CreateReader_TestAgainstBaseline(string testFile, string baselineFile)
         {
             // Get our expected output by using XmlReader directly

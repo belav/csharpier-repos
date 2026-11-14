@@ -29,12 +29,37 @@ namespace System.ComponentModel.Tests
             var attribute = new DefaultBindingPropertyAttribute("name");
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new DefaultBindingPropertyAttribute("name"), true };
-            yield return new object[] { attribute, new DefaultBindingPropertyAttribute("name2"), false };
-            yield return new object[] { attribute, new DefaultBindingPropertyAttribute(null), false };
+            yield return new object[]
+            {
+                attribute,
+                new DefaultBindingPropertyAttribute("name"),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DefaultBindingPropertyAttribute("name2"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DefaultBindingPropertyAttribute(null),
+                false,
+            };
 
-            yield return new object[] { new DefaultBindingPropertyAttribute(null), new DefaultBindingPropertyAttribute(null), true };
-            yield return new object[] { new DefaultBindingPropertyAttribute(null), new DefaultBindingPropertyAttribute("name"), false };
+            yield return new object[]
+            {
+                new DefaultBindingPropertyAttribute(null),
+                new DefaultBindingPropertyAttribute(null),
+                true,
+            };
+            yield return new object[]
+            {
+                new DefaultBindingPropertyAttribute(null),
+                new DefaultBindingPropertyAttribute("name"),
+                false,
+            };
             yield return new object[] { new DefaultBindingPropertyAttribute(null), null, false };
 
             yield return new object[] { attribute, new object(), false };
@@ -43,7 +68,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(DefaultBindingPropertyAttribute attribute, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            DefaultBindingPropertyAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }

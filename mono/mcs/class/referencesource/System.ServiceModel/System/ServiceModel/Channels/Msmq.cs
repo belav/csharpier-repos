@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Threading;
     using System.Net.Security;
+    using System.Threading;
 
     internal static class Msmq
     {
@@ -12,7 +12,8 @@ namespace System.ServiceModel.Channels
         static Version version;
         static bool activeDirectoryEnabled;
         static object xpSendLock = null;
-        static UriPrefixTable<ITransportManagerRegistration> transportManagerTable = new UriPrefixTable<ITransportManagerRegistration>();
+        static UriPrefixTable<ITransportManagerRegistration> transportManagerTable =
+            new UriPrefixTable<ITransportManagerRegistration>();
         static object staticLock = new object();
 
         // Double-checked locking pattern requires volatile for read/write synchronization
@@ -90,16 +91,32 @@ namespace System.ServiceModel.Channels
             {
                 if (Msmq.Version < longhornVersion)
                 {
-                    return new MsmqDefaultLockingQueue(receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(receiver.ListenUri), UnsafeNativeMethods.MQ_RECEIVE_ACCESS);
+                    return new MsmqDefaultLockingQueue(
+                        receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(
+                            receiver.ListenUri
+                        ),
+                        UnsafeNativeMethods.MQ_RECEIVE_ACCESS
+                    );
                 }
                 else
                 {
-                    return new MsmqSubqueueLockingQueue(receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(receiver.ListenUri), receiver.ListenUri.Host, UnsafeNativeMethods.MQ_RECEIVE_ACCESS);
+                    return new MsmqSubqueueLockingQueue(
+                        receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(
+                            receiver.ListenUri
+                        ),
+                        receiver.ListenUri.Host,
+                        UnsafeNativeMethods.MQ_RECEIVE_ACCESS
+                    );
                 }
             }
             else
             {
-                return new MsmqQueue(receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(receiver.ListenUri), UnsafeNativeMethods.MQ_RECEIVE_ACCESS);
+                return new MsmqQueue(
+                    receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(
+                        receiver.ListenUri
+                    ),
+                    UnsafeNativeMethods.MQ_RECEIVE_ACCESS
+                );
             }
         }
 
@@ -114,7 +131,12 @@ namespace System.ServiceModel.Channels
                         if (null == errorStrings)
                         {
 #pragma warning suppress 56523 // Callers (there is only one) handle an invalid handle returned from here.
-                            errorStrings = UnsafeNativeMethods.LoadLibraryEx("MQUTIL.DLL", IntPtr.Zero, UnsafeNativeMethods.LOAD_LIBRARY_AS_DATAFILE | UnsafeNativeMethods.LOAD_LIBRARY_SEARCH_SYSTEM32);
+                            errorStrings = UnsafeNativeMethods.LoadLibraryEx(
+                                "MQUTIL.DLL",
+                                IntPtr.Zero,
+                                UnsafeNativeMethods.LOAD_LIBRARY_AS_DATAFILE
+                                    | UnsafeNativeMethods.LOAD_LIBRARY_SEARCH_SYSTEM32
+                            );
                         }
                     }
                 }
@@ -137,4 +159,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

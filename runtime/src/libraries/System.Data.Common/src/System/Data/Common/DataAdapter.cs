@@ -23,27 +23,37 @@ namespace System.Data.Common
         private bool _acceptChangesDuringFill = true;
         private LoadOption _fillLoadOption;
 
-        private MissingMappingAction _missingMappingAction = System.Data.MissingMappingAction.Passthrough;
+        private MissingMappingAction _missingMappingAction = System
+            .Data
+            .MissingMappingAction
+            .Passthrough;
         private MissingSchemaAction _missingSchemaAction = System.Data.MissingSchemaAction.Add;
         private DataTableMappingCollection? _tableMappings;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(ref s_objectTypeCount);
+        internal readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref s_objectTypeCount
+        );
 
         [Conditional("DEBUG")]
         private static void AssertReaderHandleFieldCount(DataReaderContainer readerHandler)
         {
 #if DEBUG
-            Debug.Assert(readerHandler.FieldCount > 0, "Scenario expects non-empty results but no fields reported by reader");
+            Debug.Assert(
+                readerHandler.FieldCount > 0,
+                "Scenario expects non-empty results but no fields reported by reader"
+            );
 #endif
         }
 
-        protected DataAdapter() : base()
+        protected DataAdapter()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        protected DataAdapter(DataAdapter from) : base()
+        protected DataAdapter(DataAdapter from)
+            : base()
         {
             CloneFrom(from);
         }
@@ -51,14 +61,8 @@ namespace System.Data.Common
         [DefaultValue(true)]
         public bool AcceptChangesDuringFill
         {
-            get
-            {
-                return _acceptChangesDuringFill;
-            }
-            set
-            {
-                _acceptChangesDuringFill = value;
-            }
+            get { return _acceptChangesDuringFill; }
+            set { _acceptChangesDuringFill = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -89,7 +93,9 @@ namespace System.Data.Common
                 LoadOption fillLoadOption = _fillLoadOption;
                 return ((0 != fillLoadOption) ? _fillLoadOption : LoadOption.OverwriteChanges);
             }
-            [RequiresUnreferencedCode("Using LoadOption may cause members from types used in the expression column to be trimmed if not referenced directly.")] // See SchemaMapping.AddAdditionalPropertiesIfLoadOptionsSet
+            [RequiresUnreferencedCode(
+                "Using LoadOption may cause members from types used in the expression column to be trimmed if not referenced directly."
+            )] // See SchemaMapping.AddAdditionalPropertiesIfLoadOptionsSet
             set
             {
                 switch (value)
@@ -186,7 +192,8 @@ namespace System.Data.Common
 
         protected virtual bool ShouldSerializeTableMappings() => true;
 
-        protected bool HasTableMappings() => ((null != _tableMappings) && (0 < TableMappings.Count));
+        protected bool HasTableMappings() =>
+            ((null != _tableMappings) && (0 < TableMappings.Count));
 
         public event FillErrorEventHandler? FillError
         {
@@ -195,13 +202,12 @@ namespace System.Data.Common
                 _hasFillErrorHandler = true;
                 Events.AddHandler(s_eventFillError, value);
             }
-            remove
-            {
-                Events.RemoveHandler(s_eventFillError, value);
-            }
+            remove { Events.RemoveHandler(s_eventFillError, value); }
         }
 
-        [Obsolete("CloneInternals() has been deprecated. Use the DataAdapter(DataAdapter from) constructor instead.")]
+        [Obsolete(
+            "CloneInternals() has been deprecated. Use the DataAdapter(DataAdapter from) constructor instead."
+        )]
         protected virtual DataAdapter CloneInternals()
         {
             DataAdapter clone = (DataAdapter)Activator.CreateInstance(GetType())!;
@@ -225,14 +231,19 @@ namespace System.Data.Common
                 DataTableMappingCollection parameters = TableMappings;
                 foreach (object parameter in from.TableMappings)
                 {
-                    parameters.Add((parameter is ICloneable) ? ((ICloneable)parameter).Clone() : parameter);
+                    parameters.Add(
+                        (parameter is ICloneable) ? ((ICloneable)parameter).Clone() : parameter
+                    );
                 }
             }
         }
 
         protected virtual DataTableMappingCollection CreateTableMappings()
         {
-            DataCommonEventSource.Log.Trace("<comm.DataAdapter.CreateTableMappings|API> {0}", ObjectID);
+            DataCommonEventSource.Log.Trace(
+                "<comm.DataAdapter.CreateTableMappings|API> {0}",
+                ObjectID
+            );
             return new DataTableMappingCollection();
         }
 
@@ -248,16 +259,27 @@ namespace System.Data.Common
             base.Dispose(disposing); // notify base classes
         }
 
-        [RequiresUnreferencedCode("IDataReader's (built from adapter commands) schema table types cannot be statically analyzed.")]
+        [RequiresUnreferencedCode(
+            "IDataReader's (built from adapter commands) schema table types cannot be statically analyzed."
+        )]
         public virtual DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType)
         {
             throw ADP.NotSupported();
         }
 
         [RequiresUnreferencedCode("dataReader's schema table types cannot be statically analyzed.")]
-        protected virtual DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType, string srcTable, IDataReader dataReader)
+        protected virtual DataTable[] FillSchema(
+            DataSet dataSet,
+            SchemaType schemaType,
+            string srcTable,
+            IDataReader dataReader
+        )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope("<comm.DataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}, srcTable, dataReader", ObjectID, schemaType);
+            long logScopeId = DataCommonEventSource.Log.EnterScope(
+                "<comm.DataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}, srcTable, dataReader",
+                ObjectID,
+                schemaType
+            );
             try
             {
                 if (null == dataSet)
@@ -278,7 +300,13 @@ namespace System.Data.Common
                 }
                 // user must Close/Dispose of the dataReader
                 // Never returns null if dataSet is non-null
-                object value = FillSchemaFromReader(dataSet, null, schemaType, srcTable, dataReader)!;
+                object value = FillSchemaFromReader(
+                    dataSet,
+                    null,
+                    schemaType,
+                    srcTable,
+                    dataReader
+                )!;
                 return (DataTable[])value;
             }
             finally
@@ -288,9 +316,16 @@ namespace System.Data.Common
         }
 
         [RequiresUnreferencedCode("dataReader's schema table types cannot be statically analyzed.")]
-        protected virtual DataTable? FillSchema(DataTable dataTable, SchemaType schemaType, IDataReader dataReader)
+        protected virtual DataTable? FillSchema(
+            DataTable dataTable,
+            SchemaType schemaType,
+            IDataReader dataReader
+        )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope("<comm.DataAdapter.FillSchema|API> {0}, dataTable, schemaType, dataReader", ObjectID);
+            long logScopeId = DataCommonEventSource.Log.EnterScope(
+                "<comm.DataAdapter.FillSchema|API> {0}, dataTable, schemaType, dataReader",
+                ObjectID
+            );
             try
             {
                 if (null == dataTable)
@@ -317,13 +352,22 @@ namespace System.Data.Common
         }
 
         [RequiresUnreferencedCode("dataReader's schema table types cannot be statically analyzed.")]
-        internal object? FillSchemaFromReader(DataSet? dataset, DataTable? datatable, SchemaType schemaType, string? srcTable, IDataReader dataReader)
+        internal object? FillSchemaFromReader(
+            DataSet? dataset,
+            DataTable? datatable,
+            SchemaType schemaType,
+            string? srcTable,
+            IDataReader dataReader
+        )
         {
             DataTable[]? dataTables = null;
             int schemaCount = 0;
             do
             {
-                DataReaderContainer readerHandler = DataReaderContainer.Create(dataReader, ReturnProviderSpecificTypes);
+                DataReaderContainer readerHandler = DataReaderContainer.Create(
+                    dataReader,
+                    ReturnProviderSpecificTypes
+                );
 
                 AssertReaderHandleFieldCount(readerHandler);
                 if (0 >= readerHandler.FieldCount)
@@ -337,7 +381,18 @@ namespace System.Data.Common
                     schemaCount++; // don't increment if no SchemaTable ( a non-row returning result )
                 }
 
-                SchemaMapping mapping = new SchemaMapping(this, dataset, datatable, readerHandler, true, schemaType, tmp, false, null, null);
+                SchemaMapping mapping = new SchemaMapping(
+                    this,
+                    dataset,
+                    datatable,
+                    readerHandler,
+                    true,
+                    schemaType,
+                    tmp,
+                    false,
+                    null,
+                    null
+                );
 
                 if (null != datatable)
                 {
@@ -370,9 +425,18 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        protected virtual int Fill(DataSet dataSet, string srcTable, IDataReader dataReader, int startRecord, int maxRecords)
+        protected virtual int Fill(
+            DataSet dataSet,
+            string srcTable,
+            IDataReader dataReader,
+            int startRecord,
+            int maxRecords
+        )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope("<comm.DataAdapter.Fill|API> {0}, dataSet, srcTable, dataReader, startRecord, maxRecords", ObjectID);
+            long logScopeId = DataCommonEventSource.Log.EnterScope(
+                "<comm.DataAdapter.Fill|API> {0}, dataSet, srcTable, dataReader, startRecord, maxRecords",
+                ObjectID
+            );
             try
             {
                 if (null == dataSet)
@@ -400,8 +464,18 @@ namespace System.Data.Common
                     return 0;
                 }
                 // user must Close/Dispose of the dataReader
-                DataReaderContainer readerHandler = DataReaderContainer.Create(dataReader, ReturnProviderSpecificTypes);
-                return FillFromReader(dataSet, null, srcTable, readerHandler, startRecord, maxRecords);
+                DataReaderContainer readerHandler = DataReaderContainer.Create(
+                    dataReader,
+                    ReturnProviderSpecificTypes
+                );
+                return FillFromReader(
+                    dataSet,
+                    null,
+                    srcTable,
+                    readerHandler,
+                    startRecord,
+                    maxRecords
+                );
             }
             finally
             {
@@ -415,9 +489,17 @@ namespace System.Data.Common
             return Fill(dataTables, dataReader, 0, 0);
         }
 
-        protected virtual int Fill(DataTable[] dataTables, IDataReader dataReader, int startRecord, int maxRecords)
+        protected virtual int Fill(
+            DataTable[] dataTables,
+            IDataReader dataReader,
+            int startRecord,
+            int maxRecords
+        )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope("<comm.DataAdapter.Fill|API> {0}, dataTables[], dataReader, startRecord, maxRecords", ObjectID);
+            long logScopeId = DataCommonEventSource.Log.EnterScope(
+                "<comm.DataAdapter.Fill|API> {0}, dataTables[], dataReader, startRecord, maxRecords",
+                ObjectID
+            );
             try
             {
                 ADP.CheckArgumentLength(dataTables, nameof(dataTables));
@@ -452,7 +534,10 @@ namespace System.Data.Common
                         {
                             break;
                         }
-                        DataReaderContainer readerHandler = DataReaderContainer.Create(dataReader, ReturnProviderSpecificTypes);
+                        DataReaderContainer readerHandler = DataReaderContainer.Create(
+                            dataReader,
+                            ReturnProviderSpecificTypes
+                        );
                         AssertReaderHandleFieldCount(readerHandler);
                         if (readerHandler.FieldCount <= 0)
                         {
@@ -462,8 +547,7 @@ namespace System.Data.Common
                                 do
                                 {
                                     lastFillNextResult = FillNextResult(readerHandler);
-                                }
-                                while (lastFillNextResult && readerHandler.FieldCount <= 0);
+                                } while (lastFillNextResult && readerHandler.FieldCount <= 0);
                                 if (!lastFillNextResult)
                                 {
                                     break;
@@ -480,7 +564,14 @@ namespace System.Data.Common
                         }
                         // user must Close/Dispose of the dataReader
                         // user will have to call NextResult to access remaining results
-                        int count = FillFromReader(null, dataTables[i], null, readerHandler, startRecord, maxRecords);
+                        int count = FillFromReader(
+                            null,
+                            dataTables[i],
+                            null,
+                            readerHandler,
+                            startRecord,
+                            maxRecords
+                        );
                         if (0 == i)
                         {
                             result = count;
@@ -507,15 +598,43 @@ namespace System.Data.Common
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "parentChapterValue is not used here")]
-        internal int FillFromReader(DataSet? dataset, DataTable? datatable, string? srcTable, DataReaderContainer dataReader, int startRecord, int maxRecords)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "parentChapterValue is not used here"
+        )]
+        internal int FillFromReader(
+            DataSet? dataset,
+            DataTable? datatable,
+            string? srcTable,
+            DataReaderContainer dataReader,
+            int startRecord,
+            int maxRecords
+        )
         {
-            return FillFromReader(dataset, datatable, srcTable, dataReader, startRecord, maxRecords, null, null);
+            return FillFromReader(
+                dataset,
+                datatable,
+                srcTable,
+                dataReader,
+                startRecord,
+                maxRecords,
+                null,
+                null
+            );
         }
 
         [RequiresUnreferencedCode("parentChapterValue's type cannot be statically analyzed")]
-        internal int FillFromReader(DataSet? dataset, DataTable? datatable, string? srcTable, DataReaderContainer dataReader, int startRecord, int maxRecords, DataColumn? parentChapterColumn, object? parentChapterValue)
+        internal int FillFromReader(
+            DataSet? dataset,
+            DataTable? datatable,
+            string? srcTable,
+            DataReaderContainer dataReader,
+            int startRecord,
+            int maxRecords,
+            DataColumn? parentChapterColumn,
+            object? parentChapterValue
+        )
         {
             int rowsAddedToDataSet = 0;
             int schemaCount = 0;
@@ -527,7 +646,15 @@ namespace System.Data.Common
                     continue; // loop to next result
                 }
 
-                SchemaMapping? mapping = FillMapping(dataset, datatable, srcTable, dataReader, schemaCount, parentChapterColumn, parentChapterValue);
+                SchemaMapping? mapping = FillMapping(
+                    dataset,
+                    datatable,
+                    srcTable,
+                    dataReader,
+                    schemaCount,
+                    parentChapterColumn,
+                    parentChapterValue
+                );
                 schemaCount++; // don't increment if no SchemaTable ( a non-row returning result )
 
                 if (null == mapping)
@@ -659,7 +786,15 @@ namespace System.Data.Common
         }
 
         [RequiresUnreferencedCode("parentChapterValue's type cannot be statically analyzed")]
-        private SchemaMapping FillMappingInternal(DataSet? dataset, DataTable? datatable, string? srcTable, DataReaderContainer dataReader, int schemaCount, DataColumn? parentChapterColumn, object? parentChapterValue)
+        private SchemaMapping FillMappingInternal(
+            DataSet? dataset,
+            DataTable? datatable,
+            string? srcTable,
+            DataReaderContainer dataReader,
+            int schemaCount,
+            DataColumn? parentChapterColumn,
+            object? parentChapterValue
+        )
         {
             bool withKeyInfo = (Data.MissingSchemaAction.AddWithKey == MissingSchemaAction);
             string? tmp = null;
@@ -667,11 +802,30 @@ namespace System.Data.Common
             {
                 tmp = DataAdapter.GetSourceTableName(srcTable!, schemaCount);
             }
-            return new SchemaMapping(this, dataset, datatable, dataReader, withKeyInfo, SchemaType.Mapped, tmp, true, parentChapterColumn, parentChapterValue);
+            return new SchemaMapping(
+                this,
+                dataset,
+                datatable,
+                dataReader,
+                withKeyInfo,
+                SchemaType.Mapped,
+                tmp,
+                true,
+                parentChapterColumn,
+                parentChapterValue
+            );
         }
 
         [RequiresUnreferencedCode("parentChapterValue's type cannot be statically analyzed")]
-        private SchemaMapping? FillMapping(DataSet? dataset, DataTable? datatable, string? srcTable, DataReaderContainer dataReader, int schemaCount, DataColumn? parentChapterColumn, object? parentChapterValue)
+        private SchemaMapping? FillMapping(
+            DataSet? dataset,
+            DataTable? datatable,
+            string? srcTable,
+            DataReaderContainer dataReader,
+            int schemaCount,
+            DataColumn? parentChapterColumn,
+            object? parentChapterValue
+        )
         {
             SchemaMapping? mapping = null;
             if (_hasFillErrorHandler)
@@ -680,7 +834,15 @@ namespace System.Data.Common
                 {
                     // only try-catch if a FillErrorEventHandler is registered so that
                     // in the default case we get the full callstack from users
-                    mapping = FillMappingInternal(dataset, datatable, srcTable, dataReader, schemaCount, parentChapterColumn, parentChapterValue);
+                    mapping = FillMappingInternal(
+                        dataset,
+                        datatable,
+                        srcTable,
+                        dataReader,
+                        schemaCount,
+                        parentChapterColumn,
+                        parentChapterValue
+                    );
                 }
                 catch (Exception e) when (ADP.IsCatchableExceptionType(e))
                 {
@@ -690,7 +852,15 @@ namespace System.Data.Common
             }
             else
             {
-                mapping = FillMappingInternal(dataset, datatable, srcTable, dataReader, schemaCount, parentChapterColumn, parentChapterValue);
+                mapping = FillMappingInternal(
+                    dataset,
+                    datatable,
+                    srcTable,
+                    dataReader,
+                    schemaCount,
+                    parentChapterColumn,
+                    parentChapterValue
+                );
             }
             return mapping;
         }
@@ -722,9 +892,18 @@ namespace System.Data.Common
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public virtual IDataParameter[] GetFillParameters() => Array.Empty<IDataParameter>();
 
-        internal DataTableMapping? GetTableMappingBySchemaAction(string sourceTableName, string dataSetTableName, MissingMappingAction mappingAction)
+        internal DataTableMapping? GetTableMappingBySchemaAction(
+            string sourceTableName,
+            string dataSetTableName,
+            MissingMappingAction mappingAction
+        )
         {
-            return DataTableMappingCollection.GetTableMappingBySchemaAction(_tableMappings, sourceTableName, dataSetTableName, mappingAction);
+            return DataTableMappingCollection.GetTableMappingBySchemaAction(
+                _tableMappings,
+                sourceTableName,
+                dataSetTableName,
+                mappingAction
+            );
         }
 
         internal int IndexOfDataSetTable(string dataSetTable)
@@ -757,7 +936,9 @@ namespace System.Data.Common
             }
         }
 
-        [RequiresUnreferencedCode("IDataReader's (built from adapter commands) schema table types cannot be statically analyzed.")]
+        [RequiresUnreferencedCode(
+            "IDataReader's (built from adapter commands) schema table types cannot be statically analyzed."
+        )]
         public virtual int Update(DataSet dataSet)
         {
             throw ADP.NotSupported();
@@ -798,7 +979,12 @@ namespace System.Data.Common
     {
         internal LoadAdapter() { }
 
-        internal int FillFromReader(DataTable[] dataTables, IDataReader dataReader, int startRecord, int maxRecords)
+        internal int FillFromReader(
+            DataTable[] dataTables,
+            IDataReader dataReader,
+            int startRecord,
+            int maxRecords
+        )
         {
             return Fill(dataTables, dataReader, startRecord, maxRecords);
         }

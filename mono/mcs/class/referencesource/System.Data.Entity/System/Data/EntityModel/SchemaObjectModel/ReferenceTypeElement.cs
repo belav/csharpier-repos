@@ -21,14 +21,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
     {
         #region constructor
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal ReferenceTypeElement(SchemaElement parentElement)
-            : base(parentElement)
-        {
-
-        }
+            : base(parentElement) { }
         #endregion
 
         protected override bool HandleAttribute(XmlReader reader)
@@ -71,13 +68,22 @@ namespace System.Data.EntityModel.SchemaObjectModel
             return _typeUsage;
         }
 
-        internal override bool ResolveNameAndSetTypeUsage(Converter.ConversionCache convertedItemCache, Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems)
+        internal override bool ResolveNameAndSetTypeUsage(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems
+        )
         {
             if (_typeUsage == null)
             {
                 Debug.Assert(!(_type is ScalarType));
 
-                EdmType edmType = (EdmType)Converter.LoadSchemaElement(_type, _type.Schema.ProviderManifest, convertedItemCache, newGlobalItems);
+                EdmType edmType = (EdmType)
+                    Converter.LoadSchemaElement(
+                        _type,
+                        _type.Schema.ProviderManifest,
+                        convertedItemCache,
+                        newGlobalItems
+                    );
                 EntityType entityType = edmType as EntityType;
 
                 Debug.Assert(entityType != null);

@@ -8,7 +8,13 @@ namespace Microsoft.Extensions.Logging
 {
     internal readonly struct MessageLogger
     {
-        public MessageLogger(ILogger logger, string category, string? providerTypeFullName, LogLevel? minLevel, Func<string?, string?, LogLevel, bool>? filter)
+        public MessageLogger(
+            ILogger logger,
+            string category,
+            string? providerTypeFullName,
+            LogLevel? minLevel,
+            Func<string?, string?, LogLevel, bool>? filter
+        )
         {
             Logger = logger;
             Category = category;
@@ -47,7 +53,10 @@ namespace Microsoft.Extensions.Logging
     {
         public ScopeLogger(ILogger? logger, IExternalScopeProvider? externalScopeProvider)
         {
-            Debug.Assert(logger != null || externalScopeProvider != null, "Logger can't be null when there isn't an ExternalScopeProvider");
+            Debug.Assert(
+                logger != null || externalScopeProvider != null,
+                "Logger can't be null when there isn't an ExternalScopeProvider"
+            );
 
             Logger = logger;
             ExternalScopeProvider = externalScopeProvider;
@@ -57,7 +66,8 @@ namespace Microsoft.Extensions.Logging
 
         public IExternalScopeProvider? ExternalScopeProvider { get; }
 
-        public IDisposable? CreateScope<TState>(TState state) where TState : notnull
+        public IDisposable? CreateScope<TState>(TState state)
+            where TState : notnull
         {
             if (ExternalScopeProvider != null)
             {
@@ -71,7 +81,8 @@ namespace Microsoft.Extensions.Logging
 
     internal readonly struct LoggerInformation
     {
-        public LoggerInformation(ILoggerProvider provider, string category) : this()
+        public LoggerInformation(ILoggerProvider provider, string category)
+            : this()
         {
             ProviderType = provider.GetType();
             Logger = provider.CreateLogger(category);

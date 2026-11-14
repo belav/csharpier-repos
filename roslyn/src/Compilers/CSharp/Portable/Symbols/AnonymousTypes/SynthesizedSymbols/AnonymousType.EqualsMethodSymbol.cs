@@ -22,7 +22,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 : base(container, WellKnownMemberNames.ObjectEquals)
             {
                 _parameters = ImmutableArray.Create<ParameterSymbol>(
-                    SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(this.Manager.System_Object), 0, RefKind.None, "value"));
+                    SynthesizedParameterSymbol.Create(
+                        this,
+                        TypeWithAnnotations.Create(this.Manager.System_Object),
+                        0,
+                        RefKind.None,
+                        "value"
+                    )
+                );
             }
 
             public override MethodKind MethodKind
@@ -55,17 +62,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return true; }
             }
 
-            internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+            internal sealed override bool IsMetadataVirtual(
+                bool ignoreInterfaceImplementationChanges = false
+            )
             {
                 return true;
             }
 
             internal override bool IsMetadataFinal
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
         }
     }

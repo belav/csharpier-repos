@@ -39,26 +39,41 @@ namespace System.IO.IsolatedStorage
 
                 // Don't inherit the existing rules
                 security.SetAccessRuleProtection(isProtected: true, preserveInheritance: false);
-                security.AddAccessRule(new FileSystemAccessRule(
-                    identity: new SecurityIdentifier(WellKnownSidType.WorldSid, null),
-                    fileSystemRights: FileSystemRights.Read | FileSystemRights.Write,
-                    inheritanceFlags: InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
-                    propagationFlags: PropagationFlags.None,
-                    type: AccessControlType.Allow));
+                security.AddAccessRule(
+                    new FileSystemAccessRule(
+                        identity: new SecurityIdentifier(WellKnownSidType.WorldSid, null),
+                        fileSystemRights: FileSystemRights.Read | FileSystemRights.Write,
+                        inheritanceFlags: InheritanceFlags.ContainerInherit
+                            | InheritanceFlags.ObjectInherit,
+                        propagationFlags: PropagationFlags.None,
+                        type: AccessControlType.Allow
+                    )
+                );
 
-                security.AddAccessRule(new FileSystemAccessRule(
-                    identity: new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null),
-                    fileSystemRights: FileSystemRights.FullControl,
-                    inheritanceFlags: InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
-                    propagationFlags: PropagationFlags.None,
-                    type: AccessControlType.Allow));
+                security.AddAccessRule(
+                    new FileSystemAccessRule(
+                        identity: new SecurityIdentifier(
+                            WellKnownSidType.BuiltinAdministratorsSid,
+                            null
+                        ),
+                        fileSystemRights: FileSystemRights.FullControl,
+                        inheritanceFlags: InheritanceFlags.ContainerInherit
+                            | InheritanceFlags.ObjectInherit,
+                        propagationFlags: PropagationFlags.None,
+                        type: AccessControlType.Allow
+                    )
+                );
 
-                security.AddAccessRule(new FileSystemAccessRule(
-                    identity: new SecurityIdentifier(WellKnownSidType.CreatorOwnerSid, null),
-                    fileSystemRights: FileSystemRights.FullControl,
-                    inheritanceFlags: InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
-                    propagationFlags: PropagationFlags.None,
-                    type: AccessControlType.Allow));
+                security.AddAccessRule(
+                    new FileSystemAccessRule(
+                        identity: new SecurityIdentifier(WellKnownSidType.CreatorOwnerSid, null),
+                        fileSystemRights: FileSystemRights.FullControl,
+                        inheritanceFlags: InheritanceFlags.ContainerInherit
+                            | InheritanceFlags.ObjectInherit,
+                        propagationFlags: PropagationFlags.None,
+                        type: AccessControlType.Allow
+                    )
+                );
 
                 info.SetAccessControl(security);
             }

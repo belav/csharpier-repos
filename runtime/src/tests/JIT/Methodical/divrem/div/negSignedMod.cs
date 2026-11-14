@@ -16,4 +16,3 @@ public class Test_negSignedMod
         return 100;
     }
 }
-

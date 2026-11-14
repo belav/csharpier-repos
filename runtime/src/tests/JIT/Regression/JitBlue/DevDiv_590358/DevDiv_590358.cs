@@ -32,20 +32,23 @@ namespace Repro
 {
     public class Program
     {
-	    struct S
-	    {
-	        public Vector2 Vector;
-	        public S(float[] numbers)
-	        {
-		        Vector = new Vector2(numbers[0], numbers[1]);
-	        }
-	        public static implicit operator S(float[] numbers) => new S(numbers);
-	    }
-	    [Fact]
-	    public static int TestEntryPoint()
-	    {
-	        S s = new float[] { 1.0f, 2.0f };
-	        Console.WriteLine(s.Vector);
+        struct S
+        {
+            public Vector2 Vector;
+
+            public S(float[] numbers)
+            {
+                Vector = new Vector2(numbers[0], numbers[1]);
+            }
+
+            public static implicit operator S(float[] numbers) => new S(numbers);
+        }
+
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            S s = new float[] { 1.0f, 2.0f };
+            Console.WriteLine(s.Vector);
             if ((s.Vector.X != 1.0f) || (s.Vector.Y != 2.0f))
             {
                 return -1;
@@ -54,6 +57,6 @@ namespace Repro
             {
                 return 100;
             }
-	    }
+        }
     }
 }

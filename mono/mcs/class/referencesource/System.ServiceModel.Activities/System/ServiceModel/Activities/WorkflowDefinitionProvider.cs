@@ -18,10 +18,10 @@ namespace System.ServiceModel.Activities
     using System.Windows.Markup;
     using System.Xml;
     using System.Xml.Linq;
-        
+
     class WorkflowDefinitionProvider
     {
-        IDictionary<WorkflowIdentityKey, WorkflowService> definitionCollection;        
+        IDictionary<WorkflowIdentityKey, WorkflowService> definitionCollection;
         WorkflowService defaultWorkflowService;
         WorkflowServiceVersionsCollection supportedVersions;
         WorkflowServiceHost wfsh;
@@ -39,21 +39,17 @@ namespace System.ServiceModel.Activities
 
         public ICollection<WorkflowService> SupportedVersions
         {
-            get
-            {
-                return this.supportedVersions;
-            }
+            get { return this.supportedVersions; }
         }
 
         public WorkflowIdentity DefaultDefinitionIdentity
         {
-            get
-            {
-                return this.defaultWorkflowService.DefinitionIdentity;
-            }
+            get { return this.defaultWorkflowService.DefinitionIdentity; }
         }
 
-        public void GetDefinitionIdentityMetadata(IDictionary<XName, InstanceValue> metadataCollection)
+        public void GetDefinitionIdentityMetadata(
+            IDictionary<XName, InstanceValue> metadataCollection
+        )
         {
             if (metadataCollection == null)
             {
@@ -61,15 +57,22 @@ namespace System.ServiceModel.Activities
             }
             if (!metadataCollection.ContainsKey(Workflow45Namespace.DefinitionIdentities))
             {
-                Collection<WorkflowIdentity> identityCollection = new Collection<WorkflowIdentity>();
+                Collection<WorkflowIdentity> identityCollection =
+                    new Collection<WorkflowIdentity>();
                 identityCollection.Add(this.DefaultDefinitionIdentity);
                 foreach (WorkflowIdentityKey identityKey in this.definitionCollection.Keys)
                 {
                     identityCollection.Add(identityKey.Identity);
                 }
-                if (identityCollection.Count > 1 || (identityCollection.Count == 1 && identityCollection[0] != null))
+                if (
+                    identityCollection.Count > 1
+                    || (identityCollection.Count == 1 && identityCollection[0] != null)
+                )
                 {
-                    metadataCollection.Add(Workflow45Namespace.DefinitionIdentities, new InstanceValue(identityCollection));
+                    metadataCollection.Add(
+                        Workflow45Namespace.DefinitionIdentities,
+                        new InstanceValue(identityCollection)
+                    );
                 }
             }
         }
@@ -81,15 +84,33 @@ namespace System.ServiceModel.Activities
                 throw FxTrace.Exception.ArgumentNull("workflowService");
             }
 
-            WorkflowIdentityKey identityKey = new WorkflowIdentityKey(workflowService.DefinitionIdentity);
-            if (object.Equals(this.DefaultDefinitionIdentity, identityKey.Identity) || this.definitionCollection.ContainsKey(identityKey))
+            WorkflowIdentityKey identityKey = new WorkflowIdentityKey(
+                workflowService.DefinitionIdentity
+            );
+            if (
+                object.Equals(this.DefaultDefinitionIdentity, identityKey.Identity)
+                || this.definitionCollection.ContainsKey(identityKey)
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DuplicateDefinitionIdentity(identityKey.Identity == null ? "null" : identityKey.Identity.ToString())));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DuplicateDefinitionIdentity(
+                            identityKey.Identity == null ? "null" : identityKey.Identity.ToString()
+                        )
+                    )
+                );
             }
 
             if (workflowService.Name != this.defaultWorkflowService.Name)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DifferentWorkflowServiceNameNotSupported(workflowService.Name, this.defaultWorkflowService.Name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DifferentWorkflowServiceNameNotSupported(
+                            workflowService.Name,
+                            this.defaultWorkflowService.Name
+                        )
+                    )
+                );
             }
 
             this.ThrowIfNotConfigurable();
@@ -105,7 +126,9 @@ namespace System.ServiceModel.Activities
             if (this.definitionCollection.Values.Contains(workflowService))
             {
                 workflowService.DetachFromVersioning(this.defaultWorkflowService);
-                return this.definitionCollection.Remove(new WorkflowIdentityKey(workflowService.DefinitionIdentity));
+                return this.definitionCollection.Remove(
+                    new WorkflowIdentityKey(workflowService.DefinitionIdentity)
+                );
             }
             return false;
         }
@@ -126,11 +149,18 @@ namespace System.ServiceModel.Activities
         {
             if (!this.wfsh.IsConfigurable)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WorkflowServiceHostCannotAddOrRemoveServiceDefinitionAfterOpen));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.WorkflowServiceHostCannotAddOrRemoveServiceDefinitionAfterOpen
+                    )
+                );
             }
         }
 
-        public bool TryGetDefinition(WorkflowIdentity workflowIdentity, out Activity workflowDefinition)
+        public bool TryGetDefinition(
+            WorkflowIdentity workflowIdentity,
+            out Activity workflowDefinition
+        )
         {
             workflowDefinition = null;
             WorkflowService workflowService;
@@ -140,7 +170,12 @@ namespace System.ServiceModel.Activities
                 workflowDefinition = this.defaultWorkflowService.Body;
                 found = true;
             }
-            else if (this.definitionCollection.TryGetValue(new WorkflowIdentityKey(workflowIdentity), out workflowService))
+            else if (
+                this.definitionCollection.TryGetValue(
+                    new WorkflowIdentityKey(workflowIdentity),
+                    out workflowService
+                )
+            )
             {
                 workflowDefinition = workflowService.Body;
                 found = true;
@@ -148,7 +183,12 @@ namespace System.ServiceModel.Activities
             return found;
         }
 
-        public bool TryGetDefinitionAndMap(WorkflowIdentity currentIdentity, WorkflowIdentity updatedIdentity, out Activity workflowDefinition, out DynamicUpdateMap updateMap)
+        public bool TryGetDefinitionAndMap(
+            WorkflowIdentity currentIdentity,
+            WorkflowIdentity updatedIdentity,
+            out Activity workflowDefinition,
+            out DynamicUpdateMap updateMap
+        )
         {
             WorkflowService workflowService;
             if (object.Equals(updatedIdentity, this.DefaultDefinitionIdentity))
@@ -157,10 +197,17 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                this.definitionCollection.TryGetValue(new WorkflowIdentityKey(updatedIdentity), out workflowService);
+                this.definitionCollection.TryGetValue(
+                    new WorkflowIdentityKey(updatedIdentity),
+                    out workflowService
+                );
             }
 
-            if (workflowService != null && workflowService.UpdateMaps.TryGetValue(currentIdentity, out updateMap) && updateMap != null)
+            if (
+                workflowService != null
+                && workflowService.UpdateMaps.TryGetValue(currentIdentity, out updateMap)
+                && updateMap != null
+            )
             {
                 workflowDefinition = workflowService.Body;
                 return true;
@@ -175,7 +222,9 @@ namespace System.ServiceModel.Activities
         {
             WorkflowDefinitionProvider workflowDefinitionProvider;
 
-            public WorkflowServiceVersionsCollection(WorkflowDefinitionProvider workflowDefinitionProvider)
+            public WorkflowServiceVersionsCollection(
+                WorkflowDefinitionProvider workflowDefinitionProvider
+            )
             {
                 this.workflowDefinitionProvider = workflowDefinitionProvider;
             }
@@ -197,23 +246,20 @@ namespace System.ServiceModel.Activities
 
             public void CopyTo(WorkflowService[] array, int arrayIndex)
             {
-                this.workflowDefinitionProvider.definitionCollection.Values.CopyTo(array, arrayIndex);
+                this.workflowDefinitionProvider.definitionCollection.Values.CopyTo(
+                    array,
+                    arrayIndex
+                );
             }
 
             public int Count
             {
-                get
-                {
-                    return this.workflowDefinitionProvider.definitionCollection.Count;
-                }
+                get { return this.workflowDefinitionProvider.definitionCollection.Count; }
             }
 
             public bool IsReadOnly
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public bool Remove(WorkflowService workflowService)
@@ -231,7 +277,5 @@ namespace System.ServiceModel.Activities
                 return this.workflowDefinitionProvider.definitionCollection.Values.GetEnumerator();
             }
         }
-
-
     }
 }

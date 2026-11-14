@@ -10,10 +10,10 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
 
     /// <summary>
     /// Defines the function class of builtin expressions.
@@ -63,7 +63,7 @@ namespace System.Data.Common.EntitySql.AST
         UnaryPlus,
 
         Between,
-        NotBetween
+        NotBetween,
     }
 
     /// <summary>
@@ -101,7 +101,14 @@ namespace System.Data.Common.EntitySql.AST
             Arg3 = arg3;
         }
 
-        internal BuiltInExpr(BuiltInKind kind, string name, Node arg1, Node arg2, Node arg3, Node arg4)
+        internal BuiltInExpr(
+            BuiltInKind kind,
+            string name,
+            Node arg1,
+            Node arg2,
+            Node arg3,
+            Node arg4
+        )
             : this(kind, name)
         {
             ArgCount = 4;

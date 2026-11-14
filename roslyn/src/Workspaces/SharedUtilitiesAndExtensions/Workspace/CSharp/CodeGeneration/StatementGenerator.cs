@@ -12,13 +12,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 {
     internal static class StatementGenerator
     {
-        internal static SyntaxList<StatementSyntax> GenerateStatements(IEnumerable<SyntaxNode> statements)
-            => statements.OfType<StatementSyntax>().ToSyntaxList();
+        internal static SyntaxList<StatementSyntax> GenerateStatements(
+            IEnumerable<SyntaxNode> statements
+        ) => statements.OfType<StatementSyntax>().ToSyntaxList();
 
         internal static BlockSyntax GenerateBlock(IMethodSymbol method)
         {
             return SyntaxFactory.Block(
-                StatementGenerator.GenerateStatements(CodeGenerationMethodInfo.GetStatements(method)));
+                StatementGenerator.GenerateStatements(
+                    CodeGenerationMethodInfo.GetStatements(method)
+                )
+            );
         }
     }
 }

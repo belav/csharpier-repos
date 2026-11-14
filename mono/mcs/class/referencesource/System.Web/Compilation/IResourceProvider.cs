@@ -4,26 +4,26 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Compilation {
+namespace System.Web.Compilation
+{
     using System;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Reflection;
-    using System.IO;
-    using System.Security.Permissions;
-    using System.CodeDom;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
     using System.Resources;
+    using System.Security.Permissions;
     using System.Web.Compilation;
-    using System.Web.Util;
     using System.Web.UI;
-
+    using System.Web.Util;
 
     /*
      * Basic interface to access and enumerate resources
      */
-    public interface IResourceProvider {
-
+    public interface IResourceProvider
+    {
         /*
          * Retrieve a resource object for the passed in key and culture
          */
@@ -38,14 +38,14 @@ namespace System.Web.Compilation {
     /*
      * Base class for resource providers based on a standard ResourceManager
      */
-    internal abstract class BaseResXResourceProvider: IResourceProvider {
-
+    internal abstract class BaseResXResourceProvider : IResourceProvider
+    {
         private ResourceManager _resourceManager;
 
         ///// IResourceProvider implementation
 
-        public virtual object GetObject(string resourceKey, CultureInfo culture) {
-
+        public virtual object GetObject(string resourceKey, CultureInfo culture)
+        {
             // Attempt to get the resource manager
             EnsureResourceManager();
 
@@ -59,14 +59,17 @@ namespace System.Web.Compilation {
             return _resourceManager.GetObject(resourceKey, culture);
         }
 
-        public virtual IResourceReader ResourceReader { get { return null; } }
+        public virtual IResourceReader ResourceReader
+        {
+            get { return null; }
+        }
 
         ///// End of IResourceProvider implementation
 
-
         protected abstract ResourceManager CreateResourceManager();
 
-        private void EnsureResourceManager() {
+        private void EnsureResourceManager()
+        {
             if (_resourceManager != null)
                 return;
 
@@ -77,32 +80,37 @@ namespace System.Web.Compilation {
     /*
      * ResourceManager based provider for application resources.
      */
-    internal class GlobalResXResourceProvider : BaseResXResourceProvider {
-
+    internal class GlobalResXResourceProvider : BaseResXResourceProvider
+    {
         private string _classKey;
 
-        internal GlobalResXResourceProvider(string classKey) {
+        internal GlobalResXResourceProvider(string classKey)
+        {
             _classKey = classKey;
         }
 
-        protected override ResourceManager CreateResourceManager() {
-
-            string fullClassName = BaseResourcesBuildProvider.DefaultResourcesNamespace +
-                "." + _classKey;
+        protected override ResourceManager CreateResourceManager()
+        {
+            string fullClassName =
+                BaseResourcesBuildProvider.DefaultResourcesNamespace + "." + _classKey;
 
             // If there is no app resource assembly, return null
             if (BuildManager.AppResourcesAssembly == null)
                 return null;
 
-            ResourceManager resourceManager = new ResourceManager(fullClassName,
-                BuildManager.AppResourcesAssembly);
+            ResourceManager resourceManager = new ResourceManager(
+                fullClassName,
+                BuildManager.AppResourcesAssembly
+            );
             resourceManager.IgnoreCase = true;
 
             return resourceManager;
         }
 
-        public override IResourceReader ResourceReader {
-            get {
+        public override IResourceReader ResourceReader
+        {
+            get
+            {
                 // App resources don't support implicit resources, so the IResourceReader
                 // should never be needed
                 throw new NotSupportedException();
@@ -113,35 +121,42 @@ namespace System.Web.Compilation {
     /*
      * ResourceManager based provider for page (local) resources.
      */
-    internal class LocalResXResourceProvider : BaseResXResourceProvider {
-
+    internal class LocalResXResourceProvider : BaseResXResourceProvider
+    {
         private VirtualPath _virtualPath;
 
-        internal LocalResXResourceProvider(VirtualPath virtualPath) {
+        internal LocalResXResourceProvider(VirtualPath virtualPath)
+        {
             _virtualPath = virtualPath;
         }
 
-        protected override ResourceManager CreateResourceManager() {
-
+        protected override ResourceManager CreateResourceManager()
+        {
             ResourceManager resourceManager = null;
 
             Assembly pageResAssembly = GetLocalResourceAssembly();
 
-            if (pageResAssembly != null) {
+            if (pageResAssembly != null)
+            {
                 string fileName = _virtualPath.FileName;
 
                 resourceManager = new ResourceManager(fileName, pageResAssembly);
                 resourceManager.IgnoreCase = true;
             }
-            else {
-                throw new InvalidOperationException(SR.GetString(SR.ResourceExpresionBuilder_PageResourceNotFound));
+            else
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ResourceExpresionBuilder_PageResourceNotFound)
+                );
             }
 
             return resourceManager;
         }
 
-        public override IResourceReader ResourceReader {
-            get {
+        public override IResourceReader ResourceReader
+        {
+            get
+            {
                 // Get the local resource assembly for this page
                 Assembly pageResAssembly = GetLocalResourceAssembly();
 
@@ -166,8 +181,9 @@ namespace System.Web.Compilation {
         }
 
         // Need to Assert here in order to access the codegen dir (VSWhidbey 387312)
-        [PermissionSet(SecurityAction.Assert, Unrestricted=true)]
-        private Assembly GetLocalResourceAssembly() {
+        [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
+        private Assembly GetLocalResourceAssembly()
+        {
             // Remove the page file name to get its directory
             VirtualPath virtualDir = _virtualPath.Parent;
 
@@ -175,13 +191,12 @@ namespace System.Web.Compilation {
             string cacheKey = BuildManager.GetLocalResourcesAssemblyName(virtualDir);
             BuildResult result = BuildManager.GetBuildResultFromCache(cacheKey);
 
-            if (result != null) {
+            if (result != null)
+            {
                 return ((BuildResultCompiledAssembly)result).ResultAssembly;
             }
 
             return null;
         }
     }
-
 }
-

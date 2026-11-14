@@ -37,19 +37,20 @@ namespace System.Data.SqlClient
         private SqlVersion _version = SqlVersion.Sql9;
 
         /// <summary>
-        /// maximum size of sql server unicode 
+        /// maximum size of sql server unicode
         /// </summary>
         private const int varcharMaxSize = 8000;
         private const int nvarcharMaxSize = 4000;
         private const int binaryMaxSize = 8000;
 
-        private System.Collections.ObjectModel.ReadOnlyCollection<PrimitiveType> _primitiveTypes = null;
+        private System.Collections.ObjectModel.ReadOnlyCollection<PrimitiveType> _primitiveTypes =
+            null;
         private System.Collections.ObjectModel.ReadOnlyCollection<EdmFunction> _functions = null;
 
         #endregion
 
         #region Constructors
-               
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -60,7 +61,6 @@ namespace System.Data.SqlClient
             // GetSqlVersion will throw ArgumentException if manifestToken is null, empty, or not recognized.
             _version = SqlVersionUtils.GetSqlVersion(manifestToken);
         }
-
 
         #endregion
 
@@ -76,24 +76,32 @@ namespace System.Data.SqlClient
         #region Private Methods
         private static XmlReader GetProviderManifest()
         {
-            return DbProviderServices.GetXmlResource("System.Data.Resources.SqlClient.SqlProviderServices.ProviderManifest.xml");
+            return DbProviderServices.GetXmlResource(
+                "System.Data.Resources.SqlClient.SqlProviderServices.ProviderManifest.xml"
+            );
         }
 
         private XmlReader GetStoreSchemaMapping(string mslName)
         {
-            return DbProviderServices.GetXmlResource("System.Data.Resources.SqlClient.SqlProviderServices." + mslName + ".msl");
+            return DbProviderServices.GetXmlResource(
+                "System.Data.Resources.SqlClient.SqlProviderServices." + mslName + ".msl"
+            );
         }
 
         private XmlReader GetStoreSchemaDescription(string ssdlName)
         {
             if (this._version == SqlVersion.Sql8)
             {
-                return DbProviderServices.GetXmlResource("System.Data.Resources.SqlClient.SqlProviderServices." + ssdlName + "_Sql8.ssdl");
+                return DbProviderServices.GetXmlResource(
+                    "System.Data.Resources.SqlClient.SqlProviderServices." + ssdlName + "_Sql8.ssdl"
+                );
             }
 
-            return DbProviderServices.GetXmlResource("System.Data.Resources.SqlClient.SqlProviderServices." + ssdlName + ".ssdl");
+            return DbProviderServices.GetXmlResource(
+                "System.Data.Resources.SqlClient.SqlProviderServices." + ssdlName + ".ssdl"
+            );
         }
-        #endregion 
+        #endregion
 
         #region Internal Methods
 
@@ -104,15 +112,26 @@ namespace System.Data.SqlClient
         /// NOTE: This code has been copied from LinqToSql
         /// </summary>
         /// <param name="text">Original input as specified by the user</param>
-        /// <param name="alwaysEscapeEscapeChar">escape the escape character ~ regardless whether wildcard 
+        /// <param name="alwaysEscapeEscapeChar">escape the escape character ~ regardless whether wildcard
         /// characters were encountered </param>
         /// <param name="usedEscapeChar">true if the escaping was performed, false if no escaping was required</param>
         /// <returns>The escaped string that can be used as pattern in a LIKE expression</returns>
-        internal static string EscapeLikeText(string text, bool alwaysEscapeEscapeChar, out bool usedEscapeChar)
+        internal static string EscapeLikeText(
+            string text,
+            bool alwaysEscapeEscapeChar,
+            out bool usedEscapeChar
+        )
         {
             usedEscapeChar = false;
-            if (!(text.Contains("%") || text.Contains("_") || text.Contains("[")
-                || text.Contains("^") || alwaysEscapeEscapeChar && text.Contains(LikeEscapeCharToString)))
+            if (
+                !(
+                    text.Contains("%")
+                    || text.Contains("_")
+                    || text.Contains("[")
+                    || text.Contains("^")
+                    || alwaysEscapeEscapeChar && text.Contains(LikeEscapeCharToString)
+                )
+            )
             {
                 return text;
             }
@@ -132,37 +151,48 @@ namespace System.Data.SqlClient
 
         #region Overrides
         /// <summary>
-        /// Providers should override this to return information specific to their provider.  
-        /// 
+        /// Providers should override this to return information specific to their provider.
+        ///
         /// This method should never return null.
         /// </summary>
         /// <param name="informationType">The name of the information to be retrieved.</param>
         /// <returns>An XmlReader at the begining of the information requested.</returns>
         protected override XmlReader GetDbInformation(string informationType)
         {
-            if (informationType == DbProviderManifest.StoreSchemaDefinitionVersion3 ||
-                informationType == DbProviderManifest.StoreSchemaDefinition)
+            if (
+                informationType == DbProviderManifest.StoreSchemaDefinitionVersion3
+                || informationType == DbProviderManifest.StoreSchemaDefinition
+            )
             {
                 return GetStoreSchemaDescription(informationType);
             }
 
-            if (informationType == DbProviderManifest.StoreSchemaMappingVersion3 ||
-                informationType == DbProviderManifest.StoreSchemaMapping)
+            if (
+                informationType == DbProviderManifest.StoreSchemaMappingVersion3
+                || informationType == DbProviderManifest.StoreSchemaMapping
+            )
             {
                 return GetStoreSchemaMapping(informationType);
             }
 
             // Use default Conceptual Schema Definition
-            if (informationType == DbProviderManifest.ConceptualSchemaDefinitionVersion3 ||
-                informationType == DbProviderManifest.ConceptualSchemaDefinition)
+            if (
+                informationType == DbProviderManifest.ConceptualSchemaDefinitionVersion3
+                || informationType == DbProviderManifest.ConceptualSchemaDefinition
+            )
             {
                 return null;
             }
 
-            throw EntityUtil.ProviderIncompatible(System.Data.Entity.Strings.ProviderReturnedNullForGetDbInformation(informationType));
+            throw EntityUtil.ProviderIncompatible(
+                System.Data.Entity.Strings.ProviderReturnedNullForGetDbInformation(informationType)
+            );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         public override System.Collections.ObjectModel.ReadOnlyCollection<PrimitiveType> GetStoreTypes()
         {
             if (this._primitiveTypes == null)
@@ -173,34 +203,42 @@ namespace System.Data.SqlClient
                 }
                 else
                 {
-                    List<PrimitiveType> primitiveTypes = new List<PrimitiveType>(base.GetStoreTypes());
-                    Debug.Assert((this._version == SqlVersion.Sql8) || (this._version == SqlVersion.Sql9), "Found verion other than Sql 8, 9 or 10");
+                    List<PrimitiveType> primitiveTypes = new List<PrimitiveType>(
+                        base.GetStoreTypes()
+                    );
+                    Debug.Assert(
+                        (this._version == SqlVersion.Sql8) || (this._version == SqlVersion.Sql9),
+                        "Found verion other than Sql 8, 9 or 10"
+                    );
                     //Remove the Katmai types for both Sql8 and Sql9
-                    primitiveTypes.RemoveAll(new Predicate<PrimitiveType>(
-                                                        delegate(PrimitiveType primitiveType)
-                                                        {
-                                                            string name = primitiveType.Name.ToLowerInvariant();
-                                                            return name.Equals("time", StringComparison.Ordinal) || 
-                                                                   name.Equals("date", StringComparison.Ordinal) || 
-                                                                   name.Equals("datetime2", StringComparison.Ordinal) || 
-                                                                   name.Equals("datetimeoffset", StringComparison.Ordinal) ||
-                                                                   name.Equals("geography", StringComparison.Ordinal) || 
-                                                                   name.Equals("geometry", StringComparison.Ordinal);
-                                                        }
-                                                    )
-                                        );
+                    primitiveTypes.RemoveAll(
+                        new Predicate<PrimitiveType>(
+                            delegate(PrimitiveType primitiveType)
+                            {
+                                string name = primitiveType.Name.ToLowerInvariant();
+                                return name.Equals("time", StringComparison.Ordinal)
+                                    || name.Equals("date", StringComparison.Ordinal)
+                                    || name.Equals("datetime2", StringComparison.Ordinal)
+                                    || name.Equals("datetimeoffset", StringComparison.Ordinal)
+                                    || name.Equals("geography", StringComparison.Ordinal)
+                                    || name.Equals("geometry", StringComparison.Ordinal);
+                            }
+                        )
+                    );
                     //Remove the types that won't work in Sql8
-                    if (this._version == SqlVersion.Sql8)                    {
-                        
+                    if (this._version == SqlVersion.Sql8)
+                    {
                         // SQLBUDT 550667 and 551271: Remove xml and 'max' types for SQL Server 2000
-                        primitiveTypes.RemoveAll(new Predicate<PrimitiveType>(
-                                                            delegate(PrimitiveType primitiveType)
-                                                            {
-                                                                string name = primitiveType.Name.ToLowerInvariant();
-                                                                return name.Equals("xml", StringComparison.Ordinal) || name.EndsWith("(max)", StringComparison.Ordinal);
-                                                            }
-                                                        )
-                                            );                        
+                        primitiveTypes.RemoveAll(
+                            new Predicate<PrimitiveType>(
+                                delegate(PrimitiveType primitiveType)
+                                {
+                                    string name = primitiveType.Name.ToLowerInvariant();
+                                    return name.Equals("xml", StringComparison.Ordinal)
+                                        || name.EndsWith("(max)", StringComparison.Ordinal);
+                                }
+                            )
+                        );
                     }
                     this._primitiveTypes = primitiveTypes.AsReadOnly();
                 }
@@ -220,11 +258,12 @@ namespace System.Data.SqlClient
                 else
                 {
                     //Remove the functions over katmai types from both Sql 9 and Sql 8.
-                    IEnumerable<EdmFunction> functions = base.GetStoreFunctions().Where(f => !IsKatmaiOrNewer(f));
-                    if(this._version == SqlVersion.Sql8)
+                    IEnumerable<EdmFunction> functions = base.GetStoreFunctions()
+                        .Where(f => !IsKatmaiOrNewer(f));
+                    if (this._version == SqlVersion.Sql8)
                     {
                         // SQLBUDT 550998: Remove unsupported overloads from Provider Manifest on SQL 8.0
-                        functions = functions.Where(f => !IsYukonOrNewer(f));      
+                        functions = functions.Where(f => !IsYukonOrNewer(f));
                     }
                     this._functions = functions.ToList().AsReadOnly();
                 }
@@ -236,8 +275,12 @@ namespace System.Data.SqlClient
         private static bool IsKatmaiOrNewer(EdmFunction edmFunction)
         {
             // Spatial types are only supported from Katmai onward; any functions using them must therefore also be Katmai or newer.
-            if ((edmFunction.ReturnParameter != null && Helper.IsSpatialType(edmFunction.ReturnParameter.TypeUsage)) ||
-                edmFunction.Parameters.Any(p => Helper.IsSpatialType(p.TypeUsage)))
+            if (
+                (
+                    edmFunction.ReturnParameter != null
+                    && Helper.IsSpatialType(edmFunction.ReturnParameter.TypeUsage)
+                ) || edmFunction.Parameters.Any(p => Helper.IsSpatialType(p.TypeUsage))
+            )
             {
                 return true;
             }
@@ -249,40 +292,49 @@ namespace System.Data.SqlClient
                 case "COUNT_BIG":
                 case "MAX":
                 case "MIN":
-                    {
-                        string name = ((CollectionType)funParams[0].TypeUsage.EdmType).TypeUsage.EdmType.Name;
-                        return ((name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase)) ||
-                               (name.Equals("Time", StringComparison.OrdinalIgnoreCase)));
-
-                    }
+                {
+                    string name = ((CollectionType)funParams[0].TypeUsage.EdmType)
+                        .TypeUsage
+                        .EdmType
+                        .Name;
+                    return (
+                        (name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase))
+                        || (name.Equals("Time", StringComparison.OrdinalIgnoreCase))
+                    );
+                }
                 case "DAY":
                 case "MONTH":
                 case "YEAR":
                 case "DATALENGTH":
                 case "CHECKSUM":
-                    {
-                        string name = funParams[0].TypeUsage.EdmType.Name;
-                        return ((name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase)) ||
-                               (name.Equals("Time", StringComparison.OrdinalIgnoreCase)));
-
-                    }
+                {
+                    string name = funParams[0].TypeUsage.EdmType.Name;
+                    return (
+                        (name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase))
+                        || (name.Equals("Time", StringComparison.OrdinalIgnoreCase))
+                    );
+                }
                 case "DATEADD":
                 case "DATEDIFF":
-                    {
-                        string param1Name = funParams[1].TypeUsage.EdmType.Name;
-                        string param2Name = funParams[2].TypeUsage.EdmType.Name;
-                        return ((param1Name.Equals("Time", StringComparison.OrdinalIgnoreCase)) ||
-                               (param2Name.Equals("Time", StringComparison.OrdinalIgnoreCase)) ||
-                               (param1Name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase)) ||
-                               (param2Name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase)));
-                    }
+                {
+                    string param1Name = funParams[1].TypeUsage.EdmType.Name;
+                    string param2Name = funParams[2].TypeUsage.EdmType.Name;
+                    return (
+                        (param1Name.Equals("Time", StringComparison.OrdinalIgnoreCase))
+                        || (param2Name.Equals("Time", StringComparison.OrdinalIgnoreCase))
+                        || (param1Name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase))
+                        || (param2Name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase))
+                    );
+                }
                 case "DATENAME":
                 case "DATEPART":
-                    {
-                        string name = funParams[1].TypeUsage.EdmType.Name;
-                        return ((name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase)) ||
-                               (name.Equals("Time", StringComparison.OrdinalIgnoreCase)));
-                    }
+                {
+                    string name = funParams[1].TypeUsage.EdmType.Name;
+                    return (
+                        (name.Equals("DateTimeOffset", StringComparison.OrdinalIgnoreCase))
+                        || (name.Equals("Time", StringComparison.OrdinalIgnoreCase))
+                    );
+                }
                 case "SYSUTCDATETIME":
                 case "SYSDATETIME":
                 case "SYSDATETIMEOFFSET":
@@ -306,16 +358,24 @@ namespace System.Data.SqlClient
             {
                 case "COUNT":
                 case "COUNT_BIG":
-                    {
-                        string name = ((CollectionType)funParams[0].TypeUsage.EdmType).TypeUsage.EdmType.Name;
-                        return name.Equals("Guid", StringComparison.OrdinalIgnoreCase);
-                    }
+                {
+                    string name = ((CollectionType)funParams[0].TypeUsage.EdmType)
+                        .TypeUsage
+                        .EdmType
+                        .Name;
+                    return name.Equals("Guid", StringComparison.OrdinalIgnoreCase);
+                }
 
                 case "CHARINDEX":
                     {
                         foreach (FunctionParameter funParam in funParams)
                         {
-                            if (funParam.TypeUsage.EdmType.Name.Equals("Int64", StringComparison.OrdinalIgnoreCase))
+                            if (
+                                funParam.TypeUsage.EdmType.Name.Equals(
+                                    "Int64",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 return true;
                             }
@@ -331,12 +391,15 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// This method takes a type and a set of facets and returns the best mapped equivalent type 
+        /// This method takes a type and a set of facets and returns the best mapped equivalent type
         /// in EDM.
         /// </summary>
         /// <param name="storeType">A TypeUsage encapsulating a store type and a set of facets</param>
         /// <returns>A TypeUsage encapsulating an EDM type and a set of facets</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         public override TypeUsage GetEdmType(TypeUsage storeType)
         {
             EntityUtil.CheckArgumentNull<TypeUsage>(storeType, "storeType");
@@ -443,18 +506,21 @@ namespace System.Data.SqlClient
 
                 case "decimal":
                 case "numeric":
+                {
+                    byte precision;
+                    byte scale;
+                    if (
+                        TypeHelpers.TryGetPrecision(storeType, out precision)
+                        && TypeHelpers.TryGetScale(storeType, out scale)
+                    )
                     {
-                        byte precision;
-                        byte scale;
-                        if (TypeHelpers.TryGetPrecision(storeType, out precision) && TypeHelpers.TryGetScale(storeType, out scale))
-                        {
-                            return TypeUsage.CreateDecimalTypeUsage(edmPrimitiveType, precision, scale);
-                        }
-                        else
-                        {
-                            return TypeUsage.CreateDecimalTypeUsage(edmPrimitiveType);
-                        }
+                        return TypeUsage.CreateDecimalTypeUsage(edmPrimitiveType, precision, scale);
                     }
+                    else
+                    {
+                        return TypeUsage.CreateDecimalTypeUsage(edmPrimitiveType);
+                    }
+                }
 
                 case "money":
                     return TypeUsage.CreateDecimalTypeUsage(edmPrimitiveType, 19, 4);
@@ -474,38 +540,59 @@ namespace System.Data.SqlClient
                     return TypeUsage.CreateDateTimeOffsetTypeUsage(edmPrimitiveType, null);
 
                 default:
-                    throw EntityUtil.NotSupported(Strings.ProviderDoesNotSupportType(storeTypeName));
+                    throw EntityUtil.NotSupported(
+                        Strings.ProviderDoesNotSupportType(storeTypeName)
+                    );
             }
 
-            Debug.Assert(newPrimitiveTypeKind == PrimitiveTypeKind.String || newPrimitiveTypeKind == PrimitiveTypeKind.Binary, "at this point only string and binary types should be present");
+            Debug.Assert(
+                newPrimitiveTypeKind == PrimitiveTypeKind.String
+                    || newPrimitiveTypeKind == PrimitiveTypeKind.Binary,
+                "at this point only string and binary types should be present"
+            );
 
-            switch(newPrimitiveTypeKind)
+            switch (newPrimitiveTypeKind)
             {
                 case PrimitiveTypeKind.String:
                     if (!isUnbounded)
                     {
-                        return TypeUsage.CreateStringTypeUsage(edmPrimitiveType, isUnicode, isFixedLen, maxLength);
+                        return TypeUsage.CreateStringTypeUsage(
+                            edmPrimitiveType,
+                            isUnicode,
+                            isFixedLen,
+                            maxLength
+                        );
                     }
                     else
                     {
-                        return TypeUsage.CreateStringTypeUsage(edmPrimitiveType, isUnicode, isFixedLen);
+                        return TypeUsage.CreateStringTypeUsage(
+                            edmPrimitiveType,
+                            isUnicode,
+                            isFixedLen
+                        );
                     }
                 case PrimitiveTypeKind.Binary:
                     if (!isUnbounded)
                     {
-                        return TypeUsage.CreateBinaryTypeUsage(edmPrimitiveType, isFixedLen, maxLength);
+                        return TypeUsage.CreateBinaryTypeUsage(
+                            edmPrimitiveType,
+                            isFixedLen,
+                            maxLength
+                        );
                     }
                     else
                     {
                         return TypeUsage.CreateBinaryTypeUsage(edmPrimitiveType, isFixedLen);
                     }
                 default:
-                    throw EntityUtil.NotSupported(Strings.ProviderDoesNotSupportType(storeTypeName));
+                    throw EntityUtil.NotSupported(
+                        Strings.ProviderDoesNotSupportType(storeTypeName)
+                    );
             }
         }
 
         /// <summary>
-        /// This method takes a type and a set of facets and returns the best mapped equivalent type 
+        /// This method takes a type and a set of facets and returns the best mapped equivalent type
         /// in SQL Server, taking the store version into consideration.
         /// </summary>
         /// <param name="storeType">A TypeUsage encapsulating an EDM type and a set of facets</param>
@@ -513,7 +600,9 @@ namespace System.Data.SqlClient
         public override TypeUsage GetStoreType(TypeUsage edmType)
         {
             EntityUtil.CheckArgumentNull<TypeUsage>(edmType, "edmType");
-            System.Diagnostics.Debug.Assert(edmType.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType);
+            System.Diagnostics.Debug.Assert(
+                edmType.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType
+            );
 
             PrimitiveType primitiveType = edmType.EdmType as PrimitiveType;
             if (primitiveType == null)
@@ -526,19 +615,29 @@ namespace System.Data.SqlClient
             switch (primitiveType.PrimitiveTypeKind)
             {
                 case PrimitiveTypeKind.Boolean:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["bit"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["bit"]
+                    );
 
                 case PrimitiveTypeKind.Byte:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["tinyint"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["tinyint"]
+                    );
 
                 case PrimitiveTypeKind.Int16:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["smallint"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["smallint"]
+                    );
 
                 case PrimitiveTypeKind.Int32:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["int"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["int"]
+                    );
 
                 case PrimitiveTypeKind.Int64:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["bigint"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["bigint"]
+                    );
 
                 case PrimitiveTypeKind.Geography:
                 case PrimitiveTypeKind.GeographyPoint:
@@ -548,7 +647,11 @@ namespace System.Data.SqlClient
                 case PrimitiveTypeKind.GeographyMultiLineString:
                 case PrimitiveTypeKind.GeographyMultiPolygon:
                 case PrimitiveTypeKind.GeographyCollection:
-                    return GetStorePrimitiveTypeIfPostSql9("geography", edmType.Identity, primitiveType.PrimitiveTypeKind);
+                    return GetStorePrimitiveTypeIfPostSql9(
+                        "geography",
+                        edmType.Identity,
+                        primitiveType.PrimitiveTypeKind
+                    );
 
                 case PrimitiveTypeKind.Geometry:
                 case PrimitiveTypeKind.GeometryPoint:
@@ -558,164 +661,278 @@ namespace System.Data.SqlClient
                 case PrimitiveTypeKind.GeometryMultiLineString:
                 case PrimitiveTypeKind.GeometryMultiPolygon:
                 case PrimitiveTypeKind.GeometryCollection:
-                    return GetStorePrimitiveTypeIfPostSql9("geometry", edmType.Identity, primitiveType.PrimitiveTypeKind);
+                    return GetStorePrimitiveTypeIfPostSql9(
+                        "geometry",
+                        edmType.Identity,
+                        primitiveType.PrimitiveTypeKind
+                    );
 
                 case PrimitiveTypeKind.Guid:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["uniqueidentifier"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["uniqueidentifier"]
+                    );
 
                 case PrimitiveTypeKind.Double:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["float"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["float"]
+                    );
 
                 case PrimitiveTypeKind.Single:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["real"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["real"]
+                    );
 
                 case PrimitiveTypeKind.Decimal: // decimal, numeric, smallmoney, money
+                {
+                    byte precision;
+                    if (!TypeHelpers.TryGetPrecision(edmType, out precision))
                     {
-                        byte precision;
-                        if (!TypeHelpers.TryGetPrecision(edmType, out precision))
-                        {
-                            precision = 18;
-                        }
-
-                        byte scale;
-                        if (!TypeHelpers.TryGetScale(edmType, out scale))
-                        {
-                            scale = 0;
-                        }
-                        TypeUsage tu = TypeUsage.CreateDecimalTypeUsage(StoreTypeNameToStorePrimitiveType["decimal"], precision, scale);
-                        return tu;
+                        precision = 18;
                     }
 
-                case PrimitiveTypeKind.Binary: // binary, varbinary, varbinary(max), image, timestamp, rowversion
+                    byte scale;
+                    if (!TypeHelpers.TryGetScale(edmType, out scale))
                     {
-                        bool isFixedLength = null != facets[DbProviderManifest.FixedLengthFacetName].Value && (bool)facets[DbProviderManifest.FixedLengthFacetName].Value;                     
-                        Facet f = facets[DbProviderManifest.MaxLengthFacetName];
-                        bool isMaxLength = Helper.IsUnboundedFacetValue(f) || null == f.Value || (int)f.Value > binaryMaxSize;
-                        int maxLength = !isMaxLength ? (int)f.Value : Int32.MinValue;
+                        scale = 0;
+                    }
+                    TypeUsage tu = TypeUsage.CreateDecimalTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["decimal"],
+                        precision,
+                        scale
+                    );
+                    return tu;
+                }
 
-                        TypeUsage tu;
+                case PrimitiveTypeKind.Binary: // binary, varbinary, varbinary(max), image, timestamp, rowversion
+                {
+                    bool isFixedLength =
+                        null != facets[DbProviderManifest.FixedLengthFacetName].Value
+                        && (bool)facets[DbProviderManifest.FixedLengthFacetName].Value;
+                    Facet f = facets[DbProviderManifest.MaxLengthFacetName];
+                    bool isMaxLength =
+                        Helper.IsUnboundedFacetValue(f)
+                        || null == f.Value
+                        || (int)f.Value > binaryMaxSize;
+                    int maxLength = !isMaxLength ? (int)f.Value : Int32.MinValue;
+
+                    TypeUsage tu;
+                    if (isFixedLength)
+                    {
+                        tu = TypeUsage.CreateBinaryTypeUsage(
+                            StoreTypeNameToStorePrimitiveType["binary"],
+                            true,
+                            (isMaxLength ? binaryMaxSize : maxLength)
+                        );
+                    }
+                    else
+                    {
+                        if (isMaxLength)
+                        {
+                            if (_version != SqlVersion.Sql8)
+                            {
+                                tu = TypeUsage.CreateBinaryTypeUsage(
+                                    StoreTypeNameToStorePrimitiveType["varbinary(max)"],
+                                    false
+                                );
+                                Debug.Assert(
+                                    tu.Facets[DbProviderManifest.MaxLengthFacetName]
+                                        .Description
+                                        .IsConstant,
+                                    "varbinary(max) is not constant!"
+                                );
+                            }
+                            else
+                            {
+                                tu = TypeUsage.CreateBinaryTypeUsage(
+                                    StoreTypeNameToStorePrimitiveType["varbinary"],
+                                    false,
+                                    binaryMaxSize
+                                );
+                            }
+                        }
+                        else
+                        {
+                            tu = TypeUsage.CreateBinaryTypeUsage(
+                                StoreTypeNameToStorePrimitiveType["varbinary"],
+                                false,
+                                maxLength
+                            );
+                        }
+                    }
+                    return tu;
+                }
+
+                case PrimitiveTypeKind.String:
+                // char, nchar, varchar, nvarchar, varchar(max), nvarchar(max), ntext, text, xml
+                {
+                    bool isUnicode =
+                        null == facets[DbProviderManifest.UnicodeFacetName].Value
+                        || (bool)facets[DbProviderManifest.UnicodeFacetName].Value;
+                    bool isFixedLength =
+                        null != facets[DbProviderManifest.FixedLengthFacetName].Value
+                        && (bool)facets[DbProviderManifest.FixedLengthFacetName].Value;
+                    Facet f = facets[DbProviderManifest.MaxLengthFacetName];
+                    // maxlen is true if facet value is unbounded, the value is bigger than the limited string sizes *or* the facet
+                    // value is null. this is needed since functions still have maxlength facet value as null
+                    bool isMaxLength =
+                        Helper.IsUnboundedFacetValue(f)
+                        || null == f.Value
+                        || (int)f.Value > (isUnicode ? nvarcharMaxSize : varcharMaxSize);
+                    int maxLength = !isMaxLength ? (int)f.Value : Int32.MinValue;
+
+                    TypeUsage tu;
+
+                    if (isUnicode)
+                    {
                         if (isFixedLength)
                         {
-                            tu = TypeUsage.CreateBinaryTypeUsage(StoreTypeNameToStorePrimitiveType["binary"], true, (isMaxLength ? binaryMaxSize : maxLength));
+                            tu = TypeUsage.CreateStringTypeUsage(
+                                StoreTypeNameToStorePrimitiveType["nchar"],
+                                true,
+                                true,
+                                (isMaxLength ? nvarcharMaxSize : maxLength)
+                            );
                         }
                         else
                         {
                             if (isMaxLength)
                             {
+                                // nvarchar(max) (SQL 9) or ntext (SQL 8)
                                 if (_version != SqlVersion.Sql8)
                                 {
-
-                                    tu = TypeUsage.CreateBinaryTypeUsage(StoreTypeNameToStorePrimitiveType["varbinary(max)"], false);
-                                    Debug.Assert(tu.Facets[DbProviderManifest.MaxLengthFacetName].Description.IsConstant, "varbinary(max) is not constant!");
+                                    tu = TypeUsage.CreateStringTypeUsage(
+                                        StoreTypeNameToStorePrimitiveType["nvarchar(max)"],
+                                        true,
+                                        false
+                                    );
+                                    Debug.Assert(
+                                        tu.Facets[DbProviderManifest.MaxLengthFacetName]
+                                            .Description
+                                            .IsConstant,
+                                        "NVarchar(max) is not constant!"
+                                    );
                                 }
                                 else
                                 {
-                                    tu = TypeUsage.CreateBinaryTypeUsage(StoreTypeNameToStorePrimitiveType["varbinary"], false, binaryMaxSize);
+                                    // if it is unknown, fallback to nvarchar[4000] instead of ntext since it has limited store semantics
+                                    tu = TypeUsage.CreateStringTypeUsage(
+                                        StoreTypeNameToStorePrimitiveType["nvarchar"],
+                                        true,
+                                        false,
+                                        nvarcharMaxSize
+                                    );
                                 }
                             }
                             else
                             {
-                                tu = TypeUsage.CreateBinaryTypeUsage(StoreTypeNameToStorePrimitiveType["varbinary"], false, maxLength);
+                                tu = TypeUsage.CreateStringTypeUsage(
+                                    StoreTypeNameToStorePrimitiveType["nvarchar"],
+                                    true,
+                                    false,
+                                    maxLength
+                                );
                             }
                         }
-                        return tu;
                     }
-
-                case PrimitiveTypeKind.String:
-                    // char, nchar, varchar, nvarchar, varchar(max), nvarchar(max), ntext, text, xml
+                    else // !isUnicode
                     {
-                        bool isUnicode = null == facets[DbProviderManifest.UnicodeFacetName].Value || (bool)facets[DbProviderManifest.UnicodeFacetName].Value;
-                        bool isFixedLength = null != facets[DbProviderManifest.FixedLengthFacetName].Value && (bool)facets[DbProviderManifest.FixedLengthFacetName].Value;
-                        Facet f = facets[DbProviderManifest.MaxLengthFacetName];
-                        // maxlen is true if facet value is unbounded, the value is bigger than the limited string sizes *or* the facet
-                        // value is null. this is needed since functions still have maxlength facet value as null
-                        bool isMaxLength = Helper.IsUnboundedFacetValue(f) || null == f.Value || (int)f.Value > (isUnicode ? nvarcharMaxSize : varcharMaxSize);
-                        int maxLength = !isMaxLength ? (int)f.Value : Int32.MinValue;
-                        
-                        TypeUsage tu;
-
-                        if (isUnicode)
+                        if (isFixedLength)
                         {
-                            if (isFixedLength)
+                            tu = TypeUsage.CreateStringTypeUsage(
+                                StoreTypeNameToStorePrimitiveType["char"],
+                                false,
+                                true,
+                                (isMaxLength ? varcharMaxSize : maxLength)
+                            );
+                        }
+                        else
+                        {
+                            if (isMaxLength)
                             {
-                                tu = TypeUsage.CreateStringTypeUsage(StoreTypeNameToStorePrimitiveType["nchar"], true, true, (isMaxLength ? nvarcharMaxSize : maxLength));
-                            }
-                            else
-                            {
-                                if (isMaxLength)
+                                // nvarchar(max) (SQL 9) or ntext (SQL 8)
+                                if (_version != SqlVersion.Sql8)
                                 {
-                                    // nvarchar(max) (SQL 9) or ntext (SQL 8)
-                                    if (_version != SqlVersion.Sql8)
-                                    {
-                                        tu = TypeUsage.CreateStringTypeUsage(StoreTypeNameToStorePrimitiveType["nvarchar(max)"], true, false);
-                                        Debug.Assert(tu.Facets[DbProviderManifest.MaxLengthFacetName].Description.IsConstant, "NVarchar(max) is not constant!");
-                                    }
-                                    else
-                                    {   
-                                        // if it is unknown, fallback to nvarchar[4000] instead of ntext since it has limited store semantics
-                                        tu = TypeUsage.CreateStringTypeUsage(StoreTypeNameToStorePrimitiveType["nvarchar"], true, false, nvarcharMaxSize);
-                                    }
+                                    tu = TypeUsage.CreateStringTypeUsage(
+                                        StoreTypeNameToStorePrimitiveType["varchar(max)"],
+                                        false,
+                                        false
+                                    );
+                                    Debug.Assert(
+                                        tu.Facets[DbProviderManifest.MaxLengthFacetName]
+                                            .Description
+                                            .IsConstant,
+                                        "varchar(max) is not constant!"
+                                    );
                                 }
                                 else
                                 {
-                                    tu = TypeUsage.CreateStringTypeUsage(StoreTypeNameToStorePrimitiveType["nvarchar"], true, false, maxLength);
+                                    // if it is unknown, fallback to varchar[8000] instead of text since it has limited store semantics
+                                    tu = TypeUsage.CreateStringTypeUsage(
+                                        StoreTypeNameToStorePrimitiveType["varchar"],
+                                        false,
+                                        false,
+                                        varcharMaxSize
+                                    );
                                 }
-                            }
-                        }
-                        else    // !isUnicode
-                        {
-                            if (isFixedLength)
-                            {
-                                tu = TypeUsage.CreateStringTypeUsage(StoreTypeNameToStorePrimitiveType["char"], false, true,
-                                    (isMaxLength ? varcharMaxSize : maxLength));
                             }
                             else
                             {
-                                if (isMaxLength)
-                                {
-                                    // nvarchar(max) (SQL 9) or ntext (SQL 8)
-                                    if (_version != SqlVersion.Sql8)
-                                    {
-                                        tu = TypeUsage.CreateStringTypeUsage(StoreTypeNameToStorePrimitiveType["varchar(max)"], false, false);
-                                        Debug.Assert(tu.Facets[DbProviderManifest.MaxLengthFacetName].Description.IsConstant, "varchar(max) is not constant!");
-                                    }
-                                    else
-                                    {
-                                        // if it is unknown, fallback to varchar[8000] instead of text since it has limited store semantics
-                                        tu = TypeUsage.CreateStringTypeUsage(StoreTypeNameToStorePrimitiveType["varchar"], false, false, varcharMaxSize);
-                                    }
-                                }
-                                else
-                                {
-                                    tu = TypeUsage.CreateStringTypeUsage(StoreTypeNameToStorePrimitiveType["varchar"], false, false, maxLength);
-                                }
+                                tu = TypeUsage.CreateStringTypeUsage(
+                                    StoreTypeNameToStorePrimitiveType["varchar"],
+                                    false,
+                                    false,
+                                    maxLength
+                                );
                             }
                         }
-                        return tu;
                     }
-
+                    return tu;
+                }
 
                 case PrimitiveTypeKind.DateTime:
-                    return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType["datetime"]);
+                    return TypeUsage.CreateDefaultTypeUsage(
+                        StoreTypeNameToStorePrimitiveType["datetime"]
+                    );
                 case PrimitiveTypeKind.DateTimeOffset:
-                    return GetStorePrimitiveTypeIfPostSql9("datetimeoffset", edmType.Identity, primitiveType.PrimitiveTypeKind); 
+                    return GetStorePrimitiveTypeIfPostSql9(
+                        "datetimeoffset",
+                        edmType.Identity,
+                        primitiveType.PrimitiveTypeKind
+                    );
                 case PrimitiveTypeKind.Time:
-                    return GetStorePrimitiveTypeIfPostSql9("time", edmType.Identity, primitiveType.PrimitiveTypeKind);
-                 
+                    return GetStorePrimitiveTypeIfPostSql9(
+                        "time",
+                        edmType.Identity,
+                        primitiveType.PrimitiveTypeKind
+                    );
+
                 default:
-                    throw EntityUtil.NotSupported(Strings.NoStoreTypeForEdmType(edmType.Identity, primitiveType.PrimitiveTypeKind));
+                    throw EntityUtil.NotSupported(
+                        Strings.NoStoreTypeForEdmType(
+                            edmType.Identity,
+                            primitiveType.PrimitiveTypeKind
+                        )
+                    );
             }
         }
 
-        private TypeUsage GetStorePrimitiveTypeIfPostSql9(string storeTypeName, string edmTypeIdentity, PrimitiveTypeKind primitiveTypeKind)
+        private TypeUsage GetStorePrimitiveTypeIfPostSql9(
+            string storeTypeName,
+            string edmTypeIdentity,
+            PrimitiveTypeKind primitiveTypeKind
+        )
         {
             if ((this.SqlVersion != SqlVersion.Sql8) && (this.SqlVersion != SqlVersion.Sql9))
             {
-                return TypeUsage.CreateDefaultTypeUsage(StoreTypeNameToStorePrimitiveType[storeTypeName]);
+                return TypeUsage.CreateDefaultTypeUsage(
+                    StoreTypeNameToStorePrimitiveType[storeTypeName]
+                );
             }
             else
             {
-                throw EntityUtil.NotSupported(Strings.NoStoreTypeForEdmType(edmTypeIdentity, primitiveTypeKind));
+                throw EntityUtil.NotSupported(
+                    Strings.NoStoreTypeForEdmType(edmTypeIdentity, primitiveTypeKind)
+                );
             }
         }
 

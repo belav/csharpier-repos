@@ -19,12 +19,18 @@ namespace System.Net.NetworkInformation
         }
 
         public override IPv4InterfaceProperties GetIPv4Properties() => _ipv4Properties;
+
         public override IPv6InterfaceProperties GetIPv6Properties() => _ipv6Properties;
 
-        public override bool IsDynamicDnsEnabled => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override IPAddressInformationCollection AnycastAddresses => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override GatewayIPAddressInformationCollection GatewayAddresses => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override IPAddressCollection DhcpServerAddresses => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override IPAddressCollection WinsServersAddresses => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override bool IsDynamicDnsEnabled =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override IPAddressInformationCollection AnycastAddresses =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override GatewayIPAddressInformationCollection GatewayAddresses =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override IPAddressCollection DhcpServerAddresses =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override IPAddressCollection WinsServersAddresses =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
     }
 }

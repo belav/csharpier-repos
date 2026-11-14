@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,75 +27,76 @@
 
 namespace System.ServiceModel
 {
-	public class FaultCode
-	{
-		string name, ns;
-		FaultCode subcode;
-		
-		public FaultCode (string name)
-			: this (name, String.Empty)
-		{
-		}
+    public class FaultCode
+    {
+        string name,
+            ns;
+        FaultCode subcode;
 
-		public FaultCode (string name, string ns)
-			: this (name, ns, null)
-		{
-		}
+        public FaultCode(string name)
+            : this(name, String.Empty) { }
 
-		public FaultCode (string name, FaultCode subCode)
-			: this (name, String.Empty, subCode)
-		{
-		}
+        public FaultCode(string name, string ns)
+            : this(name, ns, null) { }
 
-		public FaultCode (string name, string ns, FaultCode subCode)
-		{
-			this.name = name;
-			this.ns = ns;
-			this.subcode = subCode;
-		}
+        public FaultCode(string name, FaultCode subCode)
+            : this(name, String.Empty, subCode) { }
 
-		public bool IsPredefinedFault {
-			get { return ns == String.Empty; }
-		}
+        public FaultCode(string name, string ns, FaultCode subCode)
+        {
+            this.name = name;
+            this.ns = ns;
+            this.subcode = subCode;
+        }
 
-		public bool IsReceiverFault {
-			get { return name == "Receiver"; }
-		}
-	
-		public bool IsSenderFault {
-			get { return name == "Sender"; }
-		}
-		
-		public string Name {
-			get { return name; }
-		}
+        public bool IsPredefinedFault
+        {
+            get { return ns == String.Empty; }
+        }
 
-		public string Namespace {
-			get { return ns; }
-		}
+        public bool IsReceiverFault
+        {
+            get { return name == "Receiver"; }
+        }
 
-		public FaultCode SubCode {
-			get { return subcode; }
-		}
+        public bool IsSenderFault
+        {
+            get { return name == "Sender"; }
+        }
 
-		public static FaultCode CreateReceiverFaultCode (FaultCode subCode)
-		{
-			return new FaultCode ("Receiver", subCode);
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public static FaultCode CreateReceiverFaultCode (string name, string ns)
-		{
-			return CreateReceiverFaultCode (new FaultCode (name, ns));
-		}
-		
-		public static FaultCode CreateSenderFaultCode (FaultCode subCode)
-		{
-			return new FaultCode ("Sender", subCode);
-		}
+        public string Namespace
+        {
+            get { return ns; }
+        }
 
-		public static FaultCode CreateSenderFaultCode (string name, string ns)
-		{
-			return CreateSenderFaultCode (new FaultCode (name, ns));
-		}
-	}
+        public FaultCode SubCode
+        {
+            get { return subcode; }
+        }
+
+        public static FaultCode CreateReceiverFaultCode(FaultCode subCode)
+        {
+            return new FaultCode("Receiver", subCode);
+        }
+
+        public static FaultCode CreateReceiverFaultCode(string name, string ns)
+        {
+            return CreateReceiverFaultCode(new FaultCode(name, ns));
+        }
+
+        public static FaultCode CreateSenderFaultCode(FaultCode subCode)
+        {
+            return new FaultCode("Sender", subCode);
+        }
+
+        public static FaultCode CreateSenderFaultCode(string name, string ns)
+        {
+            return CreateSenderFaultCode(new FaultCode(name, ns));
+        }
+    }
 }

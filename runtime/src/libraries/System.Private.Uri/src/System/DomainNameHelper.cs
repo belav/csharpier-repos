@@ -33,16 +33,18 @@ namespace System
 
         // Takes into account the additional legal domain name characters '-' and '_'
         // Note that '_' char is formally invalid but is historically in use, especially on corpnets
-        private static readonly SearchValues<char> s_validChars =
-            SearchValues.Create("-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz.");
+        private static readonly SearchValues<char> s_validChars = SearchValues.Create(
+            "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz."
+        );
 
         // For IRI, we're accepting anything non-ascii (except 0x80-0x9F), so invert the condition to search for invalid ascii characters.
         private static readonly SearchValues<char> s_iriInvalidChars = SearchValues.Create(
-            "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000A\u000B\u000C\u000D\u000E\u000F" +
-            "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F" +
-            " !\"#$%&'()*+,/:;<=>?@[\\]^`{|}~\u007F" +
-            "\u0080\u0081\u0082\u0083\u0084\u0085\u0086\u0087\u0088\u0089\u008A\u008B\u008C\u008D\u008E\u008F" +
-            "\u0090\u0091\u0092\u0093\u0094\u0095\u0096\u0097\u0098\u0099\u009A\u009B\u009C\u009D\u009E\u009F");
+            "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000A\u000B\u000C\u000D\u000E\u000F"
+                + "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F"
+                + " !\"#$%&'()*+,/:;<=>?@[\\]^`{|}~\u007F"
+                + "\u0080\u0081\u0082\u0083\u0084\u0085\u0086\u0087\u0088\u0089\u008A\u008B\u008C\u008D\u008E\u008F"
+                + "\u0090\u0091\u0092\u0093\u0094\u0095\u0096\u0097\u0098\u0099\u009A\u009B\u009C\u009D\u009E\u009F"
+        );
 
         private static readonly SearchValues<char> s_asciiLetterUpperOrColonChars =
             SearchValues.Create("ABCDEFGHIJKLMNOPQRSTUVWXYZ:");
@@ -55,11 +57,14 @@ namespace System
         internal static string ParseCanonicalName(string str, int start, int end, ref bool loopback)
         {
             // Do a quick search for the colon or uppercase letters
-            int index = str.AsSpan(start, end - start).LastIndexOfAny(s_asciiLetterUpperOrColonChars);
+            int index = str.AsSpan(start, end - start)
+                .LastIndexOfAny(s_asciiLetterUpperOrColonChars);
             if (index >= 0)
             {
-                Debug.Assert(!str.AsSpan(start, index).Contains(':'),
-                    "A colon should appear at most once, and must never be followed by letters.");
+                Debug.Assert(
+                    !str.AsSpan(start, index).Contains(':'),
+                    "A colon should appear at most once, and must never be followed by letters."
+                );
 
                 if (str[start + index] == ':')
                 {
@@ -89,7 +94,12 @@ namespace System
             return str.Substring(start, end - start);
         }
 
-        public static bool IsValid(ReadOnlySpan<char> hostname, bool iri, bool notImplicitFile, out int length)
+        public static bool IsValid(
+            ReadOnlySpan<char> hostname,
+            bool iri,
+            bool notImplicitFile,
+            out int length
+        )
         {
             int invalidCharOrDelimiterIndex = iri
                 ? hostname.IndexOfAny(s_iriInvalidChars)
@@ -133,9 +143,7 @@ namespace System
                     return false;
                 }
 
-                int dotIndex = iri
-                    ? hostname.IndexOfAny(IriDotCharacters)
-                    : hostname.IndexOf('.');
+                int dotIndex = iri ? hostname.IndexOfAny(IriDotCharacters) : hostname.IndexOf('.');
 
                 int labelLength = dotIndex < 0 ? hostname.Length : dotIndex;
 
@@ -209,7 +217,9 @@ namespace System
 
         public static bool TryGetUnicodeEquivalent(string hostname, ref ValueStringBuilder dest)
         {
-            Debug.Assert(ReferenceEquals(hostname, UriHelper.StripBidiControlCharacters(hostname, hostname)));
+            Debug.Assert(
+                ReferenceEquals(hostname, UriHelper.StripBidiControlCharacters(hostname, hostname))
+            );
 
             // We run a loop where for every label
             // a) if label is ascii and no ace then we lowercase it

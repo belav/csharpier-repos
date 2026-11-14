@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private TypeWithAnnotations.Boxed _lazyType;
         private ImmutableArray<ParameterSymbol> _lazyParameters;
 
-        internal SubstitutedPropertySymbol(SubstitutedNamedTypeSymbol containingType, PropertySymbol originalDefinition)
+        internal SubstitutedPropertySymbol(
+            SubstitutedNamedTypeSymbol containingType,
+            PropertySymbol originalDefinition
+        )
             : base(originalDefinition)
         {
             _containingType = containingType;
@@ -28,8 +31,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyType == null)
                 {
-                    var type = _containingType.TypeSubstitution.SubstituteType(OriginalDefinition.TypeWithAnnotations);
-                    Interlocked.CompareExchange(ref _lazyType, new TypeWithAnnotations.Boxed(type), null);
+                    var type = _containingType.TypeSubstitution.SubstituteType(
+                        OriginalDefinition.TypeWithAnnotations
+                    );
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        new TypeWithAnnotations.Boxed(type),
+                        null
+                    );
                 }
 
                 return _lazyType.Value;
@@ -38,26 +47,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override PropertySymbol OriginalDefinition
         {
-            get
-            {
-                return _underlyingProperty;
-            }
+            get { return _underlyingProperty; }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
@@ -67,7 +67,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
-            get { return _containingType.TypeSubstitution.SubstituteCustomModifiers(OriginalDefinition.RefCustomModifiers); }
+            get
+            {
+                return _containingType.TypeSubstitution.SubstituteCustomModifiers(
+                    OriginalDefinition.RefCustomModifiers
+                );
+            }
         }
 
         public override ImmutableArray<ParameterSymbol> Parameters
@@ -76,7 +81,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyParameters.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedCompareExchange(ref _lazyParameters, SubstituteParameters(), default(ImmutableArray<ParameterSymbol>));
+                    ImmutableInterlocked.InterlockedCompareExchange(
+                        ref _lazyParameters,
+                        SubstituteParameters(),
+                        default(ImmutableArray<ParameterSymbol>)
+                    );
                 }
 
                 return _lazyParameters;
@@ -88,7 +97,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 MethodSymbol originalGetMethod = OriginalDefinition.GetMethod;
-                return (object)originalGetMethod == null ? null : originalGetMethod.AsMember(_containingType);
+                return (object)originalGetMethod == null
+                    ? null
+                    : originalGetMethod.AsMember(_containingType);
             }
         }
 
@@ -97,7 +108,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 MethodSymbol originalSetMethod = OriginalDefinition.SetMethod;
-                return (object)originalSetMethod == null ? null : originalSetMethod.AsMember(_containingType);
+                return (object)originalSetMethod == null
+                    ? null
+                    : originalSetMethod.AsMember(_containingType);
             }
         }
 
@@ -119,8 +132,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     ImmutableInterlocked.InterlockedCompareExchange(
                         ref _lazyExplicitInterfaceImplementations,
-                        ExplicitInterfaceHelpers.SubstituteExplicitInterfaceImplementations(OriginalDefinition.ExplicitInterfaceImplementations, _containingType.TypeSubstitution),
-                        default(ImmutableArray<PropertySymbol>));
+                        ExplicitInterfaceHelpers.SubstituteExplicitInterfaceImplementations(
+                            OriginalDefinition.ExplicitInterfaceImplementations,
+                            _containingType.TypeSubstitution
+                        ),
+                        default(ImmutableArray<PropertySymbol>)
+                    );
                 }
                 return _lazyExplicitInterfaceImplementations;
             }
@@ -137,7 +154,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyOverriddenOrHiddenMembers == null)
                 {
-                    Interlocked.CompareExchange(ref _lazyOverriddenOrHiddenMembers, this.MakeOverriddenOrHiddenMembers(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyOverriddenOrHiddenMembers,
+                        this.MakeOverriddenOrHiddenMembers(),
+                        null
+                    );
                 }
 
                 return _lazyOverriddenOrHiddenMembers;
@@ -158,7 +179,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var substituted = new ParameterSymbol[count];
                 for (int i = 0; i < count; i++)
                 {
-                    substituted[i] = new SubstitutedParameterSymbol(this, _containingType.TypeSubstitution, unsubstitutedParameters[i]);
+                    substituted[i] = new SubstitutedParameterSymbol(
+                        this,
+                        _containingType.TypeSubstitution,
+                        unsubstitutedParameters[i]
+                    );
                 }
                 return substituted.AsImmutableOrNull();
             }

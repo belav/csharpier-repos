@@ -10,14 +10,20 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler :
-        IChainedCommandHandler<TabKeyCommandArgs>,
-        IChainedCommandHandler<BackTabKeyCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : IChainedCommandHandler<TabKeyCommandArgs>,
+            IChainedCommandHandler<BackTabKeyCommandArgs>
     {
-        public CommandState GetCommandState(TabKeyCommandArgs args, Func<CommandState> nextHandler)
-            => GetCommandState(nextHandler);
+        public CommandState GetCommandState(
+            TabKeyCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => GetCommandState(nextHandler);
 
-        public void ExecuteCommand(TabKeyCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            TabKeyCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             // If the Dashboard is focused, just navigate through its UI.
             if (AdornmentShouldReceiveKeyboardNavigation(args.TextView))
@@ -29,8 +35,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
             {
                 var spans = new NormalizedSnapshotSpanCollection(
-                    activeSession.GetBufferManager(args.SubjectBuffer)
-                    .GetEditableSpansForSnapshot(args.SubjectBuffer.CurrentSnapshot));
+                    activeSession
+                        .GetBufferManager(args.SubjectBuffer)
+                        .GetEditableSpansForSnapshot(args.SubjectBuffer.CurrentSnapshot)
+                );
 
                 for (var i = 0; i < spans.Count; i++)
                 {
@@ -46,10 +54,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             });
         }
 
-        public CommandState GetCommandState(BackTabKeyCommandArgs args, Func<CommandState> nextHandler)
-            => GetCommandState(nextHandler);
+        public CommandState GetCommandState(
+            BackTabKeyCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => GetCommandState(nextHandler);
 
-        public void ExecuteCommand(BackTabKeyCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            BackTabKeyCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             // If the Dashboard is focused, just navigate through its UI.
             if (AdornmentShouldReceiveKeyboardNavigation(args.TextView))

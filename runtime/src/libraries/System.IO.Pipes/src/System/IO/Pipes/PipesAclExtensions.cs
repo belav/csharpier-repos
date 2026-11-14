@@ -14,7 +14,12 @@ namespace System.IO.Pipes
             var handle = stream.SafePipeHandle;
 
             // PipeState must be Disconnected, Connected, or Broken
-            return new PipeSecurity(handle, AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return new PipeSecurity(
+                handle,
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
         public static void SetAccessControl(this PipeStream stream, PipeSecurity pipeSecurity)

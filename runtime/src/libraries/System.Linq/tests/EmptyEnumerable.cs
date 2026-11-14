@@ -29,7 +29,10 @@ namespace System.Linq.Tests
         {
             Assert.Equal(new T[0], Enumerable.Empty<T>());
             Assert.Equal(0, Enumerable.Empty<T>().Count());
-            Assert.Same(Enumerable.Empty<T>().GetEnumerator(), Enumerable.Empty<T>().GetEnumerator());
+            Assert.Same(
+                Enumerable.Empty<T>().GetEnumerator(),
+                Enumerable.Empty<T>().GetEnumerator()
+            );
         }
 
         [Fact]
@@ -45,7 +48,9 @@ namespace System.Linq.Tests
         public void IListImplementationIsValid()
         {
             IList<int> list = Assert.IsAssignableFrom<IList<int>>(Enumerable.Empty<int>());
-            IReadOnlyList<int> roList = Assert.IsAssignableFrom<IReadOnlyList<int>>(Enumerable.Empty<int>());
+            IReadOnlyList<int> roList = Assert.IsAssignableFrom<IReadOnlyList<int>>(
+                Enumerable.Empty<int>()
+            );
 
             Assert.Throws<NotSupportedException>(() => list.Add(42));
             Assert.Throws<NotSupportedException>(() => list.Insert(0, 42));

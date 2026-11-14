@@ -31,41 +31,63 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Connected.SqlClient
 {
-	[TestFixture]
-	[Category ("sqlserver")]
+    [TestFixture]
+    [Category("sqlserver")]
+    public class SqlParameterCollectionTest
+    {
+        EngineConfig engine;
 
-	public class SqlParameterCollectionTest
-	{
-		EngineConfig engine;
+        [SetUp]
+        public void SetUp()
+        {
+            engine = ConnectionManager.Instance.Sql.EngineConfig;
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			engine = ConnectionManager.Instance.Sql.EngineConfig;
-		}
+        [Test]
+        public void CopyToTest()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT fname FROM employee WHERE fname=@fname AND lname=@lname";
+            SqlParameter p1Fname = cmd.Parameters.Add("@fname", SqlDbType.VarChar, 15);
+            SqlParameter p1Lname = cmd.Parameters.Add("@lname", SqlDbType.VarChar, 15);
 
-		[Test]
-		public void CopyToTest ()
-		{
-			SqlCommand cmd = new SqlCommand ();
-			cmd.CommandText = "SELECT fname FROM employee WHERE fname=@fname AND lname=@lname";
-			SqlParameter p1Fname = cmd.Parameters.Add ("@fname", SqlDbType.VarChar, 15);
-			SqlParameter p1Lname = cmd.Parameters.Add ("@lname", SqlDbType.VarChar, 15);
+            Assert.AreEqual(
+                2,
+                cmd.Parameters.Count,
+                "#1 Initialization error, parameter collection must contain 2 elements"
+            );
 
-			Assert.AreEqual (2, cmd.Parameters.Count, "#1 Initialization error, parameter collection must contain 2 elements");
-
-			SqlParameter [] destinationArray = new SqlParameter [4];
-			cmd.Parameters.CopyTo (destinationArray, 1);
-			Assert.AreEqual (4, destinationArray.Length, "#2 The length of destination array should not change");
-			Assert.AreEqual (null, destinationArray[0], "#3 The parameter collection is copied at index 1, so the first element should not change");
-			Assert.AreEqual (p1Fname, destinationArray[1], "#4 The parameter at index 1 must be p1Fname");
-			Assert.AreEqual (p1Lname, destinationArray[2], "#5 The parameter at index 2 must be p1Lname");
-			Assert.AreEqual (null, destinationArray[3], "#6 The parameter at index 3 must not change");
-		}
-	}
+            SqlParameter[] destinationArray = new SqlParameter[4];
+            cmd.Parameters.CopyTo(destinationArray, 1);
+            Assert.AreEqual(
+                4,
+                destinationArray.Length,
+                "#2 The length of destination array should not change"
+            );
+            Assert.AreEqual(
+                null,
+                destinationArray[0],
+                "#3 The parameter collection is copied at index 1, so the first element should not change"
+            );
+            Assert.AreEqual(
+                p1Fname,
+                destinationArray[1],
+                "#4 The parameter at index 1 must be p1Fname"
+            );
+            Assert.AreEqual(
+                p1Lname,
+                destinationArray[2],
+                "#5 The parameter at index 2 must be p1Lname"
+            );
+            Assert.AreEqual(
+                null,
+                destinationArray[3],
+                "#6 The parameter at index 3 must not change"
+            );
+        }
+    }
 }

@@ -18,14 +18,16 @@ namespace System.ServiceModel.Dispatcher
         {
             WorkflowDurableInstance workflowDurableInstance = null;
 
-            //If InstanceContext is taken down due to Exception(Like PersistenceException); 
+            //If InstanceContext is taken down due to Exception(Like PersistenceException);
             //Make sure we inform LifeTimeManager to cleanup the record.
             if (instanceContext.State == CommunicationState.Faulted || instanceContext.Aborted)
             {
                 if (this.instanceContextProvider.InstanceLifeTimeManager != null)
                 {
-                    workflowDurableInstance = (WorkflowDurableInstance) instance;
-                    this.instanceContextProvider.InstanceLifeTimeManager.CleanUp(workflowDurableInstance.InstanceId);
+                    workflowDurableInstance = (WorkflowDurableInstance)instance;
+                    this.instanceContextProvider.InstanceLifeTimeManager.CleanUp(
+                        workflowDurableInstance.InstanceId
+                    );
                 }
             }
             base.ReleaseInstance(instanceContext, instance);

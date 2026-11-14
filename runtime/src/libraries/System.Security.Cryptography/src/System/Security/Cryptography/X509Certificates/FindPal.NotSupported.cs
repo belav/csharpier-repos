@@ -6,9 +6,15 @@ namespace System.Security.Cryptography.X509Certificates
     internal static partial class FindPal
     {
 #pragma warning disable IDE0060
-        private static partial IFindPal OpenPal(X509Certificate2Collection findFrom, X509Certificate2Collection copyTo, bool validOnly)
+        private static partial IFindPal OpenPal(
+            X509Certificate2Collection findFrom,
+            X509Certificate2Collection copyTo,
+            bool validOnly
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 #pragma warning restore IDE0060
     }

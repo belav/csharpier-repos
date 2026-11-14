@@ -8,7 +8,8 @@ using System.Collections.Generic;
 namespace Roslyn.Utilities
 {
     // Note that this is not threadsafe for concurrent reading and writing.
-    internal sealed class OrderedMultiDictionary<K, V> : IEnumerable<KeyValuePair<K, SetWithInsertionOrder<V>>>
+    internal sealed class OrderedMultiDictionary<K, V>
+        : IEnumerable<KeyValuePair<K, SetWithInsertionOrder<V>>>
         where K : notnull
     {
         private readonly Dictionary<K, SetWithInsertionOrder<V>> _dictionary;
@@ -24,8 +25,7 @@ namespace Roslyn.Utilities
             get
             {
                 SetWithInsertionOrder<V>? set;
-                return _dictionary.TryGetValue(k, out set)
-                    ? set : new SetWithInsertionOrder<V>();
+                return _dictionary.TryGetValue(k, out set) ? set : new SetWithInsertionOrder<V>();
             }
         }
 
@@ -61,8 +61,7 @@ namespace Roslyn.Utilities
         {
             foreach (var key in _keys)
             {
-                yield return new KeyValuePair<K, SetWithInsertionOrder<V>>(
-                    key, _dictionary[key]);
+                yield return new KeyValuePair<K, SetWithInsertionOrder<V>>(key, _dictionary[key]);
             }
         }
     }

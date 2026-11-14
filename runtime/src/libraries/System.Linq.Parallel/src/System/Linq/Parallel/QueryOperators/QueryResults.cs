@@ -75,7 +75,9 @@ namespace System.Linq.Parallel
         {
             get
             {
-                Debug.Fail("ElementsCount property is not supported by non-indexable query results");
+                Debug.Fail(
+                    "ElementsCount property is not supported by non-indexable query results"
+                );
                 throw new NotSupportedException();
             }
         }
@@ -102,10 +104,7 @@ namespace System.Linq.Parallel
         public T this[int index]
         {
             get { return GetElement(index); }
-            set
-            {
-                throw new NotSupportedException();
-            }
+            set { throw new NotSupportedException(); }
         }
 
         void ICollection<T>.Add(T item)

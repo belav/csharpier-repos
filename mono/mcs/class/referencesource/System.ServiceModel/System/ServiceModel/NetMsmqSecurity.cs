@@ -3,8 +3,8 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
-    using System.Runtime;
     using System.ComponentModel;
+    using System.Runtime;
     using System.ServiceModel.Channels;
     using Config = System.ServiceModel.Configuration;
 
@@ -17,22 +17,27 @@ namespace System.ServiceModel
         MessageSecurityOverMsmq messageSecurity;
 
         public NetMsmqSecurity()
-            : this(DefaultMode, null, null)
-        {
-        }
+            : this(DefaultMode, null, null) { }
 
         internal NetMsmqSecurity(NetMsmqSecurityMode mode)
-            : this(mode, null, null)
-        {
-        }
+            : this(mode, null, null) { }
 
-        NetMsmqSecurity(NetMsmqSecurityMode mode, MsmqTransportSecurity transportSecurity, MessageSecurityOverMsmq messageSecurity)
+        NetMsmqSecurity(
+            NetMsmqSecurityMode mode,
+            MsmqTransportSecurity transportSecurity,
+            MessageSecurityOverMsmq messageSecurity
+        )
         {
-            Fx.Assert(NetMsmqSecurityModeHelper.IsDefined(mode), string.Format("Invalid NetMsmqSecurityMode value: {0}.", mode.ToString()));
+            Fx.Assert(
+                NetMsmqSecurityModeHelper.IsDefined(mode),
+                string.Format("Invalid NetMsmqSecurityMode value: {0}.", mode.ToString())
+            );
 
             this.mode = mode;
-            this.transportSecurity = transportSecurity == null ? new MsmqTransportSecurity() : transportSecurity;
-            this.messageSecurity = messageSecurity == null ? new MessageSecurityOverMsmq() : messageSecurity;
+            this.transportSecurity =
+                transportSecurity == null ? new MsmqTransportSecurity() : transportSecurity;
+            this.messageSecurity =
+                messageSecurity == null ? new MessageSecurityOverMsmq() : messageSecurity;
         }
 
         [DefaultValue(NetMsmqSecurity.DefaultMode)]
@@ -43,7 +48,9 @@ namespace System.ServiceModel
             {
                 if (!NetMsmqSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.mode = value;
             }
@@ -79,7 +86,10 @@ namespace System.ServiceModel
                 msmq.MsmqTransportSecurity.Disable();
         }
 
-        internal static bool IsConfiguredTransportSecurity(MsmqTransportBindingElement msmq, out UnifiedSecurityMode mode)
+        internal static bool IsConfiguredTransportSecurity(
+            MsmqTransportBindingElement msmq,
+            out UnifiedSecurityMode mode
+        )
         {
             if (msmq == null)
             {
@@ -103,16 +113,23 @@ namespace System.ServiceModel
         }
 
         //
-        internal static bool TryCreate(SecurityBindingElement sbe, NetMsmqSecurityMode mode, out NetMsmqSecurity security)
+        internal static bool TryCreate(
+            SecurityBindingElement sbe,
+            NetMsmqSecurityMode mode,
+            out NetMsmqSecurity security
+        )
         {
             security = null;
             MessageSecurityOverMsmq messageSecurity;
             if (!MessageSecurityOverMsmq.TryCreate(sbe, out messageSecurity))
                 messageSecurity = null;
             security = new NetMsmqSecurity(mode, null, messageSecurity);
-            return sbe == null || Config.SecurityElement.AreBindingsMatching(security.CreateMessageSecurity(), sbe, false);
+            return sbe == null
+                || Config.SecurityElement.AreBindingsMatching(
+                    security.CreateMessageSecurity(),
+                    sbe,
+                    false
+                );
         }
     }
 }
-
-

@@ -77,7 +77,9 @@ namespace System.Web.Razor.Text
         {
             if (_bookmarks.Count == 0)
             {
-                throw new InvalidOperationException(RazorResources.CancelBacktrack_Must_Be_Called_Within_Lookahead);
+                throw new InvalidOperationException(
+                    RazorResources.CancelBacktrack_Must_Be_Called_Within_Lookahead
+                );
             }
             _bookmarks.Pop();
         }

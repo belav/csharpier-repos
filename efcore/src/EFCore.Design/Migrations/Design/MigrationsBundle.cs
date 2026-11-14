@@ -30,7 +30,12 @@ public static class MigrationsBundle
     /// <param name="startupAssembly">The startup assembly.</param>
     /// <param name="args">The command-line arguments.</param>
     /// <returns>Zero if the command succeeds; otherwise, one.</returns>
-    public static int Execute(string? context, Assembly assembly, Assembly startupAssembly, string[] args)
+    public static int Execute(
+        string? context,
+        Assembly assembly,
+        Assembly startupAssembly,
+        string[] args
+    )
     {
         _context = context;
         _assembly = assembly;
@@ -78,33 +83,34 @@ public static class MigrationsBundle
 
         app.HandleResponseFiles = true;
 
-        app.OnExecute(
-            args =>
-            {
-                Reporter.IsVerbose = verbose.HasValue();
-                Reporter.NoColor = noColor.HasValue();
-                Reporter.PrefixOutput = prefixOutput.HasValue();
+        app.OnExecute(args =>
+        {
+            Reporter.IsVerbose = verbose.HasValue();
+            Reporter.NoColor = noColor.HasValue();
+            Reporter.PrefixOutput = prefixOutput.HasValue();
 
-                ExecuteInternal(args);
+            ExecuteInternal(args);
 
-                return 0;
-            });
+            return 0;
+        });
     }
 
-    private static void ExecuteInternal(string[] args)
-        => new MigrationsOperations(
-                new OperationReporter(
-                    new OperationReportHandler(
-                        Reporter.WriteError,
-                        Reporter.WriteWarning,
-                        Reporter.WriteInformation,
-                        Reporter.WriteVerbose)),
-                _assembly!,
-                _startupAssembly!,
-                projectDir: string.Empty,
-                rootNamespace: null,
-                language: null,
-                nullable: false,
-                args)
-            .UpdateDatabase(_migration!.Value, _connection!.Value(), _context);
+    private static void ExecuteInternal(string[] args) =>
+        new MigrationsOperations(
+            new OperationReporter(
+                new OperationReportHandler(
+                    Reporter.WriteError,
+                    Reporter.WriteWarning,
+                    Reporter.WriteInformation,
+                    Reporter.WriteVerbose
+                )
+            ),
+            _assembly!,
+            _startupAssembly!,
+            projectDir: string.Empty,
+            rootNamespace: null,
+            language: null,
+            nullable: false,
+            args
+        ).UpdateDatabase(_migration!.Value, _connection!.Value(), _context);
 }

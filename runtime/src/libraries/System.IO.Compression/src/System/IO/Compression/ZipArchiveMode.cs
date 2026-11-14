@@ -12,6 +12,7 @@ namespace System.IO.Compression
         /// Requires that the underlying file or stream is readable.
         /// </summary>
         Read,
+
         /// <summary>
         /// Only supports the creation of new archives.
         /// Only writing to newly created entries in the archive is permitted.
@@ -20,12 +21,13 @@ namespace System.IO.Compression
         /// The underlying stream must be writable, but need not be seekable.
         /// </summary>
         Create,
+
         /// <summary>
         /// Reading and writing from entries in the archive is permitted.
         /// Requires that the contents of the entire archive be held in memory.
         /// The underlying file or stream must be readable, writable and seekable.
         /// No data will be written to the underlying file or stream until the archive is disposed.
         /// </summary>
-        Update
+        Update,
     }
 }

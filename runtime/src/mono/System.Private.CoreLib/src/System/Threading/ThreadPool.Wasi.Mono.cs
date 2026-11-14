@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.Win32.SafeHandles;
 
 #pragma warning disable IDE0060
@@ -19,9 +19,7 @@ namespace System.Threading
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public sealed class RegisteredWaitHandle : MarshalByRefObject
     {
-        internal RegisteredWaitHandle()
-        {
-        }
+        internal RegisteredWaitHandle() { }
 
 #pragma warning disable CA1822 // Mark members as static
         internal bool Repeating => false;
@@ -82,9 +80,7 @@ namespace System.Threading
             throw new PlatformNotSupportedException();
         }
 
-        internal static void NotifyWorkItemProgress()
-        {
-        }
+        internal static void NotifyWorkItemProgress() { }
 
         internal static bool NotifyThreadBlocked() => false;
 
@@ -101,18 +97,23 @@ namespace System.Threading
         }
 
         private static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle? waitObject,
-             WaitOrTimerCallback? callBack,
-             object? state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle? waitObject,
+            WaitOrTimerCallback? callBack,
+            object? state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
         private static unsafe void NativeOverlappedCallback(nint overlappedPtr) =>
-            IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(0, 0, (NativeOverlapped*)overlappedPtr);
+            IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(
+                0,
+                0,
+                (NativeOverlapped*)overlappedPtr
+            );
 
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
@@ -121,7 +122,9 @@ namespace System.Threading
             throw new PlatformNotSupportedException();
         }
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle)
         {
@@ -135,9 +138,6 @@ namespace System.Threading
         }
 
         [Conditional("unnecessary")]
-        internal static void ReportThreadStatus(bool isWorking)
-        {
-
-        }
+        internal static void ReportThreadStatus(bool isWorking) { }
     }
 }

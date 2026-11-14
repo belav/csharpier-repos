@@ -37,8 +37,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct01a.strct01a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -74,8 +72,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct03.strct03
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -109,8 +105,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct03a.strct03a
 {
@@ -147,8 +141,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct05.strct05
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -182,8 +174,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct05a.strct05a
 {
@@ -220,8 +210,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct06a.strct06a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -255,8 +243,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct07a.strct07a
 {
@@ -292,8 +278,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct09a.strct09a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -328,8 +312,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct12.strct12
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -341,9 +323,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
 
     public struct Parent
     {
-        public int Foo(
-        [Optional]
-        dynamic i)
+        public int Foo([Optional] dynamic i)
         {
             if (i == System.Type.Missing)
                 return 0;
@@ -368,8 +348,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct12a.strct12a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -381,9 +359,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
 
     public struct Parent
     {
-        public int Foo(
-        [Optional]
-        int ? i)
+        public int Foo([Optional] int? i)
         {
             if (i == null)
                 return 0;
@@ -408,8 +384,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct13.strct13
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -422,11 +396,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     public struct Parent
     {
         public int Foo(
-        [Optional]
-        dynamic i, [Optional]
-        long j, [Optional]
-        float f, [Optional]
-        dynamic d)
+            [Optional] dynamic i,
+            [Optional] long j,
+            [Optional] float f,
+            [Optional] dynamic d
+        )
         {
             if (d == System.Type.Missing)
                 return 0;
@@ -451,8 +425,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct13a.strct13a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -465,11 +437,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     public struct Parent
     {
         public int Foo(
-        [Optional]
-        int ? i, [Optional]
-        long ? j, [Optional]
-        float ? f, [Optional]
-        decimal ? d)
+            [Optional] int? i,
+            [Optional] long? j,
+            [Optional] float? f,
+            [Optional] decimal? d
+        )
         {
             if (d == null)
                 return 0;
@@ -494,8 +466,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct14a.strct14a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -506,6 +476,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     public struct Parent
     {
         private const int x = 1;
+
         public int Foo(long? z = x)
         {
             if (z == 1)
@@ -531,8 +502,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct18a.strct18a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -543,6 +512,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     public struct Parent
     {
         private const string x = "test";
+
         public int Foo(string z = x)
         {
             if (z == "test")
@@ -568,8 +538,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct19a.strct19a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -580,6 +548,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     public struct Parent
     {
         private const bool x = true;
+
         public int Foo(bool? z = x)
         {
             if ((bool)z)
@@ -604,8 +573,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.strct.strct20a.strct20a
 {
@@ -641,7 +608,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "Parent.Foo(string, int?)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadArgTypes,
+                    e.Message,
+                    "Parent.Foo(string, int?)"
+                );
                 if (ret)
                     return 0;
             }

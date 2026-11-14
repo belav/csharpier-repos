@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         public static readonly SyntaxAnnotation SpecializedFormattingAnnotation = new();
 
         public static SyntaxRemoveOptions GetRemoveOptions(
-            ISyntaxFactsService syntaxFacts, SyntaxNode syntax)
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode syntax
+        )
         {
             var removeOptions = SyntaxGenerator.DefaultRemoveOptions;
             if (HasRegularCommentTrivia(syntaxFacts, syntax.GetLeadingTrivia()))

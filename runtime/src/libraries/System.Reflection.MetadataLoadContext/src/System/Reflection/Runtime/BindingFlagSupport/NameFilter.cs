@@ -26,16 +26,16 @@ namespace System.Reflection
             _expectedNameUtf8 = expectedName.ToUtf8();
         }
 
-        public sealed override bool Matches(string name) => name.Equals(ExpectedName, StringComparison.Ordinal);
+        public sealed override bool Matches(string name) =>
+            name.Equals(ExpectedName, StringComparison.Ordinal);
     }
 
     internal sealed partial class NameFilterCaseInsensitive : NameFilter
     {
         public NameFilterCaseInsensitive(string expectedName)
-            : base(expectedName)
-        {
-        }
+            : base(expectedName) { }
 
-        public sealed override bool Matches(string name) => name.Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);
+        public sealed override bool Matches(string name) =>
+            name.Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);
     }
 }

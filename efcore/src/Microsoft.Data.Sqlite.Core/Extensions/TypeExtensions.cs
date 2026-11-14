@@ -6,10 +6,10 @@ namespace System
 {
     internal static class TypeExtensions
     {
-        public static Type UnwrapEnumType(this Type type)
-            => type.IsEnum ? Enum.GetUnderlyingType(type) : type;
+        public static Type UnwrapEnumType(this Type type) =>
+            type.IsEnum ? Enum.GetUnderlyingType(type) : type;
 
-        public static Type UnwrapNullableType(this Type type)
-            => Nullable.GetUnderlyingType(type) ?? type;
+        public static Type UnwrapNullableType(this Type type) =>
+            Nullable.GetUnderlyingType(type) ?? type;
     }
 }

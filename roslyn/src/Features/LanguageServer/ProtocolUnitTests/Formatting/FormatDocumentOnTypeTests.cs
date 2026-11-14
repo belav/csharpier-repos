@@ -16,15 +16,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
 {
     public class FormatDocumentOnTypeTests : AbstractLanguageServerProtocolTests
     {
-        public FormatDocumentOnTypeTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public FormatDocumentOnTypeTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Theory, CombinatorialData]
         public async Task TestFormatDocumentOnTypeAsync(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -33,7 +32,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -41,12 +40,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
         {
     }
 }";
-            await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+            await using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                mutatingLspWorkspace
+            );
             var characterTyped = ";";
             var locationTyped = testLspServer.GetLocations("type").Single();
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(locationTyped.Uri)
+                .Single()
+                .GetTextAsync();
 
-            var results = await RunFormatDocumentOnTypeAsync(testLspServer, characterTyped, locationTyped);
+            var results = await RunFormatDocumentOnTypeAsync(
+                testLspServer,
+                characterTyped,
+                locationTyped
+            );
             var actualText = ApplyTextEdits(results, documentText);
             Assert.Equal(expected, actualText);
         }
@@ -55,7 +65,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
         public async Task TestFormatDocumentOnType_UseTabsAsync(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
 	void M()
 	{
@@ -64,7 +74,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
 	}
 }";
             var expected =
-@"class A
+                @"class A
 {
 	void M()
 	{
@@ -72,12 +82,25 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
 		{
 	}
 }";
-            await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+            await using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                mutatingLspWorkspace
+            );
             var characterTyped = ";";
             var locationTyped = testLspServer.GetLocations("type").Single();
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(locationTyped.Uri)
+                .Single()
+                .GetTextAsync();
 
-            var results = await RunFormatDocumentOnTypeAsync(testLspServer, characterTyped, locationTyped, insertSpaces: false, tabSize: 4);
+            var results = await RunFormatDocumentOnTypeAsync(
+                testLspServer,
+                characterTyped,
+                locationTyped,
+                insertSpaces: false,
+                tabSize: 4
+            );
             var actualText = ApplyTextEdits(results, documentText);
             Assert.Equal(expected, actualText);
         }
@@ -87,19 +110,31 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
             string characterTyped,
             LSP.Location locationTyped,
             bool insertSpaces = true,
-            int tabSize = 4)
+            int tabSize = 4
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.DocumentOnTypeFormattingParams, LSP.TextEdit[]>(LSP.Methods.TextDocumentOnTypeFormattingName,
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.DocumentOnTypeFormattingParams,
+                LSP.TextEdit[]
+            >(
+                LSP.Methods.TextDocumentOnTypeFormattingName,
                 CreateDocumentOnTypeFormattingParams(
-                    characterTyped, locationTyped, insertSpaces, tabSize), CancellationToken.None);
+                    characterTyped,
+                    locationTyped,
+                    insertSpaces,
+                    tabSize
+                ),
+                CancellationToken.None
+            );
         }
 
         private static LSP.DocumentOnTypeFormattingParams CreateDocumentOnTypeFormattingParams(
             string characterTyped,
             LSP.Location locationTyped,
             bool insertSpaces,
-            int tabSize)
-            => new LSP.DocumentOnTypeFormattingParams()
+            int tabSize
+        ) =>
+            new LSP.DocumentOnTypeFormattingParams()
             {
                 Position = locationTyped.Range.Start,
                 Character = characterTyped,
@@ -108,7 +143,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
                 {
                     InsertSpaces = insertSpaces,
                     TabSize = tabSize,
-                }
+                },
             };
     }
 }

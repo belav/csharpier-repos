@@ -10,23 +10,22 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
 
     [ConfigurationCollection(typeof(TransportConfigurationTypeElement))]
-    public sealed class TransportConfigurationTypeElementCollection : ServiceModelConfigurationElementCollection<TransportConfigurationTypeElement>
+    public sealed class TransportConfigurationTypeElementCollection
+        : ServiceModelConfigurationElementCollection<TransportConfigurationTypeElement>
     {
         public TransportConfigurationTypeElementCollection()
-            : base(ConfigurationElementCollectionType.AddRemoveClearMap, null)
-        { }
+            : base(ConfigurationElementCollectionType.AddRemoveClearMap, null) { }
 
-        protected override Object GetElementKey(ConfigurationElement element) 
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             if (element == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
-            TransportConfigurationTypeElement configElementKey = (TransportConfigurationTypeElement)element;
+            TransportConfigurationTypeElement configElementKey =
+                (TransportConfigurationTypeElement)element;
             return configElementKey.Name;
         }
     }
 }
-
-

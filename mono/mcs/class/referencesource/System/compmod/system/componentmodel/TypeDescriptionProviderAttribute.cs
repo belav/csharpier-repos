@@ -1,19 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="TypeDescriptionProviderAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel 
+namespace System.ComponentModel
 {
-
     using System;
     using System.Security.Permissions;
 
     /// <devdoc>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public sealed class TypeDescriptionProviderAttribute : Attribute 
+    public sealed class TypeDescriptionProviderAttribute : Attribute
     {
         private string _typeName;
 
@@ -29,7 +28,7 @@ namespace System.ComponentModel
 
             _typeName = typeName;
         }
-    
+
         /// <devdoc>
         ///     Creates a new TypeDescriptionProviderAttribute object.
         /// </devdoc>
@@ -44,16 +43,12 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     The TypeName property returns the assembly qualified type name 
+        ///     The TypeName property returns the assembly qualified type name
         ///     for the type description provider.
         /// </devdoc>
         public string TypeName
         {
-            get
-            {
-                return _typeName;
-            }
+            get { return _typeName; }
         }
     }
 }
-

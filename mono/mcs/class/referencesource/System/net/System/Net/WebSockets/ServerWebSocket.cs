@@ -21,14 +21,20 @@ namespace System.Net.WebSockets
     {
         private readonly SafeHandle m_SessionHandle;
         private readonly WebSocketProtocolComponent.Property[] m_Properties;
-        
-        public ServerWebSocket(Stream innerStream,
+
+        public ServerWebSocket(
+            Stream innerStream,
             string subProtocol,
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
-            ArraySegment<byte> internalBuffer)
-            : base(innerStream, subProtocol, keepAliveInterval, 
-                WebSocketBuffer.CreateServerBuffer(internalBuffer, receiveBufferSize))
+            ArraySegment<byte> internalBuffer
+        )
+            : base(
+                innerStream,
+                subProtocol,
+                keepAliveInterval,
+                WebSocketBuffer.CreateServerBuffer(internalBuffer, receiveBufferSize)
+            )
         {
             m_Properties = this.InternalBuffer.CreateProperties(false);
             m_SessionHandle = this.CreateWebSocketHandle();
@@ -50,15 +56,20 @@ namespace System.Net.WebSockets
             }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", 
-            Justification = "No arbitrary data controlled by PT code is leaking into native code.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "No arbitrary data controlled by PT code is leaking into native code."
+        )]
         private SafeHandle CreateWebSocketHandle()
         {
             Contract.Assert(m_Properties != null, "'m_Properties' MUST NOT be NULL.");
             SafeWebSocketHandle sessionHandle;
-            WebSocketProtocolComponent.WebSocketCreateServerHandle(m_Properties,
-                m_Properties.Length, 
-                out sessionHandle);
+            WebSocketProtocolComponent.WebSocketCreateServerHandle(
+                m_Properties,
+                m_Properties.Length,
+                out sessionHandle
+            );
             Contract.Assert(sessionHandle != null, "'sessionHandle MUST NOT be NULL.");
 
             return sessionHandle;

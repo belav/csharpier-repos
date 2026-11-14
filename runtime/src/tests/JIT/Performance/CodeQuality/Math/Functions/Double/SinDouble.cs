@@ -14,7 +14,8 @@ namespace Functions
 
         public static void SinDoubleTest()
         {
-            var result = 0.0; var value = -1.5707963267948966;
+            var result = 0.0;
+            var value = -1.5707963267948966;
 
             for (var iteration = 0; iteration < iterations; iteration++)
             {
@@ -26,7 +27,9 @@ namespace Functions
 
             if (diff > doubleEpsilon)
             {
-                throw new Exception($"Expected Result {sinDoubleExpectedResult,20:g17}; Actual Result {result,20:g17}");
+                throw new Exception(
+                    $"Expected Result {sinDoubleExpectedResult, 20:g17}; Actual Result {result, 20:g17}"
+                );
             }
         }
     }

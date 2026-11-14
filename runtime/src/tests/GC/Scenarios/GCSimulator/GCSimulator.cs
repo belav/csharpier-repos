@@ -2,21 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading;
 using LifeTimeFX;
 
 interface PinnedObject
 {
     void CleanUp();
     bool IsPinned();
-
 }
 
 namespace GCSimulator
 {
-       
     class RandomLifeTimeStrategy : LifeTimeStrategy
     {
         private int counter = 0;
@@ -33,21 +31,15 @@ namespace GCSimulator
             shortLifeTime = shortlt;
             mediumDataCount = mdc;
             shortDataCount = sdc;
-
         }
+
         public int MediumLifeTime
         {
-            set
-            {
-                mediumLifeTime = value;
-            }
+            set { mediumLifeTime = value; }
         }
         public int ShortLifeTime
         {
-            set
-            {
-                shortLifeTime = value;
-            }
+            set { shortLifeTime = value; }
         }
 
         public int NextObject(LifeTimeENUM lifeTime)
@@ -60,12 +52,12 @@ namespace GCSimulator
                 case LifeTimeENUM.Medium:
                     return (rand.Next() % mediumDataCount) + shortDataCount;
 
-
                 case LifeTimeENUM.Long:
                     return 0;
             }
             return 0;
         }
+
         public bool ShouldDie(LifeTime o, int index)
         {
             counter++;
@@ -82,16 +74,15 @@ namespace GCSimulator
                     break;
                 case LifeTimeENUM.Long:
                     return false;
-
             }
             return false;
         }
     }
 
     /// <summary>
-    /// we might want to implement a different strategy that decide the life time of the object based on the time 
+    /// we might want to implement a different strategy that decide the life time of the object based on the time
     /// elapsed since the last object access.
-    /// 
+    ///
     /// </summary>
     class TimeBasedLifeTimeStrategy : LifeTimeStrategy
     {
@@ -116,7 +107,6 @@ namespace GCSimulator
 
         public bool ShouldDie(LifeTime o, int index)
         {
-
             LifeTimeENUM lifeTime = o.LifeTime;
             // short objects will live for 20 seconds, long objects will live for more.
             switch (lifeTime)
@@ -124,7 +114,7 @@ namespace GCSimulator
                 case LifeTimeENUM.Short:
                     if (Environment.TickCount - lastShortTickCount > 1) // this is in accureat enumber, since
                     // we will be finsh iterating throuh the short life time object in less than 1 ms , so we need
-                    // to switch either to QueryPeroformanceCounter, or to block the loop for some time through 
+                    // to switch either to QueryPeroformanceCounter, or to block the loop for some time through
                     // Thread.Sleep, the other solution is to increase the number of objects a lot.
                     {
                         lastShortTickCount = Environment.TickCount;
@@ -151,7 +141,6 @@ namespace GCSimulator
 
     class ObjectWrapper : LifeTime, PinnedObject
     {
-
         private bool pinned;
         private bool weakReferenced;
         private GCHandle gcHandle;
@@ -170,38 +159,30 @@ namespace GCSimulator
                 {
                     gcHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
                 }
-                
+
                 if (weakReferenced)
                 {
                     weakRef = new WeakReference(data);
                 }
             }
-
         }
 
         public LifeTimeENUM LifeTime
         {
-            get
-            {
-                return lifeTime;
-            }
-            set
-            {
-                this.lifeTime = value;
-            }
+            get { return lifeTime; }
+            set { this.lifeTime = value; }
         }
 
         public bool IsPinned()
         {
             return pinned;
         }
-        
+
         public bool IsWeak()
         {
             return weakReferenced;
         }
-        
-       
+
         public void CleanUp()
         {
             if (pinned)
@@ -219,7 +200,6 @@ namespace GCSimulator
                 GC.SuppressFinalize(this);
             }
         }
-
 
         ~ObjectWrapper()
         {
@@ -254,46 +234,42 @@ namespace GCSimulator
         private static string strategy = "Random";
 
         private static bool noTimer = false;
-        
+
         private static string objectGraph = "List";
 
-
         private static List<Thread> threadList = new List<Thread>();
+
         public static int Main(string[] args)
         {
-
             bool shouldContinue = ParseArgs(args);
             if (!shouldContinue)
             {
                 return 1;
             }
-                       
+
             int timer = 0;
             // Run the test.
 
             for (int i = 0; i < numThreads; ++i)
             {
-                Thread thread = new Thread(RunTest);                               
-                threadList.Add(thread);                                
+                Thread thread = new Thread(RunTest);
+                threadList.Add(thread);
                 thread.Start();
-                
             }
 
             foreach (Thread t in threadList)
             {
                 t.Join();
             }
-            
+
             return 100;
         }
-        
 
         public static void RunTest(object threadInfoObj)
         {
-            
             // Allocate the objects.
-            lifeTimeManager = new ObjectLifeTimeManager();                                    
-            LifeTimeStrategy ltStrategy;           
+            lifeTimeManager = new ObjectLifeTimeManager();
+            LifeTimeStrategy ltStrategy;
 
             int threadMediumLifeTime = mediumLifeTime;
             int threadShortLifeTime = shortLifeTime;
@@ -305,23 +281,27 @@ namespace GCSimulator
             float threadPercentWeak = percentWeak;
             bool threadRunFinalizer = runFinalizer;
             string threadStrategy = strategy;
-            string threadObjectGraph = objectGraph;                       
-            
+            string threadObjectGraph = objectGraph;
+
             if (threadObjectGraph.ToLower() == "tree")
             {
-                lifeTimeManager.SetObjectContainer(new BinaryTreeObjectContainer<LifeTime>());   
+                lifeTimeManager.SetObjectContainer(new BinaryTreeObjectContainer<LifeTime>());
             }
             else
             {
                 lifeTimeManager.SetObjectContainer(new ArrayObjectContainer<LifeTime>());
             }
-            
-            lifeTimeManager.Init(threadShortDataCount + threadMediumDataCount);    
-            
 
-            if (threadStrategy.ToLower()=="random")
+            lifeTimeManager.Init(threadShortDataCount + threadMediumDataCount);
+
+            if (threadStrategy.ToLower() == "random")
             {
-                ltStrategy = new RandomLifeTimeStrategy(threadMediumLifeTime, threadShortLifeTime, threadMediumDataCount, threadShortDataCount);
+                ltStrategy = new RandomLifeTimeStrategy(
+                    threadMediumLifeTime,
+                    threadShortLifeTime,
+                    threadMediumDataCount,
+                    threadShortDataCount
+                );
             }
             else
             {
@@ -332,21 +312,21 @@ namespace GCSimulator
             lifeTimeManager.LifeTimeStrategy = ltStrategy;
             lifeTimeManager.objectDied += new ObjectDiedEventHandler(objectDied);
 
-            for (int i=0; i < threadShortDataCount + threadMediumDataCount; ++i)
+            for (int i = 0; i < threadShortDataCount + threadMediumDataCount; ++i)
             {
                 bool pinned = false;
-                if (threadPercentPinned!=0)
+                if (threadPercentPinned != 0)
                 {
-                    pinned = (i % ((int)(1/threadPercentPinned))==0);
+                    pinned = (i % ((int)(1 / threadPercentPinned)) == 0);
                 }
 
                 bool weak = false;
-                if (threadPercentWeak!=0)
+                if (threadPercentWeak != 0)
                 {
-                    weak = (i % ((int)(1/threadPercentWeak))==0);
+                    weak = (i % ((int)(1 / threadPercentWeak)) == 0);
                 }
 
-                ObjectWrapper oWrapper = new ObjectWrapper(threadRunFinalizer, pinned, weak);                
+                ObjectWrapper oWrapper = new ObjectWrapper(threadRunFinalizer, pinned, weak);
                 if (i < threadShortDataCount)
                 {
                     oWrapper.DataSize = threadShortDataSize;
@@ -355,19 +335,17 @@ namespace GCSimulator
                 else
                 {
                     oWrapper.DataSize = threadMediumDataSize;
-                    oWrapper.LifeTime = LifeTimeENUM.Medium;                
-                }                
+                    oWrapper.LifeTime = LifeTimeENUM.Medium;
+                }
 
                 lifeTimeManager.AddObject(oWrapper, i);
             }
 
             for (int i = 0; i < countIters; ++i)
             {
-            
                 // Run the test.
                 lifeTimeManager.Run();
             }
-
         }
 
         private static void objectDied(LifeTime lifeTime, int index)
@@ -381,13 +359,14 @@ namespace GCSimulator
             bool weakReferenced = oWrapper.IsWeak();
             bool pinned = oWrapper.IsPinned();
             if (pinned)
-            { 
-                oWrapper.CleanUp(); 
+            {
+                oWrapper.CleanUp();
             }
-                        
+
             oWrapper = new ObjectWrapper(runFinalizer, pinned, weakReferenced);
             oWrapper.LifeTime = lifeTimeEnum;
-            oWrapper.DataSize = lifeTime.LifeTime == LifeTimeENUM.Short ? shortDataSize : mediumDataSize;
+            oWrapper.DataSize =
+                lifeTime.LifeTime == LifeTimeENUM.Short ? shortDataSize : mediumDataSize;
             lifeTimeManager.AddObject(oWrapper, index);
         }
 
@@ -399,7 +378,6 @@ namespace GCSimulator
         /// </summary>
         public static bool ParseArgs(string[] args)
         {
-
             for (int i = 0; i < args.Length; ++i)
             {
                 string currentArg = args[i];
@@ -447,7 +425,6 @@ namespace GCSimulator
                     shortDataCount = Int32.Parse(currentArgValue);
                 }
 
-
                 if (currentArg.StartsWith("lifetime") || currentArg.Equals("lt"))
                 {
                     currentArgValue = args[++i];
@@ -476,19 +453,19 @@ namespace GCSimulator
                     currentArgValue = args[++i];
                     strategy = currentArgValue;
                 }
-                
+
                 if (currentArg.StartsWith("notimer"))
                 {
                     noTimer = true;
                 }
-                
-                if (currentArg.StartsWith("dataweak") || currentArg.StartsWith("dw") )
+
+                if (currentArg.StartsWith("dataweak") || currentArg.StartsWith("dw"))
                 {
                     currentArgValue = args[++i];
                     percentWeak = float.Parse(currentArgValue);
                 }
-                
-                if (currentArg.StartsWith("objectgraph") || currentArg.StartsWith("og") )
+
+                if (currentArg.StartsWith("objectgraph") || currentArg.StartsWith("og"))
                 {
                     currentArgValue = args[++i];
                     objectGraph = currentArgValue;
@@ -500,23 +477,60 @@ namespace GCSimulator
 
         public static void Usage()
         {
-            Console.WriteLine("GCSimulator [-?] [-i <num Iterations>] [-dz <data size in bytes>] [-lt <life time>] [-t <num threads>] [-f] [-dp <percent data pinned>]");
+            Console.WriteLine(
+                "GCSimulator [-?] [-i <num Iterations>] [-dz <data size in bytes>] [-lt <life time>] [-t <num threads>] [-f] [-dp <percent data pinned>]"
+            );
             Console.WriteLine("Options");
             Console.WriteLine("-? Display the usage and exit");
-            Console.WriteLine("-i [-iter] <num iterations> : specify number of iterations for the test, default is " + countIters);
-            Console.WriteLine("-dz [-datasize] <data size> : specify the data size in bytes, default is " + mediumDataSize);
-            Console.WriteLine("-sdz [sdatasize] <data size> : specify the short lived  data size in bytes, default is " + shortDataSize);
-            Console.WriteLine("-dc [datacount] <data count> : specify the medium lived  data count , default is " + mediumDataCount);
-            Console.WriteLine("-sdc [sdatacount] <data count> : specify the short lived  data count, default is " + shortDataCount);
-            Console.WriteLine("-lt [-lifetime] <number> : specify the life time of the objects, default is " + shortLifeTime);
-            Console.WriteLine("-t [-threads] <number of threads> : specifiy number of threads , default is " + numThreads);
-            Console.WriteLine("-f [-fin]  : specify whether to do allocation in finalizer or not, default is no");
-            Console.WriteLine("-dp [-datapinned] <percent of data pinned> : specify the percentage of data that we want to pin, default is " + percentPinned);
-            Console.WriteLine("-dw [-dataweak] <percent of data weak referenced> : specify the percentage of data that we want to weak reference, default is " + percentWeak);
-            Console.WriteLine("-strategy < indicate the strategy for deciding when the objects should die, right now we support only Random and Time strategy, default is Random");
-            Console.WriteLine("-og [-objectgraph] <List|Tree> : specify whether to use a List- or Tree-based object graph, default is " + objectGraph);                
-            Console.WriteLine("-notimer < indicate that we do not want to run the performance timer and output any results , default is no");                
+            Console.WriteLine(
+                "-i [-iter] <num iterations> : specify number of iterations for the test, default is "
+                    + countIters
+            );
+            Console.WriteLine(
+                "-dz [-datasize] <data size> : specify the data size in bytes, default is "
+                    + mediumDataSize
+            );
+            Console.WriteLine(
+                "-sdz [sdatasize] <data size> : specify the short lived  data size in bytes, default is "
+                    + shortDataSize
+            );
+            Console.WriteLine(
+                "-dc [datacount] <data count> : specify the medium lived  data count , default is "
+                    + mediumDataCount
+            );
+            Console.WriteLine(
+                "-sdc [sdatacount] <data count> : specify the short lived  data count, default is "
+                    + shortDataCount
+            );
+            Console.WriteLine(
+                "-lt [-lifetime] <number> : specify the life time of the objects, default is "
+                    + shortLifeTime
+            );
+            Console.WriteLine(
+                "-t [-threads] <number of threads> : specifiy number of threads , default is "
+                    + numThreads
+            );
+            Console.WriteLine(
+                "-f [-fin]  : specify whether to do allocation in finalizer or not, default is no"
+            );
+            Console.WriteLine(
+                "-dp [-datapinned] <percent of data pinned> : specify the percentage of data that we want to pin, default is "
+                    + percentPinned
+            );
+            Console.WriteLine(
+                "-dw [-dataweak] <percent of data weak referenced> : specify the percentage of data that we want to weak reference, default is "
+                    + percentWeak
+            );
+            Console.WriteLine(
+                "-strategy < indicate the strategy for deciding when the objects should die, right now we support only Random and Time strategy, default is Random"
+            );
+            Console.WriteLine(
+                "-og [-objectgraph] <List|Tree> : specify whether to use a List- or Tree-based object graph, default is "
+                    + objectGraph
+            );
+            Console.WriteLine(
+                "-notimer < indicate that we do not want to run the performance timer and output any results , default is no"
+            );
         }
-
     }
 }

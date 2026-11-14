@@ -12,7 +12,10 @@ namespace System.Web.Mvc
 {
     internal static class ControllerDescriptorExtensions
     {
-        public static string GetAreaName(this ControllerDescriptor controllerDescriptor, RouteAreaAttribute area)
+        public static string GetAreaName(
+            this ControllerDescriptor controllerDescriptor,
+            RouteAreaAttribute area
+        )
         {
             if (area == null)
             {
@@ -28,15 +31,18 @@ namespace System.Web.Mvc
                 return controllerDescriptor.ControllerType.Namespace.Split('.').Last();
             }
 
-            throw Error.InvalidOperation(MvcResources.AttributeRouting_CouldNotInferAreaNameFromMissingNamespace, controllerDescriptor.ControllerName);
+            throw Error.InvalidOperation(
+                MvcResources.AttributeRouting_CouldNotInferAreaNameFromMissingNamespace,
+                controllerDescriptor.ControllerName
+            );
         }
 
         public static RouteAreaAttribute GetAreaFrom(this ControllerDescriptor controllerDescriptor)
         {
-            RouteAreaAttribute areaAttribute =
-                controllerDescriptor.GetCustomAttributes(typeof(RouteAreaAttribute), inherit: true)
-                                    .Cast<RouteAreaAttribute>()
-                                    .FirstOrDefault();
+            RouteAreaAttribute areaAttribute = controllerDescriptor
+                .GetCustomAttributes(typeof(RouteAreaAttribute), inherit: true)
+                .Cast<RouteAreaAttribute>()
+                .FirstOrDefault();
             return areaAttribute;
         }
     }

@@ -34,12 +34,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 TelemetrySession telemetrySession,
                 IPerformanceTrackerService diagnosticAnalyzerPerformanceTracker,
                 IGlobalOperationNotificationService globalOperationNotificationService,
-                CancellationToken shutdownToken)
+                CancellationToken shutdownToken
+            )
                 : base(
                     AsynchronousOperationListenerProvider.NullListener,
                     globalOperationNotificationService,
                     backOffTimeSpan: TimeSpan.FromMinutes(2),
-                    shutdownToken)
+                    shutdownToken
+                )
             {
                 _event = new SemaphoreSlim(initialCount: 0);
 
@@ -60,25 +62,44 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (!_telemetrySession.IsOptedIn)
                     return Task.CompletedTask;
 
-                using (RoslynLogger.LogBlock(FunctionId.Diagnostics_GeneratePerformaceReport, CancellationToken))
+                using (
+                    RoslynLogger.LogBlock(
+                        FunctionId.Diagnostics_GeneratePerformaceReport,
+                        CancellationToken
+                    )
+                )
                 {
                     foreach (var forSpanAnalysis in new[] { false, true })
                     {
-                        using var pooledObject = SharedPools.Default<List<AnalyzerInfoForPerformanceReporting>>().GetPooledObject();
-                        _diagnosticAnalyzerPerformanceTracker.GenerateReport(pooledObject.Object, forSpanAnalysis);
+                        using var pooledObject = SharedPools
+                            .Default<List<AnalyzerInfoForPerformanceReporting>>()
+                            .GetPooledObject();
+                        _diagnosticAnalyzerPerformanceTracker.GenerateReport(
+                            pooledObject.Object,
+                            forSpanAnalysis
+                        );
                         var isInternalUser = _telemetrySession.IsUserMicrosoftInternal;
 
                         foreach (var analyzerInfo in pooledObject.Object)
                         {
                             // this will report telemetry under VS. this will let us see how accurate our performance tracking is
-                            RoslynLogger.Log(FunctionId.Diagnostics_AnalyzerPerformanceInfo2, KeyValueLogMessage.Create(m =>
-                            {
-                                // since it is telemetry, we hash analyzer name if it is not builtin analyzer
-                                m[nameof(analyzerInfo.AnalyzerId)] = isInternalUser ? analyzerInfo.AnalyzerId : analyzerInfo.PIISafeAnalyzerId;
-                                m[nameof(analyzerInfo.Average)] = analyzerInfo.Average;
-                                m[nameof(analyzerInfo.AdjustedStandardDeviation)] = analyzerInfo.AdjustedStandardDeviation;
-                                m[nameof(forSpanAnalysis)] = forSpanAnalysis;
-                            }, LogLevel.Debug));
+                            RoslynLogger.Log(
+                                FunctionId.Diagnostics_AnalyzerPerformanceInfo2,
+                                KeyValueLogMessage.Create(
+                                    m =>
+                                    {
+                                        // since it is telemetry, we hash analyzer name if it is not builtin analyzer
+                                        m[nameof(analyzerInfo.AnalyzerId)] = isInternalUser
+                                            ? analyzerInfo.AnalyzerId
+                                            : analyzerInfo.PIISafeAnalyzerId;
+                                        m[nameof(analyzerInfo.Average)] = analyzerInfo.Average;
+                                        m[nameof(analyzerInfo.AdjustedStandardDeviation)] =
+                                            analyzerInfo.AdjustedStandardDeviation;
+                                        m[nameof(forSpanAnalysis)] = forSpanAnalysis;
+                                    },
+                                    LogLevel.Debug
+                                )
+                            );
                         }
                     }
 

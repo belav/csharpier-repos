@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
     [UseExportProvider]
     public class SpellCheckFixerProviderTests : AbstractSpellCheckFixerProviderTests
     {
-        protected override TestWorkspace CreateWorkspace(string content)
-            => TestWorkspace.CreateCSharp(content);
+        protected override TestWorkspace CreateWorkspace(string content) =>
+            TestWorkspace.CreateCSharp(content);
 
         [WpfFact]
         public async Task TestRenameClassName()
@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 {
                     public CorrectlySpelled() { }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                         var v2 = "wrd";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 {
                     public Orginal() { }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 {
                     public Class() { }
                 }
-                """);
+                """
+            );
         }
     }
 }

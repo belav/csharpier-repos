@@ -208,7 +208,10 @@ namespace System.Linq.Expressions.Interpreter
                 HashSet<LabelScopeInfo>? set = _definitions as HashSet<LabelScopeInfo>;
                 if (set == null)
                 {
-                    _definitions = set = new HashSet<LabelScopeInfo>() { (LabelScopeInfo)_definitions };
+                    _definitions = set = new HashSet<LabelScopeInfo>()
+                    {
+                        (LabelScopeInfo)_definitions,
+                    };
                 }
                 set.Add(scope);
             }
@@ -216,7 +219,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private bool HasMultipleDefinitions => _definitions is HashSet<LabelScopeInfo>;
 
-        internal static T? CommonNode<T>(T first, T second, Func<T, T> parent) where T : class
+        internal static T? CommonNode<T>(T first, T second, Func<T, T> parent)
+            where T : class
         {
             EqualityComparer<T> cmp = EqualityComparer<T>.Default;
             if (cmp.Equals(first, second))

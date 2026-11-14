@@ -2,9 +2,9 @@
 
 public class Class2
 {
-	public static void Main ()
-	{
-		var writer = new Class1();
-		byte[] bytes = writer.Finalize();
-	}
+    public static void Main()
+    {
+        var writer = new Class1();
+        byte[] bytes = writer.Finalize();
+    }
 }

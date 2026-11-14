@@ -24,10 +24,19 @@ namespace Microsoft.Extensions.Primitives
             var thirdCancellationToken = thirdCancellationTokenSource.Token;
 
             var firstCancellationChangeToken = new CancellationChangeToken(firstCancellationToken);
-            var secondCancellationChangeToken = new CancellationChangeToken(secondCancellationToken);
+            var secondCancellationChangeToken = new CancellationChangeToken(
+                secondCancellationToken
+            );
             var thirdCancellationChangeToken = new CancellationChangeToken(thirdCancellationToken);
 
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstCancellationChangeToken, secondCancellationChangeToken, thirdCancellationChangeToken });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken>
+                {
+                    firstCancellationChangeToken,
+                    secondCancellationChangeToken,
+                    thirdCancellationChangeToken,
+                }
+            );
             var count1 = 0;
             var count2 = 0;
             compositeChangeToken.RegisterChangeCallback(_ => count1++, null);
@@ -43,7 +52,10 @@ namespace Microsoft.Extensions.Primitives
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void HasChanged_IsTrue_IfAnyTokenHasChanged()
         {
             // Arrange
@@ -54,14 +66,24 @@ namespace Microsoft.Extensions.Primitives
             secondChangeToken.Setup(t => t.HasChanged).Returns(true);
 
             // Act
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object, thirdChangeToken.Object });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken>
+                {
+                    firstChangeToken.Object,
+                    secondChangeToken.Object,
+                    thirdChangeToken.Object,
+                }
+            );
 
             // Assert
             Assert.True(compositeChangeToken.HasChanged);
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void HasChanged_IsFalse_IfNoTokenHasChanged()
         {
             // Arrange
@@ -69,14 +91,19 @@ namespace Microsoft.Extensions.Primitives
             var secondChangeToken = new Mock<IChangeToken>();
 
             // Act
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object });            
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object }
+            );
 
             // Assert
             Assert.False(compositeChangeToken.HasChanged);
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void ActiveChangeCallbacks_IsTrue_IfAnyTokenHasActiveChangeCallbacks()
         {
             // Arrange
@@ -86,21 +113,33 @@ namespace Microsoft.Extensions.Primitives
 
             secondChangeToken.Setup(t => t.ActiveChangeCallbacks).Returns(true);
 
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object, thirdChangeToken.Object });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken>
+                {
+                    firstChangeToken.Object,
+                    secondChangeToken.Object,
+                    thirdChangeToken.Object,
+                }
+            );
 
             // Act & Assert
             Assert.True(compositeChangeToken.ActiveChangeCallbacks);
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void ActiveChangeCallbacks_IsFalse_IfNoTokenHasActiveChangeCallbacks()
         {
             // Arrange
             var firstChangeToken = new Mock<IChangeToken>();
             var secondChangeToken = new Mock<IChangeToken>();
 
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object }
+            );
 
             // Act & Assert
             Assert.False(compositeChangeToken.ActiveChangeCallbacks);
@@ -125,7 +164,9 @@ namespace Microsoft.Extensions.Primitives
                 event1.WaitOne(5000);
             };
 
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { cancellationChangeToken });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken> { cancellationChangeToken }
+            );
             compositeChangeToken.RegisterChangeCallback(callback, null);
 
             // Act
@@ -148,7 +189,7 @@ namespace Microsoft.Extensions.Primitives
             // Assert
             Assert.Equal(1, count);
         }
-        
+
         [Fact]
         public void ShouldNotCollectDisposablesIfChangedTokenEncountered()
         {
@@ -157,10 +198,23 @@ namespace Microsoft.Extensions.Primitives
             var secondCancellationTokenSource = new CancellationTokenSource();
             var thirdCancellationTokenSource = new CancellationTokenSource();
             var count = 0;
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> {
-                new ProxyCancellationChangeToken(firstCancellationTokenSource.Token, disposing: () => count++),
-                new ProxyCancellationChangeToken(secondCancellationTokenSource.Token, disposing: () => count++),
-                new ProxyCancellationChangeToken(thirdCancellationTokenSource.Token, disposing: () => count++) });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken>
+                {
+                    new ProxyCancellationChangeToken(
+                        firstCancellationTokenSource.Token,
+                        disposing: () => count++
+                    ),
+                    new ProxyCancellationChangeToken(
+                        secondCancellationTokenSource.Token,
+                        disposing: () => count++
+                    ),
+                    new ProxyCancellationChangeToken(
+                        thirdCancellationTokenSource.Token,
+                        disposing: () => count++
+                    ),
+                }
+            );
 
             // Act
             firstCancellationTokenSource.Cancel();
@@ -177,9 +231,15 @@ namespace Microsoft.Extensions.Primitives
             // Arrange
             var firstCancellationTokenSource = new CancellationTokenSource();
             var secondCancellationTokenSource = new CancellationTokenSource();
-            var firstCancellationChangeToken = new CancellationChangeToken(firstCancellationTokenSource.Token);
-            var secondCancellationChangeToken = new CancellationChangeToken(secondCancellationTokenSource.Token);
-            var compositeChangeToken = new CompositeChangeToken(new[] { firstCancellationChangeToken, secondCancellationChangeToken });
+            var firstCancellationChangeToken = new CancellationChangeToken(
+                firstCancellationTokenSource.Token
+            );
+            var secondCancellationChangeToken = new CancellationChangeToken(
+                secondCancellationTokenSource.Token
+            );
+            var compositeChangeToken = new CompositeChangeToken(
+                new[] { firstCancellationChangeToken, secondCancellationChangeToken }
+            );
 
             var manualResetEvent = new ManualResetEvent(false);
             compositeChangeToken.RegisterChangeCallback(_ => manualResetEvent.WaitOne(5000), null);
@@ -204,13 +264,17 @@ namespace Microsoft.Extensions.Primitives
             _cancellationChangeToken = new CancellationChangeToken(cancellationToken);
             _disposing = disposing;
         }
+
         public bool ActiveChangeCallbacks => _cancellationChangeToken.ActiveChangeCallbacks;
 
         public bool HasChanged => _cancellationChangeToken.HasChanged;
 
         public IDisposable RegisterChangeCallback(Action<object?> callback, object? state)
         {
-            IDisposable registration = _cancellationChangeToken.RegisterChangeCallback(callback, state);
+            IDisposable registration = _cancellationChangeToken.RegisterChangeCallback(
+                callback,
+                state
+            );
             return new Registration(_disposing, registration);
         }
 

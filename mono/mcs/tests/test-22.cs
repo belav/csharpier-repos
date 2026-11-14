@@ -8,39 +8,42 @@
 // This program excercises invocations to methods on structures
 //
 
-struct T {
-	public int a, b;
+struct T
+{
+    public int a,
+        b;
 }
 
-struct S {
-	T t;
+struct S
+{
+    T t;
 
-	public T GetT ()
-	{
-		return t;
-	}
+    public T GetT()
+    {
+        return t;
+    }
 
-	public void Init ()
-	{
-		t.a = 1;
-		t.b = 2;
-	}
+    public void Init()
+    {
+        t.a = 1;
+        t.b = 2;
+    }
 }
 
-class M {
-	public static int Main ()
-	{
-		S s = new S ();
+class M
+{
+    public static int Main()
+    {
+        S s = new S();
 
-		s.Init ();
-		
-		if (s.GetT ().a != 1)
-			return 1;
+        s.Init();
 
-		if (s.GetT ().b != 2)
-			return 2;
+        if (s.GetT().a != 1)
+            return 1;
 
-		return 0;
-	}
+        if (s.GetT().b != 2)
+            return 2;
+
+        return 0;
+    }
 }
-		

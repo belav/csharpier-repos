@@ -10,7 +10,6 @@
 **
 ===========================================================*/
 
-
 namespace System.Collections
 {
     // Useful base class for typed read/write collections where items derive from object
@@ -169,40 +168,22 @@ namespace System.Collections
             return currentValue;
         }
 
-        protected virtual void OnSet(object key, object? oldValue, object? newValue)
-        {
-        }
+        protected virtual void OnSet(object key, object? oldValue, object? newValue) { }
 
-        protected virtual void OnInsert(object key, object? value)
-        {
-        }
+        protected virtual void OnInsert(object key, object? value) { }
 
-        protected virtual void OnClear()
-        {
-        }
+        protected virtual void OnClear() { }
 
-        protected virtual void OnRemove(object key, object? value)
-        {
-        }
+        protected virtual void OnRemove(object key, object? value) { }
 
-        protected virtual void OnValidate(object key, object? value)
-        {
-        }
+        protected virtual void OnValidate(object key, object? value) { }
 
-        protected virtual void OnSetComplete(object key, object? oldValue, object? newValue)
-        {
-        }
+        protected virtual void OnSetComplete(object key, object? oldValue, object? newValue) { }
 
-        protected virtual void OnInsertComplete(object key, object? value)
-        {
-        }
+        protected virtual void OnInsertComplete(object key, object? value) { }
 
-        protected virtual void OnClearComplete()
-        {
-        }
+        protected virtual void OnClearComplete() { }
 
-        protected virtual void OnRemoveComplete(object key, object? value)
-        {
-        }
+        protected virtual void OnRemoveComplete(object key, object? value) { }
     }
 }

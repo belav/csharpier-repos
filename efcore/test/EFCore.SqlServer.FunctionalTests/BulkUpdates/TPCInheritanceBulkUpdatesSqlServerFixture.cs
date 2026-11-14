@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public class TPCInheritanceBulkUpdatesSqlServerFixture : TPCInheritanceBulkUpdatesFixture
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-    public override bool UseGeneratedKeys
-        => false;
+    public override bool UseGeneratedKeys => false;
 }

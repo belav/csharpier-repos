@@ -17,18 +17,21 @@ internal class MefServiceBrokerOfExportedServices : ServiceBrokerOfExportedServi
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public MefServiceBrokerOfExportedServices()
-    {
-    }
+    public MefServiceBrokerOfExportedServices() { }
 
     public void SetContainer(GlobalBrokeredServiceContainer container)
     {
         _containerTask = Task.FromResult(container);
     }
 
-    protected override Task<GlobalBrokeredServiceContainer> GetBrokeredServiceContainerAsync(CancellationToken cancellationToken)
+    protected override Task<GlobalBrokeredServiceContainer> GetBrokeredServiceContainerAsync(
+        CancellationToken cancellationToken
+    )
     {
-        Contract.ThrowIfNull(_containerTask, $"{nameof(SetContainer)} should have already been called.");
+        Contract.ThrowIfNull(
+            _containerTask,
+            $"{nameof(SetContainer)} should have already been called."
+        );
         return _containerTask;
     }
 }

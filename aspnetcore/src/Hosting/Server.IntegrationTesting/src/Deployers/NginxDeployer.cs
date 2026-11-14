@@ -109,8 +109,7 @@ public class NginxDeployer : SelfHostDeployer
 
     private static string GetUserName()
     {
-        var retVal =
-            Environment.GetEnvironmentVariable("LOGNAME")
+        var retVal = Environment.GetEnvironmentVariable("LOGNAME")
             ?? Environment.GetEnvironmentVariable("USER")
             ?? Environment.GetEnvironmentVariable("USERNAME");
 
@@ -141,8 +140,7 @@ public class NginxDeployer : SelfHostDeployer
     {
         using (Logger.BeginScope("SetupNginx"))
         {
-            var userName =
-                GetUserName()
+            var userName = GetUserName()
                 ?? throw new InvalidOperationException("Could not identify the current username");
             // copy nginx.conf template and replace pertinent information
             var pidFile = Path.Combine(

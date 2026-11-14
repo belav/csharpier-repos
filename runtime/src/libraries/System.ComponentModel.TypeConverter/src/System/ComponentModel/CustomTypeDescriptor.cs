@@ -18,9 +18,7 @@ namespace System.ComponentModel
         /// non-null, CustomTypeDescriptor calls the parent's version of
         /// the method.
         /// </summary>
-        protected CustomTypeDescriptor()
-        {
-        }
+        protected CustomTypeDescriptor() { }
 
         /// <summary>
         /// Creates a new CustomTypeDescriptor object. There are two versions
@@ -161,7 +159,11 @@ namespace System.ComponentModel
         /// If no parent is provided,this will return an empty
         /// property collection.
         /// </summary>
-        [RequiresUnreferencedCode(PropertyDescriptor.PropertyDescriptorPropertyTypeMessage + " " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
+        [RequiresUnreferencedCode(
+            PropertyDescriptor.PropertyDescriptorPropertyTypeMessage
+                + " "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
         public virtual PropertyDescriptorCollection GetProperties(Attribute[]? attributes)
         {
             if (_parent != null)
@@ -179,6 +181,7 @@ namespace System.ComponentModel
         /// returned. Returning null from this method causes the TypeDescriptor object
         /// to use its default type description services.
         /// </summary>
-        public virtual object? GetPropertyOwner(PropertyDescriptor? pd) => _parent?.GetPropertyOwner(pd);
+        public virtual object? GetPropertyOwner(PropertyDescriptor? pd) =>
+            _parent?.GetPropertyOwner(pd);
     }
 }

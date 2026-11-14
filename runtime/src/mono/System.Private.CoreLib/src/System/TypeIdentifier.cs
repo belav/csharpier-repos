@@ -42,10 +42,7 @@ namespace System
     //
     internal interface ITypeName : IEquatable<ITypeName>
     {
-        string DisplayName
-        {
-            get;
-        }
+        string DisplayName { get; }
 
         // add a nested name under this one.
         ITypeName NestedName(ITypeIdentifier innerName);
@@ -56,10 +53,7 @@ namespace System
     // converted to internal form without loss of information.
     internal interface ITypeIdentifier : ITypeName
     {
-        string InternalName
-        {
-            get;
-        }
+        string InternalName { get; }
     }
 
     internal static class TypeNames
@@ -100,13 +94,15 @@ namespace System
                 this.displayName = displayName;
             }
 
-            public override string DisplayName { get { return displayName; } }
+            public override string DisplayName
+            {
+                get { return displayName; }
+            }
 
             public override ITypeName NestedName(ITypeIdentifier innerName)
             {
                 return new Display(DisplayName + "+" + innerName.DisplayName);
             }
-
         }
     }
 
@@ -122,7 +118,10 @@ namespace System
             return new Internal(internalName);
         }
 
-        internal static ITypeIdentifier FromInternal(string internalNameSpace, ITypeIdentifier typeName)
+        internal static ITypeIdentifier FromInternal(
+            string internalNameSpace,
+            ITypeIdentifier typeName
+        )
         {
             return new Internal(internalNameSpace, typeName);
         }
@@ -186,13 +185,20 @@ namespace System
         private sealed class NoEscape : TypeNames.ATypeName, ITypeIdentifier
         {
             private readonly string simpleName;
+
             internal NoEscape(string simpleName)
             {
                 this.simpleName = simpleName;
             }
 
-            public override string DisplayName { get { return simpleName; } }
-            public string InternalName { get { return simpleName; } }
+            public override string DisplayName
+            {
+                get { return simpleName; }
+            }
+            public string InternalName
+            {
+                get { return simpleName; }
+            }
 
             public override ITypeName NestedName(ITypeIdentifier innerName)
             {

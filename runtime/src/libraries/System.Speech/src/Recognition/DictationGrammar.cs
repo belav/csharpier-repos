@@ -17,14 +17,12 @@ namespace System.Speech.Recognition
         #region Constructors
 
         // Load the generic dictation language model.
-        public DictationGrammar() : base(s_defaultDictationUri, null, null)
-        {
-        }
+        public DictationGrammar()
+            : base(s_defaultDictationUri, null, null) { }
 
         // Load a specific topic. The topic is of the form "grammar:dictation#topic"
-        public DictationGrammar(string topic) : base(new Uri(topic, UriKind.RelativeOrAbsolute), null, null)
-        {
-        }
+        public DictationGrammar(string topic)
+            : base(new Uri(topic, UriKind.RelativeOrAbsolute), null, null) { }
 
         #endregion
 

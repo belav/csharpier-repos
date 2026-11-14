@@ -17,9 +17,7 @@ namespace System.Data.Common
         private string? _dataSetColumnName;
         private string? _sourceColumnName;
 
-        public DataColumnMapping()
-        {
-        }
+        public DataColumnMapping() { }
 
         public DataColumnMapping(string? sourceColumn, string? dataSetColumn)
         {
@@ -37,14 +35,8 @@ namespace System.Data.Common
 
         internal DataColumnMappingCollection? Parent
         {
-            get
-            {
-                return _parent;
-            }
-            set
-            {
-                _parent = value;
-            }
+            get { return _parent; }
+            set { _parent = value; }
         }
 
         [DefaultValue("")]
@@ -71,13 +63,37 @@ namespace System.Data.Common
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public DataColumn? GetDataColumnBySchemaAction(DataTable dataTable, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type? dataType, MissingSchemaAction schemaAction)
+        public DataColumn? GetDataColumnBySchemaAction(
+            DataTable dataTable,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type? dataType,
+            MissingSchemaAction schemaAction
+        )
         {
-            return GetDataColumnBySchemaAction(SourceColumn, DataSetColumn, dataTable, dataType, schemaAction);
+            return GetDataColumnBySchemaAction(
+                SourceColumn,
+                DataSetColumn,
+                dataTable,
+                dataType,
+                schemaAction
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public static DataColumn? GetDataColumnBySchemaAction(string? sourceColumn, string? dataSetColumn, DataTable dataTable, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type? dataType, MissingSchemaAction schemaAction)
+        public static DataColumn? GetDataColumnBySchemaAction(
+            string? sourceColumn,
+            string? dataSetColumn,
+            DataTable dataTable,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type? dataType,
+            MissingSchemaAction schemaAction
+        )
         {
             if (null == dataTable)
             {
@@ -88,13 +104,19 @@ namespace System.Data.Common
                 return null;
             }
             DataColumnCollection columns = dataTable.Columns;
-            Debug.Assert(null != columns, "GetDataColumnBySchemaAction: unexpected null DataColumnCollection");
+            Debug.Assert(
+                null != columns,
+                "GetDataColumnBySchemaAction: unexpected null DataColumnCollection"
+            );
 
             int index = columns.IndexOf(dataSetColumn);
             if ((0 <= index) && (index < columns.Count))
             {
                 DataColumn dataColumn = columns[index];
-                Debug.Assert(null != dataColumn, "GetDataColumnBySchemaAction: unexpected null dataColumn");
+                Debug.Assert(
+                    null != dataColumn,
+                    "GetDataColumnBySchemaAction: unexpected null dataColumn"
+                );
 
                 if (!string.IsNullOrEmpty(dataColumn.Expression))
                 {
@@ -109,10 +131,26 @@ namespace System.Data.Common
                 throw ADP.ColumnSchemaMismatch(sourceColumn, dataType, dataColumn);
             }
 
-            return CreateDataColumnBySchemaAction(sourceColumn, dataSetColumn, dataTable, dataType, schemaAction);
+            return CreateDataColumnBySchemaAction(
+                sourceColumn,
+                dataSetColumn,
+                dataTable,
+                dataType,
+                schemaAction
+            );
         }
 
-        internal static DataColumn? CreateDataColumnBySchemaAction(string? sourceColumn, string? dataSetColumn, DataTable dataTable, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type? dataType, MissingSchemaAction schemaAction)
+        internal static DataColumn? CreateDataColumnBySchemaAction(
+            string? sourceColumn,
+            string? dataSetColumn,
+            DataTable dataTable,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type? dataType,
+            MissingSchemaAction schemaAction
+        )
         {
             Debug.Assert(dataTable != null, "Should not call with a null DataTable");
             if (string.IsNullOrEmpty(dataSetColumn))
@@ -140,14 +178,16 @@ namespace System.Data.Common
             return SourceColumn;
         }
 
-        internal sealed class DataColumnMappingConverter : System.ComponentModel.ExpandableObjectConverter
+        internal sealed class DataColumnMappingConverter
+            : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
-            public DataColumnMappingConverter()
-            {
-            }
+            public DataColumnMappingConverter() { }
 
-            public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+            public override bool CanConvertTo(
+                ITypeDescriptorContext? context,
+                [NotNullWhen(true)] Type? destinationType
+            )
             {
                 if (typeof(InstanceDescriptor) == destinationType)
                 {
@@ -156,7 +196,12 @@ namespace System.Data.Common
                 return base.CanConvertTo(context, destinationType);
             }
 
-            public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+            public override object? ConvertTo(
+                ITypeDescriptorContext? context,
+                CultureInfo? culture,
+                object? value,
+                Type destinationType
+            )
             {
                 if (null == destinationType)
                 {

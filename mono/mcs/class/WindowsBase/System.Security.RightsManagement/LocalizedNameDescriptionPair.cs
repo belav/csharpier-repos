@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,32 +26,34 @@
 using System;
 using System.Security;
 
-namespace System.Security.RightsManagement {
+namespace System.Security.RightsManagement
+{
+    [SecurityCritical(SecurityCriticalScope.Everything)]
+    public class LocalizedNameDescriptionPair
+    {
+        public LocalizedNameDescriptionPair(string name, string description)
+        {
+            throw new NotImplementedException();
+        }
 
-	[SecurityCritical (SecurityCriticalScope.Everything)]
-	public class LocalizedNameDescriptionPair
-	{
-		public LocalizedNameDescriptionPair (string name, string description)
-		{
-			throw new NotImplementedException ();
-		}
+        public string Name
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public string Name {
-			get { throw new NotImplementedException (); }
-		}
+        public string Description
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public string Description {
-			get { throw new NotImplementedException (); }
-		}
+        public override bool Equals(object obj)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override bool Equals (object obj)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override int GetHashCode ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

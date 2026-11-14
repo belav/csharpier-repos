@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static IList<ClassificationSpan> ToClassificationSpans(
             this IEnumerable<TaggedText> parts,
             ITextSnapshot textSnapshot,
-            ClassificationTypeMap typeMap)
+            ClassificationTypeMap typeMap
+        )
         {
             var result = new List<ClassificationSpan>();
 
@@ -23,9 +24,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             foreach (var part in parts)
             {
                 var text = part.ToString();
-                result.Add(new ClassificationSpan(
-                    new SnapshotSpan(textSnapshot, new Span(index, text.Length)),
-                    typeMap.GetClassificationType(part.Tag.ToClassificationTypeName())));
+                result.Add(
+                    new ClassificationSpan(
+                        new SnapshotSpan(textSnapshot, new Span(index, text.Length)),
+                        typeMap.GetClassificationType(part.Tag.ToClassificationTypeName())
+                    )
+                );
 
                 index += text.Length;
             }

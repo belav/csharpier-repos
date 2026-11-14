@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuilder<IConventionSkipNavigationBuilder>
+public interface IConventionSkipNavigationBuilder
+    : IConventionPropertyBaseBuilder<IConventionSkipNavigationBuilder>
 {
     /// <summary>
     ///     Gets the navigation property being configured.
@@ -33,7 +34,10 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionSkipNavigationBuilder? HasForeignKey(IConventionForeignKey? foreignKey, bool fromDataAnnotation = false);
+    IConventionSkipNavigationBuilder? HasForeignKey(
+        IConventionForeignKey? foreignKey,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="IConventionSkipNavigation.ForeignKey" /> can be set for this navigation
@@ -57,7 +61,10 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionSkipNavigationBuilder? HasInverse(IConventionSkipNavigation? inverse, bool fromDataAnnotation = false);
+    IConventionSkipNavigationBuilder? HasInverse(
+        IConventionSkipNavigation? inverse,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="IConventionSkipNavigation.Inverse" /> can be set for this navigation
@@ -88,7 +95,10 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionSkipNavigationBuilder? AutoInclude(bool? autoInclude, bool fromDataAnnotation = false);
+    IConventionSkipNavigationBuilder? AutoInclude(
+        bool? autoInclude,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether this navigation can be configured to enable lazy-loading
@@ -108,5 +118,8 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionSkipNavigationBuilder? EnableLazyLoading(bool? lazyLoadingEnabled, bool fromDataAnnotation = false);
+    IConventionSkipNavigationBuilder? EnableLazyLoading(
+        bool? lazyLoadingEnabled,
+        bool fromDataAnnotation = false
+    );
 }

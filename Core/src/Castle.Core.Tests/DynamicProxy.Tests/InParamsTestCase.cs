@@ -14,143 +14,167 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.Linq;
-	using System.Reflection;
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using Castle.DynamicProxy.Tests.Interceptors;
+    using NUnit.Framework;
 
-	using Castle.DynamicProxy.Tests.Interceptors;
+    [TestFixture]
+    public class InParamsTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void By_value_parameter_cannot_modify_argument_var()
+        {
+            var x = new ReadOnlyStruct(1);
+            var original = new ReadOnlyStruct(x.Value);
 
-	using NUnit.Framework;
+            var different = new ReadOnlyStruct(x.Value + 100);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByValue>(
+                new SetArgumentValueInterceptor(0, different)
+            );
+            proxy.Method(x);
 
-	[TestFixture]
-	public class InParamsTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void By_value_parameter_cannot_modify_argument_var()
-		{
-			var x = new ReadOnlyStruct(1);
-			var original = new ReadOnlyStruct(x.Value);
+            Assert.AreEqual(original.Value, x.Value);
+        }
 
-			var different = new ReadOnlyStruct(x.Value + 100);
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IByValue>(new SetArgumentValueInterceptor(0, different));
-			proxy.Method(x);
+        [Test]
+        public void By_referece_In_parameter_cannot_modify_argument_var()
+        {
+            var x = new ReadOnlyStruct(1);
+            var original = new ReadOnlyStruct(x.Value);
 
-			Assert.AreEqual(original.Value, x.Value);
-		}
+            var different = new ReadOnlyStruct(x.Value + 100);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByReadOnlyRef>(
+                new SetArgumentValueInterceptor(0, different)
+            );
+            proxy.Method(in x);
 
-		[Test]
-		public void By_referece_In_parameter_cannot_modify_argument_var()
-		{
-			var x = new ReadOnlyStruct(1);
-			var original = new ReadOnlyStruct(x.Value);
+            Assert.AreEqual(original.Value, x.Value);
+        }
 
-			var different = new ReadOnlyStruct(x.Value + 100);
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IByReadOnlyRef>(new SetArgumentValueInterceptor(0, different));
-			proxy.Method(in x);
+        [Test]
+        public void By_reference_Ref_parameter_can_modify_argument_var()
+        {
+            var x = new ReadOnlyStruct(1);
+            var original = new ReadOnlyStruct(x.Value);
 
-			Assert.AreEqual(original.Value, x.Value);
-		}
+            var different = new ReadOnlyStruct(x.Value + 100);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByRef>(
+                new SetArgumentValueInterceptor(0, different)
+            );
+            proxy.Method(ref x);
 
-		[Test]
-		public void By_reference_Ref_parameter_can_modify_argument_var()
-		{
-			var x = new ReadOnlyStruct(1);
-			var original = new ReadOnlyStruct(x.Value);
+            Assert.AreNotEqual(original.Value, x.Value);
+        }
 
-			var different = new ReadOnlyStruct(x.Value + 100);
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IByRef>(new SetArgumentValueInterceptor(0, different));
-			proxy.Method(ref x);
+        [Test]
+        public void By_reference_Out_parameter_can_modify_argument_var()
+        {
+            var x = new ReadOnlyStruct(1);
+            var original = new ReadOnlyStruct(x.Value);
 
-			Assert.AreNotEqual(original.Value, x.Value);
-		}
+            var different = new ReadOnlyStruct(x.Value + 100);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IOut>(
+                new SetArgumentValueInterceptor(0, different)
+            );
+            proxy.Method(out x);
 
-		[Test]
-		public void By_reference_Out_parameter_can_modify_argument_var()
-		{
-			var x = new ReadOnlyStruct(1);
-			var original = new ReadOnlyStruct(x.Value);
+            Assert.AreNotEqual(original.Value, x.Value);
+        }
 
-			var different = new ReadOnlyStruct(x.Value + 100);
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IOut>(new SetArgumentValueInterceptor(0, different));
-			proxy.Method(out x);
+        // The next four tests verify some of DynamicProxy's assumptions about how the compiler emits code.
+        // If any of them start failing, we need to review the above tests, as well as the implementation of
+        // `Castle.DynamicProxy.Generators.GeneratorUtil.CopyOutAndRefParameters`.
 
-			Assert.AreNotEqual(original.Value, x.Value);
-		}
+        [Test]
+        [TestCase(typeof(IByReadOnlyRef))]
+        public void By_reference_In_parameter_has_ParameterAttributes_In_set(Type type)
+        {
+            var parameter = type.GetMethod("Method").GetParameters()[0];
 
-		// The next four tests verify some of DynamicProxy's assumptions about how the compiler emits code.
-		// If any of them start failing, we need to review the above tests, as well as the implementation of
-		// `Castle.DynamicProxy.Generators.GeneratorUtil.CopyOutAndRefParameters`.
+            Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.In));
+        }
 
-		[Test]
-		[TestCase(typeof(IByReadOnlyRef))]
-		public void By_reference_In_parameter_has_ParameterAttributes_In_set(Type type)
-		{
-			var parameter = type.GetMethod("Method").GetParameters()[0];
+        [Test]
+        [TestCase(typeof(IByValue))]
+        [TestCase(typeof(IByRef))]
+        [TestCase(typeof(IOut))]
+        public void Parameter_other_than_by_reference_In_does_not_have_ParameterAttributes_In_set(
+            Type type
+        )
+        {
+            var parameter = type.GetMethod("Method").GetParameters()[0];
 
-			Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.In));
-		}
+            Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.In));
+        }
 
-		[Test]
-		[TestCase(typeof(IByValue))]
-		[TestCase(typeof(IByRef))]
-		[TestCase(typeof(IOut))]
-		public void Parameter_other_than_by_reference_In_does_not_have_ParameterAttributes_In_set(Type type)
-		{
-			var parameter = type.GetMethod("Method").GetParameters()[0];
+        [Test]
+        [TestCase(typeof(IByReadOnlyRef))]
+        public void By_reference_In_parameter_has_IsReadOnlyAttribute(Type type)
+        {
+            var parameter = type.GetMethod("Method").GetParameters()[0];
 
-			Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.In));
-		}
+            Assert.True(
+                parameter
+                    .GetCustomAttributes()
+                    .Any(a =>
+                        a.GetType().FullName
+                        == "System.Runtime.CompilerServices.IsReadOnlyAttribute"
+                    )
+            );
+        }
 
-		[Test]
-		[TestCase(typeof(IByReadOnlyRef))]
-		public void By_reference_In_parameter_has_IsReadOnlyAttribute(Type type)
-		{
-			var parameter = type.GetMethod("Method").GetParameters()[0];
+        [Test]
+        [TestCase(typeof(IByValue))]
+        [TestCase(typeof(IByRef))]
+        [TestCase(typeof(IOut))]
+        public void Parameter_other_than_by_reference_In_does_not_have_IsReadOnlyAttribute(
+            Type type
+        )
+        {
+            var parameter = type.GetMethod("Method").GetParameters()[0];
 
-			Assert.True(parameter.GetCustomAttributes().Any(a => a.GetType().FullName == "System.Runtime.CompilerServices.IsReadOnlyAttribute"));
-		}
+            Assert.False(
+                parameter
+                    .GetCustomAttributes()
+                    .Any(a =>
+                        a.GetType().FullName
+                        == "System.Runtime.CompilerServices.IsReadOnlyAttribute"
+                    )
+            );
+        }
 
-		[Test]
-		[TestCase(typeof(IByValue))]
-		[TestCase(typeof(IByRef))]
-		[TestCase(typeof(IOut))]
-		public void Parameter_other_than_by_reference_In_does_not_have_IsReadOnlyAttribute(Type type)
-		{
-			var parameter = type.GetMethod("Method").GetParameters()[0];
+        public readonly struct ReadOnlyStruct
+        {
+            private readonly int value;
 
-			Assert.False(parameter.GetCustomAttributes().Any(a => a.GetType().FullName == "System.Runtime.CompilerServices.IsReadOnlyAttribute"));
-		}
+            public ReadOnlyStruct(int value)
+            {
+                this.value = value;
+            }
 
-		public readonly struct ReadOnlyStruct
-		{
-			private readonly int value;
+            public int Value => this.value;
+        }
 
-			public ReadOnlyStruct(int value)
-			{
-				this.value = value;
-			}
+        public interface IByValue
+        {
+            void Method(ReadOnlyStruct arg);
+        }
 
-			public int Value => this.value;
-		}
+        public interface IByReadOnlyRef
+        {
+            void Method(in ReadOnlyStruct arg);
+        }
 
-		public interface IByValue
-		{
-			void Method(ReadOnlyStruct arg);
-		}
+        public interface IByRef
+        {
+            void Method(ref ReadOnlyStruct arg);
+        }
 
-		public interface IByReadOnlyRef
-		{
-			void Method(in ReadOnlyStruct arg);
-		}
-
-		public interface IByRef
-		{
-			void Method(ref ReadOnlyStruct arg);
-		}
-
-		public interface IOut
-		{
-			void Method(out ReadOnlyStruct arg);
-		}
-	}
+        public interface IOut
+        {
+            void Method(out ReadOnlyStruct arg);
+        }
+    }
 }

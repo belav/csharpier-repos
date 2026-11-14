@@ -21,8 +21,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Diagnostics.Add(diagnostic);
         }
 
-        public override void AddAnalyzerDescriptorsAndExecutionTime(ImmutableArray<(DiagnosticDescriptor Descriptor, DiagnosticDescriptorErrorLoggerInfo Info)> descriptors, double totalAnalyzerExecutionTime)
-        {
-        }
+        public override void AddAnalyzerDescriptorsAndExecutionTime(
+            ImmutableArray<(
+                DiagnosticDescriptor Descriptor,
+                DiagnosticDescriptorErrorLoggerInfo Info
+            )> descriptors,
+            double totalAnalyzerExecutionTime
+        ) { }
     }
 }

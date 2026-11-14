@@ -3,9 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text;
-
 using ILCompiler.DependencyAnalysis;
-
 using Internal.Text;
 
 namespace ILCompiler
@@ -19,7 +17,10 @@ namespace ILCompiler
         private readonly string _blobName;
         private readonly IReadOnlyCollection<string> _runtimeOptions;
 
-        public RuntimeConfigurationRootProvider(string blobName, IReadOnlyCollection<string> runtimeOptions)
+        public RuntimeConfigurationRootProvider(
+            string blobName,
+            IReadOnlyCollection<string> runtimeOptions
+        )
         {
             _blobName = blobName;
             _runtimeOptions = runtimeOptions;
@@ -27,7 +28,10 @@ namespace ILCompiler
 
         void ICompilationRootProvider.AddCompilationRoots(IRootingServiceProvider rootProvider)
         {
-            rootProvider.AddCompilationRoot(new RuntimeConfigurationBlobNode(_blobName, _runtimeOptions), "Runtime configuration");
+            rootProvider.AddCompilationRoot(
+                new RuntimeConfigurationBlobNode(_blobName, _runtimeOptions),
+                "Runtime configuration"
+            );
         }
 
         private sealed class RuntimeConfigurationBlobNode : ObjectNode, ISymbolDefinitionNode
@@ -35,7 +39,10 @@ namespace ILCompiler
             private readonly string _blobName;
             private readonly IReadOnlyCollection<string> _runtimeOptions;
 
-            public RuntimeConfigurationBlobNode(string blobName, IReadOnlyCollection<string> runtimeOptions)
+            public RuntimeConfigurationBlobNode(
+                string blobName,
+                IReadOnlyCollection<string> runtimeOptions
+            )
             {
                 _blobName = blobName;
                 _runtimeOptions = runtimeOptions;
@@ -55,9 +62,12 @@ namespace ILCompiler
             }
 
             public override ObjectNodeSection GetSection(NodeFactory factory) =>
-                factory.Target.IsWindows ? ObjectNodeSection.ReadOnlyDataSection : ObjectNodeSection.DataSection;
+                factory.Target.IsWindows
+                    ? ObjectNodeSection.ReadOnlyDataSection
+                    : ObjectNodeSection.DataSection;
 
-            protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+            protected override string GetName(NodeFactory factory) =>
+                this.GetMangledName(factory.NameMangler);
 
             public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
             {
@@ -83,7 +93,8 @@ namespace ILCompiler
                             valueNode = factory.ReadOnlyDataBlob(
                                 new Utf8String(_blobName + "_value_" + valueIndex++),
                                 Utf8NullTerminatedBytes(value),
-                                alignment: 1);
+                                alignment: 1
+                            );
                             valueDict.Add(value, valueNode);
                         }
 
@@ -101,9 +112,10 @@ namespace ILCompiler
                 foreach (string key in settings.Keys)
                 {
                     ISymbolNode node = factory.ReadOnlyDataBlob(
-                                new Utf8String(_blobName + "_key_" + i++),
-                                Utf8NullTerminatedBytes(key),
-                                alignment: 1);
+                        new Utf8String(_blobName + "_key_" + i++),
+                        Utf8NullTerminatedBytes(key),
+                        alignment: 1
+                    );
                     builder.EmitPointerReloc(node);
                 }
 

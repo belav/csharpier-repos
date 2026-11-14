@@ -19,8 +19,16 @@ namespace System.DirectoryServices.AccountManagement
         private readonly ResultPropertyCollection _rp;
 
         private dSPropertyCollection() { }
-        internal dSPropertyCollection(PropertyCollection pc) { _pc = pc; }
-        internal dSPropertyCollection(ResultPropertyCollection rp) { _rp = rp; }
+
+        internal dSPropertyCollection(PropertyCollection pc)
+        {
+            _pc = pc;
+        }
+
+        internal dSPropertyCollection(ResultPropertyCollection rp)
+        {
+            _rp = rp;
+        }
 
         public dSPropertyValueCollection this[string propertyName]
         {
@@ -47,8 +55,16 @@ namespace System.DirectoryServices.AccountManagement
         private readonly ResultPropertyValueCollection _rc;
 
         private dSPropertyValueCollection() { }
-        internal dSPropertyValueCollection(PropertyValueCollection pc) { _pc = pc; }
-        internal dSPropertyValueCollection(ResultPropertyValueCollection rc) { _rc = rc; }
+
+        internal dSPropertyValueCollection(PropertyValueCollection pc)
+        {
+            _pc = pc;
+        }
+
+        internal dSPropertyValueCollection(ResultPropertyValueCollection rc)
+        {
+            _rc = rc;
+        }
 
         public object this[int index]
         {
@@ -66,10 +82,7 @@ namespace System.DirectoryServices.AccountManagement
         }
         public int Count
         {
-            get
-            {
-                return (_pc != null ? _pc.Count : _rc.Count);
-            }
+            get { return (_pc != null ? _pc.Count : _rc.Count); }
         }
 
         public IEnumerator GetEnumerator()

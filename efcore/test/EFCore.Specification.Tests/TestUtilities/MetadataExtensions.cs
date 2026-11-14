@@ -9,12 +9,12 @@ public static class MetadataExtensions
 {
     public static IQueryable<TEntity> AsTracking<TEntity>(
         this IQueryable<TEntity> source,
-        bool tracking)
-        where TEntity : class
-        => tracking ? source.AsTracking() : source.AsNoTracking();
+        bool tracking
+    )
+        where TEntity : class => tracking ? source.AsTracking() : source.AsNoTracking();
 
-    public static IEnumerable<T> NullChecked<T>(this IEnumerable<T> enumerable)
-        => enumerable ?? Enumerable.Empty<T>();
+    public static IEnumerable<T> NullChecked<T>(this IEnumerable<T> enumerable) =>
+        enumerable ?? Enumerable.Empty<T>();
 
     public static void ForEach<T>(this IEnumerable<T> @this, Action<T> action)
     {

@@ -11,7 +11,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void NullaryCtor()
         {
-            RuntimeBinderInternalCompilerException rbe = new RuntimeBinderInternalCompilerException();
+            RuntimeBinderInternalCompilerException rbe =
+                new RuntimeBinderInternalCompilerException();
             Assert.Null(rbe.InnerException);
             Assert.Empty(rbe.Data);
             Assert.True((rbe.HResult & 0xFFFF0000) == 0x80130000); // Error from .NET
@@ -22,7 +23,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void StringCtor()
         {
             string message = "This is a test message.";
-            RuntimeBinderInternalCompilerException rbe = new RuntimeBinderInternalCompilerException(message);
+            RuntimeBinderInternalCompilerException rbe = new RuntimeBinderInternalCompilerException(
+                message
+            );
             Assert.Null(rbe.InnerException);
             Assert.Empty(rbe.Data);
             Assert.True((rbe.HResult & 0xFFFF0000) == 0x80130000); // Error from .NET
@@ -31,13 +34,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.Equal(new RuntimeBinderInternalCompilerException().Message, rbe.Message);
         }
 
-
         [Fact]
         public void InnerExceptionCtor()
         {
             string message = "This is a test message.";
             Exception inner = new Exception("This is a test exception");
-            RuntimeBinderInternalCompilerException rbe = new RuntimeBinderInternalCompilerException(message, inner);
+            RuntimeBinderInternalCompilerException rbe = new RuntimeBinderInternalCompilerException(
+                message,
+                inner
+            );
             Assert.Same(inner, rbe.InnerException);
         }
     }

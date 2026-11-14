@@ -33,7 +33,8 @@ public class DbSetFindingConvention : IModelInitializedConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessModelInitialized(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var setInfo in Dependencies.SetFinder.FindSets(Dependencies.ContextType))
         {

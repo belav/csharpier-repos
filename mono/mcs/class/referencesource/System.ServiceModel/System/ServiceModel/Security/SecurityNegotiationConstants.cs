@@ -11,4 +11,3 @@ namespace System.ServiceModel.Security
         internal const string NegotiationFault = "NegotiationFault";
     }
 }
-

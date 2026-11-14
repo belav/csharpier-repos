@@ -3,21 +3,28 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class FunkyDataQuerySqlServerTest : FunkyDataQueryTestBase<FunkyDataQuerySqlServerTest.FunkyDataQuerySqlServerFixture>
+public class FunkyDataQuerySqlServerTest
+    : FunkyDataQueryTestBase<FunkyDataQuerySqlServerTest.FunkyDataQuerySqlServerFixture>
 {
-    public FunkyDataQuerySqlServerTest(FunkyDataQuerySqlServerFixture fixture, ITestOutputHelper testOutputHelper)
+    public FunkyDataQuerySqlServerTest(
+        FunkyDataQuerySqlServerFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
-    protected virtual bool CanExecuteQueryString
-        => true;
+    protected virtual bool CanExecuteQueryString => true;
 
-    protected override QueryAsserter CreateQueryAsserter(FunkyDataQuerySqlServerFixture fixture)
-        => new RelationalQueryAsserter(
-            fixture, RewriteExpectedQueryExpression, RewriteServerQueryExpression, canExecuteQueryString: CanExecuteQueryString);
+    protected override QueryAsserter CreateQueryAsserter(FunkyDataQuerySqlServerFixture fixture) =>
+        new RelationalQueryAsserter(
+            fixture,
+            RewriteExpectedQueryExpression,
+            RewriteServerQueryExpression,
+            canExecuteQueryString: CanExecuteQueryString
+        );
 
     public override async Task String_contains_on_argument_with_wildcard_constant(bool async)
     {
@@ -69,7 +76,8 @@ WHERE [f].[FirstName] IS NULL
             """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
-""");
+"""
+        );
     }
 
     public override async Task String_contains_on_argument_with_wildcard_parameter(bool async)
@@ -134,7 +142,8 @@ WHERE [f].[FirstName] NOT LIKE @__prm7_0_contains ESCAPE N'\' OR [f].[FirstName]
             """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
-""");
+"""
+        );
     }
 
     public override async Task String_contains_on_argument_with_wildcard_column(bool async)
@@ -147,7 +156,8 @@ SELECT [f].[FirstName] AS [fn], [f0].[LastName] AS [ln]
 FROM [FunkyCustomers] AS [f]
 CROSS JOIN [FunkyCustomers] AS [f0]
 WHERE [f].[FirstName] IS NOT NULL AND [f0].[LastName] IS NOT NULL AND (CHARINDEX([f0].[LastName], [f].[FirstName]) > 0 OR [f0].[LastName] LIKE N'')
-""");
+"""
+        );
     }
 
     public override async Task String_contains_on_argument_with_wildcard_column_negated(bool async)
@@ -160,7 +170,8 @@ SELECT [f].[FirstName] AS [fn], [f0].[LastName] AS [ln]
 FROM [FunkyCustomers] AS [f]
 CROSS JOIN [FunkyCustomers] AS [f0]
 WHERE NOT ([f].[FirstName] IS NOT NULL AND [f0].[LastName] IS NOT NULL AND (CHARINDEX([f0].[LastName], [f].[FirstName]) > 0 OR [f0].[LastName] LIKE N''))
-""");
+"""
+        );
     }
 
     public override async Task String_starts_with_on_argument_with_wildcard_constant(bool async)
@@ -168,52 +179,53 @@ WHERE NOT ([f].[FirstName] IS NOT NULL AND [f0].[LastName] IS NOT NULL AND (CHAR
         await base.String_starts_with_on_argument_with_wildcard_constant(async);
 
         AssertSql(
-"""
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] LIKE N'\%B%' ESCAPE N'\'
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] LIKE N'\_B%' ESCAPE N'\'
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE 0 = 1
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] IS NOT NULL
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] LIKE N'\_Ba\_%' ESCAPE N'\'
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] NOT LIKE N'\%B\%a\%r%' ESCAPE N'\' OR [f].[FirstName] IS NULL
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] IS NULL
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
-""");
+"""
+        );
     }
 
     public override async Task String_starts_with_on_argument_with_wildcard_parameter(bool async)
@@ -278,7 +290,8 @@ WHERE [f].[FirstName] NOT LIKE @__prm7_0_startswith ESCAPE N'\' OR [f].[FirstNam
             """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
-""");
+"""
+        );
     }
 
     public override async Task String_starts_with_on_argument_with_bracket(bool async)
@@ -332,7 +345,8 @@ WHERE [f].[FirstName] LIKE @__prm3_0_startswith ESCAPE N'\'
 SELECT [f].[Id], [f].[FirstName], [f].[LastName], [f].[NullableBool]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] IS NOT NULL AND [f].[LastName] IS NOT NULL AND LEFT([f].[FirstName], LEN([f].[LastName])) = [f].[LastName]
-""");
+"""
+        );
     }
 
     public override async Task String_starts_with_on_argument_with_wildcard_column(bool async)
@@ -345,10 +359,13 @@ SELECT [f].[FirstName] AS [fn], [f0].[LastName] AS [ln]
 FROM [FunkyCustomers] AS [f]
 CROSS JOIN [FunkyCustomers] AS [f0]
 WHERE [f].[FirstName] IS NOT NULL AND [f0].[LastName] IS NOT NULL AND LEFT([f].[FirstName], LEN([f0].[LastName])) = [f0].[LastName]
-""");
+"""
+        );
     }
 
-    public override async Task String_starts_with_on_argument_with_wildcard_column_negated(bool async)
+    public override async Task String_starts_with_on_argument_with_wildcard_column_negated(
+        bool async
+    )
     {
         await base.String_starts_with_on_argument_with_wildcard_column_negated(async);
 
@@ -358,7 +375,8 @@ SELECT [f].[FirstName] AS [fn], [f0].[LastName] AS [ln]
 FROM [FunkyCustomers] AS [f]
 CROSS JOIN [FunkyCustomers] AS [f0]
 WHERE [f].[FirstName] IS NULL OR [f0].[LastName] IS NULL OR LEFT([f].[FirstName], LEN([f0].[LastName])) <> [f0].[LastName]
-""");
+"""
+        );
     }
 
     public override async Task String_ends_with_on_argument_with_wildcard_constant(bool async)
@@ -366,52 +384,53 @@ WHERE [f].[FirstName] IS NULL OR [f0].[LastName] IS NULL OR LEFT([f].[FirstName]
         await base.String_ends_with_on_argument_with_wildcard_constant(async);
 
         AssertSql(
-"""
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] LIKE N'%\%r' ESCAPE N'\'
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] LIKE N'%r\_' ESCAPE N'\'
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE 0 = 1
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] IS NOT NULL
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] LIKE N'%\_r\_' ESCAPE N'\'
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] NOT LIKE N'%a\%r\%' ESCAPE N'\' OR [f].[FirstName] IS NULL
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] IS NULL
 """,
-                //
-                """
+            //
+            """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
-""");
+"""
+        );
     }
 
     public override async Task String_ends_with_on_argument_with_wildcard_parameter(bool async)
@@ -476,7 +495,8 @@ WHERE [f].[FirstName] NOT LIKE @__prm7_0_endswith ESCAPE N'\' OR [f].[FirstName]
             """
 SELECT [f].[FirstName]
 FROM [FunkyCustomers] AS [f]
-""");
+"""
+        );
     }
 
     public override async Task String_ends_with_on_argument_with_wildcard_column(bool async)
@@ -489,7 +509,8 @@ SELECT [f].[FirstName] AS [fn], [f0].[LastName] AS [ln]
 FROM [FunkyCustomers] AS [f]
 CROSS JOIN [FunkyCustomers] AS [f0]
 WHERE [f].[FirstName] IS NOT NULL AND [f0].[LastName] IS NOT NULL AND RIGHT([f].[FirstName], LEN([f0].[LastName])) = [f0].[LastName]
-""");
+"""
+        );
     }
 
     public override async Task String_ends_with_on_argument_with_wildcard_column_negated(bool async)
@@ -502,7 +523,8 @@ SELECT [f].[FirstName] AS [fn], [f0].[LastName] AS [ln]
 FROM [FunkyCustomers] AS [f]
 CROSS JOIN [FunkyCustomers] AS [f0]
 WHERE [f].[FirstName] IS NULL OR [f0].[LastName] IS NULL OR RIGHT([f].[FirstName], LEN([f0].[LastName])) <> [f0].[LastName]
-""");
+"""
+        );
     }
 
     public override async Task String_ends_with_inside_conditional(bool async)
@@ -518,7 +540,8 @@ WHERE CASE
     WHEN [f].[FirstName] IS NOT NULL AND [f0].[LastName] IS NOT NULL AND RIGHT([f].[FirstName], LEN([f0].[LastName])) = [f0].[LastName] THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END = CAST(1 AS bit)
-""");
+"""
+        );
     }
 
     public override async Task String_ends_with_inside_conditional_negated(bool async)
@@ -534,7 +557,8 @@ WHERE CASE
     WHEN [f].[FirstName] IS NULL OR [f0].[LastName] IS NULL OR RIGHT([f].[FirstName], LEN([f0].[LastName])) <> [f0].[LastName] THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END = CAST(1 AS bit)
-""");
+"""
+        );
     }
 
     public override async Task String_ends_with_equals_nullable_column(bool async)
@@ -550,7 +574,8 @@ WHERE CASE
     WHEN [f].[FirstName] IS NOT NULL AND [f0].[LastName] IS NOT NULL AND RIGHT([f].[FirstName], LEN([f0].[LastName])) = [f0].[LastName] THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END = [f].[NullableBool]
-""");
+"""
+        );
     }
 
     public override async Task String_ends_with_not_equals_nullable_column(bool async)
@@ -566,7 +591,8 @@ WHERE CASE
     WHEN [f].[FirstName] IS NOT NULL AND [f0].[LastName] IS NOT NULL AND RIGHT([f].[FirstName], LEN([f0].[LastName])) = [f0].[LastName] THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END <> [f].[NullableBool] OR [f].[NullableBool] IS NULL
-""");
+"""
+        );
     }
 
     public override async Task String_FirstOrDefault_and_LastOrDefault(bool async)
@@ -578,7 +604,8 @@ END <> [f].[NullableBool] OR [f].[NullableBool] IS NULL
 SELECT SUBSTRING([f].[FirstName], 1, 1) AS [first], SUBSTRING([f].[FirstName], LEN([f].[FirstName]), 1) AS [last]
 FROM [FunkyCustomers] AS [f]
 ORDER BY [f].[Id]
-""");
+"""
+        );
     }
 
     public override async Task String_Contains_and_StartsWith_with_same_parameter(bool async)
@@ -593,21 +620,19 @@ ORDER BY [f].[Id]
 SELECT [f].[Id], [f].[FirstName], [f].[LastName], [f].[NullableBool]
 FROM [FunkyCustomers] AS [f]
 WHERE [f].[FirstName] LIKE @__s_0_contains ESCAPE N'\' OR [f].[LastName] LIKE @__s_0_startswith ESCAPE N'\'
-""");
+"""
+        );
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     public class FunkyDataQuerySqlServerFixture : FunkyDataQueryFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

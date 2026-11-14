@@ -10,13 +10,15 @@ namespace System.Runtime.Versioning
     public enum ResourceScope
     {
         None = 0,
+
         // Resource type
-        Machine   = 0x1,
-        Process   = 0x2,
+        Machine = 0x1,
+        Process = 0x2,
         AppDomain = 0x4,
-        Library   = 0x8,
+        Library = 0x8,
+
         // Visibility
-        Private  = 0x10,  // Private to this one class.
-        Assembly = 0x20,  // Assembly-level, like C#'s "internal"
+        Private = 0x10, // Private to this one class.
+        Assembly = 0x20, // Assembly-level, like C#'s "internal"
     }
 }

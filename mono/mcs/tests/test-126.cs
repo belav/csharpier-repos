@@ -3,22 +3,23 @@
 //
 using System;
 
-interface Iface {
-	void Method ();
+interface Iface
+{
+    void Method();
 }
 
-class X : Iface {
+class X : Iface
+{
+    void Iface.Method() { }
 
-	void Iface.Method () {} 
-	
-	public static int Main ()
-	{
-		X x = new X ();
-		Iface f = x;
+    public static int Main()
+    {
+        X x = new X();
+        Iface f = x;
 
-		if (f.ToString () != "X")
-			return 1;
+        if (f.ToString() != "X")
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -4,8 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
@@ -37,10 +37,7 @@ namespace System.Workflow.Activities
 
         internal StateMachineSubscriptionManager SubscriptionManager
         {
-            get
-            {
-                return _subscriptionManager;
-            }
+            get { return _subscriptionManager; }
         }
 
         private Queue<StateMachineAction> Actions
@@ -55,70 +52,37 @@ namespace System.Workflow.Activities
 
         internal bool SchedulerBusy
         {
-            get
-            {
-                return _schedulerBusy;
-            }
-            set
-            {
-                _schedulerBusy = value;
-            }
+            get { return _schedulerBusy; }
+            set { _schedulerBusy = value; }
         }
 
         internal string CurrentStateName
         {
-            get
-            {
-                return _currentStateName;
-            }
-            set
-            {
-                _currentStateName = value;
-            }
+            get { return _currentStateName; }
+            set { _currentStateName = value; }
         }
 
         internal string PreviousStateName
         {
-            get
-            {
-                return _previousStateName;
-            }
-            set
-            {
-                _previousStateName = value;
-            }
+            get { return _previousStateName; }
+            set { _previousStateName = value; }
         }
 
         internal string NextStateName
         {
-            get
-            {
-                return _nextStateName;
-            }
-            set
-            {
-                _nextStateName = value;
-            }
+            get { return _nextStateName; }
+            set { _nextStateName = value; }
         }
 
         internal bool Completed
         {
-            get
-            {
-                return _completed;
-            }
-            set
-            {
-                _completed = value;
-            }
+            get { return _completed; }
+            set { _completed = value; }
         }
 
         internal bool HasEnqueuedActions
         {
-            get
-            {
-                return this.Actions.Count > 0;
-            }
+            get { return this.Actions.Count > 0; }
         }
 
         #endregion Properties
@@ -191,9 +155,14 @@ namespace System.Workflow.Activities
             if (this.Actions.Count > 0)
             {
                 StateActivity rootState = StateMachineHelpers.GetRootState(state);
-                StateActivity nextActionState = StateMachineHelpers.FindDynamicStateByName(rootState, action.StateName);
+                StateActivity nextActionState = StateMachineHelpers.FindDynamicStateByName(
+                    rootState,
+                    action.StateName
+                );
                 if (nextActionState == null)
-                    throw new InvalidOperationException(SR.GetInvalidStateMachineAction(action.StateName));
+                    throw new InvalidOperationException(
+                        SR.GetInvalidStateMachineAction(action.StateName)
+                    );
 
                 nextActionState.RaiseProcessActionEvent(context);
             }
@@ -202,7 +171,6 @@ namespace System.Workflow.Activities
                 this.SubscriptionManager.ProcessQueue(context);
             }
         }
-
 
         internal void ProcessTransitionRequest(ActivityExecutionContext context)
         {
@@ -222,14 +190,22 @@ namespace System.Workflow.Activities
             if (String.IsNullOrEmpty(targetStateName))
                 throw new ArgumentNullException("targetStateName");
 
-            while (currentState != null && (currentState.QualifiedName.Equals(targetStateName) || !StateMachineHelpers.ContainsState(currentState, targetStateName)))
+            while (
+                currentState != null
+                && (
+                    currentState.QualifiedName.Equals(targetStateName)
+                    || !StateMachineHelpers.ContainsState(currentState, targetStateName)
+                )
+            )
             {
                 CloseStateAction action = new CloseStateAction(currentState.QualifiedName);
                 this.Actions.Enqueue(action);
                 currentState = currentState.Parent as StateActivity;
             }
             if (currentState == null)
-                throw new InvalidOperationException(SR.GetUnableToTransitionToState(targetStateName));
+                throw new InvalidOperationException(
+                    SR.GetUnableToTransitionToState(targetStateName)
+                );
 
             while (!currentState.QualifiedName.Equals(targetStateName))
             {
@@ -238,10 +214,13 @@ namespace System.Workflow.Activities
                     StateActivity childState = childActivity as StateActivity;
                     if (childState != null)
                     {
-                        // 
+                        //
                         if (StateMachineHelpers.ContainsState(childState, targetStateName))
                         {
-                            ExecuteChildStateAction action = new ExecuteChildStateAction(currentState.QualifiedName, childState.QualifiedName);
+                            ExecuteChildStateAction action = new ExecuteChildStateAction(
+                                currentState.QualifiedName,
+                                childState.QualifiedName
+                            );
                             this.Actions.Enqueue(action);
                             currentState = childState;
                             break;
@@ -258,7 +237,8 @@ namespace System.Workflow.Activities
         internal static StateMachineExecutionState Get(StateActivity state)
         {
             Debug.Assert(StateMachineHelpers.IsRootState(state));
-            StateMachineExecutionState executionState = (StateMachineExecutionState)state.GetValue(StateActivity.StateMachineExecutionStateProperty);
+            StateMachineExecutionState executionState = (StateMachineExecutionState)
+                state.GetValue(StateActivity.StateMachineExecutionStateProperty);
             Debug.Assert(executionState != null);
             return executionState;
         }

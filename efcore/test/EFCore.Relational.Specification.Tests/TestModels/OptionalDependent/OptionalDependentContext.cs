@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.OptionalDependent;
 public class OptionalDependentContext : DbContext
 {
     public OptionalDependentContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<OptionalDependentEntityAllOptional> EntitiesAllOptional { get; set; }
     public DbSet<OptionalDependentEntitySomeRequired> EntitiesSomeRequired { get; set; }

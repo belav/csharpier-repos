@@ -73,18 +73,18 @@ internal sealed class OpenIdConnectConfigureOptions : IConfigureNamedOptions<Ope
             bool.Parse,
             options.DisableTelemetry
         );
-        options.ForwardAuthenticate =
-            configSection[nameof(options.ForwardAuthenticate)] ?? options.ForwardAuthenticate;
-        options.ForwardChallenge =
-            configSection[nameof(options.ForwardChallenge)] ?? options.ForwardChallenge;
-        options.ForwardDefault =
-            configSection[nameof(options.ForwardDefault)] ?? options.ForwardDefault;
-        options.ForwardForbid =
-            configSection[nameof(options.ForwardForbid)] ?? options.ForwardForbid;
-        options.ForwardSignIn =
-            configSection[nameof(options.ForwardSignIn)] ?? options.ForwardSignIn;
-        options.ForwardSignOut =
-            configSection[nameof(options.ForwardSignOut)] ?? options.ForwardSignOut;
+        options.ForwardAuthenticate = configSection[nameof(options.ForwardAuthenticate)]
+            ?? options.ForwardAuthenticate;
+        options.ForwardChallenge = configSection[nameof(options.ForwardChallenge)]
+            ?? options.ForwardChallenge;
+        options.ForwardDefault = configSection[nameof(options.ForwardDefault)]
+            ?? options.ForwardDefault;
+        options.ForwardForbid = configSection[nameof(options.ForwardForbid)]
+            ?? options.ForwardForbid;
+        options.ForwardSignIn = configSection[nameof(options.ForwardSignIn)]
+            ?? options.ForwardSignIn;
+        options.ForwardSignOut = configSection[nameof(options.ForwardSignOut)]
+            ?? options.ForwardSignOut;
         options.GetClaimsFromUserInfoEndpoint = StringHelpers.ParseValueOrDefault(
             configSection[nameof(options.GetClaimsFromUserInfoEndpoint)],
             bool.Parse,
@@ -100,8 +100,8 @@ internal sealed class OpenIdConnectConfigureOptions : IConfigureNamedOptions<Ope
             _invariantNullableTimeSpanParse,
             options.MaxAge
         );
-        options.MetadataAddress =
-            configSection[nameof(options.MetadataAddress)] ?? options.MetadataAddress;
+        options.MetadataAddress = configSection[nameof(options.MetadataAddress)]
+            ?? options.MetadataAddress;
         SetCookieFromConfig(
             configSection.GetSection(nameof(options.NonceCookie)),
             options.NonceCookie
@@ -133,8 +133,8 @@ internal sealed class OpenIdConnectConfigureOptions : IConfigureNamedOptions<Ope
         options.Resource = configSection[nameof(options.Resource)] ?? options.Resource;
         options.ResponseMode = configSection[nameof(options.ResponseMode)] ?? options.ResponseMode;
         options.ResponseType = configSection[nameof(options.ResponseType)] ?? options.ResponseType;
-        options.ReturnUrlParameter =
-            configSection[nameof(options.ReturnUrlParameter)] ?? options.ReturnUrlParameter;
+        options.ReturnUrlParameter = configSection[nameof(options.ReturnUrlParameter)]
+            ?? options.ReturnUrlParameter;
         options.SaveTokens = StringHelpers.ParseValueOrDefault(
             configSection[nameof(options.SaveTokens)],
             bool.Parse,
@@ -145,11 +145,11 @@ internal sealed class OpenIdConnectConfigureOptions : IConfigureNamedOptions<Ope
             configSection[nameof(options.SignedOutCallbackPath)]
                 ?? options.SignedOutCallbackPath.Value
         );
-        options.SignedOutRedirectUri =
-            configSection[nameof(options.SignedOutRedirectUri)] ?? options.SignedOutRedirectUri;
+        options.SignedOutRedirectUri = configSection[nameof(options.SignedOutRedirectUri)]
+            ?? options.SignedOutRedirectUri;
         options.SignInScheme = configSection[nameof(options.SignInScheme)] ?? options.SignInScheme;
-        options.SignOutScheme =
-            configSection[nameof(options.SignOutScheme)] ?? options.SignOutScheme;
+        options.SignOutScheme = configSection[nameof(options.SignOutScheme)]
+            ?? options.SignOutScheme;
         options.SkipUnrecognizedRequests = StringHelpers.ParseValueOrDefault(
             configSection[nameof(options.SkipUnrecognizedRequests)],
             bool.Parse,
@@ -179,8 +179,8 @@ internal sealed class OpenIdConnectConfigureOptions : IConfigureNamedOptions<Ope
 
         // Override the existing defaults when values are set instead of constructing
         // an entirely new CookieBuilder.
-        cookieBuilder.Domain =
-            cookieConfigSection[nameof(cookieBuilder.Domain)] ?? cookieBuilder.Domain;
+        cookieBuilder.Domain = cookieConfigSection[nameof(cookieBuilder.Domain)]
+            ?? cookieBuilder.Domain;
         cookieBuilder.HttpOnly = StringHelpers.ParseValueOrDefault(
             cookieConfigSection[nameof(cookieBuilder.HttpOnly)],
             bool.Parse,

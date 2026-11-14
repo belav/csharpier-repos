@@ -23,10 +23,20 @@ namespace NetCoreServer
                     return false;
                 }
             }
-            else if (string.Equals("Negotiate", authType, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals("NTLM", authType, StringComparison.OrdinalIgnoreCase))
+            else if (
+                string.Equals("Negotiate", authType, StringComparison.OrdinalIgnoreCase)
+                || string.Equals("NTLM", authType, StringComparison.OrdinalIgnoreCase)
+            )
             {
-                if (!HandleChallengeResponseAuthentication(context, authType, user, password, domain))
+                if (
+                    !HandleChallengeResponseAuthentication(
+                        context,
+                        authType,
+                        user,
+                        password,
+                        domain
+                    )
+                )
                 {
                     return false;
                 }
@@ -41,7 +51,12 @@ namespace NetCoreServer
             return true;
         }
 
-        private static bool HandleBasicAuthentication(HttpContext context, string user, string password, string domain)
+        private static bool HandleBasicAuthentication(
+            HttpContext context,
+            string user,
+            string password,
+            string domain
+        )
         {
             const string WwwAuthenticateHeaderValue = "Basic realm=\"corefx-networking\"";
 
@@ -57,7 +72,10 @@ namespace NetCoreServer
             if (split.Length < 2)
             {
                 context.Response.StatusCode = 500;
-                context.Response.SetStatusDescription("Invalid Authorization header: " + authHeader); ;
+                context.Response.SetStatusDescription(
+                    "Invalid Authorization header: " + authHeader
+                );
+                ;
                 return false;
             }
 
@@ -89,12 +107,14 @@ namespace NetCoreServer
             // Success.
             return true;
         }
+
         private static bool HandleChallengeResponseAuthentication(
             HttpContext context,
             string authType,
             string user,
             string password,
-            string domain)
+            string domain
+        )
         {
             string authHeader = context.Request.Headers["Authorization"];
             if (authHeader == null)
@@ -106,7 +126,12 @@ namespace NetCoreServer
 
             // We don't fully support this authentication method.
             context.Response.StatusCode = 501;
-            context.Response.SetStatusDescription("Attempt to use unsupported challenge/response auth type. " + authType + ": " + authHeader);
+            context.Response.SetStatusDescription(
+                "Attempt to use unsupported challenge/response auth type. "
+                    + authType
+                    + ": "
+                    + authHeader
+            );
 
             return false;
         }

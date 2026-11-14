@@ -48,11 +48,17 @@ namespace System.Security.Cryptography.Xml
             CipherData.LoadXml((cipherDataNode as XmlElement)!);
 
             // EncryptionProperties
-            XmlNode? encryptionPropertiesNode = value.SelectSingleNode("enc:EncryptionProperties", nsm);
+            XmlNode? encryptionPropertiesNode = value.SelectSingleNode(
+                "enc:EncryptionProperties",
+                nsm
+            );
             if (encryptionPropertiesNode != null)
             {
                 // Select the EncryptionProperty elements inside the EncryptionProperties element
-                XmlNodeList? encryptionPropertyNodes = encryptionPropertiesNode.SelectNodes("enc:EncryptionProperty", nsm);
+                XmlNodeList? encryptionPropertyNodes = encryptionPropertiesNode.SelectNodes(
+                    "enc:EncryptionProperty",
+                    nsm
+                );
                 if (encryptionPropertyNodes != null)
                 {
                     foreach (XmlNode node in encryptionPropertyNodes)
@@ -70,7 +76,8 @@ namespace System.Security.Cryptography.Xml
 
         public override XmlElement GetXml()
         {
-            if (CacheValid) return _cachedXml;
+            if (CacheValid)
+                return _cachedXml;
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -80,7 +87,8 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the EncryptedData element
-            XmlElement encryptedDataElement = (XmlElement)document.CreateElement("EncryptedData", EncryptedXml.XmlEncNamespaceUrl);
+            XmlElement encryptedDataElement = (XmlElement)
+                document.CreateElement("EncryptedData", EncryptedXml.XmlEncNamespaceUrl);
 
             // Deal with attributes
             if (!string.IsNullOrEmpty(Id))
@@ -108,7 +116,10 @@ namespace System.Security.Cryptography.Xml
             // EncryptionProperties
             if (EncryptionProperties.Count > 0)
             {
-                XmlElement encryptionPropertiesElement = document.CreateElement("EncryptionProperties", EncryptedXml.XmlEncNamespaceUrl);
+                XmlElement encryptionPropertiesElement = document.CreateElement(
+                    "EncryptionProperties",
+                    EncryptedXml.XmlEncNamespaceUrl
+                );
                 for (int index = 0; index < EncryptionProperties.Count; index++)
                 {
                     EncryptionProperty ep = EncryptionProperties.Item(index);

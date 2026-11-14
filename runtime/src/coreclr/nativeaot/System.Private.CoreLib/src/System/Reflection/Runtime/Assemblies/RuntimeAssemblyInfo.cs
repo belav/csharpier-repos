@@ -11,7 +11,6 @@ using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
 using System.Runtime.Serialization;
 using System.Security;
-
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
 
@@ -20,7 +19,9 @@ namespace System.Reflection.Runtime.Assemblies
     //
     // The runtime's implementation of an Assembly.
     //
-    internal abstract partial class RuntimeAssemblyInfo : RuntimeAssembly, IEquatable<RuntimeAssemblyInfo>
+    internal abstract partial class RuntimeAssemblyInfo
+        : RuntimeAssembly,
+            IEquatable<RuntimeAssemblyInfo>
     {
         public bool Equals(RuntimeAssemblyInfo? other)
         {
@@ -32,13 +33,14 @@ namespace System.Reflection.Runtime.Assemblies
 
         public sealed override string FullName
         {
-            get
-            {
-                return GetName().FullName;
-            }
+            get { return GetName().FullName; }
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public sealed override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -49,10 +51,7 @@ namespace System.Reflection.Runtime.Assemblies
 
         public sealed override IEnumerable<Module> Modules
         {
-            get
-            {
-                yield return ManifestModule;
-            }
+            get { yield return ManifestModule; }
         }
 
         public sealed override Module GetModule(string name)
@@ -68,10 +67,12 @@ namespace System.Reflection.Runtime.Assemblies
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
 
-            return TypeNameParser.GetType(name,
+            return TypeNameParser.GetType(
+                name,
                 throwOnError: throwOnError,
                 ignoreCase: ignoreCase,
-                topLevelAssembly: this);
+                topLevelAssembly: this
+            );
         }
 
 #pragma warning disable 0067  // Silence warning about ModuleResolve not being used.
@@ -97,15 +98,25 @@ namespace System.Reflection.Runtime.Assemblies
 
             foreach (TypeForwardInfo typeForwardInfo in TypeForwardInfos)
             {
-                string fullTypeName = typeForwardInfo.NamespaceName.Length == 0 ? typeForwardInfo.TypeName : typeForwardInfo.NamespaceName + "." + typeForwardInfo.TypeName;
+                string fullTypeName =
+                    typeForwardInfo.NamespaceName.Length == 0
+                        ? typeForwardInfo.TypeName
+                        : typeForwardInfo.NamespaceName + "." + typeForwardInfo.TypeName;
                 RuntimeAssemblyName redirectedAssemblyName = typeForwardInfo.RedirectedAssemblyName;
 
                 Type? type = null;
                 RuntimeAssemblyInfo redirectedAssembly;
-                Exception exception = TryGetRuntimeAssembly(redirectedAssemblyName, out redirectedAssembly);
+                Exception exception = TryGetRuntimeAssembly(
+                    redirectedAssemblyName,
+                    out redirectedAssembly
+                );
                 if (exception == null)
                 {
-                    type = redirectedAssembly.GetTypeCore(fullTypeName, throwOnError: true, ignoreCase: false); // GetTypeCore() will follow any further type-forwards if needed.
+                    type = redirectedAssembly.GetTypeCore(
+                        fullTypeName,
+                        throwOnError: true,
+                        ignoreCase: false
+                    ); // GetTypeCore() will follow any further type-forwards if needed.
                 }
 
                 Debug.Assert((type != null) != (exception != null)); // Exactly one of these must be non-null.
@@ -158,7 +169,9 @@ namespace System.Reflection.Runtime.Assemblies
         /// </summary>
         internal Type GetTypeCore(string fullName, bool throwOnError, bool ignoreCase)
         {
-            RuntimeTypeInfo? type = ignoreCase ? GetTypeCoreCaseInsensitive(fullName) : GetTypeCoreCaseSensitive(fullName);
+            RuntimeTypeInfo? type = ignoreCase
+                ? GetTypeCoreCaseInsensitive(fullName)
+                : GetTypeCoreCaseSensitive(fullName);
             if (type == null)
             {
                 if (throwOnError)
@@ -196,7 +209,6 @@ namespace System.Reflection.Runtime.Assemblies
         /// </summary>
         internal abstract RuntimeTypeInfo UncachedGetTypeCoreCaseSensitive(string fullName);
 
-
         /// <summary>
         /// Perform a lookup for a type based on a name. Overriders may or may not
         /// have a cached implementation, as the result is not expected to be cached by
@@ -212,32 +224,29 @@ namespace System.Reflection.Runtime.Assemblies
 
         private CaseSensitiveTypeCache CaseSensitiveTypeTable
         {
-            get
-            {
-                return _lazyCaseSensitiveTypeTable ??= new CaseSensitiveTypeCache(this);
-            }
+            get { return _lazyCaseSensitiveTypeTable ??= new CaseSensitiveTypeCache(this); }
         }
 
 #pragma warning disable 0672  // GlobalAssemblyCache is Obsolete.
         public sealed override bool GlobalAssemblyCache
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 #pragma warning restore 0672
 
         public sealed override long HostContext
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
-        [RequiresUnreferencedCode("Types and members the loaded module depends on might be removed")]
-        public sealed override Module LoadModule(string moduleName, byte[] rawModule, byte[] rawSymbolStore)
+        [RequiresUnreferencedCode(
+            "Types and members the loaded module depends on might be removed"
+        )]
+        public sealed override Module LoadModule(
+            string moduleName,
+            byte[] rawModule,
+            byte[] rawSymbolStore
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -256,10 +265,7 @@ namespace System.Reflection.Runtime.Assemblies
 
         public sealed override SecurityRuleSet SecurityRuleSet
         {
-            get
-            {
-                return SecurityRuleSet.None;
-            }
+            get { return SecurityRuleSet.None; }
         }
 
         /// <summary>

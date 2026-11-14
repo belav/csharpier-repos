@@ -116,10 +116,10 @@ public class RedundantBranchOr
     [Fact]
     public static int TestEntryPoint()
     {
-        Func<int, int, int>[] funcs = {Or_00, Or_01, Or_02, Or_03, Or_04, Or_05, Or_06};
+        Func<int, int, int>[] funcs = { Or_00, Or_01, Or_02, Or_03, Or_04, Or_05, Or_06 };
         int funcNum = 0;
         int cases = 0;
-        int errors= 0;
+        int errors = 0;
 
         foreach (var f in funcs)
         {
@@ -137,7 +137,7 @@ public class RedundantBranchOr
                     }
                 }
             }
-            
+
             funcNum++;
         }
 

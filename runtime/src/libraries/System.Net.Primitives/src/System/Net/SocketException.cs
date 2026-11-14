@@ -8,7 +8,9 @@ namespace System.Net.Sockets
 {
     /// <summary>Provides socket exceptions to the application.</summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class SocketException : Win32Exception
     {
         /// <summary>The SocketError or Int32 specified when constructing the exception.</summary>
@@ -16,7 +18,8 @@ namespace System.Net.Sockets
         private readonly SocketError _errorCode;
 
         /// <summary>Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code.</summary>
-        public SocketException(int errorCode) : this((SocketError)errorCode)
+        public SocketException(int errorCode)
+            : this((SocketError)errorCode)
         {
             // NOTE: SocketException(SocketError) isn't exposed publicly.  As a result, code with a SocketError calls
             // this ctor, e.g.
@@ -31,18 +34,19 @@ namespace System.Net.Sockets
         }
 
         /// <summary>Initializes a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code and optional message.</summary>
-        public SocketException(int errorCode, string? message) : this((SocketError)errorCode, message)
-        {
-        }
+        public SocketException(int errorCode, string? message)
+            : this((SocketError)errorCode, message) { }
 
         /// <summary>Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code as SocketError.</summary>
-        internal SocketException(SocketError socketError) : base(GetNativeErrorForSocketError(socketError))
+        internal SocketException(SocketError socketError)
+            : base(GetNativeErrorForSocketError(socketError))
         {
             _errorCode = socketError;
         }
 
         /// <summary>Initializes a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code as SocketError and optional message.</summary>
-        internal SocketException(SocketError socketError, string? message) : base(GetNativeErrorForSocketError(socketError), message)
+        internal SocketException(SocketError socketError, string? message)
+            : base(GetNativeErrorForSocketError(socketError), message)
         {
             _errorCode = socketError;
         }
@@ -51,12 +55,20 @@ namespace System.Net.Sockets
 
         public SocketError SocketErrorCode => _errorCode;
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected SocketException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected SocketException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
             : base(serializationInfo, streamingContext)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
         }
 
         public override int ErrorCode => base.NativeErrorCode;

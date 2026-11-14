@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <summary>
 ///     Represents a stored procedure parameter.
 /// </summary>
-public interface IConventionStoredProcedureParameter : IReadOnlyStoredProcedureParameter, IConventionAnnotatable
+public interface IConventionStoredProcedureParameter
+    : IReadOnlyStoredProcedureParameter,
+        IConventionAnnotatable
 {
     /// <summary>
     ///     Gets the stored procedure to which this parameter belongs.

@@ -47,9 +47,7 @@ namespace Newtonsoft.Json.Tests.Converters
             StringProperty2 = "StringProperty2";
         }
 
-        public VersionClass()
-        {
-        }
+        public VersionClass() { }
 
         public string StringProperty1 { get; set; }
         public Version Version1 { get; set; }
@@ -66,25 +64,40 @@ namespace Newtonsoft.Json.Tests.Converters
             {
                 VersionClass versionClass = new VersionClass(version1, version2);
 
-                string json = JsonConvert.SerializeObject(versionClass, Formatting.Indented, new VersionConverter());
+                string json = JsonConvert.SerializeObject(
+                    versionClass,
+                    Formatting.Indented,
+                    new VersionConverter()
+                );
 
-                string expectedJson = string.Format(@"{{
+                string expectedJson = string.Format(
+                    @"{{
   ""StringProperty1"": ""StringProperty1"",
   ""Version1"": ""{0}"",
   ""Version2"": ""{1}"",
   ""StringProperty2"": ""StringProperty2""
-}}", version1, version2);
+}}",
+                    version1,
+                    version2
+                );
 
                 StringAssert.AreEqual(expectedJson, json);
             }
 
             internal static void DeserializeVersionClass(string version1, string version2)
             {
-                string json = string.Format(@"{{""StringProperty1"": ""StringProperty1"", ""Version1"": ""{0}"", ""Version2"": ""{1}"", ""StringProperty2"": ""StringProperty2""}}", version1, version2);
+                string json = string.Format(
+                    @"{{""StringProperty1"": ""StringProperty1"", ""Version1"": ""{0}"", ""Version2"": ""{1}"", ""StringProperty2"": ""StringProperty2""}}",
+                    version1,
+                    version2
+                );
                 Version expectedVersion1 = new Version(version1);
                 Version expectedVersion2 = new Version(version2);
 
-                VersionClass versionClass = JsonConvert.DeserializeObject<VersionClass>(json, new VersionConverter());
+                VersionClass versionClass = JsonConvert.DeserializeObject<VersionClass>(
+                    json,
+                    new VersionConverter()
+                );
 
                 Assert.AreEqual("StringProperty1", versionClass.StringProperty1);
                 Assert.AreEqual(expectedVersion1, versionClass.Version1);

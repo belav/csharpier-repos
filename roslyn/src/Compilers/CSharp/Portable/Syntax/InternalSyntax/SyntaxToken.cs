@@ -33,7 +33,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             this.flags |= NodeFlags.IsNotMissing; //note: cleared by subclasses representing missing tokens
         }
 
-        internal SyntaxToken(SyntaxKind kind, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
+        internal SyntaxToken(
+            SyntaxKind kind,
+            DiagnosticInfo[] diagnostics,
+            SyntaxAnnotation[] annotations
+        )
             : base(kind, diagnostics, annotations)
         {
             FullWidth = this.Text.Length;
@@ -52,7 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             this.flags |= NodeFlags.IsNotMissing; //note: cleared by subclasses representing missing tokens
         }
 
-        internal SyntaxToken(SyntaxKind kind, int fullWidth, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
+        internal SyntaxToken(
+            SyntaxKind kind,
+            int fullWidth,
+            DiagnosticInfo[] diagnostics,
+            SyntaxAnnotation[] annotations
+        )
             : base(kind, diagnostics, annotations, fullWidth)
         {
             this.flags |= NodeFlags.IsNotMissing; //note: cleared by subclasses representing missing tokens
@@ -73,7 +82,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 if (!SyntaxFacts.IsAnyToken(kind))
                 {
-                    throw new ArgumentException(string.Format(CSharpResources.ThisMethodCanOnlyBeUsedToCreateTokens, kind), nameof(kind));
+                    throw new ArgumentException(
+                        string.Format(CSharpResources.ThisMethodCanOnlyBeUsedToCreateTokens, kind),
+                        nameof(kind)
+                    );
                 }
 
                 return CreateMissing(kind, null, null);
@@ -88,7 +100,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 if (!SyntaxFacts.IsAnyToken(kind))
                 {
-                    throw new ArgumentException(string.Format(CSharpResources.ThisMethodCanOnlyBeUsedToCreateTokens, kind), nameof(kind));
+                    throw new ArgumentException(
+                        string.Format(CSharpResources.ThisMethodCanOnlyBeUsedToCreateTokens, kind),
+                        nameof(kind)
+                    );
                 }
 
                 return CreateMissing(kind, leading, trailing);
@@ -110,7 +125,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            if (leading == SyntaxFactory.ElasticZeroSpace && trailing == SyntaxFactory.ElasticZeroSpace)
+            if (
+                leading == SyntaxFactory.ElasticZeroSpace
+                && trailing == SyntaxFactory.ElasticZeroSpace
+            )
             {
                 return s_tokensWithElasticTrivia[(int)kind].Value;
             }
@@ -118,7 +136,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return new SyntaxTokenWithTrivia(kind, leading, trailing);
         }
 
-        internal static SyntaxToken CreateMissing(SyntaxKind kind, GreenNode leading, GreenNode trailing)
+        internal static SyntaxToken CreateMissing(
+            SyntaxKind kind,
+            GreenNode leading,
+            GreenNode trailing
+        )
         {
             return new MissingTokenWithTrivia(kind, leading, trailing);
         }
@@ -127,19 +149,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         internal const SyntaxKind LastTokenWithWellKnownText = SyntaxKind.EndOfFileToken;
 
         // TODO: eliminate the blank space before the first interesting element?
-        private static readonly ArrayElement<SyntaxToken>[] s_tokensWithNoTrivia = new ArrayElement<SyntaxToken>[(int)LastTokenWithWellKnownText + 1];
-        private static readonly ArrayElement<SyntaxToken>[] s_tokensWithElasticTrivia = new ArrayElement<SyntaxToken>[(int)LastTokenWithWellKnownText + 1];
-        private static readonly ArrayElement<SyntaxToken>[] s_tokensWithSingleTrailingSpace = new ArrayElement<SyntaxToken>[(int)LastTokenWithWellKnownText + 1];
-        private static readonly ArrayElement<SyntaxToken>[] s_tokensWithSingleTrailingCRLF = new ArrayElement<SyntaxToken>[(int)LastTokenWithWellKnownText + 1];
+        private static readonly ArrayElement<SyntaxToken>[] s_tokensWithNoTrivia =
+            new ArrayElement<SyntaxToken>[(int)LastTokenWithWellKnownText + 1];
+        private static readonly ArrayElement<SyntaxToken>[] s_tokensWithElasticTrivia =
+            new ArrayElement<SyntaxToken>[(int)LastTokenWithWellKnownText + 1];
+        private static readonly ArrayElement<SyntaxToken>[] s_tokensWithSingleTrailingSpace =
+            new ArrayElement<SyntaxToken>[(int)LastTokenWithWellKnownText + 1];
+        private static readonly ArrayElement<SyntaxToken>[] s_tokensWithSingleTrailingCRLF =
+            new ArrayElement<SyntaxToken>[(int)LastTokenWithWellKnownText + 1];
 
         static SyntaxToken()
         {
             for (var kind = FirstTokenWithWellKnownText; kind <= LastTokenWithWellKnownText; kind++)
             {
                 s_tokensWithNoTrivia[(int)kind].Value = new SyntaxToken(kind);
-                s_tokensWithElasticTrivia[(int)kind].Value = new SyntaxTokenWithTrivia(kind, SyntaxFactory.ElasticZeroSpace, SyntaxFactory.ElasticZeroSpace);
-                s_tokensWithSingleTrailingSpace[(int)kind].Value = new SyntaxTokenWithTrivia(kind, null, SyntaxFactory.Space);
-                s_tokensWithSingleTrailingCRLF[(int)kind].Value = new SyntaxTokenWithTrivia(kind, null, SyntaxFactory.CarriageReturnLineFeed);
+                s_tokensWithElasticTrivia[(int)kind].Value = new SyntaxTokenWithTrivia(
+                    kind,
+                    SyntaxFactory.ElasticZeroSpace,
+                    SyntaxFactory.ElasticZeroSpace
+                );
+                s_tokensWithSingleTrailingSpace[(int)kind].Value = new SyntaxTokenWithTrivia(
+                    kind,
+                    null,
+                    SyntaxFactory.Space
+                );
+                s_tokensWithSingleTrailingCRLF[(int)kind].Value = new SyntaxTokenWithTrivia(
+                    kind,
+                    null,
+                    SyntaxFactory.CarriageReturnLineFeed
+                );
             }
         }
 
@@ -197,17 +235,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            return new SyntaxIdentifierWithTrivia(SyntaxKind.IdentifierToken, text, text, leading, trailing);
+            return new SyntaxIdentifierWithTrivia(
+                SyntaxKind.IdentifierToken,
+                text,
+                text,
+                leading,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Identifier(SyntaxKind contextualKind, GreenNode leading, string text, string valueText, GreenNode trailing)
+        internal static SyntaxToken Identifier(
+            SyntaxKind contextualKind,
+            GreenNode leading,
+            string text,
+            string valueText,
+            GreenNode trailing
+        )
         {
             if (contextualKind == SyntaxKind.IdentifierToken && valueText == text)
             {
                 return Identifier(leading, text, trailing);
             }
 
-            return new SyntaxIdentifierWithTrivia(contextualKind, text, valueText, leading, trailing);
+            return new SyntaxIdentifierWithTrivia(
+                contextualKind,
+                text,
+                valueText,
+                leading,
+                trailing
+            );
         }
 
         internal static SyntaxToken WithValue<T>(SyntaxKind kind, string text, T value)
@@ -215,7 +271,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return new SyntaxTokenWithValue<T>(kind, text, value);
         }
 
-        internal static SyntaxToken WithValue<T>(SyntaxKind kind, GreenNode leading, string text, T value, GreenNode trailing)
+        internal static SyntaxToken WithValue<T>(
+            SyntaxKind kind,
+            GreenNode leading,
+            string text,
+            T value,
+            GreenNode trailing
+        )
         {
             return new SyntaxTokenWithValueAndTrivia<T>(kind, text, value, leading, trailing);
         }
@@ -225,25 +287,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return new SyntaxTokenWithValue<string>(SyntaxKind.StringLiteralToken, text, text);
         }
 
-        internal static SyntaxToken StringLiteral(CSharpSyntaxNode leading, string text, CSharpSyntaxNode trailing)
+        internal static SyntaxToken StringLiteral(
+            CSharpSyntaxNode leading,
+            string text,
+            CSharpSyntaxNode trailing
+        )
         {
-            return new SyntaxTokenWithValueAndTrivia<string>(SyntaxKind.StringLiteralToken, text, text, leading, trailing);
+            return new SyntaxTokenWithValueAndTrivia<string>(
+                SyntaxKind.StringLiteralToken,
+                text,
+                text,
+                leading,
+                trailing
+            );
         }
 
         public virtual SyntaxKind ContextualKind
         {
-            get
-            {
-                return this.Kind;
-            }
+            get { return this.Kind; }
         }
 
         public override int RawContextualKind
         {
-            get
-            {
-                return (int)this.ContextualKind;
-            }
+            get { return (int)this.ContextualKind; }
         }
 
         public virtual string Text
@@ -328,7 +394,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         public virtual SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
         {
-            return new SyntaxTokenWithTrivia(this.Kind, trivia, null, this.GetDiagnostics(), this.GetAnnotations());
+            return new SyntaxTokenWithTrivia(
+                this.Kind,
+                trivia,
+                null,
+                this.GetDiagnostics(),
+                this.GetAnnotations()
+            );
         }
 
         public sealed override GreenNode WithTrailingTrivia(GreenNode trivia)
@@ -338,7 +410,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         public virtual SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
         {
-            return new SyntaxTokenWithTrivia(this.Kind, null, trivia, this.GetDiagnostics(), this.GetAnnotations());
+            return new SyntaxTokenWithTrivia(
+                this.Kind,
+                null,
+                trivia,
+                this.GetDiagnostics(),
+                this.GetAnnotations()
+            );
         }
 
         internal override GreenNode SetDiagnostics(DiagnosticInfo[] diagnostics)
@@ -364,7 +442,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return stack;
         }
 
-        private static DirectiveStack ApplyDirectivesToTrivia(GreenNode triviaList, DirectiveStack stack)
+        private static DirectiveStack ApplyDirectivesToTrivia(
+            GreenNode triviaList,
+            DirectiveStack stack
+        )
         {
             if (triviaList != null && triviaList.ContainsDirectives)
             {
@@ -384,7 +465,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             visitor.VisitToken(this);
         }
 
-        protected override void WriteTokenTo(System.IO.TextWriter writer, bool leading, bool trailing)
+        protected override void WriteTokenTo(
+            System.IO.TextWriter writer,
+            bool leading,
+            bool trailing
+        )
         {
             if (leading)
             {

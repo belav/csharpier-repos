@@ -10,7 +10,19 @@ namespace System.IdentityModel
     static class Asn1IntegerConverter
     {
         static List<byte[]> powersOfTwo = new List<byte[]>(new byte[][] { new byte[] { 1 } });
-        readonly static char[] digitMap = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        static readonly char[] digitMap = new char[]
+        {
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+        };
 
         public static string Asn1IntegerToDecimalString(byte[] asn1)
         {
@@ -18,14 +30,18 @@ namespace System.IdentityModel
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("asn1");
 
             if (asn1.Length == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("asn1", SR.GetString(SR.LengthOfArrayToConvertMustGreaterThanZero)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "asn1",
+                        SR.GetString(SR.LengthOfArrayToConvertMustGreaterThanZero)
+                    )
+                );
 
             List<byte> positiveDecimalDigits = new List<byte>((asn1.Length * 8) / 3);
             int absoluteBitNumber = 0;
             byte currentByte;
 
-            // Since X509Certificate.GetSerialNumber return the little-endian, 
+            // Since X509Certificate.GetSerialNumber return the little-endian,
             // the most significant is at the last byte.
             for (int byteNumber = 0; byteNumber < asn1.Length - 1; byteNumber++)
             {
@@ -34,7 +50,10 @@ namespace System.IdentityModel
                 {
                     if ((currentByte & 1) == 1)
                     {
-                        AddSecondDecimalToFirst(positiveDecimalDigits, TwoToThePowerOf(absoluteBitNumber));
+                        AddSecondDecimalToFirst(
+                            positiveDecimalDigits,
+                            TwoToThePowerOf(absoluteBitNumber)
+                        );
                     }
                     absoluteBitNumber++;
                     currentByte >>= 1;
@@ -47,7 +66,10 @@ namespace System.IdentityModel
             {
                 if ((currentByte & 1) == 1)
                 {
-                    AddSecondDecimalToFirst(positiveDecimalDigits, TwoToThePowerOf(absoluteBitNumber));
+                    AddSecondDecimalToFirst(
+                        positiveDecimalDigits,
+                        TwoToThePowerOf(absoluteBitNumber)
+                    );
                 }
                 absoluteBitNumber++;
                 currentByte >>= 1;
@@ -63,7 +85,9 @@ namespace System.IdentityModel
             else
             {
                 // negative number
-                List<byte> negativeDecimalDigits = new List<byte>(TwoToThePowerOf(absoluteBitNumber));
+                List<byte> negativeDecimalDigits = new List<byte>(
+                    TwoToThePowerOf(absoluteBitNumber)
+                );
                 SubtractSecondDecimalFromFirst(negativeDecimalDigits, positiveDecimalDigits);
                 resultDigits = negativeDecimalDigits;
                 result.Append('-');

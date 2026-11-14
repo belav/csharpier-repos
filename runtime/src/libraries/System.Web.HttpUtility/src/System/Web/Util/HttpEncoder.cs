@@ -19,15 +19,15 @@ namespace System.Web.Util
 
         private static bool CharRequiresJavaScriptEncoding(char c) =>
             c < 0x20 // control chars always have to be encoded
-                || c == '\"' // chars which must be encoded per JSON spec
-                || c == '\\'
-                || c == '\'' // HTML-sensitive chars encoded for safety
-                || c == '<'
-                || c == '>'
-                || (c == '&')
-                || c == '\u0085' // newline chars (see Unicode 6.2, Table 5-1 [http://www.unicode.org/versions/Unicode6.2.0/ch05.pdf]) have to be encoded
-                || c == '\u2028'
-                || c == '\u2029';
+            || c == '\"' // chars which must be encoded per JSON spec
+            || c == '\\'
+            || c == '\'' // HTML-sensitive chars encoded for safety
+            || c == '<'
+            || c == '>'
+            || (c == '&')
+            || c == '\u0085' // newline chars (see Unicode 6.2, Table 5-1 [http://www.unicode.org/versions/Unicode6.2.0/ch05.pdf]) have to be encoded
+            || c == '\u2028'
+            || c == '\u2029';
 
         [return: NotNullIfNotNull(nameof(value))]
         internal static string? HtmlAttributeEncode(string? value)
@@ -105,7 +105,8 @@ namespace System.Web.Util
         }
 
         [return: NotNullIfNotNull(nameof(value))]
-        internal static string? HtmlDecode(string? value) => string.IsNullOrEmpty(value) ? value : WebUtility.HtmlDecode(value);
+        internal static string? HtmlDecode(string? value) =>
+            string.IsNullOrEmpty(value) ? value : WebUtility.HtmlDecode(value);
 
         internal static void HtmlDecode(string? value, TextWriter output)
         {
@@ -115,7 +116,8 @@ namespace System.Web.Util
         }
 
         [return: NotNullIfNotNull(nameof(value))]
-        internal static string? HtmlEncode(string? value) => string.IsNullOrEmpty(value) ? value : WebUtility.HtmlEncode(value);
+        internal static string? HtmlEncode(string? value) =>
+            string.IsNullOrEmpty(value) ? value : WebUtility.HtmlEncode(value);
 
         internal static void HtmlEncode(string? value, TextWriter output)
         {
@@ -285,7 +287,7 @@ namespace System.Web.Util
                         int h4 = HexConverter.FromChar(bytes[pos + 5]);
 
                         if ((h1 | h2 | h3 | h4) != 0xFF)
-                        {   // valid 4 hex chars
+                        { // valid 4 hex chars
                             char ch = (char)((h1 << 12) | (h2 << 8) | (h3 << 4) | h4);
                             i += 5;
 
@@ -300,7 +302,7 @@ namespace System.Web.Util
                         int h2 = HexConverter.FromChar(bytes[pos + 2]);
 
                         if ((h1 | h2) != 0xFF)
-                        {     // valid 2 hex chars
+                        { // valid 2 hex chars
                             b = (byte)((h1 << 4) | h2);
                             i += 2;
                         }
@@ -346,7 +348,7 @@ namespace System.Web.Util
                         int h4 = HexConverter.FromChar(value[pos + 5]);
 
                         if ((h1 | h2 | h3 | h4) != 0xFF)
-                        {   // valid 4 hex chars
+                        { // valid 4 hex chars
                             ch = (char)((h1 << 12) | (h2 << 8) | (h3 << 4) | h4);
                             pos += 5;
 
@@ -361,7 +363,7 @@ namespace System.Web.Util
                         int h2 = HexConverter.FromChar(value[pos + 2]);
 
                         if ((h1 | h2) != 0xFF)
-                        {     // valid 2 hex chars
+                        { // valid 2 hex chars
                             byte b = (byte)((h1 << 4) | h2);
                             pos += 2;
 
@@ -386,7 +388,12 @@ namespace System.Web.Util
         }
 
         [return: NotNullIfNotNull(nameof(bytes))]
-        internal static byte[]? UrlEncode(byte[]? bytes, int offset, int count, bool alwaysCreateNewReturnValue)
+        internal static byte[]? UrlEncode(
+            byte[]? bytes,
+            int offset,
+            int count,
+            bool alwaysCreateNewReturnValue
+        )
         {
             byte[]? encoded = UrlEncode(bytes, offset, count);
 
@@ -517,7 +524,9 @@ namespace System.Web.Util
             return expandedBytes;
         }
 
-        [Obsolete("This method produces non-standards-compliant output and has interoperability issues. The preferred alternative is UrlEncode(*).")]
+        [Obsolete(
+            "This method produces non-standards-compliant output and has interoperability issues. The preferred alternative is UrlEncode(*)."
+        )]
         [return: NotNullIfNotNull(nameof(value))]
         internal static string? UrlEncodeUnicode(string? value)
         {
@@ -534,7 +543,7 @@ namespace System.Web.Util
                 char ch = value[i];
 
                 if ((ch & 0xff80) == 0)
-                {  // 7 bit?
+                { // 7 bit?
                     if (HttpEncoderUtility.IsUrlSafeChar(ch))
                     {
                         sb.Append(ch);
@@ -575,7 +584,14 @@ namespace System.Web.Util
             string? path;
             string? queryAndFragment;
 
-            if (!UriUtil.TrySplitUriForPathEncode(value, out schemeAndAuthority, out path, out queryAndFragment))
+            if (
+                !UriUtil.TrySplitUriForPathEncode(
+                    value,
+                    out schemeAndAuthority,
+                    out path,
+                    out queryAndFragment
+                )
+            )
             {
                 // If the value is not a valid url, we treat it as a relative url.
                 // We don't need to extract query string from the url since UrlPathEncode()
@@ -607,7 +623,11 @@ namespace System.Web.Util
             return HttpEncoderUtility.UrlEncodeSpaces(UrlEncodeNonAscii(value, Encoding.UTF8));
         }
 
-        private static bool ValidateUrlEncodingParameters([NotNullWhen(true)] byte[]? bytes, int offset, int count)
+        private static bool ValidateUrlEncodingParameters(
+            [NotNullWhen(true)] byte[]? bytes,
+            int offset,
+            int count
+        )
         {
             if (bytes == null && count == 0)
             {
@@ -646,7 +666,13 @@ namespace System.Web.Util
                 if (_numBytes > 0)
                 {
                     Debug.Assert(_byteBuffer != null);
-                    _numChars += _encoding.GetChars(_byteBuffer, 0, _numBytes, _charBuffer, _numChars);
+                    _numChars += _encoding.GetChars(
+                        _byteBuffer,
+                        0,
+                        _numBytes,
+                        _charBuffer,
+                        _numChars
+                    );
                     _numBytes = 0;
                 }
             }

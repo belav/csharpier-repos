@@ -9,7 +9,8 @@ namespace System.Diagnostics
     {
         private static readonly ConditionalWeakTable<TraceFilter, string> s_initData = new();
 
-        public FilterElement() : base(typeof(TraceFilter)) { }
+        public FilterElement()
+            : base(typeof(TraceFilter)) { }
 
         public TraceFilter GetRuntimeObject()
         {
@@ -32,6 +33,8 @@ namespace System.Diagnostics
             }
         }
 
-        private bool InitDataChanged(TraceFilter filter) => !s_initData.TryGetValue(filter, out string previousInitData) || InitData != previousInitData;
+        private bool InitDataChanged(TraceFilter filter) =>
+            !s_initData.TryGetValue(filter, out string previousInitData)
+            || InitData != previousInitData;
     }
 }

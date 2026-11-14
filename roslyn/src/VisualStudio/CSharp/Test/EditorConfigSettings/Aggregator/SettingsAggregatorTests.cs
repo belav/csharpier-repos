@@ -17,8 +17,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Ag
     [Trait(Traits.Feature, Traits.Features.EditorConfigUI)]
     public class SettingsAggregatorTests
     {
-        public static Workspace CreateWorkspace(params Type[]? additionalParts)
-            => new AdhocWorkspace(VisualStudioTestCompositions.LanguageServices.AddParts(additionalParts).GetHostServices(), WorkspaceKind.Host);
+        public static Workspace CreateWorkspace(params Type[]? additionalParts) =>
+            new AdhocWorkspace(
+                VisualStudioTestCompositions
+                    .LanguageServices.AddParts(additionalParts)
+                    .GetHostServices(),
+                WorkspaceKind.Host
+            );
 
         private static Workspace CreateWorkspaceWithProjectAndDocuments()
         {
@@ -26,11 +31,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Ag
 
             var workspace = CreateWorkspace();
 
-            Assert.True(workspace.TryApplyChanges(workspace.CurrentSolution
-                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp)
-                .AddDocument(DocumentId.CreateNewId(projectId), "goo.cs", "public class Goo { }")
-                .AddAdditionalDocument(DocumentId.CreateNewId(projectId), "add.txt", "text")
-                .AddAnalyzerConfigDocument(DocumentId.CreateNewId(projectId), "editorcfg", SourceText.From("config"), filePath: "/a/b")));
+            Assert.True(
+                workspace.TryApplyChanges(
+                    workspace
+                        .CurrentSolution.AddProject(
+                            projectId,
+                            "proj1",
+                            "proj1.dll",
+                            LanguageNames.CSharp
+                        )
+                        .AddDocument(
+                            DocumentId.CreateNewId(projectId),
+                            "goo.cs",
+                            "public class Goo { }"
+                        )
+                        .AddAdditionalDocument(DocumentId.CreateNewId(projectId), "add.txt", "text")
+                        .AddAnalyzerConfigDocument(
+                            DocumentId.CreateNewId(projectId),
+                            "editorcfg",
+                            SourceText.From("config"),
+                            filePath: "/a/b"
+                        )
+                )
+            );
 
             return workspace;
         }

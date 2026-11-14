@@ -1,33 +1,38 @@
 //------------------------------------------------------------------------------
 // <copyright file="WebColorConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
-    using System.Collections;    
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
-    using System.Text;
-    using System.Web.Util;
-    using System.Web.UI;
     using System.Globalization;
+    using System.Text;
+    using System.Web.UI;
+    using System.Web.Util;
 
     /// <devdoc>
     /// </devdoc>
-    public class WebColorConverter : ColorConverter {
-
+    public class WebColorConverter : ColorConverter
+    {
         private static Hashtable htmlSysColorTable;
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) {
-            if (value is string) {
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
+        {
+            if (value is string)
+            {
                 string colorText = ((string)value).Trim();
                 Color c = Color.Empty;
 
@@ -36,21 +41,25 @@ namespace System.Web.UI.WebControls {
                     return c;
 
                 // #RRGGBB notation is handled by ColorConverter
-                if (colorText[0] == '#') {
+                if (colorText[0] == '#')
+                {
                     return base.ConvertFrom(context, culture, value);
                 }
 
                 // special case. HTML requires LightGrey, but System.Drawing.KnownColor has LightGray
-                if (StringUtil.EqualsIgnoreCase(colorText, "LightGrey")) {
+                if (StringUtil.EqualsIgnoreCase(colorText, "LightGrey"))
+                {
                     return Color.LightGray;
                 }
 
                 // System color
-                if (htmlSysColorTable == null) {
+                if (htmlSysColorTable == null)
+                {
                     InitializeHTMLSysColorTable();
                 }
                 object o = htmlSysColorTable[colorText];
-                if (o != null) {
+                if (o != null)
+                {
                     return (Color)o;
                 }
             }
@@ -59,20 +68,29 @@ namespace System.Web.UI.WebControls {
             return base.ConvertFrom(context, culture, value);
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-            if (destinationType == null) {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (destinationType == null)
+            {
                 throw new ArgumentNullException("destinationType");
             }
 
-            if (destinationType == typeof(string)) {
-                if (value != null) {
+            if (destinationType == typeof(string))
+            {
+                if (value != null)
+                {
                     Color c = (Color)value;
 
-                    if (c == Color.Empty) {
+                    if (c == Color.Empty)
+                    {
                         return String.Empty;
                     }
 
@@ -118,7 +136,8 @@ namespace System.Web.UI.WebControls {
                     }
                     */
 
-                    if (c.IsKnownColor == false) {
+                    if (c.IsKnownColor == false)
+                    {
                         // in the Web scenario, colors should be formatted in #RRGGBB notation
                         StringBuilder sb = new StringBuilder("#", 7);
                         sb.Append((c.R).ToString("X2", CultureInfo.InvariantCulture));
@@ -132,7 +151,8 @@ namespace System.Web.UI.WebControls {
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-        private static void InitializeHTMLSysColorTable() {
+        private static void InitializeHTMLSysColorTable()
+        {
             Hashtable t = new Hashtable(StringComparer.OrdinalIgnoreCase);
             t["activeborder"] = Color.FromKnownColor(KnownColor.ActiveBorder);
             t["activecaption"] = Color.FromKnownColor(KnownColor.ActiveCaption);
@@ -165,4 +185,3 @@ namespace System.Web.UI.WebControls {
         }
     }
 }
-

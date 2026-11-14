@@ -26,9 +26,6 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Gets a value indicating how strings should be handled for native interop.
         /// </summary>
-        public abstract PInvokeStringFormat PInvokeStringFormat
-        {
-            get;
-        }
+        public abstract PInvokeStringFormat PInvokeStringFormat { get; }
     }
 }

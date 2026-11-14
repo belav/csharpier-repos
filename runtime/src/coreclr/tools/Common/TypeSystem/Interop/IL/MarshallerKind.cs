@@ -9,11 +9,11 @@ namespace Internal.TypeSystem.Interop
         BlittableValue,
         Array,
         BlittableArray,
-        Bool,   // 4 byte bool
-        CBool,  // 1 byte bool
-        VariantBool,  // Variant bool
+        Bool, // 4 byte bool
+        CBool, // 1 byte bool
+        VariantBool, // Variant bool
         Enum,
-        AnsiChar,  // Marshal char (Unicode 16bits) for byte (Ansi 8bits)
+        AnsiChar, // Marshal char (Unicode 16bits) for byte (Ansi 8bits)
         UnicodeChar,
         AnsiCharArray,
         ByValArray,
@@ -40,7 +40,7 @@ namespace Internal.TypeSystem.Interop
         Guid,
         Struct,
         BlittableStruct,
-        BlittableStructPtr,   // Additional indirection on top of blittable struct. Used by MarshalAs(LpStruct)
+        BlittableStructPtr, // Additional indirection on top of blittable struct. Used by MarshalAs(LpStruct)
         LayoutClass,
         LayoutClassPtr,
         AsAnyA,
@@ -50,13 +50,13 @@ namespace Internal.TypeSystem.Interop
         BlittableValueClassByRefReturn,
         BlittableValueClassWithCopyCtor,
         CustomMarshaler,
-        Invalid
+        Invalid,
     }
 
     public enum MarshallerType
     {
         Argument,
         Element,
-        Field
+        Field,
     }
 }

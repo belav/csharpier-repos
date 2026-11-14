@@ -18,9 +18,7 @@ namespace System.IO
         /// Construct a random temp directory in the temp folder.
         /// </summary>
         public TempDirectory()
-            : this (IO.Path.Combine(IO.Path.GetTempPath(), IO.Path.GetRandomFileName()))
-        {
-        }
+            : this(IO.Path.Combine(IO.Path.GetTempPath(), IO.Path.GetRandomFileName())) { }
 
         public TempDirectory(string path)
         {
@@ -28,7 +26,10 @@ namespace System.IO
             Directory.CreateDirectory(path);
         }
 
-        ~TempDirectory() { DeleteDirectory(); }
+        ~TempDirectory()
+        {
+            DeleteDirectory();
+        }
 
         public void Dispose()
         {
@@ -36,12 +37,18 @@ namespace System.IO
             DeleteDirectory();
         }
 
-        public string GenerateRandomFilePath() => IO.Path.Combine(Path, IO.Path.GetRandomFileName());
+        public string GenerateRandomFilePath() =>
+            IO.Path.Combine(Path, IO.Path.GetRandomFileName());
 
         protected virtual void DeleteDirectory()
         {
-            try { Directory.Delete(Path, recursive: true); }
-            catch { /* Ignore exceptions on disposal paths */ }
+            try
+            {
+                Directory.Delete(Path, recursive: true);
+            }
+            catch
+            { /* Ignore exceptions on disposal paths */
+            }
         }
 
         /// <summary>

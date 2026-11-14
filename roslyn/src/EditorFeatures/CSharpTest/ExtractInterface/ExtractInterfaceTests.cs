@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.ExtractInterface;
 using Microsoft.CodeAnalysis.Editor.UnitTests;
+using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Extensions;
 using Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;
@@ -20,7 +21,6 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 using Roslyn.Test.Utilities;
 using Xunit;
-using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 {
@@ -98,7 +98,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Bar");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Bar"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -122,7 +126,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Bar");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Bar"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -146,7 +154,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Goo");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Goo"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -160,7 +172,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Goo", expectedInterfaceName: "IMyInterface1");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Goo",
+                expectedInterfaceName: "IMyInterface1"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -174,7 +191,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Goo", expectedInterfaceName: "IMyInterface1");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Goo",
+                expectedInterfaceName: "IMyInterface1"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -188,7 +210,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Goo", expectedInterfaceName: "ISomeStruct");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Goo",
+                expectedInterfaceName: "ISomeStruct"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -224,7 +251,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Goo");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Goo"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -238,7 +269,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Prop");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Prop"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -277,7 +312,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Prop");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Prop"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -291,7 +330,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "Prop");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "Prop"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -319,7 +362,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "this[]");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "this[]"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -349,7 +396,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "M");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "M"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -379,7 +430,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "M");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "M"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -393,7 +448,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedMemberName: "MyEvent");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedMemberName: "MyEvent"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -425,7 +484,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 class IMyClass2 { }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceName: "IMyClass3");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceName: "IMyClass3"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -439,7 +502,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedNamespaceName: "");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedNamespaceName: ""
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -456,7 +523,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedNamespaceName: "MyNamespace");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedNamespaceName: "MyNamespace"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -476,7 +547,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedNamespaceName: "OuterNamespace.InnerNamespace");
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedNamespaceName: "OuterNamespace.InnerNamespace"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -497,26 +572,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 """;
 
             using var testState = ExtractInterfaceTestState.Create(
-                markup, LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10),
+                markup,
+                LanguageNames.CSharp,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp10
+                ),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped, NotificationOption2.Silent }
-                });
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(result.NavigationDocumentId);
+            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
+                result.NavigationDocumentId
+            );
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 namespace OuterNamespace.InnerNamespace;
 
                 internal interface IMyClass
                 {
                     void Goo();
                 }
-                """, interfaceCode);
+                """,
+                interfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -537,19 +625,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 """;
 
             using var testState = ExtractInterfaceTestState.Create(
-                markup, LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9),
+                markup,
+                LanguageNames.CSharp,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                ),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped, NotificationOption2.Silent }
-                });
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(result.NavigationDocumentId);
+            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
+                result.NavigationDocumentId
+            );
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 namespace OuterNamespace.InnerNamespace
                 {
                     internal interface IMyClass
@@ -557,7 +656,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                         void Goo();
                     }
                 }
-                """, interfaceCode);
+                """,
+                interfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -578,19 +679,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 """;
 
             using var testState = ExtractInterfaceTestState.Create(
-                markup, LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10),
+                markup,
+                LanguageNames.CSharp,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp10
+                ),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped, NotificationOption2.Silent }
-                });
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(result.NavigationDocumentId);
+            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
+                result.NavigationDocumentId
+            );
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 namespace OuterNamespace.InnerNamespace
                 {
                     internal interface IMyClass
@@ -598,7 +710,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                         void Goo();
                     }
                 }
-                """, interfaceCode);
+                """,
+                interfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -622,7 +736,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -646,7 +764,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -670,7 +792,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -705,7 +831,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -729,7 +859,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -755,7 +889,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -794,7 +932,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -822,7 +964,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -852,7 +998,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -889,16 +1039,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 """;
 
             using var testState = ExtractInterfaceTestState.Create(
-                markup, LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10),
+                markup,
+                LanguageNames.CSharp,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp10
+                ),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
-                    { CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, AddImportPlacement.InsideNamespace }
-                });
+                    {
+                        CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                        AddImportPlacement.InsideNamespace
+                    },
+                }
+            );
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(result.NavigationDocumentId);
+            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
+                result.NavigationDocumentId
+            );
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
             Assert.Equal(expectedInterfaceCode, interfaceCode);
@@ -939,7 +1098,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/706894")]
@@ -966,7 +1129,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -991,7 +1158,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/706894")]
@@ -1031,7 +1202,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode: expectedInterfaceCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1047,23 +1222,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 """;
 
             using var testState = ExtractInterfaceTestState.Create(
-                markup, LanguageNames.CSharp,
+                markup,
+                LanguageNames.CSharp,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.Always, NotificationOption2.Silent }
-                });
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.Always,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(result.NavigationDocumentId);
+            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
+                result.NavigationDocumentId
+            );
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 internal interface IMyClass
                 {
                     void Goo();
                 }
-                """, interfaceCode);
+                """,
+                interfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1083,7 +1269,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1103,7 +1293,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1123,7 +1317,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1147,7 +1345,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 interface ISomeInterface {}
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1171,7 +1373,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 interface ISomeInterface<T> {}
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1197,7 +1403,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 interface ISomeInterface2<T, U> {}
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1223,7 +1433,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 interface ISomeInterface2<T, U> {}
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedUpdatedOriginalDocumentCode: expectedCode);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedUpdatedOriginalDocumentCode: expectedCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1237,7 +1451,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: false);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: false
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1251,7 +1469,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1265,7 +1487,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1279,7 +1505,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1293,7 +1523,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1307,7 +1541,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1321,7 +1559,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1335,7 +1577,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1349,7 +1595,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1363,7 +1613,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1379,15 +1633,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestTypeDiscoveryAsync(markup, TypeDiscoveryRule.TypeNameOnly, expectedExtractable: true);
+            await TestTypeDiscoveryAsync(
+                markup,
+                TypeDiscoveryRule.TypeNameOnly,
+                expectedExtractable: true
+            );
         }
 
         private static async Task TestTypeDiscoveryAsync(
             string markup,
             TypeDiscoveryRule typeDiscoveryRule,
-            bool expectedExtractable)
+            bool expectedExtractable
+        )
         {
-            using var testState = ExtractInterfaceTestState.Create(markup, LanguageNames.CSharp, compilationOptions: null);
+            using var testState = ExtractInterfaceTestState.Create(
+                markup,
+                LanguageNames.CSharp,
+                compilationOptions: null
+            );
             var result = await testState.GetTypeAnalysisResultAsync(typeDiscoveryRule);
             Assert.Equal(expectedExtractable, result.CanExtractInterface);
         }
@@ -1403,7 +1666,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 """;
 
             var expectedTypeParameterSuffix = @"<T>";
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedTypeParameterSuffix: expectedTypeParameterSuffix);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedTypeParameterSuffix: expectedTypeParameterSuffix
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1417,7 +1684,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 """;
 
             var expectedTypeParameterSuffix = @"<T>";
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedTypeParameterSuffix: expectedTypeParameterSuffix);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedTypeParameterSuffix: expectedTypeParameterSuffix
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1431,7 +1702,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 """;
 
             var expectedTypeParameterSuffix = @"<T, U>";
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedTypeParameterSuffix: expectedTypeParameterSuffix);
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedTypeParameterSuffix: expectedTypeParameterSuffix
+            );
         }
 
         [WpfFact]
@@ -1439,26 +1714,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
         [Trait(Traits.Feature, Traits.Features.Interactive)]
         public void ExtractInterfaceCommandDisabledInSubmission()
         {
-            using var workspace = TestWorkspace.Create(XElement.Parse("""
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">  
-                        public class $$C
-                        {
-                            public void M() { }
-                        }
-                    </Submission>
-                </Workspace>
-                """),
+            using var workspace = TestWorkspace.Create(
+                XElement.Parse(
+                    """
+                    <Workspace>
+                        <Submission Language="C#" CommonReferences="true">  
+                            public class $$C
+                            {
+                                public void M() { }
+                            }
+                        </Submission>
+                    </Workspace>
+                    """
+                ),
                 workspaceKind: WorkspaceKind.Interactive,
-                composition: EditorTestCompositions.EditorFeaturesWpf);
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             // Force initialization.
-            workspace.GetOpenDocumentIds().Select(id => workspace.GetTestDocument(id).GetTextView()).ToList();
+            workspace
+                .GetOpenDocumentIds()
+                .Select(id => workspace.GetTestDocument(id).GetTextView())
+                .ToList();
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractInterfaceCommandHandler>(PredefinedCommandHandlerNames.ExtractInterface, ContentTypeNames.CSharpContentType);
+            var handler =
+                workspace.ExportProvider.GetCommandHandler<ExtractInterfaceCommandHandler>(
+                    PredefinedCommandHandlerNames.ExtractInterface,
+                    ContentTypeNames.CSharpContentType
+                );
 
-            var state = handler.GetCommandState(new ExtractInterfaceCommandArgs(textView, textView.TextBuffer));
+            var state = handler.GetCommandState(
+                new ExtractInterfaceCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
         }
 
@@ -1475,13 +1763,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass
                 {
                     void Method(in int p1);
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1495,13 +1786,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass
                 {
                     ref readonly int Method();
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1515,13 +1809,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass
                 {
                     ref readonly int Property { get; }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1535,13 +1832,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass
                 {
                     int this[in int p1] { set; }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1555,13 +1855,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass
                 {
                     ref readonly int this[int p1] { get; }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1574,13 +1877,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass<T> where T : unmanaged
                 {
                     void M(T arg);
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1593,13 +1899,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass
                 {
                     void M<T>() where T : unmanaged;
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1612,13 +1921,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass<T> where T : notnull
                 {
                     void M(T arg);
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
@@ -1631,21 +1943,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: true, expectedInterfaceCode:
-                """
+            await TestExtractInterfaceCommandCSharpAsync(
+                markup,
+                expectedSuccess: true,
+                expectedInterfaceCode: """
                 interface ITestClass
                 {
                     void M<T>() where T : notnull;
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/23855")]
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestExtractInterface_WithCopyright1()
         {
-            var markup =
-                """
+            var markup = """
                 // Copyright
 
                 public class $$Goo
@@ -1656,8 +1970,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            var updatedMarkup =
-                """
+            var updatedMarkup = """
                 // Copyright
 
                 public class Goo : IGoo
@@ -1668,8 +1981,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            var expectedInterfaceCode =
-                """
+            var expectedInterfaceCode = """
                 // Copyright
 
                 public interface IGoo
@@ -1682,15 +1994,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedUpdatedOriginalDocumentCode: updatedMarkup,
-                expectedInterfaceCode: expectedInterfaceCode);
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/23855")]
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestExtractInterface_WithCopyright2()
         {
-            var markup =
-                """
+            var markup = """
                 // Copyright
 
                 public class Goo
@@ -1704,8 +2016,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            var updatedMarkup =
-                """
+            var updatedMarkup = """
                 // Copyright
 
                 public class Goo
@@ -1719,8 +2030,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            var expectedInterfaceCode =
-                """
+            var expectedInterfaceCode = """
                 // Copyright
 
                 public interface IA
@@ -1733,31 +2043,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedUpdatedOriginalDocumentCode: updatedMarkup,
-                expectedInterfaceCode: expectedInterfaceCode);
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/49739")]
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestRecord1()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     record $$Whatever(int X, string Y);
                 }
                 """;
 
-            var updatedMarkup =
-                """
+            var updatedMarkup = """
                 namespace Test
                 {
                     record Whatever(int X, string Y) : IWhatever;
                 }
                 """;
 
-            var expectedInterfaceCode =
-                """
+            var expectedInterfaceCode = """
                 namespace Test
                 {
                     interface IWhatever
@@ -1778,63 +2086,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedUpdatedOriginalDocumentCode: updatedMarkup,
-                expectedInterfaceCode: expectedInterfaceCode);
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestClass1()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     class $$Whatever(int X, string Y);
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(
-                markup,
-                expectedSuccess: false);
+            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: false);
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestStruct1()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     struct $$Whatever(int X, string Y);
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(
-                markup,
-                expectedSuccess: false);
+            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: false);
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/49739")]
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestRecord2()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     record $$Whatever(int X, string Y) { }
                 }
                 """;
 
-            var updatedMarkup =
-                """
+            var updatedMarkup = """
                 namespace Test
                 {
                     record Whatever(int X, string Y) : IWhatever { }
                 }
                 """;
 
-            var expectedInterfaceCode =
-                """
+            var expectedInterfaceCode = """
                 namespace Test
                 {
                     interface IWhatever
@@ -1855,47 +2155,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedUpdatedOriginalDocumentCode: updatedMarkup,
-                expectedInterfaceCode: expectedInterfaceCode);
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestClass2()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     class $$Whatever(int X, string Y) { }
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(
-                markup,
-                expectedSuccess: false);
+            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: false);
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestStruct2()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     struct $$Whatever(int X, string Y) { }
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(
-                markup,
-                expectedSuccess: false);
+            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: false);
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/49739")]
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestRecord3()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     /// <summary></summary>
@@ -1903,8 +2197,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            var updatedMarkup =
-                """
+            var updatedMarkup = """
                 namespace Test
                 {
                     /// <summary></summary>
@@ -1912,8 +2205,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            var expectedInterfaceCode =
-                """
+            var expectedInterfaceCode = """
                 namespace Test
                 {
                     interface IWhatever
@@ -1934,14 +2226,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedUpdatedOriginalDocumentCode: updatedMarkup,
-                expectedInterfaceCode: expectedInterfaceCode);
+                expectedInterfaceCode: expectedInterfaceCode
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestClass3()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     /// <summary></summary>
@@ -1949,16 +2241,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(
-                markup,
-                expectedSuccess: false);
+            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: false);
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractInterface)]
         public async Task TestStruct3()
         {
-            var markup =
-                """
+            var markup = """
                 namespace Test
                 {
                     /// <summary></summary>
@@ -1966,9 +2255,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 }
                 """;
 
-            await TestExtractInterfaceCommandCSharpAsync(
-                markup,
-                expectedSuccess: false);
+            await TestExtractInterfaceCommandCSharpAsync(markup, expectedSuccess: false);
         }
     }
 }

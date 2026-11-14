@@ -1,27 +1,28 @@
 using System;
 
-class Test {
-	
-	private long res = 0;
+class Test
+{
+    private long res = 0;
 
-	void test ()
-	{
-		long a = 1, b = 2;
+    void test()
+    {
+        long a = 1,
+            b = 2;
 
-		res = 2 * a + 3 * b;
-	}
-	
-	static int Main ()
-	{
-		Test x = new Test ();
+        res = 2 * a + 3 * b;
+    }
 
-		x.test ();
+    static int Main()
+    {
+        Test x = new Test();
 
-		Console.WriteLine (x.res);
+        x.test();
 
-		if (x.res != 8)
-			return 1;
-		
-		return 0;
-	}
+        Console.WriteLine(x.res);
+
+        if (x.res != 8)
+            return 1;
+
+        return 0;
+    }
 }

@@ -19,7 +19,10 @@ namespace System.Web.WebPages.Test
             var layoutPage = Utils.CreatePage(null, layoutPagePath);
             var page = Utils.CreatePage(null);
             var objectFactory = new Mock<IVirtualPathFactory>();
-            objectFactory.Setup(c => c.Exists(It.Is<string>(p => p.Equals(layoutPagePath)))).Returns(true).Verifiable();
+            objectFactory
+                .Setup(c => c.Exists(It.Is<string>(p => p.Equals(layoutPagePath))))
+                .Returns(true)
+                .Verifiable();
             page.VirtualPathFactory = objectFactory.Object;
 
             // Act
@@ -97,7 +100,8 @@ namespace System.Web.WebPages.Test
                 name: "alt",
                 prefix: new PositionTagged<string>(" alt=\"", 42),
                 suffix: new PositionTagged<string>("\"", 24),
-                expected: " alt=\"\"");
+                expected: " alt=\"\""
+            );
         }
 
         [Fact]
@@ -107,10 +111,16 @@ namespace System.Web.WebPages.Test
                 name: "alt",
                 prefix: new PositionTagged<string>(" alt=\"", 42),
                 suffix: new PositionTagged<string>("\"", 24),
-                values: new[] {
-                    new AttributeValue(new PositionTagged<string>(String.Empty, 142), new PositionTagged<object>(null, 124), literal: true)
+                values: new[]
+                {
+                    new AttributeValue(
+                        new PositionTagged<string>(String.Empty, 142),
+                        new PositionTagged<object>(null, 124),
+                        literal: true
+                    ),
                 },
-                expected: "");
+                expected: ""
+            );
         }
 
         [Fact]
@@ -120,10 +130,16 @@ namespace System.Web.WebPages.Test
                 name: "alt",
                 prefix: new PositionTagged<string>(" alt=\"", 42),
                 suffix: new PositionTagged<string>("\"", 24),
-                values: new[] {
-                    new AttributeValue(new PositionTagged<string>(String.Empty, 142), new PositionTagged<object>(false, 124), literal: true)
+                values: new[]
+                {
+                    new AttributeValue(
+                        new PositionTagged<string>(String.Empty, 142),
+                        new PositionTagged<object>(false, 124),
+                        literal: true
+                    ),
                 },
-                expected: "");
+                expected: ""
+            );
         }
 
         [Fact]
@@ -133,10 +149,16 @@ namespace System.Web.WebPages.Test
                 name: "alt",
                 prefix: new PositionTagged<string>(" alt=\"", 42),
                 suffix: new PositionTagged<string>("\"", 24),
-                values: new[] {
-                    new AttributeValue(new PositionTagged<string>("    ", 142), new PositionTagged<object>("foo", 124), literal: true)
+                values: new[]
+                {
+                    new AttributeValue(
+                        new PositionTagged<string>("    ", 142),
+                        new PositionTagged<object>("foo", 124),
+                        literal: true
+                    ),
                 },
-                expected: " alt=\"foo\"");
+                expected: " alt=\"foo\""
+            );
         }
 
         [Fact]
@@ -146,11 +168,21 @@ namespace System.Web.WebPages.Test
                 name: "alt",
                 prefix: new PositionTagged<string>(" alt=\"", 42),
                 suffix: new PositionTagged<string>("\"", 24),
-                values: new[] {
-                    new AttributeValue(new PositionTagged<string>("    ", 142), new PositionTagged<object>("foo", 124), literal: true),
-                    new AttributeValue(new PositionTagged<string>("glorb", 142), new PositionTagged<object>("bar", 124), literal: true)
+                values: new[]
+                {
+                    new AttributeValue(
+                        new PositionTagged<string>("    ", 142),
+                        new PositionTagged<object>("foo", 124),
+                        literal: true
+                    ),
+                    new AttributeValue(
+                        new PositionTagged<string>("glorb", 142),
+                        new PositionTagged<object>("bar", 124),
+                        literal: true
+                    ),
                 },
-                expected: " alt=\"fooglorbbar\"");
+                expected: " alt=\"fooglorbbar\""
+            );
         }
 
         [Fact]
@@ -160,17 +192,27 @@ namespace System.Web.WebPages.Test
                 name: "alt",
                 prefix: new PositionTagged<string>(" alt=\"", 42),
                 suffix: new PositionTagged<string>("\"", 24),
-                values: new[] {
-                    new AttributeValue(new PositionTagged<string>("    ", 142), new PositionTagged<object>(null, 124), literal: true),
-                    new AttributeValue(new PositionTagged<string>("glorb", 142), new PositionTagged<object>("bar", 124), literal: true)
+                values: new[]
+                {
+                    new AttributeValue(
+                        new PositionTagged<string>("    ", 142),
+                        new PositionTagged<object>(null, 124),
+                        literal: true
+                    ),
+                    new AttributeValue(
+                        new PositionTagged<string>("glorb", 142),
+                        new PositionTagged<object>("bar", 124),
+                        literal: true
+                    ),
                 },
-                expected: " alt=\"bar\"");
+                expected: " alt=\"bar\""
+            );
         }
 
         /// <remarks>
         /// This is a regression test for Html.Raw behaving incorrectly in attributes - the code here is derived from that generated
         /// by the Razor engine on input like the following:
-        /// 
+        ///
         /// cool="@Html.Raw("this is cool text")"
         /// </remarks>
         [Fact]
@@ -181,18 +223,37 @@ namespace System.Web.WebPages.Test
                 name: "alt",
                 prefix: new PositionTagged<string>(" cool=\"", 33),
                 suffix: new PositionTagged<string>("\"", 70),
-                values: new[] {
-                    AttributeValue.FromTuple(Tuple.Create(Tuple.Create("", 40), Tuple.Create<Object, Int32>(new HtmlString(alreadyEncoded), 40), false)), 
+                values: new[]
+                {
+                    AttributeValue.FromTuple(
+                        Tuple.Create(
+                            Tuple.Create("", 40),
+                            Tuple.Create<Object, Int32>(new HtmlString(alreadyEncoded), 40),
+                            false
+                        )
+                    ),
                 },
-                expected: " cool=\"" + alreadyEncoded + "\"");
+                expected: " cool=\"" + alreadyEncoded + "\""
+            );
         }
 
-        private void WriteAttributeTest(string name, PositionTagged<string> prefix, PositionTagged<string> suffix, string expected)
+        private void WriteAttributeTest(
+            string name,
+            PositionTagged<string> prefix,
+            PositionTagged<string> suffix,
+            string expected
+        )
         {
             WriteAttributeTest(name, prefix, suffix, new AttributeValue[0], expected);
         }
 
-        private void WriteAttributeTest(string name, PositionTagged<string> prefix, PositionTagged<string> suffix, AttributeValue[] values, string expected)
+        private void WriteAttributeTest(
+            string name,
+            PositionTagged<string> prefix,
+            PositionTagged<string> suffix,
+            AttributeValue[] values,
+            string expected
+        )
         {
             // Arrange
             var pageMock = new Mock<WebPageExecutingBase>() { CallBase = true };

@@ -25,7 +25,8 @@ namespace System.Runtime.Serialization
 
         public int GetId(object obj, ref bool newId)
         {
-            bool isEmpty, isWrapped;
+            bool isEmpty,
+                isWrapped;
             int position = FindElement(obj, out isEmpty, out isWrapped);
             if (!isEmpty)
             {
@@ -47,7 +48,8 @@ namespace System.Runtime.Serialization
         // (oldObjId, oldObj-id, newObj-newObjId) => (oldObj-oldObjId, newObj-id, newObjId )
         public int ReassignId(int oldObjId, object oldObj, object newObj)
         {
-            bool isEmpty, isWrapped;
+            bool isEmpty,
+                isWrapped;
             int position = FindElement(oldObj, out isEmpty, out _);
             if (isEmpty)
                 return 0;
@@ -97,7 +99,11 @@ namespace System.Runtime.Serialization
         {
             int cacheSize = m_objs.Length;
             int lastVacantPosition = position;
-            for (int next = (position == cacheSize - 1) ? 0 : position + 1; next != position; next++)
+            for (
+                int next = (position == cacheSize - 1) ? 0 : position + 1;
+                next != position;
+                next++
+            )
             {
                 if (m_objs[next] == null)
                 {
@@ -113,13 +119,18 @@ namespace System.Runtime.Serialization
 
                 // We want to avoid moving objects in the cache if the next bucket position is wrapped, but the last vacant position isn't
                 // and we want to make sure to move objects in the cache when the last vacant position is wrapped but the next bucket position isn't
-                if ((nextStartPosition <= lastVacantPosition && !(isNextStartPositionWrapped && !isLastVacantPositionWrapped)) ||
-                    (isLastVacantPositionWrapped && !isNextStartPositionWrapped))
+                if (
+                    (
+                        nextStartPosition <= lastVacantPosition
+                        && !(isNextStartPositionWrapped && !isLastVacantPositionWrapped)
+                    ) || (isLastVacantPositionWrapped && !isNextStartPositionWrapped)
+                )
                 {
                     m_objs[lastVacantPosition] = m_objs[next];
                     m_ids[lastVacantPosition] = m_ids[next];
                     // A wrapped object might become unwrapped if it moves from the front of the array to the end of the array
-                    m_isWrapped[lastVacantPosition] = m_isWrapped[next] && next > lastVacantPosition;
+                    m_isWrapped[lastVacantPosition] =
+                        m_isWrapped[next] && next > lastVacantPosition;
                     lastVacantPosition = next;
                 }
                 if (next == (cacheSize - 1))
@@ -164,10 +175,36 @@ namespace System.Runtime.Serialization
         {
             ReadOnlySpan<int> primes =
             [
-                3, 7, 17, 37, 89, 197, 431, 919, 1931, 4049, 8419, 17519, 36353,
-                75431, 156437, 324449, 672827, 1395263, 2893249, 5999471,
-                11998949, 23997907, 47995853, 95991737, 191983481, 383966977, 767933981, 1535867969,
-                2146435069, 0x7FFFFFC7
+                3,
+                7,
+                17,
+                37,
+                89,
+                197,
+                431,
+                919,
+                1931,
+                4049,
+                8419,
+                17519,
+                36353,
+                75431,
+                156437,
+                324449,
+                672827,
+                1395263,
+                2893249,
+                5999471,
+                11998949,
+                23997907,
+                47995853,
+                95991737,
+                191983481,
+                383966977,
+                767933981,
+                1535867969,
+                2146435069,
+                0x7FFFFFC7,
                 // 0x7FFFFFC7 == Array.MaxLength is not prime, but it is the largest possible array size.
                 // There's nowhere to go from here. Using a const rather than the MaxLength property
                 // so that the array contains only const values.

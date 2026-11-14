@@ -13,8 +13,12 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusCode = 404).Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusDescription = "Some description").Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.StatusCode = 404)
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.StatusDescription = "Some description")
+                .Verifiable();
 
             HttpNotFoundResult result = new HttpNotFoundResult("Some description");
 

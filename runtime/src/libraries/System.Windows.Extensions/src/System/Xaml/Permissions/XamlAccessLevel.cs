@@ -33,7 +33,10 @@ namespace System.Xaml.Permissions
         {
             int nameBoundary = assemblyQualifiedTypeName.IndexOf(',');
             string typeName = assemblyQualifiedTypeName.AsSpan(0, nameBoundary).Trim().ToString();
-            string assemblyFullName = assemblyQualifiedTypeName.AsSpan(nameBoundary + 1).Trim().ToString();
+            string assemblyFullName = assemblyQualifiedTypeName
+                .AsSpan(nameBoundary + 1)
+                .Trim()
+                .ToString();
             AssemblyName assemblyName = new AssemblyName(assemblyFullName);
             return new XamlAccessLevel(assemblyName.FullName, typeName);
         }

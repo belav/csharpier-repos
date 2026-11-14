@@ -15,42 +15,65 @@ namespace System.Runtime.Intrinsics.Wasm
         /// <summary>
         ///   i32.clz
         /// </summary>
-        public static int LeadingZeroCount(int value) { throw new PlatformNotSupportedException(); }
+        public static int LeadingZeroCount(int value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   i32.clz
         /// </summary>
-        public static int LeadingZeroCount(uint value) { throw new PlatformNotSupportedException(); }
+        public static int LeadingZeroCount(uint value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   i64.clz
         /// </summary>
-        public static int LeadingZeroCount(long value) { throw new PlatformNotSupportedException(); }
+        public static int LeadingZeroCount(long value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   i64.clz
         /// </summary>
-        public static int LeadingZeroCount(ulong value) { throw new PlatformNotSupportedException(); }
+        public static int LeadingZeroCount(ulong value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   i32.ctz
         /// </summary>
-        public static int TrailingZeroCount(int value) { throw new PlatformNotSupportedException(); }
+        public static int TrailingZeroCount(int value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   i32.ctz
         /// </summary>
-        public static int TrailingZeroCount(uint value) { throw new PlatformNotSupportedException(); }
+        public static int TrailingZeroCount(uint value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   i64.ctz
         /// </summary>
-        public static int TrailingZeroCount(long value) { throw new PlatformNotSupportedException(); }
+        public static int TrailingZeroCount(long value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   i64.ctz
         /// </summary>
-        public static int TrailingZeroCount(ulong value) { throw new PlatformNotSupportedException(); }
-
+        public static int TrailingZeroCount(ulong value)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }

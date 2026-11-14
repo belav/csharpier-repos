@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,52 +34,48 @@
 using System;
 using System.Globalization;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapMonth : ISoapXsd
-	{
-		static readonly string[] _datetimeFormats = new string[]
-		{
-			"--MM--",
-			"--MM--zzz"
-		};
-		
-		DateTime _value;
-		
-		public SoapMonth ()
-		{
-		}
-		
-		public SoapMonth (DateTime value)
-		{
-			_value = value;
-		}
-		
-		public DateTime Value {
-			get { return _value; } 
-			set { _value = value; }
-		}
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class SoapMonth : ISoapXsd
+    {
+        static readonly string[] _datetimeFormats = new string[] { "--MM--", "--MM--zzz" };
 
-		public static string XsdType {
-			get { return "gMonth"; }
-		}
+        DateTime _value;
 
-		public string GetXsdType()
-		{
-			return XsdType;
-		}
-		
-		public static SoapMonth Parse (string value)
-		{
-			DateTime d = DateTime.ParseExact (value, _datetimeFormats, null, DateTimeStyles.None);
-			return new SoapMonth (d);
-		}
+        public SoapMonth() { }
 
-		public override string ToString()
-		{
-			return _value.ToString("--MM--", CultureInfo.InvariantCulture);
-		}
-	}
+        public SoapMonth(DateTime value)
+        {
+            _value = value;
+        }
+
+        public DateTime Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        }
+
+        public static string XsdType
+        {
+            get { return "gMonth"; }
+        }
+
+        public string GetXsdType()
+        {
+            return XsdType;
+        }
+
+        public static SoapMonth Parse(string value)
+        {
+            DateTime d = DateTime.ParseExact(value, _datetimeFormats, null, DateTimeStyles.None);
+            return new SoapMonth(d);
+        }
+
+        public override string ToString()
+        {
+            return _value.ToString("--MM--", CultureInfo.InvariantCulture);
+        }
+    }
 }

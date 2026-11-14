@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,36 +33,39 @@
 using System;
 using System.Configuration;
 
-namespace System.Net.Configuration {
+namespace System.Net.Configuration
+{
+    public sealed class WebProxyScriptElement : ConfigurationElement
+    {
+        static ConfigurationProperty downloadTimeoutProp;
+        static ConfigurationPropertyCollection properties;
 
-        public sealed class WebProxyScriptElement : ConfigurationElement
+        static WebProxyScriptElement()
         {
-                static ConfigurationProperty downloadTimeoutProp;
-                static ConfigurationPropertyCollection properties;
+            downloadTimeoutProp = new ConfigurationProperty(
+                "downloadTimeout",
+                typeof(TimeSpan),
+                new TimeSpan(0, 0, 2, 0)
+            );
+            properties = new ConfigurationPropertyCollection();
 
-                static WebProxyScriptElement ()
-                {
-                        downloadTimeoutProp = new ConfigurationProperty ("downloadTimeout", typeof (TimeSpan), new TimeSpan (0,0,2,0));
-                        properties = new ConfigurationPropertyCollection ();
-
-                        properties.Add (downloadTimeoutProp);
-                }
-
-                protected override void PostDeserialize ()
-                {
-                }
-
-                [ConfigurationProperty ("downloadTimeout", DefaultValue = "00:02:00")]
-                public TimeSpan DownloadTimeout {
-                        get { return (TimeSpan) base [downloadTimeoutProp];}
-                        set { base[downloadTimeoutProp] = value; }
-                }
-
-                protected override ConfigurationPropertyCollection Properties {
-                        get { return properties; }
-                }
+            properties.Add(downloadTimeoutProp);
         }
 
+        protected override void PostDeserialize() { }
+
+        [ConfigurationProperty("downloadTimeout", DefaultValue = "00:02:00")]
+        public TimeSpan DownloadTimeout
+        {
+            get { return (TimeSpan)base[downloadTimeoutProp]; }
+            set { base[downloadTimeoutProp] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
 
 #endif

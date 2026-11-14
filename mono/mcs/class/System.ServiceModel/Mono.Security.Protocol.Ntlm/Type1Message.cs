@@ -21,10 +21,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,121 +38,125 @@ using System;
 using System.Globalization;
 using System.Text;
 
-namespace Mono.Security.Protocol.Ntlm {
+namespace Mono.Security.Protocol.Ntlm
+{
+    public class Type1Message : MessageBase
+    {
+        private string _host;
+        private string _domain;
 
-	public class Type1Message : MessageBase {
+        public Type1Message()
+            : this(NtlmVersion.Version2) { }
 
-		private string _host;
-		private string _domain;
+        public Type1Message(NtlmVersion version)
+            : base(1, version)
+        {
+            // default values
+            _domain = Environment.UserDomainName;
+            _host = Environment.MachineName;
+            Flags = (NtlmFlags)0xb203;
+        }
 
-		public Type1Message () : this (NtlmVersion.Version2)
-		{
-		}
+        public Type1Message(byte[] message)
+            : this(message, NtlmVersion.Version2) { }
 
-		public Type1Message (NtlmVersion version) : base (1, version)
-		{
-			// default values
-			_domain = Environment.UserDomainName;
-			_host = Environment.MachineName;
-			Flags = (NtlmFlags) 0xb203;
-		}
+        public Type1Message(byte[] message, NtlmVersion version)
+            : base(1, version)
+        {
+            Decode(message);
+        }
 
-		public Type1Message (byte[] message) : this (message, NtlmVersion.Version2)
-		{
-		}
+        // properties
 
-		public Type1Message (byte[] message, NtlmVersion version) : base (1, version)
-		{
-			Decode (message);
-		}
+        public string Domain
+        {
+            get { return _domain; }
+            set { _domain = value; }
+        }
 
-		// properties
+        public string Host
+        {
+            get { return _host; }
+            set { _host = value; }
+        }
 
-		public string Domain {
-			get { return _domain; }
-			set { _domain = value; }
-		}
+        // methods
 
-		public string Host {
-			get { return _host; }
-			set { _host = value; }
-		}
+        protected override void Decode(byte[] message)
+        {
+            base.Decode(message);
 
-		// methods
+            Flags = (NtlmFlags)BitConverterLE.ToUInt32(message, 12);
+            if (Version == NtlmVersion.Version1)
+                return;
 
-		protected override void Decode (byte[] message) 
-		{
-			base.Decode (message);
+            int dom_len = BitConverterLE.ToUInt16(message, 16);
+            int dom_off = BitConverterLE.ToUInt16(message, 20);
+            _domain = Encoding.ASCII.GetString(message, dom_off, dom_len);
 
-			Flags = (NtlmFlags) BitConverterLE.ToUInt32 (message, 12);
-			if (Version == NtlmVersion.Version1)
-				return;
+            int host_len = BitConverterLE.ToUInt16(message, 24);
+            int host_off = BitConverterLE.ToUInt16(message, 28);
+            _host = Encoding.ASCII.GetString(message, host_off, host_len);
 
-			int dom_len = BitConverterLE.ToUInt16 (message, 16);
-			int dom_off = BitConverterLE.ToUInt16 (message, 20);
-			_domain = Encoding.ASCII.GetString (message, dom_off, dom_len);
+            if (Version != NtlmVersion.Version3)
+                return;
+            OSVersion = CreateSubArray(message, 32, 8);
+        }
 
-			int host_len = BitConverterLE.ToUInt16 (message, 24);
-			int host_off = BitConverterLE.ToUInt16 (message, 28);
-			_host = Encoding.ASCII.GetString (message, host_off, host_len);
+        public override byte[] GetBytes()
+        {
+            short dom_len = 0,
+                host_len = 0;
+            if (Version != NtlmVersion.Version1)
+            {
+                dom_len = (short)_domain.Length;
+                host_len = (short)_host.Length;
+            }
 
-			if (Version != NtlmVersion.Version3)
-				return;
-			OSVersion = CreateSubArray (message, 32, 8);
-		}
+            int headSize = (Version == NtlmVersion.Version3 ? 40 : 32);
 
-		public override byte[] GetBytes () 
-		{
-			short dom_len = 0, host_len = 0;
-			if (Version != NtlmVersion.Version1) {
-				dom_len = (short) _domain.Length;
-				host_len = (short) _host.Length;
-			}
+            byte[] data = PrepareMessage(headSize + dom_len + host_len);
 
-			int headSize = (Version == NtlmVersion.Version3 ? 40 : 32);
+            // v1 contains only the flags.
+            if (Version == NtlmVersion.Version1)
+                return data;
 
-			byte[] data = PrepareMessage (headSize + dom_len + host_len);
+            data[12] = (byte)Flags;
+            data[13] = (byte)((uint)Flags >> 8);
+            data[14] = (byte)((uint)Flags >> 16);
+            data[15] = (byte)((uint)Flags >> 24);
 
-			// v1 contains only the flags.
-			if (Version == NtlmVersion.Version1)
-				return data;
+            int dom_off = (headSize + host_len);
 
-			data [12] = (byte) Flags;
-			data [13] = (byte)((uint)Flags >> 8);
-			data [14] = (byte)((uint)Flags >> 16);
-			data [15] = (byte)((uint)Flags >> 24);
+            data[16] = (byte)dom_len;
+            data[17] = (byte)(dom_len >> 8);
+            data[18] = data[16];
+            data[19] = data[17];
+            data[20] = (byte)dom_off;
+            data[21] = (byte)(dom_off >> 8);
+            data[22] = (byte)(dom_off >> 16);
+            data[23] = (byte)(dom_off >> 24);
 
-			int dom_off = (headSize + host_len);
+            int host_off = headSize;
+            data[24] = (byte)host_len;
+            data[25] = (byte)(host_len >> 8);
+            data[26] = data[24];
+            data[27] = data[25];
+            data[28] = (byte)host_off;
+            data[29] = (byte)(host_off >> 8);
+            data[30] = (byte)(host_off >> 16);
+            data[31] = (byte)(host_off >> 24);
 
-			data [16] = (byte) dom_len;
-			data [17] = (byte)(dom_len >> 8);
-			data [18] = data [16];
-			data [19] = data [17];
-			data [20] = (byte) dom_off;
-			data [21] = (byte)(dom_off >> 8);
-			data [22] = (byte)(dom_off >> 16);
-			data [23] = (byte)(dom_off >> 24);
+            if (Version == NtlmVersion.Version3)
+                Buffer.BlockCopy(OSVersion, 0, data, 32, OSVersion.Length);
 
-			int host_off = headSize;
-			data [24] = (byte) host_len;
-			data [25] = (byte)(host_len >> 8);
-			data [26] = data [24];
-			data [27] = data [25];
-			data [28] = (byte) host_off;
-			data [29] = (byte)(host_off >> 8);
-			data [30] = (byte)(host_off >> 16);
-			data [31] = (byte)(host_off >> 24);
+            byte[] host = Encoding.ASCII.GetBytes(_host.ToUpper(CultureInfo.InvariantCulture));
+            Buffer.BlockCopy(host, 0, data, host_off, host.Length);
 
-			if (Version == NtlmVersion.Version3)
-				Buffer.BlockCopy (OSVersion, 0, data, 32, OSVersion.Length);
+            byte[] domain = Encoding.ASCII.GetBytes(_domain.ToUpper(CultureInfo.InvariantCulture));
+            Buffer.BlockCopy(domain, 0, data, dom_off, domain.Length);
 
-			byte[] host = Encoding.ASCII.GetBytes (_host.ToUpper (CultureInfo.InvariantCulture));
-			Buffer.BlockCopy (host, 0, data, host_off, host.Length);
-
-			byte[] domain = Encoding.ASCII.GetBytes (_domain.ToUpper (CultureInfo.InvariantCulture));
-			Buffer.BlockCopy (domain, 0, data, dom_off, domain.Length);
-
-			return data;
-		}
-	}
+            return data;
+        }
+    }
 }

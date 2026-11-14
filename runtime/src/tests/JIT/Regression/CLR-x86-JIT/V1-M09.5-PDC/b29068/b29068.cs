@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -21,12 +22,8 @@ namespace Test
                 GC.Collect();
                 s_axForward1 = new AA[7];
                 GC.Collect();
-                while ((bool)new AA()._axField1[2])
-                {
-                }
-                for (; (249u <= ((24 - 71) - ((int)(local3)))); new AA())
-                {
-                }
+                while ((bool)new AA()._axField1[2]) { }
+                for (; (249u <= ((24 - 71) - ((int)(local3)))); new AA()) { }
             }
             GC.Collect();
             GC.Collect();
@@ -35,6 +32,7 @@ namespace Test
             GC.Collect();
             return new float[7];
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

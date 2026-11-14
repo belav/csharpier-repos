@@ -14,22 +14,34 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
     {
         private class ArgumentFixer : Fixer<ArgumentSyntax, ArgumentListSyntax, SyntaxNode>
         {
-            protected override ExpressionSyntax GetExpressionOfArgument(ArgumentSyntax argument)
-                => argument.Expression;
+            protected override ExpressionSyntax GetExpressionOfArgument(ArgumentSyntax argument) =>
+                argument.Expression;
 
-            protected override ArgumentSyntax GenerateNewArgument(ArgumentSyntax oldArgument, ITypeSymbol conversionType)
-                => oldArgument.WithExpression(oldArgument.Expression.Cast(conversionType));
+            protected override ArgumentSyntax GenerateNewArgument(
+                ArgumentSyntax oldArgument,
+                ITypeSymbol conversionType
+            ) => oldArgument.WithExpression(oldArgument.Expression.Cast(conversionType));
 
-            protected override ArgumentListSyntax GenerateNewArgumentList(ArgumentListSyntax oldArgumentList, ArrayBuilder<ArgumentSyntax> newArguments)
-                => oldArgumentList.WithArguments(SyntaxFactory.SeparatedList(newArguments));
+            protected override ArgumentListSyntax GenerateNewArgumentList(
+                ArgumentListSyntax oldArgumentList,
+                ArrayBuilder<ArgumentSyntax> newArguments
+            ) => oldArgumentList.WithArguments(SyntaxFactory.SeparatedList(newArguments));
 
-            protected override SeparatedSyntaxList<ArgumentSyntax> GetArgumentsOfArgumentList(ArgumentListSyntax argumentList)
-                => argumentList.Arguments;
+            protected override SeparatedSyntaxList<ArgumentSyntax> GetArgumentsOfArgumentList(
+                ArgumentListSyntax argumentList
+            ) => argumentList.Arguments;
 
-            protected override SymbolInfo GetSpeculativeSymbolInfo(SemanticModel semanticModel, ArgumentListSyntax newArgumentList)
+            protected override SymbolInfo GetSpeculativeSymbolInfo(
+                SemanticModel semanticModel,
+                ArgumentListSyntax newArgumentList
+            )
             {
                 var newInvocation = newArgumentList.Parent!;
-                return semanticModel.GetSpeculativeSymbolInfo(newInvocation.SpanStart, newInvocation, SpeculativeBindingOption.BindAsExpression);
+                return semanticModel.GetSpeculativeSymbolInfo(
+                    newInvocation.SpanStart,
+                    newInvocation,
+                    SpeculativeBindingOption.BindAsExpression
+                );
             }
         }
     }

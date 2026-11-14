@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpRemoveAsyncModifierCodeFixProvider>;
+        CSharpRemoveAsyncModifierCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveAsyncModifier)]
     public class RemoveAsyncModifierTests : CodeAnalysis.CSharp.Test.Utilities.CSharpTestBase
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return Task.CompletedTask;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -159,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return Task.CompletedTask;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -195,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return Task.CompletedTask;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -382,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         throw new System.ApplicationException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -428,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return Task.CompletedTask;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -473,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return Task.CompletedTask;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -511,7 +518,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return Task.FromResult(3);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -533,7 +541,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                 {
                     Task<int> Goo() => Task.FromResult(2);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -561,7 +570,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return Task.CompletedTask;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -603,7 +613,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -633,7 +644,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         Task Goo() { Console.WriteLine(1); return Task.CompletedTask; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -667,7 +679,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -695,7 +708,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         Task<int> Goo() => Task.FromResult(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -738,7 +752,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -774,7 +789,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -804,7 +820,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         Func<int, Task<int>> foo = x => Task.FromResult(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -839,7 +856,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -869,7 +887,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         Func<int, Task> foo = x => { Console.WriteLine(1); return Task.CompletedTask; };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -912,7 +931,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -942,7 +962,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         Func<Task<int>> foo = () => Task.FromResult(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -977,7 +998,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1007,7 +1029,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         Func<Task> foo = () => { Console.WriteLine(1); return Task.CompletedTask; };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1050,7 +1073,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1082,7 +1106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return System.Threading.Tasks.Task.CompletedTask;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1116,13 +1141,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return System.Threading.Tasks.Task.FromResult(2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/65536")]
         public async Task Method_TaskOfT_BlockBody_QualifyTaskFromResultType()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.Threading.Tasks;
                 using System.Collections.Generic;
 
@@ -1133,10 +1160,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return new int[0];
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     public Task<IReadOnlyCollection<int>> M()
@@ -1144,24 +1172,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                         return Task.FromResult<IReadOnlyCollection<int>>(new int[0]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task IAsyncEnumerable_Missing()
         {
-            var source = """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
+            var source =
+                """
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    async IAsyncEnumerable<int> M()
+                    class C
                     {
-                        yield return 1;
+                        async IAsyncEnumerable<int> M()
+                        {
+                            yield return 1;
+                        }
                     }
-                }
-                """ + AsyncStreamsTypes;
+                    """ + AsyncStreamsTypes;
 
             await new VerifyCS.Test
             {

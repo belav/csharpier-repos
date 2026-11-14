@@ -3,14 +3,14 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.Diagnostics;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Runtime.Serialization;
-    using System.Xml.XPath;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.Xml.XPath;
 
     /// <summary>
     /// Multi-reader, single writer
@@ -19,7 +19,7 @@ namespace System.ServiceModel.Dispatcher
     public class XPathMessageFilterTable<TFilterData> : IMessageFilterTable<TFilterData>
     {
         internal Dictionary<MessageFilter, TFilterData> filters;
-        InverseQueryMatcher iqMatcher;  // inverse query matcher
+        InverseQueryMatcher iqMatcher; // inverse query matcher
 
         public XPathMessageFilterTable()
         {
@@ -29,7 +29,13 @@ namespace System.ServiceModel.Dispatcher
         public XPathMessageFilterTable(int capacity)
         {
             if (capacity < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("capacity", capacity, SR.GetString(SR.FilterCapacityNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "capacity",
+                        capacity,
+                        SR.GetString(SR.FilterCapacityNegative)
+                    )
+                );
 
             Init(capacity);
         }
@@ -53,18 +59,12 @@ namespace System.ServiceModel.Dispatcher
 
         bool CanMatch
         {
-            get
-            {
-                return (this.filters.Count > 0 && null != this.iqMatcher);
-            }
+            get { return (this.filters.Count > 0 && null != this.iqMatcher); }
         }
 
         public TFilterData this[MessageFilter filter]
         {
-            get
-            {
-                return this.filters[filter];
-            }
+            get { return this.filters[filter]; }
             set
             {
                 if (this.filters.ContainsKey(filter))
@@ -80,10 +80,7 @@ namespace System.ServiceModel.Dispatcher
 
         public int Count
         {
-            get
-            {
-                return this.filters.Count;
-            }
+            get { return this.filters.Count; }
         }
 
         [DataMember]
@@ -109,27 +106,21 @@ namespace System.ServiceModel.Dispatcher
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public ICollection<MessageFilter> Keys
         {
-            get
-            {
-                return this.filters.Keys;
-            }
+            get { return this.filters.Keys; }
         }
 
         /// <summary>
         /// Some filters could be extremely expensive to evaluate or are very long running (infinite). A
         /// filter table could have a very large number of relatively simple filters that taken as a whole would have
-        /// a very long running time. XPathFilters could be created using XPath off the wire, which may be malicious. 
+        /// a very long running time. XPathFilters could be created using XPath off the wire, which may be malicious.
         /// Since filters operate on Xml infosets, a natural and simple way to set computational limits on filter tables
         /// is to specify the maximum # of nodes that should be looked at while evaluating ANY of the filters in this
-        /// table. 
+        /// table.
         /// </summary>
         [DataMember]
         public int NodeQuota
@@ -143,7 +134,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("NodeQuota", value, SR.GetString(SR.FilterQuotaRange)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "NodeQuota",
+                            value,
+                            SR.GetString(SR.FilterQuotaRange)
+                        )
+                    );
                 }
 
                 if (null == this.iqMatcher)
@@ -156,10 +153,7 @@ namespace System.ServiceModel.Dispatcher
 
         public ICollection<TFilterData> Values
         {
-            get
-            {
-                return this.filters.Values;
-            }
+            get { return this.filters.Values; }
         }
 
         public void Add(MessageFilter filter, TFilterData data)
@@ -184,7 +178,7 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("filter");
             }
 
-            //this.EnsureMatcher();            
+            //this.EnsureMatcher();
             this.filters.Add(filter, data);
             this.iqMatcher.Add(filter.XPath, filter.Namespaces, filter, forceExternal);
         }
@@ -300,7 +294,14 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(message, filters);
             if (filters.Count > 1)
             {
-                throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, filters), message);
+                throw TraceUtility.ThrowHelperError(
+                    new MultipleFilterMatchesException(
+                        SR.GetString(SR.FilterMultipleMatches),
+                        null,
+                        filters
+                    ),
+                    message
+                );
             }
             else if (filters.Count == 1)
             {
@@ -320,7 +321,13 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(messageBuffer, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, filters));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MultipleFilterMatchesException(
+                        SR.GetString(SR.FilterMultipleMatches),
+                        null,
+                        filters
+                    )
+                );
             }
             else if (filters.Count == 1)
             {
@@ -340,7 +347,13 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(navigator, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, filters));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MultipleFilterMatchesException(
+                        SR.GetString(SR.FilterMultipleMatches),
+                        null,
+                        filters
+                    )
+                );
             }
             else if (filters.Count == 1)
             {
@@ -360,7 +373,13 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(navigator, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, filters));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MultipleFilterMatchesException(
+                        SR.GetString(SR.FilterMultipleMatches),
+                        null,
+                        filters
+                    )
+                );
             }
             else if (filters.Count == 1)
             {
@@ -394,7 +413,10 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 
-        public bool GetMatchingFilters(MessageBuffer messageBuffer, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(
+            MessageBuffer messageBuffer,
+            ICollection<MessageFilter> results
+        )
         {
             if (null == messageBuffer)
             {
@@ -414,7 +436,10 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 
-        public bool GetMatchingFilters(SeekableXPathNavigator navigator, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(
+            SeekableXPathNavigator navigator,
+            ICollection<MessageFilter> results
+        )
         {
             if (null == navigator)
             {
@@ -494,7 +519,10 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 
-        public bool GetMatchingValues(SeekableXPathNavigator navigator, ICollection<TFilterData> results)
+        public bool GetMatchingValues(
+            SeekableXPathNavigator navigator,
+            ICollection<TFilterData> results
+        )
         {
             if (null == navigator)
             {

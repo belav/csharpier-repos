@@ -15,22 +15,22 @@ namespace System.Numerics.Tests
             // Trivial cases
             //                     sign bit|shortest two's complement
             //                              string w/o sign bit
-            VerifyGetBitLength(0, 0);  // 0|
-            VerifyGetBitLength(1, 1);  // 0|1
+            VerifyGetBitLength(0, 0); // 0|
+            VerifyGetBitLength(1, 1); // 0|1
             VerifyGetBitLength(-1, 0); // 1|
-            VerifyGetBitLength(2, 2);  // 0|10
+            VerifyGetBitLength(2, 2); // 0|10
             VerifyGetBitLength(-2, 1); // 1|0
-            VerifyGetBitLength(3, 2);  // 0|11
+            VerifyGetBitLength(3, 2); // 0|11
             VerifyGetBitLength(-3, 2); // 1|01
-            VerifyGetBitLength(4, 3);  // 0|100
+            VerifyGetBitLength(4, 3); // 0|100
             VerifyGetBitLength(-4, 2); // 1|00
-            VerifyGetBitLength(5, 3);  // 0|101
+            VerifyGetBitLength(5, 3); // 0|101
             VerifyGetBitLength(-5, 3); // 1|011
-            VerifyGetBitLength(6, 3);  // 0|110
+            VerifyGetBitLength(6, 3); // 0|110
             VerifyGetBitLength(-6, 3); // 1|010
-            VerifyGetBitLength(7, 3);  // 0|111
+            VerifyGetBitLength(7, 3); // 0|111
             VerifyGetBitLength(-7, 3); // 1|001
-            VerifyGetBitLength(8, 4);  // 0|1000
+            VerifyGetBitLength(8, 4); // 0|1000
             VerifyGetBitLength(-8, 3); // 1|000
 
             // Random cases
@@ -40,7 +40,10 @@ namespace System.Numerics.Tests
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.Is64BitProcess))] // OOM on 32 bit
         [OuterLoop("Allocates large arrays")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.Android | TestPlatforms.Browser, "OOM on browser and mobile due to large array allocations")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.Android | TestPlatforms.Browser,
+            "OOM on browser and mobile due to large array allocations"
+        )]
         public static void RunGetBitLengthTestsLarge()
         {
             // Very large cases
@@ -86,7 +89,8 @@ namespace System.Numerics.Tests
 
         private static long Log2BitLength(BigInteger integer)
         {
-            return (long)Math.Ceiling(BigInteger.Log(integer.Sign < 0 ? -integer : integer + 1, 2.0));
+            return (long)
+                Math.Ceiling(BigInteger.Log(integer.Sign < 0 ? -integer : integer + 1, 2.0));
         }
 
         private static bool TryIterativeBitLength(BigInteger integer, out long bitLength)
@@ -95,7 +99,7 @@ namespace System.Numerics.Tests
 
             try
             {
-                value = (long) integer;
+                value = (long)integer;
             }
             catch (OverflowException)
             {
@@ -127,12 +131,20 @@ namespace System.Numerics.Tests
             Assert.Equal(expectedBitLength, actualBitLength);
         }
 
-        private static void VerifyGetBitLength(BigInteger bigInt, long expectedResult, uint epsilon = 0)
+        private static void VerifyGetBitLength(
+            BigInteger bigInt,
+            long expectedResult,
+            uint epsilon = 0
+        )
         {
             long actualBitLength = GetBitLength(bigInt);
 
             // Log is imprecise on large inputs
-            Assert.InRange(Log2BitLength(bigInt), expectedResult - epsilon, expectedResult + epsilon);
+            Assert.InRange(
+                Log2BitLength(bigInt),
+                expectedResult - epsilon,
+                expectedResult + epsilon
+            );
 
             // self-consistency check
             if (TryIterativeBitLength(bigInt, out long expectedBitLengthIterative))

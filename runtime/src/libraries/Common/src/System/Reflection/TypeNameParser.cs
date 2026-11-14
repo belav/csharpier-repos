@@ -130,7 +130,12 @@ namespace System.Reflection
                 return null;
 
             // Because "[" is used both for generic arguments and array indexes, we must peek two characters deep.
-            if (!(Peek is TokenType.OpenSqBracket && (PeekSecond is TokenType.Other or TokenType.OpenSqBracket)))
+            if (
+                !(
+                    Peek is TokenType.OpenSqBracket
+                    && (PeekSecond is TokenType.Other or TokenType.OpenSqBracket)
+                )
+            )
                 return namedType;
 
             Skip();
@@ -187,8 +192,7 @@ namespace System.Reflection
                     if (nestedNamesCount >= nestedNames.Length)
                         Array.Resize(ref nestedNames, 2 * nestedNamesCount);
                     nestedNames[nestedNamesCount++] = nestedName;
-                }
-                while (Peek == TokenType.Plus);
+                } while (Peek == TokenType.Plus);
 
                 return new NestedNamespaceTypeName(fullName, nestedNames, nestedNamesCount);
             }
@@ -204,9 +208,15 @@ namespace System.Reflection
             static string ApplyLeadingDotCompatQuirk(string typeName)
             {
 #if NETCOREAPP
-                return (typeName.StartsWith('.') && !typeName.AsSpan(1).Contains('.')) ? typeName.Substring(1) : typeName;
+                return (typeName.StartsWith('.') && !typeName.AsSpan(1).Contains('.'))
+                    ? typeName.Substring(1)
+                    : typeName;
 #else
-                return ((typeName.Length > 0) && (typeName[0] == '.') && typeName.LastIndexOf('.') == 0) ? typeName.Substring(1) : typeName;
+                return (
+                    (typeName.Length > 0) && (typeName[0] == '.') && typeName.LastIndexOf('.') == 0
+                )
+                    ? typeName.Substring(1)
+                    : typeName;
 #endif
             }
         }
@@ -243,7 +253,9 @@ namespace System.Reflection
                 return null;
             }
 
-            return (assemblyName != null) ? new AssemblyQualifiedTypeName(typeName, assemblyName) : typeName;
+            return (assemblyName != null)
+                ? new AssemblyQualifiedTypeName(typeName, assemblyName)
+                : typeName;
         }
 
         //
@@ -453,14 +465,14 @@ namespace System.Reflection
 
         private enum TokenType
         {
-            End = 0,              //At end of string
-            OpenSqBracket = 1,    //'['
-            CloseSqBracket = 2,   //']'
-            Comma = 3,            //','
-            Plus = 4,             //'+'
-            Asterisk = 5,         //'*'
-            Ampersand = 6,        //'&'
-            Other = 7,            //Type identifier, AssemblyName or embedded AssemblyName.
+            End = 0, //At end of string
+            OpenSqBracket = 1, //'['
+            CloseSqBracket = 2, //']'
+            Comma = 3, //','
+            Plus = 4, //'+'
+            Asterisk = 5, //'*'
+            Ampersand = 6, //'&'
+            Other = 7, //Type identifier, AssemblyName or embedded AssemblyName.
         }
 
         //
@@ -475,7 +487,10 @@ namespace System.Reflection
             /// didn't specify an assembly name. How to respond to that is up to the type resolver delegate in getTypeOptions - this class
             /// is just a middleman.
             /// </summary>
-            public abstract Type? ResolveType(ref TypeNameParser parser, string? containingAssemblyIfAny);
+            public abstract Type? ResolveType(
+                ref TypeNameParser parser,
+                string? containingAssemblyIfAny
+            );
         }
 
         //
@@ -492,7 +507,10 @@ namespace System.Reflection
                 _assemblyName = assemblyName;
             }
 
-            public override Type? ResolveType(ref TypeNameParser parser, string? containingAssemblyIfAny)
+            public override Type? ResolveType(
+                ref TypeNameParser parser,
+                string? containingAssemblyIfAny
+            )
             {
                 return _nonQualifiedTypeName.ResolveType(ref parser, _assemblyName);
             }
@@ -505,12 +523,16 @@ namespace System.Reflection
         private sealed partial class NamespaceTypeName : TypeName
         {
             private readonly string _fullName;
+
             public NamespaceTypeName(string fullName)
             {
                 _fullName = fullName;
             }
 
-            public override Type? ResolveType(ref TypeNameParser parser, string? containingAssemblyIfAny)
+            public override Type? ResolveType(
+                ref TypeNameParser parser,
+                string? containingAssemblyIfAny
+            )
             {
                 return parser.GetType(_fullName, default, containingAssemblyIfAny);
             }
@@ -525,16 +547,27 @@ namespace System.Reflection
             private readonly string[] _nestedNames;
             private readonly int _nestedNamesCount;
 
-            public NestedNamespaceTypeName(string fullName, string[] nestedNames, int nestedNamesCount)
+            public NestedNamespaceTypeName(
+                string fullName,
+                string[] nestedNames,
+                int nestedNamesCount
+            )
             {
                 _fullName = fullName;
                 _nestedNames = nestedNames;
                 _nestedNamesCount = nestedNamesCount;
             }
 
-            public override Type? ResolveType(ref TypeNameParser parser, string? containingAssemblyIfAny)
+            public override Type? ResolveType(
+                ref TypeNameParser parser,
+                string? containingAssemblyIfAny
+            )
             {
-                return parser.GetType(_fullName, _nestedNames.AsSpan(0, _nestedNamesCount), containingAssemblyIfAny);
+                return parser.GetType(
+                    _fullName,
+                    _nestedNames.AsSpan(0, _nestedNamesCount),
+                    containingAssemblyIfAny
+                );
             }
         }
 
@@ -560,12 +593,21 @@ namespace System.Reflection
             }
 
 #if NETCOREAPP
-            [UnconditionalSuppressMessage("AotAnalysis", "IL3050:AotUnfriendlyApi",
-                Justification = "Used to implement resolving types from strings.")]
+            [UnconditionalSuppressMessage(
+                "AotAnalysis",
+                "IL3050:AotUnfriendlyApi",
+                Justification = "Used to implement resolving types from strings."
+            )]
 #endif
-            public override Type? ResolveType(ref TypeNameParser parser, string? containingAssemblyIfAny)
+            public override Type? ResolveType(
+                ref TypeNameParser parser,
+                string? containingAssemblyIfAny
+            )
             {
-                Type? elementType = _elementTypeName.ResolveType(ref parser, containingAssemblyIfAny);
+                Type? elementType = _elementTypeName.ResolveType(
+                    ref parser,
+                    containingAssemblyIfAny
+                );
                 if (elementType is null)
                     return null;
 
@@ -574,7 +616,7 @@ namespace System.Reflection
                     Array => elementType.MakeArrayType(),
                     Pointer => elementType.MakePointerType(),
                     ByRef => elementType.MakeByRefType(),
-                    _ => elementType.MakeArrayType(_rankOrModifier)
+                    _ => elementType.MakeArrayType(_rankOrModifier),
                 };
             }
         }
@@ -588,7 +630,11 @@ namespace System.Reflection
             private readonly TypeName[] _typeArguments;
             private readonly int _typeArgumentsCount;
 
-            public GenericTypeName(TypeName genericTypeDefinition, TypeName[] typeArguments, int typeArgumentsCount)
+            public GenericTypeName(
+                TypeName genericTypeDefinition,
+                TypeName[] typeArguments,
+                int typeArgumentsCount
+            )
             {
                 _typeDefinition = genericTypeDefinition;
                 _typeArguments = typeArguments;
@@ -596,14 +642,26 @@ namespace System.Reflection
             }
 
 #if NETCOREAPP
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2055:UnrecognizedReflectionPattern",
-                Justification = "Used to implement resolving types from strings.")]
-            [UnconditionalSuppressMessage("AotAnalysis", "IL3050:AotUnfriendlyApi",
-                Justification = "Used to implement resolving types from strings.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2055:UnrecognizedReflectionPattern",
+                Justification = "Used to implement resolving types from strings."
+            )]
+            [UnconditionalSuppressMessage(
+                "AotAnalysis",
+                "IL3050:AotUnfriendlyApi",
+                Justification = "Used to implement resolving types from strings."
+            )]
 #endif
-            public override Type? ResolveType(ref TypeNameParser parser, string? containingAssemblyIfAny)
+            public override Type? ResolveType(
+                ref TypeNameParser parser,
+                string? containingAssemblyIfAny
+            )
             {
-                Type? typeDefinition = _typeDefinition.ResolveType(ref parser, containingAssemblyIfAny);
+                Type? typeDefinition = _typeDefinition.ResolveType(
+                    ref parser,
+                    containingAssemblyIfAny
+                );
                 if (typeDefinition is null)
                     return null;
 
@@ -627,13 +685,11 @@ namespace System.Reflection
 #if NETCOREAPP
         private static ReadOnlySpan<char> CharsToEscape => "\\[]+*&,";
 
-        private static bool NeedsEscapingInTypeName(char c)
-            => CharsToEscape.Contains(c);
+        private static bool NeedsEscapingInTypeName(char c) => CharsToEscape.Contains(c);
 #else
         private static char[] CharsToEscape { get; } = "\\[]+*&,".ToCharArray();
 
-        private static bool NeedsEscapingInTypeName(char c)
-            => Array.IndexOf(CharsToEscape, c) >= 0;
+        private static bool NeedsEscapingInTypeName(char c) => Array.IndexOf(CharsToEscape, c) >= 0;
 #endif
 
         private static string EscapeTypeName(string name)
@@ -670,7 +726,8 @@ namespace System.Reflection
 
         private static (string typeNamespace, string name) SplitFullTypeName(string typeName)
         {
-            string typeNamespace, name;
+            string typeNamespace,
+                name;
 
             // Matches algorithm from ns::FindSep in src\coreclr\utilcode\namespaceutil.cpp
             int separator = typeName.LastIndexOf('.');

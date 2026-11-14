@@ -11,7 +11,7 @@ namespace System.Data.Common.EntitySql
 {
     using System;
     using System.Globalization;
-  
+
     /// <summary>
     /// Represents eSQL compilation options.
     /// </summary>
@@ -36,7 +36,7 @@ namespace System.Data.Common.EntitySql
             /// <summary>
             /// Same as CompilationMode.Normal plus WITH RELATIONSHIP clause is allowed in type constructors.
             /// </summary>
-            UserViewGenerationMode
+            UserViewGenerationMode,
         }
 
         /// <summary>
@@ -48,7 +48,9 @@ namespace System.Data.Common.EntitySql
         {
             get
             {
-                return this.NameComparisonCaseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+                return this.NameComparisonCaseInsensitive
+                    ? StringComparer.OrdinalIgnoreCase
+                    : StringComparer.Ordinal;
             }
         }
 
@@ -56,7 +58,9 @@ namespace System.Data.Common.EntitySql
         {
             get
             {
-                return this.ParserCompilationMode == CompilationMode.RestrictedViewGenerationMode ? false : true;
+                return this.ParserCompilationMode == CompilationMode.RestrictedViewGenerationMode
+                    ? false
+                    : true;
             }
         }
     }

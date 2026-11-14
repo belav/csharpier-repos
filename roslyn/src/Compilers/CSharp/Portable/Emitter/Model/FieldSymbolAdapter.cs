@@ -15,18 +15,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal partial class
 #if DEBUG
-        FieldSymbolAdapter : SymbolAdapter,
+    FieldSymbolAdapter
+        : SymbolAdapter,
 #else
-        FieldSymbol :
-#endif 
-        Cci.IFieldReference,
-        Cci.IFieldDefinition,
-        Cci.ITypeMemberReference,
-        Cci.ITypeDefinitionMember,
-        Cci.ISpecializedFieldReference
+    FieldSymbol
+        :
+#endif
+            Cci.IFieldReference,
+            Cci.IFieldDefinition,
+            Cci.ITypeMemberReference,
+            Cci.ITypeDefinitionMember,
+            Cci.ISpecializedFieldReference
     {
-        public bool IsEncDeleted
-            => false;
+        public bool IsEncDeleted => false;
 
         Cci.ITypeReference Cci.IFieldReference.GetType(EmitContext context)
         {
@@ -35,10 +36,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeWithAnnotations fieldTypeWithAnnotations = AdaptedFieldSymbol.TypeWithAnnotations;
             var customModifiers = fieldTypeWithAnnotations.CustomModifiers;
             var isFixed = AdaptedFieldSymbol.IsFixedSizeBuffer;
-            var implType = isFixed ? AdaptedFieldSymbol.FixedImplementationType(moduleBeingBuilt) : fieldTypeWithAnnotations.Type;
-            var type = moduleBeingBuilt.Translate(implType,
-                                                  syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
-                                                  diagnostics: context.Diagnostics);
+            var implType = isFixed
+                ? AdaptedFieldSymbol.FixedImplementationType(moduleBeingBuilt)
+                : fieldTypeWithAnnotations.Type;
+            var type = moduleBeingBuilt.Translate(
+                implType,
+                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
 
             if (isFixed || customModifiers.Length == 0)
             {
@@ -46,7 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                return new Cci.ModifiedTypeReference(type, ImmutableArray<Cci.ICustomModifier>.CastUp(customModifiers));
+                return new Cci.ModifiedTypeReference(
+                    type,
+                    ImmutableArray<Cci.ICustomModifier>.CastUp(customModifiers)
+                );
             }
         }
 
@@ -64,8 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(this.IsDefinitionOrDistinct());
 
-            if (AdaptedFieldSymbol.IsDefinition &&
-                AdaptedFieldSymbol.ContainingModule == moduleBeingBuilt.SourceModule)
+            if (
+                AdaptedFieldSymbol.IsDefinition
+                && AdaptedFieldSymbol.ContainingModule == moduleBeingBuilt.SourceModule
+            )
             {
                 return this;
             }
@@ -94,10 +104,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             Debug.Assert(this.IsDefinitionOrDistinct());
 
-            return moduleBeingBuilt.Translate(AdaptedFieldSymbol.ContainingType,
-                                              syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
-                                              diagnostics: context.Diagnostics,
-                                              needDeclaration: AdaptedFieldSymbol.IsDefinition);
+            return moduleBeingBuilt.Translate(
+                AdaptedFieldSymbol.ContainingType,
+                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                diagnostics: context.Diagnostics,
+                needDeclaration: AdaptedFieldSymbol.IsDefinition
+            );
         }
 
         void Cci.IReference.Dispatch(Cci.MetadataVisitor visitor)
@@ -108,7 +120,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 visitor.Visit((Cci.ISpecializedFieldReference)this);
             }
-            else if (AdaptedFieldSymbol.ContainingModule == ((PEModuleBuilder)visitor.Context.Module).SourceModule)
+            else if (
+                AdaptedFieldSymbol.ContainingModule
+                == ((PEModuleBuilder)visitor.Context.Module).SourceModule
+            )
             {
                 visitor.Visit((Cci.IFieldDefinition)this);
             }
@@ -127,18 +142,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         string Cci.INamedEntity.Name
         {
-            get
-            {
-                return AdaptedFieldSymbol.MetadataName;
-            }
+            get { return AdaptedFieldSymbol.MetadataName; }
         }
 
         bool Cci.IFieldReference.IsContextualNamedEntity
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         MetadataConstant Cci.IFieldDefinition.GetCompileTimeValue(EmitContext context)
@@ -159,9 +168,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // because this method is called by the ReferenceIndexer in the metadata-only case
                 // (and we specifically don't want to prevent metadata-only emit because of a bad
                 // constant).  If the constant value is bad, we'll end up exposing null to CCI.
-                return ((PEModuleBuilder)context.Module).CreateConstant(AdaptedFieldSymbol.Type, AdaptedFieldSymbol.ConstantValue,
-                                                               syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
-                                                               diagnostics: context.Diagnostics);
+                return ((PEModuleBuilder)context.Module).CreateConstant(
+                    AdaptedFieldSymbol.Type,
+                    AdaptedFieldSymbol.ConstantValue,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                    diagnostics: context.Diagnostics
+                );
             }
 
             return null;
@@ -201,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 CheckDefinitionInvariant();
-                return AdaptedFieldSymbol.IsReadOnly || (AdaptedFieldSymbol.IsConst && !AdaptedFieldSymbol.IsMetadataConstant);
+                return AdaptedFieldSymbol.IsReadOnly
+                    || (AdaptedFieldSymbol.IsConst && !AdaptedFieldSymbol.IsMetadataConstant);
             }
         }
 
@@ -307,7 +320,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyAdapter is null)
             {
-                return InterlockedOperations.Initialize(ref _lazyAdapter, new FieldSymbolAdapter(this));
+                return InterlockedOperations.Initialize(
+                    ref _lazyAdapter,
+                    new FieldSymbolAdapter(this)
+                );
             }
 
             return _lazyAdapter;
@@ -319,7 +335,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
-#endif 
+#endif
 
         internal virtual bool IsMarshalledExplicitly
         {

@@ -14,14 +14,22 @@ namespace System.Web.Mvc
 {
     public sealed class JsonValueProviderFactory : ValueProviderFactory
     {
-        private static void AddToBackingStore(EntryLimitedDictionary backingStore, string prefix, object value)
+        private static void AddToBackingStore(
+            EntryLimitedDictionary backingStore,
+            string prefix,
+            object value
+        )
         {
             IDictionary<string, object> d = value as IDictionary<string, object>;
             if (d != null)
             {
                 foreach (KeyValuePair<string, object> entry in d)
                 {
-                    AddToBackingStore(backingStore, MakePropertyKey(prefix, entry.Key), entry.Value);
+                    AddToBackingStore(
+                        backingStore,
+                        MakePropertyKey(prefix, entry.Key),
+                        entry.Value
+                    );
                 }
                 return;
             }
@@ -42,13 +50,20 @@ namespace System.Web.Mvc
 
         private static object GetDeserializedObject(ControllerContext controllerContext)
         {
-            if (!controllerContext.HttpContext.Request.ContentType.StartsWith("application/json", StringComparison.OrdinalIgnoreCase))
+            if (
+                !controllerContext.HttpContext.Request.ContentType.StartsWith(
+                    "application/json",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 // not JSON request
                 return null;
             }
 
-            StreamReader reader = new StreamReader(controllerContext.HttpContext.Request.InputStream);
+            StreamReader reader = new StreamReader(
+                controllerContext.HttpContext.Request.InputStream
+            );
             string bodyText = reader.ReadToEnd();
             if (String.IsNullOrEmpty(bodyText))
             {
@@ -74,7 +89,9 @@ namespace System.Web.Mvc
                 return null;
             }
 
-            Dictionary<string, object> backingStore = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, object> backingStore = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            );
             EntryLimitedDictionary backingStoreWrapper = new EntryLimitedDictionary(backingStore);
             AddToBackingStore(backingStoreWrapper, String.Empty, jsonData);
             return new DictionaryValueProvider<object>(backingStore, CultureInfo.CurrentCulture);
@@ -105,7 +122,9 @@ namespace System.Web.Mvc
             {
                 if (++_itemCount > _maximumDepth)
                 {
-                    throw new InvalidOperationException(MvcResources.JsonValueProviderFactory_RequestTooLarge);
+                    throw new InvalidOperationException(
+                        MvcResources.JsonValueProviderFactory_RequestTooLarge
+                    );
                 }
 
                 _innerDictionary.Add(key, value);
@@ -116,7 +135,9 @@ namespace System.Web.Mvc
                 NameValueCollection appSettings = ConfigurationManager.AppSettings;
                 if (appSettings != null)
                 {
-                    string[] valueArray = appSettings.GetValues("aspnet:MaxJsonDeserializerMembers");
+                    string[] valueArray = appSettings.GetValues(
+                        "aspnet:MaxJsonDeserializerMembers"
+                    );
                     if (valueArray != null && valueArray.Length > 0)
                     {
                         int result;

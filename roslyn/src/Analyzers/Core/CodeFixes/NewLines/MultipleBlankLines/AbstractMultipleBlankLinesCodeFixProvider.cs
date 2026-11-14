@@ -18,40 +18,58 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.RemoveBlankLines), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.RemoveBlankLines
+        ),
+        Shared
+    ]
     internal class MultipleBlankLinesCodeFixProvider : CodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MultipleBlankLinesCodeFixProvider()
-        {
-        }
+        public MultipleBlankLinesCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.MultipleBlankLinesDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.MultipleBlankLinesDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var document = context.Document;
             var diagnostic = context.Diagnostics.First();
-            context.RegisterCodeFix(CodeAction.Create(
-                CodeFixesResources.Remove_extra_blank_lines,
-                c => UpdateDocumentAsync(document, diagnostic, c),
-                nameof(CodeFixesResources.Remove_extra_blank_lines)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    CodeFixesResources.Remove_extra_blank_lines,
+                    c => UpdateDocumentAsync(document, diagnostic, c),
+                    nameof(CodeFixesResources.Remove_extra_blank_lines)
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
-        private static Task<Document> UpdateDocumentAsync(Document document, Diagnostic diagnostic, CancellationToken cancellationToken)
-            => FixAllAsync(document, ImmutableArray.Create(diagnostic), cancellationToken);
+        private static Task<Document> UpdateDocumentAsync(
+            Document document,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        ) => FixAllAsync(document, ImmutableArray.Create(diagnostic), cancellationToken);
 
         private static async Task<Document> FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxKinds = document.GetRequiredLanguageService<ISyntaxKindsService>();
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(out var replacements);
+            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(
+                out var replacements
+            );
             foreach (var diagnostic in diagnostics)
             {
                 var token = root.FindToken(diagnostic.AdditionalLocations[0].SourceSpan.Start);
@@ -64,7 +82,10 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             return document.WithSyntaxRoot(newRoot);
         }
 
-        private static SyntaxTriviaList UpdateLeadingTrivia(ISyntaxKindsService syntaxKinds, SyntaxTriviaList triviaList)
+        private static SyntaxTriviaList UpdateLeadingTrivia(
+            ISyntaxKindsService syntaxKinds,
+            SyntaxTriviaList triviaList
+        )
         {
             using var _ = ArrayBuilder<SyntaxTrivia>.GetInstance(out var builder);
 
@@ -84,8 +105,10 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
 
                 // We have a newlines.  Walk forward to get to the last newline in this sequence.
                 var currentEnd = currentStart + 1;
-                while (currentEnd < triviaList.Count &&
-                       IsEndOfLine(syntaxKinds, triviaList, currentEnd))
+                while (
+                    currentEnd < triviaList.Count
+                    && IsEndOfLine(syntaxKinds, triviaList, currentEnd)
+                )
                 {
                     currentEnd++;
                 }
@@ -137,7 +160,11 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             return new SyntaxTriviaList(builder.ToImmutable());
         }
 
-        private static bool IsEndOfLine(ISyntaxKindsService syntaxKinds, SyntaxTriviaList triviaList, int index)
+        private static bool IsEndOfLine(
+            ISyntaxKindsService syntaxKinds,
+            SyntaxTriviaList triviaList,
+            int index
+        )
         {
             if (index >= triviaList.Count)
                 return false;
@@ -146,7 +173,11 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             return trivia.RawKind == syntaxKinds.EndOfLineTrivia;
         }
 
-        public override FixAllProvider? GetFixAllProvider()
-            => FixAllProvider.Create(async (context, document, diagnostics) => await FixAllAsync(document, diagnostics, context.CancellationToken).ConfigureAwait(false));
+        public override FixAllProvider? GetFixAllProvider() =>
+            FixAllProvider.Create(
+                async (context, document, diagnostics) =>
+                    await FixAllAsync(document, diagnostics, context.CancellationToken)
+                        .ConfigureAwait(false)
+            );
     }
 }

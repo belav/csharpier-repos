@@ -10,9 +10,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.PickMembers
     internal interface IOmniSharpPickMembersService
     {
         OmniSharpPickMembersResult PickMembers(
-            string title, ImmutableArray<ISymbol> members,
+            string title,
+            ImmutableArray<ISymbol> members,
             ImmutableArray<OmniSharpPickMembersOption> options = default,
-            bool selectAll = true);
+            bool selectAll = true
+        );
     }
 
     internal class OmniSharpPickMembersOption
@@ -26,7 +28,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.PickMembers
 
         public string Id => PickMembersOptionInternal.Id;
         public string Title => PickMembersOptionInternal.Title;
-        public bool Value { get => PickMembersOptionInternal.Value; set => PickMembersOptionInternal.Value = value; }
+        public bool Value
+        {
+            get => PickMembersOptionInternal.Value;
+            set => PickMembersOptionInternal.Value = value;
+        }
     }
 
     internal class OmniSharpPickMembersResult
@@ -38,7 +44,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.PickMembers
         public OmniSharpPickMembersResult(
             ImmutableArray<ISymbol> members,
             ImmutableArray<OmniSharpPickMembersOption> options,
-            bool selectedAll)
+            bool selectedAll
+        )
         {
             Members = members;
             Options = options;

@@ -2,31 +2,28 @@
 
 namespace A
 {
-	interface IFoo
-	{
-		void Hello (IFoo foo);
-	}
+    interface IFoo
+    {
+        void Hello(IFoo foo);
+    }
 }
 
 namespace B
 {
-	partial class Test
-	{ }
+    partial class Test { }
 }
 
 namespace B
 {
-	using A;
+    using A;
 
-	partial class Test : IFoo
-	{
-		void IFoo.Hello (IFoo foo)
-		{ }
-	}
+    partial class Test : IFoo
+    {
+        void IFoo.Hello(IFoo foo) { }
+    }
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

@@ -12,8 +12,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 {
     internal sealed class Resolver : FunctionResolverBase<Process, Module, Request>
     {
-        internal static readonly Resolver CSharpResolver = CreateFrom(new Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.CSharpFunctionResolver());
-        internal static readonly Resolver VisualBasicResolver = CreateFrom(new Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.VisualBasicFunctionResolver());
+        internal static readonly Resolver CSharpResolver = CreateFrom(
+            new Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.CSharpFunctionResolver()
+        );
+        internal static readonly Resolver VisualBasicResolver = CreateFrom(
+            new Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.VisualBasicFunctionResolver()
+        );
 
         private readonly bool _ignoreCase;
         private readonly Guid _languageId;
@@ -63,8 +67,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             return module.Name;
         }
 
-        internal override unsafe bool TryGetMetadata(Module module, out byte* pointer, out int length)
-            => module.TryGetMetadata(out pointer, out length);
+        internal override unsafe bool TryGetMetadata(
+            Module module,
+            out byte* pointer,
+            out int length
+        ) => module.TryGetMetadata(out pointer, out length);
 
         internal override Request[] GetRequests(Process process)
         {
@@ -95,7 +102,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 
         internal override Guid LanguageId => _languageId;
 
-        private static void OnFunctionResolved(Module module, Request request, int token, int version, int ilOffset)
+        private static void OnFunctionResolved(
+            Module module,
+            Request request,
+            int token,
+            int version,
+            int ilOffset
+        )
         {
             request.OnFunctionResolved(module, token, version, ilOffset);
         }

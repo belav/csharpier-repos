@@ -38,27 +38,24 @@ internal static class JavaScriptResources
         ConcurrentDictionary<string, string> cache
     )
     {
-        return cache.GetOrAdd(
-            resourceName,
-            key =>
+        return cache.GetOrAdd(resourceName, key =>
+        {
+            // Load the JavaScript from embedded resource
+            using (var resourceStream = getManifestResourceStream(key))
             {
-                // Load the JavaScript from embedded resource
-                using (var resourceStream = getManifestResourceStream(key))
+                Debug.Assert(
+                    resourceStream != null,
+                    "Embedded resource missing. Ensure 'prebuild' script has run."
+                );
+
+                using (var streamReader = new StreamReader(resourceStream))
                 {
-                    Debug.Assert(
-                        resourceStream != null,
-                        "Embedded resource missing. Ensure 'prebuild' script has run."
-                    );
+                    var script = streamReader.ReadToEnd();
 
-                    using (var streamReader = new StreamReader(resourceStream))
-                    {
-                        var script = streamReader.ReadToEnd();
-
-                        return PrepareFormatString(script);
-                    }
+                    return PrepareFormatString(script);
                 }
             }
-        );
+        });
     }
 
     private static string PrepareFormatString(string input)

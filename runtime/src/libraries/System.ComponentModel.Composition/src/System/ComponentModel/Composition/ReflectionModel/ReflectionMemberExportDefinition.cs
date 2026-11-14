@@ -14,7 +14,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private readonly ICompositionElement? _origin;
         private IDictionary<string, object?>? _metadata;
 
-        public ReflectionMemberExportDefinition(LazyMemberInfo member, ExportDefinition exportDefinition, ICompositionElement? origin)
+        public ReflectionMemberExportDefinition(
+            LazyMemberInfo member,
+            ExportDefinition exportDefinition,
+            ICompositionElement? origin
+        )
         {
             ArgumentNullException.ThrowIfNull(exportDefinition);
 
@@ -33,7 +37,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             get { return _member; }
         }
 
-        public override IDictionary<string, object?> Metadata => _metadata ??= _exportDefinition.Metadata.AsReadOnly();
+        public override IDictionary<string, object?> Metadata =>
+            _metadata ??= _exportDefinition.Metadata.AsReadOnly();
 
         string ICompositionElement.DisplayName
         {
@@ -66,6 +71,6 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
 
         private string GetDisplayName() =>
-            $"{ToReflectionMember().GetDisplayName()} (ContractName=\"{ContractName}\")";    // NOLOC
+            $"{ToReflectionMember().GetDisplayName()} (ContractName=\"{ContractName}\")"; // NOLOC
     }
 }

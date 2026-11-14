@@ -26,14 +26,15 @@ namespace System.Web.Mvc.Test
             string contentType = "application/x-javascript";
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = contentType)
+                .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(script)).Verifiable();
 
-            JavaScriptResult result = new JavaScriptResult
-            {
-                Script = script
-            };
+            JavaScriptResult result = new JavaScriptResult { Script = script };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);
@@ -46,7 +47,14 @@ namespace System.Web.Mvc.Test
         public void ExecuteResultWithNullContextThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { new JavaScriptResult().ExecuteResult(null /* context */); }, "context");
+                delegate
+                {
+                    new JavaScriptResult().ExecuteResult(
+                        null /* context */
+                    );
+                },
+                "context"
+            );
         }
 
         [Fact]
@@ -57,7 +65,9 @@ namespace System.Web.Mvc.Test
 
             // Arrange expectations
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType).Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = contentType)
+                .Verifiable();
 
             JavaScriptResult result = new JavaScriptResult();
 

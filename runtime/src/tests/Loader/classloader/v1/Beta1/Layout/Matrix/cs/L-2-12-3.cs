@@ -25,12 +25,12 @@ public class Test
         int mi_RetCode;
         C c = new C();
         mi_RetCode = c.Test();
-        
-        if(mi_RetCode == 100)
+
+        if (mi_RetCode == 100)
             Console.WriteLine("Pass");
         else
             Console.WriteLine("FAIL");
-        
+
         return mi_RetCode;
     }
 }
@@ -52,15 +52,15 @@ struct C : A, B
     public int Test()
     {
         int mi_RetCode = 100;
-        
+
         /////////////////////////////////
-        // Test instance method access  
-        if(MethPubInst() != 100)
-        mi_RetCode = 0;
-        
-        if(MethPubInst2() != 100)
-        mi_RetCode = 0;
-        
+        // Test instance method access
+        if (MethPubInst() != 100)
+            mi_RetCode = 0;
+
+        if (MethPubInst2() != 100)
+            mi_RetCode = 0;
+
         return mi_RetCode;
     }
 }

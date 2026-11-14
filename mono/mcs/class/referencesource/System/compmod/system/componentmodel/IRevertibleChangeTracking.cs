@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="IRevertibleChangeTracking.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     /// <devdoc>
     /// </devdoc>
-    public interface IRevertibleChangeTracking : IChangeTracking {
-
+    public interface IRevertibleChangeTracking : IChangeTracking
+    {
         /// <devdoc>
         /// </devdoc>
         void RejectChanges();

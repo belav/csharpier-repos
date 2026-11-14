@@ -34,51 +34,48 @@ public class Program
                 webBuilder.ConfigureKestrel(
                     (context, options) =>
                     {
-                        options.ListenAnyIP(
-                            5001,
-                            listenOptions =>
-                            {
-                                listenOptions.UseHttps(
-                                    new TlsHandshakeCallbackOptions()
+                        options.ListenAnyIP(5001, listenOptions =>
+                        {
+                            listenOptions.UseHttps(
+                                new TlsHandshakeCallbackOptions()
+                                {
+                                    OnConnection = connectionContext =>
                                     {
-                                        OnConnection = connectionContext =>
-                                        {
-                                            // allow the tls connection without a client certificate
-                                            if (
-                                                connectionContext.ClientHelloInfo.ServerName.Equals(
-                                                    HostWithoutCert,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                )
+                                        // allow the tls connection without a client certificate
+                                        if (
+                                            connectionContext.ClientHelloInfo.ServerName.Equals(
+                                                HostWithoutCert,
+                                                StringComparison.OrdinalIgnoreCase
                                             )
-                                            {
-                                                return new ValueTask<SslServerAuthenticationOptions>(
-                                                    new SslServerAuthenticationOptions()
-                                                    {
-                                                        ServerCertificate = serverCertificate,
-                                                        ClientCertificateRequired = false,
-                                                    }
-                                                );
-                                            }
-
-                                            // require a client certificate to access 127.0.0.2
+                                        )
+                                        {
                                             return new ValueTask<SslServerAuthenticationOptions>(
                                                 new SslServerAuthenticationOptions()
                                                 {
-                                                    ClientCertificateRequired = true,
                                                     ServerCertificate = serverCertificate,
-                                                    RemoteCertificateValidationCallback = (
-                                                        sender,
-                                                        certificate,
-                                                        chain,
-                                                        sslPolicyErrors
-                                                    ) => certificate is not null,
+                                                    ClientCertificateRequired = false,
                                                 }
                                             );
-                                        },
-                                    }
-                                );
-                            }
-                        );
+                                        }
+
+                                        // require a client certificate to access 127.0.0.2
+                                        return new ValueTask<SslServerAuthenticationOptions>(
+                                            new SslServerAuthenticationOptions()
+                                            {
+                                                ClientCertificateRequired = true,
+                                                ServerCertificate = serverCertificate,
+                                                RemoteCertificateValidationCallback = (
+                                                    sender,
+                                                    certificate,
+                                                    chain,
+                                                    sslPolicyErrors
+                                                ) => certificate is not null,
+                                            }
+                                        );
+                                    },
+                                }
+                            );
+                        });
                     }
                 );
             });

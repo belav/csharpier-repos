@@ -6,7 +6,8 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
-    internal sealed class MayHaveSideEffectsVisitor : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+    internal sealed class MayHaveSideEffectsVisitor
+        : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
     {
         private bool _mayHaveSideEffects;
 
@@ -31,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return this.SetMayHaveSideEffects();
         }
 
-        public override BoundNode VisitDeconstructionAssignmentOperator(BoundDeconstructionAssignmentOperator node)
+        public override BoundNode VisitDeconstructionAssignmentOperator(
+            BoundDeconstructionAssignmentOperator node
+        )
         {
             return this.SetMayHaveSideEffects();
         }
@@ -49,7 +52,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return this.SetMayHaveSideEffects();
         }
 
-        public override BoundNode VisitCompoundAssignmentOperator(BoundCompoundAssignmentOperator node)
+        public override BoundNode VisitCompoundAssignmentOperator(
+            BoundCompoundAssignmentOperator node
+        )
         {
             return this.SetMayHaveSideEffects();
         }
@@ -64,15 +69,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return this.SetMayHaveSideEffects();
         }
 
-        public override BoundNode VisitObjectInitializerExpression(BoundObjectInitializerExpression node)
+        public override BoundNode VisitObjectInitializerExpression(
+            BoundObjectInitializerExpression node
+        )
         {
             foreach (var initializer in node.Initializers)
             {
                 // Do not treat initializer assignment as a side effect since it is
                 // part of an object creation. In short, visit the RHS only.
-                var expr = (initializer.Kind == BoundKind.AssignmentOperator)
-                    ? ((BoundAssignmentOperator)initializer).Right
-                    : initializer;
+                var expr =
+                    (initializer.Kind == BoundKind.AssignmentOperator)
+                        ? ((BoundAssignmentOperator)initializer).Right
+                        : initializer;
                 this.Visit(expr);
             }
             return null;

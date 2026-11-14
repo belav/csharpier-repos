@@ -18,14 +18,25 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         public XmlSchema GetSchema(string ns, string type1, string type2)
         {
             string xsd = string.Empty;
             if (ns.Equals(string.Empty))
-                xsd = "<schema xmlns='http://www.w3.org/2001/XMLSchema'><complexType name='" + type1 + "'><sequence><element name='local'/></sequence></complexType><simpleType name='" + type2 + "'><restriction base='int'/></simpleType></schema>";
+                xsd =
+                    "<schema xmlns='http://www.w3.org/2001/XMLSchema'><complexType name='"
+                    + type1
+                    + "'><sequence><element name='local'/></sequence></complexType><simpleType name='"
+                    + type2
+                    + "'><restriction base='int'/></simpleType></schema>";
             else
-                xsd = "<schema xmlns='http://www.w3.org/2001/XMLSchema' targetNamespace='" + ns + "'><complexType name='" + type1 + "'><sequence><element name='local'/></sequence></complexType><simpleType name='" + type2 + "'><restriction base='int'/></simpleType></schema>";
+                xsd =
+                    "<schema xmlns='http://www.w3.org/2001/XMLSchema' targetNamespace='"
+                    + ns
+                    + "'><complexType name='"
+                    + type1
+                    + "'><sequence><element name='local'/></sequence></complexType><simpleType name='"
+                    + type2
+                    + "'><restriction base='int'/></simpleType></schema>";
 
             XmlSchema schema = XmlSchema.Read(new StringReader(xsd), null);
             return schema;
@@ -53,7 +64,14 @@ namespace System.Xml.XmlSchemaTests
         //[Variation(Desc = "v2.2 - GlobalTypes with set with two schemas, both with NS", Params = new object[] { "a", "t1", "t2", "b", "t3", "t4" })]
         [InlineData("a", "t1", "t2", "b", "t3", "t4")]
         [Theory]
-        public void v2(object param0, object param1, object param2, object param3, object param4, object param5)
+        public void v2(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5
+        )
         {
             string ns1 = param0.ToString();
             string ns2 = param3.ToString();
@@ -76,10 +94,26 @@ namespace System.Xml.XmlSchemaTests
 
             //Verify
             CError.Compare(ss.GlobalTypes.Count, 5, "Types Count after add/compile/add/compile"); //+1 for anyType
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns1)), true, "Contains2");
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type3, ns2)), true, "Contains3");
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type4, ns2)), true, "Contains4");
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns1)),
+                true,
+                "Contains2"
+            );
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type3, ns2)),
+                true,
+                "Contains3"
+            );
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type4, ns2)),
+                true,
+                "Contains4"
+            );
 
             //Now reprocess one schema and check
             ss.Reprocess(s1);
@@ -114,7 +148,15 @@ namespace System.Xml.XmlSchemaTests
         //[Variation(Desc = "v3.8 - GlobalTypes with a set having schema (ns) to another set with schema(ns), no compile", Params = new object[] { "a", "t1", "t2", "b", "t3", "t4", false })]
         [InlineData("a", "t1", "t2", "b", "t3", "t4", false)]
         [Theory]
-        public void v3(object param0, object param1, object param2, object param3, object param4, object param5, object param6)
+        public void v3(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5,
+            object param6
+        )
         {
             string ns1 = param0.ToString();
             string ns2 = param3.ToString();
@@ -144,10 +186,26 @@ namespace System.Xml.XmlSchemaTests
                 ss1.Compile();
             //Verify
             CError.Compare(ss1.GlobalTypes.Count, 5, "Types Count after add/comp"); //+1 for anyType
-            CError.Compare(ss1.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)), true, "Contains1");
-            CError.Compare(ss1.GlobalTypes.Contains(new XmlQualifiedName(type2, ns1)), true, "Contains2");
-            CError.Compare(ss1.GlobalTypes.Contains(new XmlQualifiedName(type3, ns2)), true, "Contains3");
-            CError.Compare(ss1.GlobalTypes.Contains(new XmlQualifiedName(type4, ns2)), true, "Contains4");
+            CError.Compare(
+                ss1.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss1.GlobalTypes.Contains(new XmlQualifiedName(type2, ns1)),
+                true,
+                "Contains2"
+            );
+            CError.Compare(
+                ss1.GlobalTypes.Contains(new XmlQualifiedName(type3, ns2)),
+                true,
+                "Contains3"
+            );
+            CError.Compare(
+                ss1.GlobalTypes.Contains(new XmlQualifiedName(type4, ns2)),
+                true,
+                "Contains4"
+            );
 
             //Now reprocess one schema and check
             ss1.Reprocess(s1);
@@ -184,8 +242,16 @@ namespace System.Xml.XmlSchemaTests
             XmlSchema schema1 = ss.Add(null, Path.Combine(TestData._Root, uri1));
             ss.Compile();
             CError.Compare(ss.GlobalTypes.Count, 3, "Types Count"); //+1 for anyType
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns2)), true, "Contains2");
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns2)),
+                true,
+                "Contains2"
+            );
 
             //get the SOM for the imported schema
             foreach (XmlSchema s in ss.Schemas(ns2))
@@ -195,8 +261,16 @@ namespace System.Xml.XmlSchemaTests
 
             ss.Compile();
             CError.Compare(ss.GlobalTypes.Count, 2, "Types Count after Remove"); //+1 for anyType
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns2)), false, "Contains2");
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns2)),
+                false,
+                "Contains2"
+            );
 
             return;
         }
@@ -221,13 +295,29 @@ namespace System.Xml.XmlSchemaTests
             XmlSchema schema1 = ss.Add(null, Path.Combine(TestData._Root, uri1));
             ss.Compile();
             CError.Compare(ss.GlobalTypes.Count, 3, "Types Count"); //+1 for anyType
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns2)), true, "Contains2");
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns2)),
+                true,
+                "Contains2"
+            );
 
             ss.RemoveRecursive(schema1); // should not need to compile for RemoveRecursive to take effect
             CError.Compare(ss.GlobalTypes.Count, 1, "Types Count"); //+1 for anyType
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)), false, "Contains1");
-            CError.Compare(ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns2)), false, "Contains2");
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type1, ns1)),
+                false,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalTypes.Contains(new XmlQualifiedName(type2, ns2)),
+                false,
+                "Contains2"
+            );
 
             return;
         }
@@ -241,9 +331,19 @@ namespace System.Xml.XmlSchemaTests
             try
             {
                 // anytype t1 t2
-                XmlSchema schema1 = XmlSchema.Read(new StringReader("<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='a'><xs:element name='e1' type='xs:anyType'/><xs:complexType name='t1'/><xs:complexType name='t2'/></xs:schema>"), null);
+                XmlSchema schema1 = XmlSchema.Read(
+                    new StringReader(
+                        "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='a'><xs:element name='e1' type='xs:anyType'/><xs:complexType name='t1'/><xs:complexType name='t2'/></xs:schema>"
+                    ),
+                    null
+                );
                 // anytype t3 t4
-                XmlSchema schema2 = XmlSchema.Read(new StringReader("<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='e1' type='xs:anyType'/><xs:complexType name='t3'/><xs:complexType name='t4'/></xs:schema>"), null);
+                XmlSchema schema2 = XmlSchema.Read(
+                    new StringReader(
+                        "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='e1' type='xs:anyType'/><xs:complexType name='t3'/><xs:complexType name='t4'/></xs:schema>"
+                    ),
+                    null
+                );
                 XmlSchemaSet ss1 = new XmlSchemaSet();
                 XmlSchemaSet ss2 = new XmlSchemaSet();
 
@@ -253,8 +353,16 @@ namespace System.Xml.XmlSchemaTests
                 ss1.Add(ss2);
                 ss1.Compile();
                 CError.Compare(ss1.GlobalTypes.Count, 5, "Count");
-                CError.Compare(ss1.GlobalTypes.Contains(new XmlQualifiedName("t1", "a")), true, "Contains");
-                CError.Compare(ss1.GlobalTypes.Contains(new XmlQualifiedName("t2", "a")), true, "Contains");
+                CError.Compare(
+                    ss1.GlobalTypes.Contains(new XmlQualifiedName("t1", "a")),
+                    true,
+                    "Contains"
+                );
+                CError.Compare(
+                    ss1.GlobalTypes.Contains(new XmlQualifiedName("t2", "a")),
+                    true,
+                    "Contains"
+                );
             }
             catch (Exception e)
             {

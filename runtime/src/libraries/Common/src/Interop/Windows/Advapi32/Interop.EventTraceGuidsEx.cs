@@ -13,7 +13,7 @@ internal static partial class Interop
             TraceGuidQueryInfo,
             TraceGuidQueryProcess,
             TraceStackTracingInfo,
-            MaxTraceSetInfoClass
+            MaxTraceSetInfoClass,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -52,6 +52,7 @@ internal static partial class Interop
             int InBufferSize,
             void* OutBuffer,
             int OutBufferSize,
-            out int ReturnLength);
+            out int ReturnLength
+        );
     }
 }

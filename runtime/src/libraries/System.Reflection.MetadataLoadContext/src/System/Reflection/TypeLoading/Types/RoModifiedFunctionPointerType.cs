@@ -12,13 +12,15 @@ namespace System.Reflection
     /// </summary>
     internal sealed class RoModifiedFunctionPointerType : RoModifiedType
     {
-        private const string CallingConventionTypePrefix = "System.Runtime.CompilerServices.CallConv";
+        private const string CallingConventionTypePrefix =
+            "System.Runtime.CompilerServices.CallConv";
 
         private readonly Type[] _callingConventions;
         private readonly RoModifiedType[] _parameterTypes;
         private readonly RoModifiedType _returnType;
 
-        public RoModifiedFunctionPointerType(RoFunctionPointerType functionPointerType) : base(functionPointerType)
+        public RoModifiedFunctionPointerType(RoFunctionPointerType functionPointerType)
+            : base(functionPointerType)
         {
             Debug.Assert(functionPointerType.IsFunctionPointer);
 
@@ -36,19 +38,29 @@ namespace System.Reflection
             _returnType = Create((RoType)functionPointerType._returnType);
 
             Type[] returnTypeOptionalModifiers = _returnType.GetOptionalCustomModifiers();
-            _callingConventions = CreateCallingConventions(returnTypeOptionalModifiers, functionPointerType);
+            _callingConventions = CreateCallingConventions(
+                returnTypeOptionalModifiers,
+                functionPointerType
+            );
         }
 
         public override Type GetFunctionPointerReturnType() => _returnType;
-        public override Type[] GetFunctionPointerParameterTypes() => Helpers.CloneArray(_parameterTypes);
-        public override Type[] GetFunctionPointerCallingConventions() => Helpers.CloneArray(_callingConventions);
+
+        public override Type[] GetFunctionPointerParameterTypes() =>
+            Helpers.CloneArray(_parameterTypes);
+
+        public override Type[] GetFunctionPointerCallingConventions() =>
+            Helpers.CloneArray(_callingConventions);
 
         private Type CDeclType => Loader.GetCoreType(CoreType.CallConvCdecl);
         private Type StdCallType => Loader.GetCoreType(CoreType.CallConvStdcall);
         private Type ThisCallType => Loader.GetCoreType(CoreType.CallConvThiscall);
         private Type FastCallType => Loader.GetCoreType(CoreType.CallConvFastcall);
 
-        private Type[] CreateCallingConventions(Type[] returnTypeOptionalModifiers, RoFunctionPointerType functionPointerType)
+        private Type[] CreateCallingConventions(
+            Type[] returnTypeOptionalModifiers,
+            RoFunctionPointerType functionPointerType
+        )
         {
             List<Type> builder = new(returnTypeOptionalModifiers.Length + 1);
 
@@ -71,7 +83,12 @@ namespace System.Reflection
                     for (int i = 0; i < returnTypeOptionalModifiers.Length; i++)
                     {
                         Type type = returnTypeOptionalModifiers[i];
-                        if (type.FullName!.StartsWith(CallingConventionTypePrefix, StringComparison.Ordinal))
+                        if (
+                            type.FullName!.StartsWith(
+                                CallingConventionTypePrefix,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             builder.Add(type);
                         }

@@ -42,7 +42,11 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(value)} must be non-negative.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        $"{nameof(value)} must be non-negative."
+                    );
                 }
 
                 _sizeLimit = value ?? NotSet;
@@ -53,7 +57,10 @@ namespace Microsoft.Extensions.Caching.Memory
         /// Enables ot disables the option to compact the cache when the maximum size is exceeded.
         /// </summary>
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        [Obsolete("This property is retained only for compatibility.  Remove use and instead call MemoryCache.Compact as needed.", error: true)]
+        [Obsolete(
+            "This property is retained only for compatibility.  Remove use and instead call MemoryCache.Compact as needed.",
+            error: true
+        )]
         public bool CompactOnMemoryPressure { get; set; }
 
         /// <summary>
@@ -66,7 +73,11 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (value is < 0 or > 1)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(value)} must be between 0 and 1 inclusive.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        $"{nameof(value)} must be between 0 and 1 inclusive."
+                    );
                 }
 
                 _compactionPercentage = value;

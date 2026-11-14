@@ -10,10 +10,9 @@
  * Copyright (c) 2002 Microsoft Corporation
  */
 
-namespace System.Web.Profile {
+namespace System.Web.Profile
+{
     using System.Security.Principal;
 
-    public class DefaultProfile : ProfileBase
-    { }
+    public class DefaultProfile : ProfileBase { }
 }
-

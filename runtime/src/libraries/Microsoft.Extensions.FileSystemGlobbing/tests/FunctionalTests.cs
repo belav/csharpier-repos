@@ -35,16 +35,22 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             matcher.AddInclude(pattern1);
             matcher.AddInclude(pattern2);
 
-            ExecuteAndVerify(matcher, @"src/project",
-                "src/project/sub/source2.cs");
+            ExecuteAndVerify(matcher, @"src/project", "src/project/sub/source2.cs");
         }
 
         [Theory]
         [InlineData("src/project", "source1.cs", new string[] { "source1.cs" })]
         [InlineData("src/project", "Source1.cs", new string[] { })]
-        [InlineData("src/project", "compiler/preprocess/**/*.cs", new string[] { "compiler/preprocess/preprocess-source1.cs",
-                                                                                 "compiler/preprocess/sub/preprocess-source2.cs",
-                                                                                 "compiler/preprocess/sub/sub/preprocess-source3.cs" })]
+        [InlineData(
+            "src/project",
+            "compiler/preprocess/**/*.cs",
+            new string[]
+            {
+                "compiler/preprocess/preprocess-source1.cs",
+                "compiler/preprocess/sub/preprocess-source2.cs",
+                "compiler/preprocess/sub/sub/preprocess-source3.cs",
+            }
+        )]
         [InlineData("src/project", "compiler/Preprocess/**.cs", new string[] { })]
         public void IncludeCaseSensitive(string root, string includePattern, string[] expectedFiles)
         {
@@ -57,13 +63,31 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         [Theory]
         [InlineData("src/project", "source1.cs", new string[] { "source1.cs" })]
         [InlineData("src/project", "Source1.cs", new string[] { "Source1.cs" })]
-        [InlineData("src/project", "compiler/preprocess/**/*.cs", new string[] { "compiler/preprocess/preprocess-source1.cs",
-                                                                                 "compiler/preprocess/sub/preprocess-source2.cs",
-                                                                                 "compiler/preprocess/sub/sub/preprocess-source3.cs" })]
-        [InlineData("src/project", "compiler/Preprocess/**.cs", new string[] { "compiler/Preprocess/preprocess-source1.cs",
-                                                                                 "compiler/Preprocess/sub/preprocess-source2.cs",
-                                                                                 "compiler/Preprocess/sub/sub/preprocess-source3.cs" })]
-        public void IncludeCaseInsensitive(string root, string includePattern, string[] expectedFiles)
+        [InlineData(
+            "src/project",
+            "compiler/preprocess/**/*.cs",
+            new string[]
+            {
+                "compiler/preprocess/preprocess-source1.cs",
+                "compiler/preprocess/sub/preprocess-source2.cs",
+                "compiler/preprocess/sub/sub/preprocess-source3.cs",
+            }
+        )]
+        [InlineData(
+            "src/project",
+            "compiler/Preprocess/**.cs",
+            new string[]
+            {
+                "compiler/Preprocess/preprocess-source1.cs",
+                "compiler/Preprocess/sub/preprocess-source2.cs",
+                "compiler/Preprocess/sub/sub/preprocess-source3.cs",
+            }
+        )]
+        public void IncludeCaseInsensitive(
+            string root,
+            string includePattern,
+            string[] expectedFiles
+        )
         {
             var matcher = new Matcher(StringComparison.OrdinalIgnoreCase);
             matcher.AddInclude(includePattern);
@@ -72,36 +96,82 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         }
 
         [Theory]
-        [InlineData("src/project/compiler/preprocess/", "source.cs", new string[] { "preprocess-source1.cs",
-                                                                                    "sub/preprocess-source2.cs",
-                                                                                    "sub/sub/preprocess-source3.cs",
-                                                                                    "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "preprocess-source1.cs", new string[] {
-                                                                                    "sub/preprocess-source2.cs",
-                                                                                    "sub/sub/preprocess-source3.cs",
-                                                                                    "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "preprocesS-source1.cs", new string[] {
-                                                                                    "preprocess-source1.cs",
-                                                                                    "sub/preprocess-source2.cs",
-                                                                                    "sub/sub/preprocess-source3.cs",
-                                                                                    "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "**/Preprocess*", new string[] { "preprocess-source1.cs",
-                                                                                     "sub/preprocess-source2.cs",
-                                                                                     "sub/sub/preprocess-source3.cs",
-                                                                                     "sub/sub/preprocess-source3.txt" })]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "source.cs",
+            new string[]
+            {
+                "preprocess-source1.cs",
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "preprocess-source1.cs",
+            new string[]
+            {
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "preprocesS-source1.cs",
+            new string[]
+            {
+                "preprocess-source1.cs",
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "**/Preprocess*",
+            new string[]
+            {
+                "preprocess-source1.cs",
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
         [InlineData("src/project/compiler/preprocess/", "**/preprocess*", new string[] { })]
-        [InlineData("src/project/compiler/preprocess/", "**/*source*.cs", new string[] { "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "**/*Source*.cs", new string[] {
-                                                                                    "preprocess-source1.cs",
-                                                                                    "sub/preprocess-source2.cs",
-                                                                                    "sub/sub/preprocess-source3.cs",
-                                                                                    "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "sub/sub/*", new string[] { "preprocess-source1.cs",
-                                                                                    "sub/preprocess-source2.cs" })]
-        [InlineData("src/project/compiler/preprocess/", "sub/Sub/*", new string[] { "preprocess-source1.cs",
-                                                                                    "sub/preprocess-source2.cs",
-                                                                                    "sub/sub/preprocess-source3.cs",
-                                                                                    "sub/sub/preprocess-source3.txt" })]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "**/*source*.cs",
+            new string[] { "sub/sub/preprocess-source3.txt" }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "**/*Source*.cs",
+            new string[]
+            {
+                "preprocess-source1.cs",
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "sub/sub/*",
+            new string[] { "preprocess-source1.cs", "sub/preprocess-source2.cs" }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "sub/Sub/*",
+            new string[]
+            {
+                "preprocess-source1.cs",
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
         public void ExcludeCaseSensitive(string root, string excludePattern, string[] expectedFiles)
         {
             var matcher = new Matcher(StringComparison.Ordinal);
@@ -112,27 +182,64 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         }
 
         [Theory]
-        [InlineData("src/project/compiler/preprocess/", "source.cs", new string[] { "preprocess-source1.cs",
-                                                                                    "sub/preprocess-source2.cs",
-                                                                                    "sub/sub/preprocess-source3.cs",
-                                                                                    "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "preprocess-source1.cs", new string[] {
-                                                                                    "sub/preprocess-source2.cs",
-                                                                                    "sub/sub/preprocess-source3.cs",
-                                                                                    "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "preprocesS-source1.cs", new string[] {
-                                                                                    "sub/preprocess-source2.cs",
-                                                                                    "sub/sub/preprocess-source3.cs",
-                                                                                    "sub/sub/preprocess-source3.txt" })]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "source.cs",
+            new string[]
+            {
+                "preprocess-source1.cs",
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "preprocess-source1.cs",
+            new string[]
+            {
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "preprocesS-source1.cs",
+            new string[]
+            {
+                "sub/preprocess-source2.cs",
+                "sub/sub/preprocess-source3.cs",
+                "sub/sub/preprocess-source3.txt",
+            }
+        )]
         [InlineData("src/project/compiler/preprocess/", "**/Preprocess*", new string[] { })]
         [InlineData("src/project/compiler/preprocess/", "**/preprocess*", new string[] { })]
-        [InlineData("src/project/compiler/preprocess/", "**/*source*.cs", new string[] { "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "**/*Source*.cs", new string[] { "sub/sub/preprocess-source3.txt" })]
-        [InlineData("src/project/compiler/preprocess/", "sub/sub/*", new string[] { "preprocess-source1.cs",
-                                                                                    "sub/preprocess-source2.cs" })]
-        [InlineData("src/project/compiler/preprocess/", "sub/Sub/*", new string[] { "preprocess-source1.cs",
-                                                                                    "sub/preprocess-source2.cs" })]
-        public void ExcludeCaseInsensitive(string root, string excludePattern, string[] expectedFiles)
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "**/*source*.cs",
+            new string[] { "sub/sub/preprocess-source3.txt" }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "**/*Source*.cs",
+            new string[] { "sub/sub/preprocess-source3.txt" }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "sub/sub/*",
+            new string[] { "preprocess-source1.cs", "sub/preprocess-source2.cs" }
+        )]
+        [InlineData(
+            "src/project/compiler/preprocess/",
+            "sub/Sub/*",
+            new string[] { "preprocess-source1.cs", "sub/preprocess-source2.cs" }
+        )]
+        public void ExcludeCaseInsensitive(
+            string root,
+            string excludePattern,
+            string[] expectedFiles
+        )
         {
             var matcher = new Matcher(StringComparison.OrdinalIgnoreCase);
             matcher.AddInclude("**/*.*");
@@ -145,10 +252,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         public void RecursiveAndDoubleParentsWithRecursiveSearch()
         {
             var matcher = new Matcher();
-            matcher.AddInclude("**/*.cs")
-                   .AddInclude(@"../../lib/**/*.cs");
+            matcher.AddInclude("**/*.cs").AddInclude(@"../../lib/**/*.cs");
 
-            ExecuteAndVerify(matcher, @"src/project",
+            ExecuteAndVerify(
+                matcher,
+                @"src/project",
                 "src/project/source1.cs",
                 "src/project/sub/source2.cs",
                 "src/project/sub/source3.cs",
@@ -162,17 +270,19 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "src/project/compiler/shared/sub/sub/sharedsub.cs",
                 "lib/source6.cs",
                 "lib/sub3/source7.cs",
-                "lib/sub4/source8.cs");
+                "lib/sub4/source8.cs"
+            );
         }
 
         [Fact]
         public void RecursiveAndDoubleParentsSearch()
         {
             var matcher = new Matcher();
-            matcher.AddInclude("**/*.cs")
-                   .AddInclude(@"../../lib/*.cs");
+            matcher.AddInclude("**/*.cs").AddInclude(@"../../lib/*.cs");
 
-            ExecuteAndVerify(matcher, @"src/project",
+            ExecuteAndVerify(
+                matcher,
+                @"src/project",
                 "src/project/source1.cs",
                 "src/project/sub/source2.cs",
                 "src/project/sub/source3.cs",
@@ -184,7 +294,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "src/project/compiler/shared/shared1.cs",
                 "src/project/compiler/shared/sub/shared2.cs",
                 "src/project/compiler/shared/sub/sub/sharedsub.cs",
-                "lib/source6.cs");
+                "lib/source6.cs"
+            );
         }
 
         [Fact]
@@ -194,11 +305,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             matcher.AddInclude(@"..\..\lib\**\*.cs");
             matcher.AddInclude(@"*.cs");
 
-            ExecuteAndVerify(matcher, @"src/project",
+            ExecuteAndVerify(
+                matcher,
+                @"src/project",
                 "src/project/source1.cs",
                 "lib/source6.cs",
                 "lib/sub3/source7.cs",
-                "lib/sub4/source8.cs");
+                "lib/sub4/source8.cs"
+            );
         }
 
         [Fact]
@@ -208,9 +322,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             matcher.AddInclude(@"..\..\lib\*.cs");
             matcher.AddInclude(@"*.cs");
 
-            ExecuteAndVerify(matcher, @"src/project",
-                "src/project/source1.cs",
-                "lib/source6.cs");
+            ExecuteAndVerify(matcher, @"src/project", "src/project/source1.cs", "lib/source6.cs");
         }
 
         [Fact]
@@ -219,10 +331,13 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             var matcher = new Matcher();
             matcher.AddInclude(@"..\..\lib\**\*.cs");
 
-            ExecuteAndVerify(matcher, @"src/project",
+            ExecuteAndVerify(
+                matcher,
+                @"src/project",
                 "lib/source6.cs",
                 "lib/sub3/source7.cs",
-                "lib/sub4/source8.cs");
+                "lib/sub4/source8.cs"
+            );
         }
 
         [Fact]
@@ -231,7 +346,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             var matcher = new Matcher();
             matcher.AddInclude(@"../project2/**/*.cs");
 
-            ExecuteAndVerify(matcher, @"src/project",
+            ExecuteAndVerify(
+                matcher,
+                @"src/project",
                 "src/project2/source1.cs",
                 "src/project2/sub/source2.cs",
                 "src/project2/sub/source3.cs",
@@ -242,7 +359,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "src/project2/compiler/preprocess/sub/sub/preprocess-source3.cs",
                 "src/project2/compiler/shared/shared1.cs",
                 "src/project2/compiler/shared/sub/shared2.cs",
-                "src/project2/compiler/shared/sub/sub/sharedsub.cs");
+                "src/project2/compiler/shared/sub/sub/sharedsub.cs"
+            );
         }
 
         [Fact]
@@ -251,11 +369,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             var matcher = new Matcher();
             matcher.AddInclude(@"**.txt");
 
-            ExecuteAndVerify(matcher, @"src/project",
+            ExecuteAndVerify(
+                matcher,
+                @"src/project",
                 "src/project/compiler/preprocess/sub/sub/preprocess-source3.txt",
                 "src/project/compiler/shared/shared1.txt",
                 "src/project/compiler/shared/sub/shared2.txt",
-                "src/project/content1.txt");
+                "src/project/content1.txt"
+            );
         }
 
         [Fact]
@@ -267,7 +388,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             matcher.AddExclude(@"bin");
             matcher.AddExclude(@".*");
 
-            ExecuteAndVerify(matcher, @"src/project",
+            ExecuteAndVerify(
+                matcher,
+                @"src/project",
                 "src/project/source1.cs",
                 "src/project/sub/source2.cs",
                 "src/project/sub/source3.cs",
@@ -285,7 +408,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "src/project/compiler/resources/resource.res",
                 "src/project/compiler/resources/sub/resource2.res",
                 "src/project/compiler/resources/sub/sub/resource3.res",
-                "src/project/content1.txt");
+                "src/project/content1.txt"
+            );
         }
 
         [Fact]
@@ -293,7 +417,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         {
             var matcher = new Matcher();
             matcher.AddInclude(@"compiler/");
-            ExecuteAndVerify(matcher, @"src/project",
+            ExecuteAndVerify(
+                matcher,
+                @"src/project",
                 "src/project/compiler/preprocess/preprocess-source1.cs",
                 "src/project/compiler/preprocess/sub/preprocess-source2.cs",
                 "src/project/compiler/preprocess/sub/sub/preprocess-source3.cs",
@@ -305,7 +431,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "src/project/compiler/shared/sub/sub/sharedsub.cs",
                 "src/project/compiler/resources/resource.res",
                 "src/project/compiler/resources/sub/resource2.res",
-                "src/project/compiler/resources/sub/sub/resource3.res");
+                "src/project/compiler/resources/sub/sub/resource3.res"
+            );
         }
 
         [Theory]
@@ -324,7 +451,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             var matcher = new Matcher();
             matcher.AddInclude("**/*.cs");
             matcher.AddInclude("../project2/source1.cs");
-            ExecuteAndVerify(matcher, "src/project",
+            ExecuteAndVerify(
+                matcher,
+                "src/project",
                 "src/project/source1.cs",
                 "src/project/sub/source2.cs",
                 "src/project/sub/source3.cs",
@@ -336,7 +465,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "src/project/compiler/shared/shared1.cs",
                 "src/project/compiler/shared/sub/shared2.cs",
                 "src/project/compiler/shared/sub/sub/sharedsub.cs",
-                "src/project2/source1.cs");
+                "src/project2/source1.cs"
+            );
         }
 
         [Fact]
@@ -347,7 +477,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             matcher.AddInclude("**/*.cs");
 
             var directoryPath = Path.Combine(_context.RootPath, "src/project");
-            var results = matcher.Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath)));
+            var results = matcher.Execute(
+                new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))
+            );
 
             var actual = results.Files.Select(match => match.Stem);
             var expected = new string[]
@@ -362,7 +494,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "compiler/preprocess/sub/sub/preprocess-source3.cs",
                 "compiler/shared/shared1.cs",
                 "compiler/shared/sub/shared2.cs",
-                "compiler/shared/sub/sub/sharedsub.cs"
+                "compiler/shared/sub/sub/sharedsub.cs",
             };
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
@@ -391,7 +523,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "compiler/preprocess/sub/sub/preprocess-source3.cs",
                 "compiler/shared/shared1.cs",
                 "compiler/shared/sub/shared2.cs",
-                "compiler/shared/sub/sub/sharedsub.cs"
+                "compiler/shared/sub/sub/sharedsub.cs",
             };
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
@@ -404,7 +536,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             matcher.AddInclude("compiler/**/*.cs");
 
             var directoryPath = Path.Combine(_context.RootPath, "src/project");
-            var results = matcher.Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath)));
+            var results = matcher.Execute(
+                new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))
+            );
 
             var actual = results.Files.Select(match => match.Stem);
             var expected = new string[]
@@ -414,7 +548,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess/sub/sub/preprocess-source3.cs",
                 "shared/shared1.cs",
                 "shared/sub/shared2.cs",
-                "shared/sub/sub/sharedsub.cs"
+                "shared/sub/sub/sharedsub.cs",
             };
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
@@ -437,16 +571,20 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess/sub/sub/preprocess-source3.cs",
                 "shared/shared1.cs",
                 "shared/sub/shared2.cs",
-                "shared/sub/sub/sharedsub.cs"
+                "shared/sub/sub/sharedsub.cs",
             };
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
         }
 
         [Theory] // rootDir, includePattern, expectedPath
-        [InlineData(@"root", @"*.0",         @"test.0")]
-        [InlineData(@"root", @"**/*.0",      @"test.0")]
-        public void PathIncludesAllSegmentsFromPattern_RootDirectory(string root, string includePattern, string expectedPath)
+        [InlineData(@"root", @"*.0", @"test.0")]
+        [InlineData(@"root", @"**/*.0", @"test.0")]
+        public void PathIncludesAllSegmentsFromPattern_RootDirectory(
+            string root,
+            string includePattern,
+            string expectedPath
+        )
         {
             var matcher = new Matcher();
             matcher.AddInclude(includePattern);
@@ -467,14 +605,18 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         }
 
         [Theory] // rootDir,      includePattern,    expectedPath
-        [InlineData(@"root/dir1", @"*.1",            @"test.1")]
-        [InlineData(@"root/dir1", @"**/*.1",         @"test.1")]
-        [InlineData(@"root",      @"dir1/*.1",       @"dir1/test.1")]
-        [InlineData(@"root",      @"dir1/**/*.1",    @"dir1/test.1")]
-        [InlineData(@"root",      @"**/dir1/*.1",    @"dir1/test.1")]
-        [InlineData(@"root",      @"**/dir1/**/*.1", @"dir1/test.1")]
-        [InlineData(@"root",      @"**/*.1",         @"dir1/test.1")]
-        public void PathIncludesAllSegmentsFromPattern_OneDirectoryDeep(string root, string includePattern, string expectedPath)
+        [InlineData(@"root/dir1", @"*.1", @"test.1")]
+        [InlineData(@"root/dir1", @"**/*.1", @"test.1")]
+        [InlineData(@"root", @"dir1/*.1", @"dir1/test.1")]
+        [InlineData(@"root", @"dir1/**/*.1", @"dir1/test.1")]
+        [InlineData(@"root", @"**/dir1/*.1", @"dir1/test.1")]
+        [InlineData(@"root", @"**/dir1/**/*.1", @"dir1/test.1")]
+        [InlineData(@"root", @"**/*.1", @"dir1/test.1")]
+        public void PathIncludesAllSegmentsFromPattern_OneDirectoryDeep(
+            string root,
+            string includePattern,
+            string expectedPath
+        )
         {
             var matcher = new Matcher();
             matcher.AddInclude(includePattern);
@@ -495,24 +637,28 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         }
 
         [Theory] // rootDir,           includePattern,            expectedPath
-        [InlineData(@"root/dir1/dir2", @"*.2",                    @"test.2")]
-        [InlineData(@"root/dir1/dir2", @"**/*.2",                 @"test.2")]
-        [InlineData(@"root/dir1",      @"dir2/*.2",               @"dir2/test.2")]
-        [InlineData(@"root/dir1",      @"dir2/**/*.2",            @"dir2/test.2")]
-        [InlineData(@"root/dir1",      @"**/dir2/*.2",            @"dir2/test.2")]
-        [InlineData(@"root/dir1",      @"**/dir2/**/*.2",         @"dir2/test.2")]
-        [InlineData(@"root/dir1",      @"**/*.2",                 @"dir2/test.2")]
-        [InlineData(@"root",           @"dir1/dir2/*.2",          @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"dir1/dir2/**/*.2",       @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir1/dir2/**/*.2",    @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir1/**/dir2/*.2",    @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir1/**/dir2/**/*.2", @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"dir1/**/*.2",            @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir1/**/*.2",         @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir2/*.2",            @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir2/**/*.2",         @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/*.2",                 @"dir1/dir2/test.2")]
-        public void PathIncludesAllSegmentsFromPattern_TwoDirectoriesDeep(string root, string includePattern, string expectedPath)
+        [InlineData(@"root/dir1/dir2", @"*.2", @"test.2")]
+        [InlineData(@"root/dir1/dir2", @"**/*.2", @"test.2")]
+        [InlineData(@"root/dir1", @"dir2/*.2", @"dir2/test.2")]
+        [InlineData(@"root/dir1", @"dir2/**/*.2", @"dir2/test.2")]
+        [InlineData(@"root/dir1", @"**/dir2/*.2", @"dir2/test.2")]
+        [InlineData(@"root/dir1", @"**/dir2/**/*.2", @"dir2/test.2")]
+        [InlineData(@"root/dir1", @"**/*.2", @"dir2/test.2")]
+        [InlineData(@"root", @"dir1/dir2/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"dir1/dir2/**/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir1/dir2/**/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir1/**/dir2/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir1/**/dir2/**/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"dir1/**/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir1/**/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir2/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir2/**/*.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/*.2", @"dir1/dir2/test.2")]
+        public void PathIncludesAllSegmentsFromPattern_TwoDirectoriesDeep(
+            string root,
+            string includePattern,
+            string expectedPath
+        )
         {
             var matcher = new Matcher();
             matcher.AddInclude(includePattern);
@@ -533,9 +679,13 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         }
 
         [Theory] // rootDir, includePattern, expectedStem
-        [InlineData(@"root", @"*.0",         @"test.0")]
-        [InlineData(@"root", @"**/*.0",      @"test.0")]
-        public void StemIncludesAllSegmentsFromPatternStartingAtWildcard_RootDirectory(string root, string includePattern, string expectedStem)
+        [InlineData(@"root", @"*.0", @"test.0")]
+        [InlineData(@"root", @"**/*.0", @"test.0")]
+        public void StemIncludesAllSegmentsFromPatternStartingAtWildcard_RootDirectory(
+            string root,
+            string includePattern,
+            string expectedStem
+        )
         {
             string fileToFind = "test.0";
 
@@ -558,14 +708,19 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         }
 
         [Theory] // rootDir,      includePattern,    fileToFind      expectedStem
-        [InlineData(@"root/dir1", @"*.1",            @"test.1",      @"test.1")]
-        [InlineData(@"root/dir1", @"**/*.1",         @"test.1",      @"test.1")]
-        [InlineData(@"root",      @"dir1/*.1",       @"dir1/test.1", @"test.1")]
-        [InlineData(@"root",      @"dir1/**/*.1",    @"dir1/test.1", @"test.1")]
-        [InlineData(@"root",      @"**/dir1/*.1",    @"dir1/test.1", @"dir1/test.1")]
-        [InlineData(@"root",      @"**/dir1/**/*.1", @"dir1/test.1", @"dir1/test.1")]
-        [InlineData(@"root",      @"**/*.1",         @"dir1/test.1", @"dir1/test.1")]
-        public void StemIncludesAllSegmentsFromPatternStartingAtWildcard_OneDirectoryDeep(string root, string includePattern, string fileToFind, string expectedStem)
+        [InlineData(@"root/dir1", @"*.1", @"test.1", @"test.1")]
+        [InlineData(@"root/dir1", @"**/*.1", @"test.1", @"test.1")]
+        [InlineData(@"root", @"dir1/*.1", @"dir1/test.1", @"test.1")]
+        [InlineData(@"root", @"dir1/**/*.1", @"dir1/test.1", @"test.1")]
+        [InlineData(@"root", @"**/dir1/*.1", @"dir1/test.1", @"dir1/test.1")]
+        [InlineData(@"root", @"**/dir1/**/*.1", @"dir1/test.1", @"dir1/test.1")]
+        [InlineData(@"root", @"**/*.1", @"dir1/test.1", @"dir1/test.1")]
+        public void StemIncludesAllSegmentsFromPatternStartingAtWildcard_OneDirectoryDeep(
+            string root,
+            string includePattern,
+            string fileToFind,
+            string expectedStem
+        )
         {
             var matcher = new Matcher();
             matcher.AddInclude(includePattern);
@@ -586,24 +741,29 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         }
 
         [Theory] // rootDir,           includePattern,            fileToFind           expectedStem
-        [InlineData(@"root/dir1/dir2", @"*.2",                    @"test.2",           @"test.2")]
-        [InlineData(@"root/dir1/dir2", @"**/*.2",                 @"test.2",           @"test.2")]
-        [InlineData(@"root/dir1",      @"dir2/*.2",               @"dir2/test.2",      @"test.2")]
-        [InlineData(@"root/dir1",      @"dir2/**/*.2",            @"dir2/test.2",      @"test.2")]
-        [InlineData(@"root/dir1",      @"**/dir2/*.2",            @"dir2/test.2",      @"dir2/test.2")]
-        [InlineData(@"root/dir1",      @"**/dir2/**/*.2",         @"dir2/test.2",      @"dir2/test.2")]
-        [InlineData(@"root/dir1",      @"**/*.2",                 @"dir2/test.2",      @"dir2/test.2")]
-        [InlineData(@"root",           @"dir1/dir2/*.2",          @"dir1/dir2/test.2", @"test.2")]
-        [InlineData(@"root",           @"dir1/dir2/**/*.2",       @"dir1/dir2/test.2", @"test.2")]
-        [InlineData(@"root",           @"**/dir1/dir2/**/*.2",    @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir1/**/dir2/*.2",    @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir1/**/dir2/**/*.2", @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"dir1/**/*.2",            @"dir1/dir2/test.2", @"dir2/test.2")]
-        [InlineData(@"root",           @"**/dir1/**/*.2",         @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir2/*.2",            @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/dir2/**/*.2",         @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
-        [InlineData(@"root",           @"**/*.2",                 @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
-        public void StemIncludesAllSegmentsFromPatternStartingAtWildcard_TwoDirectoriesDeep(string root, string includePattern, string fileToFind, string expectedStem)
+        [InlineData(@"root/dir1/dir2", @"*.2", @"test.2", @"test.2")]
+        [InlineData(@"root/dir1/dir2", @"**/*.2", @"test.2", @"test.2")]
+        [InlineData(@"root/dir1", @"dir2/*.2", @"dir2/test.2", @"test.2")]
+        [InlineData(@"root/dir1", @"dir2/**/*.2", @"dir2/test.2", @"test.2")]
+        [InlineData(@"root/dir1", @"**/dir2/*.2", @"dir2/test.2", @"dir2/test.2")]
+        [InlineData(@"root/dir1", @"**/dir2/**/*.2", @"dir2/test.2", @"dir2/test.2")]
+        [InlineData(@"root/dir1", @"**/*.2", @"dir2/test.2", @"dir2/test.2")]
+        [InlineData(@"root", @"dir1/dir2/*.2", @"dir1/dir2/test.2", @"test.2")]
+        [InlineData(@"root", @"dir1/dir2/**/*.2", @"dir1/dir2/test.2", @"test.2")]
+        [InlineData(@"root", @"**/dir1/dir2/**/*.2", @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir1/**/dir2/*.2", @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir1/**/dir2/**/*.2", @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"dir1/**/*.2", @"dir1/dir2/test.2", @"dir2/test.2")]
+        [InlineData(@"root", @"**/dir1/**/*.2", @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir2/*.2", @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/dir2/**/*.2", @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
+        [InlineData(@"root", @"**/*.2", @"dir1/dir2/test.2", @"dir1/dir2/test.2")]
+        public void StemIncludesAllSegmentsFromPatternStartingAtWildcard_TwoDirectoriesDeep(
+            string root,
+            string includePattern,
+            string fileToFind,
+            string expectedStem
+        )
         {
             var matcher = new Matcher();
             matcher.AddInclude(includePattern);
@@ -680,7 +840,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             Assert.Equal(
                 expected.OrderBy(e => e),
                 actual.OrderBy(e => e),
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Theory]
@@ -690,7 +851,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         {
             RootDir_IsAbsolutePath_WithInMemory(rootDir, separator);
         }
-        
+
         [Theory]
         [PlatformSpecific(TestPlatforms.Windows)]
         [InlineData("C:\\src\\project", '\\')]
@@ -723,16 +884,20 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "compiler/preprocess/sub/sub/preprocess-source3.cs",
                 "compiler/shared/shared1.cs",
                 "compiler/shared/sub/shared2.cs",
-                "compiler/shared/sub/sub/sharedsub.cs"
+                "compiler/shared/sub/sub/sharedsub.cs",
             };
 
             Assert.Equal(
                 expected.OrderBy(e => e),
                 actual.OrderBy(e => e),
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
-        private static IEnumerable<string> GetFileList(string rootDir = "", char directorySeparator = '/')
+        private static IEnumerable<string> GetFileList(
+            string rootDir = "",
+            char directorySeparator = '/'
+        )
         {
             var files = new List<string>
             {
@@ -788,7 +953,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "res/resource2.text",
                 "res/resource3.text",
                 ".hidden/file1.hid",
-                ".hidden/sub/file2.hid"
+                ".hidden/sub/file2.hid",
             };
 
             return files.Select(x => (rootDir + x).Replace('/', directorySeparator));
@@ -802,13 +967,23 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             return context;
         }
 
-        private void ExecuteAndVerify(Matcher matcher, string directoryPath, params string[] expectFiles)
+        private void ExecuteAndVerify(
+            Matcher matcher,
+            string directoryPath,
+            params string[] expectFiles
+        )
         {
             directoryPath = Path.Combine(_context.RootPath, directoryPath);
-            var results = matcher.Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath)));
+            var results = matcher.Execute(
+                new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))
+            );
 
-            var actual = results.Files.Select(match => Path.GetFullPath(Path.Combine(_context.RootPath, directoryPath, match.Path)));
-            var expected = expectFiles.Select(relativePath => Path.GetFullPath(Path.Combine(_context.RootPath, relativePath)));
+            var actual = results.Files.Select(match =>
+                Path.GetFullPath(Path.Combine(_context.RootPath, directoryPath, match.Path))
+            );
+            var expected = expectFiles.Select(relativePath =>
+                Path.GetFullPath(Path.Combine(_context.RootPath, relativePath))
+            );
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
         }
@@ -823,9 +998,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             {
                 // Windows-like absolute paths are not supported on Unix.
                 string fakeWindowsPath = "C:\\This\\is\\a\\nested\\windows-like\\path\\somefile.cs";
-                Assert.True(fileMatcher.Match(Path.GetPathRoot(fakeWindowsPath), fakeWindowsPath).HasMatches);
+                Assert.True(
+                    fileMatcher.Match(Path.GetPathRoot(fakeWindowsPath), fakeWindowsPath).HasMatches
+                );
             }
-            
+
             // Unix-like absolute paths are treated as relative paths on Windows.
             string fakeUnixPath = "/This/is/a/nested/unix-like/path/somefile.cs";
             Assert.True(fileMatcher.Match(Path.GetPathRoot(fakeUnixPath), fakeUnixPath).HasMatches);

@@ -11,13 +11,22 @@ using System.Runtime.InteropServices.Marshalling;
 Type comObject = RemoveTypeTrimAnalysis(typeof(ComObject));
 
 // Ensure that the interop details strategy and all of its nested types are fully trimmed away.
-if (GetTypeWithoutTrimAnalysis("System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy", comObject.Assembly) != null)
+if (
+    GetTypeWithoutTrimAnalysis(
+        "System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy",
+        comObject.Assembly
+    ) != null
+)
 {
     return -1;
 }
 
 // Ensure that the ComInterop object field is trimmed away as well.
-if (comObject.GetFields(BindingFlags.NonPublic | BindingFlags.Instance).Any(f => f.Name == "_runtimeCallableWrapper"))
+if (
+    comObject
+        .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+        .Any(f => f.Name == "_runtimeCallableWrapper")
+)
 {
     return -2;
 }
@@ -25,8 +34,12 @@ if (comObject.GetFields(BindingFlags.NonPublic | BindingFlags.Instance).Any(f =>
 var comWrappers = new StrategyBasedComWrappers();
 
 var managedObject = new ComClass();
-var nativeObject = comWrappers.GetOrCreateComInterfaceForObject(managedObject, CreateComInterfaceFlags.None);
-var wrapper = (IComInterface)comWrappers.GetOrCreateObjectForComInstance(nativeObject, CreateObjectFlags.None);
+var nativeObject = comWrappers.GetOrCreateComInterfaceForObject(
+    managedObject,
+    CreateComInterfaceFlags.None
+);
+var wrapper = (IComInterface)
+    comWrappers.GetOrCreateObjectForComInstance(nativeObject, CreateObjectFlags.None);
 Marshal.Release(nativeObject);
 
 return wrapper.Method();

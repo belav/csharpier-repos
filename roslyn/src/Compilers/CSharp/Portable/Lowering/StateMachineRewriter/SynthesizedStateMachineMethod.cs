@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// State machine interface method implementation.
     /// </summary>
-    internal abstract class SynthesizedStateMachineMethod : SynthesizedImplementationMethod, ISynthesizedMethodBodyImplementationSymbol
+    internal abstract class SynthesizedStateMachineMethod
+        : SynthesizedImplementationMethod,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly bool _hasMethodBodyDependency;
 
@@ -27,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             StateMachineTypeSymbol stateMachineType,
             PropertySymbol associatedProperty,
             bool generateDebugInfo,
-            bool hasMethodBodyDependency)
+            bool hasMethodBodyDependency
+        )
             : base(interfaceMethod, stateMachineType, name, generateDebugInfo, associatedProperty)
         {
             _hasMethodBodyDependency = hasMethodBodyDependency;
@@ -50,7 +53,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
         {
-            return this.StateMachineType.KickoffMethod.CalculateLocalSyntaxOffset(localPosition, localTree);
+            return this.StateMachineType.KickoffMethod.CalculateLocalSyntaxOffset(
+                localPosition,
+                localTree
+            );
         }
     }
 
@@ -62,10 +68,18 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private ImmutableArray<CSharpAttributeData> _attributes;
 
-        public SynthesizedStateMachineMoveNextMethod(MethodSymbol interfaceMethod, StateMachineTypeSymbol stateMachineType)
-            : base(WellKnownMemberNames.MoveNextMethodName, interfaceMethod, stateMachineType, null, generateDebugInfo: true, hasMethodBodyDependency: true)
-        {
-        }
+        public SynthesizedStateMachineMoveNextMethod(
+            MethodSymbol interfaceMethod,
+            StateMachineTypeSymbol stateMachineType
+        )
+            : base(
+                WellKnownMemberNames.MoveNextMethodName,
+                interfaceMethod,
+                stateMachineType,
+                null,
+                generateDebugInfo: true,
+                hasMethodBodyDependency: true
+            ) { }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -79,10 +93,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var kickoffMethod = StateMachineType.KickoffMethod;
                 foreach (var attribute in kickoffMethod.GetAttributes())
                 {
-                    if (attribute.IsTargetAttribute(AttributeDescription.DebuggerHiddenAttribute) ||
-                        attribute.IsTargetAttribute(AttributeDescription.DebuggerNonUserCodeAttribute) ||
-                        attribute.IsTargetAttribute(AttributeDescription.DebuggerStepperBoundaryAttribute) ||
-                        attribute.IsTargetAttribute(AttributeDescription.DebuggerStepThroughAttribute))
+                    if (
+                        attribute.IsTargetAttribute(AttributeDescription.DebuggerHiddenAttribute)
+                        || attribute.IsTargetAttribute(
+                            AttributeDescription.DebuggerNonUserCodeAttribute
+                        )
+                        || attribute.IsTargetAttribute(
+                            AttributeDescription.DebuggerStepperBoundaryAttribute
+                        )
+                        || attribute.IsTargetAttribute(
+                            AttributeDescription.DebuggerStepThroughAttribute
+                        )
+                    )
                     {
                         if (builder == null)
                         {
@@ -93,9 +115,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                ImmutableInterlocked.InterlockedCompareExchange(ref _attributes,
-                                                                builder == null ? ImmutableArray<CSharpAttributeData>.Empty : builder.ToImmutableAndFree(),
-                                                                default(ImmutableArray<CSharpAttributeData>));
+                ImmutableInterlocked.InterlockedCompareExchange(
+                    ref _attributes,
+                    builder == null
+                        ? ImmutableArray<CSharpAttributeData>.Empty
+                        : builder.ToImmutableAndFree(),
+                    default(ImmutableArray<CSharpAttributeData>)
+                );
             }
 
             return _attributes;
@@ -104,24 +130,39 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     /// <summary>
     /// Represents a state machine method other than a MoveNext method.
-    /// All such methods are considered debugger hidden. 
+    /// All such methods are considered debugger hidden.
     /// </summary>
-    internal sealed class SynthesizedStateMachineDebuggerHiddenMethod : SynthesizedStateMachineMethod
+    internal sealed class SynthesizedStateMachineDebuggerHiddenMethod
+        : SynthesizedStateMachineMethod
     {
         public SynthesizedStateMachineDebuggerHiddenMethod(
             string name,
             MethodSymbol interfaceMethod,
             StateMachineTypeSymbol stateMachineType,
             PropertySymbol associatedProperty,
-            bool hasMethodBodyDependency)
-            : base(name, interfaceMethod, stateMachineType, associatedProperty, generateDebugInfo: false, hasMethodBodyDependency: hasMethodBodyDependency)
-        {
-        }
+            bool hasMethodBodyDependency
+        )
+            : base(
+                name,
+                interfaceMethod,
+                stateMachineType,
+                associatedProperty,
+                generateDebugInfo: false,
+                hasMethodBodyDependency: hasMethodBodyDependency
+            ) { }
 
-        internal sealed override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal sealed override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             var compilation = this.DeclaringCompilation;
-            AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor));
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
+                )
+            );
 
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
         }

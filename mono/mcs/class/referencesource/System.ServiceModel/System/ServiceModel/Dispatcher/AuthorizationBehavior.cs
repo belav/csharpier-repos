@@ -17,7 +17,8 @@ namespace System.ServiceModel.Dispatcher
 
     sealed class AuthorizationBehavior
     {
-        static ServiceAuthorizationManager DefaultServiceAuthorizationManager = new ServiceAuthorizationManager();
+        static ServiceAuthorizationManager DefaultServiceAuthorizationManager =
+            new ServiceAuthorizationManager();
 
         ReadOnlyCollection<IAuthorizationPolicy> externalAuthorizationPolicies;
         ServiceAuthorizationManager serviceAuthorizationManager;
@@ -29,7 +30,6 @@ namespace System.ServiceModel.Dispatcher
 
         public void Authorize(ref MessageRpc rpc)
         {
-
             if (TD.DispatchMessageBeforeAuthorizationIsEnabled())
             {
                 TD.DispatchMessageBeforeAuthorization(rpc.EventTraceActivity);
@@ -38,12 +38,15 @@ namespace System.ServiceModel.Dispatcher
             SecurityMessageProperty security = SecurityMessageProperty.GetOrCreate(rpc.Request);
             security.ExternalAuthorizationPolicies = this.externalAuthorizationPolicies;
 
-            ServiceAuthorizationManager serviceAuthorizationManager = this.serviceAuthorizationManager ?? DefaultServiceAuthorizationManager;
+            ServiceAuthorizationManager serviceAuthorizationManager =
+                this.serviceAuthorizationManager ?? DefaultServiceAuthorizationManager;
             try
             {
                 if (!serviceAuthorizationManager.CheckAccess(rpc.OperationContext, ref rpc.Request))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateAccessDeniedFaultException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateAccessDeniedFaultException()
+                    );
                 }
             }
             catch (Exception ex)
@@ -56,16 +59,22 @@ namespace System.ServiceModel.Dispatcher
                 {
                     PerformanceCounters.AuthorizationFailed(rpc.Operation.Name);
                 }
-                if (AuditLevel.Failure == (this.serviceAuthorizationAuditLevel & AuditLevel.Failure))
+                if (
+                    AuditLevel.Failure == (this.serviceAuthorizationAuditLevel & AuditLevel.Failure)
+                )
                 {
                     try
                     {
                         string primaryIdentity;
                         string authContextId = null;
-                        AuthorizationContext authContext = security.ServiceSecurityContext.AuthorizationContext;
+                        AuthorizationContext authContext = security
+                            .ServiceSecurityContext
+                            .AuthorizationContext;
                         if (authContext != null)
                         {
-                            primaryIdentity = SecurityUtils.GetIdentityNamesFromContext(authContext);
+                            primaryIdentity = SecurityUtils.GetIdentityNamesFromContext(
+                                authContext
+                            );
                             authContextId = authContext.Id;
                         }
                         else
@@ -74,11 +83,19 @@ namespace System.ServiceModel.Dispatcher
                             authContextId = "<null>";
                         }
 
-                        SecurityAuditHelper.WriteServiceAuthorizationFailureEvent(this.auditLogLocation,
-                            this.suppressAuditFailure, rpc.Request, rpc.Request.Headers.To, rpc.Request.Headers.Action,
-                            primaryIdentity, authContextId,
-                            serviceAuthorizationManager == DefaultServiceAuthorizationManager ? "<default>" : serviceAuthorizationManager.GetType().Name,
-                            ex);
+                        SecurityAuditHelper.WriteServiceAuthorizationFailureEvent(
+                            this.auditLogLocation,
+                            this.suppressAuditFailure,
+                            rpc.Request,
+                            rpc.Request.Headers.To,
+                            rpc.Request.Headers.Action,
+                            primaryIdentity,
+                            authContextId,
+                            serviceAuthorizationManager == DefaultServiceAuthorizationManager
+                                ? "<default>"
+                                : serviceAuthorizationManager.GetType().Name,
+                            ex
+                        );
                     }
 #pragma warning suppress 56500
                     catch (Exception auditException)
@@ -86,7 +103,10 @@ namespace System.ServiceModel.Dispatcher
                         if (Fx.IsFatal(auditException))
                             throw;
 
-                        DiagnosticUtility.TraceHandledException(auditException, TraceEventType.Error);
+                        DiagnosticUtility.TraceHandledException(
+                            auditException,
+                            TraceEventType.Error
+                        );
                     }
                 }
                 throw;
@@ -96,7 +116,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 string primaryIdentity;
                 string authContextId;
-                AuthorizationContext authContext = security.ServiceSecurityContext.AuthorizationContext;
+                AuthorizationContext authContext = security
+                    .ServiceSecurityContext
+                    .AuthorizationContext;
                 if (authContext != null)
                 {
                     primaryIdentity = SecurityUtils.GetIdentityNamesFromContext(authContext);
@@ -108,10 +130,18 @@ namespace System.ServiceModel.Dispatcher
                     authContextId = "<null>";
                 }
 
-                SecurityAuditHelper.WriteServiceAuthorizationSuccessEvent(this.auditLogLocation,
-                    this.suppressAuditFailure, rpc.Request, rpc.Request.Headers.To, rpc.Request.Headers.Action,
-                    primaryIdentity, authContextId,
-                    serviceAuthorizationManager == DefaultServiceAuthorizationManager ? "<default>" : serviceAuthorizationManager.GetType().Name);
+                SecurityAuditHelper.WriteServiceAuthorizationSuccessEvent(
+                    this.auditLogLocation,
+                    this.suppressAuditFailure,
+                    rpc.Request,
+                    rpc.Request.Headers.To,
+                    rpc.Request.Headers.Action,
+                    primaryIdentity,
+                    authContextId,
+                    serviceAuthorizationManager == DefaultServiceAuthorizationManager
+                        ? "<default>"
+                        : serviceAuthorizationManager.GetType().Name
+                );
             }
         }
 
@@ -130,7 +160,9 @@ namespace System.ServiceModel.Dispatcher
         public static AuthorizationBehavior TryCreate(DispatchRuntime dispatch)
         {
             if (dispatch == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("dispatch"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("dispatch")
+                );
 
             if (!dispatch.RequiresAuthorization)
                 return null;
@@ -142,8 +174,14 @@ namespace System.ServiceModel.Dispatcher
         {
             // always use default version?
             SecurityVersion wss = SecurityVersion.Default;
-            FaultCode faultCode = FaultCode.CreateSenderFaultCode(wss.FailedAuthenticationFaultCode.Value, wss.HeaderNamespace.Value);
-            FaultReason faultReason = new FaultReason(SR.GetString(SR.AccessDenied), CultureInfo.CurrentCulture);
+            FaultCode faultCode = FaultCode.CreateSenderFaultCode(
+                wss.FailedAuthenticationFaultCode.Value,
+                wss.HeaderNamespace.Value
+            );
+            FaultReason faultReason = new FaultReason(
+                SR.GetString(SR.AccessDenied),
+                CultureInfo.CurrentCulture
+            );
             return new FaultException(faultReason, faultCode);
         }
     }

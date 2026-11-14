@@ -16,7 +16,12 @@ namespace System.Reflection.TypeLoading.Ecma
         private readonly string _location;
         private readonly EcmaModule _manifestModule;
 
-        internal EcmaAssembly(MetadataLoadContext loader, PEReader peReader, MetadataReader reader, string location)
+        internal EcmaAssembly(
+            MetadataLoadContext loader,
+            PEReader peReader,
+            MetadataReader reader,
+            string location
+        )
             : base(loader, reader.AssemblyFiles.Count)
         {
             Debug.Assert(loader != null);
@@ -25,26 +30,34 @@ namespace System.Reflection.TypeLoading.Ecma
             Debug.Assert(location != null);
 
             _location = location;
-            _neverAccessThisExceptThroughAssemblyDefinitionProperty = reader.GetAssemblyDefinition();
+            _neverAccessThisExceptThroughAssemblyDefinitionProperty =
+                reader.GetAssemblyDefinition();
 
             _manifestModule = new EcmaModule(this, location, peReader, reader);
         }
 
         internal sealed override RoModule GetRoManifestModule() => _manifestModule;
+
         internal EcmaModule GetEcmaManifestModule() => _manifestModule;
 
-        public sealed override MethodInfo? EntryPoint => GetEcmaManifestModule().ComputeEntryPoint(fileRefEntryPointAllowed: true);
+        public sealed override MethodInfo? EntryPoint =>
+            GetEcmaManifestModule().ComputeEntryPoint(fileRefEntryPointAllowed: true);
 
         public sealed override string ImageRuntimeVersion => Reader.MetadataVersion;
         public sealed override bool IsDynamic => false;
         public sealed override string Location => _location;
 
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => AssemblyDefinition.GetCustomAttributes().ToTrueCustomAttributes(GetEcmaManifestModule());
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            AssemblyDefinition
+                .GetCustomAttributes()
+                .ToTrueCustomAttributes(GetEcmaManifestModule());
 
         protected sealed override AssemblyNameData[] ComputeAssemblyReferences()
         {
             MetadataReader reader = Reader;
-            AssemblyNameData[] assemblyReferences = new AssemblyNameData[reader.AssemblyReferences.Count];
+            AssemblyNameData[] assemblyReferences = new AssemblyNameData[
+                reader.AssemblyReferences.Count
+            ];
             int index = 0;
             foreach (AssemblyReferenceHandle handle in reader.AssemblyReferences)
             {
@@ -91,7 +104,9 @@ namespace System.Reflection.TypeLoading.Ecma
                 if (implementation.Kind != HandleKind.AssemblyReference) // This check also weeds out nested types. This is intentional.
                     continue;
 
-                RoAssembly redirectedAssembly = ((AssemblyReferenceHandle)implementation).ResolveToAssemblyOrExceptionAssembly(GetEcmaManifestModule());
+                RoAssembly redirectedAssembly = (
+                    (AssemblyReferenceHandle)implementation
+                ).ResolveToAssemblyOrExceptionAssembly(GetEcmaManifestModule());
                 ReadOnlySpan<byte> ns = exportedType.Namespace.AsReadOnlySpan(reader);
                 ReadOnlySpan<byte> name = exportedType.Name.AsReadOnlySpan(reader);
                 handler(redirectedAssembly, ns, name);
@@ -100,8 +115,16 @@ namespace System.Reflection.TypeLoading.Ecma
 
         internal MetadataReader Reader => _manifestModule.Reader;
 
-        private ref readonly AssemblyDefinition AssemblyDefinition { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughAssemblyDefinitionProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private ref readonly AssemblyDefinition AssemblyDefinition
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughAssemblyDefinitionProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly AssemblyDefinition _neverAccessThisExceptThroughAssemblyDefinitionProperty;
     }
 }

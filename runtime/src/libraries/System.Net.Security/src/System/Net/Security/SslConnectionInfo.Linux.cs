@@ -60,10 +60,7 @@ namespace System.Net.Security
             byte* b = (byte*)protocolVersion;
             if (b[0] == 'T')
             {
-                if (b[1] == 'L' &&
-                    b[2] == 'S' &&
-                    b[3] == 'v' &&
-                    b[4] == '1')
+                if (b[1] == 'L' && b[2] == 'S' && b[3] == 'v' && b[4] == '1')
                 {
                     if (b[5] == '\0')
                     {
@@ -74,19 +71,20 @@ namespace System.Net.Security
                     {
                         switch (b[6])
                         {
-                            case (byte)'1': return SslProtocols.Tls11;
+                            case (byte)'1':
+                                return SslProtocols.Tls11;
 #pragma warning restore SYSLIB0039
-                            case (byte)'2': return SslProtocols.Tls12;
-                            case (byte)'3': return SslProtocols.Tls13;
+                            case (byte)'2':
+                                return SslProtocols.Tls12;
+                            case (byte)'3':
+                                return SslProtocols.Tls13;
                         }
                     }
                 }
             }
             else if (b[0] == 'S')
             {
-                if (b[1] == 'S' &&
-                    b[2] == 'L' &&
-                    b[3] == 'v')
+                if (b[1] == 'S' && b[2] == 'L' && b[3] == 'v')
                 {
 #pragma warning disable 0618 // Ssl2, Ssl3 are deprecated.
                     if (b[4] == '2' && b[5] == '\0')

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,58 +38,61 @@ using XmlNode = System.Object;
 
 namespace System.Net.Configuration
 {
-	class WebRequestModuleHandler : IConfigurationSectionHandler
-	{
-		public virtual object Create (object parent, object configContext, XmlNode section)
-		{
+    class WebRequestModuleHandler : IConfigurationSectionHandler
+    {
+        public virtual object Create(object parent, object configContext, XmlNode section)
+        {
 #if XML_DEP
-			if (section.Attributes != null && section.Attributes.Count != 0)
-				HandlersUtil.ThrowException ("Unrecognized attribute", section);
+            if (section.Attributes != null && section.Attributes.Count != 0)
+                HandlersUtil.ThrowException("Unrecognized attribute", section);
 
-			XmlNodeList reqHandlers = section.ChildNodes;
-			foreach (XmlNode child in reqHandlers) {
-				XmlNodeType ntype = child.NodeType;
-				if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
-					continue;
+            XmlNodeList reqHandlers = section.ChildNodes;
+            foreach (XmlNode child in reqHandlers)
+            {
+                XmlNodeType ntype = child.NodeType;
+                if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
+                    continue;
 
-				if (ntype != XmlNodeType.Element)
-					HandlersUtil.ThrowException ("Only elements allowed", child);
-				
-				string name = child.Name;
-				if (name == "clear") {
-					if (child.Attributes != null && child.Attributes.Count != 0)
-						HandlersUtil.ThrowException ("Unrecognized attribute", child);
+                if (ntype != XmlNodeType.Element)
+                    HandlersUtil.ThrowException("Only elements allowed", child);
 
-					WebRequest.PrefixList = new ArrayList ();
-					continue;
-				}
+                string name = child.Name;
+                if (name == "clear")
+                {
+                    if (child.Attributes != null && child.Attributes.Count != 0)
+                        HandlersUtil.ThrowException("Unrecognized attribute", child);
 
-				//string prefix = HandlersUtil.ExtractAttributeValue ("prefix", child);
-				if (name == "add") {
-					//string type = HandlersUtil.ExtractAttributeValue ("type", child, false);
-					if (child.Attributes != null && child.Attributes.Count != 0)
-						HandlersUtil.ThrowException ("Unrecognized attribute", child);
+                    WebRequest.PrefixList = new ArrayList();
+                    continue;
+                }
 
-					throw new NotImplementedException ();
-					//WebRequest.PrefixList.Add (new WebRequestPrefixElement(prefix, type));
-					//continue;
-				}
+                //string prefix = HandlersUtil.ExtractAttributeValue ("prefix", child);
+                if (name == "add")
+                {
+                    //string type = HandlersUtil.ExtractAttributeValue ("type", child, false);
+                    if (child.Attributes != null && child.Attributes.Count != 0)
+                        HandlersUtil.ThrowException("Unrecognized attribute", child);
 
-				if (name == "remove") {
-					if (child.Attributes != null && child.Attributes.Count != 0)
-						HandlersUtil.ThrowException ("Unrecognized attribute", child);
+                    throw new NotImplementedException();
+                    //WebRequest.PrefixList.Add (new WebRequestPrefixElement(prefix, type));
+                    //continue;
+                }
 
-					throw new NotImplementedException ();
-					// WebRequest.RemovePrefix (prefix);
-					// continue;
-				}
+                if (name == "remove")
+                {
+                    if (child.Attributes != null && child.Attributes.Count != 0)
+                        HandlersUtil.ThrowException("Unrecognized attribute", child);
 
-				HandlersUtil.ThrowException ("Unexpected element", child);
-			}
-#endif			
+                    throw new NotImplementedException();
+                    // WebRequest.RemovePrefix (prefix);
+                    // continue;
+                }
 
-			return null;
-		}
-	}
+                HandlersUtil.ThrowException("Unexpected element", child);
+            }
+#endif
+
+            return null;
+        }
+    }
 }
-

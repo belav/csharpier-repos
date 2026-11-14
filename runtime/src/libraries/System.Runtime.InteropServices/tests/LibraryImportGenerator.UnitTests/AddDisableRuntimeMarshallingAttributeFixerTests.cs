@@ -11,7 +11,8 @@ using Microsoft.Interop;
 using Xunit;
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.Testing.EmptyDiagnosticAnalyzer,
-    Microsoft.Interop.Analyzers.AddDisableRuntimeMarshallingAttributeFixer>;
+    Microsoft.Interop.Analyzers.AddDisableRuntimeMarshallingAttributeFixer
+>;
 
 namespace LibraryImportGenerator.UnitTests
 {
@@ -48,12 +49,23 @@ namespace LibraryImportGenerator.UnitTests
                     public static S ConvertToManaged(Native n) => default;
                 }
                 """;
-            var expectedPropertiesFile = "[assembly: System.Runtime.CompilerServices.DisableRuntimeMarshalling]" + Environment.NewLine;
+            var expectedPropertiesFile =
+                "[assembly: System.Runtime.CompilerServices.DisableRuntimeMarshalling]"
+                + Environment.NewLine;
 
-            var diagnostic = VerifyCS.Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
+            var diagnostic = VerifyCS
+                .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
                 .WithLocation(0)
-                .WithArguments("Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.", "s");
-            await VerifyCodeFixAsync(source, propertiesFile: null, expectedPropertiesFile, diagnostic);
+                .WithArguments(
+                    "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
+                    "s"
+                );
+            await VerifyCodeFixAsync(
+                source,
+                propertiesFile: null,
+                expectedPropertiesFile,
+                diagnostic
+            );
         }
 
         [Fact]
@@ -99,37 +111,63 @@ namespace LibraryImportGenerator.UnitTests
 
                 """;
 
-            var diagnostic = VerifyCS.Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
+            var diagnostic = VerifyCS
+                .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
                 .WithLocation(0)
-                .WithArguments("Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.", "s");
+                .WithArguments(
+                    "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
+                    "s"
+                );
             await VerifyCodeFixAsync(source, propertiesFile, expectedPropertiesFile, diagnostic);
         }
 
-        private static async Task VerifyCodeFixAsync(string source, string? propertiesFile, string? expectedPropertiesFile, DiagnosticResult diagnostic)
+        private static async Task VerifyCodeFixAsync(
+            string source,
+            string? propertiesFile,
+            string? expectedPropertiesFile,
+            DiagnosticResult diagnostic
+        )
         {
             var test = new Test
             {
                 TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
                 TestCode = source,
                 FixedCode = source,
-                BatchFixedCode = source
+                BatchFixedCode = source,
             };
             test.ExpectedDiagnostics.Add(diagnostic);
             if (propertiesFile is not null)
             {
-                test.TestState.Sources.Add(($"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs", propertiesFile));
+                test.TestState.Sources.Add(
+                    (
+                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                        propertiesFile
+                    )
+                );
             }
             if (expectedPropertiesFile is not null)
             {
-                test.FixedState.Sources.Add(($"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs", expectedPropertiesFile));
-                test.BatchFixedState.Sources.Add(($"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs", expectedPropertiesFile));
+                test.FixedState.Sources.Add(
+                    (
+                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                        expectedPropertiesFile
+                    )
+                );
+                test.BatchFixedState.Sources.Add(
+                    (
+                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                        expectedPropertiesFile
+                    )
+                );
             }
             await test.RunAsync();
         }
 
         class Test : VerifyCS.Test
         {
-            private static readonly ImmutableArray<Type> GeneratorTypes = ImmutableArray.Create(typeof(Microsoft.Interop.LibraryImportGenerator));
+            private static readonly ImmutableArray<Type> GeneratorTypes = ImmutableArray.Create(
+                typeof(Microsoft.Interop.LibraryImportGenerator)
+            );
 
             public const string FilePathPrefix = "/Project/";
 

@@ -35,11 +35,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
         // In Core type string lives in System.Private.Corelib.dll which doesn't
         // contain all the types which are living in mscorlib in .NET Framework. Therefore we
         // use our mscorlib facade which also contains manual type forwards for deserialization.
-        internal static readonly Assembly s_urtAssembly = Assembly.Load("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+        internal static readonly Assembly s_urtAssembly = Assembly.Load(
+            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        );
         internal static readonly string s_urtAssemblyString = s_urtAssembly.FullName!;
 
         internal static readonly Assembly s_urtAlternativeAssembly = s_typeofString.Assembly;
-        internal static readonly string s_urtAlternativeAssemblyString = s_urtAlternativeAssembly.FullName!;
+        internal static readonly string s_urtAlternativeAssemblyString =
+            s_urtAlternativeAssembly.FullName!;
 
         // Arrays
         internal static readonly Type s_typeofTypeArray = typeof(Type[]);
@@ -71,12 +74,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
         private static volatile InternalPrimitiveTypeE[]? s_codeA;
 
         internal static InternalPrimitiveTypeE ToCode(Type? type) =>
-                type == null ? ToPrimitiveTypeEnum(TypeCode.Empty) :
-                type.IsPrimitive ? ToPrimitiveTypeEnum(Type.GetTypeCode(type)) :
-                ReferenceEquals(type, s_typeofDateTime) ? InternalPrimitiveTypeE.DateTime :
-                ReferenceEquals(type, s_typeofTimeSpan) ? InternalPrimitiveTypeE.TimeSpan :
-                ReferenceEquals(type, s_typeofDecimal) ? InternalPrimitiveTypeE.Decimal :
-                InternalPrimitiveTypeE.Invalid;
+            type == null ? ToPrimitiveTypeEnum(TypeCode.Empty)
+            : type.IsPrimitive ? ToPrimitiveTypeEnum(Type.GetTypeCode(type))
+            : ReferenceEquals(type, s_typeofDateTime) ? InternalPrimitiveTypeE.DateTime
+            : ReferenceEquals(type, s_typeofTimeSpan) ? InternalPrimitiveTypeE.TimeSpan
+            : ReferenceEquals(type, s_typeofDecimal) ? InternalPrimitiveTypeE.Decimal
+            : InternalPrimitiveTypeE.Invalid;
 
         internal static bool IsWriteAsByteArray(InternalPrimitiveTypeE code)
         {
@@ -201,20 +204,35 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 _ => null,
             };
 
-        internal static bool IsPrimitiveArray(Type? type, [NotNullWhen(true)] out object? typeInformation)
+        internal static bool IsPrimitiveArray(
+            Type? type,
+            [NotNullWhen(true)] out object? typeInformation
+        )
         {
-            if (ReferenceEquals(type, s_typeofBooleanArray)) typeInformation = InternalPrimitiveTypeE.Boolean;
-            else if (ReferenceEquals(type, s_typeofByteArray)) typeInformation = InternalPrimitiveTypeE.Byte;
-            else if (ReferenceEquals(type, s_typeofCharArray)) typeInformation = InternalPrimitiveTypeE.Char;
-            else if (ReferenceEquals(type, s_typeofDoubleArray)) typeInformation = InternalPrimitiveTypeE.Double;
-            else if (ReferenceEquals(type, s_typeofInt16Array)) typeInformation = InternalPrimitiveTypeE.Int16;
-            else if (ReferenceEquals(type, s_typeofInt32Array)) typeInformation = InternalPrimitiveTypeE.Int32;
-            else if (ReferenceEquals(type, s_typeofInt64Array)) typeInformation = InternalPrimitiveTypeE.Int64;
-            else if (ReferenceEquals(type, s_typeofSByteArray)) typeInformation = InternalPrimitiveTypeE.SByte;
-            else if (ReferenceEquals(type, s_typeofSingleArray)) typeInformation = InternalPrimitiveTypeE.Single;
-            else if (ReferenceEquals(type, s_typeofUInt16Array)) typeInformation = InternalPrimitiveTypeE.UInt16;
-            else if (ReferenceEquals(type, s_typeofUInt32Array)) typeInformation = InternalPrimitiveTypeE.UInt32;
-            else if (ReferenceEquals(type, s_typeofUInt64Array)) typeInformation = InternalPrimitiveTypeE.UInt64;
+            if (ReferenceEquals(type, s_typeofBooleanArray))
+                typeInformation = InternalPrimitiveTypeE.Boolean;
+            else if (ReferenceEquals(type, s_typeofByteArray))
+                typeInformation = InternalPrimitiveTypeE.Byte;
+            else if (ReferenceEquals(type, s_typeofCharArray))
+                typeInformation = InternalPrimitiveTypeE.Char;
+            else if (ReferenceEquals(type, s_typeofDoubleArray))
+                typeInformation = InternalPrimitiveTypeE.Double;
+            else if (ReferenceEquals(type, s_typeofInt16Array))
+                typeInformation = InternalPrimitiveTypeE.Int16;
+            else if (ReferenceEquals(type, s_typeofInt32Array))
+                typeInformation = InternalPrimitiveTypeE.Int32;
+            else if (ReferenceEquals(type, s_typeofInt64Array))
+                typeInformation = InternalPrimitiveTypeE.Int64;
+            else if (ReferenceEquals(type, s_typeofSByteArray))
+                typeInformation = InternalPrimitiveTypeE.SByte;
+            else if (ReferenceEquals(type, s_typeofSingleArray))
+                typeInformation = InternalPrimitiveTypeE.Single;
+            else if (ReferenceEquals(type, s_typeofUInt16Array))
+                typeInformation = InternalPrimitiveTypeE.UInt16;
+            else if (ReferenceEquals(type, s_typeofUInt32Array))
+                typeInformation = InternalPrimitiveTypeE.UInt32;
+            else if (ReferenceEquals(type, s_typeofUInt64Array))
+                typeInformation = InternalPrimitiveTypeE.UInt64;
             else
             {
                 typeInformation = null;
@@ -326,10 +344,13 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal static object? FromString(string? value, InternalPrimitiveTypeE code)
         {
             // InternalPrimitiveTypeE needs to be a primitive type
-            Debug.Assert((code != InternalPrimitiveTypeE.Invalid), "[Converter.FromString]!InternalPrimitiveTypeE.Invalid ");
-            return code != InternalPrimitiveTypeE.Invalid ?
-                Convert.ChangeType(value, ToTypeCode(code), CultureInfo.InvariantCulture) :
-                value;
+            Debug.Assert(
+                (code != InternalPrimitiveTypeE.Invalid),
+                "[Converter.FromString]!InternalPrimitiveTypeE.Invalid "
+            );
+            return code != InternalPrimitiveTypeE.Invalid
+                ? Convert.ChangeType(value, ToTypeCode(code), CultureInfo.InvariantCulture)
+                : value;
         }
     }
 }

@@ -23,10 +23,10 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum NotificationStatus
-	{
-		NoNotification,
-		IntraSiteOnly,
-		NotificationAlways
-	}
+    public enum NotificationStatus
+    {
+        NoNotification,
+        IntraSiteOnly,
+        NotificationAlways,
+    }
 }

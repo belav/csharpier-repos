@@ -9,16 +9,18 @@ namespace System.Web.Mvc
     /// <summary>
     /// Annotates a controller with a route prefix that applies to all actions within the controller.
     /// </summary>
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is intended to be extended by the user.")]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "This attribute is intended to be extended by the user."
+    )]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class RoutePrefixAttribute : Attribute, IRoutePrefix
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoutePrefixAttribute" /> class without specifying any parameters.
         /// </summary>
-        protected RoutePrefixAttribute()
-        {
-        }
+        protected RoutePrefixAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoutePrefixAttribute" /> class.

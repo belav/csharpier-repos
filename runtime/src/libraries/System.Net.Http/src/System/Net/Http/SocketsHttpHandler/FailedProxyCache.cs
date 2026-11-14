@@ -28,7 +28,8 @@ namespace System.Net.Http
         private const int LargeProxyConfigBoundary = 8;
 
         // Value is the Environment.TickCount64 to remove the proxy from the failure list.
-        private readonly ConcurrentDictionary<Uri, long> _failedProxies = new ConcurrentDictionary<Uri, long>();
+        private readonly ConcurrentDictionary<Uri, long> _failedProxies =
+            new ConcurrentDictionary<Uri, long>();
 
         // When Environment.TickCount64 >= _nextFlushTicks, cause a flush.
         private long _nextFlushTicks = Environment.TickCount64 + FlushFailuresTimerInMilliseconds;
@@ -93,7 +94,10 @@ namespace System.Net.Http
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Cleanup()
         {
-            if (_failedProxies.Count > LargeProxyConfigBoundary && Environment.TickCount64 >= Interlocked.Read(ref _nextFlushTicks))
+            if (
+                _failedProxies.Count > LargeProxyConfigBoundary
+                && Environment.TickCount64 >= Interlocked.Read(ref _nextFlushTicks)
+            )
             {
                 CleanupHelper();
             }
@@ -133,7 +137,10 @@ namespace System.Net.Http
             {
                 if (lockTaken)
                 {
-                    Interlocked.Exchange(ref _nextFlushTicks, Environment.TickCount64 + FlushFailuresTimerInMilliseconds);
+                    Interlocked.Exchange(
+                        ref _nextFlushTicks,
+                        Environment.TickCount64 + FlushFailuresTimerInMilliseconds
+                    );
                     _flushLock.Exit(false);
                 }
             }

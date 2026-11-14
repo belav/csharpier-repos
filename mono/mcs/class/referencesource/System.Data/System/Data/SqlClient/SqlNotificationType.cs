@@ -7,13 +7,14 @@
 // <owner current="false" primary="false">ramp</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.SqlClient {
-    public enum SqlNotificationType {
-        Change      = 0,
-        Subscribe   = 1,
+namespace System.Data.SqlClient
+{
+    public enum SqlNotificationType
+    {
+        Change = 0,
+        Subscribe = 1,
 
         // use negative values for client-only-generated values
-        Unknown     = -1
+        Unknown = -1,
     }
 }
-

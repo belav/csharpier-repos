@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,22 +27,26 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class ToolStripOverflowTests : TestHelper
-	{
-		[Test]
-		public void Constructor ()
-		{
-			ToolStripOverflow tso = (ToolStripOverflow)new ToolStrip ().OverflowButton.DropDown;
-			
-			Assert.AreEqual ("System.Windows.Forms.Layout.FlowLayout", tso.LayoutEngine.ToString (), "A1");
-		}
-	}
+    [TestFixture]
+    public class ToolStripOverflowTests : TestHelper
+    {
+        [Test]
+        public void Constructor()
+        {
+            ToolStripOverflow tso = (ToolStripOverflow)new ToolStrip().OverflowButton.DropDown;
+
+            Assert.AreEqual(
+                "System.Windows.Forms.Layout.FlowLayout",
+                tso.LayoutEngine.ToString(),
+                "A1"
+            );
+        }
+    }
 }

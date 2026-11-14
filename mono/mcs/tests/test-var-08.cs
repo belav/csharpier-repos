@@ -1,17 +1,13 @@
-
-
 using System;
 
 class X
 {
-        int var;
+    int var;
 
-        public X (int var, int i)
-        {
-                var = i;
-        }
+    public X(int var, int i)
+    {
+        var = i;
+    }
 
-        public static void Main ()
-        {
-        }
+    public static void Main() { }
 }

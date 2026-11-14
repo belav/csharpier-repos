@@ -4,10 +4,10 @@
 
 #nullable disable
 
-using Microsoft.VisualStudio.Debugger.Evaluation;
-using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Microsoft.VisualStudio.Debugger.Evaluation;
+using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string childFullNamePrefix,
             ReadOnlyCollection<string> formatSpecifiers,
             DkmEvaluationResultFlags flags,
-            string editableValue)
+            string editableValue
+        )
         {
             Debug.Assert((inspectionContext.EvaluationFlags & DkmEvaluationFlags.NoExpansion) == 0);
 
@@ -47,7 +48,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 {
                     if ((inspectionContext.EvaluationFlags & DkmEvaluationFlags.ShowValueRaw) != 0)
                     {
-                        var rawView = CreateRawView(resultProvider, inspectionContext, declaredTypeAndInfo, value);
+                        var rawView = CreateRawView(
+                            resultProvider,
+                            inspectionContext,
+                            declaredTypeAndInfo,
+                            value
+                        );
                         Debug.Assert(rawView != null);
                         return rawView;
                     }
@@ -77,7 +83,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             formatSpecifiers,
                             flags,
                             editableValue,
-                            resultProvider);
+                            resultProvider
+                        );
                     }
                 }
             }
@@ -110,7 +117,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ReadOnlyCollection<string> formatSpecifiers,
             DkmEvaluationResultFlags flags,
             string editableValue,
-            ResultProvider resultProvider)
+            ResultProvider resultProvider
+        )
         {
             Debug.Assert(proxyValue != null);
             var proxyType = proxyValue.Type;
@@ -123,17 +131,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 TypeHelpers.IsPublic,
                 resultProvider,
                 isProxyType: true,
-                supportsFavorites: false);
+                supportsFavorites: false
+            );
             if (proxyMembers != null)
             {
                 string proxyMemberFullNamePrefix = null;
                 if (childFullNamePrefix != null)
                 {
-                    proxyMemberFullNamePrefix = resultProvider.FullNameProvider.GetClrObjectCreationExpression(
-                        inspectionContext,
-                        proxyTypeAndInfo.ClrType,
-                        proxyTypeAndInfo.Info,
-                        [childFullNamePrefix]);
+                    proxyMemberFullNamePrefix =
+                        resultProvider.FullNameProvider.GetClrObjectCreationExpression(
+                            inspectionContext,
+                            proxyTypeAndInfo.ClrType,
+                            proxyTypeAndInfo.Info,
+                            [childFullNamePrefix]
+                        );
                 }
                 _proxyItem = new EvalResult(
                     ExpansionKind.Default,
@@ -151,7 +162,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     category: default(DkmEvaluationResultCategory),
                     flags: default(DkmEvaluationResultFlags),
                     editableValue: null,
-                    inspectionContext: inspectionContext);
+                    inspectionContext: inspectionContext
+                );
             }
 
             _name = name;
@@ -175,9 +187,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             bool visitAll,
-            ref int index)
+            ref int index
+        )
         {
-            _proxyItem?.Expansion.GetRows(resultProvider, rows, inspectionContext, _proxyItem.ToDataItem(), _proxyItem.Value, startIndex, count, visitAll, ref index);
+            _proxyItem?.Expansion.GetRows(
+                resultProvider,
+                rows,
+                inspectionContext,
+                _proxyItem.ToDataItem(),
+                _proxyItem.Value,
+                startIndex,
+                count,
+                visitAll,
+                ref index
+            );
 
             if (InRange(startIndex, count, index))
             {
@@ -189,7 +212,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private EvalResult CreateRawViewRow(
             ResultProvider resultProvider,
-            DkmInspectionContext inspectionContext)
+            DkmInspectionContext inspectionContext
+        )
         {
             return new EvalResult(
                 ExpansionKind.RawView,
@@ -199,7 +223,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 useDebuggerDisplay: false,
                 value: _value,
                 displayValue: null,
-                expansion: CreateRawView(resultProvider, inspectionContext, _declaredTypeAndInfo, _value),
+                expansion: CreateRawView(
+                    resultProvider,
+                    inspectionContext,
+                    _declaredTypeAndInfo,
+                    _value
+                ),
                 childShouldParenthesize: _childShouldParenthesize,
                 fullName: _fullName,
                 childFullNamePrefixOpt: _childFullNamePrefix,
@@ -207,16 +236,24 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 category: DkmEvaluationResultCategory.Data,
                 flags: _flags | DkmEvaluationResultFlags.ReadOnly,
                 editableValue: _editableValue,
-                inspectionContext: inspectionContext);
+                inspectionContext: inspectionContext
+            );
         }
 
         private static Expansion CreateRawView(
             ResultProvider resultProvider,
             DkmInspectionContext inspectionContext,
             TypeAndCustomInfo declaredTypeAndInfo,
-            DkmClrValue value)
+            DkmClrValue value
+        )
         {
-            return resultProvider.GetTypeExpansion(inspectionContext, declaredTypeAndInfo, value, ExpansionFlags.IncludeBaseMembers, supportsFavorites: false);
+            return resultProvider.GetTypeExpansion(
+                inspectionContext,
+                declaredTypeAndInfo,
+                value,
+                ExpansionFlags.IncludeBaseMembers,
+                supportsFavorites: false
+            );
         }
     }
 }

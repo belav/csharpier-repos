@@ -3,20 +3,19 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class ConferencePlannerSqlServerTest : ConferencePlannerTestBase<ConferencePlannerSqlServerTest.ConferencePlannerSqlServerFixture
->
+public class ConferencePlannerSqlServerTest
+    : ConferencePlannerTestBase<ConferencePlannerSqlServerTest.ConferencePlannerSqlServerFixture>
 {
     public ConferencePlannerSqlServerTest(ConferencePlannerSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class ConferencePlannerSqlServerFixture : ConferencePlannerFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

@@ -35,7 +35,8 @@ namespace System.Xml
                     if (_decoder == _base64Decoder)
                     {
                         // read more binary data
-                        return await ReadContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
+                        return await ReadContentAsBinaryAsync(buffer, index, count)
+                            .ConfigureAwait(false);
                     }
                     break;
                 case State.InReadElementContent:
@@ -79,7 +80,8 @@ namespace System.Xml
                     if (_decoder == _binHexDecoder)
                     {
                         // read more binary data
-                        return await ReadContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
+                        return await ReadContentAsBinaryAsync(buffer, index, count)
+                            .ConfigureAwait(false);
                     }
                     break;
                 case State.InReadElementContent:
@@ -98,7 +100,11 @@ namespace System.Xml
             return await ReadContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
         }
 
-        internal async Task<int> ReadElementContentAsBase64Async(byte[] buffer, int index, int count) // only ever awaited, so no need to separate out argument handling
+        internal async Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        ) // only ever awaited, so no need to separate out argument handling
         {
             ArgumentNullException.ThrowIfNull(buffer);
             if (index < 0 || (uint)count > buffer.Length - index)
@@ -111,7 +117,9 @@ namespace System.Xml
                 case State.None:
                     if (_reader.NodeType != XmlNodeType.Element)
                     {
-                        throw _reader.CreateReadElementContentAsException(nameof(ReadElementContentAsBase64));
+                        throw _reader.CreateReadElementContentAsException(
+                            nameof(ReadElementContentAsBase64)
+                        );
                     }
                     if (!await InitOnElementAsync().ConfigureAwait(false))
                     {
@@ -125,7 +133,8 @@ namespace System.Xml
                     if (_decoder == _base64Decoder)
                     {
                         // read more binary data
-                        return await ReadElementContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
+                        return await ReadElementContentAsBinaryAsync(buffer, index, count)
+                            .ConfigureAwait(false);
                     }
                     break;
                 default:
@@ -139,10 +148,15 @@ namespace System.Xml
             InitBase64Decoder();
 
             // read more binary data
-            return await ReadElementContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
+            return await ReadElementContentAsBinaryAsync(buffer, index, count)
+                .ConfigureAwait(false);
         }
 
-        internal async Task<int> ReadElementContentAsBinHexAsync(byte[] buffer, int index, int count) // only ever awaited, so no need to separate out argument handling
+        internal async Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        ) // only ever awaited, so no need to separate out argument handling
         {
             ArgumentNullException.ThrowIfNull(buffer);
             if (index < 0 || (uint)count > buffer.Length - index)
@@ -155,7 +169,9 @@ namespace System.Xml
                 case State.None:
                     if (_reader.NodeType != XmlNodeType.Element)
                     {
-                        throw _reader.CreateReadElementContentAsException(nameof(ReadElementContentAsBinHex));
+                        throw _reader.CreateReadElementContentAsException(
+                            nameof(ReadElementContentAsBinHex)
+                        );
                     }
                     if (!await InitOnElementAsync().ConfigureAwait(false))
                     {
@@ -169,7 +185,8 @@ namespace System.Xml
                     if (_decoder == _binHexDecoder)
                     {
                         // read more binary data
-                        return await ReadElementContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
+                        return await ReadElementContentAsBinaryAsync(buffer, index, count)
+                            .ConfigureAwait(false);
                     }
                     break;
                 default:
@@ -183,7 +200,8 @@ namespace System.Xml
             InitBinHexDecoder();
 
             // read more binary data
-            return await ReadElementContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
+            return await ReadElementContentAsBinaryAsync(buffer, index, count)
+                .ConfigureAwait(false);
         }
 
         internal async Task FinishAsync()
@@ -196,7 +214,11 @@ namespace System.Xml
                 {
                     if (_reader.NodeType != XmlNodeType.EndElement)
                     {
-                        throw new XmlException(SR.Xml_InvalidNodeType, _reader.NodeType.ToString(), _reader as IXmlLineInfo);
+                        throw new XmlException(
+                            SR.Xml_InvalidNodeType,
+                            _reader.NodeType.ToString(),
+                            _reader as IXmlLineInfo
+                        );
                     }
                     // move off the EndElement
                     await _reader.ReadAsync().ConfigureAwait(false);
@@ -236,7 +258,11 @@ namespace System.Xml
             {
                 if (_reader.NodeType != XmlNodeType.EndElement)
                 {
-                    throw new XmlException(SR.Xml_InvalidNodeType, _reader.NodeType.ToString(), _reader as IXmlLineInfo);
+                    throw new XmlException(
+                        SR.Xml_InvalidNodeType,
+                        _reader.NodeType.ToString(),
+                        _reader as IXmlLineInfo
+                    );
                 }
                 // move off end element
                 await _reader.ReadAsync().ConfigureAwait(false);
@@ -267,7 +293,11 @@ namespace System.Xml
                     {
                         if (_valueOffset < _valueChunkLength)
                         {
-                            int decodedCharsCount = _decoder.Decode(_valueChunk!, _valueOffset, _valueChunkLength - _valueOffset);
+                            int decodedCharsCount = _decoder.Decode(
+                                _valueChunk!,
+                                _valueOffset,
+                                _valueChunkLength - _valueOffset
+                            );
                             _valueOffset += decodedCharsCount;
                         }
                         if (_decoder.IsFull)
@@ -275,7 +305,13 @@ namespace System.Xml
                             return _decoder.DecodedCount;
                         }
                         Debug.Assert(_valueOffset == _valueChunkLength);
-                        if ((_valueChunkLength = await _reader.ReadValueChunkAsync(_valueChunk!, 0, ChunkSize).ConfigureAwait(false)) == 0)
+                        if (
+                            (
+                                _valueChunkLength = await _reader
+                                    .ReadValueChunkAsync(_valueChunk!, 0, ChunkSize)
+                                    .ConfigureAwait(false)
+                            ) == 0
+                        )
                         {
                             break;
                         }
@@ -286,7 +322,11 @@ namespace System.Xml
                 {
                     // read what is reader.Value
                     string value = await _reader.GetValueAsync().ConfigureAwait(false);
-                    int decodedCharsCount = _decoder.Decode(value, _valueOffset, value.Length - _valueOffset);
+                    int decodedCharsCount = _decoder.Decode(
+                        value,
+                        _valueOffset,
+                        value.Length - _valueOffset
+                    );
                     _valueOffset += decodedCharsCount;
 
                     if (_decoder.IsFull)
@@ -313,7 +353,8 @@ namespace System.Xml
                 return 0;
             }
             // read binary
-            int decoded = await ReadContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
+            int decoded = await ReadContentAsBinaryAsync(buffer, index, count)
+                .ConfigureAwait(false);
             if (decoded > 0)
             {
                 return decoded;
@@ -322,7 +363,11 @@ namespace System.Xml
             // if 0 bytes returned check if we are on a closing EndElement, throw exception if not
             if (_reader.NodeType != XmlNodeType.EndElement)
             {
-                throw new XmlException(SR.Xml_InvalidNodeType, _reader.NodeType.ToString(), _reader as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_InvalidNodeType,
+                    _reader.NodeType.ToString(),
+                    _reader as IXmlLineInfo
+                );
             }
 
             // move off the EndElement

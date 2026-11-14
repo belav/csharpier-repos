@@ -194,9 +194,8 @@ public class DefaultApplicationModelProviderTest
 
         // Assert
         var controllerModel = Assert.Single(context.Result.Controllers);
-        var action = Assert.Single(
-            controllerModel.Actions,
-            a => a.ActionMethod.Name == nameof(ModelBinderController.PostAction)
+        var action = Assert.Single(controllerModel.Actions, a =>
+            a.ActionMethod.Name == nameof(ModelBinderController.PostAction)
         );
         Assert.Collection(
             action.Parameters,
@@ -243,9 +242,8 @@ public class DefaultApplicationModelProviderTest
 
         // Assert
         var controllerModel = Assert.Single(context.Result.Controllers);
-        var action = Assert.Single(
-            controllerModel.Actions,
-            a => a.ActionMethod.Name == nameof(ModelBinderController.FormFilesSequences)
+        var action = Assert.Single(controllerModel.Actions, a =>
+            a.ActionMethod.Name == nameof(ModelBinderController.FormFilesSequences)
         );
         Assert.Collection(
             action.Parameters,
@@ -300,18 +298,14 @@ public class DefaultApplicationModelProviderTest
 
         // Assert
         var controllerModel = Assert.Single(context.Result.Controllers);
-        var action = Assert.Single(
-            controllerModel.Actions,
-            a => a.ActionName == nameof(ModelBinderController.PostAction1)
+        var action = Assert.Single(controllerModel.Actions, a =>
+            a.ActionName == nameof(ModelBinderController.PostAction1)
         );
-        Assert.Collection(
-            action.Parameters,
-            parameter =>
-            {
-                Assert.Equal("guid", parameter.ParameterName);
-                Assert.Equal(BindingSource.Special, parameter.BindingInfo.BindingSource);
-            }
-        );
+        Assert.Collection(action.Parameters, parameter =>
+        {
+            Assert.Equal("guid", parameter.ParameterName);
+            Assert.Equal(BindingSource.Special, parameter.BindingInfo.BindingSource);
+        });
     }
 
     [Fact]
@@ -337,18 +331,14 @@ public class DefaultApplicationModelProviderTest
 
         // Assert
         var controllerModel = Assert.Single(context.Result.Controllers);
-        var action = Assert.Single(
-            controllerModel.Actions,
-            a => a.ActionName == nameof(ModelBinderController.PostAction2)
+        var action = Assert.Single(controllerModel.Actions, a =>
+            a.ActionName == nameof(ModelBinderController.PostAction2)
         );
-        Assert.Collection(
-            action.Parameters,
-            parameter =>
-            {
-                Assert.Equal("fromQuery", parameter.ParameterName);
-                Assert.Equal(BindingSource.Query, parameter.BindingInfo.BindingSource);
-            }
-        );
+        Assert.Collection(action.Parameters, parameter =>
+        {
+            Assert.Equal("fromQuery", parameter.ParameterName);
+            Assert.Equal(BindingSource.Query, parameter.BindingInfo.BindingSource);
+        });
     }
 
     [Fact]
@@ -1042,9 +1032,8 @@ public class DefaultApplicationModelProviderTest
             Assert.NotNull(actionSelectorModel.AttributeRouteModel);
         }
 
-        var selectorModel = Assert.Single(
-            action.Selectors,
-            ai => ai.AttributeRouteModel?.Template == "List"
+        var selectorModel = Assert.Single(action.Selectors, ai =>
+            ai.AttributeRouteModel?.Template == "List"
         );
         var methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
@@ -1178,9 +1167,8 @@ public class DefaultApplicationModelProviderTest
         Assert.Equal(2, actions.Selectors.Count);
 
         // OrderBy is used because the order of the results may very depending on the platform / client.
-        var selectorModel = Assert.Single(
-            actions.Selectors,
-            a => a.AttributeRouteModel.Template == "Products"
+        var selectorModel = Assert.Single(actions.Selectors, a =>
+            a.AttributeRouteModel.Template == "Products"
         );
         var methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
@@ -1190,9 +1178,8 @@ public class DefaultApplicationModelProviderTest
             methodConstraint.HttpMethods.OrderBy(key => key, StringComparer.Ordinal)
         );
 
-        selectorModel = Assert.Single(
-            actions.Selectors,
-            a => a.AttributeRouteModel.Template == "v2/Products"
+        selectorModel = Assert.Single(actions.Selectors, a =>
+            a.AttributeRouteModel.Template == "v2/Products"
         );
         methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
@@ -1219,27 +1206,24 @@ public class DefaultApplicationModelProviderTest
         // Assert
         Assert.Equal(3, action.Selectors.Count);
 
-        var selectorModel = Assert.Single(
-            action.Selectors,
-            s => s.AttributeRouteModel.Template == "Products"
+        var selectorModel = Assert.Single(action.Selectors, s =>
+            s.AttributeRouteModel.Template == "Products"
         );
         var methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
         );
         Assert.Equal<string>(new string[] { "GET" }, methodConstraint.HttpMethods);
 
-        selectorModel = Assert.Single(
-            action.Selectors,
-            s => s.AttributeRouteModel.Template == "v2/Products"
+        selectorModel = Assert.Single(action.Selectors, s =>
+            s.AttributeRouteModel.Template == "v2/Products"
         );
         methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
         );
         Assert.Equal<string>(new string[] { "GET" }, methodConstraint.HttpMethods);
 
-        selectorModel = Assert.Single(
-            action.Selectors,
-            s => s.AttributeRouteModel.Template == "Products/Buy"
+        selectorModel = Assert.Single(action.Selectors, s =>
+            s.AttributeRouteModel.Template == "Products/Buy"
         );
         methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
@@ -1267,9 +1251,8 @@ public class DefaultApplicationModelProviderTest
         );
         Assert.Equal(new string[] { "GET" }, methodConstraint.HttpMethods);
 
-        selectorModel = Assert.Single(
-            action.Selectors,
-            s => s.AttributeRouteModel?.Template == "id/{id?}"
+        selectorModel = Assert.Single(action.Selectors, s =>
+            s.AttributeRouteModel?.Template == "id/{id?}"
         );
         methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
@@ -1292,18 +1275,16 @@ public class DefaultApplicationModelProviderTest
         Assert.NotNull(action);
         Assert.Equal(2, action.Selectors.Count);
 
-        var selectorModel = Assert.Single(
-            action.Selectors,
-            s => s.AttributeRouteModel?.Template == "Products"
+        var selectorModel = Assert.Single(action.Selectors, s =>
+            s.AttributeRouteModel?.Template == "Products"
         );
         var methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
         );
         Assert.Equal<string>(new string[] { "POST" }, methodConstraint.HttpMethods);
 
-        selectorModel = Assert.Single(
-            action.Selectors,
-            s => s.AttributeRouteModel?.Template == null
+        selectorModel = Assert.Single(action.Selectors, s =>
+            s.AttributeRouteModel?.Template == null
         );
         methodConstraint = Assert.Single(
             selectorModel.ActionConstraints.OfType<HttpMethodActionConstraint>()
@@ -1360,15 +1341,13 @@ public class DefaultApplicationModelProviderTest
         Assert.Equal(2, actions.Attributes.Count);
         Assert.Equal(2, actions.Selectors.Count);
 
-        var selectorModel = Assert.Single(
-            actions.Selectors,
-            a => a.AttributeRouteModel?.Template == "A"
+        var selectorModel = Assert.Single(actions.Selectors, a =>
+            a.AttributeRouteModel?.Template == "A"
         );
         Assert.Contains(selectorModel.AttributeRouteModel.Attribute, actions.Attributes);
 
-        selectorModel = Assert.Single(
-            actions.Selectors,
-            a => a.AttributeRouteModel?.Template == "B"
+        selectorModel = Assert.Single(actions.Selectors, a =>
+            a.AttributeRouteModel?.Template == "B"
         );
         Assert.Contains(selectorModel.AttributeRouteModel.Attribute, actions.Attributes);
     }
@@ -1388,15 +1367,13 @@ public class DefaultApplicationModelProviderTest
         Assert.Equal(4, action.Attributes.Count);
         Assert.Equal(2, action.Selectors.Count);
 
-        var selectorModel = Assert.Single(
-            action.Selectors,
-            a => a.AttributeRouteModel?.Template == "C"
+        var selectorModel = Assert.Single(action.Selectors, a =>
+            a.AttributeRouteModel?.Template == "C"
         );
         Assert.Contains(selectorModel.AttributeRouteModel.Attribute, action.Attributes);
 
-        selectorModel = Assert.Single(
-            action.Selectors,
-            a => a.AttributeRouteModel?.Template == "D"
+        selectorModel = Assert.Single(action.Selectors, a =>
+            a.AttributeRouteModel?.Template == "D"
         );
         Assert.Contains(selectorModel.AttributeRouteModel.Attribute, action.Attributes);
     }

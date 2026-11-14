@@ -15,23 +15,32 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     internal sealed class EEConstructorSymbol : SynthesizedInstanceConstructor
     {
         internal EEConstructorSymbol(NamedTypeSymbol containingType)
-            : base(containingType)
-        {
-        }
+            : base(containingType) { }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
             var noLocals = ImmutableArray<LocalSymbol>.Empty;
-            var initializerInvocation = Binder.BindImplicitConstructorInitializer(this, diagnostics, compilationState.Compilation);
+            var initializerInvocation = Binder.BindImplicitConstructorInitializer(
+                this,
+                diagnostics,
+                compilationState.Compilation
+            );
             var syntax = initializerInvocation.Syntax;
 
-            compilationState.AddSynthesizedMethod(this,
+            compilationState.AddSynthesizedMethod(
+                this,
                 new BoundBlock(
                     syntax,
                     noLocals,
                     ImmutableArray.Create<BoundStatement>(
                         new BoundExpressionStatement(syntax, initializerInvocation),
-                        new BoundReturnStatement(syntax, RefKind.None, null, @checked: false))));
+                        new BoundReturnStatement(syntax, RefKind.None, null, @checked: false)
+                    )
+                )
+            );
         }
     }
 }

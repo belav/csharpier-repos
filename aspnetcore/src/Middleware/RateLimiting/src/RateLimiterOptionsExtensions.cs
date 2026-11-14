@@ -37,16 +37,12 @@ public static class RateLimiterOptionsExtensions
         configureOptions.Invoke(tokenBucketRateLimiterOptions);
         // Saves an allocation in GetTokenBucketLimiter, which would have created a new set of options if this was true.
         tokenBucketRateLimiterOptions.AutoReplenishment = false;
-        return options.AddPolicy(
-            policyName,
-            context =>
-            {
-                return RateLimitPartition.GetTokenBucketLimiter(
-                    key,
-                    _ => tokenBucketRateLimiterOptions
-                );
-            }
-        );
+        return options.AddPolicy(policyName, context =>
+        {
+            return RateLimitPartition.GetTokenBucketLimiter(key, _ =>
+                tokenBucketRateLimiterOptions
+            );
+        });
     }
 
     /// <summary>
@@ -75,16 +71,12 @@ public static class RateLimiterOptionsExtensions
         configureOptions.Invoke(fixedWindowRateLimiterOptions);
         // Saves an allocation in GetFixedWindowLimiter, which would have created a new set of options if this was true.
         fixedWindowRateLimiterOptions.AutoReplenishment = false;
-        return options.AddPolicy(
-            policyName,
-            context =>
-            {
-                return RateLimitPartition.GetFixedWindowLimiter(
-                    key,
-                    _ => fixedWindowRateLimiterOptions
-                );
-            }
-        );
+        return options.AddPolicy(policyName, context =>
+        {
+            return RateLimitPartition.GetFixedWindowLimiter(key, _ =>
+                fixedWindowRateLimiterOptions
+            );
+        });
     }
 
     /// <summary>
@@ -113,16 +105,12 @@ public static class RateLimiterOptionsExtensions
         configureOptions.Invoke(slidingWindowRateLimiterOptions);
         // Saves an allocation in GetSlidingWindowLimiter, which would have created a new set of options if this was true.
         slidingWindowRateLimiterOptions.AutoReplenishment = false;
-        return options.AddPolicy(
-            policyName,
-            context =>
-            {
-                return RateLimitPartition.GetSlidingWindowLimiter(
-                    key,
-                    _ => slidingWindowRateLimiterOptions
-                );
-            }
-        );
+        return options.AddPolicy(policyName, context =>
+        {
+            return RateLimitPartition.GetSlidingWindowLimiter(key, _ =>
+                slidingWindowRateLimiterOptions
+            );
+        });
     }
 
     /// <summary>
@@ -145,15 +133,9 @@ public static class RateLimiterOptionsExtensions
         var key = new PolicyNameKey() { PolicyName = policyName };
         var concurrencyLimiterOptions = new ConcurrencyLimiterOptions();
         configureOptions.Invoke(concurrencyLimiterOptions);
-        return options.AddPolicy(
-            policyName,
-            context =>
-            {
-                return RateLimitPartition.GetConcurrencyLimiter(
-                    key,
-                    _ => concurrencyLimiterOptions
-                );
-            }
-        );
+        return options.AddPolicy(policyName, context =>
+        {
+            return RateLimitPartition.GetConcurrencyLimiter(key, _ => concurrencyLimiterOptions);
+        });
     }
 }

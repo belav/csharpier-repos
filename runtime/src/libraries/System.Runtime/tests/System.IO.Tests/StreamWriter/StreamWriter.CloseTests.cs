@@ -51,7 +51,8 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        public void CloseCausesFlush() {
+        public void CloseCausesFlush()
+        {
             StreamWriter sw2;
             Stream memstr2;
 
@@ -60,8 +61,8 @@ namespace System.IO.Tests
             memstr2 = CreateStream();
             sw2 = new StreamWriter(memstr2);
 
-            var strTemp = "HelloWorld" ;
-            sw2.Write( strTemp);
+            var strTemp = "HelloWorld";
+            sw2.Write(strTemp);
             Assert.Equal(0, memstr2.Length);
 
             sw2.Flush();
@@ -69,7 +70,8 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        public void CantFlushAfterDispose() {
+        public void CantFlushAfterDispose()
+        {
             // [] Flushing disposed writer should throw
             //-----------------------------------------------------------------
 

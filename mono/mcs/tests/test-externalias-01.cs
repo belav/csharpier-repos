@@ -6,19 +6,18 @@ using System;
 
 public class Test
 {
-	public static int Main ()
-	{
-		if (MyAssembly01::GlobalClass.StaticMethod () != 1)
-			return 1;
-		if (MyAssembly02::GlobalClass.StaticMethod () != 2)
-			return 1;
+    public static int Main()
+    {
+        if (MyAssembly01::GlobalClass.StaticMethod() != 1)
+            return 1;
+        if (MyAssembly02::GlobalClass.StaticMethod() != 2)
+            return 1;
 
-		if (new MyAssembly01::GlobalClass ().InstanceMethod () != 1)
-			return 1;
-		if (new MyAssembly02::GlobalClass ().InstanceMethod () != 2)
-			return 1;
+        if (new MyAssembly01::GlobalClass().InstanceMethod() != 1)
+            return 1;
+        if (new MyAssembly02::GlobalClass().InstanceMethod() != 2)
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }
-

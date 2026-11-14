@@ -14,14 +14,20 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal Popcnt() { }
 
-        public static new bool IsSupported { get => IsSupported; }
+        public static new bool IsSupported
+        {
+            get => IsSupported;
+        }
 
         [Intrinsic]
         public new abstract class X64 : Sse42.X64
         {
             internal X64() { }
 
-            public static new bool IsSupported { get => IsSupported; }
+            public static new bool IsSupported
+            {
+                get => IsSupported;
+            }
 
             /// <summary>
             /// __int64 _mm_popcnt_u64 (unsigned __int64 a)

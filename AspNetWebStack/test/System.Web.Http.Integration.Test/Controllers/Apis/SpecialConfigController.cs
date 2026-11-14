@@ -24,7 +24,9 @@ namespace System.Web.Http
 
         public int GetServicesCount_ControllerConfig()
         {
-            return Configuration.Services.GetService(typeof(IDocumentationProvider)) == null ? 0 : 1;
+            return Configuration.Services.GetService(typeof(IDocumentationProvider)) == null
+                ? 0
+                : 1;
         }
 
         public int GetFormattersCount_RequestConfig()
@@ -39,19 +41,29 @@ namespace System.Web.Http
 
         public int GetServicesCount_RequestConfig()
         {
-            return Request.GetConfiguration().Services.GetService(typeof(IDocumentationProvider)) == null ? 0 : 1;
+            return
+                Request.GetConfiguration().Services.GetService(typeof(IDocumentationProvider))
+                == null
+                ? 0
+                : 1;
         }
 
         private class ControllerConfigAttribute : Attribute, IControllerConfiguration
         {
-            public void Initialize(HttpControllerSettings controllerSettings, HttpControllerDescriptor controllerDescriptor)
+            public void Initialize(
+                HttpControllerSettings controllerSettings,
+                HttpControllerDescriptor controllerDescriptor
+            )
             {
                 controllerSettings.Formatters.Clear();
                 controllerSettings.Formatters.Add(new XmlMediaTypeFormatter());
 
                 controllerSettings.ParameterBindingRules.Clear();
 
-                controllerSettings.Services.Replace(typeof(IDocumentationProvider), new AttributeDocumentationProvider());
+                controllerSettings.Services.Replace(
+                    typeof(IDocumentationProvider),
+                    new AttributeDocumentationProvider()
+                );
             }
         }
     }

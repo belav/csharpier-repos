@@ -5,14 +5,14 @@
 #nullable disable
 
 using System;
-using System.Linq;
-using System.Composition;
 using System.Collections.Immutable;
+using System.Composition;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.DocumentHighlighting;
-using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.DocumentHighlighting;
+using Microsoft.CodeAnalysis.Host.Mef;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.DocumentHighlighting
@@ -24,29 +24,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.DocumentHighligh
             switch (kind)
             {
                 case FSharpHighlightSpanKind.None:
-                    {
-                        return HighlightSpanKind.None;
-                    }
+                {
+                    return HighlightSpanKind.None;
+                }
 
                 case FSharpHighlightSpanKind.Definition:
-                    {
-                        return HighlightSpanKind.Definition;
-                    }
+                {
+                    return HighlightSpanKind.Definition;
+                }
 
                 case FSharpHighlightSpanKind.Reference:
-                    {
-                        return HighlightSpanKind.Reference;
-                    }
+                {
+                    return HighlightSpanKind.Reference;
+                }
 
                 case FSharpHighlightSpanKind.WrittenReference:
-                    {
-                        return HighlightSpanKind.WrittenReference;
-                    }
+                {
+                    return HighlightSpanKind.WrittenReference;
+                }
 
                 default:
-                    {
-                        throw ExceptionUtilities.UnexpectedValue(kind);
-                    }
+                {
+                    throw ExceptionUtilities.UnexpectedValue(kind);
+                }
             }
         }
     }
@@ -64,15 +64,36 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.DocumentHighligh
             _service = service;
         }
 
-        private static ImmutableArray<HighlightSpan> MapHighlightSpans(ImmutableArray<FSharpHighlightSpan> highlightSpans)
+        private static ImmutableArray<HighlightSpan> MapHighlightSpans(
+            ImmutableArray<FSharpHighlightSpan> highlightSpans
+        )
         {
-            return highlightSpans.SelectAsArray(x => new HighlightSpan(x.TextSpan, FSharpHighlightSpanKindHelpers.ConvertTo(x.Kind)));
+            return highlightSpans.SelectAsArray(x => new HighlightSpan(
+                x.TextSpan,
+                FSharpHighlightSpanKindHelpers.ConvertTo(x.Kind)
+            ));
         }
 
-        public async Task<ImmutableArray<DocumentHighlights>> GetDocumentHighlightsAsync(Document document, int position, IImmutableSet<Document> documentsToSearch, HighlightingOptions options, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<DocumentHighlights>> GetDocumentHighlightsAsync(
+            Document document,
+            int position,
+            IImmutableSet<Document> documentsToSearch,
+            HighlightingOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var highlights = await _service.GetDocumentHighlightsAsync(document, position, documentsToSearch, cancellationToken).ConfigureAwait(false);
-            return highlights.SelectAsArray(x => new DocumentHighlights(x.Document, MapHighlightSpans(x.HighlightSpans)));
+            var highlights = await _service
+                .GetDocumentHighlightsAsync(
+                    document,
+                    position,
+                    documentsToSearch,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return highlights.SelectAsArray(x => new DocumentHighlights(
+                x.Document,
+                MapHighlightSpans(x.HighlightSpans)
+            ));
         }
     }
 }

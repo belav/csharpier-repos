@@ -12,43 +12,49 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class DestructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
+public class DestructorDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new DestructorDeclarationStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new DestructorDeclarationStructureProvider();
 
     [Fact]
     public async Task TestDestructor()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$~C(){|textspan:
                 {
-                    {|hint:$$~C(){|textspan:
-                    {
-                    }|}|}
-                }
-                """;
+                }|}|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestDestructorWithComments()
     {
         var code = """
-                class C
+            class C
+            {
+                {|span1:// Goo
+                // Bar|}
+                {|hint2:$$~C(){|textspan2:
                 {
-                    {|span1:// Goo
-                    // Bar|}
-                    {|hint2:$$~C(){|textspan2:
-                    {
-                    }|}|}
-                }
-                """;
+                }|}|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("span1", "// Goo ...", autoCollapse: true),
-            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -57,11 +63,11 @@ public class DestructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStruc
         // Expected behavior is that the class should be outlined, but the destructor should not.
 
         var code = """
-                class C
-                {
-                    $$~C(
-                }
-                """;
+            class C
+            {
+                $$~C(
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }

@@ -12,9 +12,14 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     //
     // Note: The uninitialized state ("qr = default(QueryResult<M>)) is considered a valid state for this object, and represents an empty list of members.
     //
-    internal partial struct QueryResult<M> where M : MemberInfo
+    internal partial struct QueryResult<M>
+        where M : MemberInfo
     {
-        public QueryResult(MemberPolicies<M> policies, BindingFlags bindingAttr, QueriedMemberList<M> queriedMembers)
+        public QueryResult(
+            MemberPolicies<M> policies,
+            BindingFlags bindingAttr,
+            QueriedMemberList<M> queriedMembers
+        )
         {
             _policies = policies;
             _lazyCount = 0;
@@ -35,7 +40,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                 if (count == 0)
                 {
                     if (_queriedMembers == null)
-                        return 0;  // This is an uninitialized QueryResult<M>, which is supported and represents a 0-length list of matches.
+                        return 0; // This is an uninitialized QueryResult<M>, which is supported and represents a 0-length list of matches.
 
                     int unfilteredCount = UnfilteredCount;
                     for (int i = 0; i < unfilteredCount; i++)
@@ -52,7 +57,6 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                     }
 
                     _lazyCount = count;
-
                 }
                 return count;
             }
@@ -113,8 +117,10 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                         // declared by the most derived type. Since QueriedMemberLists are sorted in order of decreasing derivation,
                         // that means we let the first match win - unless, of course, they're both the "most derived member".
                         // If they're not from same type, we throw if the policy doesn't allow ambiguity.
-                        if (match.DeclaringType.Equals(challenger.DeclaringType) ||
-                            !_policies.OkToIgnoreAmbiguity(match, challenger))
+                        if (
+                            match.DeclaringType.Equals(challenger.DeclaringType)
+                            || !_policies.OkToIgnoreAmbiguity(match, challenger)
+                        )
                             throw ThrowHelper.GetAmbiguousMatchException(match);
                     }
                     else
@@ -126,7 +132,10 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             return match;
         }
 
-        private int UnfilteredCount => ((_bindingAttr & BindingFlags.DeclaredOnly) != 0) ? _queriedMembers.DeclaredOnlyCount : _queriedMembers.TotalCount;
+        private int UnfilteredCount =>
+            ((_bindingAttr & BindingFlags.DeclaredOnly) != 0)
+                ? _queriedMembers.DeclaredOnlyCount
+                : _queriedMembers.TotalCount;
 
         private readonly MemberPolicies<M> _policies;
         private readonly BindingFlags _bindingAttr;

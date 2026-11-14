@@ -8,14 +8,20 @@ using System.Web.Helpers;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "It is not anticipated that users will need to serialize this type.")]
-    [SuppressMessage("Microsoft.Design", "CA1035:ICollectionImplementationsHaveStronglyTypedMembers", Justification = "It is not anticipated that users will call FormCollection.CopyTo().")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2237:MarkISerializableTypesWithSerializable",
+        Justification = "It is not anticipated that users will need to serialize this type."
+    )]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1035:ICollectionImplementationsHaveStronglyTypedMembers",
+        Justification = "It is not anticipated that users will call FormCollection.CopyTo()."
+    )]
     [FormCollectionBinder]
     public sealed class FormCollection : NameValueCollection, IValueProvider
     {
-        public FormCollection()
-        {
-        }
+        public FormCollection() { }
 
         public FormCollection(NameValueCollection collection)
         {
@@ -27,9 +33,17 @@ namespace System.Web.Mvc
             Add(collection);
         }
 
-        internal FormCollection(ControllerBase controller, Func<NameValueCollection> validatedValuesThunk, Func<NameValueCollection> unvalidatedValuesThunk)
+        internal FormCollection(
+            ControllerBase controller,
+            Func<NameValueCollection> validatedValuesThunk,
+            Func<NameValueCollection> unvalidatedValuesThunk
+        )
         {
-            Add(controller == null || controller.ValidateRequest ? validatedValuesThunk() : unvalidatedValuesThunk());
+            Add(
+                controller == null || controller.ValidateRequest
+                    ? validatedValuesThunk()
+                    : unvalidatedValuesThunk()
+            );
         }
 
         public ValueProviderResult GetValue(string name)
@@ -72,7 +86,8 @@ namespace System.Web.Mvc
         {
             // since the FormCollectionModelBinder.BindModel() method is thread-safe, we only need to keep
             // a single instance of the binder around
-            private static readonly FormCollectionModelBinder _binder = new FormCollectionModelBinder();
+            private static readonly FormCollectionModelBinder _binder =
+                new FormCollectionModelBinder();
 
             public override IModelBinder GetBinder()
             {
@@ -82,16 +97,21 @@ namespace System.Web.Mvc
             // this class is used for generating a FormCollection object
             private sealed class FormCollectionModelBinder : IModelBinder
             {
-                public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+                public object BindModel(
+                    ControllerContext controllerContext,
+                    ModelBindingContext bindingContext
+                )
                 {
                     if (controllerContext == null)
                     {
                         throw new ArgumentNullException("controllerContext");
                     }
 
-                    return new FormCollection(controllerContext.Controller,
-                                              () => controllerContext.HttpContext.Request.Form,
-                                              () => controllerContext.HttpContext.Request.Unvalidated.Form);
+                    return new FormCollection(
+                        controllerContext.Controller,
+                        () => controllerContext.HttpContext.Request.Form,
+                        () => controllerContext.HttpContext.Request.Unvalidated.Form
+                    );
                 }
             }
         }

@@ -40,8 +40,7 @@ public class BatchExecutorTest
         var transaction = new FakeDbTransaction(connection);
         context.Database.UseTransaction(transaction);
 
-        await context.AddAsync(
-            new Foo { Id = "1" });
+        await context.AddAsync(new Foo { Id = "1" });
 
         if (async)
         {
@@ -59,28 +58,32 @@ public class BatchExecutorTest
     private static FakeDbConnection SetupConnection(TestContext context)
     {
         var dataReader = new FakeDbDataReader(
-            new[] { "RowsAffected" }, new List<object[]> { new object[] { 1 } });
+            new[] { "RowsAffected" },
+            new List<object[]> { new object[] { 1 } }
+        );
 
         var connection = new FakeDbConnection(
-            "A=B", new FakeCommandExecutor(
+            "A=B",
+            new FakeCommandExecutor(
                 executeReader: (c, b) => dataReader,
-                executeReaderAsync: (c, b, ct) => Task.FromResult<DbDataReader>(dataReader)));
+                executeReaderAsync: (c, b, ct) => Task.FromResult<DbDataReader>(dataReader)
+            )
+        );
 
-        ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(connection);
+        ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
+            connection
+        );
         return connection;
     }
 
     private class TestContext : DbContext
     {
-        private static readonly IServiceProvider _serviceProvider
-            = FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(
-                    new ServiceCollection())
-                .BuildServiceProvider(validateScopes: true);
+        private static readonly IServiceProvider _serviceProvider = FakeRelationalOptionsExtension
+            .AddEntityFrameworkRelationalDatabase(new ServiceCollection())
+            .BuildServiceProvider(validateScopes: true);
 
         public TestContext()
-            : base(FakeRelationalTestHelpers.Instance.CreateOptions(_serviceProvider))
-        {
-        }
+            : base(FakeRelationalTestHelpers.Instance.CreateOptions(_serviceProvider)) { }
 
         public DbSet<Foo> Foos { get; set; }
         public DbSet<Bar> Bars { get; set; }

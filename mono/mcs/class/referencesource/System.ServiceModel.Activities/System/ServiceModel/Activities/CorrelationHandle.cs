@@ -15,21 +15,25 @@ namespace System.ServiceModel.Activities
     [DataContract]
     public class CorrelationHandle : Handle
     {
-        internal static readonly string StaticExecutionPropertyName = typeof(CorrelationHandle).FullName;
+        internal static readonly string StaticExecutionPropertyName =
+            typeof(CorrelationHandle).FullName;
 
-        static readonly Type requestReplyCorrelationInitializerType = typeof(RequestReplyCorrelationInitializer);
+        static readonly Type requestReplyCorrelationInitializerType =
+            typeof(RequestReplyCorrelationInitializer);
 
         // CorrelationHandles to support Context/Durable Duplex
         // For processing the CallBackContextMessageProperty
-        static readonly Type callbackCorrelationInitializerType = typeof(CallbackCorrelationInitializer);  
+        static readonly Type callbackCorrelationInitializerType =
+            typeof(CallbackCorrelationInitializer);
 
-        // This is for passing the Context information that we get in the reply message from the Server in the initial handshake 
+        // This is for passing the Context information that we get in the reply message from the Server in the initial handshake
         // to the next Sendmessage activity from the client to the server
-        static readonly Type contextCorrelationInitializerType = typeof(ContextCorrelationInitializer);
+        static readonly Type contextCorrelationInitializerType =
+            typeof(ContextCorrelationInitializer);
 
         //// To get to the same instance on the server side( between SendReply and following Receive) and on the client side( between Send and following send)
         //static readonly Type followingContextCorrelationInitializerType = typeof(FollowingContextCorrelationInitializer);
-        
+
         CorrelationCallbackContext callbackContext;
         CorrelationContext context;
 
@@ -42,9 +46,7 @@ namespace System.ServiceModel.Activities
         BookmarkScopeHandle bookmarkScopeHandle;
 
         public CorrelationHandle()
-            : base()
-        {
-        }
+            : base() { }
 
         [DataMember(Name = "noPersistHandle")]
         internal NoPersistHandle SerializedNoPersistHandle
@@ -61,39 +63,28 @@ namespace System.ServiceModel.Activities
         }
 
         [DataMember(EmitDefaultValue = false)]
-        internal Guid E2ETraceId
-        {
-            get;
-            set;
-        }
+        internal Guid E2ETraceId { get; set; }
 
         // Used for durable correlation purposes
         internal InstanceKey InstanceKey
         {
-            get
-            {
-                return this.instanceKey;
-            }
-            private set
-            {
-                this.instanceKey = value;
-            }
+            get { return this.instanceKey; }
+            private set { this.instanceKey = value; }
         }
 
-        
         // As a convenience, we let the same correlation handle that is used for durable
         // correlations be leveraged for a single outstanding transient (e.g. Request-Reply)
-        // correlation. This is primarily used in the ambient correlation case, and is 
+        // correlation. This is primarily used in the ambient correlation case, and is
         // done this way since we cannot have two Execution Properties (i.e. activityContext.Properties)
         // with the same type at a given scope without a patch to the WF Runtime
-        internal InstanceKey TransientInstanceKey
-        {
-            get;
-            set;
-        }
+        internal InstanceKey TransientInstanceKey { get; set; }
 
         [DataMember(Name = "InstanceKey", EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal SerializableInstanceKey SerializableInstanceKey
         {
             get
@@ -104,36 +95,23 @@ namespace System.ServiceModel.Activities
                 }
                 return null;
             }
-
-            set
-            {
-                this.InstanceKey = value.ToInstanceKey();
-            }
+            set { this.InstanceKey = value.ToInstanceKey(); }
         }
 
-        internal CorrelationRequestContext RequestContext
-        {
-            get;
-            private set;
-        }
+        internal CorrelationRequestContext RequestContext { get; private set; }
 
-        internal CorrelationResponseContext ResponseContext
-        {
-            get;
-            private set;
-        }
+        internal CorrelationResponseContext ResponseContext { get; private set; }
 
         [DataMember(EmitDefaultValue = false)]
         internal CorrelationCallbackContext CallbackContext
         {
-            get
-            {
-                return this.callbackContext;
-            }
-
+            get { return this.callbackContext; }
             set
             {
-                Fx.Assert(this.callbackContext == null || this.callbackContext == value, "cannot set two different callback contexts");
+                Fx.Assert(
+                    this.callbackContext == null || this.callbackContext == value,
+                    "cannot set two different callback contexts"
+                );
                 this.callbackContext = value;
             }
         }
@@ -141,25 +119,19 @@ namespace System.ServiceModel.Activities
         [DataMember(EmitDefaultValue = false)]
         internal CorrelationContext Context
         {
-            get
-            {
-                return this.context;
-            }
-
+            get { return this.context; }
             set
             {
-                Fx.Assert(this.context == null || this.context == value, "cannot set two different callback contexts");
+                Fx.Assert(
+                    this.context == null || this.context == value,
+                    "cannot set two different callback contexts"
+                );
                 this.context = value;
             }
         }
 
-
         [DataMember(EmitDefaultValue = false)]
-        internal BookmarkScope Scope
-        {
-            get;
-            set;
-        }
+        internal BookmarkScope Scope { get; set; }
 
         protected override void OnInitialize(HandleInitializationContext context)
         {
@@ -169,7 +141,8 @@ namespace System.ServiceModel.Activities
 
         protected override void OnUninitialize(HandleInitializationContext context)
         {
-            SendReceiveExtension sendReceiveExtension = context.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension =
+                context.GetExtension<SendReceiveExtension>();
             if (sendReceiveExtension != null)
             {
                 if (this.InstanceKey != null)
@@ -195,7 +168,10 @@ namespace System.ServiceModel.Activities
             return this.Scope;
         }
 
-        internal bool TryRegisterRequestContext(NativeActivityContext executionContext, CorrelationRequestContext requestContext)
+        internal bool TryRegisterRequestContext(
+            NativeActivityContext executionContext,
+            CorrelationRequestContext requestContext
+        )
         {
             Fx.Assert(requestContext != null, "requires a valid requestContext");
             if (this.noPersistHandle == null)
@@ -212,7 +188,10 @@ namespace System.ServiceModel.Activities
             return object.ReferenceEquals(this.RequestContext, requestContext);
         }
 
-        internal bool TryRegisterResponseContext(NativeActivityContext executionContext, CorrelationResponseContext responseContext)
+        internal bool TryRegisterResponseContext(
+            NativeActivityContext executionContext,
+            CorrelationResponseContext responseContext
+        )
         {
             Fx.Assert(responseContext != null, "requires a valid responseContext");
             if (this.noPersistHandle == null)
@@ -229,7 +208,10 @@ namespace System.ServiceModel.Activities
             return object.ReferenceEquals(this.ResponseContext, responseContext);
         }
 
-        internal bool TryAcquireRequestContext(NativeActivityContext executionContext, out CorrelationRequestContext requestContext)
+        internal bool TryAcquireRequestContext(
+            NativeActivityContext executionContext,
+            out CorrelationRequestContext requestContext
+        )
         {
             if (this.RequestContext != null)
             {
@@ -246,7 +228,10 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        internal bool TryAcquireResponseContext(NativeActivityContext executionContext, out CorrelationResponseContext responseContext)
+        internal bool TryAcquireResponseContext(
+            NativeActivityContext executionContext,
+            out CorrelationResponseContext responseContext
+        )
         {
             if (this.ResponseContext != null)
             {
@@ -263,7 +248,10 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        internal void InitializeBookmarkScope(NativeActivityContext context, InstanceKey instanceKey)
+        internal void InitializeBookmarkScope(
+            NativeActivityContext context,
+            InstanceKey instanceKey
+        )
         {
             Fx.Assert(context != null, "executionContext cannot be null");
             Fx.Assert(instanceKey != null, "instanceKey cannot be null");
@@ -273,7 +261,10 @@ namespace System.ServiceModel.Activities
                 if (this.InstanceKey != null && this.InstanceKey.Value != instanceKey.Value)
                 {
                     throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.CorrelationHandleInUse(this.InstanceKey.Value, instanceKey.Value)));
+                        new InvalidOperationException(
+                            SR.CorrelationHandleInUse(this.InstanceKey.Value, instanceKey.Value)
+                        )
+                    );
                 }
                 this.InstanceKey = instanceKey;
             }
@@ -291,7 +282,10 @@ namespace System.ServiceModel.Activities
                         if (this.Scope.Id != instanceKey.Value)
                         {
                             throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(SR.CorrelationHandleInUse(this.Scope.Id, instanceKey.Value)));
+                                new InvalidOperationException(
+                                    SR.CorrelationHandleInUse(this.Scope.Id, instanceKey.Value)
+                                )
+                            );
                         }
                     }
                     else
@@ -304,7 +298,14 @@ namespace System.ServiceModel.Activities
 
         internal bool IsInitalized()
         {
-            if (this.Scope != null || this.CallbackContext != null || this.Context != null || this.ResponseContext != null || this.RequestContext != null || (this.InstanceKey != null && this.InstanceKey.IsValid))
+            if (
+                this.Scope != null
+                || this.CallbackContext != null
+                || this.Context != null
+                || this.ResponseContext != null
+                || this.RequestContext != null
+                || (this.InstanceKey != null && this.InstanceKey.IsValid)
+            )
             {
                 return true;
             }
@@ -314,25 +315,51 @@ namespace System.ServiceModel.Activities
 
         internal static CorrelationHandle GetAmbientCorrelation(NativeActivityContext context)
         {
-            return context.Properties.Find(CorrelationHandle.StaticExecutionPropertyName) as CorrelationHandle;
+            return context.Properties.Find(CorrelationHandle.StaticExecutionPropertyName)
+                as CorrelationHandle;
         }
 
-        internal static CorrelationHandle GetExplicitRequestReplyCorrelation(NativeActivityContext context, Collection<CorrelationInitializer> correlationInitializers)
+        internal static CorrelationHandle GetExplicitRequestReplyCorrelation(
+            NativeActivityContext context,
+            Collection<CorrelationInitializer> correlationInitializers
+        )
         {
-            return GetTypedCorrelationHandle(context, correlationInitializers, requestReplyCorrelationInitializerType);
+            return GetTypedCorrelationHandle(
+                context,
+                correlationInitializers,
+                requestReplyCorrelationInitializerType
+            );
         }
 
-        internal static CorrelationHandle GetExplicitCallbackCorrelation(NativeActivityContext context, Collection<CorrelationInitializer> correlationInitializers)
+        internal static CorrelationHandle GetExplicitCallbackCorrelation(
+            NativeActivityContext context,
+            Collection<CorrelationInitializer> correlationInitializers
+        )
         {
-            return GetTypedCorrelationHandle(context, correlationInitializers, callbackCorrelationInitializerType);
+            return GetTypedCorrelationHandle(
+                context,
+                correlationInitializers,
+                callbackCorrelationInitializerType
+            );
         }
 
-        internal static CorrelationHandle GetExplicitContextCorrelation(NativeActivityContext context, Collection<CorrelationInitializer> correlationInitializers)
+        internal static CorrelationHandle GetExplicitContextCorrelation(
+            NativeActivityContext context,
+            Collection<CorrelationInitializer> correlationInitializers
+        )
         {
-            return GetTypedCorrelationHandle(context, correlationInitializers, contextCorrelationInitializerType);
+            return GetTypedCorrelationHandle(
+                context,
+                correlationInitializers,
+                contextCorrelationInitializerType
+            );
         }
 
-        internal static CorrelationHandle GetTypedCorrelationHandle(NativeActivityContext context, Collection<CorrelationInitializer> correlationInitializers, Type correlationInitializerType)
+        internal static CorrelationHandle GetTypedCorrelationHandle(
+            NativeActivityContext context,
+            Collection<CorrelationInitializer> correlationInitializers,
+            Type correlationInitializerType
+        )
         {
             CorrelationHandle typedCorrelationHandle = null;
 
@@ -343,7 +370,7 @@ namespace System.ServiceModel.Activities
                     if (correlationInitializerType == correlation.GetType())
                     {
                         typedCorrelationHandle = correlation.CorrelationHandle.Get(context);
-                        
+
                         // We return the first handle we find
                         break;
                     }

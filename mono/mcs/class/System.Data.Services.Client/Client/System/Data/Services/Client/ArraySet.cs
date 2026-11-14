@@ -1,15 +1,13 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
-
 
 namespace System.Data.Services.Client
 {
@@ -18,7 +16,8 @@ namespace System.Data.Services.Client
     using System.Diagnostics;
 
     [DebuggerDisplay("Count = {count}")]
-    internal struct ArraySet<T> : IEnumerable<T> where T : class
+    internal struct ArraySet<T> : IEnumerable<T>
+        where T : class
     {
         private T[] items;
 
@@ -56,7 +55,11 @@ namespace System.Data.Services.Client
 
             int index = this.count++;
             if ((null == this.items) || (index == this.items.Length))
-            {                Array.Resize<T>(ref this.items, Math.Min(Math.Max(index, 16), Int32.MaxValue / 2) * 2);
+            {
+                Array.Resize<T>(
+                    ref this.items,
+                    Math.Min(Math.Max(index, 16), Int32.MaxValue / 2) * 2
+                );
             }
 
             this.items[index] = item;
@@ -85,7 +88,7 @@ namespace System.Data.Services.Client
         {
             return this.GetEnumerator();
         }
-        
+
         public int IndexOf(T item, Func<T, T, bool> comparer)
         {
             return this.IndexOf(item, IdentitySelect, comparer);
@@ -135,9 +138,9 @@ namespace System.Data.Services.Client
                 this.items = null;
             }
             else if ((256 < array.Length) && (lastIndex < array.Length / 4))
-            {                Array.Resize(ref this.items, array.Length / 2);
+            {
+                Array.Resize(ref this.items, array.Length / 2);
             }
-
             unchecked
             {
                 this.version++;

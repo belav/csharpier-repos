@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,169 +31,147 @@
 using System;
 using System.ComponentModel;
 
-namespace Mono.Messaging {
+namespace Mono.Messaging
+{
+    public interface IMessageQueue
+    {
+        bool Authenticate { get; set; }
 
-	public interface IMessageQueue {
-		
-		bool Authenticate {
-			get; set;
-		}
+        short BasePriority { get; set; }
 
-		short BasePriority {
-			get; set;
-		}
+        bool CanRead { get; }
 
-		bool CanRead {
-			get;
-		}
+        bool CanWrite { get; }
 
-		bool CanWrite {
-			get;
-		}
+        Guid Category { get; set; }
 
-		Guid Category {
-			get; set;
-		}
+        DateTime CreateTime { get; }
 
-		DateTime CreateTime {
-			get;
-		}
+        bool DenySharedReceive { get; set; }
 
-		bool DenySharedReceive {
-			get; set;
-		}
+        EncryptionRequired EncryptionRequired { get; set; }
 
-		EncryptionRequired EncryptionRequired {
-			get; set;
-		}
+        Guid Id { get; }
 
-		Guid Id {
-			get;
-		}
+        DateTime LastModifyTime { get; }
 
-		DateTime LastModifyTime {
-			get;
-		}
+        long MaximumJournalSize { get; set; }
 
-		long MaximumJournalSize {
-			get; set;
-		}
+        long MaximumQueueSize { get; set; }
 
-		long MaximumQueueSize {
-			get; set;
-		}
+        IntPtr ReadHandle { get; }
 
-		IntPtr ReadHandle {
-			get;
-		}
+        ISynchronizeInvoke SynchronizingObject { get; set; }
 
-		ISynchronizeInvoke SynchronizingObject {
-			get; set;
-		}
+        bool Transactional { get; }
 
-		bool Transactional {
-			get;
-		}
+        bool UseJournalQueue { get; set; }
 
-		bool UseJournalQueue {
-			get; set;
-		}
+        IntPtr WriteHandle { get; }
 
-		IntPtr WriteHandle {
-			get;
-		}
-		
-		QueueReference QRef {
-			get; set;
-		}
-		
-		void Close ();
-		
-		void Purge ();
-		
-		void Send (IMessage message);
-		
-		void Send (IMessage message, IMessageQueueTransaction transaction);
-		
-		void Send (IMessage message, MessageQueueTransactionType transactionType);
-		
-		IMessage Peek ();
-		
-		IMessage Peek (TimeSpan timeout);
-		
-		IMessage PeekById (string id);
-		
-		IMessage PeekById (string id, TimeSpan timeout);
-		
-		IMessage PeekByCorrelationId (string correlationId);
-		
-		IMessage PeekByCorrelationId (string correlationId, TimeSpan timeout);
-		
-		IMessage Receive ();
-		
-		IMessage Receive (TimeSpan timeout);
-		
-		IMessage Receive (IMessageQueueTransaction transaction);
-		
-		IMessage Receive (TimeSpan timeout, IMessageQueueTransaction transaction);
-		
-		IMessage Receive (MessageQueueTransactionType transactionType);
-		
-		IMessage Receive (TimeSpan timeout, MessageQueueTransactionType transactionType);
-		
-		IMessage ReceiveById (string id);
-		
-		IMessage ReceiveById (string id, TimeSpan timeout);
-		
-		IMessage ReceiveById (string id, IMessageQueueTransaction transaction);
-		
-		IMessage ReceiveById (string id, MessageQueueTransactionType transactionType);
-		
-		IMessage ReceiveById (string id, TimeSpan timeout, IMessageQueueTransaction transaction);
-		
-		IMessage ReceiveById (string id, TimeSpan timeout, MessageQueueTransactionType transactionType);
-			
-		IMessage ReceiveByCorrelationId (string correlationId);
-		
-		IMessage ReceiveByCorrelationId (string correlationId, TimeSpan timeout);
-		
-		IMessage ReceiveByCorrelationId (string correlationId, IMessageQueueTransaction transaction);
+        QueueReference QRef { get; set; }
 
-		IMessage ReceiveByCorrelationId (string correlationId, MessageQueueTransactionType transactionType);
-		
-		IMessage ReceiveByCorrelationId (string correlationId, TimeSpan timeout, IMessageQueueTransaction transaction);
-			
-		IMessage ReceiveByCorrelationId (string correlationId, TimeSpan timeout, MessageQueueTransactionType transactionType);
-		
-		IAsyncResult BeginPeek ();
+        void Close();
 
-		IAsyncResult BeginPeek (TimeSpan timeout);
+        void Purge();
 
-		IAsyncResult BeginPeek (TimeSpan timeout, object stateObject);
+        void Send(IMessage message);
 
-		IAsyncResult BeginPeek (TimeSpan timeout, object stateObject, AsyncCallback callback);
-		
-		IMessage EndPeek (IAsyncResult asyncResult);
-		
-		IAsyncResult BeginReceive ();
+        void Send(IMessage message, IMessageQueueTransaction transaction);
 
-		IAsyncResult BeginReceive (TimeSpan timeout);
+        void Send(IMessage message, MessageQueueTransactionType transactionType);
 
-		IAsyncResult BeginReceive (TimeSpan timeout, object stateObject);
+        IMessage Peek();
 
-		IAsyncResult BeginReceive (TimeSpan timeout, object stateObject, AsyncCallback callback);
-		
-		IMessage EndReceive (IAsyncResult asyncResult);
-		
-		IMessageEnumerator GetMessageEnumerator ();
+        IMessage Peek(TimeSpan timeout);
 
-		event CompletedEventHandler PeekCompleted;
-		
-		event CompletedEventHandler ReceiveCompleted;
-		
-		void SendReceiveCompleted (IAsyncResult result);
-		
-		void SendPeekCompleted (IAsyncResult result);
-	}
+        IMessage PeekById(string id);
 
+        IMessage PeekById(string id, TimeSpan timeout);
+
+        IMessage PeekByCorrelationId(string correlationId);
+
+        IMessage PeekByCorrelationId(string correlationId, TimeSpan timeout);
+
+        IMessage Receive();
+
+        IMessage Receive(TimeSpan timeout);
+
+        IMessage Receive(IMessageQueueTransaction transaction);
+
+        IMessage Receive(TimeSpan timeout, IMessageQueueTransaction transaction);
+
+        IMessage Receive(MessageQueueTransactionType transactionType);
+
+        IMessage Receive(TimeSpan timeout, MessageQueueTransactionType transactionType);
+
+        IMessage ReceiveById(string id);
+
+        IMessage ReceiveById(string id, TimeSpan timeout);
+
+        IMessage ReceiveById(string id, IMessageQueueTransaction transaction);
+
+        IMessage ReceiveById(string id, MessageQueueTransactionType transactionType);
+
+        IMessage ReceiveById(string id, TimeSpan timeout, IMessageQueueTransaction transaction);
+
+        IMessage ReceiveById(
+            string id,
+            TimeSpan timeout,
+            MessageQueueTransactionType transactionType
+        );
+
+        IMessage ReceiveByCorrelationId(string correlationId);
+
+        IMessage ReceiveByCorrelationId(string correlationId, TimeSpan timeout);
+
+        IMessage ReceiveByCorrelationId(string correlationId, IMessageQueueTransaction transaction);
+
+        IMessage ReceiveByCorrelationId(
+            string correlationId,
+            MessageQueueTransactionType transactionType
+        );
+
+        IMessage ReceiveByCorrelationId(
+            string correlationId,
+            TimeSpan timeout,
+            IMessageQueueTransaction transaction
+        );
+
+        IMessage ReceiveByCorrelationId(
+            string correlationId,
+            TimeSpan timeout,
+            MessageQueueTransactionType transactionType
+        );
+
+        IAsyncResult BeginPeek();
+
+        IAsyncResult BeginPeek(TimeSpan timeout);
+
+        IAsyncResult BeginPeek(TimeSpan timeout, object stateObject);
+
+        IAsyncResult BeginPeek(TimeSpan timeout, object stateObject, AsyncCallback callback);
+
+        IMessage EndPeek(IAsyncResult asyncResult);
+
+        IAsyncResult BeginReceive();
+
+        IAsyncResult BeginReceive(TimeSpan timeout);
+
+        IAsyncResult BeginReceive(TimeSpan timeout, object stateObject);
+
+        IAsyncResult BeginReceive(TimeSpan timeout, object stateObject, AsyncCallback callback);
+
+        IMessage EndReceive(IAsyncResult asyncResult);
+
+        IMessageEnumerator GetMessageEnumerator();
+
+        event CompletedEventHandler PeekCompleted;
+
+        event CompletedEventHandler ReceiveCompleted;
+
+        void SendReceiveCompleted(IAsyncResult result);
+
+        void SendPeekCompleted(IAsyncResult result);
+    }
 }

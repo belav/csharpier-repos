@@ -12,7 +12,12 @@ namespace System.Management.Tests
         private const string Query = "SELECT * FROM __TimerEvent WHERE TimerID = 'MyEvent'";
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsElevatedAndSupportsWmi))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [OuterLoop]
         public void Receive_Events_Sync()
         {
@@ -24,11 +29,15 @@ namespace System.Management.Tests
                 watcher = new ManagementEventWatcher(
                     WmiTestHelper.Namespace,
                     Query,
-                    new EventWatcherOptions(null, TimeSpan.FromSeconds(5), 1));
+                    new EventWatcherOptions(null, TimeSpan.FromSeconds(5), 1)
+                );
 
                 ManagementBaseObject evt = watcher.WaitForNextEvent();
 
-                Assert.True(evt["TimerID"].ToString() == "MyEvent", $"Unexpected TimerID value {evt["TimerID"]}");
+                Assert.True(
+                    evt["TimerID"].ToString() == "MyEvent",
+                    $"Unexpected TimerID value {evt["TimerID"]}"
+                );
             }
             finally
             {
@@ -38,7 +47,12 @@ namespace System.Management.Tests
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsElevatedAndSupportsWmi))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [OuterLoop]
         public void Receive_Events_Async()
         {
@@ -52,18 +66,25 @@ namespace System.Management.Tests
                 watcher = new ManagementEventWatcher(
                     WmiTestHelper.Namespace,
                     Query,
-                    new EventWatcherOptions(null, TimeSpan.FromSeconds(5), 1));
+                    new EventWatcherOptions(null, TimeSpan.FromSeconds(5), 1)
+                );
 
                 watcher.EventArrived += (object sender, EventArrivedEventArgs args) =>
                 {
                     ManagementBaseObject newEvent = args.NewEvent;
-                    Assert.True(newEvent["TimerID"].ToString() == "MyEvent", $"Unexpected TimerID value {newEvent["TimerID"]}");
+                    Assert.True(
+                        newEvent["TimerID"].ToString() == "MyEvent",
+                        $"Unexpected TimerID value {newEvent["TimerID"]}"
+                    );
                     resetEvent.Set();
                 };
 
                 watcher.Start();
 
-                Assert.True(resetEvent.WaitOne(TimeSpan.FromSeconds(5), true), "Timeout waiting for receive event.");
+                Assert.True(
+                    resetEvent.WaitOne(TimeSpan.FromSeconds(5), true),
+                    "Timeout waiting for receive event."
+                );
             }
             finally
             {

@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="TableHeaderCell.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 // TableHeaderCell.cs
 //
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
-    using System.Text;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Text;
     using System.Web;
     using System.Web.UI;
 
@@ -20,40 +20,37 @@ namespace System.Web.UI.WebControls {
     ///    <para> Encapsulates
     ///       a header cell within a table.</para>
     /// </devdoc>
-    public class TableHeaderCell : TableCell {
-
-
+    public class TableHeaderCell : TableCell
+    {
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.Web.UI.WebControls.TableHeaderCell'/> class.
         ///    </para>
         /// </devdoc>
-        public TableHeaderCell() : base(HtmlTextWriterTag.Th) {
-        }
-        
+        public TableHeaderCell()
+            : base(HtmlTextWriterTag.Th) { }
 
         /// <devdoc>
         ///    <para>
-        ///     Sets the abbreviated text for a header cell. The abbreviated text 
-        ///     is rendered with the HTML ABBR attribute. The ABBR attribute is important 
+        ///     Sets the abbreviated text for a header cell. The abbreviated text
+        ///     is rendered with the HTML ABBR attribute. The ABBR attribute is important
         ///     for screen readers since it allows them to read a shortened version of a header for each cell in the table.
         ///     </para>
         /// </devdoc>
         [
-        WebCategory("Accessibility"),
-        DefaultValue(""),
-        WebSysDescription(SR.TableHeaderCell_AbbreviatedText)
+            WebCategory("Accessibility"),
+            DefaultValue(""),
+            WebSysDescription(SR.TableHeaderCell_AbbreviatedText)
         ]
-        public virtual string AbbreviatedText {
-            get {
+        public virtual string AbbreviatedText
+        {
+            get
+            {
                 object x = ViewState["AbbrText"];
-                return((x == null) ? String.Empty : (string)x);
+                return ((x == null) ? String.Empty : (string)x);
             }
-            set {
-                ViewState["AbbrText"] = value;
-            }
+            set { ViewState["AbbrText"] = value; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -61,20 +58,19 @@ namespace System.Web.UI.WebControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Accessibility"),
-        DefaultValue(TableHeaderScope.NotSet),
-        WebSysDescription(SR.TableHeaderCell_Scope)
+            WebCategory("Accessibility"),
+            DefaultValue(TableHeaderScope.NotSet),
+            WebSysDescription(SR.TableHeaderCell_Scope)
         ]
-        public virtual TableHeaderScope Scope {
-            get {
+        public virtual TableHeaderScope Scope
+        {
+            get
+            {
                 object x = ViewState["Scope"];
-                return((x == null) ? TableHeaderScope.NotSet : (TableHeaderScope)x);
+                return ((x == null) ? TableHeaderScope.NotSet : (TableHeaderScope)x);
             }
-            set {
-                ViewState["Scope"] = value;
-            }
+            set { ViewState["Scope"] = value; }
         }
-    
 
         /// <devdoc>
         ///    <para>
@@ -82,58 +78,73 @@ namespace System.Web.UI.WebControls {
         ///    </para>
         /// </devdoc>
         [
-        DefaultValue(null),
-        TypeConverterAttribute(typeof(StringArrayConverter)),
-        WebCategory("Accessibility"),
-        WebSysDescription(SR.TableHeaderCell_CategoryText)
+            DefaultValue(null),
+            TypeConverterAttribute(typeof(StringArrayConverter)),
+            WebCategory("Accessibility"),
+            WebSysDescription(SR.TableHeaderCell_CategoryText)
         ]
-        public virtual string[] CategoryText {
-            get {
+        public virtual string[] CategoryText
+        {
+            get
+            {
                 object x = ViewState["CategoryText"];
                 return (x != null) ? (string[])((string[])x).Clone() : new string[0];
             }
-            set {
-                if (value != null) {
+            set
+            {
+                if (value != null)
+                {
                     ViewState["CategoryText"] = (string[])value.Clone();
-                } 
-                else {
+                }
+                else
+                {
                     ViewState["CategoryText"] = null;
                 }
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Adds header cell attributes to the list of attributes to render.</para>
         /// </devdoc>
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
             base.AddAttributesToRender(writer);
             TableHeaderScope scope = Scope;
-            if (scope != TableHeaderScope.NotSet) {
-                writer.AddAttribute(HtmlTextWriterAttribute.Scope, scope.ToString().ToLowerInvariant());
+            if (scope != TableHeaderScope.NotSet)
+            {
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Scope,
+                    scope.ToString().ToLowerInvariant()
+                );
             }
 
             String abbr = AbbreviatedText;
-            if (!String.IsNullOrEmpty(abbr)) {
+            if (!String.IsNullOrEmpty(abbr))
+            {
                 writer.AddAttribute(HtmlTextWriterAttribute.Abbr, abbr);
             }
 
             string[] arr = CategoryText;
-            if (arr.Length > 0) {
+            if (arr.Length > 0)
+            {
                 bool first = true;
                 StringBuilder builder = new StringBuilder();
-                foreach (string s in arr) {
-                    if (first) {
+                foreach (string s in arr)
+                {
+                    if (first)
+                    {
                         first = false;
                     }
-                    else {
+                    else
+                    {
                         builder.Append(",");
                     }
                     builder.Append(s);
                 }
                 string val = builder.ToString();
-                if (!String.IsNullOrEmpty(val)) {
+                if (!String.IsNullOrEmpty(val))
+                {
                     writer.AddAttribute(HtmlTextWriterAttribute.Axis, val);
                 }
             }

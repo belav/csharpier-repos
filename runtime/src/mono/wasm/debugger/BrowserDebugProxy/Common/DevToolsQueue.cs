@@ -16,7 +16,10 @@ namespace Microsoft.WebAssembly.Diagnostics
         private Task? current_send;
         private readonly ConcurrentQueue<byte[]> pending;
 
-        public Task? CurrentSend { get { return current_send; } }
+        public Task? CurrentSend
+        {
+            get { return current_send; }
+        }
 
         public WasmDebuggerConnection Connection { get; init; }
         public string Id => Connection.Id;
@@ -36,7 +39,10 @@ namespace Microsoft.WebAssembly.Diagnostics
             return sendTask;
         }
 
-        public bool TryPumpIfCurrentCompleted(CancellationToken token, [NotNullWhen(true)] out Task? sendTask)
+        public bool TryPumpIfCurrentCompleted(
+            CancellationToken token,
+            [NotNullWhen(true)] out Task? sendTask
+        )
         {
             sendTask = null;
 

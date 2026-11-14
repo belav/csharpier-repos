@@ -9,18 +9,17 @@ namespace System.Activities.Tracking
 
     public abstract class TrackingParticipant
     {
-        protected TrackingParticipant()
-        {
-        }
+        protected TrackingParticipant() { }
 
-        public virtual TrackingProfile TrackingProfile
-        {
-            get;
-            set;
-        }
+        public virtual TrackingProfile TrackingProfile { get; set; }
 
         [Fx.Tag.InheritThrows(From = "Track", FromDeclaringType = typeof(TrackingParticipant))]
-        protected internal virtual IAsyncResult BeginTrack(TrackingRecord record, TimeSpan timeout, AsyncCallback callback, object state)
+        protected internal virtual IAsyncResult BeginTrack(
+            TrackingRecord record,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new TrackAsyncResult(this, record, timeout, callback, state);
         }
@@ -42,7 +41,13 @@ namespace System.Activities.Tracking
             TrackingRecord record;
             TimeSpan timeout;
 
-            public TrackAsyncResult(TrackingParticipant participant, TrackingRecord record, TimeSpan timeout, AsyncCallback callback, object state)
+            public TrackAsyncResult(
+                TrackingParticipant participant,
+                TrackingRecord record,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.participant = participant;
@@ -81,6 +86,5 @@ namespace System.Activities.Tracking
                 base.Complete(false, participantException);
             }
         }
-
     }
 }

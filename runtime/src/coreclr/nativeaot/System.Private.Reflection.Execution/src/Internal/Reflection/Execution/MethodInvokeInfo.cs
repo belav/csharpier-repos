@@ -9,9 +9,7 @@ namespace Internal.Reflection.Execution
     internal sealed class MethodInvokeInfo : DynamicInvokeInfo
     {
         public MethodInvokeInfo(MethodBase method, IntPtr invokeThunk)
-            : base(method, invokeThunk)
-        {
-        }
+            : base(method, invokeThunk) { }
 
         public IntPtr LdFtnResult { get; set; }
         public IntPtr VirtualResolveData { get; set; }

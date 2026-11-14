@@ -1,16 +1,16 @@
 #pragma warning disable 1634, 1691
 using System;
-using System.Diagnostics;
 using System.Collections;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
-using System.Workflow.Runtime;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Principal;
 using System.Threading;
-using System.Globalization;
+using System.Workflow.Runtime;
 
 namespace System.Workflow.Activities
 {
@@ -27,10 +27,13 @@ namespace System.Workflow.Activities
     {
         [NonSerialized]
         Type interfaceType;
+
         [NonSerialized]
         string methodName;
+
         [NonSerialized]
         object[] args;
+
         [NonSerialized]
         ManualResetEvent returnValueSignalEvent;
 
@@ -48,18 +51,25 @@ namespace System.Workflow.Activities
         [NonSerialized]
         MethodMessage previousMessage = null;
 
-        static Dictionary<Guid, MethodMessage> staticMethodMessageMap = new Dictionary<Guid, MethodMessage>();
+        static Dictionary<Guid, MethodMessage> staticMethodMessageMap =
+            new Dictionary<Guid, MethodMessage>();
         static Object syncRoot = new Object();
 
-        internal MethodMessage(Type interfaceType, string methodName,
-                               object[] args, String identity) :
-            this(interfaceType, methodName, args, identity, false)
-        {
+        internal MethodMessage(
+            Type interfaceType,
+            string methodName,
+            object[] args,
+            String identity
+        )
+            : this(interfaceType, methodName, args, identity, false) { }
 
-        }
-
-        internal MethodMessage(Type interfaceType, string methodName,
-                               object[] args, String identity, bool responseRequired)
+        internal MethodMessage(
+            Type interfaceType,
+            string methodName,
+            object[] args,
+            String identity,
+            bool responseRequired
+        )
         {
             this.interfaceType = interfaceType;
             this.methodName = methodName;
@@ -72,8 +82,6 @@ namespace System.Workflow.Activities
             PopulateIdentity(callContext, identity);
             Clone();
         }
-
-
 
         [OnSerializing]
         void OnSerializing(StreamingContext context)
@@ -135,10 +143,7 @@ namespace System.Workflow.Activities
 
         string IMethodMessage.TypeName
         {
-            get
-            {
-                return (this.interfaceType.ToString());
-            }
+            get { return (this.interfaceType.ToString()); }
         }
 
         object IMethodMessage.MethodSignature
@@ -150,10 +155,7 @@ namespace System.Workflow.Activities
 
         object[] IMethodMessage.Args
         {
-            get
-            {
-                return this.clonedArgs;
-            }
+            get { return this.clonedArgs; }
         }
 
         object Clone()
@@ -185,7 +187,10 @@ namespace System.Workflow.Activities
             }
             catch (SerializationException e)
             {
-                throw new InvalidOperationException(SR.GetString(SR.Error_EventArgumentSerializationException), e);
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_EventArgumentSerializationException),
+                    e
+                );
             }
             stream.Position = 0;
             object cloned = formatter.Deserialize(stream);
@@ -225,7 +230,10 @@ namespace System.Workflow.Activities
 
         void PopulateIdentity(LogicalCallContext callContext, String identity)
         {
-            callContext.SetData(IdentityContextData.IdentityContext, new IdentityContextData(identity));
+            callContext.SetData(
+                IdentityContextData.IdentityContext,
+                new IdentityContextData(identity)
+            );
         }
 
         static LogicalCallContext singletonCallContext;
@@ -259,7 +267,12 @@ namespace System.Workflow.Activities
         public void SendResponse(ICollection outArgs)
         {
             if (this.returnValueSignalEvent == null)
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, SR.GetString(SR.Error_WorkflowInstanceDehydratedBeforeSendingResponse)));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        SR.GetString(SR.Error_WorkflowInstanceDehydratedBeforeSendingResponse)
+                    )
+                );
 
             if (!this.responseSet)
             {
@@ -272,7 +285,12 @@ namespace System.Workflow.Activities
         public void SendException(Exception exception)
         {
             if (this.returnValueSignalEvent == null)
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, SR.GetString(SR.Error_WorkflowInstanceDehydratedBeforeSendingResponse)));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        SR.GetString(SR.Error_WorkflowInstanceDehydratedBeforeSendingResponse)
+                    )
+                );
 
             if (!this.responseSet)
             {
@@ -284,10 +302,7 @@ namespace System.Workflow.Activities
 
         public Exception Exception
         {
-            get
-            {
-                return this.exception;
-            }
+            get { return this.exception; }
             private set
             {
                 if (previousMessage != null)
@@ -299,10 +314,7 @@ namespace System.Workflow.Activities
 
         public ICollection OutArgs
         {
-            get
-            {
-                return this.outArgs;
-            }
+            get { return this.outArgs; }
             private set
             {
                 if (previousMessage != null)
@@ -319,23 +331,26 @@ namespace System.Workflow.Activities
 
             internal LogicalCallContext CallContext
             {
-                get
-                {
-                    return callContext;
-                }
+                get { return callContext; }
             }
 
             internal CallContextProxy(Type proxiedType)
-                : base(proxiedType)
-            {
+                : base(proxiedType) { }
 
-            }
-
-            public override System.Runtime.Remoting.Messaging.IMessage Invoke(System.Runtime.Remoting.Messaging.IMessage msg)
+            public override System.Runtime.Remoting.Messaging.IMessage Invoke(
+                System.Runtime.Remoting.Messaging.IMessage msg
+            )
             {
                 IMethodCallMessage methodCallMessage = msg as IMethodCallMessage;
-                this.callContext = methodCallMessage.LogicalCallContext.Clone() as LogicalCallContext;
-                return new ReturnMessage(null, null, 0, methodCallMessage.LogicalCallContext, methodCallMessage);
+                this.callContext =
+                    methodCallMessage.LogicalCallContext.Clone() as LogicalCallContext;
+                return new ReturnMessage(
+                    null,
+                    null,
+                    0,
+                    methodCallMessage.LogicalCallContext,
+                    methodCallMessage
+                );
             }
         }
     }

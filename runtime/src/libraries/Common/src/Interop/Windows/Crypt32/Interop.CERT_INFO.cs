@@ -40,7 +40,6 @@ internal static partial class Interop
             internal static FILETIME FromDateTime(DateTime dt)
             {
                 long fileTime = dt.ToFileTime();
-
                 unchecked
                 {
                     return new FILETIME()

@@ -6,7 +6,7 @@ using System.Globalization;
 namespace System.Numerics
 {
     /// <summary>
-    /// A structure encapsulating a four-dimensional vector (x,y,z,w), 
+    /// A structure encapsulating a four-dimensional vector (x,y,z,w),
     /// which is used to efficiently rotate an object about the (x,y,z) vector by the angle theta, where w = cos(theta/2).
     /// </summary>
     public struct Quaternion : IEquatable<Quaternion>
@@ -15,21 +15,24 @@ namespace System.Numerics
         /// Specifies the X-value of the vector component of the Quaternion.
         /// </summary>
         public float X;
+
         /// <summary>
         /// Specifies the Y-value of the vector component of the Quaternion.
         /// </summary>
         public float Y;
+
         /// <summary>
         /// Specifies the Z-value of the vector component of the Quaternion.
         /// </summary>
         public float Z;
+
         /// <summary>
         /// Specifies the rotation component of the Quaternion.
         /// </summary>
         public float W;
 
         /// <summary>
-        /// Returns a Quaternion representing no rotation. 
+        /// Returns a Quaternion representing no rotation.
         /// </summary>
         public static Quaternion Identity
         {
@@ -101,7 +104,8 @@ namespace System.Numerics
         {
             Quaternion ans;
 
-            float ls = value.X * value.X + value.Y * value.Y + value.Z * value.Z + value.W * value.W;
+            float ls =
+                value.X * value.X + value.Y * value.Y + value.Z * value.Z + value.W * value.W;
 
             float invNorm = 1.0f / (float)Math.Sqrt((double)ls);
 
@@ -143,7 +147,8 @@ namespace System.Numerics
 
             Quaternion ans;
 
-            float ls = value.X * value.X + value.Y * value.Y + value.Z * value.Z + value.W * value.W;
+            float ls =
+                value.X * value.X + value.Y * value.Y + value.Z * value.Z + value.W * value.W;
             float invNorm = 1.0f / ls;
 
             ans.X = -value.X * invNorm;
@@ -187,7 +192,12 @@ namespace System.Numerics
         {
             //  Roll first, about axis the object is facing, then
             //  pitch upward, then yaw to face into the new heading
-            float sr, cr, sp, cp, sy, cy;
+            float sr,
+                cr,
+                sp,
+                cp,
+                sy,
+                cy;
 
             float halfRoll = roll * 0.5f;
             sr = (float)Math.Sin(halfRoll);
@@ -273,10 +283,10 @@ namespace System.Numerics
         /// <returns>The dot product of the Quaternions.</returns>
         public static float Dot(Quaternion quaternion1, Quaternion quaternion2)
         {
-            return quaternion1.X * quaternion2.X +
-                   quaternion1.Y * quaternion2.Y +
-                   quaternion1.Z * quaternion2.Z +
-                   quaternion1.W * quaternion2.W;
+            return quaternion1.X * quaternion2.X
+                + quaternion1.Y * quaternion2.Y
+                + quaternion1.Z * quaternion2.Z
+                + quaternion1.W * quaternion2.W;
         }
 
         /// <summary>
@@ -292,8 +302,11 @@ namespace System.Numerics
 
             float t = amount;
 
-            float cosOmega = quaternion1.X * quaternion2.X + quaternion1.Y * quaternion2.Y +
-                             quaternion1.Z * quaternion2.Z + quaternion1.W * quaternion2.W;
+            float cosOmega =
+                quaternion1.X * quaternion2.X
+                + quaternion1.Y * quaternion2.Y
+                + quaternion1.Z * quaternion2.Z
+                + quaternion1.W * quaternion2.W;
 
             bool flip = false;
 
@@ -303,7 +316,8 @@ namespace System.Numerics
                 cosOmega = -cosOmega;
             }
 
-            float s1, s2;
+            float s1,
+                s2;
 
             if (cosOmega > (1.0f - epsilon))
             {
@@ -317,9 +331,10 @@ namespace System.Numerics
                 float invSinOmega = (float)(1 / Math.Sin(omega));
 
                 s1 = (float)Math.Sin((1.0f - t) * omega) * invSinOmega;
-                s2 = (flip)
-                    ? (float)-Math.Sin(t * omega) * invSinOmega
-                    : (float)Math.Sin(t * omega) * invSinOmega;
+                s2 =
+                    (flip)
+                        ? (float)-Math.Sin(t * omega) * invSinOmega
+                        : (float)Math.Sin(t * omega) * invSinOmega;
             }
 
             Quaternion ans;
@@ -346,8 +361,11 @@ namespace System.Numerics
 
             Quaternion r = new Quaternion();
 
-            float dot = quaternion1.X * quaternion2.X + quaternion1.Y * quaternion2.Y +
-                        quaternion1.Z * quaternion2.Z + quaternion1.W * quaternion2.W;
+            float dot =
+                quaternion1.X * quaternion2.X
+                + quaternion1.Y * quaternion2.Y
+                + quaternion1.Z * quaternion2.Z
+                + quaternion1.W * quaternion2.W;
 
             if (dot >= 0.0f)
             {
@@ -536,8 +554,11 @@ namespace System.Numerics
 
             //-------------------------------------
             // Inverse part.
-            float ls = value2.X * value2.X + value2.Y * value2.Y +
-                       value2.Z * value2.Z + value2.W * value2.W;
+            float ls =
+                value2.X * value2.X
+                + value2.Y * value2.Y
+                + value2.Z * value2.Z
+                + value2.W * value2.W;
             float invNorm = 1.0f / ls;
 
             float q2x = -value2.X * invNorm;
@@ -686,8 +707,11 @@ namespace System.Numerics
 
             //-------------------------------------
             // Inverse part.
-            float ls = value2.X * value2.X + value2.Y * value2.Y +
-                       value2.Z * value2.Z + value2.W * value2.W;
+            float ls =
+                value2.X * value2.X
+                + value2.Y * value2.Y
+                + value2.Z * value2.Z
+                + value2.W * value2.W;
             float invNorm = 1.0f / ls;
 
             float q2x = -value2.X * invNorm;
@@ -721,10 +745,12 @@ namespace System.Numerics
         /// <returns>True if the Quaternions are equal; False otherwise.</returns>
         public static bool operator ==(Quaternion value1, Quaternion value2)
         {
-            return (value1.X == value2.X &&
-                    value1.Y == value2.Y &&
-                    value1.Z == value2.Z &&
-                    value1.W == value2.W);
+            return (
+                value1.X == value2.X
+                && value1.Y == value2.Y
+                && value1.Z == value2.Z
+                && value1.W == value2.W
+            );
         }
 
         /// <summary>
@@ -735,10 +761,12 @@ namespace System.Numerics
         /// <returns>True if the Quaternions are not equal; False if they are equal.</returns>
         public static bool operator !=(Quaternion value1, Quaternion value2)
         {
-            return (value1.X != value2.X ||
-                    value1.Y != value2.Y ||
-                    value1.Z != value2.Z ||
-                    value1.W != value2.W);
+            return (
+                value1.X != value2.X
+                || value1.Y != value2.Y
+                || value1.Z != value2.Z
+                || value1.W != value2.W
+            );
         }
 
         /// <summary>
@@ -748,10 +776,7 @@ namespace System.Numerics
         /// <returns>True if the other Quaternion is equal to this instance; False otherwise.</returns>
         public bool Equals(Quaternion other)
         {
-            return (X == other.X &&
-                    Y == other.Y &&
-                    Z == other.Z &&
-                    W == other.W);
+            return (X == other.X && Y == other.Y && Z == other.Z && W == other.W);
         }
 
         /// <summary>
@@ -777,7 +802,14 @@ namespace System.Numerics
         {
             CultureInfo ci = CultureInfo.CurrentCulture;
 
-            return String.Format(ci, "{{X:{0} Y:{1} Z:{2} W:{3}}}", X.ToString(ci), Y.ToString(ci), Z.ToString(ci), W.ToString(ci));
+            return String.Format(
+                ci,
+                "{{X:{0} Y:{1} Z:{2} W:{3}}}",
+                X.ToString(ci),
+                Y.ToString(ci),
+                Z.ToString(ci),
+                W.ToString(ci)
+            );
         }
 
         /// <summary>

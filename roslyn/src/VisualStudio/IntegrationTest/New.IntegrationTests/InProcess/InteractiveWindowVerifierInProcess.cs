@@ -17,12 +17,20 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
 
         TestServices ITextViewWindowVerifierInProcess.TestServices => TestServices;
 
-        ITextViewWindowInProcess ITextViewWindowVerifierInProcess.TextViewWindow => TestServices.InteractiveWindow;
+        ITextViewWindowInProcess ITextViewWindowVerifierInProcess.TextViewWindow =>
+            TestServices.InteractiveWindow;
 
-        public async Task ReplPromptConsistencyAsync(string prompt, string output, CancellationToken cancellationToken)
+        public async Task ReplPromptConsistencyAsync(
+            string prompt,
+            string output,
+            CancellationToken cancellationToken
+        )
         {
             var replText = await TestServices.InteractiveWindow.GetReplTextAsync(cancellationToken);
-            var replTextLines = replText.Split(s_lineSeparators, StringSplitOptions.RemoveEmptyEntries);
+            var replTextLines = replText.Split(
+                s_lineSeparators,
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             foreach (var replTextLine in replTextLines)
             {

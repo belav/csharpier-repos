@@ -14,8 +14,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private const string Syntactic = nameof(Syntactic);
         private const string Declaration = nameof(Declaration);
 
-        private static readonly ImmutableDictionary<string, string?> s_syntactic = ImmutableDictionary<string, string?>.Empty.Add(Origin, Syntactic);
-        private static readonly ImmutableDictionary<string, string?> s_declaration = ImmutableDictionary<string, string?>.Empty.Add(Origin, Declaration);
+        private static readonly ImmutableDictionary<string, string?> s_syntactic =
+            ImmutableDictionary<string, string?>.Empty.Add(Origin, Syntactic);
+        private static readonly ImmutableDictionary<string, string?> s_declaration =
+            ImmutableDictionary<string, string?>.Empty.Add(Origin, Declaration);
 
         /// <summary>
         /// Per-compilation DiagnosticAnalyzer for compiler's syntax/semantic/compilation diagnostics.
@@ -32,23 +34,49 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context)
             {
                 var semanticModel = _compilation.GetSemanticModel(context.Tree);
-                var diagnostics = semanticModel.GetSyntaxDiagnostics(context.FilterSpan, context.CancellationToken);
-                ReportDiagnostics(diagnostics, context.ReportDiagnostic, IsSourceLocation, s_syntactic);
+                var diagnostics = semanticModel.GetSyntaxDiagnostics(
+                    context.FilterSpan,
+                    context.CancellationToken
+                );
+                ReportDiagnostics(
+                    diagnostics,
+                    context.ReportDiagnostic,
+                    IsSourceLocation,
+                    s_syntactic
+                );
             }
 
             public static void AnalyzeSemanticModel(SemanticModelAnalysisContext context)
             {
-                var declDiagnostics = context.SemanticModel.GetDeclarationDiagnostics(context.FilterSpan, context.CancellationToken);
-                var bodyDiagnostics = context.SemanticModel.GetMethodBodyDiagnostics(context.FilterSpan, context.CancellationToken);
+                var declDiagnostics = context.SemanticModel.GetDeclarationDiagnostics(
+                    context.FilterSpan,
+                    context.CancellationToken
+                );
+                var bodyDiagnostics = context.SemanticModel.GetMethodBodyDiagnostics(
+                    context.FilterSpan,
+                    context.CancellationToken
+                );
 
-                ReportDiagnostics(declDiagnostics, context.ReportDiagnostic, IsSourceLocation, s_declaration);
+                ReportDiagnostics(
+                    declDiagnostics,
+                    context.ReportDiagnostic,
+                    IsSourceLocation,
+                    s_declaration
+                );
                 ReportDiagnostics(bodyDiagnostics, context.ReportDiagnostic, IsSourceLocation);
             }
 
             public static void AnalyzeCompilation(CompilationAnalysisContext context)
             {
-                var diagnostics = context.Compilation.GetDeclarationDiagnostics(cancellationToken: context.CancellationToken);
-                ReportDiagnostics(diagnostics, context.ReportDiagnostic, location => !IsSourceLocation(location), s_declaration);
+                var diagnostics = context.Compilation.GetDeclarationDiagnostics(
+                    cancellationToken: context.CancellationToken
+                );
+                ReportDiagnostics(
+                    diagnostics,
+                    context.ReportDiagnostic,
+                    location => !IsSourceLocation(location),
+                    s_declaration
+                );
             }
 
             private static bool IsSourceLocation(Location location)
@@ -60,14 +88,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ImmutableArray<Diagnostic> diagnostics,
                 Action<Diagnostic> reportDiagnostic,
                 Func<Location, bool> locationFilter,
-                ImmutableDictionary<string, string?>? properties = null)
+                ImmutableDictionary<string, string?>? properties = null
+            )
             {
                 foreach (var diagnostic in diagnostics)
                 {
-                    if (locationFilter(diagnostic.Location) &&
-                        diagnostic.Severity != DiagnosticSeverity.Hidden)
+                    if (
+                        locationFilter(diagnostic.Location)
+                        && diagnostic.Severity != DiagnosticSeverity.Hidden
+                    )
                     {
-                        var current = properties == null ? diagnostic : new CompilerDiagnostic(diagnostic, properties);
+                        var current =
+                            properties == null
+                                ? diagnostic
+                                : new CompilerDiagnostic(diagnostic, properties);
                         reportDiagnostic(current);
                     }
                 }
@@ -78,7 +112,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 private readonly Diagnostic _original;
                 private readonly ImmutableDictionary<string, string?> _properties;
 
-                public CompilerDiagnostic(Diagnostic original, ImmutableDictionary<string, string?> properties)
+                public CompilerDiagnostic(
+                    Diagnostic original,
+                    ImmutableDictionary<string, string?> properties
+                )
                 {
                     _original = original;
                     _properties = properties;
@@ -86,7 +123,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
 #pragma warning disable RS0013 // we are delegating so it is okay here
                 public override DiagnosticDescriptor Descriptor => _original.Descriptor;
-#pragma warning restore RS0013 
+#pragma warning restore RS0013
 
                 internal override int Code => _original.Code;
                 internal override IReadOnlyList<object?> Arguments => _original.Arguments;
@@ -95,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 public override DiagnosticSeverity Severity => _original.Severity;
                 public override int WarningLevel => _original.WarningLevel;
                 public override Location Location => _original.Location;
-                public override IReadOnlyList<Location> AdditionalLocations => _original.AdditionalLocations;
+                public override IReadOnlyList<Location> AdditionalLocations =>
+                    _original.AdditionalLocations;
                 public override bool IsSuppressed => _original.IsSuppressed;
                 public override ImmutableDictionary<string, string?> Properties => _properties;
 
@@ -115,8 +153,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     // Hosts that want to compare compiler diagnostics from different sources,
                     // such as with diagnostic reported from compilation.GetDiagnostics(), should
                     // use a custom equality comparer.
-                    return obj is CompilerDiagnostic other &&
-                        _original.Equals(other._original);
+                    return obj is CompilerDiagnostic other && _original.Equals(other._original);
                 }
 
                 internal override Diagnostic WithLocation(Location location)
@@ -131,7 +168,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 internal override Diagnostic WithIsSuppressed(bool isSuppressed)
                 {
-                    return new CompilerDiagnostic(_original.WithIsSuppressed(isSuppressed), _properties);
+                    return new CompilerDiagnostic(
+                        _original.WithIsSuppressed(isSuppressed),
+                        _properties
+                    );
                 }
             }
         }

@@ -4,15 +4,25 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public StrongNameIdentityPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public StrongNameIdentityPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
+
         public string Name { get; set; }
         public string PublicKey { get; set; }
         public string Version { get; set; }
-        public override IPermission CreatePermission() { return default(IPermission); }
+
+        public override IPermission CreatePermission()
+        {
+            return default(IPermission);
+        }
     }
 }

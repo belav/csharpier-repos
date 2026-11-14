@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -14,19 +14,20 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
+namespace System.Runtime.InteropServices
+{
     using System;
 
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface ICustomMarshaler
-    {        
-        Object MarshalNativeToManaged( IntPtr pNativeData );
+    {
+        Object MarshalNativeToManaged(IntPtr pNativeData);
 
-        IntPtr MarshalManagedToNative( Object ManagedObj );
+        IntPtr MarshalManagedToNative(Object ManagedObj);
 
-        void CleanUpNativeData( IntPtr pNativeData );
+        void CleanUpNativeData(IntPtr pNativeData);
 
-        void CleanUpManagedData( Object ManagedObj );
+        void CleanUpManagedData(Object ManagedObj);
 
         int GetNativeDataSize();
     }

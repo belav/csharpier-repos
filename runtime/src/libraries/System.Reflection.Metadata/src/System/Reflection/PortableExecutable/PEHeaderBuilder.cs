@@ -57,14 +57,23 @@ namespace System.Reflection.PortableExecutable
             ushort majorSubsystemVersion = 4,
             ushort minorSubsystemVersion = 0,
             Subsystem subsystem = Subsystem.WindowsCui,
-            DllCharacteristics dllCharacteristics = DllCharacteristics.DynamicBase | DllCharacteristics.NxCompatible | DllCharacteristics.NoSeh | DllCharacteristics.TerminalServerAware,
+            DllCharacteristics dllCharacteristics =
+                DllCharacteristics.DynamicBase
+                | DllCharacteristics.NxCompatible
+                | DllCharacteristics.NoSeh
+                | DllCharacteristics.TerminalServerAware,
             Characteristics imageCharacteristics = Characteristics.Dll,
             ulong sizeOfStackReserve = 0x00100000,
             ulong sizeOfStackCommit = 0x1000,
             ulong sizeOfHeapReserve = 0x00100000,
-            ulong sizeOfHeapCommit = 0x1000)
+            ulong sizeOfHeapCommit = 0x1000
+        )
         {
-            if (fileAlignment < 512 || fileAlignment > 64 * 1024 || BitArithmetic.CountBits(fileAlignment) != 1)
+            if (
+                fileAlignment < 512
+                || fileAlignment > 64 * 1024
+                || BitArithmetic.CountBits(fileAlignment) != 1
+            )
             {
                 Throw.ArgumentOutOfRange(nameof(fileAlignment));
             }
@@ -102,16 +111,19 @@ namespace System.Reflection.PortableExecutable
 
         public static PEHeaderBuilder CreateLibraryHeader()
         {
-            return new PEHeaderBuilder(imageCharacteristics: Characteristics.ExecutableImage | Characteristics.Dll);
+            return new PEHeaderBuilder(
+                imageCharacteristics: Characteristics.ExecutableImage | Characteristics.Dll
+            );
         }
 
-        internal bool Is32Bit => Machine != Machine.Amd64 && Machine != Machine.IA64 && Machine != Machine.Arm64;
+        internal bool Is32Bit =>
+            Machine != Machine.Amd64 && Machine != Machine.IA64 && Machine != Machine.Arm64;
 
         internal int ComputeSizeOfPEHeaders(int sectionCount) =>
-            PEBuilder.DosHeaderSize +
-            PEHeaders.PESignatureSize +
-            CoffHeader.Size +
-            PEHeader.Size(Is32Bit) +
-            SectionHeader.Size * sectionCount;
+            PEBuilder.DosHeaderSize
+            + PEHeaders.PESignatureSize
+            + CoffHeader.Size
+            + PEHeader.Size(Is32Bit)
+            + SectionHeader.Size * sectionCount;
     }
 }

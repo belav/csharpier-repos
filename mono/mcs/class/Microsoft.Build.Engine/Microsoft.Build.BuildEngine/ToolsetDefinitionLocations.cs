@@ -27,10 +27,10 @@
 
 namespace Microsoft.Build.BuildEngine
 {
-	public enum ToolsetDefinitionLocations
-	{
-		None,
-		ConfigurationFile,
-		Registry
-	}
+    public enum ToolsetDefinitionLocations
+    {
+        None,
+        ConfigurationFile,
+        Registry,
+    }
 }

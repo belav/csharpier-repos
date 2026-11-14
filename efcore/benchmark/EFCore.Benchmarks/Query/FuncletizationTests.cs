@@ -16,8 +16,7 @@ public abstract class FuncletizationTests
 {
     private OrdersContextBase _context;
 
-    protected virtual int FuncletizationIterationCount
-        => 100;
+    protected virtual int FuncletizationIterationCount => 100;
 
     protected abstract OrdersFixtureBase CreateFixture();
 
@@ -33,8 +32,7 @@ public abstract class FuncletizationTests
     }
 
     [GlobalCleanup]
-    public virtual void CleanupContext()
-        => _context.Dispose();
+    public virtual void CleanupContext() => _context.Dispose();
 
     [Benchmark]
     public virtual void NewQueryInstance()
@@ -73,7 +71,6 @@ public abstract class FuncletizationTests
     {
         public int FirstLevelProperty { get; } = 11;
 
-        public int SecondLevelProperty
-            => FirstLevelProperty;
+        public int SecondLevelProperty => FirstLevelProperty;
     }
 }

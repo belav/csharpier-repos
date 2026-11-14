@@ -114,7 +114,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
@@ -186,7 +191,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
@@ -201,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
 
             for (var i = 0; i <= 4; i++)
             {
-                workspaceXml += $@"
+                workspaceXml +=
+                    $@"
 <Document FilePath = ""C{i}.cs"">
 class C{i}
 {{
@@ -231,7 +242,8 @@ class C{i}
 
             for (var i = 6; i <= 9; i++)
             {
-                workspaceXml += $@"
+                workspaceXml +=
+                    $@"
 <Document FilePath = ""C{i}.cs"">
 class C{i}
 {{
@@ -249,9 +261,11 @@ class C{i}
                 </Workspace>
                 """;
 
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                new AddedParameterOrExistingIndex(2) };
+                new AddedParameterOrExistingIndex(2),
+            };
 
             using var testState = ChangeSignatureTestState.Create(XElement.Parse(workspaceXml));
             testState.TestChangeSignatureOptionsService.UpdatedSignature = updatedSignature;
@@ -260,15 +274,25 @@ class C{i}
             Assert.True(result.Succeeded);
             Assert.Null(result.ChangeSignatureFailureKind);
 
-            foreach (var updatedDocument in testState.Workspace.Documents.Select(d => result.UpdatedSolution.GetDocument(d.Id)))
+            foreach (
+                var updatedDocument in testState.Workspace.Documents.Select(d =>
+                    result.UpdatedSolution.GetDocument(d.Id)
+                )
+            )
             {
                 if (updatedDocument.Name == "C5.cs")
                 {
-                    Assert.Contains("void Ext(this C5 c, string s)", (await updatedDocument.GetTextAsync(CancellationToken.None)).ToString());
+                    Assert.Contains(
+                        "void Ext(this C5 c, string s)",
+                        (await updatedDocument.GetTextAsync(CancellationToken.None)).ToString()
+                    );
                 }
                 else
                 {
-                    Assert.Contains(@"c.Ext(""two"");", (await updatedDocument.GetTextAsync(CancellationToken.None)).ToString());
+                    Assert.Contains(
+                        @"c.Ext(""two"");",
+                        (await updatedDocument.GetTextAsync(CancellationToken.None)).ToString()
+                    );
                 }
             }
         }
@@ -285,7 +309,8 @@ class C{i}
 
             for (var i = 0; i <= 4; i++)
             {
-                workspaceXml += $@"
+                workspaceXml +=
+                    $@"
 <Document FilePath = ""C{i}.cs"">
 class C{i}
 {{
@@ -315,7 +340,8 @@ class C{i}
 
             for (var i = 6; i <= 9; i++)
             {
-                workspaceXml += $@"
+                workspaceXml +=
+                    $@"
 <Document FilePath = ""C{i}.cs"">
 class C{i}
 {{
@@ -333,10 +359,21 @@ class C{i}
                 </Workspace>
                 """;
 
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, callSiteValue:"123"), "int") };
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        callSiteValue: "123"
+                    ),
+                    "int"
+                ),
+            };
 
             using var testState = ChangeSignatureTestState.Create(XElement.Parse(workspaceXml));
             testState.TestChangeSignatureOptionsService.UpdatedSignature = updatedSignature;
@@ -345,15 +382,25 @@ class C{i}
             Assert.True(result.Succeeded);
             Assert.Null(result.ChangeSignatureFailureKind);
 
-            foreach (var updatedDocument in testState.Workspace.Documents.Select(d => result.UpdatedSolution.GetDocument(d.Id)))
+            foreach (
+                var updatedDocument in testState.Workspace.Documents.Select(d =>
+                    result.UpdatedSolution.GetDocument(d.Id)
+                )
+            )
             {
                 if (updatedDocument.Name == "C5.cs")
                 {
-                    Assert.Contains("void Ext(this C5 c, string s, int newIntegerParameter)", (await updatedDocument.GetTextAsync(CancellationToken.None)).ToString());
+                    Assert.Contains(
+                        "void Ext(this C5 c, string s, int newIntegerParameter)",
+                        (await updatedDocument.GetTextAsync(CancellationToken.None)).ToString()
+                    );
                 }
                 else
                 {
-                    Assert.Contains(@"c.Ext(""two"", 123);", (await updatedDocument.GetTextAsync(CancellationToken.None)).ToString());
+                    Assert.Contains(
+                        @"c.Ext(""two"", 123);",
+                        (await updatedDocument.GetTextAsync(CancellationToken.None)).ToString()
+                    );
                 }
             }
         }
@@ -363,31 +410,46 @@ class C{i}
         [Trait(Traits.Feature, Traits.Features.Interactive)]
         public void ChangeSignatureCommandDisabledInSubmission()
         {
-            using var workspace = TestWorkspace.Create(XElement.Parse("""
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">  
-                        class C
-                        {
-                            void M$$(int x)
+            using var workspace = TestWorkspace.Create(
+                XElement.Parse(
+                    """
+                    <Workspace>
+                        <Submission Language="C#" CommonReferences="true">  
+                            class C
                             {
+                                void M$$(int x)
+                                {
+                                }
                             }
-                        }
-                    </Submission>
-                </Workspace>
-                """),
+                        </Submission>
+                    </Workspace>
+                    """
+                ),
                 workspaceKind: WorkspaceKind.Interactive,
-                composition: EditorTestCompositions.EditorFeaturesWpf);
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             // Force initialization.
-            workspace.GetOpenDocumentIds().Select(id => workspace.GetTestDocument(id).GetTextView()).ToList();
+            workspace
+                .GetOpenDocumentIds()
+                .Select(id => workspace.GetTestDocument(id).GetTextView())
+                .ToList();
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace.ExportProvider.GetCommandHandler<CSharpChangeSignatureCommandHandler>(PredefinedCommandHandlerNames.ChangeSignature, ContentTypeNames.CSharpContentType);
+            var handler =
+                workspace.ExportProvider.GetCommandHandler<CSharpChangeSignatureCommandHandler>(
+                    PredefinedCommandHandlerNames.ChangeSignature,
+                    ContentTypeNames.CSharpContentType
+                );
 
-            var state = handler.GetCommandState(new RemoveParametersCommandArgs(textView, textView.TextBuffer));
+            var state = handler.GetCommandState(
+                new RemoveParametersCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
 
-            state = handler.GetCommandState(new ReorderParametersCommandArgs(textView, textView.TextBuffer));
+            state = handler.GetCommandState(
+                new ReorderParametersCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
         }
 
@@ -419,7 +481,12 @@ class C{i}
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
@@ -443,7 +510,12 @@ class C{i}
                 m(@new: false);
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
     }
 }

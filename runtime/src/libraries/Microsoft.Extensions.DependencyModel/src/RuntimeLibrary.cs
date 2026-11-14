@@ -9,7 +9,8 @@ namespace Microsoft.Extensions.DependencyModel
 {
     public class RuntimeLibrary : Library
     {
-        public RuntimeLibrary(string type,
+        public RuntimeLibrary(
+            string type,
             string name,
             string version,
             string? hash,
@@ -17,22 +18,24 @@ namespace Microsoft.Extensions.DependencyModel
             IReadOnlyList<RuntimeAssetGroup> nativeLibraryGroups,
             IEnumerable<ResourceAssembly> resourceAssemblies,
             IEnumerable<Dependency> dependencies,
-            bool serviceable)
-            : this(type,
-                  name,
-                  version,
-                  hash,
-                  runtimeAssemblyGroups,
-                  nativeLibraryGroups,
-                  resourceAssemblies,
-                  dependencies,
-                  serviceable,
-                  path: null,
-                  hashPath: null)
-        {
-        }
+            bool serviceable
+        )
+            : this(
+                type,
+                name,
+                version,
+                hash,
+                runtimeAssemblyGroups,
+                nativeLibraryGroups,
+                resourceAssemblies,
+                dependencies,
+                serviceable,
+                path: null,
+                hashPath: null
+            ) { }
 
-        public RuntimeLibrary(string type,
+        public RuntimeLibrary(
+            string type,
             string name,
             string version,
             string? hash,
@@ -42,22 +45,22 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<Dependency> dependencies,
             bool serviceable,
             string? path,
-            string? hashPath)
-            : this(type,
-                  name,
-                  version,
-                  hash,
-                  runtimeAssemblyGroups,
-                  nativeLibraryGroups,
-                  resourceAssemblies,
-                  dependencies,
-                  serviceable,
-                  path,
-                  hashPath,
-                  runtimeStoreManifestName : null)
-         {
-         }
-
+            string? hashPath
+        )
+            : this(
+                type,
+                name,
+                version,
+                hash,
+                runtimeAssemblyGroups,
+                nativeLibraryGroups,
+                resourceAssemblies,
+                dependencies,
+                serviceable,
+                path,
+                hashPath,
+                runtimeStoreManifestName: null
+            ) { }
 
         /// <summary>
         /// Initializes a new <see cref="RuntimeLibrary"/>.
@@ -83,7 +86,8 @@ namespace Microsoft.Extensions.DependencyModel
         /// The <paramref name="resourceAssemblies"/> argument is null.
         /// The <paramref name="dependencies"/> argument is null.
         /// </exception>
-        public RuntimeLibrary(string type,
+        public RuntimeLibrary(
+            string type,
             string name,
             string version,
             string? hash,
@@ -94,16 +98,19 @@ namespace Microsoft.Extensions.DependencyModel
             bool serviceable,
             string? path,
             string? hashPath,
-            string? runtimeStoreManifestName)
-            : base(type,
-                  name,
-                  version,
-                  hash,
-                  dependencies,
-                  serviceable,
-                  path,
-                  hashPath,
-                  runtimeStoreManifestName)
+            string? runtimeStoreManifestName
+        )
+            : base(
+                type,
+                name,
+                version,
+                hash,
+                dependencies,
+                serviceable,
+                path,
+                hashPath,
+                runtimeStoreManifestName
+            )
         {
             ThrowHelper.ThrowIfNull(runtimeAssemblyGroups);
             ThrowHelper.ThrowIfNull(nativeLibraryGroups);

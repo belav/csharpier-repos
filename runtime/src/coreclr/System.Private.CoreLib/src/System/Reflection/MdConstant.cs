@@ -5,9 +5,19 @@ namespace System.Reflection
 {
     internal static class MdConstant
     {
-        public static unsafe object? GetValue(MetadataImport scope, int token, RuntimeTypeHandle fieldTypeHandle, bool raw)
+        public static unsafe object? GetValue(
+            MetadataImport scope,
+            int token,
+            RuntimeTypeHandle fieldTypeHandle,
+            bool raw
+        )
         {
-            string? stringVal = scope.GetDefaultValue(token, out long buffer, out int length, out CorElementType corElementType);
+            string? stringVal = scope.GetDefaultValue(
+                token,
+                out long buffer,
+                out int length,
+                out CorElementType corElementType
+            );
 
             RuntimeType fieldType = fieldTypeHandle.GetRuntimeType();
 
@@ -69,7 +79,7 @@ namespace System.Reflection
 
                     default:
                         throw new FormatException(SR.Arg_BadLiteralFormat);
-                        #endregion
+                    #endregion
                 }
 
                 return RuntimeType.CreateEnum(fieldType, defaultValue);
@@ -98,7 +108,7 @@ namespace System.Reflection
 
                     default:
                         throw new FormatException(SR.Arg_BadLiteralFormat);
-                        #endregion
+                    #endregion
                 }
 
                 return new DateTime(defaultValue);

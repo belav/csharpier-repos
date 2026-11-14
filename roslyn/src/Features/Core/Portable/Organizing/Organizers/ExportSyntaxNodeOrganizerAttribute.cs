@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Organizing.Organizers
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    internal class ExportSyntaxNodeOrganizerAttribute(string languageName) : ExportAttribute(typeof(ISyntaxOrganizer))
+    internal class ExportSyntaxNodeOrganizerAttribute(string languageName)
+        : ExportAttribute(typeof(ISyntaxOrganizer))
     {
         public string Language { get; } = languageName;
     }

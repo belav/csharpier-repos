@@ -3,7 +3,12 @@
 
 namespace System.Globalization.Tests
 {
-    public enum IdnType { Transitional, Nontransitional, Both };
+    public enum IdnType
+    {
+        Transitional,
+        Nontransitional,
+        Both,
+    };
 
     public interface IConformanceIdnaTest
     {

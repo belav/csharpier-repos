@@ -16,7 +16,8 @@ internal static partial class Interop
             CryptMsgParamType dwParamType,
             int dwIndex,
             out int pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -25,7 +26,8 @@ internal static partial class Interop
             CryptMsgParamType dwParamType,
             int dwIndex,
             byte* pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -34,7 +36,8 @@ internal static partial class Interop
             CryptMsgParamType dwParamType,
             int dwIndex,
             out CryptMsgType pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -43,6 +46,7 @@ internal static partial class Interop
             CryptMsgParamType dwParamType,
             int dwIndex,
             IntPtr pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
     }
 }

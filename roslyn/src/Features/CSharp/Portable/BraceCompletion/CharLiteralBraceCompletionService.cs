@@ -14,25 +14,26 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 {
-
     [Export(LanguageNames.CSharp, typeof(IBraceCompletionService)), Shared]
     internal class CharLiteralBraceCompletionService : AbstractCSharpBraceCompletionService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CharLiteralBraceCompletionService()
-        {
-        }
+        public CharLiteralBraceCompletionService() { }
 
         protected override char OpeningBrace => SingleQuote.OpenCharacter;
 
         protected override char ClosingBrace => SingleQuote.CloseCharacter;
 
-        public override bool AllowOverType(BraceCompletionContext braceCompletionContext, CancellationToken cancellationToken)
-            => AllowOverTypeWithValidClosingToken(braceCompletionContext);
+        public override bool AllowOverType(
+            BraceCompletionContext braceCompletionContext,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeWithValidClosingToken(braceCompletionContext);
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.CharacterLiteralToken);
+        protected override bool IsValidOpeningBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CharacterLiteralToken);
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.CharacterLiteralToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CharacterLiteralToken);
     }
 }

@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpTransposeRecordKeywordCodeFixProvider>;
+        CSharpTransposeRecordKeywordCodeFixProvider
+    >;
 
     public class TransposeRecordKeywordTests
     {
@@ -24,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             {
                 TestCode = @"struct {|CS9012:record|} C { }",
                 FixedCode = @"record struct C { }",
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -35,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             {
                 TestCode = @"class {|CS9012:record|} C { }",
                 FixedCode = @"record class C { }",
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -46,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             {
                 TestCode = @"public struct {|CS9012:record|} C { }",
                 FixedCode = @"public record struct C { }",
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -56,14 +57,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             await new VerifyCS.Test
             {
                 TestCode = """
-                // my struct
-                public struct {|CS9012:record|} C { }
-                """,
+                    // my struct
+                    public struct {|CS9012:record|} C { }
+                    """,
                 FixedCode = """
-                // my struct
-                public record struct C { }
-                """,
-                LanguageVersion = LanguageVersion.CSharp10
+                    // my struct
+                    public record struct C { }
+                    """,
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -73,14 +74,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             await new VerifyCS.Test
             {
                 TestCode = """
-                /// <summary></summary>
-                public struct {|CS9012:record|} C { }
-                """,
+                    /// <summary></summary>
+                    public struct {|CS9012:record|} C { }
+                    """,
                 FixedCode = """
-                /// <summary></summary>
-                public record struct C { }
-                """,
-                LanguageVersion = LanguageVersion.CSharp10
+                    /// <summary></summary>
+                    public record struct C { }
+                    """,
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -90,14 +91,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             await new VerifyCS.Test
             {
                 TestCode = """
-                [System.CLSCompliant(false)]
-                struct {|CS9012:record|} C { }
-                """,
+                    [System.CLSCompliant(false)]
+                    struct {|CS9012:record|} C { }
+                    """,
                 FixedCode = """
-                [System.CLSCompliant(false)]
-                record struct C { }
-                """,
-                LanguageVersion = LanguageVersion.CSharp10
+                    [System.CLSCompliant(false)]
+                    record struct C { }
+                    """,
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -107,12 +108,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             await new VerifyCS.Test
             {
                 TestCode = """
-                [System.CLSCompliant(false)] struct {|CS9012:record|} C { }
-                """,
+                    [System.CLSCompliant(false)] struct {|CS9012:record|} C { }
+                    """,
                 FixedCode = """
-                [System.CLSCompliant(false)] record struct C { }
-                """,
-                LanguageVersion = LanguageVersion.CSharp10
+                    [System.CLSCompliant(false)] record struct C { }
+                    """,
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -122,18 +123,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             await new VerifyCS.Test
             {
                 TestCode = """
-                class {|CS9012:record|} C
-                {
-                    struct {|CS9012:record|} D { }
-                }
-                """,
+                    class {|CS9012:record|} C
+                    {
+                        struct {|CS9012:record|} D { }
+                    }
+                    """,
                 FixedCode = """
-                record class C
-                {
-                    record struct D { }
-                }
-                """,
-                LanguageVersion = LanguageVersion.CSharp10
+                    record class C
+                    {
+                        record struct D { }
+                    }
+                    """,
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -143,22 +144,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             await new VerifyCS.Test
             {
                 TestCode = """
-                // my class
-                class {|CS9012:record|} C
-                {
-                    // my struct
-                    struct {|CS9012:record|} D { }
-                }
-                """,
+                    // my class
+                    class {|CS9012:record|} C
+                    {
+                        // my struct
+                        struct {|CS9012:record|} D { }
+                    }
+                    """,
                 FixedCode = """
-                // my class
-                record class C
-                {
-                    // my struct
-                    record struct D { }
-                }
-                """,
-                LanguageVersion = LanguageVersion.CSharp10
+                    // my class
+                    record class C
+                    {
+                        // my struct
+                        record struct D { }
+                    }
+                    """,
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -168,18 +169,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
             await new VerifyCS.Test
             {
                 TestCode = """
-                /*1*/
-                class /**/
-                /*3*/
-                {|CS9012:record|} /*4*/ C { }
-                """,
+                    /*1*/
+                    class /**/
+                    /*3*/
+                    {|CS9012:record|} /*4*/ C { }
+                    """,
                 FixedCode = """
-                /*1*/
-                record /**/
-                /*3*/
-                class /*4*/ C { }
-                """,
-                LanguageVersion = LanguageVersion.CSharp10
+                    /*1*/
+                    record /**/
+                    /*3*/
+                    class /*4*/ C { }
+                    """,
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
     }

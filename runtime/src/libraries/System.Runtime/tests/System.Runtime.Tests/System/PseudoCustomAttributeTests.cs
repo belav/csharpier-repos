@@ -11,7 +11,11 @@ using Xunit;
 
 namespace System.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtimelab/issues/830", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtimelab/issues/830",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsNativeAot)
+    )]
     public static partial class PseudoCustomAttributeTests
     {
         [Theory]
@@ -27,11 +31,20 @@ namespace System.Tests
                     break;
                 case MemberInfo memberInfo:
                     Assert.Equal(attribute != null, Attribute.IsDefined(memberInfo, attributeType));
-                    Assert.Equal(attribute != null, Attribute.IsDefined(memberInfo, attributeType, true));
+                    Assert.Equal(
+                        attribute != null,
+                        Attribute.IsDefined(memberInfo, attributeType, true)
+                    );
                     break;
                 case ParameterInfo parameterInfo:
-                    Assert.Equal(attribute != null, Attribute.IsDefined(parameterInfo, attributeType));
-                    Assert.Equal(attribute != null, Attribute.IsDefined(parameterInfo, attributeType, true));
+                    Assert.Equal(
+                        attribute != null,
+                        Attribute.IsDefined(parameterInfo, attributeType)
+                    );
+                    Assert.Equal(
+                        attribute != null,
+                        Attribute.IsDefined(parameterInfo, attributeType, true)
+                    );
                     break;
                 default:
                     Assert.Fail();
@@ -42,21 +55,40 @@ namespace System.Tests
         [Theory]
         [MemberData(nameof(TestData_AttributeExists))]
         [MemberData(nameof(TestData_AttributeDoesNotExist))]
-        public static void GetCustomAttribute(object target, Type attributeType, Attribute attribute)
+        public static void GetCustomAttribute(
+            object target,
+            Type attributeType,
+            Attribute attribute
+        )
         {
             switch (target)
             {
                 case Type type:
                     Assert.Equal(attribute, Attribute.GetCustomAttribute(type, attributeType));
-                    Assert.Equal(attribute, Attribute.GetCustomAttribute(type, attributeType, true));
+                    Assert.Equal(
+                        attribute,
+                        Attribute.GetCustomAttribute(type, attributeType, true)
+                    );
                     break;
                 case MemberInfo memberInfo:
-                    Assert.Equal(attribute, Attribute.GetCustomAttribute(memberInfo, attributeType));
-                    Assert.Equal(attribute, Attribute.GetCustomAttribute(memberInfo, attributeType, true));
+                    Assert.Equal(
+                        attribute,
+                        Attribute.GetCustomAttribute(memberInfo, attributeType)
+                    );
+                    Assert.Equal(
+                        attribute,
+                        Attribute.GetCustomAttribute(memberInfo, attributeType, true)
+                    );
                     break;
                 case ParameterInfo parameterInfo:
-                    Assert.Equal(attribute, Attribute.GetCustomAttribute(parameterInfo, attributeType));
-                    Assert.Equal(attribute, Attribute.GetCustomAttribute(parameterInfo, attributeType, true));
+                    Assert.Equal(
+                        attribute,
+                        Attribute.GetCustomAttribute(parameterInfo, attributeType)
+                    );
+                    Assert.Equal(
+                        attribute,
+                        Attribute.GetCustomAttribute(parameterInfo, attributeType, true)
+                    );
                     break;
                 default:
                     Assert.Fail();
@@ -67,27 +99,61 @@ namespace System.Tests
         [Theory]
         [MemberData(nameof(TestData_AttributeExists))]
         [MemberData(nameof(TestData_AttributeDoesNotExist))]
-        public static void GetCustomAttributes(object target, Type attributeType, Attribute attribute)
+        public static void GetCustomAttributes(
+            object target,
+            Type attributeType,
+            Attribute attribute
+        )
         {
             switch (target)
             {
                 case Type type:
-                    Assert.Equal(attribute, Attribute.GetCustomAttributes(type, typeof(Attribute))
-                        .Where((e) => e.GetType() == attributeType).SingleOrDefault());
-                    Assert.Equal(attribute, Attribute.GetCustomAttributes(type, typeof(Attribute), true)
-                        .Where((e) => e.GetType() == attributeType).SingleOrDefault());
+                    Assert.Equal(
+                        attribute,
+                        Attribute
+                            .GetCustomAttributes(type, typeof(Attribute))
+                            .Where((e) => e.GetType() == attributeType)
+                            .SingleOrDefault()
+                    );
+                    Assert.Equal(
+                        attribute,
+                        Attribute
+                            .GetCustomAttributes(type, typeof(Attribute), true)
+                            .Where((e) => e.GetType() == attributeType)
+                            .SingleOrDefault()
+                    );
                     break;
                 case MemberInfo memberInfo:
-                    Assert.Equal(attribute, Attribute.GetCustomAttributes(memberInfo, typeof(Attribute))
-                        .Where((e) => e.GetType() == attributeType).SingleOrDefault());
-                    Assert.Equal(attribute, Attribute.GetCustomAttributes(memberInfo, typeof(Attribute), true)
-                        .Where((e) => e.GetType() == attributeType).SingleOrDefault());
+                    Assert.Equal(
+                        attribute,
+                        Attribute
+                            .GetCustomAttributes(memberInfo, typeof(Attribute))
+                            .Where((e) => e.GetType() == attributeType)
+                            .SingleOrDefault()
+                    );
+                    Assert.Equal(
+                        attribute,
+                        Attribute
+                            .GetCustomAttributes(memberInfo, typeof(Attribute), true)
+                            .Where((e) => e.GetType() == attributeType)
+                            .SingleOrDefault()
+                    );
                     break;
                 case ParameterInfo parameterInfo:
-                    Assert.Equal(attribute, Attribute.GetCustomAttributes(parameterInfo, typeof(Attribute))
-                        .Where((e) => e.GetType() == attributeType).SingleOrDefault());
-                    Assert.Equal(attribute, Attribute.GetCustomAttributes(parameterInfo, typeof(Attribute), true)
-                        .Where((e) => e.GetType() == attributeType).SingleOrDefault());
+                    Assert.Equal(
+                        attribute,
+                        Attribute
+                            .GetCustomAttributes(parameterInfo, typeof(Attribute))
+                            .Where((e) => e.GetType() == attributeType)
+                            .SingleOrDefault()
+                    );
+                    Assert.Equal(
+                        attribute,
+                        Attribute
+                            .GetCustomAttributes(parameterInfo, typeof(Attribute), true)
+                            .Where((e) => e.GetType() == attributeType)
+                            .SingleOrDefault()
+                    );
                     break;
                 default:
                     Assert.Fail();
@@ -97,35 +163,111 @@ namespace System.Tests
 
         public static IEnumerable<object[]> TestData_AttributeExists()
         {
-            yield return new object[] { typeof(TestTypeWithAttributes), typeof(SerializableAttribute), new SerializableAttribute() };
-            yield return new object[] { typeof(ITestComInterface), typeof(ComImportAttribute), new ComImportAttribute() };
+            yield return new object[]
+            {
+                typeof(TestTypeWithAttributes),
+                typeof(SerializableAttribute),
+                new SerializableAttribute(),
+            };
+            yield return new object[]
+            {
+                typeof(ITestComInterface),
+                typeof(ComImportAttribute),
+                new ComImportAttribute(),
+            };
 
             FieldInfo testField = typeof(TestTypeWithAttributes).GetField("_testField");
-            yield return new object[] { testField, typeof(FieldOffsetAttribute), new FieldOffsetAttribute(120) };
-            yield return new object[] { testField, typeof(NonSerializedAttribute), new NonSerializedAttribute() };
-            yield return new object[] { testField, typeof(MarshalAsAttribute), new MarshalAsAttribute(UnmanagedType.ByValTStr) { SizeConst = 100 } };
+            yield return new object[]
+            {
+                testField,
+                typeof(FieldOffsetAttribute),
+                new FieldOffsetAttribute(120),
+            };
+            yield return new object[]
+            {
+                testField,
+                typeof(NonSerializedAttribute),
+                new NonSerializedAttribute(),
+            };
+            yield return new object[]
+            {
+                testField,
+                typeof(MarshalAsAttribute),
+                new MarshalAsAttribute(UnmanagedType.ByValTStr) { SizeConst = 100 },
+            };
 
             MethodInfo testMethod = typeof(TestTypeWithAttributes).GetMethod("TestMethod");
 
             ParameterInfo testMethodParameter = testMethod.GetParameters()[0];
-            yield return new object[] { testMethodParameter, typeof(MarshalAsAttribute), new MarshalAsAttribute(UnmanagedType.LPArray) { ArraySubType = UnmanagedType.I4 } };
-            yield return new object[] { testMethodParameter, typeof(InAttribute), new InAttribute() };
-            yield return new object[] { testMethodParameter, typeof(OutAttribute), new OutAttribute() };
-            yield return new object[] { testMethodParameter, typeof(OptionalAttribute), new OptionalAttribute() };
+            yield return new object[]
+            {
+                testMethodParameter,
+                typeof(MarshalAsAttribute),
+                new MarshalAsAttribute(UnmanagedType.LPArray) { ArraySubType = UnmanagedType.I4 },
+            };
+            yield return new object[]
+            {
+                testMethodParameter,
+                typeof(InAttribute),
+                new InAttribute(),
+            };
+            yield return new object[]
+            {
+                testMethodParameter,
+                typeof(OutAttribute),
+                new OutAttribute(),
+            };
+            yield return new object[]
+            {
+                testMethodParameter,
+                typeof(OptionalAttribute),
+                new OptionalAttribute(),
+            };
 
-            yield return new object[] { testMethod.ReturnParameter, typeof(MarshalAsAttribute), new MarshalAsAttribute(UnmanagedType.Bool) };
+            yield return new object[]
+            {
+                testMethod.ReturnParameter,
+                typeof(MarshalAsAttribute),
+                new MarshalAsAttribute(UnmanagedType.Bool),
+            };
 
-            yield return new object[] { testMethod, typeof(DllImportAttribute),
-                new DllImportAttribute("nonexistent") { CallingConvention = CallingConvention.Winapi, CharSet = CharSet.Unicode, SetLastError = true, PreserveSig = true, EntryPoint = "MyEntryPoint" } };
+            yield return new object[]
+            {
+                testMethod,
+                typeof(DllImportAttribute),
+                new DllImportAttribute("nonexistent")
+                {
+                    CallingConvention = CallingConvention.Winapi,
+                    CharSet = CharSet.Unicode,
+                    SetLastError = true,
+                    PreserveSig = true,
+                    EntryPoint = "MyEntryPoint",
+                },
+            };
 
-            yield return new object[] { testMethod, typeof(PreserveSigAttribute), new PreserveSigAttribute() };
+            yield return new object[]
+            {
+                testMethod,
+                typeof(PreserveSigAttribute),
+                new PreserveSigAttribute(),
+            };
         }
 
         public static IEnumerable<object[]> TestData_AttributeDoesNotExist()
         {
-            yield return new object[] { typeof(TestTypeWithoutAttributes), typeof(SerializableAttribute), null };
+            yield return new object[]
+            {
+                typeof(TestTypeWithoutAttributes),
+                typeof(SerializableAttribute),
+                null,
+            };
 
-            yield return new object[] { typeof(TestTypeWithoutAttributes), typeof(ComImportAttribute), null };
+            yield return new object[]
+            {
+                typeof(TestTypeWithoutAttributes),
+                typeof(ComImportAttribute),
+                null,
+            };
 
             FieldInfo testField = typeof(TestTypeWithoutAttributes).GetField("_testField");
             yield return new object[] { testField, typeof(FieldOffsetAttribute), null };
@@ -140,7 +282,12 @@ namespace System.Tests
             yield return new object[] { testMethodParameter, typeof(OutAttribute), null };
             yield return new object[] { testMethodParameter, typeof(OptionalAttribute), null };
 
-            yield return new object[] { testMethod.ReturnParameter, typeof(MarshalAsAttribute), null };
+            yield return new object[]
+            {
+                testMethod.ReturnParameter,
+                typeof(MarshalAsAttribute),
+                null,
+            };
 
             yield return new object[] { testMethod, typeof(DllImportAttribute), null };
 
@@ -158,8 +305,23 @@ namespace System.Tests
 
             [PreserveSigAttribute]
             [return: MarshalAsAttribute(UnmanagedType.Bool)]
-            [DllImportAttribute("nonexistent", CallingConvention = CallingConvention.Winapi, CharSet = CharSet.Unicode, SetLastError = true, PreserveSig = true, EntryPoint = "MyEntryPoint")]
-            public static extern bool TestMethod([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I4), In, Out, Optional] int[] x);
+            [DllImportAttribute(
+                "nonexistent",
+                CallingConvention = CallingConvention.Winapi,
+                CharSet = CharSet.Unicode,
+                SetLastError = true,
+                PreserveSig = true,
+                EntryPoint = "MyEntryPoint"
+            )]
+            public static extern bool TestMethod(
+                [
+                    MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I4),
+                    In,
+                    Out,
+                    Optional
+                ]
+                    int[] x
+            );
         }
 
         public class TestTypeWithoutAttributes
@@ -170,9 +332,10 @@ namespace System.Tests
         }
 
         [ComImport]
-        [Guid("42424242-4242-4242-4242-424242424242"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        public interface ITestComInterface
-        {
-        }
+        [
+            Guid("42424242-4242-4242-4242-424242424242"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
+        public interface ITestComInterface { }
     }
 }

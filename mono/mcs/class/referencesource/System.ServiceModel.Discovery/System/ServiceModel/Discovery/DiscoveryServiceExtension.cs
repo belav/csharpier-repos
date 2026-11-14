@@ -19,23 +19,19 @@ namespace System.ServiceModel.Discovery
         protected DiscoveryServiceExtension()
         {
             this.publishedEndpoints = new PublishedEndpointCollection();
-            this.readOnlyPublishedEndpoints = new ReadOnlyCollection<EndpointDiscoveryMetadata>(this.publishedEndpoints);
+            this.readOnlyPublishedEndpoints = new ReadOnlyCollection<EndpointDiscoveryMetadata>(
+                this.publishedEndpoints
+            );
         }
 
         public ReadOnlyCollection<EndpointDiscoveryMetadata> PublishedEndpoints
         {
-            get
-            {
-                return this.readOnlyPublishedEndpoints;
-            }
+            get { return this.readOnlyPublishedEndpoints; }
         }
 
         internal Collection<EndpointDiscoveryMetadata> InternalPublishedEndpoints
         {
-            get
-            {
-                return this.publishedEndpoints;
-            }
+            get { return this.publishedEndpoints; }
         }
 
         void IExtension<ServiceHostBase>.Attach(ServiceHostBase owner)
@@ -46,7 +42,9 @@ namespace System.ServiceModel.Discovery
             }
             if (this.owner != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.DiscoveryExtensionAlreadyAttached));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR2.DiscoveryExtensionAlreadyAttached)
+                );
             }
 
             this.owner = owner;
@@ -60,7 +58,9 @@ namespace System.ServiceModel.Discovery
             }
             if (this.owner != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.DiscoveryExtensionCannotBeDetached));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR2.DiscoveryExtensionCannotBeDetached)
+                );
             }
         }
 
@@ -72,7 +72,12 @@ namespace System.ServiceModel.Discovery
             {
                 throw FxTrace.Exception.AsError(
                     new InvalidOperationException(
-                        SR.DiscoveryMethodImplementationReturnsNull("GetDiscoveryService", this.GetType())));
+                        SR.DiscoveryMethodImplementationReturnsNull(
+                            "GetDiscoveryService",
+                            this.GetType()
+                        )
+                    )
+                );
             }
 
             return discoveryService;

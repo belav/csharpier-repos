@@ -15,16 +15,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class PlaceholderTypeArgumentSymbol : ErrorTypeSymbol
     {
-        private static readonly TypeWithAnnotations s_instance = TypeWithAnnotations.Create(new PlaceholderTypeArgumentSymbol());
+        private static readonly TypeWithAnnotations s_instance = TypeWithAnnotations.Create(
+            new PlaceholderTypeArgumentSymbol()
+        );
 
-        public static ImmutableArray<TypeWithAnnotations> CreateTypeArguments(ImmutableArray<TypeParameterSymbol> typeParameters)
+        public static ImmutableArray<TypeWithAnnotations> CreateTypeArguments(
+            ImmutableArray<TypeParameterSymbol> typeParameters
+        )
         {
             return typeParameters.SelectAsArray(_ => s_instance);
         }
 
-        private PlaceholderTypeArgumentSymbol()
-        {
-        }
+        private PlaceholderTypeArgumentSymbol() { }
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
         {
@@ -33,10 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         internal override bool MangleName
@@ -53,10 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override DiagnosticInfo? ErrorInfo
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         internal override bool Equals(TypeSymbol t2, TypeCompareKind comparison)
@@ -70,4 +66,3 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 }
-

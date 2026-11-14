@@ -9,42 +9,41 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Query.InternalTrees;
+using System.Data.Query.PlanCompiler;
 using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
-
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
 using cqt = System.Data.Common.CommandTrees;
 using md = System.Data.Metadata.Edm;
-using System.Data.Query.InternalTrees;
-using System.Data.Query.PlanCompiler;
 
 namespace System.Data.Query.PlanCompiler
 {
     /// <summary>
-    /// The PlanCompiler class is used by the BridgeCommand to produce an 
+    /// The PlanCompiler class is used by the BridgeCommand to produce an
     /// execution plan - this execution plan is the plan object. The plan compilation
-    /// process takes as input a command tree (in C space), and then runs through a 
-    /// set of changes before the final plan is produced. The final plan contains 
+    /// process takes as input a command tree (in C space), and then runs through a
+    /// set of changes before the final plan is produced. The final plan contains
     /// one or more command trees (commands?) (in S space), with a set of assembly
     /// instructions.
     /// The compiler phases include
     /// * Convert the command tree (CTree) into an internal tree (an ITree)
-    /// * Run initializations on the ITree. 
+    /// * Run initializations on the ITree.
     /// * Eliminate structured types from the tree
     ///    * Eliminating named type references, refs and records from the tree
-    ///    At the end of this phase, we still may have collections (and record 
+    ///    At the end of this phase, we still may have collections (and record
     ///    arguments to collections) in the tree.
     /// * Projection pruning (ie) eliminating unused references
     /// * Tree transformations. Various transformations are run on the ITree to
@@ -52,7 +51,7 @@ namespace System.Data.Query.PlanCompiler
     ///      rules, and a rule processor is invoked.
     /// * Nest elimination. At this point, we try to get pull up nest operations
     ///      as high up the tree as possible
-    /// * Code Generation. This phase produces a plan object with various subpieces 
+    /// * Code Generation. This phase produces a plan object with various subpieces
     ///      of the ITree represented as commands (in S space).
     ///    * The subtrees of the ITree are then converted into the corresponding CTrees
     ///      and converted into S space as part of the CTree creation.
@@ -60,17 +59,19 @@ namespace System.Data.Query.PlanCompiler
     /// </summary>
     internal class PlanCompiler
     {
-
         #region private state
 
         /// <summary>
         /// A boolean switch indicating whether we should apply transformation rules regardless of the size of the Iqt.
-        /// By default, the Enabled property of a boolean switch is set using the value specified in the configuration file. 
-        /// Configuring the switch with a value of 0 sets the Enabled property to false; configuring the switch with a nonzero 
-        /// value to set the Enabled property to true. If the BooleanSwitch constructor cannot find initial switch settings 
+        /// By default, the Enabled property of a boolean switch is set using the value specified in the configuration file.
+        /// Configuring the switch with a value of 0 sets the Enabled property to false; configuring the switch with a nonzero
+        /// value to set the Enabled property to true. If the BooleanSwitch constructor cannot find initial switch settings
         /// in the configuration file, the Enabled property of the new switch is set to false by default.
         /// </summary>
-        private static BooleanSwitch _applyTransformationsRegardlessOfSize = new BooleanSwitch("System.Data.EntityClient.IgnoreOptimizationLimit", "The Entity Framework should try to optimize the query regardless of its size");
+        private static BooleanSwitch _applyTransformationsRegardlessOfSize = new BooleanSwitch(
+            "System.Data.EntityClient.IgnoreOptimizationLimit",
+            "The Entity Framework should try to optimize the query regardless of its size"
+        );
 
         /// <summary>
         /// Determines the maximum size of the query in terms of Iqt nodes for which we attempt to do transformation rules.
@@ -133,7 +134,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Retail Assertion code.
-        /// 
+        ///
         /// Provides the ability to have retail asserts.
         /// </summary>
         /// <param name="condition"></param>
@@ -144,16 +145,20 @@ namespace System.Data.Query.PlanCompiler
             {
                 System.Diagnostics.Debug.Fail(message);
 
-                // NOTE: I considered, at great length, whether to have the assertion message text 
+                // NOTE: I considered, at great length, whether to have the assertion message text
                 //       included in the exception we throw; in the end, there really isn't a reliable
                 //       equivalent to the C++ __LINE__ and __FILE__ macros in C# (at least not without
-                //       using the C++ PreProcessor...ick)  The StackTrace object comes close but 
-                //       doesn't handle inlined callers properly for our needs (MethodA() calls MethodB() 
+                //       using the C++ PreProcessor...ick)  The StackTrace object comes close but
+                //       doesn't handle inlined callers properly for our needs (MethodA() calls MethodB()
                 //       calls us, but MethodB() is inlined, so we'll get MethodA() info instead), and
-                //       since these are retail "Asserts" (as in: we're not supposed to get them in our 
+                //       since these are retail "Asserts" (as in: we're not supposed to get them in our
                 //       shipping code, and we're doing this to avoid a null-ref which is even worse) I
                 //       elected to simplify this by just including them as the additional info.
-                throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.AssertionFailed, 0, message);
+                throw EntityUtil.InternalError(
+                    EntityUtil.InternalErrorCode.AssertionFailed,
+                    0,
+                    message
+                );
             }
         }
 
@@ -165,27 +170,35 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="resultColumnMap">column map for result assembly</param>
         /// <param name="entitySets">the entity sets referenced in this query</param>
         /// <returns>a compiled plan object</returns>
-        internal static void Compile(cqt.DbCommandTree ctree, out List<ProviderCommandInfo> providerCommands, out ColumnMap resultColumnMap, out int columnCount, out Common.Utils.Set<md.EntitySet> entitySets)
+        internal static void Compile(
+            cqt.DbCommandTree ctree,
+            out List<ProviderCommandInfo> providerCommands,
+            out ColumnMap resultColumnMap,
+            out int columnCount,
+            out Common.Utils.Set<md.EntitySet> entitySets
+        )
         {
             PlanCompiler.Assert(ctree != null, "Expected a valid, non-null Command Tree input");
             PlanCompiler pc = new PlanCompiler(ctree);
             pc.Compile(out providerCommands, out resultColumnMap, out columnCount, out entitySets);
         }
 
-
         /// <summary>
         /// Get the current command
         /// </summary>
-        internal Command Command { get { return m_command; } }
+        internal Command Command
+        {
+            get { return m_command; }
+        }
 
         /// <summary>
         /// Does the command include any sort key that represents a null sentinel
         /// This may only be set to true in NominalTypeElimination and is used
         /// in Transformation Rules
         /// </summary>
-        internal bool HasSortingOnNullSentinels 
+        internal bool HasSortingOnNullSentinels
         {
-            get { return m_hasSortingOnNullSentinels; } 
+            get { return m_hasSortingOnNullSentinels; }
             set { m_hasSortingOnNullSentinels = value; }
         }
 
@@ -208,7 +221,10 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Get the current plan compiler phase
         /// </summary>
-        internal PlanCompilerPhase Phase { get { return m_phase; } }
+        internal PlanCompilerPhase Phase
+        {
+            get { return m_phase; }
+        }
 
         /// <summary>
         /// Sets the current plan compiler trace function to <paramref name="traceCallback"/>, enabling plan compiler tracing
@@ -228,10 +244,14 @@ namespace System.Data.Query.PlanCompiler
 
         private static Action<string, object> s_traceCallback;
 #endif
+
         /// <summary>
         /// The MetadataWorkspace
         /// </summary>
-        internal md.MetadataWorkspace MetadataWorkspace { get { return m_ctree.MetadataWorkspace; } }
+        internal md.MetadataWorkspace MetadataWorkspace
+        {
+            get { return m_ctree.MetadataWorkspace; }
+        }
 
         /// <summary>
         /// Is the specified phase needed for this query?
@@ -257,12 +277,17 @@ namespace System.Data.Query.PlanCompiler
         #region private methods
 
         /// <summary>
-        /// The real driver. 
+        /// The real driver.
         /// </summary>
         /// <param name="providerCommands">list of provider commands</param>
         /// <param name="resultColumnMap">column map for the result</param>
         /// <param name="entitySets">the entity sets exposed in this query</param>
-        private void Compile(out List<ProviderCommandInfo> providerCommands, out ColumnMap resultColumnMap, out int columnCount, out Common.Utils.Set<md.EntitySet> entitySets)
+        private void Compile(
+            out List<ProviderCommandInfo> providerCommands,
+            out ColumnMap resultColumnMap,
+            out int columnCount,
+            out Common.Utils.Set<md.EntitySet> entitySets
+        )
         {
             Initialize(); // initialize the ITree
 
@@ -284,17 +309,21 @@ namespace System.Data.Query.PlanCompiler
 
             //
             // We always need the pre-processor and the codegen phases.
-            // It is generally a good thing to run through the transformation rules, and 
+            // It is generally a good thing to run through the transformation rules, and
             // the projection pruning phases.
             // The "optional" phases are AggregatePushdown, Normalization, NTE, NestPullup and JoinElimination
             //
-            m_neededPhases = (1 << (int)PlanCompilerPhase.PreProcessor) |
+            m_neededPhases =
+                (1 << (int)PlanCompilerPhase.PreProcessor)
+                |
                 // (1 << (int)PlanCompilerPhase.AggregatePushdown) |
                 // (1 << (int)PlanCompilerPhase.Normalization) |
                 // (1 << (int)PlanCompilerPhase.NTE) |
-                (1 << (int)PlanCompilerPhase.ProjectionPruning) |
+                (1 << (int)PlanCompilerPhase.ProjectionPruning)
+                |
                 // (1 << (int)PlanCompilerPhase.NestPullup) |
-                (1 << (int)PlanCompilerPhase.Transformations) |
+                (1 << (int)PlanCompilerPhase.Transformations)
+                |
                 // (1 << (int)PlanCompilerPhase.JoinElimination) |
                 (1 << (int)PlanCompilerPhase.CodeGen);
 
@@ -346,13 +375,19 @@ namespace System.Data.Query.PlanCompiler
             // Run transformations on the tree
             if (IsPhaseNeeded(PlanCompilerPhase.Transformations))
             {
-                bool projectionPrunningNeeded = ApplyTransformations(ref beforeTransformationRules1, TransformationRulesGroup.All);
+                bool projectionPrunningNeeded = ApplyTransformations(
+                    ref beforeTransformationRules1,
+                    TransformationRulesGroup.All
+                );
 
                 if (projectionPrunningNeeded)
                 {
                     beforeProjectionPruning3 = SwitchToPhase(PlanCompilerPhase.ProjectionPruning);
                     ProjectionPruner.Process(this);
-                    ApplyTransformations(ref beforeTransformationRules2, TransformationRulesGroup.Project);
+                    ApplyTransformations(
+                        ref beforeTransformationRules2,
+                        TransformationRulesGroup.Project
+                    );
                 }
             }
 
@@ -363,12 +398,18 @@ namespace System.Data.Query.PlanCompiler
                 bool modified = JoinElimination.Process(this);
                 if (modified)
                 {
-                    ApplyTransformations(ref beforeTransformationRules3, TransformationRulesGroup.PostJoinElimination);
+                    ApplyTransformations(
+                        ref beforeTransformationRules3,
+                        TransformationRulesGroup.PostJoinElimination
+                    );
                     beforeJoinElimination2 = SwitchToPhase(PlanCompilerPhase.JoinElimination);
                     modified = JoinElimination.Process(this);
                     if (modified)
                     {
-                        ApplyTransformations(ref beforeTransformationRules4, TransformationRulesGroup.PostJoinElimination);
+                        ApplyTransformations(
+                            ref beforeTransformationRules4,
+                            TransformationRulesGroup.PostJoinElimination
+                        );
                     }
                 }
             }
@@ -405,7 +446,10 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="dumpString"></param>
         /// <param name="rulesGroup"></param>
         /// <returns></returns>
-        private bool ApplyTransformations(ref string dumpString, TransformationRulesGroup rulesGroup)
+        private bool ApplyTransformations(
+            ref string dumpString,
+            TransformationRulesGroup rulesGroup
+        )
         {
             if (MayApplyTransformationRules)
             {
@@ -442,12 +486,12 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// To avoid processing huge trees, transformation rules are applied only if the number of nodes 
+        /// To avoid processing huge trees, transformation rules are applied only if the number of nodes
         /// is less than MaxNodeCountForTransformations
         /// or if it is specified that they should be applied regardless of the size of the query.
-        /// Whether to apply transformations is only computed the first time this property is requested, 
-        /// and is cached afterwards. This is because we don't expect the tree to get larger 
-        /// from applying transformations. 
+        /// Whether to apply transformations is only computed the first time this property is requested,
+        /// and is cached afterwards. This is because we don't expect the tree to get larger
+        /// from applying transformations.
         /// </summary>
         private bool MayApplyTransformationRules
         {
@@ -462,19 +506,22 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Compute whether transformations may be applied. 
-        /// Transformation rules may be applied only if the number of nodes is less than 
-        /// MaxNodeCountForTransformations or if it is specified that they should be applied 
+        /// Compute whether transformations may be applied.
+        /// Transformation rules may be applied only if the number of nodes is less than
+        /// MaxNodeCountForTransformations or if it is specified that they should be applied
         /// regardless of the size of the query.
         /// </summary>
         /// <returns></returns>
         private bool ComputeMayApplyTransformations()
         {
             //
-            // If the nextNodeId is less than MaxNodeCountForTransformations then we don't need to 
+            // If the nextNodeId is less than MaxNodeCountForTransformations then we don't need to
             // calculate the acutal node count, it must be less than  MaxNodeCountForTransformations
             //
-            if (_applyTransformationsRegardlessOfSize.Enabled || this.m_command.NextNodeId < MaxNodeCountForTransformations)
+            if (
+                _applyTransformationsRegardlessOfSize.Enabled
+                || this.m_command.NextNodeId < MaxNodeCountForTransformations
+            )
             {
                 return true;
             }
@@ -491,16 +538,21 @@ namespace System.Data.Query.PlanCompiler
         {
             // Only support queries for now
             cqt.DbQueryCommandTree cqtree = m_ctree as cqt.DbQueryCommandTree;
-            PlanCompiler.Assert(cqtree != null, "Unexpected command tree kind. Only query command tree is supported.");
+            PlanCompiler.Assert(
+                cqtree != null,
+                "Unexpected command tree kind. Only query command tree is supported."
+            );
 
             // Generate the ITree
             m_command = ITreeGenerator.Generate(cqtree);
-            PlanCompiler.Assert(m_command != null, "Unable to generate internal tree from Command Tree");
+            PlanCompiler.Assert(
+                m_command != null,
+                "Unable to generate internal tree from Command Tree"
+            );
         }
 
         #endregion
     }
-
 
     /// <summary>
     /// Enum describing which phase of plan compilation we're currently in
@@ -560,6 +612,6 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Marker
         /// </summary>
-        MaxMarker = 10
+        MaxMarker = 10,
     }
 }

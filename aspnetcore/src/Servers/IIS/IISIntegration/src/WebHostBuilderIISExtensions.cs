@@ -38,20 +38,15 @@ public static class WebHostBuilderIISExtensions
             return hostBuilder;
         }
 
-        var port =
-            hostBuilder.GetSetting(ServerPort)
+        var port = hostBuilder.GetSetting(ServerPort)
             ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{ServerPort}");
-        var path =
-            hostBuilder.GetSetting(ServerPath)
+        var path = hostBuilder.GetSetting(ServerPath)
             ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{ServerPath}");
-        var pairingToken =
-            hostBuilder.GetSetting(PairingToken)
+        var pairingToken = hostBuilder.GetSetting(PairingToken)
             ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{PairingToken}");
-        var iisAuth =
-            hostBuilder.GetSetting(IISAuth)
+        var iisAuth = hostBuilder.GetSetting(IISAuth)
             ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{IISAuth}");
-        var websocketsSupported =
-            hostBuilder.GetSetting(IISWebSockets)
+        var websocketsSupported = hostBuilder.GetSetting(IISWebSockets)
             ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{IISWebSockets}");
 
         bool isWebSocketsSupported;

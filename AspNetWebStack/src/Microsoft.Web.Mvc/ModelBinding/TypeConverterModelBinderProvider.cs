@@ -9,17 +9,26 @@ namespace Microsoft.Web.Mvc.ModelBinding
     // Returns a binder that can perform conversions using a .NET TypeConverter.
     public sealed class TypeConverterModelBinderProvider : ModelBinderProvider
     {
-        public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        public override IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName
+            );
             if (valueProviderResult == null)
             {
                 return null; // no value to convert
             }
 
-            if (!TypeDescriptor.GetConverter(bindingContext.ModelType).CanConvertFrom(typeof(string)))
+            if (
+                !TypeDescriptor
+                    .GetConverter(bindingContext.ModelType)
+                    .CanConvertFrom(typeof(string))
+            )
             {
                 return null; // this type cannot be converted
             }

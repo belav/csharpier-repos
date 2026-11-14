@@ -23,9 +23,5 @@ public class GeometryValueConverter<TGeometry> : ValueConverter<TGeometry, SqlBy
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public GeometryValueConverter(SqlServerBytesReader reader, SqlServerBytesWriter writer)
-        : base(
-            g => new SqlBytes(writer.Write(g)),
-            b => (TGeometry)reader.Read(b.Value))
-    {
-    }
+        : base(g => new SqlBytes(writer.Write(g)), b => (TGeometry)reader.Read(b.Value)) { }
 }

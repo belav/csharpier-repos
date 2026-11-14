@@ -345,7 +345,7 @@ public enum LicenseState
 {
     Active = 1,
     Suspended = 2,
-    Revoked = 3
+    Revoked = 3,
 }
 
 public interface ILogin
@@ -372,5 +372,5 @@ public enum PhoneType
 {
     Cell = 1,
     Land = 2,
-    Satellite = 3
+    Satellite = 3,
 }

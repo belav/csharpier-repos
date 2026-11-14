@@ -8,8 +8,11 @@ namespace System.IO.IsolatedStorage
 {
     public class ContainsUnknownFilesTests : IsoStorageTest
     {
-        private static MethodInfo s_containsUnknownFilesMethod
-            = typeof(IsolatedStorageFile).GetMethod("ContainsUnknownFiles", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static MethodInfo s_containsUnknownFilesMethod =
+            typeof(IsolatedStorageFile).GetMethod(
+                "ContainsUnknownFiles",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
 
         [Theory, MemberData(nameof(ValidStores))]
         public void ContainsUnknownFiles_CleanStore(PresetScopes scope)
@@ -18,7 +21,13 @@ namespace System.IO.IsolatedStorage
 
             using (var isf = GetPresetScope(scope))
             {
-                Assert.False((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { isf.GetUserRootDirectory() }));
+                Assert.False(
+                    (bool)
+                        s_containsUnknownFilesMethod.Invoke(
+                            isf,
+                            new object[] { isf.GetUserRootDirectory() }
+                        )
+                );
             }
         }
 
@@ -33,11 +42,20 @@ namespace System.IO.IsolatedStorage
                 string identityFile = Path.Combine(rootDirectory, "identity.dat");
                 string quotaFile = Path.Combine(rootDirectory, "info.dat");
                 using (File.OpenWrite(identityFile)) { }
-                Assert.False((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }), "identity ok");
+                Assert.False(
+                    (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
+                    "identity ok"
+                );
                 File.Move(identityFile, quotaFile);
-                Assert.False((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }), "quota ok");
+                Assert.False(
+                    (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
+                    "quota ok"
+                );
                 using (File.OpenWrite(identityFile)) { }
-                Assert.False((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }), "both ok");
+                Assert.False(
+                    (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
+                    "both ok"
+                );
             }
         }
 
@@ -53,18 +71,36 @@ namespace System.IO.IsolatedStorage
                 string identityFile = Path.Combine(rootDirectory, "identity.dat");
                 string quotaFile = Path.Combine(rootDirectory, "info.dat");
                 using (File.OpenWrite(otherFile)) { }
-                Assert.True((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }), "other file not ok");
+                Assert.True(
+                    (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
+                    "other file not ok"
+                );
                 using (File.OpenWrite(identityFile)) { }
-                Assert.True((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }), "other file with identity not ok");
+                Assert.True(
+                    (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
+                    "other file with identity not ok"
+                );
                 File.Move(identityFile, quotaFile);
-                Assert.True((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }), "other file with quota not ok");
+                Assert.True(
+                    (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
+                    "other file with quota not ok"
+                );
                 using (File.OpenWrite(identityFile)) { }
-                Assert.True((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }), "too many files not ok");
+                Assert.True(
+                    (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
+                    "too many files not ok"
+                );
             }
         }
 
         [Theory, MemberData(nameof(ValidStores))]
-        [SkipOnPlatform(TestPlatforms.Android | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "For mobile platforms root ends with /.isolated-storage/")]
+        [SkipOnPlatform(
+            TestPlatforms.Android
+                | TestPlatforms.iOS
+                | TestPlatforms.tvOS
+                | TestPlatforms.MacCatalyst,
+            "For mobile platforms root ends with /.isolated-storage/"
+        )]
         public void ContainsUnknownFiles_NotOkDirectory(PresetScopes scope)
         {
             TestHelper.WipeStores();
@@ -72,9 +108,15 @@ namespace System.IO.IsolatedStorage
             using (var isf = GetPresetScope(scope))
             {
                 string rootDirectory = isf.GetIdentityRootDirectory();
-                string otherDirectory = Path.Combine(rootDirectory, "ContainsUnknownFiles_NotOkDirectory");
+                string otherDirectory = Path.Combine(
+                    rootDirectory,
+                    "ContainsUnknownFiles_NotOkDirectory"
+                );
                 Directory.CreateDirectory(otherDirectory);
-                Assert.True((bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }), "other directory not ok");
+                Assert.True(
+                    (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
+                    "other directory not ok"
+                );
             }
         }
     }

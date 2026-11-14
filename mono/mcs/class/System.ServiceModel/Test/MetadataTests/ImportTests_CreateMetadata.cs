@@ -28,19 +28,19 @@
 using System;
 using NUnit.Framework;
 
-namespace MonoTests.System.ServiceModel.MetadataTests {
-
-	/*
-	 * Create the metadata programmatically.
-	 * 
-	 */
-	[TestFixture]
-	public class ImportTests_CreateMetadata : ImportTests {
-		
-		public override TestContext Context {
-			get { return TestContext.CreateMetadataContext; }
-		}
-
-	}
+namespace MonoTests.System.ServiceModel.MetadataTests
+{
+    /*
+     * Create the metadata programmatically.
+     *
+     */
+    [TestFixture]
+    public class ImportTests_CreateMetadata : ImportTests
+    {
+        public override TestContext Context
+        {
+            get { return TestContext.CreateMetadataContext; }
+        }
+    }
 }
 #endif

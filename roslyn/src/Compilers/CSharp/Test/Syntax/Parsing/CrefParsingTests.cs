@@ -4,11 +4,11 @@
 
 #nullable disable
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System;
-using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class CrefParsingTests : ParsingTests
     {
-        public CrefParsingTests(ITestOutputHelper output) : base(output) { }
+        public CrefParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
@@ -26,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options)
         {
             var commentText = string.Format(@"/// <see cref=""{0}""/>", text);
-            var trivia = SyntaxFactory.ParseLeadingTrivia(commentText, options ?? CSharpParseOptions.Default).Single();
+            var trivia = SyntaxFactory
+                .ParseLeadingTrivia(commentText, options ?? CSharpParseOptions.Default)
+                .Single();
             var structure = (DocumentationCommentTriviaSyntax)trivia.GetStructure();
             var attr = structure.DescendantNodes().OfType<XmlCrefAttributeSyntax>().Single();
             return attr.Cref;
@@ -347,7 +350,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void UnqualifiedUnsignedRightShift_01()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.Regular11 })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.Regular11,
+                }
+            )
             {
                 UsingNode("operator >>>", options);
 
@@ -362,7 +372,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void UnqualifiedUnsignedRightShift_02()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.Regular11 })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.Regular11,
+                }
+            )
             {
                 UsingNode("operator > >>", options);
 
@@ -378,7 +395,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void UnqualifiedUnsignedRightShift_03()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.Regular11 })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.Regular11,
+                }
+            )
             {
                 UsingNode("operator >> >", options);
 
@@ -394,7 +418,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void UnqualifiedUnsignedRightShift_04()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.Regular11 })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.Regular11,
+                }
+            )
             {
                 UsingNode("operator >>>=", options);
 
@@ -435,13 +466,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(60394, "https://github.com/dotnet/roslyn/issues/60394")]
         public void UnqualifiedOperatorMember1_Unchecked()
         {
-            UsingNode("operator unchecked +", TestOptions.RegularWithDocumentationComments,
+            UsingNode(
+                "operator unchecked +",
+                TestOptions.RegularWithDocumentationComments,
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator unchecked +'
                 // /// <see cref="operator unchecked +"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator unchecked +").WithArguments("operator unchecked +").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator unchecked +")
+                    .WithArguments("operator unchecked +")
+                    .WithLocation(1, 16),
                 // (1,25): warning CS1658: Unexpected keyword 'unchecked'. See also error CS9027.
                 // /// <see cref="operator unchecked +"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked").WithArguments("Unexpected keyword 'unchecked'", "9027").WithLocation(1, 25));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked")
+                    .WithArguments("Unexpected keyword 'unchecked'", "9027")
+                    .WithLocation(1, 25)
+            );
 
             N(SyntaxKind.OperatorMemberCref);
             {
@@ -503,13 +541,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(60394, "https://github.com/dotnet/roslyn/issues/60394")]
         public void UnqualifiedOperatorMember2_Unchecked()
         {
-            UsingNode("operator unchecked +(A)", TestOptions.RegularWithDocumentationComments,
+            UsingNode(
+                "operator unchecked +(A)",
+                TestOptions.RegularWithDocumentationComments,
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator unchecked +(A)'
                 // /// <see cref="operator unchecked +(A)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator unchecked +(A)").WithArguments("operator unchecked +(A)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator unchecked +(A)")
+                    .WithArguments("operator unchecked +(A)")
+                    .WithLocation(1, 16),
                 // (1,25): warning CS1658: Unexpected keyword 'unchecked'. See also error CS9027.
                 // /// <see cref="operator unchecked +(A)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked").WithArguments("Unexpected keyword 'unchecked'", "9027").WithLocation(1, 25));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked")
+                    .WithArguments("Unexpected keyword 'unchecked'", "9027")
+                    .WithLocation(1, 25)
+            );
 
             N(SyntaxKind.OperatorMemberCref);
             {
@@ -579,14 +624,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(60394, "https://github.com/dotnet/roslyn/issues/60394")]
         public void QualifiedOperatorMember1_Unchecked()
         {
-            UsingNode("T.operator unchecked +", TestOptions.RegularWithDocumentationComments,
+            UsingNode(
+                "T.operator unchecked +",
+                TestOptions.RegularWithDocumentationComments,
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'T.operator unchecked +'
                 // /// <see cref="T.operator unchecked +"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "T.operator unchecked +").WithArguments("T.operator unchecked +").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "T.operator unchecked +")
+                    .WithArguments("T.operator unchecked +")
+                    .WithLocation(1, 16),
                 // (1,27): warning CS1658: Unexpected keyword 'unchecked'. See also error CS9027.
                 // /// <see cref="T.operator unchecked +"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked").WithArguments("Unexpected keyword 'unchecked'", "9027").WithLocation(1, 27)
-                );
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked")
+                    .WithArguments("Unexpected keyword 'unchecked'", "9027")
+                    .WithLocation(1, 27)
+            );
 
             N(SyntaxKind.QualifiedCref);
             {
@@ -764,14 +815,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(60394, "https://github.com/dotnet/roslyn/issues/60394")]
         public void GreaterThanGreaterThan_Unchecked()
         {
-            UsingNode("operator unchecked }}(A{A{T}})", TestOptions.RegularWithDocumentationComments,
+            UsingNode(
+                "operator unchecked }}(A{A{T}})",
+                TestOptions.RegularWithDocumentationComments,
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator unchecked }}(A{A{T}})'
                 // /// <see cref="operator unchecked }}(A{A{T}})"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator unchecked }}(A{A{T}})").WithArguments("operator unchecked }}(A{A{T}})").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator unchecked }}(A{A{T}})")
+                    .WithArguments("operator unchecked }}(A{A{T}})")
+                    .WithLocation(1, 16),
                 // (1,25): warning CS1658: Unexpected keyword 'unchecked'. See also error CS9027.
                 // /// <see cref="operator unchecked }}(A{A{T}})"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked").WithArguments("Unexpected keyword 'unchecked'", "9027").WithLocation(1, 25)
-                );
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked")
+                    .WithArguments("Unexpected keyword 'unchecked'", "9027")
+                    .WithLocation(1, 25)
+            );
 
             N(SyntaxKind.OperatorMemberCref);
             {
@@ -899,14 +956,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(60394, "https://github.com/dotnet/roslyn/issues/60394")]
         public void UnqualifiedConversionOperatorMember1_Unchecked()
         {
-            UsingNode("implicit operator unchecked A", TestOptions.RegularWithDocumentationComments,
+            UsingNode(
+                "implicit operator unchecked A",
+                TestOptions.RegularWithDocumentationComments,
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'implicit operator unchecked A'
                 // /// <see cref="implicit operator unchecked A"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "implicit operator unchecked A").WithArguments("implicit operator unchecked A").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "implicit operator unchecked A")
+                    .WithArguments("implicit operator unchecked A")
+                    .WithLocation(1, 16),
                 // (1,34): warning CS1658: Unexpected keyword 'unchecked'. See also error CS9027.
                 // /// <see cref="implicit operator unchecked A"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked").WithArguments("Unexpected keyword 'unchecked'", "9027").WithLocation(1, 34)
-                );
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked")
+                    .WithArguments("Unexpected keyword 'unchecked'", "9027")
+                    .WithLocation(1, 34)
+            );
 
             N(SyntaxKind.ConversionOperatorMemberCref);
             {
@@ -980,14 +1043,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(60394, "https://github.com/dotnet/roslyn/issues/60394")]
         public void UnqualifiedConversionOperatorMember2_Unchecked()
         {
-            UsingNode("explicit operator unchecked A(B)", TestOptions.RegularWithDocumentationComments,
+            UsingNode(
+                "explicit operator unchecked A(B)",
+                TestOptions.RegularWithDocumentationComments,
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'explicit operator unchecked A(B)'
                 // /// <see cref="explicit operator unchecked A(B)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "explicit operator unchecked A(B)").WithArguments("explicit operator unchecked A(B)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "explicit operator unchecked A(B)")
+                    .WithArguments("explicit operator unchecked A(B)")
+                    .WithLocation(1, 16),
                 // (1,34): warning CS1658: Unexpected keyword 'unchecked'. See also error CS9027.
                 // /// <see cref="explicit operator unchecked A(B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked").WithArguments("Unexpected keyword 'unchecked'", "9027").WithLocation(1, 34)
-                );
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked")
+                    .WithArguments("Unexpected keyword 'unchecked'", "9027")
+                    .WithLocation(1, 34)
+            );
 
             N(SyntaxKind.ConversionOperatorMemberCref);
             {
@@ -1068,14 +1137,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(60394, "https://github.com/dotnet/roslyn/issues/60394")]
         public void QualifiedConversionOperatorMember1_Unchecked()
         {
-            UsingNode("T.implicit operator unchecked A", TestOptions.RegularWithDocumentationComments,
+            UsingNode(
+                "T.implicit operator unchecked A",
+                TestOptions.RegularWithDocumentationComments,
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'T.implicit operator unchecked A'
                 // /// <see cref="T.implicit operator unchecked A"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "T.implicit operator unchecked A").WithArguments("T.implicit operator unchecked A").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "T.implicit operator unchecked A")
+                    .WithArguments("T.implicit operator unchecked A")
+                    .WithLocation(1, 16),
                 // (1,36): warning CS1658: Unexpected keyword 'unchecked'. See also error CS9027.
                 // /// <see cref="T.implicit operator unchecked A"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked").WithArguments("Unexpected keyword 'unchecked'", "9027").WithLocation(1, 36)
-                );
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked")
+                    .WithArguments("Unexpected keyword 'unchecked'", "9027")
+                    .WithLocation(1, 36)
+            );
 
             N(SyntaxKind.QualifiedCref);
             {
@@ -1172,14 +1247,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(60394, "https://github.com/dotnet/roslyn/issues/60394")]
         public void QualifiedConversionOperatorMember2_Unchecked()
         {
-            UsingNode("T.explicit operator unchecked A(B)", TestOptions.RegularWithDocumentationComments,
+            UsingNode(
+                "T.explicit operator unchecked A(B)",
+                TestOptions.RegularWithDocumentationComments,
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'T.explicit operator unchecked A(B)'
                 // /// <see cref="T.explicit operator unchecked A(B)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "T.explicit operator unchecked A(B)").WithArguments("T.explicit operator unchecked A(B)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "T.explicit operator unchecked A(B)")
+                    .WithArguments("T.explicit operator unchecked A(B)")
+                    .WithLocation(1, 16),
                 // (1,36): warning CS1658: Unexpected keyword 'unchecked'. See also error CS9027.
                 // /// <see cref="T.explicit operator unchecked A(B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked").WithArguments("Unexpected keyword 'unchecked'", "9027").WithLocation(1, 36)
-                );
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "unchecked")
+                    .WithArguments("Unexpected keyword 'unchecked'", "9027")
+                    .WithLocation(1, 36)
+            );
 
             N(SyntaxKind.QualifiedCref);
             {
@@ -1464,15 +1545,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         [Theory, CombinatorialData]
         public void ParameterRefReadonly_05(
-            [CombinatorialValues(LanguageVersion.CSharp11, LanguageVersion.CSharp12, LanguageVersion.Preview)] LanguageVersion languageVersion)
+            [CombinatorialValues(
+                LanguageVersion.CSharp11,
+                LanguageVersion.CSharp12,
+                LanguageVersion.Preview
+            )]
+                LanguageVersion languageVersion
+        )
         {
-            UsingNode("A(readonly ref B)", TestOptions.Regular.WithLanguageVersion(languageVersion).WithDocumentationMode(DocumentationMode.Diagnose),
+            UsingNode(
+                "A(readonly ref B)",
+                TestOptions
+                    .Regular.WithLanguageVersion(languageVersion)
+                    .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(readonly ref B)'
                 // /// <see cref="A(readonly ref B)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(").WithArguments("A(readonly ref B)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(")
+                    .WithArguments("A(readonly ref B)")
+                    .WithLocation(1, 16),
                 // (1,18): warning CS1658: ) expected. See also error CS1026.
                 // /// <see cref="A(readonly ref B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly").WithArguments(") expected", "1026").WithLocation(1, 18));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
+                    .WithArguments(") expected", "1026")
+                    .WithLocation(1, 18)
+            );
 
             N(SyntaxKind.NameMemberCref);
             {
@@ -1491,15 +1587,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         [Theory, CombinatorialData]
         public void ParameterRefReadonly_06(
-            [CombinatorialValues(LanguageVersion.CSharp11, LanguageVersion.CSharp12, LanguageVersion.Preview)] LanguageVersion languageVersion)
+            [CombinatorialValues(
+                LanguageVersion.CSharp11,
+                LanguageVersion.CSharp12,
+                LanguageVersion.Preview
+            )]
+                LanguageVersion languageVersion
+        )
         {
-            UsingNode("A(readonly B)", TestOptions.Regular.WithLanguageVersion(languageVersion).WithDocumentationMode(DocumentationMode.Diagnose),
+            UsingNode(
+                "A(readonly B)",
+                TestOptions
+                    .Regular.WithLanguageVersion(languageVersion)
+                    .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(readonly B)'
                 // /// <see cref="A(readonly B)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(").WithArguments("A(readonly B)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(")
+                    .WithArguments("A(readonly B)")
+                    .WithLocation(1, 16),
                 // (1,18): warning CS1658: ) expected. See also error CS1026.
                 // /// <see cref="A(readonly B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly").WithArguments(") expected", "1026").WithLocation(1, 18));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
+                    .WithArguments(") expected", "1026")
+                    .WithLocation(1, 18)
+            );
 
             N(SyntaxKind.NameMemberCref);
             {
@@ -1518,15 +1629,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         [Theory, CombinatorialData]
         public void ParameterRefReadonly_07(
-            [CombinatorialValues(LanguageVersion.CSharp11, LanguageVersion.CSharp12, LanguageVersion.Preview)] LanguageVersion languageVersion)
+            [CombinatorialValues(
+                LanguageVersion.CSharp11,
+                LanguageVersion.CSharp12,
+                LanguageVersion.Preview
+            )]
+                LanguageVersion languageVersion
+        )
         {
-            UsingNode("A(in readonly B)", TestOptions.Regular.WithLanguageVersion(languageVersion).WithDocumentationMode(DocumentationMode.Diagnose),
+            UsingNode(
+                "A(in readonly B)",
+                TestOptions
+                    .Regular.WithLanguageVersion(languageVersion)
+                    .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(in readonly B)'
                 // /// <see cref="A(in readonly B)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(in readonly B)").WithArguments("A(in readonly B)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(in readonly B)")
+                    .WithArguments("A(in readonly B)")
+                    .WithLocation(1, 16),
                 // (1,21): warning CS1658: 'readonly' modifier must be specified after 'ref'.. See also error CS9190.
                 // /// <see cref="A(in readonly B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly").WithArguments("'readonly' modifier must be specified after 'ref'.", "9190").WithLocation(1, 21));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
+                    .WithArguments("'readonly' modifier must be specified after 'ref'.", "9190")
+                    .WithLocation(1, 21)
+            );
 
             N(SyntaxKind.NameMemberCref);
             {
@@ -1553,15 +1679,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         [Theory, CombinatorialData]
         public void ParameterRefReadonly_08(
-            [CombinatorialValues(LanguageVersion.CSharp11, LanguageVersion.CSharp12, LanguageVersion.Preview)] LanguageVersion languageVersion)
+            [CombinatorialValues(
+                LanguageVersion.CSharp11,
+                LanguageVersion.CSharp12,
+                LanguageVersion.Preview
+            )]
+                LanguageVersion languageVersion
+        )
         {
-            UsingNode("A(out readonly B)", TestOptions.Regular.WithLanguageVersion(languageVersion).WithDocumentationMode(DocumentationMode.Diagnose),
+            UsingNode(
+                "A(out readonly B)",
+                TestOptions
+                    .Regular.WithLanguageVersion(languageVersion)
+                    .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(out readonly B)'
                 // /// <see cref="A(out readonly B)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(out readonly B)").WithArguments("A(out readonly B)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(out readonly B)")
+                    .WithArguments("A(out readonly B)")
+                    .WithLocation(1, 16),
                 // (1,22): warning CS1658: 'readonly' modifier must be specified after 'ref'.. See also error CS9190.
                 // /// <see cref="A(out readonly B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly").WithArguments("'readonly' modifier must be specified after 'ref'.", "9190").WithLocation(1, 22));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
+                    .WithArguments("'readonly' modifier must be specified after 'ref'.", "9190")
+                    .WithLocation(1, 22)
+            );
 
             N(SyntaxKind.NameMemberCref);
             {
@@ -1588,18 +1729,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         [Theory, CombinatorialData]
         public void ParameterRefReadonly_09(
-            [CombinatorialValues(LanguageVersion.CSharp11, LanguageVersion.CSharp12, LanguageVersion.Preview)] LanguageVersion languageVersion)
+            [CombinatorialValues(
+                LanguageVersion.CSharp11,
+                LanguageVersion.CSharp12,
+                LanguageVersion.Preview
+            )]
+                LanguageVersion languageVersion
+        )
         {
-            UsingNode("A(ref readonly readonly B)", TestOptions.Regular.WithLanguageVersion(languageVersion).WithDocumentationMode(DocumentationMode.Diagnose),
+            UsingNode(
+                "A(ref readonly readonly B)",
+                TestOptions
+                    .Regular.WithLanguageVersion(languageVersion)
+                    .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(ref readonly readonly B)'
                 // /// <see cref="A(ref readonly readonly B)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(ref readonly").WithArguments("A(ref readonly readonly B)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(ref readonly")
+                    .WithArguments("A(ref readonly readonly B)")
+                    .WithLocation(1, 16),
                 // (1,31): warning CS1658: Identifier expected; 'readonly' is a keyword. See also error CS1041.
                 // /// <see cref="A(ref readonly readonly B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly").WithArguments("Identifier expected; 'readonly' is a keyword", "1041").WithLocation(1, 31),
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
+                    .WithArguments("Identifier expected; 'readonly' is a keyword", "1041")
+                    .WithLocation(1, 31),
                 // (1,31): warning CS1658: ) expected. See also error CS1026.
                 // /// <see cref="A(ref readonly readonly B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly").WithArguments(") expected", "1026").WithLocation(1, 31));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
+                    .WithArguments(") expected", "1026")
+                    .WithLocation(1, 31)
+            );
 
             N(SyntaxKind.NameMemberCref);
             {
@@ -1627,15 +1785,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         [Theory, CombinatorialData]
         public void ParameterRefReadonly_10(
-            [CombinatorialValues(LanguageVersion.CSharp11, LanguageVersion.CSharp12, LanguageVersion.Preview)] LanguageVersion languageVersion)
+            [CombinatorialValues(
+                LanguageVersion.CSharp11,
+                LanguageVersion.CSharp12,
+                LanguageVersion.Preview
+            )]
+                LanguageVersion languageVersion
+        )
         {
-            UsingNode("A(readonly ref B)", TestOptions.Regular.WithLanguageVersion(languageVersion).WithDocumentationMode(DocumentationMode.Diagnose),
+            UsingNode(
+                "A(readonly ref B)",
+                TestOptions
+                    .Regular.WithLanguageVersion(languageVersion)
+                    .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(readonly ref B)'
                 // /// <see cref="A(readonly ref B)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(").WithArguments("A(readonly ref B)").WithLocation(1, 16),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A(")
+                    .WithArguments("A(readonly ref B)")
+                    .WithLocation(1, 16),
                 // (1,18): warning CS1658: ) expected. See also error CS1026.
                 // /// <see cref="A(readonly ref B)"/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly").WithArguments(") expected", "1026").WithLocation(1, 18));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
+                    .WithArguments(") expected", "1026")
+                    .WithLocation(1, 18)
+            );
 
             N(SyntaxKind.NameMemberCref);
             {
@@ -2180,7 +2353,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void Qualified1()
         {
-            // NOTE: since int.A won't fit into a TypeSyntax, it is represented as 
+            // NOTE: since int.A won't fit into a TypeSyntax, it is represented as
             // a qualified cref member instead.
             UsingNode("int.A");
 

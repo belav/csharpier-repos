@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Virtual dispatch based on a symbol's particular class. 
+    /// Virtual dispatch based on a symbol's particular class.
     /// </summary>
     /// <typeparam name="TArgument">Additional argument type</typeparam>
     /// <typeparam name="TResult">Result type</typeparam>
@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// The default Visit method called when visiting any <see cref="Symbol" /> and 
+        /// The default Visit method called when visiting any <see cref="Symbol" /> and
         /// if visiting specific symbol method VisitXXX is not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Called when visiting an <see cref="AssemblySymbol" />; Override this method with
         /// specific implementation; Calling default <see cref="DefaultVisit" /> if it's not
-        /// overridden 
+        /// overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="ModuleSymbol" />; Override this method with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -74,7 +74,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// cref="NamespaceOrTypeSymbol.GetMembers()" />
         /// and loop over each member; calling <see cref="Visit" /> on it Or override this with
         /// specific implementation; Calling <see cref="DefaultVisit" /> if it's not
-        /// overridden 
+        /// overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="NamedTypeSymbol" />; Override this with specific
-        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting an <see cref="ArrayTypeSymbol" />; Override this with specific
-        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="PointerTypeSymbol" />; Override this with specific
-        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -127,15 +127,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
         /// <returns></returns>
-        public virtual TResult VisitFunctionPointerType(FunctionPointerTypeSymbol symbol, TArgument argument)
+        public virtual TResult VisitFunctionPointerType(
+            FunctionPointerTypeSymbol symbol,
+            TArgument argument
+        )
         {
             return DefaultVisit(symbol, argument);
         }
 
         /// <summary>
-        /// Called when visiting an <see cref="ErrorTypeSymbol" /> 
+        /// Called when visiting an <see cref="ErrorTypeSymbol" />
         /// Error symbol is created when there is compiler error; Override this with specific
-        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -147,7 +150,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="TypeParameterSymbol" />; Override this with specific
-        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -159,7 +162,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="DynamicTypeSymbol" />; Override this with specific
-        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -171,7 +174,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="DiscardSymbol" />; Override this with specific
-        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -183,7 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="MethodSymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -195,7 +198,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="FieldSymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -207,7 +210,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="PropertySymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -219,7 +222,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting an <see cref="EventSymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -231,7 +234,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="ParameterSymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -243,7 +246,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="LocalSymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -255,7 +258,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="LabelSymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -267,7 +270,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting an <see cref="AliasSymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
@@ -279,7 +282,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called when visiting a <see cref="RangeVariableSymbol" />; Override this with specific
-        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden 
+        /// implementation; Calling default <see cref="DefaultVisit" /> if it's not overridden
         /// </summary>
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>

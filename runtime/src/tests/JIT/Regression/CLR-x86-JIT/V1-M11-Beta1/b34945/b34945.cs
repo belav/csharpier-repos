@@ -3,9 +3,9 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
-
     using System;
 
     public struct X0
@@ -162,7 +162,6 @@ namespace DefaultNamespace
 
     public class Foo
     {
-
         public static int Read(ref int x)
         {
             return x;

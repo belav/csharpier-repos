@@ -6,9 +6,9 @@ namespace System.IdentityModel.Selectors
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Runtime.InteropServices;
     using System.Text;
     using System.Xml;
-    using System.Runtime.InteropServices;
 
     //
     // Summary:
@@ -19,14 +19,19 @@ namespace System.IdentityModel.Selectors
     {
         [MarshalAs(UnmanagedType.LPWStr)]
         public String targetEndpointAddress;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public String issuerEndpointAddress;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public String issuedTokenParameters;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public String policyNoticeLink;
+
         [MarshalAs(UnmanagedType.U4)]
         public int policyNoticeVersion;
+
         [MarshalAs(UnmanagedType.Bool)]
         public bool isManagedCardProvider;
     }

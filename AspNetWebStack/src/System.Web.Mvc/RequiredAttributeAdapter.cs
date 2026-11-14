@@ -8,10 +8,12 @@ namespace System.Web.Mvc
 {
     public class RequiredAttributeAdapter : DataAnnotationsModelValidator<RequiredAttribute>
     {
-        public RequiredAttributeAdapter(ModelMetadata metadata, ControllerContext context, RequiredAttribute attribute)
-            : base(metadata, context, attribute)
-        {
-        }
+        public RequiredAttributeAdapter(
+            ModelMetadata metadata,
+            ControllerContext context,
+            RequiredAttribute attribute
+        )
+            : base(metadata, context, attribute) { }
 
         public override IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {

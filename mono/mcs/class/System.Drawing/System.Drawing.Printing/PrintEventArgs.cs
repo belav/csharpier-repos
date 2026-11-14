@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,33 +30,34 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+
 //NOTE: Complete! Aparently just a redifiniton of CancleEventArgs specific to Printing.
 namespace System.Drawing.Printing
 {
-	/// <summary>
-	/// Summary description for PrintEventArgs.
-	/// </summary>
-	public class PrintEventArgs : System.ComponentModel.CancelEventArgs
-	{
-		private GraphicsPrinter graphics_context;
-		private PrintAction action;
-		
-		public PrintEventArgs()
-		{
-		}
+    /// <summary>
+    /// Summary description for PrintEventArgs.
+    /// </summary>
+    public class PrintEventArgs : System.ComponentModel.CancelEventArgs
+    {
+        private GraphicsPrinter graphics_context;
+        private PrintAction action;
 
-		internal PrintEventArgs (PrintAction action)
-		{
-			this.action = action;
-		}
+        public PrintEventArgs() { }
 
-		public PrintAction PrintAction {
-			get { return action; }
-		}
+        internal PrintEventArgs(PrintAction action)
+        {
+            this.action = action;
+        }
 
-		internal GraphicsPrinter GraphicsContext {
-			get { return graphics_context; }
-			set { graphics_context = value; }
-		}
-	}
+        public PrintAction PrintAction
+        {
+            get { return action; }
+        }
+
+        internal GraphicsPrinter GraphicsContext
+        {
+            get { return graphics_context; }
+            set { graphics_context = value; }
+        }
+    }
 }

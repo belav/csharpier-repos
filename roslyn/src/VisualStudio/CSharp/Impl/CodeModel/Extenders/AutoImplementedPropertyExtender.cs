@@ -22,8 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.Extenders
 
         private readonly bool _isAutoImplemented;
 
-        private AutoImplementedPropertyExtender(bool isAutoImplemented)
-            => _isAutoImplemented = isAutoImplemented;
+        private AutoImplementedPropertyExtender(bool isAutoImplemented) =>
+            _isAutoImplemented = isAutoImplemented;
 
         public bool IsAutoImplemented
         {

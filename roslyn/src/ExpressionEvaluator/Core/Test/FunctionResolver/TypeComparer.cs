@@ -31,32 +31,32 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             switch (x.Kind)
             {
                 case TypeSignatureKind.QualifiedType:
-                    {
-                        var xQualified = (QualifiedTypeSignature)x;
-                        var yQualified = (QualifiedTypeSignature)y;
-                        return Equals(xQualified.Qualifier, yQualified.Qualifier) &&
-                            Equals(xQualified.Name, yQualified.Name);
-                    }
+                {
+                    var xQualified = (QualifiedTypeSignature)x;
+                    var yQualified = (QualifiedTypeSignature)y;
+                    return Equals(xQualified.Qualifier, yQualified.Qualifier)
+                        && Equals(xQualified.Name, yQualified.Name);
+                }
                 case TypeSignatureKind.GenericType:
-                    {
-                        var xGeneric = (GenericTypeSignature)x;
-                        var yGeneric = (GenericTypeSignature)y;
-                        return Equals(xGeneric.QualifiedName, yGeneric.QualifiedName) &&
-                            xGeneric.TypeArguments.SequenceEqual(yGeneric.TypeArguments, this);
-                    }
+                {
+                    var xGeneric = (GenericTypeSignature)x;
+                    var yGeneric = (GenericTypeSignature)y;
+                    return Equals(xGeneric.QualifiedName, yGeneric.QualifiedName)
+                        && xGeneric.TypeArguments.SequenceEqual(yGeneric.TypeArguments, this);
+                }
                 case TypeSignatureKind.ArrayType:
-                    {
-                        var xArray = (ArrayTypeSignature)x;
-                        var yArray = (ArrayTypeSignature)y;
-                        return Equals(xArray.ElementType, yArray.ElementType) &&
-                            xArray.Rank == yArray.Rank;
-                    }
+                {
+                    var xArray = (ArrayTypeSignature)x;
+                    var yArray = (ArrayTypeSignature)y;
+                    return Equals(xArray.ElementType, yArray.ElementType)
+                        && xArray.Rank == yArray.Rank;
+                }
                 case TypeSignatureKind.PointerType:
-                    {
-                        var xPointer = (PointerTypeSignature)x;
-                        var yPointer = (PointerTypeSignature)y;
-                        return Equals(xPointer.PointedAtType, yPointer.PointedAtType);
-                    }
+                {
+                    var xPointer = (PointerTypeSignature)x;
+                    var yPointer = (PointerTypeSignature)y;
+                    return Equals(xPointer.PointedAtType, yPointer.PointedAtType);
+                }
                 default:
                     throw new NotImplementedException();
             }

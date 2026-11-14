@@ -19,7 +19,6 @@ using System.Runtime.CompilerServices;
 using Xunit;
 
 public class DevDiv_543057
-
 {
     public const int Pass = 100;
     public const int Fail = -1;
@@ -29,6 +28,7 @@ public class DevDiv_543057
     {
         return (float)i;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int test(int i, int j)
     {
@@ -48,7 +48,7 @@ public class DevDiv_543057
         {
             // Here all our floats are in registers. z is going to be redefined, so it is inactive,
             // and w is not used except in the else clause so it is also inactive.
-            z = (float) Math.Ceiling(((double)i) / ((double)j));
+            z = (float)Math.Ceiling(((double)i) / ((double)j));
             // Now we use x and y so that they are live across the call to Math.Ceiling.
             result = z + y + w;
         }
@@ -66,10 +66,10 @@ public class DevDiv_543057
         Console.WriteLine("Result: " + result);
         return Pass;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {
         return test(5, 6);
     }
 }
-

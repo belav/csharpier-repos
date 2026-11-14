@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Runtime.InteropServices;
+using Xunit;
 
 namespace System.MemoryTests
 {
@@ -15,7 +15,9 @@ namespace System.MemoryTests
             ReadOnlyMemory<char> m = input.AsMemory();
             Assert.False(m.IsEmpty);
 
-            Assert.True(MemoryMarshal.TryGetString(m, out string text, out int start, out int length));
+            Assert.True(
+                MemoryMarshal.TryGetString(m, out string text, out int start, out int length)
+            );
             Assert.Same(input, text);
             Assert.Equal(0, start);
             Assert.Equal(input.Length, length);
@@ -63,7 +65,9 @@ namespace System.MemoryTests
         public static void Array_TryGetString_ReturnsFalse()
         {
             ReadOnlyMemory<char> m = new char[10];
-            Assert.False(MemoryMarshal.TryGetString(m, out string text, out int start, out int length));
+            Assert.False(
+                MemoryMarshal.TryGetString(m, out string text, out int start, out int length)
+            );
             Assert.Null(text);
             Assert.Equal(0, start);
             Assert.Equal(0, length);

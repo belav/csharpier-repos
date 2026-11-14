@@ -86,7 +86,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             EncodeDecode(
                 X509KeyUsageFlags.KeyAgreement | X509KeyUsageFlags.DecipherOnly,
                 false,
-                "0303070880".HexToByteArray());
+                "0303070880".HexToByteArray()
+            );
         }
 
         [Fact]
@@ -95,17 +96,25 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             // Extensions encoded inside PKCS#8 on Windows may use BER encoding that would be invalid DER.
             // Ensure that no exception is thrown and the value is decoded correctly.
             X509KeyUsageExtension ext;
-            ext = new X509KeyUsageExtension(new AsnEncodedData("230403020080".HexToByteArray()), false);
+            ext = new X509KeyUsageExtension(
+                new AsnEncodedData("230403020080".HexToByteArray()),
+                false
+            );
             Assert.Equal(X509KeyUsageFlags.DigitalSignature, ext.KeyUsages);
-            ext = new X509KeyUsageExtension(new AsnEncodedData("038200020080".HexToByteArray()), false);
+            ext = new X509KeyUsageExtension(
+                new AsnEncodedData("038200020080".HexToByteArray()),
+                false
+            );
             Assert.Equal(X509KeyUsageFlags.DigitalSignature, ext.KeyUsages);
         }
 
         [Fact]
         public static void DecodeEmptyArray()
         {
-            X509KeyUsageExtension keyUsageExtension =
-                new X509KeyUsageExtension(new AsnEncodedData(Array.Empty<byte>()), false);
+            X509KeyUsageExtension keyUsageExtension = new X509KeyUsageExtension(
+                new AsnEncodedData(Array.Empty<byte>()),
+                false
+            );
 
             Assert.ThrowsAny<CryptographicException>(() => keyUsageExtension.KeyUsages);
         }

@@ -13,7 +13,8 @@ namespace Microsoft.CSharp.RuntimeBinder
     {
         public static bool IsNullableType(this Type type)
         {
-            return type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+            return type.IsConstructedGenericType
+                && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
         // This method is intended as a means to detect when MemberInfos are the same,
@@ -34,7 +35,10 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             if (mi1 is MethodInfo method1)
             {
-                if (!(mi2 is MethodInfo method2) || method1.IsGenericMethod != method2.IsGenericMethod)
+                if (
+                    !(mi2 is MethodInfo method2)
+                    || method1.IsGenericMethod != method2.IsGenericMethod
+                )
                 {
                     return false;
                 }
@@ -44,7 +48,9 @@ namespace Microsoft.CSharp.RuntimeBinder
                     method1 = method1.GetGenericMethodDefinition();
                     method2 = method2.GetGenericMethodDefinition();
 
-                    if (method1.GetGenericArguments().Length != method2.GetGenericArguments().Length)
+                    if (
+                        method1.GetGenericArguments().Length != method2.GetGenericArguments().Length
+                    )
                     {
                         return false; // Methods of different arity are not equivalent.
                     }
@@ -54,7 +60,11 @@ namespace Microsoft.CSharp.RuntimeBinder
                     && method1.CallingConvention == method2.CallingConvention
                     && method1.Name == method2.Name
                     && method1.DeclaringType.IsGenericallyEqual(method2.DeclaringType)
-                    && method1.ReturnType.IsGenericallyEquivalentTo(method2.ReturnType, method1, method2)
+                    && method1.ReturnType.IsGenericallyEquivalentTo(
+                        method2.ReturnType,
+                        method1,
+                        method2
+                    )
                     && method1.AreParametersEquivalent(method2);
             }
 
@@ -67,7 +77,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                     && ctor1.AreParametersEquivalent(ctor2);
             }
 
-            return mi1 is PropertyInfo prop1 && mi2 is PropertyInfo prop2
+            return mi1 is PropertyInfo prop1
+                && mi2 is PropertyInfo prop2
                 && prop1 != prop2
                 && prop1.Name == prop2.Name
                 && prop1.DeclaringType.IsGenericallyEqual(prop2.DeclaringType)
@@ -96,7 +107,12 @@ namespace Microsoft.CSharp.RuntimeBinder
             return true;
         }
 
-        private static bool IsEquivalentTo(this ParameterInfo pi1, ParameterInfo pi2, MethodBase method1, MethodBase method2)
+        private static bool IsEquivalentTo(
+            this ParameterInfo pi1,
+            ParameterInfo pi2,
+            MethodBase method1,
+            MethodBase method2
+        )
         {
             if (pi1 == null || pi2 == null)
             {
@@ -136,11 +152,21 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         // Compares two types and calls them equivalent if a type parameter equals a type argument.
         // i.e if the inputs are (T, int, C<T>, C<int>) then this will return true.
-        private static bool IsGenericallyEquivalentTo(this Type t1, Type t2, MemberInfo member1, MemberInfo member2)
+        private static bool IsGenericallyEquivalentTo(
+            this Type t1,
+            Type t2,
+            MemberInfo member1,
+            MemberInfo member2
+        )
         {
-            Debug.Assert(!(member1 is MethodBase) ||
-                         !((MethodBase)member1).IsGenericMethod ||
-                         (((MethodBase)member1).IsGenericMethodDefinition && ((MethodBase)member2).IsGenericMethodDefinition));
+            Debug.Assert(
+                !(member1 is MethodBase)
+                    || !((MethodBase)member1).IsGenericMethod
+                    || (
+                        ((MethodBase)member1).IsGenericMethodDefinition
+                        && ((MethodBase)member2).IsGenericMethodDefinition
+                    )
+            );
 
             if (t1.Equals(t2))
             {
@@ -154,14 +180,25 @@ namespace Microsoft.CSharp.RuntimeBinder
                 if (t2.IsGenericParameter)
                 {
                     // If member's declaring type is not type parameter's declaring type, we assume that it is used as a type argument
-                    if (t1.DeclaringMethod == null && member1.DeclaringType.Equals(t1.DeclaringType))
+                    if (
+                        t1.DeclaringMethod == null
+                        && member1.DeclaringType.Equals(t1.DeclaringType)
+                    )
                     {
-                        if (!(t2.DeclaringMethod == null && member2.DeclaringType.Equals(t2.DeclaringType)))
+                        if (
+                            !(
+                                t2.DeclaringMethod == null
+                                && member2.DeclaringType.Equals(t2.DeclaringType)
+                            )
+                        )
                         {
                             return t1.IsTypeParameterEquivalentToTypeInst(t2, member2);
                         }
                     }
-                    else if (t2.DeclaringMethod == null && member2.DeclaringType.Equals(t2.DeclaringType))
+                    else if (
+                        t2.DeclaringMethod == null
+                        && member2.DeclaringType.Equals(t2.DeclaringType)
+                    )
                     {
                         return t2.IsTypeParameterEquivalentToTypeInst(t1, member1);
                     }
@@ -205,20 +242,25 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             if (t1.IsArray && t2.IsArray)
             {
-                return t1.GetArrayRank() == t2.GetArrayRank() &&
-                       t1.GetElementType().IsGenericallyEquivalentTo(t2.GetElementType(), member1, member2);
+                return t1.GetArrayRank() == t2.GetArrayRank()
+                    && t1.GetElementType()
+                        .IsGenericallyEquivalentTo(t2.GetElementType(), member1, member2);
             }
 
-            if ((t1.IsByRef && t2.IsByRef) ||
-                (t1.IsPointer && t2.IsPointer))
+            if ((t1.IsByRef && t2.IsByRef) || (t1.IsPointer && t2.IsPointer))
             {
-                return t1.GetElementType().IsGenericallyEquivalentTo(t2.GetElementType(), member1, member2);
+                return t1.GetElementType()
+                    .IsGenericallyEquivalentTo(t2.GetElementType(), member1, member2);
             }
 
             return false;
         }
 
-        private static bool IsTypeParameterEquivalentToTypeInst(this Type typeParam, Type typeInst, MemberInfo member)
+        private static bool IsTypeParameterEquivalentToTypeInst(
+            this Type typeParam,
+            Type typeInst,
+            MemberInfo member
+        )
         {
             Debug.Assert(typeParam.IsGenericParameter);
 
@@ -235,81 +277,97 @@ namespace Microsoft.CSharp.RuntimeBinder
                 int position = typeParam.GenericParameterPosition;
                 Type[] args = method.IsGenericMethod ? method.GetGenericArguments() : null;
 
-                return args != null &&
-                       args.Length > position &&
-                       args[position].Equals(typeInst);
+                return args != null && args.Length > position && args[position].Equals(typeInst);
             }
             else
             {
-                return member.DeclaringType.GetGenericArguments()[typeParam.GenericParameterPosition].Equals(typeInst);
+                return member
+                    .DeclaringType.GetGenericArguments()[typeParam.GenericParameterPosition]
+                    .Equals(typeInst);
             }
         }
 
         // s_MemberEquivalence will replace itself with one version or another
         // depending on what works at run time
         private static Func<MemberInfo, MemberInfo, bool> s_MemberEquivalence = (m1, m2) =>
+        {
+            try
             {
-                try
+                Type memberInfo = typeof(MemberInfo);
+
+                // First, try the actual API. (Post .NetCore 2.0) The api is the only one that gets it completely right on frameworks without MetadataToken.
+                MethodInfo apiMethod = memberInfo.GetMethod(
+                    "HasSameMetadataDefinitionAs",
+                    BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                        | BindingFlags.ExactBinding,
+                    binder: null,
+                    types: new Type[] { typeof(MemberInfo) },
+                    modifiers: null
+                );
+                if (apiMethod != null)
                 {
-                    Type memberInfo = typeof(MemberInfo);
-
-                    // First, try the actual API. (Post .NetCore 2.0) The api is the only one that gets it completely right on frameworks without MetadataToken.
-                    MethodInfo apiMethod = memberInfo.GetMethod(
-                        "HasSameMetadataDefinitionAs",
-                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.ExactBinding,
-                        binder: null,
-                        types: new Type[] { typeof(MemberInfo) },
-                        modifiers: null);
-                    if (apiMethod != null)
+                    Func<MemberInfo, MemberInfo, bool> apiDelegate = apiMethod.CreateDelegate<
+                        Func<MemberInfo, MemberInfo, bool>
+                    >();
+                    try
                     {
-                        Func<MemberInfo, MemberInfo, bool> apiDelegate = apiMethod.CreateDelegate<Func<MemberInfo, MemberInfo, bool>>();
-                        try
-                        {
-                            bool result = apiDelegate(m1, m2);
-                            // it worked, so publish it
-                            s_MemberEquivalence = apiDelegate;
-                            return result;
-                        }
-                        catch
-                        {
-                            // Api found but apparently stubbed as not supported. Continue on to the next fallback...
-                        }
-                    }
-
-                    // See if MetadataToken property is available.
-                    PropertyInfo property = memberInfo.GetProperty("MetadataToken", typeof(int), Type.EmptyTypes);
-
-                    if (property is not null && property.CanRead)
-                    {
-                        // (parameter1, parameter2) => parameter1.MetadataToken == parameter2.MetadataToken
-                        var parameter1 = Expression.Parameter(memberInfo);
-                        var parameter2 = Expression.Parameter(memberInfo);
-                        var memberEquivalence = Expression.Lambda<Func<MemberInfo, MemberInfo, bool>>(
-                            Expression.Equal(
-                                Expression.Property(parameter1, property),
-                                Expression.Property(parameter2, property)),
-                                parameter1, parameter2).Compile();
-
-                        var result = memberEquivalence(m1, m2);
+                        bool result = apiDelegate(m1, m2);
                         // it worked, so publish it
-                        s_MemberEquivalence = memberEquivalence;
-
+                        s_MemberEquivalence = apiDelegate;
                         return result;
                     }
+                    catch
+                    {
+                        // Api found but apparently stubbed as not supported. Continue on to the next fallback...
+                    }
                 }
-                catch
+
+                // See if MetadataToken property is available.
+                PropertyInfo property = memberInfo.GetProperty(
+                    "MetadataToken",
+                    typeof(int),
+                    Type.EmptyTypes
+                );
+
+                if (property is not null && property.CanRead)
                 {
-                    // Platform might not allow access to the property
+                    // (parameter1, parameter2) => parameter1.MetadataToken == parameter2.MetadataToken
+                    var parameter1 = Expression.Parameter(memberInfo);
+                    var parameter2 = Expression.Parameter(memberInfo);
+                    var memberEquivalence = Expression
+                        .Lambda<Func<MemberInfo, MemberInfo, bool>>(
+                            Expression.Equal(
+                                Expression.Property(parameter1, property),
+                                Expression.Property(parameter2, property)
+                            ),
+                            parameter1,
+                            parameter2
+                        )
+                        .Compile();
+
+                    var result = memberEquivalence(m1, m2);
+                    // it worked, so publish it
+                    s_MemberEquivalence = memberEquivalence;
+
+                    return result;
                 }
+            }
+            catch
+            {
+                // Platform might not allow access to the property
+            }
 
-                // MetadataToken is not available in some contexts. Looks like this is one of those cases.
-                // fallback to "IsEquivalentTo"
-                Func<MemberInfo, MemberInfo, bool> fallbackMemberEquivalence = (m1param, m2param) => m1param.IsEquivalentTo(m2param);
+            // MetadataToken is not available in some contexts. Looks like this is one of those cases.
+            // fallback to "IsEquivalentTo"
+            Func<MemberInfo, MemberInfo, bool> fallbackMemberEquivalence = (m1param, m2param) =>
+                m1param.IsEquivalentTo(m2param);
 
-                // fallback must work
-                s_MemberEquivalence = fallbackMemberEquivalence;
-                return fallbackMemberEquivalence(m1, m2);
-            };
+            // fallback must work
+            s_MemberEquivalence = fallbackMemberEquivalence;
+            return fallbackMemberEquivalence(m1, m2);
+        };
 
         public static bool HasSameMetadataDefinitionAs(this MemberInfo mi1, MemberInfo mi2)
         {
@@ -343,7 +401,14 @@ namespace Microsoft.CSharp.RuntimeBinder
             string name = type.GetCustomAttribute<DefaultMemberAttribute>()?.MemberName;
             if (name != null)
             {
-                foreach (PropertyInfo p in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
+                foreach (
+                    PropertyInfo p in type.GetProperties(
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Static
+                            | BindingFlags.Instance
+                    )
+                )
                 {
                     if (p.Name == name && p.GetIndexParameters().Length != 0)
                     {

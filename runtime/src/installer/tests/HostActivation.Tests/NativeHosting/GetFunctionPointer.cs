@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.Cli.Build.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Microsoft.DotNet.Cli.Build.Framework;
 using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
@@ -35,18 +35,22 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 AppGetFunctionPointerArg,
                 sharedState.HostFxrPath,
                 appProject.AppDll,
-                validType ? sharedState.FunctionPointerTypeName : $"Component.BadType, {appProject.AssemblyName}",
+                validType
+                    ? sharedState.FunctionPointerTypeName
+                    : $"Component.BadType, {appProject.AssemblyName}",
                 validMethod ? sharedState.FunctionPointerEntryPoint1 : "BadMethod",
             };
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should()
-                .InitializeContextForApp(appProject.AppDll);
+            result.Should().InitializeContextForApp(appProject.AppDll);
 
             if (validType && validMethod)
             {
-                result.Should().Pass()
+                result
+                    .Should()
+                    .Pass()
                     .And.ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint1, 1, 1)
                     .And.ExecuteInDefaultContext(appProject.AssemblyName);
             }
@@ -68,14 +72,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 ComponentGetFunctionPointerArg,
                 sharedState.HostFxrPath,
                 componentProject.RuntimeConfigJson,
-                validType ? sharedState.ComponentTypeName : $"Component.BadType, {componentProject.AssemblyName}",
+                validType
+                    ? sharedState.ComponentTypeName
+                    : $"Component.BadType, {componentProject.AssemblyName}",
                 validMethod ? sharedState.ComponentEntryPoint1 : "BadMethod",
             };
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should()
-                .InitializeContextForConfig(componentProject.RuntimeConfigJson);
+            result.Should().InitializeContextForConfig(componentProject.RuntimeConfigJson);
 
             // This should fail even with the valid type and valid method,
             // because the type is not resolvable from the default AssemblyLoadContext.
@@ -94,10 +100,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 sharedState.FunctionPointerTypeName,
                 sharedState.FunctionPointerEntryPoint1,
             };
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForApp(appProject.AppDll)
                 .And.ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint1, 1, 1)
                 .And.ExecuteInDefaultContext(appProject.AssemblyName);
@@ -108,7 +117,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         [InlineData(1, true)]
         [InlineData(10, false)]
         [InlineData(10, true)]
-        public void CallDelegateOnApplicationContext_MultipleEntryPoints(int callCount, bool callUnmanaged)
+        public void CallDelegateOnApplicationContext_MultipleEntryPoints(
+            int callCount,
+            bool callUnmanaged
+        )
         {
             var appProject = sharedState.ApplicationFixture.TestProject;
             string[] baseArgs =
@@ -118,7 +130,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 appProject.AppDll,
             };
 
-            string functionPointer1Name = callUnmanaged ? sharedState.UnmanagedFunctionPointerEntryPoint1 : sharedState.FunctionPointerEntryPoint1;
+            string functionPointer1Name = callUnmanaged
+                ? sharedState.UnmanagedFunctionPointerEntryPoint1
+                : sharedState.FunctionPointerEntryPoint1;
             string[] componentInfo =
             {
                 // [Unmanaged]FunctionPointerEntryPoint1
@@ -135,16 +149,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 args = args.Concat(componentInfo);
             }
 
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForApp(appProject.AppDll)
                 .And.ExecuteInDefaultContext(appProject.AssemblyName);
 
             for (int i = 1; i <= callCount; ++i)
             {
-                result.Should()
+                result
+                    .Should()
                     .ExecuteFunctionPointer(functionPointer1Name, i * 2 - 1, i)
                     .And.ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint2, i * 2, i);
             }
@@ -177,16 +195,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 args = args.Concat(componentInfo);
             }
 
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForApp(appProject.AppDll)
                 .And.ExecuteInDefaultContext(appProject.AssemblyName);
 
             for (int i = 1; i <= callCount; ++i)
             {
-                result.Should()
+                result
+                    .Should()
                     .ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint1, i * 2 - 1, i)
                     .And.ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint2, i * 2, i);
             }
@@ -206,9 +228,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 entryPoint,
             };
 
-            sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute(expectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.InitializeContextForApp(appProject.AppDll)
                 .And.ExecuteFunctionPointerWithException(entryPoint, 1);
         }
@@ -226,24 +250,36 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             public string FunctionPointerTypeName { get; }
             public string FunctionPointerEntryPoint1 => "FunctionPointerEntryPoint1";
             public string FunctionPointerEntryPoint2 => "FunctionPointerEntryPoint2";
-            public string UnmanagedFunctionPointerEntryPoint1 => "UnmanagedFunctionPointerEntryPoint1";
+            public string UnmanagedFunctionPointerEntryPoint1 =>
+                "UnmanagedFunctionPointerEntryPoint1";
 
             public SharedTestState()
             {
                 DotNetRoot = TestContext.BuiltDotNet.BinPath;
                 HostFxrPath = TestContext.BuiltDotNet.GreatestVersionHostFxrFilePath;
 
-                ApplicationFixture = new TestProjectFixture("AppWithCustomEntryPoints", RepoDirectories)
+                ApplicationFixture = new TestProjectFixture(
+                    "AppWithCustomEntryPoints",
+                    RepoDirectories
+                )
                     .EnsureRestored()
                     .PublishProject(selfContained: false);
-                ComponentWithNoDependenciesFixture = new TestProjectFixture("ComponentWithNoDependencies", RepoDirectories)
+                ComponentWithNoDependenciesFixture = new TestProjectFixture(
+                    "ComponentWithNoDependencies",
+                    RepoDirectories
+                )
                     .EnsureRestored()
                     .PublishProject();
-                SelfContainedApplicationFixture = new TestProjectFixture("AppWithCustomEntryPoints", RepoDirectories)
+                SelfContainedApplicationFixture = new TestProjectFixture(
+                    "AppWithCustomEntryPoints",
+                    RepoDirectories
+                )
                     .EnsureRestored()
                     .PublishProject(selfContained: true);
-                ComponentTypeName = $"Component.Component, {ComponentWithNoDependenciesFixture.TestProject.AssemblyName}";
-                FunctionPointerTypeName = $"AppWithCustomEntryPoints.Program, {ApplicationFixture.TestProject.AssemblyName}";
+                ComponentTypeName =
+                    $"Component.Component, {ComponentWithNoDependenciesFixture.TestProject.AssemblyName}";
+                FunctionPointerTypeName =
+                    $"AppWithCustomEntryPoints.Program, {ApplicationFixture.TestProject.AssemblyName}";
             }
 
             protected override void Dispose(bool disposing)

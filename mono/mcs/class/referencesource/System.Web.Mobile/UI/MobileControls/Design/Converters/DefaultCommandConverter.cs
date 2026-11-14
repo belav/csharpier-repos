@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="DefaultCommandConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Converters
 {
-    using System.Diagnostics;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Web.UI.MobileControls;
 
     /// <summary>
@@ -16,11 +16,13 @@ namespace System.Web.UI.Design.MobileControls.Converters
     ///       Can filter and retrieve several types of values from controls.
     ///    </para>
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class DefaultCommandConverter : StringConverter
     {
         private Object[] GetCommands(ObjectList objectList)
@@ -32,7 +34,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             }
 
             ArrayList commandList = new ArrayList(commands.Count);
-            foreach(ObjectListCommand command in commands)
+            foreach (ObjectListCommand command in commands)
             {
                 commandList.Add(command.Name);
             }
@@ -66,7 +68,9 @@ namespace System.Web.UI.Design.MobileControls.Converters
             ObjectList objectList = null;
             if (context.Instance is IDeviceSpecificChoiceDesigner)
             {
-                objectList = ((IDeviceSpecificChoiceDesigner)context.Instance).UnderlyingObject as ObjectList;
+                objectList =
+                    ((IDeviceSpecificChoiceDesigner)context.Instance).UnderlyingObject
+                    as ObjectList;
             }
             else if (context.Instance is ObjectList)
             {
@@ -76,10 +80,10 @@ namespace System.Web.UI.Design.MobileControls.Converters
             {
                 return null;
             }
-            
+
             Debug.Assert(objectList != null);
 
-            Object [] objValues = GetCommands(objectList);
+            Object[] objValues = GetCommands(objectList);
             if (objValues != null)
             {
                 return new StandardValuesCollection(objValues);
@@ -101,7 +105,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context contains exclusive standard 
+        ///    <see langword='true'/> if the specified context contains exclusive standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
@@ -121,18 +125,18 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context conatins supported standard 
+        ///    <see langword='true'/> if the specified context conatins supported standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
-            if (context.Instance is IComponent) 
+            if (context.Instance is IComponent)
             {
                 // We only support the dropdown in single-select mode.
                 return true;
             }
             return false;
-        }        
-    }    
+        }
+    }
 }

@@ -12,20 +12,27 @@ namespace System.Runtime.Serialization.DataContracts
 
         public SpecialTypeDataContract(
             [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
-            Type type,
-            XmlDictionaryString name, XmlDictionaryString ns) : base(new SpecialTypeDataContractCriticalHelper(type, name, ns))
+                Type type,
+            XmlDictionaryString name,
+            XmlDictionaryString ns
+        )
+            : base(new SpecialTypeDataContractCriticalHelper(type, name, ns))
         {
             _helper = (base.Helper as SpecialTypeDataContractCriticalHelper)!;
         }
 
         public override bool IsBuiltInDataContract => true;
 
-        private sealed class SpecialTypeDataContractCriticalHelper : DataContract.DataContractCriticalHelper
+        private sealed class SpecialTypeDataContractCriticalHelper
+            : DataContract.DataContractCriticalHelper
         {
             internal SpecialTypeDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
-                Type type,
-                XmlDictionaryString name, XmlDictionaryString ns) : base(type)
+                    Type type,
+                XmlDictionaryString name,
+                XmlDictionaryString ns
+            )
+                : base(type)
             {
                 SetDataContractName(name, ns);
             }

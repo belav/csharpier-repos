@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private readonly int _diagnosticOffsetDelta;
         private bool _foundOldToken;
 
-        private SyntaxFirstTokenReplacer(SyntaxToken oldToken, SyntaxToken newToken, int diagnosticOffsetDelta)
+        private SyntaxFirstTokenReplacer(
+            SyntaxToken oldToken,
+            SyntaxToken newToken,
+            int diagnosticOffsetDelta
+        )
         {
             _oldToken = oldToken;
             _newToken = newToken;
@@ -26,7 +30,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             _foundOldToken = false;
         }
 
-        internal static TRoot Replace<TRoot>(TRoot root, SyntaxToken oldToken, SyntaxToken newToken, int diagnosticOffsetDelta)
+        internal static TRoot Replace<TRoot>(
+            TRoot root,
+            SyntaxToken oldToken,
+            SyntaxToken newToken,
+            int diagnosticOffsetDelta
+        )
             where TRoot : CSharpSyntaxNode
         {
             var replacer = new SyntaxFirstTokenReplacer(oldToken, newToken, diagnosticOffsetDelta);
@@ -56,7 +65,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return node;
         }
 
-        private static TSyntax UpdateDiagnosticOffset<TSyntax>(TSyntax node, int diagnosticOffsetDelta) where TSyntax : CSharpSyntaxNode
+        private static TSyntax UpdateDiagnosticOffset<TSyntax>(
+            TSyntax node,
+            int diagnosticOffsetDelta
+        )
+            where TSyntax : CSharpSyntaxNode
         {
             DiagnosticInfo[] oldDiagnostics = node.GetDiagnostics();
             if (oldDiagnostics == null || oldDiagnostics.Length == 0)
@@ -70,13 +83,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 DiagnosticInfo oldDiagnostic = oldDiagnostics[i];
                 SyntaxDiagnosticInfo oldSyntaxDiagnostic = oldDiagnostic as SyntaxDiagnosticInfo;
-                newDiagnostics[i] = oldSyntaxDiagnostic == null ?
-                    oldDiagnostic :
-                    new SyntaxDiagnosticInfo(
-                        oldSyntaxDiagnostic.Offset + diagnosticOffsetDelta,
-                        oldSyntaxDiagnostic.Width,
-                        (ErrorCode)oldSyntaxDiagnostic.Code,
-                        oldSyntaxDiagnostic.Arguments);
+                newDiagnostics[i] =
+                    oldSyntaxDiagnostic == null
+                        ? oldDiagnostic
+                        : new SyntaxDiagnosticInfo(
+                            oldSyntaxDiagnostic.Offset + diagnosticOffsetDelta,
+                            oldSyntaxDiagnostic.Width,
+                            (ErrorCode)oldSyntaxDiagnostic.Code,
+                            oldSyntaxDiagnostic.Arguments
+                        );
             }
             return node.WithDiagnosticsGreen(newDiagnostics);
         }

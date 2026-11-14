@@ -13,7 +13,10 @@ namespace System.Runtime.DurableInstancing
     {
         internal InstanceHandleReference(InstanceHandle instanceHandle)
         {
-            Fx.Assert(instanceHandle != null, "Null instanceHandle provided to InstanceHandleReference.");
+            Fx.Assert(
+                instanceHandle != null,
+                "Null instanceHandle provided to InstanceHandleReference."
+            );
             InstanceHandle = instanceHandle;
         }
 

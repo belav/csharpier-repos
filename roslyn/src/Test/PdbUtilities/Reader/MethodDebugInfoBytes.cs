@@ -40,7 +40,11 @@ namespace Roslyn.Test.Utilities
             private ArrayBuilder<byte> _bytesBuilder;
             private int _recordCount;
 
-            public Builder(string[][] importStringGroups = null, bool suppressUsingInfo = false, ISymUnmanagedConstant[] constants = null)
+            public Builder(
+                string[][] importStringGroups = null,
+                bool suppressUsingInfo = false,
+                ISymUnmanagedConstant[] constants = null
+            )
             {
                 _bytesBuilder = ArrayBuilder<byte>.GetInstance();
                 if (importStringGroups != null && !suppressUsingInfo)
@@ -49,11 +53,25 @@ namespace Roslyn.Test.Utilities
                     AddUsingInfo(groupSizes);
                 }
 
-                var namespaces = importStringGroups == null
-                    ? default(ImmutableArray<ISymUnmanagedNamespace>)
-                    : importStringGroups.SelectMany(names => names.Select(name => (ISymUnmanagedNamespace)new MockSymUnmanagedNamespace(name))).ToImmutableArray();
-                var childScope = new MockSymUnmanagedScope(default(ImmutableArray<ISymUnmanagedScope>), namespaces, constants);
-                var rootScope = new MockSymUnmanagedScope(ImmutableArray.Create<ISymUnmanagedScope>(childScope), default(ImmutableArray<ISymUnmanagedNamespace>));
+                var namespaces =
+                    importStringGroups == null
+                        ? default(ImmutableArray<ISymUnmanagedNamespace>)
+                        : importStringGroups
+                            .SelectMany(names =>
+                                names.Select(name =>
+                                    (ISymUnmanagedNamespace)new MockSymUnmanagedNamespace(name)
+                                )
+                            )
+                            .ToImmutableArray();
+                var childScope = new MockSymUnmanagedScope(
+                    default(ImmutableArray<ISymUnmanagedScope>),
+                    namespaces,
+                    constants
+                );
+                var rootScope = new MockSymUnmanagedScope(
+                    ImmutableArray.Create<ISymUnmanagedScope>(childScope),
+                    default(ImmutableArray<ISymUnmanagedNamespace>)
+                );
                 _method = new MockSymUnmanagedMethod(rootScope);
             }
 
@@ -100,7 +118,13 @@ namespace Roslyn.Test.Utilities
             {
                 // Record header
                 _bytesBuilder.Add(Version);
-                _bytesBuilder.Add((byte)(isModuleLevel ? CustomDebugInfoKind.ForwardModuleInfo : CustomDebugInfoKind.ForwardMethodInfo));
+                _bytesBuilder.Add(
+                    (byte)(
+                        isModuleLevel
+                            ? CustomDebugInfoKind.ForwardModuleInfo
+                            : CustomDebugInfoKind.ForwardMethodInfo
+                    )
+                );
                 _bytesBuilder.Add(Padding);
                 _bytesBuilder.Add(Padding);
                 _bytesBuilder.Add4(12); // Record size, including header.

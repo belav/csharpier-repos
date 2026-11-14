@@ -13,7 +13,8 @@ namespace System.Xml
         private readonly XmlNode _nodeTop;
         private XmlNode _currentNode;
 
-        internal TreeIterator(XmlNode nodeTop) : base(((XmlDataDocument)(nodeTop.OwnerDocument!)).Mapper)
+        internal TreeIterator(XmlNode nodeTop)
+            : base(((XmlDataDocument)(nodeTop.OwnerDocument!)).Mapper)
         {
             Debug.Assert(nodeTop != null);
             _nodeTop = nodeTop;

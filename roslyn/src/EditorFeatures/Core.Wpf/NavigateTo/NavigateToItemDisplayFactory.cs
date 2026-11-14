@@ -19,15 +19,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
         public NavigateToItemDisplayFactory(
             IThreadingContext threadingContext,
             IUIThreadOperationExecutor threadOperationExecutor,
-            IAsynchronousOperationListener asyncListener)
+            IAsynchronousOperationListener asyncListener
+        )
         {
             _threadingContext = threadingContext;
             _threadOperationExecutor = threadOperationExecutor;
             _asyncListener = asyncListener;
         }
 
-        public INavigateToItemDisplay CreateItemDisplay(NavigateToItem item)
-            => new NavigateToItemDisplay(
-                _threadingContext, _threadOperationExecutor, _asyncListener, (INavigateToSearchResult)item.Tag);
+        public INavigateToItemDisplay CreateItemDisplay(NavigateToItem item) =>
+            new NavigateToItemDisplay(
+                _threadingContext,
+                _threadOperationExecutor,
+                _asyncListener,
+                (INavigateToSearchResult)item.Tag
+            );
     }
 }

@@ -16,7 +16,7 @@ namespace System.Xml.Schema
         {
             Root,
             Include,
-            Import
+            Import,
         };
 
         private XmlSchema? _schema;
@@ -26,27 +26,51 @@ namespace System.Xml.Schema
         private XmlSchemaForm _attributeFormDefault;
         private XmlSchemaDerivationMethod _blockDefault;
         private XmlSchemaDerivationMethod _finalDefault;
+
         //Dictionary<Uri, Uri> schemaLocations;
         private Hashtable? _schemaLocations;
         private Hashtable? _referenceNamespaces;
 
         private string? _xmlns;
-        private const XmlSchemaDerivationMethod schemaBlockDefaultAllowed = XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension | XmlSchemaDerivationMethod.Substitution;
-        private const XmlSchemaDerivationMethod schemaFinalDefaultAllowed = XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension | XmlSchemaDerivationMethod.List | XmlSchemaDerivationMethod.Union;
-        private const XmlSchemaDerivationMethod elementBlockAllowed = XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension | XmlSchemaDerivationMethod.Substitution;
-        private const XmlSchemaDerivationMethod elementFinalAllowed = XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension;
-        private const XmlSchemaDerivationMethod simpleTypeFinalAllowed = XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.List | XmlSchemaDerivationMethod.Union;
-        private const XmlSchemaDerivationMethod complexTypeBlockAllowed = XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension;
-        private const XmlSchemaDerivationMethod complexTypeFinalAllowed = XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension;
+        private const XmlSchemaDerivationMethod schemaBlockDefaultAllowed =
+            XmlSchemaDerivationMethod.Restriction
+            | XmlSchemaDerivationMethod.Extension
+            | XmlSchemaDerivationMethod.Substitution;
+        private const XmlSchemaDerivationMethod schemaFinalDefaultAllowed =
+            XmlSchemaDerivationMethod.Restriction
+            | XmlSchemaDerivationMethod.Extension
+            | XmlSchemaDerivationMethod.List
+            | XmlSchemaDerivationMethod.Union;
+        private const XmlSchemaDerivationMethod elementBlockAllowed =
+            XmlSchemaDerivationMethod.Restriction
+            | XmlSchemaDerivationMethod.Extension
+            | XmlSchemaDerivationMethod.Substitution;
+        private const XmlSchemaDerivationMethod elementFinalAllowed =
+            XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension;
+        private const XmlSchemaDerivationMethod simpleTypeFinalAllowed =
+            XmlSchemaDerivationMethod.Restriction
+            | XmlSchemaDerivationMethod.List
+            | XmlSchemaDerivationMethod.Union;
+        private const XmlSchemaDerivationMethod complexTypeBlockAllowed =
+            XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension;
+        private const XmlSchemaDerivationMethod complexTypeFinalAllowed =
+            XmlSchemaDerivationMethod.Restriction | XmlSchemaDerivationMethod.Extension;
 
         private XmlResolver? _xmlResolver;
 
-        public SchemaCollectionPreprocessor(XmlNameTable nameTable, SchemaNames? schemaNames, ValidationEventHandler? eventHandler)
-            : base(nameTable, schemaNames, eventHandler)
-        {
-        }
+        public SchemaCollectionPreprocessor(
+            XmlNameTable nameTable,
+            SchemaNames? schemaNames,
+            ValidationEventHandler? eventHandler
+        )
+            : base(nameTable, schemaNames, eventHandler) { }
 
-        public bool Execute(XmlSchema schema, string? targetNamespace, bool loadExternals, XmlSchemaCollection? xsc)
+        public bool Execute(
+            XmlSchema schema,
+            string? targetNamespace,
+            bool loadExternals,
+            XmlSchemaCollection? xsc
+        )
         {
             _schema = schema;
             _xmlns = NameTable.Add("xmlns");
@@ -120,10 +144,7 @@ namespace System.Xml.Schema
 
         internal XmlResolver? XmlResolver
         {
-            set
-            {
-                _xmlResolver = value;
-            }
+            set { _xmlResolver = value; }
         }
 
         // SxS: This method reads resource names from the source documents and does not return any resources to the caller
@@ -143,7 +164,10 @@ namespace System.Xml.Schema
                 if (include.Schema != null)
                 {
                     // already loaded
-                    if (include is XmlSchemaImport && ((XmlSchemaImport)include).Namespace == XmlReservedNs.NsXml)
+                    if (
+                        include is XmlSchemaImport
+                        && ((XmlSchemaImport)include).Namespace == XmlReservedNs.NsXml
+                    )
                     {
                         _buildinIncluded = true;
                     }
@@ -169,7 +193,10 @@ namespace System.Xml.Schema
                     if (include.Schema != null)
                     {
                         include.Schema = include.Schema.Clone();
-                        if (include.Schema.BaseUri != null && _schemaLocations![include.Schema.BaseUri] == null)
+                        if (
+                            include.Schema.BaseUri != null
+                            && _schemaLocations![include.Schema.BaseUri] == null
+                        )
                         {
                             _schemaLocations.Add(include.Schema.BaseUri, include.Schema.BaseUri);
                         }
@@ -177,7 +204,8 @@ namespace System.Xml.Schema
                         Uri? subUri;
                         for (int j = 0; j < include.Schema.Includes.Count; ++j)
                         {
-                            XmlSchemaExternal subInc = (XmlSchemaExternal)include.Schema.Includes[j];
+                            XmlSchemaExternal subInc = (XmlSchemaExternal)
+                                include.Schema.Includes[j];
                             if (subInc is XmlSchemaImport subImp)
                             {
                                 subUri = subImp.BaseUri ?? subImp.Schema?.BaseUri;
@@ -199,7 +227,10 @@ namespace System.Xml.Schema
                 }
 
                 //CASE 3: If the imported namespace is the XML namespace, load built-in schema
-                if (include is XmlSchemaImport && ((XmlSchemaImport)include).Namespace == XmlReservedNs.NsXml)
+                if (
+                    include is XmlSchemaImport
+                    && ((XmlSchemaImport)include).Namespace == XmlReservedNs.NsXml
+                )
                 {
                     if (!_buildinIncluded)
                     {
@@ -225,23 +256,46 @@ namespace System.Xml.Schema
                     {
                         include.BaseUri = ruri;
                         _schemaLocations.Add(ruri, ruri);
-                        XmlTextReader reader = new XmlTextReader(ruri.ToString(), stream, NameTable);
+                        XmlTextReader reader = new XmlTextReader(
+                            ruri.ToString(),
+                            stream,
+                            NameTable
+                        );
                         reader.XmlResolver = _xmlResolver;
                         try
                         {
-                            Parser parser = new Parser(SchemaType.XSD, NameTable, SchemaNames, EventHandler);
+                            Parser parser = new Parser(
+                                SchemaType.XSD,
+                                NameTable,
+                                SchemaNames,
+                                EventHandler
+                            );
                             parser.Parse(reader, null);
-                            while (reader.Read()) ; // wellformness check
+                            while (reader.Read())
+                                ; // wellformness check
                             include.Schema = parser.XmlSchema;
                             LoadExternals(include.Schema!, xsc);
                         }
                         catch (XmlSchemaException e)
                         {
-                            SendValidationEventNoThrow(new XmlSchemaException(SR.Sch_CannotLoadSchema, new string[] { schemaLocation, e.Message }, e.SourceUri, e.LineNumber, e.LinePosition), XmlSeverityType.Error);
+                            SendValidationEventNoThrow(
+                                new XmlSchemaException(
+                                    SR.Sch_CannotLoadSchema,
+                                    new string[] { schemaLocation, e.Message },
+                                    e.SourceUri,
+                                    e.LineNumber,
+                                    e.LinePosition
+                                ),
+                                XmlSeverityType.Error
+                            );
                         }
                         catch (Exception)
                         {
-                            SendValidationEvent(SR.Sch_InvalidIncludeLocation, include, XmlSeverityType.Warning);
+                            SendValidationEvent(
+                                SR.Sch_InvalidIncludeLocation,
+                                include,
+                                XmlSeverityType.Warning
+                            );
                         }
                         finally
                         {
@@ -250,13 +304,16 @@ namespace System.Xml.Schema
                     }
                     else
                     {
-                        SendValidationEvent(SR.Sch_InvalidIncludeLocation, include, XmlSeverityType.Warning);
+                        SendValidationEvent(
+                            SR.Sch_InvalidIncludeLocation,
+                            include,
+                            XmlSeverityType.Warning
+                        );
                     }
                 }
             }
             schema.IsProcessing = false;
         }
-
 
         private void BuildRefNamespaces(XmlSchema schema)
         {
@@ -280,7 +337,10 @@ namespace System.Xml.Schema
             }
 
             //Add the schema's targetnamespace
-            if (schema.TargetNamespace != null && _referenceNamespaces[schema.TargetNamespace] == null)
+            if (
+                schema.TargetNamespace != null
+                && _referenceNamespaces[schema.TargetNamespace] == null
+            )
                 _referenceNamespaces.Add(schema.TargetNamespace, schema.TargetNamespace);
         }
 
@@ -303,11 +363,15 @@ namespace System.Xml.Schema
                 {
                     try
                     {
-                        XmlConvert.ToUri(tns);  // can throw
+                        XmlConvert.ToUri(tns); // can throw
                     }
                     catch
                     {
-                        SendValidationEvent(SR.Sch_InvalidNamespace, schema.TargetNamespace, schema);
+                        SendValidationEvent(
+                            SR.Sch_InvalidNamespace,
+                            schema.TargetNamespace,
+                            schema
+                        );
                     }
                 }
             }
@@ -330,19 +394,33 @@ namespace System.Xml.Schema
                     { // not specified
                         targetNamespace = schema.TargetNamespace;
                     }
-                    else if (schema.TargetNamespace == null && targetNamespace != null && targetNamespace.Length == 0)
+                    else if (
+                        schema.TargetNamespace == null
+                        && targetNamespace != null
+                        && targetNamespace.Length == 0
+                    )
                     { // no namespace schema
                         targetNamespace = null;
                     }
                     if (targetNamespace != schema.TargetNamespace)
                     {
-                        SendValidationEvent(SR.Sch_MismatchTargetNamespaceEx, targetNamespace, schema.TargetNamespace, schema);
+                        SendValidationEvent(
+                            SR.Sch_MismatchTargetNamespaceEx,
+                            targetNamespace,
+                            schema.TargetNamespace,
+                            schema
+                        );
                     }
                     break;
                 case Compositor.Import:
                     if (targetNamespace != schema.TargetNamespace)
                     {
-                        SendValidationEvent(SR.Sch_MismatchTargetNamespaceImport, targetNamespace, schema.TargetNamespace, schema);
+                        SendValidationEvent(
+                            SR.Sch_MismatchTargetNamespaceImport,
+                            targetNamespace,
+                            schema.TargetNamespace,
+                            schema
+                        );
                     }
                     break;
                 case Compositor.Include:
@@ -350,7 +428,12 @@ namespace System.Xml.Schema
                     {
                         if (targetNamespace != schema.TargetNamespace)
                         {
-                            SendValidationEvent(SR.Sch_MismatchTargetNamespaceInclude, targetNamespace, schema.TargetNamespace, schema);
+                            SendValidationEvent(
+                                SR.Sch_MismatchTargetNamespaceInclude,
+                                targetNamespace,
+                                schema.TargetNamespace,
+                                schema
+                            );
                         }
                     }
                     break;
@@ -374,7 +457,10 @@ namespace System.Xml.Schema
                         SendValidationEvent(SR.Sch_InvalidSchemaLocation, loc, include);
                     }
                 }
-                else if ((include is XmlSchemaRedefine || include is XmlSchemaInclude) && include.Schema == null)
+                else if (
+                    (include is XmlSchemaRedefine || include is XmlSchemaInclude)
+                    && include.Schema == null
+                )
                 {
                     SendValidationEvent(SR.Sch_MissRequiredAttribute, "schemaLocation", include);
                 }
@@ -386,7 +472,10 @@ namespace System.Xml.Schema
                     }
                     else if (include is XmlSchemaImport)
                     {
-                        if (((XmlSchemaImport)include).Namespace == null && schema.TargetNamespace == null)
+                        if (
+                            ((XmlSchemaImport)include).Namespace == null
+                            && schema.TargetNamespace == null
+                        )
                         {
                             SendValidationEvent(SR.Sch_ImportTargetNamespaceNull, include);
                         }
@@ -394,7 +483,11 @@ namespace System.Xml.Schema
                         {
                             SendValidationEvent(SR.Sch_ImportTargetNamespace, include);
                         }
-                        Preprocess(include.Schema, ((XmlSchemaImport)include).Namespace, Compositor.Import);
+                        Preprocess(
+                            include.Schema,
+                            ((XmlSchemaImport)include).Namespace,
+                            Compositor.Import
+                        );
                     }
                     else
                     {
@@ -513,9 +606,17 @@ namespace System.Xml.Schema
                         AddToTable(schema.Groups, group!.QualifiedName, group);
                     }
 
-                    foreach (XmlSchemaAttributeGroup? attributeGroup in includedSchema.AttributeGroups.Values)
+                    foreach (
+                        XmlSchemaAttributeGroup? attributeGroup in includedSchema
+                            .AttributeGroups
+                            .Values
+                    )
                     {
-                        AddToTable(schema.AttributeGroups, attributeGroup!.QualifiedName, attributeGroup);
+                        AddToTable(
+                            schema.AttributeGroups,
+                            attributeGroup!.QualifiedName,
+                            attributeGroup
+                        );
                     }
 
                     foreach (XmlSchemaType? type in includedSchema.SchemaTypes.Values)
@@ -544,7 +645,11 @@ namespace System.Xml.Schema
                 else if (schema.Items[i] is XmlSchemaAttributeGroup attributeGroup)
                 {
                     PreprocessAttributeGroup(attributeGroup);
-                    AddToTable(schema.AttributeGroups, attributeGroup.QualifiedName, attributeGroup);
+                    AddToTable(
+                        schema.AttributeGroups,
+                        attributeGroup.QualifiedName,
+                        attributeGroup
+                    );
                 }
                 else if (schema.Items[i] is XmlSchemaComplexType complexType)
                 {
@@ -601,7 +706,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.Groups, group.QualifiedName, group);
-                        group.Redefined = (XmlSchemaGroup?)redefine.Schema!.Groups[group.QualifiedName];
+                        group.Redefined = (XmlSchemaGroup?)
+                            redefine.Schema!.Groups[group.QualifiedName];
                         if (group.Redefined != null)
                         {
                             CheckRefinedGroup(group);
@@ -621,8 +727,13 @@ namespace System.Xml.Schema
                     }
                     else
                     {
-                        AddToTable(redefine.AttributeGroups, attributeGroup.QualifiedName, attributeGroup);
-                        attributeGroup.Redefined = (XmlSchemaAttributeGroup?)redefine.Schema!.AttributeGroups[attributeGroup.QualifiedName];
+                        AddToTable(
+                            redefine.AttributeGroups,
+                            attributeGroup.QualifiedName,
+                            attributeGroup
+                        );
+                        attributeGroup.Redefined = (XmlSchemaAttributeGroup?)
+                            redefine.Schema!.AttributeGroups[attributeGroup.QualifiedName];
                         if (attributeGroup.Redefined != null)
                         {
                             CheckRefinedAttributeGroup(attributeGroup);
@@ -643,7 +754,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.SchemaTypes, complexType.QualifiedName, complexType);
-                        XmlSchemaType? type = (XmlSchemaType?)redefine.Schema!.SchemaTypes[complexType.QualifiedName];
+                        XmlSchemaType? type = (XmlSchemaType?)
+                            redefine.Schema!.SchemaTypes[complexType.QualifiedName];
                         if (type != null)
                         {
                             if (type is XmlSchemaComplexType)
@@ -653,7 +765,10 @@ namespace System.Xml.Schema
                             }
                             else
                             {
-                                SendValidationEvent(SR.Sch_SimpleToComplexTypeRedefine, complexType);
+                                SendValidationEvent(
+                                    SR.Sch_SimpleToComplexTypeRedefine,
+                                    complexType
+                                );
                             }
                         }
                         else
@@ -672,7 +787,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.SchemaTypes, simpleType.QualifiedName, simpleType);
-                        XmlSchemaType? type = (XmlSchemaType?)redefine.Schema!.SchemaTypes[simpleType.QualifiedName];
+                        XmlSchemaType? type = (XmlSchemaType?)
+                            redefine.Schema!.SchemaTypes[simpleType.QualifiedName];
                         if (type != null)
                         {
                             if (type is XmlSchemaSimpleType)
@@ -695,17 +811,26 @@ namespace System.Xml.Schema
 
             foreach (DictionaryEntry entry in redefine.Groups)
             {
-                redefine.Schema!.Groups.Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.Groups.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
 
             foreach (DictionaryEntry entry in redefine.AttributeGroups)
             {
-                redefine.Schema!.AttributeGroups.Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.AttributeGroups.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
 
             foreach (DictionaryEntry entry in redefine.SchemaTypes)
             {
-                redefine.Schema!.SchemaTypes.Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.SchemaTypes.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
         }
 
@@ -756,7 +881,8 @@ namespace System.Xml.Schema
             int count = 0;
             for (int i = 0; i < attributeGroup.Attributes.Count; ++i)
             {
-                XmlSchemaAttributeGroupRef? groupRef = attributeGroup.Attributes[i] as XmlSchemaAttributeGroupRef;
+                XmlSchemaAttributeGroupRef? groupRef =
+                    attributeGroup.Attributes[i] as XmlSchemaAttributeGroupRef;
                 if (groupRef != null && groupRef.RefName == attributeGroup.QualifiedName)
                 {
                     count++;
@@ -772,7 +898,8 @@ namespace System.Xml.Schema
         {
             if (stype.Content != null && stype.Content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)stype.Content;
+                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                    stype.Content;
                 if (restriction.BaseTypeName == stype.QualifiedName)
                 {
                     return;
@@ -791,11 +918,15 @@ namespace System.Xml.Schema
                     XmlSchemaComplexContent content = (XmlSchemaComplexContent)ctype.ContentModel;
                     if (content.Content is XmlSchemaComplexContentRestriction)
                     {
-                        baseName = ((XmlSchemaComplexContentRestriction)content.Content).BaseTypeName;
+                        baseName = (
+                            (XmlSchemaComplexContentRestriction)content.Content
+                        ).BaseTypeName;
                     }
                     else
                     {
-                        baseName = ((XmlSchemaComplexContentExtension)content.Content!).BaseTypeName;
+                        baseName = (
+                            (XmlSchemaComplexContentExtension)content.Content!
+                        ).BaseTypeName;
                     }
                 }
                 else
@@ -803,7 +934,9 @@ namespace System.Xml.Schema
                     XmlSchemaSimpleContent content = (XmlSchemaSimpleContent)ctype.ContentModel;
                     if (content.Content is XmlSchemaSimpleContentRestriction)
                     {
-                        baseName = ((XmlSchemaSimpleContentRestriction)content.Content).BaseTypeName;
+                        baseName = (
+                            (XmlSchemaSimpleContentRestriction)content.Content
+                        ).BaseTypeName;
                     }
                     else
                     {
@@ -847,7 +980,20 @@ namespace System.Xml.Schema
             { // name
                 ValidateNameAttribute(attribute);
                 PreprocessAttributeContent(attribute);
-                attribute.SetQualifiedName(new XmlQualifiedName(attribute.Name, (attribute.Form == XmlSchemaForm.Qualified || (attribute.Form == XmlSchemaForm.None && _attributeFormDefault == XmlSchemaForm.Qualified)) ? _targetNamespace : null));
+                attribute.SetQualifiedName(
+                    new XmlQualifiedName(
+                        attribute.Name,
+                        (
+                            attribute.Form == XmlSchemaForm.Qualified
+                            || (
+                                attribute.Form == XmlSchemaForm.None
+                                && _attributeFormDefault == XmlSchemaForm.Qualified
+                            )
+                        )
+                            ? _targetNamespace
+                            : null
+                    )
+                );
             }
             else
             { // ref
@@ -860,9 +1006,10 @@ namespace System.Xml.Schema
                 {
                     ValidateQNameAttribute(attribute, "ref", attribute.RefName);
                 }
-                if (!attribute.SchemaTypeName.IsEmpty ||
-                    attribute.SchemaType != null ||
-                    attribute.Form != XmlSchemaForm.None /*||
+                if (
+                    !attribute.SchemaTypeName.IsEmpty
+                    || attribute.SchemaType != null
+                    || attribute.Form != XmlSchemaForm.None /*||
                     attribute.DefaultValue != null ||
                     attribute.FixedValue != null*/
                 )
@@ -889,7 +1036,11 @@ namespace System.Xml.Schema
             {
                 SendValidationEvent(SR.Sch_DefaultFixedAttributes, attribute);
             }
-            if (attribute.DefaultValue != null && attribute.Use != XmlSchemaUse.Optional && attribute.Use != XmlSchemaUse.None)
+            if (
+                attribute.DefaultValue != null
+                && attribute.Use != XmlSchemaUse.Optional
+                && attribute.Use != XmlSchemaUse.None
+            )
             {
                 SendValidationEvent(SR.Sch_OptionalDefaultAttribute, attribute);
             }
@@ -917,14 +1068,20 @@ namespace System.Xml.Schema
             if (attributeGroup.Name != null)
             {
                 ValidateNameAttribute(attributeGroup);
-                attributeGroup.SetQualifiedName(new XmlQualifiedName(attributeGroup.Name, _targetNamespace));
+                attributeGroup.SetQualifiedName(
+                    new XmlQualifiedName(attributeGroup.Name, _targetNamespace)
+                );
             }
             else
             {
                 SendValidationEvent(SR.Sch_MissRequiredAttribute, "name", attributeGroup);
             }
 
-            PreprocessAttributes(attributeGroup.Attributes, attributeGroup.AnyAttribute, attributeGroup);
+            PreprocessAttributes(
+                attributeGroup.Attributes,
+                attributeGroup.AnyAttribute,
+                attributeGroup
+            );
             PreprocessAnnotation(attributeGroup);
             ValidateIdAttribute(attributeGroup);
         }
@@ -990,7 +1147,20 @@ namespace System.Xml.Schema
             { // name
                 ValidateNameAttribute(element);
                 PreprocessElementContent(element);
-                element.SetQualifiedName(new XmlQualifiedName(element.Name, (element.Form == XmlSchemaForm.Qualified || (element.Form == XmlSchemaForm.None && _elementFormDefault == XmlSchemaForm.Qualified)) ? _targetNamespace : null));
+                element.SetQualifiedName(
+                    new XmlQualifiedName(
+                        element.Name,
+                        (
+                            element.Form == XmlSchemaForm.Qualified
+                            || (
+                                element.Form == XmlSchemaForm.None
+                                && _elementFormDefault == XmlSchemaForm.Qualified
+                            )
+                        )
+                            ? _targetNamespace
+                            : null
+                    )
+                );
             }
             else
             { // ref
@@ -1003,15 +1173,17 @@ namespace System.Xml.Schema
                 {
                     ValidateQNameAttribute(element, "ref", element.RefName);
                 }
-                if (!element.SchemaTypeName.IsEmpty ||
-                    element.IsAbstract ||
-                    element.Block != XmlSchemaDerivationMethod.None ||
-                    element.SchemaType != null ||
-                    element.HasConstraints ||
-                    element.DefaultValue != null ||
-                    element.Form != XmlSchemaForm.None ||
-                    element.FixedValue != null ||
-                    element.HasNillableAttribute)
+                if (
+                    !element.SchemaTypeName.IsEmpty
+                    || element.IsAbstract
+                    || element.Block != XmlSchemaDerivationMethod.None
+                    || element.SchemaType != null
+                    || element.HasConstraints
+                    || element.DefaultValue != null
+                    || element.Form != XmlSchemaForm.None
+                    || element.FixedValue != null
+                    || element.HasNillableAttribute
+                )
                 {
                     SendValidationEvent(SR.Sch_InvalidElementRef, element);
                 }
@@ -1109,7 +1281,9 @@ namespace System.Xml.Schema
             if (constraint.Name != null)
             {
                 ValidateNameAttribute(constraint);
-                constraint.SetQualifiedName(new XmlQualifiedName(constraint.Name, _targetNamespace));
+                constraint.SetQualifiedName(
+                    new XmlQualifiedName(constraint.Name, _targetNamespace)
+                );
             }
             else
             {
@@ -1119,7 +1293,11 @@ namespace System.Xml.Schema
 
             if (_schema!.IdentityConstraints[constraint.QualifiedName] != null)
             {
-                SendValidationEvent(SR.Sch_DupIdentityConstraint, constraint.QualifiedName.ToString(), constraint);
+                SendValidationEvent(
+                    SR.Sch_DupIdentityConstraint,
+                    constraint.QualifiedName.ToString(),
+                    constraint
+                );
                 valid = false;
             }
             else
@@ -1176,7 +1354,9 @@ namespace System.Xml.Schema
                 if (simpleType.Name != null)
                 {
                     ValidateNameAttribute(simpleType);
-                    simpleType.SetQualifiedName(new XmlQualifiedName(simpleType.Name, _targetNamespace));
+                    simpleType.SetQualifiedName(
+                        new XmlQualifiedName(simpleType.Name, _targetNamespace)
+                    );
                 }
                 else
                 {
@@ -1313,7 +1493,9 @@ namespace System.Xml.Schema
                 if (complexType.Name != null)
                 {
                     ValidateNameAttribute(complexType);
-                    complexType.SetQualifiedName(new XmlQualifiedName(complexType.Name, _targetNamespace));
+                    complexType.SetQualifiedName(
+                        new XmlQualifiedName(complexType.Name, _targetNamespace)
+                    );
                 }
                 else
                 {
@@ -1369,7 +1551,8 @@ namespace System.Xml.Schema
 
                 if (complexType.ContentModel is XmlSchemaSimpleContent)
                 {
-                    XmlSchemaSimpleContent content = (XmlSchemaSimpleContent)complexType.ContentModel;
+                    XmlSchemaSimpleContent content = (XmlSchemaSimpleContent)
+                        complexType.ContentModel;
                     if (content.Content == null)
                     {
                         if (complexType.QualifiedName == XmlQualifiedName.Empty)
@@ -1378,12 +1561,17 @@ namespace System.Xml.Schema
                         }
                         else
                         {
-                            SendValidationEvent(SR.Sch_NoRestOrExtQName, complexType.QualifiedName.Name, complexType.QualifiedName.Namespace, complexType);
+                            SendValidationEvent(
+                                SR.Sch_NoRestOrExtQName,
+                                complexType.QualifiedName.Name,
+                                complexType.QualifiedName.Namespace,
+                                complexType
+                            );
                         }
                     }
                     else
                     {
-                        SetParent(content.Content, content);   //simplecontent extension / restriction
+                        SetParent(content.Content, content); //simplecontent extension / restriction
                         PreprocessAnnotation(content.Content); //annotation child of simple extension / restriction
 
                         if (content.Content is XmlSchemaSimpleContentExtension contentExtension)
@@ -1394,28 +1582,49 @@ namespace System.Xml.Schema
                             }
                             else
                             {
-                                ValidateQNameAttribute(contentExtension, "base", contentExtension.BaseTypeName);
+                                ValidateQNameAttribute(
+                                    contentExtension,
+                                    "base",
+                                    contentExtension.BaseTypeName
+                                );
                             }
-                            PreprocessAttributes(contentExtension.Attributes, contentExtension.AnyAttribute, contentExtension);
+                            PreprocessAttributes(
+                                contentExtension.Attributes,
+                                contentExtension.AnyAttribute,
+                                contentExtension
+                            );
                             ValidateIdAttribute(contentExtension);
                         }
                         else
                         { //XmlSchemaSimpleContentRestriction
-                            XmlSchemaSimpleContentRestriction contentRestriction = (XmlSchemaSimpleContentRestriction)content.Content;
+                            XmlSchemaSimpleContentRestriction contentRestriction =
+                                (XmlSchemaSimpleContentRestriction)content.Content;
                             if (contentRestriction.BaseTypeName.IsEmpty)
                             {
-                                SendValidationEvent(SR.Sch_MissAttribute, "base", contentRestriction);
+                                SendValidationEvent(
+                                    SR.Sch_MissAttribute,
+                                    "base",
+                                    contentRestriction
+                                );
                             }
                             else
                             {
-                                ValidateQNameAttribute(contentRestriction, "base", contentRestriction.BaseTypeName);
+                                ValidateQNameAttribute(
+                                    contentRestriction,
+                                    "base",
+                                    contentRestriction.BaseTypeName
+                                );
                             }
                             if (contentRestriction.BaseType != null)
                             {
                                 SetParent(contentRestriction.BaseType, contentRestriction);
                                 PreprocessSimpleType(contentRestriction.BaseType, true);
                             }
-                            PreprocessAttributes(contentRestriction.Attributes, contentRestriction.AnyAttribute, contentRestriction);
+                            PreprocessAttributes(
+                                contentRestriction.Attributes,
+                                contentRestriction.AnyAttribute,
+                                contentRestriction
+                            );
                             ValidateIdAttribute(contentRestriction);
                         }
                     }
@@ -1432,7 +1641,12 @@ namespace System.Xml.Schema
                         }
                         else
                         {
-                            SendValidationEvent(SR.Sch_NoRestOrExtQName, complexType.QualifiedName.Name, complexType.QualifiedName.Namespace, complexType);
+                            SendValidationEvent(
+                                SR.Sch_NoRestOrExtQName,
+                                complexType.QualifiedName.Name,
+                                complexType.QualifiedName.Namespace,
+                                complexType
+                            );
                         }
                     }
                     else
@@ -1441,7 +1655,7 @@ namespace System.Xml.Schema
                         {
                             content.IsMixed = true; // fixup
                         }
-                        SetParent(content.Content, content);   //complexcontent extension / restriction
+                        SetParent(content.Content, content); //complexcontent extension / restriction
                         PreprocessAnnotation(content.Content); //Annotation child of extension / restriction
 
                         if (content.Content is XmlSchemaComplexContentExtension contentExtension)
@@ -1452,33 +1666,54 @@ namespace System.Xml.Schema
                             }
                             else
                             {
-                                ValidateQNameAttribute(contentExtension, "base", contentExtension.BaseTypeName);
+                                ValidateQNameAttribute(
+                                    contentExtension,
+                                    "base",
+                                    contentExtension.BaseTypeName
+                                );
                             }
                             if (contentExtension.Particle != null)
                             {
                                 SetParent(contentExtension.Particle, contentExtension); //Group / all / choice / sequence
                                 PreprocessParticle(contentExtension.Particle);
                             }
-                            PreprocessAttributes(contentExtension.Attributes, contentExtension.AnyAttribute, contentExtension);
+                            PreprocessAttributes(
+                                contentExtension.Attributes,
+                                contentExtension.AnyAttribute,
+                                contentExtension
+                            );
                             ValidateIdAttribute(contentExtension);
                         }
                         else
                         { // XmlSchemaComplexContentRestriction
-                            XmlSchemaComplexContentRestriction contentRestriction = (XmlSchemaComplexContentRestriction)content.Content;
+                            XmlSchemaComplexContentRestriction contentRestriction =
+                                (XmlSchemaComplexContentRestriction)content.Content;
                             if (contentRestriction.BaseTypeName.IsEmpty)
                             {
-                                SendValidationEvent(SR.Sch_MissAttribute, "base", contentRestriction);
+                                SendValidationEvent(
+                                    SR.Sch_MissAttribute,
+                                    "base",
+                                    contentRestriction
+                                );
                             }
                             else
                             {
-                                ValidateQNameAttribute(contentRestriction, "base", contentRestriction.BaseTypeName);
+                                ValidateQNameAttribute(
+                                    contentRestriction,
+                                    "base",
+                                    contentRestriction.BaseTypeName
+                                );
                             }
                             if (contentRestriction.Particle != null)
                             {
                                 SetParent(contentRestriction.Particle, contentRestriction); //Group / all / choice / sequence
                                 PreprocessParticle(contentRestriction.Particle);
                             }
-                            PreprocessAttributes(contentRestriction.Attributes, contentRestriction.AnyAttribute, contentRestriction);
+                            PreprocessAttributes(
+                                contentRestriction.Attributes,
+                                contentRestriction.AnyAttribute,
+                                contentRestriction
+                            );
                             ValidateIdAttribute(contentRestriction);
                         }
                         ValidateIdAttribute(content);
@@ -1568,7 +1803,6 @@ namespace System.Xml.Schema
             PreprocessAnnotation(notation); //Set parent of annotation child of notation
             ValidateIdAttribute(notation);
         }
-
 
         private void PreprocessParticle(XmlSchemaParticle particle)
         {
@@ -1666,7 +1900,11 @@ namespace System.Xml.Schema
             ValidateIdAttribute(particle);
         }
 
-        private void PreprocessAttributes(XmlSchemaObjectCollection attributes, XmlSchemaAnyAttribute? anyAttribute, XmlSchemaObject parent)
+        private void PreprocessAttributes(
+            XmlSchemaObjectCollection attributes,
+            XmlSchemaAnyAttribute? anyAttribute,
+            XmlSchemaObject parent
+        )
         {
             for (int i = 0; i < attributes.Count; ++i)
             {
@@ -1678,7 +1916,8 @@ namespace System.Xml.Schema
                 }
                 else
                 { // XmlSchemaAttributeGroupRef
-                    XmlSchemaAttributeGroupRef attributeGroupRef = (XmlSchemaAttributeGroupRef)attributes[i];
+                    XmlSchemaAttributeGroupRef attributeGroupRef = (XmlSchemaAttributeGroupRef)
+                        attributes[i];
                     if (attributeGroupRef.RefName.IsEmpty)
                     {
                         SendValidationEvent(SR.Sch_MissAttribute, "ref", attributeGroupRef);
@@ -1744,7 +1983,12 @@ namespace System.Xml.Schema
             if (len != name.Length)
             { // If the string is not a valid NCName, then throw or return false
                 string[] invCharArgs = XmlException.BuildCharExceptionArgs(name, len);
-                string innerStr = SR.Format(SR.Xml_BadNameCharWithPos, invCharArgs[0], invCharArgs[1], len);
+                string innerStr = SR.Format(
+                    SR.Xml_BadNameCharWithPos,
+                    invCharArgs[0],
+                    invCharArgs[1],
+                    len
+                );
                 SendValidationEvent(SR.Sch_InvalidNameAttributeEx, name, innerStr, xso);
             }
             else
@@ -1753,7 +1997,11 @@ namespace System.Xml.Schema
             }
         }
 
-        private void ValidateQNameAttribute(XmlSchemaObject xso, string attributeName, XmlQualifiedName value)
+        private void ValidateQNameAttribute(
+            XmlSchemaObject xso,
+            string attributeName,
+            XmlQualifiedName value
+        )
         {
             try
             {
@@ -1761,7 +2009,12 @@ namespace System.Xml.Schema
                 value.Atomize(NameTable);
                 if (_referenceNamespaces![value.Namespace] == null)
                 {
-                    SendValidationEvent(SR.Sch_UnrefNS, value.Namespace, xso, XmlSeverityType.Warning);
+                    SendValidationEvent(
+                        SR.Sch_UnrefNS,
+                        value.Namespace,
+                        xso,
+                        XmlSeverityType.Warning
+                    );
                 }
             }
             catch (Exception ex)
@@ -1816,4 +2069,4 @@ namespace System.Xml.Schema
         }
     };
 #pragma warning restore 618
-}  // namespace System.Xml
+} // namespace System.Xml

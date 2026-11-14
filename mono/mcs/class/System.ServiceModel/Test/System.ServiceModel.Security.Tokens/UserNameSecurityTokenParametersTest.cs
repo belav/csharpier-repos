@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,82 +40,96 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class UserNameSecurityTokenParametersTest
-	{
-		class MyUserNameSecurityTokenParameters : UserNameSecurityTokenParameters
-		{
-			public bool HasAsymmetricKeyEx {
-				get { return HasAsymmetricKey; }
-			}
+    [TestFixture]
+    public class UserNameSecurityTokenParametersTest
+    {
+        class MyUserNameSecurityTokenParameters : UserNameSecurityTokenParameters
+        {
+            public bool HasAsymmetricKeyEx
+            {
+                get { return HasAsymmetricKey; }
+            }
 
-			public bool SupportsClientAuthenticationEx {
-				get { return SupportsClientAuthentication; }
-			}
+            public bool SupportsClientAuthenticationEx
+            {
+                get { return SupportsClientAuthentication; }
+            }
 
-			public bool SupportsClientWindowsIdentityEx {
-				get { return SupportsClientWindowsIdentity; }
-			}
+            public bool SupportsClientWindowsIdentityEx
+            {
+                get { return SupportsClientWindowsIdentity; }
+            }
 
-			public bool SupportsServerAuthenticationEx {
-				get { return SupportsServerAuthentication; }
-			}
+            public bool SupportsServerAuthenticationEx
+            {
+                get { return SupportsServerAuthentication; }
+            }
 
-			public SecurityKeyIdentifierClause CreateKeyClause (
-				SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
-			{
-				return CreateKeyIdentifierClause (token, referenceStyle);
-			}
+            public SecurityKeyIdentifierClause CreateKeyClause(
+                SecurityToken token,
+                SecurityTokenReferenceStyle referenceStyle
+            )
+            {
+                return CreateKeyIdentifierClause(token, referenceStyle);
+            }
 
-			public void InitRequirement (SecurityTokenRequirement requirement)
-			{
-				InitializeSecurityTokenRequirement (requirement);
-			}
-		}
+            public void InitRequirement(SecurityTokenRequirement requirement)
+            {
+                InitializeSecurityTokenRequirement(requirement);
+            }
+        }
 
-		[Test]
-		public void DefaultValues ()
-		{
-			MyUserNameSecurityTokenParameters tp = new MyUserNameSecurityTokenParameters ();
-			Assert.AreEqual (SecurityTokenInclusionMode.AlwaysToRecipient, tp.InclusionMode, "#1");
-			Assert.AreEqual (SecurityTokenReferenceStyle.Internal, tp.ReferenceStyle, "#2");
-			Assert.AreEqual (false, tp.RequireDerivedKeys, "#3");
-			Assert.AreEqual (false, tp.HasAsymmetricKeyEx, "#4");
-			Assert.AreEqual (true, tp.SupportsClientAuthenticationEx, "#5");
-			Assert.AreEqual (true, tp.SupportsClientWindowsIdentityEx, "#6");
-			Assert.AreEqual (false, tp.SupportsServerAuthenticationEx, "#7");
-		}
+        [Test]
+        public void DefaultValues()
+        {
+            MyUserNameSecurityTokenParameters tp = new MyUserNameSecurityTokenParameters();
+            Assert.AreEqual(SecurityTokenInclusionMode.AlwaysToRecipient, tp.InclusionMode, "#1");
+            Assert.AreEqual(SecurityTokenReferenceStyle.Internal, tp.ReferenceStyle, "#2");
+            Assert.AreEqual(false, tp.RequireDerivedKeys, "#3");
+            Assert.AreEqual(false, tp.HasAsymmetricKeyEx, "#4");
+            Assert.AreEqual(true, tp.SupportsClientAuthenticationEx, "#5");
+            Assert.AreEqual(true, tp.SupportsClientWindowsIdentityEx, "#6");
+            Assert.AreEqual(false, tp.SupportsServerAuthenticationEx, "#7");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CreateKeyIdentifierClauseNullToken ()
-		{
-			new MyUserNameSecurityTokenParameters ().CreateKeyClause (null, SecurityTokenReferenceStyle.Internal);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateKeyIdentifierClauseNullToken()
+        {
+            new MyUserNameSecurityTokenParameters().CreateKeyClause(
+                null,
+                SecurityTokenReferenceStyle.Internal
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void CreateKeyIdentifierClauseNotSupportedToken ()
-		{
-			new MyUserNameSecurityTokenParameters ().CreateKeyClause (new RsaSecurityToken (RSA.Create ()), SecurityTokenReferenceStyle.Internal);
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void CreateKeyIdentifierClauseNotSupportedToken()
+        {
+            new MyUserNameSecurityTokenParameters().CreateKeyClause(
+                new RsaSecurityToken(RSA.Create()),
+                SecurityTokenReferenceStyle.Internal
+            );
+        }
 
-		[Test]
-		public void CreateKeyIdentifierClause ()
-		{
-			MyUserNameSecurityTokenParameters p =
-				new MyUserNameSecurityTokenParameters ();
-			UserNameSecurityToken token =
-				new UserNameSecurityToken ("mono", "pass");
-			SecurityKeyIdentifierClause c = p.CreateKeyClause (token, SecurityTokenReferenceStyle.Internal);
-			Assert.IsTrue (c is LocalIdKeyIdentifierClause, "#1");
+        [Test]
+        public void CreateKeyIdentifierClause()
+        {
+            MyUserNameSecurityTokenParameters p = new MyUserNameSecurityTokenParameters();
+            UserNameSecurityToken token = new UserNameSecurityToken("mono", "pass");
+            SecurityKeyIdentifierClause c = p.CreateKeyClause(
+                token,
+                SecurityTokenReferenceStyle.Internal
+            );
+            Assert.IsTrue(c is LocalIdKeyIdentifierClause, "#1");
 
-			try {
-				p.CreateKeyClause (token, SecurityTokenReferenceStyle.External);
-				Assert.Fail ("External identifier clause cannot be created.");
-			} catch (NotSupportedException) {
-			}
-		}
-	}
+            try
+            {
+                p.CreateKeyClause(token, SecurityTokenReferenceStyle.External);
+                Assert.Fail("External identifier clause cannot be created.");
+            }
+            catch (NotSupportedException) { }
+        }
+    }
 }
 #endif

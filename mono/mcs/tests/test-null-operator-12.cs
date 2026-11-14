@@ -1,14 +1,15 @@
 class Test
 {
-	int? _state;
-	public bool Working () => _state?.ToString () != "";
+    int? _state;
 
-	public static int Main ()
-	{
-		var t = new Test ();
-		if (!t.Working ())
-			return 1;
+    public bool Working() => _state?.ToString() != "";
 
-		return 0;
-	}
+    public static int Main()
+    {
+        var t = new Test();
+        if (!t.Working())
+            return 1;
+
+        return 0;
+    }
 }

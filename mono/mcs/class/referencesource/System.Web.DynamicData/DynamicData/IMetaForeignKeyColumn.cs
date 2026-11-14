@@ -1,10 +1,12 @@
-﻿namespace System.Web.DynamicData {
+﻿namespace System.Web.DynamicData
+{
     using System;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
-    internal interface IMetaForeignKeyColumn : IMetaColumn {
+    internal interface IMetaForeignKeyColumn : IMetaColumn
+    {
         void ExtractForeignKey(IDictionary dictionary, string value);
         ReadOnlyCollection<string> ForeignKeyNames { get; }
         string GetForeignKeyDetailsPath(object row);

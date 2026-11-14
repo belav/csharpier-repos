@@ -278,8 +278,8 @@ public class ActionEndpointFactoryTest
         var action = CreateActionDescriptor(values, "Products/{action:int}");
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => CreateAttributeRoutedEndpoint(action)
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            CreateAttributeRoutedEndpoint(action)
         );
         Assert.Equal(
             "Failed to update the route pattern 'Products/{action:int}' with required route values. "
@@ -655,8 +655,10 @@ public class ActionEndpointFactoryTest
 
     private void AssertMatchingSuppressed(Endpoint endpoint, bool suppressed)
     {
-        var isEndpointSuppressed =
-            endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching ?? false;
+        var isEndpointSuppressed = endpoint
+            .Metadata.GetMetadata<ISuppressMatchingMetadata>()
+            ?.SuppressMatching
+            ?? false;
         Assert.Equal(suppressed, isEndpointSuppressed);
     }
 

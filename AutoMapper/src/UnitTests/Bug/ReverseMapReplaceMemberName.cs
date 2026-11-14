@@ -11,28 +11,24 @@ public class ReverseMapAndReplaceMemberName : AutoMapperSpecBase
     {
         public string AccountId { get; set; }
     }
+
     class Destination
     {
         public string UserId { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.ReplaceMemberName("Account", "User");
-        cfg.ReplaceMemberName("User", "Account");
-        cfg.CreateMap<Source, Destination>().ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.ReplaceMemberName("Account", "User");
+            cfg.ReplaceMemberName("User", "Account");
+            cfg.CreateMap<Source, Destination>().ReverseMap();
+        });
 
     protected override void Because_of()
     {
-        _source = Mapper.Map<Destination, Source>(new Destination
-        {
-            UserId = SomeId
-        });
-        _destination = Mapper.Map<Source, Destination>(new Source
-        {
-            AccountId = SomeOtherId
-        });
+        _source = Mapper.Map<Destination, Source>(new Destination { UserId = SomeId });
+        _destination = Mapper.Map<Source, Destination>(new Source { AccountId = SomeOtherId });
     }
 
     [Fact]
@@ -70,21 +66,16 @@ public class ReverseMapAndReplaceMemberNameWithProfile : AutoMapperSpecBase
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.AddProfile<MyProfile>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.AddProfile<MyProfile>();
+        });
 
     protected override void Because_of()
     {
-        _source = Mapper.Map<Destination, Source>(new Destination
-        {
-            UserId = SomeId
-        });
-        _destination = Mapper.Map<Source, Destination>(new Source
-        {
-            AccountId = SomeOtherId
-        });
+        _source = Mapper.Map<Destination, Source>(new Destination { UserId = SomeId });
+        _destination = Mapper.Map<Source, Destination>(new Source { AccountId = SomeOtherId });
     }
 
     [Fact]

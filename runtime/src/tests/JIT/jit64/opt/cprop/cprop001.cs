@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class LIM
 {
     public static int accumulator = 0;
@@ -30,8 +31,6 @@ public class LIM
         return -1;
     }
 
-
-
     public static int GetInt(int x)
     {
         try
@@ -43,7 +42,6 @@ public class LIM
             throw;
         }
     }
-
 
     internal static void Accumulate(int x)
     {

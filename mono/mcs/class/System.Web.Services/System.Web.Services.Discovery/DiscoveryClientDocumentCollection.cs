@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Discovery.DiscoveryClientDocumentCollection.cs
 //
 // Author:
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,56 +32,59 @@
 
 using System.Collections;
 
-namespace System.Web.Services.Discovery {
-	public sealed class DiscoveryClientDocumentCollection : DictionaryBase {
+namespace System.Web.Services.Discovery
+{
+    public sealed class DiscoveryClientDocumentCollection : DictionaryBase
+    {
+        #region Constructors
 
-		#region Constructors 
+        public DiscoveryClientDocumentCollection()
+            : base() { }
 
-		public DiscoveryClientDocumentCollection () 
-			: base ()
-		{
-		}
-		
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public object this [string url] {
-			get { return InnerHashtable [url]; }
-			set { 
-				if (url == null)
-					throw new ArgumentNullException ();
-				InnerHashtable [url] = value; 
-			}
-		}
-		
-		public ICollection Keys {
-			get { return InnerHashtable.Keys; }
-		}
-		
-		public ICollection Values {
-			get { return InnerHashtable.Values; }
-		}
-		
-		#endregion // Properties
+        public object this[string url]
+        {
+            get { return InnerHashtable[url]; }
+            set
+            {
+                if (url == null)
+                    throw new ArgumentNullException();
+                InnerHashtable[url] = value;
+            }
+        }
 
-		#region Methods
+        public ICollection Keys
+        {
+            get { return InnerHashtable.Keys; }
+        }
 
-		public void Add (string url, object value)
-		{
-			InnerHashtable [url] = value;
-		}
+        public ICollection Values
+        {
+            get { return InnerHashtable.Values; }
+        }
 
-		public bool Contains (string url)
-		{
-			return InnerHashtable.Contains (url);
-		}
-		
-		public void Remove (string url)
-		{
-			InnerHashtable.Remove (url);
-		}
+        #endregion // Properties
 
-		#endregion // Methods
-	}
+        #region Methods
+
+        public void Add(string url, object value)
+        {
+            InnerHashtable[url] = value;
+        }
+
+        public bool Contains(string url)
+        {
+            return InnerHashtable.Contains(url);
+        }
+
+        public void Remove(string url)
+        {
+            InnerHashtable.Remove(url);
+        }
+
+        #endregion // Methods
+    }
 }

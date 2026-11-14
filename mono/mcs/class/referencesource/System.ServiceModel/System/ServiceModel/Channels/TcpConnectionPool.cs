@@ -6,19 +6,19 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Net;
     using System.Net.Sockets;
-    using System.Globalization;
     using System.ServiceModel.Diagnostics;
 
     class TcpConnectionPoolRegistry : ConnectionPoolRegistry
     {
         public TcpConnectionPoolRegistry()
-            : base()
-        {
-        }
+            : base() { }
 
-        protected override ConnectionPool CreatePool(IConnectionOrientedTransportChannelFactorySettings settings)
+        protected override ConnectionPool CreatePool(
+            IConnectionOrientedTransportChannelFactorySettings settings
+        )
         {
             ITcpChannelFactorySettings tcpSettings = (ITcpChannelFactorySettings)settings;
             return new TcpConnectionPool(tcpSettings);
@@ -27,9 +27,7 @@ namespace System.ServiceModel.Channels
         class TcpConnectionPool : ConnectionPool
         {
             public TcpConnectionPool(ITcpChannelFactorySettings settings)
-                : base(settings, settings.LeaseTimeout)
-            {
-            }
+                : base(settings, settings.LeaseTimeout) { }
 
             protected override string GetPoolKey(EndpointAddress address, Uri via)
             {
@@ -41,19 +39,23 @@ namespace System.ServiceModel.Channels
 
                 string normalizedHost = via.DnsSafeHost.ToUpperInvariant();
 
-                return string.Format(CultureInfo.InvariantCulture, @"[{0}, {1}]", normalizedHost, port);
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    @"[{0}, {1}]",
+                    normalizedHost,
+                    port
+                );
             }
 
-            public override bool IsCompatible(IConnectionOrientedTransportChannelFactorySettings settings)
+            public override bool IsCompatible(
+                IConnectionOrientedTransportChannelFactorySettings settings
+            )
             {
                 ITcpChannelFactorySettings tcpSettings = (ITcpChannelFactorySettings)settings;
                 return (
-                    (this.LeaseTimeout == tcpSettings.LeaseTimeout) &&
-                    base.IsCompatible(settings)
-                    );
+                    (this.LeaseTimeout == tcpSettings.LeaseTimeout) && base.IsCompatible(settings)
+                );
             }
         }
     }
 }
-
-

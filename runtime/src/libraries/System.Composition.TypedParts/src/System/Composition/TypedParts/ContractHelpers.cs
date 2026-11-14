@@ -14,7 +14,12 @@ namespace System.Composition.TypedParts
     {
         private const string ImportManyImportMetadataConstraintName = "IsImportMany";
 
-        public static bool TryGetExplicitImportInfo(Type memberType, object[] attributes, object site, out ImportInfo importInfo)
+        public static bool TryGetExplicitImportInfo(
+            Type memberType,
+            object[] attributes,
+            object site,
+            out ImportInfo importInfo
+        )
         {
             if (attributes.Any(a => a is ImportAttribute || a is ImportManyAttribute))
             {
@@ -65,12 +70,19 @@ namespace System.Composition.TypedParts
 
                 var attrType = attr.GetType();
                 // Note, we don't support ReflectionContext in this scenario
-                if (attrType.GetTypeInfo().GetCustomAttribute<MetadataAttributeAttribute>(true) != null)
+                if (
+                    attrType.GetTypeInfo().GetCustomAttribute<MetadataAttributeAttribute>(true)
+                    != null
+                )
                 {
                     // We don't coalesce to collections here the way export metadata does
-                    foreach (var prop in attrType
-                        .GetRuntimeProperties()
-                        .Where(p => p.GetMethod.IsPublic && p.DeclaringType == attrType && p.CanRead))
+                    foreach (
+                        var prop in attrType
+                            .GetRuntimeProperties()
+                            .Where(p =>
+                                p.GetMethod.IsPublic && p.DeclaringType == attrType && p.CanRead
+                            )
+                    )
                     {
                         importMetadata ??= new Dictionary<string, object>();
                         importMetadata.Add(prop.Name, prop.GetValue(attr, null));
@@ -86,7 +98,11 @@ namespace System.Composition.TypedParts
 
             if (importMetadata != null)
             {
-                importedContract = new CompositionContract(importedContract.ContractType, importedContract.ContractName, importMetadata);
+                importedContract = new CompositionContract(
+                    importedContract.ContractType,
+                    importedContract.ContractName,
+                    importMetadata
+                );
             }
 
             return new ImportInfo(importedContract, allowDefault);

@@ -29,121 +29,134 @@
 using System.Security.Authentication.ExtendedProtection;
 using System.Threading.Tasks;
 
-namespace System.Net {
-	public sealed class HttpListener : IDisposable
-	{
-		internal const string EXCEPTION_MESSAGE = "System.Net.HttpListener is not supported on the current platform.";
+namespace System.Net
+{
+    public sealed class HttpListener : IDisposable
+    {
+        internal const string EXCEPTION_MESSAGE =
+            "System.Net.HttpListener is not supported on the current platform.";
 
-		public delegate ExtendedProtectionPolicy ExtendedProtectionSelector (HttpListenerRequest request);
+        public delegate ExtendedProtectionPolicy ExtendedProtectionSelector(
+            HttpListenerRequest request
+        );
 
-		public HttpListener ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public HttpListener()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public AuthenticationSchemes AuthenticationSchemes {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public AuthenticationSchemes AuthenticationSchemes
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
 #if SECURITY_DEP
-		public AuthenticationSchemeSelector AuthenticationSchemeSelectorDelegate {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public AuthenticationSchemeSelector AuthenticationSchemeSelectorDelegate
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 #endif
 
-		public bool IgnoreWriteExceptions {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public bool IgnoreWriteExceptions
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public bool IsListening {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public bool IsListening
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static bool IsSupported {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static bool IsSupported
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public HttpListenerPrefixCollection Prefixes {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public HttpListenerPrefixCollection Prefixes
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string Realm {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string Realm
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public bool UnsafeConnectionNtlmAuthentication {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public bool UnsafeConnectionNtlmAuthentication
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public HttpListenerTimeoutManager TimeoutManager {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public HttpListenerTimeoutManager TimeoutManager
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public ExtendedProtectionPolicy ExtendedProtectionPolicy
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public ExtendedProtectionPolicy ExtendedProtectionPolicy
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public ExtendedProtectionSelector ExtendedProtectionSelectorDelegate
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public ExtendedProtectionSelector ExtendedProtectionSelectorDelegate
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public ServiceNameCollection DefaultServiceNames
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public ServiceNameCollection DefaultServiceNames
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public void Abort ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void Abort()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void Close ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void Close()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public IAsyncResult BeginGetContext (AsyncCallback callback, Object state)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public IAsyncResult BeginGetContext(AsyncCallback callback, Object state)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public HttpListenerContext EndGetContext (IAsyncResult asyncResult)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public HttpListenerContext EndGetContext(IAsyncResult asyncResult)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public HttpListenerContext GetContext ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public HttpListenerContext GetContext()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void Start ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void Start()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public void Stop ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public void Stop()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		void IDisposable.Dispose ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        void IDisposable.Dispose()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public Task<HttpListenerContext> GetContextAsync ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
-	}
+        public Task<HttpListenerContext> GetContextAsync()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+    }
 }

@@ -7,7 +7,6 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Description;
     using System.Xml;
 
-
     public sealed class PrivacyNoticeBindingElement : BindingElement, IPolicyExportExtension
     {
         Uri url;
@@ -27,10 +26,7 @@ namespace System.ServiceModel.Channels
 
         public Uri Url
         {
-            get
-            {
-                return this.url;
-            }
+            get { return this.url; }
             set
             {
                 if (value == null)
@@ -44,16 +40,18 @@ namespace System.ServiceModel.Channels
 
         public int Version
         {
-            get
-            {
-                return this.version;
-            }
+            get { return this.version; }
             set
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                                        SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 }
                 this.version = value;
             }
@@ -73,7 +71,10 @@ namespace System.ServiceModel.Channels
             return context.GetInnerProperty<T>();
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -88,12 +89,18 @@ namespace System.ServiceModel.Channels
                     XmlDocument doc = new XmlDocument();
 
                     // PrivacyNotice assertion
-                    XmlElement assertion = doc.CreateElement(PrivacyNoticePolicyStrings.PrivacyNoticePrefix,
-                                                              PrivacyNoticePolicyStrings.PrivacyNoticeName,
-                                                              PrivacyNoticePolicyStrings.PrivacyNoticeNamespace);
+                    XmlElement assertion = doc.CreateElement(
+                        PrivacyNoticePolicyStrings.PrivacyNoticePrefix,
+                        PrivacyNoticePolicyStrings.PrivacyNoticeName,
+                        PrivacyNoticePolicyStrings.PrivacyNoticeNamespace
+                    );
 
                     assertion.InnerText = settings.Url.ToString();
-                    assertion.SetAttribute(PrivacyNoticePolicyStrings.PrivacyNoticeVersionAttributeName, PrivacyNoticePolicyStrings.PrivacyNoticeNamespace, XmlConvert.ToString(settings.Version));
+                    assertion.SetAttribute(
+                        PrivacyNoticePolicyStrings.PrivacyNoticeVersionAttributeName,
+                        PrivacyNoticePolicyStrings.PrivacyNoticeNamespace,
+                        XmlConvert.ToString(settings.Version)
+                    );
 
                     context.GetBindingAssertions().Add(assertion);
                 }

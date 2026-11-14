@@ -23,9 +23,7 @@ public class DebugView
     /// </summary>
     /// <param name="toShortDebugString">Delegate to create the short debug string.</param>
     /// <param name="toLongDebugString">Delegate to create the long debug string.</param>
-    public DebugView(
-        Func<string> toShortDebugString,
-        Func<string> toLongDebugString)
+    public DebugView(Func<string> toShortDebugString, Func<string> toLongDebugString)
     {
         _toShortDebugString = toShortDebugString;
         _toLongDebugString = toLongDebugString;
@@ -37,8 +35,7 @@ public class DebugView
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information and examples.
     /// </remarks>
-    public virtual string LongView
-        => _toLongDebugString();
+    public virtual string LongView => _toLongDebugString();
 
     /// <summary>
     ///     The short-form, less-detailed debug string.
@@ -46,6 +43,5 @@ public class DebugView
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information and examples.
     /// </remarks>
-    public virtual string ShortView
-        => _toShortDebugString();
+    public virtual string ShortView => _toShortDebugString();
 }

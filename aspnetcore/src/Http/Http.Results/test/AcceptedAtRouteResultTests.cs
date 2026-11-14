@@ -105,9 +105,8 @@ public class AcceptedAtRouteResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>(
-            "httpContext",
-            () => result.ExecuteAsync(httpContext)
+        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () =>
+            result.ExecuteAsync(httpContext)
         );
     }
 
@@ -115,27 +114,23 @@ public class AcceptedAtRouteResultTests
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(
-            "method",
-            () =>
-                PopulateMetadata<AcceptedAtRoute>(
-                    null,
-                    new RouteEndpointBuilder(
-                        requestDelegate: null,
-                        RoutePatternFactory.Parse("/"),
-                        order: 0
-                    )
+        Assert.Throws<ArgumentNullException>("method", () =>
+            PopulateMetadata<AcceptedAtRoute>(
+                null,
+                new RouteEndpointBuilder(
+                    requestDelegate: null,
+                    RoutePatternFactory.Parse("/"),
+                    order: 0
                 )
+            )
         );
-        Assert.Throws<ArgumentNullException>(
-            "builder",
-            () =>
-                PopulateMetadata<AcceptedAtRoute>(
-                    (
-                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
-                    null
-                )
+        Assert.Throws<ArgumentNullException>("builder", () =>
+            PopulateMetadata<AcceptedAtRoute>(
+                (
+                    (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                ).GetMethodInfo(),
+                null
+            )
         );
     }
 

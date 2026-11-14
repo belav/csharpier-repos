@@ -10,11 +10,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class PragmaKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public PragmaKeywordRecommender()
-            : base(SyntaxKind.PragmaKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.PragmaKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.IsPreProcessorKeywordContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => context.IsPreProcessorKeywordContext;
     }
 }

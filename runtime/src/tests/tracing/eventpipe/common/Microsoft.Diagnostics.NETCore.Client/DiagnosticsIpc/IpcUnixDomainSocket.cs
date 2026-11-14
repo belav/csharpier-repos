@@ -14,9 +14,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
         private string _path;
 
         internal IpcUnixDomainSocket()
-            : base(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)
-        {
-        }
+            : base(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified) { }
 
         public void Bind(IpcUnixDomainSocketEndPoint localEP)
         {

@@ -17,7 +17,13 @@ namespace Microsoft.CodeAnalysis.Debugging
         internal readonly int ScopeStart; // Constants only
         internal readonly int ScopeEnd; // Constants only
 
-        internal TupleElementNamesInfo(ImmutableArray<string> elementNames, int slotIndex, string localName, int scopeStart, int scopeEnd)
+        internal TupleElementNamesInfo(
+            ImmutableArray<string> elementNames,
+            int slotIndex,
+            string localName,
+            int scopeStart,
+            int scopeEnd
+        )
         {
             Debug.Assert(!elementNames.IsDefault);
 

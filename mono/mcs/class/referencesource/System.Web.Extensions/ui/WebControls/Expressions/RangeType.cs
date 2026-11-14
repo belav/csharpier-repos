@@ -1,9 +1,11 @@
-﻿namespace System.Web.UI.WebControls.Expressions {
+﻿namespace System.Web.UI.WebControls.Expressions
+{
     using System;
 
-    public enum RangeType {
+    public enum RangeType
+    {
         None,
         Exclusive,
-        Inclusive
+        Inclusive,
     }
 }

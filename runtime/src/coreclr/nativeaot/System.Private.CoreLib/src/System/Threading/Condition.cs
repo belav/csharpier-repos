@@ -3,7 +3,6 @@
 
 #pragma warning disable 0420 //passing volatile fields by ref
 
-
 using System.Diagnostics;
 
 namespace System.Threading

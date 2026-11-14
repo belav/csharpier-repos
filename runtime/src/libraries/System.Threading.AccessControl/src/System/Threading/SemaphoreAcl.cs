@@ -24,7 +24,13 @@ namespace System.Threading
         /// <paramref name="maximumCount" /> is not a positive number.</exception>
         /// <exception cref="ArgumentException"><paramref name="initialCount" /> is greater than <paramref name="maximumCount" />.</exception>
         /// <exception cref="WaitHandleCannotBeOpenedException">A semaphore handle with the system-wide name '<paramref name="name" />' cannot be created. A semaphore handle of a different type might have the same name.</exception>
-        public static unsafe Semaphore Create(int initialCount, int maximumCount, string? name, out bool createdNew, SemaphoreSecurity? semaphoreSecurity)
+        public static unsafe Semaphore Create(
+            int initialCount,
+            int maximumCount,
+            string? name,
+            out bool createdNew,
+            SemaphoreSecurity? semaphoreSecurity
+        )
         {
             if (semaphoreSecurity == null)
             {
@@ -33,12 +39,18 @@ namespace System.Threading
 
             if (initialCount < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(initialCount), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(initialCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (maximumCount < 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(maximumCount), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(maximumCount),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
             if (initialCount > maximumCount)
@@ -51,7 +63,7 @@ namespace System.Threading
                 var secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
                 {
                     nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                    lpSecurityDescriptor = pSecurityDescriptor
+                    lpSecurityDescriptor = pSecurityDescriptor,
                 };
 
                 SafeWaitHandle handle = Interop.Kernel32.CreateSemaphoreEx(
@@ -69,9 +81,17 @@ namespace System.Threading
                 {
                     handle.Dispose();
 
-                    if (!string.IsNullOrEmpty(name) && errorCode == Interop.Errors.ERROR_INVALID_HANDLE)
+                    if (
+                        !string.IsNullOrEmpty(name)
+                        && errorCode == Interop.Errors.ERROR_INVALID_HANDLE
+                    )
                     {
-                        throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                        throw new WaitHandleCannotBeOpenedException(
+                            SR.Format(
+                                SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                                name
+                            )
+                        );
                     }
 
                     throw Win32Marshal.GetExceptionForLastWin32Error();
@@ -104,7 +124,12 @@ namespace System.Threading
                     throw new WaitHandleCannotBeOpenedException();
 
                 case OpenExistingResult.NameInvalid:
-                    throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                    throw new WaitHandleCannotBeOpenedException(
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
 
                 case OpenExistingResult.PathNotFound:
                     throw new IOException(SR.Format(SR.IO_PathNotFound_Path, name));
@@ -127,10 +152,17 @@ namespace System.Threading
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
         /// <exception cref="IOException">A Win32 error occurred.</exception>
         /// <exception cref="UnauthorizedAccessException">The named semaphore exists, but the user does not have the security access required to use it.</exception>
-        public static bool TryOpenExisting(string name, SemaphoreRights rights, [NotNullWhen(returnValue: true)] out Semaphore? result) =>
-            OpenExistingWorker(name, rights, out result) == OpenExistingResult.Success;
+        public static bool TryOpenExisting(
+            string name,
+            SemaphoreRights rights,
+            [NotNullWhen(returnValue: true)] out Semaphore? result
+        ) => OpenExistingWorker(name, rights, out result) == OpenExistingResult.Success;
 
-        private static OpenExistingResult OpenExistingWorker(string name, SemaphoreRights rights, out Semaphore? result)
+        private static OpenExistingResult OpenExistingWorker(
+            string name,
+            SemaphoreRights rights,
+            out Semaphore? result
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
 
@@ -148,10 +180,11 @@ namespace System.Threading
                 handle.Dispose();
                 return errorCode switch
                 {
-                    Interop.Errors.ERROR_FILE_NOT_FOUND or Interop.Errors.ERROR_INVALID_NAME => OpenExistingResult.NameNotFound,
+                    Interop.Errors.ERROR_FILE_NOT_FOUND or Interop.Errors.ERROR_INVALID_NAME =>
+                        OpenExistingResult.NameNotFound,
                     Interop.Errors.ERROR_PATH_NOT_FOUND => OpenExistingResult.PathNotFound,
                     Interop.Errors.ERROR_INVALID_HANDLE => OpenExistingResult.NameInvalid,
-                    _ => throw Win32Marshal.GetExceptionForLastWin32Error()
+                    _ => throw Win32Marshal.GetExceptionForLastWin32Error(),
                 };
             }
 

@@ -9,9 +9,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class CorrectException : Exception
-{
-}
+public class CorrectException : Exception { }
 
 public class CCC
 {
@@ -27,23 +25,22 @@ public class ClassCallingCctor<T>
     [MethodImpl(MethodImplOptions.NoInlining)]
     internal static int Test()
     {
-	try
-	{
-	    ClassWithCctor<T>.StaticField = Call();
-	}
-	catch (CorrectException)
-	{
-	    return 100;
-	}
-	catch
-	{
-	}
-	return 1;
+        try
+        {
+            ClassWithCctor<T>.StaticField = Call();
+        }
+        catch (CorrectException)
+        {
+            return 100;
+        }
+        catch { }
+        return 1;
     }
 }
 
 public class ClassWithCctor<T>
 {
     public static int StaticField;
+
     static ClassWithCctor() => throw new Exception();
 }

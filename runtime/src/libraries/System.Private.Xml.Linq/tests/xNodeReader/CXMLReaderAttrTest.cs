@@ -32,35 +32,99 @@ namespace CoreXml.Test.XLinq
                         n = strAttr + (i - 1);
 
                         qname = "foo:" + n;
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Compare this with GetAttribute"
+                        );
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Compare MoveToAttribute(i) with GetAttribute"
+                        );
 
-                        TestLog.Compare(DataReader[n, strNamespace], DataReader.GetAttribute(n, strNamespace), "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)");
+                        TestLog.Compare(
+                            DataReader[n, strNamespace],
+                            DataReader.GetAttribute(n, strNamespace),
+                            "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[n, strNamespace], "Compare this(i) with this(name,strNamespace)");
-                        TestLog.Compare(DataReader.MoveToAttribute(n, strNamespace), true, "MoveToAttribute(name,strNamespace)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(n, strNamespace), "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[n, strNamespace],
+                            "Compare this(i) with this(name,strNamespace)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(n, strNamespace),
+                            true,
+                            "MoveToAttribute(name,strNamespace)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(n, strNamespace),
+                            "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[qname], "Compare this(i) with this(qname)");
-                        TestLog.Compare(DataReader.MoveToAttribute(qname), true, "MoveToAttribute(qname)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(qname), "Compare MoveToAttribute(qname) with GetAttribute(qname)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[qname],
+                            "Compare this(i) with this(qname)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(qname),
+                            true,
+                            "MoveToAttribute(qname)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(qname),
+                            "Compare MoveToAttribute(qname) with GetAttribute(qname)"
+                        );
                     }
 
                     PositionOnElement(DataReader, "ACT1");
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
-                        TestLog.Compare(astr[i], DataReader.GetAttribute(i), "Compare value with GetAttribute");
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                        TestLog.Compare(
+                            astr[i],
+                            DataReader.GetAttribute(i),
+                            "Compare value with GetAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Compare this with GetAttribute"
+                        );
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Compare MoveToAttribute(i) with GetAttribute"
+                        );
 
                         n = strAttr + i;
-                        TestLog.Compare(DataReader[n], DataReader.GetAttribute(n), "Compare this(name) with GetAttribute(name)");
+                        TestLog.Compare(
+                            DataReader[n],
+                            DataReader.GetAttribute(n),
+                            "Compare this(name) with GetAttribute(name)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[n], "Compare this(i) with this(name)");
-                        TestLog.Compare(DataReader.MoveToAttribute(n), true, "MoveToAttribute(name)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(n), "Compare MoveToAttribute(name) with GetAttribute(name)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[n],
+                            "Compare this(i) with this(name)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(n),
+                            true,
+                            "MoveToAttribute(name)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(n),
+                            "Compare MoveToAttribute(name) with GetAttribute(name)"
+                        );
                     }
                 }
 
@@ -83,21 +147,61 @@ namespace CoreXml.Test.XLinq
 
                         qname = "foo:" + n;
 
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Compare this with GetAttribute"
+                        );
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Compare MoveToAttribute(i) with GetAttribute"
+                        );
 
-                        TestLog.Compare(DataReader[n, strNamespace], DataReader.GetAttribute(n, strNamespace), "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)");
+                        TestLog.Compare(
+                            DataReader[n, strNamespace],
+                            DataReader.GetAttribute(n, strNamespace),
+                            "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[n, strNamespace], "Compare this(i) with this(name,strNamespace)");
-                        TestLog.Compare(DataReader.MoveToAttribute(n, strNamespace), true, "MoveToAttribute(name,strNamespace)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(n, strNamespace), "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[n, strNamespace],
+                            "Compare this(i) with this(name,strNamespace)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(n, strNamespace),
+                            true,
+                            "MoveToAttribute(name,strNamespace)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(n, strNamespace),
+                            "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)"
+                        );
 
-                        TestLog.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Compare this(qname) with GetAttribute(qname)");
+                        TestLog.Compare(
+                            DataReader[qname],
+                            DataReader.GetAttribute(qname),
+                            "Compare this(qname) with GetAttribute(qname)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[qname], "Compare this(i) with this(qname)");
-                        TestLog.Compare(DataReader.MoveToAttribute(qname), true, "MoveToAttribute(qname)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(qname), "Compare MoveToAttribute(qname) with GetAttribute(qname)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[qname],
+                            "Compare this(i) with this(qname)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(qname),
+                            true,
+                            "MoveToAttribute(qname)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(qname),
+                            "Compare MoveToAttribute(qname) with GetAttribute(qname)"
+                        );
                     }
 
                     PositionOnElement(DataReader, "ACT1");
@@ -105,16 +209,44 @@ namespace CoreXml.Test.XLinq
                     {
                         n = strAttr + i;
 
-                        TestLog.Compare(astr[i], DataReader.GetAttribute(i), "Compare value with GetAttribute");
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                        TestLog.Compare(
+                            astr[i],
+                            DataReader.GetAttribute(i),
+                            "Compare value with GetAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Compare this with GetAttribute"
+                        );
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Compare MoveToAttribute(i) with GetAttribute"
+                        );
 
-                        TestLog.Compare(DataReader[n], DataReader.GetAttribute(n), "Compare this(name) with GetAttribute(name)");
+                        TestLog.Compare(
+                            DataReader[n],
+                            DataReader.GetAttribute(n),
+                            "Compare this(name) with GetAttribute(name)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[n], "Compare this(i) with this(name)");
-                        TestLog.Compare(DataReader.MoveToAttribute(n), true, "MoveToAttribute(name)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(n), "Compare MoveToAttribute(name) with GetAttribute(name)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[n],
+                            "Compare this(i) with this(name)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(n),
+                            true,
+                            "MoveToAttribute(name)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(n),
+                            "Compare MoveToAttribute(name) with GetAttribute(name)"
+                        );
                     }
                 }
 
@@ -137,37 +269,105 @@ namespace CoreXml.Test.XLinq
 
                         qname = "foo:" + n;
 
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Compare this with GetAttribute"
+                        );
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Compare MoveToAttribute(i) with GetAttribute"
+                        );
 
-                        TestLog.Compare(DataReader[n, strNamespace], DataReader.GetAttribute(n, strNamespace), "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)");
+                        TestLog.Compare(
+                            DataReader[n, strNamespace],
+                            DataReader.GetAttribute(n, strNamespace),
+                            "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[n, strNamespace], "Compare this(i) with this(name,strNamespace)");
-                        TestLog.Compare(DataReader.MoveToAttribute(n, strNamespace), true, "MoveToAttribute(name,strNamespace)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(n, strNamespace), "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[n, strNamespace],
+                            "Compare this(i) with this(name,strNamespace)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(n, strNamespace),
+                            true,
+                            "MoveToAttribute(name,strNamespace)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(n, strNamespace),
+                            "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)"
+                        );
 
-                        TestLog.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Compare this(qname) with GetAttribute(qname)");
+                        TestLog.Compare(
+                            DataReader[qname],
+                            DataReader.GetAttribute(qname),
+                            "Compare this(qname) with GetAttribute(qname)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[qname], "Compare this(i) with this(qname)");
-                        TestLog.Compare(DataReader.MoveToAttribute(qname), true, "MoveToAttribute(qname)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(qname), "Compare MoveToAttribute(qname) with GetAttribute(qname)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[qname],
+                            "Compare this(i) with this(qname)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(qname),
+                            true,
+                            "MoveToAttribute(qname)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(qname),
+                            "Compare MoveToAttribute(qname) with GetAttribute(qname)"
+                        );
                     }
 
                     PositionOnElement(DataReader, "ACT1");
                     for (int i = 0; i < DataReader.AttributeCount; i += 2)
                     {
-                        TestLog.Compare(astr[i], DataReader.GetAttribute(i), "Compare value with GetAttribute");
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                        TestLog.Compare(
+                            astr[i],
+                            DataReader.GetAttribute(i),
+                            "Compare value with GetAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Compare this with GetAttribute"
+                        );
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Compare MoveToAttribute(i) with GetAttribute"
+                        );
 
                         n = strAttr + i;
-                        TestLog.Compare(DataReader[n], DataReader.GetAttribute(n), "Compare this(name) with GetAttribute(name)");
+                        TestLog.Compare(
+                            DataReader[n],
+                            DataReader.GetAttribute(n),
+                            "Compare this(name) with GetAttribute(name)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[n], "Compare this(i) with this(name)");
-                        TestLog.Compare(DataReader.MoveToAttribute(n), true, "MoveToAttribute(name)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(n), "Compare MoveToAttribute(name) with GetAttribute(name)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[n],
+                            "Compare this(i) with this(name)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(n),
+                            true,
+                            "MoveToAttribute(name)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(n),
+                            "Compare MoveToAttribute(name) with GetAttribute(name)"
+                        );
                     }
                 }
 
@@ -190,37 +390,105 @@ namespace CoreXml.Test.XLinq
 
                         qname = "foo:" + n;
 
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Compare this with GetAttribute"
+                        );
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Compare MoveToAttribute(i) with GetAttribute"
+                        );
 
-                        TestLog.Compare(DataReader[n, strNamespace], DataReader.GetAttribute(n, strNamespace), "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)");
+                        TestLog.Compare(
+                            DataReader[n, strNamespace],
+                            DataReader.GetAttribute(n, strNamespace),
+                            "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[n, strNamespace], "Compare this(i) with this(name,strNamespace)");
-                        TestLog.Compare(DataReader.MoveToAttribute(n, strNamespace), true, "MoveToAttribute(name,strNamespace)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(n, strNamespace), "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[n, strNamespace],
+                            "Compare this(i) with this(name,strNamespace)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(n, strNamespace),
+                            true,
+                            "MoveToAttribute(name,strNamespace)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(n, strNamespace),
+                            "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)"
+                        );
 
-                        TestLog.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Compare this(qname) with GetAttribute(qname)");
+                        TestLog.Compare(
+                            DataReader[qname],
+                            DataReader.GetAttribute(qname),
+                            "Compare this(qname) with GetAttribute(qname)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[qname], "Compare this(i) with this(qname)");
-                        TestLog.Compare(DataReader.MoveToAttribute(qname), true, "MoveToAttribute(qname)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(qname), "Compare MoveToAttribute(qname) with GetAttribute(qname)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[qname],
+                            "Compare this(i) with this(qname)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(qname),
+                            true,
+                            "MoveToAttribute(qname)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(qname),
+                            "Compare MoveToAttribute(qname) with GetAttribute(qname)"
+                        );
                     }
 
                     PositionOnElement(DataReader, "ACT1");
                     for (int i = 0; i < DataReader.AttributeCount; i += 3)
                     {
-                        TestLog.Compare(astr[i], DataReader.GetAttribute(i), "Compare value with GetAttribute");
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                        TestLog.Compare(
+                            astr[i],
+                            DataReader.GetAttribute(i),
+                            "Compare value with GetAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Compare this with GetAttribute"
+                        );
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Compare MoveToAttribute(i) with GetAttribute"
+                        );
 
                         n = strAttr + i;
-                        TestLog.Compare(DataReader[n], DataReader.GetAttribute(n), "Compare this(name) with GetAttribute(name)");
+                        TestLog.Compare(
+                            DataReader[n],
+                            DataReader.GetAttribute(n),
+                            "Compare this(name) with GetAttribute(name)"
+                        );
 
-                        TestLog.Compare(DataReader[i], DataReader[n], "Compare this(i) with this(name)");
-                        TestLog.Compare(DataReader.MoveToAttribute(n), true, "MoveToAttribute(name)");
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(n), "Compare MoveToAttribute(name) with GetAttribute(name)");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader[n],
+                            "Compare this(i) with this(name)"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(n),
+                            true,
+                            "MoveToAttribute(name)"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(n),
+                            "Compare MoveToAttribute(name) with GetAttribute(name)"
+                        );
                     }
                 }
 
@@ -245,7 +513,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader[strName], DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                        TestLog.Compare(
+                            DataReader[strName],
+                            DataReader.GetAttribute(strName),
+                            "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                        );
                     }
                 }
 
@@ -258,7 +530,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader[strName, null], null, "Ordinal (" + i + "): Should have returned null");
+                        TestLog.Compare(
+                            DataReader[strName, null],
+                            null,
+                            "Ordinal (" + i + "): Should have returned null"
+                        );
                     }
                 }
 
@@ -271,7 +547,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader.GetAttribute(strName, null), null, "Ordinal (" + i + "): Should have returned null");
+                        TestLog.Compare(
+                            DataReader.GetAttribute(strName, null),
+                            null,
+                            "Ordinal (" + i + "): Should have returned null"
+                        );
                     }
                 }
 
@@ -284,7 +564,13 @@ namespace CoreXml.Test.XLinq
                     for (int i = 1; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader[strName, strNamespace], DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]");
+                        TestLog.Compare(
+                            DataReader[strName, strNamespace],
+                            DataReader.GetAttribute(strName, strNamespace),
+                            "Ordinal ("
+                                + i
+                                + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]"
+                        );
                     }
                 }
 
@@ -297,7 +583,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 1; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + (i - 1);
-                        TestLog.Compare(DataReader[strName, null], null, "Ordinal (" + i + "): Should have returned null");
+                        TestLog.Compare(
+                            DataReader[strName, null],
+                            null,
+                            "Ordinal (" + i + "): Should have returned null"
+                        );
                     }
                 }
 
@@ -310,7 +600,10 @@ namespace CoreXml.Test.XLinq
                     for (int i = 1; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + (i - 1);
-                        if (DataReader.GetAttribute(strName, null) == DataReader[strName, strNamespace])
+                        if (
+                            DataReader.GetAttribute(strName, null)
+                            == DataReader[strName, strNamespace]
+                        )
                             throw new TestException(TestResult.Failed, Variation.Desc);
                     }
                 }
@@ -326,7 +619,11 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + i;
                         DataReader.MoveToAttribute(strName);
-                        TestLog.Compare(DataReader.Value, DataReader[strName], "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader[strName],
+                            "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                        );
                     }
                 }
 
@@ -340,7 +637,11 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + i;
                         DataReader.MoveToAttribute(strName);
-                        TestLog.Compare(DataReader[strName, null], null, "Ordinal (" + i + "): Should have returned null");
+                        TestLog.Compare(
+                            DataReader[strName, null],
+                            null,
+                            "Ordinal (" + i + "): Should have returned null"
+                        );
                     }
                 }
 
@@ -353,7 +654,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader.MoveToAttribute(strName, null), false, "Ordinal (" + i + "): Reader should not have moved");
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(strName, null),
+                            false,
+                            "Ordinal (" + i + "): Reader should not have moved"
+                        );
                     }
                 }
 
@@ -366,7 +671,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 1; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + (i - 1);
-                        TestLog.Compare(DataReader.MoveToAttribute(strName, null), false, "Ordinal (" + i + "): Reader should not have moved");
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(strName, null),
+                            false,
+                            "Ordinal (" + i + "): Reader should not have moved"
+                        );
                     }
                 }
 
@@ -380,7 +689,11 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + i;
                         DataReader.MoveToAttribute(strName, strNamespace);
-                        TestLog.Compare(DataReader[strName, null], null, "Ordinal (" + i + "): Should have returned null");
+                        TestLog.Compare(
+                            DataReader[strName, null],
+                            null,
+                            "Ordinal (" + i + "): Should have returned null"
+                        );
                     }
                 }
 
@@ -395,7 +708,11 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + (i - 1);
                         DataReader.MoveToAttribute(strName, strNamespace);
-                        TestLog.Compare(DataReader.Value, DataReader[strName, strNamespace], "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader[strName, strNamespace],
+                            "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                        );
                     }
                 }
 
@@ -412,7 +729,11 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "EMPTY1");
-                    TestLog.Compare(DataReader[string.Empty, string.Empty], null, "Should have returned null");
+                    TestLog.Compare(
+                        DataReader[string.Empty, string.Empty],
+                        null,
+                        "Should have returned null"
+                    );
                 }
 
                 //[Variation("This[QName] Verify with GetAttribute(Name, NamespaceURI)", Priority = 0)]
@@ -427,8 +748,18 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + i;
                         qname = "foo:" + strName;
-                        TestLog.Compare(DataReader[qname], DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName,strNamespace) and this[qname]");
-                        TestLog.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Ordinal (" + i + "): Compare GetAttribute(qname) and this[qname]");
+                        TestLog.Compare(
+                            DataReader[qname],
+                            DataReader.GetAttribute(strName, strNamespace),
+                            "Ordinal ("
+                                + i
+                                + "): Compare GetAttribute(strName,strNamespace) and this[qname]"
+                        );
+                        TestLog.Compare(
+                            DataReader[qname],
+                            DataReader.GetAttribute(qname),
+                            "Ordinal (" + i + "): Compare GetAttribute(qname) and this[qname]"
+                        );
                     }
                 }
 
@@ -444,9 +775,21 @@ namespace CoreXml.Test.XLinq
                     int i = 1;
                     strName = strAttr + i;
                     qname = "foo1:" + strName;
-                    TestLog.Compare(DataReader.MoveToAttribute(qname), false, "MoveToAttribute(invalid qname)");
-                    TestLog.Compare(DataReader[qname], null, "Compare this[invalid qname] with null");
-                    TestLog.Compare(DataReader.GetAttribute(qname), null, "Compare GetAttribute(invalid qname) with null");
+                    TestLog.Compare(
+                        DataReader.MoveToAttribute(qname),
+                        false,
+                        "MoveToAttribute(invalid qname)"
+                    );
+                    TestLog.Compare(
+                        DataReader[qname],
+                        null,
+                        "Compare this[invalid qname] with null"
+                    );
+                    TestLog.Compare(
+                        DataReader.GetAttribute(qname),
+                        null,
+                        "Compare GetAttribute(invalid qname) with null"
+                    );
                 }
             }
 
@@ -457,8 +800,16 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "EMPTY1");
-                    TestLog.Compare(DataReader.MoveToAttribute(string.Empty), false, "Should have returned false");
-                    TestLog.Compare(DataReader.Value, string.Empty, "Compare MoveToAttribute with String.Empty");
+                    TestLog.Compare(
+                        DataReader.MoveToAttribute(string.Empty),
+                        false,
+                        "Should have returned false"
+                    );
+                    TestLog.Compare(
+                        DataReader.Value,
+                        string.Empty,
+                        "Compare MoveToAttribute with String.Empty"
+                    );
                 }
 
                 //[Variation("MoveToAttribute(String.Empty,String.Empty)")]
@@ -466,8 +817,16 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "EMPTY1");
-                    TestLog.Compare(DataReader.MoveToAttribute(string.Empty, string.Empty), false, "Compare the call to MoveToAttribute");
-                    TestLog.Compare(DataReader.Value, string.Empty, "Compare MoveToAttribute(strName)");
+                    TestLog.Compare(
+                        DataReader.MoveToAttribute(string.Empty, string.Empty),
+                        false,
+                        "Compare the call to MoveToAttribute"
+                    );
+                    TestLog.Compare(
+                        DataReader.Value,
+                        string.Empty,
+                        "Compare MoveToAttribute(strName)"
+                    );
                 }
             }
 
@@ -481,7 +840,11 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "ACT0");
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]"
+                        );
                     }
                 }
 
@@ -492,7 +855,11 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "ACT1");
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]"
+                        );
                     }
                 }
 
@@ -506,8 +873,16 @@ namespace CoreXml.Test.XLinq
                         string str = DataReader.GetAttribute(i);
 
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                        TestLog.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                        );
+                        TestLog.Compare(
+                            str,
+                            DataReader.Value,
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                        );
                     }
                 }
 
@@ -521,8 +896,16 @@ namespace CoreXml.Test.XLinq
                         string str = DataReader.GetAttribute(i);
 
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader[i], "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                        TestLog.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader[i],
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                        );
+                        TestLog.Compare(
+                            str,
+                            DataReader.Value,
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                        );
                     }
                 }
             }
@@ -539,7 +922,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader[strName], DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                        TestLog.Compare(
+                            DataReader[strName],
+                            DataReader.GetAttribute(strName),
+                            "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                        );
                     }
                 }
 
@@ -552,7 +939,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader[strName], DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                        TestLog.Compare(
+                            DataReader[strName],
+                            DataReader.GetAttribute(strName),
+                            "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                        );
                     }
                 }
 
@@ -565,7 +956,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader[strName], DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                        TestLog.Compare(
+                            DataReader[strName],
+                            DataReader.GetAttribute(strName),
+                            "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                        );
                     }
                 }
 
@@ -581,9 +976,25 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + i;
                         qname = "foo:" + strName;
-                        TestLog.Compare(DataReader[strName, strNamespace], DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]");
-                        TestLog.Compare(DataReader[qname], DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]");
-                        TestLog.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Ordinal (" + i + "): Compare GetAttribute(qname) and this[qname]");
+                        TestLog.Compare(
+                            DataReader[strName, strNamespace],
+                            DataReader.GetAttribute(strName, strNamespace),
+                            "Ordinal ("
+                                + i
+                                + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]"
+                        );
+                        TestLog.Compare(
+                            DataReader[qname],
+                            DataReader.GetAttribute(strName, strNamespace),
+                            "Ordinal ("
+                                + i
+                                + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]"
+                        );
+                        TestLog.Compare(
+                            DataReader[qname],
+                            DataReader.GetAttribute(qname),
+                            "Ordinal (" + i + "): Compare GetAttribute(qname) and this[qname]"
+                        );
                     }
                 }
 
@@ -631,7 +1042,11 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + i;
                         DataReader.MoveToAttribute(strName);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(strName),
+                            "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                        );
                     }
                 }
 
@@ -645,7 +1060,11 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + i;
                         DataReader.MoveToAttribute(strName);
-                        TestLog.Compare(DataReader.GetAttribute(strName, null), null, "Ordinal (" + i + "): Did not return null");
+                        TestLog.Compare(
+                            DataReader.GetAttribute(strName, null),
+                            null,
+                            "Ordinal (" + i + "): Did not return null"
+                        );
                     }
                 }
 
@@ -658,8 +1077,16 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + i;
-                        TestLog.Compare(DataReader.MoveToAttribute(strName, null), false, "Ordinal (" + i + "): Incorrect move");
-                        TestLog.Compare(DataReader.Value, string.Empty, "Ordinal (" + i + "): DataReader.Value should be empty string");
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(strName, null),
+                            false,
+                            "Ordinal (" + i + "): Incorrect move"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            string.Empty,
+                            "Ordinal (" + i + "): DataReader.Value should be empty string"
+                        );
                     }
                 }
 
@@ -672,8 +1099,16 @@ namespace CoreXml.Test.XLinq
                     for (int i = 1; i < DataReader.AttributeCount; i++)
                     {
                         strName = strAttr + (i - 1);
-                        TestLog.Compare(DataReader.MoveToAttribute(strName, null), false, "Incorrect move");
-                        TestLog.Compare(DataReader.Value, string.Empty, "Ordinal (" + i + "): DataReader.Value should be empty string");
+                        TestLog.Compare(
+                            DataReader.MoveToAttribute(strName, null),
+                            false,
+                            "Incorrect move"
+                        );
+                        TestLog.Compare(
+                            DataReader.Value,
+                            string.Empty,
+                            "Ordinal (" + i + "): DataReader.Value should be empty string"
+                        );
                     }
                 }
 
@@ -687,7 +1122,11 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + i;
                         DataReader.MoveToAttribute(strName, strNamespace);
-                        TestLog.Compare(DataReader.GetAttribute(strName, null), null, "Should have returned null");
+                        TestLog.Compare(
+                            DataReader.GetAttribute(strName, null),
+                            null,
+                            "Should have returned null"
+                        );
                     }
                 }
 
@@ -702,7 +1141,11 @@ namespace CoreXml.Test.XLinq
                     {
                         strName = strAttr + (i - 1);
                         DataReader.MoveToAttribute(strName, strNamespace);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(strName, strNamespace),
+                            "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                        );
                     }
                 }
 
@@ -711,7 +1154,11 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "ACT1");
-                    TestLog.Compare(DataReader.GetAttribute(string.Empty), null, "Should have returned null");
+                    TestLog.Compare(
+                        DataReader.GetAttribute(string.Empty),
+                        null,
+                        "Should have returned null"
+                    );
                 }
 
                 //[Variation("GetAttribute(String.Empty,String.Empty)")]
@@ -719,7 +1166,11 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "ACT0");
-                    TestLog.Compare(DataReader.GetAttribute(string.Empty, string.Empty), null, "Compare GetAttribute(strName) and this[strName]");
+                    TestLog.Compare(
+                        DataReader.GetAttribute(string.Empty, string.Empty),
+                        null,
+                        "Compare GetAttribute(strName) and this[strName]"
+                    );
                 }
             }
 
@@ -733,7 +1184,11 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "ACT0");
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare GetAttribute[i] and this[i]");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Ordinal (" + i + "): Compare GetAttribute[i] and this[i]"
+                        );
                     }
                 }
 
@@ -744,7 +1199,11 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "ACT1");
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
-                        TestLog.Compare(DataReader[i], DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare GetAttribute[i] and this[i]");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.GetAttribute(i),
+                            "Ordinal (" + i + "): Compare GetAttribute[i] and this[i]"
+                        );
                     }
                 }
 
@@ -758,8 +1217,16 @@ namespace CoreXml.Test.XLinq
                         string str = DataReader[i];
 
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader[i], "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                        TestLog.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader[i],
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                        );
+                        TestLog.Compare(
+                            str,
+                            DataReader.Value,
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                        );
                     }
                 }
 
@@ -773,8 +1240,16 @@ namespace CoreXml.Test.XLinq
                         string str = DataReader[i];
 
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader[i], "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                        TestLog.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader[i],
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                        );
+                        TestLog.Compare(
+                            str,
+                            DataReader.Value,
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                        );
                     }
                 }
             }
@@ -790,7 +1265,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader[i], DataReader.Value, "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.Value,
+                            "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]"
+                        );
                     }
                 }
 
@@ -802,7 +1281,11 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < DataReader.AttributeCount; i++)
                     {
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader[i], DataReader.Value, "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]");
+                        TestLog.Compare(
+                            DataReader[i],
+                            DataReader.Value,
+                            "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]"
+                        );
                     }
                 }
 
@@ -816,8 +1299,16 @@ namespace CoreXml.Test.XLinq
                         string str = DataReader.GetAttribute(i);
 
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                        TestLog.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader.GetAttribute(i),
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                        );
+                        TestLog.Compare(
+                            str,
+                            DataReader.Value,
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                        );
                     }
                 }
 
@@ -831,8 +1322,16 @@ namespace CoreXml.Test.XLinq
                         string str = DataReader.GetAttribute(i);
 
                         DataReader.MoveToAttribute(i);
-                        TestLog.Compare(DataReader.Value, DataReader[i], "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                        TestLog.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                        TestLog.Compare(
+                            DataReader.Value,
+                            DataReader[i],
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                        );
+                        TestLog.Compare(
+                            str,
+                            DataReader.Value,
+                            "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                        );
                     }
                 }
 
@@ -1149,8 +1648,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCount");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1162,8 +1669,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1175,8 +1690,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1188,8 +1711,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1201,8 +1732,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1214,8 +1753,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1227,8 +1774,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCount");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1240,8 +1795,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1253,8 +1816,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCount");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1265,12 +1836,24 @@ namespace CoreXml.Test.XLinq
                     if (FindNodeType(DataReader, XmlNodeType.XmlDeclaration))
                     {
                         int nCount = 3;
-                        TestLog.Compare(DataReader.AttributeCount, nCount, "Checking AttributeCount");
+                        TestLog.Compare(
+                            DataReader.AttributeCount,
+                            nCount,
+                            "Checking AttributeCount"
+                        );
                         TestLog.Compare(DataReader.HasAttributes, true, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), true, "Checking MoveToFirstAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            true,
+                            "Checking MoveToFirstAttribute"
+                        );
 
                         bool bNext = true;
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), bNext, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            bNext,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
 
@@ -1282,8 +1865,16 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(DataReader.AttributeCount, 0, "Checking AttributeCount");
                         TestLog.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                        TestLog.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                        TestLog.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                        TestLog.Compare(
+                            DataReader.MoveToFirstAttribute(),
+                            false,
+                            "Checking MoveToFirstAttribute"
+                        );
+                        TestLog.Compare(
+                            DataReader.MoveToNextAttribute(),
+                            false,
+                            "Checking MoveToNextAttribute"
+                        );
                     }
                 }
             }
@@ -1294,20 +1885,26 @@ namespace CoreXml.Test.XLinq
                 //[Variation("Valid URI reference as SystemLiteral")]
                 public void TATextReaderDocType_1()
                 {
-                    string strxml = "<?xml version='1.0' standalone='no'?><!DOCTYPE ROOT SYSTEM 'se2.dtd'[]><ROOT/>";
+                    string strxml =
+                        "<?xml version='1.0' standalone='no'?><!DOCTYPE ROOT SYSTEM 'se2.dtd'[]><ROOT/>";
 
                     XmlReader r = GetReaderStr(strxml);
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
 
                 void TestUriChar(char ch)
                 {
                     string filename = string.Format("f{0}.dtd", ch);
-                    string strxml = string.Format("<!DOCTYPE ROOT SYSTEM '{0}' []><ROOT></ROOT>", filename);
+                    string strxml = string.Format(
+                        "<!DOCTYPE ROOT SYSTEM '{0}' []><ROOT></ROOT>",
+                        filename
+                    );
 
                     XmlReader r = GetReaderStr(strxml);
 
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
 
                 // XML 1.0 SE
@@ -1358,7 +1955,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, _ST_ENS1);
                     DataReader.MoveToAttribute(1);
-                    TestLog.Compare(DataReader.LookupNamespace("xmlns"), "http://www.w3.org/2000/xmlns/", "ln");
+                    TestLog.Compare(
+                        DataReader.LookupNamespace("xmlns"),
+                        "http://www.w3.org/2000/xmlns/",
+                        "ln"
+                    );
                 }
 
                 //[Variation("MoveToAttribute access on xmlns attribute")]

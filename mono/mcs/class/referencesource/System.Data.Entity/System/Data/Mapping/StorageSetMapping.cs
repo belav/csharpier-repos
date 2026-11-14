@@ -10,14 +10,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Data.Metadata.Edm;
 using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
-namespace System.Data.Mapping {
-
+namespace System.Data.Mapping
+{
     using Triple = Pair<EntitySetBase, Pair<EntityTypeBase, bool>>;
 
     /// <summary>
@@ -25,17 +25,17 @@ namespace System.Data.Mapping {
     /// </summary>
     /// <example>
     /// For Example if conceptually you could represent the CS MSL file as following
-    /// --Mapping 
+    /// --Mapping
     ///   --EntityContainerMapping ( CNorthwind-->SNorthwind )
     ///     --EntitySetMapping
     ///       --EntityTypeMapping
     ///         --MappingFragment
     ///       --EntityTypeMapping
     ///         --MappingFragment
-    ///     --AssociationSetMapping 
+    ///     --AssociationSetMapping
     ///       --AssociationTypeMapping
     ///         --MappingFragment
-    /// This class represents the metadata for all the extent map elements in the 
+    /// This class represents the metadata for all the extent map elements in the
     /// above example namely EntitySetMapping, AssociationSetMapping and CompositionSetMapping.
     /// The SetMapping elements that are children of the EntityContainerMapping element
     /// can be accessed through the properties on this type.
@@ -48,7 +48,11 @@ namespace System.Data.Mapping {
         /// </summary>
         /// <param name="extent">Extent metadata object</param>
         /// <param name="entityContainerMapping">The EntityContainer mapping that contains this extent mapping</param>
-        internal StorageSetMapping(EntitySetBase extent, StorageEntityContainerMapping entityContainerMapping) {
+        internal StorageSetMapping(
+            EntitySetBase extent,
+            StorageEntityContainerMapping entityContainerMapping
+        )
+        {
             this.m_entityContainerMapping = entityContainerMapping;
             this.m_extent = extent;
             this.m_typeMappings = new List<StorageTypeMapping>();
@@ -60,36 +64,46 @@ namespace System.Data.Mapping {
         /// The EntityContainer mapping that contains this extent mapping.
         /// </summary>
         private StorageEntityContainerMapping m_entityContainerMapping;
+
         /// <summary>
         /// The extent for which this mapping represents.
         /// </summary>
         private EntitySetBase m_extent;
+
         /// <summary>
         /// Set of type mappings that make up the Set Mapping.
         /// Unless this is a EntitySetMapping with inheritance,
         /// you would have a single type mapping per set.
         /// </summary>
         private List<StorageTypeMapping> m_typeMappings;
+
         /// <summary>
         /// User defined Query View for the EntitySet.
         /// </summary>
         private string m_queryView;
+
         /// <summary>
         /// Line Number for Set Mapping element start tag.
         /// </summary>
         private int m_startLineNumber;
+
         /// <summary>
         /// Line position for Set Mapping element start tag.
         /// </summary>
         private int m_startLinePosition;
+
         /// <summary>
         /// Has modificationfunctionmapping for set mapping.
         /// </summary>
         private bool m_hasModificationFunctionMapping;
+
         /// <summary>
         /// Stores type-Specific user-defined QueryViews.
         /// </summary>
-        private Dictionary<Triple, string> m_typeSpecificQueryViews = new Dictionary<Triple, string>(Triple.PairComparer.Instance);
+        private Dictionary<Triple, string> m_typeSpecificQueryViews = new Dictionary<
+            Triple,
+            string
+        >(Triple.PairComparer.Instance);
 
         #endregion
 
@@ -99,9 +113,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal EntitySetBase Set
         {
-            get {
-                return this.m_extent;
-            }
+            get { return this.m_extent; }
         }
 
         ///// <summary>
@@ -111,25 +123,19 @@ namespace System.Data.Mapping {
         ///// </summary>
         internal ReadOnlyCollection<StorageTypeMapping> TypeMappings
         {
-            get
-            {
-                return this.m_typeMappings.AsReadOnly();
-            }
+            get { return this.m_typeMappings.AsReadOnly(); }
         }
 
-        internal StorageEntityContainerMapping EntityContainerMapping 
+        internal StorageEntityContainerMapping EntityContainerMapping
         {
-            get 
-            { 
-                return m_entityContainerMapping; 
-            }
+            get { return m_entityContainerMapping; }
         }
 
         /// <summary>
         /// Whether the SetMapping has empty content
         /// Returns true if there no table Mapping fragments
         /// </summary>
-        internal virtual bool HasNoContent 
+        internal virtual bool HasNoContent
         {
             get
             {
@@ -145,7 +151,6 @@ namespace System.Data.Mapping {
                         {
                             return false;
                         }
-
                     }
                 }
                 return true;
@@ -163,14 +168,8 @@ namespace System.Data.Mapping {
         /// </summary>
         internal int StartLineNumber
         {
-            get
-            {
-                return m_startLineNumber;
-            }
-            set
-            {
-                m_startLineNumber = value;
-            }
+            get { return m_startLineNumber; }
+            set { m_startLineNumber = value; }
         }
 
         /// <summary>
@@ -178,26 +177,14 @@ namespace System.Data.Mapping {
         /// </summary>
         internal int StartLinePosition
         {
-            get
-            {
-                return m_startLinePosition;
-            }
-            set
-            {
-                m_startLinePosition = value;
-            }
+            get { return m_startLinePosition; }
+            set { m_startLinePosition = value; }
         }
 
         internal bool HasModificationFunctionMapping
         {
-            get
-            {
-                return m_hasModificationFunctionMapping;
-            }
-            set
-            {
-                m_hasModificationFunctionMapping = value;
-            }
+            get { return m_hasModificationFunctionMapping; }
+            set { m_hasModificationFunctionMapping = value; }
         }
         #endregion
 
@@ -217,7 +204,6 @@ namespace System.Data.Mapping {
         /// </summary>
         internal abstract void Print(int index);
 
-
         internal bool ContainsTypeSpecificQueryView(Triple key)
         {
             return m_typeSpecificQueryViews.ContainsKey(key);
@@ -229,7 +215,10 @@ namespace System.Data.Mapping {
         /// </summary>
         internal void AddTypeSpecificQueryView(Triple key, string viewString)
         {
-            Debug.Assert(!m_typeSpecificQueryViews.ContainsKey(key), "Query View already present for the given Key");
+            Debug.Assert(
+                !m_typeSpecificQueryViews.ContainsKey(key),
+                "Query View already present for the given Key"
+            );
             m_typeSpecificQueryViews.Add(key, viewString);
         }
 

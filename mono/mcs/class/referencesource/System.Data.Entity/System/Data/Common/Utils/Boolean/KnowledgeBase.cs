@@ -9,26 +9,26 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 
 namespace System.Data.Common.Utils.Boolean
 {
     /// <summary>
     /// Data structure supporting storage of facts and proof (resolution) of queries given
     /// those facts.
-    /// 
+    ///
     /// For instance, we may know the following facts:
-    /// 
+    ///
     ///     A --> B
     ///     A
-    /// 
+    ///
     /// Given these facts, the knowledge base can prove the query:
-    /// 
+    ///
     ///     B
-    /// 
+    ///
     /// through resolution.
     /// </summary>
     /// <typeparam name="T_Identifier">Type of leaf term identifiers in fact expressions.</typeparam>
@@ -74,19 +74,22 @@ namespace System.Data.Common.Utils.Boolean
 
         /// <summary>
         /// Adds the given implication to this KB, where implication is of the form:
-        /// 
+        ///
         ///     condition --> implies
         /// </summary>
         /// <param name="condition">Condition</param>
         /// <param name="implies">Entailed expression</param>
-        internal void AddImplication(BoolExpr<T_Identifier> condition, BoolExpr<T_Identifier> implies)
+        internal void AddImplication(
+            BoolExpr<T_Identifier> condition,
+            BoolExpr<T_Identifier> implies
+        )
         {
             AddFact(new Implication(condition, implies));
         }
 
         /// <summary>
         /// Adds an equivalence to this KB, of the form:
-        /// 
+        ///
         ///     left iff. right
         /// </summary>
         /// <param name="left">Left operand</param>
@@ -107,14 +110,14 @@ namespace System.Data.Common.Utils.Boolean
             return builder.ToString();
         }
 
-        // Private class improving debugging output for implication facts 
+        // Private class improving debugging output for implication facts
         // (fact appears as A --> B rather than !A + B)
         private class Implication : OrExpr<T_Identifier>
         {
             BoolExpr<T_Identifier> _condition;
             BoolExpr<T_Identifier> _implies;
 
-            // (condition --> implies) iff. (!condition OR implies) 
+            // (condition --> implies) iff. (!condition OR implies)
             internal Implication(BoolExpr<T_Identifier> condition, BoolExpr<T_Identifier> implies)
                 : base(condition.MakeNegated(), implies)
             {
@@ -128,7 +131,7 @@ namespace System.Data.Common.Utils.Boolean
             }
         }
 
-        // Private class improving debugging output for equivalence facts 
+        // Private class improving debugging output for equivalence facts
         // (fact appears as A <--> B rather than (!A + B) . (A + !B))
         private class Equivalence : AndExpr<T_Identifier>
         {

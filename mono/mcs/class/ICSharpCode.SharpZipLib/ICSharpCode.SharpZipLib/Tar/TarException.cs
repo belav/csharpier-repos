@@ -20,7 +20,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -35,27 +35,26 @@
 
 using ICSharpCode.SharpZipLib;
 
-namespace ICSharpCode.SharpZipLib.Tar {
-	
-	/// <summary>
-	/// TarExceptions are used for exceptions specific to tar classes and code.	
-	/// </summary>
-	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-	public class TarException : SharpZipBaseException
-	{
-		/// <summary>
-		/// Initialises a new instance of the TarException class.
-		/// </summary>
-		public TarException()
-		{
-		}
-		
-		/// <summary>
-		/// Initialises a new instance of the TarException class with a specified message.
-		/// </summary>
-		/// <param name="message">The message that describes the error.</param>
-		public TarException(string message) : base(message)
-		{
-		}
-	}
+namespace ICSharpCode.SharpZipLib.Tar
+{
+    /// <summary>
+    /// TarExceptions are used for exceptions specific to tar classes and code.
+    /// </summary>
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
+    public class TarException : SharpZipBaseException
+    {
+        /// <summary>
+        /// Initialises a new instance of the TarException class.
+        /// </summary>
+        public TarException() { }
+
+        /// <summary>
+        /// Initialises a new instance of the TarException class with a specified message.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
+        public TarException(string message)
+            : base(message) { }
+    }
 }

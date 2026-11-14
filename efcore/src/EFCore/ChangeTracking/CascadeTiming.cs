@@ -28,5 +28,5 @@ public enum CascadeTiming
     ///     Cascading actions are never made automatically to dependent/child entities, but must instead
     ///     be triggered by an explicit call.
     /// </summary>
-    Never
+    Never,
 }

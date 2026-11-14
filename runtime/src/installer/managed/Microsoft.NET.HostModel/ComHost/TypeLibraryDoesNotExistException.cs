@@ -11,7 +11,7 @@ namespace Microsoft.NET.HostModel.ComHost
     public class TypeLibraryDoesNotExistException : Exception
     {
         public TypeLibraryDoesNotExistException(string path, Exception innerException)
-            :base($"Type library '{path}' does not exist.", innerException)
+            : base($"Type library '{path}' does not exist.", innerException)
         {
             Path = path;
         }

@@ -11,23 +11,28 @@ namespace ShiftTest
     {
         public long clm_data = 0x7FFFFFFFFFFFFFFF;
     }
+
     public struct VT
     {
         public long vtm_data;
     }
+
     public class longTest
     {
         private static long s_data = 0x7FFFFFFFFFFFFFFF;
+
         public static long f1(long arg_data)
         {
             arg_data >>= 8;
             return arg_data;
         }
+
         public static long f2(long arg_data)
         {
             arg_data <<= 8;
             return arg_data;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -46,10 +51,16 @@ namespace ShiftTest
 
             // Test >>
 
-            Console.WriteLine("The expected result of (0x7FFFFFFFFFFFFFFF>>8) is: {0}", (0x7FFFFFFFFFFFFFFF >> 8));
+            Console.WriteLine(
+                "The expected result of (0x7FFFFFFFFFFFFFFF>>8) is: {0}",
+                (0x7FFFFFFFFFFFFFFF >> 8)
+            );
             Console.WriteLine();
 
-            Console.WriteLine("The actual result for function argument is: {0}", f1(0x7FFFFFFFFFFFFFFF));
+            Console.WriteLine(
+                "The actual result for function argument is: {0}",
+                f1(0x7FFFFFFFFFFFFFFF)
+            );
             loc_data >>= 8;
             Console.WriteLine("The actual result for local variable is: {0}", loc_data);
             s_data >>= 8;

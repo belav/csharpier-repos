@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal readonly partial struct ExpressionBinder
@@ -47,7 +46,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                 if (leftErrors == rightErrors)
                 {
-                    int max = pTypeArgs1.Count > pTypeArgs2.Count ? pTypeArgs2.Count : pTypeArgs1.Count;
+                    int max =
+                        pTypeArgs1.Count > pTypeArgs2.Count ? pTypeArgs2.Count : pTypeArgs1.Count;
 
                     // If we don't have a winner yet, go through each element's type args.
                     for (int i = 0; i < max; i++)

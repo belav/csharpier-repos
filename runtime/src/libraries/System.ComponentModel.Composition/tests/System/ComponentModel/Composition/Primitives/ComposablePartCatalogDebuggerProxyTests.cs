@@ -30,5 +30,5 @@ namespace System.ComponentModel.Composition.Primitives
                 EqualityExtensions.CheckEquals(e.Parts, proxy.Parts);
             }
         }
-   }
+    }
 }

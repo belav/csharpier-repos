@@ -22,94 +22,70 @@ namespace System.ServiceModel.Channels
 
         protected Stream BaseStream
         {
-            get
-            {
-                return stream;
-            }
+            get { return stream; }
         }
 
         public override bool CanRead
         {
-            get
-            {
-                return stream.CanRead;
-            }
+            get { return stream.CanRead; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return stream.CanSeek;
-            }
+            get { return stream.CanSeek; }
         }
 
         public override bool CanTimeout
         {
-            get
-            {
-                return stream.CanTimeout;
-            }
+            get { return stream.CanTimeout; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return stream.CanWrite;
-            }
+            get { return stream.CanWrite; }
         }
 
         public override long Length
         {
-            get
-            {
-                return stream.Length;
-            }
+            get { return stream.Length; }
         }
 
         public override long Position
         {
-            get
-            {
-                return stream.Position;
-            }
-            set
-            {
-                stream.Position = value;
-            }
+            get { return stream.Position; }
+            set { stream.Position = value; }
         }
 
         public override int ReadTimeout
         {
-            get
-            {
-                return stream.ReadTimeout;
-            }
-            set
-            {
-                stream.ReadTimeout = value;
-            }
+            get { return stream.ReadTimeout; }
+            set { stream.ReadTimeout = value; }
         }
 
         public override int WriteTimeout
         {
-            get
-            {
-                return stream.WriteTimeout;
-            }
-            set
-            {
-                stream.WriteTimeout = value;
-            }
+            get { return stream.WriteTimeout; }
+            set { stream.WriteTimeout = value; }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             return stream.BeginRead(buffer, offset, count, callback, state);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             return stream.BeginWrite(buffer, offset, count, callback, state);
         }

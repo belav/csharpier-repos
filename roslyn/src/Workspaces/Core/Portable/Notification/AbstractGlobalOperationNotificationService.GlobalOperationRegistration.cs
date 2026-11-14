@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.Notification;
 
 internal partial class AbstractGlobalOperationNotificationService
 {
-    private class GlobalOperationRegistration(AbstractGlobalOperationNotificationService service) : IDisposable
+    private class GlobalOperationRegistration(AbstractGlobalOperationNotificationService service)
+        : IDisposable
     {
         public void Dispose()
         {

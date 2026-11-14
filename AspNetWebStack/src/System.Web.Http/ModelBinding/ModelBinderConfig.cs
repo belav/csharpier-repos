@@ -48,24 +48,50 @@ namespace System.Web.Http.ModelBinding
             set { _valueRequiredErrorMessageProvider = value; }
         }
 
-        private static string DefaultTypeConversionErrorMessageProvider(HttpActionContext actionContext, ModelMetadata modelMetadata, object incomingValue)
+        private static string DefaultTypeConversionErrorMessageProvider(
+            HttpActionContext actionContext,
+            ModelMetadata modelMetadata,
+            object incomingValue
+        )
         {
-            return GetResourceCommon(actionContext, modelMetadata, incomingValue, GetValueInvalidResource);
+            return GetResourceCommon(
+                actionContext,
+                modelMetadata,
+                incomingValue,
+                GetValueInvalidResource
+            );
         }
 
-        private static string DefaultValueRequiredErrorMessageProvider(HttpActionContext actionContext, ModelMetadata modelMetadata, object incomingValue)
+        private static string DefaultValueRequiredErrorMessageProvider(
+            HttpActionContext actionContext,
+            ModelMetadata modelMetadata,
+            object incomingValue
+        )
         {
-            return GetResourceCommon(actionContext, modelMetadata, incomingValue, GetValueRequiredResource);
+            return GetResourceCommon(
+                actionContext,
+                modelMetadata,
+                incomingValue,
+                GetValueRequiredResource
+            );
         }
 
-        private static string GetResourceCommon(HttpActionContext actionContext, ModelMetadata modelMetadata, object incomingValue, Func<HttpActionContext, string> resourceAccessor)
+        private static string GetResourceCommon(
+            HttpActionContext actionContext,
+            ModelMetadata modelMetadata,
+            object incomingValue,
+            Func<HttpActionContext, string> resourceAccessor
+        )
         {
             string displayName = modelMetadata.GetDisplayName();
             string errorMessageTemplate = resourceAccessor(actionContext);
             return Error.Format(errorMessageTemplate, incomingValue, displayName);
         }
 
-        private static string GetUserResourceString(HttpActionContext actionContext, string resourceName)
+        private static string GetUserResourceString(
+            HttpActionContext actionContext,
+            string resourceName
+        )
         {
             return GetUserResourceString(actionContext, resourceName, ResourceClassKey);
         }
@@ -74,10 +100,29 @@ namespace System.Web.Http.ModelBinding
         // If the class key is invalid, an exception will be thrown.
         // If the class key is valid but the resource is not found, it returns null, in which
         // case it will fall back to the MVC default error message.
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "resourceName", Justification = "Temporary")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "resourceClassKey", Justification = "Temporary")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "actionContext", Justification = "Temporary")]
-        internal static string GetUserResourceString(HttpActionContext actionContext, string resourceName, string resourceClassKey)
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "resourceName",
+            Justification = "Temporary"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "resourceClassKey",
+            Justification = "Temporary"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "actionContext",
+            Justification = "Temporary"
+        )]
+        internal static string GetUserResourceString(
+            HttpActionContext actionContext,
+            string resourceName,
+            string resourceClassKey
+        )
         {
 #if false
             return (!String.IsNullOrEmpty(resourceClassKey) && (actionContext != null) && (actionContext.HttpContext != null))
@@ -90,12 +135,14 @@ namespace System.Web.Http.ModelBinding
 
         private static string GetValueInvalidResource(HttpActionContext actionContext)
         {
-            return GetUserResourceString(actionContext, "PropertyValueInvalid") ?? SRResources.ModelBinderConfig_ValueInvalid;
+            return GetUserResourceString(actionContext, "PropertyValueInvalid")
+                ?? SRResources.ModelBinderConfig_ValueInvalid;
         }
 
         private static string GetValueRequiredResource(HttpActionContext actionContext)
         {
-            return GetUserResourceString(actionContext, "PropertyValueRequired") ?? SRResources.ModelBinderConfig_ValueRequired;
+            return GetUserResourceString(actionContext, "PropertyValueRequired")
+                ?? SRResources.ModelBinderConfig_ValueRequired;
         }
     }
 }

@@ -70,6 +70,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
         // Razor specific
         RazorCommentTransition,
         RazorCommentStar,
-        RazorComment
+        RazorComment,
     }
 }

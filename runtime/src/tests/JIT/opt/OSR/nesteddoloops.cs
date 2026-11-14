@@ -12,11 +12,11 @@ public class NestedDoLoops
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int F(int inner, int outer, int innerTo, int outerTo)
     {
-        do {
-            do {} while (inner++ < innerTo);
+        do
+        {
+            do { } while (inner++ < innerTo);
             inner = 0;
-        } 
-        while (outer++ < outerTo);
+        } while (outer++ < outerTo);
 
         return outer;
     }
@@ -29,5 +29,5 @@ public class NestedDoLoops
         int result2 = F(0, 100_000, 0, 10);
         Console.WriteLine($"done, sum is {result1} and {result2}");
         return (result1 == result2) && (result1 == 100_001) ? 100 : -1;
-    }  
+    }
 }

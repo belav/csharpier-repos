@@ -5,7 +5,5 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    internal sealed class TestServiceCollection : List<ServiceDescriptor>, IServiceCollection
-    {
-    }
+    internal sealed class TestServiceCollection : List<ServiceDescriptor>, IServiceCollection { }
 }

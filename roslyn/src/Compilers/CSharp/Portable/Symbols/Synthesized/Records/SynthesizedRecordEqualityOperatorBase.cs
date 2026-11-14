@@ -31,15 +31,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     ///The 'Equals' method called by the '==' operator is the 'Equals(R? other)' (<see cref="SynthesizedRecordEquals"/>).
     ///The '!=' operator delegates to the '==' operator. It is an error if the operators are declared explicitly.
     /// </summary>
-    internal abstract class SynthesizedRecordEqualityOperatorBase : SourceUserDefinedOperatorSymbolBase
+    internal abstract class SynthesizedRecordEqualityOperatorBase
+        : SourceUserDefinedOperatorSymbolBase
     {
         private readonly int _memberOffset;
 
-        protected SynthesizedRecordEqualityOperatorBase(SourceMemberContainerTypeSymbol containingType, string name, int memberOffset, BindingDiagnosticBag diagnostics)
-            : base(MethodKind.UserDefinedOperator, explicitInterfaceType: null, name, containingType, containingType.GetFirstLocation(), (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
-                   DeclarationModifiers.Public | DeclarationModifiers.Static, hasAnyBody: true, isExpressionBodied: false, isIterator: false, isNullableAnalysisEnabled: false, diagnostics)
+        protected SynthesizedRecordEqualityOperatorBase(
+            SourceMemberContainerTypeSymbol containingType,
+            string name,
+            int memberOffset,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                MethodKind.UserDefinedOperator,
+                explicitInterfaceType: null,
+                name,
+                containingType,
+                containingType.GetFirstLocation(),
+                (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
+                DeclarationModifiers.Public | DeclarationModifiers.Static,
+                hasAnyBody: true,
+                isExpressionBodied: false,
+                isIterator: false,
+                isNullableAnalysisEnabled: false,
+                diagnostics
+            )
         {
-            Debug.Assert(name == WellKnownMemberNames.EqualityOperatorName || name == WellKnownMemberNames.InequalityOperatorName);
+            Debug.Assert(
+                name == WellKnownMemberNames.EqualityOperatorName
+                    || name == WellKnownMemberNames.InequalityOperatorName
+            );
             _memberOffset = memberOffset;
         }
 
@@ -47,44 +68,98 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected sealed override Location ReturnTypeLocation => GetFirstLocation();
 
-        internal sealed override LexicalSortKey GetLexicalSortKey() => LexicalSortKey.GetSynthesizedMemberKey(_memberOffset);
+        internal sealed override LexicalSortKey GetLexicalSortKey() =>
+            LexicalSortKey.GetSynthesizedMemberKey(_memberOffset);
 
         protected sealed override SourceMemberMethodSymbol? BoundAttributesSource => null;
 
-        internal sealed override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations() => OneOrMany.Create(default(SyntaxList<AttributeListSyntax>));
+        internal sealed override OneOrMany<
+            SyntaxList<AttributeListSyntax>
+        > GetAttributeDeclarations() => OneOrMany.Create(default(SyntaxList<AttributeListSyntax>));
 
-        public sealed override string? GetDocumentationCommentXml(CultureInfo? preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default) => null;
+        public sealed override string? GetDocumentationCommentXml(
+            CultureInfo? preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default
+        ) => null;
 
         internal sealed override bool GenerateDebugInfo => false;
 
         internal sealed override bool SynthesizesLoweredBoundBody => true;
-        internal sealed override ExecutableCodeBinder? TryGetBodyBinder(BinderFactory? binderFactoryOpt = null, bool ignoreAccessibility = false) => throw ExceptionUtilities.Unreachable();
-        internal abstract override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics);
 
-        protected sealed override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        internal sealed override ExecutableCodeBinder? TryGetBodyBinder(
+            BinderFactory? binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        ) => throw ExceptionUtilities.Unreachable();
+
+        internal abstract override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        );
+
+        protected sealed override (
+            TypeWithAnnotations ReturnType,
+            ImmutableArray<ParameterSymbol> Parameters
+        ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
         {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            var annotation = ContainingType.IsRecordStruct ? NullableAnnotation.Oblivious : NullableAnnotation.Annotated;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Boolean, location, diagnostics)),
-                    Parameters: ImmutableArray.Create<ParameterSymbol>(
-                                    new SourceSimpleParameterSymbol(owner: this,
-                                                                    TypeWithAnnotations.Create(ContainingType, annotation),
-                                                                    ordinal: 0, RefKind.None, ScopedKind.None, "left", Locations),
-                                    new SourceSimpleParameterSymbol(owner: this,
-                                                                    TypeWithAnnotations.Create(ContainingType, annotation),
-                                                                    ordinal: 1, RefKind.None, ScopedKind.None, "right", Locations)));
+            var annotation = ContainingType.IsRecordStruct
+                ? NullableAnnotation.Oblivious
+                : NullableAnnotation.Annotated;
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Boolean,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: ImmutableArray.Create<ParameterSymbol>(
+                    new SourceSimpleParameterSymbol(
+                        owner: this,
+                        TypeWithAnnotations.Create(ContainingType, annotation),
+                        ordinal: 0,
+                        RefKind.None,
+                        ScopedKind.None,
+                        "left",
+                        Locations
+                    ),
+                    new SourceSimpleParameterSymbol(
+                        owner: this,
+                        TypeWithAnnotations.Create(ContainingType, annotation),
+                        ordinal: 1,
+                        RefKind.None,
+                        ScopedKind.None,
+                        "right",
+                        Locations
+                    )
+                )
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 2;
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
             Debug.Assert(IsImplicitlyDeclared);
             var compilation = this.DeclaringCompilation;
-            AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
-            Debug.Assert(WellKnownMembers.IsSynthesizedAttributeOptional(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                )
+            );
+            Debug.Assert(
+                WellKnownMembers.IsSynthesizedAttributeOptional(
+                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                )
+            );
         }
     }
 }

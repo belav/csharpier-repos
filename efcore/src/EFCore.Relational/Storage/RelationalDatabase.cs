@@ -35,14 +35,15 @@ public class RelationalDatabase : Database
     /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
     public RelationalDatabase(
         DatabaseDependencies dependencies,
-        RelationalDatabaseDependencies relationalDependencies)
+        RelationalDatabaseDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }
 
-    private IUpdateAdapter UpdateAdapter
-        => _updateAdapter ??= Dependencies.UpdateAdapterFactory.Create();
+    private IUpdateAdapter UpdateAdapter =>
+        _updateAdapter ??= Dependencies.UpdateAdapterFactory.Create();
 
     /// <summary>
     ///     Relational provider-specific dependencies for this service.
@@ -54,10 +55,11 @@ public class RelationalDatabase : Database
     /// </summary>
     /// <param name="entries">Entries representing the changes to be persisted.</param>
     /// <returns>The number of state entries persisted to the database.</returns>
-    public override int SaveChanges(IList<IUpdateEntry> entries)
-        => RelationalDependencies.BatchExecutor.Execute(
+    public override int SaveChanges(IList<IUpdateEntry> entries) =>
+        RelationalDependencies.BatchExecutor.Execute(
             RelationalDependencies.BatchPreparer.BatchCommands(entries, UpdateAdapter),
-            RelationalDependencies.Connection);
+            RelationalDependencies.Connection
+        );
 
     /// <summary>
     ///     Asynchronously persists changes from the supplied entries to the database.
@@ -71,9 +73,11 @@ public class RelationalDatabase : Database
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public override Task<int> SaveChangesAsync(
         IList<IUpdateEntry> entries,
-        CancellationToken cancellationToken = default)
-        => RelationalDependencies.BatchExecutor.ExecuteAsync(
+        CancellationToken cancellationToken = default
+    ) =>
+        RelationalDependencies.BatchExecutor.ExecuteAsync(
             RelationalDependencies.BatchPreparer.BatchCommands(entries, UpdateAdapter),
             RelationalDependencies.Connection,
-            cancellationToken);
+            cancellationToken
+        );
 }

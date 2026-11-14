@@ -13,35 +13,65 @@ namespace Microsoft.Extensions.Internal
         // Predefined Types
         [InlineData(typeof(int), "int")]
         [InlineData(typeof(List<int>), "System.Collections.Generic.List<int>")]
-        [InlineData(typeof(Dictionary<int, string>), "System.Collections.Generic.Dictionary<int, string>")]
-        [InlineData(typeof(Dictionary<int, List<string>>), "System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<string>>")]
-        [InlineData(typeof(List<List<string>>), "System.Collections.Generic.List<System.Collections.Generic.List<string>>")]
+        [InlineData(
+            typeof(Dictionary<int, string>),
+            "System.Collections.Generic.Dictionary<int, string>"
+        )]
+        [InlineData(
+            typeof(Dictionary<int, List<string>>),
+            "System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<string>>"
+        )]
+        [InlineData(
+            typeof(List<List<string>>),
+            "System.Collections.Generic.List<System.Collections.Generic.List<string>>"
+        )]
         // Classes inside NonGeneric class
-        [InlineData(typeof(A),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+A")]
-        [InlineData(typeof(B<int>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+B<int>")]
-        [InlineData(typeof(C<int, string>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+C<int, string>")]
-        [InlineData(typeof(B<B<string>>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+B<Microsoft.Extensions.Internal.TypeNameHelperTest+B<string>>")]
-        [InlineData(typeof(C<int, B<string>>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+C<int, Microsoft.Extensions.Internal.TypeNameHelperTest+B<string>>")]
+        [InlineData(typeof(A), "Microsoft.Extensions.Internal.TypeNameHelperTest+A")]
+        [InlineData(typeof(B<int>), "Microsoft.Extensions.Internal.TypeNameHelperTest+B<int>")]
+        [InlineData(
+            typeof(C<int, string>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+C<int, string>"
+        )]
+        [InlineData(
+            typeof(B<B<string>>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+B<Microsoft.Extensions.Internal.TypeNameHelperTest+B<string>>"
+        )]
+        [InlineData(
+            typeof(C<int, B<string>>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+C<int, Microsoft.Extensions.Internal.TypeNameHelperTest+B<string>>"
+        )]
         // Classes inside Generic class
-        [InlineData(typeof(Outer<int>.D),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+D")]
-        [InlineData(typeof(Outer<int>.E<int>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+E<int>")]
-        [InlineData(typeof(Outer<int>.F<int, string>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+F<int, string>")]
-        [InlineData(typeof(Level1<int>.Level2<bool>.Level3<int>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+Level1<int>+Level2<bool>+Level3<int>")]
-        [InlineData(typeof(Outer<int>.E<Outer<int>.E<string>>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+E<Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+E<string>>")]
-        [InlineData(typeof(Outer<int>.F<int, Outer<int>.E<string>>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+F<int, Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+E<string>>")]
-        [InlineData(typeof(OuterGeneric<int>.InnerNonGeneric.InnerGeneric<int, string>.InnerGenericLeafNode<bool>),
-            "Microsoft.Extensions.Internal.TypeNameHelperTest+OuterGeneric<int>+InnerNonGeneric+InnerGeneric<int, string>+InnerGenericLeafNode<bool>")]
+        [InlineData(
+            typeof(Outer<int>.D),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+D"
+        )]
+        [InlineData(
+            typeof(Outer<int>.E<int>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+E<int>"
+        )]
+        [InlineData(
+            typeof(Outer<int>.F<int, string>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+F<int, string>"
+        )]
+        [InlineData(
+            typeof(Level1<int>.Level2<bool>.Level3<int>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+Level1<int>+Level2<bool>+Level3<int>"
+        )]
+        [InlineData(
+            typeof(Outer<int>.E<Outer<int>.E<string>>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+E<Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+E<string>>"
+        )]
+        [InlineData(
+            typeof(Outer<int>.F<int, Outer<int>.E<string>>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+F<int, Microsoft.Extensions.Internal.TypeNameHelperTest+Outer<int>+E<string>>"
+        )]
+        [InlineData(
+            typeof(OuterGeneric<int>.InnerNonGeneric.InnerGeneric<
+                int,
+                string
+            >.InnerGenericLeafNode<bool>),
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+OuterGeneric<int>+InnerNonGeneric+InnerGeneric<int, string>+InnerGenericLeafNode<bool>"
+        )]
         public void Can_pretty_print_CLR_full_name(Type type, string expected)
         {
             Assert.Equal(expected, TypeNameHelper.GetTypeDisplayName(type));
@@ -76,7 +106,13 @@ namespace Microsoft.Extensions.Internal
         [InlineData(typeof(Outer<int>.F<int, string>), "F<int, string>")]
         [InlineData(typeof(Outer<int>.F<int, Outer<int>.E<string>>), "F<int, E<string>>")]
         [InlineData(typeof(Outer<int>.E<Outer<int>.E<string>>), "E<E<string>>")]
-        [InlineData(typeof(OuterGeneric<int>.InnerNonGeneric.InnerGeneric<int, string>.InnerGenericLeafNode<bool>), "InnerGenericLeafNode<bool>")]
+        [InlineData(
+            typeof(OuterGeneric<int>.InnerNonGeneric.InnerGeneric<
+                int,
+                string
+            >.InnerGenericLeafNode<bool>),
+            "InnerGenericLeafNode<bool>"
+        )]
         public void Can_pretty_print_CLR_name(Type type, string expected)
         {
             Assert.Equal(expected, TypeNameHelper.GetTypeDisplayName(type, false));
@@ -109,7 +145,11 @@ namespace Microsoft.Extensions.Internal
         [InlineData(typeof(string[][]), true, "string[][]")]
         [InlineData(typeof(int[,]), true, "int[,]")]
         [InlineData(typeof(bool[,,,]), true, "bool[,,,]")]
-        [InlineData(typeof(A[,][,,]), true, "Microsoft.Extensions.Internal.TypeNameHelperTest+A[,][,,]")]
+        [InlineData(
+            typeof(A[,][,,]),
+            true,
+            "Microsoft.Extensions.Internal.TypeNameHelperTest+A[,][,,]"
+        )]
         [InlineData(typeof(List<int[,][,,]>), true, "System.Collections.Generic.List<int[,][,,]>")]
         [InlineData(typeof(List<int[,,][,]>[,][,,]), false, "List<int[,,][,]>[,][,,]")]
         public void Can_pretty_print_array_name(Type type, bool fullName, string expected)
@@ -129,7 +169,8 @@ namespace Microsoft.Extensions.Internal
             genArgsLevel[1] = typeof(string);
             var closedLevelType = openLevelType.MakeGenericType(genArgsLevel);
 
-            var openInnerType = typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>);
+            var openInnerType =
+                typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>);
             var genArgsInnerType = openInnerType.GetGenericArguments();
             genArgsInnerType[3] = typeof(bool);
             var closedInnerType = openInnerType.MakeGenericType(genArgsInnerType);
@@ -137,10 +178,14 @@ namespace Microsoft.Extensions.Internal
             return new TheoryData<Type, bool, string>
             {
                 { typeof(List<>), false, "List<>" },
-                { typeof(Dictionary<,>), false , "Dictionary<,>" },
-                { typeof(List<>), true , "System.Collections.Generic.List<>" },
-                { typeof(Dictionary<,>), true , "System.Collections.Generic.Dictionary<,>" },
-                { typeof(Level1<>.Level2<>.Level3<>), true, "Microsoft.Extensions.Internal.TypeNameHelperTest+Level1<>+Level2<>+Level3<>" },
+                { typeof(Dictionary<,>), false, "Dictionary<,>" },
+                { typeof(List<>), true, "System.Collections.Generic.List<>" },
+                { typeof(Dictionary<,>), true, "System.Collections.Generic.Dictionary<,>" },
+                {
+                    typeof(Level1<>.Level2<>.Level3<>),
+                    true,
+                    "Microsoft.Extensions.Internal.TypeNameHelperTest+Level1<>+Level2<>+Level3<>"
+                },
                 {
                     typeof(PartiallyClosedGeneric<>).BaseType,
                     true,
@@ -165,7 +210,7 @@ namespace Microsoft.Extensions.Internal
                     closedInnerType,
                     true,
                     "Microsoft.Extensions.Internal.TypeNameHelperTest+OuterGeneric<>+InnerNonGeneric+InnerGeneric<,>+InnerGenericLeafNode<bool>"
-                }
+                },
             };
         }
 
@@ -179,18 +224,31 @@ namespace Microsoft.Extensions.Internal
         public static TheoryData GetTypeDisplayName_IncludesGenericParameterNamesWhenOptionIsSetData =>
             new TheoryData<Type, string>
             {
-                {  typeof(B<>),"Microsoft.Extensions.Internal.TypeNameHelperTest+B<T>" },
-                {  typeof(C<,>),"Microsoft.Extensions.Internal.TypeNameHelperTest+C<T1, T2>" },
-                {  typeof(PartiallyClosedGeneric<>).BaseType,"Microsoft.Extensions.Internal.TypeNameHelperTest+C<T, int>" },
-                {  typeof(Level1<>.Level2<>),"Microsoft.Extensions.Internal.TypeNameHelperTest+Level1<T1>+Level2<T2>" },
+                { typeof(B<>), "Microsoft.Extensions.Internal.TypeNameHelperTest+B<T>" },
+                { typeof(C<,>), "Microsoft.Extensions.Internal.TypeNameHelperTest+C<T1, T2>" },
+                {
+                    typeof(PartiallyClosedGeneric<>).BaseType,
+                    "Microsoft.Extensions.Internal.TypeNameHelperTest+C<T, int>"
+                },
+                {
+                    typeof(Level1<>.Level2<>),
+                    "Microsoft.Extensions.Internal.TypeNameHelperTest+Level1<T1>+Level2<T2>"
+                },
             };
 
         [Theory]
         [MemberData(nameof(GetTypeDisplayName_IncludesGenericParameterNamesWhenOptionIsSetData))]
-        public void GetTypeDisplayName_IncludesGenericParameterNamesWhenOptionIsSet(Type type, string expected)
+        public void GetTypeDisplayName_IncludesGenericParameterNamesWhenOptionIsSet(
+            Type type,
+            string expected
+        )
         {
             // Arrange & Act
-            var actual = TypeNameHelper.GetTypeDisplayName(type, fullName: true, includeGenericParameterNames: true);
+            var actual = TypeNameHelper.GetTypeDisplayName(
+                type,
+                fullName: true,
+                includeGenericParameterNames: true
+            );
 
             // Assert
             Assert.Equal(expected, actual);
@@ -199,18 +257,29 @@ namespace Microsoft.Extensions.Internal
         public static TheoryData GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSetData =>
             new TheoryData<Type, string>
             {
-                {  typeof(B<>),"B<T>" },
-                {  typeof(C<,>),"C<T1, T2>" },
-                {  typeof(PartiallyClosedGeneric<>).BaseType,"C<T, int>" },
-                {  typeof(Level1<>.Level2<>),"Level2<T2>" },
+                { typeof(B<>), "B<T>" },
+                { typeof(C<,>), "C<T1, T2>" },
+                { typeof(PartiallyClosedGeneric<>).BaseType, "C<T, int>" },
+                { typeof(Level1<>.Level2<>), "Level2<T2>" },
             };
 
         [Theory]
-        [MemberData(nameof(GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSetData))]
-        public void GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSet(Type type, string expected)
+        [MemberData(
+            nameof(
+                GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSetData
+            )
+        )]
+        public void GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSet(
+            Type type,
+            string expected
+        )
         {
             // Arrange & Act
-            var actual = TypeNameHelper.GetTypeDisplayName(type, fullName: false, includeGenericParameterNames: true);
+            var actual = TypeNameHelper.GetTypeDisplayName(
+                type,
+                fullName: false,
+                includeGenericParameterNames: true
+            );
 
             // Assert
             Assert.Equal(expected, actual);
@@ -226,32 +295,62 @@ namespace Microsoft.Extensions.Internal
                     { typeof(int), "int" },
                     { typeof(List<int>), "System.Collections.Generic.List" },
                     { typeof(Dictionary<int, string>), "System.Collections.Generic.Dictionary" },
-                    { typeof(Dictionary<int, List<string>>), "System.Collections.Generic.Dictionary" },
+                    {
+                        typeof(Dictionary<int, List<string>>),
+                        "System.Collections.Generic.Dictionary"
+                    },
                     { typeof(List<List<string>>), "System.Collections.Generic.List" },
-
                     // Classes inside NonGeneric class
                     { typeof(A), "Microsoft.Extensions.Internal.TypeNameHelperTest.A" },
                     { typeof(B<int>), "Microsoft.Extensions.Internal.TypeNameHelperTest.B" },
-                    { typeof(C<int, string>), "Microsoft.Extensions.Internal.TypeNameHelperTest.C" },
-                    { typeof(C<int, B<string>>), "Microsoft.Extensions.Internal.TypeNameHelperTest.C" },
+                    {
+                        typeof(C<int, string>),
+                        "Microsoft.Extensions.Internal.TypeNameHelperTest.C"
+                    },
+                    {
+                        typeof(C<int, B<string>>),
+                        "Microsoft.Extensions.Internal.TypeNameHelperTest.C"
+                    },
                     { typeof(B<B<string>>), "Microsoft.Extensions.Internal.TypeNameHelperTest.B" },
-
                     // Classes inside Generic class
-                    { typeof(Outer<int>.D), "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.D" },
-                    { typeof(Outer<int>.E<int>), "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.E" },
-                    { typeof(Outer<int>.F<int, string>), "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.F" },
-                    { typeof(Outer<int>.F<int, Outer<int>.E<string>>),"Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.F" },
-                    { typeof(Outer<int>.E<Outer<int>.E<string>>), "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.E" }
+                    {
+                        typeof(Outer<int>.D),
+                        "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.D"
+                    },
+                    {
+                        typeof(Outer<int>.E<int>),
+                        "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.E"
+                    },
+                    {
+                        typeof(Outer<int>.F<int, string>),
+                        "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.F"
+                    },
+                    {
+                        typeof(Outer<int>.F<int, Outer<int>.E<string>>),
+                        "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.F"
+                    },
+                    {
+                        typeof(Outer<int>.E<Outer<int>.E<string>>),
+                        "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.E"
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(FullTypeNameData))]
-        public void Can_PrettyPrint_FullTypeName_WithoutGenericParametersAndNestedTypeDelimiter(Type type, string expectedTypeName)
+        public void Can_PrettyPrint_FullTypeName_WithoutGenericParametersAndNestedTypeDelimiter(
+            Type type,
+            string expectedTypeName
+        )
         {
             // Arrange & Act
-            var displayName = TypeNameHelper.GetTypeDisplayName(type, fullName: true, includeGenericParameters: false, nestedTypeDelimiter: '.');
+            var displayName = TypeNameHelper.GetTypeDisplayName(
+                type,
+                fullName: true,
+                includeGenericParameters: false,
+                nestedTypeDelimiter: '.'
+            );
 
             // Assert
             Assert.Equal(expectedTypeName, displayName);
@@ -291,14 +390,10 @@ namespace Microsoft.Extensions.Internal
         {
             public class Level2<T2>
             {
-                public class Level3<T3>
-                {
-                }
+                public class Level3<T3> { }
             }
         }
     }
 }
 
-internal class ClassInGlobalNamespace<T>
-{
-}
+internal class ClassInGlobalNamespace<T> { }

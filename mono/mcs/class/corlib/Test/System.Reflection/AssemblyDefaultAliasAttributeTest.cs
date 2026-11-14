@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,86 +27,77 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 using NUnit.Framework;
 
-namespace MonoTests.System.Reflection {
-
-	/// <summary>
-	/// Summary description for AssemblyDefaultAliasAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class AssemblyDefaultAliasAttributeTest
-	{
+namespace MonoTests.System.Reflection
+{
+    /// <summary>
+    /// Summary description for AssemblyDefaultAliasAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class AssemblyDefaultAliasAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblyDefaultAliasAttribute attr;
-		
-		public AssemblyDefaultAliasAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName();
+        AssemblyDefaultAliasAttribute attr;
 
-			dynAsmName.Name = "TestAssembly";
+        public AssemblyDefaultAliasAttributeTest()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAsmName.Name = "TestAssembly";
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblyDefaultAliasAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "corlib" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblyDefaultAliasAttribute;
-		}
+            dynAssembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.Run);
 
-		[Test]
-		public void DefaultAliasTest ()
-		{
-			Assert.AreEqual (
-				attr.DefaultAlias,
-				"corlib", "#1");
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof(AssemblyDefaultAliasAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor(new Type[] { typeof(string) });
+            CustomAttributeBuilder attrBuilder = new CustomAttributeBuilder(
+                ctrInfo,
+                new object[1] { "corlib" }
+            );
+            dynAssembly.SetCustomAttribute(attrBuilder);
+            object[] attributes = dynAssembly.GetCustomAttributes(true);
+            attr = attributes[0] as AssemblyDefaultAliasAttribute;
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblyDefaultAliasAttribute), "#1"
-				);
-		}
+        [Test]
+        public void DefaultAliasTest()
+        {
+            Assert.AreEqual(attr.DefaultAlias, "corlib", "#1");
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void TypeIdTest()
+        {
+            Assert.AreEqual(attr.TypeId, typeof(AssemblyDefaultAliasAttribute), "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new AssemblyDefaultAliasAttribute ("System")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue()
+        {
+            Assert.AreEqual(attr.Match(attr), true, "#1");
+        }
+
+        [Test]
+        public void MatchTestForFalse()
+        {
+            Assert.AreEqual(attr.Match(new AssemblyDefaultAliasAttribute("System")), false, "#1");
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblyDefaultAliasAttribute ("some text");
-			Assert.AreEqual ("some text", a.DefaultAlias);
-		}
-	}
-}
 
+        [Test]
+        public void CtorTest()
+        {
+            var a = new AssemblyDefaultAliasAttribute("some text");
+            Assert.AreEqual("some text", a.DefaultAlias);
+        }
+    }
+}

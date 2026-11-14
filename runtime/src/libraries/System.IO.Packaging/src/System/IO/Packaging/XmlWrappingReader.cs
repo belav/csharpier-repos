@@ -22,30 +22,102 @@ namespace System.IO.Packaging
             Reader = baseReader;
         }
 
-        public override XmlReaderSettings? Settings { get { return _reader.Settings; } }
-        public override XmlNodeType NodeType { get { return _reader.NodeType; } }
-        public override string Name { get { return _reader.Name; } }
-        public override string LocalName { get { return _reader.LocalName; } }
-        public override string NamespaceURI { get { return _reader.NamespaceURI; } }
-        public override string Prefix { get { return _reader.Prefix; } }
-        public override bool HasValue { get { return _reader.HasValue; } }
-        public override string Value { get { return _reader.Value; } }
-        public override int Depth { get { return _reader.Depth; } }
-        public override string BaseURI { get { return _reader.BaseURI; } }
-        public override bool IsEmptyElement { get { return _reader.IsEmptyElement; } }
-        public override bool IsDefault { get { return _reader.IsDefault; } }
-        public override XmlSpace XmlSpace { get { return _reader.XmlSpace; } }
-        public override string XmlLang { get { return _reader.XmlLang; } }
-        public override System.Type ValueType { get { return _reader.ValueType; } }
-        public override int AttributeCount { get { return _reader.AttributeCount; } }
-        public override string this[int i] { get { return _reader[i]; } }
-        public override string? this[string name] { get { return _reader[name]; } }
-        public override string? this[string name, string? namespaceURI] { get { return _reader[name, namespaceURI]; } }
-        public override bool CanResolveEntity { get { return _reader.CanResolveEntity; } }
-        public override bool EOF { get { return _reader.EOF; } }
-        public override ReadState ReadState { get { return _reader.ReadState; } }
-        public override bool HasAttributes { get { return _reader.HasAttributes; } }
-        public override XmlNameTable NameTable { get { return _reader.NameTable; } }
+        public override XmlReaderSettings? Settings
+        {
+            get { return _reader.Settings; }
+        }
+        public override XmlNodeType NodeType
+        {
+            get { return _reader.NodeType; }
+        }
+        public override string Name
+        {
+            get { return _reader.Name; }
+        }
+        public override string LocalName
+        {
+            get { return _reader.LocalName; }
+        }
+        public override string NamespaceURI
+        {
+            get { return _reader.NamespaceURI; }
+        }
+        public override string Prefix
+        {
+            get { return _reader.Prefix; }
+        }
+        public override bool HasValue
+        {
+            get { return _reader.HasValue; }
+        }
+        public override string Value
+        {
+            get { return _reader.Value; }
+        }
+        public override int Depth
+        {
+            get { return _reader.Depth; }
+        }
+        public override string BaseURI
+        {
+            get { return _reader.BaseURI; }
+        }
+        public override bool IsEmptyElement
+        {
+            get { return _reader.IsEmptyElement; }
+        }
+        public override bool IsDefault
+        {
+            get { return _reader.IsDefault; }
+        }
+        public override XmlSpace XmlSpace
+        {
+            get { return _reader.XmlSpace; }
+        }
+        public override string XmlLang
+        {
+            get { return _reader.XmlLang; }
+        }
+        public override System.Type ValueType
+        {
+            get { return _reader.ValueType; }
+        }
+        public override int AttributeCount
+        {
+            get { return _reader.AttributeCount; }
+        }
+        public override string this[int i]
+        {
+            get { return _reader[i]; }
+        }
+        public override string? this[string name]
+        {
+            get { return _reader[name]; }
+        }
+        public override string? this[string name, string? namespaceURI]
+        {
+            get { return _reader[name, namespaceURI]; }
+        }
+        public override bool CanResolveEntity
+        {
+            get { return _reader.CanResolveEntity; }
+        }
+        public override bool EOF
+        {
+            get { return _reader.EOF; }
+        }
+        public override ReadState ReadState
+        {
+            get { return _reader.ReadState; }
+        }
+        public override bool HasAttributes
+        {
+            get { return _reader.HasAttributes; }
+        }
+        public override XmlNameTable NameTable
+        {
+            get { return _reader.NameTable; }
+        }
 
         public override string? GetAttribute(string name)
         {
@@ -112,7 +184,9 @@ namespace System.IO.Packaging
             return _readerAsResolver?.LookupPrefix(namespaceName);
         }
 
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             return _readerAsResolver?.GetNamespacesInScope(scope)!;
         }
@@ -155,26 +229,17 @@ namespace System.IO.Packaging
 
         public virtual int LineNumber
         {
-            get
-            {
-                return (_readerAsIXmlLineInfo == null) ? 0 : _readerAsIXmlLineInfo.LineNumber;
-            }
+            get { return (_readerAsIXmlLineInfo == null) ? 0 : _readerAsIXmlLineInfo.LineNumber; }
         }
 
         public virtual int LinePosition
         {
-            get
-            {
-                return (_readerAsIXmlLineInfo == null) ? 0 : _readerAsIXmlLineInfo.LinePosition;
-            }
+            get { return (_readerAsIXmlLineInfo == null) ? 0 : _readerAsIXmlLineInfo.LinePosition; }
         }
 
         protected XmlReader Reader
         {
-            get
-            {
-                return _reader;
-            }
+            get { return _reader; }
             [MemberNotNull(nameof(_reader))]
             set
             {

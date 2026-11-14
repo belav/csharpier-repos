@@ -24,12 +24,19 @@ namespace Internal.TypeSystem
             if (canonicalMethodResult == null)
             {
                 bool instantiationChanged;
-                Instantiation canonInstantiation = Context.ConvertInstantiationToCanonForm(Instantiation, kind, out instantiationChanged);
+                Instantiation canonInstantiation = Context.ConvertInstantiationToCanonForm(
+                    Instantiation,
+                    kind,
+                    out instantiationChanged
+                );
                 MethodDesc openMethodOnCanonicalizedType = _methodDef.GetCanonMethodTarget(kind);
 
                 if (instantiationChanged || (openMethodOnCanonicalizedType != _methodDef))
                 {
-                    canonicalMethodResult = Context.GetInstantiatedMethod(openMethodOnCanonicalizedType, canonInstantiation);
+                    canonicalMethodResult = Context.GetInstantiatedMethod(
+                        openMethodOnCanonicalizedType,
+                        canonInstantiation
+                    );
                 }
                 else
                 {
@@ -40,10 +47,13 @@ namespace Internal.TypeSystem
                 // This is to not end up having method instantiations like Foo<__UniversalCanon>.Method<int> or Foo<__UniversalCanon>.Method<string>
                 // or Foo<__UniversalCanon>.Method<__Canon> or Foo<int>.Method<__UniversalCanon>
                 // It should just be Foo<__UniversalCanon>.Method<__UniversalCanon>
-                if ((kind == CanonicalFormKind.Specific) &&
-                    canonicalMethodResult.IsCanonicalMethod(CanonicalFormKind.Universal))
+                if (
+                    (kind == CanonicalFormKind.Specific)
+                    && canonicalMethodResult.IsCanonicalMethod(CanonicalFormKind.Universal)
+                )
                 {
-                    canonicalMethodResult = (InstantiatedMethod)canonicalMethodResult.GetCanonMethodTarget(CanonicalFormKind.Universal);
+                    canonicalMethodResult = (InstantiatedMethod)
+                        canonicalMethodResult.GetCanonMethodTarget(CanonicalFormKind.Universal);
                 }
 
                 SetCachedCanonValue(kind, canonicalMethodResult);

@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Avx512F
@@ -20,12 +20,23 @@ namespace IntelHardwareIntrinsicTest._Avx512F
 
             if (Avx512F.IsSupported)
             {
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new double[8]))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new double[8]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<double>>(doubleTable.inArrayPtr);
                     Avx512F.Store((double*)(doubleTable.outArrayPtr), vf);
 
-                    if (!doubleTable.CheckResult((x, y) => BitConverter.DoubleToInt64Bits(x) == BitConverter.DoubleToInt64Bits(y)))
+                    if (
+                        !doubleTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.DoubleToInt64Bits(x)
+                                == BitConverter.DoubleToInt64Bits(y)
+                        )
+                    )
                     {
                         Console.WriteLine("AVX512F Store failed on double:");
                         foreach (var item in doubleTable.outArray)
@@ -37,12 +48,23 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<float> floatTable = new TestTable<float>(new float[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new float[16]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new float[16]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<float>>(floatTable.inArrayPtr);
                     Avx512F.Store((float*)(floatTable.outArrayPtr), vf);
 
-                    if (!floatTable.CheckResult((x, y) => BitConverter.SingleToInt32Bits(x) == BitConverter.SingleToInt32Bits(y)))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.SingleToInt32Bits(x)
+                                == BitConverter.SingleToInt32Bits(y)
+                        )
+                    )
                     {
                         Console.WriteLine("AVX512F Store failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -54,7 +76,12 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<long> intTable = new TestTable<long>(new long[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new long[8]))
+                using (
+                    TestTable<long> intTable = new TestTable<long>(
+                        new long[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new long[8]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<long>>(intTable.inArrayPtr);
                     Avx512F.Store((long*)(intTable.outArrayPtr), vf);
@@ -71,7 +98,12 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<ulong> intTable = new TestTable<ulong>(new ulong[8] { 1, 5, 100, 0, 1, 2, 3, 4 }, new ulong[8]))
+                using (
+                    TestTable<ulong> intTable = new TestTable<ulong>(
+                        new ulong[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new ulong[8]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<ulong>>(intTable.inArrayPtr);
                     Avx512F.Store((ulong*)(intTable.outArrayPtr), vf);
@@ -88,7 +120,12 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<int> intTable = new TestTable<int>(new int[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new int[16]))
+                using (
+                    TestTable<int> intTable = new TestTable<int>(
+                        new int[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new int[16]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<int>>(intTable.inArrayPtr);
                     Avx512F.Store((int*)(intTable.outArrayPtr), vf);
@@ -105,7 +142,12 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<uint> intTable = new TestTable<uint>(new uint[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new uint[16]))
+                using (
+                    TestTable<uint> intTable = new TestTable<uint>(
+                        new uint[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new uint[16]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<uint>>(intTable.inArrayPtr);
                     Avx512F.Store((uint*)(intTable.outArrayPtr), vf);
@@ -122,7 +164,46 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<short> intTable = new TestTable<short>(new short[32] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new short[32]))
+                using (
+                    TestTable<short> intTable = new TestTable<short>(
+                        new short[32]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new short[32]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<short>>(intTable.inArrayPtr);
                     Avx512F.Store((short*)(intTable.outArrayPtr), vf);
@@ -139,7 +220,46 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<ushort> intTable = new TestTable<ushort>(new ushort[32] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new ushort[32]))
+                using (
+                    TestTable<ushort> intTable = new TestTable<ushort>(
+                        new ushort[32]
+                        {
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new ushort[32]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<ushort>>(intTable.inArrayPtr);
                     Avx512F.Store((ushort*)(intTable.outArrayPtr), vf);
@@ -156,7 +276,78 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<sbyte> intTable = new TestTable<sbyte>(new sbyte[64] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new sbyte[64]))
+                using (
+                    TestTable<sbyte> intTable = new TestTable<sbyte>(
+                        new sbyte[64]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new sbyte[64]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<sbyte>>(intTable.inArrayPtr);
                     Avx512F.Store((sbyte*)(intTable.outArrayPtr), vf);
@@ -173,7 +364,78 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                     }
                 }
 
-                using (TestTable<byte> intTable = new TestTable<byte>(new byte[64] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new byte[64]))
+                using (
+                    TestTable<byte> intTable = new TestTable<byte>(
+                        new byte[64]
+                        {
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new byte[64]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<byte>>(intTable.inArrayPtr);
                     Avx512F.Store((byte*)(intTable.outArrayPtr), vf);
@@ -189,7 +451,6 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                         testResult = Fail;
                     }
                 }
-
             }
 
             Assert.Equal(Pass, testResult);

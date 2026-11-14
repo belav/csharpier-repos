@@ -12,10 +12,10 @@ namespace System.ServiceModel.Activities
 
     // The correlation scope has to derive from NativeActivity
     // so that we can access execution properties from AEC.
-    // 
+    //
     public class CorrelationScope : NativeActivity
     {
-        Variable<CorrelationHandle> declaredHandle; // 
+        Variable<CorrelationHandle> declaredHandle; //
 
         public CorrelationScope()
             : base()
@@ -24,30 +24,26 @@ namespace System.ServiceModel.Activities
         }
 
         // Explicit correlation OM
-        public InArgument<CorrelationHandle> CorrelatesWith
-        {
-            get;
-            set;
-        }
+        public InArgument<CorrelationHandle> CorrelatesWith { get; set; }
 
-        public Activity Body
-        {
-            get;
-            set;
-        }
+        public Activity Body { get; set; }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
             metadata.AddChild(this.Body);
             metadata.SetImplementationVariablesCollection(
-                new Collection<Variable>
-                {
-                    this.declaredHandle
-                });
+                new Collection<Variable> { this.declaredHandle }
+            );
 
-            RuntimeArgument correlatesWithArgument = new RuntimeArgument("CorrelatesWith", typeof(CorrelationHandle), ArgumentDirection.In);
+            RuntimeArgument correlatesWithArgument = new RuntimeArgument(
+                "CorrelatesWith",
+                typeof(CorrelationHandle),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.CorrelatesWith, correlatesWithArgument);
-            metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { correlatesWithArgument });
+            metadata.SetArgumentsCollection(
+                new Collection<RuntimeArgument> { correlatesWithArgument }
+            );
         }
 
         protected override void Execute(NativeActivityContext context)
@@ -65,7 +61,10 @@ namespace System.ServiceModel.Activities
                     ambientHandle = this.declaredHandle.Get(context);
                 }
 
-                context.Properties.Add(CorrelationHandle.StaticExecutionPropertyName, ambientHandle);
+                context.Properties.Add(
+                    CorrelationHandle.StaticExecutionPropertyName,
+                    ambientHandle
+                );
 
                 context.ScheduleActivity(this.Body);
             }

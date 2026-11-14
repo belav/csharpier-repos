@@ -20,21 +20,40 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// </summary>
     internal static class IDEDiagnosticIdToOptionMappingHelper
     {
-        private static readonly ConcurrentDictionary<string, ImmutableHashSet<IOption2>> s_diagnosticIdToOptionMap = new();
-        private static readonly ConcurrentDictionary<string, ConcurrentDictionary<string, ImmutableHashSet<IOption2>>> s_diagnosticIdToLanguageSpecificOptionsMap = new();
-        private static readonly ConcurrentDictionary<string, PerLanguageOption2<bool>> s_diagnosticIdToFadingOptionMap = new();
+        private static readonly ConcurrentDictionary<
+            string,
+            ImmutableHashSet<IOption2>
+        > s_diagnosticIdToOptionMap = new();
+        private static readonly ConcurrentDictionary<
+            string,
+            ConcurrentDictionary<string, ImmutableHashSet<IOption2>>
+        > s_diagnosticIdToLanguageSpecificOptionsMap = new();
+        private static readonly ConcurrentDictionary<
+            string,
+            PerLanguageOption2<bool>
+        > s_diagnosticIdToFadingOptionMap = new();
 
-        public static bool TryGetMappedOptions(string diagnosticId, string language, [NotNullWhen(true)] out ImmutableHashSet<IOption2>? options)
-            => s_diagnosticIdToOptionMap.TryGetValue(diagnosticId, out options) ||
-               (s_diagnosticIdToLanguageSpecificOptionsMap.TryGetValue(language, out var map) &&
-                map.TryGetValue(diagnosticId, out options));
+        public static bool TryGetMappedOptions(
+            string diagnosticId,
+            string language,
+            [NotNullWhen(true)] out ImmutableHashSet<IOption2>? options
+        ) =>
+            s_diagnosticIdToOptionMap.TryGetValue(diagnosticId, out options)
+            || (
+                s_diagnosticIdToLanguageSpecificOptionsMap.TryGetValue(language, out var map)
+                && map.TryGetValue(diagnosticId, out options)
+            );
 
-        public static bool TryGetMappedFadingOption(string diagnosticId, [NotNullWhen(true)] out PerLanguageOption2<bool>? fadingOption)
-            => s_diagnosticIdToFadingOptionMap.TryGetValue(diagnosticId, out fadingOption);
+        public static bool TryGetMappedFadingOption(
+            string diagnosticId,
+            [NotNullWhen(true)] out PerLanguageOption2<bool>? fadingOption
+        ) => s_diagnosticIdToFadingOptionMap.TryGetValue(diagnosticId, out fadingOption);
 
-        public static bool IsKnownIDEDiagnosticId(string diagnosticId)
-            => s_diagnosticIdToOptionMap.ContainsKey(diagnosticId) ||
-               s_diagnosticIdToLanguageSpecificOptionsMap.Values.Any(map => map.ContainsKey(diagnosticId));
+        public static bool IsKnownIDEDiagnosticId(string diagnosticId) =>
+            s_diagnosticIdToOptionMap.ContainsKey(diagnosticId)
+            || s_diagnosticIdToLanguageSpecificOptionsMap.Values.Any(map =>
+                map.ContainsKey(diagnosticId)
+            );
 
         public static void AddOptionMapping(string diagnosticId, ImmutableHashSet<IOption2> options)
         {
@@ -68,7 +87,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         }
                         else
                         {
-                            var map = s_diagnosticIdToLanguageSpecificOptionsMap.GetOrAdd(language, _ => new ConcurrentDictionary<string, ImmutableHashSet<IOption2>>());
+                            var map = s_diagnosticIdToLanguageSpecificOptionsMap.GetOrAdd(
+                                language,
+                                _ => new ConcurrentDictionary<string, ImmutableHashSet<IOption2>>()
+                            );
                             AddOptionMapping(map, diagnosticId, languageGroup.ToImmutableHashSet());
                         }
                     }
@@ -77,28 +99,45 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             if (multipleLanguagesOptionsBuilder.Count > 0)
             {
-                AddOptionMapping(s_diagnosticIdToOptionMap, diagnosticId, multipleLanguagesOptionsBuilder.ToImmutableHashSet());
+                AddOptionMapping(
+                    s_diagnosticIdToOptionMap,
+                    diagnosticId,
+                    multipleLanguagesOptionsBuilder.ToImmutableHashSet()
+                );
             }
         }
 
-        private static void AddOptionMapping(ConcurrentDictionary<string, ImmutableHashSet<IOption2>> map, string diagnosticId, ImmutableHashSet<IOption2> options)
+        private static void AddOptionMapping(
+            ConcurrentDictionary<string, ImmutableHashSet<IOption2>> map,
+            string diagnosticId,
+            ImmutableHashSet<IOption2> options
+        )
         {
             // Verify that the option is either being added for the first time, or the existing option is already the same.
             // Latter can happen in tests as we re-instantiate the analyzer for every test, which attempts to add the mapping every time.
-            Debug.Assert(!map.TryGetValue(diagnosticId, out var existingOptions) || options.SetEquals(existingOptions));
+            Debug.Assert(
+                !map.TryGetValue(diagnosticId, out var existingOptions)
+                    || options.SetEquals(existingOptions)
+            );
             Debug.Assert(options.All(option => option.Definition.IsEditorConfigOption));
 
             map.TryAdd(diagnosticId, options);
         }
 
-        public static void AddFadingOptionMapping(string diagnosticId, PerLanguageOption2<bool> fadingOption)
+        public static void AddFadingOptionMapping(
+            string diagnosticId,
+            PerLanguageOption2<bool> fadingOption
+        )
         {
             diagnosticId = diagnosticId ?? throw new ArgumentNullException(nameof(diagnosticId));
             fadingOption = fadingOption ?? throw new ArgumentNullException(nameof(fadingOption));
 
             // Verify that the option is either being added for the first time, or the existing option is already the same.
             // Latter can happen in tests as we re-instantiate the analyzer for every test, which attempts to add the mapping every time.
-            Debug.Assert(!s_diagnosticIdToFadingOptionMap.TryGetValue(diagnosticId, out var existingOption) || existingOption.Equals(fadingOption));
+            Debug.Assert(
+                !s_diagnosticIdToFadingOptionMap.TryGetValue(diagnosticId, out var existingOption)
+                    || existingOption.Equals(fadingOption)
+            );
 
             s_diagnosticIdToFadingOptionMap.TryAdd(diagnosticId, fadingOption);
         }

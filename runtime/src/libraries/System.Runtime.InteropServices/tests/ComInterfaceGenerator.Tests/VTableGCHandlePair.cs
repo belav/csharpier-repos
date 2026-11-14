@@ -28,7 +28,7 @@ namespace ComInterfaceGenerator.Tests
             return (TUnmanagedInterface)GCHandle.FromIntPtr((nint)((void**)pair)[1]).Target;
         }
 
-        static object IUnmanagedObjectUnwrapper.GetObjectForUnmanagedWrapper(void* ptr) => 
+        static object IUnmanagedObjectUnwrapper.GetObjectForUnmanagedWrapper(void* ptr) =>
             (TUnmanagedInterface)GCHandle.FromIntPtr((nint)((void**)ptr)[1]).Target;
     }
 }

@@ -39,7 +39,8 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
         ValueConverter? valueConverter,
         ValueComparer? valueComparer,
         JsonValueReaderWriter? jsonValueReaderWriter,
-        CoreTypeMapping? typeMapping)
+        CoreTypeMapping? typeMapping
+    )
     {
         CollectionProperty = collectionProperty;
         ClrType = clrType;
@@ -87,15 +88,13 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     /// <summary>
     ///     Gets a value indicating whether elements of the collection can be <see langword="null" />.
     /// </summary>
-    public virtual bool IsNullable
-        => _isNullable;
+    public virtual bool IsNullable => _isNullable;
 
     /// <summary>
     ///     Returns the type mapping for elements of the collection.
     /// </summary>
     /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
-    public virtual CoreTypeMapping? FindTypeMapping()
-        => _typeMapping;
+    public virtual CoreTypeMapping? FindTypeMapping() => _typeMapping;
 
     /// <summary>
     ///     Gets the maximum length of data that is allowed in elements of the collection. For example, if the element type is
@@ -106,8 +105,7 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     ///     set.
     /// </returns>
     [DebuggerStepThrough]
-    public virtual int? GetMaxLength()
-        => (int?)this[CoreAnnotationNames.MaxLength];
+    public virtual int? GetMaxLength() => (int?)this[CoreAnnotationNames.MaxLength];
 
     /// <summary>
     ///     Gets the precision of data that is allowed in elements of the collection.
@@ -115,8 +113,7 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     /// </summary>
     /// <returns>The precision, or <see langword="null" /> if none is defined.</returns>
     [DebuggerStepThrough]
-    public virtual int? GetPrecision()
-        => (int?)this[CoreAnnotationNames.Precision];
+    public virtual int? GetPrecision() => (int?)this[CoreAnnotationNames.Precision];
 
     /// <summary>
     ///     Gets the scale of data that is allowed in this elements of the collection.
@@ -124,43 +121,38 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     /// </summary>
     /// <returns>The scale, or <see langword="null" /> if none is defined.</returns>
     [DebuggerStepThrough]
-    public virtual int? GetScale()
-        => (int?)this[CoreAnnotationNames.Scale];
+    public virtual int? GetScale() => (int?)this[CoreAnnotationNames.Scale];
 
     /// <summary>
     ///     Gets a value indicating whether elements of the collection can persist Unicode characters.
     /// </summary>
     /// <returns>The Unicode setting, or <see langword="null" /> if none is defined.</returns>
     [DebuggerStepThrough]
-    public virtual bool? IsUnicode()
-        => (bool?)this[CoreAnnotationNames.Unicode];
+    public virtual bool? IsUnicode() => (bool?)this[CoreAnnotationNames.Unicode];
 
     /// <summary>
     ///     Gets the custom <see cref="ValueConverter" /> for this elements of the collection.
     /// </summary>
     /// <returns>The converter, or <see langword="null" /> if none has been set.</returns>
     [DebuggerStepThrough]
-    public virtual ValueConverter? GetValueConverter()
-        => _valueConverter;
+    public virtual ValueConverter? GetValueConverter() => _valueConverter;
 
     /// <summary>
     ///     Gets the custom <see cref="ValueComparer" /> for elements of the collection.
     /// </summary>
     /// <returns>The comparer, or <see langword="null" /> if none has been set.</returns>
     [DebuggerStepThrough]
-    public virtual ValueComparer? GetValueComparer()
-        => _valueComparer;
+    public virtual ValueComparer? GetValueComparer() => _valueComparer;
 
     /// <summary>
     ///     Gets the type that the elements of the collection will be converted to before being sent to the database provider.
     /// </summary>
     /// <returns>The provider type, or <see langword="null" /> if none has been set.</returns>
-    public virtual Type? GetProviderClrType()
-        => (Type?)FindAnnotation(CoreAnnotationNames.ProviderClrType)?.Value;
+    public virtual Type? GetProviderClrType() =>
+        (Type?)FindAnnotation(CoreAnnotationNames.ProviderClrType)?.Value;
 
     /// <inheritdoc />
-    public virtual JsonValueReaderWriter? GetJsonValueReaderWriter()
-        => _jsonValueReaderWriter;
+    public virtual JsonValueReaderWriter? GetJsonValueReaderWriter() => _jsonValueReaderWriter;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -168,10 +160,11 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyElementType)this).ToDebugString(),
-            () => ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -179,12 +172,11 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
-    IReadOnlyProperty IReadOnlyElementType.CollectionProperty
-        => CollectionProperty;
+    IReadOnlyProperty IReadOnlyElementType.CollectionProperty => CollectionProperty;
 
     /// <inheritdoc />
     bool IReadOnlyElementType.IsNullable
@@ -195,36 +187,30 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? IReadOnlyElementType.GetMaxLength()
-        => (int?)this[CoreAnnotationNames.MaxLength];
+    int? IReadOnlyElementType.GetMaxLength() => (int?)this[CoreAnnotationNames.MaxLength];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool? IReadOnlyElementType.IsUnicode()
-        => (bool?)this[CoreAnnotationNames.Unicode];
+    bool? IReadOnlyElementType.IsUnicode() => (bool?)this[CoreAnnotationNames.Unicode];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? IReadOnlyElementType.GetPrecision()
-        => (int?)this[CoreAnnotationNames.Precision];
+    int? IReadOnlyElementType.GetPrecision() => (int?)this[CoreAnnotationNames.Precision];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? IReadOnlyElementType.GetScale()
-        => (int?)this[CoreAnnotationNames.Scale];
+    int? IReadOnlyElementType.GetScale() => (int?)this[CoreAnnotationNames.Scale];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueConverter? IReadOnlyElementType.GetValueConverter()
-        => _valueConverter;
+    ValueConverter? IReadOnlyElementType.GetValueConverter() => _valueConverter;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    Type? IReadOnlyElementType.GetProviderClrType()
-        => (Type?)this[CoreAnnotationNames.ProviderClrType];
+    Type? IReadOnlyElementType.GetProviderClrType() =>
+        (Type?)this[CoreAnnotationNames.ProviderClrType];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    CoreTypeMapping IReadOnlyElementType.FindTypeMapping()
-        => FindTypeMapping()!;
+    CoreTypeMapping IReadOnlyElementType.FindTypeMapping() => FindTypeMapping()!;
 }

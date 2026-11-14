@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -39,14 +39,34 @@ namespace DbLinq.MySql
     partial class MySqlSchemaLoader : SchemaLoader
     {
         private readonly IVendor vendor = new MySqlVendor();
-        public override IVendor Vendor { get { return vendor; } set { } }
-
-        protected override TableName CreateTableName(string dbTableName, string dbSchema, INameAliases nameAliases, NameFormat nameFormat)
+        public override IVendor Vendor
         {
-            return CreateTableName(dbTableName, dbSchema, nameAliases, nameFormat, WordsExtraction.FromDictionary);
+            get { return vendor; }
+            set { }
         }
 
-        protected override void LoadStoredProcedures(Database schema, SchemaName schemaName, IDbConnection conn, NameFormat nameFormat)
+        protected override TableName CreateTableName(
+            string dbTableName,
+            string dbSchema,
+            INameAliases nameAliases,
+            NameFormat nameFormat
+        )
+        {
+            return CreateTableName(
+                dbTableName,
+                dbSchema,
+                nameAliases,
+                nameFormat,
+                WordsExtraction.FromDictionary
+            );
+        }
+
+        protected override void LoadStoredProcedures(
+            Database schema,
+            SchemaName schemaName,
+            IDbConnection conn,
+            NameFormat nameFormat
+        )
         {
             var procs = ReadProcedures(conn, schemaName.DbName);
 
@@ -58,47 +78,72 @@ namespace DbLinq.MySql
                 func.Name = procedureName.DbName;
                 func.Method = procedureName.MethodName;
                 func.IsComposable = string.Compare(proc.type, "FUNCTION") == 0;
-                func.BodyContainsSelectStatement = proc.body != null
-                                                   && proc.body.IndexOf("select", StringComparison.OrdinalIgnoreCase) > -1;
+                func.BodyContainsSelectStatement =
+                    proc.body != null
+                    && proc.body.IndexOf("select", StringComparison.OrdinalIgnoreCase) > -1;
                 ParseProcParams(proc, func);
 
                 schema.Functions.Add(func);
             }
         }
 
-        protected override void LoadConstraints(Database schema, SchemaName schemaName, IDbConnection conn, NameFormat nameFormat, Names names)
+        protected override void LoadConstraints(
+            Database schema,
+            SchemaName schemaName,
+            IDbConnection conn,
+            NameFormat nameFormat,
+            Names names
+        )
         {
             var constraints = ReadConstraints(conn, schemaName.DbName);
 
             //sort tables - parents first (this is moving to SchemaPostprocess)
-            //TableSorter.Sort(tables, constraints); 
+            //TableSorter.Sort(tables, constraints);
 
             foreach (DataConstraint keyColRow in constraints)
             {
                 //find my table:
                 string fullKeyDbName = GetFullDbName(keyColRow.TableName, keyColRow.TableSchema);
-                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t => fullKeyDbName == t.Name);
+                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t =>
+                    fullKeyDbName == t.Name
+                );
                 if (table == null)
                 {
                     bool ignoreCase = true;
-                    table = schema.Tables.FirstOrDefault(t => 0 == string.Compare(fullKeyDbName, t.Name, ignoreCase));
+                    table = schema.Tables.FirstOrDefault(t =>
+                        0 == string.Compare(fullKeyDbName, t.Name, ignoreCase)
+                    );
                     if (table == null)
                     {
-                        WriteErrorLine("ERROR L46: Table '" + keyColRow.TableName + "' not found for column " + keyColRow.ColumnName);
+                        WriteErrorLine(
+                            "ERROR L46: Table '"
+                                + keyColRow.TableName
+                                + "' not found for column "
+                                + keyColRow.ColumnName
+                        );
                         continue;
                     }
                 }
 
-                bool isForeignKey = keyColRow.ConstraintName != "PRIMARY"
-                                    && keyColRow.ReferencedTableName != null;
+                bool isForeignKey =
+                    keyColRow.ConstraintName != "PRIMARY" && keyColRow.ReferencedTableName != null;
 
                 if (isForeignKey)
                 {
-                    LoadForeignKey(schema, table, keyColRow.ColumnName, keyColRow.TableName, keyColRow.TableSchema,
-                                   keyColRow.ReferencedColumnName, keyColRow.ReferencedTableName, keyColRow.ReferencedTableSchema,
-                                   keyColRow.ConstraintName, nameFormat, names);
+                    LoadForeignKey(
+                        schema,
+                        table,
+                        keyColRow.ColumnName,
+                        keyColRow.TableName,
+                        keyColRow.TableSchema,
+                        keyColRow.ReferencedColumnName,
+                        keyColRow.ReferencedTableName,
+                        keyColRow.ReferencedTableSchema,
+                        keyColRow.ConstraintName,
+                        nameFormat,
+                        names
+                    );
                 }
-
             }
         }
 
@@ -172,7 +217,9 @@ namespace DbLinq.MySql
             return paramObj;
         }
 
-        static System.Text.RegularExpressions.Regex re_CHARSET = new System.Text.RegularExpressions.Regex(@" CHARSET \w+$");
+        static System.Text.RegularExpressions.Regex re_CHARSET =
+            new System.Text.RegularExpressions.Regex(@" CHARSET \w+$");
+
         /// <summary>
         /// given 'CHAR(30)', return 'string'
         /// </summary>

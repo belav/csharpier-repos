@@ -148,14 +148,10 @@ public class HealthChecksBuilderTest
         var services = CreateServices();
         services
             .AddHealthChecks()
-            .AddCheck(
-                "test",
-                tags: new[] { "tag" },
-                check: () =>
-                {
-                    return HealthCheckResult.Healthy();
-                }
-            );
+            .AddCheck("test", tags: new[] { "tag" }, check: () =>
+            {
+                return HealthCheckResult.Healthy();
+            });
 
         var serviceProvider = services.BuildServiceProvider();
 

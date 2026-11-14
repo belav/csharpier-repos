@@ -32,26 +32,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         private const int ParameterAndOverrides = 5;
 
         public GenerateVariableTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpGenerateVariableCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpGenerateVariableCodeFixProvider());
 
-        private readonly CodeStyleOption2<bool> onWithInfo = new(true, NotificationOption2.Suggestion);
+        private readonly CodeStyleOption2<bool> onWithInfo = new(
+            true,
+            NotificationOption2.Suggestion
+        );
 
         // specify all options explicitly to override defaults.
-        private OptionsCollection ImplicitTypingEverywhere()
-            => new(GetLanguage())
+        private OptionsCollection ImplicitTypingEverywhere() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
             };
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task TestSimpleLowercaseIdentifier1()
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
                         goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -92,14 +96,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
                     }
                 }
                 """,
-new[]
-{
-    string.Format(FeaturesResources.Generate_field_0, "goo"),
-    string.Format(FeaturesResources.Generate_read_only_field_0, "goo"),
-    string.Format(FeaturesResources.Generate_property_0, "goo"),
-    string.Format(FeaturesResources.Generate_local_0, "goo"),
-    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
-});
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_read_only_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_property_0, "goo"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
+                }
+            );
         }
 
         [Fact]
@@ -115,11 +120,12 @@ new[]
                     }
                 }
                 """,
-new[]
-{
-    string.Format(FeaturesResources.Generate_field_0, "_goo"),
-    string.Format(FeaturesResources.Generate_read_only_field_0, "_goo"),
-});
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "_goo"),
+                    string.Format(FeaturesResources.Generate_read_only_field_0, "_goo"),
+                }
+            );
         }
 
         [Fact]
@@ -146,7 +152,8 @@ new[]
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -173,7 +180,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -199,7 +207,8 @@ index: PropertyIndex);
                         Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -226,7 +235,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -253,7 +263,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -279,7 +290,8 @@ index: PropertyIndex);
                         Method(goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -309,7 +321,8 @@ index: PropertyIndex);
                         Method(goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -343,7 +356,8 @@ index: PropertyIndex);
                         Method(goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -359,7 +373,14 @@ index: PropertyIndex);
                     }
                 }
                 """,
-new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(FeaturesResources.Generate_property_0, "goo"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo") });
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_property_0, "goo"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
+                }
+            );
         }
 
         [Fact]
@@ -380,7 +401,18 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
                     }
                 }
                 """,
-new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(FeaturesResources.Generate_property_0, "goo"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0_and_overrides_implementations, "goo") });
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_property_0, "goo"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
+                    string.Format(
+                        FeaturesResources.Generate_parameter_0_and_overrides_implementations,
+                        "goo"
+                    ),
+                }
+            );
         }
 
         [Fact]
@@ -406,7 +438,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
                         goo = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -433,7 +466,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -459,7 +493,8 @@ index: ReadonlyFieldIndex);
                         Method(ref this.[|goo|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -487,7 +522,9 @@ index: ReadonlyFieldIndex);
                         Method(ref this.goo);
                     }
                 }
-                """, index: ReadonlyFieldIndex);
+                """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -515,7 +552,9 @@ index: ReadonlyFieldIndex);
                         Method(in this.goo);
                     }
                 }
-                """, index: PropertyIndex);
+                """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -541,7 +580,8 @@ index: ReadonlyFieldIndex);
                         Method(ref goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -557,7 +597,13 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo") });
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
+                }
+            );
         }
 
         [Fact]
@@ -583,7 +629,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
                         Method(out goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -609,7 +656,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
                         goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -636,7 +684,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -663,7 +712,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -689,7 +739,8 @@ index: PropertyIndex);
                         this.goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -716,7 +767,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -743,7 +795,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -769,7 +822,8 @@ index: PropertyIndex);
                         this.goo = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -796,7 +850,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -822,7 +877,8 @@ index: ReadonlyFieldIndex);
                         Class.goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -849,7 +905,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -876,7 +933,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -902,7 +960,8 @@ index: PropertyIndex);
                         Class.goo = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -929,7 +988,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -962,7 +1022,8 @@ index: ReadonlyFieldIndex);
                 {
                     internal object goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -994,7 +1055,8 @@ index: ReadonlyFieldIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1027,7 +1089,8 @@ index: ReadonlyFieldIndex);
                 {
                     internal object goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1060,7 +1123,8 @@ index: ReadonlyFieldIndex);
                 {
                     protected static object goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1080,7 +1144,8 @@ index: ReadonlyFieldIndex);
                 {
                 }
                 """,
-count: 2);
+                count: 2
+            );
         }
 
         [Fact]
@@ -1113,7 +1178,9 @@ count: 2);
                 {
                     object Goo { get; set; }
                 }
-                """, index: ReadonlyFieldIndex);
+                """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -1146,7 +1213,8 @@ count: 2);
                 {
                     object Goo { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1165,7 +1233,8 @@ count: 2);
                 interface I
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1185,7 +1254,8 @@ count: 2);
                 {
                 }
                 """,
-count: 1);
+                count: 1
+            );
         }
 
         [Fact]
@@ -1218,7 +1288,8 @@ count: 1);
                 {
                     int Goo { get; set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1244,7 +1315,8 @@ count: 1);
                         goo = t;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1270,7 +1342,8 @@ count: 1);
                         goo = t;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1296,7 +1369,8 @@ count: 1);
                         goo = t;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1325,7 +1399,8 @@ count: 1);
                         goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1354,7 +1429,8 @@ count: 1);
                     int i;
                     private object goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1384,7 +1460,8 @@ count: 1);
                         Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1414,7 +1491,8 @@ count: 1);
 
                     public object Goo { get; private set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1443,7 +1521,8 @@ count: 1);
                         Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1476,7 +1555,8 @@ count: 1);
                         Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1509,7 +1589,8 @@ count: 1);
                         Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1524,7 +1605,8 @@ count: 1);
                         [|Goo|]();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1539,7 +1621,8 @@ count: 1);
                         new [|Goo|]();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1554,7 +1637,8 @@ count: 1);
                         [|A|] a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1565,7 +1649,8 @@ count: 1);
                         [|A.B|] a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1576,7 +1661,8 @@ count: 1);
                         [|A|].B a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1587,7 +1673,8 @@ count: 1);
                         A.[|B|] a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1598,7 +1685,8 @@ count: 1);
                         [|A.B.C|] a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1609,7 +1697,8 @@ count: 1);
                         [|A.B|].C a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1620,7 +1709,8 @@ count: 1);
                         A.B.[|C|] a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1631,7 +1721,8 @@ count: 1);
                         [|A|].B.C a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1642,7 +1733,8 @@ count: 1);
                         A.[|B|].C a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539336")]
@@ -1654,7 +1746,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1662,7 +1755,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1670,7 +1764,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1678,7 +1773,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1686,7 +1782,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1694,7 +1791,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1702,7 +1800,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1710,7 +1809,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1718,7 +1818,8 @@ count: 1);
                 class Class
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539340")]
@@ -1731,7 +1832,8 @@ count: 1);
                     void M()
                     {
                         this.[|Goo|] }
-                """);
+                """
+            );
 
             await TestSpansAsync(
                 """
@@ -1741,7 +1843,8 @@ count: 1);
                     {
                         this.[|Goo|];
                     }
-                """);
+                """
+            );
 
             await TestSpansAsync(
                 """
@@ -1750,7 +1853,8 @@ count: 1);
                     void M()
                     {
                         this.[|Goo|] = 1 }
-                """);
+                """
+            );
 
             await TestSpansAsync(
                 """
@@ -1759,7 +1863,8 @@ count: 1);
                     void M()
                     {
                         this.[|Goo|] = 1 + 2 }
-                """);
+                """
+            );
 
             await TestSpansAsync(
                 """
@@ -1769,7 +1874,8 @@ count: 1);
                     {
                         this.[|Goo|] = 1 + 2;
                     }
-                """);
+                """
+            );
 
             await TestSpansAsync(
                 """
@@ -1778,7 +1884,8 @@ count: 1);
                     void M()
                     {
                         this.[|Goo|] += Bar() }
-                """);
+                """
+            );
 
             await TestSpansAsync(
                 """
@@ -1788,7 +1895,8 @@ count: 1);
                     {
                         this.[|Goo|] += Bar();
                     }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1818,7 +1926,9 @@ count: 1);
                         Func<string, int> f = x => goo;
                     }
                 }
-                """, FieldIndex);
+                """,
+                FieldIndex
+            );
         }
 
         [Fact]
@@ -1848,7 +1958,9 @@ count: 1);
                         Func<int> f = () => goo;
                     }
                 }
-                """, FieldIndex);
+                """,
+                FieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30232")]
@@ -1880,7 +1992,9 @@ count: 1);
                         Func<string, Task<int>> f = async x => goo;
                     }
                 }
-                """, FieldIndex);
+                """,
+                FieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30232")]
@@ -1912,7 +2026,9 @@ count: 1);
                         Func<Task<int>> f = async () => goo;
                     }
                 }
-                """, FieldIndex);
+                """,
+                FieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539427")]
@@ -1942,7 +2058,8 @@ count: 1);
                             return 2 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         // TODO: Move to TypeInferrer.InferTypes, or something
@@ -1969,7 +2086,8 @@ count: 1);
                         System.Console.WriteLine(goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         // TODO: Move to TypeInferrer.InferTypes, or something
@@ -1996,7 +2114,8 @@ count: 1);
                         System.Console.WriteLine(this.goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2023,7 +2142,8 @@ count: 1);
                 {
                     bool SomeProp { get; set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2050,7 +2170,9 @@ count: 1);
                 {
                     bool SomeProp { get; set; }
                 }
-                """, index: ReadonlyFieldIndex);
+                """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2077,7 +2199,8 @@ count: 1);
                 {
                     bool SomeProp { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2093,7 +2216,8 @@ count: 1);
                 interface ITest
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2110,7 +2234,8 @@ count: 1);
                 {
                     bool SomeProp { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -2136,7 +2261,8 @@ count: 1);
                         @goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -2162,7 +2288,8 @@ count: 1);
                         @int;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539529")]
@@ -2188,7 +2315,8 @@ count: 1);
                         test = (ref int x) => x = 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539595")]
@@ -2203,7 +2331,8 @@ count: 1);
                         Goo<string, int>([|u1|], u2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539571")]
@@ -2241,7 +2370,8 @@ count: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539717")]
@@ -2267,7 +2397,8 @@ count: 1);
                         i++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539717")]
@@ -2293,7 +2424,8 @@ count: 1);
                         --i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539738")]
@@ -2319,7 +2451,8 @@ count: 1);
 
                 C.i ++ ;
                 """,
-parseOptions: Options.Script);
+                parseOptions: Options.Script
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539558")]
@@ -2353,7 +2486,8 @@ parseOptions: Options.Script);
                         Goo#();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact(Skip = "Tuples")]
@@ -2389,7 +2523,8 @@ parseOptions: Options.Script);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539665")]
@@ -2418,7 +2553,8 @@ index: PropertyIndex);
                         C.P = 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539793")]
@@ -2434,7 +2570,14 @@ index: PropertyIndex);
                     }
                 }
                 """,
-new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(FeaturesResources.Generate_property_0, "p"), string.Format(FeaturesResources.Generate_local_0, "p"), string.Format(FeaturesResources.Generate_parameter_0, "p") });
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "p"),
+                    string.Format(FeaturesResources.Generate_property_0, "p"),
+                    string.Format(FeaturesResources.Generate_local_0, "p"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "p"),
+                }
+            );
 
             await TestInRegularAndScriptAsync(
                 """
@@ -2456,7 +2599,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
                         p++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
@@ -2472,7 +2616,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
                         goto [|goo|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539826")]
@@ -2498,7 +2643,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
                         goo.ToString();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539840")]
@@ -2517,7 +2663,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
                         [|global|]::System.String s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539871")]
@@ -2534,7 +2681,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
                         Goo<T> r = [|Goo<T>|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539934")]
@@ -2565,7 +2713,8 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539986")]
@@ -2598,7 +2747,8 @@ parseOptions: null);
                 {
                     public static C<object> M { get; internal set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539986")]
@@ -2631,7 +2781,8 @@ parseOptions: null);
                         public static C<T> M { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540159")]
@@ -2645,7 +2796,8 @@ parseOptions: null);
                     {
                         int i = [|@|] }
                 }
-                """);
+                """
+            );
             await TestMissingInRegularAndScriptAsync(
                 """
                 class C
@@ -2654,7 +2806,8 @@ parseOptions: null);
                     {
                         int i = [|@|]}
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541194")]
@@ -2686,7 +2839,8 @@ parseOptions: null);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541265")]
@@ -2735,7 +2889,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541549")]
@@ -2767,7 +2922,8 @@ parseOptions: null);
                         f(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541597")]
@@ -2793,7 +2949,8 @@ parseOptions: null);
                         a = a + 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541597")]
@@ -2819,7 +2976,8 @@ parseOptions: null);
                         a = a + 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541659")]
@@ -2857,7 +3015,8 @@ parseOptions: null);
                 class var
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541675")]
@@ -2903,19 +3062,22 @@ parseOptions: null);
                         return s.Length;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task SpeakableTopLevelStatementType()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 [|P|] = 10;
 
                 partial class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539675")]
@@ -2943,7 +3105,8 @@ parseOptions: null);
                         P = 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539675")]
@@ -2972,7 +3135,8 @@ parseOptions: null);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -2999,7 +3163,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -3026,7 +3191,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: 0);
+                index: 0
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -3058,7 +3224,8 @@ index: 0);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -3090,7 +3257,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: 0);
+                index: 0
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539665")]
@@ -3119,27 +3287,28 @@ index: 0);
                         C.P = 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540595")]
         public async Task TestGeneratePropertyInScript()
         {
             await TestAsync(
-@"[|Goo|]",
-"""
+                @"[|Goo|]",
+                """
 object Goo { get; private set; }
 
 Goo
 """,
-parseOptions: Options.Script);
+                parseOptions: Options.Script
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542535")]
         public async Task TestConstantInParameterValue()
         {
-            const string Initial =
-                """
+            const string Initial = """
                 class C
                 {   
                     const int y = 1 ; 
@@ -3147,13 +3316,11 @@ parseOptions: Options.Script);
                 }
                 """;
 
-            await TestActionCountAsync(
-Initial,
-count: 1);
+            await TestActionCountAsync(Initial, count: 1);
 
             await TestInRegularAndScriptAsync(
-Initial,
-"""
+                Initial,
+                """
 class C
 {   
     const int y = 1 ;
@@ -3161,7 +3328,8 @@ class C
 
     public void Goo ( bool x = undeclared ) { }
 }
-""");
+"""
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542900")]
@@ -3191,7 +3359,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542900")]
@@ -3222,7 +3391,8 @@ class C
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3257,7 +3427,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3292,7 +3463,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3327,7 +3499,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3362,7 +3535,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3397,7 +3571,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3432,7 +3607,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3467,7 +3643,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3502,7 +3679,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3537,7 +3715,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3578,7 +3757,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3619,7 +3799,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3660,7 +3841,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3701,7 +3883,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3742,7 +3925,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3783,7 +3967,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3824,7 +4009,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3865,7 +4051,8 @@ parseOptions: null);
                     }
                 }
                 """,
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543153")]
@@ -3894,7 +4081,8 @@ parseOptions: null);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543124")]
@@ -3910,7 +4098,8 @@ index: ReadonlyFieldIndex);
                         bool b = v.[|Bar|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543543")]
@@ -3934,7 +4123,8 @@ index: ReadonlyFieldIndex);
                         return new Program([|str|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544175")]
@@ -3955,7 +4145,8 @@ index: ReadonlyFieldIndex);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544271")]
@@ -3976,7 +4167,8 @@ index: ReadonlyFieldIndex);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544164")]
@@ -4009,7 +4201,8 @@ index: ReadonlyFieldIndex);
                         var c = new Goo { Gibberish = 24 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49294")]
@@ -4042,7 +4235,8 @@ index: ReadonlyFieldIndex);
                         var c = g with { Gibberish = 24 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13166")]
@@ -4073,7 +4267,8 @@ index: ReadonlyFieldIndex);
 
                     public static Outer X() => new Outer { Inner = { InnerValue = 5 } };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4106,7 +4301,8 @@ index: ReadonlyFieldIndex);
                         var c = new Goo { Gibberish = Gibberish };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4140,7 +4336,8 @@ index: ReadonlyFieldIndex);
                         var c = new Goo { Gibberish = Gibberish };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4174,7 +4371,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -4208,7 +4406,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -4243,7 +4442,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -4263,7 +4463,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-2);
+                2
+            );
         }
 
         [Fact]
@@ -4297,7 +4498,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -4310,7 +4512,8 @@ index: LocalIndex);
                 class Class1
                 {
                     Console.[|WriteLine|](); }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -4323,7 +4526,8 @@ index: LocalIndex);
                 class Class1
                 { [|WriteLine|]();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -4337,7 +4541,8 @@ index: LocalIndex);
                 {
                     [|WriteLine|]
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544384")]
@@ -4388,14 +4593,16 @@ index: LocalIndex);
                         return p2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544510")]
         public async Task TestNotOnUsingAlias()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using [|S|] = System ; S . Console . WriteLine ( ""hello world"" ) ; ");
+                @"using [|S|] = System ; S . Console . WriteLine ( ""hello world"" ) ; "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544907")]
@@ -4427,7 +4634,8 @@ index: LocalIndex);
                         Expression<Func<int, int>> e = x => Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4448,7 +4656,8 @@ index: LocalIndex);
                 {
                 }
                 #line default
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4474,7 +4683,8 @@ index: LocalIndex);
                         return goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4508,7 +4718,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -4546,7 +4757,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -4584,7 +4796,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -4618,7 +4831,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/809542")]
@@ -4652,7 +4866,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/809542")]
@@ -4688,7 +4903,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -4722,7 +4938,8 @@ index: ReadonlyFieldIndex);
 
                     public static object X { get; private set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4745,7 +4962,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 #line default
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4782,7 +5000,8 @@ index: ReadonlyFieldIndex);
                 #line hidden
                 }
                 #line default
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545217")]
@@ -4824,7 +5043,9 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: 3, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
+                index: 3,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545217")]
@@ -4866,7 +5087,8 @@ index: 3, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -4892,7 +5114,8 @@ index: LocalIndex);
                         int v = 1 + (k);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4924,7 +5147,8 @@ index: LocalIndex);
                                 select v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4952,7 +5176,8 @@ index: LocalIndex);
                         int[] temp = checked(goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4978,7 +5203,8 @@ index: LocalIndex);
                         var v = new int[k];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5004,7 +5230,8 @@ index: LocalIndex);
                         int i = goo ? bar : baz;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5030,7 +5257,8 @@ index: LocalIndex);
                         int i = goo ? bar : baz;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5056,7 +5284,8 @@ index: LocalIndex);
                         int i = goo ? bar : baz;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5082,7 +5311,8 @@ index: LocalIndex);
                         var x = (int)y;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5112,7 +5342,8 @@ index: LocalIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5142,7 +5373,8 @@ index: LocalIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5157,7 +5389,8 @@ index: LocalIndex);
                         [|System|].Console.WriteLine(4);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5172,7 +5405,8 @@ index: LocalIndex);
                         [|System.Console|].WriteLine(4);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5187,7 +5421,8 @@ index: LocalIndex);
                         [|base|].ToString();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -5212,7 +5447,9 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: PropertyIndex, options: ImplicitTypingEverywhere());
+                index: PropertyIndex,
+                options: ImplicitTypingEverywhere()
+            );
         }
 
         [Fact]
@@ -5237,7 +5474,8 @@ index: PropertyIndex, options: ImplicitTypingEverywhere());
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -5262,7 +5500,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -5287,7 +5526,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545269")]
@@ -5305,7 +5545,8 @@ index: PropertyIndex);
                 #line default
                 #line hidden
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545269")]
@@ -5323,9 +5564,17 @@ index: PropertyIndex);
                 #line hidden
                 }
                 """;
-            await TestExactActionSetOfferedAsync(code, new[] { string.Format(FeaturesResources.Generate_local_0, "Bar"), string.Format(FeaturesResources.Generate_parameter_0, "Bar") });
+            await TestExactActionSetOfferedAsync(
+                code,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_local_0, "Bar"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "Bar"),
+                }
+            );
 
-            await TestInRegularAndScriptAsync(code,
+            await TestInRegularAndScriptAsync(
+                code,
                 """
                 class C
                 {
@@ -5337,7 +5586,9 @@ index: PropertyIndex);
                 #line default
                 #line hidden
                 }
-                """, options: ImplicitTypingEverywhere());
+                """,
+                options: ImplicitTypingEverywhere()
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546027")]
@@ -5370,7 +5621,8 @@ index: PropertyIndex);
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545232")]
@@ -5416,7 +5668,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/863346")]
@@ -5458,7 +5711,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/863346")]
@@ -5500,7 +5754,8 @@ index: LocalIndex);
                         return function(zoo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/865067")]
@@ -5532,7 +5787,8 @@ index: LocalIndex);
                         yield return abc;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5564,7 +5820,8 @@ index: LocalIndex);
                         yield return abc;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30235")]
@@ -5602,7 +5859,8 @@ index: LocalIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/877580")]
@@ -5632,7 +5890,9 @@ index: LocalIndex);
                         throw MyExp;
                     }
                 }
-                """, index: ReadonlyFieldIndex);
+                """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5658,7 +5918,8 @@ index: LocalIndex);
                         int* a = goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5684,7 +5945,8 @@ index: LocalIndex);
                         int*[] a = goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5710,7 +5972,8 @@ index: LocalIndex);
                         int* a = goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5742,7 +6005,8 @@ index: LocalIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5774,7 +6038,8 @@ index: LocalIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5801,7 +6066,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5828,7 +6094,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5855,7 +6122,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5888,7 +6156,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5921,7 +6190,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5948,7 +6218,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5975,7 +6246,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6002,7 +6274,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6035,7 +6308,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6068,7 +6342,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6094,7 +6369,8 @@ index: PropertyIndex);
                         var x = nameof(Z);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6121,7 +6397,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6148,7 +6425,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6174,7 +6452,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6200,7 +6479,8 @@ index: LocalIndex);
                         var x = nameof(Z.X);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6227,7 +6507,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6254,7 +6535,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6280,7 +6562,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6306,7 +6589,8 @@ index: LocalIndex);
                         var x = nameof(Z.X.Y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6333,7 +6617,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6360,7 +6645,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6386,7 +6672,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6401,7 +6688,8 @@ index: LocalIndex);
                         var x = [|nameof(1 + 2)|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6417,7 +6705,8 @@ index: LocalIndex);
                         var x = [|nameof(y)|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6434,7 +6723,8 @@ index: LocalIndex);
                         var x = [|nameof(y, z)|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6461,7 +6751,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6487,7 +6778,8 @@ index: PropertyIndex);
                         var x = nameof(y, z);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6514,7 +6806,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6540,7 +6833,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6577,7 +6871,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6613,7 +6908,8 @@ index: PropertyIndex);
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6650,7 +6946,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6686,7 +6983,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6712,7 +7010,8 @@ index: LocalIndex);
                         C x = a?.Instance;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6739,7 +7038,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6766,7 +7066,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6792,7 +7093,8 @@ index: PropertyIndex);
                         var x = a?.Instance;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6819,7 +7121,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6846,7 +7149,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6872,7 +7176,8 @@ index: PropertyIndex);
                         int? x = a?.B;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6899,7 +7204,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6926,7 +7232,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6963,7 +7270,8 @@ index: PropertyIndex);
                         public C C { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7000,7 +7308,8 @@ index: PropertyIndex);
                         public int C { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7037,7 +7346,8 @@ index: PropertyIndex);
                         public int C { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7074,7 +7384,8 @@ index: PropertyIndex);
                         public object C { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7112,7 +7423,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7150,7 +7462,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7188,7 +7501,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7226,7 +7540,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7264,7 +7579,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7302,7 +7618,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7340,7 +7657,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7378,7 +7696,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7408,7 +7727,8 @@ index: PropertyIndex);
 
                     public int MyProperty { get; } = y;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -7439,7 +7759,8 @@ index: PropertyIndex);
                     public int MyProperty { get; } = y;
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7469,7 +7790,8 @@ index: ReadonlyFieldIndex);
                     public int MyProperty { get; } = y;
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7489,7 +7811,8 @@ index: PropertyIndex);
 
                     public int Y => y;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -7510,7 +7833,8 @@ index: PropertyIndex);
                     public int Y => y;
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7531,7 +7855,8 @@ index: ReadonlyFieldIndex);
                     public int y { get; private set; }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7551,7 +7876,8 @@ index: PropertyIndex);
 
                     public static C operator --(C p) => x;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -7572,7 +7898,8 @@ index: PropertyIndex);
                     public static C operator --(C p) => x;
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7593,7 +7920,8 @@ index: ReadonlyFieldIndex);
                     public static C operator --(C p) => x;
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7613,7 +7941,8 @@ index: PropertyIndex);
 
                     public static C GetValue(C p) => x;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -7634,7 +7963,8 @@ index: PropertyIndex);
                     public static C GetValue(C p) => x;
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7655,7 +7985,8 @@ index: ReadonlyFieldIndex);
                     public static C GetValue(C p) => x;
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27647")]
@@ -7676,7 +8007,8 @@ index: PropertyIndex);
                     public static async System.Threading.Tasks.Task<C> GetValue(C p) => x;
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7706,7 +8038,8 @@ index: PropertyIndex);
                         var x = new Dictionary<string, int> { [key] = 0 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -7736,7 +8069,8 @@ index: PropertyIndex);
                         var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -7766,7 +8100,8 @@ index: PropertyIndex);
                         var x = new Dictionary<string, int> { ["Zero"] = i };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -7797,7 +8132,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7828,7 +8164,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7859,7 +8196,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7890,7 +8228,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7921,7 +8260,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7952,7 +8292,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7982,7 +8323,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -8012,7 +8354,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -8042,7 +8385,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -8076,7 +8420,8 @@ index: LocalIndex);
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8111,7 +8456,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -8145,7 +8491,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8010")]
@@ -8181,7 +8528,8 @@ index: PropertyIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8010")]
@@ -8218,7 +8566,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8010")]
@@ -8255,7 +8604,8 @@ index: ReadonlyFieldIndex);
                     public static int goo { get; private set; }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8010")]
@@ -8291,7 +8641,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8358")]
@@ -8327,7 +8678,8 @@ index: LocalIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8358")]
@@ -8344,7 +8696,8 @@ index: LocalIndex);
                         C.[|_field|] = 42;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8358")]
@@ -8361,7 +8714,8 @@ index: LocalIndex);
                         [|_field|] = 42;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8387,7 +8741,8 @@ index: LocalIndex);
                         Method(tuple);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8413,7 +8768,8 @@ index: LocalIndex);
                         Method(tuple);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8439,7 +8795,8 @@ index: LocalIndex);
                         tuple = (1, "hello");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8465,7 +8822,8 @@ index: LocalIndex);
                         tuple = (a: 1, "hello");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8493,7 +8851,8 @@ index: LocalIndex);
                         ref int i = ref this.Bar;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8521,7 +8880,8 @@ index: LocalIndex);
                         ref int i = ref this.bar;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17621")]
@@ -8551,7 +8911,8 @@ index: LocalIndex);
 
                     public string String { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17621")]
@@ -8581,7 +8942,9 @@ index: LocalIndex);
 
                     public string String { get; private set; }
                 }
-                """, index: ReadonlyFieldIndex);
+                """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18275")]
@@ -8603,7 +8966,8 @@ index: LocalIndex);
                         [|nameof|]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8634,7 +8998,8 @@ index: LocalIndex);
                         _bar = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8665,7 +9030,8 @@ index: LocalIndex);
                         _goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19239")]
@@ -8691,7 +9057,8 @@ index: LocalIndex);
 
                     public int Bar { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8726,7 +9093,8 @@ index: LocalIndex);
                         _quux = 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8761,7 +9129,8 @@ index: LocalIndex);
                         this.quux = 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8796,13 +9165,15 @@ index: LocalIndex);
                         Quux = 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19575")]
         public async Task TestNotOnGenericCodeParsedAsExpression()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 class C
                 {
                     private void GetEvaluationRuleNames()
@@ -8811,13 +9182,15 @@ index: LocalIndex);
                         return ImmutableArray.CreateRange();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19575")]
         public async Task TestOnNonGenericExpressionWithLessThan()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     private void GetEvaluationRuleNames()
@@ -8838,13 +9211,15 @@ index: LocalIndex);
                         return ImmutableArray.CreateRange();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18988")]
         public async Task GroupNonReadonlyFieldsTogether()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     public bool isDisposed;
@@ -8871,13 +9246,15 @@ index: LocalIndex);
                         this.y = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18988")]
         public async Task GroupReadonlyFieldsTogether()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     public readonly int x;
@@ -8904,7 +9281,9 @@ index: LocalIndex);
                         this.y = 0;
                     }
                 }
-                """, index: ReadonlyFieldIndex);
+                """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20791")]
@@ -8936,7 +9315,8 @@ index: LocalIndex);
                     void Goo(int i) { }
                     void Goo(out bool b) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20791")]
@@ -8968,7 +9348,8 @@ index: LocalIndex);
                     void Goo(out bool b) { }
                     void Goo(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20791")]
@@ -9000,7 +9381,8 @@ index: LocalIndex);
                     void Goo(int i) { }
                     void Goo(ref bool b) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20791")]
@@ -9032,7 +9414,8 @@ index: LocalIndex);
                     void Goo(ref bool b) { }
                     void Goo(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9058,7 +9441,8 @@ index: LocalIndex);
                         get => _field;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9086,7 +9470,8 @@ index: LocalIndex);
                         set => throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9113,7 +9498,8 @@ index: LocalIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9139,7 +9525,8 @@ index: ReadonlyFieldIndex);
                     public int prop { get; private set; }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9165,7 +9552,8 @@ index: PropertyIndex);
                         set => _field = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9191,7 +9579,8 @@ index: PropertyIndex);
                         int Local() => _field;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9218,7 +9607,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9245,7 +9635,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27647")]
@@ -9272,7 +9663,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9298,7 +9690,8 @@ index: PropertyIndex);
                         int Local() => _field = 12;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9330,7 +9723,8 @@ index: PropertyIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9363,7 +9757,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9396,7 +9791,8 @@ index: ReadonlyFieldIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -9429,7 +9825,8 @@ index: PropertyIndex);
                     }
                 }
                 """,
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9461,7 +9858,8 @@ index: PropertyIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9503,7 +9901,8 @@ index: PropertyIndex);
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9539,7 +9938,8 @@ index: PropertyIndex);
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26406")]
@@ -9569,7 +9969,8 @@ index: PropertyIndex);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26406")]
@@ -9599,7 +10000,9 @@ index: PropertyIndex);
                         }
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26406")]
@@ -9629,7 +10032,9 @@ index: PropertyIndex);
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9668,7 +10073,8 @@ index: PropertyIndex);
                         public int X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9707,7 +10113,8 @@ index: PropertyIndex);
                         public int X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9756,7 +10163,8 @@ index: PropertyIndex);
                         public Frob X;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9795,7 +10203,8 @@ index: PropertyIndex);
                         public object X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9842,7 +10251,8 @@ index: PropertyIndex);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9881,7 +10291,8 @@ index: PropertyIndex);
                         public (int, int) X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9920,7 +10331,8 @@ index: PropertyIndex);
                         public (int y, int z) X { get; internal set; }
                     }
                 }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs);
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9959,7 +10371,8 @@ index: PropertyIndex);
                         public object X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -10002,7 +10415,11 @@ index: PropertyIndex);
                         public (int y, int z) X { get; internal set; }
                     }
                 }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp12
+                )
+            );
         }
 
         [Fact]
@@ -10046,7 +10463,11 @@ index: PropertyIndex);
                     {
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp12
+                )
+            );
         }
 
         [Fact]
@@ -10092,7 +10513,11 @@ index: PropertyIndex);
                     {
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp12
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10131,7 +10556,8 @@ index: PropertyIndex);
                         public int X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10170,7 +10596,8 @@ index: PropertyIndex);
                         public object X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10215,7 +10642,8 @@ index: PropertyIndex);
                         public (int y, object? z) X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10258,7 +10686,8 @@ index: PropertyIndex);
                         public int X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10301,7 +10730,8 @@ index: PropertyIndex);
                         public int X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10336,7 +10766,8 @@ index: PropertyIndex);
                         public int X { get; internal set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -10374,7 +10805,8 @@ index: PropertyIndex);
                         public int X;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -10398,7 +10830,9 @@ index: PropertyIndex);
                         goo;
                     }
                 }
-                """, index: Parameter);
+                """,
+                index: Parameter
+            );
         }
 
         [Fact]
@@ -10432,7 +10866,9 @@ index: PropertyIndex);
                         [|goo|];
                     }
                 }
-                """, index: Parameter);
+                """,
+                index: Parameter
+            );
         }
 
         [Fact]
@@ -10466,35 +10902,39 @@ index: PropertyIndex);
                         [|goo|];
                     }
                 }
-                """, index: ParameterAndOverrides);
+                """,
+                index: ParameterAndOverrides
+            );
         }
 
         [Fact]
         public async Task TestAddParameterIsOfCorrectType()
         {
             await TestInRegularAndScriptAsync(
-    """
-    class Class
-    {
-        void Method()
-        {
-            M1([|goo|]);
-        }
+                """
+                class Class
+                {
+                    void Method()
+                    {
+                        M1([|goo|]);
+                    }
 
-        void M1(int a);
-    }
-    """,
-    """
-    class Class
-    {
-        void Method(int goo)
-        {
-            M1(goo);
-        }
+                    void M1(int a);
+                }
+                """,
+                """
+                class Class
+                {
+                    void Method(int goo)
+                    {
+                        M1(goo);
+                    }
 
-        void M1(int a);
-    }
-    """, index: Parameter);
+                    void M1(int a);
+                }
+                """,
+                index: Parameter
+            );
         }
 
         [Fact]
@@ -10532,7 +10972,9 @@ index: PropertyIndex);
 
                     void M1(int a);
                 }
-                """, index: ParameterAndOverrides);
+                """,
+                index: ParameterAndOverrides
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26502")]
@@ -10552,11 +10994,13 @@ index: PropertyIndex);
                         };
                     }
                 }
-                """, new[]
-{
-    string.Format(FeaturesResources.Generate_property_0, "Field"),
-    string.Format(FeaturesResources.Generate_field_0, "Field"),
-});
+                """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_property_0, "Field"),
+                    string.Format(FeaturesResources.Generate_field_0, "Field"),
+                }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26502")]
@@ -10576,11 +11020,13 @@ index: PropertyIndex);
                         };
                     }
                 }
-                """, new[]
-{
-    string.Format(FeaturesResources.Generate_property_0, "Field"),
-    string.Format(FeaturesResources.Generate_field_0, "Field"),
-});
+                """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_property_0, "Field"),
+                    string.Format(FeaturesResources.Generate_field_0, "Field"),
+                }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45367")]
@@ -10599,11 +11045,13 @@ index: PropertyIndex);
                         [|Error|] = error;
                         Offset = offset;
                     }
-                """, new[]
-{
-    string.Format(FeaturesResources.Generate_local_0, "Error", "MyException"),
-    string.Format(FeaturesResources.Generate_parameter_0, "Error", "MyException"),
-});
+                """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_local_0, "Error", "MyException"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "Error", "MyException"),
+                }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48172")]
@@ -10639,7 +11087,9 @@ index: PropertyIndex);
                         Action<int> call = _ => Debug.Assert(expected);
                     }
                 }
-                """, index: Parameter);
+                """,
+                index: Parameter
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47586")]
@@ -10675,7 +11125,9 @@ index: PropertyIndex);
                         }
                     }
                 }
-                """, index: Parameter);
+                """,
+                index: Parameter
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/27646")]
@@ -10718,17 +11170,19 @@ index: PropertyIndex);
         [InlineData("managed")]
         [InlineData("unmanaged")]
         [InlineData("dynamic")]
-        public async Task TestContextualKeywordsThatDoNotProbablyStartSyntacticConstructs_ReturnStatement(string keyword)
+        public async Task TestContextualKeywordsThatDoNotProbablyStartSyntacticConstructs_ReturnStatement(
+            string keyword
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"class C
+                $@"class C
 {{
     int M()
     {{
         [|return {keyword}|];
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     private int {keyword};
 
@@ -10736,7 +11190,8 @@ $@"class C
     {{
         return {keyword};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/27646")]
@@ -10745,16 +11200,19 @@ $@"class C
         [InlineData("async")]
         [InlineData("await")]
         [InlineData("var")]
-        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_ReturnStatement(string keyword)
+        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_ReturnStatement(
+            string keyword
+        )
         {
             await TestMissingInRegularAndScriptAsync(
-$@"class C
+                $@"class C
 {{
     int M()
     {{
         [|return {keyword}|];
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/27646")]
@@ -10763,16 +11221,19 @@ $@"class C
         [InlineData("async")]
         [InlineData("await")]
         [InlineData("var")]
-        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_OnTheirOwn(string keyword)
+        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_OnTheirOwn(
+            string keyword
+        )
         {
             await TestMissingInRegularAndScriptAsync(
-$@"class C
+                $@"class C
 {{
     int M()
     {{
         [|{keyword}|]
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/27646")]
@@ -10781,15 +11242,18 @@ $@"class C
         [InlineData("async")]
         [InlineData("await")]
         [InlineData("var")]
-        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_Local(string keyword)
+        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_Local(
+            string keyword
+        )
         {
             await TestMissingInRegularAndScriptAsync(
-$@"class Program
+                $@"class Program
 {{
     void Main()
     {{
         var x = [|{keyword}|];
-    }}");
+    }}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/60842")]
@@ -10819,7 +11283,9 @@ $@"class Program
                         await Task.Delay(time);
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/60842")]
@@ -10849,7 +11315,9 @@ $@"class Program
                         await Task.Delay(time);
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10879,7 +11347,9 @@ $@"class Program
                         await Task.Delay(time);
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10909,7 +11379,9 @@ $@"class Program
                         await Task.Delay(time);
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10939,7 +11411,9 @@ $@"class Program
                         await Task.Delay(time);
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10969,7 +11443,9 @@ $@"class Program
                         await Task.Delay(time);
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10999,7 +11475,9 @@ $@"class Program
                         return test;
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -11029,7 +11507,9 @@ $@"class Program
                         return test;
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -11059,7 +11539,9 @@ $@"class Program
                         await Task.Delay(time);
                     }
                 }
-                """, index: 4);
+                """,
+                index: 4
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/50764")]
@@ -11076,7 +11558,8 @@ $@"class Program
                          delegate*<void> i = &[|Goo|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68322")]
@@ -11106,7 +11589,8 @@ $@"class Program
                         Example e = new(_field);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68322")]
@@ -11136,7 +11620,8 @@ $@"class Program
                         List<int> list = new() { [|_field|] };
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

@@ -20,7 +20,10 @@ namespace System.Speech.Internal.Synthesis
                 TextFragment textFragment = ssmlFrags[iFrag];
 
                 // Remove the start and end paragraph fragments
-                if (textFragment.State.Action == TtsEngineAction.StartParagraph || textFragment.State.Action == TtsEngineAction.StartSentence)
+                if (
+                    textFragment.State.Action == TtsEngineAction.StartParagraph
+                    || textFragment.State.Action == TtsEngineAction.StartSentence
+                )
                 {
                     continue;
                 }
@@ -57,7 +60,10 @@ namespace System.Speech.Internal.Synthesis
                 // Set the silence if any
                 if (sapiState.eAction == SPVACTIONS.SPVA_Silence)
                 {
-                    sapiState.SilenceMSecs = SapiSilence(ssmlState.Duration, (EmphasisBreak)ssmlState.Emphasis);
+                    sapiState.SilenceMSecs = SapiSilence(
+                        ssmlState.Duration,
+                        (EmphasisBreak)ssmlState.Emphasis
+                    );
                 }
 
                 // Set the phonemes if any
@@ -100,7 +106,11 @@ namespace System.Speech.Internal.Synthesis
                             break;
 
                         default:
-                            sapiState.Context.pCategory = SapiCategory(sapiFrag, interpretAs, format);
+                            sapiState.Context.pCategory = SapiCategory(
+                                sapiFrag,
+                                interpretAs,
+                                format
+                            );
                             break;
                     }
                 }
@@ -181,7 +191,9 @@ namespace System.Speech.Internal.Synthesis
                         break;
                 }
                 // add the relative information
-                sapiVolume = (int)((volume.IsNumberPercent ? sapiVolume * volume.Number : volume.Number) + 0.5);
+                sapiVolume = (int)(
+                    (volume.IsNumberPercent ? sapiVolume * volume.Number : volume.Number) + 0.5
+                );
             }
             else
             {
@@ -286,7 +298,9 @@ namespace System.Speech.Internal.Synthesis
                 }
 
                 // add the relative information
-                sapiRate = (int)((rate.IsNumberPercent ? ScaleNumber(rate.Number, sapiRate, 10) : sapiRate) + 0.5);
+                sapiRate = (int)(
+                    (rate.IsNumberPercent ? ScaleNumber(rate.Number, sapiRate, 10) : sapiRate) + 0.5
+                );
             }
             else
             {
@@ -329,7 +343,9 @@ namespace System.Speech.Internal.Synthesis
                         break;
                 }
                 // add the relative information
-                sapiPitch = (int)((pitch.IsNumberPercent ? sapiPitch * pitch.Number : pitch.Number) + 0.5);
+                sapiPitch = (int)(
+                    (pitch.IsNumberPercent ? sapiPitch * pitch.Number : pitch.Number) + 0.5
+                );
             }
 
             // Check the range.
@@ -402,7 +418,7 @@ namespace System.Speech.Internal.Synthesis
             "telephone",
             "time",
             "time:hms12",
-            "time:hms24"
+            "time:hms24",
         };
 
         private static readonly string[] s_asContextFormat = new string[]
@@ -432,7 +448,7 @@ namespace System.Speech.Internal.Synthesis
             "phone_number",
             "time",
             "time",
-            "time"
+            "time",
         };
 
         #endregion

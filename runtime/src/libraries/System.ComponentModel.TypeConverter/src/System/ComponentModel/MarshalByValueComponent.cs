@@ -10,8 +10,10 @@ namespace System.ComponentModel
     /// Provides the base implementation for <see cref='System.ComponentModel.IComponent'/>,
     /// which is the base class for all components in Win Forms.
     /// </summary>
-    [Designer("System.Windows.Forms.Design.ComponentDocumentDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-              "System.ComponentModel.Design.IRootDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [Designer(
+        "System.Windows.Forms.Design.ComponentDocumentDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.ComponentModel.Design.IRootDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     [DesignerCategory("Component")]
     [TypeConverter(typeof(ComponentConverter))]
     public class MarshalByValueComponent : IComponent, IServiceProvider
@@ -27,9 +29,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.MarshalByValueComponent'/> class.
         /// </summary>
-        public MarshalByValueComponent()
-        {
-        }
+        public MarshalByValueComponent() { }
 
         ~MarshalByValueComponent() => Dispose(false);
 

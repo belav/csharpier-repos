@@ -18,7 +18,5 @@ namespace Microsoft.VisualStudio.Feedback.Interop
 
     [Guid("0BB1FA06-C83E-4EAA-99AF-0B67B2D8F90B")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    internal interface SVsFeedbackProfile
-    {
-    }
+    internal interface SVsFeedbackProfile { }
 }

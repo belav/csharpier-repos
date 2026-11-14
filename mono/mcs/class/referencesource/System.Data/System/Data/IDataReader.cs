@@ -6,22 +6,17 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
-    public interface IDataReader: IDisposable, IDataRecord {
+    public interface IDataReader : IDisposable, IDataRecord
+    {
+        int Depth { get; }
 
-        int Depth {
-            get;
-        }
+        bool IsClosed { get; }
 
-        bool IsClosed {
-            get;
-        }
-
-        int RecordsAffected {
-            get;
-        }
+        int RecordsAffected { get; }
 
         void Close();
 

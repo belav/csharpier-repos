@@ -14,17 +14,24 @@ namespace System.Xml.Tests
 {
     public enum TransformType
     {
-        Reader, Stream, Writer, TextWriter
+        Reader,
+        Stream,
+        Writer,
+        TextWriter,
     }
 
     public enum InputType
     {
-        Reader, URI, Navigator
+        Reader,
+        URI,
+        Navigator,
     }
 
     public enum DocType
     {
-        XmlDocument, XPathDocument, Unknown
+        XmlDocument,
+        XPathDocument,
+        Unknown,
     }
 
     ////////////////////////////////////////////////////////////////
@@ -32,9 +39,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     //[TestModule(Name = "XSLTransform API Tests", Desc = "XSLTransform API Tests", Pri = 1)]
-    public class XSLTransformModule
-    {
-    }
+    public class XSLTransformModule { }
 
     ////////////////////////////////////////////////////////////////
     // Base class for test cases
@@ -43,37 +48,42 @@ namespace System.Xml.Tests
     public class XsltApiTestCaseBase : FileCleanupTestBase
     {
         private const string XmlResolverDocumentName = "xmlResolver_document_function.xml";
-        private static readonly string s_temporaryResolverDocumentFullName = Path.Combine(Path.GetTempPath(), typeof(XsltApiTestCaseBase) + "_" + Path.GetRandomFileName());
+        private static readonly string s_temporaryResolverDocumentFullName = Path.Combine(
+            Path.GetTempPath(),
+            typeof(XsltApiTestCaseBase) + "_" + Path.GetRandomFileName()
+        );
         private static readonly object s_temporaryResolverDocumentLock = new object();
-        protected static string absoluteUriXslFile = "xmlResolver_document_function_absolute_uri_replaced.xsl";
-        
+        protected static string absoluteUriXslFile =
+            "xmlResolver_document_function_absolute_uri_replaced.xsl";
+
         // Generic data for all derived test cases
         public string szXslNS = "http://www.w3.org/1999/XSL/Transform";
 
         public string szDefaultNS = "urn:my-object";
         public string szEmpty = "";
         public string szInvalid = "*?%()\0{}[]&!@#$";
-        public string szLongString = "ThisIsAVeryLongStringToBeStoredAsAVariableToDetermineHowLargeThisBufferForAVariableNameCanBeAndStillFunctionAsExpected";
-        public string szLongNS = "http://www.miocrosoft.com/this/is/a/very/long/namespace/uri/to/do/the/api/testing/for/xslt/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/";
+        public string szLongString =
+            "ThisIsAVeryLongStringToBeStoredAsAVariableToDetermineHowLargeThisBufferForAVariableNameCanBeAndStillFunctionAsExpected";
+        public string szLongNS =
+            "http://www.miocrosoft.com/this/is/a/very/long/namespace/uri/to/do/the/api/testing/for/xslt/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/";
         public string[] szWhiteSpace = { "  ", "\n", "\t", "\r", "\t\n  \r\t" };
         public string szSimple = "myArg";
 
         // Variables from init string
-        private string _strPath;           // Path of the data files
+        private string _strPath; // Path of the data files
 
-        private string _httpPath;          // HTTP Path of the data files
+        private string _httpPath; // HTTP Path of the data files
 
         // Other global variables
-        protected string _strOutFile;        // File to create when using write transforms
-
+        protected string _strOutFile; // File to create when using write transforms
 #pragma warning disable 0618
-        protected XslTransform xslt;                           // Main XslTransform instance
+        protected XslTransform xslt; // Main XslTransform instance
 #pragma warning restore 0618
-        protected XmlReader xrXSLT;                         // for READER transforms
-        protected XsltArgumentList m_xsltArg;                   // For XsltArgumentList tests
+        protected XmlReader xrXSLT; // for READER transforms
+        protected XsltArgumentList m_xsltArg; // For XsltArgumentList tests
         public object retObj;
 
-        protected bool _isInProc;          // Is the current test run in proc or /Host None?
+        protected bool _isInProc; // Is the current test run in proc or /Host None?
 
         private ITestOutputHelper _output;
 
@@ -82,18 +92,36 @@ namespace System.Xml.Tests
             // In AppContainer access is denied to full path and the code below and related tests cannot run
             if (!PlatformDetection.IsInAppContainer)
             {
-                string testDirPath = Path.Combine(FilePathUtil.GetWriteableTestRootPath(), "TestFiles", FilePathUtil.GetTestDataPath(), "XsltApi");
+                string testDirPath = Path.Combine(
+                    FilePathUtil.GetWriteableTestRootPath(),
+                    "TestFiles",
+                    FilePathUtil.GetTestDataPath(),
+                    "XsltApi"
+                );
 
-                Directory.CreateDirectory(Path.GetDirectoryName(s_temporaryResolverDocumentFullName));
+                Directory.CreateDirectory(
+                    Path.GetDirectoryName(s_temporaryResolverDocumentFullName)
+                );
                 Directory.CreateDirectory(testDirPath);
 
                 // Replace absolute URI in xmlResolver_document_function.xml based on the environment, and store it under a different name
-                string xslFile = Path.Combine("TestFiles", FilePathUtil.GetTestDataPath(), "XsltApi", "xmlResolver_document_function_absolute_uri.xsl");
-                absoluteUriXslFile = Path.Combine(testDirPath, "xmlResolver_document_function_absolute_uri_replaced.xsl");
+                string xslFile = Path.Combine(
+                    "TestFiles",
+                    FilePathUtil.GetTestDataPath(),
+                    "XsltApi",
+                    "xmlResolver_document_function_absolute_uri.xsl"
+                );
+                absoluteUriXslFile = Path.Combine(
+                    testDirPath,
+                    "xmlResolver_document_function_absolute_uri_replaced.xsl"
+                );
                 File.Copy(xslFile, absoluteUriXslFile, true);
                 XmlDocument doc = new XmlDocument();
                 doc.Load(absoluteUriXslFile);
-                string xslString = doc.OuterXml.Replace("ABSOLUTE_URI", s_temporaryResolverDocumentFullName);
+                string xslString = doc.OuterXml.Replace(
+                    "ABSOLUTE_URI",
+                    s_temporaryResolverDocumentFullName
+                );
                 doc.LoadXml(xslString);
                 doc.Save(absoluteUriXslFile);
             }
@@ -114,7 +142,11 @@ namespace System.Xml.Tests
             {
                 try
                 {
-                    File.Copy(FullFilePath(XmlResolverDocumentName), s_temporaryResolverDocumentFullName, overwrite: true);
+                    File.Copy(
+                        FullFilePath(XmlResolverDocumentName),
+                        s_temporaryResolverDocumentFullName,
+                        overwrite: true
+                    );
                     testAction();
                 }
                 finally
@@ -251,9 +283,18 @@ namespace System.Xml.Tests
         // --------------------------------------------------------------------------------------------------------------
         //  CheckExpectedError
         //  -------------------------------------------------------------------------------------------------------------
-        public void CheckExpectedError(Exception ex, string assembly, string res, string[] strParams)
+        public void CheckExpectedError(
+            Exception ex,
+            string assembly,
+            string res,
+            string[] strParams
+        )
         {
-            CExceptionHandler handler = new CExceptionHandler(Path.Combine(_strPath, "Exceptions.xml"), assembly, _output);
+            CExceptionHandler handler = new CExceptionHandler(
+                Path.Combine(_strPath, "Exceptions.xml"),
+                assembly,
+                _output
+            );
             if (!handler.VerifyException(ex, res, strParams))
             {
                 Assert.Fail();
@@ -264,9 +305,19 @@ namespace System.Xml.Tests
         // --------------------------------------------------------------------------------------------------------------
         //  CheckExpectedError
         //  -------------------------------------------------------------------------------------------------------------
-        public void CheckExpectedError(Exception ex, string assembly, string res, string[] strParams, LineInfo lInfo)
+        public void CheckExpectedError(
+            Exception ex,
+            string assembly,
+            string res,
+            string[] strParams,
+            LineInfo lInfo
+        )
         {
-            CExceptionHandler handler = new CExceptionHandler(Path.Combine(_strPath, "Exceptions.xml"), assembly, _output);
+            CExceptionHandler handler = new CExceptionHandler(
+                Path.Combine(_strPath, "Exceptions.xml"),
+                assembly,
+                _output
+            );
             if (!handler.VerifyException(ex, res, strParams, lInfo))
             {
                 Assert.Fail();
@@ -319,7 +370,10 @@ namespace System.Xml.Tests
                             XmlTextReader trTemp = new XmlTextReader(_strXslFile);
                             try
                             {
-                                _output.WriteLine("Loading style sheet as XmlTextReader {0}", _strXslFile);
+                                _output.WriteLine(
+                                    "Loading style sheet as XmlTextReader {0}",
+                                    _strXslFile
+                                );
                                 xslt.Load(trTemp);
                             }
                             catch (Exception ex)
@@ -339,7 +393,10 @@ namespace System.Xml.Tests
                             XmlNodeReader nrTemp = new XmlNodeReader(docTemp);
                             try
                             {
-                                _output.WriteLine("Loading style sheet as XmlNodeReader {0}", _strXslFile);
+                                _output.WriteLine(
+                                    "Loading style sheet as XmlNodeReader {0}",
+                                    _strXslFile
+                                );
                                 xslt.Load(nrTemp);
                             }
                             catch (Exception ex)
@@ -356,13 +413,18 @@ namespace System.Xml.Tests
                         case ReaderType.XmlValidatingReader:
                         default:
 #pragma warning disable 0618
-                            XmlValidatingReader vrTemp = new XmlValidatingReader(new XmlTextReader(_strXslFile));
+                            XmlValidatingReader vrTemp = new XmlValidatingReader(
+                                new XmlTextReader(_strXslFile)
+                            );
 #pragma warning restore 0618
                             vrTemp.ValidationType = ValidationType.None;
                             vrTemp.EntityHandling = EntityHandling.ExpandEntities;
                             try
                             {
-                                _output.WriteLine("Loading style sheet as XmlValidatingReader {0}", _strXslFile);
+                                _output.WriteLine(
+                                    "Loading style sheet as XmlValidatingReader {0}",
+                                    _strXslFile
+                                );
                                 xslt.Load(vrTemp);
                             }
                             catch (Exception ex)
@@ -380,7 +442,9 @@ namespace System.Xml.Tests
 
                 case InputType.Navigator:
 #pragma warning disable 0618
-                    XmlValidatingReader xrLoad = new XmlValidatingReader(new XmlTextReader(_strXslFile));
+                    XmlValidatingReader xrLoad = new XmlValidatingReader(
+                        new XmlTextReader(_strXslFile)
+                    );
 #pragma warning restore 0618
                     xrLoad.ValidationType = ValidationType.None;
                     XPathDocument xdTemp = new XPathDocument(xrLoad, XmlSpace.Preserve);
@@ -395,7 +459,12 @@ namespace System.Xml.Tests
         // --------------------------------------------------------------------------------------------------------------
         //  LoadXSL_Resolver
         //  -------------------------------------------------------------------------------------------------------------
-        public int LoadXSL_Resolver(string _strXslFile, XmlResolver xr, InputType inputType, ReaderType readerType)
+        public int LoadXSL_Resolver(
+            string _strXslFile,
+            XmlResolver xr,
+            InputType inputType,
+            ReaderType readerType
+        )
         {
             _strXslFile = FullFilePath(_strXslFile);
 #pragma warning disable 0618
@@ -416,7 +485,10 @@ namespace System.Xml.Tests
                             XmlTextReader trTemp = new XmlTextReader(_strXslFile);
                             try
                             {
-                                _output.WriteLine("Loading style sheet as XmlTextReader {0}", _strXslFile);
+                                _output.WriteLine(
+                                    "Loading style sheet as XmlTextReader {0}",
+                                    _strXslFile
+                                );
                                 xslt.Load(trTemp, xr);
                             }
                             catch (Exception ex)
@@ -436,7 +508,10 @@ namespace System.Xml.Tests
                             XmlNodeReader nrTemp = new XmlNodeReader(docTemp);
                             try
                             {
-                                _output.WriteLine("Loading style sheet as XmlNodeReader {0}", _strXslFile);
+                                _output.WriteLine(
+                                    "Loading style sheet as XmlNodeReader {0}",
+                                    _strXslFile
+                                );
                                 xslt.Load(nrTemp, xr);
                             }
                             catch (Exception ex)
@@ -453,13 +528,18 @@ namespace System.Xml.Tests
                         case ReaderType.XmlValidatingReader:
                         default:
 #pragma warning disable 0618
-                            XmlValidatingReader vrTemp = new XmlValidatingReader(new XmlTextReader(_strXslFile));
+                            XmlValidatingReader vrTemp = new XmlValidatingReader(
+                                new XmlTextReader(_strXslFile)
+                            );
 #pragma warning restore 0618
                             vrTemp.ValidationType = ValidationType.None;
                             vrTemp.EntityHandling = EntityHandling.ExpandEntities;
                             try
                             {
-                                _output.WriteLine("Loading style sheet as XmlValidatingReader {0}", _strXslFile);
+                                _output.WriteLine(
+                                    "Loading style sheet as XmlValidatingReader {0}",
+                                    _strXslFile
+                                );
                                 xslt.Load(vrTemp, xr);
                             }
                             catch (Exception ex)
@@ -477,7 +557,9 @@ namespace System.Xml.Tests
 
                 case InputType.Navigator:
 #pragma warning disable 0618
-                    XmlValidatingReader xrLoad = new XmlValidatingReader(new XmlTextReader(_strXslFile));
+                    XmlValidatingReader xrLoad = new XmlValidatingReader(
+                        new XmlTextReader(_strXslFile)
+                    );
 #pragma warning restore 0618
                     XPathDocument xdTemp = new XPathDocument(xrLoad, XmlSpace.Preserve);
                     xrLoad.Dispose();
@@ -491,10 +573,13 @@ namespace System.Xml.Tests
         //VerifyResult
         public void VerifyResult(string expectedValue)
         {
-            lock(s_outFileMemoryLock)
+            lock (s_outFileMemoryLock)
             {
                 XmlDiff.XmlDiff xmldiff = new XmlDiff.XmlDiff();
-                xmldiff.Option = XmlDiffOption.InfosetComparison | XmlDiffOption.IgnoreEmptyElement | XmlDiffOption.NormalizeNewline;
+                xmldiff.Option =
+                    XmlDiffOption.InfosetComparison
+                    | XmlDiffOption.IgnoreEmptyElement
+                    | XmlDiffOption.NormalizeNewline;
 
                 string actualValue = File.ReadAllText(_strOutFile);
 
@@ -530,7 +615,12 @@ namespace System.Xml.Tests
             }
         }
 
-        public void CallTransform(XslTransform xslt, string szFullFilename, string _strOutFile, XmlResolver resolver)
+        public void CallTransform(
+            XslTransform xslt,
+            string szFullFilename,
+            string _strOutFile,
+            XmlResolver resolver
+        )
         {
             lock (s_outFileMemoryLock)
             {
@@ -545,7 +635,12 @@ namespace System.Xml.Tests
             return Transform(szXmlFile, false, transformType, docType);
         }
 
-        public int Transform(string szXmlFile, bool errorCase, TransformType transformType, DocType docType)
+        public int Transform(
+            string szXmlFile,
+            bool errorCase,
+            TransformType transformType,
+            DocType docType
+        )
         {
             lock (s_outFileMemoryLock)
             {
@@ -562,7 +657,13 @@ namespace System.Xml.Tests
                     case TransformType.Reader:
                         xrXSLT = xslt.Transform(xd, null);
 
-                        using (FileStream outFile = new FileStream(_strOutFile, FileMode.Create, FileAccess.ReadWrite))
+                        using (
+                            FileStream outFile = new FileStream(
+                                _strOutFile,
+                                FileMode.Create,
+                                FileAccess.ReadWrite
+                            )
+                        )
                         using (XmlWriter writer = XmlWriter.Create(outFile))
                         {
                             writer.WriteNode(xrXSLT, true);
@@ -589,7 +690,11 @@ namespace System.Xml.Tests
                     case TransformType.Stream:
                         try
                         {
-                            strmTemp = new FileStream(_strOutFile, FileMode.Create, FileAccess.ReadWrite);
+                            strmTemp = new FileStream(
+                                _strOutFile,
+                                FileMode.Create,
+                                FileAccess.ReadWrite
+                            );
                             xslt.Transform(xd, null, strmTemp);
                         }
                         catch (Exception ex)
@@ -626,7 +731,13 @@ namespace System.Xml.Tests
                         TextWriter tw = null;
                         try
                         {
-                            using (FileStream outFile = new FileStream(_strOutFile, FileMode.Create, FileAccess.Write))
+                            using (
+                                FileStream outFile = new FileStream(
+                                    _strOutFile,
+                                    FileMode.Create,
+                                    FileAccess.Write
+                                )
+                            )
                             {
                                 tw = new StreamWriter(outFile, Encoding.UTF8);
                                 xslt.Transform(xd, null, tw);
@@ -652,7 +763,12 @@ namespace System.Xml.Tests
             return Transform_ArgList(szXmlFile, false, transformType, docType);
         }
 
-        public int Transform_ArgList(string szXmlFile, bool errorCase, TransformType transformType, DocType docType)
+        public int Transform_ArgList(
+            string szXmlFile,
+            bool errorCase,
+            TransformType transformType,
+            DocType docType
+        )
         {
             lock (s_outFileMemoryLock)
             {
@@ -669,7 +785,13 @@ namespace System.Xml.Tests
                     case TransformType.Reader:
                         xrXSLT = xslt.Transform(xd, m_xsltArg);
 
-                        using (FileStream outFile = new FileStream(_strOutFile, FileMode.Create, FileAccess.ReadWrite))
+                        using (
+                            FileStream outFile = new FileStream(
+                                _strOutFile,
+                                FileMode.Create,
+                                FileAccess.ReadWrite
+                            )
+                        )
                         using (XmlWriter writer = XmlWriter.Create(outFile))
                         {
                             writer.WriteNode(xrXSLT, true);
@@ -696,7 +818,11 @@ namespace System.Xml.Tests
                     case TransformType.Stream:
                         try
                         {
-                            strmTemp = new FileStream(_strOutFile, FileMode.Create, FileAccess.ReadWrite);
+                            strmTemp = new FileStream(
+                                _strOutFile,
+                                FileMode.Create,
+                                FileAccess.ReadWrite
+                            );
                             xslt.Transform(xd, m_xsltArg, strmTemp);
                         }
                         catch (Exception ex)
@@ -733,7 +859,13 @@ namespace System.Xml.Tests
                         TextWriter tw = null;
                         try
                         {
-                            using (FileStream outFile = new FileStream(_strOutFile, FileMode.Create, FileAccess.Write))
+                            using (
+                                FileStream outFile = new FileStream(
+                                    _strOutFile,
+                                    FileMode.Create,
+                                    FileAccess.Write
+                                )
+                            )
                             {
                                 tw = new StreamWriter(outFile, Encoding.UTF8);
                                 xslt.Transform(xd, m_xsltArg, tw);
@@ -753,13 +885,24 @@ namespace System.Xml.Tests
         //  TransformResolver
         //  -------------------------------------------------------------------------------------------------------------
 
-        public int TransformResolver(string szXmlFile, TransformType transformType, DocType docType, XmlResolver xr)
+        public int TransformResolver(
+            string szXmlFile,
+            TransformType transformType,
+            DocType docType,
+            XmlResolver xr
+        )
         {
             // Default value of errorCase is false
             return TransformResolver(szXmlFile, xr, false, transformType, docType);
         }
 
-        public int TransformResolver(string szXmlFile, XmlResolver xr, bool errorCase, TransformType transformType, DocType docType)
+        public int TransformResolver(
+            string szXmlFile,
+            XmlResolver xr,
+            bool errorCase,
+            TransformType transformType,
+            DocType docType
+        )
         {
             lock (s_outFileMemoryLock)
             {
@@ -777,7 +920,13 @@ namespace System.Xml.Tests
                     case TransformType.Reader:
                         xrXSLT = xslt.Transform(xd, null, xr);
 
-                        using (FileStream outFile = new FileStream(_strOutFile, FileMode.Create, FileAccess.ReadWrite))
+                        using (
+                            FileStream outFile = new FileStream(
+                                _strOutFile,
+                                FileMode.Create,
+                                FileAccess.ReadWrite
+                            )
+                        )
                         using (XmlWriter writer = XmlWriter.Create(outFile))
                         {
                             writer.WriteNode(xrXSLT, true);
@@ -804,7 +953,11 @@ namespace System.Xml.Tests
                     case TransformType.Stream:
                         try
                         {
-                            strmTemp = new FileStream(_strOutFile, FileMode.Create, FileAccess.ReadWrite);
+                            strmTemp = new FileStream(
+                                _strOutFile,
+                                FileMode.Create,
+                                FileAccess.ReadWrite
+                            );
                             xslt.Transform(xd, null, strmTemp, xr);
                         }
                         catch (Exception ex)
@@ -841,7 +994,13 @@ namespace System.Xml.Tests
                         TextWriter tw = null;
                         try
                         {
-                            using (FileStream outFile = new FileStream(_strOutFile, FileMode.Create, FileAccess.Write))
+                            using (
+                                FileStream outFile = new FileStream(
+                                    _strOutFile,
+                                    FileMode.Create,
+                                    FileAccess.Write
+                                )
+                            )
                             {
                                 tw = new StreamWriter(outFile, Encoding.UTF8);
                                 xslt.Transform(xd, null, tw, xr);
@@ -870,7 +1029,11 @@ namespace System.Xml.Tests
         {
             _output = output;
 
-            _exVer = new ExceptionVerifier(ns, ExceptionVerificationFlags.IgnoreMultipleDots, _output);
+            _exVer = new ExceptionVerifier(
+                ns,
+                ExceptionVerificationFlags.IgnoreMultipleDots,
+                _output
+            );
 
             _doc = new XPathDocument(strXmlFile);
             _nav = ((IXPathNavigable)_doc).CreateNavigator();

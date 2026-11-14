@@ -6,5 +6,9 @@ namespace System.Activities
 {
     using System.Collections.Generic;
 
-    public delegate void DelegateCompletionCallback(NativeActivityContext context, ActivityInstance completedInstance, IDictionary<string, object> outArguments);
+    public delegate void DelegateCompletionCallback(
+        NativeActivityContext context,
+        ActivityInstance completedInstance,
+        IDictionary<string, object> outArguments
+    );
 }

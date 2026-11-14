@@ -28,7 +28,8 @@ public class DesignTimeServicesBuilder
         Assembly assembly,
         Assembly startupAssembly,
         IOperationReporter reporter,
-        string[] args)
+        string[] args
+    )
     {
         _startupAssembly = startupAssembly;
         _reporter = reporter;
@@ -42,8 +43,8 @@ public class DesignTimeServicesBuilder
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IServiceProvider Build(DbContext context)
-        => CreateServiceCollection(context).BuildServiceProvider();
+    public virtual IServiceProvider Build(DbContext context) =>
+        CreateServiceCollection(context).BuildServiceProvider();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -70,8 +71,8 @@ public class DesignTimeServicesBuilder
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IServiceProvider Build(string provider)
-        => CreateServiceCollection(provider).BuildServiceProvider();
+    public virtual IServiceProvider Build(string provider) =>
+        CreateServiceCollection(provider).BuildServiceProvider();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,15 +91,19 @@ public class DesignTimeServicesBuilder
         return services;
     }
 
-    private IServiceProvider GetApplicationServices()
-        => new AppServiceProviderFactory(_startupAssembly, _reporter).Create(_args);
+    private IServiceProvider GetApplicationServices() =>
+        new AppServiceProviderFactory(_startupAssembly, _reporter).Create(_args);
 
     private void ConfigureUserServices(IServiceCollection services)
     {
-        _reporter.WriteVerbose(DesignStrings.FindingDesignTimeServices(_startupAssembly.GetName().Name));
+        _reporter.WriteVerbose(
+            DesignStrings.FindingDesignTimeServices(_startupAssembly.GetName().Name)
+        );
 
-        var designTimeServicesType = _startupAssembly.GetLoadableDefinedTypes()
-            .Where(t => typeof(IDesignTimeServices).IsAssignableFrom(t)).Select(t => t.AsType())
+        var designTimeServicesType = _startupAssembly
+            .GetLoadableDefinedTypes()
+            .Where(t => typeof(IDesignTimeServices).IsAssignableFrom(t))
+            .Select(t => t.AsType())
             .FirstOrDefault();
         if (designTimeServicesType == null)
         {
@@ -107,17 +112,22 @@ public class DesignTimeServicesBuilder
             return;
         }
 
-        _reporter.WriteVerbose(DesignStrings.UsingDesignTimeServices(designTimeServicesType.ShortDisplayName()));
+        _reporter.WriteVerbose(
+            DesignStrings.UsingDesignTimeServices(designTimeServicesType.ShortDisplayName())
+        );
 
         ConfigureDesignTimeServices(designTimeServicesType, services);
     }
 
     private void ConfigureReferencedServices(IServiceCollection services, string provider)
     {
-        _reporter.WriteVerbose(DesignStrings.FindingReferencedServices(_startupAssembly.GetName().Name));
+        _reporter.WriteVerbose(
+            DesignStrings.FindingReferencedServices(_startupAssembly.GetName().Name)
+        );
         _reporter.WriteVerbose(DesignStrings.FindingReferencedServices(_assembly.GetName().Name));
 
-        var references = _startupAssembly.GetCustomAttributes<DesignTimeServicesReferenceAttribute>()
+        var references = _startupAssembly
+            .GetCustomAttributes<DesignTimeServicesReferenceAttribute>()
             .Concat(_assembly.GetCustomAttributes<DesignTimeServicesReferenceAttribute>())
             .Distinct()
             .ToList();
@@ -131,8 +141,14 @@ public class DesignTimeServicesBuilder
 
         foreach (var reference in references)
         {
-            if (reference.ForProvider != null
-                && !string.Equals(reference.ForProvider, provider, StringComparison.OrdinalIgnoreCase))
+            if (
+                reference.ForProvider != null
+                && !string.Equals(
+                    reference.ForProvider,
+                    provider,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 continue;
             }
@@ -140,13 +156,20 @@ public class DesignTimeServicesBuilder
             var designTimeServicesType = Type.GetType(reference.TypeName, throwOnError: true)!;
 
             _reporter.WriteVerbose(
-                DesignStrings.UsingReferencedServices(designTimeServicesType.Assembly.GetName().Name));
+                DesignStrings.UsingReferencedServices(
+                    designTimeServicesType.Assembly.GetName().Name
+                )
+            );
 
             ConfigureDesignTimeServices(designTimeServicesType, services);
         }
     }
 
-    private void ConfigureProviderServices(string provider, IServiceCollection services, bool throwOnError = false)
+    private void ConfigureProviderServices(
+        string provider,
+        IServiceCollection services,
+        bool throwOnError = false
+    )
     {
         _reporter.WriteVerbose(DesignStrings.FindingProviderServices(provider));
 
@@ -169,11 +192,11 @@ public class DesignTimeServicesBuilder
             throw new OperationException(message, ex);
         }
 
-        var providerServicesAttribute = providerAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>();
+        var providerServicesAttribute =
+            providerAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>();
         if (providerServicesAttribute == null)
         {
-            var message = DesignStrings.CannotFindDesignTimeProviderAssemblyAttribute(
-                provider);
+            var message = DesignStrings.CannotFindDesignTimeProviderAssemblyAttribute(provider);
 
             if (!throwOnError)
             {
@@ -188,7 +211,8 @@ public class DesignTimeServicesBuilder
         var designTimeServicesType = providerAssembly.GetType(
             providerServicesAttribute.TypeName,
             throwOnError: true,
-            ignoreCase: false)!;
+            ignoreCase: false
+        )!;
 
         _reporter.WriteVerbose(DesignStrings.UsingProviderServices(provider));
 
@@ -197,11 +221,13 @@ public class DesignTimeServicesBuilder
 
     private static void ConfigureDesignTimeServices(
         Type designTimeServicesType,
-        IServiceCollection services)
+        IServiceCollection services
+    )
     {
         Check.DebugAssert(designTimeServicesType != null, "designTimeServicesType is null.");
 
-        var designTimeServices = (IDesignTimeServices)Activator.CreateInstance(designTimeServicesType)!;
+        var designTimeServices = (IDesignTimeServices)
+            Activator.CreateInstance(designTimeServicesType)!;
         designTimeServices.ConfigureDesignTimeServices(services);
     }
 }

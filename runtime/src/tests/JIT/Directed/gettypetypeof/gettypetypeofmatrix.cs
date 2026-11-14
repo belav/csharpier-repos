@@ -4,9 +4,7 @@
 using System;
 using Xunit;
 
-internal class Foo
-{
-}
+internal class Foo { }
 
 public class Test_gettypetypeofmatrix
 {
@@ -72,14 +70,15 @@ public class Test_gettypetypeofmatrix
         }
     }
 
-
     private static void IsObjectTypeNullRef(object o)
     {
-        Console.Write("Test: {0} == typeof(object) Expected: null ref exception...", o == null ? "null" : o.ToString());
+        Console.Write(
+            "Test: {0} == typeof(object) Expected: null ref exception...",
+            o == null ? "null" : o.ToString()
+        );
         try
         {
-            if (o.GetType() == typeof(object) ||
-                o.GetType() != typeof(object))
+            if (o.GetType() == typeof(object) || o.GetType() != typeof(object))
             {
                 throw new Exception("Failed test");
             }
@@ -96,11 +95,13 @@ public class Test_gettypetypeofmatrix
 
     private static void IsObjectArrayTypeNullRef(object o)
     {
-        Console.Write("Test: {0} == typeof(object[]) Expected: null ref exception...", o == null ? "null" : o.ToString());
+        Console.Write(
+            "Test: {0} == typeof(object[]) Expected: null ref exception...",
+            o == null ? "null" : o.ToString()
+        );
         try
         {
-            if (o.GetType() == typeof(object[]) ||
-                o.GetType() != typeof(object[]))
+            if (o.GetType() == typeof(object[]) || o.GetType() != typeof(object[]))
             {
                 throw new Exception("Failed test");
             }
@@ -117,11 +118,13 @@ public class Test_gettypetypeofmatrix
 
     private static void IsFooTypeNullRef(object o)
     {
-        Console.Write("Test: {0} == typeof(Foo) Expected: null ref exception...", o == null ? "null" : o.ToString());
+        Console.Write(
+            "Test: {0} == typeof(Foo) Expected: null ref exception...",
+            o == null ? "null" : o.ToString()
+        );
         try
         {
-            if (o.GetType() == typeof(Foo) ||
-                o.GetType() != typeof(Foo))
+            if (o.GetType() == typeof(Foo) || o.GetType() != typeof(Foo))
             {
                 throw new Exception("Failed test");
             }
@@ -138,11 +141,13 @@ public class Test_gettypetypeofmatrix
 
     private static void IsFooArrayTypeNullRef(object o)
     {
-        Console.Write("Test: {0} == typeof(Foo[]) Expected: null ref exception...", o == null ? "null" : o.ToString());
+        Console.Write(
+            "Test: {0} == typeof(Foo[]) Expected: null ref exception...",
+            o == null ? "null" : o.ToString()
+        );
         try
         {
-            if (o.GetType() == typeof(Foo[]) ||
-                o.GetType() != typeof(Foo[]))
+            if (o.GetType() == typeof(Foo[]) || o.GetType() != typeof(Foo[]))
             {
                 throw new Exception("Failed test");
             }
@@ -159,33 +164,41 @@ public class Test_gettypetypeofmatrix
 
     private static void IsObjectType(object o, bool baseline)
     {
-        Console.Write("Test: o_{0}.GetType() == typeof(object) Expected: {1}...", o.GetType(), baseline);
-        IsResultCorrect(
-            o.GetType() == typeof(object),
-            baseline);
+        Console.Write(
+            "Test: o_{0}.GetType() == typeof(object) Expected: {1}...",
+            o.GetType(),
+            baseline
+        );
+        IsResultCorrect(o.GetType() == typeof(object), baseline);
     }
 
     private static void IsObjectArrayType(object o, bool baseline)
     {
-        Console.Write("Test: o_{0}.GetType() == typeof(object[]) Expected: {1}...", o.GetType(), baseline);
-        IsResultCorrect(
-            o.GetType() == typeof(object[]),
-            baseline);
+        Console.Write(
+            "Test: o_{0}.GetType() == typeof(object[]) Expected: {1}...",
+            o.GetType(),
+            baseline
+        );
+        IsResultCorrect(o.GetType() == typeof(object[]), baseline);
     }
 
     private static void IsFooType(object o, bool baseline)
     {
-        Console.Write("Test: o_{0}.GetType() == typeof(Foo) Expected: {1}...", o.GetType(), baseline);
-        IsResultCorrect(
-            o.GetType() == typeof(Foo),
-            baseline);
+        Console.Write(
+            "Test: o_{0}.GetType() == typeof(Foo) Expected: {1}...",
+            o.GetType(),
+            baseline
+        );
+        IsResultCorrect(o.GetType() == typeof(Foo), baseline);
     }
 
     private static void IsFooArrayType(object o, bool baseline)
     {
-        Console.Write("Test: o_{0}.GetType() == typeof(Foo[]) Expected: {1}...", o.GetType(), baseline);
-        IsResultCorrect(
-            o.GetType() == typeof(Foo[]),
-            baseline);
+        Console.Write(
+            "Test: o_{0}.GetType() == typeof(Foo[]) Expected: {1}...",
+            o.GetType(),
+            baseline
+        );
+        IsResultCorrect(o.GetType() == typeof(Foo[]), baseline);
     }
 }

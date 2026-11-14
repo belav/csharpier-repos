@@ -7,8 +7,6 @@ namespace Internal.Reflection.Execution
 {
     internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
-        public unsafe ExecutionEnvironmentImplementation()
-        {
-        }
+        public unsafe ExecutionEnvironmentImplementation() { }
     }
 }

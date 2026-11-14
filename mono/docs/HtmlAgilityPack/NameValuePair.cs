@@ -12,20 +12,16 @@ namespace HtmlAgilityPack
 
         #region Constructors
 
-        internal NameValuePair()
-        {
-        }
+        internal NameValuePair() { }
 
         internal NameValuePair(string name)
-            :
-                this()
+            : this()
         {
             Name = name;
         }
 
         internal NameValuePair(string name, string value)
-            :
-                this(name)
+            : this(name)
         {
             Value = value;
         }

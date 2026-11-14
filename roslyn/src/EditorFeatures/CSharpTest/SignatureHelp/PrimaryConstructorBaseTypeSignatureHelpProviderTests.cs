@@ -16,10 +16,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp;
 
 [Trait(Traits.Feature, Traits.Features.SignatureHelp)]
-public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSharpSignatureHelpProviderTests
+public class PrimaryConstructorBaseTypeSignatureHelpProviderTests
+    : AbstractCSharpSignatureHelpProviderTests
 {
-    internal override Type GetSignatureHelpProviderType()
-        => typeof(PrimaryConstructorBaseTypeSignatureHelpProvider);
+    internal override Type GetSignatureHelpProviderType() =>
+        typeof(PrimaryConstructorBaseTypeSignatureHelpProvider);
 
     [Fact]
     public async Task PrimaryConstructorBaseType_FirstParameter()
@@ -33,8 +34,23 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(Base original)", string.Empty, null, currentParameterIndex: 0));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier)", string.Empty, null, currentParameterIndex: 0, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(Base original)",
+                string.Empty,
+                null,
+                currentParameterIndex: 0
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier)",
+                string.Empty,
+                null,
+                currentParameterIndex: 0,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }
@@ -51,7 +67,15 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier)", string.Empty, null, currentParameterIndex: 0, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier)",
+                string.Empty,
+                null,
+                currentParameterIndex: 0,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }
@@ -68,9 +92,31 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(Base original)", string.Empty, null, currentParameterIndex: 1));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(string name)", string.Empty, null, currentParameterIndex: 1));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier1, int Identifier2)", string.Empty, null, currentParameterIndex: 1, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(Base original)",
+                string.Empty,
+                null,
+                currentParameterIndex: 1
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(string name)",
+                string.Empty,
+                null,
+                currentParameterIndex: 1
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier1, int Identifier2)",
+                string.Empty,
+                null,
+                currentParameterIndex: 1,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }
@@ -87,8 +133,23 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(string name)", string.Empty, null, currentParameterIndex: 1));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier1, int Identifier2)", string.Empty, null, currentParameterIndex: 1, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(string name)",
+                string.Empty,
+                null,
+                currentParameterIndex: 1
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier1, int Identifier2)",
+                string.Empty,
+                null,
+                currentParameterIndex: 1,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }
@@ -106,9 +167,31 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(Base original)", string.Empty, null, currentParameterIndex: 1));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(string name)", "Summary for constructor", null, currentParameterIndex: 1));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier1, int Identifier2)", string.Empty, null, currentParameterIndex: 1, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(Base original)",
+                string.Empty,
+                null,
+                currentParameterIndex: 1
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(string name)",
+                "Summary for constructor",
+                null,
+                currentParameterIndex: 1
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier1, int Identifier2)",
+                string.Empty,
+                null,
+                currentParameterIndex: 1,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }
@@ -126,8 +209,23 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(string name)", "Summary for constructor", null, currentParameterIndex: 1));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier1, int Identifier2)", string.Empty, null, currentParameterIndex: 1, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(string name)",
+                "Summary for constructor",
+                null,
+                currentParameterIndex: 1
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier1, int Identifier2)",
+                string.Empty,
+                null,
+                currentParameterIndex: 1,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }
@@ -146,9 +244,31 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(Base original)", string.Empty, null, currentParameterIndex: 0));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(string name)", "Summary for constructor", "Param name", currentParameterIndex: 0));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier1, int Identifier2)", string.Empty, null, currentParameterIndex: 0, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(Base original)",
+                string.Empty,
+                null,
+                currentParameterIndex: 0
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(string name)",
+                "Summary for constructor",
+                "Param name",
+                currentParameterIndex: 0
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier1, int Identifier2)",
+                string.Empty,
+                null,
+                currentParameterIndex: 0,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }
@@ -167,8 +287,23 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(string name)", "Summary for constructor", "Param name", currentParameterIndex: 0));
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier1, int Identifier2)", string.Empty, null, currentParameterIndex: 0, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(string name)",
+                "Summary for constructor",
+                "Param name",
+                currentParameterIndex: 0
+            )
+        );
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier1, int Identifier2)",
+                string.Empty,
+                null,
+                currentParameterIndex: 0,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }
@@ -184,7 +319,15 @@ public class PrimaryConstructorBaseTypeSignatureHelpProviderTests : AbstractCSha
             """;
 
         var expectedOrderedItems = new List<SignatureHelpTestItem>();
-        expectedOrderedItems.Add(new SignatureHelpTestItem("Base(int Identifier)", string.Empty, null, currentParameterIndex: 0, isSelected: true));
+        expectedOrderedItems.Add(
+            new SignatureHelpTestItem(
+                "Base(int Identifier)",
+                string.Empty,
+                null,
+                currentParameterIndex: 0,
+                isSelected: true
+            )
+        );
 
         await TestAsync(markup, expectedOrderedItems);
     }

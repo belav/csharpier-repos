@@ -15,7 +15,11 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class MetadataReaderExtensions
     {
-        internal static bool GetWinMdVersion(this MetadataReader reader, out int majorVersion, out int minorVersion)
+        internal static bool GetWinMdVersion(
+            this MetadataReader reader,
+            out int majorVersion,
+            out int minorVersion
+        )
         {
             if (reader.MetadataKind == MetadataKind.WindowsMetadata)
             {
@@ -25,9 +29,21 @@ namespace Microsoft.CodeAnalysis
                 if (version.StartsWith(prefix, StringComparison.Ordinal))
                 {
                     var parts = version.Substring(prefix.Length).Split('.');
-                    if ((parts.Length == 2) &&
-                        int.TryParse(parts[0], NumberStyles.None, CultureInfo.InvariantCulture, out majorVersion) &&
-                        int.TryParse(parts[1], NumberStyles.None, CultureInfo.InvariantCulture, out minorVersion))
+                    if (
+                        (parts.Length == 2)
+                        && int.TryParse(
+                            parts[0],
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out majorVersion
+                        )
+                        && int.TryParse(
+                            parts[1],
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out minorVersion
+                        )
+                    )
                     {
                         return true;
                     }
@@ -55,25 +71,33 @@ namespace Microsoft.CodeAnalysis
                 assemblyDef.PublicKey,
                 assemblyDef.Name,
                 assemblyDef.Culture,
-                isReference: false);
+                isReference: false
+            );
         }
 
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
-        internal static ImmutableArray<AssemblyIdentity> GetReferencedAssembliesOrThrow(this MetadataReader reader)
+        internal static ImmutableArray<AssemblyIdentity> GetReferencedAssembliesOrThrow(
+            this MetadataReader reader
+        )
         {
-            var result = ArrayBuilder<AssemblyIdentity>.GetInstance(reader.AssemblyReferences.Count);
+            var result = ArrayBuilder<AssemblyIdentity>.GetInstance(
+                reader.AssemblyReferences.Count
+            );
             try
             {
                 foreach (var assemblyRef in reader.AssemblyReferences)
                 {
                     AssemblyReference reference = reader.GetAssemblyReference(assemblyRef);
-                    result.Add(reader.CreateAssemblyIdentityOrThrow(
-                        reference.Version,
-                        reference.Flags,
-                        reference.PublicKeyOrToken,
-                        reference.Name,
-                        reference.Culture,
-                        isReference: true));
+                    result.Add(
+                        reader.CreateAssemblyIdentityOrThrow(
+                            reference.Version,
+                            reference.Flags,
+                            reference.PublicKeyOrToken,
+                            reference.Name,
+                            reference.Culture,
+                            isReference: true
+                        )
+                    );
                 }
 
                 return result.ToImmutable();
@@ -98,18 +122,23 @@ namespace Microsoft.CodeAnalysis
             BlobHandle publicKey,
             StringHandle name,
             StringHandle culture,
-            bool isReference)
+            bool isReference
+        )
         {
             string nameStr = reader.GetString(name);
             if (!MetadataHelpers.IsValidMetadataIdentifier(nameStr))
             {
-                throw new BadImageFormatException(string.Format(CodeAnalysisResources.InvalidAssemblyName, nameStr));
+                throw new BadImageFormatException(
+                    string.Format(CodeAnalysisResources.InvalidAssemblyName, nameStr)
+                );
             }
 
             string cultureName = culture.IsNil ? null : reader.GetString(culture);
             if (cultureName != null && !MetadataHelpers.IsValidMetadataIdentifier(cultureName))
             {
-                throw new BadImageFormatException(string.Format(CodeAnalysisResources.InvalidCultureName, cultureName));
+                throw new BadImageFormatException(
+                    string.Format(CodeAnalysisResources.InvalidCultureName, cultureName)
+                );
             }
 
             ImmutableArray<byte> publicKeyOrToken = reader.GetBlobContent(publicKey);
@@ -127,10 +156,14 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    if (!publicKeyOrToken.IsEmpty &&
-                        publicKeyOrToken.Length != AssemblyIdentity.PublicKeyTokenSize)
+                    if (
+                        !publicKeyOrToken.IsEmpty
+                        && publicKeyOrToken.Length != AssemblyIdentity.PublicKeyTokenSize
+                    )
                     {
-                        throw new BadImageFormatException(CodeAnalysisResources.InvalidPublicKeyToken);
+                        throw new BadImageFormatException(
+                            CodeAnalysisResources.InvalidPublicKeyToken
+                        );
                     }
                 }
             }
@@ -159,8 +192,11 @@ namespace Microsoft.CodeAnalysis
                 publicKeyOrToken: publicKeyOrToken,
                 hasPublicKey: hasPublicKey,
                 isRetargetable: (flags & AssemblyFlags.Retargetable) != 0,
-                contentType: (AssemblyContentType)((int)(flags & AssemblyFlags.ContentTypeMask) >> 9),
-                noThrow: true);
+                contentType: (AssemblyContentType)(
+                    (int)(flags & AssemblyFlags.ContentTypeMask) >> 9
+                ),
+                noThrow: true
+            );
         }
 
         internal static bool DeclaresTheObjectClass(this MetadataReader reader)
@@ -170,11 +206,14 @@ namespace Microsoft.CodeAnalysis
 
         private static bool IsTheObjectClass(this MetadataReader reader, TypeDefinition typeDef)
         {
-            return typeDef.BaseType.IsNil &&
-                reader.IsPublicNonInterfaceType(typeDef, "System", "Object");
+            return typeDef.BaseType.IsNil
+                && reader.IsPublicNonInterfaceType(typeDef, "System", "Object");
         }
 
-        internal static bool DeclaresType(this MetadataReader reader, Func<MetadataReader, TypeDefinition, bool> predicate)
+        internal static bool DeclaresType(
+            this MetadataReader reader,
+            Func<MetadataReader, TypeDefinition, bool> predicate
+        )
         {
             foreach (TypeDefinitionHandle handle in reader.TypeDefinitions)
             {
@@ -186,20 +225,24 @@ namespace Microsoft.CodeAnalysis
                         return true;
                     }
                 }
-                catch (BadImageFormatException)
-                {
-                }
+                catch (BadImageFormatException) { }
             }
 
             return false;
         }
 
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
-        internal static bool IsPublicNonInterfaceType(this MetadataReader reader, TypeDefinition typeDef, string namespaceName, string typeName)
+        internal static bool IsPublicNonInterfaceType(
+            this MetadataReader reader,
+            TypeDefinition typeDef,
+            string namespaceName,
+            string typeName
+        )
         {
-            return (typeDef.Attributes & (TypeAttributes.Public | TypeAttributes.Interface)) == TypeAttributes.Public &&
-                reader.StringComparer.Equals(typeDef.Name, typeName) &&
-                reader.StringComparer.Equals(typeDef.Namespace, namespaceName);
+            return (typeDef.Attributes & (TypeAttributes.Public | TypeAttributes.Interface))
+                    == TypeAttributes.Public
+                && reader.StringComparer.Equals(typeDef.Name, typeName)
+                && reader.StringComparer.Equals(typeDef.Namespace, namespaceName);
         }
     }
 }

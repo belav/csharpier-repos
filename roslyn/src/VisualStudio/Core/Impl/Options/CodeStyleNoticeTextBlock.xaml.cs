@@ -15,11 +15,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     {
         private const string UseEditorConfigUrl = "https://go.microsoft.com/fwlink/?linkid=866541";
 
-        public CodeStyleNoticeTextBlock()
-            => InitializeComponent();
+        public CodeStyleNoticeTextBlock() => InitializeComponent();
 
         public static readonly Uri CodeStylePageHeaderLearnMoreUri = new Uri(UseEditorConfigUrl);
-        public static string CodeStylePageHeader => ServicesVSResources.Code_style_header_use_editor_config;
+        public static string CodeStylePageHeader =>
+            ServicesVSResources.Code_style_header_use_editor_config;
         public static string CodeStylePageHeaderLearnMoreText => ServicesVSResources.Learn_more;
 
         private void LearnMoreHyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

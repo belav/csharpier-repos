@@ -1,4 +1,4 @@
-﻿    //-----------------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
@@ -18,11 +18,7 @@ namespace System.Activities.Expressions
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<Array> Array
-        {
-            get;
-            set;
-        }
+        public InArgument<Array> Array { get; set; }
 
         [DefaultValue(null)]
         public Collection<InArgument<int>> Indices
@@ -32,7 +28,7 @@ namespace System.Activities.Expressions
                 if (this.indices == null)
                 {
                     this.indices = new ValidatingCollection<InArgument<int>>
-                    {   
+                    {
                         // disallow null values
                         OnAddValidationCallback = item =>
                         {
@@ -51,21 +47,37 @@ namespace System.Activities.Expressions
         {
             if (this.Indices.Count == 0)
             {
-                metadata.AddValidationError(SR.IndicesAreNeeded(this.GetType().Name, this.DisplayName));
+                metadata.AddValidationError(
+                    SR.IndicesAreNeeded(this.GetType().Name, this.DisplayName)
+                );
             }
 
-            RuntimeArgument arrayArgument = new RuntimeArgument("Array", typeof(Array), ArgumentDirection.In, true);
+            RuntimeArgument arrayArgument = new RuntimeArgument(
+                "Array",
+                typeof(Array),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Array, arrayArgument);
             metadata.AddArgument(arrayArgument);
 
             for (int i = 0; i < this.Indices.Count; i++)
             {
-                RuntimeArgument indexArgument = new RuntimeArgument("Index_" + i, typeof(int), ArgumentDirection.In, true);
+                RuntimeArgument indexArgument = new RuntimeArgument(
+                    "Index_" + i,
+                    typeof(int),
+                    ArgumentDirection.In,
+                    true
+                );
                 metadata.Bind(this.Indices[i], indexArgument);
                 metadata.AddArgument(indexArgument);
             }
 
-            RuntimeArgument resultArgument = new RuntimeArgument("Result", typeof(Location<TItem>), ArgumentDirection.Out);
+            RuntimeArgument resultArgument = new RuntimeArgument(
+                "Result",
+                typeof(Location<TItem>),
+                ArgumentDirection.Out
+            );
             metadata.Bind(this.Result, resultArgument);
             metadata.AddArgument(resultArgument);
         }
@@ -73,16 +85,27 @@ namespace System.Activities.Expressions
         protected override Location<TItem> Execute(CodeActivityContext context)
         {
             Array items = this.Array.Get(context);
-            
+
             if (items == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)
+                    )
+                );
             }
 
             Type realItemType = items.GetType().GetElementType();
             if (!TypeHelper.AreTypesCompatible(typeof(TItem), realItemType))
             {
-                throw FxTrace.Exception.AsError(new InvalidCastException(SR.IncompatibleTypeForMultidimensionalArrayItemReference(typeof(TItem).Name, realItemType.Name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidCastException(
+                        SR.IncompatibleTypeForMultidimensionalArrayItemReference(
+                            typeof(TItem).Name,
+                            realItemType.Name
+                        )
+                    )
+                );
             }
             int[] itemIndex = new int[this.Indices.Count];
             for (int i = 0; i < this.Indices.Count; i++)
@@ -108,14 +131,8 @@ namespace System.Activities.Expressions
 
             public override TItem Value
             {
-                get
-                {
-                    return (TItem)this.array.GetValue(indices);
-                }
-                set
-                {
-                    this.array.SetValue(value, indices);
-                }
+                get { return (TItem)this.array.GetValue(indices); }
+                set { this.array.SetValue(value, indices); }
             }
 
             [DataMember(Name = "array")]

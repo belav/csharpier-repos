@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// FixedLocalizableString representing an empty string.
             /// </summary>
-            private static readonly FixedLocalizableString s_empty = new FixedLocalizableString(string.Empty);
+            private static readonly FixedLocalizableString s_empty = new FixedLocalizableString(
+                string.Empty
+            );
 
             private readonly string _fixedString;
 

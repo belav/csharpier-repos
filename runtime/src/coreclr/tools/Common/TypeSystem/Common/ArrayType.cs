@@ -23,15 +23,15 @@ namespace Internal.TypeSystem
         public override int GetHashCode()
         {
             // ComputeArrayTypeHashCode expects -1 for an SzArray
-            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeArrayTypeHashCode(this.ElementType.GetHashCode(), _rank);
+            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeArrayTypeHashCode(
+                this.ElementType.GetHashCode(),
+                _rank
+            );
         }
 
         public override DefType BaseType
         {
-            get
-            {
-                return this.Context.GetWellKnownType(WellKnownType.Array);
-            }
+            get { return this.Context.GetWellKnownType(WellKnownType.Array); }
         }
 
         /// <summary>
@@ -39,10 +39,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public TypeDesc ElementType
         {
-            get
-            {
-                return this.ParameterType;
-            }
+            get { return this.ParameterType; }
         }
 
         internal MethodDesc[] _methods;
@@ -52,10 +49,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public new bool IsSzArray
         {
-            get
-            {
-                return _rank < 0;
-            }
+            get { return _rank < 0; }
         }
 
         /// <summary>
@@ -63,10 +57,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public new bool IsMdArray
         {
-            get
-            {
-                return _rank > 0;
-            }
+            get { return _rank > 0; }
         }
 
         /// <summary>
@@ -75,10 +66,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public int Rank
         {
-            get
-            {
-                return (_rank < 0) ? 1 : _rank;
-            }
+            get { return (_rank < 0) ? 1 : _rank; }
         }
 
         private void InitializeMethods()
@@ -130,10 +118,16 @@ namespace Internal.TypeSystem
             return _methods[(int)kind];
         }
 
-        public override TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             TypeDesc elementType = this.ElementType;
-            TypeDesc instantiatedElementType = elementType.InstantiateSignature(typeInstantiation, methodInstantiation);
+            TypeDesc instantiatedElementType = elementType.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
             if (instantiatedElementType != elementType)
                 return Context.GetArrayType(instantiatedElementType, _rank);
 
@@ -160,7 +154,7 @@ namespace Internal.TypeSystem
         Set,
         Address,
         AddressWithHiddenArg,
-        Ctor
+        Ctor,
     }
 
     /// <summary>
@@ -192,34 +186,22 @@ namespace Internal.TypeSystem
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public ArrayType OwningArray
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public ArrayMethodKind Kind
         {
-            get
-            {
-                return _kind;
-            }
+            get { return _kind; }
         }
 
         private MethodSignature _signature;
@@ -233,37 +215,71 @@ namespace Internal.TypeSystem
                     switch (_kind)
                     {
                         case ArrayMethodKind.Get:
-                            {
-                                var parameters = new TypeDesc[_owningType.Rank];
-                                for (int i = 0; i < _owningType.Rank; i++)
-                                    parameters[i] = _owningType.Context.GetWellKnownType(WellKnownType.Int32);
-                                _signature = new MethodSignature(0, 0, _owningType.ElementType, parameters, MethodSignature.EmbeddedSignatureMismatchPermittedFlag);
-                                break;
-                            }
+                        {
+                            var parameters = new TypeDesc[_owningType.Rank];
+                            for (int i = 0; i < _owningType.Rank; i++)
+                                parameters[i] = _owningType.Context.GetWellKnownType(
+                                    WellKnownType.Int32
+                                );
+                            _signature = new MethodSignature(
+                                0,
+                                0,
+                                _owningType.ElementType,
+                                parameters,
+                                MethodSignature.EmbeddedSignatureMismatchPermittedFlag
+                            );
+                            break;
+                        }
                         case ArrayMethodKind.Set:
-                            {
-                                var parameters = new TypeDesc[_owningType.Rank + 1];
-                                for (int i = 0; i < _owningType.Rank; i++)
-                                    parameters[i] = _owningType.Context.GetWellKnownType(WellKnownType.Int32);
-                                parameters[_owningType.Rank] = _owningType.ElementType;
-                                _signature = new MethodSignature(0, 0, this.Context.GetWellKnownType(WellKnownType.Void), parameters, MethodSignature.EmbeddedSignatureMismatchPermittedFlag);
-                                break;
-                            }
+                        {
+                            var parameters = new TypeDesc[_owningType.Rank + 1];
+                            for (int i = 0; i < _owningType.Rank; i++)
+                                parameters[i] = _owningType.Context.GetWellKnownType(
+                                    WellKnownType.Int32
+                                );
+                            parameters[_owningType.Rank] = _owningType.ElementType;
+                            _signature = new MethodSignature(
+                                0,
+                                0,
+                                this.Context.GetWellKnownType(WellKnownType.Void),
+                                parameters,
+                                MethodSignature.EmbeddedSignatureMismatchPermittedFlag
+                            );
+                            break;
+                        }
                         case ArrayMethodKind.Address:
                             {
                                 var parameters = new TypeDesc[_owningType.Rank];
                                 for (int i = 0; i < _owningType.Rank; i++)
-                                    parameters[i] = _owningType.Context.GetWellKnownType(WellKnownType.Int32);
-                                _signature = new MethodSignature(0, 0, _owningType.ElementType.MakeByRefType(), parameters, MethodSignature.EmbeddedSignatureMismatchPermittedFlag);
+                                    parameters[i] = _owningType.Context.GetWellKnownType(
+                                        WellKnownType.Int32
+                                    );
+                                _signature = new MethodSignature(
+                                    0,
+                                    0,
+                                    _owningType.ElementType.MakeByRefType(),
+                                    parameters,
+                                    MethodSignature.EmbeddedSignatureMismatchPermittedFlag
+                                );
                             }
                             break;
                         case ArrayMethodKind.AddressWithHiddenArg:
                             {
                                 var parameters = new TypeDesc[_owningType.Rank + 1];
-                                parameters[0] = Context.GetPointerType(Context.GetWellKnownType(WellKnownType.Void));
+                                parameters[0] = Context.GetPointerType(
+                                    Context.GetWellKnownType(WellKnownType.Void)
+                                );
                                 for (int i = 0; i < _owningType.Rank; i++)
-                                    parameters[i + 1] = _owningType.Context.GetWellKnownType(WellKnownType.Int32);
-                                _signature = new MethodSignature(0, 0, _owningType.ElementType.MakeByRefType(), parameters, MethodSignature.EmbeddedSignatureMismatchPermittedFlag);
+                                    parameters[i + 1] = _owningType.Context.GetWellKnownType(
+                                        WellKnownType.Int32
+                                    );
+                                _signature = new MethodSignature(
+                                    0,
+                                    0,
+                                    _owningType.ElementType.MakeByRefType(),
+                                    parameters,
+                                    MethodSignature.EmbeddedSignatureMismatchPermittedFlag
+                                );
                             }
                             break;
                         default:
@@ -275,13 +291,24 @@ namespace Internal.TypeSystem
                                 }
                                 else
                                 {
-                                    numArgs = (_kind == ArrayMethodKind.Ctor) ? _owningType.Rank : 2 * _owningType.Rank;
+                                    numArgs =
+                                        (_kind == ArrayMethodKind.Ctor)
+                                            ? _owningType.Rank
+                                            : 2 * _owningType.Rank;
                                 }
 
                                 var argTypes = new TypeDesc[numArgs];
                                 for (int i = 0; i < argTypes.Length; i++)
-                                    argTypes[i] = _owningType.Context.GetWellKnownType(WellKnownType.Int32);
-                                _signature = new MethodSignature(0, 0, this.Context.GetWellKnownType(WellKnownType.Void), argTypes, MethodSignature.EmbeddedSignatureMismatchPermittedFlag);
+                                    argTypes[i] = _owningType.Context.GetWellKnownType(
+                                        WellKnownType.Int32
+                                    );
+                                _signature = new MethodSignature(
+                                    0,
+                                    0,
+                                    this.Context.GetWellKnownType(WellKnownType.Void),
+                                    argTypes,
+                                    MethodSignature.EmbeddedSignatureMismatchPermittedFlag
+                                );
                             }
                             break;
                     }
@@ -314,10 +341,16 @@ namespace Internal.TypeSystem
             return false;
         }
 
-        public override MethodDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override MethodDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             TypeDesc owningType = this.OwningType;
-            TypeDesc instantiatedOwningType = owningType.InstantiateSignature(typeInstantiation, methodInstantiation);
+            TypeDesc instantiatedOwningType = owningType.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
 
             if (owningType != instantiatedOwningType)
                 return ((ArrayType)instantiatedOwningType).GetArrayMethod(_kind);

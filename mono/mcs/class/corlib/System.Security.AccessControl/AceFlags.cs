@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,19 +26,20 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Security.AccessControl {
-	[Flags]
-	public enum AceFlags : byte {
-		None = 0,
-		ObjectInherit = 0x01,
-		ContainerInherit = 0x02,
-		NoPropagateInherit = 0x04,
-		InheritOnly = 0x08,
-		InheritanceFlags = ObjectInherit | ContainerInherit | NoPropagateInherit | InheritOnly,
-		Inherited = 0x10,
-		SuccessfulAccess = 0x40,
-		FailedAccess = 0x80,
-		AuditFlags = SuccessfulAccess | FailedAccess,
-	}
+namespace System.Security.AccessControl
+{
+    [Flags]
+    public enum AceFlags : byte
+    {
+        None = 0,
+        ObjectInherit = 0x01,
+        ContainerInherit = 0x02,
+        NoPropagateInherit = 0x04,
+        InheritOnly = 0x08,
+        InheritanceFlags = ObjectInherit | ContainerInherit | NoPropagateInherit | InheritOnly,
+        Inherited = 0x10,
+        SuccessfulAccess = 0x40,
+        FailedAccess = 0x80,
+        AuditFlags = SuccessfulAccess | FailedAccess,
+    }
 }
-

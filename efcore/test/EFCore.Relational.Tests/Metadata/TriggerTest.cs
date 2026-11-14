@@ -11,9 +11,7 @@ public class TriggerTest
         var modelBuilder = CreateConventionModelBuilder();
         var entityType = modelBuilder.Entity<Customer>().Metadata;
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable(tb => tb.HasTrigger("Customer_Trigger"));
+        modelBuilder.Entity<Customer>().ToTable(tb => tb.HasTrigger("Customer_Trigger"));
 
         var trigger = entityType.FindDeclaredTrigger("Customer_Trigger");
 
@@ -22,7 +20,10 @@ public class TriggerTest
         Assert.Equal("Customer_Trigger", trigger.GetDatabaseName());
         Assert.Equal("Customer", trigger.GetTableName());
         Assert.Null(trigger.GetTableSchema());
-        Assert.Equal(ConfigurationSource.Explicit, ((IConventionTrigger)trigger).GetConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.Explicit,
+            ((IConventionTrigger)trigger).GetConfigurationSource()
+        );
     }
 
     [ConditionalFact]
@@ -42,7 +43,10 @@ public class TriggerTest
         Assert.Equal("Customer_Trigger", trigger.GetDatabaseName());
         Assert.Equal("CustomerTable", trigger.GetTableName());
         Assert.Equal("dbo", trigger.GetTableSchema());
-        Assert.Equal(ConfigurationSource.Explicit, ((IConventionTrigger)trigger).GetConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.Explicit,
+            ((IConventionTrigger)trigger).GetConfigurationSource()
+        );
     }
 
     [ConditionalFact]
@@ -54,9 +58,15 @@ public class TriggerTest
         entityType.AddTrigger("SomeTrigger").SetTableName("SomeTable");
 
         Assert.Equal(
-            CoreStrings.DuplicateTrigger("SomeTrigger", entityType.DisplayName(), entityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(
-                () => entityType.AddTrigger("SomeTrigger")).Message);
+            CoreStrings.DuplicateTrigger(
+                "SomeTrigger",
+                entityType.DisplayName(),
+                entityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => entityType.AddTrigger("SomeTrigger"))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -80,8 +90,8 @@ public class TriggerTest
         Assert.Null(entityType.RemoveTrigger("SomeTrigger"));
     }
 
-    protected virtual ModelBuilder CreateConventionModelBuilder()
-        => FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
+    protected virtual ModelBuilder CreateConventionModelBuilder() =>
+        FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
 
     private class Customer
     {
