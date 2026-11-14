@@ -316,7 +316,7 @@ namespace Microsoft.Win32
                 && a.isWritable == b.isWritable;
         }
 
-    #region PublicAPI
+        #region PublicAPI
 
         /// <summary>
         ///	Dispose of registry key object. Close the
@@ -833,7 +833,7 @@ namespace Microsoft.Win32
             return RegistryApi.ToString(this);
         }
 
-    #endregion // PublicAPI
+        #endregion // PublicAPI
 
         internal bool IsRoot
         {

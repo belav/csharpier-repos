@@ -5795,7 +5795,7 @@ namespace System
 #if FEATURE_COMINTEROP && FEATURE_USE_LCID
             if (target != null && target.GetType().IsCOMObject)
             {
-            #region Preconditions
+                #region Preconditions
                 if ((bindingFlags & ClassicBindingMask) == 0)
                     throw new ArgumentException(
                         Environment.GetResourceString("Arg_COMAccess"),
@@ -5854,13 +5854,13 @@ namespace System
                         Environment.GetResourceString("Arg_COMPropSetPut"),
                         "bindingFlags"
                     );
-            #endregion
+                #endregion
 
 #if FEATURE_REMOTING
                 if (!RemotingServices.IsTransparentProxy(target))
 #endif
                 {
-            #region Non-TransparentProxy case
+                    #region Non-TransparentProxy case
                     if (name == null)
                         throw new ArgumentNullException("name");
 #if MONO
@@ -5881,7 +5881,7 @@ namespace System
                         namedParams
                     );
 #endif
-            #endregion
+                    #endregion
                 }
 #if FEATURE_REMOTING
                 else
@@ -5889,7 +5889,7 @@ namespace System
 #if MONO
                     throw new NotImplementedException ();
 #else
-            #region TransparentProxy case
+                    #region TransparentProxy case
                     return ((MarshalByRefObject)target).InvokeMember(
                         name,
                         bindingFlags,
@@ -5899,7 +5899,7 @@ namespace System
                         culture,
                         namedParams
                     );
-            #endregion
+                    #endregion
 #endif
                 }
 #endif // FEATURE_REMOTING
